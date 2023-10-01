@@ -1,294 +1,294 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
-<channel>
-<title>Machine Learning</title>
-<link>https://www.reddit.com/r/MachineLearning/</link>
-
-<item>
-<title>[D] Simple Questions Thread</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16qzt8j/d_simple_questions_thread/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16qzt8j/d_simple_questions_thread/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Please post your questions here instead of creating a new thread. Encourage others who create new posts for questions to post here instead!</p> <p>Thread will stay alive until next one so keep posting after the date in the title.</p> <p>Thanks to everyone for answering questions in the previous thread!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/AutoModerator"> /u/AutoModerator </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16qzt8j/d_simple_questions_thread/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16qzt8j/d_simple_questions_thread/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-24T15:00:32+00:00</pubDate>
-<updated>2023-09-24T15:00:32+00:00</updated>
-</item>
-<item>
-<title>[R] Meta, INRIA researchers discover that explicit registers eliminate ViT attention spikes</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16x2o47/r_meta_inria_researchers_discover_that_explicit/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16x2o47/r_meta_inria_researchers_discover_that_explicit/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>When visualizing the inner workings of vision transformers (ViTs), researchers noticed weird spikes of attention on random background patches. This didn't make sense since the models should focus on foreground objects.</p> <p>By analyzing the output embeddings, they found a small number of tokens (2%) had super high vector norms, causing the spikes.</p> <p>The high-norm &quot;outlier&quot; tokens occurred in redundant areas and held less local info but more global info about the image.</p> <p>Their hypothesis is that ViTs learn to identify unimportant patches and recycle them as temporary storage instead of discarding. This enables efficient processing but causes issues.</p> <p>Their fix is simple - just add dedicated &quot;register&quot; tokens that provide storage space, avoiding the recycling side effects.</p> <p>Models trained with registers have:</p> <ul> <li>Smoother and more meaningful attention maps</li> <li>Small boosts in downstream performance</li> <li>Way better object discovery abilities</li> </ul> <p>The registers give ViTs a place to do their temporary computations without messing stuff up. Just a tiny architecture tweak improves interpretability and performance. Sweet!</p> <p>I think it's cool how they reverse-engineered this model artifact and fixed it with such a small change. More work like this will keep incrementally improving ViTs.</p> <p>TLDR: Vision transformers recycle useless patches to store data, causing problems. Adding dedicated register tokens for storage fixes it nicely.</p> <p><a href="https://notes.aimodels.fyi/demystifying-the-artifacts-in-vision-transformer-models/"><strong>Full summary</strong></a><strong>.</strong> Paper is <a href="https://arxiv.org/pdf/2309.16588.pdf">here</a>.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x2o47/r_meta_inria_researchers_discover_that_explicit/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x2o47/r_meta_inria_researchers_discover_that_explicit/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-10-01T14:28:22+00:00</pubDate>
-<updated>2023-10-01T14:28:22+00:00</updated>
-</item>
-<item>
-<title>[R] SOTA of Deep-Shallow Encoder-Decoder LLMs for fast inference</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16x1fzr/r_sota_of_deepshallow_encoderdecoder_llms_for/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16x1fzr/r_sota_of_deepshallow_encoderdecoder_llms_for/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>There's some evidence [1] [2] that it's possible to run text2text language model at substantially (potentially on the order of magnitude) better inference speed by keeping the decoder shallow.</p> <p>I'm curious whether some <em>general reasoner</em> SOTA (small model for machine translation available at [3]) style models are publicly available for this sort of thing.</p> <p>If not, how would one go about training one?</p> <p>Would it be necessary to do it entirely from scratch (extremely costly)? Or would it be possible to take, say, Flan-UL2 (20B), chop off its decoder, and train a much smaller decoder on top of it with the UL2 encoder frozen (ie how one trains adapter layers).</p> <p>Assuming the decoder hyperparameters are kept small, would this be possible within reasonable compute budget? Would that even meaningfully converge with small amount of compute (assuming same training objective as is for UL2)?</p> <p>Would the strength (ie somewhat comparable to 10B if we cut 20B in half) transfer from the SOTA encoder, or would cutting off half of the model layers kneecap it too badly?</p> <p>[1] <a href="https://arxiv.org/pdf/2006.10369.pdf">https://arxiv.org/pdf/2006.10369.pdf</a></p> <p>[2] <a href="https://aclanthology.org/2023.sustainlp-1.6.pdf">https://aclanthology.org/2023.sustainlp-1.6.pdf</a></p> <p>[3] <a href="https://github.com/snoop2head/Deep-Encoder-Shallow-Decoder">https://github.com/snoop2head/Deep-Encoder-Shallow-Decoder</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/upalse"> /u/upalse </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x1fzr/r_sota_of_deepshallow_encoderdecoder_llms_for/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x1fzr/r_sota_of_deepshallow_encoderdecoder_llms_for/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-10-01T13:37:56+00:00</pubDate>
-<updated>2023-10-01T13:37:56+00:00</updated>
-</item>
-<item>
-<title>[D] Duplicating layers in large models</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Is there any notable work on duplicating layers in large feed forward models? In contrast to e.g. the brain which is essentially a directed graph most networks utilized nowerdays use a feed forward approach. E.g. transformers are able to attend to past tokens, but generate the tokens in a way where for a given token a given weight is not utilized at different stages in the feed forward pass. In my intuition this would lead to an issue where concepts (factual data as well as learned &quot;algorithms&quot;) might be duplicated as they are needed at different depths in the generation process and are sequentially dependent on one another. This does not directly make the model less capable, as it might learn the same concept at two layers sufficiently well, but it reduces the data and parameter efficiency and and might impact generalization capabilities. Using a full on brain like graph might be hard to implement/optimize/scale on current hardware and is tricky with the backprop. But is there any work on duplicating a few layers, placing them at different depths in large models. I would guess that this would be more impactful for large models. One would essentially trade compute for better data efficiency.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/floriv1999"> /u/floriv1999 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-10-01T11:34:38+00:00</pubDate>
-<updated>2023-10-01T11:34:38+00:00</updated>
-</item>
-<item>
-<title>[n] Introducing r/AudioAI: Any AI You Can Hear!</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16wn8qu/n_introducing_raudioai_any_ai_you_can_hear/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16wn8qu/n_introducing_raudioai_any_ai_you_can_hear/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>I couldn't find any AI sub dedicated to audio, so I’ve created <a href="https://www.reddit.com/r/AudioAI">r/AudioAI</a> to serve as a hub for everything at the intersection of artificial intelligence and the world of sounds.</p> <p>AI-driven music, speech, audio production, and all other AI audio technologies.</p> <p>If anyone wants to be part of mod, let me know!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/chibop1"> /u/chibop1 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wn8qu/n_introducing_raudioai_any_ai_you_can_hear/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wn8qu/n_introducing_raudioai_any_ai_you_can_hear/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-10-01T00:52:01+00:00</pubDate>
-<updated>2023-10-01T00:52:01+00:00</updated>
-</item>
-<item>
-<title>[D] Struggling to get interviews what to do?</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16wbqcd/d_struggling_to_get_interviews_what_to_do/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16wbqcd/d_struggling_to_get_interviews_what_to_do/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Edit: I am a USA citizen so no need for sponsorship.</p> <p>I have 4 yoe in a start up company and a phd four publications 2 in high level math journals and 2 CV/DL papers in A journals and also 4 patents. I have experience with most common Cv tasks eg object detection, Multi object tracking, 2d/3d human pose estimation and monocular depth estimation. I’m well versed in typical network building blocks eg conv nets, FFNs, transformers, Diffusion etc. I have a little experience with NLP like NLTK and TTS networks. Also some other general dev technologies like ec2,s3,sql,mongoose, etc. </p> <p>That all being said I can’t seem to even get interviews these days just straight rejections not talking to recruiters. On the other hand in 2020, I was just searching for jobs passively and had something like a 75% success rate with getting interviews. I know the job market has changed but I’m a lot more experienced at this time than then and having abysmal luck.</p> <p>Anyone have any advice would be happy to share my resume if that would make it easier to give advice. Also open to hearing what other technologies o should/could learn.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/AbjectDrink3276"> /u/AbjectDrink3276 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wbqcd/d_struggling_to_get_interviews_what_to_do/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wbqcd/d_struggling_to_get_interviews_what_to_do/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-30T16:51:12+00:00</pubDate>
-<updated>2023-09-30T16:51:12+00:00</updated>
-</item>
-<item>
-<title>[D] Multiple single class segmentation vs single multiclass segmentation models</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16x2658/d_multiple_single_class_segmentation_vs_single/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16x2658/d_multiple_single_class_segmentation_vs_single/</guid>
-<content:encoded><![CDATA[
-
-&#32; submitted by &#32; <a href="https://www.reddit.com/user/waterstrider123"> /u/waterstrider123 </a> <br /> <span><a href="https://www.reddit.com/r/learnmachinelearning/comments/16w8zz5/multiple_single_class_segmentation_vs_single/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x2658/d_multiple_single_class_segmentation_vs_single/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-10-01T14:08:42+00:00</pubDate>
-<updated>2023-10-01T14:08:42+00:00</updated>
-</item>
-<item>
-<title>Metagpt use case [D]</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16x5d0h/metagpt_use_case_d/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16x5d0h/metagpt_use_case_d/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Guys, i am currently working on my startup, here there are certain tasks like building a ml model using certain use-cases. I wish to automate this task, do u think metagpt is a good fit for the same. </p> <p>Let me know if you need any further information!!</p> <p>Thanks!!</p> <p>Always have a massive respect for this community!!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/aristotleTheFake"> /u/aristotleTheFake </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x5d0h/metagpt_use_case_d/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x5d0h/metagpt_use_case_d/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-10-01T16:17:20+00:00</pubDate>
-<updated>2023-10-01T16:17:20+00:00</updated>
-</item>
-<item>
-<title>[D] (How) Can you estimate inference speed of a NN model on given hardware?</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16wf3lk/d_how_can_you_estimate_inference_speed_of_a_nn/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16wf3lk/d_how_can_you_estimate_inference_speed_of_a_nn/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>How, outside of testing, do you estimate how quickly a specific model will run on some hardware? Anything about time is rarely mentioned in papers and if it is, it's more likely to talk about training, unless authors are specifically proud of their speed (like YOLO). Even less so in any README.</p> <p>Some way to translate numbers of parameters into seconds on a given GPU/CPU, any rules of thumb better than just setting up everything every time?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/teleoflexuous"> /u/teleoflexuous </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wf3lk/d_how_can_you_estimate_inference_speed_of_a_nn/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wf3lk/d_how_can_you_estimate_inference_speed_of_a_nn/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-30T19:10:51+00:00</pubDate>
-<updated>2023-09-30T19:10:51+00:00</updated>
-</item>
-<item>
-<title>Arxiv [D]ives - Segment Anything</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16w9kz7/arxiv_dives_segment_anything/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16w9kz7/arxiv_dives_segment_anything/</guid>
-<content:encoded><![CDATA[
-
-<table> <tr><td> <a href="https://www.reddit.com/r/MachineLearning/comments/16w9kz7/arxiv_dives_segment_anything/"> <img alt="Arxiv [D]ives - Segment Anything" src="https://external-preview.redd.it/qWxLBZ6J6moQBncdFCWH4ZA1VCOFyZfJDVCR-RJEqlA.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=ba7c3cbb91ae56110238f982493702695a85d537" title="Arxiv [D]ives - Segment Anything" /> </a> </td><td> <!-- SC_OFF --><div class="md"><p>Every Friday for the past few months we’ve been hosting a public paper club called “Arxiv Dives”. We pick a paper and dive deep into it and chat about it as a group.</p> <p>There are a lot of gems of knowledge hidden in these research papers, and the main motivation is simply to keep up with most impactful techniques in the field by taking the time to dive in and discuss. </p> <p>The attendees so far have been great, and would love for anyone is interested to join!</p> <p><a href="https://lu.ma/oxenbookclub">https://lu.ma/oxenbookclub</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/FallMindless3563"> /u/FallMindless3563 </a> <br /> <span><a href="https://blog.oxen.ai/arxiv-dives-segment-anything/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w9kz7/arxiv_dives_segment_anything/">[comments]</a></span> </td></tr></table>
-]]></content:encoded>
-<pubDate>2023-09-30T15:20:55+00:00</pubDate>
-<updated>2023-09-30T15:20:55+00:00</updated>
-</item>
-<item>
-<title>[D] Deploy the Mistral 7b Generative Model on an A10 GPU on AWS</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Hello,</p> <p>The Mistral 7b AI model beats LLaMA 2 7b on all benchmarks and LLaMA 2 13b in many benchmarks. It is actually even on par with the LLaMA 1 34b model.</p> <p>So I made a quick video about how to deploy this model on an A10 GPU on an AWS EC2 g5.4xlarge instance:</p> <p><a href="https://nlpcloud.com/deploy-mistral-7b-on-a10-gpu-on-aws.html?utm_source=reddit&amp;utm_campaign=i859w625-3816-81ed-a265-0242ac140019">https://nlpcloud.com/deploy-mistral-7b-on-a10-gpu-on-aws.html</a></p> <p>I hope it will be useful. If you have recommendations about how to improve this video please don't hesitate to let me know, that will be very much appreciated!</p> <p>Julien</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/juliensalinas"> /u/juliensalinas </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-30T07:11:38+00:00</pubDate>
-<updated>2023-09-30T07:11:38+00:00</updated>
-</item>
-<item>
-<title>[D] What exactly are the compute requirements for training a dense model versus an MoE?</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16w7lcl/d_what_exactly_are_the_compute_requirements_for/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16w7lcl/d_what_exactly_are_the_compute_requirements_for/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Hi, New to ML, I can't find a clear answer to this question. I find references online to a 1.8 trillion parameter model taking up the computational power of a 10B model, yet I also hear that the memory requirements a lot higher for an MoE?</p> <p>If I was interested in training/inferencing, for example, a 15M dense model, or a 60M MoE with 4 15M experts. whats the difference gonna be?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/vatsadev"> /u/vatsadev </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w7lcl/d_what_exactly_are_the_compute_requirements_for/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w7lcl/d_what_exactly_are_the_compute_requirements_for/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-30T14:00:29+00:00</pubDate>
-<updated>2023-09-30T14:00:29+00:00</updated>
-</item>
-<item>
-<title>[P]Handling categorical missing data in churn prediction model for telecom data</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16wjrnu/phandling_categorical_missing_data_in_churn/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16wjrnu/phandling_categorical_missing_data_in_churn/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><h1>I am working on a telecom dataset where I need to fit a model to for predicting churn(yes or no). There are a lot of categorical data with missing values( total values 7043). What is the best way to handle missing data in this case, is it better to ignore it or any other better imputation method?</h1> <pre><code>Data columns (total 21 columns): customerID 7043 non-null object gender 7043 non-null object Age 7043 non-null int64 Partner 7043 non-null object Dependents 7043 non-null object tenure 7043 non-null int64 PhoneService 7043 non-null object MultipleLines 6500 non-null object InternetService 6500 non-null object OnlineSecurity 7043 non-null object OnlineBackup 7043 non-null object DeviceProtection 7043 non-null object TechSupport 7043 non-null object StreamingTV 6500 non-null object StreamingMovies 6500 non-null object Contract 6500 non-null object PaperlessBilling 7043 non-null object PaymentMethod 6500 non-null object MonthlyCharges 7043 non-null float64 TotalCharges 7043 non-null object Churn 7043 non-null object </code></pre> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/guyloveskissing"> /u/guyloveskissing </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wjrnu/phandling_categorical_missing_data_in_churn/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wjrnu/phandling_categorical_missing_data_in_churn/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-30T22:22:07+00:00</pubDate>
-<updated>2023-09-30T22:22:07+00:00</updated>
-</item>
-<item>
-<title>[P] Carton – Run any ML model from any programming language</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vkwhk/p_carton_run_any_ml_model_from_any_programming/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vkwhk/p_carton_run_any_ml_model_from_any_programming/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Hi! I just open-sourced a project that I've been working on for a while and wanted to see what you think!</p> <p>The goal of Carton (<a href="https://carton.run/">https://carton.run</a>) is to let you use a single interface to run any machine learning model from any programming language.</p> <p>It’s currently difficult to integrate models that use different technologies (e.g. TensorRT, Ludwig, TorchScript, JAX, GGML, etc) into your application, especially if you’re not using Python. Even if you learn the details of integrating each of these frameworks, running multiple frameworks in one process can cause hard-to-debug crashes.</p> <p>Ideally, the ML framework a model was developed in should just be an implementation detail. Carton lets you decouple your application from specific ML frameworks so you can focus on the problem you actually want to solve.</p> <p>At a high level, the way Carton works is by running models in their own processes and using an IPC system to communicate back and forth with low overhead. Carton is primarily implemented in Rust, with bindings to other languages. There are lots more details linked in the architecture doc below.</p> <p>Importantly, Carton uses your model’s original underlying framework (e.g. PyTorch) under the hood to actually execute the model. This is meaningful because it makes Carton composable with other technologies. For example, it’s easy to use custom ops, TensorRT, etc without changes. This lets you keep up with cutting-edge advances, but decouples them from your application.</p> <p>I’ve been working on Carton for almost a year now and I open sourced it on Wednesday!</p> <p>Some useful links:</p> <ul> <li>Website, docs, quickstart - <a href="https://carton.run">https://carton.run</a></li> <li>Explore existing models - <a href="https://carton.pub">https://carton.pub</a></li> <li>Repo - <a href="https://github.com/VivekPanyam/carton">https://github.com/VivekPanyam/carton</a></li> <li>Architecture - <a href="https://github.com/VivekPanyam/carton/blob/main/ARCHITECTURE.md">https://github.com/VivekPanyam/carton/blob/main/ARCHITECTURE.md</a></li> </ul> <p>Please let me know what you think!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/vpanyam"> /u/vpanyam </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vkwhk/p_carton_run_any_ml_model_from_any_programming/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vkwhk/p_carton_run_any_ml_model_from_any_programming/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-29T19:28:10+00:00</pubDate>
-<updated>2023-09-29T19:28:10+00:00</updated>
-</item>
-<item>
-<title>[R] RealFill: Reference-Driven Generation for Authentic Image Completion</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/</guid>
-<content:encoded><![CDATA[
-
-<table> <tr><td> <a href="https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/"> <img alt="[R] RealFill: Reference-Driven Generation for Authentic Image Completion" src="https://external-preview.redd.it/ImWTCUOcR47SWrmxStU5b2FjJoMHcZHYtoAiLp884yI.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=3e569815954293cf6d30fd8d177f1724aba33068" title="[R] RealFill: Reference-Driven Generation for Authentic Image Completion" /> </a> </td><td> <!-- SC_OFF --><div class="md"><p>Project page: <a href="https://realfill.github.io/">https://realfill.github.io/</a></p> <p>Paper: <a href="https://arxiv.org/abs/2309.16668">https://arxiv.org/abs/2309.16668</a></p> <p><a href="https://preview.redd.it/cj2hqx8n77rb1.jpg?width=4200&amp;format=pjpg&amp;auto=webp&amp;s=a14388d4d8673bd0625d9849fc537db85d703283">RealFill is able to complete the image with what should have been there.</a></p> <p><strong>Abstract</strong></p> <blockquote> <p>Recent advances in generative imagery have brought forth outpainting and inpainting models that can produce high-quality, plausible image content in unknown regions, but the content these models hallucinate is necessarily inauthentic, since the models lack sufficient context about the true scene. In this work, we propose <strong><em>RealFill</em></strong>, a novel generative approach for image completion that fills in missing regions of an image with the content that <em>should have been there</em>. RealFill is a generative inpainting model that is personalized using only a few reference images of a scene. These reference images do not have to be aligned with the target image, and can be taken with drastically varying viewpoints, lighting conditions, camera apertures, or image styles. Once personalized, RealFill is able to complete a target image with visually compelling contents that are faithful to the original scene. We evaluate RealFill on a new image completion benchmark that covers a set of diverse and challenging scenarios, and find that it outperforms existing approaches by a large margin.</p> </blockquote> <p>&#x200b;</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/StrawberryNumberNine"> /u/StrawberryNumberNine </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/">[comments]</a></span> </td></tr></table>
-]]></content:encoded>
-<pubDate>2023-09-29T13:42:47+00:00</pubDate>
-<updated>2023-09-29T13:42:47+00:00</updated>
-</item>
-<item>
-<title>[R] Gsgen: Text-to-3D using Gaussian Splatting</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p><a href="https://gsgen3d.github.io/">Project Page</a><br /> <a href="https://arxiv.org/abs/2309.16585">Paper</a><br /> <a href="https://github.com/gsgen3d/gsgen">Code</a> </p> <blockquote> <p>In this paper, we present Gaussian Splatting based text-to-3D generation (GSGEN), a novel approach for generating high-quality 3D objects. Previous methods suffer from inaccurate geometry and limited fidelity due to the absence of 3D prior and proper representation. We leverage 3D Gaussian Splatting, a recent state-of-the-art representation, to address existing shortcomings by exploiting the explicit nature that enables the incorporation of 3D prior. Specifically, our method adopts a progressive optimization strategy, which includes a geometry optimization stage and an appearance refinement stage. In geometry optimization, a coarse representation is established under a 3D geometry prior along with the ordinary 2D SDS loss, ensuring a sensible and 3D-consistent rough shape. Subsequently, the obtained Gaussians undergo an iterative refinement to enrich details. In this stage, we increase the number of Gaussians by compactness-based densification to enhance continuity and improve fidelity. With these designs, our approach can generate 3D content with delicate details and more accurate geometry. Extensive evaluations demonstrate the effectiveness of our method, especially for capturing high-frequency components.</p> </blockquote> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Sirisian"> /u/Sirisian </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-29T20:38:01+00:00</pubDate>
-<updated>2023-09-29T20:38:01+00:00</updated>
-</item>
-<item>
-<title>[D] CIDEr values in PaLI model and XM 3600 dataset</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>I am reading <a href="https://arxiv.org/abs/2209.06794">PaLI: A Jointly-Scaled Multilingual Language-Image Model </a>. In their table 2 (page 6), it's reported that Thapliyal et al. (2022) (0.8B) model got 57.6 of CIDEr on XM 3600 for English. Thapliyal et al. (2022) is <a href="https://arxiv.org/abs/2205.12522">Crossmodal-3600: A Massively Multilingual Multimodal Evaluation Dataset</a>. However in this paper, the CIDEr values are reported less than 1. For example, the largest model got 0.584 of CIDEr on XM 3600 for English.</p> <p>Could someone explain to me why those values have great differences?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/KingsmanVince"> /u/KingsmanVince </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-30T02:46:43+00:00</pubDate>
-<updated>2023-09-30T02:46:43+00:00</updated>
-</item>
-<item>
-<title>[R] Pathway to self-learning mathematics and statistics for ML research</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vshvy/r_pathway_to_selflearning_mathematics_and/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vshvy/r_pathway_to_selflearning_mathematics_and/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Hey everyone. I am very passionate about getting in ML research and was wondering what the learning pathway was, particularly with regards to the theoretical Math and Statistics involved.</p> <p>For context:</p> <ul> <li>I am a second year undergraduate. By the end of this year, I will have taken and finished A Multivariable Calculus with Proofs course, so that is my current starting point.</li> <li>I have been working with ML for the last 3 years and am proficient in Python and frameworks like PyTorch.</li> <li>I have also made my own implementation of several research papers (LSTMs, GRUs, Transformers, ELMo, BERT, GPT, as well as a few computer vision papers).</li> </ul> <p>I have a good general intuition of how deep learning works, but I want to formalise this knowledge with the adequate mathematical background so that I can eventually pursue a career in research. I understand that I have plenty of time until I reach there, and I am willing to dedicate it to grinding out the math and statistical knowledge required.</p> <p>I have done my research on this sub and other forums, and here are a few resources that stood out:</p> <ul> <li>Mathematics for Machine Learning by Deisenroth, Faisal and Ong</li> <li>Advanced Calculus of Several Variables by C. H. Edwards Jr.</li> <li>Mathematical Methods Lecture Notes from Imperial College by Deisenroth and Cheraghchi</li> <li>The original information theory paper by Shannon</li> <li>The Elements of Statistical Learning by Hastie, Tibshirani and Friedman</li> <li>Pattern Recognition and Machine Learning by Bishop</li> <li>The Probabalistic Machine Learning Series by Kevin P. Murphy</li> <li>Deep Learning by Goodfellow, Bengio and Courville</li> <li>Mathematics of Machine Learning on MIT OCW (<a href="https://ocw.mit.edu/courses/18-657-mathematics-of-machine-learning-fall-2015/">here</a>)</li> </ul> <p>My question is, what order should I start self-learning in, given the (somewhat limited) background knowledge I have? Also, are there any other resources that would help?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Far_Clothes_5054"> /u/Far_Clothes_5054 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vshvy/r_pathway_to_selflearning_mathematics_and/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vshvy/r_pathway_to_selflearning_mathematics_and/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-30T00:30:39+00:00</pubDate>
-<updated>2023-09-30T00:30:39+00:00</updated>
-</item>
-<item>
-<title>[D] How is this sub not going ballistic over the recent GPT-4 Vision release?</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16ux9xt/d_how_is_this_sub_not_going_ballistic_over_the/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16ux9xt/d_how_is_this_sub_not_going_ballistic_over_the/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>For a quick disclaimer, I know people on here think the sub is being flooded by people who arent ml engineers/researchers. I have worked at two FAANGS on ml research teams/platforms. </p> <p>My opinion is that GPT-4 Vision/Image processing is out of science fiction. I fed chatgpt an image of a complex sql data base schema, and it converted it to code, then optimized the schema. It understood the arrows pointing between table boxes on the image as relations, and even understand many to one/many to many. </p> <p>I took a picture of random writing on a page, and it did OCR better than has ever been possible. I was able to ask questions that required OCR and a geometrical understanding of the page layout. </p> <p>Where is the hype on here? This is an astounding human breakthrough. I cannot believe how much ML is now obsolete as a result. I cannot believe how many computer science breakthroughs have occurred with this simple model update. Where is the uproar on this sub? Why am I not seeing 500 comments on posts about what you can do with this now? Why are there even post submissions about anything else?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/corporate_autist"> /u/corporate_autist </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16ux9xt/d_how_is_this_sub_not_going_ballistic_over_the/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16ux9xt/d_how_is_this_sub_not_going_ballistic_over_the/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-29T00:48:00+00:00</pubDate>
-<updated>2023-09-29T00:48:00+00:00</updated>
-</item>
-<item>
-<title>[R] Drive Like a Human: Rethinking Autonomous Driving with Large Language Models</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vq1a0/r_drive_like_a_human_rethinking_autonomous/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vq1a0/r_drive_like_a_human_rethinking_autonomous/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Paper - <a href="https://arxiv.org/abs/2307.07162">https://arxiv.org/abs/2307.07162</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/MysteryInc152"> /u/MysteryInc152 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vq1a0/r_drive_like_a_human_rethinking_autonomous/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vq1a0/r_drive_like_a_human_rethinking_autonomous/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-29T22:49:36+00:00</pubDate>
-<updated>2023-09-29T22:49:36+00:00</updated>
-</item>
-<item>
-<title>[D] What is the best open-source framework to create a synthetic and domain specific dataset for fine-tuning small models?</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vs7qd/d_what_is_the_best_opensource_framework_to_create/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vs7qd/d_what_is_the_best_opensource_framework_to_create/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Hi everyone,</p> <p>With the different data points, such as phi-1.5 performance being as good as 7b models on some tasks, it seems to be plausible that small models can be quite capable on specific tasks.</p> <p>I am working on <a href="https://huggingface.co/spaces/mithril-security/blind_chat">BlindChat</a>, an open-source and private solution to run small LLMs on your browser and I am interested in fine-tuning a phi-1.5 on some domain specific data.</p> <p>I am thinking of having an approach similar to the researchers of the phi paper, which is creating a high quality dataset using GPT3.5 / GPT4. </p> <p>Do you know good open-source frameworks that make it easy to create a high quality data for a specific task using an existing large model, like GPT3.5/4 or Llama 2 70b?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Separate-Still3770"> /u/Separate-Still3770 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vs7qd/d_what_is_the_best_opensource_framework_to_create/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vs7qd/d_what_is_the_best_opensource_framework_to_create/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-30T00:18:49+00:00</pubDate>
-<updated>2023-09-30T00:18:49+00:00</updated>
-</item>
-<item>
-<title>[Research] - Resource to query ML and LLM based research</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vosgf/research_resource_to_query_ml_and_llm_based/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vosgf/research_resource_to_query_ml_and_llm_based/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Made a repo for you all to try using a collaborative AI tool which includes 100+ papers on LLM-Based-Agents. You can try out the repo here: <a href="https://www.collama.ai/varun/llm-based-agents">https://www.collama.ai/varun/llm-based-agents</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/_llama2"> /u/_llama2 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vosgf/research_resource_to_query_ml_and_llm_based/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vosgf/research_resource_to_query_ml_and_llm_based/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-29T22:00:57+00:00</pubDate>
-<updated>2023-09-29T22:00:57+00:00</updated>
-</item>
-<item>
-<title>[D][R] Deploying deep models on memory constrained devices</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vfuzb/dr_deploying_deep_models_on_memory_constrained/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vfuzb/dr_deploying_deep_models_on_memory_constrained/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Suppose we want to use a deep learning model on a gpu within our app. We want this model to coexist on the gpu with other processes, effectively limit it's possible usage of resources.</p> <p>As cuDNN/cuBLAS routines are nondeterministic and possibly dynamically allocate variable amount of memory, how do people manage this problem? Is it a problem at all? Estimating memory usage of deep learning models on gpu is notoriously hard. There is a research <a href="https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://www.microsoft.com/en-us/research/uploads/prod/2020/09/dnnmem.pdf&amp;ved=2ahUKEwiRwvKL4MuBAxX-IBAIHQ3MCFgQFnoECCcQAQ&amp;usg=AOvVaw2Lu04KTTmjP39qHbyB_Wa-">paper</a> from Microsoft tackling this problem and they mispredict the usage of memory by 15% on average. Some cpu BLAS libraries like openBLAS or MKL also dynamically allocate the memory, but there are alternatives - LAPACK as far as I know uses only the memory provided by the caller, making it viable option for applications in embedded.</p> <p>In safety criticall tasks like autonomous driving, it seems to be especially important to have deterministic and clear bounds on memory usage of the process and not get spontaneously hit by CUDA OOM error.</p> <p>I can imagine that for autonomous vehicles, the prediction pipeline usually is the only process occupying the GPU, making the problem less visible or go away completely. In case of desktop applications only running the inference, the problem is also less visible as the memory requirements for forward pass only are comparatively low (we can reuse allocated memory blocks efficiently).</p> <p>However, I am looking on this subject through the problem of training/finetuning deep models on the edge devices, being increasingly available thing to do. Looking at tflite, alibaba's <a href="https://github.com/alibaba/MNN">MNN</a>, mit-han-lab's <a href="https://github.com/mit-han-lab/tinyengine">tinyengine</a> etc..</p> <p>To summarize: 1. Do nondeterministic memory allocations pose a problem for deploying deep models in the wild and if so, what strategies do people employ to mitigate this problem? 2. Do you think it would be beneficial to have a deep learning library with worse performance but with fine graned controll over the memory allocations? (If such library doesn't already exist. If it does, please tell me.) Such a library could possibly enable you to choose from a list of possible computation routines, providing you with required memory before the call is made and choose suitable perf/memory tradeoff routine for a given state of the machine per function call. Eg:</p> <p>if os.free_mem&gt;matmul(x,y,fast).mem_cost: matmul(x,y,fast).compute() else: matmul(x,y,economic).compute()</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/jasio1909"> /u/jasio1909 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vfuzb/dr_deploying_deep_models_on_memory_constrained/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vfuzb/dr_deploying_deep_models_on_memory_constrained/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-29T16:14:04+00:00</pubDate>
-<updated>2023-09-29T16:14:04+00:00</updated>
-</item>
-<item>
-<title>[D] What algorithms to use text classification</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16w0tse/d_what_algorithms_to_use_text_classification/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16w0tse/d_what_algorithms_to_use_text_classification/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>I have some data - twitter description of an event in text and the event itself. If I have 100000 tweets in column X and a category in Y - e.g sporting event review, movie review, news, etc what is the best algorithm to match them. Should I make the description a bag of words and depending on the word frequency I can train a ML model (random forest,svm,etc.) or can the algorithm take into account the order.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/AnyJello605"> /u/AnyJello605 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w0tse/d_what_algorithms_to_use_text_classification/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w0tse/d_what_algorithms_to_use_text_classification/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-30T07:46:50+00:00</pubDate>
-<updated>2023-09-30T07:46:50+00:00</updated>
-</item>
-<item>
-<title>[R] The Future of Romance: Novel Techniques for Replacing your Boyfriend with Generative AI (parody)</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/</guid>
-<content:encoded><![CDATA[
-
-<table> <tr><td> <a href="https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/"> <img alt="[R] The Future of Romance: Novel Techniques for Replacing your Boyfriend with Generative AI (parody)" src="https://b.thumbs.redditmedia.com/5ZF5NveBkg2luBHIeUbhdkO8MBaV49nwKh2ioe6vP3E.jpg" title="[R] The Future of Romance: Novel Techniques for Replacing your Boyfriend with Generative AI (parody)" /> </a> </td><td> &#32; submitted by &#32; <a href="https://www.reddit.com/user/TobyWasBestSpiderMan"> /u/TobyWasBestSpiderMan </a> <br /> <span><a href="https://www.reddit.com/gallery/16s9jzt">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/">[comments]</a></span> </td></tr></table>
-]]></content:encoded>
-<pubDate>2023-09-29T13:26:45+00:00</pubDate>
-<updated>2023-09-29T13:26:45+00:00</updated>
-</item>
-<item>
-<title>[D] How to Integrate fine tuned LLAMA 2 in website ?</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16w2jtj/d_how_to_integrate_fine_tuned_llama_2_in_website/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16w2jtj/d_how_to_integrate_fine_tuned_llama_2_in_website/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>I'm absolute beginner in Machine Learning. Me and My team are building a Chat Bot that recommends medicine based on symptoms, for that we are fine tuning LLAMA 2. Uploading BOOKS to train and we will ask question based on that books. SomeHow I got code on github to FineTune LLAMA 2. But how can I Integrate in my website ? How to connect it in my web app. Need some guidance. We have submission in 2 weeks.</p> <p>If anyone is willing to mentor us in this project or just guide what to do.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/BookAny3024"> /u/BookAny3024 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w2jtj/d_how_to_integrate_fine_tuned_llama_2_in_website/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w2jtj/d_how_to_integrate_fine_tuned_llama_2_in_website/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-30T09:36:34+00:00</pubDate>
-<updated>2023-09-30T09:36:34+00:00</updated>
-</item>
-</channel>
+  <channel>
+    <title>Machine Learning</title>
+    <link>https://www.reddit.com/r/MachineLearning/</link>
+    
+    <item>
+      <title>[D] Simple Questions Thread</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16qzt8j/d_simple_questions_thread/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16qzt8j/d_simple_questions_thread/</guid>
+      <description></description>
+      <pubDate>2023-09-24T15:00:32+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Please post your questions here instead of creating a new thread. Encourage others who create new posts for questions to post here instead!</p> <p>Thread will stay alive until next one so keep posting after the date in the title.</p> <p>Thanks to everyone for answering questions in the previous thread!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/AutoModerator"> /u/AutoModerator </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16qzt8j/d_simple_questions_thread/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16qzt8j/d_simple_questions_thread/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[R] Meta, INRIA researchers discover that explicit registers eliminate ViT attention spikes</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16x2o47/r_meta_inria_researchers_discover_that_explicit/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16x2o47/r_meta_inria_researchers_discover_that_explicit/</guid>
+      <description></description>
+      <pubDate>2023-10-01T14:28:22+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>When visualizing the inner workings of vision transformers (ViTs), researchers noticed weird spikes of attention on random background patches. This didn't make sense since the models should focus on foreground objects.</p> <p>By analyzing the output embeddings, they found a small number of tokens (2%) had super high vector norms, causing the spikes.</p> <p>The high-norm &quot;outlier&quot; tokens occurred in redundant areas and held less local info but more global info about the image.</p> <p>Their hypothesis is that ViTs learn to identify unimportant patches and recycle them as temporary storage instead of discarding. This enables efficient processing but causes issues.</p> <p>Their fix is simple - just add dedicated &quot;register&quot; tokens that provide storage space, avoiding the recycling side effects.</p> <p>Models trained with registers have:</p> <ul> <li>Smoother and more meaningful attention maps</li> <li>Small boosts in downstream performance</li> <li>Way better object discovery abilities</li> </ul> <p>The registers give ViTs a place to do their temporary computations without messing stuff up. Just a tiny architecture tweak improves interpretability and performance. Sweet!</p> <p>I think it's cool how they reverse-engineered this model artifact and fixed it with such a small change. More work like this will keep incrementally improving ViTs.</p> <p>TLDR: Vision transformers recycle useless patches to store data, causing problems. Adding dedicated register tokens for storage fixes it nicely.</p> <p><a href="https://notes.aimodels.fyi/demystifying-the-artifacts-in-vision-transformer-models/"><strong>Full summary</strong></a><strong>.</strong> Paper is <a href="https://arxiv.org/pdf/2309.16588.pdf">here</a>.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x2o47/r_meta_inria_researchers_discover_that_explicit/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x2o47/r_meta_inria_researchers_discover_that_explicit/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[R] SOTA of Deep-Shallow Encoder-Decoder LLMs for fast inference</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16x1fzr/r_sota_of_deepshallow_encoderdecoder_llms_for/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16x1fzr/r_sota_of_deepshallow_encoderdecoder_llms_for/</guid>
+      <description></description>
+      <pubDate>2023-10-01T13:37:56+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>There's some evidence [1] [2] that it's possible to run text2text language model at substantially (potentially on the order of magnitude) better inference speed by keeping the decoder shallow.</p> <p>I'm curious whether some <em>general reasoner</em> SOTA (small model for machine translation available at [3]) style models are publicly available for this sort of thing.</p> <p>If not, how would one go about training one?</p> <p>Would it be necessary to do it entirely from scratch (extremely costly)? Or would it be possible to take, say, Flan-UL2 (20B), chop off its decoder, and train a much smaller decoder on top of it with the UL2 encoder frozen (ie how one trains adapter layers).</p> <p>Assuming the decoder hyperparameters are kept small, would this be possible within reasonable compute budget? Would that even meaningfully converge with small amount of compute (assuming same training objective as is for UL2)?</p> <p>Would the strength (ie somewhat comparable to 10B if we cut 20B in half) transfer from the SOTA encoder, or would cutting off half of the model layers kneecap it too badly?</p> <p>[1] <a href="https://arxiv.org/pdf/2006.10369.pdf">https://arxiv.org/pdf/2006.10369.pdf</a></p> <p>[2] <a href="https://aclanthology.org/2023.sustainlp-1.6.pdf">https://aclanthology.org/2023.sustainlp-1.6.pdf</a></p> <p>[3] <a href="https://github.com/snoop2head/Deep-Encoder-Shallow-Decoder">https://github.com/snoop2head/Deep-Encoder-Shallow-Decoder</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/upalse"> /u/upalse </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x1fzr/r_sota_of_deepshallow_encoderdecoder_llms_for/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x1fzr/r_sota_of_deepshallow_encoderdecoder_llms_for/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[D] Duplicating layers in large models</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/</guid>
+      <description></description>
+      <pubDate>2023-10-01T11:34:38+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Is there any notable work on duplicating layers in large feed forward models? In contrast to e.g. the brain which is essentially a directed graph most networks utilized nowerdays use a feed forward approach. E.g. transformers are able to attend to past tokens, but generate the tokens in a way where for a given token a given weight is not utilized at different stages in the feed forward pass. In my intuition this would lead to an issue where concepts (factual data as well as learned &quot;algorithms&quot;) might be duplicated as they are needed at different depths in the generation process and are sequentially dependent on one another. This does not directly make the model less capable, as it might learn the same concept at two layers sufficiently well, but it reduces the data and parameter efficiency and and might impact generalization capabilities. Using a full on brain like graph might be hard to implement/optimize/scale on current hardware and is tricky with the backprop. But is there any work on duplicating a few layers, placing them at different depths in large models. I would guess that this would be more impactful for large models. One would essentially trade compute for better data efficiency.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/floriv1999"> /u/floriv1999 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[n] Introducing r/AudioAI: Any AI You Can Hear!</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16wn8qu/n_introducing_raudioai_any_ai_you_can_hear/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16wn8qu/n_introducing_raudioai_any_ai_you_can_hear/</guid>
+      <description></description>
+      <pubDate>2023-10-01T00:52:01+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>I couldn't find any AI sub dedicated to audio, so I’ve created <a href="https://www.reddit.com/r/AudioAI">r/AudioAI</a> to serve as a hub for everything at the intersection of artificial intelligence and the world of sounds.</p> <p>AI-driven music, speech, audio production, and all other AI audio technologies.</p> <p>If anyone wants to be part of mod, let me know!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/chibop1"> /u/chibop1 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wn8qu/n_introducing_raudioai_any_ai_you_can_hear/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wn8qu/n_introducing_raudioai_any_ai_you_can_hear/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[D] Perplexity.ai Search Feasibility</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16x63ce/d_perplexityai_search_feasibility/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16x63ce/d_perplexityai_search_feasibility/</guid>
+      <description></description>
+      <pubDate>2023-10-01T16:47:35+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>I've been using <a href="https://perplexity.ai/">Perplexity.ai</a> for a bit now when it hit me that I don't understand how they can sustain their business model with search. Stuff like Bing search and Google search cost around $5 or more per 1000 searches, so how can they even afford to do this kind of search. Do they have their own search index.</p> <p>Also, I don't know how they pull in the data from these sources so fast? I've played around with some things like this with Langchain with retrieval, but the speed of splitting and tokenizing website html is not very fast. Have they already pre-scrapped the websites from the search results and tokenized them for LLM retrieval?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/dragon18456"> /u/dragon18456 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x63ce/d_perplexityai_search_feasibility/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x63ce/d_perplexityai_search_feasibility/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[D] Struggling to get interviews what to do?</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16wbqcd/d_struggling_to_get_interviews_what_to_do/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16wbqcd/d_struggling_to_get_interviews_what_to_do/</guid>
+      <description></description>
+      <pubDate>2023-09-30T16:51:12+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Edit: I am a USA citizen so no need for sponsorship.</p> <p>I have 4 yoe in a start up company and a phd four publications 2 in high level math journals and 2 CV/DL papers in A journals and also 4 patents. I have experience with most common Cv tasks eg object detection, Multi object tracking, 2d/3d human pose estimation and monocular depth estimation. I’m well versed in typical network building blocks eg conv nets, FFNs, transformers, Diffusion etc. I have a little experience with NLP like NLTK and TTS networks. Also some other general dev technologies like ec2,s3,sql,mongoose, etc. </p> <p>That all being said I can’t seem to even get interviews these days just straight rejections not talking to recruiters. On the other hand in 2020, I was just searching for jobs passively and had something like a 75% success rate with getting interviews. I know the job market has changed but I’m a lot more experienced at this time than then and having abysmal luck.</p> <p>Anyone have any advice would be happy to share my resume if that would make it easier to give advice. Also open to hearing what other technologies o should/could learn.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/AbjectDrink3276"> /u/AbjectDrink3276 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wbqcd/d_struggling_to_get_interviews_what_to_do/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wbqcd/d_struggling_to_get_interviews_what_to_do/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[D] Multiple single class segmentation vs single multiclass segmentation models</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16x2658/d_multiple_single_class_segmentation_vs_single/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16x2658/d_multiple_single_class_segmentation_vs_single/</guid>
+      <description></description>
+      <pubDate>2023-10-01T14:08:42+00:00</pubDate>
+      <content:encoded><![CDATA[
+        &#32; submitted by &#32; <a href="https://www.reddit.com/user/waterstrider123"> /u/waterstrider123 </a> <br /> <span><a href="https://www.reddit.com/r/learnmachinelearning/comments/16w8zz5/multiple_single_class_segmentation_vs_single/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x2658/d_multiple_single_class_segmentation_vs_single/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Metagpt use case [D]</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16x5d0h/metagpt_use_case_d/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16x5d0h/metagpt_use_case_d/</guid>
+      <description></description>
+      <pubDate>2023-10-01T16:17:20+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Guys, i am currently working on my startup, here there are certain tasks like building a ml model using certain use-cases. I wish to automate this task, do u think metagpt is a good fit for the same. </p> <p>Let me know if you need any further information!!</p> <p>Thanks!!</p> <p>Always have a massive respect for this community!!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/aristotleTheFake"> /u/aristotleTheFake </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x5d0h/metagpt_use_case_d/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x5d0h/metagpt_use_case_d/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[D] (How) Can you estimate inference speed of a NN model on given hardware?</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16wf3lk/d_how_can_you_estimate_inference_speed_of_a_nn/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16wf3lk/d_how_can_you_estimate_inference_speed_of_a_nn/</guid>
+      <description></description>
+      <pubDate>2023-09-30T19:10:51+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>How, outside of testing, do you estimate how quickly a specific model will run on some hardware? Anything about time is rarely mentioned in papers and if it is, it's more likely to talk about training, unless authors are specifically proud of their speed (like YOLO). Even less so in any README.</p> <p>Some way to translate numbers of parameters into seconds on a given GPU/CPU, any rules of thumb better than just setting up everything every time?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/teleoflexuous"> /u/teleoflexuous </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wf3lk/d_how_can_you_estimate_inference_speed_of_a_nn/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wf3lk/d_how_can_you_estimate_inference_speed_of_a_nn/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>Arxiv [D]ives - Segment Anything</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16w9kz7/arxiv_dives_segment_anything/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16w9kz7/arxiv_dives_segment_anything/</guid>
+      <description></description>
+      <pubDate>2023-09-30T15:20:55+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <table> <tr><td> <a href="https://www.reddit.com/r/MachineLearning/comments/16w9kz7/arxiv_dives_segment_anything/"> <img alt="Arxiv [D]ives - Segment Anything" src="https://external-preview.redd.it/qWxLBZ6J6moQBncdFCWH4ZA1VCOFyZfJDVCR-RJEqlA.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=ba7c3cbb91ae56110238f982493702695a85d537" title="Arxiv [D]ives - Segment Anything" /> </a> </td><td> <!-- SC_OFF --><div class="md"><p>Every Friday for the past few months we’ve been hosting a public paper club called “Arxiv Dives”. We pick a paper and dive deep into it and chat about it as a group.</p> <p>There are a lot of gems of knowledge hidden in these research papers, and the main motivation is simply to keep up with most impactful techniques in the field by taking the time to dive in and discuss. </p> <p>The attendees so far have been great, and would love for anyone is interested to join!</p> <p><a href="https://lu.ma/oxenbookclub">https://lu.ma/oxenbookclub</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/FallMindless3563"> /u/FallMindless3563 </a> <br /> <span><a href="https://blog.oxen.ai/arxiv-dives-segment-anything/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w9kz7/arxiv_dives_segment_anything/">[comments]</a></span> </td></tr></table>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[D] Deploy the Mistral 7b Generative Model on an A10 GPU on AWS</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/</guid>
+      <description></description>
+      <pubDate>2023-09-30T07:11:38+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Hello,</p> <p>The Mistral 7b AI model beats LLaMA 2 7b on all benchmarks and LLaMA 2 13b in many benchmarks. It is actually even on par with the LLaMA 1 34b model.</p> <p>So I made a quick video about how to deploy this model on an A10 GPU on an AWS EC2 g5.4xlarge instance:</p> <p><a href="https://nlpcloud.com/deploy-mistral-7b-on-a10-gpu-on-aws.html?utm_source=reddit&amp;utm_campaign=i859w625-3816-81ed-a265-0242ac140019">https://nlpcloud.com/deploy-mistral-7b-on-a10-gpu-on-aws.html</a></p> <p>I hope it will be useful. If you have recommendations about how to improve this video please don't hesitate to let me know, that will be very much appreciated!</p> <p>Julien</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/juliensalinas"> /u/juliensalinas </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[D] What exactly are the compute requirements for training a dense model versus an MoE?</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16w7lcl/d_what_exactly_are_the_compute_requirements_for/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16w7lcl/d_what_exactly_are_the_compute_requirements_for/</guid>
+      <description></description>
+      <pubDate>2023-09-30T14:00:29+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Hi, New to ML, I can't find a clear answer to this question. I find references online to a 1.8 trillion parameter model taking up the computational power of a 10B model, yet I also hear that the memory requirements a lot higher for an MoE?</p> <p>If I was interested in training/inferencing, for example, a 15M dense model, or a 60M MoE with 4 15M experts. whats the difference gonna be?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/vatsadev"> /u/vatsadev </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w7lcl/d_what_exactly_are_the_compute_requirements_for/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w7lcl/d_what_exactly_are_the_compute_requirements_for/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[P]Handling categorical missing data in churn prediction model for telecom data</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16wjrnu/phandling_categorical_missing_data_in_churn/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16wjrnu/phandling_categorical_missing_data_in_churn/</guid>
+      <description></description>
+      <pubDate>2023-09-30T22:22:07+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><h1>I am working on a telecom dataset where I need to fit a model to for predicting churn(yes or no). There are a lot of categorical data with missing values( total values 7043). What is the best way to handle missing data in this case, is it better to ignore it or any other better imputation method?</h1> <pre><code>Data columns (total 21 columns): customerID 7043 non-null object gender 7043 non-null object Age 7043 non-null int64 Partner 7043 non-null object Dependents 7043 non-null object tenure 7043 non-null int64 PhoneService 7043 non-null object MultipleLines 6500 non-null object InternetService 6500 non-null object OnlineSecurity 7043 non-null object OnlineBackup 7043 non-null object DeviceProtection 7043 non-null object TechSupport 7043 non-null object StreamingTV 6500 non-null object StreamingMovies 6500 non-null object Contract 6500 non-null object PaperlessBilling 7043 non-null object PaymentMethod 6500 non-null object MonthlyCharges 7043 non-null float64 TotalCharges 7043 non-null object Churn 7043 non-null object </code></pre> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/guyloveskissing"> /u/guyloveskissing </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wjrnu/phandling_categorical_missing_data_in_churn/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wjrnu/phandling_categorical_missing_data_in_churn/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[P] Carton – Run any ML model from any programming language</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16vkwhk/p_carton_run_any_ml_model_from_any_programming/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16vkwhk/p_carton_run_any_ml_model_from_any_programming/</guid>
+      <description></description>
+      <pubDate>2023-09-29T19:28:10+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Hi! I just open-sourced a project that I've been working on for a while and wanted to see what you think!</p> <p>The goal of Carton (<a href="https://carton.run/">https://carton.run</a>) is to let you use a single interface to run any machine learning model from any programming language.</p> <p>It’s currently difficult to integrate models that use different technologies (e.g. TensorRT, Ludwig, TorchScript, JAX, GGML, etc) into your application, especially if you’re not using Python. Even if you learn the details of integrating each of these frameworks, running multiple frameworks in one process can cause hard-to-debug crashes.</p> <p>Ideally, the ML framework a model was developed in should just be an implementation detail. Carton lets you decouple your application from specific ML frameworks so you can focus on the problem you actually want to solve.</p> <p>At a high level, the way Carton works is by running models in their own processes and using an IPC system to communicate back and forth with low overhead. Carton is primarily implemented in Rust, with bindings to other languages. There are lots more details linked in the architecture doc below.</p> <p>Importantly, Carton uses your model’s original underlying framework (e.g. PyTorch) under the hood to actually execute the model. This is meaningful because it makes Carton composable with other technologies. For example, it’s easy to use custom ops, TensorRT, etc without changes. This lets you keep up with cutting-edge advances, but decouples them from your application.</p> <p>I’ve been working on Carton for almost a year now and I open sourced it on Wednesday!</p> <p>Some useful links:</p> <ul> <li>Website, docs, quickstart - <a href="https://carton.run">https://carton.run</a></li> <li>Explore existing models - <a href="https://carton.pub">https://carton.pub</a></li> <li>Repo - <a href="https://github.com/VivekPanyam/carton">https://github.com/VivekPanyam/carton</a></li> <li>Architecture - <a href="https://github.com/VivekPanyam/carton/blob/main/ARCHITECTURE.md">https://github.com/VivekPanyam/carton/blob/main/ARCHITECTURE.md</a></li> </ul> <p>Please let me know what you think!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/vpanyam"> /u/vpanyam </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vkwhk/p_carton_run_any_ml_model_from_any_programming/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vkwhk/p_carton_run_any_ml_model_from_any_programming/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[R] RealFill: Reference-Driven Generation for Authentic Image Completion</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/</guid>
+      <description></description>
+      <pubDate>2023-09-29T13:42:47+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <table> <tr><td> <a href="https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/"> <img alt="[R] RealFill: Reference-Driven Generation for Authentic Image Completion" src="https://external-preview.redd.it/ImWTCUOcR47SWrmxStU5b2FjJoMHcZHYtoAiLp884yI.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=3e569815954293cf6d30fd8d177f1724aba33068" title="[R] RealFill: Reference-Driven Generation for Authentic Image Completion" /> </a> </td><td> <!-- SC_OFF --><div class="md"><p>Project page: <a href="https://realfill.github.io/">https://realfill.github.io/</a></p> <p>Paper: <a href="https://arxiv.org/abs/2309.16668">https://arxiv.org/abs/2309.16668</a></p> <p><a href="https://preview.redd.it/cj2hqx8n77rb1.jpg?width=4200&amp;format=pjpg&amp;auto=webp&amp;s=a14388d4d8673bd0625d9849fc537db85d703283">RealFill is able to complete the image with what should have been there.</a></p> <p><strong>Abstract</strong></p> <blockquote> <p>Recent advances in generative imagery have brought forth outpainting and inpainting models that can produce high-quality, plausible image content in unknown regions, but the content these models hallucinate is necessarily inauthentic, since the models lack sufficient context about the true scene. In this work, we propose <strong><em>RealFill</em></strong>, a novel generative approach for image completion that fills in missing regions of an image with the content that <em>should have been there</em>. RealFill is a generative inpainting model that is personalized using only a few reference images of a scene. These reference images do not have to be aligned with the target image, and can be taken with drastically varying viewpoints, lighting conditions, camera apertures, or image styles. Once personalized, RealFill is able to complete a target image with visually compelling contents that are faithful to the original scene. We evaluate RealFill on a new image completion benchmark that covers a set of diverse and challenging scenarios, and find that it outperforms existing approaches by a large margin.</p> </blockquote> <p>&#x200b;</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/StrawberryNumberNine"> /u/StrawberryNumberNine </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/">[comments]</a></span> </td></tr></table>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[R] Gsgen: Text-to-3D using Gaussian Splatting</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/</guid>
+      <description></description>
+      <pubDate>2023-09-29T20:38:01+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p><a href="https://gsgen3d.github.io/">Project Page</a><br /> <a href="https://arxiv.org/abs/2309.16585">Paper</a><br /> <a href="https://github.com/gsgen3d/gsgen">Code</a> </p> <blockquote> <p>In this paper, we present Gaussian Splatting based text-to-3D generation (GSGEN), a novel approach for generating high-quality 3D objects. Previous methods suffer from inaccurate geometry and limited fidelity due to the absence of 3D prior and proper representation. We leverage 3D Gaussian Splatting, a recent state-of-the-art representation, to address existing shortcomings by exploiting the explicit nature that enables the incorporation of 3D prior. Specifically, our method adopts a progressive optimization strategy, which includes a geometry optimization stage and an appearance refinement stage. In geometry optimization, a coarse representation is established under a 3D geometry prior along with the ordinary 2D SDS loss, ensuring a sensible and 3D-consistent rough shape. Subsequently, the obtained Gaussians undergo an iterative refinement to enrich details. In this stage, we increase the number of Gaussians by compactness-based densification to enhance continuity and improve fidelity. With these designs, our approach can generate 3D content with delicate details and more accurate geometry. Extensive evaluations demonstrate the effectiveness of our method, especially for capturing high-frequency components.</p> </blockquote> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Sirisian"> /u/Sirisian </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[D] CIDEr values in PaLI model and XM 3600 dataset</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/</guid>
+      <description></description>
+      <pubDate>2023-09-30T02:46:43+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>I am reading <a href="https://arxiv.org/abs/2209.06794">PaLI: A Jointly-Scaled Multilingual Language-Image Model </a>. In their table 2 (page 6), it's reported that Thapliyal et al. (2022) (0.8B) model got 57.6 of CIDEr on XM 3600 for English. Thapliyal et al. (2022) is <a href="https://arxiv.org/abs/2205.12522">Crossmodal-3600: A Massively Multilingual Multimodal Evaluation Dataset</a>. However in this paper, the CIDEr values are reported less than 1. For example, the largest model got 0.584 of CIDEr on XM 3600 for English.</p> <p>Could someone explain to me why those values have great differences?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/KingsmanVince"> /u/KingsmanVince </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[R] Pathway to self-learning mathematics and statistics for ML research</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16vshvy/r_pathway_to_selflearning_mathematics_and/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16vshvy/r_pathway_to_selflearning_mathematics_and/</guid>
+      <description></description>
+      <pubDate>2023-09-30T00:30:39+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Hey everyone. I am very passionate about getting in ML research and was wondering what the learning pathway was, particularly with regards to the theoretical Math and Statistics involved.</p> <p>For context:</p> <ul> <li>I am a second year undergraduate. By the end of this year, I will have taken and finished A Multivariable Calculus with Proofs course, so that is my current starting point.</li> <li>I have been working with ML for the last 3 years and am proficient in Python and frameworks like PyTorch.</li> <li>I have also made my own implementation of several research papers (LSTMs, GRUs, Transformers, ELMo, BERT, GPT, as well as a few computer vision papers).</li> </ul> <p>I have a good general intuition of how deep learning works, but I want to formalise this knowledge with the adequate mathematical background so that I can eventually pursue a career in research. I understand that I have plenty of time until I reach there, and I am willing to dedicate it to grinding out the math and statistical knowledge required.</p> <p>I have done my research on this sub and other forums, and here are a few resources that stood out:</p> <ul> <li>Mathematics for Machine Learning by Deisenroth, Faisal and Ong</li> <li>Advanced Calculus of Several Variables by C. H. Edwards Jr.</li> <li>Mathematical Methods Lecture Notes from Imperial College by Deisenroth and Cheraghchi</li> <li>The original information theory paper by Shannon</li> <li>The Elements of Statistical Learning by Hastie, Tibshirani and Friedman</li> <li>Pattern Recognition and Machine Learning by Bishop</li> <li>The Probabalistic Machine Learning Series by Kevin P. Murphy</li> <li>Deep Learning by Goodfellow, Bengio and Courville</li> <li>Mathematics of Machine Learning on MIT OCW (<a href="https://ocw.mit.edu/courses/18-657-mathematics-of-machine-learning-fall-2015/">here</a>)</li> </ul> <p>My question is, what order should I start self-learning in, given the (somewhat limited) background knowledge I have? Also, are there any other resources that would help?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Far_Clothes_5054"> /u/Far_Clothes_5054 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vshvy/r_pathway_to_selflearning_mathematics_and/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vshvy/r_pathway_to_selflearning_mathematics_and/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[D] How is this sub not going ballistic over the recent GPT-4 Vision release?</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16ux9xt/d_how_is_this_sub_not_going_ballistic_over_the/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16ux9xt/d_how_is_this_sub_not_going_ballistic_over_the/</guid>
+      <description></description>
+      <pubDate>2023-09-29T00:48:00+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>For a quick disclaimer, I know people on here think the sub is being flooded by people who arent ml engineers/researchers. I have worked at two FAANGS on ml research teams/platforms. </p> <p>My opinion is that GPT-4 Vision/Image processing is out of science fiction. I fed chatgpt an image of a complex sql data base schema, and it converted it to code, then optimized the schema. It understood the arrows pointing between table boxes on the image as relations, and even understand many to one/many to many. </p> <p>I took a picture of random writing on a page, and it did OCR better than has ever been possible. I was able to ask questions that required OCR and a geometrical understanding of the page layout. </p> <p>Where is the hype on here? This is an astounding human breakthrough. I cannot believe how much ML is now obsolete as a result. I cannot believe how many computer science breakthroughs have occurred with this simple model update. Where is the uproar on this sub? Why am I not seeing 500 comments on posts about what you can do with this now? Why are there even post submissions about anything else?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/corporate_autist"> /u/corporate_autist </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16ux9xt/d_how_is_this_sub_not_going_ballistic_over_the/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16ux9xt/d_how_is_this_sub_not_going_ballistic_over_the/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[R] Drive Like a Human: Rethinking Autonomous Driving with Large Language Models</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16vq1a0/r_drive_like_a_human_rethinking_autonomous/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16vq1a0/r_drive_like_a_human_rethinking_autonomous/</guid>
+      <description></description>
+      <pubDate>2023-09-29T22:49:36+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Paper - <a href="https://arxiv.org/abs/2307.07162">https://arxiv.org/abs/2307.07162</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/MysteryInc152"> /u/MysteryInc152 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vq1a0/r_drive_like_a_human_rethinking_autonomous/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vq1a0/r_drive_like_a_human_rethinking_autonomous/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[D] What is the best open-source framework to create a synthetic and domain specific dataset for fine-tuning small models?</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16vs7qd/d_what_is_the_best_opensource_framework_to_create/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16vs7qd/d_what_is_the_best_opensource_framework_to_create/</guid>
+      <description></description>
+      <pubDate>2023-09-30T00:18:49+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Hi everyone,</p> <p>With the different data points, such as phi-1.5 performance being as good as 7b models on some tasks, it seems to be plausible that small models can be quite capable on specific tasks.</p> <p>I am working on <a href="https://huggingface.co/spaces/mithril-security/blind_chat">BlindChat</a>, an open-source and private solution to run small LLMs on your browser and I am interested in fine-tuning a phi-1.5 on some domain specific data.</p> <p>I am thinking of having an approach similar to the researchers of the phi paper, which is creating a high quality dataset using GPT3.5 / GPT4. </p> <p>Do you know good open-source frameworks that make it easy to create a high quality data for a specific task using an existing large model, like GPT3.5/4 or Llama 2 70b?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Separate-Still3770"> /u/Separate-Still3770 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vs7qd/d_what_is_the_best_opensource_framework_to_create/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vs7qd/d_what_is_the_best_opensource_framework_to_create/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[Research] - Resource to query ML and LLM based research</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16vosgf/research_resource_to_query_ml_and_llm_based/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16vosgf/research_resource_to_query_ml_and_llm_based/</guid>
+      <description></description>
+      <pubDate>2023-09-29T22:00:57+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Made a repo for you all to try using a collaborative AI tool which includes 100+ papers on LLM-Based-Agents. You can try out the repo here: <a href="https://www.collama.ai/varun/llm-based-agents">https://www.collama.ai/varun/llm-based-agents</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/_llama2"> /u/_llama2 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vosgf/research_resource_to_query_ml_and_llm_based/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vosgf/research_resource_to_query_ml_and_llm_based/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[D][R] Deploying deep models on memory constrained devices</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16vfuzb/dr_deploying_deep_models_on_memory_constrained/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16vfuzb/dr_deploying_deep_models_on_memory_constrained/</guid>
+      <description></description>
+      <pubDate>2023-09-29T16:14:04+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Suppose we want to use a deep learning model on a gpu within our app. We want this model to coexist on the gpu with other processes, effectively limit it's possible usage of resources.</p> <p>As cuDNN/cuBLAS routines are nondeterministic and possibly dynamically allocate variable amount of memory, how do people manage this problem? Is it a problem at all? Estimating memory usage of deep learning models on gpu is notoriously hard. There is a research <a href="https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://www.microsoft.com/en-us/research/uploads/prod/2020/09/dnnmem.pdf&amp;ved=2ahUKEwiRwvKL4MuBAxX-IBAIHQ3MCFgQFnoECCcQAQ&amp;usg=AOvVaw2Lu04KTTmjP39qHbyB_Wa-">paper</a> from Microsoft tackling this problem and they mispredict the usage of memory by 15% on average. Some cpu BLAS libraries like openBLAS or MKL also dynamically allocate the memory, but there are alternatives - LAPACK as far as I know uses only the memory provided by the caller, making it viable option for applications in embedded.</p> <p>In safety criticall tasks like autonomous driving, it seems to be especially important to have deterministic and clear bounds on memory usage of the process and not get spontaneously hit by CUDA OOM error.</p> <p>I can imagine that for autonomous vehicles, the prediction pipeline usually is the only process occupying the GPU, making the problem less visible or go away completely. In case of desktop applications only running the inference, the problem is also less visible as the memory requirements for forward pass only are comparatively low (we can reuse allocated memory blocks efficiently).</p> <p>However, I am looking on this subject through the problem of training/finetuning deep models on the edge devices, being increasingly available thing to do. Looking at tflite, alibaba's <a href="https://github.com/alibaba/MNN">MNN</a>, mit-han-lab's <a href="https://github.com/mit-han-lab/tinyengine">tinyengine</a> etc..</p> <p>To summarize: 1. Do nondeterministic memory allocations pose a problem for deploying deep models in the wild and if so, what strategies do people employ to mitigate this problem? 2. Do you think it would be beneficial to have a deep learning library with worse performance but with fine graned controll over the memory allocations? (If such library doesn't already exist. If it does, please tell me.) Such a library could possibly enable you to choose from a list of possible computation routines, providing you with required memory before the call is made and choose suitable perf/memory tradeoff routine for a given state of the machine per function call. Eg:</p> <p>if os.free_mem&gt;matmul(x,y,fast).mem_cost: matmul(x,y,fast).compute() else: matmul(x,y,economic).compute()</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/jasio1909"> /u/jasio1909 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vfuzb/dr_deploying_deep_models_on_memory_constrained/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vfuzb/dr_deploying_deep_models_on_memory_constrained/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[D] What algorithms to use text classification</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16w0tse/d_what_algorithms_to_use_text_classification/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16w0tse/d_what_algorithms_to_use_text_classification/</guid>
+      <description></description>
+      <pubDate>2023-09-30T07:46:50+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>I have some data - twitter description of an event in text and the event itself. If I have 100000 tweets in column X and a category in Y - e.g sporting event review, movie review, news, etc what is the best algorithm to match them. Should I make the description a bag of words and depending on the word frequency I can train a ML model (random forest,svm,etc.) or can the algorithm take into account the order.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/AnyJello605"> /u/AnyJello605 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w0tse/d_what_algorithms_to_use_text_classification/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w0tse/d_what_algorithms_to_use_text_classification/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <title>[R] The Future of Romance: Novel Techniques for Replacing your Boyfriend with Generative AI (parody)</title>
+      <link>https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/</link>
+      <guid>https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/</guid>
+      <description></description>
+      <pubDate>2023-09-29T13:26:45+00:00</pubDate>
+      <content:encoded><![CDATA[
+        <table> <tr><td> <a href="https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/"> <img alt="[R] The Future of Romance: Novel Techniques for Replacing your Boyfriend with Generative AI (parody)" src="https://b.thumbs.redditmedia.com/5ZF5NveBkg2luBHIeUbhdkO8MBaV49nwKh2ioe6vP3E.jpg" title="[R] The Future of Romance: Novel Techniques for Replacing your Boyfriend with Generative AI (parody)" /> </a> </td><td> &#32; submitted by &#32; <a href="https://www.reddit.com/user/TobyWasBestSpiderMan"> /u/TobyWasBestSpiderMan </a> <br /> <span><a href="https://www.reddit.com/gallery/16s9jzt">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/">[comments]</a></span> </td></tr></table>
+      ]]></content:encoded>
+    </item>
+    
+  </channel>
 </rss>
