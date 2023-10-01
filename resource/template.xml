@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
-<channel>
-<title>{{ feed.title.replace('&', '&amp;') }}</title>
-<link>{{ feed.link.replace('&', '&amp;') }}</link>
-{% for item in items %}
-<item>
-<title>{{ item.title.replace('&', '&amp;') }}</title>
-<link>{{ item.link.replace('&', '&amp;') }}</link>
-<guid>{{ item.link.replace('&', '&amp;') }}</guid>
-<content:encoded><![CDATA[
-{% if item.summary %}<div> {{ item.summary}} <div>{% endif %}
-{{ item.article }}
-]]></content:encoded>
-{% if item.published %}<pubDate>{{ item.published }}</pubDate>{% endif %}
-{% if item.updated %}<updated>{{ item.updated }}</updated>{% endif %}
-</item>{% endfor %}
-</channel>
+  <channel>
+    <title>{{ feed.title.replace('&', '&amp;') }}</title>
+    <link>{{ feed.link.replace('&', '&amp;') }}</link>
+    {% for item in items %}
+    <item>
+      <title>{{ item.title.replace('&', '&amp;') }}</title>
+      <link>{{ item.link.replace('&', '&amp;') }}</link>
+      <guid>{{ item.link.replace('&', '&amp;') }}</guid>
+      <description>{{ item.summary.replace('&', '&amp;') }}</description>
+      <pubDate>{{ item.published }}</pubDate>
+      <content:encoded><![CDATA[
+        {{ item.article }}
+      ]]></content:encoded>
+    </item>
+    {% endfor %}
+  </channel>
 </rss>
