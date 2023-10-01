@@ -23,11 +23,6 @@ jobs:
 
       - name: Copy docs from current repository to gh-source repository
         run: |
-          pwd
-          ls
-          cd ..
-          pwd
-          ls
           cp -R docs/* gh/source/rssdocs/
 
       - name: Install dependencies and build
