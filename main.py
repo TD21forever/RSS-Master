@@ -69,7 +69,7 @@ def _render_xml(feed, filtered_items):
     logger.info(f"rss xml Done")
     return rss_xml
 
-def _output(rss, data):
+def _output_xml(rss, data):
     if not os.path.exists(DOCS_DIR):
         os.makedirs(DOCS_DIR)
     rss_xml_filename = absolute(DOCS_DIR, rss["name"] + ".xml")
@@ -101,13 +101,13 @@ def main():
     for group_name, group_items in rss_cfg.items():
         for rss in group_items:
             logger.info(f"开始处理: {rss.get('text', '获取失败')}")
-            # feed = get_feeds(rss)
-            # if not feed: continue
-            # filtered_items = _filter(rss, feed)
-            # if len(filtered_items) == 0: continue
-            # if rss.get("use_chatgpt", False): _use_ai(filtered_items)
-            # rss_xml = _render_xml(feed, filtered_items)
-            # _output(rss, rss_xml)
+            feed = get_feeds(rss)
+            if not feed: continue
+            filtered_items = _filter(rss, feed)
+            if len(filtered_items) == 0: continue
+            if rss.get("use_chatgpt", False): _use_ai(filtered_items)
+            rss_xml = _render_xml(feed, filtered_items)
+            _output_xml(rss, rss_xml)
             _add_rss(rss, html_items)
     _render_html(html_items)
         
