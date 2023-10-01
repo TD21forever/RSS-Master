@@ -6,36 +6,36 @@ on:
       - main
 
 jobs:
-  sync-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout gh repository
+    
+      - name: Checkout main repo
+        uses: actions/checkout@v4.1.0
+          
+      - name: Checkout gh repo
         uses: actions/checkout@v4.1.0
         with:
           repository: TD21forever/TD21forever.github.io
           ref: source
+          path: gh
+          token: ${{ secrets.TOKEN }}
+          ssh-key: ${{ secrets.KEY }}
 
       - name: Copy docs from current repository to gh-source repository
         run: |
-          pwd
-          ls
-          cp -R docs/* TD21forever.github.io/source/rssdocs/
-
-      - name: Install dependencies and build
-        run: |
-          cd TD21forever.github.io
-          npm install
-          npx hexo g -d
+          cp -R docs/* gh/source/rssdocs/
 
       - name: Configure Git
         run: |
           git config --global user.name "td21forever"
           git config --global user.email "435212619@qq.com"
+          cd gh
 
-      - name: Commit and push changes to B repository
+      - name: Commit and push changes to gh repository
         run: |
-          cd TD21forever.github.io
+          cd gh
           git add .
           git commit -m "Sync docs from main repository"
           git push origin source
