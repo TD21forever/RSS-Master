@@ -1,3 +1,4 @@
+import hashlib
 import logging
 import os
 import time
@@ -63,3 +64,7 @@ def init_dirs():
     if not os.path.exists(CONFIG_PATH): os.makedirs(CONFIG_PATH)
     
 
+def md5hash_6(text:str):
+    m = hashlib.md5()
+    m.update(text.encode("utf-8"))
+    return m.hexdigest()[:6]
