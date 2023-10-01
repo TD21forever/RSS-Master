@@ -20,6 +20,8 @@ jobs:
           repository: TD21forever/TD21forever.github.io
           ref: source
           path: gh
+          token: ${{ secrets.TOKEN }}
+          ssh-key: ${{ secrets.KEY }}
 
       - name: Copy docs from current repository to gh-source repository
         run: |
@@ -36,10 +38,9 @@ jobs:
         run: |
           cd gh
           npm install
-          export GIT_TOKEN=${{ secrets.KEY }}
           npx hexo g -d
           
-      - name: Commit and push changes to B repository
+      - name: Commit and push changes to gh repository
         run: |
           cd TD21forever.github.io
           git add .
