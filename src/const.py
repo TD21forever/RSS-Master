@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
+from typing import Dict, Optional
 
 
 class FilterType(Enum):
@@ -34,8 +35,9 @@ class Item:
     link:str
     summary:str
     article:str
-    published:str
     updated:str
+    published:Optional[str] = ""
+    media_content:Optional[Dict] = None
     
 @dataclass
 class HtmlItem:

@@ -40,7 +40,8 @@ def _filter(rss, feed):
             "published": item.get("published", ""),
             "updated": item.get("updated", ""),
             "article": item.get("summary", ""),
-            "summary": ""
+            "summary": "",
+            "media_content": item.get("media_content", None)
         }
         item = Item(**data)
         need = True 

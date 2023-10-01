@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>{{ feed.title.replace('&', '&amp;') }}</title>
     <link>{{ feed.link.replace('&', '&amp;') }}</link>
@@ -10,6 +10,9 @@
       <guid>{{ item.link.replace('&', '&amp;') }}</guid>
       <description>{{ item.summary.replace('&', '&amp;') }}</description>
       <pubDate>{{ item.published }}</pubDate>
+      {% if item.media_content %}
+      <media:content url="{{ item.media_content[0].url }}" type="{{ item.media_content[0].type }}" width="{{ item.media_content[0].width }}" height="{{ item.media_content[0].height }}" />
+      {% endif %}
       <content:encoded><![CDATA[
         {{ item.article }}
       ]]></content:encoded>
