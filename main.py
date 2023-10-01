@@ -39,7 +39,7 @@ def _filter(rss, feed):
             "title": item.get("title", ""),
             "published": item.get("published", ""),
             "updated": item.get("updated", ""),
-            "article": item.get("summary", ""),
+            "article": item.get("summary", "") if item.get("media_content", None) else "",
             "summary": "",
             "media_content": item.get("media_content", None)
         }
