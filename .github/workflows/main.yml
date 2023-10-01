@@ -1,0 +1,39 @@
+name: Sync Docs and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout gh repository
+        uses: actions/checkout@v4.1.0
+        with:
+          repository: TD21forever/TD21forever.github.io
+          ref: source
+
+      - name: Copy docs from current repository to gh-source repository
+        run: |
+          cp -R docs/* TD21forever.github.io/source/rssdocs/
+
+      - name: Install dependencies and build
+        run: |
+          cd TD21forever.github.io
+          npm install
+          npx hexo g -d
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "td21forever"
+          git config --global user.email "435212619@qq.com"
+
+      - name: Commit and push changes to B repository
+        run: |
+          cd TD21forever.github.io
+          git add .
+          git commit -m "Sync docs from main repository"
+          git push origin source
