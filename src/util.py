@@ -11,7 +11,7 @@ import opml
 import yaml
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from root import CONFIG_PATH, LOG_DIR
+from root import BASE_URL, CONFIG_PATH, LOG_DIR
 
 
 def init_logger():
@@ -88,8 +88,9 @@ def convert_yaml_to_opml(yaml_path, opml_path):
     for category_name, categoty_vals in data.items():
         outline = ET.SubElement(body, 'outline', text=category_name, title=category_name)
         for item in categoty_vals:
+            url = BASE_URL + item["name"] + ".xml"
             feed_outline = ET.SubElement(outline, "outline", text=item['text'], title=item['text'], type='rss',
-                                        xmlUrl=item['url'], htmlUrl=item['htmlUrl'])
+                                        xmlUrl=url, htmlUrl=item['htmlUrl'])
     
     tree = ET.ElementTree(opml)
     tree.write(opml_path, encoding='utf-8', xml_declaration=True)
@@ -116,6 +117,10 @@ def convert_opml_to_yaml(opml_file, yaml_file):
                 item["name"] = md5hash_6(item["url"])
                 data[group].append(item)
 
+    # 如果yaml文件存在,则改名,防止丢失
+    if os.path.exists(yaml_file):
+        os.rename(yaml_file, yaml_file + ".bak")
+        
     # 将数据写入 YAML 文件
     with open(yaml_file, "w") as f:
         yaml.dump(data, f, encoding="utf-8", allow_unicode=True)
@@ -125,6 +130,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--opml_file", help="Path to the OPML file")
     parser.add_argument("--yaml_file", help="Path to the YAML file")
+    parser.add_argument("--type", help="Type of the conversion")
     args = parser.parse_args()
     print(args.opml_file, args.yaml_file)
-    convert_opml_to_yaml(args.opml_file, args.yaml_file)
+    if args.type == "y2o":
+        convert_yaml_to_opml(args.yaml_file, args.opml_file)
+    else:
+        convert_opml_to_yaml(args.opml_file, args.yaml_file)

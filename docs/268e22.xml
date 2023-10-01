@@ -16,6 +16,39 @@
 <updated>2023-09-24T15:00:32+00:00</updated>
 </item>
 <item>
+<title>[R] Meta, INRIA researchers discover that explicit registers eliminate ViT attention spikes</title>
+<link>https://www.reddit.com/r/MachineLearning/comments/16x2o47/r_meta_inria_researchers_discover_that_explicit/</link>
+<guid>https://www.reddit.com/r/MachineLearning/comments/16x2o47/r_meta_inria_researchers_discover_that_explicit/</guid>
+<content:encoded><![CDATA[
+
+<!-- SC_OFF --><div class="md"><p>When visualizing the inner workings of vision transformers (ViTs), researchers noticed weird spikes of attention on random background patches. This didn't make sense since the models should focus on foreground objects.</p> <p>By analyzing the output embeddings, they found a small number of tokens (2%) had super high vector norms, causing the spikes.</p> <p>The high-norm &quot;outlier&quot; tokens occurred in redundant areas and held less local info but more global info about the image.</p> <p>Their hypothesis is that ViTs learn to identify unimportant patches and recycle them as temporary storage instead of discarding. This enables efficient processing but causes issues.</p> <p>Their fix is simple - just add dedicated &quot;register&quot; tokens that provide storage space, avoiding the recycling side effects.</p> <p>Models trained with registers have:</p> <ul> <li>Smoother and more meaningful attention maps</li> <li>Small boosts in downstream performance</li> <li>Way better object discovery abilities</li> </ul> <p>The registers give ViTs a place to do their temporary computations without messing stuff up. Just a tiny architecture tweak improves interpretability and performance. Sweet!</p> <p>I think it's cool how they reverse-engineered this model artifact and fixed it with such a small change. More work like this will keep incrementally improving ViTs.</p> <p>TLDR: Vision transformers recycle useless patches to store data, causing problems. Adding dedicated register tokens for storage fixes it nicely.</p> <p><a href="https://notes.aimodels.fyi/demystifying-the-artifacts-in-vision-transformer-models/"><strong>Full summary</strong></a><strong>.</strong> Paper is <a href="https://arxiv.org/pdf/2309.16588.pdf">here</a>.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x2o47/r_meta_inria_researchers_discover_that_explicit/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x2o47/r_meta_inria_researchers_discover_that_explicit/">[comments]</a></span>
+]]></content:encoded>
+<pubDate>2023-10-01T14:28:22+00:00</pubDate>
+<updated>2023-10-01T14:28:22+00:00</updated>
+</item>
+<item>
+<title>[R] SOTA of Deep-Shallow Encoder-Decoder LLMs for fast inference</title>
+<link>https://www.reddit.com/r/MachineLearning/comments/16x1fzr/r_sota_of_deepshallow_encoderdecoder_llms_for/</link>
+<guid>https://www.reddit.com/r/MachineLearning/comments/16x1fzr/r_sota_of_deepshallow_encoderdecoder_llms_for/</guid>
+<content:encoded><![CDATA[
+
+<!-- SC_OFF --><div class="md"><p>There's some evidence [1] [2] that it's possible to run text2text language model at substantially (potentially on the order of magnitude) better inference speed by keeping the decoder shallow.</p> <p>I'm curious whether some <em>general reasoner</em> SOTA (small model for machine translation available at [3]) style models are publicly available for this sort of thing.</p> <p>If not, how would one go about training one?</p> <p>Would it be necessary to do it entirely from scratch (extremely costly)? Or would it be possible to take, say, Flan-UL2 (20B), chop off its decoder, and train a much smaller decoder on top of it with the UL2 encoder frozen (ie how one trains adapter layers).</p> <p>Assuming the decoder hyperparameters are kept small, would this be possible within reasonable compute budget? Would that even meaningfully converge with small amount of compute (assuming same training objective as is for UL2)?</p> <p>Would the strength (ie somewhat comparable to 10B if we cut 20B in half) transfer from the SOTA encoder, or would cutting off half of the model layers kneecap it too badly?</p> <p>[1] <a href="https://arxiv.org/pdf/2006.10369.pdf">https://arxiv.org/pdf/2006.10369.pdf</a></p> <p>[2] <a href="https://aclanthology.org/2023.sustainlp-1.6.pdf">https://aclanthology.org/2023.sustainlp-1.6.pdf</a></p> <p>[3] <a href="https://github.com/snoop2head/Deep-Encoder-Shallow-Decoder">https://github.com/snoop2head/Deep-Encoder-Shallow-Decoder</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/upalse"> /u/upalse </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x1fzr/r_sota_of_deepshallow_encoderdecoder_llms_for/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x1fzr/r_sota_of_deepshallow_encoderdecoder_llms_for/">[comments]</a></span>
+]]></content:encoded>
+<pubDate>2023-10-01T13:37:56+00:00</pubDate>
+<updated>2023-10-01T13:37:56+00:00</updated>
+</item>
+<item>
+<title>[D] Duplicating layers in large models</title>
+<link>https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/</link>
+<guid>https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/</guid>
+<content:encoded><![CDATA[
+
+<!-- SC_OFF --><div class="md"><p>Is there any notable work on duplicating layers in large feed forward models? In contrast to e.g. the brain which is essentially a directed graph most networks utilized nowerdays use a feed forward approach. E.g. transformers are able to attend to past tokens, but generate the tokens in a way where for a given token a given weight is not utilized at different stages in the feed forward pass. In my intuition this would lead to an issue where concepts (factual data as well as learned &quot;algorithms&quot;) might be duplicated as they are needed at different depths in the generation process and are sequentially dependent on one another. This does not directly make the model less capable, as it might learn the same concept at two layers sufficiently well, but it reduces the data and parameter efficiency and and might impact generalization capabilities. Using a full on brain like graph might be hard to implement/optimize/scale on current hardware and is tricky with the backprop. But is there any work on duplicating a few layers, placing them at different depths in large models. I would guess that this would be more impactful for large models. One would essentially trade compute for better data efficiency.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/floriv1999"> /u/floriv1999 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/">[comments]</a></span>
+]]></content:encoded>
+<pubDate>2023-10-01T11:34:38+00:00</pubDate>
+<updated>2023-10-01T11:34:38+00:00</updated>
+</item>
+<item>
 <title>[n] Introducing r/AudioAI: Any AI You Can Hear!</title>
 <link>https://www.reddit.com/r/MachineLearning/comments/16wn8qu/n_introducing_raudioai_any_ai_you_can_hear/</link>
 <guid>https://www.reddit.com/r/MachineLearning/comments/16wn8qu/n_introducing_raudioai_any_ai_you_can_hear/</guid>
@@ -38,15 +71,26 @@
 <updated>2023-09-30T16:51:12+00:00</updated>
 </item>
 <item>
-<title>[D] Duplicating layers in large models</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/</guid>
+<title>[D] Multiple single class segmentation vs single multiclass segmentation models</title>
+<link>https://www.reddit.com/r/MachineLearning/comments/16x2658/d_multiple_single_class_segmentation_vs_single/</link>
+<guid>https://www.reddit.com/r/MachineLearning/comments/16x2658/d_multiple_single_class_segmentation_vs_single/</guid>
 <content:encoded><![CDATA[
 
-<!-- SC_OFF --><div class="md"><p>Is there any notable work on duplicating layers in large feed forward models? In contrast to e.g. the brain which is essentially a directed graph most networks utilized nowerdays use a feed forward approach. E.g. transformers are able to attend to past tokens, but generate the tokens in a way where for a given token a given weight is not utilized at different stages in the feed forward pass. In my intuition this would lead to an issue where concepts (factual data as well as learned &quot;algorithms&quot;) might be duplicated as they are needed at different depths in the generation process and are sequentially dependent on one another. This does not directly make the model less capable, as it might learn the same concept at two layers sufficiently well, but it reduces the data and parameter efficiency and and might impact generalization capabilities. Using a full on brain like graph might be hard to implement/optimize/scale on current hardware and is tricky with the backprop. But is there any work on duplicating a few layers, placing them at different depths in large models. I would guess that this would be more impactful for large models. One would essentially trade compute for better data efficiency.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/floriv1999"> /u/floriv1999 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wytmy/d_duplicating_layers_in_large_models/">[comments]</a></span>
+&#32; submitted by &#32; <a href="https://www.reddit.com/user/waterstrider123"> /u/waterstrider123 </a> <br /> <span><a href="https://www.reddit.com/r/learnmachinelearning/comments/16w8zz5/multiple_single_class_segmentation_vs_single/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x2658/d_multiple_single_class_segmentation_vs_single/">[comments]</a></span>
 ]]></content:encoded>
-<pubDate>2023-10-01T11:34:38+00:00</pubDate>
-<updated>2023-10-01T11:34:38+00:00</updated>
+<pubDate>2023-10-01T14:08:42+00:00</pubDate>
+<updated>2023-10-01T14:08:42+00:00</updated>
+</item>
+<item>
+<title>Metagpt use case [D]</title>
+<link>https://www.reddit.com/r/MachineLearning/comments/16x5d0h/metagpt_use_case_d/</link>
+<guid>https://www.reddit.com/r/MachineLearning/comments/16x5d0h/metagpt_use_case_d/</guid>
+<content:encoded><![CDATA[
+
+<!-- SC_OFF --><div class="md"><p>Guys, i am currently working on my startup, here there are certain tasks like building a ml model using certain use-cases. I wish to automate this task, do u think metagpt is a good fit for the same. </p> <p>Let me know if you need any further information!!</p> <p>Thanks!!</p> <p>Always have a massive respect for this community!!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/aristotleTheFake"> /u/aristotleTheFake </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x5d0h/metagpt_use_case_d/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x5d0h/metagpt_use_case_d/">[comments]</a></span>
+]]></content:encoded>
+<pubDate>2023-10-01T16:17:20+00:00</pubDate>
+<updated>2023-10-01T16:17:20+00:00</updated>
 </item>
 <item>
 <title>[D] (How) Can you estimate inference speed of a NN model on given hardware?</title>
@@ -60,17 +104,6 @@
 <updated>2023-09-30T19:10:51+00:00</updated>
 </item>
 <item>
-<title>[D] Deploy the Mistral 7b Generative Model on an A10 GPU on AWS</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Hello,</p> <p>The Mistral 7b AI model beats LLaMA 2 7b on all benchmarks and LLaMA 2 13b in many benchmarks. It is actually even on par with the LLaMA 1 34b model.</p> <p>So I made a quick video about how to deploy this model on an A10 GPU on an AWS EC2 g5.4xlarge instance:</p> <p><a href="https://nlpcloud.com/deploy-mistral-7b-on-a10-gpu-on-aws.html?utm_source=reddit&amp;utm_campaign=i859w625-3816-81ed-a265-0242ac140019">https://nlpcloud.com/deploy-mistral-7b-on-a10-gpu-on-aws.html</a></p> <p>I hope it will be useful. If you have recommendations about how to improve this video please don't hesitate to let me know, that will be very much appreciated!</p> <p>Julien</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/juliensalinas"> /u/juliensalinas </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-30T07:11:38+00:00</pubDate>
-<updated>2023-09-30T07:11:38+00:00</updated>
-</item>
-<item>
 <title>Arxiv [D]ives - Segment Anything</title>
 <link>https://www.reddit.com/r/MachineLearning/comments/16w9kz7/arxiv_dives_segment_anything/</link>
 <guid>https://www.reddit.com/r/MachineLearning/comments/16w9kz7/arxiv_dives_segment_anything/</guid>
@@ -80,6 +113,17 @@
 ]]></content:encoded>
 <pubDate>2023-09-30T15:20:55+00:00</pubDate>
 <updated>2023-09-30T15:20:55+00:00</updated>
+</item>
+<item>
+<title>[D] Deploy the Mistral 7b Generative Model on an A10 GPU on AWS</title>
+<link>https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/</link>
+<guid>https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/</guid>
+<content:encoded><![CDATA[
+
+<!-- SC_OFF --><div class="md"><p>Hello,</p> <p>The Mistral 7b AI model beats LLaMA 2 7b on all benchmarks and LLaMA 2 13b in many benchmarks. It is actually even on par with the LLaMA 1 34b model.</p> <p>So I made a quick video about how to deploy this model on an A10 GPU on an AWS EC2 g5.4xlarge instance:</p> <p><a href="https://nlpcloud.com/deploy-mistral-7b-on-a10-gpu-on-aws.html?utm_source=reddit&amp;utm_campaign=i859w625-3816-81ed-a265-0242ac140019">https://nlpcloud.com/deploy-mistral-7b-on-a10-gpu-on-aws.html</a></p> <p>I hope it will be useful. If you have recommendations about how to improve this video please don't hesitate to let me know, that will be very much appreciated!</p> <p>Julien</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/juliensalinas"> /u/juliensalinas </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16w08p1/d_deploy_the_mistral_7b_generative_model_on_an/">[comments]</a></span>
+]]></content:encoded>
+<pubDate>2023-09-30T07:11:38+00:00</pubDate>
+<updated>2023-09-30T07:11:38+00:00</updated>
 </item>
 <item>
 <title>[D] What exactly are the compute requirements for training a dense model versus an MoE?</title>
@@ -126,6 +170,17 @@
 <updated>2023-09-29T13:42:47+00:00</updated>
 </item>
 <item>
+<title>[R] Gsgen: Text-to-3D using Gaussian Splatting</title>
+<link>https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/</link>
+<guid>https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/</guid>
+<content:encoded><![CDATA[
+
+<!-- SC_OFF --><div class="md"><p><a href="https://gsgen3d.github.io/">Project Page</a><br /> <a href="https://arxiv.org/abs/2309.16585">Paper</a><br /> <a href="https://github.com/gsgen3d/gsgen">Code</a> </p> <blockquote> <p>In this paper, we present Gaussian Splatting based text-to-3D generation (GSGEN), a novel approach for generating high-quality 3D objects. Previous methods suffer from inaccurate geometry and limited fidelity due to the absence of 3D prior and proper representation. We leverage 3D Gaussian Splatting, a recent state-of-the-art representation, to address existing shortcomings by exploiting the explicit nature that enables the incorporation of 3D prior. Specifically, our method adopts a progressive optimization strategy, which includes a geometry optimization stage and an appearance refinement stage. In geometry optimization, a coarse representation is established under a 3D geometry prior along with the ordinary 2D SDS loss, ensuring a sensible and 3D-consistent rough shape. Subsequently, the obtained Gaussians undergo an iterative refinement to enrich details. In this stage, we increase the number of Gaussians by compactness-based densification to enhance continuity and improve fidelity. With these designs, our approach can generate 3D content with delicate details and more accurate geometry. Extensive evaluations demonstrate the effectiveness of our method, especially for capturing high-frequency components.</p> </blockquote> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Sirisian"> /u/Sirisian </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/">[comments]</a></span>
+]]></content:encoded>
+<pubDate>2023-09-29T20:38:01+00:00</pubDate>
+<updated>2023-09-29T20:38:01+00:00</updated>
+</item>
+<item>
 <title>[D] CIDEr values in PaLI model and XM 3600 dataset</title>
 <link>https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/</link>
 <guid>https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/</guid>
@@ -146,17 +201,6 @@
 ]]></content:encoded>
 <pubDate>2023-09-30T00:30:39+00:00</pubDate>
 <updated>2023-09-30T00:30:39+00:00</updated>
-</item>
-<item>
-<title>[R] Gsgen: Text-to-3D using Gaussian Splatting</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p><a href="https://gsgen3d.github.io/">Project Page</a><br /> <a href="https://arxiv.org/abs/2309.16585">Paper</a><br /> <a href="https://github.com/gsgen3d/gsgen">Code</a> </p> <blockquote> <p>In this paper, we present Gaussian Splatting based text-to-3D generation (GSGEN), a novel approach for generating high-quality 3D objects. Previous methods suffer from inaccurate geometry and limited fidelity due to the absence of 3D prior and proper representation. We leverage 3D Gaussian Splatting, a recent state-of-the-art representation, to address existing shortcomings by exploiting the explicit nature that enables the incorporation of 3D prior. Specifically, our method adopts a progressive optimization strategy, which includes a geometry optimization stage and an appearance refinement stage. In geometry optimization, a coarse representation is established under a 3D geometry prior along with the ordinary 2D SDS loss, ensuring a sensible and 3D-consistent rough shape. Subsequently, the obtained Gaussians undergo an iterative refinement to enrich details. In this stage, we increase the number of Gaussians by compactness-based densification to enhance continuity and improve fidelity. With these designs, our approach can generate 3D content with delicate details and more accurate geometry. Extensive evaluations demonstrate the effectiveness of our method, especially for capturing high-frequency components.</p> </blockquote> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Sirisian"> /u/Sirisian </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-29T20:38:01+00:00</pubDate>
-<updated>2023-09-29T20:38:01+00:00</updated>
 </item>
 <item>
 <title>[D] How is this sub not going ballistic over the recent GPT-4 Vision release?</title>
@@ -214,17 +258,6 @@
 <updated>2023-09-29T16:14:04+00:00</updated>
 </item>
 <item>
-<title>[R] The Future of Romance: Novel Techniques for Replacing your Boyfriend with Generative AI (parody)</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/</guid>
-<content:encoded><![CDATA[
-
-<table> <tr><td> <a href="https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/"> <img alt="[R] The Future of Romance: Novel Techniques for Replacing your Boyfriend with Generative AI (parody)" src="https://b.thumbs.redditmedia.com/5ZF5NveBkg2luBHIeUbhdkO8MBaV49nwKh2ioe6vP3E.jpg" title="[R] The Future of Romance: Novel Techniques for Replacing your Boyfriend with Generative AI (parody)" /> </a> </td><td> &#32; submitted by &#32; <a href="https://www.reddit.com/user/TobyWasBestSpiderMan"> /u/TobyWasBestSpiderMan </a> <br /> <span><a href="https://www.reddit.com/gallery/16s9jzt">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/">[comments]</a></span> </td></tr></table>
-]]></content:encoded>
-<pubDate>2023-09-29T13:26:45+00:00</pubDate>
-<updated>2023-09-29T13:26:45+00:00</updated>
-</item>
-<item>
 <title>[D] What algorithms to use text classification</title>
 <link>https://www.reddit.com/r/MachineLearning/comments/16w0tse/d_what_algorithms_to_use_text_classification/</link>
 <guid>https://www.reddit.com/r/MachineLearning/comments/16w0tse/d_what_algorithms_to_use_text_classification/</guid>
@@ -236,15 +269,15 @@
 <updated>2023-09-30T07:46:50+00:00</updated>
 </item>
 <item>
-<title>[D] How do I begin with AI ?</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16wcbhg/d_how_do_i_begin_with_ai/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16wcbhg/d_how_do_i_begin_with_ai/</guid>
+<title>[R] The Future of Romance: Novel Techniques for Replacing your Boyfriend with Generative AI (parody)</title>
+<link>https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/</link>
+<guid>https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/</guid>
 <content:encoded><![CDATA[
 
-<!-- SC_OFF --><div class="md"><p>I'm fairly new to the Al domain. I've decent python knowledge. I've gone through a lot of YouTube tutorials and got stuck in the tutorial hell. After struggling through hours of videos came here as my only last hope !!. How do I begin? What python frameworks should I learn? Which particular books should I refer ?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Dry_Ad_3887"> /u/Dry_Ad_3887 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wcbhg/d_how_do_i_begin_with_ai/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wcbhg/d_how_do_i_begin_with_ai/">[comments]</a></span>
+<table> <tr><td> <a href="https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/"> <img alt="[R] The Future of Romance: Novel Techniques for Replacing your Boyfriend with Generative AI (parody)" src="https://b.thumbs.redditmedia.com/5ZF5NveBkg2luBHIeUbhdkO8MBaV49nwKh2ioe6vP3E.jpg" title="[R] The Future of Romance: Novel Techniques for Replacing your Boyfriend with Generative AI (parody)" /> </a> </td><td> &#32; submitted by &#32; <a href="https://www.reddit.com/user/TobyWasBestSpiderMan"> /u/TobyWasBestSpiderMan </a> <br /> <span><a href="https://www.reddit.com/gallery/16s9jzt">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vbnbt/r_the_future_of_romance_novel_techniques_for/">[comments]</a></span> </td></tr></table>
 ]]></content:encoded>
-<pubDate>2023-09-30T17:15:53+00:00</pubDate>
-<updated>2023-09-30T17:15:53+00:00</updated>
+<pubDate>2023-09-29T13:26:45+00:00</pubDate>
+<updated>2023-09-29T13:26:45+00:00</updated>
 </item>
 <item>
 <title>[D] How to Integrate fine tuned LLAMA 2 in website ?</title>
@@ -256,39 +289,6 @@
 ]]></content:encoded>
 <pubDate>2023-09-30T09:36:34+00:00</pubDate>
 <updated>2023-09-30T09:36:34+00:00</updated>
-</item>
-<item>
-<title>[R] Listen2Scene: Interactive material-aware binaural sound propagation for reconstructed 3D scenes</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vbsqh/r_listen2scene_interactive_materialaware_binaural/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vbsqh/r_listen2scene_interactive_materialaware_binaural/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p><a href="https://www.youtube.com/watch?v=aNJWCwG-H_U">https://www.youtube.com/watch?v=aNJWCwG-H_U</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Snoo63916"> /u/Snoo63916 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vbsqh/r_listen2scene_interactive_materialaware_binaural/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vbsqh/r_listen2scene_interactive_materialaware_binaural/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-29T13:33:19+00:00</pubDate>
-<updated>2023-09-29T13:33:19+00:00</updated>
-</item>
-<item>
-<title>[R] M3-AUDIODEC: Multi-channel multi-speaker multi-spatial audio codec</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16vbs0o/r_m3audiodec_multichannel_multispeaker/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16vbs0o/r_m3audiodec_multichannel_multispeaker/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Paper : <a href="https://arxiv.org/abs/2309.07416">https://arxiv.org/abs/2309.07416</a></p> <p>Demo : <a href="https://anton-jeran.github.io/MAD/">https://anton-jeran.github.io/MAD/</a></p> <p>Code : <a href="https://github.com/anton-jeran/MULTI-AUDIODEC">https://github.com/anton-jeran/MULTI-AUDIODEC</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Snoo63916"> /u/Snoo63916 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vbs0o/r_m3audiodec_multichannel_multispeaker/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vbs0o/r_m3audiodec_multichannel_multispeaker/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-29T13:32:27+00:00</pubDate>
-<updated>2023-09-29T13:32:27+00:00</updated>
-</item>
-<item>
-<title>[N] CUDA Architect and Cofounder of MLPerf: AMD's ROCM has achieved software parity with CUDA</title>
-<link>https://www.reddit.com/r/MachineLearning/comments/16uldmh/n_cuda_architect_and_cofounder_of_mlperf_amds/</link>
-<guid>https://www.reddit.com/r/MachineLearning/comments/16uldmh/n_cuda_architect_and_cofounder_of_mlperf_amds/</guid>
-<content:encoded><![CDATA[
-
-<!-- SC_OFF --><div class="md"><p>Greg Diamos, the CTO of startup Lamini, was an early CUDA architect at NVIDIA and later cofounded MLPerf. </p> <p>He asserts that AMD's ROCM has &quot;achieved software parity&quot; with CUDA for LLMs.</p> <p>Lamini, focused on tuning LLM's for corporate and institutional users, has decided to go all-in with AMD Instict GPU's.</p> <p><a href="https://www.crn.com/news/components-peripherals/llm-startup-embraces-amd-gpus-says-rocm-has-parity-with-nvidia-s-cuda-platform">https://www.crn.com/news/components-peripherals/llm-startup-embraces-amd-gpus-says-rocm-has-parity-with-nvidia-s-cuda-platform</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/makmanred"> /u/makmanred </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16uldmh/n_cuda_architect_and_cofounder_of_mlperf_amds/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16uldmh/n_cuda_architect_and_cofounder_of_mlperf_amds/">[comments]</a></span>
-]]></content:encoded>
-<pubDate>2023-09-28T17:00:36+00:00</pubDate>
-<updated>2023-09-28T17:00:36+00:00</updated>
 </item>
 </channel>
 </rss>

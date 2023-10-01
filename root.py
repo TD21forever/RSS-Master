@@ -12,4 +12,4 @@ RSS_HTML_TEMPLATE_PATH = absolute("resource/template.html")
 CONFIG_PATH = absolute("resource/config.yml")
 
 
-BASE_URL = "https://dcts.top/docsrss/"
+BASE_URL = "https://blog.dcts.top/rssdocs/"
