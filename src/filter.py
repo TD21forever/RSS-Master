@@ -3,7 +3,7 @@ from typing import List
 
 from bs4 import BeautifulSoup
 
-from src.enum import FilterField, FilterType, Item
+from src.const import FilterField, FilterType, Item
 
 
 def filter_entry(item:Item, filter_type:FilterType, filter_field:FilterField, keywords:List[str]):

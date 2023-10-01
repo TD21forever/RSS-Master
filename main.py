@@ -9,7 +9,7 @@ from jinja2 import Template
 
 from root import DOCS_DIR, RSS_HTML_TEMPLATE_PATH, RSS_TEMPLATE_PATH, absolute
 from src.AI.chatgpt import gpt_summary
-from src.enum import FilterField, FilterType, HtmlItem, Item
+from src.const import FilterField, FilterType, HtmlItem, Item
 from src.filter import filter_entry
 from src.util import get_config, init_dirs, init_logger
 
