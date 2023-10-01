@@ -36,3 +36,9 @@ class Item:
     article:str
     published:str
     updated:str
+    
+@dataclass
+class HtmlItem:
+    old_url: str
+    new_url: str
+    name: str

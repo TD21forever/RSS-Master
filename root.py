@@ -8,4 +8,5 @@ LOG_DIR = absolute("log")
 DOCS_DIR = absolute("doc")
 
 RSS_TEMPLATE_PATH = absolute("resource/template.xml")
+RSS_HTML_TEMPLATE_PATH = absolute("resource/template.html")
 CONFIG_PATH = absolute("resource/config.yml")

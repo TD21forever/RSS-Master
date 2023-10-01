@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Add Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/style.css" />
+
+  <title>RSS feeds - chenmo</title>
+
+  <style>
+    img {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+    
+    body {
+      background-color: #f8f9fa;
+    }
+    
+    .table {
+      background-color: #fff;
+    }
+    
+    .table th {
+      background-color: #7e7e7e;
+      color: #fff;
+    }
+    
+    .table td {
+      background-color: #f8f9fa;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      color: #7e7e7e;
+    }
+    
+    .footer {
+      background-color: #f8f9fa;
+    }
+    
+    .footer .text-muted {
+      color: #fff;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <h1 class="mt-5">更新日期：{{ updatetime }}</h1>
+        <h1 class="mt-5">RSS feeds processed with <a href="https://github.com/TD21forever/RSS-Master">RSS-Master</a></h1>
+        <h3 class="mt-5">Inspired By <a href="https://github.com/yinan-c/RSS-GPT">RSS-GPT</a></h1>
+        <!-- Use Bootstrap table for items -->
+        <table class="table mt-5">
+          <thead>
+            <tr>
+              <th scope="col">源链接</th>
+              <th scope="col">转换链接</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in items %}
+            <tr>
+              <td><a href="{{item.old_url}}">{{item.old_url}}</a></td>
+              <td><a href="{{item.new_url}}">{{item.name}}</a></td>
+            </tr>
+            {% endfor %}
+            <!-- Add more table rows here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer mt-auto py-3">
+    <div class="container">
+      <span class="text-muted">With <a href="https://github.com/TD21forever/RSS-Master">TD21forever/RSS-Master </a> by <a href="">Chenmo</a>
+      <a href="http://creativecommons.org/licenses/by/4.0/"><img
+          src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" alt="Creative Commons Licence"
+          width="45" style="vertical-align: text-top;">
+      </a>
+    </div>
+  </footer>
+
+  <!-- Add Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

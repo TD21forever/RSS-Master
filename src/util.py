@@ -52,12 +52,10 @@ def init_logger():
     logging.basicConfig(level=level, handlers=[sh, fh])
 
 
-def get_config(spec:Union[str, None] = None):
+def get_config():
     with open(CONFIG_PATH, "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
-    if not spec: return config
-    res = config.get(spec, {})
-    return res
+    return config
     
 def init_dirs():
     if not os.path.exists(LOG_DIR): os.makedirs(LOG_DIR)
