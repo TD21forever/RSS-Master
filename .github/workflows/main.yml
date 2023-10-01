@@ -19,6 +19,7 @@ jobs:
         with:
           repository: TD21forever/TD21forever.github.io
           ref: source
+          path: gh
 
       - name: Copy docs from current repository to gh-source repository
         run: |
@@ -27,11 +28,11 @@ jobs:
           cd ..
           pwd
           ls
-          cp -R docs/* TD21forever.github.io/source/rssdocs/
+          cp -R docs/* gh/source/rssdocs/
 
       - name: Install dependencies and build
         run: |
-          cd TD21forever.github.io
+          cd gh
           npm install
           npx hexo g -d
 
