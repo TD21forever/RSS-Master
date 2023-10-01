@@ -32,14 +32,7 @@ jobs:
           git config --global user.name "td21forever"
           git config --global user.email "435212619@qq.com"
           cd gh
-          npm install
 
-      - name: Install dependencies and build
-        run: |
-          cd gh
-          npm install
-          npx hexo g -d
-          
       - name: Commit and push changes to gh repository
         run: |
           cd TD21forever.github.io
