@@ -18,6 +18,7 @@ jobs:
 
       - name: Copy docs from current repository to gh-source repository
         run: |
+          pwd
           cp -R docs/* TD21forever.github.io/source/rssdocs/
 
       - name: Install dependencies and build
