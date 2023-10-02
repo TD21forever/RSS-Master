@@ -8,6 +8,9 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def gpt_summary(query, model, summary_length):
+    if len(query) < 400:
+        logger.debug(f"Query Length: {len(query)}, Too Short, Return")
+        return ""
     query = query[:3000]
     messages = [
             {"role": "user", "content": query},
