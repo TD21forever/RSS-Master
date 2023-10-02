@@ -13,3 +13,5 @@ CONFIG_PATH = absolute("resource/config.yml")
 
 
 BASE_URL = "https://www.dcts.top/rssdocs/"
+
+CACHE_PATH = absolute("resource/cache.pkl")

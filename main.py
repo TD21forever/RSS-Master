@@ -7,14 +7,17 @@ import feedparser
 from dotenv import load_dotenv
 from jinja2 import Template
 
-from root import DOCS_DIR, RSS_HTML_TEMPLATE_PATH, RSS_TEMPLATE_PATH, absolute, CONFIG_PATH
+from root import (CACHE_PATH, CONFIG_PATH, DOCS_DIR, RSS_HTML_TEMPLATE_PATH,
+                  RSS_TEMPLATE_PATH, absolute)
 from src.AI.chatgpt import gpt_summary
+from src.cache import CacheKit
 from src.const import FilterField, FilterType, HtmlItem, Item
 from src.filter import filter_entry
 from src.util import (convert_yaml_to_opml, get_config, init_dirs, init_logger,
                       md5hash_6)
 
 logger = logging.getLogger()
+cache = CacheKit(CACHE_PATH).load_cache()
 
 def _init():
     load_dotenv()
@@ -66,10 +69,16 @@ def _filter(rss, feed):
     logger.info(f"过滤后的条目数: {len(filtered_items)}")
     return filtered_items
 
-def _use_ai(filtered_items):
+def _use_ai(filtered_items:List[Item]):
     for item in filtered_items:
+        key = md5hash_6(item.id)
+        if cache.has(key):
+            logger.info(f"{item.title}命中缓存")
+            item.summary = cache.get(key)
+            continue
         summary = gpt_summary(item.article, "gpt-3.5-turbo", 3, 200)
         logger.info(f"AI总结: {summary}")
+        cache.set(key, summary)
         item.summary = summary
 
 def _render_xml(feed, filtered_items):

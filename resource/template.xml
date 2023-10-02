@@ -4,21 +4,29 @@
         <title>{{ feed.title.replace('&', '&amp;') }}</title>
         <link>{{ feed.link.replace('&', '&amp;') }}</link>
         {% for item in items %}
-            <item>
-                <id>{{ item.id }}</id>
-                <title>{{ item.title.replace('&', '&amp;') }}</title>
-                <link>{{ item.link.replace('&', '&amp;') }}</link>
-                <guid isPermaLink="false">{{ item.guid }}</guid>
-                <pubDate>{{ item.published }}</pubDate>
-                <updated>{{ item.updated }}</updated>
+        <item>
+            <id>{{ item.id }}</id>
+            <title>{{ item.title.replace('&', '&amp;') }}</title>
+            <link>{{ item.link.replace('&', '&amp;') }}</link>
+            <guid isPermaLink="false">{{ item.guid }}</guid>
+            <pubDate>{{ item.published }}</pubDate>
+            <updated>{{ item.updated }}</updated>
                 {% if item.media_thumbnail %}
-                <media:thumbnail url="{{ item.media_thumbnail[0].url.replace('&', '&amp;') }}"/>
+            <media:thumbnail url="{{ item.media_thumbnail[0].url.replace('&', '&amp;') }}"/>
                 {% endif %}
                 {% if item.media_content %}
-                <media:content url="{{ item.media_content[0].url.replace('&', '&amp;') }}"/>
+            <media:content url="{{ item.media_content[0].url.replace('&', '&amp;') }}"/>
                 {% endif %}
-                <content:encoded><![CDATA[{{ item.article }}]]></content:encoded>
-            </item>
+            <content:encoded>
+                <![CDATA[
+                    {% if item.summary %}
+                        <div> {{ item.summary }} </div>
+                        <hr>
+                    {% endif %}
+                    {{ item.article }}
+                ]]>
+            </content:encoded>
+        </item>
         {% endfor %}
     </channel>
 </rss>

@@ -30,7 +30,7 @@ def init_logger():
     """
     if not os.path.exists(LOG_DIR): os.makedirs(LOG_DIR)
     
-    current_date = time.strftime("%Y-%m-%d", time.localtime())
+    current_date = time.strftime("%Y-%m-%d %H:%M", time.localtime())
     logfilename = f"{current_date}.log"
 
     logfilepath = os.path.join(LOG_DIR, logfilename)
@@ -44,7 +44,7 @@ def init_logger():
     sdatefmt = "%Y-%m-%d"
     sformatter = logging.Formatter(sfmt, sdatefmt)
     
-    level = logging.INFO
+    level = logging.DEBUG
     
     fh = logging.FileHandler(logfilepath)
     fh.setLevel(level)
