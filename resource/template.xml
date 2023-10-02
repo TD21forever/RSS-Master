@@ -12,10 +12,10 @@
                 <pubDate>{{ item.published }}</pubDate>
                 <updated>{{ item.updated }}</updated>
                 {% if item.media_thumbnail %}
-                    <media:thumbnail url="{{ item.media_thumbnail[0].url }}"/>
+                    <media:thumbnail url="{{ item.media_thumbnail[0].url.replace('&', '&amp;') }}"/>
                 {% endif %}
                 {% if item.media_content %}
-                    <media:content url="{{ item.media_content[0].url }}"/>
+                    <media:content url="{{ item.media_content[0].url.replace('&', '&amp;') }}"/>
                 {% endif %}
                 <content type="html">
                     {{ item.article }}
