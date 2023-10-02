@@ -8,9 +8,7 @@
                 <id>{{ item.id }}</id>
                 <title>{{ item.title.replace('&', '&amp;') }}</title>
                 <link> {{ item.link.replace('&', '&amp;') }} </link>
-                <link href="{{ item.link.replace('&', '&amp;') }}"/>
                 <guid isPermaLink="false">{{ item.guid }}</guid>
-                <description>{{ item.summary.replace('&', '&amp;') }}</description>
                 <pubDate>{{ item.published }}</pubDate>
                 <updated>{{ item.updated }}</updated>
                 {% if item.media_thumbnail %}
