@@ -19,7 +19,7 @@ class CacheKit:
             self.cache = {}
 
     def save_cache(self):
-        self.logger.debug(f"save cache: {self.cache}")
+        self.logger.debug(f"save cache: {len(self.cache)}")
         with open(self.file_path, 'wb') as f:
             pickle.dump(self.cache, f)
 

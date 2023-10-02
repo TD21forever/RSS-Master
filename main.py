@@ -78,7 +78,7 @@ def _use_ai(filtered_items:List[Item]):
             logger.info(f"{item.title}命中缓存")
             item.summary = cache.get(key)
             continue
-        summary = gpt_summary(item.article, "gpt-3.5-turbo", 3, 400)
+        summary = gpt_summary(item.article, "gpt-3.5-turbo", 400)
         logger.info(f"AI总结: {summary}")
         cache.set(key, summary)
         item.summary = summary
