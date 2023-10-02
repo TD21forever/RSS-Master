@@ -1,0 +1,52 @@
+name: cron_job
+
+# Controls when the workflow will run
+on:
+  # cron job every 2 hours
+  schedule:
+   - cron: '0 */2 * * *'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-20.04
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Check out repository
+        uses: actions/checkout@v4.1.0
+        with:
+          token: ${{ secrets.TOKEN }}
+    
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: ls_show
+        run: |
+          python main.py
+          ls -al docs/
+             
+      - name: PUSH
+        env:
+          U_EMAIL: ${{ secrets.EMAIL }}
+        run: |
+          pwd
+          git config --local user.name "RSS-Master@Bot"  
+          git config --local user.email "${U_EMAIL}" 
+          git status -s
+          git add docs/*
+          export TZ='Asia/Shanghai'
+          git commit -m "Github Auto Build at `date +"%Y-%m-%d %H:%M"`"
+          echo "======git push===="
+          git push
