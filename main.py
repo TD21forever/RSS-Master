@@ -17,12 +17,14 @@ from src.util import (convert_yaml_to_opml, get_config, init_dirs, init_logger,
                       md5hash_6)
 
 logger = logging.getLogger()
-cache = CacheKit(CACHE_PATH).load_cache()
+cache = CacheKit(CACHE_PATH)
+
 
 def _init():
     load_dotenv()
     init_logger()
     init_dirs()
+    cache.load_cache()
 
 def get_feeds(rss):
     try:
