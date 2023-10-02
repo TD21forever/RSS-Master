@@ -39,6 +39,7 @@ class Item:
     id:str
     published:Optional[str] = ""
     media_content:Optional[Dict] = None
+    media_thumbnail: Optional[Dict] = None
     
 @dataclass
 class HtmlItem:

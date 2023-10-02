@@ -42,6 +42,8 @@ def _filter(rss, feed):
             "published": item.get("published", ""),
             "updated": item.get("updated", ""),
             "article": item.get("summary", "") if not item.get("media_content", None) else "",
+            "media_thumbnail": item.get("media_thumbnail"),
+            "media_content": item.get("media_content"),
             "summary": ""
         }
         item = Item(**data)
