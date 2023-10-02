@@ -8,6 +8,7 @@
                 <id>{{ item.id }}</id>
                 <title>{{ item.title.replace('&', '&amp;') }}</title>
                 <link rel="alternate" href="{{ item.link.replace('&', '&amp;') }}"/>
+                <guid isPermaLink="false">{{ item.guid }}</guid>
                 <description>{{ item.summary.replace('&', '&amp;') }}</description>
                 <pubDate>{{ item.published }}</pubDate>
                 <updated>{{ item.updated }}</updated>
@@ -19,10 +20,7 @@
                 {% endif %}
                 <content:encoded>
                     <![CDATA[
-                        <div>
-                            {{ item.article }}
-                        </div>
-                        
+                        {{ item.article }}
                     ]]>
                 </content:encoded>
             </item>

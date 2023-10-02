@@ -34,9 +34,10 @@ def get_feeds(rss):
 def _filter(rss, feed):
     filtered_items = []
     for item in feed.entries:
-        id_ = item.get("id", md5hash_6(item.get("link", md5hash_6(item.get("title", "没获取数据")))))
+        id_ = item.get("id", item.get("link", md5hash_6(item.get("title", "没获取数据"))))
         data = {
             "id": id_,
+            "guid": id_,
             "link": item.get("link", ""),
             "title": item.get("title", ""),
             "published": item.get("published", ""),

@@ -37,6 +37,7 @@ class Item:
     article:str
     updated:str
     id:str
+    guid:str
     published:Optional[str] = ""
     media_content:Optional[Dict] = None
     media_thumbnail: Optional[Dict] = None
