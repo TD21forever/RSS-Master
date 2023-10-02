@@ -34,6 +34,7 @@ jobs:
           pip install -r requirements.txt
       - name: ls_show
         run: |
+          export TZ='Asia/Shanghai'
           python main.py
           ls -al docs/
              

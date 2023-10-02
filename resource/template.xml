@@ -17,9 +17,11 @@
                 {% if item.media_content %}
                     <media:content url="{{ item.media_content[0].url.replace('&', '&amp;') }}"/>
                 {% endif %}
-                <content type="html">
-                    {{ item.article }}
-                </content>
+                <content:encoded>
+                    <![CDATA[
+                        {{ item.article }}
+                    ]]>
+                </content:encoded>
             </item>
         {% endfor %}
     </channel>
