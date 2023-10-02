@@ -7,11 +7,12 @@ import feedparser
 from dotenv import load_dotenv
 from jinja2 import Template
 
-from root import DOCS_DIR, RSS_HTML_TEMPLATE_PATH, RSS_TEMPLATE_PATH, absolute
+from root import DOCS_DIR, RSS_HTML_TEMPLATE_PATH, RSS_TEMPLATE_PATH, absolute, CONFIG_PATH
 from src.AI.chatgpt import gpt_summary
 from src.const import FilterField, FilterType, HtmlItem, Item
 from src.filter import filter_entry
-from src.util import get_config, init_dirs, init_logger, md5hash_6
+from src.util import (convert_yaml_to_opml, get_config, init_dirs, init_logger,
+                      md5hash_6)
 
 logger = logging.getLogger()
 
@@ -27,7 +28,11 @@ def get_feeds(rss):
         logger.error(f"解析错误: {e}")
         return None
     if feed.bozo: 
-        logger.info("解析错误")
+        error = feed.get("bozo_exception", "")
+        if error:
+            logger.error(f"解析错误:, error:{error}")
+        else:
+            logger.error(f"解析错误")
         return None
     return feed
 
@@ -81,6 +86,9 @@ def _output_xml(rss, data):
     with open(rss_xml_filename, "w") as f:
         f.write(data)
         
+def _output_opml():
+    convert_yaml_to_opml(CONFIG_PATH, absolute(DOCS_DIR, "opml.xml"))
+    
 def _render_html(items:List[HtmlItem]):
     with open(RSS_HTML_TEMPLATE_PATH, "r") as f:
         html_template = Template(f.read())
@@ -115,6 +123,7 @@ def main():
             _output_xml(rss, rss_xml)
             _add_rss(rss, html_items)
     _render_html(html_items)
+    _output_opml()
         
 if __name__ == "__main__":
     main()
