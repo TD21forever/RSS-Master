@@ -77,6 +77,42 @@
     </item>
     
     <item>
+      <id>https://www.reddit.com/r/MachineLearning/t3_16xmm0d</id>
+      <title>[R] [D] How to sample x_t and x_{t-1} (deterministically) in diffusion probabilistic models?</title>
+      <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16xmm0d/r_d_how_to_sample_x_t_and_x_t1_deterministically/" />
+      <description></description>
+      <pubDate>2023-10-02T04:02:22+00:00</pubDate>
+      <updated>2023-10-02T04:02:22+00:00</updated>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Hi fellow computer scientists,</p> <p>&#x200b;</p> <p>I have a doubt about diffusion probabilistic models (DDPM).</p> <p>&#x200b;</p> <p>Consider I have an image x_0 and need to obtain x_t and x_{t-1}. I already have computed the betas, alphas and alpha_hats. Before feeding x_t to the noise predictor I want to get x_{t-1} from the real noise I've used to obtain x_t. Is that possible?</p> <p>&#x200b;</p> <p><strong>1)</strong> Can I deterministically go from x_t to x_{t-1} during training since I know the epsilon used to compute x_t from x_0?</p> <p>&#x200b;</p> <p><strong>2)</strong> Is it better to compute first x_{t-1} and afterwards compute x_{t} from x_{t-1} using the epsilon used to compute x_{t-1} from x_0 (through the closed-form formula)?</p> <p>&#x200b;</p> <p>If any of this is possible (deterministically), can you provide me the formulas? :)</p> <p>&#x200b;</p> <p>In case it is not deterministically possible, is there a close approximation?</p> <p>&#x200b;</p> <p>Thank you :)</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Christs_Elite"> /u/Christs_Elite </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16xmm0d/r_d_how_to_sample_x_t_and_x_t1_deterministically/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16xmm0d/r_d_how_to_sample_x_t_and_x_t1_deterministically/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <id>https://www.reddit.com/r/MachineLearning/t3_16xonzn</id>
+      <title>[D] How can I determine the cause why recommendation model is not performing well on dataset</title>
+      <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16xonzn/d_how_can_i_determine_the_cause_why/" />
+      <description></description>
+      <pubDate>2023-10-02T05:56:30+00:00</pubDate>
+      <updated>2023-10-02T05:56:30+00:00</updated>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>I have around 20 different sets of data, the features in these datasets are identical, they only differ by the time the data was recorded. I have Factorization Machine (FM) model to generate predictions for these datasets (for each of the datasets the model is trained and evaluated independently). I also use simple Collaborative Filtering (CF) model to benchmark FM's performance.</p> <p>While FM generally performs better than CF, I have noticed that in some cases CF outperforms FM by a large margin. I want to determine why this happens, more specifically what is so different in the datasets where FM performs poorly (I am using mean average precision as a metric).</p> <p>One idea I had was to check the sparsity of interaction matrices, but it seems that the sparsity is practically identical in all 20 cases. Is there anything I can do to identify why exactly FM is underperforming, or perhaps increase its performance?</p> <p>Any help would be appreciated.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Modruc"> /u/Modruc </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16xonzn/d_how_can_i_determine_the_cause_why/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16xonzn/d_how_can_i_determine_the_cause_why/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <id>https://www.reddit.com/r/MachineLearning/t3_16xnxgf</id>
+      <title>How to use the YOLO dataset format [P]</title>
+      <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16xnxgf/how_to_use_the_yolo_dataset_format_p/" />
+      <description></description>
+      <pubDate>2023-10-02T05:14:29+00:00</pubDate>
+      <updated>2023-10-02T05:14:29+00:00</updated>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>I am working on a convolutional neural network (CNN) for segmentation and classification, and I have a custom function to reintroduce the last prediction to avoid flickering in videos. I am also considering some improvements, such as using multiple smaller convolutional heads instead of relying on a single one. However, I'm facing some issues with training and want to make the training compatible with the YOLO format.</p> <p>import tensorflow as tf</p> <p>from tensorflow.keras import layers</p> <p>import numpy as np</p> <p>def per_baipas(x):</p> <p># Stores the last prediction of dense_layer_8, if no prediction has been made yet, it passes an input composed of zeros</p> <p>global ulti_predic</p> <p>try:</p> <p>if(ulti_predic==None):</p> <p>ulti_predic=x</p> <p>return(ulti_predic)</p> <p>else:</p> <p>ulti_predic=ulti_predic</p> <p>return(ulti_predic)</p> <p>except:</p> <p>return(x)</p> <p># Define the input layer of the neural network:</p> <p>input_layer = layers.Input(shape=(640, 640, 3))</p> <p># Original convolution and pooling layers:</p> <p>conv_layer_1 = layers.Conv2D(filters=600, kernel_size=3, activation='relu')(input_layer)</p> <p>pooling_layer_1 = layers.MaxPooling2D(pool_size=(2, 2))(conv_layer_1)</p> <p>conv_layer_2 = layers.Conv2D(filters=300, kernel_size=3, activation='relu')(pooling_layer_1)</p> <p>pooling_layer_2 = layers.MaxPooling2D(pool_size=(2, 2))(conv_layer_2)</p> <p>conv_layer_3 = layers.Conv2D(filters=400, kernel_size=3, activation='relu')(pooling_layer_2)</p> <p>pooling_layer_3 = layers.MaxPooling2D(pool_size=(2, 2))(conv_layer_3)</p> <p># LSTM layer and connection to dense layer:</p> <p>flatten_layer = layers.Flatten()(pooling_layer_3)</p> <p>dense_layer_1 = layers.Dense(units=230, activation='relu')(flatten_layer)</p> <p>dense_layer_2 = layers.Dense(units=150, activation='relu')(dense_layer_1)</p> <p>ulti=per_baipas(dense_layer_2)</p> <p># Agregar capa LSTM:</p> <p>con_l=layers.concatenate([dense_layer_2, ulti], axis=-1)</p> <p>reshaped_layer = layers.Reshape((1, -1))(con_l) # Adds a time dimension</p> <p>lstm_layer = layers.LSTM(units=240, activation='tanh')(reshaped_layer)</p> <p># Additional dense layers connected to LSTM and previous layers:</p> <p>dense_layer_3 = layers.Dense(units=55, activation='relu')(lstm_layer)</p> <p>dense_layer_4 = layers.Dense(units=30, activation='relu')(dense_layer_2)</p> <p>dense_layer_5 = layers.Dense(units=60, activation='relu')(dense_layer_4)</p> <p>dense_layer_6 = layers.Dense(units=75, activation='relu')(dense_layer_5)</p> <p>dense_layer_7 = layers.Dense(units=150, activation='relu')(layers.concatenate([dense_layer_6, dense_layer_3], axis=-1))</p> <p>dense_layer_8 = layers.Dense(units=150, activation='relu')(dense_layer_7)</p> <p>ulti_predic=dense_layer_8</p> <p>mask=layers.Dense(units=65, activation='relu')(dense_layer_8)</p> <p>clas=layers.Dense(units=50, activation='relu')(dense_layer_8)</p> <p># Output layers:</p> <p>output_layer_1 = layers.Dense(units=640 * 640, activation='sigmoid',name=&quot;segment&quot;)(mask)</p> <p>output_layer_2 = layers.Dense(units=30, activation='Softmax',name=&quot;cals&quot;)(clas)</p> <p>model = tf.keras.Model(inputs=input_layer, outputs=[output_layer_1, output_layer_2])</p> <p>model.summary()</p> <p>model.compile(optimizer=&quot;Adam&quot;,loss=&quot;categorical_crossentropy&quot;, metrics=&quot;accuracy&quot;)</p> <p>This is an example of how training can be done:</p> <p>import numpy as np</p> <p>import gc</p> <p>gc.collect()</p> <p>#model.compile(optimizer=&quot;Adam&quot;,loss=&quot;categorical_crossentropy&quot;, metrics=&quot;accuracy&quot;)</p> <p>x_train = np.random.rand(1, 640, 640, 3)</p> <p>y_train_1 = np.random.rand(1, 640 * 640)</p> <p>#y_train_2 = np.array(1)</p> <p>etiquetas = [1]</p> <p>num_clases = 30</p> <p>etiquetas_one_hot = np.zeros((len(etiquetas), num_clases))</p> <p>for i, label in enumerate(etiquetas):</p> <p>etiquetas_one_hot[i, label] = 1</p> <p>y_train_2=etiquetas_one_hot</p> <p>model.fit(x_train, [y_train_1, y_train_2], epochs=100, batch_size=1)</p> <p>How to train with masks and labels in YOLO format with my current model? Or do I need to modify my output layers?</p> <p>I tried training it this way, but it didn't work:</p> <p>&#x200b;</p> <p>One last thing, some tabs in my code may have been lost when I copied it.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/theomnissiah10101011"> /u/theomnissiah10101011 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16xnxgf/how_to_use_the_yolo_dataset_format_p/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16xnxgf/how_to_use_the_yolo_dataset_format_p/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
       <id>https://www.reddit.com/r/MachineLearning/t3_16xakha</id>
       <title>[R] LangDiversity: software to identify LLM errors</title>
       <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16xakha/r_langdiversity_software_to_identify_llm_errors/" />
@@ -125,6 +161,18 @@
     </item>
     
     <item>
+      <id>https://www.reddit.com/r/MachineLearning/t3_16xnpwi</id>
+      <title>[D] Advice for freshman in Machine Learning</title>
+      <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16xnpwi/d_advice_for_freshman_in_machine_learning/" />
+      <description></description>
+      <pubDate>2023-10-02T05:03:03+00:00</pubDate>
+      <updated>2023-10-02T05:03:03+00:00</updated>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Do you all have some advice for freshman in this field? I have been learning Machine Learning in high school and I just entered college, so basically I have a 2-year-long learning experience in this area. </p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/RauLeCreuset5747"> /u/RauLeCreuset5747 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16xnpwi/d_advice_for_freshman_in_machine_learning/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16xnpwi/d_advice_for_freshman_in_machine_learning/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
       <id>https://www.reddit.com/r/MachineLearning/t3_16wn8qu</id>
       <title>[n] Introducing r/AudioAI: Any AI You Can Hear!</title>
       <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16wn8qu/n_introducing_raudioai_any_ai_you_can_hear/" />
@@ -161,18 +209,6 @@
     </item>
     
     <item>
-      <id>https://www.reddit.com/r/MachineLearning/t3_16x975p</id>
-      <title>[P] Simplest model to run with limited hardware</title>
-      <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16x975p/p_simplest_model_to_run_with_limited_hardware/" />
-      <description></description>
-      <pubDate>2023-10-01T18:46:32+00:00</pubDate>
-      <updated>2023-10-01T18:46:32+00:00</updated>
-      <content:encoded><![CDATA[
-        <!-- SC_OFF --><div class="md"><p>We want to run (not train, i.e. think single forward pass only) an ML algorithm on a machine with very limited resources.</p> <p>Which model could we use to show off the possibilities?</p> <p>If the benchmark is an MLP for binary image classification, what else could we do with a similar scale of operations?</p> <p>E.g.</p> <p>Which model is the simplest for e.g. text-to-image generation?</p> <p>Any other ML models that are simple enough to run and if initialized with good params, does something impressive</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/2i2i_tokenized_time"> /u/2i2i_tokenized_time </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x975p/p_simplest_model_to_run_with_limited_hardware/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x975p/p_simplest_model_to_run_with_limited_hardware/">[comments]</a></span>
-      ]]></content:encoded>
-    </item>
-    
-    <item>
       <id>https://www.reddit.com/r/MachineLearning/t3_16wf3lk</id>
       <title>[D] (How) Can you estimate inference speed of a NN model on given hardware?</title>
       <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16wf3lk/d_how_can_you_estimate_inference_speed_of_a_nn/" />
@@ -181,6 +217,18 @@
       <updated>2023-09-30T19:10:51+00:00</updated>
       <content:encoded><![CDATA[
         <!-- SC_OFF --><div class="md"><p>How, outside of testing, do you estimate how quickly a specific model will run on some hardware? Anything about time is rarely mentioned in papers and if it is, it's more likely to talk about training, unless authors are specifically proud of their speed (like YOLO). Even less so in any README.</p> <p>Some way to translate numbers of parameters into seconds on a given GPU/CPU, any rules of thumb better than just setting up everything every time?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/teleoflexuous"> /u/teleoflexuous </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wf3lk/d_how_can_you_estimate_inference_speed_of_a_nn/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16wf3lk/d_how_can_you_estimate_inference_speed_of_a_nn/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <id>https://www.reddit.com/r/MachineLearning/t3_16x975p</id>
+      <title>[P] Simplest model to run with limited hardware</title>
+      <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16x975p/p_simplest_model_to_run_with_limited_hardware/" />
+      <description></description>
+      <pubDate>2023-10-01T18:46:32+00:00</pubDate>
+      <updated>2023-10-01T18:46:32+00:00</updated>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>We want to run (not train, i.e. think single forward pass only) an ML algorithm on a machine with very limited resources.</p> <p>Which model could we use to show off the possibilities?</p> <p>If the benchmark is an MLP for binary image classification, what else could we do with a similar scale of operations?</p> <p>E.g.</p> <p>Which model is the simplest for e.g. text-to-image generation?</p> <p>Any other ML models that are simple enough to run and if initialized with good params, does something impressive</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/2i2i_tokenized_time"> /u/2i2i_tokenized_time </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x975p/p_simplest_model_to_run_with_limited_hardware/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16x975p/p_simplest_model_to_run_with_limited_hardware/">[comments]</a></span>
       ]]></content:encoded>
     </item>
     
@@ -265,54 +313,6 @@
       <updated>2023-09-29T13:42:47+00:00</updated>
       <content:encoded><![CDATA[
         <table> <tr><td> <a href="https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/"> <img alt="[R] RealFill: Reference-Driven Generation for Authentic Image Completion" src="https://external-preview.redd.it/ImWTCUOcR47SWrmxStU5b2FjJoMHcZHYtoAiLp884yI.jpg?width=640&amp;crop=smart&amp;auto=webp&amp;s=3e569815954293cf6d30fd8d177f1724aba33068" title="[R] RealFill: Reference-Driven Generation for Authentic Image Completion" /> </a> </td><td> <!-- SC_OFF --><div class="md"><p>Project page: <a href="https://realfill.github.io/">https://realfill.github.io/</a></p> <p>Paper: <a href="https://arxiv.org/abs/2309.16668">https://arxiv.org/abs/2309.16668</a></p> <p><a href="https://preview.redd.it/cj2hqx8n77rb1.jpg?width=4200&amp;format=pjpg&amp;auto=webp&amp;s=a14388d4d8673bd0625d9849fc537db85d703283">RealFill is able to complete the image with what should have been there.</a></p> <p><strong>Abstract</strong></p> <blockquote> <p>Recent advances in generative imagery have brought forth outpainting and inpainting models that can produce high-quality, plausible image content in unknown regions, but the content these models hallucinate is necessarily inauthentic, since the models lack sufficient context about the true scene. In this work, we propose <strong><em>RealFill</em></strong>, a novel generative approach for image completion that fills in missing regions of an image with the content that <em>should have been there</em>. RealFill is a generative inpainting model that is personalized using only a few reference images of a scene. These reference images do not have to be aligned with the target image, and can be taken with drastically varying viewpoints, lighting conditions, camera apertures, or image styles. Once personalized, RealFill is able to complete a target image with visually compelling contents that are faithful to the original scene. We evaluate RealFill on a new image completion benchmark that covers a set of diverse and challenging scenarios, and find that it outperforms existing approaches by a large margin.</p> </blockquote> <p>&#x200b;</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/StrawberryNumberNine"> /u/StrawberryNumberNine </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vc0hp/r_realfill_referencedriven_generation_for/">[comments]</a></span> </td></tr></table>
-      ]]></content:encoded>
-    </item>
-    
-    <item>
-      <id>https://www.reddit.com/r/MachineLearning/t3_16vshvy</id>
-      <title>[R] Pathway to self-learning mathematics and statistics for ML research</title>
-      <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16vshvy/r_pathway_to_selflearning_mathematics_and/" />
-      <description></description>
-      <pubDate>2023-09-30T00:30:39+00:00</pubDate>
-      <updated>2023-09-30T00:30:39+00:00</updated>
-      <content:encoded><![CDATA[
-        <!-- SC_OFF --><div class="md"><p>Hey everyone. I am very passionate about getting in ML research and was wondering what the learning pathway was, particularly with regards to the theoretical Math and Statistics involved.</p> <p>For context:</p> <ul> <li>I am a second year undergraduate. By the end of this year, I will have taken and finished A Multivariable Calculus with Proofs course, so that is my current starting point.</li> <li>I have been working with ML for the last 3 years and am proficient in Python and frameworks like PyTorch.</li> <li>I have also made my own implementation of several research papers (LSTMs, GRUs, Transformers, ELMo, BERT, GPT, as well as a few computer vision papers).</li> </ul> <p>I have a good general intuition of how deep learning works, but I want to formalise this knowledge with the adequate mathematical background so that I can eventually pursue a career in research. I understand that I have plenty of time until I reach there, and I am willing to dedicate it to grinding out the math and statistical knowledge required.</p> <p>I have done my research on this sub and other forums, and here are a few resources that stood out:</p> <ul> <li>Mathematics for Machine Learning by Deisenroth, Faisal and Ong</li> <li>Advanced Calculus of Several Variables by C. H. Edwards Jr.</li> <li>Mathematical Methods Lecture Notes from Imperial College by Deisenroth and Cheraghchi</li> <li>The original information theory paper by Shannon</li> <li>The Elements of Statistical Learning by Hastie, Tibshirani and Friedman</li> <li>Pattern Recognition and Machine Learning by Bishop</li> <li>The Probabalistic Machine Learning Series by Kevin P. Murphy</li> <li>Deep Learning by Goodfellow, Bengio and Courville</li> <li>Mathematics of Machine Learning on MIT OCW (<a href="https://ocw.mit.edu/courses/18-657-mathematics-of-machine-learning-fall-2015/">here</a>)</li> </ul> <p>My question is, what order should I start self-learning in, given the (somewhat limited) background knowledge I have? Also, are there any other resources that would help?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Far_Clothes_5054"> /u/Far_Clothes_5054 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vshvy/r_pathway_to_selflearning_mathematics_and/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vshvy/r_pathway_to_selflearning_mathematics_and/">[comments]</a></span>
-      ]]></content:encoded>
-    </item>
-    
-    <item>
-      <id>https://www.reddit.com/r/MachineLearning/t3_16vmmxz</id>
-      <title>[R] Gsgen: Text-to-3D using Gaussian Splatting</title>
-      <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/" />
-      <description></description>
-      <pubDate>2023-09-29T20:38:01+00:00</pubDate>
-      <updated>2023-09-29T20:38:01+00:00</updated>
-      <content:encoded><![CDATA[
-        <!-- SC_OFF --><div class="md"><p><a href="https://gsgen3d.github.io/">Project Page</a><br /> <a href="https://arxiv.org/abs/2309.16585">Paper</a><br /> <a href="https://github.com/gsgen3d/gsgen">Code</a> </p> <blockquote> <p>In this paper, we present Gaussian Splatting based text-to-3D generation (GSGEN), a novel approach for generating high-quality 3D objects. Previous methods suffer from inaccurate geometry and limited fidelity due to the absence of 3D prior and proper representation. We leverage 3D Gaussian Splatting, a recent state-of-the-art representation, to address existing shortcomings by exploiting the explicit nature that enables the incorporation of 3D prior. Specifically, our method adopts a progressive optimization strategy, which includes a geometry optimization stage and an appearance refinement stage. In geometry optimization, a coarse representation is established under a 3D geometry prior along with the ordinary 2D SDS loss, ensuring a sensible and 3D-consistent rough shape. Subsequently, the obtained Gaussians undergo an iterative refinement to enrich details. In this stage, we increase the number of Gaussians by compactness-based densification to enhance continuity and improve fidelity. With these designs, our approach can generate 3D content with delicate details and more accurate geometry. Extensive evaluations demonstrate the effectiveness of our method, especially for capturing high-frequency components.</p> </blockquote> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Sirisian"> /u/Sirisian </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vmmxz/r_gsgen_textto3d_using_gaussian_splatting/">[comments]</a></span>
-      ]]></content:encoded>
-    </item>
-    
-    <item>
-      <id>https://www.reddit.com/r/MachineLearning/t3_16vvh84</id>
-      <title>[D] CIDEr values in PaLI model and XM 3600 dataset</title>
-      <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/" />
-      <description></description>
-      <pubDate>2023-09-30T02:46:43+00:00</pubDate>
-      <updated>2023-09-30T02:46:43+00:00</updated>
-      <content:encoded><![CDATA[
-        <!-- SC_OFF --><div class="md"><p>I am reading <a href="https://arxiv.org/abs/2209.06794">PaLI: A Jointly-Scaled Multilingual Language-Image Model </a>. In their table 2 (page 6), it's reported that Thapliyal et al. (2022) (0.8B) model got 57.6 of CIDEr on XM 3600 for English. Thapliyal et al. (2022) is <a href="https://arxiv.org/abs/2205.12522">Crossmodal-3600: A Massively Multilingual Multimodal Evaluation Dataset</a>. However in this paper, the CIDEr values are reported less than 1. For example, the largest model got 0.584 of CIDEr on XM 3600 for English.</p> <p>Could someone explain to me why those values have great differences?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/KingsmanVince"> /u/KingsmanVince </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vvh84/d_cider_values_in_pali_model_and_xm_3600_dataset/">[comments]</a></span>
-      ]]></content:encoded>
-    </item>
-    
-    <item>
-      <id>https://www.reddit.com/r/MachineLearning/t3_16vq1a0</id>
-      <title>[R] Drive Like a Human: Rethinking Autonomous Driving with Large Language Models</title>
-      <link rel="alternate" href="https://www.reddit.com/r/MachineLearning/comments/16vq1a0/r_drive_like_a_human_rethinking_autonomous/" />
-      <description></description>
-      <pubDate>2023-09-29T22:49:36+00:00</pubDate>
-      <updated>2023-09-29T22:49:36+00:00</updated>
-      <content:encoded><![CDATA[
-        <!-- SC_OFF --><div class="md"><p>Paper - <a href="https://arxiv.org/abs/2307.07162">https://arxiv.org/abs/2307.07162</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/MysteryInc152"> /u/MysteryInc152 </a> <br /> <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vq1a0/r_drive_like_a_human_rethinking_autonomous/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/MachineLearning/comments/16vq1a0/r_drive_like_a_human_rethinking_autonomous/">[comments]</a></span>
       ]]></content:encoded>
     </item>
     

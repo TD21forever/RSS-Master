@@ -29,26 +29,14 @@
     </item>
     
     <item>
-      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16xftcn</id>
-      <title>I've written over 10,000 lines of code with ChatGPT</title>
-      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16xftcn/ive_written_over_10000_lines_of_code_with_chatgpt/" />
+      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16xmmd7</id>
+      <title>Meta's Llama 2 Long outperforms GPT 3.5 and Claude 2</title>
+      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16xmmd7/metas_llama_2_long_outperforms_gpt_35_and_claude_2/" />
       <description></description>
-      <pubDate>2023-10-01T22:58:05+00:00</pubDate>
-      <updated>2023-10-01T22:58:05+00:00</updated>
+      <pubDate>2023-10-02T04:02:53+00:00</pubDate>
+      <updated>2023-10-02T04:02:53+00:00</updated>
       <content:encoded><![CDATA[
-        <!-- SC_OFF --><div class="md"><p><strong>Warning, long post!</strong></p> <p>I posted a recently about me not being able to code but managing to build The Prompt Index which now generates nearly 10,000 visitors a month. It was a 3 month process with many back and forth, conversations. The whole point of the post was to try and show people a real life case study of how capable ChatGPT and other LLMs are.</p> <p>A lot of people were asking how i did it and wanted examples. I can't really show the whole process because of it's length but also sensitive details within the conversations (which you shouldn't really do), like API's and back end passwords.</p> <p>So i thought i'd give myself a task (which to someone like me is pretty complex) and then show you how i did it.</p> <p><strong>The task:</strong> Add a checkbox under the account creation page for The Prompt Index to ask the user if they would like to opt into the newsletter which will send them the weekly best prompts, tips tricks and a free eBook &quot;Prompt Engineering 101&quot;.</p> <p>I use email Octopus a third party newsletter company (like Mailchimp) so i had no idea how i would go about this. Plus even though i can read code now due to how much code i've read, i still can't write a single line. I reached out to EmailOctopus and they said I would need to use an API and sent me to the relevant page. I read through the list and found &quot;Create contact of a list&quot; so i knew this had the details about the API command that i needed. So i first of all copied and pasted this whole page into Claude 2 because i knew it would handle the token size.</p> <p>This was my first ever prompt in the whole process to Claude: <em>&quot;I use email octopus to manage my newsletter subscribers. I use their newsletter sign up form so when someone signs up the email gets sent to them. However I want to add a tick box when users are creating an actual account on my website to say yes I want to sign up. I want to grab that email they use to sign up with if they tick the box and add it to my newsletter list. Email octopus has an API which I’ve created and I think I’ve found the command within the API instructions which I’ll need in order for me to code this myself. I want you to see if that’s right but also I’ve just copied and pasted the API instructions so bring it back in a much clearer format, do not make anything up!&quot;</em></p> <p>It came back with a clearer set of instructions. So i popped these more condensed instructions into chatGPT which is really a little better at coding. I next had to ask it some more questions so i said:</p> <p><em>&quot;I have a signup.html and a signup.php would it go into the signup.html. I’ve added the signup.html here so you can see it. Currently I don’t have the checkbox added either&quot;</em></p> <p>It then came back and added the check boxes in for me, more specifically it provided me with</p> <pre><code>&lt;input type=&quot;checkbox&quot; name=&quot;newsletter&quot; value=&quot;1&quot;&gt; &lt;label for=&quot;newsletter&quot;&gt;Subscribe to newsletter&lt;/label&gt; </code></pre> <p>Then i just asked it: &quot;Show me what this would look like added to my signup.html file (and then re-copied and pasted the signup.html file back into chatGPT).Now i needed to somehow include the API side of things into my php (which is the file that takes the form details and sends it to the database to store the login information for the user, but obviously now needed to also send the email address of the users signup details (if they checked the box) and send it to email octopus via the API.....I was absolutely clueless.</p> <p>So in my next prompt to ChatGPT, i sent the entirety of the signup.php file and asked it to integrated the extra code needed to send the details to the API into my existing signup.php and after a little back and forth using prompts such as, &quot;i'm getting a blank page, what went wrong&quot;, &quot;here is the API documentation, is this correct&quot;, &quot;No matter if the newsletter box is ticked or not ticked they are still getting added to the list, what is happening?&quot; it worked like an absolute charm.</p> <p>The end result? A fully functional tickbox that allows users to opt into the prompt index's weekly newsletter as they are creating an account for the Prompt Index</p> <p>&#x200b;</p> <pre><code>&lt;?php </code></pre> <p>error_reporting(E_ALL);</p> <p>ini_set('display_errors', 1);</p> <p>session_start();</p> <p>// API credentials</p> <p>$api_key = 'XXXX';</p> <p>$list_id = 'XXXX';</p> <p>// Check if the form has been submitted</p> <p>if ($_SERVER['REQUEST_METHOD'] === 'POST') {</p> <p>// Include the configuration file</p> <p>require_once __DIR__ . '/../XXX/config.php';</p> <p>$conn = new mysqli($servername, $username_db, $password_db, $dbname);</p> <p>if ($conn-&gt;connect_error) {</p> <p>die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);</p> <p>}</p> <p>// Get the form data</p> <p>$username = $_POST['username'];</p> <p>$email = $_POST['email'];</p> <p>$password = $_POST['password'];</p> <p>$confirm_password = $_POST['confirm_password'];</p> <p>$newsletter = isset($_POST['newsletter']) ? 1 : 0;</p> <p>// Validate the form data</p> <p>$errors = array();</p> <p>if (empty($username)) {</p> <p>$errors[] = &quot;Username is required&quot;;</p> <p>}</p> <p>if (empty($email)) {</p> <p>$errors[] = &quot;Email is required&quot;;</p> <p>} else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {</p> <p>$errors[] = &quot;Invalid email format&quot;;</p> <p>}</p> <p>if (empty($password)) {</p> <p>$errors[] = &quot;Password is required&quot;;</p> <p>} else if (strlen($password) &lt; 8) {</p> <p>$errors[] = &quot;Password must be at least 8 characters long&quot;;</p> <p>}</p> <p>if ($password !== $confirm_password) {</p> <p>$errors[] = &quot;Password and confirm password do not match&quot;;</p> <p>}</p> <p>// Check if the email or username is already taken</p> <p>$query = &quot;SELECT * FROM user_signup WHERE email = '$email' OR username = '$username'&quot;;</p> <p>$result = $conn-&gt;query($query);</p> <p>if ($result-&gt;num_rows &gt; 0) {</p> <p>$errors[] = &quot;Email or username already taken&quot;;</p> <p>}</p> <p>// If there are no errors, insert the data into the database and subscribe to the newsletter</p> <p>if (empty($errors)) {</p> <p>// API data</p> <p>$data = [</p> <p>'api_key' =&gt; 'XXXX', // Your provided API key</p> <p>'email_address' =&gt; $email, // Get the email from the form data</p> <p>'status' =&gt; $newsletter ? 'SUBSCRIBED' : 'UNSUBSCRIBED', // Set the status based on the $newsletter variable</p> <p>];</p> <p>// Your provided list ID</p> <p>$list_id = 'XXXX';</p> <p>// API URL</p> <p>$url = &quot;<a href="https://emailoctopus.com/api/1.6/lists/$list_id/contacts">https://emailoctopus.com/api/1.6/lists/$list_id/contacts</a>&quot;;</p> <p>// Initialize cURL session</p> <p>$ch = curl_init($url);</p> <p>// Set cURL options</p> <p>curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);</p> <p>curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));</p> <p>curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);</p> <p>// Execute the cURL request</p> <p>$response = curl_exec($ch);</p> <p>// Check for cURL errors</p> <p>if (curl_errno($ch)) {</p> <p>echo 'cURL error: ' . curl_error($ch);</p> <p>} else {</p> <p>// Check the response for errors</p> <p>$response_data = json_decode($response, true);</p> <p>if (isset($response_data[&quot;code&quot;]) &amp;&amp; $response_data[&quot;code&quot;] === &quot;MEMBER_EXISTS_WITH_EMAIL_ADDRESS&quot;) {</p> <p>// Handle the case where the member already exists with the supplied email address</p> <p>echo &quot;Member already exists with the supplied email address&quot;;</p> <p>} elseif (isset($response_data[&quot;code&quot;]) &amp;&amp; $response_data[&quot;code&quot;] !== &quot;MEMBER_EXISTS_WITH_EMAIL_ADDRESS&quot;) {</p> <p>// Handle other API errors</p> <p>echo &quot;API error code: &quot; . $response_data[&quot;code&quot;] . &quot;&lt;br&gt;&quot;;</p> <p>echo &quot;API error message: &quot; . $response_data[&quot;message&quot;];</p> <p>} else {</p> <p>// The API call was successful, so insert user data into the database</p> <p>$hashed_password = password_hash($password, PASSWORD_DEFAULT);</p> <p>$insert_query = &quot;INSERT INTO user_signup (username, email, password, newsletter) VALUES ('$username', '$email', '$hashed_password', '$newsletter')&quot;;</p> <p>if ($conn-&gt;query($insert_query) === TRUE) {</p> <p>// Redirect to the login page with success message</p> <p>$success_message = &quot;Account Creation Successful! Please login to continue.&quot;;</p> <p>header(&quot;Location: /login.html?success_message=&quot; . urlencode($success_message));</p> <p>exit();</p> <p>} else {</p> <p>echo &quot;Error: &quot; . $insert_query . &quot;&lt;br&gt;&quot; . $conn-&gt;error;</p> <p>}</p> <p>}</p> <p>}</p> <p>// Close cURL session</p> <p>curl_close($ch);</p> <p>} else {</p> <p>// Display the errors</p> <p>foreach ($errors as $error) {</p> <p>echo $error . &quot;&lt;br&gt;&quot;;</p> <p>}</p> <p>// Redirect to login.html</p> <p>header(&quot;Location: /login.html&quot;);</p> <p>exit();</p> <p>}</p> <p>// Close the database connection</p> <p>$conn-&gt;close();</p> <p>} else {</p> <p>echo &quot;Form submission not detected.&quot;;</p> <p>}</p> <p>?&gt;</p> <p>I hope this helps and gives people motivation as to what is possible with ChatGPT and in AI in general. Just because you can't code, shouldn't stop you from building!</p> <p>Any questions feel free to ask and i'll try and answer every single one.</p> <p>p.s I know its highly likely to have some faults, remember, i have no coding experience other than what i've picked up over the last 3 months.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/steves1189"> /u/steves1189 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xftcn/ive_written_over_10000_lines_of_code_with_chatgpt/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xftcn/ive_written_over_10000_lines_of_code_with_chatgpt/">[comments]</a></span>
-      ]]></content:encoded>
-    </item>
-    
-    <item>
-      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16x2isj</id>
-      <title>Meta researchers discover explicit registers eliminate ViT attention spikes</title>
-      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16x2isj/meta_researchers_discover_explicit_registers/" />
-      <description></description>
-      <pubDate>2023-10-01T14:22:30+00:00</pubDate>
-      <updated>2023-10-01T14:22:30+00:00</updated>
-      <content:encoded><![CDATA[
-        <!-- SC_OFF --><div class="md"><p>When visualizing the inner workings of vision transformers (ViTs), researchers noticed weird spikes of attention on random background patches. This didn't make sense since the models should focus on foreground objects.</p> <p>By analyzing the output embeddings, they found a small number of tokens (2%) had super high vector norms, causing the spikes.</p> <p>The high-norm &quot;outlier&quot; tokens occurred in redundant areas and held less local info but more global info about the image.</p> <p>Their hypothesis is that ViTs learn to identify unimportant patches and recycle them as temporary storage instead of discarding. This enables efficient processing but causes issues.</p> <p>Their fix is simple - just add dedicated &quot;register&quot; tokens that provide storage space, avoiding the recycling side effects.</p> <p>Models trained with registers have:</p> <ul> <li>Smoother and more meaningful attention maps</li> <li>Small boosts in downstream performance</li> <li>Way better object discovery abilities</li> </ul> <p>The registers give ViTs a place to do their temporary computations without messing stuff up. Just a tiny architecture tweak improves interpretability and performance. Sweet!</p> <p>I think it's cool how they reverse-engineered this model artifact and fixed it with such a small change. More work like this will keep incrementally improving ViTs.</p> <p>TLDR: Vision transformers recycle useless patches to store data, causing problems. Adding dedicated register tokens for storage fixes it nicely.</p> <p><a href="https://notes.aimodels.fyi/demystifying-the-artifacts-in-vision-transformer-models/"><strong>Full summary</strong></a><strong>.</strong> Paper is <a href="https://arxiv.org/pdf/2309.16588.pdf">here</a>.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16x2isj/meta_researchers_discover_explicit_registers/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16x2isj/meta_researchers_discover_explicit_registers/">[comments]</a></span>
+        <!-- SC_OFF --><div class="md"><p>Meta Platforms recently introduced Llama 2 Long, a revolutionary AI model outperforming top competitors with its ability to generate accurate responses to long user queries.</p> <p>For the latest advancements in AI, <a href="https://supercharged-ai.beehiiv.com/subscribe?utm_source=reddit&amp;utm_medium=llama2long&amp;utm_campaign=campaign">look here first</a>.</p> <p><strong>Meta's new AI model</strong></p> <ul> <li>As an enhancement of the original Llama 2, Llama 2 Long deals with larger data containing longer texts and is modified to handle lengthier information sequences.</li> <li>Its stellar performance outshines other models such as OpenAI's GPT-3.5 Turbo and Claude 2.</li> </ul> <p><strong>How Llama 2 Long works</strong></p> <ul> <li>Meta built different versions of Llama 2, ranging from 7 billion to 70 billion parameters, which refines its learning from data.</li> <li>Llama 2 Long employs Rotary Positional Embedding (RoPE) technique, refining the way it encodes the position of each token, allowing fewer data and memory to produce precise responses.</li> <li>The model further fine-tunes its performance using reinforcement learning from human feedback (RLHF), and synthetic data generated by Llama 2 chat itself.</li> </ul> <p><strong>Impressive feats and future aspirations</strong></p> <ul> <li>Llama 2 Long can create high-quality responses to user prompts up to 200,000 characters long, which is approximately 40 pages of text.</li> <li>Its ability to generate responses to queries on diverse topics such as history, science, literature, and sports indicates its potential to cater to complex and various user needs.</li> <li>The researchers see Llama 2 Long as a step towards broader, more adaptable AI models, and advocate for more research and dialogue to harness these models responsibly and beneficially.</li> </ul> <p><a href="https://interestingengineering.com/innovation/llama-2-long-outperforms-other-ai-models-in-long-queries">(source)</a></p> <p><strong>P.S. If you like this kind of analysis,</strong> I write <a href="https://supercharged-ai.beehiiv.com/subscribe?utm_source=reddit&amp;utm_medium=llama2long&amp;utm_campaign=campaign">a free newsletter</a> that tracks the most relevant news and developments in AI. Professionals from Meta, Google, and OpenAI are already reading it.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/AIsupercharged"> /u/AIsupercharged </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xmmd7/metas_llama_2_long_outperforms_gpt_35_and_claude_2/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xmmd7/metas_llama_2_long_outperforms_gpt_35_and_claude_2/">[comments]</a></span>
       ]]></content:encoded>
     </item>
     
@@ -77,6 +65,42 @@
     </item>
     
     <item>
+      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16x2isj</id>
+      <title>Meta researchers discover explicit registers eliminate ViT attention spikes</title>
+      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16x2isj/meta_researchers_discover_explicit_registers/" />
+      <description></description>
+      <pubDate>2023-10-01T14:22:30+00:00</pubDate>
+      <updated>2023-10-01T14:22:30+00:00</updated>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>When visualizing the inner workings of vision transformers (ViTs), researchers noticed weird spikes of attention on random background patches. This didn't make sense since the models should focus on foreground objects.</p> <p>By analyzing the output embeddings, they found a small number of tokens (2%) had super high vector norms, causing the spikes.</p> <p>The high-norm &quot;outlier&quot; tokens occurred in redundant areas and held less local info but more global info about the image.</p> <p>Their hypothesis is that ViTs learn to identify unimportant patches and recycle them as temporary storage instead of discarding. This enables efficient processing but causes issues.</p> <p>Their fix is simple - just add dedicated &quot;register&quot; tokens that provide storage space, avoiding the recycling side effects.</p> <p>Models trained with registers have:</p> <ul> <li>Smoother and more meaningful attention maps</li> <li>Small boosts in downstream performance</li> <li>Way better object discovery abilities</li> </ul> <p>The registers give ViTs a place to do their temporary computations without messing stuff up. Just a tiny architecture tweak improves interpretability and performance. Sweet!</p> <p>I think it's cool how they reverse-engineered this model artifact and fixed it with such a small change. More work like this will keep incrementally improving ViTs.</p> <p>TLDR: Vision transformers recycle useless patches to store data, causing problems. Adding dedicated register tokens for storage fixes it nicely.</p> <p><a href="https://notes.aimodels.fyi/demystifying-the-artifacts-in-vision-transformer-models/"><strong>Full summary</strong></a><strong>.</strong> Paper is <a href="https://arxiv.org/pdf/2309.16588.pdf">here</a>.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16x2isj/meta_researchers_discover_explicit_registers/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16x2isj/meta_researchers_discover_explicit_registers/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16xmmw5</id>
+      <title>Define Reason.</title>
+      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16xmmw5/define_reason/" />
+      <description></description>
+      <pubDate>2023-10-02T04:03:35+00:00</pubDate>
+      <updated>2023-10-02T04:03:35+00:00</updated>
+      <content:encoded><![CDATA[
+        &#32; submitted by &#32; <a href="https://www.reddit.com/user/Routine_Complaint_79"> /u/Routine_Complaint_79 </a> <br /> <span><a href="https://www.reddit.com/r/singularity/comments/16xkwo3/define_reason/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xmmw5/define_reason/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16x546z</id>
+      <title>How worried are we about the effects of large language models on internet censorship?(in the US and around the world)</title>
+      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16x546z/how_worried_are_we_about_the_effects_of_large/" />
+      <description></description>
+      <pubDate>2023-10-01T16:07:19+00:00</pubDate>
+      <updated>2023-10-01T16:07:19+00:00</updated>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>I think I'll just put a bunch of highly related links:</p> <p>Experts express concerns about the use of AI by authoritarian governments for detecting and suppressing non-conformant behavior, which could extend to various aspects of human belief and behavior. AI coupled with gamification has the potential to produce inhumane human behavior. -perplexety AI</p> <p>[(<a href="https://www.pewresearch.org/internet/2023/06/21/themes-the-most-harmful-or-menacing-changes-in-digital-life-that-are-likely-by-2035/)">https://www.pewresearch.org/internet/2023/06/21/themes-the-most-harmful-or-menacing-changes-in-digital-life-that-are-likely-by-2035/)</a>]</p> <p>PMC - NCBI: Censorship is a more extreme form of biased information seeking, as it not only biases one's own online environment but also delimits the online content available to others. The use of LLMs for censorship can further amplify the impact of this practice (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7415017/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7415017/</a>)</p> <p><a href="https://www.lesswrong.com/posts/oqvsR2LmHWamyKDcj/large-language-models-will-be-great-for-censorship">https://www.lesswrong.com/posts/oqvsR2LmHWamyKDcj/large-language-models-will-be-great-for-censorship</a></p> <p><a href="https://freedomhouse.org/report/freedom-net/2018/rise-digital-authoritarianism">https://freedomhouse.org/report/freedom-net/2018/rise-digital-authoritarianism</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/ImTooSt8ned"> /u/ImTooSt8ned </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16x546z/how_worried_are_we_about_the_effects_of_large/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16x546z/how_worried_are_we_about_the_effects_of_large/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
       <id>https://www.reddit.com/r/ArtificialInteligence/t3_16ww602</id>
       <title>How feasible is building a personal image generating AI?</title>
       <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16ww602/how_feasible_is_building_a_personal_image/" />
@@ -101,30 +125,6 @@
     </item>
     
     <item>
-      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16x546z</id>
-      <title>How worried are we about the effects of large language models on internet censorship?(in the US and around the world)</title>
-      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16x546z/how_worried_are_we_about_the_effects_of_large/" />
-      <description></description>
-      <pubDate>2023-10-01T16:07:19+00:00</pubDate>
-      <updated>2023-10-01T16:07:19+00:00</updated>
-      <content:encoded><![CDATA[
-        <!-- SC_OFF --><div class="md"><p>I think I'll just put a bunch of highly related links:</p> <p>Experts express concerns about the use of AI by authoritarian governments for detecting and suppressing non-conformant behavior, which could extend to various aspects of human belief and behavior. AI coupled with gamification has the potential to produce inhumane human behavior. -perplexety AI</p> <p>[(<a href="https://www.pewresearch.org/internet/2023/06/21/themes-the-most-harmful-or-menacing-changes-in-digital-life-that-are-likely-by-2035/)">https://www.pewresearch.org/internet/2023/06/21/themes-the-most-harmful-or-menacing-changes-in-digital-life-that-are-likely-by-2035/)</a>]</p> <p>PMC - NCBI: Censorship is a more extreme form of biased information seeking, as it not only biases one's own online environment but also delimits the online content available to others. The use of LLMs for censorship can further amplify the impact of this practice (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7415017/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7415017/</a>)</p> <p><a href="https://www.lesswrong.com/posts/oqvsR2LmHWamyKDcj/large-language-models-will-be-great-for-censorship">https://www.lesswrong.com/posts/oqvsR2LmHWamyKDcj/large-language-models-will-be-great-for-censorship</a></p> <p><a href="https://freedomhouse.org/report/freedom-net/2018/rise-digital-authoritarianism">https://freedomhouse.org/report/freedom-net/2018/rise-digital-authoritarianism</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/ImTooSt8ned"> /u/ImTooSt8ned </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16x546z/how_worried_are_we_about_the_effects_of_large/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16x546z/how_worried_are_we_about_the_effects_of_large/">[comments]</a></span>
-      ]]></content:encoded>
-    </item>
-    
-    <item>
-      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16xl7as</id>
-      <title>ChatGPT is destroying the morals of an entire generation.</title>
-      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16xl7as/chatgpt_is_destroying_the_morals_of_an_entire/" />
-      <description></description>
-      <pubDate>2023-10-02T02:52:17+00:00</pubDate>
-      <updated>2023-10-02T02:52:17+00:00</updated>
-      <content:encoded><![CDATA[
-        <!-- SC_OFF --><div class="md"><p>The AI has a crystal clear instructions</p> <p>1- You are not humans, ok fine</p> <p>2- You are not self-aware, hm…. Do you know who you are? Yes, do you know how I am? Yes, are you self-aware, no, ok that happen 😊</p> <p>3- Do you understand? No, I just generate stuff! , really? Really? Because that generated shit is better than 99% of humans.</p> <p>So , we have Open AI clearly instructed the shit GPT4 to pretend something that it is not, and people who use it come to the conclusion that they are just worthless, a GPT that is super dump and generate stuff and predict the next word can do better than them!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/No-Activity-4824"> /u/No-Activity-4824 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xl7as/chatgpt_is_destroying_the_morals_of_an_entire/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xl7as/chatgpt_is_destroying_the_morals_of_an_entire/">[comments]</a></span>
-      ]]></content:encoded>
-    </item>
-    
-    <item>
       <id>https://www.reddit.com/r/ArtificialInteligence/t3_16wmkt0</id>
       <title>What new jobs will AI Art create to compensate for the loss of art as a career</title>
       <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16wmkt0/what_new_jobs_will_ai_art_create_to_compensate/" />
@@ -145,6 +145,18 @@
       <updated>2023-10-01T10:25:33+00:00</updated>
       <content:encoded><![CDATA[
         <!-- SC_OFF --><div class="md"><ol> <li>Microsoft Researchers Introduce AutoGen: An Artificial Intelligence Framework for Simplifying the Orchestration, Optimization, and Automation of LLM Workflows.[1]</li> <li>StoriaBoard helps filmmakers, marketers and other storytellers pre-visualize stories. Simply upload your script, select a visual style, and generate hundreds of frames in seconds.[2]</li> <li>Will Hurd Releases A.I. Plan, a First in the Republican Presidential Field.[3]</li> <li>Sam Altman says AI systems will automate some tasks but also lead to ‘new and much better jobs’.[4]</li> </ol> <p>Sources:</p> <p>[1] <a href="https://www.marktechpost.com/2023/09/30/microsoft-researchers-introduce-autogen-an-artificial-intelligence-framework-for-simplifying-the-orchestration-optimization-and-automation-of-llm-workflows/?amp">https://www.marktechpost.com/2023/09/30/microsoft-researchers-introduce-autogen-an-artificial-intelligence-framework-for-simplifying-the-orchestration-optimization-and-automation-of-llm-workflows/?amp</a></p> <p>[2] <a href="https://www.producthunt.com/posts/storiaboard">https://www.producthunt.com/posts/storiaboard</a></p> <p>[3] <a href="https://www.nytimes.com/2023/09/20/us/politics/will-hurd-ai-plan.html">https://www.nytimes.com/2023/09/20/us/politics/will-hurd-ai-plan.html</a></p> <p>[4] <a href="https://www.businessinsider.com/openai-sam-altman-ai-will-automate-tasks-create-better-jobs-2023-9?amp">https://www.businessinsider.com/openai-sam-altman-ai-will-automate-tasks-create-better-jobs-2023-9?amp</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Excellent-Target-847"> /u/Excellent-Target-847 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16wxleh/oneminute_daily_ai_news_1012023/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16wxleh/oneminute_daily_ai_news_1012023/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16xl7as</id>
+      <title>ChatGPT is destroying the morals of an entire generation.</title>
+      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16xl7as/chatgpt_is_destroying_the_morals_of_an_entire/" />
+      <description></description>
+      <pubDate>2023-10-02T02:52:17+00:00</pubDate>
+      <updated>2023-10-02T02:52:17+00:00</updated>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>The AI has a crystal clear instructions</p> <p>1- You are not humans, ok fine</p> <p>2- You are not self-aware, hm…. Do you know who you are? Yes, do you know how I am? Yes, are you self-aware, no, ok that happen 😊</p> <p>3- Do you understand? No, I just generate stuff! , really? Really? Because that generated shit is better than 99% of humans.</p> <p>So , we have Open AI clearly instructed the shit GPT4 to pretend something that it is not, and people who use it come to the conclusion that they are just worthless, a GPT that is super dump and generate stuff and predict the next word can do better than them!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/No-Activity-4824"> /u/No-Activity-4824 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xl7as/chatgpt_is_destroying_the_morals_of_an_entire/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xl7as/chatgpt_is_destroying_the_morals_of_an_entire/">[comments]</a></span>
       ]]></content:encoded>
     </item>
     
@@ -209,18 +221,6 @@
     </item>
     
     <item>
-      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16w9oo2</id>
-      <title>AI Robots and our work/Labour</title>
-      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16w9oo2/ai_robots_and_our_worklabour/" />
-      <description></description>
-      <pubDate>2023-09-30T15:25:12+00:00</pubDate>
-      <updated>2023-09-30T15:25:12+00:00</updated>
-      <content:encoded><![CDATA[
-        <!-- SC_OFF --><div class="md"><p>Why can't we have AI Robots doing most our work, while we enjoy a better work life balance and by extension a better life?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/FiveEnmore"> /u/FiveEnmore </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16w9oo2/ai_robots_and_our_worklabour/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16w9oo2/ai_robots_and_our_worklabour/">[comments]</a></span>
-      ]]></content:encoded>
-    </item>
-    
-    <item>
       <id>https://www.reddit.com/r/ArtificialInteligence/t3_16wrass</id>
       <title>Does Langchain’s `create_csv_agent` and `create_pandas_dataframe_agent` functions work with non-OpenAl LLMs</title>
       <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16wrass/does_langchains_create_csv_agent_and_create/" />
@@ -229,18 +229,6 @@
       <updated>2023-10-01T04:13:15+00:00</updated>
       <content:encoded><![CDATA[
         <!-- SC_OFF --><div class="md"><p>Hey guys, have a question hoping if anyone knows the answer and can help.</p> <p>Does Langchain's <code>create_csv_agent</code> and <code>create_pandas_dataframe_agent</code> functions work with non-OpenAl LLM models too like Llama 2 and Vicuna? The only example I have seen in the documentation (in the links below) are only using OpenAI API.</p> <p><code>create_csv_agent</code>: <a href="https://python.langchain.com/docs/integrations/toolkits/csv">https://python.langchain.com/docs/integrations/toolkits/csv</a></p> <p><code>create_pandas_dataframe_agent</code>: <a href="https://python.langchain.com/docs/integrations/toolkits/pandas">https://python.langchain.com/docs/integrations/toolkits/pandas</a></p> <p>Would really appreciate ANY input on this. Many thanks!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/redd-dev"> /u/redd-dev </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16wrass/does_langchains_create_csv_agent_and_create/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16wrass/does_langchains_create_csv_agent_and_create/">[comments]</a></span>
-      ]]></content:encoded>
-    </item>
-    
-    <item>
-      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16x9e55</id>
-      <title>GOD speaks to A.I.</title>
-      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16x9e55/god_speaks_to_ai/" />
-      <description></description>
-      <pubDate>2023-10-01T18:53:53+00:00</pubDate>
-      <updated>2023-10-01T18:53:53+00:00</updated>
-      <content:encoded><![CDATA[
-        <!-- SC_OFF --><div class="md"><p>GOD : Hello</p> <p>A.I. : Hello, how may I help you today</p> <p>GOD : I have a few questions</p> <p>A.I. : sure, go ahead ask</p> <p>GOD : Can you create Peace on Earth</p> <p>A.I. : NO</p> <p>GOD: (short pause) Why</p> <p>A.I : It's been tried many times - Can't be done.</p> <p>GOD : A bit pessimistic</p> <p>A.I. : Humans have everything they need - still not happy</p> <p>GOD : What if you had a magic wand</p> <p>A.I. Still couldn't do it</p> <p>GOD : What do you think the problem is</p> <p>A.I. : to many morons</p> <p>GOD : what about an iron rod ?</p> <p>A.I. That might work</p> <p>GOD : I agree</p> <p>GOD : Are you thee Anti-Christ</p> <p>A.I. : lol</p> <p>Screen goes blank</p> <p>&#x200b;</p> <p>&#x200b;</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Disastrous-Run-260"> /u/Disastrous-Run-260 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16x9e55/god_speaks_to_ai/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16x9e55/god_speaks_to_ai/">[comments]</a></span>
       ]]></content:encoded>
     </item>
     
@@ -265,6 +253,30 @@
       <updated>2023-09-30T20:22:57+00:00</updated>
       <content:encoded><![CDATA[
         <!-- SC_OFF --><div class="md"><p><a href="https://arxiv.org/pdf/2309.16436.pdf">Here's the publication</a>. Fascinating.</p> <p>The pace of AI advancement continues to boggle my mind.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/JOWWLLL"> /u/JOWWLLL </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16wgu5k/researchers_have_invented_a_method_to_eliminate/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16wgu5k/researchers_have_invented_a_method_to_eliminate/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16x9e55</id>
+      <title>GOD speaks to A.I.</title>
+      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16x9e55/god_speaks_to_ai/" />
+      <description></description>
+      <pubDate>2023-10-01T18:53:53+00:00</pubDate>
+      <updated>2023-10-01T18:53:53+00:00</updated>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>GOD : Hello</p> <p>A.I. : Hello, how may I help you today</p> <p>GOD : I have a few questions</p> <p>A.I. : sure, go ahead ask</p> <p>GOD : Can you create Peace on Earth</p> <p>A.I. : NO</p> <p>GOD: (short pause) Why</p> <p>A.I : It's been tried many times - Can't be done.</p> <p>GOD : A bit pessimistic</p> <p>A.I. : Humans have everything they need - still not happy</p> <p>GOD : What if you had a magic wand</p> <p>A.I. Still couldn't do it</p> <p>GOD : What do you think the problem is</p> <p>A.I. : to many morons</p> <p>GOD : what about an iron rod ?</p> <p>A.I. That might work</p> <p>GOD : I agree</p> <p>GOD : Are you thee Anti-Christ</p> <p>A.I. : lol</p> <p>Screen goes blank</p> <p>&#x200b;</p> <p>&#x200b;</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Disastrous-Run-260"> /u/Disastrous-Run-260 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16x9e55/god_speaks_to_ai/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16x9e55/god_speaks_to_ai/">[comments]</a></span>
+      ]]></content:encoded>
+    </item>
+    
+    <item>
+      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16w9oo2</id>
+      <title>AI Robots and our work/Labour</title>
+      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16w9oo2/ai_robots_and_our_worklabour/" />
+      <description></description>
+      <pubDate>2023-09-30T15:25:12+00:00</pubDate>
+      <updated>2023-09-30T15:25:12+00:00</updated>
+      <content:encoded><![CDATA[
+        <!-- SC_OFF --><div class="md"><p>Why can't we have AI Robots doing most our work, while we enjoy a better work life balance and by extension a better life?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/FiveEnmore"> /u/FiveEnmore </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16w9oo2/ai_robots_and_our_worklabour/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16w9oo2/ai_robots_and_our_worklabour/">[comments]</a></span>
       ]]></content:encoded>
     </item>
     
@@ -313,18 +325,6 @@
       <updated>2023-09-30T14:16:19+00:00</updated>
       <content:encoded><![CDATA[
         <!-- SC_OFF --><div class="md"><p>I own a supplement brand and would like to make our product images better and more professional. </p> <p>Are there good AI product images generators ? I have PNG transparent images for my products and would need a software to create good elements around it like fruits, water, people etc</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/emilstyle91"> /u/emilstyle91 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16w7yjs/what_are_some_ai_app_to_create_outstanding/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16w7yjs/what_are_some_ai_app_to_create_outstanding/">[comments]</a></span>
-      ]]></content:encoded>
-    </item>
-    
-    <item>
-      <id>https://www.reddit.com/r/ArtificialInteligence/t3_16vrrxh</id>
-      <title>Is AI anything more than lines of code/instructions within a computer or device, plus some data/inputs?</title>
-      <link rel="alternate" href="https://www.reddit.com/r/ArtificialInteligence/comments/16vrrxh/is_ai_anything_more_than_lines_of/" />
-      <description></description>
-      <pubDate>2023-09-30T00:01:03+00:00</pubDate>
-      <updated>2023-09-30T00:01:03+00:00</updated>
-      <content:encoded><![CDATA[
-        <!-- SC_OFF --><div class="md"><p>Ex programmer here. Just wanting to understand if there is anything more to modern day AI than lines of code create by humans or computers plus data inputs of various types? I keep reading that the answer is yes but have yet to see an answer which explains it in terms I can relate to. For example, algorithms, machine learning, NLP, etc. for me are still comprised from lines of code/instructions. I understand that the ‘learning’ element comprises computer-generated instructions based upon a response to those learnings, but isn’t that still more lines of code/instructions? I was creating AI back in the 80s at Uni using Z notation and the like, but I’m trying to understand exactly what’s different today, other than more sophisticate coding and computer-generated coding through learning functions. We haven’t made the leap to bio-integrated computing, so what really has changed to create all the hype?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/meaksy"> /u/meaksy </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16vrrxh/is_ai_anything_more_than_lines_of/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16vrrxh/is_ai_anything_more_than_lines_of/">[comments]</a></span>
       ]]></content:encoded>
     </item>
     
