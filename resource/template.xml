@@ -5,14 +5,12 @@
     <link>{{ feed.link.replace('&', '&amp;') }}</link>
     {% for item in items %}
     <item>
+      <id>{{ item.id }}</id>
       <title>{{ item.title.replace('&', '&amp;') }}</title>
-      <link>{{ item.link.replace('&', '&amp;') }}</link>
-      <guid>{{ item.link.replace('&', '&amp;') }}</guid>
+      <link rel="alternate" href="{{ item.link.replace('&', '&amp;') }}" />
       <description>{{ item.summary.replace('&', '&amp;') }}</description>
       <pubDate>{{ item.published }}</pubDate>
-      {% if item.media_content %}
-      <media:content url="{{ item.media_content[0].url }}" type="{{ item.media_content[0].type }}" width="{{ item.media_content[0].width }}" height="{{ item.media_content[0].height }}" />
-      {% endif %}
+      <updated>{{ item.updated }}</updated>
       <content:encoded><![CDATA[
         {{ item.article }}
       ]]></content:encoded>

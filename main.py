@@ -11,7 +11,7 @@ from root import DOCS_DIR, RSS_HTML_TEMPLATE_PATH, RSS_TEMPLATE_PATH, absolute
 from src.AI.chatgpt import gpt_summary
 from src.const import FilterField, FilterType, HtmlItem, Item
 from src.filter import filter_entry
-from src.util import get_config, init_dirs, init_logger
+from src.util import get_config, init_dirs, init_logger, md5hash_6
 
 logger = logging.getLogger()
 
@@ -34,14 +34,15 @@ def get_feeds(rss):
 def _filter(rss, feed):
     filtered_items = []
     for item in feed.entries:
+        id_ = item.get("id", md5hash_6(item.get("link", md5hash_6(item.get("title", "没获取数据")))))
         data = {
+            "id": id_,
             "link": item.get("link", ""),
             "title": item.get("title", ""),
             "published": item.get("published", ""),
             "updated": item.get("updated", ""),
             "article": item.get("summary", "") if not item.get("media_content", None) else "",
-            "summary": "",
-            "media_content": item.get("media_content", None)
+            "summary": ""
         }
         item = Item(**data)
         need = True 

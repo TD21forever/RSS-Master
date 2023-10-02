@@ -36,6 +36,7 @@ class Item:
     summary:str
     article:str
     updated:str
+    id:str
     published:Optional[str] = ""
     media_content:Optional[Dict] = None
     
