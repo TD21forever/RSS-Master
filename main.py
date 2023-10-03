@@ -72,16 +72,20 @@ def _filter(rss, feed):
     return filtered_items
 
 def _use_ai(filtered_items:List[Item]):
+    cost = 0
     for item in filtered_items:
         key = md5hash_6(item.id)
         if cache.has(key):
             logger.info(f"{item.title}命中缓存")
             item.summary = cache.get(key)
             continue
-        summary = gpt_summary(item.article, "gpt-3.5-turbo", 400)
-        logger.info(f"AI总结: {summary}")
+        response = gpt_summary(item.article, "gpt-3.5-turbo", 400)
+        summary = response.get("summary", "")
         cache.set(key, summary)
         item.summary = summary
+        cost += response.get("price", 0)
+    if cost:
+        logger.info(f"AI 花费: {cost:.4f}")
 
 def _render_xml(feed, filtered_items):
     with open(RSS_TEMPLATE_PATH, "r") as f:
