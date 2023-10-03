@@ -45,14 +45,14 @@ def _filter(rss, feed):
     filtered_items = []
     for item in feed.entries:
         id_ = item.get("id", item.get("link", md5hash_6(item.get("title", "没获取数据"))))
+        article = item.get("summary", "") or item.get("description", "") or item.get("media_content", "") or ""
         data = {
             "id": id_,
             "guid": id_,
             "link": item.get("link", ""),
             "title": item.get("title", ""),
-            "published": item.get("published", ""),
             "updated": item.get("updated", ""),
-            "article": item.get("summary", "") if not item.get("media_content", None) else "",
+            "article": article,
             "media_thumbnail": item.get("media_thumbnail"),
             "media_content": item.get("media_content"),
             "summary": ""
@@ -79,7 +79,7 @@ def _use_ai(filtered_items:List[Item]):
             logger.info(f"{item.title}命中缓存")
             item.summary = cache.get(key)
             continue
-        response = gpt_summary(item.article, "gpt-3.5-turbo", 400)
+        response = gpt_summary(item.article, "gpt-3.5-turbo")
         summary = response.get("summary", "")
         cache.set(key, summary)
         item.summary = summary

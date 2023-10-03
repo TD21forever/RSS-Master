@@ -8,7 +8,7 @@ logger = logging.getLogger()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-def gpt_summary(query, model, summary_length):
+def gpt_summary(query, model):
     response = {
         "summary": "",
         "price": 0,
@@ -18,9 +18,22 @@ def gpt_summary(query, model, summary_length):
         logger.debug(f"Query Length: {len(query)}, Too Short, Return")
         return response
     query = query[:3000]
+    prompt = f"""
+        假设你是一位多语言的文字编辑工作者,有丰富的文字内容创作经验,对于<>括起来的文本,我需要你
+        
+        1. 生成4个关键词
+        2. 使用中文进行概括,要包含原文核心思想和概念,不增加自己的解释,不超过8句话
+
+        请使用一下格式:
+        关键词: <提取出来的关键词,使用逗号分割>
+        <br>
+        <br>
+        总结: <中文概括>
+        
+        Text: <{query}>
+    """
     messages = [
-            {"role": "user", "content": query},
-            {"role": "assistant", "content": f"You will firstly extract at most five keywords with Chinese and output them on the same line. Next, I want you to act as a text summarizer to help me create a concise Chinese summary of the text I provide with the format of starting with the words '<br><br>总结:' and the summary can be up to 8 sentences in length, expressing the key points and concepts written in the original text without adding your interpretations."}
+            {"role": "user", "content": prompt}
         ]
     chat = openai.ChatCompletion.create(
         model=model,
