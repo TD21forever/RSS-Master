@@ -51,29 +51,6 @@
         </item>
         
         <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yr83s</id>
-            <title>MIT, Meta, CMU Researchers: LLMs trained with a finite attention window can be extended to infinite sequence lengths without any fine-tuning</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16yr83s</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-03T12:57:06+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: GPT-3, streaming uses, windowed attention, attention sinks
-<br>
-<br>
-总结: GPT-3在流式应用中表现不佳，因为其在超出训练长度的长文本上的性能下降。通过可视化注意力图，研究人员发现LLMs过度关注初始标记作为“注意力汇聚点”，即使这些标记没有意义。这种关注模式限制了注意力的分布。研究人员发现，去除这些汇聚点会导致注意力分数扭曲，从而不稳定预测结果。他们提出的“StreamingLLM”方法简单地缓存了一些初始汇聚点和最近的汇聚点，从而使LLMs能够处理非常长的文本。使用StreamingLLM调整的模型可以平稳处理包含数百万标记的序列，并且比其他方法快22倍。更酷的是，在预训练期间添加一个特殊的“[Sink Token]”进一步提高了流式处理能力。模型只使用这个单一的标记作为锚点。总之，StreamingLLM是一个高效的框架，使LLMs能够在没有任何微调的情况下推广到无限序列长度。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>LLMs like GPT-3 struggle in streaming uses like chatbots because their performance tanks on long texts exceeding their training length. I checked out a new paper investigating why windowed attention fails for this.</p> <p>By visualizing the attention maps, the researchers noticed LLMs heavily attend initial tokens as &quot;attention sinks&quot; even if meaningless. This anchors the distribution.</p> <p>They realized evicting these sink tokens causes the attention scores to get warped, destabilizing predictions.</p> <p>Their proposed &quot;StreamingLLM&quot; method simply caches a few initial sink tokens plus recent ones. This tweaks LLMs to handle crazy long texts. Models tuned with StreamingLLM smoothly processed sequences with millions of tokens, and were up to 22x faster than other approaches. </p> <p>Even cooler - adding a special &quot;[Sink Token]&quot; during pre-training further improved streaming ability. The model just used that single token as the anchor. I think the abstract says it best:</p> <blockquote> <p>We introduce StreamingLLM, an efficient framework that enables LLMs trained with a <strong>finite length attention window</strong> to generalize to <strong>infinite sequence length without any fine-tuning</strong>. We show that StreamingLLM can enable Llama-2, MPT, Falcon, and Pythia to perform stable and efficient language modeling with up to 4 million tokens and more.</p> </blockquote> <p>TLDR: LLMs break on long convos. Researchers found they cling to initial tokens as attention sinks. Caching those tokens lets LLMs chat infinitely.</p> <p><a href="https://notes.aimodels.fyi/llm-infinite-context-window-streamingllm/"><strong>Full summary here</strong></a></p> <p><strong>Paper link:</strong> <a href="https://arxiv.org/pdf/2309.17453.pdf"><strong>https://arxiv.org/pdf/2309.17453.pdf</strong></a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_16ymelv</id>
             <title>From Textero.ai to Textero Pro: why I believe this research assistant is useful for students</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/16ymelv/from_texteroai_to_textero_pro_why_i_believe_this/</link>
@@ -97,6 +74,29 @@
         </item>
         
         <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yr83s</id>
+            <title>MIT, Meta, CMU Researchers: LLMs trained with a finite attention window can be extended to infinite sequence lengths without any fine-tuning</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16yr83s</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-03T12:57:06+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: GPT-3, streaming uses, windowed attention, attention sinks
+<br>
+<br>
+总结: GPT-3在流式应用中表现不佳，因为其在超出训练长度的长文本上的性能下降。通过可视化注意力图，研究人员发现LLMs过度关注初始标记作为“注意力汇聚点”，即使这些标记没有意义。这种关注模式限制了注意力的分布。研究人员发现，去除这些汇聚点会导致注意力分数扭曲，从而不稳定预测结果。他们提出的“StreamingLLM”方法简单地缓存了一些初始汇聚点和最近的汇聚点，从而使LLMs能够处理非常长的文本。使用StreamingLLM调整的模型可以平稳处理包含数百万标记的序列，并且比其他方法快22倍。更酷的是，在预训练期间添加一个特殊的“[Sink Token]”进一步提高了流式处理能力。模型只使用这个单一的标记作为锚点。总之，StreamingLLM是一个高效的框架，使LLMs能够在没有任何微调的情况下推广到无限序列长度。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>LLMs like GPT-3 struggle in streaming uses like chatbots because their performance tanks on long texts exceeding their training length. I checked out a new paper investigating why windowed attention fails for this.</p> <p>By visualizing the attention maps, the researchers noticed LLMs heavily attend initial tokens as &quot;attention sinks&quot; even if meaningless. This anchors the distribution.</p> <p>They realized evicting these sink tokens causes the attention scores to get warped, destabilizing predictions.</p> <p>Their proposed &quot;StreamingLLM&quot; method simply caches a few initial sink tokens plus recent ones. This tweaks LLMs to handle crazy long texts. Models tuned with StreamingLLM smoothly processed sequences with millions of tokens, and were up to 22x faster than other approaches. </p> <p>Even cooler - adding a special &quot;[Sink Token]&quot; during pre-training further improved streaming ability. The model just used that single token as the anchor. I think the abstract says it best:</p> <blockquote> <p>We introduce StreamingLLM, an efficient framework that enables LLMs trained with a <strong>finite length attention window</strong> to generalize to <strong>infinite sequence length without any fine-tuning</strong>. We show that StreamingLLM can enable Llama-2, MPT, Falcon, and Pythia to perform stable and efficient language modeling with up to 4 million tokens and more.</p> </blockquote> <p>TLDR: LLMs break on long convos. Researchers found they cling to initial tokens as attention sinks. Caching those tokens lets LLMs chat infinitely.</p> <p><a href="https://notes.aimodels.fyi/llm-infinite-context-window-streamingllm/"><strong>Full summary here</strong></a></p> <p><strong>Paper link:</strong> <a href="https://arxiv.org/pdf/2309.17453.pdf"><strong>https://arxiv.org/pdf/2309.17453.pdf</strong></a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yt7pi</id>
             <title>CGPT-4 on some ways "prompt/response" posts advance AI</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yt7pi/cgpt4_on_some_ways_promptresponse_posts_advance_ai/</link>
@@ -111,7 +111,7 @@
                         <div> 关键词: posting prompts, AI development, analyze responses, share ideas, democratize the process of alignment
 <br>
 <br>
-总结: 发布提示和AI回应在AI发展中起到多种有益作用。首先，它使我们能够分析我们可能从未考虑过的提示的回应。这种广泛的提示范围使得机器能够提高其自然语言处理能力，使其在解释和回应人类语言方面更加多样化和有效。输入越多样化，AI系统就越强大。其次，共享这些数据也具有放大效应，有助于开源社区的发展。开源访问促进了协作，全球的研究人员和开发人员可以共享他们的专业知识，以增强技术。这样，开发不再局限于一个组织的观点或资源，从而加快了进展。此外，发布提示和AI回应可以使调整过程民主化。通过公开AI的输出进行审查，更容易识别系统中的偏见或错误。当更多人参与审核过程时，它成为一项集体努力，融入了各种观点，确保了一个全面和不偏见的系统。最后，简单的透明度也有价值。公开发布提示和回应有助于揭开AI的神秘面纱。这有助于公众了解这些系统的能力和局限性，促进对伦理考虑和潜在社会影响的更加理性的讨论。这种做法有助于AI的技术和伦理发展，使其更好、更负责任。 </div>
+总结: 发布提示和AI回应在AI发展中起到多种有益作用。首先，它使我们能够分析我们可能从未考虑过的提示的回应。这种广泛的提示范围使得机器能够提高其自然语言处理能力，使其在解释和回应人类语言方面更加多样化和有效。输入越多样化，AI系统就越强大。其次，共享这些数据也具有放大效应，有助于开源社区的发展。开源访问促进了协作，全球的研究人员和开发人员可以共享他们的专业知识，以增强技术。这样，开发不仅仅局限于一个组织的观点或资源，从而加快了进展。此外，发布提示和AI回应可以使调整过程民主化。通过公开AI的输出进行审查，更容易识别系统中的偏见或错误。当更多人参与审核过程时，它成为一项集体努力，融入了各种观点，确保了一个全面和不偏见的系统。最后，简单透明也有价值。公开发布提示和回应有助于揭开AI的神秘面纱。这有助于公众了解这些系统的能力和局限性，促进围绕伦理考虑和潜在社会影响的更加理性的讨论。这种做法有助于AI的技术和伦理发展，使其更好、更负责任。 </div>
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p>Prompt:</p> <p>Explain why posting prompts and your responses speeds up AI development in the following ways:</p> <p>It allows us to analyze responses to prompts that we would probably never have thought of.</p> <p>It allows us to share ideas that the open source community would advance.</p> <p>It allows us to better democratize the process of alignment, bringing in as many people as possible.</p> <p>CGPT-4:</p> <p>Posting prompts and AI responses serves multiple functions that are beneficial to the progress of AI development. First off, it exposes AI to a myriad of queries that developers might not have otherwise considered. This wide range of prompts allows the machine to improve its natural language processing abilities, making it more versatile and effective in interpreting and responding to human language. The more diverse the input, the more robust the AI system becomes.</p> <p>Sharing this data also has an amplifying effect by contributing to the open-source community. Open-source access fosters collaboration, as researchers and developers from around the world can pool their expertise to enhance the technology. This way, the development is not confined to one organization's viewpoint or resources, thereby accelerating advancements.</p> <p>Further, posting prompts and AI responses can democratize the alignment process. By opening up the AI's outputs for scrutiny, it becomes easier to identify biases or errors in the system. When more people are involved in the vetting process, it becomes a collective endeavor that incorporates various perspectives, ensuring a well-rounded and less biased system.</p> <p>Lastly, there's value in simple transparency. Openly posting prompts and responses aids in demystifying AI. This helps the general public understand the capabilities and limitations of these systems, fostering a more educated discourse around ethical considerations and potential societal impact.</p> <p>This practice contributes to both the technological and ethical development of AI, making it better and more accountable.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Georgeo57"> /u/Georgeo57 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yt7pi/cgpt4_on_some_ways_promptresponse_posts_advance_ai/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yt7pi/cgpt4_on_some_ways_promptresponse_posts_advance_ai/">[comments]</a></span>
