@@ -15,7 +15,7 @@ Inoreader自带有过滤器，但仅仅为这个功能买单感觉有点不划�
 
 我在[RSS-GPT](https://github.com/yinan-c/)的思路上做了扩展，叫做RSS-Master，它有如下特点
 
-- 支持opml文件和config文件的相互转换：`script/convert_opml_to_yaml.sh` `script/convert_yaml_to_opml.sh`
+- 支持opml文件的生成,以及和config.yml的相互转换：`script/convert_opml_to_yaml.sh` `script/convert_yaml_to_opml.sh`
 
 - 支持自定义筛选规则：目前支持include、exclude两种类型，title和article两种作用域
 
@@ -36,10 +36,11 @@ Inoreader自带有过滤器，但仅仅为这个功能买单感觉有点不划�
 
 - AI概括、摘要功能
 
-<img src="https://qiniu.dcts.top/typora/202310031757486.png" alt="image-20231003174334231" style="zoom:50%;" />
-
-<img src="https://qiniu.dcts.top/typora/202310031757686.png" alt="image-20231003175143405" style="zoom:50%;" />
+<div style="display: flex;">
+    <img src="https://qiniu.dcts.top/typora/202310031757486.png" alt="image-20231003174334231" style="width: 50%;">
+    <img src="https://qiniu.dcts.top/typora/202310031757686.png" alt="image-20231003175143405" style="width: 50%;">
+</div>
 
 - 自定义筛选：过滤「什么值得买」的好价频道，只推荐近期想屯的货，如汽水
 
-<img src="https://qiniu.dcts.top/typora/%E4%BB%80%E4%B9%88%E5%80%BC%E5%BE%97%E4%B9%B0-%E6%B1%BD%E6%B0%B4.png" alt="image-20231003164248923" style="zoom: 50%;" />
+<img src="https://qiniu.dcts.top/typora/%E4%BB%80%E4%B9%88%E5%80%BC%E5%BE%97%E4%B9%B0-%E6%B1%BD%E6%B0%B4.png" alt="image-20231003164248923" style="zoom: 25%;" />
