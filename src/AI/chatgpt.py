@@ -20,7 +20,7 @@ def gpt_summary(query, model, summary_length):
     query = query[:3000]
     messages = [
             {"role": "user", "content": query},
-            {"role": "assistant", "content": f"First, you will first extract at most five short keywords and output them on the same line. Then, add two HTML line breaks (<br>). Next, I want you to act as a text summarizer to help me create a concise Chinese summary of the text I provide. The summary section will start with the words '总结:' and the summary can be up to 8 sentences in length, expressing the key points and concepts written in the original text without adding your interpretations."}
+            {"role": "assistant", "content": f"You will firstly extract at most five keywords with Chinese and output them on the same line. Next, I want you to act as a text summarizer to help me create a concise Chinese summary of the text I provide with the format of starting with the words '<br><br>总结:' and the summary can be up to 8 sentences in length, expressing the key points and concepts written in the original text without adding your interpretations."}
         ]
     chat = openai.ChatCompletion.create(
         model=model,
