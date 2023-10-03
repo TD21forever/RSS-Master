@@ -40,11 +40,8 @@ jobs:
           if [[ -z $changes ]]; then
             echo "No changes to commit. Exiting..."
             exit 0
+          else
+            git add .
+            git commit -m "Sync docs from main repository"
+            git push origin source
           fi
-
-      - name: Commit and push changes to gh repository
-        run: |
-          cd gh
-          git add .
-          git commit -m "Sync docs from main repository"
-          git push origin source
