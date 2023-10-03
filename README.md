@@ -13,7 +13,7 @@ Inoreader自带有过滤器，但仅仅为这个功能买单感觉有点不划�
 
 这两个项目的总体思路都是通过GitAction去执行一个脚本，获取信息后使用Open AI的API进行翻译、总结，然后渲染成模板，部署到GitHub Page上。RSS-GPT中的方式会更加满足我的需求，通过定时执行脚本直接获取RSS的xml文件，处理后把xml部署到GitHub Page上后，就可以得到这个xml文件的访问链接，最后让阅读器直接订阅这个链接即可。
 
-我在[RSS-GPT](https://github.com/yinan-c/)的思路上做了扩展，叫做RSS-Master，它有如下特点
+我对Inoreader的多端同步有强需求,对于在config配置文件中新增的RSS源,需要及时通知到Inoreader去同步,于是我在[RSS-GPT](https://github.com/yinan-c/)的思路上做了扩展，叫做RSS-Master，它有如下特点
 
 - 支持opml文件的生成,以及和config.yml的相互转换：`script/convert_opml_to_yaml.sh` `script/convert_yaml_to_opml.sh`
 
