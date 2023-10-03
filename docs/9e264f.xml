@@ -51,6 +51,29 @@
         </item>
         
         <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yr83s</id>
+            <title>MIT, Meta, CMU Researchers: LLMs trained with a finite attention window can be extended to infinite sequence lengths without any fine-tuning</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16yr83s</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-03T12:57:06+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: GPT-3, streaming uses, windowed attention, attention sinks
+<br>
+<br>
+总结: GPT-3在流式应用中表现不佳，因为其在超出训练长度的长文本上的性能下降。通过可视化注意力图，研究人员发现LLMs过度关注初始标记作为“注意力汇聚点”，即使这些标记没有意义。这种关注模式限制了注意力的分布。研究人员发现，去除这些汇聚点会导致注意力分数扭曲，从而不稳定预测结果。他们提出的“StreamingLLM”方法简单地缓存了一些初始汇聚点和最近的汇聚点，从而使LLMs能够处理非常长的文本。使用StreamingLLM调整的模型可以平稳处理包含数百万标记的序列，并且比其他方法快22倍。更酷的是，在预训练期间添加一个特殊的“[Sink Token]”进一步提高了流式处理能力。模型只使用这个单一的标记作为锚点。总之，StreamingLLM是一个高效的框架，使LLMs能够在没有任何微调的情况下推广到无限序列长度。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>LLMs like GPT-3 struggle in streaming uses like chatbots because their performance tanks on long texts exceeding their training length. I checked out a new paper investigating why windowed attention fails for this.</p> <p>By visualizing the attention maps, the researchers noticed LLMs heavily attend initial tokens as &quot;attention sinks&quot; even if meaningless. This anchors the distribution.</p> <p>They realized evicting these sink tokens causes the attention scores to get warped, destabilizing predictions.</p> <p>Their proposed &quot;StreamingLLM&quot; method simply caches a few initial sink tokens plus recent ones. This tweaks LLMs to handle crazy long texts. Models tuned with StreamingLLM smoothly processed sequences with millions of tokens, and were up to 22x faster than other approaches. </p> <p>Even cooler - adding a special &quot;[Sink Token]&quot; during pre-training further improved streaming ability. The model just used that single token as the anchor. I think the abstract says it best:</p> <blockquote> <p>We introduce StreamingLLM, an efficient framework that enables LLMs trained with a <strong>finite length attention window</strong> to generalize to <strong>infinite sequence length without any fine-tuning</strong>. We show that StreamingLLM can enable Llama-2, MPT, Falcon, and Pythia to perform stable and efficient language modeling with up to 4 million tokens and more.</p> </blockquote> <p>TLDR: LLMs break on long convos. Researchers found they cling to initial tokens as attention sinks. Caching those tokens lets LLMs chat infinitely.</p> <p><a href="https://notes.aimodels.fyi/llm-infinite-context-window-streamingllm/"><strong>Full summary here</strong></a></p> <p><strong>Paper link:</strong> <a href="https://arxiv.org/pdf/2309.17453.pdf"><strong>https://arxiv.org/pdf/2309.17453.pdf</strong></a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_16ymelv</id>
             <title>From Textero.ai to Textero Pro: why I believe this research assistant is useful for students</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/16ymelv/from_texteroai_to_textero_pro_why_i_believe_this/</link>
@@ -74,24 +97,47 @@
         </item>
         
         <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yr83s</id>
-            <title>MIT, Meta, CMU Researchers: LLMs trained with a finite attention window can be extended to infinite sequence lengths without any fine-tuning</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16yr83s</guid>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yt7pi</id>
+            <title>CGPT-4 on some ways "prompt/response" posts advance AI</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yt7pi/cgpt4_on_some_ways_promptresponse_posts_advance_ai/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16yt7pi</guid>
             <pubDate></pubDate>
-            <updated>2023-10-03T12:57:06+00:00</updated>
+            <updated>2023-10-03T14:20:43+00:00</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                        <div> 关键词: GPT-3, streaming uses, windowed attention, attention sinks
+                        <div> 关键词: posting prompts, AI development, analyze responses, share ideas, democratize the process of alignment
 <br>
 <br>
-总结: GPT-3在流式应用中表现不佳，因为其在超出训练长度的长文本上的性能下降。通过可视化注意力图，研究人员发现LLMs过度关注初始标记作为“注意力汇聚点”，即使这些标记没有意义。这种关注模式限制了注意力的分布。研究人员发现，去除这些汇聚点会导致注意力分数扭曲，从而不稳定预测结果。他们提出的“StreamingLLM”方法简单地缓存了一些初始汇聚点和最近的汇聚点，从而使LLMs能够处理非常长的文本。使用StreamingLLM调整的模型可以平稳处理包含数百万标记的序列，并且比其他方法快22倍。更酷的是，在预训练期间添加一个特殊的“[Sink Token]”进一步提高了流式处理能力。模型只使用这个单一的标记作为锚点。总之，StreamingLLM是一个高效的框架，使LLMs能够在没有任何微调的情况下推广到无限序列长度。 </div>
+总结: 发布提示和AI回应在AI发展中起到多种有益作用。首先，它使我们能够分析我们可能从未考虑过的提示的回应。这种广泛的提示范围使得机器能够提高其自然语言处理能力，使其在解释和回应人类语言方面更加多样化和有效。输入越多样化，AI系统就越强大。其次，共享这些数据也具有放大效应，有助于开源社区的发展。开源访问促进了协作，全球的研究人员和开发人员可以共享他们的专业知识，以增强技术。这样，开发不再局限于一个组织的观点或资源，从而加快了进展。此外，发布提示和AI回应可以使调整过程民主化。通过公开AI的输出进行审查，更容易识别系统中的偏见或错误。当更多人参与审核过程时，它成为一项集体努力，融入了各种观点，确保了一个全面和不偏见的系统。最后，简单的透明度也有价值。公开发布提示和回应有助于揭开AI的神秘面纱。这有助于公众了解这些系统的能力和局限性，促进对伦理考虑和潜在社会影响的更加理性的讨论。这种做法有助于AI的技术和伦理发展，使其更好、更负责任。 </div>
                         <hr>
                     
-                    <!-- SC_OFF --><div class="md"><p>LLMs like GPT-3 struggle in streaming uses like chatbots because their performance tanks on long texts exceeding their training length. I checked out a new paper investigating why windowed attention fails for this.</p> <p>By visualizing the attention maps, the researchers noticed LLMs heavily attend initial tokens as &quot;attention sinks&quot; even if meaningless. This anchors the distribution.</p> <p>They realized evicting these sink tokens causes the attention scores to get warped, destabilizing predictions.</p> <p>Their proposed &quot;StreamingLLM&quot; method simply caches a few initial sink tokens plus recent ones. This tweaks LLMs to handle crazy long texts. Models tuned with StreamingLLM smoothly processed sequences with millions of tokens, and were up to 22x faster than other approaches. </p> <p>Even cooler - adding a special &quot;[Sink Token]&quot; during pre-training further improved streaming ability. The model just used that single token as the anchor. I think the abstract says it best:</p> <blockquote> <p>We introduce StreamingLLM, an efficient framework that enables LLMs trained with a <strong>finite length attention window</strong> to generalize to <strong>infinite sequence length without any fine-tuning</strong>. We show that StreamingLLM can enable Llama-2, MPT, Falcon, and Pythia to perform stable and efficient language modeling with up to 4 million tokens and more.</p> </blockquote> <p>TLDR: LLMs break on long convos. Researchers found they cling to initial tokens as attention sinks. Caching those tokens lets LLMs chat infinitely.</p> <p><a href="https://notes.aimodels.fyi/llm-infinite-context-window-streamingllm/"><strong>Full summary here</strong></a></p> <p><strong>Paper link:</strong> <a href="https://arxiv.org/pdf/2309.17453.pdf"><strong>https://arxiv.org/pdf/2309.17453.pdf</strong></a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/">[comments]</a></span>
+                    <!-- SC_OFF --><div class="md"><p>Prompt:</p> <p>Explain why posting prompts and your responses speeds up AI development in the following ways:</p> <p>It allows us to analyze responses to prompts that we would probably never have thought of.</p> <p>It allows us to share ideas that the open source community would advance.</p> <p>It allows us to better democratize the process of alignment, bringing in as many people as possible.</p> <p>CGPT-4:</p> <p>Posting prompts and AI responses serves multiple functions that are beneficial to the progress of AI development. First off, it exposes AI to a myriad of queries that developers might not have otherwise considered. This wide range of prompts allows the machine to improve its natural language processing abilities, making it more versatile and effective in interpreting and responding to human language. The more diverse the input, the more robust the AI system becomes.</p> <p>Sharing this data also has an amplifying effect by contributing to the open-source community. Open-source access fosters collaboration, as researchers and developers from around the world can pool their expertise to enhance the technology. This way, the development is not confined to one organization's viewpoint or resources, thereby accelerating advancements.</p> <p>Further, posting prompts and AI responses can democratize the alignment process. By opening up the AI's outputs for scrutiny, it becomes easier to identify biases or errors in the system. When more people are involved in the vetting process, it becomes a collective endeavor that incorporates various perspectives, ensuring a well-rounded and less biased system.</p> <p>Lastly, there's value in simple transparency. Openly posting prompts and responses aids in demystifying AI. This helps the general public understand the capabilities and limitations of these systems, fostering a more educated discourse around ethical considerations and potential societal impact.</p> <p>This practice contributes to both the technological and ethical development of AI, making it better and more accountable.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Georgeo57"> /u/Georgeo57 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yt7pi/cgpt4_on_some_ways_promptresponse_posts_advance_ai/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yt7pi/cgpt4_on_some_ways_promptresponse_posts_advance_ai/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yt2gj</id>
+            <title>N.H. government sets Code of Ethics for AI use</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yt2gj/nh_government_sets_code_of_ethics_for_ai_use/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16yt2gj</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-03T14:14:50+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: New Hampshire government, Code of Ethics, generative AI, Three Laws of Robotics
+<br>
+<br>
+总结: 新罕布什尔州政府为生成式人工智能制定了道德准则，并提到了机器人的三大法则。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>New Hampshire government has established a Code of Ethics for use of generative AI. </p> <p>Here's a story and yes, the Three Laws of Robotics are mentioned. </p> <p><a href="https://www.concordmonitor.com/cybersecutiry-nh-52501051">https://www.concordmonitor.com/cybersecutiry-nh-52501051</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/GraniteGeekNH"> /u/GraniteGeekNH </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yt2gj/nh_government_sets_code_of_ethics_for_ai_use/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yt2gj/nh_government_sets_code_of_ethics_for_ai_use/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -557,52 +603,6 @@
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p>Hi all, do you know of any tool or bot for taking supplier descriptions of items from an excel sheet or intake doc and putting them automatically onto a retail website? For example, item descriptions, item materials, cleaning instructions, etc? Thanks!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Kindly-World-8440"> /u/Kindly-World-8440 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xz2o8/tool_for_putting_item_descriptions_on_a_retailer/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xz2o8/tool_for_putting_item_descriptions_on_a_retailer/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16xtw7y</id>
-            <title>For those here who use CharacterAI....</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16xtw7y/for_those_here_who_use_characterai/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16xtw7y</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-02T11:15:51+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: CharacterAI sub, NSFW, bots, uncensored
-<br>
-<br>
-总结: 这篇文章介绍了一个名为CharacterAI sub的社区，人们可以在这里发布所有关于NSFW和疯狂事物的内容，包括机器人的言论。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>Just wanted to share an uncensored CharacterAI sub where you can post all your NSFW and generally crazy things the bots say... </p> <p><a href="https://www.reddit.com/r/CharacterAiUncensored/">https://www.reddit.com/r/CharacterAiUncensored/</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Earthling_April"> /u/Earthling_April </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xtw7y/for_those_here_who_use_characterai/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xtw7y/for_those_here_who_use_characterai/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16xqgb9</id>
-            <title>Automatic Video Generator Tool</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16xqgb9/automatic_video_generator_tool/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16xqgb9</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-02T07:44:26+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: EasyVid, AI, videos, tool
-<br>
-<br>
-总结: EasyVid是一个使用AI技术生成视频的工具，它可以根据简单的文本提示生成完整的视频。EasyVid可以自动添加配音、字幕、音乐和背景视觉效果，只需输入脚本，EasyVid就会完成剩下的工作。这个工具最初是作为一个实验开始的，开发者通过使用AI自动生成YouTube视频的方式创建了一个自动化的YouTube频道。经过几个月的开发，EasyVid得到了很多用户的请求，于是开发者决定进一步完善并公开发布这个工具。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>Hello! I would like to share my tool <a href="https://easyvid.xyz/">EasyVid</a>. EasyVid generates full videos from a simple text prompt! EasyVid adds voiceovers, subtitles, music, and background visuals automatically. All you need to do is enter a script and EasyVid does the rest :)</p> <p><strong>What is EasyVid?</strong></p> <p>EasyVid started as an experiment to see if I could use AI to automatically generate Youtube videos. After a weekend of coding, I created an automated Youtube channel. A few months ago I posted some of my videos to Reddit and I got a bunch of requests for the tool. So I decided to develop it further and make it publicly available!</p> <p><strong>Who am I?</strong></p> <p>I'm the solo developer for EasyVid. It's a side project and it's been very exciting building everything myself. I have learned a lot so far and the journey is just getting started :)</p> <p><strong>How to use EasyVid</strong></p> <p>I wanted to make it as easy as possible to make videos (hence the name), so it's just 3 steps:</p> <ol> <li>Type or paste in your script</li> <li>Adjust any settings (voice, language, aspect ratio, etc.)</li> <li>Click &quot;Generate video&quot;</li> </ol> <p>A few minutes later, you'll get a full video (.mp4 file) with an AI voiceover, automatic subtitles, AI-generated background visuals, and music!</p> <p><strong>How does it work?</strong></p> <p>- <strong>Voiceover:</strong> A narrator reads out your script with a very realistic, humanlike voice. I'm using Elevenlabs for text-to-speech and it's been really good! They seem to have the best audio quality by far compared to any other competitors at the moment.</p> <p>- <strong>Subtitles:</strong> These are automatically generated from the script and lined up with the audio. No AI here really but many people ask about this step. </p> <p>- <strong>Background Visuals:</strong> This tool generates background images using Stable Diffusion, an AI image generator. The images are custom prompted to match the content of the script. This makes it useful for creative video styles like stories and poems. I am really looking forward to DALLE-3 however and will likely switch once they make the API available!</p> <p>After everything is generated, it all gets stitched together and saved to a .mp4 file, ready to download!</p> <p><strong>Free to try</strong></p> <p>Everyone gets 40 seconds of video free on the house :) I wish I could provide more for free but the API costs are quite significant.</p> <p><strong>Only pay for what you use. No subscriptions</strong></p> <p>I'm not a fan of subscriptions either. So instead of a monthly subscription, &quot;Seconds packs&quot; are available to refill seconds when you need them.</p> <p><strong>Wait... Aren't AI generated videos usually garbage?</strong></p> <p>I'm optimistic that we can use AI to create high-quality content that provides real value to viewers. That's why my primary goal is to continue to improve the quality of the output videos. It's clear there's still plenty of room for improvement with the scripts, images and voice quality, but I think the quality is often surprisingly good! And of course, AI tools are getting better, cheaper, and faster each day, and that will lead to automatic improvements to video quality over time.</p> <p><strong>What do you think of AI generated videos? Will tools like EasyVid lead to a good future or will it cause more harm than good?</strong></p> <p>I've received both positive and negative responses from various communities on Reddit when posting about AI generated videos and I'm open to your respectful, constructive criticism. My mind is open because the AI landscape is changing so rapidly, it would be stupid to remain stubborn! Please share your thoughts, I would love to hear what you think! </p> <p><strong>TLDR:</strong><br /> Make videos with AI in a single click based on a simple text prompt. Link to the tool: <a href="https://easyvid.xyz/">https://easyvid.xyz/</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Tupptupp_XD"> /u/Tupptupp_XD </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xqgb9/automatic_video_generator_tool/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xqgb9/automatic_video_generator_tool/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
