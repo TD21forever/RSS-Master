@@ -45,7 +45,10 @@ def _filter(rss, feed):
     filtered_items = []
     for item in feed.entries:
         id_ = item.get("id", item.get("link", md5hash_6(item.get("title", "没获取数据"))))
-        article = item.get("summary", "") or item.get("description", "") or item.get("media_content", "") or ""
+        if item.get("media_content", ""):
+            article = ""
+        else:
+            article = item.get("summary", "") or item.get("description", "") or ""
         data = {
             "id": id_,
             "guid": id_,

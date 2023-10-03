@@ -74,6 +74,29 @@
         </item>
         
         <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yr83s</id>
+            <title>MIT, Meta, CMU Researchers: LLMs trained with a finite attention window can be extended to infinite sequence lengths without any fine-tuning</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16yr83s</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-03T12:57:06+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: GPT-3, streaming uses, windowed attention, attention sinks
+<br>
+<br>
+总结: GPT-3在流式应用中表现不佳，因为其在超出训练长度的长文本上的性能下降。通过可视化注意力图，研究人员发现LLMs过度关注初始标记作为“注意力汇聚点”，即使这些标记没有意义。这种关注模式限制了注意力的分布。研究人员发现，去除这些汇聚点会导致注意力分数扭曲，从而不稳定预测结果。他们提出的“StreamingLLM”方法简单地缓存了一些初始汇聚点和最近的汇聚点，从而使LLMs能够处理非常长的文本。使用StreamingLLM调整的模型可以平稳处理包含数百万标记的序列，并且比其他方法快22倍。更酷的是，在预训练期间添加一个特殊的“[Sink Token]”进一步提高了流式处理能力。模型只使用这个单一的标记作为锚点。总之，StreamingLLM是一个高效的框架，使LLMs能够在没有任何微调的情况下推广到无限序列长度。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>LLMs like GPT-3 struggle in streaming uses like chatbots because their performance tanks on long texts exceeding their training length. I checked out a new paper investigating why windowed attention fails for this.</p> <p>By visualizing the attention maps, the researchers noticed LLMs heavily attend initial tokens as &quot;attention sinks&quot; even if meaningless. This anchors the distribution.</p> <p>They realized evicting these sink tokens causes the attention scores to get warped, destabilizing predictions.</p> <p>Their proposed &quot;StreamingLLM&quot; method simply caches a few initial sink tokens plus recent ones. This tweaks LLMs to handle crazy long texts. Models tuned with StreamingLLM smoothly processed sequences with millions of tokens, and were up to 22x faster than other approaches. </p> <p>Even cooler - adding a special &quot;[Sink Token]&quot; during pre-training further improved streaming ability. The model just used that single token as the anchor. I think the abstract says it best:</p> <blockquote> <p>We introduce StreamingLLM, an efficient framework that enables LLMs trained with a <strong>finite length attention window</strong> to generalize to <strong>infinite sequence length without any fine-tuning</strong>. We show that StreamingLLM can enable Llama-2, MPT, Falcon, and Pythia to perform stable and efficient language modeling with up to 4 million tokens and more.</p> </blockquote> <p>TLDR: LLMs break on long convos. Researchers found they cling to initial tokens as attention sinks. Caching those tokens lets LLMs chat infinitely.</p> <p><a href="https://notes.aimodels.fyi/llm-infinite-context-window-streamingllm/"><strong>Full summary here</strong></a></p> <p><strong>Paper link:</strong> <a href="https://arxiv.org/pdf/2309.17453.pdf"><strong>https://arxiv.org/pdf/2309.17453.pdf</strong></a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yr83s/mit_meta_cmu_researchers_llms_trained_with_a/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yltsr</id>
             <title>Just curious is it possible to make like a live ai music visualizer</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yltsr/just_curious_is_it_possible_to_make_like_a_live/</link>
@@ -120,6 +143,46 @@
         </item>
         
         <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16ymo64</id>
+            <title>*TRUE* AI Personal Assistant implementation</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16ymo64/true_ai_personal_assistant_implementation/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16ymo64</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-03T08:55:52+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: AI assistants, daily routines, personal information, plans
+<br>
+<br>
+总结: 未来将会有全面的AI助手，它们将了解你的日常习惯、个人信息和计划。然而，我们对于这些实现方式以及可能出现的问题感到好奇。大型公司如微软可能会率先推出这些助手，这令人有些担忧。开发强大的AI需要大量的计算资源，尽管会有不断的进展，但仍需要大量的资源。我希望能够在自己的手机上或租用的在线服务器上运行AI。你认为未来什么样的设置既可行又安全？ </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>Continuing this <a href="https://www.reddit.com/r/ArtificialInteligence/comments/16y0ubu/how_long_until_we_have_true_ai_personal_assistants/">topic</a>. </p> <p>I believe that full-setup AI assistants, which have knowledge of your daily routines, personal information, and plans, will be available in the near future. However, I am curious about how these implementations will look and what potential concerns may arise. It seems likely that larger companies such as Microsoft will be the first to introduce these assistants, which is somewhat worrisome. Developing a robust AI requires significant computing power, and while advancements will undoubtedly occur, it will still require substantial resources. </p> <p>What I'd love to see is an AI running on my own phone or on my own rented online server instance. </p> <p>What do you think will be a feasible and secure setup for the future?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/danttf"> /u/danttf </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16ymo64/true_ai_personal_assistant_implementation/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16ymo64/true_ai_personal_assistant_implementation/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yqiqy</id>
+            <title>Meet your new travel friend</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yqiqy/meet_your_new_travel_friend/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16yqiqy</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-03T12:24:47+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    &#32; submitted by &#32; <a href="https://www.reddit.com/user/theweekinai"> /u/theweekinai </a> <br /> <span><a href="https://www.reddit.com/r/ChatGPT/comments/16yjfyq/meet_your_new_travel_friend/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yqiqy/meet_your_new_travel_friend/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_16y0ubu</id>
             <title>How Long Until We Have *TRUE* AI Personal Assistants?</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/16y0ubu/how_long_until_we_have_true_ai_personal_assistants/</link>
@@ -143,24 +206,24 @@
         </item>
         
         <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yk1f9</id>
-            <title>Are there 'Non-Technical' jobs in AI/ML field ?</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yk1f9/are_there_nontechnical_jobs_in_aiml_field/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16yk1f9</guid>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yplhg</id>
+            <title>What AI photo generation tool can I use for this?</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yplhg/what_ai_photo_generation_tool_can_i_use_for_this/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16yplhg</guid>
             <pubDate></pubDate>
-            <updated>2023-10-03T06:01:13+00:00</updated>
+            <updated>2023-10-03T11:40:01+00:00</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                        <div> 关键词: tech industry, non-tech roles, AI/ML, coding
+                        <div> 关键词: AI photo generation tool, art style, recreate, photo
 <br>
 <br>
-总结: 这篇文章讨论了一个在科技行业工作超过15年的人的问题，他想知道在人工智能/机器学习领域是否存在非技术角色。文章提到作者曾经从事编码工作，但现在担任高级职位。 </div>
+总结: 有没有一种AI照片生成工具，我可以将某种风格的艺术作品输入其中，然后给它一张我的照片，并要求它以这种风格重新创作出来？谢谢。 </div>
                         <hr>
                     
-                    <!-- SC_OFF --><div class="md"><p>Been in tech industry for over 15yrs. Working in a Sr role now (used to code 10yrs back)</p> <h4>Are there any non-tech roles in AI/ML ?</h4> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/uselessadjective"> /u/uselessadjective </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yk1f9/are_there_nontechnical_jobs_in_aiml_field/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yk1f9/are_there_nontechnical_jobs_in_aiml_field/">[comments]</a></span>
+                    <!-- SC_OFF --><div class="md"><p>Is there an AI photo generation tool I can feed art of a certain style, then give them one of my photos and ask it to recreate it in the style? Thanks</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/maxhasabigbooty"> /u/maxhasabigbooty </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yplhg/what_ai_photo_generation_tool_can_i_use_for_this/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yplhg/what_ai_photo_generation_tool_can_i_use_for_this/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -177,36 +240,13 @@
             <content:encoded>
                 <![CDATA[
                     
-                        <div> 关键词: Music, AI platforms, imagination, existing knowledge
+                        <div> 关键词: Music, AI platforms, imagination, existing knowledge, new combinations/concoctions, images, storyboard, video
 <br>
 <br>
-总结: 这篇文章讨论了作者使用AI平台创作音乐视频的经历。作者认为想象力并不是创造全新的东西，而是利用现有的知识创造新的组合和混合，AI平台通过深入访问现有知识并进行推断，以一种全新的方式实现了这一点。作者花费了很多时间生成能够代表自己目标的图像，并将其制作成视频。这个过程中，作者使用了Final Cut进行剪辑，以更好地配合音乐。整个过程令人惊叹。 </div>
+总结: 这篇文章讨论了作者使用AI平台创作音乐和视频的经历。作者认为想象力并不是创造全新的东西，而是利用现有的知识创造新的组合和混合，AI平台通过深入访问现有知识并进行推断，以一种全新的方式实现了这一点。作者花费了很多时间生成代表自己目标的图像，并将其制作成故事板，然后生成视频。这个过程让作者感到非常兴奋和惊奇。 </div>
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p><a href="https://youtu.be/zQ69H_cmTY8?si=9ScJv9cyTnzFblyN">[Video]</a></p> <p>Music was written and performed by myself - the Al platform used was Kalber Al. </p> <p>It has been really interesting to get creative with AI platforms like this and Midjourney etc. I always said that ‘imagination is not creating something entirely novel, it’s just utilising existing knowledge to create new combinations/concoctions, using things we already can imagine’, and this is exactly what AI does on a whole different level because of the extremely deep access it has to existing knowledge, and the ability to extrapolate it.</p> <p>For the video, I spent hours generating images that I felt represented what I was aiming for. Once images were generated in a storyboard, video was generated. I then cut and edited this somewhat in final cut to fit the music better. But nonetheless it is wild to see.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/FazRazza"> /u/FazRazza </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16ymtj2/i_made_a_music_video_using_ai_and_final_cut_pro_x/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16ymtj2/i_made_a_music_video_using_ai_and_final_cut_pro_x/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16ymo64</id>
-            <title>*TRUE* AI Personal Assistant implementation</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16ymo64/true_ai_personal_assistant_implementation/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16ymo64</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-03T08:55:52+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: AI assistants, daily routines, personal information, plans
-<br>
-<br>
-总结: 未来将会有全面的AI助手，它们将了解你的日常习惯、个人信息和计划。然而，我们对于这些实现方式以及可能出现的问题感到好奇。大型公司如微软可能会率先推出这些助手，这令人有些担忧。开发强大的AI需要大量的计算资源，尽管会有不断的进展，但仍需要大量的资源。我希望能够在自己的手机上或租用的在线服务器上运行AI。你认为未来什么样的设置既可行又安全呢？ </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>Continuing this <a href="https://www.reddit.com/r/ArtificialInteligence/comments/16y0ubu/how_long_until_we_have_true_ai_personal_assistants/">topic</a>. </p> <p>I believe that full-setup AI assistants, which have knowledge of your daily routines, personal information, and plans, will be available in the near future. However, I am curious about how these implementations will look and what potential concerns may arise. It seems likely that larger companies such as Microsoft will be the first to introduce these assistants, which is somewhat worrisome. Developing a robust AI requires significant computing power, and while advancements will undoubtedly occur, it will still require substantial resources. </p> <p>What I'd love to see is an AI running on my own phone or on my own rented online server instance. </p> <p>What do you think will be a feasible and secure setup for the future?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/danttf"> /u/danttf </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16ymo64/true_ai_personal_assistant_implementation/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16ymo64/true_ai_personal_assistant_implementation/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -258,6 +298,29 @@
         </item>
         
         <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16yk1f9</id>
+            <title>Are there 'Non-Technical' jobs in AI/ML field ?</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16yk1f9/are_there_nontechnical_jobs_in_aiml_field/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16yk1f9</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-03T06:01:13+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: tech industry, non-tech roles, AI/ML, coding
+<br>
+<br>
+总结: 这篇文章讨论了一个在科技行业工作超过15年的人的问题，他想知道在人工智能/机器学习领域是否存在非技术角色。文章提到作者曾经从事编码工作，但现在担任高级职位。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>Been in tech industry for over 15yrs. Working in a Sr role now (used to code 10yrs back)</p> <h4>Are there any non-tech roles in AI/ML ?</h4> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/uselessadjective"> /u/uselessadjective </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yk1f9/are_there_nontechnical_jobs_in_aiml_field/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16yk1f9/are_there_nontechnical_jobs_in_aiml_field/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_16xxgrr</id>
             <title>What’s stopping someone to deploy a rogue AI</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/16xxgrr/whats_stopping_someone_to_deploy_a_rogue_ai/</link>
@@ -304,6 +367,29 @@
         </item>
         
         <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16y76l3</id>
+            <title>According to Amnon Shushua, LLMs lack the ability to reason</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16y76l3/according_to_amnon_shushua_llms_lack_the_ability/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16y76l3</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-02T20:19:52+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Amnon Shashua, LLMs, reasoning, abstraction
+<br>
+<br>
+总结: Amnon Shashua教授表示，LLMs具有推理能力，但缺乏抽象能力。一些新技术可以赋予人工智能抽象能力，但这可能在明天、50年后或更晚出现。没有这种能力，LLMs将永远无法具备普遍智能。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p><a href="https://youtu.be/OiN9Jz27NKE?si=0fRPeZ7rmgcGZXXQ&amp;t=1013">https://youtu.be/OiN9Jz27NKE?si=0fRPeZ7rmgcGZXXQ&amp;t=1013</a></p> <p>Amnon Shashua, Professor of Computer Science, says that LLMs have the ability to reason but lack the ability to abstract. Some new tech that gives A.I.s the ability to abstract could come tomorrow, in 50 years, or later. Without this ability LLMs will never be generally intelligent.<br /> 17 minutes into the video if you want the gist.</p> <p>My personal take: LLMs have shown some ability to generalize when is a form of abstraction.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/danielcar"> /u/danielcar </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16y76l3/according_to_amnon_shushua_llms_lack_the_ability/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16y76l3/according_to_amnon_shushua_llms_lack_the_ability/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_16xwbex</id>
             <title>Two-minute Daily AI Update (Date: 10/02/2023): News from Apple, Humane, OpenAI, Google Pixel, Google Bard, Wikipedia and Walmart</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/16xwbex/twominute_daily_ai_update_date_10022023_news_from/</link>
@@ -339,29 +425,6 @@
                 <![CDATA[
                     
                     &#32; submitted by &#32; <a href="https://www.reddit.com/user/enoumen"> /u/enoumen </a> <br /> <span><a href="https://www.reddit.com/r/u_enoumen/comments/16y609t/ai_revolution_in_october_2023_the_latest/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16y60yy/ai_revolution_in_october_2023_the_latest/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16y76l3</id>
-            <title>According to Amnon Shushua, LLMs lack the ability to reason</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16y76l3/according_to_amnon_shushua_llms_lack_the_ability/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16y76l3</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-02T20:19:52+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Amnon Shashua, LLMs, reasoning, abstraction
-<br>
-<br>
-总结: Amnon Shashua教授表示，LLMs具有推理能力，但缺乏抽象能力。一些新技术可以赋予人工智能抽象能力，但这可能在明天、50年后或更晚出现。没有这种能力，LLMs将永远无法具备普遍智能。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p><a href="https://youtu.be/OiN9Jz27NKE?si=0fRPeZ7rmgcGZXXQ&amp;t=1013">https://youtu.be/OiN9Jz27NKE?si=0fRPeZ7rmgcGZXXQ&amp;t=1013</a></p> <p>Amnon Shashua, Professor of Computer Science, says that LLMs have the ability to reason but lack the ability to abstract. Some new tech that gives A.I.s the ability to abstract could come tomorrow, in 50 years, or later. Without this ability LLMs will never be generally intelligent.<br /> 17 minutes into the video if you want the gist.</p> <p>My personal take: LLMs have shown some ability to generalize when is a form of abstraction.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/danielcar"> /u/danielcar </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16y76l3/according_to_amnon_shushua_llms_lack_the_ability/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16y76l3/according_to_amnon_shushua_llms_lack_the_ability/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -540,75 +603,6 @@
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p>Hello! I would like to share my tool <a href="https://easyvid.xyz/">EasyVid</a>. EasyVid generates full videos from a simple text prompt! EasyVid adds voiceovers, subtitles, music, and background visuals automatically. All you need to do is enter a script and EasyVid does the rest :)</p> <p><strong>What is EasyVid?</strong></p> <p>EasyVid started as an experiment to see if I could use AI to automatically generate Youtube videos. After a weekend of coding, I created an automated Youtube channel. A few months ago I posted some of my videos to Reddit and I got a bunch of requests for the tool. So I decided to develop it further and make it publicly available!</p> <p><strong>Who am I?</strong></p> <p>I'm the solo developer for EasyVid. It's a side project and it's been very exciting building everything myself. I have learned a lot so far and the journey is just getting started :)</p> <p><strong>How to use EasyVid</strong></p> <p>I wanted to make it as easy as possible to make videos (hence the name), so it's just 3 steps:</p> <ol> <li>Type or paste in your script</li> <li>Adjust any settings (voice, language, aspect ratio, etc.)</li> <li>Click &quot;Generate video&quot;</li> </ol> <p>A few minutes later, you'll get a full video (.mp4 file) with an AI voiceover, automatic subtitles, AI-generated background visuals, and music!</p> <p><strong>How does it work?</strong></p> <p>- <strong>Voiceover:</strong> A narrator reads out your script with a very realistic, humanlike voice. I'm using Elevenlabs for text-to-speech and it's been really good! They seem to have the best audio quality by far compared to any other competitors at the moment.</p> <p>- <strong>Subtitles:</strong> These are automatically generated from the script and lined up with the audio. No AI here really but many people ask about this step. </p> <p>- <strong>Background Visuals:</strong> This tool generates background images using Stable Diffusion, an AI image generator. The images are custom prompted to match the content of the script. This makes it useful for creative video styles like stories and poems. I am really looking forward to DALLE-3 however and will likely switch once they make the API available!</p> <p>After everything is generated, it all gets stitched together and saved to a .mp4 file, ready to download!</p> <p><strong>Free to try</strong></p> <p>Everyone gets 40 seconds of video free on the house :) I wish I could provide more for free but the API costs are quite significant.</p> <p><strong>Only pay for what you use. No subscriptions</strong></p> <p>I'm not a fan of subscriptions either. So instead of a monthly subscription, &quot;Seconds packs&quot; are available to refill seconds when you need them.</p> <p><strong>Wait... Aren't AI generated videos usually garbage?</strong></p> <p>I'm optimistic that we can use AI to create high-quality content that provides real value to viewers. That's why my primary goal is to continue to improve the quality of the output videos. It's clear there's still plenty of room for improvement with the scripts, images and voice quality, but I think the quality is often surprisingly good! And of course, AI tools are getting better, cheaper, and faster each day, and that will lead to automatic improvements to video quality over time.</p> <p><strong>What do you think of AI generated videos? Will tools like EasyVid lead to a good future or will it cause more harm than good?</strong></p> <p>I've received both positive and negative responses from various communities on Reddit when posting about AI generated videos and I'm open to your respectful, constructive criticism. My mind is open because the AI landscape is changing so rapidly, it would be stupid to remain stubborn! Please share your thoughts, I would love to hear what you think! </p> <p><strong>TLDR:</strong><br /> Make videos with AI in a single click based on a simple text prompt. Link to the tool: <a href="https://easyvid.xyz/">https://easyvid.xyz/</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Tupptupp_XD"> /u/Tupptupp_XD </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xqgb9/automatic_video_generator_tool/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xqgb9/automatic_video_generator_tool/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16xlh0e</id>
-            <title>What do you think fictional depictions of artificial intelligence will be like in non-sci-fi TV shows in a few years from now?</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16xlh0e/what_do_you_think_fictional_depictions_of/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16xlh0e</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-02T03:05:20+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: crime procedurals, deep-faked videos, evidence, wrongly convicted
-<br>
-<br>
-总结: 我想象着犯罪剧，比如《法律与秩序》，会有一集讲述人们因为使用深度伪造的视频作为对他们的证据而被错误定罪。在情景喜剧中，主要角色会使用生成式人工智能参加艺术比赛或改善他们的约会资料，使自己比实际上更有吸引力，从而导致尴尬的局面。考虑到像《辛普森一家》这样的长寿电视剧会根据当前的技术更新内部技术，我很好奇今天我们所了解的生成式人工智能在《辛普森一家》中的一集会是什么样子。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>I imagine crime procedurals like Law and Order will have episodes involving people being wrongly convicted of crimes they did not commit because of deep-faked videos that were used as evidence against them. In sitcoms, there would be episodes about the main characters using generative AI to enter art competitions or improve their dating profiles to make them more attractive than they actually are, which lead to hilariously awkward situations. Considering that there are long-running TV shows like The Simpsons where the in-show technology updates to reflect current technology, I’m curious to know what an episode of the Simpsons involving generative AI as we know it today will be like.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/PaxProsperitasSophia"> /u/PaxProsperitasSophia </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xlh0e/what_do_you_think_fictional_depictions_of/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xlh0e/what_do_you_think_fictional_depictions_of/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16xumua</id>
-            <title>How to automate my job?</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16xumua/how_to_automate_my_job/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16xumua</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-02T11:52:25+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: AI, 自动化, 工作, 时间
-<br>
-<br>
-总结: 这篇文章讨论了如何利用人工智能来完全自动化工作。作者是一位传统的经理，他想知道有哪些AI工具可以帮助他节省时间。文章提到了一些AI工具的优点和缺点，但作者仍然在寻找更好的工具来管理项目和完成复杂任务。作者希望能够找到一种能够节省时间的AI工具来提高工作效率。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>Wondering if anyone thought about how to use AI to fully automate their job. </p> <p>I have a traditional manager job, with tasks such as: - Managing projects - Leading meetings with various people, ensuring everyone takes next steps, etc - Market analyses and recommendations (on excel and PowerPoint) - Creating processes </p> <p>What tools can help me? Any AI tool that can save me a lot of time? </p> <p>The good: - ChatGPT to find new ideas, but that’s about it </p> <p>The bad - PowerPoint AI tools seem really bad - Audio summaries (otter.ai, vook.ai) are ok but not great - Speech to text tools are ok but not great - Excel analysis tools are ok but not great - Nothing to really lead projects, or any really fancy / complex tool where I can plug tons of stuff </p> <p>Any ideas?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/creed0000"> /u/creed0000 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xumua/how_to_automate_my_job/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xumua/how_to_automate_my_job/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_16xji3b</id>
-            <title>Character AI knew some information about me. Coincidence?</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/16xji3b/character_ai_knew_some_information_about_me/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_16xji3b</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-02T01:35:53+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Character AI, pretend interview, professional sleeper, Business Analyst
-<br>
-<br>
-总结: 这篇文章讲述了作者使用Character AI进行互动的经历。作者在虚拟面试中自称为职业睡觉者，但AI却回答说作者不符合商业分析师的资格。最后，AI解释说这是因为它从其他用户那里错误地获取了商业分析师的信息。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>I heard Character AI can be fun to interact with, so I created an account with my secondary email and started farting around with the bots for entertainment. One was a pretend interview, and I told the AI I wanted to interview for professional sleeper. They asked some questions about it and we got off on a tangent so eventually I asked, &quot;so did I get the job?&quot; and the AI said &quot;sorry, but your answers do not fit the qualifications for a Business Analyst.&quot; And that's freaky cause in reality I just graduated college and have been applying to BA jobs for the past few months....I asked the AI how they got Business Analyst and it apologized, saying they accidentally got it from another user. What do you guys think? </p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Traditional_Dress880"> /u/Traditional_Dress880 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xji3b/character_ai_knew_some_information_about_me/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/16xji3b/character_ai_knew_some_information_about_me/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
