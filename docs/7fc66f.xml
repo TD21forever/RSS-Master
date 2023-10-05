@@ -51,110 +51,6 @@
         </item>
         
         <item>
-            <id>https://sspai.com/post/83347</id>
-            <title>用「快捷短语」提高搜索效率：工具设置与自建服务</title>
-            <link>https://sspai.com/post/83347</link>
-            <guid isPermaLink="false">https://sspai.com/post/83347</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 03 Oct 2023 12:19:44 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 搜索引擎, 快捷短语, 浏览器, 自定义, 跨设备同步
-<br>
-<br>
-总结: 本文介绍了如何通过浏览器自带功能或第三方插件来设置搜索引擎的快捷短语，以方便用户快速调用不同搜索引擎。然而，这些方法存在一些限制，如不能跨设备同步、互不相通等。因此，作者提出了自己动手做一个支持自定义快捷短语的搜索引擎「转发器」的方法，并介绍了如何通过Vercel或Docker部署到网上，实现「一次配置、随处可用」的目标。 </div>
-                        <hr>
-                    
-                    <p>有大量研究检索需求的用户，大概都会收藏一批搜索引擎链接。这不仅包括 Google、Bing 等主流通用搜索引擎，也包括 Google Scholar、Wolfram Alpha 等用于特定领域或功能的垂直搜索引擎，通过图书馆或内网代理访问的数据库搜索引擎，以及平台类网站的站内搜索引擎等。</p>
-<p>从更广义的角度理解，任何可以通过形如 GET 请求的形式调用，在相关使用场景下只有一个待填参数的 API，都不妨看作是一个「搜索引擎」，例如 iOS 上直接跳转到应用内搜索的诸多 URL Scheme。</p>
-<p>即使在 AI 问答来势汹汹的当下，这种「直通车」式的信息获取方式仍不失其优势，值得继续沿用。</p>
-<p>但随着收藏积累的增多，如何管理和记忆的问题也随之而来。将搜索入口页面存为书签固然是一种方法，但调用起来显然过于繁琐。相比之下，一种更方便的做法是为常用搜索引擎各自分配一个「快捷短语」，例如用 <code>g</code> 代表 Google、用 <code>w</code> 代表维基百科等，然后通过「快捷短语 + 搜索语句」的方式快速调用。</p>
-<p>实现这种功能的方法很多，包括浏览器自带功能、外部自动化工具、搜索引擎的特殊语法等，各有优劣。本文将先对这些工具做一概述，然后说明如何自己动手做一个支持自定义快捷短语的搜索引擎「转发器」，并通过 Vercel 或 Docker 部署到网上，从而实现「一次配置、随处可用」。</p>
-<h2><strong>传统方法回顾与比较</strong></h2>
-<h3><strong>借助浏览器</strong></h3>
-<p>几大主流浏览器都不同程度地支持快捷短语。</p>
-<p><strong>支持最好的是 Chromium。</strong>遇到过的搜索引擎都会显示在设置页面的「搜索引擎」&gt;「管理搜索引擎和网站搜索」底部。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/03/e37fc6716e6ebbdb75f973cfa730700b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>单击右侧的「激活」按钮将其启用，然后再点击铅笔形状的「修改」图标，编辑窗口中的「快捷字词」即可。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/03/5453b59045d98c18e861bebd9f35008d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>如果 Chromium 没有记住你需要的搜索引擎，也可以自己手动添加。（<a href="https://support.google.com/chrome/answer/95426?hl=zh-Hans">官方帮助</a>）</p>
-<p><strong>其次是 Firefox。</strong>虽然不能主动记住搜索引擎，但可以手动在想收藏的搜索框中点击右键，选择「为此搜索添加关键字」，然后即可在存为书签的同时设定一个快捷短语。（<a href="https://support.mozilla.org/zh-CN/kb/%E6%99%BA%E8%83%BD%E5%85%B3%E9%94%AE%E5%AD%97">官方帮助</a>）</p>
-<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/03/5967954b7718be61eaa050d01f6f4b20.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>事实上，Firefox 会将所有地址中包含 <code>%s</code> 的书签视作一个「搜索引擎」，通过「快捷短语 + 搜索语句」的格式调用时，会自动将 <code>%s</code> 替换为搜索语句再跳转。</p>
-<p>此外，「设置」&gt;「搜索」中通过安装而添加的搜索引擎也可以双击列表中的「关键字」一列添加关键字。（<a href="https://support.mozilla.org/zh-CN/kb/add-or-remove-search-engine-firefox">官方帮助</a>）</p>
-<p>不过，Firefox 一个非常令人困惑的设计在于，通过书签创建的搜索引擎和「设置」中的搜索引擎是两套互不相关的体系，只有通过特定方式（具体说是下文介绍的 OpenSearch 协议）安装的搜索引擎能进入「设置」，并有资格被设置为默认搜索引擎。</p>
-<p><strong>灵活性最低的是 Safari。</strong>虽然也能自动发现并记住搜索引擎，但不支持任何形式的自定义，能不能记住、用什么快捷短语全凭 Safari 自作主张。具体列表则要通过「设置」&gt;「搜索」页面下，「启用快速网站搜索」开关右侧的「管理网站」按钮查看。（<a href="https://support.apple.com/zh-cn/guide/safari/sfria1042d31/mac">官方帮助</a>）</p>
-<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/03/e33b65c5eb90d8d5d2a4243825b1741f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>问题在于，Safari 自己提取的关键短语非常冗长——大多直接使用次级域名——并无「快捷」可言。好在有一个历史悠久的第三方插件 <a href="http://safarikeywordsearch.aurlien.net/">Safari Keyword Search</a> 可以补充自定义快捷短语的能力（代码开源，上架版本有象征性收费）。</p>
-<p>总的来说，通过浏览器自带功能设置搜索引擎快捷短语，好处在于离使用场景最近，缺点则在于大多不能跨设备同步（只有 Firefox 以书签形式添加的搜索引擎能通过 Firefox 账号同步），而且互不相通。换一个浏览器、换一台设备就要重新设置一遍，数量一多就难以维护。</p>
-<hr />
-<p><strong>插曲：浏览器如何「发现」搜索引擎</strong></p>
-<p>浏览器是如何知道一个文本框是不是搜索框呢？</p>
-<p>传统上，这是由网站通过一个叫做 <a href="https://github.com/dewitt/opensearch">OpenSearch</a> 的标准告知浏览器的。OpenSearch 原来是由亚马逊在 2005 年牵头制定的，根据这个标准，网站可以在 HTML 的 <code>&lt;head&gt;</code> 部分链接到同一域名下的 OpenSearch 描述文件（通常命名为 <code>opensearch.xml</code>），并在其中说明搜索相关的各项信息。浏览器通过查找和读取 OpenSearch 描述文件，就能「认识」新的搜索引擎。</p>
-<p>以 DuckDuckGo 的 OpenSearch 描述文件 <a href="http://duckduckgo.com/opensearch.xml">http://duckduckgo.com/opensearch.xml</a> 为例：</p>
-<pre class="language-htmlembedded"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"&gt;
-    &lt;ShortName&gt;DuckDuckGo&lt;/ShortName&gt;
-    &lt;Description&gt;Search DuckDuckGo&lt;/Description&gt;
-    &lt;InputEncoding&gt;UTF-8&lt;/InputEncoding&gt;
-    &lt;LongName&gt;DuckDuckGo Search&lt;/LongName&gt;
-    &lt;Image height="16" width="16"&gt;data:image/x-icon;base64,...&lt;/Image&gt;
-    &lt;Url type="text/html" method="get" template="https://duckduckgo.com/?q={searchTerms}"/&gt;
-    &lt;Url type="application/x-suggestions+json" template="https://duckduckgo.com/ac/?q={searchTerms}&amp;amp;type=list"/&gt;
-&lt;/OpenSearchDescription&gt;</code></pre>
-<p>可以看到，其中提供了简称（<code>&lt;ShortName&gt;</code>）、全称（<code>&lt;LongName&gt;</code>）、描述（<code>&lt;Description&gt;</code>）、默认编码（<code>&lt;InputEncoding&gt;</code>）、图标（<code>&lt;Image&gt;</code>）、搜索结果地址（<code>&lt;Url type="text/html"&gt;</code>）和搜索建议地址（<code>&lt;Url type="application/x-suggestions+json"&gt;</code>）等信息。</p>
-<p>浏览器就是通过这些信息自动发现和填充搜索引擎信息的。特别是在 Firefox 中，只有适配了 OpenSearch 的网站才能被添加为「设置」中的默认搜索引擎（通过在地址栏上点击右键选择「添加 [搜索引擎名称]」，否则在就要借助<a href="https://addons.mozilla.org/en-US/firefox/addon/add-custom-search-engine">插件</a>或<a href="https://mycroftproject.com/">在线服务</a>，而其原理都是构造出一个 OpenSearch 描述文件供 Firefox 读取。</p>
-<p>当然，实践中，很多网站并不会花额外功夫适配 OpenSearch 协议。随着时间推移，OpenSearch 也有逐渐被淡化和遗忘的趋势（连这个名字都被亚马逊<a href="https://en.wikipedia.org/wiki/OpenSearch_(software)">挪作他用</a>了）。为此，作为补充，主流浏览器也各有一套检测算法（heuristics），不依赖于网站主动说明，而是根据页面的内容和结构特征，「推测」出哪些输入框可能就是搜索框。</p>
-<p>例如，无版权图库 Unsplash 虽然没有关联的 OpenSearch 描述文件，但上述三大浏览器都能检测到它首页的搜索框，并提供添加为自定义搜索引擎的选项。</p>
-<hr />
-<h3><strong>借助外部工具</strong></h3>
-<p>大多数「启动器」（launcher）类工具都将自定义搜索作为基础功能之一，包括 macOS 上的 <a href="https://www.alfredapp.com/help/features/web-search/custom-searches/">Alfred</a>、<a href="https://www.obdev.at/resources/launchbar/help/">LaunchBar</a>、<a href="https://manual.raycast.com/quicklinks">Raycast</a>，Windows 上的 <a href="https://www.yuque.com/quicker/manual/settings-searchsettings#UT1Cr">Quicker</a>、<a href="https://help.listary.com/zh-Hans/web-search">Listary</a>、<a href="https://fluentsearch.net/posts/fluent-search-features-guide#web-search">Fluent Search</a> 等。（链接均为相应官方帮助页面。）</p>
-<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/03/ea6cb8c93c337df4ff6580336e764e5c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
-    <figcaption>Alfred 的自定义搜索引擎界面</figcaption>
-</figure>
-<p>通过外部工具设置搜索引擎快捷短语，好处在于不依赖于特定浏览器，而且通常能通过工具自带的同步功能跨设备同步。但这些工具只能用于桌面系统，无法兼顾移动端的快捷搜索需求。</p>
-<h3><strong>借助搜索引擎语法</strong></h3>
-<p>这个称为「bang」的功能据我所知是由 DuckDuckGo 首创的，几年前在<a href="https://sspai.com/post/40117">介绍</a> DuckDuckGo 时也特别推荐过。</p>
-<p>简单来说，使用 DuckDuckGo 时，通过在搜索语句开头加入一个感叹号，后接一个快捷短语（称为一个「bang」），就能跳转到这个 bang 所指向的搜索引擎或网站进行搜索。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/03/77acb374a0bdc1b5815fdb7782d0dde9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>例如，如果你搜索 <code>!g Wikipedia</code>，就会被跳转到 Google 搜索 Wikipedia 这个关键词。通过 bang 转发的搜索是完全匿名的，因此非常适合用作「跳板」来调用那些隐私保护堪忧的搜索引擎。</p>
-<p>bang 功能后来也被 <a href="https://search.brave.com/help/bangs">Brave</a>、<a href="https://help.kagi.com/kagi/features/bangs.html">Kagi</a>、<a href="https://docs.searxng.org/user/search-syntax.html#bang-external-bangs">SearX(NG)</a> 等后辈效仿，但 DuckDuckGo 做的仍然是最好的：除了支持的 bang 数量最多外，还贴心地考虑到了用户的输入便利，<code>!bang</code> 无论出现在搜索语句的开头还是结尾，甚至将英文感叹号换成中文感叹号，都仍然可以识别。</p>
-<p>通过 bang 语法实现快捷搜索既不依赖于特定浏览器或系统、也无需考虑同步的问题，但前提是愿意将 DuckDuckGo 设置为默认搜索引擎——对于大多数中文用户可能并非一个理想选择。此外，bang 的搜索引擎目录是由用户自主提交维护的，无法设置更符合自己习惯的快捷短语（例如用 <code>tb</code> 而非 <code>taobao</code> 搜索淘宝）；目录的质量也比较平庸，其中存在很多重复、过时或失效的条目。</p>
-<hr />
-<p><strong>插曲：DuckDuckGo 的 bang 数据</strong></p>
-<p>即使你不准备将 DuckDuckGo 用作主力搜索引擎，它的 bang 目录也是一个很不错的搜索引擎资料库。在前端，DuckDuckGo 提供了两个入口来浏览和检索 bang，分别是 <a href="https://duckduckgo.com/bangs">https://duckduckgo.com/bangs</a> 和 <a href="https://duckduckgo.com/bang_lite.html">https://duckduckgo.com/bang_lite.html</a>，区别在于前者带有搜索和分类功能，后者是一个纯静态页面。</p>
-<p>但最适合程序化检索和抓取的还是源文件 <a href="https://duckduckgo.com/bang.js">https://duckduckgo.com/bang.js</a>。这个后缀名是误导性的，其内容实际上是一个 JSON 数组，格式如下：</p>
-<pre class="language-javascript"><code>[
-    // omitted
-    {
-        "c": "Tech",                             // 分类
-        "d": "hn.algolia.com",                   // 域名
-        "r": 3591,                               // 被使用次数
-        "s": "Hacker News",                      // 名称
-        "sc": "Startups",                        // 次级分类
-        "t": "hn",                               // 快捷短语
-        "u": "http://hn.algolia.com/?={{{s}}}"   // 搜索链接模板
-    },
-    // omitted
-]</code></pre>
-<hr />
-<h2><strong>自己做一个快捷搜索跳转服务</strong></h2>
-<p>可以看出，无论借助浏览器自带功能、外部自动化工具还是特定搜索引擎的特殊语法，都有各自的局限性，不能充分覆盖各种可能的使用场景。对于搜索这种效率为先、依赖肌肉记忆的任务来说，并不理想。</p>
-<p>其实，如果能做一个类似于 bang、但支持快捷短语自定义的搜索引擎「转发器」，然后将其他工具的搜索地址都指向它，不就能实现一次配置、随处可用的目的了吗？</p>
-<p>这听起来还挺复杂，但其实完全在个人用户力所能及的范围内。因为我们并不需要真的去做一个搜索引擎，只需要做一个具有关键词识别和跳转功能的文本框，根据识别到的关键词，自动打开相应的搜索页面就行了。</p>
-<p>可行的实现方法很多，经验丰富的读者自可各显神通。考虑到方便在线部署，这里选择 Node.js 来演示。完整的代码放在 GitHub 上，你可以直接<a href="https://github.com/firexcy/vbang2">查阅</a>复制使用，也可以跟随下文一步步搭建自己的版本。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/03/f88cdd74d5777d22e1130b0bf24f2b42.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
-    <figcaption>制作好并部署的效果</figcaption>
-</figure>
-<h3><strong>脚本编写与测试</strong></h3>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://sspai.com/post/83351</id>
             <title>出行锦囊 | 出去玩带什么：和你分享我的包</title>
             <link>https://sspai.com/post/83351</link>
@@ -197,6 +93,23 @@
                         <hr>
                     
                     <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;<br />文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>1991 年，欧洲原子能研究组织发明了万维网，人类正式步入了一个新的「信息纪元」。</p><p>在 30 余年的时间中，网络速度从拨号时代的「Kbps」为单位的计算方式，变成了「Gbps」。也就是说，速度提升了整整一百万倍（1Gbps 是 1Kbps 的一百万倍）。随之而来的信息增量，也是史无前例的。</p><p>正是有了足够庞大信息支撑，大语言模型（LLM）才得以成熟，AI 技术于走向了应用。但是「信息过载」所引发的问题，远比我们想象的复杂得多。</p><h2>被「信息过载」所掌控的人生</h2><blockquote><p>「信息过载」，也称为信息负荷或信息爆炸，指的是接收的信息量超过了一个人或系统处理和理解的能力。这通常会导致信息处理和决策效率降低，甚至可能导致错误决策。这在当前的数字化、信息化社会中尤其常见，因为人们可以从互联网、社交媒体、电子邮件等多种渠道接收大量信息。</p></blockquote><p>简单说，「信息过载」导致的结果可能会代替人们思考，从而影响判断、行为。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdn.sspai.com/2023/09/03/article/a5e657701f774d907f36d133bd52ad8f?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>虽然面临「信息过载」的负担，但是人类的大脑很自然的过滤掉了海量的无效信息。然而另一个问题却随之而来——无效信息（垃圾信息）更深层次的影响着我们。</p><p><strong>当大脑长期接收无效信息的时候，大脑的警觉性、敏捷性、思考判断力会变弱，慢慢的就会变得随波逐流</strong>。大脑会习惯性的认为这些无效信息是不会引发任何焦虑的，而互联网平台则恰当的利用了这一点，把看似无关的广告植入在无效的信息之中。</p><p>比如当你在刷手机娱乐视频的时候，是处于一个安全且稳定的感受中，但是突然刷出一条类似于「一堂课教你逆袭人生」的视频，在短短的3秒之内，从触发焦虑到寻求解决，大脑已经作出了闪电般的决策。</p><p>「一堂课教你逆袭人生」实际上是把大脑从安全状态带入了焦虑状态，然后「指明」了一个解决焦虑的方式——教你逆袭。整个过程实现了从激发，到解决的闭环。这也是为什么短视频的前三秒尤其重要，不仅要提出一个问题，还要给出一个解决方案的引子。而这堂所谓的课程，也需要隐藏在海量的信息中才会奏效。因为人如果面临着随时失去安全感的状态，用户就会流失。</p><p>除此以外，我们还会经常性的买一堆无用的「玩具」，比如俗称「盖泡面神器」的平板电脑。大多数人根本不需要平板电脑，但是我们终究敌不过信息的「洗劫」。比如你关注的网红们都在开箱、测评，他们正在宣扬「科技的美好」，当这些信息量变得很大的时候，大脑将进入一个被「驯化」的过程，慢慢的你会发现「我也好想买一个」。</p><p>我有一台用了 9 年的笔记本，时至今日，办公依然无压力。但是当我被科技博主们的信息轰炸的时候，我开始极度厌恶我那台 2.4KG 的笔记本，虽然我根本不需要什么所谓的「便携性」。</p><p>在这个时代，有大量的跟我们无关的人利用网络来宣扬他们自己的理念，这本无可厚非。但是，在庞大信息的输入之下，人们渐渐的会停止自己的思考，可能会用博主们的语言来替代自己价值观，用媒体的价值观来规范自己的人生。有一句网络名言，「懂了很多道理，依然过不好这一生”，这句话本质应该是，<strong>「你懂的是别人的道理，肯定过不好自己的这一生」。</strong></p><p>「独立思考」，是破解这种状态的一把钥匙。</p><h2>如何开启「独立思考」的能力</h2><blockquote><p>独立思考，是指有能力根据自己的理解和判断来考虑问题，而不是仅仅依赖别人的观点或者已有的信息。独立思考需要勇气、坚持，以及对知识和真相的持续追求。</p></blockquote><p>就像一条机场的跑道总有起点，思想是有脉络的，也就是说思想也有「发源地」。近几年火爆网络的「第一性原理」，探寻的就是在某个领域「发源地」，从而寻找本质上的解决方案。</p><p>下面这张图，简单描述了独立思考的逻辑。</p><p>（加强底层知识和自我认知，是让「独立思考」得到进阶的方法，本文限于篇幅，不对这两点展开论述，文末有相关书籍推荐。）</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdn.sspai.com/2023/09/03/article/782f177c8f1b5edfaf4d65511d9b49f8?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>「独立思考」从提出问题开始</h3><p>培养独立思考的能力，最好是从一些跟我们相关的问题入手，那些完全不相关的问题很难进行思维的训练，价值并不大。</p><p>提出问题是独立思考的关键步骤，以下用案例说明了提出问题的方法。在提出问题的时候，尽可能提出开放性的问题，而不是只有「是」或「否」的问题，开放性的问题可以引导你深入探讨和思考。</p><p>下面我们下面就以一个网络事件作为参考案例。</p><p>比如马云曾说「996」是员工的福报。我们在宣泄「愤怒」的同时，可能完全没有思考过这段话背后的逻辑。马云既不是正义的，也不是邪恶的，他只是一个商人基于个人立场发表的观点而已。但是，这个命题的确跟我们这些打工人有关，我们可以提出如下的问题：</p><ol><li>什么是「996」？它是怎么形成的？</li><li>马云为何会称「996」是员工福报？他这么说有何深层的原因或目的？</li><li>我是一名「996」的员工，我会如何看待这个问题？</li></ol><h3><strong>继续「拆解问题」</strong></h3><p>拆解问题，实际上是把已经提出的问题进行「再次细分」，类似于「第一性原理」——一种通过剥离问题表象，寻找到最基本的真理和规律，并以此为根基来理解和解决问题的方法。</p><p>我们可以将上面的第 3 个问题拆解为：</p><ul><li>什么是「996」？它是怎么形成的？<ul><li>「996」的具体定义是什么？</li><li>在哪些行业或哪些公司，「996」比较常见？</li><li>「996」的出现和当前社会经济环境有何联系？</li></ul></li><li>马云为何会称「996」是员工福报？他这么说有何深层的原因或目的？<ul><li>马云的背景是什么，他的经验和价值观可能影响他的这种观点吗？</li><li>马云希望通过这种表述达成什么效果？</li><li>从商业的角度看，马云称「996」是员工的福报，有什么商业逻辑？</li></ul></li><li>我是一名「996」的员工，我会如何看待这个问题？<ul><li>我怎么看「996」对我工作和生活的影响？</li><li>我怎么看马云将「996」称为福报的说法？</li><li>我可以采取哪些行动来改善自己的工作和生活环境？</li></ul></li></ul><h3>尝试进行「独立思考」</h3><p>关于「独立思考」有一种误区，认为「独立思考」是一个人默默的思考。<strong>「独立思考」并非封闭式的思考，而是需要结合自身的、外部的、多元的信息来进行思考，并最终得出一个相对客观的结论来指导自己的思想和行为。</strong></p><p>针对以上已经拆分的问题，先基于自己的理解给出回答，这种回答尽量客观，并且尽量不带偏见的去描述。比如：我怎么看「996」对我工作和生活的影响？</p><p>举例。我认为「996」是一种职场人都面临的加班现状，除了较为正规的企业和工厂，很多打工人并不能获得加班工资或加班调休，他们的加班是不能得到任何加班回报的。于我个人而言，加班也不能获得任何的回报的，这一点是确认无疑的。</p><p>有了自己的回答之后，再去了解媒体舆论对这件事的看法，尤其要注意倾听那些「不一样的声音」，因为他们可能带着其他的观点。特别是传统杂志、刊物，这类媒体的分析与洞察比网文（短视频）更为深刻。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdn.sspai.com/2023/09/03/article/58261cd439104ca0ce5b5d9a956fd21f?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>最后，再进行总结与提炼。结合个人看法与外部观点，推导出符合自身现状的一套方法，如：「996」是一个暂时我无法改变的既定事实，所以我唯一能做的，就是既不抱怨也不评论。我需要改变自己的看法以及如何利用现有的工作资料来提升个人的工作能力，以及更加高效的完成常规工作，把重点投入到层次更高的工作上。并且我要做好工作与生活的有效平衡，在健康、个人成长上面合理的投入时间来增强总体素质。</p><p>这样，从提出问题到拆解问题，再到回到问题，独立思考的过程就完成了。</p><h2>后记：独立思考的价值</h2><p>短短的一篇文章，无法将独立思考完全说清，然而独立思考对身陷「信息过载」时代的我们又极为重要。想想那些根本不需要却让你掏空腰包的「电子玩具」；堆得满满的却从未翻看过的书架；报了名却从未完成过的课程。</p><p>其实，这些都不是真实的你。</p><p>我很赞同那些「低欲望」生活的少数派，他们能够从繁杂中走出来极为不易。「低欲望」的背后是对无价值信息的主动屏蔽，保持个人的独立思考，真正过上「自己想要的人生」。</p><p>你会发现，在这个时代的保持「独立思考」的确很有难度，因为各种声音会对你进行所谓的「指引」，看什么书、听什么课、买什么手机、如何过日子，都由这些声音说了算。甚至结不结婚，也要看看「网红们怎么说」。久而久之，逐渐的丧失了自我，而内心那种深层的焦虑却从未消失。</p><p>我认为，除了极少数伟大的科学家、哲学家、领袖之外，让其他人成为我们思想的指引者是一件非常危险的事情。</p><p>此刻，我们再一次回头看看这句话，「知道了很多道理，就是过不好这一生」背后的逻辑是——这些道理是自己的，还是别人的？</p><p>关于推荐书籍。选书的时候，必然是奔着「作者」去的，首推的是身兼科学家、哲学家于一身的这一类的伟大作者，如笛卡尔的《谈论方法》，亚里士多德《尼各马可伦理学》，以此类推变得寻得无数宝藏。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/83347</id>
+            <title>用「快捷短语」提高搜索效率：工具设置与自建服务</title>
+            <link>https://sspai.com/post/83347</link>
+            <guid isPermaLink="false">https://sspai.com/post/83347</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 03 Oct 2023 05:18:37 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    用「快捷短语」提高搜索效率：工具设置与自建服务
                 ]]>
             </content:encoded>
         </item>
