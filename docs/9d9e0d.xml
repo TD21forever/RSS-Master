@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/65239cccaa7d4f2b30bdf900</id>
+            <title>成了，成了，我的爬虫成了。不需要插件，不需要下载Python，102 部电视剧的评分，2 分钟就爬完了。 代码是 ChatGPT 给的，提示词是“我有 100 部电视剧，想在 co...</title>
+            <link>https://m.okjike.com/originalPosts/65239cccaa7d4f2b30bdf900</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/65239cccaa7d4f2b30bdf900</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 09 Oct 2023 06:25:16 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    成了，成了，我的爬虫成了。不需要插件，不需要下载Python，102 部电视剧的评分，2 分钟就爬完了。<br /><br />代码是 ChatGPT 给的，提示词是“我有 100 部电视剧，想在 colab 上，使用Python爬虫，在豆瓣上爬他们的评分，请问具体可以怎么操作呢？”的大白话。<br /><br />返工过 2 版。<br /><br />第一版因为豆瓣有反爬虫机制，每部电视剧都显示“未找到评分”，报错给ChatGPT后，它自己添加额外的请求头（headers）；<br /><br />第二版是我自己的原因，我想看到每一步的反馈，方便不满意及早调整。它说可以使用Python的print函数或其他日志记录方法，来输出当前正在处理的电视剧名称和已完成的数量，然后有改了段代码。<br /><br />之前，也试过用 ChatGPT 的联网功能和联网插件去爬，但联网功能的爬虫太老实，看到反爬虫机制就作罢了；webpilot 等联网插件则太不老实，爬出来的结果乱七八糟，早就不是豆瓣上的真实数据了。<br /><br />更早的时候，也有想过用chrome浏览器上的Web Scraper 插件爬。不过，每一部剧都需要重新搜一遍，印象中Web Scraper 不太能胜任。以往我都是搜完某个关键词之后，用Web Scraper把网站上的所有结果全部爬一遍。<br /><br />我爱ChatGPT和colab，对我这种非技术人员实在太友好了。没学过 Python 没关系，没学过爬虫没关系，只要敢问，ChatGPT 真的敢教，colab 也真的能实现。#AI工作流 <br /><img src="https://cdnv2.ruguoapp.com/FrMiT4ZCkvNtlpgtUuukVdE42zSPv3.png" /><br /><img src="https://cdnv2.ruguoapp.com/FjnocbZMTwQwoGJOlYZIyKYoZDzGv3.png" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6522de5cc9ddb2a2a3b50264</id>
             <title>！非常好的文章，使我的GPT4旋转。 Claude 官方发布的一篇博客，很实用，链接🔗https://www.anthropic.com/index/prompting-long-context 下面是我用ChatGPT4...</title>
             <link>https://m.okjike.com/originalPosts/6522de5cc9ddb2a2a3b50264</link>
@@ -17,23 +34,6 @@
                 <![CDATA[
                     
                     ！非常好的文章，使我的GPT4旋转。<br /><br />Claude 官方发布的一篇博客，很实用，链接🔗https://www.anthropic.com/index/prompting-long-context<br /><br />下面是我用ChatGPT4的web browsing功能把这篇博客通过特定的prompt转换成的一本「执行手册」，可以简单参考一下，具体信息建议还是从原文链接看：<br /><br />基于您的要求和提供的文章内容，以下是一份详细、具体、逻辑清晰且可操作的执行手册，形式为Markdown文本：<br /><br />---<br /><br /># Claude模型长文本回忆优化执行手册<br /><br />本手册旨在指导用户通过特定步骤和方法，优化Claude模型在处理长文档时的回忆能力。<br /><br />## 一、目标定义<br /><br />- 评估和优化Claude模型在长文档上下文中正确回忆特定信息的能力。<br /><br />## 二、准备阶段<br /><br />### 2.1 数据源选择<br /><br />- 选择一个公开可用的、日常发布的政府文档，作为测试的基础数据源。<br />  <br />### 2.2 文档分段与问题生成<br /><br />- 将选定的文档分成多个部分。<br />- 使用Claude为每个部分生成五个选择题，每个题目包含三个错误答案和一个正确答案。<br /><br />## 三、多选题生成策略<br /><br />### 3.1 避免过于明显的问题<br /><br />- 确保问题不应包含答案。<br />  <br />### 3.2 避免模糊的短语<br /><br />- 避免使用模糊的短语，如“此文档”或“此段落”，而应明确指定问题所指的段落。<br /><br />## 四、评估与测试<br /><br />### 4.1 模型选择<br /><br />- 使用Claude Instant 1.2模型进行测试。<br /><br />### 4.2 回忆能力测试<br /><br />- 在不同情境下测试Claude的回忆能力，例如仅提供Claude用于编写问题的确切段落，评估Claude能否正确回答自己生成的问题。<br /><br />## 五、提示策略<br /><br />### 5.1 Base策略<br /><br />- 直接要求Claude回答问题。<br /><br />### 5.2 Nongov Examples策略<br /><br />- 提供与政府文档无关的两个正确回答的常识性选择题示例。<br /><br />### 5.3 Two Examples策略<br /><br />- 提供两个与文档上下文中的其他部分有关的正确回答的选择题示例。<br /><br />### 5.4 Five Examples策略<br /><br />- 同上，但提供五个示例。<br /><br />## 六、优化提示<br /><br />### 6.1 使用<br /><br />- 在测试各种提示策略时，同时测试是否使用，在其中指示Claude提取相关引用。<br /><br />### 6.2 答案段落位置测试<br /><br />- 根据答案所在段落的位置（开始、结束或输入的中间）测试这些策略。<br /><br />### 6.3 上下文长度测试<br /><br />- 通过测试包含70K和95K令牌文档的效果，以了解上下文长度对结果的影响。<br /><br />---<br /><br />通过遵循本执行手册的指导，用户可以有条不紊地进行测试和优化，以提高Claude模型在长文档上下文中的回忆能力。<br /><img src="https://cdnv2.ruguoapp.com/FpVFqFOaP1LJ7VliByN0YrsC9IoTv3.jpg" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6522a3c82a0c03ca13524668</id>
-            <title>和淘宝的合作项目打卡～！淘宝叫我 Midjourney 大师诶 😌😌🥰🥰</title>
-            <link>https://m.okjike.com/originalPosts/6522a3c82a0c03ca13524668</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6522a3c82a0c03ca13524668</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 08 Oct 2023 12:42:48 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    和淘宝的合作项目打卡～！淘宝叫我 Midjourney 大师诶 😌😌🥰🥰<br /><img src="https://cdnv2.ruguoapp.com/Fiam1dihlwmd14-rsc3rfKjom06xv3.png" />
                 ]]>
             </content:encoded>
         </item>
