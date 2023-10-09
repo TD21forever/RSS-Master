@@ -5,6 +5,52 @@
         <link>https://www.infoq.cn/topic/AI</link>
         
         <item>
+            <id>https://www.infoq.cn/article/U5N1PsYQpVIpu3ThbIN6</id>
+            <title>两行代码解决大模型对话局限，港中文贾佳亚团队联合MIT发布超长文本扩展技术</title>
+            <link>https://www.infoq.cn/article/U5N1PsYQpVIpu3ThbIN6</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/U5N1PsYQpVIpu3ThbIN6</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 09 Oct 2023 06:07:54 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: LongLoRA, 大模型对话缺陷, 70B模型, 长文本对话大语言模型
+<br>
+<br>
+总结: 贾佳亚团队与MIT发布了名为LongLoRA的新技术，通过分组和偏移的方式解决了大模型对话缺陷，使得70B模型的文本长度可以拓展到32k tokens。同时，他们还发布了拥有70B参数量的长文本对话大语言模型LongAlpaca。 </div>
+                        <hr>
+                    
+                    <p>近日，贾佳亚团队联合MIT发布了一项名为LongLoRA的新技术，只需两行代码、一台8卡A100机器，便可将7B模型的文本长度拓展到100k tokens、70B模型的文本长度拓展到32k tokens。同时，该研究团队还发布了首个拥有70B参数量的长文本对话大语言模型LongAlpaca。</p><p></p><h2>LongLoRA 如何解决大模型对话缺陷</h2><p></p><p>&nbsp;</p><p>“上下文越长大模型越笨”是典型的大语言模型对话缺陷。在长文本处理过程中，之前大语言模型计算量的主要开销集中在自注意力机制(self-attention)，其开销随着文本长度成平方次地增加。针对这个问题，研究团队提出LongLoRA技术，并用分组和偏移的方式来对全局自注意力机制进行模拟。</p><p>&nbsp;</p><p><img src="https://static001.geekbang.org/infoq/70/70a810b92e075263b2e2a3281b062b01.png" /></p><p></p><p>简单来说，就是将长文本对应的tokens拆分成不同的组，在每组内部做自注意力计算，而分组的方式在不同注意力头&nbsp;(attention head) 上有所偏移。这样的方式既可以大幅度节约计算量，又可以维持全局感受野的传递。而这个实现方法也非常简洁，仅两行代码即可完成。</p><p></p><p><img src="https://static001.geekbang.org/infoq/6a/6aad8dba3c72ae4947e2aab04fe01c0e.png" /></p><p></p><p>LongLoRA还探索了低秩训练的方式。原有的低秩训练方式，如LoRA [5]，无法在文本长度迁移上取得良好的效果。而LongLoRA在低秩训练的基础上，引入嵌入层&nbsp;(Embedding layer和 Normalization layers)&nbsp;进行微调，从而达到可以和全参数微调 (Full fine-tune) 逼近的效果。</p><p></p><p><img src="https://static001.geekbang.org/infoq/f7/f7959f48537fc89bf6cb73e836ae3df0.png" /></p><p></p><p>进行不同长度文本扩展和训练时，LongLoRA、LoRA和全参数微调不同技术的具体表现如下：</p><p>&nbsp;</p><p>在Perplexity-困惑度上，原有LoRA方法的性能在不断恶化，而LongLoRA和全参数微调都能在各种文本长度下维持很好的效果；在显存消耗上，相比于全参数微调，LongLoRA和原有LoRA都有大幅度的节省。例如，对于8k长度的模型训练，相比于全参数微调，LongLoRA将显存消耗从46.3GB降低到25.6GB；在训练时间上，对于64k长度的模型训练，相比于常规LoRA，LongLoRA将训练时间从90～100小时左右降低到52.4小时，而全参数微调超过1000小时。</p><p></p><p>目前，相关技术与模型已全部开源：</p><p>&nbsp;</p><p>代码和Demo地址：<a href="https://github.com/dvlab-research/LongLoRA">https://github.com/dvlab-research/LongLoRA</a>"</p><p>论文地址：<a href="https://arxiv.org/pdf/2309.12307.pdf">https://arxiv.org/pdf/2309.12307.pdf</a>"</p><p>&nbsp;</p><p></p><h2>长篇小说读后分析，LongAlpaca完胜Llama2</h2><p></p><p>&nbsp;</p><p>LongAlpaca大语言模型，利用LongLoRA技术解决了对话缺陷问题。但大语言模型处理长文本问题的一大难点还在于缺少公开的长文本对话数据。</p><p>&nbsp;</p><p>为此，研究团队特意收集了9k条长文本问答语料对，包含针对名著、论文、深度报道甚至财务报表的各类问答，此外还挑选了3k的短问答语料与9K的长问答语料混合训练，让长文本大模型同时具备短文本对话能力。这个完整的数据集被称为LongAlpaca-12k，目前已经开源。</p><p>&nbsp;</p><p>在LongAlpaca-12k数据集基础上，研究团队对不同参数大小7B、13B、70B进行了训练和评测，开源模型包括LongAlpaca-7B、LongAlpaca-13B和LongAlpaca-70B。下面是LongLoRA技术叠加12K问答语料的大模型LongAlpaca在论文方面表现：</p><p></p><p><img src="https://static001.geekbang.org/infoq/50/50194fb46842750d702e4f1a63c84faf.png" /></p><p></p><p>&nbsp;</p><p></p><blockquote>让系统新读一篇论文，并根据ICLR的审查指南，对其提出修改意见，从而提升该论文的接收率。&nbsp;LongAlpaca的意见是：通过更精确地阐明新颖性，提供更严格和更有对比性的实验结果(包括具体的数据集和指标)、更广泛的应用和未来发展方向，重点呈现关键贡献和影响，论文被接受的机会将得到提高。</blockquote><p></p><p></p><p><img src="https://static001.geekbang.org/infoq/29/299a67454b8e96bedbeefbbf655d7141.png" /></p><p></p><p>&nbsp;</p><p></p><blockquote>让系统读两篇新的不同的论文，让LongAlpaca概括ICLR和CVPR两个会议之间的风格区别。&nbsp;LongAlpaca总结认为，CVPR论文倾向更具结构性和实验性的风格，专注于实用性和技术性。而ICLR的论文风格更加灵活，侧重关键的理论分析和数学推导，而非标准格式。&nbsp;可以看出，经过训练的LongAlpaca模型已经可以很轻松地接受新的长篇学术论文，在学术相关问题的回答上相当精准。</blockquote><p></p><p>&nbsp;</p><p>LongAlpaca在颇高阅读和理解门槛的经济领域的解读表现：</p><p></p><p><img src="https://static001.geekbang.org/infoq/d2/d2b11b8e95cdefa727b358f4bef382c3.png" /></p><p></p><p><img src="https://static001.geekbang.org/infoq/f8/f805ddb1b64be78f4c8c25c0a77c7c48.png" /></p><p></p><p></p><blockquote>根据国际货币基金组织从2012年到2023年的全球经济展望的概述合集，对经济形势进行逐年总结以及对未来经济趋势进行预测。&nbsp;LongAlpaca表示，2023年全球经济形势不明朗，跟2022年相比，增长预计放缓；未来几年，全球经济扩张速度偏温和并将低于预期，而地缘政治紧张、金融市场波动等大的挑战依然存在，需通过多边合作和结构性改革小心应对。</blockquote><p></p><p>&nbsp;</p><p>13B参数的LongAlpaca和Llama2在读完长篇小说后的内容分析对比：</p><p></p><p><img src="https://static001.geekbang.org/infoq/09/0931e6dfc10c170bffe91c8ce5c3d6bb.png" /></p><p></p><p>&nbsp;</p><p></p><blockquote>名著《西游记》中，为什么孙悟空在大闹天宫时很厉害，但取经路上却屡屡受挫？&nbsp;LongAlpaca 给出了5点原因，大概可总结为： “孙悟空的不成熟、强大的对手、力量的限制、敌人的欺骗、最初缺少同伴等因素导致了他在旅途中的失败。但随着时间推移，他获得了智慧、经验和战友，使他最终战胜了最强大的敌人。”&nbsp;而 Llama2 的回答较为简单：“虽然他确实大闹天宫，但说他代表着不败的力量并不一定准确。事实上，他最终在西游记中被强大的唐三藏打败。”Llama2没有给出正确答案，并且还提出需要更多的内容信息。</blockquote><p></p><p></p><p><img src="https://static001.geekbang.org/infoq/63/63852dbc48a17b22d9f25ad96a71289a.png" /></p><p></p><p>&nbsp;</p><p></p><blockquote>让系统新读一次《三体》，然后问第一部中，叶文洁为什么要联系外星人，而后期又为什么后悔？&nbsp;LongAlpaca认为，叶文洁最初接触外星人是出于理想主义和复仇，但随着时间的推移，她对人类的看法发生了变化，意识到自己可能给全人类带来的危险，她的悔恨与日俱增。&nbsp;而Llama2的回答则是，“通过与外星人的互动，她希望能更深入地了解宇宙的本质，以及自己在宇宙中的位置。叶文洁逐渐意识到，外星人和他们的技术并不能解决她的问题。”</blockquote><p></p><p>&nbsp;</p><p>从模型给出的答案可看出，一些模型如Llama2，可能在预训练过程中见过相关小说，但如果在提问时进行仅根据小说题目进行短文本提问的话，回答并不理想。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.infoq.cn/article/Y2lof4tq2TOqiHcN8L2g</id>
+            <title>DeepMind全新AI项目曝光：可控制各类机器人，数据集有望开源</title>
+            <link>https://www.infoq.cn/article/Y2lof4tq2TOqiHcN8L2g</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/Y2lof4tq2TOqiHcN8L2g</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 09 Oct 2023 06:00:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: DeepMind, 通用AI系统, 机器人技术, Open X-Embodiment
+<br>
+<br>
+总结: 谷歌DeepMind团队及其他研究机构共同发起的新项目旨在创建一套通用AI系统，用于解决机器人技术中的挑战。该系统能够与不同类型的物理机器人协同运作，成功执行多种任务。通过引入包含22种机器人类型数据的数据集和能够进行技能迁移的模型RT-1-X，研究人员成功克服了为每项任务、每台机器人和每种环境分别训练模型的问题。这个项目的目标是创建一套优于专用模型的通用模型，能够驱动所有类型的机器人。 </div>
+                        <hr>
+                    
+                    <p></p><h2>DeepMind的新项目是什么？</h2><p></p><p>&nbsp;</p><p>开发机器人技术的一大挑战，就在于必须投入大量精力来为每台机器人、每项任务和每种环境训练机器学习模型。近日，谷歌DeepMind团队及其他33个研究机构正共同发起新项目，旨在创建一套通用AI系统来应对这个挑战。据称该系统能够与不同类型的物理机器人协同运作，成功执行多种任务。</p><p>&nbsp;</p><p>谷歌机器人部门高级软件工程师Pannag&nbsp;Sanketi在采访中表示，“我们观察到，机器人在专项领域表现极佳，但在通用领域却缺乏灵性。一般来讲，大家需要为每项任务、每台机器人和每种环境分别训练一套模型，从零开始调整每一个变量。”</p><p>&nbsp;</p><p>为了克服这个问题，让机器人的训练和部署变得更加轻松、快捷，谷歌DeepMind在名为Open X-Embodiment的大型共享数据库项目中引入了两大关键组件：一套包含了22种机器人类型数据的数据集，外加一系列能够跨多种任务进行技能迁移的模型 RT-1-X（这是一个源自RT-1的机器人变压器模型）。为了开发 Open X-Embodiment 数据集，研发人员在超过 100万个场景中展示了500多种技能和150,000项任务，因此，该数据集也是同类中最全面的机器人数据集。</p><p>&nbsp;</p><p>此外，研究人员还在机器人实验室和不同类型的物理装置之上对模型进行了测试，并发现与传统机器人训练方法相比，新方案确实能取得更好的成绩。</p><p>&nbsp;</p><p></p><p><img src="https://static001.geekbang.org/infoq/78/782e8f89cce0fdce5401f39e87303470.png" /></p><p></p><p>&nbsp;来自 Open X-Embodiment 数据集的样本展示了 500 多种技能和 150,000 项任务。</p><p>&nbsp;</p><p><img src="https://static001.geekbang.org/infoq/45/45211e40b4438330727247df84fe16e8.png" /></p><p></p><p>&nbsp;Open X-Embodiment 数据集结合了跨实施例、数据集和技能的数据。</p><p>&nbsp;</p><p></p><h2>结合机器人数据</h2><p></p><p>通常来讲，不同类型的机器人往往拥有独特的传感器和执行器，所以需要配合专门的软件模型。这就类似于不同生物体的大脑和神经系统需要专门进化，从而适应该生物的身体结构与所处环境。</p><p>&nbsp;</p><p>但Open X-Embodiment的诞生却出于这样一条先验性的假设：将来自不同机器人和任务的数据结合起来，就能创建一套优于专用模型的通用模型，足以驱动所有类型的机器人。这个概念在一定程度上受到大语言模型（LLM）的启发，即在使用大型通用数据集进行训练时，模型成果的匹配度甚至可以优于在特定数据集上训练的小型针对性模型。而研究人员惊喜地发现，此项原理果然也适用于机器人领域。</p><p>&nbsp;</p><p>为了创建Open X-Embodiment数据集，研究团队收集了来自不同国家20个机构的22台机器人具身的真实数据。该数据集包含超100万种情节（所谓情节，是指机器人每次尝试执行任务时所采取的一系列动作），其中具体涉及500多种技能和15万个任务示例。</p><p>&nbsp;</p><p>随附的各模型均基于Transformer，一套在大语言模型中也得以应用的深度学习架构。RT-1-X建立在Robotics Transformer 1（简称RT-1）之上，是一套适用于在真实环境下实现机器人技术规模化的多任务模型。RT-2-X则建立在RT-1后继者RT-2的基础之上——RT-2是一种视觉语言动作（VLA）模型，能够从机器人和网络数据中学习，并具备响应自然语言命令的能力。</p><p>&nbsp;</p><p>研究人员在五所不同研究实验室的五台常用机器人上测试了RT-1-X对各类任务的执行能力。与针对这些机器人开发的专用模型相比，RT-1-X在拾取和移动物体、以及开门等任务上的成功率高出50%。该模型还能将技能迁移至多种不同环境，这也是在特定视觉场景下训练出的专用模型所做不到的。由此可见，由不同示例集训练而成的模型在大多数任务中都优于专用模型。论文还提到，此模型适用于从机械手臂到四足动物在内的多种机器人。</p><p>&nbsp;</p><p>加州大学伯克利分校副教授、论文联合作者Sergey Levine写道，“对于任何曾有机器人研究经验的朋友来说，都能意识到这是多么了不起：这类模型「从来」就没能第一次就尝试成功，但这个模型却做到了。”</p><p>&nbsp;</p><p><img src="https://static001.geekbang.org/infoq/89/89fcd22e3582fb86c6284da0223f93f8.png" /></p><p></p><p>&nbsp;值得注意的是，即使是规模较小的RT-1-X模型，也实现了对各实验室内部专用模型的超越！对于任何曾有机器人研究经验的朋友来说，都能意识到这是多么了不起：这类模型“从来”就没能第一次就尝试成功，但这个模型却做到了。</p><p>&nbsp;</p><p>在应急技能和处理训练数据集中未涉及的新任务方面，RT-2-X的成功率可达RT-2的3倍。具体来讲，RT-2-X在需要空间认知的任务上表现出更好的性能，例如理解“将苹果放到布旁边”和“将苹果放到布上”两种要求间的区别。</p><p>&nbsp;</p><p>研究人员在Open X和RT-X的发布博文中写道，“我们的结果表明，与其他平台的数据进行联合训练之后，RT-2-X获得了原始数据集中并不具备的额外技能，使其能够执行前所未见的新任务。”</p><p></p><h2>步步迈向机器人研究的新未来</h2><p></p><p>展望未来，科学家们正在考虑将这些进展与DeepMind开发的自我改进模型RoboCat的见解相结合，希望探索出新的研究方向。RoboCat能够学会在不同机械臂上执行各种任务，然后自动设计出新的训练数据以提高自身性能。</p><p>&nbsp;</p><p>Sanketi认为，另一个潜在的研究方向，也可能是进一步研究不同数据集间的混合会如何影响跨机器人具身的能力泛化与改进效果。</p><p>&nbsp;</p><p>该团队目前已经开源了Open X-Embodiment数据集和小型RT-1-X模型，但并未公开RT-2-X模型。</p><p>&nbsp;</p><p>Sanketi总结道，“我们相信，这些工具将改变机器人的训练方式，并加速该领域的研究进展。我们希望开源相关数据，并提供安全但受限的模型以减少障碍、加速研究。机器人技术的未来离不开机器人之间的相互学习，而这一切的前提，首先要求研究人员之间能够相互学习。”</p><p>&nbsp;</p><p>参考链接：</p><p><a href="https://venturebeat.com/ai/deepminds-remarkable-new-ai-controls-robots-of-all-kinds/">https://venturebeat.com/ai/deepminds-remarkable-new-ai-controls-robots-of-all-kinds/</a>"</p><p><a href="https://www.deepmind.com/blog/scaling-up-learning-across-many-different-robot-types">https://www.deepmind.com/blog/scaling-up-learning-across-many-different-robot-types</a>"</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.infoq.cn/article/Muye0Jrc84wvbzePFjaH</id>
             <title>RISC-V成新战场？美国议员：限制美企参与开发RISC-V开源技术，并纳入出口管制</title>
             <link>https://www.infoq.cn/article/Muye0Jrc84wvbzePFjaH</link>
@@ -621,52 +667,6 @@
                         <hr>
                     
                     <p>近日，InfoQ获悉，在第49届数据库国际顶会VLDB大会上，来自腾讯云TDSQL的2篇论文成功被VLDB 2023收录，创新技术再次被国际顶级会议VLDB认可。</p><p>&nbsp;</p><p>作为数据库领域的三大顶级会议之一，VLDB每届会议都集中展示了当前数据库研究的最前沿方向以及工业界的最新应用，吸引了众多全球顶级科技公司和研究机构的参与。因会议对系统创新性、完整性、实验设计等方面都要求极高，VLDB会议的论文接受率总体较低（约 18%）。</p><p>&nbsp;</p><p>入选论文中，腾讯云与南京大学、苏黎世联邦理工学院(ETH)&nbsp;合作研发的《Efficient Black-box Checking of Snapshot Isolation in Databases》解决方案，提出了一种新颖的黑盒检查器——PolySI，它能高效地检查快照隔离（Snapshot isolation，SI），并在检测到违规时提供可理解的反例。</p><p>&nbsp;</p><p>快照隔离是一种常见的弱隔离级别，它避免了串行化所带来的性能损失，同时可以防止很多常见的数据异常。然而，某些声称提供快照隔离保证的生产云数据库仍会产生SI数据异常，尤其在金融领域，会造成巨大影响。业界现有同类工具要么不支持快照隔离级别的测试，要么效率较低。鉴于数据库系统的复杂性，以及通常无法获取数据库内部信息的现状，业内亟需一种黑盒快照隔离检查器。</p><p>&nbsp;</p><p>为了解决该问题，我们提出并设计了“PolySI”算法与工具。PolySI的理论基础是基于广义多图（Generalized Polygraphs，GPs）的SI刻画定理，该定理保证了PolySI的正确性与完备性。PolySI采用SMT求解器（MonoSAT），并利用GPs的紧凑约束编码方案以及领域特定优化加速SMT求解。</p><p>&nbsp;</p><p>目前，通过广泛的评估，PolySI成功地重现了已知的SI异常，并在三个生产云数据库中检测到了新的SI异常、提供了可理解的反例。PolySI在多类工作负载下均优于目前最先进的SI黑盒检查器，并能够扩展到大规模工作负载。</p><p>&nbsp;</p><p>据了解，腾讯云与西蒙菲莎大学(Simon Fraser University)联合完成的《Online Schema Evolution is (Almost) Free for Snapshot Databases》论文，则介绍了“Tesseract”，一种新的在线和事务性模式演化方法，主要用于解决数据库在线修改schema过程中存在的挑战。</p><p>&nbsp;</p><p>当前，现代数据库应用经常根据不断变化的需求进行模式更改，数据库在线修改schema的主要优势在于，无需停止数据库服务或中断正在进行的事务，即可进行结构修改，这使得数据库能够在满足动态变化需求的同时，无需停机维护或重新启动数据库。</p><p>&nbsp;</p><p>但诸多问题也随之而来，在现有数据库系统中，支持在线和事务性模式（schema）演化仍然具有挑战性，如数据一致性，在进行结构修改时，为确保数据的一致性，需要使用事务或其他机制来保证数据的完整性和正确性；其次是长时间运行，某些结构修改预计需要较长的时间来完成，特别是对大型数据库或复杂结构的修改，导致对数据库性能产生一定的影响，因此需要在合适的时间窗口进行修改，以最小化对业务的影响。</p><p>&nbsp;</p><p>在以往的解决方案中，通常采用临时方法对模式演化进行“补丁”应用于现有系统，导致许多边缘情况和功能不完整。因此，应用程序通常不得不仔细安排停机时间进行模式更改，从而牺牲可用性。</p><p>&nbsp;</p><p>“Tesseract”的出现则有效避免了上述缺点。在广泛使用的多版本数据库系统中，模式演化可以被建模为改变整个表的数据修改操作，即数据定义即修改（DDaM）。这使得Tesseract可以通过利用并发控制协议几乎“免费”地支持模式。</p><p>&nbsp;</p><p>在Tesseract应用测试中，通过对现有快照隔离协议进行简单调整，在40核服务器上的工作负载下，Tesseract能够提供在线、事务性的模式演化，而无需服务停机，并在模式演化进行时保持高应用性能。</p><p></p><p>&nbsp;</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/LWyly6ZX8NrO37FQu22Y</id>
-            <title>ChatGPT 再迎重大升级！终于“联网”，不再局限于旧数据，新功能即将对所有人开放</title>
-            <link>https://www.infoq.cn/article/LWyly6ZX8NrO37FQu22Y</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/LWyly6ZX8NrO37FQu22Y</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 28 Sep 2023 06:00:23 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: OpenAI, ChatGPT, 必应搜索引擎, 图像识别功能
-<br>
-<br>
-总结: OpenAI宣布ChatGPT可以通过必应搜索引擎进行网络搜索，并且加入了图像识别功能，使得用户可以通过上传图像进行对话和交流。 </div>
-                        <hr>
-                    
-                    <p>当地时间周三（9月27日），OpenAI在X（前身为推特）上宣布，其聊天机器人产品ChatGPT可以通过微软的必应搜索引擎进行网络搜索，将不再局限于2021年9月之前的数据。</p><p>&nbsp;</p><p>OpenAI称：“现在ChatGPT Plus和Enterprise（企业版） 用户可以使用浏览功能，将很快扩展到所有用户。要启用，请在GPT-4下的选择器中选择‘使用必应浏览’（ Browse with Bing）。”</p><p>需要说明的是，OpenAI早些时候测试了相关功能，允许Plus用户通过必应搜索访问最新信息，但后来因担心用户绕过付费墙，禁用了这项功能。</p><p></p><p>值得一提的是，OpenAI本周早些时候还宣布了另一项重大更新，将使ChatGPT可以通过图片和语音命令交互。</p><p></p><h2>ChatGPT再迎重大升级：“能看、能听，也能说”</h2><p></p><p>&nbsp;</p><p>本周一，OpenAI宣布对ChatGPT进行重大更新，使其GPT-3.5和GPT-4两大AI模型能够分析图像内容，并在文本对话中据此做出反应。OpenAI方面表示，ChatGPT移动版应用还将引入语音合成选项，在与现有语音识别功能配合使用时，能够与AI助手进行全口语对话。</p><p>&nbsp;</p><p>OpenAI也强调，语音合成功能目前仅适用于iOS和Android平台，而图像识别则将登陆Web版和移动版应用。</p><p>&nbsp;</p><p>OpenAI解释称，ChatGPT中的全新图像识别功能允许用户基于GPT-3.5或GPT-4模型，根据上传的一张或多张图像开展对话。该公司在其宣传博文中宣称，这项功能能够对接各类日常应用，例如为冰箱和食品储藏室拍摄照片以确定晚餐吃点什么，还有排除烧烤炉出故障的原因。该公司还提到，用户可以使用设备的触控屏圈出自己希望ChatGPT重点关注的部分。</p><p></p><p><img src="https://static001.geekbang.org/infoq/d3/d3ecbe3dd514cb5fac3cf128f52ebbf1.png" /></p><p></p><p><img src="https://static001.geekbang.org/infoq/9d/9ded80c7d4ae015cccf9d974c0d2883e.png" /></p><p></p><p><img src="https://static001.geekbang.org/infoq/51/515adb30560e8a8c090846a0c0b5fd18.png" /></p><p></p><p>&nbsp;OpenAI宣传视频中的画面，ChatGPT在分析用户照片以帮助其调整自行车座高。</p><p>&nbsp;</p><p>在官方网站上，OpenAI发布了一段宣传视频（<a href="https://openai.com/blog/chatgpt-can-now-see-hear-and-speak">https://openai.com/blog/chatgpt-can-now-see-hear-and-speak</a>"），展示了与ChatGPT的交流过程。其中用户询问要如何升高自己的自行车座垫，并上传了车辆、说明手册以及工具箱的照片。ChatGPT迅速做出反应，并为用户提供了完成调整过程的说明。我们还没有亲自测试过此功能，因此不太清楚实际效果是否真有这么惊艳。</p><p>&nbsp;</p><p>那这一切到底是怎么实现的？OpenAI尚未发布GPT-4或其多模态版本GPT-4V的底层运行细节。但根据其他厂商（包括OpenAI合作伙伴微软）的已知AI研究，多模态AI模型往往能够将文本和图像转化为共享编码空间，借此通过同一套神经网络处理多种类型的数据。OpenAI可以使用CLIP来弥合视觉与文本数据间的差异，从而在同一潜在空间（一种表达数据关系的向量化网络）上实现图像和文本表示对齐。正是这项技术，让ChatGPT具备了跨文本和图像进行上下文推理的能力——当然，这一切都只是外界的推测。</p><p>&nbsp;</p><p>与此同时，报道还指出ChatGPT的全新语音合成功能允许用户与其进行直接对话，而且此功能由OpenAI的“新文本转语音模型”驱动。尽管文本转语音技术已经相当成熟，但该公司表示在此功能推出之后，用户可以在应用端的设置中选择语音对话，之后从五种不同的合成语音中做出选择，具体包括“Juniper”、“Sky”、“Cove”、“Ember”和“Breeze”几个选项。OpenAI称这些声音均是与专业配音演员合作开发而来。</p><p>&nbsp;</p><p>OpenAI的Whisper是一套开源语音识别系统，此次也由它继续负责对用户语音输入的转录。Whisper于今年5月正式与ChatGPT iOS版应用集成，随后在7月登陆ChatGPT的Android版应用。</p><p></p><h2>“请注意，ChatGPT给出的结果不一定准确”</h2><p></p><p>OpenAI于今年3月公布GPT-4时，就曾经展示过该模型的“多模态”功能，据称可以处理文本和图像输入。但在随后的测试阶段，公众一直无缘真正体验其图像功能。期间OpenAI与Be My Eyes合作开发了一款可以为盲人描述场景照片的应用。今年7月，有报道称OpenAI的多模态功能之所以迟迟未能发布，主要是受到隐私问题的影响。与此同时，微软则于7月匆忙在基于GPT-4的AI助手Bing Chat中启用了图像识别功能。</p><p>&nbsp;</p><p>在最近的ChatGPT更新公告中，OpenAI称其扩展功能仍有一些限制，并承认该模型仍可能出现潜在的视觉混淆（即对某些内容的错误识别）、对非英语语种无法完美识别等问题。该公司表示，他们已经“在极端场景和纯科学验证角度”对新功能进行了风险评估，同时征求了alpha版本内测人员的意见，目前的观点仍然是建议谨慎使用，特别是在科学研究等高风险或专业性较强的背景之下。</p><p>&nbsp;</p><p>鉴于在开发Be My Eyes应用时遇到的隐私问题，OpenAI表示已经采取“技术措施来尽量限制ChatGPT对人类对象做分析和直接描述的能力。因为ChatGPT给出的结果不一定准确，AI系统应当尊重个人隐私。”</p><p>&nbsp;</p><p>尽管仍有种种缺陷，但OpenAI在营销材料中还是强调ChatGPT如今已经“能看、能听，也能说”。当然，并不是每个人都能认同这种充满拟人倾向的炒作宣传。Hugging Face公司AI研究员Sasha Luccioni博士就在X上发推称，“别再像看待人类那样看待AI模型了。ChatGPT根本就没法看、没法听，也没法说。它只能跟各种传感器相集成，以不同于人类的方式接收和发出信息。”</p><p>&nbsp;</p><p>虽然ChatGPT及其底层AI模型还远远算不上“人”，但如果本次公布的结果不假，那也至少代表着OpenAI的这款虚拟助手实现了巨大的功能增强。</p><p>&nbsp;</p><p>此外，OpenAI也强调了推迟开放有其充分理由：“我们认为应该逐步推出自己的工具，这样我们才能随时间推移不断改进并完善风险缓解措施，同时也让大家能为未来更强大的AI系统做好准备。”</p><p>&nbsp;</p><p>参考链接：</p><p><a href="https://twitter.com/OpenAI">https://twitter.com/OpenAI</a>"</p><p><a href="https://arstechnica.com/information-technology/2023/09/chatgpt-goes-multimodal-with-image-recognition-and-speech-synthesis/">https://arstechnica.com/information-technology/2023/09/chatgpt-goes-multimodal-with-image-recognition-and-speech-synthesis/</a>"</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/2Kg4JCGdZWc632qllp9t</id>
-            <title>Llama 生态现状：下载量超过 3000 万次，GitHub 上有超 7000 个相关项目</title>
-            <link>https://www.infoq.cn/article/2Kg4JCGdZWc632qllp9t</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/2Kg4JCGdZWc632qllp9t</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 28 Sep 2023 02:04:12 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Meta, Llama, Hugging Face, AWS
-<br>
-<br>
-总结: Meta发布了Llama系列模型，其中Llama 2在云平台上得到广泛应用，AWS成为首个托管API合作伙伴。Llama模型在创新企业和开发者社区中得到了广泛使用和评估。社区通过微调和发布衍生品对Llama进行了优化，提高了性能。此外，Llama得到了各大硬件平台的支持。Meta将继续关注多模态、安全责任和社区，为人工智能提供开放的方法。 </div>
-                        <hr>
-                    
-                    <p><a href="https://ai.meta.com/blog/large-language-model-llama-meta-ai/">Meta发布Llama 1</a>"至今已经 7 个月左右，而<a href="https://ai.meta.com/blog/llama-2/">Llama 2</a>"以及<a href="https://ai.meta.com/blog/code-llama-large-language-model-coding/">Code Llama</a>"的发布也有了数月的时间。当地时间9月27日，Meta发布博文系统介绍了当前 Llama 生态的情况。官方统计，通过 Hugging Face 的 Llama 模型下载量超过 3000 万次，其中仅在过去 30 天就超过了 1000 万次。</p><p>&nbsp;</p><p>当前的Llama 生态情况如下：</p><p>&nbsp;</p><p>云厂商：AWS、Google Cloud 和 Microsoft Azure 等主要平台已在其平台上采用了 Llama 模型，并且 Llama 2 在云中的使用正在扩大。Google Cloud 和 AWS 总共有超过 3,500 个企业项目基于 Llama 2 模型启动。此外，Meta 还宣布 AWS 成为 Llama 2 的首个托管 API 合作伙伴，各种规模的组织都可以访问 Amazon Bedrock 上的 Llama 2 模型，而无需管理底层基础设施。</p><p>&nbsp;</p><p>创新企业：包括 Anyscale、Replicate、Snowflake、LangSmith、Scale AI 等在内，已有上万家初创公司正在使用或评估 Llama 2。“像 DoorDash 这样的创新者正在使用它进行大规模试验，然后再发布由LLM支持的新功能。”</p><p>&nbsp;</p><p>众包优化：截至目前，社区已在Hugging Face上微调并发布了7000多个衍生品。平均而言，在标准基准测试中，它们将常见基准测试的性能提高了近 10%，对于 TruthQA 等基准数据集的性能提升高达 46%。</p><p>&nbsp;</p><p>开发者社区：GitHub 上现在有超过 7,000 个基于 Llama 构建或提及 Llama 的项目。为方便将 Llama 引入边缘设备和移动平台，新的工具、部署库、模型评估方法，甚至 Llama 的“微型”版本都在开发中。此外，社区还扩展了 Llama 以支持更大的上下文、增加了对其他语言的支持等。</p><p>&nbsp;</p><p>硬件支持：各大硬件平台AMD、Intel、Nvidia、Google均通过软硬件优化提升了Llama 2的性能。</p><p></p><p><img src="https://static001.geekbang.org/infoq/61/6123307306e980cfff4e10cfa74fbb84.png" /></p><p>对于Llama 生态的未来，Meta表示，仍致力于为当今的人工智能提供开放的方法，主要会在多模态、安全责任和社区上投入更多关注。</p><p>&nbsp;</p><p>&nbsp;</p><p>参考链接：</p><p><a href="https://ai.meta.com/blog/llama-2-updates-connect-2023/">https://ai.meta.com/blog/llama-2-updates-connect-2023/</a>"</p>
                 ]]>
             </content:encoded>
         </item>
