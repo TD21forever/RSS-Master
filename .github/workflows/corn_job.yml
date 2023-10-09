@@ -3,7 +3,7 @@ name: cron_job
 on:
   schedule:
     # 在白天（6:00-23:00）每30分钟运行一次
-    - cron: '*/240 6-23 * * *'
+    - cron: '*/5 6-23 * * *'
     # 在凌晨（0:00-6:00）每2小时运行一次
     - cron: '*/240 0-6 * * *'
   workflow_dispatch:
@@ -48,7 +48,7 @@ jobs:
           git config --local user.name "RSS-Master@Bot"  
           git config --local user.email "${U_EMAIL}" 
           git status -s
-          git add docs/*
+          git add .
           export TZ='Asia/Shanghai'
           git commit -m "Github Auto Build at `date +"%Y-%m-%d %H:%M"`"
           echo "======git push===="
