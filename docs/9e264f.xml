@@ -148,24 +148,24 @@
         </item>
         
         <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_176djaa</id>
-            <title>Would love feedback on Dwelly AI</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/176djaa/would_love_feedback_on_dwelly_ai/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_176djaa</guid>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_176hcd7</id>
+            <title>Improve Reasoning in ChatGPT Through Diversity of Thought (DoT)</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/176hcd7/improve_reasoning_in_chatgpt_through_diversity_of/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_176hcd7</guid>
             <pubDate></pubDate>
-            <updated>2023-10-12T18:14:04+00:00</updated>
+            <updated>2023-10-12T21:01:15+00:00</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                        <div> 关键词: feedback, real estate AI, Dwelly, proprietary data, dataset, chat GPT, third party APIs, improvements
+                        <div> 关键词: research paper, diverse prompts, reasoning enhancement, GPT models
 <br>
 <br>
-总结: 该文本是一位用户在Reddit上发布的帖子，希望能够得到关于他们的房地产人工智能Dwelly的反馈。他们已经花了大约4个月的时间开发这个AI，并计划在未来添加更多的专有数据到他们的数据集中。该AI是基于聊天GPT构建的，同时还与第三方API进行集成以获取最新的数据。如果你想跟踪他们的进展，请随时注册，他们预计在接下来的几个月会有一些重大改进，并且非常乐意随时与你保持联系并听取建议！ </div>
+总结: 这篇研究论文介绍了一种有效的方法来提升推理能力，即使用多样化的提示来激发模型提供不同的解决问题的方法。研究人员通过在数学、规划和常识推理等领域进行测试，发现这种多样化提示的方法在提高准确性和成本效益方面都有显著的改进。与其他修改解码过程的方法不同，多样化提示通过在输入层面引入多样性，使其适用于各种模型。这种方法对于推理能力的提升具有重要意义，尽管不完美，但多样化提示使ChatGPT在推理方面取得了显著进展。 </div>
                         <hr>
                     
-                    <!-- SC_OFF --><div class="md"><p>I'd love to get feedback on our real estate AI, <a href="https://www.dwellwell.com/">Dwelly</a>. We've been working on him for about 4 months and will begin adding more proprietary data to our dataset upcoming. He's built on chat GPT but we also integrate with third party APIs to pull fresh data. If you want to follow along with our progress, please do feel free to sign up, we anticipate a couple big improvements over the next few months and would love to keep in touch about them or hear suggestions over time!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/sam_dwellwell"> /u/sam_dwellwell </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/176djaa/would_love_feedback_on_dwelly_ai/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/176djaa/would_love_feedback_on_dwelly_ai/">[comments]</a></span>
+                    <!-- SC_OFF --><div class="md"><p>Recently came across a research paper (published yesterday) published by researchers from the likes of Microsoft and Stanford, which I think has gone under the radar, because i've not seen anyone summarise it yet. I wrote this blog (it's on my site The Prompt Index) but this is not a plug, here's the whole blog. I also added a prompt template at the end which i feel embodies the technique of DoT which the researchers are highlighting. I hope you enjoy!</p> <p>ChatGPT and other large language models have shown impressive capabilities, but complex reasoning remains a weak spot. However, a new study reveals an effective technique to enhance reasoning - using diverse prompts.<br /> Researchers from Microsoft and Stanford tested methods to elicit more diverse and structured thinking from models like GPT-3 and GPT-4. The key idea is prompting the model itself to suggest various approaches and personas for solving reasoning problems.<br /> For example, when faced with a math word problem, GPT-4 can propose trying direct calculation, drawing a working backwards, and much more. These diverse strategies are then incorporated into multiple rephrased prompts.<br /> The researchers introduced two techniques building on this idea:<br /> DIV-SE: Execute each diverse prompt separately and combine the responses.<br /> IDIV-SE: Combine multiple approaches into a single prompt.<br /> In this article we are going to concentrate on IDIV-SE &quot;(In-call DIVerse reasoning path Self-Ensemble)&quot;<br /> Across benchmarks in math, planning, and commonsense reasoning, both DIV-SE and IDIV-SE improved accuracy and cost-effectiveness substantially compared to prior prompting strategies.<br /> On a difficult 4/5 blocks world planning challenge, DIV-SE boosted GPT-4's accuracy by 29.6 percentage points. For grade school math problems, it increased GPT-3.5's performance by over 10 percentage points.<br /> Unlike other methods that modify the decoding process, diverse prompting works by eliciting diversity at the input level. This makes it broadly applicable even to black-box models.<br /> <strong>In Summary:</strong><br /> Prompting the model for diverse problem-solving approaches is an effective strategy to improve reasoning.<br /> Combining these diverse prompts boosts accuracy and cost-effectiveness.<br /> DIV-SE and IDIV-SE outperformed existing prompting techniques substantially.<br /> The methods provide gains without needing access to model internals.<br /> Diversity at the prompt level complements diversity during decoding.<br /> Planning, math and commonsense reasoning saw large improvements.<br /> Eliciting diversity directly from the model itself was critical.<br /> The striking gains show the power of diversity for reasoning. While not flawless, diverse prompting pushes ChatGPT notably forward on its journey toward robust reasoning.</p> <p><strong>Key Takeaways for Readers:</strong><br /> Get GPT's feedback on potential approaches and personas to solve the reasoning problem<br /> Create demonstrations of solving the problem using different approaches<br /> Prompt GPT to solve the problem taking on each persona and using the approaches<br /> Aggregate the solutions from different personas and approaches<br /> Diversity of approaches and &quot;thinkers&quot; is key to improving reasoning</p> <p>Read the full blog <a href="https://www.thepromptindex.com/652857f7a177f.html">here</a><br /> If you enjoyed this in the slightest this is the sort of content I send out to my <a href="https://www.thepromptindex.com/newsletter.html">newsletter</a> on a weekly basis. I aim to be the first and to make things understandable and most of all, ensure there's something you can take away from the article (see prompt template below).<br /> <strong>Here’s a prompt template that we at The Prompt Index have put together which embodies the Diverse of Thought (DoT) approach:</strong><br /> IDIV-SE ( Diverse Reasoning) </p> <p>/Start of prompt/<br /> <em>[State reasoning problem here for example: In the following question, a number series is given with one term missing. Choose the correct alternative that will follow the same pattern and fill in the blank spaces. 1, 2, 3, 5, x, 13]</em><br /> <em>To begin, please suggest 3 distinct approaches I could use to accurately solve the above problem:</em><br /> <em>Approach 1:</em><br /> <em>Approach 2:</em><br /> <em>Approach 3:</em><br /> <em>Now please provide 3 short demonstrations, each solving the original problem using one of the approaches you suggested above:</em><br /> <em>Demonstration 1 (Approach 1):</em><br /> <em>Demonstration 2 (Approach 2):</em><br /> <em>Demonstration 3 (Approach 3):</em><br /> <em>Great, let's put it all together. Please now take on the role of expert one (a persona you feel is mostly aligned to the issue) and solve the original problem using Approaches 1-3.</em><br /> <em>Now take on the persona of expert 2 (a persona you feel is the next most likely aligned to the issue) and solve the original problem again using Approaches 1-3.</em><br /> <em>Finally, take on the persona of expert 3 (a persona you feel is the next most likely aligned to the issue) and solve the original problem a third time using Approaches 1-3.</em><br /> <em>Please synthesize your responses from the 3 expert personas above and provide your final recommended solution.</em></p> <p>/End of prompt/</p> <p><strong>Prompt Source:</strong> <a href="http://www.thepromptindex.com">www.thepromptindex.com</a><br /> <strong>Prompt Author:</strong> The Prompt Index<br /> <strong>Full credit (Research Paper) to</strong> Naik, R., Chandrasekaran, V., Yuksekgonul, M., Palangi, H., &amp; Nushi, B. (2023)Diversity of thought improves reasoning abilities of large language models. <a href="https://arxiv.org/abs/2310.07088">arXiv preprint arXiv:2310.07088</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/steves1189"> /u/steves1189 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/176hcd7/improve_reasoning_in_chatgpt_through_diversity_of/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/176hcd7/improve_reasoning_in_chatgpt_through_diversity_of/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -189,6 +189,52 @@
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p>I put together a project that enables interaction with BingChat via Python and Selenium. It can handle both text and image prompts, making it easy to build AI vision powered projects. It is still somewhat janky and the error handling could be improved but with some refinement I think it could be really useful for some people. Check it out at <a href="https://github.com/Gadersd/bingchat">https://github.com/Gadersd/bingchat</a>.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Illustrious_Cup1867"> /u/Illustrious_Cup1867 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/176c1y9/program_bingchat_with_python/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/176c1y9/program_bingchat_with_python/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_176gurp</id>
+            <title>How to clone voice in ai</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/176gurp/how_to_clone_voice_in_ai/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_176gurp</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-12T20:40:05+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: videos, tiktok, youtube, game characters
+<br>
+<br>
+总结: 这是一个关于在tiktok或youtube上流行的视频，其中随机游戏角色可以说出创作者想要的任何话或类似内容的讨论。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>Like these videos that are all over tiktok or youtube where random game characters say whatever the creator wants or something like that</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Beneficial_Reward_54"> /u/Beneficial_Reward_54 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/176gurp/how_to_clone_voice_in_ai/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/176gurp/how_to_clone_voice_in_ai/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_176glpj</id>
+            <title>Emotional support conversations</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/176glpj/emotional_support_conversations/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_176glpj</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-12T20:29:13+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: emotional support conversations, AI language models, MODERN method, ConceptNet
+<br>
+<br>
+总结: 这篇论文介绍了一种改进AI语言模型在情感支持对话中的方法。研究人员提出了一种名为MODERN的新方法，通过使用ConceptNet来提高语言模型对话的理解能力，从而更好地应对心理障碍的增加。该方法通过从不同的对话中提取关键信息来学习，并在回复消息时使用所有对话的主题和关键信息。这种方法可以用于创建更真实（类似人类）和有帮助的与语言模型的对话。这项研究的目的是改进语言模型的情感支持能力，而不是取代心理治疗师等角色。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>I just finished reading an interesting Arxiv research paper about improving emotional support conversations with AI language models. Basically they test new ways to improve the interactions we have with language models to better address the rise of mental disorders.</p> <p>The problem now is LLMs aren’t that great at picking up on changing emotions in a conversation. To address this, the researchers came up with a new method called MODERN. Based on my understanding of the paper, it does a few things: - it improves how well a language model understands the what you’re talking about by using something they call ConceptNet. Think of it like a dictionary that the language model references to maintain a better theme of the conversation. - the new method learns from different chats to extract key takeaways. So it improves over time. - uses the theme and key takeaways from all your chats whenever it responds to your message.</p> <p>What I find the most interesting is how this new method could be used to create more believable (human-like) and helpful conversations with LLMs.</p> <p>I don’t think the research is really about replacing therapist or anything like that. It’s more about improving the emotional support capabilities of language models in general.</p> <p>You can read the research paper yourself <a href="https://arxiv.org/pdf/2310.07700.pdf">here</a>.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Revelnova"> /u/Revelnova </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/176glpj/emotional_support_conversations/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/176glpj/emotional_support_conversations/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -263,24 +309,24 @@
         </item>
         
         <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_1768skt</id>
-            <title>music</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/1768skt/music/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_1768skt</guid>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_176djaa</id>
+            <title>Would love feedback on Dwelly AI</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/176djaa/would_love_feedback_on_dwelly_ai/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_176djaa</guid>
             <pubDate></pubDate>
-            <updated>2023-10-12T14:50:25+00:00</updated>
+            <updated>2023-10-12T18:14:04+00:00</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                        <div> 关键词: AI, 音乐创作, Charlie Parker, Reddit
+                        <div> 关键词: feedback, real estate AI, Dwelly, proprietary data, dataset, chat GPT, third party APIs, improvements
 <br>
 <br>
-总结: 这篇文章讨论了AI是否能够以某位音乐家的风格创作音乐，特别是以Charlie Parker为例。作者在Reddit上提出了这个问题，并提出了AI可以在Parker停止创作的地方继续创作音乐的建议，但遭到了负面评价。 </div>
+总结: 该文本是一位用户在Reddit上发布的帖子，希望能够得到关于他们的房地产人工智能Dwelly的反馈。他们已经花了大约4个月的时间开发这个AI，并计划在未来添加更多的专有数据到他们的数据集中。该AI是基于聊天GPT构建的，同时还与第三方API进行集成以获取最新的数据。如果你想跟踪他们的进展，请随时注册，他们预计在接下来的几个月会有一些重大改进，并且非常乐意随时与你保持联系并听取建议！ </div>
                         <hr>
                     
-                    <!-- SC_OFF --><div class="md"><p>Is AI capable of composing music in the style of a certain musician.?? I ask this because of a question in <a href="https://www.reddit.com/r/jazz">r/jazz</a> about Charlie Parker who died young. My suggestion was that maybe AI could make music where Parker stopped l. (and got downvoted)</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/weesgegroet"> /u/weesgegroet </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1768skt/music/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1768skt/music/">[comments]</a></span>
+                    <!-- SC_OFF --><div class="md"><p>I'd love to get feedback on our real estate AI, <a href="https://www.dwellwell.com/">Dwelly</a>. We've been working on him for about 4 months and will begin adding more proprietary data to our dataset upcoming. He's built on chat GPT but we also integrate with third party APIs to pull fresh data. If you want to follow along with our progress, please do feel free to sign up, we anticipate a couple big improvements over the next few months and would love to keep in touch about them or hear suggestions over time!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/sam_dwellwell"> /u/sam_dwellwell </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/176djaa/would_love_feedback_on_dwelly_ai/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/176djaa/would_love_feedback_on_dwelly_ai/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -332,29 +378,6 @@
         </item>
         
         <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_1768nz9</id>
-            <title>Implementation of Llama 2 in Google Colab</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/1768nz9/implementation_of_llama_2_in_google_colab/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_1768nz9</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-12T14:45:00+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Google Colab, free GPU, transformer library, model training
-<br>
-<br>
-总结: 使用Google Colab进行编码可以免费获得GPU加速，同时需要安装transformer库和其他必要的软件包来进行模型训练。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>While you have the option to write the code in any IDE or Google Colab, it's advisable to use Google Colab for coding, as it provides a distinct advantage due to its provision of a free GPU.<br /> In case you've come across our earlier blog on LLM, referenced in the introduction section, it's worth noting that we utilize the transformer library for model training. To proceed with this, you'll need to install the transformer library and some other required packages. </p> <p><a href="https://www.seaflux.tech/blogs/Llama-2-Meta-AI-Open-Source-Language-Model">https://www.seaflux.tech/blogs/Llama-2-Meta-AI-Open-Source-Language-Model</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/krunal_bhimani_"> /u/krunal_bhimani_ </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1768nz9/implementation_of_llama_2_in_google_colab/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1768nz9/implementation_of_llama_2_in_google_colab/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_175ueqz</id>
             <title>LLMs can’t self-correct in reasoning tasks, DeepMind study finds</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/175ueqz/llms_cant_selfcorrect_in_reasoning_tasks_deepmind/</link>
@@ -373,6 +396,52 @@
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><blockquote> <p>Feedback is the most essential thing, going back to the Perceptron, the Thermostat, and Further. </p> <p><a href="https://bdtechtalks.com/2023/10/09/llm-self-correction-reasoning-failures/">https://bdtechtalks.com/2023/10/09/llm-self-correction-reasoning-failures/</a></p> </blockquote> <p>&#x200b;</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/JackIgnatius"> /u/JackIgnatius </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175ueqz/llms_cant_selfcorrect_in_reasoning_tasks_deepmind/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175ueqz/llms_cant_selfcorrect_in_reasoning_tasks_deepmind/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_1768skt</id>
+            <title>music</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/1768skt/music/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_1768skt</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-12T14:50:25+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: AI, 音乐创作, Charlie Parker, Reddit
+<br>
+<br>
+总结: 这篇文章讨论了AI是否能够以某位音乐家的风格创作音乐，特别是以Charlie Parker为例。作者在Reddit上提出了这个问题，并提出了AI可以在Parker停止创作的地方继续创作音乐的建议，但遭到了负面评价。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>Is AI capable of composing music in the style of a certain musician.?? I ask this because of a question in <a href="https://www.reddit.com/r/jazz">r/jazz</a> about Charlie Parker who died young. My suggestion was that maybe AI could make music where Parker stopped l. (and got downvoted)</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/weesgegroet"> /u/weesgegroet </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1768skt/music/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1768skt/music/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_1768nz9</id>
+            <title>Implementation of Llama 2 in Google Colab</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/1768nz9/implementation_of_llama_2_in_google_colab/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_1768nz9</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-12T14:45:00+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Google Colab, free GPU, transformer library, model training
+<br>
+<br>
+总结: 使用Google Colab进行编码可以免费获得GPU加速，同时需要安装transformer库和其他必要的软件包来进行模型训练。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>While you have the option to write the code in any IDE or Google Colab, it's advisable to use Google Colab for coding, as it provides a distinct advantage due to its provision of a free GPU.<br /> In case you've come across our earlier blog on LLM, referenced in the introduction section, it's worth noting that we utilize the transformer library for model training. To proceed with this, you'll need to install the transformer library and some other required packages. </p> <p><a href="https://www.seaflux.tech/blogs/Llama-2-Meta-AI-Open-Source-Language-Model">https://www.seaflux.tech/blogs/Llama-2-Meta-AI-Open-Source-Language-Model</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/krunal_bhimani_"> /u/krunal_bhimani_ </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1768nz9/implementation_of_llama_2_in_google_colab/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1768nz9/implementation_of_llama_2_in_google_colab/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -493,29 +562,6 @@
         </item>
         
         <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_175mk0u</id>
-            <title>Any good courses for Python?</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/175mk0u/any_good_courses_for_python/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_175mk0u</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-11T19:27:05+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: AI, ML, 机器学习专业课程, Andrew NG
-<br>
-<br>
-总结: 这篇文章是一个AI和ML新手寻求关于学习AI的建议的帖子。他对AI感兴趣，并选择了Andrew NG的机器学习专业课程作为起点，但他也意识到需要复习自己的Python技能。他在寻找一些能够教授AI所需重要主题（如numpy、matplotlibs、panda等）的好课程。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>Hi, I am actually a complete newbie when it comes to AI and ML. Since I am actually interested in pursuing AI as a career, I thought I could start with some courses. I have selected the Machine Learning Specialization course by Andrew NG for now, but I also thought that I need to refresh my python skills. So I'm trying to find some good courses which can help with teaching some of the important topics required for AI like numpy, matplotlibs, panda, etc. Any good course suggestions please?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Swimming-Spring-4704"> /u/Swimming-Spring-4704 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175mk0u/any_good_courses_for_python/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175mk0u/any_good_courses_for_python/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_175m0it</id>
             <title>It's time we move on from chatbots</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/175m0it/its_time_we_move_on_from_chatbots/</link>
@@ -539,6 +585,29 @@
         </item>
         
         <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_175mk0u</id>
+            <title>Any good courses for Python?</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/175mk0u/any_good_courses_for_python/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_175mk0u</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-11T19:27:05+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: AI, ML, 机器学习专业课程, Andrew NG
+<br>
+<br>
+总结: 这篇文章是一个AI和ML新手寻求关于学习AI的建议的帖子。他对AI感兴趣，并选择了Andrew NG的机器学习专业课程作为起点，但他也意识到需要复习自己的Python技能。他在寻找一些能够教授AI所需重要主题（如numpy、matplotlibs、panda等）的好课程。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>Hi, I am actually a complete newbie when it comes to AI and ML. Since I am actually interested in pursuing AI as a career, I thought I could start with some courses. I have selected the Machine Learning Specialization course by Andrew NG for now, but I also thought that I need to refresh my python skills. So I'm trying to find some good courses which can help with teaching some of the important topics required for AI like numpy, matplotlibs, panda, etc. Any good course suggestions please?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Swimming-Spring-4704"> /u/Swimming-Spring-4704 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175mk0u/any_good_courses_for_python/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175mk0u/any_good_courses_for_python/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_175nr7d</id>
             <title>LLaVA 1.5: The best free alternative to ChatGPT (GPT-V4)</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/175nr7d/llava_15_the_best_free_alternative_to_chatgpt/</link>
@@ -557,75 +626,6 @@
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p>I have written a technical blogpost on the LLaVA 1.5, which imo is currently the best free alternative model to ChatGPT V4 (image capabilities). If you are interested in reading it: <a href="https://schoolofmachinelearning.com/2023/10/10/llava-1-5-the-best-free-alternative-to-chatgpt-gpt-4v/">https://schoolofmachinelearning.com/2023/10/10/llava-1-5-the-best-free-alternative-to-chatgpt-gpt-4v/</a> </p> <p>If you directly want to try: <a href="https://llava-vl.github.io">https://llava-vl.github.io</a> </p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/farhanleo"> /u/farhanleo </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175nr7d/llava_15_the_best_free_alternative_to_chatgpt/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175nr7d/llava_15_the_best_free_alternative_to_chatgpt/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_175v75h</id>
-            <title>Best AI for audience segmentation &amp; predictive analytics? (Digital Marketing)</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/175v75h/best_ai_for_audience_segmentation_predictive/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_175v75h</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-12T01:50:19+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: marketer, paid social agency, hospitality industry, AI softwares
-<br>
-<br>
-总结: 这是一位在酒店行业专注于付费社交广告的营销人员，正在寻找能够进行受众细分和预测分析的1或2个人工智能软件，目标是提高客户的收入和转化率。他们的预算不是很大，属于中型公司。非常感谢您的帮助！ </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>Context: I’m a marketer working at a paid social agency specialized in the hospitality industry. We are looking to bring on 1 or 2 AI softwares that can do both or either of these - audience segmentation and predictive analytics. </p> <p>The goal here would be to increase our client’s revenue and conversions. We don’t have the largest budget as well, we are midsize. I really really appreciate your input, thank you so much!</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/LightoftheAncients"> /u/LightoftheAncients </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175v75h/best_ai_for_audience_segmentation_predictive/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175v75h/best_ai_for_audience_segmentation_predictive/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_175qy98</id>
-            <title>is Transfomers nn are the best for creating a crypto price prediction model ?</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/175qy98/is_transfomers_nn_are_the_best_for_creating_a/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_175qy98</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-11T22:30:27+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: crypto price prediction model, RNNs, LSTM, transformers
-<br>
-<br>
-总结: 提问者想要创建一个加密货币价格预测模型，但对于使用RNNs、LSTM和transformers之间的选择感到困惑，希望得到一些资深人士的建议。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>I am willing to create a crypto price prediction model, and i am confused between RNNs and LSTM and transformers, i can use some seniors advice </p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/escanorlegend"> /u/escanorlegend </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175qy98/is_transfomers_nn_are_the_best_for_creating_a/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175qy98/is_transfomers_nn_are_the_best_for_creating_a/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_175peam</id>
-            <title>Any good non-Spotify music suggesting AIs?</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/175peam/any_good_nonspotify_music_suggesting_ais/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_175peam</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-11T21:24:51+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: AI, 音乐推荐, Spotify, 账户
-<br>
-<br>
-总结: 作者正在寻找一种AI工具，可以根据他当前保存的歌曲或提示来为他推荐新的音乐。然而，他发现所有的工具似乎都只在Spotify上推荐歌曲，而他不使用Spotify并且也不打算使用，这让他感到很烦恼，因为他无法完整地听歌，只能听到30秒的预览音频，而要听完整首歌需要创建一个账户。因此，他想要避免使用Spotify，希望能找到其他选项，比如YouTube、Soundcloud或直接下载，只要能找到一种不需要创建账户的方式来完整地听歌。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>I've been trying to find an AI which would suggest me new music based on my current saved songs or through a prompt or just in any way whatsoever. The problem I am running into is that they all seem to suggest songs on Spotify (at least the few I tried), which I don't use and don't intend to use, and find it annoying because you can't even listen to the songs fully without creating an account since all it has is 30 sec previews. That's mainly why I want to avoid Spotify. I don't like being forced to create an account when I don't use that app/site anyway. </p> <p>What's the best option you've come across that doesn't automatically give you results in Spotify? I'd take anything else, YouTube, Soundcloud, direct download, as long as I can find a way to listen to it fully without creating any account or anything.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/IngenuityFair3272"> /u/IngenuityFair3272 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175peam/any_good_nonspotify_music_suggesting_ais/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/175peam/any_good_nonspotify_music_suggesting_ais/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
