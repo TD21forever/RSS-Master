@@ -5,29 +5,6 @@
         <link>https://sspai.com</link>
         
         <item>
-            <id>https://sspai.com/post/83182</id>
-            <title>我开发了一套 Marp 主题，Markdown 直接转换的 PPT 也可以很好看：Awesome Marp</title>
-            <link>https://sspai.com/post/83182</link>
-            <guid isPermaLink="false">https://sspai.com/post/83182</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 15 Oct 2023 04:13:47 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Markdown语法, Awesome Marp, PPT制作, 自定义模板
-<br>
-<br>
-总结: 本文介绍了使用Markdown语法进行演示文稿创作的Awesome Marp，它提供了多种颜色主题和局部样式，支持页面分栏和导航进度栏等功能，可以规范化PPT制作并保留个人特色。作者通过自定义CSS文件改善了Marp原生主题的呈现效果，并将这套主题分享给其他用户。使用Markdown语法、Markdown编辑器和Marp插件即可使用Awesome Marp进行PPT制作。 </div>
-                        <hr>
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><blockquote><p>使用 Markdown 语法进行演示文稿的创作，只关注内容本身而非格式。 &nbsp;<br />有自定义模板加持，规范化 PPT 制作的同时，又不失个人特色。<br />Awesome Marp v1.0 一次性提供了 6 种颜色主题，21 种局部样式，原生 Marp 不支持的页面分栏、导航进度栏等，Awesome Marp 都能很好地实现！<br />如果对你有帮助，欢迎评论，期待交流~</p></blockquote><h2>为什么要做 Awesome Marp？</h2><p>自从了解到 Marp 可以使用 Markdown 语法来创作 PPT 之后，我有两年多没有使用 PowerPoint 做过演示文稿了。</p><p>Marp 内置的原生主题样式数量少，并且呈现效果不好看，所以一直以来我也在尝试自定义 CSS 文件，来打造符合个人审美的 theme。我在边改造边用的过程中，这套模板也得到了几位朋友的喜爱。于是索性简单写篇推文介绍一下，希望能给到你一些帮助~</p><p>我给这套主题还起了个名字，<code>Awesome Marp</code>，算是一个阶段性总结吧。目前 v1.0 版本提供了六种主题，分别是深色、绿色、蓝色、红色、紫色和棕色。</p><p>首先，先来看一张效果动图吧。</p><figure class="image ss-img-wrapper"><img alt="Awesome Marp 整体效果" src="https://cdn.sspai.com/2023/09/24/article/3ec636bd58024b715a3faefe95b5b380?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>怎么样？如果你也使用过 Marp 原生的 theme，一定会发现 Awesome-Marp 变化真的很大了。是的，我基于 Marp 的 <code>default</code> 主题，做了不小的改动。</p><p>这是一个纯 CSS 的项目，所有的效果都是 CSS 语言实现的。因为并没有前端基础，所以我是一边学一边改，代码还有不少可以再完善优化的地方。但，完成比完善更重要嘛，一些小的问题可以日后迭代更新。于是，就决定将 Awesome Marp 上线了！</p><p>本着「开箱即用」的原则，我将本项目文件夹打包上传到了<a href="https://github.com/favourhong/Awesome-Marp">GitHub</a>和<a href="https://gitee.com/favourhong/Awesome-Marp">Gitee</a>。你可以去那里下载项目文件夹，也可以在公众号后台获取链接（后文有回复码）~</p><h2>你需要了解的软件工具</h2><p>就三样：Markdown 语法、Markdown 编辑器（<a href="https://code.visualstudio.com/">Visual Studio Code</a>）和 <a href="https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode">Marp for VScode</a> 插件！</p><ul><li>Markdown：</li></ul><figure class="image ss-img-wrapper"><img alt="" src="https://cdn.sspai.com/2023/09/24/article/6a0e6893351ed69fe51851713cfa2405?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>Markdown 编辑器（如 VS Code）：</li></ul><figure class="image ss-img-wrapper"><img alt="" src="https://cdn.sspai.com/2023/09/24/article/9d87a570b39e7c1e5e94251afc77c7ed?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>Marp：</li></ul><figure class="image ss-img-wrapper"><img alt="" src="https://cdn.sspai.com/2023/09/24/article/fe0139e8cac17190b6780b2ec21ad930?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img alt="" src="https://cdn.sspai.com/2023/09/24/article/3c68faa4dcae5fc54fa12702f398c2c8?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>Awesome Marp 的几个特色</h2><ul><li>支持 4 种<strong>页面分栏</strong>的样式：分别是两栏五五分、两栏六四分、两栏七三分和三栏三三分</li></ul><figure class="image ss-img-wrapper"><img alt="4种页面分栏的呈现效果" src="https://cdn.sspai.com/2023/09/24/article/0d1418a988c1c03e4cd828ef0a537e2c?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>支持 4 种<strong>非嵌套列表的分栏</strong>样式：</li></ul><figure class="image ss-img-wrapper"><img alt="list列表分栏呈现的效果" src="https://cdn.sspai.com/2023/09/24/article/01937079115c5405442207202858f5d4?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>支持导航进度栏：</li></ul><figure class="image ss-img-wrapper"><img alt="导航进度栏的效果" src="https://cdn.sspai.com/2023/09/24/article/6fdbc2b04634c56b05739f1e4a9324a9?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>支持 5 种类型的封面页：</li></ul><figure class="image ss-img-wrapper"><img alt="5种类型封面页的效果" src="https://cdn.sspai.com/2023/09/24/article/fe24277c570680122ac75fdc973e814c?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>支持 3 种类型的目录页：</li></ul><figure class="image ss-img-wrapper"><img alt="3种目录页的效果" src="https://cdn.sspai.com/2023/09/24/article/5f8b811b4e98b84e4fcbdc56eeb8d921?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>支持 5 种自定义「引用盒子」（类似于 Beamer 的定理框）：</li></ul><figure class="image ss-img-wrapper"><img alt="5种自定义引用盒子的呈现效果" src="https://cdn.sspai.com/2023/09/24/article/b927672df98a4cedd60c2adeb693cbb9?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>小彩蛋：链接会自动增加一个小尾巴：</li></ul><figure class="image ss-img-wrapper"><img alt="链接的呈现效果" src="https://cdn.sspai.com/2023/09/24/article/c96644743c12c5b9b2aff0dd6667ac16?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>还可以自定义实现图片的水平排列方式：居中对齐、居左对齐或居右对齐，实现方式也很简单：</p><ul><li>图片水平居中对齐：<code>![#c](a.png)</code></li><li>图片水平居右对齐：<code>![#r](b.png)</code></li><li>图片水平居左对齐：<code>![#l](c.png)</code></li></ul><p>……</p><p>总结一下，实现类似上面的效果，需要自定义样式（也就是局部指令），目前 Awesome Marp 1.0 版本一共支持 21 个！</p><figure class="image ss-img-wrapper"><img alt="21 种自定义样式" src="https://cdn.sspai.com/2023/09/24/article/6446077d6816afc4abfa253ace87196d?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不光如此，我还设计了 6 种主题色，想要切换 theme，只需要可在 YAML 区定义 <code>theme: &lt;theme_name&gt;</code>：</p><figure class="image ss-img-wrapper"><img alt="6种主题颜色" src="https://cdn.sspai.com/2023/09/24/article/eed930ec4b4a06435534b4d2abc33215?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img alt="轻松切换主题" src="https://cdn.sspai.com/2023/09/24/article/033bc45d19d435a5babe3eba2d2cb6ab?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>如何使用 Awesome Marp？</h2><ul><li>如果你想「拿来即用」，直接根据我分享的 Markdown 源码文件，对照修改就好了~</li><li>如果你对部分效果不满意、期望简单微调的话，目前在 <code>Awesome-Marp/themes</code> 下有 6 个 CSS 文件，这些 CSS 文件决定了 Markdown 源码的最终渲染效果，可以试着改一改~</li><li>如果你能够自行定制个性化 CSS 文件，渲染之前，别忘了在 <code>Awesome-Marp/.vscode/settings.json</code> 里加上你的 CSS 文件路径~</li></ul><blockquote><ul><li><strong>下载地址：</strong><ul><li>GitHub：&lt;https://github.com/favourhong/Awesome-Marp&gt;</li><li>Gitee：&lt;https://gitee.com/favourhong/Awesome-Marp&gt;</li><li>也可以公众号后台回复 <strong>Marp</strong>，获取文件压缩包</li></ul></li></ul></blockquote><h2>我猜可能会出现的问题</h2><ul><li>你的呈现效果与我不同：<ul><li>可能是因为你没有安装相关字体文件。因担心版权问题，需自行下载字体并安装，Awesome Marp 用到的字体有：</li><li>英文字体：<code>Adobe Garamond</code> / <code>Latin Modern Math</code> / <code>Optima LT Medium</code> / <code>Fira Code</code></li><li>中文字体：<code>方正宋刻本秀楷体</code> / <code>方正苏新诗柳楷简体</code> / <code>霞鹜文楷</code> / <code>叶根友毛笔行书修正版</code></li></ul></li><li>自定义 CSS 不生效：<ul><li>可能因为你没有在 VS Code 的设置文件 <code>settings.json</code> 中引入自定义的 CSS 路径</li><li>可参考 <code>./Awesome-Marp/.vscode/settings.json</code> 照猫画虎</li></ul></li></ul><h2>最后</h2><p>Awesome Marp 第 1 版的样式，感觉已经基本够用了，还有一些想法没有呈现出来，我会根据自己的使用体验和大家的反馈，不定期迭代更新~</p><p>欢迎交流 💡 ~</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://sspai.com/post/83412</id>
             <title>告别电影荒：日本电影观看全指南</title>
             <link>https://sspai.com/post/83412</link>
@@ -208,6 +185,64 @@
                         <hr>
                     
                     <h2>你可能错过的新鲜事</h2><h3>高通公布面向 PC 的骁龙 X 系列芯片</h3><p>10 月 10 日，高通公司公布了面向 PC 的骁龙 X 系列芯片。高通方面表示，骁龙 X 基于高通多年来在 CPU、GPU 和 NPU 领域的异构计算经验构建，并且利用了新一代高通 Oryon CPU 的卓越性能，骁龙 X 的 NPU 还将针对生成式 AI 提供加速。首款骁龙 X 芯片会 2023 骁龙峰会上正式发布，该活动将于 10月24 至 26 日在夏威夷举行。<a href="https://www.expreview.com/90443.html">来源</a></p><h3>网页版 Adobe Illustrator 开放公测</h3><p>10 月 10 日，Adobe 公司在 MAX 大会上宣布，网页端 Beta 版 Illustrator 正式开启公测，用户已经可以创建、编辑和分享 llustrator 云文档（.aic）。同时，Adobe 还上线了 Beta 版的 Text to Vector Graphic、Retype 和 Mockup 三项新功能。其中，Text to Vector Graphic 功能基于 Adobe Firefly，可以通过描述主题或视觉效果来生成相关的矢量图形和插图；Retype 可以识别 Adobe Fonts 上的相似字体，快速将导入 Illustrator 的静态光栅化文本或轮廓转换为可编辑文本；Mockup 则可以直接在 Illustrator 中快速轻松地预览图形的「真实」应用程序模型。<a href="https://helpx.adobe.com/illustrator/web/illustrator-on-the-web-overview.html">来源</a></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/12/article/78a179891740eb3419f76fe0cc70d54f?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>产品特性概述，网页截取自 Adobe</figcaption></figure><h3>微软将结束多项服务支持</h3><h4>微软将在 Windows 中弃用 VBScript</h4><p>近日，微软公司<a href="https://learn.microsoft.com/en-us/windows/whats-new/deprecated-features">更新了 Windows 系统说明文档</a>，在「弃用功能」一章中表示，计划在未来的 Windows 版本中弃用 VBScript。微软将首先在 Internet Explorer 内移除 VBScript，之后将作为可选组件供有需要的用户安装。VBScript 曾被大量的系统管理员用于完成各种自动化任务，但这些工作目前可以通过 PowerShell 实现。此外，VBScript 日益严重的安全问题也可能是微软考虑弃用的重要原因。<a href="https://www.oschina.net/news/261322/microsoft-deprecated-vbscript-in-window">来源</a></p><h4>微软结束对于 Windows 11 21H2 版本的支持</h4><p>10 月 10 日，微软公司正式结束对首个 Windows 11（Windows 11 21H2）版本的支持，其中包括 Windows 11 家庭版、家庭中国版、专业版、专业工作站版和专业教育版，未来该版本将不会收到月度安全和质量更新。</p><p>不过，Windows 11 21H2 的企业版、企业教育版、IoT 企业版和企业多会话版将在 2024 年 10 月 8 日结束支持。用户可以尽快升级到 Windows 11 22H2 或者近期发布的 Windows 11 23H2 来保障系统继续获得服务支持。<a href="https://www.neowin.net/news/windows-11-version-21h2-is-no-longer-supported/">来源</a></p><h3>Valve 确认《反恐精英2》不支持 macOS</h3><p>近日，游戏开发商 Valve 推出了《反恐精英 2》（CS 2），但游戏仅提供了 Windows 和 Linux 版本，对此 Valve 在一份声明中表示，由于上一代游戏《CS:GO》的 macOS 玩家仅占全部玩家总数的 1%，因此他们决定《反恐精英2》不推出 macOS 版本。</p><p>目前 macOS 用户可以继续玩《CS:GO》，但对《CS:GO》的支持将于 2024 年 1 月 1 日结束。符合资格的 macOS 玩家可以申请 Prime Status Upgrade 退款。Valve 将在 12 月 1 日前允许玩家申请退款。<a href="https://www.solidot.org/story?sid=76299">来源</a></p><h3>《星露谷物语》将举办全球音乐会</h3><p>近日，知名游戏《星露谷物语》上线了<a href="https://www.stardewvalleyconcert.com/" target="_blank">「季节庆典」（Festival of Seasons）全球音乐会巡演页面</a>。据页面介绍，本次巡演将在美国、英国、加拿大、澳大利亚等地展开，演出从 2024 年 2 月正式开始，10 月起已可以预订门票。「季节庆典」将由交响乐团现场演奏《星露谷物语》中的经典配乐，让听众在现实世界中感受《星露谷物语》的四季。<a href="https://www.stardewvalleyconcert.com/" target="_blank">来源</a></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/12/1811508c6d5299f2f86dfa0823a7100d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>目前已公布的巡演目的地及开票时间，图片截取自网页</figcaption></figure><h2>少数派的近期动态</h2><ul><li>国庆去了哪儿，留下了哪些回忆？用一张照片为夏天的尾巴做个「总结」！<a href="https://s.weibo.com/weibo?q=%23%E8%BF%99%E4%B8%AA%E5%A4%8F%E5%A4%A9%E6%88%91%E5%9C%A8%E8%BF%99%23" target="_blank">#这个夏天我在这#</a> 照片征集活动仍在进行，每周都有「出行礼包」送出。<a href="https://weibo.com/u/1914010467" target="_blank"><strong>微博参与</strong></a></li><li>《iOS 蓝皮书》已开启年度更新，内容适配 iOS 17，首发加入少数派会员。年度会员可<a href="https://sspai.com/series/277"><strong>直接畅读</strong></a></li><li>不能说走就走，但想去哪儿就去哪儿总是可以的！规划、路线、必备好物、心得经验、踩雷避坑……分享你的自驾游故事和心得。<a href="https://sspai.com/bullet/1695717562"><strong>参与讨论</strong></a></li></ul><h2>你可能错过的好文章</h2><ul><li><a href="https://sspai.com/prime/story/zhuanglesha-231011">少数派健身类选题人气作者「举铁的马里奥」都装了啥？</a></li><li><a href="https://sspai.com/post/83501">具透 | 喜欢 Android 14 的 14 个理由（少数派版本）</a></li><li><a href="https://sspai.com/post/83488">返璞归真，又迎一春：小评《刺客信条：幻景》</a></li><li><a href="https://sspai.com/post/83487">用开源项目，你也能训练自己的 AI 语音模型</a></li></ul><p>&gt; 关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/83491</id>
+            <title>少数派健身类选题人气作者「举铁的马里奥」都装了啥？</title>
+            <link>https://sspai.com/post/83491</link>
+            <guid isPermaLink="false">https://sspai.com/post/83491</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Oct 2023 09:55:20 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2><strong>介绍一下你自己</strong></h2>
+<p>哈喽，大家好，我是举铁的马里奥，一个努力传播运动健康知识的兼职作者。因为喜欢运动，本科是给排水科学与工程专业的我决定追逐热爱，19 年成功跨考北京体育大学运动人体科学专业的硕士研究生。去年已经顺利毕业，目前就职于一家柔性外骨骼机器人公司。</p>
+<p>「举铁的马里奥」这个 ID 和我的求学经历相关。本科专业给水排水科学与工程，需要与各种管道打交道，所以我和同学都戏称自己是管道工——马里奥，加上自己本科期间喜欢去健身房举铁，于是就把自己社交平台的 ID 改为了举铁的马里奥，这个 ID 也沿用至今。</p>
+<h2><strong>你在日常工作和生活中都使用哪些硬件？</strong></h2>
+<p>日常工作时，用戴尔笔记本进行数据处理和文档编辑工作，还会用到一些专业的生物力学实验设备来采集实验数据，简单介绍几个。</p>
+<p>第一个常用的是「红外三维运动捕捉设备」，这个设备经常出现在好莱坞科幻大片的拍摄现场，它通过多个摄像头和红外光源可以采集到反光标点的三维空间位置，当我们把反光标记点贴在人体的不同关节，经过计算就可以得到人体在运动过程中的关节角度和角速度的数据。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/11/8805c619d5d3bcbe354f0ef14c67a7c0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>第二比较常用是「表面肌电测试仪」，人体肌肉在收缩和放松时，需要内部神经元发射电信号来控制，表面肌电就是将电极放置在肌肉表面来捕捉这些电信号，这些电信号经过分析处理后，就可以反应肌肉的活动强度等指标。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/11/7120ae4ed6fa4baa814ffc9a6a056b8d.gif" /></figure>
+<p>其他常用的还有三维测力台、呼吸代谢测试仪等设备。通过这些生物力学仪器，我们采集人体在不同状态下（穿戴外骨骼和不穿戴外骨骼）的各项生物力学指标，分析指标的差异，实现对外骨骼的功能验证和改进。</p>
+<p>日常生活时的硬件就比较常见了，用 Mackbook Air 11" 来看书和写文章，手机是iPhone 11。最近刚入手了 OLED 版 Switch，开始了海拉鲁大陆的冒险，还爱上了打《有氧拳击 2》作为有氧运动。</p>
+<p><strong>展示一下你的手机主屏吧</strong></p>
+<p>主屏比较简单，是一些常用的软件，还有两个桌面小组件，一个用来记生日，一个是图片分享。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/11/7468d773e182603cb0f70ec8293882cd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<h2><strong>分享几款你常用的 App 吧</strong></h2>
+<p>平时会用 Flomo 来写卡片，在读书和听课时会用它来记录笔记，在某些别灵光乍现的时候也用它记录自己的想法，标签体系真的非常方便，可以快速找到之前的笔记。</p>
+<p>最近有尝试一款 AI 对话的 Call Annie，因为工作中需要和国外的工程师进行沟通，所以会用这款 app 来练习口语，目前体验还不错。</p>
+<p>还有买了 Switch 以后常用的软件 Jump，用它来看游戏的打折信息，也会搜一些感兴趣的游戏，看看玩家的评论。</p>
+<p>工作中常用的一个 app 是 Landdrop，这是一个跨平台的文件互传软件，有时候需要用苹果手机拍照、录视频传输到戴尔电脑上，微信文件传输会压缩画质，所以会用 Landdrop 进行跨平台文件传输工作，就不会有压缩画质的问题。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/11/1d1a648f44dc2c6bf314e8ebd1c607dd.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<h2><strong>你会订阅哪些虚拟产品或内容服务？</strong></h2>
+<p>最近订阅的是 ChatGPT Plus 和 Apple Music。</p>
+<p>工作时经常会用 ChatGPT 协助写一些 Python 代码进行实验数据的处理，在体验 GPT 4.0 后果断订阅了 Plus，通过 code interpreter，现在可以直接上传 Excel 文件进行分析处理，省去了自己写代码清洗数据的工作量，非常的方便。</p>
+<p>Apple Music 会员，体验了两个月的免费订阅服务觉得不错，就开通了自动续费，健身和通勤时都会在这里听歌。</p>
+<h2><strong>再说说实体的吧，你出门的时候都装会些啥，怎么装？</strong></h2>
+<p>我出门一般常备的是水杯、充电宝、耳机、钥匙、纸巾，还有喂流浪猫的猫条。最近在用 Bellroy 的斜挎包装这些，4L 的容量虽然看起来不算大，但包内空间分层和收纳效率都很不错，对于我这些东西来说刚刚合适。上班通勤、下班也背着它去健身，非常方便。国庆假期还试着背着去了太湖东山岛骑行，路上遇到骑友还夸包包好看。</p>
+<figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2023/10/11/1b3f2b0a92bb78e5e206e2aeeab23c6c.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2023/10/11/dd770d57729ee2e41371a92b15b3e75f.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<h2><strong>迄今为止陪伴你时间最长、也最喜欢的东西是什么？它背后有什么故事吗？</strong></h2>
+<p>是一本台版的《肌力与体能训练》，于 2019 年 4 月淘宝购入。当时自己刚参加完北体的考研复试，虽然学习了很多人体解剖和生理知识，但是感觉学到的知识只停留在书面无法结合实践去应用，偶然在复试群里听到有小伙伴提到了美国体能协会体能训练师认证，非常感兴趣，就购入了一本台版的《肌力与体能训练》开始学习。</p>
+<p>台版的书籍都是繁体字，刚开始看的时候非常痛苦，有的明明很熟悉的字就是不认识，还需要在网上百度。奈何没有简体的版本出版，只能咬牙看下去。也是这时自己开始系统的学习体能训练的知识，开始练习高翻训练爆发力，开始注意饮食，开始购买一些运动补剂等等。</p>
+<p>反复学习了几遍书里内容后，自己也成功通过了美国体能协会体能训练师认证。我之前文章的有些内容也都来自这本书籍，会经常引用它，现在它还放在我工位上，有时候想起某些知识还会去翻翻它。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/11/d66ed9b2fdee8fdd65f07f395a8f3e8f.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<h2><strong>能简单介绍一下你的研究生专业「运动生物力学」吗？似乎并不同于刻板印象里每天在田径场上蹦蹦跳跳的体育生。</strong></h2>
+<p>我所在的专业叫运动人体科学，主要研究的方向叫运动生物力学。</p>
+<p>虽然有运动二词，但是这个专业基本都是学科生，本科的招生对象也是各省的理科学生，并不是体育生。所以相比于蹦蹦跳跳的体育生，运动人体科学的学生所学的都是纯理论的人体运动知识，比如运动人体解剖学，运动生理学、运动营养等等，其实和普通的理工科学生差不多。</p>
+<p>但是因为我们需要用理论知识去研究和解决实际的运动相关的问题，所以老师很鼓励我们去参与体育运动，不仅能加深对研究内容的理解，也能强身健体，加上北京体育大学的运动氛围非常强，所以这个专业的同学运动能力都不差。</p>
+<h2><strong>你喜欢现在的工作吗？为什么？</strong></h2>
+<p>我比较喜欢现在的工作，我目前所在的岗位是临床研究员，主要是利用自己在人体运动科学方面的知识来帮助柔性外骨骼的研发和改进。</p>
+<p>公司目前的外骨骼产品主要针对有下肢功能障碍的偏瘫患者和脊髓损伤患者，用外骨骼提供助力帮助他们进行康复训练，加速他们的康复进度。所以我能很清楚地看到自己参与研发的产品在帮助到这些患者，非常有成就感。然后公司的氛围也非常好，遇到问题大家都很热心帮忙解决，身边的同事也非常优秀，能从他们身上学习到很多东西。</p>
+<h2><strong>你平日里会去健身房吗？频率如何？能给我们简单分享一下你的训练计划吗？</strong></h2>
+<p>会去健身房，刚参加工作时一周会去四次，后面慢慢步入工作状态，就没有那么充足的精力和时间去健身房了，但是也没有停止过，现在基本会坚持每周去2-3<br />次健身房做力量训练。</p>
+<p>我采用的训练方式是我之前分享过的功能性训练，主要包括三部分：运动准备、力量训练、体能训练。<a href="https://sspai.com/post/76821" target="_blank">运动准备部分</a>之前已经分享过了，感兴趣的朋友可以去看看。今天就简单分享一下力量训练部分的计划吧。</p>
                 ]]>
             </content:encoded>
         </item>
