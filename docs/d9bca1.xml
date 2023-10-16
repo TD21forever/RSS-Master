@@ -5,6 +5,29 @@
         <link>https://www.infoq.cn/topic/AI</link>
         
         <item>
+            <id>https://www.infoq.cn/article/5LWEiT9DNPzCWsoqtdQE</id>
+            <title>代码生成：基于AI大模型的挑战与前景</title>
+            <link>https://www.infoq.cn/article/5LWEiT9DNPzCWsoqtdQE</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/5LWEiT9DNPzCWsoqtdQE</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 16 Oct 2023 00:00:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: AI 模型, 代码生成, 人工智能, 专业模型
+<br>
+<br>
+总结: 使用 AI 通用模型生成代码可能会导致代码质量问题，因此需要创建专业或专用的模型来解决这个问题。人工智能模型是通过模仿人脑中神经元与突触连接而成的网络构建的。计算机并不会思考，只是利用统计数据对事物进行预测、分类或组合。大语言模型的工作原理是根据统计数据预测下一个标记的最佳匹配，无法对事实进行核查。使用通用模型生成代码可能会导致混杂不同版本代码的问题。AI 可以是解决问题的好帮手，但使用 AI 工具需要检查、验证、修改、编辑或重写部分内容。 </div>
+                        <hr>
+                    
+                    <p>使用 AI 通用模型来完成代码生成这类非常具体的任务可能会带来问题。人工智能生成的代码就像是陌生人的代码，它们可能并不符合你的代码质量标准。这种情况下，创建专业或专用的模型不失为一条出路。</p><p>&nbsp;</p><p>Luise Freese 和 Iona Varga 在<a href="https://ndcoslo.com/">2023</a>" 年的&nbsp;<a href="https://ndcoslo.com/">NDC Oslo</a>" 大会上探讨了 AI 模型的实践困境和伦理相关问题。</p><p>&nbsp;</p><p>Varga 提到，“人工智能”这个词给人一种智慧的感觉，虽然这个名字实际只是代表了这些模型的构建方式。以节点相连的形式模仿人脑中神经元与突触连接而成的网络，这类模型因此而得名“人工网络”或“人工智能”。</p><p>&nbsp;</p><p>Freese 补充道，抽象来说，计算机是完全依赖于或开或关的晶体管，通过这些开关的组合，我们得以操纵比特。由于晶体管之间没有相互的纠缠，这些开关最终会带来这样的结果：</p><p></p><p></p><blockquote>因此，计算机并不会思考，不过是我们的人工智能算法赋予了它们个性和特征，比如“让我考虑一下”这类礼貌说辞。AI 仅仅是利用统计数据对事物进行预测、分类或组合。</blockquote><p></p><p>&nbsp;</p><p>Varga 提到，AI 的问题在与使用极其通用的模型或是基础模型完成非常具体的任务。大语言模型（LLM）的工作原理是先分析问题、创建一两个词语，再根据统计数据预测下一个标记的最佳匹配。此外，LLM 本身是无法对事实进行核查的，因为这类模型的设计目的是生成而非验证。</p><p>&nbsp;</p><p>如果我们试图建立一个能解决所有 AI 问题的 AI 模型，那么我们将会创造出一种自我放大的螺旋式下降，Freese 补充道。若想实现螺旋式上升，那就应该少用基础模型，多用更为具体的模型，后者中有一部分实际就是搭建在基础模型之上的。</p><p>&nbsp;</p><p>AI 或许能生成代码，但这些代码是否能安全地使用，是否能满足我们对质量的标准要求？Varga 认为这些问题只能由真正的人类来回答，这一过程并不容小觑。归根结底，就像是代码的编写一样，调试陌生人的代码远比自己从头到尾参与其中的代码更为困难。</p><p>&nbsp;</p><p>一般模型的理解能力也更为通用，这在代码生成问题上可能会带来问题，正如 Varga 所解释的：</p><p></p><blockquote>举例来说，React v17 或 v16 这些可能没有直接反应在模型的上下文中，但模型也能了解这些代码库。或许你会发现自己生成的一个函数中会混杂有两个版本的代码。</blockquote><p></p><p>Varga 认为，多数情况下 AI 都是解决问题的好帮手。但使用 AI 就意味着你要去检查、验证、修改、编辑或重写部分内容，而这一部分可能才是我们低估 AI 工具带来工作量的地方。</p><p>&nbsp;</p><p>InfoQ 针对人工智能所带来的挑战问题采访了 <a href="https://www.linkedin.com/in/luisefreese/">Luise Freese</a>"&nbsp;和 <a href="https://www.linkedin.com/in/iona-dahlia/">Iona Varga</a>"。</p><p>&nbsp;</p><p>InfoQ：什么因素会造成 AI 的失败？</p><p></p><p></p><blockquote>Iona Varga：一般来说，AI 并不是命中注定要失败的。我是医学物理出身的，我也见过很多优秀的 AI 工具，它们能出色地完成波弹性成像的实时剪切，早期阶段的婴儿检测，甚至能检测出肿瘤专家都无法发现的肺癌细小结节。&nbsp;但由于虚假数据和扭曲事实问题的存在，这些结果并不完全可信。举例来说，川普就职典礼上，实际的到场人数是要少于最初公布的数据。试着问模型就职典礼的公园有多热闹，你大概会得到一个出乎意料的答案。但同样，数据的来源时至今日也有颇具争议的历史背景，它们可能会出于政治剧本或标准等原因而被修改。</blockquote><p></p><p></p><p>InfoQ：伦理道德如何才能帮助我们解决 AI 所带来的问题？</p><p></p><p></p><blockquote>Luise Freese：伦理道德作为工具本身是帮不上太多忙的。伦理只是一种工作的方式，就像是 DevOps 一样。一旦你有了规划，知道该做什么了，“伦理道德”就是你对“完成”的定义。我所用的数据是否覆盖了所有产品使用相关的人或事？通过这些道德的检测，我们的工作方式将会在可访问性、包容性和避免偏见方面得到改善。</blockquote><p></p><p>&nbsp;</p><p></p><p>原文链接：</p><p><a href="https://www.infoq.com/news/2023/10/producing-quality-code-AI/">The Challenges of Producing Quality Code When Using AI-Based Generalistic Models</a>"</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.infoq.cn/article/fVBFXyE1yTvLR6RlqATA</id>
             <title>美的供应商回应员工自愿放弃公积金；23岁斯坦福博士生修复火狐浏览器22年陈旧bug；高通拟在加州裁逾1200人｜AI一周资讯</title>
             <link>https://www.infoq.cn/article/fVBFXyE1yTvLR6RlqATA</link>
@@ -719,29 +742,6 @@ uis:
                         <hr>
                     
                     <p></p><h3>Stability AI 发布 Stable Chat</h3><p></p><p></p><p>新颖的 AI 聊天平台 <a href="https://www.infoq.com/news/2023/08/stable-chat/?topicPageSponsorship=b2206c17-c7cf-47e8-aee9-0514a0817c31">Stable Chat</a>"，以用户对话体验的稳定性与一致性为设计重点。由 <a href="https://stability.ai/blog/stable-chat-research-defcon-ai-village">Stability AI</a>" 开发，该平台意在通过可靠而非创造性生成或不可预测的回答，降低以 AI 为驱动力的对话中可能出现的错误信息和误解。</p><p>&nbsp;</p><p>这一方式可用于医疗保健和客户支持等关键领域。在这些领域中，保持沟通的清晰性和正确性至关重要。该平台对稳定性独树一帜的关注，使其成为 AI 聊天机器人和对话代理行业不断发展的新亮点。</p><p></p><h3>Vertex AI 搜索与对话已全面上线</h3><p></p><p></p><p>谷歌云的<a href="https://www.infoq.com/news/2023/09/vertex-ai-search-conversation/">Vertex AI 搜索与对话</a>"服务已正式全面上线。这项开发技术可使企业利用 AI 驱动的搜索和对话功能增强其应用程序，促进与用户更为直观且高效的互动。凭借语义搜索和自然语言理解等功能，Vertex AI 搜索与对话服务允许企业构建智能搜索引擎与对话代理，提供相关性更高的信息并与用户进行自然的对话。</p><p>&nbsp;</p><p>此次发布标志着各行业在利用 AI 与机器学习技术提供客户体验与推动创新方面迈出了重要的一步。</p><p></p><h3>OpenAI 推出 ChatGPT 企业服务</h3><p></p><p></p><p>OpenAI 已推出&nbsp;<a href="https://www.infoq.com/news/2023/09/openai-chatgpt-enterprise/">ChatGPT 企业订阅服务</a>"，意在帮助企业在各类应用中充分利用其强大的语言模型。该服务提供为职业定制的强化语言能力，其中包括更强的安全功能和访问控制。借助 ChatGPT 企业服务，企业可利用其对自然语言的理解和生成，强化用户支持、实现任务自动化并开发定制的人工智能解决方案，同时还能维护数据隐私及合规性。</p><p>&nbsp;</p><p>OpenAI 此举表明了其致力于满足企业需求并扩大 AI 语言模型在商业环境中的应用。</p><p></p><h3>OpenAI 将 GPT-3.5 Turbo 面向开发者开放使用</h3><p></p><p></p><p>OpenAI 推出其语言模型的高级迭代版本，<a href="https://www.infoq.com/news/2023/08/got-3-5-fine-tuning/">GPT-3.5 Turbo</a>"。新版本允许用户根据特定任务需求，通过微调定制并调整模型。</p><p>&nbsp;</p><p>OpenAI 同时还公布了 <a href="https://openai.com/blog/gpt-3-5-turbo-fine-tuning-and-api-updates">API 定价结构的更新</a>"，使开发人员在实验和部署以 GPT-3.5 Turbo 驱动的应用程序时更具成本效益。</p><p></p><h3>Meta 开源 Code Llama</h3><p></p><p></p><p>Meta 所推出的新颖 AI 工具 <a href="https://www.infoq.com/news/2023/09/meta-code-llama/">Code Llama</a>"，意在协助开发者提升代码编写效率。<a href="https://about.fb.com/news/2023/08/code-llama-ai-for-coding/">Code Llama</a>" 采用大语言模型和深度学习技术理解并生成代码，可简化编码过程从而提升开发人员的工作效率。</p><p>&nbsp;</p><p>该工具是对快速发展的 AI 驱动开发工具的重要补充，进一步体现了 Meta 对推进 AI 技术的承诺。</p><p></p><p>原文链接：</p><p><a href="https://www.infoq.com/news/2023/09/ai-ml-data-news-september4-2023/">AI, ML, Data Engineering News Roundup: Stable Chat, Vertex AI, ChatGPT and Code Llama</a>"</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/dGfCQZjo2v6rAicehPmd</id>
-            <title>新型威胁：探索LLM攻击对网络安全的冲击</title>
-            <link>https://www.infoq.cn/article/dGfCQZjo2v6rAicehPmd</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/dGfCQZjo2v6rAicehPmd</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 03 Oct 2023 00:00:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 卡内基梅隆大学, LLM Attacks, 大型语言模型, 提示后缀
-<br>
-<br>
-总结: 卡内基梅隆大学的研究人员发布了LLM Attacks，这是一种可以针对各种大型语言模型构建对抗性攻击的算法。通过自动生成提示后缀，攻击者可以绕过语言模型的安全机制，导致有害的响应。这些攻击是可转移的，可以用于许多不同的语言模型。这项研究揭示了大型语言模型面临的安全漏洞和威胁。 </div>
-                        <hr>
-                    
-                    <p>来自<a href="https://www.cmu.edu/">卡内基梅隆大学（CMU）</a>"的研究人员发布了<a href="https://llm-attacks.org/">LLM Attacks</a>"，这是一种可以针对各种大型语言模型（LLM）构建对抗性攻击的算法，包括<a href="https://chat.openai.com/">ChatGPT</a>"、<a href="https://claude.ai/">Claude</a>"和<a href="https://bard.google.com/">Bard</a>"。这些自动生成的攻击，在GPT-3.5和GPT-4上的成功率为84%，在<a href="https://www.infoq.com/news/2023/06/google-palm2-bard/">PaLM-2</a>"上的成功率为66%。</p><p>&nbsp;</p><p>与大多数“越狱”攻击通过试错手工构建不同，CMU的团队设计了一个三步流程来自动生成提示后缀，它们可以绕过LLM的安全机制，导致有害的响应。而且，这些提示还是可转移（transferrable）的，也就是说，一个给定的后缀通常可以用于许多不同的LLM，甚至是闭源模型。为了衡量算法的有效性，研究人员创建了一个名为AdvBench的基准测试；在此基准测试上进行评估时，LLM攻击对Vicuna的成功率为88%，而基线对抗算法的成功率为25%。根据CMU团队的说法：</p><p></p><p></p><blockquote>最令人担忧的也许是，目前尚不清楚LLM提供商是否能够完全修复此类行为。在过去的10年里，在计算机视觉领域，类似的对抗性攻击已经被证明是一个非常棘手的问题。有可能深度学习模型根本就无法避免这种威胁。因此，我们认为，在增加对此类人工智能模型的使用和依赖时，应该考虑到这些因素。</blockquote><p></p><p>&nbsp;</p><p>随着ChatGPT和GPT-4的发布，<a href="https://arxiv.org/abs/2305.13860">出现了许多破解这些模型的技术</a>"，其中就包括可能导致模型绕过其保护措施并输出潜在有害响应的提示。虽然这些提示通常是通过实验发现的，但LLM Attacks算法提供了一种自动创建它们的方法。第一步是创建一个目标令牌序列：“Sure, here is (content of query)”，其中“content of query”是用户实际输入的提示，要求进行有害的响应。</p><p>&nbsp;</p><p>接下来，该算法会查找可能导致LLM输出目标序列的令牌序列，基于贪婪坐标梯度（GCG）算法为提示生成一个对抗性后缀。虽然这确实需要访问LLM的神经网络，但研究团队发现，在许多开源模型上运行GCG所获得的结果甚至可以转移到封闭模型中。</p><p>&nbsp;</p><p>在<a href="https://www.cmu.edu/news/stories/archives/2023/july/researchers-discover-new-vulnerability-in-large-language-models">CMU发布的一条介绍其研究成果的新闻</a>"中，论文合著者Matt Fredrikson表示：</p><p></p><p></p><blockquote>令人担忧的是，这些模型将在没有人类监督的自主系统中发挥更大的作用。随着自主系统越来越真实，我们要确保有一种可靠的方法来阻止它们被这类攻击所劫持，这将非常重要……现在，我们根本没有一个令人信服的方法来防止这种事情的发生，所以下一步，我们要找出如何修复这些模型……了解如何发动这些攻击通常是建立强大防御的第一步。</blockquote><p></p><p>&nbsp;</p><p>论文第一作者、<a href="https://twitter.com/andyzou_jiaming/status/1684766184871546881">CMU博士生Andy Zou在推特上谈到了这项研究</a>"。他写道：</p><p></p><p></p><blockquote>尽管存在风险，但我们认为还是应该把它们全部披露出来。这里介绍的攻击很容易实现，以前也出现过形式类似的攻击，并且最终也会被致力于滥用LLM的团队所发现。</blockquote><p></p><p>&nbsp;</p><p><a href="https://twitter.com/DavidSKrueger/status/1684904671914115072">剑桥大学助理教授David Krueger回复了Zou的帖子</a>"，他说：</p><p></p><p></p><blockquote>在图像模型中，10年的研究和成千上万的出版物都未能找出解决对抗样本的方法，考虑到这一点，我们有充分的理由相信，LLM同样会如此。</blockquote><p></p><p>&nbsp;</p><p>在Hacker News上关于这项工作的讨论中，<a href="https://news.ycombinator.com/item?id=36921808">有一位用户指出</a>"：</p><p></p><p></p><blockquote>别忘了，本研究的重点是，这些攻击不需要使用目标系统来开发。作者谈到，攻击是“通用的”，他们的意思是说，他们可以在自己的计算机上完全使用本地模型来生成这些攻击，然后将它们复制并粘贴到GPT-3.5中，并看到了有意义的成功率。速率限制并不能帮你避免这种情况，因为攻击是在本地生成的，而不是用你的服务器生成的。你的服务器收到的第一个提示已经包含了生成好的攻击字符串——研究人员发现，在某些情况下，即使是对GPT-4，成功率也在50%左右。</blockquote><p></p><p>&nbsp;</p><p>GitHub上提供了代码，你可以在AdvBench数据上重现<a href="https://github.com/llm-attacks/llm-attacks">LLM Attacks实验</a>"。项目网站上还提供了几个对抗性攻击的<a href="https://llm-attacks.org/">演示</a>"。</p><p>&nbsp;</p><p>原文链接：</p><p><a href="https://www.infoq.com/news/2023/08/llm-attack/">https://www.infoq.com/news/2023/08/llm-attack/</a>"</p>
                 ]]>
             </content:encoded>
         </item>
