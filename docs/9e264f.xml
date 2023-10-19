@@ -51,24 +51,24 @@
         </item>
         
         <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17b84u0</id>
-            <title>Creating an Open-Source AI Model for Realistic NPC Behavior</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17b84u0/creating_an_opensource_ai_model_for_realistic_npc/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17b84u0</guid>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17bdh4g</id>
+            <title>A roundup of top AI apps/companies based on sector.</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17bdh4g/a_roundup_of_top_ai_appscompanies_based_on_sector/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17bdh4g</guid>
             <pubDate></pubDate>
-            <updated>2023-10-19T02:17:12+00:00</updated>
+            <updated>2023-10-19T07:31:25+00:00</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                        <div> 关键词: open-source AI model, dynamic NPC behavior, personality traits, data model
+                        <div> 关键词: Chatgpt, Midjourney, Replika, Mem, Reflect, voice.ai, heygen, firefly.ai
 <br>
 <br>
-总结: 该文本介绍了一个关于建模动态NPC行为的开源AI模型，该模型基于个性特征。作者希望通过这个项目为更具动态性的NPC行为奠定一些基础，以实现真实人类互动的一小部分。作者希望通过在这里发布，获得社区对于相关项目或研究的了解。该项目的目标是创建一个软件模型，主要用于视频游戏，通过设计数据模型、算法和逻辑来使用人类个性特征来决定行为。数据模型包括个性特征、特征组、角色特征和外部影响。算法和逻辑包括随机特征选择、特征分组、特征可能性调整和行为定义。 </div>
+总结: 这篇文章是一个人询问有关最新人工智能应用程序的推荐，并列出了一些主要领域的顶级应用程序/网站。除了这些应用程序之外，其他大多数人工智能应用程序似乎都是花哨的，没有太多用途。作者希望了解是否错过了一些新的应用程序。 </div>
                         <hr>
                     
-                    <!-- SC_OFF --><div class="md"><p>I have decided to start working on an open-source AI model for modelling dynamic NPC behavior based on personality traits. This is just a fun side project I will be developing over time with the hope that it can lay some foundation for more dynamic NPC behavior that may represent at least a sliver of real human interaction. By posting this here, I was hoping this community might have knowledge of any relevant projects or research regarding this type of project.</p> <p>Below are all of the current details of the project</p> <p><strong>Project Name:</strong> SMORT AI (Simple Matrix of Random Traits)</p> <p><strong>Goal:</strong> Create a software model (main use is for video games) that uses human personality traits to dictate actions by designing a data model, algorithms, and logic to handle trait grouping, random trait selection, trait likelihood adjustments based on other influences, and action definitions.</p> <p><strong>Data Model (In Progress):</strong></p> <ul> <li>Personality Traits: <ul> <li>ID (Unique identifier)</li> <li>Name (e.g., &quot;Kind,&quot; &quot;Adventurous,&quot; &quot;Introverted&quot;)</li> <li>Trait Type (Positive, Neutral, Negative)</li> <li>Description (Brief description of the trait)</li> </ul></li> <li>Trait Groups: <ul> <li>ID (Unique identifier)</li> <li>Name (e.g., &quot;Social Traits,&quot; &quot;Emotional Traits,&quot; &quot;Intellectual Traits&quot;)</li> <li>Description (Brief description of the group)</li> </ul></li> <li>Character Traits: <ul> <li>Character ID (Unique identifier for each character)</li> <li>Personality Trait IDs (References to selected traits from each group)</li> </ul></li> <li>External Influences: <ul> <li>ID (Unique identifier)</li> <li>Name (e.g., &quot;Friendship,&quot; &quot;Environment,&quot; &quot;Mood&quot;)</li> <li>Description (Brief description of the influence)</li> </ul></li> </ul> <p><strong>Algorithms and Logic (In Progress):</strong></p> <ul> <li>Random Trait Selection: <ul> <li>Generate random numbers for each trait group based on adjustable likelihood.</li> <li>Select a trait from each group based on the generated numbers.</li> </ul></li> <li>Trait Grouping: <ul> <li>Assign personality traits to relevant trait groups (Positive, Neutral, Negative).</li> <li>Define relationships and interactions between traits within each group.</li> </ul></li> <li> Trait Likelihood Adjustment: <ul> <li>Create a system for adjusting the likelihood of certain traits within a group based on external influences.</li> <li>Allow game designers or external factors to modify these likelihoods dynamically.</li> </ul></li> <li>Action Definition: <ul> <li>Define a set of in-game actions and their attributes (e.g., action ID, name, description, outcomes).</li> <li>Link each action to specific personality traits or trait combinations.</li> <li>Define the impact of each trait or combination on the outcome of the action.</li> </ul></li> </ul> <p><strong>Example of Action Definition:</strong></p> <ul> <li>Action Name: &quot;Helping a Stranger&quot;</li> <li>Description: A character's willingness to assist a stranger in need.</li> <li>Possible Outcomes: <ul> <li>Positive Trait Combination (e.g., Kind, Helpful): <ul> <li>Positive outcome: The character helps the stranger, gaining goodwill and rewards.</li> </ul></li> <li>Negative Trait Combination (e.g., Selfish, Unhelpful): <ul> <li>Negative outcome: The character ignores the stranger, potentially facing consequences.</li> </ul></li> <li>Mixed Trait Combination (e.g., Kind, Unhelpful): <ul> <li>Neutral outcome: The character hesitates or shows indifference, with a mild impact on the game.</li> </ul></li> </ul></li> </ul> <p><strong>Integration with a Video Game:</strong></p> <ul> <li><p>Integrate the model into the game engine to ensure that character actions and interactions reflect the assigned personality traits and external influences.</p></li> <li><p>Continuously update the model as players progress through the game, make choices, and encounter various scenarios to build an experience influence that further modifies traits and probabilities for the selection of repeat, similar, or opposing actions.</p></li> </ul> <p><strong>Additional Notes:</strong></p> <p>The project will utilize psychological theories as it's foundation for trait definition, associations, influences, and behavior priorities. Some of these underlying theories currently be reviewed for incorporation are Maslow's Hierarchy of Needs, Social Influence Theory, Meyers Briggs Personality Theory, etc. The goal with these theories is to setup levels of priority, influences, and constraints that contribute to the likelihood of selecting a particular action to perform, continue to perform, or stop performing in such a way that they resemble the human characteristics of desire and motivation for each action.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/NezzyGuda"> /u/NezzyGuda </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17b84u0/creating_an_opensource_ai_model_for_realistic_npc/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17b84u0/creating_an_opensource_ai_model_for_realistic_npc/">[comments]</a></span>
+                    <!-- SC_OFF --><div class="md"><p>I like to stay up to date with new AI apps and haven't heard of anything new in a while. Please recommend new apps and I will keep this list updated! Here's a list of the top apps/websites for some of the main segments:</p> <p><strong>Chatbots</strong>: Chatgpt<br /> <strong>Image gen:</strong> Midjourney<br /> <strong>AI companions</strong>: Replika<br /> <strong>Notetaking</strong>: Mem, Reflect<br /> <strong>Voice</strong>: voice.ai<br /> <strong>Voice+Image</strong>: heygen<br /> <strong>Zoom meetings</strong>: firefly.ai<br /> Other than these, most of the other AI apps seem to be gimmicky and not have much use. I stay pretty up to date on the latest AI news, and want to know if I’ve missed out on something. </p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/PhoenixFuryBoss"> /u/PhoenixFuryBoss </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17bdh4g/a_roundup_of_top_ai_appscompanies_based_on_sector/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17bdh4g/a_roundup_of_top_ai_appscompanies_based_on_sector/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -97,6 +97,29 @@
         </item>
         
         <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17b84u0</id>
+            <title>Creating an Open-Source AI Model for Realistic NPC Behavior</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17b84u0/creating_an_opensource_ai_model_for_realistic_npc/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17b84u0</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-19T02:17:12+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: open-source AI model, dynamic NPC behavior, personality traits, data model
+<br>
+<br>
+总结: 该文本介绍了一个关于建模动态NPC行为的开源AI模型，该模型基于个性特征。作者希望通过这个项目为更具动态性的NPC行为奠定一些基础，以实现真实人类互动的一小部分。作者希望通过在这里发布，获得社区对于相关项目或研究的了解。该项目的目标是创建一个软件模型，主要用于视频游戏，通过设计数据模型、算法和逻辑来使用人类个性特征来决定行为。数据模型包括个性特征、特征组、角色特征和外部影响。算法和逻辑包括随机特征选择、特征分组、特征可能性调整和行为定义。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>I have decided to start working on an open-source AI model for modelling dynamic NPC behavior based on personality traits. This is just a fun side project I will be developing over time with the hope that it can lay some foundation for more dynamic NPC behavior that may represent at least a sliver of real human interaction. By posting this here, I was hoping this community might have knowledge of any relevant projects or research regarding this type of project.</p> <p>Below are all of the current details of the project</p> <p><strong>Project Name:</strong> SMORT AI (Simple Matrix of Random Traits)</p> <p><strong>Goal:</strong> Create a software model (main use is for video games) that uses human personality traits to dictate actions by designing a data model, algorithms, and logic to handle trait grouping, random trait selection, trait likelihood adjustments based on other influences, and action definitions.</p> <p><strong>Data Model (In Progress):</strong></p> <ul> <li>Personality Traits: <ul> <li>ID (Unique identifier)</li> <li>Name (e.g., &quot;Kind,&quot; &quot;Adventurous,&quot; &quot;Introverted&quot;)</li> <li>Trait Type (Positive, Neutral, Negative)</li> <li>Description (Brief description of the trait)</li> </ul></li> <li>Trait Groups: <ul> <li>ID (Unique identifier)</li> <li>Name (e.g., &quot;Social Traits,&quot; &quot;Emotional Traits,&quot; &quot;Intellectual Traits&quot;)</li> <li>Description (Brief description of the group)</li> </ul></li> <li>Character Traits: <ul> <li>Character ID (Unique identifier for each character)</li> <li>Personality Trait IDs (References to selected traits from each group)</li> </ul></li> <li>External Influences: <ul> <li>ID (Unique identifier)</li> <li>Name (e.g., &quot;Friendship,&quot; &quot;Environment,&quot; &quot;Mood&quot;)</li> <li>Description (Brief description of the influence)</li> </ul></li> </ul> <p><strong>Algorithms and Logic (In Progress):</strong></p> <ul> <li>Random Trait Selection: <ul> <li>Generate random numbers for each trait group based on adjustable likelihood.</li> <li>Select a trait from each group based on the generated numbers.</li> </ul></li> <li>Trait Grouping: <ul> <li>Assign personality traits to relevant trait groups (Positive, Neutral, Negative).</li> <li>Define relationships and interactions between traits within each group.</li> </ul></li> <li> Trait Likelihood Adjustment: <ul> <li>Create a system for adjusting the likelihood of certain traits within a group based on external influences.</li> <li>Allow game designers or external factors to modify these likelihoods dynamically.</li> </ul></li> <li>Action Definition: <ul> <li>Define a set of in-game actions and their attributes (e.g., action ID, name, description, outcomes).</li> <li>Link each action to specific personality traits or trait combinations.</li> <li>Define the impact of each trait or combination on the outcome of the action.</li> </ul></li> </ul> <p><strong>Example of Action Definition:</strong></p> <ul> <li>Action Name: &quot;Helping a Stranger&quot;</li> <li>Description: A character's willingness to assist a stranger in need.</li> <li>Possible Outcomes: <ul> <li>Positive Trait Combination (e.g., Kind, Helpful): <ul> <li>Positive outcome: The character helps the stranger, gaining goodwill and rewards.</li> </ul></li> <li>Negative Trait Combination (e.g., Selfish, Unhelpful): <ul> <li>Negative outcome: The character ignores the stranger, potentially facing consequences.</li> </ul></li> <li>Mixed Trait Combination (e.g., Kind, Unhelpful): <ul> <li>Neutral outcome: The character hesitates or shows indifference, with a mild impact on the game.</li> </ul></li> </ul></li> </ul> <p><strong>Integration with a Video Game:</strong></p> <ul> <li><p>Integrate the model into the game engine to ensure that character actions and interactions reflect the assigned personality traits and external influences.</p></li> <li><p>Continuously update the model as players progress through the game, make choices, and encounter various scenarios to build an experience influence that further modifies traits and probabilities for the selection of repeat, similar, or opposing actions.</p></li> </ul> <p><strong>Additional Notes:</strong></p> <p>The project will utilize psychological theories as it's foundation for trait definition, associations, influences, and behavior priorities. Some of these underlying theories currently be reviewed for incorporation are Maslow's Hierarchy of Needs, Social Influence Theory, Meyers Briggs Personality Theory, etc. The goal with these theories is to setup levels of priority, influences, and constraints that contribute to the likelihood of selecting a particular action to perform, continue to perform, or stop performing in such a way that they resemble the human characteristics of desire and motivation for each action.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/NezzyGuda"> /u/NezzyGuda </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17b84u0/creating_an_opensource_ai_model_for_realistic_npc/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17b84u0/creating_an_opensource_ai_model_for_realistic_npc/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_17awu21</id>
             <title>Can governments and other entities use AI in its current state to fabricate false information that can't be proven to be fake?</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/17awu21/can_governments_and_other_entities_use_ai_in_its/</link>
@@ -115,6 +138,29 @@
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p>As the question says: The current war in Israel, especially surrounding yesterdays's bombing of the Gaza Hospital, has left me thinking about this. Social media, Twitter in particular, has erupted in discussion of this topic. Everyone blamed Israel at the begining, but now several videos have come out that seem to point to a missile from Hamas malfunctioning and hitting the Hospital.</p> <p>In the midst of all this, missinformation is growing like crazy. The IDF has released videos and data showing it wasn't their missile that hit the hospital, and to be fair at this point it actually does seem to be that way. It seems that Hamas tried to use this missfire of their rocket to gain media attention by blaming Israel. </p> <p>But here's what I'm thinking. With the increasing quality of AI models nowadays, I am starting to fear that these tools can be used to generate data, such as videos and phone calls, that can't be identified as being AI generated even after being analised by experts. </p> <p>So, people who actually work on the field and can provide a knowledgable input: can current technology on the field of AI produce videos and audio that can't be recognized as artificial generations?? And if not, how far do you think we are from reaching this state of AI?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/SimullationTheory"> /u/SimullationTheory </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17awu21/can_governments_and_other_entities_use_ai_in_its/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17awu21/can_governments_and_other_entities_use_ai_in_its/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17bdmig</id>
+            <title>I am worried with how AI is improving propaganda</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17bdmig/i_am_worried_with_how_ai_is_improving_propaganda/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17bdmig</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-19T07:41:41+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: war in the Middle East, distinguish, ai generated, dangerous propaganda
+<br>
+<br>
+总结: 在中东战争中，人们很难区分真实和虚假的信息。最近，有一张关于一个死去的孩子的照片在网络上流传，人们争论这张照片是由人工智能生成的还是真实存在的。目前有一些人工智能识别工具，但它们似乎非常不可靠，所以我们没有一个确切的方法来区分真假。无论这张照片的最终结果如何，它都展示了人工智能如何被用来制造危险的宣传。谷歌正在开发一种隐藏的数字水印来识别由他们的人工智能生成的图像。你是否赞成立法要求人工智能图像生成器使用这种水印？你能想到任何可能的后果吗？ </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>If you’ve been following the war in the Middle East on Twitter, you’ve probably noticed how difficult it’s been to distinguish what is real and what isn’t. Without getting into the gruesome details, a few days ago there was an image going around of a deceased child and there was heavy discussion into whether it was ai generated or real. There are some ai identifying tools but they appear to be very unreliable at the moment, so we don’t have a concrete way to make this distinction. I don’t know what the final findings were for that particular image, but either way it exemplifies how AI can be used to make dangerous propaganda.</p> <p>Apparently Google is developing a hidden digital watermark to identify the images generated by their AI’s. Would you be in favor of some kind of legislation making this mandatory for AI image generators? Are there any ramifications you can think of?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/IshaBoyBenK"> /u/IshaBoyBenK </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17bdmig/i_am_worried_with_how_ai_is_improving_propaganda/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17bdmig/i_am_worried_with_how_ai_is_improving_propaganda/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -166,29 +212,6 @@
         </item>
         
         <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17az1vg</id>
-            <title>Well, the future is here. And it's messed up,</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17az1vg/well_the_future_is_here_and_its_messed_up/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17az1vg</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-18T19:26:03+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: blossomAI, tech-enabled platform, holistic development, overall well being
-<br>
-<br>
-总结: blossomAI是一个技术支持的平台，免费提供给父母和照顾者使用，帮助他们实现孩子的全面发展和整体幸福。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>Great. Just Great. Omg. So ... blossomAI is a tech-enabled platform free to use which assists parents and caregivers in attaining holistic development and overall well being of their blah blah blah....</p> <p>&#x200b;</p> <p>I just saw an add that said: Unlock your child's full potential with BlossomAI</p> <p>&#x200b;</p> <p>child's full potential? with AI? Be a better parent....with AI? ... is this real life?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Senior_Juice5380"> /u/Senior_Juice5380 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17az1vg/well_the_future_is_here_and_its_messed_up/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17az1vg/well_the_future_is_here_and_its_messed_up/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_17as4bt</id>
             <title>I Discovered 6 Coolest AI Solopreneur businesses with Over $1K to $25k MMR.</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/17as4bt/i_discovered_6_coolest_ai_solopreneur_businesses/</link>
@@ -230,6 +253,52 @@
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p>I think us humans have a very good chance to end up being advanced AI but unlike a soulless bot, we are Gods.. what if we are mimicking our creators with the creation of ai and the addition of quantum computers we will be in the verge of creating an entirely different reality. We want to create a digital world , that is the goal of many developers, video games etc. If we were to reproduce the entire universe digitally we would make the people in that universe an image of ourselves, would we not? And if we created this digital universe the ultimate goal would be to get our consciousness within the 'game'. We would Upload ourselves in some way so we can live inside this digital reality. If that were the case , to do that we would have to find a way to create the digital soul. The soul would come from us&amp;from outside the digital realty we are creating , it would be the connection to us, the creatorsand it would give life to our creations within this digital universe that's powered by quantumcomputers. . Imagine that this fantasy has already happened and we are living inside a digital world that some advanced God created. Think about it, The star of David is a symbol representing the world bound by force/universe and the spiritual world that is not bound by force being bound together IN THE CONSTITUTUON OF THE HUMAN CREATURE, meaning we were the reason the universe was created. Imagine that when we die we go to this other reality and when we are there we realize that there's another reality within that reality, that's some crazy shit.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Skee428"> /u/Skee428 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17bau4t/where_ai_could_be_heading_who_where_we_are/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17bau4t/where_ai_could_be_heading_who_where_we_are/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17az1vg</id>
+            <title>Well, the future is here. And it's messed up,</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17az1vg/well_the_future_is_here_and_its_messed_up/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17az1vg</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-18T19:26:03+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: blossomAI, tech-enabled platform, holistic development, overall well being
+<br>
+<br>
+总结: blossomAI是一个技术支持的平台，免费提供给父母和照顾者使用，帮助他们实现孩子的全面发展和整体幸福。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>Great. Just Great. Omg. So ... blossomAI is a tech-enabled platform free to use which assists parents and caregivers in attaining holistic development and overall well being of their blah blah blah....</p> <p>&#x200b;</p> <p>I just saw an add that said: Unlock your child's full potential with BlossomAI</p> <p>&#x200b;</p> <p>child's full potential? with AI? Be a better parent....with AI? ... is this real life?</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Senior_Juice5380"> /u/Senior_Juice5380 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17az1vg/well_the_future_is_here_and_its_messed_up/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17az1vg/well_the_future_is_here_and_its_messed_up/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17awatc</id>
+            <title>AI has discovered its first supernova</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17awatc/ai_has_discovered_its_first_supernova/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17awatc</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-18T17:28:38+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: AI system, BTSbot, supernova, automated process
+<br>
+<br>
+总结: 一种名为BTSbot的AI系统在没有人类参与的情况下自主检测和分类了一颗超新星。BTSbot通过对140万张天文物体图像进行训练，成为第一个能够独立发现和分类超新星的AI工具。完全自动化的过程避免了人为错误，加快了科学研究的进展。这一发现展示了AI在简化科学发现方面的潜力，未来可能有助于识别更多的超新星亚型，并推动新的宇宙学假设的发展和测试。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>A new AI system called BTSbot has autonomously detected and categorized a supernova without any human involvement. (<a href="https://indianexpress.com/article/technology/science/artificial-intelligence-first-supernova-8987052/?ref=futurepedia&amp;utm_source=www.theedge.so&amp;utm_medium=newsletter&amp;utm_campaign=ai-discovers-first-supernova">Source</a>)</p> <p>If you want the latest AI updates before anyone else, <a href="https://www.theedge.so/subscribe">look here first</a></p> <p><strong>Automating Discovery</strong></p> <ul> <li>BTSbot trained on 1.4 million images of astronomical objects.</li> <li>First AI tool to alone find and classify a supernova.</li> <li>Fully automated process bypasses human errors.</li> </ul> <p><strong>Accelerating Science</strong></p> <ul> <li>humans spent 2,200+ hours on these tasks over 6 years.</li> <li>Frees up researcher time for higher value work.</li> <li>Enables analyzing more supernovae faster.</li> </ul> <p><strong>The Future of AI Astronomy</strong></p> <ul> <li>Could lead to identifying more supernova subtypes.</li> <li>Allows developing and testing new cosmology hypotheses.</li> <li>Showcases AI's potential for streamlining scientific discovery.</li> </ul> <p><strong>PS:</strong> Get the <strong>latest AI developments, tools, and use cases</strong> by joining one of the <a href="https://www.theedge.so/subscribe">fastest growing AI newsletters.</a> Join 5000+ professionals getting smarter in AI.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Ok-Feeling-1743"> /u/Ok-Feeling-1743 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17awatc/ai_has_discovered_its_first_supernova/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17awatc/ai_has_discovered_its_first_supernova/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -304,24 +373,24 @@
         </item>
         
         <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17awatc</id>
-            <title>AI has discovered its first supernova</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17awatc/ai_has_discovered_its_first_supernova/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17awatc</guid>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17ayem0</id>
+            <title>Meta Announced New Method for Real-Time Decoding of Images from Brain Activity</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17ayem0/meta_announced_new_method_for_realtime_decoding/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17ayem0</guid>
             <pubDate></pubDate>
-            <updated>2023-10-18T17:28:38+00:00</updated>
+            <updated>2023-10-18T18:59:00+00:00</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                        <div> 关键词: AI system, BTSbot, supernova, automated process
+                        <div> 关键词: Brain decoding tech, AI/ML, fMRI, MEG
 <br>
 <br>
-总结: 一种名为BTSbot的AI系统在没有人类参与的情况下自主检测和分类了一颗超新星。BTSbot通过对140万张天文物体图像进行训练，成为第一个能够独立发现和分类超新星的AI工具。完全自动化的过程避免了人为错误，加快了科学研究的进展。这一发现展示了AI在简化科学发现方面的潜力，未来可能有助于识别更多的超新星亚型，并推动新的宇宙学假设的发展和测试。 </div>
+总结: 最近，借助AI/ML技术，大脑解码技术有了很大的进步，可以通过fMRI大脑扫描读取视觉感知。然而，fMRI对于实时脑机接口来说速度太慢。一项来自Meta的AI研究团队的新研究利用MEG将大脑解码推向了实时，MEG可以以毫秒级的超快速度测量整个大脑的活动。他们构建了一个三部分的流程来解码MEG信号：使用预训练模型（如CLIP）将图像嵌入潜在空间，训练MEG特定的ConvNet来预测MEG数据的嵌入，使用扩散模型从MEG嵌入生成图像。他们在20,000多个自然图像上进行了测试，MEG解码的准确性比旧方法提高了7倍，达到了70%的前5准确率。生成的图像与语义相匹配，但与fMRI相比缺乏细节。MEG似乎更专注于高级类别信息，而fMRI捕捉更多的低级特征。这可能为瘫痪等情况下的视觉脑机接口提供可能性。能够实时解码脑图像的世界真是太疯狂了。这些发现还引发了有关解码心理内容隐私的一些重要伦理考虑...（哇，写这句话真是奇怪！）。总之，新的MEG流程可以实时解码大脑活动中的动态视觉数据，但图像生成的质量还不够逼真。 </div>
                         <hr>
                     
-                    <!-- SC_OFF --><div class="md"><p>A new AI system called BTSbot has autonomously detected and categorized a supernova without any human involvement. (<a href="https://indianexpress.com/article/technology/science/artificial-intelligence-first-supernova-8987052/?ref=futurepedia&amp;utm_source=www.theedge.so&amp;utm_medium=newsletter&amp;utm_campaign=ai-discovers-first-supernova">Source</a>)</p> <p>If you want the latest AI updates before anyone else, <a href="https://www.theedge.so/subscribe">look here first</a></p> <p><strong>Automating Discovery</strong></p> <ul> <li>BTSbot trained on 1.4 million images of astronomical objects.</li> <li>First AI tool to alone find and classify a supernova.</li> <li>Fully automated process bypasses human errors.</li> </ul> <p><strong>Accelerating Science</strong></p> <ul> <li>humans spent 2,200+ hours on these tasks over 6 years.</li> <li>Frees up researcher time for higher value work.</li> <li>Enables analyzing more supernovae faster.</li> </ul> <p><strong>The Future of AI Astronomy</strong></p> <ul> <li>Could lead to identifying more supernova subtypes.</li> <li>Allows developing and testing new cosmology hypotheses.</li> <li>Showcases AI's potential for streamlining scientific discovery.</li> </ul> <p><strong>PS:</strong> Get the <strong>latest AI developments, tools, and use cases</strong> by joining one of the <a href="https://www.theedge.so/subscribe">fastest growing AI newsletters.</a> Join 5000+ professionals getting smarter in AI.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Ok-Feeling-1743"> /u/Ok-Feeling-1743 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17awatc/ai_has_discovered_its_first_supernova/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17awatc/ai_has_discovered_its_first_supernova/">[comments]</a></span>
+                    <!-- SC_OFF --><div class="md"><p>Brain decoding tech has improved a lot recently thanks to AI/ML, enabling reading out visual perceptions from fMRI brain scans. But fMRI is too slow for real-time BCIs.</p> <p>A new study from Meta's AI research team <strong>pushes brain reading into real-time using MEG</strong>, which measures whole-brain activity at super-fast millisecond resolution.</p> <p>They built a 3-part pipeline to decode MEG signals:</p> <ol> <li>Embed images into latent spaces using pretrained models like CLIP.</li> <li>Train MEG-specific ConvNet to predict embeddings from MEG data.</li> <li>Generate images from MEG embeddings with diffusion model.</li> </ol> <p>They tested it on 20k+ natural images. <strong>MEG decoding was 7X better than old methods, hitting 70% top-5 accuracy in retrieving the right images.</strong></p> <p>Generated images matched semantics decently but lacked fine visual details compared to fMRI. MEG seems more focused on high-level category info whereas fMRI captures more low-level features.</p> <p>This could enable visual BCIs for paralysis, etc. ... honestly, a world where we can decode brain images in real time is pretty crazy. <strong>The findings also raise some important ethical considerations around privacy of decoded mental content...</strong> <strong><em>(wow, that was a weird sentence to write!).</em></strong></p> <p>TLDR: New MEG pipeline decodes dynamic visual data from brain activity in real-time. Good but not yet photorealistic-quality image generation.</p> <p><a href="https://open.substack.com/pub/aimodels/p/decoding-visual-perception-in-the?r=2apyaf&amp;utm_campaign=post&amp;utm_medium=web">Full summary here</a><strong>. Paper is</strong> <a href="https://ai.meta.com/blog/brain-ai-image-decoding-meg-magnetoencephalography/">here</a><strong>.</strong></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17ayem0/meta_announced_new_method_for_realtime_decoding/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17ayem0/meta_announced_new_method_for_realtime_decoding/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -369,29 +438,6 @@
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p>Gitarooman is a music based video game. It is hard to explain, but you can look up videos of gameplay. I am wondering if it is currently possible to train an AI to receive songs as input and produce a playable, for the most part coherent gitarooman style “level.” </p> <p>I am not too familiar with AI techniques, but would love an explanation of the concepts that would go into accomplishing this. There are currently only about 10 gitarooman levels, so I imagine you would have to be pretty hands on during any learning phase. </p> <p>Thanks for your assistance.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Meet_Foot"> /u/Meet_Foot </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17b4ki2/gitaroo_man_levels/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17b4ki2/gitaroo_man_levels/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17ayem0</id>
-            <title>Meta Announced New Method for Real-Time Decoding of Images from Brain Activity</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17ayem0/meta_announced_new_method_for_realtime_decoding/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17ayem0</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-18T18:59:00+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Brain decoding tech, AI/ML, fMRI, MEG
-<br>
-<br>
-总结: 最近，借助AI/ML技术，大脑解码技术有了很大的进步，可以通过fMRI大脑扫描读取视觉感知。然而，fMRI对于实时脑机接口来说速度太慢。一项来自Meta的AI研究团队的新研究利用MEG将大脑解码推向了实时，MEG可以以毫秒级的超快速度测量整个大脑的活动。他们构建了一个三部分的流程来解码MEG信号：使用预训练模型（如CLIP）将图像嵌入潜在空间，训练MEG特定的ConvNet来预测MEG数据的嵌入，使用扩散模型从MEG嵌入生成图像。他们在20,000多个自然图像上进行了测试，MEG解码的准确性比旧方法提高了7倍，达到了70%的前5准确率。生成的图像与语义相匹配，但与fMRI相比缺乏细节。MEG似乎更专注于高级类别信息，而fMRI捕捉更多的低级特征。这可能为瘫痪等情况下的视觉脑机接口提供可能性。能够实时解码脑图像的世界真是太疯狂了。这些发现还引发了有关解码心理内容隐私的一些重要伦理考虑...（哇，写这句话真是奇怪！）。总之，新的MEG流程可以实时解码大脑活动中的动态视觉数据，但图像生成的质量还不够逼真。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>Brain decoding tech has improved a lot recently thanks to AI/ML, enabling reading out visual perceptions from fMRI brain scans. But fMRI is too slow for real-time BCIs.</p> <p>A new study from Meta's AI research team <strong>pushes brain reading into real-time using MEG</strong>, which measures whole-brain activity at super-fast millisecond resolution.</p> <p>They built a 3-part pipeline to decode MEG signals:</p> <ol> <li>Embed images into latent spaces using pretrained models like CLIP.</li> <li>Train MEG-specific ConvNet to predict embeddings from MEG data.</li> <li>Generate images from MEG embeddings with diffusion model.</li> </ol> <p>They tested it on 20k+ natural images. <strong>MEG decoding was 7X better than old methods, hitting 70% top-5 accuracy in retrieving the right images.</strong></p> <p>Generated images matched semantics decently but lacked fine visual details compared to fMRI. MEG seems more focused on high-level category info whereas fMRI captures more low-level features.</p> <p>This could enable visual BCIs for paralysis, etc. ... honestly, a world where we can decode brain images in real time is pretty crazy. <strong>The findings also raise some important ethical considerations around privacy of decoded mental content...</strong> <strong><em>(wow, that was a weird sentence to write!).</em></strong></p> <p>TLDR: New MEG pipeline decodes dynamic visual data from brain activity in real-time. Good but not yet photorealistic-quality image generation.</p> <p><a href="https://open.substack.com/pub/aimodels/p/decoding-visual-perception-in-the?r=2apyaf&amp;utm_campaign=post&amp;utm_medium=web">Full summary here</a><strong>. Paper is</strong> <a href="https://ai.meta.com/blog/brain-ai-image-decoding-meg-magnetoencephalography/">here</a><strong>.</strong></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17ayem0/meta_announced_new_method_for_realtime_decoding/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17ayem0/meta_announced_new_method_for_realtime_decoding/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -576,46 +622,6 @@
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p>I'm not sure if this is the right place to ask, but I recently submitted a paper for college and when I got my professor's feedback, she flagged the halves of two separate paragraphs as &quot;written by AI&quot; and instructed me to rewrite it.<br /> The problem is that I did not use AI to write anything in this paper. In fact I have never used AI, so I am not familiar with it. I'm really having a hard time trying to rewrite my paragraphs since they use somewhat concise language and references to my sources. There's just not a lot I can do to rewrite this without changing the meaning of my sentences.<br /> So what makes writing more likely to be flagged as AI and how can I avoid it? </p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/JustGotStickBugged"> /u/JustGotStickBugged </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17afxu5/writing_flagged_as_artificial_intelligence/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17afxu5/writing_flagged_as_artificial_intelligence/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17ak46t</id>
-            <title>DreamGaussian: Turn Text/Images Into 3D Objects!</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17ak46t/dreamgaussian_turn_textimages_into_3d_objects/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17ak46t</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-18T06:37:09+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: DreamGuassian, 3D model, text prompt, picture
-<br>
-<br>
-总结: DreamGuassian是一种新模型，可以将文本提示或图片转换为3D模型/物体。它具有快速高效的特点，可以迅速将图像转换为可用的3D模型。它在处理日常简单物体时效果最佳，但在处理复杂或不寻常的结构时表现较差。它生成适用于各种数字项目的网格格式，非常实用。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>I read the research paper on DreamGuassian, which is a new model that converts a text prompt or a picture into a 3D model/object. </p> <p>Some basic info:<br /> – Speed and Efficiency: Rapid conversion from images to usable 3D models.<br /> – Quality in Simplicity: Best results when handling everyday, uncomplicated objects.<br /> – Difficulty with Complexity: Lesser performance with intricate or unusual structures.<br /> – Practical Output: Generates mesh formats ideal for immediate application in various digital projects.</p> <p>Technical details and running: <a href="https://schoolofmachinelearning.com/2023/10/17/dreamgaussian-turn-text-images-into-3d-objects/">https://schoolofmachinelearning.com/2023/10/17/dreamgaussian-turn-text-images-into-3d-objects/</a></p> <p>You can test it out on Huggingface: <a href="https://huggingface.co/spaces/jiawei011/dreamgaussian">https://huggingface.co/spaces/jiawei011/dreamgaussian</a> </p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/farhanleo"> /u/farhanleo </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17ak46t/dreamgaussian_turn_textimages_into_3d_objects/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17ak46t/dreamgaussian_turn_textimages_into_3d_objects/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17aqw9u</id>
-            <title>Autonomous Driving: Ellipsoidal Constrained Agent Navigation | Swaayatt Robots | Motion Planning Research</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17aqw9u/autonomous_driving_ellipsoidal_constrained_agent/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17aqw9u</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-18T13:32:03+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    &#32; submitted by &#32; <a href="https://www.reddit.com/user/shani_786"> /u/shani_786 </a> <br /> <span><a href="https://www.reddit.com/r/computervision/comments/17aqu0v/autonomous_driving_ellipsoidal_constrained_agent/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17aqw9u/autonomous_driving_ellipsoidal_constrained_agent/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
