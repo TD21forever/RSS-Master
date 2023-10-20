@@ -5,6 +5,406 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2023/10/weekly-issue-274.html</id>
+            <title>科技爱好者周刊（第 274 期）：加密通信的最后一块拼图</title>
+            <link>http://www.ruanyifeng.com/blog/2023/10/weekly-issue-274.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2023/10/weekly-issue-274.html</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 20 Oct 2023 08:15:40 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 科技内容, 周五发布, 开源, 投稿
+<br>
+<br>
+总结: 这个文本是关于一个记录每周科技内容并在周五发布的杂志，它是开源的，欢迎投稿。 </div>
+                        <hr>
+                    
+                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
+<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/3529">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
+
+<h2>封面图</h2>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101507.webp" title="" /></p>
+
+<p>上图是最近落成的成都科幻馆，位于成都市郫都区菁蓉湖畔，可用于举办展览、会议等各种活动。10月18日，第81届世界科幻大会和雨果奖在这里开幕。（<a href="https://www.ithome.com/0/724/950.htm">via</a>）</p>
+
+<h2>加密通信的最后一块拼图</h2>
+
+<p>十一期间，世界最大的 CDN 服务商 Cloudflare 发了<a href="https://blog.cloudflare.com/announcing-encrypted-client-hello/">一篇博客文章</a>，宣称解决了"加密通信的最后一块拼图"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101508.webp" title="" /></p>
+
+<p>这件事挺重要的，可能会影响很多人，本周我想好好谈谈。</p>
+
+<p>我先问大家，HTTPS 链接是加密通信吗？</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101601.webp" title="" /></p>
+
+<p>你可以说它是，因为通信内容确实是加密的，外界无法窥测和篡改。</p>
+
+<p>但是，它又不是彻底的加密通信，<strong>有一个地方是不加密的，那就是域名</strong>。中间人可以看到，你访问什么网站。</p>
+
+<p>为什么域名不加密呢？</p>
+
+<p>因为加密的密钥放在服务器上，而服务器只有知道域名，才知道发送哪一把密钥。所以，密钥的发送，必须在知道域名之后。</p>
+
+<p>Cloudflare 解决的就是这个问题，它发明了一种新技术，叫做 ECH。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101704.webp" title="" /></p>
+
+<p>ECH 非常巧妙地解决了域名加密。它采用双层格式，也就是说，域名分了两层。外层是明文的，统一发送到 cloudflare-ech.com，内层是加密的，存放真正的域名。</p>
+
+<p><strong>中间人只能看到你在访问 cloudflare-ech.com，看不到内层的域名</strong>，从而达到保密的效果。</p>
+
+<p>好了，技术介绍就说到这里，下面就是我的感想。我当时一看到 ECH 的细节，不禁就产生了疑问。</p>
+
+<p>如果 cloudflare-ech.com 发生故障，或者种种原因无法访问，那么所有 Cloudflare 托管的网站是否都无法访问？</p>
+
+<p>这是很现实的问题，因为 Cloudflare 是世界最大 CDN 服务商，很多网站都放在上面。而且，它对免费用户都启用了 ECH，还无法关闭（这是付费功能），等于是让免费用户当小白鼠。</p>
+
+<p>我今天写这个话题，就是想提醒大家。<strong>如果由于 ECH 的问题，托管在 Cloudflare 的网站无法访问，有两个解决办法</strong>。</p>
+
+<p>一个是站长向 Cloudflare 付费，关了 ECH；另一个是访问者不要使用加密 DNS，因为 ECH 依赖加密 DNS，没有了它，就不会触发 ECH。</p>
+
+<h2>[活动] 稀土掘金创新论坛</h2>
+
+<p>下周六（10月28日），北京有一个高层次的"稀土掘金创新论坛"活动。</p>
+
+<p>它的主题是"<strong>AI 时代下的管理变革</strong>"，邀请了13位中国互联网行业知名的专家、学者和企业高管，进行现场畅谈。 </p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101813.webp" title="" /></p>
+
+<p>活动采用"主论坛 + 闭门会"的形式，演讲者逐一分享各自企业的 AI 创新和行业趋势，探讨这一轮生成式 AI 大潮带来的挑战和机遇。</p>
+
+<p>活动地点是北京新云南皇冠假日酒店。<strong>希望了解嘉宾见解和业内 AI 动态，进行面对面交流的朋友，不要错过了。</strong></p>
+
+<p>主论坛价值3999元的门票，限时开放<strong>免费申请</strong>。欢迎点击<a href="https://www.bagevent.com/event/8047254?bag_track=ruanyifeng">这个链接</a>，或者扫描上方二维码，现在就可以预约主会场入场券，先到先得。</p>
+
+<h2>科技动态</h2>
+
+<p>1、<a href="https://people.com/adobe-debuts-interactive-dress-8358152">变幻图案的裙子</a></p>
+
+<p>上周的 Adobe MAX 2023 大会上，Adobe 展示了一条会变换图案的裙子。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101607.webp" title="" /></p>
+
+<p>项目负责人 Christine Dierk 亲自穿着这条裙子登上舞台。它由许多小鳞片组成，可以不停地改变图案。</p>
+
+<p>它有一个开关来控制，也可以用手机无线控制。它可以显示 Adob​​e Firefly、Adobe After Effects、Adob​​e Illustrator 等软件生成的图案。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101608.webp" title="" /></p>
+
+<p>可以想象，这种衣服对女装行业，未来可能有巨大冲击，因为每天都可以下载不同颜色和图案。不过，Adobe 计划首先将其用于手提包。</p>
+
+<p>2、<a href="https://www.nytimes.com/2022/06/02/science/giraffe-neck-evolution.html">长颈鹿的脖子</a></p>
+
+<p>长颈鹿的脖子为什么那么长？</p>
+
+<p>进化论的解释是，为了吃到更高的树叶。但是，一项新的研究认为，这可能是为了获得打架优势。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082101.webp" title="" /></p>
+
+<p>在中国的准噶尔盆地，发现了一块长颈鹿祖先的化石。它的脖子并没有很长，但是头部有一块扁平的骨骼，就像头盔一样。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082102.webp" title="" /></p>
+
+<p>科学家认为，这可能表明，它们同类之间的争斗采用撞头的形式。为了获得争斗优势，它们的脖子就变得越来越长了。</p>
+
+<p>3、<a href="https://www.atlassian.com/blog/announcements/atlassian-acquires-loom">录屏软件值多少钱？</a></p>
+
+<p>澳大利亚软件巨头 Atlassian 上周宣布，以10亿美元收购录屏软件 Loom。谁能想到，一个录屏软件可以值这么多。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101304.webp" title="" /></p>
+
+<p>Loom 成立于2015年，只是一个 Chrome 插件（下图），后来陆续发布了桌面端和手机端。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101302.webp" title="" /></p>
+
+<p>它会把你的录屏自动发到云端，生成一个链接，你把这个 URL 发给其他人，对方就能在 Loom 的网站看到这个视频（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101303.webp" title="" /></p>
+
+<p>它对企业用户非常有用，有些事情说不清，录一段屏就能让别人明白。它现在有20万付费用户，每月生成500万段视频，就能价值10亿美元。</p>
+
+<p>这件事告诉我们，一个很普通的功能，如果做到极致，也会身价非凡。</p>
+
+<p>4、<a href="https://arstechnica.com/gadgets/2023/10/google-com-tests-a-news-filled-homepage-just-like-bing-and-yahoo/">谷歌的主页实验</a></p>
+
+<p>谷歌自从成立至今，主页始终只有一个搜索框。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101613.webp" title="" /></p>
+
+<p>但是，这种日子可能要结束了。根据报道，谷歌正在印度测试新的主页，上面会显示新闻、天气和股票。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101614.webp" title="" /></p>
+
+<p>虽然，谷歌强调这只是一个小范围的实验，未必会推广。但是，这让我们看到，随着时间的流逝，谷歌终究变得越来越像百度。</p>
+
+<h2>文章</h2>
+
+<p>1、<a href="https://finance.sina.cn/blockchain/2023-10-17/detail-imzrkyrm8917643.d.html">Telegram 创始人及其加密野心</a>（中文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101810.webp" title="" /></p>
+
+<p>即时通讯软件 Telegram 创始人的传奇故事。</p>
+
+<p>2、<a href="https://mp.weixin.qq.com/s/w-pMU3_TD3dEPoW-XEde-A">Linux 中如何安全地抹去磁盘数据？</a>（中文）</p>
+
+<p>文件管理器或者 rm 命令，并不能安全地删除数据。本文介绍 Linux 中常见的三个命令，安全地抹去磁盘数据。（<a href="https://github.com/ruanyf/weekly/issues/3566">@xxxsalted</a> 投稿）</p>
+
+<p>3、<a href="https://webkit.org/blog/14571/css-nesting-and-the-cascade/">CSS 嵌套来了</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023100513.webp" title="" /></p>
+
+<p>以前的 CSS 不支持嵌套的写法。但是，现在 Firefox 和 Safari 的正式版本，都已经支持这种写法了（上图）。 </p>
+
+<p>4、<a href="https://chriscoyier.net/2023/10/03/being-picky-about-a-css-reset-for-fun-pleasure/">CSS 重置详解（2023版）</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101611.webp" title="" /></p>
+
+<p>著名 CSS 作者 Chris Coyier 的最新文章，解释浏览器的 CSS 重置（CSS reset）每一行的意思。 </p>
+
+<p>5、<a href="https://www.thesoftwarephilosopher.com/articles/2023-08-07-modern-90s-web-dev.html">我用 Web Components 开发了自己的网站</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023080806.webp" title="" /></p>
+
+<p>作者记录怎么使用 Web Components 这种技术，开发自己的网站，他对结果非常满意。如果你想了解 Web Components，这是一篇不错的参考资料。</p>
+
+<p>6、<a href="https://getwaitlist.com/blog/solo-dev-startup-stack">我的创业技术栈</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023080807.webp" title="" /></p>
+
+<p>作者记录了自己创业所使用的各种 SaaS 服务，免费的优先。</p>
+
+<p>7、<a href="https://www.trickster.dev/post/back-to-the-terminal-the-new-era-of-cli-and-tui-software/">终端软件的新时代</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023080909.webp" title="" /></p>
+
+<p>GUI（图形界面）是目前的主流，但是这些年来 CLI（命令行）软件也一直在发展，变得越来越好用。本文介绍近年出现的一些新的 CLI 软件，可以替代传统软件。</p>
+
+<p>8、<a href="https://hturan.com/writing/exploring-exif">探索 EXIF</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023090702.webp" title="" /></p>
+
+<p>本文介绍如何从 iPhone 照片提取 EXIF，并将它们放入数据库，检索各种有趣的信息。</p>
+
+<h2>工具</h2>
+
+<p>1、<a href="https://github.com/mycelial/mycelite">Mycelite</a></p>
+
+<p>一个 SQLite 扩展，用来从一个 SQLite 实例同步到另一个，适合从本地向服务端同步数据。</p>
+
+<p>2、<a href="https://github.com/JessYan0913/pictode">Pictode</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101901.webp" title="" /></p>
+
+<p>一个开源的网页绘图编辑器。（<a href="https://github.com/ruanyf/weekly/issues/3567">@JessYan0913</a> 投稿）</p>
+
+<p>3、<a href="https://github.com/massivemadness/Squircle-CE">Squircle-CE</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023062813.webp" title="" /></p>
+
+<p>一个开源的安卓代码编辑器，在手机上开发代码。</p>
+
+<p>4、<a href="https://localsend.org/">LocalSend</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101903.webp" title="" /></p>
+
+<p>一款开源的跨平台文件传送软件，不需要互联网连接，依靠共享 Wifi 分享文件。</p>
+
+<p>5、<a href="https://uninstalr.com/">Uninstallr</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023081902.webp" title="" /></p>
+
+<p>一个免费的 Windows 卸载程序，号称可以准确、完整地卸载各种 Windows 软件，残留最少，参见<a href="https://jv16powertools.com/blog/comparing-windows-uninstallers-and-making-uninstalr/">作者自述</a>。</p>
+
+<p>6、<a href="https://github.com/linyuxuanlin/Auto-i18n">Auto-i18n</a></p>
+
+<p>它使用 GitHub Actions 和 ChatGPT，将仓库里面的 Markdown 文件翻译成其他语言，适合制作网站的国际化版本。（<a href="https://github.com/ruanyf/weekly/issues/3564">@linyuxuanlin</a> 投稿）</p>
+
+<p>7、<a href="https://ffmpeg-online.vercel.app/">在线 ffmpeg</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101610.webp" title="" /></p>
+
+<p>网页版的 ffmpeg，可以离线在网页上执行 ffmpeg 命令行，来编辑视频。</p>
+
+<p>8、<a href="https://github.com/dnakov/little-rat">little-rat</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082302.webp" title="" /></p>
+
+<p>一个 Chrome 插件，用来统计并关闭其他插件发出的 HTTP 请求，可以了解插件是否在偷偷上传数据。</p>
+
+<p>9、<a href="https://github.com/lllyasviel/Fooocus">Fooocus</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023081304.webp" title="" /></p>
+
+<p>一个桌面应用，可以在离线条件下，通过文本生成图片。</p>
+
+<p>10、<a href="https://github.com/binpash/try">try</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023062508.webp" title="" /></p>
+
+<p>一个 Linux 沙盒程序，让你在更改系统（比如安装程序或运行脚本）之前，先在沙盒中运行命令并检查效果。</p>
+
+<h2>资源</h2>
+
+<p>1、<a href="https://zibada.guru/gcj/">谷歌编程竞赛试题</a>（Google Coding Competitions）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023060304.webp" title="" /></p>
+
+<p>这个网站提供谷歌编程竞赛历年的真题。</p>
+
+<p>2、<a href="https://dbdb.io/">数据库的数据库</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023083002.webp" title="" /></p>
+
+<p>这个网站收集各种数据库的资料，目前一共有900多个数据库。</p>
+
+<p>3、<a href="https://github.com/tb0hdan/domains/blob/master/STATS.md">顶级域名统计</a></p>
+
+<p>这个仓库提供所有顶级域名的排名，按照各个域名的网站数量为序。</p>
+
+<p>4、<a href="https://gitlab.com/engmark/nix-start">Nix start</a></p>
+
+<p>软件包管理工具 Nix 的入门教程。</p>
+
+<p>5、<a href="https://flashmuseum.org/">Flash 博物馆</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023072914.webp" title="" /></p>
+
+<p>该网站收集各种以前的 Flash 作品，并自带播放器，可以在线播放。</p>
+
+<h2>图片</h2>
+
+<p>1、<a href="https://www.npr.org/sections/pictureshow/2022/06/25/1103324203/octopus-seahorse-jellyfish-national-geographic-liittschwager">章鱼、海马、水母</a></p>
+
+<p>美国《国家地理》杂志的一位摄影师，专门拍摄章鱼、海马、水母，最近出版了一本摄影集。</p>
+
+<p>他拍摄的章鱼、海马、水母，都让人感到与众不同。下图是章鱼。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202206/bg2022062706.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202206/bg2022062707.webp" title="" /></p>
+
+<p>海马</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202206/bg2022062708.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202206/bg2022062709.webp" title="" /></p>
+
+<p>水母</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202206/bg2022062710.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202206/bg2022062711.webp" title="" /></p>
+
+<p>2、<a href="https://mossandfog.com/impressive-owl-camouflage-on-display-can-you-spot-them/">猫头鹰的伪装</a></p>
+
+<p>猫头鹰非常善于伪装，可以很好地融入周围环境，不被猎物发现。</p>
+
+<p>标题链接里面，有很多猫头鹰的伪装照片。下面就是其中的两张，你能看出里面有猫头鹰吗？</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202211/bg2022111004.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202211/bg2022111005.webp" title="" /></p>
+
+<h2>文摘</h2>
+
+<p>1、<a href="https://www.popularmechanics.com/space/rockets/a8965/why-dont-we-have-artificial-gravity-15425569/">人造重力</a></p>
+
+<p>几乎所有跟宇宙飞船有关的科幻电影，都有一个共同的 Bug，那就是它们里面的人造重力系统。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101804.webp" title="" /></p>
+
+<p>我们知道，太空没有重力，宇航员在飞行过程中，应该处于失重状态。</p>
+
+<p>但是，在这些影视作品中，人们在船舱里面走来走去，就像在地球上一样。实际上，这是不可能的。它们这样拍摄，只是因为人造重力使得观众更容易产生共鸣，拍摄起来也更容易。</p>
+
+<p>为什么宇宙飞船无法安装人造重力呢？</p>
+
+<p>因为在飞船（或空间站）上产生人造重力，最现实的方法是让飞船围着一个点旋转，从而产生向心力。对着内部的人来说，会感到一种向着"地板"的拉力，以此模拟重力。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101805.webp" title="" /></p>
+
+<p>在一艘这种方式产生人造重力的宇宙飞船中，你会垂直于飞船的"墙"行走，墙将成为地板，而原来的飞船地板将成为墙。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101806.webp" title="" /></p>
+
+<p>那么，为什么我们还没有建造这种圆环式的飞船呢？</p>
+
+<p>问题在于尺寸。为了产生足够的向心力，旋转速度必须很快，飞船体积越小，旋转速度就越快。由于人体经受不住快速旋转，所以就不得不建造大型飞船，才能把旋转变得非常缓慢。</p>
+
+<p>地球的重力为 1g，假设旋转速度为每天（24小时）旋转一圈，请问产生 1g 向心力的圆环需要多大？</p>
+
+<p>计算结果是，这个圆环的直径约为371万公里，自转速度为486,000公里/小时。作为对比，地球直径是1.27万公里。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101807.webp" title="" /></p>
+
+<p>所以，飞船想在飞行过程中，实现人造重力是不现实的。宇航员想获得重力，只能降落其他行星的表面。</p>
+
+<p>网上有<a href="https://erikwernquist.com/one-revolution-per-minute">一个视频</a>，名字叫做《每分钟一转》（one revolution per minute），模拟向心力产生人造重力的宇宙飞船内部的生活，拍得非常好，推荐观看。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101808.webp" title="" /></p>
+
+<h2>言论</h2>
+
+<p>1、</p>
+
+<p>世界上有成千上万的聪明人，他们可以创办公司，也可以不创办。外界只要在适当的地方施加一些小小的推动，世界就会涌现一大批本来不存在的创业企业。</p>
+
+<p>-- <a href="https://www.tonykulesa.com/p/a-relatively-small-amount-of-force">保罗·格雷厄姆</a>，硅谷创业导师</p>
+
+<p>2、</p>
+
+<p>人们一直有一种误解，认为 Tailwind 与 Bootstrap 是竞争关系。但是，它们是两个不同层面的东西。Bootstrap 提供了 CSS 组件，而 Tailwind 只是一种更快的 CSS 书写方式。</p>
+
+<p>-- <a href="https://news.ycombinator.com/item?id=37144502">Hacker News 用户</a>  </p>
+
+<p>3、</p>
+
+<p>建立长期月球基地的价值并不大，至少不如火星基地大。在月球上，你要么被高温炙烤两周，然后被低温冷冻两周，要么在两极地区被永久冷冻。火星的大气层虽然很薄，但可以从中获取氮气、氧气、微量的氢气，以及源源不断的碳。月球没有大气层，接近真空，从那里很难大量提取有用的东西。</p>
+
+<p>-- <a href="https://news.ycombinator.com/item?id=37221847">Hacker News 读者</a></p>
+
+<p>4、</p>
+
+<p>产品是资产，代码是负债。</p>
+
+<p>你的产品解决了客户的问题，因此是你的资产。代码则是创造资产的成本。你拥有的代码越多，阅读、测试、更改和理解所付出的成本就越高。</p>
+
+<p>-- <a href="https://martinrue.com/my-engineering-axioms/">《我的工程公理》</a></p>
+
+<p>5、</p>
+
+<p>程序员的任务不仅仅是解决今天的问题，还要确保你的代码不会成为明天的问题。</p>
+
+<p>-- <a href="https://addyosmani.com/blog/good-code/">《好的代码就像写给接手者的一封情书》</a></p>
+
+<h2>往年回顾</h2>
+
+<p><a href="http://www.ruanyifeng.com/blog/2022/10/weekly-issue-227.html">脸书的公司入职教育</a>（2022 #227）</p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2021/09/weekly-issue-177.html">iPad 的真正用途</a>（2021 #177）</p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2020/09/weekly-issue-127.html">未来人人开发软件，几乎没人编码</a>（2020 #127）</p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2019/10/weekly-issue-77.html">韩剧《阿尔布拉罕宫的回忆》</a>（2019 #77）</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2023-10-20T08:15:40+08:00">2023年10月20日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2023/10/weekly-issue-273.html</id>
             <title>科技爱好者周刊（第 273 期）：任正非的三篇最新谈话</title>
             <link>http://www.ruanyifeng.com/blog/2023/10/weekly-issue-273.html</link>
@@ -2136,422 +2536,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2023-09-01T08:16:22+08:00">2023年9月 1日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2023/08/weekly-issue-268.html</id>
-            <title>科技爱好者周刊（第 268 期）：生产力是形容机器，不是形容人</title>
-            <link>http://www.ruanyifeng.com/blog/2023/08/weekly-issue-268.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2023/08/weekly-issue-268.html</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 25 Aug 2023 08:06:22 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 科技内容, 周刊, 开源, 投稿
-<br>
-<br>
-总结: 这是一份每周发布的科技内容周刊，内容涵盖各种科技领域的文章和资讯。周刊是开源的，欢迎读者投稿。 </div>
-                        <hr>
-                    
-                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
-<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/3324">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
-
-<h2>封面图</h2>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023081801.webp" title="" /></p>
-
-<p>甘肃瓜州的戈壁滩上，有一座头像雕塑《汉武大帝》。两千多年前，汉武帝曾经派遣军队，在此处战胜过匈奴。这个头像高达12.5米，采用红砂岩材质，通过 3D 雕刻逐块拼装而成。（<a href="https://www.sohu.com/a/542903530_120615216">via</a>）</p>
-
-<h2>生产力是形容机器，不是形容人</h2>
-
-<p>程序员创业以后，还喜欢写书，真是绝无仅有。我只知道一个例子。</p>
-
-<p>贾森·弗里德（Jason Fried）和戴维·汉森（David Heinemeier Hansson），是互联网公司 <a href="https://37signals.com/">37signals</a> 的主要创始人。他们除了写程序，就喜欢写书。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023081906.webp" title="" /></p>
-
-<p>他们已经写了四本书，都很出名，全部有中文版。</p>
-
-<blockquote>
-  <ul>
-<li>《实干》（Getting Real），2006</li>
-<li>《重来》（Rework），2010</li>
-<li>《远程》（Remote），2013</li>
-<li>《何必工作狂》（It Doesn't Have to Be Crazy at Work），2018</li>
-</ul>
-</blockquote>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023081907.webp" title="" /></p>
-
-<p>这四本书，我全部看过，都是小册子，收录了很多短文，解释他们的创业思想。</p>
-
-<p>这些文章的主旨，简单说就是一句话：<strong>如何创办一家"小而美"的互联网公司</strong>。</p>
-
-<p>他们只有几十个人，没有拿过一分钱风险投资，但是活得非常好，每年有几千万美元的收入。他们的书就是解释他们的创业哲学。</p>
-
-<p>我最近读完了他们的第四本书，正式的中文书名叫作《重来3：跳出疯狂的忙碌》（电子工业出版社，2020），英文书名为"It Doesn't Have to Be Crazy at Work"（直译就是《何必工作狂》）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023081908.webp" title="" /></p>
-
-<p>其中，<a href="https://world.hey.com/jason/effective-productive-acfa210d">有一篇文章</a>特别发人深思，提出了一个我从未意识到的观点，今天想分享给大家。</p>
-
-<p>文章说，<strong>不要用"生产力"这个词评价程序员，因为它是评价机器的。</strong></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023081909.webp" title="" /></p>
-
-<p>"生产力"这个词，英文为 productive，<strong>它的高低用产品的多少来衡量</strong>。生产力高，就是同样的时间做更多的工作，或者同样的工作花费更少的时间。</p>
-
-<p>如果使用"生产力"评价一个人的价值，最终就一定变成追求更高的产出。这是没有止境的，机器可以 24x7 工作，人不能。</p>
-
-<p>软件行业一直有一种说法，我们要招聘10倍生产力的程序员。它的言下之意，就是要招聘10倍产出的人，这种目标并不可取。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082309.webp" title="" /></p>
-
-<p><strong>当你强调生产力时，实际上是在强调，人必须始终忙碌。每一刻都有事情要做，而且总是有更多事情要做！</strong> 因此，你会有做不完的工作，闲暇时间越来越少，工作压力越来越大。</p>
-
-<p><strong>程序员的真正目标，应该是"有效性"（effective）</strong>。你的劳动是有效的，切实完成了项目。</p>
-
-<p>当你把"有效性"当作目标时，只要有效完成了项目，你就可以停下来了。因此，你可以追求做更少的事情、用更少的时间达到目标，这样你会得到更多的闲暇和休息，这才是可持久的。</p>
-
-<p>生产力目标（productive）占用你所有的时间，把你的日程排满，追求尽可能多的产出。</p>
-
-<p>有效性目标（effective）正好相反，<strong>它不追求添加更多的任务，而且减少那些不该做的事情。</strong></p>
-
-<p>如果有人称赞你，说你的生产力很高，或者公司以生产力作为考核指标。你可能需要小心，你有变成机器的风险。更好的称赞应该是，你的劳动很有效，很高效。</p>
-
-<p>37signals 就是一家这样的公司，他们的书宣传的就是这样的思想：不要当工作狂，追求更少的代价取得同样的效果。</p>
-
-<p>本期周刊的《文摘》部分，还有这本书的另外一篇摘录。</p>
-
-<h2>云原生深圳沙龙</h2>
-
-<p>现在最流行的软件模型是什么？一定是<strong>云原生（cloud native），也就是软件的构建和使用都基于云环境</strong>。互联网大厂都在转向该模式。</p>
-
-<p><strong>明天周六（8月26日）下午，深圳有一场技术沙龙</strong>，介绍云原生如何让企业实现高效部署、资源优化、降低成本。</p>
-
-<p>本次活动由稀土掘金社区 + 火山引擎云原生联合主办，邀请<strong>字节的第一线工程师，分享开发经验</strong>，以及云开发的真实体会。</p>
-
-<p>下面是活动安排，详细介绍可以点击进入<a href="https://mp.weixin.qq.com/s/qoM5zBC9JmVfgCn1gVxkHA">官网说明</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082106.webp" title="" /></p>
-
-<p>活动地点是<strong>深圳湾创新科技中心</strong>，也就字节的深圳工区，没去过的朋友可以去看看。活动免费，来不了现场，还可以报名线上直播。</p>
-
-<p>报名链接<a href="https://www.bagevent.com/event/8659508?bag_track=ryf">点击这里</a>，或者扫描上方二维码。现场除了与讲师面对面交流，还有抽奖，奖品包括华为 AI 音响、掘金周边等。</p>
-
-<h2>科技动态</h2>
-
-<p>1、<a href="https://nyulangone.org/news/pig-kidney-xenotransplantation-performing-optimally-after-32-days-human-body">猪肾移植</a></p>
-
-<p>纽约大学的外科医生宣布，将一颗猪肾脏移植到了人体，目前已经成功工作了32天。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023081905.webp" title="" /></p>
-
-<p>这是他们的第三次尝试，前两次都是移植到死者体内，本次是移植到一位已经脑死亡、通过呼吸机维持心脏跳动的患者体内。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023081904.webp" title="" /></p>
-
-<p>猪肾移植的最大难点，是人体会产生排斥反应，导致猪肾停止工作。本次移植对猪肾进行了基因改造，希望能够克服排斥反应。</p>
-
-<p>去年，美国曾经完成了世界首例猪心脏移植手术，但是患者在两个月后死亡。</p>
-
-<p>2、<a href="https://www.civilbeat.org/2023/08/what-saved-the-miracle-house-in-lahaina/">毛伊岛火灾</a></p>
-
-<p>美国夏威夷的毛伊岛，最近发生了美国100多年来最严重的火灾，造成重大伤亡。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082001.webp" title="" /></p>
-
-<p>整个城镇都烧掉了，但是媒体从照片上惊奇地发现，有一栋房子完好无缺。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082002.webp" title="" /></p>
-
-<p>火灾期间，房主正好不在岛上，家里没人，他原以为自己家肯定保不住了。别人给他看了照片以后，他也大惑不解，为什么没有烧掉。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082003.webp" title="" /></p>
-
-<p>媒体目前分析，有两个原因。首先，火势从东面过来，这栋房子东面是一大片草地，起到隔离作用，而且草地也没有被烧掉。其次，房主2021年重新装修过，将屋顶改成彩钢板（上图是装修前），从而使得落在屋顶的火星不会点燃。</p>
-
-<p>3、<a href="https://twitter.com/SpaceX/status/1692610662604702138">Starship 改装</a></p>
-
-<p>SpaceX 公司发布了 Starship 火箭的改装照片，两个工人坐在顶部，大家可以看看，这个世界推力最大的火箭有多大。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082202.webp" title="" /></p>
-
-<p>这次改装是将第一级和第二级推进器改成热分离，也就是第二级点火之后，再分离第一级。因此，需要加强第一级顶部结构的强度。</p>
-
-<p>上图就是第一级推进器的顶部，加装了一个带有排风窗的隔热罩（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082203.webp" title="" /></p>
-
-<p>4、<a href="https://www.swr.de/swraktuell/baden-wuerttemberg/stuttgart/laserstrahl-ueber-ditzingen-102.html">激光庆祝</a></p>
-
-<p>一家德国公司为了庆祝成立100周年，本月在总部向天空发射绿色激光，作为生日蜡烛。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082306.webp" title="" /></p>
-
-<p>这个激光高达10公里，方圆80公里范围内都能看到，是目前世界最大的绿色激光。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082307.webp" title="" /></p>
-
-<p>这家公司本身就生产激光器，主要用作避雷针。大型场地周围部署多个激光器，就能避免被雷击。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082308.webp" title="" /></p>
-
-<h2>文章</h2>
-
-<p>1、<a href="https://double-trouble.dev/post/typescript-tips/">TypeScript 五个小技巧</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023071803.webp" title="" /></p>
-
-<p>本文介绍 TypeScript 的一些使用技巧。  </p>
-
-<p>2、<a href="https://pet2cattle.com/2022/08/docker-container-names-generator">Docker 如何生成容器名</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023062403.webp" title="" /></p>
-
-<p>创建 Docker 容器时，如果不指定名称，Docker 会自己为容器生成一个（比如 Romantic_shtern）。这个名字是怎么得到的？</p>
-
-<p>3、<a href="https://alexharri.com/blog/typescript-structural-typing">为什么 TypeScript 不能正确处理 Object.keys()</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023062501.webp" title="" /></p>
-
-<p>本文讲解 TypeScript 的一个难点，使用<code>Object.keys()</code>遍历对象键名会产生奇怪的报错。</p>
-
-<p>4、<a href="https://interrupt.memfault.com/blog/emulating-raspberry-pi-in-qemu">如何在 QEMU 中模拟树莓派</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023062701.webp" title="" /></p>
-
-<p>QEMU 是著名的虚拟机软件，本文演示如何用它新建一个树莓派虚拟机，可以用来上手 QEMU。</p>
-
-<p>5、<a href="https://susam.net/blog/from-uuid-to-infinite-loops.html">UUID（版本4）的一个冷知识</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023072201.webp" title="" /></p>
-
-<p>UUID 意为全局唯一标识符，是一个十六进制的32位随机数。本文介绍一个冷知识，这个数字的第14位是固定不变的。</p>
-
-<p>6、<a href="https://thomaspark.co/2020/06/the-mad-magazine-fold-in-effect-in-css/">CSS 折叠翻页效果</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023072502.webp" title="" /></p>
-
-<p>本文介绍如何只使用 CSS 实现折纸一般的翻页效果。</p>
-
-<p>7、<a href="https://abstractexpr.com/2023/06/29/structures-in-c-from-basics-to-memory-alignment/">C 语言 Struct 详解</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023062914.webp" title="" /></p>
-
-<p>C 语言初级教程，详细介绍 Struct 结构的用法。</p>
-
-<p>8、<a href="https://bun.sh/blog/bun-macros">JavaScript 的 macro 语法</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023063001.webp" title="" /></p>
-
-<p>JavaScript 正在引入 marco 语法，最新版的 Bun 打包器已经支持。本文介绍这个功能。</p>
-
-<h2>工具</h2>
-
-<p>1、<a href="http://simplestatistics.org/">Simple Statistics</a> </p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023062814.webp" title="" /></p>
-
-<p>一个统计学的 JS 库，提供基本的统计函数。</p>
-
-<p>2、<a href="https://www.doubao.com/">豆包</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023081903.webp" title="" /></p>
-
-<p>字节推出的 ChatGPT 类产品，免费使用。</p>
-
-<p>3、<a href="https://github.com/TrackerControl/tracker-control-android">TrackerControl</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082011.webp" title="" /></p>
-
-<p>一个手机 App，用来监控手机软件对于用户行为的数据收集（即跟踪行为）。（<a href="https://github.com/ruanyf/weekly/issues/3381">@cheanus</a> 投稿）</p>
-
-<p>4、<a href="https://github.com/121812/dcnews">DCNews</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082012.webp" title="" /></p>
-
-<p>一个开源的 Go 应用，将微信群的聊天消息，自动同步到预设的 Discord 频道。（<a href="https://github.com/ruanyf/weekly/issues/3382">@121812</a> 投稿）</p>
-
-<p>5、<a href="https://github.com/seal-io/walrus">Walrus</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082303.webp" title="" /></p>
-
-<p>一个开源的应用管理平台，让开发人员无需了解底层平台的细节，即可自助进行部署、管理和交付。（<a href="https://github.com/ruanyf/weekly/issues/3385">@Aleegra</a> 投稿）</p>
-
-<p>6、<a href="https://github.com/TencentARC/GFPGAN">GFPGAN</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082304.webp" title="" /></p>
-
-<p>腾讯开源的旧照片 AI 修复，查看 <a href="https://replicate.com/tencentarc/gfpgan">Demo</a>。（<a href="https://github.com/ruanyf/weekly/issues/3387">@Y024</a> 投稿）</p>
-
-<p>7、<a href="https://tonzhon.com/">铜钟</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082305.webp" title="" /></p>
-
-<p>一个主打"听歌"功能的 Web App，有丰富的音乐资源、简洁的 UI 和方便的交互，<a href="https://github.com/enzeberg/tonzhon-music">代码开源</a>。（<a href="https://github.com/ruanyf/weekly/issues/3392">@enzeberg</a> 投稿）</p>
-
-<p>8、<a href="https://github.com/formkit/auto-animate">auto-animate</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082402.webp" title="" /></p>
-
-<p>一个网页动画库，可以为网页应用添加平滑的过渡，支持各种主流框架。（<a href="https://github.com/ruanyf/weekly/issues/3398">@GenerQAQ</a> 投稿）</p>
-
-<p>9、<a href="https://github.com/imgly/background-removal-js">background-removal-js</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023062903.webp" title="" /></p>
-
-<p>一个去除图片背景的 JS 库。</p>
-
-<p>10、<a href="https://github.com/Genymobile/scrcpy">scrcpy</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202304/bg2023042908.webp" title="" /></p>
-
-<p>一个跨平台的桌面应用，映射安卓手机的屏幕到电脑桌面，允许使用鼠标和键盘控制手机。</p>
-
-<h2>资源</h2>
-
-<p>1、<a href="https://developer.wordpress.org/playground/">WordPress Playground</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023071501.webp" title="" /></p>
-
-<p>WordPress 官方推出的练习场，可以在浏览器里面新建一个 WordPress 实例，用来测试插件或样式主题。</p>
-
-<p>2、<a href="https://github.com/spirometaxas/periodic-table-cli">Periodic Table Cli</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023071701.webp" title="" /></p>
-
-<p>一个命令行的元素周期表，还可以互动。</p>
-
-<p>3、<a href="https://sqlfordevs.com/ebook">写给开发者的数据库技巧</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202212/bg2022120303.webp" title="" /></p>
-
-<p>一本免费英文电子书，介绍一些高级的 SQL 语句的用法。</p>
-
-<p>4、<a href="https://yatiwang.chat/">面试押题王</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082401.webp" title="" /></p>
-
-<p>输入应聘的岗位描述，它通过 AI 自动生成面试问题和答案。不过，题库里面的技术类面试题比较少。（<a href="https://github.com/ruanyf/weekly/issues/3397">@vickwv</a> 投稿）</p>
-
-<h2>图片</h2>
-
-<p>1、<a href="https://mobileai.net/2023/08/21/graugear-docking-station/">固态硬盘外接盒</a></p>
-
-<p>一家德国公司推出了 M.2 接口的固态硬盘外接盒，样子就像真空管一样，非常新奇。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082109.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082110.webp" title="" /></p>
-
-<p>2、<a href="https://newsroom.ucla.edu/stories/a-coded-message-hidden-in-floor-247232">加大瓷砖图案</a></p>
-
-<p>1969年，加州大学洛杉矶分校（UCLA）发出了第一条互联网消息。</p>
-
-<p>当时，该校的两位教授通过网络发出两个字母"LO"。他们原想发送的是"LOGIN"。但是，只发出前两个字母，网络就崩溃了。</p>
-
-<p>2011年，为了纪念这个事件，在翻新该校的博尔特大厅（Boelter Hall）时，建筑师用两色的瓷砖，在地面上嵌入了二进制密码。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082006.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082005.webp" title="" /></p>
-
-<p>一共是14行，每行八块瓷砖，完整的分布图如下。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082007.webp" title="" /></p>
-
-<p>转成二进制，就是下图。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082008.webp" title="" /></p>
-
-<p>根据 ASCII 码，转换成文字，就是"lo and behold!"（登陆看看！）。</p>
-
-<h2>文摘</h2>
-
-<p>1、<strong>我们不是一家人</strong></p>
-
-<p>本文摘自 37signals 公司的《重来3》（电子工业出版社，2020）一书。</p>
-
-<p>有的公司喜欢宣扬"我们都是一家人"。不，你们不是一家人。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082310.webp" title="" /></p>
-
-<p>在 37signals，我们也不是一家人，我们是同事。这并不意味着我们互不关心，也不意味着我们不会尽力施以援手。我们相互关心，也乐于助人，但我们不是一家人。这在你的公司也一样。</p>
-
-<p>我们这群人聚在一起工作，只是为了做出产品，
-我们只是共同努力，把公司的产品做得尽善尽美，可我们不会为它挡子弹。你对你的公司也一样。</p>
-
-<p>我们为自己的产品而骄傲。这就足够了。</p>
-
-<p>某些高管说他们的公司就像一个"欢乐的大家庭"，那你就要当心了。一般来说，他们的意思并不是，无论你遇上什么事，公司都会保护你，也不是说公司会无条件地爱你。他们的意思更有可能是：<strong>他们需要的是单向的牺牲----你的牺牲。</strong></p>
-
-<p>这是因为，一提"家庭"这个画面，一种同甘共苦的情怀就会油然而生。你工作到深夜或放弃假期也要干活，这不仅仅是为了给公司挣到更多的钱，不，不，你是在为"大家庭"做出奉献。</p>
-
-<p>事实上，这只是某些人企图忽悠你，想让你忘掉合理的个人利益，打出的如此蹩脚的情感牌。</p>
-
-<p>公司又不是黑帮，收留的全是孤儿，让他们为家族打天下。公司企图伪装成你的家庭，不过是又一个花招，目的是把公司的需要置于你真正家庭的需要之前。这招太恶心了。</p>
-
-<p>最优秀的企业不是家庭。它们是家庭的后盾，是家庭的同盟军。它们提供健康的，能让人找到成就感的工作环境，让员工能在合理的时间合上笔记本电脑，去做最好的丈夫、妻子、父母、手足和孩子。</p>
-
-<h2>言论</h2>
-
-<p>1、</p>
-
-<p>很多成功的艺术家，不是因为模仿某种风格而成功，恰恰相反，他们不顾一切地做自己想做的事情，直到建立了自己独特的风格。</p>
-
-<p>-- <a href="https://austinkleon.com/2023/07/10/never-waste-a-midlife-crisis/">《永远不要浪费你的中年危机》</a></p>
-
-<p>2、</p>
-
-<p>JavaScript 之所以流行，只是因为它在浏览器中具有垄断地位，没有替代品，我们都被它扣为人质。</p>
-
-<p>-- <a href="https://news.ycombinator.com/item?id=36784003">Hacker News 读者</a></p>
-
-<p>3、</p>
-
-<p>一位美国法官判决，AI 生成的作品没有版权，因为"没有人类的参与"。</p>
-
-<p>这可能对软件业产生重大影响。如果在未来，公司的大部分代码由 AI 生成，这些代码将不受版权保护。这意味着，未来的大部分代码可能都没有版权，这将是一件大事。</p>
-
-<p>-- <a href="https://blog.ericgoldman.org/archives/2023/08/court-says-no-human-author-no-copyright-but-human-authorship-of-genai-outputs-remains-uncertain-guest-blog-post.htm">《没有人类作者，就没有版权》</a></p>
-
-<p>4、</p>
-
-<p>我们正在目睹有用的互联网的终结。未来的互联网上有用的内容，将是在深锁的付费墙后面，或者在各种不开放的私人论坛里面。可以公开访问的互联网，将充斥着越来越多的内容农场和 AI 模型产生的碎屑内容。</p>
-
-<p>-- <a href="https://defector.com/the-last-page-of-the-internet">《互联网的最后一页》</a></p>
-
-<p>5、</p>
-
-<p>芬兰首都赫尔辛基，每年的交通事故死亡人数非常少，不超过5个人。</p>
-
-<p>一位美国记者采访当地官员，询问采用了什么高技术。官员答道："我们没有使用任何高技术，只是强制要求放慢车速。"</p>
-
-<p>-- <a href="https://slate.com/technology/2023/07/cruise-autonomous-vehicles-safety-waymo-self-driving-cars-ad-new-york-times.html">《自动驾驶与交通安全》</a></p>
-
-<h2>历史上的本周</h2>
-
-<p><a href="http://www.ruanyifeng.com/blog/2022/09/weekly-issue-221.html">全世界最繁荣的行业</a>（2022 #221）</p>
-
-<p><a href="http://www.ruanyifeng.com/blog/2021/08/weekly-issue-171.html">云服务流量有多贵？</a>（2021 #171）</p>
-
-<p><a href="http://www.ruanyifeng.com/blog/2020/08/weekly-issue-121.html">为什么人类没有越来越闲？</a>（2020 #121）</p>
-
-<p><a href="http://www.ruanyifeng.com/blog/2019/08/weekly-issue-71.html">名校毕业，不容易创业</a>（2019 #71）</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2023-08-25T08:06:22+08:00">2023年8月25日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
