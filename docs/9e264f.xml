@@ -51,6 +51,29 @@
         </item>
         
         <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17csn7x</id>
+            <title>Kadane's Sliding Window: Unlimited Memory For Any LLM Model</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17csn7x/kadanes_sliding_window_unlimited_memory_for_any/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17csn7x</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-21T02:48:58+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: MemGPT, Kadane's Sliding Window, LLM model, long-term memory window
+<br>
+<br>
+总结: Kadane's Sliding Window是一种用于大型语言模型的长期记忆窗口，可以解决语言模型短期记忆的限制。它可以与任何LLM模型结合使用，并且非常简单地添加到现有的模型架构中。通过使用Kadane's Sliding Window，LLM模型可以存储和访问过去的信息，即使这些信息不在当前给定的上下文中。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>Yes, I am aware MemGPT exists. MemGPT is exactly why I am releasing Kadane's Sliding Window under an MIT Open-Source license. MemGPT only works with OpenAI. If you do not want to pay OpenAI money, you cannot use it. Kadane's Sliding Window is about 15 lines of Python code. You can slap this baby into whatever LLM model you would like to! </p> <p>I personally tested it out with a Phi-1.5 model. Works nice. Wrote me a nice and very long story about Alice in Wonderland. It stayed congruent with the story the entire time, because it had a context window that I fed it, that grew and grew as it spit out the story. It took about 10 seconds to set it up. </p> <p>Release Date: October 20, 2023</p> <p>License: MIT Open-Source</p> <p>Introduction</p> <p>Kadane's Sliding Window is a new long-term memory window for large language models (LLMs). It is adjustable to any length, depending on the size of the model and the limitations of the hardware. Kadane's Sliding Window is specifically designed to be used with any LLM model, and it is very simple to add to any existing model architecture.</p> <p>Motivation</p> <p>Kadane's algorithm has existed in computer science for a long time. Kadane's algorithm is a dynamic programming algorithm for finding the maximum subarray of a given array. It is also particularly well-suited for tasks that involve finding patterns in sequences. It has one limitation; it is meant for unlimited arrays, but I want it for limited strings. So, 'Kadane's Sliding Window'. Ez Pz lemon squeezy.</p> <p>LLMs are powerful tools for generating text, translating languages, and answering questions in an informative way. However, they have one major limitation: they have a very short memory. This means that they can only remember the information that is contained in the context that they are given.Kadane's Sliding Window addresses this limitation by providing LLMs with a long-term memory window. This window allows LLMs to store and access information from the past, even if it is not explicitly included in the context that they are currently given.</p> <p>Implementation</p> <p>Kadane's Sliding Window is implemented as a queue. The queue is initialized with a maximum length, which is determined by the size of the model and the limitations of the hardware. As the model generates text, the tokens are added to the queue. When the queue reaches its maximum length, the oldest tokens are removed.</p> <p>To use Kadane's Sliding Window, simply add the following code to your existing LLM model architecture:</p> <p>Python</p> <p>class KadaneSlidingWindow:</p> <p>def __init__(self, maxlen):</p> <p>self.maxlen = maxlen</p> <p>self.window = collections.deque()</p> <p>def add(self, elements):</p> <p>for element in elements:</p> <p>self.window.append(element)</p> <p>if len(self.window) &gt; self.maxlen:</p> <p>self.window.popleft()</p> <p>def get_context(self):</p> <p>return &quot; &quot;.join(self.window)</p> <p># Create a Kadane Sliding Window with a maximum length of 1000 tokens</p> <p>kadane_sliding_window = KadaneSlidingWindow(maxlen=1000)</p> <p># Add the context to the sliding window</p> <p>kadane_sliding_window.add(context.split())</p> <p># Generate text using the LLM model</p> <p>output_ids = model.generate(input_ids=input_ids)</p> <p># Decode the generated text using the tokenizer</p> <p>generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)</p> <p># Add the generated text to the sliding window</p> <p>kadane_sliding_window.add(generated_text.split())</p> <p>Benefits</p> <p>Kadane's Sliding Window offers a number of benefits for LLMs, including:</p> <p>Improved performance on tasks that require long-term memory, such as question answering and summarization.</p> <p>Increased creativity and diversity in generated text.</p> <p>Reduced need for human intervention, as the model can learn to perform tasks without being explicitly told what to do.</p> <p>Conclusion</p> <p>Kadane's Sliding Window is a powerful new tool for improving the performance of LLMs. It is simple to implement and can be used with any LLM model architecture. Kadane's Sliding Window is released under an MIT Open-Source License, so anyone can use it to improve their own LLMs.</p> <p><a href="https://turingssolutions.com/f/kadanes-sliding-window-unlimited-memory-for-any-llm-model">Release Article Contains GitHub Link</a></p> <p>Here is almost my full code from playing around with it:</p> <p>import collections</p> <p>import torch</p> <p>from transformers import AutoModelForCausalLM, AutoTokenizer</p> <p>class KadaneSlidingWindow:</p> <p>def __init__(self, maxlen):</p> <p>self.maxlen = maxlen</p> <p>self.window = collections.deque()</p> <p>self.long_term_memory = []</p> <p>def add(self, elements):</p> <p>for element in elements:</p> <p>self.window.append(element)</p> <p>self.long_term_memory.append(element)</p> <p>if len(self.window) &gt; self.maxlen:</p> <p>self.window.popleft()</p> <p>def get_context(self):</p> <p>return &quot; &quot;.join(self.window)</p> <p># Create a Kadane Sliding Window with a size of 1000 tokens</p> <p>kadane_sliding_window = KadaneSlidingWindow(maxlen=1000)</p> <p># Initialize the Phi-1.5 model</p> <p>model = AutoModelForCausalLM.from_pretrained(&quot;microsoft/phi-1_5&quot;, trust_remote_code=True, torch_dtype=&quot;auto&quot;)</p> <p>tokenizer = AutoTokenizer.from_pretrained(&quot;microsoft/phi-1_5&quot;, trust_remote_code=True, torch_dtype=&quot;auto&quot;)</p> <p># Generate text with the Phi-1.5 model and the Kadane Sliding Window</p> <p>prompt = &quot;Once upon a time, there was a little girl named Alice who lived in a small village. One day, Alice was playing in the forest when she came across a strange rabbit hole. She followed the rabbit hole down into a wonderland...&quot;</p> <p># Add the prompt to the sliding window before starting the loop</p> <p>kadane_sliding_window.add(prompt.split())</p> <p>generated_text = &quot;&quot;</p> <p>while len(generated_text) &lt; 100:</p> <p>context = kadane_sliding_window.get_context()</p> <p># Ask the model a follow-up prompt</p> <p>follow_up_prompt = &quot;After Alice fell down the rabbit hole, she...&quot;</p> <p>context = follow_up_prompt + context</p> <p># Encode the context using the tokenizer</p> <p>input_ids = tokenizer(context, return_tensors=&quot;pt&quot;).input_ids</p> <p># Generate text using the model with the encoded context as input</p> <p>output_ids = model.generate(input_ids=input_ids, max_length=min(100, len(input_ids) + 75))</p> <p># Decode the generated text using the tokenizer</p> <p>generated_text += tokenizer.decode(output_ids[0], skip_special_tokens=True)</p> <p># Add the generated text to the sliding window</p> <p>kadane_sliding_window.add(generated_text.split())</p> <p># Print the generated text</p> <p>print(generated_text)</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Fantastic-Ninja3839"> /u/Fantastic-Ninja3839 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17csn7x/kadanes_sliding_window_unlimited_memory_for_any/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17csn7x/kadanes_sliding_window_unlimited_memory_for_any/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_17cpk0i</id>
             <title>LLM vs Traditional Model building vs Model training and fine tuning. TLDR Traditional AI is getting reduced into obsolescence - Why can't we have both?</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/17cpk0i/llm_vs_traditional_model_building_vs_model/</link>
@@ -115,29 +138,6 @@
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p>Incorporating advanced Artificial Intelligence algorithms with drones has substantially widened the range of tasks that can be performed, making them more versatile, capable and in demand than ever before, resulting in a robust market expected to reach US$84 billion by 2030, growing at a rate of 28.5% from US$14.5 billion in 2023. (Source: <a href="https://www.globenewswire.com/news-release/2023/10/18/2762340/0/en/Emerging-Technology-Report-on-AI-in-Drones-Market-GTM-Strategy-and-Trends-2023-2030-Report-by-RationalStat.html">https://www.globenewswire.com/news-release/2023/10/18/2762340/0/en/Emerging-Technology-Report-on-AI-in-Drones-Market-GTM-Strategy-and-Trends-2023-2030-Report-by-RationalStat.html</a>)</p> <p><strong>Located within this growing market, Aether Global Innovations (AETH.c AETHF) is a drone management and automation services provider.</strong> In providing cutting-edge automation and development solutions, AETH leverages automation to optimize drone operations to enhance drone performance and facilitate seamless communication within fleets.</p> <p><strong>Yesterday, AETH announced the signing of a strategic joint venture partnership MOU with RufDiamond, a distributor and retrofitter of all-terrain vehicles and equipment built to withstand the harshest of conditions.</strong> </p> <p>The JV will look to identify business opportunities to exploit the development, integration and deployment of an automated drone solution from RufDiamond's retrofitted all-terrain FatTruck vehicle platforms. </p> <p>This is a strategic and opportunistic move for both AETH and RufDiamond as several clients from each company's sales pipeline have expressed an interest in an autonomous drone from an all-terrain vehicle platform. </p> <p>As Daryl Adams, CEO and founder of RufDiamond, stated: </p> <blockquote> <p>“Bringing innovative drone management and monitoring solutions onto one of our extreme, all-terrain Fat Truck mobile platforms is exciting. This integrated solution will allow many of our top clients in forestry and wildfire management, mining, energy, emergency response, government and military to expand their own coverage areas for monitoring vast properties as well as infrastructure assets, like pipelines, waterways, forests and mining sites.”</p> </blockquote> <p>This marks the sixth strategic partnership that AETH has entered into in recent months, emphasizing their steady expansion path. </p> <p>In utilizing artificial intelligence to specialize in cutting-edge UAV drone management and operations services, AETH is paving a new way forward by delivering customized solutions catering to the demands of major property and critical infrastructure owners, operators, and their management teams.</p> <p>Latest News Release: <a href="https://aethergic.com/2023/10/19/aether-global-innovations-corp-signs-strategic-joint-venture-partnership-mou-with-rufdiamond-ltd-a-distributor-and-retrofitter-of-all-terrain-vehicles/">https://aethergic.com/2023/10/19/aether-global-innovations-corp-signs-strategic-joint-venture-partnership-mou-with-rufdiamond-ltd-a-distributor-and-retrofitter-of-all-terrain-vehicles/</a></p> <p>Posted on Behalf of Aether Global Innovations Corp.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/massettawm"> /u/massettawm </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17cmptb/aether_global_aethc_aethf_signs_strategic_joint/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17cmptb/aether_global_aethc_aethf_signs_strategic_joint/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17csn7x</id>
-            <title>Kadane's Sliding Window: Unlimited Memory For Any LLM Model</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17csn7x/kadanes_sliding_window_unlimited_memory_for_any/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17csn7x</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-21T02:48:58+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: MemGPT, Kadane's Sliding Window, LLM model, long-term memory window
-<br>
-<br>
-总结: Kadane's Sliding Window是一种用于大型语言模型的长期记忆窗口，可以解决语言模型短期记忆的限制。它可以与任何LLM模型结合使用，并且非常简单地添加到现有的模型架构中。通过使用Kadane's Sliding Window，LLM模型可以存储和访问过去的信息，即使这些信息不在当前给定的上下文中。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>Yes, I am aware MemGPT exists. MemGPT is exactly why I am releasing Kadane's Sliding Window under an MIT Open-Source license. MemGPT only works with OpenAI. If you do not want to pay OpenAI money, you cannot use it. Kadane's Sliding Window is about 15 lines of Python code. You can slap this baby into whatever LLM model you would like to! </p> <p>I personally tested it out with a Phi-1.5 model. Works nice. Wrote me a nice and very long story about Alice in Wonderland. It stayed congruent with the story the entire time, because it had a context window that I fed it, that grew and grew as it spit out the story. It took about 10 seconds to set it up. </p> <p>Release Date: October 20, 2023</p> <p>License: MIT Open-Source</p> <p>Introduction</p> <p>Kadane's Sliding Window is a new long-term memory window for large language models (LLMs). It is adjustable to any length, depending on the size of the model and the limitations of the hardware. Kadane's Sliding Window is specifically designed to be used with any LLM model, and it is very simple to add to any existing model architecture.</p> <p>Motivation</p> <p>Kadane's algorithm has existed in computer science for a long time. Kadane's algorithm is a dynamic programming algorithm for finding the maximum subarray of a given array. It is also particularly well-suited for tasks that involve finding patterns in sequences. It has one limitation; it is meant for unlimited arrays, but I want it for limited strings. So, 'Kadane's Sliding Window'. Ez Pz lemon squeezy.</p> <p>LLMs are powerful tools for generating text, translating languages, and answering questions in an informative way. However, they have one major limitation: they have a very short memory. This means that they can only remember the information that is contained in the context that they are given.Kadane's Sliding Window addresses this limitation by providing LLMs with a long-term memory window. This window allows LLMs to store and access information from the past, even if it is not explicitly included in the context that they are currently given.</p> <p>Implementation</p> <p>Kadane's Sliding Window is implemented as a queue. The queue is initialized with a maximum length, which is determined by the size of the model and the limitations of the hardware. As the model generates text, the tokens are added to the queue. When the queue reaches its maximum length, the oldest tokens are removed.</p> <p>To use Kadane's Sliding Window, simply add the following code to your existing LLM model architecture:</p> <p>Python</p> <p>class KadaneSlidingWindow:</p> <p>def __init__(self, maxlen):</p> <p>self.maxlen = maxlen</p> <p>self.window = collections.deque()</p> <p>def add(self, elements):</p> <p>for element in elements:</p> <p>self.window.append(element)</p> <p>if len(self.window) &gt; self.maxlen:</p> <p>self.window.popleft()</p> <p>def get_context(self):</p> <p>return &quot; &quot;.join(self.window)</p> <p># Create a Kadane Sliding Window with a maximum length of 1000 tokens</p> <p>kadane_sliding_window = KadaneSlidingWindow(maxlen=1000)</p> <p># Add the context to the sliding window</p> <p>kadane_sliding_window.add(context.split())</p> <p># Generate text using the LLM model</p> <p>output_ids = model.generate(input_ids=input_ids)</p> <p># Decode the generated text using the tokenizer</p> <p>generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)</p> <p># Add the generated text to the sliding window</p> <p>kadane_sliding_window.add(generated_text.split())</p> <p>Benefits</p> <p>Kadane's Sliding Window offers a number of benefits for LLMs, including:</p> <p>Improved performance on tasks that require long-term memory, such as question answering and summarization.</p> <p>Increased creativity and diversity in generated text.</p> <p>Reduced need for human intervention, as the model can learn to perform tasks without being explicitly told what to do.</p> <p>Conclusion</p> <p>Kadane's Sliding Window is a powerful new tool for improving the performance of LLMs. It is simple to implement and can be used with any LLM model architecture. Kadane's Sliding Window is released under an MIT Open-Source License, so anyone can use it to improve their own LLMs.</p> <p><a href="https://turingssolutions.com/f/kadanes-sliding-window-unlimited-memory-for-any-llm-model">Release Article Contains GitHub Link</a></p> <p>Here is almost my full code from playing around with it:</p> <p>import collections</p> <p>import torch</p> <p>from transformers import AutoModelForCausalLM, AutoTokenizer</p> <p>class KadaneSlidingWindow:</p> <p>def __init__(self, maxlen):</p> <p>self.maxlen = maxlen</p> <p>self.window = collections.deque()</p> <p>self.long_term_memory = []</p> <p>def add(self, elements):</p> <p>for element in elements:</p> <p>self.window.append(element)</p> <p>self.long_term_memory.append(element)</p> <p>if len(self.window) &gt; self.maxlen:</p> <p>self.window.popleft()</p> <p>def get_context(self):</p> <p>return &quot; &quot;.join(self.window)</p> <p># Create a Kadane Sliding Window with a size of 1000 tokens</p> <p>kadane_sliding_window = KadaneSlidingWindow(maxlen=1000)</p> <p># Initialize the Phi-1.5 model</p> <p>model = AutoModelForCausalLM.from_pretrained(&quot;microsoft/phi-1_5&quot;, trust_remote_code=True, torch_dtype=&quot;auto&quot;)</p> <p>tokenizer = AutoTokenizer.from_pretrained(&quot;microsoft/phi-1_5&quot;, trust_remote_code=True, torch_dtype=&quot;auto&quot;)</p> <p># Generate text with the Phi-1.5 model and the Kadane Sliding Window</p> <p>prompt = &quot;Once upon a time, there was a little girl named Alice who lived in a small village. One day, Alice was playing in the forest when she came across a strange rabbit hole. She followed the rabbit hole down into a wonderland...&quot;</p> <p># Add the prompt to the sliding window before starting the loop</p> <p>kadane_sliding_window.add(prompt.split())</p> <p>generated_text = &quot;&quot;</p> <p>while len(generated_text) &lt; 100:</p> <p>context = kadane_sliding_window.get_context()</p> <p># Ask the model a follow-up prompt</p> <p>follow_up_prompt = &quot;After Alice fell down the rabbit hole, she...&quot;</p> <p>context = follow_up_prompt + context</p> <p># Encode the context using the tokenizer</p> <p>input_ids = tokenizer(context, return_tensors=&quot;pt&quot;).input_ids</p> <p># Generate text using the model with the encoded context as input</p> <p>output_ids = model.generate(input_ids=input_ids, max_length=min(100, len(input_ids) + 75))</p> <p># Decode the generated text using the tokenizer</p> <p>generated_text += tokenizer.decode(output_ids[0], skip_special_tokens=True)</p> <p># Add the generated text to the sliding window</p> <p>kadane_sliding_window.add(generated_text.split())</p> <p># Print the generated text</p> <p>print(generated_text)</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Fantastic-Ninja3839"> /u/Fantastic-Ninja3839 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17csn7x/kadanes_sliding_window_unlimited_memory_for_any/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17csn7x/kadanes_sliding_window_unlimited_memory_for_any/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -235,29 +235,6 @@
         </item>
         
         <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17cd4d4</id>
-            <title>Is there any meaning in buying a 1500€ computer for AI ?</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17cd4d4/is_there_any_meaning_in_buying_a_1500_computer/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17cd4d4</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-20T14:52:15+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: IT guy, AI, machine learning, vector databases
-<br>
-<br>
-总结: 这是一位公共图书馆的IT人员，他试图说服领导和同事们关注人工智能、机器学习、向量数据库、图像生成、自动翻译等技术。他通过演示向观众展示了这些技术的潜力，并希望购买一台性能较低的GPU来进行演示。 </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>Hello,</p> <p>I'm not a specialist but more &quot;the IT guy&quot; at work (a public library).</p> <p>Since the beginning of 2022, I try to convince my direction and co-workers that we should pay attention to AI, machine learning, vector databases, image creation, automatic translations etc</p> <p>I managed to give a few presentations that convinced the viewers that something is going on and it's an opportunity to attract people into the library. Meanwhile, I started to improve my skills for being able to use things in collab or kaggle.</p> <p>Not building : just using and being able to demonstrate what is possible and what's not.</p> <p>I was told that I might get some money to buy a PC, in a range around 1500€. Is it worthy regarding the low GPU I could buy for this price ? And if yes, what should I aim for ? The goal would be to make demonstrations of LLM, image creation, text to speech etc.</p> <p>Thanks in advance for your answers.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/CedricLimousin"> /u/CedricLimousin </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17cd4d4/is_there_any_meaning_in_buying_a_1500_computer/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17cd4d4/is_there_any_meaning_in_buying_a_1500_computer/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_17ch0vp</id>
             <title>Researchers propose 3D-GPT: combining LLMs and agents for procedural Text-to-3D model generation</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/17ch0vp/researchers_propose_3dgpt_combining_llms_and/</link>
@@ -276,6 +253,29 @@
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p>Researchers propose a new AI system called 3D-GPT that creates 3D models by combining natural language instructions and agents specialized for working with existing 3D modeling tools.</p> <p>3D-GPT has predefined functions that make 3D shapes, and it tweaks parameters to build scenes. The key is getting the AI to understand instructions and pick the right tools.</p> <p>It has three main agents:</p> <ul> <li><strong>A dispatcher</strong> that parses the text and picks generation functions</li> <li><strong>A conceptualizer</strong> that adds details missing from the description</li> <li><strong>A modeler</strong> that sets parameters and outputs code to drive 3D software</li> </ul> <p>By breaking modeling work down into steps, the agents can collab to match the descriptions. This is sort of like how a 3D modeling team of humans would work.</p> <p>The paper authors show it making simple scenes like &quot;lush meadow with flowers&quot; that fit the text. It also modifies scenes appropriately when given new instructions. I include some gifs of example outputs in my full summary. They look pretty good - I would say 2005-quality graphics.</p> <p>There are limits. It fully relies on existing generators, so quality is capped. Details and curves are iffy. It resorts to default shapes often instead of true understanding. And I doubt the verts and textures are well-optimized.</p> <p>The agent architecture seems to be really popular right now. This one shows some planning skills, which could extend to more creative tasks someday.</p> <p><strong>TLDR:</strong> <strong>AI agents can team up to generate 3D models from text instructions. Works to some degree but limitations remain.</strong></p> <p><a href="https://open.substack.com/pub/aimodels/p/3d-gpt-a-new-method-for-procedural"><strong>Full summary</strong></a>. Paper <a href="https://arxiv.org/abs/2310.12945"><strong>here</strong></a>.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Successful-Western27"> /u/Successful-Western27 </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17ch0vp/researchers_propose_3dgpt_combining_llms_and/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17ch0vp/researchers_propose_3dgpt_combining_llms_and/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17cd4d4</id>
+            <title>Is there any meaning in buying a 1500€ computer for AI ?</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17cd4d4/is_there_any_meaning_in_buying_a_1500_computer/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17cd4d4</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-20T14:52:15+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: IT guy, AI, machine learning, vector databases
+<br>
+<br>
+总结: 这是一位公共图书馆的IT人员，他试图说服领导和同事们关注人工智能、机器学习、向量数据库、图像生成、自动翻译等技术。他通过演示向观众展示了这些技术的潜力，并希望购买一台性能较低的GPU来进行演示。 </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>Hello,</p> <p>I'm not a specialist but more &quot;the IT guy&quot; at work (a public library).</p> <p>Since the beginning of 2022, I try to convince my direction and co-workers that we should pay attention to AI, machine learning, vector databases, image creation, automatic translations etc</p> <p>I managed to give a few presentations that convinced the viewers that something is going on and it's an opportunity to attract people into the library. Meanwhile, I started to improve my skills for being able to use things in collab or kaggle.</p> <p>Not building : just using and being able to demonstrate what is possible and what's not.</p> <p>I was told that I might get some money to buy a PC, in a range around 1500€. Is it worthy regarding the low GPU I could buy for this price ? And if yes, what should I aim for ? The goal would be to make demonstrations of LLM, image creation, text to speech etc.</p> <p>Thanks in advance for your answers.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/CedricLimousin"> /u/CedricLimousin </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17cd4d4/is_there_any_meaning_in_buying_a_1500_computer/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17cd4d4/is_there_any_meaning_in_buying_a_1500_computer/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
@@ -304,29 +304,6 @@
         </item>
         
         <item>
-            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17cd0q5</id>
-            <title>We created a song about Westworld, the HBO series where AI take over and attempt to escape the park they're put in.</title>
-            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17cd0q5/we_created_a_song_about_westworld_the_hbo_series/</link>
-            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17cd0q5</guid>
-            <pubDate></pubDate>
-            <updated>2023-10-20T14:47:59+00:00</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: dark country song, HBO series Westworld, AI, sentient lifeform
-<br>
-<br>
-总结: 这首黑暗乡村歌曲讲述了HBO系列剧《西部世界》中的情节转折和人工智能开始接管的故事。歌曲的主体部分描述了在观众被挑战思考AI是否已经发展成有感知能力的生命形式时产生的不安和诡异感。整个视频由AI生成的图像组成，这些图像是AI“想到”的，与关于AI对人类的复仇的歌曲相配，使得这个视频更加恐怖。大家万圣节快乐！ </div>
-                        <hr>
-                    
-                    <!-- SC_OFF --><div class="md"><p>This dark country song is about the HBO series Westworld, where the tide turns and the AI starts taking over. The main body of the song is about the uneasy eerie feeling during the episodes where the viewer is challenged to think whether or not the AIs have developed into a sentient lifeform. </p> <p>The entire video is made up of AI-generated imagery. It's the AI that 'thought of' the images that should accompany a song about AIs revenge against humanity... That makes this video even more spooky. Happy Halloween y'all!</p> <p><a href="https://youtu.be/OLOtt6TdUJc">https://youtu.be/OLOtt6TdUJc</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Bartooliinii"> /u/Bartooliinii </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17cd0q5/we_created_a_song_about_westworld_the_hbo_series/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17cd0q5/we_created_a_song_about_westworld_the_hbo_series/">[comments]</a></span>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://www.reddit.com/r/ArtificialInteligence/t3_17cna8e</id>
             <title>What are the best/easiest apps or websites for creating NSFW AI art on iPhone?</title>
             <link>https://www.reddit.com/r/ArtificialInteligence/comments/17cna8e/what_are_the_besteasiest_apps_or_websites_for/</link>
@@ -345,6 +322,29 @@
                         <hr>
                     
                     <!-- SC_OFF --><div class="md"><p>Basically title. I’m looking for (preferably free) an app, website, shortcut, etc. that can take prompts and turn them into NSFW Art. </p> <p>All the ones I’ve tried either aren’t well made/good, you have to pay a decent chunk of change, or only offer hentai. </p> <p>I’ve tried to install eatable diffusion on my PC but something kept going wrong with all the code and I just couldn’t with it anymore. </p> <p>Any help is appreciated! </p> <p>Thank you.</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/susboij"> /u/susboij </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17cna8e/what_are_the_besteasiest_apps_or_websites_for/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17cna8e/what_are_the_besteasiest_apps_or_websites_for/">[comments]</a></span>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.reddit.com/r/ArtificialInteligence/t3_17cd0q5</id>
+            <title>We created a song about Westworld, the HBO series where AI take over and attempt to escape the park they're put in.</title>
+            <link>https://www.reddit.com/r/ArtificialInteligence/comments/17cd0q5/we_created_a_song_about_westworld_the_hbo_series/</link>
+            <guid isPermaLink="false">https://www.reddit.com/r/ArtificialInteligence/t3_17cd0q5</guid>
+            <pubDate></pubDate>
+            <updated>2023-10-20T14:47:59+00:00</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: dark country song, HBO series Westworld, AI, sentient lifeform
+<br>
+<br>
+总结: 这首黑暗乡村歌曲讲述了HBO系列剧《西部世界》中的情节转折和人工智能开始接管的故事。歌曲的主体部分描述了在观众被挑战思考AI是否已经发展成有感知能力的生命形式时产生的不安和诡异感。整个视频由AI生成的图像组成，这些图像是AI“想到”的，与关于AI对人类的复仇的歌曲相配，使得这个视频更加恐怖。大家万圣节快乐！ </div>
+                        <hr>
+                    
+                    <!-- SC_OFF --><div class="md"><p>This dark country song is about the HBO series Westworld, where the tide turns and the AI starts taking over. The main body of the song is about the uneasy eerie feeling during the episodes where the viewer is challenged to think whether or not the AIs have developed into a sentient lifeform. </p> <p>The entire video is made up of AI-generated imagery. It's the AI that 'thought of' the images that should accompany a song about AIs revenge against humanity... That makes this video even more spooky. Happy Halloween y'all!</p> <p><a href="https://youtu.be/OLOtt6TdUJc">https://youtu.be/OLOtt6TdUJc</a></p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href="https://www.reddit.com/user/Bartooliinii"> /u/Bartooliinii </a> <br /> <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17cd0q5/we_created_a_song_about_westworld_the_hbo_series/">[link]</a></span> &#32; <span><a href="https://www.reddit.com/r/ArtificialInteligence/comments/17cd0q5/we_created_a_song_about_westworld_the_hbo_series/">[comments]</a></span>
                 ]]>
             </content:encoded>
         </item>
