@@ -178,7 +178,36 @@ apt install inkscape python3-pygments</code></pre><p>&nbsp;</p><p><strong>(Optio
             <content:encoded>
                 <![CDATA[
                     
-                    你的下一台 Android 机，记得挑字幕没那么亮的
+                    <p>夜幕降临，是时候放松放松了。你打开视频软件，点开一部标注支持 HDR 的新剧，满怀期待地准备享受视觉的盛宴。</p>
+<p>……然后你发现整个画面上最亮的是字幕。</p>
+<p>是的，这就是不少 Android 用户司空见惯的一个恼人场景。即便是当下某些热门的 Android 旗舰机型，观看 HDR 内容时，屏幕上的字幕、呼出的播放控制、下拉状态栏打开的通知面板……屏幕中的非视频内容都因为 HDR 播放而变得更耀眼了。这个现象是如此普遍，以至于编辑部的 <a class="ss-atUser" href="https://sspai.com/u/LuZhNan">@路中南</a> 都把「音量和亮度控制条是否刺眼」当作一个判断 HDR 是否触发的小「技巧」。</p>
+<p>那么，为什么 Android 设备会遇到这种问题？有办法解决吗？</p>
+<h2>SDR 与 HDR 的两难</h2>
+<p><strong>问题的核心在于从像素值到亮度的转换函数。</strong>我们知道，标准的「白点」是指像素值是 <code>(255,255,255)</code> 的一个像素。为了确定这样一个像素要用多高的亮度来显示，我们需要引入一个对应关系，也就是转换函数；不同的转换函数会导致不同的视觉效果。</p>
+<p>对于传统的标准动态范围（SDR）内容而言，常用的标准是国际电信联盟（ITU）于 1990 年发布的 ITU-R BT.709 标准。它规定：</p>
+<ul>
+    <li>SDR 内容的基本参数是亮度为 100 尼特、黑位为 0.05 尼特、内容对比度范围为 2000:1</li>
+    <li>转换函数<a href="https://en.wikipedia.org/wiki/Gamma_correction">伽马</a> 2.2 会将像素值的最大值与高亮度（无论是多少）匹配</li>
+</ul>
+<p>所以，根据这个标准，白点的亮度是 100 尼特。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/03/article/dde2a23f2fb1df83c77bbe774f61ad97?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>伽马与 ST.2084 转换函数的对比 | 图：PathPartner Tech</figcaption>
+</figure>
+<p>而在引入 HDR 内容之后，因为动态范围更广、最大亮度也更高了，就必须引入一个能更有效地在暗部和亮部分别调整动态范围转换函数。常见的选择是 <a href="https://en.wikipedia.org/w/index.php?title=Perceptual_quantizer" target="_blank">ST.2084</a>（简称 PQ），它能使亮度和色彩信息的损失最小，从而更好地呈现和传递 HDR 的内容。</p>
+<p>和伽马 2.2不同，<strong>PQ 会直接将像素值映射到设备的绝对亮度数值</strong>，比如在一台峰值亮度为 1000 尼特的设备上，白点的就会是以 1000 尼特呈现。</p>
+<p><strong>问题在于，屏幕上可能同时显示 SDR 和 HDR 内容，但伽马 2.2 和 ST.2084 这两种转换函数在同一时间只能择其一使用。</strong>一旦屏幕切换到 ST.2084 (PQ) 来保证 HDR 内容的观感，屏幕中所有内容、包括并不适合高亮度展示的 SDR 部分（例如字幕、播放控制等），都会迎来亮度的暴涨。不幸的是，这些元素很多都是纯白色或接近白色的，而当下 Android 旗舰机的峰值亮度已经突破 2000 尼特了。流星般耀眼的字幕就这样照亮了你的双眸。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/03/1a1b3ccfedfbcb41f236509ef63c85bb.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>系统界面会比 HDR 内容本身还要亮（你可以在最新版 Chromium 浏览器上点开大图查看到 HDR 效果*）</figcaption>
+</figure>
+<p>如何解决这个问题呢？Google 在 Android 13 中 Google 正式引入 SDR 和 HDR 混合显示支持，采用了一套基于 SDR 内容调暗的补偿机制：既然无法让 HDR 内容和 SDR 内容同时使用各自的转换函数，那就<strong>调暗 SDR 内容来维持该区域应有的亮度观感。</strong></p>
+<p>如何调暗？Android 系统会在这类场景下为 SDR 层重新指定一个与峰值亮度对应白点不同、重新计算的白点，将 SDR 应有的白点找回来，作为内容调暗后的观感基准。</p>
+<p>至于具体的计算方式，目前我们并没有详细的资料和代码可以参考，其中一种推测是：按照亮度滑块设定的屏幕亮度，通过 ST.2084 传递函数计算一个该亮度对应的数值作为 SDR 白点。当然反正过来也是可行的，即将伽马 2.2 函数中的白点数值（比如 400 尼特亮度对应的白点）重新引入到 ST.2084 中来。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/02/9b5e96c32ed7de1240e9925b8dc081b6.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>SDR 调暗效果在画中画这种场景中最为明显（遗憾的是 OPPO 拍摄的 ProXDR 效果无法在 Chrome 上重现）</figcaption>
+</figure>
+<p>最后的实际效果就是，当你使用 YouTube 在非全屏状态下观看 HDR 视频时，会发现视频简介、评论区等区域的界面会比正常情况下（无 HDR 内容播放时）略暗一点——这种观感并非错觉。</p>
+<h2>他山之石：Apple 与 EDR</h2>
+<p>既然事关 Android 的「不好」，我们也要看看隔壁的 Apple 在同一件事情上是怎么做的。</p>
                 ]]>
             </content:encoded>
         </item>
