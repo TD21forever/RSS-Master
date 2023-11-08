@@ -126,7 +126,7 @@
             <link>https://sspai.com/post/84233</link>
             <guid isPermaLink="false">https://sspai.com/post/84233</guid>
             <pubDate></pubDate>
-            <updated>Tue, 07 Nov 2023 09:57:57 GMT</updated>
+            <updated>Tue, 07 Nov 2023 09:58:38 GMT</updated>
                 
                 
             <content:encoded>
@@ -138,7 +138,116 @@
 总结: 本文介绍了如何使用Alfred和Workflow自己制作一个搜索特定标签下最新文章的工具，通过输入关键词激活工具，可以打开对应的文章页面。同时，文章还介绍了如何获取少数派标签列表接口和理解链接中的参数。 </div>
                         <hr>
                     
-                    Alfred Workflow 进阶指南：以少数派标签搜索为例
+                    <h2>前言</h2>
+<p>Alfred 是受 Mac 用户广泛喜爱的经典自动化工具，其付费功能 Workflow 更是提高效率的利器。不过，很多朋友或许主要都以下载别人的成品为主，一旦遇到没有现成方案、或者方案过时的情况，就只能遗憾放弃。</p>
+<p>本文中，我希望以本站读者可能感兴趣的一个常见需求——搜索少数派特定标签下的最新文章为例，从头到尾演示如何自己制作一个 Alfred Workflow，旨在抛砖引玉，希望能让更多朋友掌握 Alfred Workflow，创造出有趣、实用、流畅的工作流。</p>
+<p><strong>成品效果演示</strong></p>
+<p>输入 <code>ssp</code> 的关键词激活 <a href="https://github.com/JamesHopbourn/sspai-search-alfredworkflow">SSPAI Search Workflow</a>，后面跟着需要搜索的关键词，回车即可打开对应的文章页面。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/article/d81d59153106782ae33eb4a75ff44f76?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p><strong>成品下载和代码</strong></p>
+<p><a href="https://github.com/JamesHopbourn/sspai-search-alfredworkflow">sspai-search-alfredworkflow</a></p>
+<h2>原型搭建</h2>
+<h3>获取少数派标签列表接口</h3>
+<p>打开少数派主页和 Chrome 的网络调试工具，切换到网络子菜单，并将过滤的文件请求类型设置为「Fetch/XHR」，然后刷新一个效率标签页面，就会有请求记录被捕获到了。我通过经验一眼就看出肯定是 <code>limit=10&amp;&amp;offset=0</code> 这条请求获取的文章数据，点击预览查看，正是需要的文章列表数据。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/e20de43e014b9df9431646f16c11c9b5.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>（如果不是使用 MVC 模型来构建，而是直接将所有的数据先在后端渲染，然后返回整个网页文件的话，就需要读者自己去解析这个网页的内容了。对于这种情况，在以往的文章里也曾举例介绍过，请见《<a href="https://sspai.com/post/81269">通用状态监控通知脚本，订阅状态通知</a>》。）</p>
+<p>如果是刚入门的新手，还有两种办法来确定哪一条请求是返回了需要的数据。</p>
+<p>第一是可以逐条查看返回的数据来确定，此处刷新网页之后只有九条请求，逐一查看也不会太费时间。</p>
+<p>第二种方法是在请求页面，使用快捷键 ⌘+F 呼出关键词搜索框，然后页面上显示的任意一篇文章标题，大概率也能找到具体的数据来源。还有一篇之前的文章可供参考《<a href="https://sspai.com/prime/story/charles-sina-lottery-tutorial">Charles 抓包实战指南——以获取新浪彩票 API 并制作捷径为例</a>》。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/article/ccd863b5be920c18013e08100f5afba5?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<h3>理解链接中的参数</h3>
+<p>在上一步获取了正确的文章列表接口地址之后，接着就可以开始研究一下这个接口参数了，先把链接拆开：</p>
+<pre class="language-ace-line old-record-id-doxcnKAkf8SNDQcu5DKaE4q4qxc"><code>https://sspai.com/api/v1/article/tag/page/get?
+limit=12
+&amp;offset=0
+&amp;tag=效率</code></pre>
+<p>可以看到这个接口一共有四个参数，经验告诉我<code>limit</code> 和 <code>offset</code> 是分页参数，规定了每次读取多少条数据，从哪个位置开始读取。最后的 <code>tag</code> 就是要查询的标签了。</p>
+<p>很多人可能认为只需要把 <code>limit</code> 参数调大，就能实现一次查询更多的数据。实际上这个 limit 数字并不是无限大的，多数网站都会给这个参数设置一个最大值，超过这个最大值之后，就不会按照用户输入的 limit 去返回了，而是用网站定义的最大值。否则别人一个请求就把用户的所有文章信息都爬走了。所以这个这一步就是测试最大的 <code>limit</code> 值。</p>
+<p>此处使用 <code>curl</code> 命令向 API 接口发送查询请求，然后使用 <code>jq</code> 工具解析返回的文章列表数组长度，命令如下：</p>
+<pre class="language-ace-line old-record-id-doxcnW37JJpZgwVaA2mqwqs4DKb"><code>curl 'https://sspai.com/api/v1/article/tag/page/get?limit=10&amp;offset=0&amp;tag=效率'|jq '.data|length'</code></pre>
+<p>经过测试，可以看出，在 <code>limit=40</code> 的时候，返回的文章列表数组长度就不会再变动了，接下来无论把 <code>limit</code> 改为多大，单次都只返回 40 条数据了。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/587a704bf9d7f877565d62810c603de7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>接着就是理解 <code>offset</code> 参数的用法，一般译为偏移量，上面发的请求偏移量都是 0，说明这是从最新发表的文章向前查询 40 条记录。如果设置 <code>value=40</code>，它就会跳过最新的 40 篇文章，从第 41 篇文章开始再查询 40 篇数据返回。</p>
+<p>如下图所示，左边的 offset 是 0，右边是 40，所以两个请求返回了不同的文章列表。这个参数接下来的 Python 代码里也会使用到，此处只要知道它的功能即可。</p>
+<pre class="language-ace-line old-record-id-doxcnX7HfcdRd3eL6KE9E1eBeDh"><code>curl 'https://sspai.com/api/v1/article/tag/page/get?limit=40&amp;offset=0&amp;tag=效率'|jq '.data[]|.title'
+curl 'https://sspai.com/api/v1/article/tag/page/get?limit=40&amp;offset=40&amp;tag=效率'|jq '.data[]|.title'</code></pre>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/de3233b8d061c6816129b74d75f365f8.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>通过这一段对接口的分析，我们已经能理解少数派标签列表接口的地址和相关参数，接下来就可以正式开始准备制作 Workflow了。</p>
+<p>（如果想实现首页或是用户检索，方法基本相同，有兴趣的读者可以自己练习。）</p>
+<h3>搭建基本框架</h3>
+<p>接着打开 Alfred 切换到 Workflows 界面，点击左下角的「+」，创建一个「Blank Workflow」。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/8dfac5efbecbfa96fb26eb3717a9e279.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>在弹出的页面里填写 Workflow 的基本信息，其中 Bundle Id 的格式可以参考：「com.作者名.项目名」这样的 reverse DNS 结构，Workflow 的图标是少数派 App 的图标，此处可以参考<a href="https://sspai.com/post/40682">这篇文章</a>来获取合适的图标。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/a26c4bf22b347504e26e67578f2010db.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>接着我们在 Workflow 编辑页面右键，添加一个 Script Filter 的 Input 输入来源。这里我们会选择 Python，这是一种相对流行编程语言，即使没有任何的学习，普通读者也能借助 GPT 对代码进行解释和调整。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/ae91bcc89f8125451b202fabd35996d6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>添加了 Script Filter 之后，在弹出的窗口中填写这个脚本的基本配置信息。将 Script 中的代码修改为：<code>python3 sspai.py "$1"</code>。</p>
+<p>意思是，当使用关键词 ssp 触发了这个 Workflow 之后，使用 Python 3 去执行 <code>sspai.py</code> 脚本，并把用户的输入作为 <code>argv</code> 参数传入。（我们会在之后的章节会详细解释。）</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/c1a802744fc2ca8650fe5f079c230f3a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>保存好之后，直接使用关键词去触发这个 Workflow，就可以看到基本的界面效果了。此时还没编写 sspai.py 的逻辑代码，所以不会有其他的待选列表可供选择，但是也能看出在上图中设置的 keyword、Placeholder Title 和 Placeholder Subtext 生效了。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/86537151f7af2ff7395a057371cafdcc.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<h3>Python 环境准备</h3>
+<p>基本框架搭建好了之后，就可以开始编写 Python 代码了。</p>
+<p>那么在哪里编写呢？再次点开 Script Filter，在左下角有一个文件夹的图标，点开就是这个 Workflow 的根目录了。接下来所有的代码、依赖库都会被安装在这里。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/ddaad4434a294ce58e3c0ed64b9e8e1c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>打开这个目录之后，可以看到这个目录下只有 icon.png 和 info.plist。icon.png 是图标文件，info.plist 是记录这个 Workflow 基本信息的格式化文件，刚才在「基本框架搭建」章节填写的信息，都记录在这个文件里了。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/44bf171b5355972ce91ad55ff34b4d9c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>接下来就是要在这个目录下创建一个供 Workflow 执行的 sspai.py。可以直接将该工作目录拖入代码编辑器中，例如 Sublime Text 或者 VS Code 中，然后在左边文件列表中使用右键创建一个 sspai.py 文件即可。</p>
+<p>Python 文件准备好了，就可以直接开始写代码了。使用 requests 向少数派文章接口发一个请求，然后再把返回的数据都打印出来。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/eb333750013390556473f3e7f13d7fc1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>但是此处可以看到，VS Code 在第一行的 import requests 位置显示了红色的波浪线，说明此处的导入是有问题的。此处就是 Alfred Workflow 的特殊之处了，Alfred Workflow 只认工作目录下的 Python 依赖，不会去其他地方查找。</p>
+<p>为什么要这样设计？因为 Alfred Workflow 是可以导出分享给其他用户的，但是其他用户不可能所有人都预装了相关依赖，所以 Alfred 就有了这样的设计，所有的依赖都必须放在工作目录下，打包分享的时候会跟着分享文件一起带走。</p>
+<p>所以我们要借助 pip 命令的 <code>--target</code> 的参数指定安装目录，把 Python 的依赖库安装到 Workflow 工作目录下。VS Code 中，选择「终端」子菜单，点击「新建终端」，输入命令在工作目录下安装 requests 依赖，命令如下：</p>
+<pre class="language-ace-line old-record-id-doxcnbyi3IaG0mT76EITYHRf04e"><code>pip3 install -U --target=. requests</code></pre>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/69273f4163c846001c8a77258d7b17d2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>安装前后工作目录对比如下，除了 requests 之外，还多了很多其他的依赖，因为 requests 需要配合这些其他的依赖，才能够正常工作，所以请不要随意删除这些文件夹。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/a8a9a30dc1a29a6a10cb024c47c95436.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<h3>测试 Workflow</h3>
+<p>重启 VS Code，此时就可以看到 requests 导入正常了，没有红色的波浪线报错了。回看我们刚才写的请求接口的代码，现在可以对它进行测试了。我在这里最后使用了 <code>sys.stderr.write()</code>，这是因为 Alfred 是通过标准输出，将返回的结果提供给打开 URL 组件去打开链接的。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/54b1c8622f31e3392ad17ccf20ba4850.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>如果记录日志和返回结果都使用 <code>print()</code> 去返回数据，Alfred 就无法区分哪个是日志信息，哪个是返回数据。所以为了区分两者，日志记录使用 <code>sys.stderr.write()</code>，返回数据使用 <code>sys.stdout.write()</code>。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/f2ad053e7aa95876bc83fb55991e2c08.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>Alfred 给开发者提供了一个控制台的功能，可以通过控制台查看输出信息。打开「少数派搜索」Workflow，在右上角有一个虫子的图标，开发者可以在这里查看 Workflow 输出的日志信息。点击之后，就会提示开始记录日志了。</p>
+<p>此时通过 ssp 的关键词 + 搜索内容去触发这个 Workflow，就能够执行 Python 代码了。可以看到下面的控制台就已经成功输出了获取到的 JSON 数据。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/cf811cb76081fcd6126a2e7c72899a9f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<h3>调整数据结构</h3>
+<p>请求测试成功后，我们就要调整数据结构，让 Alfred 可以返回标准的数据并呈现出来。Alfred <a href="https://www.alfredapp.com/help/workflows/inputs/script-filter/json/">定义</a>了一个数据结构，只有根据它规定的格式去返回数据，才能让数据显示为可选项：</p>
+<pre class="language-ace-line old-record-id-doxcn1MPAK285CLWFk7K5fIF9wb"><code>{
+  "items": [
+    {
+      "uid": "desktop",
+      "type": "file",
+      "title": "Desktop",
+      "subtitle": "~/Desktop",
+      "arg": "~/Desktop",
+      "autocomplete": "Desktop",
+      "icon": {
+        "type": "fileicon",
+        "path": "~/Desktop"
+      }
+    }
+  ]
+}</code></pre>
+<p>但是在这个例子中，我们只需要：</p>
+<pre class="language-ace-line old-record-id-doxcn63v8XwAauTlk10SgfCVlKg"><code>{
+  "items": [
+    {
+      "title": "标题",
+      "subtitle": "子标题",
+      "arg": "打开的链接",
+      "autocomplete": "自动补全",
+      "icon": {
+        "path": "图标地址"
+      }
+    }
+  ]
+}</code></pre>
+<h3>代码整合</h3>
+<p>现在有了 requests 请求拿到的数据，结合上面的返回数据结构，就可以写出一个简单版的查询了。</p>
+<p>不过光有标题还不够，我们还需要大概知道文章讲了什么，以及对应 ID 来帮助跳转。这里我们要对文章列表里的每个标题，使用 for 循环来读取文章数据。</p>
+<pre class="language-ace-line old-record-id-doxcnokNESQVGRl1snAfccpmWHf"><code>curl 'https://sspai.com/api/v1/article/tag/page/get?limit=1&amp;offset=6&amp;tag=效率'|jq</code></pre>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/07/5541604b89b5106f3d8ea6239ff88fd1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>整合之后的代码如下所示，使用 requests 向 API 接口发送请求，然后使用 for 循环读取 <code>response['data']</code> 里面的每个元素，将它们转为 Alfred 可解析的 JSON 格式。然后使用 json.dumps() 函数，将它转为文本，最后使用 <code>sys.stdout.write()</code> 标准输出返回给 Workflow。</p>
                 ]]>
             </content:encoded>
         </item>
