@@ -3,7 +3,7 @@ name: cron_job
 on:
   schedule:
     # 在白天（6:00-23:00）每120分钟运行一次
-    - cron: '*/120 6-23 * * *'
+    - cron: '*/60 6-23 * * *'
     # 在凌晨（0:00-6:00）每240小时运行一次
     - cron: '*/240 0-6 * * *'
   workflow_dispatch:
@@ -42,10 +42,11 @@ jobs:
              
       - name: PUSH
         env:
-          U_EMAIL: ${{ secrets.EMAIL }}
+          U_EMAIL: ${{ secrets.BOT_EMAIL }}
+          U_NAME: ${{ secrets.BOT_NAME }}
         run: |
           pwd
-          git config --local user.name "RSS-Master@Bot"  
+          git config --local user.name "${U_NAME}"  
           git config --local user.email "${U_EMAIL}" 
           git status -s
           git add .
