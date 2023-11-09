@@ -5,7 +5,8 @@ import os
 import openai
 
 logger = logging.getLogger()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+
+
 
 
 def gpt_summary(query, model):

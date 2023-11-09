@@ -4,6 +4,7 @@ import os
 from typing import Any, Dict, List
 
 import feedparser
+import openai
 from dotenv import load_dotenv
 from jinja2 import Template
 
@@ -22,6 +23,7 @@ cache = CacheKit(CACHE_PATH)
 
 def _init():
     load_dotenv()
+    openai.api_key = os.getenv("OPENAI_API_KEY")
     init_logger()
     init_dirs()
     cache.load_cache()
