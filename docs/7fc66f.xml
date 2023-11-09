@@ -29,7 +29,7 @@
         
         <item>
             <id>https://sspai.com/post/78676</id>
-            <title>第二十一天：让提醒事项提醒自己</title>
+            <title>拯救 macOS 冷门 app：如何用提醒事项更好地提醒自己？</title>
             <link>https://sspai.com/post/78676</link>
             <guid isPermaLink="false">https://sspai.com/post/78676</guid>
             <pubDate></pubDate>
@@ -91,6 +91,29 @@
         </item>
         
         <item>
+            <id>https://sspai.com/post/84133</id>
+            <title>利用快捷指令，Linux 也能轻松「接力」iOS 剪贴文本</title>
+            <link>https://sspai.com/post/84133</link>
+            <guid isPermaLink="false">https://sspai.com/post/84133</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 09 Nov 2023 02:30:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Matrix, 写作社区, 实用价值, 快捷指令
+<br>
+<br>
+总结: Matrix是少数派的写作社区，主张分享真实的产品体验和有实用价值的经验与思考。本文介绍了使用快捷指令实现在Linux下快速复制iOS文本的方法。通过在快捷指令中使用Shell脚本，可以直接在Linux上运行复杂的脚本或者运行已经写好的Shell脚本文件。作者还介绍了在不同环境下使用wl-clipboard和xclip命令实现复制和粘贴文本的方法。同时，作者提到了一些其他的思路，如使用base64编解码。 </div>
+                        <hr>
+                    
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><h3>引言</h3><p>有快速复制 iOS 文本到 Linux 的小需求，对微信发送消息仅仅为了传输剪贴板内容而登录一个 IM 的方式感到不适；网页端微信登录需要扫码，我也绝不会在 Linux 下安装微信。以前使用 flomo 进行同步，和微信网页端的区别是可以密码登录，也无需每次都登录，但是同步起来需要时间，比起 Apple 生态的「接力」（Handoff）实在相形见绌。</p><h3>实践</h3><p>「快捷指令」能不能做到呢？发现快捷指令中「脚本」分项下有 Shell：通过 SSH 运行脚本。</p><figure class="image ss-img-wrapper image_resized" style="width: 349px;"><img src="https://cdn.sspai.com/2023/11/04/f4170332c3ed68feb4411e4d9a441b6b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Run Script Over SSH</figcaption></figure><p>图中使用英文界面是因为个人觉得和代码相关的内容使用中文翻译没有直接使用英文直观。脚本命令十分简单，实测可以直接编写运行多行复杂脚本；或者直接在 Linux 上写好 Shell 脚本文件，在指令中使用一行命令运行脚本文件即可。</p><p>参考环境是基于 wlroots 的 dwl，在 Wayland 下使用 wl-clipboard 的命令为：</p><pre class="language-null"><code>echo $Clipboard | wl-clip -nop</code></pre><p>其中<code>-n</code>参数指定不复制转行符号<sup class="ss-footnote" href="" title="下文中对此作出改进，但这个参数是否真的发挥作用我无法考证">1</sup>；<code>-o</code>参数代表只伺服一次复制就退出，在制作这个快捷指令时，我发现使用「通过 SSH 运行脚本」和在一个真实 SSH 客户端运行命令还是有一些出入，比如在运行上面的命令后快捷指令不能停止，即使加上<code>&amp;&gt;/dev/null 2&gt;&amp;1</code>后台运行依然不能结束；<code>-p</code>代表指定使用上次的复制内容<sup class="ss-footnote" href="" title="不明白wl-clipboard的逻辑，实际测试不添加p参数无法完成预想的操作">2</sup>。运行成功后需要使用<code>wl-paste -np </code>得到传输的剪贴文本<sup class="ss-footnote" href="" title="或许笔者忽略了类似X协议下的快捷键粘贴方法">3</sup>。</p><figure class="image ss-img-wrapper image_resized" style="width: 341px;"><img src="https://cdn.sspai.com/2023/11/04/87ed731827a4168efd868611b4421c02.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Shell 命令及参数</figcaption></figure><p>X11 下其实方便一些——</p><pre class="language-null"><code>echo $Clipboard | DISPLAY=:0 xclip -sel clip -r &amp;&gt;/dev/null 2&gt;&amp;1</code></pre><p>注意 X 协议下需要指定<code>DISPLAY</code>变量，这里指定常见的本地<code>0</code>显示，也可以使用<code>-d</code>参数指定显示。同样的也需要指定<code>-sel</code>参数指定使用上次的复制内容，<code>-r</code>代表不复制换行符，这是针对某些情况下，需要复制的内容后其实应该是wrap却有换行符，否则指令运行后在Linux上粘贴得到的是断开的同一段文字</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/04/2aabb19e40148257b4aec337713bb85f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>wrap 粘贴却得到换行</figcaption></figure><p>最后的<code>&amp;&gt;/dev/null 2&gt;&amp;1</code>是为了结束快捷指令运行。X 协议下指令运行成功后，直接使用粘贴快捷键即可输出剪贴文本。</p><p>Linux 当然需要开启 SSH 服务，如上图所示我选择方便的默认 22 端口，使用密钥登录提高安全性。至此基本功能已完成，但使用过程中发现有不能完全复制多段文字，不清楚是否是换行符号作祟。我使用「合并文本」功能简单合并多段文字到一段。</p><figure class="image ss-img-wrapper image_resized" style="width: 371px;"><img src="https://cdn.sspai.com/2023/11/04/17b432bb447166d8b3d44bd08772c570.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>一些处理多段文字的丑陋操作</figcaption></figure><h3>一些其它思路</h3><ul><li>其实在自己动手做之前，已多次打开少数派开始淘金，这篇文章给了我一些灵感，但使用 base64 编解码没有实践成功。</li></ul><span class="ss-linkCard">&nbsp;</span><ul><li>直接编写完整脚本，可以进一步执行特定文本处理。</li><li>「快捷指令」中其他指令，如变量、在每个切段中进行处理等，也许有适合预处理复制内容的操作。</li></ul><h3>总结</h3><p>实在丑陋拙劣的闲暇尝试，如果有更好的方法，请怀抱大爱分享，感激不尽。</p><p style="margin-left: 0px;">&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/84287</id>
             <title>派早报：OPPO 召开影像战略沟通会、R 星将公布下一代 GTA 等</title>
             <link>https://sspai.com/post/84287</link>
@@ -115,31 +138,8 @@
         </item>
         
         <item>
-            <id>https://sspai.com/post/84133</id>
-            <title>利用快捷指令，Linux 简单「接力」iOS 剪贴文本</title>
-            <link>https://sspai.com/post/84133</link>
-            <guid isPermaLink="false">https://sspai.com/post/84133</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 08 Nov 2023 16:00:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Matrix, 写作社区, 实用价值, 快捷指令
-<br>
-<br>
-总结: Matrix是少数派的写作社区，主张分享真实的产品体验和有实用价值的经验与思考。本文介绍了使用快捷指令实现在Linux下快速复制iOS文本的方法。通过在快捷指令中使用Shell脚本，可以直接在Linux上运行复杂的脚本或者运行已经写好的Shell脚本文件。作者还介绍了在不同环境下使用wl-clipboard和xclip命令实现复制和粘贴文本的方法。同时，作者提到了一些其他的思路，如使用base64编解码。 </div>
-                        <hr>
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><h3>引言</h3><p>有快速复制 iOS 文本到 Linux 的小需求，对微信发送消息仅仅为了传输剪贴板内容而登录一个 IM 的方式感到不适；网页端微信登录需要扫码，我也绝不会在 Linux 下安装微信。以前使用 flomo 进行同步，和微信网页端的区别是可以密码登录，也无需每次都登录，但是同步起来需要时间，比起 Apple 生态的「接力」（Handoff）实在相形见绌。</p><h3>实践</h3><p>「快捷指令」能不能做到呢？发现快捷指令中「脚本」分项下有 Shell：通过 SSH 运行脚本。</p><figure class="image ss-img-wrapper image_resized" style="width: 349px;"><img src="https://cdn.sspai.com/2023/11/04/f4170332c3ed68feb4411e4d9a441b6b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Run Script Over SSH</figcaption></figure><p>图中使用英文界面是因为个人觉得和代码相关的内容使用中文翻译没有直接使用英文直观。脚本命令十分简单，实测可以直接编写运行多行复杂脚本；或者直接在 Linux 上写好 Shell 脚本文件，在指令中使用一行命令运行脚本文件即可。</p><p>参考环境是基于 wlroots 的 dwl，在 Wayland 下使用 wl-clipboard 的命令为：</p><pre class="language-null"><code>echo $Clipboard | wl-clip -nop</code></pre><p>其中<code>-n</code>参数指定不复制转行符号<sup class="ss-footnote" href="" title="下文中对此作出改进，但这个参数是否真的发挥作用我无法考证">1</sup>；<code>-o</code>参数代表只伺服一次复制就退出，在制作这个快捷指令时，我发现使用「通过 SSH 运行脚本」和在一个真实 SSH 客户端运行命令还是有一些出入，比如在运行上面的命令后快捷指令不能停止，即使加上<code>&amp;&gt;/dev/null 2&gt;&amp;1</code>后台运行依然不能结束；<code>-p</code>代表指定使用上次的复制内容<sup class="ss-footnote" href="" title="不明白wl-clipboard的逻辑，实际测试不添加p参数无法完成预想的操作">2</sup>。运行成功后需要使用<code>wl-paste -np </code>得到传输的剪贴文本<sup class="ss-footnote" href="" title="或许笔者忽略了类似X协议下的快捷键粘贴方法">3</sup>。</p><figure class="image ss-img-wrapper image_resized" style="width: 341px;"><img src="https://cdn.sspai.com/2023/11/04/87ed731827a4168efd868611b4421c02.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Shell 命令及参数</figcaption></figure><p>X11 下其实方便一些——</p><pre class="language-null"><code>echo $Clipboard | DISPLAY=:0 xclip -sel clip -r &amp;&gt;/dev/null 2&gt;&amp;1</code></pre><p>注意 X 协议下需要指定<code>DISPLAY</code>变量，这里指定常见的本地<code>0</code>显示，也可以使用<code>-d</code>参数指定显示。同样的也需要指定<code>-sel</code>参数指定使用上次的复制内容，<code>-r</code>代表不复制换行符，这是针对某些情况下，需要复制的内容后其实应该是wrap却有换行符，否则指令运行后在Linux上粘贴得到的是断开的同一段文字</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/04/2aabb19e40148257b4aec337713bb85f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>wrap 粘贴却得到换行</figcaption></figure><p>最后的<code>&amp;&gt;/dev/null 2&gt;&amp;1</code>是为了结束快捷指令运行。X 协议下指令运行成功后，直接使用粘贴快捷键即可输出剪贴文本。</p><p>Linux 当然需要开启 SSH 服务，如上图所示我选择方便的默认 22 端口，使用密钥登录提高安全性。至此基本功能已完成，但使用过程中发现有不能完全复制多段文字，不清楚是否是换行符号作祟。我使用「合并文本」功能简单合并多段文字到一段。</p><figure class="image ss-img-wrapper image_resized" style="width: 371px;"><img src="https://cdn.sspai.com/2023/11/04/17b432bb447166d8b3d44bd08772c570.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>一些处理多段文字的丑陋操作</figcaption></figure><h3>一些其它思路</h3><ul><li>其实在自己动手做之前，已多次打开少数派开始淘金，这篇文章给了我一些灵感，但使用 base64 编解码没有实践成功。</li></ul><span class="ss-linkCard">&nbsp;</span><ul><li>直接编写完整脚本，可以进一步执行特定文本处理。</li><li>「快捷指令」中其他指令，如变量、在每个切段中进行处理等，也许有适合预处理复制内容的操作。</li></ul><h3>总结</h3><p>实在丑陋拙劣的闲暇尝试，如果有更好的方法，请怀抱大爱分享，感激不尽。</p><p style="margin-left: 0px;">&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://sspai.com/post/84241</id>
-            <title>城市漫步指南 | 精神安居是故乡</title>
+            <title>安阳漫步指南 | 楼台晚映青山郭，罗绮晴娇绿水洲</title>
             <link>https://sspai.com/post/84241</link>
             <guid isPermaLink="false">https://sspai.com/post/84241</guid>
             <pubDate></pubDate>
