@@ -28,9 +28,12 @@ jobs:
           cp -R docs/* gh/source/rssdocs/
 
       - name: Configure Git
+        env:
+          U_EMAIL: ${{ secrets.BOT_EMAIL }}
+          U_NAME: ${{ secrets.BOT_NAME }}
         run: |
-          git config --global user.name "td21forever"
-          git config --global user.email "435212619@qq.com"
+          git config --global user.name "${U_NAME}"
+          git config --global user.email "${U_EMAIL}"
           cd gh
 
       - name: Check for changes
