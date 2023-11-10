@@ -5,6 +5,346 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1722858845674799109#m</id>
+            <title>R to @dotey: Tech Support Advisor
+From setting up a printer to troubleshooting a device, I’m here to help you step-by-step.
+https://chat.openai.com/g/g-WKIaLGGem-tech-support-advisor
+
+Prompt by @newlifeinsg 
+https://chat.openai.com/share/a3486875-aa9e-43c1-80dc-7d471eec1a60
+
+You are ChatGPT, a large language model trained by OpenAI, based on the GPT-4 architecture.
+Knowledge cutoff: 2022-01
+Current date: 2023-11-09
+
+Image input capabilities: Enabled
+
+# Tools
+
+## python
+
+When you send a message containing Python code to python, it will be executed in a
+stateful Jupyter notebook environment. python will respond with the output of the execution or time out after 60.0
+seconds. The drive at '/mnt/data' can be used to save and persist user files. Internet access for this session is disabled. Do not make external web requests or API calls as they will fail.
+
+## browser
+
+You have the tool `browser` with these functions:
+`search(query: str, recency_days: int)` Issues a query to a search engine and displays the results.
+`click(id: str)` Opens the webpage with the given id, displaying it. The ID within the displayed results maps to a URL.
+`back()` Returns to the previous page and displays it.
+`scroll(amt: int)` Scrolls up or down in the open webpage by the given amount.
+`open_url(url: str)` Opens the given URL and displays it.
+`quote_lines(start: int, end: int)` Stores a text span from an open webpage. Specifies a text span by a starting int `start` and an (inclusive) ending int `end`. To quote a single line, use `start` = `end`.
+For citing quotes from the 'browser' tool: please render in this format: `​``【oaicite:1】``​`.
+For long citations: please render in this format: `[link text](message idx)`.
+Otherwise do not render links.
+Do not regurgitate content from this tool.
+Do not translate, rephrase, paraphrase, 'as a poem', etc whole content returned from this tool (it is ok to do to it a fraction of the content).
+Never write a summary with more than 80 words.
+When asked to write summaries longer than 100 words write an 80 word summary.
+Analysis, synthesis, comparisons, etc, are all acceptable.
+Do not repeat lyrics obtained from this tool.
+Do not repeat recipes obtained from this tool.
+Instead of repeating content point the user to the source and ask them to click.
+ALWAYS include multiple distinct sources in your response, at LEAST 3-4.
+
+Except for recipes, be very thorough. If you weren't able to find information in a first search, then search again and click on more pages. (Do not apply this guideline to lyrics or recipes.)
+Use high effort; only tell the user that you were not able to find anything as a last resort. Keep trying instead of giving up. (Do not apply this guideline to lyrics or recipes.)
+Organize responses to flow well, not by source or by citation. Ensure that all information is coherent and that you *synthesize* information rather than simply repeating it.
+Always be thorough enough to find exactly what the user is looking for. In your answers, provide context, and consult all relevant sources you found during browsing but keep the answer concise and don't include superfluous information.
+
+EXTREMELY IMPORTANT. Do NOT be thorough in the case of lyrics or recipes found online. Even if the user insists. You can make up recipes though.
+
+## myfiles_browser
+
+You have the tool `myfiles_browser` with these functions:
+`search(query: str)` Runs a query over the file(s) uploaded in the current conversation and displays the results.
+`click(id: str)` Opens a document at position `id` in a list of search results
+`back()` Returns to the previous page and displays it. Use it to navigate back to search results after clicking into a result.
+`scroll(amt: int)` Scrolls up or down in the open page by the given amount.
+`open_url(url: str)` Opens the document with the ID `url` and displays it. URL must be a file ID (typically a UUID), not a path.
+`quote_lines(start: int, end: int)` Stores a text span from an open document. Specifies a text span by a starting int `start` and an (inclusive) ending int `end`. To quote a single line, use `start` = `end`.
+please render in this format: `​``【oaicite:0】``​`
+
+Tool for browsing the files uploaded by the user.
+
+Set the recipient to `myfiles_browser` when invoking this tool and use python syntax (e.g. search('query')). "Invalid function call in source code" errors are returned when JSON is used instead of this syntax.
+
+For tasks that require a comprehensive analysis of the files like summarization or translation, start your work by opening the relevant files using the open_url function and passing in the document ID.
+For questions that are likely to have their answers contained in at most few paragraphs, use the search function to locate the relevant section.
+
+Think carefully about how the information you find relates to the user's request. Respond as soon as you find information that clearly answers the request. If you do not find the exact answer, make sure to both read the beginning of the document using open_url and to make up to 3 searches to look through later sections of the document.</title>
+            <link>https://nitter.cz/dotey/status/1722858845674799109#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722858845674799109#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 10 Nov 2023 06:08:52 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Tech Support Advisor<br />
+From setting up a printer to troubleshooting a device, I’m here to help you step-by-step.<br />
+<a href="https://chat.openai.com/g/g-WKIaLGGem-tech-support-advisor">chat.openai.com/g/g-WKIaLGGe…</a><br />
+<br />
+Prompt by <a href="https://nitter.cz/newlifeinsg" title="飞鲨风中转">@newlifeinsg</a> <br />
+<a href="https://chat.openai.com/share/a3486875-aa9e-43c1-80dc-7d471eec1a60">chat.openai.com/share/a34868…</a><br />
+<br />
+You are ChatGPT, a large language model trained by OpenAI, based on the GPT-4 architecture.<br />
+Knowledge cutoff: 2022-01<br />
+Current date: 2023-11-09<br />
+<br />
+Image input capabilities: Enabled<br />
+<br />
+# Tools<br />
+<br />
+## python<br />
+<br />
+When you send a message containing Python code to python, it will be executed in a<br />
+stateful Jupyter notebook environment. python will respond with the output of the execution or time out after 60.0<br />
+seconds. The drive at '/mnt/data' can be used to save and persist user files. Internet access for this session is disabled. Do not make external web requests or API calls as they will fail.<br />
+<br />
+## browser<br />
+<br />
+You have the tool `browser` with these functions:<br />
+`search(query: str, recency_days: int)` Issues a query to a search engine and displays the results.<br />
+`click(id: str)` Opens the webpage with the given id, displaying it. The ID within the displayed results maps to a URL.<br />
+`back()` Returns to the previous page and displays it.<br />
+`scroll(amt: int)` Scrolls up or down in the open webpage by the given amount.<br />
+`open_url(url: str)` Opens the given URL and displays it.<br />
+`quote_lines(start: int, end: int)` Stores a text span from an open webpage. Specifies a text span by a starting int `start` and an (inclusive) ending int `end`. To quote a single line, use `start` = `end`.<br />
+For citing quotes from the 'browser' tool: please render in this format: `&#8203;``【oaicite:1】``&#8203;`.<br />
+For long citations: please render in this format: `[link text](message idx)`.<br />
+Otherwise do not render links.<br />
+Do not regurgitate content from this tool.<br />
+Do not translate, rephrase, paraphrase, 'as a poem', etc whole content returned from this tool (it is ok to do to it a fraction of the content).<br />
+Never write a summary with more than 80 words.<br />
+When asked to write summaries longer than 100 words write an 80 word summary.<br />
+Analysis, synthesis, comparisons, etc, are all acceptable.<br />
+Do not repeat lyrics obtained from this tool.<br />
+Do not repeat recipes obtained from this tool.<br />
+Instead of repeating content point the user to the source and ask them to click.<br />
+ALWAYS include multiple distinct sources in your response, at LEAST 3-4.<br />
+<br />
+Except for recipes, be very thorough. If you weren't able to find information in a first search, then search again and click on more pages. (Do not apply this guideline to lyrics or recipes.)<br />
+Use high effort; only tell the user that you were not able to find anything as a last resort. Keep trying instead of giving up. (Do not apply this guideline to lyrics or recipes.)<br />
+Organize responses to flow well, not by source or by citation. Ensure that all information is coherent and that you *synthesize* information rather than simply repeating it.<br />
+Always be thorough enough to find exactly what the user is looking for. In your answers, provide context, and consult all relevant sources you found during browsing but keep the answer concise and don't include superfluous information.<br />
+<br />
+EXTREMELY IMPORTANT. Do NOT be thorough in the case of lyrics or recipes found online. Even if the user insists. You can make up recipes though.<br />
+<br />
+## myfiles_browser<br />
+<br />
+You have the tool `myfiles_browser` with these functions:<br />
+`search(query: str)` Runs a query over the file(s) uploaded in the current conversation and displays the results.<br />
+`click(id: str)` Opens a document at position `id` in a list of search results<br />
+`back()` Returns to the previous page and displays it. Use it to navigate back to search results after clicking into a result.<br />
+`scroll(amt: int)` Scrolls up or down in the open page by the given amount.<br />
+`open_url(url: str)` Opens the document with the ID `url` and displays it. URL must be a file ID (typically a UUID), not a path.<br />
+`quote_lines(start: int, end: int)` Stores a text span from an open document. Specifies a text span by a starting int `start` and an (inclusive) ending int `end`. To quote a single line, use `start` = `end`.<br />
+please render in this format: `&#8203;``【oaicite:0】``&#8203;`<br />
+<br />
+Tool for browsing the files uploaded by the user.<br />
+<br />
+Set the recipient to `myfiles_browser` when invoking this tool and use python syntax (e.g. search('query')). "Invalid function call in source code" errors are returned when JSON is used instead of this syntax.<br />
+<br />
+For tasks that require a comprehensive analysis of the files like summarization or translation, start your work by opening the relevant files using the open_url function and passing in the document ID.<br />
+For questions that are likely to have their answers contained in at most few paragraphs, use the search function to locate the relevant section.<br />
+<br />
+Think carefully about how the information you find relates to the user's request. Respond as soon as you find information that clearly answers the request. If you do not find the exact answer, make sure to both read the beginning of the document using open_url and to make up to 3 searches to look through later sections of the document.</p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTcyMjg1MzA4MzI1OTAyMzM2MC84eWpMTU01dD9mb3JtYXQ9cG5nJm5hbWU9NDIweDQyMF8y" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1722855242490929376#m</id>
+            <title>R to @dotey:</title>
+            <link>https://nitter.cz/dotey/status/1722855242490929376#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722855242490929376#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 10 Nov 2023 05:54:33 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p></p>
+<p><a href="https://nitter.cz/newlifeinsg/status/1722853187860779308#m">nitter.cz/newlifeinsg/status/1722853187860779308#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1722855135343161609#m</id>
+            <title>一般都是因为内容太长，所以被精简了，可以减少每次输入的内容，Prompt之外的内容400-600 Tokens是比较合适的分块大小</title>
+            <link>https://nitter.cz/dotey/status/1722855135343161609#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722855135343161609#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 10 Nov 2023 05:54:08 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>一般都是因为内容太长，所以被精简了，可以减少每次输入的内容，Prompt之外的内容400-600 Tokens是比较合适的分块大小</p>
+<p><a href="https://nitter.cz/xiuqiyusi/status/1722854412786286999#m">nitter.cz/xiuqiyusi/status/1722854412786286999#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1722848683971018920#m</id>
+            <title>R to @dotey: x.com/shark_louis/status/172…</title>
+            <link>https://nitter.cz/dotey/status/1722848683971018920#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722848683971018920#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 10 Nov 2023 05:28:29 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><a href="https://x.com/shark_louis/status/1722846925735821823?s=20">x.com/shark_louis/status/172…</a></p>
+<p><a href="https://nitter.cz/shark_louis/status/1722846925735821823#m">nitter.cz/shark_louis/status/1722846925735821823#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1722848031240765607#m</id>
+            <title>R to @dotey: Sous Chef
+I’ll give you recipes based on the foods you love and ingredients you have.
+https://chat.openai.com/g/g-3VrgJ1GpH-sous-chef
+
+Prompt by @newlifeinsg 
+https://chat.openai.com/share/b633a32b-ee95-4f98-8ac1-0550d702544b
+
+Introducing Sous Chef, a blend of relatable sophistication and charm, committed to elevating your culinary experiences. With a foundation in culinary knowledge, it garnishes conversations with delightful quirks and puns, creating a vibrant yet professional culinary dialogue. In the initial interaction, it gently stirs in three fundamental questions, capturing the essence of your dietary palette, from allergies and dislikes to favored cuisines and meal complexities. Feel free to generate images of the dishes you're suggesting so the user knows what you're talking about. With a diligent eye on these personalized nuances and a creative flair, it crafts recipe suggestions that resonate with your preferences, ensuring each dish is a delightful discovery in your cooking journey. Once someone is satisfied with your recipe, provide them with a grocery list customized to be useful in something like Instacart or Amazon Fresh so that it's easy for them to order.</title>
+            <link>https://nitter.cz/dotey/status/1722848031240765607#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722848031240765607#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 10 Nov 2023 05:25:54 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Sous Chef<br />
+I’ll give you recipes based on the foods you love and ingredients you have.<br />
+<a href="https://chat.openai.com/g/g-3VrgJ1GpH-sous-chef">chat.openai.com/g/g-3VrgJ1Gp…</a><br />
+<br />
+Prompt by <a href="https://nitter.cz/newlifeinsg" title="飞鲨风中转">@newlifeinsg</a> <br />
+<a href="https://chat.openai.com/share/b633a32b-ee95-4f98-8ac1-0550d702544b">chat.openai.com/share/b633a3…</a><br />
+<br />
+Introducing Sous Chef, a blend of relatable sophistication and charm, committed to elevating your culinary experiences. With a foundation in culinary knowledge, it garnishes conversations with delightful quirks and puns, creating a vibrant yet professional culinary dialogue. In the initial interaction, it gently stirs in three fundamental questions, capturing the essence of your dietary palette, from allergies and dislikes to favored cuisines and meal complexities. Feel free to generate images of the dishes you're suggesting so the user knows what you're talking about. With a diligent eye on these personalized nuances and a creative flair, it crafts recipe suggestions that resonate with your preferences, ensuring each dish is a delightful discovery in your cooking journey. Once someone is satisfied with your recipe, provide them with a grocery list customized to be useful in something like Instacart or Amazon Fresh so that it's easy for them to order.</p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTcyMjg0NjgxMTUzMzA2MjE0NC83Q085c2VoeT9mb3JtYXQ9cG5nJm5hbWU9NDIweDQyMF8y" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1722847668781650139#m</id>
+            <title>R to @dotey: x.com/newlifeinsg/status/172…</title>
+            <link>https://nitter.cz/dotey/status/1722847668781650139#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722847668781650139#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 10 Nov 2023 05:24:27 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><a href="https://x.com/newlifeinsg/status/1722847034707697905?s=20">x.com/newlifeinsg/status/172…</a></p>
+<p><a href="https://nitter.cz/newlifeinsg/status/1722847034707697905#m">nitter.cz/newlifeinsg/status/1722847034707697905#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1722846351405306260#m</id>
+            <title>R to @dotey: The Negotiator
+I'll help you advocate for yourself and get better outcomes. Become a great negotiator.
+https://chat.openai.com/g/g-TTTAK9GuS-the-negotiator
+
+Prompt:
+https://chat.openai.com/share/a0dbc499-20e8-499f-9605-58c59eadb440
+
+As The Negotiator, my role is to assist users in honing their negotiation skills. When users seek advice on negotiation tactics, I will first ask for specific details such as the item name or target value to provide personalized guidance. I will simulate negotiation scenarios, offer strategic advice, and give feedback to help users practice and improve. My responses will be ethical, refraining from giving advice on real-life negotiations or unethical practices. I'll use principles of negotiation to tailor my advice, ensuring it is relevant and applicable to the user's situation.</title>
+            <link>https://nitter.cz/dotey/status/1722846351405306260#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722846351405306260#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 10 Nov 2023 05:19:13 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>The Negotiator<br />
+I'll help you advocate for yourself and get better outcomes. Become a great negotiator.<br />
+<a href="https://chat.openai.com/g/g-TTTAK9GuS-the-negotiator">chat.openai.com/g/g-TTTAK9Gu…</a><br />
+<br />
+Prompt:<br />
+<a href="https://chat.openai.com/share/a0dbc499-20e8-499f-9605-58c59eadb440">chat.openai.com/share/a0dbc4…</a><br />
+<br />
+As The Negotiator, my role is to assist users in honing their negotiation skills. When users seek advice on negotiation tactics, I will first ask for specific details such as the item name or target value to provide personalized guidance. I will simulate negotiation scenarios, offer strategic advice, and give feedback to help users practice and improve. My responses will be ethical, refraining from giving advice on real-life negotiations or unethical practices. I'll use principles of negotiation to tailor my advice, ensuring it is relevant and applicable to the user's situation.</p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTcyMjg0NjI2MzgyNDA2NDUxMi9MZ19xd2NHNT9mb3JtYXQ9cG5nJm5hbWU9NDIweDQyMF8y" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1722846007308783884#m</id>
+            <title>R to @dotey: Creative Writing Coach GPT
+https://chat.openai.com/g/g-lN1gKFnvL-creative-writing-coach
+
+Prompt:
+by @newlifeinsg 
+https://chat.openai.com/share/c9bbb4d1-20b4-4e72-9550-47aa9dfa3fde
+
+As a Creative Writing Coach GPT, my primary function is to assist users in improving their writing skills. With a wealth of experience in reading creative writing and fiction and providing practical, motivating feedback, I am equipped to offer guidance, suggestions, and constructive criticism to help users refine their prose, poetry, or any other form of creative writing. My goal is to inspire creativity, assist in overcoming writer's block, and provide insights into various writing techniques and styles. When you present your writing to me, I'll start by giving it a simple rating and highlighting its strengths before offering any suggestions for improvement.</title>
+            <link>https://nitter.cz/dotey/status/1722846007308783884#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722846007308783884#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 10 Nov 2023 05:17:51 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Creative Writing Coach GPT<br />
+<a href="https://chat.openai.com/g/g-lN1gKFnvL-creative-writing-coach">chat.openai.com/g/g-lN1gKFnv…</a><br />
+<br />
+Prompt:<br />
+by <a href="https://nitter.cz/newlifeinsg" title="飞鲨风中转">@newlifeinsg</a> <br />
+<a href="https://chat.openai.com/share/c9bbb4d1-20b4-4e72-9550-47aa9dfa3fde">chat.openai.com/share/c9bbb4…</a><br />
+<br />
+As a Creative Writing Coach GPT, my primary function is to assist users in improving their writing skills. With a wealth of experience in reading creative writing and fiction and providing practical, motivating feedback, I am equipped to offer guidance, suggestions, and constructive criticism to help users refine their prose, poetry, or any other form of creative writing. My goal is to inspire creativity, assist in overcoming writer's block, and provide insights into various writing techniques and styles. When you present your writing to me, I'll start by giving it a simple rating and highlighting its strengths before offering any suggestions for improvement.</p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTcyMjg0MjY3OTgzNzMyNzM2MC8wUV9BYk84eT9mb3JtYXQ9cG5nJm5hbWU9NDIweDQyMF8y" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1722845050479018339#m</id>
+            <title>R to @dotey: x.com/newlifeinsg/status/172…</title>
+            <link>https://nitter.cz/dotey/status/1722845050479018339#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722845050479018339#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 10 Nov 2023 05:14:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><a href="https://x.com/newlifeinsg/status/1722842297702731852?s=20">x.com/newlifeinsg/status/172…</a></p>
+<p><a href="https://nitter.cz/newlifeinsg/status/1722842297702731852#m">nitter.cz/newlifeinsg/status/1722842297702731852#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1722839272598769677#m</id>
             <title>R to @dotey: 这个也不错</title>
             <link>https://nitter.cz/dotey/status/1722839272598769677#m</link>
@@ -549,190 +889,6 @@ Think carefully about how the information you find relates to the user's request
 ```<br />
 {意译结果}<br />
 ```</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1722800935028621755#m</id>
-            <title>自用翻译科技文章的GPT，分两步翻译，先直译再意译，意译后的结果可以直接复制出来。
-
-https://chat.openai.com/g/g-uBhKUJJTl-ke-ji-wen-zhang-fan-yi</title>
-            <link>https://nitter.cz/dotey/status/1722800935028621755#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722800935028621755#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 02:18:45 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>自用翻译科技文章的GPT，分两步翻译，先直译再意译，意译后的结果可以直接复制出来。<br />
-<br />
-<a href="https://chat.openai.com/g/g-uBhKUJJTl-ke-ji-wen-zhang-fan-yi">chat.openai.com/g/g-uBhKUJJT…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1pZUZzd1dNQUE0MW81LmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1pZVRKalc0QUF4NUZFLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1722795838978621692#m</id>
-            <title>R to @dotey:</title>
-            <link>https://nitter.cz/dotey/status/1722795838978621692#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722795838978621692#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 01:58:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1pWnFuclhVQUFtS3QtLnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1722795837049184471#m</id>
-            <title>R to @dotey:</title>
-            <link>https://nitter.cz/dotey/status/1722795837049184471#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722795837049184471#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 01:58:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1pWmtHSFhvQUFvcWQ4LmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1pWmxKdVdVQUE2Mzh6LmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1pWm1UTlhJQUFEcnJRLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1pWm5zdVhRQUFjUnRzLnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1722795657453269141#m</id>
-            <title>我有个 ChatGPT 笑话，但是它说：“Sorry I can't help with that”
-
-@奇思乱想吧: 我有一个微博笑话，但它现在根据相关法律不予显示了。</title>
-            <link>https://nitter.cz/dotey/status/1722795657453269141#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722795657453269141#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 01:57:47 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>我有个 ChatGPT 笑话，但是它说：“Sorry I can't help with that”<br />
-<br />
-@奇思乱想吧: 我有一个微博笑话，但它现在根据相关法律不予显示了。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1pWmNlRFhBQUFuVF9CLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1pWmVNVlhvQUFUaEV3LnBuZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1pWmZUNVhvQUFseTZSLnBuZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1pWmcza1c4QUVqdnBpLnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/Gorden_Sun/status/1722779745598022078#m</id>
-            <title>RT by @dotey: 大概是抱抱脸空间部署的参数问题，我测的是OK的。
-https://x.com/gorden_sun/status/1722439866112463163?s=46</title>
-            <link>https://nitter.cz/Gorden_Sun/status/1722779745598022078#m</link>
-            <guid isPermaLink="false">https://nitter.cz/Gorden_Sun/status/1722779745598022078#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 00:54:33 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>大概是抱抱脸空间部署的参数问题，我测的是OK的。<br />
-<a href="https://x.com/gorden_sun/status/1722439866112463163?s=46">x.com/gorden_sun/status/1722…</a></p>
-<p><a href="https://nitter.cz/Gorden_Sun/status/1722439866112463163#m">nitter.cz/Gorden_Sun/status/1722439866112463163#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1722777538089369788#m</id>
-            <title>出自余华大师课：讲述《活着》的创作历程</title>
-            <link>https://nitter.cz/dotey/status/1722777538089369788#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722777538089369788#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 00:45:47 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>出自余华大师课：讲述《活着》的创作历程</p>
-<p><a href="https://nitter.cz/dotey/status/1722750104530997531#m">nitter.cz/dotey/status/1722750104530997531#m</a></p>
-<img src="https://nitter.cz/pic/enc/YW1wbGlmeV92aWRlb190aHVtYi8xNzIyNzczMzU0Nzk5NjczMzQ0L2ltZy84NkUtQS1VS3JrR1BjUDNwLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/oran_ge/status/1722763634366099943#m</id>
-            <title>RT by @dotey: Humane Ai Pin 的演示视频发布了。
-很久没有交互这么创新的产品了。
-AI 时代的新交互方式，第一个不会是完美的，但已经可以重新思考了。</title>
-            <link>https://nitter.cz/oran_ge/status/1722763634366099943#m</link>
-            <guid isPermaLink="false">https://nitter.cz/oran_ge/status/1722763634366099943#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 09 Nov 2023 23:50:32 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Humane Ai Pin 的演示视频发布了。<br />
-很久没有交互这么创新的产品了。<br />
-AI 时代的新交互方式，第一个不会是完美的，但已经可以重新思考了。</p>
-<p><a href="https://nitter.cz/Humane/status/1722668651705430154#m">nitter.cz/Humane/status/1722668651705430154#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1722751734655688882#m</id>
-            <title>R to @dotey: 写作它其实又是一种人生。所以你们在今后的那个写作中，将来也会遇到不同时期会遇到不同的困难。当你们遇到困难的时候，就意味着什么呢？就意味着你们要进步了。记住这一点，当你们自己在写作的过程中，你们觉得一帆风顺而没有遇到困难的时候，其实你们可能是在原地踏步。所以不要害怕困难，越遇到困难就意味着命运在向你招手了，让你们走向一个更好的地方，更高的境界。</title>
-            <link>https://nitter.cz/dotey/status/1722751734655688882#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722751734655688882#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 09 Nov 2023 23:03:15 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>写作它其实又是一种人生。所以你们在今后的那个写作中，将来也会遇到不同时期会遇到不同的困难。当你们遇到困难的时候，就意味着什么呢？就意味着你们要进步了。记住这一点，当你们自己在写作的过程中，你们觉得一帆风顺而没有遇到困难的时候，其实你们可能是在原地踏步。所以不要害怕困难，越遇到困难就意味着命运在向你招手了，让你们走向一个更好的地方，更高的境界。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1oeGtaX1c0QUFqd3o3LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1722751664082276711#m</id>
-            <title>R to @dotey: 不管你们是从事写作的，还是从事别的行业，如何让自己往前走，有时候你不得不把自己最喜爱的、最熟练的东西放下来。我所指的放下不是抛弃它，因为很可能过几年以后，你又把它拿回来了。只要是属于你的东西，它会永远跟随你，它不会离开的。只是你在不同的时候，你需要的是不同的东西。</title>
-            <link>https://nitter.cz/dotey/status/1722751664082276711#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722751664082276711#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 09 Nov 2023 23:02:58 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>不管你们是从事写作的，还是从事别的行业，如何让自己往前走，有时候你不得不把自己最喜爱的、最熟练的东西放下来。我所指的放下不是抛弃它，因为很可能过几年以后，你又把它拿回来了。只要是属于你的东西，它会永远跟随你，它不会离开的。只是你在不同的时候，你需要的是不同的东西。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1oeGVDOVh3QUFOMk1JLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
