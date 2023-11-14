@@ -5,6 +5,82 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1724491369815625987#m</id>
+            <title>前些天大模型幻觉排行榜的这个表格刷屏了，有时候我们很容易受到一些文章的误导，轻易相信上面的结论，包括我自己也一样。
+
+今天JimFan对这个测试做出了专业点评：“在得出结论之前，一定要仔细阅读评估方法。这个原则对于大语言模型的任务以及任何其他机器学习系统都是普遍适用的。”
+
+很多时候我们还是应该多听听专业人士的，或者自己去看看原始的文章和论文，而是轻易听信自媒体或者像我这样的伪专业人士的意见。
+
+JimFan原推全文翻译如下：
+
+最近有一个大语言模型的“幻觉”测试受到热议，很多人仅凭一张表格的截图就急于下结论。但这个测试存在很多问题。其实，用一个非常简单的方法就能完全避免“幻觉”。让我从专业的同行评审角度来看：
+
+- 这项研究只是检测摘要内容与原文章的“事实一致性”，却没有考虑摘要本身的质量。这里有个简单的方法能保证 100% 的事实性：模型仅仅复制文章中的几个句子。这样做就完全不会产生幻觉。
+
+这其实类似于一个常见的问题：帮助性与安全性之间的平衡。一个百分之百安全的模型对所有请求的回答都是“对不起，我帮不了你”，这其实毫无意义。
+
+这个评估还依赖于用另一个“裁判式大语言模型”来判断是否发生了幻觉，但是它的操作说明（README）对于（1）如何指导这个裁判模型和（2）它如何真正识别错误提供的细节非常少。
+它是只给出“对/错”的简单回答吗？
+还是进行更深入的推理，比如分析哪些事实被错误表述，以及为什么会这样？
+评判的规则是什么？
+这个模型与人类的思维有多少一致性，又在哪些情况下会出现偏差？
+这个协议里，到底如何定义“幻觉”？
+
+举个例子，如果模型加入了一些额外但真实的事实怎么办？比如文章只提到“巴黎”，但模型补充说“巴黎，法国的首都”，这算不算幻觉？
+
+实际上，这项研究可能还会对那些提供更优质摘要的模型不利，因为这些模型往往会进行更多的改述和提炼，使得裁判的工作变得非常困难。而那些只会简单复制内容的差劲大语言模型，反而更容易得分。
+
+这让人想起了麻省理工学院撤回的一篇论文。那篇论文使用 GPT-4 对自己解决数学问题的表现打分，然后得出了类似“GPT-4 的表现与麻省理工学院的本科生相当”的耸人听闻的结论。
+
+在得出结论之前，一定要仔细阅读评估方法。这个原则对于大语言模型的任务以及任何其他机器学习系统都是普遍适用的。
+
+来源：http://github.com/vectara/hallucination-leaderboard</title>
+            <link>https://nitter.cz/dotey/status/1724491369815625987#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1724491369815625987#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 14 Nov 2023 18:15:56 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>前些天大模型幻觉排行榜的这个表格刷屏了，有时候我们很容易受到一些文章的误导，轻易相信上面的结论，包括我自己也一样。<br />
+<br />
+今天JimFan对这个测试做出了专业点评：“在得出结论之前，一定要仔细阅读评估方法。这个原则对于大语言模型的任务以及任何其他机器学习系统都是普遍适用的。”<br />
+<br />
+很多时候我们还是应该多听听专业人士的，或者自己去看看原始的文章和论文，而是轻易听信自媒体或者像我这样的伪专业人士的意见。<br />
+<br />
+JimFan原推全文翻译如下：<br />
+<br />
+最近有一个大语言模型的“幻觉”测试受到热议，很多人仅凭一张表格的截图就急于下结论。但这个测试存在很多问题。其实，用一个非常简单的方法就能完全避免“幻觉”。让我从专业的同行评审角度来看：<br />
+<br />
+- 这项研究只是检测摘要内容与原文章的“事实一致性”，却没有考虑摘要本身的质量。这里有个简单的方法能保证 100% 的事实性：模型仅仅复制文章中的几个句子。这样做就完全不会产生幻觉。<br />
+<br />
+这其实类似于一个常见的问题：帮助性与安全性之间的平衡。一个百分之百安全的模型对所有请求的回答都是“对不起，我帮不了你”，这其实毫无意义。<br />
+<br />
+这个评估还依赖于用另一个“裁判式大语言模型”来判断是否发生了幻觉，但是它的操作说明（README）对于（1）如何指导这个裁判模型和（2）它如何真正识别错误提供的细节非常少。<br />
+它是只给出“对/错”的简单回答吗？<br />
+还是进行更深入的推理，比如分析哪些事实被错误表述，以及为什么会这样？<br />
+评判的规则是什么？<br />
+这个模型与人类的思维有多少一致性，又在哪些情况下会出现偏差？<br />
+这个协议里，到底如何定义“幻觉”？<br />
+<br />
+举个例子，如果模型加入了一些额外但真实的事实怎么办？比如文章只提到“巴黎”，但模型补充说“巴黎，法国的首都”，这算不算幻觉？<br />
+<br />
+实际上，这项研究可能还会对那些提供更优质摘要的模型不利，因为这些模型往往会进行更多的改述和提炼，使得裁判的工作变得非常困难。而那些只会简单复制内容的差劲大语言模型，反而更容易得分。<br />
+<br />
+这让人想起了麻省理工学院撤回的一篇论文。那篇论文使用 GPT-4 对自己解决数学问题的表现打分，然后得出了类似“GPT-4 的表现与麻省理工学院的本科生相当”的耸人听闻的结论。<br />
+<br />
+在得出结论之前，一定要仔细阅读评估方法。这个原则对于大语言模型的任务以及任何其他机器学习系统都是普遍适用的。<br />
+<br />
+来源：<a href="http://github.com/vectara/hallucination-leaderboard">github.com/vectara/hallucina…</a></p>
+<p><a href="https://nitter.cz/DrJimFan/status/1724464105371939301#m">nitter.cz/DrJimFan/status/1724464105371939301#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1724486880970899890#m</id>
             <title>又一篇关于 GPT-4V 评估的论文
 
@@ -670,37 +746,6 @@ Transformer Engine：支持加速基于Transformer架构的大型语言模型和
 详细：<a href="https://nvdam.widen.net/s/nb5zzzsjdf/hpc-datasheet-sc23-h200-datasheet-3002446">nvdam.widen.net/s/nb5zzzsjdf…</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvRi0yNDh1QmFJQUE1SXdzLnBuZw==" />
 <img src="https://nitter.cz/pic/enc/bWVkaWEvRi0yNUYwOWFJQUF5WVFPLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1724231709787394304#m</id>
-            <title>GPT-4V 用于自动驾驶，最新的一篇论文：On the Road with GPT-4V(ision): Early Explorations of Visual-Language Model on Autonomous Driving
-
--卓越：场景理解、因果推理
--潜力：分布外场景、识别意图、做出明智决策
--困难：方向辨别、交通灯识别、视觉接地和空间推理任务
-
-https://arxiv.org/abs/2311.05332</title>
-            <link>https://nitter.cz/dotey/status/1724231709787394304#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1724231709787394304#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 14 Nov 2023 01:04:08 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>GPT-4V 用于自动驾驶，最新的一篇论文：On the Road with GPT-4V(ision): Early Explorations of Visual-Language Model on Autonomous Driving<br />
-<br />
--卓越：场景理解、因果推理<br />
--潜力：分布外场景、识别意图、做出明智决策<br />
--困难：方向辨别、交通灯识别、视觉接地和空间推理任务<br />
-<br />
-<a href="https://arxiv.org/abs/2311.05332">arxiv.org/abs/2311.05332</a></p>
-<p><a href="https://nitter.cz/emollick/status/1723858473044078786#m">nitter.cz/emollick/status/1723858473044078786#m</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTcyMjY5MzMxMDI3NDI0MDUxMi9DMk1nbmVLaj9mb3JtYXQ9anBnJm5hbWU9NDIweDQyMF8y" />
                 ]]>
             </content:encoded>
         </item>
