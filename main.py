@@ -84,11 +84,14 @@ def _use_ai(filtered_items:List[Item]):
             logger.info(f"{item.title}命中缓存")
             item.summary = cache.get(key)
             continue
-        response = gpt_summary(item.article, "gpt-3.5-turbo")
-        summary = response.get("summary", "")
-        cache.set(key, summary)
-        item.summary = summary
-        cost += response.get("price", 0)
+        try:
+            response = gpt_summary(item.article, "gpt-3.5-turbo")
+            summary = response.get("summary", "")
+            cache.set(key, summary)
+            item.summary = summary
+            cost += response.get("price", 0)
+        except Exception as e:
+            logger.critical(f"AI 错误: {e}")
     if cost:
         logger.info(f"AI 花费: {cost:.4f}")
 
