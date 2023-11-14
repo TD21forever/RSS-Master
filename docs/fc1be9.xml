@@ -5,416 +5,412 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1723405627668799952#m</id>
-            <title>关于GPTs的一些思考，以及为什么暂时没有特别关注GPTs的信息。
+            <id>https://nitter.cz/gefei55/status/1724264729475211542#m</id>
+            <title>RT by @op7418: 推荐一个开源 GPTs 导航，做得很精致，作者是前腾讯高级工程师，之前在微信做后端开发。
+演示网站：https://gpts.works/
+开源代码：https://github.com/all-in-aigc/gpts-works
+这份代码不是静态导航页面，而是动态的，直接从数据库获取数据的，也就是说其实你不仅仅可以用于做 GPTs 导航，你可以用来做通用导航站。</title>
+            <link>https://nitter.cz/gefei55/status/1724264729475211542#m</link>
+            <guid isPermaLink="false">https://nitter.cz/gefei55/status/1724264729475211542#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 14 Nov 2023 03:15:21 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>推荐一个开源 GPTs 导航，做得很精致，作者是前腾讯高级工程师，之前在微信做后端开发。<br />
+演示网站：<a href="https://gpts.works/">gpts.works/</a><br />
+开源代码：<a href="https://github.com/all-in-aigc/gpts-works">github.com/all-in-aigc/gpts-…</a><br />
+这份代码不是静态导航页面，而是动态的，直接从数据库获取数据的，也就是说其实你不仅仅可以用于做 GPTs 导航，你可以用来做通用导航站。</p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTcyNDIzMDg3MDgyMTkwNDM4NC84dWpRb0kwSD9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1724272444914176281#m</id>
+            <title>GPT-4 发布时就畅想过的作用于系统所有应用的 LUI 终于来了？
+MM-Navigator，一种基于GPT-4V的智能代理，用于智能手机用户界面（GUI）导航任务。
 
-首先没有合适的质量评估和筛选机制（希望商店上线会好点）这就导致：
-1. 声量大的自带运营能力的人的应用会获得大量曝光
-2. 甚至会有一些垃圾引流应用广告应用在市场里流通劣币驱逐良币
+MM-Navigator可以像人类用户一样与智能手机屏幕交互，并根据给定的指令确定后续操作。
+该系统在生成合理的行动描述方面达到了91％的准确率，在iOS上执行单步指令的正确行动方面达到了75％的准确率，超越了以前的GUI导航器。下面是论文详细介绍：
 
-生成门槛过低，导致短时间生成大量应用，生产者数量远远大于消费者。
+问题表述
+该代理的任务是根据用户以自然语言提出的指令在智能手机上完成行动。这些互动，被称为情节，涉及代理在每一步接收屏幕截图并决定完成任务的后续行动。
 
-使用门槛过高，对于简中用户尤其如此，其他国家也一样，一个月20美元挺贵的。同时GPTs在未开通的时候是无法试用的，这也导致新用户不会因为某个GPTs去开通Plus。
+屏幕定位和导航通过标记集
+GPT-4V 作为一个多模态模型，接受视觉图像和文本作为输入。该研究引入了一种名为“标记集”提示的方法，以引导 GPT-4V 进行屏幕交互，其中屏幕上的 UI 元素被检测并标记有数字标签，供 GPT-4V 识别和交互。
 
-代理的优势在于一次性解决多个流程步骤的复杂问题，单个步骤的提示词和沟通就能很好的解决，但是目前来看，相当一部分只是集成了简单的提示词进去，完全没有去做一些复杂问题的处理。
+历史生成通过多模态自我总结
+该系统采用了一项功能来弥合文本输出和可执行行动之间的差距，并保持历史背景。它使用一种策略为代理提供一种自然语言的简洁历史，帮助它确定情节中的后续行动。
 
-应用生产者无法直接获得收益，既不支持通过订阅使用，OpenAI也不会给创作者返利。导致了创作者只能用一些其他手段来将流量变现。</title>
-            <link>https://nitter.cz/op7418/status/1723405627668799952#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723405627668799952#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 11 Nov 2023 18:21:35 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>关于GPTs的一些思考，以及为什么暂时没有特别关注GPTs的信息。<br />
-<br />
-首先没有合适的质量评估和筛选机制（希望商店上线会好点）这就导致：<br />
-1. 声量大的自带运营能力的人的应用会获得大量曝光<br />
-2. 甚至会有一些垃圾引流应用广告应用在市场里流通劣币驱逐良币<br />
-<br />
-生成门槛过低，导致短时间生成大量应用，生产者数量远远大于消费者。<br />
-<br />
-使用门槛过高，对于简中用户尤其如此，其他国家也一样，一个月20美元挺贵的。同时GPTs在未开通的时候是无法试用的，这也导致新用户不会因为某个GPTs去开通Plus。<br />
-<br />
-代理的优势在于一次性解决多个流程步骤的复杂问题，单个步骤的提示词和沟通就能很好的解决，但是目前来看，相当一部分只是集成了简单的提示词进去，完全没有去做一些复杂问题的处理。<br />
-<br />
-应用生产者无法直接获得收益，既不支持通过订阅使用，OpenAI也不会给创作者返利。导致了创作者只能用一些其他手段来将流量变现。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1yRU4tdWJRQUExUG9ULmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1723382372106740000#m</id>
-            <title>李开复也回复了Yi-34B在Huggingface的LLM排行排第一的信息，证实了之前一个老哥说的他们不会故意用测试题去微调LLM作弊。</title>
-            <link>https://nitter.cz/op7418/status/1723382372106740000#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723382372106740000#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 11 Nov 2023 16:49:11 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>李开复也回复了Yi-34B在Huggingface的LLM排行排第一的信息，证实了之前一个老哥说的他们不会故意用测试题去微调LLM作弊。</p>
-<p><a href="https://nitter.cz/kaifulee/status/1723351456302915873#m">nitter.cz/kaifulee/status/1723351456302915873#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1723195412302143809#m</id>
-            <title>RT by @op7418: 虎嗅创新节又要开了，今年的议题主要是AI相关、新能源和新消费，他们给了30张票，北京感兴趣的朋友可以下下周去看看。
-先到先得，地点在97罐，25和26号任选一天，在图里的小程序兑换就行，兑换码：“ GUIZANGT”。</title>
-            <link>https://nitter.cz/op7418/status/1723195412302143809#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723195412302143809#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 11 Nov 2023 04:26:16 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>虎嗅创新节又要开了，今年的议题主要是AI相关、新能源和新消费，他们给了30张票，北京感兴趣的朋友可以下下周去看看。<br />
-先到先得，地点在97罐，25和26号任选一天，在图里的小程序兑换就行，兑换码：“ GUIZANGT”。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1vRkZxcWJjQUFpRmFWLnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1723340381964951578#m</id>
-            <title>发现了一个神奇的硬件，叫The Halo：一种非侵入性神经设备，用于稳定和诱导清明梦。
-关于清明梦：是一种梦，做梦者意识到自己正在做梦。你可以在梦中做任何自己想做的事情，类似于赛博朋克2077的超梦。有的说古人的阴神出游也是清明梦的一种。
+实验设置和人类评估指标
+该研究在iOS屏幕上进行实验，以评估GPT-4V在GUI导航中的能力，重点关注语义推理和将行动描述转化为本地化行动。人类评估员根据“预期行动描述”和“本地化行动执行”的正确性评估输出。
 
-The Halo基于超声波和机器学习模型的结合，使The Halo能够检测做梦者何时处于快速眼动睡眠状态，以诱导和稳定清醒梦。
-这个硬件还搭配一个The Prophetic App应用，运行专有的机器学习检测模型，支持追踪睡眠，上传清醒梦数据以改进模型。
+预期行动描述和本地化行动执行
+GPT-4V 在生成正确的预期行动描述方面展示了90.9％的准确率，在本地化行动执行方面展示了74.5％的准确率，表明其在理解和执行屏幕行动方面的强大能力。
 
-官网：https://propheticai.co/pages/science</title>
-            <link>https://nitter.cz/op7418/status/1723340381964951578#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723340381964951578#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 11 Nov 2023 14:02:19 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>发现了一个神奇的硬件，叫The Halo：一种非侵入性神经设备，用于稳定和诱导清明梦。<br />
-关于清明梦：是一种梦，做梦者意识到自己正在做梦。你可以在梦中做任何自己想做的事情，类似于赛博朋克2077的超梦。有的说古人的阴神出游也是清明梦的一种。<br />
-<br />
-The Halo基于超声波和机器学习模型的结合，使The Halo能够检测做梦者何时处于快速眼动睡眠状态，以诱导和稳定清醒梦。<br />
-这个硬件还搭配一个The Prophetic App应用，运行专有的机器学习检测模型，支持追踪睡眠，上传清醒梦数据以改进模型。<br />
-<br />
-官网：<a href="https://propheticai.co/pages/science">propheticai.co/pages/science</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1xSXcybmFJQUFoTlRyLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1xSXkzMGF3QUFGYUpTLnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1723261875666964681#m</id>
-            <title>🧪微调了一个 #midjoureny 风格，会让一些比较棱角分明的描述也出现流体的感觉，加上这个提示词让图像呈现出了发光的液体的感觉。
+当前GPT-4V的状态和失败案例
+该系统在执行现实世界智能手机用例的多屏导航方面显示出潜力，尽管它在复杂场景中或模型缺乏特定知识时遇到了几种类型的失败案例。
 
-提示词和风格代码：
-water has a light rainbow glimmer,silver, in the style of glitch aesthetic, marbleized, iridescence/opalescence, unicorncore, lo-fi aesthetics, loose and fluid forms --style ijM6M4y951DizpghXWLQZn3I --ar 16:9
+Android屏幕导航实验
+论文使用 Android in the Wild (AITW) 数据集来评估 Android 屏幕导航。评估包括测量正确行动与总情节长度的比例，如果GPT-4V的行动在类型、手势和位置上与用户行动匹配，则被认为是正确的。
 
-#Catjourney 这几天也更新了很多风格代码：https://catjourney.framer.website/</title>
-            <link>https://nitter.cz/op7418/status/1723261875666964681#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723261875666964681#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 11 Nov 2023 08:50:22 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>🧪微调了一个 <a href="https://nitter.cz/search?q=%23midjoureny">#midjoureny</a> 风格，会让一些比较棱角分明的描述也出现流体的感觉，加上这个提示词让图像呈现出了发光的液体的感觉。<br />
-<br />
-提示词和风格代码：<br />
-water has a light rainbow glimmer,silver, in the style of glitch aesthetic, marbleized, iridescence/opalescence, unicorncore, lo-fi aesthetics, loose and fluid forms --style ijM6M4y951DizpghXWLQZn3I --ar 16:9<br />
-<br />
-<a href="https://nitter.cz/search?q=%23Catjourney">#Catjourney</a> 这几天也更新了很多风格代码：<a href="https://catjourney.framer.website/">catjourney.framer.website/</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1wQmZxWGJRQUFZT0ZXLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1wQmZxVGJVQUFqT1BKLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1wQmZxVmFZQUFPN3h1LmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1wQmZxVGE4QUFwOGthLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1722909611748106281#m</id>
-            <title>RT by @op7418: 昨天看到零一智能的模型在 Huggingface 排第一以后，去搜了一下他家的其他产品。
-发现这个 @popaiinone 还不错 。
-这是一个类似 ChatGPT 的聊天产品，但是集成了很多工作时可以用到的效率工具，比如 PPT 和流程图生成，提示生成等。
+性能比较
+GPT-4V 在屏幕导航方面超过了以前的LLMs，显示出强大的屏幕理解能力和使用LMMs进行视觉为基础的设备控制的潜力。将屏幕描述添加到输入中提高了GPT-4V的性能，突显了多模态输入和历史背景在导航任务中的益处。
 
-PopAi率先集成了 GPT-4V 的图像 API，而且调教的比较好，我用一个图像相关论文的图片试了一下，解释的很清楚。
-同时他有个比较创新的交互是在回答内容之后你可以选择一些后续的叫Enrich的操作。比如将输出内容翻译为中文或者将输出内容经过扩写重新排版和添加内容后变为一篇文章。这种对于打工人来说太重要了。而且enrich的内容不是干巴巴的填充，配合很多相关图片，有必要的话他还会自己画流程图。
-同时 PPT 生成能力也比较亮眼，内置了非常多的模板，主要是对内容拆解和总结比较合理，知道哪些该省略哪些该详细的写。
-它也支持上传文档解析，可以直接解析arxiv的链接，不需要自己下载。
+论文地址：https://arxiv.org/abs/2311.07562</title>
+            <link>https://nitter.cz/op7418/status/1724272444914176281#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1724272444914176281#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 14 Nov 2023 03:46:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>GPT-4 发布时就畅想过的作用于系统所有应用的 LUI 终于来了？<br />
+MM-Navigator，一种基于GPT-4V的智能代理，用于智能手机用户界面（GUI）导航任务。<br />
+<br />
+MM-Navigator可以像人类用户一样与智能手机屏幕交互，并根据给定的指令确定后续操作。<br />
+该系统在生成合理的行动描述方面达到了91％的准确率，在iOS上执行单步指令的正确行动方面达到了75％的准确率，超越了以前的GUI导航器。下面是论文详细介绍：<br />
+<br />
+问题表述<br />
+该代理的任务是根据用户以自然语言提出的指令在智能手机上完成行动。这些互动，被称为情节，涉及代理在每一步接收屏幕截图并决定完成任务的后续行动。<br />
+<br />
+屏幕定位和导航通过标记集<br />
+GPT-4V 作为一个多模态模型，接受视觉图像和文本作为输入。该研究引入了一种名为“标记集”提示的方法，以引导 GPT-4V 进行屏幕交互，其中屏幕上的 UI 元素被检测并标记有数字标签，供 GPT-4V 识别和交互。<br />
+<br />
+历史生成通过多模态自我总结<br />
+该系统采用了一项功能来弥合文本输出和可执行行动之间的差距，并保持历史背景。它使用一种策略为代理提供一种自然语言的简洁历史，帮助它确定情节中的后续行动。<br />
+<br />
+实验设置和人类评估指标<br />
+该研究在iOS屏幕上进行实验，以评估GPT-4V在GUI导航中的能力，重点关注语义推理和将行动描述转化为本地化行动。人类评估员根据“预期行动描述”和“本地化行动执行”的正确性评估输出。<br />
+<br />
+预期行动描述和本地化行动执行<br />
+GPT-4V 在生成正确的预期行动描述方面展示了90.9％的准确率，在本地化行动执行方面展示了74.5％的准确率，表明其在理解和执行屏幕行动方面的强大能力。<br />
+<br />
+当前GPT-4V的状态和失败案例<br />
+该系统在执行现实世界智能手机用例的多屏导航方面显示出潜力，尽管它在复杂场景中或模型缺乏特定知识时遇到了几种类型的失败案例。<br />
+<br />
+Android屏幕导航实验<br />
+论文使用 Android in the Wild (AITW) 数据集来评估 Android 屏幕导航。评估包括测量正确行动与总情节长度的比例，如果GPT-4V的行动在类型、手势和位置上与用户行动匹配，则被认为是正确的。<br />
+<br />
+性能比较<br />
+GPT-4V 在屏幕导航方面超过了以前的LLMs，显示出强大的屏幕理解能力和使用LMMs进行视觉为基础的设备控制的潜力。将屏幕描述添加到输入中提高了GPT-4V的性能，突显了多模态输入和历史背景在导航任务中的益处。<br />
+<br />
+论文地址：<a href="https://arxiv.org/abs/2311.07562">arxiv.org/abs/2311.07562</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvRi0zWEJtM2JNQUFlUUwzLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/oran_ge/status/1724207513829257544#m</id>
+            <title>RT by @op7418: 让 AI 为您的视频配音的小工具
+上传一条100M以内的视频
+让 GPT4v 来分析并自动配上语音解说
+目前 GPT4v 的价格昂贵且每天限制100次请求。
+可以在这里免费体验一下。
+https://gptv-app.vercel.app/</title>
+            <link>https://nitter.cz/oran_ge/status/1724207513829257544#m</link>
+            <guid isPermaLink="false">https://nitter.cz/oran_ge/status/1724207513829257544#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 13 Nov 2023 23:28:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>让 AI 为您的视频配音的小工具<br />
+上传一条100M以内的视频<br />
+让 GPT4v 来分析并自动配上语音解说<br />
+目前 GPT4v 的价格昂贵且每天限制100次请求。<br />
+可以在这里免费体验一下。<br />
+<a href="https://gptv-app.vercel.app/">gptv-app.vercel.app/</a></p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTcyMzAxMjYwODc1MDczNTM2MC9fUmNwYnVKbT9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1724120049164914909#m</id>
+            <title>RT by @op7418: 这个GPTs可以帮你快速生成Framer的网站组件，而且可以随时调整，比如下面这个就是我生成的一个渐变高斯模糊动态网站背景。
+组件生成以后你只需要在左边Assets中的Code部分点加号新建然后粘贴生成的组件就可以了。非常的方便快捷。</title>
+            <link>https://nitter.cz/op7418/status/1724120049164914909#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1724120049164914909#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 13 Nov 2023 17:40:26 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这个GPTs可以帮你快速生成Framer的网站组件，而且可以随时调整，比如下面这个就是我生成的一个渐变高斯模糊动态网站背景。<br />
+组件生成以后你只需要在左边Assets中的Code部分点加号新建然后粘贴生成的组件就可以了。非常的方便快捷。</p>
+<p><a href="https://nitter.cz/_joerl/status/1723608073368179105#m">nitter.cz/_joerl/status/1723608073368179105#m</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MjQxMTk2OTA4Mjg3NDY3NTIvcHUvaW1nL0xIWW51dUQwUEhPVVY1N2UuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1724089266014437857#m</id>
+            <title>RT by @op7418: 今天拿我之前那个珍珠母贝的Niji提示词生成的图片炼了个Lora模型，意外的效果还不错。
 
-感觉非常适合没有提示词书写经验和受不了 ChatGPT 复杂开通门槛的人，日常使用完全够了。</title>
-            <link>https://nitter.cz/op7418/status/1722909611748106281#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1722909611748106281#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 09:30:36 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>昨天看到零一智能的模型在 Huggingface 排第一以后，去搜了一下他家的其他产品。<br />
-发现这个 <a href="https://nitter.cz/popaiinone" title="PopAi">@popaiinone</a> 还不错 。<br />
-这是一个类似 ChatGPT 的聊天产品，但是集成了很多工作时可以用到的效率工具，比如 PPT 和流程图生成，提示生成等。<br />
-<br />
-PopAi率先集成了 GPT-4V 的图像 API，而且调教的比较好，我用一个图像相关论文的图片试了一下，解释的很清楚。<br />
-同时他有个比较创新的交互是在回答内容之后你可以选择一些后续的叫Enrich的操作。比如将输出内容翻译为中文或者将输出内容经过扩写重新排版和添加内容后变为一篇文章。这种对于打工人来说太重要了。而且enrich的内容不是干巴巴的填充，配合很多相关图片，有必要的话他还会自己画流程图。<br />
-同时 PPT 生成能力也比较亮眼，内置了非常多的模板，主要是对内容拆解和总结比较合理，知道哪些该省略哪些该详细的写。<br />
-它也支持上传文档解析，可以直接解析arxiv的链接，不需要自己下载。<br />
-<br />
-感觉非常适合没有提示词书写经验和受不了 ChatGPT 复杂开通门槛的人，日常使用完全够了。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1qLUpRUWJrQUE2N0lyLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1qLUxaWmJJQUFjeWJQLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1qLU5ycGFvQUE0bkJWLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1qLVVBV2FJQUFFMFFULmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1723016460220735748#m</id>
-            <title>RT by @op7418: 今天还有个事情我觉的不亚于GPTs也值得关注一下。
+触发词为mother of pearl。使用的时候加上Body shot, glossy, tight,neon, celluloid, oil skin, 这些词会好一些。
+与动漫 CKPT 模型使用的时候建议 0.8 的权重，与写实模型搭配的时候建议 0.6-0.8左右，0.8 的话效果会好一些，但是皮肤质感会变差。
 
-前段时间我一直在关注LCM（Latent Consistency Models）这个技术，它可以让SD的图片生成速度提高5倍左右，但是存在的一个问题就是模型需要单独训练，无法兼容现有模型，这就导致无法融入现有的生态。
-今天这个状态改变了，他们把LCM变成了一个Lora模型，这个模型可以兼容现有的所有SD模型，不管是1.5的还是SDXL还是SSB-1B。
+C站下载地址：https://civitai.com/models/198815</title>
+            <link>https://nitter.cz/op7418/status/1724089266014437857#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1724089266014437857#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 13 Nov 2023 15:38:07 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>今天拿我之前那个珍珠母贝的Niji提示词生成的图片炼了个Lora模型，意外的效果还不错。<br />
+<br />
+触发词为mother of pearl。使用的时候加上Body shot, glossy, tight,neon, celluloid, oil skin, 这些词会好一些。<br />
+与动漫 CKPT 模型使用的时候建议 0.8 的权重，与写实模型搭配的时候建议 0.6-0.8左右，0.8 的话效果会好一些，但是皮肤质感会变差。<br />
+<br />
+C站下载地址：<a href="https://civitai.com/models/198815">civitai.com/models/198815</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvRi0weC1iNmJFQUFGUW9CLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvRi0weC1iNGJnQUFUY0E2LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1724112206047121719#m</id>
+            <title>RT by @op7418: 看了一下这个TTS效果还挺好的，部署一下试试。
 
-带来的后果就是大幅降低SD图片生成的硬件门槛，你现在甚至用CPU跑图的时间都可以接受了。
-可以在更短的时间生成更多的图像，这在抽卡的时候很重要，大力出奇迹是能解决很多问题的。
-SD图像生成服务的成本会大幅降低。
+EmotiVoice是一个强大的开源TTS引擎，支持中英文双语，包含2000多种不同的音色，以及特色的情感合成功能，支持合成包含快乐、兴奋、悲伤、愤怒等广泛情感的语音。
 
-LCM Lora现在已经可以在Comfy UI上使用了，我自己测试了一下，1.5的模型使用LCM Lora大概比不使用快了4.7倍左右。下面几张图是对应的生成效果和时间。从生成质量上来看没有特别大的区别。感谢@SimianLuo的工作。
-#stablediffusion #lcm</title>
-            <link>https://nitter.cz/op7418/status/1723016460220735748#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723016460220735748#m</guid>
+EmotiVoice提供一个易于使用的web界面，还有用于批量生成结果的脚本接口。</title>
+            <link>https://nitter.cz/op7418/status/1724112206047121719#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1724112206047121719#m</guid>
             <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 16:35:10 GMT</updated>
+            <updated>Mon, 13 Nov 2023 17:09:17 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <p>今天还有个事情我觉的不亚于GPTs也值得关注一下。<br />
+                    <p>看了一下这个TTS效果还挺好的，部署一下试试。<br />
 <br />
-前段时间我一直在关注LCM（Latent Consistency Models）这个技术，它可以让SD的图片生成速度提高5倍左右，但是存在的一个问题就是模型需要单独训练，无法兼容现有模型，这就导致无法融入现有的生态。<br />
-今天这个状态改变了，他们把LCM变成了一个Lora模型，这个模型可以兼容现有的所有SD模型，不管是1.5的还是SDXL还是SSB-1B。<br />
+EmotiVoice是一个强大的开源TTS引擎，支持中英文双语，包含2000多种不同的音色，以及特色的情感合成功能，支持合成包含快乐、兴奋、悲伤、愤怒等广泛情感的语音。<br />
 <br />
-带来的后果就是大幅降低SD图片生成的硬件门槛，你现在甚至用CPU跑图的时间都可以接受了。<br />
-可以在更短的时间生成更多的图像，这在抽卡的时候很重要，大力出奇迹是能解决很多问题的。<br />
-SD图像生成服务的成本会大幅降低。<br />
-<br />
-LCM Lora现在已经可以在Comfy UI上使用了，我自己测试了一下，1.5的模型使用LCM Lora大概比不使用快了4.7倍左右。下面几张图是对应的生成效果和时间。从生成质量上来看没有特别大的区别。感谢<a href="https://nitter.cz/SimianLuo" title="luo allen">@SimianLuo</a>的工作。<br />
-<a href="https://nitter.cz/search?q=%23stablediffusion">#stablediffusion</a> <a href="https://nitter.cz/search?q=%23lcm">#lcm</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1saDFvMmFnQUFwcXRBLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1saDMzQmJRQUE2Ui1pLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1saDZsNGFFQUExWVBvLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1saDhWemJvQUE4X1VlLmpwZw==" />
+EmotiVoice提供一个易于使用的web界面，还有用于批量生成结果的脚本接口。</p>
+<p><a href="https://nitter.cz/_akhaliq/status/1724093477321855403#m">nitter.cz/_akhaliq/status/1724093477321855403#m</a></p>
                 ]]>
             </content:encoded>
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1723044235400605711#m</id>
-            <title>Runway在发大更新，运动画笔，可以通过画笔涂抹自定义画面运动的区域。这下对于视频的控制又加强了。</title>
-            <link>https://nitter.cz/op7418/status/1723044235400605711#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723044235400605711#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 18:25:32 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Runway在发大更新，运动画笔，可以通过画笔涂抹自定义画面运动的区域。这下对于视频的控制又加强了。</p>
-<p><a href="https://nitter.cz/runwayml/status/1723033256067489937#m">nitter.cz/runwayml/status/1723033256067489937#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1723030871198826942#m</id>
-            <title>推荐算法过几天更新后，将会展示你关注网络无关的账号信息</title>
-            <link>https://nitter.cz/op7418/status/1723030871198826942#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723030871198826942#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 17:32:26 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>推荐算法过几天更新后，将会展示你关注网络无关的账号信息</p>
-<p><a href="https://nitter.cz/elonmusk/status/1723021026752143705#m">nitter.cz/elonmusk/status/1723021026752143705#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1723027915581858018#m</id>
-            <title>R to @op7418: 这是生成的那个视频</title>
-            <link>https://nitter.cz/op7418/status/1723027915581858018#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723027915581858018#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 17:20:42 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这是生成的那个视频</p>
-<video loop="loop" poster="https://nitter.cz/pic/enc/dHdlZXRfdmlkZW9fdGh1bWIvRi1sc3ZadmFFQUEycnRwLmpwZw==">
-  <source src="https://nitter.cz/pic/enc/dmlkZW8udHdpbWcuY29tL3R3ZWV0X3ZpZGVvL0YtbHN2WnZhRUFBMnJ0cC5tcDQ=" type="video/mp4" /></video>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1723027833709076920#m</id>
-            <title>R to @op7418: 想象中的好日子终于来了，LCM Lora搭配Animatediff生成视频，16帧只需要7秒钟的时间。</title>
-            <link>https://nitter.cz/op7418/status/1723027833709076920#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723027833709076920#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 17:20:22 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>想象中的好日子终于来了，LCM Lora搭配Animatediff生成视频，16帧只需要7秒钟的时间。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1sc1p6YWJvQUVUS0l4LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1723012738253762879#m</id>
-            <title>通过GPT-4V的API实时获取Blender的界面内容，对用户进行指导。它可以实时读取你的操作并且告诉你哪一步做错了，应该怎么操作对应的软件。
-这个太强了相当于一个1对1的老师实时进行指导。</title>
-            <link>https://nitter.cz/op7418/status/1723012738253762879#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723012738253762879#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 16:20:23 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>通过GPT-4V的API实时获取Blender的界面内容，对用户进行指导。它可以实时读取你的操作并且告诉你哪一步做错了，应该怎么操作对应的软件。<br />
-这个太强了相当于一个1对1的老师实时进行指导。</p>
-<p><a href="https://nitter.cz/suneel_matham/status/1722538037551530069#m">nitter.cz/suneel_matham/status/1722538037551530069#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1722869972647436381#m</id>
-            <title>RT by @op7418: 发起一个主题，大家一起来评论分享好用的GPT，请按照以下格式：
+            <id>https://nitter.cz/op7418/status/1724248068315402440#m</id>
+            <title>Open AI开发者大会分组讨论的视频也放出来了，感兴趣可以看一下。包括：
 
-- 名称：XXX
-- 说明：XXX
-- 链接：XXX
-- 推荐理由</title>
-            <link>https://nitter.cz/dotey/status/1722869972647436381#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1722869972647436381#m</guid>
+- 最大化LLM表现
+- 人工智能的新堆栈和操作
+- 人工智能业务</title>
+            <link>https://nitter.cz/op7418/status/1724248068315402440#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1724248068315402440#m</guid>
             <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 06:53:05 GMT</updated>
+            <updated>Tue, 14 Nov 2023 02:09:09 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <p>发起一个主题，大家一起来评论分享好用的GPT，请按照以下格式：<br />
+                    <p>Open AI开发者大会分组讨论的视频也放出来了，感兴趣可以看一下。包括：<br />
 <br />
-- 名称：XXX<br />
-- 说明：XXX<br />
-- 链接：XXX<br />
-- 推荐理由</p>
+- 最大化LLM表现<br />
+- 人工智能的新堆栈和操作<br />
+- 人工智能业务</p>
+<p><a href="https://nitter.cz/OfficialLoganK/status/1724232307064631645#m">nitter.cz/OfficialLoganK/status/1724232307064631645#m</a></p>
                 ]]>
             </content:encoded>
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1722909707860595074#m</id>
-            <title>R to @op7418: 你可以在这里尝试PopAi ：https://www.popai.pro/
-我也找他们要了一个 20%的优惠券：POPAI01</title>
-            <link>https://nitter.cz/op7418/status/1722909707860595074#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1722909707860595074#m</guid>
+            <id>https://nitter.cz/op7418/status/1724247615083278714#m</id>
+            <title>这个利用LCM绘画的演示看起来效果要更好一些，也很稳定。
+目前还是利用录屏软件串流到huggingface上，然后img2img绘制的。</title>
+            <link>https://nitter.cz/op7418/status/1724247615083278714#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1724247615083278714#m</guid>
             <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 09:30:59 GMT</updated>
+            <updated>Tue, 14 Nov 2023 02:07:21 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <p>你可以在这里尝试PopAi ：<a href="https://www.popai.pro/">popai.pro/</a><br />
-我也找他们要了一个 20%的优惠券：POPAI01</p>
+                    <p>这个利用LCM绘画的演示看起来效果要更好一些，也很稳定。<br />
+目前还是利用录屏软件串流到huggingface上，然后img2img绘制的。</p>
+<p><a href="https://nitter.cz/MartinNebelong/status/1724191921411608808#m">nitter.cz/MartinNebelong/status/1724191921411608808#m</a></p>
                 ]]>
             </content:encoded>
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1722825725823336630#m</id>
-            <title>Chat GPT新开了一个号，可以关注一下</title>
-            <link>https://nitter.cz/op7418/status/1722825725823336630#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1722825725823336630#m</guid>
+            <id>https://nitter.cz/op7418/status/1724124149273235676#m</id>
+            <title>R to @op7418: 网易有道出的</title>
+            <link>https://nitter.cz/op7418/status/1724124149273235676#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1724124149273235676#m</guid>
             <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 03:57:16 GMT</updated>
+            <updated>Mon, 13 Nov 2023 17:56:44 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <p>Chat GPT新开了一个号，可以关注一下</p>
-<p><a href="https://nitter.cz/ChatGPTapp/status/1722817307762630930#m">nitter.cz/ChatGPTapp/status/1722817307762630930#m</a></p>
+                    <p>网易有道出的</p>
                 ]]>
             </content:encoded>
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1722784093002404001#m</id>
-            <title>humane发布了他们的设备演示，想整一个玩玩了。</title>
-            <link>https://nitter.cz/op7418/status/1722784093002404001#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1722784093002404001#m</guid>
+            <id>https://nitter.cz/op7418/status/1724089398889996345#m</id>
+            <title>R to @op7418: 另外一些生成的图片</title>
+            <link>https://nitter.cz/op7418/status/1724089398889996345#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1724089398889996345#m</guid>
             <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 01:11:50 GMT</updated>
+            <updated>Mon, 13 Nov 2023 15:38:39 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <p>humane发布了他们的设备演示，想整一个玩玩了。</p>
-<p><a href="https://nitter.cz/Humane/status/1722668651705430154#m">nitter.cz/Humane/status/1722668651705430154#m</a></p>
+                    <p>另外一些生成的图片</p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvRi0weUtrLWJBQUFyVHlRLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvRi0weUtsVWFzQUF3OE4yLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1722783562708177008#m</id>
-            <title>GPTs现在已经向所有Plus用户开放，有想制作自己的GPTs的可以冲了。</title>
-            <link>https://nitter.cz/op7418/status/1722783562708177008#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1722783562708177008#m</guid>
+            <id>https://nitter.cz/op7418/status/1724038232260968451#m</id>
+            <title>这周的AIGC Weekly更新已经发送了，重新思考了一下AIGC Weekly的定位，还是避免在里面发大篇幅内容，大篇幅的尽量平时单独发。更多的信息让步给介绍理由和更多的信息。还是把信息量做起来。
+你可以在这里查看和订阅AIGC Weekly：https://quail.ink/op7418/p/aigc-weekly-46</title>
+            <link>https://nitter.cz/op7418/status/1724038232260968451#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1724038232260968451#m</guid>
             <pubDate></pubDate>
-            <updated>Fri, 10 Nov 2023 01:09:43 GMT</updated>
+            <updated>Mon, 13 Nov 2023 12:15:20 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <p>GPTs现在已经向所有Plus用户开放，有想制作自己的GPTs的可以冲了。</p>
-<p><a href="https://nitter.cz/sama/status/1722721030983307425#m">nitter.cz/sama/status/1722721030983307425#m</a></p>
+                    <p>这周的AIGC Weekly更新已经发送了，重新思考了一下AIGC Weekly的定位，还是避免在里面发大篇幅内容，大篇幅的尽量平时单独发。更多的信息让步给介绍理由和更多的信息。还是把信息量做起来。<br />
+你可以在这里查看和订阅AIGC Weekly：<a href="https://quail.ink/op7418/p/aigc-weekly-46">quail.ink/op7418/p/aigc-week…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvRi0wRG5ubGJrQUFHUzFxLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1723739635489148934#m</id>
+            <title>青龙搞定了SDXL的Tile Controlnet模型</title>
+            <link>https://nitter.cz/op7418/status/1723739635489148934#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723739635489148934#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 12 Nov 2023 16:28:49 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>青龙搞定了SDXL的Tile Controlnet模型</p>
+<p><a href="https://nitter.cz/bdsqlsz/status/1723714263565693003#m">nitter.cz/bdsqlsz/status/1723714263565693003#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1723603237226631522#m</id>
+            <title>RT by @op7418: Zho做出了这几天对我帮助最大的GPTs，ComfyUI Assistant ，它可以帮助你处理关于ComfyUI节点的所有问题。
+包括查找解释节点内容，查找缺失节点，创建自定义节点，解释工作流，修复节点错误等，非常强大。
+
+解释节点内容：你可以上传对应节点的py文件它就会给你详细解释这个节点的所有信息包括输入输出的要求，节点参数的意思等。
+创建自定义节点：这个就很强大了，你可以用自然语言说出你的要求GPT会帮助你写代码创建你需要的自定义节点，之后下载他创建好的py文件扔到对应目录就可以用了。
+查找缺失节点：我们使用别人工作流的时候经常遇到缺失的节点，把节点名称发给他之后，他会给出节点的安装方式、链接和介绍。
+解释工作流：你可以上传一整个工作流，之后GPT会大致介绍工作流实现的功能，还会详细列出每一个节点对应的作用。
+修复节点错误：如果你的节点出现问题报错了，你可以把节点文件和具体的报错内容发给GPT，他会帮你修复出现问题的节点代码，生成新的节点文件。
+
+这才是我想象中GPTs需要解决的事情，能够完成非常复杂的需求，直接一步到位给出解决方案。
+
+你可以在这里尝试：https://chat.openai.com/g/g-B3qi2zKGB-comfyui-assistant</title>
+            <link>https://nitter.cz/op7418/status/1723603237226631522#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723603237226631522#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 12 Nov 2023 07:26:49 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Zho做出了这几天对我帮助最大的GPTs，ComfyUI Assistant ，它可以帮助你处理关于ComfyUI节点的所有问题。<br />
+包括查找解释节点内容，查找缺失节点，创建自定义节点，解释工作流，修复节点错误等，非常强大。<br />
+<br />
+解释节点内容：你可以上传对应节点的py文件它就会给你详细解释这个节点的所有信息包括输入输出的要求，节点参数的意思等。<br />
+创建自定义节点：这个就很强大了，你可以用自然语言说出你的要求GPT会帮助你写代码创建你需要的自定义节点，之后下载他创建好的py文件扔到对应目录就可以用了。<br />
+查找缺失节点：我们使用别人工作流的时候经常遇到缺失的节点，把节点名称发给他之后，他会给出节点的安装方式、链接和介绍。<br />
+解释工作流：你可以上传一整个工作流，之后GPT会大致介绍工作流实现的功能，还会详细列出每一个节点对应的作用。<br />
+修复节点错误：如果你的节点出现问题报错了，你可以把节点文件和具体的报错内容发给GPT，他会帮你修复出现问题的节点代码，生成新的节点文件。<br />
+<br />
+这才是我想象中GPTs需要解决的事情，能够完成非常复杂的需求，直接一步到位给出解决方案。<br />
+<br />
+你可以在这里尝试：<a href="https://chat.openai.com/g/g-B3qi2zKGB-comfyui-assistant">chat.openai.com/g/g-B3qi2zKG…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvRi10M3U2VmFrQUFrZ213LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/lyson_ober/status/1723687335517409335#m</id>
+            <title>RT by @op7418: 💦 今日 Midjourney Style Tuner Code / Prompt 分享
+👉 我们的网站在这里：https://catjourney.framer.website/
+🔥 持续更新「高质量」Style 和 Prompt 内容，人工精选。一周过去，已经有越来越多可以复用的类型咯！
+
+#midjourney #styletuner #catjourney</title>
+            <link>https://nitter.cz/lyson_ober/status/1723687335517409335#m</link>
+            <guid isPermaLink="false">https://nitter.cz/lyson_ober/status/1723687335517409335#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 12 Nov 2023 13:01:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>💦 今日 Midjourney Style Tuner Code / Prompt 分享<br />
+👉 我们的网站在这里：<a href="https://catjourney.framer.website/">catjourney.framer.website/</a><br />
+🔥 持续更新「高质量」Style 和 Prompt 内容，人工精选。一周过去，已经有越来越多可以复用的类型咯！<br />
+<br />
+<a href="https://nitter.cz/search?q=%23midjourney">#midjourney</a> <a href="https://nitter.cz/search?q=%23styletuner">#styletuner</a> <a href="https://nitter.cz/search?q=%23catjourney">#catjourney</a></p>
+<p><a href="https://nitter.cz/lyson_ober/status/1720501488135630951#m">nitter.cz/lyson_ober/status/1720501488135630951#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvRi12RWZILWJZQUExbGV0LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1723617461822709889#m</id>
+            <title>哈哈哈哈 太脏了 老马，屎尿屁又上来了</title>
+            <link>https://nitter.cz/op7418/status/1723617461822709889#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1723617461822709889#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 12 Nov 2023 08:23:20 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>哈哈哈哈 太脏了 老马，屎尿屁又上来了</p>
+<p><a href="https://nitter.cz/elonmusk/status/1723452839236620505#m">nitter.cz/elonmusk/status/1723452839236620505#m</a></p>
                 ]]>
             </content:encoded>
         </item>
