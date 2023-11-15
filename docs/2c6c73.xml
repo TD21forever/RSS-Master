@@ -6,7 +6,7 @@
         
         <item>
             <id>https://www.ithome.com/0/732/788.htm</id>
-            <title>vivo WATCH 3 手表搭载紫光展锐 W117 芯片</title>
+            <title>vivo WATCH 3 手表搭载紫光展锐 W117 芯片，首发蓝河操作系统</title>
             <link>https://www.ithome.com/0/732/788.htm</link>
             <guid isPermaLink="false">https://www.ithome.com/0/732/788.htm</guid>
             <pubDate></pubDate>
@@ -137,23 +137,6 @@
                     
                     <div class="tougao-user">感谢IT之家网友 <a href="https://m.ithome.com/html/app/open.html?url=ithome%3A%2F%2Fuserpage%3Fid%3D810653" rel="nofollow">梦造</a> 的线索投递！</div>
             <p><a class="s_tag" href="https://www.ithome.com/" target="_blank">IT之家</a> 11 月 15 日消息，英特尔周二推出了最新版本微码更新，以修复一个高严重性的 CPU 漏洞，该漏洞有可能会被用来攻击云主机。</p><p>这个漏洞名为“<a href="https://lock.cmpxchg8b.com/reptar.html" target="_blank">Reptar</a>”，代号为 CVE-2023-23583，与受影响的 CPU 如何处理改变运行软件指令行为的前缀有关，几乎所有 10 代及更新的英特尔 CPU 都会受到影响，主要影响包括权限升级、拒绝服务、信息泄露这三方面。</p><p>简单来说，英特尔 x64 解码通常允许忽略冗余前缀（即在给定片段中没有意义的前缀）而不会产生任何后果。</p><p>在 8 月份的测试中，谷歌安全研究人员 Tavis Ormandy&nbsp;注意到 REX 前缀在最新英特尔 CPU 上时会产生“意外结果”。这类 CPU 支持一种称为快速短重复移动（FSRM）的功能，而该功能最初于 Ice Lake 架构中引入，旨在解决微码瓶颈问题。</p><p>Ormandy 称，这种漏洞会导致处理器“进入一种正常规则不适用的异常状态”，一旦触发，这种异常状态会导致意外且可能严重的行为，最明显的是在虚拟机的来宾账户中执行不受信任的代码，也会发生系统崩溃，而在大多数云安全模型下，这种情况被认为是安全的。</p><p>Ormandy 表示，当将多余的 <span class="link-text-start-with-http">rex.r</span> 前缀添加到 FSRM 优化的 rep mov 操作时，就会出现意外行为。</p><blockquote><p>我们在测试过程中观察到了一些非常奇怪的行为。例如，跳转到意想不到的位置、无条件分支被忽略以及处理器不再准确地记录 xsave 或 call 指令中的指令指针。</p><p>奇怪的是，当我们试图了解发生了什么时，我们会看到一个调试器报告不可能的状态！</p><p>这似乎已经表明可能存在严重问题，但在几天的实验后，我们发现当多个内核触发相同的漏洞时，处理器便会开始出现报错并停止运行。</p><p>我们经过验证发现，即使在无特权的来宾虚拟机中也会出现这个问题，因此这对云提供商来说已经具有严重的安全威胁。当然，一旦我们确认这是一个安全问题，我们就立即向英特尔报告。</p></blockquote><p>英特尔高级事件响应和安全通信主管 Jerry Bryant 周二表示，公司工程师已经发现旧版 CPU 平台上存在可能导致临时服务中断的“功能性漏洞”，并计划在明年 3 月进行修复。</p><p>英特尔初步将其严重性评级定为 5 分，然而英特尔内部和谷歌内部人员发现它存在一个可实现提权的漏洞，因此评级又提升至&nbsp;8.8 分。</p><blockquote><p>感谢英特尔安全研究人员的勤奋和专业知识，后来发现了一个可能导致权限提升（EoP）的潜在向量。根据更新后的 CVSS 3.0 评分为 8.8（高），这一发现改变了我们为客户缓解此问题的方法，我们将更新提前以与已计划于 2023 年 11 月公开披露的计划保持一致。</p><p>在准备&nbsp;2024 年 2 月的英特尔平台更新包以供客户验证时，我们收到了一位来自谷歌的研究人员关于同一 TDoS 问题的相同报告，该问题已在内部发现。该研究人员引用了谷歌 90 天的披露政策，并表示他们将于 2023 年 11 月 14 日公开披露。</p></blockquote><p>英特尔官方公告列出了两类受影响的产品：目前 12 代酷睿、13 代酷睿以及第四代英特尔至强处理器已获得微码更新。具体来说，以下产品都将获得微码更新（IT之家附具体 <a href="https://www.intel.com/content/www/us/en/developer/topic-technology/software-security-guidance/processors-affected-consolidated-product-cpu-model.html" target="_blank">CPU 名单</a>）：</p><p style="text-align: center;"><img height="657" src="https://img.ithome.com/newsuploadfiles/2023/11/84a6607d-ac26-4fb3-b415-16e63b205ada.png?x-bce-process=image/format,f_auto" title="英特尔发布微码更新以修复高危漏洞，10 代酷睿后续 CPU 几乎均受影响" width="877" /></p><p class="ad-tips">广告声明：文内含有的对外跳转链接（包括不限于超链接、二维码、口令等形式），用于传递更多信息，节省甄选时间，结果仅供参考，IT之家所有文章均包含本声明。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.ithome.com/0/732/713.htm</id>
-            <title>尼康 Z fc 相机发布 1.50 版固件，支持 EN-EL25a 电池</title>
-            <link>https://www.ithome.com/0/732/713.htm</link>
-            <guid isPermaLink="false">https://www.ithome.com/0/732/713.htm</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 15 Nov 2023 06:59:17 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p><a class="s_tag" href="https://www.ithome.com/" target="_blank">IT之家</a> 11 月 15 日消息，尼康今日为&nbsp;Z fc 相机发布<a href="https://downloadcenter.nikonimglib.com/zh-cn/download/fw/506.html" target="_blank"> 1.50 版固件</a>，添加了对 EN-EL25a 锂离子电池组的支持。</p><p style="text-align: center;"><img height="709" src="https://img.ithome.com/newsuploadfiles/2023/11/bf0174f9-4994-4b60-9231-e6f0b84c9544.jpg?x-bce-process=image/format,f_auto" title="尼康 Z fc 相机发布 1.50 版固件，支持 EN-EL25a 电池" width="912" /></p><p>IT之家整理尼康&nbsp;Z fc 相机规格如下：</p><p>Z fc 的设计灵感源自尼康历史悠久的标志性相机 ——&nbsp;<strong>尼康 1982 年发布的 FM2 单反胶片相机</strong>，除了拥有相机的乐趣外，还为用户提供拍摄精彩照片和视频的乐趣。</p><p>除此之外，<strong>Z fc</strong><strong>&nbsp;有 6 种新颜色可作为外观颜色选择。</strong>用户可以选择定制其 Z fc 外观颜色。新高级外观与 Z fc 黑色版机身和银色版机身兼容。目前拥有银色版机身相机的用户也能选择新高级外观颜色。提供有偿彩色饰皮更换服务（淡霭蓝 / 胡桃棕 / 暗夜灰 / 芥末黄 / 丝绒红 / 橄榄绿）。</p><p>参数方面，尼康 Z fc 与 Z50 和 Z30 基本相同，<strong>采用了 2088 万像素的 APS-C 画幅传感器设计，搭配 EXPEED 6 影像处理器</strong>，具备 11fps 的连拍能力。其他方面，尼康 Z fc 的屏幕支持水平 180° 和竖直 270° 翻转，支持无裁切的 4K 视频，同时也能够支持全高清 120P 的慢动作视频记录。</p><p class="ad-tips">广告声明：文内含有的对外跳转链接（包括不限于超链接、二维码、口令等形式），用于传递更多信息，节省甄选时间，结果仅供参考，IT之家所有文章均包含本声明。</p>
                 ]]>
             </content:encoded>
         </item>
