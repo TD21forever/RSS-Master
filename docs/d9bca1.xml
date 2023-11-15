@@ -5,6 +5,23 @@
         <link>https://www.infoq.cn/topic/AI</link>
         
         <item>
+            <id>https://www.infoq.cn/article/YCV0E9FALCpIUftbJiBv</id>
+            <title>李开复旗下340亿参数开源大模型被指“套壳LLaMA”，最新回应来了！</title>
+            <link>https://www.infoq.cn/article/YCV0E9FALCpIUftbJiBv</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/YCV0E9FALCpIUftbJiBv</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 15 Nov 2023 06:14:16 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p></p><blockquote>有网友在 Twitter 上评价道：“这就是中国大模型研发现状？”</blockquote><p></p><p></p><h2>李开复的 Yi-34B 被指是对 LLaMA 的重构</h2><p></p><p>&nbsp;</p><p>近日，国外开发者&nbsp;ehartford&nbsp;在开源大模型 Yi-34B 的 Hugging Face 主页上评论称，除了对两个张量做重命名之外，Yi 团队完全使用了&nbsp;LLaMA&nbsp;架构（input_layernorm,&nbsp;post_attention_layernorm）&nbsp;<a href="https://github.com/turboderp/exllamav2/commit/6d24e1ad40d89f64b1bd3ae36e639c74c9f730b2">https://github.com/turboderp/exllamav2/commit/6d24e1ad40d89f64b1bd3ae36e639c74c9f730b2</a>"&nbsp;由于 LLaMA 架构涉及大量投资和工具，因此保留全部张量的原名称显然更好。开源社区肯定会重新发布 Yi 模型并调整张量名称，制作出符合 LLaMA 架构的新版本。我们希望贵团队能在模型被广泛部署之前也能官方采取这项调整，确保成果最终得到妥善使用。</p><p>&nbsp;</p><p><img src="https://static001.geekbang.org/infoq/52/523d2c1589682c4fb0d376465b8a9b5c.png" /></p><p></p><p>ehartford 补充道，他只是提醒 Yi 团队调整张量名称来匹配相关资源，直接套用 LLaMA 架构没有任何问题，训练才是重点。</p><p>&nbsp;</p><p>网友 brucethemoose 认为，不仅如此，Yi-34B 还是对 LLaMA 代码的重构，而且似乎没有做任何改动。这显然就是在原始 Apache 2.0 llama 文件的基础上稍做调整，却没有提及LLaMA：<a href="https://www.diffchecker.com/bJTqkvmQ/">https://www.diffchecker.com/bJTqkvmQ/</a>"</p><p>&nbsp;</p><p>brucethemoose 提到：</p><p>&nbsp;</p><p></p><blockquote>这些调整并没有 PR 到 Transformer 当中，只是作为外部代码被添加了进来，这样可能引发安全风险、或者与框架发生冲突。HuggingFace 排行榜甚至不打算对其 200K 版本做基准测试，因为该模型根本没有自定义代码政策。他们宣称这是套 32K 模型，但实际配置为 4K 模型，没有 RoPE 拉伸配置，也没有解释应该如何拉伸。目前，关于其如何调校数据的信息完全为零。他们并未提供重现基准测试结果的说明，包括高到可疑的 MMLU 得分。&nbsp;任何对 AI 稍有了解的朋友都会意识到其中的问题。这是纯粹在吹牛？吹完了就跑？违反许可证要求？在基准测试里作弊？都有可能，但却没人在乎。反正他们可以继续发论文，或者是骗走死而一大笔风险投资。至少在这个圈子里，Yi 还算是高于平均水平，毕竟它总归是套基础模型、而且性能似乎的确不错。</blockquote><p></p><p>&nbsp;</p><p>有不少网友与 brucethemoose 观点相同，认为 Yi-34B 纯粹就是 LLaMA 的复制粘贴，再对部分张量重新命名，“太丢人了”。网友&nbsp;JosephusCheung&nbsp;表示，如果 Yi 团队用的就是 Meta LLaMA 原架构、代码库还有相关资源，那就必须得遵守 LLaMA 所规定的许可协议。换句话说，如果直接按照 LLaMA 的形式发布 Yi 模型，那么 Yi 许可中的很多条款也就无法成立。我认为这种行为非常粗鲁，Yi 团队明显对许可证制度缺乏应有的尊重。有些事情开源社区可以做，但商业实体绝对不行。</p><p>&nbsp;</p><p>网友&nbsp;turboderp&nbsp;认为，提交当中涉及一些重构，但也有一项用来对 RMSNorm 模块的键进行重命名的变更：如果模型的 config 文件识别到模型为“YiForCausalLM”，则“input_layernorm”为“In1”且“post_attention_layernorm”为“In2”。“据我所知，除此之外 Yi-34B 的架构与 LLaMA 没有任何区别。其实 OpenLLaMA 也是类似的情况。虽然 Yi-34B 的词库有两倍大，但它仍然是个 SentencePiece 模型而且能够正常运行。所以我们很难说 Yi-34B 算不算新成果。其架构在 modeling_yi.py 中布局，而且除了张量名称的调整之外，看起来跟 LLaMA 一模一样。当然，可能还有其他被我忽略掉的差异。”</p><p>&nbsp;</p><p>值得一提的是，前几日，阿里前技术副总裁、大模型行业创业者贾扬清曾在朋友圈中提到，有个“大厂新模型 exactly 就是 LLaMA 的架构，但是为了表示不一样，把代码里面的名字从 LLaMA 改成了他们的名字，然后换了几个变量名。然后，海外有工程师直接指了这一点出来... 还有人在 HF 上面放了个把名字改回去的 checkpoint，说好了，现在你们可以直接用 LLaMA 的代码来 load 这个 checkpoint 了”。</p><p></p><p><img src="https://static001.geekbang.org/infoq/1a/1a36acb8fd82a4d313bbfb564db7c208.png" /></p><p></p><p>&nbsp;贾扬清虽然没有指明具体的大模型名字，但有观点怀疑其指的很可能就是零一万物旗下的&nbsp;Yi-34B。</p><p></p><h2>零一万物回应争议：基于 GPT 研发，将进行代码更新</h2><p></p><p>&nbsp;</p><p>对于本次争议，零一万物回应称：GPT 是一个业内公认的成熟架构，LLaMA 在 GPT 上做了总结。零一万物研发大模型的结构设计基于 GPT 成熟结构，借鉴了行业顶尖水平的公开成果，由于大模型技术发展还在非常初期，与行业主流保持一致的结构，更有利于整体的适配与未来的迭代。同时零一万物团队对模型和训练的理解做了大量工作，也在持续探索模型结构层面本质上的突破。</p><p>&nbsp;</p><p>零一万物团队开源总监&nbsp;richardllin 回应 ehartford 称：</p><p>&nbsp;</p><p></p><blockquote>非常感谢您在讨论中指出了这一点，也感谢您以良好的耐心等待我们做出回复。您对张量名称的看法是正确的，我们会按照您的建议将其从 Yi 重命名为 LLaMA。我们也一直强调以准确、透明的方式完成工作。您在前面的帖子中提到，“开源社区肯定会重新发布 Yi 模型并调整张量名称，制作出符合 LLaMA 架构的新版本。”这让我们不禁好奇：您是希望提交一条包含这些变更的 PR 吗？或者说，如果您希望由我们处理更新，我们也可以按要求操作并在本 repo 中发布新版本——这样可能更省时间。这个命名问题是我们的疏忽。在大量训练实验中，我们对代码进行了多次重命名以满足实验要求。但在发布正式版本之前，我们显然没能将它们全部正确调整回来。我们对此深感抱歉，对于由此造成的混乱也感到遗憾。我们正在努力加强工作流程，力争未来不出现类似的失误。您的反馈给了我们很大帮助，接下来我们将再次核查所有代码，确保其余部分准确无误。也希望您还有整个社区持续关注我们的工作进展。再次感谢您的提醒，期待您的更多支持和宝贵建议。</blockquote><p></p><p></p><h2>340亿参数开源大模型 Yi-34B&nbsp;</h2><p></p><p>&nbsp;</p><p>据悉，开源大模型&nbsp;Yi-34B 来自李开复旗下 AI 大模型创业公司“零一万物”，该模型发布于 2023 年 11 月 6 日。今年 7 月，李开复博士正式官宣并上线了其筹组的“AI 2.0”新公司：零一万物。此前李开复曾表示，AI 大语言模型是中国不能错过的历史机遇，零一万物就是在今年 3 月下旬，由他亲自带队孵化的新品牌。</p><p>&nbsp;</p><p>Yi-34B 是一个双语（英语和中文）基础模型，经过 340 亿个参数训练，明显小于 Falcon-180B 和 Meta LlaMa2-70B 等其他开放模型。零一万物团队对其进行了一系列打榜测试，具体成绩包括：</p><p>&nbsp;</p><p>Hugging Face 英文测试榜单，以 70.72 分数位列全球第一；以小博大，作为国产大模型碾压 Llama-2 70B 和 Falcon-180B 等一众大模型（参数量仅为后两者的 1/2、1/5）；C-Eval 中文能力排行榜位居第一，超越了全球所有开源模型；MMLU、BBH 等八大综合能力表现全部胜出，Yi-34B 在通用能力、知识推理、阅读理解等多项指标评比中“击败全球玩家”；......</p><p>&nbsp;</p><p>对于模型尺寸的选择，零一万物团队认为，34B 是一个黄金尺寸。虽然 6B 也能在某些领域，比如客服上可用，但模型毕竟越大越好，但随之而来的就是推理成本和后续训练的系列资源问题。</p><p>&nbsp;</p><p>“34B 不会小到没有涌现或者涌现不够，完全达到了涌现的门槛。同时它又没有太大，还是允许高效率地单卡推理，而且不一定需要 H 和 A 级别的卡，只要内存足够，4090 或 3090 都是可以使用的。”李开复解释道，“既满足了精度的要求，训练推理成本友好，达到涌现的门槛，是属于非常多的商业应用都可以做的。”</p><p>&nbsp;</p><p>另外，李开复提到，通用模型决定了行业模型的天花板。虽然行业大模型有相当大的价值，但是底座如果不好，也无法完成超过底座的事情，所以选底座就要选表现最好的底座。李开复自信地表示，“今天我们在中英文上就是最好的底座，没有之一，也希望更多人选择 Yi-34B。”</p><p>&nbsp;</p><p>参考链接：</p><p><a href="https://huggingface.co/01-ai/Yi-34B/discussions/11">https://huggingface.co/01-ai/Yi-34B/discussions/11</a>"</p><p><a href="https://news.ycombinator.com/item?id=38258015">https://news.ycombinator.com/item?id=38258015</a>"</p><p><a href="https://www.infoq.cn/news/cVfuQaHVJ0SDPtP2jb7m">https://www.infoq.cn/news/cVfuQaHVJ0SDPtP2jb7m</a>"</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.infoq.cn/article/bEPZxpLYrCAUYm1RLTQM</id>
             <title>首周聚焦百度智能云千帆大模型平台使用，《大模型应用实践》实训营 11 月 16 日开讲！</title>
             <link>https://www.infoq.cn/article/bEPZxpLYrCAUYm1RLTQM</link>
@@ -633,29 +650,6 @@
                         <hr>
                     
                     <p>10月31日，阿里云正式发布千亿级参数大模型通义千问2.0。官方数据显示，在10个权威测评中，通义千问2.0综合性能超过GPT-3.5，正在加速追赶GPT-4。此外，阿里云还发布了智能编码助手通义灵码等行业应用大模型。</p><p></p><p><img src="https://static001.geekbang.org/infoq/cc/cc23cc39efb9acd3e61f3863210bbba1.jpeg" /></p><p>&nbsp;</p><p>针对阿里云的大模型策略，阿里云CTO周靖人在接受记者采访时表示，“我们的目标并不是做toC的产品，而是希望更多地把模型的能力开放出来，让更多开发者、合作伙伴使用。”</p><p>&nbsp;</p><p>据周靖人介绍，阿里云的定位是“服务好各种各样在AI时代的创业者、开发者和企业客户等。通过多层技术能力，包括AI基础设施、模型等能力，最好地支持开发者和客户，帮助他们解决在创业、落地、创新等方面的问题。”</p><p>&nbsp;</p><p>具体来讲，模型创业公司希望使用到最先进的AI基础设施；企业客户希望将开源模型与自己产品做二次结合，这类产品包括通义千问等开源模型、帮助企业做模型定制的阿里云百炼等；还有关注业务系统的开发者，通过简单的API集成到自己业务体系中。</p><p>&nbsp;</p><p>周靖人表示，这次AI技术变革的实质是一次技术体系的全面升级。对云计算来说，主要包括以下纬度：第一，系统优化，即如何利用模型能力优化复杂庞大的分布式系统，让它真正变成一个“自动驾驶的云”；第二，用模型帮助提升开发效率，即让用云这件事本身变得更加智能；第三，以模型为中心打造最好的AI基础设施，提供低成本、一站式的模型训练、微调、推理等服务。</p><p></p><p><img src="https://static001.geekbang.org/infoq/9f/9f74a49d11d71efa482b001ac1473b48.jpeg" /></p><p>&nbsp;</p><p>“而云厂商既要懂AI，又要懂云计算，才能在这次竞争里取得一个重要的战略性优势。”周靖人表示。具体来说，云厂商要做的事情就是让用户以更低的成本使用模型来提供服务。</p><p>&nbsp;</p><p>“今天基础设施的目标，特别是模型推理方面，不单是提升延迟等各个方面的性能，同时还要能够降低使用成本。在这方面，我们还有大量的工作需要做。”周靖人表示，阿里云不是简单开发界面的开放，而是API级别、模型级别的开放。用户可以借这些产品发挥更大的想象空间，做更多业务的创新。</p><p>&nbsp;</p><p>周靖人呼吁，大家要给这个领域一些时间。“毕竟从国内来讲，整个产业的变化是从今年开始的，甚至到了3、4月份，大家才陆陆续续发模型。在这方面，我们的确比海外要晚，海外拥有至少一年的先发优势，甚至更长的时间。”</p><p>&nbsp;</p><p>不过，周靖人表示，国内也在快速地追赶中。短短半年时间内，国内模型生态已经慢慢发展起来了。模型的生态发展起来，一定代表了算力发展得起来。</p><p>&nbsp;</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/0Mh7GIzC3GdmtAQGW0Jw</id>
-            <title>火山引擎金融解决方案负责人王建军确认出席 FCon，分享金融数字化升级：让智慧带来生产力</title>
-            <link>https://www.infoq.cn/article/0Mh7GIzC3GdmtAQGW0Jw</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/0Mh7GIzC3GdmtAQGW0Jw</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 08 Nov 2023 03:30:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: FCon 全球金融科技大会, 火山引擎金融解决方案, 大模型发展及应用现状, 王建军
-<br>
-<br>
-总结: FCon 全球金融科技大会将在上海举行，火山引擎金融解决方案负责人王建军将分享关于金融数字化升级和大模型应用的主题演讲。他将介绍国内外大模型发展及应用现状，以及火山引擎在金融行业的探索实践。此外，大会还将涉及DevOps在金融企业落地实践、金融科技创新应用、金融数据平台建设、金融安全风险管控和数据合规等领域的交流。 </div>
-                        <hr>
-                    
-                    <p><a href="https://fcon.infoq.cn/2023/shanghai/?utm_source=infoqweb&amp;utm_medium=atricle">FCon 全球金融科技大会</a>"，将于 11 月在上海召开。火山引擎金融解决方案负责人王建军将发表题为《<a href="https://fcon.infoq.cn/2023/shanghai/presentation/5606?utm_source=infoqweb&amp;utm_medium=article">金融数字化升级：让智慧带来生产力</a>"》主题分享，介绍国内外大模型发展及应用现状、火山引擎在金融行业的探索实践，以及大模型在未来行业的应用。</p><p></p><p><a href="https://fcon.infoq.cn/2023/shanghai/presentation/5606?utm_source=infoqweb&amp;utm_medium=article">王建军</a>"，10 年以上人工智能及数字化实践经验，2020 年加入字节跳动，曾服务于德勤咨询、第四范式等企业，推动过数十家金融机构的数字化转型和人工智能应用实践。他在本次会议的演讲内容如下：</p><p></p><p>演讲：大模型：让智慧带来生产力</p><p></p><p>通过观察海外大模型领先应用实践，结合国内产业生产效率痛点，明确大模型应用蓝图，及围绕蓝图展开的探索与实践。</p><p></p><p>演讲提纲：</p><p></p><p>海内外大模型风起云涌；大模型能力范畴和典型应用分析；围绕金融行业的探索实践；展望未来。</p><p></p><p>你将获得：</p><p></p><p>○ 了解到国内外大模型发展及应用现状；</p><p>○ 了解火山引擎在金融行业的探索实践；</p><p>○ 共同畅想大模型未来行业应用。</p><p></p><p>除上述演讲外，FCon 上海还将围绕&nbsp;<a href="https://fcon.infoq.cn/2023/shanghai/track/1580?utm_source=infoqweb&amp;utm_medium=atricle">DevOps&nbsp;在金融企业落地实践</a>"、<a href="https://fcon.infoq.cn/2023/shanghai/track/1591?utm_source=infoqweb&amp;utm_medium=atricle">金融行业大模型应用</a>"、<a href="https://fcon.infoq.cn/2023/shanghai/track/1576?utm_source=infoqweb&amp;utm_medium=atricle">创新的金融科技应用</a>"、<a href="https://fcon.infoq.cn/2023/shanghai/track/1577?utm_source=infoqweb&amp;utm_medium=atricle">金融实时数据平台建设之路</a>"、<a href="https://fcon.infoq.cn/2023/shanghai/track/1588?utm_source=infoqweb&amp;utm_medium=atricle">金融安全风险管控</a>"、<a href="https://fcon.infoq.cn/2023/shanghai/track/1589?utm_source=infoqweb&amp;utm_medium=atricle">数据要素流通与数据合规</a>"等进行交流。</p><p></p><p>FCon 上海 2023，相约 11 月！大会 8 折优惠报名倒计时仅剩 3 天，现在购票立减￥1360。咨询购票请联系：17310043226（微信同手机号）。</p><p></p><p><img src="https://static001.geekbang.org/infoq/a8/a8ec7f7fb25c7949931b2b8a5deffddd.png" /></p><p></p>
                 ]]>
             </content:encoded>
         </item>
