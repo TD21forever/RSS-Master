@@ -5,6 +5,236 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/84373</id>
+            <title>自由输入法 RIME 简明配置指南</title>
+            <link>https://sspai.com/post/84373</link>
+            <guid isPermaLink="false">https://sspai.com/post/84373</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 16 Nov 2023 03:00:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Matrix, 文章, RIME, 输入法
+<br>
+<br>
+总结: Matrix是少数派的写作社区，推荐了一篇关于RIME输入法的文章。文章介绍了为什么选择RIME作为输入法的原因，以及RIME的特性和解决的问题。 </div>
+                        <hr>
+                    
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p><a href="https://sspai.com/post/55699" target="_blank">原文首发于 2019 年 07 月 16 日。</a>是我在少数派第一篇发文，也是我首次尝试使用 Markdown 语法写作。漫长的几年间，有过配图失效，有过读者大量私信，有空时都一一解决了。偶然间，发现这篇文章居然列入了搜索引擎的第一页。阅读量也达到近 15 万，而且也发现文章中分享的皮肤配色方案在一些高级用户的配置方案中流传。</p><p>今年，RIME 突然更新了 0.15.0 版本，回望这篇文章，生涩的语法、混乱的结构、不甚了了的陈述，不仅显得陈旧和落伍，而且不少已经失效了。同时，几年间对 RIME 的折腾，有了许多新的收获，也解决了一些之前未能解决的问题。</p><p>这期间，也并非没有尝试过成品输入法。但我发现，这些成品输入法总是不能如意。比如支持单行模式的输入法只剩下久未更新的手心输入法和 QQ 输入法。百度输入法和搜狗输入法新版本也相继取消了「以词定字」的功能。广告的烦恼、隐私的担忧、功能的缺失……相信成品输入法在「少数派」手里，总归不够趁手和如意。</p><p>这使我愈发觉得，一个自由的、开源的、安全的、如我心意的输入法，是多么的难得。</p><p>于是，我决定，把这篇文章推倒重构，希望能够因此帮助更多的人。便觉幸甚。</p><h2>为什么选择 RIME</h2><p>输入法是工具。工具，唯趁手、唯如意。趁手、如意，且自由、安全，这样的输入法，无它，唯 RIME 耳。</p><p>市面上的成品输入法，你所能定制的自由，被框限在「设置」标签里。有别于此，RIME 突出的就是自由的特性。你需要什么功能，需要什么输入方案，输入细节上有什么与常人不同的习惯和需求，它几乎都能满足。即使 RIME 同样有着种种不足和缺点，但不可否认，它，就是目前唯一能实现你几乎所有输入个性化定制需求的最好选择。</p><p><strong>自由。这就是我选择 RIME 的唯一原因。</strong></p><p>如果你崇尚自由，着意隐私，我相信，RIME 不会辜负你的选择。</p><p>但也正是因为 RIME 的高度自由，引入的高度个性定制化，使得它有着很高的准入门槛。定制困难，劝退了绝大多数人。</p><p>因此，我希望，借由分享自己初步成型的配置方案，并介绍定制方法，以此帮助有自由输入法需求的朋友，首先快速上手，然后再慢慢学习精进，精心雕琢，使它成为自己想要的样子。</p><h2>RIME 的特性</h2><ol><li>高度自由可定制。</li><li>全平台兼容：Windows、macOS、Linux、Android。</li><li>全输入方案兼容：<ul><li>双拼：包括小鹤、自然码、微软在内的所有双拼方案，支持小鹤形码辅助。</li><li>全拼、注音、五笔、仓颉……市面上能见到几乎所有的方案。</li><li>市面上完全见不到的，只属于个人的自定方案。</li><li>标点自定、模糊音、词语联想、个人词库……该有的功能都有。</li></ul></li><li>高准入门槛。<ul><li>无图形界面，自定全靠代码。</li><li>配置繁琐，容易出错。</li></ul></li></ol><h2>本文想要解决的问题</h2><p>RIME 我对它的定义是「自由」。如果仅仅只是分享一套已经配置好了的方案，则失去了用户随心所欲「自由」定制的意义。因此，本文希望从如下几个方面的痛点为引子，作出简明指南。</p><ol><li>单行模式。</li><li>以词定字。</li><li>二三候选。</li><li>词库制作。</li><li>符号自定。</li><li>短语自定。</li><li>方案配置。</li><li>多端同步。</li></ol><p>本文将以 Windows 平台小鹤双拼配置方案为例。其它平台或方案，配置方法共通，请自行举一反三。本文默认读者具有一定水平的计算机实操能力和简单代码理解能力。如遇困难与问题，欢迎评论区或私信友好交流。</p><h2>开始安装 RIME</h2><p><a href="https://rime.im/download/">RIME 下载及安装</a></p><p>在此页面取得适合你系统的 RIME 输入法。分别为以下发行版：</p><ul><li>【中州韻】 ibus-rime → Linux</li><li>【小狼毫】 Weasel → Windows</li><li>【鼠鬚管】 Squirrel → Mac OS X</li></ul><p>RIME 默认使用朙月拼音作为初始方案，该方案等同于全拼输入法。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/7b84924a5eb8e2e02bf6fcaa739dbbf0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>小狼毫安装选项</figcaption></figure><p>安装时，请另行指定「用户文件夹」：<code>~\Rime</code>。下文所称「用户文件夹」均指此文件夹。</p><p>安装完成后，原则上，你已经可以正常使用 RIME 了。只不过此时的 RIME 更像是未经装修的毛坯房，能用，但不好用。</p><p>此时，你如果从未接触过 RIME ，建议鼓捣一番，了解它独特的方案选单切换方式。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/2de31544b54f6352102b8b307ec162bd.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Ctrl+` 或者 F4 是默认的选单快捷键</figcaption></figure><blockquote><p>按组合键 <code>Ctrl+顿号</code> 或 <code>F4</code> 键唤出输入方案选单，由此调整 Rime 输入法最常用的选项。</p></blockquote><h2>学习基础知识，为配置做准备</h2><p>现在，打开 <a href="https://github.com/rime/home/wiki/CustomizationGuide">RIME 定制指南</a>，详细阅读并学习。</p><p>此时，你首先需要知道的要点是，接下来，你对方案进行的任意一项修改，都需要通过「<strong>重新部署</strong>」来使其生效。</p><blockquote><p><strong>重新部署的操作方法</strong></p><p>【中州韵】点击输入法状态栏上的 ⟲ (Deploy) 按钮，或：如果找不到状态栏，在终端输入以下命令，可触发自动部署： <code>touch ~/.config/ibus/rime/; ibus restart</code></p><p>【小狼毫】1. 开始菜单→小狼毫输入法→重新部署；2. 当开启托盘图标时，右键点选「重新部署」</p><p>【鼠鬚管】在系统语言文字选单中选择「重新部署」</p></blockquote><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/8e5952cb3ad35d9a98b61d6077f192a1.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Windows 右击系统托盘图标重新部署</figcaption></figure><p>RIME 的配置文件、输入方案、符号集合及词库文件，均为特定格式的文本文档。分别为：</p><blockquote><ul><li>〔全局设定〕 <code>default.yaml</code></li><li>〔发行版设定〕 <code>weasel.yaml</code></li><li>〔预设输入方案〕 <code>&lt;方案标识&gt;.schema.yaml</code></li></ul></blockquote><p>此外，还有记录用户输入习惯的文件：</p><blockquote><ul><li>※〔用户词典〕 <code>&lt;词典名&gt;.userdb/</code> 或 <code>&lt;词典名&gt;.userdb.kct</code></li></ul></blockquote><p>由于随着软件的更新，这三个预设配置文档有可能被新版文件所覆盖。因此，RIME 引入了一种类似于「补丁」的定制方式。如上的三个「预设配置文档」，分别对应者如下三个「用户配置文档」：</p><blockquote><ul><li>※〔用户对全局设定的定制信息〕 <code>default.custom.yaml</code> 用于设置输入法方案、切换输入法快捷键、中英文切换、翻页等等。</li><li>※〔用户对发行版设定的定制信息〕 <code>weasel.custom.yaml</code> 用于设置托盘图标、指定软件默认英文输入、候选词横竖排列、界面布局、配色方案等等。</li><li>※〔用户对预设输入方案的定制信息〕 <code>&lt;方案标识&gt;.custom.yaml</code> 用于设置具体的输入方案。</li></ul></blockquote><p>所有对如上三个 <code>custom</code> 配置文档的修改，最终都会以「补丁」的方式映射汇入到 <code>default.yaml</code> 、<code>weasel.yaml</code>、和<strong> </strong><code>&lt;方案标识&gt;.schema.yaml</code> 三个文本文档中，经由重新部署而生效。</p><p>修改如上配置文档，请配合你所习惯使用的超级文本编辑器（例如 Emeditor），确保所配置的所有文本文档，均以 <code>UTF-8 无签名 </code>编码，使用 <code>LF 换行符</code> 。并在文档中，合理使用换行符、空格及制表符，以确保配置代码对齐。</p><p>注意：如上标注了星号 ※ 的文件，均含有用户定制信息，请注意备份。</p><p>最后，在编辑配置文档时，通常采用「注释」的方式，来对某一项具体功能或某一条具体配置进行「开关」。例如：</p><pre class="language-"><code>key_binder:
+  select_first_character: "bracketleft" # lua 选词快捷键，左方括号选前字，此行代表反注释开启
+  # select_last_character: "bracketright" # lua 选词快捷键，右方括号选后字，此行代表注释关闭</code></pre><p>如上，是「以词定字」功能的语句。第二条句首的 <code>#</code>，代表该条配置代码被「注释」成说明文字，不再生效。亦即该条配置代码所对应的功能被「关闭」。反之，第一条，则代表配置代码正常生效。亦即所对应的功能被「开启」。</p><p>利用此方法，注释与反注释配置文件中的相关代码语句，开启和关闭相关功能，以此达到灵活定制的效果。</p><h2>配置输入方案</h2><p>在此处下载：<a href="https://github.com/rime/plum#packages">官方提供的输入方案</a></p><p>得到输入法方案配置文档 <code>double_pinyin_flypy.schema.yaml</code>。</p><p>将方案配置文档放入用户文件夹。</p><h3>配置方案选单</h3><p>在 <code>default.custom.yaml</code> 配置文档中添加如下语句：</p><pre class="language-"><code>Patch：
+  schema_list:
+    -schema：double_pinyin_flypy </code></pre><p>重新部署后，按 <code>F4</code> 方案选单中，就有「小鹤双拼」可选使用了。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/d100f4ff4564c5c0c8fe589f22a90236.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>方案菜单</figcaption></figure><p>当需要更多输入方案时，另起一行，继续添加相应的输入方案即可：</p><pre class="language-"><code>Patch：
+  schema_list:
+    -schema：double_pinyin_flypy 
+    -schema：flypy # 注意，此处方案名应与方案配置文档中 schema_id 字段相同。</code></pre><p>也可以在这里，利用<a href="https://github.com/rime/plum">东风破</a>组件，快速安装输入方案。</p><p>请注意：<code>Patch：</code> 语句仅用于 <code>custom.yaml</code> 配置文档，整个配置文档有且只能有一个。请合理使用代码缩进进行对齐。</p><h3>配置输入习惯</h3><p>在 <code>default.custom.yaml</code> 配置文档中配置如下输入习惯。</p><ul><li>配置方案选单快捷键：</li></ul><pre class="language-"><code>Patch:
+  switcher:
+    hotkeys:
+      - F2 # 配置 F2 为方案菜单快捷键</code></pre><ul><li>配置候选项数量：</li></ul><pre class="language-"><code>Patch:
+  menu:
+    page_size: 5 # 配置候选项数量为 5 个</code></pre><ul><li>配置候选项翻页按键：</li></ul><pre class="language-"><code>Patch:
+  key_binder:
+    bindings:
+      - { when: has_menu, accept: period, send: Page_Down } # 句号向下翻页
+      - { when: has_menu, accept: comma, send: Page_Up } # 逗号向上翻页</code></pre><ul><li>配置符号表：（符号表 symbols 制作在后文）</li></ul><pre class="language-"><code>Patch:
+  punctuator:
+    full_shape:
+      __include: symbols:/punctuator/full_shape # 配置全角符号表
+    half_shape:
+      __include: symbols:/punctuator/half_shape # 配置半角符号表</code></pre><ul><li>配置中英文切换快捷键：4 种按键动作代码在注释中作了详细说明，可以根据需要自由配置</li></ul><pre class="language-"><code>Patch：
+  ascii_composer:
+    switch_key:
+      Shift_L: commit_code # 按左 shift 键，已输入字符上屏，同时切换为英文输入
+      Shift_R: inline_ascii # 按右 shift 键，切换为英文输入，同时保留已输入字符继续输入，回车上屏
+      Control_L: noop # noop 指无操作
+      Control_R: noop
+      Caps_Lock: clear # 按大小写切换键，清除已输入字符，同时切换为英文输入</code></pre><ul><li>配置软件默认中英文模式：这个功能非常舒服，能配置输入法在常用软件中的默认中英文状态。例如：配置在 PS 中默认为英文状态；在 CMD 命令行中默认为英文状态。你可以配置 RIME 在任意软件中的中英文状态。该功能在另外一个配置文件中 <code>weasel.custom.yaml</code>：</li></ul><pre class="language-"><code>Patch:
+   # 设置应用默认中英文模式
+    app_options: # 设置为在以下列表软件中，RIME 默认为英文模式
+      totalcmd64.exe:{ascii_mode: true}
+      cmd.exe:{ascii_mode: true}
+      photoshop.exe:{ascii_mode: true}</code></pre><p>其它更多输入习惯配置，请参考<a href="https://github.com/rime/home/wiki/CustomizationGuide#%E8%BC%B8%E5%85%A5%E7%BF%92%E6%85%A3">输入习惯</a>。</p><h3>配置个性化输入方案</h3><p>定制一份全新的输入方案，是 RIME 的进阶技巧。需要理解「输入引擎 Processors」、「翻译器 Translators」、「过滤器 Filters」、「拼写运算」、「码表」、「词典」等一系列系统知识。</p><p>有能力的朋友，可以在此处参考 <a href="https://github.com/rime/home/wiki/RimeWithSchemata#%E7%88%B2%E5%95%A5%E9%80%99%E9%BA%BC%E7%B9%81">《Rime 輸入方案設計書》</a>，进行完全体的个性化定制。</p><p>作为普通用户，更建议基于官方输入方案进行细节定制，或者获取其它高级用户制作的输入方案。</p><p>此处以我个人定制的输入方案 <code>flypy.schema.yaml</code><sup class="ss-footnote" href="" title="此方案受到 LufsX 这位高阶用户所分享方案的大量启发，详见参考资料链接。">1</sup>（基于小鹤双拼输入方案定制）为例，说明几处关系输入体验和输入习惯的修改位置和修改方法。</p><p>阅读整张输入方案文档。注意几个重要的字段：</p><ol><li>Engine：输入引擎，其下的组件关系各个功能的实现：<ul><li>Processors 组件。引擎核心，处理按键消息。利用选词扩展实现「以词定字」功能，即在此组件下配置。</li><li>Translators 组件。翻译器，完成编码到文字的翻译。类似「动态日期时间」、「符号转换」、「用户自定义词典」等功能，即在此组件下配置。</li><li>Filters 组件。过滤器，过滤重排候选项，进入候选序列。「emoji」、「简繁转换」、「去重」、「单字优先」、「长句优先」等功能，即在此组件下配置。</li></ul></li><li>Dictionary：字典，亦即词库。</li><li>Custom_phrase：用户自定义短语。</li></ol><h3>利用脚本扩展实现「以词定字」、「二三候选」、「动态日期时间输入」、「长句优先」等功能</h3><h4>分别安装：</h4><ol><li><a href="https://github.com/hchunhui/librime-lua">RIME librime-lua 脚本扩展</a></li><li><a href="https://github.com/BlindingDark/rime-lua-select-character">RIME 以词定字 lua 扩展</a></li><li><a href="https://einverne.github.io/post/2021/09/rime-plugin-lua-octagram.html">动态日期时间输入 lua 扩展</a></li></ol><h4>安装方法：以「以词定字」lua 扩展为例：</h4><ol><li>下载 <code>select_character.lua</code> 脚本并放到 <code>用户资料夹/lua/</code> 目录下。</li><li>修改（若不存在则新建）<code>～用户文件夹/rime.lua</code>，在合适的位置添加一行：<code>select_character = require("select_character")</code>。</li><li>修改输入方案配置文件 <code>flypy.schema.yaml</code>，在 <code>engine/processors:</code> 下添加一项：<code>- lua_processor@select_character</code>。</li><li>注意，不同的 lua 扩展脚本经由不同的输入引擎组件生效。例如上方「以词定字」扩展组件经由 <code>processors</code> 组件生效，因此添加在 <code>engine/processors:</code> 下。「动态日期时间输入 lua 扩展」经由 <code>translators</code> 翻译器组件生效，则应该添加在 <code>engine/translators:</code> 下。因此，你首先需要知晓，你希望加载的 lua 扩展经由那个组件生效。通常来说，扩展详情页面，作者会做介绍。</li><li>重新部署即可生效。</li><li>如需其它 lua 扩展，实现更多个性化功能，请自行根据扩展作者说明文档进行配置。</li></ol><p>此处配置较为困难，为方便理解，还是举例说明：</p><pre class="language-"><code>engine:
+  processors: # 输入引擎核心
+    - lua_processor@select_character # lua 以词定字选词扩展
+  translators: # 输入引擎翻译器
+    - lua_translator@date_translator # 动态日期时间输入
+    - lua_translator@unicode_input # Unicode 输入支持
+    - table_translator@custom_phrase # 用户自定义词典
+  filters: # 输入引擎过滤器
+    - lua_filter@long_phrase_first # 最长词组和单字优先（此扩展 3 条规则中，只应有 1 条规则生效）
+    # - lua_filter@single_char_first # 单字优先（其他 2 条规则相应被注释）
+    # - lua_filter@single_char_only # 只显示单字（其他 2 条规则相应被注释）</code></pre><p>同样的，<code>rime.lua</code> 配置文件也举例说明：</p><pre class="language-"><code>-- select_character_processor: 以词定字
+-- 详见 lua/select_character.lua
+select_character = require("select_character")
+
+-- date_translator: 动态日期时间输入
+-- 详见 lua/date_translator.lua
+date_translator = require("date_translator")
+
+-- long_phrase_first: 最长词组和单字优先
+-- 详见 lua/candidate_sorting/long_phrase_first.lua
+long_phrase_first = require("candidate_sorting.long_phrase_first")
+
+-- single_char_first: 单字优先
+-- 详见 lua/candidate_sorting/single_char_first.lua
+single_char_first = require("candidate_sorting.single_char_first")
+
+-- single_char_only: 只显示单字
+-- 详见 lua/candidate_sorting/single_char_only.lua
+single_char_only = require("candidate_sorting.single_char_only")
+
+-- unicode_input: Unicode 输入
+-- 详见 lua/candidate_sorting/unicode_input.lua
+unicode_input = require("unicode_input")</code></pre><p>安装遇到困难的。可以下载文末分享的相应扩展包。解压后放入「用户文件夹」，重新部署后可以生效。</p><p>在 <code>flypy.schema.yaml</code> 配置文档中，<code>processors</code> 核心组件下添加如下语句：</p><pre class="language-"><code>  engine：
+    processors：
+      - lua_processor@select_character # lua 选词扩展，以词定字</code></pre><p>同时，在 <code>default.custom.yaml</code> 配置文档中，添加如下语句，指定以词定字的按键：</p><pre class="language-"><code>  Patch:
+    key_binder:
+      select_first_character: "bracketleft" # lua 选词以词定字快捷键，左方括号选前字
+      select_last_character: "bracketright" # lua 选词以词定字快捷键，右方括号选后字</code></pre><p>在 <code>flypy.schema.yaml</code> 配置文档中，<code>translators</code> 翻译器组件下添加如下语句：</p><pre class="language-"><code>engine:
+  translators:
+    - lua_translator@date_translator # 动态日期时间输入
+    - lua_translator@unicode_input # Unicode 输入支持
+    - table_translator@custom_phrase # 用户自定义词典</code></pre><p>在 <code>flypy.schema.yaml</code> 配置文档中，<code>filters</code> 过滤器组件下添加如下语句：</p><pre class="language-"><code>engine:
+  filters:
+    - simplifier@emoji_suggestion # emoji
+    - simplifier@traditionalize # 简繁转化
+    - uniquifier # 去重
+    # - lua_filter@long_phrase_first # 最长词组和单字优先。开启哪个功能，取消哪行注释
+    # - lua_filter@single_char_first # 单字优先
+    # - lua_filter@single_char_only # 只显示单字</code></pre><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/290dcf566bd859def1f6c526568b21da.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>扩展能够实现不同的个性化输入模式</figcaption></figure><p>在 <code>flypy.schema.yaml</code> 配置文档中，<code>speller</code> 组件下添加如下语句，配置模糊音，根据个人容易出错的拼音编码灵活设置。模糊音设置得太多，将导致重码率上升，请根据个人实际情况配置。如果你使用双拼，建议尽量不设或少设模糊音。比如我只设置了 ang&lt;-&gt;an 和 eng&lt;-&gt;en 两组我最容易出错的韵母。</p><pre class="language-null"><code>    # 模糊音区域
+    # 依据个人需要注释和反注释
+    # 格式：键盘的输入码 -&gt; 转化后的输入码
+
+    # 声母部分
+    # - derive/^([z])h/$1/ # z -&gt; zh
+    # - derive/^([z])([^h])/$1h$2/ # zh -&gt; z
+    # - derive/^([c])h/$1/ # c -&gt; ch
+    # - derive/^([c])([^h])/$1h$2/ # ch -&gt; c
+    # - derive/^([s])h/$1/ # s -&gt; sh
+    # - derive/^([s])([^h])/$1h$2/ # sh -&gt; s
+    # - derive/^l/n/ # n -&gt; l
+    # - derive/^n/l/ # l -&gt; n
+    # - derive/^r/l/ # l -&gt; r
+    # - derive/^r/y/ # y -&gt; r
+    # - derive/^hu$/fu/ # fu -&gt; hu
+    # - derive/^fu$/hu/ # hu -&gt; fu
+
+    # 韵母部分
+    - derive/([^iu])([a])n$/$1$2ng/ # ang -&gt; an
+    - derive/([^iu])([a])ng$/$1$2n/ # an -&gt; ang
+    - derive/([e])n$/$1ng/ # eng -&gt; en
+    - derive/([e])ng$/$1n/ # en -&gt; eng
+    # - derive/([i])n$/$1ng/ # ing -&gt; in
+    # - derive/([i])ng$/$1n/ # in -&gt; ing
+    # - derive/([i])an$/$1ang/ # iang -&gt; ian
+    # - derive/([i])ang$/$1an/ # ian -&gt; iang
+    # 由于小鹤双拼方案此对韵母在相同按键，无需 uang &lt;-&gt; iang ，其他双拼方案如有需求，请按格式修改</code></pre><p>注意：因为此处配置了独立的输入方案 <code>flypy.schema.yaml</code> ，与默认输入方案不冲突，不会因为更新的原因导致配置文件被覆盖。因此，此处没有使用 <code>flypy.custom.yaml</code> 补丁文件，而是直接在输入方案配置文件中进行配置，因此没有 <code>Patch:</code> 语句。下同。</p><h2>制作和配置词库</h2><p>词库，是除开输入习惯之外，影响输入体验的重中之重。</p><p>配置词库有两条思路：</p><ul><li>用时间慢慢养好一个词库</li><li>制作大而全兼容并包的词库</li></ul><p>两种方式各有优劣。</p><p>自己养词库需要较长时间。优点在于非常贴合输入习惯、生活习惯和工作需求，养好的个人词库无比丝滑。</p><p>大而全词库虽然能兼容日常使用。但往往因为大而全导致候选项混乱，特别是候选项自学习阶段，混乱排序的候选项非常影响输入体验。</p><p>我倾向于慢慢培养个人词库。同时制作细分词库来确保词库养成期间的输入体验和工作需求。这也非常像搜狗输入法的细胞词库的方案。</p><h3>制作一个词库</h3><p>鉴于大部分朋友的需求，本例子以拥有近 40 万词条的「搜狗标准词库」为基础进行制作。你可以根据自身需求，选择不同的词库蓝本进行制作。</p><ul><li>下载<a href="https://pinyin.sogou.com/dict/detail/index/11640">搜狗标准词库</a>，得到「搜狗标准词库.scel」文件。</li><li>下载<a href="https://github.com/studyzy/imewlconverter">深蓝词库转换</a>。深蓝词库转换需要 <a href="https://dotnet.microsoft.com/zh-cn/download/dotnet/6.0">.net 6.0</a> 支持。</li><li>按照下图所示，进行词库转换。</li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/175b75a7fecede3f6509ed3b8e289a6c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>将得到的 .txt 格式文本文件，改名为 <code>&lt;词库名&gt;.dict.yaml</code>。并使用文本编辑器打开。<br />由于转换的词库带有词频。如下图：</li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/94aad119baba29b6c5a4375d6fcfe5f0.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>转换得到的词库带有词频</figcaption></figure><p><br />而我们需要不带词频的词库文件。使用文本编辑器的搜索替换功能，将所有词频删除。<br />得到编码格式为：<code>词组+tab+拼音串1+空格+拼音串2+空格+拼音串3</code> 的词库文件。如下图：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/b582d883ebb03b18cee131f12b23344d.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>删除词频之后的词库</figcaption></figure><p>加入词库文件头：</p><pre class="language-"><code> # 搜狗标准词库 40万条 由深蓝转换 无词频
+---
+name: sougou_standard  # 词库名
+version: "2023.11.09"  # 词库版本
+sort: by_weight # 排序依据：按照权重
+...
+
+啊啊啊    a a a
+阿埃二氏病变    a ai er shi bing bian</code></pre><p>按照前文所述的文本文件编码格式「 UTF-8 无签名」保存。</p><p>在「用户文件夹」新建 <code>～用户文件夹/dicts</code>，将词库文件导入该文件夹。</p><p>至此，基于搜狗标准词库的 RIME 词库就制作完备了。</p><h4>一些不错的开源词库</h4><ul><li><a href="https://github.com/rime-aca/dictionaries">GitHub - rime-aca/dictionaries: Rime詞庫</a></li><li><a href="https://github.com/Iorest/rime-dict">GitHub - Iorest/rime-dict: RIME 词库增强</a></li><li><a href="https://github.com/thunlp/THUOCL">GitHub - thunlp/THUOCL: THUOCL（THU Open Chinese Lexicon）中文词库</a></li><li><a href="https://github.com/Chernfalin/SuperRimeDict">GitHub - Chernfalin/SuperRimeDict: SuperRime拓展词库 for 朙月拼音&amp;Win10拼音版(700万词-含BetterRime)</a></li></ul><h3>理解 RIME 的词库架构</h3><p>RIME 允许扩充很多词库。词库架构如下图所示：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/fc1c9de3413dee1f2181d8f73ad4ca15.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>RIME 词库架构</figcaption></figure><p>主词库与扩充词库之间，是集合的关系。因此，调用主词库就相当于同时调用了 ABCD 四个扩充词库。</p><p>你可以理解为，RIME 调用主词库，主词库再调用各个扩充词库。</p><p>这非常方便。使得分门别类制作「细胞词库」成为可能。</p><p>并且可以灵活运用 RIME 注释关闭的特点，根据工作语境、生活语境、娱乐语境，定制词库调用。比如工作时调用「工作词库」「行业专业词汇词库」；娱乐时调用「游戏专属词汇词库」……</p><p>这和百度输入法的「工作模式&amp;娱乐模式」有异曲同工之妙。不过，RIME 还没有智能判断语境自动切换模式的功能。如果想要智能切换，需要配合第三方自动化工具实现。</p><h3>配置词库</h3><p>基于 RIME 的词库架构，我们可以按两条思路配置词库：</p><ul><li>制作一个含有词条的通用词库，并在这个词库中加入扩充词库。</li><li>制作一个空词库，并在这个词库中加入扩充词库。</li></ul><p>基于对词库调用逻辑关系的清晰明快以及如上根据不同语境调用词库的需求两个方面的考虑，我采用了第二种方案。</p><p>在「用户文件夹」新建文本文档，并命名为 <code>extended.dict.yaml</code>，作为主词库。</p><p>编辑如下文件内容，完成主词库对扩充词库的调用：</p><pre class="language-"><code> # Rime extended dictionary
+ # encoding: utf-8
+ ---
+ name: extended
+ version: "2023-11-10"
+
+ import_tables:
+  - dicts/sougou_standard # 搜狗标准词库
+  - dicts/A # 扩充词库 A，此处 A 应为实际词库名称
+  - dicts/B # 扩充词库 B，此处 B 应为实际词库名称
+ ...
+  # 如果是带有词条的词库，请在这里，按照编码格式添加词条</code></pre><p>打开输入方案配置文档文件 <code>flypy.schema.yaml</code>，在 <code>translator</code> 组件下添加如下语句，完成输入方案对词库的调用：</p><pre class="language-"><code>translator:
+  dictionary: extended # 此处 extended 为主词库名称</code></pre><p>如果同时使用其它输入方案，则在其它输入方案配置文档文件的相同位置，添加相同的语句。</p><h2>制作和配置符号表</h2><p>自定义符号也是影响输入体验的一个重要方面。比如各方面表现都不错的微软输入法，恰恰不能支持自定义符号。对于像我这样，学习并且已经开始使用 Markdown 语法进行写作的人来说，如果不能自定义符号，只能疲于奔命地在中英文之间切换，或者在不同的输入法之间切换。</p><p>RIME 支持自定义符号，并且支持反斜杠输入特殊符号、颜文字。在旧的那篇文章里，我没有找到双拼模式下反斜杠模式的实现方法。现在，它实现了。</p><p>由于符号表涉及非常多符号，建议使用官方符号表为蓝本进行修改。或者使用已经制作好的符号表，再根据个人的实际需求，进行码表修改。</p><p>此处以名称为 <code>symbols.yaml</code> 的符号表为例。</p><p>打开这张符号表，发现其分为两个部分，全角符号部分及半角符号部分。如下图</p><pre class="language-"><code>punctuator:
+  full_shape:
+    ",": { commit: ， }
+    ".": { commit: 。 }
+  half_shape:
+    ",": { commit: ， }
+    ".": { commit: 。 }
+    "[": "「"
+    "*": ["*", ＊, ·, ・, ×, ※, ❂]</code></pre><p>其中需要注意的是如下两种语法，分别是:</p><ol><li><code>"[": "「"</code></li><li><code>"*": ["*", ＊, ·, ・, ×, ※, ❂]</code></li></ol><p>第一种语法是一一对应的关系，按下「左方括号」，直接上屏唯一项「左直角引号」。</p><p>第二种语法是一对多的关系，按下「星号」，弹出候选项选单，通过选中候选项，上屏相应符号。</p><p>配置好自定义符号后。需要在输入法案中，指定调用这张符号表。</p><p>打开 <code>flypy.schema.yaml</code> 输入方案，找到并修改如下代码：</p><pre class="language-"><code>punctuator:
+  import_preset: symbols # 修改此处 symbols 为需要调用的符号表的名称</code></pre><p>这就完成了符号表的调用。</p><p>同样的，如果需要使用反斜杠输入特殊符号的功能，则在 <code>symbols.yaml</code> 符号表中新增：</p><pre class="language-"><code>symbols:
+ # 八卦、八卦名、六十四卦
+  '/bg': [ ☰, ☱, ☲, ☳, ☴, ☵, ☶, ☷ ]
+  '/bgm': [ 乾, 兑, 离, 震, 巽, 坎, 艮, 坤 ]
+  '/lssg': [ ䷀, ䷁, ䷂, ䷃, ䷄, ䷅, ䷆, ䷇, ䷈, ䷉, ䷊, ䷋, ䷌, ䷍, ䷎, ䷏, ䷐, ䷑, ䷒, ䷓, ䷔, ䷕, ䷖, ䷗, ䷘, ䷙, ䷚, ䷛, ䷜, ䷝, ䷞, ䷟, ䷠, ䷡, ䷢, ䷣, ䷤, ䷥, ䷦, ䷧, ䷨, ䷩, ䷪, ䷫, ䷬, ䷭, ䷮, ䷯, ䷰, ䷱, ䷲, ䷳, ䷴, ䷵, ䷶, ䷷, ䷸, ䷹, ䷺, ䷻, ䷼, ䷽, ䷾, ䷿ ]</code></pre><p>可以通过此方法，在符号表中配置各种稀奇古怪的特殊符号。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/bdf36a4f79b9c29281b996fe50fc714a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>虽然奇怪，但又很有趣的符号</figcaption></figure><h2>配置用户自定义短语</h2><p>自定义短语作为极度私有化，且能极大提升输入效率的工具，在 RIME 中具有十分重要的意义。不少朋友用自定义短语挂载超大词库的做法，并不被 RIME 所建议。自定义短语有它更为重要的作用和意义。所以，请不要在自定义短语中添加超量词条。</p><p>用户自定义短语存储于用户文件夹下的 <code>custom_phrase.txt</code> 文本文件中。</p><pre class="language-"><code># Rime table
+# coding: utf-8
+#
+# 请将该文件以 UTF-8 无签名编码保存
+# 存储位置为 ~Rime 用户文件夹/custom_phrase.txt
+#
+# 码表各字段以制表符（Tab）分隔
+# 编码格式：词条+tab+编码+tab+权重 权重决定短语词条在候选项中的排序，权重非必须项
+
+xxx@gmail.com  gmail   1
+xnomid1</code></pre><p>然后，需要在输入方案配置文件 <code>flypy.schema.yaml</code> 中，指定调用这张自定义短语表。和词库一样，如果你使用多个输入方案，需要在每个输入方案中调用。</p><pre class="language-"><code>custom_phrase:
+  user_dict: custom_phrase</code></pre><p>重新部署后，自定义短语就能生效。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/c5caaec66a10026069a65152adb70f5a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>配置输入法样式、布局与配色</h2><p>到了这一步，输入法的输入体验部分就完成了。根据你的输入习惯配置的个性化方案，已经超越了市面上绝大多数成品输入法所能提供的体验。</p><p>那么，现在开始配置很多朋友在意的「皮肤」，也就是 RIME 输入法的样式、布局与配色。</p><p>需要说明一点，RIME 之所以不称为「皮肤」，而是称为「样式、布局与配色」，在于：RIME 并不能指定背景图片。比如成品输入法皮肤市场各种各样动漫皮肤、卡通皮肤、风景皮肤，这并不支持。</p><p>RIME 只能配置输入法候选项的样式、布局和配色。</p><ul><li>样式涉及的方面有：候选框直排/横排、字体字号、单行模式/双行模式等等；</li><li>布局涉及的方面有：候选框直角/圆角、候选框边距、候选项间距、阴影等等；</li><li>配色涉及的方面有：候选框背景色、边框色，候选项色，待选项色，候选项高亮色，编码色等等。</li></ul><p>具体到方案配置，打开 <code>weasel.custom.yaml</code> 文件，具体的设置项对应的功能，我已经在方案代码旁边作了详细的注释。</p><pre class="language-"><code>Patch：
+  style：# 此行之下为样式设置
+    display_tray_icon: true # 显示系统托盘图标
+    inline_preedit: true # 在光标位置显示预编辑文本
+    preedit_type: composition # 预编辑文本类型
+    mouse_hover_ms: 0 # 鼠标悬停选词响应时间
+    paging_on_scroll: false # 鼠标滚轮翻页候选词
+    fullscreen: false # 全屏候选词窗口
+    horizontal: true # 横排显示
+    font_face: "Microsoft YaHei" # 主要字体
+    font_point: 13 # 主要字体大小
+    label_font_point: 13 # 标签字体大小
+    comment_font_point: 13 # 注释字体大小
+    inline_preedit: true # 嵌入式候选窗，单行模式
+
+    shadow_offset_x": 5 # 阴影 X 轴偏移
+    shadow_offset_y": 5 # 阴影 Y 轴偏移
+    shadow_radius": 10 # 阴影半径
+
+    layout： # 此行之下为布局设置
+      border_width: 0 # 边框宽度
+      border": 0
+      margin_x": 12 # 候选项左右边距
+      margin_y": 12 # 候选项上下边距
+      hilite_padding": 12 # 激活候选项背景色高度
+      hilite_spacing": 3 # 序号和候选项之间的间隔
+      spacing": 10 # 候选项间距
+      candidate_spacing": 24 # 候选项内部间距
+      round_corner": 0 # 圆角幅度，0为直角
+
+  "preset_color_schemes/Micosoft": # 此行之下为配色设置
+    name: "Micosoft" # 配色名称
+    author: "XNOM" # 作者名称
+    text_color: 0xD77800 # 内选区文字色
+    hilited_text_color: 0x000000 # 内选区编码色
+    hilited_back_color: 0xFFFFFF # 内选区背景色
+    hilited_candidate_text_color: 0xFFFFFF # 激活候选项文字色
+    hilited_candidate_back_color: 0xD77800 # 激活候选项背景色
+    candidate_text_color: 0x000000 # 其他候选项文字颜色
+    comment_text_color: 0x000000 # 其他候选项提示色
+
+  "style/color_scheme": Micosoft #最后加上这句，设置配色方案为 Micosoft，此处填入实际的配色方案名称</code></pre><p>注意：RIME 的配色颜色编码使用 16 进制表示。并且，和常规的「RGB 红绿蓝」颜色编码不同，使用的是「BGR 蓝绿红」颜色编码。</p><p>你可以在 <a href="https://bennyyip.github.io/Rime-See-Me/">RIME See Me</a> 调整配色后，复制右侧自动生成的代码。非常方便。</p><p>我非常喜欢原必应输入法的样式和配色，清爽、轻盈、明快，也不喜欢 win 11 style 那种圆角设置。因此，多年来我一直使用这套样式布局配色方案。相关方案配置代码如上，配置文件在文末的方案包内。如果你喜欢这套配色，请在引用时，保留 <code>author: "XNOM"</code> 作者字段。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/586f2a748e3d1f5f7fcf97fae604444d.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>微软拼音配色方案：全直角，极窄边框。</figcaption></figure><h2>配置用户资料同步</h2><p>RIME 没有云同步功能，但有本地同步功能。能够将用户数据同步至本地文件夹。</p><p>我们可以借助坚果云、onedrive 等第三方云将这个本地文件夹同步至云端，以此实现个人词典和配置方案在不同电脑间的同步和备份。</p><p>以坚果云举例：</p><ul><li>在你的坚果云同步文件夹内，这里举例为 <code>D:\Nutstore </code>，新建一个 <code>RimeSync</code> 文件夹。</li><li>其次，先打开用户资料夹，打开 <code>installation.yaml</code> 文件，在合适的地方添加如下代码：</li></ul><pre class="language-"><code>sync_dir: 'D:\Nutstore\RimeSync'</code></pre><p>最后完成后的样子是这样：</p><pre class="language-"><code>distribution_code_name: Weasel
+distribution_name: "小狼毫"
+distribution_version: 0.15.0
+install_time: "Sat Nov 11 21:51:51 2023"
+installation_id: "XNOM" # 此处填写喜欢的名字
+rime_version: 1.8.5
+sync_dir: 'D:\Nutstore\RimeSync'</code></pre><ul><li>在开始菜单运行 <code>【小狼毫】用户资料同步</code>，如果启用了托盘图标，也可以右击运行用户资料同步。完成后，你就能在 RimeSync 文件夹中找到 XNOM 文件夹，其中的内容就是你的用户资料，包含了自学习个人词典文件和配置文件等等。</li><li>利用坚果云，将此文件夹同步至云端。</li><li>在另外一台电脑，按照相同的方式操作。将云端文件夹同步至本地。</li></ul><p>这里，很有必要理解 RIME 的同步逻辑：</p><ul><li>RIME 同步两个方面的资料，一为个人词典；二为个人配置。</li><li>个人词典同步逻辑为双向同步；个人配置同步逻辑为单向同步。</li><li>个人词典双向同步逻辑，举例来说：甲电脑个人词典累积了词汇 ABC，乙电脑累积了词汇 DEF，那么，通过第三方云同步和 Rime 同步后，甲乙两地个人词典词汇都会同步且合并为 ABCDEF。通过第三方云同步，可以非常方便地同步两地之间的个人词典，保持相同的输入体验。</li><li>个人配置单向同步逻辑，是指 RIME 只会将配置文件，单向地从「用户文件夹 ~\Rime」同步至「同步文件夹 RimeSync」。换句话说，个人配置只会在「同步文件夹 RimeSync」里在甲乙两地被反复同步和覆盖，而不会导入配置文件。如果你需要导入异地的配置文件，可以在第三方云完成同步后，手动将配置文件导入。</li><li>这样的同步逻辑是为了保持配置的一致性。因为，配置文件之于 RIME 十分重要，关系着 RIME 是否能够正常运行。也必须在修改后通过重新部署才能生效。若两地的配置不一致时或其中一地有错误时，必然产生无法预估的混乱后果。不过，个人配置定制好之后，也很少需要修改，权且当作备份。云同步个人配置更多用于异地新电脑部署时。</li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/14/c4433672e86358757f6224dc01a4f162.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>RIME 同步逻辑示意图</figcaption></figure><h2>一些需要注意的地方和总结</h2><p>关于 <code>.custom</code> 定制文档的语法，上文并没有详细说明。因为在 <a href="https://github.com/rime/home/wiki/RimeWithSchemata#%E5%AE%9A%E8%A3%BD%E6%8C%87%E5%8D%97">定制指南</a> 中都有详细的说明。鉴于部分朋友，可能并不会真的去读《定制指南》，语法示例引用如下：</p><blockquote><pre class="language-"><code>Patch:
+ "一级设定项/二级设定项/三级设定项": 新的设定值
+ "另一个设定项": 新的设定值
+ "再一个设定项": 新的设定值
+ "含列表的设定项/@0": 列表第一个元素新的设定值
+ "含列表的设定项/@last": 列表最后一个元素新的设定值
+ "含列表的设定项/@before 0": 在列表第一个元素之前插入新的设定值（不建议在补丁中使用）
+ "含列表的设定项/@after last": 在列表最后一个元素之后插入新的设定值（不建议在补丁中使用）
+ "含列表的设定项/@next": 在列表最后一个元素之后插入新的设定值（不建议在补丁中使用）</code></pre></blockquote><p>再次强调，上文中，因为我配置了个人专属输入方案 <code>flypy.schema.yaml</code>，因此，并没有使用 <code>flypy.custom.yaml</code> 的配置补丁进行配置，因此上文涉及定制输入方案的部分，都是对输入方案本身的修改，因此没有加入 <code>Patch:</code>。总之一句话：对于 <code>schema.yaml</code> 的修改是直接修改，可能会被更新覆盖；对于 <code>custom.yaml</code> 的修改是补丁修改，不会被更新覆盖，但该补丁文件需以 <code>Patch：</code> 开头，并有且只能有一句。</p><p>最后，作为一款核心思想是「自由」的输入引擎，虽然无可争议地可以寻找和下载高级用户制作的方案包来使用，但我更建议你根据自己的输入习惯和输入需求进行定制。高级用户制作的方案包，则可以用于学习和借鉴。当然，整个配置过程也许艰难、也许曲折、也许漫长、也许反复，但如果结果是令人欣喜、令人愉悦、令人满足、令人得意的话，未尝不是一种别样的人生体验。这，不仅仅只是配置一个输入法而已。人生长长，何事不是如此呢？</p><h2>参考资料及扩展阅读：</h2><ol><li><a href="https://rime.im/docs/">幫助與反饋 | RIME | 中州韻輸入法引擎</a></li><li><a href="https://github.com/LufsX/rime">GitHub - LufsX/rime: Rime（中州韵）全拼与双拼的自用配置方案</a> 十分感谢 LufsX 的配置方案给予的莫大启发</li><li><a href="https://github.com/halfmoonvic/Rime">GitHub - halfmoonvic/Rime: 致第一次安装Rime的你</a></li><li><a href="https://github.com/rime/librime">GitHub - rime/librime: Rime Input Method Engine, the core library</a></li><li><a href="https://segmentfault.com/a/1190000002424698">一位匠人的中州韵——专访Rime输入法作者佛振 - 图灵访谈 - SegmentFault 思否</a></li><li><a href="https://sspai.com/link?target=https%3A%2F%2Fjdhao.github.io%2F2019%2F02%2F18%2Frime_configuration_intro%2F">最新版 Rime 输入法使用</a></li><li><a href="https://github.com/rime/rime-emoji/issues/6">Issue #6 · rime/rime-emoji · GitHub</a></li><li><a href="https://sspai.com/post/45516">别再用「六个点」当省略号了，这些标点都有更规范的输入方式 - 少数派 (sspai.com)</a></li><li><a href="https://sspai.com/post/55699">旧版自由输入法RIME简明配置指南 - 少数派 (sspai.com)</a></li><li><a href="https://pan.baidu.com/s/1CaPlEKiSjHGgZbhs76x8zQ?pwd=XNOM" target="_blank">文中所涉及配置文件、扩展包、词库等-分享在此-百度网盘-提取码XNOM</a></li><li>其它参考资料，在原文提供链接，此处不再重复添加</li></ol><p style="margin-left: 0px;">&gt; 关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/84444</id>
             <title>派早报：小米汽车公示、CDPR 将推出《猎魔人 3》mod 编辑器等</title>
             <link>https://sspai.com/post/84444</link>
@@ -75,7 +305,7 @@
         
         <item>
             <id>https://sspai.com/post/84421</id>
-            <title>现场活动 | 一起听歌吧！周六来少数派线下店享受 HiFi 音乐</title>
+            <title>科技 Live | 一起听歌吧！周六来少数派线下店享受 HiFi 音乐</title>
             <link>https://sspai.com/post/84421</link>
             <guid isPermaLink="false">https://sspai.com/post/84421</guid>
             <pubDate></pubDate>
@@ -91,7 +321,7 @@
 总结: 本周六下午，少数派线下店将举办一场音乐活动，展示HiFi音乐键盘和各种音乐设备，并邀请音乐人Power Milk现场演出。活动包括嘉宾介绍、音乐设备体验、现场演出等环节。活动地点在深圳南山区海岸城旁边的后海汇商场B2-40。 </div>
                         <hr>
                     
-                    <p>天气渐凉，何不用音乐来温暖生活？</p><p><strong>本周六（18 号）下午 3 点 - 5 点</strong>，我们将在少数派线下店举办「一起听歌吧！HiFi 音乐键盘体验展」活动。这里将展出少数派共创的<strong> HiFi 音乐键盘</strong>，各式各样的 <strong>HiFi 播放器、耳机、耳放解码一体机</strong>等你玩，我们还请到了<strong>音乐人 Power Milk 现场演出。</strong></p><p><strong>活动时间</strong>：本周六（18 号）下午 3 点 - 5 点</p><p><strong>活动地点</strong>：<a href="https://www.amap.com/place/B0JDR9TMCG">少数派线下店</a>（深圳南山区海岸城旁边的后海汇商场B2-40，后海地铁站A2 出闸后的地铁商场负二楼）</p><p><strong>活动流程：</strong></p><ul><li>嘉宾介绍</li><li>#我和音乐的故事：自己用过/买过的音乐设备分享</li><li>HiFi 音乐体验之旅</li><li>Power Milk 现场 Live</li><li>店内自由活动、交流</li></ul><p><strong>One More Thing：</strong>少数派的老朋友 <a class="ss-atUser" href="https://sspai.com/u/oiioiii">@两颗皮蛋</a> 和 <a class="ss-atUser" href="https://sspai.com/u/aping">@NICEPING</a> 也会到场，和大家一起玩音乐！</p><p><strong>报名方式：</strong>扫描下方二维码，赶快报名吧。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/15/c21146d4a902d3b7aca8b7eec01f6ac2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>因场地空间有限，本次活动参与人数为 <strong>20 人</strong>，报名费为 <strong>39/人</strong>，我们将为到场完成签到的派友赠送一份活动纪念礼品：</p><p><strong>少数派效率鼠标垫（价值 79 元）</strong></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/15/d3fc1ea3c4a50385c438440488e49104.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>少数派效率贴纸（价值 29.9 元）</strong></p><figure class="image ss-img-wrapper image_resized" style="width: 300px;"><img src="https://cdn.sspai.com/2023/11/15/b5b9878e9fba93fb7217105dbe710045.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果你已经加入少数派年度会员，还可以额外领取一份<strong>捣蛋獭贴纸（价值 19.9 元）</strong>：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/31/f5a0b7f14ddc7fe8b0ced249d14de5bb.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>HiFi 体验：一场全 HiFi 的音乐旅程</h2><p>一场 HiFi 音乐之旅，就从这个下午开启。</p><p>我们邀请资深音乐爱好者 <a class="ss-atUser" href="https://sspai.com/u/aishi">@挨石</a> ，设计了<strong>一次 HiFi 音乐之旅</strong>，他将在现场分享使用 HiFi 设备听音乐的绝妙之处，讲解 HiFi 音乐设备的使用技巧。</p><p>在现场将有全流程的 HiFi 音乐设备供大家体验，无论是上万元的台式<strong>耳放解码一体机，</strong>还是能带来震撼体验的<strong>专业 HiFi 播放器、耳机</strong>，都可以一次性在本次活动全部体验到，让你的音乐体验升个级。</p><h2>音乐 Live：来听 Power Milk 唱歌吧！</h2><p>享受音乐，怎么能少了现场 Live 的环节呢。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/15/ac25142a47eb69560c791d4aa16a8caa.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Power Milk</figcaption></figure><p>我们邀请了独立乐队 <a href="https://music.163.com/#/artist?id=12930969">Power Milk</a> 前来助阵，让各位派友可以体验音乐现场的魅力。</p><p>Power Milk&nbsp;不拘泥于Jazz、Rock或某种风格，不局限于梦幻、现实或某种命题。当你以为他们是文艺小清新，其实却是浑身性感小顽皮；当你标签他们为梦幻小分队，其实真正身份却是街头小霸王。为对抗苦闷生活这个大BOSS，Power Milk 奋身集结！</p><p>Power Milk 现场演奏歌单：</p><ul><li>叹息的泡泡</li><li>此时此刻</li><li>美味眼泪</li><li>夏日咻吡嘟（这首是和少数派合作的单曲哦~）</li></ul><h2>现场试玩：一块能听 HiFi 音乐的键盘</h2><p>少数派也要「玩音乐」啦！</p><p>少数派携手国产 HiFi 厂商飞傲，<strong>共同创造</strong>了这把 <a href="https://sspai.com/page/kb3">HiFi 音乐机械键盘</a>。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/31/b8349cd5fc38af086862ed1e53250658.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>HiFi 音乐机械键盘·共创版</figcaption></figure><p>这是一台将<strong>专业 HiFi 解码耳放一体机</strong>，与<strong>为极客打造的机械键盘</strong>相互融合的设备：</p><ul><li>台式级别的解码耳放一体机，沉浸享受 HiFi 音乐；</li><li>特选凯华鲸落轴静音轴体，码字时也不干扰享受 HiFi；</li><li>可改键的 QMK 客制化键盘，玩法无上限的极客之选；</li><li>铝镁合金面板，简洁桌搭的键盘首选。</li></ul><span class="ss-externalProduct" title="少数派共创·飞傲 HiFi 音乐键盘" type="externalproduct">&nbsp;</span><p>我们将在活动现场提供试玩，让派友可以直接体验到<strong>边打字边 HiFi </strong>的奇妙体验。</p><p style="margin-left: 0px;">&gt; 关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                    <p>天气渐凉，何不用音乐来温暖生活？</p><p><strong>本周六（18 号）下午 3 点 - 5 点</strong>，我们将在少数派线下店举办「一起听歌吧！HiFi 音乐键盘体验展」活动。这里将展出少数派共创的<strong> HiFi 音乐键盘</strong>，各式各样的 <strong>HiFi 播放器、耳机、耳放解码一体机</strong>等你玩，我们还请到了<strong>音乐人 Power Milk 现场演出。</strong></p><p><strong>活动时间</strong>：本周六（18 号）下午 3 点 - 5 点</p><p><strong>活动地点</strong>：<a href="https://www.amap.com/place/B0JDR9TMCG">少数派线下店</a>（深圳南山区海岸城旁边的后海汇商场B2-40，后海地铁站A2 出闸后的地铁商场负二楼）</p><p><strong>活动流程：</strong></p><ul><li>嘉宾介绍</li><li>#我和音乐的故事：自己用过/买过的音乐设备分享</li><li>HiFi 音乐体验之旅</li><li>Power Milk 现场 Live</li><li>店内自由活动、交流</li></ul><p><strong>One More Thing：</strong>少数派的老朋友 <a class="ss-atUser" href="https://sspai.com/u/oiioiii">@两颗皮蛋</a> 和 <a class="ss-atUser" href="https://sspai.com/u/aping">@NICEPING</a> 也会到场，和大家一起玩音乐！</p><p><strong>报名方式：</strong>扫描下方二维码，赶快报名吧。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/15/c21146d4a902d3b7aca8b7eec01f6ac2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>因场地空间有限，本次活动参与人数为 <strong>20 人</strong>，报名费为 <strong>39/人</strong>，我们将为到场完成签到的派友赠送一份活动纪念礼品：</p><p><strong>少数派效率鼠标垫（价值 79 元）</strong></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/15/d3fc1ea3c4a50385c438440488e49104.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>少数派效率贴纸（价值 29.9 元）</strong></p><figure class="image ss-img-wrapper image_resized" style="width: 300px;"><img src="https://cdn.sspai.com/2023/11/15/b5b9878e9fba93fb7217105dbe710045.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果你已经加入少数派年度会员，还可以额外领取一份<strong>捣蛋獭贴纸（价值 19.9 元）</strong>：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/31/f5a0b7f14ddc7fe8b0ced249d14de5bb.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>HiFi 体验：一场全 HiFi 的音乐旅程</h2><p>一场 HiFi 音乐之旅，就从这个下午开启。</p><p>我们邀请资深音乐爱好者 <a class="ss-atUser" href="https://sspai.com/u/aishi">@挨石</a> ，设计了<strong>一次 HiFi 音乐之旅</strong>，他将在现场分享使用 HiFi 设备听音乐的绝妙之处，讲解 HiFi 音乐设备的使用技巧。</p><p>在现场将有全流程的 HiFi 音乐设备供大家体验，无论是上万元的台式<strong>耳放解码一体机，</strong>还是能带来震撼体验的<strong>专业 HiFi 播放器、耳机</strong>，都可以一次性在本次活动全部体验到，让你的音乐体验升个级。</p><p>现场可以体验到的 HiFi 设备（仅仅是一部分哦）：</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img src="https://cdn.sspai.com/2023/11/16/ed13024c03ee04f53ffec55ec9624af1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>价值 11999 元的飞傲 M17 便携安卓音乐播放器</figcaption></figure><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img src="https://cdn.sspai.com/2023/11/16/1fcdbb838ff1da337306beca160cb7e7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>价值 4999 元的飞傲 R7桌面高清数播解码耳放一体机</figcaption></figure><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img src="https://cdn.sspai.com/2023/11/16/85195597f1c9b6499fb9c9935a7038bd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>价值 2999 元的飞傲 FT5 头戴耳机</figcaption></figure><h2>音乐 Live：来听 Power Milk 唱歌吧！</h2><p>享受音乐，怎么能少了现场 Live 的环节呢。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/15/ac25142a47eb69560c791d4aa16a8caa.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Power Milk</figcaption></figure><p>我们邀请了独立乐队 <a href="https://music.163.com/#/artist?id=12930969">Power Milk</a> 前来助阵，让各位派友可以体验音乐现场的魅力。</p><p>Power Milk&nbsp;不拘泥于Jazz、Rock或某种风格，不局限于梦幻、现实或某种命题。当你以为他们是文艺小清新，其实却是浑身性感小顽皮；当你标签他们为梦幻小分队，其实真正身份却是街头小霸王。为对抗苦闷生活这个大BOSS，Power Milk 奋身集结！</p><p>Power Milk 现场演奏歌单：</p><ul><li>叹息的泡泡</li><li>此时此刻</li><li>美味眼泪</li><li>夏日咻吡嘟（这首是和少数派合作的单曲哦~）</li></ul><h2>现场试玩：一块能听 HiFi 音乐的键盘</h2><p>少数派也要「玩音乐」啦！</p><p>少数派携手国产 HiFi 厂商飞傲，<strong>共同创造</strong>了这把 <a href="https://sspai.com/page/kb3">HiFi 音乐机械键盘</a>。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/31/b8349cd5fc38af086862ed1e53250658.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>HiFi 音乐机械键盘·共创版</figcaption></figure><p>这是一台将<strong>专业 HiFi 解码耳放一体机</strong>，与<strong>为极客打造的机械键盘</strong>相互融合的设备：</p><ul><li>台式级别的解码耳放一体机，沉浸享受 HiFi 音乐；</li><li>特选凯华鲸落轴静音轴体，码字时也不干扰享受 HiFi；</li><li>可改键的 QMK 客制化键盘，玩法无上限的极客之选；</li><li>铝镁合金面板，简洁桌搭的键盘首选。</li></ul><span class="ss-externalProduct" title="少数派共创·飞傲 HiFi 音乐键盘" type="externalproduct">&nbsp;</span><p>我们将在活动现场提供试玩，让派友可以直接体验到<strong>边打字边 HiFi </strong>的奇妙体验。</p><p style="margin-left: 0px;">&gt; 关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>
@@ -288,29 +518,6 @@
                         <hr>
                     
                     <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><blockquote><p>她慵懒地伸了个懒腰，打开了一双碧绿的眼睛，看到了自己的房间。她的房间是整个豪宅中最华丽的，有着金色的墙壁，红色的窗帘，和一张能容纳八个人的床。她的床上铺着最舒适的棉花被，最光滑的绸缎床单，还有最昂贵的珍珠枕头。她的床头柜上放着一台最高档的电脑，<strong>每天早上都会自动播放她最爱的古典音乐。</strong>她是这个城市的名媛，拥有着无人能及的才华，魅力，和地位。她的父亲是世界上最富有的商人，她的母亲是世界上最优雅的贵妇。她的身世就在那个风和日丽的早晨被揭开了，当她发现了自己的真实身份，以及那个男人的真实身份……</p><p><i>——Generated by the New Bing.</i></p></blockquote><p>尽管「豪宅」以及其他奢华得不真实的部分与我们无关（毕竟我们不是皇甫家的<a href="https://zh.wikipedia.org/zh-hans/%E5%85%AC%E4%B8%BB%E5%B0%8F%E5%A6%B9_(%E9%9B%BB%E8%A6%96%E5%8A%87)?useskin=vector" target="_blank">公主小妹</a>😅)，但其中自动播放古典的部分还是可以实现的。由此出发，我来说说我的自动化，以及一些构建的思路。</p><p>本文讲述的内容限制在 Apple 生态内，需要有能够运行自动化的设备。如要实现音频播放还需要音频播放设备，本文以我的 HomePod mini 为例。另外，本文的示例场景高度个人化（手头设备有限+出租房场景），仅作为示例以输出自动化的设置思路，部分细节可能涉及要订阅服务。</p><h2>HomePod 联欢</h2><p>受到玛丽苏文学和《公主小妹》的启发，我首先想到的是在 iPhone 的「睡眠」结束之后，以合适的音量播放传统意义上「优雅」的曲目。一来晨起后的洗漱、收拾、准备上班等等的一些列流程似乎都能在「优雅」的音乐中更「优雅」地进行；二来——我相信大家或多或少都有遇到过闹钟一按又睡过头的情况，我希望音乐能成为第二道保险，一定程度上减少这种情况的发生（尽管太轻柔舒缓的曲目反而可能更助眠，ooops）。</p><p>这便是我设置的第一条自动化——在「个人自动化」下的「睡眠」-「起床时」，让 HomePod mini 播放 Apple Music 的歌单「Classical AM」、立即运行、运行时不通知，尽量做到无感；重复和随机播放按需打开：</p><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2023/11/14/4525a6050fbec647875dd7968d82d025.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2023/11/14/2013508c2f5e304b1880c1f1747892f2.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2023/11/14/c6c20dab0942acdbd885e5768f8ab52d.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2023/11/14/561cc84663ed4bb135708973093a6da1.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>有了「起床时」，自然就会有「助眠开始时」，我设置的是让 HomePod mini 播放 Apple Music 的歌单「Jazzzzzzzzzzzzzzz」：助眠开始，在慵懒的爵士乐中慢慢平静自己的内心，以期收获更好的睡眠质量。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/ef6a8bff6c3afe25fc82d5b660be98cb.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这里想要吐槽的一点是，尽管可能是设置流程上的需要，但弹出的卡片式设置页面也太多了，进来又要出去回到上一级，而且有时候点击项目之后出现勾勾，返回即可，有些却需要点按「完成」——返回在左，「完成」在右🙄，给人一种左点点、右按按的感觉。</p><p><strong>此处的构建思路是：在已有的功能的基础上，根据自己的「见闻」，选择自己喜欢的音乐或其他，让已有设备加入到自动化当中，让生活更加的精彩而做作（不是）。</strong></p><h2>节电小巧思</h2><h3>Apps</h3><p>有一些应用程序，在使用的时候并不需要跑满 120 赫兹运行（我知道 Apple 做了很多工作让屏幕在更稳定、节能的状态下刷新，但我认为人为将最高刷新率压在 60 赫兹是更省电的），而有些程序则是打开之后就要使用较长时间，类似情况我也认为有必要开启低电量模式。</p><p>所以我设置的第二「组」自动化是：在「个人自动化」下的「App」，App 选择了第三方地图（持续使用）、「不 X 单词」（背单词没必要追求流畅的动效）、「X 团」（骑行期间省点电）、Ingress（基于地理位置的增强现实游戏），条件设置为「已打开」、立即运行、运行时不通知；随后再新增一条自动化，选择同样的应用程序，但条件设置为「已关闭」。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/14/757dd7510d3febc0d3f000245035aa90.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>打开 app 时打开低电量模式</figcaption></figure><figure class="image ss-img-wrapper image_resized" style="width: 450px;"><img src="https://cdn.sspai.com/2023/11/14/481437c48abe013ce5ff086a8de36c50.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>关闭 app 时关闭低电量模式</figcaption></figure><p>如此，便能做到启动相应应用时自启动低电量模式，关闭时（包括返回到主屏幕但不从 App 切换器中移除时）关闭低电量模式。</p><p><strong>此处的构建思路是：从使用场景和对应的 apps 下手，让某些功能（如低电量模式）适时启动。</strong></p><h3>Apple Watch</h3><p>我使用的是一只 Apple Watch Series 7，人在南方气温巨高，加上平时监测睡眠、运动，全天候显示常开——尽管电池依旧比我健康，但续航已大不如前。</p><p>我思考了一下：我已经有了一个会在工作时段自动启动的「工作」专注模式，而自动化中有一组触发条件就是和专注模式相关的：</p><figure class="image ss-img-wrapper image_resized" style="width: 450px;"><img src="https://cdn.sspai.com/2023/11/13/1ca590670be3cdb58da8549688d4341a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在公司使用电脑，对查看时间和其他即时通知的需求并不太高，抬腕查看也还算方便；加之也没有必要把亮起来的内容展示给周围的同事看，关闭全天候显示也算是一个节约 Apple Watch 电量的方法。所以我设置的第三条自动化是：在「个人自动化」下的「工作」，<strong>同时勾选</strong>「打开时」「关闭时」，「执行」中搜索「全天候」，选择 Watch 下的项目，「操作-切换」设置为「开/关」：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/77f8aeddc518fce33fd3296fb53b3226.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在这里我还加了一条「将（iPhone）媒体音量设到 0%」，这样就不会出现「在工位上摸鱼点开视频，结果音量超高」的尴尬情况。选择立即运行、运行时不通知。</p><figure class="image ss-img-wrapper image_resized" style="width: 450px;"><img src="https://cdn.sspai.com/2023/11/13/0f5035dc36735c91b22101406248bed9.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这里偷了个懒，没有将打开和关闭分开两条来设置。使用下来，只要眼前的全天候显示是符合自己预期的，启闭就不会错乱。</p><p><strong>此处的构建思路是：根据自己的生活场景，结合实际情况和自身需求，用自动化启闭同一生态内其他设备的功能，以达到省电目的；如果可以，还可以给特定场景设置双保险，避免尴尬。</strong></p><h2>强行唤醒</h2><p>在前司办公室午休小睡，有时候醒来非常痛苦。针对在前司午休唤醒的场景，我设置了一条快捷指令+一条自动化，以让午休小睡和唤醒形成闭环。</p><p>我当时的场景和对应的想法是：躺办公椅睡下的时间<strong>时早时晚（手动运行的快捷指令更适合这种情况）</strong>，但起来的<strong>时间固定</strong>，是每个工作日的 12:58<strong>（能够到点运行的自动化更适合这种情况）</strong>；午休时会佩戴 AirPods Pro，需要切换到「降噪」，会播放 Apple Music 中的「助眠音乐」列表，音乐需要自动暂停；期间不想被电话或其他通知打扰（需要从「工作」专注模式切换到「勿扰模式」）</p><h3>快捷指令部分</h3><p>基于上述，我设计的快捷指令是：</p><figure class="image ss-img-wrapper image_resized" style="width: 450px;"><img src="https://cdn.sspai.com/2023/11/13/0d0bb57815cf9b6f6b69c75aae07f3ff.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在最开始设计这条快捷指令的时候我并没有想到，即便是戴上了耳机，有时候音乐还是会从扬声器中播放，在安静的办公室中这显得尤为尴尬，所以我将「播放位置」添加并放置在最开头，以最大限度减少这种情况出现的几率；而媒体音量也是多次实践之后才知道在办公室环境下多大的音量才不会影响入睡，同时又不会因为太小声听不到音乐；后来我还加入了「关闭全天候显示」这一条设置——毕竟都午休了，亮起来的手表别说同事了，我自己也看不到，能省一点电是一点。</p><p>我曾试过直接使用「设定专注模式」指令，试图将「勿扰模式」切换到「工作」，但在我实践中，切换是时而可以时而不行。所以才采取了图中「关闭工作-打开勿扰」的曲线实施方式。</p><h3>自动化部分</h3><p>在使用快捷指令过程中我又发现，「工作」和「勿扰模式」的「切换」的效果可以达成，但到设定时间点，「勿扰模式」自动关闭后，是回归到没有启用任何专注模式的状态中的；音乐会继续播放，耳机仍是降噪的状态。被手表的闹钟震醒之后，人本来就非常迷糊，放着音乐还降着噪非常容易又睡过去，老板来了可就完蛋了。即便是醒来后精神良好，也还要手动逐个调整，非常麻烦。</p><p>为了解决这些问题，我增添了一条自动化，这里用到了 if：</p><figure class="image ss-img-wrapper image_resized" style="width: 450px;"><img src="https://cdn.sspai.com/2023/11/13/89bb316f31add7cd34411e08d274e10b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>彼时手表续航还行，也没有意识到工作中打开全天候于我而言意义不大，所以做了全天候的开关</figcaption></figure><p>也因为直接切换的指令似乎不能达到专注模式的切换效果（上文所述），索性就用了「获取当前专注模式」+if函数，做一个简单判断，并执行相应动作。</p><p>音乐消失。随着耳机被自动切换到「通透模式」，那一声「咚铛~」提示音带着一种「醒」灌入耳道，外界的声音紧随其后重新输入大脑，我不醒谁醒。抓起手机，壁纸和主屏幕的排布都回到了工作状态，也在暗示着我也得赶紧打起精神来打下午的工。</p><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2023/11/13/2bdd65c5074b943591138077dbe206a1.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2023/11/13/0c30c890c5c21411ca24e5c0c167ea93.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>这部分的构建思路是：</strong></p><ol><li><strong>可以想想什么时候该用手动运行的快捷指令</strong>，什么时候该用自动运行的自动化。他们对应的触发场景不一样。可以配合使用。</li><li><strong>结合深处场景的实际情况和自身需求</strong>，逐条设计快捷指令和自动化，并且在实践中不断迭代优化，方便又优雅的生活就此开始。</li></ol><p>自动化的设置中还有非常多出触发条件可供选择，如基于地理位置的「到达」「离开」，与 Apple Watch 相关的「Apple Watch 体能训练」；如在最下方的「家庭自动化」中还能创建人人可用的自动化操作。我还设置了开启任意体能训练时关闭全天候显示，以及在最后一个人离开家时停止 HomePod mini 的音频播放。但受限于篇幅我没有展开，毕竟本篇文章并非教程，而是借我自己的一些例子和思考过程，给各位一些快捷指令和自动化方面的参考、提供一些设置上的思路。</p><p style="margin-left: 0px;">&gt; 关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/84362</id>
-            <title>探索生活的设备并不需要完美：iPhone 的四年使用思考</title>
-            <link>https://sspai.com/post/84362</link>
-            <guid isPermaLink="false">https://sspai.com/post/84362</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 14 Nov 2023 03:30:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Matrix, 写作社区, 产品体验, 配色
-<br>
-<br>
-总结: Matrix是少数派的写作社区，主张分享真实的产品体验和有实用价值的经验与思考。文章代表作者个人观点，少数派仅对标题和排版略作修改。在文章中，作者分享了自己对于iPhone配色的观察和体验，认为配色是为了服务于产品的定位和稳定连贯的使用体验。 </div>
-                        <hr>
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>连续第四年换新，接连从深海蓝、远峰蓝、暗夜紫到今年的钛原色，我已经在四年中体验了 4 代 Pro 机型，却在今年才最终跟上了超大杯，今年也是我唯一一次心无旁骛地冲超大杯。</p><p>我深知，到了这个阶段，iPhone 不仅已经不可能做到让所有人都满意，更难做到让关注者都觉得年年有新意。但不可否认的是，连续使用新设备的这四年，也正是我真正开始认真了解、发现、探索数码设备与生活的四年。</p><h2>看起来简单，其实也是简单</h2><h3>眼球可能不重要</h3><p>（以下全部文字建立在长期裸奔的基础上，如果你是坚定的盖被子党，请自行忽略。）</p><p>每年换 iPhone 的时候，选择颜色对我来说总是最不用头痛的问题。本着让手机自动说话的原则，新晋主打配色总是我毫不犹豫的选择。但也不要因此就以为男人都是理性的动物，只要你找对了他们感兴趣的领域，颜狗也是一抓一大把。</p><p>在我从 12 Pro 连续进化到 15 Pro 的这些年，除了远峰蓝让我产生了绝对意义上的眼前一亮以外，深海蓝、暗夜紫和钛原色都让我这个颜狗有些失望。也许是因为苹果深知手机壳对于受众的不可或缺性，或者是一旦 Pro 走上了专业高端视觉体验感的路子就绝不重复回头的决心，每年的配色都在吸引话题上没输过，在引爆眼球上却没赢过。</p><figure class="image ss-img-wrapper image_resized" style="width: 317px;"><img src="https://cdn.sspai.com/2023/11/12/54b102bd25719e0c0c876618f35f5f55.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>只有这个颜色可以永远封神</figcaption></figure><p>既然不能引爆眼球，新配色到底带给了我们什么？某一日我突然翻到了自己曾经拍摄的深海蓝、远峰蓝的图片，发现相比与曾经用过的三个主配色，如今的钛原色在我的手里确实是一种质朴到不起眼的感觉（当然，高情商的说法应该叫做：低调奢华有内涵）。深海蓝很基础，远峰蓝很轻奢，暗夜紫走向深沉，而到了钛原色，则尽全力向男性审美靠拢（自然这一定是一个有失偏颇的论断），这与当年 OPPO 主打女性市场的定位让我有一种不谋而合的感觉。从营销的角度来说，近些年来配色的变化服务的都是产品的定位，从深海蓝开始，让自己大隐隐于市，用这种方法突显着 Pro 系列更加清晰与成熟的定位，这是一个只要在其位就必须做的商业选择题，即使这意味着牺牲了大家眼中的创新。所以，配色，大概以后更没有什么好纠结的了，毕竟，买配色就是买心情，看心情买就好了。</p><h3>手感一定很重要</h3><p>男人就是对一切高级的材料没有抵抗力，比如碳纤维，比如钛金属。</p><p>作为一个小手人士，甚至连正常尺寸的系列都无法完美单手握持，这就是我前些年从来不考虑超大杯的原因。到手暗夜紫中杯半年多，我才因为疫情解封在北京体验到了我派作者<a href="https://sspai.com/u/ov9kfy96/updates" target="_blank">珍妮</a>的暗夜紫超大杯。上手以后立刻明白，在重量已经到了一定水位线的基础上，痛苦的边际成本是递减的，于是我在没有任何新机发布信息的时候就决定了，要在今年换新的时候改冲超大杯。</p><p>然而痛苦的边际效应递减并不会真的意味着你就可以轻松忍受痛苦，即使习惯了「割」手，也始终无法适应每次拿出手机都一边倒的手持重量。但当我去店里提货，拿起钛原色超大杯的一瞬间，甚至感觉整个手掌走上了云端，轻巧无比。由于面积更大，重量分布更加均匀，甚至比 14 Pro 在手中的感觉更轻松。而如果你今年正巧换了 Pro 而非 Pro Max，那你更是一定会被它完美的手感所惊艳。钛金属的加入和边框的圆润，终于让我不用在拿不住和想要舒适大屏之间犹豫，这些最简单的改变带来的效果往往也最真实，最能触动人心。手感的优化对普通消费者来说甚至可能是决定选择的临门一脚。很开心，在如今这个非常难以触手可及的时代，我们还是享受到了触手可及的变化。</p><p>这些年来配色与外形设计的变化，并不是独立的，也不是稳定的，它总是为了服务于这一代产品的核心，和尽可能为消费者保持稳定连贯的使用体验。从圆用到方，再从方用到圆，很多老用户们还是能很自然地适应每一代的设计，这大约就是设计的精髓，稳定又新奇。</p><h2>变换视角观察世界</h2><p>影像，已经是近些年来 iPhone 逃不过的重点话题，我也非常注意在这里大处落墨，尽管我已经不记得，这个话题是从什么时候开始成为了手机讨论的主流。</p><h3>眼前的人像</h3><p>我只能算得上是一个高频但绝不专业摄影用户，水平仅限于在朋友圈招摇撞骗。平时无数次拿出手机瞎拍，但手里除了苹果和大疆以外再无其余任何摄影设备，所以我也是最容易被「苹果」教育的用户。早些年还在使用 iPhone 8 的时候还不懂怎么拍照，只能用人像模式来拍出一些简单虚化的照片。彼时对于拍照的理解，也仅限于把东西放在镜头里。这一时期，菜品总是成为我的拍照对象，从顶部拉一张人像速拍就是我那几年的 「代表作」。</p><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2023/11/12/55ebd0b43aa38ebc84decfb26319edd6.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2023/11/12/0da24b50df99213227ecc37f06d588b4.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>与水平相匹配的，是视角。受限于一种拍摄模式，我的视角总是固定在眼前一米左右的事物上，而且为了拍照好看，我已经习惯了从上帝视角观察事物，对于不符合我拍摄视角的事物几乎漠不关心。直到我使用下一个镜头。</p><h3>远近高低组合</h3><p>换手到 12 Pro 的当天，我决心要利用一下这个当时传说中最好的影像系统，趁着当时在南京东路约饭的机会，顺势走到外滩试一试。鉴于陆家嘴夜景实在是够长，当时习惯的人像模式不能把我的眼睛转换为画面，处于无奈我只能站在一个不太有人的地方，默默开始了超广角，于是，就有了这张照片。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/12/889e66b13a358dba86af835406497692.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>自己认为过于完美以至于做了很长时间桌面屏保</figcaption></figure><p>这不过是意外的尝试，但刚好有很好的效果，我第一次明白了不同的镜头是为了让我用不同的视角来观察世界的。近的远的，光鲜和黯淡的，并不是同样的记录方法，但每个事物都有成为美好记忆的可能。所以，我索性开始了刻意练习转换视角摄影。</p><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2023/11/12/a741d043b260c413c05f63d1145f9c7b.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2023/11/12/bc76fa8ff053cc21496074c0f8b47fbf.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>刻意练习是有魔力的，一年的使用让我几乎习惯了用不同的镜头组合发现生活中新的闪光点。然而人就是非常喜新厌旧的，好不容易觉得每个镜头都有自己的用处，又开始烦躁于这种「平衡也逐渐平庸」的感觉，似乎再这样下去，想要记录的冲动就会被这种平庸的感觉消耗殆尽了。好在，新机带来了转机。</p><h3>回归独立</h3><p>为了让我含辛茹苦的老姐抛弃用了三年多的 iPhone X，我被迫（其实是主动）冲了远峰蓝，把深海蓝降级给了她。除了已经好看到无法复制的色彩这一个优势外，其余升级几乎都是毫无波澜的，三倍镜的出现甚至开始让我犹豫和摇摆。第一次上手的时候，我是不愿意打开三倍镜的，因为这是一个被迫脱离自己舒适区的镜头。当你用二倍镜观察世界的时候，物体周遭的杂乱并不是缺点，没有很干净的环境也可以轻松出一张清晰的构图，就像是小说里描写风景的文字一样，有些凌乱不仅无伤大雅，还可以让氛围多一些特殊的味道。</p><p>三倍镜却不同，它的构图语言更像是小说里刻画人物的部分，也就是最难的部分。博主们都说三倍镜的故事感更强，上手难度大，直到我拍第一张长焦照片的时候才有了很深的体会。当我意识到，我不能在用简单组合的眼光来观察世界时，就转而开始学习如何回归到不远不近的角度，去「独立」地发现物体，去还原每一个干净的场景。因此即使适应镜头的切换需要时间，但我却不认为这个过程是痛苦的，这并不是什么常用焦段和零散焦段的区别，这只是你用不同的视角去观察世界和讲述故事的方法。</p><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2023/11/12/96448dad20ce59442354e8af16474b74.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2023/11/12/5605994db788eb45ad51f8e39bd93a52.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>2+3=5</h3><p>抢暗夜紫的过程异常顺利，即使晚进入五分钟都可以拿到首发第一天的现货，于是我有了更多的时间来开始进行「2+3 的实践」。</p><p>一切并不如想象中的完美，已经习惯了一年的三倍长焦，一下子又多了二倍的选项，就好像是家里来了一个久未谋面的远方亲戚，经常想不起来有这个人。使用的头半年，打开二倍裁切的时间可以说是少之又少，甚至对于三倍长焦的使用也不像之前一般熟练，暗夜紫荣膺我三年以来打开相机次数最少的设备，逐渐开始对于很多事物都失去了记录的兴趣。这一年间，我经常遇到无论哪个镜头都很难用的尴尬，照片删除率也一直居高不下，甚至潮州之旅中大部分的优秀素材全部来自于珍妮的贡献，虽然他由于过于手慢拿到新机的时间比我晚了一个多月。</p><p>这一年，也是我对 iPhone 怀疑最多的一年。我习惯了裸奔的割手，却没办法在横屏拍照的时候减轻小拇指的压力；也发现了当你拥有最多的武器库，难点就变成了不知道谁是那个最趁手的兵器。在不打大作游戏的情况下，iPhone 对我来说已经从融入生活逐渐变为慢慢走出视野，变成了一个无功无过的设备，普通到不会遗忘，也无法想起。</p><p>可是年年焕新已经买了，总不能不换，发布会上对于潜望式镜头和五倍镜的介绍让我重新拥有了看到 iPhone 12 系列发布会时的激动。相比于很多专业人士口中的「五倍并不是常用焦段，一般人的使用场景少到离谱」的说法，我开心的是我终于又「被迫」获得了一个重新观察事物的工具与视角，好不好用不知道，新的就已经足够让我惊喜，这大概也是身为社恐 E 人的优势：感受新事物的能力极强。</p><p>到手以后，我开始有史以来最正经的一次对长焦镜头的测试。站在学校门口，我对另一头的建筑进行了一次成功的比划，就有了下面这组照片。</p><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2023/11/12/92b92d298526fe642d0251b7175491df.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2023/11/12/f6b05d7337490e5b6420fc65bf1c423b.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这也不是多么了不起的作品，或者说，只是一张普通且朴素的照片，可对我的冲击是当下可见的。对于有些遥远的事物，我也获得了通过观察和拍摄局部来构建叙事的机会。能让人对熟悉的事物产生新的兴趣是不容易的，在习惯了两倍与三倍长焦的故事结构以后，感谢一个丝滑五倍长焦的出现让我有了一个方便好用的望远镜，开始了新一轮镜头下对世界的体验。</p><p>那么 iPhone 已经停止创新了吗？我不知道，我只知道一个人对世界的好奇心，用一万块换回来，能算的上是一笔划算的买卖。</p><h2>智能终端并不是个好聊的话题</h2><h3>不要完美</h3><p>用户体验实在是个很难评价的东西，当我们习惯了一套思维方式或者操作逻辑，只要其中有让你痛一下的地方都可以称之为「体验差」。手机已经从一个通话设备，变成了人们手中的智能终端，这意味着它必须智能，必须有花哨的功能，必须能像产品经理一样猜中心中最深的痛点并满足你。所以，我们把这些混淆成一句浓缩：它必须完美。</p><p>然而，这是错的，而且是没有必要的。</p><h3>要融入生活</h3><p>iPhone 和其他 phone 一样，都曾经或者正在「犯着追求完美的错误」。它们希望能给用户完美的使用体验，于是开始卷电池、卷快充、卷芯片、卷影像系统、卷带给用户的「小确幸」，或者卷所谓的让人眼前一亮。这些都没有错，但是也真的没有对到哪里去。</p><p>不如我们回归到手机还只是手机的那个时代，它满足的是随时随地语音交流的需要，是一个因为刚需而融入生活的东西。而现在，已经变成智能终端的手机与生活的割裂感却越来越强，在单一的领域走向极致，忘记了总归是要回到生活里，回到我们的手上。</p><p>曾经我也用现在看来简直离奇的产品经理的思维来思考手机这件事，觉得只有满足了我们对于不同场景的使用痛点，才是好的智能终端，而现在我终于能够明白，满足痛点到头来也不过只是个能让人叫好的工具，融入日常的生活才能够真的成为一个优秀的智能终端。</p><p>既然是融入，就要足够自然，足够无感，让它可以成为你随时可以拿起的工具，也可以随时变成一个想不起来也不要紧的设备。幸运的是，即使近几年已经骂声一片，iPhone 也没有在融入生活这条路上跑偏。没什么大用的息屏显示，随时随地可用的小组件，越来越花哨的 Name 与 Airdrop，不仅仅是为了营造什么新的卖点，更多地是为了让它在我们的生活中扮演更自然的人物角色，成为一个我们和他人，和世界的交流载体。我仍然能听到身边有人说 iPhone 的拍照最为简单易用，看到有很多大爷大妈在 Today at Apple 里开启傻瓜式思维的使用方式学习，还好，它还是在努力地贴近人，贴近人的生活，这在我看来也是一代又一代 iPhone 最打动人的地方。</p><h3>牙膏怎样才能挤出来</h3><p>这是一趴纯粹的题外话，或者说，是边缘的话。</p><p>作为一个经历了两个主机厂的员工（其中一家还是行业天花板），我已经非常明白，搞硬件就像治国，任何一个我眼中的小问题都不是那么轻易就可以解决的小问题，要考虑的技术问题，体验平衡，没有一个是简单一个「改」就能完成的。前些年我们习惯了算力与技术的突飞猛进，忘记了大多数时候这并不是常态。祖传的鬼影能改吗？当然能，改了会带来什么影响，我们不知道，苹果自己可能也不知道，所以它选择不改，让我们继续谩骂。</p><p>曾经的我会认为这是品牌的傲慢，可真的作为参与者见过了一个硬件产品在一代一代设计和迭代过程中需要解决的技术与商业难题以后，我可以理解，一些品牌总是在解决这个问题和解决那个问题之间做着它自己的选择。同样的，作为消费者，我们也拥有在这个品牌和那个品牌之间做选择的权利，我们按照自己的个性做属于自己的选择，苹果也一样，就当作是个有个性的人呗！我喜欢这样的人，你不喜欢，也可以大方的走到你喜欢的阵地和人群中去。</p><p>那么，曾经大家最为称道的创新呢？</p><p>挤牙膏已经是如今对苹果最时髦最有特点的评价。我不认为牙膏好挤，技术储备池和牙膏管其实是刚好相反的两面。当一家硬件公司真的只剩下最后一些可用的技术储备， 那最有可能的做法是把技术都堆上去，拿到一次占领市场山头的机会，而当一家公司有充分的技术储备时，才有权利决定是开闸放水还是仅仅打开一个水龙头。一家科技公司在发展壮大的历程中需要考虑和抉择的因素太多，锤子把很多功能都做到了深入人心，但一不小心就错过了手机全面转型为摄影设备大潮流，也没有在商业和供应链管理中经营好自己的话语权，只能成为大家心中白月光式的遗憾。</p><p>一个产品如果什么都好，它就会消失。</p><p>一个公司如果什么都好，它就会倒闭。</p><p>iPhone 显然已经不是苹果如今最受重视最认真投入资源的那个项目，但我能看到苹果依然在非常小心且认真地为 iPhone 做每一个发展过程中的决策，这可能才是真正值得我们敬佩，且当前依然很难被模仿和抄作业的地方。</p><h2>iPhone 就是生活的设备</h2><p>我家在这几年，已经从一个苹果家庭，变成了一个精致苹果家庭。</p><p>珍妮由于锤子停产，被迫转入了 iPhone 阵营，如今已经开始跟我年年焕新。珍妮的老婆诗情因为没有长焦镜头，过去几年时常在拍照竞赛中选择放弃，终于在今年冲上超大杯。我的姐姐终于解锁了拍照的精髓，而姐夫也开始更高频的拿起手机去拍一些从前所谓的「我不用拍照」的瞬间。最有趣的是，我的外甥今年也因为拍照没有长焦，以旧换新了自己的苍蝇绿而成功转身奶绿上岛，开始了自己的二倍裁切长焦生涯。家里的同辈们因为一部 iPhone，一个接一个变成生活的记录者，有人开始了周更 vlog，有人拍出了完美的落叶，有人终于不用在颜值手感和续航之中二选一，有人开始更多的让手机参与生活里的种种细节。我把这个过程，形容为从苹果家庭转身成为精致苹果家庭的过程，而这一切的背后，除了有我一张能带货的嘴以外，就是因为我们发现这是一个能够真正融入和贴合生活的设备，是我们重新开始把眼光和视角转移到这个世界是手里最合适的武器。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/12/081becb9d764d14bf75494f4cbd51871.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>看看我 13 岁的外甥的摄影水平</figcaption></figure><p>探索生活的设备，和生活本身一样，并不需要完美。</p><p>只需要，回到生活本身。</p><p style="margin-left: 0px;">&gt; 关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>
