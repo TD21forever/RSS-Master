@@ -5,6 +5,305 @@
         <link>https://sspai.com/matrix</link>
         
         <item>
+            <id>https://sspai.com/post/84373</id>
+            <title>自由输入法 RIME 简明配置指南</title>
+            <link>https://sspai.com/post/84373</link>
+            <guid isPermaLink="false">https://sspai.com/post/84373</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 16 Nov 2023 03:00:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Matrix, 文章, RIME, 输入法
+<br>
+<br>
+总结: Matrix是少数派的写作社区，推荐了一篇关于RIME输入法的文章。文章介绍了为什么选择RIME作为输入法的原因，以及RIME的特性和解决的问题。 </div>
+                        <hr>
+                    
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p><a href="https://sspai.com/post/55699" target="_blank">原文首发于 2019 年 07 月 16 日。</a>是我在少数派第一篇发文，也是我首次尝试使用 Markdown 语法写作。漫长的几年间，有过配图失效，有过读者大量私信，有空时都一一解决了。偶然间，发现这篇文章居然列入了搜索引擎的第一页。阅读量也达到近 15 万，而且也发现文章中分享的皮肤配色方案在一些高级用户的配置方案中流传。</p><p>今年，RIME 突然更新了 0.15.0 版本，回望这篇文章，生涩的语法、混乱的结构、不甚了了的陈述，不仅显得陈旧和落伍，而且不少已经失效了。同时，几年间对 RIME 的折腾，有了许多新的收获，也解决了一些之前未能解决的问题。</p><p>这期间，也并非没有尝试过成品输入法。但我发现，这些成品输入法总是不能如意。比如支持单行模式的输入法只剩下久未更新的手心输入法和 QQ 输入法。百度输入法和搜狗输入法新版本也相继取消了「以词定字」的功能。广告的烦恼、隐私的担忧、功能的缺失……相信成品输入法在「少数派」手里，总归不够趁手和如意。</p><p>这使我愈发觉得，一个自由的、开源的、安全的、如我心意的输入法，是多么的难得。</p><p>于是，我决定，把这篇文章推倒重构，希望能够因此帮助更多的人。便觉幸甚。</p><h2>为什么选择 RIME</h2><p>输入法是工具。工具，唯趁手、唯如意。趁手、如意，且自由、安全，这样的输入法，无它，唯 RIME 耳。</p><p>市面上的成品输入法，你所能定制的自由，被框限在「设置」标签里。有别于此，RIME 突出的就是自由的特性。你需要什么功能，需要什么输入方案，输入细节上有什么与常人不同的习惯和需求，它几乎都能满足。即使 RIME 同样有着种种不足和缺点，但不可否认，它，就是目前唯一能实现你几乎所有输入个性化定制需求的最好选择。</p><p><strong>自由。这就是我选择 RIME 的唯一原因。</strong></p><p>如果你崇尚自由，着意隐私，我相信，RIME 不会辜负你的选择。</p><p>但也正是因为 RIME 的高度自由，引入的高度个性定制化，使得它有着很高的准入门槛。定制困难，劝退了绝大多数人。</p><p>因此，我希望，借由分享自己初步成型的配置方案，并介绍定制方法，以此帮助有自由输入法需求的朋友，首先快速上手，然后再慢慢学习精进，精心雕琢，使它成为自己想要的样子。</p><h2>RIME 的特性</h2><ol><li>高度自由可定制。</li><li>全平台兼容：Windows、macOS、Linux、Android。</li><li>全输入方案兼容：<ul><li>双拼：包括小鹤、自然码、微软在内的所有双拼方案，支持小鹤形码辅助。</li><li>全拼、注音、五笔、仓颉……市面上能见到几乎所有的方案。</li><li>市面上完全见不到的，只属于个人的自定方案。</li><li>标点自定、模糊音、词语联想、个人词库……该有的功能都有。</li></ul></li><li>高准入门槛。<ul><li>无图形界面，自定全靠代码。</li><li>配置繁琐，容易出错。</li></ul></li></ol><h2>本文想要解决的问题</h2><p>RIME 我对它的定义是「自由」。如果仅仅只是分享一套已经配置好了的方案，则失去了用户随心所欲「自由」定制的意义。因此，本文希望从如下几个方面的痛点为引子，作出简明指南。</p><ol><li>单行模式。</li><li>以词定字。</li><li>二三候选。</li><li>词库制作。</li><li>符号自定。</li><li>短语自定。</li><li>方案配置。</li><li>多端同步。</li></ol><p>本文将以 Windows 平台小鹤双拼配置方案为例。其它平台或方案，配置方法共通，请自行举一反三。本文默认读者具有一定水平的计算机实操能力和简单代码理解能力。如遇困难与问题，欢迎评论区或私信友好交流。</p><h2>开始安装 RIME</h2><p><a href="https://rime.im/download/">RIME 下载及安装</a></p><p>在此页面取得适合你系统的 RIME 输入法。分别为以下发行版：</p><ul><li>【中州韻】 ibus-rime → Linux</li><li>【小狼毫】 Weasel → Windows</li><li>【鼠鬚管】 Squirrel → Mac OS X</li></ul><p>RIME 默认使用朙月拼音作为初始方案，该方案等同于全拼输入法。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/7b84924a5eb8e2e02bf6fcaa739dbbf0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>小狼毫安装选项</figcaption></figure><p>安装时，请另行指定「用户文件夹」：<code>~\Rime</code>。下文所称「用户文件夹」均指此文件夹。</p><p>安装完成后，原则上，你已经可以正常使用 RIME 了。只不过此时的 RIME 更像是未经装修的毛坯房，能用，但不好用。</p><p>此时，你如果从未接触过 RIME ，建议鼓捣一番，了解它独特的方案选单切换方式。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/2de31544b54f6352102b8b307ec162bd.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Ctrl+` 或者 F4 是默认的选单快捷键</figcaption></figure><blockquote><p>按组合键 <code>Ctrl+顿号</code> 或 <code>F4</code> 键唤出输入方案选单，由此调整 Rime 输入法最常用的选项。</p></blockquote><h2>学习基础知识，为配置做准备</h2><p>现在，打开 <a href="https://github.com/rime/home/wiki/CustomizationGuide">RIME 定制指南</a>，详细阅读并学习。</p><p>此时，你首先需要知道的要点是，接下来，你对方案进行的任意一项修改，都需要通过「<strong>重新部署</strong>」来使其生效。</p><blockquote><p><strong>重新部署的操作方法</strong></p><p>【中州韵】点击输入法状态栏上的 ⟲ (Deploy) 按钮，或：如果找不到状态栏，在终端输入以下命令，可触发自动部署： <code>touch ~/.config/ibus/rime/; ibus restart</code></p><p>【小狼毫】1. 开始菜单→小狼毫输入法→重新部署；2. 当开启托盘图标时，右键点选「重新部署」</p><p>【鼠鬚管】在系统语言文字选单中选择「重新部署」</p></blockquote><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/8e5952cb3ad35d9a98b61d6077f192a1.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Windows 右击系统托盘图标重新部署</figcaption></figure><p>RIME 的配置文件、输入方案、符号集合及词库文件，均为特定格式的文本文档。分别为：</p><blockquote><ul><li>〔全局设定〕 <code>default.yaml</code></li><li>〔发行版设定〕 <code>weasel.yaml</code></li><li>〔预设输入方案〕 <code>&lt;方案标识&gt;.schema.yaml</code></li></ul></blockquote><p>此外，还有记录用户输入习惯的文件：</p><blockquote><ul><li>※〔用户词典〕 <code>&lt;词典名&gt;.userdb/</code> 或 <code>&lt;词典名&gt;.userdb.kct</code></li></ul></blockquote><p>由于随着软件的更新，这三个预设配置文档有可能被新版文件所覆盖。因此，RIME 引入了一种类似于「补丁」的定制方式。如上的三个「预设配置文档」，分别对应者如下三个「用户配置文档」：</p><blockquote><ul><li>※〔用户对全局设定的定制信息〕 <code>default.custom.yaml</code> 用于设置输入法方案、切换输入法快捷键、中英文切换、翻页等等。</li><li>※〔用户对发行版设定的定制信息〕 <code>weasel.custom.yaml</code> 用于设置托盘图标、指定软件默认英文输入、候选词横竖排列、界面布局、配色方案等等。</li><li>※〔用户对预设输入方案的定制信息〕 <code>&lt;方案标识&gt;.custom.yaml</code> 用于设置具体的输入方案。</li></ul></blockquote><p>所有对如上三个 <code>custom</code> 配置文档的修改，最终都会以「补丁」的方式映射汇入到 <code>default.yaml</code> 、<code>weasel.yaml</code>、和<strong> </strong><code>&lt;方案标识&gt;.schema.yaml</code> 三个文本文档中，经由重新部署而生效。</p><p>修改如上配置文档，请配合你所习惯使用的超级文本编辑器（例如 Emeditor），确保所配置的所有文本文档，均以 <code>UTF-8 无签名 </code>编码，使用 <code>LF 换行符</code> 。并在文档中，合理使用换行符、空格及制表符，以确保配置代码对齐。</p><p>注意：如上标注了星号 ※ 的文件，均含有用户定制信息，请注意备份。</p><p>最后，在编辑配置文档时，通常采用「注释」的方式，来对某一项具体功能或某一条具体配置进行「开关」。例如：</p><pre class="language-"><code>key_binder:
+  select_first_character: "bracketleft" # lua 选词快捷键，左方括号选前字，此行代表反注释开启
+  # select_last_character: "bracketright" # lua 选词快捷键，右方括号选后字，此行代表注释关闭</code></pre><p>如上，是「以词定字」功能的语句。第二条句首的 <code>#</code>，代表该条配置代码被「注释」成说明文字，不再生效。亦即该条配置代码所对应的功能被「关闭」。反之，第一条，则代表配置代码正常生效。亦即所对应的功能被「开启」。</p><p>利用此方法，注释与反注释配置文件中的相关代码语句，开启和关闭相关功能，以此达到灵活定制的效果。</p><h2>配置输入方案</h2><p>在此处下载：<a href="https://github.com/rime/plum#packages">官方提供的输入方案</a></p><p>得到输入法方案配置文档 <code>double_pinyin_flypy.schema.yaml</code>。</p><p>将方案配置文档放入用户文件夹。</p><h3>配置方案选单</h3><p>在 <code>default.custom.yaml</code> 配置文档中添加如下语句：</p><pre class="language-"><code>Patch：
+  schema_list:
+    -schema：double_pinyin_flypy </code></pre><p>重新部署后，按 <code>F4</code> 方案选单中，就有「小鹤双拼」可选使用了。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/d100f4ff4564c5c0c8fe589f22a90236.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>方案菜单</figcaption></figure><p>当需要更多输入方案时，另起一行，继续添加相应的输入方案即可：</p><pre class="language-"><code>Patch：
+  schema_list:
+    -schema：double_pinyin_flypy 
+    -schema：flypy # 注意，此处方案名应与方案配置文档中 schema_id 字段相同。</code></pre><p>也可以在这里，利用<a href="https://github.com/rime/plum">东风破</a>组件，快速安装输入方案。</p><p>请注意：<code>Patch：</code> 语句仅用于 <code>custom.yaml</code> 配置文档，整个配置文档有且只能有一个。请合理使用代码缩进进行对齐。</p><h3>配置输入习惯</h3><p>在 <code>default.custom.yaml</code> 配置文档中配置如下输入习惯。</p><ul><li>配置方案选单快捷键：</li></ul><pre class="language-"><code>Patch:
+  switcher:
+    hotkeys:
+      - F2 # 配置 F2 为方案菜单快捷键</code></pre><ul><li>配置候选项数量：</li></ul><pre class="language-"><code>Patch:
+  menu:
+    page_size: 5 # 配置候选项数量为 5 个</code></pre><ul><li>配置候选项翻页按键：</li></ul><pre class="language-"><code>Patch:
+  key_binder:
+    bindings:
+      - { when: has_menu, accept: period, send: Page_Down } # 句号向下翻页
+      - { when: has_menu, accept: comma, send: Page_Up } # 逗号向上翻页</code></pre><ul><li>配置符号表：（符号表 symbols 制作在后文）</li></ul><pre class="language-"><code>Patch:
+  punctuator:
+    full_shape:
+      __include: symbols:/punctuator/full_shape # 配置全角符号表
+    half_shape:
+      __include: symbols:/punctuator/half_shape # 配置半角符号表</code></pre><ul><li>配置中英文切换快捷键：4 种按键动作代码在注释中作了详细说明，可以根据需要自由配置</li></ul><pre class="language-"><code>Patch：
+  ascii_composer:
+    switch_key:
+      Shift_L: commit_code # 按左 shift 键，已输入字符上屏，同时切换为英文输入
+      Shift_R: inline_ascii # 按右 shift 键，切换为英文输入，同时保留已输入字符继续输入，回车上屏
+      Control_L: noop # noop 指无操作
+      Control_R: noop
+      Caps_Lock: clear # 按大小写切换键，清除已输入字符，同时切换为英文输入</code></pre><ul><li>配置软件默认中英文模式：这个功能非常舒服，能配置输入法在常用软件中的默认中英文状态。例如：配置在 PS 中默认为英文状态；在 CMD 命令行中默认为英文状态。你可以配置 RIME 在任意软件中的中英文状态。该功能在另外一个配置文件中 <code>weasel.custom.yaml</code>：</li></ul><pre class="language-"><code>Patch:
+   # 设置应用默认中英文模式
+    app_options: # 设置为在以下列表软件中，RIME 默认为英文模式
+      totalcmd64.exe:{ascii_mode: true}
+      cmd.exe:{ascii_mode: true}
+      photoshop.exe:{ascii_mode: true}</code></pre><p>其它更多输入习惯配置，请参考<a href="https://github.com/rime/home/wiki/CustomizationGuide#%E8%BC%B8%E5%85%A5%E7%BF%92%E6%85%A3">输入习惯</a>。</p><h3>配置个性化输入方案</h3><p>定制一份全新的输入方案，是 RIME 的进阶技巧。需要理解「输入引擎 Processors」、「翻译器 Translators」、「过滤器 Filters」、「拼写运算」、「码表」、「词典」等一系列系统知识。</p><p>有能力的朋友，可以在此处参考 <a href="https://github.com/rime/home/wiki/RimeWithSchemata#%E7%88%B2%E5%95%A5%E9%80%99%E9%BA%BC%E7%B9%81">《Rime 輸入方案設計書》</a>，进行完全体的个性化定制。</p><p>作为普通用户，更建议基于官方输入方案进行细节定制，或者获取其它高级用户制作的输入方案。</p><p>此处以我个人定制的输入方案 <code>flypy.schema.yaml</code><sup class="ss-footnote" href="" title="此方案受到 LufsX 这位高阶用户所分享方案的大量启发，详见参考资料链接。">1</sup>（基于小鹤双拼输入方案定制）为例，说明几处关系输入体验和输入习惯的修改位置和修改方法。</p><p>阅读整张输入方案文档。注意几个重要的字段：</p><ol><li>Engine：输入引擎，其下的组件关系各个功能的实现：<ul><li>Processors 组件。引擎核心，处理按键消息。利用选词扩展实现「以词定字」功能，即在此组件下配置。</li><li>Translators 组件。翻译器，完成编码到文字的翻译。类似「动态日期时间」、「符号转换」、「用户自定义词典」等功能，即在此组件下配置。</li><li>Filters 组件。过滤器，过滤重排候选项，进入候选序列。「emoji」、「简繁转换」、「去重」、「单字优先」、「长句优先」等功能，即在此组件下配置。</li></ul></li><li>Dictionary：字典，亦即词库。</li><li>Custom_phrase：用户自定义短语。</li></ol><h3>利用脚本扩展实现「以词定字」、「二三候选」、「动态日期时间输入」、「长句优先」等功能</h3><h4>分别安装：</h4><ol><li><a href="https://github.com/hchunhui/librime-lua">RIME librime-lua 脚本扩展</a></li><li><a href="https://github.com/BlindingDark/rime-lua-select-character">RIME 以词定字 lua 扩展</a></li><li><a href="https://einverne.github.io/post/2021/09/rime-plugin-lua-octagram.html">动态日期时间输入 lua 扩展</a></li></ol><h4>安装方法：以「以词定字」lua 扩展为例：</h4><ol><li>下载 <code>select_character.lua</code> 脚本并放到 <code>用户资料夹/lua/</code> 目录下。</li><li>修改（若不存在则新建）<code>～用户文件夹/rime.lua</code>，在合适的位置添加一行：<code>select_character = require("select_character")</code>。</li><li>修改输入方案配置文件 <code>flypy.schema.yaml</code>，在 <code>engine/processors:</code> 下添加一项：<code>- lua_processor@select_character</code>。</li><li>注意，不同的 lua 扩展脚本经由不同的输入引擎组件生效。例如上方「以词定字」扩展组件经由 <code>processors</code> 组件生效，因此添加在 <code>engine/processors:</code> 下。「动态日期时间输入 lua 扩展」经由 <code>translators</code> 翻译器组件生效，则应该添加在 <code>engine/translators:</code> 下。因此，你首先需要知晓，你希望加载的 lua 扩展经由那个组件生效。通常来说，扩展详情页面，作者会做介绍。</li><li>重新部署即可生效。</li><li>如需其它 lua 扩展，实现更多个性化功能，请自行根据扩展作者说明文档进行配置。</li></ol><p>此处配置较为困难，为方便理解，还是举例说明：</p><pre class="language-"><code>engine:
+  processors: # 输入引擎核心
+    - lua_processor@select_character # lua 以词定字选词扩展
+  translators: # 输入引擎翻译器
+    - lua_translator@date_translator # 动态日期时间输入
+    - lua_translator@unicode_input # Unicode 输入支持
+    - table_translator@custom_phrase # 用户自定义词典
+  filters: # 输入引擎过滤器
+    - lua_filter@long_phrase_first # 最长词组和单字优先（此扩展 3 条规则中，只应有 1 条规则生效）
+    # - lua_filter@single_char_first # 单字优先（其他 2 条规则相应被注释）
+    # - lua_filter@single_char_only # 只显示单字（其他 2 条规则相应被注释）</code></pre><p>同样的，<code>rime.lua</code> 配置文件也举例说明：</p><pre class="language-"><code>-- select_character_processor: 以词定字
+-- 详见 lua/select_character.lua
+select_character = require("select_character")
+
+-- date_translator: 动态日期时间输入
+-- 详见 lua/date_translator.lua
+date_translator = require("date_translator")
+
+-- long_phrase_first: 最长词组和单字优先
+-- 详见 lua/candidate_sorting/long_phrase_first.lua
+long_phrase_first = require("candidate_sorting.long_phrase_first")
+
+-- single_char_first: 单字优先
+-- 详见 lua/candidate_sorting/single_char_first.lua
+single_char_first = require("candidate_sorting.single_char_first")
+
+-- single_char_only: 只显示单字
+-- 详见 lua/candidate_sorting/single_char_only.lua
+single_char_only = require("candidate_sorting.single_char_only")
+
+-- unicode_input: Unicode 输入
+-- 详见 lua/candidate_sorting/unicode_input.lua
+unicode_input = require("unicode_input")</code></pre><p>安装遇到困难的。可以下载文末分享的相应扩展包。解压后放入「用户文件夹」，重新部署后可以生效。</p><p>在 <code>flypy.schema.yaml</code> 配置文档中，<code>processors</code> 核心组件下添加如下语句：</p><pre class="language-"><code>  engine：
+    processors：
+      - lua_processor@select_character # lua 选词扩展，以词定字</code></pre><p>同时，在 <code>default.custom.yaml</code> 配置文档中，添加如下语句，指定以词定字的按键：</p><pre class="language-"><code>  Patch:
+    key_binder:
+      select_first_character: "bracketleft" # lua 选词以词定字快捷键，左方括号选前字
+      select_last_character: "bracketright" # lua 选词以词定字快捷键，右方括号选后字</code></pre><p>在 <code>flypy.schema.yaml</code> 配置文档中，<code>translators</code> 翻译器组件下添加如下语句：</p><pre class="language-"><code>engine:
+  translators:
+    - lua_translator@date_translator # 动态日期时间输入
+    - lua_translator@unicode_input # Unicode 输入支持
+    - table_translator@custom_phrase # 用户自定义词典</code></pre><p>在 <code>flypy.schema.yaml</code> 配置文档中，<code>filters</code> 过滤器组件下添加如下语句：</p><pre class="language-"><code>engine:
+  filters:
+    - simplifier@emoji_suggestion # emoji
+    - simplifier@traditionalize # 简繁转化
+    - uniquifier # 去重
+    # - lua_filter@long_phrase_first # 最长词组和单字优先。开启哪个功能，取消哪行注释
+    # - lua_filter@single_char_first # 单字优先
+    # - lua_filter@single_char_only # 只显示单字</code></pre><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/290dcf566bd859def1f6c526568b21da.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>扩展能够实现不同的个性化输入模式</figcaption></figure><p>在 <code>flypy.schema.yaml</code> 配置文档中，<code>speller</code> 组件下添加如下语句，配置模糊音，根据个人容易出错的拼音编码灵活设置。模糊音设置得太多，将导致重码率上升，请根据个人实际情况配置。如果你使用双拼，建议尽量不设或少设模糊音。比如我只设置了 ang&lt;-&gt;an 和 eng&lt;-&gt;en 两组我最容易出错的韵母。</p><pre class="language-null"><code>    # 模糊音区域
+    # 依据个人需要注释和反注释
+    # 格式：键盘的输入码 -&gt; 转化后的输入码
+
+    # 声母部分
+    # - derive/^([z])h/$1/ # z -&gt; zh
+    # - derive/^([z])([^h])/$1h$2/ # zh -&gt; z
+    # - derive/^([c])h/$1/ # c -&gt; ch
+    # - derive/^([c])([^h])/$1h$2/ # ch -&gt; c
+    # - derive/^([s])h/$1/ # s -&gt; sh
+    # - derive/^([s])([^h])/$1h$2/ # sh -&gt; s
+    # - derive/^l/n/ # n -&gt; l
+    # - derive/^n/l/ # l -&gt; n
+    # - derive/^r/l/ # l -&gt; r
+    # - derive/^r/y/ # y -&gt; r
+    # - derive/^hu$/fu/ # fu -&gt; hu
+    # - derive/^fu$/hu/ # hu -&gt; fu
+
+    # 韵母部分
+    - derive/([^iu])([a])n$/$1$2ng/ # ang -&gt; an
+    - derive/([^iu])([a])ng$/$1$2n/ # an -&gt; ang
+    - derive/([e])n$/$1ng/ # eng -&gt; en
+    - derive/([e])ng$/$1n/ # en -&gt; eng
+    # - derive/([i])n$/$1ng/ # ing -&gt; in
+    # - derive/([i])ng$/$1n/ # in -&gt; ing
+    # - derive/([i])an$/$1ang/ # iang -&gt; ian
+    # - derive/([i])ang$/$1an/ # ian -&gt; iang
+    # 由于小鹤双拼方案此对韵母在相同按键，无需 uang &lt;-&gt; iang ，其他双拼方案如有需求，请按格式修改</code></pre><p>注意：因为此处配置了独立的输入方案 <code>flypy.schema.yaml</code> ，与默认输入方案不冲突，不会因为更新的原因导致配置文件被覆盖。因此，此处没有使用 <code>flypy.custom.yaml</code> 补丁文件，而是直接在输入方案配置文件中进行配置，因此没有 <code>Patch:</code> 语句。下同。</p><h2>制作和配置词库</h2><p>词库，是除开输入习惯之外，影响输入体验的重中之重。</p><p>配置词库有两条思路：</p><ul><li>用时间慢慢养好一个词库</li><li>制作大而全兼容并包的词库</li></ul><p>两种方式各有优劣。</p><p>自己养词库需要较长时间。优点在于非常贴合输入习惯、生活习惯和工作需求，养好的个人词库无比丝滑。</p><p>大而全词库虽然能兼容日常使用。但往往因为大而全导致候选项混乱，特别是候选项自学习阶段，混乱排序的候选项非常影响输入体验。</p><p>我倾向于慢慢培养个人词库。同时制作细分词库来确保词库养成期间的输入体验和工作需求。这也非常像搜狗输入法的细胞词库的方案。</p><h3>制作一个词库</h3><p>鉴于大部分朋友的需求，本例子以拥有近 40 万词条的「搜狗标准词库」为基础进行制作。你可以根据自身需求，选择不同的词库蓝本进行制作。</p><ul><li>下载<a href="https://pinyin.sogou.com/dict/detail/index/11640">搜狗标准词库</a>，得到「搜狗标准词库.scel」文件。</li><li>下载<a href="https://github.com/studyzy/imewlconverter">深蓝词库转换</a>。深蓝词库转换需要 <a href="https://dotnet.microsoft.com/zh-cn/download/dotnet/6.0">.net 6.0</a> 支持。</li><li>按照下图所示，进行词库转换。</li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/175b75a7fecede3f6509ed3b8e289a6c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>将得到的 .txt 格式文本文件，改名为 <code>&lt;词库名&gt;.dict.yaml</code>。并使用文本编辑器打开。<br />由于转换的词库带有词频。如下图：</li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/94aad119baba29b6c5a4375d6fcfe5f0.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>转换得到的词库带有词频</figcaption></figure><p><br />而我们需要不带词频的词库文件。使用文本编辑器的搜索替换功能，将所有词频删除。<br />得到编码格式为：<code>词组+tab+拼音串1+空格+拼音串2+空格+拼音串3</code> 的词库文件。如下图：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/b582d883ebb03b18cee131f12b23344d.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>删除词频之后的词库</figcaption></figure><p>加入词库文件头：</p><pre class="language-"><code> # 搜狗标准词库 40万条 由深蓝转换 无词频
+---
+name: sougou_standard  # 词库名
+version: "2023.11.09"  # 词库版本
+sort: by_weight # 排序依据：按照权重
+...
+
+啊啊啊    a a a
+阿埃二氏病变    a ai er shi bing bian</code></pre><p>按照前文所述的文本文件编码格式「 UTF-8 无签名」保存。</p><p>在「用户文件夹」新建 <code>～用户文件夹/dicts</code>，将词库文件导入该文件夹。</p><p>至此，基于搜狗标准词库的 RIME 词库就制作完备了。</p><h4>一些不错的开源词库</h4><ul><li><a href="https://github.com/rime-aca/dictionaries">GitHub - rime-aca/dictionaries: Rime詞庫</a></li><li><a href="https://github.com/Iorest/rime-dict">GitHub - Iorest/rime-dict: RIME 词库增强</a></li><li><a href="https://github.com/thunlp/THUOCL">GitHub - thunlp/THUOCL: THUOCL（THU Open Chinese Lexicon）中文词库</a></li><li><a href="https://github.com/Chernfalin/SuperRimeDict">GitHub - Chernfalin/SuperRimeDict: SuperRime拓展词库 for 朙月拼音&amp;Win10拼音版(700万词-含BetterRime)</a></li></ul><h3>理解 RIME 的词库架构</h3><p>RIME 允许扩充很多词库。词库架构如下图所示：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/fc1c9de3413dee1f2181d8f73ad4ca15.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>RIME 词库架构</figcaption></figure><p>主词库与扩充词库之间，是集合的关系。因此，调用主词库就相当于同时调用了 ABCD 四个扩充词库。</p><p>你可以理解为，RIME 调用主词库，主词库再调用各个扩充词库。</p><p>这非常方便。使得分门别类制作「细胞词库」成为可能。</p><p>并且可以灵活运用 RIME 注释关闭的特点，根据工作语境、生活语境、娱乐语境，定制词库调用。比如工作时调用「工作词库」「行业专业词汇词库」；娱乐时调用「游戏专属词汇词库」……</p><p>这和百度输入法的「工作模式&amp;娱乐模式」有异曲同工之妙。不过，RIME 还没有智能判断语境自动切换模式的功能。如果想要智能切换，需要配合第三方自动化工具实现。</p><h3>配置词库</h3><p>基于 RIME 的词库架构，我们可以按两条思路配置词库：</p><ul><li>制作一个含有词条的通用词库，并在这个词库中加入扩充词库。</li><li>制作一个空词库，并在这个词库中加入扩充词库。</li></ul><p>基于对词库调用逻辑关系的清晰明快以及如上根据不同语境调用词库的需求两个方面的考虑，我采用了第二种方案。</p><p>在「用户文件夹」新建文本文档，并命名为 <code>extended.dict.yaml</code>，作为主词库。</p><p>编辑如下文件内容，完成主词库对扩充词库的调用：</p><pre class="language-"><code> # Rime extended dictionary
+ # encoding: utf-8
+ ---
+ name: extended
+ version: "2023-11-10"
+
+ import_tables:
+  - dicts/sougou_standard # 搜狗标准词库
+  - dicts/A # 扩充词库 A，此处 A 应为实际词库名称
+  - dicts/B # 扩充词库 B，此处 B 应为实际词库名称
+ ...
+  # 如果是带有词条的词库，请在这里，按照编码格式添加词条</code></pre><p>打开输入方案配置文档文件 <code>flypy.schema.yaml</code>，在 <code>translator</code> 组件下添加如下语句，完成输入方案对词库的调用：</p><pre class="language-"><code>translator:
+  dictionary: extended # 此处 extended 为主词库名称</code></pre><p>如果同时使用其它输入方案，则在其它输入方案配置文档文件的相同位置，添加相同的语句。</p><h2>制作和配置符号表</h2><p>自定义符号也是影响输入体验的一个重要方面。比如各方面表现都不错的微软输入法，恰恰不能支持自定义符号。对于像我这样，学习并且已经开始使用 Markdown 语法进行写作的人来说，如果不能自定义符号，只能疲于奔命地在中英文之间切换，或者在不同的输入法之间切换。</p><p>RIME 支持自定义符号，并且支持反斜杠输入特殊符号、颜文字。在旧的那篇文章里，我没有找到双拼模式下反斜杠模式的实现方法。现在，它实现了。</p><p>由于符号表涉及非常多符号，建议使用官方符号表为蓝本进行修改。或者使用已经制作好的符号表，再根据个人的实际需求，进行码表修改。</p><p>此处以名称为 <code>symbols.yaml</code> 的符号表为例。</p><p>打开这张符号表，发现其分为两个部分，全角符号部分及半角符号部分。如下图</p><pre class="language-"><code>punctuator:
+  full_shape:
+    ",": { commit: ， }
+    ".": { commit: 。 }
+  half_shape:
+    ",": { commit: ， }
+    ".": { commit: 。 }
+    "[": "「"
+    "*": ["*", ＊, ·, ・, ×, ※, ❂]</code></pre><p>其中需要注意的是如下两种语法，分别是:</p><ol><li><code>"[": "「"</code></li><li><code>"*": ["*", ＊, ·, ・, ×, ※, ❂]</code></li></ol><p>第一种语法是一一对应的关系，按下「左方括号」，直接上屏唯一项「左直角引号」。</p><p>第二种语法是一对多的关系，按下「星号」，弹出候选项选单，通过选中候选项，上屏相应符号。</p><p>配置好自定义符号后。需要在输入法案中，指定调用这张符号表。</p><p>打开 <code>flypy.schema.yaml</code> 输入方案，找到并修改如下代码：</p><pre class="language-"><code>punctuator:
+  import_preset: symbols # 修改此处 symbols 为需要调用的符号表的名称</code></pre><p>这就完成了符号表的调用。</p><p>同样的，如果需要使用反斜杠输入特殊符号的功能，则在 <code>symbols.yaml</code> 符号表中新增：</p><pre class="language-"><code>symbols:
+ # 八卦、八卦名、六十四卦
+  '/bg': [ ☰, ☱, ☲, ☳, ☴, ☵, ☶, ☷ ]
+  '/bgm': [ 乾, 兑, 离, 震, 巽, 坎, 艮, 坤 ]
+  '/lssg': [ ䷀, ䷁, ䷂, ䷃, ䷄, ䷅, ䷆, ䷇, ䷈, ䷉, ䷊, ䷋, ䷌, ䷍, ䷎, ䷏, ䷐, ䷑, ䷒, ䷓, ䷔, ䷕, ䷖, ䷗, ䷘, ䷙, ䷚, ䷛, ䷜, ䷝, ䷞, ䷟, ䷠, ䷡, ䷢, ䷣, ䷤, ䷥, ䷦, ䷧, ䷨, ䷩, ䷪, ䷫, ䷬, ䷭, ䷮, ䷯, ䷰, ䷱, ䷲, ䷳, ䷴, ䷵, ䷶, ䷷, ䷸, ䷹, ䷺, ䷻, ䷼, ䷽, ䷾, ䷿ ]</code></pre><p>可以通过此方法，在符号表中配置各种稀奇古怪的特殊符号。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/bdf36a4f79b9c29281b996fe50fc714a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>虽然奇怪，但又很有趣的符号</figcaption></figure><h2>配置用户自定义短语</h2><p>自定义短语作为极度私有化，且能极大提升输入效率的工具，在 RIME 中具有十分重要的意义。不少朋友用自定义短语挂载超大词库的做法，并不被 RIME 所建议。自定义短语有它更为重要的作用和意义。所以，请不要在自定义短语中添加超量词条。</p><p>用户自定义短语存储于用户文件夹下的 <code>custom_phrase.txt</code> 文本文件中。</p><pre class="language-"><code># Rime table
+# coding: utf-8
+#
+# 请将该文件以 UTF-8 无签名编码保存
+# 存储位置为 ~Rime 用户文件夹/custom_phrase.txt
+#
+# 码表各字段以制表符（Tab）分隔
+# 编码格式：词条+tab+编码+tab+权重 权重决定短语词条在候选项中的排序，权重非必须项
+
+xxx@gmail.com  gmail   1
+xnomid1</code></pre><p>然后，需要在输入方案配置文件 <code>flypy.schema.yaml</code> 中，指定调用这张自定义短语表。和词库一样，如果你使用多个输入方案，需要在每个输入方案中调用。</p><pre class="language-"><code>custom_phrase:
+  user_dict: custom_phrase</code></pre><p>重新部署后，自定义短语就能生效。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/c5caaec66a10026069a65152adb70f5a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>配置输入法样式、布局与配色</h2><p>到了这一步，输入法的输入体验部分就完成了。根据你的输入习惯配置的个性化方案，已经超越了市面上绝大多数成品输入法所能提供的体验。</p><p>那么，现在开始配置很多朋友在意的「皮肤」，也就是 RIME 输入法的样式、布局与配色。</p><p>需要说明一点，RIME 之所以不称为「皮肤」，而是称为「样式、布局与配色」，在于：RIME 并不能指定背景图片。比如成品输入法皮肤市场各种各样动漫皮肤、卡通皮肤、风景皮肤，这并不支持。</p><p>RIME 只能配置输入法候选项的样式、布局和配色。</p><ul><li>样式涉及的方面有：候选框直排/横排、字体字号、单行模式/双行模式等等；</li><li>布局涉及的方面有：候选框直角/圆角、候选框边距、候选项间距、阴影等等；</li><li>配色涉及的方面有：候选框背景色、边框色，候选项色，待选项色，候选项高亮色，编码色等等。</li></ul><p>具体到方案配置，打开 <code>weasel.custom.yaml</code> 文件，具体的设置项对应的功能，我已经在方案代码旁边作了详细的注释。</p><pre class="language-"><code>Patch：
+  style：# 此行之下为样式设置
+    display_tray_icon: true # 显示系统托盘图标
+    inline_preedit: true # 在光标位置显示预编辑文本
+    preedit_type: composition # 预编辑文本类型
+    mouse_hover_ms: 0 # 鼠标悬停选词响应时间
+    paging_on_scroll: false # 鼠标滚轮翻页候选词
+    fullscreen: false # 全屏候选词窗口
+    horizontal: true # 横排显示
+    font_face: "Microsoft YaHei" # 主要字体
+    font_point: 13 # 主要字体大小
+    label_font_point: 13 # 标签字体大小
+    comment_font_point: 13 # 注释字体大小
+    inline_preedit: true # 嵌入式候选窗，单行模式
+
+    shadow_offset_x": 5 # 阴影 X 轴偏移
+    shadow_offset_y": 5 # 阴影 Y 轴偏移
+    shadow_radius": 10 # 阴影半径
+
+    layout： # 此行之下为布局设置
+      border_width: 0 # 边框宽度
+      border": 0
+      margin_x": 12 # 候选项左右边距
+      margin_y": 12 # 候选项上下边距
+      hilite_padding": 12 # 激活候选项背景色高度
+      hilite_spacing": 3 # 序号和候选项之间的间隔
+      spacing": 10 # 候选项间距
+      candidate_spacing": 24 # 候选项内部间距
+      round_corner": 0 # 圆角幅度，0为直角
+
+  "preset_color_schemes/Micosoft": # 此行之下为配色设置
+    name: "Micosoft" # 配色名称
+    author: "XNOM" # 作者名称
+    text_color: 0xD77800 # 内选区文字色
+    hilited_text_color: 0x000000 # 内选区编码色
+    hilited_back_color: 0xFFFFFF # 内选区背景色
+    hilited_candidate_text_color: 0xFFFFFF # 激活候选项文字色
+    hilited_candidate_back_color: 0xD77800 # 激活候选项背景色
+    candidate_text_color: 0x000000 # 其他候选项文字颜色
+    comment_text_color: 0x000000 # 其他候选项提示色
+
+  "style/color_scheme": Micosoft #最后加上这句，设置配色方案为 Micosoft，此处填入实际的配色方案名称</code></pre><p>注意：RIME 的配色颜色编码使用 16 进制表示。并且，和常规的「RGB 红绿蓝」颜色编码不同，使用的是「BGR 蓝绿红」颜色编码。</p><p>你可以在 <a href="https://bennyyip.github.io/Rime-See-Me/">RIME See Me</a> 调整配色后，复制右侧自动生成的代码。非常方便。</p><p>我非常喜欢原必应输入法的样式和配色，清爽、轻盈、明快，也不喜欢 win 11 style 那种圆角设置。因此，多年来我一直使用这套样式布局配色方案。相关方案配置代码如上，配置文件在文末的方案包内。如果你喜欢这套配色，请在引用时，保留 <code>author: "XNOM"</code> 作者字段。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/13/586f2a748e3d1f5f7fcf97fae604444d.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>微软拼音配色方案：全直角，极窄边框。</figcaption></figure><h2>配置用户资料同步</h2><p>RIME 没有云同步功能，但有本地同步功能。能够将用户数据同步至本地文件夹。</p><p>我们可以借助坚果云、onedrive 等第三方云将这个本地文件夹同步至云端，以此实现个人词典和配置方案在不同电脑间的同步和备份。</p><p>以坚果云举例：</p><ul><li>在你的坚果云同步文件夹内，这里举例为 <code>D:\Nutstore </code>，新建一个 <code>RimeSync</code> 文件夹。</li><li>其次，先打开用户资料夹，打开 <code>installation.yaml</code> 文件，在合适的地方添加如下代码：</li></ul><pre class="language-"><code>sync_dir: 'D:\Nutstore\RimeSync'</code></pre><p>最后完成后的样子是这样：</p><pre class="language-"><code>distribution_code_name: Weasel
+distribution_name: "小狼毫"
+distribution_version: 0.15.0
+install_time: "Sat Nov 11 21:51:51 2023"
+installation_id: "XNOM" # 此处填写喜欢的名字
+rime_version: 1.8.5
+sync_dir: 'D:\Nutstore\RimeSync'</code></pre><ul><li>在开始菜单运行 <code>【小狼毫】用户资料同步</code>，如果启用了托盘图标，也可以右击运行用户资料同步。完成后，你就能在 RimeSync 文件夹中找到 XNOM 文件夹，其中的内容就是你的用户资料，包含了自学习个人词典文件和配置文件等等。</li><li>利用坚果云，将此文件夹同步至云端。</li><li>在另外一台电脑，按照相同的方式操作。将云端文件夹同步至本地。</li></ul><p>这里，很有必要理解 RIME 的同步逻辑：</p><ul><li>RIME 同步两个方面的资料，一为个人词典；二为个人配置。</li><li>个人词典同步逻辑为双向同步；个人配置同步逻辑为单向同步。</li><li>个人词典双向同步逻辑，举例来说：甲电脑个人词典累积了词汇 ABC，乙电脑累积了词汇 DEF，那么，通过第三方云同步和 Rime 同步后，甲乙两地个人词典词汇都会同步且合并为 ABCDEF。通过第三方云同步，可以非常方便地同步两地之间的个人词典，保持相同的输入体验。</li><li>个人配置单向同步逻辑，是指 RIME 只会将配置文件，单向地从「用户文件夹 ~\Rime」同步至「同步文件夹 RimeSync」。换句话说，个人配置只会在「同步文件夹 RimeSync」里在甲乙两地被反复同步和覆盖，而不会导入配置文件。如果你需要导入异地的配置文件，可以在第三方云完成同步后，手动将配置文件导入。</li><li>这样的同步逻辑是为了保持配置的一致性。因为，配置文件之于 RIME 十分重要，关系着 RIME 是否能够正常运行。也必须在修改后通过重新部署才能生效。若两地的配置不一致时或其中一地有错误时，必然产生无法预估的混乱后果。不过，个人配置定制好之后，也很少需要修改，权且当作备份。云同步个人配置更多用于异地新电脑部署时。</li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/14/c4433672e86358757f6224dc01a4f162.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>RIME 同步逻辑示意图</figcaption></figure><h2>一些需要注意的地方和总结</h2><p>关于 <code>.custom</code> 定制文档的语法，上文并没有详细说明。因为在 <a href="https://github.com/rime/home/wiki/RimeWithSchemata#%E5%AE%9A%E8%A3%BD%E6%8C%87%E5%8D%97">定制指南</a> 中都有详细的说明。鉴于部分朋友，可能并不会真的去读《定制指南》，语法示例引用如下：</p><blockquote><pre class="language-"><code>Patch:
+ "一级设定项/二级设定项/三级设定项": 新的设定值
+ "另一个设定项": 新的设定值
+ "再一个设定项": 新的设定值
+ "含列表的设定项/@0": 列表第一个元素新的设定值
+ "含列表的设定项/@last": 列表最后一个元素新的设定值
+ "含列表的设定项/@before 0": 在列表第一个元素之前插入新的设定值（不建议在补丁中使用）
+ "含列表的设定项/@after last": 在列表最后一个元素之后插入新的设定值（不建议在补丁中使用）
+ "含列表的设定项/@next": 在列表最后一个元素之后插入新的设定值（不建议在补丁中使用）</code></pre></blockquote><p>再次强调，上文中，因为我配置了个人专属输入方案 <code>flypy.schema.yaml</code>，因此，并没有使用 <code>flypy.custom.yaml</code> 的配置补丁进行配置，因此上文涉及定制输入方案的部分，都是对输入方案本身的修改，因此没有加入 <code>Patch:</code>。总之一句话：对于 <code>schema.yaml</code> 的修改是直接修改，可能会被更新覆盖；对于 <code>custom.yaml</code> 的修改是补丁修改，不会被更新覆盖，但该补丁文件需以 <code>Patch：</code> 开头，并有且只能有一句。</p><p>最后，作为一款核心思想是「自由」的输入引擎，虽然无可争议地可以寻找和下载高级用户制作的方案包来使用，但我更建议你根据自己的输入习惯和输入需求进行定制。高级用户制作的方案包，则可以用于学习和借鉴。当然，整个配置过程也许艰难、也许曲折、也许漫长、也许反复，但如果结果是令人欣喜、令人愉悦、令人满足、令人得意的话，未尝不是一种别样的人生体验。这，不仅仅只是配置一个输入法而已。人生长长，何事不是如此呢？</p><h2>参考资料及扩展阅读：</h2><ol><li><a href="https://rime.im/docs/">幫助與反饋 | RIME | 中州韻輸入法引擎</a></li><li><a href="https://github.com/LufsX/rime">GitHub - LufsX/rime: Rime（中州韵）全拼与双拼的自用配置方案</a> 十分感谢 LufsX 的配置方案给予的莫大启发</li><li><a href="https://github.com/halfmoonvic/Rime">GitHub - halfmoonvic/Rime: 致第一次安装Rime的你</a></li><li><a href="https://github.com/rime/librime">GitHub - rime/librime: Rime Input Method Engine, the core library</a></li><li><a href="https://segmentfault.com/a/1190000002424698">一位匠人的中州韵——专访Rime输入法作者佛振 - 图灵访谈 - SegmentFault 思否</a></li><li><a href="https://sspai.com/link?target=https%3A%2F%2Fjdhao.github.io%2F2019%2F02%2F18%2Frime_configuration_intro%2F">最新版 Rime 输入法使用</a></li><li><a href="https://github.com/rime/rime-emoji/issues/6">Issue #6 · rime/rime-emoji · GitHub</a></li><li><a href="https://sspai.com/post/45516">别再用「六个点」当省略号了，这些标点都有更规范的输入方式 - 少数派 (sspai.com)</a></li><li><a href="https://sspai.com/post/55699">旧版自由输入法RIME简明配置指南 - 少数派 (sspai.com)</a></li><li><a href="https://pan.baidu.com/s/1CaPlEKiSjHGgZbhs76x8zQ?pwd=XNOM" target="_blank">文中所涉及配置文件、扩展包、词库等-分享在此-百度网盘-提取码XNOM</a></li><li>其它参考资料，在原文提供链接，此处不再重复添加</li></ol><p style="margin-left: 0px;">&gt; 关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/84424</id>
+            <title>复盘阅读和写作：我好像没有飞翔的力量了</title>
+            <link>https://sspai.com/post/84424</link>
+            <guid isPermaLink="false">https://sspai.com/post/84424</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 16 Nov 2023 02:49:32 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 提取出来的关键词,使用逗号分割
+<br>
+<br>
+总结: 以前的我通过广泛的阅读，全面了解到人类的知识体系，并积累了大量的读书笔记。通过进一步的整理，我剔除了不切实际的想法，巩固了对现实有指导性的部分。我成为一个坚持的人，相信美好的未来是主动争取来的，而不是依靠未知的运气和漫长的等待。年与时驰，我的阅读从大学阶段顺利过渡到了社会阶段，我的人生因此不断受益，让我成为自己的主人。通过阅读和写作，我能够辨析内在，厘清一个人与社会的边界。写作是一件影响深远的事情，能够帮助对自己进行全方位的反思和觉悟。写书是厚积薄发的过程，合拢资源有助于确定完整的立意。最初只是随意的记录，后来突然就产生了意义。 </div>
+                        <hr>
+                    
+                    <p>Tip. 不知不觉写了很多，也不太想分章了，欢迎阅读。</p><p>以前，我经常会梦到飞行：在一片天地间，我仿佛长出翅膀，自由地腾起，然后是落下。在空中，我一会儿飞往高处，一会儿又落回低处。腾云驾雾间，耍弄着各种高超的飞行技巧。这种感觉充满了奇妙。</p><h2>阅读，从未中断</h2><p>真正随心所欲的阅读，大约是从大学时代开始的。大学以前，我的日子是苦闷的，也没有充足的时间和条件去关注教材以外的书籍。</p><p>以前的岁月，枯燥到我好像没有了任何的记忆。以致于，后来自由的我对于教材（类似的还有新闻、官方资料、电视等），始终保持警惕的态度――置疑多于信任。为了获得美好的人生体验，我要杜绝任何可能导致束缚人生的事情发生。</p><p>大学期间，我生出很多困扰，比如看到大学生卖菜、研究生失业的新闻报道后，我迫切地想要解决未来人生中可能出现的隐患。</p><p>我相信，唯有从自身的实际情况出发，才能彻底解决现实生活带来的焦虑。我不再只关注书本知识。我所在的大学很普通，却有着丰富的馆藏资源，里面的书籍成为我学习知识的主要来源。</p><p><strong>通过广泛的阅读，我全面了解到人类的知识体系，并积累了大量的读书笔记。在这个过程中，我感受到思想的力量，培养了自主意识，周围的世界终于不再处于不可控的状态。</strong></p><p>大学毕业后，我经常奔波于图书馆和住处之间。业余，我习惯一个人读书。我喜欢纸质书，每次都会做很多笔记。如同在大学期间一样，我广泛系统地涉猎各种知识。</p><p>时间一久，积累的笔记越来越多，它们与过去的知识发生重叠。这时，上班、休息、整理笔记，成为我的主要日常安排。通过进一步的整理，我要剔除头脑中不切实际的想法，巩固其中对现实有指导性的部分。</p><figure class="image ss-img-wrapper image_resized" style="width: 430px;"><img src="https://cdn.sspai.com/2023/11/15/284561d08805af54c47719cacbd3ae17.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>记满笔记的几个本子</figcaption></figure><p>过了几年，我已经完成多次这样的知识更新过程。高效的学习启迪了我，一次次帮助我完善自己，我没有荒废这些时光。于是，我成为一个坚持的人，相信美好的未来是主动争取来的，而不是依靠未知的运气和漫长的等待。</p><p>年与时驰，我的阅读从大学阶段顺利过渡到了社会阶段，我的人生因此不断受益，让我成为自己的主人。</p><h2>开始写自己，写他人</h2><p>当我年近三十的时候，我给出自己的写作缘由：</p><p>1、精力变得充沛起来，工作也基本稳定，因此决定在这个人生阶段开启文学之旅。同时，丰富生活，和周围世界的关系融洽起来。</p><p>2、在社会中与各色人等打交道，逐渐善于隐藏最本真的自己，同时异化出很多东西。于是，想要通过文字辨析内在，厘清一个人与社会的边界。</p><p>3、通过阅读和写作，不再局限于时间和个人，有能力去继承和创造知识，淬炼出人生中的精华经验，连续人生、激活生命。</p><p>于是，我写诗歌、散文等，写自己写他人。这里摘录一段我过去的文字（《生命杂感》）：</p><blockquote><p>仿佛置身于宇宙中的星辰，将自己也置身于事情的合理位置上。找到自己的立足点，从而在整个事情中扮演好确定有效的角色。</p></blockquote><blockquote><p>人类的客观世界是幼稚的、机械的，复杂而艰涩最终走向简单而易懂的本质。在思维上，小的角度顺从大的角度；在行动上，大的角度兼顾小的角度。</p></blockquote><blockquote><p>自己与他人的交流在交互律动中进行。自己所做的每件事情，都是在跟内在的自己对话。自己与他人以及外界的交流，只是一次次映照镜子的体验过程。</p></blockquote><p>某个夜晚，这是从某公司离职前的最后一次下班，相识一场又是离别。于是，我有感而作（《别意》）：</p><blockquote><p>人去楼空事事休，欲语还掩情难留。絮草依扶终须别，当守本心绝此忧。</p></blockquote><p>谈到写作与职业的关系，我认为，<strong>写作是一件影响深远的事情。尤其对于个人而言，选择写作能够帮助对自己进行全方位的反思和觉悟。这里体现出一门艺术学科对人的发展的包容力。</strong></p><p>文人，是以文字为生的人。但是察古观今，很多文人并非单纯的文人，他们往往另兼一职甚至多职，而文人的身份只能算作其中副职之一。而我，最为现实的选择，或许也是半工半文。</p><h2>迷上写书，三四年了</h2><p>写书是厚积薄发的过程，合拢资源有助于确定完整的立意。整个过程就像百川入海一样，很多以往的混乱片段都变得清晰和贯通起来了。</p><p>又或许，<strong>最初只是随意的记录，后来突然就产生了意义。在写书以前，我经历了持久的学习和探索。写书，或许只是因为找到一个可供发挥的方向。</strong></p><p>我写的第一本书，正如此书中序言里说的：</p><blockquote><p>过去的十年时光，见证了我的一段人生路。书中的故事来源，主要包括这些年中的相亲经历、网络交友经历、熟人交际，以及许多耳闻目见的故事等。</p></blockquote><blockquote><p>这些经历勾画出了我的生命轨迹――有思想意识方面的，有工作生活方面的，也有感情经历方面的。若是梳理我至今为止的人生财富，恐怕除了学习工作方面的提升，这些经历也可以成为其中的主要部分之一吧？于是，试图从中汲取养料，自然成为本书的目标之一。</p></blockquote><blockquote><p>……</p></blockquote><blockquote><p>另外，我是一个爱书、爱大自然的人。在过去的很长一段时间里，我沉浸在书籍的汪洋中。我阅读有关工作、生活和人生等方面的书籍，也阅读偶然遇到的各种有趣的书籍。说到爱自然，我喜欢拍摄日常生活中的自然景物，也喜欢接触有关自然的书籍、纪录片、影视作品等。</p></blockquote><blockquote><p>在大量知识的长期滋养下，我尝试在自己的作品中挖掘出超越故事本身的、更加深刻的意义。用一种自然流畅的口吻讲述故事，以一种简单从容的心态对待生活，将之作为救赎人生的一种重要手段，自然就成为了本书的另一个目标。</p></blockquote><figure class="image ss-img-wrapper image_resized" style="width: 455px;"><img src="https://cdn.sspai.com/2023/11/15/e5423a14ea7d3c2c6c95ff73bdfe7cc9.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>在某景区拍摄的池中鱼</figcaption></figure><p>对了，这本书的拟定名是《六鱼书》，这里有故事的一个引子：</p><blockquote><p>十年间，六鱼希望变成一条真正的鱼，在人类的世界中拥有完全的自由。他也希望遇到另一条真正的鱼，在彼此的身旁一直游来游去。</p></blockquote><blockquote><p>六鱼不喜欢谈论过去，因为在他的回忆里充满了苦涩。他讲述的话题大多是发生在当下的事情，以及无关紧要的生活见闻。说多了，它们就变成了一段段详实的人生记录。因此，他养成这样的聊天习惯，并坚定地认为可记录的文字、声音要胜过不可记录的对话、会面。</p></blockquote><blockquote><p>……</p></blockquote><blockquote><p>六鱼常常产生一种错觉：并不存在完全停止的时候。他和他遇到的人们，是永远不会有结果的，就像在一个故事里，作者和他笔下的人物，也是永远不会有结果的，这是一样的情形。因此，在每个故事的高潮时刻，他总是准备着再去悲伤一次。</p></blockquote><blockquote><p>六鱼希望变成一条真正的鱼，在另一条鱼的身旁一直游来游去。他在一片汪洋中游来游去，游过的轨迹会变成怎样的故事呢？</p></blockquote><p>此书写作了大约三年多，期间改稿十多次。可惜，此书的出版尚未提上日程，不然也该是时候接受读者朋友们的考验了。后面写的书，更是面世无望。</p><h2>坚持写作，真好</h2><p>我曾对自己说：“制定一个计划，无论自己的生活状况如何，都要勇敢无畏地走下去，坚决而专一，在一定的时期内果断地前行和进步。”</p><p>说说写作的体验。<strong>我真正写作的时间并不多，更多的工作是对灵感的捕捉，以及对各种素材的梳理。这个过程会花费大量的时间，也许是几个月，也许是数年。迟于写作，只为了产出好的作品。</strong></p><p>太累的时候，我也有过迷茫：坚持写作，到底是为了什么？有人很好奇，对别人的故事感兴趣；有人喜欢文字，崇拜会写作的人，因为他们可以输出自己的观点；有人想成为写书人，但是阅历不够、文笔不好。有了这些互动，我找到了写作的意义――我要肩负起传播这些故事的责任。</p><p>在写作期间，因为积压了太多的故事，我睡不着觉，我半夜失眠。一个故事只有开始却远没有结束，它们在催促着我，让我久久不能放松。我对一位朋友说，我的脑子很乱，简直是浆糊一团，因为我讲不清楚这些故事。</p><p>为了缓解写作中带来的疲倦，我每天都到附近的公园里放松绷紧的神经。或者慢慢骑行，或者沿着河边散步，一边欣赏眼前美景，一边观察热闹的人群。有时候会随意拍摄，有时候会记下当时的心情，渐渐地，孤单的心充实了起来。</p><figure class="image ss-img-wrapper image_resized" style="width: 457px;"><img src="https://cdn.sspai.com/2023/11/15/147e45109f71b9ee185fa01d42733b9c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>观察热闹的人群</figcaption></figure><p>在很长的一段时间里，我都是独自摸索。为了避免受到外界的影响，我处于闭关的状态。尽管苦闷，但是从来没有想过放弃写作计划。有人说，你还能坚持做自己喜欢的事情，真好。</p><p>当然，不是所有的人都有耐心。有人厌恶文学，不想将自己的时间浪费在阅读上。有人奔波在路上，有人眼中只有利益。他们对于作者，没有丝毫的敬意。这没什么，有不同的看法才是真正的世界。</p><p>这些年，我对阅读和写作的几点探索和感思：</p><p>对个人记忆的不信任，开始使用书纸电子，由于各种产品的时效性，于是通过与他人的沟通来保持记忆，最后因为时间的流逝，终于选择著书立说，流传于后世。</p><p><strong>阅读，是为了启迪自我、发现生活。写作，是为了更好地表达自己、认识自己、坚守自己。</strong>美文，可以学习，还可以与别人形成某个共同的话题。</p><p>读书多了就会腻，于是就会自以为是地认为已经读遍了书籍，虽然新书一直在出版，但是总认为套路总是那么回事。可是一旦沉下心来，就会发现读书的容纳力丢了，对以往的书籍也是所知寥寥。</p><h2>前路，不知何往</h2><p>一个人前行，道路难免走向无法预料的牛角尖、象牙塔。渐渐的，我希望与外界接触，希望与拥有相同写作欲望、思考习惯的人们交流、共同进步。于是，我开始利用网络发布作品，关注和寻觅知音同志。</p><p>时间很快过去了几个月，我遇到的只有猜疑、排斥和不解。这令我深深地受伤和不忿，也许人多的地方也是喧闹、浮躁的存在，想要在人群中获取到广泛的赏识多少有些痴心妄想。</p><p>向媒体投稿，途径是极少的。在文学平台上，很多网站编辑、网红作者等，他们的文章也不过尔尔，实在不够得到被千人捧、万人呼的殊荣；反观那些有着一定笔力，长久坚持写作的普通人，甚至是很有思想见地、颇具文学才华的人，却得不到人们的关注和认可。</p><p><strong>对于文学创作的探索和回应，令我失望又痛心，我认为这个时代的文学前景是光明的，但是漫漫长途实在令人感到彷徨。</strong></p><p>一次，遇到一位职业写作者。我咨询写作和出版的事情。她说：“你有获奖的经历吗？有发表或出版的作品吗？就像一个没有驾照的人，也梦想开赛车，做别人的司机吗？自得其乐也不错，将写作当成业余爱好吧！”</p><p>如今，出版行业的不景气，传统文学市场的严重萎缩，这些都让新人的写作变得艰难起来。有人说，好作品终究是好作品，期待你的文字。是呀！我也这样对自己说。可是，前路，我却不知何往。</p><p>在一次行路途中，突然闪现灵动：仿佛一个人在坠落，悬崖深不见底，身旁悬着一条随时能救命的绳子，可惜却视而不见，由着自己不断地下坠。可叹，在沉重的现实面前，我好像没有飞翔的力量了。</p><p>渐渐地，我的兴趣寡淡，没有了写作的动力，书也越读越少。近来，断断续续在读的只有《仅此一生》《杨绛全传》《纪伯伦散文诗全集》等寥寥几本书。</p><figure class="image ss-img-wrapper image_resized" style="width: 453px;"><img src="https://cdn.sspai.com/2023/11/15/9e31376761eb480ad4d3aadc32d50426.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>"束之高阁的书</figcaption></figure><p>尽管，现在的我已经很少做飞行的梦，但我的心底依然保留着飞行的梦想。或许，梦中的我也可以这样飞：</p><blockquote><p>我脸朝下，双臂张开，像一只大鸟一样展开翅膀。有时我会变换花样，一只手臂张开，另一只并在身旁，我用一只翅膀飞。有时，我会把一只腿弯曲，翘起来，像飞机的尾翼一样高耸。 ――刘亮程《把地上的事往天上聊》</p></blockquote><p>P.S. 本文是复盘人生的系列文章之一，仅为表达出人类群体中某一个体的生存现状，感谢阅读，感谢您在这里片刻的停留。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/84417</id>
+            <title>个人、家庭记账的误区</title>
+            <link>https://sspai.com/post/84417</link>
+            <guid isPermaLink="false">https://sspai.com/post/84417</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 15 Nov 2023 06:38:49 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 记账, 初学者, 复式记账, 理解
+<br>
+<br>
+总结: 初学者在记账过程中容易陷入误区，认为记账是一件简单的事情，不愿意学习复式记账。然而，随着经验的积累，他们逐渐发现记账并不简单，需要深入理解和学习。同时，他们也会面临如何记录和分类账目的问题，需要进行权衡和取舍。对于记账来说，合适的工具和对复式记账的理解都是重要的，能够让记账变得简单且有意思。 </div>
+                        <hr>
+                    
+                    <p>普通人一开始记账最容易陷入的误区主要有三个，一开始就认为记账是一件简单的事情，想要把每笔账的记得清清楚楚的完美注意倾向，认为单式记账就行，复式记账是一座难以逾越的高山不愿意去学习。</p><h3 style="text-align: justify;"><strong>一开始就认为记账是一件简单的事情，记账就是记录每日的支出，这有什么难的？</strong></h3><p>作为记账小白，刚一开始觉得记账是一件很简单的事情，不就是记录自己的收入和支出么这有啥难的。怀有这种想法的人遇到的最大的问题可能是一遇到一点难题不知道怎么做就放弃了记账，因为思想上完全没有准备。对于普通人来说，收入每月就发生一次非常好记，剩下的基本都是支出，只要按照发生的时候记录下来就行了，这有啥难的呢？这通常都是没有记账经验的初出茅庐的人的想法，我一开始也是这样。有两个因素在共同起促成了这种想法，一方面是你有所接触和了解，并不是完全没有碰过，你就会下意识的认为自己理解这件事情。另一方面真实的情况是你对这件事情缺乏深入的理解，看不到更多的细节，但是你一开始并没有意识到。</p><p>如果是一件你完全没有经验的事情，例如芯片设计，你是不会碰到这样的问题，因为你根本不会有对理解芯片设计这件事情有错觉。但是对于记账这件事情，很多人是有这样的错觉的，我一开始也是这样。但是随着记录的越来越多，你就会逐渐发现很多不知道该如何去处理的问题，于是就想要搞清楚到底问题在哪里，于是就去学习相关的知识，逐渐的才发现之前的自己有多么的天真。想要通过自己对于收入和支出的粗浅的理解就把账记录的清清楚楚的，进而进行有意义的分析是不知者无畏的一种表现。</p><p>经历了这十多年的记账实践，我逐渐的发现记账越来越清晰，记账不是一件困难的事情，甚至可以说记账是一件简单的事情，起码从理解的层面上来看。回头看我走了很多的弯路，因为那个时候没有太多的针对个人和家庭记账经验，自己在黑暗中摸索了很长时间才逐渐的找到了出口。</p><p>我对于一个记账的新手有几点建议，首先如果你不是一个科班的会计或着财务出身的人，就不要高估自己对于记账和财务知识的理解。其次，就和学习其他知识一样，面对一个新的领域在遇到一些似懂非懂的地方的时候，要去做一些功课理解最关键的一些概念，不要生搬硬套自己脑子里固有的不正确的概念而不自知。最后，记账是个持续改进和学习的过程，开始可能觉得简单，随着记账的深入就会发现很多的概念和细节自己都不了解，随着自己的学习和碰到更多类型的账目，逐渐的当理解到了整个复式记账的逻辑之后，就会发现记账是一件简单的事情，不但能够理解自己和家庭的财务情况，而且对于新闻中提到的财务术语也不会完全一头雾水。</p><h3 style="text-align: justify;"><strong>一开始就想要把每笔账都记得清清楚楚，把记账这件事情搞得明明白白的。</strong></h3><p>这是每一个有完美倾向的人都会碰到的问题。有这种想法的人最终可能会走向三个不同的状态，第一个状态就是钻入牛角尖，必须要记录的清清楚楚，否则就会内心纠结导致最后放弃了记账；第二个状态就是觉得反正记也记不清楚，那就随便记记吧，失去了开始记账的热情，脚踩西瓜皮滑到哪里算哪里，破罐子破摔；第三个状态就是遇到具体的账会去做权衡，有时候能记得细一些就记细一些，条件有限的话就记粗一些，记账颗粒度的粗细是有代价的，最大的代价是时间和精力，因此必须去做取舍。有些人就只经历过第一种状态就放弃了，有些人经历了第二种状态最终也是不了了之了，有些人反复的经历了第二种和第三种状态的煎熬和折磨，最终也放弃了。有些人反复经历这三种状态种，从一个坑进入另一个坑，最终能坚持下来的应该都是进入了第三种状态。经过十多年的记账经历，我现在就处于第三种状态。</p><figure class="image ss-img-wrapper image_resized" style="width: 664px;"><img src="https://cdn.sspai.com/2023/11/14/ec4a55db1f18b1cb907097a10a71635b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>举个很常见的例子，你去超市做了一次大采购，有猪肉、牛排、鱼、芹菜、韭菜、蒜苗、牛奶、苹果、拌猪耳、鸡蛋、卫生纸、油、面、胡椒等等一大堆，你怎么记录？是根据单据上的每一项，逐个的记录下来吗？作为一个要求精确的人，你会想要完完全全的把这些明细记录下来；作为第二种状态的人，你可能就把这次采购作为一次记录记个总数，这样各种类型的支出可能就无法区分开来。第三种人会怎么记呢？你可能会把肉记为一类，把调料记为一类，把水果记为一类，每一类的金额算个大概就好，只要加总的金额和单据一致就行。</p><p>还有平日记账的时候，是遇到一笔交易就去记录，还是统一把一天的交易分类好，记录每项分类的总金额就好呢？这其中有些是因为需要权衡记录的颗粒度问题，还有一方面尤其是对于初次记账的人来说的难点，在于没有一个完整的分类和框架，在每次碰到要记账的时候才发现不知道如何去记录，或者说不知道记录成什么样子才合适。如果经常碰到这样的问题，又没有及时的搞明白，日积月累的就会越来越混乱导致无法坚持下去而放弃了。</p><h3 style="text-align: justify;"><strong>最后就是一听到复式记账就头大，觉得自己就记个小账不需要那么麻烦，而且听说复式记账非常的难，普通人根本搞不懂，那都是专业人事才去学的。</strong></h3><p>我们记账就用单式记账就行了，何必去费那事儿学复式记账呢，而且还不一定学的会，即便学会了也是杀鸡用牛刀不值得。复式记账是大多数人望而却步的概念，只能远远的看看，更不要说什么权责发生制和收付实现制了，这些其实都是会计的一些基本的概念，花点时间是不难理解的。</p><p>回过头来看我之前一直没有找到一个合适的记账软件很大的一个问题就是软件本身只是一个便利化的工具，软件本身并不能够让我对于记账这件事情有更深入的理解，反而经常是让我更加的糊涂。我现在认为我要能长期的记好个人和家庭的账，需要有一个趁手的工具能够随时随地方便的记录发生的交易，工具的扩展行很强可以灵活的进行记账的分类，能够生成各种报表等等，同时要学习和理解复式记账，能够使用复式记账的思路进行记账，这样反而最简单。我的意思不是说必须要先学会复式记账才能记，而是说我们要学会复式记账，因为它能够让你更深入的理解记账和财务的本质。</p><p>工具和思想都很重要，对于记账来说，有了合适的记账软件和对复式记账的理解，那么记账就不在是一件困难的事情，反而会让你感觉这是一件非常有意思的事情。丘成桐的观点认为我们从小的教学太多"技巧"和变着花样的练习，却忽略了数学的"大道"，例如方程，严格说方程之前非"数学"，只是"算术"，未知数和等号，小朋友能不能理解？很早就可以，学完加减乘除就可以理解，所有小高的应用题都是白做的，方程全秒杀，你以为在锻炼小朋友逻辑推理，其实在耽误他们养成方程思维。我觉得记账也是一样的，我们大量的时间都在陷入单式记账的思路里，在各种的记账软件中穿梭，使用低效的思维和工具浪费了大量的时间，最后也没有真正搞懂记账这件事情，对于收入、支出、资产和负债等等财务概念更没有深入的理解。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/84344</id>
+            <title>Loop 计时器，你的得力时间助手</title>
+            <link>https://sspai.com/post/84344</link>
+            <guid isPermaLink="false">https://sspai.com/post/84344</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 15 Nov 2023 01:37:02 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 效率类应用, 计时软件, Loop, 高效
+<br>
+<br>
+总结: 本文介绍了一款名为Loop的计时器应用，它具有简约的设计和高效的使用体验。Loop支持多个计时器同时运行，可以自由设置计时任务，并且支持间隔和循环功能。此外，Loop还具有灵活个性化的特点，可以自定义计时器的颜色和声音，并支持导入自定义音频文件。总的来说，Loop是一款设计简约、使用高效且具有灵活个性化功能的计时器应用。 </div>
+                        <hr>
+                    
+                    <p>谈到效率类应用，话题总是离不开各类计时软件。想要使用体验足够简单，苹果自带的时钟 app 足矣；想要更丰富的事件管理和记录，番茄土豆类 app 和各种待办事项（due、滴答清单）也层出不穷。</p><p>但也许，并非所有用户都想要费时费力地为每个计时进行任务分类、添加标签、备注等繁琐操作，尤其是这可能还意味着不菲的订阅费用。毕竟使用计时器应用的初衷只是计时罢了。</p><p>不过，与自带的时钟应用相比，我们确实需要多一些功能，少一点割裂（至少在 Mac 上保持与 iPhone 差不多的使用体验，自带时钟应用至今不能在 Mac 上同时运行多个计时器）。同时，我们也期待计时器拥有现代化的设计，而非过时的拟物界面。毕竟，硬件都能够升级到 iPhone 15了，为什么软件设计还强行停留在 iPhone 4 时代呢？</p><p>最近，Loop 完成了一次重大更新，使其成为了我的首选计时器。如果你希望拥有一款设计简约且具有性价比、使用高效但又兼具灵活的计时器，Loop 将是你的不二之选。</p><h2>高效</h2><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/11/b39f168b29d503a50cfe99d01c9296cf.PNG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>黑暗模式、多计时器同时运行</figcaption></figure><h3>快速启动，自由设置</h3><p>Loop 让计时器的使用变得轻而易举。打开应用后，你将看到进度环和最近使用的计时器。只需轻触圆环，即可重新启动上一个计时器，无需再次设置。再次点击圆环即可暂停计时器。</p><p>即使同时运行多个计时器，嵌套的圆环和独立的控制按钮也让你能够轻松管理每个计时任务。如果你是健身爱好者，可以为有氧运动、力量训练和冥想等不同需求创建不同的计时预设。如果你擅长家务，Loop 也能帮助你管理烹饪和洗衣等任务。</p><p>向上滑动或点击“所有计时器”，你将看到简单计时器和常用计时器的界面。在常用计时器中，你可以自由地配置所需的计时任务。你可以随时启用和编辑它们。</p><p>Loop 最多只有两个主界面，所以在不同设备上启动特定计时器的操作都非常简单和快捷。</p><h3>间隔、循环，时刻掌握</h3><p>Loop 支持为计时任务设置间隔和循环。每当一个间隔结束，你会收到通知，并可以设置独特的音效。已命名的间隔名称也会同时显示在进度环上方，确保你对时间的掌控更加准确。这对于需要在演讲或小组讨论中控制 PPT 时间的人来说非常实用。</p><h3>iCloud 同步，统一体验</h3><p>Loop 支持 iCloud 同步，确保你的设置、预设和声音文件等在 iPhone、iPad、Apple Watch 和 Mac 之间无缝同步，让你拥有一致的使用体验。</p><h2>灵活个性化</h2><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/11/d3b840773b6a188e8658f5fbca7f05a4.PNG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>丰富的计时器配色与图标显示</figcaption></figure><h3>颜色多样，声音自选</h3><p>Loop 允许你自定义计时器的进度环颜色，不论是单色还是渐变，都可以经由自定义设置满足你的审美需求，比如健身环的经典配色就是不错的选择。如果你不喜欢折腾，Loop 的原生配色方案也足够清新自然。</p><p>此外，你还可以根据需要为每个预设的计时任务添加文本、表情符号，或者从内置的图标库中选择符号以个性化你的计时任务图标。</p><h3>想听什么，你来决定</h3><p>除了内置的音效，Loop 还支持导入自定义音频文件，这意味着你可以选择喜欢的声音来激发自己的动力，志玲姐姐还是小岳岳，通通不在话下。你甚至可以使用设备自带的录音软件，将自己或亲友的声音添加到计时器中，增添一份特别的关怀。</p><h3>多种搭配，闹钟模式</h3><p>闹钟模式能够循环播放结束声音，直到你手动重置该计时器，可谓是防卷利器（仅限自己）。想要长时间伏案工作/学习/健身，闹钟模式不允许！配置唐僧音频，你甚至可以得到孙悟空的同款紧箍咒体验。想要卷？没门！</p><p>如果你就是要卷，致力于利用每一点空闲时间，Loop 也没问题。在炖汤、洗衣的等待时间里刷刷少数派文章，闹钟模式绝不让你的饭糊汤老，完美衔接精神食粮和实体粮食。</p><h2>总结</h2><p>尽管 Loop 由德国开发者创建，但在新版本中它贴心地支持了中文（非机翻），对用户的问题反馈和建议响应得也足够及时。</p><p>现在，你无需订阅，仅需 22 元人民币的价格，即可解锁上述所有功能，并在 iPhone、iPad、Mac 和 Apple Watch 之间同步使用。即使不解锁内购，Loop 也允许免费使用多计时器同时运行、新建计时器、编辑计时器等核心功能。</p><p>现在就点击链接试用 Loop，让时间成为你的忠实伙伴！</p><p><a href="https://apps.apple.com/cn/app/loop-%E6%97%B6%E9%97%B4%E9%97%B4%E9%9A%94%E5%92%8C%E5%A4%9A%E9%87%8D%E8%AE%A1%E6%97%B6%E5%99%A8/id1537384788">App&nbsp;Store 上的“Loop - 时间间隔和多重计时器”</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/84304</id>
             <title>「播客学英语」iOS app - 听播客，看文本，学英语，记单词</title>
             <link>https://sspai.com/post/84304</link>
@@ -281,29 +580,6 @@
         </item>
         
         <item>
-            <id>https://sspai.com/post/84133</id>
-            <title>利用快捷指令，Linux 简单「接力」iOS 剪贴文本</title>
-            <link>https://sspai.com/post/84133</link>
-            <guid isPermaLink="false">https://sspai.com/post/84133</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 08 Nov 2023 16:00:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Matrix, 写作社区, 实用价值, 快捷指令
-<br>
-<br>
-总结: Matrix是少数派的写作社区，主张分享真实的产品体验和有实用价值的经验与思考。本文介绍了使用快捷指令实现在Linux下快速复制iOS文本的方法。通过在快捷指令中使用Shell脚本，可以直接在Linux上运行复杂的脚本或者运行已经写好的Shell脚本文件。作者还介绍了在不同环境下使用wl-clipboard和xclip命令实现复制和粘贴文本的方法。同时，作者提到了一些其他的思路，如使用base64编解码。 </div>
-                        <hr>
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><h3>引言</h3><p>有快速复制 iOS 文本到 Linux 的小需求，对微信发送消息仅仅为了传输剪贴板内容而登录一个 IM 的方式感到不适；网页端微信登录需要扫码，我也绝不会在 Linux 下安装微信。以前使用 flomo 进行同步，和微信网页端的区别是可以密码登录，也无需每次都登录，但是同步起来需要时间，比起 Apple 生态的「接力」（Handoff）实在相形见绌。</p><h3>实践</h3><p>「快捷指令」能不能做到呢？发现快捷指令中「脚本」分项下有 Shell：通过 SSH 运行脚本。</p><figure class="image ss-img-wrapper image_resized" style="width: 349px;"><img src="https://cdn.sspai.com/2023/11/04/f4170332c3ed68feb4411e4d9a441b6b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Run Script Over SSH</figcaption></figure><p>图中使用英文界面是因为个人觉得和代码相关的内容使用中文翻译没有直接使用英文直观。脚本命令十分简单，实测可以直接编写运行多行复杂脚本；或者直接在 Linux 上写好 Shell 脚本文件，在指令中使用一行命令运行脚本文件即可。</p><p>参考环境是基于 wlroots 的 dwl，在 Wayland 下使用 wl-clipboard 的命令为：</p><pre class="language-null"><code>echo $Clipboard | wl-clip -nop</code></pre><p>其中<code>-n</code>参数指定不复制转行符号<sup class="ss-footnote" href="" title="下文中对此作出改进，但这个参数是否真的发挥作用我无法考证">1</sup>；<code>-o</code>参数代表只伺服一次复制就退出，在制作这个快捷指令时，我发现使用「通过 SSH 运行脚本」和在一个真实 SSH 客户端运行命令还是有一些出入，比如在运行上面的命令后快捷指令不能停止，即使加上<code>&amp;&gt;/dev/null 2&gt;&amp;1</code>后台运行依然不能结束；<code>-p</code>代表指定使用上次的复制内容<sup class="ss-footnote" href="" title="不明白wl-clipboard的逻辑，实际测试不添加p参数无法完成预想的操作">2</sup>。运行成功后需要使用<code>wl-paste -np </code>得到传输的剪贴文本<sup class="ss-footnote" href="" title="或许笔者忽略了类似X协议下的快捷键粘贴方法">3</sup>。</p><figure class="image ss-img-wrapper image_resized" style="width: 341px;"><img src="https://cdn.sspai.com/2023/11/04/87ed731827a4168efd868611b4421c02.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Shell 命令及参数</figcaption></figure><p>X11 下其实方便一些——</p><pre class="language-null"><code>echo $Clipboard | DISPLAY=:0 xclip -sel clip -r &amp;&gt;/dev/null 2&gt;&amp;1</code></pre><p>注意 X 协议下需要指定<code>DISPLAY</code>变量，这里指定常见的本地<code>0</code>显示，也可以使用<code>-d</code>参数指定显示。同样的也需要指定<code>-sel</code>参数指定使用上次的复制内容，<code>-r</code>代表不复制换行符，这是针对某些情况下，需要复制的内容后其实应该是wrap却有换行符，否则指令运行后在Linux上粘贴得到的是断开的同一段文字</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/04/2aabb19e40148257b4aec337713bb85f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>wrap 粘贴却得到换行</figcaption></figure><p>最后的<code>&amp;&gt;/dev/null 2&gt;&amp;1</code>是为了结束快捷指令运行。X 协议下指令运行成功后，直接使用粘贴快捷键即可输出剪贴文本。</p><p>Linux 当然需要开启 SSH 服务，如上图所示我选择方便的默认 22 端口，使用密钥登录提高安全性。至此基本功能已完成，但使用过程中发现有不能完全复制多段文字，不清楚是否是换行符号作祟。我使用「合并文本」功能简单合并多段文字到一段。</p><figure class="image ss-img-wrapper image_resized" style="width: 371px;"><img src="https://cdn.sspai.com/2023/11/04/17b432bb447166d8b3d44bd08772c570.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>一些处理多段文字的丑陋操作</figcaption></figure><h3>一些其它思路</h3><ul><li>其实在自己动手做之前，已多次打开少数派开始淘金，这篇文章给了我一些灵感，但使用 base64 编解码没有实践成功。</li></ul><span class="ss-linkCard">&nbsp;</span><ul><li>直接编写完整脚本，可以进一步执行特定文本处理。</li><li>「快捷指令」中其他指令，如变量、在每个切段中进行处理等，也许有适合预处理复制内容的操作。</li></ul><h3>总结</h3><p>实在丑陋拙劣的闲暇尝试，如果有更好的方法，请怀抱大爱分享，感激不尽。</p><p style="margin-left: 0px;">&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://sspai.com/post/84239</id>
             <title>在秋分来到春天的南半球，新西兰自驾 10 天之旅</title>
             <link>https://sspai.com/post/84239</link>
@@ -379,29 +655,6 @@
         </item>
         
         <item>
-            <id>https://sspai.com/post/83956</id>
-            <title>31 岁在一线城市被裁意味着什么？</title>
-            <link>https://sspai.com/post/83956</link>
-            <guid isPermaLink="false">https://sspai.com/post/83956</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 07 Nov 2023 09:04:08 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Matrix, 青少年失业率, 一周工作 1 小时及以上属于就业, 三十岁在一线城市失业意味着什么
-<br>
-<br>
-总结: 2023年8月，国家统计局不再公布青少年失业率，改为以一周工作1小时及以上为就业标准。同年8月，三十岁在一线城市失业引起关注。失业意味着未来的奋斗与想象烟消灰灭，活下去成为最重要的指标。对于失业者来说，申领失业金有双重现金到账、自动帮缴社保等好处，但也有资格限制和失业金终止的风险。 </div>
-                        <hr>
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>2023 年 8 月，国家统计局不再公布青年失业率，这个数据的背后，是 #一周工作 1 小时及以上属于就业# 的衡量标准。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/30/79a7b1d44955a36b323361d6258bd9cd.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>青年失业率趋势图</figcaption></figure><p><strong>同年 8 月，已经迈入中年的我被裁员了。</strong>就在被裁当天，#三十岁在一线城市失业意味着什么# 冲上微博热搜，然而点击进去已是根据法律法规内容不予显示了。</p><figure class="image ss-img-wrapper image_resized" style="width: 440px;"><img src="https://cdn.sspai.com/2023/10/30/8223d4320963f31ae7d8947ad88e7c2a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>失业，意味着与奋斗有关的未来一切想象瞬间烟销灰灭，在稳中向好的当下，「活下去」成为了最重要的指标。</p><h2>断缴社保，成为了我的第一选择</h2><p>当然，我也不是一开始就如此决绝。我曾经不止一次在小红书搜索「申领失业金的同时缴纳社保」的可行性，就是说在没有收入，好不容易每个月能领 2000 来块失业金的当下还要拿出 1000 多块钱去缴社保。</p><p>好消息是可以的（严谨的说是养老）。</p><p>坏消息是有资格限制：要么你是本地户籍；要么你在广州连续或累积缴纳 5 年社保。</p><p>——而我，刚好缴了 4 年零 11 个月。</p><p>后来回想起来也是可笑，一个失业下岗连吃饭都快成问题的人，为了遥不可及地能在这座城市立足、买车、买房、孩子入学等资格，为了 30 年后大概率领不到的养老金，好不容易下定决心，饿着肚皮也要从每月 2000 块失业金挤出 1000 块去交社保的时候，结果人家还嫌你不是本地户口，不让你缴……真是可怜又可悲。</p><h2>申领失业金，有什么好处与坏处？</h2><p>作为一名运营，利益点的提炼至关重要。套用如今的互联网营销话术，我将其简单归纳为 4 点：</p><figure class="image ss-img-wrapper image_resized" style="width: 394px;"><img src="https://cdn.sspai.com/2023/11/07/323be9f02081df95c94ae0dcc4ced01b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>每月双重现金到账：最高 6000 元 / 月，最长可领两年</h3><p>首先，最显而易见的好处就是每月定期给你银行账号打钱，而且还是打两份钱，包括「失业保险金」和「求职补贴」，详见下图。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/30/2e1dab0920aa5ad414a80baf88c8770f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>需要说明的是，很多人会把「求职补贴」理解成工资报酬 *15%，但其实这种说法并不严谨，你每月税前工资 2W，但公司给你交社保是按 5000 交的，最终你能拿到的求职补贴也只是 750 元（5000*0.15）。</p><p>至于能领长时间取决于你缴社保的年限，<strong>微信打开「失业指南」小程序就能算</strong>，只要你输入的信息是正确的，估算结果和你实际能领到的金额基本上是一致的，比 12333 自带的好用多了~</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/30/6d47a34e4d8637b23bec3697727bd97f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3><strong>社保不断：</strong>申领期间自动帮缴，个人无需扣费</h3><p>申领失业金期间，失业基金会帮缴医保。</p><p>我开始以为是帮你缴医保的前提是，费用自动从失业金里扣除，但其实不是，个人无需扣费。</p><p>讽刺的是，失业期间交的医保金额比我在职期间交的医保金额还要多😅</p><figure class="image ss-img-wrapper image_resized" style="width: 401px;"><img src="https://cdn.sspai.com/2023/10/31/e08c885b5e4ab4d53cb2f15aedb92ac7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>失业基金代缴的医保比在职交的还要多……</figcaption></figure><h3>本地户籍人员可以边领失业金边交社保</h3><p>正如前文所述，如果你是本地户籍或累计参保年限满足条件的，可以一边申领失业金的同时缴纳养老保险。</p><h3>稳定就业后一次性提取</h3><p>简单来说，重新就业缴纳社保 3 个月后，上传资料，就可以把按 50% 的比例把未领取的失业待遇的一次性取出来。</p><p>另外，失业登记后，社区会问是否需要帮忙介绍工作。我个人建议是不要，毕竟<strong>累计 3 次无正当理由拒绝职位推介或岗位培训的，将终止发放失业金。</strong></p><p>这么看下来，失业金还是很有诱惑力的，对吧？</p><h2>钱难挣，💩难吃</h2><p>当你做出了停缴社保的决定后，困难才刚刚开始。申领失业金虽然就那么几个步骤，但每个步骤又牵扯出一大堆待办业务和信息查询。</p><p>毫不夸张的说，过去一个多月我都在为申领失业金奔波，被拒四次后才通过审核，总结出以下流程，供各位参考。</p><figure class="image ss-img-wrapper image_resized" style="width: 549px;"><img src="https://cdn.sspai.com/2023/10/30/2378a1f61203f0f84dda216c96316db3.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>申领失业金的流程虽然称不上困难，但也绝对不简单，不止是我，身边失业的同事朋友也是申领好几次都被拒绝，究其原因，结合我自身的领取经历来说，主要受以下原因影响：</p><ol><li>系统太繁杂，办一个业务要跳 3~4 个小程序或 app，办业务的渠道查不到业务进度的，查进度的渠道看不到业务结果；</li><li>关键信息不公开不透明，最重要的「社保减员理由」无法在线上查询；</li><li>业务入口藏得太深，官方书面表述与实际办理业务的字面意思存在较大出入，缺乏模糊搜索，没有教程压根找不到对应的业务办理和查询入口；</li><li>渠道信息不互通，粤省事数据延迟大的离谱，数据延迟 1 个月你敢信？</li></ol><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/30/142e1be1ad3035e576087cca019bfe5a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>来自同事的吐槽</figcaption></figure><p>好不容易过五关斩六将，终于收到审核通过的短信通知，兴致冲冲打开粤省事，结果一看可领金额 0 元？！</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/30/e9ac562671ada911c1599c2d641b893e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>审核通过，显示可领失业金为 0 元</figcaption></figure><p>然后又是各种查攻略找教程，得知<strong>粤省事接收的都是二手信息，信息更新有延时（一延时就是一个月），查失业明细要去广东人社官网。</strong></p><p>本来失业就已经很惨了，还要被那么难用的系统搞到心梗……大哥，你数据有延迟你最起码写个「待更新」都总比写个 0 元要强吧😅</p><p>槽点还有很多很多，这里就不一一列举了。完整体验了一圈下来，最大的感触就是：<strong>从规则制定到流程设计，都生怕你吃上一口饱饭。</strong></p><p>不止失业金，公积金也是一样，选择失业提取，然后弹出一个「未失业满 1 年」的温馨提示，担心你死得不够快😇😅</p><figure class="image ss-img-wrapper image_resized" style="width: 309px;"><img src="https://cdn.sspai.com/2023/10/30/24d9257e685013d1b113ef6ffc9ee3d3.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>失业满 1 年才可提广州公积金</figcaption></figure><p>这种<strong>体验层面的断层，源于设计者与使用者的完全脱钩，</strong>只管生不管养，产品自然而然就难用了。</p><h2>淋过雨，才知道伞的可贵</h2><p>每每使用这种政企服务，都会不由自主的皱起眉头。哪怕你之前已经操作过一回了，下次再操作的时候还是会被各种词不达意的表述给迷惑住，然后又不得不在公众号、小红书里翻教程，一翻就是半小时。</p><p>吐槽之声不乏于耳，但难得的是付诸行动。为了让有需要的人士能够顺利申领失业金，我倒腾了个<strong>「失业指南」微信小程序😎</strong></p><figure class="image ss-img-wrapper image_resized" style="width: 225px;"><img src="https://cdn.sspai.com/2023/10/30/d7dd36948ee8bc6f7cd1dc51c9d4413d.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>微信扫码体验</figcaption></figure><p>初衷很简单，就是希望这个小程序的存在，能让有需要的人顺利度过失业难关。</p><p>产品也很简单，分为「计算器、领失业金、常见问题」三大模块，让目标人群对整个申领失业金流程有个清晰的认知：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/30/04a85711a75193e1001401233396b726.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>失业指南 - 微信小程序</figcaption></figure><ul><li><strong>失业计算器</strong>：输入你所在的城市与社保缴纳年限，就能查询你能领多少失业金，以及能领多少；</li><li><strong>领失业金</strong>：申领流程全梳理，一共几步，每个步骤涉及到的业务办理入口、需要用到的资料、过程中可能会遇到的问题及解决方案；</li><li><strong>常见问题</strong>：无论是找工作，还是申领失业金，被拒都是常态……过来人碰壁的经验，总结出一套高效处理的方法论，助你少踩坑，一次轻松过审。</li></ul><p>很多时候，一句看似不起眼的温馨提示，足以让困扰多日的疑虑与焦虑瞬间烟消云散。</p><h2>失业之后，这是我交出的答卷</h2><p>以上，是我对 #三十岁在一线城市失业意味着什么# 这个议题交出的答卷，欢迎各位在评论区交流一下失业心得。</p><p>文章的最后，衷心祝愿屏幕前的你用不上这个产品。但如果你不幸被卷入这阵失业狂潮，也希望这个产品能够给你提供一点点帮助。</p><p>需要说明的是，<strong>目前该产品仅为广东地区服务</strong>，后续会陆续增加「领公积金、灵活就业、劳动仲裁」等模块，如果你对这个项目也感兴趣的话，欢迎联系我~</p><figure class="image ss-img-wrapper image_resized" style="width: 174px;"><img src="https://cdn.sspai.com/2023/10/30/0fed96c6923d13fe51545cfbce825406.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>扫描二维码联系开发者</figcaption></figure><p style="margin-left: 0px;">&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://sspai.com/post/83018</id>
             <title>一个相册照片囤积患者的自我治疗</title>
             <link>https://sspai.com/post/83018</link>
@@ -420,52 +673,6 @@
                         <hr>
                     
                     <p style="margin-left: 0px; text-align: justify;">很喜欢翻相册看照片，特别是心情不好的时候，逐渐下沉的情绪被记忆重新托起，但是目前市面上的相册app都无法满足我的体验要求，于是我自己做了一款iOS app 「轻翻相册」。</p><p style="margin-left: 0px; text-align: justify;"><strong>思考</strong></p><p style="margin-left: 0px; text-align: justify;">一款好用的相册APP，应该是什么样的体验？</p><p style="margin-left: 0px; text-align: justify;">我之前用过一段时间的slidebox，用它翻翻相册同时整理一下，单就删照片照片来说，已经比较简洁了，但从翻看体验来说，横滑一张让人不太痛快，特别是我喜欢连拍多张相似的图片，也保留了很多截图，slidebox单张的展示效率太低。</p><p style="margin-left: 0px; text-align: justify;">而系统相册因为乱七八糟的图片混在一起，正方形的小图内容展示都不全，也让我一度沮丧，因为很多时候更重要的是我想翻翻自己相册照片，而这种展示形态下，可以说是毫无翻看体验可言。</p><p style="margin-left: 0px; text-align: justify;"><strong>1、照片筛选更简单一点</strong></p><p style="margin-left: 0px; text-align: justify;">这是我想到的第一个目标：随心所欲地选择翻看照片的范围和方式。</p><p style="margin-left: 0px; text-align: justify;">我的解决办法的是 “ 多维度筛选 ”&nbsp; 。一方面，自动分类照片的类型供筛选，哪些是手机拍摄的，后置拍摄，前置拍摄，录屏等等，另一方面，提供场景维度的筛选能力，时间、空间、地点，也支持随机浏览，多维度自由组合。这个功能其实不难，却是非常实用。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/12/4e362362c58438059971d1a6d72abd57.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px; text-align: justify;"><strong>2、图片的整理更高效一点</strong></p><p style="margin-left: 0px; text-align: justify;">除了拍照，因为工作性质需要截很多图，加上经常保存一些网图，各种乱七八糟的照片，在某个时间点，整理的倦怠超出了我的耐心，我放弃了整理，但也直接影响了翻相册体验。</p><p style="margin-left: 0px; text-align: justify;">为了解决这个问题，我研究了下双列瀑布流展示相册照片的可能性，或许是来自于日常主流APP的浏览习惯养成，加上这些年主流机型屏幕变大，双列翻看流畅程度超出了我的预期，既可以看清完整照片，快速通过手势删除照片以及对照片分类，也可以有保持顺滑的翻看体验，整理的效率比slidebox更高，特别是对喜欢连拍和截图的人​，特别地友好。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/12/021145c4b12be9710d79d67896600165.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px; text-align: center;">​</p><p style="margin-left: 0px; text-align: justify;"><strong>3、让回忆更清晰一点</strong></p><p style="margin-left: 0px; text-align: justify;">​随着年龄的增长，时间悄无声息让记忆的清晰度逐渐下降。我记不清想要找的照片具体在哪个角落，也逐渐淡忘了自己拍这张照片时的心情。</p><p style="margin-left: 0px; text-align: justify;">因此除了图片被保存之外，我更想真实地 “ 记住此刻 ” 。</p><p style="margin-left: 0px; text-align: justify;">于是，我专门开发了语义搜索照片的功能，你可以用非常直白的日常化语言进行文字搜索，而不用绞尽脑汁地想关键词，比如，你可以搜 “纯银如何评价即刻app”，也可以搜“如何提升阅读技巧”，就可以帮你找回相关的文字截图，也可以用“两个人在海边散步” 搜出拍过的照片。</p><p style="margin-left: 0px; text-align: justify;">另外，我打算增加一个实验性的功能，一个可以给图片添加文字的功能，可以将拍照当时的想法或感受记录下来，方便回顾此刻的体验，重新擦拭我的记忆。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/12/4b9d17853ee50c62c575401235092591.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px; text-align: justify;"><strong>整体感觉如何</strong></p><p style="margin-left: 0px; text-align: justify;">相比苹果系统相册，因为轻翻有比较灵活的筛选方式，可以筛选摄像头拍摄的照片，不用再忍受中间不合时宜出现的文字截图，或者翻到还不想处理的照片，翻看的心情，这非常的重要。</p><p style="margin-left: 0px; text-align: justify;">如果要整理照片，以我iphone13的屏幕大小，双列足够我分辨清楚图片上内容，而不用像slidebox那样必须一张一张地滑动图片，无论是删除，还是手动分类的体验都更加丝滑。</p><p style="margin-left: 0px; text-align: justify;"><strong>写在最后​</strong></p><p style="margin-left: 0px; text-align: justify;">轻翻相册的出发点是我的个人需求，但是它也确实极大改善了翻看相册和整理相册的体验，因此也希望它可以帮助到更多人。</p><span class="ss-application">&nbsp;</span><p>&nbsp;</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/82093</id>
-            <title>客制化键盘丨弧彩似虹 佳作共赏 Vertex ARC60 简评</title>
-            <link>https://sspai.com/post/82093</link>
-            <guid isPermaLink="false">https://sspai.com/post/82093</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 06 Nov 2023 02:50:09 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: ARC60, 60%, 配列, 造型
-<br>
-<br>
-总结: ARC60是一款60%配列的键盘，具有小巧的身躯和灵活的布局。尽管60%配列在市场上并不是主流选择，但ARC60的设计突破了传统，给人一种大胆跳脱的感觉。它的外观设计以弧线为主题，与ANGLE80形成互补，展现了设计师对于几何概念的独特解读。 </div>
-                        <hr>
-                    
-                    <blockquote><p style="margin-left: 0px;">造型、内胆、设计，我把有关于ARC60的一切都埋在这里了······</p></blockquote><p style="margin-left: 0px;"><strong>观前提醒：本文仅代表个人观点，仅供参考。</strong></p><p style="margin-left: 0px;"><strong>⁠全文近8千字，预计阅读时间27至40分钟。</strong></p><h2 style="margin-left: 0px;">弧</h2><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/039f73ed5a2f633a31b6dc5568946f3d.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>你喜欢60%吗？</p><p>八月中旬，<strong>VERTEX （维塔科思）</strong>工作室寄来了一把ARC60（弧60）。</p><p>意外、困惑、惊喜，一时间五味杂陈。一方面ARC60的团购销售已于几周前结束了，此时送测似乎显得有些多余。但更让我意外的是他们送测的原因。</p><blockquote><p>看到你一直都很喜欢我们的产品，也想让你谈谈ARC60。</p></blockquote><p>能得到一个工作室认可，对我这样的普通玩家而言，是一种莫大的荣幸。</p><p>关注我的朋友都知道，我是一个不会摄影的玩家，夸张点讲，不会拍照在客制化圈子里相当于断了条腿，能够体验作品机会寥寥无几。而能玩上好的作品更是一种缘分，这把ARC60，便是缘分之一。在钻研了一段时间之后，提笔却又成了难事，ARC60虽是佳作，但写一篇简析并非易事。</p><p>客制化键盘，是一个低门槛，人人都能上手玩一玩的爱好，相较于其他品类的数码产品，键盘参数相对有限，其功能也基本停留在输入这一质朴层面，但若深入探讨键盘内外的种种思路细节和逻辑，其实并不像大多数人所想的那么简单。而有关工艺和设计的理解，对于我这样的普通玩家来说又是一道知识的鸿沟。写出有理有据有价值的内容，需要时间的沉淀。尽管对于当下环境而言，写客制化键盘这个品类可能有些徒劳，但毕竟爱好如此。</p><p>有关ARC60的所触所感，我也将在这篇文章中尽数呈现，且当一乐。</p><h2>配列与造型</h2><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/e29298b33623b14067c140ede8a84e3c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>从套件和团队的命名不难看出，对几何概念的解读一直是Vertex设计的重要灵感来源，弧与角（ARC&amp;ANGLE）皆是如此。</p><p>作为Vertex的首秀，ANGEL80给我带来了许多惊喜，尽管它并不完美，但仍有可圈可点之处。而相较于ANGEL80的高人气，ARC60在国内社区则显得有些名不见经传。</p><p>问题出在哪里？在这段时间的使用中，我对于ARC60在国内外截然不同的人气也有了一些思考，按照惯例，让我们先从配列讲起。</p><h3>小而美的60%</h3><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/20/2922d9914be508e45ec07a45f5ff41ac.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>热插拔：支持WKL/Tsangan/HHKB（7u空格），不支持ISO配列&nbsp;</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/20/9f5f9fbdbfada2c993cea260947ddc33.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>焊接</figcaption></figure><p>ARC60是一把60%配列的键盘，60%也是我心水的配列之一，小巧的身躯，「对称」的美感，以及灵活的布局，这也使得我对60%的喜爱远超65%，这是一个富有客制化趣味的配列。</p><p>从历史地位来看，60%配列在一众配列之中属于「老牌劲旅」。产品方面，既有Vortex TAB60、Poker 60以及其他一系列知名品牌的60%配列键盘，也有GH60这种在客制化键盘领域具有里程碑意义的作品。研发层面，60%配列的开发程度堪比海贼王里的橡胶果实，在一众键盘爱好者的研发下具有极高的配列灵活度和大量的适配外壳与配件。</p><p>但从市场角度来看，60%配列键盘在整个机械键盘市场中并不是主流的选择，甚至是有些小众的。暂且不谈占据绝对优势的大配列（≥80%），即便是在「没有数字键盘」的细分市场中，60%也很难被称为「大众的选择」。究其原因，一语道破天机。</p><blockquote><p>你的键盘没有方向键，怎么用？</p></blockquote><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/1c542389c469f3044a5f9049ac719962.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我明白，再多的好也没法改变传统派对于实体方向键的执着。但在2023年，「小键盘干重活」早已不是难事，尚且不谈各位大佬自研改进的固件软驱，光是via和vial就足够支持日常所需的切层映射，而许多奇怪配列的布局和映射逻辑更是「精妙绝伦」。</p><p>同时，60%也是我认为最适合中文体系的小键盘入门配列，在质疑这些奇奇怪怪的小键盘之前，不妨先试试切层映射的方向键。</p><p>接下来，让我们来简单聊聊ARC60的外观设计。</p><h3>大胆跳脱的造型设计</h3><blockquote><p>直线属于人类，曲线属于上帝</p></blockquote><p>从设计理念来看，ARC60和ANGLE80，其实是一对互补的主题套件，由顶点（vertex）生出的角（angle）与弧（arc）共同交织出形与面。</p><p>如果说ANGEL80是基于「角」的理解所提炼的元素进行设计，那么ARC60则是「弧」。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/08/27/dca94b8b36ed6b3894dcea9f89c3b3bc.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>由顶点延伸出直线，由直线形成角，再由角交织出面，ANGEL80的一切都基于此。破形配重和三角月长石以及边框比例，搭配最小限度的曲面倒角，使得这把套件虽摸起来不算太割手，但看起来却是锐意十足，</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/cbd8540f546894b58e106f20a332c939.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>ARC60的灵感则是源自鸢尾折叠，通过对三角形的变形，创造出曲线。键盘的底部配重设计部分受到鸢尾折叠图案的启发，而键盘的大部分曲线也基于此。与angle截然不同的是，arc是由面拼接出线，再由线凝聚成视点，虚幻的交汇点提供了模糊的边界感，不同于ANGEL80的横平竖直ARC60的曲线肆意地伸展、蔓延，犹如波浪。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/68595e9a9390ad552007d707a6319ce0.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不过，尽管设计上强调了曲线的灵感，ARC60并不是一把外形「圆润」的键盘。相反，它呈现出相当「方正」的轮廓。通过大倾斜的切割和留白的设计，勾勒出了ARC60的形体，同时起到了「分割」的作用，让你能清楚地感知到键盘的立体感。</p><p>再从整体来看，天包地的上下盖设计搭配流畅贯通的线条，同时没有任何多余的修饰，连铭牌都藏于内部，外观极其纯粹而内敛。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/7e99d6d082b71bbbb125401dae5ef510.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>当然，如果你要说没有装饰的造型就是「公模」，我觉得多少有些牵强了，至少从辨识度来讲，ARC80绝对是极好辨识的，甚至比ANGEL80更容易辨识。</p><p>有关于ARC60外观的评价，比起「美与丑」，「怪」才是我最常听到的。</p><p>这也是ARC60小众的原因，大胆跳脱的设计和纯粹弧的运用，正面虽然运用倒角曲线减少了过于板正造成的刻板感，但这也带给了它不易被人接受的「又圆又方」的视觉效果。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/c1a0d04259ff992b3c77f90e8262626b.JPG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在分析完配列、造型之后，现在让我们来探讨一下真正让ARC60在国内人气雪上加霜的原因——组装门槛。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/09/02/d142288288e8ff6fea8d888109c2ca69.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>重拾基本功——焊接</h3><p>不论是造型、配列，甚至是配色，这些因素主要是个人偏好的体现，ARC60究竟为何在国内不温不火？对此，我思索良久，直到我跟vertex聊到焊接与热插拔，聊到ARC60在国内外截然不同的人气处境，他们说的一句话，点醒了我。</p><blockquote><p>现在好多送测做视频的都不愿意甚至是不会焊接。</p></blockquote><p>或许，答案就在这里。ARC60在国内不温不火的原因，在于它有一定的组装门槛。</p><p>在2023年听到「组装门槛」这个词，你或许会有些诧异。是的，ARC60是一把具有一定「组装门槛」的套件。虽然这所谓的「门槛」只是简简单单的焊接，但今时不同往日，焊接作为客制化键盘甚至DIY领域的基本技能，在热插拔普及之后，这项基础技能在客制化键盘领域已经日渐式微，关于这一点，我相信那些专业从事代组的博主会比我更清楚。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/54dff7cfd4ebca5cb8070620f9fdc0e3.JPG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>诚然，热插拔技术的推广让更多人接触到了客制化键盘，也让更多玩家能够轻松上手，它的便利性是毋庸置疑的，作为一个玩家，我也从热插拔这项技术的推广中获益良多。但我仍旧认为，具备焊接技能对于深入玩键盘会有很大帮助。这或许说出来有些要当众矢之的的味道，当然也可能是我自作多情，毕竟并没有多少人关注我不是么。</p><p>回到焊接这个话题，我并不是想表达会焊接就高人一等或者有什么优越感。实际上，焊接键盘轴体是一项非常简单的技能，它既不是微型焊接这种需要使用高倍率的显微镜和非常精细的手部协调的手艺，也不是BGA焊接这种需要高度的技术和精度的焊接作业。轴体焊接这件事，只要你踏出第一步，上手是很快的事情，后续还能延伸到键盘飞线维修、剪线键盘改造等一系列DIY拓展。</p><p>当然，热插拔也不是不纯之物。热插拔的便利性以及对于客制化键盘的推广作用是不可忽视的。但同时，拒绝焊接，就已经拒绝了相当一部分有意思的产品设计了，同时也很难体会到一些套件最甜美的部分，而ARC60便是其中之一。</p><p>焊接是深入体验键盘的一种方式，它不是唯一的方式，但也不应当忽视。</p><blockquote><p>静下心来，花个一下午，慢慢去组一把键盘，这个过程我很享受</p></blockquote><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/09/03/8b71fc5d55b6286891e352a57fc52587.JPG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>说完了ARC60的配列与造型，我们来讲讲潜藏在外表下那些朴实内质。</p><h2>朴实无华的内胆</h2><p>与ARC60的纯粹外观相呼应，它的内胆结构也相当简约和朴实，没有复杂的零部件或独特的设计。采用三层式结构，包括上盖、中框和内胆，以及底壳。严格意义上来讲，这里一共有四个组件，但我更倾向于将内胆和中框视为一个整体。主要原因是ARC60这把键盘的内胆设计中，中框和内胆有着强关联。当然，你也可以把它划分到外壳组中，随你喜欢，内胆的固定方式采用了相对传统的贴棉条的Gasket Mount。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/bd65aa8374b9fbb5b52d2e2a4162baf2.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h4>底壳</h4><p>底壳部分，整个底壳非常规整，将一切不平整的地方用配重进行了填充。当然，这里仍旧有一些我想要吐槽的地方，就是外露配重的一部分是盖在长条形配重上的，这可能是出于对设计美观的考量（两块配重无缝衔接），但假若你的字板坏了，你就需要拧开所有的螺丝，将外露配重抬起后才能拿出长条形配重。虽然子板更换的概率并不高，不过碰上一次还是略显烦心。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/d63033c8a4857d6503a65363d2f29771.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>讲到底壳，绝对绕不开配重这个话题。不知道屏幕前的各位对此有什么看法，于我而言，「重量」在很长一段时间里，是衡量一把套件质量水平的重要标准之一。乍听起来是有些意义不明甚至反直觉的，因为在键盘乃至所有数码产品的发展史中，「轻薄」一直是各家努力发展的方向，例如笔记本电脑、相机、耳机等等，而机械键盘方面则是发展出了矮轴键盘这样的特化产品。</p><p>那么，舍弃了轻薄和便携的客制化玩家，究竟为什么如此痴迷于「重」？</p><p>除开诸如外观质感等因素，「重即是好」之所以能够成为客制化键盘玩家近乎图腾的信仰，实际上有其合理之处。基于密度越高的材料反映出来的声音是越干净这一点，从早期客制化对于铝合金的执着到后续铜配重热潮，以及全铜键盘的出现。对于设计相对原始的套件而言，高密度带来的是最直接、最简单的提升方式。这有点像在游戏中提升角色强度最简单的方法——调高数值。这种提升并不涉及到复杂的机制或美感，但却有着绝对的暴力。</p><p>但在ARC60上，这一点被「舍去」了。底壳饰块小巧而又精致的设计决定了其本身在套件中的占比是极小的，更何况标配均为铝材，即使后续升配为黄铜配重也不会对整体表现有太多影响。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/28/c42fa9ce1567795d36ec12c4c74f2900.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>小配重设计其实在这几年的键盘市场里相当少见，在过去几年的客制化市场中，「加量不加价」的超大配重块已经成为了许多套件尤其是低价位卷王的「必备卖点」。这些配重块不同于精心设计和高难切削造型的背面设计，他们往往是大块、堆砌而又单一的。但你不得不承认，这其中确实反映了对当前客制化市场的某种高度概括的需求和氛围。</p><p>当然，在「密度」这件事情上，vertex也并非没有尝试，而实验证明，数值带来的提升确实是纯粹而又不讲道理的暴力。</p><blockquote><p>这个是一个纯不锈钢底的ARC60，声音表现确实提升一个维度</p></blockquote><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/28/45ea12efb1efdba63b3ac48c9ef52667.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>纯不锈钢底的arc试样</figcaption></figure><p>另一方面，小配重设计和统一铝材也为ARC60带来了成本上的节约，至少2k的售价没那么让人望而却步不是么？</p><h4>中框与内胆</h4><p>提到中框，你会想到什么？</p><p>谈到中框设计，我会联想到Flame60、Leaf65、Y8等作品。这些套件的中框或如三明治的夹心一样引人注目，又或如优雅的腰带般巧妙点缀在衣间。</p><p>中框在客制化键盘设计上的运用并不少见，其中既有偏向造型设计的，也有偏向结构运用的，这两者并没有好坏之分，只是有所取舍。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/7b8c1d0971f68ba709e0578a68d11d91.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>而ARC60显然属于后者中的极端，中框被深深隐藏在外壳内部，完完全全舍弃了中框在造型上的运用，但也因此获得了灵活多变的设计自由。而这些「自由」被尽数用在了结构切换上——有钢与无钢。</p><p>这样的设计是相当大胆的，额外花费精力打造一个定制件，却并非用于兼容多种安装结构（如Case mount）。这种设计是相当奢侈的，因为一般来说，从无钢到有钢的切换并不需要如此「私人订制」，只需更换一些固定件（比如棉条、螺栓等）的尺寸以确保不会出现露轴或下陷问题，就可以完成适配。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/44573d97eaf7a1e647597c8d4c9962eb.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>说回ARC60，Vertex 之所以对有钢和无钢结构切换的设计能够如此自信，源自他们对于内胆，对于支撑与形变的理解，而在PCB方面，无论是焊接还是热插拔，ARC60不同以往，选择了1.6mm且不开槽（No Flex cuts）的配置。</p><p>其实一块PCB的软硬，受到非常多因素的影响，包括但不限于基材，制板工艺，开槽、厚度等等，同时刚性与韧性也是一个非常复杂的话题，而加上其他组件形成内胆之后，这一切会更加复杂。好在ARC60已经减去了非常多的影响因素，让分析也变得简单了一些。</p><p>有钢的情况下，相较于柔软的PCB，铝制的定位板提供更强的支撑和敲击反馈，而无钢状态下，整个键盘内胆的撑托就只有PCB，它自身就是一张巨大的有变形量的「板簧」。</p><p>另一方面，通过对棉条位置的设计，在ARC60上，无钢手感的分区是明显的，接近棉条的边缘区最硬，而空格区域最软，整体的回馈仍旧是较为韧且有力的。当然，这里的「韧」或许与当下许多厂商博主宣传的「gasket=软弹」的公式背道而驰，但绝非所谓的「结构失效」。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/29/d547aa98e8cf18fc39a6b03119595c9a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>红色区域最硬，黄色区域最软</figcaption></figure><p>同时，我非常喜欢ARC60在无棉无钢状态下的声音反馈，深沉而独具风味，值得上一些有特色的轴体来玩。这样的声音回馈是相当简单而纯粹的，相较于有泡棉模组的热插拔状态，或许会显得有些不够饱满和空洞（不是空腔）。但起码，键盘本体对于共振的抑制是非常好的，无需泡棉的加入，也没有恼人刺耳的金属音。</p><p>看完了全文，或许你心中有许多疑惑，就这？</p><p>是的，这就是ARC60的全貌。ARC60并不是一把有多么高深莫测的键盘，相反，它非常的简单，非常的纯粹。从外形设计到内胆配置，颇有种奥卡姆剃刀中「若无必要，勿增实体」的神髓，这一点在内胆方面的体现尤为明显，arc60的内胆从一开始便是以无棉为基础进行设计与调试。</p><p>在结束这把键盘的点评之前，我想分享一些我从arc60这把键盘以及这家工作室身上得到的一些想法，虽然只是管中窥豹，略见一斑，但我觉得仍然值得一说。</p><h2>从Arc60到Vertex</h2><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/5c872bf63c4f8dfd690e11a1af73ca26.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>ARC60虽然是Vertex工作室的第二款作品，但严格意义上它是他们推出的第三款产品。在成立之初，Vertex先后发布了Angle80 R1（2021年初）和Angle80 R2（2022年初），再于同年年底推出了Arc60（2022年底）。尽管这三款产品在外观风格上同属一派，但它们的设计理念和方向在我看来差异颇大。而这样的差异或许源自于从玩家到设计者的角色转变以及有关键盘新的思考。</p><p>在Angle80这把套件身上，我们其实能看到很多「趋势」的集合——1.2mmPCB和开槽（flex）设计，以及Leaf spring和gasket等等，这些趋势的汇聚似乎指向了一个明确的市场倾向和喜好。最初看到angle80的时候，我会想到一些作品，有时会猜想这把套件或许想去「对标」一些现象级的作品（比如7V），当然这仅仅是我个人的无关紧要的推测。</p><p>说到这里，有些朋友可能会误解我的意思，认为我在说Angle80是一款随大流的产品。我觉得这其实是非常微妙的界定，因为Angle80最初并未提供热插拔 PCB，这意味着它从一开始就不是以「大众」为出发点的作品，我的意思是，Angle80是一把以「知道什么」为基点进行制作的作品，他们有自己的一些坚持，但也受到了非常多作品所带来的「趋势」的影响。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/3153df8bb32fca25307d3332060e141b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这其实不难理解，设计中的灵感和启发往往来自对他人作品的欣赏和理解。而作为从机械键盘客制化频道中孕育出的工作室，vertex接触过的客制化套件是非常之多的。什么是流行？什么是好卖的？对于这些市场性的问题，vertex绝对是比我这样的个人玩家有着更高一层的视野的，他们所能见的，是一个更透彻，更全面的市场，Angle80便是在这样的基础下应运而生。</p><p>在经历R1和R2两轮的团购之后，Angle系列暂告一段落，虽然R2的改进没有臻至完美，但也算给玩家一个不错的答复。</p><p>那么，ARC60呢？</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/1828247c8aa8c5883e8cccaaef59cb39.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>我最喜欢的ARC芦荟HHKB by夏木</figcaption></figure><p>时隔一年左右，ARC60以现货的形式进行了团购。相较于Angle80，ARC60是一把更具「实验」性质的作品。</p><blockquote><p>相较于给出一个激进花俏的创新方案，我们可能更擅长去做一些纯粹的东西&nbsp;</p></blockquote><p>对于这句话，我只能同意一半。用市场的角度来看，ARC60的配置，其实是相当「激进」。1.6mmPCB、不开槽（Flex）设计、「隐藏」的中框、无棉的组装建议等等，这是一把「逆水行舟」的作品。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/6cc88ff3590450c262769dcc6a3f0d65.JPG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>但这也是一把目的性极强的作品，是一把基于「想要什么」而制作的作品。</p><p>想要玩家能够停留在这把键盘上的时间更久一些，去体会整个玩键盘的过程，于是，搭配可变更中框的双内胆设计出现了；想要尽可能的纯粹而简单，才有了弧的造型和最原初的gasket棉条安装；想要对当下过度依赖泡棉填充以及公式化内胆设计的环境发出抗议，所以将声音包作为了选配，并建议无棉安装。</p><p>这么看来，看似圆润的ARC60比方正的Angle80更有「棱角」，更有自己的「态度」。</p><blockquote><p>从ARC开始我们就在做一些对泡棉填充玩法的「抗议」。</p><p>不是去否认泡棉的存在，只是想让玩家认识到它是以一种mod的形式存在，并不是一把键盘出身时候应该附带的东西，而ifoam（vertex的泡棉选购项）这个命名本身就带有一点调侃的意味在里边。</p></blockquote><p>这种态度在ARC60这把键盘上是是微妙而隐秘的，甚至有些私人的，但在后续推出的Angle65上，这种态度变得旗帜鲜明了起来。我觉得这其中的转变与ARC60在玩家群体里取得的反馈与成功不无关系，尽管ARC60在国内并不算多么有知名度，但大部分上手过的玩家对其手感声音表现的认可是实实在在的。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/f2f0e2c4ac0dabbdb22d0629aecabd1f.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>而这份实实在在的口碑，源自于对作品的千锤百炼。如果你仔细读过Vertex的每一条产品帖，你会发现他们倾向于将键盘测试的过程作为帖子的一部分与玩家分享。</p><blockquote><p>ARC整个设计阶段差不多花费了1年之久，它的效果之所以能获得大家的认可，其实是通过不断的测试验证而得到的，方向没问题的情况下，只要肯花功夫不断微调跟整改，都是可以得到理想的结果的。</p></blockquote><p>在与Vertex交流的过程中，我也讨教过许多有关键盘结构、声学、手感的问题。</p><p>因为在键盘声学、结构和手感等方面，绝大多数的评测对于键盘的理解，似乎只是简单地将一个特征映射到另一个结果。例如开槽——软弹，这就像是一个一个的连连看游戏。但这样的解释只是表面现象，深入挖掘键盘内胆的背后逻辑时，会发现有太多因素交织影响最终的效果。这使得纸面的甚至实际的推论往往是充满了民科色彩的迷局。</p><p>那些车轱辘话术对于我这种半吊子水平的博主用来胡扯糊弄小白尚且够用，那么工作室面对如此困境该如何解决呢？</p><blockquote><p>我们曾经也尝试过利用软件去用数据找到答案，可是我们后来才发现没有这么简单，内胆设计就像是化学反应，你可能改变了一点反应温度，出来的产物就完全不一样了。就板簧而言，改变一点点板簧的形态，长度，位置，都很难去估计最终的结果是怎么样的。</p><p>所以，尽管在结构方面积累了一些基本知识和设计理念，但每次制作产品的最后阶段，我们仍然会选择对每个细节进行打样尝试，只有这样才能更好地了解最终的实际效果。</p></blockquote><p>坦白的讲，其实有一些庆幸，云里雾里的可能不止我一个，至少目前来说，实际打样才是验证产品好坏的唯一标准。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/42ab3a866fa6db1c87fb73f0c908414d.JPG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>不会是第一把，也不是最后一把,但值得有一把</h2><p>在你阅读到这一部分之前，或许你已经对 ARC60 有了足够清晰和充分的认知，但如果仍有一些未能理顺的部分，不妨看看我的总结。</p><p>我认为 ARC60 的市场定位其实是蛮清晰的。如果你是一位60%爱好者，那么这套 ARC60个非常值得入手把玩的套件。它采用双层内胆结构，为玩家提供了充足的尝试空间。就键盘布局而言，我个人更偏爱 HHKB 分裂退格。如果焊接板允许的话，我都会选择这种布局。除了更轻便的退格外，还能省下一个卫星轴的费用，何乐而不为呢？</p><p>同时，ARC60配色选择也非常丰富，总会有你喜欢的，其中我最喜欢的莫过于芦荟色，清新而爽脆的绿色。造型就见仁见智了，但毫无疑问的是，这把键盘的辨识度绝对不低，尽管它的正面没有任何装饰件。</p><p>除开能够欣赏60之美的玩家之外，我认为ARC60也非常适合已经玩过一两把套件的新玩家作为往下一个阶段进阶的键盘。</p><p>对于新玩家而言，尽管这把键盘的价位相当于两把入门级套件，例如TOFU60、QK60等，两千肯定是与「便宜」无缘。但我认为这把键盘仍旧是物有所值的，无论是外壳工艺（喷涂由Matrix代工）、内胆配置（两张PCB）、手感与声音以及设计，它值得这个价位。组装方面也不需要过于担心，除了焊接需要一点学习成本外，这款键盘的组装非常简单、直观。拆装步骤连贯流畅，而隐藏螺丝设计的优雅设计也是值得品味的亮点。</p><p>那么，这把键盘能否作为最后一把呢？</p><p>如果以不留遗憾的「退烧」为目标，我觉得ARC60仍旧无法完全满足这个目标，尽管ARC60作为两千价位的套件已经近乎臻至完美，但这也仅仅是这个价位所能做的，距离我心目中真正的顶级、完美、叹为观止的作品，仍有一段距离。</p><p>当然，每个人心中的答案都会不一样，至少于我而言：</p><blockquote><p><strong>这里不是终点，也不是vertex的顶点。</strong></p></blockquote><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/ca02c0ee459fe9916167b08aececc371.JPG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>一些题外话</h2><p>这里说一些题外话，我一直认为，中框结构对于键盘的共振有着一定的良性的影响。虽然共振的产生受非常多因素的影响，但根据我过去的改造经验，定制中框对减轻套件共振似乎有所效果。这种猜想可以进一步延伸到 Sandwich Mount 和 Integrated Mount 在抑制共振方面的表现差异，我粗略推断Sandwich Mount中定位板的延伸起到了中框的作用。当然，设计不当的金属件中框指不定还会成为金属声的源头，这只是一个简单的推测，当个笑料便是。而有关中框的猜想，vertex倒是直白的回答了我。</p><blockquote><p>ARC的中框对于声音应该是没有影响的，至少在设计阶段，我们并没有考虑说加设中框来对声音产生影响，ARC的中框仅仅是服务于内胆结构切换的；</p></blockquote><p>感谢你的阅读，喜欢我的文章欢迎一键三连+转发</p><p>有任何问题欢迎评论区讨论。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/05/380c3f395de534e552e47b1082e73827.JPG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>tips：</p><p style="margin-left: 0px;">ARC/弧60 国内团购轮次【<a href="https://www.zfrontier.com/app/flow/kkXrzW1wW5Nj" target="_blank">R1-2022.11</a>】【<a href="https://www.zfrontier.com/app/flow/wagkvboLNa0p" target="_blank">R2-2023.8</a>】</p><p style="margin-left: 0px;">发售价：阳极1900、电泳1950、喷涂2050（由matrix代工）&nbsp;</p><p style="margin-left: 0px;">&nbsp;</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/81400</id>
-            <title>把"世界"装进口袋 - 图小小相册APP</title>
-            <link>https://sspai.com/post/81400</link>
-            <guid isPermaLink="false">https://sspai.com/post/81400</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 04 Nov 2023 13:17:02 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 产品介绍, 照片存储和整理, 压缩, 图小小相册
-<br>
-<br>
-总结: 这篇文章介绍了一个名为图小小相册的产品，它解决了照片存储和整理的问题。通过压缩照片的体积，图小小相册可以节省手机空间并轻松备份照片。同时，它还提供了方便的照片管理功能，包括快速搜索和添加标签。虽然图小小相册无法实现实时多设备同步查看，但它仍然是一个很好的解决方案，让用户可以方便地存储和管理照片。 </div>
-                        <hr>
-                    
-                    <p>大家好，我是Kang，今天在这里正式跟大家介绍下我们的产品 - 图小小相册。</p><p>得益于智能手机的发展，拍照变成了一件非常简单的事情，出门旅游拍一些好看的风景、出去聚餐拍一些朋友的合照和美食，还有记录小孩、宠物的可爱瞬间等等，我们热衷于通过拍照记录那些美妙的时刻。但是，随着时间的推移...</p><h2>照片的存储和整理正在变成一个越来越繁重的工作...</h2><p>随着手机的像素和画质不断提高，随便拍一张照片也有几MB大小，拍视频的话几百MB甚至几GB都很正常，通常没有拍多少张照片手机空间就会告急。我目前所知道的一些照片存储和整理的方案：</p><ul><li>硬盘备份：有些人可能会定期将照片通过电脑备份到移动硬盘里面，首先这个拷贝的过程就非常麻烦，而且当你需要查看某些照片的时候，还需要将硬盘翻找出来，通过连接电脑进行查看，非常不方便；</li><li>云备份：市面上有比较多的云备份相关的产品，比如手机厂商提供的云存储服务、第三方的云相册，用户定期将本地照片上传到云进行备份。受限于网络或者云服务商的限制，照片的上传、查看、导出等可能会比较慢（视频上传可能会受到限制），云备份的价格也不便宜，而且会有隐私泄露、照片丢失、服务关停等风险；</li><li>个人NAS：搭建和使用的门槛比较高，大部分小白用户完全不知道如何使用，而且价格也不便宜。</li></ul><p>综合来看，目前其实并没有很好的相册产品，让用户可以很方便地对照片进行存储和管理。</p><h2>如何解决？</h2><p>其实解决照片存储问题的思路有两个：</p><ul><li>第一种：是增加存储空间，不管是硬盘备份、云备份还是个人NAS，其本质都是通过增加存储空间的方式来解决这个问题；</li><li>第二种：尝试将照片体积变小，也就是"<strong>压缩</strong>"。</li></ul><p><strong>而图小小相册的内核就是"压缩"</strong>。压缩的关键在于：如何在不影响照片画质的前提下，将照片的体积尽可能变小。"压缩"的背后有一套非常复杂的算法，简单来说，压缩算法通过分析图像的内容并寻找到一些特征规律，然后基于这些规律实现数据的压缩。对压缩算法感兴趣的朋友可以网上找一些资料了解，有很多。</p><h2>图小小相册让照片存储和管理变轻松</h2><p>图小小相册另辟蹊径，通过"<strong>压缩</strong>"的方式实现照片备份，让照片存储和管理变得很"轻"。你尽管拍照，剩下的都交给图小小。</p><h3>照片视频“减轻”</h3><p>图小小相册内置先进的智能压缩算法，对于手机直接拍摄存储的照片，可以进一步压缩5-10倍，基本不影响画质。对于拍摄的视频，可以压缩4-8倍左右，同样不影响画质。以压缩5倍为例，一张手机拍摄照片大概5MB大小，存储一万张照片大概需要占用手机50GB空间，如果采用5倍压缩，相册空间占用变为10GB，手机节省出40GB空间。如果同样存储50GB空间，图小小相册大概可以存储5万张照片。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/03/a085bbafe9f5b3c12c0bb97f89ad0a22.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>压缩效果对比</figcaption></figure><h3>使用很“轻松”</h3><p>只需简单三步便可将照片存储至图小小相册：</p><ul><li>导入照片</li><li>压缩并备份</li><li>清理已备份的原相册照片</li></ul><p>另外，由于照片以更小的体积仍然存储在手机本地，这样会给照片管理带来相当多的方便：</p><ul><li>无需联网便可随时查看视频照片，不用等待漫长的加载时间，不用再去寻找丢在角落的硬盘；</li><li>上传和导出没有任何速度限制，随时上传、随时导出；</li><li>不用担心隐私泄露、数据丢失，因为这些视频照片根本没有上传云端；</li><li>没有视频大小的限制，随时拍摄、随时压缩备份。</li></ul><h3>搜索很“轻巧”</h3><p>照片数量变多的另外一个问题是如何快速查找，最传统的查找方式是按照照片的时间、地点等信息进行查找，根据我自身的体验，小于1000张照片这种方式是可行的。大于1000张时，这种方式会逐渐变得低效，因为总一些你想不来时间的照片，或者一段时间内拍了非常多的照片。</p><p>其次是现在主流的AI标签式搜索，其本质是通过AI预先对照片进行分类（打标签），比如人脸分类、场景分类等常见分类，这种对于1万张以内的照片是OK，AI标签+时间地点搜索基本能够快速定位目标照片。</p><p>但是如果超过1万张照片，甚至达到10万-100万量级的照片数量，AI标签式搜索也会遇到困难，因为AI只能对常见的场景进行标签，更多长尾的场景和内容则是没有包含的，这样的话就无法搜出对应的结果。</p><p>更进一步的搜索方式应该是AI语义搜索：即用户通过回忆照片中的内容，然后输入对这些内容的描述进行搜索。也就是真正”理解“照片中的内容，这样搜索方式会更高效，因为对于照片视频是具象的信息，人脑更容易记住里面的内容。</p><p>图小小相册内置了AI语义检索算法（对该算法感兴趣的朋友可以网上查找相关资料了解），实现了真正的对内容进行检索，支持文字搜索和以图搜图。这样用户就不用担心照片太多之后，查找照片太麻烦的问题了。</p><p>更进一步地，用户可以基于AI语义检索算法，轻巧地对照片进行管理，比如添加标签、清理相似图等。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/03/fa85ca6a5eba3e18e8a301c03909e382.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>图小小相册不能做什么？</h2><p>无法实时多设备同步查看。图小小相册本质上仍然是一个本地相册，因此相比于云相册，天然短板就是没有办法实现多设备同步查看。是否要做云是我们内部一直在讨论的事情，的确很多用户会想要多设备同步的功能，但云本身跟我们强调的数据隐私安全理念相违背。目前内部正在研发局域网内的多设备数据同步的问题，如果需要多设备查看的话，可以定期一键同步数据至另外一台设备，同时也方便用户进行设备更换等操作。</p><h2>写在最后</h2><p>喜欢拍照记录的人，通常是认真生活且热爱生活的人，他们总能捕捉平凡生活中的高光时刻，他们总能在忙碌的工作中偶尔停下自己的脚步，他们总能意识到时光易逝、回忆珍贵。图小小相册希望陪伴千千万万个这样的“他们”，一起成长，变成更好的“我们”。</p>
                 ]]>
             </content:encoded>
         </item>
