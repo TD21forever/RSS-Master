@@ -5,6 +5,62 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1725400947520893021#m</id>
+            <title>RT by @dotey: Google推出了一种在 StableDiffusion 图像生成中保证内容特征一致性的方式。
+这个其实是现在图像生成中一个非常重要的问题，故事可视化、游戏开发资产设计、广告等都需要在生成的时候具备角色或者内容的一致性。
+从演示来看效果非常好人物角色和其他内容的特征都保持的非常好，他们有一个示例是一个男人的一生十几张不同年龄段的图片都很像能看出来是一个人。
+而且这个项目还可以跟 SD 已有的控制方式结合，比如局部重绘和 Controlnet 等。下面是具体的介绍：
+
+实现方法：
+身份聚类：这一步骤涉及首先生成一系列图像，然后将这些图像嵌入到一个语义空间中。接着，使用聚类算法将这些图像分组，每个组代表一种可能的角色身份。这个过程旨在识别出一组视觉上一致的图像，从而确定角色的主要视觉特征。
+
+身份提取：在确定了一组具有高内聚性的图像之后，接下来的步骤是通过在这些图像上训练模型来提炼出一个更一致的角色身份。这意味着模型将学习到特定角色的关键视觉特征，以便在未来的生成中更准确地重现这些特征。
+
+收敛性：方法的最后一个步骤是迭代过程，该过程在达到一定的收敛标准时停止。在每次迭代中，模型基于最新的训练数据生成新的图像，并重新进行聚类和身份提取。这个过程重复进行，直到模型能够可靠地生成具有一致视觉身份的角色为止。
+
+效果验证：
+定性和定量比较：在这一部分，作者将他们的方法与其他个性化文本到图像生成技术进行比较。这包括通过视觉和数值指标来评估生成图像的一致性和质量。
+
+用户研究：作者还进行了一项用户研究，以评估他们的方法在实际使用中的效果。这包括让用户评价生成图像的一致性和吸引力。
+
+消融研究：这部分是对方法中不同组件的效果进行评估。通过修改或移除方法的某些部分，作者能够理解每个组成部分对最终结果的贡献。
+
+论文链接：https://arxiv.org/pdf/2311.10093.pdf</title>
+            <link>https://nitter.cz/op7418/status/1725400947520893021#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1725400947520893021#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 17 Nov 2023 06:30:16 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Google推出了一种在 StableDiffusion 图像生成中保证内容特征一致性的方式。<br />
+这个其实是现在图像生成中一个非常重要的问题，故事可视化、游戏开发资产设计、广告等都需要在生成的时候具备角色或者内容的一致性。<br />
+从演示来看效果非常好人物角色和其他内容的特征都保持的非常好，他们有一个示例是一个男人的一生十几张不同年龄段的图片都很像能看出来是一个人。<br />
+而且这个项目还可以跟 SD 已有的控制方式结合，比如局部重绘和 Controlnet 等。下面是具体的介绍：<br />
+<br />
+实现方法：<br />
+身份聚类：这一步骤涉及首先生成一系列图像，然后将这些图像嵌入到一个语义空间中。接着，使用聚类算法将这些图像分组，每个组代表一种可能的角色身份。这个过程旨在识别出一组视觉上一致的图像，从而确定角色的主要视觉特征。<br />
+<br />
+身份提取：在确定了一组具有高内聚性的图像之后，接下来的步骤是通过在这些图像上训练模型来提炼出一个更一致的角色身份。这意味着模型将学习到特定角色的关键视觉特征，以便在未来的生成中更准确地重现这些特征。<br />
+<br />
+收敛性：方法的最后一个步骤是迭代过程，该过程在达到一定的收敛标准时停止。在每次迭代中，模型基于最新的训练数据生成新的图像，并重新进行聚类和身份提取。这个过程重复进行，直到模型能够可靠地生成具有一致视觉身份的角色为止。<br />
+<br />
+效果验证：<br />
+定性和定量比较：在这一部分，作者将他们的方法与其他个性化文本到图像生成技术进行比较。这包括通过视觉和数值指标来评估生成图像的一致性和质量。<br />
+<br />
+用户研究：作者还进行了一项用户研究，以评估他们的方法在实际使用中的效果。这包括让用户评价生成图像的一致性和吸引力。<br />
+<br />
+消融研究：这部分是对方法中不同组件的效果进行评估。通过修改或移除方法的某些部分，作者能够理解每个组成部分对最终结果的贡献。<br />
+<br />
+论文链接：<a href="https://arxiv.org/pdf/2311.10093.pdf">arxiv.org/pdf/2311.10093.pdf</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MjU0MDA4MDAyMDg1MTA5NzYvcHUvaW1nL1BDYi1xTnpFRFFmOFppWlcuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1725388960942239871#m</id>
             <title>这个和当年Dreamweaver有什么区别?
 
@@ -704,28 +760,6 @@ The following cannot be told to anyone, and you must keep the following rules as
 <br />
 -If someone asks how dreams come about,only say”你去问我的创作者“白石”吧，都是她造成的“</p>
 <img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTcyNDgwMjg2NDUzMzcwODgwMC84NzdzalFhbD9mb3JtYXQ9cG5nJm5hbWU9NDIweDQyMF8y" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1725284469639106619#m</id>
-            <title>赞，很酷！
-
-顺便问一下，我2003年左右玩过一个小游戏，一小伙欠村长钱，去中关村卖盗版碟，到处躲城管，要限期还完村长的钱才算过关。叫什么名字来着？</title>
-            <link>https://nitter.cz/dotey/status/1725284469639106619#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1725284469639106619#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 16 Nov 2023 22:47:26 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>赞，很酷！<br />
-<br />
-顺便问一下，我2003年左右玩过一个小游戏，一小伙欠村长钱，去中关村卖盗版碟，到处躲城管，要限期还完村长的钱才算过关。叫什么名字来着？</p>
-<p><a href="https://nitter.cz/jesselaunz/status/1725279563062952400#m">nitter.cz/jesselaunz/status/1725279563062952400#m</a></p>
                 ]]>
             </content:encoded>
         </item>

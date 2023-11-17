@@ -5,6 +5,76 @@
         <link>https://www.infoq.cn/topic/AI</link>
         
         <item>
+            <id>https://www.infoq.cn/article/w6e6BsbFAaGkDETwFEh1</id>
+            <title>AIGC在前端Web开发中的应用：响应式设计和Tailwind配置的完美搭档</title>
+            <link>https://www.infoq.cn/article/w6e6BsbFAaGkDETwFEh1</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/w6e6BsbFAaGkDETwFEh1</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 17 Nov 2023 06:28:55 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 响应式网页设计, ChatGPT, 文本简写, AI
+<br>
+<br>
+总结: 本文介绍了在响应式网页设计中使用ChatGPT实现智能简写的方法。传统方式中，为了适应不同屏幕大小，需要将文本分为两个版本，但这种方法繁琐且不受欢迎。而使用AI进行文本简写可以更好地解决这个问题。通过ChatGPT生成简写版本，可以保持原始文本的语气、风格和关键信息，并适应不同屏幕尺寸的显示需求。这种方法简单有效，可以提高用户体验。另外，本文还介绍了使用ChatGPT、GitHub Copilot和Phind组合生成符合黄金比例的Tailwind width配置的方法。这些语言模型为设计师提供了多种解决方案，可以提高设计效果。 </div>
+                        <hr>
+                    
+                    <p></p><h1>在响应式网页设计中使用ChatGPT实现智能简写</h1><p></p><p></p><p>自从移动Web诞生以来，数字设计师们就一直要求方案撰稿人们尽量缩短文本长度。</p><p></p><p>可总有叛逆青年对此表示不满，“怎么能妨碍自我表达呢！”</p><p></p><p></p><p></p><p></p><h4>传统方式</h4><p></p><p></p><p>长文本在大屏幕上显示效果不错，但在小屏上却容易让人头晕眼花。</p><p></p><p>解决办法非常简单！现在，我们只需要提醒方案创作者们将原始内容分为两个版本，其一先把文本量缩短约50%，其二则进一步提炼出几个核心要点。但这还是有点烦人，你的合作伙伴恐怕会表达强烈不满。</p><p></p><p>或者，我们也可以借助AI的力量……</p><p></p><p></p><h4>新的方式</h4><p></p><p></p><p>这就是AI响应式Web设计，页面规划的全新形态。</p><p></p><p></p><p></p><p></p><p></p><h2>根本问题</h2><p></p><p></p><p>由于响应式Web设计中的一大常见策略，就是在不同设备上让字体保持大小一致，所以当网站显示在较小、较窄的屏幕上时，大段的文字就只能向下方延伸。这样用户阅读起来就得不断滚动，不少受众觉得这种体验相当糟糕。</p><p></p><p></p><h2>解决之道</h2><p></p><p></p><p>答案很简单：使用ChatGPT进行文本简写！本文的要点也正在于此，下面我们就一同了解具体过程中涉及的思路和技巧。</p><p></p><p></p><h2>中等尺寸屏幕</h2><p></p><p></p><p>这里我们先用提示词生成一个简写后的段落，其长度约等于原始段落的60%。（眼尖的朋友可能发现了，我在提示词里要求的是缩短至10%。但这里必须得把要求极端化，否则ChatGPT的简写程度总是达不到要求。）</p><p></p><p></p><h4>使用以下提示词在中等尺寸的屏幕上生成简写文本：</h4><p></p><p></p><p></p><blockquote>对于以下原始文本，请在遵循各项具体要求的前提下创建简写版本：1. 保持原本的语气、风格和表达习惯：如果原始文本较为严肃、正式，则简写后也应保持这种风格。如果原始文本较为轻松愉快，则简写后也应保持这种风格。简写版本应该与作者在编写原始内容时的思路和表达方式保持一致。2. 保留关键信息：确保简写后的版本仍保留原始文本的要点和中心思想。在生成简写版本时，不可丢失关键信息。3. 长度：简写版的字符量应为原始文本的10%。原始文本：[此处添加您的原始文本，不含方括号]简写版本：</blockquote><p></p><p></p><p>通过尝试，我发现要想得到一份像样的简写版本，其实没必要把提示词搞得这么复杂。但明确表述这些要求会让我更加安心，毕竟我自己一直都对生成式AI抱有一点怀疑态度，所以就当是我有强迫症吧。</p><p></p><h2>小尺寸屏幕</h2><p></p><p></p><p>对于小尺寸屏幕，大家可以调整上述提示词，或者使用以下提示词进一步提炼要点：</p><p></p><h4>在ChatGPT中使用以下提示词，在小尺寸屏幕上输出要点概括：</h4><p></p><p></p><p></p><blockquote>对于以下原始文本，请生成简写版本，其中包含1到3条相互独立的要点概括，每点最多包含3到8个单词。原始文本：[此处添加您的原始文本，不含方括号]简写版本：</blockquote><p></p><p></p><h2>HTML形式</h2><p></p><p></p><p>这种结构非常简单而且效果不错。（可能有人会说这是在浪费带宽，毕竟确实需要传输额外的文本。我觉得咱们最好别抬杠，你杠就是你对。）</p><p></p><p><code lang="text"></code></p><div class="content-lg"><code lang="text">
+    <p>A lot of text goes here for big screens.</p>
+</code></div><code lang="text">
+<div class="content-md">
+    <p>Shorter text goes here for medium screens.</p>
+</div>
+<div class="content-sm">
+    <ul>
+        <li>Bullets...</li>
+        <li>go...</li>
+        <li>here...</li>
+    </ul>
+</div></code><p></p><p></p><p></p><h2>CSS形式</h2><p></p><p></p><p><code lang="text">/* Mobile First: Hide everything except the small text */
+.content-lg { display:none; }
+.content-md { display:none; }
+/* Medium Screen: Hide mobile, show medium */
+@media only screen and (min-width: 440px){
+.content-sm { display:none; }
+.content-md { display:block; }
+}
+/* Large Screen: Hide medium, show large */
+@media only screen and (min-width: 740px){
+.content-md { display:none; }
+.content-lg { display:block; }
+}</code></p><p></p><p>好了，就是这么简单。希望我的方法能给大家带来启发，特别是让作者跟设计师之间脆弱的合作关系继续维持下去。</p><p></p><p>提醒各位，请一定使用GPT-4来实现这项技术。毕竟跟4代相比，GPT-3只能算是个自动补全器、效果还很一般。</p><p></p><p></p><h1>使用ChatGPT、GitHub Copilot与Phind组合，为width类生成Tailwind配置</h1><p></p><p></p><p>借助ChatGPT 4、GitHub Copilot和Phind的力量，轻松生成符合黄金比例的Tailwind width配置。</p><p></p><p>这些语言模型就如同一个个可以直接对话的助手，各自为同一问题提供不同的解决方案。</p><p></p><p>这里我们主要试验它们各自对黄金比例的配置建议，并讨论具体效果如何。</p><p></p><p></p><h2>试验案例</h2><p></p><p></p><p>这里我们只使用个人项目，并没有完整的设计，单纯用于尝试各种布局灵感。</p><p></p><p>我打算在Web应用程序的Tailwind配置中添加一些自定义的width大小，且桌面分辨率最大不超过800像素。</p><p></p><p>我向ChatGPT 4和GitHub Copilot Chat提出了相同的问题，但得到的答案却有所区别。</p><p></p><p></p><h2>ChatGPT 4</h2><p></p><p></p><p>先来看看我向ChatGPT 4提出的问题。</p><p></p><p><img src="https://static001.geekbang.org/infoq/70/70b4892b5569b66f61f64284e26b2f7d.png" /></p><p></p><p>﻿它给出的建议如下。</p><p></p><p><img src="https://static001.geekbang.org/infoq/00/00732be98c2336c5f40e563d143281ab.png" /></p><p>﻿</p><p>大家可能已经注意到，它使用我添加的约束（即使用黄金比例）来计算所给出的最后一个尺寸（384像素）的实际大小，希望借此达到我所要求的800像素。之后，它尝试创建了一系列width utilities将其区隔开来，基本处理逻辑跟Tailwind差不多。</p><p></p><p>我并没有检查它建议的所有utilities，但第一条和最后一条根据rem与px的比率计算可知是正确的。</p><p></p><h2>Github Copilot</h2><p></p><p></p><p>之后，我又尝试通过VSCode使用GitHub Copilot来生成这份列表。</p><p></p><p>下面来看提示词和相应的输出结果：</p><p></p><p><img src="https://static001.geekbang.org/infoq/bc/bc8a4ec1bec0e9c9e6d09d7105c94539.png" /></p><p>﻿</p><p>这里的步骤更为精细，最终达到800像素，而且它正确地从400像素开始建议（因为Tailwind已经定义了384像素），但我发现它并没有理会黄金比例（约为1.61）这码事。</p><p></p><p>它显然是忽略了使用黄金比例的要求，没有用它来进行区隔，也没有用该比例计算两个utilities类之间以rem或px为单位的距离结果。</p><p></p><p></p><h2>Github Copilot Chat</h2><p></p><p></p><p>我随后又尝试了Github Copilot Chat:</p><p></p><p><img src="https://static001.geekbang.org/infoq/dc/dcf6f37150c5b94405738e538f5b317c.png" /></p><p></p><p>﻿它给出的响应如下：</p><p></p><p><img src="https://static001.geekbang.org/infoq/1f/1f0dc5e33de25bbc95c68d4e984d306d.png" /></p><p>﻿</p><p>它似乎并不知道Tailwind已经给出了到384像素的width类，但在区隔各width类时，它正确使用了黄金比例的近似值。</p><p></p><p></p><h2>Phind</h2><p></p><p></p><p>最后，我向Phind提出了同样的问题，结果如下：</p><p></p><p><img src="https://static001.geekbang.org/infoq/27/27e509e604421dc34cea12b0ef487f6a.png" /></p><p></p><p><img src="https://static001.geekbang.org/infoq/35/35864d08ea8e2d442d050f9bab449b47.png" /></p><p></p><p></p><p>很明显，Phind给出的答案更靠谱。它解释了自己的整个计算过程，在每个步骤中都用到了黄金比例，给出Tailwind配置并演示了具体该如何使用。</p><p></p><p></p><p>原文链接：</p><p><a href="https://thecleverest.com/using-chatgpt-for-smart-truncation-in-responsive-web-design/">https://thecleverest.com/using-chatgpt-for-smart-truncation-in-responsive-web-design/</a>"</p><p></p><p><a href="https://allaboutcoding.ghinda.com/using-chatgpt-github-copilot-and-phind-to-generate-tailwind-config-for-width-classes">https://allaboutcoding.ghinda.com/using-chatgpt-github-copilot-and-phind-to-generate-tailwind-config-for-width-classes</a>"</p><p></p><p></p><p></p><h5>相关阅读：</h5><p></p><p></p><p><a href="https://www.infoq.cn/article/uui4NVydvW9GO32OA3tB?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">AIGC&nbsp;浪潮下，如何推动企业应用及落地？</a>"</p><p><a href="https://www.infoq.cn/article/rggHjzaBfCVPV5hxTF7H?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">顶流「AIGC」的疯狂与争议|解读&nbsp;AIGC&nbsp;的 2022</a>"</p><p><a href="https://www.infoq.cn/article/NqVwsVxRrd7smxodMUgk?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">AIGC 将如何影响产业？又面临哪些科技治理的问题和挑战？</a>"</p><p><a href="https://www.infoq.cn/video/kxtTSYgd34dmmI8Pzb1A?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">AIGC&nbsp;发展现状与应用展望</a>"</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.infoq.cn/article/rsWGiToNHaspoM75YwbG</id>
+            <title>百川智能与鹏城实验室开展合作，突破国产算力大模型长窗口技术</title>
+            <link>https://www.infoq.cn/article/rsWGiToNHaspoM75YwbG</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/rsWGiToNHaspoM75YwbG</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 17 Nov 2023 06:26:25 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 百川智能, 鹏城实验室, 国产算力, 大模型
+<br>
+<br>
+总结: 百川智能与鹏城实验室合作研发基于国产算力的128K长窗口大模型“鹏城-百川·脑海33B”，这是国产算力大模型创新与落地的一次实践，对国产算力大模型发展具有积极示范作用。 </div>
+                        <hr>
+                    
+                    <p>11月16日，<a href="https://www.infoq.cn/article/ivM3DbowD6o9Ro4jIeGq?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">百川智能</a>"与<a href="https://www.infoq.cn/article/BVX31hO4ZBgsjIYC5gmj?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">鹏城实验室</a>"宣布携手探索大模型训练和应用，合作研发基于国产算力的128K长窗口大模型“鹏城-百川·脑海33B”。这是国产算力大模型创新与落地的一次实践，对国产算力大模型发展具有积极示范作用。</p><p></p><p><img src="https://static001.geekbang.org/infoq/b2/b2c86c1c6f573991ce76f72c08533cac.png" /></p><p></p><p></p><p></p><h2>百川智能携手鹏城实验室助力国产算力大模型创新</h2><p></p><p>&nbsp;</p><p>众所周知，训练大模型需要海量的算力，并且大模型参数数量的增长与算力的平方成正比。大模型性能的竞争，一定程度上是算力的比拼。在复杂多变的国际环境下，国内算力供给与需求之间的“鸿沟”持续扩大，国产化算力已经成为国内大模型企业的必要选择。</p><p>&nbsp;</p><p>虽然国内诸多企业在通用AI芯片方面早有布局，在芯片量产、生态构建、应用拓展领域也取得了不错进展，但基于国产算力训练大模型，仍面临着生态建设、成本控制、能效比优化等阻碍。因此算力完全自主，仍需要芯片厂商、大模型企业、学术科研机构等多方共同努力。</p><p>&nbsp;</p><p>鹏城实验室表示，鹏城实验室秉持“国产算力+自主大模型”的创新理念，依托“鹏城·脑海”开源联合体，广泛联合企业、高校和科研院所，致力于通过开源群智的合作模式共享资源，为千行百业插上人工智能的“翅膀”。百川智能是国内领先的大模型企业，自成立以来一直在推动大模型研发和开源生态建设，其开源和闭源模型在同等量级权威评测中都取得了优异成绩。双方在合作过程中能够充分发挥各自优势形成合力，更好地满足我国不断增长的智能化转型需求，助力中国人工智能产业快速崛起。</p><p>&nbsp;</p><p>百川智能表示，百川智能希望通过开源、与合作伙伴共创等方式助力中国大模型创新，繁荣本土大模型生态。鹏城实验室作为国家战略科技力量的重要组成部分，在国产算力大模型研发和应用等方面一直处于国内领先位置。本次百川智能与鹏城实验室合作研发“鹏城-百川·脑海33B”长窗口大模型，是国产算力大模型技术创新和落地的一次突破。未来，百川智能将在技术、算力等诸多维度不断深化与鹏城实验室的合作，持续助力本土大模型创新发展。</p><p>&nbsp;</p><p></p><h2>国产算力最长上下文窗口，“鹏城-百川·脑海33B”率先实现国产算力技术突破</h2><p></p><p>&nbsp;</p><p>论坛上，百川智能和鹏城实验室展示了双方共同研发的“鹏城-百川·脑海33B”大模型。“鹏城-百川·脑海33B”的128K长上下文窗口基于“鹏城云脑”国产算力平台训练，未来可升级至192K，是基于国产算力训练的最长上下文窗口。</p><p>&nbsp;</p><p>上下文窗口长度对模型理解和生成与特定上下文相关的文本至关重要，是大模型的核心技术之一。通常而言，更长的上下文窗口可以提供更丰富的语义信息、消除歧义，能够让模型生成的内容更准确、更流畅。</p><p>&nbsp;</p><p>为了更好地提升“鹏城-百川·脑海33B”上下文窗口长度和模型整体性能，百川智能和鹏城实验室对模型进行了全流程优化。在数据集构建方面，采用精细的数据构造，实现了段落、句子粒度的自动化数据过滤、选择、配比，良好的提升了数据质量；在训练架构上，通过NormHead、max-Z-Loss、dynamic-LR等自研或业界领先的模型训练优化技术，对Transformer模块进行深度优化，确保模型收敛稳定的同时，全面提升了模型优化效率和最终效果；此外，还在全生命周期的模型工具集中，通过与北京大学王亦洲、杨耀东老师团队的合作，首创了带安全约束的RLHF对齐技术，有效提升了模型内容生成质量和安全性。</p><p>&nbsp;</p><p>未来，双方将在国产算力大模型技术创新和模型落地等方面继续加强合作，并与相关领域的优势单位如北京大学、清华大学等开展协同创新，助力本土大模型在模型性能、技术创新方面持续突破，推动本土大模型进一步开源开放，为更多行业智能化转型提供帮助和支持。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.infoq.cn/article/cEREueFSDRlWuqqCkMZ2</id>
             <title>AIGC算法揭秘及产业落地应用分享</title>
             <link>https://www.infoq.cn/article/cEREueFSDRlWuqqCkMZ2</link>
@@ -646,52 +716,6 @@
                         <hr>
                     
                     <p><a href="https://qcon.infoq.cn/2023/shanghai/?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=7&amp;utm_term=1110&amp;utm_content=fengyong">QCon 全球软件开发大会</a>"，将于 12 月在上海召开。通明智云技术副总裁冯勇将担任「<a href="https://qcon.infoq.cn/2023/shanghai/track/1602?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=7&amp;utm_term=1110&amp;utm_content=fengyong">面向人工智能时代的架构</a>"」的专题出品人。在此次专题中，从实践者角度出发的观点，你将了解到在以人工智能为中心的软件架构设计上奏效的方法，或者不奏效的方法。</p><p></p><p><a href="https://qcon.infoq.cn/2023/shanghai/track/1602?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=7&amp;utm_term=1110&amp;utm_content=fengyong">冯勇</a>"，2001 年起加入 F5 公司，担任 F5 中国区构架师技术总监，帮助中国金融和运营商行业客户实现应用交付和安全构架，从传统数据中心进化到多云多活、云原生应用构架。通明湖产品构架、技术战略和大客户技术支持。</p><p></p><p>相信冯勇的到来，可以帮助提升此专题的质量，让你学习到构建人工智能系统和应用的现代软件架构的最新趋势和技术，能够帮助听众构建和维护未来基于人工智能的系统。</p><p></p><p>除上述专题外，QCon 上海还将围绕&nbsp;<a href="https://qcon.infoq.cn/2023/shanghai/track/1598?utm_source=infoqweb&amp;utm_medium=teacherart">智能化信创软件&nbsp;IDE</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1595?utm_source=infoqweb&amp;utm_medium=teacherart">GenAI和通用大模型应用探索</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1597?utm_source=infoqweb&amp;utm_medium=teacherart">LLM&nbsp;时代的性能优化</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1599?utm_source=infoqweb&amp;utm_medium=teacherart">LLM&nbsp;时代的大前端技术</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1602?utm_source=infoqweb&amp;utm_medium=teacherart">面向人工智能时代的架构</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1604?utm_source=infoqweb&amp;utm_medium=teacherart">性能工程：提升效率和创新的新方法</a>"等专题进行交流。</p><p></p><p>QCon 上海 2023，相约 12 月！现在购票，享 7 折优惠，立减￥2040！咨询购票请联系：18514549229（微信同手机号）。</p><p></p><p><img src="https://static001.geekbang.org/infoq/01/0113b3dfb187d5f9988b7eb16d2e0594.png" /></p><p></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/k7A8JjzqilkBTms5RXU6</id>
-            <title>金蝶：星瀚已给上百家大型企业完成ERP系统替代升级</title>
-            <link>https://www.infoq.cn/article/k7A8JjzqilkBTms5RXU6</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/k7A8JjzqilkBTms5RXU6</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 09 Nov 2023 10:44:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 金蝶云·苍穹 GPT 大模型, 星瀚 V6.0 更新, 智能化, 全球化, 信创化
-<br>
-<br>
-总结: 金蝶云·苍穹 GPT 大模型和星瀚 V6.0 更新是金蝶公司在智能化、全球化和信创化方面的重要突破。金蝶云·苍穹 GPT 大模型是中国首个财务领域大模型，而星瀚 V6.0 更新强调智能化，通过云原生和AI原生的结合，在财务智能应用和平台层面进行创新。此外，星瀚 V6.0 还实现了全球化，建立了国际化基础平台，并开发了本地化应用。信创化方面，金蝶与华为合作，打造了面向大企业的HR人力云产品，并持续升级。金蝶云·星瀚已经帮助上百家大型企业完成ERP替代升级。 </div>
-                        <hr>
-                    
-                    <p>3 个月前，金蝶宣布发布<a href="https://www.infoq.cn/article/LUHdjDy1v1FPfmlkPx0k?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">金蝶云·苍穹 GPT 大模型</a>"，其中涵盖中国首个财务领域大模型。彼时，金蝶还介绍了苍穹 GPT 助手在 HR、供应链与制造领域以及开发领域的应用。</p><p></p><p>11 月 9 日，金蝶进一步推出基于苍穹的星瀚 V6.0 更新，强调智能化是其一大突破。金蝶云·星瀚是金蝶专为大型企业设计的SaaS管理云，自2016年开始研发，2018年正式对外发布，此后每年至少进行一次大版本迭代升级，今年已经升级到 V6.0 旗舰版本。</p><p></p><p><img src="https://static001.infoq.cn/resource/image/aa/df/aacfdbd7a6b0504d3987de09070624df.jpg" /></p><p></p><p>此次星瀚 V6.0 的更新迭代与其背后的苍穹PaaS平台密不可分。金蝶中国副总裁、研发平台副总经理李帆表示，金蝶云·苍穹每年都有一个大版本更新，近期亦有多项新特性发布，包括企业级大模型能力平台、轻建模、无代码开发平台、流式集成等。简言之，如今的苍穹 PaaS 除了云原生底座，还有以苍穹GPT为核心的AI原生底座。</p><p></p><p>据金蝶中国执行副总裁、研发平台总经理赵燕锡介绍，星瀚 V6.0 实现了三个方面的重要突破：</p><p></p><p>1.智能化。云原生 + AI 原生，不仅在智能应用上有创新，还在平台层面进行了创新，专注于财务智能应用的创新。</p><p>2.全球化。该版本建立了国际化基础平台，围绕财务、人力、税务等领域在不同国家做了业务框架的设计，并且开发了本地化应用。目前金蝶已在新加坡成立公司，创建了海外节点。</p><p>3.信创化。信创升级不仅仅是功能替代，更是对新应用和新模式的追求。2020年，星瀚<a href="https://www.infoq.cn/article/TTDomPgEEYjUM7BODlEi?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">与华为合作</a>"HRIT项目，此后金蝶吸收了在华为合作共建项目中的丰富场景与领先实践，打造了新的面向大企业的 <a href="https://www.infoq.cn/article/Igh3UxK5dKWq3qx4VF1d?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">HR 人力云产品</a>"，并持续升级，目前与山西国运、吉利控股、建设银行等一系列超大型企业客户就HR项目建立了深入合作。</p><p></p><p>“SAP做了的，我们要做，SAP做不了的，我们也要做。”赵燕锡强调。</p><p></p><p>金蝶中国助理总裁、供应链与税务云产品部总经理曾顺基进一步介绍道，星瀚 V6.0 在安全性、高性能、体验优化、数据库适配等多个方面实现了 800 多项特性应用的升级，这次更新的关键更新集中在以下十个方面：</p><p>GPT财务助手、数字员工。电子凭证池，支持异构系统数据接入。预算会计，全局预测更智能，包括沙盘模拟和智能预测；实现更智能化的管控预警。价值型司库，EAS资金历史数据一键升级星瀚，可全面替代SAP资金管理。智慧税务：新增税务检查、一键报税等功能。强化装备制造，产品选配、BOM变更评估、齐套检查多方面完善升级。盈利能力分析，使用“事件会计+盈利能力分析”实现精细、高效的多维损益分析。标准成本+实际成本，对标SAP。吸收500强需求，丰富供应链功能，支持采购品类管理，满足超大集团的采购管控需求。持续打造世界级HR，薪酬管理和人事服务场景更加丰富，数据处理增强。</p><p></p><p>据透露，从正式发布至今，金蝶云·星瀚已经帮助上百家大型企业完成ERP替代升级。</p><p></p><p><img src="https://static001.infoq.cn/resource/image/e2/ca/e205602269fc52b1557a8c4a4e7b91ca.png" /></p><p></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/pMUTkGIW2puumDIJiaWT</id>
-            <title>效率提升11倍，PODsys如何快速部署大模型AI算力平台？</title>
-            <link>https://www.infoq.cn/article/pMUTkGIW2puumDIJiaWT</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/pMUTkGIW2puumDIJiaWT</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 09 Nov 2023 09:18:44 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 大模型, 算力平台, 部署, PODsys
-<br>
-<br>
-总结: 大模型是通用人工智能的底座，但大模型训练对算力平台的依赖非常大。PODsys是一个开源的智算集群系统方案，通过简化部署流程和提供完整的工具链，帮助用户快速部署大模型算力平台，提升部署效率，助力大模型创新。 </div>
-                        <hr>
-                    
-                    <p>大模型是通用人工智能的底座，但大模型训练对算力平台的依赖非常大。大模型算力平台是指支撑大模型训练和推理部署的算力基础设施，包括业界最新的加速卡、高速互联网络、高性能分布式存储系统、液冷系统和高效易用的大模型研发工具和框架。在算力平台的部署过程中，大模型研发机构常常需要面对一系列的问题：大模型算力平台是什么样的？如何快速构建大模型算力平台？如何确保算力平台稳定可靠？如何提升部署效率？如何提升算力平台的性能……这些问题能否顺利解决，直接关系到大模型研发和应用落地的速度。</p><p>&nbsp;</p><p>为了帮助用户加速大模型的技术创新与应用落地，浪潮信息发布了大模型智算软件栈OGAI（Open GenAI Infra）。OGAI由5层架构组成，从L0到L4分别对应于基础设施层的智算中心OS产品、系统环境层的PODsys产品、调度平台层的AIStation产品、模型工具层的YLink产品和多模纳管层的MModel产品。</p><p>&nbsp;</p><p>其中L1层PODsys是一个为客户提供智算集群系统环境部署方案的开源项目，具备基础设施环境安装、环境部署、用户管理、系统监控和资源调度等能力。用户只需执行两条简单的命令，即可完成大模型算力平台的部署，将大模型算力平台部署效率提升11倍，帮助用户顺利迈出大模型研发的第一步。（下载地址：<a href="https://podsys.ai/">https://podsys.ai/</a>"）</p><p></p><h2>大模型算力平台部署难题亟待求解</h2><p></p><p>&nbsp;</p><p>大模型参数量和训练数据复杂性快速增加，对AI算力平台的建设提出了新的要求，即需要从数据中心规模化算力部署的角度，统筹考虑大模型分布式训练对计算、网络和存储的需求特点，并集成平台软件、结合应用实践，充分关注数据传输、任务调度、并行优化、资源利用率等，设计和构建高性能、高速互联、存算平衡的可扩展集群系统，以满足AI大模型的训练需求。</p><p>&nbsp;</p><p>强大的大模型算力平台不仅需要高性能的CPU、GPU、存储、网络等硬件设备，还需要考虑不同硬件和软件之间的兼容性和版本选择，确保驱动和工具的适配性和稳定性。当算力平台的规模从十几台服务器扩展到几百台，平台部署难度会呈指数级上升。</p><p>&nbsp;</p><p>首先，算力平台部署需要的相关驱动程序、软件包往往高达数十个，正确安装、部署并优化这些驱动程序与软件，需要专业的运维工程师和大量调试时间，严重影响部署效率。其次，为了确保算力平台的高性能和稳定运行，需要验证不同硬件环境下的软件适配，优化BIOS、操作系统、底层驱动、文件系统和网络等多项指标，找到最优的选择，这一工作同样费时费力。此外，算力平台的资源状态处于时刻的变动中，如果不进行合理的资源调度与管理，很容易影响平台的资源利用率。</p><p></p><h2>如何快速部署大模型算力平台？</h2><p></p><p>&nbsp;</p><p>PODsys专注于大模型算力平台部署场景，提供包括基础设施环境安装、环境部署、用户管理、系统监控和资源调度在内的完整工具链，旨在打造一个开源、高效、兼容、易用的智算集群系统方案。</p><p>&nbsp;</p><p>PODsys整合了大模型算力平台部署所需的数十个驱动、软件等安装包以及对应的依赖和兼容关系，并提供了一系列的简化部署的脚本工具。使用这些工具只需要简单2个步骤，PODsys即可帮助用户快速部署大模型算力平台。</p><p></p><p><img src="https://static001.geekbang.org/infoq/e2/e28d58db02463f721b6aeff171d7cb6f.png" /></p><p></p><p>步骤1：使用docker run命令快速启动PODsys系统。</p><p>&nbsp;</p><p>PODsys系统集成了大模型算力平台部署所需的操作系统、GPU驱动、网卡驱动、通信加速库等数十个驱动程序、软件和安装包，并提供了一系列脚本工具来简化部署，让用户可以快速安装、配置和更新集群环境。PODsys大量选用了业界广泛使用的主流开源系统、工具、框架和软件，来保障整个部署方案的开放性、兼容性和稳定性。</p><p>&nbsp;</p><p>步骤2：使用install_client命令快速部署大模型算力平台的并行软件环境。</p><p>&nbsp;</p><p>PODsys将单机部署方式改成集群部署方式，可将部署效率提升11倍以上。在管理节点运行一句简单的命令（install_client.sh），即可完成大模型算力平台的环境配置，集成了高速文件系统接口、自动化运维工具、NVDIA CUDA编程框架、NCCL高性能通信库，支持NGC 加速平台等功能。并能实现多用户、多租户管理集群。</p><p>&nbsp;</p><p>PODsys提供了全面的系统监控和管理，帮助用户实时监控集群的状态和性能指标。通过可视化的界面，用户可以查看集群资源的使用情况、作业的执行情况和性能瓶颈，从而及时调整集群配置和优化作业性能，来保证算力平台的高性能和稳定运行。</p><p></p><p><img src="https://static001.geekbang.org/infoq/e3/e363a8e01822b72342b27975ba39fbec.png" /></p><p></p><p>此外，PODsys具备高效的资源调度和作业管理功能，可以根据用户的需求自动调度和管理作业，确保集群的资源利用率和作业的执行效率。</p><p>&nbsp;</p><p>伴随着大模型的快速应用，算力平台的鲁棒性、易用性、部署效率成为用户关注的首要问题。针对商业用户，PODsys还提供专业的算力平台性能调优服务。总之，PODsys提供了一套完整的工具链，将大模型平台部署变得像系统安装一样简单，让用户省时、省力地部署大模型算力平台，助力大模型创新走好第一步。</p>
                 ]]>
             </content:encoded>
         </item>
