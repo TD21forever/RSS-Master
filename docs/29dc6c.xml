@@ -5,6 +5,118 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1726439252316364814#m</id>
+            <title>StyleTTS 2：一个开源的媲美 Elevenlabs 的文本转语音工具
+
+🌈 多样化的语音风格：StyleTTS 2能够自动生成多种不同的语音风格，无需依赖特定的参考语音。
+
+🗣 更自然的语音：采用特殊的训练方法，使得生成的语音更加贴近真人的说话方式。
+
+⚡ 高效生成：利用扩散模型技术，高效地生成不同风格的语音。
+
+🎚 精确的语音控制：提供对语音的精确控制，包括语速、语调等方面。
+
+👤 接近真人的语音合成：在测试中，生成的语音质量接近于真人录音。
+
+🔊 适应不同说话者：即使没有特定说话者的样本，也能生成高质量的语音。
+
+工作原原理及特点：
+
+StyleTTS 2利用风格扩散和与大型语音语言模型（SLM）的对抗性训练来实现接近人类水平的TTS合成。
+
+这个模型与其前身不同之处在于，它通过扩散模型将风格建模为一个潜在的随机变量，以生成最适合文本的风格，而不需要参考语音，实现了高效的潜在扩散，同时受益于扩散模型提供的多样化语音合成。
+
+1、非自回归架构：与传统的自回归TTS模型不同，StyleTTS 2采用非自回归架构。它在生成语音时不需要依次预测每个音频样本，而是可以并行生成整个语音序列。这种方法大大提高了语音合成的速度。
+
+2、风格编码器：StyleTTS 2包含一个风格编码器，它能够从参考音频中提取风格特征。这些风格特征包括韵律、语调、语速等，使得生成的语音不仅准确传达文本信息，还能够模仿参考音频的风格和情感。
+
+3、端到端生成：StyleTTS 2实现了端到端的语音生成。它直接从文本和风格向量生成音频波形，而不是先生成梅尔频谱图再转换为音频。这种方法简化了传统TTS系统中的多步骤流程，提高了效率和生成语音的自然度。
+
+4、风格扩散和对抗训练：StyleTTS 2结合了风格扩散和对抗训练技术。风格扩散是指通过风格编码器生成固定长度的风格向量，这些向量能够捕捉到不同的语音风格。对抗训练则是通过生成对抗网络（GAN）来提高语音的自然度和真实感。
+
+5、高质量语音合成：通过这些技术，StyleTTS 2能够生成高质量、自然流畅且具有表现力的语音。它在多个数据集上的性能评估显示，其生成的语音质量接近甚至超过了人类的录音。
+
+6、多样性和灵活性：StyleTTS 2的设计允许它适应不同的语音风格和情感，使其在多种应用场景中都能生成适宜的语音输出。
+
+StyleTTS 2在多个评估结果方面表现出色：
+
+1、高质量语音合成：在多个测试中，StyleTTS 2生成的语音质量非常高，接近或达到了真人录音的水平。这表明了其在模仿人类语音方面的高效能力。
+
+2、比较平均意见得分（CMOS）：在LJSpeech数据集上的评估显示，StyleTTS 2的语音生成质量超过了人类录音，获得了统计上显著的CMOS得分。CMOS是评估语音合成质量的一个重要指标，高CMOS得分意味着更高的语音质量和自然度。
+
+3、多说话者数据集表现：在VCTK数据集上，StyleTTS 2也展现了优异的性能，达到了人类水平。这个数据集包含多个说话者的语音，表明StyleTTS 2能够适应不同说话者的特点，生成多样化且高质量的语音。
+
+4、自然度和表现力：StyleTTS 2不仅在语音的清晰度和准确度上表现优秀，还在自然度和表现力方面取得了显著成果。这意味着生成的语音不仅仅是清晰可懂，还能够传达丰富的情感和语调变化。
+
+StyleTTS 2的评估结果显示了其在文本到语音合成领域的先进性能，特别是在语音质量、自然度和多样性方面。
+
+项目及演示：https://styletts2.github.io/
+GitHub：https://github.com/yl4579/StyleTTS2
+论文：https://arxiv.org/abs/2306.07691
+Colab在线体验：https://colab.research.google.com/github/yl4579/StyleTTS2/blob/main/</title>
+            <link>https://nitter.cz/xiaohuggg/status/1726439252316364814#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1726439252316364814#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 20 Nov 2023 03:16:08 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>StyleTTS 2：一个开源的媲美 Elevenlabs 的文本转语音工具<br />
+<br />
+🌈 多样化的语音风格：StyleTTS 2能够自动生成多种不同的语音风格，无需依赖特定的参考语音。<br />
+<br />
+🗣 更自然的语音：采用特殊的训练方法，使得生成的语音更加贴近真人的说话方式。<br />
+<br />
+⚡ 高效生成：利用扩散模型技术，高效地生成不同风格的语音。<br />
+<br />
+🎚 精确的语音控制：提供对语音的精确控制，包括语速、语调等方面。<br />
+<br />
+👤 接近真人的语音合成：在测试中，生成的语音质量接近于真人录音。<br />
+<br />
+🔊 适应不同说话者：即使没有特定说话者的样本，也能生成高质量的语音。<br />
+<br />
+工作原原理及特点：<br />
+<br />
+StyleTTS 2利用风格扩散和与大型语音语言模型（SLM）的对抗性训练来实现接近人类水平的TTS合成。<br />
+<br />
+这个模型与其前身不同之处在于，它通过扩散模型将风格建模为一个潜在的随机变量，以生成最适合文本的风格，而不需要参考语音，实现了高效的潜在扩散，同时受益于扩散模型提供的多样化语音合成。<br />
+<br />
+1、非自回归架构：与传统的自回归TTS模型不同，StyleTTS 2采用非自回归架构。它在生成语音时不需要依次预测每个音频样本，而是可以并行生成整个语音序列。这种方法大大提高了语音合成的速度。<br />
+<br />
+2、风格编码器：StyleTTS 2包含一个风格编码器，它能够从参考音频中提取风格特征。这些风格特征包括韵律、语调、语速等，使得生成的语音不仅准确传达文本信息，还能够模仿参考音频的风格和情感。<br />
+<br />
+3、端到端生成：StyleTTS 2实现了端到端的语音生成。它直接从文本和风格向量生成音频波形，而不是先生成梅尔频谱图再转换为音频。这种方法简化了传统TTS系统中的多步骤流程，提高了效率和生成语音的自然度。<br />
+<br />
+4、风格扩散和对抗训练：StyleTTS 2结合了风格扩散和对抗训练技术。风格扩散是指通过风格编码器生成固定长度的风格向量，这些向量能够捕捉到不同的语音风格。对抗训练则是通过生成对抗网络（GAN）来提高语音的自然度和真实感。<br />
+<br />
+5、高质量语音合成：通过这些技术，StyleTTS 2能够生成高质量、自然流畅且具有表现力的语音。它在多个数据集上的性能评估显示，其生成的语音质量接近甚至超过了人类的录音。<br />
+<br />
+6、多样性和灵活性：StyleTTS 2的设计允许它适应不同的语音风格和情感，使其在多种应用场景中都能生成适宜的语音输出。<br />
+<br />
+StyleTTS 2在多个评估结果方面表现出色：<br />
+<br />
+1、高质量语音合成：在多个测试中，StyleTTS 2生成的语音质量非常高，接近或达到了真人录音的水平。这表明了其在模仿人类语音方面的高效能力。<br />
+<br />
+2、比较平均意见得分（CMOS）：在LJSpeech数据集上的评估显示，StyleTTS 2的语音生成质量超过了人类录音，获得了统计上显著的CMOS得分。CMOS是评估语音合成质量的一个重要指标，高CMOS得分意味着更高的语音质量和自然度。<br />
+<br />
+3、多说话者数据集表现：在VCTK数据集上，StyleTTS 2也展现了优异的性能，达到了人类水平。这个数据集包含多个说话者的语音，表明StyleTTS 2能够适应不同说话者的特点，生成多样化且高质量的语音。<br />
+<br />
+4、自然度和表现力：StyleTTS 2不仅在语音的清晰度和准确度上表现优秀，还在自然度和表现力方面取得了显著成果。这意味着生成的语音不仅仅是清晰可懂，还能够传达丰富的情感和语调变化。<br />
+<br />
+StyleTTS 2的评估结果显示了其在文本到语音合成领域的先进性能，特别是在语音质量、自然度和多样性方面。<br />
+<br />
+项目及演示：<a href="https://styletts2.github.io/">styletts2.github.io/</a><br />
+GitHub：<a href="https://github.com/yl4579/StyleTTS2">github.com/yl4579/StyleTTS2</a><br />
+论文：<a href="https://arxiv.org/abs/2306.07691">arxiv.org/abs/2306.07691</a><br />
+Colab在线体验：<a href="https://colab.research.google.com/github/yl4579/StyleTTS2/blob/main/">colab.research.google.com/gi…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MjY0MzA2OTI5MjQ2NDEyODAvcHUvaW1nL21iMUx5Q284Yjkwb1lBMnMuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1726420710703411675#m</id>
             <title>R to @xiaohuggg: 也可以使用爬取的内容创建Assistant自定义助手
 
@@ -710,36 +822,6 @@ GitHub：<a href="https://github.com/AMAAI-Lab/mustango">github.com/AMAAI-Lab/mu
 <br />
 应该是完成了部分既定的目标​​​👍</p>
 <img src="https://nitter.cz/pic/enc/YW1wbGlmeV92aWRlb190aHVtYi8xNzI1ODY4MDk3NDQ0MzkyOTYwL2ltZy9JOUk5MEZtNEFnZnhhZUlJLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1725850463785074731#m</id>
-            <title>不得不说Meta Quest3 这一波还是可以的！
-
-混合虚拟现实技术明年必将爆发💥
-
-将会带来很多实用和娱乐场景的巨大变化。
-
-虚拟和现实的界限将越来越模糊！</title>
-            <link>https://nitter.cz/xiaohuggg/status/1725850463785074731#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1725850463785074731#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 18 Nov 2023 12:16:29 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>不得不说Meta Quest3 这一波还是可以的！<br />
-<br />
-混合虚拟现实技术明年必将爆发💥<br />
-<br />
-将会带来很多实用和娱乐场景的巨大变化。<br />
-<br />
-虚拟和现实的界限将越来越模糊！</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MjU1NTgwNDkwMzU3NTU1MjAvcHUvaW1nL2pOU0RlSzRkZ1VIQzlfY0UuanBn" />
                 ]]>
             </content:encoded>
         </item>
