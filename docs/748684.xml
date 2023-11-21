@@ -5,6 +5,158 @@
         <link>https://nitter.cz/quinn_leng</link>
         
         <item>
+            <id>https://nitter.cz/GregKamradt/status/1727018183608193393#m</id>
+            <title>RT by @quinn_leng: Claude 2.1 (200K Tokens) - Pressure Testing Long Context Recall
+
+We all love increasing context lengths - but what's performance like?
+
+Anthropic reached out with early access to Claude 2.1 so I repeated the “needle in a haystack” analysis I did on GPT-4
+
+Here's what I found:
+
+Findings:
+* At 200K tokens (nearly 470 pages), Claude 2.1 was able to recall facts at some document depths
+* Facts at the very top and very bottom of the document were recalled with nearly 100% accuracy
+* Facts positioned at the top of the document were recalled with less performance than the bottom (similar to GPT-4)
+* Starting at ~90K tokens, performance of recall at the bottom of the document started to get increasingly worse
+* Performance at low context lengths was not guaranteed
+
+So what:
+* Prompting Engineering Matters - It’s worth tinkering with your prompt and running A/B tests to measure retrieval accuracy
+* No Guarantees - Your facts are not guaranteed to be retrieved. Don’t bake the assumption they will into your applications
+* Less context = more accuracy - This is well know, but when possible reduce the amount of context you send to the models to increase its ability to recall
+* Position Matters - Also well know, but facts placed at the very beginning and 2nd half of the document seem to be recalled better
+
+Why run this test?:
+* I’m a big fan of Anthropic! They are helping to push the bounds on LLM performance and creating powerful tools for the world
+* As a practitioner of LLMs, it’s important to build an intuition for how they work, where they excel and their limits
+* Tests like these, while not bulletproof, help showcase real world examples and get a feeling for how they work. The goal is to transfer this knowledge to productive use cases
+
+Overview of the process:
+* Use Paul Graham essays as ‘background’ tokens. With 218 essays it’s easy to get up to 200K tokens (repeated essays when necessary)
+* Place a random statement within the document at various depths. Fact used: “The best thing to do in San Francisco is eat a sandwich and sit in Dolores Park on a sunny day.”
+* Ask Claude 2.1 to answer this question only using the context provided
+* Evaluate Claude 2.1s answer with GPT-4 using @LangChainAI evals
+* Rinse and repeat for 35x document depths between 0% (top of document) and 100% (bottom of document) (sigmoid distribution) and 35x context lengths (1K Tokens > 200K Tokens)
+
+Next Steps To Take This Further:
+* For rigor, one should do a key:value retrieval step. However for relatability I did a San Francisco line within PGs essays for clarity and practical relevance
+* Repeat test multiple times for increased statistical significance
+
+Notes:
+* Amount Of Recall Matters - The model's performance is hypothesized to diminish when tasked with multiple fact retrievals or when engaging in synthetic reasoning steps
+* Changing your prompt, question, fact to be retrieved and background context will impact performance
+* The Anthropic team reached out and offered credits to repeat this test. They also offered prompt advice to maximize performance. It's important to clarify that their involvement was strictly logistical. The integrity and independence of the results were maintained, ensuring that the findings reflect my unbiased evaluation and are not influenced by their support.
+* This test cost ~$1,016 for API calls ($8 per million tokens)</title>
+            <link>https://nitter.cz/GregKamradt/status/1727018183608193393#m</link>
+            <guid isPermaLink="false">https://nitter.cz/GregKamradt/status/1727018183608193393#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Nov 2023 17:36:36 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Claude 2.1 (200K Tokens) - Pressure Testing Long Context Recall<br />
+<br />
+We all love increasing context lengths - but what's performance like?<br />
+<br />
+Anthropic reached out with early access to Claude 2.1 so I repeated the “needle in a haystack” analysis I did on GPT-4<br />
+<br />
+Here's what I found:<br />
+<br />
+Findings:<br />
+* At 200K tokens (nearly 470 pages), Claude 2.1 was able to recall facts at some document depths<br />
+* Facts at the very top and very bottom of the document were recalled with nearly 100% accuracy<br />
+* Facts positioned at the top of the document were recalled with less performance than the bottom (similar to GPT-4)<br />
+* Starting at ~90K tokens, performance of recall at the bottom of the document started to get increasingly worse<br />
+* Performance at low context lengths was not guaranteed<br />
+<br />
+So what:<br />
+* Prompting Engineering Matters - It’s worth tinkering with your prompt and running A/B tests to measure retrieval accuracy<br />
+* No Guarantees - Your facts are not guaranteed to be retrieved. Don’t bake the assumption they will into your applications<br />
+* Less context = more accuracy - This is well know, but when possible reduce the amount of context you send to the models to increase its ability to recall<br />
+* Position Matters - Also well know, but facts placed at the very beginning and 2nd half of the document seem to be recalled better<br />
+<br />
+Why run this test?:<br />
+* I’m a big fan of Anthropic! They are helping to push the bounds on LLM performance and creating powerful tools for the world<br />
+* As a practitioner of LLMs, it’s important to build an intuition for how they work, where they excel and their limits<br />
+* Tests like these, while not bulletproof, help showcase real world examples and get a feeling for how they work. The goal is to transfer this knowledge to productive use cases<br />
+<br />
+Overview of the process:<br />
+* Use Paul Graham essays as ‘background’ tokens. With 218 essays it’s easy to get up to 200K tokens (repeated essays when necessary)<br />
+* Place a random statement within the document at various depths. Fact used: “The best thing to do in San Francisco is eat a sandwich and sit in Dolores Park on a sunny day.”<br />
+* Ask Claude 2.1 to answer this question only using the context provided<br />
+* Evaluate Claude 2.1s answer with GPT-4 using <a href="https://nitter.cz/LangChainAI" title="LangChain">@LangChainAI</a> evals<br />
+* Rinse and repeat for 35x document depths between 0% (top of document) and 100% (bottom of document) (sigmoid distribution) and 35x context lengths (1K Tokens > 200K Tokens)<br />
+<br />
+Next Steps To Take This Further:<br />
+* For rigor, one should do a key:value retrieval step. However for relatability I did a San Francisco line within PGs essays for clarity and practical relevance<br />
+* Repeat test multiple times for increased statistical significance<br />
+<br />
+Notes:<br />
+* Amount Of Recall Matters - The model's performance is hypothesized to diminish when tasked with multiple fact retrievals or when engaging in synthetic reasoning steps<br />
+* Changing your prompt, question, fact to be retrieved and background context will impact performance<br />
+* The Anthropic team reached out and offered credits to repeat this test. They also offered prompt advice to maximize performance. It's important to clarify that their involvement was strictly logistical. The integrity and independence of the results were maintained, ensuring that the findings reflect my unbiased evaluation and are not influenced by their support.<br />
+* This test cost ~$1,016 for API calls ($8 per million tokens)</p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvRl9lWXJESWFBQUFzV1ZwLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/DrJimFan/status/1727023421899620642#m</id>
+            <title>RT by @quinn_leng: Instead of taking OAI's merger offer, Anthropic launched major updates for Claude 2.1🎉. I think the below chart is the most interesting: this is how all LLM papers that claim "long context" should report: error rates on "Beginning", "Middle", and "End".
+
+There're a bunch of papers making wild claims, all the way up to "1B context tokens". Here's a friendly reminder that the 30-year-old LSTM literally supports infinite context. It's a meaningless number unless you show detailed evaluations at different locations in the context. LLMs tend to be "Lost in the Middle", i.e. struggle to remember and reason on information at the middle section of the context window: https://arxiv.org/abs/2307.03172
+
+Claude 2.1 also claims "2x hallucination" - please take this with a BIG grain of salt. A while back, I expressed my concerns about Vectara's benchmarking protocol. Same concerns apply here too. 
+
+The trivial solution to achieve 0% hallucination is simply refusing to answer every query. One cannot claim victory here without a careful Safety vs Usefulness analysis. How many questions that Claude used to answer correctly are now rejected?
+
+In any case, kudos to Dario &amp; Anthropic team on assuring us a solid alternative during turmoil! 🩷https://www.anthropic.com/index/claude-2-1</title>
+            <link>https://nitter.cz/DrJimFan/status/1727023421899620642#m</link>
+            <guid isPermaLink="false">https://nitter.cz/DrJimFan/status/1727023421899620642#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Nov 2023 17:57:24 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Instead of taking OAI's merger offer, Anthropic launched major updates for Claude 2.1🎉. I think the below chart is the most interesting: this is how all LLM papers that claim "long context" should report: error rates on "Beginning", "Middle", and "End".<br />
+<br />
+There're a bunch of papers making wild claims, all the way up to "1B context tokens". Here's a friendly reminder that the 30-year-old LSTM literally supports infinite context. It's a meaningless number unless you show detailed evaluations at different locations in the context. LLMs tend to be "Lost in the Middle", i.e. struggle to remember and reason on information at the middle section of the context window: <a href="https://arxiv.org/abs/2307.03172">arxiv.org/abs/2307.03172</a><br />
+<br />
+Claude 2.1 also claims "2x hallucination" - please take this with a BIG grain of salt. A while back, I expressed my concerns about Vectara's benchmarking protocol. Same concerns apply here too. <br />
+<br />
+The trivial solution to achieve 0% hallucination is simply refusing to answer every query. One cannot claim victory here without a careful Safety vs Usefulness analysis. How many questions that Claude used to answer correctly are now rejected?<br />
+<br />
+In any case, kudos to Dario & Anthropic team on assuring us a solid alternative during turmoil! 🩷<a href="https://www.anthropic.com/index/claude-2-1">anthropic.com/index/claude-2…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvRl9lWmZQSmJnQUE2WmVOLnBuZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/quinn_leng/status/1727013248602640734#m</id>
+            <title>Anthropic 果然还是 OpenAI 的最强对手，Claude 2.1 版本增加到了 200k 上下文，同时增加了非常实用的使用工具的能力，以及 system prompt ，同时回答准确度也有了显著提升。模型整体水平跟 OpenAI 接近了一大步</title>
+            <link>https://nitter.cz/quinn_leng/status/1727013248602640734#m</link>
+            <guid isPermaLink="false">https://nitter.cz/quinn_leng/status/1727013248602640734#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Nov 2023 17:16:59 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Anthropic 果然还是 OpenAI 的最强对手，Claude 2.1 版本增加到了 200k 上下文，同时增加了非常实用的使用工具的能力，以及 system prompt ，同时回答准确度也有了显著提升。模型整体水平跟 OpenAI 接近了一大步</p>
+<p><a href="https://nitter.cz/AnthropicAI/status/1727001773888659753#m">nitter.cz/AnthropicAI/status/1727001773888659753#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/quinn_leng/status/1726764513905848597#m</id>
             <title>另一个我这两天一直在思考的问题是，人类在 AI 面前显得多脆弱，世界上最有前景的公司几个小时之内被三个人搞得七零八落。如果人类真的灭绝了，大概率应该是自己搞砸了，而不是因为 AGI</title>
             <link>https://nitter.cz/quinn_leng/status/1726764513905848597#m</link>
@@ -348,59 +500,6 @@ Specs:<br />
                     
                     <p>GPT-4-turbo 128k 上下文在超过 64k 以后开始出现遗忘。当然这个测试题目很简单，把一句话插入到一篇小说的不同位置来检查回复中是否记得这句话。我猜如果是更复杂的总结归类任务，遗忘应该会更明显。但是 64k 对于绝大多数场景完全够用。 long context 真的是赚钱神器，一个 prompt 下去一美元就没了</p>
 <p><a href="https://nitter.cz/GregKamradt/status/1722386725635580292#m">nitter.cz/GregKamradt/status/1722386725635580292#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/quinn_leng/status/1721795966897164310#m</id>
-            <title>试用了一下，多语言效果都很不错，算是目前说中文最自然的 TTS 服务</title>
-            <link>https://nitter.cz/quinn_leng/status/1721795966897164310#m</link>
-            <guid isPermaLink="false">https://nitter.cz/quinn_leng/status/1721795966897164310#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 07 Nov 2023 07:45:22 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>试用了一下，多语言效果都很不错，算是目前说中文最自然的 TTS 服务</p>
-<p><a href="https://nitter.cz/finedtune/status/1721760389581709778#m">nitter.cz/finedtune/status/1721760389581709778#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/quinn_leng/status/1721780027187241293#m</id>
-            <title>OpenAI 多次出场血洗下游厂商的一些思考：</title>
-            <link>https://nitter.cz/quinn_leng/status/1721780027187241293#m</link>
-            <guid isPermaLink="false">https://nitter.cz/quinn_leng/status/1721780027187241293#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 07 Nov 2023 06:42:02 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>OpenAI 多次出场血洗下游厂商的一些思考：</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRi1UOXdiQWJVQUFPcktXLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/quinn_leng/status/1721774867106898048#m</id>
-            <title>R to @quinn_leng: 3. Reproducible outputs + better instruction following：企业级开发者的福音，可复现和输出稳定性一直是困扰规模化应用的瓶颈。相对复杂的使用场景需要几十次甚至上百次调用 API，很容易出现错误被系统放大的情况。有了可复现以及更加稳定的输出格式，系统的成功率大幅提升。</title>
-            <link>https://nitter.cz/quinn_leng/status/1721774867106898048#m</link>
-            <guid isPermaLink="false">https://nitter.cz/quinn_leng/status/1721774867106898048#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 07 Nov 2023 06:21:32 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>3. Reproducible outputs + better instruction following：企业级开发者的福音，可复现和输出稳定性一直是困扰规模化应用的瓶颈。相对复杂的使用场景需要几十次甚至上百次调用 API，很容易出现错误被系统放大的情况。有了可复现以及更加稳定的输出格式，系统的成功率大幅提升。</p>
                 ]]>
             </content:encoded>
         </item>
