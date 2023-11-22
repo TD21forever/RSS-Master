@@ -5,6 +5,44 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1727174145031717143#m</id>
+            <title>Stable Video Diffusion视频生成的原始项目需要40G显存的运行空间，这对于我们普通公司和普通人有点困难。StabilityAI的研究人员分享了如何将项目的运行显存压缩到20G。下面是一些要点：
+
+1）即使是在小型 GPU 上，你也可以生成视频（只需减少你一次解码的帧数，因为这会占用大部分的 VRAM）。14 帧（一次解码一帧）应该不会超过 20GB VRAM。
+
+2）帧率条件 (fps conditioning) 和运动条件 (motion conditioning) 可以极大地影响结果。你不必非要选择帧率条件 = 渲染帧率！我在高帧率/高运动条件下，以较低的帧率渲染时也取得了非常好的结果。
+
+3）指导比例 (guidance scale) 也会对结果产生重大影响。我们实际上是在帧轴上线性地从 w_min 增加到 w_max。更多的指导会带来更好的一致性，但可能导致过饱和。为了获得最佳结果，请尝试调整 w_min/w_max。
+
+4）该模型只针对 576x1024 的分辨率进行了训练，当显著改变长宽比时，你可能会观察到一些异常。如果你仍然想尝试，增加条件增强的噪声可能会有所帮助。
+
+4）当将模型应用于具有严重压缩伪影的图像时，增加条件增强的噪声也是必要的。</title>
+            <link>https://nitter.cz/op7418/status/1727174145031717143#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1727174145031717143#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 22 Nov 2023 03:56:20 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Stable Video Diffusion视频生成的原始项目需要40G显存的运行空间，这对于我们普通公司和普通人有点困难。StabilityAI的研究人员分享了如何将项目的运行显存压缩到20G。下面是一些要点：<br />
+<br />
+1）即使是在小型 GPU 上，你也可以生成视频（只需减少你一次解码的帧数，因为这会占用大部分的 VRAM）。14 帧（一次解码一帧）应该不会超过 20GB VRAM。<br />
+<br />
+2）帧率条件 (fps conditioning) 和运动条件 (motion conditioning) 可以极大地影响结果。你不必非要选择帧率条件 = 渲染帧率！我在高帧率/高运动条件下，以较低的帧率渲染时也取得了非常好的结果。<br />
+<br />
+3）指导比例 (guidance scale) 也会对结果产生重大影响。我们实际上是在帧轴上线性地从 w_min 增加到 w_max。更多的指导会带来更好的一致性，但可能导致过饱和。为了获得最佳结果，请尝试调整 w_min/w_max。<br />
+<br />
+4）该模型只针对 576x1024 的分辨率进行了训练，当显著改变长宽比时，你可能会观察到一些异常。如果你仍然想尝试，增加条件增强的噪声可能会有所帮助。<br />
+<br />
+4）当将模型应用于具有严重压缩伪影的图像时，增加条件增强的噪声也是必要的。</p>
+<p><a href="https://nitter.cz/timudk/status/1727064128223855087#m">nitter.cz/timudk/status/1727064128223855087#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1727145368306196595#m</id>
             <title>这个清晰度和动作幅度StableVideo上限很高啊，这个视频是在A100上跑出来的。</title>
             <link>https://nitter.cz/op7418/status/1727145368306196595#m</link>
@@ -419,23 +457,6 @@ DeepShrink High-Res Fix还能有效避免大尺寸图片生成时的内容重复
 我上次关于LCM的内容发出后不到两周就出现了Krea这种现象及产品，现在就是看谁跑的快了。每次底层技术的大突破都会造就一个新的现象级应用。</p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvRl9ZWWc2bWJVQUE0MXlvLmpwZw==" />
 <img src="https://nitter.cz/pic/enc/bWVkaWEvRl9ZWS1xR2FnQUEyUm05LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1726627156640592242#m</id>
-            <title>R to @op7418: 麻了又有错别字，应该是“上下移动”</title>
-            <link>https://nitter.cz/op7418/status/1726627156640592242#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1726627156640592242#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 20 Nov 2023 15:42:47 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>麻了又有错别字，应该是“上下移动”</p>
                 ]]>
             </content:encoded>
         </item>
