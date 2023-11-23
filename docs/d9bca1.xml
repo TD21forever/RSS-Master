@@ -5,6 +5,29 @@
         <link>https://www.infoq.cn/topic/AI</link>
         
         <item>
+            <id>https://www.infoq.cn/article/ajiASOVMieVsMOvd5YiR</id>
+            <title>中国生成式AI开发者生态调研 ｜参与有礼</title>
+            <link>https://www.infoq.cn/article/ajiASOVMieVsMOvd5YiR</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/ajiASOVMieVsMOvd5YiR</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 23 Nov 2023 06:12:44 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: ChatGPT, 生成式AI生态, AI开发和应用, AI基础设施
+<br>
+<br>
+总结: 自ChatGPT爆火至今已有一年，国内在生成式AI生态方面取得了进展。InfoQ邀请开发者参与问卷调研，内容将呈现在2024年终趋势与技术展望报告中。参与者有机会获得多种礼品。详情请点击链接参与。 </div>
+                        <hr>
+                    
+                    <p>自ChatGPT爆火至今已有一年，这一年国内在基础大模型层面、相关工具层面，甚至是行业应用层面均取得了一定进展。基于此，InfoQ希望邀请广大开发者共同完善国内的生成式AI生态，本次问卷共分为【AI开发和应用】、【AI基础设施】、【AI未来趋势】三部分，一共27个问题，完整填完预计需要花费6分钟。</p><p></p><p>与此同时，我们也准备了部分礼品，分别是价值500元的京东礼品卡、价值50元的京东礼品卡、太空熊风扇、小米无线蓝牙耳机Air2&nbsp;SE、InfoQ定制马克杯、InfoQ定制抱枕等众多礼品，数量有限，先到先得。</p><p></p><p>调研问卷的最终内容将由InfoQ研究中心分析后呈现在【2024年终趋势与技术展望】报告中，届时通过InfoQ官网电子书模块可以下载阅读，再次感谢各位开发者的参与（点击链接：<a href="https://jinshuju.net/f/BWMntO?x_field_1=gongzhonghao">https://jinshuju.net/f/BWMntO?x_field_1=gongzhonghao</a>" 或者扫描下方海报二维码即可参与）。</p><p></p><p><img src="https://static001.infoq.cn/resource/image/d0/e3/d0d4c32fd2bce56551edaefe1d69c0e3.jpg" /></p><p></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.infoq.cn/article/1SzWMPmv5S9utdqlRTeV</id>
             <title>飞书发布系列AI产品：有知识、有记忆、更主动，还能像“人”一样协作</title>
             <link>https://www.infoq.cn/article/1SzWMPmv5S9utdqlRTeV</link>
@@ -691,29 +714,6 @@
 .content-md { display:none; }
 .content-lg { display:block; }
 }</code></p><p></p><p>好了，就是这么简单。希望我的方法能给大家带来启发，特别是让作者跟设计师之间脆弱的合作关系继续维持下去。</p><p></p><p>提醒各位，请一定使用GPT-4来实现这项技术。毕竟跟4代相比，GPT-3只能算是个自动补全器、效果还很一般。</p><p></p><p></p><h1>使用ChatGPT、GitHub Copilot与Phind组合，为width类生成Tailwind配置</h1><p></p><p></p><p>借助ChatGPT 4、GitHub Copilot和Phind的力量，轻松生成符合黄金比例的Tailwind width配置。</p><p></p><p>这些语言模型就如同一个个可以直接对话的助手，各自为同一问题提供不同的解决方案。</p><p></p><p>这里我们主要试验它们各自对黄金比例的配置建议，并讨论具体效果如何。</p><p></p><p></p><h2>试验案例</h2><p></p><p></p><p>这里我们只使用个人项目，并没有完整的设计，单纯用于尝试各种布局灵感。</p><p></p><p>我打算在Web应用程序的Tailwind配置中添加一些自定义的width大小，且桌面分辨率最大不超过800像素。</p><p></p><p>我向ChatGPT 4和GitHub Copilot Chat提出了相同的问题，但得到的答案却有所区别。</p><p></p><p></p><h2>ChatGPT 4</h2><p></p><p></p><p>先来看看我向ChatGPT 4提出的问题。</p><p></p><p><img src="https://static001.geekbang.org/infoq/70/70b4892b5569b66f61f64284e26b2f7d.png" /></p><p></p><p>﻿它给出的建议如下。</p><p></p><p><img src="https://static001.geekbang.org/infoq/00/00732be98c2336c5f40e563d143281ab.png" /></p><p>﻿</p><p>大家可能已经注意到，它使用我添加的约束（即使用黄金比例）来计算所给出的最后一个尺寸（384像素）的实际大小，希望借此达到我所要求的800像素。之后，它尝试创建了一系列width utilities将其区隔开来，基本处理逻辑跟Tailwind差不多。</p><p></p><p>我并没有检查它建议的所有utilities，但第一条和最后一条根据rem与px的比率计算可知是正确的。</p><p></p><h2>Github Copilot</h2><p></p><p></p><p>之后，我又尝试通过VSCode使用GitHub Copilot来生成这份列表。</p><p></p><p>下面来看提示词和相应的输出结果：</p><p></p><p><img src="https://static001.geekbang.org/infoq/bc/bc8a4ec1bec0e9c9e6d09d7105c94539.png" /></p><p>﻿</p><p>这里的步骤更为精细，最终达到800像素，而且它正确地从400像素开始建议（因为Tailwind已经定义了384像素），但我发现它并没有理会黄金比例（约为1.61）这码事。</p><p></p><p>它显然是忽略了使用黄金比例的要求，没有用它来进行区隔，也没有用该比例计算两个utilities类之间以rem或px为单位的距离结果。</p><p></p><p></p><h2>Github Copilot Chat</h2><p></p><p></p><p>我随后又尝试了Github Copilot Chat:</p><p></p><p><img src="https://static001.geekbang.org/infoq/dc/dcf6f37150c5b94405738e538f5b317c.png" /></p><p></p><p>﻿它给出的响应如下：</p><p></p><p><img src="https://static001.geekbang.org/infoq/1f/1f0dc5e33de25bbc95c68d4e984d306d.png" /></p><p>﻿</p><p>它似乎并不知道Tailwind已经给出了到384像素的width类，但在区隔各width类时，它正确使用了黄金比例的近似值。</p><p></p><p></p><h2>Phind</h2><p></p><p></p><p>最后，我向Phind提出了同样的问题，结果如下：</p><p></p><p><img src="https://static001.geekbang.org/infoq/27/27e509e604421dc34cea12b0ef487f6a.png" /></p><p></p><p><img src="https://static001.geekbang.org/infoq/35/35864d08ea8e2d442d050f9bab449b47.png" /></p><p></p><p></p><p>很明显，Phind给出的答案更靠谱。它解释了自己的整个计算过程，在每个步骤中都用到了黄金比例，给出Tailwind配置并演示了具体该如何使用。</p><p></p><p></p><p>原文链接：</p><p><a href="https://thecleverest.com/using-chatgpt-for-smart-truncation-in-responsive-web-design/">https://thecleverest.com/using-chatgpt-for-smart-truncation-in-responsive-web-design/</a>"</p><p></p><p><a href="https://allaboutcoding.ghinda.com/using-chatgpt-github-copilot-and-phind-to-generate-tailwind-config-for-width-classes">https://allaboutcoding.ghinda.com/using-chatgpt-github-copilot-and-phind-to-generate-tailwind-config-for-width-classes</a>"</p><p></p><p></p><p></p><h5>相关阅读：</h5><p></p><p></p><p><a href="https://www.infoq.cn/article/uui4NVydvW9GO32OA3tB?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">AIGC&nbsp;浪潮下，如何推动企业应用及落地？</a>"</p><p><a href="https://www.infoq.cn/article/rggHjzaBfCVPV5hxTF7H?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">顶流「AIGC」的疯狂与争议|解读&nbsp;AIGC&nbsp;的 2022</a>"</p><p><a href="https://www.infoq.cn/article/NqVwsVxRrd7smxodMUgk?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">AIGC 将如何影响产业？又面临哪些科技治理的问题和挑战？</a>"</p><p><a href="https://www.infoq.cn/video/kxtTSYgd34dmmI8Pzb1A?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">AIGC&nbsp;发展现状与应用展望</a>"</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/rsWGiToNHaspoM75YwbG</id>
-            <title>百川智能与鹏城实验室开展合作，突破国产算力大模型长窗口技术</title>
-            <link>https://www.infoq.cn/article/rsWGiToNHaspoM75YwbG</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/rsWGiToNHaspoM75YwbG</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 17 Nov 2023 06:26:25 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 百川智能, 鹏城实验室, 国产算力, 大模型
-<br>
-<br>
-总结: 百川智能与鹏城实验室合作研发基于国产算力的128K长窗口大模型“鹏城-百川·脑海33B”，这是国产算力大模型创新与落地的一次实践，对国产算力大模型发展具有积极示范作用。 </div>
-                        <hr>
-                    
-                    <p>11月16日，<a href="https://www.infoq.cn/article/ivM3DbowD6o9Ro4jIeGq?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">百川智能</a>"与<a href="https://www.infoq.cn/article/BVX31hO4ZBgsjIYC5gmj?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">鹏城实验室</a>"宣布携手探索大模型训练和应用，合作研发基于国产算力的128K长窗口大模型“鹏城-百川·脑海33B”。这是国产算力大模型创新与落地的一次实践，对国产算力大模型发展具有积极示范作用。</p><p></p><p><img src="https://static001.geekbang.org/infoq/b2/b2c86c1c6f573991ce76f72c08533cac.png" /></p><p></p><p></p><p></p><h2>百川智能携手鹏城实验室助力国产算力大模型创新</h2><p></p><p>&nbsp;</p><p>众所周知，训练大模型需要海量的算力，并且大模型参数数量的增长与算力的平方成正比。大模型性能的竞争，一定程度上是算力的比拼。在复杂多变的国际环境下，国内算力供给与需求之间的“鸿沟”持续扩大，国产化算力已经成为国内大模型企业的必要选择。</p><p>&nbsp;</p><p>虽然国内诸多企业在通用AI芯片方面早有布局，在芯片量产、生态构建、应用拓展领域也取得了不错进展，但基于国产算力训练大模型，仍面临着生态建设、成本控制、能效比优化等阻碍。因此算力完全自主，仍需要芯片厂商、大模型企业、学术科研机构等多方共同努力。</p><p>&nbsp;</p><p>鹏城实验室表示，鹏城实验室秉持“国产算力+自主大模型”的创新理念，依托“鹏城·脑海”开源联合体，广泛联合企业、高校和科研院所，致力于通过开源群智的合作模式共享资源，为千行百业插上人工智能的“翅膀”。百川智能是国内领先的大模型企业，自成立以来一直在推动大模型研发和开源生态建设，其开源和闭源模型在同等量级权威评测中都取得了优异成绩。双方在合作过程中能够充分发挥各自优势形成合力，更好地满足我国不断增长的智能化转型需求，助力中国人工智能产业快速崛起。</p><p>&nbsp;</p><p>百川智能表示，百川智能希望通过开源、与合作伙伴共创等方式助力中国大模型创新，繁荣本土大模型生态。鹏城实验室作为国家战略科技力量的重要组成部分，在国产算力大模型研发和应用等方面一直处于国内领先位置。本次百川智能与鹏城实验室合作研发“鹏城-百川·脑海33B”长窗口大模型，是国产算力大模型技术创新和落地的一次突破。未来，百川智能将在技术、算力等诸多维度不断深化与鹏城实验室的合作，持续助力本土大模型创新发展。</p><p>&nbsp;</p><p></p><h2>国产算力最长上下文窗口，“鹏城-百川·脑海33B”率先实现国产算力技术突破</h2><p></p><p>&nbsp;</p><p>论坛上，百川智能和鹏城实验室展示了双方共同研发的“鹏城-百川·脑海33B”大模型。“鹏城-百川·脑海33B”的128K长上下文窗口基于“鹏城云脑”国产算力平台训练，未来可升级至192K，是基于国产算力训练的最长上下文窗口。</p><p>&nbsp;</p><p>上下文窗口长度对模型理解和生成与特定上下文相关的文本至关重要，是大模型的核心技术之一。通常而言，更长的上下文窗口可以提供更丰富的语义信息、消除歧义，能够让模型生成的内容更准确、更流畅。</p><p>&nbsp;</p><p>为了更好地提升“鹏城-百川·脑海33B”上下文窗口长度和模型整体性能，百川智能和鹏城实验室对模型进行了全流程优化。在数据集构建方面，采用精细的数据构造，实现了段落、句子粒度的自动化数据过滤、选择、配比，良好的提升了数据质量；在训练架构上，通过NormHead、max-Z-Loss、dynamic-LR等自研或业界领先的模型训练优化技术，对Transformer模块进行深度优化，确保模型收敛稳定的同时，全面提升了模型优化效率和最终效果；此外，还在全生命周期的模型工具集中，通过与北京大学王亦洲、杨耀东老师团队的合作，首创了带安全约束的RLHF对齐技术，有效提升了模型内容生成质量和安全性。</p><p>&nbsp;</p><p>未来，双方将在国产算力大模型技术创新和模型落地等方面继续加强合作，并与相关领域的优势单位如北京大学、清华大学等开展协同创新，助力本土大模型在模型性能、技术创新方面持续突破，推动本土大模型进一步开源开放，为更多行业智能化转型提供帮助和支持。</p>
                 ]]>
             </content:encoded>
         </item>
