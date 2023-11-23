@@ -5,6 +5,112 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1727609231866773878#m</id>
+            <title>MCVD：通用的视频生成模型 可以预测“未来”和“重建”过去
+
+它可以：
+
+🎥 视频生成：创造全新的视频片段。
+
+🔮 视频预测：根据已有视频片段，预测可能发生的画面
+
+🔄 过去重建：根据已有视频片段，重建倒推过去画面
+
+🔗 视频插值：在两个已知视频片段之间，创造出连接的两段的中间画面。
+
+MCVD是一个多功能的视频生成模型，能够进行视频的前向/后向预测和插值，适用于多种视频处理任务。
+
+例如：你有一段视频，但想要在视频中添加或改变一些内容，比如让视频中的人物做不同的动作，或者在视频的某个时间点添加新的场景。MCVD就是一种可以帮你做到这些的技术。
+
+它的特别之处在于，使用这个技术，你可以用一个模型来完成多种不同的视频编辑任务。比如，你可以用它来填补视频中缺失的部分，预测接下来会发生什么，或者完全创造一个新的视频片段。
+
+工作原理和特点：
+
+工作原理：
+1、基于分数的扩散损失函数：MCVD使用这种损失函数来生成新的视频帧。这种方法通过逐步去除噪声来生成图像，从而创造出逼真的视频帧。
+
+2、高斯噪声注入和去噪：在训练过程中，模型会向当前的视频帧注入高斯噪声，然后根据过去或未来的帧信息去除这些噪声。
+
+3、随机遮蔽训练：MCVD在训练时会随机遮蔽过去或未来的帧，这使得模型能够适应不同的视频生成任务。
+
+4、2D卷积U-Net架构：与更复杂的3D、循环或变换器架构相比，MCVD采用了2D卷积U-Net架构，这使得模型在处理视频数据时更为高效。
+
+5、时空自适应归一化（SPATIN）：MCVD通过这种技术处理过去和未来的帧，增强了模型对时间序列数据的处理能力。
+
+主要特点：
+1、通用视频生成模型：MCVD能够处理多种视频生成任务，包括前向/后向预测和插值。
+
+2、多种应用场景：它能够进行无条件生成、未来预测、过去重建和插值等多种视频处理任务。
+
+3、高质量和多样化的视频样本：MCVD能够产生高质量和多样化的视频样本，适用于各种应用。
+
+4、低资源需求：与其他大型视频处理模型相比，MCVD只需要1-4个GPU即可进行有效训练。
+
+5、良好的扩展性：模型在通道数量方面具有良好的扩展性，可以根据需要进行进一步的扩展。
+
+项目及演示：https://mask-cond-video-diffusion.github.io/
+论文：https://arxiv.org/abs/2205.09853
+GitHub：https://github.com/voletiv/mcvd-pytorch</title>
+            <link>https://nitter.cz/xiaohuggg/status/1727609231866773878#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1727609231866773878#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 23 Nov 2023 08:45:12 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>MCVD：通用的视频生成模型 可以预测“未来”和“重建”过去<br />
+<br />
+它可以：<br />
+<br />
+🎥 视频生成：创造全新的视频片段。<br />
+<br />
+🔮 视频预测：根据已有视频片段，预测可能发生的画面<br />
+<br />
+🔄 过去重建：根据已有视频片段，重建倒推过去画面<br />
+<br />
+🔗 视频插值：在两个已知视频片段之间，创造出连接的两段的中间画面。<br />
+<br />
+MCVD是一个多功能的视频生成模型，能够进行视频的前向/后向预测和插值，适用于多种视频处理任务。<br />
+<br />
+例如：你有一段视频，但想要在视频中添加或改变一些内容，比如让视频中的人物做不同的动作，或者在视频的某个时间点添加新的场景。MCVD就是一种可以帮你做到这些的技术。<br />
+<br />
+它的特别之处在于，使用这个技术，你可以用一个模型来完成多种不同的视频编辑任务。比如，你可以用它来填补视频中缺失的部分，预测接下来会发生什么，或者完全创造一个新的视频片段。<br />
+<br />
+工作原理和特点：<br />
+<br />
+工作原理：<br />
+1、基于分数的扩散损失函数：MCVD使用这种损失函数来生成新的视频帧。这种方法通过逐步去除噪声来生成图像，从而创造出逼真的视频帧。<br />
+<br />
+2、高斯噪声注入和去噪：在训练过程中，模型会向当前的视频帧注入高斯噪声，然后根据过去或未来的帧信息去除这些噪声。<br />
+<br />
+3、随机遮蔽训练：MCVD在训练时会随机遮蔽过去或未来的帧，这使得模型能够适应不同的视频生成任务。<br />
+<br />
+4、2D卷积U-Net架构：与更复杂的3D、循环或变换器架构相比，MCVD采用了2D卷积U-Net架构，这使得模型在处理视频数据时更为高效。<br />
+<br />
+5、时空自适应归一化（SPATIN）：MCVD通过这种技术处理过去和未来的帧，增强了模型对时间序列数据的处理能力。<br />
+<br />
+主要特点：<br />
+1、通用视频生成模型：MCVD能够处理多种视频生成任务，包括前向/后向预测和插值。<br />
+<br />
+2、多种应用场景：它能够进行无条件生成、未来预测、过去重建和插值等多种视频处理任务。<br />
+<br />
+3、高质量和多样化的视频样本：MCVD能够产生高质量和多样化的视频样本，适用于各种应用。<br />
+<br />
+4、低资源需求：与其他大型视频处理模型相比，MCVD只需要1-4个GPU即可进行有效训练。<br />
+<br />
+5、良好的扩展性：模型在通道数量方面具有良好的扩展性，可以根据需要进行进一步的扩展。<br />
+<br />
+项目及演示：<a href="https://mask-cond-video-diffusion.github.io/">mask-cond-video-diffusion.gi…</a><br />
+论文：<a href="https://arxiv.org/abs/2205.09853">arxiv.org/abs/2205.09853</a><br />
+GitHub：<a href="https://github.com/voletiv/mcvd-pytorch">github.com/voletiv/mcvd-pyto…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mjc2MDc3NjcyNDA5NTM4NTYvcHUvaW1nL1NDdkZWbTNDSzJRYlJiNkMuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1727468251154620804#m</id>
             <title>RT by @xiaohuggg: #AI开源项目推荐：vscode-ui-sketcher
 
@@ -659,102 +765,6 @@ Emmett Shear <a href="https://nitter.cz/eshear" title="Emmett Shear">@eshear</a>
 <br />
 下载链接：<a href="http://bit.ly/47pdbAW">bit.ly/47pdbAW</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MjcyNTQ0MjMzOTM3Mzg3NTIvcHUvaW1nL3dxUy01TTBPdWk0aUQyQUkuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1727243786496229508#m</id>
-            <title>微软将于12月1日面向中国大陆的企业和教育机构用户免费提供Copilot功能。
-
-企业和教育机构可以使用 Windows Copilot、Bing Chat Enterprise 以及在 Microsoft Edge 中免费使用 Copilot。
-
-Copilot AI 模型支持联网获取数据。
-
-根据说明，Copilot 是免费提供的，只要企业和教育机构订阅了 Microsoft 365 即可，支持的许可证包括：
-
-Microsoft 365 E3
-Microsoft 365 E5
-Microsoft 365 Business Standard
-Microsoft 365 Business Premium
-Microsoft 365 A3
-Microsoft 365 A5</title>
-            <link>https://nitter.cz/xiaohuggg/status/1727243786496229508#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1727243786496229508#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 22 Nov 2023 08:33:03 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>微软将于12月1日面向中国大陆的企业和教育机构用户免费提供Copilot功能。<br />
-<br />
-企业和教育机构可以使用 Windows Copilot、Bing Chat Enterprise 以及在 Microsoft Edge 中免费使用 Copilot。<br />
-<br />
-Copilot AI 模型支持联网获取数据。<br />
-<br />
-根据说明，Copilot 是免费提供的，只要企业和教育机构订阅了 Microsoft 365 即可，支持的许可证包括：<br />
-<br />
-Microsoft 365 E3<br />
-Microsoft 365 E5<br />
-Microsoft 365 Business Standard<br />
-Microsoft 365 Business Premium<br />
-Microsoft 365 A3<br />
-Microsoft 365 A5</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MjcyNDAwNzk1NzAyNTU4NzIvcHUvaW1nL3p1TGY4X1JZXzNSZTBSZFcuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1727211162239193492#m</id>
-            <title>R to @xiaohuggg: 公布的三位董事的资料，其中两位是新增的。
-
-其他原本四位董事并没有说明是不是还在：Greg Brockman、Ilya Sutskever、Tasha McCauley、Helen Toner
-
-期待后续公布更多信息，估计还在商量。</title>
-            <link>https://nitter.cz/xiaohuggg/status/1727211162239193492#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1727211162239193492#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 22 Nov 2023 06:23:25 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>公布的三位董事的资料，其中两位是新增的。<br />
-<br />
-其他原本四位董事并没有说明是不是还在：Greg Brockman、Ilya Sutskever、Tasha McCauley、Helen Toner<br />
-<br />
-期待后续公布更多信息，估计还在商量。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRl9oSTdYTWFrQUFtUU1nLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1727207285389467917#m</id>
-            <title>OpenAI：Sam Altman将回归OpenAI担任首席执行官。
-
-并组建由 Bret Taylor（主席）、Larry Summers 和 Adam D'Angelo 组成的新初始董事会。
-
-🙂</title>
-            <link>https://nitter.cz/xiaohuggg/status/1727207285389467917#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1727207285389467917#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 22 Nov 2023 06:08:01 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>OpenAI：Sam Altman将回归OpenAI担任首席执行官。<br />
-<br />
-并组建由 Bret Taylor（主席）、Larry Summers 和 Adam D'Angelo 组成的新初始董事会。<br />
-<br />
-🙂</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRl9oRV9UeWFrQUF0bkxELmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
