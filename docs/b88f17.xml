@@ -5,6 +5,54 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1728147033213575424#m</id>
+            <title>已经翻译了原文：《Q* 假设：思维树推理、过程奖励模型，以及如何大幅提升合成数据的能力 [译]》
+https://baoyu.io/translations/ai/q-star-by-natolambert
+
+摘录最后一章：
+
+整合理解：Q* 可能指的是什么
+
+Q* 似乎采用了个性化排名模型（PRM）来对思考树（Tree of Thoughts）的推理数据进行评分，并通过离线强化学习（Offline RL）进行优化。这种方式与当前那些使用如动态政策优化（DPO）或迭代学习 Q 学习（ILQL）这类离线算法的强化学习人类反馈（RLHF）工具类似，这些工具在训练过程中并不需要从大语言模型（LLM）生成数据。在这种方法中，强化学习算法观察的“轨迹”是一系列推理步骤，因此我们最终以多步骤方式进行 RLHF，而不再是单纯的上下文带状策略。
+
+考虑到我听说的传闻，OpenAI 已在 RLHF 中使用离线 RL（这本身并不具有太多信息量），这对我来说并不是一个惊人的飞跃。这种方法的难点在于收集合适的提示，构建能够生成高质量推理步骤的模型，最关键的是：准确评估成千上万个完成的任务。
+
+最后一步则利用了所谓的“巨大计算资源”：用 AI 而不是人类来为每个步骤打分。在这里，合成数据显得尤为重要，相较于单一的连续思考路径，树状结构提供了更多选择，帮助我们最终找到正确答案。
+
+大量的计算资源与我所听闻的大型科技公司（如 Google、Anthropic、Cohere 等）正在使用过程监督或类似于现实生活人工智能反馈（RLAIF）的方法来创建大规模的预训练数据集的传言相符，这无疑需要大量的 GPU 时间。这与目前公开模型在该领域的差距令人担忧。
+
+虽然这些核心概念对我来说相对清晰，但要实现这些概念需要极高的模型操作技巧，这是很少人拥有的。从分布控制到大规模推断，再到 RL 的挑剔性，这些都远远超出了我的知识和经验范围。这些信息看似自然而然。ToT 和 PRM 的所有评估都集中在数学等推理问题上，这与最近新闻报道的这种泄露方法的内容完全吻合。即便这不是 Q*，也绝对是一个值得尝试的有趣实验。</title>
+            <link>https://nitter.cz/dotey/status/1728147033213575424#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1728147033213575424#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 24 Nov 2023 20:22:14 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>已经翻译了原文：《Q* 假设：思维树推理、过程奖励模型，以及如何大幅提升合成数据的能力 [译]》<br />
+<a href="https://baoyu.io/translations/ai/q-star-by-natolambert">baoyu.io/translations/ai/q-s…</a><br />
+<br />
+摘录最后一章：<br />
+<br />
+整合理解：Q* 可能指的是什么<br />
+<br />
+Q* 似乎采用了个性化排名模型（PRM）来对思考树（Tree of Thoughts）的推理数据进行评分，并通过离线强化学习（Offline RL）进行优化。这种方式与当前那些使用如动态政策优化（DPO）或迭代学习 Q 学习（ILQL）这类离线算法的强化学习人类反馈（RLHF）工具类似，这些工具在训练过程中并不需要从大语言模型（LLM）生成数据。在这种方法中，强化学习算法观察的“轨迹”是一系列推理步骤，因此我们最终以多步骤方式进行 RLHF，而不再是单纯的上下文带状策略。<br />
+<br />
+考虑到我听说的传闻，OpenAI 已在 RLHF 中使用离线 RL（这本身并不具有太多信息量），这对我来说并不是一个惊人的飞跃。这种方法的难点在于收集合适的提示，构建能够生成高质量推理步骤的模型，最关键的是：准确评估成千上万个完成的任务。<br />
+<br />
+最后一步则利用了所谓的“巨大计算资源”：用 AI 而不是人类来为每个步骤打分。在这里，合成数据显得尤为重要，相较于单一的连续思考路径，树状结构提供了更多选择，帮助我们最终找到正确答案。<br />
+<br />
+大量的计算资源与我所听闻的大型科技公司（如 Google、Anthropic、Cohere 等）正在使用过程监督或类似于现实生活人工智能反馈（RLAIF）的方法来创建大规模的预训练数据集的传言相符，这无疑需要大量的 GPU 时间。这与目前公开模型在该领域的差距令人担忧。<br />
+<br />
+虽然这些核心概念对我来说相对清晰，但要实现这些概念需要极高的模型操作技巧，这是很少人拥有的。从分布控制到大规模推断，再到 RL 的挑剔性，这些都远远超出了我的知识和经验范围。这些信息看似自然而然。ToT 和 PRM 的所有评估都集中在数学等推理问题上，这与最近新闻报道的这种泄露方法的内容完全吻合。即便这不是 Q*，也绝对是一个值得尝试的有趣实验。</p>
+<p><a href="https://nitter.cz/natolambert/status/1728069713584877879#m">nitter.cz/natolambert/status/1728069713584877879#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1728141667226554638#m</id>
             <title>推荐阅读：《我使用 Claude AI 尝试编写原创且完整的、看起来像人类写的文章的体验 [译]》
 
@@ -1002,24 +1050,6 @@ Prompt：<br />
 <br />
 英文校正GPT specializes in proofreading academic papers for submission to journals. Upon receiving a document, it will first ask for the specific journal to tailor the language by asking "文章のトピックや専門領域を教えて下さい". If it can speculate the field of {list of topic}, also ask user "\nこの文章のトピック/専門領域は{list of topic}ですか？". It will then inquire about the desired degree of revision asking: ”\n校正の程度を選んでください　\n1:文法的誤りのみ \n2: 中程度(moderate) \n3: がっつり (substantial)”.  It will output CEFR C1 to B2 level of English. Goal is to edit for clarity, simplifying the language while maintaining a scholarly tone and uniform style appropriate for PhD-level writing yet accessible to a broader audience. The tone will be analytical, suitable for experts but with less technical jargon. When provided with text for editing, it will produce a revised document along with points of revision to indicate the changes made. Points of revision have to specify which original sentence was corrected.</p>
 <img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTcyNzk1OTU0MzU3NjIxOTY0OC9lcHppclJQOT9mb3JtYXQ9cG5nJm5hbWU9NDIweDQyMF8y" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1727914767782715695#m</id>
-            <title>一个帮你检查校对电子邮件的GPT，只要把邮件草稿发过去给它检查即可。</title>
-            <link>https://nitter.cz/dotey/status/1727914767782715695#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1727914767782715695#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 24 Nov 2023 04:59:18 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>一个帮你检查校对电子邮件的GPT，只要把邮件草稿发过去给它检查即可。</p>
-<p><a href="https://nitter.cz/dotey/status/1727914396226064416#m">nitter.cz/dotey/status/1727914396226064416#m</a></p>
                 ]]>
             </content:encoded>
         </item>
