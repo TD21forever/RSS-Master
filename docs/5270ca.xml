@@ -5,6 +5,29 @@
         <link>https://sspai.com/matrix</link>
         
         <item>
+            <id>https://sspai.com/post/84576</id>
+            <title>Windows连接特定WiFi自动静音</title>
+            <link>https://sspai.com/post/84576</link>
+            <guid isPermaLink="false">https://sspai.com/post/84576</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 23 Nov 2023 11:04:27 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 尴尬, 笔记本, 办公室WiFi, 自动静音
+<br>
+<br>
+总结: 这篇文章介绍了如何利用Windows计划任务和nircmd命令行小程序，在连接办公室WiFi时自动静音笔记本，避免尴尬情况发生。通过创建任务计划，设置触发器和筛选器，可以实现在连接特定WiFi时自动执行静音操作。 </div>
+                        <hr>
+                    
+                    <p>不知道你有没有这样的尴尬，笔记本周末带回家，周一拿到办公室，打开potplayer刚想摸摸鱼，小电影的声音就自动播放出来😂，利用Windows计划任务+nircmd命令行小程序帮你连接办公室WiFi时自动静音，不再让悲剧重演！！！</p><p>参考链接:&nbsp;<a href="https://superuser.com/questions/92414/how-to-run-a-program-when-connecting-to-a-specific-network-in-windows-7">https://superuser.com/questions/92414/how-to-run-a-program-when-connecting-to-a-specific-network-in-windows-7</a></p><h2>NirCmd</h2><p>官网：<a href="https://www.nirsoft.net/utils/nircmd.html">NirCmd - Windows command line tool (nirsoft.net)</a></p><p>NirCmd是一个免费的命令行小工具，可以在不使用UI的条件下进行一些Windows系统控制，如读写注册表、连接VPN、重启系统、创建快捷方式、更改显示设置、关闭显示器等等等等，感兴趣的具体可以看官网介绍。 那么结合任务计划程序，就可以在Windows下完成不少自动化功能，可以说是Windows系统下的简易Tasker了。</p><p>&nbsp;</p><h2>任务计划程序</h2><p>任务栏搜索：<strong>任务计划</strong></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/23/1b5c51b34e967b9a1442d5aa5cb30844.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>右侧点击：<strong>创建任务</strong></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/23/6af513b5aa8402814591d1e709039c93.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>起个名字</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/23/98e1a07ea16fe00fac5c0b17ee2be89c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&nbsp;</p><p>切换到<strong>触发器</strong>选项卡，新建-<strong>发生事件时</strong>：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/23/9d11c8f2b86cb334fce0a567737ced7e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&nbsp;</p><p>选择自定义单选框，单击<strong>新建时间筛选器</strong></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/23/c5270e2fe5568807718cd551667f7d0e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在<strong>筛选器</strong>选项卡下，选择事件级别：信息（这里实际时利用Windows事件日志来触发自动化，感兴趣的可以任务栏搜索事件查看器试试，可以利用其他事件触发自动化）</p><p>事件日志下拉菜单以此选择：<strong>应用程序和服务日志-Microsoft-Windows-WLAN-AutoConfig/Operational</strong></p><p>事件来源选择<strong>WLAN-AutoConfig</strong></p><p>&lt;所有事件-ID&gt; 改为<strong>8001</strong></p><p>任务类别选择<strong>AcmConnection</strong></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/23/f6547fc96c0dcd09e7f9821f2a9fdf2a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&nbsp;</p><p>如果就在这里打住的话，那么连接任何WiFi都会触发后面的任务，因此还需要根据SSID做更改，切换到XML选项卡；再对应查看<strong>Windows事件查看器</strong>，左侧选择<strong>应用程序和服务日志-Microsoft-Windows-WLAN-AutoConfig/Operational</strong>，找到右侧8001对应的日志。 通过对比可以看出，刚才的选项对应了日志XML文件记录的条目信息，因此只要将SSID条目添加进去，就可以在连接指定WiFi时再触发对应任务了。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/23/9c125857607ec0c98af54a19f7d5fe77.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>点选<strong>手动编辑查询</strong>，只要在<code>&lt;/Select&gt;</code>前添加<code>and *[EventData[Data[@Name='SSID']='你的WiFi ssid']]</code>即可，最终XML如下：</p><p><code>&lt;QueryList&gt;</code></p><p><code>&nbsp;&lt;Query Id="0" Path="Microsoft-Windows-WLAN-AutoConfig/Operational"&gt;</code></p><p><code>&nbsp; &nbsp;&lt;Select Path="Microsoft-Windows-WLAN-AutoConfig/Operational"&gt;*[System[Provider[@Name='Microsoft-Windows-WLAN-AutoConfig'] and Task = 24010 and (EventID=8001)]]and *[EventData[Data[@Name='SSID']='你的WiFi ssid']] &lt;/Select&gt;</code></p><p><code>&nbsp;&lt;/Query&gt;</code></p><p><code>&lt;/QueryList&gt;</code></p><h2>成果演示</h2><p>最后，确定保存，返回到操作选项卡，新建，选择启动程序，浏览到NirCmd存放位置，添加参数填入mutesysvolume 1，确定保存，输入密码，大功告成。&nbsp;</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/23/c6f53f99299bc6bee6ce4ce6f3e6c422.gif" /></figure><p>&nbsp;利用同样的方法，你也可以选择连接家庭WiFi或断开公司WiFi时，自动恢复音量等等，举一反三，这里就不详细说明啦。&nbsp;</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/84552</id>
             <title>从 iPhone 15 Pro 谈起，聊聊 Apple 产品的体验、周边和生态</title>
             <link>https://sspai.com/post/84552</link>
@@ -685,29 +708,6 @@ return</code></pre><h2 style="margin-left: 0.0px;">四、仍有缺憾</h2><p sty
                         <hr>
                     
                     <p>谈到效率类应用，话题总是离不开各类计时软件。想要使用体验足够简单，苹果自带的时钟 app 足矣；想要更丰富的事件管理和记录，番茄土豆类 app 和各种待办事项（due、滴答清单）也层出不穷。</p><p>但也许，并非所有用户都想要费时费力地为每个计时进行任务分类、添加标签、备注等繁琐操作，尤其是这可能还意味着不菲的订阅费用。毕竟使用计时器应用的初衷只是计时罢了。</p><p>不过，与自带的时钟应用相比，我们确实需要多一些功能，少一点割裂（至少在 Mac 上保持与 iPhone 差不多的使用体验，自带时钟应用至今不能在 Mac 上同时运行多个计时器）。同时，我们也期待计时器拥有现代化的设计，而非过时的拟物界面。毕竟，硬件都能够升级到 iPhone 15了，为什么软件设计还强行停留在 iPhone 4 时代呢？</p><p>最近，Loop 完成了一次重大更新，使其成为了我的首选计时器。如果你希望拥有一款设计简约且具有性价比、使用高效但又兼具灵活的计时器，Loop 将是你的不二之选。</p><h2>高效</h2><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/11/b39f168b29d503a50cfe99d01c9296cf.PNG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>黑暗模式、多计时器同时运行</figcaption></figure><h3>快速启动，自由设置</h3><p>Loop 让计时器的使用变得轻而易举。打开应用后，你将看到进度环和最近使用的计时器。只需轻触圆环，即可重新启动上一个计时器，无需再次设置。再次点击圆环即可暂停计时器。</p><p>即使同时运行多个计时器，嵌套的圆环和独立的控制按钮也让你能够轻松管理每个计时任务。如果你是健身爱好者，可以为有氧运动、力量训练和冥想等不同需求创建不同的计时预设。如果你擅长家务，Loop 也能帮助你管理烹饪和洗衣等任务。</p><p>向上滑动或点击“所有计时器”，你将看到简单计时器和常用计时器的界面。在常用计时器中，你可以自由地配置所需的计时任务。你可以随时启用和编辑它们。</p><p>Loop 最多只有两个主界面，所以在不同设备上启动特定计时器的操作都非常简单和快捷。</p><h3>间隔、循环，时刻掌握</h3><p>Loop 支持为计时任务设置间隔和循环。每当一个间隔结束，你会收到通知，并可以设置独特的音效。已命名的间隔名称也会同时显示在进度环上方，确保你对时间的掌控更加准确。这对于需要在演讲或小组讨论中控制 PPT 时间的人来说非常实用。</p><h3>iCloud 同步，统一体验</h3><p>Loop 支持 iCloud 同步，确保你的设置、预设和声音文件等在 iPhone、iPad、Apple Watch 和 Mac 之间无缝同步，让你拥有一致的使用体验。</p><h2>灵活个性化</h2><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/11/d3b840773b6a188e8658f5fbca7f05a4.PNG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>丰富的计时器配色与图标显示</figcaption></figure><h3>颜色多样，声音自选</h3><p>Loop 允许你自定义计时器的进度环颜色，不论是单色还是渐变，都可以经由自定义设置满足你的审美需求，比如健身环的经典配色就是不错的选择。如果你不喜欢折腾，Loop 的原生配色方案也足够清新自然。</p><p>此外，你还可以根据需要为每个预设的计时任务添加文本、表情符号，或者从内置的图标库中选择符号以个性化你的计时任务图标。</p><h3>想听什么，你来决定</h3><p>除了内置的音效，Loop 还支持导入自定义音频文件，这意味着你可以选择喜欢的声音来激发自己的动力，志玲姐姐还是小岳岳，通通不在话下。你甚至可以使用设备自带的录音软件，将自己或亲友的声音添加到计时器中，增添一份特别的关怀。</p><h3>多种搭配，闹钟模式</h3><p>闹钟模式能够循环播放结束声音，直到你手动重置该计时器，可谓是防卷利器（仅限自己）。想要长时间伏案工作/学习/健身，闹钟模式不允许！配置唐僧音频，你甚至可以得到孙悟空的同款紧箍咒体验。想要卷？没门！</p><p>如果你就是要卷，致力于利用每一点空闲时间，Loop 也没问题。在炖汤、洗衣的等待时间里刷刷少数派文章，闹钟模式绝不让你的饭糊汤老，完美衔接精神食粮和实体粮食。</p><h2>总结</h2><p>尽管 Loop 由德国开发者创建，但在新版本中它贴心地支持了中文（非机翻），对用户的问题反馈和建议响应得也足够及时。</p><p>现在，你无需订阅，仅需 22 元人民币的价格，即可解锁上述所有功能，并在 iPhone、iPad、Mac 和 Apple Watch 之间同步使用。即使不解锁内购，Loop 也允许免费使用多计时器同时运行、新建计时器、编辑计时器等核心功能。</p><p>现在就点击链接试用 Loop，让时间成为你的忠实伙伴！</p><p><a href="https://apps.apple.com/cn/app/loop-%E6%97%B6%E9%97%B4%E9%97%B4%E9%9A%94%E5%92%8C%E5%A4%9A%E9%87%8D%E8%AE%A1%E6%97%B6%E5%99%A8/id1537384788">App&nbsp;Store 上的“Loop - 时间间隔和多重计时器”</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/84304</id>
-            <title>「播客学英语」iOS app - 听播客，看文本，学英语，记单词</title>
-            <link>https://sspai.com/post/84304</link>
-            <guid isPermaLink="false">https://sspai.com/post/84304</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 15 Nov 2023 00:26:36 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 播客学英语, app, 学习方法, 词汇量
-<br>
-<br>
-总结: 这篇文章介绍了一款名为「播客学英语」的iOS app，它通过听播客来学习英语。作者选择这种学习方法的原因是因为它可以接触到真实的英语表达，可以在日常生活中进行无意识学习，可以改善听力，学习语境词汇，并且可以找到不同国家母语使用者关于感兴趣话题的播客。然而，作者在实践中发现自己的词汇量不够，而且很多播客没有提供文本，于是开发了这个app来解决这个问题。作者希望通过这个app能够找到对这种学习方法感兴趣的用户，并获得他们的认可和建议，同时也为已经在尝试这种学习方式的朋友提供一个好用的工具。该app主要分为听播客和词汇库两个模块，用户可以在听播客的过程中查询不认识的单词并将其加入生词库，还可以隐藏文本进行听力训练，导出文本以便其他用途。同时，查询过的词汇和上下文例句都会记录在词汇库中，用户可以通过图表了解自己的词汇积累情况，并进行针对性的复习。作者感谢用户的反馈，不断改进和完善这个app。如果读者感兴趣，可以前往AppStore下载试用，并留言发表自己的看法。 </div>
-                        <hr>
-                    
-                    <p>你好👋。</p><p>今天跟你介绍我的一个 iOS app，叫「<a href="https://apps.apple.com/app/id6453694910" target="_blank">播客学英语」</a>，顾名思义，这个 app 就是通过听播客来学英语。这个 app 的想法萌芽于去年学英语的经历，具体内容可以查看我的上一篇文章，<a href="https://sspai.com/post/77853" target="_blank">2021 到 2023 英语学习探索之路</a>。</p><p><strong>在介绍功能之前，请容我先谈谈为什么选择播客学英语？</strong></p><p>就这个问题我问了问 <a href="https://claude.ai/" target="_blank">claude.ai</a>，他是这样回答的：</p><ul><li>学习母语使用者的真实对话 - 您将接触到自然的英语表达，而不是教科书中的对白。</li><li>无意识学习 - 您可以在通勤、锻炼、做饭等时听播客。很容易融入日常生活。</li><li>改善听力 - 多听，大脑就会适应并理解快速的日常英语对话。</li><li>学习语境词汇 - 单词和短语用在真实场景中，有助记忆。</li><li>语音和话题多样性 - 可以找到不同国家母语使用者关于您感兴趣的话题的播客。</li></ul><p>这几点基本概括了用播客学英语的好处，但现实是我在实践播客学英语的过程中遇到了一个痛点，那就是我的词汇量太少，而很多播客又没有提供文本，哪怕提供了文本，查词过程也会非常繁琐，于是我就做了这个 app，希望把这件事情变得简单一些。</p><p>我无法给你证明这种学习方法是科学有效的，也无法给你任何学习成果层面的承诺，我想这可能只是一个尝试，我希望能找到对这个“方法”感兴趣的用户，能够从他们那里获得一些认可或者建议，也希望给那些已经在尝试通过这种方式学英语的朋友一个好用的工具。</p><p><strong>好了，下面就开始介绍一下这个 app 的功能。</strong></p><p>先看看 app 的主要界面，分别是音频，播客和词汇。我给你推荐了一些我认为制作精良，难度适中的播客供你参考，你也可以在首页探索看看大家在听的，或者收藏你自己感兴趣的播客。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/30/94d6666a4383b150e4bb8e038a8efadf.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>app 主界面</figcaption></figure><p>App 主要分为两个模块。</p><p><strong>一是听播客。</strong></p><p>在听播客的过程中，遇到不认识的单词可以快速点击查询并将其加入生词库。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/30/5f668e0b346b7f1e8963870c2dec6608.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>看文本查单词</figcaption></figure><p>播客内容被切分为小段落，你可以重复听某个段落。遇到比较难的段落，你可以借助翻译来理解它的意思。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/30/9da47f6b6934cea712f9e6169446d724.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果你不想一直盯着文本看，你可以选择隐藏文本，在你听不懂的时候再打开检查。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/30/6100cab2c833438c17c6ac81303d55ea.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>隐藏文本</figcaption></figure><p>你还可以导出文本，方便你将其用作其他用途。还有其他更多选项供你探索。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/30/75a27195ad639461c600b9c690b56fcc.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>其他设置</figcaption></figure><p><strong>二是词汇库。</strong></p><p>在听播客过程中查询过的词汇都会被记录到词汇库，并且查询单词时的上下文例句也会记录下来。你可以通过图表对你的词汇积累情况一目了然，同时也设置了多个维度的词汇模块，你可以针对性的复习单词。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/30/3f2ee4d08047b19aa9e9e44e2f40686d.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>词汇库</figcaption></figure><p>以上就是这个 app 所有的功能了，可能还有一些小细节没有讲到。在此特别感谢上线这段时间以来用户的反馈，app 得以在他们的建议中不断改进和完善。</p><p>如果你感兴趣，欢迎前往&nbsp;<a href="https://apps.apple.com/app/id6453694910" target="_blank">AppStore</a>&nbsp;下载试用，也欢迎留言发表你的看法。</p><p>感谢你的阅读。</p>
                 ]]>
             </content:encoded>
         </item>
