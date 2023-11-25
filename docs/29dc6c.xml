@@ -5,6 +5,138 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1728285016340451712#m</id>
+            <title>R to @xiaohuggg: 通过提示文本你还可以控制动画的动作和幅度等...</title>
+            <link>https://nitter.cz/xiaohuggg/status/1728285016340451712#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1728285016340451712#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 25 Nov 2023 05:30:32 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>通过提示文本你还可以控制动画的动作和幅度等...</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MjgyODQ4OTI4MzA4NjMzNjAvcHUvaW1nL3RhWkFabzlnR0h0WkJiVmYuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1728284751931568512#m</id>
+            <title>LiveSketch：为素描“注入生命” 通过文本提示将静态素描动画化
+
+该技术能够将单一主题的静态素描转换成动画。
+
+用户只需提供描述所需动作的文本提示，系统就会生成短动画。
+
+通过修改描述运动的提示文本，你还可以控制生成结果的程度。
+
+比如，如果你画了一只猫，并用文字描述它在跳跃，这个系统就能制作出一只跳跃的猫的动画。
+
+它为任何人提供了一种简单直观的方法，使他们的素描变得生动活泼。这对于讲故事、插图、网站、演示文稿等领域都非常有用。
+
+主要功能
+
+•动画化静态素描：该技术能够将单一主题的静态素描转换成动画。用户只需提供描述所需动作的文本提示，系统就会生成短动画。
+•基于文本到视频的先验：这种方法利用了大型预训练的文本到视频扩散模型的运动先验，通过评分蒸馏损失来指导笔触的放置。
+•自然流畅的动作：为了促进自然流畅的动作并更好地保留素描的外观，该方法通过两个组件来模拟学习到的动作：一个控制小的局部变形，另一个控制全局仿射变换。
+
+工作原理
+
+1.素描表示：将素描表示为一组放置在白色背景上的笔触，每个笔触是一个具有四个控制点的二维贝塞尔曲线。
+http://2.xn--io0a7i预测：训练一个“神经位移场”（一个小型MLP），将初始素描坐标映射到每帧的偏移量。
+3.训练过程：利用预训练的文本到视频模型中封装的运动先验来训练这个网络。通过调整每个控制点的偏移量来创建所有视频帧，并使用可微光栅化器进行渲染。
+
+LiveSketch的工作原理基于以下几个关键步骤：
+
+1、输入处理：用户提供一个静态的草图作为输入。这个草图包含了一系列的控制点，这些点定义了草图的形状和结构。
+
+2、特征提取：系统首先对输入的草图进行特征提取。这一步骤通过一个共享特征骨干网络完成，它将控制点的坐标转换成一个高维特征空间中的表示。这个特征空间能够捕捉到草图的关键信息，如形状和结构。
+
+3、双路径处理：提取的特征被送入两个不同的路径：本地路径和全局路径。
+
+•本地路径：这个路径专注于处理草图的局部细节和微小变化。它使用一个多层感知器（MLP）来预测每个控制点的偏移量，从而实现对草图的微调。
+•全局路径：与此同时，全局路径处理草图的整体运动和变化，如旋转、缩放或平移。这是通过预测一个全局变换矩阵来实现的，该矩阵应用于草图的所有控制点。
+
+4、动画生成：通过这两个路径的处理，系统能够生成一系列的帧，每一帧都是原始草图的一个变化版本。这些帧共同形成了一个连贯的动画序列，展示了草图从初始状态到最终状态的平滑过渡。
+
+5、输出：最终，系统输出一个动画，其中草图按照用户的输入和系统生成的动态变化进行移动和变形。
+
+应用示例
+
+•动画素描：例如，可以创建一个游泳和跳跃的海豚，一个摇摆的眼镜蛇，或者一个玩耍的猫的动画。
+•调整提示文本：通过修改描述运动的提示文本，可以控制生成结果的程度。
+
+这项技术为设计师提供了一种新的工具，使他们能够快速且直观地将想法转化为动画形式，无需复杂的动画制作经验。
+
+项目及演示：https://livesketch.github.io/
+论文：https://livesketch.github.io/static/source/paper.pdf
+GitHub：coming soon...</title>
+            <link>https://nitter.cz/xiaohuggg/status/1728284751931568512#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1728284751931568512#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 25 Nov 2023 05:29:29 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>LiveSketch：为素描“注入生命” 通过文本提示将静态素描动画化<br />
+<br />
+该技术能够将单一主题的静态素描转换成动画。<br />
+<br />
+用户只需提供描述所需动作的文本提示，系统就会生成短动画。<br />
+<br />
+通过修改描述运动的提示文本，你还可以控制生成结果的程度。<br />
+<br />
+比如，如果你画了一只猫，并用文字描述它在跳跃，这个系统就能制作出一只跳跃的猫的动画。<br />
+<br />
+它为任何人提供了一种简单直观的方法，使他们的素描变得生动活泼。这对于讲故事、插图、网站、演示文稿等领域都非常有用。<br />
+<br />
+主要功能<br />
+<br />
+•动画化静态素描：该技术能够将单一主题的静态素描转换成动画。用户只需提供描述所需动作的文本提示，系统就会生成短动画。<br />
+•基于文本到视频的先验：这种方法利用了大型预训练的文本到视频扩散模型的运动先验，通过评分蒸馏损失来指导笔触的放置。<br />
+•自然流畅的动作：为了促进自然流畅的动作并更好地保留素描的外观，该方法通过两个组件来模拟学习到的动作：一个控制小的局部变形，另一个控制全局仿射变换。<br />
+<br />
+工作原理<br />
+<br />
+1.素描表示：将素描表示为一组放置在白色背景上的笔触，每个笔触是一个具有四个控制点的二维贝塞尔曲线。<br />
+<a href="http://2.xn--io0a7i">2.xn--io0a7i</a>预测：训练一个“神经位移场”（一个小型MLP），将初始素描坐标映射到每帧的偏移量。<br />
+3.训练过程：利用预训练的文本到视频模型中封装的运动先验来训练这个网络。通过调整每个控制点的偏移量来创建所有视频帧，并使用可微光栅化器进行渲染。<br />
+<br />
+LiveSketch的工作原理基于以下几个关键步骤：<br />
+<br />
+1、输入处理：用户提供一个静态的草图作为输入。这个草图包含了一系列的控制点，这些点定义了草图的形状和结构。<br />
+<br />
+2、特征提取：系统首先对输入的草图进行特征提取。这一步骤通过一个共享特征骨干网络完成，它将控制点的坐标转换成一个高维特征空间中的表示。这个特征空间能够捕捉到草图的关键信息，如形状和结构。<br />
+<br />
+3、双路径处理：提取的特征被送入两个不同的路径：本地路径和全局路径。<br />
+<br />
+•本地路径：这个路径专注于处理草图的局部细节和微小变化。它使用一个多层感知器（MLP）来预测每个控制点的偏移量，从而实现对草图的微调。<br />
+•全局路径：与此同时，全局路径处理草图的整体运动和变化，如旋转、缩放或平移。这是通过预测一个全局变换矩阵来实现的，该矩阵应用于草图的所有控制点。<br />
+<br />
+4、动画生成：通过这两个路径的处理，系统能够生成一系列的帧，每一帧都是原始草图的一个变化版本。这些帧共同形成了一个连贯的动画序列，展示了草图从初始状态到最终状态的平滑过渡。<br />
+<br />
+5、输出：最终，系统输出一个动画，其中草图按照用户的输入和系统生成的动态变化进行移动和变形。<br />
+<br />
+应用示例<br />
+<br />
+•动画素描：例如，可以创建一个游泳和跳跃的海豚，一个摇摆的眼镜蛇，或者一个玩耍的猫的动画。<br />
+•调整提示文本：通过修改描述运动的提示文本，可以控制生成结果的程度。<br />
+<br />
+这项技术为设计师提供了一种新的工具，使他们能够快速且直观地将想法转化为动画形式，无需复杂的动画制作经验。<br />
+<br />
+项目及演示：<a href="https://livesketch.github.io/">livesketch.github.io/</a><br />
+论文：<a href="https://livesketch.github.io/static/source/paper.pdf">livesketch.github.io/static/…</a><br />
+GitHub：coming soon...</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MjgyNjEzNjI2MDkyMjE2MzIvcHUvaW1nL3hiVERQT2pDZkt1SE9xbmUuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1728255730061582759#m</id>
             <title>LEO：3D世界中的多面手代理
 
@@ -820,59 +952,6 @@ MCVD是一个多功能的视频生成模型，能够进行视频的前向/后向
 论文：<a href="https://arxiv.org/abs/2205.09853">arxiv.org/abs/2205.09853</a><br />
 GitHub：<a href="https://github.com/voletiv/mcvd-pytorch">github.com/voletiv/mcvd-pyto…</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mjc2MDc3NjcyNDA5NTM4NTYvcHUvaW1nL1NDdkZWbTNDSzJRYlJiNkMuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1727468251154620804#m</id>
-            <title>RT by @xiaohuggg: #AI开源项目推荐：vscode-ui-sketcher
-
-UI Sketcher是一个VSCode插件，借助GPT-4V的多模态能力，在插件中画出界面草图，就能生成一个基于ReactNative的UI界面。
-
-需要OpenAI的API Key
-
-https://github.com/pAIrprogio/vscode-ui-sketcher</title>
-            <link>https://nitter.cz/dotey/status/1727468251154620804#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1727468251154620804#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 22 Nov 2023 23:25:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p><a href="https://nitter.cz/search?q=%23AI开源项目推荐">#AI开源项目推荐</a>：vscode-ui-sketcher<br />
-<br />
-UI Sketcher是一个VSCode插件，借助GPT-4V的多模态能力，在插件中画出界面草图，就能生成一个基于ReactNative的UI界面。<br />
-<br />
-需要OpenAI的API Key<br />
-<br />
-<a href="https://github.com/pAIrprogio/vscode-ui-sketcher">github.com/pAIrprogio/vscode…</a></p>
-<p><a href="https://nitter.cz/taishiyadeee/status/1727175786963300531#m">nitter.cz/taishiyadeee/status/1727175786963300531#m</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTcyNjg5NjAxNTE4NDE1MDUyOC9sYUJZWlJCcj9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1727569904424132709#m</id>
-            <title>R to @xiaohuggg: Ilya Sutskever 说到的他们已经克服了训练数据的问题
-
-https://youtu.be/Ft0gTO2K85A</title>
-            <link>https://nitter.cz/xiaohuggg/status/1727569904424132709#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1727569904424132709#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 23 Nov 2023 06:08:56 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Ilya Sutskever 说到的他们已经克服了训练数据的问题<br />
-<br />
-<a href="https://youtu.be/Ft0gTO2K85A">youtu.be/Ft0gTO2K85A</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTcyNDI0MTE5ODI1NTQxMTIwMC9GS0JtUUI2Zj9mb3JtYXQ9anBnJm5hbWU9MTIwMHg2Mjc=" />
                 ]]>
             </content:encoded>
         </item>
