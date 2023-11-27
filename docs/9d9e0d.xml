@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6563d4a45682fbc62ef4ddf7</id>
+            <title>这张蜡笔小新的剧照，如果用 Stable Video Diffusion 生成一两秒的视频，会是什么效果呢？ 请打开 https://stable-video-diffusion.qiuyumi.com/result.php?id=i...</title>
+            <link>https://m.okjike.com/originalPosts/6563d4a45682fbc62ef4ddf7</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6563d4a45682fbc62ef4ddf7</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 26 Nov 2023 23:28:36 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    这张蜡笔小新的剧照，如果用 Stable Video Diffusion 生成一两秒的视频，会是什么效果呢？<br />请打开 https://stable-video-diffusion.qiuyumi.com/result.php?id=ifq22wlbzshzkuvr5cpq64bldy 查看。<br />这是一个免费图片生成视频在线小工具，虽然还有各种体验问题的，但不管怎么样，至少已经能够走通全流程了，就发布出来给大家玩玩。<br />工具首页： https://stable-video-diffusion.com/?gefei <br />功能很简单，上传一张图片，等待30秒左右，你刷新页面，就能看到已经生成好的视频。<br />目前手机端还无法下载视频，我后面再优化，大家可以先在 PC 端使用并下载视频。<br /><br />更新：增加下载按钮了，大家生成好的视频及时下载。<br /><img src="https://cdnv2.ruguoapp.com/FvxlU9EvC-WijAgURe4KfCxymWrFv3.jpg" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/65632ee65682fbc62eea646b</id>
             <title>从个人审美来说，妙鸭真是ai换脸里最土的，土到一眼能认出来。 字节系的产品做的好看多了，这是轻颜相机的。</title>
             <link>https://m.okjike.com/originalPosts/65632ee65682fbc62eea646b</link>
@@ -34,23 +51,6 @@
                 <![CDATA[
                     
                     OpenAI 官方 16 个 GPTs 提示词分析。<br /><br />花了点时间读完了官方默认的 16 个 GPTs，从写作助手、数学老师到菜谱助手等等，这些 GPTs 充分地展现了 GPT-4/4V 的能力。<br /><br />从提示词写法上来说，可以归类为三种。<br /><br />1. 根据我的推测，是用 GPT Builder 创建的。提示词比较简单。主要就是指定名字、主要用途、注意事项、语言风格。没有详细的例子或者规则。<br /><br />你如果读过 GPT Builder 自动生成的 Instruction，只要一读这个提示词，就能感觉出来。参考图一。<br /><br />这其中包括以下 4 个 GPTs：<br /><br />  - Math Mentor<br />  - The Negotiator<br />  - Sous Chef<br />  - Creative Writing Coach<br /><br />2. 手动写的，但是用的非常简单通用的结构。手动指定目标 (goal) 和语言风格 (style)，最多增加一些具体的样例。参考图二。<br /><br />这其中包括以下 2 个 GPTs：<br /><br />  - genz 4 meme<br />  - ChatGPT Classic (啥也没定义)<br /><br />3. 看上去很复杂，但实际上相似度 80%。可以先瞅一眼图三。<br /><br />看上去很唬人。但实际上我们只需要关注 # 号开头的部分。从图三可以看到，里面包含了几个 # 号开头的段落：<br /><br />  # Tools<br />  ## python <br />  ## browser<br />  ## myfiles_browser<br /><br />我们知道，GPT-4/4V 有最基本的 4 个能力，分别是：<br /><br />  - Data Analysis 可以生成并执行代码 (python)<br />  - 浏览器可以查询互联网 (browser)<br />  - DALL.E 图片生成和处理 (dalle)<br />  - 上传文件量化作为知识库 (myfiles_browser)。<br /><br />## 开头的提示词段落，就是在分别定义这个 GPT 里用到这些功能的时候的流程和注意事项。<br /><br />上面已经包含了 3 个，剩下一个就是 ## dalle，在图四可以看到。<br /><br />忽略 ## dalle 段落，你会发现，图四中，## myfiles_browser 和 ## python 跟图三是一样的。<br /><br />而剩下的其他 GPTs 几乎都是这样的结构，只是复制过去的功能不一样，有些只需要 ##browser，有些需要的功能多一点。 <br /><br />所以我说，它们相似度 80%.<br /><br />10 个 GPTs 用到的功能如下：<br /><br />  - DALL.E (dalle 功能定义以及限制条件)<br />  - Code Analysis (python, myfiles_browser)<br />  - Tech Support Advisor (python, browser, myfiles_browser)<br />  - Sticker Whiz (python, myfiles_browser, dalle)<br />  - Cosmic Dream (dalle, browser, myfiles_browser)<br /><br />With customized instruction:<br />  - Coloring Book Hero (simple dalle, myfiles_browser) <br />  - Game Time (browser, myfiles_browser) <br />  - Hot Mods (dalle, myfiles_browser)<br />  - Laundry Buddy (browser, myfiles_browser) <br />  - Mocktail Mixologist (dalle, myfiles_browser) <br /><br />With customized instruction 的几个，结构也是一样的，只是在提示词末尾增加了名字、用途和语言风格这种简单的要求。图四就是这样的例子。<br /><br />所以，到这里，我们可以收获什么呢？<br /><br />我们自己在创建 GPTs 的时候，如果要用到以上的功能，可以直接把对应的定义复制过去用。<br /><br />比如像浏览器功能定义，里面很好地指定了如何用浏览器搜索以及处理信息。<br /><br />另外一点启发，除了在提示词里写一些限定词来触发对应的功能，比如“用浏览器搜索 XXX”。我们可以参考这些定义，在提示词里进一步指定浏览器搜索的范围，如何处理信息等规则。其他几个功能同理。<br /><br />你可以在以下 3 个链接找到这 16 个 GPTs 的提示词全文：<br />https://github.com/LouisShark/chatgpt_system_prompt/tree/main<br /><br />https://github.com/lxfater/Awesome-GPTs/tree/main/prompt<br /><br />https://github.com/linexjlin/GPTs/tree/main<br /><img src="https://cdnv2.ruguoapp.com/FkkyVA8gN3q3t1dTuzbnjLEUf4vov3.jpg" /><br /><img src="https://cdnv2.ruguoapp.com/FmqiVzVIxrqIy7Bkokrrh03kaCkuv3.jpg" /><br /><img src="https://cdnv2.ruguoapp.com/FnddBI_q4sXd4LZ88ZKpHgbh-Ztav3.jpg" /><br /><img src="https://cdnv2.ruguoapp.com/FnGO6o4RGgJdCXRPv5JKJJtnsLI_v3.jpg" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6561da0e34ae48b9beef2f22</id>
-            <title>氛围感好好哦，但是AI真的不会画手哈哈哈哈哈哈</title>
-            <link>https://m.okjike.com/originalPosts/6561da0e34ae48b9beef2f22</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6561da0e34ae48b9beef2f22</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 25 Nov 2023 11:27:10 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    氛围感好好哦，但是AI真的不会画手哈哈哈哈哈哈<br /><img src="https://cdnv2.ruguoapp.com/Fr4rmhKyBkU9Tt0hbmnPjwHZSMH-v3.heic" /><br /><img src="https://cdnv2.ruguoapp.com/Fi_UZqHG7bNjt5105_tyBfLrMWA0v3.jpg" />
                 ]]>
             </content:encoded>
         </item>
