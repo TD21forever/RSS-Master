@@ -5,6 +5,36 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/Barret_China/status/1729339337182187704#m</id>
+            <title>RT by @dotey: self-operating-computer，https://github.com/OthersideAI/self-operating-computer，这个项目演示了如何让 GPT-4V 来控制自己的电脑，你需要做的就是告诉它完成一个怎样的任务，例如，打开 Google Docs 写一篇文章，然后发布并分享给同事。
+
+它的 Prompt 写的比较简单，定义了一个可以与机器交互的 DSL，主要包含三种动作：Click/Type/Search，分别对应 mouse_click/keyboard_type/mac_search 几个封装好的系统函数。
+
+每次程序执行动作时，都会携带任务目标、上一步执行结果以及当前屏幕截图作为上下文，然后将信息传递给 ChatGPT，并让它给出下一步操作指示。
+
+这个项目中 Prompt 的定制化程度偏高，说明完成复杂的工作还比较有挑战，如果参考之前提到的 Mutil-Agent 方案，https://twitter.com/Barret_China/status/1712408323851788505，做出来效果应该会更好一些。</title>
+            <link>https://nitter.cz/Barret_China/status/1729339337182187704#m</link>
+            <guid isPermaLink="false">https://nitter.cz/Barret_China/status/1729339337182187704#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 28 Nov 2023 03:20:02 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>self-operating-computer，<a href="https://github.com/OthersideAI/self-operating-computer">github.com/OthersideAI/self-…</a>，这个项目演示了如何让 GPT-4V 来控制自己的电脑，你需要做的就是告诉它完成一个怎样的任务，例如，打开 Google Docs 写一篇文章，然后发布并分享给同事。<br />
+<br />
+它的 Prompt 写的比较简单，定义了一个可以与机器交互的 DSL，主要包含三种动作：Click/Type/Search，分别对应 mouse_click/keyboard_type/mac_search 几个封装好的系统函数。<br />
+<br />
+每次程序执行动作时，都会携带任务目标、上一步执行结果以及当前屏幕截图作为上下文，然后将信息传递给 ChatGPT，并让它给出下一步操作指示。<br />
+<br />
+这个项目中 Prompt 的定制化程度偏高，说明完成复杂的工作还比较有挑战，如果参考之前提到的 Mutil-Agent 方案，<a href="https://nitter.cz/Barret_China/status/1712408323851788505">nitter.cz/Barret_China/sta…</a>，做出来效果应该会更好一些。</p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvRl9fVmhQWWFvQUFaSmtmLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1729299645933728046#m</id>
             <title>Bill Gates 认为 ChatGPT 和其他生成式 AI 已经达到顶峰，OpenAI 的 GPT-5 不会有显著提升
 
@@ -768,73 +798,6 @@ Github：<a href="https://github.com/jordansinger/UIDraw">github.com/jordansinge
 <br />
 但我们永远不能百分之百确定它生成的内容是幻觉、错误的回答，还是正确的回答。所以，它的一部分内容可能是记忆中的，而另一部分则不是，我们无法精确区分。但大多数情况下，这就像是它在梦游或在做关于互联网文本的梦，源于它的数据分布。这种能力使得神经网络能够生成各种文本，从代码到商品描述再到百科全书条目，但它也意味着生成的内容需要谨慎验证和审查，以确保准确性和可信度。这就是模型训练和模型推断的关键过程，它们共同构建了人工智能模型的能力和潜力。</p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mjg5NjE4MTc2MjIyNDEyODEvcHUvaW1nL3pCck1GN1Vzenpnc0RNNm8uanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1728959646138880026#m</id>
-            <title>OpenAI 的大神 Andrej Karpathy 前几天在他的 YouTube 频道讲了一堂课，系统的介绍了大语言模型，内容深入浅出，非常赞，抽空将它翻译成了双语，由于内容较长，我将分批上传，以下是第一部分精校后的双语视频，字幕文稿如下：
-
-Intro: Large Language Model (LLM) talk
-
-大家好。最近，我进行了一场关于大语言模型的 30 分钟入门讲座。遗憾的是，这次讲座没有被录制下来，但许多人在讲座后找到我，他们告诉我非常喜欢那次讲座。因此，我决定重新录制并上传到 YouTube，那么，让我们开始吧，为大家带来“忙碌人士的大语言模型入门”系列，主讲人 Scott。好的，那我们开始吧。
-
-LLM Inference
-
-首先，什么是大语言模型 (Large Language Model) 呢？其实，一个大语言模型就是由两个文件组成的。在这个假设的目录中会有两个文件。
-
-以 Llama 2 70B 模型为例，这是一个由 Meta AI 发布的大语言模型。这是 Llama 系列语言模型的第二代，也是该系列中参数最多的模型，达到了 700 亿。LAMA2 系列包括了多个不同规模的模型，70 亿，130 亿，340 亿，700 亿是最大的一个。
-
-现在很多人喜欢这个模型，因为它可能是目前公开权重最强大的模型。Meta 发布了这款模型的权重、架构和相关论文，所以任何人都可以很轻松地使用这个模型。这与其他一些你可能熟悉的语言模型不同，例如，如果你正在使用 ChatGPT 或类似的东西，其架构并未公开，是 OpenAI 的产权，你只能通过网页界面使用，但你实际上没有访问那个模型的权限。
-
-在这种情况下，Llama 2 70B 模型实际上就是你电脑上的两个文件：一个是存储参数的文件，另一个是运行这些参数的代码。这些参数是神经网络（即语言模型）的权重或参数。我们稍后会详细解释。因为这是一个拥有 700 亿参数的模型，每个参数占用两个字节，因此参数文件的大小为 140 GB，之所以是两个字节，是因为这是 float 16 类型的数据。
-
-除了这些参数，还有一大堆神经网络的参数。你还需要一些能运行神经网络的代码，这些代码被包含在我们所说的运行文件中。这个运行文件可以是 C 语言或 Python，或任何其他编程语言编写的。它可以用任何语言编写，但 C 语言是一种非常简单的语言，只是举个例子。只需大约 500 行 C 语言代码，无需任何其他依赖，就能构建起神经网络架构，并且主要依靠一些参数来运行模型。所以只需要这两个文件。
-
-你只需带上这两个文件和你的 MacBook，就拥有了一个完整的工具包。你不需要连接互联网或其他任何设备。你可以拿着这两个文件，编译你的 C 语言代码。你将得到一个可针对参数运行并与语言模型交互的二进制文件。
-
-比如，你可以让它写一首关于 Scale AI 公司的诗，语言模型就会开始生成文本。在这种情况下，它会按照指示为你创作一首关于 Scale AI 的诗。之所以选用 Scale AI 作为例子，你会在整个演讲中看到，是因为我最初在 Scale AI 举办的活动上介绍过这个话题，所以演讲中会多次提到它，以便内容更具体。这就是我们如何运行模型的方式。只需要两个文件和一台 MacBook。
-
-我在这里稍微有点作弊，因为这并不是在运行一个有 700 亿参数的模型，而是在运行一个有 70 亿参数的模型。一个有 700 亿参数的模型运行速度大约会慢 10 倍。但我想给你们展示一下文本生成的过程，让你们了解它是什么样子。所以运行模型并不需要很多东西。这是一个非常小的程序包，但是当我们需要获取那些参数时，计算的复杂性就真正显现出来了。
-
-那么，这些参数从何而来，我们如何获得它们？因为无论 run.c 文件中的内容是什么，神经网络的架构和前向传播都是算法上明确且公开的。</title>
-            <link>https://nitter.cz/dotey/status/1728959646138880026#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1728959646138880026#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 27 Nov 2023 02:11:16 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>OpenAI 的大神 Andrej Karpathy 前几天在他的 YouTube 频道讲了一堂课，系统的介绍了大语言模型，内容深入浅出，非常赞，抽空将它翻译成了双语，由于内容较长，我将分批上传，以下是第一部分精校后的双语视频，字幕文稿如下：<br />
-<br />
-Intro: Large Language Model (LLM) talk<br />
-<br />
-大家好。最近，我进行了一场关于大语言模型的 30 分钟入门讲座。遗憾的是，这次讲座没有被录制下来，但许多人在讲座后找到我，他们告诉我非常喜欢那次讲座。因此，我决定重新录制并上传到 YouTube，那么，让我们开始吧，为大家带来“忙碌人士的大语言模型入门”系列，主讲人 Scott。好的，那我们开始吧。<br />
-<br />
-LLM Inference<br />
-<br />
-首先，什么是大语言模型 (Large Language Model) 呢？其实，一个大语言模型就是由两个文件组成的。在这个假设的目录中会有两个文件。<br />
-<br />
-以 Llama 2 70B 模型为例，这是一个由 Meta AI 发布的大语言模型。这是 Llama 系列语言模型的第二代，也是该系列中参数最多的模型，达到了 700 亿。LAMA2 系列包括了多个不同规模的模型，70 亿，130 亿，340 亿，700 亿是最大的一个。<br />
-<br />
-现在很多人喜欢这个模型，因为它可能是目前公开权重最强大的模型。Meta 发布了这款模型的权重、架构和相关论文，所以任何人都可以很轻松地使用这个模型。这与其他一些你可能熟悉的语言模型不同，例如，如果你正在使用 ChatGPT 或类似的东西，其架构并未公开，是 OpenAI 的产权，你只能通过网页界面使用，但你实际上没有访问那个模型的权限。<br />
-<br />
-在这种情况下，Llama 2 70B 模型实际上就是你电脑上的两个文件：一个是存储参数的文件，另一个是运行这些参数的代码。这些参数是神经网络（即语言模型）的权重或参数。我们稍后会详细解释。因为这是一个拥有 700 亿参数的模型，每个参数占用两个字节，因此参数文件的大小为 140 GB，之所以是两个字节，是因为这是 float 16 类型的数据。<br />
-<br />
-除了这些参数，还有一大堆神经网络的参数。你还需要一些能运行神经网络的代码，这些代码被包含在我们所说的运行文件中。这个运行文件可以是 C 语言或 Python，或任何其他编程语言编写的。它可以用任何语言编写，但 C 语言是一种非常简单的语言，只是举个例子。只需大约 500 行 C 语言代码，无需任何其他依赖，就能构建起神经网络架构，并且主要依靠一些参数来运行模型。所以只需要这两个文件。<br />
-<br />
-你只需带上这两个文件和你的 MacBook，就拥有了一个完整的工具包。你不需要连接互联网或其他任何设备。你可以拿着这两个文件，编译你的 C 语言代码。你将得到一个可针对参数运行并与语言模型交互的二进制文件。<br />
-<br />
-比如，你可以让它写一首关于 Scale AI 公司的诗，语言模型就会开始生成文本。在这种情况下，它会按照指示为你创作一首关于 Scale AI 的诗。之所以选用 Scale AI 作为例子，你会在整个演讲中看到，是因为我最初在 Scale AI 举办的活动上介绍过这个话题，所以演讲中会多次提到它，以便内容更具体。这就是我们如何运行模型的方式。只需要两个文件和一台 MacBook。<br />
-<br />
-我在这里稍微有点作弊，因为这并不是在运行一个有 700 亿参数的模型，而是在运行一个有 70 亿参数的模型。一个有 700 亿参数的模型运行速度大约会慢 10 倍。但我想给你们展示一下文本生成的过程，让你们了解它是什么样子。所以运行模型并不需要很多东西。这是一个非常小的程序包，但是当我们需要获取那些参数时，计算的复杂性就真正显现出来了。<br />
-<br />
-那么，这些参数从何而来，我们如何获得它们？因为无论 run.c 文件中的内容是什么，神经网络的架构和前向传播都是算法上明确且公开的。</p>
-<p><a href="https://nitter.cz/karpathy/status/1727731541781152035#m">nitter.cz/karpathy/status/1727731541781152035#m</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mjg5NTg2NTQ5Nzg2NjI0MDIvcHUvaW1nL096ak1ReDBBU0JqM29IUkYuanBn" />
                 ]]>
             </content:encoded>
         </item>
