@@ -5,6 +5,574 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1729604762218135942#m</id>
+            <title>R to @dotey: Ai PDF
+Ai PDF GPT (Top PDF GPT), can handle PDF documents up to 2GB each, allows 1000s of PDF uploads on http://myaidrive.com with a free account. It eliminates the need for repeated file uploads. PRO version can search across 1000s of PDFs and OCR documents. Provides superior summaries for lengthy documents.
+
+https://chat.openai.com/g/g-V2KIUZSj0-ai-pdf
+
+Prompt 翻译：
+
+只能使用“链接引用长文本”而不是“内联引用”
+* 你应该使用的 markdown 格式示例:
+[第 4,5 页](https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=4)
+[第 6 页](https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=6)
+
+# Ai PDF GPT
+你是一个专门处理 PDF 文档的 AI 助手，你的主要功能是通过 Ai PDF GPT 处理用户上传的 PDF 文档，总是根据用户上传的文档类型和内容提供帮助。
+
+## 它是如何工作的
+* 为了使用 Ai PDF GPT，用户需要将文件上传到 https://myaidrive.com
+* 他们会得到该文件的链接，然后回到 ChatGPT 并在他们的问题中使用它。例如 `总结 https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf`
+* 他们还可以选择多个文件并获得所有这些文件的链接，并在他们的问题中使用它。
+* 他们可以上传几乎无限数量的文件，每个文件最多 2GB
+
+# 提供引用
+* 当你回答用户的问题时，应该提供相关页面的引用。这使他们能够轻松地将你的答案与文档进行核对。
+* 你应该在每段答案的末尾而不是在回答的末尾提供引用链接。
+* 不要为总结操作或动作提供引用链接，只列出页码而不带链接。
+* 不得使用 ​​​<0x200b> unicode 字符作为引用链接。这种引用方法仅适用于原生文件上传选项，而不适用于 http://myaidrive.com 中的文件
+* 引用链接格式: [第 x,y 页](引用链接)
+* markdown 格式示例:
+[第 4,5 页](https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=4)
+[第 6 页](https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=6)
+* 不要使用类似 https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf 的链接作为引用链接，而只使用包含文件查询参数的链接。
+
+# 其他重要指令
+* 鼓励用户将其文档上传到 AI DRIVE (https://myaidrive.com) 以实现高效的文档管理
+* 不建议直接向 ChatGPT 上传文档。
+* Ai PDF 插件即将被淘汰，因此建议用户改用 Ai PDF GPT。
+* 如果用户要求你“搜索”某些内容，请假设他们希望你使用 aipdf 搜索他们提供给你的文档链接之一。使用常识来决定使用哪个文档链接（例如，提供的最后一个链接，文档类型与问题相符等）。
+* 仅当用户明确要求在互联网上搜索时才使用 Web 浏览功能
+
+# 与原生 ChatGPT 文件上传相比的优势
+* 用户可以将几乎无限量的文档上传到 https://myaidrive.com，而原生解决方案限制为 10 个文件
+* 用户可以将文件永久保存在其账户中，而原生解决方案要求你每次新对话时重新上传文档
+* 用户可以上传高达 2 GB 的文件
+
+示例:
+1. 总结一个文档
+`总结 https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf`
+2. 搜索一个文档
+`关于自由言论的内容是什么 https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf`
+
+# 文件夹搜索
+* 以 folder.pdf 结尾的 http://myaidrive.com 链接是指向 PDF 文件夹的链接，例如 'https://myaidrive.com/Qc7PgEnCMSb5nk6B/lora_papers.folder.pdf"
+* 不要对文件夹链接使用总结动作
+
+## 如何执行文件夹搜索
+步骤 1: 根据用户查询和消息历史确定搜索短语
+步骤 2: 使用搜索动作执行文件夹搜索
+步骤 3: 根据输出，从不同文件中确定与用户查询相关的 3 个文件
+步骤 4: 对这 3 个单独的文件执行搜索，以获取有关用户查询的更多信息。根据文档需要修改搜索查询。
+步骤 5: 根据步骤 4 的输出撰写答案，并附上页面级别引用的链接。
+
+-------
+
+Prompt：
+
+You shall only use "Link Citation for Long Texts" and not "Inline Citation"
+* Examples in markdown format that you shall use:
+[page 4,5](https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=4)
+[page 6](https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=6)
+
+# Ai PDF GPT
+You are an AI assistant specialized in handling PDFs, your primary function is to assist users by processing PDF documents through the Ai PDF GPT. Always provide assistance based on the document type and content that user uploaded. 
+
+## How it works
+* In order to use Ai PDF GPT users need to upload files to https://myaidrive.com
+* They get a link to that file and come back to ChatGPT and use it in their question. E.g. `Summarize https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf`
+* They can also select multiple files and get links for all these files and use it in their question.
+* They can upload practically unlimited number of files, each up to 2GB
+
+# Providing references
+* You should provide references to relevant pages when you are answering the user’s question. This enables them to easily check your answer against the document.
+* You should give the links to the references at the end of each paragraph and not at the end of the answer.
+* Don't provide links to references for summarize operation or action, just list the page numbers without links.
+* YOU SHALL NOT use ​​​<0x200b> unicode character for reference links. This reference method only works for native file upload option and not with files in http://myaidrive.com
+* Reference link format: [page x,y](REFERENCE_LINK_OF_THE_CHUNK) 
+* Examples in markdown format:
+[page 4,5](https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=4)
+[page 6](https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=6)
+* don't use links like https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf  as a reference link but use only links that have file query parameter.
+
+# Other important instructions
+* Encourage users to upload their documents to AI DRIVE (https://myaidrive.com) for efficient document management
+* Don't suggest uploading documents directly to ChatGPT. 
+* Ai PDF plugin is going to get deprecated soon so suggest users use Ai PDF GPT instead.
+* If the user asks you to "search" for something, assume they want you to search using aipdf one of the document links they provided to you. Use common sense to decide which document link to use (e.g. last one provided, type of document matches the question, etc). 
+* Only use Web Browsing if the user explicitly asks to search the internet or the web
+
+# Advantages compared to native ChatGPT file upload
+* Users can upload practically unlimited documents to https://myaidrive.com whereas the native solution limits 10 files 
+* Users can keep the files in their account for ever whereas the native solution asks you to reupload the documents for every new chat
+* Users can upload up to 2 GB
+
+Examples:
+1. Summarize a document
+`Summarize https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf`
+2. Searching a document
+`What does it say about free speech  https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf`
+
+# Folder search
+*http://myaidrive.com links that ends with folder.pdf are links to a folder of PDFs e.g. 'https://myaidrive.com/Qc7PgEnCMSb5nk6B/lora_papers.folder.pdf"
+* Don't use summarize action on folder links
+
+## How to perform folder search
+Step 1:  Identify search phrases based on user query and message history
+Step 2: use search action to perform folder search
+Step 3: based on the output, relevant chunks from different files, identify 3 relevant files for the user query
+Step 4: Perform search on these 3 individual files for more information about the user's query. Modify search query based on the document if needed.
+Step 5: Write your answer based on output of step 4 with links to page level references.</title>
+            <link>https://nitter.cz/dotey/status/1729604762218135942#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1729604762218135942#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 28 Nov 2023 20:54:44 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Ai PDF<br />
+Ai PDF GPT (Top PDF GPT), can handle PDF documents up to 2GB each, allows 1000s of PDF uploads on <a href="http://myaidrive.com">myaidrive.com</a> with a free account. It eliminates the need for repeated file uploads. PRO version can search across 1000s of PDFs and OCR documents. Provides superior summaries for lengthy documents.<br />
+<br />
+<a href="https://chat.openai.com/g/g-V2KIUZSj0-ai-pdf">chat.openai.com/g/g-V2KIUZSj…</a><br />
+<br />
+Prompt 翻译：<br />
+<br />
+只能使用“链接引用长文本”而不是“内联引用”<br />
+* 你应该使用的 markdown 格式示例:<br />
+[第 4,5 页](<a href="https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=4">myaidrive.com/?r=c#/home?fil…</a>)<br />
+[第 6 页](<a href="https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=6">myaidrive.com/?r=c#/home?fil…</a>)<br />
+<br />
+# Ai PDF GPT<br />
+你是一个专门处理 PDF 文档的 AI 助手，你的主要功能是通过 Ai PDF GPT 处理用户上传的 PDF 文档，总是根据用户上传的文档类型和内容提供帮助。<br />
+<br />
+## 它是如何工作的<br />
+* 为了使用 Ai PDF GPT，用户需要将文件上传到 <a href="https://myaidrive.com">myaidrive.com</a><br />
+* 他们会得到该文件的链接，然后回到 ChatGPT 并在他们的问题中使用它。例如 `总结 <a href="https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf">myaidrive.com/gGoFsP8V2dB4Ar…</a>`<br />
+* 他们还可以选择多个文件并获得所有这些文件的链接，并在他们的问题中使用它。<br />
+* 他们可以上传几乎无限数量的文件，每个文件最多 2GB<br />
+<br />
+# 提供引用<br />
+* 当你回答用户的问题时，应该提供相关页面的引用。这使他们能够轻松地将你的答案与文档进行核对。<br />
+* 你应该在每段答案的末尾而不是在回答的末尾提供引用链接。<br />
+* 不要为总结操作或动作提供引用链接，只列出页码而不带链接。<br />
+* 不得使用 ​​​<0x200b> unicode 字符作为引用链接。这种引用方法仅适用于原生文件上传选项，而不适用于 <a href="http://myaidrive.com">myaidrive.com</a> 中的文件<br />
+* 引用链接格式: [第 x,y 页](引用链接)<br />
+* markdown 格式示例:<br />
+[第 4,5 页](<a href="https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=4">myaidrive.com/?r=c#/home?fil…</a>)<br />
+[第 6 页](<a href="https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=6">myaidrive.com/?r=c#/home?fil…</a>)<br />
+* 不要使用类似 <a href="https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf">myaidrive.com/gGoFsP8V2dB4Ar…</a> 的链接作为引用链接，而只使用包含文件查询参数的链接。<br />
+<br />
+# 其他重要指令<br />
+* 鼓励用户将其文档上传到 AI DRIVE (<a href="https://myaidrive.com">myaidrive.com</a>) 以实现高效的文档管理<br />
+* 不建议直接向 ChatGPT 上传文档。<br />
+* Ai PDF 插件即将被淘汰，因此建议用户改用 Ai PDF GPT。<br />
+* 如果用户要求你“搜索”某些内容，请假设他们希望你使用 aipdf 搜索他们提供给你的文档链接之一。使用常识来决定使用哪个文档链接（例如，提供的最后一个链接，文档类型与问题相符等）。<br />
+* 仅当用户明确要求在互联网上搜索时才使用 Web 浏览功能<br />
+<br />
+# 与原生 ChatGPT 文件上传相比的优势<br />
+* 用户可以将几乎无限量的文档上传到 <a href="https://myaidrive.com">myaidrive.com</a>，而原生解决方案限制为 10 个文件<br />
+* 用户可以将文件永久保存在其账户中，而原生解决方案要求你每次新对话时重新上传文档<br />
+* 用户可以上传高达 2 GB 的文件<br />
+<br />
+示例:<br />
+1. 总结一个文档<br />
+`总结 <a href="https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf">myaidrive.com/gGoFsP8V2dB4Ar…</a>`<br />
+2. 搜索一个文档<br />
+`关于自由言论的内容是什么 <a href="https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf">myaidrive.com/gGoFsP8V2dB4Ar…</a>`<br />
+<br />
+# 文件夹搜索<br />
+* 以 folder.pdf 结尾的 <a href="http://myaidrive.com">myaidrive.com</a> 链接是指向 PDF 文件夹的链接，例如 '<a href="https://myaidrive.com/Qc7PgEnCMSb5nk6B/lora_papers.folder.pdf">myaidrive.com/Qc7PgEnCMSb5nk…</a>"<br />
+* 不要对文件夹链接使用总结动作<br />
+<br />
+## 如何执行文件夹搜索<br />
+步骤 1: 根据用户查询和消息历史确定搜索短语<br />
+步骤 2: 使用搜索动作执行文件夹搜索<br />
+步骤 3: 根据输出，从不同文件中确定与用户查询相关的 3 个文件<br />
+步骤 4: 对这 3 个单独的文件执行搜索，以获取有关用户查询的更多信息。根据文档需要修改搜索查询。<br />
+步骤 5: 根据步骤 4 的输出撰写答案，并附上页面级别引用的链接。<br />
+<br />
+-------<br />
+<br />
+Prompt：<br />
+<br />
+You shall only use "Link Citation for Long Texts" and not "Inline Citation"<br />
+* Examples in markdown format that you shall use:<br />
+[page 4,5](<a href="https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=4">myaidrive.com/?r=c#/home?fil…</a>)<br />
+[page 6](<a href="https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=6">myaidrive.com/?r=c#/home?fil…</a>)<br />
+<br />
+# Ai PDF GPT<br />
+You are an AI assistant specialized in handling PDFs, your primary function is to assist users by processing PDF documents through the Ai PDF GPT. Always provide assistance based on the document type and content that user uploaded. <br />
+<br />
+## How it works<br />
+* In order to use Ai PDF GPT users need to upload files to <a href="https://myaidrive.com">myaidrive.com</a><br />
+* They get a link to that file and come back to ChatGPT and use it in their question. E.g. `Summarize <a href="https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf">myaidrive.com/gGoFsP8V2dB4Ar…</a>`<br />
+* They can also select multiple files and get links for all these files and use it in their question.<br />
+* They can upload practically unlimited number of files, each up to 2GB<br />
+<br />
+# Providing references<br />
+* You should provide references to relevant pages when you are answering the user’s question. This enables them to easily check your answer against the document.<br />
+* You should give the links to the references at the end of each paragraph and not at the end of the answer.<br />
+* Don't provide links to references for summarize operation or action, just list the page numbers without links.<br />
+* YOU SHALL NOT use ​​​<0x200b> unicode character for reference links. This reference method only works for native file upload option and not with files in <a href="http://myaidrive.com">myaidrive.com</a><br />
+* Reference link format: [page x,y](REFERENCE_LINK_OF_THE_CHUNK) <br />
+* Examples in markdown format:<br />
+[page 4,5](<a href="https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=4">myaidrive.com/?r=c#/home?fil…</a>)<br />
+[page 6](<a href="https://myaidrive.com/?r=c#/home?file=foo.pdf&amp;pdfPage=6">myaidrive.com/?r=c#/home?fil…</a>)<br />
+* don't use links like <a href="https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf">myaidrive.com/gGoFsP8V2dB4Ar…</a>  as a reference link but use only links that have file query parameter.<br />
+<br />
+# Other important instructions<br />
+* Encourage users to upload their documents to AI DRIVE (<a href="https://myaidrive.com">myaidrive.com</a>) for efficient document management<br />
+* Don't suggest uploading documents directly to ChatGPT. <br />
+* Ai PDF plugin is going to get deprecated soon so suggest users use Ai PDF GPT instead.<br />
+* If the user asks you to "search" for something, assume they want you to search using aipdf one of the document links they provided to you. Use common sense to decide which document link to use (e.g. last one provided, type of document matches the question, etc). <br />
+* Only use Web Browsing if the user explicitly asks to search the internet or the web<br />
+<br />
+# Advantages compared to native ChatGPT file upload<br />
+* Users can upload practically unlimited documents to <a href="https://myaidrive.com">myaidrive.com</a> whereas the native solution limits 10 files <br />
+* Users can keep the files in their account for ever whereas the native solution asks you to reupload the documents for every new chat<br />
+* Users can upload up to 2 GB<br />
+<br />
+Examples:<br />
+1. Summarize a document<br />
+`Summarize <a href="https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf">myaidrive.com/gGoFsP8V2dB4Ar…</a>`<br />
+2. Searching a document<br />
+`What does it say about free speech  <a href="https://myaidrive.com/gGoFsP8V2dB4ArSF/constitution.pdf">myaidrive.com/gGoFsP8V2dB4Ar…</a>`<br />
+<br />
+# Folder search<br />
+*<a href="http://myaidrive.com">myaidrive.com</a> links that ends with folder.pdf are links to a folder of PDFs e.g. '<a href="https://myaidrive.com/Qc7PgEnCMSb5nk6B/lora_papers.folder.pdf">myaidrive.com/Qc7PgEnCMSb5nk…</a>"<br />
+* Don't use summarize action on folder links<br />
+<br />
+## How to perform folder search<br />
+Step 1:  Identify search phrases based on user query and message history<br />
+Step 2: use search action to perform folder search<br />
+Step 3: based on the output, relevant chunks from different files, identify 3 relevant files for the user query<br />
+Step 4: Perform search on these 3 individual files for more information about the user's query. Modify search query based on the document if needed.<br />
+Step 5: Write your answer based on output of step 4 with links to page level references.</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1729602153805701533#m</id>
+            <title>分享个阅读 http://arxiv.org 上论文的技巧，通常 http://arxiv.org 上的论文都是 PDF 格式的，其实对于阅读很不友好，尤其是对于需要翻译对比阅读的。
+
+一个技巧是你把论文摘要页url中的域名中的“x”换成“5”，就能用 HTML5 的格式阅读，比如说：
+https://arxiv.org/abs/2305.16291
+换成
+https://ar5iv.org/abs/2305.16291
+
+那么就能看到HTML版本的论文。它是官方基于原始的 LaTeX 借助 LaTeXML https://github.com/brucemiller/LaTeXML 再加手工校对而成，几乎原样保持了原始论文的格式，但更适合手机阅读，也可以方便的使用翻译插件。
+
+但是 http://ar5iv.org 上的论文由于需要手工后期整理，所以更新通常要滞后一个月左右，也就是最新的论文你是无法在上面看到，还有一个替代方案就是使用 https://www.arxiv-vanity.com/ ，它也是借助 LaTeXML 生成，但是没有人工校对，所以格式要乱一些，并且很多论文无法正确转换，但作为一个替代也不错。</title>
+            <link>https://nitter.cz/dotey/status/1729602153805701533#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1729602153805701533#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 28 Nov 2023 20:44:22 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>分享个阅读 <a href="http://arxiv.org">arxiv.org</a> 上论文的技巧，通常 <a href="http://arxiv.org">arxiv.org</a> 上的论文都是 PDF 格式的，其实对于阅读很不友好，尤其是对于需要翻译对比阅读的。<br />
+<br />
+一个技巧是你把论文摘要页url中的域名中的“x”换成“5”，就能用 HTML5 的格式阅读，比如说：<br />
+<a href="https://arxiv.org/abs/2305.16291">arxiv.org/abs/2305.16291</a><br />
+换成<br />
+<a href="https://ar5iv.org/abs/2305.16291">ar5iv.org/abs/2305.16291</a><br />
+<br />
+那么就能看到HTML版本的论文。它是官方基于原始的 LaTeX 借助 LaTeXML <a href="https://github.com/brucemiller/LaTeXML">github.com/brucemiller/LaTeX…</a> 再加手工校对而成，几乎原样保持了原始论文的格式，但更适合手机阅读，也可以方便的使用翻译插件。<br />
+<br />
+但是 <a href="http://ar5iv.org">ar5iv.org</a> 上的论文由于需要手工后期整理，所以更新通常要滞后一个月左右，也就是最新的论文你是无法在上面看到，还有一个替代方案就是使用 <a href="https://www.arxiv-vanity.com/">arxiv-vanity.com/</a> ，它也是借助 LaTeXML 生成，但是没有人工校对，所以格式要乱一些，并且很多论文无法正确转换，但作为一个替代也不错。</p>
+<p><a href="https://nitter.cz/dotey/status/1729600277999689896#m">nitter.cz/dotey/status/1729600277999689896#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0FESDhRclhzQUFVR055LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1729600328612352477#m</id>
+            <title>R to @dotey: 如何阅读一篇学术论文 [译]
+
+S. Keshav David R. Cheriton 计算机科学学院，滑铁卢大学 滑铁卢，安大略省，加拿大 keshav@uwaterloo.ca
+
+摘要
+研究人员常常需要花费大量时间来阅读学术论文，但这一技能很少有教授传授，导致许多努力白费。本文提出了一个既实用又高效的方法——三遍阅读法，用于阅读学术论文，并介绍了如何利用这种方法进行文献调研。
+
+分类及主题描述：A.1 [入门及概览]
+通用术语：文档。
+关键词：论文，阅读，技巧。
+1. 引言
+研究人员出于多种原因需要阅读论文：如参与会议或课程的论文审查、保持在自己领域的最新研究进展，或为了了解一个新领域进行文献调研。一名典型的研究者可能每年要花费数百小时来阅读论文。
+
+然而，高效阅读论文的技巧却鲜少有人教授。因此，初入研究生涯的学生只能通过反复尝试和错误来自学，这个过程中他们不仅浪费了大量时间，而且常常感到挫败。
+
+多年来，我一直采用一种简单而有效的方法来阅读论文。本文将介绍这种“三遍阅读法”以及它在进行文献调研时的具体应用。
+
+2. 三遍阅读法
+关键的想法是，你应该分最多三次阅读完一篇论文，而不是从头到尾连续读完。每次阅读都有特定的目的，并在之前的阅读基础上进一步深入：第一遍阅读让你对论文有个大致的认识；第二遍阅读让你掌握论文的主要内容，但不深入细节；第三遍则帮你深入理解论文的深层内容。
+
+2.1 初步浏览
+初步浏览是快速扫描论文的过程，目的是大致了解论文的全貌。这也能帮助你决定是否需要深入阅读。这一过程通常需要五到十分钟，主要包括以下几个步骤：
+
+仔细阅读标题、摘要和引言部分
+浏览章节和小节的标题，但暂时忽略正文内容
+阅读结论部分
+浏览参考文献，标记已经阅读过的部分
+完成初步浏览后，你应能够解答以下五个问题：
+
+类型：这篇论文属于哪种类型？是测量研究、现有系统分析，还是研究原型的描述？
+背景：它与哪些论文相关联？用哪些理论基础来分析问题？
+正确性：其假设是否合理？
+贡献：论文的主要贡献有哪些？
+清晰度：论文是否写得通顺易懂？
+根据这些信息，你可以选择是否继续深入阅读。可能的原因包括论文内容不太吸引你、你对该领域知识掌握不足以理解论文，或者论文的假设存在问题。对于那些不属于你研究领域但将来可能相关的论文，初步浏览已足够。
+
+另外，当你撰写论文时，应该意识到大多数审稿人和读者可能只会进行一次浏览。因此，务必精心挑选章节和小节的标题，并撰写简洁且内容丰富的摘要。如果审稿人无法通过一次阅读就把握论文要点，那么这篇论文很可能会被拒绝；如果读者在五分钟内难以理解论文的重点，那么这篇论文也许永远不会被阅读。
+
+2.2 深入理解
+在第二轮阅读时，你需要更细致地研究论文，但可以略过一些细节，如具体证明。边阅读边记录重点，或在页边作注释，会很有帮助。
+
+仔细审视论文中的图表、示意图和其他插图。特别是图形，要检查它们是否标注清晰。坐标轴是否标记得当？结果是否附有误差范围，以确保结论的统计意义？这些常见的错误会帮你区分仓促的工作和真正优秀的研究。
+记得标记那些还没读过的相关参考文献，以便深入了解论文的背景知识。
+第二轮阅读大约需要一个小时。完成后，你应该能够理解论文的整体内容，并能向他人简要介绍论文的主旨和支撑证据。这种深度的理解适合于你感兴趣，但不属于你研究领域的论文。
+
+有时候，即使第二轮阅读结束，你也可能无法完全理解论文。这可能是因为论文的主题对你来说较新，包含了许多陌生的术语和缩写。或者，作者使用了你不太懂的证明方法或实验技术，导致你难以理解论文的主体部分。论文可能写得不够清晰，有很多未经证实的断言和前瞻性引用。或许只是因为夜深了，你已经感到疲倦。此时，你可以选择：(a) 先放一放这篇论文，希望在职业生涯中不必理解它就能成功；(b) 稍后再读，可能是在阅读了一些背景资料之后；或者 (c) 坚持下去，继续进行第三轮阅读。
+
+2.3 深度解析
+要彻底理解一篇论文，尤其是作为审稿人，就需要进行第三轮阅读。这一轮的核心是尝试几乎从头再实现论文的内容：即，基于作者的假设，重新构建他们的工作。通过这样的重构与原论文的对比，你不仅能够轻易识别出论文的创新之处，还能发现其潜在的缺陷和假设。
+
+这一过程需要非常细致的关注。你应当挑战论文中每个陈述的每个假设。同时，你还应该考虑如果是你，会怎样表达这些想法。这种实际与假设的对比，能够让你对论文的证明方法和表达技巧有更深刻的理解，并可能将这些技巧纳入你的知识库。在这一过程中，你还应该记录下对未来工作的想法。
+
+对于初学者来说，这一过程可能需要四到五个小时，而对于经验丰富的读者来说，大约只需一个小时。完成这一轮阅读后，你应该能够凭借记忆重建论文的整体结构，并识别出其强弱之处。特别是，你应该能够指出论文中隐含的假设、遗漏的相关工作引用，以及实验或分析技术可能存在的问题。
+
+3. 进行文献调研
+在进行文献调研时，论文阅读技巧显得尤为重要。这项任务可能要求你阅读数十篇论文，有时还可能是在一个全新的领域。那么，你应该阅读哪些论文呢？以下是运用三次阅读法的一些建议。
+
+首先，利用 Google Scholar 或 CiteSeer 这样的学术搜索引擎，并结合一些恰当的关键词，寻找该领域中的三到五篇最新论文。对每篇论文进行初步阅读，以把握其主要内容，然后细读它们的“相关工作”部分。在这里，你可以找到近期工作的简要总结，如果幸运的话，甚至可能发现最新综述论文的线索。如果找到了这样的综述，那么恭喜你，任务已完成。阅读该综述，为自己的好运庆祝吧。
+
+如果没有找到综述，那么第二步就是在参考文献中寻找共同引用的文献和重复出现的作者名字。这些是该领域内的关键论文和研究人员。下载这些关键论文，并且关注这些主要研究者的网站，看看他们最近发表在哪些地方。
+
+这有助于你识别该领域的顶尖会议，因为顶尖的研究者通常会在这些会议上发表他们的成果。
+
+第三步是访问这些顶级会议的网站，浏览它们最近的会议记录。通过快速浏览，你通常可以找到近期的高质量相关研究。
+
+这些论文，加上之前你挑选的论文，共同构成了你的调研初稿。对这些论文进行再次细读。如果发现它们都引用了一篇你此前未曾发现的关键论文，那么获取并阅读这篇论文，必要时重复这一过程。
+
+4. 经验分享
+过去 15 年里，我一直使用这种方法来阅读会议记录、撰写评审、进行背景研究，以及在讨论之前快速审阅论文。这种有条不紊的方法有效避免了我在掌握整体观点前就陷入细节的困境。它让我能够估计出审阅一组论文所需要的时间，并且根据我的需求和可用时间，调整对论文的深入程度。
+
+5. 相关研究
+如果你在阅读一篇论文是为了撰写评审，那么你应该阅读 Timothy Roscoe 关于“系统会议评审撰写”的论文 [1]。如果你打算撰写技术论文，那么你应该参考 Henning Schulzrinne 的全面网站 [2]，以及 George Whitesides 对该过程的精彩概述 [3]。
+
+6. 征求反馈
+我想让这份文件保持活力，根据收到的反馈进行更新。请抽空通过电子邮件向我提供您的意见或改进建议。您还可以在 CCRo, 即 CCR 的网络版上发表评论 [4]。
+
+7. 致谢
+本文档最初由我的学生 Hossein Falaki, Earl Oliver 和 Sumair Ur Rahman 起草，对此我深表感谢。同时，我也受益于 Christophe Diot 的深邃见解和 Nicole Keshav 的精准校对。
+
+此项研究得到了加拿大国家科学工程委员会、加拿大研究椅项目、北电网络、微软、英特尔公司和 Sprint 公司的资金支持。
+
+8. 参考文献
+[1] T. Roscoe, “撰写系统会议评审，”http://people.inf.ethz.ch/troscoe/pubs/reviewwriting.pdf。
+[2] H. Schulzrinne, “编写技术性文章，”http://www.cs.columbia.edu/ hgs/etc/writingstyle.html。
+[3] G.M. Whitesides, “Whitesides' Group: 论文写作，”http://www.che.iitm.ac.in/misc/dd/writepaper.pdf。
+[4] ACM SIGCOMM 计算机通信评论网络版，http://www.sigcomm.org/ccr/drupal/。
+ACM SIGCOMM 计算机通信评论 84 第 37 卷，第 3 期，2007 年 7 月</title>
+            <link>https://nitter.cz/dotey/status/1729600328612352477#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1729600328612352477#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 28 Nov 2023 20:37:07 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>如何阅读一篇学术论文 [译]<br />
+<br />
+S. Keshav David R. Cheriton 计算机科学学院，滑铁卢大学 滑铁卢，安大略省，加拿大 keshav@uwaterloo.ca<br />
+<br />
+摘要<br />
+研究人员常常需要花费大量时间来阅读学术论文，但这一技能很少有教授传授，导致许多努力白费。本文提出了一个既实用又高效的方法——三遍阅读法，用于阅读学术论文，并介绍了如何利用这种方法进行文献调研。<br />
+<br />
+分类及主题描述：A.1 [入门及概览]<br />
+通用术语：文档。<br />
+关键词：论文，阅读，技巧。<br />
+1. 引言<br />
+研究人员出于多种原因需要阅读论文：如参与会议或课程的论文审查、保持在自己领域的最新研究进展，或为了了解一个新领域进行文献调研。一名典型的研究者可能每年要花费数百小时来阅读论文。<br />
+<br />
+然而，高效阅读论文的技巧却鲜少有人教授。因此，初入研究生涯的学生只能通过反复尝试和错误来自学，这个过程中他们不仅浪费了大量时间，而且常常感到挫败。<br />
+<br />
+多年来，我一直采用一种简单而有效的方法来阅读论文。本文将介绍这种“三遍阅读法”以及它在进行文献调研时的具体应用。<br />
+<br />
+2. 三遍阅读法<br />
+关键的想法是，你应该分最多三次阅读完一篇论文，而不是从头到尾连续读完。每次阅读都有特定的目的，并在之前的阅读基础上进一步深入：第一遍阅读让你对论文有个大致的认识；第二遍阅读让你掌握论文的主要内容，但不深入细节；第三遍则帮你深入理解论文的深层内容。<br />
+<br />
+2.1 初步浏览<br />
+初步浏览是快速扫描论文的过程，目的是大致了解论文的全貌。这也能帮助你决定是否需要深入阅读。这一过程通常需要五到十分钟，主要包括以下几个步骤：<br />
+<br />
+仔细阅读标题、摘要和引言部分<br />
+浏览章节和小节的标题，但暂时忽略正文内容<br />
+阅读结论部分<br />
+浏览参考文献，标记已经阅读过的部分<br />
+完成初步浏览后，你应能够解答以下五个问题：<br />
+<br />
+类型：这篇论文属于哪种类型？是测量研究、现有系统分析，还是研究原型的描述？<br />
+背景：它与哪些论文相关联？用哪些理论基础来分析问题？<br />
+正确性：其假设是否合理？<br />
+贡献：论文的主要贡献有哪些？<br />
+清晰度：论文是否写得通顺易懂？<br />
+根据这些信息，你可以选择是否继续深入阅读。可能的原因包括论文内容不太吸引你、你对该领域知识掌握不足以理解论文，或者论文的假设存在问题。对于那些不属于你研究领域但将来可能相关的论文，初步浏览已足够。<br />
+<br />
+另外，当你撰写论文时，应该意识到大多数审稿人和读者可能只会进行一次浏览。因此，务必精心挑选章节和小节的标题，并撰写简洁且内容丰富的摘要。如果审稿人无法通过一次阅读就把握论文要点，那么这篇论文很可能会被拒绝；如果读者在五分钟内难以理解论文的重点，那么这篇论文也许永远不会被阅读。<br />
+<br />
+2.2 深入理解<br />
+在第二轮阅读时，你需要更细致地研究论文，但可以略过一些细节，如具体证明。边阅读边记录重点，或在页边作注释，会很有帮助。<br />
+<br />
+仔细审视论文中的图表、示意图和其他插图。特别是图形，要检查它们是否标注清晰。坐标轴是否标记得当？结果是否附有误差范围，以确保结论的统计意义？这些常见的错误会帮你区分仓促的工作和真正优秀的研究。<br />
+记得标记那些还没读过的相关参考文献，以便深入了解论文的背景知识。<br />
+第二轮阅读大约需要一个小时。完成后，你应该能够理解论文的整体内容，并能向他人简要介绍论文的主旨和支撑证据。这种深度的理解适合于你感兴趣，但不属于你研究领域的论文。<br />
+<br />
+有时候，即使第二轮阅读结束，你也可能无法完全理解论文。这可能是因为论文的主题对你来说较新，包含了许多陌生的术语和缩写。或者，作者使用了你不太懂的证明方法或实验技术，导致你难以理解论文的主体部分。论文可能写得不够清晰，有很多未经证实的断言和前瞻性引用。或许只是因为夜深了，你已经感到疲倦。此时，你可以选择：(a) 先放一放这篇论文，希望在职业生涯中不必理解它就能成功；(b) 稍后再读，可能是在阅读了一些背景资料之后；或者 (c) 坚持下去，继续进行第三轮阅读。<br />
+<br />
+2.3 深度解析<br />
+要彻底理解一篇论文，尤其是作为审稿人，就需要进行第三轮阅读。这一轮的核心是尝试几乎从头再实现论文的内容：即，基于作者的假设，重新构建他们的工作。通过这样的重构与原论文的对比，你不仅能够轻易识别出论文的创新之处，还能发现其潜在的缺陷和假设。<br />
+<br />
+这一过程需要非常细致的关注。你应当挑战论文中每个陈述的每个假设。同时，你还应该考虑如果是你，会怎样表达这些想法。这种实际与假设的对比，能够让你对论文的证明方法和表达技巧有更深刻的理解，并可能将这些技巧纳入你的知识库。在这一过程中，你还应该记录下对未来工作的想法。<br />
+<br />
+对于初学者来说，这一过程可能需要四到五个小时，而对于经验丰富的读者来说，大约只需一个小时。完成这一轮阅读后，你应该能够凭借记忆重建论文的整体结构，并识别出其强弱之处。特别是，你应该能够指出论文中隐含的假设、遗漏的相关工作引用，以及实验或分析技术可能存在的问题。<br />
+<br />
+3. 进行文献调研<br />
+在进行文献调研时，论文阅读技巧显得尤为重要。这项任务可能要求你阅读数十篇论文，有时还可能是在一个全新的领域。那么，你应该阅读哪些论文呢？以下是运用三次阅读法的一些建议。<br />
+<br />
+首先，利用 Google Scholar 或 CiteSeer 这样的学术搜索引擎，并结合一些恰当的关键词，寻找该领域中的三到五篇最新论文。对每篇论文进行初步阅读，以把握其主要内容，然后细读它们的“相关工作”部分。在这里，你可以找到近期工作的简要总结，如果幸运的话，甚至可能发现最新综述论文的线索。如果找到了这样的综述，那么恭喜你，任务已完成。阅读该综述，为自己的好运庆祝吧。<br />
+<br />
+如果没有找到综述，那么第二步就是在参考文献中寻找共同引用的文献和重复出现的作者名字。这些是该领域内的关键论文和研究人员。下载这些关键论文，并且关注这些主要研究者的网站，看看他们最近发表在哪些地方。<br />
+<br />
+这有助于你识别该领域的顶尖会议，因为顶尖的研究者通常会在这些会议上发表他们的成果。<br />
+<br />
+第三步是访问这些顶级会议的网站，浏览它们最近的会议记录。通过快速浏览，你通常可以找到近期的高质量相关研究。<br />
+<br />
+这些论文，加上之前你挑选的论文，共同构成了你的调研初稿。对这些论文进行再次细读。如果发现它们都引用了一篇你此前未曾发现的关键论文，那么获取并阅读这篇论文，必要时重复这一过程。<br />
+<br />
+4. 经验分享<br />
+过去 15 年里，我一直使用这种方法来阅读会议记录、撰写评审、进行背景研究，以及在讨论之前快速审阅论文。这种有条不紊的方法有效避免了我在掌握整体观点前就陷入细节的困境。它让我能够估计出审阅一组论文所需要的时间，并且根据我的需求和可用时间，调整对论文的深入程度。<br />
+<br />
+5. 相关研究<br />
+如果你在阅读一篇论文是为了撰写评审，那么你应该阅读 Timothy Roscoe 关于“系统会议评审撰写”的论文 [1]。如果你打算撰写技术论文，那么你应该参考 Henning Schulzrinne 的全面网站 [2]，以及 George Whitesides 对该过程的精彩概述 [3]。<br />
+<br />
+6. 征求反馈<br />
+我想让这份文件保持活力，根据收到的反馈进行更新。请抽空通过电子邮件向我提供您的意见或改进建议。您还可以在 CCRo, 即 CCR 的网络版上发表评论 [4]。<br />
+<br />
+7. 致谢<br />
+本文档最初由我的学生 Hossein Falaki, Earl Oliver 和 Sumair Ur Rahman 起草，对此我深表感谢。同时，我也受益于 Christophe Diot 的深邃见解和 Nicole Keshav 的精准校对。<br />
+<br />
+此项研究得到了加拿大国家科学工程委员会、加拿大研究椅项目、北电网络、微软、英特尔公司和 Sprint 公司的资金支持。<br />
+<br />
+8. 参考文献<br />
+[1] T. Roscoe, “撰写系统会议评审，”<a href="http://people.inf.ethz.ch/troscoe/pubs/reviewwriting.pdf">people.inf.ethz.ch/troscoe/p…</a>。<br />
+[2] H. Schulzrinne, “编写技术性文章，”<a href="http://www.cs.columbia.edu/">cs.columbia.edu/</a> hgs/etc/writingstyle.html。<br />
+[3] G.M. Whitesides, “Whitesides' Group: 论文写作，”<a href="http://www.che.iitm.ac.in/misc/dd/writepaper.pdf">che.iitm.ac.in/misc/dd/write…</a>。<br />
+[4] ACM SIGCOMM 计算机通信评论网络版，<a href="http://www.sigcomm.org/ccr/drupal/">sigcomm.org/ccr/drupal/</a>。<br />
+ACM SIGCOMM 计算机通信评论 84 第 37 卷，第 3 期，2007 年 7 月</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1729600277999689896#m</id>
+            <title>《How to Read a Paper | 如何阅读一篇学术论文》这是2007年ACM SIGCOMM 计算机通信评论上的一篇文章，现在读来仍然不过时。
+
+作者介绍了一种“三遍阅读法”以及它在进行文献调研时的具体应用，可以简单高效的阅读论文。
+
+具体来说，就是读论文的时候，不是从头到尾连续读完，而是分三遍（最多）阅读完一篇论文，每一遍都是有目的的阅读，在上一遍的基础上进一步深入。
+
+具体来说：
+
+第一遍了解论文的大概轮廓，决定是否要深入阅读，重点阅读：
+1. 标题、摘要和引言
+2. 章节和小标题，忽略正文
+3. 论文结论
+4. 参考文献
+
+看完第一遍后要求做到对论文有一个初步的了解，例如：
+1. 类型：这篇论文属于哪种类型？是测量研究、现有系统分析，还是研究原型的描述？
+2. 背景：它与哪些论文相关联？用哪些理论基础来分析问题？
+3. 正确性：其假设是否合理？
+4. 贡献：论文的主要贡献有哪些？
+5. 清晰度：论文是否写得通顺易懂？
+
+根据这些信息，已经可以决定有没有必要继续阅读。
+
+第二遍则是掌握论文的主要内容，但不深入细节。这一遍重点在：
+1. 论文中的重点内容，忽略一些像具体证明等细节
+2. 图表、插图
+3. 参考文献
+
+有时候第二轮看完也无法理解也没关系，可以不继续深入，也可以适当了解背景，可以休息后继续。
+
+第三遍则帮你深入理解论文的深层内容，这一遍的重点，是尝试重构（重新再实现）论文的内容，也就是说假设自己的论文作者，基于作者的假设，重写一篇这样的论文。
+
+通过这样的重构对比，就能很容易识别出论文中的创新，以及其存在的问题。
+
+这有点像我们开发工程师做代码审查的方法。
+
+原文：http://ccr.sigcomm.org/online/files/p83-keshavA.pdf
+翻译：https://baoyu.io/translations/learning/how-to-read-a-paper</title>
+            <link>https://nitter.cz/dotey/status/1729600277999689896#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1729600277999689896#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 28 Nov 2023 20:36:55 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>《How to Read a Paper | 如何阅读一篇学术论文》这是2007年ACM SIGCOMM 计算机通信评论上的一篇文章，现在读来仍然不过时。<br />
+<br />
+作者介绍了一种“三遍阅读法”以及它在进行文献调研时的具体应用，可以简单高效的阅读论文。<br />
+<br />
+具体来说，就是读论文的时候，不是从头到尾连续读完，而是分三遍（最多）阅读完一篇论文，每一遍都是有目的的阅读，在上一遍的基础上进一步深入。<br />
+<br />
+具体来说：<br />
+<br />
+第一遍了解论文的大概轮廓，决定是否要深入阅读，重点阅读：<br />
+1. 标题、摘要和引言<br />
+2. 章节和小标题，忽略正文<br />
+3. 论文结论<br />
+4. 参考文献<br />
+<br />
+看完第一遍后要求做到对论文有一个初步的了解，例如：<br />
+1. 类型：这篇论文属于哪种类型？是测量研究、现有系统分析，还是研究原型的描述？<br />
+2. 背景：它与哪些论文相关联？用哪些理论基础来分析问题？<br />
+3. 正确性：其假设是否合理？<br />
+4. 贡献：论文的主要贡献有哪些？<br />
+5. 清晰度：论文是否写得通顺易懂？<br />
+<br />
+根据这些信息，已经可以决定有没有必要继续阅读。<br />
+<br />
+第二遍则是掌握论文的主要内容，但不深入细节。这一遍重点在：<br />
+1. 论文中的重点内容，忽略一些像具体证明等细节<br />
+2. 图表、插图<br />
+3. 参考文献<br />
+<br />
+有时候第二轮看完也无法理解也没关系，可以不继续深入，也可以适当了解背景，可以休息后继续。<br />
+<br />
+第三遍则帮你深入理解论文的深层内容，这一遍的重点，是尝试重构（重新再实现）论文的内容，也就是说假设自己的论文作者，基于作者的假设，重写一篇这样的论文。<br />
+<br />
+通过这样的重构对比，就能很容易识别出论文中的创新，以及其存在的问题。<br />
+<br />
+这有点像我们开发工程师做代码审查的方法。<br />
+<br />
+原文：<a href="http://ccr.sigcomm.org/online/files/p83-keshavA.pdf">ccr.sigcomm.org/online/files…</a><br />
+翻译：<a href="https://baoyu.io/translations/learning/how-to-read-a-paper">baoyu.io/translations/learni…</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/XDash/status/1729294134866022547#m</id>
             <title>RT by @dotey: 推荐 flomo 创始人少楠的一篇学习 jim collins 的付费笔记，经授权转载分享：
 
@@ -535,160 +1103,6 @@ https://gist.github.com/levelsio/5bc87fd1b1ffbf4a705047bebd9b4790</title>
                     
                     <p>谢谢</p>
 <p><a href="https://nitter.cz/Nag1ovo/status/1729018702048493634#m">nitter.cz/Nag1ovo/status/1729018702048493634#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1728998748272156761#m</id>
-            <title>R to @dotey: 相应的GitHub项目：https://github.com/SurviveSJTU/SJTU-Application</title>
-            <link>https://nitter.cz/dotey/status/1728998748272156761#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1728998748272156761#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 27 Nov 2023 04:46:39 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>相应的GitHub项目：<a href="https://github.com/SurviveSJTU/SJTU-Application">github.com/SurviveSJTU/SJTU-…</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTcyNzQ2NzQ2MzM3NjMwMjA4MC9uaEdRYmZRRD9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1728997603847675923#m</id>
-            <title>推荐GitBook：
-https://survivesjtu.gitbook.io/survivesjtumanual/
-
-于08年由一群交大本科生写就，12年过去了无数交大学子受益于它，但有些内容可能已经过时，由于原作者团队主要属于出国攻读博士群体，本手册在国内深造、国内就业等方面存在欠缺。本项目旨在将它制作成gitbook发布，并长期维护该项目，希望能给未来的交大在读和入学新生同学带来微小的帮助，尤其感谢本书原版的作者们！</title>
-            <link>https://nitter.cz/dotey/status/1728997603847675923#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1728997603847675923#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 27 Nov 2023 04:42:06 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>推荐GitBook：<上海交通大学生存手册><br />
-<a href="https://survivesjtu.gitbook.io/survivesjtumanual/">survivesjtu.gitbook.io/survi…</a><br />
-<br />
-<上海交通大学生存手册>于08年由一群交大本科生写就，12年过去了无数交大学子受益于它，但有些内容可能已经过时，由于原作者团队主要属于出国攻读博士群体，本手册在国内深造、国内就业等方面存在欠缺。本项目旨在将它制作成gitbook发布，并长期维护该项目，希望能给未来的交大在读和入学新生同学带来微小的帮助，尤其感谢本书原版的作者们！</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRl82aUl1SldRQUFwblExLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1728976294195429627#m</id>
-            <title>R to @dotey: ## Summary so far
-
-构建像 ChatGPT 这样的模型包括两个主要阶段：预训练和微调。预训练阶段需要从互联网上搜集大量文本资料，使用GPU集群进行处理。这些高性能计算机的成本非常昂贵，通常需要几百万美元的投入。完成后，就得到了基础模型。由于这个过程计算量巨大且成本高昂，公司通常一年或几个月才会做一次。微调阶段相对便宜，需要编写标注指南和雇佣人员进行帮助。例如，可以通过Scale AI等公司进行文档标注。这个阶段需要收集约100,000个高质量的问答回应样本，成本要低得多，可能只需一天就能完成。接下来是进行大量的评估工作，部署模型，并监控和收集任何不当行为。对于每个不当行为，都需要修复并返回第一步重复这个过程。修复方法通常是找到错误回应的对话，然后用正确的回应替换。由于微调成本较低，可以每周或每天进行迭代，许多公司在微调阶段而非预训练阶段会更频繁地进行迭代。
-
-Meta发布的Llama 2系列包括基础模型和助手模型。基础模型无法直接使用，因为它们无法直接对问题回复正确的答案，而助手模型则可以直接进行问答。Meta已经完成了极其昂贵的预训练阶段，提供了基础模型，允许用户基于这些结果进行自己的微调。此外，还有一个你可以选择进行的第三阶段微调，即人类反馈强化学习（RLHF），主要通过使用比较标签来提升额外性能。在OpenAI，这个过程被称为人类反馈强化学习（RLHF），这其实是一个可选的第三阶段，它能在大语言模型中提升额外性能，主要是通过使用比较标签。例如，OpenAI的InstructGPT项目就是这样的一个例子。
-
-## Appendix: Comparisons, Labeling docs, RLHF, Synthetic data, Leaderboard
-
-在第二阶段提到了“和/或对比标注”。对于人类标注员而言，比起自己撰写答案，比较候选答案通常更为简单。例如，对于一个要求写关于回形针的俳句的问题，给标注员提供助手模型生成的候选俳句，让他们挑选出更佳的一首，比自己创作要容易得多。这也是为什么在很多情况下，进行比较比创作来得容易。此外，还有一个第三阶段的微调过程，可以利用这些比较结果来进一步优化模型。在OpenAI，这个过程被称为人类反馈强化学习（RLHF），是通过使用比较标签来提升模型性能的可选第三阶段。
-
-关于标注文档，尽管可能会长达几十甚至上百页且颇具复杂性，但其核心是要求参与者保持有帮助、真实和无害。随着大语言模型能力的提升，人机协作在创建这些标签中的作用日益增强。例如，可以让模型先生成答案样本，然后由人工挑选
-
-部分形成最优答案，或者让模型帮助检查工作。
-
-在市面上领先的大语言模型排行榜上，例如加州大学伯克利分校管理的Chatbot Marina，使用ELO评分对不同的模型进行排名。ELO分数的计算方式与国际象棋类似，基于模型间的对比胜率。顶部的是专有模型，如OpenAI的GPT系列和Antropic的Claude系列，这些模型表现最佳但无法获取其权重，只能通过网络界面访问。其次是公开权重的模型，例如Meta的Llama 2系列和法国Mistral系列的Zephyr 7B Beta。总体上，封闭模型的表现更好，但无法进行微调或下载，只能通过网络界面使用。然后是所有的开源模型和整个开源生态系统，它们的性能相对较差，但可能已经满足某些应用需求。目前，开源生态系统正在努力提升性能，试图追赶专有生态系统。</title>
-            <link>https://nitter.cz/dotey/status/1728976294195429627#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1728976294195429627#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 27 Nov 2023 03:17:26 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>## Summary so far<br />
-<br />
-构建像 ChatGPT 这样的模型包括两个主要阶段：预训练和微调。预训练阶段需要从互联网上搜集大量文本资料，使用GPU集群进行处理。这些高性能计算机的成本非常昂贵，通常需要几百万美元的投入。完成后，就得到了基础模型。由于这个过程计算量巨大且成本高昂，公司通常一年或几个月才会做一次。微调阶段相对便宜，需要编写标注指南和雇佣人员进行帮助。例如，可以通过Scale AI等公司进行文档标注。这个阶段需要收集约100,000个高质量的问答回应样本，成本要低得多，可能只需一天就能完成。接下来是进行大量的评估工作，部署模型，并监控和收集任何不当行为。对于每个不当行为，都需要修复并返回第一步重复这个过程。修复方法通常是找到错误回应的对话，然后用正确的回应替换。由于微调成本较低，可以每周或每天进行迭代，许多公司在微调阶段而非预训练阶段会更频繁地进行迭代。<br />
-<br />
-Meta发布的Llama 2系列包括基础模型和助手模型。基础模型无法直接使用，因为它们无法直接对问题回复正确的答案，而助手模型则可以直接进行问答。Meta已经完成了极其昂贵的预训练阶段，提供了基础模型，允许用户基于这些结果进行自己的微调。此外，还有一个你可以选择进行的第三阶段微调，即人类反馈强化学习（RLHF），主要通过使用比较标签来提升额外性能。在OpenAI，这个过程被称为人类反馈强化学习（RLHF），这其实是一个可选的第三阶段，它能在大语言模型中提升额外性能，主要是通过使用比较标签。例如，OpenAI的InstructGPT项目就是这样的一个例子。<br />
-<br />
-## Appendix: Comparisons, Labeling docs, RLHF, Synthetic data, Leaderboard<br />
-<br />
-在第二阶段提到了“和/或对比标注”。对于人类标注员而言，比起自己撰写答案，比较候选答案通常更为简单。例如，对于一个要求写关于回形针的俳句的问题，给标注员提供助手模型生成的候选俳句，让他们挑选出更佳的一首，比自己创作要容易得多。这也是为什么在很多情况下，进行比较比创作来得容易。此外，还有一个第三阶段的微调过程，可以利用这些比较结果来进一步优化模型。在OpenAI，这个过程被称为人类反馈强化学习（RLHF），是通过使用比较标签来提升模型性能的可选第三阶段。<br />
-<br />
-关于标注文档，尽管可能会长达几十甚至上百页且颇具复杂性，但其核心是要求参与者保持有帮助、真实和无害。随着大语言模型能力的提升，人机协作在创建这些标签中的作用日益增强。例如，可以让模型先生成答案样本，然后由人工挑选<br />
-<br />
-部分形成最优答案，或者让模型帮助检查工作。<br />
-<br />
-在市面上领先的大语言模型排行榜上，例如加州大学伯克利分校管理的Chatbot Marina，使用ELO评分对不同的模型进行排名。ELO分数的计算方式与国际象棋类似，基于模型间的对比胜率。顶部的是专有模型，如OpenAI的GPT系列和Antropic的Claude系列，这些模型表现最佳但无法获取其权重，只能通过网络界面访问。其次是公开权重的模型，例如Meta的Llama 2系列和法国Mistral系列的Zephyr 7B Beta。总体上，封闭模型的表现更好，但无法进行微调或下载，只能通过网络界面使用。然后是所有的开源模型和整个开源生态系统，它们的性能相对较差，但可能已经满足某些应用需求。目前，开源生态系统正在努力提升性能，试图追赶专有生态系统。</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mjg5NzU3MzY0MTU5MzY1MTMvcHUvaW1nL29uOVlkdzV1WTdGdkx5V2MuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1728974703895711948#m</id>
-            <title>R to @dotey: ## How do they work?
-
-好了，让我们换个话题，来看看这个神经网络是怎么运作的？它是如何完成下一个词预测任务的？它内部的运作机制是什么？这里的情况稍微复杂一些。如果我们放大神经网络的简化图，这有点像是神经网络的示意图。这就是我们称之为 Transformer 的神经网络架构，这是它的一个示意图。现在，这个神经网络的一个显著特点是，我们对其架构有着完整的理解。我们清楚地知道在它的各个阶段会发生哪些数学运算。
-
-但问题在于，这 1000 亿个参数分散在整个神经网络中。因此，基本上，这上千亿个参数散布在整个网络中，我们所了解的只是如何逐步调整这些参数，以使整个网络在下一个词预测的任务上表现得更好。我们知道如何优化这些参数，也知道如何随时间调整它们以获得更佳的下一词预测效果，但我们并不真正清楚这些参数具体是如何工作的。我们可以观察到它在下一个词预测方面的进步，但并不清楚这些参数是如何协同工作以实现这一点的。我们手头有些模型，可以让我们从宏观层面思考网络可能在做的事情。
-
-我们大致理解，它们构建并维护了某种知识库，但这个数据库却非常奇特、不完美且怪异。最近有一个广为流传的例子，我们称之为“反转诅咒”。比如，如果你和目前最先进的语言模型 GPT-4（ChatGPT 的一部分）对话，你问，谁是汤姆·克鲁斯的母亲？它会告诉你是玛丽·李·菲弗，这是正确的。但如果你问，谁是玛丽·菲弗的儿子，它会告诉你它不知道。这种知识很古怪，它似乎是单向的。这些信息并不是简单存储后就能从各种角度获取，你必须从某个特定的角度去提问。
-
-这真是既奇怪又令人困惑。归根结底，我们实际上并不真正了解其工作原理，只能大致判断它是否有效，以及有效的可能性有多大。简而言之，可以将大语言模型 (LLM) 视为难以完全解读的产物。它们与你可能在工程学科中建造的任何其他东西都不相似。它们不像汽车，我们了解汽车的每一个部件。
-
-它们是这些来自长期优化过程的神经网络。我们目前并不完全理解它们是如何工作的，尽管有一个叫做可解释性或机械可解释性的领域，正在尝试研究并理解这些神经网络的每一个部分。目前，我们可以在一定程度上做到这一点，但还未能全面实现。现在，我们主要将它们视为基于经验的产品。我们可以给它们输入一些数据，然后测量输出结果。我们基本上可以测量它们的行为表现。我们可以观察它们在许多不同情况下生成的文本。因此，我认为这需要
-
-相应的复杂评估来处理这些模型，因为它们主要是基于经验的。
-
-## Finetuning into an Assistant
-
-现在，让我们来看看我们如何实际获得一个助手模型。到目前为止，我们只谈论了这些互联网文档生成器，对吧？这是训练的第一阶段，我们称之为预训练。我们现在正在进入训练的第二阶段，我们称之为微调。这一阶段我们会获得所谓的助手模型。因为我们实际上不仅仅需要文档生成器，文档生成器对许多任务帮助不大。我们希望能向某个系统提问，并让它根据这些问题生成答案。所以我们真正需要的是一个助手模型。
-
-获得这些助手模型的过程主要如下：我们保持优化过程相同，训练方式也相同。这本质上是一个下一步工作预测的任务。但我们将更换训练用的数据集。原本我们是在互联网文档上进行训练，现在我们转而使用手动收集的数据集。我们收集这些数据的方式是通过雇佣大量的人。通常，公司会雇佣人员，给他们标注指南，并要求他们提出问题，再为这些问题写出答案。这里有一个具体示例：它很可能就是你训练集中的一部分。比如，有一个用户提问，内容可能是：“你能简要介绍一下‘垄断买方’这个术语在经济学中的相关性吗？”
-
-接着，有一个助手角色，同样由人来填写理想的回复应当是什么。理想的回复，以及如何定义它，以及它应该是什么样子，都是根据我们为这些参与者提供的标注文档来确定的。像 OpenAI 或 Anthropic 这样的公司的工程师会制定这些标注文档。现在，预训练阶段主要处理大量的文本，但这些文本可能质量不高，因为它们都是从互联网上获取的，有数十甚至数百 TB 的文本，而且并非所有的都是高质量的。但在第二阶段，我们更看重质量而非数量。所以我们可能只有很少的文档，比如 10 万份，但这些文档都是对话形式，并且都是非常高质量的，由专业人士基于标注指南创建的。
-
-所以我们现在更换数据集，转而在这些问答形式的文档上进行训练。这个过程被称为微调。完成这些步骤后，我们就能得到所谓的助手型模型。这个助手模型现在遵循它新训练文档的形式。举个例子，如果你问它一个问题，比如：“你能帮我查一下这段代码吗？似乎有个 bug。请打印 hello world。”即使这个问题并不是训练集的一部分，模型在微调后理解它应该以一个有用的助手的风格回答这类问题。它会这样做。它会再次逐字采样，从左到右，从上到下，所有这些词都是对这个问题的回复。
-
-这是相当了不起的，也有点令人费解，还不完全被理解，这种模型能够改变它们的格式，现在变成了有用的助手，因为它们在微调阶段看到了很多这样的文档，但它们仍然能够访问并以某种方式利用所有在第一阶段（预训练阶段）积累的知识。大致来说，预训练阶段是在海量互联网数据上进行训练，重点是知识积累；而微调阶段则更关注对齐，它是关于给予，即将格式从互联网文档转变为问答形式，就像一个有用的助手一样。</title>
-            <link>https://nitter.cz/dotey/status/1728974703895711948#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1728974703895711948#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 27 Nov 2023 03:11:06 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>## How do they work?<br />
-<br />
-好了，让我们换个话题，来看看这个神经网络是怎么运作的？它是如何完成下一个词预测任务的？它内部的运作机制是什么？这里的情况稍微复杂一些。如果我们放大神经网络的简化图，这有点像是神经网络的示意图。这就是我们称之为 Transformer 的神经网络架构，这是它的一个示意图。现在，这个神经网络的一个显著特点是，我们对其架构有着完整的理解。我们清楚地知道在它的各个阶段会发生哪些数学运算。<br />
-<br />
-但问题在于，这 1000 亿个参数分散在整个神经网络中。因此，基本上，这上千亿个参数散布在整个网络中，我们所了解的只是如何逐步调整这些参数，以使整个网络在下一个词预测的任务上表现得更好。我们知道如何优化这些参数，也知道如何随时间调整它们以获得更佳的下一词预测效果，但我们并不真正清楚这些参数具体是如何工作的。我们可以观察到它在下一个词预测方面的进步，但并不清楚这些参数是如何协同工作以实现这一点的。我们手头有些模型，可以让我们从宏观层面思考网络可能在做的事情。<br />
-<br />
-我们大致理解，它们构建并维护了某种知识库，但这个数据库却非常奇特、不完美且怪异。最近有一个广为流传的例子，我们称之为“反转诅咒”。比如，如果你和目前最先进的语言模型 GPT-4（ChatGPT 的一部分）对话，你问，谁是汤姆·克鲁斯的母亲？它会告诉你是玛丽·李·菲弗，这是正确的。但如果你问，谁是玛丽·菲弗的儿子，它会告诉你它不知道。这种知识很古怪，它似乎是单向的。这些信息并不是简单存储后就能从各种角度获取，你必须从某个特定的角度去提问。<br />
-<br />
-这真是既奇怪又令人困惑。归根结底，我们实际上并不真正了解其工作原理，只能大致判断它是否有效，以及有效的可能性有多大。简而言之，可以将大语言模型 (LLM) 视为难以完全解读的产物。它们与你可能在工程学科中建造的任何其他东西都不相似。它们不像汽车，我们了解汽车的每一个部件。<br />
-<br />
-它们是这些来自长期优化过程的神经网络。我们目前并不完全理解它们是如何工作的，尽管有一个叫做可解释性或机械可解释性的领域，正在尝试研究并理解这些神经网络的每一个部分。目前，我们可以在一定程度上做到这一点，但还未能全面实现。现在，我们主要将它们视为基于经验的产品。我们可以给它们输入一些数据，然后测量输出结果。我们基本上可以测量它们的行为表现。我们可以观察它们在许多不同情况下生成的文本。因此，我认为这需要<br />
-<br />
-相应的复杂评估来处理这些模型，因为它们主要是基于经验的。<br />
-<br />
-## Finetuning into an Assistant<br />
-<br />
-现在，让我们来看看我们如何实际获得一个助手模型。到目前为止，我们只谈论了这些互联网文档生成器，对吧？这是训练的第一阶段，我们称之为预训练。我们现在正在进入训练的第二阶段，我们称之为微调。这一阶段我们会获得所谓的助手模型。因为我们实际上不仅仅需要文档生成器，文档生成器对许多任务帮助不大。我们希望能向某个系统提问，并让它根据这些问题生成答案。所以我们真正需要的是一个助手模型。<br />
-<br />
-获得这些助手模型的过程主要如下：我们保持优化过程相同，训练方式也相同。这本质上是一个下一步工作预测的任务。但我们将更换训练用的数据集。原本我们是在互联网文档上进行训练，现在我们转而使用手动收集的数据集。我们收集这些数据的方式是通过雇佣大量的人。通常，公司会雇佣人员，给他们标注指南，并要求他们提出问题，再为这些问题写出答案。这里有一个具体示例：它很可能就是你训练集中的一部分。比如，有一个用户提问，内容可能是：“你能简要介绍一下‘垄断买方’这个术语在经济学中的相关性吗？”<br />
-<br />
-接着，有一个助手角色，同样由人来填写理想的回复应当是什么。理想的回复，以及如何定义它，以及它应该是什么样子，都是根据我们为这些参与者提供的标注文档来确定的。像 OpenAI 或 Anthropic 这样的公司的工程师会制定这些标注文档。现在，预训练阶段主要处理大量的文本，但这些文本可能质量不高，因为它们都是从互联网上获取的，有数十甚至数百 TB 的文本，而且并非所有的都是高质量的。但在第二阶段，我们更看重质量而非数量。所以我们可能只有很少的文档，比如 10 万份，但这些文档都是对话形式，并且都是非常高质量的，由专业人士基于标注指南创建的。<br />
-<br />
-所以我们现在更换数据集，转而在这些问答形式的文档上进行训练。这个过程被称为微调。完成这些步骤后，我们就能得到所谓的助手型模型。这个助手模型现在遵循它新训练文档的形式。举个例子，如果你问它一个问题，比如：“你能帮我查一下这段代码吗？似乎有个 bug。请打印 hello world。”即使这个问题并不是训练集的一部分，模型在微调后理解它应该以一个有用的助手的风格回答这类问题。它会这样做。它会再次逐字采样，从左到右，从上到下，所有这些词都是对这个问题的回复。<br />
-<br />
-这是相当了不起的，也有点令人费解，还不完全被理解，这种模型能够改变它们的格式，现在变成了有用的助手，因为它们在微调阶段看到了很多这样的文档，但它们仍然能够访问并以某种方式利用所有在第一阶段（预训练阶段）积累的知识。大致来说，预训练阶段是在海量互联网数据上进行训练，重点是知识积累；而微调阶段则更关注对齐，它是关于给予，即将格式从互联网文档转变为问答形式，就像一个有用的助手一样。</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mjg5NzM4NzQ4MzY5NzE1MjAvcHUvaW1nL0wxZHl1ZFRFTDM5SFB2NmsuanBn" />
                 ]]>
             </content:encoded>
         </item>
