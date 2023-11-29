@@ -5,6 +5,137 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1729708319948804600#m</id>
+            <title>R to @dotey: @immersivetran 建议可以集成一下 😄</title>
+            <link>https://nitter.cz/dotey/status/1729708319948804600#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1729708319948804600#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 29 Nov 2023 03:46:14 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><a href="https://nitter.cz/immersivetran" title="沉浸式翻译">@immersivetran</a> 建议可以集成一下 😄</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1729706523796840495#m</id>
+            <title>好问题！
+
+因为PDF阅读这个问题很困扰我，我就想能不能PDF转HTML，结果发现PDF转HTML效果很差！
+
+我就想能不能LaTeX转HTML，发现可行，就找到LaTeXML！但是本地测试没成功，不过我怀疑有人做过了，就去 Google 搜索，找到了 http://arxiv-vanity.com 。
+
+于是就开始用 http://arxiv-vanity.com ，但是发现质量不够好，觉得不如自己写一个，写了一点发现坑很多，就去 github 搜代码，然后根据代码搜索到了ar5iv 这个项目：
+
+https://github.com/dginev/ar5iv</title>
+            <link>https://nitter.cz/dotey/status/1729706523796840495#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1729706523796840495#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 29 Nov 2023 03:39:06 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>好问题！<br />
+<br />
+因为PDF阅读这个问题很困扰我，我就想能不能PDF转HTML，结果发现PDF转HTML效果很差！<br />
+<br />
+我就想能不能LaTeX转HTML，发现可行，就找到LaTeXML！但是本地测试没成功，不过我怀疑有人做过了，就去 Google 搜索，找到了 <a href="http://arxiv-vanity.com">arxiv-vanity.com</a> 。<br />
+<br />
+于是就开始用 <a href="http://arxiv-vanity.com">arxiv-vanity.com</a> ，但是发现质量不够好，觉得不如自己写一个，写了一点发现坑很多，就去 github 搜代码，然后根据代码搜索到了ar5iv 这个项目：<br />
+<br />
+<a href="https://github.com/dginev/ar5iv">github.com/dginev/ar5iv</a></p>
+<p><a href="https://nitter.cz/xiaohuggg/status/1729700559567872066#m">nitter.cz/xiaohuggg/status/1729700559567872066#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1729704654198501449#m</id>
+            <title>微软开放源代码 ThreadX，采用 MIT 许可证
+——在数百万树莓派中使用的 'Azure RTOS' 现在是开放源代码软件
+
+2023年11月28日星期二 // 11:05 UTC
+
+微软正在将其通过 Express Logic 收购的实时操作系统开源，并将其捐赠给 Eclipse 基金会。
+
+这家公司使其 ThreadX 实时操作系统（RTOS）和包含这个系统的 Azure RTOS 开发套件开放源代码。微软已经将 Azure RTOS 交给了 Eclipse 基金会，此后它将被称为 Eclipse ThreadX，在宽容的 MIT 许可证下提供。
+
+尽管市场上有许多实时操作系统（简称 RTOS），但它们通常不为人所知。你可能没有听说过 ThreadX，但你可能不知不觉中已经拥有了它的多个副本，甚至可能正在使用。
+
+有些更知名的 RTOS，比如 Wind River 的 VxWorks，它甚至在火星上运行，在 NASA 的毅力号火星车里。Blackberry 的 QNX RTOS，曾被认为是该公司赚钱的关键部分，它曾两次受到关注：一次是作为 RIM 的 Blackberry X 触控板和智能手机系列的基础，另一次是在 1990 年代，因其惊人的 QNX 单软盘演示而出名。
+
+然而，ThreadX 的普及程度更高。据微软称，有 120 亿设备正在运行它，你可能就拥有其中的一些。它曾经为 Intel 芯片上的管理引擎提供动力，并且是控制所有大于 Pi Pico 的 Raspberry Pi 的固件。在 Pi 1、2 和 3 上，它是你 Pi SD 卡上名为 `bootcode.bin` 的文件；在 Pi 4 和 400 上，它被称为 `start*.elf`。虽然它在 GitHub 上可用   http://github.com/raspberrypi/firmware  并被包含在 Debian 中，但它是一个专有的“二进制大对象（Binary Large Object，简称 blob）”。它像一个密封的黑盒，甚至不包含 Arm 代码：而是在 Pi 的 VideoCore GPU 上运行。它是主要设备，负责启动 Pi 并控制其硬件：Arm 核心是 VideoCore GPU 的从属设备。
+
+## 哦太好了，以下是您可以在那些被束之高阁的树莓派、NUC 电脑上尝试的新鲜事：在它们上运行 Ubuntu Appliances
+
+这正是 Xen 只在 Pi 4 及更新型号上运行的原因：它们是第一个让 Arm 核心拥有自己的中断控制器的版本。尽管如此，这依旧需要一番努力。据我们了解，在 Pi 5 中，这一功能被集成到 EEPROM 中并进一步简化，这意味着 Arm 核心能够拥有更多的控制权，正如这篇 Reg 评论所述。
+
+2019 年，这个年轻的操作系统刚满 21 岁，Microsoft 立即将其收入囊中，收购了 ThreadX 的所有者 Express Logic，并将它更名为 Azure RTOS，不过这并没有增加它的品牌知名度。这次收购紧随 AWS 接管 FreeRTOS 之后，一些观察人士，如 Reddit 上的这位评论者所言，认为这是对亚马逊举动的回应。收购后，原始开发者 William Lamie 离开并创立了一家新公司，销售一个名为 PX5OS 的“第五代”RTOS，它支持 POSIX 兼容的线程。
+
+即便如此，ThreadX 仍是一个经过测试并且成熟的产品；它的某些部分，如 STM32 版本，甚至获得了 TÜV 功能安全 (FuSa) 认证 [PDF]。这对某些客户来说是极具吸引力的。
+
+* Python 头部对欧洲即将实施的网络安全规则表示担忧
+* 开源 IDE NetBeans 升级至 v13 - 对 Gradle、Maven 进行了改进
+* Eclipse Data Connector 为 GAIA-X 提供支持，这是欧洲保护其云数据免受外国科技公司影响的计划
+* Microsoft 一切正常吗？Windows 巨头承认在开源方面“曾站错队伍”
+
+目前，只有最新版本托管在 GitHub 上 http://github.com/azure-rtos ，我们并没有找到任何 VideoCore 版本的踪迹。虽然 GPU 驱动程序已经开源，但固件从未开源，对此项目页面有详细解释。此前尝试编写独立的 FOSS 版本未能完成。现在，至少有些希望树莓派基金会能获得授权，发布其版本的源代码。截至去年，该基金会已销售超过 4600 万个设备，如果整个软件栈都开源，那将使它们对更多人更具吸引力。®
+
+原文地址：https://www.theregister.com/2023/11/28/microsoft_opens_sources_threadx/
+项目地址：http://github.com/azure-rtos</title>
+            <link>https://nitter.cz/dotey/status/1729704654198501449#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1729704654198501449#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 29 Nov 2023 03:31:40 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>微软开放源代码 ThreadX，采用 MIT 许可证<br />
+——在数百万树莓派中使用的 'Azure RTOS' 现在是开放源代码软件<br />
+<br />
+2023年11月28日星期二 // 11:05 UTC<br />
+<br />
+微软正在将其通过 Express Logic 收购的实时操作系统开源，并将其捐赠给 Eclipse 基金会。<br />
+<br />
+这家公司使其 ThreadX 实时操作系统（RTOS）和包含这个系统的 Azure RTOS 开发套件开放源代码。微软已经将 Azure RTOS 交给了 Eclipse 基金会，此后它将被称为 Eclipse ThreadX，在宽容的 MIT 许可证下提供。<br />
+<br />
+尽管市场上有许多实时操作系统（简称 RTOS），但它们通常不为人所知。你可能没有听说过 ThreadX，但你可能不知不觉中已经拥有了它的多个副本，甚至可能正在使用。<br />
+<br />
+有些更知名的 RTOS，比如 Wind River 的 VxWorks，它甚至在火星上运行，在 NASA 的毅力号火星车里。Blackberry 的 QNX RTOS，曾被认为是该公司赚钱的关键部分，它曾两次受到关注：一次是作为 RIM 的 Blackberry X 触控板和智能手机系列的基础，另一次是在 1990 年代，因其惊人的 QNX 单软盘演示而出名。<br />
+<br />
+然而，ThreadX 的普及程度更高。据微软称，有 120 亿设备正在运行它，你可能就拥有其中的一些。它曾经为 Intel 芯片上的管理引擎提供动力，并且是控制所有大于 Pi Pico 的 Raspberry Pi 的固件。在 Pi 1、2 和 3 上，它是你 Pi SD 卡上名为 `bootcode.bin` 的文件；在 Pi 4 和 400 上，它被称为 `start*.elf`。虽然它在 GitHub 上可用   <a href="http://github.com/raspberrypi/firmware">github.com/raspberrypi/firmw…</a>  并被包含在 Debian 中，但它是一个专有的“二进制大对象（Binary Large Object，简称 blob）”。它像一个密封的黑盒，甚至不包含 Arm 代码：而是在 Pi 的 VideoCore GPU 上运行。它是主要设备，负责启动 Pi 并控制其硬件：Arm 核心是 VideoCore GPU 的从属设备。<br />
+<br />
+## 哦太好了，以下是您可以在那些被束之高阁的树莓派、NUC 电脑上尝试的新鲜事：在它们上运行 Ubuntu Appliances<br />
+<br />
+这正是 Xen 只在 Pi 4 及更新型号上运行的原因：它们是第一个让 Arm 核心拥有自己的中断控制器的版本。尽管如此，这依旧需要一番努力。据我们了解，在 Pi 5 中，这一功能被集成到 EEPROM 中并进一步简化，这意味着 Arm 核心能够拥有更多的控制权，正如这篇 Reg 评论所述。<br />
+<br />
+2019 年，这个年轻的操作系统刚满 21 岁，Microsoft 立即将其收入囊中，收购了 ThreadX 的所有者 Express Logic，并将它更名为 Azure RTOS，不过这并没有增加它的品牌知名度。这次收购紧随 AWS 接管 FreeRTOS 之后，一些观察人士，如 Reddit 上的这位评论者所言，认为这是对亚马逊举动的回应。收购后，原始开发者 William Lamie 离开并创立了一家新公司，销售一个名为 PX5OS 的“第五代”RTOS，它支持 POSIX 兼容的线程。<br />
+<br />
+即便如此，ThreadX 仍是一个经过测试并且成熟的产品；它的某些部分，如 STM32 版本，甚至获得了 TÜV 功能安全 (FuSa) 认证 [PDF]。这对某些客户来说是极具吸引力的。<br />
+<br />
+* Python 头部对欧洲即将实施的网络安全规则表示担忧<br />
+* 开源 IDE NetBeans 升级至 v13 - 对 Gradle、Maven 进行了改进<br />
+* Eclipse Data Connector 为 GAIA-X 提供支持，这是欧洲保护其云数据免受外国科技公司影响的计划<br />
+* Microsoft 一切正常吗？Windows 巨头承认在开源方面“曾站错队伍”<br />
+<br />
+目前，只有最新版本托管在 GitHub 上 <a href="http://github.com/azure-rtos">github.com/azure-rtos</a> ，我们并没有找到任何 VideoCore 版本的踪迹。虽然 GPU 驱动程序已经开源，但固件从未开源，对此项目页面有详细解释。此前尝试编写独立的 FOSS 版本未能完成。现在，至少有些希望树莓派基金会能获得授权，发布其版本的源代码。截至去年，该基金会已销售超过 4600 万个设备，如果整个软件栈都开源，那将使它们对更多人更具吸引力。®<br />
+<br />
+原文地址：<a href="https://www.theregister.com/2023/11/28/microsoft_opens_sources_threadx/">theregister.com/2023/11/28/m…</a><br />
+项目地址：<a href="http://github.com/azure-rtos">github.com/azure-rtos</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0FFbE5PclhzQUFFeWlBLnBuZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1729684562551136653#m</id>
             <title>RT by @dotey: 朋友们我测试了一下，这就是 #SDXLTurbo 的速度，我的4070Ti都能完成几乎实时生成。
 有人在4090 上 24 秒内生成了 256 张图。实时渲染图生图或者视频的时代来了。</title>
@@ -1014,154 +1145,6 @@ Gates 还相信，AI 有潜力彻底改变医疗行业，尤其是在加速药�
 最后，Gates 分析了 AI 在应对气候变化方面的重要角色。他强调气候模型不断进步，并大力支持那些能在高温环境中生长的新作物品种。<br />
 Gates 透露，他投资了近百家公司，致力于利用 AI 技术改善电网，展现了他面对全球挑战的决心。</p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvRl8tMDBndlc0QUFuQ3F4LnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1729277775205335321#m</id>
-            <title>R to @dotey: **LLM Scaling Laws**
-
-好的，现在我要转换话题，我们将讨论语言模型，它们是如何改进的，以及这些改进将带我们走向何方。首先要理解的关于大语言模型的重要概念是“规模化法则”。事实证明，这些大语言模型在预测下一个词的准确性方面的表现是一个非常平滑、规律性强，并且只有两个变量的预测函数。一个变量是 N，即网络中的参数数量；另一个变量是 D，即你用来训练的文本量。只要有了这两个数据，我们就能非常准确地预测你在下一词预测任务上能达到的准确度。令人惊奇的是，这些趋势看起来并没有出现停滞或达到极限的迹象。这意味着，如果你在更多文本上训练更大规模的模型，我们可以非常自信地预期下一词预测的表现将会提升。
-
-因此，在算法上取得进步并非必要条件。算法进步当然是很好的加分项，但我们能够在不增加成本的情况下获得更强大的模型，因为我们只需要更强大的计算机。我们有理由相信这是可行的，并且我们可以在更长时间内训练一个更大的模型。我们非常有信心我们将得到更好的结果。当然，在实际操作中，我们并不是真的那么关心预测下一个词的准确度。但是，从经验上看，这种准确度与我们真正关心的许多评估指标是相关的。例如，你可以对这些大语言模型进行很多不同的测试。你会看到，如果你训练一个更大的模型更长的时间，例如，在 GPT 系列中从 3.5 提升到 4，所有这些测试的准确性都会提高。所以，当我们训练更大规模的模型和更多的数据时，我们自然而然地期待有性能的提升。这正是当前计算领域的一场淘金热的根本驱动力，每个人都在努力获取更强大的 GPU 集群，收集更多的数据，因为人们有很大的信心，通过这样做，可以获得更优秀的模型。算法的进步就像是额外的奖励，许多机构对此投入巨大。但从根本上说，扩大规模提供了一条通往成功的确定途径。
-
-**Tool Use (Browser, Calculator, Interpreter, DALL-E)**
-
-接下来，我想通过一些具体的例子来讲解这些语言模型的能力，以及它们是如何随着时间发展的。不是泛泛而谈，我会用一个具体的例子，逐步分析来说明。所以我打开 ChatGPT，给出了以下的查询。我说，收集关于 Scale AI 及其融资轮次的信息，包括发生的时间、日期、金额和估值，并将这些信息整理成一张表。根据我们收集的大量数据，ChatGPT 在微调学习阶段就已经理解，在这种类型的查询中，ChatGPT 不会仅仅依靠自己作为一个大语言模型来直接回答问题。相反，它学会了在需要时使用一些外部工具来帮助完成任务。在这个例子中，一个很合适的工具就是浏览器。
-
-假设你和我遇到同样的问题，你可能会选择上网搜索，对吧？ChatGPT 做的正是这样的事情。它能够发出特定的词汇，我们可以通过这些词汇观察它是如何尝试进行搜索的。在这种情况下，我们可以拿着这个查询去 Bing 搜索，查看搜索结果。就像你我在浏览搜索结果一样，我们可以把搜索到的文本反馈给语言模型，让它基于这些文本生成回答。这个过程非常类似于我们使用浏览器进行研究的方式。然后，它会将这些信息整理成以下形式，并以此方式进行回应。
-
-所以，它收集了信息，我们得到了一张表格，上面列出了 A、B、C、D 和 E 轮融资的具体日期、筹资金额和对应的估值。接着，它还提供了引用链接，你可以通过这些链接去核实这些信息的准确性。在底部，它表示，实际上我要道歉，我没有找到 A 轮和 B 轮的估值数据，只找到了筹集的金额。所以你可以看到表格中有一项标记为不可用。好的，我们现在可以继续这种互动。我提出，让我们尝试基于 C 轮、D 轮和 E 轮中看到的比例，来推测或估算 A 轮和 B 轮的估值。可以看到，在 C、D 和 E 轮中，筹资金额和估值之间存在一定的比例关系。那么，我们该如何解决这个问题呢？当我们尝试推算“不可用”的数据时，并不是仅凭脑海中的计算就能解决。你不可能只是试图在你的脑海中解决它。这样做相当复杂，因为我们在数学方面并不特别擅长。同样，ChatGPT 也不是通过单纯“思考”就能擅长数学运算。实际上，ChatGPT 知道它应该使用计算器来处理这类任务。因此，它会发出特定的指令，告诉程序它需要使用计算器来计算这个数值。它实际上做的是，首先计算所有的比率，然后根据这些比率来推算 A 轮和 B 轮的估值，可能是 7000 万或者 2.83 亿。所以，现在我们的目标是得到所有不同融资轮次的估值数据。接下来，我们将这些数据制作成一个二维图表：横轴表示日期，纵轴显示 Scale AI 的估值。为了更精确地展示，我们会在纵轴上使用对数刻度，并且加上网格线，使图表看起来既专业又美观。ChatGPT 实际上可以使用工具，这次是编写代码，使用 Python 语言中的 Matplotlib 库来绘制这些数据。它会进入一个 Python 解释器，输入所有数据，然后生成图表。这就是图。它清晰地展示了底部的数据，完全按照我们用自然语言提出的要求制作完成。
-
-与 ChatGPT 交流就像与人交谈一样自然。现在我们看着这张图表，想要进行更多的分析。比如，我们现在想在这个图表上加一条线性趋势线，并尝试推算 Scale AI 到 2025 年底的估值。再比如，在图表上标出今天的日期，并基于趋势线来估算今天和 2025 年底的估值。ChatGPT 完成了所有编码工作，虽然这些代码没有展示出来，但它提供了详细的分析结果。在图表的底部，我们可以看到日期和估值的推算结果。根据这个趋势线的拟合结果，今天 Scale AI 的估值大约是 1500 亿美元。而到了 2025 年底，这个公司预计会成长为价值高达 2 万亿美元的科技巨头。所以，祝贺 Scale AI 团队。但这只是 ChatGPT 擅长的分析类型之一。我想通过这个例子展示的核心点是，语言模型在工具使用方面的能力以及它们的发展趋势。它们的功能不再局限于在大脑中处理信息和选择词汇。如今，它们开始利用各种工具和现有的计算基础设施，将一切紧密联系并用词汇交织在一起，如果这有意义的话。
-
-因此，工具使用已成为这些模型日益增强能力的重要一环。它们能够编写大量代码、进行全面分析、从互联网上检索信息等等。再举一个例子。根据上述信息，试图生成一个代表 Scale AI 公司的图像。所以，基于上面的所有内容，依据大语言模型的上下文理解，它对 Scale AI 有深刻的了解。它可能还记得关于 Scale AI 的一些信息以及网络中储存的知识。然后它去使用另一个工具，在这种情况下这个工具是 DALL-E，这也是 OpenAI 开发的一种工具，可以根据自然语言描述生成图像。所以在这里 DALL-E 被用作生成图像的工具。希望这个演示能具体说明问题解决过程中大量使用工具的情况，这与人类解决很多问题的方式高度相关。我们在解决问题时不仅仅依赖思考，而是广泛运用各种工具，比如电脑就非常有用。对于大语言模型也是如此，利用工具正逐渐成为大语言模型发展的一个重要方向。</title>
-            <link>https://nitter.cz/dotey/status/1729277775205335321#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1729277775205335321#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 27 Nov 2023 23:15:24 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>**LLM Scaling Laws**<br />
-<br />
-好的，现在我要转换话题，我们将讨论语言模型，它们是如何改进的，以及这些改进将带我们走向何方。首先要理解的关于大语言模型的重要概念是“规模化法则”。事实证明，这些大语言模型在预测下一个词的准确性方面的表现是一个非常平滑、规律性强，并且只有两个变量的预测函数。一个变量是 N，即网络中的参数数量；另一个变量是 D，即你用来训练的文本量。只要有了这两个数据，我们就能非常准确地预测你在下一词预测任务上能达到的准确度。令人惊奇的是，这些趋势看起来并没有出现停滞或达到极限的迹象。这意味着，如果你在更多文本上训练更大规模的模型，我们可以非常自信地预期下一词预测的表现将会提升。<br />
-<br />
-因此，在算法上取得进步并非必要条件。算法进步当然是很好的加分项，但我们能够在不增加成本的情况下获得更强大的模型，因为我们只需要更强大的计算机。我们有理由相信这是可行的，并且我们可以在更长时间内训练一个更大的模型。我们非常有信心我们将得到更好的结果。当然，在实际操作中，我们并不是真的那么关心预测下一个词的准确度。但是，从经验上看，这种准确度与我们真正关心的许多评估指标是相关的。例如，你可以对这些大语言模型进行很多不同的测试。你会看到，如果你训练一个更大的模型更长的时间，例如，在 GPT 系列中从 3.5 提升到 4，所有这些测试的准确性都会提高。所以，当我们训练更大规模的模型和更多的数据时，我们自然而然地期待有性能的提升。这正是当前计算领域的一场淘金热的根本驱动力，每个人都在努力获取更强大的 GPU 集群，收集更多的数据，因为人们有很大的信心，通过这样做，可以获得更优秀的模型。算法的进步就像是额外的奖励，许多机构对此投入巨大。但从根本上说，扩大规模提供了一条通往成功的确定途径。<br />
-<br />
-**Tool Use (Browser, Calculator, Interpreter, DALL-E)**<br />
-<br />
-接下来，我想通过一些具体的例子来讲解这些语言模型的能力，以及它们是如何随着时间发展的。不是泛泛而谈，我会用一个具体的例子，逐步分析来说明。所以我打开 ChatGPT，给出了以下的查询。我说，收集关于 Scale AI 及其融资轮次的信息，包括发生的时间、日期、金额和估值，并将这些信息整理成一张表。根据我们收集的大量数据，ChatGPT 在微调学习阶段就已经理解，在这种类型的查询中，ChatGPT 不会仅仅依靠自己作为一个大语言模型来直接回答问题。相反，它学会了在需要时使用一些外部工具来帮助完成任务。在这个例子中，一个很合适的工具就是浏览器。<br />
-<br />
-假设你和我遇到同样的问题，你可能会选择上网搜索，对吧？ChatGPT 做的正是这样的事情。它能够发出特定的词汇，我们可以通过这些词汇观察它是如何尝试进行搜索的。在这种情况下，我们可以拿着这个查询去 Bing 搜索，查看搜索结果。就像你我在浏览搜索结果一样，我们可以把搜索到的文本反馈给语言模型，让它基于这些文本生成回答。这个过程非常类似于我们使用浏览器进行研究的方式。然后，它会将这些信息整理成以下形式，并以此方式进行回应。<br />
-<br />
-所以，它收集了信息，我们得到了一张表格，上面列出了 A、B、C、D 和 E 轮融资的具体日期、筹资金额和对应的估值。接着，它还提供了引用链接，你可以通过这些链接去核实这些信息的准确性。在底部，它表示，实际上我要道歉，我没有找到 A 轮和 B 轮的估值数据，只找到了筹集的金额。所以你可以看到表格中有一项标记为不可用。好的，我们现在可以继续这种互动。我提出，让我们尝试基于 C 轮、D 轮和 E 轮中看到的比例，来推测或估算 A 轮和 B 轮的估值。可以看到，在 C、D 和 E 轮中，筹资金额和估值之间存在一定的比例关系。那么，我们该如何解决这个问题呢？当我们尝试推算“不可用”的数据时，并不是仅凭脑海中的计算就能解决。你不可能只是试图在你的脑海中解决它。这样做相当复杂，因为我们在数学方面并不特别擅长。同样，ChatGPT 也不是通过单纯“思考”就能擅长数学运算。实际上，ChatGPT 知道它应该使用计算器来处理这类任务。因此，它会发出特定的指令，告诉程序它需要使用计算器来计算这个数值。它实际上做的是，首先计算所有的比率，然后根据这些比率来推算 A 轮和 B 轮的估值，可能是 7000 万或者 2.83 亿。所以，现在我们的目标是得到所有不同融资轮次的估值数据。接下来，我们将这些数据制作成一个二维图表：横轴表示日期，纵轴显示 Scale AI 的估值。为了更精确地展示，我们会在纵轴上使用对数刻度，并且加上网格线，使图表看起来既专业又美观。ChatGPT 实际上可以使用工具，这次是编写代码，使用 Python 语言中的 Matplotlib 库来绘制这些数据。它会进入一个 Python 解释器，输入所有数据，然后生成图表。这就是图。它清晰地展示了底部的数据，完全按照我们用自然语言提出的要求制作完成。<br />
-<br />
-与 ChatGPT 交流就像与人交谈一样自然。现在我们看着这张图表，想要进行更多的分析。比如，我们现在想在这个图表上加一条线性趋势线，并尝试推算 Scale AI 到 2025 年底的估值。再比如，在图表上标出今天的日期，并基于趋势线来估算今天和 2025 年底的估值。ChatGPT 完成了所有编码工作，虽然这些代码没有展示出来，但它提供了详细的分析结果。在图表的底部，我们可以看到日期和估值的推算结果。根据这个趋势线的拟合结果，今天 Scale AI 的估值大约是 1500 亿美元。而到了 2025 年底，这个公司预计会成长为价值高达 2 万亿美元的科技巨头。所以，祝贺 Scale AI 团队。但这只是 ChatGPT 擅长的分析类型之一。我想通过这个例子展示的核心点是，语言模型在工具使用方面的能力以及它们的发展趋势。它们的功能不再局限于在大脑中处理信息和选择词汇。如今，它们开始利用各种工具和现有的计算基础设施，将一切紧密联系并用词汇交织在一起，如果这有意义的话。<br />
-<br />
-因此，工具使用已成为这些模型日益增强能力的重要一环。它们能够编写大量代码、进行全面分析、从互联网上检索信息等等。再举一个例子。根据上述信息，试图生成一个代表 Scale AI 公司的图像。所以，基于上面的所有内容，依据大语言模型的上下文理解，它对 Scale AI 有深刻的了解。它可能还记得关于 Scale AI 的一些信息以及网络中储存的知识。然后它去使用另一个工具，在这种情况下这个工具是 DALL-E，这也是 OpenAI 开发的一种工具，可以根据自然语言描述生成图像。所以在这里 DALL-E 被用作生成图像的工具。希望这个演示能具体说明问题解决过程中大量使用工具的情况，这与人类解决很多问题的方式高度相关。我们在解决问题时不仅仅依赖思考，而是广泛运用各种工具，比如电脑就非常有用。对于大语言模型也是如此，利用工具正逐渐成为大语言模型发展的一个重要方向。</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MjkyNzY3NjA4NTA1NjMwNzIvcHUvaW1nL1VRX0VWbDd5bVJoTWN1SnQuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/goocarlos/status/1729210688017760324#m</id>
-            <title>RT by @dotey: 这款名为 Coze 的产品是否看起来眼熟？由某裁员中的大厂“高 Level”团队创作。该产品的完成度其实做得不错，毕竟是重金投入。但社区中屡有朋友向我发来询问，因为实在和 Dify 太像了，连我们选择不恰当的那些英文术语都全盘搬走。简单的说下吧：
-
-我们一直在做的就是持续创新、并坚持向社区交付高品质的产品。论资金密度我们是无法跟这个体量的大厂去拼的，但我们可以保持开放、中立、透明。Dify 为开发者的做的事可以归结为三项：
-1. Democratization of AI，围绕 LLM 的 RAG 和 Fine-tune 等是复杂技术，有待简化；
-2. Cross-Functional Collaboration in AI，我们相信 非技术人员需要参与到 AI 应用的定义过程之中；
-3. Data-Driven Feedback，AI 应用的效果提升建立在来自生产数据的反馈，为全社会加速这个流程的运转。
-
-如何应对？
-1. 据我已知，Dify 有超过万计的私有部署实例，已经有许多开发者基于我们赚到了钱、融到了资以及少走了弯路（虽然我们没怎么收钱）。社区是我们最重要的力量和资产；
-2. 我们会在近期开放产品的 Roadmap，并发布详细的贡献指南；
-3. 大厂仿品有价值的特性，我们会做得更好，然后“贡献”给开源社区；
-4. 与全生态合作伙伴加深合作，我们和国内所有的模型公司都有非常棒的沟通；
-5. 将未来我们的收入分出来一部分给贡献者。
-
-创业公司如何对待大厂？
-在热门赛道，国内几乎所有的大厂都会以战投、交流、比赛等方式与创业者接触，然后把情报带回去注资研发。今年某些厂商狂搞黑客松就是现象之一，目的并不是简单的拉高声量。
-
-大厂应该如何对待创业项目？
-1. 出来好好交个朋友，不寒碜；
-2. 向借鉴的开源项目公开致敬，即使没有直接使用源码；
-3. 向开源社区做贡献。
-
-就说这些，如果你想以任何形式参与 Dify 的产品，发邮件至 luyu@dify.ai，Do it for you.</title>
-            <link>https://nitter.cz/goocarlos/status/1729210688017760324#m</link>
-            <guid isPermaLink="false">https://nitter.cz/goocarlos/status/1729210688017760324#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 27 Nov 2023 18:48:49 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这款名为 Coze 的产品是否看起来眼熟？由某裁员中的大厂“高 Level”团队创作。该产品的完成度其实做得不错，毕竟是重金投入。但社区中屡有朋友向我发来询问，因为实在和 Dify 太像了，连我们选择不恰当的那些英文术语都全盘搬走。简单的说下吧：<br />
-<br />
-我们一直在做的就是持续创新、并坚持向社区交付高品质的产品。论资金密度我们是无法跟这个体量的大厂去拼的，但我们可以保持开放、中立、透明。Dify 为开发者的做的事可以归结为三项：<br />
-1. Democratization of AI，围绕 LLM 的 RAG 和 Fine-tune 等是复杂技术，有待简化；<br />
-2. Cross-Functional Collaboration in AI，我们相信 非技术人员需要参与到 AI 应用的定义过程之中；<br />
-3. Data-Driven Feedback，AI 应用的效果提升建立在来自生产数据的反馈，为全社会加速这个流程的运转。<br />
-<br />
-如何应对？<br />
-1. 据我已知，Dify 有超过万计的私有部署实例，已经有许多开发者基于我们赚到了钱、融到了资以及少走了弯路（虽然我们没怎么收钱）。社区是我们最重要的力量和资产；<br />
-2. 我们会在近期开放产品的 Roadmap，并发布详细的贡献指南；<br />
-3. 大厂仿品有价值的特性，我们会做得更好，然后“贡献”给开源社区；<br />
-4. 与全生态合作伙伴加深合作，我们和国内所有的模型公司都有非常棒的沟通；<br />
-5. 将未来我们的收入分出来一部分给贡献者。<br />
-<br />
-创业公司如何对待大厂？<br />
-在热门赛道，国内几乎所有的大厂都会以战投、交流、比赛等方式与创业者接触，然后把情报带回去注资研发。今年某些厂商狂搞黑客松就是现象之一，目的并不是简单的拉高声量。<br />
-<br />
-大厂应该如何对待创业项目？<br />
-1. 出来好好交个朋友，不寒碜；<br />
-2. 向借鉴的开源项目公开致敬，即使没有直接使用源码；<br />
-3. 向开源社区做贡献。<br />
-<br />
-就说这些，如果你想以任何形式参与 Dify 的产品，发邮件至 luyu@dify.ai，Do it for you.</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRl85ZE16c2EwQUVBZ3ZoLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRl85ZFB0MGJFQUFlS3RaLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRl85ZFB1QmFZQUFnSXFDLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRl85amM4SmJ3QUFVQUduLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1729231976672977016#m</id>
-            <title>推荐：《Reading List For Andrej Karpathy’s Intro to Large Language Models Video》 
-Andrej Karpathy 大语言模型视频入门的精选阅读清单
-
-作者针对Andrej Karpathy前几天的视频教程，把相关的参考文章、论文都分门别类整理出来了。
-
-原文：https://blog.oxen.ai/reading-list-for-andrej-karpathys-intro-to-large-language-models-video/
-译文：https://baoyu.io/translations/llm/reading-list-for-andrej-karpathys-intro-to-large-language-models-video</title>
-            <link>https://nitter.cz/dotey/status/1729231976672977016#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1729231976672977016#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 27 Nov 2023 20:13:25 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>推荐：《Reading List For Andrej Karpathy’s Intro to Large Language Models Video》 <br />
-Andrej Karpathy 大语言模型视频入门的精选阅读清单<br />
-<br />
-作者针对Andrej Karpathy前几天的视频教程，把相关的参考文章、论文都分门别类整理出来了。<br />
-<br />
-原文：<a href="https://blog.oxen.ai/reading-list-for-andrej-karpathys-intro-to-large-language-models-video/">blog.oxen.ai/reading-list-fo…</a><br />
-译文：<a href="https://baoyu.io/translations/llm/reading-list-for-andrej-karpathys-intro-to-large-language-models-video">baoyu.io/translations/llm/re…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRl85MnlJTVdVQUV1NXVFLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRl85M0hkblhjQUFfUE1wLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRl85M09xU1hvQUFWX1NoLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvRl85M1RzeVhZQUFaYjNrLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>

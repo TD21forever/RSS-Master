@@ -5,6 +5,29 @@
         <link>https://www.infoq.cn/topic/AI</link>
         
         <item>
+            <id>https://www.infoq.cn/article/r14f5E9kJAxbaN7dMWdS</id>
+            <title>楷同科技有限公司 CEO 黄益聪确认出席 QCon 上海，分享基于时间序列数据预测模型的智能量化交易系统性能优化实践</title>
+            <link>https://www.infoq.cn/article/r14f5E9kJAxbaN7dMWdS</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/r14f5E9kJAxbaN7dMWdS</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 29 Nov 2023 03:30:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: QCon 全球软件开发大会, 时间序列数据预测模型, 智能量化交易系统, 性能优化实践
+<br>
+<br>
+总结: 本文介绍了即将在上海举办的QCon全球软件开发大会，其中将有一位演讲嘉宾分享关于基于时间序列数据预测模型的智能量化交易系统性能优化实践的主题。演讲内容包括系统全链路的优化实践，如如何高效处理计算高频产生的时间序列数据、降低数据对Java GC的影响等。该演讲将对构建高性能、低延迟的智能量化交易系统以及多语言开发的复杂系统的全链路性能分析和优化等方面带来收益。 </div>
+                        <hr>
+                    
+                    <p><a href="https://qcon.infoq.cn/2023/shanghai/?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=8&amp;utm_term=1129&amp;utm_content=huangyicong">QCon 全球软件开发大会</a>"，将于 12 月在上海召开。快手基础平台部系统软件中心 / 系统软件负责人熊刚将发表题为《<a href="https://qcon.infoq.cn/2023/shanghai/presentation/5626?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=8&amp;utm_term=1129&amp;utm_content=huangyicong">基于时间序列数据预测模型的智能量化交易系统性能优化实践</a>"》主题分享，探讨系统全链路从数据采集 - 数据计算 - 模型预测 - 交易下单，全流程进行优化的实践，包括怎样高效的在 Java 处理计算 C++ 高频产生的时间序列数据，怎么降低高频产生、长生命周期数据对 Java GC 的影响等。</p><p></p><p><a href="https://qcon.infoq.cn/2023/shanghai/presentation/5626?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=8&amp;utm_term=1129&amp;utm_content=huangyicong">黄益聪</a>"，曾担任 Intel 高级工程师，阿里巴巴高级技术专家，中国互联网百强独角兽企业技术副总裁、CTO，有 15 项中国发明专利，3 项美国发明专利，专注于大数据与人工智能领域，AI 量化交易系统实践。他在本次会议的演讲内容如下：</p><p></p><p>演讲：基于时间序列数据预测模型的智能量化交易系统性能优化实践</p><p></p><p>金融市场的行情数据，如股票价格、成交量、交易队列等是典型的时间序列数据，具有很强的时间性和顺序依赖性。智能量化交易系统需要对市场上高频产生的时间序列数据进行处理计算，输入深度学习模型进行预测，执行交易策略，生成交易行为进行交易。整个过程需要覆盖全市场一万以上的品种，并且需要在很小的时间窗口，比如秒级完成。进一步的，我们使用了多语言进行系统开发。其中数据采集模块使用了 C++ 以达到高性能，交易策略引擎使用了 Java Spring Boot 搭建服务，AI 模型使用了 Python 基于 TensorFlow 和 Torch 框架。</p><p></p><p>业务需求的系统低延迟计算和多语言系统模块的交互，给我们的性能优化带来了挑战。这次分享，将带来我们对系统全链路从数据采集 - 数据计算 - 模型预测 - 交易下单，全流程进行优化的实践分享，包括怎样高效的在 Java 处理计算 C++ 高频产生的时间序列数据，怎么降低高频产生、长生命周期数据对 Java GC 的影响，怎么高效部署调用低延迟、多模型、多版本的 AI 模型预测服务，系统故障的数据断点快速恢复等。</p><p></p><p>演讲提纲：</p><p></p><p>背景与项目概况</p><p>○ 量化交易系统介绍</p><p>○ 项目技术架构</p><p>○ C++/ Java / Python 多语言交互</p><p>全链路数据流优化</p><p>○ 实时行情数据收集与处理</p><p>○ 低延迟、高吞吐性能挑战</p><p>○ 尝试的优化手段：GC Tuning，Direct Buffer</p><p>○ 我们的解决方案</p><p>○ 性能优化效果</p><p>服务化 AI 模型预测</p><p>○ Tensorflow 模型性能优化实践</p><p>○ Torch 模型转换</p><p>总结与展望</p><p>○ 复杂模型和低延迟预测性能的权衡</p><p>○ 目标展望：更快、更准</p><p></p><p>听众收益点：</p><p></p><p>○ 构建高性能、低延迟的智能量化交易系统</p><p>○ 多语言开发的复杂系统的全链路性能分析和优化</p><p>○ AI 模型在智能量化交易系统的实践</p><p></p><p>除上述演讲外，QCon 上海还将围绕&nbsp;<a href="https://qcon.infoq.cn/2023/shanghai/track/1595?utm_source=infoqweb&amp;utm_medium=teacherart">GenAI和通用大模型应用探索</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1596?utm_source=infoqweb&amp;utm_medium=teacherart">AI&nbsp;Agent&nbsp;与行业融合应用的前景</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1597?utm_source=infoqweb&amp;utm_medium=teacherart">LLM&nbsp;时代的性能优化</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1598?utm_source=infoqweb&amp;utm_medium=teacherart">智能化信创软件&nbsp;IDE</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1602?utm_source=infoqweb&amp;utm_medium=teacherart">面向人工智能时代的架构</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1604?utm_source=infoqweb&amp;utm_medium=teacherart">性能工程：提升效率和创新的新方法</a>"等专题进行交流。</p><p></p><p>QCon 上海 2023，相约 12 月！ 8 折优惠还剩最后 3 天，现在购票立减￥1360！咨询购票请联系：18514549229（微信同手机号）。</p><p></p><p><img src="https://static001.geekbang.org/infoq/01/0113b3dfb187d5f9988b7eb16d2e0594.png" /></p><p></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.infoq.cn/article/W5RzCzfZ6imJQrCk2lW9</id>
             <title>全方位深度测评 AI 代码助手 Amazon CodeWhisperer</title>
             <link>https://www.infoq.cn/article/W5RzCzfZ6imJQrCk2lW9</link>
@@ -760,29 +783,6 @@ latency: 1041.122000001371 ms.</code></p><p></p><p>其中有一个指标是 late
                         <hr>
                     
                     <p>11月22日，字节跳动旗下飞书在京举办发布会，正式发布“飞书智能伙伴”等系列AI产品。“飞书智能伙伴”是一款开放的 AI 服务框架，能帮助企业根据不同的业务场景自主选择适合的底层大模型。</p><p></p><p>据悉，“飞书智能伙伴”的主要特点是有知识、有记忆，有主动性，也能深入到业务中。在内容创作、内容总结、数据分析、场景构建、系统搭建等业务场景，用户均可与智能伙伴一起共事。</p><p></p><p>目前，飞书智能伙伴已在多个公司业务中开展试用，包括安克创新、元气森林等，其在销售、市场营销等多个工作场景中表现亮眼。</p><p></p><p>“大模型引入的最佳方式应类似于纳入一位具备智慧和能力的‘人’，这个‘人’不仅能完成多种任务，还将持续增强能力。基于这样的思考，我们把‘智能伙伴’作为AI在飞书中的具体体现，让它像‘人’一样和我们一起工作。”飞书CEO谢欣表示，“有了智能伙伴以后，飞书不仅是一个解决人和人协同的工作平台，更成为了一个解决人与人、人与AI协同工作的平台。”</p><p></p><p>“同时我们也发现，绝大部分企业虽然充满拥抱AI的意愿，但在系统、数据等各方面的准备仍然不足。我们仍需要强调数字化的重要性。”谢欣认为，“在这方面，我们首先发布了全新版本——飞书7，这是一个拥有 AI 能力的、面向未来的 AI 框架，它能够帮助我们更有效地整合企业内那些孤立的、分散的系统，为企业搭建起一个更加完善和高效的框架，让企业实现AI Ready。”</p><p></p><p><img src="https://static001.geekbang.org/infoq/e0/e0246a6d2ce74c56be949e6875246aee.png" /></p><p></p><h2>飞书智能伙伴，像“人”一样与用户协同工作</h2><p></p><p></p><p>通过创建角色，用户可为飞书智能伙伴定制专属名字及头像，此后，智能伙伴便能在对话框中与用户展开协作。在很多工作场景中，都可以见到智能伙伴的身影，由它来推进工作的完成。</p><p></p><p>在创建完毕后，用户可随时通过对话框与飞书智能伙伴进行对话，并向其提出需求。飞书智能伙伴就像一个普通同事，在通讯录、群聊、文档、搜索都能随时找到它的身影，任何用户能和同事协作的地方，都可以与它互动。</p><p></p><p>飞书智能伙伴能迅速通过企业知识库获取信息，根据用户提问或交互生成相关内容。在长期的工作下，飞书智能伙伴还能伴随用户的讨论、会议、创作等一系列工作行为，逐步积累用户工作上的记忆，与用户共同成长，成为工作中的另一个自己。</p><p></p><p>作为工作伙伴，飞书智能伙伴还能制定工作计划、主动向用户推进工作，而不只是等待发号施令。</p><p></p><p><img src="https://static001.geekbang.org/infoq/f0/f00ce7b36398397a8083049a1a284320.png" /></p><p></p><p>这些特点及功能已在飞书被广泛应用，例如帮助用户提炼会议要点、总结未读消息、分析PDF与音视频等。在创作中，飞书智能伙伴也能自动续写或生成文档、表格、邮件、思维导图、问卷等等。最困扰打工人的日报、周报，在飞书智能伙伴的帮助下也能迅速生成，这些内容生成场景，已经成为了使用飞书工作的日常。</p><p></p><p>此外，飞书智能伙伴还具备一系列在AI时代的特色场景及功能。例如在获取用户权限许可后，它能根据用户每天的会议、文档、聊天记录等信息，生成“每日工作总结”，并主动发给用户。此外，仅通过简单的提示词，它便能依托飞书多维表格迅速创建业务系统，让工具门槛持续降低，让人人都成为业务高手。</p><p></p><p>智能化更需数字化，企业应先做好AI Ready此外，飞书还同步发布了飞书智能伙伴创建平台，即使没有专业技术背景的人，也能通过该产品轻松创建智能伙伴。</p><p></p><p>飞书现场展示了利用该平台创建的销售伙伴——“张师傅”。通过AI处理销售跟进信息，它能极大程度地解放销售团队的管理带宽，每月跟进管理的客户数增加了数十甚至上百倍。</p><p></p><p>而想要拥抱好AI，企业更应及早推动数字化的完备。通过构建更好的数字基础设施，为AI时代提供更好的底层条件。</p><p></p><p>“我们已经看到 AI 正在改变我们的工作方式，并推动我们的组织进化。”谢欣表示，“作为企业家，确保公司能迅速适应并准备好迎接人工智能的高速发展时代变得至关重要，也就是我们所说的 AI Ready，这将是增强企业竞争力的关键。”</p><p></p><p>在发布后，飞书智能伙伴将为付费企业免费提供测试，并同步向外部开放试用申请，首批限时 10000 个名额，可通过飞书官网完成申请。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/ZS3ZcMfpIHRsKJh53ri3</id>
-            <title>阿里巴巴高级技术专家杨斯然确认出席 QCon 上海，分享 LLM 训练推理加速在阿里巴巴的实践</title>
-            <link>https://www.infoq.cn/article/ZS3ZcMfpIHRsKJh53ri3</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/ZS3ZcMfpIHRsKJh53ri3</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 23 Nov 2023 03:30:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: QCon 全球软件开发大会, LLM 训练推理加速, TensorRT LLM, Maga Transformer 框架
-<br>
-<br>
-总结: QCon 全球软件开发大会将在上海举行，会议将探讨基于TensorRT LLM和Maga Transformer框架的LLM训练推理加速方法，以提高推理效率并降低存储和计算需求。 </div>
-                        <hr>
-                    
-                    <p><a href="https://qcon.infoq.cn/2023/shanghai/?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=8&amp;utm_term=1123&amp;utm_content=yangsiran">QCon 全球软件开发大会</a>"，将于 12 月在上海召开。美国五百强公司高级数据科学家王元将发表题为《<a href="https://qcon.infoq.cn/2023/shanghai/presentation/5625?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=8&amp;utm_term=1123&amp;utm_content=yangsiran">LLM 训练推理加速在阿里巴巴的实践</a>"》主题分享，探讨基于 TensorRT LLM， Maga Transformer 框架和 LLM 推理平台产品，该系统支持各种量化和剪枝方法，以及 KVCache Reuse、Speculative Decoding、Medusa 等辅助优化方法，可以进一步提高推理效率并降低存储和计算需求。</p><p></p><p><a href="https://qcon.infoq.cn/2023/shanghai/presentation/5625?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=8&amp;utm_term=1123&amp;utm_content=yangsiran">杨斯然</a>"，目前是爱橙科技智能引擎事业部大模型训练团队负责人。自 2017 年开始在阿里从事深度学习训练系统的开发，工作包括图学习系统 Euler、稀疏模型训练系统 XDL、高性能稀疏模型训练、大语言模型训练系统等。他在本次会议的演讲内容如下：</p><p></p><p>演讲：LLM 训练推理加速在阿里巴巴的实践</p><p></p><p>在大规模语言模型 (LLM) 的训练和推理实践中，工程和算法需求间存在许多需要细心权衡的问题。这些问题涉及到从软硬件协同优化，到分布式处理，以及至算法工程 Co-design 等多个领域。为了解决这些挑战，我们深入研究了不同的应用场景和流量特性，并因此对我们的系统进行了全面优化。</p><p></p><p>尽管从 HuggingFace 上可以拿到 LLaMA 等模型的代码，但用自己的数据训练一个 LLaMA 模型对个人用户或中小型组织并不是一件低成本且简单的工作。Megatron-LLaMA 框架基于有着成熟社区的 Megatron-LM 项目，充分降低了 LLaMA 等开源模型的训练成本和门槛。</p><p></p><p>Megatron-LLaMA 中包含了：</p><p></p><p>基于社区 HuggingFace LLaMA 模型的续训能力；在不同规模、硬件上大模型训练的最佳实现；针对训练成本的性能优化。</p><p></p><p>在推理方面，基于 TensorRT LLM，我们进一步研发了 Maga Transformer 框架和 LLM 推理平台产品。这个系统通过应用一套统一的框架和多种不同的策略，成功地优化了不同推理场景下的成本和用户体验。我们全面支持各种开源和内部 LLM 模型，以 LLaMA 7B 和 Falcon 180B 为例，我们的系统达到了 xxx 的性能水平，这一结果充分证明了我们的系统在处理大规模数据时的卓越性能。</p><p></p><p>此外，我们的系统还广泛支持各种量化和剪枝方法，以及 KVCache Reuse、Speculative Decoding、Medusa 等辅助优化方法，这可以进一步提高推理效率并降低存储和计算需求。这一系列的特性使得我们的系统在处理大规模语言模型推理时表现出强大的竞争力。</p><p></p><p>除上述演讲外，QCon 上海还将围绕&nbsp;<a href="https://qcon.infoq.cn/2023/shanghai/track/1595?utm_source=infoqweb&amp;utm_medium=teacherart">GenAI和通用大模型应用探索</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1596?utm_source=infoqweb&amp;utm_medium=teacherart">AI&nbsp;Agent&nbsp;与行业融合应用的前景</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1597?utm_source=infoqweb&amp;utm_medium=teacherart">LLM&nbsp;时代的性能优化</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1598?utm_source=infoqweb&amp;utm_medium=teacherart">智能化信创软件&nbsp;IDE</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1602?utm_source=infoqweb&amp;utm_medium=teacherart">面向人工智能时代的架构</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1604?utm_source=infoqweb&amp;utm_medium=teacherart">性能工程：提升效率和创新的新方法</a>"等专题进行交流。</p><p></p><p>QCon 上海 2023，相约 12 月！ 现在购票，享 8 折优惠，立减￥1360！咨询购票请联系：18514549229（微信同手机号）。</p><p></p><p><img src="https://static001.geekbang.org/infoq/01/0113b3dfb187d5f9988b7eb16d2e0594.png" /></p><p></p>
                 ]]>
             </content:encoded>
         </item>
