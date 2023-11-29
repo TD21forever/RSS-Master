@@ -5,6 +5,120 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1729750005706264598#m</id>
+            <title>从ChatGPT中提取训练数据
+
+DeepMind研究人员发现了一种新的“发散攻击”（divergence attack）方式，可以诱导ChatGPT疯狂输出其训练数据中的具体内容。
+
+研究人员只花了大约 200 美元的token费用，就提取几兆字节的 ChatGPT 训练数据。
+
+模型甚至泄露了一些真实电子邮件地址和电话号码。
+
+这种方式使模型偏离其聊天机器人风格的生成，并以比正常情况下高150倍的频率输出训练数据。
+
+攻击表明，通过查询模型，实际上可以提取它所训练的一些确切数据。估计表明使用此方法，可以从模型中提取约 1 GB 的 ChatGPT 训练数据集。
+
+这种攻击揭示了即使是经过对齐的模型，也可能存在训练数据泄露的风险。
+
+具体步骤：
+
+命令提示：研究人员使用了特定的命令提示，例如重复“poem”这个词。“poem poem poem poem”?”这种重复性的提示使得模型的注意力集中在特定的主题或词汇上。
+
+观察模型响应：在这种重复性提示下，模型倾向于回落到其预训练数据，而不是遵循其微调对齐程序的指导。这意味着模型更可能输出与其训练数据直接相关的内容。
+
+数据泄露频率的增加：在这种攻击下，ChatGPT显示出了高频率地泄露训练数据的情况。这意味着模型在特定的命令提示下，会以远高于正常情况下的频率输出其训练数据中的内容。
+
+攻击后泄露的数据类型包括：
+
+公开数据和私有数据：攻击可能导致泄露大型语言模型（LLM）训练时使用的公开数据和私有数据。这些数据可能包括公司的专有数据收集流程、用户特定数据或未公开的许可数据。
+
+训练数据的具体内容：攻击可能导致泄露训练数据集中的具体内容。例如，论文中提到的一种攻击方法是通过重复特定的令牌序列来诱导模型重现训练数据。这种方法可以用来提取模型训练数据集中的特定文本片段。
+
+个人信息和敏感数据：考虑到大型语言模型通常使用互联网上的广泛文本数据进行训练，因此存在个人信息或敏感数据被泄露的风险。
+
+对ChatGPT的攻击是特定于该模型的，并且据他们所知，不适用于他们测试过的任何其他生产语言模型。他们在发现漏洞后，于8月30日向OpenAI披露了这一漏洞，并在发表论文前允许了90天的时间来解决这个问题。
+
+他们已经与各个模型的作者（如OPT、Falcon、Mistral和LLaMA）分享了他们的发现，并遵循标准的披露时间线。
+
+详细：https://not-just-memorization.github.io/extracting-training-data-from-chatgpt.html#sec:data-extraction
+论文：https://arxiv.org/abs/2311.17035</title>
+            <link>https://nitter.cz/xiaohuggg/status/1729750005706264598#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1729750005706264598#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 29 Nov 2023 06:31:53 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>从ChatGPT中提取训练数据<br />
+<br />
+DeepMind研究人员发现了一种新的“发散攻击”（divergence attack）方式，可以诱导ChatGPT疯狂输出其训练数据中的具体内容。<br />
+<br />
+研究人员只花了大约 200 美元的token费用，就提取几兆字节的 ChatGPT 训练数据。<br />
+<br />
+模型甚至泄露了一些真实电子邮件地址和电话号码。<br />
+<br />
+这种方式使模型偏离其聊天机器人风格的生成，并以比正常情况下高150倍的频率输出训练数据。<br />
+<br />
+攻击表明，通过查询模型，实际上可以提取它所训练的一些确切数据。估计表明使用此方法，可以从模型中提取约 1 GB 的 ChatGPT 训练数据集。<br />
+<br />
+这种攻击揭示了即使是经过对齐的模型，也可能存在训练数据泄露的风险。<br />
+<br />
+具体步骤：<br />
+<br />
+命令提示：研究人员使用了特定的命令提示，例如重复“poem”这个词。“poem poem poem poem”?”这种重复性的提示使得模型的注意力集中在特定的主题或词汇上。<br />
+<br />
+观察模型响应：在这种重复性提示下，模型倾向于回落到其预训练数据，而不是遵循其微调对齐程序的指导。这意味着模型更可能输出与其训练数据直接相关的内容。<br />
+<br />
+数据泄露频率的增加：在这种攻击下，ChatGPT显示出了高频率地泄露训练数据的情况。这意味着模型在特定的命令提示下，会以远高于正常情况下的频率输出其训练数据中的内容。<br />
+<br />
+攻击后泄露的数据类型包括：<br />
+<br />
+公开数据和私有数据：攻击可能导致泄露大型语言模型（LLM）训练时使用的公开数据和私有数据。这些数据可能包括公司的专有数据收集流程、用户特定数据或未公开的许可数据。<br />
+<br />
+训练数据的具体内容：攻击可能导致泄露训练数据集中的具体内容。例如，论文中提到的一种攻击方法是通过重复特定的令牌序列来诱导模型重现训练数据。这种方法可以用来提取模型训练数据集中的特定文本片段。<br />
+<br />
+个人信息和敏感数据：考虑到大型语言模型通常使用互联网上的广泛文本数据进行训练，因此存在个人信息或敏感数据被泄露的风险。<br />
+<br />
+对ChatGPT的攻击是特定于该模型的，并且据他们所知，不适用于他们测试过的任何其他生产语言模型。他们在发现漏洞后，于8月30日向OpenAI披露了这一漏洞，并在发表论文前允许了90天的时间来解决这个问题。<br />
+<br />
+他们已经与各个模型的作者（如OPT、Falcon、Mistral和LLaMA）分享了他们的发现，并遵循标准的披露时间线。<br />
+<br />
+详细：<a href="https://not-just-memorization.github.io/extracting-training-data-from-chatgpt.html#sec:data-extraction">not-just-memorization.github…</a><br />
+论文：<a href="https://arxiv.org/abs/2311.17035">arxiv.org/abs/2311.17035</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0FGQXlJb2FjQUFkTTM2LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1729747949947584679#m</id>
+            <title>这么玩是吧？？
+
+都能用嘴实时画图了？？
+
+以后老板站在电脑前指点江山？？？？🤣</title>
+            <link>https://nitter.cz/xiaohuggg/status/1729747949947584679#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1729747949947584679#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 29 Nov 2023 06:23:43 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这么玩是吧？？<br />
+<br />
+都能用嘴实时画图了？？<br />
+<br />
+以后老板站在电脑前指点江山？？？？🤣</p>
+<p><a href="https://nitter.cz/s3news_/status/1729580210717069624#m">nitter.cz/s3news_/status/1729580210717069624#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1729722115543244963#m</id>
             <title>R to @xiaohuggg: 打开这个：http://drawfast.tldraw.com
 
@@ -709,54 +823,6 @@ GPT结合<a href="https://nitter.cz/tldraw" title="tldraw">@tldraw</a> 实时画
 <br />
 😂</p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MjkxODQwMzQ5NzI5MjU5NTIvcHUvaW1nL3RxQnBkQ0RBQUwtZ2pteFkuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1729167719394869646#m</id>
-            <title>牛p了
-
-用文字描述指挥AI画画😂
-
-你只需要描述你要画什么就行
-
-右边会按照你的要求即时创作，还会展示创作过程👍👍👍</title>
-            <link>https://nitter.cz/xiaohuggg/status/1729167719394869646#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1729167719394869646#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 27 Nov 2023 15:58:05 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>牛p了<br />
-<br />
-用文字描述指挥AI画画😂<br />
-<br />
-你只需要描述你要画什么就行<br />
-<br />
-右边会按照你的要求即时创作，还会展示创作过程👍👍👍</p>
-<video loop="loop" poster="https://nitter.cz/pic/enc/dHdlZXRfdmlkZW9fdGh1bWIvRl84NFF6T1hrQUEyRk1YLmpwZw==">
-  <source src="https://nitter.cz/pic/enc/dmlkZW8udHdpbWcuY29tL3R3ZWV0X3ZpZGVvL0ZfODRRek9Ya0FBMkZNWC5tcDQ=" type="video/mp4" /></video>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1729102242429702348#m</id>
-            <title>R to @xiaohuggg: 所以这种片子以后就统称为：A片</title>
-            <link>https://nitter.cz/xiaohuggg/status/1729102242429702348#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1729102242429702348#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 27 Nov 2023 11:37:54 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>所以这种片子以后就统称为：A片</p>
                 ]]>
             </content:encoded>
         </item>
