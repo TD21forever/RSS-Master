@@ -5,6 +5,80 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1730092380005798004#m</id>
+            <title>MonoNav：微型空中飞行器（MAV）导航系统
+
+由普林斯顿大学开发，这个系统在只靠单目相机、光学里程计和离线计算的情况下，能创建出精确的地图。
+
+利用强大的路径规划和导航方法，实现在未知环境中的稳健自主飞行。
+
+MonoNav具有可以复杂室内环境中进行高速飞行的能力。
+
+MonoNav的一个显著特点是它能够明确地考虑到尺度问题。这意味着它在检测到即将发生的碰撞时能够采取措施避免碰撞，从而提高了飞行的安全性。
+
+在实际的硬件实验中，MonoNav已经展示了其在复杂室内环境中进行高速飞行的能力，同时显著降低了碰撞的风险。
+
+MonoNav的工作流程可以分为以下几个步骤：
+
+假设我们有一个微型空中飞行器（MAV），比如一架小型无人机，它装备了一个单目相机。这架无人机需要在一个未知的室内环境中飞行，比如一个充满家具和其他障碍物的房间。我们的目标是让这架无人机能够自主地在这个环境中导航，避开障碍物，从一个点飞到另一个点。
+
+1、启动和深度估计：无人机启动时，它的单目相机开始捕捉房间内的图像。MonoNav系统使用这些图像来估计每个像素的深度，即图像中每个点到相机的距离。
+
+2、三维重建：随着无人机在房间内移动，MonoNav将捕获到的多个深度图像合并，创建出房间的三维模型。这个模型包括了房间内所有物体的位置和形状，如家具、门、窗户等。
+
+3、路径规划：假设我们要求无人机从房间的一角飞到另一角。MonoNav会分析当前的三维模型，规划出一条避开所有障碍物的路径。这个路径是由一系列简单的飞行指令组成的，比如“向前飞10米，然后向右转30度”。
+
+4、飞行和避障：无人机按照规划好的路径飞行。如果在飞行过程中遇到了新的障碍物或者环境发生了变化，MonoNav会实时更新三维模型，并重新规划路径，确保无人机能够安全地绕过障碍物。
+
+通过这种方式，MonoNav使得单目相机装备的无人机能够在复杂的室内环境中实现自主导航，这在以前主要依赖于更复杂的传感器系统（如激光雷达）才能实现。
+
+项目及演示：https://natesimon.github.io/mononav/
+论文：https://natesimon.github.io/assets/pdf/MonoNav_ISER2023.pdf
+GitHub：https://github.com/natesimon/MonoNav/</title>
+            <link>https://nitter.cz/xiaohuggg/status/1730092380005798004#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1730092380005798004#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 30 Nov 2023 05:12:21 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>MonoNav：微型空中飞行器（MAV）导航系统<br />
+<br />
+由普林斯顿大学开发，这个系统在只靠单目相机、光学里程计和离线计算的情况下，能创建出精确的地图。<br />
+<br />
+利用强大的路径规划和导航方法，实现在未知环境中的稳健自主飞行。<br />
+<br />
+MonoNav具有可以复杂室内环境中进行高速飞行的能力。<br />
+<br />
+MonoNav的一个显著特点是它能够明确地考虑到尺度问题。这意味着它在检测到即将发生的碰撞时能够采取措施避免碰撞，从而提高了飞行的安全性。<br />
+<br />
+在实际的硬件实验中，MonoNav已经展示了其在复杂室内环境中进行高速飞行的能力，同时显著降低了碰撞的风险。<br />
+<br />
+MonoNav的工作流程可以分为以下几个步骤：<br />
+<br />
+假设我们有一个微型空中飞行器（MAV），比如一架小型无人机，它装备了一个单目相机。这架无人机需要在一个未知的室内环境中飞行，比如一个充满家具和其他障碍物的房间。我们的目标是让这架无人机能够自主地在这个环境中导航，避开障碍物，从一个点飞到另一个点。<br />
+<br />
+1、启动和深度估计：无人机启动时，它的单目相机开始捕捉房间内的图像。MonoNav系统使用这些图像来估计每个像素的深度，即图像中每个点到相机的距离。<br />
+<br />
+2、三维重建：随着无人机在房间内移动，MonoNav将捕获到的多个深度图像合并，创建出房间的三维模型。这个模型包括了房间内所有物体的位置和形状，如家具、门、窗户等。<br />
+<br />
+3、路径规划：假设我们要求无人机从房间的一角飞到另一角。MonoNav会分析当前的三维模型，规划出一条避开所有障碍物的路径。这个路径是由一系列简单的飞行指令组成的，比如“向前飞10米，然后向右转30度”。<br />
+<br />
+4、飞行和避障：无人机按照规划好的路径飞行。如果在飞行过程中遇到了新的障碍物或者环境发生了变化，MonoNav会实时更新三维模型，并重新规划路径，确保无人机能够安全地绕过障碍物。<br />
+<br />
+通过这种方式，MonoNav使得单目相机装备的无人机能够在复杂的室内环境中实现自主导航，这在以前主要依赖于更复杂的传感器系统（如激光雷达）才能实现。<br />
+<br />
+项目及演示：<a href="https://natesimon.github.io/mononav/">natesimon.github.io/mononav/</a><br />
+论文：<a href="https://natesimon.github.io/assets/pdf/MonoNav_ISER2023.pdf">natesimon.github.io/assets/p…</a><br />
+GitHub：<a href="https://github.com/natesimon/MonoNav/">github.com/natesimon/MonoNav…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzAwOTIxMjUyMzUzMTQ2ODgvcHUvaW1nL1pudDkwOHFtS0Q1YmI2WmguanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1730070281535013067#m</id>
             <title>一篇关于大语言模型的综合性研究报告
 
