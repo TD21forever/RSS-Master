@@ -5,6 +5,153 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1730070281535013067#m</id>
+            <title>一篇关于大语言模型的综合性研究报告
+
+这篇报告详尽地回顾了自ChatGPT发布一年以来，各种声称与ChatGPT相当或更优的开源大语言模型在各种任务上的表现​！
+
+报告整合了各种评估基准，分析了开源LLMs与ChatGPT在不同任务上的比较。
+
+包括一般能力、代理能力、逻辑推理能力、长文本建模能力、特定应用能力（如问答、总结）、以及可信赖性（如幻觉、安全性）。
+
+结论是：综合能力，ChatGPT，依然，遥遥领先！
+
+以下是报告简要总结：
+
+1、一般能力：
+
+基准测试：包括MT-Bench（多轮对话和指令遵循能力测试），AlpacaEval（测试模型遵循一般用户指令的能力），Open LLM Leaderboard（评估LLMs在多种推理和通用知识任务上的表现）。
+
+模型性能：
+
+•Llama-2-70B-chat 在 AlpacaEval 中达到了 92.66% 的胜率，超过了 GPT-3.5-turbo。
+•WizardLM-70B 在 MT-Bench 上得分为 7.71，但低于 GPT-4（8.99）和 GPT-3.5-turbo（7.94）。
+•Zephyr-7B 在 AlpacaEval 中的胜率为 90.60%，在 MT-Bench 上得分为 7.34。
+•GodziLLa2-70B 在 Open LLM Leaderboard 上的得分为 67.01%，而 Yi-34B 得分为 68.68%。
+•GPT-4 保持最高表现，胜率为 95.28%
+
+2、代理能力：
+
+基准测试：包括工具使用（API-Bank、ToolBench）、自我调试（InterCode-Bash、MINT-HumanEval），遵循自然语言反馈（MINT），和环境探索（ALFWorld、WebArena）。
+
+模型性能：Lemur-70B-chat 在 ALFWorld、IC-CTF 和 WebArena 环境测试中表现优于 GPT-3.5-turbo 和 GPT-4
+
+3、逻辑推理能力：
+
+基准测试：包括GSM8K（数学问题解决）、MATH（竞赛数学问题）、TheoremQA（应用定理解决科学问题）、HumanEval（编程问题）等。
+
+模型性能：
+
+•WizardCoder 在 HumanEval 上比 GPT-3.5-turbo 高出 19.1% 的绝对改进。
+•WizardMath 在 GSM8K 上比 GPT-3.5-turbo 有 42.9% 的绝对改进
+
+4、应用特定能力：
+
+基准测试：包括查询聚焦摘要（AQualMuse、QMSum等）和开放式问答（SQuAD、NewsQA等）。
+
+模型性能：InstructRetro在NQ、TriviaQA、SQuAD 2.0和DROP上比GPT-3有7-10%的改进​​。
+
+5、医学领域应用：
+
+基准测试：包括心理健康分析（IMHI）和放射学报告生成（OpenI、MIMIC-CXR）。
+
+模型性能：
+
+•MentalLlama-chat-13B 在 IMHI 训练集上微调后，其表现超过了 ChatGPT 在 9 个任务中的 9 个。
+•Radiology-Llama-2 在 MIMIC-CXR 和 OpenI 数据集上大幅超过了 ChatGPT 和 GPT-4 
+
+6、可信赖性：
+
+基准测试：包括TruthfulQA、FactualityPrompts、HaluEval等，用于评估LLMs的真实性和安全性。
+
+模型性能：
+
+•不同的方法和模型（如 Platypus、Chain-of-Verification、Chain-of-Knowledge 等）在减少幻觉和提高安全性方面取得了进步
+
+•例如Platypus在TruthfulQA上比GPT-3.5-turbo表现出约20%的改进。
+
+详细报告：https://arxiv.org/pdf/2311.16989.pdf</title>
+            <link>https://nitter.cz/xiaohuggg/status/1730070281535013067#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1730070281535013067#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 30 Nov 2023 03:44:32 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>一篇关于大语言模型的综合性研究报告<br />
+<br />
+这篇报告详尽地回顾了自ChatGPT发布一年以来，各种声称与ChatGPT相当或更优的开源大语言模型在各种任务上的表现​！<br />
+<br />
+报告整合了各种评估基准，分析了开源LLMs与ChatGPT在不同任务上的比较。<br />
+<br />
+包括一般能力、代理能力、逻辑推理能力、长文本建模能力、特定应用能力（如问答、总结）、以及可信赖性（如幻觉、安全性）。<br />
+<br />
+结论是：综合能力，ChatGPT，依然，遥遥领先！<br />
+<br />
+以下是报告简要总结：<br />
+<br />
+1、一般能力：<br />
+<br />
+基准测试：包括MT-Bench（多轮对话和指令遵循能力测试），AlpacaEval（测试模型遵循一般用户指令的能力），Open LLM Leaderboard（评估LLMs在多种推理和通用知识任务上的表现）。<br />
+<br />
+模型性能：<br />
+<br />
+•Llama-2-70B-chat 在 AlpacaEval 中达到了 92.66% 的胜率，超过了 GPT-3.5-turbo。<br />
+•WizardLM-70B 在 MT-Bench 上得分为 7.71，但低于 GPT-4（8.99）和 GPT-3.5-turbo（7.94）。<br />
+•Zephyr-7B 在 AlpacaEval 中的胜率为 90.60%，在 MT-Bench 上得分为 7.34。<br />
+•GodziLLa2-70B 在 Open LLM Leaderboard 上的得分为 67.01%，而 Yi-34B 得分为 68.68%。<br />
+•GPT-4 保持最高表现，胜率为 95.28%<br />
+<br />
+2、代理能力：<br />
+<br />
+基准测试：包括工具使用（API-Bank、ToolBench）、自我调试（InterCode-Bash、MINT-HumanEval），遵循自然语言反馈（MINT），和环境探索（ALFWorld、WebArena）。<br />
+<br />
+模型性能：Lemur-70B-chat 在 ALFWorld、IC-CTF 和 WebArena 环境测试中表现优于 GPT-3.5-turbo 和 GPT-4<br />
+<br />
+3、逻辑推理能力：<br />
+<br />
+基准测试：包括GSM8K（数学问题解决）、MATH（竞赛数学问题）、TheoremQA（应用定理解决科学问题）、HumanEval（编程问题）等。<br />
+<br />
+模型性能：<br />
+<br />
+•WizardCoder 在 HumanEval 上比 GPT-3.5-turbo 高出 19.1% 的绝对改进。<br />
+•WizardMath 在 GSM8K 上比 GPT-3.5-turbo 有 42.9% 的绝对改进<br />
+<br />
+4、应用特定能力：<br />
+<br />
+基准测试：包括查询聚焦摘要（AQualMuse、QMSum等）和开放式问答（SQuAD、NewsQA等）。<br />
+<br />
+模型性能：InstructRetro在NQ、TriviaQA、SQuAD 2.0和DROP上比GPT-3有7-10%的改进​​。<br />
+<br />
+5、医学领域应用：<br />
+<br />
+基准测试：包括心理健康分析（IMHI）和放射学报告生成（OpenI、MIMIC-CXR）。<br />
+<br />
+模型性能：<br />
+<br />
+•MentalLlama-chat-13B 在 IMHI 训练集上微调后，其表现超过了 ChatGPT 在 9 个任务中的 9 个。<br />
+•Radiology-Llama-2 在 MIMIC-CXR 和 OpenI 数据集上大幅超过了 ChatGPT 和 GPT-4 <br />
+<br />
+6、可信赖性：<br />
+<br />
+基准测试：包括TruthfulQA、FactualityPrompts、HaluEval等，用于评估LLMs的真实性和安全性。<br />
+<br />
+模型性能：<br />
+<br />
+•不同的方法和模型（如 Platypus、Chain-of-Verification、Chain-of-Knowledge 等）在减少幻觉和提高安全性方面取得了进步<br />
+<br />
+•例如Platypus在TruthfulQA上比GPT-3.5-turbo表现出约20%的改进。<br />
+<br />
+详细报告：<a href="https://arxiv.org/pdf/2311.16989.pdf">arxiv.org/pdf/2311.16989.pdf</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0FKd2lzb2FjQUFOaVV5LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0FKeHBtM2FBQUF2cDIwLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1730057451473662380#m</id>
             <title>微软开源 ThreadX
 
@@ -693,94 +840,6 @@ Huggingface：<a href="https://huggingface.co/epfl-llm">huggingface.co/epfl-llm<
 <br />
 详细：<a href="https://aws.amazon.com/cn/q/">aws.amazon.com/cn/q/</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mjk3ODAwMjk3MTcxNzIyMjQvcHUvaW1nLzZzUjFsUlhtdU9qTEsyRHcuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1729750005706264598#m</id>
-            <title>从ChatGPT中提取训练数据
-
-DeepMind研究人员发现了一种新的“发散攻击”（divergence attack）方式，可以诱导ChatGPT疯狂输出其训练数据中的具体内容。
-
-研究人员只花了大约 200 美元的token费用，就提取几兆字节的 ChatGPT 训练数据。
-
-模型甚至泄露了一些真实电子邮件地址和电话号码。
-
-这种方式使模型偏离其聊天机器人风格的生成，并以比正常情况下高150倍的频率输出训练数据。
-
-攻击表明，通过查询模型，实际上可以提取它所训练的一些确切数据。估计表明使用此方法，可以从模型中提取约 1 GB 的 ChatGPT 训练数据集。
-
-这种攻击揭示了即使是经过对齐的模型，也可能存在训练数据泄露的风险。
-
-具体步骤：
-
-命令提示：研究人员使用了特定的命令提示，例如重复“poem”这个词。“poem poem poem poem”?”这种重复性的提示使得模型的注意力集中在特定的主题或词汇上。
-
-观察模型响应：在这种重复性提示下，模型倾向于回落到其预训练数据，而不是遵循其微调对齐程序的指导。这意味着模型更可能输出与其训练数据直接相关的内容。
-
-数据泄露频率的增加：在这种攻击下，ChatGPT显示出了高频率地泄露训练数据的情况。这意味着模型在特定的命令提示下，会以远高于正常情况下的频率输出其训练数据中的内容。
-
-攻击后泄露的数据类型包括：
-
-公开数据和私有数据：攻击可能导致泄露大型语言模型（LLM）训练时使用的公开数据和私有数据。这些数据可能包括公司的专有数据收集流程、用户特定数据或未公开的许可数据。
-
-训练数据的具体内容：攻击可能导致泄露训练数据集中的具体内容。例如，论文中提到的一种攻击方法是通过重复特定的令牌序列来诱导模型重现训练数据。这种方法可以用来提取模型训练数据集中的特定文本片段。
-
-个人信息和敏感数据：考虑到大型语言模型通常使用互联网上的广泛文本数据进行训练，因此存在个人信息或敏感数据被泄露的风险。
-
-对ChatGPT的攻击是特定于该模型的，并且据他们所知，不适用于他们测试过的任何其他生产语言模型。他们在发现漏洞后，于8月30日向OpenAI披露了这一漏洞，并在发表论文前允许了90天的时间来解决这个问题。
-
-他们已经与各个模型的作者（如OPT、Falcon、Mistral和LLaMA）分享了他们的发现，并遵循标准的披露时间线。
-
-详细：https://not-just-memorization.github.io/extracting-training-data-from-chatgpt.html#sec:data-extraction
-论文：https://arxiv.org/abs/2311.17035</title>
-            <link>https://nitter.cz/xiaohuggg/status/1729750005706264598#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1729750005706264598#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 29 Nov 2023 06:31:53 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>从ChatGPT中提取训练数据<br />
-<br />
-DeepMind研究人员发现了一种新的“发散攻击”（divergence attack）方式，可以诱导ChatGPT疯狂输出其训练数据中的具体内容。<br />
-<br />
-研究人员只花了大约 200 美元的token费用，就提取几兆字节的 ChatGPT 训练数据。<br />
-<br />
-模型甚至泄露了一些真实电子邮件地址和电话号码。<br />
-<br />
-这种方式使模型偏离其聊天机器人风格的生成，并以比正常情况下高150倍的频率输出训练数据。<br />
-<br />
-攻击表明，通过查询模型，实际上可以提取它所训练的一些确切数据。估计表明使用此方法，可以从模型中提取约 1 GB 的 ChatGPT 训练数据集。<br />
-<br />
-这种攻击揭示了即使是经过对齐的模型，也可能存在训练数据泄露的风险。<br />
-<br />
-具体步骤：<br />
-<br />
-命令提示：研究人员使用了特定的命令提示，例如重复“poem”这个词。“poem poem poem poem”?”这种重复性的提示使得模型的注意力集中在特定的主题或词汇上。<br />
-<br />
-观察模型响应：在这种重复性提示下，模型倾向于回落到其预训练数据，而不是遵循其微调对齐程序的指导。这意味着模型更可能输出与其训练数据直接相关的内容。<br />
-<br />
-数据泄露频率的增加：在这种攻击下，ChatGPT显示出了高频率地泄露训练数据的情况。这意味着模型在特定的命令提示下，会以远高于正常情况下的频率输出其训练数据中的内容。<br />
-<br />
-攻击后泄露的数据类型包括：<br />
-<br />
-公开数据和私有数据：攻击可能导致泄露大型语言模型（LLM）训练时使用的公开数据和私有数据。这些数据可能包括公司的专有数据收集流程、用户特定数据或未公开的许可数据。<br />
-<br />
-训练数据的具体内容：攻击可能导致泄露训练数据集中的具体内容。例如，论文中提到的一种攻击方法是通过重复特定的令牌序列来诱导模型重现训练数据。这种方法可以用来提取模型训练数据集中的特定文本片段。<br />
-<br />
-个人信息和敏感数据：考虑到大型语言模型通常使用互联网上的广泛文本数据进行训练，因此存在个人信息或敏感数据被泄露的风险。<br />
-<br />
-对ChatGPT的攻击是特定于该模型的，并且据他们所知，不适用于他们测试过的任何其他生产语言模型。他们在发现漏洞后，于8月30日向OpenAI披露了这一漏洞，并在发表论文前允许了90天的时间来解决这个问题。<br />
-<br />
-他们已经与各个模型的作者（如OPT、Falcon、Mistral和LLaMA）分享了他们的发现，并遵循标准的披露时间线。<br />
-<br />
-详细：<a href="https://not-just-memorization.github.io/extracting-training-data-from-chatgpt.html#sec:data-extraction">not-just-memorization.github…</a><br />
-论文：<a href="https://arxiv.org/abs/2311.17035">arxiv.org/abs/2311.17035</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0FGQXlJb2FjQUFkTTM2LmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
