@@ -5,6 +5,90 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1730423823466418408#m</id>
+            <title>R to @dotey: 放个效果图，感觉质量还行</title>
+            <link>https://nitter.cz/dotey/status/1730423823466418408#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1730423823466418408#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 01 Dec 2023 03:09:23 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>放个效果图，感觉质量还行</p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0FPelNSVVc0QUE2Q2paLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1730418206991409407#m</id>
+            <title>#AI开源项目推荐：VikParuchuri/marker
+
+Marker 能将 PDF、EPUB 和 MOBI 文件转换成 markdown 格式。它的转换速度是 nougat 的十倍之快，对多数文档的处理更为精确，且几乎不会产生错误的幻觉效果。
+
+- 支持多种类型的 PDF 文档（特别优化了对书籍和科学论文的处理）
+- 可以去除页眉、页脚和其他无关内容
+- 能够将大部分公式转换成 latex 格式
+- 格式化代码块和表格
+- 支持多种语言（主要测试语言为英语）
+- 可在 GPU、CPU 或 MPS 上运行
+
+工作原理
+
+Marker 是基于一系列深度学习模型构建的：
+
+- 提取文本，必要时使用 OCR 技术（采用启发式算法和 tesseract 工具）
+- 检测页面布局（使用 [布局分割器](https://huggingface.co/vikp/layout_segmenter) 和 [列检测器](https://huggingface.co/vikp/column_detector)）
+- 清洗并格式化每一块内容（运用启发式算法和 [nougat](https://huggingface.co/facebook/nougat-base)）
+- 合并这些块并对整体文本进行后期处理（利用启发式算法和 [pdf后处理器](https://huggingface.co/vikp/pdf_postprocessor_t5)）
+
+依赖自回归前向传递来生成文本的方法通常速度较慢，且容易出现重复或虚假内容。根据 nougat 论文的研究，这种重复现象在测试集的页面中出现的比例为 1.5%，但在非专业领域的文档中，这一比例会更高。根据我的个人测试，非专业领域（非 arXiv）的页面重复率超过了 5%。
+
+尽管 nougat 模型表现出色，但我还是希望找到一个更快、更适用于普通用途的解决方案。Marker 的转换速度是 nougat 的十倍，因为它只对公式块进行 LLM 前向传递处理，所以几乎没有产生错误幻觉的风险。
+
+项目地址：https://github.com/VikParuchuri/marker</title>
+            <link>https://nitter.cz/dotey/status/1730418206991409407#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1730418206991409407#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 01 Dec 2023 02:47:04 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><a href="https://nitter.cz/search?q=%23AI开源项目推荐">#AI开源项目推荐</a>：VikParuchuri/marker<br />
+<br />
+Marker 能将 PDF、EPUB 和 MOBI 文件转换成 markdown 格式。它的转换速度是 nougat 的十倍之快，对多数文档的处理更为精确，且几乎不会产生错误的幻觉效果。<br />
+<br />
+- 支持多种类型的 PDF 文档（特别优化了对书籍和科学论文的处理）<br />
+- 可以去除页眉、页脚和其他无关内容<br />
+- 能够将大部分公式转换成 latex 格式<br />
+- 格式化代码块和表格<br />
+- 支持多种语言（主要测试语言为英语）<br />
+- 可在 GPU、CPU 或 MPS 上运行<br />
+<br />
+工作原理<br />
+<br />
+Marker 是基于一系列深度学习模型构建的：<br />
+<br />
+- 提取文本，必要时使用 OCR 技术（采用启发式算法和 tesseract 工具）<br />
+- 检测页面布局（使用 [布局分割器](<a href="https://huggingface.co/vikp/layout_segmenter">huggingface.co/vikp/layout_s…</a>) 和 [列检测器](<a href="https://huggingface.co/vikp/column_detector">huggingface.co/vikp/column_d…</a>)）<br />
+- 清洗并格式化每一块内容（运用启发式算法和 [nougat](<a href="https://huggingface.co/facebook/nougat-base">huggingface.co/facebook/noug…</a>)）<br />
+- 合并这些块并对整体文本进行后期处理（利用启发式算法和 [pdf后处理器](<a href="https://huggingface.co/vikp/pdf_postprocessor_t5">huggingface.co/vikp/pdf_post…</a>)）<br />
+<br />
+依赖自回归前向传递来生成文本的方法通常速度较慢，且容易出现重复或虚假内容。根据 nougat 论文的研究，这种重复现象在测试集的页面中出现的比例为 1.5%，但在非专业领域的文档中，这一比例会更高。根据我的个人测试，非专业领域（非 arXiv）的页面重复率超过了 5%。<br />
+<br />
+尽管 nougat 模型表现出色，但我还是希望找到一个更快、更适用于普通用途的解决方案。Marker 的转换速度是 nougat 的十倍，因为它只对公式块进行 LLM 前向传递处理，所以几乎没有产生错误幻觉的风险。<br />
+<br />
+项目地址：<a href="https://github.com/VikParuchuri/marker">github.com/VikParuchuri/mark…</a></p>
+<p><a href="https://nitter.cz/dotey/status/1696713736369602605#m">nitter.cz/dotey/status/1696713736369602605#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/songma/status/1730403742946939262#m</id>
             <title>RT by @dotey: 国内法院这个判决，在对AI作品的法律认定和实践上，是真·遥遥领先。</title>
             <link>https://nitter.cz/songma/status/1730403742946939262#m</link>
@@ -500,42 +584,6 @@ Smith 先生此行伦敦是为了宣布投资 25 亿英镑用于建设先进的�
 “在接下来的 12 个月里，所谓的通用人工智能（即计算机超越人类智能）出现的可能性几乎为零。这需要多年，甚至几十年的时间。”<br />
 <br />
 原文：<a href="https://www.bbc.com/news/technology-67578656">bbc.com/news/technology-6757…</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1730213245636796465#m</id>
-            <title>RT by @dotey: Freepik在白板里面加的这些小贴纸很有用啊，不会画画的也可以快速构图把想要的东西放在对应的位置了。</title>
-            <link>https://nitter.cz/op7418/status/1730213245636796465#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1730213245636796465#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 30 Nov 2023 13:12:38 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Freepik在白板里面加的这些小贴纸很有用啊，不会画画的也可以快速构图把想要的东西放在对应的位置了。</p>
-<p><a href="https://nitter.cz/madaro_art/status/1730195776070971589#m">nitter.cz/madaro_art/status/1730195776070971589#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1730259139719209271#m</id>
-            <title>哈哈，这个好酷，倒过来是另一张图</title>
-            <link>https://nitter.cz/dotey/status/1730259139719209271#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1730259139719209271#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 30 Nov 2023 16:15:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>哈哈，这个好酷，倒过来是另一张图</p>
-<p><a href="https://nitter.cz/DrJimFan/status/1730253638935920738#m">nitter.cz/DrJimFan/status/1730253638935920738#m</a></p>
                 ]]>
             </content:encoded>
         </item>
