@@ -3,9 +3,9 @@ name: cron_job
 on:
   schedule:
     # 在白天（6:00-23:00）每120分钟运行一次
-    - cron: '*/240 6-23 * * *'
+    - cron: '*/360 6-23 * * *'
     # 在凌晨（0:00-6:00）每240小时运行一次
-    - cron: '*/240 0-6 * * *'
+    - cron: '*/360 0-6 * * *'
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
