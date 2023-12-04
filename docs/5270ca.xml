@@ -120,6 +120,192 @@
         </item>
         
         <item>
+            <id>https://sspai.com/post/84768</id>
+            <title>Emacs高手修炼手册 （2023年，Emacs 29）</title>
+            <link>https://sspai.com/post/84768</link>
+            <guid isPermaLink="false">https://sspai.com/post/84768</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 02 Dec 2023 02:56:25 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Emacs高手修炼手册, 配置, 简洁, 实用, 速度
+<br>
+<br>
+总结: 《Emacs高手修炼手册》是一本关于Emacs编辑器配置的文章，作者强调了配置的简洁性、实用性和速度。作者还提到了一些问题，如不兼容旧版本和追求新特性。文章还介绍了安装和early-init.el文件的内容，以及几个自定义变量的定义。 </div>
+                        <hr>
+                    
+                    <h2 style="margin-left: 0px;"><strong>写在前面的话</strong></h2><p style="margin-left: 0px;">《Emacs高手修炼手册》这个标题已经用了好几年了，但感觉自己始终没有达到自己心目中的〔高手〕的境界。所以我还是在〔修炼〕，用这个标题继续写一些自己的实践——当然更多的，还是配置。</p><p style="margin-left: 0px;">其实当我写2023这个2.0版本的时候，我一直在想，如何把这个系列写的跟之前的不一样。如果还是之前的样子，那么其实没有必要写新的一篇，读者也没有必要读新的一篇——我们都不喜欢水文。</p><p style="margin-left: 0px;">于是我回头看了自己这一年的使用上的变化，自己对比了自己在配置上的变化，我总结出了自己这篇文章需要有的特点：</p><p style="margin-left: 0px;">简洁，我的配置越来越简洁，代码行越来越少，但功能却不因此而变的简单；</p><p style="margin-left: 0px;">实用，Emacs终究还是一个工具，一个编辑器，一个可以让自己的想法得到验证的工具；</p><p style="margin-left: 0px;">速度，过去的一年，我有大量的时间是在使用Windows操作系统，所以速度对我来说，毫无疑问是一个挑战与要追求的点；</p><p style="margin-left: 0px;">虽然我在上面提到的这些特点，都是非常优美的词汇，但不可否认的是，我的这篇文章也有一些问题：</p><p style="margin-left: 0px;">不兼容旧版本，我的配置只兼容最新的版本，我希望自己（以及大家）能够尊重他们最新的努力，以及为最新版本付出更多的测试与反馈；</p><p style="margin-left: 0px;">追求新特性，这一点算优点也算缺点。比如29一出来，我就热烈的拥抱了treesit特性。</p><p style="margin-left: 0px;">我知道这样的一些特点，一定会有人喜欢，也一定会有人讨厌。但没关系，我们重在交流思路。如果你准备好了跟我一同前行，那么请升级你的Emacs到29版本，我们出发了。</p><h2 style="margin-left: 0px;"><strong>关于安装</strong></h2><p style="margin-left: 0px;">由于这是2.0版本，我们不在安装部分下大篇幅。你直接在<a href="https://gnu.org/software/emacs" target="_blank">官网</a>下载你对应的操作系统的版本安装即可；或者使用你对应操作系统的包管理器（如apt，dnf，pacman，scoop，winget，homebrew等）进行安装即可。</p><h2 style="margin-left: 0px;"><strong>先说说early-init.el</strong></h2><p style="margin-left: 0px;">这个文件是被非常早的加载的一个文件，所以我们可以适当的用来优化一些启动方面的参数。例如：</p><pre class="language-public-DraftStyleDefault-pre"><code>(setq gc-cons-threshold most-positive-fixnum)
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))</code></pre><p style="margin-left: 0px;">这样的代码已经被证实可以非常好的优化启动速度。</p><p style="margin-left: 0px;">同时你也可以把一些界面禁用的操作放到这里来，例如：</p><pre class="language-public-DraftStyleDefault-pre"><code>(push '(scroll-bar-mode . nil) default-frame-alist)
+(push '(tool-bar-mode . nil) default-frame-alist)
+
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))</code></pre><p style="margin-left: 0px;">你甚至还可以放一些其他的内容。看你喜欢。一般来说，我建议你也别放太多，因为从代码的管理上来看，我们把不影响启动的一些配置，还是放到init.el中更合适。</p><blockquote><p>以下所有代码都会在init.el中进行配置，因为代码行总共约300行（含注释）而已，所以我们不再拆分不同的el文件，因为那样也会在读取文件上可能损耗一些（尽管微不足道）的时间。</p></blockquote><h2 style="margin-left: 0px;"><strong>几个自定义的变量</strong></h2><p style="margin-left: 0px;">由于后面的配置中，我们会需要使用到一些判断或者允许其他人在custom.el或者其他位置自定义的一些功能，所以我们提前定义几个变量。定义变量的基本格式是：</p><pre class="language-public-DraftStyleDefault-pre"><code>(defvar VAR-NAME DEFAULT-VALUE DOCUMENTS)</code></pre><p style="margin-left: 0px;">所以我们定义两个操作系统相关的：</p><pre class="language-public-DraftStyleDefault-pre"><code>(defvar cabins--os-win (memq system-type '(ms-dos windows-nt cygwin)))
+(defvar cabins--os-mac (eq system-type 'darwin))</code></pre><p style="margin-left: 0px;">由于名字取的〔非常好〕，所以我省略了注释。</p><blockquote><p>这里没有定义Linux的原因，不是因为我不喜欢Linux（实际上，我是Linux的忠实粉丝，我甚至在B站有个系列叫《Linux体验周刊》），而是Linux的兼容性非常好，不需要特殊的设置，所以不需要额外的逻辑判断。</p></blockquote><p style="margin-left: 0px;">此外我还定义了几个字体集变量：</p><pre class="language-public-DraftStyleDefault-pre"><code>(defvar cabins--fonts-default '("Sometype Mono" "Cascadia Code PL" "Menlo" "Consolas"))
+(defvar cabins--fonts-unicode '("Segoe UI Symbol" "Symbola" "Symbol"))
+(defvar cabins--fonts-emoji '("Noto Color Emoji" "Apple Color Emoji"))
+(defvar cabins--fonts-cjk '("KaiTi" "STKaiTi" "WenQuanYi Micro Hei"))</code></pre><p style="margin-left: 0px;">这里我解释一下，为什么我使用楷体作为默认的中文字体，因为我发现它通过我后面的配置可以非常完美的与英文字体进行等宽显示。至于英文字体，我最近迷上了Sometype Mono这款圆润（而毫无特色）的字体。如果你有自己的喜好，可以修改这几个变量，也可以在其他的位置通过setq函数来改变这几个变量的值。</p><h2 style="margin-left: 0px;"><strong>字体配置</strong></h2><p style="margin-left: 0px;">一般来说，这样的配置应该最后讲，但，我偏偏要先说。因为这个地方困扰了太多的人了。为了实现从字体集中选择出最合适的字体（就像CSS中font-family那样），我们先来写一个函数：</p><pre class="language-public-DraftStyleDefault-pre"><code>(require 'subr-x) ;; cl-loop来自这里
+
+(defun cabins--set-font-common (character font-list &amp;optional scale-factor)
+  "Set fonts for multi CHARACTER from FONT-LIST and modify style with SCALE-FACTOR."
+
+  (cl-loop for font in font-list
+       when (find-font (font-spec :name font))
+       return (if (not character)
+              (set-face-attribute 'default nil :family font)
+            (when scale-factor (setq face-font-rescale-alist `((,font . ,scale-factor))))
+            (set-fontset-font t character (font-spec :family font) nil 'prepend))))</code></pre><p style="margin-left: 0px;">这个函数看着很长，其实就是针对字符集来选择一个字体（如果这个字体已经安装，通过find-font查找），然后进行设置。scale-factor主要是针对中文来进行缩放的。</p><p style="margin-left: 0px;">所以接下来，我们就可以设置我们的字体了：</p><pre class="language-public-DraftStyleDefault-pre"><code>(defun cabins--font-setup (&amp;optional default-fonts unicode-fonts emoji-fonts cjk-fonts)
+  "Font setup, with optional DEFAULT-FONTS, UNICODE-FONTS, EMOJI-FONTS, CJK-FONTS."
+
+  (interactive)
+  (when (display-graphic-p)
+    (cabins--set-font-common nil (if default-fonts default-fonts cabins--fonts-default))
+    (cabins--set-font-common 'unicode (if unicode-fonts unicode-fonts cabins--fonts-unicode))
+    (cabins--set-font-common 'emoji (if emoji-fonts emoji-fonts cabins--fonts-emoji))
+    (dolist (charset '(kana han bopomofo cjk-misc))
+      (cabins--set-font-common charset (if cjk-fonts cjk-fonts cabins--fonts-cjk) 1.2))))</code></pre><p style="margin-left: 0px;">这段代码应该比较容易理解，interactive让这个函数可以通过M-x来调用，那一堆optional的参数实现了你可以在代码中调用这个函数来设置自己的字体集。</p><p style="margin-left: 0px;">经过了上面这两个函数的配置（第一个函数是为了给第二个内部调用），我们的字体基本没有什么恼人的问题了。</p><h2 style="margin-left: 0px;"><strong>主题</strong></h2><p style="margin-left: 0px;">说完了字体，我们干脆一起设置一个漂亮的主题。先上代码：</p><pre class="language-public-DraftStyleDefault-pre"><code>(defun cabins--load-theme()
+  "Load theme, Auto change color scheme according to system dark mode on Windows."
+
+  (interactive)
+  (when (display-graphic-p)
+    ;; choose theme according to system dark/light mode
+    (let* ((cmd (cond
+         (cabins--os-win
+          (concat
+           "powershell "
+           "(Get-ItemProperty -Path "
+           "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize "
+           "-Name AppsUseLightTheme).AppsUseLightTheme"))
+         (cabins--os-mac
+          "defaults read -g AppleInterfaceStyle")
+         ((eq system-type 'gnu/linux)
+          "gsettings get org.gnome.desktop.interface color-scheme")))
+       (mode (string-trim (shell-command-to-string cmd))))
+      (if (member mode '("0" "Dark" "'prefer-dark'"))
+      (load-theme 'modus-vivendi t)
+    (load-theme 'modus-operandi t)))))</code></pre><p style="margin-left: 0px;">这个函数可以判断操作系统的暗黑模式或者明亮模式（其中Linux那里只判断了GNOME桌面的，其他桌面的用户可自形容补充），然后根据系统的主题色调来设置Emacs的亮色主题（modus-operandi）还是暗色主题(modus-vivendi)。</p><p style="margin-left: 0px;">针对daemon用户以及希望能够改变了亮暗色就立即生效的用户，我们可以添加如下的代码，使体验更好：</p><pre class="language-public-DraftStyleDefault-pre"><code>(defun cabins--reset-ui()
+  "Try to reset ui options."
+
+  (interactive)
+  (cabins--font-setup)
+  (cabins--load-theme))
+
+(add-hook 'after-init-hook #'cabins--reset-ui)
+;; 下面这条慎用，部分系统上可能有严重的性能问题
+;; (add-hook 'window-configuration-change-hook #'cabins--load-theme)
+(when (daemonp)
+  (add-hook 'after-make-frame-functions
+        (lambda (frame) (with-selected-frame frame
+                  (cabins--reset-ui)))))</code></pre><h2 style="margin-left: 0px;"><strong>package以及use-package</strong></h2><p style="margin-left: 0px;">好消息！Emacs 29已经将use-package这个大杀器内置（built-in）了。所以我们不需要在额外的安装它，而可以放心的直接使用它。那还说什么？先用它来配置一下package这个内置包管理器试试。</p><pre class="language-public-DraftStyleDefault-pre"><code>(use-package package
+  :config
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+  (unless (bound-and-true-p package--initialized)
+    (package-initialize)))</code></pre><p style="margin-left: 0px;">如果你对use-package有更多的选项配置，其实也可以一起写在这里。</p><h2 style="margin-left: 0px;"><strong>关于内置包</strong></h2><p style="margin-left: 0px;">我一定要给你们推荐一些内置包，这些包可以极大程度地减少你对第三方包的依赖。</p><p style="margin-left: 0px;">global-auto-revert-mode(since v25.1) 可以让你的文件内容（因为其他原因改变了的时候）自动加载到最新的内容</p><p style="margin-left: 0px;">auto-save-visited-mode（since v26.1) 可以自动保存，有这个内置包，其他的自动保存的包都扔掉吧</p><p style="margin-left: 0px;">delete-selection-mode(since v20.1) 这个在编辑（删除文字）的时候有用</p><p style="margin-left: 0px;">fido-vertical-mode(since v28.1) 可以让你的minibuffer变成垂直的，非常推荐</p><p style="margin-left: 0px;">flyspell-mode(since v20.3) 拼写检查，依赖系统安装aspell程序，Windows系统慎用，疑似有性能问题〔笔者个人体验结论，非大众普遍观点〕</p><p style="margin-left: 0px;">global-hl-line-mode(since v21.1) 高亮当前行，这个建议图形化（display-graphic-p)情况下使用，感觉在命令行下使用的时候，有的时候体验不好，看个人喜好</p><p style="margin-left: 0px;">recentf-mode(since v22.1)，其中v29添加了recentf-open函数，可以打开近期文件。如果你不喜欢recentf-open的行为，可以试试recentf-open-files</p><p style="margin-left: 0px;">repeat-mode(since v28.1) 这个命令我不知道怎么描述，比如你想不停的撤销的时候，你就可以只按一次C-x u而之后就只按u即可，能支持很多类似的命令</p><h2 style="margin-left: 0px;"><strong>几个够用的第三方包</strong></h2><h3 style="margin-left: 0px;"><strong>company</strong></h3><p style="margin-left: 0px;">第一个当然是自动补全，这对于我们程序员来说，是不能缺少的东西。</p><pre class="language-public-DraftStyleDefault-pre"><code>(use-package company :ensure t :defer t
+  :hook (after-init . global-company-mode))</code></pre><p style="margin-left: 0px;">如果你只喜欢在编程的时候启用，可以将:hook一行改成:hook (prog-mode . company-mode)。默认输入第三个字母的时候开始出现补全选项。我最早会改出1个，但后来发现，完全没有必要，默认3个就很好，毕竟int``def这样的关键字，输入比补全更快。</p><h3 style="margin-left: 0px;"><strong>exec-path-from-shell</strong></h3><p style="margin-left: 0px;">这个包你还真必须得安装，它可以帮助读取你的环境变量。不然很多的时候，我们会出现找不到我们〔明明就在那里〕的一些命令。</p><pre class="language-public-DraftStyleDefault-pre"><code>;; Settings for exec-path-from-shell
+;; fix the PATH environment variable issue
+(use-package exec-path-from-shell
+  :ensure t
+  :when (or (memq window-system '(mac ns x))
+        (unless cabins--os-win
+          (daemonp)))
+  :init (exec-path-from-shell-initialize))</code></pre><h3 style="margin-left: 0px;"><strong>format-all</strong></h3><p style="margin-left: 0px;">我不知道从什么时候开始，依赖上了格式化工具。我想可能是学习Go与Rust以来，它们提供的gofmt以及rustfmt让我感觉代码格式化是一种必要的东西。所以我就希望，我所有的代码都能够格式化。然后format-all这个工具包就走入了我的必备清单。</p><pre class="language-public-DraftStyleDefault-pre"><code>;; great for programmers
+(use-package format-all :ensure t :defer t
+  ;; 开启保存时自动格式化
+  :hook (prog-mode . format-all-mode)
+  ;; 绑定一个手动格式化的快捷键
+  :bind ("C-c f" . #'format-all-region-or-buffer))</code></pre><h3 style="margin-left: 0px;"><strong>gnu-elpa-keyring-update</strong></h3><p style="margin-left: 0px;">这个是个可选包，只是我还是希望能够更新下校验的keyring，所以就保留了。</p><pre class="language-public-DraftStyleDefault-pre"><code>(use-package gnu-elpa-keyring-update :ensure t :defer t)</code></pre><h3 style="margin-left: 0px;"><strong>iedit</strong></h3><p style="margin-left: 0px;">这个包我一直没怎么用，直到有一天我在重构代码的时候。它可以让你快速的一次性修改buffer中出现的变量名称。（使用的时候要小心）</p><pre class="language-public-DraftStyleDefault-pre"><code>(use-package iedit :ensure t :defer t)</code></pre><h3 style="margin-left: 0px;"><strong>move-dup</strong></h3><p style="margin-left: 0px;">我承认，我需要这个包，完全是因为被VSCode以及JetBrains系列惯坏了。我需要把代码行移上去，或者移下来的。但其实吧，内置的transpose-line也能完成类似的功能，只是我感觉有的时候跟我想的可能有差距。我需要停下来想一下。所以就保留了这个包。</p><pre class="language-public-DraftStyleDefault-pre"><code>(use-package move-dup :ensure t :defer t
+  :hook (after-init . global-move-dup-mode))</code></pre><h3 style="margin-left: 0px;"><strong>which-key</strong></h3><p style="margin-left: 0px;">啊，我一直想如果这个能作为一个内置包就好了。虽然很多的时候我是在使用M-x，但，这个东西可以提示接下来可能用到的快捷键，会让我的安全感爆棚。</p><pre class="language-public-DraftStyleDefault-pre"><code>(use-package which-key :ensure t :defer t
+  :hook (after-init . which-key-mode))</code></pre><p style="margin-left: 0px;">我一共就使用了这7个第三方包，这也是我的配置速度运行快的一个重要的原因。其他的第三方包对我来说没有吸引力主要是因为：</p><p style="margin-left: 0px;">可能拖慢速度（毕竟我过去一年有很多的时间在使用Windows这样的操作系统）</p><p style="margin-left: 0px;">内置包可替代，比如Magit，啊，我已经深深爱上了内置的VC</p><p style="margin-left: 0px;">想不出什么第三方包对我来说是必不可少的了</p><h2 style="margin-left: 0px;"><strong>操作系统相关设置</strong></h2><p style="margin-left: 0px;">如果你有我这样的使用Windows系统的经历，你就不应该错过这个小的篇章。</p><pre class="language-public-DraftStyleDefault-pre"><code>;;Configs for OS
+;; Special configs for MS-Windows
+(when (and cabins--os-win
+       (boundp 'w32-get-true-file-attributes))
+  (setq w32-get-true-file-attributes nil
+    w32-pipe-read-delay 0
+    w32-pipe-buffer-size (* 64 1024)))
+
+;; Special configs for macOS
+(when cabins--os-mac
+  (setq mac-command-modifier 'meta
+    mac-option-modifier 'super
+    ns-use-native-fullscreen t))
+
+;; solve the Chinese paste issue
+;; let Emacs auto-guess the selection coding according to the Windows/system settings
+(unless cabins--os-win
+  (set-selection-coding-system 'utf-8))</code></pre><p style="margin-left: 0px;">主要是设置文件、编码以及按键映射。</p><h2 style="margin-left: 0px;"><strong>编程</strong></h2><p style="margin-left: 0px;">终于到了这个我最喜欢的环节了。职业病，没有办法。得益于Emacs 29对eglot的内置，我们在这里可以减少了一个第三方包的配置，同时减少了很多的配置代码。但在配置eglot之前，我们先启用几个内置包，来增强我们的编程模式。</p><pre class="language-public-DraftStyleDefault-pre"><code>(add-hook 'prog-mode-hook 'column-number-mode) ;在ModeLine显示列号
+(add-hook 'prog-mode-hook 'display-line-numbers-mode) ;显示行号
+(add-hook 'prog-mode-hook 'electric-pair-mode) ;括号的配对
+(add-hook 'prog-mode-hook 'flymake-mode) ;错误的提示
+(add-hook 'prog-mode-hook 'hs-minor-mode) ;代码的折叠
+(add-hook 'prog-mode-hook 'prettify-symbols-mode) ;会将lambda等符号美化为λ</code></pre><p style="margin-left: 0px;">顺便，我们听从flymake的官方建议，给错误跳转绑定两个快捷键（我天天在用）：</p><pre class="language-public-DraftStyleDefault-pre"><code>(global-set-key (kbd "M-n") #'flymake-goto-next-error)
+(global-set-key (kbd "M-p") #'flymake-goto-prev-error)</code></pre><h3 style="margin-left: 0px;"><strong>treesit</strong></h3><p style="margin-left: 0px;">从v29开始，内置了treesit的支持。它是一个解析器生成工具和增量解析库。 它可以为源文件构建一个具体的语法树， 并在源文件被编辑时高效地更新语法树。 这种技术相对于 Emacs 以前基于正则表达式来实现的语法高亮功能， 性能上要快很多， 而且在复杂表达式场景下的语法高亮准确度要高很多。</p><p style="margin-left: 0px;">同时，v29也内置了许多的-ts-mode，比如go-ts-mode，rust-ts-mode，typescripe-ts-mode等等。让我们（配合eglot)就不再需要go-mode，rust-mode等这些第三方包了。实在爽快！</p><pre class="language-public-DraftStyleDefault-pre"><code>(use-package treesit
+  :when (and (fboundp 'treesit-available-p)
+         (treesit-available-p))
+  :config (setq treesit-font-lock-level 4)
+  :init
+  (setq treesit-language-source-alist
+    '((bash       . ("https://github.com/tree-sitter/tree-sitter-bash"))
+      (c          . ("https://github.com/tree-sitter/tree-sitter-c"))
+      (cpp        . ("https://github.com/tree-sitter/tree-sitter-cpp"))
+      (css        . ("https://github.com/tree-sitter/tree-sitter-css"))
+      (cmake      . ("https://github.com/uyha/tree-sitter-cmake"))
+      (csharp     . ("https://github.com/tree-sitter/tree-sitter-c-sharp.git"))
+      (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"))
+      (elisp      . ("https://github.com/Wilfred/tree-sitter-elisp"))
+      (go         . ("https://github.com/tree-sitter/tree-sitter-go"))
+      (gomod      . ("https://github.com/camdencheek/tree-sitter-go-mod.git"))
+      (html       . ("https://github.com/tree-sitter/tree-sitter-html"))
+      (java       . ("https://github.com/tree-sitter/tree-sitter-java.git"))
+      (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript"))
+      (json       . ("https://github.com/tree-sitter/tree-sitter-json"))
+      (lua        . ("https://github.com/Azganoth/tree-sitter-lua"))
+      (make       . ("https://github.com/alemuller/tree-sitter-make"))
+      (markdown   . ("https://github.com/MDeiml/tree-sitter-markdown" nil "tree-sitter-markdown/src"))
+      (ocaml      . ("https://github.com/tree-sitter/tree-sitter-ocaml" nil "ocaml/src"))
+      (org        . ("https://github.com/milisims/tree-sitter-org"))
+      (python     . ("https://github.com/tree-sitter/tree-sitter-python"))
+      (php        . ("https://github.com/tree-sitter/tree-sitter-php"))
+      (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" nil "typescript/src"))
+      (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" nil "tsx/src"))
+      (ruby       . ("https://github.com/tree-sitter/tree-sitter-ruby"))
+      (rust       . ("https://github.com/tree-sitter/tree-sitter-rust"))
+      (sql        . ("https://github.com/m-novikov/tree-sitter-sql"))
+      (vue        . ("https://github.com/merico-dev/tree-sitter-vue"))
+      (yaml       . ("https://github.com/ikatyang/tree-sitter-yaml"))
+      (toml       . ("https://github.com/tree-sitter/tree-sitter-toml"))
+      (zig        . ("https://github.com/GrayJack/tree-sitter-zig"))))
+  (add-to-list 'major-mode-remap-alist '(sh-mode         . bash-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(c-mode          . c-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(c++-mode        . c++-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(c-or-c++-mode   . c-or-c++-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(css-mode        . css-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(js-mode         . js-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(java-mode       . java-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(js-json-mode    . json-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(makefile-mode   . cmake-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(python-mode     . python-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(ruby-mode       . ruby-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(conf-toml-mode  . toml-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\(?:Dockerfile\\(?:\\..*\\)?\\|\\.[Dd]ockerfile\\)\\'" . dockerfile-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
+  (add-to-list 'auto-mode-alist '("/go\\.mod\\'" . go-mod-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.y[a]?ml\\'" . yaml-ts-mode)))</code></pre><p style="margin-left: 0px;">其实treesit-language-source-alist里面不需要配置这么多，但这样显得标准而且很专业的样子，所以我就都保留了。而且说不准，谁会用到比如zig这样的语言。</p><h3 style="margin-left: 0px;"><strong>eglot</strong></h3><p style="margin-left: 0px;">内置了之后，最大的好处就是〔足够少的配置，开箱即用〕，看，代码已经这么少了：</p><pre class="language-public-DraftStyleDefault-pre"><code>(use-package eglot
+  :hook (prog-mode . eglot-ensure)
+  :bind ("C-c e f" . eglot-format))</code></pre><p style="margin-left: 0px;">bind那一行是绑定了一个格式化的快捷键，如果你还记得我前面提到的format-all的话，这个快捷键就不是那么必须了。</p><h2 style="margin-left: 0px;"><strong>可选第三方包</strong></h2><p style="margin-left: 0px;">如果你像我一样有些特殊的需求的话，比如显示protobuf或者quickrun等，你可以在这里配置（也可以在custom.el中配置）。</p><pre class="language-public-DraftStyleDefault-pre"><code>(use-package protobuf-mode :ensure t :defer t)
+(use-package quickrun :ensure t :defer t)
+(use-package restclient :ensure t :defer t
+  :mode (("\\.http\\'" . restclient-mode)))</code></pre><h2 style="margin-left: 0px;"><strong>custom.el</strong></h2><p style="margin-left: 0px;">前面有提到这个自定义的配置，这里的配置会因人/平台而异。所以这个文件不建议添加到git管理中。要想加载这个文件，我们需要在我们的init.el文件中写入这样的加载代码：</p><pre class="language-public-DraftStyleDefault-pre"><code>(setq custom-file (locate-user-emacs-file "custom.el"))
+(when (file-exists-p custom-file)
+  (load custom-file))</code></pre><h2 style="margin-left: 0px;"><strong>结束语</strong></h2><p style="margin-left: 0px;">这就是我全部的配置了。可能随着时间的变化，我会再有一些不一样的想法。如果你想看到我最新的想法，可以star我的配置：https://github.com/cabins/emacs.d</p><p style="margin-left: 0px;">另外，文中提到的一些教程/课程（全都是免费的），可以关注我的B站观看（ID：第253页图灵笔记），或我的掘金频道阅读，后续我也会在少数派继续写更多的文章。</p><p style="margin-left: 0px;">希望你能喜欢。</p><p style="margin-left: 0px;">&nbsp;</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/84758</id>
             <title>游戏《双子Gemini》，不离不弃的陪伴者之歌</title>
             <link>https://sspai.com/post/84758</link>
@@ -414,29 +600,6 @@
                         <hr>
                     
                     <p style="margin-left: 0px; text-align: justify;">当我们在阅读一本书或一篇文章时，首先需要关注的重点是什么呢？</p><p style="margin-left: 0px; text-align: justify;">在莫提默·艾德勒 查尔斯·范多伦合著的《如何阅读一本书》中有提到：“在用分析阅读阅读一本书时，找出共通的词义却是第一个步骤。除非读者与作者能找出共通的词义，否则想要把知识从一方传递到另一方是不可能的事。因为词义是可供沟通的知识的基本要素。”</p><p style="margin-left: 0px; text-align: justify;">我们不妨将文中的词义理解为双方对书中概念的解释。那么上面这段话则可以理解为：阅读是作者与读者之间进行沟通的过程，作者通过书籍或文章向读者分享他的知识、判断和情绪。只有双方对于这些概念拥有相同或相近的解释，才能实现有效的沟通，否则读者就不能明白作者在说些什么。</p><p style="margin-left: 0px; text-align: justify;">所以，明确作者所使用概念要传递的含义，是阅读一本书或文章首先要关注的重点。那我该如何在阅读的过程中有效地理解这些概念呢？</p><figure class="image ss-img-wrapper"><img alt="图片" src="https://cdn.sspai.com/2023/11/24/article/bf0189de7466b4754bd68d1c95b4efbd?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;"><strong>01</strong></p><p style="margin-left: 0px;"><strong>概念的定义</strong></p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><p style="margin-left: 0px; text-align: justify;">概念是人类在认识过程中，从感性认识逐步提升到理性认识的产物。它是通过抽象和概括所感知事物的共同本质特点而形成的，是自我认知意识的一种表达方式，也是思维活动的结果和基本单位。概念通常以词或词组的形式来表达，并具有内涵和外延，即其涵义和适用范围。</p><p style="margin-left: 0px; text-align: justify;">概念的形成是人类认知能力的重要体现。通过对感知到的具体事物进行归纳和总结，我们可以提取出它们的共同特征，进而形成对应的概念。</p><p style="margin-left: 0px; text-align: justify;">例如，通过观察多种不同的鸟类，我们可以抽象出“鸟”的概念，将所有具备鸟类特征的事物归纳为这一概念的内涵。</p><p style="margin-left: 0px; text-align: justify;">概念具有内涵和外延的特性。内涵指的是概念所包含的共同特征和本质属性，它决定了概念的定义和含义。外延则表示适用于概念的范围，即概念所涵盖的具体事物或情境。</p><p style="margin-left: 0px; text-align: justify;">概念在人类思维和沟通中起着重要的作用。它们是思维活动的基本单位，有助于我们对世界的理解和认知。通过共享相同的概念，人们可以进行有效沟通和交流，共同理解和表达特定的意义。</p><p style="margin-left: 0px; text-align: justify;">严格来说，读者很难与作者就某个概念的解析达到完全一致。然而，作为作者，应该以大家易于理解的方式来表达和解析概念，避免知识的混淆和模糊。在选择词汇和语言表达时考虑读者的背景知识和理解能力，尽量使用通俗易懂的词汇和语句结构。</p><p style="margin-left: 0px; text-align: justify;">同时，作为读者，我们也要努力弄清楚书中所涉及的概念。通过仔细阅读、思考和学习，逐渐理解和掌握这些概念的定义和含义。这有助于我们准确地理解和分析所学内容，并避免因为概念的模糊理解而产生误解。</p><p style="margin-left: 0px; text-align: justify;"><strong>02</strong><br />&nbsp;</p><p style="margin-left: 0px; text-align: justify;"><strong>如何找到一本书的核心概念</strong><br />&nbsp;</p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><p style="margin-left: 0px; text-align: justify;">一个作者之所以能够写出一本书，通常是因为他们对某个概念有深刻的理解，并形成了独特的洞见。他们会通过一连串的实例来证明自己的观点，从而让读者更好地理解和接受这个概念。</p><p style="margin-left: 0px; text-align: justify;">一本书的核心概念通常并不会太多，有些书甚至只有几个。这些核心概念在整本书中会被反复提及，不仅出现在书名、目录和章节标题中，还会贯穿于各个章节的内容中，以便更加清晰地传达作者的主旨。</p><p style="margin-left: 0px; text-align: justify;">例如，比如《韧性：不确定时代的精进法则》这本书，书名中的"韧性"一词就是该书的核心概念，我们一眼就能看出来。对于这些核心概念，我们需要特别注意理解和弄清楚。</p><p style="margin-left: 0px; text-align: justify;">同时，我们也要意识到，在阅读过程中，我们需要理解和记忆的概念，并不一定是作者强调的概念，也不一定是书中的核心概念。重要的是那些对我们来说有用、相对陌生或者是新知识的概念。</p><p style="margin-left: 0px; text-align: justify;">我们在阅读时，应该主动留意并记录这些有用的概念，不论它们是否是书中的核心概念。这些概念可能会对我们的学习和理解产生影响。</p><p style="margin-left: 0px; text-align: justify;">例如，在阅读《框架思维》这本书时，我在注释中发现"心理表征"这个词汇，虽然相对作者来说并不是核心概念，但是对我来说是理解框架思维体系的一个重要概念，于是我主动记录下来这个概念，并后续做成了一张“心理表征”的卡片笔记。</p><p style="margin-left: 0px; text-align: justify;">后来，在阅读《刻意练习：如何从新手到大师》这本书时，"心理表征"这个概念再次出现，并且是该书的核心概念。由于之前已经通过制作成卡片笔记，对这个概念有深入的理解和记忆，所以在阅读这部分内容时，我就能够更好地理解和吸收其中的知识内容了。</p><p style="margin-left: 0px; text-align: justify;">所以，我们也需要意识到，找到概念只是阅读的第一步。更重要的是我们要理解和记忆这些概念，并且在后续能够将其应用起来。这样才能达到我们阅读的最终目的。</p><p style="margin-left: 0px; text-align: justify;"><strong>03</strong><br />&nbsp;</p><p style="margin-left: 0px; text-align: justify;"><strong>概念卡的定义</strong><br />&nbsp;</p><p style="margin-left: 0px; text-align: justify;">为了更好地理解、记忆和应用某些重要的概念，我采用的方法是卡片笔记法，即将要掌握的概念制作成一张张概念卡卡片笔记，借助的工具是笔记软件Obsidian。</p><p style="margin-left: 0px; text-align: justify;">概念卡是指在卡片笔记中用来专门记录某个概念的卡片。它的主要目的是对这个概念进行定义和解释。概念卡通常包括以下内容：</p><p style="margin-left: 0px; text-align: justify;"><strong>概念名称</strong>：明确标识该概念的名称。</p><p style="margin-left: 0px; text-align: justify;"><strong>标签：</strong>用于分类和整理，判断该概念是否属于已有的知识体系框架。如果暂时还没有完整的知识体系的概念，暂时使用一个大的或模糊的标签。</p><p style="margin-left: 0px; text-align: justify;"><strong>定义转述：</strong>用自己的话清晰、简明地解析清楚这些概念。</p><p style="margin-left: 0px; text-align: justify;"><strong>关键要素：</strong>列举该概念的关键特征或属性，以便更好地理解该概念的内涵。</p><p style="margin-left: 0px; text-align: justify;"><strong>示例：</strong>提供一个或多个具体的例子来说明该概念的应用和具体情境。（通常会单独设置一张关于这个概念的案例卡）</p><p style="margin-left: 0px; text-align: justify;"><strong>应用场景：</strong>判断这个概念可能应用的场景，与我们已有的知识产生勾连，这样更利于知识的复用。（这里可能与标签的功能有些重复，需要思考如何区分）</p><p style="margin-left: 0px; text-align: justify;"><strong>相关卡片：</strong>其主要记录的是与当前卡片中的知识点、观点和案例相关的其他卡片，更重要的是添加跳转链接。</p><p style="margin-left: 0px; text-align: justify;"><strong>参考资料：</strong>列出相关的参考资料，如书籍、论文、网站等，以便进一步学习和深入研究该概念。</p><p style="margin-left: 0px; text-align: justify;">概念卡的制作是一种有助于更好理解和记忆概念的方法。通过将概念用自己的话术以文字、图表或其他形式记录在概念卡上，我们能够加深对概念的理解，并与其他相关概念进行关联和比较，从而增强记忆和应用能力。</p><p style="margin-left: 0px; text-align: justify;">此外，概念卡也是一种整理和归纳概念的工具。通过不断积累和整理概念卡，我们能够建立起自己的知识库，从而提升学习效果和思维能力。</p><p style="margin-left: 0px; text-align: justify;">更重要的是，使用Obsidian等笔记工具制作概念卡，还具有可视化和组织化的优势。我们可以创建链接、标签和目录等，使概念卡之间形成关联，方便我们在知识网络中快速导航和查找相关内容。这样，我们能够更高效地复习和巩固知识，进一步提升学习效果。</p><figure class="image ss-img-wrapper"><img alt="图片" src="https://cdn.sspai.com/2023/11/24/article/d2603d9319a7e30f5bb6499c29fb28ae?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;"><strong>04</strong></p><p style="margin-left: 0px;"><strong>举个例子</strong><br />&nbsp;</p><figure class="image ss-img-wrapper"><img alt="图片" src="https://cdn.sspai.com/2023/11/24/article/6283a29605c23127191dd6d4a6f5965a?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;"><strong>05</strong></p><p style="margin-left: 0px;"><strong>总的来说</strong></p><p style="margin-left: 0px; text-align: justify;">学习过程中，扎实掌握每个概念就像是在自己的知识地图上钉上一颗钉子。而使用Obsidian笔记软件制作概念卡，并按照有效的模板组织，我们能够更好地理解和应用概念，同时提高学习效果。</p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><p style="margin-left: 0px; text-align: justify;"><strong>如果您对使用卡片笔记进行阅读和写作感兴趣，可以添加我好友。后续，我将分享更多关于阅读和写作的有价值干货。</strong></p><figure class="image ss-img-wrapper"><img alt="图片" src="https://cdn.sspai.com/2023/11/24/article/a7cfc759d52ff6bf199d6f4bfd0f4690?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px; text-align: center;"><strong>- End -</strong></p><p style="margin-left: 0px; text-align: center;"><strong>-</strong>作者：雷墨<strong>-</strong></p><p style="margin-left: 0px; text-align: center;">——<strong>专注于卡片笔记写作</strong>——</p><p style="margin-left: 0px; text-align: center;"><strong>每年阅读100本书，每天整理1张卡片笔</strong></p><p style="margin-left: 0px; text-align: center;"><strong>持续有效地阅读，长期深入地思考</strong></p><p style="margin-left: 0px; text-align: center;"><strong>坚持做一定会赢的事</strong></p><p style="margin-left: 0px; text-align: center;">&nbsp;</p><p style="margin-left: 0px; text-align: center;">&nbsp;</p><p style="margin-left: 0px; text-align: center;"><strong>-【点赞】【分享】是对文章最大的赞赏-</strong></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/84609</id>
-            <title>超越，广角：一枚超广角镜头的故事</title>
-            <link>https://sspai.com/post/84609</link>
-            <guid isPermaLink="false">https://sspai.com/post/84609</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 24 Nov 2023 07:16:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 总有一天, 1635ZA故事, Revue 1.11, 24mm
-<br>
-<br>
-总结: 这篇文章讲述了作者在摄影领域的一段经历。他最初选择了10倍变焦的镜头，但在旅行中发现24mm的视角对于广阔的风景来说太狭隘了。于是他购买了Contax D25镜头，这款镜头以其出色的色彩表现而闻名。作者描述了D25镜头带来的优秀画质和独特的特点。最后，他提到了关于超广角的夏梦，暗示着故事的延续。 </div>
-                        <hr>
-                    
-                    <p style="margin-left: 0px;">我知道「总有一天」，却未曾想是「今天」——</p><p style="margin-left: 0px;">属于1635ZA故事结束了。</p><h2 style="margin-left: 0px;">Revue 1.11 / The End of 24mm</h2><p style="margin-left: 0px;">2016年，最初的一年。</p><p style="margin-left: 0px;">没有购置套机镜头FE28-70的我，义无反顾得选择了10倍变焦的FE24-240。</p><p style="margin-left: 0px;">接着，九寨沟-黄龙之行的旅拍让我举步维艰——24mm的视角面对这般广袤而又壮丽的风光，显得过于狭隘。</p><figure class="image ss-img-wrapper image_resized" style="width: 664px;"><img src="https://cdn.sspai.com/2023/11/24/0651f6c187914e7817700bcd8a5dee44.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>镜头：FE24-240，机位：黄龙</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/b1d738d7c05836350d67786a2b5dbb20.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>镜头：FE24-240，机位：松潘古城</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/ffd2ee47285ea1a8fa685df76faabfa8.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>镜头：FE24-240，机位：九寨沟</figcaption></figure><p style="margin-left: 0px;">在那个多数手机仅有一枚后置镜头的年代，「拍的到」的确远比「拍的好」来得重要。但对那时的我来说，这样的追求似乎过于浅薄。</p><p style="margin-left: 0px;">2个月后，我购置了SAL24ZA、Batis 25的替代品：Contax D25。</p><h2 style="margin-left: 0px;">Revue 2.22 / Contax Distagon 25mm F/2.8 MMJ</h2><p style="margin-left: 0px;">胶片时代，Contax D25 被誉为「色彩之王」。</p><p style="margin-left: 0px;">好评如潮的色彩表现使其随即成为Contax家族里的常青树，在不同时期由不同的工厂生产：有早期德产的AEG、晚期的MMG，也有晚期日产的MMJ。</p><p style="margin-left: 0px;">对蔡司镜头的拥趸来说，每一个时期的Contax D25都有着莫可名状的魅力。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/0e1d28252091b6c96af2fb1c811e1128.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>镜头：D25，机位：光谷</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/8c271bb8ea208536a6e4fdd2b27d521a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>镜头：D25，机位：南湖</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/5221a4dbe4894ba61ebdb77cba8c5404.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>镜头：D25，机位：武汉长江大桥</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/8911e76ee0734785d3d7d6a8e7c7fec0.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>镜头：D25，机位：南湖</figcaption></figure><p style="margin-left: 0px;">优秀的画质带来的不仅仅是惊人的解析力，还有舒适的焦外、Contax独特的星芒。D25仿若超越了肤浅的参数，她所有的一切都是那么耀眼。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/fe6b08277875a9155308f2e7e597b78a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>D25微距效果</figcaption></figure><p style="margin-left: 0px;">如光如影，如梦如幻；春梦无痕，一夕千念。</p><p style="margin-left: 0px;">那一瞬，忽然想起关于超广角的夏梦。</p><p style="margin-left: 0px;">&nbsp;</p><p style="margin-left: 0px;">于是，1635ZA的故事，开始了。</p><h2 style="margin-left: 0px;">Revue 3.33 / Wide angle，Ultra-wide angle</h2><p style="margin-left: 0px;">那是最初一年的雪季。</p><p style="margin-left: 0px;">深刻体会到冬天使用全金属镜头窘迫的我，面对司空见惯的景色，依然热忱。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/49004b88959f7d1a17a9c50b6ebaaccf.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：柳湖公园</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/aec27bd3f5509355b3e6fd17a297b737.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：崆峒山</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/02b280dcc054713719632b31cfb0e692.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：柳湖公园</figcaption></figure><p style="margin-left: 0px;">19年关西之旅前，我购置了佳能22饼并搭配了小巧M100。现在来看，我购买35mm镜头纯属巧合，不过早年移动互联网上对35mm的追捧确乎影响了我。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/6081b566e8f284197bdffb4d036a2bfb.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>35mm端微距效果</figcaption></figure><p style="margin-left: 0px;">我对1635ZA的35mm端画质不曾满意，正因如此，限制了这支镜头的价值：你可以看到我用16mm端拍了不少风光照，但你却很难找到我使用35mm端去拍摄的照片。</p><p style="margin-left: 0px;">在我手中，她更像是一枚附带了变焦功能的16mm定焦镜头。</p><p style="margin-left: 0px;">&nbsp;</p><p style="margin-left: 0px;">那么，16mm究竟意味着什么——</p><p style="margin-left: 0px;">是妄想囊括视界的贪婪，是企图颠覆现状的勇气？</p><p style="margin-left: 0px;">都不是。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/aaf1cebf7bf451b0dc30e3779400ebf2.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：竹洞天</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/d32fdfe1fed28cfd35ddb58e2dc3c666.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：德国监狱博物馆</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/c857fd51e908a0305a7e24cb9be972dd.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：解放桥</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/2501dc0cc14e9eb0f00771aa5bda9fdc.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：兜率天宫</figcaption></figure><p style="margin-left: 0px;">在我眼中，遇见她的那个冬天，16mm就是全新的故事。</p><p style="margin-left: 0px;">她超脱了什么，又涵盖了什么，这样单纯的答案莫过于管窥蠡测。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/ee71437477ba6fc3c4e162ff12c89e68.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：六盘山</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/38dc849dd22ad8c4e96eea86fdefd2f8.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：梅田蓝天大厦</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/2b70d4448b107bdcd19c0dfdcb862095.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：梅田蓝天大厦</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/b2ec8d888d24a1be8f88e6a502cfba66.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：六甲山</figcaption></figure><p style="margin-left: 0px;">当你不再沉湎于回忆，当你渴望突破当下的桎梏，当你确信你将会向着彻底与过往诀别的道路前行时，每时每刻、每分每秒，新的故事终将开启。</p><h2 style="margin-left: 0px;">Revue 4.44 / Summary &amp; The Next</h2><p style="margin-left: 0px;">她曾说：「若想仅凭一支镜头走遍天涯海角，那1635/2.8将是你绕不过的坎儿。」</p><p style="margin-left: 0px;">没错，我确乎需要一支35mm镜头，但它不能局限于35mm。</p><p style="margin-left: 0px;">基于这样的想法，我放弃了置换Sigma1628/2.8的念头，即使它拥有和1635ZA一样的72mm滤镜口径。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/9dbeb94c5c672cc6d2d6889129dadc68.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：德国监狱博物馆</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/92457df6eee8fd19432e4ead2b925306.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：扎尕那</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/1d972ec149f9162e081b4e1367cc5dc8.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>机位：扎尕那</figcaption></figure><p style="margin-left: 0px;">又是一年，又是雪季。我匆匆忙忙用着不熟悉的焦段拍摄着什么，并无过多期待，但当我重新审视1635ZA画质时，这般白圭之玷，倒显得之前的我有些刻薄。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/0340a877d206df333bb491e69efadee9.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/89f1c424898449b3d3976a71c45b0a76.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/baf226319188da58e83fc32fbb0d879a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">16mm真的是过去、现在、未来的起点吗？</p><p style="margin-left: 0px;">至少，当下，超越广角的故事对我而言，已经很遥远了。</p><p style="margin-left: 0px;">&nbsp;</p><p style="margin-left: 0px;">相同的一年，但是盛夏。空寂落寞的街巷里，杂糅着些许蝉鸣声。行走着，探索着，在最后的夏梦中，2040/2.8陪伴我去拓展更多更深的记忆。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/5bb89ca3138ee94599a5754e96b2d00d.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/e4721b2a8c07560cfd045ee9d14e8ea6.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/a9cf2f8c14182b4ca540387abe9e748e.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">杳霭流玉，温澜潮生。等待着，夏末航迹云的消散，不再留恋，不再幻想，这个回答或许错误，也可能从未有唯一的答案。不过，我确乎迈出了下一步。</p><p style="margin-left: 0px;">&nbsp;</p><p style="margin-left: 0px;">存在主义认为，在无意义的宇宙中人的存在本无意义。并不是说我们的生活不必精彩，随着一次次新的故事展开，我们改变了什么，又被什么所改变，是否获得了意义、是否拥有了意义、又是否充满了意义？</p><p style="margin-left: 0px;">星霜荏苒，当新的故事与你再次启程时，恰好有这么一枚镜头，她陪伴着你度过了日日夜夜，风风雨雨，让你专注，让你痴迷，让你难忘。直到有一天，你环顾四周，才发觉生活里到处都她的影子。</p><p style="margin-left: 0px;">她的故事尚未完结，关于你的新故事也才刚刚开始。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/11/24/3202e2c69755539d0fa6de787e0a536b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">&nbsp;</p>
                 ]]>
             </content:encoded>
         </item>
