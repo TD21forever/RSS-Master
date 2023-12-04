@@ -5,6 +5,29 @@
         <link>https://www.infoq.cn/topic/AI</link>
         
         <item>
+            <id>https://www.infoq.cn/article/dbe17f152b9a3cc0220864411</id>
+            <title>大模型技术的发展与实践 主赛道：技术人的 2023 总结</title>
+            <link>https://www.infoq.cn/article/dbe17f152b9a3cc0220864411</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/dbe17f152b9a3cc0220864411</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 03 Dec 2023 12:52:37 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 大模型, 语言模型, 自然语言处理, 参数
+<br>
+<br>
+总结: 大模型是一种深度学习模型，特别是在自然语言处理领域，它包含数干亿参数，并通过学习大量文本数据来理解和生成自然语言。语言模型的发展经历了统计语言模型、神经网络语言模型、预训练语言模型和大语言模型四个阶段。大模型技术的出现，如chatGPT，取得了在对话、摘要、内容生成等领域超越人类专家的成果，让人们对通用人工智能时代的到来充满期待。 </div>
+                        <hr>
+                    
+                    <p></p><h2>一、大模型的概念</h2><p></p><p>大型语言模型，也称大语言模型、大模型（Large Language Model，LLM；Large Language Models，LLMs) 。</p><p></p><p>大语言模型是一种深度学习模型，特别是属于自然语言处理（NLP）的领域，一般是指包含数干亿（或更多）参数的语言模型，这些参数是在大量文本数据上训练的，例如模型GPT-3，PaLM，LLaMA等，大语言模型的目的是理解和生成自然语言，通过学习大量的文本数据来预测下一个词或生成与给定文本相关的内容。</p><p></p><p></p><blockquote>参数可以被理解为模型学习任务所需要记住的信息，参数的数量通常与模型的复杂性和学习能力直接相关，更多的参数意味着模型可能具有更强的学习能力。</blockquote><p></p><p></p><h3>1、语言模型的发展史</h3><p></p><p>语言是人类表达和交流的一种突出能力，我们在幼儿开始就学会了沟通表达，并且伴随我们一生。在很长一段时间机器无法掌握以人类的方式进行交流、创作的能力。实现让机器能够像人类一样阅读、书写和交流的能力，一直是学术界一个长期的研究课题，充满挑战。直到以chatGPT为标志性事件的大模型技术的出现，这一愿望才变得可能。大模型是语言模型发展的高级阶段，本节我们来梳理一下语言模型（Language Models，LM）的四个发展阶段，让读者可以更好地了解大模型是怎么进化出来的。</p><p></p><p>具体分成了统计语言模型、神经网络语言模型、预训练语言模型、大语言模型。</p><p></p><p>从技术上讲，语言模型是提高机器的语言智能的主要方法之一。一般来说，LM旨在对单词序列的生成概率进行建模，从而预测后面（或中间空缺的）单词的概率。LM的研究在学术界和产业界都受到了广泛的关注。</p><p></p><p>例如，最近网络上非常热火的ChatGPT技术，也是大模型的一种应用。OpenAI 的 GPT (Generative Pre-trained Transformer) 系列是大语言模型的典型代表，作为目前为止，公认最强的 GPT-4 架构，它已经被训练在数十亿的单词上。从实际应用表现来看，大语言模型具备回答各种问题、编写文章、编程、翻译等能力，如果深究其原理，LLM建立在Transformers架构之上，并在很大程度上扩展了模型的大小、预训练数据和总计算量。</p><p></p><p><img src="https://static001.geekbang.org/infoq/bd/bdb92cdfa690b7f6a7a84627f4a44cec.png" /></p><p></p><p>可以这么通俗的理解：如果一个模型"足够大"，那它就可以称为大模型。</p><p></p><h3>2、OpenAI大模型发展历程</h3><p></p><p>关于OpenAI网上的介绍非常多了，大家应该也比较熟悉了，我这里不过多说明，这一小节重点讲一下GPT系列的发展历程。GPT系列大体经历了如下6个发展阶段（下图上一行），最新的版本是GPT-4，目前一直在迭代优化中。下图第二行是基于GPT-3.5的一系列迭代版本（大家如果购买过openAI的大模型账号并进行过相关开发，应该是知道这些名字的），这个版本被大家熟知是2022年11月30日发布的chatGPT，目前chatGPT一直在优化中，GPT-4中的能力也逐步融入到了chatGPT中，chatGPT是一个不断进化的系统。</p><p></p><p><img src="https://static001.geekbang.org/infoq/84/8463475505b41ae119fc9f93710cad0c.png" /></p><p></p><p>除了OpenAI外，国内外还有非常多的公司参与大模型赛道（国内的报道可以参考晚点发布的「大模型创业潮：狂飙 180 天」，见参考文献15，不过大模型发展太快了，一天一个样，可能等读者看到时，又有新的创业公司加入大模型挑战赛了，或者有更先进、更厉害的模型出现了），下面图2是截止到2023年6月底国内外重要的大模型的发展脉络。</p><p></p><p><img src="https://static001.geekbang.org/infoq/fa/fa1057f4763e1cfdfb2b9d6c7d2c0597.png" /></p><p></p><h3>3、预训练技术</h3><p></p><p>其中k是上下文窗口的大小，条件概率P使用参数为θ的神经网络建模。这些参数使用随机梯度下降法进行训练。一般用多层Transformer解码器（见参考文献20）作为语言模型（即P），它是Transformer的变体。</p><p></p><p><img src="https://static001.geekbang.org/infoq/a8/a817f3f82f4c7766d02f67f1b5b5905b.png" /></p><p></p><h3>3.1指令微调</h3><p></p><p>指令微调通常更有效，因为只有中等数量的样本用于训练。由于指令微调是一个有监督的训练过程，其优化在几个方面与预训练不同，例如训练目标（比如序列到序列的loss）和优化配置参数（比如较小的批大小和学习率）。</p><p></p><p><img src="https://static001.geekbang.org/infoq/66/66849b4281399981276141cfae3bf88c.png" /></p><p></p><h3>3.2对齐微调</h3><p></p><p>研究表明，人类对齐能在一定程度上损害了LLM的一般能力（即为了实现人类对齐，让LLM在其它任务上的表现变差），相关文献称之为对齐税（alignment tax）。</p><p></p><p><img src="https://static001.geekbang.org/infoq/e2/e2a5d079b6489e3a8ec9aadc47d2a9cb.png" /></p><p></p><h2>二、ChatGPT的出现</h2><p></p><p>自2022年11月30日OpenAI发布chatGPT以来，大模型技术掀起了新一轮人工智能浪潮。chatGPT在各个领域（包括对话、摘要、内容生成、问题解答、识图、数学计算与推理、代码编写等）取得了比之前算法好得多的成绩，很多方面都超越了人类专家的水平，特别是对话交流具备了一定的共情能力，这让AI领域的工作者和普通大众相信AGI（Artificial General Intelligence，通用人工智能）时代马上就要来临了。</p><p></p><p>GPT，全称"Generative Pre-training Transformer"，是一个由OpenAI开发的自然语言处理（NLP）的模型。它的主要目标是理解和生成人类的自然语言。通过对大规模文本数据进行预训练，GPT模型能学习到语言的各种模式，如语法、句法、一词多义等，以及一些基础的世界知识。</p><p></p><p>总的来说，它通过预训练和生成技术，以及Transformer的自注意力机制，来理解和生成人类的自然语言。</p><p></p><p><img src="https://static001.geekbang.org/infoq/18/18576e286d9bb15a36cc451f74045894.png" /></p><p></p><p>GPT-3是一个特别的大模型，因为它有1750亿个参数。这些参数使得GPT-3在处理语言任务时表现出强大的能力，例如：理解和生成自然语言文本、进行有深度和上下文的对话等。所以，可以说GPT-3是大模型的一个具体应用，显示了大模型的强大能力和可能性。</p><p></p><h2>三、大模型的应用场景</h2><p></p><p>大模型被专家、学者一致认为可能是第四次AI革命的“导火索”，极有可能推动AGI时代的到来。</p><p></p><p>既然大家都这么看好大模型技术，那么大模型的价值体现在什么地方呢？我们可以从大模型能够解决什么问题的角度出发，梳理大模型对个人生活、对企业运营、对社会发展可能带来的影响和革新，因此本节我们重点讲解个5大模型具有颠覆性的应用场景。</p><p></p><h3>1、内容生成</h3><p></p><p>我们这里的内容生成是广义的，包括文本、图片、视频、音频、代码等，以及对文本内容进行总结、从图片或者视频中提取信息等都属于此范畴。内容生成应该是大模型最直接的应用场景，我们从下面5个场景展开说明。</p><p></p><p>文本生成在这个领域，影响最大的是文字工作者，比如自媒体、编辑、文秘、作家等。目前大模型生成的内容还不能直接拿来用，需要人工进行审核、调整，修改不当的地方。大模型是文字工作者最好的帮手，可以给创作者提供思路，创作原型，因此可以极大地提升创作效率。内容摘要内容摘要的应用场景还是挺多的。对于文本进行摘要可以帮忙读者更快了解文章的主题，从而决定值不值得全部看一遍。另外，对于科研工作者，利用摘要的能力，可以极大提高文献阅读效率。图片生成目前大模型可以基于一段文字描述生成图片，还可以生成相似图片，以及对图片进行风格迁移。这里面比较有名的是midjourney（公司）、stable diffusion（开源项目）等。下面图就是之前走红网络的、midjourney生成的中国情侣的照片（图片来源于midjourney的大模型生成程序），大家可以看到图片细节是非常逼真的。</p><p></p><p><img src="https://static001.geekbang.org/infoq/62/62456c1ecc05aa9c7889933a8d743c0a.webp" /></p><p></p><p>大模型生成图片的应用价值非常大，比如文章配图、文内关键段落配图、电影电视剧海报图、广告宣传图、电商的物料图等。大模型对以绘画为职业的人冲击非常大，像游戏公司之前有很多插画师，现在基本都可以用大模型来替代了，之前国内就报道过有家游戏公司裁掉了大量的游戏插画师。</p><p></p><p>视频生成大模型的视频生成能力，可以基于一段文本描述生成逼真的视频，目前生成的视频的时长和清晰度还待优化。</p><p></p><p>视频生成领域的应用价值，相信读者可以感知到，比如创意、宣传、教学、影视、游戏等领域都可以从视频自动生成中获得极大的生产力。</p><p></p><p>代码生成大模型基于代码数据训练后，具备了代码纠错、找bug、自动写代码的能力。这对于程序员的生产力提升是不言而喻的，GitHub网站上30%新代码是在AI编程工具Copilot（大模型）帮助下完成的。未来随着大模型代码能力的增强，对初中级程序员是致命打击，很多编程工作可能都被机器替代了。但是资深程序员、架构师不会受影响。</p><p></p><p></p><blockquote>ChatGPT是一种特定的GPT应用，GPT是一种大模型，而大模型是一类具有大量参数的深度学习模型。</blockquote><p></p><p></p><h3>2、模型演示</h3><p></p><p>Prompt：您好，请帮我解释一下什么是人工智能？</p><p></p><p><img src="https://static001.geekbang.org/infoq/e4/e4b35289a7756e6b89eb4be3709ecb9d.png" /></p><p></p><h2>四、为什么需要学习使用开源大模型</h2><p></p><p>首先，目前GPT大模型的使用受到国内外的双重限制，这对于用户的操作空间产生了较大影响。此外，保证数据安全性对于企业来说至关重要，使用GPT大模型可能会存在数据泄露等安全隐患，这无疑增加了使用风险。</p><p></p><p>其次，在经济层面，使用GPT大模型通常是按量计费的，如果需要大规模使用，就需要支付相对较高的费用。这对于需要控制成本的企业来说，无疑增加了其运营压力。</p><p></p><p>再次，GPT大模型虽然可以进行微调，但是无法从训练语料层面进行定制化训练。这可能会导致中文对话显得稍显生硬，不够自然，无法满足一些特定需求。</p><p></p><p>因此，学习并使用开源大模型具有很大的必要性。它们不仅可以帮助我们避免上述问题，还可以根据我们的具体需求进行定制化训练，从而更好地满足我们的需求。</p><p></p><h2>五、总结与体会</h2><p></p><p>我们对大模型相关的发展历史、openAI技术的发展脉络、当前国内外主流的大语言模型进行了简单的介绍，同时针对大模型区别于之前模型的核心技术原理进行了简单讲解，本章提到的预训练、指令微调、对齐微调、上下文学习、思维链提示、规划等核心技术读者需要了解。相信通过本章的讲解，读者大致了解了大模型相关的知识。</p><p></p><p>在最后一节从内容生成、问题解答、互动式对话、生产力工具/企业服务、搜索推荐等5个维度介绍了大模型能够赋能的领域和应用场景。未来大模型一定会革新所有的行业和场景的。读者需要对大模型相关的技术及行业、场景应用保持敏感，在工作中要将大模型相关的技术用起来。</p><p></p><p>未来的生活和发展已经离不开大模型，这将会带来更大的科技发展和改变，我们需要掌握并熟练使用大模型的工具，让我们的工作和生活变得更加高效和充实。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.infoq.cn/article/pov3o4pJUJDqKZ66Mxip</id>
             <title>黄仁勋：OpenAI首台AI超算是马斯克买的；字节跳动游戏大撤退内情曝光；互联网大厂月薪2万抢AI数据标注员 | AI一周资讯</title>
             <link>https://www.infoq.cn/article/pov3o4pJUJDqKZ66Mxip</link>
@@ -1019,29 +1042,6 @@ latency: 1041.122000001371 ms.</code></p><p></p><p>其中有一个指标是 late
                         <hr>
                     
                     <p>百度智能云<a href="https://www.infoq.cn/article/o8abj2wff5yLfGWuB0E1?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">千帆大模型</a>"平台官方出品的《大模型应用实践》实训营本周正式进入第三周最终阶段！在首周学习了百度智能云千帆大模型平台，第二周深入了解了一些大模型核心能力之后，本周我们将正式进入行业实战，带大家完整地搭建出行业场景中的 AI 原生应用。</p><p></p><h4>&nbsp;行业大模型应用浪潮</h4><p></p><p></p><p>随着科技的飞速发展，人工智能和大数据技术的融合应用已经成为各行业的核心竞争力。行业大模型，具备强大的计算和处理能力，能够应对复杂的业务场景。无论是在金融、医疗、教育、法律，还是在制造、零售、物流等领域，行业大模型都能够通过深度学习和大数据分析，挖掘出数据背后的价值，为行业的智能化升级提供有力支撑。</p><p></p><p><a href="https://www.infoq.cn/article/lq2fJ7gm9iyuOLkaLdqv?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">ChatLaw</a>" 作为法律科技领域的佼佼者，利用自然语言处理技术为法律行业带来了革命性的变革。在本周的课程中，ChatLaw 大模型将展现其在法律文档智能分析、合同审查以及法律咨询等方面的卓越能力。通过 ChatLaw 大模型的应用构建，学员们将深入了解如何将先进的人工智能技术应用于法律领域，提升法律服务的效率和准确性。</p><p></p><p><a href="https://www.infoq.cn/article/0qEivqb1dXP9Wuqmhu9B?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">度小满轩辕大模型</a>"在金融领域的应用也引起了广泛关注。度小满轩辕大模型凭借强大的大数据分析和机器学习能力，为金融行业带来了信贷风险评估、投资组合优化和金融市场预测等前沿应用。学员们将通过度小满的具体金融行业应用案例，深刻感受大模型在金融领域的巨大潜力。</p><p></p><h4>&nbsp;百度智能云千帆 SDK 构建持续成长的 AI 原生应用</h4><p></p><p></p><p>除了 ChatLaw 和度小满轩辕大模型的行业大模型，课程还特别推出了百度智能云千帆 SDK 的应用指南。千帆 SDK 以其丰富的功能和易用性受到了广泛关注。课程通过详细讲解 SDK 的使用方式及技巧与实践案例，学员们可以轻松掌握其应用方法，为行业应用创新提供有力支持。</p><p></p><p>扫描下图二维码，即刻加入大模型实训营活动群，报名参加第三周课程！您也可以在群中随时观看往期课程精彩回放。</p><p></p><p><img src="https://static001.geekbang.org/infoq/2f/2f67472b5c7ebcb5e0f090290e1475a0.jpeg" /></p><p></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/IMw3hYiqR4GOwk7d5I7S</id>
-            <title>蚂蚁集团研发效能技术负责人陈红伟，确认担任 QCon 智能研发时代效能提升之路专题出品人</title>
-            <link>https://www.infoq.cn/article/IMw3hYiqR4GOwk7d5I7S</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/IMw3hYiqR4GOwk7d5I7S</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 27 Nov 2023 03:30:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: QCon 全球软件开发大会, 陈红伟, 智能研发时代效能提升之路, 大模型垂直领域 Code-LLM
-<br>
-<br>
-总结: QCon 全球软件开发大会将在上海举行，蚂蚁集团研发效能技术负责人陈红伟将担任「智能研发时代效能提升之路」的专题出品人。在此次专题中，将介绍大模型垂直领域 Code-LLM如何结合研发全流程，渗透设计、需求、编码、测试、部署、运维等关键阶段，彻底迈入智能研发时代。 </div>
-                        <hr>
-                    
-                    <p><a href="https://qcon.infoq.cn/2023/shanghai/?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=8&amp;utm_term=1127&amp;utm_content=chenhongwei">QCon 全球软件开发大会</a>"，将于 12 月在上海召开。蚂蚁集团研发效能技术负责人陈红伟将担任「<a href="https://qcon.infoq.cn/2023/shanghai/track/1614?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=8&amp;utm_term=1127&amp;utm_content=chenhongwei">智能研发时代效能提升之路</a>"」的专题出品人。在此次专题中，你将了解到，大模型垂直领域 Code-LLM 如何结合研发全流程，渗透设计、需求、编码、测试、部署、运维等关键阶段，彻底迈入智能研发时代。</p><p></p><p><a href="https://qcon.infoq.cn/2023/shanghai/track/1614?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=8&amp;utm_term=1127&amp;utm_content=chenhongwei">陈红伟</a>"，2007 年加入蚂蚁，现任蚂蚁研发效能技术负责人。专注于支付金融系统架构、技术风险、云原生、云研发、持续交付等领域，通过技术创新引领研发效能的持续架构演进，坚持研发智能化，打造了百灵代码大模型、百灵研发助手，不断提升蚂蚁研发效能成熟度。</p><p></p><p>相信陈红伟的到来，可以帮助提升此专题的质量，让你学习到代码领域大模型研究和开发的最新进展，在研发领域的创新应用形式，以及 AI 及大语言模型对研发效能的影响。</p><p></p><p>除上述专题外，QCon 上海还将围绕&nbsp;<a href="https://qcon.infoq.cn/2023/shanghai/track/1598?utm_source=infoqweb&amp;utm_medium=teacherart">智能化信创软件&nbsp;IDE</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1595?utm_source=infoqweb&amp;utm_medium=teacherart">GenAI和通用大模型应用探索</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1597?utm_source=infoqweb&amp;utm_medium=teacherart">LLM&nbsp;时代的性能优化</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1599?utm_source=infoqweb&amp;utm_medium=teacherart">LLM&nbsp;时代的大前端技术</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1602?utm_source=infoqweb&amp;utm_medium=teacherart">面向人工智能时代的架构</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1604?utm_source=infoqweb&amp;utm_medium=teacherart">性能工程：提升效率和创新的新方法</a>"等专题进行交流。</p><p></p><p>QCon 上海 2023，相约 12 月！现在购票，享 8 折优惠，立减￥1360！咨询购票请联系：18514549229（微信同手机号）。</p><p></p><p><img src="https://static001.geekbang.org/infoq/01/0113b3dfb187d5f9988b7eb16d2e0594.png" /></p><p></p>
                 ]]>
             </content:encoded>
         </item>
