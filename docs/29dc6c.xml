@@ -5,6 +5,80 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1731601609933865214#m</id>
+            <title>MoMask：根据文字描述来生成3D动画人物动作。
+
+它不仅能生成常见的动作（如走路、跑步），还能根据更具体的描述生成复杂的动作（如特定类型的舞蹈动作）。
+
+它的工作方式有点像是把人类的动作分解成一系列小块，每个小块代表一个特定的动作。
+
+然后，根据文字描述，它会选择合适的动作小块，组合起来。
+
+就像搭积木一样，最终形成一个完整的、流畅的动作序列。
+
+此外，它还能够根据需要“填补”动作序列中的空白部分，比如如果一个动作序列中间缺少一部分，MoMask能够智能地补全这部分，使整个动作看起来自然流畅。
+
+工作原理可以分为几个关键步骤：
+
+1、分层量化表示：首先，MoMask使用一种称为“分层量化”的技术来表示人类的动作。这意味着它把复杂的人类动作分解成多个层次的“动作标记”。每个标记都是动作的一个小部分，就像是用来描述动作的“字母”一样。
+
+2、向量量化：在基础层，MoMask通过一种叫做“向量量化”的过程获取一系列运动标记。这个过程类似于把连续的动作数据转换成一系列离散的标记，这些标记能够更精确地捕捉动作的细节。
+
+3、残差标记：在随后的层级中，MoMask生成所谓的“残差标记”，这些标记代表了从基础层动作标记中提取的更高阶的动作信息。
+
+4、双向变换器：MoMask使用两个不同的双向变换器来处理这些标记。第一个变换器（掩码变换器）用于预测在训练阶段根据文本输入随机掩盖的运动标记。在生成（即推理）阶段，从一个空序列开始，掩码变换器逐步填充缺失的标记。第二个变换器（残差变换器）学习基于当前层的结果来逐步预测下一层的标记。
+
+5、文本驱动的生成：在实际应用中，MoMask能够根据给定的文字描述生成相应的3D人类动作。例如，如果描述是“一个人在跳舞”，MoMask会生成一个符合这一描述的动作序列。
+
+6、除了直接根据文本生成动作，MoMask还可以用于其他相关任务，如“时间内插”，即在现有动作片段中填补特定区域，使其符合文本描述。
+
+项目及演示：https://ericguo5513.github.io/momask/
+论文：https://arxiv.org/abs/2312.00063
+GitHub：https://github.com/EricGuo5513/momask-codes</title>
+            <link>https://nitter.cz/xiaohuggg/status/1731601609933865214#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1731601609933865214#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 04 Dec 2023 09:09:30 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>MoMask：根据文字描述来生成3D动画人物动作。<br />
+<br />
+它不仅能生成常见的动作（如走路、跑步），还能根据更具体的描述生成复杂的动作（如特定类型的舞蹈动作）。<br />
+<br />
+它的工作方式有点像是把人类的动作分解成一系列小块，每个小块代表一个特定的动作。<br />
+<br />
+然后，根据文字描述，它会选择合适的动作小块，组合起来。<br />
+<br />
+就像搭积木一样，最终形成一个完整的、流畅的动作序列。<br />
+<br />
+此外，它还能够根据需要“填补”动作序列中的空白部分，比如如果一个动作序列中间缺少一部分，MoMask能够智能地补全这部分，使整个动作看起来自然流畅。<br />
+<br />
+工作原理可以分为几个关键步骤：<br />
+<br />
+1、分层量化表示：首先，MoMask使用一种称为“分层量化”的技术来表示人类的动作。这意味着它把复杂的人类动作分解成多个层次的“动作标记”。每个标记都是动作的一个小部分，就像是用来描述动作的“字母”一样。<br />
+<br />
+2、向量量化：在基础层，MoMask通过一种叫做“向量量化”的过程获取一系列运动标记。这个过程类似于把连续的动作数据转换成一系列离散的标记，这些标记能够更精确地捕捉动作的细节。<br />
+<br />
+3、残差标记：在随后的层级中，MoMask生成所谓的“残差标记”，这些标记代表了从基础层动作标记中提取的更高阶的动作信息。<br />
+<br />
+4、双向变换器：MoMask使用两个不同的双向变换器来处理这些标记。第一个变换器（掩码变换器）用于预测在训练阶段根据文本输入随机掩盖的运动标记。在生成（即推理）阶段，从一个空序列开始，掩码变换器逐步填充缺失的标记。第二个变换器（残差变换器）学习基于当前层的结果来逐步预测下一层的标记。<br />
+<br />
+5、文本驱动的生成：在实际应用中，MoMask能够根据给定的文字描述生成相应的3D人类动作。例如，如果描述是“一个人在跳舞”，MoMask会生成一个符合这一描述的动作序列。<br />
+<br />
+6、除了直接根据文本生成动作，MoMask还可以用于其他相关任务，如“时间内插”，即在现有动作片段中填补特定区域，使其符合文本描述。<br />
+<br />
+项目及演示：<a href="https://ericguo5513.github.io/momask/">ericguo5513.github.io/momask…</a><br />
+论文：<a href="https://arxiv.org/abs/2312.00063">arxiv.org/abs/2312.00063</a><br />
+GitHub：<a href="https://github.com/EricGuo5513/momask-codes">github.com/EricGuo5513/momas…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzE1OTk1Njc2ODUzOTg1MjgvcHUvaW1nL3JwRTJubFp6blBtM3hFQjUuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1731576291898638617#m</id>
             <title>这个早就有了
 不就是那什么吗
@@ -783,28 +857,6 @@ Voxon的显示器不仅能展示预渲染的3D图像，还能实时响应输入�
 教程及下载：<a href="https://civitai.com/articles/3194">civitai.com/articles/3194</a></p>
 <p><a href="https://nitter.cz/xiaohuggg/status/1730863044518195218#m">nitter.cz/xiaohuggg/status/1730863044518195218#m</a></p>
 <img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczMTE1ODYwMDg4MDQxODgxNy9qQnhWTmkzVD9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1731248386601631909#m</id>
-            <title>单管道推力矢量无人机
-
-可以向各个方向飞行</title>
-            <link>https://nitter.cz/xiaohuggg/status/1731248386601631909#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1731248386601631909#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 03 Dec 2023 09:45:55 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>单管道推力矢量无人机<br />
-<br />
-可以向各个方向飞行</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzEwNjUyMzA0MTgxMTY2MDgvcHUvaW1nL3ZQZFFyeWhIMHk1aWZrN3MuanBn" />
                 ]]>
             </content:encoded>
         </item>
