@@ -5,6 +5,138 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1732026172509421697#m</id>
+            <title>VividTalk：单张照片+一段音频即可让照片说话
+
+你只需要提供一张人物的静态照片和一段语音录音，VividTalk就能将它们结合起来，制作出一个看起来像是实际说话的人物的视频。
+
+而且面部表情和头部动作都很自然，口型可以同步、支持多种语言，不同风格，如真实风格、卡通风格等。
+
+该项目由由南京大学、阿里巴巴、字节跳动和南开大学共同开发。
+
+和前几天我发的微软的这个项目几乎一样：https://twitter.com/xiaohuggg/status/1730547607716643080
+
+VividTalk通过先进的音频到3D网格映射技术和网格到视频的转换技术，实现了高质量、逼真的音频驱动的说话头像视频生成。
+
+其工作原理的详细说明：
+
+1、音频到网格的映射（第一阶段）：
+
+在这一阶段，VividTalk首先将输入的音频映射到3D网格上。这涉及学习两种类型的运动：非刚性表情运动和刚性头部运动。
+
+对于表情运动，技术使用混合形状（blendshape）和顶点作为中间表示，以最大化模型的表示能力。混合形状提供了全局的粗略运动，而顶点偏移则描述了更细致的嘴唇运动。
+
+对于自然的头部运动，VividTalk提出了一个新颖的可学习的头部姿势代码本，采用了两阶段训练机制。
+
+2、网格到视频的转换（第二阶段）：
+
+在第二阶段，VividTalk使用双分支运动-VAE（变分自编码器）和生成器将学习到的网格转换为密集的运动，并基于这些运动逐帧合成高质量的视频。
+
+这一过程涉及将3D网格的运动转换为2D密集运动，然后输入到生成器中，以合成最终的视频帧。
+
+3、高视觉质量和真实感：
+
+VividTalk生成的视频具有高视觉质量，包括逼真的面部表情、多样的头部姿势，并且在嘴唇同步方面有显著提升。
+
+通过这种方法，VividTalk能够生成与输入音频高度同步的逼真说话头像视频，提高了视频的真实感和动态性。
+
+项目及演示：https://humanaigc.github.io/vivid-talk/
+论文：https://arxiv.org/pdf/2312.01841.pdf
+GitHub：https://github.com/HumanAIGC/VividTalk</title>
+            <link>https://nitter.cz/xiaohuggg/status/1732026172509421697#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1732026172509421697#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 05 Dec 2023 13:16:33 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>VividTalk：单张照片+一段音频即可让照片说话<br />
+<br />
+你只需要提供一张人物的静态照片和一段语音录音，VividTalk就能将它们结合起来，制作出一个看起来像是实际说话的人物的视频。<br />
+<br />
+而且面部表情和头部动作都很自然，口型可以同步、支持多种语言，不同风格，如真实风格、卡通风格等。<br />
+<br />
+该项目由由南京大学、阿里巴巴、字节跳动和南开大学共同开发。<br />
+<br />
+和前几天我发的微软的这个项目几乎一样：<a href="https://nitter.cz/xiaohuggg/status/1730547607716643080">nitter.cz/xiaohuggg/status…</a><br />
+<br />
+VividTalk通过先进的音频到3D网格映射技术和网格到视频的转换技术，实现了高质量、逼真的音频驱动的说话头像视频生成。<br />
+<br />
+其工作原理的详细说明：<br />
+<br />
+1、音频到网格的映射（第一阶段）：<br />
+<br />
+在这一阶段，VividTalk首先将输入的音频映射到3D网格上。这涉及学习两种类型的运动：非刚性表情运动和刚性头部运动。<br />
+<br />
+对于表情运动，技术使用混合形状（blendshape）和顶点作为中间表示，以最大化模型的表示能力。混合形状提供了全局的粗略运动，而顶点偏移则描述了更细致的嘴唇运动。<br />
+<br />
+对于自然的头部运动，VividTalk提出了一个新颖的可学习的头部姿势代码本，采用了两阶段训练机制。<br />
+<br />
+2、网格到视频的转换（第二阶段）：<br />
+<br />
+在第二阶段，VividTalk使用双分支运动-VAE（变分自编码器）和生成器将学习到的网格转换为密集的运动，并基于这些运动逐帧合成高质量的视频。<br />
+<br />
+这一过程涉及将3D网格的运动转换为2D密集运动，然后输入到生成器中，以合成最终的视频帧。<br />
+<br />
+3、高视觉质量和真实感：<br />
+<br />
+VividTalk生成的视频具有高视觉质量，包括逼真的面部表情、多样的头部姿势，并且在嘴唇同步方面有显著提升。<br />
+<br />
+通过这种方法，VividTalk能够生成与输入音频高度同步的逼真说话头像视频，提高了视频的真实感和动态性。<br />
+<br />
+项目及演示：<a href="https://humanaigc.github.io/vivid-talk/">humanaigc.github.io/vivid-ta…</a><br />
+论文：<a href="https://arxiv.org/pdf/2312.01841.pdf">arxiv.org/pdf/2312.01841.pdf</a><br />
+GitHub：<a href="https://github.com/HumanAIGC/VividTalk">github.com/HumanAIGC/VividTa…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzIwMTk4ODU4MzQ5MzYzMjAvcHUvaW1nL1NYalFmdkNJNVRTVTlBdTcuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1732014004950974917#m</id>
+            <title>HeyGen推出Avatar2.0 ：Instant Avatar 即时虚拟分身
+
+- 只需要5分钟，使用手机即可创造一个自己的虚拟分身。
+
+- 多语言支持：通过内置的翻译工具，支持创建多语言内容。
+
+- 口型同步：支持口型同步和多语言声音匹配
+
+- 免费使用：而且这项服务是免费的...
+
+用户可以利用这项技术制作可扩展的、定制化的视频内容，同步到全球所有的平台。
+
+详细：https://www.heygen.com/article/introducing-avatar-2-0-instant-avatar</title>
+            <link>https://nitter.cz/xiaohuggg/status/1732014004950974917#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1732014004950974917#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 05 Dec 2023 12:28:12 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>HeyGen推出Avatar2.0 ：Instant Avatar 即时虚拟分身<br />
+<br />
+- 只需要5分钟，使用手机即可创造一个自己的虚拟分身。<br />
+<br />
+- 多语言支持：通过内置的翻译工具，支持创建多语言内容。<br />
+<br />
+- 口型同步：支持口型同步和多语言声音匹配<br />
+<br />
+- 免费使用：而且这项服务是免费的...<br />
+<br />
+用户可以利用这项技术制作可扩展的、定制化的视频内容，同步到全球所有的平台。<br />
+<br />
+详细：<a href="https://www.heygen.com/article/introducing-avatar-2-0-instant-avatar">heygen.com/article/introduci…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzIwMTMwOTk2NDgxODQzMjAvcHUvaW1nL2hqa3lfVDMxcFptRGNCX3YuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1731970985014780212#m</id>
             <title>R to @xiaohuggg: 这应用不就来了
 
@@ -606,107 +738,6 @@ GitHub：https://github.com/EricGuo5513/momask-codes</title>
 论文：<a href="https://arxiv.org/abs/2312.00063">arxiv.org/abs/2312.00063</a><br />
 GitHub：<a href="https://github.com/EricGuo5513/momask-codes">github.com/EricGuo5513/momas…</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzE1OTk1Njc2ODUzOTg1MjgvcHUvaW1nL3JwRTJubFp6blBtM3hFQjUuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1731576291898638617#m</id>
-            <title>这个早就有了
-不就是那什么吗
-这个我们国家也能做
-xxx早就做了，就知道跪舔
-很早之前我就做过一个这种类似的
-这有啥难度，多少年前的技术了，还吹...</title>
-            <link>https://nitter.cz/xiaohuggg/status/1731576291898638617#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1731576291898638617#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 04 Dec 2023 07:28:53 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个早就有了<br />
-不就是那什么吗<br />
-这个我们国家也能做<br />
-xxx早就做了，就知道跪舔<br />
-很早之前我就做过一个这种类似的<br />
-这有啥难度，多少年前的技术了，还吹...</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1731560293971767673#m</id>
-            <title>GPT-4能处理和理解混乱文本 即时你输入错误的情况下
-
-东京大学的研究人员测试了GPT-4在处理混乱文本方面的表现。
-
-研究人员创建了一些字母顺序被混乱的句子，然后让GPT-4尝试恢复它们的原始顺序。
-
-即使是在字母完全混乱的极端情况下，它也能几乎完美地恢复原始句子。
-
-研究显示，GPT-4具有在一定程度上理解并纠正用户输入错误内容的能力。这包括但不限于：
-
-字母顺序混乱：如上述例子所示，即使单词内的字母顺序被打乱，GPT-4也能够识别出原始的、正确的单词。
-
-拼写错误：GPT-4能够识别并纠正常见的拼写错误，理解用户的真实意图。
-
-语法错误：GPT-4还能在一定程度上理解并处理含有语法错误的句子。
-
-不完整或含糊的输入：即使用户的输入不完整或含糊不清，GPT-4也能尝试根据上下文提供合理的回答或建议。
-
-研究结果：
-
-1、GPT-4处理混乱文本的表现：即使在单词内部的字母完全混乱的情况下，GPT-4也能够准确地识别和重组这些字母，恢复成正确的单词和句子。例如，如果输入的是“eTh cta sat no eht amt”，GPT-4能够识别出正确的句子应该是“The cat sat on the mat”。
-
-2、编辑距离减少95%：编辑距离是一种衡量两个字符串之间差异的方法，通常通过计算将一个字符串转换成另一个字符串所需的最少单字符编辑（插入、删除、替换）次数。在这项研究中，GPT-4能够将混乱的句子恢复到接近原始句子的状态，使得编辑距离减少了95%。这意味着GPT-4非常有效地纠正了混乱的文本。
-
-3、问题回答能力：即使在给定的上下文是混乱的情况下，GPT-4仍然能够理解问题的本质并提供准确的答案。这表明GPT-4不仅能处理和纠正混乱的文本，还能在这种情况下理解和回应复杂的查询。
-
-4、与其他模型的对比：GPT-4在处理极端混乱文本的能力更加突出。
-
-论文：https://arxiv.org/abs/2311.18805</title>
-            <link>https://nitter.cz/xiaohuggg/status/1731560293971767673#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1731560293971767673#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 04 Dec 2023 06:25:19 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>GPT-4能处理和理解混乱文本 即时你输入错误的情况下<br />
-<br />
-东京大学的研究人员测试了GPT-4在处理混乱文本方面的表现。<br />
-<br />
-研究人员创建了一些字母顺序被混乱的句子，然后让GPT-4尝试恢复它们的原始顺序。<br />
-<br />
-即使是在字母完全混乱的极端情况下，它也能几乎完美地恢复原始句子。<br />
-<br />
-研究显示，GPT-4具有在一定程度上理解并纠正用户输入错误内容的能力。这包括但不限于：<br />
-<br />
-字母顺序混乱：如上述例子所示，即使单词内的字母顺序被打乱，GPT-4也能够识别出原始的、正确的单词。<br />
-<br />
-拼写错误：GPT-4能够识别并纠正常见的拼写错误，理解用户的真实意图。<br />
-<br />
-语法错误：GPT-4还能在一定程度上理解并处理含有语法错误的句子。<br />
-<br />
-不完整或含糊的输入：即使用户的输入不完整或含糊不清，GPT-4也能尝试根据上下文提供合理的回答或建议。<br />
-<br />
-研究结果：<br />
-<br />
-1、GPT-4处理混乱文本的表现：即使在单词内部的字母完全混乱的情况下，GPT-4也能够准确地识别和重组这些字母，恢复成正确的单词和句子。例如，如果输入的是“eTh cta sat no eht amt”，GPT-4能够识别出正确的句子应该是“The cat sat on the mat”。<br />
-<br />
-2、编辑距离减少95%：编辑距离是一种衡量两个字符串之间差异的方法，通常通过计算将一个字符串转换成另一个字符串所需的最少单字符编辑（插入、删除、替换）次数。在这项研究中，GPT-4能够将混乱的句子恢复到接近原始句子的状态，使得编辑距离减少了95%。这意味着GPT-4非常有效地纠正了混乱的文本。<br />
-<br />
-3、问题回答能力：即使在给定的上下文是混乱的情况下，GPT-4仍然能够理解问题的本质并提供准确的答案。这表明GPT-4不仅能处理和纠正混乱的文本，还能在这种情况下理解和回应复杂的查询。<br />
-<br />
-4、与其他模型的对比：GPT-4在处理极端混乱文本的能力更加突出。<br />
-<br />
-论文：<a href="https://arxiv.org/abs/2311.18805">arxiv.org/abs/2311.18805</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0FlNzY3UWJ3QUEzUVI5LmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
