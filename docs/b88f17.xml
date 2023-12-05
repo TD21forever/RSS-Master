@@ -5,6 +5,144 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1731898886388609172#m</id>
+            <title>ChatGPT 类系统是如何运作的呢？
+
+让我们通过下面的图解来探索它的运作机制。整个过程主要分为两大部分。
+
+1. 训练过程。要打造一个 ChatGPT 模型，我们需要经历两个关键阶段：
+
+- 预训练：在这一阶段，我们会对一个 GPT 模型（一种仅包含解码器的 Transformer）进行训练，使用大量的互联网数据。我们的目标是培养出一个能够基于已有的句子预测出下一个词汇的模型，这个预测不仅在语法上要正确，而且在语义上要与互联网上的内容相吻合。预训练阶段完成后，模型能够补全给定的句子，但还不足以应对提问。
+
+- 微调：这一阶段是一个三步骤的过程，目的是将预训练好的模型转化为一个能够回答问题的 ChatGPT 模型：
+
+  1）. 收集训练用的数据（包括问题和答案），并在这些数据上对预训练模型进行微调。模型学习如何根据问题生成与训练数据类似的答案。
+  2）. 进一步收集数据（问题和多个答案），并训练一个奖励模型，用于将这些答案按照相关性进行排序，从最相关到最不相关。
+  3）. 运用强化学习（PPO 优化）对模型进行微调，以提高模型回答问题的准确性。
+
+2. 回答问题
+
+🔹步骤 1：用户提出一个完整的问题，例如“解释一下分类算法是怎么工作的”。
+🔹步骤 2：这个问题首先被送往内容审核组件。该组件确保问题不违反安全准则，过滤掉不恰当的问题。
+🔹步骤 3-4：如果问题通过内容审核，它就会被送到 ChatGPT 模型处理。如果未通过审核，则直接生成模板式的回答。
+🔹步骤 5-6：模型生成回答后，这个回答再次经过内容审核组件的检查。这一步骤确保所生成的回答是安全的、无害的、无偏见的等。
+🔹步骤 7：如果回答通过了内容审核，它就会展现给用户。如果没有通过审核，系统则提供一个模板化的答案给用户。</title>
+            <link>https://nitter.cz/dotey/status/1731898886388609172#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1731898886388609172#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 05 Dec 2023 04:50:46 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>ChatGPT 类系统是如何运作的呢？<br />
+<br />
+让我们通过下面的图解来探索它的运作机制。整个过程主要分为两大部分。<br />
+<br />
+1. 训练过程。要打造一个 ChatGPT 模型，我们需要经历两个关键阶段：<br />
+<br />
+- 预训练：在这一阶段，我们会对一个 GPT 模型（一种仅包含解码器的 Transformer）进行训练，使用大量的互联网数据。我们的目标是培养出一个能够基于已有的句子预测出下一个词汇的模型，这个预测不仅在语法上要正确，而且在语义上要与互联网上的内容相吻合。预训练阶段完成后，模型能够补全给定的句子，但还不足以应对提问。<br />
+<br />
+- 微调：这一阶段是一个三步骤的过程，目的是将预训练好的模型转化为一个能够回答问题的 ChatGPT 模型：<br />
+<br />
+  1）. 收集训练用的数据（包括问题和答案），并在这些数据上对预训练模型进行微调。模型学习如何根据问题生成与训练数据类似的答案。<br />
+  2）. 进一步收集数据（问题和多个答案），并训练一个奖励模型，用于将这些答案按照相关性进行排序，从最相关到最不相关。<br />
+  3）. 运用强化学习（PPO 优化）对模型进行微调，以提高模型回答问题的准确性。<br />
+<br />
+2. 回答问题<br />
+<br />
+🔹步骤 1：用户提出一个完整的问题，例如“解释一下分类算法是怎么工作的”。<br />
+🔹步骤 2：这个问题首先被送往内容审核组件。该组件确保问题不违反安全准则，过滤掉不恰当的问题。<br />
+🔹步骤 3-4：如果问题通过内容审核，它就会被送到 ChatGPT 模型处理。如果未通过审核，则直接生成模板式的回答。<br />
+🔹步骤 5-6：模型生成回答后，这个回答再次经过内容审核组件的检查。这一步骤确保所生成的回答是安全的、无害的、无偏见的等。<br />
+🔹步骤 7：如果回答通过了内容审核，它就会展现给用户。如果没有通过审核，系统则提供一个模板化的答案给用户。</p>
+<p><a href="https://nitter.cz/bytebytego/status/1731572801231020424#m">nitter.cz/bytebytego/status/1731572801231020424#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1731896227850022930#m</id>
+            <title>R to @dotey: 是的，对于TL或者经理的话，这是个很好的机会了解每一位员工的工作状态，及时解决问题
+
+https://x.com/circleghost0723/status/1731895304121975135?s=20</title>
+            <link>https://nitter.cz/dotey/status/1731896227850022930#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1731896227850022930#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 05 Dec 2023 04:40:12 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>是的，对于TL或者经理的话，这是个很好的机会了解每一位员工的工作状态，及时解决问题<br />
+<br />
+<a href="https://x.com/circleghost0723/status/1731895304121975135?s=20">x.com/circleghost0723/status…</a></p>
+<p><a href="https://nitter.cz/circleghost0723/status/1731895304121975135#m">nitter.cz/circleghost0723/status/1731895304121975135#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1731890053800976886#m</id>
+            <title>每日例会我觉得不要省，工作需要一点仪式感，另外这可以及时解决问题，但不宜超过半小时</title>
+            <link>https://nitter.cz/dotey/status/1731890053800976886#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1731890053800976886#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 05 Dec 2023 04:15:40 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>每日例会我觉得不要省，工作需要一点仪式感，另外这可以及时解决问题，但不宜超过半小时</p>
+<p><a href="https://nitter.cz/ThaddeusJiang/status/1731850432065290376#m">nitter.cz/ThaddeusJiang/status/1731850432065290376#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1731888448582373761#m</id>
+            <title>RT by @dotey: Suno @suno_ai_+  Midjourney+D-ID
+
+创作唱歌视频👍</title>
+            <link>https://nitter.cz/xiaohuggg/status/1731888448582373761#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1731888448582373761#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 05 Dec 2023 04:09:17 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Suno <a href="https://nitter.cz/suno_ai_" title="Suno">@suno_ai_</a>+  Midjourney+D-ID<br />
+<br />
+创作唱歌视频👍</p>
+<p><a href="https://nitter.cz/anukaakash/status/1731628181600526781#m">nitter.cz/anukaakash/status/1731628181600526781#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1731889475846910050#m</id>
+            <title>右边那个小姐姐是不是跟吴恩达老师一起上过课的？</title>
+            <link>https://nitter.cz/dotey/status/1731889475846910050#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1731889475846910050#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 05 Dec 2023 04:13:22 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>右边那个小姐姐是不是跟吴恩达老师一起上过课的？</p>
+<p><a href="https://nitter.cz/gdb/status/1731889183290261618#m">nitter.cz/gdb/status/1731889183290261618#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/wshuyi/status/1731645108851003898#m</id>
             <title>RT by @dotey: Setapp 里面的 Typingmind 终于可以支持 128k token 窗口的 GPT-4 Turbo 了。只要你订阅了 Setapp ，就不需要额外付费使用自己的 OpenAI API Key 了。欧耶✌️  https://go.setapp.com/invite/shuyi</title>
             <link>https://nitter.cz/wshuyi/status/1731645108851003898#m</link>
@@ -412,114 +550,6 @@ https://www.nature.com/articles/d41586-023-03798-6
                     
                     <p>renew 一下供参考</p>
 <p><a href="https://nitter.cz/dotey/status/1707478347553395105#m">nitter.cz/dotey/status/1707478347553395105#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/Tisoga/status/1731478506465636749#m</id>
-            <title>RT by @dotey: http://devv.ai 是如何构建高效的 RAG 系统的 🔎
-
-之前答应过要分享一下 http://devv.ai 底层涉及到的技术，这个系列 thread 会分享我们在这个项目上的具体实践，这是第一篇。
-
-另外我们开了一个专门用于提交反馈和建议的 GitHub Repo，欢迎反馈。
-
-🧵
-
-https://github.com/devv-ai/devv</title>
-            <link>https://nitter.cz/Tisoga/status/1731478506465636749#m</link>
-            <guid isPermaLink="false">https://nitter.cz/Tisoga/status/1731478506465636749#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 04 Dec 2023 01:00:19 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p><a href="http://devv.ai">devv.ai</a> 是如何构建高效的 RAG 系统的 🔎<br />
-<br />
-之前答应过要分享一下 <a href="http://devv.ai">devv.ai</a> 底层涉及到的技术，这个系列 thread 会分享我们在这个项目上的具体实践，这是第一篇。<br />
-<br />
-另外我们开了一个专门用于提交反馈和建议的 GitHub Repo，欢迎反馈。<br />
-<br />
-🧵<br />
-<br />
-<a href="https://github.com/devv-ai/devv">github.com/devv-ai/devv</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczMTQ3ODUwOTgyNTI4MjA0OC8xMVNoa09WdT9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1731530439234310339#m</id>
-            <title>Meta要发布啥好东西吗？</title>
-            <link>https://nitter.cz/dotey/status/1731530439234310339#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1731530439234310339#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 04 Dec 2023 04:26:41 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Meta要发布啥好东西吗？</p>
-<p><a href="https://nitter.cz/ArmenAgha/status/1731076069170835720#m">nitter.cz/ArmenAgha/status/1731076069170835720#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1731487869477491157#m</id>
-            <title>RT by @dotey: Cybertruck 是有史以来第一辆采用48V的汽车。 上一次汽车产业提高电压是从6V到12V，但那已经是70年前的事情了。
-
-人类一直无法再次提高汽车电压水平，但是马斯克解决了这个问题！
-
-牛P的是，Musk在解决这个问题后，他给其他汽车公司的 CEO每人寄送了一本名为《如何设计48伏特车辆》的书。🫡
-
-通过将电压提高 4 倍，Cybertruck的设计使得所需电流减少到原来的 1/4。由于电流与铜材料成本相关（铜材料成本较高），减少电流使用意味着可以节省大量铜材料，从而为特斯拉节省大约每年 100 亿美元的成本。
-
-汽车公司几十年来一直试图创建 48V 汽车，但直到现在都没有成功。</title>
-            <link>https://nitter.cz/xiaohuggg/status/1731487869477491157#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1731487869477491157#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 04 Dec 2023 01:37:32 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Cybertruck 是有史以来第一辆采用48V的汽车。 上一次汽车产业提高电压是从6V到12V，但那已经是70年前的事情了。<br />
-<br />
-人类一直无法再次提高汽车电压水平，但是马斯克解决了这个问题！<br />
-<br />
-牛P的是，Musk在解决这个问题后，他给其他汽车公司的 CEO每人寄送了一本名为《如何设计48伏特车辆》的书。🫡<br />
-<br />
-通过将电压提高 4 倍，Cybertruck的设计使得所需电流减少到原来的 1/4。由于电流与铜材料成本相关（铜材料成本较高），减少电流使用意味着可以节省大量铜材料，从而为特斯拉节省大约每年 100 亿美元的成本。<br />
-<br />
-汽车公司几十年来一直试图创建 48V 汽车，但直到现在都没有成功。</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzE0ODYxNzM2MzY0ODEwMjQvcHUvaW1nL2pBQVJzLWZnSW5nSDhHR3YuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1731488081180577800#m</id>
-            <title>有网友花2小时做了个小程序：把一个包含表单的PDF文档，导出成PNG图片，然后传给GPT-4V的API，然后让GPT生成一段Google表单对应的JSON数据，再调用Google Form的API生成表单。
-
-思路不错，感觉不需要用API，直接图片传给ChatGPT Plus也可以得到JSON。</title>
-            <link>https://nitter.cz/dotey/status/1731488081180577800#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1731488081180577800#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 04 Dec 2023 01:38:22 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>有网友花2小时做了个小程序：把一个包含表单的PDF文档，导出成PNG图片，然后传给GPT-4V的API，然后让GPT生成一段Google表单对应的JSON数据，再调用Google Form的API生成表单。<br />
-<br />
-思路不错，感觉不需要用API，直接图片传给ChatGPT Plus也可以得到JSON。</p>
-<p><a href="https://nitter.cz/krystof_rehacek/status/1731280672990322879#m">nitter.cz/krystof_rehacek/status/1731280672990322879#m</a></p>
                 ]]>
             </content:encoded>
         </item>
