@@ -7,9 +7,9 @@ import feedparser
 import openai
 from dotenv import load_dotenv
 from jinja2 import Template
-
+import pandas as pd
 from root import (CACHE_PATH, CONFIG_PATH, DOCS_DIR, RSS_HTML_TEMPLATE_PATH,
-                  RSS_TEMPLATE_PATH, absolute)
+                  RSS_TEMPLATE_PATH, COST_RECORD_PATH, absolute)
 from src.AI.chatgpt import gpt_summary
 from src.cache import CacheKit
 from src.const import FilterField, FilterType, HtmlItem, Item
@@ -76,6 +76,18 @@ def _filter(rss, feed):
     logger.info(f"过滤后的条目数: {len(filtered_items)}")
     return filtered_items
 
+def _read_cost_record_and_add(cost):
+    if not os.path.exists(COST_RECORD_PATH):
+        df = pd.DataFrame(columns=["time", "cost"])
+    else:
+        df = pd.read_excel(COST_RECORD_PATH)
+        
+    message = [datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), cost]
+    df = pd.concat([df, pd.DataFrame([message], columns=["time", "cost"])], ignore_index=True)
+    df.to_excel(COST_RECORD_PATH, index=False)
+
+
+
 def _use_ai(filtered_items:List[Item]):
     cost = 0
     for item in filtered_items:
@@ -93,7 +105,9 @@ def _use_ai(filtered_items:List[Item]):
         except Exception as e:
             logger.critical(f"AI 错误: {e}")
     if cost:
-        logger.info(f"AI 花费: {cost:.4f}")
+        logger.info(f"AI 花费: {cost:.8f}")
+        _read_cost_record_and_add(cost=cost)
+    
 
 def _render_xml(feed, filtered_items):
     with open(RSS_TEMPLATE_PATH, "r") as f:
