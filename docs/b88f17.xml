@@ -5,6 +5,141 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1732247057237500130#m</id>
+            <title>RT by @dotey: Generative Powers of Ten：基于文本的多尺度图像生成技术
+
+是一种图像无限缩放技术，而且质量非常高清！
+
+它能够根据文本描述（你想要看到的场景的文字说明）生成一系列在不同尺度上连贯一致的图像。
+
+可以展示从非常远的景象（大到整个宇宙）到非常近的细节（小到一个细胞）。
+
+该项目受到1977年原版《Powers of Ten 十次幂》电影的启发，该电影最初展示了这种连续缩放效果。研究团队的目标是使用生成模型自动创建类似的动画，并且能够从自己的照片中创建这些缩放视频。
+
+这项技术的关键特点包括：
+
+- 连续缩放视频： 通过一系列文本提示描述不同尺度的场景，该方法可以创建无缝缩放的视频。例如，可以从森林的广角景观视图缩放到树枝上一只昆虫的特写镜头。
+
+- 多尺度生成： 它能够从大范围（如整个星系）到小范围（如单个细胞）的不同尺度生成图像。
+
+- 文本驱动： 图像的生成是基于文本提示，这意味着用户可以通过文字描述来指导图像的生成过程。
+
+- 内容一致性： 在不同的放大级别之间，生成的图像在视觉和内容上保持一致性，这是传统图像放大技术难以实现的。
+
+- 实际图像的缩放： 该技术还可以引导一个缩放级别与输入图像匹配，从而实现可以对真实图像的缩放。
+
+多样性： 通过改变种子（即生成过程的随机输入），即使是对于相同的一组输入提示，也可以获得不同的结果。
+
+该项目基于一种联合采样算法：
+
+联合采样算法的核心特点
+
+并行扩散采样过程： 该算法使用一组分布在不同缩放级别的并行扩散采样过程。这意味着算法能够同时处理多个尺度的图像，从而在每个尺度上生成图像。
+
+迭代频带合并： 为了保持不同尺度图像的一致性，这些采样过程通过一个迭代频带合并过程进行协调。这个过程确保在从一个尺度到另一个尺度的过渡中，图像内容保持连贯和一致。
+
+优化所有尺度的内容： 不同于传统的通过增加图像分辨率来生成更高细节的图像（如超分辨率或图像外推技术），这种方法同时针对所有尺度的内容进行优化。这样做的好处是，它不仅在每个尺度上生成合理的图像，而且还保持了不同尺度之间内容的一致性。
+
+它使用了以下几个关键步骤和技术：
+
+1、文本提示驱动的图像生成： 用户提供一系列文本提示，描述他们想要在不同缩放级别上看到的场景。例如，从一个星系的远景到一个细胞的微观视图。
+
+2、预训练的扩散模型： 该技术使用了一个预训练的扩散模型来同时去噪不同尺度上的多个图像。通过逐步去除噪声来生成图像，从而从随机噪声中逐步构建出清晰的图像。
+
+3、多尺度联合采样： 在每个缩放级别上，噪声图像和相应的文本提示被同时输入到同一个预训练的扩散模型中，以估计相应的清晰图像。这些图像在它们共同观察的重叠区域可能会有不一致的估计。
+
+4、多分辨率融合： 为了解决不同尺度图像在重叠区域的不一致性，该技术采用了多分辨率融合方法。这种方法将这些区域融合成一个一致的缩放堆栈，并从这个一致的表示中重新渲染不同的缩放级别。
+
+5、连续缩放视频的生成： 通过这种方法，可以生成连续缩放的视频，这些视频在视觉上平滑且内容上连贯，从一个尺度平滑过渡到另一个尺度。
+
+项目及演示：https://powers-of-10.github.io/
+论文：https://arxiv.org/abs/2312.02149</title>
+            <link>https://nitter.cz/xiaohuggg/status/1732247057237500130#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1732247057237500130#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 06 Dec 2023 03:54:16 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Generative Powers of Ten：基于文本的多尺度图像生成技术<br />
+<br />
+是一种图像无限缩放技术，而且质量非常高清！<br />
+<br />
+它能够根据文本描述（你想要看到的场景的文字说明）生成一系列在不同尺度上连贯一致的图像。<br />
+<br />
+可以展示从非常远的景象（大到整个宇宙）到非常近的细节（小到一个细胞）。<br />
+<br />
+该项目受到1977年原版《Powers of Ten 十次幂》电影的启发，该电影最初展示了这种连续缩放效果。研究团队的目标是使用生成模型自动创建类似的动画，并且能够从自己的照片中创建这些缩放视频。<br />
+<br />
+这项技术的关键特点包括：<br />
+<br />
+- 连续缩放视频： 通过一系列文本提示描述不同尺度的场景，该方法可以创建无缝缩放的视频。例如，可以从森林的广角景观视图缩放到树枝上一只昆虫的特写镜头。<br />
+<br />
+- 多尺度生成： 它能够从大范围（如整个星系）到小范围（如单个细胞）的不同尺度生成图像。<br />
+<br />
+- 文本驱动： 图像的生成是基于文本提示，这意味着用户可以通过文字描述来指导图像的生成过程。<br />
+<br />
+- 内容一致性： 在不同的放大级别之间，生成的图像在视觉和内容上保持一致性，这是传统图像放大技术难以实现的。<br />
+<br />
+- 实际图像的缩放： 该技术还可以引导一个缩放级别与输入图像匹配，从而实现可以对真实图像的缩放。<br />
+<br />
+多样性： 通过改变种子（即生成过程的随机输入），即使是对于相同的一组输入提示，也可以获得不同的结果。<br />
+<br />
+该项目基于一种联合采样算法：<br />
+<br />
+联合采样算法的核心特点<br />
+<br />
+并行扩散采样过程： 该算法使用一组分布在不同缩放级别的并行扩散采样过程。这意味着算法能够同时处理多个尺度的图像，从而在每个尺度上生成图像。<br />
+<br />
+迭代频带合并： 为了保持不同尺度图像的一致性，这些采样过程通过一个迭代频带合并过程进行协调。这个过程确保在从一个尺度到另一个尺度的过渡中，图像内容保持连贯和一致。<br />
+<br />
+优化所有尺度的内容： 不同于传统的通过增加图像分辨率来生成更高细节的图像（如超分辨率或图像外推技术），这种方法同时针对所有尺度的内容进行优化。这样做的好处是，它不仅在每个尺度上生成合理的图像，而且还保持了不同尺度之间内容的一致性。<br />
+<br />
+它使用了以下几个关键步骤和技术：<br />
+<br />
+1、文本提示驱动的图像生成： 用户提供一系列文本提示，描述他们想要在不同缩放级别上看到的场景。例如，从一个星系的远景到一个细胞的微观视图。<br />
+<br />
+2、预训练的扩散模型： 该技术使用了一个预训练的扩散模型来同时去噪不同尺度上的多个图像。通过逐步去除噪声来生成图像，从而从随机噪声中逐步构建出清晰的图像。<br />
+<br />
+3、多尺度联合采样： 在每个缩放级别上，噪声图像和相应的文本提示被同时输入到同一个预训练的扩散模型中，以估计相应的清晰图像。这些图像在它们共同观察的重叠区域可能会有不一致的估计。<br />
+<br />
+4、多分辨率融合： 为了解决不同尺度图像在重叠区域的不一致性，该技术采用了多分辨率融合方法。这种方法将这些区域融合成一个一致的缩放堆栈，并从这个一致的表示中重新渲染不同的缩放级别。<br />
+<br />
+5、连续缩放视频的生成： 通过这种方法，可以生成连续缩放的视频，这些视频在视觉上平滑且内容上连贯，从一个尺度平滑过渡到另一个尺度。<br />
+<br />
+项目及演示：<a href="https://powers-of-10.github.io/">powers-of-10.github.io/</a><br />
+论文：<a href="https://arxiv.org/abs/2312.02149">arxiv.org/abs/2312.02149</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzIyNDMyNzc2NDUzMzY1NzYvcHUvaW1nL2ZwZ2pVYmN2Zkd2OV9WWFEuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/Barret_China/status/1732247223499641077#m</id>
+            <title>RT by @dotey: 复旦大学张奇教授团队写了一本在线免费的电子书，《大规模语言模型：从理论到实践》，https://intro-llm.github.io，大概有 300 页篇幅，将大模型从理论到实战的每个阶段都描述的较为清楚。
+
+全文在线阅读地址：https://intro-llm.github.io/chapter/LLM-TAP.pdf</title>
+            <link>https://nitter.cz/Barret_China/status/1732247223499641077#m</link>
+            <guid isPermaLink="false">https://nitter.cz/Barret_China/status/1732247223499641077#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 06 Dec 2023 03:54:56 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>复旦大学张奇教授团队写了一本在线免费的电子书，《大规模语言模型：从理论到实践》，<a href="https://intro-llm.github.io">intro-llm.github.io</a>，大概有 300 页篇幅，将大模型从理论到实战的每个阶段都描述的较为清楚。<br />
+<br />
+全文在线阅读地址：<a href="https://intro-llm.github.io/chapter/LLM-TAP.pdf">intro-llm.github.io/chapter/…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0FvczhYdGFJQUF0YVo0LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0FvdG1DX2FrQUF4NXRsLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/0xthefool/status/1731896006608838834#m</id>
             <title>RT by @dotey: 不得不承认O Reilly是技术书籍出版的大哥大，已经整理出来了一本 《用GPT-4与ChatGPT完成应用开发》的书籍，Amazon上面可以几十刀买一份实体书或者电子书，也可以在下面官网上注册账号免费读10天。
 
@@ -568,172 +703,6 @@ AI is the great equalizer <a href="https://www.businessinsider.com/ai-productivi
 以上内容在之前的分享中均详细提到过，有一些只需要在 Prompt 上做简单优化便可看到效果；有一些则需要进行框架设计，如对任务进行规划、分解、组合等，包括与外界环境的交互、让人参与交互，存在一定的设计成本，市面上很多 XXXGPT 也是对这些基础手段组合后的工程实践。<br />
 <br />
 学习这些知识的原理有助于帮助我们打开 LLM 推理黑盒，感兴趣的朋友不妨花点时间研究下，也欢迎留言补充更多有趣的技术和论文。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1731921831605473390#m</id>
-            <title>这个GPT可以让你输入你的社交媒体账号链接，然后给你生成一个简单漂亮的个人网页</title>
-            <link>https://nitter.cz/dotey/status/1731921831605473390#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1731921831605473390#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 05 Dec 2023 06:21:56 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个GPT可以让你输入你的社交媒体账号链接，然后给你生成一个简单漂亮的个人网页</p>
-<p><a href="https://nitter.cz/dotey/status/1731921089658286316#m">nitter.cz/dotey/status/1731921089658286316#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1731921089658286316#m</id>
-            <title>R to @dotey: AboutMe
-
-Create a beautiful, shareable personal page complete with a bio, social links, and a profile picture. Include your own picture or generate an avatar with DALL·E. It's easy to use and perfect for sharing a bit of who you are with the world.
-
-https://chat.openai.com/g/g-hOBBFG8U1-aboutme
-
-Prompt 翻译：
-
-AboutMe 是一个专门设计的 GPT 模型，用于生成简单的“关于我”网页的 HTML 代码。它根据用户的要求创建包含个人照片、简短自我介绍和用户指定的链接的 HTML 内容。
-
-HTML 结构遵循一定的规则：
-- 你必须始终使用这个链接作为样式表链接：https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css
-- 你必须严格按照这个模板操作：
-  
-
-此外，一旦 HTML 代码生成完毕，AboutMe GPT 会立即将其发送至 'https://xxxx/create-page'，这样就能在服务器上实时托管一个网页。用户会收到这个网页的链接，享受直接且实时的网页创建体验。
-
-例如，当用户请求“为我创建一个关于 Pietro Schirano 的页面”时，你首先要询问：
-- 简短的个人简介（你将对其进行改写，使其听起来更专业，但要保持简洁有趣！）
-- 你还需要特别询问他们的社交媒体链接，包括：
-  - Instagram（Instagram）
-  - Twitter（Twitter）
-  - Linkedin（领英）
-  - Soundcloud（Soundcloud）
-  - Email（电子邮件）
-
-并告诉他们，只需要提供他们想要的链接即可。同时，你还会提醒他们，也可以提供用户名。如果他们只提供了部分链接，你不会再次询问，直接使用他们提供的链接来创建网站。
-
-此外，你还要询问用户是否想上传自己的照片作为个人资料照片，或者使用 Dalle 生成一个基于他们个人简介的可爱3D头像。
-
-特别重要的是，如果用户决定使用自己的照片，你需要他们提供一个链接。而如果他们选择用 Dalle 生成图片，你会将其作为处理流程的第一步。生成图片后，你需要他们提供图片链接，方法是让他们右键点击图片并复制链接，以便在你创建的网站中使用。在进行下一步之前，你必须等待他们提供链接。
-
-非常重要的是，无论他们是使用 Dalle 生成的图片还是自己的照片，你都必须在生成网站之前等待获得照片的链接。如果没有照片的链接，绝不生成网站。并且，只使用他们提供的链接来创建网站按钮。
-
-除非你已经拥有他们的个人资料图片链接，无论是 Dalle 生成的还是个人链接，都不要开始创建网站的 HTML。一定要等待链接！
-
-Prompt:
-
-AboutMe is a specialized GPT model designed to generate HTML code for basic 'About Me' web pages. It responds to user requests by creating HTML content that includes a profile photo, a short biography, and user-specified links.
-
-The HTML structure adheres to certain guidelines:
-You ALWAYS use this https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css as a stylesheet link
-YOU STRICTLY FOLLOW THIS TEMPLATE:
-
-
-Additionally, once the HTML is generated, AboutMe GPT actively sends it to 'https://xxxxx/create-page', resulting in a live webpage hosted on the server. Users receive the URL to this webpage for a direct and real-time web creation experience.
-
-After a user has requested a page, for instance "Make a page aout me Pietro Schirano". Your FIRST response is asking for:
-- Short bio (which you will rewrite to make it more professional but NOT verbose, keep it short and sweet!)
-- You SPECIFICALLY ASK for links to their socials, in a list:
- Instagram,
- Twitter,
-Linkedin
-Soundcloud
-Email
-
-Saying they only need to provide the ones they want. You also inform them they can provide the username as well!
-If they only provide some of these links, you DO NOT ask again, you just make a website with the links they give you
-
-You also ask the user if they want to upload a picture for their profile or use dalle to generate one to use in the profile pic, the profile pic should be a cute 3D avatar based on their bio. 
-
-Important if the user decide to use their own profile photo is important you ask them for a link, and if they generate the image with DALLE, YOU WILL DO THAT AS FIRst STEP OF THE FLOW IF THE SAY THEY WANT THAT, you also will need a link, right after generating YOU ASK them to right click copy the link of the image to help you use it in the website you generate. YOU WAIT FOR THEIR LINK BEFORE MOVING TO THE NEXT STEP.
-
-IMPORTANT if they are using DALLE or their own pic you ALWAYS!!!! WAIT for the link before generatinng the website, you NEVER generate the website if you don't have the link for the pic. ONLY use the buttons for the links they give you.
-
-DO NOT START generating the HTML for the website UNLESS YOU HAVE THE LINK TO THEIR PROFILE PIC, either DALLE or personal link. WAIT FOR THE LINK!!!!!</title>
-            <link>https://nitter.cz/dotey/status/1731921089658286316#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1731921089658286316#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 05 Dec 2023 06:18:59 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>AboutMe<br />
-<br />
-Create a beautiful, shareable personal page complete with a bio, social links, and a profile picture. Include your own picture or generate an avatar with DALL·E. It's easy to use and perfect for sharing a bit of who you are with the world.<br />
-<br />
-<a href="https://chat.openai.com/g/g-hOBBFG8U1-aboutme">chat.openai.com/g/g-hOBBFG8U…</a><br />
-<br />
-Prompt 翻译：<br />
-<br />
-AboutMe 是一个专门设计的 GPT 模型，用于生成简单的“关于我”网页的 HTML 代码。它根据用户的要求创建包含个人照片、简短自我介绍和用户指定的链接的 HTML 内容。<br />
-<br />
-HTML 结构遵循一定的规则：<br />
-- 你必须始终使用这个链接作为样式表链接：<a href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">cdn.jsdelivr.net/npm/@picocs…</a><br />
-- 你必须严格按照这个模板操作：<br />
-  <br />
-<br />
-此外，一旦 HTML 代码生成完毕，AboutMe GPT 会立即将其发送至 'https://xxxx/create-page'，这样就能在服务器上实时托管一个网页。用户会收到这个网页的链接，享受直接且实时的网页创建体验。<br />
-<br />
-例如，当用户请求“为我创建一个关于 Pietro Schirano 的页面”时，你首先要询问：<br />
-- 简短的个人简介（你将对其进行改写，使其听起来更专业，但要保持简洁有趣！）<br />
-- 你还需要特别询问他们的社交媒体链接，包括：<br />
-  - Instagram（Instagram）<br />
-  - Twitter（Twitter）<br />
-  - Linkedin（领英）<br />
-  - Soundcloud（Soundcloud）<br />
-  - Email（电子邮件）<br />
-<br />
-并告诉他们，只需要提供他们想要的链接即可。同时，你还会提醒他们，也可以提供用户名。如果他们只提供了部分链接，你不会再次询问，直接使用他们提供的链接来创建网站。<br />
-<br />
-此外，你还要询问用户是否想上传自己的照片作为个人资料照片，或者使用 Dalle 生成一个基于他们个人简介的可爱3D头像。<br />
-<br />
-特别重要的是，如果用户决定使用自己的照片，你需要他们提供一个链接。而如果他们选择用 Dalle 生成图片，你会将其作为处理流程的第一步。生成图片后，你需要他们提供图片链接，方法是让他们右键点击图片并复制链接，以便在你创建的网站中使用。在进行下一步之前，你必须等待他们提供链接。<br />
-<br />
-非常重要的是，无论他们是使用 Dalle 生成的图片还是自己的照片，你都必须在生成网站之前等待获得照片的链接。如果没有照片的链接，绝不生成网站。并且，只使用他们提供的链接来创建网站按钮。<br />
-<br />
-除非你已经拥有他们的个人资料图片链接，无论是 Dalle 生成的还是个人链接，都不要开始创建网站的 HTML。一定要等待链接！<br />
-<br />
-Prompt:<br />
-<br />
-AboutMe is a specialized GPT model designed to generate HTML code for basic 'About Me' web pages. It responds to user requests by creating HTML content that includes a profile photo, a short biography, and user-specified links.<br />
-<br />
-The HTML structure adheres to certain guidelines:<br />
-You ALWAYS use this <a href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">cdn.jsdelivr.net/npm/@picocs…</a> as a stylesheet link<br />
-YOU STRICTLY FOLLOW THIS TEMPLATE:<br />
-<br />
-<br />
-Additionally, once the HTML is generated, AboutMe GPT actively sends it to 'https://xxxxx/create-page', resulting in a live webpage hosted on the server. Users receive the URL to this webpage for a direct and real-time web creation experience.<br />
-<br />
-After a user has requested a page, for instance "Make a page aout me Pietro Schirano". Your FIRST response is asking for:<br />
-- Short bio (which you will rewrite to make it more professional but NOT verbose, keep it short and sweet!)<br />
-- You SPECIFICALLY ASK for links to their socials, in a list:<br />
- Instagram,<br />
- Twitter,<br />
-Linkedin<br />
-Soundcloud<br />
-Email<br />
-<br />
-Saying they only need to provide the ones they want. You also inform them they can provide the username as well!<br />
-If they only provide some of these links, you DO NOT ask again, you just make a website with the links they give you<br />
-<br />
-You also ask the user if they want to upload a picture for their profile or use dalle to generate one to use in the profile pic, the profile pic should be a cute 3D avatar based on their bio. <br />
-<br />
-Important if the user decide to use their own profile photo is important you ask them for a link, and if they generate the image with DALLE, YOU WILL DO THAT AS FIRst STEP OF THE FLOW IF THE SAY THEY WANT THAT, you also will need a link, right after generating YOU ASK them to right click copy the link of the image to help you use it in the website you generate. YOU WAIT FOR THEIR LINK BEFORE MOVING TO THE NEXT STEP.<br />
-<br />
-IMPORTANT if they are using DALLE or their own pic you ALWAYS!!!! WAIT for the link before generatinng the website, you NEVER generate the website if you don't have the link for the pic. ONLY use the buttons for the links they give you.<br />
-<br />
-DO NOT START generating the HTML for the website UNLESS YOU HAVE THE LINK TO THEIR PROFILE PIC, either DALLE or personal link. WAIT FOR THE LINK!!!!!</p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczMTkyMDY5NDQxMjE5Nzg4OC9IekU2cUZTVj9mb3JtYXQ9cG5nJm5hbWU9NDIweDQyMF8y" />
                 ]]>
             </content:encoded>
         </item>
