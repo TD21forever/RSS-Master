@@ -5,6 +5,60 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1732368220429115511#m</id>
+            <title>Google 再发布王炸级图像生成功能Generative Powers of Ten，支持对生成的图像进行无限放大，比如讲一张人像照片放大到可以看到细胞结构，从地球大气层缩放到地面上的物体。
+通过联合多尺度扩散采样方法实现这一目标，该方法鼓励不同尺度的一致性，同时保持每个单独采样过程的完整性。由于每个生成的比例都由不同的文本提示引导，因此我们的方法比传统的超分辨率方法能够实现更深层次的缩放，而传统的超分辨率方法可能很难在截然不同的比例下创建新的上下文结构。下面是具体介绍：
+
+实现方法：
+使用预训练的扩散模型来同时去噪多个不同尺度的场景图像。每个缩放级别的噪声图像以及相应的提示同时输入到相同的预训练扩散模型中，返回对应的清晰图像的估计。这些图像可能对它们所观察到的重叠区域具有不一致的估计。我们采用多分辨率混合将这些区域融合成一致的缩放堆栈，并从一致的表示中重新渲染不同的缩放级别。然后，这些重新渲染的图像被用作DDPM采样步骤中的清晰图像估计。
+
+基线比较：
+生成缩放视频的另一种方法是使用文本条件的超分辨率模型逐步超分辨率放大图像，或者使用文本条件的外部绘制模型逐步绘制放大图像。在这里，我们与这两种变体进行比较，使用稳定扩散的超分辨率和外部绘制模型。我们观察到，因果生成通常会导致较差的结果，因为先前的生成结果并不总是与后续的缩放级别兼容。
+
+论文地址：https://arxiv.org/abs/2312.02149</title>
+            <link>https://nitter.cz/op7418/status/1732368220429115511#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1732368220429115511#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 06 Dec 2023 11:55:44 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Google 再发布王炸级图像生成功能Generative Powers of Ten，支持对生成的图像进行无限放大，比如讲一张人像照片放大到可以看到细胞结构，从地球大气层缩放到地面上的物体。<br />
+通过联合多尺度扩散采样方法实现这一目标，该方法鼓励不同尺度的一致性，同时保持每个单独采样过程的完整性。由于每个生成的比例都由不同的文本提示引导，因此我们的方法比传统的超分辨率方法能够实现更深层次的缩放，而传统的超分辨率方法可能很难在截然不同的比例下创建新的上下文结构。下面是具体介绍：<br />
+<br />
+实现方法：<br />
+使用预训练的扩散模型来同时去噪多个不同尺度的场景图像。每个缩放级别的噪声图像以及相应的提示同时输入到相同的预训练扩散模型中，返回对应的清晰图像的估计。这些图像可能对它们所观察到的重叠区域具有不一致的估计。我们采用多分辨率混合将这些区域融合成一致的缩放堆栈，并从一致的表示中重新渲染不同的缩放级别。然后，这些重新渲染的图像被用作DDPM采样步骤中的清晰图像估计。<br />
+<br />
+基线比较：<br />
+生成缩放视频的另一种方法是使用文本条件的超分辨率模型逐步超分辨率放大图像，或者使用文本条件的外部绘制模型逐步绘制放大图像。在这里，我们与这两种变体进行比较，使用稳定扩散的超分辨率和外部绘制模型。我们观察到，因果生成通常会导致较差的结果，因为先前的生成结果并不总是与后续的缩放级别兼容。<br />
+<br />
+论文地址：<a href="https://arxiv.org/abs/2312.02149">arxiv.org/abs/2312.02149</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzIzNjc0NDcxOTY2NTU2MTcvcHUvaW1nL3psRlM1VHl6TXduZ0tqanMuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1732361402604789818#m</id>
+            <title>已经有人把 Pika 1.0 新的网页界面体验发出来了，看起来跟 Runwaye 比较类似，有些布局调整，还有视频编辑功能。 界面的主要内容有提示词输入、上传图片或者视频、选择视频宽高比和帧数、摄像机控制和运动强度、负向提示词、种子以及与提示强度、创作历史。</title>
+            <link>https://nitter.cz/op7418/status/1732361402604789818#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1732361402604789818#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 06 Dec 2023 11:28:38 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>已经有人把 Pika 1.0 新的网页界面体验发出来了，看起来跟 Runwaye 比较类似，有些布局调整，还有视频编辑功能。 界面的主要内容有提示词输入、上传图片或者视频、选择视频宽高比和帧数、摄像机控制和运动强度、负向提示词、种子以及与提示强度、创作历史。</p>
+<p><a href="https://nitter.cz/ai_for_success/status/1732344714995831115#m">nitter.cz/ai_for_success/status/1732344714995831115#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1732356954423718092#m</id>
             <title>R to @op7418: 视频局部编辑测试
 https://x.com/op7418/status/1732214497107161358?s=20</title>
@@ -361,28 +415,6 @@ https://x.com/ammaar/status/1732224780466852125?s=20</title>
                     <p>又一个 Pika 1.0 的实际测试视频，感觉应该就要发邀请了，有测试资格的都用上了：<br />
 <a href="https://x.com/ammaar/status/1732224780466852125?s=20">x.com/ammaar/status/17322247…</a></p>
 <p><a href="https://nitter.cz/ammaar/status/1732224780466852125#m">nitter.cz/ammaar/status/1732224780466852125#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1732229556260761874#m</id>
-            <title>LeonardoAi 也推出了实时的涂鸦 AI 绘画，不需要等待列表，而且免费立刻就能玩，专业工具加这个真是降维打击啊，速度又快而且可以随时切换平台内的多种图像模型。  
-
-登录以后点左边导航的LiveCanvas按钮就可以玩了，来试试吧：https://app.leonardo.ai/</title>
-            <link>https://nitter.cz/op7418/status/1732229556260761874#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1732229556260761874#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 06 Dec 2023 02:44:44 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>LeonardoAi 也推出了实时的涂鸦 AI 绘画，不需要等待列表，而且免费立刻就能玩，专业工具加这个真是降维打击啊，速度又快而且可以随时切换平台内的多种图像模型。  <br />
-<br />
-登录以后点左边导航的LiveCanvas按钮就可以玩了，来试试吧：<a href="https://app.leonardo.ai/">app.leonardo.ai/</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzIyMjg5NTM1ODU0MzA1MjgvcHUvaW1nL1IyamY2b0VTdEJRQzQteVkuanBn" />
                 ]]>
             </content:encoded>
         </item>
