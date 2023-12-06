@@ -5,6 +5,52 @@
         <link>https://www.infoq.cn/topic/AI</link>
         
         <item>
+            <id>https://www.infoq.cn/article/TavkpylwzkTM7924wE8y</id>
+            <title>抖音直播电商背后的技术实践：画面更高清、网络更低延迟、玩法儿更多</title>
+            <link>https://www.infoq.cn/article/TavkpylwzkTM7924wE8y</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/TavkpylwzkTM7924wE8y</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 06 Dec 2023 04:02:57 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 双十一, 抖音电商, 直播电商, 火山引擎
+<br>
+<br>
+总结: 2023年的双十一活动中，抖音电商通过与火山引擎合作，提供更高清、更沉浸、更互动的直播体验和新玩法，取得了巨大成功。通过火山引擎的自适应展示策略和内容自适应编码，直播画面更高清，商品细节更清晰可见。同时，通过降低直播延迟，消费者与商家的互动更加实时，提高了购买决策的效率。这些创新措施使得抖音电商成为双十一的赢家之一。 </div>
+                        <hr>
+                    
+                    <p>2023 年的“双十一”收官，品牌商家在这场“年终大考”中，纷纷交出了满意的“答卷”。</p><p></p><p>根据抖音发布的《玩法阶段战报》显示，在 2023 年双 11 好物节期间，抖音官方的立减玩法让商品的总计曝光达 1,341 亿；抖音平台的新商家数量同比增长 91%；抖音商城的消费人数同比增长 111%。从双十一的直播数据来看，10 月 20 日至 11 月 11 日，抖音电商里的直播间累计直播时长达 5,827 万小时，挂购物车的短视频播放量达 1,697 亿次。</p><p></p><p>视频化时代，直播电商的兴起改变了消费者的习惯和品牌商家的商业模式。但对于抖音电商来说，如何在“<a href="https://www.infoq.cn/article/d2vXbzccCxM1Ni5VRpGT?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">双十一</a>"”这样的“流量大考”中，为消费者提供更高清、更沉浸、更互动的直播体验和新玩法，从而驱动品牌的业务增长？这是<a href="https://mp.weixin.qq.com/s?__biz=MzA4NTU2MTg3MQ%3D%3D&amp;chksm=84605d6bb317d47de854b51c767168481dd2859f0fe563f39c9a6c34ad082b846dfce4e14c11&amp;idx=3&amp;mid=2655189515&amp;scene=27&amp;sn=06a95fea7b2120b93c4bf3ffea3d3079&amp;utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search#wechat_redirect">抖音电商</a>"首要解决的命题之一。</p><p></p><h2>一、直播画面更高清，让商品细节纤毫毕现</h2><p></p><p></p><p>非专业的直播设备让商品展示时的画面变得模糊，进而影响消费者的购买决策。抖音电商携手<a href="https://www.infoq.cn/article/VhJrF0rKTF1fDRGlTcdo?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">火山引擎</a>"打造了不同产品特性的定制化展示策略，通过自适应的方式做到场景化“满分”展示：</p><p></p><p>利用画质分析层对 ROI（Region Of Interest）、信号复杂度与基础画质进行特征分析；预测层接收特征，对场景进行分类，然后对画质 / 码率进行预测；通过决策算法，基于当前场景的目标画质、网络分析，决策出更优参数集合；最后将画质指标反馈给预测算法进行调优。</p><p></p><p><img src="https://static001.geekbang.org/infoq/93/93e56abe87d61c10d855ee4632cd9e46.png" /></p><p>图：火山引擎内容自适应策略</p><p></p><p>火山引擎的人眼感兴趣区域检测（ROI 检测），通过深度的机器学习来对视频内容进行分析，进而辅助 CAE 在编码阶段就进行更合理的码率分配，以此提高人眼感兴趣区域的编码质量，同时做到无损压缩。与传统的 ROI 检测能力相比，火山引擎通过数据集的优化和性能的不断打磨，做到了通过客户端使用便可与视频内容、视频种类解耦，目前已涵盖了直播间中包含人脸、商品等大规模常见的 ROI 区域。</p><p></p><p><img src="https://static001.geekbang.org/infoq/30/3048da71efd88d55faa66cb6a88ed9a1.png" /></p><p>图：火山引擎 ROI 检测与人眼兴趣区域高度重叠</p><p></p><p>在推流侧，火山引擎通过新一代自研 BVC 编码器，可实现内容自适应编码和感知视频编码。在电商场景下，受机型与系统编码能力的限制，会让推流侧出现时域上的画质波动（部分画面质量低）。这时，火山引擎新一代自研 BVC 编码器当会预测到低于既定的阈值，及时动态触发，调整码率与增强画质，实现高清画质相对恒定的直播体验。</p><p></p><p><img src="https://static001.geekbang.org/infoq/08/0838b8edd3f43a81b8d097eb0c68e009.png" /></p><p>图：火山引擎视频时域画质</p><p></p><p>此外，在播放端，火山引擎以 SDR 转 HDR 算法，通过参考 SMPTE 相关标准并结合色调映射算法，将 SDR 视频源转换为 HDR10 标准格式的 HDR 视频，以提升画面的对比度、色彩丰富度，为消费者带来更好的直播视觉效果，帮助品牌商家全方位展示商品细节。</p><p></p><p><img src="https://static001.geekbang.org/infoq/65/65ba01b3e6e02ec4a82c6cd454cdd65c.png" /></p><p>图：火山引擎 SDR 转 HDR 算法</p><p></p><h2>二、直播体验更低延迟，让消费者与商家云端同频</h2><p></p><p></p><p>直播延迟的高低，影响着消费者购买决策的是与否。</p><p></p><p>直播延迟主要分布在生产端、流媒体服务、消费端三个环节：</p><p></p><p>在生产端，一般情况下，网络延迟平均在 20~30ms，编码延迟依赖编码参数设置而定，因此在整体延迟中占比较小；在流媒体服务上，在拉流转码的场景下，会额外产生 300ms~2S 的转码延迟，如果直接播放源流，则不会产生转码延迟；在消费端，网络延迟一般在 100ms~200ms，延迟主要由链路分发节点之间的传输延迟产生。</p><p></p><p><img src="https://static001.geekbang.org/infoq/46/46b15ebd3232560fdfeac2d2c653e2d0.png" /></p><p>图：火山引擎直播延迟分析</p><p></p><p>在抖音电商的直播场景中，评论、提问和解答，是消费者与品牌商家互动的主要方式，品牌商家是否及时反馈，对直播间的活跃度和成单转化起着关键性的作用。在抖音电商的直播实践过程中，基于火山引擎直播 SDK 的云端一体化解决方案，可以将 FLV 拉流延迟降低至 2-3s 内；RTM 超低延时拉流延时降低至 1s 内；同时也能做到面对网络不稳定时的灵敏响应、对抗弱网环境和提升带宽利用率。</p><p></p><h2>三、直播玩法更丰富，让电商业务获得新增长</h2><p></p><p></p><p>如今，消费者越来越倾向于能互动、有参与感的购物体验，直播电商平台的互动同质化已难以满足消费者的需求，导致电商平台的成单转化或成挑战。</p><p></p><p>以往直播间会采用「主播介绍 - 上链接 - 观众抢购」的模式，对于头部主播来说，可以有效提升商品流转效率，从而提升 GMV，但对于其他中腰部主播或官方品牌的直播间来说，丰富与消费者的互动玩法晚饭，让消费者更加深入地了解商品，才能提升消费者的购买动力。</p><p></p><p>抖音电商与火山引擎共同打造的互动直播方案，可以为品牌商家打造抖音同款的互动体验，支持嘉宾连麦、主播 PK 等丰富的直播形式，相较于传统直播的文本聊天和发弹幕的形式更具有互动性。从直播数据生产到直播数据的全链路数据驱动，帮助有效提升消费者粘性与业务营收。火山引擎互动直播方案目前已在抖音平台落地实践，并获得日均场次超 210 万、人均观看时长同比增长 15.4% 的成效。</p><p></p><p><img src="https://static001.geekbang.org/infoq/51/515a5cd3c6749ae03e5f74f8d4cc89ee.png" /></p><p>图：抖音电商直播画面</p><p></p><h2>四、End</h2><p></p><p></p><p>从线下门店到线上购物再到直播电商，消费者的消费习惯不断变化，火山引擎视频云也将继续聚焦“消费体验”，持续升级迭代技术能力，助力品牌商家稳抓消费者心智、驱动业务新增量。未来，火山引擎将持续打造更安全、更稳定、更专业的云端直播服务，为消费者提供更低延迟、更高画质、更流畅的直播体验。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.infoq.cn/article/30kQk4C6UOvlrZJxiLNM</id>
+            <title>PayPal 合规平台研发总监朱琳确认出席 QCon 上海，分享图智能在 PayPal 的应用</title>
+            <link>https://www.infoq.cn/article/30kQk4C6UOvlrZJxiLNM</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/30kQk4C6UOvlrZJxiLNM</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 06 Dec 2023 03:30:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: QCon 全球软件开发大会, 图智能在 PayPal 的应用, 合规调查, 交易网络
+<br>
+<br>
+总结: PayPal 合规平台研发总监朱琳将在QCon全球软件开发大会上分享图智能在PayPal的应用，探讨如何利用图算法优化合规调查的流程，提高交易网络的调查效率，并解决大规模交易量下合规调查所面临的独特挑战。 </div>
+                        <hr>
+                    
+                    <p><a href="https://qcon.infoq.cn/2023/shanghai/?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=9&amp;utm_term=1206&amp;utm_content=zhulin">QCon 全球软件开发大会</a>"，将于 12 月在上海召开。PayPal 合规平台研发总监朱琳将发表题为《<a href="https://qcon.infoq.cn/2023/shanghai/presentation/5675?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=9&amp;utm_term=1206&amp;utm_content=zhulin">图智能在 PayPal 的应用</a>"》主题分享，探讨 PayPal 如何利用图算法优化合规调查的流程，提高交易网络的调查效率，并有效预防金融犯罪，以及如何成功解决大规模交易量下合规调查所面临的独特挑战。</p><p></p><p><a href="https://qcon.infoq.cn/2023/shanghai/presentation/5675?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=9&amp;utm_term=1206&amp;utm_content=zhulin">朱琳</a>"，2008 年硕士毕业于复旦大学计算机系。2018 年加入 PayPal 合规平台部门至今。专注以人工智能技术为合规调查提供创新、实用的解决方案，在反洗钱、违反用户使用协议检测和反金融犯罪等领域积累了丰富的实战经验。她在本次会议的演讲内容如下：</p><p></p><p>演讲：图智能在 PayPal 的应用</p><p></p><p>作为一家电子支付公司，PayPal 每天处理着大量的交易，为了防止金融犯罪（如欺诈、洗钱、恐怖融资等）、保证 PayPal 合法合规运行，合规调查发挥了至关重要的作用。然而，合规调查也面临着诸多挑战，包括交易网络的复杂性，犯罪模式的多样性等等。</p><p></p><p>在本次分享中，我们将介绍 PayPal 如何利用图算法优化合规调查的流程，提高交易网络的调查效率。</p><p></p><p>演讲提纲：</p><p></p><p>PayPal 合规调查的背景和挑战基于交易网络的账户合规调查图可视化算法及技术助力合规调查交易模式的自动检测和发现</p><p></p><p>听众收益点：</p><p></p><p>○ 了解 PayPal 如何通过图算法显著提高交易网络合规调查的效率，并有效预防金融犯罪</p><p>○ 了解 PayPal 如何成功解决大规模交易量下合规调查所面临的独特挑战</p><p></p><p>除上述演讲外，QCon 上海还将围绕&nbsp;<a href="https://qcon.infoq.cn/2023/shanghai/track/1595?utm_source=infoqweb&amp;utm_medium=teacherart">GenAI和通用大模型应用探索</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1596?utm_source=infoqweb&amp;utm_medium=teacherart">AI&nbsp;Agent&nbsp;与行业融合应用的前景</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1597?utm_source=infoqweb&amp;utm_medium=teacherart">LLM&nbsp;时代的性能优化</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1598?utm_source=infoqweb&amp;utm_medium=teacherart">智能化信创软件&nbsp;IDE</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1602?utm_source=infoqweb&amp;utm_medium=teacherart">面向人工智能时代的架构</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1604?utm_source=infoqweb&amp;utm_medium=teacherart">性能工程：提升效率和创新的新方法</a>"等专题进行交流。</p><p></p><p>QCon 上海 2023，相约 12 月！ 现在购票，享 9 折优惠，立减￥680！咨询购票请联系：18514549229（微信同手机号）。</p><p></p><p><img src="https://static001.geekbang.org/infoq/01/0113b3dfb187d5f9988b7eb16d2e0594.png" /></p><p></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.infoq.cn/article/Kmuok7Y278ktUSZox2PS</id>
             <title>度小满杨青：传统 AI 与大模型融合，引领金融科技创新浪潮</title>
             <link>https://www.infoq.cn/article/Kmuok7Y278ktUSZox2PS</link>
@@ -903,115 +949,6 @@ console.log({ res });</code></code></p><p></p><p><code lang="null">输出的结�
                         <hr>
                     
                     <p>大模型正在以前所未有的速度掀起创新型变革，站在时代的交叉路口，企业若想更好地洞察市场、提升生产效率、优化运营管理，无疑需要更大规模、更复杂的数据分析和 AI 应用进行支撑。</p><p></p><p>当数据和 AI 已经成为企业核心竞争力的重要组成部分，推进数据和 AI 基础设施的现代化便是企业数字化转型的重要举措。但摆在企业面前的挑战却层出不穷：</p><p></p><p>如何才能提升大规模数据处理能力？如何准确把握 AI 和大数据分析的最新落地实践与前沿趋势？又该如何解决 GPU 稀缺、数据工程复杂以及资源未充分利用等挑战？</p><p></p><p>上述提到的种种挑战都严重阻碍了数据价值的释放，然而，在这样的背景下，依旧不乏一批先行者与实践者率先找到了最佳实践路径。在 12 月 9 日的“2023 全球 AI 前沿科技大会”上，将为你奉上 AI 和大数据分析在不同行业的最新进展、趋势及对未来的展望。</p><p></p><p>此次大会由 Alluxio 与北京大学计算机学院、中关村融创企业开放创新促进会、中关村创业大街联合举办。</p><p>大会将邀请中国科学院院士梅宏、Databricks 和 Anyscale 联合创始人兼执行主席 Ion Stoica、Alluxio 创始人兼首席执行官李浩源、美国卡内基梅隆大学计算机学院软件研究所助理教授方飞、面壁智能联合创始人、CEO 李大海、Alluxio 创始成员兼开源社区副总裁范斌以及科大讯飞北京研究院副院长李家琦等国内外知名学者、企业技术专家，他们将围绕“智算加速，建瓴未来”这一主题，带来最佳实践与趋势洞察。</p><p></p><p>不仅大咖云集，本场大会的主会场内容还涵盖了 6 大前沿主题 +1 场圆桌会议，从数据基础设施软件基座到大模型应用探索，从面向未来的建设展望到挖掘大模型的无限潜能。</p><p></p><p><img src="https://static001.geekbang.org/infoq/55/550864d8bacfb28f6cfd714551aef00d.jpeg" /></p><p></p><p>此外，还单独设置大数据分析专场 +AI/ML 专场。在【AI/ML】会场中，来自知乎、Shopee、快手、MemVerge、PingCAP、Alluxio 的 6 位嘉宾，将围绕 AI 场景中 Alluxio 加速模型训练与模型上线的实战经验展开分享；在【大数据分析】会场中，来自联通、Uber、微软、B 站、携程、Alluxio 的 6 位嘉宾将围绕大数据时代背景下，多样化应用与探索，为同行业其他品牌带来诸多应用借鉴。</p><p></p><p><img src="https://static001.geekbang.org/infoq/f4/f405ef4156f658a1a46d6209abc71d7f.png" /></p><p></p><p>众多专家齐聚，前沿趋势与最佳落地实践结合，相信这场理论与实践兼备的大会，定会让你不虚此行！如果你对前沿 AI 和大数据分析技术感兴趣，并期待收获一次沉浸式的学习体验，欢迎大家参与“2023 全球 AI 前沿科技大会”。</p><p></p><p>报名通道现已开启，欢迎扫描下方二维码提前占位，12 月 9 日 09:00-17:30，我们在北京中关村国家自主创新示范区会议中心，与你不见不散！</p><p></p><p><img src="https://static001.geekbang.org/infoq/6d/6d9edfa411cd3a0823c4936862bea5e2.png" /></p><p></p><p>不仅议程安排足够丰富，到场的小伙伴还会获得由 Alluxio 准备的 5 重精美礼品，品类多达 20+ 种，欢迎到场赢取惊喜哦～<a href="https://www.infoq.cn/form/?id=1928&amp;utm_source=gzh&amp;sign=iq_655f138c0be1e">也可点击此链接，直接报名！</a>"</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/r14f5E9kJAxbaN7dMWdS</id>
-            <title>楷同科技有限公司 CEO 黄益聪确认出席 QCon 上海，分享基于时间序列数据预测模型的智能量化交易系统性能优化实践</title>
-            <link>https://www.infoq.cn/article/r14f5E9kJAxbaN7dMWdS</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/r14f5E9kJAxbaN7dMWdS</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 29 Nov 2023 03:30:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: QCon 全球软件开发大会, 时间序列数据预测模型, 智能量化交易系统, 性能优化实践
-<br>
-<br>
-总结: 本文介绍了即将在上海举办的QCon全球软件开发大会，其中将有一位演讲嘉宾分享关于基于时间序列数据预测模型的智能量化交易系统性能优化实践的主题。演讲内容包括系统全链路的优化实践，如如何高效处理计算高频产生的时间序列数据、降低数据对Java GC的影响等。该演讲将对构建高性能、低延迟的智能量化交易系统以及多语言开发的复杂系统的全链路性能分析和优化等方面带来收益。 </div>
-                        <hr>
-                    
-                    <p><a href="https://qcon.infoq.cn/2023/shanghai/?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=8&amp;utm_term=1129&amp;utm_content=huangyicong">QCon 全球软件开发大会</a>"，将于 12 月在上海召开。快手基础平台部系统软件中心 / 系统软件负责人熊刚将发表题为《<a href="https://qcon.infoq.cn/2023/shanghai/presentation/5626?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=8&amp;utm_term=1129&amp;utm_content=huangyicong">基于时间序列数据预测模型的智能量化交易系统性能优化实践</a>"》主题分享，探讨系统全链路从数据采集 - 数据计算 - 模型预测 - 交易下单，全流程进行优化的实践，包括怎样高效的在 Java 处理计算 C++ 高频产生的时间序列数据，怎么降低高频产生、长生命周期数据对 Java GC 的影响等。</p><p></p><p><a href="https://qcon.infoq.cn/2023/shanghai/presentation/5626?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=8&amp;utm_term=1129&amp;utm_content=huangyicong">黄益聪</a>"，曾担任 Intel 高级工程师，阿里巴巴高级技术专家，中国互联网百强独角兽企业技术副总裁、CTO，有 15 项中国发明专利，3 项美国发明专利，专注于大数据与人工智能领域，AI 量化交易系统实践。他在本次会议的演讲内容如下：</p><p></p><p>演讲：基于时间序列数据预测模型的智能量化交易系统性能优化实践</p><p></p><p>金融市场的行情数据，如股票价格、成交量、交易队列等是典型的时间序列数据，具有很强的时间性和顺序依赖性。智能量化交易系统需要对市场上高频产生的时间序列数据进行处理计算，输入深度学习模型进行预测，执行交易策略，生成交易行为进行交易。整个过程需要覆盖全市场一万以上的品种，并且需要在很小的时间窗口，比如秒级完成。进一步的，我们使用了多语言进行系统开发。其中数据采集模块使用了 C++ 以达到高性能，交易策略引擎使用了 Java Spring Boot 搭建服务，AI 模型使用了 Python 基于 TensorFlow 和 Torch 框架。</p><p></p><p>业务需求的系统低延迟计算和多语言系统模块的交互，给我们的性能优化带来了挑战。这次分享，将带来我们对系统全链路从数据采集 - 数据计算 - 模型预测 - 交易下单，全流程进行优化的实践分享，包括怎样高效的在 Java 处理计算 C++ 高频产生的时间序列数据，怎么降低高频产生、长生命周期数据对 Java GC 的影响，怎么高效部署调用低延迟、多模型、多版本的 AI 模型预测服务，系统故障的数据断点快速恢复等。</p><p></p><p>演讲提纲：</p><p></p><p>背景与项目概况</p><p>○ 量化交易系统介绍</p><p>○ 项目技术架构</p><p>○ C++/ Java / Python 多语言交互</p><p>全链路数据流优化</p><p>○ 实时行情数据收集与处理</p><p>○ 低延迟、高吞吐性能挑战</p><p>○ 尝试的优化手段：GC Tuning，Direct Buffer</p><p>○ 我们的解决方案</p><p>○ 性能优化效果</p><p>服务化 AI 模型预测</p><p>○ Tensorflow 模型性能优化实践</p><p>○ Torch 模型转换</p><p>总结与展望</p><p>○ 复杂模型和低延迟预测性能的权衡</p><p>○ 目标展望：更快、更准</p><p></p><p>听众收益点：</p><p></p><p>○ 构建高性能、低延迟的智能量化交易系统</p><p>○ 多语言开发的复杂系统的全链路性能分析和优化</p><p>○ AI 模型在智能量化交易系统的实践</p><p></p><p>除上述演讲外，QCon 上海还将围绕&nbsp;<a href="https://qcon.infoq.cn/2023/shanghai/track/1595?utm_source=infoqweb&amp;utm_medium=teacherart">GenAI和通用大模型应用探索</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1596?utm_source=infoqweb&amp;utm_medium=teacherart">AI&nbsp;Agent&nbsp;与行业融合应用的前景</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1597?utm_source=infoqweb&amp;utm_medium=teacherart">LLM&nbsp;时代的性能优化</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1598?utm_source=infoqweb&amp;utm_medium=teacherart">智能化信创软件&nbsp;IDE</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1602?utm_source=infoqweb&amp;utm_medium=teacherart">面向人工智能时代的架构</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1604?utm_source=infoqweb&amp;utm_medium=teacherart">性能工程：提升效率和创新的新方法</a>"等专题进行交流。</p><p></p><p>QCon 上海 2023，相约 12 月！ 8 折优惠还剩最后 3 天，现在购票立减￥1360！咨询购票请联系：18514549229（微信同手机号）。</p><p></p><p><img src="https://static001.geekbang.org/infoq/01/0113b3dfb187d5f9988b7eb16d2e0594.png" /></p><p></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/W5RzCzfZ6imJQrCk2lW9</id>
-            <title>全方位深度测评 AI 代码助手 Amazon CodeWhisperer</title>
-            <link>https://www.infoq.cn/article/W5RzCzfZ6imJQrCk2lW9</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/W5RzCzfZ6imJQrCk2lW9</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 29 Nov 2023 02:40:36 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 程序员, 代码助手, AI, Amazon CodeWhisperer
-<br>
-<br>
-总结: 随着互联网技术的发展，程序员们面临着越来越多的挑战，传统的开发工具已经无法满足需求，因此基于人工智能技术的代码助手应运而生。Amazon CodeWhisperer是亚马逊推出的AI代码助手，旨在帮助程序员提高开发效率、减少错误、提高代码质量，并支持多种编程语言和开发环境。它通过实时生成代码建议、获取开源项目信息、扫描代码漏洞等特性，帮助程序员快速构建应用程序，提高团队协作效率。 </div>
-                        <hr>
-                    
-                    <p></p><h3>背景</h3><p></p><p></p><p>随着互联网技术的不断发展，<a href="https://so.csdn.net/so/search?q=%E7%A8%8B%E5%BA%8F%E5%91%98&amp;spm=1001.2101.3001.7020">程序员</a>"们面临着越来越多的挑战，如代码复杂度不断提高、代码错误难以避免、团队协作效率低下等。传统的开发工具已经无法满足程序员们的需求，因此这几年基于人工智能技术的代码助手应运而生。AI代码助手的目的是通过自动化的方式帮助程序员提高开发效率、减少错误、提高代码质量，同时还可以帮助程序员快速学习新技术、更快，更安全地构建应用程序，提高团队协作效率。可以说AI代码助手成为当今软件开发领域的重要趋势之一。本篇文章就来深度测评一下AI 代码助手&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"。</p><p></p><h3><a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer 介绍</a>"</h3><p></p><p></p><p>Amazon CodeWhisperer&nbsp;是亚马逊云科技推出的AI代码助手，目的是帮助开发者更快，更安全地构建应用程序。作为智能编程助手，它经过了非常多的优秀开源代码训练，参与训练的代码都是具有良好的扩展性，安全性，优雅等特点，利用它编写的代码能够很快地写出健壮，优雅，具有很高扩展性的代码。 此外它还可以扫描代码来检测难以发现的漏洞，获取代码建议来立即修复漏洞。总的来说它具有以下特性：</p><p></p><h4>特性</h4><p></p><p>实时生成代码片段或全函数的代码建议获取相关开源项目的存储库信息扫描代码漏洞，给出修复建议支持 Python，Java，JavaScript 等15中编程语言支持 VS Code，IntelliJ IDEA，Amazon Cloud9、Amazon Lambda 控制台、JupyterLab 和 Amazon SageMaker Studio 等集成开发环境</p><p>以上就是&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"&nbsp;的介绍，下面进入正在的测评阶段。</p><p></p><p>主要从以下几方面进行测评：</p><p>用户体验 （包括，安装，配置，文档资料）功能使用（包括，上手难度，使用复杂度，安全，准确度）场景实践（以具体业务场景体验功能）</p><p>安装，配置也是测评的一部分，下面就从最开始的安装开始体验。</p><p></p><h3>安装配置&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"</h3><p></p><p></p><p>本次安装使用的在 Windows 10 的 VS Code 上进行的。作为 AI 智能代码助手，它是以 IDE 插件的方式存在的。这样能够很好地与 IDE 相关功能无缝结合。提升开发效率，增强用户体验。</p><p>打开 VS Code，在插件列表中搜索&nbsp;&nbsp;Amazon Toolkit</p><p></p><p><img src="https://static001.geekbang.org/infoq/f6/f6001aab889f12da44c240e236b393a0.png" /></p><p></p><p>找到名称为&nbsp;Amazon Toolkit&nbsp;的插件，点击 Install 按钮进行安装。有时安装后，需要重载一下 VS Code 才能用。</p><p></p><p>笔者写这篇文章时，Amazon Toolkit 最新的版本是&nbsp;1.91.0，如果有读者安装的与笔者的功能不同，请检查下版本是否一致。以下是该插件的一些基本信息：</p><p></p><p>版本：1.91.0</p><p>下载次数：1,663,326</p><p>Git仓库：<a href="https://github.com/aws/aws-toolkit-vscode">amazon-toolkit-vscode</a>"</p><p>插件地址：<a href="https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.aws-toolkit-vscode">Amazon Toolkit</a>"</p><p>开源协议：<a href="https://marketplace.visualstudio.com/items/AmazonWebServices.aws-toolkit-vscode/license">Apache License Version 2.0</a>"</p><p>从下载次数来看，Amazon Toolkit 是一个非常受欢迎的插件。</p><p></p><p>在安装完成后，你可以在左侧的侧边栏，看到一个 Amazon 的图标，点击它就会出现插件的面板。如下：</p><p></p><p><img src="https://static001.geekbang.org/infoq/cf/cf5282612c54c8bbfe19fc90a4330893.png" /></p><p></p><p>该插件主要包括三种功能：</p><p>Amazon CodeCatalyst 统一的软件开发服务，可在 Amazon 上快速构建和交付应用程序。CDK 云应用程序资源<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"&nbsp;智能代码助手。</p><p></p><p>要使用这些功能，需要用户先连接 Amazon 服务。</p><p>当我们需要使用&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"， 只需要点击 CodeWhisperer 下的 Star 按钮，然后再点击 Sign in 按钮，如下图：</p><p></p><p><img src="https://static001.geekbang.org/infoq/1e/1eef9b4b08c3caf3531f5de0359ea4ef.png" /></p><p></p><p>如果你没有 Amazon 账号，也没关系，点击按钮后，会弹出一个重定向弹窗，点击 Proceed To Brower，使用浏览器继续。</p><p></p><p><img src="https://static001.geekbang.org/infoq/0d/0dfbfdcf8bf635a46abd91a6d1c87101.png" /></p><p></p><p>点击按钮会 页面显示大致如下</p><p></p><p><img src="https://static001.geekbang.org/infoq/38/38a25646300243dc95df751500b13575.png" /></p><p></p><p>点击确认并继续</p><p></p><p><img src="https://static001.geekbang.org/infoq/00/001bf944dc6ac743c9447bda273ba7d3.png" /></p><p></p><p></p><p><img src="https://static001.geekbang.org/infoq/af/af604608b158437bc40c52737e655a4b.png" /></p><p></p><p></p><p><img src="https://static001.geekbang.org/infoq/0d/0d1b5f33d305b5bcc8814fb78275e49d.png" /></p><p></p><p></p><p><img src="https://static001.geekbang.org/infoq/22/22751317effcc0fd3da7517310242f5b.png" /></p><p></p><p>总体步骤就是，输入邮箱，姓名 → 验证邮箱 → 填写密码 → 允许 Amazon Toolkit 访问数据</p><p>整体流程非常顺畅，安装，配置三分钟内就能完成。</p><p>授权后，插件就开始工作了。我们也可以开始愉快地工作了。</p><p></p><p><img src="https://static001.geekbang.org/infoq/04/049a734c47975b7b61254a680a2ea7a7.png" /></p><p></p><p>此外值得一提的是，该插件还提供了一种专业版的功能，不过要配置 IAM 身份中心，这部分我们暂时不表。</p><p></p><p>在安装并配置&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"&nbsp;后，在编码时会自动开启代码建议。同时你也可以收到去获取代码建议。在 Windows 平台的 VS Code 上，使用 Alt + C 键，使用 Tab 键来插入当前的建议代码块。使用左右键来切换代码块。</p><p></p><h3>具体场景</h3><p></p><p></p><p>下面我们在具体的场景中来体验&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"。</p><p></p><h4>使用&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Code Whisperer</a>"&nbsp;开发数据可视化图表</h4><p></p><p></p><p>场景一：作为一名前端开发者，我们经常会遇到使用图表库开发一些可视化的图表，比如使用 Echarts 来开发一个折线图。</p><p></p><p>我们创建一个简单的 html，在页面内写入必要的信息，并在 script 标签中写入注释：</p><p></p><p><code lang="text"></code></p><p></p><p>然后按下 Alt + C 键，这时在 VS Code 会调出，html is currently not supported by CodeWhisperer。</p><p>如下图：</p><p></p><p><img src="https://static001.geekbang.org/infoq/f2/f2da98c8bac8acc7f71497714af82c2d.png" /></p><p></p><p>目前&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">CodeWhisperer</a>"&nbsp;还不支持 html 文件的代码建议。所以我们需要先创建一个 js，然后在 html 文件中引入。</p><p></p><p>我们在 js 文件中，使用注释写下需要实现的功能，然后按下 Alt + C 键。就会出现如下图：</p><p></p><p><img src="https://static001.geekbang.org/infoq/71/716980467f988fd2dcdacba2d6a3d3bf.png" /></p><p></p><p>在检查过给出的建议代码后，确定是我们需要的，按下 Tab 键，来获取插入当前区域。</p><p>更加具体的交互可以先下面的动图：</p><p></p><p><img src="https://static001.geekbang.org/infoq/d2/d22e5bdeb330a5005e81a78905ad46c3.gif" /></p><p></p><p>这是一个非常实用的场面，避免了花费大量时间去查询 Echarts 文档。要知道 Echarts 的配置文档是非常多的。下图是密密麻麻的 Echarts 图表配置项：</p><p></p><p><img src="https://static001.geekbang.org/infoq/f0/f009865a68020e1730d96b161fc79a89.png" /></p><p></p><p></p><h4>编写一个 Python 的浏览器自动化脚本</h4><p></p><p></p><p>作为一名开发人员，我们经常会遇到一些重复的工作，比如这样一个场景，在某个网站上有一个销售榜单，我们需要实时监控这个表单，并将每天的数据汇总发到邮箱里。对于这样的重复性没有技术含量的工作，我们通常使用脚本来编写自动化脚本。下面我们就使用&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"&nbsp;来编写一个这样的脚本，看看它是否能够帮助我们快速实现功能。</p><p></p><p>创建一个 auto-run.py 的文件，在文件里引入 selenium，并且使用代码注释写下要实现的功能，按下 Alt + C 键。交互动图如下：</p><p></p><p><img src="https://static001.geekbang.org/infoq/72/72dc7a512bd67b79380a853d44a65105.gif" /></p><p></p><p>根据动图大家可以看到，当按下 Alt + C 键时，只提供了一行代码建议，在按下左箭头键后，出现了四行的代码建议。整个流程是非常快速的。</p><p></p><p>给出的代码建议地完整地实现了， 使用 webdriver 打开 Chrome 浏览器，并且访问百度首页，但在输入关键词时，却把"拿我格子衫" 写成了“拿战校衫”。个人猜测是由于中文在大模型中有偏差造成的。换成英文就无此问题。</p><p></p><p>使用&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"&nbsp;时，代码建议是非常快速的，这个快，除了靠个人感觉来评估，也有一些更为准确的数字来评估。<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"&nbsp;提供了一个日志面板，我们可以在 VS Code 的 Setting 配置面板里，找到 Amazon Toolkit 的配置项，找到 Log Level，将其调整为 debug。如下图：</p><p></p><p><img src="https://static001.geekbang.org/infoq/f5/f57ad175da4f88acfaa7ca349b5a8e18.png" /></p><p></p><p>调整后，我们选中 OUTPUT 面板，并将输出选位 Amazon Toolkit Logs，如下图：</p><p></p><p><img src="https://static001.geekbang.org/infoq/9b/9b2ea6250202ee1d78e1fe58cace1c75.png" /></p><p></p><p>当我们在编辑器中按下 Alt + C 键，底部的日志面板会打印出整个流程的日志：</p><p>打印信息大致如下</p><p></p><p><code lang="text">2023-09-25 11:36:41 [DEBUG]: command: running "aws.codeWhisperer"
-2023-09-25 11:36:41 [DEBUG]: command: running "_aws.auth.autoConnect"
-2023-09-25 11:36:41 [VERBOSE]: telemetry: emitted metric "vscode_executeCommand"
-2023-09-25 11:36:41 [DEBUG]: codewhisperer: Connection expired = false,
-                           secondaryAuth connection expired = false,
-                           connection is undefined = false
-2023-09-25 11:36:41 [DEBUG]: codewhisperer: isValidCodeWhispererConnection = true
-2023-09-25 11:36:41 [VERBOSE]: telemetry: emitted metric "vscode_executeCommand"
-2023-09-25 11:36:41 [DEBUG]: CodeWhisperer finished fetching crossfile context out of 0 files
-2023-09-25 11:36:41 [DEBUG]: CodeWhispererSupplementalContext:
-    isUtg: false,
-    isProcessTimeout: false,
-    contentsLength: 0,
-    latency: 0.2452000007033348,
-
-2023-09-25 11:36:41 [DEBUG]: SSO token cache: loaded key: 5fa44ff1-8f20-4ed5-89be-548baeb748aa
-2023-09-25 11:36:42 [DEBUG]: Request ID: db72446b-5ee6-439f-af87-87800aa93d90,
-                timestamp(epoch): 1695613002378,
-                timezone: Asia/Shanghai,
-                datetime: 9/25/2023, 11:36:42 AM,
-                vscode version: '1.82.2',
-                extension version: '1.91.0',
-                filename: 'hello-selenium.py',
-                left context of line:  '',
-                line number: 2,
-                character location: 0,
-                latency: 1047.5229000002146 ms.
-2023-09-25 11:36:42 [VERBOSE]: Recommendations:
-2023-09-25 11:36:42 [VERBOSE]: [0]
-driver = webdriver.Chrome()
-2023-09-25 11:36:42 [VERBOSE]: telemetry: emitted metric "codewhisperer_serviceInvocation"
-2023-09-25 11:36:42 [DEBUG]: SSO token cache: loaded key: 5fa44ff1-8f20-4ed5-89be-548baeb748aa
-2023-09-25 11:36:42 [VERBOSE]: telemetry: emitted metric "codewhisperer_perceivedLatency"
-2023-09-25 11:36:43 [DEBUG]: Request ID: b69b0f19-bf91-4fe3-b335-96268b567126,
-                timestamp(epoch): 1695613003423,
-                timezone: Asia/Shanghai,
-                datetime: 9/25/2023, 11:36:43 AM,
-                vscode version: '1.82.2',
-                extension version: '1.91.0',
-                filename: 'hello-selenium.py',
-                left context of line:  '',
-                line number: 2,
-                character location: 0,
-                latency: 1041.122000001371 ms.
-2023-09-25 11:36:43 [VERBOSE]: Recommendations:
-2023-09-25 11:36:43 [VERBOSE]: [0]
-driver = webdriver.Chrome()
-driver.get("http://www.baidu.com")
-driver.find_element_by_id("kw").send_keys("拿战校衫")
-driver.find_element_by_id("su").click()
-2023-09-25 11:36:43 [VERBOSE]: [1]
-driver = webdriver.Chrome()
-driver.get("http://www.baidu.com")
-driver.find_element_by_id("kw").send_keys("拿战校衣")
-driver.find_element_by_id("su").click()</code></p><p></p><p>根据打印日志的信息，基本的流程大致是这样的：</p><p></p><p>时间戳：2023-09-25 11:36:41，日志以DEBUG级别开始，表示调试信息。命令执行：运行"aws.codeWhisperer"和"_aws.auth.autoConnect"两个命令。遥测数据：emitted metric “vscode_executeCommand”，表示执行了一个 VS Code 命令。检查&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">CodeWhisperer</a>"&nbsp;连接状态：isValidCodeWhispererConnection为true，连接有效。检查&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">CodeWhisperer</a>"&nbsp;获取 crossfile 上下文的结果：完成从一个文件中获取crossfile上下文。检查&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">CodeWhisperer</a>"&nbsp;补充上下文信息： isUtg 为 false，isProcessTimeout 为 false，contentsLength 为0，latency 为0.245秒。SSO令牌缓存：加载了SSO令牌缓存的键值对。请求ID、时间戳、时区、日期时间、VS Code 版本、扩展版本、文件名、行号、字符位置、延迟等信息被记录。推荐建议：[0]，建议使用 webdriver.Chrome() 来创建一个 Chrome 浏览器驱动对象。遥测数据：emitted metric “codewhisperer_serviceInvocation”，表示服务调用的度量数据。…</p><p></p><p>使用 token 发起的 Request，整个请求中包含了这些信息：</p><p></p><p><code lang="text">timestamp(epoch): 1695613003423,
-timezone: Asia/Shanghai,
-datetime: 9/25/2023, 11:36:43 AM,
-vscode version: '1.82.2',
-extension version: '1.91.0',
-filename: 'hello-selenium.py',
-left context of line:  '',
-line number: 2,
-character location: 0,
-latency: 1041.122000001371 ms.</code></p><p></p><p>其中有一个指标是 latency，表明延迟，即从用户按下 Alt+ C 键，到代码块出现这段时间。可以看到生成4行代码只用了 1s 左右，非常的迅速。</p><p></p><p>通过上述的两个实战案例，相信大家已经了解&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"&nbsp;的常规使用。在使用时需要以下几点</p><p></p><h4>使用时注意点</h4><p></p><p></p><p>实现功能需要提供一些上下文，比如使用的库和功能注释最好使用英文，中文可能出现乱码或繁体使用左箭头键和右箭头键选择最合适的代码块html 和 yaml 文件暂时不支持</p><p></p><p>另外在使用的过程中，发现了一个不知是 VS Code 的问题还是插件的问题，就是在用鼠标切换代码建议时，当前索引没有改变，详见下图：</p><p></p><p><img src="https://static001.geekbang.org/infoq/52/5251601e3e9e3553667a3607f4d627bc.gif" /></p><p></p><p>根据上图 可以看到 切换代码建议，&nbsp;1/5&nbsp;一直都没有变， 用户无法感知当前显示的是第几个代码块。</p><p></p><h4>插件代码解析</h4><p></p><p></p><p>为了更加了解这个产品，我仔细阅读了该插件的源码，它的代码托管在 GitHub，主要功能代码存放在&nbsp;src/codewhisperer&nbsp;目录里。</p><p></p><p>Amazon CodeWhisperer 的插件入口在此处，<a href="https://github.com/aws/aws-toolkit-vscode/blob/master/src/codewhisperer/views/securityPanelViewProvider.ts">https://github.com/aws/aws-toolkit-vscode/blob/master/src/codewhisperer/views/securityPanelViewProvider.ts</a>"</p><p>这段代码是一个名为&nbsp;SecurityPanelViewProvider&nbsp;的类，它实现了&nbsp;vscode.WebviewViewProvider&nbsp;接口。这个类主要用于在 Visual Studio Code 中打开一个特定的文件并在安全扫描面板中显示代码扫描结果。</p><p></p><p>以下是该类的主要方法和功能：</p><p></p><p>makeUri(...args: Parameters): vscode.Uri：&nbsp;这个方法用于根据给定的路径和行号范围创建一个 URI，用于在 openEditorAtRange 方法中打开编辑器。</p><p>openEditorAtRange(path: string, startLine: number, endLine: number)：&nbsp;这个方法接受一个文件路径和开始、结束行号，然后在 VS Code 中打开该文件并在指定的行范围内高亮显示问题。</p><p>persistLines()：&nbsp;这个方法用于持久化处理过的行信息。</p><p>addLines(securityRecommendationCollection: AggregatedCodeScanIssue[], editor: vscode.TextEditor | undefined)：&nbsp;这个方法用于将扫描结果添加到安全面板中，并更新视图。</p><p>update()：&nbsp;这个方法用于更新视图，将处理好的HTML内容设置到 webview 中。</p><p>persistLine(panelSet: SecurityPanelSet, index: number)：&nbsp;这个方法用于持久化单个处理过的行信息。</p><p>addUnclickableWarningItem(item: SecurityPanelItem) 和 addUnclickableInfoItem(item: SecurityPanelItem)：&nbsp;这两个方法分别用于添加不可点击的警告项和信息项。</p><p>addClickableWarningItem(item: SecurityPanelItem) 和 addClickableInfoItem(item: SecurityPanelItem)：&nbsp;这两个方法分别用于添加可点击的警告项和信息项，它们会生成一个包含文件路径和行号范围的 URI，并将其设置为链接的 href 属性，以便用户可以点击查看文件并在 VS Code 中打开。</p><p></p><h4>学习资料与文档</h4><p></p><p></p><p>虽然 Amazon CodeWhisperer 使用起来非常简单，但官方还是提供了很多学习资料，覆盖各个阶段的学习者。</p><p>如果你想要获取更多有关它的资料 可以查阅官方文档&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/">https://aws.amazon.com/cn/codewhisperer/</a>"下面是几篇帮助你快速了解 Amazon CodeWhisperer 的视频教程。</p><p><a href="https://dev.amazoncloud.cn/video/videoDetail?id=6445fcdec9a819396b2fe24a">利用 VS Code 开始使用 Amazon CodeWhisperer</a>"</p><p><a href="https://dev.amazoncloud.cn/video/videoDetail?id=6445fa2413eafe780ecafaac">利用 Amazon CodeWhisperer 创建基于 Python 的事件驱动型 Serverless App</a>"</p><p><a href="https://dev.amazoncloud.cn/video/videoDetail?id=6445fb816afa68650f58e0df">利用 Amazon CodeWhisperer 创建基于 Java 的事件驱动型 Serverless App</a>"</p><p></p><h3>总结</h3><p></p><p></p><p>总的来讲，<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"&nbsp;是一款非常优秀的智能编程助手，它能够理解代码的功能和结构，并根据这些信息自动生成注释。这有助于提高代码的可读性和可维护性，同时也能帮助开发人员更好地理解他们正在编写的代码。</p><p></p><p>本文介绍了<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"&nbsp;的背景和特性，并测评了它在实际开发场景中的优秀表现。此外，也给出了一些&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"&nbsp;的教程视频。</p><p></p><p>总之，<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"&nbsp;是一种借助AI大模型创新性的工具，它有助于改善代码质量和软件开发效率，并帮助开发人员更快速，更安全地开发应用，大家快快用起来，也期待&nbsp;<a href="https://aws.amazon.com/cn/codewhisperer/?trk=cndc-detail">Amazon CodeWhisperer</a>"&nbsp;能够更新更多的功能。</p>
                 ]]>
             </content:encoded>
         </item>
