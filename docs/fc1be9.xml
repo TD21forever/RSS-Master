@@ -5,6 +5,38 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1732377907795013749#m</id>
+            <title>这一天还是来了，deepsex-34b，一个专门用来写小黄书（NFSW）的 LLM。下面是训练过程：
+
+◆作者先收集了大约4GB的各种轻小说的总集合，并使用BERT对数据集中情节相似的小说进行了两轮相似性去重。此外，还混入了一部分不适宜内容的小说，以提高模型的不适宜内容识别能力。
+◆然后使用YI-34B-base作为模型的基础，使用r=64 alpha=128的设置，并使用qlora对连续预训练进行3个时期的微调。
+◆准备limarp+pippa数据集，将其清理为alpaca格式，并使用goliath-120b进行评分，该模型擅长角色扮演，筛选出高质量的问题和答案对。共有30k条数据。
+◆使用2中获得的基础模型的数据，在6个时期内进行sft，r=16 alpha=32进行微调。
+
+模型下载：https://huggingface.co/zzlgreat/deepsex-34b</title>
+            <link>https://nitter.cz/op7418/status/1732377907795013749#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1732377907795013749#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 06 Dec 2023 12:34:13 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这一天还是来了，deepsex-34b，一个专门用来写小黄书（NFSW）的 LLM。下面是训练过程：<br />
+<br />
+◆作者先收集了大约4GB的各种轻小说的总集合，并使用BERT对数据集中情节相似的小说进行了两轮相似性去重。此外，还混入了一部分不适宜内容的小说，以提高模型的不适宜内容识别能力。<br />
+◆然后使用YI-34B-base作为模型的基础，使用r=64 alpha=128的设置，并使用qlora对连续预训练进行3个时期的微调。<br />
+◆准备limarp+pippa数据集，将其清理为alpaca格式，并使用goliath-120b进行评分，该模型擅长角色扮演，筛选出高质量的问题和答案对。共有30k条数据。<br />
+◆使用2中获得的基础模型的数据，在6个时期内进行sft，r=16 alpha=32进行微调。<br />
+<br />
+模型下载：<a href="https://huggingface.co/zzlgreat/deepsex-34b">huggingface.co/zzlgreat/deep…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Fxa2ZPZ2EwQUFrVU9NLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1732368220429115511#m</id>
             <title>Google 再发布王炸级图像生成功能Generative Powers of Ten，支持对生成的图像进行无限放大，比如讲一张人像照片放大到可以看到细胞结构，从地球大气层缩放到地面上的物体。
 通过联合多尺度扩散采样方法实现这一目标，该方法鼓励不同尺度的一致性，同时保持每个单独采样过程的完整性。由于每个生成的比例都由不同的文本提示引导，因此我们的方法比传统的超分辨率方法能够实现更深层次的缩放，而传统的超分辨率方法可能很难在截然不同的比例下创建新的上下文结构。下面是具体介绍：
