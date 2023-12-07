@@ -5,6 +5,52 @@
         <link>https://www.infoq.cn/topic/AI</link>
         
         <item>
+            <id>https://www.infoq.cn/article/9VZpK1cefI2chOMcZlr6</id>
+            <title>字节跳动开源 Kelemetry：面向 Kubernetes 控制面的全局追踪系统</title>
+            <link>https://www.infoq.cn/article/9VZpK1cefI2chOMcZlr6</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/9VZpK1cefI2chOMcZlr6</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 07 Dec 2023 02:47:55 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Kelemetry, Kubernetes, 追踪系统, 可观测性
+<br>
+<br>
+总结: Kelemetry是字节跳动开发的用于Kubernetes控制平面的追踪系统，它通过追踪单个Kubernetes对象的完整生命周期以及不同对象之间的相互影响，从全局视角串联起多个Kubernetes组件的行为。通过可视化K8s系统内的事件链路，Kelemetry使得Kubernetes系统更容易观测、更容易理解、更容易Debug。 </div>
+                        <hr>
+                    
+                    <p>Kelemetry 是<a href="https://www.infoq.cn/article/AsgjeVRM8isLSzo7IXzh?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">字节跳动</a>"开发的用于 Kubernetes 控制平面的追踪系统，它从全局视角串联起多个 Kubernetes 组件的行为，追踪单个 <a href="https://mp.weixin.qq.com/s?__biz=MzI5ODQ2MzI3NQ%3D%3D&amp;chksm=eca7f1acdbd078baf17571575d642a09391401c945ddae152443ea51963b8eaca11b540c3364&amp;idx=1&amp;mid=2247502056&amp;scene=27&amp;sn=ef7a6deb9a63551cac10322b6b059aad&amp;utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search#wechat_redirect">Kubernetes </a>"对象的完整生命周期以及不同对象之间的相互影响。</p><p></p><p>通过可视化 K8s 系统内的事件链路，它使得 Kubernetes 系统更容易观测、更容易理解、更容易 Debug。</p><p></p><p><img src="https://static001.geekbang.org/infoq/db/db4d1992cabf04d9d5b71732aa916335.png" /></p><p></p><h2>背景</h2><p></p><p></p><p>在传统的分布式追踪中，“追踪”通常对应于用户请求期间的内部调用。特别是当用户请求到达时，追踪会从根跨度开始，然后每个内部 <a href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA%3D%3D&amp;chksm=bdbec6368ac94f20a4bc7b7ca477b73dadb587d40cc4d30907e9a68f6c25d8dde1fe6a216337&amp;idx=2&amp;mid=2651012709&amp;scene=27&amp;sn=520d66662328a7b4dbb2c7a93e7f17ff&amp;utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search#wechat_redirect">RPC</a>" 用会启动一个新的子跨度。由于父跨度的持续时间通常是其子跨度的超集，追踪可以直观地以树形或火焰图的形式观察，其中层次结构表示组件之间的依赖关系。</p><p></p><p>与传统的 RPC 系统相反，Kubernetes API 是异步和声明式的。为了执行操作，组件会更新 apiserver 上对象的规范（期望状态），然后其他组件会不断尝试自我纠正以达到期望的状态。</p><p></p><p>例如，当我们将 ReplicaSet 从 3 个副本扩展到 5 个副本时，我们会将 spec.replicas 字段更新为 5，rs controller 会观察到此更改，并不断创建新的 pod 对象，直到总数达到 5 个。当 kubelet 观察到其管理的节点创建了一个 pod 时，它会在其节点上生成与 pod 中的规范匹配的容器。</p><p></p><p>在此过程中，我们从未直接调用过 rs controller，rs controller 也从未直接调用过 kubelet。这意味着我们无法观察到组件之间的直接因果关系。如果在过程中删除了原始的 3 个 pod 中的一个，副本集控制器将与两个新的 pod 一起创建一个不同的 pod，我们无法将此创建与 ReplicaSet 的扩展或 pod 的删除关联起来。</p><p></p><p>因此，由于“追踪”或“跨度”的定义模糊不清，传统的基于跨度的分布式追踪模型在 Kubernetes 中几乎不适用。</p><p></p><p>过去，各个组件一直在实现自己的内部追踪，通常每个“reconcile”对应一个追踪（例如，kubelet 追踪只追踪处理单个 pod 创建/更新的同步操作）。然而，没有单一的追踪能够解释整个流程，这导致了可观察性的孤立岛，因为只有观察多个 reconcile 才能理解许多面向用户的行为；例如，扩展 ReplicaSet 的过程只能通过观察副本集控制器处理 ReplicaSet 更新或 pod 就绪更新的多个 reconcile 来推断。</p><p></p><p>为解决可观察性数据孤岛的问题，Kelemetry&nbsp;以组件无关、非侵入性的方式，收集并连接来自不同组件的信号，并以追踪的形式展示相关数据。</p><p></p><h2>设计</h2><p></p><p></p><h4>1.将对象作为跨度</h4><p></p><p></p><p>为了连接不同组件的可观察性数据，Kelemetry 采用了一种不同的方法，受 kspan 项目的启发，与将单个操作作为根跨度的尝试不同，这里为对象本身创建一个跨度，而每个在对象上发生的事件都是一个子跨度。此外，各个对象通过它们的拥有关系连接在一起，使得子对象的跨度成为父对象的子跨度。</p><p></p><p>基于此，我们得到了两个维度：树形层次结构表示对象层次结构和事件范围，而时间线表示事件顺序，通常与因果关系一致。</p><p></p><p>例如，当我们创建一个单 pod 部署时，deployment controller、rs controller 和 kubelet 之间的交互可以使用审计日志和事件的数据在单个追踪中显示：</p><p></p><p><img src="https://static001.geekbang.org/infoq/b8/b8d64999b5f740434013fb8d12cb0551.png" /></p><p></p><p>追踪通常用于追踪持续几秒钟的短暂请求，所以追踪存储实现可能不支持具有长生命周期或包含太多跨度的追踪；包含过多跨度的追踪可能导致某些存储后端的性能问题。因此，我们通过将每个事件分到其所属的半小时时间段中，将每个追踪的持续时间限制为 30 分钟。例如，发生在 12:56 的事件将被分组到 12:30-13:00 的对象跨度中。</p><p></p><p>我们使用分布式 KV 存储来存储（集群、资源类型、命名空间、名称、字段、半小时时间戳）到相应对象创建的追踪/跨度 ID 的映射，以确保每个对象只创建一个追踪。</p><p></p><h4>2.审计日志收集</h4><p></p><p></p><p>Kelemetry 的主要数据源之一是 apiserver 的审计日志。审计日志提供了关于每个控制器操作的丰富信息，包括发起操作的客户端、涉及的对象、从接收请求到完成的准确持续时间等。在 Kubernetes 架构中，每个对象的更改会触发其相关的控制器进行协调，并导致后续对象的更改，因此观察与对象更改相关的审计日志有助于理解一系列事件中控制器之间的交互。</p><p></p><p>Kubernetes apiserver 的审计日志以两种不同的方式暴露：日志文件和&nbsp;webhook。一些云提供商实现了自己的审计日志收集方式，而在社区中配置审计日志收集的与厂商无关的方法进展甚微。为了简化自助提供的集群的部署过程，Kelemetry 提供了一个审计 webhook，用于接收原生的审计信息，也暴露了插件 API 以实现从特定厂商的消息队列中消费审计日志。</p><p></p><h4>3.Event 收集</h4><p></p><p></p><p>当 Kubernetes 控制器处理对象时，它们会发出与对象关联的“event”。当用户运行 kubectl describe 命令时，这些 event 会显示出来，通常提供了控制器处理过程的更友好的描述。例如，当调度器无法调度一个 pod 时，它会发出一个 FailToSchedulePod 事件，其中包含详细的消息：</p><p></p><p></p><blockquote>0/4022 nodes are available to run pod xxxxx: 1072 Insufficient memory, 1819 Insufficient cpu, 1930 node(s) didn't match node selector, 71 node(s) had taint {xxxxx}, that the pod didn't tolerate.</blockquote><p></p><p></p><p>由于 event 针对用于 kubectl describe 命令优化，它们并不保留每个原始事件，而是存储了最后一次记录事件的时间戳和次数。另一方面，Kelemetry 使用 Kubernetes 中的对象列表观察 API 检索事件，而该 API 仅公开 event 对象的最新版本。为了避免重复事件，Kelemetry 使用了几种启发式方法来“猜测”是否应将 event 报告为一个跨度：</p><p></p><p>持久化处理的最后一个 event 的时间戳，并在重启后忽略该时间戳之前的事件。虽然事件的接收顺序不一定有保证（由于客户端时钟偏差、控制器 — apiserver — etcd 往返的不一致延迟等原因），但这种延迟相对较小，可以消除由于控制器重启导致的大多数重复。验证 event 的 resourceVersion 是否发生了变化，避免由于重列导致的重复event。</p><p></p><h4>4.将对象状态与审计日志关联</h4><p></p><p></p><p>在研究审计日志进行故障排除时，我们最想知道的是“此请求改变了什么”，而不是“谁发起了此请求”，尤其是当各个组件的语义不清楚时。Kelemetry 运行一个控制器来监视对象的创建、更新和删除事件，并在接收到审计事件时将其与审计跨度关联起来。当 Kubernetes 对象被更新时，它的 resourceVersion 字段会更新为一个新的唯一值。这个值可以用来关联更新对应的审计日志。Kelemetry 把对象每个 resourceVersion 的 diff 和快照缓存在分布式 KV 存储中，以便稍后从审计消费者中链接，从而使每个审计日志跨度包含控制器更改的字段。</p><p></p><p>追踪 resourceVersion 还有助于识别控制器之间的 409 冲突。当客户端传递 UPDATE 请求的 resourceVersion 过旧，且其他请求是将 resourceVersion 更改时，就会发生冲突请求。Kelemetry 能够将具有相同旧资源版本的多个审计日志组合在一起，以显示与其后续冲突相关的审计请求作为相关的子跨度。</p><p>为了确保无缝可用性，该控制器使用多主选举机制，允许控制器的多个副本同时监视同一集群，以确保在控制器重新启动时不会丢失任何事件。</p><p></p><p><img src="https://static001.geekbang.org/infoq/26/26f1cf7e0f78030b03886254eb61bd8f.png" /></p><p></p><h4>5.前端追踪转换</h4><p></p><p></p><p>在传统的追踪中，跨度总是在同一个进程（通常是同一个函数）中开始和结束。因此，OTLP 等追踪协议不支持在跨度完成后对其进行修改。不幸的是，Kelemetry 不是这种情况，因为对象不是运行中的函数，并且没有专门用于启动或停止其跨度的进程。相反，Kelemetry 在创建后立即确定对象跨度，并将其他数据写入子跨度， 是以每个审计日志和事件都是一个子跨度而不是对象跨度上的日志。</p><p></p><p>然而，由于审计日志的结束时间/持续时间通常没有什么价值，因此追踪视图非常丑陋且空间效率低下：</p><p></p><p><img src="https://static001.geekbang.org/infoq/f6/f6d756f06651a91611b69ac2358ba451.png" /></p><p></p><p>为了提高用户体验，Kelemetry 拦截在 Jaeger 查询前端和存储后端之间，将存储后端结果返回给查询前端之前，对存储后端结果执行自定义转换流水线。</p><p></p><p>Kelemetry 目前支持 4 种转换流水线：</p><p></p><p>tree：服务名/操作名等字段名简化后的原始 trace 树timeline：修剪所有嵌套的伪跨度，将所有事件跨度放在根跨度下，有效地提供审计日志tracing：非对象跨度被展平为相关对象的跨度日志</p><p></p><p><img src="https://static001.geekbang.org/infoq/5e/5ed7ff44abbbd184f84df33edd6b7051.png" /></p><p></p><p>分组：在追踪管道输出之上，为每个数据源（审计/事件）创建一个新的伪跨度。当多个组件将它们的跨度发送到 Kelemetry 时，组件所有者可以专注于自己组件的日志并轻松地交叉检查其他组件的日志。</p><p></p><p>用户可以在追踪搜索时通过设置“service name“来选择转换流水线。中间存储插件为每个追踪搜索结果生成一个新的“CacheID”，并将其与实际 TraceID 和转换管道一起存储到缓存 KV 中。当用户查看时，他们传递 CacheID，CacheID 由中间存储插件转换为实际 TraceID，并执行与 CacheID 关联的转换管道。</p><p></p><p><img src="https://static001.geekbang.org/infoq/49/4907b57d081885c707ca102ddb53d2ed.png" /></p><p></p><h4>6.突破时长限制</h4><p></p><p></p><p>如上所述，追踪不能无限增长，因为它可能会导致某些存储后端出现问题。相反，我们每 30 分钟开始一个新的追踪。这会导致用户体验混乱，因为在 12:28 开始滚动的部署追踪会在 12:30 突然终止，用户必须在 12:30 手动跳转到下一个追踪才能继续查看追踪。</p><p></p><p>为了避免这种认知开销，Kelemetry 存储插件在搜索追踪时识别具有相同对象标签的跨度，并将它们与相同的缓存 ID 以及用户指定的搜索时间范围一起存储。在渲染 span 时，所有相关的轨迹都合并在一起，具有相同对象标签的对象 span 被删除重复，它们的子对象被合并。轨迹搜索时间范围成为轨迹的剪切范围，将对象组的完整故事显示为单个轨迹。</p><p></p><h4>7.多集群支持</h4><p></p><p></p><p>可以部署 Kelemetry 来监视来自多个集群的事件。在字节跳动，Kelemetry 每天创建 80 亿个跨度（不包括伪跨度；使用多 raft 缓存后端而不是 etcd）。对象可以链接到来自不同集群的父对象，以启用对跨集群组件的追踪。</p><p></p><h2>未来增强</h2><p></p><p></p><h4>1.采用自定义追踪源</h4><p></p><p></p><p>为了真正连接 K8s 生态系统中的所有观测点，审计和事件并不足够全面。Kelemetry 将从现有组件收集追踪，并将其集成到 Kelemetry 追踪系统中，以提供对整个系统的统一和专业化视图。</p><p></p><h4>2.批量分析</h4><p></p><p></p><p>通过 Kelemetry 的聚合追踪，回答诸如“从部署升级到首次拉取镜像的进展需要多长时间”等问题变得更加容易，但我们仍然缺乏在大规模上聚合这些指标以提供整体性能洞察的能力。通过每隔半小时分析 Kelemetry 的追踪输出，我们可以识别一系列跨度中的模式，并将其关联为不同的场景。</p><p></p><h2>使用案例</h2><p></p><p></p><h4>1. replicaset controller 异常</h4><p></p><p></p><p>用户报告，一个 deployment 不断创建新的 Pod。我们可以通过 deployment 名称快速查找其 Kelemetry 追踪，分析 replicaset 与其创建的 Pod 之间的关系。</p><p></p><p><img src="https://static001.geekbang.org/infoq/2c/2c97bb74029ca6a6da856f1ae10da9d1.png" /></p><p></p><p>从追踪可见几个关键点：</p><p>Replicaset-controller 发出&nbsp;SuccessfulCreate&nbsp;事件，表示 Pod 创建请求成功返回，并在 replicaset reconcile 中得到了 replicaset controller 的确认。没有&nbsp;replicaset&nbsp;状态更新事件，这意味着&nbsp;replicaset controller&nbsp;中的&nbsp;Pod reconcile&nbsp;未能更新&nbsp;replicaset&nbsp;状态或未观察到这些&nbsp;Pod。</p><p></p><p>此外，查看其中一个 Pod 的追踪：</p><p></p><p><img src="https://static001.geekbang.org/infoq/68/681b330669ecbef35076a4bd8ae49625.png" /></p><p></p><p>Replicaset controller 在 Pod 创建后再也没有与该 Pod 进行交互，甚至没有失败的更新请求。</p><p></p><p>因此，我们可以得出结论，replicaset controller 中的 Pod 缓存很可能与 apiserver 上的实际 Pod 存储不一致，我们应该考虑 pod informer 的性能或一致性问题。如果没有 Kelemetry，定位此问题将涉及查看多个 apiserver 实例的各个 Pod 的审计日志。</p><p></p><h4>2.浮动的 minReadySeconds</h4><p></p><p></p><p>用户发现 deployment 的滚动更新非常缓慢，从 14:00 到 18:00 花费了几个小时。如果不使用 Kelemetry，通过使用 kubectl 查找对象，发现 minReadySeconds 字段设置为 10，所以长时间的滚动更新时间是不符合预期的。kube-controller-manager 的日志显示，在一个小时后 Pod 才变为 Ready 状态</p><p></p><p><img src="https://static001.geekbang.org/infoq/7d/7d1c4dff024fe46343fe4da131bf0b5a.png" /></p><p></p><p>进一步查看 kube-controller-manager 的日志后发现，在某个时刻 minReadySeconds 的值为 3600。</p><p></p><p><img src="https://static001.geekbang.org/infoq/8b/8b77d4ed7afdf84b068a5a25d633b157.png" /></p><p></p><p>如果使用 Kelemetry 进行调试，我们可以直接通过 deployment 名称查找追踪，并发现 federation 组件增加了 minReadySeconds 的值。</p><p></p><p><img src="https://static001.geekbang.org/infoq/4a/4a80f8e4fb2b8e8abfec3b66384c46af.png" /></p><p></p><p>后来，deployment controller 将该值恢复为 10。</p><p></p><p><img src="https://static001.geekbang.org/infoq/f2/f2df40bee17f5a6535ff8fc48c904b19.png" /></p><p></p><p>因此，我们可以得出结论，问题是由用户在滚动更新过程中临时注入的较大 minReadySeconds 值引起的。通过检视对象 diff ，可以轻松识别由非预期中间状态引起的问题。</p><p></p><h2>尝试 Kelemetry</h2><p></p><p></p><p>目前，Kelemetry 已在 GitHub 上开源：github.com/kubewharf/kelemetry</p><p></p><p>感兴趣的开发者可以按照 docs/QUICK_START.md 快速入门指南，亲自体验 Kelemetry 如何与组件进行交互。如果你不想设置一个集群，也可以查看从 GitHub CI 流水线构建的在线预览：kubewharf.io/kelemetry/trace-deployment/。</p><p></p><p>我们期待有更多朋友关注与加入社区，如果大家在试用过程中发现了一些问题，也欢迎大家提出 issue 给我们反馈！</p><p></p><p><img src="https://static001.geekbang.org/infoq/cd/cd9e76b489cb86e1f34493f5f83f2f4b.jpeg" /></p><p>扫描二维码，添加小助手</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.infoq.cn/article/8WCa8vc3wjxuod6gXhxh</id>
+            <title>字节跳动开源 Katalyst：在离线混部调度，成本优化升级</title>
+            <link>https://www.infoq.cn/article/8WCa8vc3wjxuod6gXhxh</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/8WCa8vc3wjxuod6gXhxh</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 07 Dec 2023 02:36:15 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 互联网应用, 资源使用情况, 潮汐特性, 削峰填谷
+<br>
+<br>
+总结: 当下互联网应用的资源使用情况具有潮汐特性，为了节约成本和保证业务稳定性，可以通过削峰填谷的方式，将闲置资源出让给优先级低的服务，并在需要时及时归还。 </div>
+                        <hr>
+                    
+                    <p>当下互联网应用以天为单位，在线业务的资源使用情况往往会随着访问数量的波动而变化，具备明显的潮汐特性。为了确保业务稳定性，业务方往往会参考高峰时段的资源使用情况来申请资源，但这部分资源在低峰时段容易被闲置。</p><p></p><p>如果可以把这些闲置资源暂时出让给优先级低的服务，当在线业务需要使用的时候及时将资源归还，形成在离线服务混部，就可以达到削峰填谷，节约成本的效果。</p><p></p><p></p><h2>字节跳动云原生混部实践</h2><p></p><p></p><p><a href="https://www.infoq.cn/article/AsgjeVRM8isLSzo7IXzh?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">字节跳动</a>"业务规模庞大、业务类型多元，其中涵盖了包括微服务、推广搜服务、机器学习与大数据、存储在内的多种业务类型。通常来说，不同业务类型对底层基础设施会有不同的资源管理诉求，传统的管理模式是基于业务线或者服务类型切分资源池，实现定制化需求。</p><p></p><p>但切分资源池的做法容易形成资源孤岛，无法实现资源层面的灵活拆借，不利于全局资源利用效率的提升和业务成本的优化，加重集群运维的负担。</p><p></p><p>此外，由于不同类型业务的 SLO 要求、资源潮汐特性存在互补，基础设施团队期望充分利用这些特性，通过调度和管控等手段去优化资源效率，实现资源池的融合统一，帮助业务团队获得更低的资源成本和更强的弹性能力。</p><p></p><p><img src="https://static001.geekbang.org/infoq/ea/eacec4cca090bbb206becadfb88aeaac.png" /></p><p></p><p>为实现资源统一托管，字节跳动从 2016 年就开始基于<a href="https://mp.weixin.qq.com/s?__biz=MzI5ODQ2MzI3NQ%3D%3D&amp;chksm=eca7f1acdbd078baf17571575d642a09391401c945ddae152443ea51963b8eaca11b540c3364&amp;idx=1&amp;mid=2247502056&amp;scene=27&amp;sn=ef7a6deb9a63551cac10322b6b059aad&amp;utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search#wechat_redirect"> Kubernetes </a>"构建统一的基础设施。</p><p></p><p>到现阶段，字节内部已经基本完成全量微服务、推广搜服务以及大部分机器学习与大数据业务的云原生化改造。在此过程中，基础架构团队持续探索统一资源池下的资源优化手段，并逐渐形成了 “弹性伸缩” 和 “常态混部” 互相配合的资源池混部方案。</p><p></p><p>弹性伸缩：实现机器级别、<a href="https://mp.weixin.qq.com/s?__biz=MzIwMzY1OTU1NQ%3D%3D&amp;chksm=96ceb6bca1b93faa5de5fcc563ec907c7b14c920809f6ff563e1696cd3e857c6161776352915&amp;idx=2&amp;mid=2247497456&amp;scene=27&amp;sn=cac27bb9cfb119a5225371886a296147&amp;utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search#wechat_redirect">Numa</a>" 级别的资源分时复用，结合业务指标和系统指标，共同指导业务实例的横向和纵向扩缩容策略，最终使得离线类服务以更加低廉的价格购买更多闲时资源，在线类服务以更加高昂的价格购买更多峰时资源，通过资源市场化运营的方式实现综合效率的提升。混合部署：提供资源超卖的能力，充分利用集群中 “已经售卖但未充分使用的资源” 部署更多低优业务，同时在系统侧完善 CPU、内存、磁盘、网络等多维度的资源隔离机制，并且智能预测、感知各类服务的负载变化，结合服务的分级机制，通过分钟级的指标感知和调控策略，保证服务的稳定性。</p><p>该方案在链路上基于 Kubernetes 和 Yarn 两套体系实现联合管控，在单机上同时运行 Kubernetes 和&nbsp;Yarn&nbsp;的管控组件，配合中心协调组件对两套系统可见的资源量进行分配。在联合管控系统之上，团队基于服务资源画像实现实时的资源预估，在保证各类服务 SLA 要求的前提下，实现更加灵活和动态的资源分配。</p><p></p><p>在该资源池混部方案落地实践的过程中，基础设施团队完成了资源并池可行性的验证，完成了混部基础能力的构建，并且在部分核心业务集群实现了整机天级利用率从&nbsp;23%&nbsp;到&nbsp;60%&nbsp;的提升。</p><p></p><p><img src="https://static001.geekbang.org/infoq/10/103c99cf7f723241327e2e0e28c69ca5.jpeg" /></p><p></p><p></p><h2>Katalyst：从内部验证到开源</h2><p></p><p></p><p>在经历内部抖音、今日头条等大规模潮汐流量业务验证后，字节跳动的云原生混部实践已日臻完善。</p><p></p><p>为了帮助更多人了解大规模资源混部实践的工作原理，方便更多开发者用户体验这种开箱即用、一键式部署的资源管控能力，研发团队决定回馈社区，采用 Kubernetes Native 的方式重构并增强了资源管控系统的实现，提炼出资源管控系统&nbsp;Katalyst&nbsp;并正式开源。</p><p></p><p>Katalyst 引申自单词 catalyst (音&nbsp;[ˈkætəlɪst])，本意为催化剂。首字母修改为 K，寓意该系统能够为所有运行在 Kubernetes 体系中的负载提供更加强劲的自动化资源管理能力。</p><p></p><h4>什么是 Katalyst</h4><p></p><p></p><p>Katalyst 脱胎于字节跳动混部技术实践，同时也从资源、管控、调度等多个维度对资源管控能力进行了扩展和补充。它的主要特点包括：</p><p></p><p>完全孵化于超大规模混部实践，并在字节服务云原生化的进程中同步接管资源管控链路，真正实现内外技术体系的复用搭载字节跳动内部的 Kubernetes 发行版 Enhanced Kubernetes&nbsp;同步开源，兼容性好，体验更多字节自研的核心功能系统基于插件化模式构建，用户可以在 Katalyst Framework 之上自定制各类调度、管控、策略、数据等模块插件提供一键式部署模版和详尽运维手册，降低外部用户的理解和接入使用成本</p><p></p><h4>Katalyst 如何实现资源抽象</h4><p></p><p></p><p>在资源层，Kubernetes 原生 QoS 分级无法满足大规模生产环境的要求，Katalyst 在此基础上进行了进一步的抽象。</p><p></p><p>Katalyst 以 CPU 为主维度，为应用提供了 system_core 系统核、dedicated_core 独占核、shared_core 共享核、reclaimed_core 回收核等多种不同等级，同时每种等级又辅助以多种 enhancement 机制（例如是否需要 numa node 绑定，是否需要网卡亲和或者带宽限制等），实现差异化的资源分配和管控策略。</p><p></p><p><img src="https://static001.geekbang.org/infoq/f7/f71230f305f46d0df4e67c511a34d8ae.png" /></p><p></p><p>通过抽象资源模型，Katalyst 为用户提供了统一的资源入口，用户根据实际业务需求，将业务服务映射到对应的 QoS 和售卖模式上准确地表达自身的需求，最终实现从统一的资源池获取资源而不用关注底层资源池细节。</p><p></p><p><img src="https://static001.geekbang.org/infoq/bd/bda96be8e6b52a9ac1aca992f8b3de17.jpeg" /></p><p></p><p></p><h4>Katalyst&nbsp;的架构设计</h4><p></p><p></p><p>早期的混部架构存在几方面的问题：Kubernetes 和 Yarn 两套系统的联合管控虽然实现了在离线业务的常态混部，但是复杂的系统也使得维护成本变高。</p><p></p><p>另外这种架构也带来了额外的资源损耗，这些损耗一方面来自于联合管控模式下单机 Agent 组件资源占用，尤其在超大规模的集群中，这部分资源非常可观。此外，由于两套管控导致系统复杂度变高，系统交互过程中会产生多级资源漏斗，任何环节的异常都会导致资源丢失。</p><p></p><p>在 Katalyst 中，我们对整体的混部架构做了优化重构：</p><p></p><p><img src="https://static001.geekbang.org/infoq/55/5550deec101cf3a61bdafd496e1d274d.png" /></p><p></p><p>在管控层，我们将字节早期基于 Kubernetes 和 Yarn 两套体系的融合系统整合成一套基于 Kubernetes 的系统。</p><p></p><p>具体来说，我们在接入层同时保留了 Kubernetes 以及 Yarn 各自的 API 入口，底层系统的元数据管理和资源管控实现则统一收敛到基于 Kubernetes 的管控系统 Katalyst 上。</p><p></p><p>在调度层， Katalyst 在统一元数据的基础上实现了 “中心” 和 “单机” 互相协调的资源调度机制。</p><p></p><p>在单机调度侧：Katalyst 搭载 Enhanced Kubernetes 里的扩展模块 QoS Resource Manager (QRM) 能够实现可插件化的微拓扑亲和性分配，并通过自定 CRD 将微拓扑上报到中心打通调度流程；在服务运行过程中，Katalyst 会持续观察 Pod 运行时系统指标，集合业务 QoS 要求和业务指标反馈进行预估，决策出 Pod 在各个资源维度上的分配量，通过 QRM reconcile 机制实时下发到 CRI。上述过程中的资源预估模型和 QRM 实现，都可以通过插件化的方式定制，使得资源调控的策略更加匹配不同业务场景的诉求。</p><p></p><p>在中心调度侧：Katalyst 基于原生 Scheduler Framework 扩展了更加丰富的调度能力，在调度过程中同时考虑不同 QoS 业务在同一个集群中运行时资源层应该如何分配及协作，配合单机调度实现更加细粒度的调度语义要求；同时，中心调度还会结合业务容器运行时的实时数据和服务画像，在全集群范围内实现动态的 Rebalance 策略，降低集群空置率，提升业务稳定性。</p><p></p><p><img src="https://static001.geekbang.org/infoq/d1/d10908b4dd2ac433f598eb11c15c9012.jpeg" /></p><p></p><p>通过收敛资源管控，Katalyst 有效减少了系统运行中的资源损耗。此外，在联合管控体系下，Katalyst 将旁路异步管控的实现切换成基于标准 CRI 接口的同步管控实现，避免因为各种异步引发的 race 或者冲突，从而引发服务性能抖动。</p><p></p><p>最后，在一套管控体系下，我们还能够充分享受 Kubernetes 面向 API 设计的优势，通过自定义 CRD 的方式去解耦内部系统，泛化管控策略，使得系统能够通过插件化的方式更加灵活地系统迭代，真正实现了内外同源。</p><p></p><p></p><h2>RoadMap</h2><p></p><p></p><p>Katalyst 作为一个资源管理系统，在离线混部是其核心应用场景之一。除了抽象上述核心概念之外，我们还为 Katalyst 提供和规划了丰富的 QoS 能力：</p><p></p><p>精细化的资源出让策略：Katalyst 支持基于静态启发式、无监督算法、QoS Aware 的多种资源预估策略，更准确的计算和预测节点可出让资源量，进一步提高资源利用率。多维度的资源隔离能力：基于 cgroup, rdt, iocost, tc 等能力，实现不同混部场景中对 cpu，内存，磁盘，网络等多种资源的有效隔离，保障在线业务的 QoS 不受影响。多层级的负载驱逐策略：支持基于多种指标，多层级的驱逐策略，在保障在线业务 QoS 的同时也尽可能提高离线业务的 QoS。</p><p>除了混部场景，Katalyst 也提供一些增强的资源管理能力：</p><p>资源弹性管理：提供灵活可扩展的 HPA/VPA 资源弹性策略，帮助用户提高部署率和资源利用率。微拓扑感知调度：感知节点上 CPU，内存，异构设备的微拓扑，基于更细粒度的微拓扑信息完成资源分配，满足高性能业务的 QoS 要求。</p><p></p><p>详细的功能规划请参考 &nbsp;roadmap                                       （https://github.com/kubewharf/katalyst-core/blob/main/docs/roadmap.md）。</p><p></p><p>虽然混部技术在字节内部已经经历了几次的技术迭代，但是一个通用、标准化的平台底座必然要经过各种场景的打磨，我们非常期待更多朋友加入到 Katalyst 开源社区中！</p><p></p><p>项目地址：github.com/kubewharf/katalyst-core</p><p></p><p><img src="https://static001.geekbang.org/infoq/c3/c31da82a63f8db5f4f010fbdca49637b.jpeg" /></p><p>扫描二维码加入群聊</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.infoq.cn/article/LAvHdllNrSpdZlsAk9x4</id>
             <title>没必要非得固守纯向量数据库！专访亚马逊云科技数据库和迁移副总裁Jeff Carter</title>
             <link>https://www.infoq.cn/article/LAvHdllNrSpdZlsAk9x4</link>
@@ -638,317 +684,6 @@
                         <hr>
                     
                     <p>OpenAI 神秘项目“Q*”刚曝光不久，亚马逊云科技就推出了有着相似名字的企业级生成式AI助手Q。</p><p></p><p>在日前于拉斯维加斯召开的re: Invent大会主题演讲中，亚马逊云科技CEO Adam Selipsky正式宣布推出Amazon Q，“您可以使用Q轻松进行对话、内容生成并执行操作。Q完全了解你的系统、数据存储库和运营需求。”Selipsky说道。</p><p></p><p>据悉，Amazon Q由亚马逊云科技17年来积累的知识和经验训练而成，可以提出满足业务需求的云基础设施建议、输出博客文章、帮助应用程序代码，以及搜索和分析企业数据。订阅起价为每用户每年20美元，且已经提供公开预览版。</p><p><img src="https://static001.infoq.cn/resource/image/6e/7f/6ef2bb20072ee091eac7e275c7e97c7f.jpeg" /></p><p></p><p></p><h2>如何帮助开发者</h2><p></p><p></p><h4>加速业务开发</h4><p></p><p></p><p>Amazon Q是用户在亚马逊云科技上构建、部署和操作应用程序及工作负载的专家。根据官方介绍，用户可以将Q接入组织指定的应用程序和软件（例如Salesforce、Jira、Zendesk、Gmail以及Amazon S3存储实例等），并据此进行自定义配置。</p><p></p><p>Q能够根据所有关联数据及内容进行索引，“学习”关于当前业务的方方面面，包括组织结构、核心概念和产品名称等。</p><p></p><p>例如，公司可以通过Web应用程序要求Q分析用户在使用哪些功能时遇到了问题、应该如何改进这些功能；也可以像使用ChatGPT那样直接上传文件（支持Word文档、PDF、电子表格等）并询问与内容相关的问题。Q则通过联系、整合和数据（包括特定业务数据）提供响应与参考。基于这些问题，Amazon Q会给出明确答案并列出引用出处。</p><p></p><p>用户可以追问任意多轮的问题，来获取更加详尽的答案，找到实现其工作负载的最佳选项，并得到基本操作的步骤指导。</p><p></p><p>Q不仅能够回答问题，还能作为助手生成或总结博文内容、新闻稿和电子邮件。它还为工作中的常规操作提供一组可配置的插件，包括自动创建服务工单、通过Slack中的特定团队以及更新ServiceNow中的仪表板等。</p><p></p><p></p><p></p><p>为了防止错误，Q要求用户在行动之前检查其操作建议，并展示结果以供验证。</p><p></p><p>Q可以通过亚马逊云科技的管理控制台、各类Web应用程序以及Slack等聊天应用进行访问，而且对亚马逊云科技家族的产品和服务有着透彻了解。亚马逊云科技表示，Q能够理解亚马逊云科技上各种应用工作负载间的细微差别，哪怕是只需运行短短几秒的应用、或者极少访问存储内容的程序也可以接受Q的指引和操作。</p><p></p><p>Q还能解决网络连接等常见问题，分析网络配置以提供修复建议。“如果控制台出现错误，您可以按下 Amazon Q 按钮进行故障排除。Q 将研究该错误并建议如何修复它。Amazon Q 还了解网络，“可以帮助快速解决连接问题，”Selipsky说道。</p><p></p><p>Selipsky表示，“我坚信这将是一场生产力层面的变革，希望来自不同行业、从事不同岗位的人们都能从Amazon Q身上获益。”</p><p><img src="https://static001.infoq.cn/resource/image/6e/7f/6ef2bb20072ee091eac7e275c7e97c7f.jpeg" /></p><p></p><h4>生成、解释代码</h4><p></p><p></p><p>Q与Amazon CodeWHisperer服务相结合，可以生成并解释应用程序代码。在受支持的IDE（例如Amazon CodeCatalyst）当中，Q可以为用户代码生成测试，借此衡量其质量水平。</p><p></p><p>此外，Q还能创建软件新功能、执行代码转换，并为代码包、存储库和框架更新草案和文档，使用自然语言对计划进行完善和执行。</p><p></p><p>Selipsky表示，亚马逊云科技内部的一支小团队就成功在短短两天之内，使用Q将上千款应用程序从Java 8升级到了Java 17，甚至完成了相应的测试。</p><p></p><p>Q的代码转换功能仅支持从Java 8和Java 11升级至Java 17（后续将推出.NET Framework到跨平台.NET转换），且所有代码相关功能（包括代码转换）都需要配合CodeWhisperer Professional订阅服务。不清楚这方面要求后续是否会有所放松。</p><p></p><p>Selipsky补充道，Amazon Q 将能够将应用程序从 Windows .NET Framework 迁移到 Linux 上的跨平台 .NET，这是一个好主意，但由于仅依赖于 Windows，因此在实践中常常面临挑战。</p><p></p><p>亚马逊云科技表示，他们也在利用Q增强更多第一方产品，例如Supply Chain和QuickSight（一种商业分析服务）。</p><p></p><p>Q能够在QuickSight中为商业报告提供可视化选项，自动调整格式，或者根据报告中的引用及数据回答用户提问。而在Supply Chain当中，Q能够通过最新分析结果响应诸如“为什么我的配送单延误了？”之类的查询。</p><p></p><p>Q还在逐步进入联络中心软件Amazon Connect。在Q的支持下，客服人员现在可以快速获得关于用户提问的答复建议，对应的操作步骤以及背景资料链接，由此告别繁琐低效的手动搜索。Q还能生成通话摘要，帮助主管后续跟踪服务进度。</p><p></p><p></p><h4>隐私安全</h4><p></p><p></p><p>在整场演讲中，Selipsky多次强调Q给出的答案及操作建议完全可控且支持筛查。Q只会返回用户有权查看的信息，管理员可以限制敏感主题，要求Q在必要时过滤掉不当问题和答案。</p><p></p><p>为了缓解幻觉问题（即生成式AI系统中常见的捏造事实行为），管理员可以要求Q仅从公司内部文档中提取知识，而不得使用来自底层模型的知识。Selipsky表示，驱动Q的底层模型是Amazon AI开发平台Bedrock提供的模型组合，包括Amazon原研的Titan系列，且绝不会利用用户数据进行模型训练。</p><p></p><p>当前，已经有十几家公司明确禁止或限制使用ChatGPT，反映出了当下人们对向聊天机器人输入数据可能导致泄露风险的担忧。Selipsky强调，“如果你的用户本来就无权访问某些内容，那么在使用Q之后也仍然无权访问。Q理解并尊重用户的当前身份、角色和权限……我们也永远不会使用业务内容来训练底层模型。”</p><p></p><p>除了对隐私的高度重视，从各个方面来看，Q似乎都是亚马逊云科技对于微软Azure Copilot做出的有力回应，而Azure Copilot又是微软对谷歌Duet AI的回应。Azure Copilot与Duet AI均采用聊天助手的形式，负责为云用户提供应用程序和环境配置建议，并通过发现潜在问题和给出答案的方式协助故障排查。</p><p></p><p></p><h2>题外话</h2><p></p><p></p><p>Constellation Research 创始人兼首席分析师 Ray Wang在采访中表示，他认为Q是本届re: Invent上最具份量的发布。“这是在用AI武装开发者，帮助他们取得成功。”</p><p></p><p>很明显，亚马逊云科技看到了近期调查给出的关键结论，即大多数试用生成式AI的厂商都不知道该怎么将新技术纳入业务用例、将其真正转化为生产力。</p><p></p><p>宝马集团数据工程和分析顾问Christoph Albrecht&nbsp;表示：“宝马团队需要快速提取和解释新数据，以提供客户期望的精确体验。Amazon&nbsp;QuickSight中新增的Amazon Q功能可帮助我们的分析师在数小时内构建仪表板，而以前需要数天时间。”</p><p>&nbsp;</p><p>值得注意的是，Anthropic 首席执行官兼联合创始人 Dario Amodei 也在 re:Invent 上与 Selipsky 一起登台。9 月份，亚马逊云科技向这家人工智能初创公司进行了高达 40 亿美元的投资，为 Anthropic 提供更多云基础设施和芯片来训练和运行其模型。Anthropic 的 Claude LLM 将为一系列 AWS 产品提供支持，包括AppFabric。</p><p></p><p><img src="https://static001.infoq.cn/resource/image/8e/97/8ea56eeb793ecd4a83874251de300797.png" /></p><p></p><p>Anthropic 的 7 个创始人都来自 OpenAI，曾经深度参与过 OpenAI 的 GPT-3、引入人类偏好的强化学习等多项研究。对于离开 OpenAI的原因 ，据说是因为其“从一开始就在模型安全性方面有着不同的愿景。”Anthropic在OpenAI 高层斗争大戏落幕之后不久后亮相re: Invent，这也彰显了亚马逊云科技发力生成式AI的决心。</p><p></p><p>接下来，就让我们一同期待Q的更多使用案例和反馈，看看它是否真如宣传的这么神奇。</p><p></p><p>&nbsp;</p><p>参考链接：</p><p><a href="https://aws.amazon.com/cn/q/">https://aws.amazon.com/cn/q/</a>"</p><p><a href="https://techcrunch.com/2023/11/28/amazon-unveils-q-an-ai-powered-chatbot-for-businesses/">https://techcrunch.com/2023/11/28/amazon-unveils-q-an-ai-powered-chatbot-for-businesses/</a>"</p><p></p><p></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/u4VX7rDm5rw1sdXa7YOI</id>
-            <title>OpenAI发布了GPTs，可以创建无代码、定制版本的ChatGPT</title>
-            <link>https://www.infoq.cn/article/u4VX7rDm5rw1sdXa7YOI</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/u4VX7rDm5rw1sdXa7YOI</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 29 Nov 2023 06:09:02 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: OpenAI开发者大会, GPTs, ChatGPT商店, 定制化ChatGPT
-<br>
-<br>
-总结: 在最近的OpenAI开发者大会上，OpenAI宣布推出了GPTs，这是专为特定任务创建的ChatGPT的定制版本。开发者可以在即将推出的ChatGPT商店中分享他们的GPTs并从中获利。GPTs提供了一种将ChatGPT与定制指令、外部知识和任何技能组合在一起的机制，以满足特定用途的需求。创建一个GPT就像开始一次对话，给它指令和额外的知识，并选择它可以做的事情。用户可以通过ChatGPT与GPT进行对话，描述他们想要实现的目标，并定义指令、对话启动问题、知识、能力和动作。GPTs可供订阅了ChatGPT Plus的用户使用，并且用户还需启用“Beta选项”功能。此外，OpenAI还推出了GPT商店，用户可以在商店中分享自己的GPT。 </div>
-                        <hr>
-                    
-                    <p>在<a href="https://www.infoq.com/news/2023/11/openai-announcements-1stdevday/">最近的OpenAI开发者大会</a>"上，OpenAI宣布将推出GPTs，这是专为特定任务创建的ChatGPT的定制版本。该公司表示，开发者还能够在即将推出的ChatGPT商店中分享他们的GPTs并从中获利。</p><p>&nbsp;</p><p>GPTs提供了一种将ChatGPT与定制指令、外部知识和任何技能组合在一起的机制。它们试图满足定制化ChatGPT以适应特定用途的需求，例如学习棋盘游戏规则、帮助教授数学或设计贴纸等。</p><p>&nbsp;</p><p></p><blockquote>许多高级用户都会维护一个仔细制作的提示和指令集列表，手动将它们复制到ChatGPT中。现在，GPT可以为你完成所有这些操作。</blockquote><p></p><p>&nbsp;</p><p>在GPT出现之前，提示工程是专门定制ChatGPT行为的最常见方法。根据OpenAI的说法，构建GPT不需要编码技能，非常适合教育工作者、教练或任何喜欢构建有用工具的人。</p><p>&nbsp;</p><p></p><blockquote>创建一个GPT就像开始一次对话，给它指令和额外的知识，并选择它可以做的事情，比如搜索互联网、制作图片或分析数据。</blockquote><p></p><p>&nbsp;</p><p>使用OpenAI的界面，创建GPT的第一步是与ChatGPT进行对话，描述你想要实现的目标。完成这一步后，你可以定义指令、对话启动问题、知识、能力和动作。</p><p>&nbsp;</p><p>指令部分极为关键。在这里，你需要确定使用哪些资源、选择什么风格和语调，以及定义期望的行为模式。比如，你可以设定当用户提供特定数据时，你的 GPT 应如何利用这些数据进行网上搜索，接着运行某些脚本来处理搜索结果等等。</p><p>&nbsp;</p><p>对话启动问题是你提供的一些示例句子，帮助用户了解他们可以向 GPT 咨询哪些问题。而知识，则是你上传的资源集，这些资源会作为模型的一部分，供 GPT 使用。功能指的是 GPT 能够利用的各种工具，而动作则是指 GPT 调用外部服务的操作。</p><p>&nbsp;</p><p>GPTs 可供订阅了 ChatGPT Plus 的用户使用，并且用户还需启用“Beta 选项”功能。</p><p>&nbsp;</p><p>正如前面提到的，OpenAI 最近还推出了 GPT 商店，这使得用户可以公开分享自己的 GPT。据公司透露，GPT 商店预计将从 2023 年 11 月末开始提供服务，接下来几个月将支持进行货币交易。</p><p>&nbsp;</p><p>此前，ChatGPT 通过集成第三方应用程序，提供了 <a href="https://openai.com/blog/chatgpt-plugins">ChatGPT 插件</a>" 来修改 ChatGPT 的行为。虽然从这个角度看，GPTs 似乎让插件变得过时，但 <a href="https://platform.openai.com/docs/plugins/introduction">OpenAI 表示他们正推广动作功能</a>"，这是在插件基础上的进一步发展，旨在利用插件的许多核心理念。</p><p>&nbsp;</p><p>原文链接：</p><p><a href="https://www.infoq.com/news/2023/11/openai-gpts-custom-chatgpt/">https://www.infoq.com/news/2023/11/openai-gpts-custom-chatgpt/</a>"</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/mtCjWCpbmQWGIbVjKcyE</id>
-            <title>手把手教你在JavaScript中使用LangChain，解锁AI应用能力</title>
-            <link>https://www.infoq.cn/article/mtCjWCpbmQWGIbVjKcyE</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/mtCjWCpbmQWGIbVjKcyE</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 29 Nov 2023 05:58:55 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: JavaScript 框架, 语言分析模型, Agents, AI 应用集成
-<br>
-<br>
-总结: 这篇文章介绍了一个名为 LangChain 的 JavaScript 框架，它提供了丰富的功能和设置，可以帮助开发者和研究人员通过创建语言分析模型和 Agents 进行实验。同时，该框架还支持将 AI 应用集成到 Web 应用中。 </div>
-                        <hr>
-                    
-                    <p>JS 版的 LangChain，是一个功能丰富的 JavaScript 框架。不管你是开发者还是研究人员都可以利用该框架通过创建语言分析模型和 Agents 来开展各项实验。该框架还提供了十分丰富的功能设置，基于这些功能设置，NLP 爱好者可以通过构建自定义模型来提高文本数据的处理效率。与此同时，作为一个 JS 框架，开发人员可以轻松的将他们的 AI 应用集成到自己的 Web 应用中。</p><p></p><p></p><h2>环境准备</h2><p></p><p></p><p>安装下面的步骤，我们创建一个新目录并且安装 LangChain 的 npm 包：</p><p></p><p>1.执行如下命令，安装 LangChain 的 npm 包</p><p></p><p><code lang="null">npm install -S langchain
-</code></p><p></p><p>2.在目录下面创建一个以.mjs 为后缀的文件（例如：test1.mjs）</p><p></p><p></p><h2>Agents（智体）</h2><p></p><p></p><p>在 LangChain 中，一个 Agent 代表的是一个具备理解和生成文本能力的实例。通过给这些 Agent 设置特定行为和数据源，就可以训练他们执行各种与语言相关的任务，从而使他们具备为更多的应用提供服务的能力。</p><p></p><p></p><h3>创建 LangChain 的 Agent</h3><p></p><p></p><p>利用 LangChain 框架创建的 Agent 在数据获取和响应优化上都支持“工具”的配置。请看下面的示例代码。该例中，Agent 体使用 Serp API（一个网络搜索 API）在互联网上搜索与输入内容相关的信息，然后根据搜索得到的内容完成响应数据的生成，与此同时，它还使用 llm-math 工具来执行诸如 转换单位、百分比对比等 数学运算任务。</p><p></p><p><code lang="null">// langchain 智能体引入
-import { initializeAgentExecutorWithOptions } from "langchain/agents";
-// 引入语言模型：OpenAi
-import { ChatOpenAI } from "langchain/chat_models/openai";
-// 引入网络搜索工具
-import { SerpAPI } from "langchain/tools";
-// 引入计算函数 工具
-import { Calculator } from "langchain/tools/calculator";
-// OpenAI 的 API 访问的密钥
-process.env["OPENAI_API_KEY"] = "YOUR_OPENAI_KEY"
-// SerpAPI 访问密钥
-process.env["SERPAPI_API_KEY"] = "YOUR_SERPAPI_KEY"
-// 创建工具链
-const tools = [new Calculator(), new SerpAPI()];
-// 模型配置，这里用的是 OpenAI gpt-3.5-turbo
-const model = new ChatOpenAI({ modelName: "gpt-3.5-turbo", temperature: 0 });
-// 智能体初始化
-const executor = await initializeAgentExecutorWithOptions(tools, model, {
-  agentType: "openai-functions",
-  verbose: false,
-});
-// 执行，这里给出的问题是："通过搜索互联网，找出自 2010 年以来 Boldy James 发行了多少张专辑，以及 Nas 自 2010 年以来发行了多少张专辑？找出谁发行了更多的专辑，并显示百分比的差异。"
-const result = await executor.run("By searching the Internet, find how many albums has Boldy James dropped since 2010 and how many albums has Nas dropped since 2010? Find who dropped more albums and show the difference in percent.");
-console.log(result);</code></p><p></p><p>上述代码，在模型创建之后，通过 initializeAgentExecutorWithOptions 函数将模型和工具（SerpAPI 和 Calculator）进行合并，生成了一个 executor（执行者）。在输入端，我们要求 LLM（大语言模型） 通过搜索 Internet（使用 SerpAPI），找出自 2010 年以来，Nas 和 Boldy James 这两位艺术家中谁发行了更多专辑，并技术差值百分比（使用计算器）。</p><p></p><p>在该例子中，我通过明确地告诉 LLM“通过搜索互联网…”，以使它通过互联网获取最新数据，而不使用 OpenAI 的的默认数据（该数据截止 2021 年），从而得出正确答案。</p><p></p><p></p><blockquote>译者注：OpenAI于2023年11月2日发布会上，表示其模型数据已经更新到了2023年4月。</blockquote><p></p><p></p><p>下面是上面代码的输出：</p><p></p><p><code lang="null">&gt; node test1.mjs从 2010 年至今，Boldy James 发了 4 张专辑，Nas 发了 17 张因此，Nas 比 Boldy James 发行的专辑要多，两者发行专辑的差值是 13我们将使用如下公式：(差值 / 总值)*100，来计算差值百分比在这里，差值是 13，总值是 17因此差值百分比是：(13/17)*100 = 76.47%所以，从 2010 年至今，Nas 发布的专辑比 Boldy James 多了 76。47%
-</code></p><p></p><p></p><h2>模型（Models）</h2><p></p><p></p><p>LangChain 中支持三种类型的模型使用方式：</p><p></p><p>LLM（大语言模型）Chat Model（对话模型）Embeddings（Embeddings 技术是一种将高纬数据转为低维数据的技术）</p><p></p><p>下面通过示例，我们一起来了解这三种模型的使用。</p><p></p><p></p><h3>语言模型</h3><p></p><p></p><p>LangChain 为 JavaScript 提供了使用语言模型能力，通过该能力 JS 可以根据文本输出生成文本输出。它不像聊天模型那么复杂，最适合处理简单的输入 - 输出的语言任务。下面是一个基于 OpenAI 模型的代码示例：</p><p></p><p><code lang="null">import { OpenAI } from "langchain/llms/openai";
-const llm = new OpenAI({
-  openAIApiKey: "你自己的 OpenAI 的密钥",
-  model: "gpt-3.5-turbo",
-  temperature: 0
-});
-const res = await llm.call("List all red berries");
-console.log(res);</code></p><p></p><p>如你所见，该例是要求 OpenAI 的 gpt-3.5-turbo 模型罗列所有的红色浆果。其中，我将 temperature 设为 0，其目的是为了确保 LLM 输出结果的准确性。下面是输出的结果：</p><p></p><p><code lang="null">1. Strawberries
-2. Cranberries
-3. Raspberries
-4. Redcurrants
-5. Red Gooseberries
-6. Red Elderberries
-7. Red Huckleberries
-8. Red Mulberries</code></p><p></p><p></p><h3>对话模型</h3><p></p><p></p><p>如果你需要更复杂的答案和对话，则需要使用对话模型。对话模型在技术上与语言模型有何不同？好吧，用 LangChain 官方文档 的话来说：</p><p></p><p></p><blockquote>对话模型是语言模型的一个变体。虽然对话模型在底层使用的依然是大语言模型，但是他们在接口上略有不同。对话模型没有使用“文本输入、文本输出”格式的API，而是使用了一个基于“聊天消息”来实现输入输出的接口。</blockquote><p></p><p></p><p>下面是一个简单的 JavaScript 对话模型脚本（该示例相当无用但很有趣）。</p><p></p><p><code lang="null">import { ChatOpenAI } from "langchain/chat_models/openai";
-import { PromptTemplate } from "langchain/prompts";
-// 创建对话，配置密钥、模型版本、和 temperature
-const chat = new ChatOpenAI({
-  openAIApiKey: "YOUR_OPENAI_KEY",
-  model: "gpt-3.5-turbo",
-  temperature: 0
-});
-// 通过提示词模版，创建提示词
-const prompt = PromptTemplate.fromTemplate(`你现在扮演一个诗人的角色，在回答时请保持语言的韵律: {question}`);
-const runnable = prompt.pipe(chat);
-// 对话执行
-const response = await runnable.invoke({ question: "Djokovic, Federer 和 Nadal，三人中谁是最好的网球运动员?" });
-console.log(response);</code></p><p></p><p>如你所见，上面的代码首先发送了一条系统消息给对话机器人，告诉它，当前扮演的是一个诗人角色，且在回答的时候要始终使用押韵的方式。然后再向对话机器人发送一条用户消息，让它给出 Djokovic、Federer 和 Nadal 这三人中，谁是最好的网球运动员。如果你运行这个脚本，将会看到如下内容：</p><p></p><p><code lang="null">// AI 消息体
-AIMessage.content:
-'In the realm of tennis, they all shine bright,\n' +
-'Djokovic, Federer, and Nadal, a glorious sight.\n' +
-'Each with their unique style and skill,\n' +
-'Choosing the best is a difficult thrill.\n' +
-'\n' +
-'Djokovic, the Serb, a master of precision,\n' +
-'With agility and focus, he plays with decision.\n' +
-'His powerful strokes and relentless drive,\n' +
-"Make him a force that's hard to survive.\n" +
-'\n' +
-'Federer, the Swiss maestro, a true artist,\n' +
-'Graceful and elegant, his game is the smartest.\n' +
-'His smooth technique and magical touch,\n' +
-'Leave spectators in awe, oh so much.\n' +
-'\n' +
-'Nadal, the Spaniard, a warrior on clay,\n' +
-'His fierce determination keeps opponents at bay.\n' +
-'With his relentless power and never-ending fight,\n' +
-'He conquers the court, with all his might.\n' +
-'\n' +
-"So, who is better? It's a question of taste,\n" +
-"Each player's greatness cannot be erased.\n" +
-"In the end, it's the love for the game we share,\n" +
-'That makes them all champions, beyond compare.'</code></p><p></p><p></p><blockquote>译注：这是一首诗，实在翻译不来，就不翻译了哈。</blockquote><p></p><p></p><p></p><h3>Embeddings</h3><p></p><p></p><p>Embeddings 支持将文本数据转换为向量数据，以便于和其他相关的内容进行关联。这可能听起来有点抽象，让我们直接来看一个例子：</p><p></p><p><code lang="null">import { OpenAIEmbeddings } from "langchain/embeddings/openai";
-
-process.env["OPENAI_API_KEY"] = "YOUR_OPENAI_KEY"
-
-const embeddings = new OpenAIEmbeddings();
-
-const res = await embeddings.embedQuery("谁是万维网之父?");
-console.log(res)</code></p><p></p><p>这里是数据返回，是一大串的浮点数据：</p><p></p><p><code lang="null">[
-  0.02274114,  -0.012759142,   0.004794503,  -0.009431809,    0.01085313,
-  0.0019698727,  -0.013649924,   0.014933698, -0.0038185727,  -0.025400387,
-  0.010794181,   0.018680222,   0.020042595,   0.004303263,   0.019937797,
-  0.011226473,   0.009268062,   0.016125774,  0.0116391145, -0.0061765253,
-  -0.0073358514, 0.00021696436,   0.004896026,  0.0034026562,  -0.018365828,
-  ... 1501 more items
-]</code></p><p></p><p>这就是 Embeddings 的形态。仅仅是为了六个单词，就用了那么多浮点数！利用 Embeddings 技术，可以将输入文本与潜在答案、相关文本、名称等进行关联。</p><p></p><p>下面让我们来看一个 Embeddings&nbsp;模型的一个使用案例。</p><p></p><p>在下面的脚本中，我们向模型提问：“世界上最重的动物是什么？”。然后我们借助 Embeddings 技术让模型能从我们提供的参考答案中找出最佳答案。</p><p></p><p><code lang="null">import { OpenAIEmbeddings } from "langchain/embeddings/openai";
-
-process.env["OPENAI_API_KEY"] = "YOUR_OPENAI_KEY"
-
-const embeddings = new OpenAIEmbeddings();
-// 余弦相似度函数
-function cosinesim(A, B) {
-    var dotproduct = 0;
-    var mA = 0;
-    var mB = 0;
-
-    for(var i = 0; i &lt; A.length; i++) {
-        dotproduct += A[i] * B[i];
-        mA += A[i] * A[i];
-        mB += B[i] * B[i];
-    }
-
-    mA = Math.sqrt(mA);
-    mB = Math.sqrt(mB);
-    var similarity = dotproduct / (mA * mB);
-
-    return similarity;
-}
-// 嵌入 1：蓝鲸是世界上最重的动物
-const res1 = await embeddings.embedQuery("The Blue Whale is the heaviest animal in the world");
-// 嵌入 2：乔治·奥威尔写了《一九八四》这本书
-const res2 = await embeddings.embedQuery("George Orwell wrote 1984");
-// 嵌入 3：随机内容
-const res3 = await embeddings.embedQuery("Random stuff");
-// 源内容数组
-const text_arr = ["The Blue Whale is the heaviest animal in the world", "George Orwell wrote 1984", "Random stuff"]
-// 利用 embeddings 转换之后的数据数组
-const res_arr = [res1, res2, res3]
-// 问题：世界上最重的动物是什么？
-const question = await embeddings.embedQuery("What is the heaviest animal?");
-// 相似度数组
-const sims = []
-for (var i=0;i<="" code=""></code></p><p></p><p><code lang="null">在上面的代码中，先定义了一个计算相识度的函数：cosinesim(A, B)，其次利用 embeddings 技术将每个答案转换为了向量数据，接着使用 cosinesim 函数计算出了每个答案和输入问题的相识度值，最高拿到相识度最高的答案，完成输出。下面是输出的结果：</code></p><p></p><p><code lang="null"><code lang="null">The Blue Whale is the heaviest animal in the world
-// 蓝鲸是世界上最重的动物</code></code></p><p></p><p></p><h2><code lang="null">Chunks（数据块）</code></h2><p></p><p></p><p><code lang="null">由于 LangChain 模型在生产响应的时候不支持大文本的输入。所以需要用到诸如文本分割等数据分块的技术将大文本数据分割成多个 Chunk。下面我向你演示 LangChain 中两种简单的文本数据分割方法，以实现大文本输入。</code></p><p></p><p></p><h4><code lang="null">方法一、CharacterTextSplitter</code></h4><p></p><p></p><p><code lang="null">为了避免分割之后，Chunk 中内容中断，可以使用换行符来进行文本拆分，该方法是在每次出现换行符时执行分割，可以通过 CharacterTextSplitter 来实现，示例代码如下：</code></p><p></p><p><code lang="null"><code lang="null">import { Document } from "langchain/document";import { CharacterTextSplitter } from "langchain/text_splitter";// 创建一个分割器，使用换行符进行分割，每个区块的大小是 7，区块的重叠度是 3const splitter = new CharacterTextSplitter({  separator: "\n",  chunkSize: 7,  chunkOverlap: 3,});const output = await splitter.createDocuments([your_text]);
-</code></code></p><p></p><p><code lang="null">这是拆分文本的一种有用的方法，同时，你可以使用任何字符作为 Chunk 的分隔符，而不仅仅是换行符（\n）</code></p><p></p><p></p><h4><code lang="null">方法二、RecursiveCharacterTextSplitter</code></h4><p></p><p></p><p><code lang="null">如果要严格按一定长度的字符拆分文本，可以使用 RecursiveCharacterTextSplitter 来实现，示例代码如下：</code></p><p></p><p><code lang="null"><code lang="null">import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";const splitter = new RecursiveCharacterTextSplitter({  // chunk 的大小  chunkSize: 100,  // chunk 的重叠度  chunkOverlap: 15,});const output = await splitter.createDocuments([your_text]);
-</code></code></p><p></p><p><code lang="null">在此示例中，会将文本按照每 100 个字符进行一次拆分，每个 Chunk 的重叠度为 15 个字符。</code></p><p></p><p></p><h4><code lang="null">Chunk 的大小和重叠度</code></h4><p></p><p></p><p><code lang="null">通过上面的示例，想必你已经迫不及待的想知道 Chunk 的大小和重叠度这两个参数确切的含义以及它们对性能的影响了吧。下面我简单从两方面解释下：</code></p><p></p><p><code lang="null">chunkSize 决定了每个 Chunk 中的字符数量。chunkSize 的值越大，那么 Chunk 中的字符数就越多，LangChain 处理该 Chunk 和产生对应输出所需的时间就越长，反之亦然。chunkOverlap 是用于设置了每个 Chunk 之间共享上下文的大小。chunkOverlap 的值越高，Chunk 的冗余度就越高 ;chunkOverlap 的值越低，Chunk 之间共享的上下文就越少。通常将 chunkOverlap 设置在 Chunk 大小的 10% 到 20% 之间会比较理想，当然，真正理想 chunkOverlap 值还是要根据不同的文本类型和使用场景来确定。</code></p><p></p><p></p><h2><code lang="null">Chains（模型链）</code></h2><p></p><p></p><p><code lang="null">通过单个 LLM 的输入输出是无法完成一些更为复杂的任务，因此需要利用 Chains，通过将多个 LLM 的功能链接一起来完成。下面是一个很有意思的例子：</code></p><p></p><p><code lang="null"><code lang="null">import { ChatPromptTemplate } from "langchain/prompts";
-import { LLMChain } from "langchain/chains";
-import { ChatOpenAI } from "langchain/chat_models/openai";
-
-process.env["OPENAI_API_KEY"] = "YOUR_OPENAI_KEY"
-
-// 这是一段知识库
-const wiki_text = `
-Alexander Stanislavovich 'Sasha' Bublik (Александр Станиславович Бублик; born 17 June 1997) is a Kazakhstani professional tennis player. 
-He has been ranked as high as world No. 25 in singles by the Association of Tennis Professionals (ATP), which he achieved in July 2023, and is the current Kazakhstani No. 1 player...
-
-Alexander Stanislavovich Bublik was born on 17 June 1997 in Gatchina, Russia and began playing tennis at the age of four. He was coached by his father, Stanislav. On the junior tour, Bublik reached a career-high ranking of No. 19 and won eleven titles (six singles and five doubles) on the International Tennis Federation (ITF) junior circuit.[4][5]...
-`
-const chat = new ChatOpenAI({ temperature: 0 });
-const chatPrompt = ChatPromptTemplate.fromMessages([
-  [
-    "system",
-    "You are a helpful assistant that {action} the provided text",
-  ],
-  ["human", "{text}"],
-]);
-// 这里将 2 个模型进行了链接
-const chainB = new LLMChain({
-  prompt: chatPrompt,
-  llm: chat,
-});
-
-const resB = await chainB.call({
-  action: "lists all important numbers from",
-  text: wiki_text,
-});
-console.log({ resB });</code></code></p><p></p><p><code lang="null">在上面的代码中，我在提示词中设置了一个变量，同时通过将 LLM 的 temperature 设置为 0，以要求 LLM 给出一个基于事实的回答。该例中，我要求 LLM 基于给定的简短知识库，输出我最喜欢网球运动员的关键数据。以下是 LLM 给出的回答：</code></p><p></p><p><code lang="null"><code lang="null">{
-  resB: {
-    text: 'Important numbers from the provided text:\n' +
-      '\n' +
-      "- Alexander Stanislavovich 'Sasha' Bublik's date of birth: 17 June 1997\n" +
-      "- Bublik's highest singles ranking: world No. 25\n" +
-      "- Bublik's highest doubles ranking: world No. 47\n" +
-      "- Bublik's career ATP Tour singles titles: 3\n" +
-      "- Bublik's career ATP Tour singles runner-up finishes: 6\n" +
-      "- Bublik's height: 1.96 m (6 ft 5 in)\n" +
-      "- Bublik's number of aces served in the 2021 ATP Tour season: unknown\n" +
-      "- Bublik's junior tour ranking: No. 19\n" +
-      "- Bublik's junior tour titles: 11 (6 singles and 5 doubles)\n" +
-      "- Bublik's previous citizenship: Russia\n" +
-      "- Bublik's current citizenship: Kazakhstan\n" +
-      "- Bublik's role in the Levitov Chess Wizards team: reserve member"
-  }
-}</code></code></p><p></p><p><code lang="null">很酷，但这还没有真正展示 Chains 的全部能力。再看一个更实际的例子：</code></p><p></p><p><code lang="null"><code lang="null">import { z } from "zod";
-import { zodToJsonSchema } from "zod-to-json-schema";
-import { ChatOpenAI } from "langchain/chat_models/openai";
-import {
-  ChatPromptTemplate,
-  SystemMessagePromptTemplate,
-  HumanMessagePromptTemplate,
-} from "langchain/prompts";
-import { JsonOutputFunctionsParser } from "langchain/output_parsers";
-process.env["OPENAI_API_KEY"] = "YOUR_OPENAI_KEY"
-const zodSchema = z.object({
-  albums: z
-    .array(
-      z.object({
-        name: z.string().describe("The name of the album"),
-        artist: z.string().describe("The artist(s) that made the album"),
-        length: z.number().describe("The length of the album in minutes"),
-        genre: z.string().optional().describe("The genre of the album"),
-      })
-    )
-    .describe("An array of music albums mentioned in the text"),
-});
-const prompt = new ChatPromptTemplate({
-  promptMessages: [
-    SystemMessagePromptTemplate.fromTemplate(
-      "List all music albums mentioned in the following text."
-    ),
-    HumanMessagePromptTemplate.fromTemplate("{inputText}"),
-  ],
-  inputVariables: ["inputText"],
-});
-const llm = new ChatOpenAI({ modelName: "gpt-3.5-turbo", temperature: 0 });
-const functionCallingModel = llm.bind({
-  functions: [
-    {
-      name: "output_formatter",
-      description: "Should always be used to properly format output",
-      parameters: zodToJsonSchema(zodSchema),
-    },
-  ],
-  function_call: { name: "output_formatter" },
-});
-const outputParser = new JsonOutputFunctionsParser();
-const chain = prompt.pipe(functionCallingModel).pipe(outputParser);
-const response = await chain.invoke({
-  inputText: "My favorite albums are: 2001, To Pimp a Butterfly and Led Zeppelin IV",
-});
-console.log(JSON.stringify(response, null, 2));</code></code></p><p></p><p><code lang="null">此脚本通过读取输入的文本信息，识别所有提到的音乐专辑以及将每张专辑的名称、艺术家、长度和流派，最后将所有数据转换为 JSON 格式进行输出。以下是输入“我最喜欢的专辑是：2001 年、To Pimp a Butterfly 和 Led Zeppelin IV”的输出：</code></p><p></p><p><code lang="null"><code lang="null">{
-  "albums": [
-    {
-      "name": "2001",
-      "artist": "Dr. Dre",
-      "length": 68,
-      "genre": "Hip Hop"
-    },
-    {
-      "name": "To Pimp a Butterfly",
-      "artist": "Kendrick Lamar",
-      "length": 79,
-      "genre": "Hip Hop"
-    },
-    {
-      "name": "Led Zeppelin IV",
-      "artist": "Led Zeppelin",
-      "length": 42,
-      "genre": "Rock"
-    }
-  ]
-}</code></code></p><p></p><p><code lang="null">虽然这只是一个有趣的例子，但通过该技术可以将非结构化的文本数据转为结构化的数据，从而使用在其他应用系统中。</code></p><p></p><p></p><h2><code lang="null">不止 OpenAI</code></h2><p></p><p></p><p><code lang="null">尽管在演示 LangChain 不同功能的示例中，我一直都是使用 OpenAI 模型。但其实 LangChain 并不局限于 OpenAI 模型。你可以将 LangChain 与许多其他 LLM 和 AI 服务一起使用。在 LangChain 的官方文档中可以找到 LangChain 的 JS 版本所支持集成的完整 LLM 列表。</code></p><p></p><p><code lang="null">例如，你可以将 Cohere 与 LangChain 一起使用。再使用 npm install cohere-ai 安装 Cohere 之后，你就可以像下面示例代码一样，使用 LangChain 和 Cohere 编写一个简单的问答脚本：</code></p><p></p><p><code lang="null"><code lang="null">import { Cohere } from "langchain/llms/cohere";
-const model = new Cohere({
-  maxTokens: 50,
-  apiKey: "YOUR_COHERE_KEY", // In Node.js defaults to process.env.COHERE_API_KEY
-});
-const res = await model.call(
-  "Come up with a name for a new Nas album" // 给 Nas 的新专辑起个名字
-);
-console.log({ res });</code></code></p><p></p><p><code lang="null">输出的结果如下：</code></p><p></p><p><code lang="null"><code lang="null">{
-  res: ' Here are a few possible names for a new Nas album:\n' +
-    '\n' +
-    "- King's Landing\n" +
-    "- God's Son: The Sequel\n" +
-    "- Street's Disciple\n" +
-    '- Izzy Free\n' +
-    '- Nas and the Illmatic Flow\n' +
-    '\n' +
-    'Do any'
-}</code></code></p><p></p><p></p><h2><code lang="null">总结</code></h2><p></p><p></p><p><code lang="null">读完本篇文章，相信你已经对 JS 版的 LangChain 各方面能力都有所了解了。现在你可以通过 LangChain 用 JS 开发各种基于 AI 的应用和体验 LLM 了。当然，也请你必参考 LangChainJS 的官方文档，以了解更多有关特定功能的详细信息。</code></p><p></p><p><code lang="null">最后，预祝你在 JavaScript 中愉快的使用 LangChain 进行编码和体验！如果你喜欢这篇文章，你可能还想阅读如何在 Python 中使用 LangChain 这篇文章：</code></p><p></p><p><code lang="null"><a href="https://www.sitepoint.com/langchain-python-complete-guide/">https://www.sitepoint.com/langchain-python-complete-guide/</a>"</code></p><p></p><p><code lang="null">原文链接：</code></p><p></p><p><code lang="null"><a href="https://www.sitepoint.com/langchain-javascript-complete-guide/">https://www.sitepoint.com/langchain-javascript-complete-guide/</a>"</code></p><p></p><p></p><h5><code lang="null">相关阅读：</code></h5><p></p><p><code lang="null"><a href="https://www.infoq.cn/article/Rujx6tv3Grxh3HYMZJqK?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">LangChain&nbsp;的问题所在</a>"</code></p><p><code lang="null"><a href="https://www.infoq.cn/article/67vMj2F2HTC24fDdE64a?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">OpenAI 用 45 分钟重塑游戏规则！干掉 MJ、LangChain，创造“不会编程的应用开发者”新职业</a>"</code></p><p><code lang="null"><a href="https://www.infoq.cn/article/yl8eJoSfkHbOCyFzCcgw?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">LangChain：2023 年最潮大语言模型 Web 开发框架</a>"</code></p><p><code lang="null"><a href="https://xie.infoq.cn/article/d9e58b3a7e0fe2a369269c923?utm_campaign=geek_search&amp;utm_content=geek_search&amp;utm_medium=geek_search&amp;utm_source=geek_search&amp;utm_term=geek_search">理论 + 实践详解最热的 LLM 应用框架 LangChain</a>"</code></p>
                 ]]>
             </content:encoded>
         </item>
