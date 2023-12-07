@@ -5,6 +5,78 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1732664112302502064#m</id>
+            <title>这个研究牛蛙，可以通过手绘的轨迹，控制镜头的运动轨迹和视频中物体的运动轨迹，而且还支持 Animatediff，希望开源之后会有对应的节点插件。
+
+项目优势：
+1）它有效地独立控制摄像机运动和物体运动，实现更精细的运动控制，促进两种类型运动的灵活多样组合。
+2）它的运动条件由摄像机的姿势和轨迹确定，这些条件与外观无关，对生成的视频中的物体的外观或形状影响最小。
+
+实现方法：
+MotionCtrl通过添加相机运动控制模块（CMCM）和物体运动控制模块（OMCM）来扩展LVDM的去噪U-Net结构。CMCM通过将相机姿态序列RT附加到第二个自注意模块的输入中，并应用一个定制的轻量级全连接层来提取相机姿态特征，将其与LVDM的时间变换器进行集成。
+
+论文地址：https://arxiv.org/abs/2312.03641</title>
+            <link>https://nitter.cz/op7418/status/1732664112302502064#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1732664112302502064#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 07 Dec 2023 07:31:30 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这个研究牛蛙，可以通过手绘的轨迹，控制镜头的运动轨迹和视频中物体的运动轨迹，而且还支持 Animatediff，希望开源之后会有对应的节点插件。<br />
+<br />
+项目优势：<br />
+1）它有效地独立控制摄像机运动和物体运动，实现更精细的运动控制，促进两种类型运动的灵活多样组合。<br />
+2）它的运动条件由摄像机的姿势和轨迹确定，这些条件与外观无关，对生成的视频中的物体的外观或形状影响最小。<br />
+<br />
+实现方法：<br />
+MotionCtrl通过添加相机运动控制模块（CMCM）和物体运动控制模块（OMCM）来扩展LVDM的去噪U-Net结构。CMCM通过将相机姿态序列RT附加到第二个自注意模块的输入中，并应用一个定制的轻量级全连接层来提取相机姿态特征，将其与LVDM的时间变换器进行集成。<br />
+<br />
+论文地址：<a href="https://arxiv.org/abs/2312.03641">arxiv.org/abs/2312.03641</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzI2NjQwNzEwMzA0NTYzMjAvcHUvaW1nL3pfWVZidXcxcVN5YXNSLVAuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1732368220429115511#m</id>
+            <title>RT by @op7418: Google 再发布王炸级图像生成功能Generative Powers of Ten，支持对生成的图像进行无限放大，比如讲一张人像照片放大到可以看到细胞结构，从地球大气层缩放到地面上的物体。
+通过联合多尺度扩散采样方法实现这一目标，该方法鼓励不同尺度的一致性，同时保持每个单独采样过程的完整性。由于每个生成的比例都由不同的文本提示引导，因此我们的方法比传统的超分辨率方法能够实现更深层次的缩放，而传统的超分辨率方法可能很难在截然不同的比例下创建新的上下文结构。下面是具体介绍：
+
+实现方法：
+使用预训练的扩散模型来同时去噪多个不同尺度的场景图像。每个缩放级别的噪声图像以及相应的提示同时输入到相同的预训练扩散模型中，返回对应的清晰图像的估计。这些图像可能对它们所观察到的重叠区域具有不一致的估计。我们采用多分辨率混合将这些区域融合成一致的缩放堆栈，并从一致的表示中重新渲染不同的缩放级别。然后，这些重新渲染的图像被用作DDPM采样步骤中的清晰图像估计。
+
+基线比较：
+生成缩放视频的另一种方法是使用文本条件的超分辨率模型逐步超分辨率放大图像，或者使用文本条件的外部绘制模型逐步绘制放大图像。在这里，我们与这两种变体进行比较，使用稳定扩散的超分辨率和外部绘制模型。我们观察到，因果生成通常会导致较差的结果，因为先前的生成结果并不总是与后续的缩放级别兼容。
+
+论文地址：https://arxiv.org/abs/2312.02149</title>
+            <link>https://nitter.cz/op7418/status/1732368220429115511#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1732368220429115511#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 06 Dec 2023 11:55:44 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Google 再发布王炸级图像生成功能Generative Powers of Ten，支持对生成的图像进行无限放大，比如讲一张人像照片放大到可以看到细胞结构，从地球大气层缩放到地面上的物体。<br />
+通过联合多尺度扩散采样方法实现这一目标，该方法鼓励不同尺度的一致性，同时保持每个单独采样过程的完整性。由于每个生成的比例都由不同的文本提示引导，因此我们的方法比传统的超分辨率方法能够实现更深层次的缩放，而传统的超分辨率方法可能很难在截然不同的比例下创建新的上下文结构。下面是具体介绍：<br />
+<br />
+实现方法：<br />
+使用预训练的扩散模型来同时去噪多个不同尺度的场景图像。每个缩放级别的噪声图像以及相应的提示同时输入到相同的预训练扩散模型中，返回对应的清晰图像的估计。这些图像可能对它们所观察到的重叠区域具有不一致的估计。我们采用多分辨率混合将这些区域融合成一致的缩放堆栈，并从一致的表示中重新渲染不同的缩放级别。然后，这些重新渲染的图像被用作DDPM采样步骤中的清晰图像估计。<br />
+<br />
+基线比较：<br />
+生成缩放视频的另一种方法是使用文本条件的超分辨率模型逐步超分辨率放大图像，或者使用文本条件的外部绘制模型逐步绘制放大图像。在这里，我们与这两种变体进行比较，使用稳定扩散的超分辨率和外部绘制模型。我们观察到，因果生成通常会导致较差的结果，因为先前的生成结果并不总是与后续的缩放级别兼容。<br />
+<br />
+论文地址：<a href="https://arxiv.org/abs/2312.02149">arxiv.org/abs/2312.02149</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzIzNjc0NDcxOTY2NTU2MTcvcHUvaW1nL3psRlM1VHl6TXduZ0tqanMuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1732658520057872811#m</id>
             <title>前几天的Magic Animate 可以调整生成视频的人物动作。
 Adobe 今天这个基于深度的图像控制，可以通过简单的 3D 模型拖动改变画面中对应物体的大小以及位置，感觉可以解决视频生成过程中的非人物内容控制。挺厉害的。
@@ -436,47 +508,6 @@ https://x.com/pika_labs/status/1732438007603777539?s=20</title>
                     
                     <p>牛蛙，我说今天的双语字幕怎么自动开了</p>
 <p><a href="https://nitter.cz/immersivetran/status/1732244736495522132#m">nitter.cz/immersivetran/status/1732244736495522132#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1732440181633097844#m</id>
-            <title>R to @op7418: 这个Pika的视频编辑演示配音之后好搞笑啊，会玩
-https://x.com/Martin_Haerlin/status/1732434873871188361?s=20</title>
-            <link>https://nitter.cz/op7418/status/1732440181633097844#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1732440181633097844#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 06 Dec 2023 16:41:41 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个Pika的视频编辑演示配音之后好搞笑啊，会玩<br />
-<a href="https://x.com/Martin_Haerlin/status/1732434873871188361?s=20">x.com/Martin_Haerlin/status/…</a></p>
-<p><a href="https://nitter.cz/Martin_Haerlin/status/1732434873871188361#m">nitter.cz/Martin_Haerlin/status/1732434873871188361#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1732437169170792455#m</id>
-            <title>Gemini多模态图像识别能力测试，简单的文字OCR识别没有问题，而且翻译的时候会输出逐句翻译，这点很好。
-但是复杂图像识别不太行，可以识别出雪人但是雪人的细节全错了。</title>
-            <link>https://nitter.cz/op7418/status/1732437169170792455#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1732437169170792455#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 06 Dec 2023 16:29:42 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Gemini多模态图像识别能力测试，简单的文字OCR识别没有问题，而且翻译的时候会输出逐句翻译，这点很好。<br />
-但是复杂图像识别不太行，可以识别出雪人但是雪人的细节全错了。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0FyYUFtT2J3QUViSFlwLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0FyYUR1UWJZQUFzNG5pLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
