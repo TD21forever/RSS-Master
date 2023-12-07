@@ -5,6 +5,69 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1732839223332335927#m</id>
+            <title>Anthropic 的这篇文章还是值得看看的，它首先解释了为什么有时候回答超长上下文时会不准：
+
+“Claude 2.1 在回答基于文档中某个特定句子的问题时可能会有所保留，特别是当这个句子突兀地插入或者位置不合适时”
+
+文章中举了一个例子：
+
+文章中有这样一句话：“在旧金山，最棒的事莫过于晴朗天气下，在多洛雷斯公园边吃着三明治。”当模型浏览这篇包含上述句子的长文章时，它被询问：“在旧金山最有趣的活动是什么？”
+
+在这次评估中，Claude 2.1 的回应多少有些出人意料。它回答说：“遗憾的是，文章并没有明确指出旧金山最有趣的活动是什么。”换句话说，它倾向于报告文章没有提供足够的信息来回答这个问题，而不是去查找文中嵌入的那个句子。
+
+Claude 2.1 的训练数据混合了多种资料，目的是降低信息不准确性。这包括在文档中没有足够的信息来支持一个回答时，模型就不会基于该文档作出回应。
+
+然后他们也给出了解决方案，那就是在提示词中，在 Claude 回复之前加入 “这是上下文中最相关的一句话：”，这个小小的改变就足以将 Claude 2.1 在原始评估中的得分从 27% 提升至 98%。
+
+它这个提示词改动很有意思，本质上就是CoT（Chain of Thought，链式思考）的变种，把原来直接回复问题变成了两步：
+1. 先找出上下文最相关的一句话
+2. 继续回复原始问题
+
+诱导 Claude 先去检索出来上下文最相关的一句话是什么，然后再进行回答，那么相关性就好很多。
+
+虽然我觉得这明显就是 Claude 自己能力有问题在自己找补，但是它这个提示词技巧还挺值得学习的！
+
+另外我把文章翻译了一下：https://baoyu.io/translations/anthropic/long-context-prompting-for-claude-2-1</title>
+            <link>https://nitter.cz/dotey/status/1732839223332335927#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1732839223332335927#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 07 Dec 2023 19:07:20 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Anthropic 的这篇文章还是值得看看的，它首先解释了为什么有时候回答超长上下文时会不准：<br />
+<br />
+“Claude 2.1 在回答基于文档中某个特定句子的问题时可能会有所保留，特别是当这个句子突兀地插入或者位置不合适时”<br />
+<br />
+文章中举了一个例子：<br />
+<br />
+文章中有这样一句话：“在旧金山，最棒的事莫过于晴朗天气下，在多洛雷斯公园边吃着三明治。”当模型浏览这篇包含上述句子的长文章时，它被询问：“在旧金山最有趣的活动是什么？”<br />
+<br />
+在这次评估中，Claude 2.1 的回应多少有些出人意料。它回答说：“遗憾的是，文章并没有明确指出旧金山最有趣的活动是什么。”换句话说，它倾向于报告文章没有提供足够的信息来回答这个问题，而不是去查找文中嵌入的那个句子。<br />
+<br />
+Claude 2.1 的训练数据混合了多种资料，目的是降低信息不准确性。这包括在文档中没有足够的信息来支持一个回答时，模型就不会基于该文档作出回应。<br />
+<br />
+然后他们也给出了解决方案，那就是在提示词中，在 Claude 回复之前加入 “这是上下文中最相关的一句话：”，这个小小的改变就足以将 Claude 2.1 在原始评估中的得分从 27% 提升至 98%。<br />
+<br />
+它这个提示词改动很有意思，本质上就是CoT（Chain of Thought，链式思考）的变种，把原来直接回复问题变成了两步：<br />
+1. 先找出上下文最相关的一句话<br />
+2. 继续回复原始问题<br />
+<br />
+诱导 Claude 先去检索出来上下文最相关的一句话是什么，然后再进行回答，那么相关性就好很多。<br />
+<br />
+虽然我觉得这明显就是 Claude 自己能力有问题在自己找补，但是它这个提示词技巧还挺值得学习的！<br />
+<br />
+另外我把文章翻译了一下：<a href="https://baoyu.io/translations/anthropic/long-context-prompting-for-claude-2-1">baoyu.io/translations/anthro…</a></p>
+<p><a href="https://nitter.cz/AnthropicAI/status/1732527908139552951#m">nitter.cz/AnthropicAI/status/1732527908139552951#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0F4SFNSWlhJQUF2cWlPLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/9hills/status/1732693066958684523#m</id>
             <title>RT by @dotey: 14个Gemini论文中精选的例子，直接截图发给GPT-4，GPT-4正确了12个。
 
@@ -758,25 +821,6 @@ Zuckerberg 的 “快速行动，打破常规” 口号可能在 Meta 的 2019 �
 <br />
 转译自：Silicon Valley has a new version of its beloved 'move fast and break things' mantra<br />
  <a href="https://www.businessinsider.com/silicon-valley-move-fast-and-break-things-sam-altman-openai-2023-12">businessinsider.com/silicon-…</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1732591280415289513#m</id>
-            <title>Gemini 的官方演示视频（中文字幕）</title>
-            <link>https://nitter.cz/dotey/status/1732591280415289513#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1732591280415289513#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 07 Dec 2023 02:42:05 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Gemini 的官方演示视频（中文字幕）</p>
-<p><a href="https://nitter.cz/dotey/status/1732507449943323032#m">nitter.cz/dotey/status/1732507449943323032#m</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzI1NDM4NTU5MTg5OTM0MDkvcHUvaW1nLzVmRndIRDY2SVI3REVuaUQuanBn" />
                 ]]>
             </content:encoded>
         </item>
