@@ -5,6 +5,106 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1733048972552397124#m</id>
+            <title>这个项目不错，帮你翻译项目文档</title>
+            <link>https://nitter.cz/dotey/status/1733048972552397124#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733048972552397124#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 08 Dec 2023 09:00:48 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这个项目不错，帮你翻译项目文档</p>
+<p><a href="https://nitter.cz/jerryjliu0/status/1732926141118472448#m">nitter.cz/jerryjliu0/status/1732926141118472448#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1733041246799638916#m</id>
+            <title>虽然 Q* 热度过了，但这篇对于OpenAI Q*的分析文章值得一读：《如何理解关于 OpenAI Q* 的流言 | How to think about the OpenAI Q* rumors》
+
+部分内容摘录：
+
+对大语言模型（LLM）来说，数字如“5”和“6”只是普通的 Token，和“the”或“cat”没什么两样。LLM 能学会 5+6=11，是因为在它的训练数据中，这种 Token 序列及其变体（比如“5+6=11”）出现了无数次。但这些训练数据很可能不包含像 ((5+6-3-3-1)/2+3+7)/3+4=8 这样的复杂计算例子。因此，当要求语言模型一次性解决这样的计算问题时，它很可能会混淆，从而得出错误的答案。
+
+换个角度来看，大语言模型并没有外部的“草稿空间”来记录中间计算结果，比如 5+6=11。通过链式思考推理（chain-of-thought reasoning），LLM 可以有效地利用自己的输出作为草稿空间。这使得它能将复杂问题分解成若干容易处理的小步骤——每个步骤都极有可能对应训练数据中的某些实例。
+
+...
+
+计算机科学家将其定义为 NP-hard 问题，即不存在一种普遍的线性解决算法。解决这类问题，我们只能尝试一个可能的解决方案，检验其是否有效，若不行则进行回溯。
+
+对于 GPT-4 来说，它可以通过向其上下文窗口增加更多文本来实现这种回溯，但这种方法并不适合大规模应用。更优的方案是赋予 GPT-4“退格键”，使其能删除最后（或最后几个）推理步骤，然后重新尝试。要使这种方法行之有效，系统还需能够追踪已尝试过的组合，以避免重复努力。这样，大语言模型就能探索一个可能性树，其形式如下图所示。
+
+...
+
+Legg 提到的“著名的第 37 步”，是指 AlphaGo 和世界顶级围棋手李世石在2016 年对决中的第二局。当时，大多数围棋专家起初都认为 AlphaGo 的这一步是失误。但最终 AlphaGo 赢得了比赛，事后分析证明这实际上是一个高明的着法。AlphaGo 在这一过程中领悟到了围棋的某些人类棋手未曾触及的奥秘。
+
+AlphaGo 通过模拟成千上万种从当前棋盘状态出发的可能棋局来获得这样的领悟。由于可能的走法序列太多，电脑无法一一检查，AlphaGo 便利用神经网络来使这个过程可控。
+
+其中一个名为策略网络 (policy network) 的网络用于预测哪些走法最有前景，从而值得在模拟对局中尝试。另一个名为价值网络 (value network) 的网络则估算结果棋盘状态对于黑白双方的利弊。AlphaGo 基于这些评估，从而反向确定下一步的最佳走法。
+
+Legg 提出的观点是，一种类似树搜索的方法可能会增强大语言模型（Large Language Model）的推理能力。这种模型不仅仅是预测一个最有可能的 Token，而是在确定答案之前，可能会探索数千种不同的回答。实际上，DeepMind 的思考树（Tree of Thoughts）论文看起来就是向这个方向迈出的第一步。
+
+我们之前看到，OpenAI 尝试通过一个生成器（产生可能的解决方案）和一个验证器（判断这些解决方案是否正确）来解决数学问题。这和 AlphaGo 的设计有明显的相似之处，AlphaGo 有一个策略网络（产生可能的棋步）和一个价值网络（估计这些棋步是否能带来有利的棋盘局面）。
+
+如果把 OpenAI 的生成器和验证器网络与 DeepMind 的思考树（Tree of Thoughts）概念结合起来，我们可能就能得到一个像 AlphaGo 那样运作的语言模型，它可能也会具备 AlphaGo 那样强大的推理能力。
+
+...
+
+原文：https://www.understandingai.org/p/how-to-think-about-the-openai-q-rumors
+翻译：https://baoyu.io/translations/ai/how-to-think-about-the-openai-q-rumors</title>
+            <link>https://nitter.cz/dotey/status/1733041246799638916#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733041246799638916#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 08 Dec 2023 08:30:06 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>虽然 Q* 热度过了，但这篇对于OpenAI Q*的分析文章值得一读：《如何理解关于 OpenAI Q* 的流言 | How to think about the OpenAI Q* rumors》<br />
+<br />
+部分内容摘录：<br />
+<br />
+对大语言模型（LLM）来说，数字如“5”和“6”只是普通的 Token，和“the”或“cat”没什么两样。LLM 能学会 5+6=11，是因为在它的训练数据中，这种 Token 序列及其变体（比如“5+6=11”）出现了无数次。但这些训练数据很可能不包含像 ((5+6-3-3-1)/2+3+7)/3+4=8 这样的复杂计算例子。因此，当要求语言模型一次性解决这样的计算问题时，它很可能会混淆，从而得出错误的答案。<br />
+<br />
+换个角度来看，大语言模型并没有外部的“草稿空间”来记录中间计算结果，比如 5+6=11。通过链式思考推理（chain-of-thought reasoning），LLM 可以有效地利用自己的输出作为草稿空间。这使得它能将复杂问题分解成若干容易处理的小步骤——每个步骤都极有可能对应训练数据中的某些实例。<br />
+<br />
+...<br />
+<br />
+计算机科学家将其定义为 NP-hard 问题，即不存在一种普遍的线性解决算法。解决这类问题，我们只能尝试一个可能的解决方案，检验其是否有效，若不行则进行回溯。<br />
+<br />
+对于 GPT-4 来说，它可以通过向其上下文窗口增加更多文本来实现这种回溯，但这种方法并不适合大规模应用。更优的方案是赋予 GPT-4“退格键”，使其能删除最后（或最后几个）推理步骤，然后重新尝试。要使这种方法行之有效，系统还需能够追踪已尝试过的组合，以避免重复努力。这样，大语言模型就能探索一个可能性树，其形式如下图所示。<br />
+<br />
+...<br />
+<br />
+Legg 提到的“著名的第 37 步”，是指 AlphaGo 和世界顶级围棋手李世石在2016 年对决中的第二局。当时，大多数围棋专家起初都认为 AlphaGo 的这一步是失误。但最终 AlphaGo 赢得了比赛，事后分析证明这实际上是一个高明的着法。AlphaGo 在这一过程中领悟到了围棋的某些人类棋手未曾触及的奥秘。<br />
+<br />
+AlphaGo 通过模拟成千上万种从当前棋盘状态出发的可能棋局来获得这样的领悟。由于可能的走法序列太多，电脑无法一一检查，AlphaGo 便利用神经网络来使这个过程可控。<br />
+<br />
+其中一个名为策略网络 (policy network) 的网络用于预测哪些走法最有前景，从而值得在模拟对局中尝试。另一个名为价值网络 (value network) 的网络则估算结果棋盘状态对于黑白双方的利弊。AlphaGo 基于这些评估，从而反向确定下一步的最佳走法。<br />
+<br />
+Legg 提出的观点是，一种类似树搜索的方法可能会增强大语言模型（Large Language Model）的推理能力。这种模型不仅仅是预测一个最有可能的 Token，而是在确定答案之前，可能会探索数千种不同的回答。实际上，DeepMind 的思考树（Tree of Thoughts）论文看起来就是向这个方向迈出的第一步。<br />
+<br />
+我们之前看到，OpenAI 尝试通过一个生成器（产生可能的解决方案）和一个验证器（判断这些解决方案是否正确）来解决数学问题。这和 AlphaGo 的设计有明显的相似之处，AlphaGo 有一个策略网络（产生可能的棋步）和一个价值网络（估计这些棋步是否能带来有利的棋盘局面）。<br />
+<br />
+如果把 OpenAI 的生成器和验证器网络与 DeepMind 的思考树（Tree of Thoughts）概念结合起来，我们可能就能得到一个像 AlphaGo 那样运作的语言模型，它可能也会具备 AlphaGo 那样强大的推理能力。<br />
+<br />
+...<br />
+<br />
+原文：<a href="https://www.understandingai.org/p/how-to-think-about-the-openai-q-rumors">understandingai.org/p/how-to…</a><br />
+翻译：<a href="https://baoyu.io/translations/ai/how-to-think-about-the-openai-q-rumors">baoyu.io/translations/ai/how…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0F6LXZkTFhJQUFXVDdELmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0F6LXluOFhZQUFVTW9pLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0F6LXpjVlcwQUFDSjlfLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1733024692024336511#m</id>
             <title>这是AI发的吗？</title>
             <link>https://nitter.cz/dotey/status/1733024692024336511#m</link>
@@ -906,91 +1006,6 @@ https://x.com/xicilion/status/1732860778548752457?s=20</title>
                     
                     <p>😂</p>
 <p><a href="https://nitter.cz/venturetwins/status/1732817594762338597#m">nitter.cz/venturetwins/status/1732817594762338597#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1732839223332335927#m</id>
-            <title>Anthropic 的这篇文章还是值得看看的，它首先解释了为什么有时候回答超长上下文时会不准：
-
-“Claude 2.1 在回答基于文档中某个特定句子的问题时可能会有所保留，特别是当这个句子突兀地插入或者位置不合适时”
-
-文章中举了一个例子：
-
-文章中有这样一句话：“在旧金山，最棒的事莫过于晴朗天气下，在多洛雷斯公园边吃着三明治。”当模型浏览这篇包含上述句子的长文章时，它被询问：“在旧金山最有趣的活动是什么？”
-
-在这次评估中，Claude 2.1 的回应多少有些出人意料。它回答说：“遗憾的是，文章并没有明确指出旧金山最有趣的活动是什么。”换句话说，它倾向于报告文章没有提供足够的信息来回答这个问题，而不是去查找文中嵌入的那个句子。
-
-Claude 2.1 的训练数据混合了多种资料，目的是降低信息不准确性。这包括在文档中没有足够的信息来支持一个回答时，模型就不会基于该文档作出回应。
-
-然后他们也给出了解决方案，那就是在提示词中，在 Claude 回复之前加入 “这是上下文中最相关的一句话：”，这个小小的改变就足以将 Claude 2.1 在原始评估中的得分从 27% 提升至 98%。
-
-它这个提示词改动很有意思，本质上就是CoT（Chain of Thought，链式思考）的变种，把原来直接回复问题变成了两步：
-1. 先找出上下文最相关的一句话
-2. 继续回复原始问题
-
-诱导 Claude 先去检索出来上下文最相关的一句话是什么，然后再进行回答，那么相关性就好很多。
-
-虽然我觉得这明显就是 Claude 自己能力有问题在自己找补，但是它这个提示词技巧还挺值得学习的！
-
-另外我把文章翻译了一下：https://baoyu.io/translations/anthropic/long-context-prompting-for-claude-2-1</title>
-            <link>https://nitter.cz/dotey/status/1732839223332335927#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1732839223332335927#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 07 Dec 2023 19:07:20 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Anthropic 的这篇文章还是值得看看的，它首先解释了为什么有时候回答超长上下文时会不准：<br />
-<br />
-“Claude 2.1 在回答基于文档中某个特定句子的问题时可能会有所保留，特别是当这个句子突兀地插入或者位置不合适时”<br />
-<br />
-文章中举了一个例子：<br />
-<br />
-文章中有这样一句话：“在旧金山，最棒的事莫过于晴朗天气下，在多洛雷斯公园边吃着三明治。”当模型浏览这篇包含上述句子的长文章时，它被询问：“在旧金山最有趣的活动是什么？”<br />
-<br />
-在这次评估中，Claude 2.1 的回应多少有些出人意料。它回答说：“遗憾的是，文章并没有明确指出旧金山最有趣的活动是什么。”换句话说，它倾向于报告文章没有提供足够的信息来回答这个问题，而不是去查找文中嵌入的那个句子。<br />
-<br />
-Claude 2.1 的训练数据混合了多种资料，目的是降低信息不准确性。这包括在文档中没有足够的信息来支持一个回答时，模型就不会基于该文档作出回应。<br />
-<br />
-然后他们也给出了解决方案，那就是在提示词中，在 Claude 回复之前加入 “这是上下文中最相关的一句话：”，这个小小的改变就足以将 Claude 2.1 在原始评估中的得分从 27% 提升至 98%。<br />
-<br />
-它这个提示词改动很有意思，本质上就是CoT（Chain of Thought，链式思考）的变种，把原来直接回复问题变成了两步：<br />
-1. 先找出上下文最相关的一句话<br />
-2. 继续回复原始问题<br />
-<br />
-诱导 Claude 先去检索出来上下文最相关的一句话是什么，然后再进行回答，那么相关性就好很多。<br />
-<br />
-虽然我觉得这明显就是 Claude 自己能力有问题在自己找补，但是它这个提示词技巧还挺值得学习的！<br />
-<br />
-另外我把文章翻译了一下：<a href="https://baoyu.io/translations/anthropic/long-context-prompting-for-claude-2-1">baoyu.io/translations/anthro…</a></p>
-<p><a href="https://nitter.cz/AnthropicAI/status/1732527908139552951#m">nitter.cz/AnthropicAI/status/1732527908139552951#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0F4SFNSWlhJQUF2cWlPLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/9hills/status/1732693066958684523#m</id>
-            <title>RT by @dotey: 14个Gemini论文中精选的例子，直接截图发给GPT-4，GPT-4正确了12个。
-
-从经验上看，GPT-4的能力应该强于 Gemini，等Ultra放出再看。</title>
-            <link>https://nitter.cz/9hills/status/1732693066958684523#m</link>
-            <guid isPermaLink="false">https://nitter.cz/9hills/status/1732693066958684523#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 07 Dec 2023 09:26:33 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>14个Gemini论文中精选的例子，直接截图发给GPT-4，GPT-4正确了12个。<br />
-<br />
-从经验上看，GPT-4的能力应该强于 Gemini，等Ultra放出再看。</p>
-<p><a href="https://nitter.cz/DimitrisPapail/status/1732529288493080600#m">nitter.cz/DimitrisPapail/status/1732529288493080600#m</a></p>
                 ]]>
             </content:encoded>
         </item>
