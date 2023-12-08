@@ -5,6 +5,172 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1732981463489110318#m</id>
+            <title>R to @xiaohuggg: LooseControl还可以对图像进行的更加智能和细致的修改，这些修改不仅影响图像的特定元素，还能理解和适应场景的整体语义和环境。
+
+例如，当你在场景中进行编辑时，LooseControl 能够理解并适应这些变化，包括光照的变化等。</title>
+            <link>https://nitter.cz/xiaohuggg/status/1732981463489110318#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1732981463489110318#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 08 Dec 2023 04:32:32 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>LooseControl还可以对图像进行的更加智能和细致的修改，这些修改不仅影响图像的特定元素，还能理解和适应场景的整体语义和环境。<br />
+<br />
+例如，当你在场景中进行编辑时，LooseControl 能够理解并适应这些变化，包括光照的变化等。</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzI5ODE0MTczMDU2Njk2MzIvcHUvaW1nL2ZVdlI2RTM0aUZYWE14aDQuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1732981317560881423#m</id>
+            <title>LooseControl：一个创新的图像生成框架，可根据深度信息来引导图像的生成。
+
+LooseControl在生成图像时会考虑物体之间的空间关系，可通过简单地描述物体在场景中的位置来创建复杂的场景。
+
+例如你想设计一个房间，但只有一些基本想法，你只需要描述你的想法，它会根据你的描述设计一张真实的效果图。
+
+LooseControl 提供了一种新颖的方式来设计复杂场景并执行语义编辑。
+
+可以对图像进行的更加智能和细致的修改，这些修改不仅影响图像的特定元素，还能理解和适应场景的整体语义和环境。
+
+例如，当你在场景中进行编辑时，LooseControl 能够理解并适应这些变化，包括光照的变化。
+
+基本背景：
+
+LooseControl 允许用户在图像生成过程中使用深度条件，这意味着它可以根据物体在场景中的深度（即远近关系）来引导图像的生成。这里的“深度条件”指的是在生成图像时考虑物体之间的空间关系，比如哪个物体在前面，哪个在后面。
+
+以前的技术，如 ControlNet，也使用了深度信息来生成图像，但它们通常需要非常详细和准确的深度图。深度图是一种显示场景中每个点距离观察者远近的图像，通常需要专业的设备和软件来创建。
+
+LooseControl 的创新之处在于，它不需要这么详细的深度图。它允许用户以更简单、更灵活的方式指定深度条件。例如，用户可以只指定场景的大致布局和物体的大致位置，而不是提供完整的深度图。这使得用户可以更容易地创建复杂的场景图像，即使他们没有专业的图像处理技能或设备。
+
+简单来说，LooseControl 让图像生成变得更加容易和直观，用户可以通过简单地描述物体在场景中的位置来创建复杂的图像，而不需要复杂的技术支持。
+
+LooseControl的主要特点：
+
+1、场景边界控制 (C1)：用户可以通过指定场景的边界来粗略地定义场景，而不需要提供详细的深度图。
+
+2、3D 盒子控制 (C2)：除了场景边界，用户还可以通过大致的 3D 边界盒子来指定目标对象的位置，而不是其确切的形状和外观。
+
+3、编辑机制：
+
+3D 盒子编辑 (E1)：用户可以通过更改、添加或移除盒子来细化图像，同时保持图像的风格不变。
+
+属性编辑 (E2)：提供可能的编辑方向来改变场景的某个特定方面，如整体对象密度或特定对象。
+
+4、应用场景：使用 LooseControl和文本指导，用户可以仅通过指定场景边界和主要对象的位置来创建复杂的环境（例如房间、街景等）。
+
+举例解释：
+
+假如你是一个室内设计师，需要设计一个房间的样子，但你只有一些基本的想法，比如房间里应该有一张沙发、一张桌子和一盏灯。LooseControl 就是一个可以帮助你把这些基本想法变成真实图像的工具。
+
+1、场景边界控制：你可以告诉 LooseControl 房间的大致布局，比如沙发在哪里、桌子和灯在哪里。你不需要提供详细的图纸，只需要大概描述房间的布局。
+
+2、3D 盒子控制：你可以定义每个物体（如沙发、桌子、灯）的位置和大小。就像在电脑游戏中放置物体一样，你可以决定它们在房间中的位置和朝向。
+
+3、编辑功能：
+
+3D 盒子编辑：如果你觉得沙发的位置不太对，或者想换一个形状不同的桌子，你可以轻松地调整它们，而不会影响到房间的其他部分。
+
+属性编辑：如果你想改变房间的整体风格，比如从现代风格变成复古风格，LooseControl 也可以帮助你做到这一点。
+
+总的来说，LooseControl 就像是一个高级的室内设计软件，让你可以轻松地设计和调整房间的样子，即使你只有一些非常基本的想法。
+
+工作原理：
+
+LooseControl基于 ControlNet 和 StableDiffusion 模型，通过 LoRA（Low Rank）网络适配和自动合成必要的训练数据来实现。
+
+LooseControl依赖于对 ControlNet 和 StableDiffusion 模型的改进和适配。通过使用 LoRA网络适配和自动合成训练数据。
+
+LooseControl能够在保留原始生成权重的同时进行微调。此外，通过操作注意力层中的“键”和“值”，以及对 ControlNet Jacobian 的奇异值分析，实现了上述的编辑功能。
+
+项目及演示：https://shariqfarooq123.github.io/loose-control/
+论文：https://arxiv.org/abs/2312.03079
+GitHub：https://github.com/shariqfarooq123/LooseControl
+在线Demo：https://huggingface.co/spaces/shariqfarooq/LooseControl</title>
+            <link>https://nitter.cz/xiaohuggg/status/1732981317560881423#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1732981317560881423#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 08 Dec 2023 04:31:57 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>LooseControl：一个创新的图像生成框架，可根据深度信息来引导图像的生成。<br />
+<br />
+LooseControl在生成图像时会考虑物体之间的空间关系，可通过简单地描述物体在场景中的位置来创建复杂的场景。<br />
+<br />
+例如你想设计一个房间，但只有一些基本想法，你只需要描述你的想法，它会根据你的描述设计一张真实的效果图。<br />
+<br />
+LooseControl 提供了一种新颖的方式来设计复杂场景并执行语义编辑。<br />
+<br />
+可以对图像进行的更加智能和细致的修改，这些修改不仅影响图像的特定元素，还能理解和适应场景的整体语义和环境。<br />
+<br />
+例如，当你在场景中进行编辑时，LooseControl 能够理解并适应这些变化，包括光照的变化。<br />
+<br />
+基本背景：<br />
+<br />
+LooseControl 允许用户在图像生成过程中使用深度条件，这意味着它可以根据物体在场景中的深度（即远近关系）来引导图像的生成。这里的“深度条件”指的是在生成图像时考虑物体之间的空间关系，比如哪个物体在前面，哪个在后面。<br />
+<br />
+以前的技术，如 ControlNet，也使用了深度信息来生成图像，但它们通常需要非常详细和准确的深度图。深度图是一种显示场景中每个点距离观察者远近的图像，通常需要专业的设备和软件来创建。<br />
+<br />
+LooseControl 的创新之处在于，它不需要这么详细的深度图。它允许用户以更简单、更灵活的方式指定深度条件。例如，用户可以只指定场景的大致布局和物体的大致位置，而不是提供完整的深度图。这使得用户可以更容易地创建复杂的场景图像，即使他们没有专业的图像处理技能或设备。<br />
+<br />
+简单来说，LooseControl 让图像生成变得更加容易和直观，用户可以通过简单地描述物体在场景中的位置来创建复杂的图像，而不需要复杂的技术支持。<br />
+<br />
+LooseControl的主要特点：<br />
+<br />
+1、场景边界控制 (C1)：用户可以通过指定场景的边界来粗略地定义场景，而不需要提供详细的深度图。<br />
+<br />
+2、3D 盒子控制 (C2)：除了场景边界，用户还可以通过大致的 3D 边界盒子来指定目标对象的位置，而不是其确切的形状和外观。<br />
+<br />
+3、编辑机制：<br />
+<br />
+3D 盒子编辑 (E1)：用户可以通过更改、添加或移除盒子来细化图像，同时保持图像的风格不变。<br />
+<br />
+属性编辑 (E2)：提供可能的编辑方向来改变场景的某个特定方面，如整体对象密度或特定对象。<br />
+<br />
+4、应用场景：使用 LooseControl和文本指导，用户可以仅通过指定场景边界和主要对象的位置来创建复杂的环境（例如房间、街景等）。<br />
+<br />
+举例解释：<br />
+<br />
+假如你是一个室内设计师，需要设计一个房间的样子，但你只有一些基本的想法，比如房间里应该有一张沙发、一张桌子和一盏灯。LooseControl 就是一个可以帮助你把这些基本想法变成真实图像的工具。<br />
+<br />
+1、场景边界控制：你可以告诉 LooseControl 房间的大致布局，比如沙发在哪里、桌子和灯在哪里。你不需要提供详细的图纸，只需要大概描述房间的布局。<br />
+<br />
+2、3D 盒子控制：你可以定义每个物体（如沙发、桌子、灯）的位置和大小。就像在电脑游戏中放置物体一样，你可以决定它们在房间中的位置和朝向。<br />
+<br />
+3、编辑功能：<br />
+<br />
+3D 盒子编辑：如果你觉得沙发的位置不太对，或者想换一个形状不同的桌子，你可以轻松地调整它们，而不会影响到房间的其他部分。<br />
+<br />
+属性编辑：如果你想改变房间的整体风格，比如从现代风格变成复古风格，LooseControl 也可以帮助你做到这一点。<br />
+<br />
+总的来说，LooseControl 就像是一个高级的室内设计软件，让你可以轻松地设计和调整房间的样子，即使你只有一些非常基本的想法。<br />
+<br />
+工作原理：<br />
+<br />
+LooseControl基于 ControlNet 和 StableDiffusion 模型，通过 LoRA（Low Rank）网络适配和自动合成必要的训练数据来实现。<br />
+<br />
+LooseControl依赖于对 ControlNet 和 StableDiffusion 模型的改进和适配。通过使用 LoRA网络适配和自动合成训练数据。<br />
+<br />
+LooseControl能够在保留原始生成权重的同时进行微调。此外，通过操作注意力层中的“键”和“值”，以及对 ControlNet Jacobian 的奇异值分析，实现了上述的编辑功能。<br />
+<br />
+项目及演示：<a href="https://shariqfarooq123.github.io/loose-control/">shariqfarooq123.github.io/lo…</a><br />
+论文：<a href="https://arxiv.org/abs/2312.03079">arxiv.org/abs/2312.03079</a><br />
+GitHub：<a href="https://github.com/shariqfarooq123/LooseControl">github.com/shariqfarooq123/L…</a><br />
+在线Demo：<a href="https://huggingface.co/spaces/shariqfarooq/LooseControl">huggingface.co/spaces/shariq…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzI5ODAwMDg1ODk5MTQxMTIvcHUvaW1nL2d6UUFCLUh6UEhDU0pISmQuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1732969634674983299#m</id>
             <title>R to @xiaohuggg: 只用3张照片生成的的一个场景</title>
             <link>https://nitter.cz/xiaohuggg/status/1732969634674983299#m</link>
@@ -543,42 +709,6 @@ Instinct MI300A 数据中心 APU：<br />
                     
                     <p>3D 动画效果，令人惊叹！ <a href="https://nitter.cz/vonkleppski" title="Vonklepp">@vonkleppski</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzIzODAxMTAwNTE4MTk1MjAvcHUvaW1nL3ZZSjk1MVFhWWltczZTUWouanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1732593254150066494#m</id>
-            <title>R to @xiaohuggg: 文本转视频 @vonkleppski</title>
-            <link>https://nitter.cz/xiaohuggg/status/1732593254150066494#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1732593254150066494#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 07 Dec 2023 02:49:56 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>文本转视频 <a href="https://nitter.cz/vonkleppski" title="Vonklepp">@vonkleppski</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzIzNzQyOTY1MDczMzQ2NTYvcHUvaW1nL2Q3VFZXa0lpS0t3SUpCZkEuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1732593251499348377#m</id>
-            <title>R to @xiaohuggg: 用烟花表演来庆祝 Pika 的发布！ @maxescu</title>
-            <link>https://nitter.cz/xiaohuggg/status/1732593251499348377#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1732593251499348377#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 07 Dec 2023 02:49:55 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>用烟花表演来庆祝 Pika 的发布！ <a href="https://nitter.cz/maxescu" title="Max">@maxescu</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzI0MzI3Mjc5NTIwNDgxMzAvcHUvaW1nLzVFM2pWV0pjWnFndE5FT3guanBn" />
                 ]]>
             </content:encoded>
         </item>
