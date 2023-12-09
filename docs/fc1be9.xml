@@ -5,6 +5,88 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1733503266141704195#m</id>
+            <title>这个老哥带来了首个开源MoE架构模型Mixtral-8x7b比较详细的介绍，还有MoE模型是什么，以及和GPT-4 MoE架构的区别。可以看看比我上午自己搜的强不少：
+
+◆该模型以 87 GB 的种子文件形式发布
+◆看似是 GPT-4 的精简版
+◆在 X 平台发布，没有配套的新闻发布会，且对更多细节守口如瓶。
+
+谷歌凭借其精心编排的演示视频令 AI 社区敬畏，但现在这段视频正受到广泛批评。  
+另一方面，开源 AI 创业公司 Mistral AI 发布了一个包含 8 个 7B 级别专家的 MoE 模型。 
+
+专家混合（MoE）是什么？  
+专家混合（MoE）是用于提高大语言模型效率和准确度的技术。这种方法将复杂任务划分为更小、更易管理的子任务，每个子任务由专门的小型模型或“专家”负责。
+以下是简要说明：  
+1. 专家层：这些是在特定领域训练有素的小型神经网络。每个专家以其独特专长的方式处理相同的输入。
+2. 门控网络：这是 MoE 架构的决策核心。它判断哪个专家最适合处理特定输入。网络为输入数据与每个专家的兼容性打分，然后根据这些得分确定每个专家在任务中的角色。 
+这些组成部分共同确保正确的专家处理正确的任务。门控网络有效地将输入引导至最合适的专家，而专家则专注于他们擅长的领域。这种合作培训使得整体模型更加多才多艺、能力更强。
+关于 Mistral 新 MoE 的详情（来自 Reddit）  在对每个 Token 进行推理时，只有 2 个专家被使用。
+这一信息可以从模型的元数据中获得： 
+ {"dim": 4096, "n_layers": 32, "head_dim": 128, "hidden_dim": 14336, "n_heads": 32, "n_kv_heads": 8, "norm_eps": 1e-05, "vocab_size": 32000, "moe": {"num_experts_per_tok": 2, "num_experts": 8}
+
+与 GPT-4 的比较Mistral 的 8x7B 模型采用了与 GPT-4 相似的架构，但规模更小：
+◆总共 8 个专家模型，而不是 16 个（减少了一半）
+◆每个专家拥有 7B 参数，而不是 166B（减少了 24 倍） 
+◆总共约 42B 参数，而非 1.8T（减少了 42 倍）
+◆与原版 GPT-4 相同的 32K 上下文限制</title>
+            <link>https://nitter.cz/op7418/status/1733503266141704195#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733503266141704195#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 09 Dec 2023 15:06:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这个老哥带来了首个开源MoE架构模型Mixtral-8x7b比较详细的介绍，还有MoE模型是什么，以及和GPT-4 MoE架构的区别。可以看看比我上午自己搜的强不少：<br />
+<br />
+◆该模型以 87 GB 的种子文件形式发布<br />
+◆看似是 GPT-4 的精简版<br />
+◆在 X 平台发布，没有配套的新闻发布会，且对更多细节守口如瓶。<br />
+<br />
+谷歌凭借其精心编排的演示视频令 AI 社区敬畏，但现在这段视频正受到广泛批评。  <br />
+另一方面，开源 AI 创业公司 Mistral AI 发布了一个包含 8 个 7B 级别专家的 MoE 模型。 <br />
+<br />
+专家混合（MoE）是什么？  <br />
+专家混合（MoE）是用于提高大语言模型效率和准确度的技术。这种方法将复杂任务划分为更小、更易管理的子任务，每个子任务由专门的小型模型或“专家”负责。<br />
+以下是简要说明：  <br />
+1. 专家层：这些是在特定领域训练有素的小型神经网络。每个专家以其独特专长的方式处理相同的输入。<br />
+2. 门控网络：这是 MoE 架构的决策核心。它判断哪个专家最适合处理特定输入。网络为输入数据与每个专家的兼容性打分，然后根据这些得分确定每个专家在任务中的角色。 <br />
+这些组成部分共同确保正确的专家处理正确的任务。门控网络有效地将输入引导至最合适的专家，而专家则专注于他们擅长的领域。这种合作培训使得整体模型更加多才多艺、能力更强。<br />
+关于 Mistral 新 MoE 的详情（来自 Reddit）  在对每个 Token 进行推理时，只有 2 个专家被使用。<br />
+这一信息可以从模型的元数据中获得： <br />
+ {"dim": 4096, "n_layers": 32, "head_dim": 128, "hidden_dim": 14336, "n_heads": 32, "n_kv_heads": 8, "norm_eps": 1e-05, "vocab_size": 32000, "moe": {"num_experts_per_tok": 2, "num_experts": 8}<br />
+<br />
+与 GPT-4 的比较Mistral 的 8x7B 模型采用了与 GPT-4 相似的架构，但规模更小：<br />
+◆总共 8 个专家模型，而不是 16 个（减少了一半）<br />
+◆每个专家拥有 7B 参数，而不是 166B（减少了 24 倍） <br />
+◆总共约 42B 参数，而非 1.8T（减少了 42 倍）<br />
+◆与原版 GPT-4 相同的 32K 上下文限制</p>
+<p><a href="https://nitter.cz/Saboo_Shubham_/status/1733364854973456561#m">nitter.cz/Saboo_Shubham_/status/1733364854973456561#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1733498433166840116#m</id>
+            <title>最近也把之前积累的零碎搬到Heptabase上了。</title>
+            <link>https://nitter.cz/op7418/status/1733498433166840116#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733498433166840116#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 09 Dec 2023 14:46:47 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>最近也把之前积累的零碎搬到Heptabase上了。</p>
+<p><a href="https://nitter.cz/lyson_ober/status/1733496688504140029#m">nitter.cz/lyson_ober/status/1733496688504140029#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1733482321368752182#m</id>
             <title>Mixtral-8x7b更详细的一些信息：
 ◆当前只提供了状态字典，没有相应代码，所以现在还无法执行。
@@ -370,79 +452,6 @@ https://x.com/ziqiao_ma/status/1733224975207628938?s=20</title>
                     <p>作者原推：<br />
 <a href="https://x.com/ziqiao_ma/status/1733224975207628938?s=20">x.com/ziqiao_ma/status/17332…</a></p>
 <p><a href="https://nitter.cz/ziqiao_ma/status/1733224975207628938#m">nitter.cz/ziqiao_ma/status/1733224975207628938#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1733204647337476202#m</id>
-            <title>RT by @op7418: 尝试了一下DemoFusion这个图片放大项目，这玩意的资源消耗真是恐怖，2048*2048的图片A100居然跑了两分半的时间。
-前两张是动漫图片，后两张是写实照片，不过效果确实好。可能是实现问题部分细节有一些崩坏的纹理。
-动漫的图片会被识别成写实的照片，可能是提示词问题。
-原图放在下面的推里面了可以对比一下生成前后的效果。
-
-想体验的可以用这个Colab链接尝试，不过不是Pro的就算了，T4得跑好久：https://colab.research.google.com/github/camenduru/DemoFusion-colab/blob/main/DemoFusion_img2img_colab.ipynb</title>
-            <link>https://nitter.cz/op7418/status/1733204647337476202#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733204647337476202#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 08 Dec 2023 19:19:23 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>尝试了一下DemoFusion这个图片放大项目，这玩意的资源消耗真是恐怖，2048*2048的图片A100居然跑了两分半的时间。<br />
-前两张是动漫图片，后两张是写实照片，不过效果确实好。可能是实现问题部分细节有一些崩坏的纹理。<br />
-动漫的图片会被识别成写实的照片，可能是提示词问题。<br />
-原图放在下面的推里面了可以对比一下生成前后的效果。<br />
-<br />
-想体验的可以用这个Colab链接尝试，不过不是Pro的就算了，T4得跑好久：<a href="https://colab.research.google.com/github/camenduru/DemoFusion-colab/blob/main/DemoFusion_img2img_colab.ipynb">colab.research.google.com/gi…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EyRzFMQ2JRQUF3ZnlxLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EySUJ1VWJRQUFEWXdxLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EyUjZNQWJRQVlfQmZpLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EyVWJWT2JRQUVjdGY1LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1733205116709405140#m</id>
-            <title>R to @op7418: 动漫的图</title>
-            <link>https://nitter.cz/op7418/status/1733205116709405140#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733205116709405140#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 08 Dec 2023 19:21:15 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>动漫的图</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EyVXloV2JRQUVEQ2t3LmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EyVXpZWGJRQUFCN0JpLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EyVTJlQ2JRQUFic0lOLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EyVTNTcGJRQUF4aW5sLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1733204922328629571#m</id>
-            <title>R to @op7418: 写实的图</title>
-            <link>https://nitter.cz/op7418/status/1733204922328629571#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733204922328629571#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 08 Dec 2023 19:20:29 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>写实的图</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EyVW5qN2JRQUVmOTRtLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EyVW5rVGJRQUFNUXNQLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EyVXFXQWJRQUFYc3NmLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EyVXJOTmFnQUFKa29RLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
