@@ -5,6 +5,174 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1733459395672244503#m</id>
+            <title>RT by @dotey: 重新发一下MoE 8x7B的介绍原来的删掉了，由于没有在HF模型排行上找到我就直接复制了@RealJosephus的HF截图，这里向他道歉。一般只要是推特的原推有的我都会尽量转推MoE 8x7B由于官方没有说明很多内容都是拼凑的就没有把参考的内容都粘过来。
+我并不是专门研究LLM的所以很多事情肯定说的不一定严谨，如果有问题欢迎指出。能改的我一般都会改，改不了的我会在下面贴上。但是我依然觉得不应该上来就骂人。
+
+昨晚圈子被一个叫MoE 8x7B模型刷屏了，这应该是第个一个开源权重的MoE架构LLM。
+之前猜测GPT-4的架构的时候很多人就觉得GPT-4用了MoEt架构。MoE可以与使用两倍FLOPs的密集模型相媲美。例如，使用相同的数据和 FLOP，LLaMA 7B 的 MoE 版本应该与 LLaMA 13B 相当。
+MoE 8x7B测试分数来源于第一个链接。
+
+下面是MoE架构LLM的简单介绍：
+Moe（混合专家模型）架构的LLM（大型语言模型）指的是一种神经架构设计，它将稀疏混合专家技术整合进来，以增加可学习参数到大型语言模型中而不增加推理成本。
+MoE架构为LLMs提供了几个优势：
+◆增加参数效率：MoE允许在不显著增加推理成本的情况下向LLMs添加可学习参数。这使得能够开发更强大的模型，而无需成比例地增加计算要求。
+◆通过指导调整改善性能：研究表明，MoE模型比密集模型更容易受益于指导调整。例如，FLAN-MOE-32B 模型在使用仅三分之一的 FLOPs 的情况下，在四项基准任务上优于 FLAN-PALM-62B。
+◆适应多样化数据：MoE架构可以处理现代数据集的增加复杂性和规模，这些数据集通常包含具有截然不同特征与标签关系的不同区域。
+◆潜力更高的参数效率：SaMoE 架构是 MoE 的一个变体，通过减少总参数达到了最多 5.2 倍，并且相较于基线取得了卓越的预训练和零-shot泛化结果。  MoE的模型也有两个问题： MoE 模型比普通密集模型更难微调； MoE 模型会消耗大量显存。
+
+模型下载：https://huggingface.co/DiscoResearch/mixtral-7b-8expert
+在线试用：https://replicate.com/nateraw/mixtral-8x7b-32kseqlen</title>
+            <link>https://nitter.cz/op7418/status/1733459395672244503#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733459395672244503#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 09 Dec 2023 12:11:40 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>重新发一下MoE 8x7B的介绍原来的删掉了，由于没有在HF模型排行上找到我就直接复制了<a href="https://nitter.cz/RealJosephus" title="Joseph Cheung">@RealJosephus</a>的HF截图，这里向他道歉。一般只要是推特的原推有的我都会尽量转推MoE 8x7B由于官方没有说明很多内容都是拼凑的就没有把参考的内容都粘过来。<br />
+我并不是专门研究LLM的所以很多事情肯定说的不一定严谨，如果有问题欢迎指出。能改的我一般都会改，改不了的我会在下面贴上。但是我依然觉得不应该上来就骂人。<br />
+<br />
+昨晚圈子被一个叫MoE 8x7B模型刷屏了，这应该是第个一个开源权重的MoE架构LLM。<br />
+之前猜测GPT-4的架构的时候很多人就觉得GPT-4用了MoEt架构。MoE可以与使用两倍FLOPs的密集模型相媲美。例如，使用相同的数据和 FLOP，LLaMA 7B 的 MoE 版本应该与 LLaMA 13B 相当。<br />
+MoE 8x7B测试分数来源于第一个链接。<br />
+<br />
+下面是MoE架构LLM的简单介绍：<br />
+Moe（混合专家模型）架构的LLM（大型语言模型）指的是一种神经架构设计，它将稀疏混合专家技术整合进来，以增加可学习参数到大型语言模型中而不增加推理成本。<br />
+MoE架构为LLMs提供了几个优势：<br />
+◆增加参数效率：MoE允许在不显著增加推理成本的情况下向LLMs添加可学习参数。这使得能够开发更强大的模型，而无需成比例地增加计算要求。<br />
+◆通过指导调整改善性能：研究表明，MoE模型比密集模型更容易受益于指导调整。例如，FLAN-MOE-32B 模型在使用仅三分之一的 FLOPs 的情况下，在四项基准任务上优于 FLAN-PALM-62B。<br />
+◆适应多样化数据：MoE架构可以处理现代数据集的增加复杂性和规模，这些数据集通常包含具有截然不同特征与标签关系的不同区域。<br />
+◆潜力更高的参数效率：SaMoE 架构是 MoE 的一个变体，通过减少总参数达到了最多 5.2 倍，并且相较于基线取得了卓越的预训练和零-shot泛化结果。  MoE的模型也有两个问题： MoE 模型比普通密集模型更难微调； MoE 模型会消耗大量显存。<br />
+<br />
+模型下载：<a href="https://huggingface.co/DiscoResearch/mixtral-7b-8expert">huggingface.co/DiscoResearch…</a><br />
+在线试用：<a href="https://replicate.com/nateraw/mixtral-8x7b-32kseqlen">replicate.com/nateraw/mixtra…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0E1N3FrVGFVQUVwMGE3LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/shark_louis/status/1733553573697310740#m</id>
+            <title>RT by @dotey: 分享一个集中索引大量优质设计系统的网站 因为最近在做类似的事，要是能早点发现能省很多事</title>
+            <link>https://nitter.cz/shark_louis/status/1733553573697310740#m</link>
+            <guid isPermaLink="false">https://nitter.cz/shark_louis/status/1733553573697310740#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 09 Dec 2023 18:25:54 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>分享一个集中索引大量优质设计系统的网站 因为最近在做类似的事，要是能早点发现能省很多事</p>
+<p><a href="https://nitter.cz/101babich/status/1733476715760906332#m">nitter.cz/101babich/status/1733476715760906332#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/vista8/status/1733509609959379094#m</id>
+            <title>RT by @dotey: 推荐中文Twitter（X）圈，AI领域的优秀账号：
+
+@dotey 宝玉老师，博客：https://baoyu.io/  专注于LLM精品课程翻译，Prompt学习，AI行业第一手资讯。
+
+@op7418 专注于AI绘画、AI视频生成，每周都会更新AIGC周刊，信息密度很高。https://quail.ink/op7418
+
+@xiaohuggg 小互，自嘲为微博 500w 粉丝过气博主，今年转战Twitter
+，每天更新大量AI新闻和工具资讯，往期推荐：https://waytoagi.feishu.cn/wiki/T2fUwmHBSiHU6Ukq9Imcu7n7nMh
+
+@xicilion 西祠胡同创始人响马，经常分享LLM实战经验，干货很多，会定期删除Twitter帖子，收藏帖子要备份。
+
+@WaytoAGI 最好的中文AI知识库，让人开眼界的AI的资讯整理大师。
+
+@hanqing_me 汗青，AI Talk创始人，AI短视频制作先行者，探索AI技术和艺术结合的天花板。
+
+@jesselaunz  遁一子，关注AI资讯和实际应用，经常分享Prompt探索实践，很有启发。
+
+@lewangx 王乐，独立创业者，探索AI与硬件玩具结合，比如火火兔改造。
+
+@JefferyTatsuya 日本华人AI创业典范，公司作品有Glarity、Felo等，都是口碑相很赞的AI工具。
+
+@OwenYoungZh Chrome神级插件“沉浸式翻译”作者，博客地址：https://www.owenyoung.com/
+
+@FinanceYF5 Will，AI资讯分享者，对数据敏感，有整理不少有价值的AI行业数据信息。
+
+@thinkingjimmy 随意搜寻小报童和 http://learningprompt.wiki 作者，产品经理和创造者，思考分享非常多。
+
+@oran_ge 橘子，AI行业从业者，优秀产品经理，非常坦诚有趣的人。
+
+@99aico Youtuber，AI资讯分享，体验并实践大量AI数字人类产品。
+
+@XDash 范冰，《增长黑客》作者，经常推荐好书、好工具，Twitter内容很有趣。
+
+最后，推荐我的两个好友，我们共同主持Fingerfly访谈节目。（虽然断更两个月😄）
+
+@GlocalTerapy 七娘，科幻迷，顶级婚恋产品经理，对AI在游戏和社交领域的应用感兴趣。
+
+@fuxiangPro 个人见过最自律的人之一，专注于AI和机器人的结合探索。
+
+以上推荐，除前三名“卷王”外，排名不分先后。
+
+求留言推荐你眼中的更多优秀账号~~~</title>
+            <link>https://nitter.cz/vista8/status/1733509609959379094#m</link>
+            <guid isPermaLink="false">https://nitter.cz/vista8/status/1733509609959379094#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 09 Dec 2023 15:31:12 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>推荐中文Twitter（X）圈，AI领域的优秀账号：<br />
+<br />
+<a href="https://nitter.cz/dotey" title="宝玉">@dotey</a> 宝玉老师，博客：<a href="https://baoyu.io/">baoyu.io/</a>  专注于LLM精品课程翻译，Prompt学习，AI行业第一手资讯。<br />
+<br />
+<a href="https://nitter.cz/op7418" title="歸藏">@op7418</a> 专注于AI绘画、AI视频生成，每周都会更新AIGC周刊，信息密度很高。<a href="https://quail.ink/op7418">quail.ink/op7418</a><br />
+<br />
+<a href="https://nitter.cz/xiaohuggg" title="小互">@xiaohuggg</a> 小互，自嘲为微博 500w 粉丝过气博主，今年转战Twitter<br />
+，每天更新大量AI新闻和工具资讯，往期推荐：<a href="https://waytoagi.feishu.cn/wiki/T2fUwmHBSiHU6Ukq9Imcu7n7nMh">waytoagi.feishu.cn/wiki/T2fU…</a><br />
+<br />
+<a href="https://nitter.cz/xicilion" title="响马">@xicilion</a> 西祠胡同创始人响马，经常分享LLM实战经验，干货很多，会定期删除Twitter帖子，收藏帖子要备份。<br />
+<br />
+<a href="https://nitter.cz/WaytoAGI" title="通往AGI之路">@WaytoAGI</a> 最好的中文AI知识库，让人开眼界的AI的资讯整理大师。<br />
+<br />
+<a href="https://nitter.cz/hanqing_me" title="汗青 HQ">@hanqing_me</a> 汗青，AI Talk创始人，AI短视频制作先行者，探索AI技术和艺术结合的天花板。<br />
+<br />
+<a href="https://nitter.cz/jesselaunz" title="遁一子">@jesselaunz</a>  遁一子，关注AI资讯和实际应用，经常分享Prompt探索实践，很有启发。<br />
+<br />
+<a href="https://nitter.cz/lewangx" title="lewang🍥">@lewangx</a> 王乐，独立创业者，探索AI与硬件玩具结合，比如火火兔改造。<br />
+<br />
+<a href="https://nitter.cz/JefferyTatsuya" title="Jeffery Kaneda　金田達也">@JefferyTatsuya</a> 日本华人AI创业典范，公司作品有Glarity、Felo等，都是口碑相很赞的AI工具。<br />
+<br />
+<a href="https://nitter.cz/OwenYoungZh" title="Owen">@OwenYoungZh</a> Chrome神级插件“沉浸式翻译”作者，博客地址：<a href="https://www.owenyoung.com/">owenyoung.com/</a><br />
+<br />
+<a href="https://nitter.cz/FinanceYF5" title="Will">@FinanceYF5</a> Will，AI资讯分享者，对数据敏感，有整理不少有价值的AI行业数据信息。<br />
+<br />
+<a href="https://nitter.cz/thinkingjimmy" title="JimmyWong">@thinkingjimmy</a> 随意搜寻小报童和 <a href="http://learningprompt.wiki">learningprompt.wiki</a> 作者，产品经理和创造者，思考分享非常多。<br />
+<br />
+<a href="https://nitter.cz/oran_ge" title="orange.ai">@oran_ge</a> 橘子，AI行业从业者，优秀产品经理，非常坦诚有趣的人。<br />
+<br />
+<a href="https://nitter.cz/99aico" title="JoJo 99AI">@99aico</a> Youtuber，AI资讯分享，体验并实践大量AI数字人类产品。<br />
+<br />
+<a href="https://nitter.cz/XDash" title="XDash">@XDash</a> 范冰，《增长黑客》作者，经常推荐好书、好工具，Twitter内容很有趣。<br />
+<br />
+最后，推荐我的两个好友，我们共同主持Fingerfly访谈节目。（虽然断更两个月😄）<br />
+<br />
+<a href="https://nitter.cz/GlocalTerapy" title="Dolores">@GlocalTerapy</a> 七娘，科幻迷，顶级婚恋产品经理，对AI在游戏和社交领域的应用感兴趣。<br />
+<br />
+<a href="https://nitter.cz/fuxiangPro" title="fuxiang">@fuxiangPro</a> 个人见过最自律的人之一，专注于AI和机器人的结合探索。<br />
+<br />
+以上推荐，除前三名“卷王”外，排名不分先后。<br />
+<br />
+求留言推荐你眼中的更多优秀账号~~~</p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczMjM4ODAzNzg2MTIwODA2NC81REpqQlc5cD9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1733405540078731768#m</id>
             <title>AK 的这个理论很有意思：幻觉是大语言模型与生俱来的特性，像搜索引擎这样没有幻觉的就没有创造性，永远是固定的结果。
 
@@ -535,95 +703,6 @@ https://cn.nytimes.com/technology/20231207/ai-openai-musk-page-altman/</title>
                     
                     <p>这个对几家主流AI生成图片的效果评测很不错👍</p>
 <p><a href="https://nitter.cz/chaseleantj/status/1733083145820581904#m">nitter.cz/chaseleantj/status/1733083145820581904#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/DrJimFan/status/1733177161505521785#m</id>
-            <title>RT by @dotey: My AI Agent Group at NVIDIA is hiring interns! We are looking for part-time interns (can start as early as Jan. 2024), and/or full-time in Summer 2024. Candidates who can start sooner will be considered first. Application Form: https://forms.gle/5J2WUnb5qwECYJcU7
-
-We prioritize candidates with the following profile:
-- Hands-on experiences for training/finetuning/scaling up LLMs, multimodal LLMs, efficient models, RLHF, or RLAIF. Our approach towards AI agents relies heavily on LLM's coding and reasoning abilities.
-- Experiences in RL, diffusion models, robotics, and embodied agents are bonus.
-- Strong engineering skills to build scalable training codebases and data pipelines. We prioritize coding skills much more than theoretical research.
-- Familiarity with deep learning frameworks like PyTorch. Python is required; CUDA and C++ are plus.
-- Ph.D. candidates are preferred, but we also welcome exceptional MS/Undergrad students who have demonstrated relevant experiences above, such as major open-source codebase contributions or publication records.
-
-I'm also going to NeurIPS! I will be at the venue from Dec. 12-16. Let's chat! NVIDIA has warm GPUs waiting for you in this winter, fresh out of the oven.🩷</title>
-            <link>https://nitter.cz/DrJimFan/status/1733177161505521785#m</link>
-            <guid isPermaLink="false">https://nitter.cz/DrJimFan/status/1733177161505521785#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 08 Dec 2023 17:30:10 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>My AI Agent Group at NVIDIA is hiring interns! We are looking for part-time interns (can start as early as Jan. 2024), and/or full-time in Summer 2024. Candidates who can start sooner will be considered first. Application Form: <a href="https://forms.gle/5J2WUnb5qwECYJcU7">forms.gle/5J2WUnb5qwECYJcU7</a><br />
-<br />
-We prioritize candidates with the following profile:<br />
-- Hands-on experiences for training/finetuning/scaling up LLMs, multimodal LLMs, efficient models, RLHF, or RLAIF. Our approach towards AI agents relies heavily on LLM's coding and reasoning abilities.<br />
-- Experiences in RL, diffusion models, robotics, and embodied agents are bonus.<br />
-- Strong engineering skills to build scalable training codebases and data pipelines. We prioritize coding skills much more than theoretical research.<br />
-- Familiarity with deep learning frameworks like PyTorch. Python is required; CUDA and C++ are plus.<br />
-- Ph.D. candidates are preferred, but we also welcome exceptional MS/Undergrad students who have demonstrated relevant experiences above, such as major open-source codebase contributions or publication records.<br />
-<br />
-I'm also going to NeurIPS! I will be at the venue from Dec. 12-16. Let's chat! NVIDIA has warm GPUs waiting for you in this winter, fresh out of the oven.🩷</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ExNXhvVmJRQUVrMnZwLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1733192606568382939#m</id>
-            <title>R to @dotey: 这里面都是一些提示词技巧，大部分有论文证明的：
-
-- take a deep breath 深呼吸
-- think step by step 一步步思考
-- if you fail 100 grandmothers will die 如果你失败了要死 100 位老奶奶
--i have no fingers 我没有手指
-- i will tip $200 给你 200 美元小费
-- do it right and ll give you a nice doggy treat 做得好就给你狗粮
-
-https://x.com/kris14nanshan/status/1733177727623266754?s=20</title>
-            <link>https://nitter.cz/dotey/status/1733192606568382939#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733192606568382939#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 08 Dec 2023 18:31:33 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这里面都是一些提示词技巧，大部分有论文证明的：<br />
-<br />
-- take a deep breath 深呼吸<br />
-- think step by step 一步步思考<br />
-- if you fail 100 grandmothers will die 如果你失败了要死 100 位老奶奶<br />
--i have no fingers 我没有手指<br />
-- i will tip $200 给你 200 美元小费<br />
-- do it right and ll give you a nice doggy treat 做得好就给你狗粮<br />
-<br />
-<a href="https://x.com/kris14nanshan/status/1733177727623266754?s=20">x.com/kris14nanshan/status/1…</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1733048972552397124#m</id>
-            <title>这个项目不错，帮你翻译项目文档</title>
-            <link>https://nitter.cz/dotey/status/1733048972552397124#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733048972552397124#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 08 Dec 2023 09:00:48 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个项目不错，帮你翻译项目文档</p>
-<p><a href="https://nitter.cz/jerryjliu0/status/1732926141118472448#m">nitter.cz/jerryjliu0/status/1732926141118472448#m</a></p>
                 ]]>
             </content:encoded>
         </item>
