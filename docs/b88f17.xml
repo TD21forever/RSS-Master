@@ -5,6 +5,59 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1733392133497729409#m</id>
+            <title>这个小姐姐的博客上的内容质量很高👍🏻</title>
+            <link>https://nitter.cz/dotey/status/1733392133497729409#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733392133497729409#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 09 Dec 2023 07:44:24 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这个小姐姐的博客上的内容质量很高👍🏻</p>
+<p><a href="https://nitter.cz/helloiamleonie/status/1732315699823947986#m">nitter.cz/helloiamleonie/status/1732315699823947986#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1733389526796484972#m</id>
+            <title>一个“白嫖”CDN的技巧
+
+使用场景是我需要动态请求一个中文字体文件，放自己网站的话占用流量比较大（我用的Vercel要按照流量付费的），后来发现可以把字体放到 GitHub，然后使用 http://cdn.jsdelivr.net 下载 GitHub 上的静态文件，这样就可以直接从 jsdelivr 下载我在 GitHub 上放的静态文件。
+
+路径格式是：/gh/user/repo@version/file
+版本号是可选的，例如：
+https://cdn.jsdelivr.net/gh/jquery/jquery@3/dist/jquery.min.js
+https://cdn.jsdelivr.net/gh/jquery/jquery/dist/jquery.min.js
+
+这里有详细说明：https://github.com/jsdelivr/jsdelivr#github</title>
+            <link>https://nitter.cz/dotey/status/1733389526796484972#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733389526796484972#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 09 Dec 2023 07:34:02 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>一个“白嫖”CDN的技巧<br />
+<br />
+使用场景是我需要动态请求一个中文字体文件，放自己网站的话占用流量比较大（我用的Vercel要按照流量付费的），后来发现可以把字体放到 GitHub，然后使用 <a href="http://cdn.jsdelivr.net">cdn.jsdelivr.net</a> 下载 GitHub 上的静态文件，这样就可以直接从 jsdelivr 下载我在 GitHub 上放的静态文件。<br />
+<br />
+路径格式是：/gh/user/repo@version/file<br />
+版本号是可选的，例如：<br />
+<a href="https://cdn.jsdelivr.net/gh/jquery/jquery@3/dist/jquery.min.js">cdn.jsdelivr.net/gh/jquery/j…</a><br />
+<a href="https://cdn.jsdelivr.net/gh/jquery/jquery/dist/jquery.min.js">cdn.jsdelivr.net/gh/jquery/j…</a><br />
+<br />
+这里有详细说明：<a href="https://github.com/jsdelivr/jsdelivr#github">github.com/jsdelivr/jsdelivr…</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/balconychy/status/1733327109790351496#m</id>
             <title>RT by @dotey: 老外怼人也是够狠</title>
             <link>https://nitter.cz/balconychy/status/1733327109790351496#m</link>
@@ -568,106 +621,6 @@ https://x.com/kris14nanshan/status/1733177727623266754?s=20</title>
                     
                     <p>这个项目不错，帮你翻译项目文档</p>
 <p><a href="https://nitter.cz/jerryjliu0/status/1732926141118472448#m">nitter.cz/jerryjliu0/status/1732926141118472448#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1733041246799638916#m</id>
-            <title>虽然 Q* 热度过了，但这篇对于OpenAI Q*的分析文章值得一读：《如何理解关于 OpenAI Q* 的流言 | How to think about the OpenAI Q* rumors》
-
-部分内容摘录：
-
-对大语言模型（LLM）来说，数字如“5”和“6”只是普通的 Token，和“the”或“cat”没什么两样。LLM 能学会 5+6=11，是因为在它的训练数据中，这种 Token 序列及其变体（比如“5+6=11”）出现了无数次。但这些训练数据很可能不包含像 ((5+6-3-3-1)/2+3+7)/3+4=8 这样的复杂计算例子。因此，当要求语言模型一次性解决这样的计算问题时，它很可能会混淆，从而得出错误的答案。
-
-换个角度来看，大语言模型并没有外部的“草稿空间”来记录中间计算结果，比如 5+6=11。通过链式思考推理（chain-of-thought reasoning），LLM 可以有效地利用自己的输出作为草稿空间。这使得它能将复杂问题分解成若干容易处理的小步骤——每个步骤都极有可能对应训练数据中的某些实例。
-
-...
-
-计算机科学家将其定义为 NP-hard 问题，即不存在一种普遍的线性解决算法。解决这类问题，我们只能尝试一个可能的解决方案，检验其是否有效，若不行则进行回溯。
-
-对于 GPT-4 来说，它可以通过向其上下文窗口增加更多文本来实现这种回溯，但这种方法并不适合大规模应用。更优的方案是赋予 GPT-4“退格键”，使其能删除最后（或最后几个）推理步骤，然后重新尝试。要使这种方法行之有效，系统还需能够追踪已尝试过的组合，以避免重复努力。这样，大语言模型就能探索一个可能性树，其形式如下图所示。
-
-...
-
-Legg 提到的“著名的第 37 步”，是指 AlphaGo 和世界顶级围棋手李世石在2016 年对决中的第二局。当时，大多数围棋专家起初都认为 AlphaGo 的这一步是失误。但最终 AlphaGo 赢得了比赛，事后分析证明这实际上是一个高明的着法。AlphaGo 在这一过程中领悟到了围棋的某些人类棋手未曾触及的奥秘。
-
-AlphaGo 通过模拟成千上万种从当前棋盘状态出发的可能棋局来获得这样的领悟。由于可能的走法序列太多，电脑无法一一检查，AlphaGo 便利用神经网络来使这个过程可控。
-
-其中一个名为策略网络 (policy network) 的网络用于预测哪些走法最有前景，从而值得在模拟对局中尝试。另一个名为价值网络 (value network) 的网络则估算结果棋盘状态对于黑白双方的利弊。AlphaGo 基于这些评估，从而反向确定下一步的最佳走法。
-
-Legg 提出的观点是，一种类似树搜索的方法可能会增强大语言模型（Large Language Model）的推理能力。这种模型不仅仅是预测一个最有可能的 Token，而是在确定答案之前，可能会探索数千种不同的回答。实际上，DeepMind 的思考树（Tree of Thoughts）论文看起来就是向这个方向迈出的第一步。
-
-我们之前看到，OpenAI 尝试通过一个生成器（产生可能的解决方案）和一个验证器（判断这些解决方案是否正确）来解决数学问题。这和 AlphaGo 的设计有明显的相似之处，AlphaGo 有一个策略网络（产生可能的棋步）和一个价值网络（估计这些棋步是否能带来有利的棋盘局面）。
-
-如果把 OpenAI 的生成器和验证器网络与 DeepMind 的思考树（Tree of Thoughts）概念结合起来，我们可能就能得到一个像 AlphaGo 那样运作的语言模型，它可能也会具备 AlphaGo 那样强大的推理能力。
-
-...
-
-原文：https://www.understandingai.org/p/how-to-think-about-the-openai-q-rumors
-翻译：https://baoyu.io/translations/ai/how-to-think-about-the-openai-q-rumors</title>
-            <link>https://nitter.cz/dotey/status/1733041246799638916#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733041246799638916#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 08 Dec 2023 08:30:06 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>虽然 Q* 热度过了，但这篇对于OpenAI Q*的分析文章值得一读：《如何理解关于 OpenAI Q* 的流言 | How to think about the OpenAI Q* rumors》<br />
-<br />
-部分内容摘录：<br />
-<br />
-对大语言模型（LLM）来说，数字如“5”和“6”只是普通的 Token，和“the”或“cat”没什么两样。LLM 能学会 5+6=11，是因为在它的训练数据中，这种 Token 序列及其变体（比如“5+6=11”）出现了无数次。但这些训练数据很可能不包含像 ((5+6-3-3-1)/2+3+7)/3+4=8 这样的复杂计算例子。因此，当要求语言模型一次性解决这样的计算问题时，它很可能会混淆，从而得出错误的答案。<br />
-<br />
-换个角度来看，大语言模型并没有外部的“草稿空间”来记录中间计算结果，比如 5+6=11。通过链式思考推理（chain-of-thought reasoning），LLM 可以有效地利用自己的输出作为草稿空间。这使得它能将复杂问题分解成若干容易处理的小步骤——每个步骤都极有可能对应训练数据中的某些实例。<br />
-<br />
-...<br />
-<br />
-计算机科学家将其定义为 NP-hard 问题，即不存在一种普遍的线性解决算法。解决这类问题，我们只能尝试一个可能的解决方案，检验其是否有效，若不行则进行回溯。<br />
-<br />
-对于 GPT-4 来说，它可以通过向其上下文窗口增加更多文本来实现这种回溯，但这种方法并不适合大规模应用。更优的方案是赋予 GPT-4“退格键”，使其能删除最后（或最后几个）推理步骤，然后重新尝试。要使这种方法行之有效，系统还需能够追踪已尝试过的组合，以避免重复努力。这样，大语言模型就能探索一个可能性树，其形式如下图所示。<br />
-<br />
-...<br />
-<br />
-Legg 提到的“著名的第 37 步”，是指 AlphaGo 和世界顶级围棋手李世石在2016 年对决中的第二局。当时，大多数围棋专家起初都认为 AlphaGo 的这一步是失误。但最终 AlphaGo 赢得了比赛，事后分析证明这实际上是一个高明的着法。AlphaGo 在这一过程中领悟到了围棋的某些人类棋手未曾触及的奥秘。<br />
-<br />
-AlphaGo 通过模拟成千上万种从当前棋盘状态出发的可能棋局来获得这样的领悟。由于可能的走法序列太多，电脑无法一一检查，AlphaGo 便利用神经网络来使这个过程可控。<br />
-<br />
-其中一个名为策略网络 (policy network) 的网络用于预测哪些走法最有前景，从而值得在模拟对局中尝试。另一个名为价值网络 (value network) 的网络则估算结果棋盘状态对于黑白双方的利弊。AlphaGo 基于这些评估，从而反向确定下一步的最佳走法。<br />
-<br />
-Legg 提出的观点是，一种类似树搜索的方法可能会增强大语言模型（Large Language Model）的推理能力。这种模型不仅仅是预测一个最有可能的 Token，而是在确定答案之前，可能会探索数千种不同的回答。实际上，DeepMind 的思考树（Tree of Thoughts）论文看起来就是向这个方向迈出的第一步。<br />
-<br />
-我们之前看到，OpenAI 尝试通过一个生成器（产生可能的解决方案）和一个验证器（判断这些解决方案是否正确）来解决数学问题。这和 AlphaGo 的设计有明显的相似之处，AlphaGo 有一个策略网络（产生可能的棋步）和一个价值网络（估计这些棋步是否能带来有利的棋盘局面）。<br />
-<br />
-如果把 OpenAI 的生成器和验证器网络与 DeepMind 的思考树（Tree of Thoughts）概念结合起来，我们可能就能得到一个像 AlphaGo 那样运作的语言模型，它可能也会具备 AlphaGo 那样强大的推理能力。<br />
-<br />
-...<br />
-<br />
-原文：<a href="https://www.understandingai.org/p/how-to-think-about-the-openai-q-rumors">understandingai.org/p/how-to…</a><br />
-翻译：<a href="https://baoyu.io/translations/ai/how-to-think-about-the-openai-q-rumors">baoyu.io/translations/ai/how…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0F6LXZkTFhJQUFXVDdELmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0F6LXluOFhZQUFVTW9pLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0F6LXpjVlcwQUFDSjlfLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1733024692024336511#m</id>
-            <title>这是AI发的吗？</title>
-            <link>https://nitter.cz/dotey/status/1733024692024336511#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733024692024336511#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 08 Dec 2023 07:24:19 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这是AI发的吗？</p>
-<p><a href="https://nitter.cz/ChatGPTapp/status/1732979491071549792#m">nitter.cz/ChatGPTapp/status/1732979491071549792#m</a></p>
                 ]]>
             </content:encoded>
         </item>
