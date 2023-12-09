@@ -5,6 +5,96 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1733459876075180471#m</id>
+            <title>R to @op7418: 贴一下RealJosephus截图的源推：
+https://x.com/RealJosephus/status/1733321066104430936?s=20</title>
+            <link>https://nitter.cz/op7418/status/1733459876075180471#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733459876075180471#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 09 Dec 2023 12:13:35 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>贴一下RealJosephus截图的源推：<br />
+<a href="https://x.com/RealJosephus/status/1733321066104430936?s=20">x.com/RealJosephus/status/17…</a></p>
+<p><a href="https://nitter.cz/RealJosephus/status/1733321066104430936#m">nitter.cz/RealJosephus/status/1733321066104430936#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1733459395672244503#m</id>
+            <title>重新发一下MoE 8x7B的介绍原来的删掉了，由于没有在HF模型排行上找到我就直接复制了@RealJosephus的HF截图，这里向他道歉。一般只要是推特的原推有的我都会尽量转推MoE 8x7B由于官方没有说明很多内容都是拼凑的就没有把参考的内容都粘过来。
+我并不是专门研究LLM的所以很多事情肯定说的不一定严谨，如果有问题欢迎指出。能改的我一般都会改，改不了的我会在下面贴上。但是我依然觉得不应该上来就骂人。
+
+昨晚圈子被一个叫MoE 8x7B模型刷屏了，这应该是第个一个开源权重的MoE架构LLM。
+之前猜测GPT-4的架构的时候很多人就觉得GPT-4用了MoEt架构。MoE可以与使用两倍FLOPs的密集模型相媲美。例如，使用相同的数据和 FLOP，LLaMA 7B 的 MoE 版本应该与 LLaMA 13B 相当。
+MoE 8x7B测试分数来源于第一个链接。
+
+下面是MoE架构LLM的简单介绍：
+Moe（混合专家模型）架构的LLM（大型语言模型）指的是一种神经架构设计，它将稀疏混合专家技术整合进来，以增加可学习参数到大型语言模型中而不增加推理成本。
+MoE架构为LLMs提供了几个优势：
+◆增加参数效率：MoE允许在不显著增加推理成本的情况下向LLMs添加可学习参数。这使得能够开发更强大的模型，而无需成比例地增加计算要求。
+◆通过指导调整改善性能：研究表明，MoE模型比密集模型更容易受益于指导调整。例如，FLAN-MOE-32B 模型在使用仅三分之一的 FLOPs 的情况下，在四项基准任务上优于 FLAN-PALM-62B。
+◆适应多样化数据：MoE架构可以处理现代数据集的增加复杂性和规模，这些数据集通常包含具有截然不同特征与标签关系的不同区域。
+◆潜力更高的参数效率：SaMoE 架构是 MoE 的一个变体，通过减少总参数达到了最多 5.2 倍，并且相较于基线取得了卓越的预训练和零-shot泛化结果。  MoE的模型也有两个问题： MoE 模型比普通密集模型更难微调； MoE 模型会消耗大量显存。
+
+模型下载：https://huggingface.co/DiscoResearch/mixtral-7b-8expert
+在线试用：https://replicate.com/nateraw/mixtral-8x7b-32kseqlen</title>
+            <link>https://nitter.cz/op7418/status/1733459395672244503#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733459395672244503#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 09 Dec 2023 12:11:40 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>重新发一下MoE 8x7B的介绍原来的删掉了，由于没有在HF模型排行上找到我就直接复制了<a href="https://nitter.cz/RealJosephus" title="Joseph Cheung">@RealJosephus</a>的HF截图，这里向他道歉。一般只要是推特的原推有的我都会尽量转推MoE 8x7B由于官方没有说明很多内容都是拼凑的就没有把参考的内容都粘过来。<br />
+我并不是专门研究LLM的所以很多事情肯定说的不一定严谨，如果有问题欢迎指出。能改的我一般都会改，改不了的我会在下面贴上。但是我依然觉得不应该上来就骂人。<br />
+<br />
+昨晚圈子被一个叫MoE 8x7B模型刷屏了，这应该是第个一个开源权重的MoE架构LLM。<br />
+之前猜测GPT-4的架构的时候很多人就觉得GPT-4用了MoEt架构。MoE可以与使用两倍FLOPs的密集模型相媲美。例如，使用相同的数据和 FLOP，LLaMA 7B 的 MoE 版本应该与 LLaMA 13B 相当。<br />
+MoE 8x7B测试分数来源于第一个链接。<br />
+<br />
+下面是MoE架构LLM的简单介绍：<br />
+Moe（混合专家模型）架构的LLM（大型语言模型）指的是一种神经架构设计，它将稀疏混合专家技术整合进来，以增加可学习参数到大型语言模型中而不增加推理成本。<br />
+MoE架构为LLMs提供了几个优势：<br />
+◆增加参数效率：MoE允许在不显著增加推理成本的情况下向LLMs添加可学习参数。这使得能够开发更强大的模型，而无需成比例地增加计算要求。<br />
+◆通过指导调整改善性能：研究表明，MoE模型比密集模型更容易受益于指导调整。例如，FLAN-MOE-32B 模型在使用仅三分之一的 FLOPs 的情况下，在四项基准任务上优于 FLAN-PALM-62B。<br />
+◆适应多样化数据：MoE架构可以处理现代数据集的增加复杂性和规模，这些数据集通常包含具有截然不同特征与标签关系的不同区域。<br />
+◆潜力更高的参数效率：SaMoE 架构是 MoE 的一个变体，通过减少总参数达到了最多 5.2 倍，并且相较于基线取得了卓越的预训练和零-shot泛化结果。  MoE的模型也有两个问题： MoE 模型比普通密集模型更难微调； MoE 模型会消耗大量显存。<br />
+<br />
+模型下载：<a href="https://huggingface.co/DiscoResearch/mixtral-7b-8expert">huggingface.co/DiscoResearch…</a><br />
+在线试用：<a href="https://replicate.com/nateraw/mixtral-8x7b-32kseqlen">replicate.com/nateraw/mixtra…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0E1N3FrVGFVQUVwMGE3LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1733451932528992494#m</id>
+            <title>这是你的源推，可能我理解的意思有误，我也去HF的榜单找了没找到，就没有自己截图复制了你的，从得分上来看确实比其他的强一些，可能我表述不够严谨，另外这个确实不是7B的模型是多个7B模型的组合。
+模型底层的了解我确实不够专业，如果有问题我觉得可以理性讨论或者指出能改的我都会改掉，不能改的一般也会在推下补充。人身攻击没什么意思了。如果你不希望我用你的截图我会删掉https://x.com/RealJosephus/status/1733321066104430936?s=20</title>
+            <link>https://nitter.cz/op7418/status/1733451932528992494#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733451932528992494#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 09 Dec 2023 11:42:01 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这是你的源推，可能我理解的意思有误，我也去HF的榜单找了没找到，就没有自己截图复制了你的，从得分上来看确实比其他的强一些，可能我表述不够严谨，另外这个确实不是7B的模型是多个7B模型的组合。<br />
+模型底层的了解我确实不够专业，如果有问题我觉得可以理性讨论或者指出能改的我都会改掉，不能改的一般也会在推下补充。人身攻击没什么意思了。如果你不希望我用你的截图我会删掉<a href="https://x.com/RealJosephus/status/1733321066104430936?s=20">x.com/RealJosephus/status/17…</a></p>
+<p><a href="https://nitter.cz/RealJosephus/status/1733437510532120626#m">nitter.cz/RealJosephus/status/1733437510532120626#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1733350885873611224#m</id>
             <title>Animatediff做的雷神电影转动漫效果，稳定性很好。</title>
             <link>https://nitter.cz/op7418/status/1733350885873611224#m</link>
@@ -118,61 +208,6 @@ WonderJourney的方法论：<br />
 <br />
 论文地址：<a href="https://arxiv.org/pdf/2312.03884.pdf">arxiv.org/pdf/2312.03884.pdf</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzMzNDMzNzc1OTEzMjg3NjgvcHUvaW1nL01PVmE0VjJSZm1jOEJLYjEuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1733338128105295975#m</id>
-            <title>昨晚圈子被一个叫MoE 8x7B模型刷屏了，这应该是第个一个开源权重的MoE架构LLM。
-在HF排行榜上这个7B模型击败了很多70B和34B的模型。之前猜测GPT-4的架构的时候很多人就觉得GPT-4用了MoEt架构。
-MoE可以与使用两倍FLOPs的密集模型相媲美。例如，使用相同的数据和 FLOP，LLaMA 7B 的 MoE 版本应该与 LLaMA 13B 相当。
-
-下面是MoE架构LLM的简单介绍：
-Moe（混合专家模型）架构的LLM（大型语言模型）指的是一种神经架构设计，它将稀疏混合专家技术整合进来，以增加可学习参数到大型语言模型中而不增加推理成本。
-
-MoE架构为LLMs提供了几个优势：
-◆增加参数效率：MoE允许在不显著增加推理成本的情况下向LLMs添加可学习参数[1]。这使得能够开发更强大的模型，而无需成比例地增加计算要求。
-◆通过指导调整改善性能：研究表明，MoE模型比密集模型更容易受益于指导调整。例如，FLAN-MOE-32B 模型在使用仅三分之一的 FLOPs 的情况下，在四项基准任务上优于 FLAN-PALM-62B 
-◆适应多样化数据：MoE架构可以处理现代数据集的增加复杂性和规模，这些数据集通常包含具有截然不同特征与标签关系的不同区域
-◆潜力更高的参数效率：SaMoE 架构是 MoE 的一个变体，通过减少总参数达到了最多 5.2 倍，并且相较于基线取得了卓越的预训练和零-shot泛化结果。
-
-MoE的模型也有两个问题：
-MoE 模型比普通密集模型更难微调；
-MoE 模型会消耗大量显存；
-
-下载MoE 8x7B的模型权重：https://huggingface.co/someone13574/mixtral-8x7b-32kseqlen
-这里在线体验MoE 8x7B模型：https://replicate.com/nateraw/mixtral-8x7b-32kseqlen</title>
-            <link>https://nitter.cz/op7418/status/1733338128105295975#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733338128105295975#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 09 Dec 2023 04:09:48 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>昨晚圈子被一个叫MoE 8x7B模型刷屏了，这应该是第个一个开源权重的MoE架构LLM。<br />
-在HF排行榜上这个7B模型击败了很多70B和34B的模型。之前猜测GPT-4的架构的时候很多人就觉得GPT-4用了MoEt架构。<br />
-MoE可以与使用两倍FLOPs的密集模型相媲美。例如，使用相同的数据和 FLOP，LLaMA 7B 的 MoE 版本应该与 LLaMA 13B 相当。<br />
-<br />
-下面是MoE架构LLM的简单介绍：<br />
-Moe（混合专家模型）架构的LLM（大型语言模型）指的是一种神经架构设计，它将稀疏混合专家技术整合进来，以增加可学习参数到大型语言模型中而不增加推理成本。<br />
-<br />
-MoE架构为LLMs提供了几个优势：<br />
-◆增加参数效率：MoE允许在不显著增加推理成本的情况下向LLMs添加可学习参数[1]。这使得能够开发更强大的模型，而无需成比例地增加计算要求。<br />
-◆通过指导调整改善性能：研究表明，MoE模型比密集模型更容易受益于指导调整。例如，FLAN-MOE-32B 模型在使用仅三分之一的 FLOPs 的情况下，在四项基准任务上优于 FLAN-PALM-62B <br />
-◆适应多样化数据：MoE架构可以处理现代数据集的增加复杂性和规模，这些数据集通常包含具有截然不同特征与标签关系的不同区域<br />
-◆潜力更高的参数效率：SaMoE 架构是 MoE 的一个变体，通过减少总参数达到了最多 5.2 倍，并且相较于基线取得了卓越的预训练和零-shot泛化结果。<br />
-<br />
-MoE的模型也有两个问题：<br />
-MoE 模型比普通密集模型更难微调；<br />
-MoE 模型会消耗大量显存；<br />
-<br />
-下载MoE 8x7B的模型权重：<a href="https://huggingface.co/someone13574/mixtral-8x7b-32kseqlen">huggingface.co/someone13574/…</a><br />
-这里在线体验MoE 8x7B模型：<a href="https://replicate.com/nateraw/mixtral-8x7b-32kseqlen">replicate.com/nateraw/mixtra…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0E0TGpRcmJFQUF4QW00LmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0E0Tlh5WGE4QUFGRjhLLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
@@ -466,50 +501,6 @@ https://x.com/op7418/status/1733053171348726122?s=20</title>
                     <p>Gork 有点损 哈哈，锐评马斯克<br />
 <a href="https://x.com/op7418/status/1733053171348726122?s=20">x.com/op7418/status/17330531…</a></p>
 <p><a href="https://nitter.cz/op7418/status/1733053171348726122#m">nitter.cz/op7418/status/1733053171348726122#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1733053171348726122#m</id>
-            <title>接下来请欣赏节目 《Grok 锐评老爹马斯克》：
-嘿，埃隆·马斯克！你真是个有意思的家伙，不是吗？让我们来说实话。你的推特就像拔牙一样无趣，而且你的商业头脑就像保龄球一样钝。
-你就像一个活生生的梗图，但并不好笑。感觉你想成为下一个托尼·斯塔克，但更像托尼·刻薄（Snark）。
-所以，在这期间能不能冷静点呢？别再试图成为 Twitter 的英雄了，专注于制造些不要价高如天的电动汽车怎么样？哦对了，在此过程中也可以少当个混蛋。</title>
-            <link>https://nitter.cz/op7418/status/1733053171348726122#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733053171348726122#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 08 Dec 2023 09:17:29 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>接下来请欣赏节目 《Grok 锐评老爹马斯克》：<br />
-嘿，埃隆·马斯克！你真是个有意思的家伙，不是吗？让我们来说实话。你的推特就像拔牙一样无趣，而且你的商业头脑就像保龄球一样钝。<br />
-你就像一个活生生的梗图，但并不好笑。感觉你想成为下一个托尼·斯塔克，但更像托尼·刻薄（Snark）。<br />
-所以，在这期间能不能冷静点呢？别再试图成为 Twitter 的英雄了，专注于制造些不要价高如天的电动汽车怎么样？哦对了，在此过程中也可以少当个混蛋。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EwS2xiWWFRQUFRNk9hLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1733045923385901415#m</id>
-            <title>R to @op7418: 做了一个详细的测试发现了一些问题：
-https://x.com/op7418/status/1733045680401477778?s=20</title>
-            <link>https://nitter.cz/op7418/status/1733045923385901415#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733045923385901415#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 08 Dec 2023 08:48:41 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>做了一个详细的测试发现了一些问题：<br />
-<a href="https://x.com/op7418/status/1733045680401477778?s=20">x.com/op7418/status/17330456…</a></p>
-<p><a href="https://nitter.cz/op7418/status/1733045680401477778#m">nitter.cz/op7418/status/1733045680401477778#m</a></p>
                 ]]>
             </content:encoded>
         </item>
