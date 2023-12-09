@@ -5,6 +5,140 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1733417404099887532#m</id>
+            <title>Material Palette：从单张真实世界图片中提取 PBR 材料
+
+该工具可以从一张普通照片中提取出各种建筑PBR材料（比如木头、金属、砖瓦的质感）。
+
+首先通过分析给定照片，识别出照片中不同部分对应的材料是什么。
+
+然后，它进一步分析这些纹理图像，提取出材料的不同特性，比如颜色、光泽和表面的粗糙度。
+
+这对于建筑装修行业以及需要在电脑里制作或编辑三维场景的人来说特别有用，因为它可以让虚拟场景里的物体看起来更像真的。
+
+Material Palette" 的主要功能和工作原理如下：
+
+主要功能：
+
+1、提取 PBR 材料：从单张真实世界的图片中提取物理基础渲染（Physically-Based Rendering, PBR）材料，包括反照率、法线和粗糙度。
+
+它提取以下几个方面的材料特性：
+
+1、纹理图像：使用扩散模型生成类似于场景中每种材料的纹理图像。这些纹理图像模仿了真实世界中材料的外观。
+
+2、空间变化的双向反射分布函数（SVBRDFs）：将生成的纹理图像进一步分解为 SVBRDFs。SVBRDFs 是一种描述材料如何与光互动的模型，
+
+包括以下几个方面：
+
+反照率（Albedo）：材料的基本颜色和纹理。
+
+法线（Normal）：材料表面的微观几何结构，影响光线反射的方式。
+
+粗糙度（Roughness）：材料表面的光滑或粗糙程度，影响光线散射的特性。
+
+3、生成逼真纹理：使用扩散模型生成类似于场景中每种材料的纹理图像。
+
+SVBRDF 分解：将生成的纹理图像分解为空间变化的双向反射分布函数（Spatially Varying BRDFs, SVBRDFs）。
+
+工作原理：
+
+1、文本到图像的扩散模型：首先，项目使用微调的文本到图像扩散模型来生成类似于场景中每种材料的纹理图像。这一步骤基于对场景中存在的材料类型的理解。
+
+2、多任务网络：接着，使用一个多任务网络将这些生成的纹理图像分解为 SVBRDFs。这包括提取材料的反照率、法线和粗糙度等属性。
+
+3、材料的视觉呈现：通过这种方法，可以从单张图片中提取出具有高度真实感的材料属性，这些属性可以用于 3D 渲染和其他视觉效果应用中。
+
+Material Palette利用先进的 AI 技术从单张图片中提取高质量的材料属性，这些属性对于创建逼真的 3D 场景和视觉效果至关重要。
+
+这有几个实际应用：
+
+1、3D 渲染和视觉效果：在电影、游戏和虚拟现实中，可以使用这些提取的材料来创建逼真的 3D 模型和场景。
+
+2、设计和建筑可视化：建筑师和设计师可以利用这些材料来增强他们的视觉呈现，使设计更加真实和吸引人。
+
+3、增强现实（AR）和虚拟现实（VR）：在 AR 和 VR 应用中，提取的材料可以用来改善用户的沉浸体验，使虚拟对象看起来更加真实。
+
+4、艺术和创意产业：艺术家和创意专业人士可以使用这些材料来探索新的艺术表现形式，或在他们的作品中增加更多细节和真实感。
+
+5、教育和培训：在教育和培训模拟中，这些材料可以用来创建更逼真的环境，帮助学习者更好地理解和互动。
+
+项目及演示:https://astra-vision.github.io/MaterialPalette/
+论文：https://arxiv.org/abs/2311.17060
+GitHub：https://github.com/astra-vision/MaterialPalette</title>
+            <link>https://nitter.cz/xiaohuggg/status/1733417404099887532#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1733417404099887532#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 09 Dec 2023 09:24:49 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Material Palette：从单张真实世界图片中提取 PBR 材料<br />
+<br />
+该工具可以从一张普通照片中提取出各种建筑PBR材料（比如木头、金属、砖瓦的质感）。<br />
+<br />
+首先通过分析给定照片，识别出照片中不同部分对应的材料是什么。<br />
+<br />
+然后，它进一步分析这些纹理图像，提取出材料的不同特性，比如颜色、光泽和表面的粗糙度。<br />
+<br />
+这对于建筑装修行业以及需要在电脑里制作或编辑三维场景的人来说特别有用，因为它可以让虚拟场景里的物体看起来更像真的。<br />
+<br />
+Material Palette" 的主要功能和工作原理如下：<br />
+<br />
+主要功能：<br />
+<br />
+1、提取 PBR 材料：从单张真实世界的图片中提取物理基础渲染（Physically-Based Rendering, PBR）材料，包括反照率、法线和粗糙度。<br />
+<br />
+它提取以下几个方面的材料特性：<br />
+<br />
+1、纹理图像：使用扩散模型生成类似于场景中每种材料的纹理图像。这些纹理图像模仿了真实世界中材料的外观。<br />
+<br />
+2、空间变化的双向反射分布函数（SVBRDFs）：将生成的纹理图像进一步分解为 SVBRDFs。SVBRDFs 是一种描述材料如何与光互动的模型，<br />
+<br />
+包括以下几个方面：<br />
+<br />
+反照率（Albedo）：材料的基本颜色和纹理。<br />
+<br />
+法线（Normal）：材料表面的微观几何结构，影响光线反射的方式。<br />
+<br />
+粗糙度（Roughness）：材料表面的光滑或粗糙程度，影响光线散射的特性。<br />
+<br />
+3、生成逼真纹理：使用扩散模型生成类似于场景中每种材料的纹理图像。<br />
+<br />
+SVBRDF 分解：将生成的纹理图像分解为空间变化的双向反射分布函数（Spatially Varying BRDFs, SVBRDFs）。<br />
+<br />
+工作原理：<br />
+<br />
+1、文本到图像的扩散模型：首先，项目使用微调的文本到图像扩散模型来生成类似于场景中每种材料的纹理图像。这一步骤基于对场景中存在的材料类型的理解。<br />
+<br />
+2、多任务网络：接着，使用一个多任务网络将这些生成的纹理图像分解为 SVBRDFs。这包括提取材料的反照率、法线和粗糙度等属性。<br />
+<br />
+3、材料的视觉呈现：通过这种方法，可以从单张图片中提取出具有高度真实感的材料属性，这些属性可以用于 3D 渲染和其他视觉效果应用中。<br />
+<br />
+Material Palette利用先进的 AI 技术从单张图片中提取高质量的材料属性，这些属性对于创建逼真的 3D 场景和视觉效果至关重要。<br />
+<br />
+这有几个实际应用：<br />
+<br />
+1、3D 渲染和视觉效果：在电影、游戏和虚拟现实中，可以使用这些提取的材料来创建逼真的 3D 模型和场景。<br />
+<br />
+2、设计和建筑可视化：建筑师和设计师可以利用这些材料来增强他们的视觉呈现，使设计更加真实和吸引人。<br />
+<br />
+3、增强现实（AR）和虚拟现实（VR）：在 AR 和 VR 应用中，提取的材料可以用来改善用户的沉浸体验，使虚拟对象看起来更加真实。<br />
+<br />
+4、艺术和创意产业：艺术家和创意专业人士可以使用这些材料来探索新的艺术表现形式，或在他们的作品中增加更多细节和真实感。<br />
+<br />
+5、教育和培训：在教育和培训模拟中，这些材料可以用来创建更逼真的环境，帮助学习者更好地理解和互动。<br />
+<br />
+项目及演示:<a href="https://astra-vision.github.io/MaterialPalette/">astra-vision.github.io/Mater…</a><br />
+论文：<a href="https://arxiv.org/abs/2311.17060">arxiv.org/abs/2311.17060</a><br />
+GitHub：<a href="https://github.com/astra-vision/MaterialPalette">github.com/astra-vision/Mate…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzM0MTQ4NzQ1NDg3MTE0MjQvcHUvaW1nL2U0alVSOERVSzZZSTZfUDUuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1733408732544139416#m</id>
             <title>R to @xiaohuggg:</title>
             <link>https://nitter.cz/xiaohuggg/status/1733408732544139416#m</link>
