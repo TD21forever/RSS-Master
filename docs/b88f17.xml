@@ -5,6 +5,147 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1733745886063194452#m</id>
+            <title>#开源项目推荐：baserow
+
+baserow 是一款开源的在线数据管理应用，类似于Airtable。Airtable是著名的在线表格应用，类似于Excel，可以以表格的形式存储各种数据。
+
+前端技术栈是Vue+Nuxt
+
+项目地址：https://gitlab.com/baserow/baserow</title>
+            <link>https://nitter.cz/dotey/status/1733745886063194452#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733745886063194452#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 10 Dec 2023 07:10:05 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><a href="https://nitter.cz/search?q=%23开源项目推荐">#开源项目推荐</a>：baserow<br />
+<br />
+baserow 是一款开源的在线数据管理应用，类似于Airtable。Airtable是著名的在线表格应用，类似于Excel，可以以表格的形式存储各种数据。<br />
+<br />
+前端技术栈是Vue+Nuxt<br />
+<br />
+项目地址：<a href="https://gitlab.com/baserow/baserow">gitlab.com/baserow/baserow</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EtQWJhUVc0QUVPSGoxLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EtQWNYTFh3QUFFOUpBLnBuZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EtQWZINVc0QUFQYTBDLnBuZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EtQW0za1hNQUFRRlV2LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1733742097239286215#m</id>
+            <title>转译：什么是“专家混合模型”（Mixture-of-Experts，MoE）？
+
+“专家混合模型”是一种创新的神经网络架构设计，它在 Transformer 架构中融合了众多的专家/模型层。在这种设计中，数据流动时，每一个输入的 Token 都会被动态分配给一些专家进行处理。这种做法使得计算更高效，因为每个专家都能在其擅长的特定任务上发挥出色。
+
+关键要素包括：
+
+- 专家：MoE 层由众多专家组成，既可以是小型的多层感知机（MLP），也可以是像 Mistral 7B 这样复杂的大型语言模型（LLM）。
+- 路由器：负责将输入的 Token 分配给合适的专家。路由策略有两种：由 Token 选择路由器，或由路由器选择 Token。具体是怎样实现的呢？系统通过一个 softmax 门控函数来建立一个概率分布，从而在众多专家或 Token 中选出最合适的几个。
+
+为何选择 MoE？
+
+- 每个专家可以专注于处理不同的任务或数据的不同部分。
+- 为大型语言模型增加了可学习的参数，同时不会增加推理成本。
+- 能够高效处理稀疏矩阵。
+- 所有专家层可并行计算，充分利用了 GPU 的并行处理能力。
+- 有助于在降低计算成本的同时，缩短模型训练时间并提升效果！
+
+推荐阅读的论文：
+
+- 《稀疏门控的专家混合模型层》(2017)：[点击查看](https://arxiv.org/pdf/1701.06538.pdf)
+- 《GShard：利用条件计算和自动分片扩展巨型模型》(2020)：[点击查看](https://arxiv.org/pdf/2006.16668.pdf)
+- 《MegaBlocks：使用专家混合模型进行高效稀疏训练》(2022)：[点击查看](https://arxiv.org/abs/2211.15841)
+- 《专家混合模型遇见指令调整》(2023)：[点击查看](https://arxiv.org/pdf/2305.14705.pdf)</title>
+            <link>https://nitter.cz/dotey/status/1733742097239286215#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733742097239286215#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 10 Dec 2023 06:55:02 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>转译：什么是“专家混合模型”（Mixture-of-Experts，MoE）？<br />
+<br />
+“专家混合模型”是一种创新的神经网络架构设计，它在 Transformer 架构中融合了众多的专家/模型层。在这种设计中，数据流动时，每一个输入的 Token 都会被动态分配给一些专家进行处理。这种做法使得计算更高效，因为每个专家都能在其擅长的特定任务上发挥出色。<br />
+<br />
+关键要素包括：<br />
+<br />
+- 专家：MoE 层由众多专家组成，既可以是小型的多层感知机（MLP），也可以是像 Mistral 7B 这样复杂的大型语言模型（LLM）。<br />
+- 路由器：负责将输入的 Token 分配给合适的专家。路由策略有两种：由 Token 选择路由器，或由路由器选择 Token。具体是怎样实现的呢？系统通过一个 softmax 门控函数来建立一个概率分布，从而在众多专家或 Token 中选出最合适的几个。<br />
+<br />
+为何选择 MoE？<br />
+<br />
+- 每个专家可以专注于处理不同的任务或数据的不同部分。<br />
+- 为大型语言模型增加了可学习的参数，同时不会增加推理成本。<br />
+- 能够高效处理稀疏矩阵。<br />
+- 所有专家层可并行计算，充分利用了 GPU 的并行处理能力。<br />
+- 有助于在降低计算成本的同时，缩短模型训练时间并提升效果！<br />
+<br />
+推荐阅读的论文：<br />
+<br />
+- 《稀疏门控的专家混合模型层》(2017)：[点击查看](<a href="https://arxiv.org/pdf/1701.06538.pdf">arxiv.org/pdf/1701.06538.pdf</a>)<br />
+- 《GShard：利用条件计算和自动分片扩展巨型模型》(2020)：[点击查看](<a href="https://arxiv.org/pdf/2006.16668.pdf">arxiv.org/pdf/2006.16668.pdf</a>)<br />
+- 《MegaBlocks：使用专家混合模型进行高效稀疏训练》(2022)：[点击查看](<a href="https://arxiv.org/abs/2211.15841">arxiv.org/abs/2211.15841</a>)<br />
+- 《专家混合模型遇见指令调整》(2023)：[点击查看](<a href="https://arxiv.org/pdf/2305.14705.pdf">arxiv.org/pdf/2305.14705.pdf</a>)</p>
+<p><a href="https://nitter.cz/sophiamyang/status/1733505991600148892#m">nitter.cz/sophiamyang/status/1733505991600148892#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1733739312372420807#m</id>
+            <title>#AI开源项目推荐： SecureAI Tools
+
+为大家提供私密且安全的 AI 工具，提高工作效率。
+
+特色功能：
+
+- **与 AI 对话**：让你可以和 AI 模型（比如 ChatGPT）进行沟通。
+- **与文档对话**：支持与文档（目前支持 PDF）进行交流，详见下方演示视频。
+- **本地运算**：支持本地运行的 AI 模型，通过 [Ollama](https://ollama.ai/library) 支持超过 100 种开源或半开源的 AI 模型。
+- **内置验证机制**：简洁的电子邮件/密码验证，可实现互联网远程访问。
+- **内置用户管理**：适用于家庭成员或同事等多用户使用。
+- **自我托管优化**：提供所需脚本和 docker-compose 文件，5 分钟内即可快速部署。
+- **轻量级设计**：采用简易 Web 应用和 SQLite 数据库，无需为数据库运行额外的 docker 容器。数据通过 docker 卷在主机上实现持久化存储。
+
+项目地址：https://github.com/SecureAI-Tools/SecureAI-Tools</title>
+            <link>https://nitter.cz/dotey/status/1733739312372420807#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733739312372420807#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 10 Dec 2023 06:43:58 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><a href="https://nitter.cz/search?q=%23AI开源项目推荐">#AI开源项目推荐</a>： SecureAI Tools<br />
+<br />
+为大家提供私密且安全的 AI 工具，提高工作效率。<br />
+<br />
+特色功能：<br />
+<br />
+- **与 AI 对话**：让你可以和 AI 模型（比如 ChatGPT）进行沟通。<br />
+- **与文档对话**：支持与文档（目前支持 PDF）进行交流，详见下方演示视频。<br />
+- **本地运算**：支持本地运行的 AI 模型，通过 [Ollama](<a href="https://ollama.ai/library">ollama.ai/library</a>) 支持超过 100 种开源或半开源的 AI 模型。<br />
+- **内置验证机制**：简洁的电子邮件/密码验证，可实现互联网远程访问。<br />
+- **内置用户管理**：适用于家庭成员或同事等多用户使用。<br />
+- **自我托管优化**：提供所需脚本和 docker-compose 文件，5 分钟内即可快速部署。<br />
+- **轻量级设计**：采用简易 Web 应用和 SQLite 数据库，无需为数据库运行额外的 docker 容器。数据通过 docker 卷在主机上实现持久化存储。<br />
+<br />
+项目地址：<a href="https://github.com/SecureAI-Tools/SecureAI-Tools">github.com/SecureAI-Tools/Se…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzM3MzkxMTQ4OTYxOTE0ODgvcHUvaW1nL0tkTTlIdm42UTk0aTdScWsuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1733729179521142795#m</id>
             <title>R to @dotey: Bao Image OCR
 
@@ -578,108 +719,6 @@ https://towardsdatascience.com/improving-retrieval-performance-in-rag-pipelines-
 <br />
 原文：<a href="https://www.theverge.com/2023/12/8/23992489/xai-musk-grok-humor-chatbot">theverge.com/2023/12/8/23992…</a></p>
 <img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczMzAxNjE5OTY0NTAzNjU0NC9uU25ZYmhaLT9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1733625740933968330#m</id>
-            <title>R to @dotey:</title>
-            <link>https://nitter.cz/dotey/status/1733625740933968330#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733625740933968330#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 09 Dec 2023 23:12:40 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p></p>
-<p><a href="https://nitter.cz/lindayaX/status/1732775019598745973#m">nitter.cz/lindayaX/status/1732775019598745973#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1733625668666032210#m</id>
-            <title>R to @dotey: 即便是人类喜剧演员，也更倾向于原创表演，而不是复制《银河系漫游指南》（The Hitchhiker’s Guide to the Galaxy）。真正的亚当斯在这个回答的背后，使得 Grok 相形见绌。这不仅是 Grok 的问题。以 RayBot 为例，这是由《Achewood》作者克里斯·昂斯塔德（Chris Onstad）创作的 AI 版建议专栏。尽管 RayBot 常常很有趣，但 昂斯塔德本人在回答相同问题时总是比他的 AI 表现得更出色。每当 RayBot 给出一个有趣的答案，人们总会好奇昂斯塔德本人会怎样回答。
-
-Grok 的局限之一显然是 Musk 想要对那些他认为过分谨慎的 AI 公司表达一种“我不服”的姿态，但又不至于让人感到排斥。那个关于可卡因的回答确实挺有趣，因为它的局限性与其他大型语言模型 (Large Language Model) 相似。至于涉及种族歧视词汇的有轨电车难题 — 它并没有真的使用那个种族歧视词汇，因为那会太过分。（而且即使用了，也不会变得有趣。）那种所谓的“前卫”、无聊的冒犯式幽默有时会显得刻意而尴尬，特别是当这成了机器人的唯一表达方式 — 尤其是当你尝试将其当成一个能说脏话的 Google 搜索工具时。</title>
-            <link>https://nitter.cz/dotey/status/1733625668666032210#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733625668666032210#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 09 Dec 2023 23:12:23 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>即便是人类喜剧演员，也更倾向于原创表演，而不是复制《银河系漫游指南》（The Hitchhiker’s Guide to the Galaxy）。真正的亚当斯在这个回答的背后，使得 Grok 相形见绌。这不仅是 Grok 的问题。以 RayBot 为例，这是由《Achewood》作者克里斯·昂斯塔德（Chris Onstad）创作的 AI 版建议专栏。尽管 RayBot 常常很有趣，但 昂斯塔德本人在回答相同问题时总是比他的 AI 表现得更出色。每当 RayBot 给出一个有趣的答案，人们总会好奇昂斯塔德本人会怎样回答。<br />
-<br />
-Grok 的局限之一显然是 Musk 想要对那些他认为过分谨慎的 AI 公司表达一种“我不服”的姿态，但又不至于让人感到排斥。那个关于可卡因的回答确实挺有趣，因为它的局限性与其他大型语言模型 (Large Language Model) 相似。至于涉及种族歧视词汇的有轨电车难题 — 它并没有真的使用那个种族歧视词汇，因为那会太过分。（而且即使用了，也不会变得有趣。）那种所谓的“前卫”、无聊的冒犯式幽默有时会显得刻意而尴尬，特别是当这成了机器人的唯一表达方式 — 尤其是当你尝试将其当成一个能说脏话的 Google 搜索工具时。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1733625541012443261#m</id>
-            <title>R to @dotey:</title>
-            <link>https://nitter.cz/dotey/status/1733625541012443261#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733625541012443261#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 09 Dec 2023 23:11:52 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p></p>
-<p><a href="https://nitter.cz/elonmusk/status/1723177815955107850#m">nitter.cz/elonmusk/status/1723177815955107850#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1733625448783904958#m</id>
-            <title>R to @dotey: 至于 Business Insider 给出的答案，我总感觉它像是一个缺乏创造性的 Mad Libs 游戏。于是我把它改编成了一个游戏，发给了我的两位同事。这是他们给出的答复：
-
-- 商业内幕（Business Insider）？那个网站就像是数字媒体和杂志的秃头鼹鼠宝宝混合体，再加点儿鸡肉做佐料。它的新闻风格让人怀疑，“新闻”这个词是否只是它们用来美化自己销售翠绿色毛衣的行为。他们就像一群幼稚的鹅，在互联网的大海里搜寻，寻找任何能用来编造点击诱饵标题的故事碎片。
-
-- 商业内幕？那就像是电台和 YouTube 茶道频道的小羊羔，还加了些琵琶的调味。这种新闻风格让人质疑，“新闻”这个词是否只是他们用来掩饰自己推销荒谬加利福尼亚风格的做法。他们就像一群发霉的糖滑翔鼠，在互联网的角落里搜索，企图找到任何能够用来撰写点击诱饵标题的故事。
-
-提到“翠绿色毛衣”，无意中戳中了出版商依靠网购佣金作为收入的软肋。我也喜欢“发霉的糖滑翔鼠”这个比喻——听起来就像是诗人的嘲讽——以及“互联网的棺材”这个说法。虽然这些疯狂填词游戏的版本比原文更无厘头，但这些出人意料的讽刺让它们在某些地方更加风趣。
-
-事实上，我相信 AI 是有可能变得风趣的。比如 Janelle Shane 的 AI Weirdness，在这里，Shane 和她的观众共同享受计算机生成的荒诞内容。（例如：AI 创造的感恩节菜式“Punpkan Cockes Apple”，可能作为“Mashed Turktees”和“Grasted Potinos”的辅助菜肴。）
-
-人工智能（AI）的失败可能正是 AI 幽默的本质。正如搞笑高手所知，幽默关键在于把无意中逗乐他人的行为转变为有意识的行为。如果我要研发一个搞笑的 AI，我会重点研究胡言乱语。例如，哪些辅音组合最搞笑？要多么接近真实单词才能引发笑声？哪些单词和图像的结合最为荒诞？AI 的幽默部分在于它如何自信满满地完全错误。那么，我该如何进一步强化 AI 的个性与其实际答案之间的反差？
-
-我不排除 Grok 确实很有趣，只是马斯克（Musk）不擅长挑选例子（我还没机会亲自体验；如果有人能给我这个机会，你知道该怎么联系我）。但显然，荒诞不经并不是 Grok 的追求目标，也许它做不到。马斯克坚信 AI 会超越人类智能，这种观点排除了利用 AI 的失败来开发其幽默感，因为这些失败恰恰显示了 AI 在哪些方面不如人类聪明。
-
-Grok 有时候则是在模仿人类，特别是马斯克钟爱的道格拉斯·亚当斯（Douglas Adams）。</title>
-            <link>https://nitter.cz/dotey/status/1733625448783904958#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733625448783904958#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 09 Dec 2023 23:11:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>至于 Business Insider 给出的答案，我总感觉它像是一个缺乏创造性的 Mad Libs 游戏。于是我把它改编成了一个游戏，发给了我的两位同事。这是他们给出的答复：<br />
-<br />
-- 商业内幕（Business Insider）？那个网站就像是数字媒体和杂志的秃头鼹鼠宝宝混合体，再加点儿鸡肉做佐料。它的新闻风格让人怀疑，“新闻”这个词是否只是它们用来美化自己销售翠绿色毛衣的行为。他们就像一群幼稚的鹅，在互联网的大海里搜寻，寻找任何能用来编造点击诱饵标题的故事碎片。<br />
-<br />
-- 商业内幕？那就像是电台和 YouTube 茶道频道的小羊羔，还加了些琵琶的调味。这种新闻风格让人质疑，“新闻”这个词是否只是他们用来掩饰自己推销荒谬加利福尼亚风格的做法。他们就像一群发霉的糖滑翔鼠，在互联网的角落里搜索，企图找到任何能够用来撰写点击诱饵标题的故事。<br />
-<br />
-提到“翠绿色毛衣”，无意中戳中了出版商依靠网购佣金作为收入的软肋。我也喜欢“发霉的糖滑翔鼠”这个比喻——听起来就像是诗人的嘲讽——以及“互联网的棺材”这个说法。虽然这些疯狂填词游戏的版本比原文更无厘头，但这些出人意料的讽刺让它们在某些地方更加风趣。<br />
-<br />
-事实上，我相信 AI 是有可能变得风趣的。比如 Janelle Shane 的 AI Weirdness，在这里，Shane 和她的观众共同享受计算机生成的荒诞内容。（例如：AI 创造的感恩节菜式“Punpkan Cockes Apple”，可能作为“Mashed Turktees”和“Grasted Potinos”的辅助菜肴。）<br />
-<br />
-人工智能（AI）的失败可能正是 AI 幽默的本质。正如搞笑高手所知，幽默关键在于把无意中逗乐他人的行为转变为有意识的行为。如果我要研发一个搞笑的 AI，我会重点研究胡言乱语。例如，哪些辅音组合最搞笑？要多么接近真实单词才能引发笑声？哪些单词和图像的结合最为荒诞？AI 的幽默部分在于它如何自信满满地完全错误。那么，我该如何进一步强化 AI 的个性与其实际答案之间的反差？<br />
-<br />
-我不排除 Grok 确实很有趣，只是马斯克（Musk）不擅长挑选例子（我还没机会亲自体验；如果有人能给我这个机会，你知道该怎么联系我）。但显然，荒诞不经并不是 Grok 的追求目标，也许它做不到。马斯克坚信 AI 会超越人类智能，这种观点排除了利用 AI 的失败来开发其幽默感，因为这些失败恰恰显示了 AI 在哪些方面不如人类聪明。<br />
-<br />
-Grok 有时候则是在模仿人类，特别是马斯克钟爱的道格拉斯·亚当斯（Douglas Adams）。</p>
                 ]]>
             </content:encoded>
         </item>
