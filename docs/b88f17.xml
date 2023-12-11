@@ -5,6 +5,97 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/Gorden_Sun/status/1734128575861944527#m</id>
+            <title>RT by @dotey: MistralAI发布了关于混合专家模型Mixtral 8x7B的介绍。
+核心信息：
+· 32K上下文
+· 支持英语、法语、意大利语、德语、西班牙语
+· 整体能力超过LLaMa 2，且推理速度快6倍
+· 能力与ChatGPT 3.5接近
+· 有45B参数，但是每个token只使用12B的参数，所以推理速度与12B模型相同
+https://mistral.ai/news/mixtral-of-experts/</title>
+            <link>https://nitter.cz/Gorden_Sun/status/1734128575861944527#m</link>
+            <guid isPermaLink="false">https://nitter.cz/Gorden_Sun/status/1734128575861944527#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 08:30:45 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>MistralAI发布了关于混合专家模型Mixtral 8x7B的介绍。<br />
+核心信息：<br />
+· 32K上下文<br />
+· 支持英语、法语、意大利语、德语、西班牙语<br />
+· 整体能力超过LLaMa 2，且推理速度快6倍<br />
+· 能力与ChatGPT 3.5接近<br />
+· 有45B参数，但是每个token只使用12B的参数，所以推理速度与12B模型相同<br />
+<a href="https://mistral.ai/news/mixtral-of-experts/">mistral.ai/news/mixtral-of-e…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEY3BFVGJNQUFPcVU4LnBuZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1734129116167729596#m</id>
+            <title>强烈推荐这篇文章：《深入探索：AI 驱动的 PDF 布局检测引擎源代码解析 [译]》
+
+系统的分析了最近很火的 PDF 转 Markdown 开源程序 Marker https://github.com/VikParuchuri/marker 的工作原理，比我想象的要复杂不少，用了好几个开源库。Marker 主要通过以下六个阶段来工作：
+
+1. 准备阶段： 利用 PyMuPDF 工具，可以把各种格式的文档转换成 PDF 文件。
+
+2. 文本识别（OCR）： 使用 Tesseract 或 OCRMyPDF 进行文字识别；也可以选择用 PyMuPDF 进行基本的文字抓取。
+
+3. 布局识别： 运用专门定制的 LayoutLMv3 模型 来识别文档中的表格、图表、标题、图说、页眉和页脚。
+
+4. 列的检测和排序： 再用一个定制的 LayoutLMv3 模型来识别文档中的列，并按照正确的顺序（上到下，左到右）进行排列。
+
+5. 公式/代码处理： 通过 Nougat 工具，把公式图片转换成对应的 latex 代码，并利用启发式方法准确识别和调整代码及表格内容。
+
+6. 文本清理与优化： 使用定制的 T5ForTextClassification 模型进行文本清理，比如去掉不必要的空格和奇怪的字符，确保以一种保守且保留原意的方式进行优化。
+
+借助这六个阶段，Marker 能够把任何文档转化为格式整洁的 Markdown 文件。
+
+原文：Inside Marker: A Guided Source Code Tour for an AI-powered PDF Layout Detection Engine https://journal.hexmos.com/marker-pdf-document-ai/
+翻译：https://baoyu.io/translations/ai/marker-pdf-document-ai</title>
+            <link>https://nitter.cz/dotey/status/1734129116167729596#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1734129116167729596#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 08:32:54 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>强烈推荐这篇文章：《深入探索：AI 驱动的 PDF 布局检测引擎源代码解析 [译]》<br />
+<br />
+系统的分析了最近很火的 PDF 转 Markdown 开源程序 Marker <a href="https://github.com/VikParuchuri/marker">github.com/VikParuchuri/mark…</a> 的工作原理，比我想象的要复杂不少，用了好几个开源库。Marker 主要通过以下六个阶段来工作：<br />
+<br />
+1. 准备阶段： 利用 PyMuPDF 工具，可以把各种格式的文档转换成 PDF 文件。<br />
+<br />
+2. 文本识别（OCR）： 使用 Tesseract 或 OCRMyPDF 进行文字识别；也可以选择用 PyMuPDF 进行基本的文字抓取。<br />
+<br />
+3. 布局识别： 运用专门定制的 LayoutLMv3 模型 来识别文档中的表格、图表、标题、图说、页眉和页脚。<br />
+<br />
+4. 列的检测和排序： 再用一个定制的 LayoutLMv3 模型来识别文档中的列，并按照正确的顺序（上到下，左到右）进行排列。<br />
+<br />
+5. 公式/代码处理： 通过 Nougat 工具，把公式图片转换成对应的 latex 代码，并利用启发式方法准确识别和调整代码及表格内容。<br />
+<br />
+6. 文本清理与优化： 使用定制的 T5ForTextClassification 模型进行文本清理，比如去掉不必要的空格和奇怪的字符，确保以一种保守且保留原意的方式进行优化。<br />
+<br />
+借助这六个阶段，Marker 能够把任何文档转化为格式整洁的 Markdown 文件。<br />
+<br />
+原文：Inside Marker: A Guided Source Code Tour for an AI-powered PDF Layout Detection Engine <a href="https://journal.hexmos.com/marker-pdf-document-ai/">journal.hexmos.com/marker-pd…</a><br />
+翻译：<a href="https://baoyu.io/translations/ai/marker-pdf-document-ai">baoyu.io/translations/ai/mar…</a></p>
+<p><a href="https://nitter.cz/dotey/status/1730418206991409407#m">nitter.cz/dotey/status/1730418206991409407#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEY285LVhrQUFGVG9wLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEYzE5ZFhnQUFtSkpBLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEYzNwTVhBQUFkcFc4LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1734105617982456270#m</id>
             <title>RT by @dotey: 阿里又整活了
 
@@ -907,59 +998,6 @@ GPT坚持使用中文进行交互，以确保提供真实且具有文化共鸣�
                     
                     <p>对结果排重也很重要👍</p>
 <p><a href="https://nitter.cz/9hills/status/1733850170666975744#m">nitter.cz/9hills/status/1733850170666975744#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/shark_louis/status/1733751595119350154#m</id>
-            <title>RT by @dotey: 这个哥们可视化 chunk 算法结果的网站也非常好用，省去了写代码验证的时间
-https://www.chunkviz.com/#explanation</title>
-            <link>https://nitter.cz/shark_louis/status/1733751595119350154#m</link>
-            <guid isPermaLink="false">https://nitter.cz/shark_louis/status/1733751595119350154#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 10 Dec 2023 07:32:46 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个哥们可视化 chunk 算法结果的网站也非常好用，省去了写代码验证的时间<br />
-<a href="https://www.chunkviz.com/#explanation">chunkviz.com/#explanation</a></p>
-<p><a href="https://nitter.cz/GregKamradt/status/1733208049513611339#m">nitter.cz/GregKamradt/status/1733208049513611339#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1733745886063194452#m</id>
-            <title>#开源项目推荐：baserow
-
-baserow 是一款开源的在线数据管理应用，类似于Airtable。Airtable是著名的在线表格应用，类似于Excel，可以以表格的形式存储各种数据。
-
-前端技术栈是Vue+Nuxt
-
-项目地址：https://gitlab.com/baserow/baserow</title>
-            <link>https://nitter.cz/dotey/status/1733745886063194452#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1733745886063194452#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 10 Dec 2023 07:10:05 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p><a href="https://nitter.cz/search?q=%23开源项目推荐">#开源项目推荐</a>：baserow<br />
-<br />
-baserow 是一款开源的在线数据管理应用，类似于Airtable。Airtable是著名的在线表格应用，类似于Excel，可以以表格的形式存储各种数据。<br />
-<br />
-前端技术栈是Vue+Nuxt<br />
-<br />
-项目地址：<a href="https://gitlab.com/baserow/baserow">gitlab.com/baserow/baserow</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EtQWJhUVc0QUVPSGoxLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EtQWNYTFh3QUFFOUpBLnBuZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EtQWZINVc0QUFQYTBDLnBuZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0EtQW0za1hNQUFRRlV2LmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
