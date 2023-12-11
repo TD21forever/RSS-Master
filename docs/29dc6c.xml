@@ -5,6 +5,249 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1734105617982456270#m</id>
+            <title>阿里又整活了
+
+DreaMoving：能够生成目标身份在任何地方跳舞的视频。
+
+你可以指定一个特定的人物（如名人、朋友或任何特定形象），让他正在任意背景或场景（可以是真实的地点如海滩、城市街道或任何虚构的场景）下跳舞。
+
+更牛的是仅靠脸部照片或文字提示也能生成跳舞视频...
+
+还可指定人物动作和姿势
+
+DreaMoving是一个基于扩散模型的人类舞蹈视频生成框架。能够根据指导序列和简单的内容描述（仅文本提示、仅图像提示或文本和图像提示）生成高质量、高保真度的视频。
+
+用户可以通过下几种输入内容来生成和控制视频：
+
+1、文本提示：对视频内容的简单描述，比如场景设置、人物动作或任何特定的主题。例如，“一个女孩在海滩上跳舞”。
+
+文本提示也可以用于描述视频中的背景环境。
+
+2、参考图像：这些图像用于指定视频中人物的外观。例如，用户可以上传一个人脸图像来确保视频中的人物具有相同或类似的面部特征。
+
+如果需要，还可以包括衣着或身体特征的图像。
+
+3、姿势或深度序列：这是定义视频中人物动作的关键输入。姿势序列指定了人物在视频中的具体动作和姿态。
+用户可以通过提供特定的舞蹈动作序列来控制视频中的舞蹈风格和动作。
+
+4、可选的衣物图像：如果用户想要在视频中指定人物的服装样式，可以上传相关的衣物图像。
+
+技术细节：
+
+架构: DreaMoving 基于 Stable-Diffusion 模型构建，包括去噪 U-Net、视频控制网（Video ControlNet）和内容引导器（Content Guider）。
+
+数据收集与预处理: 收集了约1000个高质量的人类舞蹈视频，经过剪辑和处理，得到约6000个短视频片段。
+
+运动块: 为了提高时间一致性和运动保真度，将运动块集成到去噪 U-Net 和控制网中。
+
+内容引导器: 设计用于控制生成视频的内容，包括人物外观和背景。使用图像提示精确引导人物外观，文本提示生成背景。
+
+模型训练: 包括内容引导器训练、长帧预训练、视频控制网训练和表情微调。
+
+模型推理: 输入包括文本提示、参考图像和姿势或深度序列。通过调整控制网和内容引导器中的参数来控制视频内容。
+
+项目地址：https://dreamoving.github.io/dreamoving/
+
+论文：https://arxiv.org/abs/2312.05107
+
+代码还没有，是个很基础的演示，估计是为了抢流量...🤣</title>
+            <link>https://nitter.cz/xiaohuggg/status/1734105617982456270#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734105617982456270#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 06:59:32 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>阿里又整活了<br />
+<br />
+DreaMoving：能够生成目标身份在任何地方跳舞的视频。<br />
+<br />
+你可以指定一个特定的人物（如名人、朋友或任何特定形象），让他正在任意背景或场景（可以是真实的地点如海滩、城市街道或任何虚构的场景）下跳舞。<br />
+<br />
+更牛的是仅靠脸部照片或文字提示也能生成跳舞视频...<br />
+<br />
+还可指定人物动作和姿势<br />
+<br />
+DreaMoving是一个基于扩散模型的人类舞蹈视频生成框架。能够根据指导序列和简单的内容描述（仅文本提示、仅图像提示或文本和图像提示）生成高质量、高保真度的视频。<br />
+<br />
+用户可以通过下几种输入内容来生成和控制视频：<br />
+<br />
+1、文本提示：对视频内容的简单描述，比如场景设置、人物动作或任何特定的主题。例如，“一个女孩在海滩上跳舞”。<br />
+<br />
+文本提示也可以用于描述视频中的背景环境。<br />
+<br />
+2、参考图像：这些图像用于指定视频中人物的外观。例如，用户可以上传一个人脸图像来确保视频中的人物具有相同或类似的面部特征。<br />
+<br />
+如果需要，还可以包括衣着或身体特征的图像。<br />
+<br />
+3、姿势或深度序列：这是定义视频中人物动作的关键输入。姿势序列指定了人物在视频中的具体动作和姿态。<br />
+用户可以通过提供特定的舞蹈动作序列来控制视频中的舞蹈风格和动作。<br />
+<br />
+4、可选的衣物图像：如果用户想要在视频中指定人物的服装样式，可以上传相关的衣物图像。<br />
+<br />
+技术细节：<br />
+<br />
+架构: DreaMoving 基于 Stable-Diffusion 模型构建，包括去噪 U-Net、视频控制网（Video ControlNet）和内容引导器（Content Guider）。<br />
+<br />
+数据收集与预处理: 收集了约1000个高质量的人类舞蹈视频，经过剪辑和处理，得到约6000个短视频片段。<br />
+<br />
+运动块: 为了提高时间一致性和运动保真度，将运动块集成到去噪 U-Net 和控制网中。<br />
+<br />
+内容引导器: 设计用于控制生成视频的内容，包括人物外观和背景。使用图像提示精确引导人物外观，文本提示生成背景。<br />
+<br />
+模型训练: 包括内容引导器训练、长帧预训练、视频控制网训练和表情微调。<br />
+<br />
+模型推理: 输入包括文本提示、参考图像和姿势或深度序列。通过调整控制网和内容引导器中的参数来控制视频内容。<br />
+<br />
+项目地址：<a href="https://dreamoving.github.io/dreamoving/">dreamoving.github.io/dreamov…</a><br />
+<br />
+论文：<a href="https://arxiv.org/abs/2312.05107">arxiv.org/abs/2312.05107</a><br />
+<br />
+代码还没有，是个很基础的演示，估计是为了抢流量...🤣</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQwOTk1ODQyNjY0MDc5MzYvcHUvaW1nL2RyejRqMWpJQ3hLT1VQWkUuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1734098519655682497#m</id>
+            <title>R to @xiaohuggg: 还可以根据照片生成动作视频
+
+据说本周支持生成舞蹈视频</title>
+            <link>https://nitter.cz/xiaohuggg/status/1734098519655682497#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734098519655682497#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 06:31:19 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>还可以根据照片生成动作视频<br />
+<br />
+据说本周支持生成舞蹈视频</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQwOTgzNzY3ODA5MTA1OTIvcHUvaW1nLzRXNnU0Y05yODJaalVHdVkuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1734098211177222550#m</id>
+            <title>R to @xiaohuggg: 生成产品广告视频演示</title>
+            <link>https://nitter.cz/xiaohuggg/status/1734098211177222550#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734098211177222550#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 06:30:06 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>生成产品广告视频演示</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQwOTgxOTEyNjY4MDc4MDgvcHUvaW1nL1JCbnpIZVlIbjExRUhXdjQuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1734097871346302988#m</id>
+            <title>R to @xiaohuggg: 和几个主流AI视频工具的对比</title>
+            <link>https://nitter.cz/xiaohuggg/status/1734097871346302988#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734097871346302988#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 06:28:45 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>和几个主流AI视频工具的对比</p>
+<video loop="loop" poster="https://nitter.cz/pic/enc/dHdlZXRfdmlkZW9fdGh1bWIvR0JEQXZmM2FVQUEtX1pVLmpwZw==">
+  <source src="https://nitter.cz/pic/enc/dmlkZW8udHdpbWcuY29tL3R3ZWV0X3ZpZGVvL0dCREF2ZjNhVUFBLV9aVS5tcDQ=" type="video/mp4" /></video>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1734097702265503844#m</id>
+            <title>R to @xiaohuggg: 生成了一堆鱼的效果感觉很不错</title>
+            <link>https://nitter.cz/xiaohuggg/status/1734097702265503844#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734097702265503844#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 06:28:04 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>生成了一堆鱼的效果感觉很不错</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQwOTc2MjcyNDYxNjE5MjAvcHUvaW1nL3BuOFFkU2NIcS1zOUpYbTMuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1734097567124959651#m</id>
+            <title>AI 视频新秀NeverEnds迎来重大更新
+
+@NeverEnds_ai 是一个能够从文本和图片生成视频的 AI 工具。
+
+最近推出了 2.0 版本，增加了图生视频功能，并支持手机端体验。
+
+- NeverEnds强调更具真实感和实用性的AI视频
+
+- 强化AI视频的人物刻画
+
+- 降低操作门槛 
+
+简单测试了下，在动漫、广告视频上表现的很不错。
+
+据说下一步将整合文字和语音功能，可以直接剪辑制作视频，打造低成本、低门槛地AI 视频全流程视频制作工具。
+
+感兴趣的可以去他们Discord频道试试，
+
+无限免费使用：https://discord.gg/eTTMZJ2USx
+
+官网：https://neverends.life</title>
+            <link>https://nitter.cz/xiaohuggg/status/1734097567124959651#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734097567124959651#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 06:27:32 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>AI 视频新秀NeverEnds迎来重大更新<br />
+<br />
+<a href="https://nitter.cz/NeverEnds_ai" title="NeverEnds | AI Video generation">@NeverEnds_ai</a> 是一个能够从文本和图片生成视频的 AI 工具。<br />
+<br />
+最近推出了 2.0 版本，增加了图生视频功能，并支持手机端体验。<br />
+<br />
+- NeverEnds强调更具真实感和实用性的AI视频<br />
+<br />
+- 强化AI视频的人物刻画<br />
+<br />
+- 降低操作门槛 <br />
+<br />
+简单测试了下，在动漫、广告视频上表现的很不错。<br />
+<br />
+据说下一步将整合文字和语音功能，可以直接剪辑制作视频，打造低成本、低门槛地AI 视频全流程视频制作工具。<br />
+<br />
+感兴趣的可以去他们Discord频道试试，<br />
+<br />
+无限免费使用：<a href="https://discord.gg/eTTMZJ2USx">discord.gg/eTTMZJ2USx</a><br />
+<br />
+官网：<a href="https://neverends.life">neverends.life</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQwNDExNTMwNzM1MDQyNTYvcHUvaW1nL2FZYTFuWkNhYXkzbWkyblMuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1734063806090002616#m</id>
             <title>Google NotebookLM 开放访问了，不用排队了，但是最好是美国IP...
 
@@ -682,226 +925,6 @@ Mistral的MoE与GPT-4的比较：Mistral 8x7B使用与GPT-4非常相似的架构
 MoE 8x7B在线体验，由<a href="https://nitter.cz/mattshumer_" title="Matt Shumer">@mattshumer_</a> 提供：<br />
 <a href="https://replicate.com/nateraw/mixtral-8x7b-32kseqlen">replicate.com/nateraw/mixtra…</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0E5UXRkRWEwQUFSTXJyLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1733684125994033558#m</id>
-            <title>人工智能客服来了...🙃
-
-Deepgram Aura：实时、对话式的语音 AI 代理
-
-- 实时对话：超快速文本转语音API，不到200毫秒延迟
-
--人类般的声音：它不仅能模仿人类的语音，还能根据对话内容调整语调和情感
-
--适用多种场景：可用于各种需要语音交互的场景，如电话客服系统、智能家居、语音驱动的应用等。
-
-Aura可以为AI代理提供真实的声音，以自然的方式进行对话，包括及时回应、在思考时加入像“嗯”和“啊”这样的自然语音填充词，以及根据对话情境调整语调和情感。
-
-Deepgram的目标是在TTS能力中加入笑声和其他语音细节。
-
-Deepgram的Aura TTS API目前处于等待名单阶段，有兴趣的用户可以注册以首先尝试这一新技术。Aura预计将在不久的将来正式发布。
-
-排队：https://deepgram.com/learn/aura-text-to-speech-api-waitlist</title>
-            <link>https://nitter.cz/xiaohuggg/status/1733684125994033558#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1733684125994033558#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 10 Dec 2023 03:04:40 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>人工智能客服来了...🙃<br />
-<br />
-Deepgram Aura：实时、对话式的语音 AI 代理<br />
-<br />
-- 实时对话：超快速文本转语音API，不到200毫秒延迟<br />
-<br />
--人类般的声音：它不仅能模仿人类的语音，还能根据对话内容调整语调和情感<br />
-<br />
--适用多种场景：可用于各种需要语音交互的场景，如电话客服系统、智能家居、语音驱动的应用等。<br />
-<br />
-Aura可以为AI代理提供真实的声音，以自然的方式进行对话，包括及时回应、在思考时加入像“嗯”和“啊”这样的自然语音填充词，以及根据对话情境调整语调和情感。<br />
-<br />
-Deepgram的目标是在TTS能力中加入笑声和其他语音细节。<br />
-<br />
-Deepgram的Aura TTS API目前处于等待名单阶段，有兴趣的用户可以注册以首先尝试这一新技术。Aura预计将在不久的将来正式发布。<br />
-<br />
-排队：<a href="https://deepgram.com/learn/aura-text-to-speech-api-waitlist">deepgram.com/learn/aura-text…</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzM2ODE2OTg1OTUxMTA5MTIvcHUvaW1nL0I5MVpkc2h1bVNZUVZ3MEguanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1733678222775321058#m</id>
-            <title>欧盟通过全球首个人工智能监管法案 
-
-- 对AI应用进行风险分类，特别关注“高风险”应用，如自动驾驶汽车和医疗设备。
-
-- 禁止了企业从互联网或安全录像中抓取面部数据
-
-- 违规处罚：违反法案的公司可能面临其全球收入7%的罚款。
-
-- 对基础模型的限制：法案对捕获互联网数据以支持消费产品的大语言模型施加了限制。
-
-- 对开源模型的豁免：法案为开源模型提供了广泛的豁免，这些模型可以自由地被开发人员更改和使用。
-
-AI 法案的主要内容：
-
-1、高影响通用 AI 系统的义务：为满足某些标准的“高影响”通用 AI（GPAI）系统设立了义务，包括风险评估、对抗测试、事故报告等。
-
-2、透明度要求：要求这些系统创建技术文档和关于训练内容的“详细摘要”。
-
-3、公民投诉权利：公民有权对影响其权利的“高风险”系统提出投诉并获得解释。
-
-4、罚款框架：违反规则的公司将面临不同程度的罚款，根据违规行为和公司规模，罚款范围从 3500 万欧元到全球收入的 7% 。
-
-5、禁止的 AI 应用：禁止使用 AI 抓取 CCTV 录像中的面部图像、基于“敏感特征”（如种族、性取向、宗教或政治信仰）进行分类、在工作或学校中进行情感识别，或创建“社会评分”系统。
-
-6、执法部门使用生物识别系统的保障和豁免：规定了执法部门使用生物识别系统的保障和豁免，无论是实时使用还是用于录像中的证据搜索。
-
-7、立法最终对基础模型施加了限制，但对“开源模型”给予了广泛的豁免，这些模型是使用对开发人员自由提供的代码开发的，开发人员可以更改这些代码以用于自己的产品和工具。这一举措可能有利于反对该法律的欧洲开源 AI 公司，包括法国的 Mistral 和德国的 Aleph Alpha，以及发布了开源模型 LLaMA 的 Meta。
-
-监管生物识别监控和基础 AI 模型的争议
-
-关于监管实时生物识别监控（如面部识别）和像 OpenAI 的 ChatGPT 这样的“通用”基础 AI 模型的规则一直存在分歧。
-
-各方反应：
-
-欧洲数字隐私和人权团体：这些团体对国家安全和警务方面的许多豁免表示担忧，他们一直在向议会代表施压，要求他们坚决反对各国为其警察和情报机构开辟广泛豁免的努力。
-
-欧洲开源 AI 公司：对法案中对“开源模型”给予的广泛豁免可能感到满意，这有利于这些公司的发展和创新。
-
-专有模型开发者：可能对法案中对被归类为具有“系统性风险”的专有模型施加的额外义务感到关切。
-
-科技公司：对新法律带来的合规要求和潜在的财务处罚感到担忧。在欧洲 AI 领域，对新立法的担忧甚至更大，人们认为这可能会阻碍技术创新，进一步使美国和英国在 AI 研发方面更具优势。
-
-全球观察者：由于欧盟在科技监管方面的领导地位，全球其他地区的政府和监管机构可能会密切关注这一法案，考虑其对自己法律的影响。
-
-该法案预计在年底前达成最终协议，但法律最早可能要到 2025 年才会生效。该法案可能成为全球其他地区制定类似法律的标准。</title>
-            <link>https://nitter.cz/xiaohuggg/status/1733678222775321058#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1733678222775321058#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 10 Dec 2023 02:41:13 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>欧盟通过全球首个人工智能监管法案 <br />
-<br />
-- 对AI应用进行风险分类，特别关注“高风险”应用，如自动驾驶汽车和医疗设备。<br />
-<br />
-- 禁止了企业从互联网或安全录像中抓取面部数据<br />
-<br />
-- 违规处罚：违反法案的公司可能面临其全球收入7%的罚款。<br />
-<br />
-- 对基础模型的限制：法案对捕获互联网数据以支持消费产品的大语言模型施加了限制。<br />
-<br />
-- 对开源模型的豁免：法案为开源模型提供了广泛的豁免，这些模型可以自由地被开发人员更改和使用。<br />
-<br />
-AI 法案的主要内容：<br />
-<br />
-1、高影响通用 AI 系统的义务：为满足某些标准的“高影响”通用 AI（GPAI）系统设立了义务，包括风险评估、对抗测试、事故报告等。<br />
-<br />
-2、透明度要求：要求这些系统创建技术文档和关于训练内容的“详细摘要”。<br />
-<br />
-3、公民投诉权利：公民有权对影响其权利的“高风险”系统提出投诉并获得解释。<br />
-<br />
-4、罚款框架：违反规则的公司将面临不同程度的罚款，根据违规行为和公司规模，罚款范围从 3500 万欧元到全球收入的 7% 。<br />
-<br />
-5、禁止的 AI 应用：禁止使用 AI 抓取 CCTV 录像中的面部图像、基于“敏感特征”（如种族、性取向、宗教或政治信仰）进行分类、在工作或学校中进行情感识别，或创建“社会评分”系统。<br />
-<br />
-6、执法部门使用生物识别系统的保障和豁免：规定了执法部门使用生物识别系统的保障和豁免，无论是实时使用还是用于录像中的证据搜索。<br />
-<br />
-7、立法最终对基础模型施加了限制，但对“开源模型”给予了广泛的豁免，这些模型是使用对开发人员自由提供的代码开发的，开发人员可以更改这些代码以用于自己的产品和工具。这一举措可能有利于反对该法律的欧洲开源 AI 公司，包括法国的 Mistral 和德国的 Aleph Alpha，以及发布了开源模型 LLaMA 的 Meta。<br />
-<br />
-监管生物识别监控和基础 AI 模型的争议<br />
-<br />
-关于监管实时生物识别监控（如面部识别）和像 OpenAI 的 ChatGPT 这样的“通用”基础 AI 模型的规则一直存在分歧。<br />
-<br />
-各方反应：<br />
-<br />
-欧洲数字隐私和人权团体：这些团体对国家安全和警务方面的许多豁免表示担忧，他们一直在向议会代表施压，要求他们坚决反对各国为其警察和情报机构开辟广泛豁免的努力。<br />
-<br />
-欧洲开源 AI 公司：对法案中对“开源模型”给予的广泛豁免可能感到满意，这有利于这些公司的发展和创新。<br />
-<br />
-专有模型开发者：可能对法案中对被归类为具有“系统性风险”的专有模型施加的额外义务感到关切。<br />
-<br />
-科技公司：对新法律带来的合规要求和潜在的财务处罚感到担忧。在欧洲 AI 领域，对新立法的担忧甚至更大，人们认为这可能会阻碍技术创新，进一步使美国和英国在 AI 研发方面更具优势。<br />
-<br />
-全球观察者：由于欧盟在科技监管方面的领导地位，全球其他地区的政府和监管机构可能会密切关注这一法案，考虑其对自己法律的影响。<br />
-<br />
-该法案预计在年底前达成最终协议，但法律最早可能要到 2025 年才会生效。该法案可能成为全球其他地区制定类似法律的标准。</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzM2NzUwOTUzMzg2NzIxMjgvcHUvaW1nL1VMOEJIdFJKMHFEb1dUV1AuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1733505502150381931#m</id>
-            <title>📢小道消息：
-
-OpenAI将有大动作！
-
-消息称OpenAI很有可能将会在下周发布GPT-4.5… 
-
-时间不是很确定，最晚在月底前，推测在圣诞节前…
-
-还有推迟了的GPTs商店也将提前发布！
-
-由于Google Gemini的发布导致OpenAI将不得不提前打开武器库…🤓</title>
-            <link>https://nitter.cz/xiaohuggg/status/1733505502150381931#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1733505502150381931#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 09 Dec 2023 15:14:53 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>📢小道消息：<br />
-<br />
-OpenAI将有大动作！<br />
-<br />
-消息称OpenAI很有可能将会在下周发布GPT-4.5… <br />
-<br />
-时间不是很确定，最晚在月底前，推测在圣诞节前…<br />
-<br />
-还有推迟了的GPTs商店也将提前发布！<br />
-<br />
-由于Google Gemini的发布导致OpenAI将不得不提前打开武器库…🤓</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0E2bUVFRmJjQUFFdUNwLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1733487530698514557#m</id>
-            <title>额 这么牛叉
-
-俩角色
-
-能打架互动了✨🫡不知道咋弄的！</title>
-            <link>https://nitter.cz/xiaohuggg/status/1733487530698514557#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1733487530698514557#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 09 Dec 2023 14:03:28 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>额 这么牛叉<br />
-<br />
-俩角色<br />
-<br />
-能打架互动了✨🫡不知道咋弄的！</p>
-<p><a href="https://nitter.cz/AIWarper/status/1733344112605384734#m">nitter.cz/AIWarper/status/1733344112605384734#m</a></p>
                 ]]>
             </content:encoded>
         </item>
