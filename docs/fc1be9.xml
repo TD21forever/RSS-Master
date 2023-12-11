@@ -5,6 +5,193 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1734258292732633098#m</id>
+            <title>Meta前几天发布的一堆声音模型可以去下面链接试用Demo了，包括镜头 TTS、文本转声音效果等。</title>
+            <link>https://nitter.cz/op7418/status/1734258292732633098#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734258292732633098#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 17:06:12 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Meta前几天发布的一堆声音模型可以去下面链接试用Demo了，包括镜头 TTS、文本转声音效果等。</p>
+<p><a href="https://nitter.cz/AIatMeta/status/1734257634008531453#m">nitter.cz/AIatMeta/status/1734257634008531453#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734251620098289889#m</id>
+            <title>Meta AI开源了AVID，通过修复扩展了 AnimateDiff 等 T2V 模型的能力，同时还支持通过文本编辑视频以及生成无限时长的视频。
+文本编辑视频的能力包括修复视频的裁切、对视频对象进行更改、改变视频内对象的纹理和颜色、删除视频对应内容、更换视频所处的环境。
+
+简介：
+文本引导的视频修复面临三个主要挑战：（i）编辑视频的时间一致性，（ii）在不同的结构保真度级别支持不同的修复类型，以及（iii）处理可变的视频长度。为了解决这些挑战，我们引入了带有扩散模型的任意长度视频修复，称为 AVID。
+我们的模型的核心配备了有效的运动模块和可调节的结构引导，用于固定长度的视频修复。在此基础上，我们提出了一种新颖的时间多重扩散采样管道，具有中帧注意力引导机制，有助于生成任何所需持续时间的视频。
+我们的综合实验表明，我们的模型可以在不同的视频持续时间范围内稳健地处理各种修复类型，并且质量很高。
+
+方法：
+培训阶段，我们采用两步方法。
+ (a) 运动模块集成在主要文本到图像 (T2I) 修复模型的每一层之后，通过应用于视频数据的合成掩模针对视频修复任务进行优化。 
+(b) 在第二个训练步骤中，我们保留 UNet $\epsilon_\theta$ 中的参数，并利用 UNet 编码器的参数副本专门训练结构指导模块 $\mathbf{s}_\theta$ 。在推理过程中，
+(c)，对于长度为 $N^\prime$ 的视频，我们构建一系列片段，每个片段包含 $N$ 个连续帧。在每个去噪步骤中，都会计算并汇总每个分段的结果。
+
+论文地址：https://zhang-zx.github.io/AVID/</title>
+            <link>https://nitter.cz/op7418/status/1734251620098289889#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734251620098289889#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 16:39:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Meta AI开源了AVID，通过修复扩展了 AnimateDiff 等 T2V 模型的能力，同时还支持通过文本编辑视频以及生成无限时长的视频。<br />
+文本编辑视频的能力包括修复视频的裁切、对视频对象进行更改、改变视频内对象的纹理和颜色、删除视频对应内容、更换视频所处的环境。<br />
+<br />
+简介：<br />
+文本引导的视频修复面临三个主要挑战：（i）编辑视频的时间一致性，（ii）在不同的结构保真度级别支持不同的修复类型，以及（iii）处理可变的视频长度。为了解决这些挑战，我们引入了带有扩散模型的任意长度视频修复，称为 AVID。<br />
+我们的模型的核心配备了有效的运动模块和可调节的结构引导，用于固定长度的视频修复。在此基础上，我们提出了一种新颖的时间多重扩散采样管道，具有中帧注意力引导机制，有助于生成任何所需持续时间的视频。<br />
+我们的综合实验表明，我们的模型可以在不同的视频持续时间范围内稳健地处理各种修复类型，并且质量很高。<br />
+<br />
+方法：<br />
+培训阶段，我们采用两步方法。<br />
+ (a) 运动模块集成在主要文本到图像 (T2I) 修复模型的每一层之后，通过应用于视频数据的合成掩模针对视频修复任务进行优化。 <br />
+(b) 在第二个训练步骤中，我们保留 UNet $\epsilon_\theta$ 中的参数，并利用 UNet 编码器的参数副本专门训练结构指导模块 $\mathbf{s}_\theta$ 。在推理过程中，<br />
+(c)，对于长度为 <a href="https://nitter.cz/search?q=%23N">$N</a>^\prime$ 的视频，我们构建一系列片段，每个片段包含 <a href="https://nitter.cz/search?q=%23N">$N</a>$ 个连续帧。在每个去噪步骤中，都会计算并汇总每个分段的结果。<br />
+<br />
+论文地址：<a href="https://zhang-zx.github.io/AVID/">zhang-zx.github.io/AVID/</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQyNTEyODU1ODU3NTIwNjQvcHUvaW1nL1VhOENCcmpTSUVFcGtDdVQuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734193477947449612#m</id>
+            <title>RT by @op7418: 这个视频编辑项目可以模仿 Pika 的视频编辑功能，实现利用文字对视频某一部分内容的变化和编辑。
+不过从演示来看没有 Pika的精准，只能通过文字控制。 并且将会开源，这下开源社区也可以进行视频编辑了，而且跟现有的 SD 生态兼容。下面是具体介绍：  
+
+简介：引入了RAVE，一种零样本视频编辑方法，利用预训练的文本到图像扩散模型而无需额外训练。RAVE接受输入视频和文本提示，能够生成高质量的视频，同时保留原始的动作和语义结构。
+它采用了一种新颖的噪声洗牌策略，利用帧之间的时空交互，比现有方法更快地生成时间上连贯的视频。它在内存需求方面也非常高效，能够处理更长的视频。RAVE能够进行各种编辑，从局部属性修改到形状变换。 
+
+ 原理：流程始于使用预训练的T2I模型进行DDIM反演，并使用现成的条件预处理器对输入视频进行条件提取（ VK ）。这些条件随后被输入到ControlNet中。
+在RAVE视频编辑过程中，使用条件网格（ CL ）、潜在网格（ GtL ）和目标文本提示作为ControlNet的输入，对T个时间步骤进行扩散去噪。在每个去噪步骤中，对潜在网格（ GtL ）和条件网格（ CL ）进行随机洗牌。经过T个时间步骤后，重新排列潜在网格，并得到最终的输出视频（ V∗K ）。 
+
+论文：https://arxiv.org/abs/2312.04524</title>
+            <link>https://nitter.cz/op7418/status/1734193477947449612#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734193477947449612#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 12:48:39 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这个视频编辑项目可以模仿 Pika 的视频编辑功能，实现利用文字对视频某一部分内容的变化和编辑。<br />
+不过从演示来看没有 Pika的精准，只能通过文字控制。 并且将会开源，这下开源社区也可以进行视频编辑了，而且跟现有的 SD 生态兼容。下面是具体介绍：  <br />
+<br />
+简介：引入了RAVE，一种零样本视频编辑方法，利用预训练的文本到图像扩散模型而无需额外训练。RAVE接受输入视频和文本提示，能够生成高质量的视频，同时保留原始的动作和语义结构。<br />
+它采用了一种新颖的噪声洗牌策略，利用帧之间的时空交互，比现有方法更快地生成时间上连贯的视频。它在内存需求方面也非常高效，能够处理更长的视频。RAVE能够进行各种编辑，从局部属性修改到形状变换。 <br />
+<br />
+ 原理：流程始于使用预训练的T2I模型进行DDIM反演，并使用现成的条件预处理器对输入视频进行条件提取（ VK ）。这些条件随后被输入到ControlNet中。<br />
+在RAVE视频编辑过程中，使用条件网格（ CL ）、潜在网格（ GtL ）和目标文本提示作为ControlNet的输入，对T个时间步骤进行扩散去噪。在每个去噪步骤中，对潜在网格（ GtL ）和条件网格（ CL ）进行随机洗牌。经过T个时间步骤后，重新排列潜在网格，并得到最终的输出视频（ V∗K ）。 <br />
+<br />
+论文：<a href="https://arxiv.org/abs/2312.04524">arxiv.org/abs/2312.04524</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQxOTM0MTE2NjQ4NTUwNDAvcHUvaW1nL091cnIycFZLb2FkUXFyWkguanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734114699590217742#m</id>
+            <title>RT by @op7418: 用 Visual Electric 生成了几张图片测试了一下，图片的美观度非常好，提示词响应也还行，简单的提示也能出不错的。普通人直接上手也能生成非常漂亮的图片。
+图片质量除了模型之外，他们还通过资源库的示例图片来保证，你可以快速生成类似的。
+同时他们还给了色板可以指定生成图片的主要颜色也保证了图片的美观度。
+提示词在 ALT 里面。</title>
+            <link>https://nitter.cz/op7418/status/1734114699590217742#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734114699590217742#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 07:35:37 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>用 Visual Electric 生成了几张图片测试了一下，图片的美观度非常好，提示词响应也还行，简单的提示也能出不错的。普通人直接上手也能生成非常漂亮的图片。<br />
+图片质量除了模型之外，他们还通过资源库的示例图片来保证，你可以快速生成类似的。<br />
+同时他们还给了色板可以指定生成图片的主要颜色也保证了图片的美观度。<br />
+提示词在 ALT 里面。</p>
+<p><a href="https://nitter.cz/op7418/status/1734105985558671423#m">nitter.cz/op7418/status/1734105985558671423#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEUDVDWGFjQUFiblFkLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEUDA1ZWE4QUF2clV0LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEUUIyNmFFQUE5d25FLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEUUcwcWJZQUFjMlN4LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734169185390117064#m</id>
+            <title>RT by @op7418: 前几天谷歌出的Style Aligned风格迁移项目，也已经有 ComfyUI 节点了，这个项目的主要功能是可以让生成的图片与参考图片的风格保持一致，但是画面内容可以不同。
+这个节点目前可以让同一批次生成的图片都和第一张的风格一样，后期会增加输入图片的风格迁移功能。
+下面图片就是启用Style Aligned和没有启用的区别。
+谷歌项目地址：https://style-aligned-gen.github.io/
+ComfyUI 插件地址：https://github.com/brianfitzgerald/style_aligned_comfy</title>
+            <link>https://nitter.cz/op7418/status/1734169185390117064#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734169185390117064#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 11:12:07 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>前几天谷歌出的Style Aligned风格迁移项目，也已经有 ComfyUI 节点了，这个项目的主要功能是可以让生成的图片与参考图片的风格保持一致，但是画面内容可以不同。<br />
+这个节点目前可以让同一批次生成的图片都和第一张的风格一样，后期会增加输入图片的风格迁移功能。<br />
+下面图片就是启用Style Aligned和没有启用的区别。<br />
+谷歌项目地址：<a href="https://style-aligned-gen.github.io/">style-aligned-gen.github.io/</a><br />
+ComfyUI 插件地址：<a href="https://github.com/brianfitzgerald/style_aligned_comfy">github.com/brianfitzgerald/s…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JFQmRicWFZQUExYU5wLnBuZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JFQnFyT2IwQUFzalhSLnBuZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734138331498422449#m</id>
+            <title>RT by @op7418: 一个 ComfyUI 节点，可以将多张照片转换成连贯的视频，即使是毫不相关的图片也可以，也提供了示例的工作流。
+
+主要的参数就三个：
+Key frame position：提供的每个主关键帧之间要生成多少帧。
+Length of influence：应用 ControlNet 和 IPAdapter 的帧数。
+Strength of influence：控制的强度。
+
+这里是节点和工作流地址：https://github.com/banodoco/steerable-motion</title>
+            <link>https://nitter.cz/op7418/status/1734138331498422449#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734138331498422449#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 09:09:31 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>一个 ComfyUI 节点，可以将多张照片转换成连贯的视频，即使是毫不相关的图片也可以，也提供了示例的工作流。<br />
+<br />
+主要的参数就三个：<br />
+Key frame position：提供的每个主关键帧之间要生成多少帧。<br />
+Length of influence：应用 ControlNet 和 IPAdapter 的帧数。<br />
+Strength of influence：控制的强度。<br />
+<br />
+这里是节点和工作流地址：<a href="https://github.com/banodoco/steerable-motion">github.com/banodoco/steerabl…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQxMzgyMzE0NzI2Njg2NzIvcHUvaW1nL3hNTktlc3RwVjdsQTdtbjYuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1734243194635002135#m</id>
             <title>Hugggingface的人发布了一篇详细介绍MoE架构模型的文章《专家混合模型解释》这里摘录一些我能看得懂的，做一下笔记，中间涉及到大量数学公式的我就歇菜了，各位可以去看原文：
 
@@ -345,42 +532,6 @@ https://github.com/llmware-ai/llmware</title>
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1734193477947449612#m</id>
-            <title>这个视频编辑项目可以模仿 Pika 的视频编辑功能，实现利用文字对视频某一部分内容的变化和编辑。
-不过从演示来看没有 Pika的精准，只能通过文字控制。 并且将会开源，这下开源社区也可以进行视频编辑了，而且跟现有的 SD 生态兼容。下面是具体介绍：  
-
-简介：引入了RAVE，一种零样本视频编辑方法，利用预训练的文本到图像扩散模型而无需额外训练。RAVE接受输入视频和文本提示，能够生成高质量的视频，同时保留原始的动作和语义结构。
-它采用了一种新颖的噪声洗牌策略，利用帧之间的时空交互，比现有方法更快地生成时间上连贯的视频。它在内存需求方面也非常高效，能够处理更长的视频。RAVE能够进行各种编辑，从局部属性修改到形状变换。 
-
- 原理：流程始于使用预训练的T2I模型进行DDIM反演，并使用现成的条件预处理器对输入视频进行条件提取（ VK ）。这些条件随后被输入到ControlNet中。
-在RAVE视频编辑过程中，使用条件网格（ CL ）、潜在网格（ GtL ）和目标文本提示作为ControlNet的输入，对T个时间步骤进行扩散去噪。在每个去噪步骤中，对潜在网格（ GtL ）和条件网格（ CL ）进行随机洗牌。经过T个时间步骤后，重新排列潜在网格，并得到最终的输出视频（ V∗K ）。 
-
-论文：https://arxiv.org/abs/2312.04524</title>
-            <link>https://nitter.cz/op7418/status/1734193477947449612#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734193477947449612#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 12:48:39 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个视频编辑项目可以模仿 Pika 的视频编辑功能，实现利用文字对视频某一部分内容的变化和编辑。<br />
-不过从演示来看没有 Pika的精准，只能通过文字控制。 并且将会开源，这下开源社区也可以进行视频编辑了，而且跟现有的 SD 生态兼容。下面是具体介绍：  <br />
-<br />
-简介：引入了RAVE，一种零样本视频编辑方法，利用预训练的文本到图像扩散模型而无需额外训练。RAVE接受输入视频和文本提示，能够生成高质量的视频，同时保留原始的动作和语义结构。<br />
-它采用了一种新颖的噪声洗牌策略，利用帧之间的时空交互，比现有方法更快地生成时间上连贯的视频。它在内存需求方面也非常高效，能够处理更长的视频。RAVE能够进行各种编辑，从局部属性修改到形状变换。 <br />
-<br />
- 原理：流程始于使用预训练的T2I模型进行DDIM反演，并使用现成的条件预处理器对输入视频进行条件提取（ VK ）。这些条件随后被输入到ControlNet中。<br />
-在RAVE视频编辑过程中，使用条件网格（ CL ）、潜在网格（ GtL ）和目标文本提示作为ControlNet的输入，对T个时间步骤进行扩散去噪。在每个去噪步骤中，对潜在网格（ GtL ）和条件网格（ CL ）进行随机洗牌。经过T个时间步骤后，重新排列潜在网格，并得到最终的输出视频（ V∗K ）。 <br />
-<br />
-论文：<a href="https://arxiv.org/abs/2312.04524">arxiv.org/abs/2312.04524</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQxOTM0MTE2NjQ4NTUwNDAvcHUvaW1nL091cnIycFZLb2FkUXFyWkguanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://nitter.cz/op7418/status/1734186106151968821#m</id>
             <title>看了一下流量暴涨的两个，Hix 是 AI 写作应用，官网营销感很重，而且有返利和推广机制，感觉对海外学生一个比较好的功能是绕过 AI 内容检测这个。
 Toolify是一个 AI 导航站，内容确实非常丰富体验也做的不错，居然还有付费推广。</title>
@@ -416,175 +567,6 @@ Toolify是一个 AI 导航站，内容确实非常丰富体验也做的不错，
                     
                     <p>Claude 越更新分数越低，模型质量越来越差，可能更他们的对齐工作有关系。不过越来越低还是太离谱了。</p>
 <p><a href="https://nitter.cz/Drachs1978/status/1733952093462188235#m">nitter.cz/Drachs1978/status/1733952093462188235#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1734139143259861185#m</id>
-            <title>RT by @op7418: Mixtral AI公布MoE 8x7B详细细节：
-
-• 32k上下文。
-• 支持英语、法语、意大利语、德语和西班牙语。
-• 性能超过Llama 2系列和GPT3.5
-• 在代码生成方面表现强劲。
-• 在MT-Bench上达到8.3的分数。
-
-技术细节：
-
-•Mixtral是一个稀疏混合专家网络，是一个仅解码器模型，其中前馈块从8组不同的参数组中选择。在每一层，对于每个令牌，路由网络选择两组（“专家”）来处理令牌并加性地结合它们的输出。
-
-•Mixtral总共有45B个参数，但每个令牌只使用12B个参数。因此，它以与12B模型相同的速度和成本处理输入和生成输出。
-
-详细内容：https://mistral.ai/news/mixtral-of-experts/</title>
-            <link>https://nitter.cz/xiaohuggg/status/1734139143259861185#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734139143259861185#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 09:12:45 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Mixtral AI公布MoE 8x7B详细细节：<br />
-<br />
-• 32k上下文。<br />
-• 支持英语、法语、意大利语、德语和西班牙语。<br />
-• 性能超过Llama 2系列和GPT3.5<br />
-• 在代码生成方面表现强劲。<br />
-• 在MT-Bench上达到8.3的分数。<br />
-<br />
-技术细节：<br />
-<br />
-•Mixtral是一个稀疏混合专家网络，是一个仅解码器模型，其中前馈块从8组不同的参数组中选择。在每一层，对于每个令牌，路由网络选择两组（“专家”）来处理令牌并加性地结合它们的输出。<br />
-<br />
-•Mixtral总共有45B个参数，但每个令牌只使用12B个参数。因此，它以与12B模型相同的速度和成本处理输入和生成输出。<br />
-<br />
-详细内容：<a href="https://mistral.ai/news/mixtral-of-experts/">mistral.ai/news/mixtral-of-e…</a></p>
-<p><a href="https://nitter.cz/xiaohuggg/status/1733694954260901907#m">nitter.cz/xiaohuggg/status/1733694954260901907#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEbU9ZcmE0QUFyS0V2LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1734104301155262545#m</id>
-            <title>RT by @op7418: 上次Google的Gemini演示视频是后期剪辑后结果，于是有网友拿GPT-4V试验了部分场景，发现基本上能还原Gemini的演示效果，并且他把代码开源了：https://github.com/gregsadetsky/sagittarius
-
-原始视频：http://www.youtube.com/watch?v=__nL7Vc0OCg</title>
-            <link>https://nitter.cz/dotey/status/1734104301155262545#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1734104301155262545#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 06:54:18 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>上次Google的Gemini演示视频是后期剪辑后结果，于是有网友拿GPT-4V试验了部分场景，发现基本上能还原Gemini的演示效果，并且他把代码开源了：<a href="https://github.com/gregsadetsky/sagittarius">github.com/gregsadetsky/sagi…</a><br />
-<br />
-原始视频：<a href="http://www.youtube.com/watch?v=__nL7Vc0OCg">youtube.com/watch?v=__nL7Vc0…</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQxMDM5ODgyMjI1MDkwNTYvcHUvaW1nL2o5OUNGWmxoaU15Qng1bE0uanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734181821401981404#m</id>
-            <title>R to @op7418: 补充一下，如果懒得搞 ComfyUI 的话，Runway 也可以免费做类似的插值动画。</title>
-            <link>https://nitter.cz/op7418/status/1734181821401981404#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734181821401981404#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 12:02:20 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>补充一下，如果懒得搞 ComfyUI 的话，Runway 也可以免费做类似的插值动画。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734180435268440243#m</id>
-            <title>这个好，X-Adapter可以让SD 1.5 生态中的 Lora 和 Contorlnet 模型可以用在 SDXL 的 CKPT 上，这样 SDXL 的生态一下就丰富了很多，不过目前阻碍 SDXL 普及的主要还是算力和显存占用太高了。</title>
-            <link>https://nitter.cz/op7418/status/1734180435268440243#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734180435268440243#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 11:56:49 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个好，X-Adapter可以让SD 1.5 生态中的 Lora 和 Contorlnet 模型可以用在 SDXL 的 CKPT 上，这样 SDXL 的生态一下就丰富了很多，不过目前阻碍 SDXL 普及的主要还是算力和显存占用太高了。</p>
-<p><a href="https://nitter.cz/dreamingtulpa/status/1734135100554490151#m">nitter.cz/dreamingtulpa/status/1734135100554490151#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734171513702748340#m</id>
-            <title>有人用magic-animate 和 AnimateDiff攒了一个阿里Animate Anybody的非官方实现，阿里要再不开源，估计也就不需要了，哈哈哈哈。</title>
-            <link>https://nitter.cz/op7418/status/1734171513702748340#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734171513702748340#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 11:21:22 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>有人用magic-animate 和 AnimateDiff攒了一个阿里Animate Anybody的非官方实现，阿里要再不开源，估计也就不需要了，哈哈哈哈。</p>
-<p><a href="https://nitter.cz/toyxyz3/status/1734098765668356359#m">nitter.cz/toyxyz3/status/1734098765668356359#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734170571469123869#m</id>
-            <title>R to @op7418: 用 Pika 1.0 的局部修复功能将阿甘正传中的阿甘变成了浣熊。
-https://x.com/MatanCohenGrumi/status/1734050966826275030?s=20</title>
-            <link>https://nitter.cz/op7418/status/1734170571469123869#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734170571469123869#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 11:17:38 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>用 Pika 1.0 的局部修复功能将阿甘正传中的阿甘变成了浣熊。<br />
-<a href="https://x.com/MatanCohenGrumi/status/1734050966826275030?s=20">x.com/MatanCohenGrumi/status…</a></p>
-<p><a href="https://nitter.cz/MatanCohenGrumi/status/1734050966826275030#m">nitter.cz/MatanCohenGrumi/status/1734050966826275030#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734169185390117064#m</id>
-            <title>前几天谷歌出的Style Aligned风格迁移项目，也已经有 ComfyUI 节点了，这个项目的主要功能是可以让生成的图片与参考图片的风格保持一致，但是画面内容可以不同。
-这个节点目前可以让同一批次生成的图片都和第一张的风格一样，后期会增加输入图片的风格迁移功能。
-下面图片就是启用Style Aligned和没有启用的区别。
-谷歌项目地址：https://style-aligned-gen.github.io/
-ComfyUI 插件地址：https://github.com/brianfitzgerald/style_aligned_comfy</title>
-            <link>https://nitter.cz/op7418/status/1734169185390117064#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734169185390117064#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 11:12:07 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>前几天谷歌出的Style Aligned风格迁移项目，也已经有 ComfyUI 节点了，这个项目的主要功能是可以让生成的图片与参考图片的风格保持一致，但是画面内容可以不同。<br />
-这个节点目前可以让同一批次生成的图片都和第一张的风格一样，后期会增加输入图片的风格迁移功能。<br />
-下面图片就是启用Style Aligned和没有启用的区别。<br />
-谷歌项目地址：<a href="https://style-aligned-gen.github.io/">style-aligned-gen.github.io/</a><br />
-ComfyUI 插件地址：<a href="https://github.com/brianfitzgerald/style_aligned_comfy">github.com/brianfitzgerald/s…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JFQmRicWFZQUExYU5wLnBuZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JFQnFyT2IwQUFzalhSLnBuZw==" />
                 ]]>
             </content:encoded>
         </item>
