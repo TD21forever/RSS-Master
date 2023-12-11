@@ -5,6 +5,42 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1734193477947449612#m</id>
+            <title>这个视频编辑项目可以模仿 Pika 的视频编辑功能，实现利用文字对视频某一部分内容的变化和编辑。
+不过从演示来看没有 Pika的精准，只能通过文字控制。 并且将会开源，这下开源社区也可以进行视频编辑了，而且跟现有的 SD 生态兼容。下面是具体介绍：  
+
+简介：引入了RAVE，一种零样本视频编辑方法，利用预训练的文本到图像扩散模型而无需额外训练。RAVE接受输入视频和文本提示，能够生成高质量的视频，同时保留原始的动作和语义结构。
+它采用了一种新颖的噪声洗牌策略，利用帧之间的时空交互，比现有方法更快地生成时间上连贯的视频。它在内存需求方面也非常高效，能够处理更长的视频。RAVE能够进行各种编辑，从局部属性修改到形状变换。 
+
+ 原理：流程始于使用预训练的T2I模型进行DDIM反演，并使用现成的条件预处理器对输入视频进行条件提取（ VK ）。这些条件随后被输入到ControlNet中。
+在RAVE视频编辑过程中，使用条件网格（ CL ）、潜在网格（ GtL ）和目标文本提示作为ControlNet的输入，对T个时间步骤进行扩散去噪。在每个去噪步骤中，对潜在网格（ GtL ）和条件网格（ CL ）进行随机洗牌。经过T个时间步骤后，重新排列潜在网格，并得到最终的输出视频（ V∗K ）。 
+
+论文：https://arxiv.org/abs/2312.04524</title>
+            <link>https://nitter.cz/op7418/status/1734193477947449612#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734193477947449612#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 12:48:39 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这个视频编辑项目可以模仿 Pika 的视频编辑功能，实现利用文字对视频某一部分内容的变化和编辑。<br />
+不过从演示来看没有 Pika的精准，只能通过文字控制。 并且将会开源，这下开源社区也可以进行视频编辑了，而且跟现有的 SD 生态兼容。下面是具体介绍：  <br />
+<br />
+简介：引入了RAVE，一种零样本视频编辑方法，利用预训练的文本到图像扩散模型而无需额外训练。RAVE接受输入视频和文本提示，能够生成高质量的视频，同时保留原始的动作和语义结构。<br />
+它采用了一种新颖的噪声洗牌策略，利用帧之间的时空交互，比现有方法更快地生成时间上连贯的视频。它在内存需求方面也非常高效，能够处理更长的视频。RAVE能够进行各种编辑，从局部属性修改到形状变换。 <br />
+<br />
+ 原理：流程始于使用预训练的T2I模型进行DDIM反演，并使用现成的条件预处理器对输入视频进行条件提取（ VK ）。这些条件随后被输入到ControlNet中。<br />
+在RAVE视频编辑过程中，使用条件网格（ CL ）、潜在网格（ GtL ）和目标文本提示作为ControlNet的输入，对T个时间步骤进行扩散去噪。在每个去噪步骤中，对潜在网格（ GtL ）和条件网格（ CL ）进行随机洗牌。经过T个时间步骤后，重新排列潜在网格，并得到最终的输出视频（ V∗K ）。 <br />
+<br />
+论文：<a href="https://arxiv.org/abs/2312.04524">arxiv.org/abs/2312.04524</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQxOTM0MTE2NjQ4NTUwNDAvcHUvaW1nL091cnIycFZLb2FkUXFyWkguanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1734186106151968821#m</id>
             <title>看了一下流量暴涨的两个，Hix 是 AI 写作应用，官网营销感很重，而且有返利和推广机制，感觉对海外学生一个比较好的功能是绕过 AI 内容检测这个。
 Toolify是一个 AI 导航站，内容确实非常丰富体验也做的不错，居然还有付费推广。</title>
@@ -144,46 +180,6 @@ Toolify是一个 AI 导航站，内容确实非常丰富体验也做的不错，
                     
                     <p>这个好，X-Adapter可以让SD 1.5 生态中的 Lora 和 Contorlnet 模型可以用在 SDXL 的 CKPT 上，这样 SDXL 的生态一下就丰富了很多，不过目前阻碍 SDXL 普及的主要还是算力和显存占用太高了。</p>
 <p><a href="https://nitter.cz/dreamingtulpa/status/1734135100554490151#m">nitter.cz/dreamingtulpa/status/1734135100554490151#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734177441801994377#m</id>
-            <title>这个视频编辑项目可以模仿 Pika 的视频编辑功能，实现利用文字对视频某一部分内容的变化和编辑。不过从演示来看没有 Pika的精准，只能通过文字控制。
-并且将会开源，这下开源社区也可以进行视频编辑了，而且跟现有的 SD 生态兼容。下面是具体介绍：
-
-简介：
-引入了RAVE，一种零样本视频编辑方法，利用预训练的文本到图像扩散模型而无需额外训练。RAVE接受输入视频和文本提示，能够生成高质量的视频，同时保留原始的动作和语义结构。
-它采用了一种新颖的噪声洗牌策略，利用帧之间的时空交互，比现有方法更快地生成时间上连贯的视频。它在内存需求方面也非常高效，能够处理更长的视频。RAVE能够进行各种编辑，从局部属性修改到形状变换。
-
-原理：
-流程始于使用预训练的T2I模型进行DDIM反演，并使用现成的条件预处理器对输入视频进行条件提取（ VK ）。这些条件随后被输入到ControlNet中。在RAVE视频编辑过程中，使用条件网格（ CL ）、潜在网格（ GtL ）和目标文本提示作为ControlNet的输入，对T个时间步骤进行扩散去噪。在每个去噪步骤中，对潜在网格（ GtL ）和条件网格（ CL ）进行随机洗牌。经过T个时间步骤后，重新排列潜在网格，并得到最终的输出视频（ V∗K ）。
-
-代码库：https://github.com/rehg-lab/RAVE
-论文：https://arxiv.org/abs/2312.04524</title>
-            <link>https://nitter.cz/op7418/status/1734177441801994377#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734177441801994377#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 11:44:56 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个视频编辑项目可以模仿 Pika 的视频编辑功能，实现利用文字对视频某一部分内容的变化和编辑。不过从演示来看没有 Pika的精准，只能通过文字控制。<br />
-并且将会开源，这下开源社区也可以进行视频编辑了，而且跟现有的 SD 生态兼容。下面是具体介绍：<br />
-<br />
-简介：<br />
-引入了RAVE，一种零样本视频编辑方法，利用预训练的文本到图像扩散模型而无需额外训练。RAVE接受输入视频和文本提示，能够生成高质量的视频，同时保留原始的动作和语义结构。<br />
-它采用了一种新颖的噪声洗牌策略，利用帧之间的时空交互，比现有方法更快地生成时间上连贯的视频。它在内存需求方面也非常高效，能够处理更长的视频。RAVE能够进行各种编辑，从局部属性修改到形状变换。<br />
-<br />
-原理：<br />
-流程始于使用预训练的T2I模型进行DDIM反演，并使用现成的条件预处理器对输入视频进行条件提取（ VK ）。这些条件随后被输入到ControlNet中。在RAVE视频编辑过程中，使用条件网格（ CL ）、潜在网格（ GtL ）和目标文本提示作为ControlNet的输入，对T个时间步骤进行扩散去噪。在每个去噪步骤中，对潜在网格（ GtL ）和条件网格（ CL ）进行随机洗牌。经过T个时间步骤后，重新排列潜在网格，并得到最终的输出视频（ V∗K ）。<br />
-<br />
-代码库：<a href="https://github.com/rehg-lab/RAVE">github.com/rehg-lab/RAVE</a><br />
-论文：<a href="https://arxiv.org/abs/2312.04524">arxiv.org/abs/2312.04524</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQxNzczNTAxMTQ1NDk3NjAvcHUvaW1nLzlXQlJfOFgxcFN2VEhfN24uanBn" />
                 ]]>
             </content:encoded>
         </item>
