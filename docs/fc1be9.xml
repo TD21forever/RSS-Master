@@ -5,6 +5,179 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1734243194635002135#m</id>
+            <title>Hugggingface的人发布了一篇详细介绍MoE架构模型的文章《专家混合模型解释》这里摘录一些我能看得懂的，做一下笔记，中间涉及到大量数学公式的我就歇菜了，各位可以去看原文：
+
+MoE模型太长不看部分：
+◈ 预训练模型比密集模型快得多；
+◈ 相较于具有相同参数数量的模型，具有更快的推理速度；
+◈ 需要高VRAM，因为所有专家模型都加载在显存中；
+◈ 在微调中面临许多挑战，但最近对MoE指导微调的工作很有前景。
+
+专家混合模型（MoE）是什么？
+模型的规模是提高模型质量的最重要因素之一。在固定的计算预算下，训练一个更大的模型进行较少的步骤比训练一个较小的模型进行更多的步骤更好。
+专家混合模型使得模型可以用更少的计算资源进行预训练，这意味着你可以在相同的计算预算下大幅扩展模型或数据集的规模，就像密集模型一样。特别是，在预训练阶段，专家混合模型应该比其密集对应模型更快地达到相同的质量。
+
+MoE由两个主要元素组成：
+Sarse MoE层：p被用来代替密集的前馈网络（FFN）层。MoE层有一定数量的“专家”（例如8个），每个专家都是一个神经网络。在实践中，这些专家是FFN，但它们也可以是更复杂的网络，甚至是MoE本身，从而导致分层MoE。
+一个门控网络或路由器：确定将哪些令牌发送给哪个专家模型。正如我们将在后面探讨的那样，我们可以将一个Token发送给多个专家。如何将Token路由到专家是在使用MoEs时的重要决策之一 - 路由器由学习参数组成，并且与网络的其余部分一起进行预训练。
+因此，总结一下，在MoEs中，我们用门控网络和一定数量的专家替换了transformer模型的每个FFN层。
+
+尽管MoEs相比密集模型提供了诸如高效的预训练和更快的推理等好处，但它们也面临挑战：
+训练：MoEs能够显著提高计算效率的预训练，但在微调过程中历来存在泛化困难，导致过拟合。
+推理：虽然混合专家模型可能有许多参数，但推理过程中只使用其中一部分。与具有相同参数数量的密集模型相比，这导致推理速度大大加快。然而，所有参数都需要加载到显存中，因此显存需求很高。
+
+MoEs简史：
+MoEs的根源可以追溯到1991年的论文《自适应局部专家混合》。这个想法类似于集成方法，旨在为由独立网络组成的系统提供监督程序，每个网络处理训练案例的不同子集。每个独立网络或专家模型都专门处理输入空间的不同区域。专家模型是如何选择的？一个门控网络确定每个专家模型的权重。在训练过程中，专家模型和门控都会被训练。
+
+2010年至2015年期间，两个不同的研究领域为后来的MoE进展做出了贡献：
+专家模型作为组件：在传统的MoE设置中，整个系统包括一个门控网络和多个专家。MoE作为整个模型已经在SVMs、高斯过程和其他方法中得到了探索。Eigen、Ranzato和Ilya的工作探索了MoE作为更深层网络的组成部分。这使得MoE可以作为多层网络中的层，使模型能够同时变得庞大和高效。
+条件计算：传统网络通过每一层处理所有输入数据。在这段时间里，Yoshua Bengio研究了基于输入标记动态激活或停用组件的方法。
+这些工作导致在NLP的背景下探索专家模型混合。具体来说，Shazeer等人（2017年，其中“等人”包括Geoffrey Hinton和Jeff Dean，Google的Chuck Norris）通过引入稀疏性（Sparsity），将这一想法扩展到了一个137B的LSTM（当时的事实NLP架构，由Schmidhuber创建），从而实现了非常快速的推理，即使在高规模下也能保持。
+
+Sparsity是什么？（这部分完全看不懂）各位自己去看原文吧，好多公式。
+
+MoEs的负载均衡Token：
+如前所述，如果我们所有的Token都发送给几个热门专家模型，那将使训练效率低下。在正常的MoE训练中，门控网络会收敛到大多激活相同的几个专家模型。这种自我强化会使受青睐的专家模型训练得更快，因此被选择得更多。为了减轻这种情况，添加了辅助损失以鼓励给予所有专家模型相等的重要性。这种损失确保所有专家模型接收大致相等数量的训练样本。接下来的部分还将探讨专家模型能力的概念，该概念引入了专家可以处理多少Token的阈值。在 `transformers` 中，辅助损失通过 `aux_loss` 参数暴露出来。
+
+Switch Transformers采用了简化的单专家策略。这种方法的影响是：
+◈ 路由器计算减少
+◈ 每个专家的批处理大小至少可以减半
+◈ 通信成本降低
+◈ 质量得到保留
+
+增加专家模型数量会如何影响预训练？
+更多的专家会导致改善样本效率和更快的加速，但这些增益是递减的（特别是在256或512之后），并且推理过程中会需要更多的VRAM。在大规模研究的Switch Transformers中研究的特性在小规模下也是一致的，即使每层只有2、4或8个专家。
+
+何时使用稀疏的MoE模型而不是密集（dense）模型？
+专家模型在具有许多机器的高吞吐量场景中非常有用。在预训练的固定计算预算下，稀疏模型将更加优化。对于具有较少VRAM的低吞吐量场景，密集模型将更好。
+
+MoE模型未来的发力方向：
+进一步实验将稀疏的MoE蒸馏为参数更少但具有类似参数数量的密集模型。
+另一个领域将是MoE的量化。 QMoE（2023年10月）是朝着这个方向迈出的一大步，通过将MoE量化为每个参数不到1比特，从而将使用3.2TB加速器的1.6T交换Transformer压缩到只有160GB。
+
+简而言之，一些有趣的探索领域：
+◈ 将Mixtral提炼成密集模型；
+◈ 探索专家模型合并技术及其对推理时间的影响；
+◈ 执行Mixtral的极端量化技术。
+
+原文链接：https://huggingface.co/blog/moe</title>
+            <link>https://nitter.cz/op7418/status/1734243194635002135#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734243194635002135#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 16:06:12 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Hugggingface的人发布了一篇详细介绍MoE架构模型的文章《专家混合模型解释》这里摘录一些我能看得懂的，做一下笔记，中间涉及到大量数学公式的我就歇菜了，各位可以去看原文：<br />
+<br />
+MoE模型太长不看部分：<br />
+◈ 预训练模型比密集模型快得多；<br />
+◈ 相较于具有相同参数数量的模型，具有更快的推理速度；<br />
+◈ 需要高VRAM，因为所有专家模型都加载在显存中；<br />
+◈ 在微调中面临许多挑战，但最近对MoE指导微调的工作很有前景。<br />
+<br />
+专家混合模型（MoE）是什么？<br />
+模型的规模是提高模型质量的最重要因素之一。在固定的计算预算下，训练一个更大的模型进行较少的步骤比训练一个较小的模型进行更多的步骤更好。<br />
+专家混合模型使得模型可以用更少的计算资源进行预训练，这意味着你可以在相同的计算预算下大幅扩展模型或数据集的规模，就像密集模型一样。特别是，在预训练阶段，专家混合模型应该比其密集对应模型更快地达到相同的质量。<br />
+<br />
+MoE由两个主要元素组成：<br />
+Sarse MoE层：p被用来代替密集的前馈网络（FFN）层。MoE层有一定数量的“专家”（例如8个），每个专家都是一个神经网络。在实践中，这些专家是FFN，但它们也可以是更复杂的网络，甚至是MoE本身，从而导致分层MoE。<br />
+一个门控网络或路由器：确定将哪些令牌发送给哪个专家模型。正如我们将在后面探讨的那样，我们可以将一个Token发送给多个专家。如何将Token路由到专家是在使用MoEs时的重要决策之一 - 路由器由学习参数组成，并且与网络的其余部分一起进行预训练。<br />
+因此，总结一下，在MoEs中，我们用门控网络和一定数量的专家替换了transformer模型的每个FFN层。<br />
+<br />
+尽管MoEs相比密集模型提供了诸如高效的预训练和更快的推理等好处，但它们也面临挑战：<br />
+训练：MoEs能够显著提高计算效率的预训练，但在微调过程中历来存在泛化困难，导致过拟合。<br />
+推理：虽然混合专家模型可能有许多参数，但推理过程中只使用其中一部分。与具有相同参数数量的密集模型相比，这导致推理速度大大加快。然而，所有参数都需要加载到显存中，因此显存需求很高。<br />
+<br />
+MoEs简史：<br />
+MoEs的根源可以追溯到1991年的论文《自适应局部专家混合》。这个想法类似于集成方法，旨在为由独立网络组成的系统提供监督程序，每个网络处理训练案例的不同子集。每个独立网络或专家模型都专门处理输入空间的不同区域。专家模型是如何选择的？一个门控网络确定每个专家模型的权重。在训练过程中，专家模型和门控都会被训练。<br />
+<br />
+2010年至2015年期间，两个不同的研究领域为后来的MoE进展做出了贡献：<br />
+专家模型作为组件：在传统的MoE设置中，整个系统包括一个门控网络和多个专家。MoE作为整个模型已经在SVMs、高斯过程和其他方法中得到了探索。Eigen、Ranzato和Ilya的工作探索了MoE作为更深层网络的组成部分。这使得MoE可以作为多层网络中的层，使模型能够同时变得庞大和高效。<br />
+条件计算：传统网络通过每一层处理所有输入数据。在这段时间里，Yoshua Bengio研究了基于输入标记动态激活或停用组件的方法。<br />
+这些工作导致在NLP的背景下探索专家模型混合。具体来说，Shazeer等人（2017年，其中“等人”包括Geoffrey Hinton和Jeff Dean，Google的Chuck Norris）通过引入稀疏性（Sparsity），将这一想法扩展到了一个137B的LSTM（当时的事实NLP架构，由Schmidhuber创建），从而实现了非常快速的推理，即使在高规模下也能保持。<br />
+<br />
+Sparsity是什么？（这部分完全看不懂）各位自己去看原文吧，好多公式。<br />
+<br />
+MoEs的负载均衡Token：<br />
+如前所述，如果我们所有的Token都发送给几个热门专家模型，那将使训练效率低下。在正常的MoE训练中，门控网络会收敛到大多激活相同的几个专家模型。这种自我强化会使受青睐的专家模型训练得更快，因此被选择得更多。为了减轻这种情况，添加了辅助损失以鼓励给予所有专家模型相等的重要性。这种损失确保所有专家模型接收大致相等数量的训练样本。接下来的部分还将探讨专家模型能力的概念，该概念引入了专家可以处理多少Token的阈值。在 `transformers` 中，辅助损失通过 `aux_loss` 参数暴露出来。<br />
+<br />
+Switch Transformers采用了简化的单专家策略。这种方法的影响是：<br />
+◈ 路由器计算减少<br />
+◈ 每个专家的批处理大小至少可以减半<br />
+◈ 通信成本降低<br />
+◈ 质量得到保留<br />
+<br />
+增加专家模型数量会如何影响预训练？<br />
+更多的专家会导致改善样本效率和更快的加速，但这些增益是递减的（特别是在256或512之后），并且推理过程中会需要更多的VRAM。在大规模研究的Switch Transformers中研究的特性在小规模下也是一致的，即使每层只有2、4或8个专家。<br />
+<br />
+何时使用稀疏的MoE模型而不是密集（dense）模型？<br />
+专家模型在具有许多机器的高吞吐量场景中非常有用。在预训练的固定计算预算下，稀疏模型将更加优化。对于具有较少VRAM的低吞吐量场景，密集模型将更好。<br />
+<br />
+MoE模型未来的发力方向：<br />
+进一步实验将稀疏的MoE蒸馏为参数更少但具有类似参数数量的密集模型。<br />
+另一个领域将是MoE的量化。 QMoE（2023年10月）是朝着这个方向迈出的一大步，通过将MoE量化为每个参数不到1比特，从而将使用3.2TB加速器的1.6T交换Transformer压缩到只有160GB。<br />
+<br />
+简而言之，一些有趣的探索领域：<br />
+◈ 将Mixtral提炼成密集模型；<br />
+◈ 探索专家模型合并技术及其对推理时间的影响；<br />
+◈ 执行Mixtral的极端量化技术。<br />
+<br />
+原文链接：<a href="https://huggingface.co/blog/moe">huggingface.co/blog/moe</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JGQ0dkM2FRQUE2b3V6LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1733684523593068782#m</id>
+            <title>RT by @op7418: Civitai最近有非常多的用Animatediff做出来的好内容，而且很多都有教程，所以开个帖子推荐一下这些视频和内容。
+首先是the_marconi用QRcode Monster做的产品徽标动画，首先先找到基础动画，然后用Comfyui转视频，最后到AE里最后调整。
+
+教程和原视频地址：https://civitai.com/articles/3172/nature-powers-netflix-seasons-workflow-and-details</title>
+            <link>https://nitter.cz/op7418/status/1733684523593068782#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1733684523593068782#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 10 Dec 2023 03:06:15 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Civitai最近有非常多的用Animatediff做出来的好内容，而且很多都有教程，所以开个帖子推荐一下这些视频和内容。<br />
+首先是the_marconi用QRcode Monster做的产品徽标动画，首先先找到基础动画，然后用Comfyui转视频，最后到AE里最后调整。<br />
+<br />
+教程和原视频地址：<a href="https://civitai.com/articles/3172/nature-powers-netflix-seasons-workflow-and-details">civitai.com/articles/3172/na…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzM2ODQzOTI0MjAzNDc5MDQvcHUvaW1nL1JtLWY3OHFHNFhHcTVLNVEuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734231258878915021#m</id>
+            <title>终于来了！！ARC Windows版本第一个测试版已经推出，现在可以加入等待列表。
+https://www.isarconwindowsyet.com/</title>
+            <link>https://nitter.cz/op7418/status/1734231258878915021#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734231258878915021#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 15:18:47 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>终于来了！！ARC Windows版本第一个测试版已经推出，现在可以加入等待列表。<br />
+<a href="https://www.isarconwindowsyet.com/">isarconwindowsyet.com/</a></p>
+<p><a href="https://nitter.cz/browsercompany/status/1734229624647807059#m">nitter.cz/browsercompany/status/1734229624647807059#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JFNkVqRGFVQUF1YnhJLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1734226816439902469#m</id>
             <title>llmware是一个非常简单的RAG（检索增强生成）应用开源库，很适合用来学习，可以通过几行代码看到 LLMWare 的端到端示例：
 • 创建一个库并将文件加载到其中 
@@ -412,67 +585,6 @@ ComfyUI 插件地址：https://github.com/brianfitzgerald/style_aligned_comfy</t
 ComfyUI 插件地址：<a href="https://github.com/brianfitzgerald/style_aligned_comfy">github.com/brianfitzgerald/s…</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0JFQmRicWFZQUExYU5wLnBuZw==" />
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0JFQnFyT2IwQUFzalhSLnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734141397031407889#m</id>
-            <title>Stability ai 的 CEO 患有 Aphantasia，让 ChatGPT 解释了一下，挺神奇的。
-主要指个人在心中无法自发地形成心象，换句话说，当大多数人想象一个物体、场景或者脸孔时，他们能够在心中“看到”一个图像，而患有 Aphantasia 的人则不能。
-他们是通过其他方式来记忆和回忆事情的，我没办法想象这是什么状态。</title>
-            <link>https://nitter.cz/op7418/status/1734141397031407889#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734141397031407889#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 09:21:42 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Stability ai 的 CEO 患有 Aphantasia，让 ChatGPT 解释了一下，挺神奇的。<br />
-主要指个人在心中无法自发地形成心象，换句话说，当大多数人想象一个物体、场景或者脸孔时，他们能够在心中“看到”一个图像，而患有 Aphantasia 的人则不能。<br />
-他们是通过其他方式来记忆和回忆事情的，我没办法想象这是什么状态。</p>
-<p><a href="https://nitter.cz/EMostaque/status/1733858090603155782#m">nitter.cz/EMostaque/status/1733858090603155782#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734139839900225688#m</id>
-            <title>已经有人微调出了 Mistral 8x7B 的 Chat 模型，在 SlimOrca 数据集上进行的训练。
-模型下载：https://huggingface.co/mattshumer/mistral-8x7b-chat</title>
-            <link>https://nitter.cz/op7418/status/1734139839900225688#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734139839900225688#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 09:15:31 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>已经有人微调出了 Mistral 8x7B 的 Chat 模型，在 SlimOrca 数据集上进行的训练。<br />
-模型下载：<a href="https://huggingface.co/mattshumer/mistral-8x7b-chat">huggingface.co/mattshumer/mi…</a></p>
-<p><a href="https://nitter.cz/mattshumer_/status/1733927635246305633#m">nitter.cz/mattshumer_/status/1733927635246305633#m</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczMzkyNTIwNzU4MzEyNTUwNC9FWHVsbGNQVD9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734139372784795938#m</id>
-            <title>R to @op7418: 作者也发了推在这里：https://x.com/peteromallet/status/1733908564165398578?s=20</title>
-            <link>https://nitter.cz/op7418/status/1734139372784795938#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734139372784795938#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 09:13:39 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>作者也发了推在这里：<a href="https://x.com/peteromallet/status/1733908564165398578?s=20">x.com/peteromallet/status/17…</a></p>
-<p><a href="https://nitter.cz/peteromallet/status/1733908564165398578#m">nitter.cz/peteromallet/status/1733908564165398578#m</a></p>
                 ]]>
             </content:encoded>
         </item>

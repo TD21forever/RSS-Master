@@ -5,6 +5,65 @@
         <link>https://nitter.cz/chinesehuazhou</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1734129116167729596#m</id>
+            <title>RT by @chinesehuazhou: 强烈推荐这篇文章：《深入探索：AI 驱动的 PDF 布局检测引擎源代码解析 [译]》
+
+系统的分析了最近很火的 PDF 转 Markdown 开源程序 Marker https://github.com/VikParuchuri/marker 的工作原理，比我想象的要复杂不少，用了好几个开源库。Marker 主要通过以下六个阶段来工作：
+
+1. 准备阶段： 利用 PyMuPDF 工具，可以把各种格式的文档转换成 PDF 文件。
+
+2. 文本识别（OCR）： 使用 Tesseract 或 OCRMyPDF 进行文字识别；也可以选择用 PyMuPDF 进行基本的文字抓取。
+
+3. 布局识别： 运用专门定制的 LayoutLMv3 模型 来识别文档中的表格、图表、标题、图说、页眉和页脚。
+
+4. 列的检测和排序： 再用一个定制的 LayoutLMv3 模型来识别文档中的列，并按照正确的顺序（上到下，左到右）进行排列。
+
+5. 公式/代码处理： 通过 Nougat 工具，把公式图片转换成对应的 latex 代码，并利用启发式方法准确识别和调整代码及表格内容。
+
+6. 文本清理与优化： 使用定制的 T5ForTextClassification 模型进行文本清理，比如去掉不必要的空格和奇怪的字符，确保以一种保守且保留原意的方式进行优化。
+
+借助这六个阶段，Marker 能够把任何文档转化为格式整洁的 Markdown 文件。
+
+原文：Inside Marker: A Guided Source Code Tour for an AI-powered PDF Layout Detection Engine https://journal.hexmos.com/marker-pdf-document-ai/
+翻译：https://baoyu.io/translations/ai/marker-pdf-document-ai</title>
+            <link>https://nitter.cz/dotey/status/1734129116167729596#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1734129116167729596#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 08:32:54 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>强烈推荐这篇文章：《深入探索：AI 驱动的 PDF 布局检测引擎源代码解析 [译]》<br />
+<br />
+系统的分析了最近很火的 PDF 转 Markdown 开源程序 Marker <a href="https://github.com/VikParuchuri/marker">github.com/VikParuchuri/mark…</a> 的工作原理，比我想象的要复杂不少，用了好几个开源库。Marker 主要通过以下六个阶段来工作：<br />
+<br />
+1. 准备阶段： 利用 PyMuPDF 工具，可以把各种格式的文档转换成 PDF 文件。<br />
+<br />
+2. 文本识别（OCR）： 使用 Tesseract 或 OCRMyPDF 进行文字识别；也可以选择用 PyMuPDF 进行基本的文字抓取。<br />
+<br />
+3. 布局识别： 运用专门定制的 LayoutLMv3 模型 来识别文档中的表格、图表、标题、图说、页眉和页脚。<br />
+<br />
+4. 列的检测和排序： 再用一个定制的 LayoutLMv3 模型来识别文档中的列，并按照正确的顺序（上到下，左到右）进行排列。<br />
+<br />
+5. 公式/代码处理： 通过 Nougat 工具，把公式图片转换成对应的 latex 代码，并利用启发式方法准确识别和调整代码及表格内容。<br />
+<br />
+6. 文本清理与优化： 使用定制的 T5ForTextClassification 模型进行文本清理，比如去掉不必要的空格和奇怪的字符，确保以一种保守且保留原意的方式进行优化。<br />
+<br />
+借助这六个阶段，Marker 能够把任何文档转化为格式整洁的 Markdown 文件。<br />
+<br />
+原文：Inside Marker: A Guided Source Code Tour for an AI-powered PDF Layout Detection Engine <a href="https://journal.hexmos.com/marker-pdf-document-ai/">journal.hexmos.com/marker-pd…</a><br />
+翻译：<a href="https://baoyu.io/translations/ai/marker-pdf-document-ai">baoyu.io/translations/ai/mar…</a></p>
+<p><a href="https://nitter.cz/dotey/status/1730418206991409407#m">nitter.cz/dotey/status/1730418206991409407#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEY285LVhrQUFGVG9wLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEYzE5ZFhnQUFtSkpBLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEYzNwTVhBQUFkcFc4LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/chinesehuazhou/status/1733396725929541643#m</id>
             <title>#Python 潮流周刊第30期
 https://pythoncat.top/posts/2023-12-09-weekly</title>
@@ -387,27 +446,6 @@ https://eddieantonio.ca/blog/2023/10/25/python-is-a-compiled-language</title>
                     <p>昨天在v2ex发布了周刊后，收到这一则作者回复。顺着话题，这里想问问大家：怎么能提高我们周刊的投稿量呢？<br />
 虽然目前按我人工筛选的方式，存稿足足有余（毕竟信息源广，且有意克制每期的数量），但还是希望有更多同学来自荐/推荐，毕竟众人拾柴火焰高，一个良好的投稿氛围更有利于周刊的健康持续发展！</p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvRi1JODdEVmJJQUFjN0c1LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/chinesehuazhou/status/1720786150179418235#m</id>
-            <title>下午和家人去逛了可园和沧浪亭，晚上还能如期更新周刊，我真是棒棒哒
-Python 潮流周刊#25：性能最快的代码格式化工具 Ruff！
-https://pythoncat.top/posts/2023-11-04-weekly</title>
-            <link>https://nitter.cz/chinesehuazhou/status/1720786150179418235#m</link>
-            <guid isPermaLink="false">https://nitter.cz/chinesehuazhou/status/1720786150179418235#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 04 Nov 2023 12:52:43 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>下午和家人去逛了可园和沧浪亭，晚上还能如期更新周刊，我真是棒棒哒<br />
-Python 潮流周刊#25：性能最快的代码格式化工具 Ruff！<br />
-<a href="https://pythoncat.top/posts/2023-11-04-weekly">pythoncat.top/posts/2023-11-…</a></p>
                 ]]>
             </content:encoded>
         </item>
