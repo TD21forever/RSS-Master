@@ -5,6 +5,270 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1734213073454727616#m</id>
+            <title>RT by @op7418: SVD生成的视频质量很高</title>
+            <link>https://nitter.cz/op7418/status/1734213073454727616#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734213073454727616#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 14:06:31 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>SVD生成的视频质量很高</p>
+<p><a href="https://nitter.cz/lepadphone/status/1734199836042568088#m">nitter.cz/lepadphone/status/1734199836042568088#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734225448182444056#m</id>
+            <title>RT by @op7418: Ethan Mollick说了一下Mixtral 8x7B最重要的两件事情：
+1)）这是一个开源模型（免费，任何人都可以下载或修改）击败了GPT-3.5。
+2）它没有安全防护栏。
+魔鬼已经从瓶子里面被放出来了。看一下Mixtral 8x7B能生成一些什么东西。</title>
+            <link>https://nitter.cz/op7418/status/1734225448182444056#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734225448182444056#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 14:55:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Ethan Mollick说了一下Mixtral 8x7B最重要的两件事情：<br />
+1)）这是一个开源模型（免费，任何人都可以下载或修改）击败了GPT-3.5。<br />
+2）它没有安全防护栏。<br />
+魔鬼已经从瓶子里面被放出来了。看一下Mixtral 8x7B能生成一些什么东西。</p>
+<p><a href="https://nitter.cz/emollick/status/1734224029479731313#m">nitter.cz/emollick/status/1734224029479731313#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734226816439902469#m</id>
+            <title>RT by @op7418: llmware是一个非常简单的RAG（检索增强生成）应用开源库，很适合用来学习，可以通过几行代码看到 LLMWare 的端到端示例：
+• 创建一个库并将文件加载到其中 
+• 生成嵌入 
+• 执行语义搜索 
+• 它可以使用任何 Hugging Face 模型或 GPT-4 来回答数据中的问题
+代码仓库里也有很多实现的例子可以学习。
+https://github.com/llmware-ai/llmware</title>
+            <link>https://nitter.cz/op7418/status/1734226816439902469#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734226816439902469#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 15:01:08 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>llmware是一个非常简单的RAG（检索增强生成）应用开源库，很适合用来学习，可以通过几行代码看到 LLMWare 的端到端示例：<br />
+• 创建一个库并将文件加载到其中 <br />
+• 生成嵌入 <br />
+• 执行语义搜索 <br />
+• 它可以使用任何 Hugging Face 模型或 GPT-4 来回答数据中的问题<br />
+代码仓库里也有很多实现的例子可以学习。<br />
+<a href="https://github.com/llmware-ai/llmware">github.com/llmware-ai/llmwar…</a></p>
+<p><a href="https://nitter.cz/svpino/status/1734218825510359423#m">nitter.cz/svpino/status/1734218825510359423#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734251620098289889#m</id>
+            <title>RT by @op7418: Meta AI开源了AVID，通过修复扩展了 AnimateDiff 等 T2V 模型的能力，同时还支持通过文本编辑视频以及生成无限时长的视频。
+文本编辑视频的能力包括修复视频的裁切、对视频对象进行更改、改变视频内对象的纹理和颜色、删除视频对应内容、更换视频所处的环境。
+
+简介：
+文本引导的视频修复面临三个主要挑战：（i）编辑视频的时间一致性，（ii）在不同的结构保真度级别支持不同的修复类型，以及（iii）处理可变的视频长度。为了解决这些挑战，我们引入了带有扩散模型的任意长度视频修复，称为 AVID。
+我们的模型的核心配备了有效的运动模块和可调节的结构引导，用于固定长度的视频修复。在此基础上，我们提出了一种新颖的时间多重扩散采样管道，具有中帧注意力引导机制，有助于生成任何所需持续时间的视频。
+我们的综合实验表明，我们的模型可以在不同的视频持续时间范围内稳健地处理各种修复类型，并且质量很高。
+
+方法：
+培训阶段，我们采用两步方法。
+ (a) 运动模块集成在主要文本到图像 (T2I) 修复模型的每一层之后，通过应用于视频数据的合成掩模针对视频修复任务进行优化。 
+(b) 在第二个训练步骤中，我们保留 UNet $\epsilon_\theta$ 中的参数，并利用 UNet 编码器的参数副本专门训练结构指导模块 $\mathbf{s}_\theta$ 。在推理过程中，
+(c)，对于长度为 $N^\prime$ 的视频，我们构建一系列片段，每个片段包含 $N$ 个连续帧。在每个去噪步骤中，都会计算并汇总每个分段的结果。
+
+论文地址：https://zhang-zx.github.io/AVID/</title>
+            <link>https://nitter.cz/op7418/status/1734251620098289889#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734251620098289889#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 16:39:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Meta AI开源了AVID，通过修复扩展了 AnimateDiff 等 T2V 模型的能力，同时还支持通过文本编辑视频以及生成无限时长的视频。<br />
+文本编辑视频的能力包括修复视频的裁切、对视频对象进行更改、改变视频内对象的纹理和颜色、删除视频对应内容、更换视频所处的环境。<br />
+<br />
+简介：<br />
+文本引导的视频修复面临三个主要挑战：（i）编辑视频的时间一致性，（ii）在不同的结构保真度级别支持不同的修复类型，以及（iii）处理可变的视频长度。为了解决这些挑战，我们引入了带有扩散模型的任意长度视频修复，称为 AVID。<br />
+我们的模型的核心配备了有效的运动模块和可调节的结构引导，用于固定长度的视频修复。在此基础上，我们提出了一种新颖的时间多重扩散采样管道，具有中帧注意力引导机制，有助于生成任何所需持续时间的视频。<br />
+我们的综合实验表明，我们的模型可以在不同的视频持续时间范围内稳健地处理各种修复类型，并且质量很高。<br />
+<br />
+方法：<br />
+培训阶段，我们采用两步方法。<br />
+ (a) 运动模块集成在主要文本到图像 (T2I) 修复模型的每一层之后，通过应用于视频数据的合成掩模针对视频修复任务进行优化。 <br />
+(b) 在第二个训练步骤中，我们保留 UNet $\epsilon_\theta$ 中的参数，并利用 UNet 编码器的参数副本专门训练结构指导模块 $\mathbf{s}_\theta$ 。在推理过程中，<br />
+(c)，对于长度为 <a href="https://nitter.cz/search?q=%23N">$N</a>^\prime$ 的视频，我们构建一系列片段，每个片段包含 <a href="https://nitter.cz/search?q=%23N">$N</a>$ 个连续帧。在每个去噪步骤中，都会计算并汇总每个分段的结果。<br />
+<br />
+论文地址：<a href="https://zhang-zx.github.io/AVID/">zhang-zx.github.io/AVID/</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQyNTEyODU1ODU3NTIwNjQvcHUvaW1nL1VhOENCcmpTSUVFcGtDdVQuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734258292732633098#m</id>
+            <title>RT by @op7418: Meta前几天发布的一堆声音模型可以去下面链接试用Demo了，包括镜头 TTS、文本转声音效果等。</title>
+            <link>https://nitter.cz/op7418/status/1734258292732633098#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734258292732633098#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 17:06:12 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Meta前几天发布的一堆声音模型可以去下面链接试用Demo了，包括镜头 TTS、文本转声音效果等。</p>
+<p><a href="https://nitter.cz/AIatMeta/status/1734257634008531453#m">nitter.cz/AIatMeta/status/1734257634008531453#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734243194635002135#m</id>
+            <title>RT by @op7418: Hugggingface的人发布了一篇详细介绍MoE架构模型的文章《专家混合模型解释》这里摘录一些我能看得懂的，做一下笔记，中间涉及到大量数学公式的我就歇菜了，各位可以去看原文：
+
+MoE模型太长不看部分：
+◈ 预训练模型比密集模型快得多；
+◈ 相较于具有相同参数数量的模型，具有更快的推理速度；
+◈ 需要高VRAM，因为所有专家模型都加载在显存中；
+◈ 在微调中面临许多挑战，但最近对MoE指导微调的工作很有前景。
+
+专家混合模型（MoE）是什么？
+模型的规模是提高模型质量的最重要因素之一。在固定的计算预算下，训练一个更大的模型进行较少的步骤比训练一个较小的模型进行更多的步骤更好。
+专家混合模型使得模型可以用更少的计算资源进行预训练，这意味着你可以在相同的计算预算下大幅扩展模型或数据集的规模，就像密集模型一样。特别是，在预训练阶段，专家混合模型应该比其密集对应模型更快地达到相同的质量。
+
+MoE由两个主要元素组成：
+Sarse MoE层：p被用来代替密集的前馈网络（FFN）层。MoE层有一定数量的“专家”（例如8个），每个专家都是一个神经网络。在实践中，这些专家是FFN，但它们也可以是更复杂的网络，甚至是MoE本身，从而导致分层MoE。
+一个门控网络或路由器：确定将哪些令牌发送给哪个专家模型。正如我们将在后面探讨的那样，我们可以将一个Token发送给多个专家。如何将Token路由到专家是在使用MoEs时的重要决策之一 - 路由器由学习参数组成，并且与网络的其余部分一起进行预训练。
+因此，总结一下，在MoEs中，我们用门控网络和一定数量的专家替换了transformer模型的每个FFN层。
+
+尽管MoEs相比密集模型提供了诸如高效的预训练和更快的推理等好处，但它们也面临挑战：
+训练：MoEs能够显著提高计算效率的预训练，但在微调过程中历来存在泛化困难，导致过拟合。
+推理：虽然混合专家模型可能有许多参数，但推理过程中只使用其中一部分。与具有相同参数数量的密集模型相比，这导致推理速度大大加快。然而，所有参数都需要加载到显存中，因此显存需求很高。
+
+MoEs简史：
+MoEs的根源可以追溯到1991年的论文《自适应局部专家混合》。这个想法类似于集成方法，旨在为由独立网络组成的系统提供监督程序，每个网络处理训练案例的不同子集。每个独立网络或专家模型都专门处理输入空间的不同区域。专家模型是如何选择的？一个门控网络确定每个专家模型的权重。在训练过程中，专家模型和门控都会被训练。
+
+2010年至2015年期间，两个不同的研究领域为后来的MoE进展做出了贡献：
+专家模型作为组件：在传统的MoE设置中，整个系统包括一个门控网络和多个专家。MoE作为整个模型已经在SVMs、高斯过程和其他方法中得到了探索。Eigen、Ranzato和Ilya的工作探索了MoE作为更深层网络的组成部分。这使得MoE可以作为多层网络中的层，使模型能够同时变得庞大和高效。
+条件计算：传统网络通过每一层处理所有输入数据。在这段时间里，Yoshua Bengio研究了基于输入标记动态激活或停用组件的方法。
+这些工作导致在NLP的背景下探索专家模型混合。具体来说，Shazeer等人（2017年，其中“等人”包括Geoffrey Hinton和Jeff Dean，Google的Chuck Norris）通过引入稀疏性（Sparsity），将这一想法扩展到了一个137B的LSTM（当时的事实NLP架构，由Schmidhuber创建），从而实现了非常快速的推理，即使在高规模下也能保持。
+
+Sparsity是什么？（这部分完全看不懂）各位自己去看原文吧，好多公式。
+
+MoEs的负载均衡Token：
+如前所述，如果我们所有的Token都发送给几个热门专家模型，那将使训练效率低下。在正常的MoE训练中，门控网络会收敛到大多激活相同的几个专家模型。这种自我强化会使受青睐的专家模型训练得更快，因此被选择得更多。为了减轻这种情况，添加了辅助损失以鼓励给予所有专家模型相等的重要性。这种损失确保所有专家模型接收大致相等数量的训练样本。接下来的部分还将探讨专家模型能力的概念，该概念引入了专家可以处理多少Token的阈值。在 `transformers` 中，辅助损失通过 `aux_loss` 参数暴露出来。
+
+Switch Transformers采用了简化的单专家策略。这种方法的影响是：
+◈ 路由器计算减少
+◈ 每个专家的批处理大小至少可以减半
+◈ 通信成本降低
+◈ 质量得到保留
+
+增加专家模型数量会如何影响预训练？
+更多的专家会导致改善样本效率和更快的加速，但这些增益是递减的（特别是在256或512之后），并且推理过程中会需要更多的VRAM。在大规模研究的Switch Transformers中研究的特性在小规模下也是一致的，即使每层只有2、4或8个专家。
+
+何时使用稀疏的MoE模型而不是密集（dense）模型？
+专家模型在具有许多机器的高吞吐量场景中非常有用。在预训练的固定计算预算下，稀疏模型将更加优化。对于具有较少VRAM的低吞吐量场景，密集模型将更好。
+
+MoE模型未来的发力方向：
+进一步实验将稀疏的MoE蒸馏为参数更少但具有类似参数数量的密集模型。
+另一个领域将是MoE的量化。 QMoE（2023年10月）是朝着这个方向迈出的一大步，通过将MoE量化为每个参数不到1比特，从而将使用3.2TB加速器的1.6T交换Transformer压缩到只有160GB。
+
+简而言之，一些有趣的探索领域：
+◈ 将Mixtral提炼成密集模型；
+◈ 探索专家模型合并技术及其对推理时间的影响；
+◈ 执行Mixtral的极端量化技术。
+
+原文链接：https://huggingface.co/blog/moe</title>
+            <link>https://nitter.cz/op7418/status/1734243194635002135#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734243194635002135#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 16:06:12 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Hugggingface的人发布了一篇详细介绍MoE架构模型的文章《专家混合模型解释》这里摘录一些我能看得懂的，做一下笔记，中间涉及到大量数学公式的我就歇菜了，各位可以去看原文：<br />
+<br />
+MoE模型太长不看部分：<br />
+◈ 预训练模型比密集模型快得多；<br />
+◈ 相较于具有相同参数数量的模型，具有更快的推理速度；<br />
+◈ 需要高VRAM，因为所有专家模型都加载在显存中；<br />
+◈ 在微调中面临许多挑战，但最近对MoE指导微调的工作很有前景。<br />
+<br />
+专家混合模型（MoE）是什么？<br />
+模型的规模是提高模型质量的最重要因素之一。在固定的计算预算下，训练一个更大的模型进行较少的步骤比训练一个较小的模型进行更多的步骤更好。<br />
+专家混合模型使得模型可以用更少的计算资源进行预训练，这意味着你可以在相同的计算预算下大幅扩展模型或数据集的规模，就像密集模型一样。特别是，在预训练阶段，专家混合模型应该比其密集对应模型更快地达到相同的质量。<br />
+<br />
+MoE由两个主要元素组成：<br />
+Sarse MoE层：p被用来代替密集的前馈网络（FFN）层。MoE层有一定数量的“专家”（例如8个），每个专家都是一个神经网络。在实践中，这些专家是FFN，但它们也可以是更复杂的网络，甚至是MoE本身，从而导致分层MoE。<br />
+一个门控网络或路由器：确定将哪些令牌发送给哪个专家模型。正如我们将在后面探讨的那样，我们可以将一个Token发送给多个专家。如何将Token路由到专家是在使用MoEs时的重要决策之一 - 路由器由学习参数组成，并且与网络的其余部分一起进行预训练。<br />
+因此，总结一下，在MoEs中，我们用门控网络和一定数量的专家替换了transformer模型的每个FFN层。<br />
+<br />
+尽管MoEs相比密集模型提供了诸如高效的预训练和更快的推理等好处，但它们也面临挑战：<br />
+训练：MoEs能够显著提高计算效率的预训练，但在微调过程中历来存在泛化困难，导致过拟合。<br />
+推理：虽然混合专家模型可能有许多参数，但推理过程中只使用其中一部分。与具有相同参数数量的密集模型相比，这导致推理速度大大加快。然而，所有参数都需要加载到显存中，因此显存需求很高。<br />
+<br />
+MoEs简史：<br />
+MoEs的根源可以追溯到1991年的论文《自适应局部专家混合》。这个想法类似于集成方法，旨在为由独立网络组成的系统提供监督程序，每个网络处理训练案例的不同子集。每个独立网络或专家模型都专门处理输入空间的不同区域。专家模型是如何选择的？一个门控网络确定每个专家模型的权重。在训练过程中，专家模型和门控都会被训练。<br />
+<br />
+2010年至2015年期间，两个不同的研究领域为后来的MoE进展做出了贡献：<br />
+专家模型作为组件：在传统的MoE设置中，整个系统包括一个门控网络和多个专家。MoE作为整个模型已经在SVMs、高斯过程和其他方法中得到了探索。Eigen、Ranzato和Ilya的工作探索了MoE作为更深层网络的组成部分。这使得MoE可以作为多层网络中的层，使模型能够同时变得庞大和高效。<br />
+条件计算：传统网络通过每一层处理所有输入数据。在这段时间里，Yoshua Bengio研究了基于输入标记动态激活或停用组件的方法。<br />
+这些工作导致在NLP的背景下探索专家模型混合。具体来说，Shazeer等人（2017年，其中“等人”包括Geoffrey Hinton和Jeff Dean，Google的Chuck Norris）通过引入稀疏性（Sparsity），将这一想法扩展到了一个137B的LSTM（当时的事实NLP架构，由Schmidhuber创建），从而实现了非常快速的推理，即使在高规模下也能保持。<br />
+<br />
+Sparsity是什么？（这部分完全看不懂）各位自己去看原文吧，好多公式。<br />
+<br />
+MoEs的负载均衡Token：<br />
+如前所述，如果我们所有的Token都发送给几个热门专家模型，那将使训练效率低下。在正常的MoE训练中，门控网络会收敛到大多激活相同的几个专家模型。这种自我强化会使受青睐的专家模型训练得更快，因此被选择得更多。为了减轻这种情况，添加了辅助损失以鼓励给予所有专家模型相等的重要性。这种损失确保所有专家模型接收大致相等数量的训练样本。接下来的部分还将探讨专家模型能力的概念，该概念引入了专家可以处理多少Token的阈值。在 `transformers` 中，辅助损失通过 `aux_loss` 参数暴露出来。<br />
+<br />
+Switch Transformers采用了简化的单专家策略。这种方法的影响是：<br />
+◈ 路由器计算减少<br />
+◈ 每个专家的批处理大小至少可以减半<br />
+◈ 通信成本降低<br />
+◈ 质量得到保留<br />
+<br />
+增加专家模型数量会如何影响预训练？<br />
+更多的专家会导致改善样本效率和更快的加速，但这些增益是递减的（特别是在256或512之后），并且推理过程中会需要更多的VRAM。在大规模研究的Switch Transformers中研究的特性在小规模下也是一致的，即使每层只有2、4或8个专家。<br />
+<br />
+何时使用稀疏的MoE模型而不是密集（dense）模型？<br />
+专家模型在具有许多机器的高吞吐量场景中非常有用。在预训练的固定计算预算下，稀疏模型将更加优化。对于具有较少VRAM的低吞吐量场景，密集模型将更好。<br />
+<br />
+MoE模型未来的发力方向：<br />
+进一步实验将稀疏的MoE蒸馏为参数更少但具有类似参数数量的密集模型。<br />
+另一个领域将是MoE的量化。 QMoE（2023年10月）是朝着这个方向迈出的一大步，通过将MoE量化为每个参数不到1比特，从而将使用3.2TB加速器的1.6T交换Transformer压缩到只有160GB。<br />
+<br />
+简而言之，一些有趣的探索领域：<br />
+◈ 将Mixtral提炼成密集模型；<br />
+◈ 探索专家模型合并技术及其对推理时间的影响；<br />
+◈ 执行Mixtral的极端量化技术。<br />
+<br />
+原文链接：<a href="https://huggingface.co/blog/moe">huggingface.co/blog/moe</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JGQ0dkM2FRQUE2b3V6LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1734384674443600345#m</id>
             <title>RT by @op7418: 一条长推，号称我们距离实现通用人工智能（AGI）可能比我们想象的更近，太长了，没耐心看完，直接翻译一下第一条推文，有兴趣的可以自己看看。
 
@@ -481,70 +745,6 @@ ConceptARC\_提取\_对象\_第10节\_测试对象\_3<br />
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1734258292732633098#m</id>
-            <title>Meta前几天发布的一堆声音模型可以去下面链接试用Demo了，包括镜头 TTS、文本转声音效果等。</title>
-            <link>https://nitter.cz/op7418/status/1734258292732633098#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734258292732633098#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 17:06:12 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Meta前几天发布的一堆声音模型可以去下面链接试用Demo了，包括镜头 TTS、文本转声音效果等。</p>
-<p><a href="https://nitter.cz/AIatMeta/status/1734257634008531453#m">nitter.cz/AIatMeta/status/1734257634008531453#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734251620098289889#m</id>
-            <title>Meta AI开源了AVID，通过修复扩展了 AnimateDiff 等 T2V 模型的能力，同时还支持通过文本编辑视频以及生成无限时长的视频。
-文本编辑视频的能力包括修复视频的裁切、对视频对象进行更改、改变视频内对象的纹理和颜色、删除视频对应内容、更换视频所处的环境。
-
-简介：
-文本引导的视频修复面临三个主要挑战：（i）编辑视频的时间一致性，（ii）在不同的结构保真度级别支持不同的修复类型，以及（iii）处理可变的视频长度。为了解决这些挑战，我们引入了带有扩散模型的任意长度视频修复，称为 AVID。
-我们的模型的核心配备了有效的运动模块和可调节的结构引导，用于固定长度的视频修复。在此基础上，我们提出了一种新颖的时间多重扩散采样管道，具有中帧注意力引导机制，有助于生成任何所需持续时间的视频。
-我们的综合实验表明，我们的模型可以在不同的视频持续时间范围内稳健地处理各种修复类型，并且质量很高。
-
-方法：
-培训阶段，我们采用两步方法。
- (a) 运动模块集成在主要文本到图像 (T2I) 修复模型的每一层之后，通过应用于视频数据的合成掩模针对视频修复任务进行优化。 
-(b) 在第二个训练步骤中，我们保留 UNet $\epsilon_\theta$ 中的参数，并利用 UNet 编码器的参数副本专门训练结构指导模块 $\mathbf{s}_\theta$ 。在推理过程中，
-(c)，对于长度为 $N^\prime$ 的视频，我们构建一系列片段，每个片段包含 $N$ 个连续帧。在每个去噪步骤中，都会计算并汇总每个分段的结果。
-
-论文地址：https://zhang-zx.github.io/AVID/</title>
-            <link>https://nitter.cz/op7418/status/1734251620098289889#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734251620098289889#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 16:39:41 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Meta AI开源了AVID，通过修复扩展了 AnimateDiff 等 T2V 模型的能力，同时还支持通过文本编辑视频以及生成无限时长的视频。<br />
-文本编辑视频的能力包括修复视频的裁切、对视频对象进行更改、改变视频内对象的纹理和颜色、删除视频对应内容、更换视频所处的环境。<br />
-<br />
-简介：<br />
-文本引导的视频修复面临三个主要挑战：（i）编辑视频的时间一致性，（ii）在不同的结构保真度级别支持不同的修复类型，以及（iii）处理可变的视频长度。为了解决这些挑战，我们引入了带有扩散模型的任意长度视频修复，称为 AVID。<br />
-我们的模型的核心配备了有效的运动模块和可调节的结构引导，用于固定长度的视频修复。在此基础上，我们提出了一种新颖的时间多重扩散采样管道，具有中帧注意力引导机制，有助于生成任何所需持续时间的视频。<br />
-我们的综合实验表明，我们的模型可以在不同的视频持续时间范围内稳健地处理各种修复类型，并且质量很高。<br />
-<br />
-方法：<br />
-培训阶段，我们采用两步方法。<br />
- (a) 运动模块集成在主要文本到图像 (T2I) 修复模型的每一层之后，通过应用于视频数据的合成掩模针对视频修复任务进行优化。 <br />
-(b) 在第二个训练步骤中，我们保留 UNet $\epsilon_\theta$ 中的参数，并利用 UNet 编码器的参数副本专门训练结构指导模块 $\mathbf{s}_\theta$ 。在推理过程中，<br />
-(c)，对于长度为 <a href="https://nitter.cz/search?q=%23N">$N</a>^\prime$ 的视频，我们构建一系列片段，每个片段包含 <a href="https://nitter.cz/search?q=%23N">$N</a>$ 个连续帧。在每个去噪步骤中，都会计算并汇总每个分段的结果。<br />
-<br />
-论文地址：<a href="https://zhang-zx.github.io/AVID/">zhang-zx.github.io/AVID/</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQyNTEyODU1ODU3NTIwNjQvcHUvaW1nL1VhOENCcmpTSUVFcGtDdVQuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://nitter.cz/op7418/status/1734193477947449612#m</id>
             <title>RT by @op7418: 这个视频编辑项目可以模仿 Pika 的视频编辑功能，实现利用文字对视频某一部分内容的变化和编辑。
 不过从演示来看没有 Pika的精准，只能通过文字控制。 并且将会开源，这下开源社区也可以进行视频编辑了，而且跟现有的 SD 生态兼容。下面是具体介绍：  
@@ -668,134 +868,6 @@ Strength of influence：控制的强度。<br />
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1734243194635002135#m</id>
-            <title>Hugggingface的人发布了一篇详细介绍MoE架构模型的文章《专家混合模型解释》这里摘录一些我能看得懂的，做一下笔记，中间涉及到大量数学公式的我就歇菜了，各位可以去看原文：
-
-MoE模型太长不看部分：
-◈ 预训练模型比密集模型快得多；
-◈ 相较于具有相同参数数量的模型，具有更快的推理速度；
-◈ 需要高VRAM，因为所有专家模型都加载在显存中；
-◈ 在微调中面临许多挑战，但最近对MoE指导微调的工作很有前景。
-
-专家混合模型（MoE）是什么？
-模型的规模是提高模型质量的最重要因素之一。在固定的计算预算下，训练一个更大的模型进行较少的步骤比训练一个较小的模型进行更多的步骤更好。
-专家混合模型使得模型可以用更少的计算资源进行预训练，这意味着你可以在相同的计算预算下大幅扩展模型或数据集的规模，就像密集模型一样。特别是，在预训练阶段，专家混合模型应该比其密集对应模型更快地达到相同的质量。
-
-MoE由两个主要元素组成：
-Sarse MoE层：p被用来代替密集的前馈网络（FFN）层。MoE层有一定数量的“专家”（例如8个），每个专家都是一个神经网络。在实践中，这些专家是FFN，但它们也可以是更复杂的网络，甚至是MoE本身，从而导致分层MoE。
-一个门控网络或路由器：确定将哪些令牌发送给哪个专家模型。正如我们将在后面探讨的那样，我们可以将一个Token发送给多个专家。如何将Token路由到专家是在使用MoEs时的重要决策之一 - 路由器由学习参数组成，并且与网络的其余部分一起进行预训练。
-因此，总结一下，在MoEs中，我们用门控网络和一定数量的专家替换了transformer模型的每个FFN层。
-
-尽管MoEs相比密集模型提供了诸如高效的预训练和更快的推理等好处，但它们也面临挑战：
-训练：MoEs能够显著提高计算效率的预训练，但在微调过程中历来存在泛化困难，导致过拟合。
-推理：虽然混合专家模型可能有许多参数，但推理过程中只使用其中一部分。与具有相同参数数量的密集模型相比，这导致推理速度大大加快。然而，所有参数都需要加载到显存中，因此显存需求很高。
-
-MoEs简史：
-MoEs的根源可以追溯到1991年的论文《自适应局部专家混合》。这个想法类似于集成方法，旨在为由独立网络组成的系统提供监督程序，每个网络处理训练案例的不同子集。每个独立网络或专家模型都专门处理输入空间的不同区域。专家模型是如何选择的？一个门控网络确定每个专家模型的权重。在训练过程中，专家模型和门控都会被训练。
-
-2010年至2015年期间，两个不同的研究领域为后来的MoE进展做出了贡献：
-专家模型作为组件：在传统的MoE设置中，整个系统包括一个门控网络和多个专家。MoE作为整个模型已经在SVMs、高斯过程和其他方法中得到了探索。Eigen、Ranzato和Ilya的工作探索了MoE作为更深层网络的组成部分。这使得MoE可以作为多层网络中的层，使模型能够同时变得庞大和高效。
-条件计算：传统网络通过每一层处理所有输入数据。在这段时间里，Yoshua Bengio研究了基于输入标记动态激活或停用组件的方法。
-这些工作导致在NLP的背景下探索专家模型混合。具体来说，Shazeer等人（2017年，其中“等人”包括Geoffrey Hinton和Jeff Dean，Google的Chuck Norris）通过引入稀疏性（Sparsity），将这一想法扩展到了一个137B的LSTM（当时的事实NLP架构，由Schmidhuber创建），从而实现了非常快速的推理，即使在高规模下也能保持。
-
-Sparsity是什么？（这部分完全看不懂）各位自己去看原文吧，好多公式。
-
-MoEs的负载均衡Token：
-如前所述，如果我们所有的Token都发送给几个热门专家模型，那将使训练效率低下。在正常的MoE训练中，门控网络会收敛到大多激活相同的几个专家模型。这种自我强化会使受青睐的专家模型训练得更快，因此被选择得更多。为了减轻这种情况，添加了辅助损失以鼓励给予所有专家模型相等的重要性。这种损失确保所有专家模型接收大致相等数量的训练样本。接下来的部分还将探讨专家模型能力的概念，该概念引入了专家可以处理多少Token的阈值。在 `transformers` 中，辅助损失通过 `aux_loss` 参数暴露出来。
-
-Switch Transformers采用了简化的单专家策略。这种方法的影响是：
-◈ 路由器计算减少
-◈ 每个专家的批处理大小至少可以减半
-◈ 通信成本降低
-◈ 质量得到保留
-
-增加专家模型数量会如何影响预训练？
-更多的专家会导致改善样本效率和更快的加速，但这些增益是递减的（特别是在256或512之后），并且推理过程中会需要更多的VRAM。在大规模研究的Switch Transformers中研究的特性在小规模下也是一致的，即使每层只有2、4或8个专家。
-
-何时使用稀疏的MoE模型而不是密集（dense）模型？
-专家模型在具有许多机器的高吞吐量场景中非常有用。在预训练的固定计算预算下，稀疏模型将更加优化。对于具有较少VRAM的低吞吐量场景，密集模型将更好。
-
-MoE模型未来的发力方向：
-进一步实验将稀疏的MoE蒸馏为参数更少但具有类似参数数量的密集模型。
-另一个领域将是MoE的量化。 QMoE（2023年10月）是朝着这个方向迈出的一大步，通过将MoE量化为每个参数不到1比特，从而将使用3.2TB加速器的1.6T交换Transformer压缩到只有160GB。
-
-简而言之，一些有趣的探索领域：
-◈ 将Mixtral提炼成密集模型；
-◈ 探索专家模型合并技术及其对推理时间的影响；
-◈ 执行Mixtral的极端量化技术。
-
-原文链接：https://huggingface.co/blog/moe</title>
-            <link>https://nitter.cz/op7418/status/1734243194635002135#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734243194635002135#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 16:06:12 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Hugggingface的人发布了一篇详细介绍MoE架构模型的文章《专家混合模型解释》这里摘录一些我能看得懂的，做一下笔记，中间涉及到大量数学公式的我就歇菜了，各位可以去看原文：<br />
-<br />
-MoE模型太长不看部分：<br />
-◈ 预训练模型比密集模型快得多；<br />
-◈ 相较于具有相同参数数量的模型，具有更快的推理速度；<br />
-◈ 需要高VRAM，因为所有专家模型都加载在显存中；<br />
-◈ 在微调中面临许多挑战，但最近对MoE指导微调的工作很有前景。<br />
-<br />
-专家混合模型（MoE）是什么？<br />
-模型的规模是提高模型质量的最重要因素之一。在固定的计算预算下，训练一个更大的模型进行较少的步骤比训练一个较小的模型进行更多的步骤更好。<br />
-专家混合模型使得模型可以用更少的计算资源进行预训练，这意味着你可以在相同的计算预算下大幅扩展模型或数据集的规模，就像密集模型一样。特别是，在预训练阶段，专家混合模型应该比其密集对应模型更快地达到相同的质量。<br />
-<br />
-MoE由两个主要元素组成：<br />
-Sarse MoE层：p被用来代替密集的前馈网络（FFN）层。MoE层有一定数量的“专家”（例如8个），每个专家都是一个神经网络。在实践中，这些专家是FFN，但它们也可以是更复杂的网络，甚至是MoE本身，从而导致分层MoE。<br />
-一个门控网络或路由器：确定将哪些令牌发送给哪个专家模型。正如我们将在后面探讨的那样，我们可以将一个Token发送给多个专家。如何将Token路由到专家是在使用MoEs时的重要决策之一 - 路由器由学习参数组成，并且与网络的其余部分一起进行预训练。<br />
-因此，总结一下，在MoEs中，我们用门控网络和一定数量的专家替换了transformer模型的每个FFN层。<br />
-<br />
-尽管MoEs相比密集模型提供了诸如高效的预训练和更快的推理等好处，但它们也面临挑战：<br />
-训练：MoEs能够显著提高计算效率的预训练，但在微调过程中历来存在泛化困难，导致过拟合。<br />
-推理：虽然混合专家模型可能有许多参数，但推理过程中只使用其中一部分。与具有相同参数数量的密集模型相比，这导致推理速度大大加快。然而，所有参数都需要加载到显存中，因此显存需求很高。<br />
-<br />
-MoEs简史：<br />
-MoEs的根源可以追溯到1991年的论文《自适应局部专家混合》。这个想法类似于集成方法，旨在为由独立网络组成的系统提供监督程序，每个网络处理训练案例的不同子集。每个独立网络或专家模型都专门处理输入空间的不同区域。专家模型是如何选择的？一个门控网络确定每个专家模型的权重。在训练过程中，专家模型和门控都会被训练。<br />
-<br />
-2010年至2015年期间，两个不同的研究领域为后来的MoE进展做出了贡献：<br />
-专家模型作为组件：在传统的MoE设置中，整个系统包括一个门控网络和多个专家。MoE作为整个模型已经在SVMs、高斯过程和其他方法中得到了探索。Eigen、Ranzato和Ilya的工作探索了MoE作为更深层网络的组成部分。这使得MoE可以作为多层网络中的层，使模型能够同时变得庞大和高效。<br />
-条件计算：传统网络通过每一层处理所有输入数据。在这段时间里，Yoshua Bengio研究了基于输入标记动态激活或停用组件的方法。<br />
-这些工作导致在NLP的背景下探索专家模型混合。具体来说，Shazeer等人（2017年，其中“等人”包括Geoffrey Hinton和Jeff Dean，Google的Chuck Norris）通过引入稀疏性（Sparsity），将这一想法扩展到了一个137B的LSTM（当时的事实NLP架构，由Schmidhuber创建），从而实现了非常快速的推理，即使在高规模下也能保持。<br />
-<br />
-Sparsity是什么？（这部分完全看不懂）各位自己去看原文吧，好多公式。<br />
-<br />
-MoEs的负载均衡Token：<br />
-如前所述，如果我们所有的Token都发送给几个热门专家模型，那将使训练效率低下。在正常的MoE训练中，门控网络会收敛到大多激活相同的几个专家模型。这种自我强化会使受青睐的专家模型训练得更快，因此被选择得更多。为了减轻这种情况，添加了辅助损失以鼓励给予所有专家模型相等的重要性。这种损失确保所有专家模型接收大致相等数量的训练样本。接下来的部分还将探讨专家模型能力的概念，该概念引入了专家可以处理多少Token的阈值。在 `transformers` 中，辅助损失通过 `aux_loss` 参数暴露出来。<br />
-<br />
-Switch Transformers采用了简化的单专家策略。这种方法的影响是：<br />
-◈ 路由器计算减少<br />
-◈ 每个专家的批处理大小至少可以减半<br />
-◈ 通信成本降低<br />
-◈ 质量得到保留<br />
-<br />
-增加专家模型数量会如何影响预训练？<br />
-更多的专家会导致改善样本效率和更快的加速，但这些增益是递减的（特别是在256或512之后），并且推理过程中会需要更多的VRAM。在大规模研究的Switch Transformers中研究的特性在小规模下也是一致的，即使每层只有2、4或8个专家。<br />
-<br />
-何时使用稀疏的MoE模型而不是密集（dense）模型？<br />
-专家模型在具有许多机器的高吞吐量场景中非常有用。在预训练的固定计算预算下，稀疏模型将更加优化。对于具有较少VRAM的低吞吐量场景，密集模型将更好。<br />
-<br />
-MoE模型未来的发力方向：<br />
-进一步实验将稀疏的MoE蒸馏为参数更少但具有类似参数数量的密集模型。<br />
-另一个领域将是MoE的量化。 QMoE（2023年10月）是朝着这个方向迈出的一大步，通过将MoE量化为每个参数不到1比特，从而将使用3.2TB加速器的1.6T交换Transformer压缩到只有160GB。<br />
-<br />
-简而言之，一些有趣的探索领域：<br />
-◈ 将Mixtral提炼成密集模型；<br />
-◈ 探索专家模型合并技术及其对推理时间的影响；<br />
-◈ 执行Mixtral的极端量化技术。<br />
-<br />
-原文链接：<a href="https://huggingface.co/blog/moe">huggingface.co/blog/moe</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JGQ0dkM2FRQUE2b3V6LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://nitter.cz/op7418/status/1733684523593068782#m</id>
             <title>RT by @op7418: Civitai最近有非常多的用Animatediff做出来的好内容，而且很多都有教程，所以开个帖子推荐一下这些视频和内容。
 首先是the_marconi用QRcode Monster做的产品徽标动画，首先先找到基础动画，然后用Comfyui转视频，最后到AE里最后调整。
@@ -836,173 +908,6 @@ https://www.isarconwindowsyet.com/</title>
 <a href="https://www.isarconwindowsyet.com/">isarconwindowsyet.com/</a></p>
 <p><a href="https://nitter.cz/browsercompany/status/1734229624647807059#m">nitter.cz/browsercompany/status/1734229624647807059#m</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0JFNkVqRGFVQUF1YnhJLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734226816439902469#m</id>
-            <title>llmware是一个非常简单的RAG（检索增强生成）应用开源库，很适合用来学习，可以通过几行代码看到 LLMWare 的端到端示例：
-• 创建一个库并将文件加载到其中 
-• 生成嵌入 
-• 执行语义搜索 
-• 它可以使用任何 Hugging Face 模型或 GPT-4 来回答数据中的问题
-代码仓库里也有很多实现的例子可以学习。
-https://github.com/llmware-ai/llmware</title>
-            <link>https://nitter.cz/op7418/status/1734226816439902469#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734226816439902469#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 15:01:08 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>llmware是一个非常简单的RAG（检索增强生成）应用开源库，很适合用来学习，可以通过几行代码看到 LLMWare 的端到端示例：<br />
-• 创建一个库并将文件加载到其中 <br />
-• 生成嵌入 <br />
-• 执行语义搜索 <br />
-• 它可以使用任何 Hugging Face 模型或 GPT-4 来回答数据中的问题<br />
-代码仓库里也有很多实现的例子可以学习。<br />
-<a href="https://github.com/llmware-ai/llmware">github.com/llmware-ai/llmwar…</a></p>
-<p><a href="https://nitter.cz/svpino/status/1734218825510359423#m">nitter.cz/svpino/status/1734218825510359423#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734225448182444056#m</id>
-            <title>Ethan Mollick说了一下Mixtral 8x7B最重要的两件事情：
-1)）这是一个开源模型（免费，任何人都可以下载或修改）击败了GPT-3.5。
-2）它没有安全防护栏。
-魔鬼已经从瓶子里面被放出来了。看一下Mixtral 8x7B能生成一些什么东西。</title>
-            <link>https://nitter.cz/op7418/status/1734225448182444056#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734225448182444056#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 14:55:41 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Ethan Mollick说了一下Mixtral 8x7B最重要的两件事情：<br />
-1)）这是一个开源模型（免费，任何人都可以下载或修改）击败了GPT-3.5。<br />
-2）它没有安全防护栏。<br />
-魔鬼已经从瓶子里面被放出来了。看一下Mixtral 8x7B能生成一些什么东西。</p>
-<p><a href="https://nitter.cz/emollick/status/1734224029479731313#m">nitter.cz/emollick/status/1734224029479731313#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734224814750208310#m</id>
-            <title>谷歌25周年视频，很多经典的事件做了一下整合</title>
-            <link>https://nitter.cz/op7418/status/1734224814750208310#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734224814750208310#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 14:53:10 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>谷歌25周年视频，很多经典的事件做了一下整合</p>
-<p><a href="https://nitter.cz/Google/status/1734218344402743791#m">nitter.cz/Google/status/1734218344402743791#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734213511486783820#m</id>
-            <title>Mixtral AI官方的Mixtral 8x7B介绍，还有微调好的Mixtral 8x7B模型。</title>
-            <link>https://nitter.cz/op7418/status/1734213511486783820#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734213511486783820#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 14:08:15 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Mixtral AI官方的Mixtral 8x7B介绍，还有微调好的Mixtral 8x7B模型。</p>
-<p><a href="https://nitter.cz/dchaplot/status/1734190262983798898#m">nitter.cz/dchaplot/status/1734190262983798898#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734213073454727616#m</id>
-            <title>SVD生成的视频质量很高</title>
-            <link>https://nitter.cz/op7418/status/1734213073454727616#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734213073454727616#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 14:06:31 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>SVD生成的视频质量很高</p>
-<p><a href="https://nitter.cz/lepadphone/status/1734199836042568088#m">nitter.cz/lepadphone/status/1734199836042568088#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734093582913708368#m</id>
-            <title>RT by @op7418: AIGC Weekly 50期一周年了，第一期也是这个时候发布的，也是刚过完生日，那个时候想的就是随便写写，反正平时也要看，没想到一个周刊会让我发生这样的改变，我是一个很没有长性的人，几乎没有规律性坚持任何事情，这是唯一坚持的事情。感觉最重要的就是各位的支持，持续不断的正反馈才让我坚持这么久。
-
-50 期地址：https://quail.ink/op7418/p/aigc-weekly-50</title>
-            <link>https://nitter.cz/op7418/status/1734093582913708368#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734093582913708368#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 06:11:42 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>AIGC Weekly 50期一周年了，第一期也是这个时候发布的，也是刚过完生日，那个时候想的就是随便写写，反正平时也要看，没想到一个周刊会让我发生这样的改变，我是一个很没有长性的人，几乎没有规律性坚持任何事情，这是唯一坚持的事情。感觉最重要的就是各位的支持，持续不断的正反馈才让我坚持这么久。<br />
-<br />
-50 期地址：<a href="https://quail.ink/op7418/p/aigc-weekly-50">quail.ink/op7418/p/aigc-week…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JDOG91ZmFJQUE2Q0tGLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734105985558671423#m</id>
-            <title>RT by @op7418: 今天周刊推荐的 Visual Electric 是一个给了我巨大惊喜的 AI 画图产品。他们不再像其他 AI 画图产品一样只关注图片质量，在交互和产品上也下了很多功夫。
-
-◆首先这个产品的官网做的非常漂亮，尤其是字体和动效的设计。
-◆然后进入首页就是一个巨大的图片灵感库，都是精挑细选的非常有美感的图片，选择图片可以直接生成。
-◆图片生成界面是一个类似于白板的 UI，图片生成和对图片的后续操作都在一个白板上进行，你可以清晰的看到你生成过程的所有图片，随时反回去编辑，而且还集成了抠图等很方便的图片处理功能。
-◆图片生成的质量也很好，跟Adobe Firefly 的质量和风格类似。是可用的。
-◆最后你可以通过链接分享你生成的图片，图片展示页面的排版也非常美观和克制，太喜欢了。
-
-这里尝试Visual Electric：https://visualelectric.com/</title>
-            <link>https://nitter.cz/op7418/status/1734105985558671423#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734105985558671423#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 07:00:59 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>今天周刊推荐的 Visual Electric 是一个给了我巨大惊喜的 AI 画图产品。他们不再像其他 AI 画图产品一样只关注图片质量，在交互和产品上也下了很多功夫。<br />
-<br />
-◆首先这个产品的官网做的非常漂亮，尤其是字体和动效的设计。<br />
-◆然后进入首页就是一个巨大的图片灵感库，都是精挑细选的非常有美感的图片，选择图片可以直接生成。<br />
-◆图片生成界面是一个类似于白板的 UI，图片生成和对图片的后续操作都在一个白板上进行，你可以清晰的看到你生成过程的所有图片，随时反回去编辑，而且还集成了抠图等很方便的图片处理功能。<br />
-◆图片生成的质量也很好，跟Adobe Firefly 的质量和风格类似。是可用的。<br />
-◆最后你可以通过链接分享你生成的图片，图片展示页面的排版也非常美观和克制，太喜欢了。<br />
-<br />
-这里尝试Visual Electric：<a href="https://visualelectric.com/">visualelectric.com/</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JERi1sNWJVQUFJcXk4LmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JESGs4a2F3QUF5a2dxLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JESHRxaWFjQUF1aWtYLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JESUdtVmE0QUE3RmFSLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
