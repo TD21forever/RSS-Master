@@ -5,6 +5,96 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1734409880205992322#m</id>
+            <title>3DiffTection：通过单张图片进行 3D 物体检测
+
+它能够仅靠单张图片，在复杂的视觉环境中，准确地识别和理解三维空间中的物体和其在空间中的位置和方向排列。
+
+从而实现更准确和深入的物体检测和场景理解。
+
+即时物体被遮挡，或者物体出现在不常见的角度和位置也能识别出来。
+
+该项目由英伟达多伦多人工智能实验室以及多所大学联合开发。
+
+3DiffTection 主要特点：
+
+从图片识别物体：它能从一张普通的照片中识别出各种物体，并了解这些物体在真实世界中的位置和方向。
+
+创建不同视角的图像：即使只有一张图片，3DiffTection 也能创造出从不同角度看这个场景的新图片。
+
+连接不同视角的相同点：它能识别出在不同图片中相同的地方或物体，即使这些图片是从不同的角度拍摄的。
+
+3DiffTection 的工作原理：
+
+1、3D 感知扩散模型:：首先，3DiffTection 使用它的扩散模型来分析这张照片。这个模型经过特殊训练，能够理解物体在三维空间中的排列和方向，即使在复杂的视觉环境中。
+
+2、几何和语义调整：通过几何调整，3DiffTection 的模型学会了如何从不同的视角理解同一个场景。比如，它可以通过理解桌子上物品的几何关系，推测出被部分遮挡物品的完整形状。
+
+通过语义调整，模型进一步学习了如何识别和分类这些物品，即使在它们部分被遮挡或以不常见的方式呈现时。
+
+3、视图合成和控制网：它甚至能创造出好像是从房间里其他角度拍摄的照片，帮助我们更全面地理解桌子上的场景。
+
+4、测试时预测集成：最后，当 3DiffTection 对这张照片进行物体检测时，它会综合考虑从多个虚拟视点获得的信息，以提高检测的准确性和可靠性。
+
+5、3D 物体检测:最终，3DiffTection 利用这些调整过的特征来进行 3D 物体检测。它能够识别图片中的物体，并理解这些物体在三维空间中的相对位置和方向。
+
+3DiffTection 的重点在于从单张图片中提取和理解三维信息，而不是直接创建一个完整的 3D 立体图像。这种方法在自动驾驶、机器人技术和增强现实等领域非常有用，因为它能够提供关于物体三维结构的重要信息，即使是从单一视角拍摄的图片。
+
+项目及演示：https://research.nvidia.com/labs/toronto-ai/3difftection/
+论文：https://arxiv.org/abs/2311.04391
+GitHub：https://github.com/nv-tlabs/3DiffTection（coming soon...）</title>
+            <link>https://nitter.cz/xiaohuggg/status/1734409880205992322#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734409880205992322#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 12 Dec 2023 03:08:33 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>3DiffTection：通过单张图片进行 3D 物体检测<br />
+<br />
+它能够仅靠单张图片，在复杂的视觉环境中，准确地识别和理解三维空间中的物体和其在空间中的位置和方向排列。<br />
+<br />
+从而实现更准确和深入的物体检测和场景理解。<br />
+<br />
+即时物体被遮挡，或者物体出现在不常见的角度和位置也能识别出来。<br />
+<br />
+该项目由英伟达多伦多人工智能实验室以及多所大学联合开发。<br />
+<br />
+3DiffTection 主要特点：<br />
+<br />
+从图片识别物体：它能从一张普通的照片中识别出各种物体，并了解这些物体在真实世界中的位置和方向。<br />
+<br />
+创建不同视角的图像：即使只有一张图片，3DiffTection 也能创造出从不同角度看这个场景的新图片。<br />
+<br />
+连接不同视角的相同点：它能识别出在不同图片中相同的地方或物体，即使这些图片是从不同的角度拍摄的。<br />
+<br />
+3DiffTection 的工作原理：<br />
+<br />
+1、3D 感知扩散模型:：首先，3DiffTection 使用它的扩散模型来分析这张照片。这个模型经过特殊训练，能够理解物体在三维空间中的排列和方向，即使在复杂的视觉环境中。<br />
+<br />
+2、几何和语义调整：通过几何调整，3DiffTection 的模型学会了如何从不同的视角理解同一个场景。比如，它可以通过理解桌子上物品的几何关系，推测出被部分遮挡物品的完整形状。<br />
+<br />
+通过语义调整，模型进一步学习了如何识别和分类这些物品，即使在它们部分被遮挡或以不常见的方式呈现时。<br />
+<br />
+3、视图合成和控制网：它甚至能创造出好像是从房间里其他角度拍摄的照片，帮助我们更全面地理解桌子上的场景。<br />
+<br />
+4、测试时预测集成：最后，当 3DiffTection 对这张照片进行物体检测时，它会综合考虑从多个虚拟视点获得的信息，以提高检测的准确性和可靠性。<br />
+<br />
+5、3D 物体检测:最终，3DiffTection 利用这些调整过的特征来进行 3D 物体检测。它能够识别图片中的物体，并理解这些物体在三维空间中的相对位置和方向。<br />
+<br />
+3DiffTection 的重点在于从单张图片中提取和理解三维信息，而不是直接创建一个完整的 3D 立体图像。这种方法在自动驾驶、机器人技术和增强现实等领域非常有用，因为它能够提供关于物体三维结构的重要信息，即使是从单一视角拍摄的图片。<br />
+<br />
+项目及演示：<a href="https://research.nvidia.com/labs/toronto-ai/3difftection/">research.nvidia.com/labs/tor…</a><br />
+论文：<a href="https://arxiv.org/abs/2311.04391">arxiv.org/abs/2311.04391</a><br />
+GitHub：<a href="https://github.com/nv-tlabs/3DiffTection">github.com/nv-tlabs/3DiffTec…</a>（coming soon...）</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ0MDkyNTE4NDg5MjUxODQvcHUvaW1nL3BNaERpVGxaQjY5VTBLM0MuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1734316369863393667#m</id>
             <title>Rob Lynch @RobLynch99 发布了一条关于 GPT-4-turbo 的有趣发现。
 
@@ -849,24 +939,6 @@ Awesome 3D Gaussian Splatting项目：<br />
 <br />
 GitHub：<a href="https://github.com/MrNeRF/awesome-3D-gaussian-splatting">github.com/MrNeRF/awesome-3D…</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQwMjc4NDc1MDM4ODQyODgvcHUvaW1nL0Jqei0zLUZOU0RwMTJENVMuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1734018030823489766#m</id>
-            <title>？？？？😂</title>
-            <link>https://nitter.cz/xiaohuggg/status/1734018030823489766#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734018030823489766#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 01:11:29 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>？？？？😂</p>
-<p><a href="https://nitter.cz/blizaine/status/1733892911534620927#m">nitter.cz/blizaine/status/1733892911534620927#m</a></p>
                 ]]>
             </content:encoded>
         </item>
