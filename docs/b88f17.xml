@@ -5,6 +5,146 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1734316369863393667#m</id>
+            <title>RT by @dotey: Rob Lynch @RobLynch99 发布了一条关于 GPT-4-turbo 的有趣发现。
+
+他指出，当通过 API 使用 GPT-4-turbo 时，如果系统提示中的日期是十二月而不是五月，模型完成任务（如代码生成）会更短，这一差异在统计上是显著的。
+
+有网友调侃因为12月是假期，模型自己在给自己放假…🤓偷懒！
+
+实验细节：
+
+•Rob Lynch 使用相同的提示进行了 API 调用（一个要求实现机器学习任务但不使用库的代码完成任务）。
+
+•他创建了两个系统提示，一个告诉 API 当前是五月，另一个是十二月，并比较了这两种情况下的结果分布。
+
+•对于五月的系统提示，平均值为 4298；对于十二月的系统提示，平均值为 4086。
+
+•在每个样本中进行了 477 次完成，t 测试的 p 值小于 2.28e-07。
+
+总结：
+
+Rob Lynch 在他的推文中报告的现象表明，GPT-4-turbo 模型在处理相同的任务时，会根据系统提示中的日期信息产生不同长度的输出。
+
+具体来说，他发现当模型“认为”当前是十二月而不是五月时（通过系统提示中的日期决定），它生成的代码或文本完成任务会更短。
+
+1.时间感知:
+•这表明 GPT-4-turbo 可能对时间信息有一定的敏感性，即使这种信息是通过系统提示隐式给出的。
+
+2.输出变化:
+•模型的输出不仅取决于给定的任务或问题，还可能受到其他上下文信息（如日期）的影响。
+
+3.行为模式:
+•这种现象可能揭示了模型在处理信息时的某些内在行为模式或偏好。
+
+猜测可能原因：
+
+1.上下文敏感性:
+•GPT-4-turbo 模型被设计为对上下文非常敏感。如果模型在处理请求时识别到特定的日期信息，它可能会根据这个信息调整其回答。这可能是因为模型在训练时接触到了与日期相关的不同类型的数据。
+
+2.内部逻辑:
+•模型可能内部包含某种逻辑，使得它在处理包含特定日期的提示时表现出不同的行为。这种逻辑可能是在模型训练过程中无意中形成的。
+
+3.数据集偏差:
+•如果模型训练使用的数据集在不同时间段有所不同，这可能导致模型对日期信息作出反应。例如，某些类型的内容可能更多地出现在特定时间段的数据中。
+
+4.随机性或偶然性:
+•这种现象也可能是随机性或特定实验设置的偶然结果，并不一定代表模型普遍行为。</title>
+            <link>https://nitter.cz/xiaohuggg/status/1734316369863393667#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734316369863393667#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Dec 2023 20:56:59 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Rob Lynch <a href="https://nitter.cz/RobLynch99" title="Rob Lynch">@RobLynch99</a> 发布了一条关于 GPT-4-turbo 的有趣发现。<br />
+<br />
+他指出，当通过 API 使用 GPT-4-turbo 时，如果系统提示中的日期是十二月而不是五月，模型完成任务（如代码生成）会更短，这一差异在统计上是显著的。<br />
+<br />
+有网友调侃因为12月是假期，模型自己在给自己放假…🤓偷懒！<br />
+<br />
+实验细节：<br />
+<br />
+•Rob Lynch 使用相同的提示进行了 API 调用（一个要求实现机器学习任务但不使用库的代码完成任务）。<br />
+<br />
+•他创建了两个系统提示，一个告诉 API 当前是五月，另一个是十二月，并比较了这两种情况下的结果分布。<br />
+<br />
+•对于五月的系统提示，平均值为 4298；对于十二月的系统提示，平均值为 4086。<br />
+<br />
+•在每个样本中进行了 477 次完成，t 测试的 p 值小于 2.28e-07。<br />
+<br />
+总结：<br />
+<br />
+Rob Lynch 在他的推文中报告的现象表明，GPT-4-turbo 模型在处理相同的任务时，会根据系统提示中的日期信息产生不同长度的输出。<br />
+<br />
+具体来说，他发现当模型“认为”当前是十二月而不是五月时（通过系统提示中的日期决定），它生成的代码或文本完成任务会更短。<br />
+<br />
+1.时间感知:<br />
+•这表明 GPT-4-turbo 可能对时间信息有一定的敏感性，即使这种信息是通过系统提示隐式给出的。<br />
+<br />
+2.输出变化:<br />
+•模型的输出不仅取决于给定的任务或问题，还可能受到其他上下文信息（如日期）的影响。<br />
+<br />
+3.行为模式:<br />
+•这种现象可能揭示了模型在处理信息时的某些内在行为模式或偏好。<br />
+<br />
+猜测可能原因：<br />
+<br />
+1.上下文敏感性:<br />
+•GPT-4-turbo 模型被设计为对上下文非常敏感。如果模型在处理请求时识别到特定的日期信息，它可能会根据这个信息调整其回答。这可能是因为模型在训练时接触到了与日期相关的不同类型的数据。<br />
+<br />
+2.内部逻辑:<br />
+•模型可能内部包含某种逻辑，使得它在处理包含特定日期的提示时表现出不同的行为。这种逻辑可能是在模型训练过程中无意中形成的。<br />
+<br />
+3.数据集偏差:<br />
+•如果模型训练使用的数据集在不同时间段有所不同，这可能导致模型对日期信息作出反应。例如，某些类型的内容可能更多地出现在特定时间段的数据中。<br />
+<br />
+4.随机性或偶然性:<br />
+•这种现象也可能是随机性或特定实验设置的偶然结果，并不一定代表模型普遍行为。</p>
+<p><a href="https://nitter.cz/RobLynch99/status/1734278713762549970#m">nitter.cz/RobLynch99/status/1734278713762549970#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1734366237629526108#m</id>
+            <title>推荐HuggingFace的这篇《深入解析“混合专家模型（Mixtral of Experts）” | Mixture of Experts Explained》
+
+完整的讲述了混合专家模型的各个方面。主要内容如下：
+1. 相较于密集型模型，预训练速度更快
+2. 拥有比同等参数的模型更快的推理速度
+3. 对显存要求高，因为需要将所有专家模型都加载到内存中
+4. 虽然在微调方面存在挑战，但近期关于 MoE 的指令调优研究显示出了光明前景
+
+原文：https://huggingface.co/blog/moe#switch-transformers
+翻译：https://baoyu.io/translations/llm/mixture-of-experts-explained</title>
+            <link>https://nitter.cz/dotey/status/1734366237629526108#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1734366237629526108#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 12 Dec 2023 00:15:08 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>推荐HuggingFace的这篇《深入解析“混合专家模型（Mixtral of Experts）” | Mixture of Experts Explained》<br />
+<br />
+完整的讲述了混合专家模型的各个方面。主要内容如下：<br />
+1. 相较于密集型模型，预训练速度更快<br />
+2. 拥有比同等参数的模型更快的推理速度<br />
+3. 对显存要求高，因为需要将所有专家模型都加载到内存中<br />
+4. 虽然在微调方面存在挑战，但近期关于 MoE 的指令调优研究显示出了光明前景<br />
+<br />
+原文：<a href="https://huggingface.co/blog/moe#switch-transformers">huggingface.co/blog/moe#swit…</a><br />
+翻译：<a href="https://baoyu.io/translations/llm/mixture-of-experts-explained">baoyu.io/translations/llm/mi…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JHMHpTc1dFQUFWbHZjLnBuZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/fuxiangPro/status/1734080048523821188#m</id>
             <title>RT by @dotey: **为什么伟大不能被计划**的作者对“幻觉与创造力”有不一样的观点：
 1）创造力的关键在于了解现有的东西，这是创新的基础。如果分不清现实与虚构，就难以推动真正的创新。
@@ -672,63 +812,6 @@ DreaMoving是一个基于扩散模型的人类舞蹈视频生成框架。能够�
 <p><a href="https://nitter.cz/_bmacd/status/1733891071384625438#m">nitter.cz/_bmacd/status/1733891071384625438#m</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0JDd3E0alhZQUFZT0o4LmpwZw==" />
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0JDd3U4WVhvQUFxMWNHLnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/turingbook/status/1734066061123997841#m</id>
-            <title>RT by @dotey: 扩散模型是不是多模态最好的选择？这方面新的探索很多。清华大学朱军团队 @zehuachen 等同学的工作，在文本到语音合成任务中，用确定性方法取代扩散模型，取得很好效果。“我们利用从文本输入获得的潜在表示作为先验，并在它和真实梅尔谱图之间建立一个完全易于处理的薛定谔桥梁。”</title>
-            <link>https://nitter.cz/turingbook/status/1734066061123997841#m</link>
-            <guid isPermaLink="false">https://nitter.cz/turingbook/status/1734066061123997841#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 04:22:21 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>扩散模型是不是多模态最好的选择？这方面新的探索很多。清华大学朱军团队 <a href="https://nitter.cz/zehuachen" title="泽泽">@zehuachen</a> 等同学的工作，在文本到语音合成任务中，用确定性方法取代扩散模型，取得很好效果。“我们利用从文本输入获得的潜在表示作为先验，并在它和真实梅尔谱图之间建立一个完全易于处理的薛定谔桥梁。”</p>
-<p><a href="https://nitter.cz/_akhaliq/status/1732606971876966849#m">nitter.cz/_akhaliq/status/1732606971876966849#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/mtrainier2020/status/1734076697786642837#m</id>
-            <title>RT by @dotey: 里面还是少了很多东西的。我首先建议去认真读netflix tech blog，他们的blog我认为干货含量最高的tech blog。https://netflixtechblog.com/
-每个月都只有几篇，非常值得去看。 
-Netflix非常慷慨地分享了他们的best practice。我认为任何对高可用高可靠服务有追求的人，都可以看看netflix怎么玩的。
-
-而且我也强烈推荐Netflix founder 写的那本书,  That will never work。常读常新。
-很多年轻人可能不知道，Netflix以前是邮寄DVD的。后来才搞得streaming的。 
-Netflix 对技术疯狂投入的触动是从2012年圣诞节down开始的。
-所以后面他们的技术演进对availability 有着巨大的推动。比如fault injection系列的各种monkey，都是他们搞出来的。
-在图中并没有体现，而这块对这个对行业的价值，可能不小于 spring boot 这套东西。
-还有就是最新的service mesh 基本上没有提及 ，以及他们的工作流编排引擎workflow orchestration engine (Conductor)，以及他们还有自己的媒体transcoding 的engine，cosmos等等，在存储这块，他们虽然用了大量的C*，但是也用了elasticsearch这种nonsql。
-还有netflix的CDN这块也没有涉及。另外随着machine learning 的发展，他们内部也有大量基于python的服务。</title>
-            <link>https://nitter.cz/mtrainier2020/status/1734076697786642837#m</link>
-            <guid isPermaLink="false">https://nitter.cz/mtrainier2020/status/1734076697786642837#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 05:04:36 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>里面还是少了很多东西的。我首先建议去认真读netflix tech blog，他们的blog我认为干货含量最高的tech blog。<a href="https://netflixtechblog.com/">netflixtechblog.com/</a><br />
-每个月都只有几篇，非常值得去看。 <br />
-Netflix非常慷慨地分享了他们的best practice。我认为任何对高可用高可靠服务有追求的人，都可以看看netflix怎么玩的。<br />
-<br />
-而且我也强烈推荐Netflix founder 写的那本书,  That will never work。常读常新。<br />
-很多年轻人可能不知道，Netflix以前是邮寄DVD的。后来才搞得streaming的。 <br />
-Netflix 对技术疯狂投入的触动是从2012年圣诞节down开始的。<br />
-所以后面他们的技术演进对availability 有着巨大的推动。比如fault injection系列的各种monkey，都是他们搞出来的。<br />
-在图中并没有体现，而这块对这个对行业的价值，可能不小于 spring boot 这套东西。<br />
-还有就是最新的service mesh 基本上没有提及 ，以及他们的工作流编排引擎workflow orchestration engine (Conductor)，以及他们还有自己的媒体transcoding 的engine，cosmos等等，在存储这块，他们虽然用了大量的C*，但是也用了elasticsearch这种nonsql。<br />
-还有netflix的CDN这块也没有涉及。另外随着machine learning 的发展，他们内部也有大量基于python的服务。</p>
-<p><a href="https://nitter.cz/dotey/status/1734070311606182361#m">nitter.cz/dotey/status/1734070311606182361#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JDc1NuR2J3QUFKZkxmLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
