@@ -5,6 +5,166 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1734769901964066878#m</id>
+            <title>Tesla 公布最新Optimus Gen2 机器人的演示视频
+
+比3月份公布的Gen 1进步非常大，走路拿东西都已经很流畅了...
+
+- 2个自由度的颈部关节
+- 走路速度稳定度提高了30%
+- 不影响功能的情况下，总重减少了10公斤
+- 身体平衡能力更强，可以深蹲
+- 新的手部关节，11个自由度，更加灵活
+- 轻松拿捏鸡蛋
+- 最后还表演了跳舞...</title>
+            <link>https://nitter.cz/xiaohuggg/status/1734769901964066878#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734769901964066878#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Dec 2023 02:59:09 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Tesla 公布最新Optimus Gen2 机器人的演示视频<br />
+<br />
+比3月份公布的Gen 1进步非常大，走路拿东西都已经很流畅了...<br />
+<br />
+- 2个自由度的颈部关节<br />
+- 走路速度稳定度提高了30%<br />
+- 不影响功能的情况下，总重减少了10公斤<br />
+- 身体平衡能力更强，可以深蹲<br />
+- 新的手部关节，11个自由度，更加灵活<br />
+- 轻松拿捏鸡蛋<br />
+- 最后还表演了跳舞...</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ3NjY2Njc3Njk4MjMyMzIvcHUvaW1nL3FrcVEyZll1dUR0d3J6RmcuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1734764757453025539#m</id>
+            <title>Upscale-A-Video：视频增加工具 提升视频清晰度和细节
+
+由南洋理工大学 S-Lab 实验室开发，它能够将低分辨率视频转换为高分辨率，同时提高视频的清晰度和细节。
+
+最重要的是：它可以通过文本提示来修改视频内容，比如提升特定物体的细节或改善整体的视觉效果。或者生成或修改视频内容、风格、细节等。
+
+主要能力：
+
+1、视频质量提升：Upscale-A-Video能够将分辨率较低的视频转换成高分辨率视频。例如，如果原视频模糊不清，这个工具可以使其变得更加清晰，细节更丰富。这对于改善老旧视频或质量较差的视频特别有用。
+
+2、时间一致性：在提高视频分辨率的同时，能确保视频的每一帧都平滑过渡，没有不自然的跳跃或变化。这样，视频看起来就像是原本就以高分辨率拍摄的，而不是经过后期处理的。
+
+3、文本引导的内容生成：允许用户通过输入文本提示来引导视频内容的生成。例如，用户可以输入特定的描述或指令，Upscale-A-Video将根据这些文本提示来调整视频的视觉内容。这种方法使得视频不仅在技术上得到提升，还能更好地符合用户的创意或需求。
+
+- 视频质量提升：通过文本提示，用户可以指导模型专注于视频中的某些方面，比如提升特定物体的细节或改善整体的视觉效果。
+
+- 内容生成和修改：在某些情况下，文本提示可能还用于生成或修改视频内容。例如，如果文本提示描述了某种特定的视觉风格或元素，模型可能会尝试按照这些指示调整视频内容。
+
+工作原理：
+
+在视频超分辨率领域，提高输出视频的保真度和时间一致性是一个主要挑战。这主要是因为扩散模型在生成过程中的随机性，可能导致视频中出现时间上的不连贯性。
+
+Upscale-A-Video 使用一个文本引导的潜在扩散框架来进行视频增强。这意味着它可以根据文本提示来生成更高质量的视频内容。
+
+该框架通过两个关键机制确保时间连贯性：局部上，它将时间层集成到 U-Net 和 VAE-Decoder 中，保持短序列的一致性；全局上，引入了一个无需训练的流引导的循环潜在传播模块，通过在整个序列中传播和融合潜在信息来增强视频的整体稳定性。
+
+技术细节：
+
+1、局部和全局处理结合：
+
+• 局部处理：视频被分割成片段，每个片段使用具有时间层的 U-Net 进行处理，以确保片段内的一致性。
+
+在视频的每个小片段内，使用集成了时间层的 U-Net 和 VAE-Decoder 来保持片段内的一致性。
+
+VAE-Decoder 主要用来减少剩余的闪烁伪影，以实现低级一致性。
+
+• 全局处理：通过一个流引导的循环潜在传播模块，在整个视频序列中传播和融合潜在信息，以增强视频的整体稳定性。这个模块在视频的不同部分之间建立联系，确保整个视频的一致性。
+
+2、潜在扩散模型：
+
+• 扩散过程：在潜在空间中，视频内容通过引入噪声和逐步去噪的过程来生成。这个过程允许模型逐步构建出高质量的视频内容。
+
+• 文本引导：用户可以通过文本提示来指导视频内容的生成，使得最终的视频不仅质量高，还能符合特定的视觉风格或主题。
+
+3、平衡恢复和生成：
+
+• 可调节的噪声水平：通过调整加入到输入中的噪声水平，可以在恢复原始内容和生成新内容之间找到平衡点。较低的噪声水平倾向于恢复原始内容，而较高的噪声水平则鼓励生成更细致的细节。
+
+这种方法适用于各种真实世界的视频，包括老电影片段和现代实拍视频。
+
+项目及演示：https://shangchenzhou.com/projects/upscale-a-video/
+论文：https://arxiv.org/abs/2312.06640
+GitHub：https://github.com/sczhou/Upscale-A-Video</title>
+            <link>https://nitter.cz/xiaohuggg/status/1734764757453025539#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734764757453025539#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Dec 2023 02:38:43 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Upscale-A-Video：视频增加工具 提升视频清晰度和细节<br />
+<br />
+由南洋理工大学 S-Lab 实验室开发，它能够将低分辨率视频转换为高分辨率，同时提高视频的清晰度和细节。<br />
+<br />
+最重要的是：它可以通过文本提示来修改视频内容，比如提升特定物体的细节或改善整体的视觉效果。或者生成或修改视频内容、风格、细节等。<br />
+<br />
+主要能力：<br />
+<br />
+1、视频质量提升：Upscale-A-Video能够将分辨率较低的视频转换成高分辨率视频。例如，如果原视频模糊不清，这个工具可以使其变得更加清晰，细节更丰富。这对于改善老旧视频或质量较差的视频特别有用。<br />
+<br />
+2、时间一致性：在提高视频分辨率的同时，能确保视频的每一帧都平滑过渡，没有不自然的跳跃或变化。这样，视频看起来就像是原本就以高分辨率拍摄的，而不是经过后期处理的。<br />
+<br />
+3、文本引导的内容生成：允许用户通过输入文本提示来引导视频内容的生成。例如，用户可以输入特定的描述或指令，Upscale-A-Video将根据这些文本提示来调整视频的视觉内容。这种方法使得视频不仅在技术上得到提升，还能更好地符合用户的创意或需求。<br />
+<br />
+- 视频质量提升：通过文本提示，用户可以指导模型专注于视频中的某些方面，比如提升特定物体的细节或改善整体的视觉效果。<br />
+<br />
+- 内容生成和修改：在某些情况下，文本提示可能还用于生成或修改视频内容。例如，如果文本提示描述了某种特定的视觉风格或元素，模型可能会尝试按照这些指示调整视频内容。<br />
+<br />
+工作原理：<br />
+<br />
+在视频超分辨率领域，提高输出视频的保真度和时间一致性是一个主要挑战。这主要是因为扩散模型在生成过程中的随机性，可能导致视频中出现时间上的不连贯性。<br />
+<br />
+Upscale-A-Video 使用一个文本引导的潜在扩散框架来进行视频增强。这意味着它可以根据文本提示来生成更高质量的视频内容。<br />
+<br />
+该框架通过两个关键机制确保时间连贯性：局部上，它将时间层集成到 U-Net 和 VAE-Decoder 中，保持短序列的一致性；全局上，引入了一个无需训练的流引导的循环潜在传播模块，通过在整个序列中传播和融合潜在信息来增强视频的整体稳定性。<br />
+<br />
+技术细节：<br />
+<br />
+1、局部和全局处理结合：<br />
+<br />
+• 局部处理：视频被分割成片段，每个片段使用具有时间层的 U-Net 进行处理，以确保片段内的一致性。<br />
+<br />
+在视频的每个小片段内，使用集成了时间层的 U-Net 和 VAE-Decoder 来保持片段内的一致性。<br />
+<br />
+VAE-Decoder 主要用来减少剩余的闪烁伪影，以实现低级一致性。<br />
+<br />
+• 全局处理：通过一个流引导的循环潜在传播模块，在整个视频序列中传播和融合潜在信息，以增强视频的整体稳定性。这个模块在视频的不同部分之间建立联系，确保整个视频的一致性。<br />
+<br />
+2、潜在扩散模型：<br />
+<br />
+• 扩散过程：在潜在空间中，视频内容通过引入噪声和逐步去噪的过程来生成。这个过程允许模型逐步构建出高质量的视频内容。<br />
+<br />
+• 文本引导：用户可以通过文本提示来指导视频内容的生成，使得最终的视频不仅质量高，还能符合特定的视觉风格或主题。<br />
+<br />
+3、平衡恢复和生成：<br />
+<br />
+• 可调节的噪声水平：通过调整加入到输入中的噪声水平，可以在恢复原始内容和生成新内容之间找到平衡点。较低的噪声水平倾向于恢复原始内容，而较高的噪声水平则鼓励生成更细致的细节。<br />
+<br />
+这种方法适用于各种真实世界的视频，包括老电影片段和现代实拍视频。<br />
+<br />
+项目及演示：<a href="https://shangchenzhou.com/projects/upscale-a-video/">shangchenzhou.com/projects/u…</a><br />
+论文：<a href="https://arxiv.org/abs/2312.06640">arxiv.org/abs/2312.06640</a><br />
+GitHub：<a href="https://github.com/sczhou/Upscale-A-Video">github.com/sczhou/Upscale-A-…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ3NjQwNjQ3MzQzNTU0NTYvcHUvaW1nL21zdk5vYUpxUnY0ZzVmVjkuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1734753455510794492#m</id>
             <title>#Midjourney Alpha 网站
 
@@ -874,79 +1034,6 @@ Runway 正在寻找对此研究感兴趣的人才加入他们的团队。详细�
 想实现视频里效果的你们自己也可以试试，小哥分享了代码：<a href="https://github.com/gregsadetsky/sagittarius">github.com/gregsadetsky/sagi…</a></p>
 <p><a href="https://nitter.cz/dotey/status/1734104301155262545#m">nitter.cz/dotey/status/1734104301155262545#m</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQxNzY4ODE2NzM2OTUyMzIvcHUvaW1nL0R1RXY3NzJUaDN5c0owbmsuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1734170307697721740#m</id>
-            <title>这个挺有意思🤓
-
-让物体在虚拟场景中按照特定轨迹移动
-
-#Quset3</title>
-            <link>https://nitter.cz/xiaohuggg/status/1734170307697721740#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734170307697721740#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 11:16:35 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个挺有意思🤓<br />
-<br />
-让物体在虚拟场景中按照特定轨迹移动<br />
-<br />
-<a href="https://nitter.cz/search?q=%23Quset3">#Quset3</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQxMTg0MzE4ODMxNDUyMTYvcHUvaW1nL2hwRE5TRUR3NnlqSFdHYVcuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1734139143259861185#m</id>
-            <title>Mixtral AI公布MoE 8x7B详细细节：
-
-• 32k上下文。
-• 支持英语、法语、意大利语、德语和西班牙语。
-• 性能超过Llama 2系列和GPT3.5
-• 在代码生成方面表现强劲。
-• 在MT-Bench上达到8.3的分数。
-
-技术细节：
-
-•Mixtral是一个稀疏混合专家网络，是一个仅解码器模型，其中前馈块从8组不同的参数组中选择。在每一层，对于每个令牌，路由网络选择两组（“专家”）来处理令牌并加性地结合它们的输出。
-
-•Mixtral总共有45B个参数，但每个令牌只使用12B个参数。因此，它以与12B模型相同的速度和成本处理输入和生成输出。
-
-详细内容：https://mistral.ai/news/mixtral-of-experts/</title>
-            <link>https://nitter.cz/xiaohuggg/status/1734139143259861185#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734139143259861185#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 09:12:45 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Mixtral AI公布MoE 8x7B详细细节：<br />
-<br />
-• 32k上下文。<br />
-• 支持英语、法语、意大利语、德语和西班牙语。<br />
-• 性能超过Llama 2系列和GPT3.5<br />
-• 在代码生成方面表现强劲。<br />
-• 在MT-Bench上达到8.3的分数。<br />
-<br />
-技术细节：<br />
-<br />
-•Mixtral是一个稀疏混合专家网络，是一个仅解码器模型，其中前馈块从8组不同的参数组中选择。在每一层，对于每个令牌，路由网络选择两组（“专家”）来处理令牌并加性地结合它们的输出。<br />
-<br />
-•Mixtral总共有45B个参数，但每个令牌只使用12B个参数。因此，它以与12B模型相同的速度和成本处理输入和生成输出。<br />
-<br />
-详细内容：<a href="https://mistral.ai/news/mixtral-of-experts/">mistral.ai/news/mixtral-of-e…</a></p>
-<p><a href="https://nitter.cz/xiaohuggg/status/1733694954260901907#m">nitter.cz/xiaohuggg/status/1733694954260901907#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JEbU9ZcmE0QUFyS0V2LmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
