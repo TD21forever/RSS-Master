@@ -5,6 +5,136 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1734728249396085116#m</id>
+            <title>R to @dotey: 配合 @realrenmin 老师这条一起看
+https://x.com/realrenmin/status/1734721215283986628?s=20</title>
+            <link>https://nitter.cz/dotey/status/1734728249396085116#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1734728249396085116#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Dec 2023 00:13:39 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>配合 <a href="https://nitter.cz/realrenmin" title="Sverige_ Dong-seok🇸🇪">@realrenmin</a> 老师这条一起看<br />
+<a href="https://x.com/realrenmin/status/1734721215283986628?s=20">x.com/realrenmin/status/1734…</a></p>
+<p><a href="https://nitter.cz/realrenmin/status/1734721215283986628#m">nitter.cz/realrenmin/status/1734721215283986628#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/realrenmin/status/1734721215283986628#m</id>
+            <title>RT by @dotey: Mistral AI放出Mixtral 8x7B, 基于Mixture of Experts (MoE)的开源模型，效果不错。
+
+但在我看来，MoE是transformer时代LSTM-GRU，是NLP古早的范式，architecture engineering，非常old school。核心方法是加一些gate来加强Efficient Training at Scale，简言之目的是为了低成本训练，而不是为了塑造专家模型。
+
+而Mixture of Experts的名字，太具迷惑性了，字面意思似乎是各种专家模型的组合起到1+1>2的效果。但实际看看Mixtral 8x7B，8个mistral 7b，b b不一样，但没有一个是专家模型，之所以叫做expert，居然是MoE中的FNN，我十分怀疑FNN能有什么专家能力。
+
+它的benchmarking也理所当然的跟通用大模型GPT3.5/Llama 2相比，比较的是generic能力，并没有什么突出的专家能力。粗算了一下，8x7B float16, 至少需要100GB以上GPU显存，cost巨大。在这种情况下，oss的情怀，不足以说服我不用OpenAI的api。
+
+如果我们停下来想想，什么是expert。
+首先，expert能力一定不是通用大模型的generic的能力，而是独特的specialization的能力。例如会写code的GitHub copilot，或会generate思科路由器配置命令，甚至特别会planning，特别会算数都是专家能力都算。
+简言之，expert能力是会产生特定领域特定输出的能力。所以，MoE是一个好名字，在这个时代，缺有些名不副实。
+
+而做specialization模型的技术，依然在发展，并且依然是前沿，其实就是lora微调，例如Stanford's Alpaca models项目等等，核心思想就是在开源模型上加adapter，使之能够完成一个具体领域的专家工作，其实Mistral AI的开源7b模型估计也是这么做出来的。
+
+未来，大语言模型作为agent的时代在实际中的应用，一定是llm在中间协调多种多样不同7b抽象出来的api，来完成新的human computer interaction。甚至在特定领域，这个协调工作也可以被planning expert的开源模型替代，而协调的过程，还是离不开 CoT，React，ReWoo或者其他的prompting方法。
+
+CoT, ReAct在我的推中已经分享过好几次了，接下来找时间把ReWoo, 几个微调的介绍（跳票很久了）分享给大家。</title>
+            <link>https://nitter.cz/realrenmin/status/1734721215283986628#m</link>
+            <guid isPermaLink="false">https://nitter.cz/realrenmin/status/1734721215283986628#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 12 Dec 2023 23:45:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Mistral AI放出Mixtral 8x7B, 基于Mixture of Experts (MoE)的开源模型，效果不错。<br />
+<br />
+但在我看来，MoE是transformer时代LSTM-GRU，是NLP古早的范式，architecture engineering，非常old school。核心方法是加一些gate来加强Efficient Training at Scale，简言之目的是为了低成本训练，而不是为了塑造专家模型。<br />
+<br />
+而Mixture of Experts的名字，太具迷惑性了，字面意思似乎是各种专家模型的组合起到1+1>2的效果。但实际看看Mixtral 8x7B，8个mistral 7b，b b不一样，但没有一个是专家模型，之所以叫做expert，居然是MoE中的FNN，我十分怀疑FNN能有什么专家能力。<br />
+<br />
+它的benchmarking也理所当然的跟通用大模型GPT3.5/Llama 2相比，比较的是generic能力，并没有什么突出的专家能力。粗算了一下，8x7B float16, 至少需要100GB以上GPU显存，cost巨大。在这种情况下，oss的情怀，不足以说服我不用OpenAI的api。<br />
+<br />
+如果我们停下来想想，什么是expert。<br />
+首先，expert能力一定不是通用大模型的generic的能力，而是独特的specialization的能力。例如会写code的GitHub copilot，或会generate思科路由器配置命令，甚至特别会planning，特别会算数都是专家能力都算。<br />
+简言之，expert能力是会产生特定领域特定输出的能力。所以，MoE是一个好名字，在这个时代，缺有些名不副实。<br />
+<br />
+而做specialization模型的技术，依然在发展，并且依然是前沿，其实就是lora微调，例如Stanford's Alpaca models项目等等，核心思想就是在开源模型上加adapter，使之能够完成一个具体领域的专家工作，其实Mistral AI的开源7b模型估计也是这么做出来的。<br />
+<br />
+未来，大语言模型作为agent的时代在实际中的应用，一定是llm在中间协调多种多样不同7b抽象出来的api，来完成新的human computer interaction。甚至在特定领域，这个协调工作也可以被planning expert的开源模型替代，而协调的过程，还是离不开 CoT，React，ReWoo或者其他的prompting方法。<br />
+<br />
+CoT, ReAct在我的推中已经分享过好几次了，接下来找时间把ReWoo, 几个微调的介绍（跳票很久了）分享给大家。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/mtrainier2020/status/1734671070144446927#m</id>
+            <title>RT by @dotey: 讲一个小案例，一家走完上市准备流程的公司，死在上市前的故事。中间有很多可以参考的地方。
+这家公司是欧洲某国的物流+电商企业。做了很久了，在当地也算是地头蛇了。 营收都很健康。
+随着海淘的浪潮，他们公司发展特别快。很快就被巨头给盯上了。
+第一个出手的是顺丰旗下的公司，他们的应对方法就是，你只要在一个地方设点，我就永远低于你价格10%，揽件。对于地头蛇来讲属于生死之战，可以拿其他地方的利润来补。但是对于顺丰来讲，除非公司层面有决心亏三年，一定战略占领这个地方，否则，大公司有大公司的难处。所以顺丰在该国业务开展的并不恨顺利。
+ps，这也是非常常见的打法。
+
+第二就是，老奸巨猾的某东了。
+
+首先，某东首先表示收购意愿。
+然后，强哥邀请核心创始人去家里吃饭。强哥亲自做饭。
+结果就是，该司将该公司的各种商业窍门，以及上上下下，里里外外啥都不剩，给人讲了一遍。 这是该公司犯的第一个错误。
+好了。
+过了一段时间，某东就说，给你两个选择，要么帮我们建一套跟你们一样的系统。要么我去找你竞争对手去建。
+然后收购这事呢，也一直缓慢推进。吊着你。
+这个公司，犯的第二个错误。他们知道被当枪使，还是去帮某东去建一套系统。
+果不其然，收购这事，最后也黄了。
+
+当然，还有一些事情纠葛在一起，这个公司今年黄的。
+
+lesson learned：
+1. 不要怕打架。
+2. 见到大佬不要慌，不要把核心机密全盘托出。 不见兔子不撒鹰。
+3. 打破囚徒困境的办法找到利益共同点搞联盟，搞交叉持股。</title>
+            <link>https://nitter.cz/mtrainier2020/status/1734671070144446927#m</link>
+            <guid isPermaLink="false">https://nitter.cz/mtrainier2020/status/1734671070144446927#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 12 Dec 2023 20:26:26 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>讲一个小案例，一家走完上市准备流程的公司，死在上市前的故事。中间有很多可以参考的地方。<br />
+这家公司是欧洲某国的物流+电商企业。做了很久了，在当地也算是地头蛇了。 营收都很健康。<br />
+随着海淘的浪潮，他们公司发展特别快。很快就被巨头给盯上了。<br />
+第一个出手的是顺丰旗下的公司，他们的应对方法就是，你只要在一个地方设点，我就永远低于你价格10%，揽件。对于地头蛇来讲属于生死之战，可以拿其他地方的利润来补。但是对于顺丰来讲，除非公司层面有决心亏三年，一定战略占领这个地方，否则，大公司有大公司的难处。所以顺丰在该国业务开展的并不恨顺利。<br />
+ps，这也是非常常见的打法。<br />
+<br />
+第二就是，老奸巨猾的某东了。<br />
+<br />
+首先，某东首先表示收购意愿。<br />
+然后，强哥邀请核心创始人去家里吃饭。强哥亲自做饭。<br />
+结果就是，该司将该公司的各种商业窍门，以及上上下下，里里外外啥都不剩，给人讲了一遍。 这是该公司犯的第一个错误。<br />
+好了。<br />
+过了一段时间，某东就说，给你两个选择，要么帮我们建一套跟你们一样的系统。要么我去找你竞争对手去建。<br />
+然后收购这事呢，也一直缓慢推进。吊着你。<br />
+这个公司，犯的第二个错误。他们知道被当枪使，还是去帮某东去建一套系统。<br />
+果不其然，收购这事，最后也黄了。<br />
+<br />
+当然，还有一些事情纠葛在一起，这个公司今年黄的。<br />
+<br />
+lesson learned：<br />
+1. 不要怕打架。<br />
+2. 见到大佬不要慌，不要把核心机密全盘托出。 不见兔子不撒鹰。<br />
+3. 打破囚徒困境的办法找到利益共同点搞联盟，搞交叉持股。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1734708814983602256#m</id>
             <title>哇塞，Mixtral-8x7b 已经成为排名第一的开源模型。
 
@@ -1069,170 +1199,6 @@ ConceptARC\_提取\_对象\_第10节\_测试对象\_3<br />
 <br />
 接下来的推文（2/5）：</p>
 <p><a href="https://nitter.cz/kenshin9000_/status/1734238211088506967#m">nitter.cz/kenshin9000_/status/1734238211088506967#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1734381683384754280#m</id>
-            <title>如果要体验开源的多专家混合模型 Mixtral-8x7B 能力的话，可以到 POE 上去测试：http://poe.com/Mixtral-8x7B-Chat
-
-https://poe.com/Mixtral-8x7B-Chat</title>
-            <link>https://nitter.cz/dotey/status/1734381683384754280#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1734381683384754280#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 12 Dec 2023 01:16:31 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>如果要体验开源的多专家混合模型 Mixtral-8x7B 能力的话，可以到 POE 上去测试：<a href="http://poe.com/Mixtral-8x7B-Chat">poe.com/Mixtral-8x7B-Chat</a><br />
-<br />
-<a href="https://poe.com/Mixtral-8x7B-Chat">poe.com/Mixtral-8x7B-Chat</a></p>
-<p><a href="https://nitter.cz/goldengrape/status/1734331331776299206#m">nitter.cz/goldengrape/status/1734331331776299206#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JIQzVsOFhJQUVWVjYtLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JIQzhrelhZQUFlZExtLnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1734316369863393667#m</id>
-            <title>RT by @dotey: Rob Lynch @RobLynch99 发布了一条关于 GPT-4-turbo 的有趣发现。
-
-他指出，当通过 API 使用 GPT-4-turbo 时，如果系统提示中的日期是十二月而不是五月，模型完成任务（如代码生成）会更短，这一差异在统计上是显著的。
-
-有网友调侃因为12月是假期，模型自己在给自己放假…🤓偷懒！
-
-实验细节：
-
-•Rob Lynch 使用相同的提示进行了 API 调用（一个要求实现机器学习任务但不使用库的代码完成任务）。
-
-•他创建了两个系统提示，一个告诉 API 当前是五月，另一个是十二月，并比较了这两种情况下的结果分布。
-
-•对于五月的系统提示，平均值为 4298；对于十二月的系统提示，平均值为 4086。
-
-•在每个样本中进行了 477 次完成，t 测试的 p 值小于 2.28e-07。
-
-总结：
-
-Rob Lynch 在他的推文中报告的现象表明，GPT-4-turbo 模型在处理相同的任务时，会根据系统提示中的日期信息产生不同长度的输出。
-
-具体来说，他发现当模型“认为”当前是十二月而不是五月时（通过系统提示中的日期决定），它生成的代码或文本完成任务会更短。
-
-1.时间感知:
-•这表明 GPT-4-turbo 可能对时间信息有一定的敏感性，即使这种信息是通过系统提示隐式给出的。
-
-2.输出变化:
-•模型的输出不仅取决于给定的任务或问题，还可能受到其他上下文信息（如日期）的影响。
-
-3.行为模式:
-•这种现象可能揭示了模型在处理信息时的某些内在行为模式或偏好。
-
-猜测可能原因：
-
-1.上下文敏感性:
-•GPT-4-turbo 模型被设计为对上下文非常敏感。如果模型在处理请求时识别到特定的日期信息，它可能会根据这个信息调整其回答。这可能是因为模型在训练时接触到了与日期相关的不同类型的数据。
-
-2.内部逻辑:
-•模型可能内部包含某种逻辑，使得它在处理包含特定日期的提示时表现出不同的行为。这种逻辑可能是在模型训练过程中无意中形成的。
-
-3.数据集偏差:
-•如果模型训练使用的数据集在不同时间段有所不同，这可能导致模型对日期信息作出反应。例如，某些类型的内容可能更多地出现在特定时间段的数据中。
-
-4.随机性或偶然性:
-•这种现象也可能是随机性或特定实验设置的偶然结果，并不一定代表模型普遍行为。</title>
-            <link>https://nitter.cz/xiaohuggg/status/1734316369863393667#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1734316369863393667#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 Dec 2023 20:56:59 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Rob Lynch <a href="https://nitter.cz/RobLynch99" title="Rob Lynch">@RobLynch99</a> 发布了一条关于 GPT-4-turbo 的有趣发现。<br />
-<br />
-他指出，当通过 API 使用 GPT-4-turbo 时，如果系统提示中的日期是十二月而不是五月，模型完成任务（如代码生成）会更短，这一差异在统计上是显著的。<br />
-<br />
-有网友调侃因为12月是假期，模型自己在给自己放假…🤓偷懒！<br />
-<br />
-实验细节：<br />
-<br />
-•Rob Lynch 使用相同的提示进行了 API 调用（一个要求实现机器学习任务但不使用库的代码完成任务）。<br />
-<br />
-•他创建了两个系统提示，一个告诉 API 当前是五月，另一个是十二月，并比较了这两种情况下的结果分布。<br />
-<br />
-•对于五月的系统提示，平均值为 4298；对于十二月的系统提示，平均值为 4086。<br />
-<br />
-•在每个样本中进行了 477 次完成，t 测试的 p 值小于 2.28e-07。<br />
-<br />
-总结：<br />
-<br />
-Rob Lynch 在他的推文中报告的现象表明，GPT-4-turbo 模型在处理相同的任务时，会根据系统提示中的日期信息产生不同长度的输出。<br />
-<br />
-具体来说，他发现当模型“认为”当前是十二月而不是五月时（通过系统提示中的日期决定），它生成的代码或文本完成任务会更短。<br />
-<br />
-1.时间感知:<br />
-•这表明 GPT-4-turbo 可能对时间信息有一定的敏感性，即使这种信息是通过系统提示隐式给出的。<br />
-<br />
-2.输出变化:<br />
-•模型的输出不仅取决于给定的任务或问题，还可能受到其他上下文信息（如日期）的影响。<br />
-<br />
-3.行为模式:<br />
-•这种现象可能揭示了模型在处理信息时的某些内在行为模式或偏好。<br />
-<br />
-猜测可能原因：<br />
-<br />
-1.上下文敏感性:<br />
-•GPT-4-turbo 模型被设计为对上下文非常敏感。如果模型在处理请求时识别到特定的日期信息，它可能会根据这个信息调整其回答。这可能是因为模型在训练时接触到了与日期相关的不同类型的数据。<br />
-<br />
-2.内部逻辑:<br />
-•模型可能内部包含某种逻辑，使得它在处理包含特定日期的提示时表现出不同的行为。这种逻辑可能是在模型训练过程中无意中形成的。<br />
-<br />
-3.数据集偏差:<br />
-•如果模型训练使用的数据集在不同时间段有所不同，这可能导致模型对日期信息作出反应。例如，某些类型的内容可能更多地出现在特定时间段的数据中。<br />
-<br />
-4.随机性或偶然性:<br />
-•这种现象也可能是随机性或特定实验设置的偶然结果，并不一定代表模型普遍行为。</p>
-<p><a href="https://nitter.cz/RobLynch99/status/1734278713762549970#m">nitter.cz/RobLynch99/status/1734278713762549970#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1734366237629526108#m</id>
-            <title>推荐HuggingFace的这篇《深入解析“混合专家模型（Mixtral of Experts）” | Mixture of Experts Explained》
-
-完整的讲述了混合专家模型的各个方面。主要内容如下：
-1. 相较于密集型模型，预训练速度更快
-2. 拥有比同等参数的模型更快的推理速度
-3. 对显存要求高，因为需要将所有专家模型都加载到内存中
-4. 虽然在微调方面存在挑战，但近期关于 MoE 的指令调优研究显示出了光明前景
-
-原文：https://huggingface.co/blog/moe#switch-transformers
-翻译：https://baoyu.io/translations/llm/mixture-of-experts-explained</title>
-            <link>https://nitter.cz/dotey/status/1734366237629526108#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1734366237629526108#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 12 Dec 2023 00:15:08 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>推荐HuggingFace的这篇《深入解析“混合专家模型（Mixtral of Experts）” | Mixture of Experts Explained》<br />
-<br />
-完整的讲述了混合专家模型的各个方面。主要内容如下：<br />
-1. 相较于密集型模型，预训练速度更快<br />
-2. 拥有比同等参数的模型更快的推理速度<br />
-3. 对显存要求高，因为需要将所有专家模型都加载到内存中<br />
-4. 虽然在微调方面存在挑战，但近期关于 MoE 的指令调优研究显示出了光明前景<br />
-<br />
-原文：<a href="https://huggingface.co/blog/moe#switch-transformers">huggingface.co/blog/moe#swit…</a><br />
-翻译：<a href="https://baoyu.io/translations/llm/mixture-of-experts-explained">baoyu.io/translations/llm/mi…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JHMHpTc1dFQUFWbHZjLnBuZw==" />
                 ]]>
             </content:encoded>
         </item>
