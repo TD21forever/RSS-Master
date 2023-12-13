@@ -5,6 +5,48 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1734851634373820808#m</id>
+            <title>海德堡大学开源了一个优化版本的 ContorlNet 模型：ConTorlNetXS。这个架构的 ContorlNet 模型精简了原来的模型推理和训练的时间都提高了两倍，同时生成图片的质量更高，控制更加精准。
+
+概述：
+这个项目中，我们研究了用于控制基于稳定扩散模型的图像生成过程的ControlNet的大小和架构设计。我们展示了一个新的架构，其参数仅为基础模型的1%，实现了最先进的结果，并在FID分数方面表现出比ControlNet更好的性能。因此，我们称之为ControlNet-XS。
+
+原理：
+原始的ControlNet是StableDiffusion基础模型中U-Net编码器的副本，因此接收与基础模型相同的输入，并附加一个类似边缘图的引导信号。经过训练的ControlNet的中间输出然后添加到基础模型的解码器层的输入中。在ControlNet的训练过程中，基础模型的权重保持冻结。我们发现这种方法存在几个概念上的问题，导致ControlNet过于庞大，并且生成图像的质量显著降低。
+我们通过将连接从编码器基础模型添加到控制编码器来解决延迟反馈的第一个问题。通过这种方式，纠正可以更快地适应基础模型的生成过程。然而，它并没有完全消除延迟，因为基础模型的编码器仍然没有受到引导。因此，我们从ControlNet-XS直接将额外的连接添加到基础模型的编码器中，直接影响整个生成过程。
+
+大小和FID分数比较：
+我们评估了三种变体（A、B、C）相对于原始的ControlNet在COCO2017的验证集上的FID分数表现。我们所有的变体都取得了显著的改进，同时只使用了原始ControlNet参数的一小部分。
+
+论文地址：https://arxiv.org/abs/2312.06573</title>
+            <link>https://nitter.cz/op7418/status/1734851634373820808#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734851634373820808#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Dec 2023 08:23:56 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>海德堡大学开源了一个优化版本的 ContorlNet 模型：ConTorlNetXS。这个架构的 ContorlNet 模型精简了原来的模型推理和训练的时间都提高了两倍，同时生成图片的质量更高，控制更加精准。<br />
+<br />
+概述：<br />
+这个项目中，我们研究了用于控制基于稳定扩散模型的图像生成过程的ControlNet的大小和架构设计。我们展示了一个新的架构，其参数仅为基础模型的1%，实现了最先进的结果，并在FID分数方面表现出比ControlNet更好的性能。因此，我们称之为ControlNet-XS。<br />
+<br />
+原理：<br />
+原始的ControlNet是StableDiffusion基础模型中U-Net编码器的副本，因此接收与基础模型相同的输入，并附加一个类似边缘图的引导信号。经过训练的ControlNet的中间输出然后添加到基础模型的解码器层的输入中。在ControlNet的训练过程中，基础模型的权重保持冻结。我们发现这种方法存在几个概念上的问题，导致ControlNet过于庞大，并且生成图像的质量显著降低。<br />
+我们通过将连接从编码器基础模型添加到控制编码器来解决延迟反馈的第一个问题。通过这种方式，纠正可以更快地适应基础模型的生成过程。然而，它并没有完全消除延迟，因为基础模型的编码器仍然没有受到引导。因此，我们从ControlNet-XS直接将额外的连接添加到基础模型的编码器中，直接影响整个生成过程。<br />
+<br />
+大小和FID分数比较：<br />
+我们评估了三种变体（A、B、C）相对于原始的ControlNet在COCO2017的验证集上的FID分数表现。我们所有的变体都取得了显著的改进，同时只使用了原始ControlNet参数的一小部分。<br />
+<br />
+论文地址：<a href="https://arxiv.org/abs/2312.06573">arxiv.org/abs/2312.06573</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ4NTA3ODIxNTQxMDg5MjgvcHUvaW1nLzdqaUpfTFdwaGhQVFhHZ2ouanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1734834548062720190#m</id>
             <title>R to @op7418: 他们要再这么搞开源名声都臭了</title>
             <link>https://nitter.cz/op7418/status/1734834548062720190#m</link>
@@ -558,24 +600,6 @@ Phi-2 是一个基础模型，没有经过人类反馈强化学习（RLHF）的�
                     <p>写个如何用 Ollama 在 Mac 本地跑 LLM，并且用在 Obsidian 上处理自己的笔记和内容的小教程。视频是具体的演示，我把等待时间剪掉了。<br />
 我们开始具体的教程🧵：</p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ0OTIyNTkzOTgzMjgzMjAvcHUvaW1nL1RTOTNndlFHLTBvQU5MWmouanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734633006575337611#m</id>
-            <title>runway现在运动笔刷加上提示词可以让人物面部产生指定的表情，比如开心恐惧等，也可以对面部器官进行控制比如睁眼闭眼。</title>
-            <link>https://nitter.cz/op7418/status/1734633006575337611#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734633006575337611#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 12 Dec 2023 17:55:11 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>runway现在运动笔刷加上提示词可以让人物面部产生指定的表情，比如开心恐惧等，也可以对面部器官进行控制比如睁眼闭眼。</p>
-<p><a href="https://nitter.cz/runwayml/status/1734574651630616710#m">nitter.cz/runwayml/status/1734574651630616710#m</a></p>
                 ]]>
             </content:encoded>
         </item>
