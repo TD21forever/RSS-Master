@@ -5,6 +5,46 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1734834158869123480#m</id>
+            <title>RT by @dotey: 阿里期货开源，再发新项目：虚拟服装试穿。只需要一张人物照片和服装照片就可以让那个人穿上这个衣服，对服装行业是个利好。
+效果确实很好，但是全是期货开源很容易被当成诈骗啊。
+Reddit 有个宣传这个项目的帖子，下面全是在喷，用不到就是不存在。
+还可以跟前几天发的Animate-Anyone项目结合生成跳舞视频。
+
+简介：
+Outfit Anyone通过利用双流条件扩散模型来解决这些限制，使其能够熟练处理服装变形，从而获得更逼真的结果。它通过可扩展性（调节姿势和身体形状等因素）和广泛适用性（从动漫到野外图像）来区别于其他方法。Outfit Anyone在各种场景中的表现突显了它在实际部署中的实用性和准备就绪性。
+
+实现方法：
+核心是条件扩散模型，它处理模特、服装和相关文本提示的图像，以服装图像作为控制因素。在内部，网络分为两个流，独立处理模特和服装数据。这些流在融合网络中汇聚，便于将服装细节嵌入模特的特征表示中。在此基础上，我们建立了Outfit Anyone，包括两个关键元素：用于初始试穿图像的零样本试穿网络，以及用于增强输出图像中服装和皮肤纹理的事后优化器。
+
+项目地址：https://humanaigc.github.io/outfit-anyone/</title>
+            <link>https://nitter.cz/op7418/status/1734834158869123480#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734834158869123480#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Dec 2023 07:14:29 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>阿里期货开源，再发新项目：虚拟服装试穿。只需要一张人物照片和服装照片就可以让那个人穿上这个衣服，对服装行业是个利好。<br />
+效果确实很好，但是全是期货开源很容易被当成诈骗啊。<br />
+Reddit 有个宣传这个项目的帖子，下面全是在喷，用不到就是不存在。<br />
+还可以跟前几天发的Animate-Anyone项目结合生成跳舞视频。<br />
+<br />
+简介：<br />
+Outfit Anyone通过利用双流条件扩散模型来解决这些限制，使其能够熟练处理服装变形，从而获得更逼真的结果。它通过可扩展性（调节姿势和身体形状等因素）和广泛适用性（从动漫到野外图像）来区别于其他方法。Outfit Anyone在各种场景中的表现突显了它在实际部署中的实用性和准备就绪性。<br />
+<br />
+实现方法：<br />
+核心是条件扩散模型，它处理模特、服装和相关文本提示的图像，以服装图像作为控制因素。在内部，网络分为两个流，独立处理模特和服装数据。这些流在融合网络中汇聚，便于将服装细节嵌入模特的特征表示中。在此基础上，我们建立了Outfit Anyone，包括两个关键元素：用于初始试穿图像的零样本试穿网络，以及用于增强输出图像中服装和皮肤纹理的事后优化器。<br />
+<br />
+项目地址：<a href="https://humanaigc.github.io/outfit-anyone/">humanaigc.github.io/outfit-a…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ4MzM2OTY4ODMzMzEwNzIvcHUvaW1nL3FsaG1TQl9ManRXRkp5V00uanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/MoonAtCloud/status/1734765525266485566#m</id>
             <title>RT by @dotey: 天琴座计划 Project Lyra
 
@@ -523,55 +563,6 @@ https://x.com/realrenmin/status/1734721215283986628?s=20</title>
                     <p>配合 <a href="https://nitter.cz/realrenmin" title="Sverige_ Dong-seok🇸🇪">@realrenmin</a> 老师这条一起看<br />
 <a href="https://x.com/realrenmin/status/1734721215283986628?s=20">x.com/realrenmin/status/1734…</a></p>
 <p><a href="https://nitter.cz/realrenmin/status/1734721215283986628#m">nitter.cz/realrenmin/status/1734721215283986628#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/realrenmin/status/1734721215283986628#m</id>
-            <title>RT by @dotey: Mistral AI放出Mixtral 8x7B, 基于Mixture of Experts (MoE)的开源模型，效果不错。
-
-但在我看来，MoE是transformer时代LSTM-GRU，是NLP古早的范式，architecture engineering，非常old school。核心方法是加一些gate来加强Efficient Training at Scale，简言之目的是为了低成本训练，而不是为了塑造专家模型。
-
-而Mixture of Experts的名字，太具迷惑性了，字面意思似乎是各种专家模型的组合起到1+1>2的效果。但实际看看Mixtral 8x7B，8个mistral 7b，b b不一样，但没有一个是专家模型，之所以叫做expert，居然是MoE中的FNN，我十分怀疑FNN能有什么专家能力。
-
-它的benchmarking也理所当然的跟通用大模型GPT3.5/Llama 2相比，比较的是generic能力，并没有什么突出的专家能力。粗算了一下，8x7B float16, 至少需要100GB以上GPU显存，cost巨大。在这种情况下，oss的情怀，不足以说服我不用OpenAI的api。
-
-如果我们停下来想想，什么是expert。
-首先，expert能力一定不是通用大模型的generic的能力，而是独特的specialization的能力。例如会写code的GitHub copilot，或会generate思科路由器配置命令，甚至特别会planning，特别会算数都是专家能力都算。
-简言之，expert能力是会产生特定领域特定输出的能力。所以，MoE是一个好名字，在这个时代，缺有些名不副实。
-
-而做specialization模型的技术，依然在发展，并且依然是前沿，其实就是lora微调，例如Stanford's Alpaca models项目等等，核心思想就是在开源模型上加adapter，使之能够完成一个具体领域的专家工作，其实Mistral AI的开源7b模型估计也是这么做出来的。
-
-未来，大语言模型作为agent的时代在实际中的应用，一定是llm在中间协调多种多样不同7b抽象出来的api，来完成新的human computer interaction。甚至在特定领域，这个协调工作也可以被planning expert的开源模型替代，而协调的过程，还是离不开 CoT，React，ReWoo或者其他的prompting方法。
-
-CoT, ReAct在我的推中已经分享过好几次了，接下来找时间把ReWoo, 几个微调的介绍（跳票很久了）分享给大家。</title>
-            <link>https://nitter.cz/realrenmin/status/1734721215283986628#m</link>
-            <guid isPermaLink="false">https://nitter.cz/realrenmin/status/1734721215283986628#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 12 Dec 2023 23:45:41 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Mistral AI放出Mixtral 8x7B, 基于Mixture of Experts (MoE)的开源模型，效果不错。<br />
-<br />
-但在我看来，MoE是transformer时代LSTM-GRU，是NLP古早的范式，architecture engineering，非常old school。核心方法是加一些gate来加强Efficient Training at Scale，简言之目的是为了低成本训练，而不是为了塑造专家模型。<br />
-<br />
-而Mixture of Experts的名字，太具迷惑性了，字面意思似乎是各种专家模型的组合起到1+1>2的效果。但实际看看Mixtral 8x7B，8个mistral 7b，b b不一样，但没有一个是专家模型，之所以叫做expert，居然是MoE中的FNN，我十分怀疑FNN能有什么专家能力。<br />
-<br />
-它的benchmarking也理所当然的跟通用大模型GPT3.5/Llama 2相比，比较的是generic能力，并没有什么突出的专家能力。粗算了一下，8x7B float16, 至少需要100GB以上GPU显存，cost巨大。在这种情况下，oss的情怀，不足以说服我不用OpenAI的api。<br />
-<br />
-如果我们停下来想想，什么是expert。<br />
-首先，expert能力一定不是通用大模型的generic的能力，而是独特的specialization的能力。例如会写code的GitHub copilot，或会generate思科路由器配置命令，甚至特别会planning，特别会算数都是专家能力都算。<br />
-简言之，expert能力是会产生特定领域特定输出的能力。所以，MoE是一个好名字，在这个时代，缺有些名不副实。<br />
-<br />
-而做specialization模型的技术，依然在发展，并且依然是前沿，其实就是lora微调，例如Stanford's Alpaca models项目等等，核心思想就是在开源模型上加adapter，使之能够完成一个具体领域的专家工作，其实Mistral AI的开源7b模型估计也是这么做出来的。<br />
-<br />
-未来，大语言模型作为agent的时代在实际中的应用，一定是llm在中间协调多种多样不同7b抽象出来的api，来完成新的human computer interaction。甚至在特定领域，这个协调工作也可以被planning expert的开源模型替代，而协调的过程，还是离不开 CoT，React，ReWoo或者其他的prompting方法。<br />
-<br />
-CoT, ReAct在我的推中已经分享过好几次了，接下来找时间把ReWoo, 几个微调的介绍（跳票很久了）分享给大家。</p>
                 ]]>
             </content:encoded>
         </item>
