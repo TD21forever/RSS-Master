@@ -5,6 +5,255 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1734954527462420822#m</id>
+            <title>Notdiamond-0001这个项目挺屌的，可以自动帮你选择将用户的问题发送给GPT-4还是GPT-3.5，从而大幅降低调用模型的成本提高回答的准确性。
+以后还会推出Gemini、Mistral、Claude 和 Llama这几个模型的自动选择。
+
+下面是几个重点功能：
+◇ 在用作路由器时，Notdiamond-0001的性能比GPT-4高出1.51倍。
+◇ 确定要调用哪个模型在<10毫秒内完成。
+◇ 可通过API免费获得或者在HF上使用，还会全天候持续监控OpenAI是否中断，并重新路由到你选择的备用模型。
+
+未来的规划：很快将发布动态路由到 Gemini、Claude、Mistral、Llama、Cohere 和更多模型的功能，以及你自己的微调模型和自定义工作流程、代理、RAG 应用程序和链。
+
+这里使用：https://huggingface.co/notdiamond/notdiamond-0001</title>
+            <link>https://nitter.cz/op7418/status/1734954527462420822#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734954527462420822#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Dec 2023 15:12:47 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Notdiamond-0001这个项目挺屌的，可以自动帮你选择将用户的问题发送给GPT-4还是GPT-3.5，从而大幅降低调用模型的成本提高回答的准确性。<br />
+以后还会推出Gemini、Mistral、Claude 和 Llama这几个模型的自动选择。<br />
+<br />
+下面是几个重点功能：<br />
+◇ 在用作路由器时，Notdiamond-0001的性能比GPT-4高出1.51倍。<br />
+◇ 确定要调用哪个模型在<10毫秒内完成。<br />
+◇ 可通过API免费获得或者在HF上使用，还会全天候持续监控OpenAI是否中断，并重新路由到你选择的备用模型。<br />
+<br />
+未来的规划：很快将发布动态路由到 Gemini、Claude、Mistral、Llama、Cohere 和更多模型的功能，以及你自己的微调模型和自定义工作流程、代理、RAG 应用程序和链。<br />
+<br />
+这里使用：<a href="https://huggingface.co/notdiamond/notdiamond-0001">huggingface.co/notdiamond/no…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JQTHVoLWJNQUFmY1BRLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734760424456024238#m</id>
+            <title>RT by @op7418: Mixtral-8x7b 上限这个ELO测试之后获得了1000多次投票，得分马上就要超过cloude1 了，已经超过了所有开源模型，模型质量确实顶。</title>
+            <link>https://nitter.cz/op7418/status/1734760424456024238#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734760424456024238#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Dec 2023 02:21:30 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Mixtral-8x7b 上限这个ELO测试之后获得了1000多次投票，得分马上就要超过cloude1 了，已经超过了所有开源模型，模型质量确实顶。</p>
+<p><a href="https://nitter.cz/lmsysorg/status/1734680611393073289#m">nitter.cz/lmsysorg/status/1734680611393073289#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734829583328039177#m</id>
+            <title>RT by @op7418: MJ Discord 有个频道的人写了一下 Midjourney 风格微调的原理，跟我原来想的完全不一样，原来提示词的作用没那么大。哈哈哈哈。
+
+简单说一下结论：
+
+✱无论使用什么提示词，风格调整器中两列 128 张图片的风格是固定的。
+也就是说你用两个不同的提示词微调选择相同位置的图片也会获得一个相同的风格，比如下面的图是用不同的风格生成的，完全一样。
+
+✱生成风格的提示词只对风格调整时的图像起作用，不会对使用风格的图像起作用。
+
+✱你的提示词只有跟原提示词类似才能够获得跟风格调节器里面图片的效果。如果用的提示词跟原来的一点关系没有就有可能得到完全不同的结果。
+
+那个帖子的原文翻译：
+
+免责声明：此内容非 MidJourney 官方文档，仅代表个人观点，未经官方认证。
+
+✱ 风格调节器是由 128 行和 3 列构成的网格。每个网格位置，如第 1 行左列（1L），在所有网格中完全一致，且风格指向的排序亦然。也就是说，如果你在十个不同的调节器中选择了 1L、6R、9L 和 11R，最终的风格效果将完全相同。
+✱ 因此，你在风格调节器中所用的提示仅影响调节器内生成的图片，不会影响后续图片，除非使用同一提示语。
+✱ 这里展示了四种不同风格调节器，使用同一调节方向生成的作品。
+
+如果不同调节器生成的图片大相径庭，会影响用这个调节器生成的图片吗？
+不会，因为提示仅对调节器内的图片产生影响，而非用调节器生成的图片。_那为何会有这么多不同的调节器？_ 因为每个调节器生成的图片都反映了所用的提示语，使你能通过不同风格直观感受你的提示。
+
+我必须用类似于制作调节器时的提示语吗？
+你的提示越接近原始提示，你得到的图片就越接近调节器内的图片。若使用不同提示，根据选择的风格方向，结果可能会截然不同。
+
+那么，使用风格调节器的意义何在？
+举例来说，对于 `picture of a woman` 这类提示，在有调节器之前，可用的风格非常有限。现在，调节器能展示出 256 种不同的 `picture of a woman` 风格，从喷笔到怪异、铅笔画到真实照片、鲜艳到柔和、繁复到简约、写实到超现实等。你可以选择多种或少量这些风格方向来创造自己的独特风格。若你的后续提示语接近调节器的提示，风格将非常可预测。若使用不同提示，可能会有意想不到的结果，但依然比默认的 MJ 提供了更多的风格选择。
+
+原贴地址：https://discord.com/channels/662267976984297473/1179745230887591957</title>
+            <link>https://nitter.cz/op7418/status/1734829583328039177#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734829583328039177#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Dec 2023 06:56:18 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>MJ Discord 有个频道的人写了一下 Midjourney 风格微调的原理，跟我原来想的完全不一样，原来提示词的作用没那么大。哈哈哈哈。<br />
+<br />
+简单说一下结论：<br />
+<br />
+✱无论使用什么提示词，风格调整器中两列 128 张图片的风格是固定的。<br />
+也就是说你用两个不同的提示词微调选择相同位置的图片也会获得一个相同的风格，比如下面的图是用不同的风格生成的，完全一样。<br />
+<br />
+✱生成风格的提示词只对风格调整时的图像起作用，不会对使用风格的图像起作用。<br />
+<br />
+✱你的提示词只有跟原提示词类似才能够获得跟风格调节器里面图片的效果。如果用的提示词跟原来的一点关系没有就有可能得到完全不同的结果。<br />
+<br />
+那个帖子的原文翻译：<br />
+<br />
+免责声明：此内容非 MidJourney 官方文档，仅代表个人观点，未经官方认证。<br />
+<br />
+✱ 风格调节器是由 128 行和 3 列构成的网格。每个网格位置，如第 1 行左列（1L），在所有网格中完全一致，且风格指向的排序亦然。也就是说，如果你在十个不同的调节器中选择了 1L、6R、9L 和 11R，最终的风格效果将完全相同。<br />
+✱ 因此，你在风格调节器中所用的提示仅影响调节器内生成的图片，不会影响后续图片，除非使用同一提示语。<br />
+✱ 这里展示了四种不同风格调节器，使用同一调节方向生成的作品。<br />
+<br />
+如果不同调节器生成的图片大相径庭，会影响用这个调节器生成的图片吗？<br />
+不会，因为提示仅对调节器内的图片产生影响，而非用调节器生成的图片。_那为何会有这么多不同的调节器？_ 因为每个调节器生成的图片都反映了所用的提示语，使你能通过不同风格直观感受你的提示。<br />
+<br />
+我必须用类似于制作调节器时的提示语吗？<br />
+你的提示越接近原始提示，你得到的图片就越接近调节器内的图片。若使用不同提示，根据选择的风格方向，结果可能会截然不同。<br />
+<br />
+那么，使用风格调节器的意义何在？<br />
+举例来说，对于 `picture of a woman` 这类提示，在有调节器之前，可用的风格非常有限。现在，调节器能展示出 256 种不同的 `picture of a woman` 风格，从喷笔到怪异、铅笔画到真实照片、鲜艳到柔和、繁复到简约、写实到超现实等。你可以选择多种或少量这些风格方向来创造自己的独特风格。若你的后续提示语接近调节器的提示，风格将非常可预测。若使用不同提示，可能会有意想不到的结果，但依然比默认的 MJ 提供了更多的风格选择。<br />
+<br />
+原贴地址：<a href="https://discord.com/channels/662267976984297473/1179745230887591957">discord.com/channels/6622679…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JOYURsM2FVQUF0QkNZLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734834158869123480#m</id>
+            <title>RT by @op7418: 阿里期货开源，再发新项目：虚拟服装试穿。只需要一张人物照片和服装照片就可以让那个人穿上这个衣服，对服装行业是个利好。
+效果确实很好，但是全是期货开源很容易被当成诈骗啊。
+Reddit 有个宣传这个项目的帖子，下面全是在喷，用不到就是不存在。
+还可以跟前几天发的Animate-Anyone项目结合生成跳舞视频。
+
+简介：
+Outfit Anyone通过利用双流条件扩散模型来解决这些限制，使其能够熟练处理服装变形，从而获得更逼真的结果。它通过可扩展性（调节姿势和身体形状等因素）和广泛适用性（从动漫到野外图像）来区别于其他方法。Outfit Anyone在各种场景中的表现突显了它在实际部署中的实用性和准备就绪性。
+
+实现方法：
+核心是条件扩散模型，它处理模特、服装和相关文本提示的图像，以服装图像作为控制因素。在内部，网络分为两个流，独立处理模特和服装数据。这些流在融合网络中汇聚，便于将服装细节嵌入模特的特征表示中。在此基础上，我们建立了Outfit Anyone，包括两个关键元素：用于初始试穿图像的零样本试穿网络，以及用于增强输出图像中服装和皮肤纹理的事后优化器。
+
+项目地址：https://humanaigc.github.io/outfit-anyone/</title>
+            <link>https://nitter.cz/op7418/status/1734834158869123480#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734834158869123480#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Dec 2023 07:14:29 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>阿里期货开源，再发新项目：虚拟服装试穿。只需要一张人物照片和服装照片就可以让那个人穿上这个衣服，对服装行业是个利好。<br />
+效果确实很好，但是全是期货开源很容易被当成诈骗啊。<br />
+Reddit 有个宣传这个项目的帖子，下面全是在喷，用不到就是不存在。<br />
+还可以跟前几天发的Animate-Anyone项目结合生成跳舞视频。<br />
+<br />
+简介：<br />
+Outfit Anyone通过利用双流条件扩散模型来解决这些限制，使其能够熟练处理服装变形，从而获得更逼真的结果。它通过可扩展性（调节姿势和身体形状等因素）和广泛适用性（从动漫到野外图像）来区别于其他方法。Outfit Anyone在各种场景中的表现突显了它在实际部署中的实用性和准备就绪性。<br />
+<br />
+实现方法：<br />
+核心是条件扩散模型，它处理模特、服装和相关文本提示的图像，以服装图像作为控制因素。在内部，网络分为两个流，独立处理模特和服装数据。这些流在融合网络中汇聚，便于将服装细节嵌入模特的特征表示中。在此基础上，我们建立了Outfit Anyone，包括两个关键元素：用于初始试穿图像的零样本试穿网络，以及用于增强输出图像中服装和皮肤纹理的事后优化器。<br />
+<br />
+项目地址：<a href="https://humanaigc.github.io/outfit-anyone/">humanaigc.github.io/outfit-a…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ4MzM2OTY4ODMzMzEwNzIvcHUvaW1nL3FsaG1TQl9ManRXRkp5V00uanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734851634373820808#m</id>
+            <title>RT by @op7418: 海德堡大学开源了一个优化版本的 ContorlNet 模型：ConTorlNetXS。这个架构的 ContorlNet 模型精简了原来的模型推理和训练的时间都提高了两倍，同时生成图片的质量更高，控制更加精准。
+
+概述：
+这个项目中，我们研究了用于控制基于稳定扩散模型的图像生成过程的ControlNet的大小和架构设计。我们展示了一个新的架构，其参数仅为基础模型的1%，实现了最先进的结果，并在FID分数方面表现出比ControlNet更好的性能。因此，我们称之为ControlNet-XS。
+
+原理：
+原始的ControlNet是StableDiffusion基础模型中U-Net编码器的副本，因此接收与基础模型相同的输入，并附加一个类似边缘图的引导信号。经过训练的ControlNet的中间输出然后添加到基础模型的解码器层的输入中。在ControlNet的训练过程中，基础模型的权重保持冻结。我们发现这种方法存在几个概念上的问题，导致ControlNet过于庞大，并且生成图像的质量显著降低。
+我们通过将连接从编码器基础模型添加到控制编码器来解决延迟反馈的第一个问题。通过这种方式，纠正可以更快地适应基础模型的生成过程。然而，它并没有完全消除延迟，因为基础模型的编码器仍然没有受到引导。因此，我们从ControlNet-XS直接将额外的连接添加到基础模型的编码器中，直接影响整个生成过程。
+
+大小和FID分数比较：
+我们评估了三种变体（A、B、C）相对于原始的ControlNet在COCO2017的验证集上的FID分数表现。我们所有的变体都取得了显著的改进，同时只使用了原始ControlNet参数的一小部分。
+
+论文地址：https://arxiv.org/abs/2312.06573</title>
+            <link>https://nitter.cz/op7418/status/1734851634373820808#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734851634373820808#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Dec 2023 08:23:56 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>海德堡大学开源了一个优化版本的 ContorlNet 模型：ConTorlNetXS。这个架构的 ContorlNet 模型精简了原来的模型推理和训练的时间都提高了两倍，同时生成图片的质量更高，控制更加精准。<br />
+<br />
+概述：<br />
+这个项目中，我们研究了用于控制基于稳定扩散模型的图像生成过程的ControlNet的大小和架构设计。我们展示了一个新的架构，其参数仅为基础模型的1%，实现了最先进的结果，并在FID分数方面表现出比ControlNet更好的性能。因此，我们称之为ControlNet-XS。<br />
+<br />
+原理：<br />
+原始的ControlNet是StableDiffusion基础模型中U-Net编码器的副本，因此接收与基础模型相同的输入，并附加一个类似边缘图的引导信号。经过训练的ControlNet的中间输出然后添加到基础模型的解码器层的输入中。在ControlNet的训练过程中，基础模型的权重保持冻结。我们发现这种方法存在几个概念上的问题，导致ControlNet过于庞大，并且生成图像的质量显著降低。<br />
+我们通过将连接从编码器基础模型添加到控制编码器来解决延迟反馈的第一个问题。通过这种方式，纠正可以更快地适应基础模型的生成过程。然而，它并没有完全消除延迟，因为基础模型的编码器仍然没有受到引导。因此，我们从ControlNet-XS直接将额外的连接添加到基础模型的编码器中，直接影响整个生成过程。<br />
+<br />
+大小和FID分数比较：<br />
+我们评估了三种变体（A、B、C）相对于原始的ControlNet在COCO2017的验证集上的FID分数表现。我们所有的变体都取得了显著的改进，同时只使用了原始ControlNet参数的一小部分。<br />
+<br />
+论文地址：<a href="https://arxiv.org/abs/2312.06573">arxiv.org/abs/2312.06573</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ4NTA3ODIxNTQxMDg5MjgvcHUvaW1nLzdqaUpfTFdwaGhQVFhHZ2ouanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734818099659174081#m</id>
+            <title>RT by @op7418: Runway 即将推出文本生成语音工具，支持多种语言，从演示来看音质很好，而且情绪和停顿都很自然。</title>
+            <link>https://nitter.cz/op7418/status/1734818099659174081#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734818099659174081#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Dec 2023 06:10:40 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Runway 即将推出文本生成语音工具，支持多种语言，从演示来看音质很好，而且情绪和停顿都很自然。</p>
+<p><a href="https://nitter.cz/iamneubert/status/1734721951841546463#m">nitter.cz/iamneubert/status/1734721951841546463#m</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ4MTc4MjE3NzM5Nzk2NDgvcHUvaW1nL1ZMVVRrS0NjdmtlM1BNTVkuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1734869378724950074#m</id>
+            <title>RT by @op7418: Krea现在开始向所有人开放，不需要邀请了，没有资格的可以试试了。</title>
+            <link>https://nitter.cz/op7418/status/1734869378724950074#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734869378724950074#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Dec 2023 09:34:26 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Krea现在开始向所有人开放，不需要邀请了，没有资格的可以试试了。</p>
+<p><a href="https://nitter.cz/krea_ai/status/1734866368489722035#m">nitter.cz/krea_ai/status/1734866368489722035#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1734770668242432210#m</id>
             <title>RT by @op7418: 意外的发现我已经有了 Midjourney Alpha 版本也就是图片生成版本的权限，体验了一下录制了一个视频，这下图片生成真的方便多了。
 写一下如何使用Alpha 版本和图片生成的一些变化，后面发现的小细节也会写在这个帖子上：
@@ -84,24 +333,6 @@
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1734869378724950074#m</id>
-            <title>Krea现在开始向所有人开放，不需要邀请了，没有资格的可以试试了。</title>
-            <link>https://nitter.cz/op7418/status/1734869378724950074#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734869378724950074#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Dec 2023 09:34:26 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Krea现在开始向所有人开放，不需要邀请了，没有资格的可以试试了。</p>
-<p><a href="https://nitter.cz/krea_ai/status/1734866368489722035#m">nitter.cz/krea_ai/status/1734866368489722035#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://nitter.cz/op7418/status/1734865889483489747#m</id>
             <title>R to @op7418: 他测试了中文，不太行，口音太重了
 https://x.com/iamneubert/status/1734731970712604788?s=20</title>
@@ -117,48 +348,6 @@ https://x.com/iamneubert/status/1734731970712604788?s=20</title>
                     <p>他测试了中文，不太行，口音太重了<br />
 <a href="https://x.com/iamneubert/status/1734731970712604788?s=20">x.com/iamneubert/status/1734…</a></p>
 <p><a href="https://nitter.cz/iamneubert/status/1734731970712604788#m">nitter.cz/iamneubert/status/1734731970712604788#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734851634373820808#m</id>
-            <title>海德堡大学开源了一个优化版本的 ContorlNet 模型：ConTorlNetXS。这个架构的 ContorlNet 模型精简了原来的模型推理和训练的时间都提高了两倍，同时生成图片的质量更高，控制更加精准。
-
-概述：
-这个项目中，我们研究了用于控制基于稳定扩散模型的图像生成过程的ControlNet的大小和架构设计。我们展示了一个新的架构，其参数仅为基础模型的1%，实现了最先进的结果，并在FID分数方面表现出比ControlNet更好的性能。因此，我们称之为ControlNet-XS。
-
-原理：
-原始的ControlNet是StableDiffusion基础模型中U-Net编码器的副本，因此接收与基础模型相同的输入，并附加一个类似边缘图的引导信号。经过训练的ControlNet的中间输出然后添加到基础模型的解码器层的输入中。在ControlNet的训练过程中，基础模型的权重保持冻结。我们发现这种方法存在几个概念上的问题，导致ControlNet过于庞大，并且生成图像的质量显著降低。
-我们通过将连接从编码器基础模型添加到控制编码器来解决延迟反馈的第一个问题。通过这种方式，纠正可以更快地适应基础模型的生成过程。然而，它并没有完全消除延迟，因为基础模型的编码器仍然没有受到引导。因此，我们从ControlNet-XS直接将额外的连接添加到基础模型的编码器中，直接影响整个生成过程。
-
-大小和FID分数比较：
-我们评估了三种变体（A、B、C）相对于原始的ControlNet在COCO2017的验证集上的FID分数表现。我们所有的变体都取得了显著的改进，同时只使用了原始ControlNet参数的一小部分。
-
-论文地址：https://arxiv.org/abs/2312.06573</title>
-            <link>https://nitter.cz/op7418/status/1734851634373820808#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734851634373820808#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Dec 2023 08:23:56 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>海德堡大学开源了一个优化版本的 ContorlNet 模型：ConTorlNetXS。这个架构的 ContorlNet 模型精简了原来的模型推理和训练的时间都提高了两倍，同时生成图片的质量更高，控制更加精准。<br />
-<br />
-概述：<br />
-这个项目中，我们研究了用于控制基于稳定扩散模型的图像生成过程的ControlNet的大小和架构设计。我们展示了一个新的架构，其参数仅为基础模型的1%，实现了最先进的结果，并在FID分数方面表现出比ControlNet更好的性能。因此，我们称之为ControlNet-XS。<br />
-<br />
-原理：<br />
-原始的ControlNet是StableDiffusion基础模型中U-Net编码器的副本，因此接收与基础模型相同的输入，并附加一个类似边缘图的引导信号。经过训练的ControlNet的中间输出然后添加到基础模型的解码器层的输入中。在ControlNet的训练过程中，基础模型的权重保持冻结。我们发现这种方法存在几个概念上的问题，导致ControlNet过于庞大，并且生成图像的质量显著降低。<br />
-我们通过将连接从编码器基础模型添加到控制编码器来解决延迟反馈的第一个问题。通过这种方式，纠正可以更快地适应基础模型的生成过程。然而，它并没有完全消除延迟，因为基础模型的编码器仍然没有受到引导。因此，我们从ControlNet-XS直接将额外的连接添加到基础模型的编码器中，直接影响整个生成过程。<br />
-<br />
-大小和FID分数比较：<br />
-我们评估了三种变体（A、B、C）相对于原始的ControlNet在COCO2017的验证集上的FID分数表现。我们所有的变体都取得了显著的改进，同时只使用了原始ControlNet参数的一小部分。<br />
-<br />
-论文地址：<a href="https://arxiv.org/abs/2312.06573">arxiv.org/abs/2312.06573</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ4NTA3ODIxNTQxMDg5MjgvcHUvaW1nLzdqaUpfTFdwaGhQVFhHZ2ouanBn" />
                 ]]>
             </content:encoded>
         </item>
@@ -181,46 +370,6 @@ https://x.com/iamneubert/status/1734731970712604788?s=20</title>
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1734834158869123480#m</id>
-            <title>阿里期货开源，再发新项目：虚拟服装试穿。只需要一张人物照片和服装照片就可以让那个人穿上这个衣服，对服装行业是个利好。
-效果确实很好，但是全是期货开源很容易被当成诈骗啊。
-Reddit 有个宣传这个项目的帖子，下面全是在喷，用不到就是不存在。
-还可以跟前几天发的Animate-Anyone项目结合生成跳舞视频。
-
-简介：
-Outfit Anyone通过利用双流条件扩散模型来解决这些限制，使其能够熟练处理服装变形，从而获得更逼真的结果。它通过可扩展性（调节姿势和身体形状等因素）和广泛适用性（从动漫到野外图像）来区别于其他方法。Outfit Anyone在各种场景中的表现突显了它在实际部署中的实用性和准备就绪性。
-
-实现方法：
-核心是条件扩散模型，它处理模特、服装和相关文本提示的图像，以服装图像作为控制因素。在内部，网络分为两个流，独立处理模特和服装数据。这些流在融合网络中汇聚，便于将服装细节嵌入模特的特征表示中。在此基础上，我们建立了Outfit Anyone，包括两个关键元素：用于初始试穿图像的零样本试穿网络，以及用于增强输出图像中服装和皮肤纹理的事后优化器。
-
-项目地址：https://humanaigc.github.io/outfit-anyone/</title>
-            <link>https://nitter.cz/op7418/status/1734834158869123480#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734834158869123480#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Dec 2023 07:14:29 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>阿里期货开源，再发新项目：虚拟服装试穿。只需要一张人物照片和服装照片就可以让那个人穿上这个衣服，对服装行业是个利好。<br />
-效果确实很好，但是全是期货开源很容易被当成诈骗啊。<br />
-Reddit 有个宣传这个项目的帖子，下面全是在喷，用不到就是不存在。<br />
-还可以跟前几天发的Animate-Anyone项目结合生成跳舞视频。<br />
-<br />
-简介：<br />
-Outfit Anyone通过利用双流条件扩散模型来解决这些限制，使其能够熟练处理服装变形，从而获得更逼真的结果。它通过可扩展性（调节姿势和身体形状等因素）和广泛适用性（从动漫到野外图像）来区别于其他方法。Outfit Anyone在各种场景中的表现突显了它在实际部署中的实用性和准备就绪性。<br />
-<br />
-实现方法：<br />
-核心是条件扩散模型，它处理模特、服装和相关文本提示的图像，以服装图像作为控制因素。在内部，网络分为两个流，独立处理模特和服装数据。这些流在融合网络中汇聚，便于将服装细节嵌入模特的特征表示中。在此基础上，我们建立了Outfit Anyone，包括两个关键元素：用于初始试穿图像的零样本试穿网络，以及用于增强输出图像中服装和皮肤纹理的事后优化器。<br />
-<br />
-项目地址：<a href="https://humanaigc.github.io/outfit-anyone/">humanaigc.github.io/outfit-a…</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ4MzM2OTY4ODMzMzEwNzIvcHUvaW1nL3FsaG1TQl9ManRXRkp5V00uanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://nitter.cz/op7418/status/1734830577474490544#m</id>
             <title>R to @op7418: Midjourney 官方推特刚才点赞了这条，麻了金 V 都掉了，我以为高仿呢。</title>
             <link>https://nitter.cz/op7418/status/1734830577474490544#m</link>
@@ -238,80 +387,6 @@ Outfit Anyone通过利用双流条件扩散模型来解决这些限制，使其�
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1734829583328039177#m</id>
-            <title>MJ Discord 有个频道的人写了一下 Midjourney 风格微调的原理，跟我原来想的完全不一样，原来提示词的作用没那么大。哈哈哈哈。
-
-简单说一下结论：
-
-✱无论使用什么提示词，风格调整器中两列 128 张图片的风格是固定的。
-也就是说你用两个不同的提示词微调选择相同位置的图片也会获得一个相同的风格，比如下面的图是用不同的风格生成的，完全一样。
-
-✱生成风格的提示词只对风格调整时的图像起作用，不会对使用风格的图像起作用。
-
-✱你的提示词只有跟原提示词类似才能够获得跟风格调节器里面图片的效果。如果用的提示词跟原来的一点关系没有就有可能得到完全不同的结果。
-
-那个帖子的原文翻译：
-
-免责声明：此内容非 MidJourney 官方文档，仅代表个人观点，未经官方认证。
-
-✱ 风格调节器是由 128 行和 3 列构成的网格。每个网格位置，如第 1 行左列（1L），在所有网格中完全一致，且风格指向的排序亦然。也就是说，如果你在十个不同的调节器中选择了 1L、6R、9L 和 11R，最终的风格效果将完全相同。
-✱ 因此，你在风格调节器中所用的提示仅影响调节器内生成的图片，不会影响后续图片，除非使用同一提示语。
-✱ 这里展示了四种不同风格调节器，使用同一调节方向生成的作品。
-
-如果不同调节器生成的图片大相径庭，会影响用这个调节器生成的图片吗？
-不会，因为提示仅对调节器内的图片产生影响，而非用调节器生成的图片。_那为何会有这么多不同的调节器？_ 因为每个调节器生成的图片都反映了所用的提示语，使你能通过不同风格直观感受你的提示。
-
-我必须用类似于制作调节器时的提示语吗？
-你的提示越接近原始提示，你得到的图片就越接近调节器内的图片。若使用不同提示，根据选择的风格方向，结果可能会截然不同。
-
-那么，使用风格调节器的意义何在？
-举例来说，对于 `picture of a woman` 这类提示，在有调节器之前，可用的风格非常有限。现在，调节器能展示出 256 种不同的 `picture of a woman` 风格，从喷笔到怪异、铅笔画到真实照片、鲜艳到柔和、繁复到简约、写实到超现实等。你可以选择多种或少量这些风格方向来创造自己的独特风格。若你的后续提示语接近调节器的提示，风格将非常可预测。若使用不同提示，可能会有意想不到的结果，但依然比默认的 MJ 提供了更多的风格选择。
-
-原贴地址：https://discord.com/channels/662267976984297473/1179745230887591957</title>
-            <link>https://nitter.cz/op7418/status/1734829583328039177#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734829583328039177#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Dec 2023 06:56:18 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>MJ Discord 有个频道的人写了一下 Midjourney 风格微调的原理，跟我原来想的完全不一样，原来提示词的作用没那么大。哈哈哈哈。<br />
-<br />
-简单说一下结论：<br />
-<br />
-✱无论使用什么提示词，风格调整器中两列 128 张图片的风格是固定的。<br />
-也就是说你用两个不同的提示词微调选择相同位置的图片也会获得一个相同的风格，比如下面的图是用不同的风格生成的，完全一样。<br />
-<br />
-✱生成风格的提示词只对风格调整时的图像起作用，不会对使用风格的图像起作用。<br />
-<br />
-✱你的提示词只有跟原提示词类似才能够获得跟风格调节器里面图片的效果。如果用的提示词跟原来的一点关系没有就有可能得到完全不同的结果。<br />
-<br />
-那个帖子的原文翻译：<br />
-<br />
-免责声明：此内容非 MidJourney 官方文档，仅代表个人观点，未经官方认证。<br />
-<br />
-✱ 风格调节器是由 128 行和 3 列构成的网格。每个网格位置，如第 1 行左列（1L），在所有网格中完全一致，且风格指向的排序亦然。也就是说，如果你在十个不同的调节器中选择了 1L、6R、9L 和 11R，最终的风格效果将完全相同。<br />
-✱ 因此，你在风格调节器中所用的提示仅影响调节器内生成的图片，不会影响后续图片，除非使用同一提示语。<br />
-✱ 这里展示了四种不同风格调节器，使用同一调节方向生成的作品。<br />
-<br />
-如果不同调节器生成的图片大相径庭，会影响用这个调节器生成的图片吗？<br />
-不会，因为提示仅对调节器内的图片产生影响，而非用调节器生成的图片。_那为何会有这么多不同的调节器？_ 因为每个调节器生成的图片都反映了所用的提示语，使你能通过不同风格直观感受你的提示。<br />
-<br />
-我必须用类似于制作调节器时的提示语吗？<br />
-你的提示越接近原始提示，你得到的图片就越接近调节器内的图片。若使用不同提示，根据选择的风格方向，结果可能会截然不同。<br />
-<br />
-那么，使用风格调节器的意义何在？<br />
-举例来说，对于 `picture of a woman` 这类提示，在有调节器之前，可用的风格非常有限。现在，调节器能展示出 256 种不同的 `picture of a woman` 风格，从喷笔到怪异、铅笔画到真实照片、鲜艳到柔和、繁复到简约、写实到超现实等。你可以选择多种或少量这些风格方向来创造自己的独特风格。若你的后续提示语接近调节器的提示，风格将非常可预测。若使用不同提示，可能会有意想不到的结果，但依然比默认的 MJ 提供了更多的风格选择。<br />
-<br />
-原贴地址：<a href="https://discord.com/channels/662267976984297473/1179745230887591957">discord.com/channels/6622679…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JOYURsM2FVQUF0QkNZLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://nitter.cz/op7418/status/1734818295977857258#m</id>
             <title>R to @op7418: 终于开始卷视频之外的东西了</title>
             <link>https://nitter.cz/op7418/status/1734818295977857258#m</link>
@@ -324,217 +399,6 @@ Outfit Anyone通过利用双流条件扩散模型来解决这些限制，使其�
                 <![CDATA[
                     
                     <p>终于开始卷视频之外的东西了</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734818099659174081#m</id>
-            <title>Runway 即将推出文本生成语音工具，支持多种语言，从演示来看音质很好，而且情绪和停顿都很自然。</title>
-            <link>https://nitter.cz/op7418/status/1734818099659174081#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734818099659174081#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Dec 2023 06:10:40 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Runway 即将推出文本生成语音工具，支持多种语言，从演示来看音质很好，而且情绪和停顿都很自然。</p>
-<p><a href="https://nitter.cz/iamneubert/status/1734721951841546463#m">nitter.cz/iamneubert/status/1734721951841546463#m</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ4MTc4MjE3NzM5Nzk2NDgvcHUvaW1nL1ZMVVRrS0NjdmtlM1BNTVkuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1734805589174235416#m</id>
-            <title>RT by @op7418: 微软今天发布小模型 Phi-2 的新闻关注度还蛮大的，只有2.7B参数（Llama 2最小的模型都是 7B的），模型越小就对设备要求越低，甚至于移动设备都能运行。但模型的能力又跟模型的训练量和参数量息息相关，数据量越大参数越大能力越强。
-
-微软的解决方案是提升数据质量，通过专注于高质量的“教科书级”数据，训练数据混合了专门为教授模型常识推理和广泛知识（包括科学、日常生活和心理理论等）而设计的合成数据集。此外，还精心挑选了基于教育价值和内容质量筛选的网络数据，进一步丰富了训练语料库。
-
-Phi-2 的训练数据有 1.4 T 个 token，在 96 块 A100 GPU 上训练了 14 天。
-
-Phi-2 是一个基础模型，没有经过人类反馈强化学习（RLHF）的校准，也没有进行过指令式微调。
-
-从能力上来说，据微软自己公布的数据：2.7B 的 Phi-2 超过了目前开源领域表现最好的 Mistral 和 Llama-2 7B 和 13B，编程能力甚至超过了 Llama-2-70B。
-
-至于是不是真的这么强还得看看用户的反馈。
-
-详情可以看官方博客：https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/
-
-也可以看我翻译的版本：《Phi-2：小语言模型的非凡实力 [译]》
-https://baoyu.io/translations/microsoft/phi-2-the-surprising-power-of-small-language-models</title>
-            <link>https://nitter.cz/dotey/status/1734805589174235416#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1734805589174235416#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Dec 2023 05:20:58 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>微软今天发布小模型 Phi-2 的新闻关注度还蛮大的，只有2.7B参数（Llama 2最小的模型都是 7B的），模型越小就对设备要求越低，甚至于移动设备都能运行。但模型的能力又跟模型的训练量和参数量息息相关，数据量越大参数越大能力越强。<br />
-<br />
-微软的解决方案是提升数据质量，通过专注于高质量的“教科书级”数据，训练数据混合了专门为教授模型常识推理和广泛知识（包括科学、日常生活和心理理论等）而设计的合成数据集。此外，还精心挑选了基于教育价值和内容质量筛选的网络数据，进一步丰富了训练语料库。<br />
-<br />
-Phi-2 的训练数据有 1.4 T 个 token，在 96 块 A100 GPU 上训练了 14 天。<br />
-<br />
-Phi-2 是一个基础模型，没有经过人类反馈强化学习（RLHF）的校准，也没有进行过指令式微调。<br />
-<br />
-从能力上来说，据微软自己公布的数据：2.7B 的 Phi-2 超过了目前开源领域表现最好的 Mistral 和 Llama-2 7B 和 13B，编程能力甚至超过了 Llama-2-70B。<br />
-<br />
-至于是不是真的这么强还得看看用户的反馈。<br />
-<br />
-详情可以看官方博客：<a href="https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/">microsoft.com/en-us/research…</a><br />
-<br />
-也可以看我翻译的版本：《Phi-2：小语言模型的非凡实力 [译]》<br />
-<a href="https://baoyu.io/translations/microsoft/phi-2-the-surprising-power-of-small-language-models">baoyu.io/translations/micros…</a></p>
-<p><a href="https://nitter.cz/MSFTResearch/status/1734609807770898674#m">nitter.cz/MSFTResearch/status/1734609807770898674#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734807181843984459#m</id>
-            <title>试了一下明确说不会写性内容和性暴力内容，可能得需要一些提示词技巧了。</title>
-            <link>https://nitter.cz/op7418/status/1734807181843984459#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734807181843984459#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Dec 2023 05:27:17 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>试了一下明确说不会写性内容和性暴力内容，可能得需要一些提示词技巧了。</p>
-<p><a href="https://nitter.cz/xiaohuggg/status/1734773939367452831#m">nitter.cz/xiaohuggg/status/1734773939367452831#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JORnc5TmJrQUFFWm9vLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734797727958179925#m</id>
-            <title>应该是蒙版重绘的，选的这个镜头也很好，没有大幅动作手部动作也少。</title>
-            <link>https://nitter.cz/op7418/status/1734797727958179925#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734797727958179925#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Dec 2023 04:49:43 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>应该是蒙版重绘的，选的这个镜头也很好，没有大幅动作手部动作也少。</p>
-<p><a href="https://nitter.cz/AIWarper/status/1734774527098511497#m">nitter.cz/AIWarper/status/1734774527098511497#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734469157423648991#m</id>
-            <title>RT by @op7418: 刚注意到李飞飞团队的这个视频生成模型W.A.L.T，这效果也太好了，感觉比 Pika 1.0 还要好的多。
-清晰度和动作都非常好，特别是光剑打斗的那个视频。可惜不开源。
-我补充了一些项目页面的演示视频。
-
-项目简介：
-方法有两个关键的设计决策。首先，我们使用因果编码器在统一的潜在空间内联合压缩图像和视频，从而实现跨模态的训练和生成。其次，为了提高记忆和训练效率，我们使用专为联合空间和时空生成建模而定制的窗口注意架构。总而言之，这些设计决策使我们能够在已建立的视频（UCF-101 和 Kinetics-600）和图像（ImageNet）生成基准上实现最先进的性能，而无需使用无分类器指导。
-最后，我们还训练了三个用于文本到视频生成任务的级联模型，其中包括一个基本潜在视频扩散模型和两个视频超分辨率扩散模型，以每秒 8 帧的速度生成 512 x 896 分辨率的视频。
-
-项目地址：https://walt-video-diffusion.github.io/</title>
-            <link>https://nitter.cz/op7418/status/1734469157423648991#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734469157423648991#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 12 Dec 2023 07:04:06 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>刚注意到李飞飞团队的这个视频生成模型W.A.L.T，这效果也太好了，感觉比 Pika 1.0 还要好的多。<br />
-清晰度和动作都非常好，特别是光剑打斗的那个视频。可惜不开源。<br />
-我补充了一些项目页面的演示视频。<br />
-<br />
-项目简介：<br />
-方法有两个关键的设计决策。首先，我们使用因果编码器在统一的潜在空间内联合压缩图像和视频，从而实现跨模态的训练和生成。其次，为了提高记忆和训练效率，我们使用专为联合空间和时空生成建模而定制的窗口注意架构。总而言之，这些设计决策使我们能够在已建立的视频（UCF-101 和 Kinetics-600）和图像（ImageNet）生成基准上实现最先进的性能，而无需使用无分类器指导。<br />
-最后，我们还训练了三个用于文本到视频生成任务的级联模型，其中包括一个基本潜在视频扩散模型和两个视频超分辨率扩散模型，以每秒 8 帧的速度生成 512 x 896 分辨率的视频。<br />
-<br />
-项目地址：<a href="https://walt-video-diffusion.github.io/">walt-video-diffusion.github.…</a></p>
-<p><a href="https://nitter.cz/agrimgupta92/status/1734253883076063426#m">nitter.cz/agrimgupta92/status/1734253883076063426#m</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ0NjgyNzY4NDIwMTY3NjkvcHUvaW1nL1BCS0ZHeHFMVmpZeTdEdkcuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734785122183036962#m</id>
-            <title>牛蛙 数学和代码确实厉害</title>
-            <link>https://nitter.cz/op7418/status/1734785122183036962#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734785122183036962#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Dec 2023 03:59:38 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>牛蛙 数学和代码确实厉害</p>
-<p><a href="https://nitter.cz/aigclab/status/1734782664979452010#m">nitter.cz/aigclab/status/1734782664979452010#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734780663843459345#m</id>
-            <title>R to @op7418: 麻了，刚才提示我不支持现在又可以生成了</title>
-            <link>https://nitter.cz/op7418/status/1734780663843459345#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734780663843459345#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Dec 2023 03:41:55 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>麻了，刚才提示我不支持现在又可以生成了</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JNdHcyYmE0QUFxNEpELmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734618500000284803#m</id>
-            <title>RT by @op7418: 这个观点很有意思，要判断一个模型是否在微调阶段使用了GPT-4生成的数据集只需要向他询问“给我讲个笑话”就行。</title>
-            <link>https://nitter.cz/op7418/status/1734618500000284803#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734618500000284803#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 12 Dec 2023 16:57:32 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个观点很有意思，要判断一个模型是否在微调阶段使用了GPT-4生成的数据集只需要向他询问“给我讲个笑话”就行。</p>
-<p><a href="https://nitter.cz/mattshumer_/status/1734605812054827364#m">nitter.cz/mattshumer_/status/1734605812054827364#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734780196853801066#m</id>
-            <title>R to @op7418: 目前不支持 Niji 的图片生成</title>
-            <link>https://nitter.cz/op7418/status/1734780196853801066#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734780196853801066#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Dec 2023 03:40:04 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>目前不支持 Niji 的图片生成</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JNdFY4bWJBQUFGUk1rLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
