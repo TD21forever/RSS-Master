@@ -5,6 +5,432 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2023/12/weekly-issue-282.html</id>
+            <title>科技爱好者周刊（第 282 期）：电动皮卡 Cybertruck 的 48V 供电</title>
+            <link>http://www.ruanyifeng.com/blog/2023/12/weekly-issue-282.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2023/12/weekly-issue-282.html</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 15 Dec 2023 08:15:00 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
+<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/3684">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
+
+<h2>封面图</h2>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120511.webp" title="" /></p>
+
+<p>上海14号线豫园地铁站，就在黄浦江边。屋顶设计采用几万片铝板，象征着一圈圈的水波，以及豫园的飞檐，并可以配合灯光形成一个天幕。（<a href="https://www.archiposition.com/items/20220224043158">via</a>）</p>
+
+<h2>电动皮卡 Cybertruck 的 48V 供电</h2>
+
+<p>这个月，特斯拉的 Cybertruck 开始在美国交付了。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120808.webp" title="" /></p>
+
+<p>它是一辆皮卡，造型很奇特，车斗上面有一个挡板，打开就可以装货。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120809.webp" title="" /></p>
+
+<p>这辆车创造了很多世界第一。</p>
+
+<blockquote>
+  <ol start="1">
+<li>世界第一辆不锈钢汽车。</li>
+<li>钢板据说可以防弹，而且因为车形具有棱角，普通车辆撞到它会很惨。</li>
+<li>最重的皮卡，自重3.5吨，加上乘客和货物可以超过4吨，是普通皮卡的2倍。</li>
+</ol>
+</blockquote>
+
+<p>但是，有一个世界第一，提到的人很少：<strong>它是世界首辆车内供电全部为 48V 的汽车</strong>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120810.webp" title="" /></p>
+
+<p>大家知道，汽车内部有很多电器，都需要用电，比如电动门窗、空调、灯具、点烟器等等。这里就有一个车内的电压问题。</p>
+
+<p>以前都是油车，没有太多的电子设备，不需要很大功率，所以电压定得比较低。一开始是 6V 的直流电，后来提高到 12V。</p>
+
+<p>现在，市场上所有车辆，车内都有 12V 供电。相应的，车内的电子设备一般也是 12V 电压设计。</p>
+
+<p>Cybertruck 是世界第一辆没有 12V 供电，只有 48V 供电的汽车。这意味着，它的所有电子设备都是专门定制的。</p>
+
+<p>为什么 Cybertruck 放弃了 12V？</p>
+
+<p>原因很简单，因为它的用电量太大了，12V 电压会使得电线不堪负荷。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120811.webp" title="" /></p>
+
+<p>有报道透露，单单是 Cyber​​truck 长达1.2米的巨型雨刷（上图），启动功率就要3600瓦，如果使用 12V 电压，电流将高达300安培，需要极粗的电线。</p>
+
+<p><strong>改成 48V 以后，电压提高了4倍，电流只需要原来的四分之一</strong>。</p>
+
+<p>用电功率越来越大，这不单是 Cybertruck 面临的问题，其他电车都面临这个问题，12V 电压早就是汽车发展的一个限制。</p>
+
+<p>改成 48V 有很多好处，主要有以下几点。</p>
+
+<p>（1）电流变成原来的四分之一，就不需要很粗的电线了，可以大幅减少铜的用量，从而降低成本，同时减轻了整车重量。</p>
+
+<p>（2）电流变小，还可以减少电线的发热量，使得传输损耗变小。</p>
+
+<p>（3）48V 的电压，达到了以太网供电（POE）的电压标准，就可以用网线为一些设备供电，将信号传输和电源合成一根线。而且，以太网传输比现在的双绞线，速率更高，信号更稳定。</p>
+
+<p>当然，48V 也有缺点，主要问题是配套的电子设备比较少，而且价格高。另外，整车的供电系统都需要重新设计。</p>
+
+<p>好在特斯拉把 Cybertruck 的电路设计公开了，<a href="https://electrek.co/2023/12/07/tesla-shares-48v-architecture-with-other-automakers-to-move-the-industry/">主动提供给其他车厂</a>。福特汽车的 CEO 发推说，没想到真能收到特斯拉发来的图纸，马斯克回复"不用谢"（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121203.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121204.webp" title="" /></p>
+
+<p>48V 肯定是未来的方向，希望国内的车企和汽配公司能够尽快跟进，升级供电电压。</p>
+
+<h2>[活动] 人工智能线下沙龙（深圳站）</h2>
+
+<p>AI 是眼下的行业热点，也是投资和招聘最多的领域。</p>
+
+<p>掘金社区，作为国内著名的开发者社区，将于<strong>本周日在深圳举办一次线下活动</strong>，为大家创造一个相聚结识的机会，共同探讨 AI。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121309.webp" title="" /></p>
+
+<p>活动主题为 <strong>《大模型技术探索与 AIGC 应用创新》</strong>，他们邀请了阿里、NVIDIA 等公司的四位技术大牛，分享各自拿手的话题，包括 Transformer 的处理，以及 AIGC 模型如何落地于实际业务。</p>
+
+<p>活动的详细内容，请看<a href="https://www.bagevent.com/event/8756156?bag_track=ruanyifeng">官方主页</a>，或扫描上方二维码，在那里免费报名。</p>
+
+<p>珠三角的朋友如果本周日下午（12月17日）有空，可以去玩玩，地点就在字节的深圳湾工区。现场除了与嘉宾互动，还有茶歇环节，签到就赠笔记本、徽章套盒和贴纸。</p>
+
+<h2>科技动态</h2>
+
+<p>1、<a href="https://www.thrillist.com/travel/nation/envision-arts-gallery-wichita-kansas">盲人美术馆</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023063004.webp" title="" /></p>
+
+<p>盲人怎么参观美术馆？美国堪萨斯州最近就出现了一家专门接待盲人观众的美术馆。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023063005.webp" title="" /></p>
+
+<p>它的所有展品都可以摸，为了便于盲人观众领会，这些艺术品经过重新设计，表面都有突起。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023063006.webp" title="" /></p>
+
+<p>展品介绍也是可以摸的盲文。观众还会领到一个解说器，走到艺术品前面，就会听到自动解说。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202306/bg2023063007.webp" title="" /></p>
+
+<p>2、<a href="https://insideevs.com/news/699413/highest-mileage-tesla-model-s-3-batteries-14-motors/">行驶里程最多的特斯特</a></p>
+
+<p>世界上行驶里程最多的特斯拉，是一辆2014款的 Model S P85。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120702.webp" title="" /></p>
+
+<p>它一共行驶了190万公里，相当于每年21万公里。也就是说，即使一天都不休息，它这些年每天最少要行驶577公里。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120703.webp" title="" /></p>
+
+<p>目前还不清楚，这辆车为什么行驶了这么多里程。车主只是说，他用这辆车完成过许多海外旅行，去过非洲、摩洛哥、瑞典、奥地利和中国。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120704.webp" title="" /></p>
+
+<p>一辆纯电车能开这么多公里，真是不简单。它的核心部件已经换过多次，电机换过13次，电池组换过3次。</p>
+
+<p>3、<a href="https://newatlas.com/marine/heave-oscillators-wave-energy-ship/">船舶起伏发电</a></p>
+
+<p>大家可能听说过"波浪发电"，在海里放置一个发电机，利用海浪拍打的能量发电。</p>
+
+<p>上海一家研究所提出，船舶也会经受波浪拍打，为什么不直接把它改造成发电机呢。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120708.webp" title="" /></p>
+
+<p>他们的设想是，在船舱底部放置一个三轴振荡器，连接一个液压缸和弹簧。</p>
+
+<p>船体晃动时，振荡器会在三个方向上产生振动，从而带动液压缸，压缩/拉动弹簧发电。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120709.webp" title="" /></p>
+
+<p>但是，他们没有计算，这样到底能发多少电。考虑到船只总是选择风平浪静的路线，这个设计就算能做出来，发电量可能非常少。</p>
+
+<p>4、<a href="https://finance.sina.com.cn/stock/usstock/c/2023-12-09/doc-imzxkvky9798727.shtml">首个基因编辑疗法</a></p>
+
+<p>12月8日，美国批准首个基因编辑疗法，治疗血液的镰状细胞病（下图，由于基因缺陷，病人的血细胞不是正常的圆形，而是镰刀形）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121006.webp" title="" /></p>
+
+<p>这标志着基因编辑技术 CRISPR 诞生10年后，正式用于临床了。</p>
+
+<p>该疗法会抽取病人所有的造血干细胞，逐一进行基因编辑，删除有缺陷的基因，再将造血细胞输回人体。</p>
+
+<p>这意味着，基因疗法可能只能用于血液病，因为其他器官无法进行逐一的细胞编辑，除非在胚胎时期就进行编辑。</p>
+
+<p>而且，该疗法非常贵，最低价格是220万美元（约1500多万人民币），根本不是普通人可以负担的。</p>
+
+<h2>文章</h2>
+
+<p>1、<a href="https://developer.chrome.com/blog/css-wrapped-2023?hl=zh-cn">2023年 CSS 发展总结</a>（中文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121202.webp" title="" /></p>
+
+<p>Chrome 团队的总结，2023年 CSS 增加了哪些功能。</p>
+
+<p>2、<a href="https://corecursive.com/software-world-tour-with-son-luong-ngoc/">一个越南程序员的阿里之旅</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120705.webp" title="" /></p>
+
+<p>作者是一个越南程序员，原来在 Lazada 工作。后来，Lazada 被阿里收购，他就来到阿里，在杭州西溪园区呆过一段时间。</p>
+
+<p>现在，他已经跳槽到 Booking.com，本文是他讲述自己的故事，以及对阿里的感受。</p>
+
+<p>3、<a href="https://thenewstack.io/a-visit-to-the-physical-internet-archive/">互联网档案馆参观记</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023103001.webp" title="" /></p>
+
+<p>互联网档案馆（Internet Archive）是一个神奇的项目，目标是为 <strong>所有网址</strong> 保存一个备份，免费供大众查阅。</p>
+
+<p>它在加州的总部可以购票参观，作者就去参观了，还遇到创始人为他们讲解。</p>
+
+<p>4、<a href="https://linuxiac.com/how-to-protect-ssh-with-fail2ban/">如何使用 Fail2ban 保护 SSH</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110106.webp" title="" /></p>
+
+<p>一篇初学者教程，教你如何在 Linux 上使用 Fail2Ban，防止服务器被暴力破解密码。</p>
+
+<p>5、<a href="https://jakelazaroff.com/words/web-components-will-outlive-your-javascript-framework/">Web 组件比 JavaScript 框架更长久</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110208.webp" title="" /></p>
+
+<p>作者需要一个页面效果，最终选择了 Web 组件来实现，这样可以与任何框架匹配。否则，换了一个框架，就需要重新实现。</p>
+
+<p>6、<a href="https://www.macarthur.me/posts/more-aggressive-cache-headers">静态资源的缓存标头应该怎么写？</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023092108.webp" title="" /></p>
+
+<p>网站的静态资源，通常不会经常变动，它们的缓存应该怎么写 HTTP 标头呢。</p>
+
+<p>7、<a href="https://www.worthe-it.co.za/blog/2023-08-20-building-a-digital-music-collection-in-2023.html">如何将 MP3 文件转为 Opus 格式？</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023082108.webp" title="" /></p>
+
+<p>Opus 是新的音乐编码格式，比 MP3 音频质量更好，而且压缩后体积还更小。</p>
+
+<p>8、<a href="https://practicalbetterments.com/create-a-shortcut-for-even-lower-phone-brightness/">如何降低手机的亮度</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110713.webp" title="" /></p>
+
+<p>有时候，即使调到最暗，手机屏幕依然很亮，本文教你如何在苹果和安卓手机上，将屏幕调到极暗。</p>
+
+<p>9、<a href="https://marcotm.com/articles/information-extraction-with-large-language-models-parsing-unstructured-data-with-gpt/">如何使用 GPT-3 解析非结构化数据</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023092401.webp" title="" /></p>
+
+<p>作者演示一个实例，如何用 GPT-3 将公司的招聘帖子转成 JSON 数据。</p>
+
+<h2>工具</h2>
+
+<p>1、<a href="https://imagine.meta.com/">Imagine</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120803.webp" title="" /></p>
+
+<p>Meta 公司推出的文生图工具，使用 Facebook 和 Instagram 的11亿张图片训练，现在可以免费使用。</p>
+
+<p>2、<a href="https://notebooklm.google.com/">NotebookLM</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120902.webp" title="" /></p>
+
+<p>谷歌发布的 AI 笔记工具，用户上传文档，然后可以对文档提问，并且自动生成笔记，目前对美国用户免费开放。参见<a href="https://blog.google/technology/ai/notebooklm-new-features-availability/">谷歌的介绍文章</a>。</p>
+
+<p>不过，它好像只支持上传英文的 PDF 文件。</p>
+
+<p>3、<a href="https://github.com/scalar/scalar">Scalar API Reference</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101616.webp" title="" /></p>
+
+<p>一个开源工具，将 Swagger/OpenAPI 文件转成互动式 API 文档。</p>
+
+<p>4、<a href="https://github.com/Nutlope/roomGPT">RoomGPT</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101701.webp" title="" /></p>
+
+<p>一个开源软件，你上传一张房间照片，它使用 AI 重新设计你的房间。</p>
+
+<p>5、<a href="https://github.com/DongHY1/comments">Comments</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121403.webp" title="" /></p>
+
+<p>一个开源的网页评论系统，类似于 Vercel Comment，可以对页面的各个部分拉框评论。它采用 GitHub 的身份认证，数据放在 supabase。（<a href="https://github.com/ruanyf/weekly/issues/3743">@DongHY1</a> 投稿）</p>
+
+<p>6、<a href="https://github.com/ruanyf/weekly/issues/3725">GPT Assistant</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120802.webp" title="" /></p>
+
+<p>网友写的开源 GPT 安卓客户端，可以跟 AI 语音聊天，还可以发送图片到 GPT-4V，并基于安卓 WebView，让 GPT 访问任何网站。（<a href="https://github.com/ruanyf/weekly/issues/3725">@Skythinker616</a> 投稿）</p>
+
+<p>7、<a href="https://www.wvovw.com/guide/what-is-wvovw.html">MD Video</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121301.webp" title="" /></p>
+
+<p>一个桌面软件，将 Markdown 文档转成一段短视频。（<a href="https://github.com/ruanyf/weekly/issues/3736">@lqomg</a> 投稿）</p>
+
+<p>8、<a href="https://github.com/THUDM/CodeGeeX2">CodeGeeX2</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121302.webp" title="" /></p>
+
+<p>AI 编程助手，支持 VS Code、 IntelliJ IDEA、PyCharm、GoLand、WebStorm 等 IDE 编辑器，参见<a href="https://github.com/CatsAndMice/blog/issues/72">介绍文章</a>。（<a href="https://github.com/ruanyf/weekly/issues/3731">@CatsAndMice</a> 投稿）</p>
+
+<p>9、<a href="https://github.com/zobor/bproxy">bproxy</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121004.webp" title="" /></p>
+
+<p>一款抓包代理工具，可以拦截 HTTP 请求，配置文件是一个 JS 脚本。（<a href="https://github.com/ruanyf/weekly/issues/3728">@zobor 投稿</a>）</p>
+
+<p>10、<a href="https://trippy.cli.rs/">Trippy</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121005.webp" title="" /></p>
+
+<p>一个命令行工具，可以代替 traceroute 查看互联网通信的路径，分析网络状况。</p>
+
+<h2>资源</h2>
+
+<p>1、<a href="https://git.herrbischoff.com/awesome-macos-command-line/about/">Mac 命令行命令</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202212/bg2022120801.webp" title="" /></p>
+
+<p>这个网站收集各种有用的 Mac 命令行的命令。</p>
+
+<p>2、<a href="https://openintro-ims2.netlify.app/">现代统计学导论</a>（Introduction to Modern Statistics）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101403.webp" title="" /></p>
+
+<p>一本面向大学新生的统计学入门教材，免费阅读。</p>
+
+<p>3、<a href="https://github.com/Asabeneh/30-Days-Of-Python">30天 Python 教程</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101618.webp" title="" /></p>
+
+<p>这个仓库是一个30天的 Python 入门课程，配有代码练习和视频。</p>
+
+<p>4、<a href="https://news.ycombinator.com/item?id=37931804">最漂亮的网页游戏</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101902.webp" title="" /></p>
+
+<p>Hacker News 的一个讨论帖，里面列举许多非常漂亮的网页游戏。上图出自游戏<a href="https://alexanderperrin.com.au/paper/shorttrip/">《短途旅行》</a>（Short Trip）。</p>
+
+<h2>图片</h2>
+
+<p>1、<a href="https://imgur.com/a/xi3P3">苏联台风级核潜艇</a></p>
+
+<p>苏联台风级核潜艇，诞生于上个世纪80年代，是世界最大的核潜艇。</p>
+
+<p>标题链接收集了100多张历史照片，详细回顾了这个巨无霸的历史。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023071305.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023071306.webp" title="" /></p>
+
+<p>它一共建造了6艘，由于耗资巨大，苏联无力维持，目前已经全部退役。</p>
+
+<p>2、<a href="https://www.naturalis.nl/en/about-us/media/press-releases/rebellious-birds-make-nests-out-of-anti-bird-pins">防鸟针鸟巢</a></p>
+
+<p>荷兰科学家发现，很多鸟儿捡拾建筑上面金属的防鸟针，用来搭建鸟巢。这件事让人哭笑不得。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023071311.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023071702.webp" title="" /></p>
+
+<p>科学家还不能解释，鸟儿真的喜欢金属鸟巢吗？还是因为这些材料在城市中更容易得到？</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023071703.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023071704.webp" title="" /></p>
+
+<h2>文摘</h2>
+
+<p>1、<a href="https://anicetnougaret.fr/blog/farswap-xp">我的区块链经历</a></p>
+
+<p>2022年，我得到了一个机会，一个人去葡萄牙首都里斯本，参加 NearCon 2022 会议。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121404.webp" title="" /></p>
+
+<p>这是一场为期4天的区块链会议和黑客马拉松。参加会议期间，我要为自己的 Web3 项目寻找投资者，并尽我所能推销这个项目。</p>
+
+<p>我不习惯干推销，也没有信心详细解释它的加密机制，因为我主要从事前端开发工作。</p>
+
+<p>但是，我是一个非常自信的人，不害怕在公众面前讲话，所以第一天我就在大会讲台上进行了推销。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121405.webp" title="" /></p>
+
+<p>我当时是21岁，许多人对我的自信和年龄产生了深刻的印象。我是最年轻的参会者之一，而且根据一些人的说法，我看起来比实际年龄还要年轻。</p>
+
+<p>这让我很快结识了很多人，包括开发者、投资者和从事各种加密相关工作的人。</p>
+
+<p>令我惊讶的是，NEAR 基金会为这次大会投入了疯狂的预算。考虑到它只是一种相当小众的加密货币，小众到没有在大多数交易所上市，所以会议的规格尤其令人难以置信。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023121406.webp" title="" /></p>
+
+<p>大会耗费巨资：免费而且非常好吃的食物、免费的夜总会派对、丰厚的黑客马拉松现金奖励、配有大摄像头和大屏幕的大型会议室，以及良好的大会整体筹备。</p>
+
+<p>这很奇怪啊，一家无人知晓的公司，为什么要在技术会议和公共活动上面投入如此多的资金。</p>
+
+<p>似乎对他们来说，取悦一些在里斯本度过一个凉爽周末的开发者和投资者，换取对方对他们的更多投资，不对他们实用性存疑的技术丧失信心，才是首等重要的大事。</p>
+
+<p>正是由于这件事，从此以后，我就对区块链的生态产生了怀疑。</p>
+
+<h2>言论</h2>
+
+<p>1、</p>
+
+<p>世界上最富有的10位富豪，离婚过13次。</p>
+
+<p>-- <a href="https://collabfund.com/blog/a-few-laws-of-getting-rich/">collabfund.com</a></p>
+
+<p>2、</p>
+
+<p>创业公司几乎就是一个"生活在未来"的地方。在创业的早期，你就像活在未来，因为你只关注一件事，就是如何做出一个未来大受欢迎的新产品。</p>
+
+<p>-- <a href="https://landmines.substack.com/p/earning-the-privilege-to-work-on">《你的问题不是你独有的》</a></p>
+
+<p>3、</p>
+
+<p>以太坊曾被认为是"世界计算机"，允许人们将其用作计算资源。</p>
+
+<p>这显然是一个愚蠢的想法，因为所有的计算都必须由所有全节点复制，这是极其冗余的。</p>
+
+<p>-- <a href="https://bramcohen.com/p/remember-how-ethereum-was-supposed">《还记得以太坊如何成为"世界计算机"吗？》</a></p>
+
+<p>4、</p>
+
+<p>具有讽刺意味的是，忠诚的员工更可能被选为企业的剥削目标。企业会假设，忠诚的员工更愿意为企业做出个人牺牲。</p>
+
+<p>-- <a href="https://www.sciencedirect.com/science/article/abs/pii/S0022103122001615">杜克大学的一项研究</a></p>
+
+<p>5、</p>
+
+<p>任何不经常改主意的人，都大大低估了我们生活的世界的复杂性。</p>
+
+<p>-- 贝佐斯，亚马逊创始人</p>
+
+<h2>往年回顾</h2>
+
+<p><a href="http://www.ruanyifeng.com/blog/2022/12/weekly-issue-235.html">青年失业率与选择创业</a>（2022 #235）</p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2021/11/weekly-issue-185.html">美国宪法拍卖，一个区块链案例</a>（2021 #185）</p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2020/11/weekly-issue-135.html">什么行业适合创业？</a>（2020 #135）</p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2019/12/weekly-issue-85.html">美国为什么不是乱哄哄？</a>（2019 #85）</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2023-12-15T08:15:00+08:00">2023年12月15日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2023/12/weekly-issue-281.html</id>
             <title>科技爱好者周刊（第 281 期）：新基建的政策选择</title>
             <link>http://www.ruanyifeng.com/blog/2023/12/weekly-issue-281.html</link>
@@ -2112,432 +2538,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2023-11-10T08:12:28+08:00">2023年11月10日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2023/11/weekly-issue-276.html</id>
-            <title>科技爱好者周刊（第 276 期）：内容行业的衰落</title>
-            <link>http://www.ruanyifeng.com/blog/2023/11/weekly-issue-276.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2023/11/weekly-issue-276.html</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 03 Nov 2023 08:02:33 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
-<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/3599">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
-
-<h2>封面图</h2>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102901.webp" title="" /></p>
-
-<p>山西平陆县有一条大裂缝，非常笔直，长约10公里，当地称为"划沟"。它的形成原因未知，可能与地震有关。（<a href="https://www.toutiao.com/w/1733600916925507/">via</a>）</p>
-
-<h2>内容行业的衰落</h2>
-
-<p>现在的 AI 技术，每天都在进化。我有一种感觉，普通人大概没意识到，它<strong>马上</strong>就要改变人类社会了。</p>
-
-<p>历史上，这种事一再发生。在你不知不觉中，某些大事件悄悄酝酿，突然就冲击到了你的生活，将你的人生全部打乱，你却毫无准备。</p>
-
-<p><strong>首当其冲，受到 AI 冲击的将是内容行业</strong>。我们以后消费的内容，绝大部分将都是 AI 参与生成的。</p>
-
-<p>文字、图像、声音这三个内容领域，我就不举例了，相关报道太多了。我们来看看，难度最高的视频生成，AI 现在到了什么程度。</p>
-
-<p>上个月，日本有一条<a href="https://www.sohu.com/a/730122312_506163">饮料广告</a>（<a href="https://www.bilibili.com/video/BV1WC4y1G774/">B 站</a>，<a href="https://www.youtube.com/watch?v=DEoG1NCdmdY">Youtube</a>）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102807.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102808.webp" title="" /></p>
-
-<p>看上去，这条广告很普通，模特拿着饮料又唱又跳。但是，这个模特不是真人，而是 AI 生成的。</p>
-
-<p>她的动作、表情、嘴型如此自然，毫无破绽。以后我们还需要真人模特吗？</p>
-
-<p>不仅模特没有了用武之地，而且明星偶像也可以被 AI 取代。今年上半年，韩国就成立了 <a href="https://k.sina.cn/article_7808249420_1d1686e4c001019zl5.html">AI 女团 MAVE</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102809.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102810.webp" title="" /></p>
-
-<p>四个成员都是 AI 生成的，还有自己的单曲和 MV，大家可以去看一下（ <a href="https://www.bilibili.com/video/BV1s84y177NF/">B 站</a>，<a href="https://www.youtube.com/watch?v=1wGOHbcQKIc">Youtube</a>）。你看了以后，大概会觉得，真人偶像以后不好当了。</p>
-
-<p>事实上，迪斯尼已经在公映的电影里面，加入了 <a href="https://futurism.com/the-byte/disney-mocked-fake-cgi-actors-crowd-scene">AI 演员</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102811.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102812.webp" title="" /></p>
-
-<p>上面是今年的新片《舞会契约》（Prom Pact）的截图，里面有一个镜头一晃而过。网友注意到，第二排的观众明显是 AI 生成的。制片公司为了省钱，不用群众演员，就用 AI 把人加上去了。</p>
-
-<p>好莱坞的演员工会最近正在罢工，他们的主要诉求就是，制片公司不能使用 AI 演员，不能剥夺真人演员的演出机会。可见这些专业人士，已经意识到了 AI 的竞争力有多强。</p>
-
-<p>但是，就算制片公司做了让步，互联网上的 AI 视频是挡不住的。</p>
-
-<p>《宋飞正传》（Seinfield）是上个世纪很红的美国肥皂剧，有100多集。网友就把这部电视剧作为训练材料，做出了一个 AI 生成器。</p>
-
-<p>AI 自动生成这部电视剧的新剧集，不过里面的角色不是真人，而是卡通形象。它们通过合成语音，说着 AI 生成的剧本台词。这部"AI 电视剧"就在视频网站 Twitch 的 <a href="https://www.twitch.tv/watchmeforever">WatchMeForever</a> 频道，一天24小时不间断地播放，已经半年了，任何时间进去看，都是不一样的内容。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110108.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110109.webp" title="" /></p>
-
-<p>上面这些例子，只是今年上半年的 AI 水平，而明年的模型会比今年强十倍，甚至百倍。难以想象，到了明年这个时候，AI 生成视频会是怎样的质量，真人还能不能匹敌。</p>
-
-<p>总之，<strong>AI 已经不是实验室产品，而是处于工业化的前夜，今后一到两年内，就会完全颠覆内容行业</strong>。</p>
-
-<p>由于 AI 可以低成本地、大量地、源源不断地生成内容，<strong>内容很快就会贬值，因为有越来越多的 AI 生成的内容可供消费</strong>。</p>
-
-<p>内容从业者（作家、记者、摄影师、歌手、音乐家、演员、导演等等）都将不得不与 AI 竞争。但只要你是依靠人力来创造内容，就会发现越来越难以赢得观众，只有少数头部创作者可以赚到钱。</p>
-
-<p>顺便说一句，这个周刊也属于内容行业，也是在生产内容，而且目前还是人力生产。如果周刊还想办下去，势必就要摆脱人工模式，改成自动化模式或者 AI 模式，这样才能更多、更快地生产内容。</p>
-
-<h2>科技动态</h2>
-
-<p>1、<a href="https://www.fastcompany.com/90971739/this-18-year-old-built-a-better-computer-monitor-that-doesnt-strain-your-eyes">护眼显示器</a></p>
-
-<p>使用电脑显示器时，你会不会觉得，屏幕太亮太伤眼睛？</p>
-
-<p>一位美国的18岁高中生，因为受不了显示屏的眩光，发明了一款护眼显示器。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102802.webp" title="" /></p>
-
-<p>他的想法很简单，去掉显示器的发光模块，在屏幕后面加一块反光板，利用环境光来照亮屏幕。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102803.webp" title="" /></p>
-
-<p>这样的设计确实更护眼，成本也低，也更省电。发明者说，它在日光下与传统显示器差异不大。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102805.webp" title="" /></p>
-
-<p>但是低光环境，屏幕就会变得黯淡，难以展现鲜艳的颜色。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102804.webp" title="" /></p>
-
-<p>上图中，右侧的反光屏明显更黯淡。</p>
-
-<p>目前，该显示器正在众筹，建议零售价是1099美元。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102806.webp" title="" /></p>
-
-<p>2、<a href="https://www.theverge.com/2023/10/31/23940533/google-ing-top-level-domain">.ing 域名</a></p>
-
-<p>.ing 域名开始预售了，目前是抢注期间，价格比较贵。Godaddy 上面，think.ing 是3.9万美元，buy.ing 和 do.ing 都是13万美元。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110101.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110102.webp" title="" /></p>
-
-<p>其他普通的 .ing 域名的价格会每日下降，直到12月5日，该域名正式启用，对所有人开放，价格恢复正常。</p>
-
-<p>目前，design.ing、draw.ing、edit.ing、sign.ing、go.ing、giv.ing、surf.ing 都已经被注册了。</p>
-
-<p>3、<a href="https://www.abc.net.au/news/2023-09-23/rooftop-solar-cannibalising-australian-power-market/102889710">负电价</a></p>
-
-<p>澳大利亚发生了一件前所未闻的事情：电价变成负的了。</p>
-
-<p>负电价出现在部分地区的批发电价，电网收购电厂发的电，电厂还要付钱给前者。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023092406.webp" title="" /></p>
-
-<p>主要原因是澳大利亚日照充分，非常适合太阳能发电。大部分居民住宅已经安装了太阳能板，导致电厂的电白天根本用不完。</p>
-
-<p>电厂为了维持机器运转，只好付钱让电网收购这些电。当然，这是在白天，晚上的电费还是正的。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023092407.webp" title="" /></p>
-
-<p>（上图：许多屋顶都有太阳能板。）</p>
-
-<p>随着屋顶太阳能进一步普及，这种情况以后会越来越多。这就要求进一步发展储能设施，以及更动态灵活的电力调度系统。</p>
-
-<p>4、<a href="https://colossalorder.fi/?p=2049">《城市天际线 II》的性能问题</a></p>
-
-<p>《城市天际线 II》是一款最近发布的 3D 游戏，主要内容是城市规划。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110201.webp" title="" /></p>
-
-<p>但是，它有性能问题，高清渲染时，即使顶级的硬件也会出现卡顿。</p>
-
-<p><a href="https://twitter.com/tombomp/status/1717641500891238536">一位玩家</a>经过深入挖掘，终于发现了原因。游戏里面的行人 NPC，建模时不知何故选择了高精度模型，要求大量渲染资源。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110202.webp" title="" /></p>
-
-<p>这个模型里面，每颗牙齿都是单独渲染的，而且即使天空视角时，行人只有一个背影，它却还在渲染牙齿。这时，如果画面里面的行人比较多，就出现了性能问题。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110203.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110204.webp" title="" /></p>
-
-<h2>文章</h2>
-
-<p>1、<a href="https://i.ifeng.com/c/8UMiWPZTz6l">"苹果皮"复活</a>（中文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110207.webp" title="" /></p>
-
-<p>美版的 iPhone 只支持 eSIM，不支持实体 SIM 卡。国内现在出现了一款手机壳，让美版 iPhone 可以使用实体 SIM 卡。</p>
-
-<p>2、<a href="https://jvns.ca/blog/2023/09/14/in-a-git-repository--where-do-your-files-live-/">你的文件位于 Git 仓库哪里？</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023091504.webp" title="" /></p>
-
-<p>作者通过找出某个文件在<code>.git</code>目录的位置，介绍 Git 的原理。</p>
-
-<p>3、<a href="https://tmp.bearblog.dev/how-i-stay-reasonably-anonymous-online/">我如何在网上保持匿名</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023091503.webp" title="" /></p>
-
-<p>作者介绍自己在网上防止被追踪而采取的各种措施。</p>
-
-<p>4、<a href="https://www.flexmonster.com/blog/react-based-frameworks-comparison-remix-nextjs-gatsby/">Remix、Next.js 和 Gatsby 的比较</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023091505.webp" title="" /></p>
-
-<p>标题里面的三个框架都基于 React，自带后端，本文比较了它们的特点。</p>
-
-<p>5、<a href="https://engineercodex.substack.com/p/how-instagram-scaled-to-14-million">Instagram 的早期架构</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023091603.webp" title="" /></p>
-
-<p>Instagram 在2010年10月发布，一年之内就拥有了1400万用户。它那时只有3个工程师，他们怎么设计后端架构，支持这么多用户。</p>
-
-<p>6、<a href="https://linuxiac.com/how-to-find-linux-os-installation-date/">如何查看 Linux 系统的安装时间</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023091901.webp" title="" /></p>
-
-<p>本文教你使用几个简单的命令，查看本机的 Linux 系统是什么时候安装的。</p>
-
-<p>7、<a href="https://tigerbeetle.com/blog/2023-09-19-64-bit-bank-balances-ought-to-be-enough-for-anybody/">64位整数够放货币吗？</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023092002.webp" title="" /></p>
-
-<p>这篇文章讨论一个有趣的问题：货币该用什么类型的数据来储存。</p>
-
-<h2>[本周软件] 雷池：国产免费 Web 安全网关</h2>
-
-<p>本周向大家介绍一个 Web 网站防护项目，中文名为"<a href="https://waf-ce.chaitin.cn/">雷池</a>"。</p>
-
-<p>它可以灵活地设定各种规则，过滤网络请求，防止黑客攻击你的网站，相当于一层自定义的软件防火墙。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102604.webp" title="" /></p>
-
-<p>它基于 Nginx，以反向代理的形式，架设在网站前面，自带图形操作界面，简单好用。</p>
-
-<p>自从半年前在 <a href="https://github.com/chaitin/SafeLine">GitHub 开源</a>，它已经收获了5000 star，目前是全球排名第二的开源 WAF 项目。</p>
-
-<p>它的最大特点，就是采用智能语义分析算法，判断可疑请求，不让黑客越雷池半步，很适合个人和小企业使用。</p>
-
-<h2>工具</h2>
-
-<p>1、<a href="https://github.com/btpf/Alexandria">Alexandria</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023083004.webp" title="" /></p>
-
-<p>一个开源的 Windows/Linux 的桌面软件，用来阅读各种电子书籍。</p>
-
-<p>2、<a href="https://www.youtube-dubbing.com/">YouTube Dubbing</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023103101.webp" title="" /></p>
-
-<p>一个 Chrome 插件，可以将 YouTube 视频的英文语音，转成中文语音。（<a href="https://github.com/ruanyf/weekly/issues/3592">@dyc87112</a> 投稿）</p>
-
-<p>3、<a href="https://github.com/jianchang512/pyvideotrans">pyvideotrans</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110205.webp" title="" /></p>
-
-<p>一个 Windows 应用，跟上一个软件作用相似，可以将本地视频文件的语音，翻译成另一种语言，比如英文旁白改成机器语音合成的中文。</p>
-
-<p>该工具只用了 CPU，没有用到 GPU，也没有用到任何商业接口，无需付费。（<a href="https://github.com/ruanyf/weekly/issues/3600">@jianchang512</a> 投稿）</p>
-
-<p>4、<a href="https://github.com/bensadeh/tailspin">tailspin</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110215.webp" title="" /></p>
-
-<p>一个命令行工具，实时高亮显示日志文件。</p>
-
-<p>5、<a href="https://wolicheng.com/womic/index.html">WO Mic</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110206.webp" title="" /></p>
-
-<p>这个 App 可以将旧手机变成麦克风，把音频信号传入电脑或其他设备，无线、USB 线传输皆可。（<a href="https://github.com/ruanyf/weekly/issues/3602">@GXY2017</a> 投稿）</p>
-
-<p>6、<a href="https://olivevideoeditor.org/">Olive</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/220204/bg2022042504.webp" title="" /></p>
-
-<p>一个跨平台的视频编辑器，据说简单好用，适合快速编辑生成短视频。类似的视频编辑器还有 <a href="https://shotcut.org/">Shotcut</a>、<a href="https://pitivi.org/">Pitivi</a>，主要适合 Linux 平台。</p>
-
-<p>7、<a href="https://www.tldraw.com/">tldraw</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110103.webp" title="" /></p>
-
-<p>一个 Web 白板工具，支持多人实时协作。</p>
-
-<p>8、<a href="https://www.rspack.dev/zh/">Rspark</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023103103.webp" title="" /></p>
-
-<p>一个 Rust 语言写的 JS 脚本打包器，速度很快，支持从 Webpack 移植。（<a href="https://github.com/ruanyf/weekly/issues/3596">@hardfist</a> 投稿）</p>
-
-<p>9、<a href="https://github.com/fantastic-admin/basic">Fantastic-admin</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023103102.webp" title="" /></p>
-
-<p>一款开箱即用的 Vue3 中后台管理系统框架。（<a href="https://github.com/ruanyf/weekly/issues/3595">@hooray</a> 投稿）</p>
-
-<p>10、<a href="https://github.com/1587315093/scratch-card">ScratchCard</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023103104.webp" title="" /></p>
-
-<p>一个刮刮卡的 React 组件。（<a href="https://github.com/1587315093/scratch-card">@1587315093</a> 投稿）</p>
-
-<h2>资源</h2>
-
-<p>1、<a href="https://apps.london.gov.uk/street-trees/">伦敦的树</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023090712.webp" title="" /></p>
-
-<p>伦敦市政府的官方网站，在地图上标出了该市的每一棵树。点击后，显示这棵树的详细数据和谷歌地图照片。</p>
-
-<p>2、<a href="https://github.com/AnsonZnl/RehabilitationGuide">颈椎病腰突康复指南</a></p>
-
-<p>作者患有颈椎病和腰椎间盘突出，现在已经康复。他收集康复资料，做成这个资料仓库。（<a href="https://github.com/ruanyf/weekly/issues/3598">@AnsonZnl</a> 投稿）</p>
-
-<p>3、<a href="https://www.thebyte.com.cn/">深入架构原理与实践</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102702.webp" title="" /></p>
-
-<p>中文原创书籍，介绍互联网服务架构，集中在网络、集群以及服务治理、FinOps 这三个主题。（<a href="https://github.com/ruanyf/weekly/issues/3589">@isno</a> 投稿）</p>
-
-<p>4、<a href="https://internetingishard.netlify.app/html-and-css/">Html 和 CSS 教程</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023091107.webp" title="" /></p>
-
-<p>针对初学者的网页开发入门教程（英文），特点是有大量图解。</p>
-
-<p>5、<a href="https://maclookup.app/">MAC 地址查询</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023091203.webp" title="" /></p>
-
-<p>该网站通过网卡 MAC 地址，可以查到厂商和网卡信息。</p>
-
-<h2>图片</h2>
-
-<p>1、<a href="https://news.artnet.com/market/new-yorker-cartoon-highest-price-auction-2381602">最流行的单幅漫画</a></p>
-
-<p>1993年是互联网诞生的初期，Facebook 要到10年才诞生，Instagram 则要到17年后诞生。</p>
-
-<p>当年7月份的《纽约人》杂志，发表了一张漫画。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110107.webp" title="" /></p>
-
-<p>一条狗正在上网，它扭头对另一条旁观的狗说："互联网上，没人知道你是一条狗。"</p>
-
-<p>这张漫画比喻互联网的匿名性，以及它是一个独立的平行世界。现实世界的小人物，在互联网上可能是一个极受欢迎的网红。</p>
-
-<p>这张漫画受到了巨大的欢迎，有着无数引用和转载，被认为是最流行的单幅漫画。原稿最近在拍卖会上以 175,000 美元的高价售出，这也是单幅漫画的最高价格。</p>
-
-<p>2、<a href="https://en.wikipedia.org/wiki/WordStar">WordStar</a></p>
-
-<p>WordStar 是上个世纪80年度最流行的文字编辑器，只有终端界面，没有图形界面。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110104.webp" title="" /></p>
-
-<p>你可能想不到，现在还有人用它，而且是很著名的人。</p>
-
-<p>那就是奇幻小说家乔治·RR·马丁，他的巨著《冰与火之歌》就是在 DOS 系统的 WordStar 上写的，写了5000多页。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110105.webp" title="" /></p>
-
-<h2>文摘</h2>
-
-<p>1、<a href="https://hackaday.com/2022/07/11/where-are-our-video-phones/">视频电话的历史</a></p>
-
-<p>很早以前，人类就幻想有可以看见对方的电话。1870年代的一篇科幻小说，就提到了这种电话。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202207/bg2022071406.jpg" title="" /></p>
-
-<p>（图片说明：19世纪人们幻想的视频电话。）</p>
-
-<p>电话发明人亚历山大·贝尔，认为这种"可视电话"是可能的，并且正确地预测，可能会有一种方法，让机器感知到光，将其转化为电能，并且这种机器的体积应该非常小。</p>
-
-<p>最早的视频电话出现在1930年代，由一家美国公司发明。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202207/bg2022071408.webp" title="" /></p>
-
-<p>这种电话需要专用的电话线，两端都配备了扫描仪和阴极射线管。它实际上是一个专线的双向电视直播。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202207/bg2022071409.webp" title="" /></p>
-
-<p>它可以实现每秒25帧，分辨率为150行。但是，这个系统在二战期间被放弃了。</p>
-
-<p>1950年代中期，信号压缩技术发明了，电话线可以传输大量数据了，因此有可能在电话线上传输图片。</p>
-
-<p>真正的可视电话就这样诞生了，可以在打电话时看到对方的图像。但是，原型产品都很贵。1964年的可视电话，三分钟的通话费用高达27美元，相当于今天的250美元。</p>
-
-<p>1992年，AT&amp;T 公司制造了一款商用视频电话，以每秒10帧的速度显示黑白图像。这确实可以算作不流畅的视频了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202207/bg2022071410.webp" title="" /></p>
-
-<p>它采用电话的音频线来发送图像，本质上就是传真的画质，而且速度非常慢，6到8秒的延迟后，才会看到对方的图片。</p>
-
-<p>这个视频电话售价为1,500美元，售出了大约30,000台，根本无法弥补投资。 </p>
-
-<p>其他公司也有类似的尝试，但都遇到了同样的问题：电话线传输模拟信号的带宽太小，根本无法实现视频直播。</p>
-
-<p>真正的视频电话，只有等到数字网络和数字技术成熟以后才出现。使用数字技术压缩视频，在高带宽的网络线路上传输，才能真正实现视频电话。</p>
-
-<p>近年来，压缩技术的进步和带宽的增加，多人实时的视频会议也成为了现实。</p>
-
-<h2>言论</h2>
-
-<p>1、</p>
-
-<p>有一次，古希腊哲学家皮浪乘船时，遇到了巨大的暴风雨。他看到有些乘客非常害怕，就以自己携带的猪还在专心进食，来安慰他们不要担心。</p>
-
-<p>这件事让我们思考，人类引以为傲的理性，是不是在折磨我们，让我们失去平静？</p>
-
-<p>-- <a href="https://www.futilitycloset.com/2023/09/01/pyrrhos-pig/">蒙田</a>，法国哲学家</p>
-
-<p>2、</p>
-
-<p>19世纪一个叫做诺亚·韦伯斯特的美国人，想编一本词典。他一共花了26年才完成，收入了7万个单词。为了编好词典，他自学了28种语言，而且为了筹措资金，不得不抵押自己的房子。</p>
-
-<p>最可悲的是，等到词典编出来，销量却不佳，几乎没人认可这项工作。反倒是他死后，这本词典逐渐成为美国最畅销的词典。直到今天，最权威的词典都要借用他的名字，称自己为《韦伯斯特词典》。</p>
-
-<p>-- <a href="https://jsomers.net/blog/dictionary">《你可能用错了词典》</a></p>
-
-<p>3、</p>
-
-<p>电影公司为了票房，让电影从独立的故事，转变为互相交叉和联系的系列电影，这样做的风险不断增加，因为故事变得如此复杂，以至于看电影从一种娱乐变成了需要事前做一些家庭作业。</p>
-
-<p>-- <a href="https://kottke.org/23/09/the-life-cycle-of-superhero-storytelling">《超级英雄故事的生命周期》</a></p>
-
-<p>4、</p>
-
-<p>创业者有一个谬误，叫做"下一个功能谬误"，指的是一种错误想法，认为自家产品的下一个新功能会突然让人们使用该产品。</p>
-
-<p>-- <a href="https://andrewchen.com/the-next-feature-fallacy-the-fallacy-that-the-next-new-feature-will-suddenly-make-people-use-your-product/">@andrewchen</a></p>
-
-<h2>往年回顾</h2>
-
-<p><a href="http://www.ruanyifeng.com/blog/2022/11/weekly-issue-229.html">手机充电问题的解决</a>（2022 #229）</p>
-
-<p><a href="http://www.ruanyifeng.com/blog/2021/10/weekly-issue-179.html">AR 技术的打开方式</a>（2021 #179）</p>
-
-<p><a href="http://www.ruanyifeng.com/blog/2020/10/weekly-issue-129.html">创业的凸函数与凹函数</a>（2020 #129）</p>
-
-<p><a href="http://www.ruanyifeng.com/blog/2019/10/weekly-issue-79.html">我们的生活越来越依赖机器</a>（2019 #79）</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2023-11-03T08:02:33+08:00">2023年11月 3日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
