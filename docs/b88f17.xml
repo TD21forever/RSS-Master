@@ -5,6 +5,70 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1735770125704335647#m</id>
+            <title>FunSearch 是 Google DeepMind 最近利用大语言模型在数学领域的一个重大成果，甚至于你能从中看出前不久传闻中的 Q* 的影子，因为它本质上是实现了大语言模型自己提出解决数学问题的方案，并自己去验证解决方案。
+
+它有一个前提条件，就是需要将数学问题描述成计算机代码“函数”，这就是 FunSearch 中“Fun”的由来，也就是“Function”。
+
+图一很清楚的描述了 FunSearch 的工作原理。
+
+FunSearch 主要由几个部分组成：
+- 大语言模型：根据现有代码，提出创新性的解决方案，生成新的代码
+- 评估器：防止错误或虚构的结果，评估生成的结果，选择最好的结果
+- 程序池：保存已经生成好的并且评估器评选的最好的代码
+
+FunSearch 是一个循环迭代的过程。在每一轮中：
+1. 系统会从现有程序池选取若干程序，交由 LLM 加工。
+2. LLM 在这些程序的基础上进行创新，生成新程序，并自动对它们进行评估。
+3. 表现最佳的程序将被重新加入程序池，形成一个自我提升的循环。
+
+借助代码和评估器，FunSearch 就类似于 Alpha Go 的训练那样，实现了一套自动训练优化的机制，让 LLM 提出新的解决方案，持续不断地优化解决方案，最终解决问题。
+
+另外如果你记得 @DrJimFan 他们做过的 GPT-4 自动玩 Minecraft 的 Voyager https://twitter.com/DrJimFan/status/1662115266933972993 （图二），原理也是类似的：把 Minecraft 的操作转换成代码，GPT-4 生成技能代码，生成后去 Minecraft 中执行校验，优秀的技能代码最终保存到技能库。思路惊人的相似。
+
+感觉这个（LLM - 代码 - 验证器）框架以后可以有越来越多的有创新的应用场景！
+
+另外原始文章我翻译了一下：https://baoyu.io/translations/google/funsearch-making-new-discoveries-in-mathematical-sciences-using-large-language-models</title>
+            <link>https://nitter.cz/dotey/status/1735770125704335647#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1735770125704335647#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 15 Dec 2023 21:13:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>FunSearch 是 Google DeepMind 最近利用大语言模型在数学领域的一个重大成果，甚至于你能从中看出前不久传闻中的 Q* 的影子，因为它本质上是实现了大语言模型自己提出解决数学问题的方案，并自己去验证解决方案。<br />
+<br />
+它有一个前提条件，就是需要将数学问题描述成计算机代码“函数”，这就是 FunSearch 中“Fun”的由来，也就是“Function”。<br />
+<br />
+图一很清楚的描述了 FunSearch 的工作原理。<br />
+<br />
+FunSearch 主要由几个部分组成：<br />
+- 大语言模型：根据现有代码，提出创新性的解决方案，生成新的代码<br />
+- 评估器：防止错误或虚构的结果，评估生成的结果，选择最好的结果<br />
+- 程序池：保存已经生成好的并且评估器评选的最好的代码<br />
+<br />
+FunSearch 是一个循环迭代的过程。在每一轮中：<br />
+1. 系统会从现有程序池选取若干程序，交由 LLM 加工。<br />
+2. LLM 在这些程序的基础上进行创新，生成新程序，并自动对它们进行评估。<br />
+3. 表现最佳的程序将被重新加入程序池，形成一个自我提升的循环。<br />
+<br />
+借助代码和评估器，FunSearch 就类似于 Alpha Go 的训练那样，实现了一套自动训练优化的机制，让 LLM 提出新的解决方案，持续不断地优化解决方案，最终解决问题。<br />
+<br />
+另外如果你记得 <a href="https://nitter.cz/DrJimFan" title="Jim Fan">@DrJimFan</a> 他们做过的 GPT-4 自动玩 Minecraft 的 Voyager <a href="https://nitter.cz/DrJimFan/status/1662115266933972993">nitter.cz/DrJimFan/status/…</a> （图二），原理也是类似的：把 Minecraft 的操作转换成代码，GPT-4 生成技能代码，生成后去 Minecraft 中执行校验，优秀的技能代码最终保存到技能库。思路惊人的相似。<br />
+<br />
+感觉这个（LLM - 代码 - 验证器）框架以后可以有越来越多的有创新的应用场景！<br />
+<br />
+另外原始文章我翻译了一下：<a href="https://baoyu.io/translations/google/funsearch-making-new-discoveries-in-mathematical-sciences-using-large-language-models">baoyu.io/translations/google…</a></p>
+<p><a href="https://nitter.cz/GoogleDeepMind/status/1735332722208284797#m">nitter.cz/GoogleDeepMind/status/1735332722208284797#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JhczlqN1hNQUFPM1RfLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Jhd1hmY1dRQUVJRTVNLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1735712550212215061#m</id>
             <title>R to @dotey:</title>
             <link>https://nitter.cz/dotey/status/1735712550212215061#m</link>
@@ -324,6 +388,7 @@ https://ollama.ai/library/dolphin-mixtral/tags</title>
 <br />
 模型下载地址：<a href="https://huggingface.co/ehartford/dolphin-2.5-mixtral-8x7b">huggingface.co/ehartford/dol…</a></p>
 <p><a href="https://nitter.cz/bindureddy/status/1735427610732302452#m">nitter.cz/bindureddy/status/1735427610732302452#m</a></p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczNTExOTY2NzE5NzYxMjAzMi9kSnYtdjFJLT9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
                 ]]>
             </content:encoded>
         </item>
@@ -501,24 +566,7 @@ BTW: RSSHub 是一个让普通网站支持 RSS 的开源项目<br />
 <br />
 <a href="https://github.com/DIYgod/RSSHub">github.com/DIYgod/RSSHub</a></p>
 <p><a href="https://nitter.cz/DIYgod/status/1735353580805132681#m">nitter.cz/DIYgod/status/1735353580805132681#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1735408876366037099#m</id>
-            <title>GitHub Copilot的开源替代CodeGPT已经支持 Google Gemini Pro的API了，现在Gemini Pro是免费的，赶紧用起来！</title>
-            <link>https://nitter.cz/dotey/status/1735408876366037099#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1735408876366037099#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 14 Dec 2023 21:18:13 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>GitHub Copilot的开源替代CodeGPT已经支持 Google Gemini Pro的API了，现在Gemini Pro是免费的，赶紧用起来！</p>
-<p><a href="https://nitter.cz/dani_avila7/status/1735082509958832289#m">nitter.cz/dani_avila7/status/1735082509958832289#m</a></p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczNDIzNDUyODMwMDg5MjE2MS9wSXd6WjNSZz9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
                 ]]>
             </content:encoded>
         </item>
