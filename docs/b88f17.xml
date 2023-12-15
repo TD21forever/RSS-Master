@@ -5,6 +5,58 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1735799522792546517#m</id>
+            <title>OpenAI 的 Chat Completions API 新增了 logprobs，那么这个参数是做什么用的呢？
+
+我们知道 LLM （大语言模型）是概率模型，会根据 Token 出现的概率来决定下一个 Token，但我们通常是无法知道 LLM 在生成的时候，各个 Token 的概率是什么样的，只能看到最终的结果，所以在调试 Prompt 的时候无法直观的看到 Prompt 和参数的设置对生成结果的影响。
+
+新增的 logprobs 参数，默认是 false 的，如果你设置成 true，那么在返回的结果中，会多一个 logprobs 的项，里面会列出来每一个 Token 在生成时的概率。（参见图一）
+
+但这个只是让你看到一种结果。如果你仔细看文档，还可以看到新增了一个 top_logprobs 参数，需要同时将 logprobs 设置为 true 才能生效，这个参数是一个0-5之间的数字，意味着在返回结果的时候，会同时其他显示在生成时，当时最有可能的候选 Token 有哪些，以及各自的概率是多少。
+
+比如我将 top_logprobs 设置成 5，就可以看到在生成第一个词的时候，最有可能得 5 个 Token 是：“How”、“Hello”、“I”、“Great”和“Thank”。
+
+当第一个词选定“How”后，生成第二个词是最有可能的 5 个词分别是：“ can”，“ may”， “ May”， “ Can”， “dy”。
+
+注意前 4 个前面都有空格，而第 5 个没有空格，也就是每一次的 Token 既可能是个独立的单词也可能和前面的组成一个新的单词，比如第 5 个“dy”就可以和前面的“How”组成一个新词“Howdy”。
+
+不过对于普通开发者来说，感觉并没有太大的用处，只有真正的 Prompt Engineer 才可能会用的上。
+
+也欢迎评论补充：你觉得这两个参数可以有哪些实用的应用场景？</title>
+            <link>https://nitter.cz/dotey/status/1735799522792546517#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1735799522792546517#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 15 Dec 2023 23:10:30 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>OpenAI 的 Chat Completions API 新增了 logprobs，那么这个参数是做什么用的呢？<br />
+<br />
+我们知道 LLM （大语言模型）是概率模型，会根据 Token 出现的概率来决定下一个 Token，但我们通常是无法知道 LLM 在生成的时候，各个 Token 的概率是什么样的，只能看到最终的结果，所以在调试 Prompt 的时候无法直观的看到 Prompt 和参数的设置对生成结果的影响。<br />
+<br />
+新增的 logprobs 参数，默认是 false 的，如果你设置成 true，那么在返回的结果中，会多一个 logprobs 的项，里面会列出来每一个 Token 在生成时的概率。（参见图一）<br />
+<br />
+但这个只是让你看到一种结果。如果你仔细看文档，还可以看到新增了一个 top_logprobs 参数，需要同时将 logprobs 设置为 true 才能生效，这个参数是一个0-5之间的数字，意味着在返回结果的时候，会同时其他显示在生成时，当时最有可能的候选 Token 有哪些，以及各自的概率是多少。<br />
+<br />
+比如我将 top_logprobs 设置成 5，就可以看到在生成第一个词的时候，最有可能得 5 个 Token 是：“How”、“Hello”、“I”、“Great”和“Thank”。<br />
+<br />
+当第一个词选定“How”后，生成第二个词是最有可能的 5 个词分别是：“ can”，“ may”， “ May”， “ Can”， “dy”。<br />
+<br />
+注意前 4 个前面都有空格，而第 5 个没有空格，也就是每一次的 Token 既可能是个独立的单词也可能和前面的组成一个新的单词，比如第 5 个“dy”就可以和前面的“How”组成一个新词“Howdy”。<br />
+<br />
+不过对于普通开发者来说，感觉并没有太大的用处，只有真正的 Prompt Engineer 才可能会用的上。<br />
+<br />
+也欢迎评论补充：你觉得这两个参数可以有哪些实用的应用场景？</p>
+<p><a href="https://nitter.cz/OpenAIDevs/status/1735730662362189872#m">nitter.cz/OpenAIDevs/status/1735730662362189872#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JiSXp5eVhVQUk1dUs2LnBuZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JiS1B0VldRQUE2Sk5CLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1735770125704335647#m</id>
             <title>FunSearch 是 Google DeepMind 最近利用大语言模型在数学领域的一个重大成果，甚至于你能从中看出前不久传闻中的 Q* 的影子，因为它本质上是实现了大语言模型自己提出解决数学问题的方案，并自己去验证解决方案。
 
@@ -145,7 +197,6 @@ https://baoyu.io/translations/ai/big-ideas-in-tech-2024</title>
                     <p>我把 a16z 这篇文章翻译了一下：《2024 年科技领域的重大创新思想 [译]》<br />
 <a href="https://baoyu.io/translations/ai/big-ideas-in-tech-2024">baoyu.io/translations/ai/big…</a></p>
 <p><a href="https://nitter.cz/indigo11/status/1735216254993199204#m">nitter.cz/indigo11/status/1735216254993199204#m</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczNTU1ODA4ODI5NDMxMzk4NC9WRlNDekVZZD9mb3JtYXQ9cG5nJm5hbWU9ODAweDQxOQ==" />
                 ]]>
             </content:encoded>
         </item>
@@ -325,7 +376,6 @@ Ollama：<a href="https://ollama.ai/library/dolphin-mixtral">ollama.ai/library/d
 <br />
 至于机器要求，请查看网站上的说明</p>
 <p><a href="https://nitter.cz/dotey/status/1735457201395814770#m">nitter.cz/dotey/status/1735457201395814770#m</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczMzU5NzA2MzIyNzUyMzA3Mi94bk1mbk5zcT9mb3JtYXQ9cG5nJm5hbWU9NDIweDQyMF8y" />
                 ]]>
             </content:encoded>
         </item>
@@ -365,7 +415,6 @@ https://ollama.ai/library/dolphin-mixtral/tags</title>
                     <p>如果要自己部署可以用 <a href="http://ollama.ai">ollama.ai</a><br />
 <br />
 <a href="https://ollama.ai/library/dolphin-mixtral/tags">ollama.ai/library/dolphin-mi…</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczNDQzMDgwNTI4NjY0MTY2NC9YWUd1WUt2UD9mb3JtYXQ9cG5nJm5hbWU9NDIweDQyMF8y" />
                 ]]>
             </content:encoded>
         </item>
@@ -536,37 +585,6 @@ Octo 设计上支持扩展，采用大型 Transformer 架构，配备小型编�
 <br />
 项目地址：<a href="https://octo-models.github.io/">octo-models.github.io/</a></p>
 <p><a href="https://nitter.cz/KarlPertsch/status/1735302982743347520#m">nitter.cz/KarlPertsch/status/1735302982743347520#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1735410631992279393#m</id>
-            <title>这个项目挺好的，是一个浏览器插件，可以发现页面中的RSS或者RSSHub订阅地址。
-
-https://github.com/DIYgod/RSSHub-Radar
-
-BTW: RSSHub 是一个让普通网站支持 RSS 的开源项目
-
-https://github.com/DIYgod/RSSHub</title>
-            <link>https://nitter.cz/dotey/status/1735410631992279393#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1735410631992279393#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 14 Dec 2023 21:25:11 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个项目挺好的，是一个浏览器插件，可以发现页面中的RSS或者RSSHub订阅地址。<br />
-<br />
-<a href="https://github.com/DIYgod/RSSHub-Radar">github.com/DIYgod/RSSHub-Rad…</a><br />
-<br />
-BTW: RSSHub 是一个让普通网站支持 RSS 的开源项目<br />
-<br />
-<a href="https://github.com/DIYgod/RSSHub">github.com/DIYgod/RSSHub</a></p>
-<p><a href="https://nitter.cz/DIYgod/status/1735353580805132681#m">nitter.cz/DIYgod/status/1735353580805132681#m</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczNDIzNDUyODMwMDg5MjE2MS9wSXd6WjNSZz9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
                 ]]>
             </content:encoded>
         </item>
