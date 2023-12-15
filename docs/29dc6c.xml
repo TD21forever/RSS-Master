@@ -5,6 +5,208 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1735553242048958615#m</id>
+            <title>Nature介绍了DeepMind开发的一种新技术：FunSearch
+
+这个方法结合大语言模型和一个自动检查程序，可以创造性地解决问题，同时杜绝幻觉，确保答案是正确的。
+
+同时FunSearch不仅给出解决方案，还展示如何得到这些解决方案的过程。
+
+该方法成功解决数学和计算机科学中的两大难题：帽子集问题和装箱问题。
+
+FunSearch能够提出创新和创造性的解决方案，这些方案有时可能超出了传统思维的范围。
+
+主要原理：
+
+FunSearch 结合了两个主要组件：一个预训练的大语言模型（LLM）和一个自动“评估器”。
+
+这两个组件共同工作，以生成创造性的解决方案并过滤掉错误或不可靠的想法。
+
+1、预训练的大语言模型：这个模型是 FunSearch 的核心。它通过分析大量的文本数据（如科学论文、书籍等）被训练来理解语言和知识。
+
+当面对一个特定的问题时，这个模型会生成一系列可能的解决方案或思路。这些解决方案是基于模型从其训练数据中学到的模式和信息。
+
+2、自动“评估器”：评估器的作用是检查和评估由语言模型生成的解决方案。
+
+它会分析这些解决方案，判断它们是否可靠、是否有逻辑错误或事实错误。
+
+如果评估器认为某个解决方案不可靠或有误，它会将其过滤掉。这有助于确保最终提出的解决方案是高质量的。
+
+3、迭代过程：FunSearch 通过迭代过程在初始解决方案和新知识之间往返。
+
+如果初步的解决方案被评估器认为不足，语言模型会基于评估器的反馈尝试生成新的、更好的解决方案。
+
+4、创造性解决方案：由于语言模型接受了广泛的训练，它能够提出创新和创造性的解决方案，这些方案可能超出了传统思维的范围。
+
+FunSearch 不仅生成解决方案，还能提供关于如何得到这些解决方案的解释。这有助于用户理解解决方案的逻辑和背后的思路。
+
+总之，FunSearch 通过结合一个强大的语言模型和一个智能的评估器，能够在保证解决方案质量的同时，提供创新和创造性的想法。这种方法特别适用于解决复杂的科学问题，其中创新思维和准确性都非常重要。
+
+应用于实际问题：
+
+FunSearch 已经在实际的数学和计算机科学问题上取得了成果，例如在帽子集问题和装箱问题上。
+
+🎩帽子集问题（Cap Set Problem）：
+
+帽子集问题是一个数学问题，涉及在特定规则下找到最大的数字集合。
+
+帽子集问题是一个长期困扰数学家的开放性挑战，特别是在极值组合学（extremal combinatorics）领域。
+
+这个问题涉及在高维网格中寻找最大的点集（称为帽子集），其中任何三个点都不在同一直线上。
+
+这个问题之所以重要，是因为它可以作为其他极值组合学问题的模型。
+
+计算上的挑战：用传统的暴力计算方法来解决帽子集问题是不可行的，因为需要考虑的可能性数量非常巨大，远超过宇宙中原子的数量。
+
+FunSearch 的应用：FunSearch 通过生成程序来寻找解决方案，成功找到了过去 20 年中最大的帽子集，这是一个显著的数学成就。
+
+这代表了过去 20 年中帽子集大小的最大增长。
+
+此外，FunSearch 在解决这个问题上超越了现有的最先进的计算求解器，因为这个问题的规模远远超出了它们当前的处理能力。
+
+这些结果表明，FunSearch 技术可以帮助我们在难以建立直觉的硬组合问题上超越现有的结果。
+
+预计这种方法将在组合学的类似理论问题中发现新的解决方案，并可能在未来在通信理论等领域开辟新的可能性。
+
+🗄️装箱问题（Bin-Packing Problem）：
+
+装箱问题是计算机科学中的一个实际挑战，涉及如何将不同大小的物品装入最少数量的箱子中。
+
+这个问题在现实世界中非常常见，比如在装载货物或在数据中心分配计算任务以最小化成本时。
+
+传统解决方法：通常，装箱问题是通过基于人类经验的算法规则（启发式方法）来解决的。
+
+但是，为每个具体情况找到一套规则（考虑到不同的大小、时间或容量）可能非常具有挑战性。
+
+FunSearch 的应用：FunSearch 被用来解决装箱问题，它生成了一个自动定制的程序，适应数据的具体情况。
+
+这个程序在性能上超越了现有的启发式方法，使用更少的箱子来装载相同数量的物品。
+
+与其他 AI 方法（如神经网络和强化学习）相比，FunSearch 生成的代码易于检查和部署，这意味着其解决方案可能很容易被应用于各种实际的工业系统中，从而迅速带来好处。
+
+FunSearch 的灵活性：尽管装箱问题与帽子集问题非常不同，但设置 FunSearch 来解决这个问题却很容易。
+这展示了 FunSearch 在解决不同类型的问题上的灵活性和有效性。
+
+而且FunSearch 倾向于找到由高度紧凑的程序表示的解决方案，这些解决方案具有低的科尔莫哥洛夫复杂度（Kolmogorov complexity）。
+
+简短的程序可以描述非常大的对象，使 FunSearch 能够处理大型的“大海捞针”问题。
+此外，这种紧凑性使 FunSearch 生成的程序输出更易于研究人员理解。
+
+这种简洁性和可解释性对于研究人员来说尤其重要，因为它们可以更容易地分析和验证 AI 提出的解决方案。
+
+详细：https://deepmind.google/discover/blog/funsearch-making-new-discoveries-in-mathematical-sciences-using-large-language-models/
+
+论文：https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/funsearch-making-new-discoveries-in-mathematical-sciences-using-large-language-models/Mathematical-discoveries-from-program-search-with-large-language-models.pdf
+
+Nature：https://www.nature.com/articles/s41586-023-06924-6</title>
+            <link>https://nitter.cz/xiaohuggg/status/1735553242048958615#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1735553242048958615#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 15 Dec 2023 06:51:52 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Nature介绍了DeepMind开发的一种新技术：FunSearch<br />
+<br />
+这个方法结合大语言模型和一个自动检查程序，可以创造性地解决问题，同时杜绝幻觉，确保答案是正确的。<br />
+<br />
+同时FunSearch不仅给出解决方案，还展示如何得到这些解决方案的过程。<br />
+<br />
+该方法成功解决数学和计算机科学中的两大难题：帽子集问题和装箱问题。<br />
+<br />
+FunSearch能够提出创新和创造性的解决方案，这些方案有时可能超出了传统思维的范围。<br />
+<br />
+主要原理：<br />
+<br />
+FunSearch 结合了两个主要组件：一个预训练的大语言模型（LLM）和一个自动“评估器”。<br />
+<br />
+这两个组件共同工作，以生成创造性的解决方案并过滤掉错误或不可靠的想法。<br />
+<br />
+1、预训练的大语言模型：这个模型是 FunSearch 的核心。它通过分析大量的文本数据（如科学论文、书籍等）被训练来理解语言和知识。<br />
+<br />
+当面对一个特定的问题时，这个模型会生成一系列可能的解决方案或思路。这些解决方案是基于模型从其训练数据中学到的模式和信息。<br />
+<br />
+2、自动“评估器”：评估器的作用是检查和评估由语言模型生成的解决方案。<br />
+<br />
+它会分析这些解决方案，判断它们是否可靠、是否有逻辑错误或事实错误。<br />
+<br />
+如果评估器认为某个解决方案不可靠或有误，它会将其过滤掉。这有助于确保最终提出的解决方案是高质量的。<br />
+<br />
+3、迭代过程：FunSearch 通过迭代过程在初始解决方案和新知识之间往返。<br />
+<br />
+如果初步的解决方案被评估器认为不足，语言模型会基于评估器的反馈尝试生成新的、更好的解决方案。<br />
+<br />
+4、创造性解决方案：由于语言模型接受了广泛的训练，它能够提出创新和创造性的解决方案，这些方案可能超出了传统思维的范围。<br />
+<br />
+FunSearch 不仅生成解决方案，还能提供关于如何得到这些解决方案的解释。这有助于用户理解解决方案的逻辑和背后的思路。<br />
+<br />
+总之，FunSearch 通过结合一个强大的语言模型和一个智能的评估器，能够在保证解决方案质量的同时，提供创新和创造性的想法。这种方法特别适用于解决复杂的科学问题，其中创新思维和准确性都非常重要。<br />
+<br />
+应用于实际问题：<br />
+<br />
+FunSearch 已经在实际的数学和计算机科学问题上取得了成果，例如在帽子集问题和装箱问题上。<br />
+<br />
+🎩帽子集问题（Cap Set Problem）：<br />
+<br />
+帽子集问题是一个数学问题，涉及在特定规则下找到最大的数字集合。<br />
+<br />
+帽子集问题是一个长期困扰数学家的开放性挑战，特别是在极值组合学（extremal combinatorics）领域。<br />
+<br />
+这个问题涉及在高维网格中寻找最大的点集（称为帽子集），其中任何三个点都不在同一直线上。<br />
+<br />
+这个问题之所以重要，是因为它可以作为其他极值组合学问题的模型。<br />
+<br />
+计算上的挑战：用传统的暴力计算方法来解决帽子集问题是不可行的，因为需要考虑的可能性数量非常巨大，远超过宇宙中原子的数量。<br />
+<br />
+FunSearch 的应用：FunSearch 通过生成程序来寻找解决方案，成功找到了过去 20 年中最大的帽子集，这是一个显著的数学成就。<br />
+<br />
+这代表了过去 20 年中帽子集大小的最大增长。<br />
+<br />
+此外，FunSearch 在解决这个问题上超越了现有的最先进的计算求解器，因为这个问题的规模远远超出了它们当前的处理能力。<br />
+<br />
+这些结果表明，FunSearch 技术可以帮助我们在难以建立直觉的硬组合问题上超越现有的结果。<br />
+<br />
+预计这种方法将在组合学的类似理论问题中发现新的解决方案，并可能在未来在通信理论等领域开辟新的可能性。<br />
+<br />
+🗄️装箱问题（Bin-Packing Problem）：<br />
+<br />
+装箱问题是计算机科学中的一个实际挑战，涉及如何将不同大小的物品装入最少数量的箱子中。<br />
+<br />
+这个问题在现实世界中非常常见，比如在装载货物或在数据中心分配计算任务以最小化成本时。<br />
+<br />
+传统解决方法：通常，装箱问题是通过基于人类经验的算法规则（启发式方法）来解决的。<br />
+<br />
+但是，为每个具体情况找到一套规则（考虑到不同的大小、时间或容量）可能非常具有挑战性。<br />
+<br />
+FunSearch 的应用：FunSearch 被用来解决装箱问题，它生成了一个自动定制的程序，适应数据的具体情况。<br />
+<br />
+这个程序在性能上超越了现有的启发式方法，使用更少的箱子来装载相同数量的物品。<br />
+<br />
+与其他 AI 方法（如神经网络和强化学习）相比，FunSearch 生成的代码易于检查和部署，这意味着其解决方案可能很容易被应用于各种实际的工业系统中，从而迅速带来好处。<br />
+<br />
+FunSearch 的灵活性：尽管装箱问题与帽子集问题非常不同，但设置 FunSearch 来解决这个问题却很容易。<br />
+这展示了 FunSearch 在解决不同类型的问题上的灵活性和有效性。<br />
+<br />
+而且FunSearch 倾向于找到由高度紧凑的程序表示的解决方案，这些解决方案具有低的科尔莫哥洛夫复杂度（Kolmogorov complexity）。<br />
+<br />
+简短的程序可以描述非常大的对象，使 FunSearch 能够处理大型的“大海捞针”问题。<br />
+此外，这种紧凑性使 FunSearch 生成的程序输出更易于研究人员理解。<br />
+<br />
+这种简洁性和可解释性对于研究人员来说尤其重要，因为它们可以更容易地分析和验证 AI 提出的解决方案。<br />
+<br />
+详细：<a href="https://deepmind.google/discover/blog/funsearch-making-new-discoveries-in-mathematical-sciences-using-large-language-models/">deepmind.google/discover/blo…</a><br />
+<br />
+论文：<a href="https://storage.googleapis.com/deepmind-media/DeepMind.com/Blog/funsearch-making-new-discoveries-in-mathematical-sciences-using-large-language-models/Mathematical-discoveries-from-program-search-with-large-language-models.pdf">storage.googleapis.com/deepm…</a><br />
+<br />
+Nature：<a href="https://www.nature.com/articles/s41586-023-06924-6">nature.com/articles/s41586-0…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzU1NTI2MzQ1OTIwMzg5MTIvcHUvaW1nL3JBcXg3U3JpeW9rNjA2ZGYuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1735538480019828925#m</id>
             <title>还是中国人更懂AI
 
@@ -261,28 +463,6 @@ GitHub：<a href="https://github.com/openai/weak-to-strong">github.com/openai/we
 <br />
 OpenAI还启动了一个价值 1000 万美元的资助计划，支持广泛的超人类 AI 对齐研究，特别是与弱到强泛化相关的研究。申请：<a href="https://openai.com/blog/superalignment-fast-grants">openai.com/blog/superalignme…</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0JXMkU4OGIwQUF5VGFGLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1735311066480136502#m</id>
-            <title>一个暗示：有新东西，而且非常棒！
-
-“OpenAI 目前的规模有一个非常好的地方 — 有时我会发现，我们多年来一直试图优先考虑但未能实施的项目，竟然自发地开始了，而且初步结果非常棒。”</title>
-            <link>https://nitter.cz/xiaohuggg/status/1735311066480136502#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1735311066480136502#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 14 Dec 2023 14:49:33 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>一个暗示：有新东西，而且非常棒！<br />
-<br />
-“OpenAI 目前的规模有一个非常好的地方 — 有时我会发现，我们多年来一直试图优先考虑但未能实施的项目，竟然自发地开始了，而且初步结果非常棒。”</p>
-<p><a href="https://nitter.cz/gdb/status/1735309823720448349#m">nitter.cz/gdb/status/1735309823720448349#m</a></p>
                 ]]>
             </content:encoded>
         </item>
