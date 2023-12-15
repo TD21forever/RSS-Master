@@ -5,6 +5,61 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1735499657391096241#m</id>
+            <title>Ollama已经支持 MoE 架构的模型，目前可以下载Mixtral 8x7B和Dolphin Mixtral，但是需要 48G 内存才能跑。</title>
+            <link>https://nitter.cz/op7418/status/1735499657391096241#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1735499657391096241#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 15 Dec 2023 03:18:57 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Ollama已经支持 MoE 架构的模型，目前可以下载Mixtral 8x7B和Dolphin Mixtral，但是需要 48G 内存才能跑。</p>
+<p><a href="https://nitter.cz/OLLAMA/status/1735476087529070594#m">nitter.cz/OLLAMA/status/1735476087529070594#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1735498027111235928#m</id>
+            <title>有人问 GPT-4.5 的截图是不是真的，Sam 回了个“nah”说了跟没说一样。不过既然回了，感觉还是有戏。</title>
+            <link>https://nitter.cz/op7418/status/1735498027111235928#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1735498027111235928#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 15 Dec 2023 03:12:28 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>有人问 GPT-4.5 的截图是不是真的，Sam 回了个“nah”说了跟没说一样。不过既然回了，感觉还是有戏。</p>
+<p><a href="https://nitter.cz/sama/status/1735422206296088950#m">nitter.cz/sama/status/1735422206296088950#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JXNkVtRmFvQUF0RjVYLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1735495406086410594#m</id>
+            <title>这个恶搞挺搞笑的，整了一个 GPT-5 出来</title>
+            <link>https://nitter.cz/op7418/status/1735495406086410594#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1735495406086410594#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 15 Dec 2023 03:02:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这个恶搞挺搞笑的，整了一个 GPT-5 出来</p>
+<p><a href="https://nitter.cz/jimbomorrison/status/1735341340073050485#m">nitter.cz/jimbomorrison/status/1735341340073050485#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1735266457200853372#m</id>
             <title>RT by @op7418: Outfit Anyone这个项目放出的 Huggingface 的演示 Demo，但是还是没有发布代码，目前由于尝试的人太多Demo 已经无法工作，我找了几个别人测试的图发一下，看起来效果不错，没有什么明显瑕疵。
 在这里尝试：https://huggingface.co/spaces/HumanAIGC/OutfitAnyone</title>
@@ -424,48 +479,6 @@ Reddit泄露帖子也被删除... 🤣</p>
                     
                     <p>大雪加上昌平地铁脱轨之后给大家看一下昌平打车盛况，高德 tmd 排队 1400 人！给我气笑了。</p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0JUc3JMaGFvQUF3OHItLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1734968375171055695#m</id>
-            <title>RT by @op7418: 南洋理工发布了一个可以大幅提高AI视频生成中内容一致性的方法FreeInit，演示看起来非常流畅。而且可以跟现有的SD生态结合。
-他们还发了跟Animatediff结合的方法，等有大佬做插件就可以用了。视频是使用了FreeInit和未使用FreeInit的Animaetdiff的对比。
-
-简介：
-我们深入研究了视频扩散模型的噪声初始化，并发现了一个隐含的训练-推断差距，导致了推断质量的下降。
-我们的关键发现是：1）推断时初始潜变量的信噪比（SNR）的时空频率分布与训练时本质上不同，2）去噪过程受到初始噪声的低频分量的显著影响。
-受到这些观察的启发，我们提出了一种简洁而有效的推断采样策略FreeInit，显著改善了扩散模型生成的视频的时间一致性。
-通过在推断过程中迭代地优化初始潜变量的时空低频分量，FreeInit能够弥补训练和推断之间的初始化差距，从而有效改善了生成结果的主体外观和时间一致性。
-
-原理：
-提出了FreeInit来弥合视频扩散模型训练和推断之间的初始化差距。FreeInit以迭代方式改进推断初始噪声。通过DDIM采样、DDPM前向和噪声重新初始化，初始噪声的低频成分逐渐得到改进，从而持续增强时间一致性和主体外观。
-
-项目地址：https://tianxingwu.github.io/pages/FreeInit/</title>
-            <link>https://nitter.cz/op7418/status/1734968375171055695#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1734968375171055695#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Dec 2023 16:07:49 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>南洋理工发布了一个可以大幅提高AI视频生成中内容一致性的方法FreeInit，演示看起来非常流畅。而且可以跟现有的SD生态结合。<br />
-他们还发了跟Animatediff结合的方法，等有大佬做插件就可以用了。视频是使用了FreeInit和未使用FreeInit的Animaetdiff的对比。<br />
-<br />
-简介：<br />
-我们深入研究了视频扩散模型的噪声初始化，并发现了一个隐含的训练-推断差距，导致了推断质量的下降。<br />
-我们的关键发现是：1）推断时初始潜变量的信噪比（SNR）的时空频率分布与训练时本质上不同，2）去噪过程受到初始噪声的低频分量的显著影响。<br />
-受到这些观察的启发，我们提出了一种简洁而有效的推断采样策略FreeInit，显著改善了扩散模型生成的视频的时间一致性。<br />
-通过在推断过程中迭代地优化初始潜变量的时空低频分量，FreeInit能够弥补训练和推断之间的初始化差距，从而有效改善了生成结果的主体外观和时间一致性。<br />
-<br />
-原理：<br />
-提出了FreeInit来弥合视频扩散模型训练和推断之间的初始化差距。FreeInit以迭代方式改进推断初始噪声。通过DDIM采样、DDPM前向和噪声重新初始化，初始噪声的低频成分逐渐得到改进，从而持续增强时间一致性和主体外观。<br />
-<br />
-项目地址：<a href="https://tianxingwu.github.io/pages/FreeInit/">tianxingwu.github.io/pages/F…</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzQ5NjgyODU3Mjc1MDY0MzIvcHUvaW1nLzA2bHFTa2VXVzhuUm1BeTkuanBn" />
                 ]]>
             </content:encoded>
         </item>
