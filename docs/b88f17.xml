@@ -5,6 +5,101 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1735878580943335679#m</id>
+            <title>字节跳动秘密使用 OpenAI 技术打造竞争产品
+
+“他们只是不想暴露行踪。” 在激烈的生成式 AI 竞赛中，连业界巨头也在寻找捷径。
+
+TikTok 的“为你推荐”功能魅力无比，使得其母公司字节跳动在全球范围内站在了 AI 领导者的位置。然而，现在这家公司在生成式 AI 竞赛中的表现却距离领先有一大段距离，以至于它不得不秘密地运用 OpenAI 的技术，以开发出自家的大语言模型，以此来与市场上的其他大语言模型竞争。
+
+在 AI 界，这样的做法备受非议。这还直接违反了 OpenAI 的服务条款中的一项规定，即禁止将其模型的输出用来“开发与我们的产品和服务有竞争关系的任何人工智能模型。” 字节跳动是通过购买 Microsoft 的 OpenAI 使用权来使用 OpenAI 的，但 Microsoft 也有着同样的规定。尽管如此，字节跳动在与我分享的内部文件中确认，他们有依赖 OpenAI API 在开发其基础大语言模型的各个阶段，包括训练和评估模型，这个模型被代号为 Project Seed。
+
+涉及此事的员工深知其后果；我在字节跳动的内部沟通平台 Lark 上看到了他们讨论如何通过“数据脱敏”来掩盖这一行为的对话。这种滥用程度如此严重，以至于 Project Seed 的员工经常达到他们 API 使用的上限。
+
+在 OpenAI 平台的早期阶段，Project Seed 计划的使用更为大胆。几个月前，字节跳动命令其团队停止在模型开发的任何阶段使用 GPT 生成的文本，这一指示来自内部文件。就在这个时期，该公司在中国获得了监管批准，通过一个叫做 Doubao 的聊天机器人平台发布 Project Seed。
+
+然而，据我了解，这个 API 依旧在违反 OpenAI 和 Microsoft 的服务条款中被使用，其中包括评估字节跳动在 Doubao 背后的模型性能。一位对字节跳动内部情况有直接了解的人表示：“他们声称要确保一切合法，但实际上他们只是不想被发现。”
+
+对于本故事中提及的详细事实，字节跳动的发言人 Jodi Seth 表示，在 Project Seed 的初期开发中，确实使用了 GPT 生成的数据来标注模型，并在今年中期左右将其从训练数据中移除。“字节跳动得到了 Microsoft 的授权，可以使用 GPT API，”她在声明中说。“我们在非中国市场利用 GPT 支持我们的产品和特性，但在中国市场，则是使用我们自研的模型来支持 Doubao。”
+
+“像 Azure OpenAI 服务这样的 Microsoft AI 解决方案属于我们的有限访问框架的一部分，意味着所有客户都必须申请并得到 Microsoft 的批准，”Microsoft 的发言人 Frank Shaw 在一份声明中说。“我们还制定了标准，并提供资源帮助客户负责任地使用这些技术，并符合我们的服务条款。我们有流程来检测滥用，并在发现违反行为准则的公司时，将停止他们的访问权限。”
+
+更新 12月15日，下午6:40东部时间: 在这篇报道发布后，OpenAI 的发言人 Niko Felix 向我确认，字节跳动的账户已被暂停使用：“所有使用我们 API 的客户必须遵守我们的使用政策，确保技术被用于正当目的。尽管字节跳动对我们的 API 使用很少，但我们正在进一步调查期间已暂停他们的账户。如果我们发现他们的使用不符合这些政策，我们将要求他们进行必要的调整，或终止他们的账户。”
+
+虽然鲜少公开讨论，但小型公司普遍利用专有的人工智能模型，尤其是 OpenAI 的模型，来开发与之竞争的产品。由于 OpenAI 和 Microsoft 还没有以某个违规案例为鉴，这种做法目前仍处于法律上的灰色地带。“许多初创企业现在都在冒这个风险，”Databricks 的生成式 AI 副总裁 Naveen Rao 表示。
+
+不过，从我在采访中了解到的情况来看，像 ByteDance 这样规模和资源雄厚的公司采取这种行为是极为罕见的。这似乎表明 Project Seed 团队面临着巨大的压力，必须迅速交付成果。“我经常收到 ByteDance 发来的招聘邮件，”一位在美国大型科技公司的 AI 研究员说，“我通常不予理会。但这件事让我想把这些邮件直接标为垃圾邮件。”
+
+其他公司也遇到了类似的问题，担心自己的 GPT 输出被用来发展竞争对手。比如，Google 有研究员因为一些同事试图利用包含 ChatGPT 对话内容的网站数据而选择辞职。这一事件并未涉及滥用 OpenAI 的 API，但在内部引起了不小的尴尬，涉事员工也受到了轻微的惩戒。
+
+自从大约一年前 ByteDance 启动了 Project Seed，这个项目就成了一个高优先级且高度保密的任务。参与其中的员工需要签署特别的保密协议，项目内部的信息获取也变得愈发隔离。ByteDance 的亿万富翁联合创始人、前 CEO 张一鸣 密切关注项目的进展。
+
+Project Seed 目前主要研发两个产品：Doubao，这是一个已在中国上线的消费者聊天机器人平台（似乎在国外也可以访问）；另一个是针对商业用户的聊天机器人平台，目前正在开发中，计划通过 ByteDance 的云服务部门销售。
+
+虽然告知员工 Project Seed 的目标是为了像 OpenAI 那样，最终发展出通用人工智能（AGI），但其实质目标似乎更倾向于尽快成为中国版的 ChatGPT。该项目团队已被指令在今年年底之前实现与 GPT-3.5 相同的性能，并在 2024 年年中前达到 GPT-4 的水平。目前 Seed 模型的参数大约为 2000 亿，而 GPT-3.5 的参数为 1750 亿。（OpenAI 尚未公布 GPT-4 的参数数量。）
+
+目前，Project Seed 与 TikTok 没有关联，主要在中国服务器上进行开发。团队成员大多位于中国，但也有驻美国的成员。项目的主导者是字节跳动搜索部门负责人 Zhu Wenjia，他向公司高级工程领导 Yang Zhenyuan 汇报工作。项目的其他关键领导人包括 Qiao Mu（隶属于 Wenjia）和负责应用机器学习团队的 Xiang Liang。
+
+据我所知，OpenAI 正在研究如何识别其 API 输出以预防潜在的误用问题，但看来问题已经显露。目前还不清楚 ByteDance 的此类行为是否会加剧美中两国之间已经存在的紧张局势，两国都将 AI 视为国家安全的重要议题。
+
+另一个引人关注的问题是，当大量的大语言模型（LLM）开始参与构建其他 LLM 时，网络信息质量会发生何种变化。由于这些基础模型本身就是在非真实、人工制造的数据上训练的，用它们来构建更多 LLM 可能会进一步放大错误信息的传播。正如 Databricks 的 Rao 向我表述的那样：“这最终可能导致我们与现实世界的脱节。”
+
+https://www.theverge.com/2023/12/15/24003151/bytedance-china-openai-microsoft-competitor-llm</title>
+            <link>https://nitter.cz/dotey/status/1735878580943335679#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1735878580943335679#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 Dec 2023 04:24:39 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>字节跳动秘密使用 OpenAI 技术打造竞争产品<br />
+<br />
+“他们只是不想暴露行踪。” 在激烈的生成式 AI 竞赛中，连业界巨头也在寻找捷径。<br />
+<br />
+TikTok 的“为你推荐”功能魅力无比，使得其母公司字节跳动在全球范围内站在了 AI 领导者的位置。然而，现在这家公司在生成式 AI 竞赛中的表现却距离领先有一大段距离，以至于它不得不秘密地运用 OpenAI 的技术，以开发出自家的大语言模型，以此来与市场上的其他大语言模型竞争。<br />
+<br />
+在 AI 界，这样的做法备受非议。这还直接违反了 OpenAI 的服务条款中的一项规定，即禁止将其模型的输出用来“开发与我们的产品和服务有竞争关系的任何人工智能模型。” 字节跳动是通过购买 Microsoft 的 OpenAI 使用权来使用 OpenAI 的，但 Microsoft 也有着同样的规定。尽管如此，字节跳动在与我分享的内部文件中确认，他们有依赖 OpenAI API 在开发其基础大语言模型的各个阶段，包括训练和评估模型，这个模型被代号为 Project Seed。<br />
+<br />
+涉及此事的员工深知其后果；我在字节跳动的内部沟通平台 Lark 上看到了他们讨论如何通过“数据脱敏”来掩盖这一行为的对话。这种滥用程度如此严重，以至于 Project Seed 的员工经常达到他们 API 使用的上限。<br />
+<br />
+在 OpenAI 平台的早期阶段，Project Seed 计划的使用更为大胆。几个月前，字节跳动命令其团队停止在模型开发的任何阶段使用 GPT 生成的文本，这一指示来自内部文件。就在这个时期，该公司在中国获得了监管批准，通过一个叫做 Doubao 的聊天机器人平台发布 Project Seed。<br />
+<br />
+然而，据我了解，这个 API 依旧在违反 OpenAI 和 Microsoft 的服务条款中被使用，其中包括评估字节跳动在 Doubao 背后的模型性能。一位对字节跳动内部情况有直接了解的人表示：“他们声称要确保一切合法，但实际上他们只是不想被发现。”<br />
+<br />
+对于本故事中提及的详细事实，字节跳动的发言人 Jodi Seth 表示，在 Project Seed 的初期开发中，确实使用了 GPT 生成的数据来标注模型，并在今年中期左右将其从训练数据中移除。“字节跳动得到了 Microsoft 的授权，可以使用 GPT API，”她在声明中说。“我们在非中国市场利用 GPT 支持我们的产品和特性，但在中国市场，则是使用我们自研的模型来支持 Doubao。”<br />
+<br />
+“像 Azure OpenAI 服务这样的 Microsoft AI 解决方案属于我们的有限访问框架的一部分，意味着所有客户都必须申请并得到 Microsoft 的批准，”Microsoft 的发言人 Frank Shaw 在一份声明中说。“我们还制定了标准，并提供资源帮助客户负责任地使用这些技术，并符合我们的服务条款。我们有流程来检测滥用，并在发现违反行为准则的公司时，将停止他们的访问权限。”<br />
+<br />
+更新 12月15日，下午6:40东部时间: 在这篇报道发布后，OpenAI 的发言人 Niko Felix 向我确认，字节跳动的账户已被暂停使用：“所有使用我们 API 的客户必须遵守我们的使用政策，确保技术被用于正当目的。尽管字节跳动对我们的 API 使用很少，但我们正在进一步调查期间已暂停他们的账户。如果我们发现他们的使用不符合这些政策，我们将要求他们进行必要的调整，或终止他们的账户。”<br />
+<br />
+虽然鲜少公开讨论，但小型公司普遍利用专有的人工智能模型，尤其是 OpenAI 的模型，来开发与之竞争的产品。由于 OpenAI 和 Microsoft 还没有以某个违规案例为鉴，这种做法目前仍处于法律上的灰色地带。“许多初创企业现在都在冒这个风险，”Databricks 的生成式 AI 副总裁 Naveen Rao 表示。<br />
+<br />
+不过，从我在采访中了解到的情况来看，像 ByteDance 这样规模和资源雄厚的公司采取这种行为是极为罕见的。这似乎表明 Project Seed 团队面临着巨大的压力，必须迅速交付成果。“我经常收到 ByteDance 发来的招聘邮件，”一位在美国大型科技公司的 AI 研究员说，“我通常不予理会。但这件事让我想把这些邮件直接标为垃圾邮件。”<br />
+<br />
+其他公司也遇到了类似的问题，担心自己的 GPT 输出被用来发展竞争对手。比如，Google 有研究员因为一些同事试图利用包含 ChatGPT 对话内容的网站数据而选择辞职。这一事件并未涉及滥用 OpenAI 的 API，但在内部引起了不小的尴尬，涉事员工也受到了轻微的惩戒。<br />
+<br />
+自从大约一年前 ByteDance 启动了 Project Seed，这个项目就成了一个高优先级且高度保密的任务。参与其中的员工需要签署特别的保密协议，项目内部的信息获取也变得愈发隔离。ByteDance 的亿万富翁联合创始人、前 CEO 张一鸣 密切关注项目的进展。<br />
+<br />
+Project Seed 目前主要研发两个产品：Doubao，这是一个已在中国上线的消费者聊天机器人平台（似乎在国外也可以访问）；另一个是针对商业用户的聊天机器人平台，目前正在开发中，计划通过 ByteDance 的云服务部门销售。<br />
+<br />
+虽然告知员工 Project Seed 的目标是为了像 OpenAI 那样，最终发展出通用人工智能（AGI），但其实质目标似乎更倾向于尽快成为中国版的 ChatGPT。该项目团队已被指令在今年年底之前实现与 GPT-3.5 相同的性能，并在 2024 年年中前达到 GPT-4 的水平。目前 Seed 模型的参数大约为 2000 亿，而 GPT-3.5 的参数为 1750 亿。（OpenAI 尚未公布 GPT-4 的参数数量。）<br />
+<br />
+目前，Project Seed 与 TikTok 没有关联，主要在中国服务器上进行开发。团队成员大多位于中国，但也有驻美国的成员。项目的主导者是字节跳动搜索部门负责人 Zhu Wenjia，他向公司高级工程领导 Yang Zhenyuan 汇报工作。项目的其他关键领导人包括 Qiao Mu（隶属于 Wenjia）和负责应用机器学习团队的 Xiang Liang。<br />
+<br />
+据我所知，OpenAI 正在研究如何识别其 API 输出以预防潜在的误用问题，但看来问题已经显露。目前还不清楚 ByteDance 的此类行为是否会加剧美中两国之间已经存在的紧张局势，两国都将 AI 视为国家安全的重要议题。<br />
+<br />
+另一个引人关注的问题是，当大量的大语言模型（LLM）开始参与构建其他 LLM 时，网络信息质量会发生何种变化。由于这些基础模型本身就是在非真实、人工制造的数据上训练的，用它们来构建更多 LLM 可能会进一步放大错误信息的传播。正如 Databricks 的 Rao 向我表述的那样：“这最终可能导致我们与现实世界的脱节。”<br />
+<br />
+<a href="https://www.theverge.com/2023/12/15/24003151/bytedance-china-openai-microsoft-competitor-llm">theverge.com/2023/12/15/2400…</a></p>
+<p><a href="https://nitter.cz/xiaohuggg/status/1735876029552718213#m">nitter.cz/xiaohuggg/status/1735876029552718213#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JjVHdFY1hRQUFSMk9zLnBuZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1735868760957845761#m</id>
             <title>#开源项目推荐：Halo
 一个强大易用的开源建站工具。
@@ -551,35 +646,6 @@ https://huggingface.co/chat</title>
 <a href="https://huggingface.co/chat">huggingface.co/chat</a></p>
 <p><a href="https://nitter.cz/mervenoyann/status/1735277253313921461#m">nitter.cz/mervenoyann/status/1735277253313921461#m</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0JYZEttMldnQUF2WmxoLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1735531881230213136#m</id>
-            <title>如果有想在本机运行 Mixtral 8x7B 或者 Dolphin-mixtral 8x7B的，可以使用 Ollama 或者 LM Studio，只不过 Ollama 目前只支持 Mac，而 LM Studio 还支持 Windows 和 Linux。
-
-LM Studio：https://lmstudio.ai/
-Ollama：https://ollama.ai/library/dolphin-mixtral
-
-至于机器要求，请查看网站上的说明</title>
-            <link>https://nitter.cz/dotey/status/1735531881230213136#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1735531881230213136#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 Dec 2023 05:26:59 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>如果有想在本机运行 Mixtral 8x7B 或者 Dolphin-mixtral 8x7B的，可以使用 Ollama 或者 LM Studio，只不过 Ollama 目前只支持 Mac，而 LM Studio 还支持 Windows 和 Linux。<br />
-<br />
-LM Studio：<a href="https://lmstudio.ai/">lmstudio.ai/</a><br />
-Ollama：<a href="https://ollama.ai/library/dolphin-mixtral">ollama.ai/library/dolphin-mi…</a><br />
-<br />
-至于机器要求，请查看网站上的说明</p>
-<p><a href="https://nitter.cz/dotey/status/1735457201395814770#m">nitter.cz/dotey/status/1735457201395814770#m</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczMzU5NzA2MzIyNzUyMzA3Mi94bk1mbk5zcT9mb3JtYXQ9cG5nJm5hbWU9NDIweDQyMF8y" />
                 ]]>
             </content:encoded>
         </item>
