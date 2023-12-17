@@ -5,6 +5,36 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1735950361352163570#m</id>
+            <title>RT by @dotey: Midjourney憋了半年的大招V6模型将在下周发布，今天正式开始了社区风格评价，我从社区评价里找了一些图片做了个视频，可以大概看一下V6模型的质量。
+
+从我的观察来看，V6对于画面中复杂信息和内容的还原度大幅提高，模型也更敢于绘制更复杂的内容。
+
+模型评价每次会随机展示两张V6模型生成的图片，然后你选择自己觉得好看的一张。虽然这些图片是随机生成的但也可以看出一些V6的模型质量。
+
+点击链接进行评价：https://www.midjourney.com/rank-v6</title>
+            <link>https://nitter.cz/op7418/status/1735950361352163570#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1735950361352163570#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 Dec 2023 09:09:53 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Midjourney憋了半年的大招V6模型将在下周发布，今天正式开始了社区风格评价，我从社区评价里找了一些图片做了个视频，可以大概看一下V6模型的质量。<br />
+<br />
+从我的观察来看，V6对于画面中复杂信息和内容的还原度大幅提高，模型也更敢于绘制更复杂的内容。<br />
+<br />
+模型评价每次会随机展示两张V6模型生成的图片，然后你选择自己觉得好看的一张。虽然这些图片是随机生成的但也可以看出一些V6的模型质量。<br />
+<br />
+点击链接进行评价：<a href="https://www.midjourney.com/rank-v6">midjourney.com/rank-v6</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzU5NTAyNzIyODE5NDgxNjIvcHUvaW1nL2VoXzhmd0RqNF9qTERCQlYuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/vista8/status/1736041266897686725#m</id>
             <title>RT by @dotey: 花两个小时看完Lex Fridman访谈亚马逊创始人贝佐斯（Jeff bezos）
 https://www.youtube.com/watch?v=DcWqzZ3I2cY
@@ -705,58 +735,6 @@ n 参数，可以同时返回多个生成结果。比如有时候你可以一次
 <br />
 还有一个就是上次开发者大会说到的 seed 参数，这个类似于用 Stable Diffusion 画图的时候用到的 seed 参数，当你每次传入相同的 seed 和其他相同参数时，每次返回的结果会尽可能的保持一致。</p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0JiT1hlVVdNQUFIMlRNLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1735799522792546517#m</id>
-            <title>OpenAI 的 Chat Completions API 新增了 logprobs，那么这个参数是做什么用的呢？
-
-我们知道 LLM （大语言模型）是概率模型，会根据 Token 出现的概率来决定下一个 Token，但我们通常是无法知道 LLM 在生成的时候，各个 Token 的概率是什么样的，只能看到最终的结果，所以在调试 Prompt 的时候无法直观的看到 Prompt 和参数的设置对生成结果的影响。
-
-新增的 logprobs 参数，默认是 false 的，如果你设置成 true，那么在返回的结果中，会多一个 logprobs 的项，里面会列出来每一个 Token 在生成时的概率。（参见图一）
-
-但这个只是让你看到一种结果。如果你仔细看文档，还可以看到新增了一个 top_logprobs 参数，需要同时将 logprobs 设置为 true 才能生效，这个参数是一个0-5之间的数字，意味着在返回结果的时候，会同时其他显示在生成时，当时最有可能的候选 Token 有哪些，以及各自的概率是多少。
-
-比如我将 top_logprobs 设置成 5，就可以看到在生成第一个词的时候，最有可能得 5 个 Token 是：“How”、“Hello”、“I”、“Great”和“Thank”。
-
-当第一个词选定“How”后，生成第二个词是最有可能的 5 个词分别是：“ can”，“ may”， “ May”， “ Can”， “dy”。
-
-注意前 4 个前面都有空格，而第 5 个没有空格，也就是每一次的 Token 既可能是个独立的单词也可能和前面的组成一个新的单词，比如第 5 个“dy”就可以和前面的“How”组成一个新词“Howdy”。
-
-不过对于普通开发者来说，感觉并没有太大的用处，只有真正的 Prompt Engineer 才可能会用的上。
-
-也欢迎评论补充：你觉得这两个参数可以有哪些实用的应用场景？</title>
-            <link>https://nitter.cz/dotey/status/1735799522792546517#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1735799522792546517#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 Dec 2023 23:10:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>OpenAI 的 Chat Completions API 新增了 logprobs，那么这个参数是做什么用的呢？<br />
-<br />
-我们知道 LLM （大语言模型）是概率模型，会根据 Token 出现的概率来决定下一个 Token，但我们通常是无法知道 LLM 在生成的时候，各个 Token 的概率是什么样的，只能看到最终的结果，所以在调试 Prompt 的时候无法直观的看到 Prompt 和参数的设置对生成结果的影响。<br />
-<br />
-新增的 logprobs 参数，默认是 false 的，如果你设置成 true，那么在返回的结果中，会多一个 logprobs 的项，里面会列出来每一个 Token 在生成时的概率。（参见图一）<br />
-<br />
-但这个只是让你看到一种结果。如果你仔细看文档，还可以看到新增了一个 top_logprobs 参数，需要同时将 logprobs 设置为 true 才能生效，这个参数是一个0-5之间的数字，意味着在返回结果的时候，会同时其他显示在生成时，当时最有可能的候选 Token 有哪些，以及各自的概率是多少。<br />
-<br />
-比如我将 top_logprobs 设置成 5，就可以看到在生成第一个词的时候，最有可能得 5 个 Token 是：“How”、“Hello”、“I”、“Great”和“Thank”。<br />
-<br />
-当第一个词选定“How”后，生成第二个词是最有可能的 5 个词分别是：“ can”，“ may”， “ May”， “ Can”， “dy”。<br />
-<br />
-注意前 4 个前面都有空格，而第 5 个没有空格，也就是每一次的 Token 既可能是个独立的单词也可能和前面的组成一个新的单词，比如第 5 个“dy”就可以和前面的“How”组成一个新词“Howdy”。<br />
-<br />
-不过对于普通开发者来说，感觉并没有太大的用处，只有真正的 Prompt Engineer 才可能会用的上。<br />
-<br />
-也欢迎评论补充：你觉得这两个参数可以有哪些实用的应用场景？</p>
-<p><a href="https://nitter.cz/OpenAIDevs/status/1735730662362189872#m">nitter.cz/OpenAIDevs/status/1735730662362189872#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JiSXp5eVhVQUk1dUs2LnBuZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JiS1B0VldRQUE2Sk5CLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
