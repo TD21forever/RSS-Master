@@ -5,6 +5,28 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1737124514969075791#m</id>
+            <title>Runway 文字转语音功能正式发布
+
+可以用来给生成的视频创建画外音和对话，支持细腻真实的人声效果，多种语言！</title>
+            <link>https://nitter.cz/xiaohuggg/status/1737124514969075791#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1737124514969075791#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 19 Dec 2023 14:55:33 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Runway 文字转语音功能正式发布<br />
+<br />
+可以用来给生成的视频创建画外音和对话，支持细腻真实的人声效果，多种语言！</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzcxMTAxOTI0Mjc1MzIyODkvcHUvaW1nL1p0akVxUnZxcnBVaUEtS28uanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1737095765376504197#m</id>
             <title>LK99又起风波 中南大学和华南理工等研究团队，提出了LK99材料的超导性证据。
 
@@ -713,132 +735,6 @@ Gaussian-SLAM可以实时渲染重建3D场景</title>
 <br />
 Gaussian-SLAM可以实时渲染重建3D场景</p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzY2NzQ5NjAwNDE3MzAwNDgvcHUvaW1nL0xvb3ZWTnJUaTBKNVRWRXcuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1736674788679311709#m</id>
-            <title>Gaussian-SLAM：能够从视频流中重建出逼真的3D场景
-
-通过观看一个视频，Gaussian-SLAM可以分析视频中的图像，能够理解视频中的环境布局和物体的位置。
-
-然后利用这些图像数据来创建、还原可以从各个角度观察的3D模型，重建现实世界场景。
-
-而是这个过程是实时渲染的...
-
-举例解释：
-
-想象一下，你有一个视频，这个视频是在一个公园里拍摄的，里面有树木、长椅、小路和人们。通常，视频只能提供二维的视角，你只能看到从摄像机角度拍摄的场景。
-
-现在，使用Gaussian-SLAM技术，我们可以分析这个视频，识别出视频中的各个物体（如树木、长椅等），并了解它们在空间中的相对位置。Gaussian-SLAM通过分析视频中物体的移动和视角变化，计算出这些物体在三维空间中的位置和形状。
-
-最终，这项技术可以创建一个三维模型，这个模型是公园的数字复制品。在这个三维模型中，你可以像在真实世界一样，从任何角度查看公园的每个角落。你可以看到树木的具体位置、长椅的样子，甚至是人们在公园中的活动。
-
-这就像是把一个真实的场景转换成了一个可以在计算机上查看和探索的3D虚拟环境。
-
-这种技术对于创建虚拟现实体验、视频游戏中的环境，或者帮助自动驾驶汽车更好地理解它们周围的世界非常有用。
-
-Gaussian-SLAM的主要功能特点和工作原理如下：
-
-主要功能特点：
-
-1、光学真实的渲染：能够以高度真实的方式重建和渲染真实世界和合成场景。
-
-2、高斯斑点场景表示：使用高斯斑点作为场景的主要表示单位，这是一种新颖的方法，与传统的点云或网格表示不同。
-
-3、交互式时间重建：允许在交互时间内重建场景，即重建过程足够快，可以实时渲染或近实时进行。
-
-4、适用于单目RGBD输入：针对单目RGBD（红绿蓝深度）输入数据进行优化，适用于多种场景。
-
-Gaussian-SLAM特别针对的是RGBD摄像头的输入数据进行优化。
-
-RGBD摄像头除了捕捉普通的彩色图像外，还能提供每个像素点的深度信息，即物体距离摄像头的距离。这种深度信息对于创建准确的三维场景模型至关重要。
-
-工作原理
-
-1、数据处理：接收RGBD关键帧输入，进行子采样并考虑颜色梯度。
-
-2、3D高斯初始化：将采样点投影到3D空间，在这些采样位置初始化新的高斯。
-
-3、场景构建：新的3D高斯被添加到全局地图的当前活动部分中，形成场景的一部分。
-
-4、关键帧存储与渲染：输入的RGBD关键帧暂时存储，与对活动子图有贡献的其他关键帧一起。然后，渲染所有对活动子图有贡献的关键帧。
-
-5、优化与更新：计算与子图输入关键帧相关的深度和颜色损失，然后更新活动子图中3D高斯的参数。
-
-应用场景
-
-Gaussian-SLAM适用于需要高度真实感和精确度的SLAM应用，如自动驾驶、机器人导航、增强现实和虚拟现实等。
-
-项目及演示：https://vladimiryugay.github.io/gaussian_slam/
-论文：https://ivi.fnwi.uva.nl/cv/paper/GaussianSLAM.pdf
-GitHub：https://github.com/VladimirYugay/Gaussian-SLAM</title>
-            <link>https://nitter.cz/xiaohuggg/status/1736674788679311709#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1736674788679311709#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 18 Dec 2023 09:08:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Gaussian-SLAM：能够从视频流中重建出逼真的3D场景<br />
-<br />
-通过观看一个视频，Gaussian-SLAM可以分析视频中的图像，能够理解视频中的环境布局和物体的位置。<br />
-<br />
-然后利用这些图像数据来创建、还原可以从各个角度观察的3D模型，重建现实世界场景。<br />
-<br />
-而是这个过程是实时渲染的...<br />
-<br />
-举例解释：<br />
-<br />
-想象一下，你有一个视频，这个视频是在一个公园里拍摄的，里面有树木、长椅、小路和人们。通常，视频只能提供二维的视角，你只能看到从摄像机角度拍摄的场景。<br />
-<br />
-现在，使用Gaussian-SLAM技术，我们可以分析这个视频，识别出视频中的各个物体（如树木、长椅等），并了解它们在空间中的相对位置。Gaussian-SLAM通过分析视频中物体的移动和视角变化，计算出这些物体在三维空间中的位置和形状。<br />
-<br />
-最终，这项技术可以创建一个三维模型，这个模型是公园的数字复制品。在这个三维模型中，你可以像在真实世界一样，从任何角度查看公园的每个角落。你可以看到树木的具体位置、长椅的样子，甚至是人们在公园中的活动。<br />
-<br />
-这就像是把一个真实的场景转换成了一个可以在计算机上查看和探索的3D虚拟环境。<br />
-<br />
-这种技术对于创建虚拟现实体验、视频游戏中的环境，或者帮助自动驾驶汽车更好地理解它们周围的世界非常有用。<br />
-<br />
-Gaussian-SLAM的主要功能特点和工作原理如下：<br />
-<br />
-主要功能特点：<br />
-<br />
-1、光学真实的渲染：能够以高度真实的方式重建和渲染真实世界和合成场景。<br />
-<br />
-2、高斯斑点场景表示：使用高斯斑点作为场景的主要表示单位，这是一种新颖的方法，与传统的点云或网格表示不同。<br />
-<br />
-3、交互式时间重建：允许在交互时间内重建场景，即重建过程足够快，可以实时渲染或近实时进行。<br />
-<br />
-4、适用于单目RGBD输入：针对单目RGBD（红绿蓝深度）输入数据进行优化，适用于多种场景。<br />
-<br />
-Gaussian-SLAM特别针对的是RGBD摄像头的输入数据进行优化。<br />
-<br />
-RGBD摄像头除了捕捉普通的彩色图像外，还能提供每个像素点的深度信息，即物体距离摄像头的距离。这种深度信息对于创建准确的三维场景模型至关重要。<br />
-<br />
-工作原理<br />
-<br />
-1、数据处理：接收RGBD关键帧输入，进行子采样并考虑颜色梯度。<br />
-<br />
-2、3D高斯初始化：将采样点投影到3D空间，在这些采样位置初始化新的高斯。<br />
-<br />
-3、场景构建：新的3D高斯被添加到全局地图的当前活动部分中，形成场景的一部分。<br />
-<br />
-4、关键帧存储与渲染：输入的RGBD关键帧暂时存储，与对活动子图有贡献的其他关键帧一起。然后，渲染所有对活动子图有贡献的关键帧。<br />
-<br />
-5、优化与更新：计算与子图输入关键帧相关的深度和颜色损失，然后更新活动子图中3D高斯的参数。<br />
-<br />
-应用场景<br />
-<br />
-Gaussian-SLAM适用于需要高度真实感和精确度的SLAM应用，如自动驾驶、机器人导航、增强现实和虚拟现实等。<br />
-<br />
-项目及演示：<a href="https://vladimiryugay.github.io/gaussian_slam/">vladimiryugay.github.io/gaus…</a><br />
-论文：<a href="https://ivi.fnwi.uva.nl/cv/paper/GaussianSLAM.pdf">ivi.fnwi.uva.nl/cv/paper/Gau…</a><br />
-GitHub：<a href="https://github.com/VladimirYugay/Gaussian-SLAM">github.com/VladimirYugay/Gau…</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzY2NzQ2OTg5MjExNTY2MDgvcHUvaW1nL1k4MXVsalhIdFB4RjFENTYuanBn" />
                 ]]>
             </content:encoded>
         </item>
