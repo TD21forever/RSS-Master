@@ -5,6 +5,186 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1736958842595082744#m</id>
+            <title>VOODOO 3D：可以把一个人的表情和动作精准的复制到另一个人的3D模型上。
+
+通过这项技术，你可以让一个虚拟的3D人物模型模仿真实人的表情和头部动作。
+
+而且这个过程是实时的，通过摄像头输入，当真人改变表情或头部姿势时，3D模型也会立即做出相同的反应。
+
+通俗来说就是：3D变脸术
+
+主要特点：
+
+3D感知一次性头部再现：能够完美复制头部动作和表情，同时保持源图像的身份特征。而且只需要一次性的输入数据。
+
+全息显示：设计允许在全息显示设备上实时渲染头部模型。
+
+多视角渲染：能够同时渲染多达45个不同的视角，适用于需要从多个角度展示头部模型的应用。
+
+高保真度：VOODOO 3D在保持源身份的同时，能够准确再现驱动视频中的表情和动作。
+
+VOODOO 3D技术的实现基于几个关键技术：
+
+1. 3D提升网络（Lp3D）
+
+核心组件：Lp3D是VOODOO 3D中的核心网络，负责处理面部图像。
+
+功能：它将2D面部图像转换成3D辐射场，这是一种三维数据结构，用于表示和存储3D对象的信息。
+
+过程：网络分析面部图像，预测其在三维空间中的外观和结构，从而创建一个详细的3D模型。
+
+2. 体积解耦
+
+技术方法：体积解耦是一种分离和处理不同数据源的技术。
+
+应用：在VOODOO 3D中，它用于区分源图像（原始人物的面部）和驱动视频帧（要复制的表情和动作）。
+
+实现：这项技术将源图像和驱动视频的信息提升到一个共享的3D体积表示中，使得源身份和目标表情可以独立处理。
+
+3. 三平面渲染
+
+控制机制：使用从驱动视频中提取的表情信息来控制源图像的3D模型。
+
+灵活性：允许从任意视角渲染头部图像，增加了输出的真实感和多样性。
+
+4. 实时渲染
+
+高效能力：VOODOO 3D能够实时渲染多达45个不同视角的图像。
+
+应用重要性：这对于全息显示和3D视频会议系统等应用至关重要，因为它们需要从多个角度展示逼真的3D头部模型。
+
+应用场景：
+
+该方法能够实时生成高保真、视角一致的输出，适用于基于全息显示的3D视频会议系统。它解决了现有方法中的身份泄露和表情不自然问题。
+
+3D视频会议：在3D视频会议中，VOODOO 3D可以用来实时创建参与者的3D头部模型，提供更加沉浸和真实的会议体验。
+
+虚拟现实（VR）和增强现实（AR）：在VR和AR应用中，VOODOO 3D可以用于生成逼真的3D头部模型，增强用户的沉浸感和交互体验。
+
+电影和游戏制作：在电影和游戏行业，这项技术可以用于快速生成逼真的3D角色，特别是在需要精细表情捕捉的场景中。
+
+社交媒体和娱乐：在社交媒体和娱乐领域，VOODOO 3D可以用于创造个性化的3D头像或动画表情包。
+
+项目及演示：https://p0lyfish.github.io/voodoo3d/
+论文：https://arxiv.org/pdf/2312.04651.pdf
+GitHub：coming soon...</title>
+            <link>https://nitter.cz/xiaohuggg/status/1736958842595082744#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1736958842595082744#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 19 Dec 2023 03:57:13 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>VOODOO 3D：可以把一个人的表情和动作精准的复制到另一个人的3D模型上。<br />
+<br />
+通过这项技术，你可以让一个虚拟的3D人物模型模仿真实人的表情和头部动作。<br />
+<br />
+而且这个过程是实时的，通过摄像头输入，当真人改变表情或头部姿势时，3D模型也会立即做出相同的反应。<br />
+<br />
+通俗来说就是：3D变脸术<br />
+<br />
+主要特点：<br />
+<br />
+3D感知一次性头部再现：能够完美复制头部动作和表情，同时保持源图像的身份特征。而且只需要一次性的输入数据。<br />
+<br />
+全息显示：设计允许在全息显示设备上实时渲染头部模型。<br />
+<br />
+多视角渲染：能够同时渲染多达45个不同的视角，适用于需要从多个角度展示头部模型的应用。<br />
+<br />
+高保真度：VOODOO 3D在保持源身份的同时，能够准确再现驱动视频中的表情和动作。<br />
+<br />
+VOODOO 3D技术的实现基于几个关键技术：<br />
+<br />
+1. 3D提升网络（Lp3D）<br />
+<br />
+核心组件：Lp3D是VOODOO 3D中的核心网络，负责处理面部图像。<br />
+<br />
+功能：它将2D面部图像转换成3D辐射场，这是一种三维数据结构，用于表示和存储3D对象的信息。<br />
+<br />
+过程：网络分析面部图像，预测其在三维空间中的外观和结构，从而创建一个详细的3D模型。<br />
+<br />
+2. 体积解耦<br />
+<br />
+技术方法：体积解耦是一种分离和处理不同数据源的技术。<br />
+<br />
+应用：在VOODOO 3D中，它用于区分源图像（原始人物的面部）和驱动视频帧（要复制的表情和动作）。<br />
+<br />
+实现：这项技术将源图像和驱动视频的信息提升到一个共享的3D体积表示中，使得源身份和目标表情可以独立处理。<br />
+<br />
+3. 三平面渲染<br />
+<br />
+控制机制：使用从驱动视频中提取的表情信息来控制源图像的3D模型。<br />
+<br />
+灵活性：允许从任意视角渲染头部图像，增加了输出的真实感和多样性。<br />
+<br />
+4. 实时渲染<br />
+<br />
+高效能力：VOODOO 3D能够实时渲染多达45个不同视角的图像。<br />
+<br />
+应用重要性：这对于全息显示和3D视频会议系统等应用至关重要，因为它们需要从多个角度展示逼真的3D头部模型。<br />
+<br />
+应用场景：<br />
+<br />
+该方法能够实时生成高保真、视角一致的输出，适用于基于全息显示的3D视频会议系统。它解决了现有方法中的身份泄露和表情不自然问题。<br />
+<br />
+3D视频会议：在3D视频会议中，VOODOO 3D可以用来实时创建参与者的3D头部模型，提供更加沉浸和真实的会议体验。<br />
+<br />
+虚拟现实（VR）和增强现实（AR）：在VR和AR应用中，VOODOO 3D可以用于生成逼真的3D头部模型，增强用户的沉浸感和交互体验。<br />
+<br />
+电影和游戏制作：在电影和游戏行业，这项技术可以用于快速生成逼真的3D角色，特别是在需要精细表情捕捉的场景中。<br />
+<br />
+社交媒体和娱乐：在社交媒体和娱乐领域，VOODOO 3D可以用于创造个性化的3D头像或动画表情包。<br />
+<br />
+项目及演示：<a href="https://p0lyfish.github.io/voodoo3d/">p0lyfish.github.io/voodoo3d/</a><br />
+论文：<a href="https://arxiv.org/pdf/2312.04651.pdf">arxiv.org/pdf/2312.04651.pdf</a><br />
+GitHub：coming soon...</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzY5NTc2MTg5NzgyNzUzMjgvcHUvaW1nL0NHNmJmRUQxeDNlNDJadFouanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1736946514520604958#m</id>
+            <title>toolkit：视频工具包 – 转换、制作 GIF、提取音频
+
+- 将任何视频/gif 转换为 mp4
+- 将视频转换为 gif
+- 从视频中提取音频
+- 将帧转换为视频或 gif
+- 提取视频或 gif 帧
+
+作者@fofrAI
+传送门：https://replicate.com/fofr/toolkit
+GitHub：https://github.com/fofr/cog-cpu-toolkit</title>
+            <link>https://nitter.cz/xiaohuggg/status/1736946514520604958#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1736946514520604958#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 19 Dec 2023 03:08:14 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>toolkit：视频工具包 – 转换、制作 GIF、提取音频<br />
+<br />
+- 将任何视频/gif 转换为 mp4<br />
+- 将视频转换为 gif<br />
+- 从视频中提取音频<br />
+- 将帧转换为视频或 gif<br />
+- 提取视频或 gif 帧<br />
+<br />
+作者<a href="https://nitter.cz/fofrAI" title="fofr">@fofrAI</a><br />
+传送门：<a href="https://replicate.com/fofr/toolkit">replicate.com/fofr/toolkit</a><br />
+GitHub：<a href="https://github.com/fofr/cog-cpu-toolkit">github.com/fofr/cog-cpu-tool…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzY5NDU2NTI1OTUzNjM4NDAvcHUvaW1nL2VEUThHT1YzWUdMLVJRN2guanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1736939401714991425#m</id>
             <title>OpenAI的一个测试页面
 
@@ -578,42 +758,6 @@ GitHub：<a href="https://github.com/damo-vilab/i2vgen-xl">github.com/damo-vilab
 <br />
 参与独特的展示活动，甚至可以直接被NBA发现。选择加入NBA Global Scout的参与者有资格获得NBA选拔赛、训练营、比赛和展示会的邀请。</p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzY1OTY5MjA4NzE5MDMyMzIvcHUvaW1nL29CY1V6RHdrSkFKVEJoeUQuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1736597475367244143#m</id>
-            <title>R to @xiaohuggg: 足球训练似乎也能用得到😄</title>
-            <link>https://nitter.cz/xiaohuggg/status/1736597475367244143#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1736597475367244143#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 18 Dec 2023 04:01:17 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>足球训练似乎也能用得到😄</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzY1OTYzNjgzODk4MDQwMzIvcHUvaW1nL1JyVTFWY29ld3Z1RTg3Q1kuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1736597473639137345#m</id>
-            <title>R to @xiaohuggg: 也可以用来计分</title>
-            <link>https://nitter.cz/xiaohuggg/status/1736597473639137345#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1736597473639137345#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 18 Dec 2023 04:01:16 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>也可以用来计分</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzY1OTYyOTM0NzUyMzc4ODgvcHUvaW1nL19RNDN2TWpkMkdQNzlRRWkuanBn" />
                 ]]>
             </content:encoded>
         </item>
