@@ -5,6 +5,143 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1737017381321310709#m</id>
+            <title>正好今天也看到一篇类似的文章：《用 RAGAs（检索增强生成评估）评估 RAG（检索增强型生成）应用》
+
+它也是四个评估指标，但是略有不同：
+
+1. 上下文精准度： 衡量检索出的上下文中有用信息与无用信息的比率。该指标通过分析 question 和 contexts 来计算。
+2. 上下文召回率： 用来评估是否检索到了解答问题所需的全部相关信息。这一指标依据 ground_truth（此为框架中唯一基于人工标注的真实数据的指标）和 contexts 进行计算。
+3. 真实性：用于衡量生成答案的事实准确度。它通过对比给定上下文中正确的陈述与生成答案中总陈述的数量来计算。这一指标结合了 question、contexts 和 answer。
+4. 答案相关度： 评估生成答案与问题的关联程度。例如，对于问题“法国在哪里及其首都是什么？”，答案“法国位于西欧。”的答案相关度较低，因为它只回答了问题的一部分。
+
+所有指标的评分范围在 [0, 1] 之间，分数越高表示性能越出色。
+
+它在评估时，需要依赖以下几种信息：
+
+- question：RAG 流程的输入，即用户的查询问题。
+- answer：由 RAG 流程生成的答案，也就是输出结果。
+- contexts：为解答 question 而从外部知识源检索到的相关上下文。
+- ground_truths：question 的标准答案，这是唯一需要人工标注的信息。这个信息仅在评估 context_recall 这一指标时才必须（详见 评估指标）
+
+它在评估数据集时，不必依赖人工标注的标准答案，而是通过底层的大语言模型 (LLM) 来进行评估。
+
+具体参考：Evaluating RAG Applications with RAGAs
+https://towardsdatascience.com/evaluating-rag-applications-with-ragas-81d67b0ee31a
+翻译：https://baoyu.io/translations/rag/evaluating-rag-applications-with-ragas</title>
+            <link>https://nitter.cz/dotey/status/1737017381321310709#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737017381321310709#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 19 Dec 2023 07:49:50 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>正好今天也看到一篇类似的文章：《用 RAGAs（检索增强生成评估）评估 RAG（检索增强型生成）应用》<br />
+<br />
+它也是四个评估指标，但是略有不同：<br />
+<br />
+1. 上下文精准度： 衡量检索出的上下文中有用信息与无用信息的比率。该指标通过分析 question 和 contexts 来计算。<br />
+2. 上下文召回率： 用来评估是否检索到了解答问题所需的全部相关信息。这一指标依据 ground_truth（此为框架中唯一基于人工标注的真实数据的指标）和 contexts 进行计算。<br />
+3. 真实性：用于衡量生成答案的事实准确度。它通过对比给定上下文中正确的陈述与生成答案中总陈述的数量来计算。这一指标结合了 question、contexts 和 answer。<br />
+4. 答案相关度： 评估生成答案与问题的关联程度。例如，对于问题“法国在哪里及其首都是什么？”，答案“法国位于西欧。”的答案相关度较低，因为它只回答了问题的一部分。<br />
+<br />
+所有指标的评分范围在 [0, 1] 之间，分数越高表示性能越出色。<br />
+<br />
+它在评估时，需要依赖以下几种信息：<br />
+<br />
+- question：RAG 流程的输入，即用户的查询问题。<br />
+- answer：由 RAG 流程生成的答案，也就是输出结果。<br />
+- contexts：为解答 question 而从外部知识源检索到的相关上下文。<br />
+- ground_truths：question 的标准答案，这是唯一需要人工标注的信息。这个信息仅在评估 context_recall 这一指标时才必须（详见 评估指标）<br />
+<br />
+它在评估数据集时，不必依赖人工标注的标准答案，而是通过底层的大语言模型 (LLM) 来进行评估。<br />
+<br />
+具体参考：Evaluating RAG Applications with RAGAs<br />
+<a href="https://towardsdatascience.com/evaluating-rag-applications-with-ragas-81d67b0ee31a">towardsdatascience.com/evalu…</a><br />
+翻译：<a href="https://baoyu.io/translations/rag/evaluating-rag-applications-with-ragas">baoyu.io/translations/rag/ev…</a></p>
+<p><a href="https://nitter.cz/Tisoga/status/1736544319199478175#m">nitter.cz/Tisoga/status/1736544319199478175#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1737015537937314300#m</id>
+            <title>Nvidia 推出一项新技术：GAvatar，这是一种能够生成可动画的 3D 高斯头像，并采用了隐式网格学习技术。
+
+高斯分割技术作为一种先进的 3D 表现形式，它巧妙地结合了显式（即网格形式）和隐式（如神经辐射场，NeRF）的 3D 表示优点。
+
+在这篇论文中，利用高斯分割技术，通过文本描述来创造出栩栩如生的可动画头像，这一过程克服了传统网格或基于 NeRF 表示的种种限制，如灵活性和效率不足。
+
+然而，简单地应用高斯分割技术并不能制作出高质量的可动画头像，这种方法在学习过程中稳定性不足，难以捕捉细致的头像几何形状，常常导致身体部分形态不佳。为解决这些难题，Nvidia 提出了一种基于原始形状的 3D 高斯表示法，这种方法通过在姿势驱动的基础形状内定义高斯分布来便于动画制作。接着，为了稳定地并高效地学习数以百万计的高斯数据，Nvidia 采用神经隐式场预测高斯的各种属性（比如颜色）。
+
+最后，为了更好地捕捉细致的头像几何结构并提取精细网格，Nvidia 提出了一种全新的、针对 3D 高斯的基于有向距离场（SDF）的隐式网格学习方法。这种方法不仅规范了几何结构，而且能够提取高度详细的纹理网格。我们的这种方法，GAvatar，使得仅用文本提示就可以生成大量多样化的可动画头像成为可能。
+
+在外观和几何质量上，GAvatar 明显优于现有技术，并能在 1K 分辨率下达到令人印象深刻的渲染速度——每秒 100 帧。
+
+项目首页：https://nvlabs.github.io/GAvatar/
+论文：https://arxiv.org/abs/2312.11461</title>
+            <link>https://nitter.cz/dotey/status/1737015537937314300#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737015537937314300#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 19 Dec 2023 07:42:31 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Nvidia 推出一项新技术：GAvatar，这是一种能够生成可动画的 3D 高斯头像，并采用了隐式网格学习技术。<br />
+<br />
+高斯分割技术作为一种先进的 3D 表现形式，它巧妙地结合了显式（即网格形式）和隐式（如神经辐射场，NeRF）的 3D 表示优点。<br />
+<br />
+在这篇论文中，利用高斯分割技术，通过文本描述来创造出栩栩如生的可动画头像，这一过程克服了传统网格或基于 NeRF 表示的种种限制，如灵活性和效率不足。<br />
+<br />
+然而，简单地应用高斯分割技术并不能制作出高质量的可动画头像，这种方法在学习过程中稳定性不足，难以捕捉细致的头像几何形状，常常导致身体部分形态不佳。为解决这些难题，Nvidia 提出了一种基于原始形状的 3D 高斯表示法，这种方法通过在姿势驱动的基础形状内定义高斯分布来便于动画制作。接着，为了稳定地并高效地学习数以百万计的高斯数据，Nvidia 采用神经隐式场预测高斯的各种属性（比如颜色）。<br />
+<br />
+最后，为了更好地捕捉细致的头像几何结构并提取精细网格，Nvidia 提出了一种全新的、针对 3D 高斯的基于有向距离场（SDF）的隐式网格学习方法。这种方法不仅规范了几何结构，而且能够提取高度详细的纹理网格。我们的这种方法，GAvatar，使得仅用文本提示就可以生成大量多样化的可动画头像成为可能。<br />
+<br />
+在外观和几何质量上，GAvatar 明显优于现有技术，并能在 1K 分辨率下达到令人印象深刻的渲染速度——每秒 100 帧。<br />
+<br />
+项目首页：<a href="https://nvlabs.github.io/GAvatar/">nvlabs.github.io/GAvatar/</a><br />
+论文：<a href="https://arxiv.org/abs/2312.11461">arxiv.org/abs/2312.11461</a></p>
+<p><a href="https://nitter.cz/_akhaliq/status/1736994634356691255#m">nitter.cz/_akhaliq/status/1736994634356691255#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/waylybaye/status/1737002026280870346#m</id>
+            <title>RT by @dotey: 大家好，OpenCat 2.0 iOS/macOS 更新啦，部分 UI 进行了重新设计了。
+
+Cloud 现在可以免费试用了。
+支持了 Google Gemini。
+
+https://opencat.app/</title>
+            <link>https://nitter.cz/waylybaye/status/1737002026280870346#m</link>
+            <guid isPermaLink="false">https://nitter.cz/waylybaye/status/1737002026280870346#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 19 Dec 2023 06:48:49 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>大家好，OpenCat 2.0 iOS/macOS 更新啦，部分 UI 进行了重新设计了。<br />
+<br />
+Cloud 现在可以免费试用了。<br />
+支持了 Google Gemini。<br />
+<br />
+<a href="https://opencat.app/">opencat.app/</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JzUl91dWF3QUFXM2xiLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JzU0JqeWJjQUEzV3FFLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JzU0duemFNQUFUUnN2LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JzU0lPOWFzQUFJQm8wLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1736990848317812988#m</id>
             <title>推荐阅读：《在命令行中运行 Mistral 模型的多种方法》
 
@@ -437,99 +574,6 @@ openai-translator <a href="https://github.com/openai-translator/openai-translato
                     
                     <p>我提前在微博上提醒准备一点这个药的时候，都还无动于衷……还有几个杠精说打流感疫苗更划算，才 100 块。</p>
 <p><a href="https://nitter.cz/Barret_China/status/1736263577865183297#m">nitter.cz/Barret_China/status/1736263577865183297#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/Gorden_Sun/status/1736561583957180619#m</id>
-            <title>RT by @dotey: MLC Chat：在iPhone上离线运行7B最强LLM Mistral
-中文不太行，速度很快，手机会发热
-APP下载：https://apps.apple.com/gb/app/mlc-chat/id6448482937
-Github：https://github.com/mlc-ai/mlc-llm</title>
-            <link>https://nitter.cz/Gorden_Sun/status/1736561583957180619#m</link>
-            <guid isPermaLink="false">https://nitter.cz/Gorden_Sun/status/1736561583957180619#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 18 Dec 2023 01:38:40 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>MLC Chat：在iPhone上离线运行7B最强LLM Mistral<br />
-中文不太行，速度很快，手机会发热<br />
-APP下载：<a href="https://apps.apple.com/gb/app/mlc-chat/id6448482937">apps.apple.com/gb/app/mlc-ch…</a><br />
-Github：<a href="https://github.com/mlc-ai/mlc-llm">github.com/mlc-ai/mlc-llm</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzY1NjE0ODc5Mjg1MjQ4MDAvcHUvaW1nL282WFAyWFpRTmZGVGpubFUuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1736608205424226642#m</id>
-            <title>干货，直接看最后的Thread链接更方便：
-https://typefully.com/Tisoga/PBB58Vu</title>
-            <link>https://nitter.cz/dotey/status/1736608205424226642#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1736608205424226642#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 18 Dec 2023 04:43:55 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>干货，直接看最后的Thread链接更方便：<br />
-<a href="https://typefully.com/Tisoga/PBB58Vu">typefully.com/Tisoga/PBB58Vu</a></p>
-<p><a href="https://nitter.cz/Tisoga/status/1736544319199478175#m">nitter.cz/Tisoga/status/1736544319199478175#m</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczNjU0NDQ4MTcwMzQ5MzYzMi9ndlVkdzRIcz9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/Tisoga/status/1736544319199478175#m</id>
-            <title>RT by @dotey: http://devv.ai 是如何构建高效的 RAG 系统的 Part 2
-
-这个系列的 thread 会分享 http://devv.ai 背后构建整个 Retrieval Augmented Generation System 的经验，包括在生产环境上的一些实践。
-
-这是系列的第二篇，主题是「如何评估一个 RAG 系统」。
-
-🧵</title>
-            <link>https://nitter.cz/Tisoga/status/1736544319199478175#m</link>
-            <guid isPermaLink="false">https://nitter.cz/Tisoga/status/1736544319199478175#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 18 Dec 2023 00:30:03 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p><a href="http://devv.ai">devv.ai</a> 是如何构建高效的 RAG 系统的 Part 2<br />
-<br />
-这个系列的 thread 会分享 <a href="http://devv.ai">devv.ai</a> 背后构建整个 Retrieval Augmented Generation System 的经验，包括在生产环境上的一些实践。<br />
-<br />
-这是系列的第二篇，主题是「如何评估一个 RAG 系统」。<br />
-<br />
-🧵</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0JseDJscmJnQUFzWThOLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1736605060769935538#m</id>
-            <title>看着都想玩👍🏻</title>
-            <link>https://nitter.cz/dotey/status/1736605060769935538#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1736605060769935538#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 18 Dec 2023 04:31:25 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>看着都想玩👍🏻</p>
-<p><a href="https://nitter.cz/xiaohuggg/status/1736597467934958027#m">nitter.cz/xiaohuggg/status/1736597467934958027#m</a></p>
                 ]]>
             </content:encoded>
         </item>
