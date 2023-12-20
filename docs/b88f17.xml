@@ -5,6 +5,67 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/mtrainier2020/status/1737398651830276156#m</id>
+            <title>RT by @dotey: 我初步读了一下论文，这篇论文的基本思路其实是利用了推理过程中的局部性。现在现在推理性能的一个瓶颈就是GPU的内存。它们的思路就是联合CPU和GPU做联合推理。尽可能把active的neuron 信息load到GPU中，充分利用局部性。这样大大提高了GPU推理的效率。
+你不能拿单独的CPU推理或者单独的GPU推理来比。两者的指导思想都不一样。
+这样的效果非常牛逼。
+
+在推理速度上，在 4090 上是未经优化的llama.cpp 11 倍。相当于用一块4090（2000刀左右）在推理上取得了比a100 （2万刀左右）仅仅慢18%的成绩。
+
+这个结果，更大的意义就是证明，充分考虑并利用推理的局部性有极大的潜力，CPU+GPU 联合推理有很强的优越性。
+类似的，那么在训练当面是不是也可以采用这种思路呢？</title>
+            <link>https://nitter.cz/mtrainier2020/status/1737398651830276156#m</link>
+            <guid isPermaLink="false">https://nitter.cz/mtrainier2020/status/1737398651830276156#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 20 Dec 2023 09:04:52 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>我初步读了一下论文，这篇论文的基本思路其实是利用了推理过程中的局部性。现在现在推理性能的一个瓶颈就是GPU的内存。它们的思路就是联合CPU和GPU做联合推理。尽可能把active的neuron 信息load到GPU中，充分利用局部性。这样大大提高了GPU推理的效率。<br />
+你不能拿单独的CPU推理或者单独的GPU推理来比。两者的指导思想都不一样。<br />
+这样的效果非常牛逼。<br />
+<br />
+在推理速度上，在 4090 上是未经优化的llama.cpp 11 倍。相当于用一块4090（2000刀左右）在推理上取得了比a100 （2万刀左右）仅仅慢18%的成绩。<br />
+<br />
+这个结果，更大的意义就是证明，充分考虑并利用推理的局部性有极大的潜力，CPU+GPU 联合推理有很强的优越性。<br />
+类似的，那么在训练当面是不是也可以采用这种思路呢？</p>
+<p><a href="https://nitter.cz/engineer_bob_sz/status/1737297706736144476#m">nitter.cz/engineer_bob_sz/status/1737297706736144476#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0J4NjNKeVdJQUFDZlp5LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0J4NjNKdlc0QUFGblJfLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0J4NjNKeFdrQUFNMEM5LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1737408280090280396#m</id>
+            <title>RT by @dotey: 前几天发布的大幅提高视频生成流畅性的项目FreeInit，已经可以用了。
+
+试了一下，真的离谱，Animatediff 的稳定性确实得到了大幅提高，但是同时变化幅度也有一定下降，不过这个是值得的。
+
+下面是对比视频，可以用camenduru做的这个 Colab 链接部署测试：https://colab.research.google.com/github/camenduru/FreeInit-colab/blob/main/FreeInit_gradio_colab.ipynb</title>
+            <link>https://nitter.cz/op7418/status/1737408280090280396#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1737408280090280396#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 20 Dec 2023 09:43:08 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>前几天发布的大幅提高视频生成流畅性的项目FreeInit，已经可以用了。<br />
+<br />
+试了一下，真的离谱，Animatediff 的稳定性确实得到了大幅提高，但是同时变化幅度也有一定下降，不过这个是值得的。<br />
+<br />
+下面是对比视频，可以用camenduru做的这个 Colab 链接部署测试：<a href="https://colab.research.google.com/github/camenduru/FreeInit-colab/blob/main/FreeInit_gradio_colab.ipynb">colab.research.google.com/gi…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mzc0MDgwNjY4MzA5NzkwNzIvcHUvaW1nL19IdndIQ2FpQUJ0VGQwN1kuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1737389024300429498#m</id>
             <title>🤣 React Server Component 没那么夸张吧
 RSC 虐我千百遍，我待 RSC 如初恋！</title>
@@ -597,50 +658,6 @@ https://towardsdatascience.com/evaluating-rag-applications-with-ragas-81d67b0ee3
 <a href="https://towardsdatascience.com/evaluating-rag-applications-with-ragas-81d67b0ee31a">towardsdatascience.com/evalu…</a><br />
 翻译：<a href="https://baoyu.io/translations/rag/evaluating-rag-applications-with-ragas">baoyu.io/translations/rag/ev…</a></p>
 <p><a href="https://nitter.cz/Tisoga/status/1736544319199478175#m">nitter.cz/Tisoga/status/1736544319199478175#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1737015537937314300#m</id>
-            <title>Nvidia 推出一项新技术：GAvatar，这是一种能够生成可动画的 3D 高斯头像，并采用了隐式网格学习技术。
-
-高斯分割技术作为一种先进的 3D 表现形式，它巧妙地结合了显式（即网格形式）和隐式（如神经辐射场，NeRF）的 3D 表示优点。
-
-在这篇论文中，利用高斯分割技术，通过文本描述来创造出栩栩如生的可动画头像，这一过程克服了传统网格或基于 NeRF 表示的种种限制，如灵活性和效率不足。
-
-然而，简单地应用高斯分割技术并不能制作出高质量的可动画头像，这种方法在学习过程中稳定性不足，难以捕捉细致的头像几何形状，常常导致身体部分形态不佳。为解决这些难题，Nvidia 提出了一种基于原始形状的 3D 高斯表示法，这种方法通过在姿势驱动的基础形状内定义高斯分布来便于动画制作。接着，为了稳定地并高效地学习数以百万计的高斯数据，Nvidia 采用神经隐式场预测高斯的各种属性（比如颜色）。
-
-最后，为了更好地捕捉细致的头像几何结构并提取精细网格，Nvidia 提出了一种全新的、针对 3D 高斯的基于有向距离场（SDF）的隐式网格学习方法。这种方法不仅规范了几何结构，而且能够提取高度详细的纹理网格。我们的这种方法，GAvatar，使得仅用文本提示就可以生成大量多样化的可动画头像成为可能。
-
-在外观和几何质量上，GAvatar 明显优于现有技术，并能在 1K 分辨率下达到令人印象深刻的渲染速度——每秒 100 帧。
-
-项目首页：https://nvlabs.github.io/GAvatar/
-论文：https://arxiv.org/abs/2312.11461</title>
-            <link>https://nitter.cz/dotey/status/1737015537937314300#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737015537937314300#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 19 Dec 2023 07:42:31 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Nvidia 推出一项新技术：GAvatar，这是一种能够生成可动画的 3D 高斯头像，并采用了隐式网格学习技术。<br />
-<br />
-高斯分割技术作为一种先进的 3D 表现形式，它巧妙地结合了显式（即网格形式）和隐式（如神经辐射场，NeRF）的 3D 表示优点。<br />
-<br />
-在这篇论文中，利用高斯分割技术，通过文本描述来创造出栩栩如生的可动画头像，这一过程克服了传统网格或基于 NeRF 表示的种种限制，如灵活性和效率不足。<br />
-<br />
-然而，简单地应用高斯分割技术并不能制作出高质量的可动画头像，这种方法在学习过程中稳定性不足，难以捕捉细致的头像几何形状，常常导致身体部分形态不佳。为解决这些难题，Nvidia 提出了一种基于原始形状的 3D 高斯表示法，这种方法通过在姿势驱动的基础形状内定义高斯分布来便于动画制作。接着，为了稳定地并高效地学习数以百万计的高斯数据，Nvidia 采用神经隐式场预测高斯的各种属性（比如颜色）。<br />
-<br />
-最后，为了更好地捕捉细致的头像几何结构并提取精细网格，Nvidia 提出了一种全新的、针对 3D 高斯的基于有向距离场（SDF）的隐式网格学习方法。这种方法不仅规范了几何结构，而且能够提取高度详细的纹理网格。我们的这种方法，GAvatar，使得仅用文本提示就可以生成大量多样化的可动画头像成为可能。<br />
-<br />
-在外观和几何质量上，GAvatar 明显优于现有技术，并能在 1K 分辨率下达到令人印象深刻的渲染速度——每秒 100 帧。<br />
-<br />
-项目首页：<a href="https://nvlabs.github.io/GAvatar/">nvlabs.github.io/GAvatar/</a><br />
-论文：<a href="https://arxiv.org/abs/2312.11461">arxiv.org/abs/2312.11461</a></p>
-<p><a href="https://nitter.cz/_akhaliq/status/1736994634356691255#m">nitter.cz/_akhaliq/status/1736994634356691255#m</a></p>
                 ]]>
             </content:encoded>
         </item>
