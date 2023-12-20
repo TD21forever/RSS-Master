@@ -5,6 +5,78 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/xicilion/status/1737317533878014293#m</id>
+            <title>RT by @dotey: 一个思路和 airllm 很类似的优化推理引擎，利用清华的 ReLU-based sparse models 技术，对 llama.cpp 的 ggml 进行改造，最终达到在 4090 上相对原版 llama.cpp 11 倍的速度。
+
+在 4090 上的速度仅比在 a100 （未介绍基于什么引擎）上慢 18%。
+
+https://github.com/SJTU-IPADS/PowerInfer</title>
+            <link>https://nitter.cz/xicilion/status/1737317533878014293#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xicilion/status/1737317533878014293#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 20 Dec 2023 03:42:32 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>一个思路和 airllm 很类似的优化推理引擎，利用清华的 ReLU-based sparse models 技术，对 llama.cpp 的 ggml 进行改造，最终达到在 4090 上相对原版 llama.cpp 11 倍的速度。<br />
+<br />
+在 4090 上的速度仅比在 a100 （未介绍基于什么引擎）上慢 18%。<br />
+<br />
+<a href="https://github.com/SJTU-IPADS/PowerInfer">github.com/SJTU-IPADS/PowerI…</a></p>
+<p><a href="https://nitter.cz/omarsar0/status/1737168751668187229#m">nitter.cz/omarsar0/status/1737168751668187229#m</a></p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczNzE0NzAwMjUyMDAzOTQyNC9nOW50U0xIQj9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1737312698705092887#m</id>
+            <title>建议关注 Google 新发布的 VideoPoet，它并非基于扩散模型，而是多模态大语言模型，基本上扩散模型能支持的功能它都能做，比如说：如文本到视频、图像到视频、视频到音频的转换，以及视频风格化、补画（inpainting）或延伸画（outpainting）处理。
+
+并且它在保证视频一致性方面做的效果特别好，你可以看到它的一些演示动画都相当稳定。
+
+我上传的这个视频是 Google 用 VideoPoet 制作的一个短片，展示了由多个由 VideoPoet 生成的短视频片段拼接而成的成果。在编写剧本时，他们使用 Bard 创作了一个关于旅行的浣熊的短故事，并提供了按场景划分的故事梗概和相应的视频提示。接着，根据这些提示制作了视频片段，并将它们拼接成为最终展示的视频。
+
+对于长视频也很有大模型的 提示-补全（Prompt-Completion） 风格，VideoPoet 可以通过对视频最后一秒进行分析，预测接下来的一秒内容，从而生成更长的视频。这种方法可以连续应用，显示出模型不仅能够有效延长视频长度，还能在多次重复过程中保持视频中所有对象的连贯性和真实性。
+
+也许像 VideoPoet 这样的多模态大模型才是视频生成的未来主流。
+
+更多演示可以看项目网站：https://sites.research.google/videopoet/
+
+更多详情可以看这篇博客：《VideoPoet: 能零样本生成视频的大语言模型 [译]》
+https://baoyu.io/translations/google/videopoet-large-language-model-for-zero</title>
+            <link>https://nitter.cz/dotey/status/1737312698705092887#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737312698705092887#m</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 20 Dec 2023 03:23:19 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>建议关注 Google 新发布的 VideoPoet，它并非基于扩散模型，而是多模态大语言模型，基本上扩散模型能支持的功能它都能做，比如说：如文本到视频、图像到视频、视频到音频的转换，以及视频风格化、补画（inpainting）或延伸画（outpainting）处理。<br />
+<br />
+并且它在保证视频一致性方面做的效果特别好，你可以看到它的一些演示动画都相当稳定。<br />
+<br />
+我上传的这个视频是 Google 用 VideoPoet 制作的一个短片，展示了由多个由 VideoPoet 生成的短视频片段拼接而成的成果。在编写剧本时，他们使用 Bard 创作了一个关于旅行的浣熊的短故事，并提供了按场景划分的故事梗概和相应的视频提示。接着，根据这些提示制作了视频片段，并将它们拼接成为最终展示的视频。<br />
+<br />
+对于长视频也很有大模型的 提示-补全（Prompt-Completion） 风格，VideoPoet 可以通过对视频最后一秒进行分析，预测接下来的一秒内容，从而生成更长的视频。这种方法可以连续应用，显示出模型不仅能够有效延长视频长度，还能在多次重复过程中保持视频中所有对象的连贯性和真实性。<br />
+<br />
+也许像 VideoPoet 这样的多模态大模型才是视频生成的未来主流。<br />
+<br />
+更多演示可以看项目网站：<a href="https://sites.research.google/videopoet/">sites.research.google/videop…</a><br />
+<br />
+更多详情可以看这篇博客：《VideoPoet: 能零样本生成视频的大语言模型 [译]》<br />
+<a href="https://baoyu.io/translations/google/videopoet-large-language-model-for-zero">baoyu.io/translations/google…</a></p>
+<p><a href="https://nitter.cz/_akhaliq/status/1737253472808956293#m">nitter.cz/_akhaliq/status/1737253472808956293#m</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzczMTExMTQxNTE1NDY4ODEvcHUvaW1nL1lyaDVub0FjQjBvanhHRDYuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/linyiLYi/status/1737241501334462765#m</id>
             <title>RT by @dotey: 苹果 mlx 机器学习库增加了对通义千问的支持，前几天 mixtral、phi-2 也都是一到三天的时间就支持了，这个库的维护力量超出预期。llama.cpp 要加油了。</title>
             <link>https://nitter.cz/linyiLYi/status/1737241501334462765#m</link>
@@ -586,42 +658,6 @@ Librum 支持的格式包括：<br />
 项目地址：<a href="https://github.com/pacexy/flow">github.com/pacexy/flow</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0JyNTl0Q1c0QUV4YXA2LmpwZw==" />
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0JyNkE0ZldzQUFJUHNuLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1736945436697546852#m</id>
-            <title>R to @dotey:</title>
-            <link>https://nitter.cz/dotey/status/1736945436697546852#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1736945436697546852#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 19 Dec 2023 03:03:57 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p></p>
-<p><a href="https://nitter.cz/DalinHuang/status/1736944047510438192#m">nitter.cz/DalinHuang/status/1736944047510438192#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/Gorden_Sun/status/1736928256547602630#m</id>
-            <title>RT by @dotey: Mistral 的 CEO Arthur Mensch 在法国国家广播电台上宣布，Mistral 将在 2024 年发布 GPT-4 级别的开源模型</title>
-            <link>https://nitter.cz/Gorden_Sun/status/1736928256547602630#m</link>
-            <guid isPermaLink="false">https://nitter.cz/Gorden_Sun/status/1736928256547602630#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 19 Dec 2023 01:55:41 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Mistral 的 CEO Arthur Mensch 在法国国家广播电台上宣布，Mistral 将在 2024 年发布 GPT-4 级别的开源模型</p>
-<p><a href="https://nitter.cz/rohanpaul_ai/status/1736827830971867312#m">nitter.cz/rohanpaul_ai/status/1736827830971867312#m</a></p>
                 ]]>
             </content:encoded>
         </item>
