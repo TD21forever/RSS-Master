@@ -5,6 +5,29 @@
         <link>https://www.36kr.com/information/web_news</link>
         
         <item>
+            <id>https://www.36kr.com/p/2571082226623878</id>
+            <title>AI iPhone前奏？苹果发表论文，解决“在手机内存上运行大模型”</title>
+            <link>https://www.36kr.com/p/2571082226623878</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/2571082226623878</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 21 Dec 2023 23:06:34 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 苹果, LLM, 内存, GPU
+<br>
+<br>
+总结: 苹果发布了一篇论文，介绍了一种可以在设备上运行LLM的方法，通过提高内存使用效率，支持有限容量的设备运行内存2倍大小的LLM，提升了GPU的推理速度。这项突破性研究扩大了LLM的适用性和可及性，可能加快了苹果将生成式AI集成到iOS 18的计划。手机巨头们也开始布局AI，将AI技术应用于手机中。 </div>
+                        <hr>
+                    
+                    <blockquote><p>这项新研究支持设备运行内存2倍大小的LLM，GPU的推理速度可以提升数十倍。</p></blockquote><p>AI iPhone要来了？</p><p>据媒体报道，近日，苹果发布了一篇论文，介绍了一种可以再超出可用DRAM容量的设备上运行LLM（大语言模型）的方法。</p><p>通过大幅提高内存使用效率，这项新研究支持有限容量的移动设备运行内存2倍大小的LLM，GPU的推理速度可以提升数十倍。</p><p>论文称，LLM密集的计算量和内存要求对于DRAM容量来说是一大挑战，该论文构建了一个以闪存为基础的推理成本模型，将在两个关键领域进行优化：减少从闪存中传输的数据量、更多更流畅地读取数据块。</p><p>这意味着，该项突破性研究扩大了LLM适用性和可及性，苹果将生成式AI集成到iOS 18的计划或将加快推进。</p><h2>01 LLM能在手机上运行了？</h2><p>一般来说，DRAM就是我们常说的“内存”，而flash（闪存）指的是硬盘。</p><p>运算数据时，CPU通常会以DRAM为“中间桥梁”，把硬盘中的数据复制到内存中来，再在内存中做数据处理，这样速度可以提升至数百万倍。</p><p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20231222/v2_66742186211e4ee083e5b2ddbd9977e9@5091053_oswg14160oswg311oswg205_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1/format,jpg/interlace,1" /></p><p>但在容量上，DRAM相较于硬盘要小一个数量级。而LLM运行时，需要同时处理的数据量庞大，对容量有限的设备来说构成了极大的挑战。</p><p>但这篇论文提出的新框架似乎发现了突破点。该框架旨在将模型参数存储在闪存中，在需要的时候再将数据调入DRAM，解决了LLM运行时数据处理量超过DRAM可用容量的的难题。</p><p>具体而言，苹果主要运用了两种技术：</p><blockquote><p>（1）“窗口化”技术：重复使用此前激活过的神经元，以此减少数据传输；</p><p>（2）“行列捆绑”技术：针对闪存的数据特征，定制访问数据块的顺序，从而增加从闪存读取的数据块大小。</p></blockquote><p>论文提及，一个70亿参数的模型就需要超过14GB的内存来加载半精度浮点格式的参数，超过了大多数网络端点的承受能力。但是通过该框架，能够实现最小化数据传输并最大化闪存吞吐量，从而减少数据负载、提高内存使用效率。</p><p>研究结果显示，与传统的加载方法相比，该框架支持DRAM两倍大小的模型，在CPU和GPU中推理速度可分别提升4-5倍、20-25倍。研究团队在文末总结道：</p><blockquote><p>“这项突破性技术对于在资源有限的环境中部署先进的LLM尤为重要，从而扩大LLM适用性和可及性。”</p><figure class="image"><img src="https://img.36krcdn.com/hsossms/20231222/v2_73c57a86fadf4186a046c6a2a717197c@5091053_oswg42315oswg301oswg167_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1/format,jpg/interlace,1" /></figure></blockquote><h2>02 手机巨头们瞄准了AI</h2><p>在AI潮下，各大手机制造纷纷开始布局“人工智能+手机”。</p><p>据此前市场消息，苹果将在其iOS 18中引入AI，主要用于Siri和通讯应用程序的智能问答、生成语句等功能，此外，苹果还在探索AI在Apple Music、Page、Keynote和Xcode等应用中的潜能。</p><p>三星于11月初推出其生成式AI模型Samsung Gauss，报道称该模型将纳入即将于2024年初发布的Galaxy S24系列手机中，三星旗下笔记本电脑、平板电脑也有可能集成该模型。</p><p>谷歌的双子星大模型（Gemini）也将集成到谷歌旗下产品，11月，谷歌官宣Gemini1.0将在谷歌产品中逐步推出；Gemini Pro将集成到Bard中以进行高级推理和规划；Gemini Nano将为Pixel 8 Pro智能手机的功能提供支持。</p><p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s/i7ljkhxEUakH2yxvdwNPOA" rel="noopener noreferrer nofollow" target="_blank">“硬AI”（ID:IngAI_）</a>，作者：李笑寅，编辑：硬 AI，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.36kr.com/p/2570437259748737</id>
             <title>单人100元奖励，除了抢商家，抖音还开始抢大众点评达人？</title>
             <link>https://www.36kr.com/p/2570437259748737</link>
