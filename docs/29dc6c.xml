@@ -5,6 +5,70 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1737656196629471517#m</id>
+            <title>PowerInfer：让普通电脑也能跑大语言模型
+
+由上海交通大学开发，目的是在配备消费级GPU的个人电脑上提供高速的大语言模型推理服务。
+
+PowerInfer 无缝整合了 CPU 和 GPU 的内存和计算能力，优化了内存和计算资源，从而在个人电脑上高效地运行复杂的 AI 模型。
+
+比llama.cpp快11倍...
+
+它支持多种不同的大型语言模型！
+
+在测试中，PowerInfer在单个 NVIDIA RTX 4090 GPU 上达到了平均每秒生成 13.20 个令牌的速率，峰值可达 29.08 个令牌。接近顶级服务器级 GPU 的性能。
+
+PowerInfer 对比llama.cpp 在运行 Falcon(ReLU)-40B-FP16 的单个 RTX 4090(24G) 上实现 11 倍加速！
+
+其主要工作原理：
+
+通过智能地分配和优化计算任务在 CPU 和 GPU 之间的处理，以及利用大型语言模型中的局部性特征，从而在个人电脑上高效地运行复杂的 AI 模型。这种方法使得即使是不具备高端服务器硬件的用户也能体验到高速的 AI 模型推理性能。
+
+激活局部性利用：PowerInfer 利用了大语言模型推理中的高局部性。大语言模型在各种输入中，只有一小部分神经元（称为“热神经元”）持续激活，而大多数神经元（“冷神经元”）则根据特定输入变化。
+
+GPU-CPU 混合推理：为了提高效率，PowerInfer 预先将热神经元加载到 GPU 上，以实现快速访问。这减少了 GPU 的内存需求。同时，它在 CPU 上计算冷神经元的激活，减少了 CPU 和 GPU 之间的数据传输。
+
+GitHub：https://github.com/SJTU-IPADS/PowerInfer
+论文：https://ipads.se.sjtu.edu.cn/_media/publications/powerinfer-20231219.pdf</title>
+            <link>https://nitter.cz/xiaohuggg/status/1737656196629471517#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1737656196629471517#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 21 Dec 2023 02:08:16 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>PowerInfer：让普通电脑也能跑大语言模型<br />
+<br />
+由上海交通大学开发，目的是在配备消费级GPU的个人电脑上提供高速的大语言模型推理服务。<br />
+<br />
+PowerInfer 无缝整合了 CPU 和 GPU 的内存和计算能力，优化了内存和计算资源，从而在个人电脑上高效地运行复杂的 AI 模型。<br />
+<br />
+比llama.cpp快11倍...<br />
+<br />
+它支持多种不同的大型语言模型！<br />
+<br />
+在测试中，PowerInfer在单个 NVIDIA RTX 4090 GPU 上达到了平均每秒生成 13.20 个令牌的速率，峰值可达 29.08 个令牌。接近顶级服务器级 GPU 的性能。<br />
+<br />
+PowerInfer 对比llama.cpp 在运行 Falcon(ReLU)-40B-FP16 的单个 RTX 4090(24G) 上实现 11 倍加速！<br />
+<br />
+其主要工作原理：<br />
+<br />
+通过智能地分配和优化计算任务在 CPU 和 GPU 之间的处理，以及利用大型语言模型中的局部性特征，从而在个人电脑上高效地运行复杂的 AI 模型。这种方法使得即使是不具备高端服务器硬件的用户也能体验到高速的 AI 模型推理性能。<br />
+<br />
+激活局部性利用：PowerInfer 利用了大语言模型推理中的高局部性。大语言模型在各种输入中，只有一小部分神经元（称为“热神经元”）持续激活，而大多数神经元（“冷神经元”）则根据特定输入变化。<br />
+<br />
+GPU-CPU 混合推理：为了提高效率，PowerInfer 预先将热神经元加载到 GPU 上，以实现快速访问。这减少了 GPU 的内存需求。同时，它在 CPU 上计算冷神经元的激活，减少了 CPU 和 GPU 之间的数据传输。<br />
+<br />
+GitHub：<a href="https://github.com/SJTU-IPADS/PowerInfer">github.com/SJTU-IPADS/PowerI…</a><br />
+论文：<a href="https://ipads.se.sjtu.edu.cn/_media/publications/powerinfer-20231219.pdf">ipads.se.sjtu.edu.cn/_media/…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mzc2NTQwMDQ5MTY4ODM0NTYvcHUvaW1nL1M0SG54WE9tZFNhNmo1eWkuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1737647074110570574#m</id>
             <title>R to @xiaohuggg: 之前的介绍</title>
             <link>https://nitter.cz/xiaohuggg/status/1737647074110570574#m</link>
@@ -586,88 +650,6 @@ VideoPoet 使用大语言模型（LLM）用于处理和生成文本，但经过�
 详细介绍：<a href="https://blog.research.google/2023/12/videopoet-large-language-model-for-zero.html">blog.research.google/2023/12…</a><br />
 演示：<a href="https://sites.research.google/videopoet/">sites.research.google/videop…</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzczNjk5NTU5MzM1ODk1MDQvcHUvaW1nL3BoRzRKQWlCVTltYkNzVWouanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1737321380511891550#m</id>
-            <title>HyFluid：从视频中“读懂”流体的运动状态
-
-假如你有一些视频片段，里面有水、烟或其他流动的物质。HyFluid 能够分析这些视频，然后告诉你这些流体是如何移动的，比如它们的速度和密度。
-
-更牛P的是它不仅能告诉你这个流体现在是怎么流动的，还能预测它将来会怎么流动。
-
-人类肉眼看不到的也能识别...
-
-这个项目特别厉害的地方在于，它能处理那些看起来很混乱、难以捉摸的流体运动。通常，我们很难从肉眼看到的流体运动中准确地知道流体是怎么流动的，但 HyFluid 利用先进的计算方法，可以做到这一点。
-
-HyFluid 项目的主要特点和功能：
-
-1、流体动态重建：HyFluid 能够从稀疏的多视角视频中推断出流体的密度和速度，这对于理解和模拟流体动力学非常重要。比如拍摄烟雾或雾的视频，然后告诉你这些流体是怎么流动的，比如它们流动得有多快，有多密集。
-
-2、重建3D流体场景：特别擅长处理那些我们无法压缩的流体，就像烟雾或雾这样的东西。它能创建出这些流体在三维空间中的模型，让我们能更好地理解它们的行为。
-
-3、重新制作和改变流体动态：HyFluid 让你能够从不同的角度重新看流体是怎么动的，甚至还可以改变它们的动态。这对于制作电影里的特效或者进行科学实验来说非常有用。
-
-4、预测流体将来会怎样：除了告诉我们流体现在是怎么动的，HyFluid 还可以预测它们将来会怎样流动。这对于做科学预测或者创造动态的电脑模拟场景很有帮助。
-
-5、物理基础的损失函数：为了解决流体速度的视觉模糊问题，HyFluid 引入了一系列基于物理的损失函数，这些函数强制推断出物理上可行的速度场，这些速度场是无散度的，并驱动密度的传输。
-
-6、混合神经速度表示：为了处理流体速度的湍流特性，HyFluid 设计了一种混合神经速度表示，包括一个基础神经速度场，用于捕捉大部分无旋能量，以及一个基于涡旋粒子的速度，用于模拟剩余的湍流速度。
-
-7、恢复涡流流动细节：HyFluid 的方法能够恢复涡流流动的细节，为各种学习和重建应用开辟了可能性，包括3D不可压缩流体的重新模拟和编辑、未来预测以及神经动态场景构建。
-
-应用示例：HyFluid 可以从几个多视角视频（例如三个视角）中推断出3D流体的密度和速度场，并允许从新的视角重新模拟流体动力学，预测流体的未来演变，并将恢复的3D密度和流体外观轻松地合成到任何类似NeRF的动态场景中。
-
-HyFluid 项目展示了如何利用先进的机器学习技术来解决复杂的流体动力学问题，为流体动力学的研究和应用提供了新的工具和方法。
-
-项目及演示：https://kovenyu.com/hyfluid/
-论文：https://arxiv.org/pdf/2312.06561.pdf
-GitHub：https://github.com/y-zheng18/HyFluid</title>
-            <link>https://nitter.cz/xiaohuggg/status/1737321380511891550#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1737321380511891550#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 20 Dec 2023 03:57:49 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>HyFluid：从视频中“读懂”流体的运动状态<br />
-<br />
-假如你有一些视频片段，里面有水、烟或其他流动的物质。HyFluid 能够分析这些视频，然后告诉你这些流体是如何移动的，比如它们的速度和密度。<br />
-<br />
-更牛P的是它不仅能告诉你这个流体现在是怎么流动的，还能预测它将来会怎么流动。<br />
-<br />
-人类肉眼看不到的也能识别...<br />
-<br />
-这个项目特别厉害的地方在于，它能处理那些看起来很混乱、难以捉摸的流体运动。通常，我们很难从肉眼看到的流体运动中准确地知道流体是怎么流动的，但 HyFluid 利用先进的计算方法，可以做到这一点。<br />
-<br />
-HyFluid 项目的主要特点和功能：<br />
-<br />
-1、流体动态重建：HyFluid 能够从稀疏的多视角视频中推断出流体的密度和速度，这对于理解和模拟流体动力学非常重要。比如拍摄烟雾或雾的视频，然后告诉你这些流体是怎么流动的，比如它们流动得有多快，有多密集。<br />
-<br />
-2、重建3D流体场景：特别擅长处理那些我们无法压缩的流体，就像烟雾或雾这样的东西。它能创建出这些流体在三维空间中的模型，让我们能更好地理解它们的行为。<br />
-<br />
-3、重新制作和改变流体动态：HyFluid 让你能够从不同的角度重新看流体是怎么动的，甚至还可以改变它们的动态。这对于制作电影里的特效或者进行科学实验来说非常有用。<br />
-<br />
-4、预测流体将来会怎样：除了告诉我们流体现在是怎么动的，HyFluid 还可以预测它们将来会怎样流动。这对于做科学预测或者创造动态的电脑模拟场景很有帮助。<br />
-<br />
-5、物理基础的损失函数：为了解决流体速度的视觉模糊问题，HyFluid 引入了一系列基于物理的损失函数，这些函数强制推断出物理上可行的速度场，这些速度场是无散度的，并驱动密度的传输。<br />
-<br />
-6、混合神经速度表示：为了处理流体速度的湍流特性，HyFluid 设计了一种混合神经速度表示，包括一个基础神经速度场，用于捕捉大部分无旋能量，以及一个基于涡旋粒子的速度，用于模拟剩余的湍流速度。<br />
-<br />
-7、恢复涡流流动细节：HyFluid 的方法能够恢复涡流流动的细节，为各种学习和重建应用开辟了可能性，包括3D不可压缩流体的重新模拟和编辑、未来预测以及神经动态场景构建。<br />
-<br />
-应用示例：HyFluid 可以从几个多视角视频（例如三个视角）中推断出3D流体的密度和速度场，并允许从新的视角重新模拟流体动力学，预测流体的未来演变，并将恢复的3D密度和流体外观轻松地合成到任何类似NeRF的动态场景中。<br />
-<br />
-HyFluid 项目展示了如何利用先进的机器学习技术来解决复杂的流体动力学问题，为流体动力学的研究和应用提供了新的工具和方法。<br />
-<br />
-项目及演示：<a href="https://kovenyu.com/hyfluid/">kovenyu.com/hyfluid/</a><br />
-论文：<a href="https://arxiv.org/pdf/2312.06561.pdf">arxiv.org/pdf/2312.06561.pdf</a><br />
-GitHub：<a href="https://github.com/y-zheng18/HyFluid">github.com/y-zheng18/HyFluid</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzczMjEwOTUxNTI1MTMwMjQvcHUvaW1nL0s2MHVmWEFhd1VJMThmMkEuanBn" />
                 ]]>
             </content:encoded>
         </item>

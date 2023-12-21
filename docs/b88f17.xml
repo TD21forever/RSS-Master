@@ -5,6 +5,68 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1737658820598398985#m</id>
+            <title>HuggingFace 官方博客上的一篇文章：《Speculative Decoding for 2x Faster Whisper Inference | 推测性解码：实现 Whisper 推理速度提升两倍 [译]》
+
+在这篇文章中，展示了如何应用“猜测式解码”(Speculative Decoding) 技术来减少 Whisper 语音识别模型的处理时间，实现了处理速度的 两倍提升，同时数学上保证了模型输出的 完全一致性。因此，这一方法可以无缝替代现有的 Whisper 处理流程，不仅保持了原有的准确性，还能实现处理速度的双倍快速提升。
+
+简单来说，Speculative Decoding就是先利用一个快速的 Assistant 模型生成候选tokens，再用 Main 模型验证。
+
+Assistant 的速度是 Main 模型的 3 倍，但准确率只有 70% - 80%。
+
+使用这种方法可以让整体速度提升 2 倍，并且保证输出完全一致。
+
+文章还提供了Google Colab的测试连接：https://colab.research.google.com/github/sanchit-gandhi/notebooks/blob/main/speculative_decoding.ipynb
+
+原文：https://huggingface.co/blog/whisper-speculative-decoding#english-speech-transcription
+译文：https://baoyu.io/translations/huggingface/whisper-speculative-decoding</title>
+            <link>https://nitter.cz/dotey/status/1737658820598398985#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737658820598398985#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 21 Dec 2023 02:18:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>HuggingFace 官方博客上的一篇文章：《Speculative Decoding for 2x Faster Whisper Inference | 推测性解码：实现 Whisper 推理速度提升两倍 [译]》<br />
+<br />
+在这篇文章中，展示了如何应用“猜测式解码”(Speculative Decoding) 技术来减少 Whisper 语音识别模型的处理时间，实现了处理速度的 两倍提升，同时数学上保证了模型输出的 完全一致性。因此，这一方法可以无缝替代现有的 Whisper 处理流程，不仅保持了原有的准确性，还能实现处理速度的双倍快速提升。<br />
+<br />
+简单来说，Speculative Decoding就是先利用一个快速的 Assistant 模型生成候选tokens，再用 Main 模型验证。<br />
+<br />
+Assistant 的速度是 Main 模型的 3 倍，但准确率只有 70% - 80%。<br />
+<br />
+使用这种方法可以让整体速度提升 2 倍，并且保证输出完全一致。<br />
+<br />
+文章还提供了Google Colab的测试连接：<a href="https://colab.research.google.com/github/sanchit-gandhi/notebooks/blob/main/speculative_decoding.ipynb">colab.research.google.com/gi…</a><br />
+<br />
+原文：<a href="https://huggingface.co/blog/whisper-speculative-decoding#english-speech-transcription">huggingface.co/blog/whisper-…</a><br />
+译文：<a href="https://baoyu.io/translations/huggingface/whisper-speculative-decoding">baoyu.io/translations/huggin…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0IxbmNFeFd3QUFHOXY5LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1737657020587630635#m</id>
+            <title>终于放出来了！</title>
+            <link>https://nitter.cz/dotey/status/1737657020587630635#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737657020587630635#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 21 Dec 2023 02:11:32 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>终于放出来了！</p>
+<p><a href="https://nitter.cz/xiaohuggg/status/1737647067693211728#m">nitter.cz/xiaohuggg/status/1737647067693211728#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/HiTw93/status/1737618885220647160#m</id>
             <title>RT by @dotey: #工程师学习 这个《动手实战人工智能 Hands-on AI》写得很用心，作者从监督学习开始，带你入门机器学习和深度学习，他尝试剖析和推导每一个基础算法的原理，将数学过程写出来，同时基于 Python 代码对公式进行实现，做到公式和代码的一一对应。
 🤖 https://ai.huhuhang.com/</title>
@@ -606,63 +668,6 @@ LLMOps 还是个很新也是个很有前途的领域，我个人对这方面也�
                 <![CDATA[
                     
                     <p>我拿我的翻译 Prompt （PopAi 中已经内置成了模板，并且支持多种语言翻译）实际测试后效果挺不错，这个产品免费的每天有条数限制，但 Unlimited 档的话可以无限使用 GPT-4，不用担心受 ChatGPT Plus 3 小时 40 条的限制了。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1737512577641390311#m</id>
-            <title>之前我发翻译的 Prompt 的或者 GPTs 时候，很多同学无法注册 ChatGPT Plus 或无法获取到 GPT-4 的 API，没机会用上，所以这里推荐一个 ChatGPT 的替代产品 PopAi @popaiinone，内置有 GPT-4V 多模态模型，所以不仅是能用上高质量的翻译能力，还能支持图像识别，PDF 文档对话等能力。</title>
-            <link>https://nitter.cz/dotey/status/1737512577641390311#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737512577641390311#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 20 Dec 2023 16:37:34 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>之前我发翻译的 Prompt 的或者 GPTs 时候，很多同学无法注册 ChatGPT Plus 或无法获取到 GPT-4 的 API，没机会用上，所以这里推荐一个 ChatGPT 的替代产品 PopAi <a href="https://nitter.cz/popaiinone" title="PopAi">@popaiinone</a>，内置有 GPT-4V 多模态模型，所以不仅是能用上高质量的翻译能力，还能支持图像识别，PDF 文档对话等能力。</p>
-<p><a href="https://nitter.cz/dotey/status/1707478347553395105#m">nitter.cz/dotey/status/1707478347553395105#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0J6aVFBLVdvQjhENXR4LmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0J6aVFBLVc4QUFreU1DLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0J6aVFBX1dvQUFvdVlxLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0J6aVRieVdvQVlob1RLLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/mtrainier2020/status/1737398651830276156#m</id>
-            <title>RT by @dotey: 我初步读了一下论文，这篇论文的基本思路其实是利用了推理过程中的局部性。现在现在推理性能的一个瓶颈就是GPU的内存。它们的思路就是联合CPU和GPU做联合推理。尽可能把active的neuron 信息load到GPU中，充分利用局部性。这样大大提高了GPU推理的效率。
-你不能拿单独的CPU推理或者单独的GPU推理来比。两者的指导思想都不一样。
-这样的效果非常牛逼。
-
-在推理速度上，在 4090 上是未经优化的llama.cpp 11 倍。相当于用一块4090（2000刀左右）在推理上取得了比a100 （2万刀左右）仅仅慢18%的成绩。
-
-这个结果，更大的意义就是证明，充分考虑并利用推理的局部性有极大的潜力，CPU+GPU 联合推理有很强的优越性。
-类似的，那么在训练当面是不是也可以采用这种思路呢？</title>
-            <link>https://nitter.cz/mtrainier2020/status/1737398651830276156#m</link>
-            <guid isPermaLink="false">https://nitter.cz/mtrainier2020/status/1737398651830276156#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 20 Dec 2023 09:04:52 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>我初步读了一下论文，这篇论文的基本思路其实是利用了推理过程中的局部性。现在现在推理性能的一个瓶颈就是GPU的内存。它们的思路就是联合CPU和GPU做联合推理。尽可能把active的neuron 信息load到GPU中，充分利用局部性。这样大大提高了GPU推理的效率。<br />
-你不能拿单独的CPU推理或者单独的GPU推理来比。两者的指导思想都不一样。<br />
-这样的效果非常牛逼。<br />
-<br />
-在推理速度上，在 4090 上是未经优化的llama.cpp 11 倍。相当于用一块4090（2000刀左右）在推理上取得了比a100 （2万刀左右）仅仅慢18%的成绩。<br />
-<br />
-这个结果，更大的意义就是证明，充分考虑并利用推理的局部性有极大的潜力，CPU+GPU 联合推理有很强的优越性。<br />
-类似的，那么在训练当面是不是也可以采用这种思路呢？</p>
-<p><a href="https://nitter.cz/engineer_bob_sz/status/1737297706736144476#m">nitter.cz/engineer_bob_sz/status/1737297706736144476#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0J4NjNKeVdJQUFDZlp5LmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0J4NjNKdlc0QUFGblJfLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0J4NjNKeFdrQUFNMEM5LmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
