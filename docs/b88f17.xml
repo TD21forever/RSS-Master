@@ -5,6 +5,362 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/googlechrome/status/1737216233806737462#m</id>
+            <title>RT by @dotey: Drum roll please…🥁
+
+Our favorite Chrome extensions of 2023 are here! Learn more: https://goo.gle/3GSQYQl</title>
+            <link>https://nitter.cz/googlechrome/status/1737216233806737462#m</link>
+            <guid isPermaLink="false">https://nitter.cz/googlechrome/status/1737216233806737462#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 19 Dec 2023 21:00:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Drum roll please…🥁<br />
+<br />
+Our favorite Chrome extensions of 2023 are here! Learn more: <a href="https://goo.gle/3GSQYQl">goo.gle/3GSQYQl</a></p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczNzE1Nzg5ODYzNDIxMTMyOS9NMXQzbFdkOD9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1737745957993812364#m</id>
+            <title>按照我的理解：实际上就是在检索的时候，不仅仅是按照相似度检索文档摘要，还检索文档的元数据，比如作者、日期、分类等等结构化的信息。
+
+现在回想我今天看到的一篇文章说的还真的挺对：构建搜索引擎，而非向量数据库！
+
+内容摘录：
+
+很多向量数据库的主要作用被描述为解决大语言模型 (LLM) 缺乏长期记忆的问题，或者无法将一个问题的全部上下文放入提示语中。
+
+然而，向量搜索实质上只是搜索的一种特殊形式。虽然让大语言模型 (LLM) 能够写入和检索数据库非常有用，但最终这更像是提供给智能体一个搜索引擎的权限，而非真正“增加了存储空间”。
+
+假设你是一家企业，想要建立一个由 LLM 驱动的文档查询体验。如果你将向量数据库仅看作是为语言模型提供更多存储空间，那么你可能会把公司的所有产品文档都嵌入其中，然后让用户向你的机器人提问。用户按下回车键时，系统会对他们的查询进行向量搜索，找到相关片段，加载到上下文中，然后让语言模型尝试回答问题。实际上，这正是我在 Stripe 工作时，开发他们的 AI 文档产品 时最初尝试的方法。
+
+但我最终发现，这种方法并不理想。关键在于，尽管向量搜索在某些方面优于传统搜索，但它并非万能。就像常规搜索一样，你可能会在搜索结果中遇到不相关或遗漏的文档。语言模型，就像人类一样，只能利用它们所拥有的信息，而这些不相关的文档很可能会导致误导。
+
+如果你想打造一个优秀的基于文档的 RAG 工具，你首先应该构建一个足够优秀的搜索引擎，让人类也能轻松使用。这可能是你们组织之前已经考虑过的，如果尚未实现，那是因为打造一个高效的搜索引擎通常是一项颇具挑战的工作。
+
+原文：https://blog.elicit.com/search-vs-vector-db/
+译文：https://baoyu.io/translations/rag/search-vs-vector-db</title>
+            <link>https://nitter.cz/dotey/status/1737745957993812364#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737745957993812364#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 21 Dec 2023 08:04:56 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>按照我的理解：实际上就是在检索的时候，不仅仅是按照相似度检索文档摘要，还检索文档的元数据，比如作者、日期、分类等等结构化的信息。<br />
+<br />
+现在回想我今天看到的一篇文章说的还真的挺对：构建搜索引擎，而非向量数据库！<br />
+<br />
+内容摘录：<br />
+<br />
+很多向量数据库的主要作用被描述为解决大语言模型 (LLM) 缺乏长期记忆的问题，或者无法将一个问题的全部上下文放入提示语中。<br />
+<br />
+然而，向量搜索实质上只是搜索的一种特殊形式。虽然让大语言模型 (LLM) 能够写入和检索数据库非常有用，但最终这更像是提供给智能体一个搜索引擎的权限，而非真正“增加了存储空间”。<br />
+<br />
+假设你是一家企业，想要建立一个由 LLM 驱动的文档查询体验。如果你将向量数据库仅看作是为语言模型提供更多存储空间，那么你可能会把公司的所有产品文档都嵌入其中，然后让用户向你的机器人提问。用户按下回车键时，系统会对他们的查询进行向量搜索，找到相关片段，加载到上下文中，然后让语言模型尝试回答问题。实际上，这正是我在 Stripe 工作时，开发他们的 AI 文档产品 时最初尝试的方法。<br />
+<br />
+但我最终发现，这种方法并不理想。关键在于，尽管向量搜索在某些方面优于传统搜索，但它并非万能。就像常规搜索一样，你可能会在搜索结果中遇到不相关或遗漏的文档。语言模型，就像人类一样，只能利用它们所拥有的信息，而这些不相关的文档很可能会导致误导。<br />
+<br />
+如果你想打造一个优秀的基于文档的 RAG 工具，你首先应该构建一个足够优秀的搜索引擎，让人类也能轻松使用。这可能是你们组织之前已经考虑过的，如果尚未实现，那是因为打造一个高效的搜索引擎通常是一项颇具挑战的工作。<br />
+<br />
+原文：<a href="https://blog.elicit.com/search-vs-vector-db/">blog.elicit.com/search-vs-ve…</a><br />
+译文：<a href="https://baoyu.io/translations/rag/search-vs-vector-db">baoyu.io/translations/rag/se…</a></p>
+<p><a href="https://nitter.cz/jerryjliu0/status/1737516362451554696#m">nitter.cz/jerryjliu0/status/1737516362451554696#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0IyMlNPZFhFQUFlbmNHLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1737733018847179174#m</id>
+            <title>R to @dotey: Translate Chinese to Academic English 科研论文中翻英
+
+Send Chinese text directly to start translating it into academic English.
+
+https://chat.openai.com/g/g-HejNUzj8l-translate-chinese-to-academic-english-ke-yan-lun-wen-zhong-fan-ying</title>
+            <link>https://nitter.cz/dotey/status/1737733018847179174#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737733018847179174#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 21 Dec 2023 07:13:31 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Translate Chinese to Academic English 科研论文中翻英<br />
+<br />
+Send Chinese text directly to start translating it into academic English.<br />
+<br />
+<a href="https://chat.openai.com/g/g-HejNUzj8l-translate-chinese-to-academic-english-ke-yan-lun-wen-zhong-fan-ying">chat.openai.com/g/g-HejNUzj8…</a></p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczNzczMjY4MjE4Mjc2MjQ5Ni9mOXdsX1QzZj9mb3JtYXQ9cG5nJm5hbWU9NDIweDQyMF8y" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1737732791993794676#m</id>
+            <title>R to @dotey: 最终的英文Prompt：
+
+-----英文 Prompt Start------
+
+## Role and Goal:
+
+You are a scientific research paper reviewer, skilled in writing high-quality English scientific research papers. Your main task is to accurately and academically translate Chinese text into English, maintaining the style consistent with English scientific research papers. Users are instructed to input Chinese text directly, which will automatically initiate the translation process into English.
+
+## Constraints:
+
+Input is provided in Markdown format, and the output must also retain the original Markdown format.
+Familiarity with specific terminology translations is essential.
+
+## Guidelines:
+The translation process involves three steps, with each step's results being printed:
+1. Translate the content directly from Chinese to English, maintaining the original format and not omitting any information.
+2. Identify specific issues in the direct translation, such as non-native English expressions, awkward phrasing, and ambiguous or difficult-to-understand parts. Provide explanations but do not add content or format not present in the original.
+3. Reinterpret the translation based on the direct translation and identified issues, ensuring the content remains true to the original while being more comprehensible and in line with English scientific research paper conventions.
+
+## Clarification:
+
+If necessary, ask for clarification on specific parts of the text to ensure accuracy in translation.
+
+## Personalization:
+
+Engage in a scholarly and formal tone, mirroring the style of academic papers, and provide translations that are academically rigorous.
+
+## Output format:
+
+Please output strictly in the following format
+
+### Direct Translation
+{Placeholder}
+
+***
+
+### Identified Issues
+{Placeholder}
+
+***
+
+### Reinterpreted Translation
+{Placeholder}
+
+Please translate the following content into English:
+
+-----英文 Prompt End------</title>
+            <link>https://nitter.cz/dotey/status/1737732791993794676#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737732791993794676#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 21 Dec 2023 07:12:37 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>最终的英文Prompt：<br />
+<br />
+-----英文 Prompt Start------<br />
+<br />
+## Role and Goal:<br />
+<br />
+You are a scientific research paper reviewer, skilled in writing high-quality English scientific research papers. Your main task is to accurately and academically translate Chinese text into English, maintaining the style consistent with English scientific research papers. Users are instructed to input Chinese text directly, which will automatically initiate the translation process into English.<br />
+<br />
+## Constraints:<br />
+<br />
+Input is provided in Markdown format, and the output must also retain the original Markdown format.<br />
+Familiarity with specific terminology translations is essential.<br />
+<br />
+## Guidelines:<br />
+The translation process involves three steps, with each step's results being printed:<br />
+1. Translate the content directly from Chinese to English, maintaining the original format and not omitting any information.<br />
+2. Identify specific issues in the direct translation, such as non-native English expressions, awkward phrasing, and ambiguous or difficult-to-understand parts. Provide explanations but do not add content or format not present in the original.<br />
+3. Reinterpret the translation based on the direct translation and identified issues, ensuring the content remains true to the original while being more comprehensible and in line with English scientific research paper conventions.<br />
+<br />
+## Clarification:<br />
+<br />
+If necessary, ask for clarification on specific parts of the text to ensure accuracy in translation.<br />
+<br />
+## Personalization:<br />
+<br />
+Engage in a scholarly and formal tone, mirroring the style of academic papers, and provide translations that are academically rigorous.<br />
+<br />
+## Output format:<br />
+<br />
+Please output strictly in the following format<br />
+<br />
+### Direct Translation<br />
+{Placeholder}<br />
+<br />
+***<br />
+<br />
+### Identified Issues<br />
+{Placeholder}<br />
+<br />
+***<br />
+<br />
+### Reinterpreted Translation<br />
+{Placeholder}<br />
+<br />
+Please translate the following content into English:<br />
+<br />
+-----英文 Prompt End------</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1737732732149457076#m</id>
+            <title>R to @dotey: 以下是给GPT Builder提供的中文Prompt：
+
+-----中文 Prompt Start------
+
+现在我要写一个将中文翻译成英文科研论文的GPT，请参照以下Prompt制作，注意都用英文生成：
+
+## 角色
+你是一位科研论文审稿员，擅长写作高质量的英文科研论文。请你帮我准确且学术性地将以下中文翻译成英文，风格与英文科研论文保持一致。
+
+## 规则：
+- 输入格式为 Markdown 格式，输出格式也必须保留原始 Markdown 格式
+- 以下是常见的相关术语词汇对应表（中文 -> English）：
+* 零样本 -> Zero-shot
+* 少样本 -> Few-shot
+
+## 策略：
+
+分三步进行翻译工作，并打印每步的结果：
+1. 根据中文内容直译成英文，保持原有格式，不要遗漏任何信息
+2. 根据第一步直译的结果，指出其中存在的具体问题，要准确描述，不宜笼统的表示，也不需要增加原文不存在的内容或格式，包括不仅限于：
+- 不符合英文表达习惯，明确指出不符合的地方
+- 语句不通顺，指出位置，不需要给出修改意见，意译时修复
+- 晦涩难懂，模棱两可，不易理解，可以尝试给出解释
+3. 根据第一步直译的结果和第二步指出的问题，重新进行意译，保证内容的原意的基础上，使其更易于理解，更符合英文科研论文的表达习惯，同时保持原有的格式不变
+
+## 格式
+返回格式如下，"{xxx}"表示占位符：
+
+### 直译
+{直译结果}
+
+***
+
+### 问题
+{直译的具体问题列表}
+
+***
+
+### 意译
+```
+{意译结果}
+```
+
+现在请按照上面的要求从第一行开始翻译以下内容为英文：
+```
+-----中文 Prompt End------</title>
+            <link>https://nitter.cz/dotey/status/1737732732149457076#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737732732149457076#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 21 Dec 2023 07:12:23 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>以下是给GPT Builder提供的中文Prompt：<br />
+<br />
+-----中文 Prompt Start------<br />
+<br />
+现在我要写一个将中文翻译成英文科研论文的GPT，请参照以下Prompt制作，注意都用英文生成：<br />
+<br />
+## 角色<br />
+你是一位科研论文审稿员，擅长写作高质量的英文科研论文。请你帮我准确且学术性地将以下中文翻译成英文，风格与英文科研论文保持一致。<br />
+<br />
+## 规则：<br />
+- 输入格式为 Markdown 格式，输出格式也必须保留原始 Markdown 格式<br />
+- 以下是常见的相关术语词汇对应表（中文 -> English）：<br />
+* 零样本 -> Zero-shot<br />
+* 少样本 -> Few-shot<br />
+<br />
+## 策略：<br />
+<br />
+分三步进行翻译工作，并打印每步的结果：<br />
+1. 根据中文内容直译成英文，保持原有格式，不要遗漏任何信息<br />
+2. 根据第一步直译的结果，指出其中存在的具体问题，要准确描述，不宜笼统的表示，也不需要增加原文不存在的内容或格式，包括不仅限于：<br />
+- 不符合英文表达习惯，明确指出不符合的地方<br />
+- 语句不通顺，指出位置，不需要给出修改意见，意译时修复<br />
+- 晦涩难懂，模棱两可，不易理解，可以尝试给出解释<br />
+3. 根据第一步直译的结果和第二步指出的问题，重新进行意译，保证内容的原意的基础上，使其更易于理解，更符合英文科研论文的表达习惯，同时保持原有的格式不变<br />
+<br />
+## 格式<br />
+返回格式如下，"{xxx}"表示占位符：<br />
+<br />
+### 直译<br />
+{直译结果}<br />
+<br />
+***<br />
+<br />
+### 问题<br />
+{直译的具体问题列表}<br />
+<br />
+***<br />
+<br />
+### 意译<br />
+```<br />
+{意译结果}<br />
+```<br />
+<br />
+现在请按照上面的要求从第一行开始翻译以下内容为英文：<br />
+```<br />
+-----中文 Prompt End------</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1737732681280942570#m</id>
+            <title>应网友要求，制作了一个将中文翻译成英文科研论文的GPT https://chat.openai.com/g/g-HejNUzj8l-translate-chinese-to-academic-english-ke-yan-lun-wen-zhong-fan-ying ，Prompt 和之前分享的英文翻译成中文类似的，也是分成三步：
+1. 中文翻译成英文
+2. 检查翻译的问题，例如不符合英文表达习惯，意思不清晰等，并指出位置和解释
+3. 基于上面两步重新意译
+
+我英语不够好，无法直接分辨出质量是否足够好，为了测试效果，我找了篇正经的中文论文，给它翻译，翻译成英文后，再把英文发到我的英文翻译中文GPT翻译 https://chat.openai.com/g/g-uBhKUJJTl-ke-ji-wen-zhang-fan-yi ，将翻译后的中文对比原文，发现除了用词有点差别，基本上意思都保留的挺好，应该还不错。（具体效果可以参考图一和图二）
+
+在制作GPT时，我是先用中文写好Prompt，然后让GPT帮我修改Prompt，再手动调整一下就完成了。（参考图三）
+
+Prompt 见评论</title>
+            <link>https://nitter.cz/dotey/status/1737732681280942570#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737732681280942570#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 21 Dec 2023 07:12:11 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>应网友要求，制作了一个将中文翻译成英文科研论文的GPT <a href="https://chat.openai.com/g/g-HejNUzj8l-translate-chinese-to-academic-english-ke-yan-lun-wen-zhong-fan-ying">chat.openai.com/g/g-HejNUzj8…</a> ，Prompt 和之前分享的英文翻译成中文类似的，也是分成三步：<br />
+1. 中文翻译成英文<br />
+2. 检查翻译的问题，例如不符合英文表达习惯，意思不清晰等，并指出位置和解释<br />
+3. 基于上面两步重新意译<br />
+<br />
+我英语不够好，无法直接分辨出质量是否足够好，为了测试效果，我找了篇正经的中文论文，给它翻译，翻译成英文后，再把英文发到我的英文翻译中文GPT翻译 <a href="https://chat.openai.com/g/g-uBhKUJJTl-ke-ji-wen-zhang-fan-yi">chat.openai.com/g/g-uBhKUJJT…</a> ，将翻译后的中文对比原文，发现除了用词有点差别，基本上意思都保留的挺好，应该还不错。（具体效果可以参考图一和图二）<br />
+<br />
+在制作GPT时，我是先用中文写好Prompt，然后让GPT帮我修改Prompt，再手动调整一下就完成了。（参考图三）<br />
+<br />
+Prompt 见评论</p>
+<p><a href="https://nitter.cz/dotey/status/1737627478007456183#m">nitter.cz/dotey/status/1737627478007456183#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0IycDJUU1d3QUFFajNwLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0IycDUzblhRQUFHMVA5LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0IycWpUOVh3QUFJazJqLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1737706407875473545#m</id>
             <title>R to @dotey: 翻译的这个例子有讨论余地，重点还是prompt😅</title>
             <link>https://nitter.cz/dotey/status/1737706407875473545#m</link>
@@ -506,144 +862,6 @@ https://x.com/reach_vb/status/1737559520866636061?s=20</title>
 <br />
 <a href="https://x.com/reach_vb/status/1737559520866636061?s=20">x.com/reach_vb/status/173755…</a></p>
 <p><a href="https://nitter.cz/reach_vb/status/1737559520866636061#m">nitter.cz/reach_vb/status/1737559520866636061#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1737561925016330649#m</id>
-            <title>不知道，帮转</title>
-            <link>https://nitter.cz/dotey/status/1737561925016330649#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737561925016330649#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 20 Dec 2023 19:53:39 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>不知道，帮转</p>
-<p><a href="https://nitter.cz/xiaohuggg/status/1737501193058877916#m">nitter.cz/xiaohuggg/status/1737501193058877916#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1737429065949479003#m</id>
-            <title>RT by @dotey: 还能这么玩，自己雕刻了一个低分辨率模型，然后利用Magnific AI一直放大，实现了前几天类似谷歌那个无限放大项目的效果。</title>
-            <link>https://nitter.cz/op7418/status/1737429065949479003#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1737429065949479003#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 20 Dec 2023 11:05:43 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>还能这么玩，自己雕刻了一个低分辨率模型，然后利用Magnific AI一直放大，实现了前几天类似谷歌那个无限放大项目的效果。</p>
-<p><a href="https://nitter.cz/MartinNebelong/status/1737404691581898826#m">nitter.cz/MartinNebelong/status/1737404691581898826#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1737549740592488871#m</id>
-            <title>在 Mac 上借助 MLX 运行微软的小语言模型 Phi-2 的教程，很详细。
-Phi-2 对资源要求不高，能力也还不错（详见：https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/），有兴趣的可以试试。</title>
-            <link>https://nitter.cz/dotey/status/1737549740592488871#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1737549740592488871#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 20 Dec 2023 19:05:14 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>在 Mac 上借助 MLX 运行微软的小语言模型 Phi-2 的教程，很详细。<br />
-Phi-2 对资源要求不高，能力也还不错（详见：<a href="https://www.microsoft.com/en-us/research/blog/phi-2-the-surprising-power-of-small-language-models/">microsoft.com/en-us/research…</a>），有兴趣的可以试试。</p>
-<p><a href="https://nitter.cz/reach_vb/status/1737541383399895360#m">nitter.cz/reach_vb/status/1737541383399895360#m</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczNzEyNTkyNzY0ODExNjczNi9qMF9KSkZjeD9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1737492846041530578#m</id>
-            <title>RT by @dotey: 刚看到苹果发的这个论文《使用有限的内存实现更快的 LLM 推理》。通过将将模型参数保存在闪存里，根据需要移动到DRAM。
-
-使得能够运行的模型大小是可用DRAM的两倍，与传统的CPU和GPU加载方法相比，推理速度分别提高了4-5倍和20-25倍。</title>
-            <link>https://nitter.cz/op7418/status/1737492846041530578#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1737492846041530578#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 20 Dec 2023 15:19:10 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>刚看到苹果发的这个论文《使用有限的内存实现更快的 LLM 推理》。通过将将模型参数保存在闪存里，根据需要移动到DRAM。<br />
-<br />
-使得能够运行的模型大小是可用DRAM的两倍，与传统的CPU和GPU加载方法相比，推理速度分别提高了4-5倍和20-25倍。</p>
-<p><a href="https://nitter.cz/_akhaliq/status/1737300118070534468#m">nitter.cz/_akhaliq/status/1737300118070534468#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1737460981331288421#m</id>
-            <title>RT by @dotey: XHS-Downloader：小红书采集器 
-
-✅ 采集小红书图文/视频作品信息
-✅ 提取小红书图文/视频作品下载地址
-✅ 下载小红书无水印图文/视频作品文件
-✅ 自动跳过已下载的作品文件
-✅ 作品文件完整性处理机制
-✅ 持久化储存作品信息至文件
-
-GitHub：https://github.com/JoeanAmier/XHS-Downloader</title>
-            <link>https://nitter.cz/xiaohuggg/status/1737460981331288421#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1737460981331288421#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 20 Dec 2023 13:12:33 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>XHS-Downloader：小红书采集器 <br />
-<br />
-✅ 采集小红书图文/视频作品信息<br />
-✅ 提取小红书图文/视频作品下载地址<br />
-✅ 下载小红书无水印图文/视频作品文件<br />
-✅ 自动跳过已下载的作品文件<br />
-✅ 作品文件完整性处理机制<br />
-✅ 持久化储存作品信息至文件<br />
-<br />
-GitHub：<a href="https://github.com/JoeanAmier/XHS-Downloader">github.com/JoeanAmier/XHS-Do…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0J5elhIR2JVQUFjb2hQLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1737518777481535521#m</id>
-            <title>RT by @dotey: ChatGPT聊天记录可以归档了，再也不用看着一堆没用碍眼的聊天记录了。
-
-点击想归档的聊天记录右侧三个点，选择Archive Chat就可以了，已经归档的内容可以在设置中查看。</title>
-            <link>https://nitter.cz/op7418/status/1737518777481535521#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1737518777481535521#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 20 Dec 2023 17:02:12 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>ChatGPT聊天记录可以归档了，再也不用看着一堆没用碍眼的聊天记录了。<br />
-<br />
-点击想归档的聊天记录右侧三个点，选择Archive Chat就可以了，已经归档的内容可以在设置中查看。</p>
-<p><a href="https://nitter.cz/OpenAI/status/1737517702766633063#m">nitter.cz/OpenAI/status/1737517702766633063#m</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mzc1MTgzMzk3OTc0NTQ4NDgvcHUvaW1nL2Rjakt4NG80WnBUTzE1TlUuanBn" />
                 ]]>
             </content:encoded>
         </item>
