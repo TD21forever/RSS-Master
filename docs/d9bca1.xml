@@ -5,6 +5,29 @@
         <link>https://www.infoq.cn/topic/AI</link>
         
         <item>
+            <id>https://www.infoq.cn/article/htR9SxSgVDy9KhUUY4RX</id>
+            <title>搭起AI和DB之间“桥梁”！阿里云开源新技术：将AI算法“一键部署”进数据库</title>
+            <link>https://www.infoq.cn/article/htR9SxSgVDy9KhUUY4RX</link>
+            <guid isPermaLink="false">https://www.infoq.cn/article/htR9SxSgVDy9KhUUY4RX</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 21 Dec 2023 03:16:35 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 数据库国际顶会VLDB2024, PilotScope中间件, AI算法, 开源
+<br>
+<br>
+总结: 阿里云的PilotScope中间件成功入围数据库国际顶会VLDB2024，并宣布将其全部技术免费开源。PilotScope中间件旨在实现将AI算法在数据库中的一键部署，为AI和数据库之间搭建了桥梁。该中间件屏蔽了不同数据库的细节，提供了抽象的、可对AI调用的接口，使得同一个AI方法可以支持各种数据库。此外，PilotScope对AI算法的嵌入做了最小的扰动和侵入，不对系统的稳定性造成影响。经过两年的研发，PilotScope已基本完成，并在阿里云内部展开试点应用。未来，希望通过PilotScope工具将AI算法真正大规模地应用到数据库系统中，提升数据库系统的效率和效果。 </div>
+                        <hr>
+                    
+                    <p>12月20日，数据库国际顶会VLDB2024公布新一批论文，阿里云旨在实现将AI算法在数据库“一键部署”的PilotScope中间件相关论文成功入围。同日，阿里云宣布将PilotScope全部技术免费开源。</p><p>&nbsp;</p><p>开源地址：<a href="https://github.com/alibaba/pilotscope">https://github.com/alibaba/pilotscope</a>"</p><p></p><h2>在AI和DB之间“搭桥”</h2><p></p><p>&nbsp;</p><p>AI 和数据库的结合在业内已经探索了很长一段时间，其中AI for DB 是利用 AI 技术替换数据库里的某些功能，使其性能得到提升。</p><p>&nbsp;</p><p>这个方案需要依赖深度学习或者说大模型。但难点在于，AI开发和数据库开发基本是两拨人，数据库特别复杂，AI开发人员很难梳理清楚其中的结构，得到嵌入效果的同时还要保证数据库的稳定性。同时，AI方法非常多样，数据库底层架构也不尽相同，这导致嵌入的模式、交互需求、具体底层实现方式都各不相同，如果做定制化就会带来很大的时间成本，不利于大规模应用。</p><p>&nbsp;</p><p>“AI做了很多，DB做了很多，但中间的桥梁没有人干，这个桥是不通的。我们现在做的事情就是要把这个桥搭建起来。”PilotScope项目负责人朱鎔说道。</p><p></p><p><img src="https://static001.geekbang.org/infoq/96/965e270024da0ee69ed41bd0d20a5fd6.png" /></p><p></p><p>根据朱鎔的介绍，PilotScope 屏蔽不同数据库异构的细节，提供了抽象的、可对AI调用的一整套接口。PilotScope把数据库交互需求及嵌入过程，抽象成了一个个的接口，将最难的底层细节开发部分屏蔽掉，用户可以直接使用，AI工程师不用关注数据库的细节。</p><p>&nbsp;</p><p>理论上，用户只要支持这个接口，同一个AI方法可以支持各种数据库，包括阿里云、微软、AWS以及PostgreSQL等数据库，开发者可以用一个方法、写一次代码就支持所有类型数据库在上面的运行。接口还可以不断扩展，支持不同AI方法的需求，同时通过开源的方式来增加支持AI算法的多样性。</p><p>&nbsp;</p><p>另外，PilotScope对AI算法的嵌入做了最小的扰动和侵入，不对系统的稳定性造成影响。用户不开启PilotScope时可以直接忽略它的存在，而使用PilotScope并把某些AI算法进行了相应运行后，PilotScope的检测机制会处理和限定模型的异常输出，对于不正常的结果会直接打断，让数据用原来的模块运行。</p><p></p><p><img src="https://static001.geekbang.org/infoq/6e/6ec0d41a67e0b098d14ebfd13804e0cd.png" /></p><p></p><p>&nbsp;据了解，当前PilotScope针对参数调优、索引推荐、基数估计、查询优化等数据库主流任务，预置了10多种AI算法，并完成PostgreSQL和Spark等两大主流开源数据库的适配打样。根据团队的实验数据，使用PilotScope将AI算法嵌入数据库，较传统“硬植入”方法，查询优化等任务提速1-2倍不等，并且PilotScope本身对部署产生的额外代价基本可忽略。</p><p></p><h2>十多人，用了两年做研发</h2><p></p><p>&nbsp;</p><p>PilotScope项目是一个深度交叉的领域：要有懂算法的研发人员明确算法具体需求，也要有懂系统的研发将需求真正抽象成系统化设计；除了要有懂AI的人，还要有懂数据库的人，了解数据库架构、嵌入模式、与数据库的交互等；在系统设计的人员抽象出系统模式后，还需要开发人员用实际的代码把构思实现出来；AI for DB是学界想做的算法探索研究，业界想做一些实际落地，两者的综合平衡对满足开源社区是比较重要的。</p><p>&nbsp;</p><p>从上可以看出，这样的研发难度是不小的。朱鎔表示，从有做PilotScope的想法开始到今天正式搞出来，十几个人的团队差不多用了两年时间才基本完成。</p><p>&nbsp;</p><p>做PilotScope的想法来源于阿里云团队在做AI for DB中遇到了测试、部署、落地等各种痛点问题。2021年夏季之前，团队是点对点地解决，然后发现通用性差、成本高，很难持续下去。之后，团队开始构思这样的一个中间件，在与业务部门沟通、研究了学界最新进展后，才将最终需求确认下来，包括要支持哪些主流方法、支持到什么程度等。</p><p>&nbsp;</p><p>整个2022年，团队一直在解决“两端解耦、让桥顺畅”的难题，到了9月份左右才开始做真正的系统研发。考虑到两个数据库的适配，团队要做很多细小的修改、打磨、迭代，陆陆续续到今年八九月份才算基本成熟。</p><p>&nbsp;</p><p>据悉，PilotScope目前已在阿里云内部展开试点应用。朱鎔表示，未来将做一些产业化部署，希望通过这个工具，把AI for DB的算法真正大规模的地应用到数据库系统里，提升数据库系统的效率和效果。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.infoq.cn/article/74LiswphPqhsxDFiO4m8</id>
             <title>一代更比一代强，AI 时代的至强如何为云服务保驾护航？</title>
             <link>https://www.infoq.cn/article/74LiswphPqhsxDFiO4m8</link>
@@ -667,29 +690,6 @@
                         <hr>
                     
                     <p><a href="https://qcon.infoq.cn/2023/shanghai/?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=9&amp;utm_term=1215&amp;utm_content=quancheng">QCon 全球软件开发大会</a>"，将于 12 月在上海召开。腾讯金融云技术总监全成将发表题为《<a href="https://qcon.infoq.cn/2023/shanghai/presentation/5611?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=9&amp;utm_term=1215&amp;utm_content=quancheng">大语言模型金融智能应用研发实战与探索</a>"》主题分享，探讨基于 AI 大语言模型的金融智能应用平台搭建实践，在实际应用场景中，如何利用 AI 大语言模型端到端的解决实际问题，以及以工程化视角，如何搭建可维护可持续可运维的金融智能化应用。</p><p></p><p><a href="https://qcon.infoq.cn/2023/shanghai/presentation/5611?utm_source=infoqweb&amp;utm_medium=teacherart&amp;utm_campaign=9&amp;utm_term=1215&amp;utm_content=quancheng">全成</a>"，之前曾在某金融集团公司参与关系网络风控识别项目，和说话人声纹识别比对项目；在券商互联网企业参与过大数据量化投资项目。目前在腾讯主要参与 TX2SQL 大模型智能应用项目，负责专业知识及推理大模型微调，构建端到端 TX2SQL 问答系统。他在本次会议的演讲内容如下：</p><p></p><p>演讲：大语言模型金融智能应用研发实战与探索</p><p></p><p>介绍基于 AI 大语言模型的金融智能应用平台搭建实践，分解在实际应用场景中，如何利用 AI 大语言模型端到端的解决实际问题，并以工程化视角，分享如何搭建可维护可持续可运维的金融智能化应用。</p><p></p><p>演讲提纲：</p><p></p><p>AI 大语言模型在实际应用中面临的问题及挑战AI 大语言模型金融智能应用架构，包括业务架构、技术架构、模型矩阵AI 大语言模型金融智能应用介绍，包括智能客服、TXT2SQL 数据分析、OCR 平台</p><p></p><p>听众受益点：</p><p></p><p>○ 大模型时代，智能化应用的研发模式</p><p>○ 端到端智能应用搭建与大模型微调、Prompt 工程等</p><p></p><p>除上述演讲外，QCon 上海还将围绕&nbsp;<a href="https://qcon.infoq.cn/2023/shanghai/track/1595?utm_source=infoqweb&amp;utm_medium=teacherart">GenAI和通用大模型应用探索</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1596?utm_source=infoqweb&amp;utm_medium=teacherart">AI&nbsp;Agent&nbsp;与行业融合应用的前景</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1597?utm_source=infoqweb&amp;utm_medium=teacherart">LLM&nbsp;时代的性能优化</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1598?utm_source=infoqweb&amp;utm_medium=teacherart">智能化信创软件&nbsp;IDE</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1602?utm_source=infoqweb&amp;utm_medium=teacherart">面向人工智能时代的架构</a>"、<a href="https://qcon.infoq.cn/2023/shanghai/track/1604?utm_source=infoqweb&amp;utm_medium=teacherart">性能工程：提升效率和创新的新方法</a>"等专题进行交流。</p><p></p><p>QCon 上海 2023，相约 12 月！ 9 折优惠仅剩最后 1 天，现在购票立减￥680！咨询购票请联系：18514549229（微信同手机号）。</p><p></p><p><img src="https://static001.geekbang.org/infoq/01/0113b3dfb187d5f9988b7eb16d2e0594.png" /></p><p></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.infoq.cn/article/DWIO6WPCGEzkcXsHISgz</id>
-            <title>2023 英特尔 On 技术创新大会中国站“剧透”：五大专题论坛，全面赋能 AI 开发</title>
-            <link>https://www.infoq.cn/article/DWIO6WPCGEzkcXsHISgz</link>
-            <guid isPermaLink="false">https://www.infoq.cn/article/DWIO6WPCGEzkcXsHISgz</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 14 Dec 2023 07:44:43 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 人工智能, 新一代 AI PC 计算平台, 新一代至强平台, 边云协同
-<br>
-<br>
-总结: 中国专家将深度讲解最新一代增强 AI 能力的计算平台，支持开放、多架构的软件方案，塑造未来的技术和应用创新。 </div>
-                        <hr>
-                    
-                    <p>中国专家将深度讲解最新一代增强 AI 能力的计算平台，支持开放、多架构的软件方案，塑造未来的技术和应用创新。欢迎大家扫描海报二维码注册参会！</p><p></p><p><img src="https://static001.geekbang.org/infoq/ae/ae4772fd58da5f636300260425eff44c.png" /></p><p></p><p></p><h4>&nbsp;1. 人工智能</h4><p></p><p>在包括客户端、边缘计算和数据中心的英特尔平台上，可以针对不同业务场景，选用各种英特尔® CPU、GPU 和 ASIC 等深度学习计算引擎，配以 OpenVINO™ 等开发及优化工具链，加速生成式人工智能的持续调参优化和快速部署，让开发者能够灵活便捷地开发和交付面向消费者和企业级的 LLM/AIGC 业务软件。</p><p></p><p><img src="https://static001.geekbang.org/infoq/7a/7ae38b173df6c56f9ff1a32fc66201d0.png" /></p><p></p><p></p><h4>&nbsp;2. 新一代 AI PC 计算平台</h4><p></p><p>为 PC 计算平台开发 AI 应用需要强大的硬件性能、优化的能耗、先进的工具和开放的生态系统。在本专题中，您将深入了解英特尔新一代 AI PC 硬件平台及其出色的连接性如何助力您更轻松地进行 AI 应用开发和游戏开发。还将展示英特尔开放的软硬件生态系统和与合作伙伴推出的最新解决方案，帮助您了解客户端开发领域的前沿动态。</p><p></p><p><img src="https://static001.geekbang.org/infoq/3d/3d1cf9d32a884cd32ba6980e18daa33b.png" /></p><p></p><p></p><h4>&nbsp;3. 新一代至强平台</h4><p></p><p>云计算和大模型时代浪潮正在革命性地重新定义云计算，全新一代英特尔® 至强® 可扩展处理器应运而生。其内置的英特尔® AMX 加速引擎为 AI 带来极致加速性能表现，其他众多内置加速器 可对各个云业务进行加速和性能优化；同时，在英特尔® SGX、英特尔® TDX “双保险” 的加持下，安全的运行环境能为业务保驾护航；英特尔还具备丰富的全栈软件优化，赋能各个云软件，充分释放至强潜能, 软硬协同加速云计算及 AI 创新。</p><p></p><p><img src="https://static001.geekbang.org/infoq/78/780d70d67d4d3e5342fa3b0260616cde.png" /></p><p></p><p></p><h4>&nbsp;4. 边云协同</h4><p></p><p>在云原生开发和边缘智能方面处于领先地位的英特尔，协同多年来与创新合作伙伴合作所积累的现代“边云协同”应用程序开发经验、技术、产品和平台，赋能以生成式 AI 大模型为核心的混合式 AI 解决方案，加速其商业化落地。</p><p></p><p><img src="https://static001.geekbang.org/infoq/82/82fa0feeb70459425a51977ffadcea45.png" /></p><p></p><p></p><h4>&nbsp;5. 先进技术</h4><p></p><p>本专题中将介绍，为计算行业面临的最大挑战寻求变革性解决方案，并了解将影响英特尔未来 2-5 年及以后工作的技术发展。主题包括摩尔定律的未来、芯片设计的未来、量子计算、AI 的未来、神经拟态计算、面向“双碳”的智能计算等等。</p><p></p><p><img src="https://static001.geekbang.org/infoq/f9/f901a884d2635ae1c3a59ff308e56c9d.png" /></p><p></p><p>英特尔 On 技术创新大会中国站，2023 年 12 月 19 日 09:00 正式上线，欢迎大家即刻扫码注册，参加一场面向智算时代开发者的年度技术盛会！助力开发者，让 AI 无处不在！</p>
                 ]]>
             </content:encoded>
         </item>
