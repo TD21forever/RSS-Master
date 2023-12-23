@@ -5,6 +5,239 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1738252455836856366#m</id>
+            <title>RT by @op7418: 卧槽，字节昨天发布这个项目DreamTuner，可以一举解决图像生成中角色一致性的问题。
+
+效果也太好了，可以将输入图片的角色在生成新图是完美保留，并且融合度非常好，这下小说、漫画和视频的人物一致性和商品一致性问题彻底解决了。
+
+并且可以和ContorlNet联动确保动画的稳定，间接实现了前段时间的让单张图片动起来的功能。
+
+项目简介：
+我们提出了一种新颖的方法DreamTurner，该方法将定制主题的参考信息从粗到细注入。首先提出了一个主题编码器，用于粗略主题身份保留，通过额外的注意力层在视觉-文本交叉注意力之前引入了压缩的一般主题特征。 
+然后，注意到预训练的文本到图像模型中的自注意力层自然地执行了详细的空间上下文关联功能，我们将其修改为自主题注意力层，以细化目标主题的细节，生成的图像从参考图像和自身查询详细特征。
+值得强调的是，自主题注意力是一种优雅、有效且无需训练的方法，用于保持定制概念的详细特征，可在推断过程中作为即插即用的解决方案。
+最后，通过对单个图像进行额外微调，DreamTurner 在受主题驱动的图像生成方面取得了显著的表现，可由文本或其他条件（如姿势）进行控制。
+
+项目地址：https://dreamtuner-diffusion.github.io/</title>
+            <link>https://nitter.cz/op7418/status/1738252455836856366#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738252455836856366#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 22 Dec 2023 17:37:35 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>卧槽，字节昨天发布这个项目DreamTuner，可以一举解决图像生成中角色一致性的问题。<br />
+<br />
+效果也太好了，可以将输入图片的角色在生成新图是完美保留，并且融合度非常好，这下小说、漫画和视频的人物一致性和商品一致性问题彻底解决了。<br />
+<br />
+并且可以和ContorlNet联动确保动画的稳定，间接实现了前段时间的让单张图片动起来的功能。<br />
+<br />
+项目简介：<br />
+我们提出了一种新颖的方法DreamTurner，该方法将定制主题的参考信息从粗到细注入。首先提出了一个主题编码器，用于粗略主题身份保留，通过额外的注意力层在视觉-文本交叉注意力之前引入了压缩的一般主题特征。 <br />
+然后，注意到预训练的文本到图像模型中的自注意力层自然地执行了详细的空间上下文关联功能，我们将其修改为自主题注意力层，以细化目标主题的细节，生成的图像从参考图像和自身查询详细特征。<br />
+值得强调的是，自主题注意力是一种优雅、有效且无需训练的方法，用于保持定制概念的详细特征，可在推断过程中作为即插即用的解决方案。<br />
+最后，通过对单个图像进行额外微调，DreamTurner 在受主题驱动的图像生成方面取得了显著的表现，可由文本或其他条件（如姿势）进行控制。<br />
+<br />
+项目地址：<a href="https://dreamtuner-diffusion.github.io/">dreamtuner-diffusion.github.…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ItREx3cmJNQVFRYzFZLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ItRFRaMWJNQVVTOEx2LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1738255300627739080#m</id>
+            <title>RT by @op7418: 阿里之后是字节？连着发，冲业绩呢，字节推出了从单张面部图像生成不同角度的3D图像的项目DiffPortrait3D。
+
+DiffPortrait3D 擅长生成高保真且 3D 一致的图像合成，无需任何微调，DiffPortrait3D 在各种面部肖像中都普遍有效，包括但不限于具有夸张表情的面部、宽广的相机视野和艺术描绘。
+
+项目简介：
+DiffPortrait3D，这是一种条件扩散模型，能够从单个野外肖像中合成 3D 一致的照片级真实感新颖的视图。
+
+具体来说，给定单个 RGB 输入，我们的目标是合成从新颖的相机视图渲染的合理但一致的面部细节，同时保留身份和面部表情。我们的零镜头方法取代了耗时的优化和微调，可以很好地推广到任意人脸肖像，包括未摆姿势的相机视图、极端的面部表情和多样化的艺术描绘。
+
+其核心是，我们利用在大规模图像数据集上预先训练的 2D 扩散模型的生成先验作为我们的渲染主干，而去噪则是通过对外观和相机姿势的解开的细心控制来引导。
+
+为了实现这一点，我们首先将参考图像中的外观上下文注入到冻结 UNet 的自注意力层中。然后使用新颖的条件控制模块来操纵渲染视图，该模块通过从同一视图观看交叉主体的条件图像来解释相机姿势。
+
+此外，我们插入了一个可训练的交叉视图注意模块来增强视图一致性，并在推理过程中通过新颖的 3D 感知噪声生成过程进一步增强了视图一致性。
+
+我们在具有挑战性的野外和多视图基准测试中，在定性和定量上展示了最先进的结果。
+
+论文地址：https://browse.arxiv.org/html/2312.13016v2</title>
+            <link>https://nitter.cz/op7418/status/1738255300627739080#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738255300627739080#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 22 Dec 2023 17:48:53 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>阿里之后是字节？连着发，冲业绩呢，字节推出了从单张面部图像生成不同角度的3D图像的项目DiffPortrait3D。<br />
+<br />
+DiffPortrait3D 擅长生成高保真且 3D 一致的图像合成，无需任何微调，DiffPortrait3D 在各种面部肖像中都普遍有效，包括但不限于具有夸张表情的面部、宽广的相机视野和艺术描绘。<br />
+<br />
+项目简介：<br />
+DiffPortrait3D，这是一种条件扩散模型，能够从单个野外肖像中合成 3D 一致的照片级真实感新颖的视图。<br />
+<br />
+具体来说，给定单个 RGB 输入，我们的目标是合成从新颖的相机视图渲染的合理但一致的面部细节，同时保留身份和面部表情。我们的零镜头方法取代了耗时的优化和微调，可以很好地推广到任意人脸肖像，包括未摆姿势的相机视图、极端的面部表情和多样化的艺术描绘。<br />
+<br />
+其核心是，我们利用在大规模图像数据集上预先训练的 2D 扩散模型的生成先验作为我们的渲染主干，而去噪则是通过对外观和相机姿势的解开的细心控制来引导。<br />
+<br />
+为了实现这一点，我们首先将参考图像中的外观上下文注入到冻结 UNet 的自注意力层中。然后使用新颖的条件控制模块来操纵渲染视图，该模块通过从同一视图观看交叉主体的条件图像来解释相机姿势。<br />
+<br />
+此外，我们插入了一个可训练的交叉视图注意模块来增强视图一致性，并在推理过程中通过新颖的 3D 感知噪声生成过程进一步增强了视图一致性。<br />
+<br />
+我们在具有挑战性的野外和多视图基准测试中，在定性和定量上展示了最先进的结果。<br />
+<br />
+论文地址：<a href="https://browse.arxiv.org/html/2312.13016v2">browse.arxiv.org/html/2312.1…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ItRjh6amJNQUU4U2NGLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1738257502205325535#m</id>
+            <title>RT by @op7418: 室内设计师福音，Meta推出了ControlRoom3D，用户只需要拖动简单的3D方块并定义方块代表的家具，ControlRoom3D就可以生成3D的室内布局图，并且可以基于3D白模再生成对应贴图，直接渲染成完整的室内设计3D方案。
+
+项目简介：
+手动创建AR/VR应用程序的3D环境是一个复杂的过程，需要对3D建模软件有专业知识。先驱性的工作通过根据文本风格描述生成房间网格来促进这一过程。
+
+然而，许多自动生成的3D网格并不符合典型的房间布局，影响了它们的可信度，例如在一个卧室里放置了几张床。
+
+为了解决这些挑战，我们提出了ControlRoom3D，一种新颖的方法来生成高质量的房间网格。我们方法的核心是用户定义的3D语义代理房间，它基于语义边界框和整体房间风格的文本描述勾勒出了粗略的房间布局。
+
+我们的关键见解是，当渲染为2D时，这种3D表示提供了有价值的几何和语义信息，可以控制强大的2D模型生成与代理房间相匹配的3D一致纹理和几何。
+
+通过包括定量指标和定性用户评估在内的广泛研究支持，我们的方法生成了多样且全球可信的3D房间网格，从而使用户能够轻松设计3D房间，而无需专业知识。
+
+项目地址：https://jonasschult.github.io/ControlRoom3D/</title>
+            <link>https://nitter.cz/op7418/status/1738257502205325535#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738257502205325535#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 22 Dec 2023 17:57:38 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>室内设计师福音，Meta推出了ControlRoom3D，用户只需要拖动简单的3D方块并定义方块代表的家具，ControlRoom3D就可以生成3D的室内布局图，并且可以基于3D白模再生成对应贴图，直接渲染成完整的室内设计3D方案。<br />
+<br />
+项目简介：<br />
+手动创建AR/VR应用程序的3D环境是一个复杂的过程，需要对3D建模软件有专业知识。先驱性的工作通过根据文本风格描述生成房间网格来促进这一过程。<br />
+<br />
+然而，许多自动生成的3D网格并不符合典型的房间布局，影响了它们的可信度，例如在一个卧室里放置了几张床。<br />
+<br />
+为了解决这些挑战，我们提出了ControlRoom3D，一种新颖的方法来生成高质量的房间网格。我们方法的核心是用户定义的3D语义代理房间，它基于语义边界框和整体房间风格的文本描述勾勒出了粗略的房间布局。<br />
+<br />
+我们的关键见解是，当渲染为2D时，这种3D表示提供了有价值的几何和语义信息，可以控制强大的2D模型生成与代理房间相匹配的3D一致纹理和几何。<br />
+<br />
+通过包括定量指标和定性用户评估在内的广泛研究支持，我们的方法生成了多样且全球可信的3D房间网格，从而使用户能够轻松设计3D房间，而无需专业知识。<br />
+<br />
+项目地址：<a href="https://jonasschult.github.io/ControlRoom3D/">jonasschult.github.io/Contro…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzgyNTcxMjYxMzU2NDAwNjUvcHUvaW1nL1dMbFNOY0ZHXzdZTDlpUHIuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1738258672063779017#m</id>
+            <title>RT by @op7418: 罕见的AI音乐生成介绍和教程，介绍如何使用 AI 生成 MIDI 钢琴音乐，并在 JAX 和 Equinox 中训练。
+
+作者使用miditok库进行REMI tokeniser并训练字节对编码（BPE）tokeniser. BPE tokeniser将常见序列组合成单个token, 作者希望这些token可以代表常见模式。</title>
+            <link>https://nitter.cz/op7418/status/1738258672063779017#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738258672063779017#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 22 Dec 2023 18:02:17 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>罕见的AI音乐生成介绍和教程，介绍如何使用 AI 生成 MIDI 钢琴音乐，并在 JAX 和 Equinox 中训练。<br />
+<br />
+作者使用miditok库进行REMI tokeniser并训练字节对编码（BPE）tokeniser. BPE tokeniser将常见序列组合成单个token, 作者希望这些token可以代表常见模式。</p>
+<p><a href="https://nitter.cz/alexfmckinney/status/1738186934432792973#m">nitter.cz/alexfmckinney/status/1738186934432792973#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1738260817097953530#m</id>
+            <title>RT by @op7418: 这个等不了阿里自己实现Animate Anyone单图生成动作视频的老哥进展很快啊。
+
+已经发布了训练和推理代码，第一阶段训练已经完成，马上就会发布权重文件。
+
+项目基于magic-animate和AnimateDiff构建。
+
+https://github.com/guoqincode/AnimateAnyone-unofficial</title>
+            <link>https://nitter.cz/op7418/status/1738260817097953530#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738260817097953530#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 22 Dec 2023 18:10:48 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这个等不了阿里自己实现Animate Anyone单图生成动作视频的老哥进展很快啊。<br />
+<br />
+已经发布了训练和推理代码，第一阶段训练已经完成，马上就会发布权重文件。<br />
+<br />
+项目基于magic-animate和AnimateDiff构建。<br />
+<br />
+<a href="https://github.com/guoqincode/AnimateAnyone-unofficial">github.com/guoqincode/Animat…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ItSy1pZmJNQUFBeG9rLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1738269094737293581#m</id>
+            <title>RT by @op7418: 上海人工智能实验室又搞了一个即插即用的图像生成视频模型。
+主要特点是根据不同的文本提示以动作进行动画处理，同时保留原始的独特风格和高保真度的细节。
+
+项目简介：
+我们提出了PIA，一种个性化图像动画生成器，它在与条件图像对齐、通过文本实现动作可控性以及与各种个性化T2I模型的兼容性方面表现出色，而无需特定调整。
+
+为了实现这些目标，PIA基于一个经过良好训练的时间对齐层的基础T2I模型，允许将任何个性化T2I模型无缝转换为图像动画模型。
+
+PIA的一个关键组成部分是引入条件模块，它利用条件帧和帧间关联作为输入，在潜在空间中通过关联提示来传输外观信息，以指导个别帧的合成。
+
+ 这种设计减轻了外观相关图像对齐的挑战，并允许更加专注于与运动相关的指导对齐。
+
+项目地址：https://pi-animator.github.io/</title>
+            <link>https://nitter.cz/op7418/status/1738269094737293581#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738269094737293581#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 22 Dec 2023 18:43:42 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>上海人工智能实验室又搞了一个即插即用的图像生成视频模型。<br />
+主要特点是根据不同的文本提示以动作进行动画处理，同时保留原始的独特风格和高保真度的细节。<br />
+<br />
+项目简介：<br />
+我们提出了PIA，一种个性化图像动画生成器，它在与条件图像对齐、通过文本实现动作可控性以及与各种个性化T2I模型的兼容性方面表现出色，而无需特定调整。<br />
+<br />
+为了实现这些目标，PIA基于一个经过良好训练的时间对齐层的基础T2I模型，允许将任何个性化T2I模型无缝转换为图像动画模型。<br />
+<br />
+PIA的一个关键组成部分是引入条件模块，它利用条件帧和帧间关联作为输入，在潜在空间中通过关联提示来传输外观信息，以指导个别帧的合成。<br />
+<br />
+ 这种设计减轻了外观相关图像对齐的挑战，并允许更加专注于与运动相关的指导对齐。<br />
+<br />
+项目地址：<a href="https://pi-animator.github.io/">pi-animator.github.io/</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzgyNjkwNTU0ODI3NjEyMTYvcHUvaW1nL3pWTWpQTUdiOXFsMzJKa0EuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1738274661862158451#m</id>
             <title>R to @op7418: toyxyz发了一个PIA的测试，看起来效果很不错。</title>
             <link>https://nitter.cz/op7418/status/1738274661862158451#m</link>
@@ -63,48 +296,6 @@ Fairy不仅解决了以前模型的限制，包括内存和处理速度。它还
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1738269094737293581#m</id>
-            <title>上海人工智能实验室又搞了一个即插即用的图像生成视频模型。
-主要特点是根据不同的文本提示以动作进行动画处理，同时保留原始的独特风格和高保真度的细节。
-
-项目简介：
-我们提出了PIA，一种个性化图像动画生成器，它在与条件图像对齐、通过文本实现动作可控性以及与各种个性化T2I模型的兼容性方面表现出色，而无需特定调整。
-
-为了实现这些目标，PIA基于一个经过良好训练的时间对齐层的基础T2I模型，允许将任何个性化T2I模型无缝转换为图像动画模型。
-
-PIA的一个关键组成部分是引入条件模块，它利用条件帧和帧间关联作为输入，在潜在空间中通过关联提示来传输外观信息，以指导个别帧的合成。
-
- 这种设计减轻了外观相关图像对齐的挑战，并允许更加专注于与运动相关的指导对齐。
-
-项目地址：https://pi-animator.github.io/</title>
-            <link>https://nitter.cz/op7418/status/1738269094737293581#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738269094737293581#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 18:43:42 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>上海人工智能实验室又搞了一个即插即用的图像生成视频模型。<br />
-主要特点是根据不同的文本提示以动作进行动画处理，同时保留原始的独特风格和高保真度的细节。<br />
-<br />
-项目简介：<br />
-我们提出了PIA，一种个性化图像动画生成器，它在与条件图像对齐、通过文本实现动作可控性以及与各种个性化T2I模型的兼容性方面表现出色，而无需特定调整。<br />
-<br />
-为了实现这些目标，PIA基于一个经过良好训练的时间对齐层的基础T2I模型，允许将任何个性化T2I模型无缝转换为图像动画模型。<br />
-<br />
-PIA的一个关键组成部分是引入条件模块，它利用条件帧和帧间关联作为输入，在潜在空间中通过关联提示来传输外观信息，以指导个别帧的合成。<br />
-<br />
- 这种设计减轻了外观相关图像对齐的挑战，并允许更加专注于与运动相关的指导对齐。<br />
-<br />
-项目地址：<a href="https://pi-animator.github.io/">pi-animator.github.io/</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzgyNjkwNTU0ODI3NjEyMTYvcHUvaW1nL3pWTWpQTUdiOXFsMzJKa0EuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://nitter.cz/op7418/status/1738261404535394338#m</id>
             <title>Perplexity又开始了会员两个月免费活动，在支付的时候输入HOLIDAYS23 就行，真的好用。</title>
             <link>https://nitter.cz/op7418/status/1738261404535394338#m</link>
@@ -118,36 +309,6 @@ PIA的一个关键组成部分是引入条件模块，它利用条件帧和帧�
                     
                     <p>Perplexity又开始了会员两个月免费活动，在支付的时候输入HOLIDAYS23 就行，真的好用。</p>
 <p><a href="https://nitter.cz/perplexity_ai/status/1738255102191022359#m">nitter.cz/perplexity_ai/status/1738255102191022359#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1738260817097953530#m</id>
-            <title>这个等不了阿里自己实现Animate Anyone单图生成动作视频的老哥进展很快啊。
-
-已经发布了训练和推理代码，第一阶段训练已经完成，马上就会发布权重文件。
-
-项目基于magic-animate和AnimateDiff构建。
-
-https://github.com/guoqincode/AnimateAnyone-unofficial</title>
-            <link>https://nitter.cz/op7418/status/1738260817097953530#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738260817097953530#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 18:10:48 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个等不了阿里自己实现Animate Anyone单图生成动作视频的老哥进展很快啊。<br />
-<br />
-已经发布了训练和推理代码，第一阶段训练已经完成，马上就会发布权重文件。<br />
-<br />
-项目基于magic-animate和AnimateDiff构建。<br />
-<br />
-<a href="https://github.com/guoqincode/AnimateAnyone-unofficial">github.com/guoqincode/Animat…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ItSy1pZmJNQUFBeG9rLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
@@ -207,167 +368,6 @@ https://github.com/guoqincode/AnimateAnyone-unofficial</title>
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1738258672063779017#m</id>
-            <title>罕见的AI音乐生成介绍和教程，介绍如何使用 AI 生成 MIDI 钢琴音乐，并在 JAX 和 Equinox 中训练。
-
-作者使用miditok库进行REMI tokeniser并训练字节对编码（BPE）tokeniser. BPE tokeniser将常见序列组合成单个token, 作者希望这些token可以代表常见模式。</title>
-            <link>https://nitter.cz/op7418/status/1738258672063779017#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738258672063779017#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 18:02:17 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>罕见的AI音乐生成介绍和教程，介绍如何使用 AI 生成 MIDI 钢琴音乐，并在 JAX 和 Equinox 中训练。<br />
-<br />
-作者使用miditok库进行REMI tokeniser并训练字节对编码（BPE）tokeniser. BPE tokeniser将常见序列组合成单个token, 作者希望这些token可以代表常见模式。</p>
-<p><a href="https://nitter.cz/alexfmckinney/status/1738186934432792973#m">nitter.cz/alexfmckinney/status/1738186934432792973#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1738257502205325535#m</id>
-            <title>室内设计师福音，Meta推出了ControlRoom3D，用户只需要拖动简单的3D方块并定义方块代表的家具，ControlRoom3D就可以生成3D的室内布局图，并且可以基于3D白模再生成对应贴图，直接渲染成完整的室内设计3D方案。
-
-项目简介：
-手动创建AR/VR应用程序的3D环境是一个复杂的过程，需要对3D建模软件有专业知识。先驱性的工作通过根据文本风格描述生成房间网格来促进这一过程。
-
-然而，许多自动生成的3D网格并不符合典型的房间布局，影响了它们的可信度，例如在一个卧室里放置了几张床。
-
-为了解决这些挑战，我们提出了ControlRoom3D，一种新颖的方法来生成高质量的房间网格。我们方法的核心是用户定义的3D语义代理房间，它基于语义边界框和整体房间风格的文本描述勾勒出了粗略的房间布局。
-
-我们的关键见解是，当渲染为2D时，这种3D表示提供了有价值的几何和语义信息，可以控制强大的2D模型生成与代理房间相匹配的3D一致纹理和几何。
-
-通过包括定量指标和定性用户评估在内的广泛研究支持，我们的方法生成了多样且全球可信的3D房间网格，从而使用户能够轻松设计3D房间，而无需专业知识。
-
-项目地址：https://jonasschult.github.io/ControlRoom3D/</title>
-            <link>https://nitter.cz/op7418/status/1738257502205325535#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738257502205325535#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 17:57:38 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>室内设计师福音，Meta推出了ControlRoom3D，用户只需要拖动简单的3D方块并定义方块代表的家具，ControlRoom3D就可以生成3D的室内布局图，并且可以基于3D白模再生成对应贴图，直接渲染成完整的室内设计3D方案。<br />
-<br />
-项目简介：<br />
-手动创建AR/VR应用程序的3D环境是一个复杂的过程，需要对3D建模软件有专业知识。先驱性的工作通过根据文本风格描述生成房间网格来促进这一过程。<br />
-<br />
-然而，许多自动生成的3D网格并不符合典型的房间布局，影响了它们的可信度，例如在一个卧室里放置了几张床。<br />
-<br />
-为了解决这些挑战，我们提出了ControlRoom3D，一种新颖的方法来生成高质量的房间网格。我们方法的核心是用户定义的3D语义代理房间，它基于语义边界框和整体房间风格的文本描述勾勒出了粗略的房间布局。<br />
-<br />
-我们的关键见解是，当渲染为2D时，这种3D表示提供了有价值的几何和语义信息，可以控制强大的2D模型生成与代理房间相匹配的3D一致纹理和几何。<br />
-<br />
-通过包括定量指标和定性用户评估在内的广泛研究支持，我们的方法生成了多样且全球可信的3D房间网格，从而使用户能够轻松设计3D房间，而无需专业知识。<br />
-<br />
-项目地址：<a href="https://jonasschult.github.io/ControlRoom3D/">jonasschult.github.io/Contro…</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzgyNTcxMjYxMzU2NDAwNjUvcHUvaW1nL1dMbFNOY0ZHXzdZTDlpUHIuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1738255300627739080#m</id>
-            <title>阿里之后是字节？连着发，冲业绩呢，字节推出了从单张面部图像生成不同角度的3D图像的项目DiffPortrait3D。
-
-DiffPortrait3D 擅长生成高保真且 3D 一致的图像合成，无需任何微调，DiffPortrait3D 在各种面部肖像中都普遍有效，包括但不限于具有夸张表情的面部、宽广的相机视野和艺术描绘。
-
-项目简介：
-DiffPortrait3D，这是一种条件扩散模型，能够从单个野外肖像中合成 3D 一致的照片级真实感新颖的视图。
-
-具体来说，给定单个 RGB 输入，我们的目标是合成从新颖的相机视图渲染的合理但一致的面部细节，同时保留身份和面部表情。我们的零镜头方法取代了耗时的优化和微调，可以很好地推广到任意人脸肖像，包括未摆姿势的相机视图、极端的面部表情和多样化的艺术描绘。
-
-其核心是，我们利用在大规模图像数据集上预先训练的 2D 扩散模型的生成先验作为我们的渲染主干，而去噪则是通过对外观和相机姿势的解开的细心控制来引导。
-
-为了实现这一点，我们首先将参考图像中的外观上下文注入到冻结 UNet 的自注意力层中。然后使用新颖的条件控制模块来操纵渲染视图，该模块通过从同一视图观看交叉主体的条件图像来解释相机姿势。
-
-此外，我们插入了一个可训练的交叉视图注意模块来增强视图一致性，并在推理过程中通过新颖的 3D 感知噪声生成过程进一步增强了视图一致性。
-
-我们在具有挑战性的野外和多视图基准测试中，在定性和定量上展示了最先进的结果。
-
-论文地址：https://browse.arxiv.org/html/2312.13016v2</title>
-            <link>https://nitter.cz/op7418/status/1738255300627739080#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738255300627739080#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 17:48:53 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>阿里之后是字节？连着发，冲业绩呢，字节推出了从单张面部图像生成不同角度的3D图像的项目DiffPortrait3D。<br />
-<br />
-DiffPortrait3D 擅长生成高保真且 3D 一致的图像合成，无需任何微调，DiffPortrait3D 在各种面部肖像中都普遍有效，包括但不限于具有夸张表情的面部、宽广的相机视野和艺术描绘。<br />
-<br />
-项目简介：<br />
-DiffPortrait3D，这是一种条件扩散模型，能够从单个野外肖像中合成 3D 一致的照片级真实感新颖的视图。<br />
-<br />
-具体来说，给定单个 RGB 输入，我们的目标是合成从新颖的相机视图渲染的合理但一致的面部细节，同时保留身份和面部表情。我们的零镜头方法取代了耗时的优化和微调，可以很好地推广到任意人脸肖像，包括未摆姿势的相机视图、极端的面部表情和多样化的艺术描绘。<br />
-<br />
-其核心是，我们利用在大规模图像数据集上预先训练的 2D 扩散模型的生成先验作为我们的渲染主干，而去噪则是通过对外观和相机姿势的解开的细心控制来引导。<br />
-<br />
-为了实现这一点，我们首先将参考图像中的外观上下文注入到冻结 UNet 的自注意力层中。然后使用新颖的条件控制模块来操纵渲染视图，该模块通过从同一视图观看交叉主体的条件图像来解释相机姿势。<br />
-<br />
-此外，我们插入了一个可训练的交叉视图注意模块来增强视图一致性，并在推理过程中通过新颖的 3D 感知噪声生成过程进一步增强了视图一致性。<br />
-<br />
-我们在具有挑战性的野外和多视图基准测试中，在定性和定量上展示了最先进的结果。<br />
-<br />
-论文地址：<a href="https://browse.arxiv.org/html/2312.13016v2">browse.arxiv.org/html/2312.1…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ItRjh6amJNQUU4U2NGLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1738252455836856366#m</id>
-            <title>卧槽，字节昨天发布这个项目DreamTuner，可以一举解决图像生成中角色一致性的问题。
-
-效果也太好了，可以将输入图片的角色在生成新图是完美保留，并且融合度非常好，这下小说、漫画和视频的人物一致性和商品一致性问题彻底解决了。
-
-并且可以和ContorlNet联动确保动画的稳定，间接实现了前段时间的让单张图片动起来的功能。
-
-项目简介：
-我们提出了一种新颖的方法DreamTurner，该方法将定制主题的参考信息从粗到细注入。首先提出了一个主题编码器，用于粗略主题身份保留，通过额外的注意力层在视觉-文本交叉注意力之前引入了压缩的一般主题特征。 
-然后，注意到预训练的文本到图像模型中的自注意力层自然地执行了详细的空间上下文关联功能，我们将其修改为自主题注意力层，以细化目标主题的细节，生成的图像从参考图像和自身查询详细特征。
-值得强调的是，自主题注意力是一种优雅、有效且无需训练的方法，用于保持定制概念的详细特征，可在推断过程中作为即插即用的解决方案。
-最后，通过对单个图像进行额外微调，DreamTurner 在受主题驱动的图像生成方面取得了显著的表现，可由文本或其他条件（如姿势）进行控制。
-
-项目地址：https://dreamtuner-diffusion.github.io/</title>
-            <link>https://nitter.cz/op7418/status/1738252455836856366#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738252455836856366#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 17:37:35 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>卧槽，字节昨天发布这个项目DreamTuner，可以一举解决图像生成中角色一致性的问题。<br />
-<br />
-效果也太好了，可以将输入图片的角色在生成新图是完美保留，并且融合度非常好，这下小说、漫画和视频的人物一致性和商品一致性问题彻底解决了。<br />
-<br />
-并且可以和ContorlNet联动确保动画的稳定，间接实现了前段时间的让单张图片动起来的功能。<br />
-<br />
-项目简介：<br />
-我们提出了一种新颖的方法DreamTurner，该方法将定制主题的参考信息从粗到细注入。首先提出了一个主题编码器，用于粗略主题身份保留，通过额外的注意力层在视觉-文本交叉注意力之前引入了压缩的一般主题特征。 <br />
-然后，注意到预训练的文本到图像模型中的自注意力层自然地执行了详细的空间上下文关联功能，我们将其修改为自主题注意力层，以细化目标主题的细节，生成的图像从参考图像和自身查询详细特征。<br />
-值得强调的是，自主题注意力是一种优雅、有效且无需训练的方法，用于保持定制概念的详细特征，可在推断过程中作为即插即用的解决方案。<br />
-最后，通过对单个图像进行额外微调，DreamTurner 在受主题驱动的图像生成方面取得了显著的表现，可由文本或其他条件（如姿势）进行控制。<br />
-<br />
-项目地址：<a href="https://dreamtuner-diffusion.github.io/">dreamtuner-diffusion.github.…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ItREx3cmJNQVFRYzFZLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ItRFRaMWJNQVVTOEx2LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://nitter.cz/op7418/status/1738249503197778156#m</id>
             <title>Tatiana写的纯色渐变提示词，更换颜色的话只需要把颜色单词替换就行，替换为colourful有惊喜哦。
 
@@ -410,140 +410,6 @@ DiffPortrait3D，这是一种条件扩散模型，能够从单个野外肖像中
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0I5OUlVaGJNQUU2NEthLmpwZw==" />
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0I5OUlVaGJNQUlEZ29VLmpwZw==" />
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0I5OUlVZ2JNQUk0NllfLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1738156475711906252#m</id>
-            <title>很多人在要提示词，晚上发一下模版。</title>
-            <link>https://nitter.cz/op7418/status/1738156475711906252#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738156475711906252#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 11:16:11 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>很多人在要提示词，晚上发一下模版。</p>
-<p><a href="https://nitter.cz/op7418/status/1738144842658795780#m">nitter.cz/op7418/status/1738144842658795780#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1738152166727258422#m</id>
-            <title>白鸦这篇从Adobe放弃收购Figma，说到AGI时代UX设计师这个工种的处境挺有意思的，我一定程度上认同他的说法。
-
-UX设计将进入一个新的时代。一个图形用户界面和对话式界面混合使用的时代，一个软界面和现实空间融合交互的时代，更细微简单但也更讲究的人机交互，将让人们获得更好的使用体验。
-
-一个UX设计能力被普及，人人都可以参与界面设计的时代。
-
-有点过于悲观，UX设计师还是需要，但确实不需要这么多UX设计师了。
-
-链接：https://mp.weixin.qq.com/s/PMQFzsBODNDonRkAoMVycw</title>
-            <link>https://nitter.cz/op7418/status/1738152166727258422#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738152166727258422#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 10:59:04 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>白鸦这篇从Adobe放弃收购Figma，说到AGI时代UX设计师这个工种的处境挺有意思的，我一定程度上认同他的说法。<br />
-<br />
-UX设计将进入一个新的时代。一个图形用户界面和对话式界面混合使用的时代，一个软界面和现实空间融合交互的时代，更细微简单但也更讲究的人机交互，将让人们获得更好的使用体验。<br />
-<br />
-一个UX设计能力被普及，人人都可以参与界面设计的时代。<br />
-<br />
-有点过于悲观，UX设计师还是需要，但确实不需要这么多UX设计师了。<br />
-<br />
-链接：<a href="https://mp.weixin.qq.com/s/PMQFzsBODNDonRkAoMVycw">mp.weixin.qq.com/s/PMQFzsBOD…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0I4b0xZdmF3QUFvaTNoLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1738147886905610660#m</id>
-            <title>R to @op7418: 再来几张：</title>
-            <link>https://nitter.cz/op7418/status/1738147886905610660#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738147886905610660#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 10:42:04 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>再来几张：</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0I4a1NNaGFJQUF4V0NhLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0I4a1NNaWJBQUFIYjJLLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0I4a1NNb2JvQUFOWDdYLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0I4a1NNbWJRQUEwWklMLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1738144842658795780#m</id>
-            <title>Midjourney V6 对中国文化和内容的理解是真的到位，不只是物品的形象，还有对应的审美和意境。
-下面这几张图我恍惚间觉得甚至有点黑神话·悟空过场动画截图的感觉了。</title>
-            <link>https://nitter.cz/op7418/status/1738144842658795780#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738144842658795780#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 10:29:58 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Midjourney V6 对中国文化和内容的理解是真的到位，不只是物品的形象，还有对应的审美和意境。<br />
-下面这几张图我恍惚间觉得甚至有点黑神话·悟空过场动画截图的感觉了。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0I4aGRRU2JVQUF3c284LmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0I4aGRUYmFFQUE2UjkxLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0I4aGRVeWFNQUFCS3NaLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0I4aGRYM2JrQUFvTVFtLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1738117860457943271#m</id>
-            <title>把 @xai  其中的一张做成了视频：</title>
-            <link>https://nitter.cz/op7418/status/1738117860457943271#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738117860457943271#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 08:42:45 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>把 <a href="https://nitter.cz/xai" title="xAI">@xai</a>  其中的一张做成了视频：</p>
-<p><a href="https://nitter.cz/op7418/status/1738103017717809633#m">nitter.cz/op7418/status/1738103017717809633#m</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzgxMTc3ODYyNDgwMjgxNjAvcHUvaW1nLzhCZUp2Z2ZtSTNOTzlJaEEuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/hal__lee/status/1738054925157097520#m</id>
-            <title>RT by @op7418: 刚才研究了一下 Tailwindcss 的色板是怎么调出来的，一般这种多级色调都是有一套算法，保证相同等级的颜色在亮度上感知一致（比如 Material Design）。但是看 Tailwindcss 的文档才知道，这都是他们靠手和眼精心调出来的。</title>
-            <link>https://nitter.cz/hal__lee/status/1738054925157097520#m</link>
-            <guid isPermaLink="false">https://nitter.cz/hal__lee/status/1738054925157097520#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 04:32:40 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>刚才研究了一下 Tailwindcss 的色板是怎么调出来的，一般这种多级色调都是有一套算法，保证相同等级的颜色在亮度上感知一致（比如 Material Design）。但是看 Tailwindcss 的文档才知道，这都是他们靠手和眼精心调出来的。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0I3TlNwcWFvQUExaUdBLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0I3TnpQcWIwQUE4Y3ZBLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
