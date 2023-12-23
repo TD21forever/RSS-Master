@@ -5,6 +5,200 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1738512384749371524#m</id>
+            <title>R to @xiaohuggg: DreamTuner支持局部编辑（如表情变化）和全局编辑（如场景和动作的变化），即使在复杂的文本输入下也能生成高度详细的图像。
+
+生成的图像不仅细节丰富，而且准确保持了参考图像的细节。</title>
+            <link>https://nitter.cz/xiaohuggg/status/1738512384749371524#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1738512384749371524#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 23 Dec 2023 10:50:27 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>DreamTuner支持局部编辑（如表情变化）和全局编辑（如场景和动作的变化），即使在复杂的文本输入下也能生成高度详细的图像。<br />
+<br />
+生成的图像不仅细节丰富，而且准确保持了参考图像的细节。</p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NCdnRLRGE0QUFfZXF0LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1738511953499414598#m</id>
+            <title>R to @xiaohuggg: DreamTuner 能够成功生成与文本输入一致且保留关键主题细节的高保真图像。</title>
+            <link>https://nitter.cz/xiaohuggg/status/1738511953499414598#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1738511953499414598#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 23 Dec 2023 10:48:44 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>DreamTuner 能够成功生成与文本输入一致且保留关键主题细节的高保真图像。</p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NCdkJlcGFFQUF5T1BYLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1738511391093608762#m</id>
+            <title>这个项目好，可以直接商用
+
+DreamTuner ：通过单张图片实现主题驱动的图像生成
+
+该项目由字节跳动开发，你只需要提供一张图片，DreamTuner就能帮你生成与这张图片在主题和风格上一致的新图像。
+
+比如你有一张可乐照片，它可以根据你的要求将可乐放在任何场景中或添加其他元素形成一张完美海报！
+
+这个工具特别适用于需要根据特定主题或条件创建个性化图像的场景。
+
+主要功能特点：
+
+1、文本控制的主题驱动图像生成：DreamTuner 能够根据文本输入生成与特定主题（如动漫角色）相关的图像。
+
+它支持局部编辑（如表情变化）和全局编辑（如场景和动作的变化），即使在复杂的文本输入下也能生成高度详细的图像。
+
+生成的图像不仅细节丰富，而且准确保持了参考图像的细节。
+
+2、风格主题一致：在 DreamBooth 数据集上的评估显示，通过主题编码器和自主题注意力，生成了精细化的参考，使 DreamTuner 能够成功生成与文本输入一致且保留关键主题细节的高保真图像。
+
+3、与 ControlNet 的结合：DreamTuner 的方法可以与 ControlNet 结合，扩展到不同条件（如姿势）的应用。
+在一个示例中，仅使用一张图像进行 DreamTuner 的微调，其中参考图像的姿势作为参考条件。
+
+为了确保帧间的连贯性，自主题注意力同时使用参考图像和生成图像的前一帧，分别赋予不同的参考权重。
+
+DreamTuner 的工作原理：
+
+1、主题编码器：当用户上传一张参考图片时，DreamTuner 首先使用主题编码器来分析这张图片。主题编码器主要是提取图片的基本特征，如颜色、形状、风格等，这些特征代表了图片的“粗略”或“大致”身份。
+
+2、自主题注意力层：系统中的自主题注意力层进一步处理这些特征。这些层专注于细化图片的细节，如纹理、轮廓等，确保生成的图像在视觉上与原始图片保持一致。
+
+3、文本到图像的转换：用户可以提供文本描述来指导图像的生成。例如，用户可能描述一个场景或动作。
+DreamTuner 结合提取的图片特征和用户的文本描述，生成新的图像。
+
+4、生成高保真图像：通过这种方式，DreamTuner 能够生成与原始参考图片在风格和主题上一致的高保真图像。
+
+以下是一个具体的例子来解释 DreamTuner 的功能和作用：
+
+例子：创建个性化动漫角色图像
+
+假设你是一位动漫爱好者，想要创建一个全新的动漫角色图像，但只有一张参考图像和一些想法。
+
+1、使用单张参考图像：
+
+•你有一张喜欢的动漫角色的图像，想要基于这个角色创造一个新的场景或表情。
+
+•使用 DreamTuner，你可以上传这张参考图像。这张图片包含了你想要的角色风格和一些基本特征，比如发型、服装风格。
+
+2、添加文本描述：
+
+•你想要这个角色在不同的场景中，比如“坐在公园的长椅上”或“手里拿着一杯茶，阳光透过窗户照射进来”。
+
+•你可以将这些描述作为文本输入到 DreamTuner 中。
+
+3、生成新的图像：
+
+•DreamTuner 将使用你提供的参考图像和文本描述来生成新的图像。
+
+•这个过程中，它会保留原始参考图像的关键特征（如角色的风格和特点），同时根据你的描述添加新的元素和场景。
+
+•你将获得一系列根据你的描述生成的新动漫角色图像，这些图像既保留了原始角色的风格，又融入了新的场景和表情。
+
+这个过程大大简化了从单一参考图像创造出一系列一致风格和主题的图像的过程。
+
+DreamTuner 可以用于个性化的图像创作、动漫艺术设计、广告创意等领域，特别适合那些需要根据特定主题或条件快速生成高质量图像的场景。
+
+项目及演示：https://dreamtuner-diffusion.github.io/
+论文：https://arxiv.org/abs/2312.13691
+GitHub：coming soon...</title>
+            <link>https://nitter.cz/xiaohuggg/status/1738511391093608762#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1738511391093608762#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 23 Dec 2023 10:46:30 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这个项目好，可以直接商用<br />
+<br />
+DreamTuner ：通过单张图片实现主题驱动的图像生成<br />
+<br />
+该项目由字节跳动开发，你只需要提供一张图片，DreamTuner就能帮你生成与这张图片在主题和风格上一致的新图像。<br />
+<br />
+比如你有一张可乐照片，它可以根据你的要求将可乐放在任何场景中或添加其他元素形成一张完美海报！<br />
+<br />
+这个工具特别适用于需要根据特定主题或条件创建个性化图像的场景。<br />
+<br />
+主要功能特点：<br />
+<br />
+1、文本控制的主题驱动图像生成：DreamTuner 能够根据文本输入生成与特定主题（如动漫角色）相关的图像。<br />
+<br />
+它支持局部编辑（如表情变化）和全局编辑（如场景和动作的变化），即使在复杂的文本输入下也能生成高度详细的图像。<br />
+<br />
+生成的图像不仅细节丰富，而且准确保持了参考图像的细节。<br />
+<br />
+2、风格主题一致：在 DreamBooth 数据集上的评估显示，通过主题编码器和自主题注意力，生成了精细化的参考，使 DreamTuner 能够成功生成与文本输入一致且保留关键主题细节的高保真图像。<br />
+<br />
+3、与 ControlNet 的结合：DreamTuner 的方法可以与 ControlNet 结合，扩展到不同条件（如姿势）的应用。<br />
+在一个示例中，仅使用一张图像进行 DreamTuner 的微调，其中参考图像的姿势作为参考条件。<br />
+<br />
+为了确保帧间的连贯性，自主题注意力同时使用参考图像和生成图像的前一帧，分别赋予不同的参考权重。<br />
+<br />
+DreamTuner 的工作原理：<br />
+<br />
+1、主题编码器：当用户上传一张参考图片时，DreamTuner 首先使用主题编码器来分析这张图片。主题编码器主要是提取图片的基本特征，如颜色、形状、风格等，这些特征代表了图片的“粗略”或“大致”身份。<br />
+<br />
+2、自主题注意力层：系统中的自主题注意力层进一步处理这些特征。这些层专注于细化图片的细节，如纹理、轮廓等，确保生成的图像在视觉上与原始图片保持一致。<br />
+<br />
+3、文本到图像的转换：用户可以提供文本描述来指导图像的生成。例如，用户可能描述一个场景或动作。<br />
+DreamTuner 结合提取的图片特征和用户的文本描述，生成新的图像。<br />
+<br />
+4、生成高保真图像：通过这种方式，DreamTuner 能够生成与原始参考图片在风格和主题上一致的高保真图像。<br />
+<br />
+以下是一个具体的例子来解释 DreamTuner 的功能和作用：<br />
+<br />
+例子：创建个性化动漫角色图像<br />
+<br />
+假设你是一位动漫爱好者，想要创建一个全新的动漫角色图像，但只有一张参考图像和一些想法。<br />
+<br />
+1、使用单张参考图像：<br />
+<br />
+•你有一张喜欢的动漫角色的图像，想要基于这个角色创造一个新的场景或表情。<br />
+<br />
+•使用 DreamTuner，你可以上传这张参考图像。这张图片包含了你想要的角色风格和一些基本特征，比如发型、服装风格。<br />
+<br />
+2、添加文本描述：<br />
+<br />
+•你想要这个角色在不同的场景中，比如“坐在公园的长椅上”或“手里拿着一杯茶，阳光透过窗户照射进来”。<br />
+<br />
+•你可以将这些描述作为文本输入到 DreamTuner 中。<br />
+<br />
+3、生成新的图像：<br />
+<br />
+•DreamTuner 将使用你提供的参考图像和文本描述来生成新的图像。<br />
+<br />
+•这个过程中，它会保留原始参考图像的关键特征（如角色的风格和特点），同时根据你的描述添加新的元素和场景。<br />
+<br />
+•你将获得一系列根据你的描述生成的新动漫角色图像，这些图像既保留了原始角色的风格，又融入了新的场景和表情。<br />
+<br />
+这个过程大大简化了从单一参考图像创造出一系列一致风格和主题的图像的过程。<br />
+<br />
+DreamTuner 可以用于个性化的图像创作、动漫艺术设计、广告创意等领域，特别适合那些需要根据特定主题或条件快速生成高质量图像的场景。<br />
+<br />
+项目及演示：<a href="https://dreamtuner-diffusion.github.io/">dreamtuner-diffusion.github.…</a><br />
+论文：<a href="https://arxiv.org/abs/2312.13691">arxiv.org/abs/2312.13691</a><br />
+GitHub：coming soon...</p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NCdXp4cmE0QUF0OHV4LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1738144842658795780#m</id>
             <title>RT by @xiaohuggg: Midjourney V6 对中国文化和内容的理解是真的到位，不只是物品的形象，还有对应的审美和意境。
 下面这几张图我恍惚间觉得甚至有点黑神话·悟空过场动画截图的感觉了。</title>
@@ -695,116 +889,6 @@ TTTV3装置介绍：<a href="https://www.wiss.org/WISS2023Proceedings/data/2-C06
 版署征求意见稿全文11259字<br />
 <br />
 所以据此计算该文每个汉字价值4126万人民币</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1738084768095637829#m</id>
-            <title>R to @xiaohuggg: AppAgent 演示在 X 上浏览和搜索并关注用户
-
-👋</title>
-            <link>https://nitter.cz/xiaohuggg/status/1738084768095637829#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1738084768095637829#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 06:31:15 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>AppAgent 演示在 X 上浏览和搜索并关注用户<br />
-<br />
-👋</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzgwODQ3MTg2OTA5MzA2ODgvcHUvaW1nL0w2OWRqQ1prYWJmaUlacEcuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1738084326506676298#m</id>
-            <title>R to @xiaohuggg: AppAgent 演示使用Gmail进行邮件撰写和发布
-
-😄</title>
-            <link>https://nitter.cz/xiaohuggg/status/1738084326506676298#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1738084326506676298#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 06:29:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>AppAgent 演示使用Gmail进行邮件撰写和发布<br />
-<br />
-😄</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzgwODQxNTcxOTA5ODc3NzYvcHUvaW1nL0U4Y1FDTUswb3ZDWUhkVjUuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1738083914193965528#m</id>
-            <title>AppAgent：让AI模仿人类在手机上操作APP
-
-AppAgent可以通过自主学习和模仿人类的点击和滑动手势，能够在手机上执行各种任务。
-
-它可以在社交媒体上发帖、帮你撰写和发送邮件 、使用地图、在线购物，甚至进行复杂的图像编辑...
-
-AppAgent在50 个任务上进行了广泛测试，涵盖了10种不同的应用程序。
-
-该项目由腾讯和德州大学达拉斯分校的研究团开发。
-
-主要功能特点：
-
-- 多模态代理：AppAgent 是一个基于大语言模型的多模态代理，它能够处理和理解多种类型的信息（如文本、图像、触控操作等）。这使得它能够理解复杂的任务并在各种不同的应用程序中执行这些任务。
-
-- 直观交互：它能通过模仿人类的直观动作（如点击和滑动屏幕）来与智能手机应用程序交互。就像一个真人用户一样。
-
-- 自主学习：AppAgent 通过观察和分析不同应用程序中的用户界面交互。并学习这些交互模式，并将所获得的知识编译成文档。
-
-- 构建知识库：通过这些交互，AppAgent 构建了一个知识库，记录了不同应用程序的操作方法和界面布局。这个知识库随后用于指导代理在不同应用程序中执行任务。
-
--执行复杂任务：一旦学习了应用程序的操作方式，AppAgent 就能够执行跨应用程序的复杂任务，如发送电子邮件、编辑图片或进行在线购物。
-
-项目及演示：https://appagent-official.github.io/
-论文：https://arxiv.org/abs/2312.13771
-GitHub：https://github.com/mnotgod96/AppAgent</title>
-            <link>https://nitter.cz/xiaohuggg/status/1738083914193965528#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1738083914193965528#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 06:27:51 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>AppAgent：让AI模仿人类在手机上操作APP<br />
-<br />
-AppAgent可以通过自主学习和模仿人类的点击和滑动手势，能够在手机上执行各种任务。<br />
-<br />
-它可以在社交媒体上发帖、帮你撰写和发送邮件 、使用地图、在线购物，甚至进行复杂的图像编辑...<br />
-<br />
-AppAgent在50 个任务上进行了广泛测试，涵盖了10种不同的应用程序。<br />
-<br />
-该项目由腾讯和德州大学达拉斯分校的研究团开发。<br />
-<br />
-主要功能特点：<br />
-<br />
-- 多模态代理：AppAgent 是一个基于大语言模型的多模态代理，它能够处理和理解多种类型的信息（如文本、图像、触控操作等）。这使得它能够理解复杂的任务并在各种不同的应用程序中执行这些任务。<br />
-<br />
-- 直观交互：它能通过模仿人类的直观动作（如点击和滑动屏幕）来与智能手机应用程序交互。就像一个真人用户一样。<br />
-<br />
-- 自主学习：AppAgent 通过观察和分析不同应用程序中的用户界面交互。并学习这些交互模式，并将所获得的知识编译成文档。<br />
-<br />
-- 构建知识库：通过这些交互，AppAgent 构建了一个知识库，记录了不同应用程序的操作方法和界面布局。这个知识库随后用于指导代理在不同应用程序中执行任务。<br />
-<br />
--执行复杂任务：一旦学习了应用程序的操作方式，AppAgent 就能够执行跨应用程序的复杂任务，如发送电子邮件、编辑图片或进行在线购物。<br />
-<br />
-项目及演示：<a href="https://appagent-official.github.io/">appagent-official.github.io/</a><br />
-论文：<a href="https://arxiv.org/abs/2312.13771">arxiv.org/abs/2312.13771</a><br />
-GitHub：<a href="https://github.com/mnotgod96/AppAgent">github.com/mnotgod96/AppAgen…</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzgwODEwNzU4ODc1MDk1MDQvcHUvaW1nL1YyN2ZPN3M3dWVYWDF4MncuanBn" />
                 ]]>
             </content:encoded>
         </item>
