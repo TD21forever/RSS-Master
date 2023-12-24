@@ -5,6 +5,64 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1738969745313927603#m</id>
+            <title>有人尝试了借助开源大语言模型，无需联网在本机实现和游戏 NPC 自由对话，技术栈：
+- Mistral7b，开源大语言模型
+- StyleTTS2 文字转语音
+- llama.cpp 用来运行大语言模型的库
+
+生成一句新对话的时间大约为 2-3 秒。在生成新对话行时会稍微有点卡顿，但影响不大。StyleTTS2（文本转语音系统）需要占用约 14GB 的 RAM，而基于 llama.cpp 运行的服务器占用 3GB，因此运行这一系统需要较大的 RAM 容量。不过我相信 StyleTTS 还有进一步优化的空间。从视频中可以看出，对帧率影响不大，游戏画面依然能够保持流畅的 60 帧每秒。
+
+缺点也很明显：
+
+Mistral 在判断游戏世界中哪些事情可能发生哪些不可能方面也不是很准确。比如，在演示中出现的关于训练村民的任务，在游戏中实际上是无法实现的，因为游戏中根本没有相关机制。
+
+尽管 Mistral 模型的处理速度更快，但一致性不如 GPT3.5。容易偏离主题，并且不太能坚持事实。
+
+StyleTTS2 的语音合成效果也不够自然，还带有些许机械感。对于它不熟悉的词汇，它的发音不太准确，或者会根据上下文错误地发音（例如，Angers 这个城市的发音与动词“to anger”发音不同）。
+
+不过还是相当有积极意义的一次尝试👍🏻
+
+相关源码：https://github.com/joe-gibbs/local-llms-ue5
+
+原文：https://jgibbs.dev/blogs/local-llm-npcs-in-unreal-engine
+译文：https://baoyu.io/translations/llm/local-llm-npcs-in-unreal-engine</title>
+            <link>https://nitter.cz/dotey/status/1738969745313927603#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1738969745313927603#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 24 Dec 2023 17:07:50 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>有人尝试了借助开源大语言模型，无需联网在本机实现和游戏 NPC 自由对话，技术栈：<br />
+- Mistral7b，开源大语言模型<br />
+- StyleTTS2 文字转语音<br />
+- llama.cpp 用来运行大语言模型的库<br />
+<br />
+生成一句新对话的时间大约为 2-3 秒。在生成新对话行时会稍微有点卡顿，但影响不大。StyleTTS2（文本转语音系统）需要占用约 14GB 的 RAM，而基于 llama.cpp 运行的服务器占用 3GB，因此运行这一系统需要较大的 RAM 容量。不过我相信 StyleTTS 还有进一步优化的空间。从视频中可以看出，对帧率影响不大，游戏画面依然能够保持流畅的 60 帧每秒。<br />
+<br />
+缺点也很明显：<br />
+<br />
+Mistral 在判断游戏世界中哪些事情可能发生哪些不可能方面也不是很准确。比如，在演示中出现的关于训练村民的任务，在游戏中实际上是无法实现的，因为游戏中根本没有相关机制。<br />
+<br />
+尽管 Mistral 模型的处理速度更快，但一致性不如 GPT3.5。容易偏离主题，并且不太能坚持事实。<br />
+<br />
+StyleTTS2 的语音合成效果也不够自然，还带有些许机械感。对于它不熟悉的词汇，它的发音不太准确，或者会根据上下文错误地发音（例如，Angers 这个城市的发音与动词“to anger”发音不同）。<br />
+<br />
+不过还是相当有积极意义的一次尝试👍🏻<br />
+<br />
+相关源码：<a href="https://github.com/joe-gibbs/local-llms-ue5">github.com/joe-gibbs/local-l…</a><br />
+<br />
+原文：<a href="https://jgibbs.dev/blogs/local-llm-npcs-in-unreal-engine">jgibbs.dev/blogs/local-llm-n…</a><br />
+译文：<a href="https://baoyu.io/translations/llm/local-llm-npcs-in-unreal-engine">baoyu.io/translations/llm/lo…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mzg5Njg0MzUxNTYwMTcxNTIvcHUvaW1nL1NKSXJEZkJyNDg4WEpUQk4uanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1738849725221343683#m</id>
             <title>RT by @dotey: 换脸工具Rope发布了Ruby版本，性能获得了大幅提升。有需要的可以更新一下试试，具体更新内容有：
 
@@ -799,46 +857,6 @@ https://ui.shadcn.com/</title>
 <a href="https://ui.shadcn.com/">ui.shadcn.com/</a></p>
 <p><a href="https://nitter.cz/shadcn/status/1738283281424982488#m">nitter.cz/shadcn/status/1738283281424982488#m</a></p>
 <img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTczNDMxOTA1ODUxMjY5NTI5Ni9mYVlQQnRBWj9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1738079323058495971#m</id>
-            <title>RT by @dotey: Meta 发布了一个文字对视频进行编辑的项目：Fairy。
-主要的优势除了一致性和真实度之外，还有极高的生成效率。
-只需要14秒就可以生成120帧512x384的视频（30 FPS，持续4秒）。比之前的同类项目快 44 倍。
-
-官方简介：
-Fairy，这是一种简约而强大的图像编辑扩散模型的改进版本，用于视频编辑应用。
-我们的方法集中在基于锚点的跨帧注意力的概念上，这种机制可以隐式地在帧之间传播扩散特征，确保优越的时间一致性和高保真度的合成。
-Fairy不仅解决了以前模型的限制，包括内存和处理速度。它还通过独特的数据增强策略改善了时间一致性。这种策略使模型在源图像和目标图像中对仿射变换具有等变性。
-令人惊讶的是，Fairy在仅14秒内生成了120帧512x384的视频（30 FPS，持续4秒），至少比之前的作品快44倍。
-一个涉及1000个生成样本的全面用户研究证实，我们的方法提供了卓越的质量，明显优于已建立的方法。
-
-项目地址：https://fairy-video2video.github.io/</title>
-            <link>https://nitter.cz/op7418/status/1738079323058495971#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738079323058495971#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 06:09:37 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Meta 发布了一个文字对视频进行编辑的项目：Fairy。<br />
-主要的优势除了一致性和真实度之外，还有极高的生成效率。<br />
-只需要14秒就可以生成120帧512x384的视频（30 FPS，持续4秒）。比之前的同类项目快 44 倍。<br />
-<br />
-官方简介：<br />
-Fairy，这是一种简约而强大的图像编辑扩散模型的改进版本，用于视频编辑应用。<br />
-我们的方法集中在基于锚点的跨帧注意力的概念上，这种机制可以隐式地在帧之间传播扩散特征，确保优越的时间一致性和高保真度的合成。<br />
-Fairy不仅解决了以前模型的限制，包括内存和处理速度。它还通过独特的数据增强策略改善了时间一致性。这种策略使模型在源图像和目标图像中对仿射变换具有等变性。<br />
-令人惊讶的是，Fairy在仅14秒内生成了120帧512x384的视频（30 FPS，持续4秒），至少比之前的作品快44倍。<br />
-一个涉及1000个生成样本的全面用户研究证实，我们的方法提供了卓越的质量，明显优于已建立的方法。<br />
-<br />
-项目地址：<a href="https://fairy-video2video.github.io/">fairy-video2video.github.io/</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzgwNzg5NTk1NDY1NDgyMjQvcHUvaW1nL1BBQ0dxcDg5S2pwei1LUXQuanBn" />
                 ]]>
             </content:encoded>
         </item>
