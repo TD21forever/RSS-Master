@@ -5,6 +5,106 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1738767070022570250#m</id>
+            <title>转译：《苹果最新 AI 研究或将彻底革新你的 iPhone》
+
+苹果这个几乎与技术创新划等号的公司，再次站在了 AI 革命的前沿。
+
+这家总部位于加州库比蒂诺的公司最近公布了在人工智能研究领域的重要进展，推出了两篇新论文，分别介绍了用于 3D 头像和高效语言模型推断的新技术。这些创新有望为用户提供更沉浸式的视觉体验，并使复杂的 AI 系统能够在 iPhone 和 iPad 等消费者设备上运行。
+
+在其[第一篇研究论文](https://arxiv.org/pdf/2311.17910.pdf)中，苹果的科学家们提出了一个名为 [HUGS](https://machinelearning.apple.com/research/hugs)（人类高斯喷溅，Human Gaussian Splats）的技术，用于从单镜头短视频中生成动态的 3D 人像。“我们的方法只需一段短单镜头视频（50-100 帧），就能自动学习分离静态场景和一个完全可动画化的人像，整个过程仅需 30 分钟，” 首席作者 Muhammed Kocabas 表示。
+
+图一
+该技术包括训练视频（左上），重建的标准人体头像（右上），重建的场景模型（左下），以及重新布局的动画人体与场景（右下）。 （图片来源：Apple）
+
+HUGS 使用一种高效的渲染技术，即 3D 高斯喷溅，来同时展现人物和背景场景。人物模型以 [SMPL](https://smpl.is.tue.mpg.de/)（一种统计学身体形态模型）为基础构建。而 HUGS 通过允许高斯变形，能够捕捉到衣物和发型等细节。
+
+一个创新的[神经形变模块](https://machinelearning.apple.com/research/neural-engine-transformers) 采用线性混合蒙皮技术（linear blend skinning），使得高斯以逼真的方式动态表现。这种协调的动作避免了在调整人像姿势时产生的视觉失真。Kocabas 指出，HUGS 能够实现对人物新姿势的合成以及对人物和场景的新视角合成。
+
+相较于早期的头像生成方法，HUGS 在训练和渲染速度上高达100倍。研究者们在标准游戏GPU上仅用30分钟进行系统优化，就取得了逼真的效果。在 3D 重建质量方面，HUGS 也超过了如 [Vid2Avatar](https://github.com/MoyGcc/vid2avatar) 和 [NeuMan](https://machinelearning.apple.com/research/neural-human-radiance-field) 等最先进技术。
+
+这项新技术使人们仅需一段包含人物和场景的视频，就能将不同的数字角色或“头像”置入新环境中。这个过程非常迅速，图像每秒更新60次，达到流畅且逼真的效果。
+
+苹果研究团队的这一新 3D 建模成就非常引人注目。实时表现能力及利用实地视频创造头像的技术，很快就可能为虚拟试穿、远程互动及合成媒体领域开辟新天地。想象一下，如果你可以直接在 iPhone 相机上制作如此新颖的 3D 场景，会带来怎样的创新可能性！
+
+## 在人工智能推断中弥合内存差距
+
+在[第二篇论文](https://arxiv.org/pdf/2312.11514.pdf)中，苹果(Apple)的研究团队应对了一个挑战：如何将庞大的大语言模型 (LLMs)，比如参数众多的 GPT-4，部署到内存受限的设备上。这些先进的自然语言模型由于参数众多，让在普通消费级硬件上的推断变得耗费资源。
+
+他们提出的系统旨在最大程度减少在推断过程中从闪存到有限的动态随机存取内存 (DRAM) 的数据传输量。“我们的方法是建立一个与闪存行为相协调的推断成本模型，从而在两个关键方面进行优化：一是减少从闪存到内存的数据传输量，二是以更大、更连续的数据块进行读取，”首席研究员 Keivan Alizadeh 详细说明了这一点。
+
+研究中引入了两种主要技术：“窗口化”，即重复利用最近推断过程中的激活数据；以及“行列捆绑”，通过将数据的行和列存储在一起，实现读取更大的数据块。在苹果 M1 Max CPU 上运用这些技术，相比传统的简单数据加载方法，推断速度提高了 4-5 倍；而在 GPU 上，速度提升更是达到了 20-25 倍。
+
+“这项技术突破对于在资源受限的环境中部署先进的大语言模型至关重要，这不仅扩大了这些模型的应用范围，也提高了它们的易用性，”共同作者 Mehrdad Farajtabar 表示。这些优化不久后可能使得复杂的 AI 助手和聊天机器人能够在 iPhone、iPad 和其他移动设备上流畅运行。
+
+## 苹果的战略愿景
+
+这两篇论文凸显了苹果在 AI 研究和应用领域的逐渐增强的领导力。尽管前景充满希望，专家们提醒，苹果在将这些技术整合到消费产品中时必须格外慎重，承担相应的责任。从保护隐私到预防技术滥用，都应全面考虑到[社会影响](https://venturebeat.com/ai/the-widening-web-of-effective-altruism-in-ai-security-the-ai-beat/)。
+
+苹果可能会将这些创新技术融入其产品系列，不仅仅是为了提升设备性能，更是为了预见混合 AI 服务的未来需求。苹果允许更复杂的 AI 模型在内存有限的设备上运行，为新一代应用和服务的开发奠定基础，这些应用和服务将以前所未有的方式利用大语言模型（LLMs）的强大功能。
+
+此外，苹果公开发布这些研究成果，对整个 AI 领域做出了贡献，这可能会促进该领域的进一步发展。这一行为反映了苹果对自身作为技术领先者地位的自信，以及不断探索新可能性的承诺。
+
+苹果的最新创新如果得到恰当应用，有可能将人工智能提升至一个新高度。逼真的数字化虚拟形象和强大的 AI 助手原本只存在于遥远的未来设想中 — 但在苹果科学家的努力下，这一未来正迅速成为现实。
+
+来源：https://venturebeat.com/ai/apples-latest-ai-research-could-completely-transform-your-iphone/</title>
+            <link>https://nitter.cz/dotey/status/1738767070022570250#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1738767070022570250#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 24 Dec 2023 03:42:28 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>转译：《苹果最新 AI 研究或将彻底革新你的 iPhone》<br />
+<br />
+苹果这个几乎与技术创新划等号的公司，再次站在了 AI 革命的前沿。<br />
+<br />
+这家总部位于加州库比蒂诺的公司最近公布了在人工智能研究领域的重要进展，推出了两篇新论文，分别介绍了用于 3D 头像和高效语言模型推断的新技术。这些创新有望为用户提供更沉浸式的视觉体验，并使复杂的 AI 系统能够在 iPhone 和 iPad 等消费者设备上运行。<br />
+<br />
+在其[第一篇研究论文](<a href="https://arxiv.org/pdf/2311.17910.pdf">arxiv.org/pdf/2311.17910.pdf</a>)中，苹果的科学家们提出了一个名为 [HUGS](<a href="https://machinelearning.apple.com/research/hugs">machinelearning.apple.com/re…</a>)（人类高斯喷溅，Human Gaussian Splats）的技术，用于从单镜头短视频中生成动态的 3D 人像。“我们的方法只需一段短单镜头视频（50-100 帧），就能自动学习分离静态场景和一个完全可动画化的人像，整个过程仅需 30 分钟，” 首席作者 Muhammed Kocabas 表示。<br />
+<br />
+图一<br />
+该技术包括训练视频（左上），重建的标准人体头像（右上），重建的场景模型（左下），以及重新布局的动画人体与场景（右下）。 （图片来源：Apple）<br />
+<br />
+HUGS 使用一种高效的渲染技术，即 3D 高斯喷溅，来同时展现人物和背景场景。人物模型以 [SMPL](<a href="https://smpl.is.tue.mpg.de/">smpl.is.tue.mpg.de/</a>)（一种统计学身体形态模型）为基础构建。而 HUGS 通过允许高斯变形，能够捕捉到衣物和发型等细节。<br />
+<br />
+一个创新的[神经形变模块](<a href="https://machinelearning.apple.com/research/neural-engine-transformers">machinelearning.apple.com/re…</a>) 采用线性混合蒙皮技术（linear blend skinning），使得高斯以逼真的方式动态表现。这种协调的动作避免了在调整人像姿势时产生的视觉失真。Kocabas 指出，HUGS 能够实现对人物新姿势的合成以及对人物和场景的新视角合成。<br />
+<br />
+相较于早期的头像生成方法，HUGS 在训练和渲染速度上高达100倍。研究者们在标准游戏GPU上仅用30分钟进行系统优化，就取得了逼真的效果。在 3D 重建质量方面，HUGS 也超过了如 [Vid2Avatar](<a href="https://github.com/MoyGcc/vid2avatar">github.com/MoyGcc/vid2avatar</a>) 和 [NeuMan](<a href="https://machinelearning.apple.com/research/neural-human-radiance-field">machinelearning.apple.com/re…</a>) 等最先进技术。<br />
+<br />
+这项新技术使人们仅需一段包含人物和场景的视频，就能将不同的数字角色或“头像”置入新环境中。这个过程非常迅速，图像每秒更新60次，达到流畅且逼真的效果。<br />
+<br />
+苹果研究团队的这一新 3D 建模成就非常引人注目。实时表现能力及利用实地视频创造头像的技术，很快就可能为虚拟试穿、远程互动及合成媒体领域开辟新天地。想象一下，如果你可以直接在 iPhone 相机上制作如此新颖的 3D 场景，会带来怎样的创新可能性！<br />
+<br />
+## 在人工智能推断中弥合内存差距<br />
+<br />
+在[第二篇论文](<a href="https://arxiv.org/pdf/2312.11514.pdf">arxiv.org/pdf/2312.11514.pdf</a>)中，苹果(Apple)的研究团队应对了一个挑战：如何将庞大的大语言模型 (LLMs)，比如参数众多的 GPT-4，部署到内存受限的设备上。这些先进的自然语言模型由于参数众多，让在普通消费级硬件上的推断变得耗费资源。<br />
+<br />
+他们提出的系统旨在最大程度减少在推断过程中从闪存到有限的动态随机存取内存 (DRAM) 的数据传输量。“我们的方法是建立一个与闪存行为相协调的推断成本模型，从而在两个关键方面进行优化：一是减少从闪存到内存的数据传输量，二是以更大、更连续的数据块进行读取，”首席研究员 Keivan Alizadeh 详细说明了这一点。<br />
+<br />
+研究中引入了两种主要技术：“窗口化”，即重复利用最近推断过程中的激活数据；以及“行列捆绑”，通过将数据的行和列存储在一起，实现读取更大的数据块。在苹果 M1 Max CPU 上运用这些技术，相比传统的简单数据加载方法，推断速度提高了 4-5 倍；而在 GPU 上，速度提升更是达到了 20-25 倍。<br />
+<br />
+“这项技术突破对于在资源受限的环境中部署先进的大语言模型至关重要，这不仅扩大了这些模型的应用范围，也提高了它们的易用性，”共同作者 Mehrdad Farajtabar 表示。这些优化不久后可能使得复杂的 AI 助手和聊天机器人能够在 iPhone、iPad 和其他移动设备上流畅运行。<br />
+<br />
+## 苹果的战略愿景<br />
+<br />
+这两篇论文凸显了苹果在 AI 研究和应用领域的逐渐增强的领导力。尽管前景充满希望，专家们提醒，苹果在将这些技术整合到消费产品中时必须格外慎重，承担相应的责任。从保护隐私到预防技术滥用，都应全面考虑到[社会影响](<a href="https://venturebeat.com/ai/the-widening-web-of-effective-altruism-in-ai-security-the-ai-beat/">venturebeat.com/ai/the-widen…</a>)。<br />
+<br />
+苹果可能会将这些创新技术融入其产品系列，不仅仅是为了提升设备性能，更是为了预见混合 AI 服务的未来需求。苹果允许更复杂的 AI 模型在内存有限的设备上运行，为新一代应用和服务的开发奠定基础，这些应用和服务将以前所未有的方式利用大语言模型（LLMs）的强大功能。<br />
+<br />
+此外，苹果公开发布这些研究成果，对整个 AI 领域做出了贡献，这可能会促进该领域的进一步发展。这一行为反映了苹果对自身作为技术领先者地位的自信，以及不断探索新可能性的承诺。<br />
+<br />
+苹果的最新创新如果得到恰当应用，有可能将人工智能提升至一个新高度。逼真的数字化虚拟形象和强大的 AI 助手原本只存在于遥远的未来设想中 — 但在苹果科学家的努力下，这一未来正迅速成为现实。<br />
+<br />
+来源：<a href="https://venturebeat.com/ai/apples-latest-ai-research-could-completely-transform-your-iphone/">venturebeat.com/ai/apples-la…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mzg3NjY4NzkzMTE3NTczMTIvcHUvaW1nL19HMU94dE1xQjVjT0ttWnUuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1738614091349172544#m</id>
             <title>RT by @dotey: 卧槽，看了这个老哥用Midjourney V6生产3D素材，突发奇想，既然V6对中国传统元素的了解很详细，能不能也用来生产中国风3D素材贴图。
 
@@ -780,36 +880,6 @@ PIA的一个关键组成部分是引入条件模块，它利用条件帧和帧�
 <br />
 项目地址：<a href="https://pi-animator.github.io/">pi-animator.github.io/</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3MzgyNjkwNTU0ODI3NjEyMTYvcHUvaW1nL3pWTWpQTUdiOXFsMzJKa0EuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1738260817097953530#m</id>
-            <title>RT by @dotey: 这个等不了阿里自己实现Animate Anyone单图生成动作视频的老哥进展很快啊。
-
-已经发布了训练和推理代码，第一阶段训练已经完成，马上就会发布权重文件。
-
-项目基于magic-animate和AnimateDiff构建。
-
-https://github.com/guoqincode/AnimateAnyone-unofficial</title>
-            <link>https://nitter.cz/op7418/status/1738260817097953530#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1738260817097953530#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 18:10:48 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个等不了阿里自己实现Animate Anyone单图生成动作视频的老哥进展很快啊。<br />
-<br />
-已经发布了训练和推理代码，第一阶段训练已经完成，马上就会发布权重文件。<br />
-<br />
-项目基于magic-animate和AnimateDiff构建。<br />
-<br />
-<a href="https://github.com/guoqincode/AnimateAnyone-unofficial">github.com/guoqincode/Animat…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ItSy1pZmJNQUFBeG9rLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
