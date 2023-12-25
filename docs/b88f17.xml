@@ -5,6 +5,62 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1739123470322016718#m</id>
+            <title>推荐阅读：《多个 AI 智能体共同解决化学难题 [译]》
+
+尽管人工智能技术飞速发展，但 AI 目前还无法完全替代人类从事科学研究。然而，这并不意味着 AI 不能在一些日常的科学实验工作中提供自动化的帮助。举个例子，就在几年前，研究人员就已经让 AI 控制自动化实验室设备，并成功让它全面记录所有可能发生的化学反应。
+
+虽然这种方法很有效，但最初设立这个系统时仍需要研究人员大量的干预。现在，卡内基梅隆大学的一个团队已经探索出了一种方法，让 AI 系统能够自行学习如何进行化学操作。这个系统需要三个专门化的 AI 智能体，每个负责不同的任务。一旦设置完成并提供了所需原料，你只需告诉它你想进行的反应类型，它就能自行解决了。
+
+研究人员并没有依赖单一的系统来完成化学领域的所有工作，而是设置了几个不同的模块，这些模块在工作分配上互相配合，共同构成了一个名为“Coscientist”的系统。
+
+他们使用了以下三个模块：
+
+1. 网络搜索器（Web searcher）： 这个模块有两项核心功能：一是利用 Google 的搜索 API 来寻找可能含有有用信息的网页；二是获取这些网页的内容并从中提取信息，这有点像 ChatGPT 在对话早期部分维持的上下文，帮助它更好地回答后续问题。研究者可以追踪这个模块花费时间的地方，发现它访问的页面中大约一半是维基百科。此外，它最常访问的网站前五名包括了美国化学学会和英国皇家化学学会发布的期刊。
+
+2. 文档搜索器（Documentation searcher）： 可以把这个模块看作是用于“查阅手册”的 AI。它将控制各种实验室自动化设备，比如机器人流体处理器，这些设备通常是通过专门的命令或类似 Python 语言的接口来控制的。这个 AI 模块可以访问所有这些设备的使用手册，以便了解如何操作它们。
+
+3. 规划器（Planner）： 规划器可以向其他两个 AI 模块发出指令并处理它们的回应。它能够在一个 Python 编程环境中执行代码，从而进行各种计算。它还能操作自动化实验室设备，亲自进行和分析实验。因此，规划器就像是一个化学家，它从文献中学习，并尝试使用实验设备来应用所学的知识。
+
+规划器还能识别软件错误，无论是它的 Python 脚本还是操作自动化硬件时的错误，并据此进行修正。
+
+原文：https://arstechnica.com/science/2023/12/large-language-models-can-figure-out-how-to-do-chemistry/
+译文：https://baoyu.io/translations/ai/large-language-models-can-figure-out-how-to-do-chemistry</title>
+            <link>https://nitter.cz/dotey/status/1739123470322016718#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1739123470322016718#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 25 Dec 2023 03:18:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>推荐阅读：《多个 AI 智能体共同解决化学难题 [译]》<br />
+<br />
+尽管人工智能技术飞速发展，但 AI 目前还无法完全替代人类从事科学研究。然而，这并不意味着 AI 不能在一些日常的科学实验工作中提供自动化的帮助。举个例子，就在几年前，研究人员就已经让 AI 控制自动化实验室设备，并成功让它全面记录所有可能发生的化学反应。<br />
+<br />
+虽然这种方法很有效，但最初设立这个系统时仍需要研究人员大量的干预。现在，卡内基梅隆大学的一个团队已经探索出了一种方法，让 AI 系统能够自行学习如何进行化学操作。这个系统需要三个专门化的 AI 智能体，每个负责不同的任务。一旦设置完成并提供了所需原料，你只需告诉它你想进行的反应类型，它就能自行解决了。<br />
+<br />
+研究人员并没有依赖单一的系统来完成化学领域的所有工作，而是设置了几个不同的模块，这些模块在工作分配上互相配合，共同构成了一个名为“Coscientist”的系统。<br />
+<br />
+他们使用了以下三个模块：<br />
+<br />
+1. 网络搜索器（Web searcher）： 这个模块有两项核心功能：一是利用 Google 的搜索 API 来寻找可能含有有用信息的网页；二是获取这些网页的内容并从中提取信息，这有点像 ChatGPT 在对话早期部分维持的上下文，帮助它更好地回答后续问题。研究者可以追踪这个模块花费时间的地方，发现它访问的页面中大约一半是维基百科。此外，它最常访问的网站前五名包括了美国化学学会和英国皇家化学学会发布的期刊。<br />
+<br />
+2. 文档搜索器（Documentation searcher）： 可以把这个模块看作是用于“查阅手册”的 AI。它将控制各种实验室自动化设备，比如机器人流体处理器，这些设备通常是通过专门的命令或类似 Python 语言的接口来控制的。这个 AI 模块可以访问所有这些设备的使用手册，以便了解如何操作它们。<br />
+<br />
+3. 规划器（Planner）： 规划器可以向其他两个 AI 模块发出指令并处理它们的回应。它能够在一个 Python 编程环境中执行代码，从而进行各种计算。它还能操作自动化实验室设备，亲自进行和分析实验。因此，规划器就像是一个化学家，它从文献中学习，并尝试使用实验设备来应用所学的知识。<br />
+<br />
+规划器还能识别软件错误，无论是它的 Python 脚本还是操作自动化硬件时的错误，并据此进行修正。<br />
+<br />
+原文：<a href="https://arstechnica.com/science/2023/12/large-language-models-can-figure-out-how-to-do-chemistry/">arstechnica.com/science/2023…</a><br />
+译文：<a href="https://baoyu.io/translations/ai/large-language-models-can-figure-out-how-to-do-chemistry">baoyu.io/translations/ai/lar…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NLYmtxeVcwQUFDc2x4LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1738978659808022619#m</id>
             <title>“在我们继续之前，我想先重复一遍刚才的内容，以确认我已经完全理解了。”
 
@@ -823,24 +879,6 @@ https://baoyu.io/blog/ai/will-ai-impact-us-in-2024</title>
 <br />
 <a href="https://baoyu.io/blog/ai/will-ai-impact-us-in-2024">baoyu.io/blog/ai/will-ai-imp…</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0JfdjljRldRQUVMTjNZLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/goldengrape/status/1738342053808046208#m</id>
-            <title>RT by @dotey: 这一篇超好，需要细细研读</title>
-            <link>https://nitter.cz/goldengrape/status/1738342053808046208#m</link>
-            <guid isPermaLink="false">https://nitter.cz/goldengrape/status/1738342053808046208#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Dec 2023 23:33:37 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这一篇超好，需要细细研读</p>
-<p><a href="https://nitter.cz/dotey/status/1738030025859817929#m">nitter.cz/dotey/status/1738030025859817929#m</a></p>
                 ]]>
             </content:encoded>
         </item>
