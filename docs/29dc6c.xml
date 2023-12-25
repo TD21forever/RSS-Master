@@ -5,6 +5,108 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1739114693023920260#m</id>
+            <title>Tracking Any Object Amodally ：以非直观方式追踪任何对象
+
+特别是在物体部分遮挡或不完全可见的情况下，也能理解其完整结构。
+
+该项目能由卡内基梅隆大学和丰田研究所开发，让AI能像人一样，即使在只能看到物体一部分的情况下，也能识别并追踪这个物体的整体。
+
+比如，当我们看到一辆部分被墙遮挡的车时，即使只看到一半，我们也能知道那是一辆车，并且脑海中会自动想象出车的全貌。
+
+这个项目就是要让计算机也能做到这一点。在物体被遮挡的情况下，计算机仍能“理解”并追踪到这个物体的完整形状和位置。
+
+这对于自动驾驶车辆来说特别重要。想象一下，如果自动驾驶车辆能像人一样，即使在复杂的环境中也能准确识别和追踪部分被遮挡的行人或其他车辆，那么它的驾驶就会更安全、更可靠。
+
+这个项目能大幅提升计算机视觉系统的智能，让它们在处理遮挡物体时更加像人类，从而在自动驾驶、视频监控等领域发挥更大的作用。
+
+TAO-Amodal数据集：
+
+为提高物体追踪技术他们专门设计了一个数据集：TAO-Amodal
+
+这个数据集包含了大量的视频序列，其中包括各种被遮挡或部分可见的物体，以及详细标注信息。
+
+它可以让AI能够更好地理解和追踪那些我们只能看到一部分的物体。
+
+- 数据集规模：包含880种多样的类别，覆盖数千个视频序列。
+
+- 注释类型：数据集包括完全不可见、部分出框和被遮挡物体的 amodal（非模态）和 modal（模态）边界框。
+
+- 重点：TAO-Amodal 数据集的重点在于评估当前追踪器在遮挡推理方面的能力，通过追踪任何物体（Tracking Any Object）的 Amodal 感知（Amodal perception）来实现。
+
+Amodal Expander 插件
+
+项目还开发了一个轻量级插件模块“Amodal Expander 插件”，这个是一个轻量级的插件模块，用于改进物体追踪器的功能。
+
+Modal 追踪器：这种追踪器主要关注物体的可见部分。它在物体完全可见时表现良好，但如果物体被遮挡或部分不可见，它可能无法准确追踪。
+
+Amodal 追踪器：与Modal追踪器不同，Amodal 追踪器能够理解和推断物体的完整形状，即使物体部分被遮挡或不完全可见。这意味着即使在复杂的视觉环境中，Amodal 追踪器也能更准确地追踪物体。
+
+Amodal Expander插件的作用是将标准的 Modal 追踪器转换为 Amodal 追踪器。这是通过在少量视频序列上对追踪器进行微调实现的。微调后的追踪器能够更好地处理部分遮挡或不完全可见的物体，从而在追踪这些物体时更为有效和准确。
+
+在TAO-Amodal数据集上的测试结果显示，该技术在检测和追踪被遮挡物体方面取得了3.3%和1.6%的改进。特别是在追踪人物方面，与现有的模态追踪技术相比，性能提高了2倍。 
+
+项目地址：https://tao-amodal.github.io/
+论文：https://arxiv.org/abs/2312.12433
+GitHub：https://github.com/WesleyHsieh0806/TAO-Amodal</title>
+            <link>https://nitter.cz/xiaohuggg/status/1739114693023920260#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1739114693023920260#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 25 Dec 2023 02:43:48 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Tracking Any Object Amodally ：以非直观方式追踪任何对象<br />
+<br />
+特别是在物体部分遮挡或不完全可见的情况下，也能理解其完整结构。<br />
+<br />
+该项目能由卡内基梅隆大学和丰田研究所开发，让AI能像人一样，即使在只能看到物体一部分的情况下，也能识别并追踪这个物体的整体。<br />
+<br />
+比如，当我们看到一辆部分被墙遮挡的车时，即使只看到一半，我们也能知道那是一辆车，并且脑海中会自动想象出车的全貌。<br />
+<br />
+这个项目就是要让计算机也能做到这一点。在物体被遮挡的情况下，计算机仍能“理解”并追踪到这个物体的完整形状和位置。<br />
+<br />
+这对于自动驾驶车辆来说特别重要。想象一下，如果自动驾驶车辆能像人一样，即使在复杂的环境中也能准确识别和追踪部分被遮挡的行人或其他车辆，那么它的驾驶就会更安全、更可靠。<br />
+<br />
+这个项目能大幅提升计算机视觉系统的智能，让它们在处理遮挡物体时更加像人类，从而在自动驾驶、视频监控等领域发挥更大的作用。<br />
+<br />
+TAO-Amodal数据集：<br />
+<br />
+为提高物体追踪技术他们专门设计了一个数据集：TAO-Amodal<br />
+<br />
+这个数据集包含了大量的视频序列，其中包括各种被遮挡或部分可见的物体，以及详细标注信息。<br />
+<br />
+它可以让AI能够更好地理解和追踪那些我们只能看到一部分的物体。<br />
+<br />
+- 数据集规模：包含880种多样的类别，覆盖数千个视频序列。<br />
+<br />
+- 注释类型：数据集包括完全不可见、部分出框和被遮挡物体的 amodal（非模态）和 modal（模态）边界框。<br />
+<br />
+- 重点：TAO-Amodal 数据集的重点在于评估当前追踪器在遮挡推理方面的能力，通过追踪任何物体（Tracking Any Object）的 Amodal 感知（Amodal perception）来实现。<br />
+<br />
+Amodal Expander 插件<br />
+<br />
+项目还开发了一个轻量级插件模块“Amodal Expander 插件”，这个是一个轻量级的插件模块，用于改进物体追踪器的功能。<br />
+<br />
+Modal 追踪器：这种追踪器主要关注物体的可见部分。它在物体完全可见时表现良好，但如果物体被遮挡或部分不可见，它可能无法准确追踪。<br />
+<br />
+Amodal 追踪器：与Modal追踪器不同，Amodal 追踪器能够理解和推断物体的完整形状，即使物体部分被遮挡或不完全可见。这意味着即使在复杂的视觉环境中，Amodal 追踪器也能更准确地追踪物体。<br />
+<br />
+Amodal Expander插件的作用是将标准的 Modal 追踪器转换为 Amodal 追踪器。这是通过在少量视频序列上对追踪器进行微调实现的。微调后的追踪器能够更好地处理部分遮挡或不完全可见的物体，从而在追踪这些物体时更为有效和准确。<br />
+<br />
+在TAO-Amodal数据集上的测试结果显示，该技术在检测和追踪被遮挡物体方面取得了3.3%和1.6%的改进。特别是在追踪人物方面，与现有的模态追踪技术相比，性能提高了2倍。 <br />
+<br />
+项目地址：<a href="https://tao-amodal.github.io/">tao-amodal.github.io/</a><br />
+论文：<a href="https://arxiv.org/abs/2312.12433">arxiv.org/abs/2312.12433</a><br />
+GitHub：<a href="https://github.com/WesleyHsieh0806/TAO-Amodal">github.com/WesleyHsieh0806/T…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mzg4OTExNDMwNTA1Nzk5NjgvcHUvaW1nL2pIUWNZQTdyekpLYXdIOFMuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1738881963384356883#m</id>
             <title>Fairy：通过自然语言指令就能对视频进行编辑
 
@@ -657,28 +759,6 @@ MJ未来最大的危机可能是来源于此，那就是版权问题<br />
 <br />
 它在 GitHub 上分享了代码和详细的电路图：<a href="https://github.com/maHidaka/ros_face/blob/master/README.md">github.com/maHidaka/ros_face…</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3Mzg1MTQ3NDE5NzMzODUyMTYvcHUvaW1nL2JfemRvOWVTbmdaYWdwU0IuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1738512384749371524#m</id>
-            <title>R to @xiaohuggg: DreamTuner支持局部编辑（如表情变化）和全局编辑（如场景和动作的变化），即使在复杂的文本输入下也能生成高度详细的图像。
-
-生成的图像不仅细节丰富，而且准确保持了参考图像的细节。</title>
-            <link>https://nitter.cz/xiaohuggg/status/1738512384749371524#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1738512384749371524#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 23 Dec 2023 10:50:27 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>DreamTuner支持局部编辑（如表情变化）和全局编辑（如场景和动作的变化），即使在复杂的文本输入下也能生成高度详细的图像。<br />
-<br />
-生成的图像不仅细节丰富，而且准确保持了参考图像的细节。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NCdnRLRGE0QUFfZXF0LmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
