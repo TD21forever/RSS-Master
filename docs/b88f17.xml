@@ -5,6 +5,149 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1739785576151232888#m</id>
+            <title>YAYI 2 是中科闻歌研发的新一代开源大语言模型，包括 Base 和 Chat 版本，参数规模为 30B。YAYI2-30B 是基于 Transformer 的大语言模型，采用了超过 2 万亿 Tokens 的高质量、多语言语料进行预训练。针对通用和特定领域的应用场景，采用了百万级指令进行微调，同时借助人类反馈强化学习方法，以更好地使模型与人类价值观对齐。
+
+本次开源的模型为 YAYI2-30B Base 模型。
+
+相关论文：https://arxiv.org/abs/2312.14862
+项目地址：https://github.com/wenge-research/YAYI2</title>
+            <link>https://nitter.cz/dotey/status/1739785576151232888#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1739785576151232888#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 26 Dec 2023 23:09:39 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>YAYI 2 是中科闻歌研发的新一代开源大语言模型，包括 Base 和 Chat 版本，参数规模为 30B。YAYI2-30B 是基于 Transformer 的大语言模型，采用了超过 2 万亿 Tokens 的高质量、多语言语料进行预训练。针对通用和特定领域的应用场景，采用了百万级指令进行微调，同时借助人类反馈强化学习方法，以更好地使模型与人类价值观对齐。<br />
+<br />
+本次开源的模型为 YAYI2-30B Base 模型。<br />
+<br />
+相关论文：<a href="https://arxiv.org/abs/2312.14862">arxiv.org/abs/2312.14862</a><br />
+项目地址：<a href="https://github.com/wenge-research/YAYI2">github.com/wenge-research/YA…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NUMUtBVldnQUE0M1NDLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NUMVBTMVdjQUV1c1JPLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1739775517958516795#m</id>
+            <title>根据这篇论文《Exploiting Novel GPT-4 APIs | 利用新型GPT-4 API的漏洞》的信息，没想到调用 GPT-4 API 尤其是微调后的 GPT-4 可以干很多“坏事”😄
+
+主要漏洞包括：
+
+1. 微调应用编程接口（Fine-tuning API）可能会撤销或削弱安全防护措施，这可能导致模型产生有害输出或协助完成危险请求。
+
+2. 通过微调，模型可能会生成针对公众人物的错误信息。
+
+3. 微调机制可能会提取训练数据中的私人信息，如电子邮件。
+
+4. 微调也可能在代码建议中插入恶意的URL。
+
+5. 函数调用应用编程接口（Function calling API）允许执行任意未经清洁的函数调用，这可能导致潜在的攻击行为。
+
+6. 知识检索应用编程接口（Knowledge retrieval API）可能被利用来通过提示插入或在文档/消息中的指令来误导用户或执行不期望的函数调用。
+
+7. 对于函数调用和知识检索的输出，它们没有比用户提示更高的权威性，这可以防止某些攻破限制的攻击行为。
+
+论文摘要 
+
+通常，语言模型攻击假设两种极端情况：
+一种是对模型权重具有完全的白盒访问权限；
+另一种是只有生成文本API的黑盒访问权限。
+
+但是，实际上的API功能通常比仅仅生成文本更强大，它们提供一种“灰盒”访问方式，这导致了新的威胁向量。为了探索这一问题，我们进行了对GPT-4 API的“红队”攻击测试，该API公开了三种新功能：微调、函数调用和知识检索。
+
+我们发现，通过少量的15个有害样本或100个良性样本进行模型微调，就可以移除GPT-4的核心防护，并能够生成一系列有害的输出。
+
+此外，我们还发现GPT-4助手模型容易暴露函数调用的格式，并能够被诱导执行任意函数调用。
+
+最后，我们发现知识检索可以通过在检索文档中注入指令来进行劫持。这些漏洞凸显出，任何新增的API功能都可能带来新的漏洞。
+
+论文地址：https://arxiv.org/abs/2312.14302
+（计划晚点翻译一下这篇论文）</title>
+            <link>https://nitter.cz/dotey/status/1739775517958516795#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1739775517958516795#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 26 Dec 2023 22:29:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>根据这篇论文《Exploiting Novel GPT-4 APIs | 利用新型GPT-4 API的漏洞》的信息，没想到调用 GPT-4 API 尤其是微调后的 GPT-4 可以干很多“坏事”😄<br />
+<br />
+主要漏洞包括：<br />
+<br />
+1. 微调应用编程接口（Fine-tuning API）可能会撤销或削弱安全防护措施，这可能导致模型产生有害输出或协助完成危险请求。<br />
+<br />
+2. 通过微调，模型可能会生成针对公众人物的错误信息。<br />
+<br />
+3. 微调机制可能会提取训练数据中的私人信息，如电子邮件。<br />
+<br />
+4. 微调也可能在代码建议中插入恶意的URL。<br />
+<br />
+5. 函数调用应用编程接口（Function calling API）允许执行任意未经清洁的函数调用，这可能导致潜在的攻击行为。<br />
+<br />
+6. 知识检索应用编程接口（Knowledge retrieval API）可能被利用来通过提示插入或在文档/消息中的指令来误导用户或执行不期望的函数调用。<br />
+<br />
+7. 对于函数调用和知识检索的输出，它们没有比用户提示更高的权威性，这可以防止某些攻破限制的攻击行为。<br />
+<br />
+论文摘要 <br />
+<br />
+通常，语言模型攻击假设两种极端情况：<br />
+一种是对模型权重具有完全的白盒访问权限；<br />
+另一种是只有生成文本API的黑盒访问权限。<br />
+<br />
+但是，实际上的API功能通常比仅仅生成文本更强大，它们提供一种“灰盒”访问方式，这导致了新的威胁向量。为了探索这一问题，我们进行了对GPT-4 API的“红队”攻击测试，该API公开了三种新功能：微调、函数调用和知识检索。<br />
+<br />
+我们发现，通过少量的15个有害样本或100个良性样本进行模型微调，就可以移除GPT-4的核心防护，并能够生成一系列有害的输出。<br />
+<br />
+此外，我们还发现GPT-4助手模型容易暴露函数调用的格式，并能够被诱导执行任意函数调用。<br />
+<br />
+最后，我们发现知识检索可以通过在检索文档中注入指令来进行劫持。这些漏洞凸显出，任何新增的API功能都可能带来新的漏洞。<br />
+<br />
+论文地址：<a href="https://arxiv.org/abs/2312.14302">arxiv.org/abs/2312.14302</a><br />
+（计划晚点翻译一下这篇论文）</p>
+<p><a href="https://nitter.cz/_akhaliq/status/1739480367776563443#m">nitter.cz/_akhaliq/status/1739480367776563443#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NUc2NXOFdzQUFpVFFMLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1739773412162068785#m</id>
+            <title>强烈推荐这篇：《Advanced RAG Techniques: an Illustrated Overview》
+不可多得的全面阐述 RAG 概念指南。
+
+原文：https://pub.towardsai.net/advanced-rag-techniques-an-illustrated-overview-04d193d8fec6
+
+译文：https://baoyu.io/translations/rag/advanced-rag-techniques-an-illustrated-overview</title>
+            <link>https://nitter.cz/dotey/status/1739773412162068785#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1739773412162068785#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 26 Dec 2023 22:21:19 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>强烈推荐这篇：《Advanced RAG Techniques: an Illustrated Overview》<br />
+不可多得的全面阐述 RAG 概念指南。<br />
+<br />
+原文：<a href="https://pub.towardsai.net/advanced-rag-techniques-an-illustrated-overview-04d193d8fec6">pub.towardsai.net/advanced-r…</a><br />
+<br />
+译文：<a href="https://baoyu.io/translations/rag/advanced-rag-techniques-an-illustrated-overview">baoyu.io/translations/rag/ad…</a></p>
+<p><a href="https://nitter.cz/jerryjliu0/status/1739678474842128455#m">nitter.cz/jerryjliu0/status/1739678474842128455#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NUcXFkQldRQUVicUFWLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/thinkingjimmy/status/1739533087623811333#m</id>
             <title>RT by @dotey: 之前一直想写 Stable Diffusion 相关的教程，但觉得 Stable Diffusion WebUI 可拓展性不强，自由度不够高，所以一直没下笔。最近尝试了下 ComfyUI ，才惊叹地发现这才是我想要的。市面上系统性的 ComfyUI 教程不多，所以最近跟朋友一起搞了一个新教程：https://www.comflowy.com/zh-CN 希望对大家有帮助。</title>
             <link>https://nitter.cz/thinkingjimmy/status/1739533087623811333#m</link>
@@ -649,144 +792,6 @@ https://x.com/dotey/status/1739180460331155513?s=20</title>
                     <p>相关论文已经翻译了<br />
 <a href="https://x.com/dotey/status/1739180460331155513?s=20">x.com/dotey/status/173918046…</a></p>
 <p><a href="https://nitter.cz/dotey/status/1739180460331155513#m">nitter.cz/dotey/status/1739180460331155513#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1739180460331155513#m</id>
-            <title>翻译了最近很火的论文：《Autonomous chemical research with large language models | 大语言模型在自主化学研究中的应用 [译]》
-
-中文版：https://baoyu.io/translations/ai-paper/s41586-023-06792-0
-原始论文：https://www.nature.com/articles/s41586-023-06792-0
-pdf：https://www.nature.com/articles/s41586-023-06792-0.pdf
-
-本研究重点介绍了一种基于多个大语言模型的智能助手（我们称之为 Coscientist），它能独立设计、规划并执行复杂的科学实验。
-
-Coscientist 由匹兹堡的 Coscientist 大学和卡内基梅隆大学的 Wilton E. Scott 能源创新研究所共同研发。这个智能助手可以通过互联网搜索相关资料，使用机器人实验的应用程序接口 (API)，并借助其他大语言模型来完成多样化的任务。Coscientist 的研发是独立进行的，与其他自主智能体的研究同步展开，化学领域的 ChemCrow 也是一个相关的例子。
-
-我们在论文中展示了 Coscientist 在六大任务方面的灵活性和高效能力，包括：
-（1）利用公开数据规划已知化合物的化学合成；
-（2）高效搜索和浏览大量硬件文档；
-（3）利用文档在云实验室执行高阶指令；
-（4）通过低阶指令精准控制液体处理设备；
-（5）处理需要多个硬件模块协同和多数据源整合的复杂科学任务；
-（6）解决分析既往实验数据的优化问题。</title>
-            <link>https://nitter.cz/dotey/status/1739180460331155513#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1739180460331155513#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 25 Dec 2023 07:05:08 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>翻译了最近很火的论文：《Autonomous chemical research with large language models | 大语言模型在自主化学研究中的应用 [译]》<br />
-<br />
-中文版：<a href="https://baoyu.io/translations/ai-paper/s41586-023-06792-0">baoyu.io/translations/ai-pap…</a><br />
-原始论文：<a href="https://www.nature.com/articles/s41586-023-06792-0">nature.com/articles/s41586-0…</a><br />
-pdf：<a href="https://www.nature.com/articles/s41586-023-06792-0.pdf">nature.com/articles/s41586-0…</a><br />
-<br />
-本研究重点介绍了一种基于多个大语言模型的智能助手（我们称之为 Coscientist），它能独立设计、规划并执行复杂的科学实验。<br />
-<br />
-Coscientist 由匹兹堡的 Coscientist 大学和卡内基梅隆大学的 Wilton E. Scott 能源创新研究所共同研发。这个智能助手可以通过互联网搜索相关资料，使用机器人实验的应用程序接口 (API)，并借助其他大语言模型来完成多样化的任务。Coscientist 的研发是独立进行的，与其他自主智能体的研究同步展开，化学领域的 ChemCrow 也是一个相关的例子。<br />
-<br />
-我们在论文中展示了 Coscientist 在六大任务方面的灵活性和高效能力，包括：<br />
-（1）利用公开数据规划已知化合物的化学合成；<br />
-（2）高效搜索和浏览大量硬件文档；<br />
-（3）利用文档在云实验室执行高阶指令；<br />
-（4）通过低阶指令精准控制液体处理设备；<br />
-（5）处理需要多个硬件模块协同和多数据源整合的复杂科学任务；<br />
-（6）解决分析既往实验数据的优化问题。</p>
-<p><a href="https://nitter.cz/dotey/status/1739123470322016718#m">nitter.cz/dotey/status/1739123470322016718#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NMTzk2ZVhnQUFNMThnLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NMUEJjc1hBQUF6cEZjLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NMUEhEVldRQUFmblZwLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NMUElxa1hJQUF5NGlCLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1739123470322016718#m</id>
-            <title>推荐阅读：《多个 AI 智能体共同解决化学难题 [译]》
-
-尽管人工智能技术飞速发展，但 AI 目前还无法完全替代人类从事科学研究。然而，这并不意味着 AI 不能在一些日常的科学实验工作中提供自动化的帮助。举个例子，就在几年前，研究人员就已经让 AI 控制自动化实验室设备，并成功让它全面记录所有可能发生的化学反应。
-
-虽然这种方法很有效，但最初设立这个系统时仍需要研究人员大量的干预。现在，卡内基梅隆大学的一个团队已经探索出了一种方法，让 AI 系统能够自行学习如何进行化学操作。这个系统需要三个专门化的 AI 智能体，每个负责不同的任务。一旦设置完成并提供了所需原料，你只需告诉它你想进行的反应类型，它就能自行解决了。
-
-研究人员并没有依赖单一的系统来完成化学领域的所有工作，而是设置了几个不同的模块，这些模块在工作分配上互相配合，共同构成了一个名为“Coscientist”的系统。
-
-他们使用了以下三个模块：
-
-1. 网络搜索器（Web searcher）： 这个模块有两项核心功能：一是利用 Google 的搜索 API 来寻找可能含有有用信息的网页；二是获取这些网页的内容并从中提取信息，这有点像 ChatGPT 在对话早期部分维持的上下文，帮助它更好地回答后续问题。研究者可以追踪这个模块花费时间的地方，发现它访问的页面中大约一半是维基百科。此外，它最常访问的网站前五名包括了美国化学学会和英国皇家化学学会发布的期刊。
-
-2. 文档搜索器（Documentation searcher）： 可以把这个模块看作是用于“查阅手册”的 AI。它将控制各种实验室自动化设备，比如机器人流体处理器，这些设备通常是通过专门的命令或类似 Python 语言的接口来控制的。这个 AI 模块可以访问所有这些设备的使用手册，以便了解如何操作它们。
-
-3. 规划器（Planner）： 规划器可以向其他两个 AI 模块发出指令并处理它们的回应。它能够在一个 Python 编程环境中执行代码，从而进行各种计算。它还能操作自动化实验室设备，亲自进行和分析实验。因此，规划器就像是一个化学家，它从文献中学习，并尝试使用实验设备来应用所学的知识。
-
-规划器还能识别软件错误，无论是它的 Python 脚本还是操作自动化硬件时的错误，并据此进行修正。
-
-原文：https://arstechnica.com/science/2023/12/large-language-models-can-figure-out-how-to-do-chemistry/
-译文：https://baoyu.io/translations/ai/large-language-models-can-figure-out-how-to-do-chemistry</title>
-            <link>https://nitter.cz/dotey/status/1739123470322016718#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1739123470322016718#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 25 Dec 2023 03:18:41 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>推荐阅读：《多个 AI 智能体共同解决化学难题 [译]》<br />
-<br />
-尽管人工智能技术飞速发展，但 AI 目前还无法完全替代人类从事科学研究。然而，这并不意味着 AI 不能在一些日常的科学实验工作中提供自动化的帮助。举个例子，就在几年前，研究人员就已经让 AI 控制自动化实验室设备，并成功让它全面记录所有可能发生的化学反应。<br />
-<br />
-虽然这种方法很有效，但最初设立这个系统时仍需要研究人员大量的干预。现在，卡内基梅隆大学的一个团队已经探索出了一种方法，让 AI 系统能够自行学习如何进行化学操作。这个系统需要三个专门化的 AI 智能体，每个负责不同的任务。一旦设置完成并提供了所需原料，你只需告诉它你想进行的反应类型，它就能自行解决了。<br />
-<br />
-研究人员并没有依赖单一的系统来完成化学领域的所有工作，而是设置了几个不同的模块，这些模块在工作分配上互相配合，共同构成了一个名为“Coscientist”的系统。<br />
-<br />
-他们使用了以下三个模块：<br />
-<br />
-1. 网络搜索器（Web searcher）： 这个模块有两项核心功能：一是利用 Google 的搜索 API 来寻找可能含有有用信息的网页；二是获取这些网页的内容并从中提取信息，这有点像 ChatGPT 在对话早期部分维持的上下文，帮助它更好地回答后续问题。研究者可以追踪这个模块花费时间的地方，发现它访问的页面中大约一半是维基百科。此外，它最常访问的网站前五名包括了美国化学学会和英国皇家化学学会发布的期刊。<br />
-<br />
-2. 文档搜索器（Documentation searcher）： 可以把这个模块看作是用于“查阅手册”的 AI。它将控制各种实验室自动化设备，比如机器人流体处理器，这些设备通常是通过专门的命令或类似 Python 语言的接口来控制的。这个 AI 模块可以访问所有这些设备的使用手册，以便了解如何操作它们。<br />
-<br />
-3. 规划器（Planner）： 规划器可以向其他两个 AI 模块发出指令并处理它们的回应。它能够在一个 Python 编程环境中执行代码，从而进行各种计算。它还能操作自动化实验室设备，亲自进行和分析实验。因此，规划器就像是一个化学家，它从文献中学习，并尝试使用实验设备来应用所学的知识。<br />
-<br />
-规划器还能识别软件错误，无论是它的 Python 脚本还是操作自动化硬件时的错误，并据此进行修正。<br />
-<br />
-原文：<a href="https://arstechnica.com/science/2023/12/large-language-models-can-figure-out-how-to-do-chemistry/">arstechnica.com/science/2023…</a><br />
-译文：<a href="https://baoyu.io/translations/ai/large-language-models-can-figure-out-how-to-do-chemistry">baoyu.io/translations/ai/lar…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NLYmtxeVcwQUFDc2x4LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1738978659808022619#m</id>
-            <title>“在我们继续之前，我想先重复一遍刚才的内容，以确认我已经完全理解了。”
-
-在沟通中，最有效的策略之一就是用自己的话重述对方刚刚解释的内容。
-
-推荐阅读：Let me repeat that back to you -- Two-phase commit for humans  https://roughlywritten.substack.com/p/let-me-repeat-that-back-to-you
-译文：https://baoyu.io/translations/work/let-me-repeat-that-back-to-you</title>
-            <link>https://nitter.cz/dotey/status/1738978659808022619#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1738978659808022619#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 24 Dec 2023 17:43:15 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>“在我们继续之前，我想先重复一遍刚才的内容，以确认我已经完全理解了。”<br />
-<br />
-在沟通中，最有效的策略之一就是用自己的话重述对方刚刚解释的内容。<br />
-<br />
-推荐阅读：Let me repeat that back to you -- Two-phase commit for humans  <a href="https://roughlywritten.substack.com/p/let-me-repeat-that-back-to-you">roughlywritten.substack.com/…</a><br />
-译文：<a href="https://baoyu.io/translations/work/let-me-repeat-that-back-to-you">baoyu.io/translations/work/l…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NJWHJ2ZVhrQUFnTnZtLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
