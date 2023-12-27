@@ -5,6 +5,29 @@
         <link>https://sspai.com/matrix</link>
         
         <item>
+            <id>https://sspai.com/post/85309</id>
+            <title>从头开始做个Mac小工具02：奇奇怪怪的问题&amp;工具0.1版本发布</title>
+            <link>https://sspai.com/post/85309</link>
+            <guid isPermaLink="false">https://sspai.com/post/85309</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 27 Dec 2023 06:56:22 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 折腾进度, 启动台配置数据库, 奇怪的问题, .sheet修饰词的数据更新问题
+<br>
+<br>
+总结: 作者在更新折腾进度时，提到了他对启动台配置数据库的分析和功能实现。在实现过程中，作者遇到了一些奇怪的问题，如分组数据关联错误和.sheet修饰词的数据同步问题。作者通过解决问题的思路和方法，成功解决了这些问题。此外，作者还提到了对SQLite数据库的备份功能的实现。 </div>
+                        <hr>
+                    
+                    <p>大家好呀，经过了近一周的折腾我又来更新我的折腾进度了。</p><p>上次我在<a href="https://sspai.com/post/85187" target="_blank">《从头开始做个Mac小工具01：启动台数据分析&amp;数据读取》</a>中提到我初步分析了启动台配置数据库的表结构，没更新的这几天我主要就是在老老实实的码代码，实现功能。</p><p>在过程中，我经历了各种奇奇怪怪的问题，再此我大概做个总结，并说说我的解决思路。</p><h2>奇怪的问题</h2><h3>-1 解决问题</h3><p>我遇到的第一个问题，来自于启动台配置数据库神器数据。在记录启动台应用分组的表单groups中，每一个分组其实由两行数据组成，其中一行用于注明分组的名称，另一行用于关连分组中的APP。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/a8d59380489109fc2f0993fd3b150d20.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>第一次看这个数据库的时候，我就很好奇为什么数据分布的这么有规律，总是一行有名称一行名称是空（NULL）的，没想到后面给我这么大一个惊喜。</figcaption></figure><p>当我在实现APP分组的功能时，发现分组后的APP会神奇失踪不会出现在对应的组别下。经过items表和groups表的来回对比，我才找到原因。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/e75c25947830025affc1d7939c616317.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>就像这红框中那几行数据，它们都属于游戏分组。父id时48，当你去看游戏分组的id时发现，它有名称的id其实是47。</figcaption></figure><p>发现问题之后的解决起来就很容易了，在关联搜索的时候直接手动把ID减去1即可。或许这也是为什么这个数据所有与ID相关的数据全是整数，而不像一般的数据库通过UUID或者ID字符串作为数据主键。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/cbb17681e0e6542c30702b45b7b312f6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>神奇的 -1</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/9a04811f5e6f8fe647236ee050572d51.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>成功关联数据</figcaption></figure><h3>.sheet修饰词的数据更新问题</h3><p>实现数据查找后，接下来的重点就进入写界面的部份。在这里我又遇到了一个神奇的问题，数据锁死，无法同步。</p><p>因为这个问题搞得我心力交瘁，当时居然忘记截图，我就大概说一下触发的过程吧。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/e24ade9df9bd53c1f56c992c9e3c0761.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>实现代码如图</figcaption></figure><p>SwiftUI 提供了很便捷的前端开发库，其中每个View都有一<code>.sheet</code>修饰词可以直接实现模态窗口的绘制，通过在闭包中写需要绘制的窗口View即可。</p><p>从我的代码中可以很直观的看到我的模态窗口是用于显示分组下APP的列表的，每次选择新的分组，APP列表应该跟随更新。</p><p>然而，当时却遇到了问题，当APP每次重新启动时，第一次选择分组永远所显示的数据永远是代码初始化时预设的数据。假设当时我预设的<code>selectedAPP</code>为“游戏”分组，那么当APP重启后，不论选择哪个分组，第一次显示的分组数据都是“游戏”分组的数据。</p><p>经过查询，我发现<code>.sheet</code>修饰词的数据同步问题居然出现的概率不低，但每个人出现的情侣和解决的方法都不一样。没办法我只能换了多种设置数据的办法，最终像是撞大运一样，其中一种实现解决了数据同步的问题。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/a12ceb46078070ef5d3ccd280aa74270.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>通过在Item被点击的时间中强制设置selectedAPP的值，而不是单纯的等待List来手动更新就可以实现数据的同步</figcaption></figure><h3>SQLite的数据备份问题</h3><p>在实现了所有的数据展现功能后，我开始准备实现对启动台配置数据库的增删改查功能。</p><p>但在此之前，为了防止我写出什么了不得的Bug，我决定先做一个数据库备份的功能。</p><p>因为数据库是个未加密的SQLite3文件，所以我想都没想就写了个对db文件的复制与覆盖的功能作为数据库备份功能的实现。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/79ba58dd6fafae389ed905ac43baaaaa.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>就像这样，把db复制成db.backup作为备份文件。当数据需要回滚时，直接用备份文件覆盖原文件即可。</figcaption></figure><p>从截图中能注意到，其实除db文件外，还有db-shm和db-wal两个文件。但是当时我没在意，以为这两个文件时数据库管理工具生成的配置文件，与数据库的数据无关。</p><p>接着就出现了一个神奇的问题：无论我对db文件做了多少的修改，备份出来的文件永远都是修改前的数据。</p><p>此时我才意识到db-shm和db-wal两个文件的意义，经过查询，两者大概的功用如下：</p><blockquote><p>shm：在一个多进程的应用程序中，如果多个进程需要同时访问 SQLite 数据库文件，那么 SQLite 会使用 db-shm 文件来管理多个进程之间的通信。db-shm 文件不存储实际的数据，它只包含用于同步和通信的元数据。</p><p>wal：SQLite 使用写前日志以提高性能和数据完整性。通常，当执行写操作（如插入、删除或更新）时，SQLite 会将数据写入 db-wal 文件而不是直接写入数据库文件。然后，SQLite 会异步将这些数据刷新到数据库文件，以便在系统发生崩溃或其他故障时，可以从 db-wal 文件中恢复数据。</p></blockquote><p>因为我原来做SQLite数据库相关的项目少有涉及到基于文件备份这样的需求的，没有第一时间注意到所有的数据库操作会先生效与wal文件，后续再根据策略同步到db文件中这一事实。</p><p>所以单纯备份db数据会存在部份数据操作丢失的情形。</p><p>解决的办法也很简单，将其他两个文件同时备份即可。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/b00ab68a3904dbf93092127152086afc.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>把这两个一并备份了就行啦</figcaption></figure><h3>利用AIGC绘制APP的ICON</h3><p>实现了以上功能后，我决定现将0.1版本进行发布，这样可以让少数派的各位小伙伴帮忙在多个平台和系统上进行测试试用。</p><p>此时一个不是技术的问题开始困扰我：完全不会用设计软件、审美也很一般又不认识任何设计师的我应该怎么弄到一个图标，让我的APP不用默认图标像个破解失败的软件呢？</p><p>此时一个大胆的想法出现在我脑海：利用AIGC帮我画一个不就完了吗？</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/7b7860ae9a8fe153c039ffbae66dd7f1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>文言一心生成的icon</figcaption></figure><p>我先用文言一心试了试，且不说这到底好不好看，每张图的右下角都有一个“AI作图”的水印搞得我好恼火。这个水印也提醒了我另一个问题：AI作图的版权归属。</p><p>再次搜索后，我发现目前已经有商用平台开始做logo设计了，于是我找了一个看着还行的，通过付费生成了一个看着还不错的图标。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/b74db6b94f9d5720498713de01c48353.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>输入需求后一次性会设计多个logo，我选了其中一个进行了裁剪处理，最终形成了我APP的ICON</figcaption></figure><p>随后再次通过AI处理的方式生成了适配macOS的多种分辨率图标。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/50b27bd08db15f70be138caac5d03577.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>虽然意义不太明确，当看着还不错吧？</figcaption></figure><h2>0.1版本发布</h2><p>经过了以上的工作，我得形成了初步具备功能的启动台管理小工具APP，并将代码和打包好的dmg文件发布到了GitHub上。</p><h3>工具获取</h3><p>如果想要提前试用小工具APP的小伙伴可以直接点击GitHub，前往GitHub下载。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/177f0208ba529e5d45939d5a0748f658.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>点击红框处的release处</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/e307ef62de0d62d37c26a8cbe097bc61.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>直接下载dmg文件安装即可</figcaption></figure><p>如果有小伙伴访问GitHub比较困难的，可以在少数派站内私信我你的邮箱，我有空的时候会发邮件给您。</p><h3>功能介绍</h3><p>如何定位启动台的配置数据库位置请才考我的<a href="https://sspai.com/post/85136" target="_blank">《为啥Mac启动台图标删不掉？》</a>一文。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/c339ae765e01ce33e8145cdefbae0d7d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Toolbar上三个功能按钮分别为：DB备份、DB回滚与DB数据库重载（当有新应用在APP启动时安装上时使用）</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/63a5fe2f19faaf3a04ae1a983a774fc0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>上下文菜单为：查看分组内APP、重命名分组或APP在启动台显示的名称、删除分组或APP的图标</figcaption></figure><h3>能解决的问题</h3><p>目前这个APP已经能解决四类问题：遗留的APP图标清除、重复的APP图标清除、不想要在启动台上显示的APP清除、空的分组文件夹清除。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/79cba894b4a4e8beababde067c1a7b8c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>像这种已经无关联的废数据可以手动清除</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/24/d6dd4450dd5162dc3ecb9530a7d6ea65.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>还有这种重复的数据清除，罗技的Options+真的是启动台的问题大户……</figcaption></figure><h3>问题反馈</h3><p>因目前版本为Pre- release版本，您在使用中遇到任何的问题可以直接截图后在少数派站内私信我，或将问题描述发送至邮箱： <a href="mailto:2627851284@qq.com" target="_blank">2627851284@qq.com。</a></p><h2>下一阶段工作</h2><h3>UI优化</h3><p>目前UI还有大量的问题，比如美观性，又比如夜览模式下的渲染问题修复等。如果有小伙伴擅长UI设计，并愿意帮助我优化APP的，请务必联系我，万分感谢。</p><h3>功能优化</h3><p>目前规划中的功能包括：自动废数据清理、图标的icon替换、图标排序等等。</p><h2>最后麻烦大家在访问GitHub的时候帮我的项目点个星</h2><p>目前整个项目都将以开源模式运营，完全用爱发电，摆脱各位在觉得这个APP有用时，不吝给我点个星，让我更有动力继续更新下去。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/85378</id>
             <title>又吵架了？沉淀情绪，勇敢探索亲密关系的1+7+3个建议</title>
             <link>https://sspai.com/post/85378</link>
@@ -518,54 +541,6 @@ QuickAccessLang3=...</code></pre><p>用来识别标准字形的单个英文小�
                         <hr>
                     
                     <h2>写在前面</h2><p>多年以来，从学校颇高的毕业要求到互联网公司以卷著称的工作环境，我一直觉得我压力比较大，天天都想着放松。随着近两年的思考和实践，我的放松方式发生显著的变化，也有很多感悟。</p><h2>十年之前：放松的时候其实是在逃避</h2><p>那时候在学校，对于偏内向的我，学校项目、社交其实都会增加压力，独处的时候，主要是靠游戏来放松的，可是为什么说游戏是逃避呢？因为回想的时候会发现，后期临近毕业，压力越来越大的时候，我玩游戏的时间反而越来越长，并且会玩到自己清晰的感觉到已经不想玩了，还是停不下来的地步。</p><p>现在看起来，就是很典型的逃避了，因为一旦注意力离开游戏，现实的压力就会铺面而来，像一根木棒随时朝头顶砸过来，只有游戏的紧张能让自己忘记，和借酒消愁其实是一个意思。其实这种方式也不是完全没用，但我觉得这种方式应该只是正餐之外的小甜品而已，不能靠这东西填饱肚子。</p><h2>三年之前：开始思考什么是「我喜欢」</h2><p>放松，最好的方法莫过于做自己喜欢的事情了，三年前我有过一段非常宝贵的经历，就是离职之后，完全做自己想做的事情。而这段经历后我得到的感悟就是，我没有什么真正特别喜欢做的事情。</p><p>游戏、刷剧、购物等等，这些放松方式在没有压力的时候，在心里逐渐变得清晰起来，我喜欢，但并没有那么喜欢。曾经每天必定要玩的游戏，其实每周想起来的时候爽一下，对于我就够了。</p><p>而缺少让自己充满热情的爱好这件事情，我意识到这事情急不来，慢慢寻找吧。</p><h2>现在的放松：身体先松</h2><p>最近越来越清晰的感受到的一个现象就是：我们的思维并没有那么理性，其实感性支配着我们绝大多数的选择，比想象中多很多的那种。而所谓的感性从哪里获取的信息呢，其实是所有地方，身体内-外。</p><p>身体健康，相比心悸的时候，我们面对问题的感受会是非常不一样的，身体好的时候会觉得今天我必须把这个问题解决，公司没我不行，而心悸的时候，我会觉得算了吧，还是命要紧。这两种其实是非常极端、非常清晰的状态，而我感受到日常生活中，更多是微妙的身体状态，在影响着微妙的感受，微妙的决策。照顾好自己的身体，是照顾好精神生活的第一步。</p><p>感受到这些的同时，我也找到了我目前最爱的放松方式，就是让自己动起来。不一定是很累的那种，能让身体运动起来、和这个世界交互是最重要的。早上醒来开窗先吸一口清冷的空气，公园散步的时候闻到各种植物散发的复杂的气味，去坐过山车，让自己肆无忌惮的喊出来，还有我最爱的徒步，一个人走进自然之后，会感受那种原始的美，原始的热爱和兴奋，也会感受到原始的恐惧，激发身体里的求生的本能，这种时候，我会感受到我在活着。</p><p>随着身体上感受的变化，加上对世界的重新思考，其实很多压力源也少。工作上有压力，但也没那么大不了，延期-绩效差-被辞退-没钱没地位-生存受到威胁-恐惧，这是以前导致我压力大的一个潜意识中的因果链，而实际面对之后，这些并不存在。踏实工作，不过份加班，即使延期了也并不一定被辞退，最多是绩效差而已，少了年终奖，但多了快乐和健康。被辞退也可以再找，真的饿到没饭吃的时候，也总是能找到临时工撑过去的。我的那些深层的恐惧只是投射错了地方，晒晒太阳就会消失了。</p><h2>最后</h2><p>每个人的经历、爱好、身体状况都不一样，人体也很复杂，我们可以用各种方式分析，但适合自己的，只有自己亲身去体验才知道。在房间里点一个香薰、把玩一个自己喜欢的摆件、洗澡的时候吃个橙子，又或是去公园走走，去山里撒点野，还记得那年夕阳下的奔跑吗？穿开裆裤的那种。</p><p>想找回那种状态似乎也不是不可能，因为我们其实不用过于害怕，工作没那么重要，他人的眼光根本不用理会，父母的意见也只是他们的想法而已，自己对自己负责就好，找到自己的方向，而不是为了他人的期待，或者什么公认的目标而活。多感受感受自己，世界在内心里的倒影也许慢慢就变了。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/85176</id>
-            <title>JsonTranslate 实用指南：怎样让你的项目说上 13 种语言？</title>
-            <link>https://sspai.com/post/85176</link>
-            <guid isPermaLink="false">https://sspai.com/post/85176</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 19 Dec 2023 07:34:54 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: JsonTranslate, 多语言, 翻译工具, API
-<br>
-<br>
-总结: JsonTranslate是一款专为开发者和内容创作者设计的多语言JSON翻译工具，支持多种翻译API，能够简化多语言翻译流程，助力项目国际化和本地化。 </div>
-                        <hr>
-                    
-                    <p><a href="https://tools.newzone.top/json-translate">JsonTranslate</a>，一款专为开发者和内容创作者设计的多语言 JSON 翻译工具，支持 Google Translate、DeepL 和 DeepLX 翻译 API，助力项目国际化和本地化。无论你是在开发多语言网站、应用程序还是处理多语言数据集，JsonTranslate 都能提供简便的解决方案，轻松将 JSON 文件中的内容翻译为多种目标语言。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdn.sspai.com/2023/12/19/article/939231474e4f753ae7948d00628913c5?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>该工具的设计理念与市面上其他多语言翻译器不同。常见的翻译器虽然追求一键自动化，但通常配置繁琐，且往往需要付费订阅。JsonTranslate 的设计初衷是为了解决 ChatGPT Shortcut 和 IMGPrompt 等个人或开源项目中的英汉互译问题而设计，特别适合那些翻译文件不多的项目。</p><p>与传统的全站自动化翻译工具相比，JsonTranslate 更加注重根据用户需求进行精确翻译。用户可以方便地粘贴需要翻译的文本，甚至指定单个新增节点，从而简化多语言翻译流程，使得翻译工作更为高效和精确。</p><h2>使用说明</h2><figure class="image ss-img-wrapper"><img alt="" src="https://cdn.sspai.com/2023/12/19/article/bfac15c3188c27a43233160c16681f67?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>1. 选择翻译 API</h3><p>在使用 JsonTranslate 时，你有多种翻译 API 的选择。首先是 Google Translate 和 DeepL Translate，这两者都需要用户自行获取 API 密钥。Google Translate 在常见句子的翻译上较为普遍，特别适合翻译用户界面 UI；而 DeepL 在长文本翻译方面表现更优，能提供更流畅的翻译结果。若想申请这些 API，可参考相关的<a href="https://docs.easyuseai.com/platform/translate/google_fanyi.html">接口申请教程</a>。</p><p>此外，JsonTranslate 还提供了 DeepLX 作为一个免费选项。DeepLX 通过将 DeepL Free API 转换为本地 API 接口，允许第三方应用进行调用。它无需 API 密钥，适合少量或偶尔的翻译需求。想了解更多关于 DeepLX 的信息，可以访问其 <a href="https://github.com/OwO-Network/DeepLX/">GitHub 页面</a>。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdn.sspai.com/2023/12/19/article/cf124d9131db0a3f9d1dfc63c1bb6933?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>需要注意的是，使用 Google Translate 时，你的翻译数据会从客户端直接发送到 Google 服务器。而 DeepL API 则不支持在网页上使用。因此，JsonTranslate 在服务器端提供了一个专门的 DeepL 翻译转发接口，该接口仅用于数据转发，不会收集任何用户数据。用户可以选择在本地环境中部署并使用这一接口。</p><h3>2. 语言设置</h3><p>你可以灵活地选择源语言和目标语言，以实现不同语言之间的相互翻译。目前，JsonTranslate 支持 13 种语言的互译，包括英语、中文、日语、韩语、西班牙语、法语、德语、意大利语、俄语、葡萄牙语、印地语、阿拉伯语和孟加拉语。这些语言涵盖了全球大部分主要语言区域，能满足多样化的用户需求。需要注意的是，印地语、阿拉伯语和孟加拉语目前仅能通过 Google Translate 进行翻译，因为 DeepL 尚未支持这三种语言。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdn.sspai.com/2023/12/19/article/8b07db028658965f9c6a2e149ef44ba6?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>3. 翻译键名</h3><p>键名（key）是访问 JSON 结构中特定信息的关键，可以由数字、英文字母、中文等非符号字符组成。在命名时需注意大小写的区别。对于包含数组<code>[]</code>的 JSON 数据，建议避免使用数字作为键名，因为这会被认为是数组索引，从而可能引起混淆或错误。</p><p>为了同时指定多个键名的翻译，你可以通过逗号进行分隔，不论是使用中文还是英文逗号均可。</p><p>如果你刚开始接触 JSON 的键名，不妨参考以下的示例说明。这些示例将帮助你更好地理解键名的格式和使用方式。</p><h3>4. 翻译内容</h3><p>JsonTranslate 专为 JSON 内容翻译而设计，仅支持 JSON 格式输入。</p><p>输入内容变更时，应用会实时格式化 JSON 并验证格式正确性。请避免在输入框内进行大量修改，因为频繁的修改可能增加出错的风险。如果需要对 JSON 文件做大量的编辑或修改，建议先在其他专用的 JSON 编辑工具中完成编辑，确保格式无误后再将内容导入 JsonTranslate 进行翻译。</p><h3>5. 翻译结果</h3><p>点击「开始翻译」按钮后，翻译完成可以选择「复制结果」。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdn.sspai.com/2023/12/19/article/24e9b1ec7d021eae4b553fcb92653fdc?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>结果界面右侧还设有灰色按钮，用于切换翻译节点模式，包括单一键名模式和映射翻译模式。单一键名模式下，翻译的输入输出使用相同节点，而映射翻译模式则涉及不同节点的翻译。例如，节点 A 的值将翻译至节点 B，节点 C 的值翻译至节点 D。</p><h2>JSON 键名及其局限性</h2><p>JSON 数据是以键值对的形式存储的，其中“键”（也称为“名称”）是一个字符串，用于唯一标识数据记录中的特定项目或元素，是数据检索和操作的基础。JsonTranslate 正是利用了 JSON 键名的标识作用来实现精准化识别翻译。</p><p>以下是对示例中的几个键名的解释：</p><ul><li><code>downvote.message</code>：这是一个嵌套的键名。<code>downvote</code> 是外层对象的键名，而 <code>message</code> 是 <code>downvote</code> 对象内部的一个键名。</li><li><code>提示词.message</code>：这里 <code>提示词</code> 是一个键名，它本身包含一个对象，该对象有一个键 <code>message</code>。</li><li><code>share.owner</code>：这个键名包含了一个点（<code>.</code>），它是一个单独的键名而不是指示嵌套关系。在这种情况下，如果你想访问 <code>share.owner</code> 对象中的 <code>name</code>，你不能使用 <code>share.owner.name</code>，因为这会被错误解释为查找一个名为 <code>owner</code> 的对象内的 <code>name</code> 键，而实际上 <code>share.owner</code> 是一个完整的键名。</li></ul><pre class="language-null"><code>{
-  "downvote": {
-    "message": "Downvote"
-  },
-  "提示词": {
-    "message": "prompt"
-  },
-  "share.owner": {
-    "name": "rabbit"
-  },
-  "data": {
-    "title": {
-      "id": "001",
-      "name": "cabbages"
-    }
-  },
-  "content": [
-    {
-      "id": "001",
-      "value": "Hello, cabbage."
-    },
-    {
-      "id": "002",
-      "value": "Hello, Radish."
-    }
-  ]</code></pre><p>目前，JsonTranslate 无法处理包含点（<code>.</code>）的 JSON 键名。这是因为点号在 JSONPath 中用于区分嵌套对象的键名，使得含点的键名可能被误解为多层嵌套对象。为避免这一问题，建议使用不含点的键名。</p><h2>结语</h2><p>JsonTranslate 是一款适合小型项目和个人开发者的多语言 JSON 翻译工具。它以简单直观的操作和对多种翻译 API 的支持，帮助用户高效处理多语言翻译任务。虽然不能与专业的全站自动化翻译工具如 Crowdin 相媲美，但对于那些追求便利性、面临有限资源或只需处理少量翻译任务的用户来说，JsonTranslate 提供了一种实用且易于上手的解决方案。</p>
                 ]]>
             </content:encoded>
         </item>
