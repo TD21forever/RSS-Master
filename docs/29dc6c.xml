@@ -5,6 +5,102 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1740577088980336803#m</id>
+            <title>MotionCtrl：控制生成视频中的摄像机和物体运动。
+
+MotionCtrl是一个视频运动控制器，它可以和AI视频生成工具一起使用，用来控制视频中的相机动作，比如转动、缩放和移动。
+
+同时它还能控制视频中物体的移动路径或方式，可以让物体按照特定的路径或方式移动。
+
+让AI生成的视频看起来更加生动和真实。
+
+MotionCtrl能够和其他视频生成工具一起使用，增强视频的创造性和多样性。
+
+由于能够独立控制相机和物体运动，MotionCtrl可以创造出更加复杂和动态的视频效果，增强视觉体验。
+
+MotionCtrl”的主要功能：
+
+1、控制相机运动： 它可以控制视频中的相机动作，比如转动、缩放和移动，让视频看起来更加生动和真实。
+
+2、控制物体运动： 它还能控制视频中物体的移动，可以让物体按照特定的路径或方式移动。
+
+3、灵活性和统一性： 这个工具既灵活又统一，它还能够同时处理相机和物体的运动，提供更丰富的视频制作可能性。
+
+4、与其他视频生成方法集成：MotionCtrl控制器可以部署在LVDM、VideoCrafter1（LVDM的改进版本）和AnimateDiff上。它还与其他视频生成方法（如SVD）兼容，其集成的结果和模型将很快提供。
+
+5、泛化能力： 一旦训练完成，可以适应广泛的相机姿态和轨迹。
+
+技术细节：
+
+MotionCtrl由两个主要部分组成：相机运动控制模块（CMCM）和物体运动控制模块（OMCM）。这两个模块分别负责处理视频中的相机运动和物体运动。
+
+1、架构设计： MotionCtrl基于去噪U-Net结构进行扩展，增加了专门的模块来控制相机和物体的运动。这种设计使得它能够更有效地处理视频中的运动元素。
+
+2、相机运动控制模块（CMCM）： 这个模块负责处理视频中的相机运动。它通过集成相机姿态序列来控制相机的移动，如平移、缩放和旋转。
+
+3、物体运动控制模块（OMCM）： 这个模块负责控制视频中物体的运动。它使用卷积层和降采样来从物体轨迹中提取多尺度特征，从而指导物体的运动。
+
+优势： 相比于其他方法，MotionCtrl能够更有效和独立地控制相机和物体运动，提供更细致的运动控制，并且对视频中物体的外观或形状影响最小。
+
+项目及演示：https://wzhouxiff.github.io/projects/MotionCtrl/
+论文：https://arxiv.org/pdf/2312.03641.pdf
+GitHub：https://github.com/TencentARC/MotionCtrl
+在线演示：https://huggingface.co/spaces/TencentARC/MotionCtrl</title>
+            <link>https://nitter.cz/xiaohuggg/status/1740577088980336803#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1740577088980336803#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 29 Dec 2023 03:34:51 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>MotionCtrl：控制生成视频中的摄像机和物体运动。<br />
+<br />
+MotionCtrl是一个视频运动控制器，它可以和AI视频生成工具一起使用，用来控制视频中的相机动作，比如转动、缩放和移动。<br />
+<br />
+同时它还能控制视频中物体的移动路径或方式，可以让物体按照特定的路径或方式移动。<br />
+<br />
+让AI生成的视频看起来更加生动和真实。<br />
+<br />
+MotionCtrl能够和其他视频生成工具一起使用，增强视频的创造性和多样性。<br />
+<br />
+由于能够独立控制相机和物体运动，MotionCtrl可以创造出更加复杂和动态的视频效果，增强视觉体验。<br />
+<br />
+MotionCtrl”的主要功能：<br />
+<br />
+1、控制相机运动： 它可以控制视频中的相机动作，比如转动、缩放和移动，让视频看起来更加生动和真实。<br />
+<br />
+2、控制物体运动： 它还能控制视频中物体的移动，可以让物体按照特定的路径或方式移动。<br />
+<br />
+3、灵活性和统一性： 这个工具既灵活又统一，它还能够同时处理相机和物体的运动，提供更丰富的视频制作可能性。<br />
+<br />
+4、与其他视频生成方法集成：MotionCtrl控制器可以部署在LVDM、VideoCrafter1（LVDM的改进版本）和AnimateDiff上。它还与其他视频生成方法（如SVD）兼容，其集成的结果和模型将很快提供。<br />
+<br />
+5、泛化能力： 一旦训练完成，可以适应广泛的相机姿态和轨迹。<br />
+<br />
+技术细节：<br />
+<br />
+MotionCtrl由两个主要部分组成：相机运动控制模块（CMCM）和物体运动控制模块（OMCM）。这两个模块分别负责处理视频中的相机运动和物体运动。<br />
+<br />
+1、架构设计： MotionCtrl基于去噪U-Net结构进行扩展，增加了专门的模块来控制相机和物体的运动。这种设计使得它能够更有效地处理视频中的运动元素。<br />
+<br />
+2、相机运动控制模块（CMCM）： 这个模块负责处理视频中的相机运动。它通过集成相机姿态序列来控制相机的移动，如平移、缩放和旋转。<br />
+<br />
+3、物体运动控制模块（OMCM）： 这个模块负责控制视频中物体的运动。它使用卷积层和降采样来从物体轨迹中提取多尺度特征，从而指导物体的运动。<br />
+<br />
+优势： 相比于其他方法，MotionCtrl能够更有效和独立地控制相机和物体运动，提供更细致的运动控制，并且对视频中物体的外观或形状影响最小。<br />
+<br />
+项目及演示：<a href="https://wzhouxiff.github.io/projects/MotionCtrl/">wzhouxiff.github.io/projects…</a><br />
+论文：<a href="https://arxiv.org/pdf/2312.03641.pdf">arxiv.org/pdf/2312.03641.pdf</a><br />
+GitHub：<a href="https://github.com/TencentARC/MotionCtrl">github.com/TencentARC/Motion…</a><br />
+在线演示：<a href="https://huggingface.co/spaces/TencentARC/MotionCtrl">huggingface.co/spaces/Tencen…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDA1NzM1NjI4ODc2NzE4MDgvcHUvaW1nLzlNSVU5VXppNDFUZDFybmEuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1740566806069457215#m</id>
             <title>R to @xiaohuggg: 演示视频</title>
             <link>https://nitter.cz/xiaohuggg/status/1740566806069457215#m</link>
@@ -660,56 +756,6 @@ GitHub：<a href="https://github.com/FoundationVision/UniRef">github.com/Foundat
 4、转换为 .svg 文件：完成插图后，可以使用 <a href="http://vectorizer.ai">vectorizer.ai</a> 将图像转换为 .svg 文件，这对于进一步的编辑和使用非常有用。</p>
 <p><a href="https://nitter.cz/chaseleantj/status/1739978741798130002#m">nitter.cz/chaseleantj/status/1739978741798130002#m</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0NYRU5MeGF3QUVjZmJZLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1740008017448559006#m</id>
-            <title>糟了...
-
-纽约时报和多位普利策获奖作者起诉微软和 OpenAI 侵犯版权
-
-纽约时报指控微软和 OpenAI 在未经许可的情况下使用其版权内容（包括数百万篇文章）来训练他们的人工智能工具。
-
-除了纽约时报之外，还有一些普利策奖获奖作者和其他非小说类作家加入了这一诉讼。
-
-指控 OpenAI 和微软滥用他们的书籍内容训练 OpenAI 的 GPT 大语言模型，侵犯了他们的版权。
-
-前几天苹果花了5000w美金从几大新闻机构买版权估计是刺激到其他人了，看到有利可图了，然后他们开始起诉了！哈哈哈...
-
-下一个我觉得是Midjourney...
-
-华尔街日报 - 《纽约时报》起诉微软和OpenAI侵犯版权：https://www.wsj.com/tech/ai/new-york-times-sues-microsoft-and-openai-alleging-copyright-infringement-fd85e1c4
-
-路透社 - 普利策获奖作者加入 OpenAI 和微软版权诉讼：https://www.reuters.com/legal/pulitzer-winning-authors-join-openai-microsoft-copyright-lawsuit-2023-12-20/</title>
-            <link>https://nitter.cz/xiaohuggg/status/1740008017448559006#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1740008017448559006#m</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 27 Dec 2023 13:53:33 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>糟了...<br />
-<br />
-纽约时报和多位普利策获奖作者起诉微软和 OpenAI 侵犯版权<br />
-<br />
-纽约时报指控微软和 OpenAI 在未经许可的情况下使用其版权内容（包括数百万篇文章）来训练他们的人工智能工具。<br />
-<br />
-除了纽约时报之外，还有一些普利策奖获奖作者和其他非小说类作家加入了这一诉讼。<br />
-<br />
-指控 OpenAI 和微软滥用他们的书籍内容训练 OpenAI 的 GPT 大语言模型，侵犯了他们的版权。<br />
-<br />
-前几天苹果花了5000w美金从几大新闻机构买版权估计是刺激到其他人了，看到有利可图了，然后他们开始起诉了！哈哈哈...<br />
-<br />
-下一个我觉得是Midjourney...<br />
-<br />
-华尔街日报 - 《纽约时报》起诉微软和OpenAI侵犯版权：<a href="https://www.wsj.com/tech/ai/new-york-times-sues-microsoft-and-openai-alleging-copyright-infringement-fd85e1c4">wsj.com/tech/ai/new-york-tim…</a><br />
-<br />
-路透社 - 普利策获奖作者加入 OpenAI 和微软版权诉讼：<a href="https://www.reuters.com/legal/pulitzer-winning-authors-join-openai-microsoft-copyright-lawsuit-2023-12-20/">reuters.com/legal/pulitzer-w…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NXX1loVmJ3QUFfNmFhLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
