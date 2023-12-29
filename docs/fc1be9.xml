@@ -5,6 +5,91 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1740686124736262583#m</id>
+            <title>一个开源的多模态 LLM Unified-IO 2。
+比较离谱的是它可以实现语音理解和动作理解还有图像标记这种任务，还可以理解空间关系。真正的 All in one 。
+甚至还可以驱动机器人做对应的操作。
+
+项目简介：
+Unified-IO 2，这是第一个能够理解和生成图像、文本、音频和动作的自回归多模态模型。
+为了统一不同的模态，我们将输入和输出（图像、文本、音频、动作、框等）进行分词，并将它们置于一个共享的语义空间中，然后使用单个编码器-解码器变换器模型进行处理。由于使用多样的模态进行训练非常困难，我们提出了各种架构改进来稳定模型。
+我们从头开始在来自不同来源的大型多模态预训练语料库上训练我们的模型，并采用多模态混合去噪目标。为了学习一系列广泛的技能，比如遵循多模态指令，我们构建并微调了一个包含120个现有数据集的集合，并进行了提示和增强。
+通过一个统一的模型，Unified-IO 2在GRIT基准测试中达到了最先进的性能，并在30多个基准测试中取得了强大的结果，包括图像生成和理解、文本理解、视频和音频理解以及机器人操作。我们将所有的模型都发布给研究界。
+
+项目地址：https://unified-io-2.allenai.org/</title>
+            <link>https://nitter.cz/op7418/status/1740686124736262583#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1740686124736262583#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 29 Dec 2023 10:48:07 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>一个开源的多模态 LLM Unified-IO 2。<br />
+比较离谱的是它可以实现语音理解和动作理解还有图像标记这种任务，还可以理解空间关系。真正的 All in one 。<br />
+甚至还可以驱动机器人做对应的操作。<br />
+<br />
+项目简介：<br />
+Unified-IO 2，这是第一个能够理解和生成图像、文本、音频和动作的自回归多模态模型。<br />
+为了统一不同的模态，我们将输入和输出（图像、文本、音频、动作、框等）进行分词，并将它们置于一个共享的语义空间中，然后使用单个编码器-解码器变换器模型进行处理。由于使用多样的模态进行训练非常困难，我们提出了各种架构改进来稳定模型。<br />
+我们从头开始在来自不同来源的大型多模态预训练语料库上训练我们的模型，并采用多模态混合去噪目标。为了学习一系列广泛的技能，比如遵循多模态指令，我们构建并微调了一个包含120个现有数据集的集合，并进行了提示和增强。<br />
+通过一个统一的模型，Unified-IO 2在GRIT基准测试中达到了最先进的性能，并在30多个基准测试中取得了强大的结果，包括图像生成和理解、文本理解、视频和音频理解以及机器人操作。我们将所有的模型都发布给研究界。<br />
+<br />
+项目地址：<a href="https://unified-io-2.allenai.org/">unified-io-2.allenai.org/</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Nnb1ladWFvQUFFNjZnLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Nnb2hRWWFBQUVZczl1LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Nnb3B0RGJ3QUEzWXVFLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Nnb3g2SWFFQUFDLThILmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1740681583496245656#m</id>
+            <title>小红书新发布的一个编码器SSR-Encoder，可以实现从一张图片种提取不同的主题（人物、物体等）特征生成图像。与 SD 现有的能力都能结合，Animatediff 也可以。
+
+这个厉害。类似于加强版的 IPadapter？而且说了会开源，这几个以图像内容消费为主的国内公司都在图像生成模型上发力。
+
+项目简介：
+最近在主题驱动的图像生成领域的进展已经实现了零样本生成，然而精确选择和关注关键主题表示仍然是一个挑战。
+为了解决这个问题，我们引入了SSR-Encoder，这是一种新架构，旨在从单个或多个参考图像中选择性地捕获任何主题。它响应各种查询模式，包括文本和掩模，而无需在测试时进行微调。
+SSR-Encoder结合了一个Token-to-Patch Aligner，用于将查询输入与图像块对齐，以及一个细节保留的主题编码器，用于提取和保留主题的精细特征，从而生成主题嵌入。
+这些嵌入与原始文本嵌入结合使用，条件化生成过程。SSR-Encoder以其模型泛化性和效率为特点，适应于一系列自定义模型和控制模块。通过Embedding Consistency Regularization Loss进行增强，以改进训练。
+我们广泛的实验表明其在多样化和高质量的图像生成中的有效性，表明其广泛的适用性。
+
+项目地址：https://ssr-encoder.github.io/</title>
+            <link>https://nitter.cz/op7418/status/1740681583496245656#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1740681583496245656#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 29 Dec 2023 10:30:04 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>小红书新发布的一个编码器SSR-Encoder，可以实现从一张图片种提取不同的主题（人物、物体等）特征生成图像。与 SD 现有的能力都能结合，Animatediff 也可以。<br />
+<br />
+这个厉害。类似于加强版的 IPadapter？而且说了会开源，这几个以图像内容消费为主的国内公司都在图像生成模型上发力。<br />
+<br />
+项目简介：<br />
+最近在主题驱动的图像生成领域的进展已经实现了零样本生成，然而精确选择和关注关键主题表示仍然是一个挑战。<br />
+为了解决这个问题，我们引入了SSR-Encoder，这是一种新架构，旨在从单个或多个参考图像中选择性地捕获任何主题。它响应各种查询模式，包括文本和掩模，而无需在测试时进行微调。<br />
+SSR-Encoder结合了一个Token-to-Patch Aligner，用于将查询输入与图像块对齐，以及一个细节保留的主题编码器，用于提取和保留主题的精细特征，从而生成主题嵌入。<br />
+这些嵌入与原始文本嵌入结合使用，条件化生成过程。SSR-Encoder以其模型泛化性和效率为特点，适应于一系列自定义模型和控制模块。通过Embedding Consistency Regularization Loss进行增强，以改进训练。<br />
+我们广泛的实验表明其在多样化和高质量的图像生成中的有效性，表明其广泛的适用性。<br />
+<br />
+项目地址：<a href="https://ssr-encoder.github.io/">ssr-encoder.github.io/</a></p>
+<p><a href="https://nitter.cz/_akhaliq/status/1740616525478781168#m">nitter.cz/_akhaliq/status/1740616525478781168#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Nna1ItbWFVQUFITlNiLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Nna1dmUGJ3QUFzdHVYLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Nna2t1OWJFQUFfTUJ1LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Nna3BmS2JzQUVxd3hCLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1740677173856625055#m</id>
             <title>发现了一个可以在手机上跑的多模态模型UForm，有点意思。
 
