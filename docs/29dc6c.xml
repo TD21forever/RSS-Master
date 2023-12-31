@@ -5,6 +5,92 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1741279083005354279#m</id>
+            <title>HandRefiner：解决AI图像生成中手部畸形的问题
+
+目前的图像生成模型，再生成图像方面已经非常出色，但在生成人类手部的图像时却常常出现问题，比如手指数量不对或者手形怪异。
+
+HandRefiner提出一种方法，在不改变图片其他部分的情况下，修正那些形状不正常的手部图像。
+
+它采用条件修补方法来纠正畸形的手部，可以识别出手部的正确形状和手势，并将这些正确的信息重新应用到原始的错误手部图像上。
+
+HandRefiner主要特点：
+
+- 精确性：HandRefiner能够精确地识别和修正生成图像中的畸形手部，提供了一种有效的后处理解决方案。
+
+- 保持一致性：在修正手部的同时，它保持图像其他部分的一致性，不会影响图像的整体质量。
+
+- 利用合成数据：研究中发现了ControlNet中的一个相变现象，这使得HandRefiner能够有效地利用合成数据进行训练，而不会受到真实手和合成手之间域差异的影响。这意味着HandRefiner还能学习很多不同的手的样子，这样无论手有多怪，它都能找到合适的方式来修正。
+
+- 适用性：尽管HandRefiner主要针对手部图像，但其基本原理和技术可以适用于其他需要精细修正的图像生成任务。比如这种方法也可以用来修正其他部分，比如脚或者耳朵。
+
+工作原理：
+
+1、手部识别与重建：
+
+识别问题：首先，HandRefiner识别出生成图像中形状不正常的手部。
+
+重建手部：使用手部网格重建模型，HandRefiner根据人手应该有的样子重新画出一个正确的手。它能够重建出正确的手部形状和手势。这得益于模型基于正常手部的训练数据，即使是在畸形的手部图像中也能生成合理的重建结果。
+
+2、条件修补：
+
+修补过程：HandRefiner采用条件修补方法来处理识别出的问题手部。它生成一个深度图，这个深度图包含了关于手部形状和位置的重要信息。
+
+集成与修正：然后，这个深度图被用作指导，通过ControlNet集成到扩散模型中。HandRefiner会把这个重新画好的手放回原来的画作中，替换掉那个画错的手，但其他部分不动，保持原画的风格和内容。
+
+GitHub：https://github.com/wenquanlu/HandRefiner/
+论文：https://arxiv.org/abs/2311.17957
+模型下载：https://huggingface.co/hr16/ControlNet-HandRefiner-pruned</title>
+            <link>https://nitter.cz/xiaohuggg/status/1741279083005354279#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1741279083005354279#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 31 Dec 2023 02:04:19 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>HandRefiner：解决AI图像生成中手部畸形的问题<br />
+<br />
+目前的图像生成模型，再生成图像方面已经非常出色，但在生成人类手部的图像时却常常出现问题，比如手指数量不对或者手形怪异。<br />
+<br />
+HandRefiner提出一种方法，在不改变图片其他部分的情况下，修正那些形状不正常的手部图像。<br />
+<br />
+它采用条件修补方法来纠正畸形的手部，可以识别出手部的正确形状和手势，并将这些正确的信息重新应用到原始的错误手部图像上。<br />
+<br />
+HandRefiner主要特点：<br />
+<br />
+- 精确性：HandRefiner能够精确地识别和修正生成图像中的畸形手部，提供了一种有效的后处理解决方案。<br />
+<br />
+- 保持一致性：在修正手部的同时，它保持图像其他部分的一致性，不会影响图像的整体质量。<br />
+<br />
+- 利用合成数据：研究中发现了ControlNet中的一个相变现象，这使得HandRefiner能够有效地利用合成数据进行训练，而不会受到真实手和合成手之间域差异的影响。这意味着HandRefiner还能学习很多不同的手的样子，这样无论手有多怪，它都能找到合适的方式来修正。<br />
+<br />
+- 适用性：尽管HandRefiner主要针对手部图像，但其基本原理和技术可以适用于其他需要精细修正的图像生成任务。比如这种方法也可以用来修正其他部分，比如脚或者耳朵。<br />
+<br />
+工作原理：<br />
+<br />
+1、手部识别与重建：<br />
+<br />
+识别问题：首先，HandRefiner识别出生成图像中形状不正常的手部。<br />
+<br />
+重建手部：使用手部网格重建模型，HandRefiner根据人手应该有的样子重新画出一个正确的手。它能够重建出正确的手部形状和手势。这得益于模型基于正常手部的训练数据，即使是在畸形的手部图像中也能生成合理的重建结果。<br />
+<br />
+2、条件修补：<br />
+<br />
+修补过程：HandRefiner采用条件修补方法来处理识别出的问题手部。它生成一个深度图，这个深度图包含了关于手部形状和位置的重要信息。<br />
+<br />
+集成与修正：然后，这个深度图被用作指导，通过ControlNet集成到扩散模型中。HandRefiner会把这个重新画好的手放回原来的画作中，替换掉那个画错的手，但其他部分不动，保持原画的风格和内容。<br />
+<br />
+GitHub：<a href="https://github.com/wenquanlu/HandRefiner/">github.com/wenquanlu/HandRef…</a><br />
+论文：<a href="https://arxiv.org/abs/2311.17957">arxiv.org/abs/2311.17957</a><br />
+模型下载：<a href="https://huggingface.co/hr16/ControlNet-HandRefiner-pruned">huggingface.co/hr16/ControlN…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NwRExyaWJnQUFmeU8tLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1741135218592117071#m</id>
             <title>据 The Information 的报道，OpenAI 2023年，年收入超过了16 亿美元。
 
@@ -1203,32 +1289,6 @@ FlowPilot 夜间测试视频：https://www.youtube.com/watch?v=FBB2XRMej9M</titl
 <br />
 FlowPilot 夜间测试视频：<a href="https://www.youtube.com/watch?v=FBB2XRMej9M">youtube.com/watch?v=FBB2XRMe…</a></p>
 <img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTc0MDc1MzYxNzk1MzQyMzM2MC80ZmttSmh6Yz9mb3JtYXQ9anBnJm5hbWU9ODAweDMyMF8x" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1740644167506968710#m</id>
-            <title>R to @xiaohuggg: Flowpilot是一个基于 Openpilot 开发的的开源驾驶辅助系统
-
-Openpilot以前发过，下面是它的介绍
-
-https://x.com/xiaohuggg/status/1717374629944402201</title>
-            <link>https://nitter.cz/xiaohuggg/status/1740644167506968710#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1740644167506968710#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 29 Dec 2023 08:01:23 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Flowpilot是一个基于 Openpilot 开发的的开源驾驶辅助系统<br />
-<br />
-Openpilot以前发过，下面是它的介绍<br />
-<br />
-<a href="https://x.com/xiaohuggg/status/1717374629944402201">x.com/xiaohuggg/status/17173…</a></p>
-<p><a href="https://nitter.cz/xiaohuggg/status/1717374629944402201#m">nitter.cz/xiaohuggg/status/1717374629944402201#m</a></p>
                 ]]>
             </content:encoded>
         </item>
