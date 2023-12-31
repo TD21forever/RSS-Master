@@ -5,6 +5,110 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1741140249290698969#m</id>
+            <title>RT by @dotey: 哈哈，好玩用SD重绘了音频动画，变成了跟着音乐生长的草</title>
+            <link>https://nitter.cz/op7418/status/1741140249290698969#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1741140249290698969#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 30 Dec 2023 16:52:38 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>哈哈，好玩用SD重绘了音频动画，变成了跟着音乐生长的草</p>
+<p><a href="https://nitter.cz/dotsimulate/status/1740789185311629571#m">nitter.cz/dotsimulate/status/1740789185311629571#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1741279083005354279#m</id>
+            <title>RT by @dotey: HandRefiner：解决AI图像生成中手部畸形的问题
+
+目前的图像生成模型，再生成图像方面已经非常出色，但在生成人类手部的图像时却常常出现问题，比如手指数量不对或者手形怪异。
+
+HandRefiner提出一种方法，在不改变图片其他部分的情况下，修正那些形状不正常的手部图像。
+
+它采用条件修补方法来纠正畸形的手部，可以识别出手部的正确形状和手势，并将这些正确的信息重新应用到原始的错误手部图像上。
+
+HandRefiner主要特点：
+
+- 精确性：HandRefiner能够精确地识别和修正生成图像中的畸形手部，提供了一种有效的后处理解决方案。
+
+- 保持一致性：在修正手部的同时，它保持图像其他部分的一致性，不会影响图像的整体质量。
+
+- 利用合成数据：研究中发现了ControlNet中的一个相变现象，这使得HandRefiner能够有效地利用合成数据进行训练，而不会受到真实手和合成手之间域差异的影响。这意味着HandRefiner还能学习很多不同的手的样子，这样无论手有多怪，它都能找到合适的方式来修正。
+
+- 适用性：尽管HandRefiner主要针对手部图像，但其基本原理和技术可以适用于其他需要精细修正的图像生成任务。比如这种方法也可以用来修正其他部分，比如脚或者耳朵。
+
+工作原理：
+
+1、手部识别与重建：
+
+识别问题：首先，HandRefiner识别出生成图像中形状不正常的手部。
+
+重建手部：使用手部网格重建模型，HandRefiner根据人手应该有的样子重新画出一个正确的手。它能够重建出正确的手部形状和手势。这得益于模型基于正常手部的训练数据，即使是在畸形的手部图像中也能生成合理的重建结果。
+
+2、条件修补：
+
+修补过程：HandRefiner采用条件修补方法来处理识别出的问题手部。它生成一个深度图，这个深度图包含了关于手部形状和位置的重要信息。
+
+集成与修正：然后，这个深度图被用作指导，通过ControlNet集成到扩散模型中。HandRefiner会把这个重新画好的手放回原来的画作中，替换掉那个画错的手，但其他部分不动，保持原画的风格和内容。
+
+GitHub：https://github.com/wenquanlu/HandRefiner/
+论文：https://arxiv.org/abs/2311.17957
+模型下载：https://huggingface.co/hr16/ControlNet-HandRefiner-pruned</title>
+            <link>https://nitter.cz/xiaohuggg/status/1741279083005354279#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1741279083005354279#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 31 Dec 2023 02:04:19 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>HandRefiner：解决AI图像生成中手部畸形的问题<br />
+<br />
+目前的图像生成模型，再生成图像方面已经非常出色，但在生成人类手部的图像时却常常出现问题，比如手指数量不对或者手形怪异。<br />
+<br />
+HandRefiner提出一种方法，在不改变图片其他部分的情况下，修正那些形状不正常的手部图像。<br />
+<br />
+它采用条件修补方法来纠正畸形的手部，可以识别出手部的正确形状和手势，并将这些正确的信息重新应用到原始的错误手部图像上。<br />
+<br />
+HandRefiner主要特点：<br />
+<br />
+- 精确性：HandRefiner能够精确地识别和修正生成图像中的畸形手部，提供了一种有效的后处理解决方案。<br />
+<br />
+- 保持一致性：在修正手部的同时，它保持图像其他部分的一致性，不会影响图像的整体质量。<br />
+<br />
+- 利用合成数据：研究中发现了ControlNet中的一个相变现象，这使得HandRefiner能够有效地利用合成数据进行训练，而不会受到真实手和合成手之间域差异的影响。这意味着HandRefiner还能学习很多不同的手的样子，这样无论手有多怪，它都能找到合适的方式来修正。<br />
+<br />
+- 适用性：尽管HandRefiner主要针对手部图像，但其基本原理和技术可以适用于其他需要精细修正的图像生成任务。比如这种方法也可以用来修正其他部分，比如脚或者耳朵。<br />
+<br />
+工作原理：<br />
+<br />
+1、手部识别与重建：<br />
+<br />
+识别问题：首先，HandRefiner识别出生成图像中形状不正常的手部。<br />
+<br />
+重建手部：使用手部网格重建模型，HandRefiner根据人手应该有的样子重新画出一个正确的手。它能够重建出正确的手部形状和手势。这得益于模型基于正常手部的训练数据，即使是在畸形的手部图像中也能生成合理的重建结果。<br />
+<br />
+2、条件修补：<br />
+<br />
+修补过程：HandRefiner采用条件修补方法来处理识别出的问题手部。它生成一个深度图，这个深度图包含了关于手部形状和位置的重要信息。<br />
+<br />
+集成与修正：然后，这个深度图被用作指导，通过ControlNet集成到扩散模型中。HandRefiner会把这个重新画好的手放回原来的画作中，替换掉那个画错的手，但其他部分不动，保持原画的风格和内容。<br />
+<br />
+GitHub：<a href="https://github.com/wenquanlu/HandRefiner/">github.com/wenquanlu/HandRef…</a><br />
+论文：<a href="https://arxiv.org/abs/2311.17957">arxiv.org/abs/2311.17957</a><br />
+模型下载：<a href="https://huggingface.co/hr16/ControlNet-HandRefiner-pruned">huggingface.co/hr16/ControlN…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NwRExyaWJnQUFmeU8tLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1741278404308033555#m</id>
             <title>Reddit上的消息：在2023年12月，多邻国解雇了大量负责翻译工作的合同工。这当然是因为他们发现AI能在更短的时间内完成这些翻译任务，并且还能帮他们省钱。
 
@@ -480,70 +584,6 @@ Bankman-Fried 在脚注中（仅仅是脚注！）的惊人坦言是，如果投
 <br />
 在这些故事写作的80年后，其中的远见仍然显著。例如，如果没人特别告诉你，你可能会以为阿西莫夫自己就是最近关于 ChatGPT 因为学到人类在圣诞节期间减少工作而在十二月变得“懒惰”的讨论的作者。Dave Lee</p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0NvQm1fLVhrQUFXX1JyLnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1741205765975605581#m</id>
-            <title>R to @dotey: 2. 你的脸属于我们 Your Face Belongs to Us  - Kashmir Hill
-2023
-
-人类的面容，历来被视为灵魂之窗的浪漫象征，在计算机算法眼中却不过是另一种身份识别的“指纹”。Kashmir Hill 扣人心弦的著作中，详细揭示了一个名为 Clearview AI 的创业公司，如何大胆地从互联网搜集了数十亿人的面部数据，随后与美国多个警察局合作，悄然打造了一种隐蔽的监控工具。
-
-Hill 是首位揭露 Clearview 庞大网络的记者，她深入剖析了视频门铃和能识别人脸的安防摄像头急剧增长，如何将我们的生活环境逐渐转变成一个类似监狱的环境，而且这种监控带有明显的种族歧视倾向。她指出，面部识别软件通常无法准确识别黑人面孔，这种偏差导致了一位名为 Robert Julian-Borchak Williams 的人在家人面前被错误逮捕并监禁的惊悚经历，仅仅因为错误的面部识别。即便是像 Clearview 这样准确度极高的算法，也并未考虑到公民自由的重要性。
-
-Hill 还揭示了 Clearview 的创始人 Hoan Ton-That 如何长期与极右翼人士合作，他们中的许多人渴望追踪无证移民的面孔。她写道，现在的“外出”意味着的东西正在根本上发生变化，而且这种变化让人感到不安。Parmy Olson</title>
-            <link>https://nitter.cz/dotey/status/1741205765975605581#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1741205765975605581#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 30 Dec 2023 21:12:59 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>2. 你的脸属于我们 Your Face Belongs to Us  - Kashmir Hill<br />
-2023<br />
-<br />
-人类的面容，历来被视为灵魂之窗的浪漫象征，在计算机算法眼中却不过是另一种身份识别的“指纹”。Kashmir Hill 扣人心弦的著作中，详细揭示了一个名为 Clearview AI 的创业公司，如何大胆地从互联网搜集了数十亿人的面部数据，随后与美国多个警察局合作，悄然打造了一种隐蔽的监控工具。<br />
-<br />
-Hill 是首位揭露 Clearview 庞大网络的记者，她深入剖析了视频门铃和能识别人脸的安防摄像头急剧增长，如何将我们的生活环境逐渐转变成一个类似监狱的环境，而且这种监控带有明显的种族歧视倾向。她指出，面部识别软件通常无法准确识别黑人面孔，这种偏差导致了一位名为 Robert Julian-Borchak Williams 的人在家人面前被错误逮捕并监禁的惊悚经历，仅仅因为错误的面部识别。即便是像 Clearview 这样准确度极高的算法，也并未考虑到公民自由的重要性。<br />
-<br />
-Hill 还揭示了 Clearview 的创始人 Hoan Ton-That 如何长期与极右翼人士合作，他们中的许多人渴望追踪无证移民的面孔。她写道，现在的“外出”意味着的东西正在根本上发生变化，而且这种变化让人感到不安。Parmy Olson</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NvQlp0blhvQUFGa1I4LnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1741205453948756123#m</id>
-            <title>彭博社推荐的：《2023年我们为未来而阅读的书籍》
-
-1. 我看到的世界 — 李飞飞
-2023
-
-李飞飞，这位90年代初来美的年轻中国女性，当时几乎不懂英语，更别提计算机视觉了。她绝不会想到自己的工作将深刻推动我们进入当前的人工智能热潮。她的ImageNet项目，至今已标注了超过1400万张图片，为训练AI算法打下了基础，使得DeepMind和OpenAI这样的AI先锋公司得以崛起。
-
-在《我看到的世界》一书中，李飞飞将自己的工作与个人经历紧密结合，讲述了她作为移民的奋斗历程以及成为领域内最受尊敬的人物之一的故事。如今，她是斯坦福大学人本人工智能研究所的联席主任，成为硅谷快速发展中代表人类立场的重要声音。她的故事不仅令人着迷，也让人感到谦逊。在我们寻找值得托付未来人工智能的领袖时，李飞飞的履历给人以极大的鼓舞。*Dave Lee*</title>
-            <link>https://nitter.cz/dotey/status/1741205453948756123#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1741205453948756123#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 30 Dec 2023 21:11:44 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>彭博社推荐的：《2023年我们为未来而阅读的书籍》<br />
-<br />
-1. 我看到的世界 — 李飞飞<br />
-2023<br />
-<br />
-李飞飞，这位90年代初来美的年轻中国女性，当时几乎不懂英语，更别提计算机视觉了。她绝不会想到自己的工作将深刻推动我们进入当前的人工智能热潮。她的ImageNet项目，至今已标注了超过1400万张图片，为训练AI算法打下了基础，使得DeepMind和OpenAI这样的AI先锋公司得以崛起。<br />
-<br />
-在《我看到的世界》一书中，李飞飞将自己的工作与个人经历紧密结合，讲述了她作为移民的奋斗历程以及成为领域内最受尊敬的人物之一的故事。如今，她是斯坦福大学人本人工智能研究所的联席主任，成为硅谷快速发展中代表人类立场的重要声音。她的故事不仅令人着迷，也让人感到谦逊。在我们寻找值得托付未来人工智能的领袖时，李飞飞的履历给人以极大的鼓舞。*Dave Lee*</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0NvQThfMVhnQUUwS3pYLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
