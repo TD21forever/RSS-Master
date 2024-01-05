@@ -5,6 +5,80 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1743113987901035007#m</id>
+            <title>TrailBlazer：利用边界框控制视频对象轨迹
+
+TrailBlazer是英伟达的一个预训练好的模型，只需输入文本即可生成视频。
+
+同时他们提出一个边界框的概念，来控制视频对象的运动方向、速度和行为。
+
+例如，你可以通过改变边界框的大小、方向，让视频中的对象看起来更接近或更远离，也可以控制移动方向。
+
+与传统的低级控制信号（如边缘图、深度图）相比，TrailBlazer提供了一种简化的高级控制方法，适合非专业用户。
+
+该方法直接在预训练的去噪UNet中编辑空间和时间注意力，无需额外训练或优化，核心算法可以在不到200行代码中实现。
+
+TrailBlazer主要功能特点：
+
+1、文本到视频的转换：这是通过使用已经训练好的人工智能模型来完成的，所以用户不需要进行任何复杂的编程或训练过程。输入文本描述即可，TrailBlazer会根据这些描述生成视频。
+
+2、使用边界框来引导视频中的对象：在视频中，您可以通过创建一个简单的框（称为边界框）来指示视频中的人物或物体应该出现在哪里。这就像在视频中画一个虚拟的框，然后告诉里面的人物或物体要怎么动。
+
+3、控制视频中的动作和位置：通过调整这些边界框，您可以控制视频中的人物或物体的运动和位置，比如让它们向左移动或向右转。
+
+4、同时控制多个对象：如果您的视频中有多个人物或物体，TrailBlazer允许您同时控制它们的动作，这对于创造复杂的场景非常有用。
+
+5、关键帧动画：您可以设置特定的“关键帧”，在这些关键帧上定义对象的位置和动作。这就像在视频的不同时间点上设定标记，然后定义在这些时间点上对象应该做什么。
+
+6、用户友好：即使您不是专业的视频制作人员，也可以轻松使用TrailBlazer，因为它简化了视频编辑和动画制作的过程。
+
+项目及演示：https://hohonu-vicml.github.io/Trailblazer.Page/
+论文：http://arxiv.org/abs/2401.00896
+GitHub：https://github.com/hohonu-vicml/Trailblazer（coming soon...）</title>
+            <link>https://nitter.cz/xiaohuggg/status/1743113987901035007#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1743113987901035007#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 05 Jan 2024 03:35:34 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>TrailBlazer：利用边界框控制视频对象轨迹<br />
+<br />
+TrailBlazer是英伟达的一个预训练好的模型，只需输入文本即可生成视频。<br />
+<br />
+同时他们提出一个边界框的概念，来控制视频对象的运动方向、速度和行为。<br />
+<br />
+例如，你可以通过改变边界框的大小、方向，让视频中的对象看起来更接近或更远离，也可以控制移动方向。<br />
+<br />
+与传统的低级控制信号（如边缘图、深度图）相比，TrailBlazer提供了一种简化的高级控制方法，适合非专业用户。<br />
+<br />
+该方法直接在预训练的去噪UNet中编辑空间和时间注意力，无需额外训练或优化，核心算法可以在不到200行代码中实现。<br />
+<br />
+TrailBlazer主要功能特点：<br />
+<br />
+1、文本到视频的转换：这是通过使用已经训练好的人工智能模型来完成的，所以用户不需要进行任何复杂的编程或训练过程。输入文本描述即可，TrailBlazer会根据这些描述生成视频。<br />
+<br />
+2、使用边界框来引导视频中的对象：在视频中，您可以通过创建一个简单的框（称为边界框）来指示视频中的人物或物体应该出现在哪里。这就像在视频中画一个虚拟的框，然后告诉里面的人物或物体要怎么动。<br />
+<br />
+3、控制视频中的动作和位置：通过调整这些边界框，您可以控制视频中的人物或物体的运动和位置，比如让它们向左移动或向右转。<br />
+<br />
+4、同时控制多个对象：如果您的视频中有多个人物或物体，TrailBlazer允许您同时控制它们的动作，这对于创造复杂的场景非常有用。<br />
+<br />
+5、关键帧动画：您可以设置特定的“关键帧”，在这些关键帧上定义对象的位置和动作。这就像在视频的不同时间点上设定标记，然后定义在这些时间点上对象应该做什么。<br />
+<br />
+6、用户友好：即使您不是专业的视频制作人员，也可以轻松使用TrailBlazer，因为它简化了视频编辑和动画制作的过程。<br />
+<br />
+项目及演示：<a href="https://hohonu-vicml.github.io/Trailblazer.Page/">hohonu-vicml.github.io/Trail…</a><br />
+论文：<a href="http://arxiv.org/abs/2401.00896">arxiv.org/abs/2401.00896</a><br />
+GitHub：<a href="https://github.com/hohonu-vicml/Trailblazer">github.com/hohonu-vicml/Trai…</a>（coming soon...）</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDMxMTI3MTcyODY5MzI0ODAvcHUvaW1nL29rN3hvQlctOW40U2hjeU8uanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1743101491421024287#m</id>
             <title>GPTs 将允许向用户发送Email
 
@@ -896,24 +970,6 @@ GEO引入了一个名为GEO-BENCH的多样化基准测试，包含10,000个查�
 GitHub：<a href="https://github.com/GEO-optim/GEO">github.com/GEO-optim/GEO</a><br />
 GEO-BENCH：<a href="https://huggingface.co/datasets/GEO-Optim/geo-bench">huggingface.co/datasets/GEO-…</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0M5cFJWdmFZQUFPeHBGLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1742719780828963272#m</id>
-            <title>R to @xiaohuggg: 开发者介绍：</title>
-            <link>https://nitter.cz/xiaohuggg/status/1742719780828963272#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1742719780828963272#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 04 Jan 2024 01:29:08 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>开发者介绍：</p>
-<p><a href="https://nitter.cz/tonyzzhao/status/1742603121682153852#m">nitter.cz/tonyzzhao/status/1742603121682153852#m</a></p>
                 ]]>
             </content:encoded>
         </item>
