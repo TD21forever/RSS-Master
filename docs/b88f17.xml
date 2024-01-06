@@ -5,6 +5,64 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1743745935451070472#m</id>
+            <title>我在日常用 GPT-4 翻译的时候，就会发现有时候 GPT 能给出很不错的质量的翻译，但有时候质量一般甚至比较差，所以我也尝试过一次生成多个翻译结果，然后从里面人工挑选最好的翻译，但是我当时想做而没有做到的是：
+
+如何让 GPT 从里面帮我挑选一个最好的，或者将几个的优点结合组合成一个最好的结果。
+
+昨天读了一篇来自浙大论文《Self-Contrast: Better Reflection Through Inconsistent Solving Perspectives》（作者之一 @spicysweet1859 ）
+
+提到的方案相对就很系统了：
+
+先让 LLM 根据请求生成几个不同风格的 prompt ,  然后基于每一条 prompt 得到一个不同结果，然后对比这些结果之间的差异，基于这些差异总结出更有针对性的检查指令，用于反思，最后综合这些信息生成最终结果。
+
+之所以不是直接一个Prompt生成多个结果，而是多个Prompt生成多个结果，是为了让生成的结果更多样，否则一个Prompt中的结果可能多样性不够，当然缺点是要费Token一些。但从性能上来说可能更好，因为可以并行生成。
+
+另外对于特定任务其实不需要让LLM生成Prompt，应该人工生成Prompt效果也是一样的。
+
+在跟作者沟通后了解到，这个方案最适合的其实不是翻译，而是推理：
+
+> 我们这种 通过对比不同视角的responses之间的差异来启发反思的策略 对推理任务更有效果一些。 对于像翻译这类生成任务，我们实验发现其实也不需要多个视角，一个负面面视角和一个正面视角其实应该够用。这点宝玉老师您应该也介绍过。 by @spicysweet1859
+
+推荐阅读：
+https://browse.arxiv.org/html/2401.02009v1</title>
+            <link>https://nitter.cz/dotey/status/1743745935451070472#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1743745935451070472#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 06 Jan 2024 21:26:42 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>我在日常用 GPT-4 翻译的时候，就会发现有时候 GPT 能给出很不错的质量的翻译，但有时候质量一般甚至比较差，所以我也尝试过一次生成多个翻译结果，然后从里面人工挑选最好的翻译，但是我当时想做而没有做到的是：<br />
+<br />
+如何让 GPT 从里面帮我挑选一个最好的，或者将几个的优点结合组合成一个最好的结果。<br />
+<br />
+昨天读了一篇来自浙大论文《Self-Contrast: Better Reflection Through Inconsistent Solving Perspectives》（作者之一 <a href="https://nitter.cz/spicysweet1859" title="spicysweet">@spicysweet1859</a> ）<br />
+<br />
+提到的方案相对就很系统了：<br />
+<br />
+先让 LLM 根据请求生成几个不同风格的 prompt ,  然后基于每一条 prompt 得到一个不同结果，然后对比这些结果之间的差异，基于这些差异总结出更有针对性的检查指令，用于反思，最后综合这些信息生成最终结果。<br />
+<br />
+之所以不是直接一个Prompt生成多个结果，而是多个Prompt生成多个结果，是为了让生成的结果更多样，否则一个Prompt中的结果可能多样性不够，当然缺点是要费Token一些。但从性能上来说可能更好，因为可以并行生成。<br />
+<br />
+另外对于特定任务其实不需要让LLM生成Prompt，应该人工生成Prompt效果也是一样的。<br />
+<br />
+在跟作者沟通后了解到，这个方案最适合的其实不是翻译，而是推理：<br />
+<br />
+> 我们这种 通过对比不同视角的responses之间的差异来启发反思的策略 对推理任务更有效果一些。 对于像翻译这类生成任务，我们实验发现其实也不需要多个视角，一个负面面视角和一个正面视角其实应该够用。这点宝玉老师您应该也介绍过。 by <a href="https://nitter.cz/spicysweet1859" title="spicysweet">@spicysweet1859</a><br />
+<br />
+推荐阅读：<br />
+<a href="https://browse.arxiv.org/html/2401.02009v1">browse.arxiv.org/html/2401.0…</a></p>
+<p><a href="https://nitter.cz/dotey/status/1705441050133713202#m">nitter.cz/dotey/status/1705441050133713202#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0RNR1pNdVhzQUFCZ3c2LnBuZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0RNSHJGMFdzQUVHd2ZPLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/fuxiangPro/status/1743665779814654039#m</id>
             <title>RT by @dotey: 查理芒格说李光耀是他的学习榜样。他可能是古往今来最优秀的领导者之一，用50多年的时间将新加坡从一个沼泽般的第三世界国家拉升为第一世界国家。这是个奇迹。
 
@@ -848,29 +906,6 @@ Science是否将这个过程描述为涵盖了所有情况，最后还需要看�
 此外，《科学》期刊尚未公开其将如何处理旗下已经发现与未发现的数千篇科学论文，这些论文的图像已被认定为似乎被不适当地操控。有一些被指出问题的作者已经提供了需要的解释或数据，但大部分确实存在问题的研究都没有得到解答，部分作者已经很久没有回应了。</p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0REWjNHNlhrQUFFMVliLnBuZw==" />
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0REWjZkUlc4QUFrMDJWLnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/balconychy/status/1743103140558508307#m</id>
-            <title>RT by @dotey: 这机器人的BOM清单已经开源了。
-总价32K美金。
-https://docs.google.com/document/d/1_3yhWjodSNNYlpxkRCPIlvIAaQ76Nqk2wsqhnEVM6Dc/edit</title>
-            <link>https://nitter.cz/balconychy/status/1743103140558508307#m</link>
-            <guid isPermaLink="false">https://nitter.cz/balconychy/status/1743103140558508307#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 05 Jan 2024 02:52:28 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这机器人的BOM清单已经开源了。<br />
-总价32K美金。<br />
-<a href="https://docs.google.com/document/d/1_3yhWjodSNNYlpxkRCPIlvIAaQ76Nqk2wsqhnEVM6Dc/edit">docs.google.com/document/d/1…</a></p>
-<p><a href="https://nitter.cz/zipengfu/status/1742973258528612724#m">nitter.cz/zipengfu/status/1742973258528612724#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0RDLTladGJnQUFFWXNyLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
