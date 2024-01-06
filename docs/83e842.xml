@@ -5,6 +5,84 @@
         <link>https://nitter.cz/GPTDAOCN</link>
         
         <item>
+            <id>https://nitter.cz/GPTDAOCN/status/1743700855864619388#m</id>
+            <title>人类对新技术的恐惧和犹豫不决。从20世纪50年代对自动电梯的犹豫，到今天对人工智能和自动驾驶汽车的不安，这种心理模式一直存在。
+
+在a16z的播客中，@heyfeifer 探讨了人们对新技术的反应。这反映了一个深刻的真理：技术的进步总是会遇到社会心理的阻力，但历史表明，随着时间的推移和适应，这些技术最终会被接受。如何减轻这种恐惧，并帮助人们接受和适应新技术，是我们必须面对的挑战。</title>
+            <link>https://nitter.cz/GPTDAOCN/status/1743700855864619388#m</link>
+            <guid isPermaLink="false">https://nitter.cz/GPTDAOCN/status/1743700855864619388#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 06 Jan 2024 18:27:35 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>人类对新技术的恐惧和犹豫不决。从20世纪50年代对自动电梯的犹豫，到今天对人工智能和自动驾驶汽车的不安，这种心理模式一直存在。<br />
+<br />
+在a16z的播客中，<a href="https://nitter.cz/heyfeifer" title="Jason Feifer">@heyfeifer</a> 探讨了人们对新技术的反应。这反映了一个深刻的真理：技术的进步总是会遇到社会心理的阻力，但历史表明，随着时间的推移和适应，这些技术最终会被接受。如何减轻这种恐惧，并帮助人们接受和适应新技术，是我们必须面对的挑战。</p>
+<p><a href="https://nitter.cz/a16z/status/1743700204140761508#m">nitter.cz/a16z/status/1743700204140761508#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/GPTDAOCN/status/1743700326107222495#m</id>
+            <title>如何利用Redis实现高效的AI驱动向量相似性搜索系统
+
+这张图讲了如何使用Redis实现向量相似性搜索（Vector Similarity Search）。主要内容分为几个部分
+
+1、数据转换：原始数据被转换成嵌入向量（embeddings），这是一个将离散的分类变量映射到连续数值向量的过程。例如，文本、图像或音频都可以通过特定模型转换成其对应的嵌入向量。这里提到了可以利用Huggingface的模型库来了解更多关于嵌入向量的信息。
+2、存储在Redis：将这些嵌入向量存储在Redis中，一个开源的（键值对）数据库。
+3、索引方法：Redis具有两种索引方法：FLAT和Hierarchical Navigable Small World (HNSW)。FLAT是一种暴力搜索方法，而HNSW是一种多层次的近似最近邻搜索方法。
+4、搜索功能：搜索过程通过K近邻（KNN）功能进行，可以使用L2距离、余弦相似度或内积来检索相似的向量。
+5、一次性索引：索引只需创建一次，并且随着新的哈希自动重新索引，所有的哈希都存储在Redis中。
+6、预过滤器：搜索功能中包含文本、标签、地理位置等预过滤器。
+7、检索结果：使用上述的K近邻搜索，以及预过滤器，最终检索出相关的结果。
+8、性能与规模：图中指出Redis搜索的性能非常高，每秒可以处理更多的查询，并且具有较低的延迟。
+9、用例：向量相似性搜索可以应用于欺诈检测、情感分析、推荐系统、视觉搜索等多种场景。
+
+图的下半部分展示了几个具体的用例：
+1、推荐系统：结合用户、配置文件或上下文参数以及产品特征和知识模型，进行推荐。
+2、欺诈检测：通过检查处理和验证模型，用于银行支票的欺诈检测。
+3、安全条码扫描：实时条码扫描可以用于实时图像分析和交易分析。
+
+整体而言，这张图展示了使用Redis进行向量相似性搜索的全过程，从原始数据的处理到存储，再到索引和搜索，最后应用于各种实际场景中。这是一种结合了AI和数据库技术的现代搜索解决方案。</title>
+            <link>https://nitter.cz/GPTDAOCN/status/1743700326107222495#m</link>
+            <guid isPermaLink="false">https://nitter.cz/GPTDAOCN/status/1743700326107222495#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 06 Jan 2024 18:25:28 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>如何利用Redis实现高效的AI驱动向量相似性搜索系统<br />
+<br />
+这张图讲了如何使用Redis实现向量相似性搜索（Vector Similarity Search）。主要内容分为几个部分<br />
+<br />
+1、数据转换：原始数据被转换成嵌入向量（embeddings），这是一个将离散的分类变量映射到连续数值向量的过程。例如，文本、图像或音频都可以通过特定模型转换成其对应的嵌入向量。这里提到了可以利用Huggingface的模型库来了解更多关于嵌入向量的信息。<br />
+2、存储在Redis：将这些嵌入向量存储在Redis中，一个开源的（键值对）数据库。<br />
+3、索引方法：Redis具有两种索引方法：FLAT和Hierarchical Navigable Small World (HNSW)。FLAT是一种暴力搜索方法，而HNSW是一种多层次的近似最近邻搜索方法。<br />
+4、搜索功能：搜索过程通过K近邻（KNN）功能进行，可以使用L2距离、余弦相似度或内积来检索相似的向量。<br />
+5、一次性索引：索引只需创建一次，并且随着新的哈希自动重新索引，所有的哈希都存储在Redis中。<br />
+6、预过滤器：搜索功能中包含文本、标签、地理位置等预过滤器。<br />
+7、检索结果：使用上述的K近邻搜索，以及预过滤器，最终检索出相关的结果。<br />
+8、性能与规模：图中指出Redis搜索的性能非常高，每秒可以处理更多的查询，并且具有较低的延迟。<br />
+9、用例：向量相似性搜索可以应用于欺诈检测、情感分析、推荐系统、视觉搜索等多种场景。<br />
+<br />
+图的下半部分展示了几个具体的用例：<br />
+1、推荐系统：结合用户、配置文件或上下文参数以及产品特征和知识模型，进行推荐。<br />
+2、欺诈检测：通过检查处理和验证模型，用于银行支票的欺诈检测。<br />
+3、安全条码扫描：实时条码扫描可以用于实时图像分析和交易分析。<br />
+<br />
+整体而言，这张图展示了使用Redis进行向量相似性搜索的全过程，从原始数据的处理到存储，再到索引和搜索，最后应用于各种实际场景中。这是一种结合了AI和数据库技术的现代搜索解决方案。</p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0RMZU5KTGFzQUFjNEVjLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/GPTDAOCN/status/1743694902419165243#m</id>
             <title>掌握Excel中的Python，提升数据处理能力——全面的Python速查手册
 
@@ -648,46 +726,6 @@ Q4：<br />
 <br />
 总之，我认为这篇文章是一篇值得阅读和思考的文章，它让我们了解了人工智能在司法领域的机遇和挑战，也让我们思考了人工智能与法律的关系和未</p>
 <p><a href="https://nitter.cz/dotey/status/1741661915321954364#m">nitter.cz/dotey/status/1741661915321954364#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/GPTDAOCN/status/1741847316007694734#m</id>
-            <title>微软的Copilot应用程序已经发布了其iOS版本，这意味着用户现在可以在他们的智能手机上免费使用GPT-4和DALL-E 3。
-
-这个APP的发布意味着用户可以在移动设备上直接使用这些强大的AI工具，这会对日常生活、工作和创意活动产生显著影响。 https://apps.apple.com/us/app/microsoft-copilot/id6472538445?l=zh-Hans-CN</title>
-            <link>https://nitter.cz/GPTDAOCN/status/1741847316007694734#m</link>
-            <guid isPermaLink="false">https://nitter.cz/GPTDAOCN/status/1741847316007694734#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 01 Jan 2024 15:42:16 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>微软的Copilot应用程序已经发布了其iOS版本，这意味着用户现在可以在他们的智能手机上免费使用GPT-4和DALL-E 3。<br />
-<br />
-这个APP的发布意味着用户可以在移动设备上直接使用这些强大的AI工具，这会对日常生活、工作和创意活动产生显著影响。 <a href="https://apps.apple.com/us/app/microsoft-copilot/id6472538445?l=zh-Hans-CN">apps.apple.com/us/app/micros…</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTc0MzQxNDExMjM1OTc0NzU4NS9hMTZQYjhWaj9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/GPTDAOCN/status/1741754220028825629#m</id>
-            <title>新年快乐 2024会更魔幻</title>
-            <link>https://nitter.cz/GPTDAOCN/status/1741754220028825629#m</link>
-            <guid isPermaLink="false">https://nitter.cz/GPTDAOCN/status/1741754220028825629#m</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 01 Jan 2024 09:32:20 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>新年快乐 2024会更魔幻</p>
-<p><a href="https://nitter.cz/vivilinsv/status/1741724896563278014#m">nitter.cz/vivilinsv/status/1741724896563278014#m</a></p>
                 ]]>
             </content:encoded>
         </item>
