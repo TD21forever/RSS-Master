@@ -5,6 +5,72 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1743575712379126262#m</id>
+            <title>博主Edward Donner分享了他如何利用自己的24万条短信和WhatsApp历史记录来微调了一个Llama 2模型来模仿自己！
+
+- 训练后的模型不仅能够模仿他自己，还能够令人信服地扮演他的许多朋友的角色——至少是那些与他交换了至少1000条消息的人。
+
+- 他被模型生成的对话的逼真程度所震惊，这些对话反映了他与不同人的关系的细微差别。
+
+- 他甚至有时会搜索自己的文本历史记录，以确认模型不是在复述真实的对话。
+
+- 尽管模型有时会陷入循环或出错，但他认为超过一半的对话能够通过图灵测试。
+
+他计划继续探索RAG等技术，以给模型提供更多的对话背景，进一步提高对话质量。他还打算尝试其他基础模型、进一步优化提示和输入数据，以及改进生成过程。
+
+以下是他的实验的关键步骤和发现：
+
+1、获取消息：Edward使用iMazing工具下载了他的所有SMS/iMessage和WhatsApp对话，筛选出群聊、非联系人和不常联系的人，最终得到了240,805条消息。
+
+2、准备数据集：他将消息分组为与同一人的对话块，每个块包含不超过200个令牌的多条消息，共得到25,087个数据块。
+
+3、超参数搜索：他首先使用7B参数的Llama 2模型进行微调，后来升级到13B参数，结果有显著提高。
+
+4、优化输入数据和提示：他不断调整训练数据的格式和提示，尽管训练和评估损失增加，但生成的结果却在改善。
+
+5、生成对话：他使用Hugging Face的文本生成工具来写对话，尝试了多种技术，包括重复罚分、令牌抑制、波束搜索等。
+
+详细：https://edwarddonner.com/2024/01/02/fine-tuning-an-llm-on-240k-text-messages/</title>
+            <link>https://nitter.cz/xiaohuggg/status/1743575712379126262#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1743575712379126262#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 06 Jan 2024 10:10:18 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>博主Edward Donner分享了他如何利用自己的24万条短信和WhatsApp历史记录来微调了一个Llama 2模型来模仿自己！<br />
+<br />
+- 训练后的模型不仅能够模仿他自己，还能够令人信服地扮演他的许多朋友的角色——至少是那些与他交换了至少1000条消息的人。<br />
+<br />
+- 他被模型生成的对话的逼真程度所震惊，这些对话反映了他与不同人的关系的细微差别。<br />
+<br />
+- 他甚至有时会搜索自己的文本历史记录，以确认模型不是在复述真实的对话。<br />
+<br />
+- 尽管模型有时会陷入循环或出错，但他认为超过一半的对话能够通过图灵测试。<br />
+<br />
+他计划继续探索RAG等技术，以给模型提供更多的对话背景，进一步提高对话质量。他还打算尝试其他基础模型、进一步优化提示和输入数据，以及改进生成过程。<br />
+<br />
+以下是他的实验的关键步骤和发现：<br />
+<br />
+1、获取消息：Edward使用iMazing工具下载了他的所有SMS/iMessage和WhatsApp对话，筛选出群聊、非联系人和不常联系的人，最终得到了240,805条消息。<br />
+<br />
+2、准备数据集：他将消息分组为与同一人的对话块，每个块包含不超过200个令牌的多条消息，共得到25,087个数据块。<br />
+<br />
+3、超参数搜索：他首先使用7B参数的Llama 2模型进行微调，后来升级到13B参数，结果有显著提高。<br />
+<br />
+4、优化输入数据和提示：他不断调整训练数据的格式和提示，尽管训练和评估损失增加，但生成的结果却在改善。<br />
+<br />
+5、生成对话：他使用Hugging Face的文本生成工具来写对话，尝试了多种技术，包括重复罚分、令牌抑制、波束搜索等。<br />
+<br />
+详细：<a href="https://edwarddonner.com/2024/01/02/fine-tuning-an-llm-on-240k-text-messages/">edwarddonner.com/2024/01/02/…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0RKczNicmFjQUFoZTRlLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1743526839698755678#m</id>
             <title>蔡司在2024年的CES展会上展示其全息相机Holocam技术，该技术能够将任何玻璃屏幕变成相机。
 
@@ -648,37 +714,6 @@ GitHub：<a href="https://github.com/hohonu-vicml/Trailblazer">github.com/hohonu
                     
                     <p>英文效果演示，整体还不错：</p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDI5NzgzNTE4MzUzNTcxODQvcHUvaW1nL1A5Rnh4SlFrVE9hM29vUkQuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1743089151317270983#m</id>
-            <title>DreamTalk这个效果还行啊 😀
-
-中文效果差一点
-
-测了下，中文语速慢还可以，语速快有时候跟不上，英文口型效果对的很不错。
-
-感兴趣的可以体验下，记得交作业：https://huggingface.co/spaces/fffiloni/dreamtalk</title>
-            <link>https://nitter.cz/xiaohuggg/status/1743089151317270983#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1743089151317270983#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 05 Jan 2024 01:56:53 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>DreamTalk这个效果还行啊 😀<br />
-<br />
-中文效果差一点<br />
-<br />
-测了下，中文语速慢还可以，语速快有时候跟不上，英文口型效果对的很不错。<br />
-<br />
-感兴趣的可以体验下，记得交作业：<a href="https://huggingface.co/spaces/fffiloni/dreamtalk">huggingface.co/spaces/fffilo…</a></p>
-<p><a href="https://nitter.cz/xiaohuggg/status/1736627340623692177#m">nitter.cz/xiaohuggg/status/1736627340623692177#m</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDMwODg3MDYzMTAwNjYxNzYvcHUvaW1nL3YxYlpkUmI2aTN1bmhpdjguanBn" />
                 ]]>
             </content:encoded>
         </item>
