@@ -5,6 +5,108 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1744623826510741764#m</id>
+            <title>阿里巴巴又整活了！
+
+FaceChain-FACT：无需训练，上传你的照片克隆你自己🤓
+
+你只需要上传一张照片，它就能提取你的面部特征，然后结合不同的风格模板，生成具有你个人特征的虚拟AI肖像。
+
+可以实现让你在任意场景中或者生成各种风格、服装、个性化的你自己！
+
+最牛P的是它可以运行在CPU上！达到秒级生成速度！
+
+FaceChain-FACT的主要亮点：
+
+1、支持零样本肖像生成。无需训练，上传照片即可！
+
+2、训练模型时使用了数百万精美的人类肖像，确保生成肖像的真实性和质量。
+
+3、提供100多种高级定制模板。
+
+4、模型支持在CPU上运行，并实现秒级推理时间，生成速度极快！
+
+5、兼容与ControlNet和LoRA插件，提供了更多的灵活性和创造空间。
+
+技术原理：
+
+现代面部定制在图像生成中面临挑战，尤其是因为人脸的高细节要求。
+
+FaceChain通过训练一个LoRA模型，整合面部信息来生成定制化肖像。然而，由于需要训练用户的LoRA模型，FaceChain的流程分为训练和推理两个阶段，这增加了用户的成本。
+
+因此，提出了一种无需面部LoRA模型训练的零样本版本，即FaceChain-FACT。此外，只需用户的单张照片，即可生成定制化肖像。与现有商业应用相比，生成速度提升了100倍，实现了秒级图像生成速度。
+
+FaceChain-FACT整合了类似于Stable Diffusion的基于变换器的面部特征提取器，并使用了作为面部条件的密集细粒度特征，这些特征具有更好的角色再现能力。FaceChain-FACT与ControlNet和LoRA插件兼容，并支持即插即用。
+
+方法：
+
+该技术采用了一系列图像预处理方法，包括面部分割、裁剪和对齐、手部检测、面部质量筛选等，以筛选和获得训练数据集。
+
+利用基于变换器的面部特征提取器提取特征，并利用倒数第二层的密集细粒度特征作为面部条件。
+
+Stable Diffusion通过FACT-Adapter接收面部条件，并将其与文本嵌入结合，生成肖像图像。通过融合来自FaceChain的各种LoRA模型，可以生成多种风格的肖像。
+
+项目及演示：https://facechain-fact.github.io/
+
+GitHub：https://github.com/modelscope/facechain/tree/main/facechain_adapter（coming soon…）</title>
+            <link>https://nitter.cz/xiaohuggg/status/1744623826510741764#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1744623826510741764#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 09 Jan 2024 07:35:08 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>阿里巴巴又整活了！<br />
+<br />
+FaceChain-FACT：无需训练，上传你的照片克隆你自己🤓<br />
+<br />
+你只需要上传一张照片，它就能提取你的面部特征，然后结合不同的风格模板，生成具有你个人特征的虚拟AI肖像。<br />
+<br />
+可以实现让你在任意场景中或者生成各种风格、服装、个性化的你自己！<br />
+<br />
+最牛P的是它可以运行在CPU上！达到秒级生成速度！<br />
+<br />
+FaceChain-FACT的主要亮点：<br />
+<br />
+1、支持零样本肖像生成。无需训练，上传照片即可！<br />
+<br />
+2、训练模型时使用了数百万精美的人类肖像，确保生成肖像的真实性和质量。<br />
+<br />
+3、提供100多种高级定制模板。<br />
+<br />
+4、模型支持在CPU上运行，并实现秒级推理时间，生成速度极快！<br />
+<br />
+5、兼容与ControlNet和LoRA插件，提供了更多的灵活性和创造空间。<br />
+<br />
+技术原理：<br />
+<br />
+现代面部定制在图像生成中面临挑战，尤其是因为人脸的高细节要求。<br />
+<br />
+FaceChain通过训练一个LoRA模型，整合面部信息来生成定制化肖像。然而，由于需要训练用户的LoRA模型，FaceChain的流程分为训练和推理两个阶段，这增加了用户的成本。<br />
+<br />
+因此，提出了一种无需面部LoRA模型训练的零样本版本，即FaceChain-FACT。此外，只需用户的单张照片，即可生成定制化肖像。与现有商业应用相比，生成速度提升了100倍，实现了秒级图像生成速度。<br />
+<br />
+FaceChain-FACT整合了类似于Stable Diffusion的基于变换器的面部特征提取器，并使用了作为面部条件的密集细粒度特征，这些特征具有更好的角色再现能力。FaceChain-FACT与ControlNet和LoRA插件兼容，并支持即插即用。<br />
+<br />
+方法：<br />
+<br />
+该技术采用了一系列图像预处理方法，包括面部分割、裁剪和对齐、手部检测、面部质量筛选等，以筛选和获得训练数据集。<br />
+<br />
+利用基于变换器的面部特征提取器提取特征，并利用倒数第二层的密集细粒度特征作为面部条件。<br />
+<br />
+Stable Diffusion通过FACT-Adapter接收面部条件，并将其与文本嵌入结合，生成肖像图像。通过融合来自FaceChain的各种LoRA模型，可以生成多种风格的肖像。<br />
+<br />
+项目及演示：<a href="https://facechain-fact.github.io/">facechain-fact.github.io/</a><br />
+<br />
+GitHub：<a href="https://github.com/modelscope/facechain/tree/main/facechain_adapter">github.com/modelscope/facech…</a>（coming soon…）</p>
+<img src="https://nitter.cz/pic/enc/YW1wbGlmeV92aWRlb190aHVtYi8xNzQ0NjIzNTUzNDQ4OTUxODA4L2ltZy9kbXVad0p5Z2JJeUhTMVJGLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1744616727839932496#m</id>
             <title>R to @xiaohuggg: 详细介绍：https://mp.weixin.qq.com/s/Edw7D-Fh_cmqq02mJrkHyA?from=groupmessage&amp;isappinstalled=0&amp;scene=1&amp;clicktime=1704783948&amp;enterid=1704783948</title>
             <link>https://nitter.cz/xiaohuggg/status/1744616727839932496#m</link>
@@ -482,69 +584,6 @@ https://x.com/creacas_ai/status/1744448182648533204?s=20</title>
 <br />
 <a href="https://x.com/creacas_ai/status/1744448182648533204?s=20">x.com/creacas_ai/status/1744…</a></p>
 <p><a href="https://nitter.cz/creacas_ai/status/1744448182648533204#m">nitter.cz/creacas_ai/status/1744448182648533204#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1744559984980189535#m</id>
-            <title>R to @xiaohuggg: 左边原图：https://bestaiprompts.art/img/waterfall_cutre.jpeg
-
-右边8K的：https://bestaiprompts.art/img/super_waterfall.jpeg
-
-由于X分辨率限制，建议点开链接查看完整效果</title>
-            <link>https://nitter.cz/xiaohuggg/status/1744559984980189535#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1744559984980189535#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 09 Jan 2024 03:21:27 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>左边原图：<a href="https://bestaiprompts.art/img/waterfall_cutre.jpeg">bestaiprompts.art/img/waterf…</a><br />
-<br />
-右边8K的：<a href="https://bestaiprompts.art/img/super_waterfall.jpeg">bestaiprompts.art/img/super_…</a><br />
-<br />
-由于X分辨率限制，建议点开链接查看完整效果</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0RYbjRUYmJZQUFuaFBDLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0RYb0IxWmJnQUFLRzByLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1744559983243694528#m</id>
-            <title>Magnific AI 图像升级器再升级
-
-现在可以直接把图像提升到10K的级别
-
-- 输出尺寸高达 10,000 x 10,000 像素。
-- 可以将任何Midjourney图像放大 8 倍！ 
-- 新滑块：Fractality，用于调整图像的某些特性。
-- 使用“Z + 滚轮”可以实时查看放大/缩小结果
-
-下面是一些案例，你们看看效果↓🧵</title>
-            <link>https://nitter.cz/xiaohuggg/status/1744559983243694528#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1744559983243694528#m</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 09 Jan 2024 03:21:27 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Magnific AI 图像升级器再升级<br />
-<br />
-现在可以直接把图像提升到10K的级别<br />
-<br />
-- 输出尺寸高达 10,000 x 10,000 像素。<br />
-- 可以将任何Midjourney图像放大 8 倍！ <br />
-- 新滑块：Fractality，用于调整图像的某些特性。<br />
-- 使用“Z + 滚轮”可以实时查看放大/缩小结果<br />
-<br />
-下面是一些案例，你们看看效果↓🧵</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDQ1NTUzMzA4MDQyNzMxNTIvcHUvaW1nL3pMZmVGTHpIamc3dnVKbEQuanBn" />
                 ]]>
             </content:encoded>
         </item>
