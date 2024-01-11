@@ -5,6 +5,247 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/85348</id>
+            <title>调整页码、转移批注、切割页面：这些命令行工具帮你玩转 PDF</title>
+            <link>https://sspai.com/post/85348</link>
+            <guid isPermaLink="false">https://sspai.com/post/85348</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 11 Jan 2024 12:36:27 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: PDF, 文件格式, 跨平台, 软件
+<br>
+<br>
+总结: 本文介绍了PDF作为一种重要的文件格式，其跨平台和不易修改的特点。同时，还提供了一些免费的PDF处理工具和技巧，使用户能够轻松解决PDF相关的问题，而无需使用昂贵的Adobe Acrobat或其他付费软件。这些工具主要是命令行界面，适合自动化使用，但也提供了一些图形界面和打包方案，方便不熟悉命令行的用户使用。 </div>
+                        <hr>
+                    
+                    <p style="margin-left: 0px;">如今，无论是商业文件，电子书籍，还是学术论文，大多以 PDF 文件格式存储和分发。这主要是看中了 PDF 跨平台、跨设备、且不易修改的特点；也有说法称 PDF 为<a href="https://www.vice.com/en/article/pam43n/why-the-pdf-is-secretly-the-worlds-most-important-file-format">世界上最重要的文件格式</a>。</p>
+<p style="margin-left: 0px;">但是，PDF 的很多特点和功能仍然不为人知，日常学习工作中遇到 PDF 相关的问题还是会让不少同学犯难。此外，发明 PDF 格式的 Adobe 公司推出的 Acrobat 不仅昂贵，也并非万能，在实现某些 PDF 功能时并非总是最优选项。</p>
+<p style="margin-left: 0px;">举个例子，我一位朋友热衷于将纸质书扫描成 PDF 电子书，前段时间他想将扫出的两页对开版本分割成单页，在 Acrobat 中折腾了半天也没有实现。能找到的其他软件价格都还不便宜。最终，通过我们下面会介绍的 MuPDF，他没花一分钱就实现了这个需求。</p>
+<p>有鉴于此，本文接下来将分享一些我日常用到的 PDF 处理工具和技巧，让你无需 Adobe Acrobat 或其他付费 PDF 软件，也能轻松相应的问题。</p>
+<p>方便查阅起见，下面先用表格列出这些工具的主要信息：</p>
+<figure class="table">
+    <table>
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>语言</th>
+                <th>支持平台</th>
+                <th>许可方式</th>
+                <th>简介</th>
+                <th>安装方式</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="https://gitlab.com/pdftk-java/pdftk">pdftk-java</a></td>
+                <td>Java</td>
+                <td>Linux, macOS, Windows</td>
+                <td>GNU-2.0</td>
+                <td>命令行工具，导出 PDF 元数据，合并、拆分、修复 PDF 等</td>
+                <td><code>brew install pdftk-java</code></td>
+            </tr>
+            <tr>
+                <td><a href="https://skim-app.sourceforge.io/">Skim</a></td>
+                <td>Objective-C</td>
+                <td>macOS</td>
+                <td>BSD</td>
+                <td>图形界面工具，阅读和批注 PDF，默认将 PDF 标注存储为 Skim notes</td>
+                <td><code>brew install --cask skim</code></td>
+            </tr>
+            <tr>
+                <td><a href="https://mupdf.com/">MuPDF</a></td>
+                <td>C</td>
+                <td>Linux, macOS, Windows, Android, iOS</td>
+                <td>AGPL-3.0</td>
+                <td>轻量级 PDF、XPS 和电子书查看器；常用作框架，但也有命令行工具</td>
+                <td><code>brew install mupdf</code></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/rrthomas/pdfjam">pdfjam</a></td>
+                <td>Shell</td>
+                <td>Linux, macOS, 通过 <a href="http://www.cygwin.com/">Cygwin</a> 支持 Windows</td>
+                <td>GPL-2.0</td>
+                <td>命令行工具，主要用于涉及 PDF 页面的处理任务</td>
+                <td>安装 <a href="https://www.latex-project.org/get/">TeX Live</a> 发行版或下载 <a href="https://github.com/rrthomas/pdfjam/releases/tag/v3.10">release</a> 后安装</td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/py-pdf/pypdf">pypdf</a></td>
+                <td>Python</td>
+                <td>Linux, macOS, Windows</td>
+                <td>BSD</td>
+                <td>Python 库，通过 Python 对 PDF 进行分割、合并、裁剪和转换、提取文本等</td>
+                <td><code>pip install pypdf</code></td>
+            </tr>
+        </tbody>
+    </table>
+</figure>
+<p>可以看出，这些工具主要是命令行界面，天然地适合自动化使用。但为了让不熟悉命令行的朋友也能轻松，我也提供了 macOS 平台上的打包方案（<a href="https://p15.p3.n0.cdn.getcloudapp.com/items/4guWAPdz/5eb749fa-80b4-49ab-a88d-c480e18c393f.zip">下载</a>） ，有依托 <a href="http://www.keyboardmaestro.com/">Keyboard Maestro</a>、<a href="https://support.apple.com/guide/automator/welcome/mac">Automator</a>（自动操作）和 <a href="https://support.apple.com/guide/shortcuts-mac/apdf22b0444c/mac">Shortcuts</a>（快捷指令）的版本可选。</p>
+<hr />
+<p>给自己打个小广告：Keyboard Maestro 是我非常喜欢的自动化工具，我还为它写过一个完整的教程《<a href="https://sspai.com/series/350">生产力超频：Keyboard Maestro 拯救效率</a>》（会员可以免费阅读）。如果你还没有购买 <a href="https://www.keyboardmaestro.com/main/store">Keyboard Maestro</a>，可以使用少数派读者专属优惠码 <code>SSPAI</code> 享受八折优惠。</p>
+<h2 style="margin-left: 0px;"><strong>调整 PDF 页码标签</strong></h2>
+<p style="margin-left: 0px;">一般情况下，PDF 的页码（page numbers）是从文件的首页起算。但因为 PDF 常用来保存出版物，其实际内容的页码编排与 PDF 文件的页数未必一致。例如，在下图所示的 PDF 中，由于封面、目录等占用的页数，正文页脚的第 10 页实际上已经是文件的第 19 页。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/b50580f5827b649038bbaf67d3f3f491.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>PDF Expert 右下角显示的 PDF 页码</figcaption>
+</figure>
+<p>实际上，PDF 也考虑到了这种情况，不仅支持从首页单调递增的纯数字页码，还支持一种被称作 <a href="https://www.devontechnologies.com/blog/20220208-pdf-page-numbering">page folios</a> 的富格式页码（在 Acrobat 中也叫作 page labels）。page folios 支持分组，内容可以是阿拉伯数字、英文字母、罗马数字或自定义标记，还能添加前缀，因此可以与文件内容完全对应。</p>
+<p style="margin-left: 0px;">如果你有 Adobe Acrobat，选中需要调整的页面缩略图，右键点击「Page Labels…」，在弹出的对话框中设置即可。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/2e747f79e6774ac82f7b554475c31cfa.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>在 Adobe Acrobat 中调整 PDF 页码</figcaption>
+</figure>
+<p>但如果你不想为 Acrobat 付费，或者觉得页数多时操作繁琐，则可以使用命令行工具 PDFtk。假设输入文件为 <code>input.pdf</code>，用下面的命令将其元数据导出为一个纯文本文件 <code>metadata.text</code>（<a href="https://www.pdflabs.com/docs/pdftk-man-page/#dest-op-dump-data-utf8">文档</a>）：</p>
+<pre class="language-shell"><code>pdftk input.pdf dump_data_utf8 output metadata.text</code></pre>
+<p style="margin-left: 0px;">使用文本编辑器打开生成的 <code>metadata.text</code>，可以看到 <code>input.pdf</code> 的各种元数据，其中就包括页码标签信息，如下所示：</p>
+<pre class="language-text"><code>PageLabelBegin
+PageLabelNewIndex: 1
+PageLabelStart: 1
+PageLabelPrefix: Cover
+PageLabelNumStyle: NoNumber
+PageLabelBegin
+PageLabelNewIndex: 2
+PageLabelStart: 1
+PageLabelPrefix: Page
+PageLabelNumStyle: UppercaseLetters
+PageLabelBegin
+PageLabelNewIndex: 3
+PageLabelStart: 1
+PageLabelNumStyle: UppercaseLetters
+PageLabelBegin
+PageLabelNewIndex: 6
+PageLabelStart: 1
+PageLabelNumStyle: LowercaseLetters
+PageLabelBegin
+PageLabelNewIndex: 9
+PageLabelStart: 1
+PageLabelNumStyle: UppercaseRomanNumerals
+PageLabelBegin
+PageLabelNewIndex: 12
+PageLabelStart: 1
+PageLabelNumStyle: LowercaseRomanNumerals
+PageLabelBegin
+PageLabelNewIndex: 17
+PageLabelStart: 1
+PageLabelNumStyle: DecimalArabicNumerals</code></pre>
+<p>容易发现，每个 PDF 页码标签的元数据由 4 或 5 行组成：</p>
+<ul>
+    <li><code>PageLabelBegin</code>：开始一个页码标签</li>
+    <li><code>PageLabelNewIndex</code>：页码标签开始的索引，对应 PDF 的 page numbers</li>
+    <li><code>PageLabelStart</code>：页码标签开始的页码</li>
+    <li><code>PageLabelPrefix</code>：页码标签的前缀（可选）</li>
+    <li><code>PageLabelNumStyle</code>：页码标签的类型，包括 <code>NoNumber</code>（无页码）、<code>DecimalArabicNumerals</code>（阿拉伯数字）、<code>UppercaseLetters</code>（大写英文字母）、<code>LowercaseLetters</code>（小写英文字母）、<code>UppercaseRomanNumerals</code>（大写罗马数字）和 <code>LowercaseRomanNumerals</code>（小写罗马数字）。</li>
+</ul>
+<p style="margin-left: 0px;">据此，示例输出的元数据可以解读为：</p>
+<figure class="table">
+    <table>
+        <tbody>
+            <tr>
+                <td>页码范围</td>
+                <td>页码格式</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><code>Cover</code></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>带有前缀 <code>Page</code> 的大写英文字母 <code>Page A</code></td>
+            </tr>
+            <tr>
+                <td>3-5</td>
+                <td>大写英文字母 <code>A</code>，依次递增</td>
+            </tr>
+            <tr>
+                <td>6-8</td>
+                <td>小写英文字母 <code>a</code>，依次递增</td>
+            </tr>
+            <tr>
+                <td>9-11</td>
+                <td>大写罗马数字 <code>I</code>，依次递增</td>
+            </tr>
+            <tr>
+                <td>12-16</td>
+                <td>小写罗马数字 <code>i</code>，依次递增</td>
+            </tr>
+            <tr>
+                <td>17-</td>
+                <td>阿拉伯数字 <code>17</code>，依次递增直至最后一页</td>
+            </tr>
+        </tbody>
+    </table>
+</figure>
+<p>当然，PDF 未必都需要页码定义，如果元数据没有定义页码标签，阅读器默认会使用最普通的格式，即从阿拉伯数字 1 开始递增。</p>
+<p style="margin-left: 0px;">回到我们的需求：如果将 <code>metadata.text</code> 倒数第 3 行的 <code>17</code> 修改为 <code>20</code>，就是指文件第 17 页开始的 page labels 修改为从阿拉伯数字 20 开始。</p>
+<p style="margin-left: 0px;">最后将修改后的 <code>metadata.text</code> 导入回 PDF 即可：</p>
+<pre class="language-null"><code>pdftk input.pdf update_info_utf8 metadata.text output output.pdf</code></pre>
+<p style="margin-left: 0px;">输出的 <code>output.pdf</code> 所显示的页码如下图所示。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/bff2f6acc137558370e2ff6a5ad477e3.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>修改元数据后得到 PDF，从第 20 页开始使用阿拉伯数字作为页码标签</figcaption>
+</figure>
+<p style="margin-left: 0px;">据此，我们还可以通过 Keyboard Maestro 将其固定为一个 marco，这样以后就可以一键调用了。</p>
+<p style="margin-left: 0px;">先看成品效果，如下图所示：</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/5118cf46a2a668df8b95ba15fcd35af0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>调整 PDF 页码标签的 Keyboard Maestro macro</figcaption>
+</figure>
+<p style="margin-left: 0px;">简单描述，这个 macro：</p>
+<p style="margin-left: 0px;">1. 首先获取访达（Finder）中选中文件及其所在路径，然后保存为 Keyboard Maestro 中的变量 <code>selected_pdf</code>。</p>
+<p style="margin-left: 0px;">2. 判断选中的文件是否是 PDF，如果不是，则弹出通知然后取消执行 macro。</p>
+<p style="margin-left: 0px;">3. 弹出一个提示框，让用户输入页码标签的起始页，这里包括了 3 种类型，也就是 <code>PDFtk</code> 的读取的 3 个变量：<sup class="ss-footnote" href="" title="只包括了自定义的 Cover、小写罗马数字和阿拉伯数字这 3 种类型的页码标签，如果你需要调整其他类型的页码标签，可以参考上面的示例，自行修改 Shell 脚本中的代码。">1</sup></p>
+<ul>
+    <li><code>FirstPage</code>：第一页，通常为 <code>Cover</code>，默认值设置为 1</li>
+    <li><code>LowercaseRomanNumerals</code>：小写罗马数字页码标签的起始页</li>
+    <li><code>DecimalArabicNumerals</code>：阿拉伯数字页码标签的起始页</li>
+</ul>
+<p>如果上述 3 个值留空的话，则表示不包括该类页码标签。</p>
+<p>4. 将用户输入的值作为变量传递给下面的 Shell 脚本。</p>
+<pre class="language-shell"><code>export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
+
+cd "$KMVAR_pdf_path"
+
+# Dump PDF metadata
+pdftk "$KMVAR_selected_pdf" dump_data_utf8 output metadata.text
+
+# Path to the metadata file dumped by pdftk
+METADATA_FILE="metadata.text"
+
+# Remove existing page label information if present
+sed -i '' '/PageLabelBegin/,$d' "$METADATA_FILE"
+
+# Function to append page label information
+append_page_label(){
+    cat &lt;&lt;EOF &gt;&gt; "$METADATA_FILE"
+PageLabelBegin
+PageLabelNewIndex: $1
+PageLabelStart: $2
+$3
+$4
+EOF
+}
+
+# Append new page label information if variables are not empty
+[ -n "$KMVAR_FirstPage" ] &amp;&amp; append_page_label "$KMVAR_FirstPage" "1" "PageLabelPrefix: Cover" "PageLabelNumStyle: NoNumber"
+[ -n "$KMVAR_LowercaseRomanNumerals" ] &amp;&amp; append_page_label "$KMVAR_LowercaseRomanNumerals" "1" "PageLabelNumStyle: LowercaseRomanNumerals"
+[ -n "$KMVAR_DecimalArabicNumerals" ] &amp;&amp; append_page_label "$KMVAR_DecimalArabicNumerals" "1" "PageLabelNumStyle: DecimalArabicNumerals"
+
+# Update PDF metadata
+pdftk "$KMVAR_selected_pdf" update_info_utf8 metadata.text output adjusted-page-labels.pdf
+
+# Remove `metadata.text`
+rm metadata.text</code></pre>
+<p style="margin-left: 0px;">这段代码使用 <code>pdftk</code> 导出 PDF 的元数据为文本文件 <code>metadata.text</code>，然后使用 <code>sed</code> 删除 <code>metadata.text</code> 中已有的页码标签信息。接着，使用 <code>cat</code> 将用户输入的页码标签信息追加到 <code>metadata.text</code> 中，通过 <code>pdftk</code> 导入，最后删除临时文件 <code>metadata.text</code>。</p>
+<p style="margin-left: 0px;">这就完成了 marco 的编写。以后，在访达中选中需要修改页码标签的 PDF 文件，按下快捷键 <code>⌃ + ⌥ + L</code> ，在弹出的窗口中输入不同类型的页码标签的起始页，就可以得到页码标签修改后的 PDF 文件。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/10cd55c0df48114263163a3f33e1005c.gif" />
+    <figcaption>调整 PDF 页码标签的 Keyboard Maestro macro 使用效果</figcaption>
+</figure>
+<h2 style="margin-left: 0px;"><strong>转移 PDF 书签</strong></h2>
+<p style="margin-left: 0px;">PDF 书签（<a href="https://helpx.adobe.com/hk_en/acrobat/using/page-thumbnails-bookmarks-pdfs.html">bookmark</a>）是指导航窗格的书签面板中的超链接文本，对应着不同的页码，有时也叫作「目录」或「大纲」。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/85735</id>
             <title>换台新电脑、迎接新一年：2024 Mac 选购指南</title>
             <link>https://sspai.com/post/85735</link>
@@ -225,86 +466,6 @@
                         <hr>
                     
                     <p style="margin-left: 0px;">编注：本文是「放轻松」征文活动的入围文章。本文仅代表作者本人观点，少数派对标题和排版略作调整。</p><p style="margin-left: 0px;">想了解如何参与本次征文、赢取奖品，可以 <a href="https://sspai.com/post/84979" target="_blank">点此查看</a> 活动规则。</p><hr /><blockquote><p>What are you doing?</p><p>Just relax.</p></blockquote><p>这是我在外贸工作时，经常和外国客户发生的对话。当时我想着，这算哪门子回复，放松也算是一件事情吗？直到后来，我才明白在他们眼里，放松和工作一样，同等重要。</p><p>21 世纪，我们形成了一种观念，我们需要努力工作，拼命搞钱。在这个时代，躺平和悠闲被视作没有上进心，甚至我们会伪装成自己很忙很努力的样子，以此来对抗焦虑。但事实上，休息的重要性被远远忽视了。</p><p>先说结论，<strong>休息并不只是为了恢复能量，还有更好地整合记忆，以及让我们富有创造性。</strong></p><p>我们都知道《<a href="https://weread.qq.com/web/bookDetail/4c332a50597c664c3f9f45e" target="_blank">异类</a>》这本书中说过的一万小时定律，只要我们在某个领域学习和训练超过了 1 万个小时，那么就能成为这个领域的专家。乍一看，我们只要无限的加长学习和工作的时间，收获就会越大。但有研究表明，科学家发表文章的篇数和他们每周的工作时长并不成正比，而是一个大致的 M 形。<br />&nbsp;</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/08/d92ceb947e061de2f4becc3a62c28c7e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>简略折线图，纵轴数字仅表示比例</figcaption></figure><p>研究结果显示，当科学家每周工作 10 到 25 小时，效率达到巅峰，随后开始下降，在每周工作 60 小时的时候，效率达到最低谷。也就是说，盲目堆砌时长是不可靠的。在固定的时间段里，我们的精力是有限的。我忽然想起来学生时代，我们总是羡慕那些每次考试第一名的学生，他们往往不是最努力、学习时长最长的，而是最懂劳逸结合的。是的，他们找到了效率最高的那个平衡点，找到了放轻松和休息的秘诀。</p><p>伟大的毛主席曾经说过：不会休息，就不会工作。善于休息的人，学习效率越高。当我们在休息的时候，就像给注意力充上了电，并且大脑事实上并没有停止工作，而是在整合信息。但当我们只工作不懂休息的时候，我们不仅会感觉到累，还无法让大脑健康地整合已经获取的信息，这的确有悖于我们的常识。</p><p>《<a href="https://weread.qq.com/web/bookDetail/19a32fe072277dfa19a7763" target="_blank">科学休息</a>》中说，我们需要在一个领域成为高手，的确需要一万个小时的刻意练习。但这句话并不完整，还有后半句：我们还需要一万两千五百小时的刻意休息，以及三万小时的睡眠。</p><p>那么，如何有效的休息？在说我自己的方法之前，我想先聊聊我们为什么会累，以及能量和注意力是怎么消耗的，这有助于我们避免消耗不必要的能量。</p><ul><li>身体累</li><li>精神累</li></ul><p>对大多数人而言，每天几乎都坐在椅子上面对电脑，每天的运动量明显不足，如我自己而言，真正的身体累可能只有在特种兵式旅游的时候才会发生。那真正导致我们下班瘫在沙发上的到底是什么？毫无疑问，是精神的内耗。</p><h2>让我们感到累的原因</h2><h3><strong>积累了太多待办事项</strong></h3><p>我<a href="https://sspai.com/post/84644">上一篇文章</a>提到过，待办会储存在大脑的短期记忆当中，哪怕你不去想，它也会在你无意识的情况下进入你的潜意识，让你有一种「有很多事情还没有做」的感觉，它会侵蚀你的注意力。因为你害怕错过某些重要的事情，大脑会不受控制地始终保留着它，占用着大脑的运程。这种状态让你无法感觉轻松，就像你持续地背着一个包袱。</p><p>我的解决方法是立即去完成手边容易完成的事情，并写下现在不方便完成的待办。是的，并不是一定要完成它，它才会从大脑中剔除，将待办写下来也有效果。但我们得保证我们写下来的地方，不会丢，足够信任你的 GTD，可以使用 omnifocus 或者 things 这类软件 。</p><blockquote><p>每当我完成或者写下所有待办的时候，我都会有一种搬开了「压住大脑的石头」的感觉。</p></blockquote><p>但是需要注意的是，我们应该掌控手边的工具，而不是让工具带偏了我们，最终本末倒置。之前我很爱研究 App 的功能，一方面是因为我对数码的热爱，另一方面是我认为功能越多，就越能帮助我。但后来我发现，我会为了用到某个功能，而专门为了这个功能去规划自己的使用习惯，这让我最终放弃了很多 App 。</p><p>我们最应该做的，是思考自己真正的需求是什么，这个 App 能否满足我的需求。每个 App 都有自己的设计理念，但它的理念并不适用于每一个人。我几乎尝试过所有 GTD，但最终，我还是选择了一款简单且功能并非最多的，我的需求只有一个：清空我潜意识里游离的待办焦虑。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/09/58cb32aae81659732f1d38de5de821e6.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>GTD 界面</figcaption></figure><h3><strong>迈出舒适圈时产生的排斥情绪</strong></h3><p>我对走出舒适区有很深的感受，每当我去一家新公司上班的时候，面对未知的人际关系和工作内容，我总是会预想自己被别人拒绝、完不成新任务，放大了对未知的恐惧，就会损耗很多精力去对抗它，想到第二天要上班就会痛苦，早上甚至会想着辞职。如果无法缓解迈出舒适区时产生的对抗情绪，那么最终就会导致恶性循环，越来越累。</p><p>迈出舒适圈并不简单，我们的大脑分为<a href="https://baike.baidu.com/item/%E4%B8%89%E8%84%91%E7%90%86%E8%AE%BA/54443112">三个物理脑系统</a>。</p><ul><li>最原始爬行动物的大脑：本能脑也叫鳄鱼脑</li><li>掌控情绪哺乳动物的大脑：情绪脑也叫猴子脑</li><li>以及最后进化出的新皮层：理智脑</li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/09/cddf393bda39e5245326d8e504b05572.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption><a href="https://www.sciencedirect.com/topics/neuroscience/triune-brain">图源</a> | 三位一体大脑</figcaption></figure><p>本能脑和情绪脑经过了上亿年的进化，为了迎合原始社会的生存需求，它们进化出了俩个特征，<strong>一个是喜欢即时享受，另一个是避难求易</strong>，<strong>只喜欢待在舒适圈</strong>。因为在原始社会，走出巢穴和自己的地盘，你随时会死，既然随时会死，那么即时享受就很好理解了。虽然现代社会已经处于和平年代，但 2 个物理脑系统却还是几亿年前的，所以我们喜欢呆在舒适区，喜欢刷短视频、玩游戏和看小说，即时满足，沉迷短期快乐。</p><p>但大概在 250 万年前，人类进化出了理智脑，它善于逻辑分析和理性思考，考虑长期利益和后果。它知道我们越是走出舒适区，便会变得越强。但对于形成了几亿年的本能脑和情绪脑来说，250 万年的理智脑的年龄像个婴儿一样。理智脑虽然是最聪明的，但它无法让本能脑和情绪脑听命于它。理智脑一般会做出的决策有：运动提高身体素质、学习提高自身、坐姿正确避免颈椎病、今日事今日毕等……</p><blockquote><p>三脑共存，它们应该是一个协作配合的系统，让我们更好的成长，而不是互相对抗。</p></blockquote><p>理智脑的决策明显和情绪脑、本能脑不同，当他们意见不一致，我们就会开始内耗。成年以后我们的理智脑才算发育完全，但要让它成为情绪脑和本能脑的领导，并不简单。我们需要提高认知，刻意训练理智脑的使用。并不是说完全的摒弃本能脑和情绪脑，我们要善于利用它们，比如给自己在达成目标的时候制造奖励。和领导（理智脑）要善于利用下属（本能脑和情绪脑）的特点优势进行管理一样。</p><h3><strong>不满现状，对抗一切</strong></h3><p>我们都有幸福感很低的时期，那段日子，我们的心态开始出现问题，说到底就是我们不满现状，对抗生活，对抗工作，对抗一切。持续的内耗让我们没有精力去朝着健康的方向成长。根本的原因是我们否定现在的自己或者社会。</p><p>对于自己，我们可能会后悔过去的很多决定，我们都想过：要是能回到过去该多好，我们开始用过去的错误评判现在的自己，会自卑，会怯懦。这就是很多人喜欢看重生小说和越来越失去自信的原因。</p><p>对于社会，我们也许会看不惯职场的某些阿谀奉承，不认可买房买车的人生，但又无力改变。我也有过这段内耗的时期，但最终与自己和解，我们不能活在过去，或沉迷在幻想的未来，我们有且只拥有当下，生活在符合我们价值观的人和事的生态当中。</p><blockquote><p>看到世界和人生绚烂的一面。</p></blockquote><p>我们有自己的思想，可以表达，可以感受，可以选择任何一条人生的路，可以在自己的文章中加入任何想写的句子和词语，但动物却不能。我们可以乐观地看待自己和社会，从而感到更加轻松，减少内耗。</p><h3><strong>当今社会互联网造成的精神损耗</strong></h3><p>互联网对我们造成了重大的影响。这是我想着重讲的一点，也是影响我乃至绝大多数人的一点。互联网让信息爆发式流通，但同时也让我们筋疲力尽。</p><p>接下来我会重点谈谈我对「互联网如何让我们疲劳」的感受，以及我自己的放松方法。</p><h2>互联网如何让我们感觉到「累」</h2><h3>手机为什么会挟持我们的注意力</h3><p>再三考虑，我还是想大致总结一下「多巴胺」这个始作俑者的作用，其一是在写的过程中有利于我自己思考和反思，其二是我希望可以完整的给大家叙述我对于放松的感想和思路。可能你会觉得有些无聊，但也许会收获不一样的东西。</p><p>先说一个有意思的结论：<strong>多巴胺最重要的功能并不是让我们感到快乐，而是挟制我们的注意力，以及给于我们生理上的动力</strong>。</p><p>原始社会，为了更好的生存，人类进化出了多巴胺，当我们想到食物、关系、性的时候，就会产生快乐的感觉，它让我们去追求这些生存物质。注意，是当你想到的时候就会产生快乐的感觉，并不一定是获得。比如当你发了一条朋友圈，过了十分钟，你想到朋友圈可能会冒出红点，你就会兴奋，可能兴奋这个词并不准确，应该是产生了「想要去点开朋友圈这个动作」的兴奋动力，多巴胺赋予了你动机。但当你真的点开了朋友圈，查看了点赞，事实上并没有点开之前的感觉强烈。也就是说，多巴胺不仅在你得到的时候会分泌，在你得到之前也会分泌，甚至分泌得更多。</p><p>上学的时候，在我们放假的前几个小时是最开心的，但真的得到假期，却没有前者开心。同理，期待礼物的时候，我们会分泌大量多巴胺，产生愉悦，但真的得到礼物，却没有之前的愉悦感强。</p><p>举个例子，在得到食物以后，假设我们会分泌1数量的多巴胺。但在得到食物之前，我们大脑可能会分泌 2 数量的多巴胺。也就是说，多巴胺的产生并不是因为你得到了什么，而是因为为了让你得到什么，它让你产生得到的动机。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/08/3e9d527f6c90370fc71816d7aaff84d6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>多巴胺的作用</figcaption></figure><p>多巴胺的目标是引导你去追求，但你得不得的到对它来说无所谓，最重要的是它要让你踏上得到的路，产生动力。</p><blockquote><p>对于大脑来说，在「不确定性中不断向前迈进」这条「道路」本身可能就是一种目标。</p></blockquote><p>我把它叫做「爬树机制」，远古时期，我们为了获得果实，需要爬到树上摘取，但只有当你爬上去，才知道上面有没有果子。所以为了让人类存活，多巴胺让你在爬树之前就有愉悦的感觉，给你动力爬上去。</p><p>现在再来联系起我们的行为，在不到百年形成的钢铁丛林城市里，多巴胺像是到了一个陌生的世界，它继续沿用着过去的那一套。但事实上，它已经被滥用，面对一切多巴胺觉得有利于我们的事物，它都会分泌。</p><p>沉迷手机无非就是沉迷铺天盖地的新信息。远古时期，掌握天气、天敌或其他新信息，就能获得更高的存活率，所以，除了性、食物、关系，获取新信息也是多巴胺的目标。我们一次次打开手机，以为上面有重要的信息，其实我们真正需要的，早就不是信息本身，而是得到信息之前分泌的多巴胺。</p><p>当我们滑动屏幕时，是为了得到滑动前对下一个视频产生的期待愉悦感。也就是说，无论你点开什么，你都会想再次点开更新的页面，总会产生一种下一个会更好的感觉。可是真正有用的信息又有多少？当我们刷了一晚上的抖音，什么都没有得到的时候，我们会自责。但我们想不明白，那其实只是一场不停分泌多巴胺的狂欢。</p><p>从这个角度看，就很好理解赌徒的心理，他们一次次在多巴胺的作用下去下注，事实上，在他们看来，赢不赢已经无所谓，他们被下注之前的大量多巴胺挟持了。</p><blockquote><p>我们是如何夺走人们的时间和精力的？我们只是利用了人类心理的弱点， 再放入了一点点的多巴胺。社交网络的建立不是为了让我们更加亲密无间，而是为了分散我们的注意力。——肖恩帕克，脸书的创始人之一（顺便，推荐电影《社交网络》）</p></blockquote><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/08/cacd71d34a4d2df199fee77f401206c8.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>《社交网络》电影台词</figcaption></figure><h3>注意力切换的「累」，无法再感受当下</h3><p>现如今互联网给了我们太多的选择，我们已经很难打开手机将注意力集中在一件事情上，我们的注意力一次次被呈现着色彩图像的电子屏幕吸引。</p><p>小时候，每到傍晚，我奶奶就会在院子洗衣服，这时我会爬到藤椅上，在 14 寸的黑白电视上看《大耳朵图图》，直到现在，我还能记起当时看电视的愉悦。而现在我几乎可以在电脑和手机上看任何一部剧，并且画质超清，能自由快进和二倍速，但那种愉悦的感觉却再也没有过。</p><p>小时候的我们只会注意一件事，并且会认真感受当下，我们会认真的把玩手里的细沙，会感受摆弄玩具的快乐，但现在，这种能力仿佛在退化。</p><p>我们开始缺失感受当下的能力，浏览视频网站时，我们在多巴胺的作用下对每一个视频都有着强烈期待。可是当我们点开一个视频，大脑却还在对别的视频分泌着渴望的多巴胺，它在考虑要不要换下一个节目，太多的新信息选择权让多巴胺蜂拥而至，我们的注意力和能量就这样被「挟持」。</p><p>扎克伯格和乔布斯喜欢每天穿相同风格的灰色T恤，是因为他们不想早上起来的时候有太多的选择权，将自己的衣柜只放置同一种类型的衣服，这样他们就可以消耗更少的能量，将精力放在他们真正关注的事情上。</p><p>多巴胺喜欢「新信息」，而这正是当前时代最不缺少的东西，但我们的注意力是会被消耗的能量。</p><p>我们有多久没有在吃饭的时候停止看视频，体会咀嚼嘴中的美味；享受洗澡，感受水流过皮肤的触感；享受聊天，感受坐在对面的朋友的一字一句。我们总以为大脑是多线程，可以同时处理很多事，但事实上，那只不过是频繁的在各个事件上切换而已。比如你同时在做 A 和 B，但事实上，是 A-B-A-B 的切换，而且，当你在 A 的时候，你的注意力还有一部分残留在 B 上，真正要转移到 A，需要几分钟的时间。当然，有些事我们更多的是依靠习惯性肌肉记忆。</p><h3>互联网给我们的社交压力</h3><p>我们暂且不在这讨论互联网上的虚假信息，比如标题党、营销号和铺天盖地的广告，但有一个东西我想提出来，那就是互联网带给我们的社交压力。社交网络让我们和越来越多的人产生了联系，我们想获得每个人的认可，很多时候将控制我们情绪的遥控器交到了别人的手中，甚至朋友圈别人是否赞了你这样的微小举动，同样可以影响你。</p><p>再者，网红当道和直播时代的今天，我们在互联网上浏览了太多别人的人生，那些精美的图片和视频进入了我们普通人的生活。原始社会人类会为了抢占社会资源而受到生命威胁，所以我们同样不能保证，自己从没有滋生过嫉妒、自卑的情绪，即便我们知道网上的很多的人设都是营造出来的。</p><p>我们适应了快节奏的生活方式，快节奏的交友和感情，快速的得到和失去。我们很难再停下来，真正的走出网络，享受现实的关系和社交模式，连感情也是如此。忽然想起歌曲《从前慢》的歌词：</p><blockquote><p>从前的日色变得慢，车、马、邮件都慢，一生只够爱一个人。从前的锁也好看，钥匙精美有样子，你锁了，人家就懂了。</p></blockquote><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/08/21ba655fbdf3c7050283c6ab9ea8dc8c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption><a href="https://unsplash.com/s/photos/wechat-%E5%9C%B0%E7%90%83">图源</a></figcaption></figure><h2>放松的方式</h2><p>写到这，其实大部分的感想已经接近完结。与其说我想找到某些放松的方法，不如说如何不让自己处于「不健康的累」的状态。</p><p>不是所有休息活动对每个人都有效，同理，并非刷视频对每个人都无效，这取决于在做这件事的时候，你如何去感受它？比如女生可能喜欢逛街，享受于此，但男生却无法享受在商场逛街的乐趣。每一种活动我们都需要去学习：它如何让我们放松。然后找到其中最适合自己的休息方式。</p><h3>轻松的人际关系</h3><p>所有的烦恼都来自于人际关系，社交压力一直存在，我们应该找寻真正让我们轻松的关系。比起在网上社交，我更喜欢面对面的方式。这样可以感受到朋友、家人和爱人的表情、动作和语气，良好的关系真的有利于心情和健康，但同样，进入一个需要伪装才能融入的群体，它也会让我们真正地筋疲力尽。</p><p>我微信里的确有很多群，我也想被每个群体认可，但渐渐地，我觉得我并不擅长「怕得罪别人这种说话方式」。所以，我后来几乎很少通过网上社交，除非是发小或者很好的朋友，这样让我有一个轻松社交的圈子。</p><p>有了健康的关系，放假的时候约饭就成了很稀松平常的事，吃完饭以后我们会玩纸牌，但由于每次都玩太过单调，随即小时候的大富翁被我网购回来了。在公园一起晒太阳玩桌游，一起在家吃火锅，一起去旅游，这也让我更少地沉迷游戏和手机。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/09/a872cf40bf6b3e90c901cf824d8ddff0.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>和朋友在艾溪湖</figcaption></figure><h3><strong>Man Cave</strong></h3><p>无论在线上还是线下，我们处于人际关系网中是常态。但无论是谁，哪怕再亲近的人，也会分散你的注意力，和独处的状态差别很大。他们在和你对话的时候，你不能不得不思考后回答，你无法安静的一句话也不说，但事实上，我们的确有一句话都不想说的时候。这就是为什么很多人会喜欢熬夜，因为他们白天的时候，注意力都在别人身上，感受到的世界是别人的。只有晚上一个人的时候，世界才是自己的。</p><p><strong>维基百科中说：</strong></p><blockquote><p><strong>在 man cave 中，男人可以</strong>「<strong>抽烟或放屁</strong>」<strong>并</strong>「<strong>一遍又一遍地讲同样的笑话</strong>」<strong>。</strong></p></blockquote><p>我和我女朋友有个约定，每个月她会给我一天的私人空间，也就是「man cave」。在这段时间里，我可以做任何想做的事，而且不用特意关注她。其实有朋友问过我，「是因为你不想待在女朋友身边吗？所以才想有一个人待着的一天。」这个问题我仔细思考了一番，答案恰恰相反。</p><p>我正是因为太关心我女朋友的感受了，所以当我们待在一起时，无论我在干什么，我都会分一部分注意力给她，我会考虑她是否需要人说话，或者此时此刻是否需要我的关注。但这是我心甘情愿给予的注意力。所有 man cave 算是自己给自己放的一天假，这一天会挑在假期，并且没有和朋友约出门的时间，这样我就有一大段的注意力空窗时间。</p><h3>空想</h3><p>我一直在想，为什么初中的时候一天 8 节课，还要上早自习、晚自习，但却好像还没有上班累。我想，原因除了少了社会压力以外，也许还有当时的我们思维运作模式更加纯粹。小时候我们总是会上课的时候发呆，对着草稿纸发呆，让大脑的想法随意的流动，像小狗一样跑来跑去，这是一种我们现在很难达到的状态，一种纯粹的空想。</p><p>我们的大脑不会停止运作，除非我们去世。但我们感觉到累并不是因为大脑的持续运作，而是因为我们在控制大脑该去想什么。我们总是让它去想：「昨天的某句话有没有得罪同事」「明天那个 PPT 应该怎么写」「今天快递到没到」「我今天又没有去跑步」。</p><p>但空想的时候，是不去控制你要想什么，想什么都无所谓，最重要的是不要阻止自己想什么，我们只需要让它自然的想下去。和冥想有点略微的不同，冥想需要对任何冒出的念头「冷眼旁观」，不做任何的评判。</p><p>我以前试过冥想，但我本身不是一个安静的性格，所以心很难静下来，在几次尝试后便放弃了。开始实行空想，在我看来，空想比冥想更随意一点，就是看着窗外发呆。甚至某一刻打字时我会突然停下来，看着其中的某一个字，越看越不认识，紧绷的感觉好像也得到了放松。那是一种古怪的状态，可能每个人都不一样。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/09/9ea7d8abdf9a2289decb9b45ce50aa72.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>《最好的我们》剧照</figcaption></figure><h3>感受当下</h3><p>我喜欢游泳，特别喜欢在水里沉下去的感觉。我以前不知道为什么会喜欢这种感觉，直到我直到了「感受当下」这个概念。因为那样耳朵会被水理所当然的捂住，周围蓝色的水流好像将时间变得粘稠，我很容易感受当下身体的舒展和水流的流动，而不去想过去未来，也不再关注任何其他的事物。这是一种很奇妙的体验，当我们还小的时候，我们只关注当下，但现在，我们很难再像小孩一样，因为手指发出响声就开心的尖叫。洗澡对我来说也是放松方式，可能我更擅长去感受水流触及皮肤的感觉。</p><p><strong>有一则故事</strong><i>：</i></p><blockquote><p>一位行者问老和尚：「您得道前在做什么？」</p><p>老和尚说：「砍柴、担水、做饭。」</p><p>行者问：「那得道后呢？」</p><p>老和尚说：「砍柴、担水、做饭。」</p><p>行者又问：「那何谓得道？」</p><p>老和尚说：「得道前，砍柴时惦记着挑水，挑水时惦记着做饭；得道后，砍柴即砍柴，担水即担水，做饭即做饭。」</p></blockquote><p>余华老师也说过，我们能触摸到的、听到的、闻到的就是现在，哪怕是梦境，也是现在。但现在的价值在哪，就是因为它有过去，它有未来，不然它会很单薄，就像无根之水一样。</p><p>希望在注意力翻来覆去的时候，我们能回归当下，感受那种快乐和真实。</p><h3>运动</h3><p>运动的好处想必不用再多叙述，我是篮球爱好者，但这几年没有和朋友在一个城市，很少去打了。但我会抽出时间去跑步，对我来说，冬天跑步刚开始确实有点痛苦，甚至还需要歌曲加上想象力的加持。但习惯以后，就会享受分泌内啡肽的感觉。</p><p>其实我们都知道，很多时候我们并不是身体累，而是精神累，跑步前很困难，但跑完洗完澡以后，那种放松的感觉是无可比拟的。</p><p>锻炼身体可以让我们感觉身体状态良好，在我们跨出舒适区的时候，压力系统的临界值会更高，因为健康的身体会觉得你并不需要激活压力系统就可以应对这次的困难。</p><p>再者，运动最重要的作用并非是身体上的，而是大脑。运动会提高你集中注意力的能力。在远古时代，捕猎时必须专注，因为这关系到了生存，所以捕猎时的运动就和高度集中的注意力就这样联系起来了。而现代社会，我们不再需要捕猎，但我们需要运动去提高我们控制注意力的能力。经常运动的人更能掌控自己对手机的注意力。</p><p>有研究表明，一周运动 2 个小时，效果便会在某一个时刻开始显现。如果能提高心率最好。但如果你没有时间，哪怕一周运动 5 分钟，也能帮助你提高注意力和缓解焦虑。所以不要觉得时间不够没有效果。</p><p>希望有一天，「Just relax」也能成为我们的生活方式之一。</p><p style="margin-left: 0px;"><strong>🎁 评论有奖：</strong>「<a href="https://sspai.com/post/84979" target="_blank">放轻松」征文活动</a> 入围文章中的优秀评论，同样有机会获得罐头冥想 &nbsp;App &nbsp;3 个月兑换码或付费栏目通用优惠券，欢迎大家踊跃参与留言讨论。</p><p style="margin-left: 0px;">&gt; 下载少数派 <a href="https://sspai.com/page/client">客户端</a>、关注 <a href="https://sspai.com/link?target=https%3A%2F%2Fwww.xiaohongshu.com%2Fuser%2Fprofile%2F63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的<a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/85481</id>
-            <title>【Rethinking IT】如何应用数据图表了解家里的 Unifi 网络状况？</title>
-            <link>https://sspai.com/post/85481</link>
-            <guid isPermaLink="false">https://sspai.com/post/85481</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 09 Jan 2024 03:40:24 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Matrix, 写作社区, 实用价值, 文章代表
-<br>
-<br>
-总结: Matrix是少数派的写作社区，主张分享真实的产品体验，有实用价值的经验与思考。文章代表作者个人观点，少数派仅对标题和排版略作修改。 </div>
-                        <hr>
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐&nbsp;</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><h2>1. 前言</h2><p>自从之前写了<a href="https://www.chiphell.com/thread-2478211-1-1.html" target="_blank">《【让 IT 更简单】使用 Ubiquiti 全家桶对朋友家进行网络改造》</a> <a href="https://sspai.com/post/81572" target="_blank">《【Rethinking IT】如何结合 Unifi 和 MikroTik 设备打造家庭网络》</a>两篇文章后，相信给各位正在用 Unifi 或者打算使用 Unifi 的朋友应该有所帮助。</p><p>那么，今天我就换个方向，不再讨论规划和安装 Unifi 网络设备，来研究研究<strong>如何了解家里的 Unifi 设备状况</strong>？</p><p>这时候有朋友就会说，不是有 Unifi 官方的 Web 控制台，还有手机 App 嘛。没错，Unifi 在 UI 设计方面确实独树一帜，而且在其 Web 控制台和 App 中，每一个 Unifi 设备和客户端设备都有相应的 <strong>概览</strong> 页面和 <strong>洞察</strong> 页面，上面提供了 Unifi 设备和客户端设备的实时数据。</p><p>但是，如果我希望研究一下某一段时间这个 Unifi 设备的历史数据，想看看这段时间该 Unifi 设备的负载情况，稳定性如何，客户端设备何时离线，是不是就无从得知了？</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/68e9ea76c598a1b7d27830fe68920dd1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>其实，这个需求看起来就是需要一套 <strong>监控系统</strong> 啦。那么今天，就由我来给大家 <strong>解锁 Unifi 的新玩法</strong>！</p><p>由于小弟我从未在互联网大厂 SRE 岗位工作过，只是一个小小乙方的服务器、存储设备上架搬运工，所以以下内容均为自己工作之余，在家利用 Homelab 环境瞎捣腾的，自然不是什么多高大上的东西。如果有什么写得不准确的地方，或者引用了错误的资料，还请各位大佬海涵！</p><h2>2. 组件介绍</h2><h3>2.1.&nbsp;Prometheus &amp; InfluxDB</h3><h4>2.1.1. 时序数据库</h4><p>说 Prometheus 和 InfluxDB 之前，这里需要先提到一个概念：<strong>时序数据库 (Time Series Database，TSDB)</strong>。那么什么是时序数据库呢，此处引用 WiKi 百科的定义：</p><blockquote><p>A time series database is a software system that is optimized for storing and serving time series through associated pairs of time(s) and value(s). In some fields,&nbsp;&nbsp;time series may be called profiles, curves, traces or trends. Several early time series databases are associated with industrial applications which could efficiently store measured values from sensory equipment (also referred to as data historians), but now are used in support of a much wider range of applications.</p></blockquote><p>什么意思呢？就是说时序数据库，它被优化成专门将一系列相关联的「<strong>时间</strong>」和「<strong>数值</strong>」，进行存储和提供服务的一套软件系统。在某些领域，时间序列可能被称为剖面、曲线、轨迹或者趋势。一些早期的时间序列数据库与工业应用相关联，这些应用可以有效地存储来自传感设备的测量值，但现在用于支持更广泛的应用。</p><p>所以，时序数据其实就是随着时间不断产生的连续测量数值或者事件，时序数据库就是用来保存这些数据的手段之一。</p><p>以下引用 TDengine 官方文章中描述时序数据库的特点：</p><blockquote><p>时序数据库的特点</p><ol><li><strong>时间戳</strong>： 每个数据点都带有时间戳，这个时间戳对于数据的计算和分析十分重要。</li><li><strong>结构化</strong>： 与来自网络爬虫、微博、微信的海量数据不同，联网设备或监控系统生成的数据都是结构化的。这些数据都具有预定义的数据类型或固定长度，比如智能电表采集的电流、电压就可以用 4 字节的标准的浮点数来表示。</li><li><strong>流式</strong>： 数据源以近似恒定速率生成数据，如音频或视频流。这些数据流彼此独立。</li><li><strong>流量平稳可预测</strong>： 与电商平台或社交媒体网站的数据不同，时序数据的流量在一段时间内是稳定的，并且可以根据数据源的数量和采样周期来进行计算和预测。</li><li><strong>不变性</strong>： 时序数据一般都是 append-only，类似于日志数据，一般不容许而且也没有修改的必要。很少有场景，需要对采集的原始数据进行修改。</li></ol></blockquote><p>这么听起来，这种数据库完美契合一种系统：<strong>监控系统</strong>。</p><p>那么说到监控系统，相信不少 IT 同行可能或多或少听过 <strong>Cacti、Nagios、Zabbix</strong> 包括上面提到的 <strong>Prometheus</strong>。这其中，Cacti、Nagios、Zabbix 这 3 者，我相信曾经部署过的朋友应该都会部署 MariaDB (即 MySQL 的修改版本) 数据库。那么使用这种关系型数据库的监控系统有什么问题呢？答案是当数据量足够庞大规模的时候，这种关系型数据库就会成为整套监控系统的瓶颈之一。当然，连我都知道的事情，厂商不可能不知道，所以 Zabbix 从 4.2 版本之后开始也支持了时序数据库中的 Timscaledb。更多内容可以查阅 Zabbix 官方博客<a href="https://blog.zabbix.com/cn/zabbix-time-series-data-and-timescaledb-2/6959/" target="_blank">《Zabbix，时间序列数据和 TimescaleDB》</a>。</p><p>至于 Prometheus（普罗米修斯：你没听错，就是跟异形前传同名的那个普罗米修斯）就是一款本身就是基于时序数据库打造的监控系统。在我对 Unifi 设备和 Proxmox VE 虚拟化做监控方案之前，我其实是不知道 InfluxDB 的。因为平时工作接触较多都是 VMware vSphere，而在这种商业软件的加持下，VMware 天然有自己一套完美的监控运维平台，也就是 vRealize Operations，现在改名叫 Aria Operations。所以，我在研究 Proxmox VE 监控的时候发现，<strong>数据中心 &gt; 指标服务器</strong> 页面下就支持 Graphite 和 InfluxDB。而这俩，也都是时序数据库。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/c44333a15dfdbd7bcd3e7c20d32c6a3b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>所以我就搜索了一下时序数据库发展历程，可以看到我上述提到的 Graphite、InfluxDB、Prometheus、TimeScale 都先后应运而生。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/a17a2a7f2d703159b40e46db18530081.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>并且我还搜索了一下相关排名，<strong>DB-Engines</strong> 网站上关于时序数据库的受欢迎程度排名中，InfluxDB 目前依然是遥遥领先。那就更让我觉得我可能是需要稍微了解了解这个 InfluxDB 了。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/8b90967ea4e92c49afd8cdb90829692a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h4>2.1.2. Prometheus</h4><p><strong>Prometheus</strong> 受启发于 Google 的 Brogmon 监控系统 (相似的 Kubernetes 是从 Google 的 Brog 系统演变而来)，从2012年开始由前 Google 工程师在 <strong>Soundcloud</strong> 以开源软件的形式进行研发的系统监控和告警工具包，并且于 2015 年早期对外发布早期版本。自此以后，许多公司和组织都采用了 Prometheus 作为监控告警工具。Prometheus 的主要特性有：</p><ul><li>一个多维数据模型，包含由 metric 和 key/value 标识的时间序列数据</li><li>PromQL 是一种灵活的查询语言</li><li>不依赖分布式存储，单个服务器节点是自治的</li><li>基于 HTTP 协议通过 Pull 形式进行收集时间序列数据</li><li>Push 形式的时间序列数据是通过一个中间网关来支持的</li><li>Targets 可以通过服务发现或静态配置发现的</li><li>多种模式的图形和仪表盘支持</li></ul><p>Prometheus 生态系统由多个组件组成，其中许多是可选的：</p><ul><li><strong>Prometheus Server</strong>：Prometheus 主服务器，用于抓取和存储时间序列数据。</li><li><strong>Client Libraries</strong>：用于检测应用程序代码的库，主要用于客户端。</li><li><strong>Push Gateway</strong>：支持短期生命周期的作业。</li><li><strong>Exporter</strong>：为 HAProxy、StatsD、Graphite 等服务提供数据。</li><li><strong>Alert Manager</strong>：一个告警处理工具。</li><li>各种支持工具。</li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/f7aeed49b98b6f75924d0a19ce962b5d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h4>2.1.3. InfluxDB</h4><p><strong>InfluxDB</strong> 是一套由 <strong>InfluxData</strong> 公司开发的时序数据库，它具备以下特性：</p><ul><li>基于 Go 语言开发，只需要二进制文件即可运行</li><li>针对时序数据进行快速写入</li><li>简单高效的 HTTP API</li><li>类似 SQL 的查询语法</li><li>能够实时查询，数据在写入时被索引后就能够被立即查出</li><li>支持对 Tag 建索引，实现快速有效的查询</li><li>数据保留策略（Retention policies）能够有效地使旧数据自动失效</li></ul><p>InfluxDB 本身只是一套数据库，那么监控数据如何写入呢？Prometheus 会拉取各种 Exporter 暴露出来的 metrics 数据，而 InfluxData 公司则开发了一套整体的 <strong>TICK 堆栈</strong>（类似 ELK：3 个字母分别代表 Elasticsearch、Kibana、Logstash）。其中：</p><ul><li><strong>Telegraf</strong>：一个插件驱动的服务器代理，用于收集和报告指标。Telegraf 插件直接从其运行的系统获取各种指标，从第三方 API 中提取指标，甚至通过 StatsD 和 Kafka 消费者服务监听指标。</li><li><strong>Chronograf</strong>：是堆栈的管理用户界面和可视化引擎，它可以轻松设置和维护基础结构的监视和警报。</li><li><strong>Kapacitor</strong>：是一个数据处理引擎，它可以处理来自 InfluxDB 的流数据和批处理数据。</li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/4b802557de19cde167ad0380a6803f5e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3><strong>2.2. Grafana</strong></h3><p><strong>Grafana</strong> 是一个开源可视化和分析软件。它允许您查询、可视化、提醒和浏览指标、日志和跟踪，无论它们存储在何处。它为您提供了将时序数据库（TSDB）数据转换为富有洞察力的图形和可视化的工具。</p><p>Grafana 目前内置支持的数据来源：</p><ul><li>Alertmanager</li><li>AWS CloudWatch</li><li>Azure Monitor</li><li>Elasticsearch</li><li>Google Cloud Monitoring</li><li>Graphite</li><li>InfluxDB</li><li>Jaeger</li><li>Loki</li><li>Microsoft SQL Server (MSSQL)</li><li>MySQL</li><li>OpenTSDB</li><li>PostgreSQL</li><li>Prometheus</li><li>Tempo</li><li>Testdata</li><li>Zipkin</li></ul><h3>2.3. Unifi Poller</h3><p>那么上面铺垫了那么多，跟监控 <strong>Unifi</strong> 又有什么关系呢？是这样的，由于 Prometheus 官网的 <a href="https://prometheus.io/docs/instrumenting/exporters/" target="_blank">Exporters</a> 页面并无适配 Unifi 的 Exporter，同样的 Telegraf 官网的 <a href="https://docs.influxdata.com/telegraf/v1/plugins/#input-plugins" target="_blank">Input plugins</a> 页面也无适配 Unifi 的相关 plugin。所以有国外网友开发了这个 Unifi Poller 项目来满足这个需求。</p><p><strong>Unifi Poller</strong> 是一个开源的，支持收集 Unifi 控制器数据并导出到 InfluxDB 或者 Prometheus 的收集器。同时，提供了 12 个 Grafana 面板，6 个属于 InfluxDB，另外 6 个属于 Prometheus。</p><p>Unifi Poller 基于 Go 语言开发，可以运行在 Windows、macOS、FreeBSD、Linux 或 Docker 下。</p><ul><li>在 Influx 模式下，Unifi Poller 每 30 秒轮询一次 Unifi 控制器数据并导出到 InfluxDB 数据库。<strong>(相当于一个 Telegraf Unifi Input plugin)</strong></li><li>在 Prometheus 模式下，Unifi Poller 开放一个 Web 端口并接受 Prometheus 拉取，动态的转换 Unifi 控制器的 API 数据到 Prometheus。<strong>(相当于一个 Unifi Exporter)</strong></li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/f807bb454d0a26f15e525f867227beed.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>3. 项目部署</h2><p>介绍完以上全部组件，那么今天我就要使用 <strong>InfluxDB + Grafana + Unifi Poller</strong> 来部署一整套 Unifi 设备的监控系统了。</p><p>为什么不是用 <strong>Prometheus + Grafana + Unifi Poller</strong> 呢？当然是官网建议入门用户使用 InfluxDB，因为部署 Prometheus 又要涉及相当广的内容了，所以有兴趣的朋友还请您自行研究。</p><h3>3.1. 准备工作</h3><p>3.1.1. 组件版本</p><p>根据 Unifi Poller 官网 <a href="https://unpoller.com/docs/poller/faq/" target="_blank"><u>FAQs</u></a> 说明：</p><ul><li>推荐使用 Grafana 7.4.0+。需要 Grafana 7.x 或更高版本。</li><li>如果您选择使用 InfluxDB，则需要 InfluxDB 1.8.x。1.10 和 1.11 可能有效。</li><li>InfluxDB 2.x 无法作用。</li><li>Prometheus 2.x (如果您选择使用 Prometheus)。</li></ul><p>所以，此次我们使用的环境如下：</p><figure class="table"><table><tbody><tr><td><strong>名称</strong></td><td><strong>版本</strong></td><td><strong>类型</strong></td><td><strong>备注</strong></td></tr><tr><td>Unifi OS</td><td>3.1.16</td><td>Unifi 控制台</td><td>Unifi Cloud Key Gen 2 Plus</td></tr><tr><td>Unifi Network</td><td>8.0.24</td><td>Unifi 网络应用</td><td>Unifi Cloud Key Gen 2 Plus</td></tr><tr><td>CentOS</td><td>7.9</td><td>虚拟机系统</td><td>2C，4G，100G 或更多</td></tr><tr><td>Docker</td><td>24.07</td><td>容器应用</td><td>&nbsp;</td></tr><tr><td>Docker Compose</td><td>v2.21.0</td><td>多容器运行工具</td><td>&nbsp;</td></tr><tr><td>InfluxDB</td><td>1.8.10</td><td>数据库容器</td><td>&nbsp;</td></tr><tr><td>Grafana</td><td>10.1.0</td><td>数据展示容器</td><td>&nbsp;</td></tr><tr><td>Unifi Poller</td><td>v2.9.5</td><td>数据收集容器</td><td>&nbsp;</td></tr></tbody></table></figure><h4>3.1.2. 准备工作</h4><p>如果您的控制器是在运行 Unifi OS 的 UDM、UXG 或 UDM-Pro 或 UCK 上，那么建议创建一个 <strong>受限制的用户</strong>，对 UniFi 网络应用具有 <strong>只读权限</strong>。其他权限级别可能无法正常工作。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/e404b7dd30225adeb1c882df6a5ecc43.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>例如，我这边创建的用户名为 <strong>unifipoller</strong>，密码设置一个自己熟悉的即可。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/9688a7c51c84027c24dc4d0e61aa091d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/3f8cd41adc640b0df113933787303c42.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>3.2. 安装部署</h3><h4>3.2.1. 安装 CentOS</h4><p>安装系统这个步骤我就略过了，实在是没有必要专门凑字数水一个章节。您也可以使用您所熟悉的操作系统，像是 Ubuntu、Debian、OpenSUSE 等等。</p><h4>3.2.2. 安装 Docker</h4><p>从 <a href="https://get.docker.com/" target="_blank">https://get.docker.com</a> 下载 Docker 安装脚本。</p><pre class="language-shell"><code>curl -fsSL https://get.docker.com -o get-docker.sh</code></pre><p>使用阿里云镜像站执行 Docker 安装脚本。</p><pre class="language-shell"><code>sh get-docker.sh --mirror Aliyun</code></pre><p>运行并设置 Docker 自启动。</p><pre class="language-shell"><code>systemctl enable --now docker</code></pre><p>运行结果如下图。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/da8f1ec438973d844766b4d40de8d7b5.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h4>3.2.3. 安装 Docker Compose</h4><p>下载 Docker Compose 二进制文件。若无特殊上网方式，此步骤下载会非常慢，但是我实测过，确实可以下载完成，下方截图内我总共用了 35 分钟下载完。</p><pre class="language-shell"><code>curl -SL https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose</code></pre><p>设置 Docker Compose 为可执行权限。</p><pre class="language-shell"><code>chmod +x /usr/local/bin/docker-compose</code></pre><p>为 Docker Compose 命令设置软连接。</p><pre class="language-shell"><code>ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose</code></pre><p>验证 Docker Compose 版本。</p><pre class="language-shell"><code>docker compose version</code></pre><p>运行结果如下图。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/85addfce162102563aa5a9b086d74641.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h4>3.2.4. 配置 Docker 加速器</h4><p>创建 daemon.json 文件。</p><pre class="language-shell"><code>vim /etc/docker/daemon.json</code></pre><p>粘贴以下内容。</p><pre class="language-shell"><code>{
-  "registry-mirrors": [
-    "https://hub-mirror.c.163.com",
-    "https://dockerproxy.com",
-    "https://docker.nju.edu.cn",
-    "https://docker.m.daocloud.io"
-  ]
-}</code></pre><p>重启 Docker 服务。</p><pre class="language-shell"><code>systemctl daemon-reload
-systemctl restart docker</code></pre><p>运行结果如下图。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/a47ce668be87d30ac5e30c1b9a0a17cb.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>当然，这里我更建议的是自己部署一套本地镜像仓库，比如使用 VMware 开源的 <strong>Harbor</strong>，我自己就在家庭内网部署了一套，这样还能避免某些镜像因为一些不可说原因删库导致无法拉取。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/3217605100eec054b16559e24f7f2c5d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h4>3.2.5. 部署 Unifi Poller 堆栈</h4><p>由于这里 Grafana 需要安装 3 个插件，会涉及到权限问题，所以需要先创建 grafana 用户。</p><pre class="language-shell"><code>useradd -g root grafana</code></pre><p>修改 Grafana 用户 ID。</p><pre class="language-shell"><code>usermod -u 472 grafana</code></pre><p>创建 Grafana、InfluxDB、Unifi Poller 用来存储其配置文件的目录。</p><pre class="language-shell"><code>mkdir -p /docker/{grafana,influxdb,unifi-poller}</code></pre><p>修改 Grafana 目录拥有者。</p><pre class="language-shell"><code>chown 472:root -R /docker/grafana</code></pre><p>验证 Grafana 目录权限。</p><pre class="language-shell"><code>ls -l /docker</code></pre><p>运行结果如下图。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/eaaf22d38f1ea37a6e8811b3d7759c67.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>创建 up.conf 配置文件。</p><pre class="language-shell"><code>vim /docker/unifi-poller/up.conf</code></pre><p>粘贴并根据实际情况修改以下内容。</p><pre class="language-shell"><code>#### INPUTS
-[unifi.defaults]
-  url = "https://10.0.3.250"  # 修改为您的 Unifi Console IP
-  user = "unifipoller"
-  pass = "CHANGE_ME"  # 3.1.2. 章节您设置的密码
-  save_sites = true  # 保持不变
-  save_dpi = true  # 保持不变
-
-#### OUTPUTS
-[influxdb]
-  url = "http://CHANGE_ME:8086"  # 本虚拟机的 IP:8086</code></pre><p>运行结果如下图。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/05d17460aba7db572725434520265926.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>创建 unifi-poller 的 Compose 目录。</p><pre class="language-shell"><code>mkdir up &amp;&amp; cd up</code></pre><p>创建 docker-compose.yaml 文件。</p><pre class="language-shell"><code>vim docker-compose.yaml</code></pre><p>粘贴并根据实际情况修改以下内容。</p><blockquote><p>注意<br />此处我对官网提供的 Docker Compose 模板进行了精简和纠错：</p><ul><li>因为模板里面还部署了 Chronograf 容器，然而其实对于我们的需求而言，除了增加额外的性能开销以外，并没有什么用处。</li><li>而且模板中 InfluxDB 容器的参数甚至用了 InfluxDB 2.x 版本的环境变量，我刚开始尝试部署的时候，一直部署失败。后面仔细研究了下 InfluxDB 的变量说明，才发现明明前面 FAQs 说 InfluxDB 2.x 无法使用，结果模板里面却又套用了 InfluxDB 2.x 的内容。</li></ul></blockquote><pre class="language-shell"><code>version: "3"
-services:
-  influxdb:
-    restart: always
-    image: influxdb:1.8.10
-    ports:
-      - '8086:8086'
-    volumes:
-      - /etc/localtime:/etc/localtime:ro  # 我自己的习惯，只读挂载本机的时区，避免时区显示问题
-      - /docker/influxdb:/var/lib/influxdb
-    environment:
-      - INFLUXDB_DB=unifi  # 请勿修改数据库名称，默认只识别 unifi
-      - INFLUXDB_ADMIN_USER=CHANGE_ME  # 数据库管理员名称，可根据自己需求修改，与 Unifi OS 中设置用户无关
-      - INFLUXDB_ADMIN_PASSWORD=CHANGE_ME  # 数据库管理员密码，可根据自己需求修改，与 Unifi OS 中设置用户无关
-
-  grafana:
-    image: grafana/grafana:10.2.3
-    restart: always
-    user: '472:root'
-    ports:
-      - '3000:3000'
-    volumes:
-      - /etc/localtime:/etc/localtime:ro  # 我自己的习惯，只读挂载本机的时区，避免时区显示问题
-      - /docker/grafana:/var/lib/grafana
-    depends_on:
-      - influxdb
-    environment:
-      - GF_SECURITY_ADMIN_USER=CHANGE_ME  # Grafana 面板管理员名称，可根据自己需求修改，与 Unifi OS 中设置用户无关
-      - GF_SECURITY_ADMIN_PASSWORD=CHANGE_ME  # Grafana 面板管理员密码，可根据自己需求修改，与 Unifi OS 中设置用户无关
-      - GF_INSTALL_PLUGINS=grafana-clock-panel,natel-discrete-panel,grafana-piechart-panel  # 3 个 Grafana 插件
-
-  unifi-poller:
-    restart: always
-    image: golift/unifi-poller:v2.9.5
-    depends_on:
-      - influxdb
-      - grafana
-    volumes:
-      - /etc/localtime:/etc/localtime:ro  # 我自己的习惯，只读挂载本机的时区，避免时区显示问题
-      - /docker/unifi-poller:/etc/unpoller</code></pre><p>运行结果如下图。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/25c4ee3b1847041c41bff5d8406309e7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>使用 Docker Compose 拉起 Unifi Poller，由于此处我使用本地镜像仓库，所以拉取镜像几乎是以秒级计算的，如果您使用的是上面的镜像加速器，可能需要耐心等待一会儿。应该庆幸的是 ，Unifi Poller 镜像在今年重新上传 Docker Hub 了，前两年作者只上传到 Github 镜像仓库，对于大部分国内用户来说，基本上是拉不下来镜像的。</p><pre class="language-shell"><code>docker-compose up -d</code></pre><p>运行结果如下图。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/e17a531334ff0aa28932859c619d72cd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>查看 Unifi Poller 容器运行日志，当发现间隔 30 秒生成一次数据条目，就证明容器运行正常了。</p><pre class="language-shell"><code>docker logs -f up-unifi-poller-1</code></pre><p>运行结果如下图。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/f0a7fe7563ed1a541b81c9fbfd4f211d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>3.3. 面板设置</h3><p>浏览器访问 <a href="http://xn--ip-tx5di3ni80c:3000/" target="_blank"><u>http://虚拟机IP:3000</u></a> ，输入上面 docker-compose.yaml 文件中设置的 Grafana 面板管理员名称及密码进行登录。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/cfc2c4444d155075919c21d19c9ea124.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/1ed6ab587a2bf4931da79ff829c1a31a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h4>3.3.1. 设置语言</h4><p>单击左侧导航栏，选择 <strong>Administration &gt; General</strong>。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/4bb7a530823e53191472aa28e8919887.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>单击 Default preferences，Language 选择 <strong>中文 (简体)</strong>，单击 Save。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/7876f8753ea303d3e6cbb2c2c2e50712.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>虽然汉化依然不完全，但是还是稍微能让大众看懂一些了。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/b76934fab8397a3ffce2e3e4734eb3b7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h4>3.3.2. 添加数据源</h4><p>单击左侧导航栏，选择 <strong>连接 &gt; 数据源</strong>。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/9a76757729a107245ebd4e4f6bf4b4a1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>单击 Add data source。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/05963cfc7073c7d8191c4a438408fe38.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>选择 <strong>InfluxDB</strong>。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/474162eba5e09d2cd10310efdee945e9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>Query language 保持默认选择 InfluxQL，URL 输入 <a href="http://xn--ip-tx5di3ni80c:8086/" target="_blank">http://虚拟机IP:8086</a> ，其他选项如图设置。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/c91cb3ad27faf8b59a3bd7911bd88009.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>Database 输入 <strong>unifi</strong>，User 输入 <strong>数据库管理员名称</strong>，Password 输入 <strong>数据库管理员密码</strong>，单击 Save &amp; Test。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/a81bfc7612be30400e45c5cf61f73af1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>显示绿色提示就是测试通过。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/caf9a4b8d66c9c2f3e072a0b04d692d5.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h4>3.3.3. 添加面板</h4><p>单击左侧导航栏，选择 <strong>仪表板</strong>。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/390a1faa6f3ef061f10ee08a10e87756.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>单击 <strong>导入</strong>。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/4e096325804fcf27e600740e1f2cb79c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>输入 <strong>10414</strong>，单击加载。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/2c31e639ce8ec7b513134246c4fb58b9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>下方数据源选择 <strong>influxdb</strong>，单击 Import。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/b94681451becbb84cbf5e5632598a065.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>依次导入 <strong>10414 - 10419</strong>，总共 6 个面板，即可大功告成！</p><h2>4. 效果展示</h2><p>由于上述环境是我自己家的环境，并没有全套的 Unifi 全家桶，所以我下面以我几个月前帮一位朋友搭建的 Unifi 全家桶环境进行 Grafana 截图展示（隐私内容均已马赛克处理）。</p><h3>4.1. USG Insights</h3><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/32d15fcabdfee0d50a14e8189e8d0474.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/65c4f0af7e95efc016c75faa8048dfb0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>4.2. USW I<strong>nsights</strong></h3><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/33e5e11c01d5f24c52b4cadb0dfcc06f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/f708eb4bf98fe183a0a40d6e6b867996.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3><strong>4.3. UAP Ins</strong>ight<strong>s</strong></h3><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/c7c18b20caf36e2c7cb02a93ee1d3e70.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/ce77b0ef83e1fbf2ec87f06c684c76a3.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/995d2eb3b7b96728313b9320e0904556.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3><strong>4.4. Cl</strong>ient Insights</h3><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/30151145667639ce80a0614d44843bf2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/a16ae6151dcc815765ef350dcad588b6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3><strong>4.5. Network</strong> Site</h3><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/5fcebbf1f03916f869d75d63f63206a5.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>4.6. Client DPI</h3><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/0cd176a2374b07a846fedcf48fd9c237.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/2aa3fab20dcbdd3ed1551701c21d371c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>5. 讨论分析</h2><p>下面我就举 2 个例子来说明下数据图表对于了解家里的 Unifi 网络情况到底有什么作用。</p><h3>5.1. 交换机温度</h3><p>对于 2 代 Pro 系列 &amp; Enterprise 系列的 Unifi 交换机以及 RPS 设备，都是有温度传感器的。我相信绝大多数家用 Unifi 设备的朋友，即便购买了机架式设备，应该是不会在家里专门搞个恒温机房的。所以夏天时候对于设备的散热应该是会有一定顾虑的，不过就我这一年来对几位朋友家的交换机温度情况进行观察，即便是我们南方，应该问题也是不大的。</p><p>下图就是朋友家几台设备近 1 个月的温度变化。可以发现入冬之后，整体设备的温度降幅还是比较明显的。而且，即便是之前温度较高的时候，Unifi 设备也是相当稳定的。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/5c790684e3a81ad12f8a50a000f07bd8.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>5.2. 客户端 Wi-Fi 信号强度</h3><p>相信即使是 Wi-Fi 6 普及的现在，很多朋友依然会头疼一件事：明明有线网络下测速已经达到运营商给的网络速度上限了，为什么无线客户端信号依旧很弱，网速依然很慢？我的路由器发射功率设置是否合理？我的 Mesh 节点是否够多？我的 AP 摆放位置是否合理等等？</p><p>那么这里，我们还是要了解几个概念。</p><p>首先是 <strong>dB</strong>。日常中通常使用功率来衡量一个电器做功的快慢，如一个 10W 的电灯泡，10W 功率就是电灯泡消耗能量做功的快慢。在天线收发系统里，同样也需要消耗电能来转换为电磁波的能量进行传输。但是电磁波的能量衰减非常快，例如一个 100mW 的能量源，传输一段距离后很快就能衰减成 1mW、0.1mW、0.01mW 甚至更小。对于这种呈几何数量级的衰减，使用功率来衡量会给计数带来不便，因此引用新的概念：dB 和 dBm。</p><p>dB 是一个纯计数单位，它的计算公式为 <strong>dB = 10lg(A/B)</strong>。</p><p>当 A 和 B 表示两个功率时，dB 就表示两个功率的相对值，例如 A 的功率为 20mW，B 的功率为 10mW，则 10lg(20/10) = 3dB，表示 A 比 B 大 3dB。如果 A 的功率变为 100mW，则 10lg(100/10) = 10dB。所以有句口诀是 「<strong>加 3 乘 2，加 10 乘 10；减 3 除 2，减 10 除 10</strong>」。</p><p><strong>EIRP (Effective Isotropic Radiated Power)</strong>：有效全向辐射功率，即天线端发射出去时的信号强度。它是天线在天线增益最高的方向上的最大功率输出。</p><p>EIRP 必须考虑与连接器相关的功率损耗以及传输线损耗。发射天线的确切辐射输出功率可以使用发射机功率电平、电缆长度和天线增益来计算。在大多数国家/地区，EIRP 由政府机构控制。因此，不允许系统发出高于指定 EIRP 的信号。</p><p><strong>EIRP = Tx Power (发射功率) + Tx Antenna (发射天线增益) – Tx Cable (发射电缆损耗)</strong></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/3142565cf9110df336080e5422ad7eeb.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&nbsp;</p><p>如果发射器的输入功率电平为 12 dBm，并且使用损耗为 10 dB 的电缆连接到增益为 4 dBi 的天线，则系统的 EIRP 为 18 dBm。</p><p>EIRP = 12 dBm + 10 dBi – 4 dB = 18 dBm</p><p>以上 EIRP 的计算仅仅是无线发射端的总和，如果要计算完整的路径的信号强度，还需要计算上 Free Space Loss (空气损耗)，以及无线接收端的天线增益和电缆损耗之和。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/7b871d4da29593f24db5b6365cf273f0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>Rx Signal = Tx Power (发射功率) – Tx Cable (发射电缆损耗) + Tx Antenna (发射天线增益) – Free Space (空气损耗) + Rx Antenna (接收天线增益) – Rx Cable (接收电缆损耗)</strong></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/69f95ef251f81b56acf317cf0297dd3e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>所以，Rx Signal = 18 dBm – 5 dB + 8 dBi – 25 dB + 8 dBi – 5 dB = -1 dBm</p><p>那么 <strong>Free Space Loss</strong> 有没有一个标准呢，这也是有的，其数学公式如下：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/6e93ffdcfe1138e14ea3fd72810664b4.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>FSPL 公式准确地告诉我们遵循 <strong>平方反比定律</strong> 的程度。</p><p>平方反比定律告诉我们，随着与无线发射源的距离增加一倍，能量会分散在面积的 4 倍以上。这导致信号变成了原始幅度的 1/4。换句话说，每当与信号源的距离增加一倍时，Wi-Fi 信号就会损失 6dB (这在下图中以红色表示)。对比上述的口诀，即减 6 除 4。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/7c6ff09689f503a73d24a3244f6bfab3.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>正如预期的那样，墙壁会衰减信号。如下图所示。衰减量将取决于墙壁的结构。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/fb05a635ffd5ac19ad69d8bd2d1a985e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>根据以上的相关理论知识，我们可以从 Client Insights 面板中的 Wireless Signal 模块去分析家中连接到 Unifi 设备的 Wi-Fi 客户端的无线信号状况了。这里我就抛砖引玉下，大家可以结合时间节点，去分析家中各个客户端的无线信号如何，特别是一些智能家居使用较多的朋友，是否有些客户端的无线信号始终维持在较差的水平，这样可能就要根据实际的情况去调整自己家 Unifi AP 的安装位置和安装密度了。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/31/cd359f1ebf52f5f53e7fb13d8c617106.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这里再附上 2 篇 Unifi 官网的帮助文档，和 2 个视频方便大家根据 Unifi 原厂的教程对自己的 Unifi 环境进行 Wi-Fi 调优。</p><ol><li><a href="https://help.ui.com.cn/articles/360012947634/" target="_blank">UniFi Network - 优化无线网络速度</a></li><li><a href="https://help.ui.com.cn/articles/221321728/" target="_blank">UniFi Network - 了解和使用最小 RSSI</a></li></ol>  <h2>6. 结语</h2><p>谢谢您耐心的看到这里，希望这次的文章，还能像之前的两篇文章一样，能帮助到更多使用 Unifi 设备的朋友。虽然经过这两三年的使用和折腾，我也踩了一些坑，总得来说，我看到更多的是积极的一面，不管是这一年来 Unifi Network 软件功能的完善，还是 Unifi 作为一个全球化的品牌，有着全球那么多用户开发的第三方工具可以搭配使用。我也帮好多周围亲戚朋友从官方商城下单，更新了家庭网络设备，大家都表示比起以前，在家使用有线网络和 Wi-Fi 那是稳定多了。</p><h4>参考资料</h4><ul><li><a href="https://www.taosdata.com/tdengine/time-series-database/what-is-a-time-series-database" target="_blank">什么是时序数据库？我们为什么需要时序数据库？</a></li><li><a href="https://blog.zabbix.com/cn/zabbix-time-series-data-and-timescaledb-2/6959/" target="_blank">Zabbix，时间序列数据和 TimescaleDB</a></li><li><a href="https://db-engines.com/en/ranking/time+series+dbms" target="_blank">DB-Engines Ranking</a></li><li><a href="https://prometheus.io/docs/instrumenting/exporters/" target="_blank">Exporters and integrations</a></li><li><a href="https://docs.influxdata.com/telegraf/v1/plugins/#input-plugins" target="_blank">Plugin directory</a></li><li><a href="https://unpoller.com/" target="_blank">Unpoller</a></li><li><a href="https://study-ccnp.com/what-is-effective-isotropic-radiated-power-eirp/" target="_blank">What is Effective Isotropic Radiated Power (EIRP)?</a></li><li><a href="https://semfionetworks.com/blog/free-space-path-loss-diagrams/" target="_blank">Free Space Path Loss Diagrams</a></li></ul><p style="margin-left: 0px;">&gt; 下载少数派 <a href="https://sspai.com/page/client">客户端</a>、关注 <a href="https://sspai.com/link?target=https%3A%2F%2Fwww.xiaohongshu.com%2Fuser%2Fprofile%2F63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的<a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现🚀</p>
                 ]]>
             </content:encoded>
         </item>
