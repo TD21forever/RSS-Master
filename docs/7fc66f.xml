@@ -196,7 +196,225 @@ console.log(result);</code></pre><p>这段代码首先通过 <code>document.getE
 总结: 本文介绍了PDF作为一种重要的文件格式，其跨平台和不易修改的特点。同时，还提供了一些免费的PDF处理工具和技巧，使用户能够轻松解决PDF相关的问题，而无需使用昂贵的Adobe Acrobat或其他付费软件。这些工具主要是命令行界面，适合自动化使用，但也提供了一些图形界面和打包方案，方便不熟悉命令行的用户使用。 </div>
                         <hr>
                     
-                    调整页码、转移批注、切割页面：这些命令行工具帮你玩转 PDF
+                    <p style="margin-left: 0px;">如今，无论是商业文件，电子书籍，还是学术论文，大多以 PDF 文件格式存储和分发。这主要是看中了 PDF 跨平台、跨设备、且不易修改的特点；也有说法称 PDF 为<a href="https://www.vice.com/en/article/pam43n/why-the-pdf-is-secretly-the-worlds-most-important-file-format">世界上最重要的文件格式</a>。</p>
+<p style="margin-left: 0px;">但是，PDF 的很多特点和功能仍然不为人知，日常学习工作中遇到 PDF 相关的问题还是会让不少同学犯难。此外，发明 PDF 格式的 Adobe 公司推出的 Acrobat 不仅昂贵，也并非万能，在实现某些 PDF 功能时并非总是最优选项。</p>
+<p style="margin-left: 0px;">举个例子，我一位朋友热衷于将纸质书扫描成 PDF 电子书，前段时间他想将扫出的两页对开版本分割成单页，在 Acrobat 中折腾了半天也没有实现。能找到的其他软件价格都还不便宜。最终，通过我们下面会介绍的 MuPDF，他没花一分钱就实现了这个需求。</p>
+<p>有鉴于此，本文接下来将分享一些我日常用到的 PDF 处理工具和技巧，让你无需 Adobe Acrobat 或其他付费 PDF 软件，也能轻松相应的问题。</p>
+<p>方便查阅起见，下面先用表格列出这些工具的主要信息：</p>
+<figure class="table">
+    <table>
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>语言</th>
+                <th>支持平台</th>
+                <th>许可方式</th>
+                <th>简介</th>
+                <th>安装方式</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="https://gitlab.com/pdftk-java/pdftk">pdftk-java</a></td>
+                <td>Java</td>
+                <td>Linux, macOS, Windows</td>
+                <td>GNU-2.0</td>
+                <td>命令行工具，导出 PDF 元数据，合并、拆分、修复 PDF 等</td>
+                <td><code>brew install pdftk-java</code></td>
+            </tr>
+            <tr>
+                <td><a href="https://skim-app.sourceforge.io/">Skim</a></td>
+                <td>Objective-C</td>
+                <td>macOS</td>
+                <td>BSD</td>
+                <td>图形界面工具，阅读和批注 PDF，默认将 PDF 标注存储为 Skim notes</td>
+                <td><code>brew install --cask skim</code></td>
+            </tr>
+            <tr>
+                <td><a href="https://mupdf.com/">MuPDF</a></td>
+                <td>C</td>
+                <td>Linux, macOS, Windows, Android, iOS</td>
+                <td>AGPL-3.0</td>
+                <td>轻量级 PDF、XPS 和电子书查看器；常用作框架，但也有命令行工具</td>
+                <td><code>brew install mupdf</code></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/rrthomas/pdfjam">pdfjam</a></td>
+                <td>Shell</td>
+                <td>Linux, macOS, 通过 <a href="http://www.cygwin.com/">Cygwin</a> 支持 Windows</td>
+                <td>GPL-2.0</td>
+                <td>命令行工具，主要用于涉及 PDF 页面的处理任务</td>
+                <td>安装 <a href="https://www.latex-project.org/get/">TeX Live</a> 发行版或下载 <a href="https://github.com/rrthomas/pdfjam/releases/tag/v3.10">release</a> 后安装</td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/py-pdf/pypdf">pypdf</a></td>
+                <td>Python</td>
+                <td>Linux, macOS, Windows</td>
+                <td>BSD</td>
+                <td>Python 库，通过 Python 对 PDF 进行分割、合并、裁剪和转换、提取文本等</td>
+                <td><code>pip install pypdf</code></td>
+            </tr>
+        </tbody>
+    </table>
+</figure>
+<p>可以看出，这些工具主要是命令行界面，天然地适合自动化使用。但为了让不熟悉命令行的朋友也能轻松，我也提供了 macOS 平台上的打包方案（<a href="https://p15.p3.n0.cdn.getcloudapp.com/items/4guWAPdz/5eb749fa-80b4-49ab-a88d-c480e18c393f.zip">下载</a>） ，有依托 <a href="http://www.keyboardmaestro.com/">Keyboard Maestro</a>、<a href="https://support.apple.com/guide/automator/welcome/mac">Automator</a>（自动操作）和 <a href="https://support.apple.com/guide/shortcuts-mac/apdf22b0444c/mac">Shortcuts</a>（快捷指令）的版本可选。</p>
+<hr />
+<p>给自己打个小广告：Keyboard Maestro 是我非常喜欢的自动化工具，我还为它写过一个完整的教程《<a href="https://sspai.com/series/350">生产力超频：Keyboard Maestro 拯救效率</a>》（会员可以免费阅读）。如果你还没有购买 <a href="https://www.keyboardmaestro.com/main/store">Keyboard Maestro</a>，可以使用少数派读者专属优惠码 <code>SSPAI</code> 享受八折优惠。</p>
+<h2 style="margin-left: 0px;"><strong>调整 PDF 页码标签</strong></h2>
+<p style="margin-left: 0px;">一般情况下，PDF 的页码（page numbers）是从文件的首页起算。但因为 PDF 常用来保存出版物，其实际内容的页码编排与 PDF 文件的页数未必一致。例如，在下图所示的 PDF 中，由于封面、目录等占用的页数，正文页脚的第 10 页实际上已经是文件的第 19 页。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/b50580f5827b649038bbaf67d3f3f491.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>PDF Expert 右下角显示的 PDF 页码</figcaption>
+</figure>
+<p>实际上，PDF 也考虑到了这种情况，不仅支持从首页单调递增的纯数字页码，还支持一种被称作 <a href="https://www.devontechnologies.com/blog/20220208-pdf-page-numbering">page folios</a> 的富格式页码（在 Acrobat 中也叫作 page labels）。page folios 支持分组，内容可以是阿拉伯数字、英文字母、罗马数字或自定义标记，还能添加前缀，因此可以与文件内容完全对应。</p>
+<p style="margin-left: 0px;">如果你有 Adobe Acrobat，选中需要调整的页面缩略图，右键点击「Page Labels…」，在弹出的对话框中设置即可。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/2e747f79e6774ac82f7b554475c31cfa.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>在 Adobe Acrobat 中调整 PDF 页码</figcaption>
+</figure>
+<p>但如果你不想为 Acrobat 付费，或者觉得页数多时操作繁琐，则可以使用命令行工具 PDFtk。假设输入文件为 <code>input.pdf</code>，用下面的命令将其元数据导出为一个纯文本文件 <code>metadata.text</code>（<a href="https://www.pdflabs.com/docs/pdftk-man-page/#dest-op-dump-data-utf8">文档</a>）：</p>
+<pre class="language-shell"><code>pdftk input.pdf dump_data_utf8 output metadata.text</code></pre>
+<p style="margin-left: 0px;">使用文本编辑器打开生成的 <code>metadata.text</code>，可以看到 <code>input.pdf</code> 的各种元数据，其中就包括页码标签信息，如下所示：</p>
+<pre class="language-text"><code>PageLabelBegin
+PageLabelNewIndex: 1
+PageLabelStart: 1
+PageLabelPrefix: Cover
+PageLabelNumStyle: NoNumber
+PageLabelBegin
+PageLabelNewIndex: 2
+PageLabelStart: 1
+PageLabelPrefix: Page
+PageLabelNumStyle: UppercaseLetters
+PageLabelBegin
+PageLabelNewIndex: 3
+PageLabelStart: 1
+PageLabelNumStyle: UppercaseLetters
+PageLabelBegin
+PageLabelNewIndex: 6
+PageLabelStart: 1
+PageLabelNumStyle: LowercaseLetters
+PageLabelBegin
+PageLabelNewIndex: 9
+PageLabelStart: 1
+PageLabelNumStyle: UppercaseRomanNumerals
+PageLabelBegin
+PageLabelNewIndex: 12
+PageLabelStart: 1
+PageLabelNumStyle: LowercaseRomanNumerals
+PageLabelBegin
+PageLabelNewIndex: 17
+PageLabelStart: 1
+PageLabelNumStyle: DecimalArabicNumerals</code></pre>
+<p>容易发现，每个 PDF 页码标签的元数据由 4 或 5 行组成：</p>
+<ul>
+    <li><code>PageLabelBegin</code>：开始一个页码标签</li>
+    <li><code>PageLabelNewIndex</code>：页码标签开始的索引，对应 PDF 的 page numbers</li>
+    <li><code>PageLabelStart</code>：页码标签开始的页码</li>
+    <li><code>PageLabelPrefix</code>：页码标签的前缀（可选）</li>
+    <li><code>PageLabelNumStyle</code>：页码标签的类型，包括 <code>NoNumber</code>（无页码）、<code>DecimalArabicNumerals</code>（阿拉伯数字）、<code>UppercaseLetters</code>（大写英文字母）、<code>LowercaseLetters</code>（小写英文字母）、<code>UppercaseRomanNumerals</code>（大写罗马数字）和 <code>LowercaseRomanNumerals</code>（小写罗马数字）。</li>
+</ul>
+<p style="margin-left: 0px;">据此，示例输出的元数据可以解读为：</p>
+<figure class="table">
+    <table>
+        <tbody>
+            <tr>
+                <td>页码范围</td>
+                <td>页码格式</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><code>Cover</code></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>带有前缀 <code>Page</code> 的大写英文字母 <code>Page A</code></td>
+            </tr>
+            <tr>
+                <td>3-5</td>
+                <td>大写英文字母 <code>A</code>，依次递增</td>
+            </tr>
+            <tr>
+                <td>6-8</td>
+                <td>小写英文字母 <code>a</code>，依次递增</td>
+            </tr>
+            <tr>
+                <td>9-11</td>
+                <td>大写罗马数字 <code>I</code>，依次递增</td>
+            </tr>
+            <tr>
+                <td>12-16</td>
+                <td>小写罗马数字 <code>i</code>，依次递增</td>
+            </tr>
+            <tr>
+                <td>17-</td>
+                <td>阿拉伯数字 <code>17</code>，依次递增直至最后一页</td>
+            </tr>
+        </tbody>
+    </table>
+</figure>
+<p>当然，PDF 未必都需要页码定义，如果元数据没有定义页码标签，阅读器默认会使用最普通的格式，即从阿拉伯数字 1 开始递增。</p>
+<p style="margin-left: 0px;">回到我们的需求：如果将 <code>metadata.text</code> 倒数第 3 行的 <code>17</code> 修改为 <code>20</code>，就是指文件第 17 页开始的 page labels 修改为从阿拉伯数字 20 开始。</p>
+<p style="margin-left: 0px;">最后将修改后的 <code>metadata.text</code> 导入回 PDF 即可：</p>
+<pre class="language-null"><code>pdftk input.pdf update_info_utf8 metadata.text output output.pdf</code></pre>
+<p style="margin-left: 0px;">输出的 <code>output.pdf</code> 所显示的页码如下图所示。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/bff2f6acc137558370e2ff6a5ad477e3.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>修改元数据后得到 PDF，从第 20 页开始使用阿拉伯数字作为页码标签</figcaption>
+</figure>
+<p style="margin-left: 0px;">据此，我们还可以通过 Keyboard Maestro 将其固定为一个 marco，这样以后就可以一键调用了。</p>
+<p style="margin-left: 0px;">先看成品效果，如下图所示：</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/5118cf46a2a668df8b95ba15fcd35af0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>调整 PDF 页码标签的 Keyboard Maestro macro</figcaption>
+</figure>
+<p style="margin-left: 0px;">简单描述，这个 macro：</p>
+<p style="margin-left: 0px;">1. 首先获取访达（Finder）中选中文件及其所在路径，然后保存为 Keyboard Maestro 中的变量 <code>selected_pdf</code>。</p>
+<p style="margin-left: 0px;">2. 判断选中的文件是否是 PDF，如果不是，则弹出通知然后取消执行 macro。</p>
+<p style="margin-left: 0px;">3. 弹出一个提示框，让用户输入页码标签的起始页，这里包括了 3 种类型，也就是 <code>PDFtk</code> 的读取的 3 个变量：<sup class="ss-footnote" href="" title="只包括了自定义的 Cover、小写罗马数字和阿拉伯数字这 3 种类型的页码标签，如果你需要调整其他类型的页码标签，可以参考上面的示例，自行修改 Shell 脚本中的代码。">1</sup></p>
+<ul>
+    <li><code>FirstPage</code>：第一页，通常为 <code>Cover</code>，默认值设置为 1</li>
+    <li><code>LowercaseRomanNumerals</code>：小写罗马数字页码标签的起始页</li>
+    <li><code>DecimalArabicNumerals</code>：阿拉伯数字页码标签的起始页</li>
+</ul>
+<p>如果上述 3 个值留空的话，则表示不包括该类页码标签。</p>
+<p>4. 将用户输入的值作为变量传递给下面的 Shell 脚本。</p>
+<pre class="language-shell"><code>export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
+
+cd "$KMVAR_pdf_path"
+
+# Dump PDF metadata
+pdftk "$KMVAR_selected_pdf" dump_data_utf8 output metadata.text
+
+# Path to the metadata file dumped by pdftk
+METADATA_FILE="metadata.text"
+
+# Remove existing page label information if present
+sed -i '' '/PageLabelBegin/,$d' "$METADATA_FILE"
+
+# Function to append page label information
+append_page_label(){
+    cat &lt;&lt;EOF &gt;&gt; "$METADATA_FILE"
+PageLabelBegin
+PageLabelNewIndex: $1
+PageLabelStart: $2
+$3
+$4
+EOF
+}
+
+# Append new page label information if variables are not empty
+[ -n "$KMVAR_FirstPage" ] &amp;&amp; append_page_label "$KMVAR_FirstPage" "1" "PageLabelPrefix: Cover" "PageLabelNumStyle: NoNumber"
+[ -n "$KMVAR_LowercaseRomanNumerals" ] &amp;&amp; append_page_label "$KMVAR_LowercaseRomanNumerals" "1" "PageLabelNumStyle: LowercaseRomanNumerals"
+[ -n "$KMVAR_DecimalArabicNumerals" ] &amp;&amp; append_page_label "$KMVAR_DecimalArabicNumerals" "1" "PageLabelNumStyle: DecimalArabicNumerals"
+
+# Update PDF metadata
+pdftk "$KMVAR_selected_pdf" update_info_utf8 metadata.text output adjusted-page-labels.pdf
+
+# Remove `metadata.text`
+rm metadata.text</code></pre>
+<p style="margin-left: 0px;">这段代码使用 <code>pdftk</code> 导出 PDF 的元数据为文本文件 <code>metadata.text</code>，然后使用 <code>sed</code> 删除 <code>metadata.text</code> 中已有的页码标签信息。接着，使用 <code>cat</code> 将用户输入的页码标签信息追加到 <code>metadata.text</code> 中，通过 <code>pdftk</code> 导入，最后删除临时文件 <code>metadata.text</code>。</p>
+<p style="margin-left: 0px;">这就完成了 marco 的编写。以后，在访达中选中需要修改页码标签的 PDF 文件，按下快捷键 <code>⌃ + ⌥ + L</code> ，在弹出的窗口中输入不同类型的页码标签的起始页，就可以得到页码标签修改后的 PDF 文件。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/10cd55c0df48114263163a3f33e1005c.gif" />
+    <figcaption>调整 PDF 页码标签的 Keyboard Maestro macro 使用效果</figcaption>
+</figure>
+<h2 style="margin-left: 0px;"><strong>转移 PDF 书签</strong></h2>
+<p style="margin-left: 0px;">PDF 书签（<a href="https://helpx.adobe.com/hk_en/acrobat/using/page-thumbnails-bookmarks-pdfs.html">bookmark</a>）是指导航窗格的书签面板中的超链接文本，对应着不同的页码，有时也叫作「目录」或「大纲」。</p>
                 ]]>
             </content:encoded>
         </item>
