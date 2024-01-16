@@ -5,6 +5,23 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/85182</id>
+            <title>原理、对策与产品：聊聊牙齿美白两三事</title>
+            <link>https://sspai.com/post/85182</link>
+            <guid isPermaLink="false">https://sspai.com/post/85182</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 16 Jan 2024 14:39:52 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    原理、对策与产品：聊聊牙齿美白两三事
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/85807</id>
             <title>CES 2024 亮点回顾：硬件软件两开花</title>
             <link>https://sspai.com/post/85807</link>
@@ -196,225 +213,7 @@ console.log(result);</code></pre><p>这段代码首先通过 <code>document.getE
 总结: 本文介绍了PDF作为一种重要的文件格式，其跨平台和不易修改的特点。同时，还提供了一些免费的PDF处理工具和技巧，使用户能够轻松解决PDF相关的问题，而无需使用昂贵的Adobe Acrobat或其他付费软件。这些工具主要是命令行界面，适合自动化使用，但也提供了一些图形界面和打包方案，方便不熟悉命令行的用户使用。 </div>
                         <hr>
                     
-                    <p style="margin-left: 0px;">如今，无论是商业文件，电子书籍，还是学术论文，大多以 PDF 文件格式存储和分发。这主要是看中了 PDF 跨平台、跨设备、且不易修改的特点；也有说法称 PDF 为<a href="https://www.vice.com/en/article/pam43n/why-the-pdf-is-secretly-the-worlds-most-important-file-format">世界上最重要的文件格式</a>。</p>
-<p style="margin-left: 0px;">但是，PDF 的很多特点和功能仍然不为人知，日常学习工作中遇到 PDF 相关的问题还是会让不少同学犯难。此外，发明 PDF 格式的 Adobe 公司推出的 Acrobat 不仅昂贵，也并非万能，在实现某些 PDF 功能时并非总是最优选项。</p>
-<p style="margin-left: 0px;">举个例子，我一位朋友热衷于将纸质书扫描成 PDF 电子书，前段时间他想将扫出的两页对开版本分割成单页，在 Acrobat 中折腾了半天也没有实现。能找到的其他软件价格都还不便宜。最终，通过我们下面会介绍的 MuPDF，他没花一分钱就实现了这个需求。</p>
-<p>有鉴于此，本文接下来将分享一些我日常用到的 PDF 处理工具和技巧，让你无需 Adobe Acrobat 或其他付费 PDF 软件，也能轻松相应的问题。</p>
-<p>方便查阅起见，下面先用表格列出这些工具的主要信息：</p>
-<figure class="table">
-    <table>
-        <thead>
-            <tr>
-                <th>名称</th>
-                <th>语言</th>
-                <th>支持平台</th>
-                <th>许可方式</th>
-                <th>简介</th>
-                <th>安装方式</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><a href="https://gitlab.com/pdftk-java/pdftk">pdftk-java</a></td>
-                <td>Java</td>
-                <td>Linux, macOS, Windows</td>
-                <td>GNU-2.0</td>
-                <td>命令行工具，导出 PDF 元数据，合并、拆分、修复 PDF 等</td>
-                <td><code>brew install pdftk-java</code></td>
-            </tr>
-            <tr>
-                <td><a href="https://skim-app.sourceforge.io/">Skim</a></td>
-                <td>Objective-C</td>
-                <td>macOS</td>
-                <td>BSD</td>
-                <td>图形界面工具，阅读和批注 PDF，默认将 PDF 标注存储为 Skim notes</td>
-                <td><code>brew install --cask skim</code></td>
-            </tr>
-            <tr>
-                <td><a href="https://mupdf.com/">MuPDF</a></td>
-                <td>C</td>
-                <td>Linux, macOS, Windows, Android, iOS</td>
-                <td>AGPL-3.0</td>
-                <td>轻量级 PDF、XPS 和电子书查看器；常用作框架，但也有命令行工具</td>
-                <td><code>brew install mupdf</code></td>
-            </tr>
-            <tr>
-                <td><a href="https://github.com/rrthomas/pdfjam">pdfjam</a></td>
-                <td>Shell</td>
-                <td>Linux, macOS, 通过 <a href="http://www.cygwin.com/">Cygwin</a> 支持 Windows</td>
-                <td>GPL-2.0</td>
-                <td>命令行工具，主要用于涉及 PDF 页面的处理任务</td>
-                <td>安装 <a href="https://www.latex-project.org/get/">TeX Live</a> 发行版或下载 <a href="https://github.com/rrthomas/pdfjam/releases/tag/v3.10">release</a> 后安装</td>
-            </tr>
-            <tr>
-                <td><a href="https://github.com/py-pdf/pypdf">pypdf</a></td>
-                <td>Python</td>
-                <td>Linux, macOS, Windows</td>
-                <td>BSD</td>
-                <td>Python 库，通过 Python 对 PDF 进行分割、合并、裁剪和转换、提取文本等</td>
-                <td><code>pip install pypdf</code></td>
-            </tr>
-        </tbody>
-    </table>
-</figure>
-<p>可以看出，这些工具主要是命令行界面，天然地适合自动化使用。但为了让不熟悉命令行的朋友也能轻松，我也提供了 macOS 平台上的打包方案（<a href="https://p15.p3.n0.cdn.getcloudapp.com/items/4guWAPdz/5eb749fa-80b4-49ab-a88d-c480e18c393f.zip">下载</a>） ，有依托 <a href="http://www.keyboardmaestro.com/">Keyboard Maestro</a>、<a href="https://support.apple.com/guide/automator/welcome/mac">Automator</a>（自动操作）和 <a href="https://support.apple.com/guide/shortcuts-mac/apdf22b0444c/mac">Shortcuts</a>（快捷指令）的版本可选。</p>
-<hr />
-<p>给自己打个小广告：Keyboard Maestro 是我非常喜欢的自动化工具，我还为它写过一个完整的教程《<a href="https://sspai.com/series/350">生产力超频：Keyboard Maestro 拯救效率</a>》（会员可以免费阅读）。如果你还没有购买 <a href="https://www.keyboardmaestro.com/main/store">Keyboard Maestro</a>，可以使用少数派读者专属优惠码 <code>SSPAI</code> 享受八折优惠。</p>
-<h2 style="margin-left: 0px;"><strong>调整 PDF 页码标签</strong></h2>
-<p style="margin-left: 0px;">一般情况下，PDF 的页码（page numbers）是从文件的首页起算。但因为 PDF 常用来保存出版物，其实际内容的页码编排与 PDF 文件的页数未必一致。例如，在下图所示的 PDF 中，由于封面、目录等占用的页数，正文页脚的第 10 页实际上已经是文件的第 19 页。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/b50580f5827b649038bbaf67d3f3f491.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
-    <figcaption>PDF Expert 右下角显示的 PDF 页码</figcaption>
-</figure>
-<p>实际上，PDF 也考虑到了这种情况，不仅支持从首页单调递增的纯数字页码，还支持一种被称作 <a href="https://www.devontechnologies.com/blog/20220208-pdf-page-numbering">page folios</a> 的富格式页码（在 Acrobat 中也叫作 page labels）。page folios 支持分组，内容可以是阿拉伯数字、英文字母、罗马数字或自定义标记，还能添加前缀，因此可以与文件内容完全对应。</p>
-<p style="margin-left: 0px;">如果你有 Adobe Acrobat，选中需要调整的页面缩略图，右键点击「Page Labels…」，在弹出的对话框中设置即可。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/2e747f79e6774ac82f7b554475c31cfa.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
-    <figcaption>在 Adobe Acrobat 中调整 PDF 页码</figcaption>
-</figure>
-<p>但如果你不想为 Acrobat 付费，或者觉得页数多时操作繁琐，则可以使用命令行工具 PDFtk。假设输入文件为 <code>input.pdf</code>，用下面的命令将其元数据导出为一个纯文本文件 <code>metadata.text</code>（<a href="https://www.pdflabs.com/docs/pdftk-man-page/#dest-op-dump-data-utf8">文档</a>）：</p>
-<pre class="language-shell"><code>pdftk input.pdf dump_data_utf8 output metadata.text</code></pre>
-<p style="margin-left: 0px;">使用文本编辑器打开生成的 <code>metadata.text</code>，可以看到 <code>input.pdf</code> 的各种元数据，其中就包括页码标签信息，如下所示：</p>
-<pre class="language-text"><code>PageLabelBegin
-PageLabelNewIndex: 1
-PageLabelStart: 1
-PageLabelPrefix: Cover
-PageLabelNumStyle: NoNumber
-PageLabelBegin
-PageLabelNewIndex: 2
-PageLabelStart: 1
-PageLabelPrefix: Page
-PageLabelNumStyle: UppercaseLetters
-PageLabelBegin
-PageLabelNewIndex: 3
-PageLabelStart: 1
-PageLabelNumStyle: UppercaseLetters
-PageLabelBegin
-PageLabelNewIndex: 6
-PageLabelStart: 1
-PageLabelNumStyle: LowercaseLetters
-PageLabelBegin
-PageLabelNewIndex: 9
-PageLabelStart: 1
-PageLabelNumStyle: UppercaseRomanNumerals
-PageLabelBegin
-PageLabelNewIndex: 12
-PageLabelStart: 1
-PageLabelNumStyle: LowercaseRomanNumerals
-PageLabelBegin
-PageLabelNewIndex: 17
-PageLabelStart: 1
-PageLabelNumStyle: DecimalArabicNumerals</code></pre>
-<p>容易发现，每个 PDF 页码标签的元数据由 4 或 5 行组成：</p>
-<ul>
-    <li><code>PageLabelBegin</code>：开始一个页码标签</li>
-    <li><code>PageLabelNewIndex</code>：页码标签开始的索引，对应 PDF 的 page numbers</li>
-    <li><code>PageLabelStart</code>：页码标签开始的页码</li>
-    <li><code>PageLabelPrefix</code>：页码标签的前缀（可选）</li>
-    <li><code>PageLabelNumStyle</code>：页码标签的类型，包括 <code>NoNumber</code>（无页码）、<code>DecimalArabicNumerals</code>（阿拉伯数字）、<code>UppercaseLetters</code>（大写英文字母）、<code>LowercaseLetters</code>（小写英文字母）、<code>UppercaseRomanNumerals</code>（大写罗马数字）和 <code>LowercaseRomanNumerals</code>（小写罗马数字）。</li>
-</ul>
-<p style="margin-left: 0px;">据此，示例输出的元数据可以解读为：</p>
-<figure class="table">
-    <table>
-        <tbody>
-            <tr>
-                <td>页码范围</td>
-                <td>页码格式</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td><code>Cover</code></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>带有前缀 <code>Page</code> 的大写英文字母 <code>Page A</code></td>
-            </tr>
-            <tr>
-                <td>3-5</td>
-                <td>大写英文字母 <code>A</code>，依次递增</td>
-            </tr>
-            <tr>
-                <td>6-8</td>
-                <td>小写英文字母 <code>a</code>，依次递增</td>
-            </tr>
-            <tr>
-                <td>9-11</td>
-                <td>大写罗马数字 <code>I</code>，依次递增</td>
-            </tr>
-            <tr>
-                <td>12-16</td>
-                <td>小写罗马数字 <code>i</code>，依次递增</td>
-            </tr>
-            <tr>
-                <td>17-</td>
-                <td>阿拉伯数字 <code>17</code>，依次递增直至最后一页</td>
-            </tr>
-        </tbody>
-    </table>
-</figure>
-<p>当然，PDF 未必都需要页码定义，如果元数据没有定义页码标签，阅读器默认会使用最普通的格式，即从阿拉伯数字 1 开始递增。</p>
-<p style="margin-left: 0px;">回到我们的需求：如果将 <code>metadata.text</code> 倒数第 3 行的 <code>17</code> 修改为 <code>20</code>，就是指文件第 17 页开始的 page labels 修改为从阿拉伯数字 20 开始。</p>
-<p style="margin-left: 0px;">最后将修改后的 <code>metadata.text</code> 导入回 PDF 即可：</p>
-<pre class="language-null"><code>pdftk input.pdf update_info_utf8 metadata.text output output.pdf</code></pre>
-<p style="margin-left: 0px;">输出的 <code>output.pdf</code> 所显示的页码如下图所示。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/bff2f6acc137558370e2ff6a5ad477e3.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
-    <figcaption>修改元数据后得到 PDF，从第 20 页开始使用阿拉伯数字作为页码标签</figcaption>
-</figure>
-<p style="margin-left: 0px;">据此，我们还可以通过 Keyboard Maestro 将其固定为一个 marco，这样以后就可以一键调用了。</p>
-<p style="margin-left: 0px;">先看成品效果，如下图所示：</p>
-<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/5118cf46a2a668df8b95ba15fcd35af0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
-    <figcaption>调整 PDF 页码标签的 Keyboard Maestro macro</figcaption>
-</figure>
-<p style="margin-left: 0px;">简单描述，这个 macro：</p>
-<p style="margin-left: 0px;">1. 首先获取访达（Finder）中选中文件及其所在路径，然后保存为 Keyboard Maestro 中的变量 <code>selected_pdf</code>。</p>
-<p style="margin-left: 0px;">2. 判断选中的文件是否是 PDF，如果不是，则弹出通知然后取消执行 macro。</p>
-<p style="margin-left: 0px;">3. 弹出一个提示框，让用户输入页码标签的起始页，这里包括了 3 种类型，也就是 <code>PDFtk</code> 的读取的 3 个变量：<sup class="ss-footnote" href="" title="只包括了自定义的 Cover、小写罗马数字和阿拉伯数字这 3 种类型的页码标签，如果你需要调整其他类型的页码标签，可以参考上面的示例，自行修改 Shell 脚本中的代码。">1</sup></p>
-<ul>
-    <li><code>FirstPage</code>：第一页，通常为 <code>Cover</code>，默认值设置为 1</li>
-    <li><code>LowercaseRomanNumerals</code>：小写罗马数字页码标签的起始页</li>
-    <li><code>DecimalArabicNumerals</code>：阿拉伯数字页码标签的起始页</li>
-</ul>
-<p>如果上述 3 个值留空的话，则表示不包括该类页码标签。</p>
-<p>4. 将用户输入的值作为变量传递给下面的 Shell 脚本。</p>
-<pre class="language-shell"><code>export PATH="$PATH:/opt/homebrew/bin:/usr/local/bin"
-
-cd "$KMVAR_pdf_path"
-
-# Dump PDF metadata
-pdftk "$KMVAR_selected_pdf" dump_data_utf8 output metadata.text
-
-# Path to the metadata file dumped by pdftk
-METADATA_FILE="metadata.text"
-
-# Remove existing page label information if present
-sed -i '' '/PageLabelBegin/,$d' "$METADATA_FILE"
-
-# Function to append page label information
-append_page_label(){
-    cat &lt;&lt;EOF &gt;&gt; "$METADATA_FILE"
-PageLabelBegin
-PageLabelNewIndex: $1
-PageLabelStart: $2
-$3
-$4
-EOF
-}
-
-# Append new page label information if variables are not empty
-[ -n "$KMVAR_FirstPage" ] &amp;&amp; append_page_label "$KMVAR_FirstPage" "1" "PageLabelPrefix: Cover" "PageLabelNumStyle: NoNumber"
-[ -n "$KMVAR_LowercaseRomanNumerals" ] &amp;&amp; append_page_label "$KMVAR_LowercaseRomanNumerals" "1" "PageLabelNumStyle: LowercaseRomanNumerals"
-[ -n "$KMVAR_DecimalArabicNumerals" ] &amp;&amp; append_page_label "$KMVAR_DecimalArabicNumerals" "1" "PageLabelNumStyle: DecimalArabicNumerals"
-
-# Update PDF metadata
-pdftk "$KMVAR_selected_pdf" update_info_utf8 metadata.text output adjusted-page-labels.pdf
-
-# Remove `metadata.text`
-rm metadata.text</code></pre>
-<p style="margin-left: 0px;">这段代码使用 <code>pdftk</code> 导出 PDF 的元数据为文本文件 <code>metadata.text</code>，然后使用 <code>sed</code> 删除 <code>metadata.text</code> 中已有的页码标签信息。接着，使用 <code>cat</code> 将用户输入的页码标签信息追加到 <code>metadata.text</code> 中，通过 <code>pdftk</code> 导入，最后删除临时文件 <code>metadata.text</code>。</p>
-<p style="margin-left: 0px;">这就完成了 marco 的编写。以后，在访达中选中需要修改页码标签的 PDF 文件，按下快捷键 <code>⌃ + ⌥ + L</code> ，在弹出的窗口中输入不同类型的页码标签的起始页，就可以得到页码标签修改后的 PDF 文件。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/12/25/10cd55c0df48114263163a3f33e1005c.gif" />
-    <figcaption>调整 PDF 页码标签的 Keyboard Maestro macro 使用效果</figcaption>
-</figure>
-<h2 style="margin-left: 0px;"><strong>转移 PDF 书签</strong></h2>
-<p style="margin-left: 0px;">PDF 书签（<a href="https://helpx.adobe.com/hk_en/acrobat/using/page-thumbnails-bookmarks-pdfs.html">bookmark</a>）是指导航窗格的书签面板中的超链接文本，对应着不同的页码，有时也叫作「目录」或「大纲」。</p>
+                    调整页码、转移批注、切割页面：这些命令行工具帮你玩转 PDF
                 ]]>
             </content:encoded>
         </item>
@@ -461,29 +260,6 @@ rm metadata.text</code></pre>
                         <hr>
                     
                     <p style="margin-left: 0px;">编注：本文是「放轻松」征文活动的入围文章。本文仅代表作者本人观点，少数派对标题和排版略作调整。</p><p style="margin-left: 0px;">想了解如何参与本次征文、赢取奖品，可以 <a href="https://sspai.com/post/84979" target="_blank">点此查看</a> 活动规则。</p><hr /><h2>前言</h2><p>活着容易，但生活并不容易。</p><p>看到征文标题的时候，愈发感觉「如何生活」已经成了当下一大重要问题，而近些年来，「精神内耗」逐渐成了一个热词，越来越多的人用这个词汇来形容自己正处在一种慢性精神痛苦的状态，伴随着焦虑，疲惫和忧虑等情绪。就像是一块漏电的电池，即便是静静地躺在原地，也已经耗尽了全部的气力。</p><p>回顾平日的生活，像我这样的庸庸碌碌之辈亦有不大不小的烦恼。未来规划、自我价值、情绪拉扯、人际关系，这些生活中的油盐酱醋茶有时也会让人觉得疲于应对。尽管如此，生活仍要继续，如何放松自己也是一件「正事」。</p><p>虽然我的人生阅历并不是那么丰富，但在与生活拉扯的过程中，也逐渐获得了一些值得分享的心得与体会，希望这些心得和体会能为有所焦虑的朋友提供一些舒缓身心的思路。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/07/35d9bdda7d2e4a8beba2699895693862.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2><strong>不要拒绝悲伤，要</strong>允许自己悲伤</h2><p>我觉得允许自己悲伤是一种很重要的能力，随着年岁的增长，能让自己流泪的事情已经越来越少了，这并不是因为我们的内心已经变得坚不可摧，而是不再允许自己的悲伤。</p><p>我们将情绪深埋在内心的角落，或者忍耐和压抑它，或者放大积极的情绪，并让自己忙碌起来，希望这样能消磨掉那些「压力时光」。但实际上，压力和焦虑所带来的「悲伤」是无法被选择的，让理智来对抗它，很多时候是一种变相的逃避。</p><blockquote><p>一个人之所以患上抑郁症，往往不是因为过度悲伤，而恰恰是拒绝了悲伤。——维雷娜卡斯特《体验悲哀》<sup class="ss-footnote" href="" title="本书的中文译版本阅读体验不佳，推荐看原文">1</sup></p></blockquote><p>很多时候，社会对一个人成长的要求往往是无上限的，不能有太多的愤怒，不能有太多的消沉，直到「不以物喜，不以己悲」的境界，但人非圣贤，肉长的心又怎能不在意得失？</p><p>古往今来，物我两忘，宠辱不惊者，唯有书上的先贤智者，凡夫俗子对自己的要求大可以放宽一些，既然开心的时候可以开怀大笑，那悲伤的时候为何不能真切的为自己流一些泪呢？哪怕是那么几滴，在学会隐忍的同时，也不要麻木自己的真心。</p><h2>追逐快乐而不得者，皆反求诸己</h2><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/07/6ecc3f542d3c107af80a422a9a1e6a8d.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不知不觉中，追逐快乐，将其视为生活的终极目标，已经成了一种生活的常态。</p><p>上大学之前，我总是觉得放纵就会给我带来快乐，放纵体现在很多地方，暴饮暴食、报复性的熬夜、长时间的刷短视频等等。</p><p>但在上了大学，不再有严格的管束之后，我慢慢发现，过去的放纵并没有真正满足我的内心需求。这让我思考，为什么放纵行为会带来短暂的快感却无法持久？</p><p style="margin-left: 0px;">人的内心是复杂而神秘的。不可否认的是，对于精神高度紧绷的学生来说，这些放纵是一种难得的奢侈，同时也带来了极高的即时满足感。然而，无节制的放纵只是一种深渊，它会不断将人往下拉，每次需要更高的刺激阈值。很显然，这并非是快乐，而是一种逃避痛苦的手段，而痛苦本身并没有消失，只是以更加剧烈的方式在某个时刻出现。</p><p style="margin-left: 0px;">这种放纵行为在某种程度上是对束缚的一种反抗，一种寻找自由的尝试。但当我们不再将生活的某一具体状态（上学、上班）视为一场对抗时，放纵所带来的背德感和刺激感也逐渐消失，取而代之的是一种空虚感。放纵行为并不能满足我们更深层次的心灵需求，它只是一种逃避现实的方式，并不能带来真正的满足和内心的平静。</p><p>而在我失去这种方便的手段后，我发现自己越来越难以获得快乐。</p><blockquote><p style="margin-left: 0px; text-align: justify;">孟子曰：「爱人不亲反其仁，治人不治反其智，礼人不答反其敬。行有不得者，皆反求诸己，其身正而天下归之。诗云『永言配命，自求多福。』」</p><p style="margin-left: 0px; text-align: right;">——《离娄上》</p></blockquote><p>孟子所言的「行有不得者，皆反求诸己」，用在过去我对快乐的求而不得实在是太贴切不过。</p><blockquote><p>这里的「反」，不是现代意义上的「违反」，而是「回返」。在中国古典思想里，一个人做的任何事情，其结果其原因，都要回返落实到自己身上。从结果的角度，一个人所做的事情最终要作用于自身，且用自身去衡量，所谓「己所不欲，勿施于人」 ；从原因的角度，当这个事情遭遇困境的时候，也首先回返到自身去找原因，即「反求诸己」。——张定浩 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p></blockquote><p>当我们思考如何获得快乐时，我们需要反思自己的内心需求和价值观。</p><p>快乐和满足感更多地来自于真实的、有深度的体验，而不是简单的逃避或反叛。快乐不应该是我们追逐的终点，而应该是我们行动的动机和起点。</p><p>而我们自身以及周遭的文化氛围执着于通过「努力」来追逐快乐，陷入追求快乐的急躁态度，不断努力追逐，却往往难以获得持久的满足。这是否是一种「欲速则不达」呢？</p><p>另一方面，过分的社会比较也成为快乐消失的根源之一。我们逐渐从享受快乐转变为需要比别人更快乐的残酷竞争中。这种社会比较的快乐逐渐被外在的衡量指标所取代，无论是金钱、名利，或是一个圈子中的地位和鄙视链。为了获得源源不断的快乐，我们不断追逐、奔波和挖掘，然而这种追逐始终难以带来持久的满足，因为它并非快乐本身。</p><p>当我们感到追逐快乐的过程变得疲惫和无望时，或许是时候停下来反思。我们可以通过回归内心、审视自己的需求和价值观，来寻找真正的快乐和满足。</p><p>像是培养内心的平静和满足，关注内在的成长和发展，建立更有意义的人际关系，追求与自己的价值观一致的事业和生活目标这样的话题或许有些过于泛泛而谈，不如问一问自己。</p><blockquote><p>这样的行为是让你快乐，还是带来的更长久的疲惫？</p></blockquote><p>在问这个问题和寻找答案的过程中，我们需要学会放下过度追求快乐的心态，而是将快乐视为内心的状态和流动的能量。</p><p>不要追逐快乐，而是寻找真正的满足。通过反求诸己，深入探索内心的需求和价值观，建立起更持久、更有意义的快乐和满足。摆脱过度的社会比较，将注意力集中在自己内心的真意上，当我们能够在内心深处找到平静、满足和喜悦时，快乐也就不是那么遥不可及了。</p><h2>通过阅读，建立辨识复杂情感的能力</h2><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/07/c68ddee96a45cd51de76d8738a9759db.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果说前两点是一种解题的思路和角度，那么建立辨识复杂情感的能力是这一切的根基。如果一个人没有建立起辨识复杂情感的能力，他就不会拥有高质量的情感。好比是失去味觉的舌头，没有知觉的四肢，虽是对生活的苦辣酸咸如铜墙铁壁般游刃有余，但也永远无法知道何为真切的快乐，这样的状况下，我们是很容易陷入晦暗的生活之中，日复一日的机械般徘徊。</p><p>而对于情感的教育，坦白的讲，在我们的生活里一直是缺失的，至少对我来说，从小到大从来没有人、没有课程会来教育我如何辨识情感，而在长期的情感教育缺失的情况下，人会变得冷而麻木。</p><p>另一方面，人们接收到越来越多倾向于「快餐式」的情感表达，这也会潜移默化地降低辨识复杂情感的能力，例如近些年来影视作品、文学作品中表面化的情绪反应，唐突的冲突和解决。</p><p>关于如何建立辨识复杂情感的能力，我觉得写作和阅读就是一个很好的方式。通过深入阅读，我们可以理解语言的物质性、历史性和时间感，重新思考文字背后的意义。阅读陌生的文字，思考其背后的含义，是对心灵的一种锻炼。如果说有哪一种文章是最能锻炼这一点的，散文绝对是当仁不让的。</p><blockquote><p>散文是情感的结晶。</p></blockquote><p>七八年前看不懂这句话，随着年岁的增长，其中的含义也逐渐显现。</p><p>如果说小说的目的是征服这个世界，用「虚构」来实践意志，而散文则是在这个已经无法改变的现实中，在一些「意难平」的角落处，开凿出一片心灵的栖息地。</p><blockquote><p>文章意境的来源，不只需要我们淬炼高质量的情感，还需要我们更深沉地理解人生、理解命运，并对心理现象有意识地搜集裁剪。这考验着写作者在写作散文之外，在日常生活中，是否有足以发现最具「心灵光彩」的生活片段的能力，有撷取人情中最难言说、言说不尽的困境的锐利，及将他们组合成连续不断、起伏变化的文学语言的耐心。——张怡微</p></blockquote><p>我们的教育，一直在强调，文字对于「知识」传递的重要性，但文字最开始用途，其实是对情感，对心灵的记录。而阅读散文，其实是在品味他人的情感碎片，物质性的文字构建出美学世界，对于其中意境的感触，不仅能拓宽自己对情感世界的认知，也有助于我们发现过去不曾感知的周遭的一切。</p><p>当然，即便是一时半会无法读进某一篇散文，也不必强求，散文本身也在选择着读者。如世故之地，年少者未能踏足；私密之所，他者莫能窥其内；娟秀玲珑之所，心怀壮阔者亦未能得其所。</p><p>阅读散文，是一件需要坚持的事情，从最初的语焉不详，到有所触动，必定需要经过漫长的路程。散文本身就带有一定的与性别、年龄、社会经验相关联的属性，以及一些身份或经历的共鸣。好比是辛弃疾的诗文，人生初得意的时候，哪能理解其中滋味。</p><blockquote><p>少年不识愁滋味，爱上层楼。爱上层楼，为赋新词强说愁。</p></blockquote><p>同样一篇文章，孩童时候的阅读和几十年之后的阅读，心境是完全不同的，这也是散文的魅力所在。更重要的是，通过阅读的深度体验和情感投入，来培养我们辨识复杂情感的能力，感受当下和心流状态，从而更好地应对内心的变化和生活的挑战。</p><h2>关于真我的思考</h2><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/07/98ca7127d25e71b49f9dac435d09b11e.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在前文中，我们探讨了情感的流动性和对自身情感的认可的重要性，以及如何建立这样的能力，而这最后的板块，我想留给关于自我的探讨。</p><p>有很长一段时间里，我觉得自己陷入了一个怪圈，一个扮演着「自我」的人，尤其是在熟悉的人面前。这似乎听起来有些奇怪，但这是我真切的体验，就好比一个时常逆来顺受的人，不会突然变得倔强无比，他应该逆来顺受。</p><p>每当进入一个社交情景之中，我觉得自己就像是漂浮在水上的浮萍，时常是无根可依的，挣扎在扮演不同的角色之间。但是生活不同于文字冒险游戏，选项总是错综复杂而又没有一个标准的答案，想从多端取其平衡，但却总显得不伦不类。其结果便是在背离的、汇合的和平行的网中，把握不住真切的自我。</p><p>而在疫情这段时间里，我几乎失去了所有线下的社交，也正是这段时间，让我重新思考了自己平时的行为模式，以及我为什么会扮演一个「自我」的角色。一个人在独处的时候，总是能找到一些纾解焦虑的媒介和手段，这或许可以作为群体生活的一种歇息，但仅靠这些，是没法淬炼出直面焦虑的力量和勇气的。</p><p>思考良久之后，我觉得这种状态有别于「忍耐」，也不是一种「妥协」，而是一种内心的迷失。我想，扮演「自我」，或许的确包含了真我的一些外壳，但更多的是因为，这样的扮演像一种安全的逃避，让人不用去忍受尖锐的质疑，也变得更为合群。</p><p>20 年的时候，偶然读到一本小说，由萨莉·鲁尼撰写的<strong>《正常人》</strong>，一本有关于年轻人成长的故事，小说的内容在此不做赘述，但从中获得一些感触我觉得是十分值得分享的。</p><figure class="image ss-img-wrapper image_resized" style="width: 259px;"><img src="https://cdn.sspai.com/2024/01/07/4267e9e068f989910a0ff1eaf5c62be2.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>人要遵从自己的内心和本性去做一件看起来很正常的事，代价是很大的，更进一步来讲，当代社会虽然推崇人应有个性和色彩，但又不自觉的暗示着从众才是安全的道理。</p><blockquote><p style="margin-left: 0px;">与其做好人，我宁愿做一个完整的人。——荣格</p></blockquote><p>如何寻找真我，我给不出太好的方法，因为我既没有专门练习过冥想，也没有接受过正规的心理学培训。</p><p>但有一点，我觉得是每个人都能够去做的，并且行之有效的，那便是挖掘自己的兴趣和热情，培养一个可以持之以恒的爱好。爱好除了给人带来内心的充实和满足之外，也逐渐成为了重新连接真实自我的桥梁。</p><p>以我自己为例，我大概是在 13 年、14 年接触到机械键盘这个概念，随后便一发不可收拾地玩上了机械键盘，而这个长久而又有些小众的爱好也让我不断明确自我的存在。那么，如何进一步挖掘和拓展这份爱好，下面是我的一些经验和总结。</p><h3>创造属于自己的空间</h3><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/06/cd3cb469533b2cf011341c7ba119d72c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>从早期玩按斤卖的剪线键盘（多为台产），到如今的团购套件，我认为玩键盘最有意思的环节就是组装和调试，而在这个过程中，进入到一个专注于自己兴趣的空间是一件非常重要的事。</p><p>一个独立的空间，一张桌子，良好的灯光和舒适的椅子，这可以是一个书房、工作室或办公桌。随后就是收集适合的工具和材料，将你的个性和兴趣融入这方小天地中。如果你热爱的是某一项运动，那就寻找一片合适的场地，一条合适的线路，运动过程本身就是最好的空间。</p><p>当然，最为重要的还是要留出属于自己的时间，这对于越来越忙碌的人生可能有些奢侈，但这些用在爱好的上的时间，绝对称不上浪费。</p><p>这样的空间也有利于我们去深入体验当下，减缓你的节奏，尽可能将你的注意力集中在当前所做的事情上，心无旁骛的时候往往能更深刻地感受到自己的存在。例如看书时，书页和指尖的摩擦，骑车时，风刮过脸颊，汗珠从发丝上滴落。</p><h3>参加相关的社群与活动</h3><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/07/6aa992bb6a68f6ec11a457314e52113e.JPG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果说创造属于自己的空间是一种内循环式的塑形，那么以爱好为圆心的社交则是一种外循环式的填充。这就像是汽车空调的两个通风设置，内循环和外循环，内循环虽能快速控温，但时间长久了氧气含量下降，容易让人感到燥热、疲劳焦虑。</p><p>通过玩键盘而结识的朋友，虽然数量不多，但却是真诚而有趣的。这样的社交也有别于为了迎合他人或满足社交期望而做出牺牲的社交，少一些功利，多一些纯粹，保持真实的自己，与志同道合的人分享和交流，对爱好进行持续的学习，并保持对成长的渴望。</p><p>最重要的一点，保持一些纯粹。不要被外界的功利和虚荣所左右，不要为了迎合他人的期望而改变自己的兴趣，也不要为了攀比和虚荣而追求所谓的「大佬」地位。</p><p>要让自己的爱好成为内心的滋养和快乐的源泉，而非一种负担。</p><h2>结语</h2><p>在 24 年的开头，回顾 2023，生活的压力其实并没有减小。我觉得焦虑是无法避免的，一个人如果一直保持着轻快的精神，也许是因为他没有对精神土壤深处进行耕耘，亦或者他真的很幸运，或是不幸。</p><p>二十多岁的年纪，按理说，这正是人生正无穷无尽向自己展开的年岁，但我觉得这大概率是一种错觉。人生多歧，不会有所谓具体的航向，迷茫时常是我内心现实的硬质的照影。但其实，人活着大可不必那么刻板，那么细致。</p><p>看到征文标题的时候，我突然想起了去年年初写过的征文《<a href="https://sspai.com/post/77767">2022 年，重新找回生活感的一些经验和分享</a>》。</p><p>回看这篇文章，内心是有些感慨的，在文章结尾，我写道：</p><blockquote><p>疫情之后我时常在想，如果我原来的生活是向前奔跑，那现在的状态是什么？如果说精彩成功的生活是气鼓鼓的轮胎，那可能我原本就是稍微有点破旧的轮胎，疫情给轮胎扎出一条隐匿的裂缝，让我的意志力，让生活本身的意义慢慢地流失掉，最终留下的是空瘪的躯壳，无法再承载我的人生向前滚动。但值得欣慰的是，不管路面有多坎坷，在 2022 年我的生活开始继续向前滚动。</p></blockquote><p>有些许焦虑，也是没关系的。希望新的一年，也能继续这种向前滚动，富有张力的生活。</p><p style="margin-left: 0px;"><strong>🎁 评论有奖：</strong>「<a href="https://sspai.com/post/84979" target="_blank">放轻松」征文活动</a> 入围文章中的优秀评论，同样有机会获得罐头冥想 &nbsp;App &nbsp;3 个月兑换码或付费栏目通用优惠券，欢迎大家踊跃参与留言讨论。</p><p style="margin-left: 0px;">&gt; 下载少数派 <a href="https://sspai.com/page/client">客户端</a>、关注 <a href="https://sspai.com/link?target=https%3A%2F%2Fwww.xiaohongshu.com%2Fuser%2Fprofile%2F63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的<a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/85729</id>
-            <title>派早报：荣耀发布 MagicOS 8.0、播客工具 Castro 恢复运营等</title>
-            <link>https://sspai.com/post/85729</link>
-            <guid isPermaLink="false">https://sspai.com/post/85729</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 11 Jan 2024 00:42:58 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 荣耀, MagicOS 8.0, AI, Magic6
-<br>
-<br>
-总结: 荣耀公司发布了MagicOS 8.0操作系统，该系统将AI技术融入人机交互，通过学习和感知用户行为和使用习惯，提供更智慧的人性化服务。Magic6系列手机将成为首批搭载MagicOS 8.0的产品。 </div>
-                        <hr>
-                    
-                    <h2>你可能错过的新鲜事</h2><h3>荣耀发布 MagicOS 8.0</h3><p>1 月 10 日，荣耀公司召开发布会，推出了 MagicOS 8.0 操作系统。MagicOS 8.0 将 AI 融入系统人机交互，内置了荣耀自研的 70 亿参数级大模型，AI 算法将会学习和感知用户行为及使用习惯，给出更为智慧的人性化服务。即将发布的 Magic6 系列手机将成为首发搭载 MagicOS 8.0 的产品。<a href="https://weibo.com/5067607858/NBbBABZ1w">来源</a></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/11/article/fd55947640deb007239f0246e8b0adcc?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>MagicOS 8.0 宣传海报，图片来自荣耀</figcaption></figure><h3>ALIENWARE 发布多款新品</h3><p>1 月 10 日，ALIENWARE 品牌在 CES 上推出了多款新品，其中包含 ALIENWARE m16 R2、ALIENWARE m18 R2 、ALIENWARE x16 R2 游戏笔记本、ALIENWARE QD-OLED 31.5 英寸 4K 及 26.5 英寸 360Hz 游戏显示器、ALIENWARE PRO 无线游戏鼠标及无线键盘等。</p><p>其中，ALIENWARE m16 搭载酷睿 Ultra H 系列处理器和 NVIDIA GeForce RTX 40 系列显卡，采用 QHD 240Hz 显示屏；ALIENWARE m18 搭载英特尔酷睿 i9-14900HX 处理器，可选 NVIDIA GeForce RTX 4090 显卡；ALIENWARE x16 R2 搭载英特尔酷睿 Ultra 处理器，最高可选 NVIDIA GeForce RTX 4090 显卡。<a href="https://www.gcores.com/articles/176107">来源</a></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/11/article/44cd0df45855521fc3aace73d63a4d29?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>ALIENWARE x16 R2 产品外观图，图片来自新闻源</figcaption></figure><h3>极氪推出 2024 款极氪 X</h3><p>1 月 10 日，新能源汽车品牌极氪推出了 2024 款极氪 X，该车为 SUV 车型，分为四座和五座版本，电池容量为 66kWh，五座后驱版 CLTC 续航成绩为 512km，0⁠–100km/h 加速时间为 3.7 秒。四座及五座版售价均为 20 万元起。<a href="https://weibo.com/7576049404/NBa4QgkPg">来源</a></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/11/article/00de7a1e8366929da8c2a27a0b775db1?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>产品外观图，图片来自新闻源</figcaption></figure><h3><strong>Google 将与三星合并「快速分享」方案</strong></h3><p>Google 公司在 CES 2024 上宣布，将与三星公司合作，把双方的 Android 文件互传解决方案合并为一个以 Quick Share（快速共享）命名的跨设备解决方案。这一新产品扩大了用户可以在包括 Chromebook 在内的整个 Android 生态系统中共享内容的设备网络。用户只需要轻点新的快速共享图标，就能看到附近可用设备的列表，可以在手机设置中选择谁可以发现设备并发送文件。</p><p>Google 表示，他们还在与 LG 等 PC 制造商合作，将 Quick Share 作为预装应用扩展到 Windows PC。同时「快速分享」功能将于下月开始向当前支持「附近共享」功能的设备推出。<a href="https://blog.google/products/android/ces-2024-android-updates/">来源</a></p><h3>播客工具 Castro 恢复运营</h3><p>1 月 10 日，播客工具 Castro 的客户端及网站均恢复运营。Castro 此前因 DNS 和数据库故障而长时间宕机，引发了 Castro 即将停止服务的猜测。Castro 方面否认了相关传闻，但承认近期正在寻找新的收购方，且有部分员工离职。<a href="https://www.theverge.com/2024/1/7/24028955/castro-podcast-player-shut-down-rumor-ios-app">来源</a></p><h3>Steam 更新针对 AI 生成内容的政策</h3><p>1 月 10 日，Steam 游戏平台发布公告，更新了关于 AI 内容的政策。根据 Steam 的新规则，开发者如果在自己的游戏作品里使用了 AI 生成的内容，上传和发布时需要做相关声明。Steam 将 AI 内容分为「预生成」和「实时生成」两类，玩家在购买游戏时需要明确知道游戏的制作过程是否使用了 AI。平台还将开放玩家投诉通道，避免 AI 生成违法内容。<a href="https://steamcommunity.com/groups/steamworks/announcements/detail/3862463747997849619">来源</a></p><h2><strong>看看就行的小道消息</strong></h2><ul><li>Windows 爱好者 @PhantomOcean3 近日从 Windows 最新记事本测试版中发现，新版本中附带了一个名为 CoWriter 的菜单，其中包含对内容进行重写、变短、变长、更改语气、更改格式等功能，意味着记事本或将引入Windows Copilot。相关的配置文件还显示，CoWriter 功能会和 Bing 图像创建者一样会消耗相应的积分，用户的积分每日自动重置，当日积分用完后将无法再继续使用。<a href="https://www.theverge.com/2024/1/9/24032117/microsoft-windows-notepad-generative-ai-option">来源</a></li></ul><h2>少数派的近期动态</h2><ul><li>在<a href="https://sspai.com/page/beeper-power">少数派·特洛克 | BB 机移动电源</a>正式发售后，大家提到最多的意见就是「如果短语可以自定义就好了」，虽然受制于技术限制，我们无法开放完全的自定义功能，但通过与厂家沟通，可以实现通过 OTA 后期更新一批新的预设短语。如果你有想说的话，欢迎向我们提议。一经采用，我们会送上一枚 BB 机纪念徽章作为奖品。<a href="https://sspai.com/post/85545"><strong>评论参与</strong></a></li></ul><h2>你可能错过的好文章</h2><ul><li><a href="https://sspai.com/post/85655">定格影像记忆，我们给心中的 2023「年度最佳」颁了奖</a></li><li><a href="https://sspai.com/post/85675">播客 | 开一家自己的出版社，再出一本自己写的书</a></li><li><a href="https://sspai.com/post/85171">Heptabase：重塑知识管理与学习的未来</a></li></ul><p>&gt; 关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>
