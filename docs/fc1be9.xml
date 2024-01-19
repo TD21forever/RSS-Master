@@ -5,6 +5,146 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1748184369976713484#m</id>
+            <title>RT by @op7418: 谷歌推出了用于用于增强大语言模型的选择性预测框架 ASPIRE。
+
+这个预测框架可以在 LLM 输出的时候给出一个可靠性评分，让用户更好的判断 LLM 输出内容的可靠性。
+
+选择性预测会让大语言模型在给出答案的同时，提供一个选择性得分，用以表示答案正确的可能性。
+
+训练方式：
+ASPIRE 的工作方式是对大语言模型进行针对性的微调，使其更擅长于问题回答任务，并训练模型自行评估其生成答案的正确性。该框架包括三个阶段：特定任务的调优、答案采样和自我评估学习（self-evaluation learning）。在特定任务调优阶段，ASPIRE 对预先训练好的大语言模型进行微调，以提升其预测表现。答案采样阶段则是针对每个训练问题生成多种答案，进而构建自我评估学习的数据集。到了自我评估学习阶段，ASPIRE 引入可调整参数，并对这些参数进行微调，以培养模型的自我评估能力。
+
+结论：
+ASPIRE 的出现标志着大语言模型领域的一次变革，它强调了模型容量并非其性能的唯一决定因素。实际上，通过策略性的调整，即便是小型模型也能实现更精确、更有信心的预测，从而显著提升模型的有效性。
+
+内容来源：https://blog.research.google/2024/01/introducing-aspire-for-selective.html</title>
+            <link>https://nitter.cz/op7418/status/1748184369976713484#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1748184369976713484#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 19 Jan 2024 03:23:28 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>谷歌推出了用于用于增强大语言模型的选择性预测框架 ASPIRE。<br />
+<br />
+这个预测框架可以在 LLM 输出的时候给出一个可靠性评分，让用户更好的判断 LLM 输出内容的可靠性。<br />
+<br />
+选择性预测会让大语言模型在给出答案的同时，提供一个选择性得分，用以表示答案正确的可能性。<br />
+<br />
+训练方式：<br />
+ASPIRE 的工作方式是对大语言模型进行针对性的微调，使其更擅长于问题回答任务，并训练模型自行评估其生成答案的正确性。该框架包括三个阶段：特定任务的调优、答案采样和自我评估学习（self-evaluation learning）。在特定任务调优阶段，ASPIRE 对预先训练好的大语言模型进行微调，以提升其预测表现。答案采样阶段则是针对每个训练问题生成多种答案，进而构建自我评估学习的数据集。到了自我评估学习阶段，ASPIRE 引入可调整参数，并对这些参数进行微调，以培养模型的自我评估能力。<br />
+<br />
+结论：<br />
+ASPIRE 的出现标志着大语言模型领域的一次变革，它强调了模型容量并非其性能的唯一决定因素。实际上，通过策略性的调整，即便是小型模型也能实现更精确、更有信心的预测，从而显著提升模型的有效性。<br />
+<br />
+内容来源：<a href="https://blog.research.google/2024/01/introducing-aspire-for-selective.html">blog.research.google/2024/01…</a></p>
+<video loop="loop" poster="https://nitter.cz/pic/enc/dHdlZXRfdmlkZW9fdGh1bWIvR0VMTVNneGE4QUFSdXNLLmpwZw==">
+  <source src="https://nitter.cz/pic/enc/dmlkZW8udHdpbWcuY29tL3R3ZWV0X3ZpZGVvL0dFTE1TZ3hhOEFBUnVzSy5tcDQ=" type="video/mp4" /></video>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1748189182307303606#m</id>
+            <title>RT by @op7418: 小扎刚发言完，Meta 就出王炸？推出了可以进行自我奖励的 LLM。
+简单来说就是语言模型可以自我判断模型质量，从而实现一定程度上的自我进化。
+
+使用这个方法微调的 Llama 2 70B 模型，优于 AlpacaEval 2.0 排行榜上的Claude 2、Gemini Pro 和 GPT-4 0613等模型。
+
+实现方式：
+
+自奖励语言模型，这类智能体具备双重功能：一方面（i）它们能够作为遵循指令的模型，针对给定的提示生成回应；另一方面（ii）它们还能创造并评估新的指令遵循示例，并将这些示例加入到自己的训练集中。
+
+我们采用了与 Xu 等人（2023年）最近提出的类似的迭代式动态评价优化（Iterative DPO）框架来训练这些模型。从一个基础模型出发，在每一轮迭代中，模型都会经历一个自我指令生成的过程，在这个过程中，模型针对新创造的提示生成候选回应，并由模型自身对这些回应进行奖励评分。
+
+这个评分过程是通过让大语言模型扮演评判员（LLM-as-a-Judge）的方式来实现的，这本身也是一种遵循指令的任务。然后，根据这些生成的数据构建一个偏好数据集，并利用动态评价优化方法来训练下一轮的模型。
+
+论文地址：https://arxiv.org/html/2401.10020v1</title>
+            <link>https://nitter.cz/op7418/status/1748189182307303606#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1748189182307303606#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 19 Jan 2024 03:42:35 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>小扎刚发言完，Meta 就出王炸？推出了可以进行自我奖励的 LLM。<br />
+简单来说就是语言模型可以自我判断模型质量，从而实现一定程度上的自我进化。<br />
+<br />
+使用这个方法微调的 Llama 2 70B 模型，优于 AlpacaEval 2.0 排行榜上的Claude 2、Gemini Pro 和 GPT-4 0613等模型。<br />
+<br />
+实现方式：<br />
+<br />
+自奖励语言模型，这类智能体具备双重功能：一方面（i）它们能够作为遵循指令的模型，针对给定的提示生成回应；另一方面（ii）它们还能创造并评估新的指令遵循示例，并将这些示例加入到自己的训练集中。<br />
+<br />
+我们采用了与 Xu 等人（2023年）最近提出的类似的迭代式动态评价优化（Iterative DPO）框架来训练这些模型。从一个基础模型出发，在每一轮迭代中，模型都会经历一个自我指令生成的过程，在这个过程中，模型针对新创造的提示生成候选回应，并由模型自身对这些回应进行奖励评分。<br />
+<br />
+这个评分过程是通过让大语言模型扮演评判员（LLM-as-a-Judge）的方式来实现的，这本身也是一种遵循指令的任务。然后，根据这些生成的数据构建一个偏好数据集，并利用动态评价优化方法来训练下一轮的模型。<br />
+<br />
+论文地址：<a href="https://arxiv.org/html/2401.10020v1">arxiv.org/html/2401.10020v1</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VMUXhvNGFJQUFrS05FLnBuZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1748191803965378723#m</id>
+            <title>RT by @op7418: 另一个 ComfyUI 上的AnimateAnyone实现，看起来比其他的稳定一些，面部崩的不是很厉害。
+
+也是基于摩尔线程的AnimateAnyone方案，不过这个的文档写的非常详细，而且提供了不同采样器的效果预览。
+
+项目地址：https://github.com/MrForExample/ComfyUI-AnimateAnyone-Evolved</title>
+            <link>https://nitter.cz/op7418/status/1748191803965378723#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1748191803965378723#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 19 Jan 2024 03:53:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>另一个 ComfyUI 上的AnimateAnyone实现，看起来比其他的稳定一些，面部崩的不是很厉害。<br />
+<br />
+也是基于摩尔线程的AnimateAnyone方案，不过这个的文档写的非常详细，而且提供了不同采样器的效果预览。<br />
+<br />
+项目地址：<a href="https://github.com/MrForExample/ComfyUI-AnimateAnyone-Evolved">github.com/MrForExample/Comf…</a></p>
+<p><a href="https://nitter.cz/MrForExample/status/1748080976104734858#m">nitter.cz/MrForExample/status/1748080976104734858#m</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDgxOTE3NzM1NDQwMzAyMDgvcHUvaW1nL3JmVVR0Q3dwa3lwNEtXaVUuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1748180416840995281#m</id>
+            <title>RT by @op7418: 刚发现摩尔线程前几天复原了阿里的单图跳舞项目并且已经开源训练代码，你可以训练自己的AnimateAnyone模型。
+有个基于摩尔线程开源的版本制作了 ComfyUI 节点，并且提供了基础的工作流。
+现在可以在ComfyUI中非常简单的让单图跳舞了。
+
+节点地址：https://github.com/chaojie/ComfyUI-Moore-AnimateAnyone?tab=readme-ov-file</title>
+            <link>https://nitter.cz/op7418/status/1748180416840995281#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1748180416840995281#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 19 Jan 2024 03:07:45 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>刚发现摩尔线程前几天复原了阿里的单图跳舞项目并且已经开源训练代码，你可以训练自己的AnimateAnyone模型。<br />
+有个基于摩尔线程开源的版本制作了 ComfyUI 节点，并且提供了基础的工作流。<br />
+现在可以在ComfyUI中非常简单的让单图跳舞了。<br />
+<br />
+节点地址：<a href="https://github.com/chaojie/ComfyUI-Moore-AnimateAnyone?tab=readme-ov-file">github.com/chaojie/ComfyUI-M…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VMSHlmZWIwQUF3TmNlLnBuZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1748293897237991794#m</id>
             <title>帮快手的朋友招两个设计，主要在探索UI 和运营设计的自动生成，需要在 AIGC 领域有过设计实践，懂 SD，有前端能力更好。
 邮件标题或者备注可以加上在歸藏这里看到的。
@@ -136,7 +276,7 @@ a note that reads "The only secret to growing on X is putting out good content a
                 <![CDATA[
                     
                     <p>补一个摩尔线程的项目地址：<a href="https://github.com/MooreThreads/Moore-AnimateAnyone">github.com/MooreThreads/Moor…</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTc0NTc3ODEyODE2NzgyNTQwOS9JbzVSM1lRMj9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTc0ODMxNDg4MDQ1NTcyMDk2MC9QbkdZSkVtMT9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
                 ]]>
             </content:encoded>
         </item>
@@ -157,33 +297,6 @@ a note that reads "The only secret to growing on X is putting out good content a
                     <p>今天无意间刷到《恋与深空》的宣传片，才发现女性向游戏已经做到这种地步了，NPC的表情动作和配音都非常自然生动。<br />
 场景也非常漂亮，麻了，男性向没有这么高质量的恋爱游戏啊。</p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDgwMTE4MjAzNDkzNzQ0NjQvcHUvaW1nL2Q5LVo2VkNSc0Izc0dyUnUuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1748191803965378723#m</id>
-            <title>另一个 ComfyUI 上的AnimateAnyone实现，看起来比其他的稳定一些，面部崩的不是很厉害。
-
-也是基于摩尔线程的AnimateAnyone方案，不过这个的文档写的非常详细，而且提供了不同采样器的效果预览。
-
-项目地址：https://github.com/MrForExample/ComfyUI-AnimateAnyone-Evolved</title>
-            <link>https://nitter.cz/op7418/status/1748191803965378723#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1748191803965378723#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 19 Jan 2024 03:53:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>另一个 ComfyUI 上的AnimateAnyone实现，看起来比其他的稳定一些，面部崩的不是很厉害。<br />
-<br />
-也是基于摩尔线程的AnimateAnyone方案，不过这个的文档写的非常详细，而且提供了不同采样器的效果预览。<br />
-<br />
-项目地址：<a href="https://github.com/MrForExample/ComfyUI-AnimateAnyone-Evolved">github.com/MrForExample/Comf…</a></p>
-<p><a href="https://nitter.cz/MrForExample/status/1748080976104734858#m">nitter.cz/MrForExample/status/1748080976104734858#m</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDgxOTE3NzM1NDQwMzAyMDgvcHUvaW1nL3JmVVR0Q3dwa3lwNEtXaVUuanBn" />
                 ]]>
             </content:encoded>
         </item>
@@ -250,50 +363,6 @@ a note that reads "The only secret to growing on X is putting out good content a
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1748189182307303606#m</id>
-            <title>小扎刚发言完，Meta 就出王炸？推出了可以进行自我奖励的 LLM。
-简单来说就是语言模型可以自我判断模型质量，从而实现一定程度上的自我进化。
-
-使用这个方法微调的 Llama 2 70B 模型，优于 AlpacaEval 2.0 排行榜上的Claude 2、Gemini Pro 和 GPT-4 0613等模型。
-
-实现方式：
-
-自奖励语言模型，这类智能体具备双重功能：一方面（i）它们能够作为遵循指令的模型，针对给定的提示生成回应；另一方面（ii）它们还能创造并评估新的指令遵循示例，并将这些示例加入到自己的训练集中。
-
-我们采用了与 Xu 等人（2023年）最近提出的类似的迭代式动态评价优化（Iterative DPO）框架来训练这些模型。从一个基础模型出发，在每一轮迭代中，模型都会经历一个自我指令生成的过程，在这个过程中，模型针对新创造的提示生成候选回应，并由模型自身对这些回应进行奖励评分。
-
-这个评分过程是通过让大语言模型扮演评判员（LLM-as-a-Judge）的方式来实现的，这本身也是一种遵循指令的任务。然后，根据这些生成的数据构建一个偏好数据集，并利用动态评价优化方法来训练下一轮的模型。
-
-论文地址：https://arxiv.org/html/2401.10020v1</title>
-            <link>https://nitter.cz/op7418/status/1748189182307303606#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1748189182307303606#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 19 Jan 2024 03:42:35 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>小扎刚发言完，Meta 就出王炸？推出了可以进行自我奖励的 LLM。<br />
-简单来说就是语言模型可以自我判断模型质量，从而实现一定程度上的自我进化。<br />
-<br />
-使用这个方法微调的 Llama 2 70B 模型，优于 AlpacaEval 2.0 排行榜上的Claude 2、Gemini Pro 和 GPT-4 0613等模型。<br />
-<br />
-实现方式：<br />
-<br />
-自奖励语言模型，这类智能体具备双重功能：一方面（i）它们能够作为遵循指令的模型，针对给定的提示生成回应；另一方面（ii）它们还能创造并评估新的指令遵循示例，并将这些示例加入到自己的训练集中。<br />
-<br />
-我们采用了与 Xu 等人（2023年）最近提出的类似的迭代式动态评价优化（Iterative DPO）框架来训练这些模型。从一个基础模型出发，在每一轮迭代中，模型都会经历一个自我指令生成的过程，在这个过程中，模型针对新创造的提示生成候选回应，并由模型自身对这些回应进行奖励评分。<br />
-<br />
-这个评分过程是通过让大语言模型扮演评判员（LLM-as-a-Judge）的方式来实现的，这本身也是一种遵循指令的任务。然后，根据这些生成的数据构建一个偏好数据集，并利用动态评价优化方法来训练下一轮的模型。<br />
-<br />
-论文地址：<a href="https://arxiv.org/html/2401.10020v1">arxiv.org/html/2401.10020v1</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VMUXhvNGFJQUFrS05FLnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://nitter.cz/op7418/status/1748185756211028086#m</id>
             <title>前几天微软DragNUWA的一个应用，用非常简陋的 3D 白模控制视频生成中内容的运动方向和速度。
 
@@ -311,75 +380,6 @@ a note that reads "The only secret to growing on X is putting out good content a
 <br />
 生成的视频看起来非常稳定，一个非常好的取巧方法。</p>
 <p><a href="https://nitter.cz/TDS_95514874/status/1747753162226675844#m">nitter.cz/TDS_95514874/status/1747753162226675844#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1748184369976713484#m</id>
-            <title>谷歌推出了用于用于增强大语言模型的选择性预测框架 ASPIRE。
-
-这个预测框架可以在 LLM 输出的时候给出一个可靠性评分，让用户更好的判断 LLM 输出内容的可靠性。
-
-选择性预测会让大语言模型在给出答案的同时，提供一个选择性得分，用以表示答案正确的可能性。
-
-训练方式：
-ASPIRE 的工作方式是对大语言模型进行针对性的微调，使其更擅长于问题回答任务，并训练模型自行评估其生成答案的正确性。该框架包括三个阶段：特定任务的调优、答案采样和自我评估学习（self-evaluation learning）。在特定任务调优阶段，ASPIRE 对预先训练好的大语言模型进行微调，以提升其预测表现。答案采样阶段则是针对每个训练问题生成多种答案，进而构建自我评估学习的数据集。到了自我评估学习阶段，ASPIRE 引入可调整参数，并对这些参数进行微调，以培养模型的自我评估能力。
-
-结论：
-ASPIRE 的出现标志着大语言模型领域的一次变革，它强调了模型容量并非其性能的唯一决定因素。实际上，通过策略性的调整，即便是小型模型也能实现更精确、更有信心的预测，从而显著提升模型的有效性。
-
-内容来源：https://blog.research.google/2024/01/introducing-aspire-for-selective.html</title>
-            <link>https://nitter.cz/op7418/status/1748184369976713484#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1748184369976713484#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 19 Jan 2024 03:23:28 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>谷歌推出了用于用于增强大语言模型的选择性预测框架 ASPIRE。<br />
-<br />
-这个预测框架可以在 LLM 输出的时候给出一个可靠性评分，让用户更好的判断 LLM 输出内容的可靠性。<br />
-<br />
-选择性预测会让大语言模型在给出答案的同时，提供一个选择性得分，用以表示答案正确的可能性。<br />
-<br />
-训练方式：<br />
-ASPIRE 的工作方式是对大语言模型进行针对性的微调，使其更擅长于问题回答任务，并训练模型自行评估其生成答案的正确性。该框架包括三个阶段：特定任务的调优、答案采样和自我评估学习（self-evaluation learning）。在特定任务调优阶段，ASPIRE 对预先训练好的大语言模型进行微调，以提升其预测表现。答案采样阶段则是针对每个训练问题生成多种答案，进而构建自我评估学习的数据集。到了自我评估学习阶段，ASPIRE 引入可调整参数，并对这些参数进行微调，以培养模型的自我评估能力。<br />
-<br />
-结论：<br />
-ASPIRE 的出现标志着大语言模型领域的一次变革，它强调了模型容量并非其性能的唯一决定因素。实际上，通过策略性的调整，即便是小型模型也能实现更精确、更有信心的预测，从而显著提升模型的有效性。<br />
-<br />
-内容来源：<a href="https://blog.research.google/2024/01/introducing-aspire-for-selective.html">blog.research.google/2024/01…</a></p>
-<video loop="loop" poster="https://nitter.cz/pic/enc/dHdlZXRfdmlkZW9fdGh1bWIvR0VMTVNneGE4QUFSdXNLLmpwZw==">
-  <source src="https://nitter.cz/pic/enc/dmlkZW8udHdpbWcuY29tL3R3ZWV0X3ZpZGVvL0dFTE1TZ3hhOEFBUnVzSy5tcDQ=" type="video/mp4" /></video>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1748180416840995281#m</id>
-            <title>刚发现摩尔线程前几天复原了阿里的单图跳舞项目并且已经开源训练代码，你可以训练自己的AnimateAnyone模型。
-有个基于摩尔线程开源的版本制作了 ComfyUI 节点，并且提供了基础的工作流。
-现在可以在ComfyUI中非常简单的让单图跳舞了。
-
-节点地址：https://github.com/chaojie/ComfyUI-Moore-AnimateAnyone?tab=readme-ov-file</title>
-            <link>https://nitter.cz/op7418/status/1748180416840995281#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1748180416840995281#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 19 Jan 2024 03:07:45 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>刚发现摩尔线程前几天复原了阿里的单图跳舞项目并且已经开源训练代码，你可以训练自己的AnimateAnyone模型。<br />
-有个基于摩尔线程开源的版本制作了 ComfyUI 节点，并且提供了基础的工作流。<br />
-现在可以在ComfyUI中非常简单的让单图跳舞了。<br />
-<br />
-节点地址：<a href="https://github.com/chaojie/ComfyUI-Moore-AnimateAnyone?tab=readme-ov-file">github.com/chaojie/ComfyUI-M…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VMSHlmZWIwQUF3TmNlLnBuZw==" />
                 ]]>
             </content:encoded>
         </item>
@@ -460,111 +460,6 @@ ASPIRE 的出现标志着大语言模型领域的一次变革，它强调了模�
 项目地址：<a href="https://univg-baidu.github.io/">univg-baidu.github.io/</a></p>
 <p><a href="https://nitter.cz/_akhaliq/status/1747860016449679534#m">nitter.cz/_akhaliq/status/1747860016449679534#m</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDc5NDc2MzAyNzIwOTAxMTIvcHUvaW1nL1pTZnNfZW5YaVNPS1dfdzQuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1748008690777747706#m</id>
-            <title>RT by @op7418: 测试了一下Runway的多运动笔刷功能，真的强大，非常适合画面丰富的场景。
-
-可以完全由自己控制每个物品的运动方向和强度，直接将视频控制带向了新的高度。
-
-AI时代光有强大的模型还不行，还需要有搭配模型交互和工具，这样才能发挥出模型的价值。
-
-如何使用：直接在原来的运动笔刷的位置打开就行，已经替换为了新的多运动笔刷。切换笔刷分类分别设置运动就行。
-
-立刻体验：https://app.runwayml.com/video-tools</title>
-            <link>https://nitter.cz/op7418/status/1748008690777747706#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1748008690777747706#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 18 Jan 2024 15:45:22 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>测试了一下Runway的多运动笔刷功能，真的强大，非常适合画面丰富的场景。<br />
-<br />
-可以完全由自己控制每个物品的运动方向和强度，直接将视频控制带向了新的高度。<br />
-<br />
-AI时代光有强大的模型还不行，还需要有搭配模型交互和工具，这样才能发挥出模型的价值。<br />
-<br />
-如何使用：直接在原来的运动笔刷的位置打开就行，已经替换为了新的多运动笔刷。切换笔刷分类分别设置运动就行。<br />
-<br />
-立刻体验：<a href="https://app.runwayml.com/video-tools">app.runwayml.com/video-tools</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDgwMDg0ODQ2NzM4MzA5MTIvcHUvaW1nL3NLWEI5a2RnbDNYcy1NbVAuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1747930933343498259#m</id>
-            <title>RT by @op7418: 🧪前几天一个老哥做这种动物时装走秀视频在抖音火了，我看了一下每条视频几乎都有几万攒，百万播放是有的。
-
-刚好前几天看到个类似的就想复原一下这个提示词，整了几个宠物的时尚走秀图片。这个可以做好多主题，比如宠物、十二生肖还能以服装品牌为主题。
-
-主要提示词的内容为”拟人化的{动物名称}”加上“{动物名称}穿着{品牌名}时尚服装”。
-
-提示词：
-Anthropomorphic fox, Fashion runway, Full body, fox wearing Dior fashion clothes, anthropomorphic, high-end design style, Cold and beautiful, A slender and slender figure, Milan Fashion Show, Full body, Dynamic capture of runway shows --ar 9:16 --v 6.0 --style raw
-
-#晚安提示词 #Midjourney #Catjourney</title>
-            <link>https://nitter.cz/op7418/status/1747930933343498259#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1747930933343498259#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 18 Jan 2024 10:36:24 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>🧪前几天一个老哥做这种动物时装走秀视频在抖音火了，我看了一下每条视频几乎都有几万攒，百万播放是有的。<br />
-<br />
-刚好前几天看到个类似的就想复原一下这个提示词，整了几个宠物的时尚走秀图片。这个可以做好多主题，比如宠物、十二生肖还能以服装品牌为主题。<br />
-<br />
-主要提示词的内容为”拟人化的{动物名称}”加上“{动物名称}穿着{品牌名}时尚服装”。<br />
-<br />
-提示词：<br />
-Anthropomorphic fox, Fashion runway, Full body, fox wearing Dior fashion clothes, anthropomorphic, high-end design style, Cold and beautiful, A slender and slender figure, Milan Fashion Show, Full body, Dynamic capture of runway shows --ar 9:16 --v 6.0 --style raw<br />
-<br />
-<a href="https://nitter.cz/search?q=%23晚安提示词">#晚安提示词</a> <a href="https://nitter.cz/search?q=%23Midjourney">#Midjourney</a> <a href="https://nitter.cz/search?q=%23Catjourney">#Catjourney</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VIbDVHR2JNQUFNM0NBLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1748020871883825300#m</id>
-            <title>UncleLee做的一个电商图片AI工具，功能还挺全的，AI换装、换背景、抠图、更换服装颜色，该有的都有。有需求的可以试试。</title>
-            <link>https://nitter.cz/op7418/status/1748020871883825300#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1748020871883825300#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 18 Jan 2024 16:33:47 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>UncleLee做的一个电商图片AI工具，功能还挺全的，AI换装、换背景、抠图、更换服装颜色，该有的都有。有需求的可以试试。</p>
-<p><a href="https://nitter.cz/UncleLee_404/status/1748018468564439376#m">nitter.cz/UncleLee_404/status/1748018468564439376#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1748012698913439775#m</id>
-            <title>R to @op7418: 怪不得把百面千相砍了，那个哪有这玩意赚钱。</title>
-            <link>https://nitter.cz/op7418/status/1748012698913439775#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1748012698913439775#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 18 Jan 2024 16:01:18 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>怪不得把百面千相砍了，那个哪有这玩意赚钱。</p>
                 ]]>
             </content:encoded>
         </item>
