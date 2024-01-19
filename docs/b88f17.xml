@@ -5,6 +5,29 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/Gorden_Sun/status/1748208676920594543#m</id>
+            <title>RT by @dotey: 来了！
+实测GPT-SoVITS中文效果确实很好，只需要2分钟的样本训练，就能实现克隆音色（语速、情感等需要更长样本才能训练好），比XTTS更稳定更逼真（XTTS只通过8秒音频来克隆音色）
+tinyfool的脸面太大（字面含义），我常用的嘴型匹配覆盖不了这么大面积，会有黑边，换了个稍微差点的方案。</title>
+            <link>https://nitter.cz/Gorden_Sun/status/1748208676920594543#m</link>
+            <guid isPermaLink="false">https://nitter.cz/Gorden_Sun/status/1748208676920594543#m</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 19 Jan 2024 05:00:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>来了！<br />
+实测GPT-SoVITS中文效果确实很好，只需要2分钟的样本训练，就能实现克隆音色（语速、情感等需要更长样本才能训练好），比XTTS更稳定更逼真（XTTS只通过8秒音频来克隆音色）<br />
+tinyfool的脸面太大（字面含义），我常用的嘴型匹配覆盖不了这么大面积，会有黑边，换了个稍微差点的方案。</p>
+<p><a href="https://nitter.cz/huangyun_122/status/1747629775558938998#m">nitter.cz/huangyun_122/status/1747629775558938998#m</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDgyMDg2MzA1MTA1NDI4NDgvcHUvaW1nL2xZaVpJRWlGLUxHZGJRZG8uanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/HiTw93/status/1748132914372477126#m</id>
             <title>RT by @dotey: #工程师工具 发现一个做得很精致的免费开源简历生成器，可以把很好通过表单填写生成一份精致的简历，包括编辑、以及共享给其他人的查看，很潮流，会比纯粹Word简历方便不少，有需要的小伙伴可以试试，假如你是前端或Java正在找工作，也可以用这个工具生成简历以后发给我～
 🤖 https://rxresu.me/</title>
@@ -690,230 +713,6 @@ Trinh 博士表示，他计划将这一系统应用到数学的其他领域乃�
 法国高等师范学院的认知神经科学家Stanislas Dehaene，在基础几何知识领域有着深入的研究兴趣。他对 AlphaGeometry 的性能表现赞不绝口。然而，他提到这个系统在解决问题时，并没有实际“看到”问题的本质——它仅仅是处理了图像的逻辑和数字编码（这些图纸实际上是为了方便人类读者）。Dehaene 博士指出：“系统所操作的圆、线条和三角形，并没有被赋予任何空间感知。”研究人员也认同，引入视觉元素可能会大有裨益。Luong 博士表示，他们计划在一年内利用谷歌的 Gemini——一个能够同时处理文本和图像的“多模态”系统——来实现这一点。<br />
 <br />
 <a href="https://baoyu.io/translations/ai/ai-computers-mathematics-olympiad">baoyu.io/translations/ai/ai-…</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1747831626392879395#m</id>
-            <title>R to @dotey: Action Schema:
-
-openapi: 3.0.0
-info:
-  version: 0.1.2
-  title: arXiv Metadata API (Atom+XML)
-  description: |
-    A query API for arXiv paper metadata.
-  termsOfService: https://arxiv.org/help/general
-  contact:
-    name: arXiv API Team
-    email: nextgen@arxiv.org
-  license:
-    name: MIT
-servers:
-  - url: https://export.arxiv.org/api/
-    description: Metadata API endpoint.
-paths:
-  /query:
-    get:
-      operationId: query
-      description: |
-        Returns all published arXiv papers that respond to the specified
-        query parameters. By default, returns most recent papers first.
-      parameters:
-        - name: search_query
-          in: query
-          description: |
-            A string that represents a search query. Fields are specified by "field:value" and 
-            delimited with "AND", "OR", and "ANDNOT" boolean operators. Valid field names are:
-            ti (title), au (author), abs(abstract), co (comment), jr (journal reference), cat
-            (subject category), rn (report number), id (id - use id_list instead), all (all 
-            fields).
-          required: false
-          style: form
-          explode: true
-          schema:
-            type: string
-          example: au:del_maestro+AND+ti:checkerboard
-        - name: id_list
-          in: query
-          description: |
-            A comma-delimited list of arXiv id's.
-          required: false
-          schema:
-            type: string
-          example: 1234.12345,5678.56789
-        - name: start
-          in: query
-          description: |
-            Defines the index of the first returned result, using 0-based indexing.
-          required: false
-          schema:
-            type: integer
-          example: 0
-        - name: max_results
-          in: query
-          description: |
-            The number of results returned by the query. Used in conjunction with "start" for 
-            pagination. Max_results is limited to 30000, in slices of 2000.
-          required: false
-          schema:
-            type: integer
-          example: 10
-        - name: sortBy
-          in: query
-          description: |
-            Method to sort results.
-          required: false
-          schema:
-            type: string
-            enum:
-              - relevance
-              - lastUpdatedDate
-              - submittedDate
-        - name: sortOrder
-          in: query
-          description: |
-            Order for the sort method
-          required: false
-          schema:
-            type: string
-            enum:
-              - ascending
-              - descending
-      responses:
-        default:
-          description: All queries return a valid Atom XML feed, even errors.
-          content:
-            application/atom+xml:
-              schema:
-                $ref: ./resources/AtomXML.yaml#
-components:
-  schemas:
-    Error:
-      required:
-        - code
-        - message
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string</title>
-            <link>https://nitter.cz/dotey/status/1747831626392879395#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1747831626392879395#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 18 Jan 2024 04:01:47 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Action Schema:<br />
-<br />
-openapi: 3.0.0<br />
-info:<br />
-  version: 0.1.2<br />
-  title: arXiv Metadata API (Atom+XML)<br />
-  description: |<br />
-    A query API for arXiv paper metadata.<br />
-  termsOfService: <a href="https://arxiv.org/help/general">arxiv.org/help/general</a><br />
-  contact:<br />
-    name: arXiv API Team<br />
-    email: nextgen@arxiv.org<br />
-  license:<br />
-    name: MIT<br />
-servers:<br />
-  - url: <a href="https://export.arxiv.org/api/">export.arxiv.org/api/</a><br />
-    description: Metadata API endpoint.<br />
-paths:<br />
-  /query:<br />
-    get:<br />
-      operationId: query<br />
-      description: |<br />
-        Returns all published arXiv papers that respond to the specified<br />
-        query parameters. By default, returns most recent papers first.<br />
-      parameters:<br />
-        - name: search_query<br />
-          in: query<br />
-          description: |<br />
-            A string that represents a search query. Fields are specified by "field:value" and <br />
-            delimited with "AND", "OR", and "ANDNOT" boolean operators. Valid field names are:<br />
-            ti (title), au (author), abs(abstract), co (comment), jr (journal reference), cat<br />
-            (subject category), rn (report number), id (id - use id_list instead), all (all <br />
-            fields).<br />
-          required: false<br />
-          style: form<br />
-          explode: true<br />
-          schema:<br />
-            type: string<br />
-          example: au:del_maestro+AND+ti:checkerboard<br />
-        - name: id_list<br />
-          in: query<br />
-          description: |<br />
-            A comma-delimited list of arXiv id's.<br />
-          required: false<br />
-          schema:<br />
-            type: string<br />
-          example: 1234.12345,5678.56789<br />
-        - name: start<br />
-          in: query<br />
-          description: |<br />
-            Defines the index of the first returned result, using 0-based indexing.<br />
-          required: false<br />
-          schema:<br />
-            type: integer<br />
-          example: 0<br />
-        - name: max_results<br />
-          in: query<br />
-          description: |<br />
-            The number of results returned by the query. Used in conjunction with "start" for <br />
-            pagination. Max_results is limited to 30000, in slices of 2000.<br />
-          required: false<br />
-          schema:<br />
-            type: integer<br />
-          example: 10<br />
-        - name: sortBy<br />
-          in: query<br />
-          description: |<br />
-            Method to sort results.<br />
-          required: false<br />
-          schema:<br />
-            type: string<br />
-            enum:<br />
-              - relevance<br />
-              - lastUpdatedDate<br />
-              - submittedDate<br />
-        - name: sortOrder<br />
-          in: query<br />
-          description: |<br />
-            Order for the sort method<br />
-          required: false<br />
-          schema:<br />
-            type: string<br />
-            enum:<br />
-              - ascending<br />
-              - descending<br />
-      responses:<br />
-        default:<br />
-          description: All queries return a valid Atom XML feed, even errors.<br />
-          content:<br />
-            application/atom+xml:<br />
-              schema:<br />
-                <a href="https://nitter.cz/search?q=%23ref">$ref</a>: ./resources/AtomXML.yaml#<br />
-components:<br />
-  schemas:<br />
-    Error:<br />
-      required:<br />
-        - code<br />
-        - message<br />
-      properties:<br />
-        code:<br />
-          type: integer<br />
-          format: int32<br />
-        message:<br />
-          type: string</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VHTGRfd1hvQUFyc1J3LmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
