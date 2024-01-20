@@ -5,6 +5,205 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1748554598368121184#m</id>
+            <title>DiffusionGPT：由LLM驱动的文本到图像生成系统
+
+由字节跳动开发，DiffusionGPT的牛P之处在于它集成了多种领域的专家图像生成模型。
+
+然后使用LLM来对接这些图像生成模型，让LLM来处理和理解各种文本提示。
+
+最后根据理解的信息选择最合适的图像模型来生成图像。
+
+这样就和GPT 4一样，通过聊天画图...
+
+DiffusionGPT主要特点：
+
+1、多样化文本提示处理：DiffusionGPT 能够理解和处理各种类型的文本提示，包括具体的指令、抽象的灵感、复杂的假设等。
+
+2、集成多个领域专家模型：系统集成了多种领域的图像扩散模型，每个模型在其特定领域具有专业的图像生成能力。这类模型专注于特定领域的图像生成，比如自然景观、人物肖像、艺术作品等。
+
+这意味着系统不仅能够生成普通的图像，还能够处理更特定、更复杂的图像生成任务，比如特定风格或类型的图像。模仿特定艺术家的风格、漫画风格或摄影技术。
+
+3、大语言模型驱动：DiffusionGPT 使用大语言模型（LLM）来解析和理解用户输入的文本提示。这个过程类似于其他基于 LLM 的系统（如 GPT-4）处理文本的方式，但特别应用于理解用于图像生成的指令和描述。
+
+4、智能选择合适的图像模型：基于对文本提示的理解，DiffusionGPT 能够智能地选择最合适的图像生成模型来生成图像。这不仅包括选择正确的模型，还涉及调整生成参数以最好地满足用户的需求。
+
+5、输出高质量图像：通过精准地匹配文本提示与最佳生成模型，DiffusionGPT 能生成高质量、与用户需求高度吻合的图像。
+
+6、用户反馈与优势数据库：结合用户反馈和优势数据库，系统能够根据用户偏好调整模型选择，提升图像生成的相关性和质量。
+
+例如：在系统的早期使用中，用户可能提供对生成图像的反馈，比如“这张图片的颜色太暗了”。DiffusionGPT 利用这些反馈来调整其模型选择，使得未来的图像生成更符合用户的偏好。
+
+主要工作原理：
+
+1、输入解析：用户提供文本提示，如描述、指令或灵感。
+大型语言模型（LLM）负责解析这些文本提示，理解其含义和需求。
+
+2、思维树（Tree-of-Thought）构建：根据不同的图像生成任务，系统构建了一个“思维树”，这是一种组织不同图像生成模型的结构。
+思维树基于先验知识和人类反馈，涵盖了多种领域的专家级模型。
+
+3、模型选择：根据 LLM 解析的结果，系统通过思维树来确定最适合当前文本提示的图像生成模型。在选择过程中，可能还会考虑用户的偏好和历史反馈，这些信息存储在优势数据库中。
+
+4、图像生成：一旦选定了合适的模型，该模型就会被用来生成图像。生成的图像将与输入的文本提示紧密相关，并反映出用户的意图和偏好。
+
+5、结果输出：最终生成的图像会呈现给用户。
+这些图像可以是多样化的，包括但不限于具体描述的场景、概念艺术作品或符合特定风格的图像。
+
+6、用户反馈优化过程：
+
+用户对生成图像的反馈被用来丰富优势数据库，进而帮助系统更好地理解用户偏好，优化后续的模型选择和图像生成。
+
+实验结果：
+
+DiffusionGPT 在生成人类和场景等类别的图像时展现了高度的真实性和细节。
+
+与基准模型（如 SD1.5）相比，DiffusionGPT 生成的图像在视觉保真度、捕捉细节方面有明显提升。
+
+DiffusionGPT 在图像奖励和美学评分方面的表现优于传统的稳定扩散模型。
+
+在进行图像生成质量的量化评估时，DiffusionGPT 展示了较高的评分，说明其生成的图像在质量和美学上更受青睐。
+
+项目地址：http://diffusiongpt.github.io/
+论文：http://arxiv.org/abs/2401.10061
+GitHub：http://github.com/DiffusionGPT/DiffusionGPT
+
+在线演示：
+
+DiffusionGPT：https://huggingface.co/spaces/DiffusionGPT/DiffusionGPT
+
+DiffusionGPT-XL：https://huggingface.co/spaces/DiffusionGPT/DiffusionGPT-XL</title>
+            <link>https://nitter.cz/xiaohuggg/status/1748554598368121184#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1748554598368121184#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 20 Jan 2024 03:54:37 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>DiffusionGPT：由LLM驱动的文本到图像生成系统<br />
+<br />
+由字节跳动开发，DiffusionGPT的牛P之处在于它集成了多种领域的专家图像生成模型。<br />
+<br />
+然后使用LLM来对接这些图像生成模型，让LLM来处理和理解各种文本提示。<br />
+<br />
+最后根据理解的信息选择最合适的图像模型来生成图像。<br />
+<br />
+这样就和GPT 4一样，通过聊天画图...<br />
+<br />
+DiffusionGPT主要特点：<br />
+<br />
+1、多样化文本提示处理：DiffusionGPT 能够理解和处理各种类型的文本提示，包括具体的指令、抽象的灵感、复杂的假设等。<br />
+<br />
+2、集成多个领域专家模型：系统集成了多种领域的图像扩散模型，每个模型在其特定领域具有专业的图像生成能力。这类模型专注于特定领域的图像生成，比如自然景观、人物肖像、艺术作品等。<br />
+<br />
+这意味着系统不仅能够生成普通的图像，还能够处理更特定、更复杂的图像生成任务，比如特定风格或类型的图像。模仿特定艺术家的风格、漫画风格或摄影技术。<br />
+<br />
+3、大语言模型驱动：DiffusionGPT 使用大语言模型（LLM）来解析和理解用户输入的文本提示。这个过程类似于其他基于 LLM 的系统（如 GPT-4）处理文本的方式，但特别应用于理解用于图像生成的指令和描述。<br />
+<br />
+4、智能选择合适的图像模型：基于对文本提示的理解，DiffusionGPT 能够智能地选择最合适的图像生成模型来生成图像。这不仅包括选择正确的模型，还涉及调整生成参数以最好地满足用户的需求。<br />
+<br />
+5、输出高质量图像：通过精准地匹配文本提示与最佳生成模型，DiffusionGPT 能生成高质量、与用户需求高度吻合的图像。<br />
+<br />
+6、用户反馈与优势数据库：结合用户反馈和优势数据库，系统能够根据用户偏好调整模型选择，提升图像生成的相关性和质量。<br />
+<br />
+例如：在系统的早期使用中，用户可能提供对生成图像的反馈，比如“这张图片的颜色太暗了”。DiffusionGPT 利用这些反馈来调整其模型选择，使得未来的图像生成更符合用户的偏好。<br />
+<br />
+主要工作原理：<br />
+<br />
+1、输入解析：用户提供文本提示，如描述、指令或灵感。<br />
+大型语言模型（LLM）负责解析这些文本提示，理解其含义和需求。<br />
+<br />
+2、思维树（Tree-of-Thought）构建：根据不同的图像生成任务，系统构建了一个“思维树”，这是一种组织不同图像生成模型的结构。<br />
+思维树基于先验知识和人类反馈，涵盖了多种领域的专家级模型。<br />
+<br />
+3、模型选择：根据 LLM 解析的结果，系统通过思维树来确定最适合当前文本提示的图像生成模型。在选择过程中，可能还会考虑用户的偏好和历史反馈，这些信息存储在优势数据库中。<br />
+<br />
+4、图像生成：一旦选定了合适的模型，该模型就会被用来生成图像。生成的图像将与输入的文本提示紧密相关，并反映出用户的意图和偏好。<br />
+<br />
+5、结果输出：最终生成的图像会呈现给用户。<br />
+这些图像可以是多样化的，包括但不限于具体描述的场景、概念艺术作品或符合特定风格的图像。<br />
+<br />
+6、用户反馈优化过程：<br />
+<br />
+用户对生成图像的反馈被用来丰富优势数据库，进而帮助系统更好地理解用户偏好，优化后续的模型选择和图像生成。<br />
+<br />
+实验结果：<br />
+<br />
+DiffusionGPT 在生成人类和场景等类别的图像时展现了高度的真实性和细节。<br />
+<br />
+与基准模型（如 SD1.5）相比，DiffusionGPT 生成的图像在视觉保真度、捕捉细节方面有明显提升。<br />
+<br />
+DiffusionGPT 在图像奖励和美学评分方面的表现优于传统的稳定扩散模型。<br />
+<br />
+在进行图像生成质量的量化评估时，DiffusionGPT 展示了较高的评分，说明其生成的图像在质量和美学上更受青睐。<br />
+<br />
+项目地址：<a href="http://diffusiongpt.github.io/">diffusiongpt.github.io/</a><br />
+论文：<a href="http://arxiv.org/abs/2401.10061">arxiv.org/abs/2401.10061</a><br />
+GitHub：<a href="http://github.com/DiffusionGPT/DiffusionGPT">github.com/DiffusionGPT/Diff…</a><br />
+<br />
+在线演示：<br />
+<br />
+DiffusionGPT：<a href="https://huggingface.co/spaces/DiffusionGPT/DiffusionGPT">huggingface.co/spaces/Diffus…</a><br />
+<br />
+DiffusionGPT-XL：<a href="https://huggingface.co/spaces/DiffusionGPT/DiffusionGPT-XL">huggingface.co/spaces/Diffus…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VRZEl4c2J3QUFneHB2LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VRZEl4c2JVQUFlWVVlLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VRZEl5R2JVQUE3RERtLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VRVjdwUGFVQUF6Vjg2LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1748548848933642366#m</id>
+            <title>大BOSS释放了
+
+Stable Video Diffusion最新进展
+
+似乎视频效果和清晰度都上了一个新高度🥱</title>
+            <link>https://nitter.cz/xiaohuggg/status/1748548848933642366#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1748548848933642366#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 20 Jan 2024 03:31:46 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>大BOSS释放了<br />
+<br />
+Stable Video Diffusion最新进展<br />
+<br />
+似乎视频效果和清晰度都上了一个新高度🥱</p>
+<p><a href="https://nitter.cz/EMostaque/status/1748405750907457548#m">nitter.cz/EMostaque/status/1748405750907457548#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1748547405606494267#m</id>
+            <title>R to @xiaohuggg: Apple Vision Pro官方使用导览
+
+https://www.apple.com/apple-vision-pro/guided-tour/</title>
+            <link>https://nitter.cz/xiaohuggg/status/1748547405606494267#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1748547405606494267#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 20 Jan 2024 03:26:02 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Apple Vision Pro官方使用导览<br />
+<br />
+<a href="https://www.apple.com/apple-vision-pro/guided-tour/">apple.com/apple-vision-pro/g…</a></p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTc0ODMzMjA2OTcxNTkzMTEzNi9NRFlBcjFjWT9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1748540618215924156#m</id>
             <title>👓 #AppleVisionPro 全方位介绍和使用指南
 
@@ -769,137 +968,6 @@ GitHub：<a href="https://github.com/outline/outline">github.com/outline/outline
 <br />
 - 智能眼镜：强调了AI与元宇宙结合的重要性，认为智能眼镜是作为与AI交互的理想设备。</p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDgxNzU0NTIzMzY5NTUzOTIvcHUvaW1nL0pRVnVTcG9OMnR5eWJheS0uanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1748165704258593146#m</id>
-            <title>TowerBase-7B-v0.1：专门针对翻译任务优化的多语言模型
-
-Tower基于 LLaMA2 构建，支持：英语、德语、法语、中文等10种语言。
-
-它在翻译任务上的表现与最先进的模型相匹敌，甚至超过了 GPT3.5 以及其他更大的开源模型。
-
-它可以处理多种语言之间的翻译任务。
-
-除了多语言翻译能力，Tower 还能够处理从语法改进到机器翻译和自动后编辑等翻译评估工作的前翻译活动。
-
-Tower 模型的发布包括两个版本：TowerBase 和 TowerInstruct。
-
-TowerInstruct 是 Tower 模型的一个变体，它特别适合在零样本的情况下执行翻译和相关任务，以及其他多语言任务。这意味着 TowerInstruct 能够直接应用于新的任务，而无需针对那些任务进行额外的训练或微调。
-
-主要功能特点：
-
-1、多语言支持： Tower 模型支持10种不同语言——英语、德语、法语、西班牙语、中文、葡萄牙语、意大利语、俄语、韩语和荷兰语，这与其他主要以英语数据构建的开源模型不同。
-
-2、翻译相关任务： 模型专门针对翻译及相关任务进行了优化，能够处理包括语法改进、机器翻译、自动后编辑等。
-
-3、优越的性能： Tower 在翻译任务上超越了现有的最先进模型，如 GPT-3.5、Mixtral 8x7B 和 LLaMA-2 70B。
-
-4、多任务能力： 模型在自动后编辑、命名实体识别、源错误校正等任务上表现突出，部分任务甚至超过了 GPT-4。
-
-模型训练情况：
-
-继续预训练： Tower 的训练使用了200亿个文本标记，平均分布在不同语言中，其中三分之二来自单语数据，三分之一来自公开的双语数据集。
-
-指令调整： 此阶段通过细化的数据集提高了模型解决零样本任务的能力，如 TowerBlocks，包含了多种翻译相关任务的特定记录。
-
-该项目的目的是促进协作和可重现的研究，以促进知识共享，并推动多语言 LLM 和相关研究的进一步发展
-
-详细介绍：https://unbabel.com/announcing-tower-an-open-multilingual-llm-for-translation-related-tasks/
-
-模型下载：https://huggingface.co/Unbabel/TowerBase-7B-v0.1</title>
-            <link>https://nitter.cz/xiaohuggg/status/1748165704258593146#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1748165704258593146#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 19 Jan 2024 02:09:17 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>TowerBase-7B-v0.1：专门针对翻译任务优化的多语言模型<br />
-<br />
-Tower基于 LLaMA2 构建，支持：英语、德语、法语、中文等10种语言。<br />
-<br />
-它在翻译任务上的表现与最先进的模型相匹敌，甚至超过了 GPT3.5 以及其他更大的开源模型。<br />
-<br />
-它可以处理多种语言之间的翻译任务。<br />
-<br />
-除了多语言翻译能力，Tower 还能够处理从语法改进到机器翻译和自动后编辑等翻译评估工作的前翻译活动。<br />
-<br />
-Tower 模型的发布包括两个版本：TowerBase 和 TowerInstruct。<br />
-<br />
-TowerInstruct 是 Tower 模型的一个变体，它特别适合在零样本的情况下执行翻译和相关任务，以及其他多语言任务。这意味着 TowerInstruct 能够直接应用于新的任务，而无需针对那些任务进行额外的训练或微调。<br />
-<br />
-主要功能特点：<br />
-<br />
-1、多语言支持： Tower 模型支持10种不同语言——英语、德语、法语、西班牙语、中文、葡萄牙语、意大利语、俄语、韩语和荷兰语，这与其他主要以英语数据构建的开源模型不同。<br />
-<br />
-2、翻译相关任务： 模型专门针对翻译及相关任务进行了优化，能够处理包括语法改进、机器翻译、自动后编辑等。<br />
-<br />
-3、优越的性能： Tower 在翻译任务上超越了现有的最先进模型，如 GPT-3.5、Mixtral 8x7B 和 LLaMA-2 70B。<br />
-<br />
-4、多任务能力： 模型在自动后编辑、命名实体识别、源错误校正等任务上表现突出，部分任务甚至超过了 GPT-4。<br />
-<br />
-模型训练情况：<br />
-<br />
-继续预训练： Tower 的训练使用了200亿个文本标记，平均分布在不同语言中，其中三分之二来自单语数据，三分之一来自公开的双语数据集。<br />
-<br />
-指令调整： 此阶段通过细化的数据集提高了模型解决零样本任务的能力，如 TowerBlocks，包含了多种翻译相关任务的特定记录。<br />
-<br />
-该项目的目的是促进协作和可重现的研究，以促进知识共享，并推动多语言 LLM 和相关研究的进一步发展<br />
-<br />
-详细介绍：<a href="https://unbabel.com/announcing-tower-an-open-multilingual-llm-for-translation-related-tasks/">unbabel.com/announcing-tower…</a><br />
-<br />
-模型下载：<a href="https://huggingface.co/Unbabel/TowerBase-7B-v0.1">huggingface.co/Unbabel/Tower…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VLN2NOd2E0QUFNQ0JPLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VLN2NPR2JnQUE2Q281LnBuZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VLN2NPR2FBQUF1a05tLnBuZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1748155150513086551#m</id>
-            <title>传说这是中本聪
-
-🤔</title>
-            <link>https://nitter.cz/xiaohuggg/status/1748155150513086551#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1748155150513086551#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 19 Jan 2024 01:27:21 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>传说这是中本聪<br />
-<br />
-🤔</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1747989532455444740#m</id>
-            <title>🔔http://Xiaohu.AI日报「1月18日」
-
-✨✨✨✨✨✨✨✨</title>
-            <link>https://nitter.cz/xiaohuggg/status/1747989532455444740#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1747989532455444740#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 18 Jan 2024 14:29:15 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>🔔<a href="http://Xiaohu.AI">Xiaohu.AI</a>日报「1月18日」<br />
-<br />
-✨✨✨✨✨✨✨✨</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VJYk5sSmE4QUFXaXdZLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
