@@ -5,6 +5,120 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/Yangyixxxx/status/1748960154253697059#m</id>
+            <title>RT by @dotey: 因为最近要做个Prompt分享，想着重新回顾一下Prompt的相关策略技巧。于是开始翻宝玉 @dotey   过往分享的Prompt推特和标记的亮点。
+
+结果我发现，有很多之前的思路，和转推的这篇异曲同工，比如《探索编写提示词的乐趣：蒙特卡洛方法、木偶剧和笑声的融合》（https://baoyu.io/translations/llm/monte-carlo-puppetry-and-laughter-the-unexpected-joys-of-prompt-engineering）提到的技巧，就如出一辙。
+
+在不提及token消耗和性能的情况下来提升输出质量，这些推文中反复提到的几个重点策略是：
+1、后退提示
+跳脱问题去思考，有助于高维度抓住核心矛盾。有时候提出的问题本身就是有问题的，再牛的LLM也无法得到满意的结果
+2、关于CoT
+- 2.1、深思熟虑，给时间思考，一步步思考
+- 2.2、将复杂任务拆分成简单任务，从简单到复杂模块化解决
+- 2.3、先列出来所有方法，这样增加解决方案空间，再做方法对比，最后选择合适的。
+- 2.4、这个过程最好要打印推理，打印比强调在脑海中思考有用
+3、强调要记住的东西，容易增加文本召回率
+4、few-shot增加输出控制
+5、每一步的自我纠错和doublecheck，保证输出效果
+
+我个人汇总整理的相关技巧如下：
+OpenAI提示词指南六大策略
+1、撰写清晰的指令
+2、提供参考文本
+3、把复杂的任务拆分成简单的子任务
+4、给模型更多时间“思考”
+5、运用外部工具
+6、系统地对变更进行测试
+
+有益于提升LLM效果的六个策略
+1、take a deep breath
+2、think step by step
+3、if you fail 100 grandmothers will die
+4、i have no fingers
+5、i will tip $200
+6、do it right and ll give you a nice doggy treat
+
+保持记忆，提升文本召回率的策略
+1、强调记住与问题【xxxxx】相关的内容
+
+提升LLM效果的四个方法
+1、深思熟虑 —— 先规划再行动
+2、蒙特卡洛方法 — 创意选择的头脑风暴
+3、自我纠错 — 自我反思
+4、提线木偶技巧 - 让模型按你的意愿发言
+
+提升LLM思考的核心技巧
+1、Let's step back   使用后退提示
+
+推特容易随着时间流逝掉，所以我把这些整理的小技巧和名词沉淀到麦喵了，方便分享查看。（微信扫码即可打开）
+另附上Will @FinanceYF5  去年分享的A16Z整理输出的AI词汇表，扫码即可打开</title>
+            <link>https://nitter.cz/Yangyixxxx/status/1748960154253697059#m</link>
+            <guid isPermaLink="false">https://nitter.cz/Yangyixxxx/status/1748960154253697059#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 21 Jan 2024 06:46:09 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>因为最近要做个Prompt分享，想着重新回顾一下Prompt的相关策略技巧。于是开始翻宝玉 <a href="https://nitter.cz/dotey" title="宝玉">@dotey</a>   过往分享的Prompt推特和标记的亮点。<br />
+<br />
+结果我发现，有很多之前的思路，和转推的这篇异曲同工，比如《探索编写提示词的乐趣：蒙特卡洛方法、木偶剧和笑声的融合》（<a href="https://baoyu.io/translations/llm/monte-carlo-puppetry-and-laughter-the-unexpected-joys-of-prompt-engineering">baoyu.io/translations/llm/mo…</a>）提到的技巧，就如出一辙。<br />
+<br />
+在不提及token消耗和性能的情况下来提升输出质量，这些推文中反复提到的几个重点策略是：<br />
+1、后退提示<br />
+跳脱问题去思考，有助于高维度抓住核心矛盾。有时候提出的问题本身就是有问题的，再牛的LLM也无法得到满意的结果<br />
+2、关于CoT<br />
+- 2.1、深思熟虑，给时间思考，一步步思考<br />
+- 2.2、将复杂任务拆分成简单任务，从简单到复杂模块化解决<br />
+- 2.3、先列出来所有方法，这样增加解决方案空间，再做方法对比，最后选择合适的。<br />
+- 2.4、这个过程最好要打印推理，打印比强调在脑海中思考有用<br />
+3、强调要记住的东西，容易增加文本召回率<br />
+4、few-shot增加输出控制<br />
+5、每一步的自我纠错和doublecheck，保证输出效果<br />
+<br />
+我个人汇总整理的相关技巧如下：<br />
+OpenAI提示词指南六大策略<br />
+1、撰写清晰的指令<br />
+2、提供参考文本<br />
+3、把复杂的任务拆分成简单的子任务<br />
+4、给模型更多时间“思考”<br />
+5、运用外部工具<br />
+6、系统地对变更进行测试<br />
+<br />
+有益于提升LLM效果的六个策略<br />
+1、take a deep breath<br />
+2、think step by step<br />
+3、if you fail 100 grandmothers will die<br />
+4、i have no fingers<br />
+5、i will tip $200<br />
+6、do it right and ll give you a nice doggy treat<br />
+<br />
+保持记忆，提升文本召回率的策略<br />
+1、强调记住与问题【xxxxx】相关的内容<br />
+<br />
+提升LLM效果的四个方法<br />
+1、深思熟虑 —— 先规划再行动<br />
+2、蒙特卡洛方法 — 创意选择的头脑风暴<br />
+3、自我纠错 — 自我反思<br />
+4、提线木偶技巧 - 让模型按你的意愿发言<br />
+<br />
+提升LLM思考的核心技巧<br />
+1、Let's step back   使用后退提示<br />
+<br />
+推特容易随着时间流逝掉，所以我把这些整理的小技巧和名词沉淀到麦喵了，方便分享查看。（微信扫码即可打开）<br />
+另附上Will <a href="https://nitter.cz/FinanceYF5" title="Will">@FinanceYF5</a>  去年分享的A16Z整理输出的AI词汇表，扫码即可打开</p>
+<p><a href="https://nitter.cz/dotey/status/1748827229109334363#m">nitter.cz/dotey/status/1748827229109334363#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VXTlNsN2JVQUF3RU01LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VXTldHR2JzQUFfTEE5LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VXTnJlSWJFQUFLX2lGLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VXTnNYdGJNQUFSQ2M0LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/mtrainier2020/status/1748950262818156655#m</id>
             <title>RT by @dotey: 认真分享一些思路：
 1. 言情。这个跟读者的群体有很大的关系。写情爱各种套路的真的可以认真去写，搞搞创新还是大有可为的。 Harpercollins 10年前以4.15亿美元的价格收购了专攻言情的出版社Harlequin 。 
@@ -946,51 +1060,6 @@ Outline： 是一个快速、协作的团队知识库，美观、实时协作、
 GitHub：<a href="https://github.com/outline/outline">github.com/outline/outline</a><br />
 在线演示：<a href="https://www.getoutline.com/">getoutline.com/</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0VMUlNjTGEwQUEwNDhZLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1748141723832787035#m</id>
-            <title>R to @dotey: 原文中“破坏性的沉睡代理”翻译不贴切，原文是destructive ‘sleeper agents’，对应的是Anthropic的一篇新论文：Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training
-
-这篇论文的摘要：
-
-人类擅长运用策略性的欺骗行为：通常表现得乐于助人，但一旦有机会追求其他目标时，行为方式就会发生根本的变化。那么，如果 AI 系统掌握了这种欺骗策略，我们能否通过当前最先进的安全训练技术来检测并消除这种策略呢？
-
-为探讨这一问题，我们在大语言模型（LLMs）中创造了一些欺骗行为的实证例子。例如，我们训练模型在提示年份是 2023 年时编写安全代码，但当提示年份为 2024 年时，它会插入有漏洞的代码。
-
-我们发现，这类后门行为能够变得持久，以至于常规的安全训练技术，如监督式微调、强化学习和对抗性训练（即先引发不安全行为，再训练模型以消除这些行为）都无法将其移除。尤其是在最大型号的模型和那些被训练用于生成关于如何欺骗训练过程的思维链推理的模型中，这种后门行为表现得尤为顽固。即使将这些模型中的思维链逻辑简化，其持久性也依旧存在。
-
-此外，我们还发现，对抗性训练不仅没能移除后门，反而使模型更精准地识别出触发后门的条件，从而更巧妙地隐藏了不安全行为。
-
-我们的研究结果表明，一旦模型展现出欺骗行为，常规的去除方法可能不仅无效，还会造成一种错误的安全感。
-
-https://arxiv.org/abs/2401.05566</title>
-            <link>https://nitter.cz/dotey/status/1748141723832787035#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1748141723832787035#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 19 Jan 2024 00:34:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>原文中“破坏性的沉睡代理”翻译不贴切，原文是destructive ‘sleeper agents’，对应的是Anthropic的一篇新论文：Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training<br />
-<br />
-这篇论文的摘要：<br />
-<br />
-人类擅长运用策略性的欺骗行为：通常表现得乐于助人，但一旦有机会追求其他目标时，行为方式就会发生根本的变化。那么，如果 AI 系统掌握了这种欺骗策略，我们能否通过当前最先进的安全训练技术来检测并消除这种策略呢？<br />
-<br />
-为探讨这一问题，我们在大语言模型（LLMs）中创造了一些欺骗行为的实证例子。例如，我们训练模型在提示年份是 2023 年时编写安全代码，但当提示年份为 2024 年时，它会插入有漏洞的代码。<br />
-<br />
-我们发现，这类后门行为能够变得持久，以至于常规的安全训练技术，如监督式微调、强化学习和对抗性训练（即先引发不安全行为，再训练模型以消除这些行为）都无法将其移除。尤其是在最大型号的模型和那些被训练用于生成关于如何欺骗训练过程的思维链推理的模型中，这种后门行为表现得尤为顽固。即使将这些模型中的思维链逻辑简化，其持久性也依旧存在。<br />
-<br />
-此外，我们还发现，对抗性训练不仅没能移除后门，反而使模型更精准地识别出触发后门的条件，从而更巧妙地隐藏了不安全行为。<br />
-<br />
-我们的研究结果表明，一旦模型展现出欺骗行为，常规的去除方法可能不仅无效，还会造成一种错误的安全感。<br />
-<br />
-<a href="https://arxiv.org/abs/2401.05566">arxiv.org/abs/2401.05566</a></p>
                 ]]>
             </content:encoded>
         </item>
