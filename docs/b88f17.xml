@@ -5,6 +5,90 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/dotey/status/1748996143973855572#m</id>
+            <title>R to @dotey: 更正一下：对于OpenAI是否丢弃历史消息还是对历史消息摘要，我并不确认其内部实现，但可以肯定的是消息条数超过一定长度就可能会影响到前面的输入</title>
+            <link>https://nitter.cz/dotey/status/1748996143973855572#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1748996143973855572#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 21 Jan 2024 09:09:10 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>更正一下：对于OpenAI是否丢弃历史消息还是对历史消息摘要，我并不确认其内部实现，但可以肯定的是消息条数超过一定长度就可能会影响到前面的输入</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1748991160012472376#m</id>
+            <title>问：在同一个对话里如果我希望gpt每次都遵循同样的规则跟我对话，需要每次输入都带上整段prompt吗？
+
+答：
+
+通常来说不需要，但不一定。
+
+对于一个ChatGPT会话，通常结构是这样的：
+- System Message （系统内置提示词，用户不可见，例如你是个有用的助手……）
+- User Message 1 （用户输入的第一条消息，很多时候用户会加上自己的Prompt，例如请帮我总结以下内容）
+- Assistant Message 1（ChatGPT 根据 System Message 和 User Mesage 1给出的回复）
+...
+- User Message N (用户可以在同一会话中一直回复）
+- Assistant Message N（每一条User Message对应一条ChatGPT 回应的Assistant Message）
+
+每一次在会话中发送一条新消息，意味着要把所有历史消息一起发送给ChatGPT。当你的消息条数超过一定值，就超过最大上下文窗口了（比如GPT-4默认是8K Token），这时候ChatGPT会选择丢弃前面的会话，所以这时候它就会忘记你之前说过的话，那你就需要重新给它指令或者新开会话。
+
+对于自己创建的GPT，和ChatGPT的差别在于System Message，ChatGPT的System Message是OpenAI限定好的，我们无法修改；而对于自己创建的GPT，我们可以自己设置Prompt，OpenAI内置的Prompt加上我们自定义的Prompt一起构成了 System Message。</title>
+            <link>https://nitter.cz/dotey/status/1748991160012472376#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1748991160012472376#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 21 Jan 2024 08:49:21 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>问：在同一个对话里如果我希望gpt每次都遵循同样的规则跟我对话，需要每次输入都带上整段prompt吗？<br />
+<br />
+答：<br />
+<br />
+通常来说不需要，但不一定。<br />
+<br />
+对于一个ChatGPT会话，通常结构是这样的：<br />
+- System Message （系统内置提示词，用户不可见，例如你是个有用的助手……）<br />
+- User Message 1 （用户输入的第一条消息，很多时候用户会加上自己的Prompt，例如请帮我总结以下内容）<br />
+- Assistant Message 1（ChatGPT 根据 System Message 和 User Mesage 1给出的回复）<br />
+...<br />
+- User Message N (用户可以在同一会话中一直回复）<br />
+- Assistant Message N（每一条User Message对应一条ChatGPT 回应的Assistant Message）<br />
+<br />
+每一次在会话中发送一条新消息，意味着要把所有历史消息一起发送给ChatGPT。当你的消息条数超过一定值，就超过最大上下文窗口了（比如GPT-4默认是8K Token），这时候ChatGPT会选择丢弃前面的会话，所以这时候它就会忘记你之前说过的话，那你就需要重新给它指令或者新开会话。<br />
+<br />
+对于自己创建的GPT，和ChatGPT的差别在于System Message，ChatGPT的System Message是OpenAI限定好的，我们无法修改；而对于自己创建的GPT，我们可以自己设置Prompt，OpenAI内置的Prompt加上我们自定义的Prompt一起构成了 System Message。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1748987599446827186#m</id>
+            <title>当 AI 越来越像人类，会发生什么？</title>
+            <link>https://nitter.cz/dotey/status/1748987599446827186#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1748987599446827186#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 21 Jan 2024 08:35:12 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>当 AI 越来越像人类，会发生什么？</p>
+<p><a href="https://nitter.cz/bindureddy/status/1748962059054989335#m">nitter.cz/bindureddy/status/1748962059054989335#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/Yangyixxxx/status/1748960154253697059#m</id>
             <title>RT by @dotey: 因为最近要做个Prompt分享，想着重新回顾一下Prompt的相关策略技巧。于是开始翻宝玉 @dotey   过往分享的Prompt推特和标记的亮点。
 
@@ -890,176 +974,6 @@ Prompt和运行结果参考：<a href="https://github.com/Codium-ai/AlphaCodium/
                     
                     <p>mailchimp 2009年之前一直利润微薄，苦苦挣扎，它的转折点是 2010年，把对客户的定价改为部分免费，超过一定使用量之后才收费。当年利润增加了六倍多。2010到 2021年收入增长了 500 倍，达到每年十亿美元。免费用户起到了给其平台宣传，帮助其增长的重要作用。</p>
 <p><a href="https://nitter.cz/jspujji/status/1748338963599839549#m">nitter.cz/jspujji/status/1748338963599839549#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1748295530382528713#m</id>
-            <title>RT by @dotey: 微软推出针对学生的AI阅读教练工具：Reading Coach
-
-你可以选择角色和设定，创建独特的AI生成故事。通过AI驱动的故事和个性化练习吸引学生阅读并提高阅读流畅度。
-
-当你阅读时，语音转文本AI分析阅读流利性，检测学习者挑战的词汇，并记录阅读的准确性、速度和时间。
-
-用来改进你的阅读和语音语法问题。
-
-以下是其主要功能：
-
-1、个性化阅读练习：提供个性化、有趣、一致且独立的阅读流利性练习。
-
-2、AI生成故事：学习者可以选择角色和设定，创建独特的AI生成故事。故事内容经过内容质量、安全性和适龄性的审核，符合Microsoft的负责任AI指南。
-
-3、沉浸式阅读器：对有阅读障碍（如诵读困难）的学习者，内置的沉浸式阅读器提供支持。
-
-4、即时反馈：阅读时，语音转文本AI分析阅读流利性，检测学习者挑战的词汇，并记录阅读的准确性、速度和时间。
-
-5、互动性阅读：学习者在故事章节中做出选择，通过故事导航自己的阅读旅程。上一章节中挑战的词汇会自动纳入下一章节，实现即时适应性练习。
-
-6、流利性教练：在每个故事章节后，提供针对挑战词汇的流利性指导。
-
-7、激励机制：通过努力为中心的徽章，解锁新角色和设定，以保持学习者的阅读动力。
-
-🔗：https://coach.microsoft.com/</title>
-            <link>https://nitter.cz/xiaohuggg/status/1748295530382528713#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1748295530382528713#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 19 Jan 2024 10:45:10 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>微软推出针对学生的AI阅读教练工具：Reading Coach<br />
-<br />
-你可以选择角色和设定，创建独特的AI生成故事。通过AI驱动的故事和个性化练习吸引学生阅读并提高阅读流畅度。<br />
-<br />
-当你阅读时，语音转文本AI分析阅读流利性，检测学习者挑战的词汇，并记录阅读的准确性、速度和时间。<br />
-<br />
-用来改进你的阅读和语音语法问题。<br />
-<br />
-以下是其主要功能：<br />
-<br />
-1、个性化阅读练习：提供个性化、有趣、一致且独立的阅读流利性练习。<br />
-<br />
-2、AI生成故事：学习者可以选择角色和设定，创建独特的AI生成故事。故事内容经过内容质量、安全性和适龄性的审核，符合Microsoft的负责任AI指南。<br />
-<br />
-3、沉浸式阅读器：对有阅读障碍（如诵读困难）的学习者，内置的沉浸式阅读器提供支持。<br />
-<br />
-4、即时反馈：阅读时，语音转文本AI分析阅读流利性，检测学习者挑战的词汇，并记录阅读的准确性、速度和时间。<br />
-<br />
-5、互动性阅读：学习者在故事章节中做出选择，通过故事导航自己的阅读旅程。上一章节中挑战的词汇会自动纳入下一章节，实现即时适应性练习。<br />
-<br />
-6、流利性教练：在每个故事章节后，提供针对挑战词汇的流利性指导。<br />
-<br />
-7、激励机制：通过努力为中心的徽章，解锁新角色和设定，以保持学习者的阅读动力。<br />
-<br />
-🔗：<a href="https://coach.microsoft.com/">coach.microsoft.com/</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDgyMDg4MzQ2ODA4NTI0ODAvcHUvaW1nL0lMS3k2WnkzbHVZejhPMmcuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/HiTw93/status/1748132914372477126#m</id>
-            <title>RT by @dotey: #工程师工具 发现一个做得很精致的免费开源简历生成器，可以把很好通过表单填写生成一份精致的简历，包括编辑、以及共享给其他人的查看，很潮流，会比纯粹Word简历方便不少，有需要的小伙伴可以试试，假如你是前端或Java正在找工作，也可以用这个工具生成简历以后发给我～
-🤖 https://rxresu.me/</title>
-            <link>https://nitter.cz/HiTw93/status/1748132914372477126#m</link>
-            <guid isPermaLink="false">https://nitter.cz/HiTw93/status/1748132914372477126#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 18 Jan 2024 23:59:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p><a href="https://nitter.cz/search?q=%23工程师工具">#工程师工具</a> 发现一个做得很精致的免费开源简历生成器，可以把很好通过表单填写生成一份精致的简历，包括编辑、以及共享给其他人的查看，很潮流，会比纯粹Word简历方便不少，有需要的小伙伴可以试试，假如你是前端或Java正在找工作，也可以用这个工具生成简历以后发给我～<br />
-🤖 <a href="https://rxresu.me/">rxresu.me/</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VLQW53Z2FjQUFIb3d2LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1748191295192104996#m</id>
-            <title>RT by @dotey: 兄弟们一个界面非常简洁美观功能强大的的开源知识库程序。
-
-推荐给你们！
-
-Outline： 是一个快速、协作的团队知识库，美观、实时协作、功能丰富，并且兼容Markdown。
-
-适用于各种文档和知识管理需求。
-
-是一个直观、快速且协作的文档编辑和管理平台：
-
--直观的编辑体验：提供了一个支持Markdown、斜线命令、互动嵌入等功能的快速编辑器。
-
--实时协作：支持团队成员在文档上实时协作，评论和线程帮助保持对话的组织性。
-
--即时搜索：文档可以嵌套在层次结构中，自动构建反向链接网络，实现毫秒级的全文搜索。
-
--与Slack集成：可以在Slack中搜索、分享和提问，文档更新时可向频道发送通知。
-
--公共共享：支持通过链接公开共享文档，或私下与团队分享。用户可以使用自己的品牌颜色、Logo和域名。
-
--速度快：强调了应用的快速响应时间，包括文档的即时加载和快速导航。
-
--协作性：设计初衷是强大、实时且易于使用，以提供愉快的阅读和写作体验。
-
--安全性与权限管理：提供读写权限管理、用户组、访客用户、公共共享等功能。
-
--20+集成：简单集成到如Slack、Figma、Loom等日常使用的工具，还提供开放API。
-
--多语言支持：支持从右到左的书写（RTL）并支持 17 种语言的翻译，包括法语、西班牙语、德语、韩语和中文。
-
--开源和可定制：Outline的源代码是公开的，开发在公开环境中完成。支持自定义域名和品牌颜色。
-
-GitHub：https://github.com/outline/outline
-在线演示：https://www.getoutline.com/</title>
-            <link>https://nitter.cz/xiaohuggg/status/1748191295192104996#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1748191295192104996#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 19 Jan 2024 03:50:59 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>兄弟们一个界面非常简洁美观功能强大的的开源知识库程序。<br />
-<br />
-推荐给你们！<br />
-<br />
-Outline： 是一个快速、协作的团队知识库，美观、实时协作、功能丰富，并且兼容Markdown。<br />
-<br />
-适用于各种文档和知识管理需求。<br />
-<br />
-是一个直观、快速且协作的文档编辑和管理平台：<br />
-<br />
--直观的编辑体验：提供了一个支持Markdown、斜线命令、互动嵌入等功能的快速编辑器。<br />
-<br />
--实时协作：支持团队成员在文档上实时协作，评论和线程帮助保持对话的组织性。<br />
-<br />
--即时搜索：文档可以嵌套在层次结构中，自动构建反向链接网络，实现毫秒级的全文搜索。<br />
-<br />
--与Slack集成：可以在Slack中搜索、分享和提问，文档更新时可向频道发送通知。<br />
-<br />
--公共共享：支持通过链接公开共享文档，或私下与团队分享。用户可以使用自己的品牌颜色、Logo和域名。<br />
-<br />
--速度快：强调了应用的快速响应时间，包括文档的即时加载和快速导航。<br />
-<br />
--协作性：设计初衷是强大、实时且易于使用，以提供愉快的阅读和写作体验。<br />
-<br />
--安全性与权限管理：提供读写权限管理、用户组、访客用户、公共共享等功能。<br />
-<br />
--20+集成：简单集成到如Slack、Figma、Loom等日常使用的工具，还提供开放API。<br />
-<br />
--多语言支持：支持从右到左的书写（RTL）并支持 17 种语言的翻译，包括法语、西班牙语、德语、韩语和中文。<br />
-<br />
--开源和可定制：Outline的源代码是公开的，开发在公开环境中完成。支持自定义域名和品牌颜色。<br />
-<br />
-GitHub：<a href="https://github.com/outline/outline">github.com/outline/outline</a><br />
-在线演示：<a href="https://www.getoutline.com/">getoutline.com/</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VMUlNjTGEwQUEwNDhZLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
