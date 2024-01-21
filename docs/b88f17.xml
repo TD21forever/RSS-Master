@@ -5,6 +5,54 @@
         <link>https://nitter.cz/dotey</link>
         
         <item>
+            <id>https://nitter.cz/Yangyixxxx/status/1749007949991956555#m</id>
+            <title>RT by @dotey: LLM的信息记忆交互是个非常值得研究的课题。
+虽然Langchain在持续不断抽象解决这个问题，但可能还需要一定时间才能做的更好。
+
+以下是我自己的一些认识：
+1、滚动窗口，设定一个滚动窗口，LLM记的住窗口内部的内容，这种更像是一种缓存机制
+2、对历史对话不断总结，比如针对Q1A1-Q2A2....做summary，但信息会有折损
+3、对消息进行外部存储，通过提问和上下文做召回，将召回内容返回给LLM的对话窗口以便使用
+这种工程化作业就很多了，用矢量库的，或者redis的，各种各样。多半知识库也是利用这个
+4、还有很多有意思的工程，比如replika设定的mark，可以让用户主动标记某个消息，如用户的生日，构成外部优先级比较高的存储信息
+
+目前从整体方法上讲虽然就这些，但实际上的使用要区分场景和实施细节，结果会完全不一样。
+
+比如一条信息，到底是以实体的方式存储维护，还是单单是一个单纯的文本，亦或是构建成知识图谱三元组？这些往往要因场景和预期效果而定。对token消耗，响应时间，召回效果上做不可能三角的平衡，用到的Langchain的方法也不太一样（比如下图）
+
+这里有一个将Langchain翻译过的中文站，之前看过一些，感觉工程上还是有非常非常多细节的。
+https://www.langchain.com.cn</title>
+            <link>https://nitter.cz/Yangyixxxx/status/1749007949991956555#m</link>
+            <guid isPermaLink="false">https://nitter.cz/Yangyixxxx/status/1749007949991956555#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 21 Jan 2024 09:56:04 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>LLM的信息记忆交互是个非常值得研究的课题。<br />
+虽然Langchain在持续不断抽象解决这个问题，但可能还需要一定时间才能做的更好。<br />
+<br />
+以下是我自己的一些认识：<br />
+1、滚动窗口，设定一个滚动窗口，LLM记的住窗口内部的内容，这种更像是一种缓存机制<br />
+2、对历史对话不断总结，比如针对Q1A1-Q2A2....做summary，但信息会有折损<br />
+3、对消息进行外部存储，通过提问和上下文做召回，将召回内容返回给LLM的对话窗口以便使用<br />
+这种工程化作业就很多了，用矢量库的，或者redis的，各种各样。多半知识库也是利用这个<br />
+4、还有很多有意思的工程，比如replika设定的mark，可以让用户主动标记某个消息，如用户的生日，构成外部优先级比较高的存储信息<br />
+<br />
+目前从整体方法上讲虽然就这些，但实际上的使用要区分场景和实施细节，结果会完全不一样。<br />
+<br />
+比如一条信息，到底是以实体的方式存储维护，还是单单是一个单纯的文本，亦或是构建成知识图谱三元组？这些往往要因场景和预期效果而定。对token消耗，响应时间，召回效果上做不可能三角的平衡，用到的Langchain的方法也不太一样（比如下图）<br />
+<br />
+这里有一个将Langchain翻译过的中文站，之前看过一些，感觉工程上还是有非常非常多细节的。<br />
+<a href="https://www.langchain.com.cn">langchain.com.cn</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VXM0U2WGJrQUFBZmNBLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/dotey/status/1748997349320364122#m</id>
             <title>#AI开源项目推荐#：ML-Papers-of-the-Week
 
@@ -902,87 +950,6 @@ Prompt和运行结果参考：https://github.com/Codium-ai/AlphaCodium/blob/main
 项目源码：<a href="https://github.com/Codium-ai/AlphaCodium/">github.com/Codium-ai/AlphaCo…</a><br />
 Prompt和运行结果参考：<a href="https://github.com/Codium-ai/AlphaCodium/blob/main/alpha_codium/gen/example.log">github.com/Codium-ai/AlphaCo…</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0VQdkdWc1gwQUFVRi1BLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1748503587682967775#m</id>
-            <title>这两天看到的收获很大的一篇论文《AlphaCodium：引领代码生成新境界，从提示工程到流程工程》，它提出了一种新的生成代码的方法，比传统的直接基于Prompt生成代码的方式准确率更高。
-
-它用的测试集是CodeContests ，这是由 Deepmind 推出的一项挑战性编程数据集。相对来说还是很权威的。以 GPT-4 为例的话，准确率从19%提升到了44%。
-
-它的原理有些复杂，但是如果你有过LeetCode刷题经验，相对比较好理解一些。
-
-普通人刷 LeetCode，上来就做，这样有可能得到答案，也有可能做不出来，这就类似于你把题目直接丢给GPT-4，让它直接给出答案，准确率相对要低一些。
-
-高手刷LeetCode，会有个做题的流程，同样的水平，做出来的概率会大一些。
-高手做题时会大概分成几个步骤：
-1. 先把题目中的要点一条条列出来，确保不会遗漏任何重要信息
-2. 通常LeetCode会提供 1 个或多个测试用例，仔细看测试用例，分析为什么给定的输入能得到给定的输出
-3. 在写代码前，列出几种可能的解决方案，例如暴力算法、递归、动态规划，每一种方案写下思路和伪代码
-4. 对于列出来的几种方案进行评估，选出最佳方案
-5. 可能还会补充一些测试用例帮助事后验证
----
-以下部分是迭代过程：
-6. 根据选中的解决方案写代码，如果代码不能运行则修改代码直至能运行
-7. 将代码提交到LeetCode的测试集去验证，如果无法通过所有测试，则修改错误，如果通过到第8步
-8. 用第 5 步生成的测试用例验证代码，如果运行不通过则继续优化代码
-
-这里留个思考题：如果第8步出错，怎么判断是代码有问题还是自己生成的测试用例有问题？
-
-而 AlphaCodium 就是完美遵循了以上的步骤来解题，只不过每一步都是由大语言模型帮助完成！
-
-这给了我一些启示：
-1. 不必寄希望于将复杂的任务在一个 Prompt 中完成，拆分成若干子任务成功概率会高一些
-2. AI 可以借鉴人类的优秀实践，例如高手是如何解决编程难题的，让 AI 按照高手的步骤去一步步做
-3. AI 的潜力还有很大挖掘空间
-
-完整的文章参考：https://www.codium.ai/blog/alphacodium-state-of-the-art-code-generation-for-code-contests/
-中文译文：https://baoyu.io/translations/prompt-engineering/alphacodium-state-of-the-art-code-generation-for-code-contests</title>
-            <link>https://nitter.cz/dotey/status/1748503587682967775#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1748503587682967775#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 20 Jan 2024 00:31:55 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这两天看到的收获很大的一篇论文《AlphaCodium：引领代码生成新境界，从提示工程到流程工程》，它提出了一种新的生成代码的方法，比传统的直接基于Prompt生成代码的方式准确率更高。<br />
-<br />
-它用的测试集是CodeContests ，这是由 Deepmind 推出的一项挑战性编程数据集。相对来说还是很权威的。以 GPT-4 为例的话，准确率从19%提升到了44%。<br />
-<br />
-它的原理有些复杂，但是如果你有过LeetCode刷题经验，相对比较好理解一些。<br />
-<br />
-普通人刷 LeetCode，上来就做，这样有可能得到答案，也有可能做不出来，这就类似于你把题目直接丢给GPT-4，让它直接给出答案，准确率相对要低一些。<br />
-<br />
-高手刷LeetCode，会有个做题的流程，同样的水平，做出来的概率会大一些。<br />
-高手做题时会大概分成几个步骤：<br />
-1. 先把题目中的要点一条条列出来，确保不会遗漏任何重要信息<br />
-2. 通常LeetCode会提供 1 个或多个测试用例，仔细看测试用例，分析为什么给定的输入能得到给定的输出<br />
-3. 在写代码前，列出几种可能的解决方案，例如暴力算法、递归、动态规划，每一种方案写下思路和伪代码<br />
-4. 对于列出来的几种方案进行评估，选出最佳方案<br />
-5. 可能还会补充一些测试用例帮助事后验证<br />
----<br />
-以下部分是迭代过程：<br />
-6. 根据选中的解决方案写代码，如果代码不能运行则修改代码直至能运行<br />
-7. 将代码提交到LeetCode的测试集去验证，如果无法通过所有测试，则修改错误，如果通过到第8步<br />
-8. 用第 5 步生成的测试用例验证代码，如果运行不通过则继续优化代码<br />
-<br />
-这里留个思考题：如果第8步出错，怎么判断是代码有问题还是自己生成的测试用例有问题？<br />
-<br />
-而 AlphaCodium 就是完美遵循了以上的步骤来解题，只不过每一步都是由大语言模型帮助完成！<br />
-<br />
-这给了我一些启示：<br />
-1. 不必寄希望于将复杂的任务在一个 Prompt 中完成，拆分成若干子任务成功概率会高一些<br />
-2. AI 可以借鉴人类的优秀实践，例如高手是如何解决编程难题的，让 AI 按照高手的步骤去一步步做<br />
-3. AI 的潜力还有很大挖掘空间<br />
-<br />
-完整的文章参考：<a href="https://www.codium.ai/blog/alphacodium-state-of-the-art-code-generation-for-code-contests/">codium.ai/blog/alphacodium-s…</a><br />
-中文译文：<a href="https://baoyu.io/translations/prompt-engineering/alphacodium-state-of-the-art-code-generation-for-code-contests">baoyu.io/translations/prompt…</a></p>
-<p><a href="https://nitter.cz/itamar_mar/status/1747957348293824676#m">nitter.cz/itamar_mar/status/1747957348293824676#m</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NDg0OTMwODk1ODc1NzI3MzYvcHUvaW1nLzFCTkh3UjBnbElOV0Q3cUEuanBn" />
                 ]]>
             </content:encoded>
         </item>
