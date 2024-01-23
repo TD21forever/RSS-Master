@@ -414,18 +414,43 @@ Email (work): +++&lt;span style="display: none" aria-hidden="true"&gt;PLEASE GO 
         </item>
         
         <item>
-            <id>https://sspai.com/post/85182</id>
-            <title>原理、对策与产品：聊聊牙齿美白两三事</title>
-            <link>https://sspai.com/post/85182</link>
-            <guid isPermaLink="false">https://sspai.com/post/85182</guid>
+            <id>https://sspai.com/post/85816</id>
+            <title>一日一技｜巧用 Keyboard Maestro，快速在备忘录中记录窗口的选中内容</title>
+            <link>https://sspai.com/post/85816</link>
+            <guid isPermaLink="false">https://sspai.com/post/85816</guid>
             <pubDate></pubDate>
-            <updated>Tue, 16 Jan 2024 14:39:52 GMT</updated>
+            <updated>Sun, 14 Jan 2024 10:19:46 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    原理、对策与产品：聊聊牙齿美白两三事
+                        <div> 关键词: Matrix, 写作社区, 实用价值, 备忘录
+<br>
+<br>
+总结: Matrix是少数派的写作社区，主张分享真实的产品体验，有实用价值的经验与思考。在文章中，作者介绍了他在日常生活中记录重要信息的需求，并选择了备忘录App作为存储内容的软件。为了自动化记录，作者使用了Keyboard Maestro这款工具，实现了在窗口中选中内容后自动打开备忘录并记录相关信息的功能。通过这种方式，作者提供了一个方便、高效的方法来记录重要信息。 </div>
+                        <hr>
+                    
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐&nbsp;</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>在日常生活中，经常需要去记录一些在不同软件中的，未来可能会用到的重要信息。一般来讲，我需要的内容应该包含以下几个部分：软件名称、时间、我选中的重要信息。</p><p>而我最初关于存储内容的软件考虑就是「备忘录」App，主要是因为其在 Apple 生态中原生的体验、优秀的多端同步机制。</p><p>于是我就在想，有没有一个自动化的流程可以去记录这些。最终我选用了 Keyboard Maestro 这款万能的工具。可以一键导入的 kmmacros 文件放在文章最底部，方便大家下载。</p><h2>实现功能</h2><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/14/86dfee9eb4fff486f476b1084d789727.gif" /><figcaption>过程演示</figcaption></figure><ol><li>在窗口中选中一段内容</li><li>点击特定快捷键（这里我设置的是 ⌘ + ⌥ + ⇧ + C）</li><li>自动打开备忘录，并记录如下内容：<br />标题为窗口名称+应用名称+保存时间<br />正文为图片+选中文字+应用名称的 Tag 以方便搜索</li></ol><h2>所需工具</h2><p>为了实现这个功能，你需要使用如下软件：</p><ul><li><strong>Keyboard Maestro</strong></li></ul><p>更多关于 Keyboard Maestro 的使用方法，可以参考以下栏目：</p><span class="ss-paidSection" type="paidsection">&nbsp;</span><h2>实现思路</h2><p>为了实现这个功能，我们首先需要明确我们应该获得哪些信息：</p><ul><li>窗口及其 App 的名称</li><li>窗口的截图</li><li>选中的内容</li></ul><p>然而 Keyboard Maestro 并不方便去获取这些内容，于是我用到了集成在 Keyboard Maestro 中的「大杀器」：Apple Script。</p><p>Apple Script 是苹果公司开发的一种脚本语言，可以用来控制运行于 macOS 上的程序，也可以写成独立运行的 Applet。它与 macOS 深度集成，可以进行很多操作。恰好，作为一个编程语言，ChatGPT 也学习了其大量的资料，因此可以很方便的让 ChatGPT 来帮我们补全程序，而我们只需要提供思路即可。</p><h3>选中的内容</h3><p>我们可以直接通过复制（选中的内容）指令，将选中的内容存在剪切板中。而为了不破坏系统剪切板的内容，我们将其放在 Keyboard Maestro 的自定义剪切板中。如图。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/14/fd0382b1e66effbe73da00de83ba1aa8.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>获取窗口的截图</h3><p>我们可以直接调用 Keyboard Maestro 中的指令 「Screen Capture Front Window」即可。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/14/ce45a0672809e8615a3caf20df70d87c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&nbsp;</p><h3>获取窗口的名称及其对应软件的名称</h3><p>这两个名称用 Keyboard Maestro 获取不是很方便，因此我选用了 Apple Script。</p><p>获取窗口名称的程序是：</p><pre class="language-null"><code>tell application "System Events"
+set frontApp to first application process whose frontmost is true
+set frontAppName to name of frontApp
+tell process frontAppName
+set windowTitle to name of front window
+end tell
+end tell
+
+return windowTitle</code></pre><p>获取对应软件名称的程序是：</p><pre class="language-null"><code>tell application "System Events"
+set frontAppName to name of first application process whose frontmost is true
+end tell
+
+set oldDelimiters to AppleScript's text item delimiters
+set AppleScript's text item delimiters to " "
+set textItemList to text items of frontAppName
+set AppleScript's text item delimiters to ""
+set frontAppNameNoSpaces to textItemList as string
+set AppleScript's text item delimiters to oldDelimiters
+
+return frontAppNameNoSpaces</code></pre><p>随后，两个返回的变量保存在 Macros 的变量中：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/14/8934aca08842e0d1e62cd74e0f6696ad.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>产生的一些问题</h3><p>在写接下来的指令时，我就按照：「新建备忘录 —— 一点一点粘贴对应的东西」这个流程来操作，就如图所示：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/14/ff7a619c60bb1c2cc99f5a64d6d0f15a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>但当实际操作时，我发现它会在一种情况下报错：当备忘录已经打开一个新建的备忘录，但没有任何输入的内容时，就无法选中 文件——新建备忘录 ，如图所示：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/14/c84e5d5af4b0453c368a9942af1bc317.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这种情况就会导致程序的报错。而为了解决这个问题，我使用了 "Try … Catch …" 指令，先默认没有新建的备忘录进行操作。如果发现有新建的备忘录，那么就直接粘贴内容。解决了这个问题。</p><h2>下载链接</h2><p>GitHub 链接：<a href="https://github.com/MarvinCui/Keyboard-Maestro-Macros-by-Marvin/blob/main/Save%20to%20Notes/Save%20to%20Notes.kmmacros" target="_blank">Link</a></p><p style="margin-left: 0px;">&gt; 下载少数派 <a href="https://sspai.com/page/client">客户端</a>、关注 <a href="https://sspai.com/link?target=https%3A%2F%2Fwww.xiaohongshu.com%2Fuser%2Fprofile%2F63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现🚀</p>
                 ]]>
             </content:encoded>
         </item>
