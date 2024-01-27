@@ -5,6 +5,280 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
+            <id>https://nitter.cz/op7418/status/1751300318464487521#m</id>
+            <title>昨晚谷歌还发布了一种叫“仅权重量化”（weight-only quantization）的技术。这项技术使用了 8 位整数（S8）来表示权重，同时使用 16 位浮点数（F16）来表示输入数据，以此进行矩阵乘法运算。这种方法在保证一定精度的同时，提高了运算效率。
+
+详细内容：https://blog.research.google/2024/01/mixed-input-matrix-multiplication.html</title>
+            <link>https://nitter.cz/op7418/status/1751300318464487521#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1751300318464487521#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 27 Jan 2024 17:45:08 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>昨晚谷歌还发布了一种叫“仅权重量化”（weight-only quantization）的技术。这项技术使用了 8 位整数（S8）来表示权重，同时使用 16 位浮点数（F16）来表示输入数据，以此进行矩阵乘法运算。这种方法在保证一定精度的同时，提高了运算效率。<br />
+<br />
+详细内容：<a href="https://blog.research.google/2024/01/mixed-input-matrix-multiplication.html">blog.research.google/2024/01…</a></p>
+<p><a href="https://nitter.cz/GoogleAI/status/1750977073009881469#m">nitter.cz/GoogleAI/status/1750977073009881469#m</a></p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTc1MDk3NzAyOTQ2NDYwODc2OC9mZnpKT21kQj9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1751298793130065978#m</id>
+            <title>虚幻引擎5生成的一个演示视频，非常真实，如果不是偶尔的画面撕裂我都无法分辨出来这是渲染的。
+
+前几天虚幻引擎更新5.3之后才基本把之前发布时说的所有能力补齐，确实牛批。</title>
+            <link>https://nitter.cz/op7418/status/1751298793130065978#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1751298793130065978#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 27 Jan 2024 17:39:04 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>虚幻引擎5生成的一个演示视频，非常真实，如果不是偶尔的画面撕裂我都无法分辨出来这是渲染的。<br />
+<br />
+前几天虚幻引擎更新5.3之后才基本把之前发布时说的所有能力补齐，确实牛批。</p>
+<img src="https://nitter.cz/pic/enc/YW1wbGlmeV92aWRlb190aHVtYi8xNzUwODkwMDE5MzcwMjc0ODE2L2ltZy80bllIZE01SEp3QTNfVmM0LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1751296580836377017#m</id>
+            <title>今天是InstructGPT发布两周年的纪念日，它是现代大语言模型的开山鼻祖。
+
+Jim Fan介绍了InstructGPT的重要性并且说了几条关于InstructGPT非常有意思的点。还展示了InstructGPT中非常经典的三步LLM训练方法的图片，我也顺便让GPT-4解释了一下也顺便放在下面：
+
+InstructGPT 开创了一个经典的模型训练方法：先进行预训练，然后是监督式微调，最后是基于强化学习的人类反馈（Reinforcement Learning from Human Feedback, RLHF）。
+这个策略至今仍被广泛采用，虽然有些许变化，比如 DPO 策略。
+
+InstructGPT 可能是 OpenAI 最后一次详细介绍他们如何训练尖端模型的论文。
+回顾这两年，Jim Fan认为它标志着大语言模型从学术研究（GPT-3）走向实际应用（ChatGPT）的关键转折点。
+
+一些有趣的事实：
+
+1️⃣InstructGPT 并非 RLHF 的发明者。实际上，它的博客链接指向了 OpenAI 团队在 2017 年完成的最早的 RLHF 研究。RLHF 的初衷是解决模拟机器人领域中难以定义的任务。它通过要求人类注释者给出 900 个简单的是非选择，帮助一个名为“跳跃机器人”的机器人在模拟环境中学会了后空翻：https://openai.com/research/learning-from-human-preferences
+
+2️⃣InstructGPT 在 2022 年的 NeurIPS 会议上亮相，地点是新奥尔良。当时Jim Fan正在会上展示他的项目 MineDojo，看到 OpenAI 的展示非常惊喜。
+
+3️⃣这些模型有三种规模：1.3B、6B 和 175B。与老式的、需要复杂提示的 GPT-3-175B 相比，标注者更加青睐 Instruct-1.3B。而且，Microsoft Phi-1，作为众所周知的小型优秀语言模型之一，也是 1.3B。
+
+4️⃣InstructGPT 在展示研究方面堪称典范。它的三步骤图解清晰易懂，成为 AI 领域最具标志性的视觉之一。它的引言部分直奔主题，用粗体突出了八个主要观点。对于模型局限性和偏见问题的讨论，也是实事求是和坦诚的。
+
+InstructGPT模型三步训练方法示意图介绍：
+
+1️⃣第1步：收集示范数据，并训练一个监督策略。
+
+从我们的提示数据集中抽取一个提示，例如“向一个6岁的孩子解释月球登陆”。
+标注者提供期望的输出行为，例如“一些人去了月球”。
+这些数据被用来通过监督学习细调GPT-3模型。
+
+2️⃣第2步：收集比较数据，并训练一个奖励模型。
+
+抽取一个提示和几个模型输出样本，例如同样是“向一个6岁的孩子解释月球登陆”。
+标注者会对这些输出进行排名，从最好到最差。
+这些数据被用来训练我们的奖励模型。
+
+3️⃣第3步：使用强化学习对奖励模型优化策略。
+
+从数据集中抽取一个新的提示，例如“写一个关于青蛙的故事”。
+策略生成一个输出，比如开始写“从前有一次…”。
+奖励模型计算一个奖励值给这个输出。
+这个奖励值被用来通过PPO（比例策略优化）更新策略。
+整个过程展示了从收集数据到通过人类标注者的反馈来训练和优化人工智能模型的步骤。这种方法结合了监督学习和强化学习来改进模型的性能。
+
+OpenAI原文：https://openai.com/research/instruction-following</title>
+            <link>https://nitter.cz/op7418/status/1751296580836377017#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1751296580836377017#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 27 Jan 2024 17:30:17 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>今天是InstructGPT发布两周年的纪念日，它是现代大语言模型的开山鼻祖。<br />
+<br />
+Jim Fan介绍了InstructGPT的重要性并且说了几条关于InstructGPT非常有意思的点。还展示了InstructGPT中非常经典的三步LLM训练方法的图片，我也顺便让GPT-4解释了一下也顺便放在下面：<br />
+<br />
+InstructGPT 开创了一个经典的模型训练方法：先进行预训练，然后是监督式微调，最后是基于强化学习的人类反馈（Reinforcement Learning from Human Feedback, RLHF）。<br />
+这个策略至今仍被广泛采用，虽然有些许变化，比如 DPO 策略。<br />
+<br />
+InstructGPT 可能是 OpenAI 最后一次详细介绍他们如何训练尖端模型的论文。<br />
+回顾这两年，Jim Fan认为它标志着大语言模型从学术研究（GPT-3）走向实际应用（ChatGPT）的关键转折点。<br />
+<br />
+一些有趣的事实：<br />
+<br />
+1️⃣InstructGPT 并非 RLHF 的发明者。实际上，它的博客链接指向了 OpenAI 团队在 2017 年完成的最早的 RLHF 研究。RLHF 的初衷是解决模拟机器人领域中难以定义的任务。它通过要求人类注释者给出 900 个简单的是非选择，帮助一个名为“跳跃机器人”的机器人在模拟环境中学会了后空翻：<a href="https://openai.com/research/learning-from-human-preferences">openai.com/research/learning…</a><br />
+<br />
+2️⃣InstructGPT 在 2022 年的 NeurIPS 会议上亮相，地点是新奥尔良。当时Jim Fan正在会上展示他的项目 MineDojo，看到 OpenAI 的展示非常惊喜。<br />
+<br />
+3️⃣这些模型有三种规模：1.3B、6B 和 175B。与老式的、需要复杂提示的 GPT-3-175B 相比，标注者更加青睐 Instruct-1.3B。而且，Microsoft Phi-1，作为众所周知的小型优秀语言模型之一，也是 1.3B。<br />
+<br />
+4️⃣InstructGPT 在展示研究方面堪称典范。它的三步骤图解清晰易懂，成为 AI 领域最具标志性的视觉之一。它的引言部分直奔主题，用粗体突出了八个主要观点。对于模型局限性和偏见问题的讨论，也是实事求是和坦诚的。<br />
+<br />
+InstructGPT模型三步训练方法示意图介绍：<br />
+<br />
+1️⃣第1步：收集示范数据，并训练一个监督策略。<br />
+<br />
+从我们的提示数据集中抽取一个提示，例如“向一个6岁的孩子解释月球登陆”。<br />
+标注者提供期望的输出行为，例如“一些人去了月球”。<br />
+这些数据被用来通过监督学习细调GPT-3模型。<br />
+<br />
+2️⃣第2步：收集比较数据，并训练一个奖励模型。<br />
+<br />
+抽取一个提示和几个模型输出样本，例如同样是“向一个6岁的孩子解释月球登陆”。<br />
+标注者会对这些输出进行排名，从最好到最差。<br />
+这些数据被用来训练我们的奖励模型。<br />
+<br />
+3️⃣第3步：使用强化学习对奖励模型优化策略。<br />
+<br />
+从数据集中抽取一个新的提示，例如“写一个关于青蛙的故事”。<br />
+策略生成一个输出，比如开始写“从前有一次…”。<br />
+奖励模型计算一个奖励值给这个输出。<br />
+这个奖励值被用来通过PPO（比例策略优化）更新策略。<br />
+整个过程展示了从收集数据到通过人类标注者的反馈来训练和优化人工智能模型的步骤。这种方法结合了监督学习和强化学习来改进模型的性能。<br />
+<br />
+OpenAI原文：<a href="https://openai.com/research/instruction-following">openai.com/research/instruct…</a></p>
+<p><a href="https://nitter.cz/DrJimFan/status/1751285761364906476#m">nitter.cz/DrJimFan/status/1751285761364906476#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0UzYWM2QWFVQUEyQWFOLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1751293373074510210#m</id>
+            <title>另一个GPTs调用能力的牛批演示，在一个聊天中先使用Grimoire构建一个网页。
+
+然后直接调用DesignerGPT对上面Grimoire生成的网页进行部署。
+
+这样通过两个GPTs的协作，就直接获得了一个部署好的网站。</title>
+            <link>https://nitter.cz/op7418/status/1751293373074510210#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1751293373074510210#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 27 Jan 2024 17:17:32 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>另一个GPTs调用能力的牛批演示，在一个聊天中先使用Grimoire构建一个网页。<br />
+<br />
+然后直接调用DesignerGPT对上面Grimoire生成的网页进行部署。<br />
+<br />
+这样通过两个GPTs的协作，就直接获得了一个部署好的网站。</p>
+<p><a href="https://nitter.cz/skirano/status/1751092906964787406#m">nitter.cz/skirano/status/1751092906964787406#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1751292605781205337#m</id>
+            <title>R to @op7418: 我自己的体验在这里：
+https://x.com/op7418/status/1751292333268893851?s=20</title>
+            <link>https://nitter.cz/op7418/status/1751292605781205337#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1751292605781205337#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 27 Jan 2024 17:14:29 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>我自己的体验在这里：<br />
+<a href="https://x.com/op7418/status/1751292333268893851?s=20">x.com/op7418/status/17512923…</a></p>
+<p><a href="https://nitter.cz/op7418/status/1751292333268893851#m">nitter.cz/op7418/status/1751292333268893851#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1751292333268893851#m</id>
+            <title>我刚才发现自己有了ChatGPT昨天发布的GPTs联动的功能，试了一下确实强大。
+
+下面用一个例子看一下如何使用和具体能力，还有一个对简中用户比较重要的操作。
+
+我自己看论文会先下载下来让ChatGPT总结，然后会用宝玉的科技文章翻译GPTs对总结的内容进行精细的翻译，以前完成这两步起码需要我切两个窗口，然后复制粘贴一次。
+
+现在我只需要在总结完成后输入“@”找到需要的GPTs，输入要求就可以在一次对话中完成，甚至我还可以再搞一个自动发推的GPTs在ChatGPT直接将翻译内容发到推特上。
+
+最后一个对简中用户不太友好的BUG：拉起GPTs选择的时候你输入的“@”符号需要在英文输入法下才能调用这个功能，中文输入法下面没办法拉起GPTs选择，OpenAI做产品是真的糙。</title>
+            <link>https://nitter.cz/op7418/status/1751292333268893851#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1751292333268893851#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 27 Jan 2024 17:13:24 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>我刚才发现自己有了ChatGPT昨天发布的GPTs联动的功能，试了一下确实强大。<br />
+<br />
+下面用一个例子看一下如何使用和具体能力，还有一个对简中用户比较重要的操作。<br />
+<br />
+我自己看论文会先下载下来让ChatGPT总结，然后会用宝玉的科技文章翻译GPTs对总结的内容进行精细的翻译，以前完成这两步起码需要我切两个窗口，然后复制粘贴一次。<br />
+<br />
+现在我只需要在总结完成后输入“@”找到需要的GPTs，输入要求就可以在一次对话中完成，甚至我还可以再搞一个自动发推的GPTs在ChatGPT直接将翻译内容发到推特上。<br />
+<br />
+最后一个对简中用户不太友好的BUG：拉起GPTs选择的时候你输入的“@”符号需要在英文输入法下才能调用这个功能，中文输入法下面没办法拉起GPTs选择，OpenAI做产品是真的糙。</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTEyOTIyNTcwODc2ODg3MDQvcHUvaW1nL0dFdHpDX2JJcWhsNmY3S3YuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1751187683400105984#m</id>
+            <title>昨晚ChatGPT推出了通过在正常的聊天中@其他GPTs协同处理任务的能力，这个能力非常强大。
+
+他让GPTs的可能性多了非常多，我没有被灰度到，Dan Shipper这个演示非常详细和完整。
+
+他演示了如何将对话结果利用GPTs直接保存到Notion中，我顺便翻译了这个视频，如果你也没有被灰度到可以看看这个视频。</title>
+            <link>https://nitter.cz/op7418/status/1751187683400105984#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1751187683400105984#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 27 Jan 2024 10:17:33 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>昨晚ChatGPT推出了通过在正常的聊天中@其他GPTs协同处理任务的能力，这个能力非常强大。<br />
+<br />
+他让GPTs的可能性多了非常多，我没有被灰度到，Dan Shipper这个演示非常详细和完整。<br />
+<br />
+他演示了如何将对话结果利用GPTs直接保存到Notion中，我顺便翻译了这个视频，如果你也没有被灰度到可以看看这个视频。</p>
+<p><a href="https://nitter.cz/danshipper/status/1751017376143794415#m">nitter.cz/danshipper/status/1751017376143794415#m</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTExODc1ODgxMDk3OTUzMjgvcHUvaW1nLzJGQkdTdjNtUnFSTjdJZEsuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1751170799082643524#m</id>
+            <title>Stability ai即将发布图像放大产品或者模型，用的演示还是Magnific AI曾经用过的劳拉图片。</title>
+            <link>https://nitter.cz/op7418/status/1751170799082643524#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1751170799082643524#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 27 Jan 2024 09:10:28 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Stability ai即将发布图像放大产品或者模型，用的演示还是Magnific AI曾经用过的劳拉图片。</p>
+<p><a href="https://nitter.cz/EMostaque/status/1751061406382735633#m">nitter.cz/EMostaque/status/1751061406382735633#m</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Uxb0xLZWFJQUEwa2FZLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/op7418/status/1750929802461388902#m</id>
             <title>这两个确实挺合适合作的，现在可以将Perplexity设置为Arc的默认搜索引擎。</title>
             <link>https://nitter.cz/op7418/status/1750929802461388902#m</link>
@@ -345,253 +619,6 @@
 <br />
 3）新增了 /feedback 功能。 这个功能允许你提交给 Midjourney 团队，告诉我们你最希望我们优先开发和完善的功能或项目。</p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTA0MjM4MDY1ODQ1MTI1MTIvcHUvaW1nL2IxWWNYTndnb1dobUVPNUMuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1750443205538234601#m</id>
-            <title>RT by @op7418: 🧪Midjoureny V6 现在对这类大场景仙侠内容的响应是真的好，整个画面氛围感相当足。
-
-确实是想象中的修仙门派场景，而且服装非常朴素不浮夸，没有被国内后来的垃圾仙侠游戏素材污染。
-
-提示词：
-Chinese style cultivator, 3D, CG, upon the clouds,back view, sense of speed, many young Chinese immortals are flying on the sky wearing light blue clothes,flying to a chinese golden palace --ar 16:9 --stylize 250 --v 6
-#晚安提示词</title>
-            <link>https://nitter.cz/op7418/status/1750443205538234601#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1750443205538234601#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 25 Jan 2024 08:59:16 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>🧪Midjoureny V6 现在对这类大场景仙侠内容的响应是真的好，整个画面氛围感相当足。<br />
-<br />
-确实是想象中的修仙门派场景，而且服装非常朴素不浮夸，没有被国内后来的垃圾仙侠游戏素材污染。<br />
-<br />
-提示词：<br />
-Chinese style cultivator, 3D, CG, upon the clouds,back view, sense of speed, many young Chinese immortals are flying on the sky wearing light blue clothes,flying to a chinese golden palace --ar 16:9 --stylize 250 --v 6<br />
-<a href="https://nitter.cz/search?q=%23晚安提示词">#晚安提示词</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VyUjlwZWJzQUFRMU1pLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VyUl9wSWJNQUFFV2QxLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VyU0RGTmF3QUFWUEhhLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VyU0lHbWFBQUFtZmEzLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1750497734849917017#m</id>
-            <title>RT by @op7418: 前几天刷到了好几个用Pixverse做的好视频，刚好他们最近上线了网页版本和新模型就想顺便测试一下和 Runway 以及 Pika 的质量相比怎么样。
-
-先说结论：
-
-如果不考虑其他功能和交互我这次测试的结果Pixverse和 Pika 的质量接近分别是 74.5 分和 73.5 分。Runway 效果居然最差只有 64.5 分。
-
-Pixverse的模型是这三者最为平衡的，可以有比较强的运动幅度，同时可以维持较好的一致性，模型可以比较好的对提示词进行响应，尤其是 2.5D 那个镜头非常的惊艳，但是纯二次元图片的效果也不是很好。
-
-Pika 在动漫和 2.5D 风格上的优势巨大，但是只有 Pika 每次生成是 3秒钟，所以图像质量打分会比其他两个差，写实风格效果也不是很如意，图像质量以及一致性相对差一些。
-
-Runway 的模型质量和上面两者差距较大，主要是二次元风格的还原度太差还有 2.5D 风格直接无法维持一致性，写实场景对复杂画面改动较大有时候无法维持画面一致性，但是 Runway 对生成内容的控制还是三者最强的，因为其他两个都没有所以这部分就不计入分数。
-
-这里使用Pixverse：https://app.pixverse.ai/create/
-
-说一下测试的内容这次只测试视频模型的质量，所以三者都会使用图生视频来测试，这样可以忽略各自的图像模型的差距。
-
-另外每个都会使用物品特写、写实风景、写实人像、皮克斯 2.5D 风格、 2D 动画风格，这五种风格，然后每张图片生成的视频会从主题一致性、运动平滑度、运动程度以及成像质量这四个维度进行主观评分，每张图片随机一次，所以评分非常主观不保证复现，就是给大家使用的时候一个参考。
-
-下面是具体每个测试的分数，视频是三者生成视频的对比：
-
-物品特写-橘子落水：
-
-Runway   主题一致性4分、运动平滑度 4分、运动程度 4.5分、成像质量 3.5分 、总分： 16
-Pixverse 主题一致性4分、运动平滑度 4分、运动程度 3.5分 、成像质量 4分 、总分：15.5
-Pika 主题一致性 3.5分、运动平滑度 4分、运动程度 4分 、成像质量 3.5分、总分：15
-
-写实风景-伦敦塔着火：
-
-Runway：主题一致性2分、运动平滑度 4分、运动程度 4分、成像质量 3.5分 、总分： 13.5
-Pixverse：主题一致性4分、运动平滑度 4分、运动程度 3.5分 、成像质量 4分 、总分：15.5
-Pika：主题一致性 3.5分、运动平滑度 3.5分、运动程度 3.5分 、成像质量 3.5分、总分：14
-
-皮克斯 2.5D 风格-拟人狐狸：
-
-Runway：主题一致性2分、运动平滑度 3.5分、运动程度 4分、成像质量 2分 、总分： 11.5
-Pixverse：主题一致性4分、运动平滑度 4分、运动程度 4分 、成像质量 4分 、总分：16
-Pika：主题一致性 3.5分、运动平滑度 4分、运动程度 3.5分 、成像质量 3.5分、总分：14.5
-
-写实人像-水面古装：
-
-Runway：主题一致性4分、运动平滑度 4分、运动程度 2分、成像质量 3.5分 、总分： 13.5
-Pixverse：主题一致性4分、运动平滑度 4分、运动程度 4分 、成像质量 4分 、总分：16
-Pika：主题一致性 3分、运动平滑度 3.5分、运动程度 4.5分 、成像质量 3分、总分：14
-
-动漫场景-植物园女孩：
-
-Runway：主题一致性 1分、运动平滑度 2分、运动程度 4分、成像质量 3分 、总分：10
-Pixverse：主题一致性3分、运动平滑度 3分、运动程度 2.5分 、成像质量 3分 、总分：11.5
-Pika：主题一致性 4分、运动平滑度 4分、运动程度 4.5分 、成像质量 3.5分、总分：16
-
-总分： Runway：64.5、Pixverse：74.5 、Pika：73.5
-#aivideo #PixVerse</title>
-            <link>https://nitter.cz/op7418/status/1750497734849917017#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1750497734849917017#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 25 Jan 2024 12:35:57 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>前几天刷到了好几个用Pixverse做的好视频，刚好他们最近上线了网页版本和新模型就想顺便测试一下和 Runway 以及 Pika 的质量相比怎么样。<br />
-<br />
-先说结论：<br />
-<br />
-如果不考虑其他功能和交互我这次测试的结果Pixverse和 Pika 的质量接近分别是 74.5 分和 73.5 分。Runway 效果居然最差只有 64.5 分。<br />
-<br />
-Pixverse的模型是这三者最为平衡的，可以有比较强的运动幅度，同时可以维持较好的一致性，模型可以比较好的对提示词进行响应，尤其是 2.5D 那个镜头非常的惊艳，但是纯二次元图片的效果也不是很好。<br />
-<br />
-Pika 在动漫和 2.5D 风格上的优势巨大，但是只有 Pika 每次生成是 3秒钟，所以图像质量打分会比其他两个差，写实风格效果也不是很如意，图像质量以及一致性相对差一些。<br />
-<br />
-Runway 的模型质量和上面两者差距较大，主要是二次元风格的还原度太差还有 2.5D 风格直接无法维持一致性，写实场景对复杂画面改动较大有时候无法维持画面一致性，但是 Runway 对生成内容的控制还是三者最强的，因为其他两个都没有所以这部分就不计入分数。<br />
-<br />
-这里使用Pixverse：<a href="https://app.pixverse.ai/create/">app.pixverse.ai/create/</a><br />
-<br />
-说一下测试的内容这次只测试视频模型的质量，所以三者都会使用图生视频来测试，这样可以忽略各自的图像模型的差距。<br />
-<br />
-另外每个都会使用物品特写、写实风景、写实人像、皮克斯 2.5D 风格、 2D 动画风格，这五种风格，然后每张图片生成的视频会从主题一致性、运动平滑度、运动程度以及成像质量这四个维度进行主观评分，每张图片随机一次，所以评分非常主观不保证复现，就是给大家使用的时候一个参考。<br />
-<br />
-下面是具体每个测试的分数，视频是三者生成视频的对比：<br />
-<br />
-物品特写-橘子落水：<br />
-<br />
-Runway   主题一致性4分、运动平滑度 4分、运动程度 4.5分、成像质量 3.5分 、总分： 16<br />
-Pixverse 主题一致性4分、运动平滑度 4分、运动程度 3.5分 、成像质量 4分 、总分：15.5<br />
-Pika 主题一致性 3.5分、运动平滑度 4分、运动程度 4分 、成像质量 3.5分、总分：15<br />
-<br />
-写实风景-伦敦塔着火：<br />
-<br />
-Runway：主题一致性2分、运动平滑度 4分、运动程度 4分、成像质量 3.5分 、总分： 13.5<br />
-Pixverse：主题一致性4分、运动平滑度 4分、运动程度 3.5分 、成像质量 4分 、总分：15.5<br />
-Pika：主题一致性 3.5分、运动平滑度 3.5分、运动程度 3.5分 、成像质量 3.5分、总分：14<br />
-<br />
-皮克斯 2.5D 风格-拟人狐狸：<br />
-<br />
-Runway：主题一致性2分、运动平滑度 3.5分、运动程度 4分、成像质量 2分 、总分： 11.5<br />
-Pixverse：主题一致性4分、运动平滑度 4分、运动程度 4分 、成像质量 4分 、总分：16<br />
-Pika：主题一致性 3.5分、运动平滑度 4分、运动程度 3.5分 、成像质量 3.5分、总分：14.5<br />
-<br />
-写实人像-水面古装：<br />
-<br />
-Runway：主题一致性4分、运动平滑度 4分、运动程度 2分、成像质量 3.5分 、总分： 13.5<br />
-Pixverse：主题一致性4分、运动平滑度 4分、运动程度 4分 、成像质量 4分 、总分：16<br />
-Pika：主题一致性 3分、运动平滑度 3.5分、运动程度 4.5分 、成像质量 3分、总分：14<br />
-<br />
-动漫场景-植物园女孩：<br />
-<br />
-Runway：主题一致性 1分、运动平滑度 2分、运动程度 4分、成像质量 3分 、总分：10<br />
-Pixverse：主题一致性3分、运动平滑度 3分、运动程度 2.5分 、成像质量 3分 、总分：11.5<br />
-Pika：主题一致性 4分、运动平滑度 4分、运动程度 4.5分 、成像质量 3.5分、总分：16<br />
-<br />
-总分： Runway：64.5、Pixverse：74.5 、Pika：73.5<br />
-<a href="https://nitter.cz/search?q=%23aivideo">#aivideo</a> <a href="https://nitter.cz/search?q=%23PixVerse">#PixVerse</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTA0OTc2NDkzMTk3MjMwMDgvcHUvaW1nLzVUc2pGMEF1QWdjVTRGU0UuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1750534452101738775#m</id>
-            <title>RT by @op7418: 百度这个多模态模型UNIMO-G有点意思，可以实现图片和文字混合输入对内容进行控制，而且图片的ID会被还原，IPadapter是个宝藏啊。</title>
-            <link>https://nitter.cz/op7418/status/1750534452101738775#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1750534452101738775#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 25 Jan 2024 15:01:51 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>百度这个多模态模型UNIMO-G有点意思，可以实现图片和文字混合输入对内容进行控制，而且图片的ID会被还原，IPadapter是个宝藏啊。</p>
-<p><a href="https://nitter.cz/_akhaliq/status/1750353584854643090#m">nitter.cz/_akhaliq/status/1750353584854643090#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VzbGtqQ2JJQUEzU0UwLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1750539605840126460#m</id>
-            <title>RT by @op7418: 一个500行Python代码构建的AI搜索工具，而且还会开源，试了一下麻雀虽小该有的都有。
-
-后端是Mixtral-8x7b 模型，托管在 LeptonAI 上，输出速度能达到每秒大约200个 token，用的搜索引擎是 Bing 的搜索 API。
-
-作者还写了一下自己的经验：
-
-(1) 搜索质量至关重要。优质的摘要片段是形成精准概括的关键。
-(2) 适当加入一些虚构内容实际上有助于补充摘要片段中缺失的“常识性信息”。
-(3) 在进行内容概括时，开源模型表现出了卓越的效果。
-
-这里尝试：https://search.lepton.run/</title>
-            <link>https://nitter.cz/op7418/status/1750539605840126460#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1750539605840126460#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 25 Jan 2024 15:22:20 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>一个500行Python代码构建的AI搜索工具，而且还会开源，试了一下麻雀虽小该有的都有。<br />
-<br />
-后端是Mixtral-8x7b 模型，托管在 LeptonAI 上，输出速度能达到每秒大约200个 token，用的搜索引擎是 Bing 的搜索 API。<br />
-<br />
-作者还写了一下自己的经验：<br />
-<br />
-(1) 搜索质量至关重要。优质的摘要片段是形成精准概括的关键。<br />
-(2) 适当加入一些虚构内容实际上有助于补充摘要片段中缺失的“常识性信息”。<br />
-(3) 在进行内容概括时，开源模型表现出了卓越的效果。<br />
-<br />
-这里尝试：<a href="https://search.lepton.run/">search.lepton.run/</a></p>
-<p><a href="https://nitter.cz/jiayq/status/1750242829769801793#m">nitter.cz/jiayq/status/1750242829769801793#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0VzcUM1YmIwQUFKVEl6LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1750563094802370631#m</id>
-            <title>有意思，让大语言模型懂得尽可能多的语言， MaLA-500涵盖了广泛的 534 种语言。</title>
-            <link>https://nitter.cz/op7418/status/1750563094802370631#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1750563094802370631#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 25 Jan 2024 16:55:40 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>有意思，让大语言模型懂得尽可能多的语言， MaLA-500涵盖了广泛的 534 种语言。</p>
-<p><a href="https://nitter.cz/_akhaliq/status/1750380825214857246#m">nitter.cz/_akhaliq/status/1750380825214857246#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1750555153672159395#m</id>
-            <title>卸磨杀驴？微软解雇了1900名暴雪和XBOX员工</title>
-            <link>https://nitter.cz/op7418/status/1750555153672159395#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1750555153672159395#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 25 Jan 2024 16:24:07 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>卸磨杀驴？微软解雇了1900名暴雪和XBOX员工</p>
-<p><a href="https://nitter.cz/verge/status/1750524688881815634#m">nitter.cz/verge/status/1750524688881815634#m</a></p>
                 ]]>
             </content:encoded>
         </item>
