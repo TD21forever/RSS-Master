@@ -5,6 +5,29 @@
         <link>https://sspai.com/matrix</link>
         
         <item>
+            <id>https://sspai.com/post/86175</id>
+            <title>一日一技 | Mac 版微信聊天记录如何自动备份至外接硬盘</title>
+            <link>https://sspai.com/post/86175</link>
+            <guid isPermaLink="false">https://sspai.com/post/86175</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 31 Jan 2024 09:30:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Matrix, 微信备份文件, 外接硬盘, 软链接
+<br>
+<br>
+总结: 本文介绍了如何将微信聊天记录自动备份到外接硬盘的方法，通过使用软链接将微信备份文件放到外接硬盘，可以节省Mac本地磁盘存储空间。 </div>
+                        <hr>
+                    
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐&nbsp;</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp; 是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;<br />文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><h2>问题描述</h2><p>我平时使用的电脑是 MacBook Pro M1 版,硬盘存储空间只有 256G，有次系统提示我存储空间告急，在整理文件的过程中，我发现微信在电脑文件中的占比位居榜首，达到 40G 至 50G，那么，如何将微信备份文件迁移到外接硬盘呢？接下来，我就和大家分享下我将微信聊天记录自动备份到外接硬盘的全过程。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/29/ff92a96012fa03c173ab7105e79dc168.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>清理后的微信文件依然很大</figcaption></figure><h2>解决方案</h2><p>如何将微信聊天记录「自动备份至外接硬盘」？其实这里要用到的就是「软链接」。</p><p>「<a href="https://en.wikipedia.org/wiki/Symbolic_link" target="_blank">软链接</a>」以路径形式存在，也叫符号链接（Symbolic link），类似于 Windows 系统中的「快捷方式」，最早在 Linux 和 Unix 系统中用于创建文件或目录的一种形式。在 macOS 系统里叫做「替身」，链接不同文件系统的文件。</p><h3>操作步骤</h3><p>所以解决问题的最佳方案，就是把微信备份文件通过软连接放到外接硬盘，这样在 Mac 端微信执行「备份聊天记录至电脑」操作时，通过创建「软链接」的方式，可以将聊天记录直接备份到外接硬盘；需要还原备份时，直接插上硬盘即可显示并恢复相关聊天记录。达到节省 Mac 本地磁盘存储空间的目的。</p><h4>找到微信聊天记录备份文件默认路径</h4><p><code>/Library/Containers/com.tencent.xinWeChat/Data/Library/Application\ Support/com.tencent.xinWeChat/2.0b4.0.9</code></p><p>在 Mac 电脑系统内，微信的备份文件会存放在<code> 2.0b4.0.9</code> 的 <code>Backup</code> 文件夹内，并且备份目录的路径不会改变。每一个微信账号的聊天记录备份对应此目录下的一个文件夹，名称通常为<strong>一长串字母和数字</strong>的组合。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/30/4271b006be9efbfeea5120515e095f04.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>微信备份文件默认路径</figcaption></figure><p>如果你的 Mac 版微信没有执行过备份操作，很可能没有 <code>Backup</code> 这个文件夹，或者 <code>Backup</code> 下面没有子文件夹，为了保证文件权限一致，需要先执行一次备份，生成文件夹目录（无需全部备份，只备份一个人的聊天记录即可），我挑了一个文件最小的聊天记录进行了备份。</p><p>需要注意的是，备份操作实际上是将手机微信里的聊天记录备份到电脑里，所以需要将手机和电脑连接至同一网络后，在手机端选择需要备份的聊天记录。在稳定的网络下进行备份，并且过程中不能黑屏，否则会导致备份中断。</p><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2024/01/29/8551142341bc3e548f3dfea317044396.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2024/01/29/34879072280b1a489314863122397d6e.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&nbsp;</p><h4>复制 Backup 文件夹至移动硬盘</h4><p>备份完成之后，将<code>Backup</code>文件夹复制到移动硬盘中的某个位置，例如：<code>/Volumes/硬盘名/backup/wechat</code> （注意此处路径中不要有中文，否则微信可能无法读取）</p><p>复制完成后，就可以把微信默认备份路径下的 <code>Backup</code> 文件夹删除，如果不放心，可以删除前备份一下。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/30/7bf6a88f0298a9f49831e2b0bc82a89f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>&nbsp;复制 Backup 文件夹到硬盘</figcaption></figure><h4>创建软连接</h4><p>打开终端，执行如下命令：</p><p><code>ln -s /Volumes/硬盘名/backup/wechat/Backup&nbsp;`/Library/Containers/com.tencent.xinWeChat/Data/Library/Application\ Support/com.tencent.xinWeChat/2.0b4.0.9/Backup</code></p><p>此处我有三点要和大家分享：</p><ol><li>需要将命令中的「硬盘名」改成你自己的外接硬盘的盘符名称。</li><li>如果硬盘的名称中有空格，写法为反斜杠+空格，例如：<code>/Volumes/Extreme Pro/backup/</code></li><li>经过我的实测，我发现只能使用移动硬盘创建软连接，无法用 NAS 做为外部存储。原因是 NAS 为网络挂载，以协议方式传输数据，而非通过 USB 连接外部硬盘。软链接创建后，微信目录下的 <code>Backup</code> 就会指向移动硬盘下的 <code>Backup</code> 文件夹。</li></ol><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/29/e2705cb42992dcc487546e4b2b8232c8.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>创建软连接（图标左下角带有箭头）</figcaption></figure><h4>重签名操作</h4><p>在第一步的时候，我们已经通过一个聊天记录，进行了一次备份操作，在微信「管理备份文件」中，会显示备份文件的名称、时间等信息，但创建软连接后，之前的备份文件却不见了。</p><p>原因是 Mac 下的应用是以沙盒模式运行，无法直接读取不在该应用程序以外的文件夹，虽然通过创建软连接的方式将备份文件指向外接硬盘，但实际还是无法读取。解决此问题的方法是将微信重签名，具体操作步骤：退出微信，复制下方代码到终端，回车后盲输密码，再次回车（也可直接输入前段命令后，直接拖动程序到终端）。</p><p><code>sudo codesign --sign - --force --deep /Applications/WeChat.app</code></p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/29/ebbf91772fb8a887fc4f5dbb8f99868e.gif" /><figcaption>微信重签名</figcaption></figure><p>重新签名后，当点击微信左下角的设置按钮后，会有「是否允许访问外接硬盘」的弹窗提示，此时需要点击「好」，让微信获得访问权限。</p><p>至此，微信便可逃逸沙盒，正常识别到备份文件。再次打开微信，进入到「管理备份文件」界面，我们可以看到之前的备份文件信息。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/29/7a554f38b5314eeb36fc2a1d71ae001b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>备份信息</figcaption></figure><h2>写在最后</h2><p>以上就是我将 Mac 版微信聊天记录备份到外接硬盘的全过程，以后当我需要备份或恢复聊天记录时，接上硬盘便可。如果你也有类似的需求，不妨试试。</p><p style="margin-left: 0px;">&gt; 下载少数派 <a href="https://sspai.com/page/client">客户端</a>、关注 <a href="https://sspai.com/link?target=https%3A%2F%2Fwww.xiaohongshu.com%2Fuser%2Fprofile%2F63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/86167</id>
             <title>纪念我的第一台三星手机——三星A9 Star</title>
             <link>https://sspai.com/post/86167</link>
@@ -23,6 +46,29 @@
                         <hr>
                     
                     <p>现在是2024年1月15日，星期一，2:44。我在床上翻来覆去将近3个小时，横竖睡不着，广东的天气向来如此：盖上被子，又闷又热，翻开被子，又凉又冷，在广东活了差不多20年，还是受不了。那便如此吧，我索性就不睡了，翻起身来，戴上眼镜。近来刚搬完家，桌面上摆放着许多以往的物件，不禁挑起我的兴趣，逐一看起来，不经意间便看见了一台皎白的机器，这是我的第一台三星手机，三星A9 Star。</p><p>我接触这台手机，是在初升高，那时真是轻狂，不自量力报了全区第一的学府，而最后竟还能有高中读，也是万幸，于是在我对父亲的死乞白赖下，最终在A9 Star和A60之间，我选择了A9 Star。</p><p>我接触三星的时间很短，到现在也不过才四年半，我的一位知己挚友，印象中在初中时就已经拿着Note4与我吃鸡，还用过几台索尼，与他相比，我的手机阅历，真是望尘莫及。当初开箱A9 Star的光景历历在目：我同他一起拿了快递，到了我们常常散步的一条河堤边，在石头护栏上开了箱，A9 Star的盒装是整体纯白，字样用了彩刻，旁边还有“2018”字样。可只是撕开了胶条，便终止了，然后转移到他家继续。打开盒子，月般的洁白充斥着我的眼睛，当时的我还在用vivo的合约机，哪里见过这个啊。当时肚子里也属实是没有一点墨水，只是觉得，真白！我缓缓将它拿起，挚友在旁边也一样激动，那时候他已经换了三星A60，彩色背板的，当时他说了一句话，我到现在都记得很清楚：“哇！如果我没有买A60，那我就是买这台了。”我当时已无暇顾及他说了什么，像托着明珠似的拿着这台手机。背面的双摄模组，模组下面有闪光灯，居中，位置不会尴尬的指纹模块，还有处在中上位置的三星logo，整个背板干净整洁有条理，就像亭亭玉立的大姐姐，使得我心荡漾。顺着背板的元素，视线下移，“惠州三星电子有限公司”字样赫然跃于板上，那个时候看，并没有什么感觉，而此时此刻，在拿出来细细端详，我便感受到了强烈的时光流逝，倘若搬家时我扔掉了这台手机，那么就是又一个回忆的消逝，变成失去的回忆了。背面看完，来看正面，当时三星还是有贴原厂膜的，不知道什么时候，三星不贴膜了。长按开机键，浑厚的振动贯通手心，A9 Star没有振动马达，振感很是奇怪（不舒服），又慢又震。我记得在当时的一年后左右，我拿起挚友的A60打字，清脆明快的振动令我难以忘怀，到现在我也觉得没有任何一台手机的振感比得上A60。那时候三星激活是否需要SIM卡，我也记不清了，总之，成功激活手机。就是它陪伴了我两年半的高中岁月，那是我永远都不会忘记的时光。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/29/e9e467575c90394c7db9970ebd277525.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>A9 Star背板</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/29/686c37acc30949d21eb8716665525230.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>制造商字样</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/29/a52ec8467016e32ae3e22513c64e27e5.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>A9 Star包装盒</figcaption></figure><p>高中身边人都是苹果、小米、华为，那时候连OV都难有一见，像我这种用三星的更是另类中的另类，不过后来我在食堂看见有学生在用S7 edge，当时我就很想知道S7 edge用起来是什么感觉呢。</p><p>A9 Star固然好看，但是在真正使用时，便会对它有不一样的理解。我所就读的学校虽然在本区，但也是离家远，上学住宿，周末回家。上学期间，学生手机都要上交，我们每次都是在周日晚上的晚自习前把手机关机，然后上交给班主任。尽管我确定我每次都关机了，但依然有几次我在周五拿到手机时候，连机都开不了，我怀疑是手机叠在一起压到开机键了，抑或是三星的bug，现已无从得知。拿到手机后，要做的事可不少，开机、“等待One UI启动”、打电话告知家里人、调出乘车码。听着还好，但是就做这点事，从课室到校门口5分钟，A9 Star都不一定搞得定，光是系统启动一项就有可能要2~3分钟，这可能是由于One UI1.0太差劲了，或者是4G的RAM的确是不够用……写到这里，我放下笔，尝试去点亮它，居然没电了？！我明明记得最后一次用完是关机了，于是我起身去充电，经过窗外，听见彻空的鸡鸣，可到现在才过去了46分钟，我继续写。后来我发现，4G的RAM在One UI1.0的“强力”加持下，在许多方面都是慢人一步，支付宝、微信支付、微信小程序、相机，还有在当时不久后的未来发生的全球灾难，打开健康码又卡又慢，更新到了2.0，那更是卡成PPT。我便发觉，除了外观，其他方面，A9 Star好像都低人一等……但也并没有真的这么不堪，A9 Star所搭载的是骁龙660，也是一代中端神U了，主流游戏都可以流畅运行，64G的存储空间在当时对我来说绝对是海量。</p><p>就这样“低人一等”不知道多久，我渐渐发现了A9 Star身上的闪光点，虽然不多，但是也值得说道说道。其一就是它的相机，A9 Star是双摄，但是没有超广角，而是有一颗凑数的微距还有一颗主摄，主摄像头的成片效果我看来是要比A60好的，A60的成片效果真的是油画一张，这颗微距吧，虽然效果一般，但是也是惊喜了，起码可以拍一点花花草草小猫小狗什么的。此外，A9 Star给我的最大惊喜就是over the horizon 2018，真神曲，三星铃声T0，直到现在我也会时不时找来听，温柔与希望是我对这首曲子最直观的感受。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/29/7be4926214068eb8d5a14bf4aab55688.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>A9 Star样张</figcaption></figure><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2024/01/29/f03b75b83fa74cb5357596005ea988f2.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2024/01/29/8eff75db7bef12c17a3f249bc50f43ee.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>就这样，这台手机陪我平平淡淡度过了高中的前两年半，这时我的原厂贴膜依然完好，手机背板也没有划痕。直到一天假期的晚上，我和挚友在外散步，讲到激动处，拿着A9 Star的手往前一甩，它十分清脆且完美的贴在沥青路上，屏幕和我的心都碎了，但是膜却没有什么问题，幸好还可以用，当时真的是给我吓得不轻。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/29/f09ddf47a3a99613d06a506f40639c46.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>A9 Star正面照</figcaption></figure><p>不知道各位有无那种从小玩到大的异性发小，我与人家从小学在qq聊到高中在微信，聊天记录也一直不舍得删，即便后来换了新手机，有时候也会拿回A9 Star来细细品味过去，把它当作纪念过去的宝贵礼物（纯纯借口，其实就是喜欢人家）。渐渐，我发现了大屏幕的不好，特别是在学校里偷偷用，非常危险，191g的重量我倒是无所谓，但是加上大边框的6.3英寸屏幕对我来说却相当致命，于是我换了挚友的A60，陪我度过高中的最后阶段，此时，挚友已经用上S22了，120HZ、柳叶刀我都是第一次听说。换上A60，A9 Star自然变成上交的手机了，此外那时候总是在听网课，简直是哔哩哔哩高中了，为了可以在自习课上偷偷听网课，我还特地花了一整节晚自习在书上凿了缝出来，以防止被老师发现，毕竟不想辜负和我关系好的老师，不想辜负家里人，也不想辜负发小。如果这个缝是要给A9 Star开的话，那可能得要我两节晚自习。写到此处，我又出去看了看，A9 Star才23%，可能是太久没有用了，此时夜变得更黑了，4点还未到。说起来，我便想起来了A9 Star的续航是真的顶呱呱，非常耐用，但是A9 Star有个毛病，就是到了10%电量，就会突然嗨起来，然后在两分钟左右关机，我已经忘记有多少次，我刚接上充电器它就关机了。</p><p>而后再而后，听网课、复习、高考，在2022年的八月，我又因为颜值，在官翻商城买了S10当作主用机，打开S10盒封的一瞬间，A9 Star和高中的时光便不会出现在眼前，只会涌现在脑海了。</p><p>到这里，大抵就写完了。我又出去看了看，31%，够我今晚活在过去了。我拿着A9 Star，凝视着她，可能真的是太久太久，久到最后一次用它也记不清楚是什么时候了。不过，这次的开机速度居然连1分钟都不到！真的是长大了啊。2.0的One UI、悦耳的skyline、右下角的裂痕以及Bixby按键，活像一本岁月的史书，当我翻阅它时，它向我倾诉过往。我打开相册，空无一物，哦，我想起来了，之前恢复出厂设置了。</p><p>我不善遣词造句，因而不善写文，更不善写结尾，走笔至此，只有一句话想说：时光的流逝变成了一种叫做回忆的东西。</p><p>夜真的深了，我有了倦意，看了看时间，4：12。我依旧把A9 Star关机，而后合上本子，盖上笔帽。</p><p>我写此文谨纪念我的三星A9 Star以及它陪我度过的高中时光。</p><p>&nbsp;</p><p>&nbsp;</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/86117</id>
+            <title>佛学、冥想及相关</title>
+            <link>https://sspai.com/post/86117</link>
+            <guid isPermaLink="false">https://sspai.com/post/86117</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 30 Jan 2024 02:48:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 佛学, 冥想, 科学, 教义
+<br>
+<br>
+总结: 《洞见》试图从科学的角度解释佛学和冥想，证明其有效性，并剖析佛教经典《坛经》。冥想可以帮助人们活得更好，但与佛教根本主旨厌世相悖。佛教教义在传播过程中经历了改良和简化，以迎合大众需求。当代人对佛学的了解主要是为了给心灵找到寄托，希望生活更轻松。正念冥想作为一种可操作的实践手段，能够帮助人们减轻生活中的苦难。 </div>
+                        <hr>
+                    
+                    <p>去年看了三本有关佛学的书，分别是《观呼吸》、《洞见：从科学到哲学，打开人类的认知真相》、《思辨的禅趣》，此前还看过季羡林《佛教十五题》。一共四本，各有偏重。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/8c56000ad3a3b589adffe733d8dc96c0?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>《观呼吸》讲正念冥想的方法，《洞见》试图从科学角度解释佛学和冥想，《思辨的禅趣》是夹叙夹议地剖析佛教经典《坛经》，也会涉及的佛学的演变，《佛教十五题》是偏向学术研究，讲历史，讲来龙去脉的。</p><p>说是读过，但目前残留在脑海中的不多，就印象较多的、感触较深的《洞见》说起。</p><p>《洞见》试图从科学的角度证明正念冥想的有效，解读佛学的科学性，将玄乎其玄的各方流派和典籍言论，抽丝剥茧，留下最本质，最原始的教义和方法。本书英文名为《Why Buddhism is True?》（为什么佛学是真的？），这里的“真”是指，是否符合“科学”这一量尺。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/95c58999a53e99703d6e6d04af8f19ec?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>其实，书中的大部分科学知识之前都知道，都是心理学、神经学的研究，比如弗洛伊德提出的意识与潜意识(这学说貌似并不被科学界认可)、大脑的模块化分工等，作者是将这些科学发现作为佛学的某些观点支撑，便完成了“佛学是真的”这一论证。</p><p>举个例子。佛学说，无我。科学角度看，大脑是分模块运行的，各个模块竞争，将潜意识挤进意识层。而这其中，没有一个所谓的“自我意识”存在。理性存在，但是理性不作用于抉择，而是理性引发感觉。归根到底，是感觉与感觉的竞争。</p><p>大概逻辑是，大脑分为各个模块，各个模块产生的感觉强弱，竞争上岗。胜者进入意识层，促成行为。所以，这其中哪有一个一成不变的“我”。</p><p>而冥想的原理与真实体验也与这一科学理论相互印证。旁观者观测一念一念的起起落落，置身事外。剔除“五蕴”，留下最内核的“自我”。</p><p>不过，这里又与无我概念有矛盾，《思辨的禅趣》作者对这种前后矛盾颇有微词。我认为，有没有自我与冥想不矛盾，正念冥想可以看做是抛丝剥茧的“自我”提纯过程。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/0c3dc7ace2ed116a7b725de4e4cfb4c4?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不过，在看过《思辨的禅趣》之后，难免怀疑作者只是把能用科学解释的内容保留，甚至还有篡改佛学教义的嫌疑。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/35e57e1dded5f7f932a8f7ed8d153671?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我们都知道“苦海无涯，回头是岸”这句话，小时候的电视剧里总会有老和尚故作高深、语重心长地缓缓吐出这八个字。之所以流传甚广，在于这句话也道出了佛教的根本主旨——厌世。而坐禅冥想是为了破执，让人们明白这滚滚红尘都是幻象，无论好坏，都是虚幻的。只要悟透这点，便能逃脱六道轮回，修成正果，抵达彼岸。</p><p>而《洞见》一书讲的却是，冥想如何让人活得更好，只对坏情绪、坏感受一通审视打击。要知道，那些快乐、开心、愉悦等积极情绪，在佛眼中都是“苦”。所以说，当代冥想所追求的目的，与佛教根本主旨南辕北辙。</p><p>不过，教义的对错，大部分人并不在意，而且教义也不是一成不变的。两千年过去了，走样儿是难免的。而且这些荒腔走板不是口口相传的误差，而是因地制宜、因势利导的变通。</p><p>佛教（任何宗教同样）东传来到我国，教义、教规都得结合咱们的习俗和文化进行改良，更重要的是不要和政策对立。《佛教十五题》一书中，讲了灭佛运动，便是因为人们纷纷遁入空门，影响了国家的财政税收和兵役徭役。当然，也有成功案例，比如儒教，便是一个有助于统治者管理和统治的伦理宗教。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/ef5397e0dfa69b36c1aa3e6c17a29817?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>另外，佛教教派众多，最终能传下来的、为大众熟知的却只有那几个。与其说是优胜劣汰，不如说是劣胜优汰。它们之所以能流传下来，便是迎合了大众的知识水平和审美情趣，对复杂内容进行简化。</p><p>就像成功学，人们需要的只是一句简单直接、朗朗上口的口号，而不是复杂且不确定的论证过程。所以，你只需要告诉世人，吃斋念佛、打坐拜佛便能得到佛祖的庇佑。禅宗最大的优势，在于顿悟，刚才还手握屠刀，一刹那的顿悟，便能成佛。你想想，这说法得多受人民群众，尤其是恶人的欢迎。</p><p>时间发展到现在，佛教已经发展成了一个入世的宗教。</p><p>当代人了解佛学，只不过是希望给心灵一个寄托，即便修成佛教中的“正果”，也不过是成为一个不喜不悲、或者是豁达开明、拿得起放得下的人（感觉这是一个可以进一步探讨的命题，而世人只不过希望眼前的生活能更轻松些。若是作为心灵寄托，尤其是近些年的正念冥想，是可操作的实在手段，不说立竿见影，也能让生活苦海不那么苦。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/bdb7b9be7b9bb964a9e30206eb8340c9?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>所以，《洞见》的内容构成也是以正念冥想为主，辅以教义。西方早就流行冥想，乔布斯、约翰·列侬上个世纪五六十年代就去印度、日本禅修。禅宗思想还是嬉皮士精神不可或缺的重要组成部分。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/458d4be09649f15ccf5da21ddf92e251?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如今，正念冥想在中国流行起来。记得此前梁文道曾经在节目中提到过。当时还觉得挺遥远，要专门腾出时间，去东南亚某国封闭修行，远离外界喧嚣，放下手机和网络，每天的吃食应该也是以清淡的素食为主。只不过，他形容的这一切，透着一丝神秘和一股子钱的味道。</p><p>当时代发展遇到阻碍，浪潮下的人，遇到无法快速解决的现实问题，改变自己看待事物的认知是最快的方式。于是，各种心理按摩和抚慰纷至沓来，将人们无处安放的心稳稳接住。</p><p>如今为了方便广大人民的迫切需求，冥想也借助高科技逐渐普及，在家修行即可，早起和睡前想一会，操作便利。找冥想老师更是无需访名山，寻高师。手机软件市场上就有好几款冥想APP，花钱买课，赛博老师教你内观，每日打卡。功能上，更多了些实用性，如助眠。同时，也剥离了宗教属性。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/08e18ddbe29bba75af1aab9861c73a8b?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>但也要警惕，这里边也混迹着各种大骗小诈，慌不择路的人难免落入其中。前些日子还有个新闻，所谓的精神导师诱导信徒透支消费，结果本就飘忽不定的人生还将负债累累。</p><p>尽管《洞见》在用科学解释冥想这件事，也在见缝插针地讲了一些可操作的冥想方法，但更具操作指导意义的是《观呼吸》这本书。如果真想入门冥想，推荐阅读。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/4cc8c0d6080c73bd5a1ee0b6ec4743a0?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><br /><br />&nbsp;</p>
                 ]]>
             </content:encoded>
         </item>
@@ -348,6 +394,29 @@ if __name__ == "__main__":
         </item>
         
         <item>
+            <id>https://sspai.com/post/86092</id>
+            <title>《流言终结者》主持亚当·萨维奇是如何成为连环技能收集者的</title>
+            <link>https://sspai.com/post/86092</link>
+            <guid isPermaLink="false">https://sspai.com/post/86092</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 25 Jan 2024 15:01:01 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 流言终结者, 创客, 材料, 胶水
+<br>
+<br>
+总结: 《所有工具都是锤子》是《流言终结者》主创亚当·萨维奇的自传，从创客的视角出发，讲述了如何成为一个创造者。书中详实介绍了材料和胶水的选择，对手工爱好者和美术部门从业者有很大帮助。作者自称为"连环技能收集者"，他学习新技能的目的是为了解决问题。书中还介绍了列清单和勾选框的方法，提高工作效率。 </div>
+                        <hr>
+                    
+                    <p>我最近无意间接触到了《流言终结者》主创亚当·萨维奇撰写的自传——《所有工具都是锤子》，他在这本书主要是从一个创客的视角出发，讲述如何从头开始去做一个创造者，本书甚至有一整个章节专门介绍什么样的材料应该用什么样的胶水，内容之详实，对于手工爱好者，或者影视行业的美术部门从业者来说，这本书应该可以帮助他们增进许多实用的知识。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/f89631deb9d01c1f2f82bdb68668214b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>《流言终结者》两位主持亚当·萨维奇（左）和杰米·海纳曼（右）</figcaption></figure><p>我本人，严格来说，不太属于本书的目标受众，但我仍看得津津有味。一方面是书中讲到了颇多《流言终结者》和好莱坞电影的幕后趣闻，这是我感兴趣的内容，另一方面，虽然我不是一个制造实物的创造者，但也勉强算得上是一个数字内容创作者，书中作者分享的许多关于工作心态、工作方法的内容，也适用于创作者重新审视工具、重新思考解决问题的方式。</p><p>我尤为喜欢书中作者戏仿「连环杀人犯（serial killer）」一词，称自己为「连环技能收集者（serial skill collector）」，他学习新技能的目的不是单纯为了学会它，而常常是为了完成某个项目，进而自发地去学习新技能，让新技能成为自己「解决问题工具箱」里的工具，接下来的内容就是他在成为「连环技能收集者」的过程中收获到的窍门。</p><h2>井井有条</h2><p>作者在工作中最常用的两种提高工作效率的方法，其实我们生活中应该也经常会提到和用到，一个就是「列清单」，另一个就是「勾选框」。</p><p>因为作者最大的兴趣爱好，就是完美复刻出影视作品里的道具，为了追求到百分之百地复刻，列清单就是最有效避免任何细节遗漏的手段。</p><h3>为什么要列清单？</h3><p>列清单可以把杂乱无章的事项整理得有序，让我们对当前项目有全局的了解，清楚目前的进度，以合理地安排时间，避免最后期限到来时才后知后觉根本来不及完成任务，因而陷入崩溃状态。</p><blockquote><p>一份完整、详细列出所有部件的清单能让你清楚地看到它们之间的关系。它既能帮助你直观地看到项目的进展，也能使你免于被挫败感击倒。</p></blockquote><h3>如何列任务清单？</h3><h4>1. 罗列所有信息</h4><p>将关于目前这个项目的所有信息都罗列出来，是一个「清空大脑」的行为。</p><p>「清空大脑」，几乎在所有 Getting Things Done 教程中，都会提到这一点，对于普通人来说，完全依靠大脑来记住所有的事情几乎是不可能的，事情越多、越杂、越细，就越充满干扰。</p><p>我常常会把大脑记忆比作计算机的内存，用于存储临时数据、处理当前任务，它访问速度快、执行效率高，但缺点就是容量小。如果计算机同时执行多个耗费性能的程序，那么就会出现卡顿等问题，我们对大脑的使用也是如此。所以，其他眼下无暇处理的事务，就先存储在计算机的硬盘吧，也就是用纸笔或者软件应用记下来。</p><p>在罗列信息的时候，作者提到，不必担心制造出一堆乱糟糟的信息，或者是内容不够详细具体。</p><p>他举了皮克斯编剧安德鲁·斯坦顿（《海底总动员》、《机器人总动员》导演、编剧）的话作为例子。安德鲁在为一个团队做咨询的时候，直截了当地说，在项目初期情况一定会一团糟，但这是正常的，无需在初期阶段追求质量。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/3d4453d43e9c615dd2afc63405b7be41.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>安德鲁·斯坦顿（右）凭《海底总动员》获得奥斯卡最佳动画电影奖。</figcaption></figure><p>清单也不会一次性就能够全部列完，随着工作开展，会不断遇到新问题，或者发现任务 A 的执行，需要先依赖任务 B 的完成，这时候就需要对清单进行补充。</p><p>但是，列清单是可以永无止境的，只要不断追求更高的细化程度，清单就可以一直列下去，而我们的目的其实并不是要列出一份究极详细的清单，而是要借助这份清单去完成任务。所以，在列到一定程度，比如足够让人了解任务的大概模样之后，就可以动手去做了。</p><h4>2. 整理分类</h4><p>将信息罗列出来之后，第二步就是整理分类这些信息。</p><p>作者的方法是将其整合成连贯有序的操作步骤，因为每个人的分类规则各异，可以根据自己的实际情况进行整理，我在这里就不多赘述了。</p><h4>3. 动工</h4><p>整理完之后，第三步，动工。</p><p>虽然作者会将清单整理成有顺序的操作步骤，但实际上他说他更喜欢先从清单中最棘手的部分开始入手，既解决了最难的问题，等到收拾其他问题就轻而易举了，也避免在最后截止时间快到时才发现还有一个非常耗费时间和精力的难题等待解决。</p><p>但个人认为，不是一定要像作者一样从最难的部分开始，或许有的人可能会因为太困难，心中更加焦虑从而导致拖延，每个人都会有自己的工作方式，不必认为他人的方式一定就是最优解，适合自己的才是最有用的方法。作者也在书中提到这一点。</p><blockquote><p><strong>你的理念只能也只该属于你自己。</strong> 你对重大问题的答案可能跟别人不一样。也许像尼克·奥普曼一样，当一切顺其自然推进时，你工作起来最得心应手；或者像杰米一样，当一切按部就班进行时，你的头脑最具创意，双手最有效率。</p></blockquote><p>在一步步解决清单上的任务的过程中，作者的另一个常用方法「勾选框」就派上了用场。不过，他所用的不是在已完成的任务前打勾，或者划掉已完成的任务，而是涂抹勾选框。</p><p>这个方法是他在工业光魔特效公司（乔治·卢卡斯为制作《星球大战》而创立的公司，曾获得过 15 次奥斯卡最佳视觉效果奖）学到的。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/b8f2566f98b6fadeb2eea00319d89d2f.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>工业光魔特效师们正在制作《星球大战》中的千年隼模型。</figcaption></figure><p>如果任务 100% 完成了，就把整个方框涂黑。<br />如果任务完成进度超过 50%，就沿对角线将方框涂黑一半。<br />如果任务尚未开始或无法衡量进展，就先将方框留白。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/b14397213d83a2b29ff690ca50debc44.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>作者执行他的勾选框准则。</figcaption></figure><p>这样做，比打勾更好追踪进度，也不会因为划线而让清单变得难以辨认、复盘。</p><h4>4. 清单可以休眠</h4><p>基于作者的工作内容，他时常会中途搁置一些项目的进展，比如在制作某些电影道具时遇到无法解决的细节问题，只能等到日后有更多资料时方能继续开工，又或者是忙得不可开交，无法一口气完成项目，像是他想要制作《异形》中凯恩的太空服，开始时是 2002 年，等到他真正完成制作已经是 2014 年了。</p><p>而我们自己，也必定有过类似的经历，在做某件事的时候，有更重要的任务要去完成，那手头上的事情肯定要搁置一旁。</p><p>这种暂时搁置清单的状态，他称之为「清单休眠」。</p><p>在把这个清单休眠之前，他会做的事情是，再列一份关于这个休眠的清单的清单，记录哪些工作已经完成，还需要完成哪些工作，而自己下一步打算做什么。</p><p>如此一来，在之后再拾起这个项目时，你便能很快上手，无需再多花精力从头来过。</p><p>关于「清单休眠」这个方法，虽然在工作中暂时未有机会能够尝试，但我在玩游戏时却对此深有感触，比方说在追求游戏百分之百完成度的过程中，难免会遇到肝不动的情况，而我一旦放下这个游戏，又常常会时隔很久才会有机会再次拾起它，每当我重新打开游戏时，总是会忘记我是谁、我在哪、我要干嘛，需要花上一段时间来重新上手。这时候，如果我在暂时放下这款游戏的时候记下了当前正在进行什么任务、之后还有什么事情要做，可能就会好很多。</p><h3>整理收纳</h3><p>作者绝对不是一个极简主义者，会把办公桌收拾得整整齐齐的那种，相反，他可能是个「极繁主义者」。</p><p>他描述自己的第一间工作室，是用「公寓内部看起来就像好多个垃圾堆组成的地形图。就像当时我糊里糊涂的脑子一样，工作室里满是乱堆乱放的原材料、尚未成型的创意作品和回收利用的垃圾。当时我经常沿街捡垃圾，幻想自己是个拾荒艺术家。」来形容的。他认为这样的工作室虽然乱七八糟，但却充满活力。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/74414eac77419fe16bf1fc2c215e19ee.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>作者在他的第一间工作室中工作。</figcaption></figure><p>但就是这样一个喜欢捡垃圾、工作室里堆满工具的人，随着工作逐渐繁杂，工具逐渐增多，也深深感到整理的重要性。</p><blockquote><p>他（指《公园与游憩》中的角色尼克·普罗德曼）通常是怎么方便怎么来，比如拽过几个锯架和一些夹钳，借助它们来锯木料。当然，我年轻的时候也是这么做的。“不过，这需要更大的力气和敏捷程度，”尼克继续说道，“而且10%会出问题。我会不小心摔一跤，砸穿刚刚搭好的假墙。”我也是这样。</p></blockquote><blockquote><p>通常来说，我们的第一个工作室都充满活力但乱七八糟。不过，我们会一口咬定这是创造力的体现，但是随着距离的产生（无论是时间还是空间），我们就会意识到，混乱以某种方式阻碍了自己的创造力产出。</p></blockquote><p>尽管如此，他也不会是「断舍离」理念的拥护者，他认为「有一种方法能让你整理得干干净净，所有东西都收纳得看不见、贴上标签、按颜色排列，感觉就像监狱一样，让人倍感压抑。」，在美观和实用性之间更追求的是既要收拾，但要敞开，无遮无挡，用他的话来说就是「一目了然，触手可及，看似嘈杂，实则有序」。</p><p>其实就是把所有工具都放到一目了然的位置，不把工具收纳至看不见的地方，避免因为看不见而遗忘了工具的存在，接着在全开放式的基础上，他再对物品进行分类，让自己可以快速地找到工具所在。看起来乱，但对作者来说，这能让他的工作效率最大化。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/02734ab4d9643c6bd0f29bd1df669316.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>作者的开放式工具架</figcaption></figure><p>每个人都有更适合自己的整理方式，比如作者在《谣言终结者》的搭档杰米·海纳曼，就更喜欢分门别类、整整齐齐的收纳方式，不同的工作内容都有各自专属的工作间，比如焊接室、电子元器件室、木工车间、喷漆房等，锤子只会存放在木工车间，不会出现在其他地方。</p><p>当作者在木工车间之外的地方需要一把锤子，就需要往返一趟取用这把锤子，显然在作者看来，这绝对只会降低工作效率，然而——「穿过整间工作室去取锤子对杰米来说很有意义。他会充分利用这段时间，边走边思考下一步该怎么做。」</p><p>所以，找到最适合自己工作、生活的整理方法，就是最好的整理方法。</p><blockquote><p>我说的“直面自己”，是指观察自己的习惯并从中学习，根据获得的信息做出改变，从而提升自我。</p></blockquote><h2>心态</h2><p>从上述方法的介绍中很容易看出，作者对工作心态很重视，一个好的工作心态，对提升工作效率是事半功倍的。他在经年累月地实践中总结出来的经验，可以有效地在工作期间将心态调整至最佳状态。</p><p>除了工作方法之外，对于通常意义下容易消耗心态的情况，作者也分享了他如何用积极的态度去面对。</p><h3>1. 截止期限</h3><p>把截止期限视为洪水猛兽，并不少见，但作者认为，不应该把截止期限视为敌人，而是应该接受它的挑战，把它当作是游戏中的一个任务。</p><p>比如说寒暑假作业，是我们每个人从小到大必定都经历过最经典的截止期限，有的人会在放假的前期就一鼓作气完成所有作业，有的人会合理分配每天写多少，也有更多人是在放假结束前几天，甚至前几个小时才匆忙赶完。结果都是完成了任务，但完成效果最差、最讨厌截止期限的一定是最后一类人。</p><p>正职工作中遇到的截止期限，和读书时作业的截止期限，是同一类，都是由外界施加压力，那如果是日常生活或者兴趣爱好这种无第三方介入的截止期限呢，比如每天拖地，又或者是每周写一篇文章，即使没有完成，也不会有什么影响，所以事情便一拖再拖，远远超出自己当初设下这个截止期限的计划。</p><p>这就是作者为什么要用整整一章去讲述如何面对截止期限，并且提出要正视截止期限，去迎接它的挑战。</p><p>在处理自己的事情或项目时，如何给自己设定一个合理的截止期限？作者说，截止期限不能是随机的一个日期，这个日期必须和你本人或者项目本身有关，也可以和两者都有关系。</p><p>如果是随机的日期，那么很容易再次发生不断拖延的情况，因为完不成也没关系，而如果关系到自己或者项目本身，比如要在某个特殊的日子给某个人送一个礼物，那就会有动力推动自己前进。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/6c58bd2d31fe82c390f29874de05ff0e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>作者要求自己在 SDCC 上穿着《异形》的服装，终于历时 12 年做完了这件作品。</figcaption></figure><p>既然有了截止期限，即使我们再如何积极面对它，也难免会遇到无法按时完成的意外状况。</p><p>截止期限会带来时间压力，这份压力能够帮助我们关注任务本身，把压力转化为效率，但稍不注意压力也会转化为焦虑。正视截止期限，不单单是指接受它带来的挑战，也提醒我们不要被截止期限带来的恐惧压垮。</p><p>即使没有按时完成，也不会是世界末日，放松心态去解决没有按时完成带来的后果和问题即可。</p><p>当然，这里指的是在尽力之后仍无法按时完成的情况，例如工作中难免会遇到意外情况，事情并不如我们所设想的展开，而不是指敷衍了事后，用「天也不会塌」来安慰自己。</p><h3>2. 容忍错误</h3><p>正如上文所说，工作中难免会遇到意外情况，失败是常有的事。作者强调，这里所说的「失败」，是指过程中暂时的失败，而不是最后结局的失败。可能对于他创客的工作内容来说，只存在「还没开始做」、「正在做」和「做出来了」三种状态，在成功制作出想要的物品之前，任何的失败都不会让他觉得这个目标绝对无法实现，只会认为是暂时的错误罢了。虽然我们不是做同样的工作，但也是可以学习这样的心态的。</p><p>所以，他认为错误的存在是合理的，任何事物要到达完美的状态，不可能一蹴而就，需要多次迭代方能达成。</p><p>而且错误总是能够带来经验，经验则能帮助我们更好地完成下一次任务。</p><h2>所有工具都是锤子</h2><p>关于书名《所有工具都是锤子》，源自于作者在工业光魔的一个同事马克·巴克，马克厌恶花费太多时间于找对应的工具这件事上，他鼓励的态度是打开思路，不要被工具所束缚，比如说当手边需要敲打东西却没有锤子时，钳子也可以成为「锤子」，这就是「所有工具都是锤子」之意，让工具为己所用，更重要的是了解自己需要什么，才能最好地提高效率。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/86007</id>
             <title>摩拳擦掌准备假期旅行？这些冷门但必备的好物，推荐给你</title>
             <link>https://sspai.com/post/86007</link>
@@ -394,109 +463,6 @@ if __name__ == "__main__":
         </item>
         
         <item>
-            <id>https://sspai.com/post/85945</id>
-            <title>Obsidian双链框架AMOC，更简单的PARA、卡片笔记体系</title>
-            <link>https://sspai.com/post/85945</link>
-            <guid isPermaLink="false">https://sspai.com/post/85945</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 24 Jan 2024 09:39:59 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Obsidian, 笔记软件, 自动化, 可视化统计汇总
-<br>
-<br>
-总结: Obsidian是一款功能强大的笔记软件，通过自动化和可视化统计汇总等功能，帮助用户高效地组织和管理笔记。尽管在使用过程中会遇到一些维护困难的问题，但Obsidian的简洁性和易用性使其成为许多人的首选。 </div>
-                        <hr>
-                    
-                    <p>Obsidian成了我主力工具，到现在练习时长快2年半了，并不是有多喜欢它，每次有新笔记软件都会看一看有没有能取代它的，可惜都没遇到。</p><span class="ss-linkCard">&nbsp;</span><p>这篇发表的时候，其实已经不怎么折腾。这一年，在个人方面，基于Obsidian笔记组织了41场拍摄，20个长视频、6-8万字的摄影课程，公司方面则是一天一更新的短视频策划拍摄后期等记录，同时能自动汇总一周工作，哪怕填写2-3个月前的每日工时都能轻松应付。不过每个月看一本书的目标，去年只完成了4本。交代一下免得被当成折腾Obsidian就是不务正业，我只是把原来玩守望先锋的时间放到折腾上。</p><p>那这一年我更侧重Obsidian的自动化、可视化统计汇总等功能追加，同时也遇到很严重的问题：维护困难。</p><h2>遇到的问题</h2><p>Obsidian很大一部分依赖大量使用Dataview插件。在实际使用中，文件有流动性，需要对树状图进行调整、有修改、归档之类的，例如一个月过去了，就把日记放到对应文件夹，一年过去了也是，这就会相当抓狂，一堆Dataview代码引用了path（文件路径），需要调整。出于方便排序，我采用的"001-xxx"的文件夹索引号命名，一旦修改，真地狱级灾难！</p><p>后期有部分笔记采用了Tags，这也导致我的tags标签系统非常臃肿，新建笔记的时候经常想不起到底要打什么标签，不打的话问题大不大？到底是不是需要模板等等。</p><p>整体而言，易用性、简洁性都极差，投入的精力消耗过大。</p><p>《Building a Second Brain》作者Tiago Forte 介绍 PARA 时就提到：</p><blockquote><p>Only&nbsp;the&nbsp;simplest,&nbsp;most&nbsp;effortless&nbsp;habits&nbsp;endure&nbsp;long&nbsp;term.<br />只有最简单、最轻松的习惯才能持久。</p></blockquote><p>这个原则和编程原则KISS (Keep it Simple, Stupid)如出一辙。在Obsidian高强度的使用过程中，很早就引入<a href="https://www.youtube.com/@linkingyourthinking" target="_blank">油管博主Nick Milo</a>的MOC（Maps Of Contents）方法，异常好用。很简单，就是在笔记顶头写上<code>Up:: [[上层目录]]</code>。MOC的其中一种用法，是建立起目录大纲作为的索引：</p><figure class="image ss-img-wrapper image_resized" style="width: 428px;"><img alt="image.png" src="https://cdn.sspai.com/2024/01/20/article/bf9f5c793dcd6fe6def7ae57595be1f0?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>去年的分享中，下图的日常、记录、打码的工作、橙猫涉影就是采用MOC的方式，都是手动输入。新增删减都需要调整，比较麻烦，写笔记都像维护系统一样繁琐了。</p><figure class="image ss-img-wrapper image_resized" style="width: 418px;"><img alt="image.png" src="https://cdn.sspai.com/2024/01/20/article/916b0126ae332f635c66793824835249?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我开始思考能否利用什么方法实现这一块的自动化，自动组合起来，不需要那么麻烦手动增删。经过一段时间的探索后，就有了今天给大家介绍的，Automate MOC架构（下面简称AMOC）。</p><h2>AMOC 介绍</h2><figure class="image ss-img-wrapper image_resized" style="width: 508px;"><img alt="image.png" src="https://cdn.sspai.com/2024/01/20/article/e857fed0f4b2267ce26de7c6361fd59d?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在Obsidian中，如果树状图是物理结构、Tags标签是魔法结构，那AMOC就是连接物理和魔法的桥梁、中间层，基于双链+Dataview的结构打造，充分发挥了双链作用。</p><figure class="image ss-img-wrapper image_resized" style="width: 514px;"><img src="https://cdn.sspai.com/2024/01/20/article/3c981ed57ab42a8bcbcde4458807d80d?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>AMOC的目的是为了专注笔记本身，让我忽略笔记本身以外的打理。对于查改增删等操作都在笔记内完成。而笔记则自动形成MOC，即AMOC如下图所示，AMOC只是一个框架，不涉及知识分类。</p><figure class="image ss-img-wrapper"><img alt="image.png" src="https://cdn.sspai.com/2024/01/20/article/66507b3d76b463759be45038233dd2bf?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>AMOC整体呈现，自动识别你的调整修改，无需维护</figcaption></figure><p>编程有个原则："Don't Repeat Yourself"，Just Copy。<br />AMOC的核心功能只需要Copy即可，粘贴到相关笔记，只需3个步骤即可上手建立AMOC。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/24/4f1057d63e33ba07a278a5e858dc3d1f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>AMOC 步骤1：上级索引</h2><p>AMOC步骤中最关键🔑的一点，就是在笔记中我们要告诉它，它的上级索引是谁，并写上：</p><blockquote><p><code>up:: [[上层目录]]</code></p></blockquote><p>双冒号为Dataview能识别的属性，后续步骤的Dataview都基于此项进行双链识别。</p><h2>AMOC 步骤2：同级索引</h2><p>当 A 笔记及其他笔记都存在 <code>up:: [[Z笔记]]</code> ，即共同指向Z笔记时，在A笔记中加入下面的Code，即可实现同级AMOC，无需理解直接Copy Paste即可。</p><pre class="language-javascript"><code>&gt; [!note] AMOC Standard
-&gt; ```dataview
-&gt; list
-&gt; where up !=undefined and contains(up,this.up) and !contains(file.path,"模板")
-&gt; sort file.name
-&gt; limit 10
-&gt; ```
-</code></pre><p>在我的Ob中，绘图、橙猫涉影……模板、白板，这几个同层级的AMOC笔记，都具备<code>up:: [[Homepage]]</code>，上段代码在日记中的展示如下图（样式修改过）：</p><figure class="image ss-img-wrapper"><img alt="同级MOC" src="https://cdn.sspai.com/2024/01/20/article/cb346611c4969b13fe21cdb01bcc642e?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我习惯上会加上Callout样式，毕竟颜值是最大生产力。</p><h2>AMOC 步骤3：下级索引</h2><p>当B、C、D笔记都输入了 <code>up:: [[A笔记]]</code> ，同上级索引为A笔记时，在A笔记中加入下面的Code，即可实现BCD的集合。</p><pre class="language-javascript"><code>&gt; [!note] AMOC Down
-&gt; ```dataview
-&gt; list
-&gt; where up !=undefined and contains(up,this.file.link) and !contains(file.path,"模板")
-&gt; sort file.name
-&gt; limit 10
-&gt; ```</code></pre><p>这段代码的差别仅仅只是把步骤2的 <code>this.up 换成了 this.file.link</code>，即可实现，充分利用了双链笔记的优势。</p><p>在我的笔记里，还结合Minimal主题的list-cards，在笔记 'CMSY.md' 中效果如图：</p><figure class="image ss-img-wrapper"><img alt="image.png" src="https://cdn.sspai.com/2024/01/20/article/8ee02065f4084e0b81fe8a4a7202ea55?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果有一天，我不希望 'CMSYInbox' 笔记出现，只需要把 'CMSYInbox' 的up修改为其他笔记即可，全自动调整。</p><h2>AMOC的补充说明</h2><p>AMOC 概括起来就是</p><ol><li>笔记自身建立了 <code>up::</code></li><li>直接粘贴两段Dataview</li></ol><p>不管我们是从笔记外部调整了它的树状图，还是修改了它标签，都不会产生任何影响，因为它是基于up属性。如果你修改笔记名字，Obsidian的双链功能会自动同步全局更改。专注笔记本身，不产生过多的焦虑和担忧。</p><p>在这个功能之后，我延伸了一下，同时读取2层：</p><figure class="image ss-img-wrapper"><img alt="image.png" src="https://cdn.sspai.com/2024/01/20/article/66507b3d76b463759be45038233dd2bf?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>对应的Dataviewjs如下，搭配MCL css使用，模板中有：</p><pre class="language-javascript"><code>```dataviewjs
-const listLimit =10
-const calloutSytle = "&gt;&gt; [!abstract]- 📖"
-
-//过滤掉日记、excalidraw、canvas的MOC 和模板、box
-let filterPages = dv.pages('-#日记 and -#excalidraw')
-.filter(p =&gt; p.file.path.contains("白板")==0 &amp;&amp; 
-p.file.path.contains("box")==0 &amp;&amp;
-p.file.path.contains("模板")==0 &amp;&amp; 
-p.up &amp;&amp; 
-p.file.name.contains("日记")==0)
-.sort(p =&gt; p.file.name,"desc")
-
-let pages = filterPages.filter(p =&gt; String(p.up).contains(dv.current().file.link))
-
-let formatMulti = "&gt; [!multi-column]\n&gt; "
-let nextlevel = pages.map(async(page) =&gt; {
-  return  calloutName + page.file.link
-})
-//console.log(arr)
-for (let page of pages) {
-var uplink = page.file.link 
-formatMulti += "\n" + calloutSytle  + "[[" + page.file.path + "|"  + page.file.frontmatter.aliases + "]]"
-
-if(filterPages.where(p =&gt; String(p.up).contains(uplink)).file.length!=0)
-formatMulti += "\n&gt;&gt; - "+filterPages.where(p =&gt; String(p.up).contains(uplink)).limit(listLimit).file.link.join("\n&gt;&gt; - ")
-else
-formatMulti += "\n&gt;&gt; 无"
-formatMulti += "\n&gt;"
-
-}
-
-dv.paragraph(formatMulti)
-```</code></pre><p>考虑到它的易用性和可维护性，2层AMOC足够，适可而止。</p><p>AMOC在不同操作下的说明：</p><ul><li>新建：任何位置新建，笔记中写上<code>up:: [[上级目录]]</code>，自动添加到目录当中。</li><li>修改：分类、归档等调整，笔记中修改<code>up:: [[新的上级目录]]</code>，自动纳入到新的目录，如Inbox、Done、Achieve当中。<ul><li>一开始的时候，《摄影》的 上层AMOC为《橙猫涉影》，但因为用的太多，需要多层AMOC跳转，我直接对《摄影》修改 <code>up:: [[Homepage]]</code> 即可建立新的AMOC。</li></ul></li><li>延伸：采用了contains 写法而不是 up=this.up，提供了更多的可拓展性，让笔记的 up 可以指向多个AMOC笔记。<ul><li>这篇文章一开始放在公众号下，但后来忘记了，去 'Obsidian MOC' 下找不到，这种有交叉属性的，可以同时放到up中 <code>up:: [[公众号]], [[obsidian MOC]]</code> ，当然也可以用标签来实现，只是个人更喜欢AMOC的方式，我的标签有另外用途。</li></ul></li></ul><p>搭配主题和Callout样式，AMOC最终在一个文档中的效果图：</p><figure class="image ss-img-wrapper"><img alt="image.png" src="https://cdn.sspai.com/2024/01/20/article/f46959c3b6b176d498097258fd10cd17?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>基于AMOC搭建PARA</h2><p>PARA在笔记中很受欢迎，我用AMOC组织了相关文件，模板文末有提供下载。<br />搭建PARA，只需要5个笔记：</p><ul><li>结构中心.md 作为总控</li><li>代表PARA的4个笔记，粘贴下面内容即可：</li></ul><pre class="language-javascript"><code>up:: [[PARA结构中心]]
-
-&gt; [!note]- 最近编辑：当前文件夹下
-&gt; ```dataviewjs
-&gt; dv.table(["文件","修改时间"],dv.pages()
-&gt; .filter(p =&gt; p.file.folder.contains(dv.current().file.folder) &amp;&amp; p.file.name!=dv.current().file.name)
-&gt; .sort(p =&gt; p.file.mtime,"desc")
-&gt; .limit(10)
-&gt; .map(item =&gt; {return [item.file.link,item.file.mtime]}))
-&gt; ```
-
-# `=this.file.name`
-
-&gt; 💡YAML中的cssclasses采用list-card，横向显示list，需搭配主题Minimal使用
-
-## AMOC
-
-&gt; [!note]- AMOC Standard
-&gt; ```dataview
-&gt; LIST
-&gt; where up !=undefined and contains(up,this.up) and !contains(file.path,"模板")
-&gt; sort file.name
-&gt; limit 10
-&gt; ``` 
-
-&gt; [!note]- AMOC Down
-&gt; ```dataview
-&gt; LIST
-&gt; where up !=undefined and contains(up,this.file.link) and !contains(file.path,"模板")
-&gt; sort file.folder asc
-&gt; limit 10
-&gt; ``` 
-
-</code></pre><p>在PARA这4个笔记中的内容是一模一样的，仅仅只需要依据不同的笔记名，即可基于自身 <code>this.file</code> 属性，实现一统江湖，大体架构如下：</p><figure class="image ss-img-wrapper"><img alt="AMOC在PARA中效果" src="https://cdn.sspai.com/2024/01/20/article/cae9ce94fa7b9347b9eae01638c4959b?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在这个模板基础上，我只要两步操作：</p><ol><li>新建笔记</li><li>在顶部写上 <code>up:: [[01Projects]</code> 即可划分为对应的领域，前面的数字用于排序。</li></ol><p>在结构中心.md中我会放入了读取多层索引的Code，具体可看模板，效果如下：</p><figure class="image ss-img-wrapper"><img alt="image.png" src="https://cdn.sspai.com/2024/01/20/article/1152d0c86d54fca348897ab2ebb3c7bc?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>基于AMOC搭建卡片笔记</h2><p>和PARA的方法，几乎是一样的：1个中心.md，在闪念、文献、永久3个笔记里面放上是一模一样的内容。</p><figure class="image ss-img-wrapper"><img alt="image.png" src="https://cdn.sspai.com/2024/01/20/article/f8a0a81df78e072fbacb6f556ef57d12?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>至于要不要为它们建立独立文件夹，就看你们自己的习惯，用文件夹会更规范也方便后期管理，这里只是出于展示的用途，怎么操作都不会影响到AMOC，基于双链以及文件属性内联了，用起来就非常轻松。</p><h2>模板下载与说明</h2><p>树状图毕竟包含了全部文件，要完全放弃是不可能的，在这一块，我也经常用上 <code>this.file.folder</code> 来进行处理，这就要求AMOC的笔记必须放在合适的文件夹下，符合我们常规树状图的做法，差别在于相对路径和绝对路径。</p><p>在标题上，我经常采用下面写法，非常方便。</p><pre class="language-text"><code># `=this.file.name` 
-</code></pre><p>👉<a href="https://flowus.cn/cmsy/share/22fb9094-0710-4083-9475-b554d6c8079c" target="_blank"><strong>模板下载</strong></a></p><h2>结语</h2><p>万事开头难，至少现在不用再担心开头难了。<br />在新建md笔记的时候，我不用再考虑到底放哪个文件夹，到底要加哪个tag，畏手畏脚的，现在只需要专注笔记本身，加上<code>up:: [[上层索引]]</code>即可，还可随时变更，不受任何约束freestyle，将双链的功能发挥到极致。</p><p>本来想分享过去一年所增加的功能，结果涉及到有理论的，即使AMOC这么简单的功能，都需要很大篇幅讲述，有机会再分享一些自动化功能！</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://sspai.com/post/85897</id>
             <title>「悬浮捷径SoftCircle」安卓效率神器，一键跳转任意位置</title>
             <link>https://sspai.com/post/85897</link>
@@ -520,70 +486,148 @@ dv.paragraph(formatMulti)
         </item>
         
         <item>
-            <id>https://sspai.com/post/85951</id>
-            <title>解读焦虑之谜：生活的「表面积」与心灵负担</title>
-            <link>https://sspai.com/post/85951</link>
-            <guid isPermaLink="false">https://sspai.com/post/85951</guid>
+            <id>https://sspai.com/post/83387</id>
+            <title>自定义Excalidraw脚本——实现Zotero与Excalidraw的联动</title>
+            <link>https://sspai.com/post/83387</link>
+            <guid isPermaLink="false">https://sspai.com/post/83387</guid>
             <pubDate></pubDate>
-            <updated>Sun, 21 Jan 2024 01:30:35 GMT</updated>
+            <updated>Sat, 07 Oct 2023 01:00:23 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                        <div> 关键词: 观点, 表面积, 能量, 紧张和焦虑
+                        <div> 关键词: Zotero, Excalidraw, 无缝连接, 脚本
 <br>
 <br>
-总结: 本文提出了一个有趣的观点，认为我们感到紧张和焦虑是因为我们自身的「表面积」过大，维护它所需的能量超过了我们拥有的能量。这种「表面积」包括生活中所有消耗精力的人和事物。当我们的「表面积」扩大到难以应对时，就会产生紧张和焦虑。因此，为了减少焦虑和紧张，我们应该尽量维持较小的「表面积」。 </div>
+总结: 介绍了如何通过自定义 Excalidraw 的脚本实现 Zotero 与 Excalidraw 的无缝连接，通过拖拽 Zotero 的文本或图片到 Excalidraw 实现笔记功能。 </div>
                         <hr>
                     
-                    <p style="margin-left: 0px;">最近，看到一个十分有趣的观点。它提供了另一种视角来看待是什么让我们感到如此忙碌、紧张和焦虑。</p><p style="margin-left: 0px;">这一观点认为，我们的焦虑源于自身的「表面积」。一般来说，「表面积」越大，维护它所需的能量就越多。然而，在一段时间内，我们的能量是有限的。当维护「表面积」所需的能量超过我们自身拥有的能量时，就会带来紧张和焦虑的感觉。</p><figure class="image ss-img-wrapper image_resized" style="width: 406px;"><img src="https://cdn.sspai.com/2024/01/20/d853b71120b48058b9162e6dd4e41173.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>我们的能量犹如湖泊中的水，在一定时间内总量是一定的。我们消耗能量来维护「表面积」，就如同开辟水渠灌溉田地。当湖泊中的水不足以灌溉你拥有的田地时，焦虑和紧张就产生了。</figcaption></figure><p style="margin-left: 0px;">当大多数人想到表面积时，可能首先想到的是一个长方形或正方形的表面积。然而，今天所说的「表面积」与常规概念略有不同。它指的是生活中所有能够牵扯你精力的人和事物。这些元素隐藏在日常生活中，而大多数人很少意识到它们究竟消耗了多少能量。</p><p style="margin-left: 0px;">这样的说法可能仍然有些抽象。以一个例子来说明，如果你拥有一套房子，你需要维护的「表面积」相对较小。你只需要偶尔进行清理，或者在某一天突发奇想时，为房间添加一些新的家具。然而，如果你再购置一套房子，你需要维护的表面积就会增加。你可能会思考：把哪套房子作为固定住所？空闲的房子是否应该出租给他人？如果出租，租户是否会把房子弄得一团糟呢？</p><p style="margin-left: 0px;">当你拥有第三套、第四套……房子时，你的「表面积」就在逐步增加。这种增长并非线性，而是略高于线性的趋势。我们生活中面对的所有事物都是如此。朋友是一种「表面积」。从出生到死亡，我们能够与朋友相处的时间是有限的。朋友越多，我们与每位朋友单独相处的时间就越有限。金钱也是一种「表面积」。拥有的金钱越多，你就需要花费更多时间和精力来管理各种类型的资产和投资，思考如何获取更大的利益。人们对于物质的渴望是无穷无尽的，我们总是希望拥有更多。</p><p style="margin-left: 0px;">然而，正如文章开头所提到的，我们在一段时间内能量总量是有限的。因此，当一个人的「表面积」扩大到难以应对时，就会产生紧张和焦虑。「表面积」越大，对个体精神和身体的负担就越沉重。当然，人类是充满智慧的。在感到难以负担时，他们会雇佣一些人来协助打理这些事务。于是，助理、职业经理、保姆等职业应运而生。这些专业人士可以协助你维护「表面积」，甚至可以帮助你扩大「表面积」。表面上看，这种方式让你能够将自己的「表面积」转嫁给他人。但与此同时，这也从另一个角度扩大了你的「表面积」。实际上，你仍需花费能量来与这些专业人士进行互动，例如传达计划、分配任务和听取报告等。</p><p style="margin-left: 0px;">从「表面积」的角度来思考，就不难理解为什么我们在生活中会感到如此焦虑、紧张。「表面积」已经成为你我身份的一部分。</p><p style="margin-left: 0px;">比如：</p><p style="margin-left: 0px;">「他是一位 '大忙人'，每个项目都要亲历亲为。」</p><p style="margin-left: 0px;">「他是拥有四家店面的个体经营者，渴望将店铺遍布整个城市。」</p><p style="margin-left: 0px;">甚至，你可能都没有意识到自己拥有多大的「表面积」。每一天，你全身心地投入到要扮演的角色中，感觉自己已经足够努力了，却仍然有一种要窒息的感觉。</p><p style="margin-left: 0px;">大多数人都渴望拥有更多的资源，以便与更强的人竞争。从群体层面看，这可能会带来巨大的效益。然而，就个人而言，这可能导致不快乐。我们每个人都渴望拥有更多自由的时间，渴望更加专注于当下的工作和生活。这就需要更小的「表面积」，使你的能量足以在工作和生活中流动。大多数真正快乐的人，它们的「表面积」都相对较小。他们可能只有4-5个亲密的朋友，与其他人仅仅维持着松散的朋友关系。在工作和生活中，他们可能也只专注于一两件事，而不是四五件。</p><p style="margin-left: 0px;">因此，最大程度地享受生活的方法是维持「表面积」在较小的范围内。这让我想起了前几年广受欢迎的一本书——《断舍离》。该书倡导人们过上一种精简、高效的生活，这种生活方式能够使我们的内心保持宁静和平和。当然，这是一项相当艰巨的任务。然而，相较于在无尽的事务中不知疲倦地奔波，维持较小「表面积」的工作可能反而更轻松一些。</p><p style="margin-left: 0px;">当然，这里提到要保持较小「表面积」并非意味着在生活中停滞不前。就像「断舍离」这一理念，并非要舍弃所有东西。我们需要更加理智、清醒，以避免「表面积」无意义的扩大，例如一些毫无意义的社交和不必要的忧虑。我们的最终目标是确保我们的能量足以应对生活，减少焦虑和紧张。</p><p style="margin-left: 0px;">实际上，到了这里，这篇文章的主要内容差不多已经结束了。按照常理，此时应该提供一些建议，以帮助我们维持较小的「表面积」。然而，在本文中，我并不想这样。我坚信每个人都像树叶一样，是独一无二的。只有你才是自己生活的亲历者，也只有你最了解自己。当然，每个人在自我认知上都存在一些盲区，就像弗洛伊德的冰山理论，有很大一部分潜藏在水面之下，我们难以意识到那些部分。「表面积」也是如此。你可能没有意识到自己拥有多么大的「表面积」，才导致你如此紧张和焦虑。</p><figure class="image ss-img-wrapper image_resized" style="width: 488px;"><img src="https://cdn.sspai.com/2024/01/20/4b8986957837de2021afca441e688195.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>弗洛伊德的冰山理论。生活中我们能够意识到的内容只是水面上很少的一部分，大部分都潜藏在水面下的无意识层面中。</figcaption></figure><p style="margin-left: 0px;">因此，在文章结尾，我想提供一种让你更了解自己的方法。这个方法源自团体心理辅导中的一个小活动，专注于压力感知。</p><p style="margin-left: 0px;">在原始活动中，为了协助团体成员更好地认识自身的压力，咨询师或活动领导者会邀请某一位成员站在指定区域，仔细回顾最近可能给自己带来压力的生活事件。每当他提及一项压力事件时，团体中的另一位成员将会把自己的一只手搭在他的身上，直到他说完所有的压力事件。通过这种方式，成员可以直观、具体地感受到自身经历的压力事件数量，以及这些事件对他的影响。</p><p style="margin-left: 0px;">在生活中，当没有他人协助时，可以采用另一种方法独自完成上述活动。你可以准备一些便签，将压力事件写在上面，然后按顺序将这些便签摆放在桌面上。这样的做法同样能够以直观、具体的方式展示出你身上的压力事件。并且当你将这些便签拼接在一起时，形成的图景即为超出你能够处理的那部分「表面积」。同样的，你写在便签上的内容也不仅限于压力事件，你还可以将自己的「表面积」记录在上面，以提醒自己哪些「表面积」是不重要的，要保持较小的「表面积」。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/85314</id>
-            <title>客制化键盘简评丨TKD Cycle8 丨圆与缘</title>
-            <link>https://sspai.com/post/85314</link>
-            <guid isPermaLink="false">https://sspai.com/post/85314</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 20 Jan 2024 05:22:53 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Cycle8, TKD, 客制化键盘, 80%
-<br>
-<br>
-总结: 本文介绍了Cycle8作为TKD的Cycle系列的完结之作，以及80%作为客制化键盘圈中经典的配列之一。文章详细描述了Cycle8的造型与配列的变化，包括回形灯条、拆分配重块、钛合金工艺等设计细节。同时，文章也表达了作者对于键盘创作的思考和对自由创作的热情。 </div>
-                        <hr>
-                    
-                    <p><strong>观前提醒：本文仅代表个人观点，仅供参考。</strong></p><h2><strong>前言</strong></h2><blockquote><p>最后，Cycle8也将会是TKD的Cycle系列的完结之作</p></blockquote><p>看到团购帖中的这句话，我愣了一下。原本理好的思绪一下子被抽离，如细丝，纷乱缠绕。重新看向手里的这把Cycle8，我突然觉得它变得沉甸甸的，虽然铝合金本就谈不上「轻盈」。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/20/26278ea9af809b51ad3c311c84bafba3.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>去年写了几篇有关键盘的评测，也对一些创作方向进行了尝试，但始终无法让自己满意。</p><p>「行有不得者，皆反求諸己」，归根到底还是自己的水平不够，亦或者在键圈写文章本身就不是一条正道。那我能做什么呢？思考良久，唯有继续倾注热情到自己的文字中，虽有些徒劳，但还有创作的自由。</p><p>下面，我们就来聊聊Cycle8，这把Cycle系列的收官之作，也聊聊TKD，这个让我有点困惑的联合厂牌。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/08/29a40f668a10dbf255075178fc2bef24.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>造型与配列</h2><blockquote><p>不要忘记来时的路和我们坚持的热爱，也希望把这份热情传递给每一个喜欢客制化键盘的人。</p></blockquote><p>这是<strong>TKD.Customize</strong>在Cycle立项时的宣言，如果说Cycle7是一次小心翼翼的尝试，那么Cycle8则是对<strong>TKD</strong>意志的实践。</p><p>我想，以Cycle8作为Cycle系列的收尾或许是早就谋划好的。80%，TKL，Tenkeyless，作为客制化键盘圈中最为经典的配列之一，80%诞生了许多不朽的传奇之作，其中不乏对我影响颇深的作品，也是我玩键盘来时的路。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/20/c8e21db51de91b1d1269e1a1e041eeed.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果说60%是客制化键盘家族中最受宠爱的孩子，那么80%就是家族里的长子，威望卓著。它不是我最偏爱的那一个，但若要选出一个担任我桌面江山社稷的掌舵者，80%绝对是我的第一选择。不同于60%那般小家碧玉，80%是名门正派的大家闺秀，有条不紊的配列布局，完善的按键映射，在效率与舒适之间取得了最为普世的平衡，美的落落大方。</p><p>而相较于Cycle7，Cycle8的变化主要集中在对细节的丰富和造型的重新设计。</p><blockquote><p>它沿用了Cycle7上的碰珠快拆结构，并通过自主CNC定制了更符合TKL边框比例的快拆构件；</p><p>在该作中丰富了更多的设计细节，相较于前作，且作为TKL尺寸的键盘，在Cycle8身上有着更具代表性的设计内容：回形灯条、拆分配重块、钛合金工艺、全新材质的PC定位板以及丰富的配件选项</p></blockquote><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/cfd4463c4e82ec68a6f2d12b3773fdf7.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>正面来说，我个人是绝对站光板（无回形灯条）版本。</p><p>一方面80%本身的比例设计就非常的完美了，天资自然，不假雕琢。另一方面，回形灯条的设计实在是不敢恭维，我能够理解设计师想要将造型设计与「Cycle」进行联系，同时也让键盘不被说成「毫无辨识度」的想法，回形灯条槽的加工也是通过刀头进行回形切削得到。这很巧妙，但这个设计本身的大小局限于方寸之地，在布局的时候，或许是想强化「Cycle」的意象，同心方形设计的圈数多且大，再加上CNC切削的立体造型带来的视线引导，使得整个视觉重心都被引向了这个灯槽，有点头重脚轻。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/7447f29aa8ab9b7606b42ac34e04e247.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>从侧面观察，Cycle8的线条设计是让我惊喜的。它散发出一种动感十足的现代气息，两条从倒角引出的清晰而锐利的弧线，速度感十足，它们在视觉上划破空间，给人一种强烈的前进感。紧接着，这两条弧线似乎融入了一条与键盘上盖平行的隐约直线之中，巧妙地营造出一种「渐近线」的效果，这在Cycle7中是完全没有的。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/1e2e7bb6bd9eee0b7fc22fcaa55d5ab7.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>背面的配重设计选择了拆分配重。</p><blockquote><p>我们将Cycle8的底部配重通过旋转对称的弧线切分成了3块，并搭配不同的表面处理工艺跟材质来丰富其视觉效果。</p></blockquote><p>我自己是相对比较喜欢镜面这样简单的配重设计，虽不如彩钛那么缤纷绚烂，但镜花水月也别有一般风味。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/5c9f4758c00fa5a8766c7abfb0c132df.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>说完了造型与配列，下面我们来简单聊聊关于快拆和内胆。</p><h2><strong>快拆：实用还是噱头？</strong></h2><p>不知道你的答案是怎样的，对于我来说，它更像是一个可有可无的附加项。</p><p>我并不是一个嫌麻烦的人，至少在玩键盘这件事情上，我愿意投入时间去享受组装的乐趣。能选焊接的键盘，我就不会选择热插拔，虽然这可能意味着多好几倍的组装时间成本，但正是这种折腾的过程，让我乐在其中。</p><p>当然，我并不否认快拆带来的便利性。它就像是知识付费，虽然被过度炒作，但确实有其存在的价值。但同样的，快拆功能并不能激发一个人对键盘定制的热爱，就像健身房的年卡并不能让人真正爱上健身一样。对键盘的热爱，源于玩家的内心。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/20/d122ecd2c7b8cd875155ba5d45c1da4c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>Cycle8的快拆好用吗？我相信Cycle7的表现以及市场上多款快拆套件都已经证明了它的稳定性和实用性</p><p>Cycle8的快拆常用吗？如果不出意外的话，我手上的Cycle8大概很长一段时间内都不会再拆开了，即便它只用几秒钟就能拆开。必须承认的是，我觉得快拆很适合键盘博主，经常要换键帽和轴体的话，取出内胆操作是最便捷的。但我想，对于一般用户而言，热插拔就是最好的快拆。</p><blockquote><p>我们预期的通过快拆来节省入门玩家对套件本体探索的操作成本的目的，但对此我们有了新的思考，从实际表现来说，我们对于快拆的设想某种程度上是失败的。</p></blockquote><p>如果仅仅是出于商业和市场的角度来考量，沿用快拆在很长一段时间内都会是一个重要的卖点，就像是1.2mm单键开槽黑芯PCB和各种声音包以及Hifi营销。</p><p>但TKD没有选择继续延伸Cycle系列，或许以后会有一些配列的补全，但短期之内快拆不会出现在新的作品上。我想，或许是他们对于快拆，对于玩家的需求，对于「Cycle」重新进行了思考。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/20/a2c6b5463c017234d7e803e833370177.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>更进一步，我希望那些继续采用快拆结构设计的工作室，能够附赠多张PCB或是提供相对便宜的PCB加购选项，如果几张PCB的价格就足够顶上一把键盘，那快拆真有些「食之无味，弃之可惜」</p><h2>内胆与部分细节</h2><p>在上下盖的接触部分，Cycle8加入了force break mod，简单但高效的减震设计。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/19/66e85c49211f52676883a5f871cf7101.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>此外，限位柱的独立件设计减少了喷涂过程中可能出现的公差问题，确保了键盘组装的精确度。上盖两侧的防撞条设计，以及定制的碳钢弹簧配合氮化硅碰珠和CNC加工的更小尺寸碰珠构件，都是为了解决碰珠快拆可能带来的边框过宽问题，同时内部边缘的倒角处理也非常精细。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/19/0e7e345cb5ef75e6b30eb4f5b9a1f386.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在内胆的设计上，Cycle8与Cycle7有所不同，这次采用了硅胶圈来替代硅胶条的固定方式，同时保留了Gasket豆的固定方法。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/19/6bd47885c78de45c3c2d5b09ce6dc0d4.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>整个内胆的固定方式是点状式分布Gasket，上四下三非对称，空格区域无固定点。同样点位分布的情况下，硅胶柱的支撑面是远小于硅胶条或是硅胶圈，底部的豆状硅胶形变也相对容易。</p><p>新引入的硅胶圈Gasket（O-ring）硬度较高，安装后处于一种紧绷状态，相较于原型的硅胶条，韧劲多一些，不会太过死板。我个人在尝试后，相较于硅胶豆，更喜欢这种硅胶圈的手感。它提供了明确的反馈，不会震手，且回弹迅速，使得整体的键入感觉非常明确。</p><p style="margin-left: 0px;">相比之下，一些采用板簧硅胶套固定模式的键盘，虽然手感偏硬，但并未达到硅胶圈Gasket（O-ring）的键入回馈效果。如果偏好手感较软的用户，硅胶豆可能是更好的选择，因为它的形变更容易，可以带来更柔和的键入体验，但需要注意的是，边角处的按键可能会感觉支撑性稍弱。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/19/d27ae9aedc696018d49b756167c8096a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>值得一提的是，硅胶圈Gasket（O-ring）虽然从定义上来说，确实是O-ring Mod，但实际表现和传统的O-ring&nbsp;Mount是完全不一样的。</p><p>不开槽的1.6mmPCB，从焊接角度而言，这绝对是利好。同时这也和硅胶圈Gasket（O-ring）的固定模式相性甚佳。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/19/0d2182ad1afccd1c414ab0a5b5492a1b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/19/ff3b7d420c32af3eba6aae0e15e70c37.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>有关于Cycle8的一切，我已悉数告知。而有关TKD，有关Cycle的一些想法，请容我再絮叨一会。</p><h2>从Cycle到<strong>TKD.Customize</strong></h2><p>不同于子品牌和衍生品牌的概念，<strong>TKD.Customize</strong>是一个联合创立的厂牌。或许听到这里，你会感到一头雾水，这之间又有什么区别呢？与市场上众多入门产品相比，Cycle系列和卷王产品有何不同？请注意，我这里指的不仅仅是产品本身的一些特质，还有产品背后的设计思路。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/20/4843de59b3711748433ad0e9fc1140ec.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在看到Cycle之后的很长一段时间里，我没有思考过这个问题。Cycle7的高调亮相和它的低价策略，它身上缺失的个性，让我一度认为这个系列只是个内卷而下沉的产品，直到玩到Cycle8，看到那一句话。</p><blockquote><p>最后，Cycle8也将会是TKD的Cycle系列的完结之作</p></blockquote><p>重新回看<strong>TKD.Customize</strong>成立的那篇帖子，它是入门的，也是性价比的，这一点是毫无疑问的。凭借Cycle7在国内外积累的用户群和口碑，为TKD铺平了道路。继续沿用快拆特性，并在迭代中进行升级，对TKD来说，是一个条平坦的路。</p><p>思索着，看着自己那些一点也不「卷」的老套件，突然想起那天朋友提出的问题</p><blockquote><p>这些套件一点性价比都没有，你为什么还要买呢？</p></blockquote><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/20/970d43d59e807f0289d63c4fbb09dd02.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>想起那天表弟给我看样品视频时的自豪</p><blockquote><p>你觉得Cycle的表面工艺如何？</p></blockquote><p>Cycle的阳极很好，喷涂也不赖。一个尖锐的问题随即产生，那么像是Angle、Arc这样的作品，它们存在的意义和价值又该怎么去阐释？</p><p>像是Angle、Arc这样的作品，即便是数量再怎么多，也无法降低到千元以下，但如果只是从纸面参数来看，它并不会比Cycle好多少，甚至后续推出的Cycle系列在表面处理工艺上会更加成熟。</p><p>这时，我才突然明白，<strong>TKD.Customize</strong>它不是Vertex和Equalz的子品牌，它的产品也不是所谓的支系、丐版。TKD是下沉的，Cycle是极具产品属性、商品属性的，但它并非追求内卷。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/20/630315fecee4ea7c54c450a0024bdc6d.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><blockquote><p>我们想的是先做一个入门级别的产品出来，然后再考虑如何能让它的成本变得更低，去支撑一个较低的售价，再定位到入门的市场跟玩家</p></blockquote><p>什么是入门？价格足够低是吗？我想，价格很多时候只是入门的一环。</p><p>价格重要吗？重要，但现在有太多产品，想要用低价去堵住用户的嘴。低价，是他们抄袭成性、敷衍设计最后的一块遮羞布，也是品控问题频出，产品质量低下的挡箭牌。</p><p>回看Angle和Arc，我对这两把键盘的评价其实是很尖锐的，甚至有些刻薄的，它们是好的作品，但不是为所有人准备的，它的设计是偏执的，不具有包容性的，它单纯只是为那些认定其价值的人准备的，是一份礼物。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/20/6837abde964e4b758c09ebcb1793fff3.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>回到<strong>TKD</strong>，它到底是为何而生呢？从生产角度而言，TKD带来的更多是生产和供应链上的根基稳固，通过生产更大规模的产品，跑通更大的生产线路，为Vertex以及Equalz提供生产上的便利，这是冰山一角。从品牌角度而言，低价策略是品牌进行市场渗透的大杀器，而知名度也是品牌价值的真实内涵。</p><p>除开以上颇为功利的分析，TKD到底想带给我们什么？我想，如果说angle、arc，他们是有曲线，有角度，尖锐一些的产品，那么cycle，圆，就是相对容易被更多人接受的产品。而TKD想要带来的，是一款能让人入门，能从中获取乐趣的键盘。</p><p>Cycle8是一把好键盘吗？它便宜，但绝不廉价。</p><p>Cycle8是一把能让人入门的键盘吗？我想，这个责任让一把键盘来承担，未免有些太过沉重。但至少，为那些渴望探索客制化键盘世界的新玩家提供了一个友好的起点。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/20/70dbf42f8f3df88692835868ac576d93.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我是个懦弱的人，夹在厂商和消费者之间，冷静下来想狡黠地从两端取利，半推半就的写了些自认为尚为客观的内容，但惟有低价的产品，我很少涉及。这并不是因为我排斥低价，只是我单纯觉得无趣。虽然客观来讲，键盘自己不会打字，文章确实是我一个字一个字敲出来的，但主观来说，文章写的有趣并不是我有水平，而是键盘值得说道。</p><p>不过可笑的是，我水平太低，确实接不到几个有趣的套件。而卷王的置换推广，我没有做过，原因无他，我写不出几个字，仅此而已。</p><p>我很高兴，在Cycle8身上能看到在Cycle7身上没有的设计细节以及更加鲜明的态度和棱角。尽管它是圆的，但至少让这篇文章还有写的价值。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/85809</id>
-            <title>Decky Loader：让你的 Steam Deck 更好用</title>
-            <link>https://sspai.com/post/85809</link>
-            <guid isPermaLink="false">https://sspai.com/post/85809</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 19 Jan 2024 02:15:04 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Matrix, Decky Loader, PowerTools, Wine Cellar
-<br>
-<br>
-总结: 本文介绍了Steam Deck的插件商店Decky Loader以及其中的一些实用插件。同时介绍了PowerTools和Wine Cellar这两个可以进一步定制和管理Steam Deck性能和兼容层的工具。 </div>
-                        <hr>
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐&nbsp;</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>自 Steam Deck 发售以来，得益于 Valve 对软硬件的开放态度以及社区持续不断的热情，Deck 的「折腾」氛围一直很浓厚，甚至行为本身有时都成了一种乐趣。而作为一个插件商店 Decky Loader 无疑也为这种行为带来了很大的便利。随着社区的发展，Decky Loader 如今也已经拥有了诸多功能强大且实用的插件，本文便旨在介绍其中的一部分。</p><h2>安装与卸载</h2><p>Decky Loader 提供了两种安装方式，二者都很简单，区别只在于前者可以不用 sudo 密码而后者需要，在安装之前我们需要把 Steam Deck 切换到桌面模式。按下「Steam」键，选择「电源」，然后选择「切换到桌面模式」。</p><p>第一种方式是下载安装程序运行，从 <a href="https://github.com/SteamDeckHomebrew/decky-installer/releases">Release</a> 页面下载最新的 decky_installer.desktop， 如果使用的是火狐浏览器，则需要重命名。然后双击运行，过程中会要求输入 sudo 密码，如果之前没有设置则为临时密码 <code>Decky!</code>。选择版本时通常选择「Release」就足够。</p><p>第二种方式很简单，在 Konsole 内执行 <code>curl -L &lt;https://github.com/SteamDeckHomebrew/decky-installer/releases/latest/download/install_release.sh&gt; | sh</code> 并输入 sudo 密码即可。</p><p>卸载方式同样有两种，第一种打开下载的 decky_installer.desktop 选择「uninstall decky loader」，第二种方式与第二种安装方式相同， 只需要将 <code>install_realease.sh</code> 替换成 <code>uninstall_release.sh</code> 。</p><p>有时 SteamOS 更新后 Decky Loader 会消失不见，此时只需要再次运行 decky_install.desktop 便可恢复，插件的配置仍然会保留。</p><h2>PowerTools：更深度地定制 Deck 性能</h2><p>SteamOS 自身提供了比较直观的性能选项，通常只需要简单的设置，例如调整刷新率与 TDP 限制便能满足大部分时候的需求。然而，如果你想要进行更复杂，更细致的性能调节，不妨试试 PowerTools。</p><p>CPU 方面，PowerTools 提供了如下功能：</p><ul><li>开关超线程（对于未更新至 SteamOS 3.5 的模拟器爱好者而言尤其有用）</li><li>调节线程数</li><li>频率限制</li><li>更换 CPU 调度器</li></ul><p>GPU 方面，你可以通过 PowerTools 进行：</p><ul><li>PowerPlay 设置</li><li>频率调节</li><li>降低内存频率（实际上我不推荐将这个开关打开，因为它降低功耗的效果并不显著，反而帧率会有很明显的下降）</li></ul><p>同时它也提供了限制充电电流、调节充电模式和限制最大电量的功能。并且可以为游戏提供单独配置。</p><h2>Pause Games：暂停应用以提升续航</h2><p>LCD 版 Steam Deck 的续航可以说是其最大痛点之一，所以采取一些措施来尽量节省一点电量就显得尤为必要。Pause Games 可以在不需要的时候将进程挂起，也就是暂停应用来达到省电的目的，另一方面，这也算是为没有暂停功能的游戏间接实现了暂停。在打开多个游戏时，你也可以用它暂停其它游戏，达到类似于 Xbox Series 游戏机上快速唤醒的效果。另外我个人推荐把 Also on overlay 也启用，因为这相当于把「Steam」键变成了快速暂停的开关。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/b035644f682d7d7b20f50be59ebf59f3.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>Wine Cellar: 管理兼容层</h2><p>Steam Deck 运行 Windows 游戏通常需要兼容层，其中最出名的便属 Wine 以及基于 Wine 并由 Valve 开发的 Proton，在 Deck 上下载 Windows 游戏时，一般会自动下载 Valve 验证过的 Proton 版本，通常情况下不必更改。不过，对于一些未验证的应用，我们有时也需要尝试其它兼容层。Wine Cellar 便可以帮助我们便捷地管理与更新兼容层。</p><p>Wine Cellar 目前提供了如下几个兼容层的下载更新功能：</p><ul><li><a href="https://github.com/GloriousEggroll/proton-ge-custom">ProtonGE</a>：由 Proton 和 Wine 衍生而来，提供了更好的视频支持以及许多其它补丁。在许多情况下可以作为 Proton 的替代品甚至更好。</li><li><a href="https://github.com/luxtorpeda-dev/luxtorpeda">Luxtorpeda</a>：使用 Linux 本地引擎运行游戏。</li><li><a href="https://github.com/dreamer/boxtron">Boxtron</a>：使用 Linux 本地的 DOSBox 运行 DOS 游戏。</li></ul><p>并且，它也可以识别出其它的兼容层并查看哪些兼容层正被哪些游戏使用（不过不包括非 Steam 游戏）。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/78acdb023f32ce996e73f83d93b16d97.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>话又说回来，你其实也可以在桌面模式下使用 ProtonUP-Qt。</p><h2>Storage Cleaner：我的空间去哪了？</h2><p>在 Deck 上安装游戏时，除了游戏本体，通常还伴随一份预编译的着色器缓存与一份兼容性数据。预编译着色器缓存可以避免在游戏过程中即时带来的卡顿，兼容性数据则用于存储 Steam Play 兼容性工具产生的游戏数据，例如存档。根据不同游戏的情况，这两项数据可能占据 1 到 2 GB 的空间。假如你的 Steam Deck 空间紧张，不妨试试 Storage Cleaner。</p><p>Storage Cleaner 提供了直观的界面查看各个游戏（包括非 Steam 游戏）的着色器缓存与兼容性数据所使用的空间，只需要在其中选择你需要删除的数据即可，不过需要注意，非 Steam 游戏的兼容性数据由于没有通过 Steam Cloud 同步，在没有备份的情况下删除将导致存档丢失。</p><h2>CSS Loader: 个性化你的 Deck</h2><p>Steam 客户端很大一部分运行于基于 Chromium 内核的浏览器之上，也正是得益于这一点，我们可以很方便地通过 CSS 对 Steam Deck 的 UI 进行自定义，让它更符合你的喜好。</p><p>CSS Loader 内置了一个拥有相当丰富主题的商店。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/703e3b2d314f09246fac52825cdea65d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>插件本身也提供了 Profile 方便用户在不同主题搭配之间切换。如果使用到了隐藏元素的主题，需要前往设置启用「Enable Nav Patch」，希望主题在桌面模式下生效的话需要启用「Enable Standalone Backend」。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/136cac95a5dc9b8b4ea06465417d96a8.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Before</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/c914ef865078513e94724de003cbd27e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>After</figcaption></figure><h2>ProtonDB Badges：更准确的游戏兼容性</h2><p>ProtonDB 是一个社区驱动的网站，旨在评估 Windows 游戏在 Proton 等兼容层下的运行情况，并随着 Steam Deck 的推出为其设置了专门的分类。Proton DB 根据兼容情况将游戏划分为了几个等级：</p><ul><li>白金（PLATIUM）：开箱即玩。</li><li>金牌（GOLD）：需要一些调整便可完美运行。</li><li>青铜（BRONZE）：崩溃或其它的问题，尚未解决。</li></ul><p>在安装游戏时，我们可以看到来自Steam官方的兼容情况。然而，这些信息有时可能不够准确，以 Persona 5 Strike 为例，它在库中显示的 Steam Deck 兼容性状况为不支持，但 ProtonDB 的等级为黄金，从网站上得知游戏实际上可以通过 ProtonGE 运行。有了 ProtonDB Badges，便可以很方便地获悉游戏的兼容性，安装插件后游戏界面的左上角会显示一个徽章，它会显示该游戏的兼容等级，点击该徽章便可以跳转至游戏的 ProtonDB 页面。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/955a8c7829290a79a9e188037a39141c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>SteamGridDB：自定义游戏封面</h2><p><a href="https://www.steamgriddb.com/">SteamGridDB</a> 是一个收集各类游戏，并制作了相应资产的网站。你可以从中下载到相应游戏的库主页、图标、徽标等内容。</p><p>SteamGridDB 插件则让我们可以很方便地更换库内游戏的相应内容，对于库内的非 Steam 游戏，也可以通过它来添加各项资产。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/f0d82979f7f0f187b429ffbe855cb5b0.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>HLTB for Deck: 多长时间能通关</h2><p><a href="https://howlongtobeat.com/">HowLongToBeat</a>（HLTB）是一个查看游戏不同完成度所需时长的网站，与 ProtonDB 一样由社区驱动，也正是因此，其数据通常来自实际的玩家， 所以与实际游玩的情况不会有太大偏差。</p><p>HLTB for Deck 则为我们查询当前游戏时长提供了便利，安装之后只需要进入库主页便可查看。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/e20a96b7131b91a9a49b3f6973bd438c.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>MoonDeck：用 Moonlight 取代 Steam Link</h2><p>首先需要解答一个问题：Steam Link 已经很方便了，为什么要取代它呢？主要还是因为 Moonlight 的延迟更低且稳定性更佳。</p><p>首先我们需要在 Deck 上安装 Moonlight 客户端，进入桌面模式，在 Discover 商店中安装即可。</p><p>然后在主机安装 MoonDeckBuddy，从 <a href="https://github.com/FrogTheFrog/moondeck-buddy/releases">Release</a> 页面下载对应平台的最新版本。安装完之后将 MoonDeckStream 添加到所使用的串流服务中。</p><p>使用 Nvidia GameStream 的在 SHIELD 处添加：</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/16431908b6d76031d7fb6c0ae3705a7d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>使用 Sunshine 的在 WebUI 的 Application 中添加新应用并命名为 MoonDeckStream，再「Command」栏内填写 MoonDeckStream 的文件路径，它与 MoonDeckBuddy 在同一目录，如果是通过 AppImage 格式安装的话则还需要添加上 <code>exec MoonDeckStream</code> ，并取消勾选「Continue streaming if the application exits quickly」。</p><p>然后我们回到 MoonDeck，在「Host Selection」的「Scan Local Network」中点击「Scan」然后添加扫描到的主机。</p><p>最后我们需要完成 Moonlight 和 MoonDeckyBuddy 的配对：</p><ul><li>在桌面模式下打开 Moonlight 客户端，点击主机图标，使用的是 GameStream 则在弹出的窗口中输入对应的 pin 码，使用的是 Sunshine 则在 WebUI 中输入。</li><li>在 MoonDeck 的 「Host Selection」的最下方找到 「MOONDECK BUDDY」，点击「Pair」，再在 MoonDeck Buddy 弹出的窗口中输入 pin 码即可。</li></ul><p>配置完成，当我们要使用 MoonDeck 串流时，只需要在游戏页面点击库主页图片右下角的图标即可。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/86e01a496b0d1b9ec592810a86ac0d5e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>Reshadeck：为 Deck 加载 Reshade FX 着色器</h2><p><a href="https://reshade.me/">Reshade</a> 是一个通过注入 Direct3D、OpenGL、Vulkan 等常用图形 API 来为游戏添加后处理效果的软件，使用的着色器便为 Reshade FX，但由于实现方式是注入 Windows 平台独有的 DLL，因此并不能直接在 Linux 原生游戏上使用。</p><p>不过，Value 在 SteamOS 3.5 更新中为 gamescope <a href="https://www.gamingonlinux.com/2023/09/gamescope-added-support-for-reshade-shaders-on-linux-steamos/">添加了 Reshade FX 支持</a>，更新以后可以通过 gamescope 间接为 Linux 原生游戏添加后处理效果，根据笔者的猜测，Value 采用的做法并非移植 Reshade，而是实现了一个 ReShade FX 编译器，且由于 gamescope 是一个叠加层，无法获得游戏内的渲染缓冲，这就使得一些着色器不会生效，例如怀旧爱好者非常喜爱的 CRT 滤镜 CRT-Royale。</p><p>Reshadeck 的作用便是帮助我们更方便地调用 Reshade FX 着色器。从 <a href="https://github.com/crosire/reshade-shaders/tree/slim">GitHub 仓库</a> 下载 Shaders 安装包后解压至目录，便可在菜单选择要使用的文件夹，不过正如前言所说，并非所有着色器都可用，并且，添加着色器也将带来额外的性能开销，一些着色器甚至可能引起崩溃。另外由于着色器实际作用于 gamescope ，所以截图截取的仍然是游戏的原本画面，不过录制视频时仍然有效。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/18/f1de183a0fd09ead413ad26fb986cc6b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>用 RD_MattiasCRT 时的效果</figcaption></figure><h2>一些功能简单但同样非常实用的插件：</h2><ul><li>ScreenshotUpdater：自动上传截图到 Steam 云。</li><li>Shotty：通过符号链接将 Steam 截图同步至图片文件夹。</li><li>Battery Tracker：查看电池曲线。</li><li>Play Time：记录每日游戏时长。</li><li>KDE Connect：让 KDE Connect 在游戏模式下仍然保持连接。</li></ul><p style="margin-left: 0px;">&gt; 下载少数派 <a href="https://sspai.com/page/client">客户端</a>、关注 <a href="https://sspai.com/link?target=https%3A%2F%2Fwww.xiaohongshu.com%2Fuser%2Fprofile%2F63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现🚀</p>
+                    <p>这次将介绍 Zotero 与 Excalidraw 的无缝连接，不需要借助 Quicker，而是通过自定义 Excalidraw 的脚本，直接拖拽 Zotero 的文本或者图片就可以实现 Zotero 到 Excalidraw 的笔记了，<strong>拖拽过来的包含注释和选择的内容</strong>。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/06/dd25c71985c4fc33db66029623039257.gif" /></figure><blockquote><p>PS：本文使用的的是 Zotero 7，按理说 Zotero 6 也可以正常使用。</p></blockquote><h3>修改📌注释的文件路径</h3><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/06/77c2af80e86f9529c1757f0c4cb38723.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>修改 [[#Zotero to Excalidraw 脚本]] 中的两个文件路径：</p><ul><li>第一个为 Zotero 的图形存储路径：Zotero 的标注图片一般在你定义的数据库的文件夹的<strong>cache-&gt;library</strong>下面：</li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/06/6fad1ae2f544f4c1a6596e78d61caa31.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>第二个就是你自定义拖拽过来的图片存放的存储路径了，注意要在 Obsidian 的笔记库中。</li></ul><h3>保存为 md 文件保存到指定文件夹</h3><p>修改完路径后将下面代码保存为 md 文件，修改放入 Excalidraw 指定的 Scripts 的文件夹中，在 Excalidraw 的画板中的工具面板中就会出现一个齿轮按钮，需要时点击运行就可以了。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/06/e0514cff6cd8cde78e7a796eb198564b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><blockquote><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/06/2f895f90d8de012b987cf0a70effccea.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>可以添加相同名称的SVG来给脚本一个图标</figcaption></figure></blockquote><h3>Zotero to Excalidraw 脚本</h3><p>该脚本的中心思想就是通过拖拽的文本，定位到图片名，从而复制该图片到 OB 的笔记库中，并对拖拽的文本进行处理，去除多余的空格以及全角转半角，拆分为 zotero_txt、zotero_author、zotero_link、zotero_comment、zotero_image 这 5 个文本，自定义组合：</p><blockquote><p>如果你是拖拽替他文本，该脚本可以帮你格式化处理一下的</p></blockquote><p>文档原链接：<a href="https://pkmer.cn/show/20230929013043">自定义 Excalidraw 脚本：实现 Zotero 与 Excalidraw 的拖拽联动</a></p><pre class="language-javascript"><code>function processText(text) {
+    // 替换英文之间的多个空格为一个空格
+    text = text.replace(/([a-zA-Z])([\u4e00-\u9fa5])/g, '$1 $2');
+    // 删除中文之间的空格
+    text = text.replace(/([\u4e00-\u9fa5])\s+([\u4e00-\u9fa5])/g, '$1$2');
+    text = text.replace(/([\u4e00-\u9fa5])\s+/g, '$1');
+    text = text.replace(/\s+([\u4e00-\u9fa5])/g, '$1');
+    // 将全角字符转换为半角字符
+    text = text.replace(/[\uFF01-\uFF5E]/g, function (match) { return String.fromCharCode(match.charCodeAt(0) - 65248); });
+
+    // // 在中英文之间添加空格
+    // text = text.replace(/([\u4e00-\u9fa5])([a-zA-Z])/g, '$1 $2');
+    // text = text.replace(/([a-zA-Z])([\u4e00-\u9fa5])/g, '$1 $2');
+
+    return text;
+}
+
+function match_zotero_txt(text) {
+    const regex = /“(.*)” \(/;
+    const matches = text.match(regex);
+    return matches ? matches[1] : "";
+}
+
+function match_zotero_author(text) {
+    const regex = /\(\[(.*\d+)]\(/;
+    const matches = text.match(regex);
+    return matches ? matches[1] : "";
+}
+
+function match_zotero_link(text) {
+    const regex = /\[pdf\]\((.*)\)\)/;
+    const matches = text.match(regex);
+    return matches ? matches[1] : "";
+}
+
+function match_zotero_comment(text) {
+    const regex = /\)\)([^ ].*)/;
+    const matches = text.match(regex);
+    return matches ? matches[1] : "";
+}
+
+function match_zotero_image(text) {
+    const regex = /annotation=(\w*)/;
+    const matches = text.match(regex);
+    return matches ? matches[1] : "";
+}
+
+const path = require('path');
+const fs = require("fs");
+
+let api = ea.getExcalidrawAPI();
+let el = ea.targetView.containerEl.querySelectorAll(".excalidraw-wrapper")[0];
+
+el.ondrop = async function (event) {
+    console.log("ondrop");
+    event.preventDefault();
+    let insert_txt = event.dataTransfer.getData("Text");
+
+    // 清空原本投入的文本
+    event.stopPropagation();
+    ea.clear();
+    // 格式化文本(去空格、全角转半角)  
+
+    insert_txt = processText(insert_txt)
+
+    if (insert_txt.includes("zotero://")) {
+        console.log("Zotero");
+
+        zotero_txt = match_zotero_txt(insert_txt);
+        zotero_author = match_zotero_author(insert_txt);
+        if (zotero_author) {
+            zotero_author = `(${zotero_author})`;
+        };
+        zotero_comment = match_zotero_comment(insert_txt);
+        if (zotero_comment) {
+            zotero_comment = `\n\n📝：${zotero_comment}`;
+        };
+        zotero_link = match_zotero_link(insert_txt);
+
+        if (zotero_txt) {
+            console.log("ZoteroText");
+            let id = await ea.addText(0, 0, `📖：${zotero_txt}${zotero_author}${zotero_comment}`, { width: 600, box: true, wrapAt: 50, textAlign: "left", textVerticalAlign: "middle", box: "box" });
+            let el = ea.getElement(id);
+            el.link = zotero_link;
+            await ea.addElementsToView(true, false, false);
+            if (ea.targetView.draginfoDiv) {
+                document.body.removeChild(ea.targetView.draginfoDiv);
+                delete ea.targetView.draginfoDiv;
+            };
+        } else {
+            console.log("ZoteroImage");
+            zotero_image = match_zotero_image(insert_txt);
+            zotero_image_name = `${zotero_image}.png`;
+
+            // 📌修改到Zotero的library文件夹
+            zotero_image_path = `D:\\Zotero\\cache\\library\\${zotero_image}.png`;
+            // 📌定义附件保存的地址，修改到你定义的笔记文件夹
+            let Obsidian_image_Path = `D:\\PandaNotes\\Y-图形文件存储\\ZoteroImages\\${zotero_image}.png`
+
+            // 复制zotero的图片到Obsidian的笔记库
+            fs.copyFileSync(zotero_image_path, Obsidian_image_Path);
+
+            await new Promise((resolve) =&gt; setTimeout(resolve, 300)); // 暂停0.3秒，等待复制文件的过程
+
+            let id = await ea.addImage(0, 0, zotero_image_name);
+            let el = ea.getElement(id);
+            el.link = zotero_link;
+            await ea.addElementsToView(true, false, false);
+            if (ea.targetView.draginfoDiv) {
+                document.body.removeChild(ea.targetView.draginfoDiv);
+                delete ea.targetView.draginfoDiv;
+            };
+        };
+
+    } else {
+        let id = await ea.addText(0, 0, `${insert_txt} `, { width: 400, box: true, wrapAt: 50, textAlign: "left", textVerticalAlign: "middle", box: "box" });
+        let el = ea.getElement(id);
+        await ea.addElementsToView(true, false, false);
+        if (ea.targetView.draginfoDiv) {
+            document.body.removeChild(ea.targetView.draginfoDiv);
+            delete ea.targetView.draginfoDiv;
+        };
+
+    };
+};</code></pre>
                 ]]>
             </content:encoded>
         </item>
