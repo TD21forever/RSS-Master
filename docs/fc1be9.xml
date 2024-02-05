@@ -5,109 +5,520 @@
         <link>https://nitter.cz/op7418</link>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1754178987180572864#m</id>
-            <title>尝试用Niji6复刻某个画师的风格成功了一部分，没有特别像。</title>
-            <link>https://nitter.cz/op7418/status/1754178987180572864#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754178987180572864#m</guid>
+            <id>https://nitter.cz/op7418/status/1754557459308720580#m</id>
+            <title>R to @op7418: JimFan 的补充，可能是想做实时生成的 3D 内容，同时要为这些内容做一个消费的硬件。</title>
+            <link>https://nitter.cz/op7418/status/1754557459308720580#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754557459308720580#m</guid>
             <pubDate></pubDate>
-            <updated>Sun, 04 Feb 2024 16:23:56 GMT</updated>
+            <updated>Mon, 05 Feb 2024 17:27:51 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <p>尝试用Niji6复刻某个画师的风格成功了一部分，没有特别像。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZnWVdVNWIwQUVhN3h3LmpwZw==" />
+                    <p>JimFan 的补充，可能是想做实时生成的 3D 内容，同时要为这些内容做一个消费的硬件。</p>
+<p><a href="https://nitter.cz/DrJimFan/status/1754556376985350366#m">nitter.cz/DrJimFan/status/1754556376985350366#m</a></p>
                 ]]>
             </content:encoded>
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1754165338202333289#m</id>
-            <title>🧪发一下昨晚睡前发的龙的提示词，整个画面通过前面的人像衬托了龙的体积使得龙非常具有压迫感，而且黑金的配色也非常高级。
+            <id>https://nitter.cz/op7418/status/1754554779928605135#m</id>
+            <title>Jim Fan关于LLM通过奖励模型来实现自我迭代和进化的见解以及论文推荐：
 
-提示词就是正常的描述就行，先说画面整体的内容就是龙的前面站着一个兜帽人，然后再描写龙的具体形象主要是黑烟和金色的眼睛。
+大语言模型（LLM）进行自我提升似乎在经过三轮后就达到了极限。目前我还没有见到任何像 AlphaZero 那样令人信服的大语言模型自我引导实例，AlphaZero 仅凭自我对弈就能从零开始掌握围棋、国际象棋和将棋。
+
+我正在阅读 Meta 的一篇论文《自我奖励的语言模型》(Self-Rewarding Language Models)（https://arxiv.org/abs/2401.10020）。这篇论文提出了一个非常简单的想法：通过循环迭代的方式使单一大语言模型自我提出问题、生成答案并给予自我奖励。研究指出，奖励模型的建立能力并非固定不变，而是能够随主模型一同进步。但即便如此，经过三次迭代后，模型的进步似乎就达到了饱和点，这也是论文实验中的最高迭代次数。
+
+我有以下几点思考：
+
+◆这种饱和现象发生的原因是因为奖励模型（即评估生成内容的质量的模块）的进步速度比内容生成模块慢。一开始，由于评估任务本质上比内容生成简单，两者之间总会存在一定的差距。但令人惊讶的是，仅仅经过三轮迭代，内容生成模块就追上了奖励模型的进步，尽管两者都在不断进步。
+
+◆另一篇论文《加强型自我训练（ReST）在语言模型中的应用》(Reinforced Self-Training for Language Modeling)（https://arxiv.org/abs/2308.08998）也发现，在经过三次迭代后，模型的提升开始出现递减。
+
+◆我认为，如果没有外部的驱动信号，如符号逻辑验证、单元测试或编译器反馈等，这种评估模块与内容生成模块之间的差距是难以长期维持的。然而，这些驱动信号通常只适用于特定领域，而不足以支持我们期待的广泛应用范围内的自我提升。
+
+这方面还有许多研究空间值得探索。</title>
+            <link>https://nitter.cz/op7418/status/1754554779928605135#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754554779928605135#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 17:17:12 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Jim Fan关于LLM通过奖励模型来实现自我迭代和进化的见解以及论文推荐：<br />
+<br />
+大语言模型（LLM）进行自我提升似乎在经过三轮后就达到了极限。目前我还没有见到任何像 AlphaZero 那样令人信服的大语言模型自我引导实例，AlphaZero 仅凭自我对弈就能从零开始掌握围棋、国际象棋和将棋。<br />
+<br />
+我正在阅读 Meta 的一篇论文《自我奖励的语言模型》(Self-Rewarding Language Models)（<a href="https://arxiv.org/abs/2401.10020">arxiv.org/abs/2401.10020</a>）。这篇论文提出了一个非常简单的想法：通过循环迭代的方式使单一大语言模型自我提出问题、生成答案并给予自我奖励。研究指出，奖励模型的建立能力并非固定不变，而是能够随主模型一同进步。但即便如此，经过三次迭代后，模型的进步似乎就达到了饱和点，这也是论文实验中的最高迭代次数。<br />
+<br />
+我有以下几点思考：<br />
+<br />
+◆这种饱和现象发生的原因是因为奖励模型（即评估生成内容的质量的模块）的进步速度比内容生成模块慢。一开始，由于评估任务本质上比内容生成简单，两者之间总会存在一定的差距。但令人惊讶的是，仅仅经过三轮迭代，内容生成模块就追上了奖励模型的进步，尽管两者都在不断进步。<br />
+<br />
+◆另一篇论文《加强型自我训练（ReST）在语言模型中的应用》(Reinforced Self-Training for Language Modeling)（<a href="https://arxiv.org/abs/2308.08998">arxiv.org/abs/2308.08998</a>）也发现，在经过三次迭代后，模型的提升开始出现递减。<br />
+<br />
+◆我认为，如果没有外部的驱动信号，如符号逻辑验证、单元测试或编译器反馈等，这种评估模块与内容生成模块之间的差距是难以长期维持的。然而，这些驱动信号通常只适用于特定领域，而不足以支持我们期待的广泛应用范围内的自我提升。<br />
+<br />
+这方面还有许多研究空间值得探索。</p>
+<p><a href="https://nitter.cz/DrJimFan/status/1754552129229140215#m">nitter.cz/DrJimFan/status/1754552129229140215#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754553682467991981#m</id>
+            <title>腾讯的视频生成模型DynamiCrafter发布了最新版本的高分辨率模型文件，从他们自己的测试来看比SVD的动态幅度要大一些，同时稳定性也还行。
+
+模型已经放出了，期望Comfyui的大佬们支持一下，开源视频模型也卷起来了。
+
+项目地址：https://github.com/Doubiiu/DynamiCrafter?tab=readme-ov-file</title>
+            <link>https://nitter.cz/op7418/status/1754553682467991981#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754553682467991981#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 17:12:50 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>腾讯的视频生成模型DynamiCrafter发布了最新版本的高分辨率模型文件，从他们自己的测试来看比SVD的动态幅度要大一些，同时稳定性也还行。<br />
+<br />
+模型已经放出了，期望Comfyui的大佬们支持一下，开源视频模型也卷起来了。<br />
+<br />
+项目地址：<a href="https://github.com/Doubiiu/DynamiCrafter?tab=readme-ov-file">github.com/Doubiiu/DynamiCra…</a></p>
+<p><a href="https://nitter.cz/Double47685693/status/1754313237754184128#m">nitter.cz/Double47685693/status/1754313237754184128#m</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTQ1NTM0NDg2OTQyNjM4MDgvcHUvaW1nL21IM3BVdlpRcFFsRDhwQUwuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754551605423386829#m</id>
+            <title>Midjourney招了一个硬件产品的负责人，我想象不到Midjourney想做的硬件是什么样的。</title>
+            <link>https://nitter.cz/op7418/status/1754551605423386829#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754551605423386829#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 17:04:35 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Midjourney招了一个硬件产品的负责人，我想象不到Midjourney想做的硬件是什么样的。</p>
+<p><a href="https://nitter.cz/zackhargett/status/1754535759997215150#m">nitter.cz/zackhargett/status/1754535759997215150#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754548187573154004#m</id>
+            <title>阿里开源了Qwen1.5模型，包括六种尺寸的基础模型和聊天模型：0.5B、1.8B、4B、7B、14B 和 72B。
+
+还提供量化模型，包括 Int4 和 Int8 GPTQ 模型，以及 AWQ 和 GGUF 量化模型。
+
+他们说在测试中，70B模型的评分超过了Claude2.1，以及GPT-3.5，距离GPT-4还有一些距离。最高支持32K上下文。
+
+博客里有更详细的介绍和测试：https://qwenlm.github.io/blog/qwen1.5/</title>
+            <link>https://nitter.cz/op7418/status/1754548187573154004#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754548187573154004#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 16:51:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>阿里开源了Qwen1.5模型，包括六种尺寸的基础模型和聊天模型：0.5B、1.8B、4B、7B、14B 和 72B。<br />
+<br />
+还提供量化模型，包括 Int4 和 Int8 GPTQ 模型，以及 AWQ 和 GGUF 量化模型。<br />
+<br />
+他们说在测试中，70B模型的评分超过了Claude2.1，以及GPT-3.5，距离GPT-4还有一些距离。最高支持32K上下文。<br />
+<br />
+博客里有更详细的介绍和测试：<a href="https://qwenlm.github.io/blog/qwen1.5/">qwenlm.github.io/blog/qwen1.…</a></p>
+<p><a href="https://nitter.cz/huybery/status/1754537742892232972#m">nitter.cz/huybery/status/1754537742892232972#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754534132049412332#m</id>
+            <title>R to @op7418: 在Midjourney V6上使用也不错啊</title>
+            <link>https://nitter.cz/op7418/status/1754534132049412332#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754534132049412332#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 15:55:09 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>在Midjourney V6上使用也不错啊</p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZsYmFCYmJnQUFJOW5ULmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZsYmNCTGFRQUFhLVpULmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754530875247902856#m</id>
+            <title>🧪来点Niji6的提示词吧，复刻一下我之前在Niji5发过的一套风格，非常符合东亚的审美的美少女。少女的服装和头发会带有彩虹色的炫光。
+
+提示词中为了保证人物的身材加上了“wearing a chubby bodysuit”这样的词，非常管用，另外为了营造这种独特的彩色炫光，使用了彩虹色头发、厚亚克力以及反射的彩虹色等词。
+
+整套提示词—s的值越高炫光的表现就会越强烈，同时如果想要3D质感的话可以加C4D渲染或者UE5等词。
 
 提示词：
-dark silhouette of person wearing hoodie facing a huge Chinese dragon that looks like a dragon made of black smoke and golden eyes
+
+k-pop girl, wearing a chubby bodysuit, anime waifu, looking at viewer, highlydetailed, Gel coat, reflections transparent iridescent colors, long transparent iridescent RGB hair, artby Serafleur from artstation, thick acrylic, illustration on pixiv, waist up portrait, gorgeoussacred girl, best quality, ultra detailed, sad, clever, beautiful face beautiful lighton black background, --ar 9:16 --style raw --niji 6
 
 #晚安提示词 #midjourney #catjourney</title>
-            <link>https://nitter.cz/op7418/status/1754165338202333289#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754165338202333289#m</guid>
+            <link>https://nitter.cz/op7418/status/1754530875247902856#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754530875247902856#m</guid>
             <pubDate></pubDate>
-            <updated>Sun, 04 Feb 2024 15:29:42 GMT</updated>
+            <updated>Mon, 05 Feb 2024 15:42:12 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <p>🧪发一下昨晚睡前发的龙的提示词，整个画面通过前面的人像衬托了龙的体积使得龙非常具有压迫感，而且黑金的配色也非常高级。<br />
+                    <p>🧪来点Niji6的提示词吧，复刻一下我之前在Niji5发过的一套风格，非常符合东亚的审美的美少女。少女的服装和头发会带有彩虹色的炫光。<br />
 <br />
-提示词就是正常的描述就行，先说画面整体的内容就是龙的前面站着一个兜帽人，然后再描写龙的具体形象主要是黑烟和金色的眼睛。<br />
+提示词中为了保证人物的身材加上了“wearing a chubby bodysuit”这样的词，非常管用，另外为了营造这种独特的彩色炫光，使用了彩虹色头发、厚亚克力以及反射的彩虹色等词。<br />
+<br />
+整套提示词—s的值越高炫光的表现就会越强烈，同时如果想要3D质感的话可以加C4D渲染或者UE5等词。<br />
 <br />
 提示词：<br />
-dark silhouette of person wearing hoodie facing a huge Chinese dragon that looks like a dragon made of black smoke and golden eyes<br />
+<br />
+k-pop girl, wearing a chubby bodysuit, anime waifu, looking at viewer, highlydetailed, Gel coat, reflections transparent iridescent colors, long transparent iridescent RGB hair, artby Serafleur from artstation, thick acrylic, illustration on pixiv, waist up portrait, gorgeoussacred girl, best quality, ultra detailed, sad, clever, beautiful face beautiful lighton black background, --ar 9:16 --style raw --niji 6<br />
 <br />
 <a href="https://nitter.cz/search?q=%23晚安提示词">#晚安提示词</a> <a href="https://nitter.cz/search?q=%23midjourney">#midjourney</a> <a href="https://nitter.cz/search?q=%23catjourney">#catjourney</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZnTURSdWFRQUFlRnZtLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZnTURSdWJzQUFubXJGLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZnTURSMWFzQUkzb2x0LmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZnTURSeGJNQUFuQm94LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZsWWdQemIwQUFwakZrLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
         
         <item>
-            <id>https://nitter.cz/op7418/status/1753987762062283073#m</id>
-            <title>RT by @op7418: 昨天清华和商汤的这个视频生成项目可以让开源视频模型也有类似 Runway 的运动笔刷能力。
-而且比 Runway 更进一步支持涂抹区域后在用画笔描绘运动方向，也可以分开使用。
+            <id>https://nitter.cz/op7418/status/1754516155316961758#m</id>
+            <title>这个从图像提取提示词然后生成配乐的项目演示很有意思，如果你做内容的时候不知道应该搭配什么音乐的时候可以参考。
 
-希望可以跟现有的开源视频生成模型兼容，我看论文里没写这块。
-
-详细介绍：
-
-我们推出了一种名为 Motion-I2V 的创新框架，用于实现既一致又可控的图片到视频转换（I2V）。不同于以往直接学习将图片转换为视频的复杂映射关系，Motion-I2V 把这一过程分为两个阶段，并在其中明确加入了运动模型。
-
-在第一阶段，我们设计了一种以扩散理论为基础的运动场预测技术，主要用来推算参考图片中各像素点的移动轨迹。在第二阶段，我们引入了一种结合运动数据的时间序列注意力机制，这个机制能够改进视频生成中常用的、功能有限的一维时间序列注意力方法。这个改进可以高效地将参考图片的特征信息传递到根据第一阶段预测的轨迹生成的视频帧中。
-
-相较于现有技术，Motion-I2V 即便面对大幅度的运动和视角变化，也能创造出更为一致的视频。通过为第一阶段配备一个专门的稀疏轨迹控制网络（ControlNet），Motion-I2V 允许用户通过少量的轨迹和区域标注来精确控制运动轨迹和运动区域，这比单纯依赖文本指令进行控制提供了更多的灵活性。
-
-此外，Motion-I2V 的第二阶段还自然地支持了不需要样本训练的视频到视频转换（零样本转换）。通过定性和定量的比较，我们发现 Motion-I2V 在生成一致性和可控性强的视频方面，优于以往的方法。
-
-项目地址：https://xiaoyushi97.github.io/Motion-I2V/</title>
-            <link>https://nitter.cz/op7418/status/1753987762062283073#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1753987762062283073#m</guid>
+项目地址：https://huggingface.co/spaces/fffiloni/image-to-music-v2</title>
+            <link>https://nitter.cz/op7418/status/1754516155316961758#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754516155316961758#m</guid>
             <pubDate></pubDate>
-            <updated>Sun, 04 Feb 2024 03:44:04 GMT</updated>
+            <updated>Mon, 05 Feb 2024 14:43:43 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <p>昨天清华和商汤的这个视频生成项目可以让开源视频模型也有类似 Runway 的运动笔刷能力。<br />
-而且比 Runway 更进一步支持涂抹区域后在用画笔描绘运动方向，也可以分开使用。<br />
+                    <p>这个从图像提取提示词然后生成配乐的项目演示很有意思，如果你做内容的时候不知道应该搭配什么音乐的时候可以参考。<br />
 <br />
-希望可以跟现有的开源视频生成模型兼容，我看论文里没写这块。<br />
+项目地址：<a href="https://huggingface.co/spaces/fffiloni/image-to-music-v2">huggingface.co/spaces/fffilo…</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTQ1MTU4NzUyMjk3MzI4NjQvcHUvaW1nL0tsdUVJZEZxRWp0LVlQb3IuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754513146839253421#m</id>
+            <title>刚才更新了一下之前推荐过的Comfyui工作流管理插件Comfyspace，发现他们新增了模型管理功能。能力更强大了。
+
+你现在可以点击右上角模型按钮，查看你已有的模型文件，同时它会根据模型文件同步Civitai的模型封面图，不需要看文字猜模型了，而且模型的分类也很全不是只有CKPT模型和Lora模型。
+
+另外就是点击安装可以直接拉起一个界面展示Civitai的所有模型也可以搜索，你可以直接下载模型到对应文件夹。
+
+这个插件现在成了我用Comfyui根本离不开的一个插件了，他们的本地插件管理和历史生成结果查看功能也很好用。
+
+这里安装：https://github.com/11cafe/comfyui-workspace-manager?tab=readme-ov-file</title>
+            <link>https://nitter.cz/op7418/status/1754513146839253421#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754513146839253421#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 14:31:46 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>刚才更新了一下之前推荐过的Comfyui工作流管理插件Comfyspace，发现他们新增了模型管理功能。能力更强大了。<br />
 <br />
-详细介绍：<br />
+你现在可以点击右上角模型按钮，查看你已有的模型文件，同时它会根据模型文件同步Civitai的模型封面图，不需要看文字猜模型了，而且模型的分类也很全不是只有CKPT模型和Lora模型。<br />
 <br />
-我们推出了一种名为 Motion-I2V 的创新框架，用于实现既一致又可控的图片到视频转换（I2V）。不同于以往直接学习将图片转换为视频的复杂映射关系，Motion-I2V 把这一过程分为两个阶段，并在其中明确加入了运动模型。<br />
+另外就是点击安装可以直接拉起一个界面展示Civitai的所有模型也可以搜索，你可以直接下载模型到对应文件夹。<br />
 <br />
-在第一阶段，我们设计了一种以扩散理论为基础的运动场预测技术，主要用来推算参考图片中各像素点的移动轨迹。在第二阶段，我们引入了一种结合运动数据的时间序列注意力机制，这个机制能够改进视频生成中常用的、功能有限的一维时间序列注意力方法。这个改进可以高效地将参考图片的特征信息传递到根据第一阶段预测的轨迹生成的视频帧中。<br />
+这个插件现在成了我用Comfyui根本离不开的一个插件了，他们的本地插件管理和历史生成结果查看功能也很好用。<br />
 <br />
-相较于现有技术，Motion-I2V 即便面对大幅度的运动和视角变化，也能创造出更为一致的视频。通过为第一阶段配备一个专门的稀疏轨迹控制网络（ControlNet），Motion-I2V 允许用户通过少量的轨迹和区域标注来精确控制运动轨迹和运动区域，这比单纯依赖文本指令进行控制提供了更多的灵活性。<br />
+这里安装：<a href="https://github.com/11cafe/comfyui-workspace-manager?tab=readme-ov-file">github.com/11cafe/comfyui-wo…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZsSGF4V2FrQUFjU2VjLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754505228022620601#m</id>
+            <title>Runway GEN:48的参赛作品，作者在尝试完全用AI讲一个传统探险夺宝的故事。
+比较出彩的是对主要角色的人物一致性做了处理，使得整个视频比之前的很多视频连贯。
+
+视频生成：Runway
+图片生成：Leonardo AI
+图像放大：Magnific
+声音：Gemelo AI
+视频放大：Topaz Labs AI</title>
+            <link>https://nitter.cz/op7418/status/1754505228022620601#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754505228022620601#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 14:00:18 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Runway GEN:48的参赛作品，作者在尝试完全用AI讲一个传统探险夺宝的故事。<br />
+比较出彩的是对主要角色的人物一致性做了处理，使得整个视频比之前的很多视频连贯。<br />
 <br />
-此外，Motion-I2V 的第二阶段还自然地支持了不需要样本训练的视频到视频转换（零样本转换）。通过定性和定量的比较，我们发现 Motion-I2V 在生成一致性和可控性强的视频方面，优于以往的方法。<br />
+视频生成：Runway<br />
+图片生成：Leonardo AI<br />
+图像放大：Magnific<br />
+声音：Gemelo AI<br />
+视频放大：Topaz Labs AI</p>
+<p><a href="https://nitter.cz/maxescu/status/1754484241298026998#m">nitter.cz/maxescu/status/1754484241298026998#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754465656203071504#m</id>
+            <title>第一次在用 GPT-4 的时候触发这种回答质量的选择，看来最近算力紧张问题有所缓解？这么长的内容都直接给多选。</title>
+            <link>https://nitter.cz/op7418/status/1754465656203071504#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754465656203071504#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 11:23:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>第一次在用 GPT-4 的时候触发这种回答质量的选择，看来最近算力紧张问题有所缓解？这么长的内容都直接给多选。</p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZrY19zOWE0QUFjWmxnLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754450977623785950#m</id>
+            <title>Kimi chat 背后的模型，moonshot模型正式开放了 API 申请。
+而且完全与 OpenAI 的 API 兼容，可以很方便的迁移。最高的模型上下文为 128K 。
+
+moonshot-v1-128k 模型的价格为0.06元，新用户会送 15 元的 Token 额度。
+
+这里申请：https://platform.moonshot.cn/pricing</title>
+            <link>https://nitter.cz/op7418/status/1754450977623785950#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754450977623785950#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 10:24:43 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Kimi chat 背后的模型，moonshot模型正式开放了 API 申请。<br />
+而且完全与 OpenAI 的 API 兼容，可以很方便的迁移。最高的模型上下文为 128K 。<br />
 <br />
-项目地址：<a href="https://xiaoyushi97.github.io/Motion-I2V/">xiaoyushi97.github.io/Motion…</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTM5ODc3MzA2MTM0MDc3NDQvcHUvaW1nL2hGV3NqNG41b3FZaWRPaFEuanBn" />
+moonshot-v1-128k 模型的价格为0.06元，新用户会送 15 元的 Token 额度。<br />
+<br />
+这里申请：<a href="https://platform.moonshot.cn/pricing">platform.moonshot.cn/pricing</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZrUG80MmJ3QUFEby1XLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754449601640419633#m</id>
+            <title>专门用来给宝可梦对战用的 Agents 这个有点意思，Agent 主要处理方式有三步：
+
+（i）上下文强化学习，即它能够立即利用战斗中得到的文字反馈，不断迭代和完善其策略；
+（ii）知识增强式生成，即通过引入外部知识来防止产生错误或不准确的信息，确保智能体能够做出及时且适当的反应；
+（iii）一致性行动生成，用以减少智能体在面对强劲对手，试图逃避战斗时出现的恐慌性快速切换行为。</title>
+            <link>https://nitter.cz/op7418/status/1754449601640419633#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754449601640419633#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 10:19:15 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>专门用来给宝可梦对战用的 Agents 这个有点意思，Agent 主要处理方式有三步：<br />
+<br />
+（i）上下文强化学习，即它能够立即利用战斗中得到的文字反馈，不断迭代和完善其策略；<br />
+（ii）知识增强式生成，即通过引入外部知识来防止产生错误或不准确的信息，确保智能体能够做出及时且适当的反应；<br />
+（iii）一致性行动生成，用以减少智能体在面对强劲对手，试图逃避战斗时出现的恐慌性快速切换行为。</p>
+<p><a href="https://nitter.cz/_akhaliq/status/1754337188014100876#m">nitter.cz/_akhaliq/status/1754337188014100876#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754447127588282875#m</id>
+            <title>字节研究院发布的这个视频控制方式Boximator，看起来效果相当不错。
+你可以选择需要运动的物体，然后绘制他结束的位置和运动路径，他就会严格按照你绘制的位置和路径运动。
+
+这个控制方式比 Runway 的运动笔刷还要再进一步，你可以精确控制物品结束运动的位置。
+
+演示里用的视频模型也是字节研发的PixelDance视频生成模型。
+
+🔍项目简介：
+
+我们提出了Boximator，这是一种用于精细运动控制的新方法。Boximator采用了两种约束机制：硬性约束（hard box）和软性约束（soft box）。
+
+用户可以利用硬性约束选取视频中某一帧（称为条件帧）的特定对象，然后通过这两种约束方式来大致或严格地指定该对象在未来画面中的位置、形状或运动轨迹。Boximator可以作为现有视频合成模型的一个附加组件。在训练过程中，为了保留原模型的知识，我们选择冻结了原始权重，只对控制模块进行训练。
+为了解决训练过程中的挑战，我们引入了一种创新的自我追踪技术，这大大简化了学习框选对象与其关联的过程。
+
+经过实验证明，Boximator在视频质量方面（即FVD，一种视频质量评价标准）达到了行业领先水平，相较于两个基础模型有所提升，并在引入框选约束后进一步增强了效果。其在运动控制上的强大能力，通过包围盒对齐指标的显著提升得到了验证。
+人类评估也显示，用户更偏好Boximator生成的视频效果，而不是基础模型的输出。
+
+项目地址：https://boximator.github.io/</title>
+            <link>https://nitter.cz/op7418/status/1754447127588282875#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754447127588282875#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 10:09:25 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>字节研究院发布的这个视频控制方式Boximator，看起来效果相当不错。<br />
+你可以选择需要运动的物体，然后绘制他结束的位置和运动路径，他就会严格按照你绘制的位置和路径运动。<br />
+<br />
+这个控制方式比 Runway 的运动笔刷还要再进一步，你可以精确控制物品结束运动的位置。<br />
+<br />
+演示里用的视频模型也是字节研发的PixelDance视频生成模型。<br />
+<br />
+🔍项目简介：<br />
+<br />
+我们提出了Boximator，这是一种用于精细运动控制的新方法。Boximator采用了两种约束机制：硬性约束（hard box）和软性约束（soft box）。<br />
+<br />
+用户可以利用硬性约束选取视频中某一帧（称为条件帧）的特定对象，然后通过这两种约束方式来大致或严格地指定该对象在未来画面中的位置、形状或运动轨迹。Boximator可以作为现有视频合成模型的一个附加组件。在训练过程中，为了保留原模型的知识，我们选择冻结了原始权重，只对控制模块进行训练。<br />
+为了解决训练过程中的挑战，我们引入了一种创新的自我追踪技术，这大大简化了学习框选对象与其关联的过程。<br />
+<br />
+经过实验证明，Boximator在视频质量方面（即FVD，一种视频质量评价标准）达到了行业领先水平，相较于两个基础模型有所提升，并在引入框选约束后进一步增强了效果。其在运动控制上的强大能力，通过包围盒对齐指标的显著提升得到了验证。<br />
+人类评估也显示，用户更偏好Boximator生成的视频效果，而不是基础模型的输出。<br />
+<br />
+项目地址：<a href="https://boximator.github.io/">boximator.github.io/</a></p>
+<p><a href="https://nitter.cz/_akhaliq/status/1754373879340957843#m">nitter.cz/_akhaliq/status/1754373879340957843#m</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTQ0NDcwMTU1MjQ5MzM2MzIvcHUvaW1nL1Rna0I3TlQzajJPdFZPSUEuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754422811115003994#m</id>
+            <title>AIGC 周刊第 58 期更新了，春节期间应该就不更新了，也没啥人看，下次更新应该会在春节上班的第一天。
+
+老样子Quail和公众号都会发，还是建议Quail订阅一下，网页看体验好一些，太多链接了。
+
+这里看 58 期：https://quail.ink/op7418/p/aigc-weekly-58</title>
+            <link>https://nitter.cz/op7418/status/1754422811115003994#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754422811115003994#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 08:32:48 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>AIGC 周刊第 58 期更新了，春节期间应该就不更新了，也没啥人看，下次更新应该会在春节上班的第一天。<br />
+<br />
+老样子Quail和公众号都会发，还是建议Quail订阅一下，网页看体验好一些，太多链接了。<br />
+<br />
+这里看 58 期：<a href="https://quail.ink/op7418/p/aigc-weekly-58">quail.ink/op7418/p/aigc-week…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZqMk9fRGJvQUFSTGdLLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754321552953495704#m</id>
+            <title>Stability AI 产量很高啊，Emad这张图在暗示有类似在图片指定位置生成文字的能力？</title>
+            <link>https://nitter.cz/op7418/status/1754321552953495704#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754321552953495704#m</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 01:50:26 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Stability AI 产量很高啊，Emad这张图在暗示有类似在图片指定位置生成文字的能力？</p>
+<p><a href="https://nitter.cz/EMostaque/status/1754314710818635923#m">nitter.cz/EMostaque/status/1754314710818635923#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1754240855211168248#m</id>
+            <title>RT by @op7418: #AI开源项目推荐：ml-mgie
+苹果开源的通过多模态大语言模型引导，基于自然语言指令修改图片的技术MGIE，编辑图片更简单自然。
+
+http://github.com/apple/ml-mgie</title>
+            <link>https://nitter.cz/dotey/status/1754240855211168248#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1754240855211168248#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 04 Feb 2024 20:29:46 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><a href="https://nitter.cz/search?q=%23AI开源项目推荐">#AI开源项目推荐</a>：ml-mgie<br />
+苹果开源的通过多模态大语言模型引导，基于自然语言指令修改图片的技术MGIE，编辑图片更简单自然。<br />
+<br />
+<a href="http://github.com/apple/ml-mgie">github.com/apple/ml-mgie</a></p>
+<p><a href="https://nitter.cz/WilliamWangNLP/status/1754176140691087623#m">nitter.cz/WilliamWangNLP/status/1754176140691087623#m</a></p>
+<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTc1NDE3MzIyMTczMjMwMjg0OC82NkE2WnJ6Zj9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/op7418/status/1754065569232671193#m</id>
+            <title>RT by @op7418: 详细翻译了一下谷歌 Bard 泄露的7 号升级内容，这内容主要的部分有：
+
+◆Bard将会重命名为Gemini；
+
+◆Gemini Advanced将会提供谷歌最强大的AI模型，Ultra 1.0的访问权限；
+
+◆发布Gemini移动应用，可以通过文本、语音或图像与其互动；
+
+◆Gemini会首先在加拿大地区开放，有需求的可以先把代理切到加拿大。</title>
+            <link>https://nitter.cz/op7418/status/1754065569232671193#m</link>
+            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754065569232671193#m</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 04 Feb 2024 08:53:15 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>详细翻译了一下谷歌 Bard 泄露的7 号升级内容，这内容主要的部分有：<br />
+<br />
+◆Bard将会重命名为Gemini；<br />
+<br />
+◆Gemini Advanced将会提供谷歌最强大的AI模型，Ultra 1.0的访问权限；<br />
+<br />
+◆发布Gemini移动应用，可以通过文本、语音或图像与其互动；<br />
+<br />
+◆Gemini会首先在加拿大地区开放，有需求的可以先把代理切到加拿大。</p>
+<p><a href="https://nitter.cz/AiBreakfast/status/1754008072828158416#m">nitter.cz/AiBreakfast/status/1754008072828158416#m</a></p>
                 ]]>
             </content:encoded>
         </item>
         
         <item>
             <id>https://nitter.cz/op7418/status/1754162206579835070#m</id>
-            <title>SegMoE，无需训练就可以混合多个SD模型组成一个新的模型，类似LLM的MoE模型。
+            <title>RT by @op7418: SegMoE，无需训练就可以混合多个SD模型组成一个新的模型，类似LLM的MoE模型。
 
 他们提供了三个已经混合好的模型，分别由2个SDXL、4个SDXL和4个SD1.5模型组成。
 
@@ -141,249 +552,6 @@ dark silhouette of person wearing hoodie facing a huge Chinese dragon that looks
 <br />
 模型和代码地址：<a href="https://github.com/segmind/segmoe">github.com/segmind/segmoe</a></p>
 <img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZnSGJldGFnQUE1TkJPLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1753974593067577542#m</id>
-            <title>RT by @op7418: 尝试了一下这个将 LCM 和视频模型结合起来的项目 AnimateLCM，确实比单纯用 LCM 加 Animatediff 效果好了一些，A100 512*512 20 帧的推理时间为 4 秒。相当可以了。</title>
-            <link>https://nitter.cz/op7418/status/1753974593067577542#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1753974593067577542#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 04 Feb 2024 02:51:44 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>尝试了一下这个将 LCM 和视频模型结合起来的项目 AnimateLCM，确实比单纯用 LCM 加 Animatediff 效果好了一些，A100 512*512 20 帧的推理时间为 4 秒。相当可以了。</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTM5NzQ0ODI1NDM1MTM2MDAvcHUvaW1nL1B5QlFYUjVQcGlfVmFURnQuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1753947689228906992#m</id>
-            <title>RT by @op7418: vid2vid 做的化妆品广告，效果做的很有意思，一下就高级了起来</title>
-            <link>https://nitter.cz/op7418/status/1753947689228906992#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1753947689228906992#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 04 Feb 2024 01:04:50 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>vid2vid 做的化妆品广告，效果做的很有意思，一下就高级了起来</p>
-<img src="https://nitter.cz/pic/enc/YW1wbGlmeV92aWRlb190aHVtYi8xNzUzNjI0NzExNjYwMjA0MDMyL2ltZy91dFpDaFdRYkFFQTNHb194LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1754065569232671193#m</id>
-            <title>详细翻译了一下谷歌 Bard 泄露的7 号升级内容，这内容主要的部分有：
-
-◆Bard将会重命名为Gemini；
-
-◆Gemini Advanced将会提供谷歌最强大的AI模型，Ultra 1.0的访问权限；
-
-◆发布Gemini移动应用，可以通过文本、语音或图像与其互动；
-
-◆Gemini会首先在加拿大地区开放，有需求的可以先把代理切到加拿大。</title>
-            <link>https://nitter.cz/op7418/status/1754065569232671193#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1754065569232671193#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 04 Feb 2024 08:53:15 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>详细翻译了一下谷歌 Bard 泄露的7 号升级内容，这内容主要的部分有：<br />
-<br />
-◆Bard将会重命名为Gemini；<br />
-<br />
-◆Gemini Advanced将会提供谷歌最强大的AI模型，Ultra 1.0的访问权限；<br />
-<br />
-◆发布Gemini移动应用，可以通过文本、语音或图像与其互动；<br />
-<br />
-◆Gemini会首先在加拿大地区开放，有需求的可以先把代理切到加拿大。</p>
-<p><a href="https://nitter.cz/AiBreakfast/status/1754008072828158416#m">nitter.cz/AiBreakfast/status/1754008072828158416#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1753990976723628261#m</id>
-            <title>哈哈哈哈 看完视频估计嘴角都比 AK 还难压</title>
-            <link>https://nitter.cz/op7418/status/1753990976723628261#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1753990976723628261#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 04 Feb 2024 03:56:51 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>哈哈哈哈 看完视频估计嘴角都比 AK 还难压</p>
-<p><a href="https://nitter.cz/hylarucoder/status/1753983127767437568#m">nitter.cz/hylarucoder/status/1753983127767437568#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1753985782367551861#m</id>
-            <title>即刻的黄即精神股东2.0几个人做的即刻年终总结项目，可以看到自己去年的即刻数据。
-看了一下我去年在即刻发了快 1200 条动态，45 万字，麻了，估计推特的只多不少。</title>
-            <link>https://nitter.cz/op7418/status/1753985782367551861#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1753985782367551861#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 04 Feb 2024 03:36:12 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>即刻的黄即精神股东2.0几个人做的即刻年终总结项目，可以看到自己去年的即刻数据。<br />
-看了一下我去年在即刻发了快 1200 条动态，45 万字，麻了，估计推特的只多不少。</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Zkb2w0c2FNQUFZeU5ELmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1753975638757974126#m</id>
-            <title>R to @op7418: 写实模型也还行</title>
-            <link>https://nitter.cz/op7418/status/1753975638757974126#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1753975638757974126#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 04 Feb 2024 02:55:54 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>写实模型也还行</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTM5NzU2MDU2MjI4NzQxMTIvcHUvaW1nL2NES1dmT1VLX2k4Zm1PR1ouanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1753722045479960731#m</id>
-            <title>RT by @op7418: 我一直以为是niji6 增加了风控措施导致不能生成擦边图片，看了阑夕这条才反应过来，原来是 MJ 新版网站的问题。
-想用niji6生成擦边图片的话建议用Discord 和 niji app。</title>
-            <link>https://nitter.cz/op7418/status/1753722045479960731#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1753722045479960731#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 03 Feb 2024 10:08:12 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>我一直以为是niji6 增加了风控措施导致不能生成擦边图片，看了阑夕这条才反应过来，原来是 MJ 新版网站的问题。<br />
-想用niji6生成擦边图片的话建议用Discord 和 niji app。</p>
-<p><a href="https://nitter.cz/foxshuo/status/1753681832347115915#m">nitter.cz/foxshuo/status/1753681832347115915#m</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZaNDVlQ2JvQUl5SThjLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZaNDVkLWJFQUFndWNMLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZaNDVkLWJvQUFDY2NaLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZaNDVlRGFNQUE4b3NELmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1753814172369121368#m</id>
-            <title>RT by @op7418: 视频生成模型SVD刚才发布了1.1版本，我试用了一下。
-发现比上个版本的进步非常多，之前的几个比较大的问题都有了改善，这下终于是一个可用的模型了。
-
-我测评了多种风格的内容，主要是图片生成视频，图片由MJ生成，下面是发现的一些变化：
-
-◆XT模型本体从9G多缩小到了4G多，显存要求降低了，同时推理速度加快许多，之前跑不了的电脑这下可以试试了。
-
-◆整体运动幅度大幅增加，很多内容不再只是运镜了，也意味着模型真的理解了内容。
-
-◆生物和人像的运动幅度和一致性大幅提升，人物不再是完全不动的图片了，会进行相应的运动和跟环境交互。
-
-◆之前视频中的密集噪点得到了一定程度优化。
-
-◆2D动漫图像现在也可以动了，不过效果依然不太好。
-
-◆已往的强项流体运动效果依然很顶，没有负向优化。
-
-你可以在这里下载模型：https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt-1-1</title>
-            <link>https://nitter.cz/op7418/status/1753814172369121368#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1753814172369121368#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 03 Feb 2024 16:14:17 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>视频生成模型SVD刚才发布了1.1版本，我试用了一下。<br />
-发现比上个版本的进步非常多，之前的几个比较大的问题都有了改善，这下终于是一个可用的模型了。<br />
-<br />
-我测评了多种风格的内容，主要是图片生成视频，图片由MJ生成，下面是发现的一些变化：<br />
-<br />
-◆XT模型本体从9G多缩小到了4G多，显存要求降低了，同时推理速度加快许多，之前跑不了的电脑这下可以试试了。<br />
-<br />
-◆整体运动幅度大幅增加，很多内容不再只是运镜了，也意味着模型真的理解了内容。<br />
-<br />
-◆生物和人像的运动幅度和一致性大幅提升，人物不再是完全不动的图片了，会进行相应的运动和跟环境交互。<br />
-<br />
-◆之前视频中的密集噪点得到了一定程度优化。<br />
-<br />
-◆2D动漫图像现在也可以动了，不过效果依然不太好。<br />
-<br />
-◆已往的强项流体运动效果依然很顶，没有负向优化。<br />
-<br />
-你可以在这里下载模型：<a href="https://huggingface.co/stabilityai/stable-video-diffusion-img2vid-xt-1-1">huggingface.co/stabilityai/s…</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTM4MTQwMzA2MjI2MjU3OTIvcHUvaW1nL1Z0MG12Zlh0OE9ubUsybTguanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1753825067975520542#m</id>
-            <title>晚安了，整条黑龙陪伴梦里的大家</title>
-            <link>https://nitter.cz/op7418/status/1753825067975520542#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1753825067975520542#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 03 Feb 2024 16:57:35 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>晚安了，整条黑龙陪伴梦里的大家</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0ZiV1JZV2JjQUFYNW52LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/op7418/status/1753816602255245693#m</id>
-            <title>这个针对视频的LCM项目，更新了模型文件，期待Comfyui的流程。
-
-模型下载：https://huggingface.co/wangfuyun/AnimateLCM</title>
-            <link>https://nitter.cz/op7418/status/1753816602255245693#m</link>
-            <guid isPermaLink="false">https://nitter.cz/op7418/status/1753816602255245693#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 03 Feb 2024 16:23:56 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这个针对视频的LCM项目，更新了模型文件，期待Comfyui的流程。<br />
-<br />
-模型下载：<a href="https://huggingface.co/wangfuyun/AnimateLCM">huggingface.co/wangfuyun/Ani…</a></p>
-<p><a href="https://nitter.cz/op7418/status/1753266435462414387#m">nitter.cz/op7418/status/1753266435462414387#m</a></p>
-<img src="https://nitter.cz/pic/enc/Y2FyZF9pbWcvMTc1MzgwOTYxNDM2ODMzMzgyNC94WFd6NDVPeT9mb3JtYXQ9anBnJm5hbWU9ODAweDQxOQ==" />
                 ]]>
             </content:encoded>
         </item>
