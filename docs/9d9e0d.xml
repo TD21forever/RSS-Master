@@ -5,18 +5,35 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/65c18c656d9f1906319c04bb</id>
-            <title>最近在 kimi 和 ChatGPT 的帮助下，逐字逐句地精读了三篇AI相关的文章，觉得收获非常大。 很多困扰我已久的问题，在这三篇文章里看到了些线索。 比如，生成式 AI...</title>
-            <link>https://m.okjike.com/originalPosts/65c18c656d9f1906319c04bb</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/65c18c656d9f1906319c04bb</guid>
+            <id>https://m.okjike.com/originalPosts/65c34efa3624666324edd268</id>
+            <title>复制了和菜头大佬分享的关键词，然后自己修修改改生成了四张满意的图，细节满满</title>
+            <link>https://m.okjike.com/originalPosts/65c34efa3624666324edd268</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/65c34efa3624666324edd268</guid>
             <pubDate></pubDate>
-            <updated>Tue, 06 Feb 2024 01:33:25 GMT</updated>
+            <updated>Wed, 07 Feb 2024 09:35:54 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    最近在 kimi 和 ChatGPT 的帮助下，逐字逐句地精读了三篇AI相关的文章，觉得收获非常大。<br /><br />很多困扰我已久的问题，在这三篇文章里看到了些线索。<br /><br />比如，生成式 AI 生成的内容，当前无法实现精准控制，这个问题是否就无解呢？其实不是的，第一篇文章中就提到了他们的解法。<br /><br />再比如，RAG 在处理幻觉方面这么牛，各种 RAG 技术的通用性如何呢？答案可能没那么乐观，因为他们可能只是某个特定 use case 上做得很好，但不意味着可以轻易推广到其他所有场景。<br /><img src="https://cdnv2.ruguoapp.com/Fg5-OQHryWWiDpGDwug3BdihWT3dv3.jpg" /><br /><img src="https://cdnv2.ruguoapp.com/Fl0o4R1EgShUcO0eT32XlwGSt_1-v3.jpg" /><br /><img src="https://cdnv2.ruguoapp.com/FqzXb9EgGIGT5-rwX3Uct0o2rMv6v3.jpg" />
+                    复制了和菜头大佬分享的关键词，然后自己修修改改生成了四张满意的图，细节满满<br /><img src="https://cdnv2.ruguoapp.com/FksYXnjSpTcMadxHBIdUd2m99ORKv3.jpg" /><br /><img src="https://cdnv2.ruguoapp.com/FoYnNlxW_YWqwcMCrAvl6FUVR3Dev3.jpg" /><br /><img src="https://cdnv2.ruguoapp.com/FuS8lOVOXT9FBrpJ94jSa282Z5mZv3.jpg" /><br /><img src="https://cdnv2.ruguoapp.com/FtCDXVZutL3Bu-ZtBitfl7foN3frv3.png" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/65c2674e3b9c66cae4009069</id>
+            <title>elvis写了一篇非常详细的文章来介绍 RAG 生态的所有部分，还会添加清晰易懂的参考文献列表以及技术性编程教程帮助提高 RAG 系统的性能。 主要内容来自《大语言模...</title>
+            <link>https://m.okjike.com/originalPosts/65c2674e3b9c66cae4009069</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/65c2674e3b9c66cae4009069</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 06 Feb 2024 17:07:26 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    elvis写了一篇非常详细的文章来介绍 RAG 生态的所有部分，还会添加清晰易懂的参考文献列表以及技术性编程教程帮助提高 RAG 系统的性能。<br /><br />主要内容来自《大语言模型的检索增强生成：一项调查》这篇论文，我简要总结了一下文章每个部分的内容，感兴趣可以去看原文：<br /><br />检索增强生成（Retrieval Augmented Generation, RAG）技术，旨在通过结合外部知识源，如数据库，来提升大语言模型（LLMs）的能力。它主要用于解决领域知识的缺失、事实性问题和生成错误。RAG特别适用于那些需要最新知识、又不需针对每个特定任务重复训练LLM的应用场景，比如对话代理和知识密集型任务。<br /><br />RAG如何工作<br /><br />RAG通过接收输入的提示信息，从资源如维基百科中检索相关文档，再将这些文档作为上下文来生成回答。这种方法使LLMs能够访问最新的信息，并生成更准确、更可控、更相关的内容。它能及时适应不断变化的信息，这对于LLM来说至关重要，因为它们的知识库本身是静态的。<br /><br />RAG系统的发展<br /><br />RAG系统已经从初级阶段（Naive RAG）发展到高级阶段（Advanced RAG）和模块化阶段（Modular RAG），以解决性能、成本和效率的限制。高级RAG通过优化不同阶段，如预检索、检索和检索后处理，来提高检索质量。模块化RAG则通过调整不同的功能模块来适应特定问题的背景，提供了更大的灵活性。<br /><br />RAG系统的关键组成<br /><br />检索：包括提升语义表示、对齐查询与文档，以及调整检索器输出以符合LLM的偏好。<br />生成：涉及将检索到的信息转化为连贯的文本，并在检索后对LLM进行微调。<br />增强：在生成任务中融合检索到的段落的上下文，包括不同阶段和增强数据源。<br />RAG与模型微调<br />RAG适合用于集成新知识，而模型微调则有助于提升模型的性能和效率。这两种方法可以互补，结合提示工程（Prompting Engineering），能够优化LLM在复杂和可扩展应用中的表现。<br /><br />RAG的评估<br /><br />RAG系统的评估基于检索到的上下文质量和生成的内容质量。评估指标包括规范化折扣累计增益（NDCG）、命中率、F1值和精确匹配（EM）等。评估重点是上下文的相关性、答案的准确性和相关性，以及抗噪声能力和信息整合能力。<br /><br />RAG面临的挑战与未来展望<br /><br />RAG目前面临的挑战包括适应更广泛的上下文窗口、提高对虚假信息的抵抗能力、理解规模化定律，以及开发可投入生产的系统。此外，人们也在关注多模态RAG和为评估制定更细致的标准。<br /><br />RAG工具<br /><br />构建RAG系统可以使用包括LangChain和LlamaIndex在内的工具，以及针对不同目的的专业工具。云服务提供商也在提供以RAG为中心的服务，以促进RAG应用的发展。<br /><br />原文链接：https://www.promptingguide.ai/research/rag<br /><img src="https://cdnv2.ruguoapp.com/FtThfr5CsziZZzh83G--H-vhoq0dv3.png" />
                 ]]>
             </content:encoded>
         </item>
@@ -73,23 +90,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/65bf82e63624666324a40812</id>
-            <title>更多的一些水彩。 prompt： a painting of a Chinese dragon in blue and yellow colors, in the style of expressionist figures, the stars art group (xing x...</title>
-            <link>https://m.okjike.com/originalPosts/65bf82e63624666324a40812</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/65bf82e63624666324a40812</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 04 Feb 2024 12:28:22 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    更多的一些水彩。<br /><br />prompt：<br /><br />a painting of a Chinese dragon in blue and yellow colors, in the style of expressionist figures, the stars art group (xing xing), jewish life scenes, thick impasto landscapes, mote kei, dark sky-blue and red, careful framing --ar 3:4 --v 6.0<br /><img src="https://cdnv2.ruguoapp.com/FoIodSEu1T-v1pQaaz9w_lRWNPfBv3.png" /><br /><img src="https://cdnv2.ruguoapp.com/FsTLSKyqRrFw1u_iv1mMZfHvtpT5v3.png" /><br /><img src="https://cdnv2.ruguoapp.com/Fj2hTtWowVCu6Z7dR59TrKbiIm4av3.png" /><br /><img src="https://cdnv2.ruguoapp.com/FjiHBpxtg-VwwODOeBIOmFnFwRTnv3.png" /><br /><img src="https://cdnv2.ruguoapp.com/Fm5ycA1j1jCA_XYGtNilJzBU7vysv3.png" /><br /><img src="https://cdnv2.ruguoapp.com/Fq5Qbp7s6sR8jLlWuwoVD_eyl4Itv3.png" /><br /><img src="https://cdnv2.ruguoapp.com/Fp7mcc1vn5r9c9xqPHlm8YU7Bywyv3.png" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/65bf35509185c305d1f20992</id>
             <title>任何对ai有浓厚兴趣+会用飞书的朋友 欢迎戳我！</title>
             <link>https://m.okjike.com/originalPosts/65bf35509185c305d1f20992</link>
@@ -135,7 +135,7 @@
             <content:encoded>
                 <![CDATA[
                     
-                    之前和@海辛Hyacinth 做上一个项目的时候都被AI像素风的表现惊艳到了，于是又跑了一个芭比场景，依然很稳，喜欢！<br /><video controls="" src="https://videocdn.jellow.site/llllOuBsb-ABkhnMvIsEWDH43p9E.mp4?sign=204df2ae6da2d2216b43298577a24bcc&amp;t=65c275b2"></video>
+                    之前和@海辛Hyacinth 做上一个项目的时候都被AI像素风的表现惊艳到了，于是又跑了一个芭比场景，依然很稳，喜欢！<br /><video controls="" src="https://videocdn.jellow.site/llllOuBsb-ABkhnMvIsEWDH43p9E.mp4?sign=729b8afdead2c542156c49d724ec7747&amp;t=65c3cdfb"></video>
                 ]]>
             </content:encoded>
         </item>
