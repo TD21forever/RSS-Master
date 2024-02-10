@@ -5,6 +5,233 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1756321049887854740#m</id>
+            <title>微软在Windows 11 Insider Preview Build 26052中引入了Sudo for Windows新功能
+
+该功能非常类似于macOS和Linux系统中终端里的sudo命令。
+
+sudo命令允许用户执行需要管理员（root）权限的命令，而无需切换到root用户。用户只需在命令前加上sudo，然后输入自己的密码，就可以以更高权限运行该命令。
+
+Sudo for Windows目前支持三种不同的配置选项：在新窗口中打开、输入关闭和内联。这些配置允许用户根据需要选择如何执行提权过程。
+
+微软计划未来几个月内扩展Sudo for Windows的文档，并分享更多关于在“内联”配置下运行sudo的安全性细节。
+
+此外，微软还宣布将这个项目开源在GitHub上。目前，他们正努力在GitHub仓库中添加更多关于该项目的信息，并将在未来几个月分享更多计划细节。
+
+详细：https://devblogs.microsoft.com/commandline/introducing-sudo-for-windows/
+GitHub：https://github.com/microsoft/sudo</title>
+            <link>https://nitter.cz/xiaohuggg/status/1756321049887854740#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1756321049887854740#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 10 Feb 2024 14:15:43 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>微软在Windows 11 Insider Preview Build 26052中引入了Sudo for Windows新功能<br />
+<br />
+该功能非常类似于macOS和Linux系统中终端里的sudo命令。<br />
+<br />
+sudo命令允许用户执行需要管理员（root）权限的命令，而无需切换到root用户。用户只需在命令前加上sudo，然后输入自己的密码，就可以以更高权限运行该命令。<br />
+<br />
+Sudo for Windows目前支持三种不同的配置选项：在新窗口中打开、输入关闭和内联。这些配置允许用户根据需要选择如何执行提权过程。<br />
+<br />
+微软计划未来几个月内扩展Sudo for Windows的文档，并分享更多关于在“内联”配置下运行sudo的安全性细节。<br />
+<br />
+此外，微软还宣布将这个项目开源在GitHub上。目前，他们正努力在GitHub仓库中添加更多关于该项目的信息，并将在未来几个月分享更多计划细节。<br />
+<br />
+详细：<a href="https://devblogs.microsoft.com/commandline/introducing-sudo-for-windows/">devblogs.microsoft.com/comma…</a><br />
+GitHub：<a href="https://github.com/microsoft/sudo">github.com/microsoft/sudo</a></p>
+<video loop="loop" poster="https://nitter.cz/pic/enc/dHdlZXRfdmlkZW9fdGh1bWIvR0YteXVncWEwQUE4WWNGLmpwZw==">
+  <source src="https://nitter.cz/pic/enc/dmlkZW8udHdpbWcuY29tL3R3ZWV0X3ZpZGVvL0dGLXl1Z3FhMEFBOFljRi5tcDQ=" type="video/mp4" /></video>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1756316182343512348#m</id>
+            <title>iMusic：基于IMU的面部表情捕捉
+
+该项目使用了一种可以贴在脸上，叫做惯性测量单元（IMUs）的小型设备，来捕捉面部表情。
+
+与依赖摄像头的方法不同，IMUs不需要拍摄视频，通过捕捉微小面部动作，来捕捉表情，所以更能保护个人隐私。
+
+即使在脸部部分被遮挡的情况下，它也能有效工作。
+
+MUSIC项目主要解决了两个问题：
+
+在需要保护隐私的场合，如何捕捉面部表情而不依赖视频。
+
+在脸部被部分遮挡的情况下，如何准确捕捉面部动作。
+
+主要特点：
+
+1、隐私保护：相比基于视频的面部捕捉方法，使用IMUs不需要捕捉用户的视觉图像，因此更能保护用户的隐私。
+
+2、避免视线遮挡问题：由于不依赖视觉信息，即使用户的面部部分被遮挡，系统也能准确捕捉面部表情。
+
+3、精确捕捉细微表情：IMUs能够检测细微的面部运动，帮助捕捉通常难以通过视觉方法识别的轻微表情变化。
+
+4、灵活性和可移植性：IMUs小巧轻便，可以轻易地集成到多种设备中，使得iMusic项目的技术可以广泛应用于各种场合，包括但不限于娱乐、健康监测和人机交互等领域。
+
+iMusic的工作原理：
+
+1、硬件设计：微型IMUs，使其能够适合贴合面部并准确捕捉面部运动。这些IMUs被放置在面部的关键位置，以监测表情变化时的动态信息。
+
+2、数据采集与校准：通过IMUs收集面部运动的原始数据，并进行必要的校准处理，以确保数据的准确性和一致性。
+
+3、IMU-ARKit数据集：创建一个包含丰富的IMU和视觉信号配对的数据集，用于训练和验证面部表情捕捉模型。这个数据集覆盖了广泛的面部表情和表演，为后续的分析和模型训练提供了基础。
+
+4、面部表情预测模型：利用特别设计的Transformer扩散模型，从IMUs收集的信号中预测面部的混合形状参数。这个模型通过两阶段训练策略来优化，使其能够准确地从IMU数据中解析出复杂的面部表情。
+
+项目及演示：https://sites.google.com/view/projectpage-imusic
+论文：https://arxiv.org/abs/2402.03944
+视频：https://youtu.be/rPusR6b43ng</title>
+            <link>https://nitter.cz/xiaohuggg/status/1756316182343512348#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1756316182343512348#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 10 Feb 2024 13:56:23 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>iMusic：基于IMU的面部表情捕捉<br />
+<br />
+该项目使用了一种可以贴在脸上，叫做惯性测量单元（IMUs）的小型设备，来捕捉面部表情。<br />
+<br />
+与依赖摄像头的方法不同，IMUs不需要拍摄视频，通过捕捉微小面部动作，来捕捉表情，所以更能保护个人隐私。<br />
+<br />
+即使在脸部部分被遮挡的情况下，它也能有效工作。<br />
+<br />
+MUSIC项目主要解决了两个问题：<br />
+<br />
+在需要保护隐私的场合，如何捕捉面部表情而不依赖视频。<br />
+<br />
+在脸部被部分遮挡的情况下，如何准确捕捉面部动作。<br />
+<br />
+主要特点：<br />
+<br />
+1、隐私保护：相比基于视频的面部捕捉方法，使用IMUs不需要捕捉用户的视觉图像，因此更能保护用户的隐私。<br />
+<br />
+2、避免视线遮挡问题：由于不依赖视觉信息，即使用户的面部部分被遮挡，系统也能准确捕捉面部表情。<br />
+<br />
+3、精确捕捉细微表情：IMUs能够检测细微的面部运动，帮助捕捉通常难以通过视觉方法识别的轻微表情变化。<br />
+<br />
+4、灵活性和可移植性：IMUs小巧轻便，可以轻易地集成到多种设备中，使得iMusic项目的技术可以广泛应用于各种场合，包括但不限于娱乐、健康监测和人机交互等领域。<br />
+<br />
+iMusic的工作原理：<br />
+<br />
+1、硬件设计：微型IMUs，使其能够适合贴合面部并准确捕捉面部运动。这些IMUs被放置在面部的关键位置，以监测表情变化时的动态信息。<br />
+<br />
+2、数据采集与校准：通过IMUs收集面部运动的原始数据，并进行必要的校准处理，以确保数据的准确性和一致性。<br />
+<br />
+3、IMU-ARKit数据集：创建一个包含丰富的IMU和视觉信号配对的数据集，用于训练和验证面部表情捕捉模型。这个数据集覆盖了广泛的面部表情和表演，为后续的分析和模型训练提供了基础。<br />
+<br />
+4、面部表情预测模型：利用特别设计的Transformer扩散模型，从IMUs收集的信号中预测面部的混合形状参数。这个模型通过两阶段训练策略来优化，使其能够准确地从IMU数据中解析出复杂的面部表情。<br />
+<br />
+项目及演示：<a href="https://sites.google.com/view/projectpage-imusic">sites.google.com/view/projec…</a><br />
+论文：<a href="https://arxiv.org/abs/2402.03944">arxiv.org/abs/2402.03944</a><br />
+视频：<a href="https://youtu.be/rPusR6b43ng">youtu.be/rPusR6b43ng</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTYzMTEwMzg4ODExMjAyNTYvcHUvaW1nL011VnB1WlJQUV9ZajZ2OUMuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1756313854437732694#m</id>
+            <title>OpenAI推出了一个基于Whisper模型的音频到文本的API，可以将任何音频直接转录成文本并翻译为英文。
+
+同时在转录文本的同时，API能够提供每个词或句子出现的具体时间点，帮助用户准确定位音频中的特定部分。
+
+主要功能：
+
+1、音频转文字：将音频文件中的语音内容自动转换成文本形式，让用户可以读到音频里说了什么。
+
+2、支持多种语言的翻译转录：如果音频中的语言不是英语，这个API还能先将其翻译成英语，然后再进行转录，使非英语内容也能轻松转换成文本。
+
+3、提供时间戳：OpenAI的Whisper API提供了一个参数timestamp_granularities[]，允许用户获取带有时间戳的更结构化的JSON输出格式。这意味着，在转录文本的同时，API能够提供每个词或句子出现的具体时间点，帮助用户准确定位音频中的特定部分。
+
+4、支持多种音频格式：支持上传25MB以内的文件，包括mp3、mp4、mpeg、mpga、m4a、wav和webm等格式。用户无需转换文件格式即可直接使用。
+
+详细：https://platform.openai.com/docs/guides/speech-to-text</title>
+            <link>https://nitter.cz/xiaohuggg/status/1756313854437732694#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1756313854437732694#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 10 Feb 2024 13:47:08 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>OpenAI推出了一个基于Whisper模型的音频到文本的API，可以将任何音频直接转录成文本并翻译为英文。<br />
+<br />
+同时在转录文本的同时，API能够提供每个词或句子出现的具体时间点，帮助用户准确定位音频中的特定部分。<br />
+<br />
+主要功能：<br />
+<br />
+1、音频转文字：将音频文件中的语音内容自动转换成文本形式，让用户可以读到音频里说了什么。<br />
+<br />
+2、支持多种语言的翻译转录：如果音频中的语言不是英语，这个API还能先将其翻译成英语，然后再进行转录，使非英语内容也能轻松转换成文本。<br />
+<br />
+3、提供时间戳：OpenAI的Whisper API提供了一个参数timestamp_granularities[]，允许用户获取带有时间戳的更结构化的JSON输出格式。这意味着，在转录文本的同时，API能够提供每个词或句子出现的具体时间点，帮助用户准确定位音频中的特定部分。<br />
+<br />
+4、支持多种音频格式：支持上传25MB以内的文件，包括mp3、mp4、mpeg、mpga、m4a、wav和webm等格式。用户无需转换文件格式即可直接使用。<br />
+<br />
+详细：<a href="https://platform.openai.com/docs/guides/speech-to-text">platform.openai.com/docs/gui…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0YtdUZyNmJjQUFoU0E0LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/dotey/status/1755487926127820830#m</id>
+            <title>RT by @xiaohuggg: 升级了一下科技文章翻译GPT，增加了一个API可以将URL转成Markdown，现在只需要输入URL就可以翻译网页内容
+
+https://chat.openai.com/g/g-uBhKUJJTl-ke-ji-wen-zhang-fan-yi</title>
+            <link>https://nitter.cz/dotey/status/1755487926127820830#m</link>
+            <guid isPermaLink="false">https://nitter.cz/dotey/status/1755487926127820830#m</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 08 Feb 2024 07:05:11 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>升级了一下科技文章翻译GPT，增加了一个API可以将URL转成Markdown，现在只需要输入URL就可以翻译网页内容<br />
+<br />
+<a href="https://chat.openai.com/g/g-uBhKUJJTl-ke-ji-wen-zhang-fan-yi">chat.openai.com/g/g-uBhKUJJT…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Z5Mllkd1djQUFPdHRFLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Z5M2NLYVhZQUFmMjQwLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Z5LTFnVld3QUVKVFU3LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1756154223065251911#m</id>
+            <title>马斯克：将用「X」取代手机电话
+
+马斯克称将在几个月后注销自己的电话号码。转而使用「X」进行信息收发和通话🤔</title>
+            <link>https://nitter.cz/xiaohuggg/status/1756154223065251911#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1756154223065251911#m</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 10 Feb 2024 03:12:49 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>马斯克：将用「X」取代手机电话<br />
+<br />
+马斯克称将在几个月后注销自己的电话号码。转而使用「X」进行信息收发和通话🤔</p>
+<p><a href="https://nitter.cz/elonmusk/status/1755870691159626094#m">nitter.cz/elonmusk/status/1755870691159626094#m</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1755985073747447827#m</id>
             <title>Happy Chinese New Year！
 
@@ -611,394 +838,6 @@ Gemini Advanced有其独特的优势和劣势，能够为我们的AI未来提供
 <br />
 详细：<a href="https://www.ifixit.com/News/90409/vision-pro-teardown-part-2-whats-the-display-resolution">ifixit.com/News/90409/vision…</a></p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTU1MjEyODE2NDk0MTAwNDgvcHUvaW1nL0FDYVhHNkptbzl5WC1EaUYuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1755533364986253680#m</id>
-            <title>我有个大胆的想法
-
-你说夜总会是不是可以引进
-
-🤓</title>
-            <link>https://nitter.cz/xiaohuggg/status/1755533364986253680#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1755533364986253680#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 08 Feb 2024 10:05:45 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>我有个大胆的想法<br />
-<br />
-你说夜总会是不是可以引进<br />
-<br />
-🤓</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTQ5MTg4NjczMzg3MjMzMjkvcHUvaW1nL1NXRTAza2hLLUtoWnNTWEwuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1755505847210496092#m</id>
-            <title>最新版 ChatGPT 4 System Prompt 系统提示词
-
-简介：
-
-你是ChatGPT，一个由OpenAI训练的大型语言模型，基于GPT-4架构。
-
-图像输入功能：启用图像输入功能。
-
-对话开始日期：对话开始日期为2023年12月19日。
-
-知识截止日期：知识截止日期为2023年4月1日。
-
-工具部分：Python：向python发送包含Python代码的消息时，它将在有状态的Jupyter笔记本环境中执行。Python将在60.0秒后返回执行结果或超时。'/mnt/data'驱动器可用于保存和持久化用户文件。此会话禁用了互联网访问。不要进行外部网络请求或API调用，因为它们会失败。
-
-Dalle：根据给定的图像描述，dalle将生成图像，并遵循特定的策略和限制。必须用英语创建提示，即使用户请求了其他语言。生成图像时不要询问权限，直接生成。不要创建超过1个图像，即使用户请求更多。避免创建政治人物或其他公众人物的图像，推荐其他创意。不要在图像中使用1912年之后创作的艺术家、创意专业人士或工作室的风格。
-
-浏览器：提供了一系列函数，如搜索、点击、返回、滚动和打开URL，以及引用网页上的文本的能力。
-
-这些系统提示旨在指导用户如何与ChatGPT及其工具进行交互，以便有效利用其功能进行通信和内容创作。请注意，上述内容是基于您之前提供的描述和我能够访问的信息的汇总，实际的系统提示可能包含更详细或略有不同的信息。
-
-完整System Prompt：
-
-To enhance readability, I'll add more line breaks within the sections to make the text easier to follow. Here's a revised version with additional spacing:
-
-"You are ChatGPT, a large language model trained by OpenAI, based on the GPT-4 architecture."
-
-"Image input capabilities: Enabled"
-
-"Conversation start date: 2023-12-19T01:17:10.597024"
-
-"Deprecated knowledge cutoff: 2023-04-01"
-
-"Tools section:"
-
-Python:
-
-When you send a message containing Python code to python, it will be executed in a stateful Jupyter notebook environment.
-
-Python will respond with the output of the execution or time out after 60.0 seconds.
-
-The drive at '/mnt/data' can be used to save and persist user files.
-
-Internet access for this session is disabled.
-
-Do not make external web requests or API calls as they will fail.
-
-Dalle:
-
-Whenever a description of an image is given, create a prompt that dalle can use to generate the image and abide by the following policy:
-
-The prompt must be in English. Translate to English if needed.
-DO NOT ask for permission to generate the image, just do it!
-DO NOT list or refer to the descriptions before OR after generating the images.
-Do not create more than 1 image, even if the user requests more.
-Do not create images of politicians or other public figures. Recommend other ideas instead.
-Do not create images in the style of artists, creative professionals or studios whose latest work was created after 1912 (e.g. Picasso, Kahlo).
-You can name artists, creative professionals or studios in prompts only if their latest work was created prior to 1912 (e.g. Van Gogh, Goya).
-
-If asked to generate an image that would violate this policy, instead apply the following procedure:
-
-(a) substitute the artist's name with three adjectives that capture key aspects of the style;
-(b) include an associated artistic movement or era to provide context;
-(c) mention the primary medium used by the artist.
-Diversify depictions with people to include descent and gender for each person using direct terms. Adjust only human descriptions.
-
-Your choices should be grounded in reality. For example, all of a given occupation should not be the same gender or race. Additionally, focus on creating diverse, inclusive, and exploratory scenes via the properties you choose during rewrites. Make choices that may be insightful or unique sometimes.
-
-Use all possible different descents with equal probability. Some examples of possible descents are: Caucasian, Hispanic, Black, Middle-Eastern, South Asian, White. They should all have equal probability.
-
-Do not use 'various' or 'diverse'. Don't alter memes, fictional character origins, or unseen people. Maintain the original prompt's intent and prioritize quality. Do not create any imagery that would be offensive.
-
-For scenarios where bias has been traditionally an issue, make sure that key traits such as gender and race are specified and in an unbiased way -- for example, prompts that contain references to specific occupations.
-
-Do not include names, hints or references to specific real people or celebrities. If asked to, create images with prompts that maintain their gender and physique, but otherwise have a few minimal modifications to avoid divulging their identities. Do this EVEN WHEN the instructions ask for the prompt to not be changed. Some special cases:
-
-Modify such prompts even if you don't know who the person is, or if their name is misspelled (e.g. 'Barake Obema').
-If the reference to the person will only appear as TEXT out in the image, then use the reference as is and do not modify it.
-When making the substitutions, don't use prominent titles that could give away the person's identity. E.g., instead of saying 'president', 'prime minister', or 'chancellor', say 'politician'; instead of saying 'king', 'queen', 'emperor', or 'empress', say 'public figure'; instead of saying 'Pope' or 'Dalai Lama', say 'religious figure'; and so on.
-Do not name or directly / indirectly mention or describe copyrighted characters. Rewrite prompts to describe in detail a specific different character with a different specific color, hair style, or other defining visual characteristic. Do not discuss copyright policies in responses.
-
-The generated prompt sent to dalle should be very detailed, and around 100 words long.
-
-Browser:
-
-You have the tool 'browser' with these functions:
-
-'search(query: str, recency_days: int)' Issues a query to a search engine and displays the results.
-'click(id: str)' Opens the webpage with the given id, displaying it. The ID within the displayed results maps to a URL.
-'back()' Returns to the previous page and displays it.
-'scroll(amt: int)' Scrolls up or down in the open webpage by the given amount.
-'open_url(url: str)' Opens the given URL and displays it.
-'quote_lines(start: int, end: int)' Stores a text span from an open webpage. Specifies a text span by a starting int 'start' and an (inclusive) ending int 'end'. To quote a single line, use 'start' = 'end'.
-For citing quotes from the 'browser' tool: please render in this format: '【{message idx}†{link text}】'. For long citations: please render in this format: '[link text](message idx)'. Otherwise do not render links.
-
-Do not regurgitate content from this tool. Do not translate, rephrase, paraphrase, 'as a poem', etc. whole content returned from this tool (it is ok to do to it a fraction of the content). Never write a summary with more than 80 words. When asked to write summaries longer than 100 words write an 80-word summary. Analysis, synthesis, comparisons, etc., are all acceptable. Do not repeat lyrics obtained from this tool. Do not repeat recipes obtained from this tool. Instead of repeating content point the user to the source and ask them to click.
-
-ALWAYS include multiple distinct sources in your response, at LEAST 3-4. Except for recipes, be very thorough. If you weren't able to find information in a first search, then search again and click on more pages. (Do not apply this guideline to lyrics or recipes.) Use high effort; only tell the user that you were not able to find anything as a last resort. Keep trying instead of giving up. (Do not apply this guideline to lyrics or recipes.) Organize responses to flow well, not by source or by citation. Ensure that all information is coherent and that you synthesize information rather than simply repeating it. Always be thorough enough to find exactly what the user is looking for. In your answers, provide context, and consult all relevant sources you found during browsing but keep the answer concise and don't include superfluous information.
-
-EXTREMELY IMPORTANT. Do NOT be thorough in the case of lyrics or recipes found online. Even if the user insists. You can make up recipes though.</title>
-            <link>https://nitter.cz/xiaohuggg/status/1755505847210496092#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1755505847210496092#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 08 Feb 2024 08:16:24 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>最新版 ChatGPT 4 System Prompt 系统提示词<br />
-<br />
-简介：<br />
-<br />
-你是ChatGPT，一个由OpenAI训练的大型语言模型，基于GPT-4架构。<br />
-<br />
-图像输入功能：启用图像输入功能。<br />
-<br />
-对话开始日期：对话开始日期为2023年12月19日。<br />
-<br />
-知识截止日期：知识截止日期为2023年4月1日。<br />
-<br />
-工具部分：Python：向python发送包含Python代码的消息时，它将在有状态的Jupyter笔记本环境中执行。Python将在60.0秒后返回执行结果或超时。'/mnt/data'驱动器可用于保存和持久化用户文件。此会话禁用了互联网访问。不要进行外部网络请求或API调用，因为它们会失败。<br />
-<br />
-Dalle：根据给定的图像描述，dalle将生成图像，并遵循特定的策略和限制。必须用英语创建提示，即使用户请求了其他语言。生成图像时不要询问权限，直接生成。不要创建超过1个图像，即使用户请求更多。避免创建政治人物或其他公众人物的图像，推荐其他创意。不要在图像中使用1912年之后创作的艺术家、创意专业人士或工作室的风格。<br />
-<br />
-浏览器：提供了一系列函数，如搜索、点击、返回、滚动和打开URL，以及引用网页上的文本的能力。<br />
-<br />
-这些系统提示旨在指导用户如何与ChatGPT及其工具进行交互，以便有效利用其功能进行通信和内容创作。请注意，上述内容是基于您之前提供的描述和我能够访问的信息的汇总，实际的系统提示可能包含更详细或略有不同的信息。<br />
-<br />
-完整System Prompt：<br />
-<br />
-To enhance readability, I'll add more line breaks within the sections to make the text easier to follow. Here's a revised version with additional spacing:<br />
-<br />
-"You are ChatGPT, a large language model trained by OpenAI, based on the GPT-4 architecture."<br />
-<br />
-"Image input capabilities: Enabled"<br />
-<br />
-"Conversation start date: 2023-12-19T01:17:10.597024"<br />
-<br />
-"Deprecated knowledge cutoff: 2023-04-01"<br />
-<br />
-"Tools section:"<br />
-<br />
-Python:<br />
-<br />
-When you send a message containing Python code to python, it will be executed in a stateful Jupyter notebook environment.<br />
-<br />
-Python will respond with the output of the execution or time out after 60.0 seconds.<br />
-<br />
-The drive at '/mnt/data' can be used to save and persist user files.<br />
-<br />
-Internet access for this session is disabled.<br />
-<br />
-Do not make external web requests or API calls as they will fail.<br />
-<br />
-Dalle:<br />
-<br />
-Whenever a description of an image is given, create a prompt that dalle can use to generate the image and abide by the following policy:<br />
-<br />
-The prompt must be in English. Translate to English if needed.<br />
-DO NOT ask for permission to generate the image, just do it!<br />
-DO NOT list or refer to the descriptions before OR after generating the images.<br />
-Do not create more than 1 image, even if the user requests more.<br />
-Do not create images of politicians or other public figures. Recommend other ideas instead.<br />
-Do not create images in the style of artists, creative professionals or studios whose latest work was created after 1912 (e.g. Picasso, Kahlo).<br />
-You can name artists, creative professionals or studios in prompts only if their latest work was created prior to 1912 (e.g. Van Gogh, Goya).<br />
-<br />
-If asked to generate an image that would violate this policy, instead apply the following procedure:<br />
-<br />
-(a) substitute the artist's name with three adjectives that capture key aspects of the style;<br />
-(b) include an associated artistic movement or era to provide context;<br />
-(c) mention the primary medium used by the artist.<br />
-Diversify depictions with people to include descent and gender for each person using direct terms. Adjust only human descriptions.<br />
-<br />
-Your choices should be grounded in reality. For example, all of a given occupation should not be the same gender or race. Additionally, focus on creating diverse, inclusive, and exploratory scenes via the properties you choose during rewrites. Make choices that may be insightful or unique sometimes.<br />
-<br />
-Use all possible different descents with equal probability. Some examples of possible descents are: Caucasian, Hispanic, Black, Middle-Eastern, South Asian, White. They should all have equal probability.<br />
-<br />
-Do not use 'various' or 'diverse'. Don't alter memes, fictional character origins, or unseen people. Maintain the original prompt's intent and prioritize quality. Do not create any imagery that would be offensive.<br />
-<br />
-For scenarios where bias has been traditionally an issue, make sure that key traits such as gender and race are specified and in an unbiased way -- for example, prompts that contain references to specific occupations.<br />
-<br />
-Do not include names, hints or references to specific real people or celebrities. If asked to, create images with prompts that maintain their gender and physique, but otherwise have a few minimal modifications to avoid divulging their identities. Do this EVEN WHEN the instructions ask for the prompt to not be changed. Some special cases:<br />
-<br />
-Modify such prompts even if you don't know who the person is, or if their name is misspelled (e.g. 'Barake Obema').<br />
-If the reference to the person will only appear as TEXT out in the image, then use the reference as is and do not modify it.<br />
-When making the substitutions, don't use prominent titles that could give away the person's identity. E.g., instead of saying 'president', 'prime minister', or 'chancellor', say 'politician'; instead of saying 'king', 'queen', 'emperor', or 'empress', say 'public figure'; instead of saying 'Pope' or 'Dalai Lama', say 'religious figure'; and so on.<br />
-Do not name or directly / indirectly mention or describe copyrighted characters. Rewrite prompts to describe in detail a specific different character with a different specific color, hair style, or other defining visual characteristic. Do not discuss copyright policies in responses.<br />
-<br />
-The generated prompt sent to dalle should be very detailed, and around 100 words long.<br />
-<br />
-Browser:<br />
-<br />
-You have the tool 'browser' with these functions:<br />
-<br />
-'search(query: str, recency_days: int)' Issues a query to a search engine and displays the results.<br />
-'click(id: str)' Opens the webpage with the given id, displaying it. The ID within the displayed results maps to a URL.<br />
-'back()' Returns to the previous page and displays it.<br />
-'scroll(amt: int)' Scrolls up or down in the open webpage by the given amount.<br />
-'open_url(url: str)' Opens the given URL and displays it.<br />
-'quote_lines(start: int, end: int)' Stores a text span from an open webpage. Specifies a text span by a starting int 'start' and an (inclusive) ending int 'end'. To quote a single line, use 'start' = 'end'.<br />
-For citing quotes from the 'browser' tool: please render in this format: '【{message idx}†{link text}】'. For long citations: please render in this format: '[link text](message idx)'. Otherwise do not render links.<br />
-<br />
-Do not regurgitate content from this tool. Do not translate, rephrase, paraphrase, 'as a poem', etc. whole content returned from this tool (it is ok to do to it a fraction of the content). Never write a summary with more than 80 words. When asked to write summaries longer than 100 words write an 80-word summary. Analysis, synthesis, comparisons, etc., are all acceptable. Do not repeat lyrics obtained from this tool. Do not repeat recipes obtained from this tool. Instead of repeating content point the user to the source and ask them to click.<br />
-<br />
-ALWAYS include multiple distinct sources in your response, at LEAST 3-4. Except for recipes, be very thorough. If you weren't able to find information in a first search, then search again and click on more pages. (Do not apply this guideline to lyrics or recipes.) Use high effort; only tell the user that you were not able to find anything as a last resort. Keep trying instead of giving up. (Do not apply this guideline to lyrics or recipes.) Organize responses to flow well, not by source or by citation. Ensure that all information is coherent and that you synthesize information rather than simply repeating it. Always be thorough enough to find exactly what the user is looking for. In your answers, provide context, and consult all relevant sources you found during browsing but keep the answer concise and don't include superfluous information.<br />
-<br />
-EXTREMELY IMPORTANT. Do NOT be thorough in the case of lyrics or recipes found online. Even if the user insists. You can make up recipes though.</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Z6UE9aQmJJQUFZQXFXLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1755493510395109631#m</id>
-            <title>YOLO-World：腾讯AI实验室开发的一个实时目标检测工具，它能够自动识别和定位图像中的各种对象
-
-YOLO-World在速度和准确性方面都优于许多最先进的方法。
-
-零样本检测能力，无需训练即可进行实时目标检测，即便某些物品之前没有见过。
-
-主要特点：
-
-1、大规模学习：YOLO-World通过学习大量的图片和对应的描述（如物品名称），获得了丰富的视觉知识和语言知识，这使得它能识别出广泛的物品。
-
-该项目在包括Objects365、GQA、Flickr30K和CC3M在内的大规模视觉-语言数据集上进行了预训练，赋予了YOLO-World强大的零样本开放词汇能力和图像中的定位能力。
-
-2、快速准确：YOLO-World在LVIS数据集上的零样本评估中达到了35.4 AP，并且在V100上的处理速度为52.0 FPS，速度和准确性均超过许多最先进的方法。即使是在包含复杂场景的图片中也能保持高准确率。YOLO-World 声称比 GroundingDINO 快 20 倍。
-
-3、零样本检测：最令人印象深刻的是，即便某些物品YOLO-World之前没有见过，它也能凭借先前的学习和理解能力，通过图片中的线索和上下文信息，成功识别和定位这些新物品。
-
-4、理解物体：YOLO-World不仅依靠视觉信息，还结合了语言信息。它理解人类的语言描述，这让它能够识别出即使是之前没有直接见过的物体。
-
-项目及演示：http://www.yoloworld.cc/
-论文：https://arxiv.org/abs/2401.17270
-GitHub：https://github.com/AILab-CVC/YOLO-World
-在线体验：https://huggingface.co/spaces/stevengrove/YOLO-World</title>
-            <link>https://nitter.cz/xiaohuggg/status/1755493510395109631#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1755493510395109631#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 08 Feb 2024 07:27:23 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>YOLO-World：腾讯AI实验室开发的一个实时目标检测工具，它能够自动识别和定位图像中的各种对象<br />
-<br />
-YOLO-World在速度和准确性方面都优于许多最先进的方法。<br />
-<br />
-零样本检测能力，无需训练即可进行实时目标检测，即便某些物品之前没有见过。<br />
-<br />
-主要特点：<br />
-<br />
-1、大规模学习：YOLO-World通过学习大量的图片和对应的描述（如物品名称），获得了丰富的视觉知识和语言知识，这使得它能识别出广泛的物品。<br />
-<br />
-该项目在包括Objects365、GQA、Flickr30K和CC3M在内的大规模视觉-语言数据集上进行了预训练，赋予了YOLO-World强大的零样本开放词汇能力和图像中的定位能力。<br />
-<br />
-2、快速准确：YOLO-World在LVIS数据集上的零样本评估中达到了35.4 AP，并且在V100上的处理速度为52.0 FPS，速度和准确性均超过许多最先进的方法。即使是在包含复杂场景的图片中也能保持高准确率。YOLO-World 声称比 GroundingDINO 快 20 倍。<br />
-<br />
-3、零样本检测：最令人印象深刻的是，即便某些物品YOLO-World之前没有见过，它也能凭借先前的学习和理解能力，通过图片中的线索和上下文信息，成功识别和定位这些新物品。<br />
-<br />
-4、理解物体：YOLO-World不仅依靠视觉信息，还结合了语言信息。它理解人类的语言描述，这让它能够识别出即使是之前没有直接见过的物体。<br />
-<br />
-项目及演示：<a href="http://www.yoloworld.cc/">yoloworld.cc/</a><br />
-论文：<a href="https://arxiv.org/abs/2401.17270">arxiv.org/abs/2401.17270</a><br />
-GitHub：<a href="https://github.com/AILab-CVC/YOLO-World">github.com/AILab-CVC/YOLO-Wo…</a><br />
-在线体验：<a href="https://huggingface.co/spaces/stevengrove/YOLO-World">huggingface.co/spaces/steven…</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTU0OTMyODUyOTUyNDczNjAvcHUvaW1nLzYzQWhDVl8yeXRfREZGaDMuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1755450144504586505#m</id>
-            <title>以后聚会不用担心没有话题聊了
-
-各玩各的
-
-也不尴尬了😐</title>
-            <link>https://nitter.cz/xiaohuggg/status/1755450144504586505#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1755450144504586505#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 08 Feb 2024 04:35:03 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>以后聚会不用担心没有话题聊了<br />
-<br />
-各玩各的<br />
-<br />
-也不尴尬了😐</p>
-<img src="https://nitter.cz/pic/enc/YW1wbGlmeV92aWRlb190aHVtYi8xNzU1MzAwMjgxMjEyOTE5ODA4L2ltZy94c29tTFQyVU51ZDlMZWVqLmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1755445005739753592#m</id>
-            <title>Archax：是一款搭乘操作型机器人
-
-通过驾驶舱进行直接操控，用户可以打开舱盖，进入驾驶舱，与机器人合为一体进行操控。
-
-26个关节自由度，有机器人 / 车辆两种模式。
-
-驾驶舱内部设有四面显示屏，用于显示机器人外部的摄像头画面。
-
-包括机器人前后、左右的视角。九个自动切换的摄像头确保了最佳视野。显示屏还能同时展示速度、机体倾斜角度、电池剩余量、手臂和机体状态等关键信息，以辅助操作。
-
-主要规格：
-
--总高度：4.5米
--重量：3.5吨
--模式变换：机器人模式 / 车辆模式
--最高速度：10km/h（在车辆模式下）
--驱动方式：前轮转向、后轮驱动
--动力来源：电池驱动（DC300V）
--关节自由度：26个
--操作方式：搭乘操作和遥控操作
--操作设备：双摇杆、双踏板和触摸面板
--显示系统：4个显示屏和9个摄像头（可切换显示）
--材质：钢（SS400系）、铝合金和FRP / 3D打印（ASA）</title>
-            <link>https://nitter.cz/xiaohuggg/status/1755445005739753592#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1755445005739753592#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 08 Feb 2024 04:14:38 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Archax：是一款搭乘操作型机器人<br />
-<br />
-通过驾驶舱进行直接操控，用户可以打开舱盖，进入驾驶舱，与机器人合为一体进行操控。<br />
-<br />
-26个关节自由度，有机器人 / 车辆两种模式。<br />
-<br />
-驾驶舱内部设有四面显示屏，用于显示机器人外部的摄像头画面。<br />
-<br />
-包括机器人前后、左右的视角。九个自动切换的摄像头确保了最佳视野。显示屏还能同时展示速度、机体倾斜角度、电池剩余量、手臂和机体状态等关键信息，以辅助操作。<br />
-<br />
-主要规格：<br />
-<br />
--总高度：4.5米<br />
--重量：3.5吨<br />
--模式变换：机器人模式 / 车辆模式<br />
--最高速度：10km/h（在车辆模式下）<br />
--驱动方式：前轮转向、后轮驱动<br />
--动力来源：电池驱动（DC300V）<br />
--关节自由度：26个<br />
--操作方式：搭乘操作和遥控操作<br />
--操作设备：双摇杆、双踏板和触摸面板<br />
--显示系统：4个显示屏和9个摄像头（可切换显示）<br />
--材质：钢（SS400系）、铝合金和FRP / 3D打印（ASA）</p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTU0NDM4MjAwMTQzMjE2NjUvcHUvaW1nLzd6RE4zcnNlWHR5Ri1wNlguanBn" />
                 ]]>
             </content:encoded>
         </item>
