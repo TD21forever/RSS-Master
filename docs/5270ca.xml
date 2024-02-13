@@ -75,6 +75,52 @@
         </item>
         
         <item>
+            <id>https://sspai.com/post/86327</id>
+            <title>用Notion + Excel来做新年预算</title>
+            <link>https://sspai.com/post/86327</link>
+            <guid isPermaLink="false">https://sspai.com/post/86327</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 05:35:23 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 年终奖, 调薪涨薪, 个人预算, 实际花销
+<br>
+<br>
+总结: 年末时，应该对个人预算和实际花销进行总结，制定未来一年的个人预算。通过记录收入和支出两个维度来进行预算。收入端可以根据过去一年的总收入情况和未来的变化来预测未来一年的预期收入。支出端可以通过记录过去一年的预算计划和实际完成情况，评估异常情况，并制定未来一年的总预算。 </div>
+                        <hr>
+                    
+                    <p>又到了年末，无论有没有年终奖、有没有调薪涨薪，但总该来看一看过去的这一年个人预算和实际花销，以及制定未来一年的个人预算（看看明年还能剁几次手，说走就走的旅程还能进行几次，裸辞还能撑几个月。。。）。记账我用的是MoneyWiz，用法和记账的方法论已经有很多了，站内也有很多大佬做了很多的经验分享和教程，我这边就不赘述了。主要来讲用Notion和Excel来做年终的预算总结。</p><p>毕竟只是个人，所以主要从两个维度来看预算：</p><ol><li>收入端：过去一年的总收入情况，税收、社保等支出情况，以及结合年末自身收入的变化（调薪、年终奖等）来预测未来一年的预期收入</li><li>支出端：过去一年的总预算科目计划与实际完成情况，并对其中的异常情况作进一步的评估，并依次来做好未来一年的总预算</li></ol><h2>收入端</h2><p>收入端就比较好统计，如果是自由职业者或者是项目制的小伙伴，就按照自己平时的个人所得以及对未来一年行业的变化来做收入预估，可以稍微谨慎一点以防未来收入出现较大的变动影响到预算的执行。</p><p>我这边就给一个稳定拿工资，按照标准情况来缴纳社保和公积金的上海打工人小王来举例（假设小王2021年全年工资20000/月，2022年25000/月，2023年30000/月，2024年涨薪到35000/月，以下所有开支数字均是随机函数生成）</p><p>一般来说，在上海社保基数调整时间统一改到了每年的七月份，所以从每年的七月份开始一般公司和个人所交纳的社保和公积金的基数就会发生变化，一般来说都会按照上一年的平均工资来计算新的公积金基数。</p><p>所以我按照标准的规则，以及目前个人所得税的税档来做了以下Excel表格（如有需要的小伙伴，可以在文章末尾的链接自取）。如下可以看到：</p><p>如果小伙伴们想要自己简单的测算一下，可以更改左侧表中的税前工资、社保、公积金以及专项扣除四个栏目，就可以自动计算出税后薪金以及全年的收入。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/02/05/57d3d7b82e858f41980f19c2722b0a37.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>支出端</h2><p>支出端统计以及总结的方法有很多种，像我的话是平时用Moneywiz集合它的预算系统来进行记账，这样每个月末以及每年末的时候我就可以很方便的通过Moneywiz的报表来看过去的一年的预算、支出情况，以及重点的科目的支出情况，最终汇总到Notion。 如果不用Moneywiz的小伙伴甚至是不记账的小伙伴也都可以用支付宝、微信的月度统计来做。</p><p>有些小伙伴可能会说，MoneyWiz不都有报表和review了吗，为什么还要重复造轮子。因为是Notion的深度用户，所以想要在Notion总结以及记录月度的数据，以及可以和其他的计划综合在一起比较好和直观的管理个人的财务。</p><p>目前Notion关于预算管理的主要有两个核心的Database： Budget Log 和 Bonus Log。</p><h3>Budget Log</h3><p>这个database的主要功能就是记录月度的预算，以及月度的收支情况。如下所示（所有支出数据都是excel随机生成）：</p><ul><li>我的个人预算一般分成Daily，Food，Housing和Shopping，所以会在第一行有年初做的整体预算<code>2023 Year Budget</code>，然后每个月根据实际的支出情况填上之后，就可以在表格最下方看到实时的预算统计，剩下多少预算等等。也可以在每一行的Balance中看到月度现金流的盈亏情况</li><li><code>Shopping Bunus</code> 是一个Notion的Rollup，连接到另外一个Bonus Log的Database，用来在月度的现金流中统计入额外的奖金、补助、报销等等。具体设置见后文</li><li><code>2023 Year Budget</code> 点开来就可以作为一个单独的Page，每一年初的预算总结和新一年的预算配置，里面可以回顾过去一年为什么有些预算超支了，明年要如何调整等等</li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/02/05/281702de4e8d9c4e727f2a7f9a3bcb1e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/02/05/fc5b7a793d8092d9248b8ef62f71cb7f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&nbsp;</p><h3>Bonus Log</h3><p>这个Database就是用来记录额外的收入，包括年终奖、奖金、补助、报销等等。具体的类目可以在Name栏中填写，然后在<code>Yearly Budget Log</code> 的relation中选择具体发生的月份，这样在上一个Budget Log的database中就会自动统计了</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/02/05/67aa3a1e6c3da2a1f3db078218e9466c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>在制定年度的预算的时候</h3><p>在后面附上的Excel中，也做了类似的模板，可以帮助进一步直观的看最终的总结（如下）。当然目前Notion和Excel的表格并不是联动的，但想进一步的同学们可以通过Google Sheet和Notion来进一步数据联动。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/02/05/c3433e59fda6f6732fe5e90320113b09.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>写在最后</h2><p>年度预算的目的其实是为了更好的知道自己过去一年赚了多少钱，花了多少钱，花在那些科目上，并且根据个人情况更好的为新的一年的计划留出预算和做好准备。</p><h3>Link：</h3><p><strong>Excel模版</strong>：</p><p>链接: <a href="https://pan.baidu.com/s/1EQwf2mdqjgCTsWIRBySKEg?pwd=2666">https://pan.baidu.com/s/1EQwf2mdqjgCTsWIRBySKEg?pwd=2666</a> 提取码: 2666</p><p><strong>Notion模版</strong>： <a href="https://www.notion.so/Budget-Review-Example-2e05983d28db41b088cee5a71fb3c8b3?pvs=4">https://www.notion.so/Budget-Review-Example-2e05983d28db41b088cee5a71fb3c8b3?pvs=4</a></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/86274</id>
+            <title>真情侣，不记账：用支付宝荷包 + 飞书多维表格建立消费记录与分析系统</title>
+            <link>https://sspai.com/post/86274</link>
+            <guid isPermaLink="false">https://sspai.com/post/86274</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 05 Feb 2024 05:20:01 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 情侣, AA制, AB制, 共同账户
+<br>
+<br>
+总结: 本文介绍了情侣间共同支出的两种方式：AA制和AB制。AA制是指每个人支付相同的费用，而AB制是将共同消费的人员分为A角和B角，A角承担大部分费用，B角只承担少部分费用。文章还介绍了建立共同账户的步骤，并推荐使用支付宝小荷包作为共同账户的工具。然而，支付宝小荷包的统计分析功能有限，只能统计月收入和月支出，无法对支出的构成进行分析。因此，作者推荐使用飞书的多维表格进行数据清洗和分析。 </div>
+                        <hr>
+                    
+                    <p>本文适用于有以下消费习惯的情侣：</p><ol><li>对于情侣间的共同支出，采用 AA 制或 AB 制。</li><li>AA 制，就是在一起消费时，每个人都是A角，所有费用共同平均负担，每个人支付一样多；</li><li>AB 制，将共同消费的人员如演员角色分配一样分 A 角、B 角，B 角做 A 角的替补，因此共同消费中，A 角承担大头如 3/4 额度，而 B 角只担一小部分剩余的 1/4 额度。</li><li>双方有较深基础的信任。</li><li>薛定谔地懒，不想逐笔记账、分账。</li><li>但又想知道两个人到底花了多少钱，花在了哪里。</li></ol><h2>整体思路</h2><p>第一步，确认两边的比例，比如 1:1 或 2:1；</p><p>第二步，建立起共同账户，按照比例存入金额，比如两边都各放 1000；</p><p>第三步，在月末分别导出账单，筛选出使用共同账户流转的金额，合并成为当月的数据源；</p><p>第四步，将数据源导入数据模版进行数据分析，并生成逐月报表、累计报表。</p><h2>工具选择</h2><p>共同账户之所以选择支付宝小荷包，一方面是便捷性，它背靠支付宝，<strong>不需要额外下载和管理新的应用</strong>，安全性也得到了保障；另一方面当然是通用性，<strong>能选择支付宝支付的账单占到了通用场景的 90%</strong>，剩下的 10% 也可以通过从共同账户转出并备注的方式得以补充，确保了数据的完整性。</p><p>唯一令人惋惜的是，支付宝小荷包的统计分析不能说是一片空白，只能说是毫无意义。目前小荷包的统计分析能做到的只有统计月收入、月支出，形成月收入和月支出的折线图，<strong>不会对支出的构成进行分析</strong>。更鸡肋的是，作为一个共同账户，小荷包特别在统计部分展示了成员的收支情况，这就像是我给我们家买了一个锅，小荷包执着于把这个锅的帐记到我一个人头上。</p><p>明明我们需要关注的是这个锅本身：如果买一个锅就占到了全部支出的50%，那我们是不是应该下次一起挑选锅的时候能更具有性价比一些。</p><figure class="image ss-img-wrapper image_resized" style="width: 323px;"><img alt="KZuQb2OEAoYU3Fx2rTtc5biUnaf" src="https://cdn.sspai.com/editor/u_/cmufj45b34ten6781od0?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>当然，这也可能是由于支付宝小荷包主打的场景是「攒钱」，把更多的精力放在打造「荷包圈」——一个公布自己攒钱进度并在评论区引流如何一天赚几千方法的平台。</p><p>为了弥补小荷包统计分析上的不足，我只能亲自上阵做数据清洗和数据分析。飞书的多维表格是我的不二之选，它灵活、美观，在后面的具体使用中会结合场景进一步说明。</p><h2>使用说明</h2><h3>首先，存钱、花钱。</h3><p>在支付宝搜索「小荷包」，新建「情侣用小荷包」，预估一下共同支出的额度，按照比例放入金额；在小荷包金额不足的时候，再及时按比例补充。</p><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2024/02/05/17e2c71b66b6d09d5351217c113a1884.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2024/02/05/036e47cb9a83134114665e68b9f9cf48.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在共同支出时，有以下两种方式进行共同账户支出：</p><ol><li>正常扫一扫或者出示付款码，在下方切换到<strong>「支付宝小荷包」</strong>进行支付；</li><li>在支付宝首页进入到<strong>「小荷包」</strong>界面后，通过页面内的扫一扫和付款码进行支付。</li></ol><p>以上两种<strong>直接</strong>使用小荷包付款的支出会由支付宝<strong>自动分类</strong>，比如小卖部的账单会自动列为「生活百货」，火车票会自动列为「交通出行」，无需手动分类。</p><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2024/02/04/80da74cc9a2b9fbb2498b98bf4fe1e93.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2024/02/04/bfcd72053f331b3f8d9241e546fb8a48.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果因为支付渠道受限或者忘记切换，使用了其他钱包进行支付，可以到「小荷包」中<strong>「转出」</strong>，选择「转给自己」或者「转给他人」，在转出理由中备注花在什么东西上了，需要在数据清洗环节根据这个备注来对支出进行手动归类。</p><figure class="image ss-img-wrapper image_resized" style="width: 323px;"><img alt="RQJFbXFuxoM9FYxE9HpcG48gnLh" src="https://cdn.sspai.com/editor/u_/cmufj5db34ten6781oe0?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>其次，导出，清洗。</h3><p>通过身份证密码后六位分别解密解压流水文件，以其中一方的数据源为基础，<strong>合并另一方的数据源到同一表格</strong>，在这一个表格上进行数据清洗的工作。</p><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2024/02/04/88f75c2a5dae5c1e8ebf5e867a54838b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2024/02/04/dc10f1a4e1b52e68afa40c46ca600b4c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>数据清洗包括以下几步：</p><h4>1.删去冗余信息</h4><figure class="image ss-img-wrapper"><img alt="A4b2bvgxDoMcZsxvNgKcbo8wnKe" src="https://cdn.sspai.com/editor/u_/cmufj65b34ten0fq333g?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h4>2.取出通过共同账户消费的记录</h4><p><strong>2.1 直接通过小荷包进行的消费</strong></p><p>在「收/付款方式」中筛选出包含「小荷包」的记录，在「交易状态」中筛选出包括「交易成功」和「等待确认收货」的记录，这一步是为了剔除那些退货退款的记录；</p><figure class="image ss-img-wrapper"><img alt="LqXnbdPa5oORMvxIeSjcA4aAnth" src="https://cdn.sspai.com/editor/u_/cmufj6lb34ten0fq3340?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img alt="STfIb4hxmoMZfdxwV8dcwyjYnPc" src="https://cdn.sspai.com/editor/u_/cmufj6tb34ten0fq334g?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>接下来，检查「交易分类」中的自动分类，因为支付宝的自动分类中会有一项叫做「酒店旅游」，为了更好地区分场景，我一般会根据商品说明，再特别手动把这一类拆分为「酒店住宿」和「旅游景点」，也可以保留原有的自动分类；</p><p>将结果取出到「清洗后」的工作簿。</p><p><strong>2.2 通过小荷包转出并备注进行的消费</strong></p><p>取消前面的筛选，重新设置筛选条件；</p><p>在「交易对方」中筛选包含「小荷包」选项，在「收/支」中筛选「收入」，并将「商品说明」一栏的列宽增加，就可以看到当时消费后备注的具体事项了；</p><figure class="image ss-img-wrapper"><img alt="XRANbSyUfoSNylxcGdmcveyxnWK" src="https://cdn.sspai.com/editor/u_/cmufj75b34ten5sgimi0?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>区别于 2.1 的记录，此类记录无法自动生成分类，全部都显示为「转账红包」。所以还需要手动调整「交易分类」这一列的内容。结合自动分类以及实际场景，目前数据表盘中的分类可参考下列：</p><ul><li>家居家装</li><li>日用百货</li><li>充值缴尹</li><li>餐饮美食</li><li>生活服务</li><li>住房物业</li><li>交通出行</li><li>医疗健康</li><li>服饰装挠</li><li>文化休闲</li><li>运动户外</li><li>人情往来</li><li>酒店住宿</li><li>旅游景点</li></ul><figure class="image ss-img-wrapper"><img alt="FCjQb6LYToqsB0xbPkhcbDMlnem" src="https://cdn.sspai.com/editor/u_/cmufj7db34ten5sgimig?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>将结果取出到「清洗后」的工作簿。</p><h3>最后，导入，分析。</h3><h4>数据表</h4><p>将清洗后的数据复制粘贴到飞书多维表格模版的数据表中，模版可参考以下链接：</p><p><a href="https://o90hpulfak.feishu.cn/base/Cq7UbVoF0aVPWKsD1pTcNAronKc" target="_blank">https://o90hpulfak.feishu.cn/base/Cq7UbVoF0aVPWKsD1pTcNAronKc</a></p><h4>累计报表</h4><p>根据模版中内嵌的表格和表盘，无需二次配置就可以获得的数据分析包括：</p><p><strong>各项开销（除住房外）分组聚合折线图</strong></p><p>该折线图可通过点击具体的类别，查看该类别随时间发生的变化，并可定位到消费激增的月份。</p><figure class="image ss-img-wrapper"><img alt="ETJ1bGm7VoNcXpx24UCcEVnGnhE" src="https://cdn.sspai.com/editor/u_/cmufj7lb34ten0fq3350?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>各项开销分布（累计）</strong></p><p>该饼图可对消费的各项占比有直观的了解，发现帝都的租房不是贵啊，是要人命啊。</p><figure class="image ss-img-wrapper"><img alt="Cb1HbJl61oNZy2xciN2cC1annBb" src="https://cdn.sspai.com/editor/u_/cmufj85b34tenbpbvq10?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>除住房外开销分布（累计）</strong></p><p>该饼图可对除住房外的各项占比有直观的了解，发现我们不是在吃饭就是在去吃饭的路上。</p><figure class="image ss-img-wrapper"><img alt="NyYfb1fXLoSi3UxCUMMcT35DnJf" src="https://cdn.sspai.com/editor/u_/cmufj85b34ten0fq335g?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>累计总支出数与历史月份支出</strong></p><p>该数据统计主要是看个大数，具体的每月支出可以到逐月报表中查看。</p><figure class="image ss-img-wrapper"><img alt="HZF4b1Bv5oNe57xS7xzcazhSn8b" src="https://cdn.sspai.com/editor/u_/cmufj8lb34ten6781of0?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在这一页面中，选择左上角的「添加组件」，选择「统计数字」，按照下图的条件进行配置，并拖动生成的表盘到合适的位置，即可新增最新月份的数据。或者复制已有表盘，在「筛选数据」中更新筛选条件为最新的月份即可。</p><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2024/02/04/b8d3b2a1180b9b950c06f46d33d5c91c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2024/02/04/f0a6e3662192f769fac2e71de8d61abd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>当然，这一步也可以前置，批量配置好一整年的表盘，在数据导入后就能自动计算和呈现。</p><h4>场景报表</h4><p>除日常开支外，涉及到的旅行场景就可以根据旅行出行日期进行配置，得到特定场景下的开支分析。为了实现这一点，在数据导入的时候需要手动修改消费时间，比如 12.15 支出的旅行车票，会被手动修改为 12.31 支出，视为元旦假期旅行场景中的数据。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/02/05/c538f7370e2ec7d5a22b58cb57f40728.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img alt="MdkvbD5M3otCGNxw2xhc7RgLnBe" src="https://cdn.sspai.com/editor/u_/cmufj9tb34ten6781og0?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h4>逐月报表</h4><p>逐月报表左侧的饼图，展示的是除去场景支出、租房支出的生活支出分布，右侧展示的是除去场景支出、租房支出的生活总支出，通过浏览这一数据表，能较为直观地纵览每个月的生活支出变化。</p><p>也可以通过点击饼图，查看到具体的支出明细。</p><figure class="image ss-img-wrapper"><img alt="E0rubutybok1WbxgzMScvK6Rnhd" src="https://cdn.sspai.com/editor/u_/cmufja5b34tenbpbvq2g?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在这一表盘中，需要通过添加组件或复制现有表盘，来生成新一月的数据分析。</p><figure class="image ss-img-wrapper"><img alt="PZSyblC9qoAsPBxbQrNcFvsinGp" src="https://cdn.sspai.com/editor/u_/cmufjatb34tenbpbvq30?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>以 1 月数据为例，由于 1.1 的数据视为元旦假期旅行场景的支出，在配置时会按照以下条件进行配置，<strong>来达成去除旅行场景支出的目的</strong>。另外，由于住房物业一般是三个月交一次，并且每个月的变化几乎没有，所以<strong>将它从生活支出的表盘剔除</strong>，只在累计表盘中体现。</p><figure class="ss-imgRows"><img alt="" src="https://cdn.sspai.com/2024/02/04/4407bdb9b47a89ca06ad657785b7e9aa.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdn.sspai.com/2024/02/04/ee804ce501619c85be7d2575984e3c17.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>同理，对数字仪表盘也做相同条件的配置即可。上述的每个表盘都可以通过右上角的「更多」进行配置、重命名和复制。</p><figure class="image ss-img-wrapper"><img alt="DQl4bIpvaoD1MXxU0L2cKnCKnmg" src="https://cdn.sspai.com/editor/u_/cmufjblb34ten6781ohg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>写在最后</h2><p>显而易见，这种数据分析的实现路径还是太长了，在支付宝小荷包的产品经理意识到这是一个非常刚需的功能点之前，还是需要个人投入一定的时间和耐心进行数据的清洗和分析。</p><p><strong>这种方式只是一定程度上省去了「记账」的动作，而无法完全坐享其成</strong>。另外需要特别说明的是，每对情侣、夫妻都有自洽的消费习惯和经济水平，这篇文章的做法仅限于很小一部分的群体，希望能给这部分用户一些自己的经验和模版，也绝对尊重不同的观念和习惯。另外，这种涉及资金转入转出的方式<strong>不适用于尚未成熟的、未建立强信任的恋爱关系</strong>，毕竟防人之心不可无。</p><p>最后还是谢谢飞书多维表格，灵活的配置、数据的穿透、舒服的UI在这应用场景中缺一不可。</p><p style="margin-left: 0px;">&gt; 关注 <a href="https://sspai.com/link?target=https%3A%2F%2Fwww.xiaohongshu.com%2Fuser%2Fprofile%2F63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/85961</id>
             <title>为了养成每日自我提升的习惯，我开发了ReHabit</title>
             <link>https://sspai.com/post/85961</link>
@@ -415,176 +461,6 @@
                         <hr>
                     
                     <p>去年看了三本有关佛学的书，分别是《观呼吸》、《洞见：从科学到哲学，打开人类的认知真相》、《思辨的禅趣》，此前还看过季羡林《佛教十五题》。一共四本，各有偏重。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/8c56000ad3a3b589adffe733d8dc96c0?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>《观呼吸》讲正念冥想的方法，《洞见》试图从科学角度解释佛学和冥想，《思辨的禅趣》是夹叙夹议地剖析佛教经典《坛经》，也会涉及的佛学的演变，《佛教十五题》是偏向学术研究，讲历史，讲来龙去脉的。</p><p>说是读过，但目前残留在脑海中的不多，就印象较多的、感触较深的《洞见》说起。</p><p>《洞见》试图从科学的角度证明正念冥想的有效，解读佛学的科学性，将玄乎其玄的各方流派和典籍言论，抽丝剥茧，留下最本质，最原始的教义和方法。本书英文名为《Why Buddhism is True?》（为什么佛学是真的？），这里的“真”是指，是否符合“科学”这一量尺。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/95c58999a53e99703d6e6d04af8f19ec?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>其实，书中的大部分科学知识之前都知道，都是心理学、神经学的研究，比如弗洛伊德提出的意识与潜意识(这学说貌似并不被科学界认可)、大脑的模块化分工等，作者是将这些科学发现作为佛学的某些观点支撑，便完成了“佛学是真的”这一论证。</p><p>举个例子。佛学说，无我。科学角度看，大脑是分模块运行的，各个模块竞争，将潜意识挤进意识层。而这其中，没有一个所谓的“自我意识”存在。理性存在，但是理性不作用于抉择，而是理性引发感觉。归根到底，是感觉与感觉的竞争。</p><p>大概逻辑是，大脑分为各个模块，各个模块产生的感觉强弱，竞争上岗。胜者进入意识层，促成行为。所以，这其中哪有一个一成不变的“我”。</p><p>而冥想的原理与真实体验也与这一科学理论相互印证。旁观者观测一念一念的起起落落，置身事外。剔除“五蕴”，留下最内核的“自我”。</p><p>不过，这里又与无我概念有矛盾，《思辨的禅趣》作者对这种前后矛盾颇有微词。我认为，有没有自我与冥想不矛盾，正念冥想可以看做是抛丝剥茧的“自我”提纯过程。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/0c3dc7ace2ed116a7b725de4e4cfb4c4?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不过，在看过《思辨的禅趣》之后，难免怀疑作者只是把能用科学解释的内容保留，甚至还有篡改佛学教义的嫌疑。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/35e57e1dded5f7f932a8f7ed8d153671?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我们都知道“苦海无涯，回头是岸”这句话，小时候的电视剧里总会有老和尚故作高深、语重心长地缓缓吐出这八个字。之所以流传甚广，在于这句话也道出了佛教的根本主旨——厌世。而坐禅冥想是为了破执，让人们明白这滚滚红尘都是幻象，无论好坏，都是虚幻的。只要悟透这点，便能逃脱六道轮回，修成正果，抵达彼岸。</p><p>而《洞见》一书讲的却是，冥想如何让人活得更好，只对坏情绪、坏感受一通审视打击。要知道，那些快乐、开心、愉悦等积极情绪，在佛眼中都是“苦”。所以说，当代冥想所追求的目的，与佛教根本主旨南辕北辙。</p><p>不过，教义的对错，大部分人并不在意，而且教义也不是一成不变的。两千年过去了，走样儿是难免的。而且这些荒腔走板不是口口相传的误差，而是因地制宜、因势利导的变通。</p><p>佛教（任何宗教同样）东传来到我国，教义、教规都得结合咱们的习俗和文化进行改良，更重要的是不要和政策对立。《佛教十五题》一书中，讲了灭佛运动，便是因为人们纷纷遁入空门，影响了国家的财政税收和兵役徭役。当然，也有成功案例，比如儒教，便是一个有助于统治者管理和统治的伦理宗教。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/ef5397e0dfa69b36c1aa3e6c17a29817?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>另外，佛教教派众多，最终能传下来的、为大众熟知的却只有那几个。与其说是优胜劣汰，不如说是劣胜优汰。它们之所以能流传下来，便是迎合了大众的知识水平和审美情趣，对复杂内容进行简化。</p><p>就像成功学，人们需要的只是一句简单直接、朗朗上口的口号，而不是复杂且不确定的论证过程。所以，你只需要告诉世人，吃斋念佛、打坐拜佛便能得到佛祖的庇佑。禅宗最大的优势，在于顿悟，刚才还手握屠刀，一刹那的顿悟，便能成佛。你想想，这说法得多受人民群众，尤其是恶人的欢迎。</p><p>时间发展到现在，佛教已经发展成了一个入世的宗教。</p><p>当代人了解佛学，只不过是希望给心灵一个寄托，即便修成佛教中的“正果”，也不过是成为一个不喜不悲、或者是豁达开明、拿得起放得下的人（感觉这是一个可以进一步探讨的命题，而世人只不过希望眼前的生活能更轻松些。若是作为心灵寄托，尤其是近些年的正念冥想，是可操作的实在手段，不说立竿见影，也能让生活苦海不那么苦。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/bdb7b9be7b9bb964a9e30206eb8340c9?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>所以，《洞见》的内容构成也是以正念冥想为主，辅以教义。西方早就流行冥想，乔布斯、约翰·列侬上个世纪五六十年代就去印度、日本禅修。禅宗思想还是嬉皮士精神不可或缺的重要组成部分。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/458d4be09649f15ccf5da21ddf92e251?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如今，正念冥想在中国流行起来。记得此前梁文道曾经在节目中提到过。当时还觉得挺遥远，要专门腾出时间，去东南亚某国封闭修行，远离外界喧嚣，放下手机和网络，每天的吃食应该也是以清淡的素食为主。只不过，他形容的这一切，透着一丝神秘和一股子钱的味道。</p><p>当时代发展遇到阻碍，浪潮下的人，遇到无法快速解决的现实问题，改变自己看待事物的认知是最快的方式。于是，各种心理按摩和抚慰纷至沓来，将人们无处安放的心稳稳接住。</p><p>如今为了方便广大人民的迫切需求，冥想也借助高科技逐渐普及，在家修行即可，早起和睡前想一会，操作便利。找冥想老师更是无需访名山，寻高师。手机软件市场上就有好几款冥想APP，花钱买课，赛博老师教你内观，每日打卡。功能上，更多了些实用性，如助眠。同时，也剥离了宗教属性。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/08e18ddbe29bba75af1aab9861c73a8b?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>但也要警惕，这里边也混迹着各种大骗小诈，慌不择路的人难免落入其中。前些日子还有个新闻，所谓的精神导师诱导信徒透支消费，结果本就飘忽不定的人生还将负债累累。</p><p>尽管《洞见》在用科学解释冥想这件事，也在见缝插针地讲了一些可操作的冥想方法，但更具操作指导意义的是《观呼吸》这本书。如果真想入门冥想，推荐阅读。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/26/article/4cc8c0d6080c73bd5a1ee0b6ec4743a0?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><br /><br />&nbsp;</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/86092</id>
-            <title>《流言终结者》主持亚当·萨维奇是如何成为连环技能收集者的</title>
-            <link>https://sspai.com/post/86092</link>
-            <guid isPermaLink="false">https://sspai.com/post/86092</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 25 Jan 2024 15:01:01 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 流言终结者, 创客, 材料, 胶水
-<br>
-<br>
-总结: 《所有工具都是锤子》是《流言终结者》主创亚当·萨维奇的自传，从创客的视角出发，讲述了如何成为一个创造者。书中详实介绍了材料和胶水的选择，对手工爱好者和美术部门从业者有很大帮助。作者自称为"连环技能收集者"，他学习新技能的目的是为了解决问题。书中还介绍了列清单和勾选框的方法，提高工作效率。 </div>
-                        <hr>
-                    
-                    <p>我最近无意间接触到了《流言终结者》主创亚当·萨维奇撰写的自传——《所有工具都是锤子》，他在这本书主要是从一个创客的视角出发，讲述如何从头开始去做一个创造者，本书甚至有一整个章节专门介绍什么样的材料应该用什么样的胶水，内容之详实，对于手工爱好者，或者影视行业的美术部门从业者来说，这本书应该可以帮助他们增进许多实用的知识。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/f89631deb9d01c1f2f82bdb68668214b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>《流言终结者》两位主持亚当·萨维奇（左）和杰米·海纳曼（右）</figcaption></figure><p>我本人，严格来说，不太属于本书的目标受众，但我仍看得津津有味。一方面是书中讲到了颇多《流言终结者》和好莱坞电影的幕后趣闻，这是我感兴趣的内容，另一方面，虽然我不是一个制造实物的创造者，但也勉强算得上是一个数字内容创作者，书中作者分享的许多关于工作心态、工作方法的内容，也适用于创作者重新审视工具、重新思考解决问题的方式。</p><p>我尤为喜欢书中作者戏仿「连环杀人犯（serial killer）」一词，称自己为「连环技能收集者（serial skill collector）」，他学习新技能的目的不是单纯为了学会它，而常常是为了完成某个项目，进而自发地去学习新技能，让新技能成为自己「解决问题工具箱」里的工具，接下来的内容就是他在成为「连环技能收集者」的过程中收获到的窍门。</p><h2>井井有条</h2><p>作者在工作中最常用的两种提高工作效率的方法，其实我们生活中应该也经常会提到和用到，一个就是「列清单」，另一个就是「勾选框」。</p><p>因为作者最大的兴趣爱好，就是完美复刻出影视作品里的道具，为了追求到百分之百地复刻，列清单就是最有效避免任何细节遗漏的手段。</p><h3>为什么要列清单？</h3><p>列清单可以把杂乱无章的事项整理得有序，让我们对当前项目有全局的了解，清楚目前的进度，以合理地安排时间，避免最后期限到来时才后知后觉根本来不及完成任务，因而陷入崩溃状态。</p><blockquote><p>一份完整、详细列出所有部件的清单能让你清楚地看到它们之间的关系。它既能帮助你直观地看到项目的进展，也能使你免于被挫败感击倒。</p></blockquote><h3>如何列任务清单？</h3><h4>1. 罗列所有信息</h4><p>将关于目前这个项目的所有信息都罗列出来，是一个「清空大脑」的行为。</p><p>「清空大脑」，几乎在所有 Getting Things Done 教程中，都会提到这一点，对于普通人来说，完全依靠大脑来记住所有的事情几乎是不可能的，事情越多、越杂、越细，就越充满干扰。</p><p>我常常会把大脑记忆比作计算机的内存，用于存储临时数据、处理当前任务，它访问速度快、执行效率高，但缺点就是容量小。如果计算机同时执行多个耗费性能的程序，那么就会出现卡顿等问题，我们对大脑的使用也是如此。所以，其他眼下无暇处理的事务，就先存储在计算机的硬盘吧，也就是用纸笔或者软件应用记下来。</p><p>在罗列信息的时候，作者提到，不必担心制造出一堆乱糟糟的信息，或者是内容不够详细具体。</p><p>他举了皮克斯编剧安德鲁·斯坦顿（《海底总动员》、《机器人总动员》导演、编剧）的话作为例子。安德鲁在为一个团队做咨询的时候，直截了当地说，在项目初期情况一定会一团糟，但这是正常的，无需在初期阶段追求质量。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/3d4453d43e9c615dd2afc63405b7be41.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>安德鲁·斯坦顿（右）凭《海底总动员》获得奥斯卡最佳动画电影奖。</figcaption></figure><p>清单也不会一次性就能够全部列完，随着工作开展，会不断遇到新问题，或者发现任务 A 的执行，需要先依赖任务 B 的完成，这时候就需要对清单进行补充。</p><p>但是，列清单是可以永无止境的，只要不断追求更高的细化程度，清单就可以一直列下去，而我们的目的其实并不是要列出一份究极详细的清单，而是要借助这份清单去完成任务。所以，在列到一定程度，比如足够让人了解任务的大概模样之后，就可以动手去做了。</p><h4>2. 整理分类</h4><p>将信息罗列出来之后，第二步就是整理分类这些信息。</p><p>作者的方法是将其整合成连贯有序的操作步骤，因为每个人的分类规则各异，可以根据自己的实际情况进行整理，我在这里就不多赘述了。</p><h4>3. 动工</h4><p>整理完之后，第三步，动工。</p><p>虽然作者会将清单整理成有顺序的操作步骤，但实际上他说他更喜欢先从清单中最棘手的部分开始入手，既解决了最难的问题，等到收拾其他问题就轻而易举了，也避免在最后截止时间快到时才发现还有一个非常耗费时间和精力的难题等待解决。</p><p>但个人认为，不是一定要像作者一样从最难的部分开始，或许有的人可能会因为太困难，心中更加焦虑从而导致拖延，每个人都会有自己的工作方式，不必认为他人的方式一定就是最优解，适合自己的才是最有用的方法。作者也在书中提到这一点。</p><blockquote><p><strong>你的理念只能也只该属于你自己。</strong> 你对重大问题的答案可能跟别人不一样。也许像尼克·奥普曼一样，当一切顺其自然推进时，你工作起来最得心应手；或者像杰米一样，当一切按部就班进行时，你的头脑最具创意，双手最有效率。</p></blockquote><p>在一步步解决清单上的任务的过程中，作者的另一个常用方法「勾选框」就派上了用场。不过，他所用的不是在已完成的任务前打勾，或者划掉已完成的任务，而是涂抹勾选框。</p><p>这个方法是他在工业光魔特效公司（乔治·卢卡斯为制作《星球大战》而创立的公司，曾获得过 15 次奥斯卡最佳视觉效果奖）学到的。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/b8f2566f98b6fadeb2eea00319d89d2f.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>工业光魔特效师们正在制作《星球大战》中的千年隼模型。</figcaption></figure><p>如果任务 100% 完成了，就把整个方框涂黑。<br />如果任务完成进度超过 50%，就沿对角线将方框涂黑一半。<br />如果任务尚未开始或无法衡量进展，就先将方框留白。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/b14397213d83a2b29ff690ca50debc44.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>作者执行他的勾选框准则。</figcaption></figure><p>这样做，比打勾更好追踪进度，也不会因为划线而让清单变得难以辨认、复盘。</p><h4>4. 清单可以休眠</h4><p>基于作者的工作内容，他时常会中途搁置一些项目的进展，比如在制作某些电影道具时遇到无法解决的细节问题，只能等到日后有更多资料时方能继续开工，又或者是忙得不可开交，无法一口气完成项目，像是他想要制作《异形》中凯恩的太空服，开始时是 2002 年，等到他真正完成制作已经是 2014 年了。</p><p>而我们自己，也必定有过类似的经历，在做某件事的时候，有更重要的任务要去完成，那手头上的事情肯定要搁置一旁。</p><p>这种暂时搁置清单的状态，他称之为「清单休眠」。</p><p>在把这个清单休眠之前，他会做的事情是，再列一份关于这个休眠的清单的清单，记录哪些工作已经完成，还需要完成哪些工作，而自己下一步打算做什么。</p><p>如此一来，在之后再拾起这个项目时，你便能很快上手，无需再多花精力从头来过。</p><p>关于「清单休眠」这个方法，虽然在工作中暂时未有机会能够尝试，但我在玩游戏时却对此深有感触，比方说在追求游戏百分之百完成度的过程中，难免会遇到肝不动的情况，而我一旦放下这个游戏，又常常会时隔很久才会有机会再次拾起它，每当我重新打开游戏时，总是会忘记我是谁、我在哪、我要干嘛，需要花上一段时间来重新上手。这时候，如果我在暂时放下这款游戏的时候记下了当前正在进行什么任务、之后还有什么事情要做，可能就会好很多。</p><h3>整理收纳</h3><p>作者绝对不是一个极简主义者，会把办公桌收拾得整整齐齐的那种，相反，他可能是个「极繁主义者」。</p><p>他描述自己的第一间工作室，是用「公寓内部看起来就像好多个垃圾堆组成的地形图。就像当时我糊里糊涂的脑子一样，工作室里满是乱堆乱放的原材料、尚未成型的创意作品和回收利用的垃圾。当时我经常沿街捡垃圾，幻想自己是个拾荒艺术家。」来形容的。他认为这样的工作室虽然乱七八糟，但却充满活力。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/74414eac77419fe16bf1fc2c215e19ee.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>作者在他的第一间工作室中工作。</figcaption></figure><p>但就是这样一个喜欢捡垃圾、工作室里堆满工具的人，随着工作逐渐繁杂，工具逐渐增多，也深深感到整理的重要性。</p><blockquote><p>他（指《公园与游憩》中的角色尼克·普罗德曼）通常是怎么方便怎么来，比如拽过几个锯架和一些夹钳，借助它们来锯木料。当然，我年轻的时候也是这么做的。“不过，这需要更大的力气和敏捷程度，”尼克继续说道，“而且10%会出问题。我会不小心摔一跤，砸穿刚刚搭好的假墙。”我也是这样。</p></blockquote><blockquote><p>通常来说，我们的第一个工作室都充满活力但乱七八糟。不过，我们会一口咬定这是创造力的体现，但是随着距离的产生（无论是时间还是空间），我们就会意识到，混乱以某种方式阻碍了自己的创造力产出。</p></blockquote><p>尽管如此，他也不会是「断舍离」理念的拥护者，他认为「有一种方法能让你整理得干干净净，所有东西都收纳得看不见、贴上标签、按颜色排列，感觉就像监狱一样，让人倍感压抑。」，在美观和实用性之间更追求的是既要收拾，但要敞开，无遮无挡，用他的话来说就是「一目了然，触手可及，看似嘈杂，实则有序」。</p><p>其实就是把所有工具都放到一目了然的位置，不把工具收纳至看不见的地方，避免因为看不见而遗忘了工具的存在，接着在全开放式的基础上，他再对物品进行分类，让自己可以快速地找到工具所在。看起来乱，但对作者来说，这能让他的工作效率最大化。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/02734ab4d9643c6bd0f29bd1df669316.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>作者的开放式工具架</figcaption></figure><p>每个人都有更适合自己的整理方式，比如作者在《谣言终结者》的搭档杰米·海纳曼，就更喜欢分门别类、整整齐齐的收纳方式，不同的工作内容都有各自专属的工作间，比如焊接室、电子元器件室、木工车间、喷漆房等，锤子只会存放在木工车间，不会出现在其他地方。</p><p>当作者在木工车间之外的地方需要一把锤子，就需要往返一趟取用这把锤子，显然在作者看来，这绝对只会降低工作效率，然而——「穿过整间工作室去取锤子对杰米来说很有意义。他会充分利用这段时间，边走边思考下一步该怎么做。」</p><p>所以，找到最适合自己工作、生活的整理方法，就是最好的整理方法。</p><blockquote><p>我说的“直面自己”，是指观察自己的习惯并从中学习，根据获得的信息做出改变，从而提升自我。</p></blockquote><h2>心态</h2><p>从上述方法的介绍中很容易看出，作者对工作心态很重视，一个好的工作心态，对提升工作效率是事半功倍的。他在经年累月地实践中总结出来的经验，可以有效地在工作期间将心态调整至最佳状态。</p><p>除了工作方法之外，对于通常意义下容易消耗心态的情况，作者也分享了他如何用积极的态度去面对。</p><h3>1. 截止期限</h3><p>把截止期限视为洪水猛兽，并不少见，但作者认为，不应该把截止期限视为敌人，而是应该接受它的挑战，把它当作是游戏中的一个任务。</p><p>比如说寒暑假作业，是我们每个人从小到大必定都经历过最经典的截止期限，有的人会在放假的前期就一鼓作气完成所有作业，有的人会合理分配每天写多少，也有更多人是在放假结束前几天，甚至前几个小时才匆忙赶完。结果都是完成了任务，但完成效果最差、最讨厌截止期限的一定是最后一类人。</p><p>正职工作中遇到的截止期限，和读书时作业的截止期限，是同一类，都是由外界施加压力，那如果是日常生活或者兴趣爱好这种无第三方介入的截止期限呢，比如每天拖地，又或者是每周写一篇文章，即使没有完成，也不会有什么影响，所以事情便一拖再拖，远远超出自己当初设下这个截止期限的计划。</p><p>这就是作者为什么要用整整一章去讲述如何面对截止期限，并且提出要正视截止期限，去迎接它的挑战。</p><p>在处理自己的事情或项目时，如何给自己设定一个合理的截止期限？作者说，截止期限不能是随机的一个日期，这个日期必须和你本人或者项目本身有关，也可以和两者都有关系。</p><p>如果是随机的日期，那么很容易再次发生不断拖延的情况，因为完不成也没关系，而如果关系到自己或者项目本身，比如要在某个特殊的日子给某个人送一个礼物，那就会有动力推动自己前进。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2024/01/25/6c58bd2d31fe82c390f29874de05ff0e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>作者要求自己在 SDCC 上穿着《异形》的服装，终于历时 12 年做完了这件作品。</figcaption></figure><p>既然有了截止期限，即使我们再如何积极面对它，也难免会遇到无法按时完成的意外状况。</p><p>截止期限会带来时间压力，这份压力能够帮助我们关注任务本身，把压力转化为效率，但稍不注意压力也会转化为焦虑。正视截止期限，不单单是指接受它带来的挑战，也提醒我们不要被截止期限带来的恐惧压垮。</p><p>即使没有按时完成，也不会是世界末日，放松心态去解决没有按时完成带来的后果和问题即可。</p><p>当然，这里指的是在尽力之后仍无法按时完成的情况，例如工作中难免会遇到意外情况，事情并不如我们所设想的展开，而不是指敷衍了事后，用「天也不会塌」来安慰自己。</p><h3>2. 容忍错误</h3><p>正如上文所说，工作中难免会遇到意外情况，失败是常有的事。作者强调，这里所说的「失败」，是指过程中暂时的失败，而不是最后结局的失败。可能对于他创客的工作内容来说，只存在「还没开始做」、「正在做」和「做出来了」三种状态，在成功制作出想要的物品之前，任何的失败都不会让他觉得这个目标绝对无法实现，只会认为是暂时的错误罢了。虽然我们不是做同样的工作，但也是可以学习这样的心态的。</p><p>所以，他认为错误的存在是合理的，任何事物要到达完美的状态，不可能一蹴而就，需要多次迭代方能达成。</p><p>而且错误总是能够带来经验，经验则能帮助我们更好地完成下一次任务。</p><h2>所有工具都是锤子</h2><p>关于书名《所有工具都是锤子》，源自于作者在工业光魔的一个同事马克·巴克，马克厌恶花费太多时间于找对应的工具这件事上，他鼓励的态度是打开思路，不要被工具所束缚，比如说当手边需要敲打东西却没有锤子时，钳子也可以成为「锤子」，这就是「所有工具都是锤子」之意，让工具为己所用，更重要的是了解自己需要什么，才能最好地提高效率。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/83387</id>
-            <title>自定义Excalidraw脚本——实现Zotero与Excalidraw的联动</title>
-            <link>https://sspai.com/post/83387</link>
-            <guid isPermaLink="false">https://sspai.com/post/83387</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 07 Oct 2023 01:00:23 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Zotero, Excalidraw, 无缝连接, 脚本
-<br>
-<br>
-总结: 介绍了如何通过自定义 Excalidraw 的脚本实现 Zotero 与 Excalidraw 的无缝连接，通过拖拽 Zotero 的文本或图片到 Excalidraw 实现笔记功能。 </div>
-                        <hr>
-                    
-                    <p>这次将介绍 Zotero 与 Excalidraw 的无缝连接，不需要借助 Quicker，而是通过自定义 Excalidraw 的脚本，直接拖拽 Zotero 的文本或者图片就可以实现 Zotero 到 Excalidraw 的笔记了，<strong>拖拽过来的包含注释和选择的内容</strong>。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/06/dd25c71985c4fc33db66029623039257.gif" /></figure><blockquote><p>PS：本文使用的的是 Zotero 7，按理说 Zotero 6 也可以正常使用。</p></blockquote><h3>修改📌注释的文件路径</h3><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/06/77c2af80e86f9529c1757f0c4cb38723.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>修改 [[#Zotero to Excalidraw 脚本]] 中的两个文件路径：</p><ul><li>第一个为 Zotero 的图形存储路径：Zotero 的标注图片一般在你定义的数据库的文件夹的<strong>cache-&gt;library</strong>下面：</li></ul><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/06/6fad1ae2f544f4c1a6596e78d61caa31.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>第二个就是你自定义拖拽过来的图片存放的存储路径了，注意要在 Obsidian 的笔记库中。</li></ul><h3>保存为 md 文件保存到指定文件夹</h3><p>修改完路径后将下面代码保存为 md 文件，修改放入 Excalidraw 指定的 Scripts 的文件夹中，在 Excalidraw 的画板中的工具面板中就会出现一个齿轮按钮，需要时点击运行就可以了。</p><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/06/e0514cff6cd8cde78e7a796eb198564b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><blockquote><figure class="image ss-img-wrapper"><img src="https://cdn.sspai.com/2023/10/06/2f895f90d8de012b987cf0a70effccea.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>可以添加相同名称的SVG来给脚本一个图标</figcaption></figure></blockquote><h3>Zotero to Excalidraw 脚本</h3><p>该脚本的中心思想就是通过拖拽的文本，定位到图片名，从而复制该图片到 OB 的笔记库中，并对拖拽的文本进行处理，去除多余的空格以及全角转半角，拆分为 zotero_txt、zotero_author、zotero_link、zotero_comment、zotero_image 这 5 个文本，自定义组合：</p><blockquote><p>如果你是拖拽替他文本，该脚本可以帮你格式化处理一下的</p></blockquote><p>文档原链接：<a href="https://pkmer.cn/show/20230929013043">自定义 Excalidraw 脚本：实现 Zotero 与 Excalidraw 的拖拽联动</a></p><pre class="language-javascript"><code>function processText(text) {
-    // 替换英文之间的多个空格为一个空格
-    text = text.replace(/([a-zA-Z])([\u4e00-\u9fa5])/g, '$1 $2');
-    // 删除中文之间的空格
-    text = text.replace(/([\u4e00-\u9fa5])\s+([\u4e00-\u9fa5])/g, '$1$2');
-    text = text.replace(/([\u4e00-\u9fa5])\s+/g, '$1');
-    text = text.replace(/\s+([\u4e00-\u9fa5])/g, '$1');
-    // 将全角字符转换为半角字符
-    text = text.replace(/[\uFF01-\uFF5E]/g, function (match) { return String.fromCharCode(match.charCodeAt(0) - 65248); });
-
-    // // 在中英文之间添加空格
-    // text = text.replace(/([\u4e00-\u9fa5])([a-zA-Z])/g, '$1 $2');
-    // text = text.replace(/([a-zA-Z])([\u4e00-\u9fa5])/g, '$1 $2');
-
-    return text;
-}
-
-function match_zotero_txt(text) {
-    const regex = /“(.*)” \(/;
-    const matches = text.match(regex);
-    return matches ? matches[1] : "";
-}
-
-function match_zotero_author(text) {
-    const regex = /\(\[(.*\d+)]\(/;
-    const matches = text.match(regex);
-    return matches ? matches[1] : "";
-}
-
-function match_zotero_link(text) {
-    const regex = /\[pdf\]\((.*)\)\)/;
-    const matches = text.match(regex);
-    return matches ? matches[1] : "";
-}
-
-function match_zotero_comment(text) {
-    const regex = /\)\)([^ ].*)/;
-    const matches = text.match(regex);
-    return matches ? matches[1] : "";
-}
-
-function match_zotero_image(text) {
-    const regex = /annotation=(\w*)/;
-    const matches = text.match(regex);
-    return matches ? matches[1] : "";
-}
-
-const path = require('path');
-const fs = require("fs");
-
-let api = ea.getExcalidrawAPI();
-let el = ea.targetView.containerEl.querySelectorAll(".excalidraw-wrapper")[0];
-
-el.ondrop = async function (event) {
-    console.log("ondrop");
-    event.preventDefault();
-    let insert_txt = event.dataTransfer.getData("Text");
-
-    // 清空原本投入的文本
-    event.stopPropagation();
-    ea.clear();
-    // 格式化文本(去空格、全角转半角)  
-
-    insert_txt = processText(insert_txt)
-
-    if (insert_txt.includes("zotero://")) {
-        console.log("Zotero");
-
-        zotero_txt = match_zotero_txt(insert_txt);
-        zotero_author = match_zotero_author(insert_txt);
-        if (zotero_author) {
-            zotero_author = `(${zotero_author})`;
-        };
-        zotero_comment = match_zotero_comment(insert_txt);
-        if (zotero_comment) {
-            zotero_comment = `\n\n📝：${zotero_comment}`;
-        };
-        zotero_link = match_zotero_link(insert_txt);
-
-        if (zotero_txt) {
-            console.log("ZoteroText");
-            let id = await ea.addText(0, 0, `📖：${zotero_txt}${zotero_author}${zotero_comment}`, { width: 600, box: true, wrapAt: 50, textAlign: "left", textVerticalAlign: "middle", box: "box" });
-            let el = ea.getElement(id);
-            el.link = zotero_link;
-            await ea.addElementsToView(true, false, false);
-            if (ea.targetView.draginfoDiv) {
-                document.body.removeChild(ea.targetView.draginfoDiv);
-                delete ea.targetView.draginfoDiv;
-            };
-        } else {
-            console.log("ZoteroImage");
-            zotero_image = match_zotero_image(insert_txt);
-            zotero_image_name = `${zotero_image}.png`;
-
-            // 📌修改到Zotero的library文件夹
-            zotero_image_path = `D:\\Zotero\\cache\\library\\${zotero_image}.png`;
-            // 📌定义附件保存的地址，修改到你定义的笔记文件夹
-            let Obsidian_image_Path = `D:\\PandaNotes\\Y-图形文件存储\\ZoteroImages\\${zotero_image}.png`
-
-            // 复制zotero的图片到Obsidian的笔记库
-            fs.copyFileSync(zotero_image_path, Obsidian_image_Path);
-
-            await new Promise((resolve) =&gt; setTimeout(resolve, 300)); // 暂停0.3秒，等待复制文件的过程
-
-            let id = await ea.addImage(0, 0, zotero_image_name);
-            let el = ea.getElement(id);
-            el.link = zotero_link;
-            await ea.addElementsToView(true, false, false);
-            if (ea.targetView.draginfoDiv) {
-                document.body.removeChild(ea.targetView.draginfoDiv);
-                delete ea.targetView.draginfoDiv;
-            };
-        };
-
-    } else {
-        let id = await ea.addText(0, 0, `${insert_txt} `, { width: 400, box: true, wrapAt: 50, textAlign: "left", textVerticalAlign: "middle", box: "box" });
-        let el = ea.getElement(id);
-        await ea.addElementsToView(true, false, false);
-        if (ea.targetView.draginfoDiv) {
-            document.body.removeChild(ea.targetView.draginfoDiv);
-            delete ea.targetView.draginfoDiv;
-        };
-
-    };
-};</code></pre>
                 ]]>
             </content:encoded>
         </item>

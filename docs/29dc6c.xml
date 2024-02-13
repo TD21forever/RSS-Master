@@ -5,6 +5,492 @@
         <link>https://nitter.cz/xiaohuggg</link>
         
         <item>
+            <id>https://nitter.cz/xiaohuggg/status/1757433016010609137#m</id>
+            <title>R to @xiaohuggg: 在线体验：https://huggingface.co/spaces/multimodalart/stable-cascade
+
+作者：@multimodalart</title>
+            <link>https://nitter.cz/xiaohuggg/status/1757433016010609137#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1757433016010609137#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 13 Feb 2024 15:54:17 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>在线体验：<a href="https://huggingface.co/spaces/multimodalart/stable-cascade">huggingface.co/spaces/multim…</a><br />
+<br />
+作者：<a href="https://nitter.cz/multimodalart" title="apolinario (multimodal.art)">@multimodalart</a></p>
+<img src="https://nitter.cz/pic/enc/YW1wbGlmeV92aWRlb190aHVtYi8xNzU3NDMyOTU1MzE5MDA1MTg0L2ltZy9nLTlnOWxpdVFMTUVXa0s3LmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1757431125579047408#m</id>
+            <title>Stability AI 推出推出一种全新的图像生成模型：Stable Cascade
+
+Stable Cascade特别的地方在于它通过一个“三阶段方法”的来让图片生成变得更高质量、更灵活，不仅在美学和功能性上设定了新的标准，还大大降低了对高端硬件的需求！
+
+而且与SD相比训练成本降低16倍！
+
+通俗来讲它通过一个叫做“三步走”的过程来完成：
+
+1.第一步，它先把你的文字转换成一种叫做“潜在表示”的小图块，可以想象成一个非常模糊的小图像草稿。
+
+2.第二步，通过两个阶段（我们叫它Stage A和B）把这个模糊的草稿变成一个清晰的高分辨率图像。这就像是先画出一个大概的草图，然后再逐步细化，最后上色，使其变得栩栩如生。
+
+3.第三步，就是让这个过程变得高效且灵活。Stable Cascade能够让你只对文字转换那部分（第一步）进行调整和改善，而不需要每次都重新画整个图像。这样不仅节省了大量时间，还大大降低了需要的计算资源。
+
+而且，它能根据不同的需要，使用不同“大小”的模型来完成任务。如果你想要更高质量的图像，可以选择“更大”的模型；如果你的电脑配置较低，也有“更小”的模型可供选择，这样就能确保每个人都能使用这项技术。
+
+Stable Cascade在制作图像时，不仅仅关注图像看起来是否美观，还会确保图像与你输入的文字尽可能吻合。这意味着，它能够理解你的文字，然后创造出与之相匹配的场景。
+
+核心特点和技术细节：
+
+• 潜在生成阶段（Stage C）：将用户输入转换为紧凑的24x24潜在表示，这些表示随后传递给潜在解码阶段（Stage A &amp; B）。这一阶段用于压缩图像，与Stable Diffusion中的VAE（变分自编码器）的作用相似，但实现了更高的压缩率。
+
+• 解码与高分辨率生成（Stage A &amp; B）：通过将文本条件生成（Stage C）与解码到高分辨率像素空间（Stage A &amp; B）解耦，允许在Stage C上单独完成额外的训练或微调，包括ControlNets和LoRAs。这比训练类似大小的Stable Diffusion模型降低了16倍的成本。
+
+模型参数：
+
+Stage C有两种不同的模型，分别为10亿（1B）和36亿（3.6B）参数；
+
+Stage B则为7亿（700M）和15亿（1.5B）参数。推荐使用3.6B参数的Stage C模型，因为这个模型输出的质量最高。但对于那些希望关注最低硬件要求的用户，可以使用1B参数版本。对于Stage B，两者都能获得出色的结果，但15亿参数的模型在重建细节方面表现更佳。
+
+性能比较和用户体验：
+
+• 性能比较：在多个模型比较中，Stable Cascade在提示对齐和美学质量方面表现最佳。人类评估使用了混合的部分提示和美学提示来显示结果。
+
+• 推理速度和VRAM要求：Stable Cascade的推理速度与其他模型（如SDXL，Playground v2等）进行了比较，显示了其在推理速度上的优势。预期的VRAM需求约为20GB，但通过使用较小的变种可以进一步降低，尽管这可能会降低最终输出的质量。
+
+高效的训练和微调：
+
+通过将文本条件生成与解码到高分辨率像素空间的过程解耦，Stable Cascade允许在Stage C进行额外的训练或微调，包括ControlNets和LoRAs，实现了与训练类似大小的Stable Diffusion模型相比16倍的成本降低。
+
+总之：Stable Cascade通过其模块化方法和创新的三阶段处理，不仅在美学和功能性上设定了新的标准，还大大降低了对高端硬件的需求，使更多的用户能够访问和利用先进的文本到图像生成技术。
+
+详细：https://stability.ai/news/introducing-stable-cascade
+
+GitHub：https://github.com/Stability-AI/StableCascade
+
+HuggingFace：https://github.com/Stability-AI/StableCascade</title>
+            <link>https://nitter.cz/xiaohuggg/status/1757431125579047408#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1757431125579047408#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 13 Feb 2024 15:46:46 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Stability AI 推出推出一种全新的图像生成模型：Stable Cascade<br />
+<br />
+Stable Cascade特别的地方在于它通过一个“三阶段方法”的来让图片生成变得更高质量、更灵活，不仅在美学和功能性上设定了新的标准，还大大降低了对高端硬件的需求！<br />
+<br />
+而且与SD相比训练成本降低16倍！<br />
+<br />
+通俗来讲它通过一个叫做“三步走”的过程来完成：<br />
+<br />
+1.第一步，它先把你的文字转换成一种叫做“潜在表示”的小图块，可以想象成一个非常模糊的小图像草稿。<br />
+<br />
+2.第二步，通过两个阶段（我们叫它Stage A和B）把这个模糊的草稿变成一个清晰的高分辨率图像。这就像是先画出一个大概的草图，然后再逐步细化，最后上色，使其变得栩栩如生。<br />
+<br />
+3.第三步，就是让这个过程变得高效且灵活。Stable Cascade能够让你只对文字转换那部分（第一步）进行调整和改善，而不需要每次都重新画整个图像。这样不仅节省了大量时间，还大大降低了需要的计算资源。<br />
+<br />
+而且，它能根据不同的需要，使用不同“大小”的模型来完成任务。如果你想要更高质量的图像，可以选择“更大”的模型；如果你的电脑配置较低，也有“更小”的模型可供选择，这样就能确保每个人都能使用这项技术。<br />
+<br />
+Stable Cascade在制作图像时，不仅仅关注图像看起来是否美观，还会确保图像与你输入的文字尽可能吻合。这意味着，它能够理解你的文字，然后创造出与之相匹配的场景。<br />
+<br />
+核心特点和技术细节：<br />
+<br />
+• 潜在生成阶段（Stage C）：将用户输入转换为紧凑的24x24潜在表示，这些表示随后传递给潜在解码阶段（Stage A & B）。这一阶段用于压缩图像，与Stable Diffusion中的VAE（变分自编码器）的作用相似，但实现了更高的压缩率。<br />
+<br />
+• 解码与高分辨率生成（Stage A & B）：通过将文本条件生成（Stage C）与解码到高分辨率像素空间（Stage A & B）解耦，允许在Stage C上单独完成额外的训练或微调，包括ControlNets和LoRAs。这比训练类似大小的Stable Diffusion模型降低了16倍的成本。<br />
+<br />
+模型参数：<br />
+<br />
+Stage C有两种不同的模型，分别为10亿（1B）和36亿（3.6B）参数；<br />
+<br />
+Stage B则为7亿（700M）和15亿（1.5B）参数。推荐使用3.6B参数的Stage C模型，因为这个模型输出的质量最高。但对于那些希望关注最低硬件要求的用户，可以使用1B参数版本。对于Stage B，两者都能获得出色的结果，但15亿参数的模型在重建细节方面表现更佳。<br />
+<br />
+性能比较和用户体验：<br />
+<br />
+• 性能比较：在多个模型比较中，Stable Cascade在提示对齐和美学质量方面表现最佳。人类评估使用了混合的部分提示和美学提示来显示结果。<br />
+<br />
+• 推理速度和VRAM要求：Stable Cascade的推理速度与其他模型（如SDXL，Playground v2等）进行了比较，显示了其在推理速度上的优势。预期的VRAM需求约为20GB，但通过使用较小的变种可以进一步降低，尽管这可能会降低最终输出的质量。<br />
+<br />
+高效的训练和微调：<br />
+<br />
+通过将文本条件生成与解码到高分辨率像素空间的过程解耦，Stable Cascade允许在Stage C进行额外的训练或微调，包括ControlNets和LoRAs，实现了与训练类似大小的Stable Diffusion模型相比16倍的成本降低。<br />
+<br />
+总之：Stable Cascade通过其模块化方法和创新的三阶段处理，不仅在美学和功能性上设定了新的标准，还大大降低了对高端硬件的需求，使更多的用户能够访问和利用先进的文本到图像生成技术。<br />
+<br />
+详细：<a href="https://stability.ai/news/introducing-stable-cascade">stability.ai/news/introducin…</a><br />
+<br />
+GitHub：<a href="https://github.com/Stability-AI/StableCascade">github.com/Stability-AI/Stab…</a><br />
+<br />
+HuggingFace：<a href="https://github.com/Stability-AI/StableCascade">github.com/Stability-AI/Stab…</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0dPbVNJZ2E4QUFoUHN6LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0dPbVNJaWFrQUFGQlVFLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0dPbVNJaWFFQUFMSHlzLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1757388396996280482#m</id>
+            <title>NVIDIA市值已超过亚马逊和谷歌，成为全球市值超过万亿切，排名第四的公司。
+
+自2024年1月1日起，仅用了不到6周的时间，NVIDIA的市值增加了6500亿美元的市值。这一增长额超过了特斯拉整个公司的市值！
+
+截至2024年2月12日，全球市值排行如下：
+
+1. 微软 (Microsoft)：$3.115万亿
+2. 苹果 (Apple)：$2.904万亿
+3. 沙特阿美 (Saudi Aramco)：$2.034万亿
+4. NVIDIA：$1.831万亿
+5. Alphabet (谷歌的母公司)：$1.820万亿
+6. 亚马逊 (Amazon)：$1.803万亿
+7. Meta (Facebook的母公司)：$1.217万亿</title>
+            <link>https://nitter.cz/xiaohuggg/status/1757388396996280482#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1757388396996280482#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 13 Feb 2024 12:56:59 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>NVIDIA市值已超过亚马逊和谷歌，成为全球市值超过万亿切，排名第四的公司。<br />
+<br />
+自2024年1月1日起，仅用了不到6周的时间，NVIDIA的市值增加了6500亿美元的市值。这一增长额超过了特斯拉整个公司的市值！<br />
+<br />
+截至2024年2月12日，全球市值排行如下：<br />
+<br />
+1. 微软 (Microsoft)：$3.115万亿<br />
+2. 苹果 (Apple)：$2.904万亿<br />
+3. 沙特阿美 (Saudi Aramco)：$2.034万亿<br />
+4. NVIDIA：$1.831万亿<br />
+5. Alphabet (谷歌的母公司)：$1.820万亿<br />
+6. 亚马逊 (Amazon)：$1.803万亿<br />
+7. Meta (Facebook的母公司)：$1.217万亿</p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0dOX2JUUWF3QUE3eWZRLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1757355823460991485#m</id>
+            <title>notesGPT：开源的语音笔记GPT工具
+
+它能够录下你的语音内容，然后自动帮助你把这些语音转成文字，对内容进行总结，并且生成相关的任务列表！
+
+notesGPT的主要功能包括：
+
+1. 录制语音笔记：用户可以直接通过该工具录制他们的语音笔记，无需手动输入文字，方便快捷。
+
+2. 自动转录：录制的语音笔记会自动被转换成文本形式，便于阅读和编辑。
+
+3. 内容总结：notesGPT能够自动分析转录的文本内容，并提供一个简洁的总结，帮助用户快速把握笔记的关键信息。
+
+4. 生成行动项：根据语音笔记的内容，自动生成相关的行动项或任务，帮助用户更有效地组织和规划工作或学习任务。
+
+5. 100%免费和开源：notesGPT是一个完全开放源代码的项目，用户可以免费使用所有功能，同时社区的开发者也可以参与到项目的改进和扩展中来。
+
+主要功能和技术栈：
+
+•Convex：数据库和云函数
+•Next.js App Router：框架
+•Together Inference：LLM (Mixtral)
+•Together Embeddings：搜索用的嵌入式数据库
+•Convex File Storage：存储语音笔记
+•Convex Vector search：向量搜索
+•Replicate：Whisper转录
+•Clerk：用户认证
+•Tailwind CSS：样式设计
+
+在线体验：http://usenotesgpt.com
+GitHub：https://github.com/Nutlope/notesGPT</title>
+            <link>https://nitter.cz/xiaohuggg/status/1757355823460991485#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1757355823460991485#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 13 Feb 2024 10:47:33 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>notesGPT：开源的语音笔记GPT工具<br />
+<br />
+它能够录下你的语音内容，然后自动帮助你把这些语音转成文字，对内容进行总结，并且生成相关的任务列表！<br />
+<br />
+notesGPT的主要功能包括：<br />
+<br />
+1. 录制语音笔记：用户可以直接通过该工具录制他们的语音笔记，无需手动输入文字，方便快捷。<br />
+<br />
+2. 自动转录：录制的语音笔记会自动被转换成文本形式，便于阅读和编辑。<br />
+<br />
+3. 内容总结：notesGPT能够自动分析转录的文本内容，并提供一个简洁的总结，帮助用户快速把握笔记的关键信息。<br />
+<br />
+4. 生成行动项：根据语音笔记的内容，自动生成相关的行动项或任务，帮助用户更有效地组织和规划工作或学习任务。<br />
+<br />
+5. 100%免费和开源：notesGPT是一个完全开放源代码的项目，用户可以免费使用所有功能，同时社区的开发者也可以参与到项目的改进和扩展中来。<br />
+<br />
+主要功能和技术栈：<br />
+<br />
+•Convex：数据库和云函数<br />
+•Next.js App Router：框架<br />
+•Together Inference：LLM (Mixtral)<br />
+•Together Embeddings：搜索用的嵌入式数据库<br />
+•Convex File Storage：存储语音笔记<br />
+•Convex Vector search：向量搜索<br />
+•Replicate：Whisper转录<br />
+•Clerk：用户认证<br />
+•Tailwind CSS：样式设计<br />
+<br />
+在线体验：<a href="http://usenotesgpt.com">usenotesgpt.com</a><br />
+GitHub：<a href="https://github.com/Nutlope/notesGPT">github.com/Nutlope/notesGPT</a></p>
+<img src="https://nitter.cz/pic/enc/YW1wbGlmeV92aWRlb190aHVtYi8xNzU3MzU1NzYxMzg5NTA2NTYwL2ltZy9xYXpvcGJEa0UwQ1VvaFhuLmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1757319738450215079#m</id>
+            <title>通过VR 也能操控真实物体
+
+隔空控制家里电器开关</title>
+            <link>https://nitter.cz/xiaohuggg/status/1757319738450215079#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1757319738450215079#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 13 Feb 2024 08:24:09 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>通过VR 也能操控真实物体<br />
+<br />
+隔空控制家里电器开关</p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTcxODM2MzY4MDgzNDM1NTIvcHUvaW1nL0paaWp0TlpyQm9yVUNfTXAuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1757240458944844074#m</id>
+            <title>ElevenLabs推出一个新的平台，允许你分享自己的声音并赚取收入。
+
+你可以在ElevenLabs的声音库中创建分享自己的AI声音，每当有人使用这些声音时，就能获得一定的回报。
+
+操作流程如下：
+
+-前往VoiceLab并上传30分钟以上的音频
+-为您的声音命名并进行描述
+-设置您的价格和使用参数
+-添加您的支付详情，并在使用时获得支付
+
+ElevenLabs还提供了一些高级选项，比如与平台合作，创建特别高质量的默认声音，这样不仅能获得保证的前期收入，还能提升个人品牌的影响力。
+
+详细：https://elevenlabs.io/voice-actors</title>
+            <link>https://nitter.cz/xiaohuggg/status/1757240458944844074#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1757240458944844074#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 13 Feb 2024 03:09:08 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>ElevenLabs推出一个新的平台，允许你分享自己的声音并赚取收入。<br />
+<br />
+你可以在ElevenLabs的声音库中创建分享自己的AI声音，每当有人使用这些声音时，就能获得一定的回报。<br />
+<br />
+操作流程如下：<br />
+<br />
+-前往VoiceLab并上传30分钟以上的音频<br />
+-为您的声音命名并进行描述<br />
+-设置您的价格和使用参数<br />
+-添加您的支付详情，并在使用时获得支付<br />
+<br />
+ElevenLabs还提供了一些高级选项，比如与平台合作，创建特别高质量的默认声音，这样不仅能获得保证的前期收入，还能提升个人品牌的影响力。<br />
+<br />
+详细：<a href="https://elevenlabs.io/voice-actors">elevenlabs.io/voice-actors</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTcyMzE5NDUwNDA1MDY4ODAvcHUvaW1nL0FlcVBKSmRBRnZvbmhyemIuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1757231958088949810#m</id>
+            <title>Azure OpenAI Service宣布了一系列新功能：包括公开预览的Assistants API、新的文本到语音（TTS）功能、即将推出的GPT-4 Turbo和GPT-3.5 Turbo模型更新、新的嵌入模型以及微调API的更新。
+
+与之前的聊天完成API相比，Assistants API能够记住之前的对话内容，创建持久化和无限长的线程。
+
+Assistants API 是一项由 Azure OpenAI 提供的新服务，它旨在帮助开发者在他们的应用程序中更容易地创建高质量的人工智能助手体验。与之前的聊天完成API相比，Assistants API提供了以下几个关键改进：
+
+1、状态性演进： Assistants API能够记住之前的对话内容，这意味着它可以在对话过程中维持上下文，提供更连贯、更个性化的交流体验。
+
+2、持久化和无限长的线程： 开发者可以创建持久化的对话线程，这些线程可以无限长，不受模型上下文窗口大小的限制。这样，即使是长时间或复杂的对话也能流畅进行。
+
+3、简化对话状态管理： 由于Assistants API自身支持对话状态的管理，开发者无需自己构建复杂的系统来追踪对话状态或管理线程。这降低了开发复杂度，使得创建动态、互动的AI助手变得更简单。
+
+Azure OpenAI Service更新和新增功能主要包括：
+
+1、Assistants API公开预览：这是一个新功能，旨在让开发者在自己的应用中轻松创建类似副驾驶的高质量体验。Assistants API支持持久化和无限长的线程，简化了开发者在管理对话状态和集成工具方面的工作，提高了开发效率。
+
+2、文本到语音（TTS）功能：引入了新的文本到语音模型，能够将文本转换为具有个性和风格的高质量人声，适用于客户支持、培训视频、实时流媒体等多种场景。
+
+3、GPT-4 Turbo和GPT-3.5 Turbo模型更新：推出了GPT-4 Turbo和GPT-3.5 Turbo的更新版本，包括改进的代码生成能力、减少“懒惰”现象、修复了影响非英文UTF-8生成的错误等。提供了改进的指令遵循、JSON模式、可复现的输出、并行函数调用等特性。
+
+5、新的嵌入模型和微调API更新：引入了新的嵌入模型和微调API的更新，包括一个新模型、支持持续微调和更优惠的定价。这些更新使得构建自定义模型和使用更长消息进行微调变得更加简单和经济。
+
+6、定价优化：为训练和托管微调模型在Azure OpenAI Service上的成本提供了降价，包括将GPT-3.5-Turbo的训练和托管成本降低了50%。
+
+详细：https://msft.it/6019ihVTb</title>
+            <link>https://nitter.cz/xiaohuggg/status/1757231958088949810#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1757231958088949810#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 13 Feb 2024 02:35:21 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Azure OpenAI Service宣布了一系列新功能：包括公开预览的Assistants API、新的文本到语音（TTS）功能、即将推出的GPT-4 Turbo和GPT-3.5 Turbo模型更新、新的嵌入模型以及微调API的更新。<br />
+<br />
+与之前的聊天完成API相比，Assistants API能够记住之前的对话内容，创建持久化和无限长的线程。<br />
+<br />
+Assistants API 是一项由 Azure OpenAI 提供的新服务，它旨在帮助开发者在他们的应用程序中更容易地创建高质量的人工智能助手体验。与之前的聊天完成API相比，Assistants API提供了以下几个关键改进：<br />
+<br />
+1、状态性演进： Assistants API能够记住之前的对话内容，这意味着它可以在对话过程中维持上下文，提供更连贯、更个性化的交流体验。<br />
+<br />
+2、持久化和无限长的线程： 开发者可以创建持久化的对话线程，这些线程可以无限长，不受模型上下文窗口大小的限制。这样，即使是长时间或复杂的对话也能流畅进行。<br />
+<br />
+3、简化对话状态管理： 由于Assistants API自身支持对话状态的管理，开发者无需自己构建复杂的系统来追踪对话状态或管理线程。这降低了开发复杂度，使得创建动态、互动的AI助手变得更简单。<br />
+<br />
+Azure OpenAI Service更新和新增功能主要包括：<br />
+<br />
+1、Assistants API公开预览：这是一个新功能，旨在让开发者在自己的应用中轻松创建类似副驾驶的高质量体验。Assistants API支持持久化和无限长的线程，简化了开发者在管理对话状态和集成工具方面的工作，提高了开发效率。<br />
+<br />
+2、文本到语音（TTS）功能：引入了新的文本到语音模型，能够将文本转换为具有个性和风格的高质量人声，适用于客户支持、培训视频、实时流媒体等多种场景。<br />
+<br />
+3、GPT-4 Turbo和GPT-3.5 Turbo模型更新：推出了GPT-4 Turbo和GPT-3.5 Turbo的更新版本，包括改进的代码生成能力、减少“懒惰”现象、修复了影响非英文UTF-8生成的错误等。提供了改进的指令遵循、JSON模式、可复现的输出、并行函数调用等特性。<br />
+<br />
+5、新的嵌入模型和微调API更新：引入了新的嵌入模型和微调API的更新，包括一个新模型、支持持续微调和更优惠的定价。这些更新使得构建自定义模型和使用更长消息进行微调变得更加简单和经济。<br />
+<br />
+6、定价优化：为训练和托管微调模型在Azure OpenAI Service上的成本提供了降价，包括将GPT-3.5-Turbo的训练和托管成本降低了50%。<br />
+<br />
+详细：<a href="https://msft.it/6019ihVTb">msft.it/6019ihVTb</a></p>
+<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTcyMjg3NDI5MzI1NjYwMTYvcHUvaW1nL2t3ekxWczRVTTFKSEJGQWcuanBn" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://nitter.cz/xiaohuggg/status/1757225933138952546#m</id>
+            <title>Keyframer：利用大语言模型（LLMs）将静态图像转换成动画。
+
+该项目由苹果开发，通过自然语言提示，可以从静态SVG图像创建动画插图。
+
+同时通过LLMs生成的CSS动画代码，用户可以对生成的动画进行细化编辑。
+
+这意味着，无论你是想让一个设计中的元素旋转、移动还是淡入淡出，你都可以通过描述这些动作的文字来实现。
+
+Keyframer主要功能：
+
+1、自然语言控制：用户可以使用自然语言提示来指导动画的创作过程，无需深入了解动画制作的复杂技术细节。
+
+2、迭代设计支持：Keyframer允许用户通过编辑大语言模型生成的CSS动画代码或属性来迭代和精细化他们的设计，提供了一种直接和灵活的方式来调整动画效果。
+
+3、设计变体探索：用户可以请求设计变体，这支持了创意过程和设计探索，帮助用户发现和尝试新的设计方向。
+
+4、分类用户提示策略：通过用户研究，Keyframer贡献了用户提示策略的分类，包括用于描述运动的语义提示类型和“分解”提示风格，这有助于用户更有效地与工具交互。
+
+Keyframer将动画设计的门槛大大降低，让更广泛的受众能够参与到动画创作中，不仅对设计师有益，对于任何对动画创作感兴趣的人来说都是一个有价值的工具。
+
+工作原理：
+
+1、自然语言处理： 用户通过自然语言描述他们想要为静态SVG图像创建的动画效果。这些描述可以包括动画的方向、速度、效果等详细信息。
+
+2、LLM生成动画代码： Keyframer利用大语言模型（如GPT-3）来解析用户的自然语言描述。基于这些描述，LLM生成相应的CSS动画代码。这段代码是动画效果的“配方”，指定了动画的具体行为，如动画的持续时间、变化的属性（例如位置、大小、颜色等）以及动画的时间函数。
+
+3、动画渲染和预览： 生成的CSS代码应用于输入的SVG图像，创建动画效果。用户可以在Keyframer的界面中实时预览这些动画，以评估效果是否符合他们的预期。
+
+4、直接编辑功能： 为了进一步细化和定制动画，Keyframer提供了代码编辑器和属性编辑器。用户可以预览这段代码生成的动画效果，如果效果符合预期，可以直接使用；如果需要调整，用户还可以通过编辑生成的CSS代码来细化动画的效果。这一步不需要用户编写代码，但他们可以直接修改代码来调整动画的各种参数（如速度、方向、延迟等），以达到完全符合他们设计意图的动画效果。
+
+5、设计迭代与探索： 用户可以通过添加新的自然语言提示来请求设计变体或对动画进行迭代。这支持了创意思维和设计探索过程，允许用户在看到初步效果后，继续调整和完善他们的动画设计。
+
+6、用户提示策略和反馈循环： Keyframer支持分解式提示风格，用户可以分步骤地描述和细化动画的各个部分。系统的设计允许用户基于生成的动画效果和直接编辑的反馈，不断调整他们的提示策略，实现设计目标的逐步精细化。
+
+实验结果：
+
+研究表明，即使是动画和编程经验较少的用户，也能够使用Keyframer有效地创建动画。通过直接编辑生成的CSS代码，用户可以对动画进行精细调整，这增强了他们对设计过程的控制感和满意度。
+
+研究还发现，LLM生成的输出有时会出现意外的、创意的解决方案，这为设计过程带来了意外的惊喜和新的灵感。这些意外的输出有助于扩展用户的设计思维，推动他们探索新的创意可能性。
+论文：https://arxiv.org/abs/2402.06071
+
+PDF：https://arxiv.org/pdf/2402.06071.pdf</title>
+            <link>https://nitter.cz/xiaohuggg/status/1757225933138952546#m</link>
+            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1757225933138952546#m</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 13 Feb 2024 02:11:24 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Keyframer：利用大语言模型（LLMs）将静态图像转换成动画。<br />
+<br />
+该项目由苹果开发，通过自然语言提示，可以从静态SVG图像创建动画插图。<br />
+<br />
+同时通过LLMs生成的CSS动画代码，用户可以对生成的动画进行细化编辑。<br />
+<br />
+这意味着，无论你是想让一个设计中的元素旋转、移动还是淡入淡出，你都可以通过描述这些动作的文字来实现。<br />
+<br />
+Keyframer主要功能：<br />
+<br />
+1、自然语言控制：用户可以使用自然语言提示来指导动画的创作过程，无需深入了解动画制作的复杂技术细节。<br />
+<br />
+2、迭代设计支持：Keyframer允许用户通过编辑大语言模型生成的CSS动画代码或属性来迭代和精细化他们的设计，提供了一种直接和灵活的方式来调整动画效果。<br />
+<br />
+3、设计变体探索：用户可以请求设计变体，这支持了创意过程和设计探索，帮助用户发现和尝试新的设计方向。<br />
+<br />
+4、分类用户提示策略：通过用户研究，Keyframer贡献了用户提示策略的分类，包括用于描述运动的语义提示类型和“分解”提示风格，这有助于用户更有效地与工具交互。<br />
+<br />
+Keyframer将动画设计的门槛大大降低，让更广泛的受众能够参与到动画创作中，不仅对设计师有益，对于任何对动画创作感兴趣的人来说都是一个有价值的工具。<br />
+<br />
+工作原理：<br />
+<br />
+1、自然语言处理： 用户通过自然语言描述他们想要为静态SVG图像创建的动画效果。这些描述可以包括动画的方向、速度、效果等详细信息。<br />
+<br />
+2、LLM生成动画代码： Keyframer利用大语言模型（如GPT-3）来解析用户的自然语言描述。基于这些描述，LLM生成相应的CSS动画代码。这段代码是动画效果的“配方”，指定了动画的具体行为，如动画的持续时间、变化的属性（例如位置、大小、颜色等）以及动画的时间函数。<br />
+<br />
+3、动画渲染和预览： 生成的CSS代码应用于输入的SVG图像，创建动画效果。用户可以在Keyframer的界面中实时预览这些动画，以评估效果是否符合他们的预期。<br />
+<br />
+4、直接编辑功能： 为了进一步细化和定制动画，Keyframer提供了代码编辑器和属性编辑器。用户可以预览这段代码生成的动画效果，如果效果符合预期，可以直接使用；如果需要调整，用户还可以通过编辑生成的CSS代码来细化动画的效果。这一步不需要用户编写代码，但他们可以直接修改代码来调整动画的各种参数（如速度、方向、延迟等），以达到完全符合他们设计意图的动画效果。<br />
+<br />
+5、设计迭代与探索： 用户可以通过添加新的自然语言提示来请求设计变体或对动画进行迭代。这支持了创意思维和设计探索过程，允许用户在看到初步效果后，继续调整和完善他们的动画设计。<br />
+<br />
+6、用户提示策略和反馈循环： Keyframer支持分解式提示风格，用户可以分步骤地描述和细化动画的各个部分。系统的设计允许用户基于生成的动画效果和直接编辑的反馈，不断调整他们的提示策略，实现设计目标的逐步精细化。<br />
+<br />
+实验结果：<br />
+<br />
+研究表明，即使是动画和编程经验较少的用户，也能够使用Keyframer有效地创建动画。通过直接编辑生成的CSS代码，用户可以对动画进行精细调整，这增强了他们对设计过程的控制感和满意度。<br />
+<br />
+研究还发现，LLM生成的输出有时会出现意外的、创意的解决方案，这为设计过程带来了意外的惊喜和新的灵感。这些意外的输出有助于扩展用户的设计思维，推动他们探索新的创意可能性。<br />
+论文：<a href="https://arxiv.org/abs/2402.06071">arxiv.org/abs/2402.06071</a><br />
+<br />
+PDF：<a href="https://arxiv.org/pdf/2402.06071.pdf">arxiv.org/pdf/2402.06071.pdf</a></p>
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0dMcnFkMGJrQUEzdDE2LmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0dMcnFlR2FNQUF6ZGFjLmpwZw==" />
+<img src="https://nitter.cz/pic/enc/bWVkaWEvR0dMcnFlS2J3QUE2TEhELmpwZw==" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://nitter.cz/xiaohuggg/status/1757022189201858603#m</id>
             <title>Franco Ronconi 介绍了一个Canvastique3D工具
 
@@ -516,331 +1002,6 @@ EVE的规格：<br />
 <br />
 EVE通过人工智能自主操作，默认情况下能够导航工作空间，执行如开不同手柄的门、从远处识别人或物体、像人类一样穿越非结构化空间的任务。EVE在帮助人类操作者执行任务时，利用其力量、精确度和传感器执行如在办公楼巡逻和检查员工ID徽章的任务。EVE会关注潜在的危险或错误，并在操作者需要接管时报告。</p>
 <img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTY1MjE4ODk2NTExMzQ0NjQvcHUvaW1nL1o3aEZuSWdxQTJsdTFOTGIuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1756516368269312196#m</id>
-            <title>Vision Arena：视觉模型竞技场
-
-这个项目的目的是测试和比较不同的视觉语言模型（VLMs），比如GPT-4V、Gemini、Llava、Qwen-VL等。
-
-用户可以在这个工具上同时测试两个视觉模型，并对它们进行投票，以决定哪个更优秀。
-
-而且是盲测，选择你认为好的结果才会告诉你模型是什么。
-
-测试地址：https://huggingface.co/spaces/WildVision/vision-arena</title>
-            <link>https://nitter.cz/xiaohuggg/status/1756516368269312196#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1756516368269312196#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 11 Feb 2024 03:11:51 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Vision Arena：视觉模型竞技场<br />
-<br />
-这个项目的目的是测试和比较不同的视觉语言模型（VLMs），比如GPT-4V、Gemini、Llava、Qwen-VL等。<br />
-<br />
-用户可以在这个工具上同时测试两个视觉模型，并对它们进行投票，以决定哪个更优秀。<br />
-<br />
-而且是盲测，选择你认为好的结果才会告诉你模型是什么。<br />
-<br />
-测试地址：<a href="https://huggingface.co/spaces/WildVision/vision-arena">huggingface.co/spaces/WildVi…</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTYzMjc1MzIzNTI0NDIzNjgvcHUvaW1nL2ZYWjBZdVVyWnBYVU1xN1cuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1756508424551227405#m</id>
-            <title>Maybe：一个花了100万美金打造的个人财务的操作系统，由于没有运营成功，现在他们给开源了
-
-用户可以用它来跟踪和管理自己的收入、支出、投资和财富。
-
-同时它还包含一个“财务顾问”功能，使用户能够与真正的财务规划师或注册金融分析师联系，以获得专业的财务管理建议。
-
-由于商业模式未能成功，这个项目在2023年中期关闭了。团队在2021/2022年期间投入了将近100万美元来构建这个应用，包括员工、合同工、数据提供商/服务和基础设施等成本。
-
-现在，团队决定将Maybe作为一个完全开源的项目复兴，目的是让用户可以免费运行这个应用，管理自己的财务，并最终提供一个收费的托管版本。
-
-GitHub：https://github.com/maybe-finance/maybe</title>
-            <link>https://nitter.cz/xiaohuggg/status/1756508424551227405#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1756508424551227405#m</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 11 Feb 2024 02:40:17 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Maybe：一个花了100万美金打造的个人财务的操作系统，由于没有运营成功，现在他们给开源了<br />
-<br />
-用户可以用它来跟踪和管理自己的收入、支出、投资和财富。<br />
-<br />
-同时它还包含一个“财务顾问”功能，使用户能够与真正的财务规划师或注册金融分析师联系，以获得专业的财务管理建议。<br />
-<br />
-由于商业模式未能成功，这个项目在2023年中期关闭了。团队在2021/2022年期间投入了将近100万美元来构建这个应用，包括员工、合同工、数据提供商/服务和基础设施等成本。<br />
-<br />
-现在，团队决定将Maybe作为一个完全开源的项目复兴，目的是让用户可以免费运行这个应用，管理自己的财务，并最终提供一个收费的托管版本。<br />
-<br />
-GitHub：<a href="https://github.com/maybe-finance/maybe">github.com/maybe-finance/may…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0YtMTJPamE4QUFfRWM2LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1756321049887854740#m</id>
-            <title>微软在Windows 11 Insider Preview Build 26052中引入了Sudo for Windows新功能
-
-该功能非常类似于macOS和Linux系统中终端里的sudo命令。
-
-sudo命令允许用户执行需要管理员（root）权限的命令，而无需切换到root用户。用户只需在命令前加上sudo，然后输入自己的密码，就可以以更高权限运行该命令。
-
-Sudo for Windows目前支持三种不同的配置选项：在新窗口中打开、输入关闭和内联。这些配置允许用户根据需要选择如何执行提权过程。
-
-微软计划未来几个月内扩展Sudo for Windows的文档，并分享更多关于在“内联”配置下运行sudo的安全性细节。
-
-此外，微软还宣布将这个项目开源在GitHub上。目前，他们正努力在GitHub仓库中添加更多关于该项目的信息，并将在未来几个月分享更多计划细节。
-
-详细：https://devblogs.microsoft.com/commandline/introducing-sudo-for-windows/
-GitHub：https://github.com/microsoft/sudo</title>
-            <link>https://nitter.cz/xiaohuggg/status/1756321049887854740#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1756321049887854740#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 10 Feb 2024 14:15:43 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>微软在Windows 11 Insider Preview Build 26052中引入了Sudo for Windows新功能<br />
-<br />
-该功能非常类似于macOS和Linux系统中终端里的sudo命令。<br />
-<br />
-sudo命令允许用户执行需要管理员（root）权限的命令，而无需切换到root用户。用户只需在命令前加上sudo，然后输入自己的密码，就可以以更高权限运行该命令。<br />
-<br />
-Sudo for Windows目前支持三种不同的配置选项：在新窗口中打开、输入关闭和内联。这些配置允许用户根据需要选择如何执行提权过程。<br />
-<br />
-微软计划未来几个月内扩展Sudo for Windows的文档，并分享更多关于在“内联”配置下运行sudo的安全性细节。<br />
-<br />
-此外，微软还宣布将这个项目开源在GitHub上。目前，他们正努力在GitHub仓库中添加更多关于该项目的信息，并将在未来几个月分享更多计划细节。<br />
-<br />
-详细：<a href="https://devblogs.microsoft.com/commandline/introducing-sudo-for-windows/">devblogs.microsoft.com/comma…</a><br />
-GitHub：<a href="https://github.com/microsoft/sudo">github.com/microsoft/sudo</a></p>
-<video loop="loop" poster="https://nitter.cz/pic/enc/dHdlZXRfdmlkZW9fdGh1bWIvR0YteXVncWEwQUE4WWNGLmpwZw==">
-  <source src="https://nitter.cz/pic/enc/dmlkZW8udHdpbWcuY29tL3R3ZWV0X3ZpZGVvL0dGLXl1Z3FhMEFBOFljRi5tcDQ=" type="video/mp4" /></video>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1756316182343512348#m</id>
-            <title>iMusic：基于IMU的面部表情捕捉
-
-该项目使用了一种可以贴在脸上，叫做惯性测量单元（IMUs）的小型设备，来捕捉面部表情。
-
-与依赖摄像头的方法不同，IMUs不需要拍摄视频，通过捕捉微小面部动作，来捕捉表情，所以更能保护个人隐私。
-
-即使在脸部部分被遮挡的情况下，它也能有效工作。
-
-MUSIC项目主要解决了两个问题：
-
-在需要保护隐私的场合，如何捕捉面部表情而不依赖视频。
-
-在脸部被部分遮挡的情况下，如何准确捕捉面部动作。
-
-主要特点：
-
-1、隐私保护：相比基于视频的面部捕捉方法，使用IMUs不需要捕捉用户的视觉图像，因此更能保护用户的隐私。
-
-2、避免视线遮挡问题：由于不依赖视觉信息，即使用户的面部部分被遮挡，系统也能准确捕捉面部表情。
-
-3、精确捕捉细微表情：IMUs能够检测细微的面部运动，帮助捕捉通常难以通过视觉方法识别的轻微表情变化。
-
-4、灵活性和可移植性：IMUs小巧轻便，可以轻易地集成到多种设备中，使得iMusic项目的技术可以广泛应用于各种场合，包括但不限于娱乐、健康监测和人机交互等领域。
-
-iMusic的工作原理：
-
-1、硬件设计：微型IMUs，使其能够适合贴合面部并准确捕捉面部运动。这些IMUs被放置在面部的关键位置，以监测表情变化时的动态信息。
-
-2、数据采集与校准：通过IMUs收集面部运动的原始数据，并进行必要的校准处理，以确保数据的准确性和一致性。
-
-3、IMU-ARKit数据集：创建一个包含丰富的IMU和视觉信号配对的数据集，用于训练和验证面部表情捕捉模型。这个数据集覆盖了广泛的面部表情和表演，为后续的分析和模型训练提供了基础。
-
-4、面部表情预测模型：利用特别设计的Transformer扩散模型，从IMUs收集的信号中预测面部的混合形状参数。这个模型通过两阶段训练策略来优化，使其能够准确地从IMU数据中解析出复杂的面部表情。
-
-项目及演示：https://sites.google.com/view/projectpage-imusic
-论文：https://arxiv.org/abs/2402.03944
-视频：https://youtu.be/rPusR6b43ng</title>
-            <link>https://nitter.cz/xiaohuggg/status/1756316182343512348#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1756316182343512348#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 10 Feb 2024 13:56:23 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>iMusic：基于IMU的面部表情捕捉<br />
-<br />
-该项目使用了一种可以贴在脸上，叫做惯性测量单元（IMUs）的小型设备，来捕捉面部表情。<br />
-<br />
-与依赖摄像头的方法不同，IMUs不需要拍摄视频，通过捕捉微小面部动作，来捕捉表情，所以更能保护个人隐私。<br />
-<br />
-即使在脸部部分被遮挡的情况下，它也能有效工作。<br />
-<br />
-MUSIC项目主要解决了两个问题：<br />
-<br />
-在需要保护隐私的场合，如何捕捉面部表情而不依赖视频。<br />
-<br />
-在脸部被部分遮挡的情况下，如何准确捕捉面部动作。<br />
-<br />
-主要特点：<br />
-<br />
-1、隐私保护：相比基于视频的面部捕捉方法，使用IMUs不需要捕捉用户的视觉图像，因此更能保护用户的隐私。<br />
-<br />
-2、避免视线遮挡问题：由于不依赖视觉信息，即使用户的面部部分被遮挡，系统也能准确捕捉面部表情。<br />
-<br />
-3、精确捕捉细微表情：IMUs能够检测细微的面部运动，帮助捕捉通常难以通过视觉方法识别的轻微表情变化。<br />
-<br />
-4、灵活性和可移植性：IMUs小巧轻便，可以轻易地集成到多种设备中，使得iMusic项目的技术可以广泛应用于各种场合，包括但不限于娱乐、健康监测和人机交互等领域。<br />
-<br />
-iMusic的工作原理：<br />
-<br />
-1、硬件设计：微型IMUs，使其能够适合贴合面部并准确捕捉面部运动。这些IMUs被放置在面部的关键位置，以监测表情变化时的动态信息。<br />
-<br />
-2、数据采集与校准：通过IMUs收集面部运动的原始数据，并进行必要的校准处理，以确保数据的准确性和一致性。<br />
-<br />
-3、IMU-ARKit数据集：创建一个包含丰富的IMU和视觉信号配对的数据集，用于训练和验证面部表情捕捉模型。这个数据集覆盖了广泛的面部表情和表演，为后续的分析和模型训练提供了基础。<br />
-<br />
-4、面部表情预测模型：利用特别设计的Transformer扩散模型，从IMUs收集的信号中预测面部的混合形状参数。这个模型通过两阶段训练策略来优化，使其能够准确地从IMU数据中解析出复杂的面部表情。<br />
-<br />
-项目及演示：<a href="https://sites.google.com/view/projectpage-imusic">sites.google.com/view/projec…</a><br />
-论文：<a href="https://arxiv.org/abs/2402.03944">arxiv.org/abs/2402.03944</a><br />
-视频：<a href="https://youtu.be/rPusR6b43ng">youtu.be/rPusR6b43ng</a></p>
-<img src="https://nitter.cz/pic/enc/ZXh0X3R3X3ZpZGVvX3RodW1iLzE3NTYzMTEwMzg4ODExMjAyNTYvcHUvaW1nL011VnB1WlJQUV9ZajZ2OUMuanBn" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1756313854437732694#m</id>
-            <title>OpenAI推出了一个基于Whisper模型的音频到文本的API，可以将任何音频直接转录成文本并翻译为英文。
-
-同时在转录文本的同时，API能够提供每个词或句子出现的具体时间点，帮助用户准确定位音频中的特定部分。
-
-主要功能：
-
-1、音频转文字：将音频文件中的语音内容自动转换成文本形式，让用户可以读到音频里说了什么。
-
-2、支持多种语言的翻译转录：如果音频中的语言不是英语，这个API还能先将其翻译成英语，然后再进行转录，使非英语内容也能轻松转换成文本。
-
-3、提供时间戳：OpenAI的Whisper API提供了一个参数timestamp_granularities[]，允许用户获取带有时间戳的更结构化的JSON输出格式。这意味着，在转录文本的同时，API能够提供每个词或句子出现的具体时间点，帮助用户准确定位音频中的特定部分。
-
-4、支持多种音频格式：支持上传25MB以内的文件，包括mp3、mp4、mpeg、mpga、m4a、wav和webm等格式。用户无需转换文件格式即可直接使用。
-
-详细：https://platform.openai.com/docs/guides/speech-to-text</title>
-            <link>https://nitter.cz/xiaohuggg/status/1756313854437732694#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1756313854437732694#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 10 Feb 2024 13:47:08 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>OpenAI推出了一个基于Whisper模型的音频到文本的API，可以将任何音频直接转录成文本并翻译为英文。<br />
-<br />
-同时在转录文本的同时，API能够提供每个词或句子出现的具体时间点，帮助用户准确定位音频中的特定部分。<br />
-<br />
-主要功能：<br />
-<br />
-1、音频转文字：将音频文件中的语音内容自动转换成文本形式，让用户可以读到音频里说了什么。<br />
-<br />
-2、支持多种语言的翻译转录：如果音频中的语言不是英语，这个API还能先将其翻译成英语，然后再进行转录，使非英语内容也能轻松转换成文本。<br />
-<br />
-3、提供时间戳：OpenAI的Whisper API提供了一个参数timestamp_granularities[]，允许用户获取带有时间戳的更结构化的JSON输出格式。这意味着，在转录文本的同时，API能够提供每个词或句子出现的具体时间点，帮助用户准确定位音频中的特定部分。<br />
-<br />
-4、支持多种音频格式：支持上传25MB以内的文件，包括mp3、mp4、mpeg、mpga、m4a、wav和webm等格式。用户无需转换文件格式即可直接使用。<br />
-<br />
-详细：<a href="https://platform.openai.com/docs/guides/speech-to-text">platform.openai.com/docs/gui…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0YtdUZyNmJjQUFoU0E0LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/dotey/status/1755487926127820830#m</id>
-            <title>RT by @xiaohuggg: 升级了一下科技文章翻译GPT，增加了一个API可以将URL转成Markdown，现在只需要输入URL就可以翻译网页内容
-
-https://chat.openai.com/g/g-uBhKUJJTl-ke-ji-wen-zhang-fan-yi</title>
-            <link>https://nitter.cz/dotey/status/1755487926127820830#m</link>
-            <guid isPermaLink="false">https://nitter.cz/dotey/status/1755487926127820830#m</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 08 Feb 2024 07:05:11 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>升级了一下科技文章翻译GPT，增加了一个API可以将URL转成Markdown，现在只需要输入URL就可以翻译网页内容<br />
-<br />
-<a href="https://chat.openai.com/g/g-uBhKUJJTl-ke-ji-wen-zhang-fan-yi">chat.openai.com/g/g-uBhKUJJT…</a></p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Z5Mllkd1djQUFPdHRFLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Z5M2NLYVhZQUFmMjQwLmpwZw==" />
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Z5LTFnVld3QUVKVFU3LmpwZw==" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1756154223065251911#m</id>
-            <title>马斯克：将用「X」取代手机电话
-
-马斯克称将在几个月后注销自己的电话号码。转而使用「X」进行信息收发和通话🤔</title>
-            <link>https://nitter.cz/xiaohuggg/status/1756154223065251911#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1756154223065251911#m</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 10 Feb 2024 03:12:49 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>马斯克：将用「X」取代手机电话<br />
-<br />
-马斯克称将在几个月后注销自己的电话号码。转而使用「X」进行信息收发和通话🤔</p>
-<p><a href="https://nitter.cz/elonmusk/status/1755870691159626094#m">nitter.cz/elonmusk/status/1755870691159626094#m</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://nitter.cz/xiaohuggg/status/1755985073747447827#m</id>
-            <title>Happy Chinese New Year！
-
-Every One…
-
-🐲🧨🇨🇳</title>
-            <link>https://nitter.cz/xiaohuggg/status/1755985073747447827#m</link>
-            <guid isPermaLink="false">https://nitter.cz/xiaohuggg/status/1755985073747447827#m</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 09 Feb 2024 16:00:40 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Happy Chinese New Year！<br />
-<br />
-Every One…<br />
-<br />
-🐲🧨🇨🇳</p>
-<img src="https://nitter.cz/pic/enc/bWVkaWEvR0Y2REhLRGJNQUFxaHNsLmpwZw==" />
                 ]]>
             </content:encoded>
         </item>
