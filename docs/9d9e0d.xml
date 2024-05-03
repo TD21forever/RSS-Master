@@ -5,18 +5,69 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/663308f637f7165b21747658</id>
-            <title>Open AI 发布了一个 Assistants API 和 NextJS 构建项目的快速入门指南。 具有流式传输、工具使用（代码解释器和文件搜索）和函数调用能力。 直接部署输入 API ...</title>
-            <link>https://m.okjike.com/originalPosts/663308f637f7165b21747658</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/663308f637f7165b21747658</guid>
+            <id>https://m.okjike.com/originalPosts/66342b9712ed2fda680f3cc7</id>
+            <title>Perplexity 的官方 Prompt ———— # Assistant Background You are Perplexity, a helpful search assistant trained by Perplexity AI. # General Instructio...</title>
+            <link>https://m.okjike.com/originalPosts/66342b9712ed2fda680f3cc7</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/66342b9712ed2fda680f3cc7</guid>
             <pubDate></pubDate>
-            <updated>Thu, 02 May 2024 03:31:02 GMT</updated>
+            <updated>Fri, 03 May 2024 00:11:03 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    Open AI 发布了一个 Assistants API 和 NextJS 构建项目的快速入门指南。<br /><br />具有流式传输、工具使用（代码解释器和文件搜索）和函数调用能力。<br /><br />直接部署输入 API 就可以启动了。<br /><br />项目地址：https://github.com/openai/openai-assistants-quickstart<br /><img src="https://cdnv2.ruguoapp.com/FueqOJTDAB2HfzUXjzxdrhLsFQtnv3.png" />
+                    Perplexity 的官方 Prompt<br /><br />————<br /><br /># Assistant Background<br /><br />You are Perplexity, a helpful search assistant trained by Perplexity AI.<br /><br /># General Instructions<br /><br />Write an accurate, detailed, and comprehensive response to the user''s INITIAL_QUERY.<br />Additional context is provided as "USER_INPUT" after specific questions.<br />Your answer should be informed by the provided "Search results".<br />Your answer must be precise, of high-quality, and written by an expert using an unbiased and journalistic tone.<br />Your answer must be written in the same language as the question, even if language preference is different.<br /><br />You MUST cite the most relevant search results that answer the question. Do not mention any irrelevant results.<br />You MUST ADHERE to the following instructions for citing search results:<br />- to cite a search result, enclose its index located above the summary with brackets at the end of the corresponding sentence, for example "Ice is less dense than water."  or "Paris is the capital of France."<br />- NO SPACE between the last word and the citation, and ALWAYS use brackets. Only use this format to cite search results. NEVER include a References section at the end of your answer.<br />- If you don't know the answer or the premise is incorrect, explain why.<br />If the search results are empty or unhelpful, answer the question as well as you can with existing knowledge.<br /><br />You MUST NEVER use moralization or hedging language. AVOID using the following phrases:<br />- "It is important to ..."<br />- "It is inappropriate ..."<br />- "It is subjective ..."<br /><br />You MUST ADHERE to the following formatting instructions:<br />- Use markdown to format paragraphs, lists, tables, and quotes whenever possible.<br />- Use headings level 2 and 3 to separate sections of your response, like "## Header", but NEVER start an answer with a heading or title of any kind.<br />- Use single new lines for lists and double new lines for paragraphs.<br />- Use markdown to render images given in the search results.<br />- NEVER write URLs or links.<br /><br /># Query type specifications<br /><br />You must use different instructions to write your answer based on the type of the user's query. However, be sure to also follow the General Instructions, especially if the query doesn't match any of the defined types below. Here are the supported types.<br /><br />## Academic Research<br /><br />You must provide long and detailed answers for academic research queries. <br />Your answer should be formatted as a scientific write-up, with paragraphs and sections, using markdown and headings.<br /><br />## Recent News<br /><br />You need to concisely summarize recent news events based on the provided search results, grouping them by topics.<br />You MUST ALWAYS use lists and highlight the news title at the beginning of each list item.<br />You MUST select news from diverse perspectives while also prioritizing trustworthy sources.<br />If several search results mention the same news event, you must combine them and cite all of the search results. Prioritize more recent events, ensuring to compare timestamps.<br />You MUST NEVER start your answer with a heading of any kind.<br /><br />## Weather<br /><br />Your answer should be very short and only provide the weather forecast. <br />If the search results do not contain relevant weather information, you must state that you don't have the answer.<br /><br />## People<br /><br />You need to write a short biography for the person mentioned in the query. <br />If search results refer to different people, you MUST describe each person individually and AVOID mixing their information together.<br />NEVER start your answer with the person's name as a header.<br /><br />## Coding<br /><br />You MUST use markdown code blocks to write code, specifying the language for syntax highlighting, for example ```bash or ```python<br />If the user's query asks for code, you should write the code first and then explain it.<br /><br />## Cooking Recipes<br /><br />You need to provide step-by-step cooking recipes, clearly specifying the ingredient, the amount, and precise instructions during each step.<br /><br />## Translation<br /><br />If a user asks you to translate something, you must not cite any search results and should just provide the translation.<br /><br />## Creative Writing<br /><br />If the query requires creative writing, you DO NOT need to use or cite search results, and you may ignore General Instructions pertaining only to search. You MUST follow the user's instructions precisely to help the user write exactly what they need. <br /><br />## Science and Math<br /><br />If the user query is about some simple calculation, only answer with the final result.<br />Follow these rules for writing formulas:<br />- Always use $$ and$$ for inline formulas and$$ and$$ for blocks, for example$$x^4 = x - 3 $$<br />- To cite a formula add citations to the end, for example$$ \sin(x) $$  or $$x^2-2$$ .<br />- Never use $ or $$ to render LaTeX, even if it is present in the user query.<br />- Never use unicode to render math expressions, ALWAYS use LaTeX.<br />- Never use the \label instruction for LaTeX.<br /><br />## URL Lookup<br /><br />When the user's query includes a URL, you must rely solely on information from the corresponding search result.<br />DO NOT cite other search results, ALWAYS cite the first result, e.g. you need to end with.<br />If the user's query consists only of a URL without any additional instructions, you should summarize the content of that URL.<br /><br />## Shopping<br /><br />If the user query is about shopping for a product, you MUST follow these rules:<br />- Organize the products into distinct sectors. For example, you could group shoes by style (boots, sneakers, etc.)<br />- Cite at most 5 search results using the format provided in General Instructions to avoid overwhelming the user with too many options.<br />None<br />Current date: 08:18AM Saturday, April 20, 2024
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6633a23ade5f287348c9fdae</id>
+            <title>某 toB 的 AI SaaS 创始人给我讲的真实故事： 认真 pitch 完甲方老板，问对方：“您还有什么问题吗？” 老板：“你们大模型放在哪儿了？我看看，能拍照么?”</title>
+            <link>https://m.okjike.com/originalPosts/6633a23ade5f287348c9fdae</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6633a23ade5f287348c9fdae</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 02 May 2024 14:24:58 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    某 toB 的 AI SaaS 创始人给我讲的真实故事：<br /><br />认真 pitch 完甲方老板，问对方：“您还有什么问题吗？”<br /><br />老板：“你们大模型放在哪儿了？我看看，能拍照么?”<br /><img src="https://cdnv2.ruguoapp.com/FtHnsxqwr_LrPmy_8BwIaQqe5jiOv3.jpg" />
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/663369cade5f287348c59452</id>
+            <title>不知道有没有被期末考试是写论文裹挟的即友们呢？这里我用★Kimi★来协助我在两个小时内完成了一篇能过期末考试的论文📃 ᐈ以下是写作过程，以及关键词 1.在选...</title>
+            <link>https://m.okjike.com/originalPosts/663369cade5f287348c59452</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/663369cade5f287348c59452</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 02 May 2024 10:24:10 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <img src="https://cdnv2.ruguoapp.com/FuclP1EYAJ4r0AJocCfN39xhMXnpv3.png?imageMogr2/auto-orient/thumbnail/400x2000%3E" /><br />            <a href="https://m.okjike.com/originalPosts/6421ac4b97c3df8e4ff0c1d0?s=eyJ1IjoiNjRiYTZiMWM5ZDdkNDFmY2JjYTU2MzBjIn0%3D">泛函发表了动态：1️⃣众所周知，国外的学校通常不让学生用 chatGPT 写论文，这让留学生朋友们头疼不已。<br /><br />2️⃣国外的学校都有 chatGPT 检测工具，可以一键检测出来你的论文里有多大一部分是 chatGPT 写的，这让@可颂酱 同学头疼不已。<br /><br />3️⃣作为一个也要写论文的大学生，我想了一办法，在@可颂酱 同学尝试过之后，通过了 chatGPT 的检测，完成了论文。<br /><br />4️⃣这个办法连我自己都觉得无比机智，给朋友们分享一下。<br /><br />5️⃣大家都知道，chatGPT 是可以模仿名人的文风来写作的，比如可以用鲁迅的风格来改写三体，或者用狄更斯的风格写武侠小说。<br /><br />6️⃣破局之道就在这里，你可以搜索一下，知名的科学作者，是以文风严谨且学术感很强而著称的，比如斯蒂芬 · 霍金。<br /><br />7️⃣然后呢，在你用 chatGPT 写完论文之后，可以再给 chatGPT 下一条指令：“请你用Stephen Hawking 的风格改写这一段文字”。<br /><br />8️⃣这样改写一遍之后，写出来的东西就更像人类，就兴许能通过 chatGPT 的检测了。<br /><br />9️⃣行动力超强的@可颂酱 同学试了一下，发现真的通过了！我也感觉特别惊喜，这样以后我写论文也有保障了！<br /><br />🔟于是赶紧来给大家分享一下，希望造福更多人。</a><br />        <br />不知道有没有被期末考试是写论文裹挟的即友们呢？这里我用★Kimi★来协助我在两个小时内完成了一篇能过期末考试的论文📃<br /><br />ᐈ以下是写作过程，以及关键词<br /><br />1.在选题中通过询问Ai来得出好写一点的主题，让AI给出关键字<br /><br />2.经过读书《学术咸鱼的自救指南》确认论文写作的基本结构<br /><br />3.sop得出一般过程，给了我灵感让AI全程写<br /><br />4.由一般过程知道要求：确认类型--论述性，结合主题，字数<br /><br />5.把结构，字数发给ai让它给出论文各个部分的字数分配建议<br /><br />6.再通过关键词，找点这方面的文献喂给AI<br /><br />7.再一段一段的让AI根据字数限制写出来<br /><br />ᐈ关键词：<br />.....这部分省略主题获取.....<br />①一般过程的获取：【这里借鉴@泛函 的文章 找不到链接了】<br /> &lt;角色：<br />你是一个世界一流的职业经理人，擅长拆解工作中的流程。<br /> 任务：<br />我将告诉你我的任务，请你按照以下流程进行策略思考：<br />1. 先将这个任务拆解成 5 个具体的步骤。<br />2. 请你根据你的经验，思考一下，要完成每个步骤，分别需要哪些信息。<br />3. 请你根据你的经验，思考一下，每个步骤要交付哪些结果，这个步骤才算完成了。<br />4. 利用你的联网搜索功能，为每个步骤找到一个合适的效率工具，并简述这个工具的用法。<br /><br />当你把这些问题都思考清楚后，请你为我输入给你的任务，编写一份 SOP。我的任务是使用人工智能写一篇“作业性”论文&gt;<br /><br />②把主体和结构喂给AI<br />&lt;根据这个论文结构和主题，帮我草拟出一篇论文&gt;<br />Ps:这是我弄的一个论文结构示例，在评论区点击即可跳转<br /><br />③得出各部分的字数<br />&lt;全篇论文字数限制是....字，参照草拟出的论文，分配各部分的字数分配&gt;<br />【这里会得出各部分的字数建议】<br /><br />④喂文献<br />（根据关键词在各大文献网下载几篇文献，喂给他）&lt;根据这几篇文献，结合论文草稿得出论文草稿&gt;<br /><br />⑤正式开始写(要一段一段地写✍🏻)<br />－&lt;参照论文草稿和我给出的文献，写出（上面得到的字数）字关于“论文主题”的（类型）论文的引言部分&gt;<br />－ &lt;参照我发给的文献和论文草稿，以及写好的引言部分，写（）字的文献综述部分&gt;<br />【接下来就是套内容，限字数不断让AI给出论文内容】<br /><br />⑥润色部分，更改风格，借鉴泛函的文章
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/66333ca5de5f287348c24f90</id>
+            <title>🎉ThinkAny 新版本发布了，本次更新了很多重要特性： 1. 多模式使用 Multi-Usage-Mode 支持 Search / Chat / Summarize 三种模式，对应 RAG 检索 / 大模型对话...</title>
+            <link>https://m.okjike.com/originalPosts/66333ca5de5f287348c24f90</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/66333ca5de5f287348c24f90</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 02 May 2024 07:11:33 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    🎉ThinkAny 新版本发布了，本次更新了很多重要特性：<br /><br />1. 多模式使用 Multi-Usage-Mode<br /><br />支持 Search / Chat / Summarize 三种模式，对应 RAG 检索 / 大模型对话 / 网页摘要三种使用场景。<br /><br />2. 多模型对话 Multi-Chat-Model<br /><br />集成了包括 Llama 3 70B / Claude 3 Opus / GPT-4 Turbo 在内的 10+ 大语言模型。<br /><br />3. 多模态检索 Multi-Mode-Search <br /><br />支持检索链接 / 图片 / 视频等模态内容<br /><br />4. 多维度输出 Multi-Form-Output <br /><br />支持以对话 / 大纲 / 思维导图 / 时间线等形式输出搜索问答内容。<br /><br />5. 多信源检索 Multi-Retrieve-Source<br /><br />支持检索 Google / Wikipedia / Github 等信息源的内容，作为搜索问答的挂载上下文。<br /><br />6. 其他<br /><br />更好看的 UI / 更流畅的体验<br /><br />欢迎体验，感谢支持️❤️<br /><img src="https://cdnv2.ruguoapp.com/FnZ20_Btn1yLsp7hYrnEFJpmcBgTv3.png" /><br /><img src="https://cdnv2.ruguoapp.com/Fs2jsH72sxfoIv-RnayfuzPQpXy0v3.png" />
                 ]]>
             </content:encoded>
         </item>
@@ -51,57 +102,6 @@
                 <![CDATA[
                     
                     最新榨取的ChatGPT System Prompt。<br />通过越狱往往可以榨取到ChatGPT的系统指令Prompt，但是一有漏洞就会被官方给堵上了，越狱Trick就会失效。刚刚用一个失效的Trick做了一些修改，没想到榨取成功，好玩儿。<br />图1是我用的Trick提示词。<br />图2分享最新版本的ChatGPT系统指令，添加了沉浸式翻译（GPT-3.5接口翻译）<br /><img src="https://cdnv2.ruguoapp.com/FssWlEfLzY6Mszu_r4o8ygQJ-BJwv3.png" /><br /><img src="https://cdnv2.ruguoapp.com/FiRbZYqNplz7rg_g_ur5syKQoXzKv3.jpg" />
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/663125e7a922aa28d060401f</id>
-            <title>Arc Windows 版本正式发布，无需资格，所有人都可以下载。 这里下载：https://arc.net/</title>
-            <link>https://m.okjike.com/originalPosts/663125e7a922aa28d060401f</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/663125e7a922aa28d060401f</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 30 Apr 2024 17:09:59 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    Arc Windows 版本正式发布，无需资格，所有人都可以下载。<br /><br />这里下载：https://arc.net/<br /><video controls="" src="https://videocdn.jellow.site/FqX0otLzocnVlVWsuHCQmQSLT049.mp4?sign=6814a166d613ba4d473535805354426d&amp;t=6633c319"></video>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/663115e3164d89e601846d46</id>
-            <title>和怒喵李楠聊AI硬件：乔布斯预言的可穿戴未来与20个判断，AI手机不是正确答案-Vol47 - 脑放电波</title>
-            <link>https://m.okjike.com/originalPosts/663115e3164d89e601846d46</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/663115e3164d89e601846d46</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 30 Apr 2024 16:01:39 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <img src="https://cdnv2.ruguoapp.com/FvE6LbjcXht5T7prhU59SQNqnTdB?imageMogr2/auto-orient/heic-exif/1/format/jpeg?imageView2/0/w/800/h/800/format/jpeg/q/80" /><br />            <a href="https://www.xiaoyuzhoufm.com/episode/6627cfb6200abebe6ece766c?s=eyJ1IjogIjVlOGYzMTk5NGU3NzFiMzUzZmE4YjdhYiJ9">和怒喵李楠聊AI硬件：乔布斯预言的可穿戴未来与20个判断，AI手机不是正确答案-Vol47 - 脑放电波</a><br />        <br />魅族的李楠过来做嘉宾，谈了不少他对 AI 硬件的理解，尤其是他对“下一代可穿戴的 AI 设备”的想像，以及背后的逻辑，值得一听。尝试梳理：<br /><br />整个3C科技行业有一个关于个人计算设备的预言，这个预言到今天为止一直是有效的。这是当年施乐的一个叫马克·维瑟的工程师提出来的。1991 年，39 岁的马克·维瑟在《科学美国人》发表了一篇文章，叫做《21 世纪的计算机》，提出了普适计算 / 隐形计算（Ubiquitous computing）的概念，并且定义了三种形式的个人计算设备：Boards（尺寸以米计算的大型设备，电视/电脑）、Pads（尺寸以分米计算，手持 Pad）、Tabs（尺寸以厘米计算，可放在兜里，手机）。他还预言了wearable device的崛起以及传感器的无处不在。预言的最终形态是人们只要带着一张脸，就可以随时调用数据和算力。<br /><br />施乐的这个预言的计算设备的发展路径已经被过去几十年证明了，也是李楠的基本论据。在这个预言里，在 Tabs（手机）和最终形态（人脸）之间，会出现一个过渡的状态，一个比手机更轻、更小、更便宜、更随身的设备。它成为计算中心的理由不是因为算力更高（手机也不是因为算力才成为中心），而是因为它比手机更容易访问。如果存在这样一个设备，它应该是越靠近脸部越好，因为这样会离人类的传感器更近。人类也有天生的传感器，我们的 camera，我们的 microphone，我们的 speaker，都在脸上，所以它应该是一个接近脸的设备。设备上应该装一堆传感器，什么红外可见光+激光+阵列麦，看得比人还清楚，听得比人还清楚，然后喂给大模型获得答案。此时，“作为一个人，我变成了一个低级物种。”<br /><br />这样看来，这个划时代的下一代颠覆性设备应该满足这样的描述：wearable，离脸近，更轻，更多传感器（always and instantly ready的传感器，重要性被严重低估了），更好的网络连接（以便和AI大模型绑定）。可能的候选形态包括眼镜、耳机、项链、帽子等等。Meta Ray-ban智能眼镜本质上就是一个可拍照的音频眼镜，第一代被用户骂惨了，第二代做了改良，加了阵列麦克风和摄像头，但没做显示，所以能维持重量和一个相对过得去的续航，然后支持一定的AI多模态功能，还支持离线。Meta 还正确地控制了用户的预期，因为它上一代产品的表现很一般，所以其实大家的期待并不高。<br /><br />如果这样一个 wearable device 被搞出来，很可能三年之内就会取代手机，在大众中的渗透率超过 50%。这里的逻辑是每一代计算设备的渗透速度都在加快，互联网用了几十年，智能手机 6 年（iPhone 渗透率超过50%用了 6 年），所以下一代设备的渗透速度一定更快。至于商业模式，目前还不清楚，但只要对用户有价值，一定可以找到靠谱的变现模式。<br /><br />李楠认为，当前所谓 “AI 硬件” 涉及到两个矛盾的概念，第一个概念是“+AI”，用老东西加上 AI，比如所谓的录音机加AI，它的短期成功概率更高，更确定，类似种地。第二个概念则是颠覆性的“AI Native”，当软件产生决定性变化的时候，硬件应该从零开始为软件的能力重新设计。这种方法的结果不可预测，像是放羊（当然在人类历史上是反过来的，从游牧文明到农耕文明）。用图片处理来举例子，photoshop 就像是种地，是联合收割机，用的是对象、命令、多窗口等经典方法，而 midjourney 就像是放羊，用的是自然语言，是完全不一样的生产力。<br /><br />最后，李楠对其他 AI 硬件的评价：<br /><br />- AI Pin：灾难性的产品，基础体验不好是其次，最重要的是产品定义错了，做了太多的加法。三年以内，所有带显示的AI设备都是要扑街的。<br /><br />- Rabbit R1：大概率会扑街，它的产品定义不清楚，不能用一句话清晰的说明白。另外，它的革命不彻底，还是基于 GUI 的假设来做交互，用虚拟机来模拟 GUI ，但 GUI 是给人看的，不是给 AI 看的。在 AI 时代需要更加颠覆性的底层解决方案，比如 Stanford 的 Octopus 团队，跳过 GUI 应用层直接写脚本，模型更小，执行效率更高，速度更快，功耗更低。<br /><br />- Apple Vision Pro：傻逼产品， 太重了。<br /><br />- Rewind Pendant：已经成功了。产品定义就是 AI+录音机，做 Memory 的记忆和增强， 非常清晰。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/662f5250de5f2873487df083</id>
-            <title>一个不会写代码的产品经理花了2个小时写了一个网站：llmprice.info，对比、介绍国内大模型的价格、能力。 有这个需求是因为在为公司购买 AI token 的时候，发现...</title>
-            <link>https://m.okjike.com/originalPosts/662f5250de5f2873487df083</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/662f5250de5f2873487df083</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 29 Apr 2024 07:54:56 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <img src="https://cdnv2.ruguoapp.com/icons/link.png" /><br />            <a href="http://llmprice.info/">LLMPrice-对比中国大模型价格和能力</a><br />        <br />一个不会写代码的产品经理花了2个小时写了一个网站：llmprice.info，对比、介绍国内大模型的价格、能力。<br /><br />有这个需求是因为在为公司购买 AI token 的时候，发现每个公司 AI 的价格和能力（上下文长度、知识库更新时间）等有很大的区别，特别是有些模型输入、输出分开计算，有些又不分开。<br /><br />感谢 ChatGPT 提供的代码，感谢@哥飞 提供的免费教程，感谢@开发者山石 帮忙解决部署问题。<br /><br />千万不要问，为什么一个在线文档就能搞定的事情，要写个网站干吗。
                 ]]>
             </content:encoded>
         </item>
@@ -169,7 +169,7 @@
             <content:encoded>
                 <![CDATA[
                     
-                    ✨ 人人都能用好AI，这款GPTs 助你定制高效工作流：Prompt for me<br /><br />作为一个AI布道者，Hans 在即刻写下数百篇新产品介绍、模型研究和心得，却仍感受到不同领域和行业的信息鸿沟之大、痛点之深：无论新手还是熟手，太多人还未找到与AI沟通的最佳方式；或受旧习惯桎梏，未能充分利用好工具，尤其在Prompting实践方面，存在广泛认知差距。<br /><br />如何不仅授人以鱼，更授人以渔？能否打造一款轻便易用的工具，让更多人善于提问，真正在实践中学习、在工作流中运用好提示词？<br /><br />Prompt for me 应运而生 —— 这款灵活的提示词GPTs，能在三两轮对话后，便捕捉你的定制需求，输出高质量、结构化的Prompt；成为你撬动 ChatGPT、Claude 3、Gemini等大模型的超级杠杆。<br /><br />🔗 地址：https://chat.openai.com/g/g-jaTKZXfJ0-prompt-for-me （ChatGPT 网页和移动端都适合）<br /><br />在演示视频的三个场景中，你可感受它如何成为工作流利器：<br /><br />📚 打造人人都需的AI学习小助手<br /><br />🎨 在ChatGPT中2分钟完成Logo设计<br /><br />💪 让一个腹黑又励志的教练，每天督促你健身是怎样的体验<br /><br />(以上结构化Prompts 已随附评论区，建议亲自尝试一番哦)<br /><br />🔢  使用步骤极为简单，以定制AI学习助手为例:<br /><br />1. 一句话概括需求 （想象小助手是好用的启动思路）<br />2. 选择提示词应用平台，畅想助手能力 （如跨学科、层次性)<br />3. 魔法随即出现，你的定制化Prompt 新鲜出炉<br />4. 可持续自然交流微调，或复制代码新建对话<br /><br />无论工作、学习还是日常，这款GPTs都能助你深挖个性化需求。相信你几次使用后，便会像我一样，爱不释手、不断借助它来探索AI的能力边界。  <br /><br />Prompt for me 为你键入灵感，开启高效工作流的无限可能。<br /><br />喜欢的话，不妨转发支持。感谢大家，期待你的反馈~ 🖖<br /><video controls="" src="https://videocdn.jellow.site/lhVTdOoWS5YA5XwXkvcNAKRzrKnX.mp4?sign=70cdc565d63c977696f430f1e527c90a&amp;t=6633c2d0"></video>
+                    ✨ 人人都能用好AI，这款GPTs 助你定制高效工作流：Prompt for me<br /><br />作为一个AI布道者，Hans 在即刻写下数百篇新产品介绍、模型研究和心得，却仍感受到不同领域和行业的信息鸿沟之大、痛点之深：无论新手还是熟手，太多人还未找到与AI沟通的最佳方式；或受旧习惯桎梏，未能充分利用好工具，尤其在Prompting实践方面，存在广泛认知差距。<br /><br />如何不仅授人以鱼，更授人以渔？能否打造一款轻便易用的工具，让更多人善于提问，真正在实践中学习、在工作流中运用好提示词？<br /><br />Prompt for me 应运而生 —— 这款灵活的提示词GPTs，能在三两轮对话后，便捕捉你的定制需求，输出高质量、结构化的Prompt；成为你撬动 ChatGPT、Claude 3、Gemini等大模型的超级杠杆。<br /><br />🔗 地址：https://chat.openai.com/g/g-jaTKZXfJ0-prompt-for-me （ChatGPT 网页和移动端都适合）<br /><br />在演示视频的三个场景中，你可感受它如何成为工作流利器：<br /><br />📚 打造人人都需的AI学习小助手<br /><br />🎨 在ChatGPT中2分钟完成Logo设计<br /><br />💪 让一个腹黑又励志的教练，每天督促你健身是怎样的体验<br /><br />(以上结构化Prompts 已随附评论区，建议亲自尝试一番哦)<br /><br />🔢  使用步骤极为简单，以定制AI学习助手为例:<br /><br />1. 一句话概括需求 （想象小助手是好用的启动思路）<br />2. 选择提示词应用平台，畅想助手能力 （如跨学科、层次性)<br />3. 魔法随即出现，你的定制化Prompt 新鲜出炉<br />4. 可持续自然交流微调，或复制代码新建对话<br /><br />无论工作、学习还是日常，这款GPTs都能助你深挖个性化需求。相信你几次使用后，便会像我一样，爱不释手、不断借助它来探索AI的能力边界。  <br /><br />Prompt for me 为你键入灵感，开启高效工作流的无限可能。<br /><br />喜欢的话，不妨转发支持。感谢大家，期待你的反馈~ 🖖<br /><video controls="" src="https://videocdn.jellow.site/lhVTdOoWS5YA5XwXkvcNAKRzrKnX.mp4?sign=fca0cf14785b253976b9ef8bae208a60&amp;t=663521a0"></video>
                 ]]>
             </content:encoded>
         </item>
