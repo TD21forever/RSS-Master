@@ -5,6 +5,272 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2024/05/tdsql.html</id>
+            <title>分布式数据库入门：以国产数据库 TDSQL 为例</title>
+            <link>http://www.ruanyifeng.com/blog/2024/05/tdsql.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2024/05/tdsql.html</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 29 May 2024 09:03:49 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2>一、简介</h2>
+
+<p>今天，跟大家分享一些企业级的互联网技术。</p>
+<p>我要介绍的就是分布式数据库（distributed database）。我尽量用通俗的语言，说清楚它的概念、产品和用法，文末还会提供学习资料下载。</p>
+
+<p>分布式数据库堪称最重要的数据库，几乎所有你知道的大型互联网服务，都运行在它之上。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052101.webp" title="" /></p>
+
+<p>平时，我们自己开发，接触的都是单机数据库（又称集中式数据库），就是数据库只运行在一台服务器上。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052001.webp" title="" /></p>
+
+<p>（图片说明：左侧的单个数据库服务器，支撑着整个应用。）</p>
+
+<p><strong>分布式数据库指的是，数据库系统分布在多台服务器。</strong></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052002.webp" title="" /></p>
+
+<p>(图片说明：单个数据库分布在多台服务器上，共同支撑应用。)</p>
+
+<p>在宏观层面，金融、电信、航空、物流、电商等国民经济的重要产业，都离不开分布式数据库。</p>
+
+<p>如果没有它，我们很难想象生活会变成什么样，比如12306那样的购票网站，就没法提供服务了。</p>
+
+<p>在个人层面，当你从初级开发者成长为大型项目的架构师，就多多少少会遇到分布式数据库。</p>
+
+<p>设计架构时，除非只用一台服务器，否则就免不了要考虑，数据在多台服务器之间如何拆分和保存。</p>
+
+<p>总之，产品做大以后，分布式数据库是避不开的。对于个人来说，这也意味着事业和能力的进步。</p>
+
+<h2>二、分布式数据库的优点</h2>
+
+<p>分布式数据库为什么那么重要？因为它有一些单机数据库无法比拟的优点。</p>
+
+<p><strong>（1）更安全</strong>。分布式数据库包含多个节点，不管是放在同一个机房，还是不同机房，都要比单机数据库安全得多。</p>
+
+<p><strong>（2）高可用</strong>。如果单个数据库节点故障下线，其他节点还可以照常工作，不会单点失败。</p>
+
+<p><strong>（3）性能更好</strong>。对于大数据、大计算量的任务，分布式数据库可以并行处理，大大缩短处理时间。</p>
+
+<p><strong>（4）体验更好</strong>。当数据库分布在多个机房，可以为用户分配就近的数据库节点，提供更好的响应速度。</p>
+
+<h2>三、分布式数据库的难点</h2>
+
+<p>虽然有上面这些优点，但是分布式数据库的使用并不普及，小公司一般不用它，这是为什么？</p>
+
+<p>主要原因是，<strong>分布式数据库有两大问题，阻碍了它的普及：成本高和复杂性。</strong></p>
+
+<p>分布式数据库属于"异地多活"，提供了额外的冗余性，来保障数据安全，成本高自不必多言。</p>
+
+<p>它的复杂性主要体现在下面几点。</p>
+
+<p><strong>（1）一致性问题</strong>。如何保证不同节点的数据一致？如果节点的数据不一致怎么办？</p>
+
+<p><strong>（2）通信问题</strong>。怎样保证节点之间的通信可靠？如果通信延迟或失败怎么办？</p>
+
+<p><strong>（3）分区问题</strong>。如果拆分大型数据表，数据储存在不同的节点，那么拆分策略、节点间的数据迁移可能会非常复杂。</p>
+
+<p><strong>（4）优化问题</strong>。如果来自多个节点的数据需要组合，查询就必须优化以提高性能。</p>
+
+<h2>四、CAP 定理</h2>
+
+<p>大家可能知道，有一条著名的 CAP 定理，说的就是分布式系统（包括分布式数据库）无法克服的局限性。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052003.webp" title="" /></p>
+
+<p>分布式系统有三大目标----数据一致（Consistency）、高可用（Availability）、数据分区（Partition tolerance）。</p>
+
+<p>CAP 定理告诉我们，<strong>三大目标无法同时满足，最多只能同时做到两个</strong>。在数据分区的前提下，要么为了（强）一致性，舍弃高可用；要么为了高可用，舍弃（强）一致性。</p>
+
+<p>因此，任何分布式数据库都做不到完美，只能是三大目标的某种取舍和均衡。</p>
+
+<h2>五、分布式数据库的产品</h2>
+
+<p>分布式数据库的历史非常悠久，市场上至少有上百种产品，有开源的，也有闭源的。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052302.webp" title="" /></p>
+
+<p>几乎所有的分布式数据库，既可以单机使用（即作为单机数据库），也可以多机联合，分布式使用。因此，很多我们熟悉的单机数据库，其实也是分布式数据库。</p>
+
+<p>开源的分布式数据库，比较有名的是 Postgres 和 MySQL（关系型数据库），以及 MongoDB 和 CockroachDB（非关系型数据库）。</p>
+
+<p>商业数据库里面，最有名的就是 Oracle。它是分布式数据库事实上的标准，大企业一般都选择用它。</p>
+
+<h2>六、国产数据库 TDSQL</h2>
+
+<p>下面，我选择国产数据库 <a href="https://cloud.tencent.com/product/tddbms">TDSQL</a> 作为示例，介绍分布式数据库的功能和用法。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052503.webp" title="" /></p>
+
+<p>TDSQL 是腾讯的产品，属于国内领先的分布式数据库。腾讯的几乎所有关键业务，比如微信、QQ、腾讯音乐、腾讯游戏等等，都运行在它之上，经受了高强度、海量的实战考验。</p>
+
+<p>外部很多大公司也在用它，比如小红书、拼多多、B 站、海尔、深圳地铁等等。</p>
+
+<p><u>它完全按照金融级的标准打造，属于金融级数据库，注重安全、高可用、高并发</u>，客户目前超过50万。在国内金融行业，它服务 TOP10 银行中的7家，已经助力30余家金融机构的核心系统改造。</p>
+
+<p>TDSQL 是完全的国产数据库，特别强调 Oracle 的兼容，企业现有的 Oracle 数据库可以平滑迁移，它的成本要比 Oracle 低很多。如果国内企业有国产化和供应链安全的考虑，它是很好的替代品。</p>
+
+<p>它的产品能力和自主研发，通过了国家认证（《中国信息安全测评中心的安全可靠测评结果公告（2023年第1号）》），对于国有企业的技术选型，这也是很重要的考虑之一。</p>
+
+<p>最后，TDSQL 是腾讯云对外公开的一个服务，任何人都可以使用。只要在网页上点击几下，就开通了，非常容易上手。</p>
+
+<h2>七、分布式数据库的功能</h2>
+
+<p>我们通过 TDSQL，看看分布式数据库有哪些功能。</p>
+
+<p><strong>（1）强同步复制</strong>。分布式数据库往往采用主从式架构，一个集群有一个主节点（master）和若干个从节点（slave）。系统支持节点之间的强同步复制，以保证数据一致。</p>
+
+<p>具体来说，写入数据时，主节点会等待从节点返回操作成功消息，然后才向用户返回结果，这样保证了主节点和从节点的数据完全一致。</p>
+
+<p><strong>（2）事务一致性</strong>。系统为每一笔事务提供全局唯一数字序列，每个节点都可以查询事务的执行情况，保证在分布式环境下的事务一致性。</p>
+
+<p><strong>（3）自动拆分</strong>。分布式数据库的大型数据表，往往需要进行拆分，储存在不同的节点。TDSQL 支持自动水平拆分（分表），将数据均匀写入到不同节点，查询时也自动聚合返回。</p>
+
+<p>对于用户来说，分表是透明的，完全可以无视，业务端看到的就是一张逻辑完整的表，无需感知后端的分表细节。</p>
+
+<p><strong>（4）高度可扩展</strong>。当数据库性能或容量不足时，TDSQL 可以不停机扩展，只需在控制台点击，就可自动升级完成。系统内的数据迁移、数据均衡和路由切换，都是自动的。</p>
+
+<p><strong>（5）高度灵活性</strong>。用户可以在线变更表结构；遇到某些类型的故障，系统可以自动恢复；所有节点，不管是主节点还是从节点，都可进行读写。</p>
+
+<p><strong>（6）产品管控能力</strong>。TDSQL 对开发者友好，提供大量监控工具，实时监控和告警，每日推送详细的健康探查报告。</p>
+
+<blockquote>
+  <p>腾讯云有一个专门的云服务 DBbrain，利用机器学习、大数据、专家经验引擎等手段，为用户的数据库提供性能、安全、管理等功能。</p>
+
+<p>比如，它会全方位诊断和优化 SQL，发现性能瓶颈，让 SQL、事务、业务流水全链路可观测，可视化展现死锁等异常，易于理解。</p>
+
+<p>它很大程度上了替代了人工 DBA，将传统的人工运维变成智能化服务。</p>
+
+<p>TDSQL 还有一个 AI 智能问答系统（下图）。它基于知识库与小模型训练，快速准确地响应用户查询，相当于一个智能客户，提供专业且个性化的解答。</p>
+</blockquote>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052303.webp" title="" /></p>
+
+<h2>八、TDSQL 的用法</h2>
+
+<p>下面，我来演示一下 TDSQL 的用法，很简单，在网页上开通后，你就可以使用分布式数据库了。</p>
+
+<p><strong>第一步</strong>，在 TDSQL 的<a href="https://cloud.tencent.com/product/tddbms">官网</a>上，进入产品控制台。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052108.webp" title="" /></p>
+
+<p><strong>第二步</strong>，在控制台页面，选择数据库服务器所在的地域（跟你的云服务器应该是同一个地域），以及数据库引擎，然后点击"新建"按钮。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052110.webp" title="" /></p>
+
+<p>目前 TDSQL 有三种引擎：MySQL、自研的 TDStore 和 PostgreSQL。<u>不管哪一种引擎，都具备一样的容灾能力和高可用，并且兼容 Oracle。</u></p>
+
+<p><strong>第三步</strong>，会跳出一个配置页面，让你选择数据库配置。不同的配置，价格不一样。</p>
+
+<p>其中有一项，问你要不要开通"强同步"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052111.webp" title="" /></p>
+
+<p>强同步可以确保主节点和从节点的数据一致性。如果你的应用不要求强一致，更在意快速返回结果，这里可以选择"异步"。</p>
+
+<p><strong>第四步</strong>，配置完成后，会进入付款环节，然后数据库就开通了，你的分布式数据库就已经在线了。</p>
+
+<p>使用时，需要先连接数据库，分成内网连接和外网连接，这里可以<a href="https://cloud.tencent.com/document/product/557/10238">参考文档</a>。需要注意，如果开通外网连接，数据库就暴露在公网上，任何人都可以请求，必须注意安全风险。</p>
+
+<p>连接数据库以后，就可以执行 SQL 语句了，到了这一步，就跟使用普通数据库没有任何区别。<strong>分布式数据库的 SQL 与单机数据库，基本是一样的</strong>。</p>
+
+<h2>九、TDSQL 的最佳实践</h2>
+
+<p>分布式数据有一些最佳实践，下面举出三个（以 MySQL 引擎为例）。</p>
+
+<p><strong>（1）如何将数据导入分布式数据库</strong></p>
+
+<p>这分成两种情况。第一种情况是将现有的单机实例，导入到新建的分布式实例。操作步骤如下（详细命令见<a href="https://cloud.tencent.com/document/product/557/7717">文档</a>）。</p>
+
+<blockquote>
+  <ol start="1">
+<li>导出单机数据库的表结构和数据，拿到两个 SQL 文件。</li>
+<li>打开数据库的表结构文件，设置每个表的主键（primary key），以及分片依据的 shardkey。</li>
+<li>将修改后的两个 SQL 文件，上传到云服务器，导入到分布式数据库。</li>
+</ol>
+</blockquote>
+
+<p>第二种情况是将现有的一个分布式实例，导入到另一个分布式实例。操作步骤与上面一样，只是少了第二步，不需要指定主键和 shardkey，因为原来就有了。（详细命令见<a href="https://cloud.tencent.com/document/product/557/8637">文档</a>）。</p>
+
+<p><strong>（2）如何分片</strong></p>
+
+<p>分片（sharding）是分布式数据库的核心问题之一：到底要架设多少个数据分区？数据在多个分区如何分布？</p>
+
+<p>分片数量取决于，整个数据库预估的最大并发，以及每个分片能够处理的请求数量，可以用下面的公式计算。</p>
+
+<blockquote>
+  <p>读写并发性能 = ∑（分片性能 * 分片数量）</p>
+</blockquote>
+
+<p>单个分片的性能，主要与实例的 CPU / 内存数量相关。单个分片规格越高、分片数量越多，数据库系统的处理能力越强。</p>
+
+<p>除了性能，分片还要考虑容量问题。一般来说，单个分片至少存储5000万行数据。</p>
+
+<p><strong>（3）如何配置硬件</strong></p>
+
+<p>分布式数据库的硬件，下面给出三个推荐的配置。</p>
+
+<blockquote>
+  <p>A. 测试功能。</p>
+
+<p>这种情况不要求性能，只用来验证系统，建议配置2个节点，每个节点 2GB 内存 + 25GB 硬盘。</p>
+
+<p>B. 业务发展初期。</p>
+
+<p>这种情况数据规模较小，增长快，建议配置2个节点，每个节点 16GB 内存 + 200GB 硬盘。</p>
+
+<p>C. 业务发展稳定期。</p>
+
+<p>这种情况根据业务实际情况配置，可以配置4个节点，每个节点硬件为：(当前业务峰值 * 增长率) / 4。</p>
+</blockquote>
+
+<h2>十、总结</h2>
+
+<p>总的来说，当代的分布式数据库产品，将自身的大量复杂性，都隐藏了起来，为用户提供一个易用的操作接口。</p>
+
+<p>一般来说，不建议自己搭建分布式数据库，即使你有专门的数据库工程师和运维工程师，成本也会非常高。使用云服务商的产品，是更经济更省事的选择。</p>
+
+<p>就拿 TDSQL 来说，它有两个版本：集群版和基础版。前者是多节点的，供企业在生产环境使用；后者是单节点的，费用较低，专门供个人使用，但功能是一样的，很适合个人开发者学习或者尝试分布式数据库。</p>
+
+<p>（完）</p>
+
+<h2>福利内容</h2>
+
+<p>在这个 AI 时代，如何使用云服务，助力企业的数据管理？</p>
+
+<p>下面是三个国内大厂的真实案例。</p>
+
+<blockquote>
+  <p>案例一：<strong>微信读书的"AI 问书"</strong>。这个功能让 AI 来回答读者提问，关于海量的书籍内容的各种问题。</p>
+
+<p>案例二：<strong>海峡银行核心系统升级</strong>。省级银行如何使用 TDSQL，将核心系统升级为分布式数据库。</p>
+
+<p>案例三：<strong>极光大数据平台的架构优化</strong>。极光（URORA）是国内领先的开发者服务提供商，数据量近百 PB，节点过千，文件4亿，应该如何优化架构？</p>
+</blockquote>
+
+<p>它们来自腾讯云内部编写的资料 <strong>《AGI 时代首选的全栈式数据管理方案》</strong> ，包括工具指南、用户案例分享等诸多内容。</p>
+
+<p>现在可以<strong>免费下载</strong>，只需微信扫描下方二维码。如果你关注国内真实环境中的企业级开发，不妨看看。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052803.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052901.webp" title="" /></p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2024-05-29T09:03:49+08:00">2024年5月29日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2024/05/weekly-issue-301.html</id>
             <title>科技爱好者周刊（第 301 期）：OpenAI 的图书馆工位</title>
             <link>http://www.ruanyifeng.com/blog/2024/05/weekly-issue-301.html</link>
@@ -2205,442 +2471,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2024-04-19T08:27:12+08:00">2024年4月19日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2024/04/weekly-issue-296.html</id>
-            <title>科技爱好者周刊（第 296 期）：xz 后门的作者 Jia Tan 是谁？</title>
-            <link>http://www.ruanyifeng.com/blog/2024/04/weekly-issue-296.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2024/04/weekly-issue-296.html</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 12 Apr 2024 07:38:48 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
-<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/4204">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
-
-<h2>封面图</h2>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040706.webp" title="" /></p>
-
-<p>去年底建成的南昌东站，以《滕王阁序》的"落霞与孤鹜齐飞，秋水共长天一色"为灵感，造型宛如展翅翱翔的羽翼，象征城市的腾飞。（<a href="https://www.sohu.com/a/747607834_791225">via</a>）</p>
-
-<h2>xz 后门的作者 Jia Tan 是谁？</h2>
-
-<p>互联网行业最近的重大事件，莫过于 <a href="https://boehs.org/node/everything-i-know-about-the-xz-backdoor">xz 软件的后门</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040903.webp" title="" /></p>
-
-<p>xz 是一种压缩软件，大量用于 Linux 系统，比如系统管理器 systemD 就用它压缩日志。它是 Linux 的基本组件之一，每台服务器几乎都有它。</p>
-
-<p>今年3月底，有人发现它的新版本有点奇怪，让 SSH 的启动时间慢了500毫秒。进一步调查发现，里面竟然有一个后门。</p>
-
-<p>这件事震惊了业界，因为新版本即将纳入主要的 Linux 发行版（比如 Debian 和 Fedora），只差几天而已。到了那时，服务器带有后门，后果不堪设想。</p>
-
-<p>而且，<strong>整个事件经过精心策划，过程长达数年，每一步都毫无破绽</strong>，心思之缜密，耐心之好，能力之强，令人后怕。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040902.webp" title="" /></p>
-
-<p>这个事件开始于2021年4月，一个网名叫做 Jia Tan 的人，第一次向 xz 软件包提交了一个正常的补丁，被顺利合并。</p>
-
-<p>2021年11月和2022年4月，他又提交了两个正常的补丁，也被合并。</p>
-
-<p>然后，突然冒出了几个网友，在邮件列表上向管理员建议，xz 项目缺乏人手，响应迟缓，应该给予 Jia Tan 管理员权限。这个建议被采纳了。但是，人们现在发现，这几个网友都是陌生的邮件地址和名字，根本找不到其他的活动痕迹。</p>
-
-<p>就这样，Jia Tan 成为了管理员，拥有独立发布新版本的权限，先后发了几个版本。虽然他的这些代码可能是无害的，但是扩展了功能，为后面要做的坏事打下了基础。</p>
-
-<p>2024年2月，他添加了后门。代码做了混淆，而且后门不在源代码里面，要在构建阶段才会生成，很难发现。他发了这个版本以后，就开始发信，催促几个大型发行版，尽快收入这个版本。</p>
-
-<p><strong>后门曝光后，Jia Tan 就彻底消失了</strong>，没有任何身份信息，也没有其他痕迹，谁也不知道他到底是谁。人们开始搜集线索，试图找出这个人。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040904.webp" title="" /></p>
-
-<p>他的网名是汉语拼音，邮件全名是 Jia Cheong Tan，中间的 Cheong 似乎是粤语。他的 GitHub 提交时间采用东八时区。他的 IP 地址是新加坡。</p>
-
-<p><strong>一切都在指向，他是一个在新加坡的华人。真的是这样吗？</strong></p>
-
-<p>网名显然是假的，代码提交时间可以更改，至于 IP 地址，已经查明是 VPN 地址。</p>
-
-<p><strong>有没有一种可能，他伪装成华人，栽赃给中国？</strong></p>
-
-<p>有人<a href="https://rheaeve.substack.com/p/xz-backdoor-times-damned-times-and">分析了</a>，他在 GitHub 的所有提交。虽然提交时间可以更改，但也不能改得太过分，毕竟要保持提交顺序和及时性，所以还是能看出一点东西。</p>
-
-<p>他的提交，绝大部分采用东八时区的时间，但是有一些是东二时区和东三时区。</p>
-
-<p>研究者相信，<strong>他很可能是一个东二时区的欧洲人，伪装成东八时区的中国人</strong>。他更改了计算机的时区，但是偶尔有几次忘记了更改。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040905.webp" title="" /></p>
-
-<p>东二时区的国家（上图的绿色部分），主要是东欧国家，以及一部分北欧国家（芬兰和瑞典）和中东国家（以色列和埃及）。</p>
-
-<p>他来自东二时区，主要理由有三点。</p>
-
-<p>（1）他在东二时区的提交日期是冬季，而东三时区的提交日期是夏季。这正好符合欧洲国家和以色列的夏令时切换。</p>
-
-<p>（2）他明显在手动切换时区。举例来说，2022年10月6日，他先在东八时区的17:00:38进行了一次提交，然后又在东三时区的21:53:09再次提交。两次相差不到十个小时，很难相信这一点时间，他已经从中国来到欧洲写代码。</p>
-
-<p>（3）他在中国的农历假日（中秋节、清明节、春节）都有提交，尤其是2023年春节假期（1月21日到1月27日），他有五天提交记录（分别是22日、23日、24日、26日、27日），这说明他不过春节。相反地，他在欧洲人很重视的假期（圣诞节和新年）却没有提交记录。</p>
-
-<p>综上所述，这个 Jia Tan 很可能来自东二时区。不过，这个人（或者组织）非常小心，而且是技术高手，也许永远也发现不了真实身份。</p>
-
-<p>这件事情提醒我们，开源社区的参与者形形色色，不全是好人，有些人非常阴险，不仅干坏事，还伪装身份，栽赃给他人。因此，我们对他人保持善意的同时，也不能丢失警惕。已经有人提议，重要的开源项目不能接受匿名身份的代码提交者。</p>
-
-<h2>科技动态</h2>
-
-<p>1、<a href="https://www.spoon-tamago.com/2531-sato-surname-problem/">日本人都姓佐藤</a></p>
-
-<p>一个日本大学教授警告，如果不改变人口下降的趋势，到了2531年，所有日本人都会姓佐藤（sato）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040206.webp" title="" /></p>
-
-<p>佐藤是日本目前最常见的姓氏，占总人口的1.5%。由于日本人口正在下降，罕见姓氏不断消失，人口向大姓集中。</p>
-
-<p>而且，日本有法律，强制要求女性婚后改用夫家的姓氏，导致小姓更难生存。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040205.webp" title="" /></p>
-
-<p>（图片说明：某场比赛时，球员姓氏都是佐藤。）</p>
-
-<p>根据调查，2022年至2023年间，佐藤姓氏增长率高达0.83%。也就是说，总人口在减少，但是佐藤氏在增加。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040207.webp" title="" /></p>
-
-<p>根据教授的计算，以这个增长率，到了2531年，日本将不存在第二个姓氏，所有人都姓佐藤。</p>
-
-<p>为了警示日本国民，他还办了一个"<a href="https://think-name.jp/">佐藤问题网站</a>"，提出急需改变女性婚后改夫姓的问题。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040204.webp" title="" /></p>
-
-<p>2、<a href="https://www.theguardian.com/environment/2024/mar/24/birding-online-community-10000-species">观察最多鸟类的人</a></p>
-
-<p><a href="https://igoterra.com">iGoTerra</a> 是一个野生动物网上社区，用来记录和管理自己看到的野生动物。</p>
-
-<p>它有一个<a href="https://igoterra.com/rankings?group=33&amp;rank=8&amp;area=312025&amp;year=-1&amp;observedSeen=1">榜单</a>，列出看到最多鸟类的用户排名。最近，该榜单诞生了有史以来第一位看到超过10000种鸟的人。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040303.webp" title="" /></p>
-
-<p>创造记录的是一位70岁的美国退休外交官 Peter Kaestner。下图是2024年2月9日他在菲律宾拍到的捕蜘鸟，这是他看到的第10,000种鸟。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040304.webp" title="" /></p>
-
-<p>这个记录是不可思议的，因为已知的鸟类大约只有1.1万种，这意味着他几乎见过地球上所有鸟。</p>
-
-<p>技术帮助鸟类观察者创造记录。机器学习现在可以从照片中自动认出，这是哪一种鸟，甚至从叫声也可以分辨鸟类，iGoTerra 社区则让爱好者分享在哪里可以看到什么鸟。</p>
-
-<p>另外，由于对于鸟类的理解在发展，物种被不断细分，很多新的鸟类因此诞生。这也是能够突破10000大关的原因之一。</p>
-
-<p>不过，iGoTerra 只要求上传照片或鸟叫的录音作为证据，并不会对真实性进行审核。</p>
-
-<p>3、<a href="https://www.vintag.es/2024/04/steve-wozniak-working-in-garage.html">苹果公司的起源</a></p>
-
-<p>本月，苹果公司庆祝<a href="https://www.benzinga.com/markets/equities/24/04/38023363/happy-48-apple-if-you-invested-1000-in-apple-when-it-went-public-heres-how-much-youd-have">成立48周年</a>。这家公司是在1976年4月1日由乔布斯和史蒂夫·沃兹尼亚克在美国加州成立的。</p>
-
-<p>当时，他们两个在乔布斯父母的车库里面，组装电脑的电路板对外销售。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040208.webp" title="" /></p>
-
-<p>车库非常简陋，下面是当时的一些照片，沃兹尼亚克一个人在干活。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040209.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040210.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040211.webp" title="" /></p>
-
-<p>两位创始人恐怕都没有料到，苹果后来会发展得这么大，真可谓"作始也简，将毕也巨"。</p>
-
-<h2>文章</h2>
-
-<p>1、<a href="https://www.163.com/dy/article/IVGAHL7K0511ABV6.html">史上首位图灵和阿贝尔双料获奖者</a>（中文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024041108.webp" title="" /></p>
-
-<p>计算机科学的最高奖"图灵奖"刚刚揭晓，普林斯顿高等研究院的数学教授艾维·维格森（Avi Wigderson）。他还拿过数学界的最高奖"阿贝尔奖"，是唯一一位双料获奖者。</p>
-
-<p>2、<a href="https://joshcollinsworth.com/blog/antiquated-react">可以替代 React 的框架</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023081606.webp" title="" /></p>
-
-<p>这篇长文对 React 框架提出批评，认为它的很多做法已经过时。文章后半部分介绍了各种可以替代 React 的前端框架。</p>
-
-<p>3、<a href="https://greptime.com/blogs/2024-03-19-keyboard-monitoring">如何生成键盘输入统计看板</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040306.webp" title="" /></p>
-
-<p>本文介绍使用一个 Python 脚本，统计用户在当前计算机按下了什么键。（<a href="https://github.com/ruanyf/weekly/issues/4195">@tisonkun</a> 投稿）</p>
-
-<p>4、<a href="https://www.zdnet.com/article/4-things-claude-ai-can-do-that-chatgpt-cant/">Claude AI 能做，而 ChatGPT 不能做的四件事</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023090711.webp" title="" /></p>
-
-<p>Claude 是 Anthropic 公司推出的大规模语言模型，有免费版和收费的 <a href="https://www.zdnet.com/article/anthropic-unveils-claude-pro-a-paid-subscription-plan-for-its-chatgpt-rival/">Pro 版</a>。本文比较了 Claude 强于 ChatGPT 的四个地方。</p>
-
-<p>5、<a href="https://linuxiac.com/how-to-set-up-caddy-as-reverse-proxy/">如何将 Caddy 作为反向代理</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202403/bg2024032907.webp" title="" /></p>
-
-<p>一篇初学者教程，介绍如何用 Caddy 架设反向代理服务器，它的设置比 nginx 简单，而且自动生成和更新 HTTPS 证书。</p>
-
-<p>6、<a href="https://overreacted.io/goodbye-clean-code/">我后悔重构了代码</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202312/bg2023120807.webp" title="" /></p>
-
-<p>著名程序员 Dan Abramov 的一篇旧文。他曾经觉得同事的代码太冗余，就擅自重构了，让其变得干净。</p>
-
-<p>但是，他后来认识到，那些冗余的代码有可取之处，抽象反而不利于日后的扩展。</p>
-
-<h2>AI 相关</h2>
-
-<p>1、<a href="http://chatgpt.com/">ChatGPT</a></p>
-
-<p>OpenAI 宣布，ChatGPT 取消注册要求，不登录就可以使用。但是，收费的功能（比如 ChatGPT 4 和 DALL-E）还是必须登录。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040201.webp" title="" /></p>
-
-<p>2、<a href="https://www.opera.com/zh-cn">Opera</a></p>
-
-<p>Opera 浏览器<a href="https://press.opera.com/2024/04/03/ai-feature-drops-local-llms/">宣布</a>，通过它就能安装和使用50多个 AI 模型（每个模型占用大约 2GB 空间），大大简化了本地计算机使用 AI 的难度。 </p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040401.webp" title="" /></p>
-
-<p>3、<a href="https://www.suno.ai/">Suno AI</a></p>
-
-<p>Suno AI 是一个"文生音乐"的服务。网友的<a href="https://sunoprompt.com/">这个工具</a>帮助你生成它的提示词，可以调整各种细节。（<a href="https://github.com/ruanyf/weekly/issues/4194">@Lcorinst</a> 投稿）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040305.webp" title="" /></p>
-
-<p>另有一个 <a href="https://sunoaidownload.com/">Suno AI 音乐下载器</a>。（<a href="https://github.com/ruanyf/weekly/issues/4250">@AICodeHunt</a> 投稿）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024041104.webp" title="" /></p>
-
-<p>4、<a href="https://artiversehub.ai/prompt-marketplace">Free Prompt Market</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040311.webp" title="" /></p>
-
-<p>一个收集各种文生图 AI 模型的提示词的网站，可以作为参考工具。（<a href="https://github.com/ruanyf/weekly/issues/4209">@leoli202303</a> 投稿）</p>
-
-<h2>工具</h2>
-
-<p>1、<a href="https://vivirenremoto.github.io/doomcaptcha/">DOOM 验证码</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202403/bg2024032906.webp" title="" /></p>
-
-<p>DOOM 游戏被用作网页验证码，只有消灭指定数目的敌人，才能通过验证。</p>
-
-<p>2、<a href="https://github.com/OneUptime/oneuptime">OneUptime</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040301.webp" title="" /></p>
-
-<p>一个开源的服务可用性检查工具，记录服务的健康状态，如果发现服务下线，立刻发送通知，可以替代 <a href="https://www.statuspage.io/">StatusPage.io</a>。</p>
-
-<p>3、<a href="https://github.com/dashpresshq/dashpress">DashPress</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040302.webp" title="" /></p>
-
-<p>一个开源工具，只需执行一个命令，就会自动分析数据库结构，生成管理后台，号称不用写代码。</p>
-
-<p>4、<a href="https://github.com/weijunext/landing-page-boilerplate">Landing page boilerplate</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040307.webp" title="" /></p>
-
-<p>开源的项目落地页模板，参见<a href="https://juejin.cn/post/7350200488455520267">介绍文章</a>。（<a href="https://github.com/ruanyf/weekly/issues/4197">@weijunext</a> 投稿）</p>
-
-<p>5、<a href="https://github.com/qiweiii/github-custom-notifier">GitHub Custom Notifier</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040308.webp" title="" /></p>
-
-<p>一个开源的浏览器插件，用来监听 GitHub 官方没有提供的一些事件（比如创建 label），事件发生时，浏览器就会发送通知。（<a href="https://github.com/ruanyf/weekly/issues/4199">@qiweiii</a> 投稿）</p>
-
-<p>6、<a href="https://github.com/heyform/heyform">HeyForm</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040310.webp" title="" /></p>
-
-<p>一个开源的表单生成器，创建调查、问卷、投票等，可以不编写一行代码。（<a href="https://github.com/ruanyf/weekly/issues/4207">@iMuFeng</a> 投稿）</p>
-
-<p>7、<a href="https://github.com/dafengzhen/youdeyiwu">Youdeyiwu</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040312.webp" title="" /></p>
-
-<p>一个开源的轻量级论坛，追求界面简洁和使用方便，后端使用 Java，前端使用 Next.js。（<a href="https://github.com/ruanyf/weekly/issues/4211">@dafengzhen</a> 投稿）</p>
-
-<p>8、<a href="https://genji-md.dev/">Markdown Genji</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040313.webp" title="" /></p>
-
-<p>VitePress 的一个插件，用于在 Markdown 文档插入可以执行的代码块，创建交互式文档。（<a href="https://github.com/ruanyf/weekly/issues/4212">@pearmini</a> 投稿）</p>
-
-<p>9、<a href="https://github.com/ruanyf/weekly/issues/4222">Mutative</a></p>
-
-<p>一个操作不可变状态的 JS 库，追求高效。（<a href="https://github.com/ruanyf/weekly/issues/4222">@unadlib</a> 投稿）。</p>
-
-<p>10、<a href="https://github.com/0x2E/fusion">Fusion</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040501.webp" title="" /></p>
-
-<p>一个轻量、简洁的 RSS 聚合和阅读器，使用 Go + Svelte 开发。（<a href="https://github.com/ruanyf/weekly/issues/4223">@0x2E</a> 投稿）</p>
-
-<p>11、<a href="https://github.com/nashaofu/node-screenshots">node-screenshots</a></p>
-
-<p>一个跨平台、零依赖的 Node.js 模块，用于截图和录屏。（<a href="https://github.com/ruanyf/weekly/issues/4224">@nashaofu</a> 投稿）</p>
-
-<p>12、<a href="https://github.com/Bistutu/FluentRead">流畅阅读</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040707.webp" title="" /></p>
-
-<p>一款浏览器翻译插件，支持人工智能引擎。（<a href="https://github.com/ruanyf/weekly/issues/4230">@Bistutu</a> 投稿）</p>
-
-<p>13、<a href="https://github.com/lesderid/keynavish">keynavish</a></p>
-
-<p>使用键盘控制鼠标运动的 Windows 软件。（<a href="https://github.com/ruanyf/weekly/issues/55">@NomandChan</a> 投稿）</p>
-
-<p>14、<a href="https://github.com/k8zdev/k8z">K8Z</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024041002.webp" title="" /></p>
-
-<p>管理 Kubernetes 的开源工具，有手机客户端和桌面客户端。（<a href="https://github.com/ruanyf/weekly/issues/4246">@kofj</a> 投稿）</p>
-
-<h2>资源</h2>
-
-<p>1、<a href="https://qufei1993.github.io/nextjs-learn-cn">Learn Next.js 中文教程</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040309.webp" title="" /></p>
-
-<p>Next.js <a href="https://nextjs.org/learn">官方教程</a>的中文翻译，构建一个全栈 Web 应用程序。（<a href="https://github.com/ruanyf/weekly/issues/4206">@qufei1993</a> 投稿）</p>
-
-<p>2、<a href="https://3dp.ing/">3DP.ing</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040602.webp" title="" /></p>
-
-<p>一个 3D 打印模型的搜索引擎，特点是使用图片搜索。（<a href="https://github.com/ruanyf/weekly/issues/4227">@wangasa</a> 投稿）</p>
-
-<p>3、<a href="https://1000userguide.com">1000UserGuide</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040901.webp" title="" /></p>
-
-<p>该网站整理了300多个免费推广渠道，包括网站、论坛、网址导航、产品目录等，帮助独立开发者推广产品。（<a href="https://github.com/ruanyf/weekly/issues/4240">@naxiaoduo</a> 投稿）</p>
-
-<p>4、<a href="https://github.com/zhuima/awesome-cloudflare">Awesome Cloudflare</a></p>
-
-<p>这个仓库收集基于 Cloudflare 服务的各种开源软件。（<a href="https://github.com/ruanyf/weekly/issues/4244">@zhuima</a> 投稿）</p>
-
-<p>5、<a href="https://github.com/rogerzhu/-bgnet0-cn/tree/main/src">Beej's Guide to Network Concepts 中译</a></p>
-
-<p>网友对<a href="https://beej.us/guide/bgnet0/">《Beej's Guide to Network Concepts》</a>一书的中文翻译。（<a href="https://github.com/ruanyf/weekly/issues/4248">@rogerzhu</a> 投稿）</p>
-
-<h2>图片</h2>
-
-<p>1、<a href="https://www.cnn.com/travel/california-highway-1-damage-big-sur/index.html">加州一号公路</a></p>
-
-<p>加州一号公路从旧金山直到洛杉矶，就建在海岸山脉上，一路沿着太平洋，风景十分优美。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040203.webp" title="" /></p>
-
-<p>但是，正因为建在海边悬崖上，这条公路经常发生地质灾害。本月就发生了崩塌，一部分公路掉进了太平洋，不得不暂时封闭。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024040202.webp" title="" /></p>
-
-<p>2、<a href="https://www.nasa.gov/image-article/craters-edge/">梅子坑</a></p>
-
-<p>梅子坑（plum crater）是一个小型的月球陨石撞击坑，直径约40米，深约10米。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202403/bg2024032901.webp" title="" /></p>
-
-<p>这个陨石坑之所以特别，是因为人类访问过这个地方。</p>
-
-<p>1972年4月21日，阿波罗16号飞船的登月地点，就在梅子坑附近。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202403/bg2024032902.webp" title="" /></p>
-
-<p>宇航员实地考察了这个陨石坑。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202403/bg2024032904.webp" title="" /></p>
-
-<p>当年的脚印至今清晰可见（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202403/bg2024032903.webp" title="" /></p>
-
-<h2>文摘</h2>
-
-<p>1、<a href="https://theconversation.com/what-are-roundabouts-a-transportation-engineer-explains-the-safety-benefits-of-these-circular-intersections-215412">环岛的作用</a></p>
-
-<p>开车时，你可能已经遇到许多环岛。</p>
-
-<p>你有没有想过，这些路口为什么要造环岛？没有环岛，行车面积不就更大了吗？</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023102603.webp" title="" /></p>
-
-<p>本质上，环岛上是一种交通控制措施，相比交通灯控制的传统交叉路口，它们具有多种优势，最重要的一个是安全性。</p>
-
-<p>首先，环岛迫使司机放慢速度，为了调整车头方向，司机不得降速。</p>
-
-<p>其次，环岛减少了潜在冲突点的数量。冲突点就是车辆与车辆、车辆与行人可能发生碰撞的位置，它的数量越多，就越容易发生碰撞。</p>
-
-<p>根据一项研究，环岛只有8个潜在冲突点，而传统的四向交叉路口有32个。</p>
-
-<p>最后，环岛的车道都是紧密相邻的同心圆，并且还有很多进口和出口，迫使车辆减速让行。</p>
-
-<p>根据美国公路管理局估计，环岛取代传统的交叉路口时，可将严重交通事故减少80%到90%。</p>
-
-<p>除了安全性，环岛还有一些其他优点，比如让交通更有秩序，不会出现车辆在交叉路口乱成一团的情形，也能让司机更轻松地掉头。</p>
-
-<h2>言论</h2>
-
-<p>1、</p>
-
-<p>马斯克的管理风格非常独特，他不需要非技术性的中层管理人员，员工表现不佳就会被裁，也不喜欢大型会议。</p>
-
-<p>-- <a href="https://finance.sina.cn/7x24/2024-03-30/detail-inaqasmq1380352.d.html">前特斯拉 AI 总监安德烈·卡帕西</a></p>
-
-<p>2、</p>
-
-<p>有一种开发模式，叫做"头条新闻驱动法"，将项目分解成一个个头条新闻。</p>
-
-<p>选择一个日期，可以发布第一个头条新闻，然后拼命工作在该日期发布，接着转到下一个头条新闻，重复上面的过程。</p>
-
-<p>-- <a href="https://www.spakhm.com/headline-development">《头条新闻驱动法》</a></p>
-
-<p>3、</p>
-
-<p>我们有一栋房子的 WiFi，只在下雨时可用。后来，我发现了原因。</p>
-
-<p>它的 WiFi 是通过桥接器连接另一栋房子的 WiFi，窗外的树长高了，挡住了对面房子的信号。下雨时，雨水压低了树叶，信号就又通了。</p>
-
-<p>-- <a href="https://predr.ag/blog/wifi-only-works-when-its-raining/">《WiFi 在下雨时可用》</a></p>
-
-<p>4、</p>
-
-<p>每年冬天，室内供暖消耗大量能源。如果我们能够发明更舒适、更保暖的保暖内衣，就可以减少能源消耗，同时不牺牲轻便感。保暖内衣允许我们大幅调低供暖温度，并且成本几乎为零。</p>
-
-<p>-- <a href="https://solar.lowtechmagazine.com/2011/02/insulation-first-the-body-then-the-home/">《先保暖身体，再保暖房间》</a></p>
-
-<p>5、</p>
-
-<p>节省几次击键的工具被高估了，保持注意力专注的工具被低估了。</p>
-
-<p>-- <a href="https://www.johndcook.com/blog/2023/01/29/small-scale-automation/">《小型自动化》</a></p>
-
-<h2>往年回顾</h2>
-
-<p><a href="https://www.ruanyifeng.com/blog/2023/04/weekly-issue-249.html">最成功的软件企业家</a>（2023 #249）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2022/03/weekly-issue-199.html">俄罗斯的 HTTPS 证书问题</a>（2022 #199）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2021/03/weekly-issue-149.html">新能源汽车，谁会是赢家？</a>（2021 #149）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2020/03/weekly-issue-99.html">疫情导致的研究生扩招</a>（2020 #99）</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2024-04-12T07:38:48+08:00">2024年4月12日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
