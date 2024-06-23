@@ -5,11 +5,12 @@ from typing import Any, Dict, List
 
 import feedparser
 import openai
+import pandas as pd
 from dotenv import load_dotenv
 from jinja2 import Template
-import pandas as pd
-from root import (CACHE_PATH, CONFIG_PATH, DOCS_DIR, RSS_HTML_TEMPLATE_PATH,
-                  RSS_TEMPLATE_PATH, COST_RECORD_PATH, absolute)
+
+from root import (CACHE_PATH, CONFIG_PATH, COST_RECORD_PATH, DOCS_DIR,
+                  RSS_HTML_TEMPLATE_PATH, RSS_TEMPLATE_PATH, absolute)
 from src.AI.chatgpt import gpt_summary
 from src.cache import CacheKit
 from src.const import FilterField, FilterType, HtmlItem, Item
@@ -28,13 +29,15 @@ def _init():
     init_dirs()
     cache.load_cache()
 
+
 def get_feeds(rss):
     try:
         feed = feedparser.parse(rss["url"])
     except Exception as e:
         logger.error(f"解析错误: {e}")
         return None
-    if feed.bozo: 
+    if feed.bozo:
+        logger.info(f"{feed}")
         error = feed.get("bozo_exception", "")
         if error:
             logger.error(f"解析错误:, error:{error}")
@@ -43,14 +46,17 @@ def get_feeds(rss):
         return None
     return feed
 
+
 def _filter(rss, feed):
     filtered_items = []
     for item in feed.entries:
-        id_ = item.get("id", item.get("link", md5hash_6(item.get("title", "没获取数据"))))
+        id_ = item.get("id", item.get(
+            "link", md5hash_6(item.get("title", "没获取数据"))))
         if item.get("media_content", ""):
             article = ""
         else:
-            article = item.get("summary", "") or item.get("description", "") or ""
+            article = item.get("summary", "") or item.get(
+                "description", "") or ""
         data = {
             "id": id_,
             "guid": id_,
@@ -63,7 +69,7 @@ def _filter(rss, feed):
             "summary": ""
         }
         item = Item(**data)
-        need = True 
+        need = True
         for item_filter in rss.get("filters", []):
             filter_type = FilterType.from_str(item_filter["type"])
             filter_field = FilterField.from_str(item_filter["field"])
@@ -71,24 +77,26 @@ def _filter(rss, feed):
             if not filter_entry(item, filter_type, filter_field, keywords):
                 need = False
                 break
-        if not need: continue
+        if not need:
+            continue
         filtered_items.append(item)
     logger.info(f"过滤后的条目数: {len(filtered_items)}")
     return filtered_items
+
 
 def _read_cost_record_and_add(cost):
     if not os.path.exists(COST_RECORD_PATH):
         df = pd.DataFrame(columns=["time", "cost"])
     else:
         df = pd.read_excel(COST_RECORD_PATH)
-        
+
     message = [datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), cost]
-    df = pd.concat([df, pd.DataFrame([message], columns=["time", "cost"])], ignore_index=True)
+    df = pd.concat([df, pd.DataFrame([message], columns=[
+                   "time", "cost"])], ignore_index=True)
     df.to_excel(COST_RECORD_PATH, index=False)
 
 
-
-def _use_ai(filtered_items:List[Item]):
+def _use_ai(filtered_items: List[Item]):
     cost = 0
     for item in filtered_items:
         key = md5hash_6(item.id)
@@ -107,7 +115,7 @@ def _use_ai(filtered_items:List[Item]):
     if cost:
         logger.info(f"AI 花费: {cost:.8f}")
         _read_cost_record_and_add(cost=cost)
-    
+
 
 def _render_xml(feed, filtered_items):
     with open(RSS_TEMPLATE_PATH, "r") as f:
@@ -116,30 +124,35 @@ def _render_xml(feed, filtered_items):
     logger.info(f"rss xml Done")
     return rss_xml
 
+
 def _output_xml(rss, data):
     if not os.path.exists(DOCS_DIR):
         os.makedirs(DOCS_DIR)
     rss_xml_filename = absolute(DOCS_DIR, rss["name"] + ".xml")
     with open(rss_xml_filename, "w") as f:
         f.write(data)
-        
+
+
 def _output_opml():
     convert_yaml_to_opml(CONFIG_PATH, absolute(DOCS_DIR, "opml.xml"))
-    
-def _render_html(items:List[HtmlItem]):
+
+
+def _render_html(items: List[HtmlItem]):
     with open(RSS_HTML_TEMPLATE_PATH, "r") as f:
         html_template = Template(f.read())
-    html = html_template.render(items=items, updatetime=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    html = html_template.render(
+        items=items, updatetime=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     with open(absolute(DOCS_DIR, "index" + ".html"), "w") as f:
         f.write(html)
-    
-def _add_rss(rss, container:List[HtmlItem]):
+
+
+def _add_rss(rss, container: List[HtmlItem]):
     now = datetime.datetime.now()
     formatted_date = now.strftime("%m%d_%H%M")
     name = rss.get("name", "") + "_" + formatted_date + ".xml"
     new_url = rss.get("name", "") + ".xml"
     container.append(HtmlItem(rss.get("url"), new_url, name))
-    
+
 
 def main():
     # init
@@ -147,21 +160,24 @@ def main():
     # load config
     rss_cfg = get_config()
     # process
-    html_items:List[HtmlItem] = []
+    html_items: List[HtmlItem] = []
     for group_name, group_items in rss_cfg.items():
         for rss in group_items:
             logger.info(f"开始处理: {rss.get('text', '获取失败')}")
             feed = get_feeds(rss)
-            if not feed: continue
+            if not feed:
+                continue
             filtered_items = _filter(rss, feed)
-            if len(filtered_items) == 0: continue
-            if rss.get("use_chatgpt", False): _use_ai(filtered_items)
+            if len(filtered_items) == 0:
+                continue
+            if rss.get("use_chatgpt", False):
+                _use_ai(filtered_items)
             rss_xml = _render_xml(feed, filtered_items)
             _output_xml(rss, rss_xml)
             _add_rss(rss, html_items)
     _render_html(html_items)
     _output_opml()
-        
+
+
 if __name__ == "__main__":
     main()
-        
