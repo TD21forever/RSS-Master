@@ -5,6 +5,176 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2024/10/ai-code-interview.html</id>
+            <title>后面试时代与 AI 刷题</title>
+            <link>http://www.ruanyifeng.com/blog/2024/10/ai-code-interview.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2024/10/ai-code-interview.html</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 10 Oct 2024 08:15:22 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2>一、引言</h2>
+
+<p>七月的时候，我写了一篇文章<a href="https://www.ruanyifeng.com/blog/2024/07/copilot-vs-marscode.html">《AI 编程助手测评：GitHub Copilot vs 豆包 MarsCode》</a>，推荐了后者。</p>
+<p>豆包 MarsCode 团队最近就邀请我，试用他们的新功能"<a href="https://sourl.cn/PzDdn2">代码练习</a>"，它专门用来准备面试和刷题。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024093002.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024093003.webp" title="" /></p>
+
+<p>试用以后，我有很多想法。</p>
+
+<p>我觉得，AI 会改变程序员的面试，以后是 <strong>AI 刷题的后面试时代</strong>。</p>
+
+<h2>二、面试的 LeetCode 刷题</h2>
+
+<p>现在的程序员面试，一般都有算法解题。</p>
+
+<p>为了准备面试，大家都会去刷算法题，最常见的就是使用 LeetCode 题库。</p>
+
+<p>LeetCode 是世界最流行的算法题库。它源自美国，专门收集各种面试算法题，目前已经超过了3000道，不少是互联网大厂的真题。</p>
+
+<p>很多同学坚持不懈，每天投入几个小时，做里面的题目，训练自己的算法能力。一般来说，至少要刷200题，面试才较有把握。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024093001.webp" title="" /></p>
+
+<p>（图片说明：上图是某个老外的刷题统计面板，他一年365天，每天都在刷题，一共刷了1500题。）</p>
+
+<h2>三、AI 颠覆 LeetCode</h2>
+
+<p>生成式 AI 出现后，越来越多的人发现，有了 AI，人肉刷题似乎不那么必要了。</p>
+
+<p>今年（2024）8月份，一位美国网友在 Reddit 论坛发了这样一个帖子。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024092601.webp" title="" /></p>
+
+<p>他说，自己写了一个脚本，让 AI 自动求解 LeetCode 算法题，一天之内做了633道题目，正确率达到了86%，成本只要9美元。</p>
+
+<p>这个帖子引起了巨大反响。</p>
+
+<p><strong>既然 AI 可以提示正确答案，为什么不参考 AI 来准备面试呢？</strong> 何必坚持苦思冥想、徒手 LeetCode 刷题。</p>
+
+<h2>四、AI 助手的解题能力</h2>
+
+<p>我们完全可以跟着 AI 刷题，做到事半功倍。</p>
+
+<p>我选一道 LeetCode 题目，展示一下这是多么简单的事情。</p>
+
+<blockquote><pre><code class="language-javascript">
+你是一个 JavaScript 程序员，请补充完成下面的函数。
+
+要求是输入一个代表罗马数字的字符串（比如"IX"），该函数会返回对应的阿拉伯数字（比如9）。
+
+ /**
+  * @param {string} s 
+  * @return {number} 
+  */ 
+
+var romanToInt = function(s) {
+
+
+};
+</code></pre></blockquote>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024092701.webp" title="" /></p>
+
+<p>选择上面这道题，主要是因为它很短，便于展示。而且，这道题的难度不大，但需要考虑多种情况，很适合用在初级面试。</p>
+
+<p>我选择的 AI 工具，就是 VS Code 编辑器的豆包 MarsCode 插件，它是免费的。</p>
+
+<p>在 VS Code 代码编辑器里，从左边栏打开该插件（如果未安装，可以在插件市场搜索"MarsCode"）。然后，在对话框输入题目。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024092702.webp" title="" /></p>
+
+<p>稍等片刻，AI 就会给出答案以及代码解释。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024092703.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024100801.webp" title="" /></p>
+
+<p>哪个地方看不懂，就向 AI 询问。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024092705.webp" title="" /></p>
+
+<p>这节省多少时间啊，大大加快了刷题速度。</p>
+
+<h2>五、后面试时代</h2>
+
+<p>可以看到，AI 能够快速解决面试算法问题，那么，基于算法解题的面试模式，是不是应该有所改变了？</p>
+
+<p>现在的互联网大厂，都允许工作中使用 AI 模型，面试再要求"徒手解题"，已经有点过时了。</p>
+
+<p>AI 将越来越普及，如果未来的面试不使用 AI，就好像不使用 IDE 编辑器一样不合理，应该允许程序员在面试中使用日常工具。</p>
+
+<p>我的想法是，<strong>面试的考察重点可能会改变，从让面试者解题，变成让面试者解释和审查 AI 生成的代码。</strong></p>
+
+<p>面试时，给你一段 AI 生成的解题代码，让你解释这段代码，并且修正里面的错误和没有考虑到的地方。</p>
+
+<p>这样做有很多好处:（1）更贴近程序员的实际工作模式；（2）能看出程序员的代码阅读和理解能力；（3）难以事前准备或作弊;（4）更能反映一个人的协作能力；（5）也适用于偏向阅读代码而不是编写代码的岗位，比如项目经理、架构师等等。</p>
+
+<p>这可以称为"<strong>基于 AI 的后面试时代</strong>"，即面试从考察编码解题能力，演变到考察代码的审查理解能力。</p>
+
+<h2>六、AI 陪练功能</h2>
+
+<p>现在已经有很多工具，为面试提供 AI 辅助训练。</p>
+
+<p>豆包 MarsCode 的"代码练习"就是一个最新的尝试。我用了以后，觉得对准备面试、有效刷题真的有帮助，可以训练自己与 AI 协同编程。</p>
+
+<p>它是一个基于云 IDE 的<a href="https://sourl.cn/mMbyYL">专门页面</a>，内置了<strong>上百道字节跳动的面试真题</strong>。</p>
+
+<p>所有相关操作都集中在这个页面上，<strong>只要有浏览器就可以使用，刷题全过程不必切换页面</strong>，大大方便了使用：选题、解题、调试、AI 对话......</p>
+
+<p>而且，它是免费的，大家现在就可以试试看：进入<a href="https://sourl.cn/gfce3V">豆包 MarsCode 官网</a>，点击顶部菜单的"<a href="https://sourl.cn/mMbyYL">代码练习</a>"，就可以进入。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024092606.webp" title="" /></p>
+
+<p>这个页面是云 IDE，不需要任何安装，打开后直接在浏览器使用。</p>
+
+<p>默认状态下，页面分成四栏。左侧是面试真题的目录，目前有100道，以后还会不断增加。选中一道题目，点击后可以看到具体内容。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024092607.webp" title="" /></p>
+
+<p>页面右侧是代码框和 AI 框。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024092608.webp" title="" /></p>
+
+<p>在代码框，需要首先选择你的编程语言，共有8种可选（Python、JavaScript、Go、C++、C、Java、Rust、TypeScript），上图是 JavaScript。然后，输入解题代码，再点击顶部的运行按钮，就可以看到运行结果。</p>
+
+<p>在 AI 框，则是三个预设选项，点击后就可以让 AI 提示思路、代码、检查代码。下方还有对话框，用来跟 AI 对话。</p>
+
+<p>一般来说，拿到题目后，（1）先点击"需要一点思路提示"，让 AI 帮助你理解题目。（2）再点击"给我一些代码提示吧"，让 AI 给出初步代码。（3）你修改和完善代码，再点击"帮我检查一下代码"，看看会不会报错。</p>
+
+<p>此外，这个页面还集成了 IDE 功能，比如语法检查和代码调试。随着代码键入，会自动给出用法提示（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024092706.webp" title="" /></p>
+
+<p>这样的"<a href="https://sourl.cn/mMbyYL">代码练习</a>"，堪称面试刷题的利器，我觉得，面试指导书籍和辅导班可能都不需要了，以后都会被淘汰。</p>
+
+<h2>七、总结</h2>
+
+<p>AI 改变软件行业，也必然改变程序员的面试求职。</p>
+
+<p>AI 刷题是未来的趋势，善用者将更容易通过面试，拿到心仪的 offer。</p>
+
+<p>但是，需要提醒的是，AI 只是工具，生成的代码不一定正确和安全，而且项目之中也不应该有黑箱。</p>
+
+<p>正确的做法是，<strong>使用 AI 但不依赖，思路比答案更重要，只有理解了每一行代码，才能接受它的结果</strong>。我们使用 AI 的首要目的，永远是提升自己的能力，而不是让 AI 替代我们，代码的最后责任人的不是 AI，而是你。</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2024-10-10T08:15:22+08:00">2024年10月10日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2024/09/weekly-issue-319.html</id>
             <title>科技爱好者周刊（第 319 期）：如何拍出爆款视频</title>
             <link>http://www.ruanyifeng.com/blog/2024/09/weekly-issue-319.html</link>
@@ -1858,442 +2028,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2024-09-06T08:14:18+08:00">2024年9月 6日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2024/08/weekly-issue-315.html</id>
-            <title>科技爱好者周刊（第 315 期）：一份谷歌离职报告</title>
-            <link>http://www.ruanyifeng.com/blog/2024/08/weekly-issue-315.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2024/08/weekly-issue-315.html</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 30 Aug 2024 08:08:59 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
-<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/4911">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
-
-<h2>封面图</h2>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082605.webp" title="" /></p>
-
-<p>入夜后，大理洱海上亮起无数鱼灯，吸引鱼类浮上水面，渔民趁机捕捉，消灭外来的西太公鱼。（<a href="https://news.haiwainet.cn/n/2024/0820/c3541083-32782962.html">via</a>）</p>
-
-<h2>一份谷歌离职报告</h2>
-
-<p>上周，我看到一篇<a href="https://tinystruggles.com/posts/google_postmortem/">有趣的文章</a>。一位谷歌 SRE 工程师离职了。</p>
-
-<p>她负责服务器的运维，平时要为网站故障写分析报告（postmortem），现在离职了，就为自己的离职也写了一份分析报告。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082015.webp" title="" /></p>
-
-<p>她写得非常坦率，说了心里话，也透露了很多谷歌公司的情况。信息量挺大的，下面分享给大家，碍于篇幅，有所删节。</p>
-
-<p><strong>（1）我的基本情况。</strong> 2015年，我从波兰的大学毕业，加入谷歌，来到爱尔兰分公司，担任 SRE 工程师。</p>
-
-<p>入职时，我的职级是 L3，9个月内就晋升到 L4，一年后晋升到 L5，现在是 L6。</p>
-
-<p><strong>（2）我从谷歌得到了什么。</strong> 在谷歌待了九年后，我在本周离职。回顾这九年，我得到了很多东西。</p>
-
-<p>首先，我得到了大量的钱。</p>
-
-<p>其次，我得到了工程技能，理解了复杂的大型网站系统，还拥有处理生产故障和调试机器的世界一流的技能。</p>
-
-<p>再次，我得到了领导和管理团队的技能，以及成为一家巨型技术公司一员的满足感。</p>
-
-<p>最后，我得到了各种福利，比如办公室、游泳池、健身房、体育课程、每周按摩、美味和健康的膳食、医疗保健等，还有好玩且舒适的异地出差和商务旅行机会。</p>
-
-<p><strong>（3）谷歌的变化。</strong> 现在的谷歌，相比我刚加入时，发生了很多变化，已经不再那么有趣和酷炫了。</p>
-
-<p>以前，谷歌的技术是顶尖的。现在，其他公司的技术水平，正在接近谷歌。</p>
-
-<p>谷歌的内部预算也在削减，我们的商务旅行减少了，裁员不断。公司还把招聘名额转移到更廉价的地区。这对我产生了直接影响，我没法为自己的团队招人了。</p>
-
-<p>这些年来，谷歌内部的安全制度和规章，不断增加，越来越繁琐。公司的内部系统，以及各种团队之间的关系，变得非常复杂。这减慢了我们的开发速度，并带来了许多艰巨的工程挑战。</p>
-
-<p>对于我们来说，理解公司内部系统，成了越来越大的负担。你需要牢记无数的系统和技术细节，其中任何一个都可能对你产生影响（对于 SRE 工程师尤其如此）。新入职的员工可能需要一年的时间才能完全理解这些东西，这太疯狂了。</p>
-
-<p>很多时候，我觉得自己被会议、重复性劳动、资源不足的团队工作，压得喘不过气，但同时又没有良好的成长机会。</p>
-
-<p>公司两次承诺我，可以扩招手下的员工，但是两次都被取消了。我觉得，现在的工作没有充分发挥我的能力，但是在公司内部，又找不到发挥的方式。</p>
-
-<p>与此同时，谷歌的高管们不提供支持和反馈，也几乎没有任何监督。你问他们下一步如何开展工作，他们会不知所措，让你自己去解决。</p>
-
-<p><strong>（4）我的想法改变了。</strong> 那些曾经吸引我的东西，已经不再有很强的吸引力了。</p>
-
-<p>我已经达到并且超过了自己的财务目标。</p>
-
-<p>我对谷歌技术的迷恋，逐渐变少。实际工作中遇到的技术问题，也不再那么令人兴奋。</p>
-
-<p>我的兴趣转移到了其他方面。SRE 工程师跟我的兴趣和性格都不太符合。我是一个乐观和有创造力的人，但是 SRE 岗位要求稳重和保守。另外，长期夜班扰乱了我的睡眠，SRE 要求"七天24小时在线"使我很难放下工作。</p>
-
-<p>我想离开 SRE 换个岗位，而爱尔兰又没有太多其他岗位可选择。由于惰性和个人原因，我也没有申请去其他地区。老实说，谷歌是一家以美国为中心的公司，只要你不在美国总部，推进任何事情都很麻烦，很容易感到孤立和边缘化。</p>
-
-<p>我在谷歌看不到大的升迁机会。我已经是 L6 工程师了，在工程领域到顶了。我对 L7 并不真正感兴趣，因为 L7 更多是一种政治角色，不是工程角色，并且也很难说手下会管理多少人。如果我有机会自己领导一个大团队，我可能愿意留下来，否则我更渴望创办自己的公司。</p>
-
-<p><strong>（5）其他想法。</strong> 回顾这九年，我感到自己很幸运。</p>
-
-<p>谷歌的股票表现非常好，再加上我的快速晋升和高绩效，使得个人收入很不错。我经过仔细思考后，对这些收入做出的财务决策，也很正确，给我带来了更多财务回报。</p>
-
-<p>我在谷歌认识了大量的人，建立了许多关系。我雇用的员工也都非常可靠。</p>
-
-<p>我有一些后悔没有做的事情。最主要的就是，我本应该早点退出 SRE，申请转移到其他国家，从一开始我就知道 SRE 不是我想要的。我只是坐等情况发生变化，结果没有如愿，现在我知道了，我应该主动寻求变化。</p>
-
-<h2>微软工程师的薪资</h2>
-
-<p>上周，一家<a href="https://www.businessinsider.com/microsoft-spreadsheet-shows-pay-engineers-2024-8">美国媒体</a>获得一张电子表格，里面是500多个微软员工自愿分享的自己的薪资数据。</p>
-
-<p>这家媒体就统计了微软各级别工程师的平均薪资。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082301.webp" title="" /></p>
-
-<p>上图可以看到，2024年美国互联网大厂的程序员的收入水平。微软最低的59级工程师，基本工资也超过了12万美元。这是很高的收入，跟美国大学普通的正教授差不多了。</p>
-
-<p>程序员的收入，最主要由职级决定，职级越高，收入越高。这就是为什么大厂程序员那么看重晋升的原因。</p>
-
-<p>但是，不同职级的基本工资，相差不是那么大，收入差异主要由奖金和股票决定，高职级的绩效收入远大于基本工资。</p>
-
-<p>当然，由于数据总量比较小，上表肯定不完全准确，只能作为参考。</p>
-
-<h2>[活动通知] 动手练习 AI 编程</h2>
-
-<p>AI 编程工具是眼下的热点，大家都在探索，怎么将 AI 用于编程。</p>
-
-<p>明天（8月31日）下午，就有一场 AI 编程的动手活动，由豆包 MarsCode 官方主办。</p>
-
-<p>豆包 MarsCode 是字节旗下的 AI 编程工具，具有代码生成、补全、智能预测等功能。到时，<strong>字节工程师将一对一指导大家，动手实操</strong>，通过 AI 完成你的软件开发构想。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082807.webp" title="" /></p>
-
-<p>你可以跟小伙伴组队报名（每队最多3人），也可以单人组队，在 AI 的帮助下，现场编码完成一个小游戏。</p>
-
-<p>工程师会在现场指导和答疑，最后<strong>每组进行作品展示，评出优秀作品，领取奖品</strong>。</p>
-
-<p>希望动手练习 AI 的同学，明天下午不要错过这次免费活动的机会，活动地点在北京的抖音工区。</p>
-
-<p>点击<a href="https://www.bagevent.com/event/8901648?bag_track=ryf">这个链接</a>，或者扫描上方海报的二​维​码，了解活动详情并报名。如果你不在北京，可以参加豆包 MarsCode 的<a href="https://sourl.co/ZHGytq">征文活动</a>，题材不限，奖品丰富。</p>
-
-<h2>科技动态</h2>
-
-<p>1、<a href="https://www.sohu.com/a/802511112_121873449">载人飞艇</a></p>
-
-<p>8月20日上午6时，中国的载人飞艇 AS700 从湖北荆门起飞，飞行近1000公里，于次日中午12点达到广西桂林。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082606.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082607.webp" title="" /></p>
-
-<p>由于中间有落地休整，整个飞行时间是12小时44分钟。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082608.webp" title="" /></p>
-
-<p>飞艇到达桂林后，从8月23日开始20天的展演。如果这段时间你在阳朔，每天中午就可以看到它在飞行。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082609.webp" title="" /></p>
-
-<p>它最大载人数10人（含一名驾驶员），飞行高度500米到2000米，最长航时10小时，最大航程700公里。</p>
-
-<p>它主要用于旅游出行，空中观光，甚至举办"云端婚礼"。由于内部是氦气，所以非常安全。</p>
-
-<p>2、<a href="https://kottke.org/21/03/the-invention-of-a-new-pasta-shape">新形状意大利面</a></p>
-
-<p>意大利面的酱汁，需要吸附在面条上，这样才好吃。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024072612.webp" title="" /></p>
-
-<p>一位美国网红别出心裁，使用计算机设计了一种新形状的意大利面条。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024072613.webp" title="" /></p>
-
-<p>据说，这种新型面条的表面褶皱尽量最大化，以便吸附更多的酱汁，同时还要保证足够的弹性，以便产生良好的口感。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024072614.webp" title="" /></p>
-
-<p>它每包的售价高达200多元人民币，一上市就售罄。</p>
-
-<p>3、<a href="https://arstechnica.com/gadgets/2024/08/acemagics-x1-is-a-clever-but-delicate-approach-to-dual-screen-laptops/">折叠屏笔记本</a></p>
-
-<p>一家深圳公司推出了折叠屏笔记本，具有两个折叠在一起的屏幕。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082501.webp" title="" /></p>
-
-<p>以前的双屏笔记本，基本都没有实体键盘，用其中一块触摸屏当作键盘，或者外接键盘。</p>
-
-<p>但是，这款笔记本别出心裁，使用铰链将两块屏幕连在一起。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082502.webp" title="" /></p>
-
-<p>所以，它的第二块屏幕可以反转，放在主屏幕的背面（上图），也可以向左翻，作为侧屏（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082503.webp" title="" /></p>
-
-<p>根据用过的人说，左侧的侧屏，对于使用者非常有用。但是，重心有点不稳，用力击键时，侧屏会抖动。</p>
-
-<p>从它可以看出，笔记本这种成熟产品，还是有很大的创新空间。</p>
-
-<p>4、<strong>其他</strong></p>
-
-<p>（1） <a href="https://www.idownloadblog.com/2024/08/22/iphone-16-jpeg-xl-rumor/">iPhone 16 系列</a>据报道将支持 JPEG-XL 格式的图片，体积是 JPEG 的三分之一。</p>
-
-<p>（2）<a href="https://china.chinadaily.com.cn/a/202408/29/WS66d00abba310b35299d39168.html">中国互联网络信息中心</a>（CNNIC）统计，截止6月底，中国注册的域名共3187万个，其中<code>.cn</code>域名1956万个。</p>
-
-<p>同一份报告称，中国网民的95.5%看短视频，65.2%看长视频。</p>
-
-<h2>文章</h2>
-
-<p>1、<a href="https://www.sheshbabu.com/posts/visual-explanation-of-saml-authentication/">SAML 身份验证的可视化解释</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024072503.webp" title="" /></p>
-
-<p>SAML 是企业常用的身份验证协议和 SSO（单点登录）解决方案。本文解释它是什么。</p>
-
-<p>2、<a href="https://piccalil.li/blog/styling-tables-the-modern-css-way/">现代 CSS 方式设置 table 样式</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024072504.webp" title="" /></p>
-
-<p>本文介绍怎么用现代 CSS，对网页的<code>&lt;table&gt;</code>标签进行样式设置。</p>
-
-<p>3、<a href="https://www.fffuel.co/svg-spinner/">如何制作 SVG 加载器</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024072508.webp" title="" /></p>
-
-<p>本文一步步讲解，如何写 SVG 代码，生成一个"正在加载中"的动画图标。</p>
-
-<p>4、<a href="https://endtimes.dev/why-lowercase-letters-save-data/">小写可以减少压缩文件体积</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024072512.webp" title="" /></p>
-
-<p>本文解释为什么将大写字母改成小写后，文件的压缩体积会变小，是一篇压缩算法的简介。</p>
-
-<p>5、<a href="https://jvns.ca/blog/2024/01/26/inside-git/">.git 子目录内部</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024072610.webp" title="" /></p>
-
-<p>Git 仓库的元数据都保存在 .git 子目录，本文解释该子目录里面每一项的作用。</p>
-
-<p>6、<a href="https://tonsky.me/blog/checkbox/">方形复选框的记忆</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024072611.webp" title="" /></p>
-
-<p>作者认为，设计师应该遵守一个约定：复选框是方形的，单选框是圆形的。</p>
-
-<h2>工具</h2>
-
-<p>1、<a href="https://github.com/coollabsio/coolify">Coolify</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082701.webp" title="" /></p>
-
-<p>一个开源的应用运行平台，相当于自己搭建一个 Heroku / Netlify / Vercel 替代品，各种应用可以轻松在上面运行。</p>
-
-<p>2、<a href="https://ente.io/auth/">Ente Auth</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052603.webp" title="" /></p>
-
-<p>一个开源的双因素认证码管理器。</p>
-
-<p>3、<a href="https://github.com/JackySoft/marsview">Marsview</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082512.webp" title="" /></p>
-
-<p>一款面向后台的低代码可视化搭建平台，快速搭建中后台管理系统。（<a href="https://github.com/ruanyf/weekly/issues/5060">@JackySoft</a> 投稿）</p>
-
-<p>4、<a href="https://notionexporter.com/">Notion Exporter</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082808.webp" title="" /></p>
-
-<p>一个浏览器插件，将 Notion 内容导出为长图或卡片，同时保留排版格式。（<a href="https://github.com/ruanyf/weekly/issues/5079">@Shanshi66</a> 投稿）</p>
-
-<p>5、<a href="https://deepesh-01.github.io/battery_indicator/">电池的电量显示</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023112807.webp" title="" /></p>
-
-<p>该网站使用一个简单的脚本（<a href="https://deepesh-01.github.io/battery_indicator/app.js">源码</a>），显示当前设备的电池电量百分比。</p>
-
-<p>6、<a href="https://github.com/tapjs/tsimp">tsimp</a></p>
-
-<p>一个 Node.js 的 TypeScript 加载器，也就是说，它可以让 Node.js 运行 TS 脚本。</p>
-
-<p>7、<a href="https://github.com/krupkat/xpano">xpano</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023112905.webp" title="" /></p>
-
-<p>一个自动拼接多张照片的工具。</p>
-
-<p>8、<a href="https://concrete.style/">concrete.css</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202402/bg2024020806.webp" title="" /></p>
-
-<p>一个简单的、无类的 CSS 极简框架，受到 <a href="https://milligram.io/">Milligram</a> 和 <a href="http://getskeleton.com/">Skeleton</a> 的启发。</p>
-
-<p>9、<a href="https://peoplegraphmaker.com/">Person Diagram</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202402/bg2024020108.webp" title="" /></p>
-
-<p>一个玩具应用，在线制作人口比重图（占总人口的比重）。</p>
-
-<h2>AI 相关</h2>
-
-<p>1、<a href="https://modelscope.cn/studios/chostem/ancient_Chinese_text_generator">现代文转古文大模型</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082511.webp" title="" /></p>
-
-<p>输入现代汉语句子，生成古汉语风格的句子，<a href="https://github.com/JianXiao2021/ancient_text_generation_LLM">代码开源</a>。（<a href="https://github.com/ruanyf/weekly/issues/5057">@JianXiao2021</a> 开源）</p>
-
-<p>2、<a href="https://github.com/Kedreamix/Linly-Dubbing">Linly-Dubbing</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082805.webp" title="" /></p>
-
-<p>AI 视频配音的开源工具，自动将外语视频改成中文配音。（<a href="https://github.com/ruanyf/weekly/issues/5074">@Y024</a> 投稿）</p>
-
-<p>3、<a href="https://github.com/Cinnamon/kotaemon">kotaemon</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082806.webp" title="" /></p>
-
-<p>一个开源的本地工具，可以指定 AI 模型，与添加的文档聊天。（<a href="https://github.com/ruanyf/weekly/issues/5075">@Y024</a> 投稿）</p>
-
-<p>4、<a href="https://www.guillaume.sh/watson">Watson AI</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082504.webp" title="" /></p>
-
-<p>一个开源的 Mac/Windows 桌面程序，通过系统麦克风，录制远程会议的音频，然后用 AI 生成会议记录和摘要。</p>
-
-<p>5、<a href="https://fluximg.com/">Fluximg.com</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082510.webp" title="" /></p>
-
-<p>免费使用的 Flux AI 文生图服务。（<a href="https://github.com/ruanyf/weekly/issues/5055">@youyuela</a> 投稿）</p>
-
-<h2>资源</h2>
-
-<p>1、<a href="https://github.com/meethigher/black-wukong-youji/blob/master/%E9%BB%91%E7%A5%9E%E8%AF%9D%E6%82%9F%E7%A9%BA%E5%A6%96%E6%80%AA%E5%B9%B3%E7%94%9F%E5%BD%95.md">妖怪平生录</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082705.webp" title="" /></p>
-
-<p>这个仓库收录了游戏《黑神话：悟空》内附的203个妖怪的图片、小诗和故事。（<a href="https://github.com/ruanyf/weekly/issues/5063">@meethigher</a> 投稿）</p>
-
-<p>2、<a href="https://emojispark.com/">Emoji Spark</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082801.webp" title="" /></p>
-
-<p>快速匹配搜索 Emoji 的网站。（<a href="https://github.com/ruanyf/weekly/issues/5067">@0xjoanne</a> 投稿）</p>
-
-<p>3、<a href="https://jverzani.github.io/CalculusWithJuliaNotes.jl/">使用 Julia 语言学习微积分</a>（Calculus With Julia）（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202406/bg2024060509.webp" title="" /></p>
-
-<p>一本在线阅读的电子书，从最简单的极限开始介绍微积分，需要计算的地方使用 Julia 语言举例。</p>
-
-<p>4、<a href="https://ihavenotv.com/">Documentaries</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202401/bg2024011601.webp" title="" /></p>
-
-<p>该网站可以免费观看英文纪录片。</p>
-
-<h2>图片</h2>
-
-<p>1、<a href="https://www.bbc.com/future/article/20230725-making-the-blue-flash-how-i-reconstructed-a-fatal-atomic-accident">还原致命的原子弹实验事故</a></p>
-
-<p>1946年，负责制造原子弹的美国洛斯阿拉莫斯实验室，发生了一起致命事故。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023072903.webp" title="" /></p>
-
-<p>核物理学家路易斯·斯洛廷，带人参观实验室。他决定演示一下，原子弹的"关键组件"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023072904.webp" title="" /></p>
-
-<p>他用螺丝刀将铍半球支撑在钚核上。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023072905.webp" title="" /></p>
-
-<p>但是，螺丝刀一滑，铍半球落到了钚核上方，引发了辐射反应。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023072906.webp" title="" /></p>
-
-<p>他立刻用手将两者分开，导致自己受到了致命辐射，九天后就去世了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023072907.webp" title="" /></p>
-
-<p>下面是一个英国艺术家使用各种模型材料，重新还原的事故现场。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023072908.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202307/bg2023072909.webp" title="" /></p>
-
-<h2>文摘</h2>
-
-<p>1、<a href="https://waitbutwhy.com/2015/03/7-3-billion-people-one-building.html">73亿人，一栋小楼</a></p>
-
-<p>地球的总人口，目前是81.7亿。</p>
-
-<p>10年前的2014年，总人口是73亿。</p>
-
-<p>当时有人做过计算，73亿看上去是很大的数字，但并没有大家想象的那么大。</p>
-
-<p>如果每个人用一粒米来代表，73亿粒米刚好填满一个边长为6.1米的立方体，大约相当于一栋两层小楼的体积。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024052604.webp" title="" /></p>
-
-<p>如果每个人用一粒沙来代表，总体积将取决于沙粒的大小。最极端的情况下，73亿粒细沙刚好填满一个2升的饮料瓶。</p>
-
-<p>在地球眼里，人就是一粒米或一粒沙的大小。每天喧闹无比、仿佛宇宙中心的人类社会，不过就是一栋小楼，或者一个饮料瓶里面发生的事情。</p>
-
-<h2>言论</h2>
-
-<p>1、</p>
-
-<p>问：如果网速提高到 1Tb/s，互联网会怎样？</p>
-
-<p>答：会有更多、更大、更快的广告。</p>
-
-<p>-- <a href="https://news.ycombinator.com/item?id=41332413">Hacker News 读者</a></p>
-
-<p>2、</p>
-
-<p>大家都认为 Nvidia 是销售 GPU（显卡）的公司，但是实际上他们是在销售 CUDA 加速运算库，GPU 只是非常昂贵又必不可少的独家配件。</p>
-
-<p>-- <a href="https://news.ycombinator.com/item?id=41361597">Hacker News 读者</a></p>
-
-<p>3、</p>
-
-<p>我不喜欢现场听技术演讲，95%的情况收获非常少。我更喜欢看技术演讲的录像，可以仔细思考，推荐给他人。我还可以将播放速度提高到 1.5倍或2倍，如果演讲不是那么好，这样至少可以减少浪费的时间。</p>
-
-<p>-- <a href="https://chelseatroy.com/2022/08/03/how-i-do-and-dont-prepare-a-talk-for-a-technical-conference/">《我如何准备技术演讲》</a></p>
-
-<p>4、</p>
-
-<p>飞行器直立登陆月球非常困难，最近美国和日本的月球登陆器，都在登陆时倾倒了。主要原因是月球的重力只有地球的六分之一，重心稍高一点，就很容易翻倒了。</p>
-
-<p>-- <a href="https://www.nytimes.com/2024/03/04/science/moon-landing-sideways-gravity.html">《为什么直立登陆月球如此困难》</a></p>
-
-<p>5、</p>
-
-<p>敏捷宣言提出四大原则，其中之一是"正常工作的软件胜过详尽的文档"。</p>
-
-<p>这条原则造成的结果，就是敏捷开发的项目，文档普遍很简陋。一项研究发现，敏捷开发的项目比不采用敏捷开发的项目，失败可能性高出268%。</p>
-
-<p>-- <a href="https://www.theregister.com/2024/06/05/agile_failure_rates/">theregister.com</a></p>
-
-<h2>往年回顾</h2>
-
-<p><a href="https://www.ruanyifeng.com/blog/2023/08/weekly-issue-268.html">生产力是形容机器，不是形容人</a>（2023 #268）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2022/08/weekly-issue-218.html">葡萄酒，樱花，全球变暖</a>（2022 #218）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2021/07/weekly-issue-168.html">游戏《底特律：变人》</a>（2021 #168）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2020/07/weekly-issue-118.html">高考志愿怎么填</a>（2020 #118）</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2024-08-30T08:08:59+08:00">2024年8月30日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
