@@ -105,7 +105,7 @@ def _use_ai(filtered_items: List[Item]):
             item.summary = cache.get(key)
             continue
         try:
-            response = gpt_summary(item.article, "gpt-3.5-turbo")
+            response = gpt_summary(item.article, "gpt-4o-mini-2024-07-18")
             summary = response.get("summary", "")
             cache.set(key, summary)
             item.summary = summary
