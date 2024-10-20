@@ -1,3 +1,4 @@
+
 import argparse
 import hashlib
 import logging
@@ -10,7 +11,10 @@ from typing import Union
 import opml
 import yaml
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..')))
+
+
 from root import BASE_URL, CONFIG_PATH, LOG_DIR
 
 
@@ -28,14 +32,15 @@ def init_logger():
         >>> logger.debug(train_state)
         >>> logger.info(train_result)
     """
-    if not os.path.exists(LOG_DIR): os.makedirs(LOG_DIR)
-    
+    if not os.path.exists(LOG_DIR):
+        os.makedirs(LOG_DIR)
+
     current_date = time.strftime("%Y-%m-%d %H:%M", time.localtime())
     logfilename = f"{current_date}.log"
 
     logfilepath = os.path.join(LOG_DIR, logfilename)
 
-       # 创建日志格式器
+    # 创建日志格式器
     filefmt = "[%(asctime)s]-[%(levelname)s]:%(message)s"
     filedatefmt = "%Y-%m-%d"
     file_formatter = logging.Formatter(filefmt, filedatefmt)
@@ -43,9 +48,9 @@ def init_logger():
     sfmt = "[%(asctime)s]-[%(levelname)s]:%(message)s"
     sdatefmt = "%Y-%m-%d"
     sformatter = logging.Formatter(sfmt, sdatefmt)
-    
+
     level = logging.DEBUG
-    
+
     fh = logging.FileHandler(logfilepath)
     fh.setLevel(level)
     fh.setFormatter(file_formatter)
@@ -61,13 +66,16 @@ def get_config():
     with open(CONFIG_PATH, "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
     return config
-    
-def init_dirs():
-    if not os.path.exists(LOG_DIR): os.makedirs(LOG_DIR)
-    if not os.path.exists(CONFIG_PATH): os.makedirs(CONFIG_PATH)
-    
 
-def md5hash_6(text:str):
+
+def init_dirs():
+    if not os.path.exists(LOG_DIR):
+        os.makedirs(LOG_DIR)
+    if not os.path.exists(CONFIG_PATH):
+        os.makedirs(CONFIG_PATH)
+
+
+def md5hash_6(text: str):
     m = hashlib.md5()
     m.update(text.encode("utf-8"))
     return m.hexdigest()[:6]
@@ -77,24 +85,24 @@ def convert_yaml_to_opml(yaml_path, opml_path):
     with open(yaml_path, 'r') as file:
         data = yaml.safe_load(file)
 
-    
     opml = ET.Element("opml", version="1.0")
     head = ET.SubElement(opml, "head")
     title = ET.SubElement(head, "title")
     title.text = "Feeds of 435212619 from Inoreader [https://www.inoreader.com]"
-    
+
     body = ET.SubElement(opml, "body")
 
     for category_name, categoty_vals in data.items():
-        outline = ET.SubElement(body, 'outline', text=category_name, title=category_name)
+        outline = ET.SubElement(
+            body, 'outline', text=category_name, title=category_name)
         for item in categoty_vals:
             url = BASE_URL + item["name"] + ".xml"
             feed_outline = ET.SubElement(outline, "outline", text=item['text'], title=item['text'], type='rss',
-                                        xmlUrl=url, htmlUrl=item['htmlUrl'])
-    
+                                         xmlUrl=url, htmlUrl=item['htmlUrl'])
+
     tree = ET.ElementTree(opml)
     tree.write(opml_path, encoding='utf-8', xml_declaration=True)
-    
+
 
 def convert_opml_to_yaml(opml_file, yaml_file):
     # 使用 opml 库解析 OPML 文件
@@ -120,11 +128,35 @@ def convert_opml_to_yaml(opml_file, yaml_file):
     # 如果yaml文件存在,则改名,防止丢失
     if os.path.exists(yaml_file):
         os.rename(yaml_file, yaml_file + ".bak")
-        
+
     # 将数据写入 YAML 文件
     with open(yaml_file, "w") as f:
         yaml.dump(data, f, encoding="utf-8", allow_unicode=True)
 
+
+def new_feed():
+    from src.util import md5hash_6
+    html_url = input("请输入 htmlUrl: ")
+    text = input("请输入 text (RSS 的描述): ")
+    url = input("请输入 RSS URL: ")
+    use_chatgpt = input("是否使用 ChatGPT 解析 (True/False): ")
+
+    # 生成 RSS 配置字典
+    rss_config = {
+        "htmlUrl": html_url,
+        "name": md5hash_6(url) if url else "",
+        "text": text,
+        "url": url,
+        "use_chatgpt": use_chatgpt.lower() == 'true'
+    }
+    message =  f"""
+- htmlUrl: {rss_config['htmlUrl']}
+    name: {rss_config['name']}
+    text: {rss_config['text']}
+    url: {rss_config['url']}
+    use_chatgpt: {use_chatgpt}
+"""
+    print(message)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -132,8 +164,11 @@ if __name__ == "__main__":
     parser.add_argument("--yaml_file", help="Path to the YAML file")
     parser.add_argument("--type", help="Type of the conversion")
     args = parser.parse_args()
-    print(args.opml_file, args.yaml_file)
     if args.type == "y2o":
+        print(args.opml_file, args.yaml_file)
         convert_yaml_to_opml(args.yaml_file, args.opml_file)
-    else:
+    elif args.type == "o2y":
+        print(args.opml_file, args.yaml_file)
         convert_opml_to_yaml(args.opml_file, args.yaml_file)
+    elif args.type == 'add':
+        new_feed()

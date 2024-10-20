@@ -11,53 +11,95 @@
   <title>RSS feeds - chenmo</title>
 
   <style>
-    img {
-      max-width: 100% !important;
-      height: auto !important;
-    }
-    
     body {
       background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #343a40;
     }
-    
+
+    h1, h3 {
+      color: #343a40;
+      font-weight: 600;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
     .table {
-      background-color: #fff;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
-    
+
     .table th {
-      background-color: #7e7e7e;
-      color: #fff;
+      background-color: #343a40;
+      color: #ffffff;
     }
-    
+
     .table td {
-      background-color: #f8f9fa;
+      background-color: #ffffff;
+      color: #343a40;
+      padding: 15px;
     }
-    
-    h1, h2, h3, h4, h5, h6 {
-      color: #7e7e7e;
+
+    .table-hover tbody tr:hover {
+      background-color: #f1f3f5;
     }
-    
-    .footer {
-      background-color: #f8f9fa;
+
+    .download-link {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 20px;
+      background-color: #007bff;
+      color: #ffffff;
+      border-radius: 5px;
+      transition: background-color 0.3s;
     }
-    
-    .footer .text-muted {
-      color: #fff;
+
+    .download-link:hover {
+      background-color: #0056b3;
+    }
+
+    footer.footer {
+      background-color: #343a40;
+      padding: 20px 0;
+      color: #ffffff;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    footer.footer a {
+      color: #007bff;
+    }
+
+    footer.footer a:hover {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    footer img {
+      margin-left: 10px;
     }
   </style>
-
 </head>
 
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-sm">
+      <div class="col-sm-12">
         <h1 class="mt-5">更新日期：{{ updatetime }}</h1>
-        <h1 class="mt-5">RSS feeds processed with <a href="https://github.com/TD21forever/RSS-Master">RSS-Master</a></h1>
-        <h3 class="mt-5">Inspired By <a href="https://github.com/yinan-c/RSS-GPT">RSS-GPT</a></h1>
-        <a href="/rssdocs/opml.xml" download class="download-link">OPML文件</a>
-        <!-- Use Bootstrap table for items -->
-        <table class="table mt-5">
+        <h1 class="mt-4">RSS feeds processed with <a href="https://github.com/TD21forever/RSS-Master">RSS-Master</a></h1>
+        <h3 class="mt-3">Inspired By <a href="https://github.com/yinan-c/RSS-GPT">RSS-GPT</a></h3>
+        <a href="/rssdocs/opml.xml" download class="download-link">下载 OPML 文件</a>
+        
+        <!-- Bootstrap table for items with hover effect -->
+        <table class="table table-hover mt-5">
           <thead>
             <tr>
               <th scope="col">源链接</th>
@@ -67,11 +109,10 @@
           <tbody>
             {% for item in items %}
             <tr>
-              <td><a href="{{item.old_url}}">{{item.old_url}}</a></td>
-              <td><a href="{{item.new_url}}">{{item.name}}</a></td>
+              <td><a href="{{item.old_url}}" target="_blank">{{item.old_url}}</a></td>
+              <td><a href="{{item.new_url}}" target="_blank">{{item.name}}</a></td>
             </tr>
             {% endfor %}
-            <!-- Add more table rows here -->
           </tbody>
         </table>
       </div>
@@ -80,10 +121,9 @@
 
   <footer class="footer mt-auto py-3">
     <div class="container">
-      <span class="text-muted">With <a href="https://github.com/TD21forever/RSS-Master">TD21forever/RSS-Master </a> by <a href="">Chenmo</a>
-      <a href="http://creativecommons.org/licenses/by/4.0/"><img
-          src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" alt="Creative Commons Licence"
-          width="45" style="vertical-align: text-top;">
+      <span class="text-muted">With <a href="https://github.com/TD21forever/RSS-Master">TD21forever/RSS-Master</a> by <a href="#">Chenmo</a></span>
+      <a href="http://creativecommons.org/licenses/by/4.0/">
+        <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" alt="Creative Commons Licence" width="45">
       </a>
     </div>
   </footer>
