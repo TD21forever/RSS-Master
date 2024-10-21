@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/67161d5f1102819b88934559</id>
+            <title>AI探索站 10月21日</title>
+            <link>https://m.okjike.com/originalPosts/67161d5f1102819b88934559</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67161d5f1102819b88934559</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 21 Oct 2024 09:22:39 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Notebook LM 产品负责人和 Karpathy 都聊了一下这个产品目前需要优化的部分和欠缺的功能。<br /><br />我整理了一下，一个比 Notebook LM 更好的 AI 播客 PMF 这不就出来了？<br /><br />1. 移动应用开发：需要专门的移动应用；更便捷的音频控制，特别是在屏幕锁定时。<br /><br />2. 交互功能：播放过程中能够中断并提问的能力；提出或请求后续剧集的选项。<br /><br />3. 简化内容生成：简化基于兴趣点生成额外剧集的流程；减少收集资料和定制内容所需的时间和精力。<br /><br />4. 分享和群组功能：与家人或朋友分享剧集的能力；群组收听体验的潜在功能。<br /><br />5. 内容质量和呈现：对信息上下文化的积极反馈；避免枯燥的事实陈述。<br /><br />6. 资料来源管理：目前主要依赖维基百科；建议提供快速资料来源选择器，并提供推荐。<br /><br />7. 自定义指令：保存自定义指令模版的能力。<br /><br />8. 离线功能：在网络连接不佳的地方可以本地保存内容的选项。<br /><br />9. 与其他AI工具的集成：目前使用NotebookLM pod和ChatGPT Advanced Voice的组合进行问答。<br /><br />10. 基于图像的播客生成：建议从单张图片生成简短播客；利用图像识别技术识别地标自动提取高质量资料，并提供简短的审核选项。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6715f6bda8855e724b78728e</id>
             <title>AI探索站 10月21日</title>
             <link>https://m.okjike.com/originalPosts/6715f6bda8855e724b78728e</link>
@@ -51,23 +68,6 @@
                 <![CDATA[
                     
                     把今天用AI翻译整本书的脚本代码开源了，也顺带说下思路：<br /><br />1、书的文本太长了，超过了LLM的上下文限制，更是远超了多数模型4096的输出token。所以文本需要分割，但是分割得不能太短，短的话会上下文不足会影响翻译质量，所以最好是接近LLM最长输出长度的；<br />2、分割翻译容易导致上下文同类表述翻译风格不一致，所以最好的是先提取文本高频词汇，直接在system prompt里限制；风格方面可以通过few-shot实现前后风格的接近；<br />3、从提高翻译质量和不要有机翻感的目标来说，可以做两步，一是直接定义风格（比如鲁迅），特定风格不容易有机器感；二是两步或更多步翻译，给AI更多的token进行思考，尤其是第二次翻译可以实现对前面内容的反思。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/671364a8a8855e724b4b8c88</id>
-            <title>AI探索站 10月19日</title>
-            <link>https://m.okjike.com/originalPosts/671364a8a8855e724b4b8c88</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/671364a8a8855e724b4b8c88</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 19 Oct 2024 07:50:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    Notebook LM 团队成员和作家 Steven Johnson 分享了他使用这个工具的 8 个专家提示。<br /><br />有的方法还挺好的，比如按项目把所有需要的内容都给他整理，或者跟它沟通完后让他生成总结整理到另一个笔记本。<br /><br />- 将最近 10 个文档上传到一个笔记本中，然后提出问题开始尝试。即使最近的文档不相关且完全随​​机。<br /><br />- 创建一个“全能笔记本”，包含你大多数时间工作的一般知识在内的资源。然后跟它交流，就跟团队中的另一个成员一样。<br /><br />- NotebookLM 在需要管理、连接和综合来自多个来源的信息的情况下非常有用。比如使用 Gemini 和 Gems 探讨后利用 NotebookLM 整理，再加上谷歌文档的内容，都扔给它整理和整合。<br /><br />- NotebookLM 的建议问题是一种很好的资源。模型实际上将帮助询问引导浏览材料的问题。直到您想到要询问的问题为止。<br /><br />- 请求 NotebookLM 以不同的方式提供信息，比如FAQ、简报文件、时间轴、目录、学习指南，甚至播客。<br /><br />- NotebookLM 也是一个用途广泛的创意工具，在办公室或教室之外也可以很好地使用，很多人在撰写奇幻和科幻小说或开发游戏时使用它，他们在进行世界构建和复杂背景故事工作。<br /><br />- 将信息源转换为音频概述，只需在音频概述面板中点击“自定义”，输入希望主持人从的来源中关注的要点的简短描述，就可以生成对谈播客。<br /><br />- 整理跟NotebookLM的记录，你可以在一个笔记本上进行谈话 — 你提出问题，然后追问问题，甚至要求它优化你的想法，在对话结束时，你可以请求 NotebookLM 总结对话中的关键要点，形成一个单一的笔记并放入那个笔记本中。<br /><br />感兴趣可以看看：blog.google/technology/ai/notebooklm-beginner-tips/
                 ]]>
             </content:encoded>
         </item>
