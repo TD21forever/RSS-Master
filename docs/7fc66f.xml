@@ -5,6 +5,141 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/92955</id>
+            <title>学会配置 Fontconfig，让 Linux 中文字体更顺心</title>
+            <link>https://sspai.com/post/92955</link>
+            <guid isPermaLink="false">https://sspai.com/post/92955</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 22 Oct 2024 03:30:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <Linux, 字体显示, Fontconfig, 解决方案>
+<br>
+<br>
+总结: 本文讨论了在使用 Linux 发行版时常见的字体显示问题，包括缺少常用字体、字体显示混乱等。通过了解 Fontconfig 的字体配置机制，用户可以逐步解决这些问题，提升使用体验。文章提供了安装基本字体、设置区域、安装 Windows 字体、配置后备字体和禁用 hinting 等具体解决方案。最终，作者希望通过这些方法，使 Linux 的字体显示效果不逊色于 Windows，满足用户的日常办公需求。 </div>
+                        <hr>
+                    
+                    <p>相较于我们熟悉的 Windows，用户在使用 Linux 发行版的过程中，或多或少会面对各种各样的字体显示问题，非常影响使用体验，相信也让包括我在内的不少用户苦不堪言。</p><p>下面的情况，或许你遇到过：</p><ul><li>缺少熟悉的宋体、楷体、仿宋等字体，无法顺畅地在 Linux 下办公</li><li>当系统语言并非简体中文时，简体中文字形变成日文、韩文的风格，很影响观感</li><li>Windows 下的「点阵字体」（字体的 hinting 优化）也出现在了 Linux 里</li><li>安装第三方字体后，系统显示的中文字体会变成刚刚安装的字体</li><li>还有其他潜伏着的问题……</li></ul><p><strong>但是，不要被这些问题给吓住。</strong>了解了 Linux 的字体配置机制，探究问题的本质，这些问题其实都是小意思，都可以用针对性的方案逐个击破。从此，Linux 也有了不输给 Windows 的使用体验，对于现在政企电脑国产化<sup class="ss-footnote" href="" title="政企国产化广泛使用统信 UOS、麒麟 Linux 等国产 Linux 发行版，基于 Debian。">1</sup>，以及一般用户日常使用 Linux 的场景，都有极大益处。</p><h2>背景知识：Linux 字体，离不开 Fontconfig</h2><p><strong>在 Linux 当中，字体是由 fontconfig 来统一管理的</strong>，它是由 Free Desktop 推出的字体管理工具，通用于各大发行版，甚至在 Windows 下也能使用。</p><p>Fontconfig 拥有开箱即用的便捷性，可以自动扫描特定目录下的所有字体。使用 Windows 的用户或许有这样的体验：直接把字体文件放进 <code>C:\Windows\Fonts </code>目录下，就能安装了。在Linux中，这同样可以做到——你只需把字体放在指定目录下即可，通常是系统字体目录（<code>/usr/share/fonts/</code>），或用户字体目录（如<code>~/.fonts/</code>）。<sup class="ss-footnote" href="" title="注意不同发行版的字体目录有所不同，请参考对应发行版的文档。">2</sup></p><p>然而另一方面，fontconfig 是由配置文件驱动的。配置文件的合理与否，直接关系到 Linux 字体显示的表现。Fontconfig 的配置文件采用 XML 格式，支持的功能特性极其强大；相应地，它的参数种类繁多，拥有一定的门槛。想要合理配置字体，还要一番功夫。</p><p>幸运的是，本教程只需使用 fontconfig 配置文件的极小一部分功能，包括后备字体的配置、禁用 hinting 功能。需要编写的 XML 代码量自然也少很多。</p><p>那么，接下来，笔者就将根据几个常见的问题场景，为大家提供各个击破的解决方案。且看下文分解。</p><blockquote><p>注意：阅读本文，需要你了解 <a href="https://www.runoob.com/xml/xml-tutorial.html" target="_blank">XML 文件的基础知识</a>。</p></blockquote><h2>安装基本字体，解决中文字体无法显示的问题</h2><p>现在的 Linux 发行版，其默认字体以 Noto 系列为大宗，中文字体为对应的 Noto CJK 系列，<sup class="ss-footnote" href="" title="早期的发行版（如2015年之前的Ubuntu）有可能使用其他字体，例如Droid Sans Fallback。">3</sup>通常各大发行版都有自带。</p><p>但如果你用的是 Arch Linux、Alpine 这些需要「纯手工」配置的操作系统，这些字体包是不会默认安装的，需要你手动安装。一旦漏掉中文字体，那么在显示中文的地方，你就只能看到一片空白，或者是「豆腐块（囗）」。更麻烦的是，如果漏掉英文字体，且系统默认语言为英文，那么你就只能面对茫茫一片空白，只能对着界面「干瞪眼」。</p><p>要解决这个问题，只需安装对应发行版的 Noto 字体包，即可解决最基本的文字显示问题。以下列举部分发行版的安装命令：</p><pre class="language-shell"><code># Arch Linux。其中noto-fonts为西文字体，noto-fonts-cjk为中日韩文字体
+sudo pacman -S noto-fonts noto-fonts-cjk
+
+# Ubuntu
+sudo apt install fonts-noto-core fonts-noto-cjk
+
+# Alpine
+sudo apk update
+sudo apk add --upgrade font-noto font-noto-cjk
+
+# Void Linux
+sudo xbps-install -Su noto-fonts-ttf noto-fonts-cjk</code></pre><p>另外，如果你希望使用第三方字体来作为界面显示字体，则 Noto 字体包就不是刚需。你只需把你喜欢的字体复制到发行版的字体目录下即可，例如 Arch Linux 的字体目录为<code>/usr/share/fonts/</code>。</p><blockquote><p><strong>注意：</strong>为便于管理，请将字体文件放到字体文件夹的二级目录里，例如<code>/usr/share/fonts/TTF</code>（或<code>/usr/share/fonts/</code>下的其他子目录）。</p></blockquote><h2>正确设置区域，解决字体显示混乱的问题</h2><p>Linux 系统的区域（locale）设置，直接决定了系统显示的语言、时间格式、数字格式等体验。如果区域设置不符合规范，那么系统会使用内置的默认区域「<code>C</code>」，它会导致字体显示异常，例如：</p><ul><li>在终端应用（如 Konsole）里输入中文并按退格键时，文字还在，但只显示一半</li><li><a href="https://ohmyz.sh/" target="_blank">Oh My Zsh</a> 等使用特殊字符的终端扩展，在使用时会出现乱码</li><li>部分软件在显示中文时可能出现乱码</li></ul><p>要解决字体显示问题，你需要进入桌面环境的「区域设置」，将区域设置为正确的值。</p><h3>0）确保已经激活了目标区域</h3><p>Linux 发行版提供了世界各地各种语言的区域支持。一般像 Ubuntu、Deepin、Zorin OS、银河麒麟这些新手向发行版，默认已经帮你配置好。<sup class="ss-footnote" href="" title="严格来说，是使用Calamares、YaST等安装程序框架所安装的发行版，都会在安装过程中为你自动配置，包括区域、时区等参数。">4</sup>但对于 Arch Linux 这些需要「纯手工」安装的发行版，往往需要我们自行检查并激活区域支持。</p><p>通常，我们至少需要保证英语、简体中文的区域支持打开。</p><ul><li><strong>第一步：</strong>用 root 权限的文本编辑器打开<code>/etc/locale.gen</code>，找到以下几行，将它们前面的井号（「<code>#</code>」）删掉，然后保存：</li></ul><pre class="language-shell"><code>#en_US.UTF-8 UTF-8
+...
+#zh_CN.UTF-8 UTF-8</code></pre><ul><li><strong>第二步：</strong>在终端中运行以下命令，让系统重新激活区域支持：</li></ul><pre class="language-shell"><code>sudo locale-gen</code></pre><p>命令执行结果如下所示：</p><pre class="language-shell"><code>sudo locale-gen
+Generating locales...
+  en_US.UTF-8... done
+  zh_CN.UTF-8... done
+Generation complete.</code></pre><ul><li><strong>提示：</strong>如果你还需要其他区域的支持，就取消相应行前的注释。例如，想启用日文支持，就取消注释<code>ja_JP.UTF-8 UTF-8</code>这一行。</li></ul><h3>1）在桌面环境的设置里设置区域</h3><p>常用的桌面环境，通常在各自的「系统设置」程序中提供语言设置的入口，不同桌面环境的入口也有所不同。具体可参考各个发行版和桌面环境的文档。</p><ul><li><strong>Gnome：</strong>在「活动面板（Activities）」中，键入「Region &amp; Language」</li><li><strong>KDE：</strong>打开「系统设置（System Settings）」→「区域和语言（Region &amp; Language）」→「语言（Language）」</li><li><strong>Cinnamon：</strong>打开「系统设置（System Settings）」→「语言（Languages）」</li><li><strong>Deepin、UOS：</strong>打开「控制中心」→「键盘和语言」<sup class="ss-footnote" href="" title="国产操作系统通常已经配置好区域和语言，无需干预。">5</sup></li></ul><h3>2）对于轻量级桌面环境</h3><p>有些轻量级桌面环境没有配备区域设置，例如 MATE Desktop。这时，你可以借助第三方软件 <a href="https://github.com/linuxmint/mintlocale" target="_blank"><strong>mintlocale</strong></a> 完成设置，它是 Linux Mint 的语言设置工具，通用于其他发行版。</p><p>Arch Linux 用户可以直接从 AUR 安装（假设你已经安装了 <a href="https://aur.archlinux.org/packages/yay">Yay</a> 这款 AUR 助手）：</p><pre class="language-shell"><code>yay -S mintlocale</code></pre><p>在终端中运行 mintlocale，然后按你的需要，依次设置以下参数：</p><figure class="table"><table><thead><tr><th>参数</th><th>作用</th></tr></thead><tbody><tr><td>Language</td><td><strong>决定系统语言。这是非常重要的参数</strong></td></tr><tr><td>Region</td><td>决定系统所在的地区。区域设置决定了数字、货币、度量衡等格式，为应用程序所采用</td></tr><tr><td>Time format</td><td>决定时间／日期的格式，不同区域有不同的时间日期表示方式</td></tr><tr><td>System locale</td><td>显示当前已设置的区域设置</td></tr></tbody></table></figure><p>你需要将这些参数设置为正确的国家／地区、语言，例如中国大陆的简体中文对应「Chinese, China」。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/16/e293f4fa12ccc150eb9d5c976ad0c44a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>mintlocale的界面。</figcaption></figure><p>设置完成后，点击「Apply System-Wide」，全局应用区域设置。期间会要求你输入密码（该设置需要 root 权限）。</p><p>最后，重启电脑，即可生效。因区域设置导致的字体问题就得到解决。</p><h2>安装 Windows 字体，解决办公缺少字体的问题</h2><blockquote><p>声明：</p><p>由于潜在的授权许可条款，使用 Windows 内置字体可能存在一定的法律风险。</p><p>这些字体应当用于个人及非商用场合；商用场合应当获得字体版权方的授权。</p></blockquote><p>长期以来，在政府、企业办公领域主流的操作系统都是 Windows。在这一背景下，Windows 自带的中易宋体（SimSun）、仿宋（SimFang）、楷体（SimKai）、Times New Roman 等字体都成为了规范字体；微软雅黑等用于界面显示的字体也深入人心，是PPT制作的常备字体。</p><p>不过，上面这些字体由于涉及到授权许可问题，是不会随 Linux 发行版提供的。有些开发者也设计了这些字体的开源「平替」，例如 UKai、UMing，但它们的显示效果还是和 Windows 自带的字体有明显区别，不能完全替代。</p><p>因此，如果你需要使用 Linux 办公，尤其是在政企中使用，那么就有必要将 Windows 的这些字体安装到系统中。</p><h3>1）通用的方式：直接从 Windows 中复制</h3><p>最直接、最简单的方法，就是从一台 Windows 电脑中提取字体。</p><ul><li><strong>第一步，</strong>你可以直接进入 Windows 的字体目录（如<code>C:\Windows\Fonts\</code>），选中你需要的字体，然后按 Ctrl+C 复制，粘贴到可移动磁盘中，或者是刻录成光盘，等。<sup class="ss-footnote" href="" title="很多政府机关不允许连接U盘，只能使用光盘。那么就用刻录机和刻录盘来传输文件吧。">6</sup></li></ul><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/17/314157b540998c874934cdd0bbf27ce7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>在 Windows 的字体目录中，选择你要导出的字体。</figcaption></figure><ul><li><strong>第二步，</strong>在你的 Linux 电脑上，插入你保存了字体的磁盘或光盘。打开文件管理器，浏览到磁盘或光盘的路径，右击空白处选择「打开终端」（或其他类似的选项）。</li><li><strong>第三步，</strong>在终端中运行以下命令，将字体复制到 Linux 发行版的字体目录中。<strong>注意，你需要 root 权限。</strong></li></ul><pre class="language-shell"><code># 建立一个专门的子目录，存放来自Windows的字体
+sudo mkdir /usr/share/fonts/Windows_TTF/
+
+# 由于Linux下的文件区分大小写，因此我们要兼顾大小写，以便所有字体都能复制到目标位置
+sudo cp *.TTF *.ttf *.OTF *.otf /usr/share/fonts/Windows_TTF/</code></pre><ul><li><strong>第四步，</strong>在终端中运行<code>fc-cache</code>，刷新字体缓存，使更改生效：</li></ul><pre class="language-null"><code>fc-cache -v</code></pre><h3>2）如果你是 Arch Linux 用户：可以安装 AUR 包</h3><p>如果你是 Arch Linux 及其衍生版（如 Manjaro）的用户，AUR里提供了几组字体安装包，可以极其方便地为 Arch Linux 补充 Windows 必备字体。</p><p><strong>构建过程中，它们会实时从微软的官方镜像</strong><sup class="ss-footnote" href="" title="包括 Windows 的安装 ISO、可选功能包。">7</sup><strong>获取字体文件，因此安装过程需要全程保持网络畅通。</strong></p><p>这些包有以下几种类型：</p><figure class="table"><table><thead><tr><th>包名</th><th>说明</th></tr></thead><tbody><tr><td><code>ttf-ms-win10-auto-&lt;区域&gt;</code></td><td><p>从 Windows 10 安装镜像中获取指定区域的系统基础字体。</p><p><code>&lt;区域&gt;</code>为小写的区域代码，例如，中文对应的包名为<code>ttf-ms-win10-auto-zh_cn</code>。</p></td></tr><tr><td><code>ttf-ms-win10-auto</code></td><td>从 Windows 10 安装镜像中获取系统基础字体，主要是英文字体（如 Segoe UI、Times New Roman）。</td></tr><tr><td><code>ttf-ms-win11-auto-&lt;区域&gt;</code></td><td>类似于<code>ttf-ms-win10-auto-&lt;区域&gt;</code>，区别在于它从 Windows 11 镜像中获取。</td></tr><tr><td><code>ttf-ms-win11-auto</code></td><td>类似于<code>ttf-ms-win10-auto</code>，区别在于它从 Windows 11 镜像中获取。</td></tr><tr><td><code>ttf-ms-win11-fod-auto-&lt;语言&gt;</code></td><td><p>从 Windows 11 可选功能包中，获取指定语言的扩展字体。</p><p><code>&lt;语言&gt;</code>为目标语言的代码，例如简体中文对应<code>hans</code>，繁体中文对应<code>hant</code>，日语对应<code>jpan</code>。</p></td></tr></tbody></table></figure><p><strong>对于简体中文用户，笔者建议选择基于 Windows 11 的包，以保证字体的更新。你可以通过 Yay 来进行安装：</strong></p><pre class="language-shell"><code>yay -S --noconfirm ttf-ms-win11-auto ttf-ms-win11-auto-zh_cn ttf-ms-win11-fod-auto-hans</code></pre><p>上述三个包，包含了以下字体：</p><figure class="table"><table><thead><tr><th>包名</th><th>包含的字体</th></tr></thead><tbody><tr><td><code>ttf-ms-win11-auto</code></td><td>Segoe UI、Times New Roman、Courier New 等</td></tr><tr><td><code>ttf-ms-win11-auto-zh_cn</code></td><td>中易宋体、微软雅黑</td></tr><tr><td><code>ttf-ms-win11-fod-auto-hans</code></td><td>中易楷体、中易仿宋、中易黑体、等线</td></tr></tbody></table></figure><p>安装完成后，这些字体就可以使用了。<sup class="ss-footnote" href="" title="安装过程中会自动运行fc-cache更新字体缓存。">8</sup></p><blockquote><p><strong>注意：</strong></p><ul><li>安装过程使用 <a href="https://github.com/fangfufu/httpdirfs/">httpdirfs</a> 来远程在线挂载微软官方 ISO 镜像，因此需要全程保持网络畅通。视网络环境不同，安装速度也有所不同，请保持耐心。</li><li>AUR还提供了不带<code>auto</code>字样的包（例如<code>ttf-ms-win11</code>），但是笔者不建议安装，因为它们需要你自己下载安装镜像，并自行提取镜像里的文件，很麻烦。</li></ul></blockquote><h2>设置后备字体，解决字体显示「变色龙」的问题</h2><p>在按照上一章的步骤安装 Windows 字体后，你或许会发现这样一种情况：<strong>中文字体变了</strong>。</p><p>原本统一使用 Noto Sans CJK 字体显示（与 Android 的默认字体一致），但现在竟然莫名其妙地变成了微软雅黑，甚至是仿宋和楷体。</p><p>而如果你的系统语言并不是简体中文，或者是软件的字体设置为英文字体（如，Hack Nerd Font），那么在显示简中汉字的时候也会出现问题：字形不是大陆规范字形，而是变成日文甚至韩文的汉字字形。</p><p>那么，这个问题又将如何解决？</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/18/55a858d0e2bc54fc6b181521f171c142.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>日文系统环境下，Bing 的搜索结果，可见这里混杂了 MS Gothic 与微软雅黑这两种字体。</figcaption></figure><h3>1）「罪魁祸首」：<strong>Fontconfig 的后备字体机制</strong></h3><p>造成以上这两种情况的原因，就来自 fontconfig 的后备字体（fallback font）机制。它会在显示一个字形而当前字体没有该字形时，自动选择另一种字体来显示。</p><p><strong>如果后备字体没有配置好，fontconfig 就会按特定规则选择字体，例如你刚刚安装的字体，这样一来字体显示就会变得很「诡异」。</strong></p><p>接下来，不妨更进一步分析前文的两个问题。</p><ul><li>看看第一个问题。现在的桌面环境，设置的默认字体都为英文字体，例如 Noto Sans。这些字体是不包含中文字符的，一旦显示中文字符，就会触发 fontconfig 的后备字体机制。在安装 Windows 字体前，电脑没有其他中文字体，因此自然会选中 Noto Sans CJK；然而，安装仿宋、楷体这样的中文字体后，fontconfig 有了「新选择」，原先的后备字体就被顶掉了。</li><li>再看看第二个问题。对于多语言的环境，fontconfig 会根据系统语言选择对应语言的字体，例如，日文环境下就选择 Noto Sans CJK JP、MS Gothic 等<sup class="ss-footnote" href="" title="MS Gothic是Windows自带的日文字体。你可以按前文的讲解，从Windows中获取，或者是安装ttf-ms-win11-fod-auto-jpan这个包。">9</sup>。但是，日文字体没有收录简体汉字，因此在显示简体汉字的场合，同样会触发 fontconfig 的后备字体机制，优先选择新安装的中文字体。于是，同样会导致字体显示效果变得诡异。</li></ul><p>因此，只有正确配置 fontconfig 的后备字体，才能改善字体的显示表现。</p><h3>2）如何配置后备字体？</h3><p>接下来，我们就来编写一个 fontconfig 配置文件，为常见的字体配置一个后备字体序列。</p><ul><li><strong>第一步：</strong>在用户主目录的<code>.config/fontconfig</code>子目录下，创建文件<code>fonts.conf</code>。如果没有该目录，就新建一个。</li><li><strong>第二步：</strong>打开<code>fonts.conf</code>，填入以下内容。务必结合你的实际情况，参考代码中的注释来修改。</li></ul><blockquote><p><strong>注意：</strong>如果<code>fonts.conf</code>已有内容，就把<code>&lt;fontconfig&gt;</code>节点里的所有 XML 节点都追加到现有的<code>&lt;fontconfig&gt;</code>节点里。</p></blockquote><pre class="language-htmlembedded"><code>&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd"&gt;
+
+&lt;fontconfig&gt;
+    &lt;!--
+        为你电脑上的字体配置后备字体序列。
+        每个字体对应一个&lt;alias&gt; 小节。
+    --&gt;
+    &lt;alias&gt;
+        &lt;!--
+            &lt;family&gt; 字段，是你要设置后备字体的字体名称。
+            【提示】字体名称可以是字体的中文名（在WPS等软件看到的名字），例如“宋体”
+        --&gt;
+        &lt;family&gt;Cantarell&lt;/family&gt; &lt;!-- 这里的Cantarell是一个英文字体，我们需要为其配置后备中文字体。 --&gt;
+        &lt;!--
+            &lt;prefer&gt; 字段，是一个后备字体的列表，可以包含多个&lt;family&gt;字段。
+            后备字体的显示顺序自上而下排列，优先显示排序靠前的字体，
+            如果靠前的字体没有可以显示的字符，那么后面的字体就会顶上。
+        --&gt;
+        &lt;prefer&gt;
+            &lt;family&gt;DengXian&lt;/family&gt;
+            &lt;family&gt;Noto Sans CJK SC&lt;/family&gt;            &lt;!-- 建议使用 Noto Sans CJK SC 作为兜底 --&gt;
+        &lt;/prefer&gt;
+    &lt;/alias&gt;
+
+    &lt;!--
+        后面的设置项，格式都是一样的，这里不再赘述。
+    --&gt;
+    &lt;alias&gt;
+        &lt;family&gt;Hack Nerd Font&lt;/family&gt;
+        &lt;prefer&gt;
+            &lt;family&gt;Noto Sans CJK SC&lt;/family&gt;
+        &lt;/prefer&gt;
+    &lt;/alias&gt;
+
+    &lt;alias&gt;
+        &lt;family&gt;Noto Sans&lt;/family&gt;
+        &lt;prefer&gt;
+            &lt;family&gt;Noto Sans CJK SC&lt;/family&gt;
+        &lt;/prefer&gt;
+    &lt;/alias&gt;
+
+    &lt;alias&gt;
+        &lt;family&gt;Noto Sans Mono&lt;/family&gt;
+        &lt;prefer&gt;
+            &lt;family&gt;Noto Sans Mono CJK SC&lt;/family&gt;
+            &lt;family&gt;Noto Sans CJK SC&lt;/family&gt;
+        &lt;/prefer&gt;
+    &lt;/alias&gt;
+
+    &lt;alias&gt;
+        &lt;family&gt;Noto Serif&lt;/family&gt;
+        &lt;prefer&gt;
+            &lt;family&gt;Noto Serif CJK SC&lt;/family&gt;
+        &lt;/prefer&gt;
+    &lt;/alias&gt;
+
+    &lt;!--
+        这里的MS Gothic是Windows自带的日文字体，相当于我们的黑体。
+        该字体没有收录简体中文字符，所以我们要设置中易黑体（SimHei）作为后备。
+    --&gt;
+    &lt;alias&gt;
+        &lt;family&gt;MS Gothic&lt;/family&gt;
+        &lt;prefer&gt;
+            &lt;family&gt;SimHei&lt;/family&gt;
+            &lt;family&gt;Noto Sans CJK SC&lt;/family&gt;
+        &lt;/prefer&gt;
+    &lt;/alias&gt;
+
+    &lt;alias&gt;
+        &lt;family&gt;sans-serif&lt;/family&gt;
+        &lt;prefer&gt;
+            &lt;family&gt;Noto Sans CJK SC&lt;/family&gt;
+        &lt;/prefer&gt;
+    &lt;/alias&gt;
+
+&lt;/fontconfig&gt;
+</code></pre><ul><li><strong>第三步：</strong>写好<code>fonts.conf</code>之后，刷新字体缓存。注意这里的<code>fc-cache</code>需要带上<code>-f</code>参数，强制刷新，否则后备字体有可能不会生效。</li></ul><pre class="language-shell"><code>fc-cache -f -v</code></pre><p>完成字体缓存刷新后，重新打开应用程序，你就能看到更改生效。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/18/9d3b7b106bc2ffa0eb14ba4585da77a5.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>设置了后备字体的效果。虽然是 Noto Sans CJK SC 与 JP 的混杂，但明显比设置前协调多了。</figcaption></figure><p>按照以上的方法设置后，你的电脑字体显示就会非常稳定，不会再出现字体显示不统一等问题。</p><blockquote><p><strong>注意：</strong>后备字体设置只对<code>fonts.conf</code>当中的字体生效。如果你还使用其他字体，你需要为这些字体增加相应的配置。</p></blockquote><h2>禁用 Hinting，解决特定字体显示效果拉胯的问题</h2><p>熟悉 Windows 的朋友都知道，在 Windows 当中，若屏幕分辨率和缩放比率较低，则一些字体显示出来的效果一言难尽，例如：</p><ul><li>宋体、细明体（PMingLiU）、MS Gothic、MS Mincho 等东亚语言字体，统统显示为点阵</li><li>微软雅黑的显示效果与打印效果大相径庭</li></ul><p>以上这些现象的产生，是因为这些字体自带了 hinting（字体微调）数据，会在特定的字号下，显示经过专门设计的位图字体。宋体的点阵就是这么来的。该技术的初衷是保证在低分辨率下，屏幕界面的文字依然能清晰显示，但随着高分屏的普及，这一技术如今反而拖了显示效果的后腿。</p><p>不幸的是，Linux 发行版的字体渲染也支持 hinting。因此，同样的 Windows 字体，如果安装到 Linux 中，你同样要面对让你一言难尽的显示效果，不知道该用什么语言来形容。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/20/b286b97d12491076f7e2afab56f9c92e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>以国考的报名系统为例。文本框中的提示文字为宋体，但因 hinting 而显示为我们熟悉的点阵。</figcaption></figure><p>幸运的是，同样通过配置 fontconfig，我们<strong>可以轻松禁用这些字体的 hinting 功能。</strong></p><ul><li><strong>第一步：</strong>打开用户主目录的<code>.config/fontconfig/fonts.conf</code>。如果没有，那就新建一个。</li><li><strong>第二步：</strong>在<code>&lt;fontconfig&gt;</code>节点中，补充与 hinting 设置相关的节点。同样是每个字体对应一个<code>&lt;match&gt;</code>节点。</li></ul><pre class="language-htmlembedded"><code>
+  &lt;!--
+    禁用特定字体的Hinting功能。
+    下面的代码就是让Fontconfig匹配特定的字体，然后修改参数以禁用它们的Hinting功能。
+  --&gt;
+  &lt;match target="font"&gt;
+    &lt;test name="family" compare="eq" ignore-blanks="true"&gt;
+    &lt;!-- &lt;string&gt;节点，在这里指定字体的名字。例如中易宋体就是SimSun --&gt;
+    &lt;!-- 【提示】字体名称可以是字体的中文名（在WPS等软件看到的名字），例如“宋体” --&gt;
+      &lt;string&gt;宋体&lt;/string&gt;  
+    &lt;/test&gt;
+    &lt;edit name="hinting" mode="assign"&gt;
+      &lt;bool&gt;false&lt;/bool&gt;
+    &lt;/edit&gt;
+  &lt;/match&gt;</code></pre><ul><li><strong>第三步：</strong>设置完成后，更新字体缓存：</li></ul><pre class="language-shell"><code>fc-cache -fv</code></pre><p>这样，重新打开相应的程序，你就会看到字体渲染有了明显改善：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/20/aac428086c4c070c030e54757b740ab2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>禁用 hinting 后，没有了点阵，宋体的显示效果与打印效果一致。</figcaption></figure><h2>写在最后</h2><p>作为日常使用 Arch Linux 的作者，笔者一直致力于让自己的电脑用起来更加舒服，尤其是字体显示的表现。</p><p>以上的经验，就是我自己在「调教」Arch Linux 字体显示中积累而成的，一步步实践下来，现在屏幕上的字体显示格外舒适，无论是日常使用，还是作为重中之重的办公，都与 Windows 不相上下，扫清了顾虑，迎来了舒爽。</p><p>如果你也像我一样日常使用 Linux，或者是因工作需要而离不开 Linux──尤其是使用政企统一配备的国产电脑、国产 Linux 发行版，那么期待这篇教程能对你有所启发。</p><h4>关联阅读：</h4><ul><li><a href="https://sspai.com/post/90194" target="_blank">终于可以在 Linux 下愉快打印了：Linux 发行版配置打印机攻略</a></li><li><a href="https://sspai.com/post/91396" target="_blank">终于可以愉快地扫描了：Linux 扫描仪配置与使用攻略</a></li><li><a href="https://sspai.com/post/89194" target="_blank">没错，我日常就用 Linux：谈谈我的 Linux 发行版使用体会</a></li></ul><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://sspai.com/link?target=https%3A%2F%2Fwww.xiaohongshu.com%2Fuser%2Fprofile%2F63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的&nbsp;<a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/93094</id>
             <title>派早报：腾讯会议将调整免费版权益，美满电子向客户发函通知涨价等</title>
             <link>https://sspai.com/post/93094</link>
@@ -228,68 +363,6 @@ uuidgen | tr -d '-'
 
 # 6. 启动服务；
 docker compose -f firefly-iii.yml up -d</code></pre><p>服务部署完成后，打开浏览器，输入 <code>http://localhost:80</code>（端口修改过的话注意换成对应的端口），即可打开 Firefly III 的主页了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/14/8b37c787b663ffffe5382e5655d80e60.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>随后填写邮箱以及密码，进入到主页中，首先映入眼帘的就是初始化设置（这个相比 Maybe 以及 Actual 就非常友好了），填写银行名称、货币为人民币（Chinese yuan）、以及语言修改为中文简体（Chinese Simplified）后，点击提交。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/14/f7b2642615ac083423ceebf0367c6e85.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">接着便进入到 Firefly III 的主页中，仍然有不错的引导提示，确保你能够理解系统的运作方式，完成所有引导后，就正式进入到系统中（在不同的标签页中，仍有对应的引导提示）。</p><p style="margin-left: 0px;">最后就可以按照自己的喜好和习惯，逐渐开始建立个人的记账数据。</p><h3>使用技巧</h3><p style="margin-left: 0px;">这部分内容是在使用 MoneyWiz 和 Firefly III 时的一些小技巧分享。</p><h4>信用类资产账户</h4><ul><li>在第一次创建时，不需要考虑输入已消费的账单，直接初始余额设置为当前待还金额，后面的消费记录再逐渐添加即可；</li><li>还款的操作为现金账户到该账户的转账；</li></ul><h4>其他类型账户</h4><ul><li>常用的加油卡、公交卡等，也可以创建为储蓄账户（或现金账户）；</li><li>支付宝或者微信中的余额，可以创建为储蓄账户（或现金账户）；</li><li>为房贷等创建债务（贷款）账户，可以设置贷款金额、利率、还款模式等，还款时可以自动计算本金、利息分别归还的金额；</li></ul><h4>导出导入数据</h4><p style="margin-left: 0px;">目前 MoneyWiz、Maybe、Actual 以及 Firefly III 这几个系统之间的数据，都不可以无缝的互相导入，这也是切换系统的最大难题之一。</p><p style="margin-left: 0px;">好处是 MoneyWiz 可以将所有的数据导出为 CSV 格式的表格，而 Firefly III 则提供丰富的 <a href="https://api-docs.firefly-iii.org/">REST API</a> 接口，可以通过写一个简单的 Python 脚本，完成数据的导入。</p><p style="margin-left: 0px;">当然可以通过使用 REST API 完成更多的复杂功能，例如写一个 Alfred 的 Workflow，输入交易信息，再通过 ChatGPT 进行格式化，最后插入到 Firefly III 中。</p><h4>其他</h4><ul><li>根据个人习惯创建多种维度的预算，及时提醒以及纠正超支，这对网购上瘾「患者」尤其有效；</li><li>Firefly III 的存钱罐是一个非常赞的功能，在每天无聊的记账中，给自己建立一个小目标，攒一些零花钱（私房钱）去买一样心仪已久的东西（改车），在获得的那一刻成就感满满；</li></ul><h3>使用注意</h3><ul><li>个人、家庭财务数据是非常重要的隐私，切记请勿将其暴露在互联网中，这是非常危险的行为。</li><li>使用自建服务，一定要注意数据的备份存储，否则可能会由于系统损坏等原因导致数据丢失，再重建数据工作量会非常庞大。</li></ul><h2>6 最后总结</h2><p style="margin-left: 0px;">借着这次切换记账软件，把这十多年的记账总结和思考记录了一下，希望能给大家引发一些深刻的思考，当然也更期待能跟大家多交流其中的技巧和经验，互相学习。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/92995</id>
-            <title>具透 Plus | Firefox 垂直标签、Windows 版 sudo 等近期半成品功能</title>
-            <link>https://sspai.com/post/92995</link>
-            <guid isPermaLink="false">https://sspai.com/post/92995</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 17 Oct 2024 11:44:48 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Firefox, 垂直标签栏, Windows, sudo  
-<br>
-<br>
-总结: Firefox 在其 131 版本中引入了垂直标签栏的测试功能，尽管正式版未如期推出，但用户仍可通过配置页面手动启用。现阶段的垂直标签栏功能较为简陋，用户建议使用第三方扩展如 Tree Style Tab 来获得更丰富的功能。同时，微软在 Windows 11 24H2 中引入了 Sudo for Windows 命令，改善了终端提权体验，但与类 Unix 的 sudo 命令仍存在差距。此外，Windows 11 24H2 还支持将 HDR 图片设置为壁纸，尽管存在一些问题。 </div>
-                        <hr>
-                    
-                    <h2>Firefox 也有垂直标签栏了，但还是接着用插件吧</h2>
-<p><a class="ss-atUser" href="https://sspai.com/u/platyhsu">@PlatyHsu</a>：近两年，垂直标签栏通过 Edge、Arc 等浏览器在更大众的群体中建立了认知。但从历史看，这一设计还是在 Firefox 用户中有最深厚的基础。尽管 Firefox 此前从未官方支持过垂直标签栏，但得益于很早就原生支持侧边栏，并开放给第三方扩展使用（Chrome 和 Edge 直到晚近版本才支持侧边栏及侧边栏扩展），Firefox 生态中有不少优秀的垂直标签栏扩展，以 <a href="https://addons.mozilla.org/en-US/firefox/addon/tree-style-tab/">Tree Style Tab</a> 为代表。这也成为很多用户留恋 Firefox 的关键原因。</p>
-<p>因此，当 Firefox 在 8 月发布<a href="https://blog.nightly.mozilla.org/2024/08/07/firefox-sidebar-and-vertical-tabs-try-them-out-in-nightly-firefox-labs-131/">博客文章</a>，宣布在尚处于 Nightly 频道的 Firefox 131 中开放测试垂直标签栏功能，引起了不少兴奋也就是可以理解的了。然而，经过两个月的等待，当 Firefox 131 在 10 月成为正式版时，垂直标签栏并未如期亮相，甚至都没有被列入设置中的「实验室」板块。</p>
-<p>不过，愿意尝鲜的用户仍然可以通过 <code>about:config</code> 配置页面打开这个隐藏的功能。方法是，在地址栏访问 <code>about:config</code> 后，通过搜索框找到 <code>sidebar.revamp</code> 和 <code>sidebar.verticalTabs</code> 两个设置项，分别通过双击将其值翻转为 <code>true</code>，然后重启浏览器即可。</p>
-<p>从实际效果来看，目前版本也确实很简陋，唯一可以调节的选项就是折叠和展开两种布局（通过工具栏的侧边栏按钮）。在标签页操作上，也只支持最基础的拖动排序，不像 Edge 那样支持分组，Arc 那样的多层级管理就更不用说了。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/17/7d97229a185d587ceaf5e19e29290a36.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>眼尖的朋友应该会注意到侧边栏的样式也发生了变化，这个样式实际上是可以通过上面提到的 <code>sidebar.revamp</code> 开关单独开启的。主要变化在于，原来存在多个侧边栏时，需要通过侧边栏顶部的下拉菜单切换，而现在会直接展示图标（跟 Edge 有点类似）。这样的好处是切换起来更方便了，缺点则是会挤占一整列的空间；并且如果装的扩展图标比较丑，比较有碍观瞻。另外，侧边栏周围多了一圈阴影装饰，营造出一个「悬浮」的视觉层级，至于好不好看就见仁见智了。</p>
-<p>因此，就现阶段而言，我建议对垂直标签栏感兴趣的朋友可以只打开 <code>sidebar.revamp</code>，然后装一个 Tree Style Tab 之类的第三方扩展。这样，既可以获得新版侧边栏布局的便利，也可以用上比原生垂直标签栏更多的功能。至于原来的横向标签栏，可以通过 Firefix-UI-Fix 将其<a href="https://github.com/black7375/Firefox-UI-Fix/wiki/Options#tab-bar">设置为</a>自动隐藏、悬停显示。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/17/article/830413b6cbf9644b98e0aff6548843b4.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
-    <figcaption>新版侧边栏布局搭配 Tree Style Tab 的效果</figcaption>
-</figure>
-<h2>微软给 Windows 仿了一个 sudo，但仅限于 sudo</h2>
-<p><a class="ss-atUser" href="https://sspai.com/u/liuxiaofengone">@化学心情下2</a>：一直以来 Windows 上的终端和类 Unux 上的都不太一样。当用户需要在类 Unix 终端里执行一个需要管理员权限的命令时，只需要将用户切换到 root 或者使用 sudo 命令（以 root 的身份）直接运行即可。</p>
-<p>但过去 Windows 上的终端，管理员身份和非管理员身份的终端窗口是明确分开的，微软表示：</p>
-<blockquote>
-    <p>PowerShell 不参与<a href="https://learn.microsoft.com/zh-cn/windows/security/application-security/application-control/user-account-control/">用户访问控制（UAC）。</a> 这意味着它无法提示用户对需要管理员批准的任务进行提升。</p>
-    <p>UAC 是一项 Windows 安全功能，可帮助防止恶意代码使用提升的权限运行。</p>
-</blockquote>
-<p>在 24H2 之前需要使用管理员身份运行命令，主要有以下几种方法：</p>
-<ol>
-    <li>启用 Windows 终端时，手动选择「以管理员身份运行 PowerShell」；</li>
-    <li>使用 PowerShell 内置命令 <code>Start-Process</code>（或其简称 <code>runas</code>） 在命令中加入 <code>Start-Process powershell.exe -Verb RunAs -ArgumentList</code> 这样的命令额外弹出一个「以管理员身份运行」的 Powershell 运行后续命令；</li>
-    <li>在脚本中加入 <code>-NoProfile -ExecutionPolicy Bypass</code> 这样的命令绕过 PowerShell 的执行策略和个人配置，进而弹出一个「以管理员身份运行」的 Powershell 运行后续命令。</li>
-</ol>
-<p>换句话说，除非开始就「以管理员身份运行 PowerShell」，否则你后续你想执行一个需要管理员权限的命令，就绕不开重新打开一个 PowerShell 窗口的剧情。另外考虑到每次直接都默认以「以管理员身份运行 PowerShell」其实并不安全，很容易因为误操作或恶意脚本而对系统造成不必要的更改和破坏。所以这个设计对普通人影响不大，但对经常要和终端打交道的高级用户就很头疼了。虽然也存在一些第三方工具来模拟 sudo 的功能，例如 <a href="https://github.com/gerardog/gsudo">gsudo</a> 和 <a href="https://www.nirsoft.net/utils/nircmd2.html"><code>nircmd.exe elevate</code></a>，但那毕竟需要额外安装。</p>
-<p>一直以为微软不再打算更改，结果在 Windows 11 24H2 里，微软终于引入了 Sudo for Windows 命令，来改善使用体验。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/17/article/8653f40d9b50482ae24fcceaec95a5ec.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>想要使用这个功能，我们需要前往「设置 &gt; 系统 &gt; 开发者选项」，然后打开「启用 sudo」 开关；接着还可以配置 sudo 的运行模式：</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/17/article/dbccff5b16edaa7d4088dcb78f9bf099.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<ul>
-    <li>内联：类似 Linux 那样直接在当前终端窗口下提权；</li>
-    <li>新窗口：提权后需要另外打开一个窗口；</li>
-    <li>禁用输入：提升当前正在运行命令的权限，但阻止后续命令输入，相比内联模式更安全。</li>
-</ul>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/17/article/572b14a100ba971bedc34db13ec32c4f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>使用上 Sudo for Windows 和类 Unix 的 sudo 命令大致类似，碰到 Windows 终端告诉你权限不足的地方，前面加上 sudo 重新运行一次即可。</p>
-<p>不过需要注意的是，Sudo for Windows 距离现有的 Start-Process (runas) 和「正版」sudo 都有一些差距。例如，它不能像 runas 那样切换为任意用户，输入密码也需要弹出 UAC 对话框而不是直接在命令行中完成。而与 sudo 相比，它并不支持通过 <code>sudo -i</code> 或者 <code>sudo su</code> 直接切换成超级管理员用户，而是只能提权单个命令。（当然，它更不可能有正版 sudo 那句<a href="https://xkcd.com/838/">吓人的报错提示</a>。）</p>
-<p>你可以通过微软的<a href="https://learn.microsoft.com/en-us/windows/sudo/">文档页面</a>了解更多关于 Windows 版 sudo 的细节。</p>
-<h2>Windows HDR 壁纸支持来了，但需要一些设置技巧</h2>
-<p><a class="ss-atUser" href="https://sspai.com/u/clyde">@克莱德</a>：在 Windows 11 24H2 中，你可以将一张 HDR 图片设置为壁纸——这听起来是不是很酷？微软也这么觉得。所以尽管这个功能从 2023 年 <a href="https://www.windowscentral.com/software-apps/windows-11/windows-11-is-getting-true-hdr-desktop-wallpaper-support-and-better-screen-casting">8 月</a>就开始内部测试了、尽管有一个非常可笑的 bug 几乎半年以前就有人发现了，在 24H2 正式版中我们还是迎来了这样一个实用性几乎为零、同时还存在低级问题的特性。</p>
                 ]]>
             </content:encoded>
         </item>
