@@ -5,6 +5,381 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/93065</id>
+            <title>用飞书多维表格和扫码枪，快速构建个人图书管理系统</title>
+            <link>https://sspai.com/post/93065</link>
+            <guid isPermaLink="false">https://sspai.com/post/93065</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 24 Oct 2024 03:17:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <飞书, 多维表格, ISBN, 数据管理>
+<br>
+<br>
+总结: 本文介绍了如何利用飞书的多维表格和扫码枪快速构建个人家庭图书管理系统。通过扫描纸质书的ISBN号，结合豆瓣数据爬取，实现书籍信息的自动录入。作者分享了创建表格模板、使用AI补全信息、上传封面图等具体步骤，旨在减少手动录入工作量。最终，用户可以在短时间内整理出家庭图书数据库，并探索更多数据管理的可能性。 </div>
+                        <hr>
+                    
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐&nbsp;</strong></p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><blockquote><p>一句话介绍：飞书多维表格 + 扫码枪读取纸质书 ISBN 号 + 爬取豆瓣数据 + 飞书应用开发能力 = 快速构建个人家庭图书管理系统。</p></blockquote><p>先看一下最后的成果吧。虽然我还没完全把书全录进去，但模板和代码已经搞定了。大家可以直接使用<a href="https://bsua27acdo.feishu.cn/base/Sd4Vb07Sva4h6jsEWKGcHEEtnih" target="_blank">我的模板</a>。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/ce029ea3e62cc3d826228899f5fa9b4b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>数据表</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/f3ac0214555375072ddaeda1fbad0acf.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>封面图</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/9365f709aae10b882842d7a9041b45fe.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>查询页（支持以书名、作者或分类查询图书）</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/4a15b0e1283c22d5a374386c98756b37.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>统计图仪表盘</figcaption></figure><p>接下来详细记录一下我创建模板和录入数据的过程。</p><p>契机是这样的，最近家里新买了一个书柜，我想着反正要把书都倒腾出来摆放一次，不妨顺便把家里的纸质书登记为一个表格；而且我最近翻出了一个以前买的扫码枪，可以发挥一下作用（实践下来发现确实挺好玩的）。</p><p>在工具的选择上，我没犹豫太多就选了飞书的多维表格。多维表格的扩展和开发能力很强，也能够快速把一个基础的数据表呈现为多种看板、画廊效果。而且多维表格最近还新增了 AI 捷径，可以直接调用 AI 能力填充表格。</p><p>整体设计思路大概分为以下几部分：</p><figure class="image ss-img-wrapper image_resized" style="width: 450px;"><img src="https://cdnfile.sspai.com/2024/10/21/article/71e9dd8368cb51efce3104d96b35afc0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>创建表格模板</h2><p>在飞书云文档新建多维表格。如果不想逐个手动配置字段的话，可以点击右上角的 AI 助手飞飞，告诉它希望增加哪些字段，AI 就会帮助我们生成表头并设置出最为合适的字段属性：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/8f2255de21206bee0581a5025f654d06.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我这次的思路是：先通过 ISBN 获取豆瓣图书数据，然后使用飞书的 AI 能力补充生成需要的字段，最后再手动录入少量数据。基于此，要录入的信息分为三类：</p><ul><li>基础信息：豆瓣中能够获取到的基本信息，比如书名、作者、出版社、简介、评分等；</li><li>AI 生成信息：基于基础信息，生成豆瓣中无法获取的信息，比如基于把图书简介概括为一句话总结，生成合适的图书分类等；</li><li>手动录入信息：当前阅读状态（读完、在读、待读），读书笔记等。</li></ul><p>通过自动抓取导入 + AI 补全生成，尽可能减少手工录入的工作量。同时在多维表格中，数据表是最基础的数据库，后续可以基于数据表格创建不同的视图、表单或仪表盘，不过现在还是空表，所以我们把其他视图放到最后再介绍。</p><h2>爬取豆瓣接口获取书籍信息</h2><p>如果可以的话，用 API 是最好的，不过豆瓣的接口很早就关闭了，我在网上搜了一下，也没有其他太好用的图书 API（或者都不免费）。鉴于个人使用一共也没多少本书，所以可以还是做一下豆瓣的爬虫吧，仅供学习使用，不会对豆瓣服务器造成太大压力。</p><p>使用豆瓣的搜索接口提交 ISBN 号<sup class="ss-footnote" href="" title="国际标准书号，用于唯一标识图书等出版物的编号系统，便于全球范围内对出版物进行分类和识别。">1</sup>，从第一条搜索结果中获取图书链接并爬取更详细的信息。</p><p>如图，豆瓣的搜索接口是：<code>https://book.douban.com/j/subject_suggest?q=</code></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/cbdf9d3ad559c0bdae85341f447d4468.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><pre class="language-python"><code>    params = {'q': isbn}
+    response_suggest = requests.get('https://book.douban.com/j/subject_suggest', params=params, headers=headers_suggest)
+    if response_suggest.status_code != 200 or not response_suggest.json():
+        return "未找到相关书籍信息"
+    book_suggest = response_suggest.json()[0]
+    book_url = book_suggest['url'].replace('\\', '')</code></pre><p>获取图书详情页<code>https://book.douban.com/subject/35335514/</code>后，请求该页面数据，并从页面中提取相应信息：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/cea5f9a3671f6c10d13bc54705999172.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不过由于豆瓣的图书简介内容并没有统一数据格式，这里还需要做很多错误处理，举个例子，比如定价这里，有时会写 59.00 元，有时会写￥59 或 CNY 59，有时会写 59，有时信息缺失干脆没有这个字段，所以为了避免程序处理时报错，就需要做一些处理，比如使用正则：</p><pre class="language-python"><code>    try:
+        price = float(re.search(r"(?:CNY\s*)?(\d+(?:\.\d+)?)(?:\s*元)?", soup.find('span', text='定价:').next_sibling.strip().replace('元', '')).group(1))
+    except AttributeError:
+        price = ''</code></pre><p>其他字段的处理类似，这里就不再赘述了。</p><p>还有一个稍微特殊一点的就是封面图片，多维表格中支持上传图片附件，可以将封面图生成画廊，所以我们也需要顺便记录一下封面图片的 URL 地址，后续可以下载图片并上传到飞书中。</p><p>豆瓣的信息里，其实没有图书的分类信息，我本来想参考中图法<sup class="ss-footnote" href="" title="即《中国图书馆分类法》，是中国的一种大型综合性分类体系，用于系统地对图书馆馆藏进行分类和组织，是国内图书馆最广泛采用的分类法。">2</sup>去做图书分类，后来发现太复杂了，家里这么点书确实没必要那么精细的分类。</p><p>然后我试了一下飞书的 AI 功能，其实可以用 AI 自动补充图书分类：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/a574a8eab273d68af033c88eb9fc49ea.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>再比如，豆瓣简介写的比较长，我们可以让 AI 进行总结，生成一句话简介：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/31a56600fd679fad2ad3024129cf0627.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这样设置好了之后，只要我们填入前几列的字段，飞书 AI 就会帮助我们自动补全这两列数据，非常好用。</p><h2>通过接口向飞书云文档推送数据</h2><p>多维表格其实自带一个 Webhook 接口用于提交数据，具体做法是点击文档右上角的「自动化」：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/054fbdebade8f67be1cbe66b67ef1423.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>「创建自定义流程」：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/e96f388985b1f713b6f60abc0dd51453.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>左边选择「接收到 Webhook 时」，会得到一个 Webhook 地址，向这个地址发送 JSON 格式的数据，服务器就会收到并自动解析为字段；然后右侧选择「新增记录」，选择插入数据的位置为数据表，然后设置记录内容即可：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/8f5e4c82406b807f4327fa4947b46a35.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不过……我感觉这样做还是不是太方便，因为需要手动逐个去设置字段匹配，字段一多或者需要修改时也比较麻烦。所以我还是用开发应用的方式来实现，登录飞书开放平台，选择创建企业自建应用：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/db276811efdbd14f270f5b8a840b7075.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>填写基本信息：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/d0cb8b49b9b73ec4abcd9f5f38694a8d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>创建完成后有很多可以设置的选项，不过我们这次主要会用到「应用凭证」、「权限管理」和「版本发布」这几项功能，其余的大家可以自行阅读飞书的<a href="https://open.feishu.cn/document/home/index" target="_blank">开发文档</a>（在这里要保存好 <code><strong>App ID</strong></code> 和 <code><strong>App Secret</strong></code> 供后面使用）。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/d8b1801a5a53781bd1c1c25c0f1229c9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>想要通过应用向多维表格中提交数据，主要需要几个过程，我会把文档附在这里供大家参考：</p><ul><li><a href="https://open.feishu.cn/document/server-docs/authentication-management/access-token/tenant_access_token_internal" target="_blank">获取鉴权</a></li><li>上传图片附件<a href="https://open.feishu.cn/document/server-docs/docs/drive-v1/upload/upload_all" target="_blank">获取 file_token&nbsp;</a></li><li>向多维表格中<a href="https://open.feishu.cn/document/server-docs/docs/bitable-v1/app-table-record/create" target="_blank">提交数据</a></li></ul><p>这个过程中，还需要向应用开放相应的操作权限，我建议是在「开发文档」中调试接口时，开通相应的权限。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/6f910379d257441e9f549a5c3c98d4ee.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>具体来说，我们需要提前准备好 4 个参数，分别是：</p><ul><li><code>appid</code>：飞书应用的唯一标识，在应用设置页面获取</li><li><code>app_secret</code>：在应用设置页面获取，和 <code>appid</code> 一起使用，用于获取<code>tenant_access_token</code></li><li><code>table_apptoken</code>：多维表格 App 的唯一标识，从多维表格链接中获取。</li><li><code>table_id</code>：多维表格数据表的唯一标识，从多维表格链接中获取。</li></ul><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/5183b3ee63fce60ea8b839ebbb71a9bd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>获取鉴权</h3><p>提交<code>appid</code>和 <code>app_secret</code> ，获得<code>tenant_access_token</code>。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/c69cdb1b3c98a2073ae71f8d6e2a58a7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><pre class="language-python"><code>def access_token():
+    url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"
+    payload = json.dumps({
+        "app_id": feishu_appid,
+        "app_secret": feishu_app_secret
+    })
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    response = requests.request("POST", url, headers=headers, data=payload)
+    return response.json()['tenant_access_token']</code></pre><h3>上传图片</h3><p>对于附件类内容，需要先完成上传获取<code>file_token</code> ，后续提交表格记录时需要用到。这一步直接用飞书文档里的示例代码就行：</p><pre class="language-python"><code>import os
+import requests
+from requests_toolbelt import MultipartEncoder
+def upload_media(file_path, access_token):
+    file_size = os.path.getsize(file_path)
+    url = "https://open.feishu.cn/open-apis/drive/v1/medias/upload_all"
+
+    form = {
+        'file_name': os.path.basename(file_path),
+        'parent_type': 'bitable_image',
+        'parent_node': table_apptoken,
+        'size': str(file_size),
+        'file': (open(file_path, 'rb'))
+    }
+    print(form)
+    multi_form = MultipartEncoder(form)
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': multi_form.content_type
+    }
+
+    response = requests.request("POST", url, headers=headers, data=multi_form)
+    print(response.json())
+    if response.status_code == 200:
+        return response.json().get('data', {}).get('file_token')
+    else:
+        return None</code></pre><h3>上传记录</h3><p>这一步主要是结合数据表的结构，构造好需要提交的 JSON。主要是需要结合<a href="https://open.feishu.cn/document/server-docs/docs/bitable-v1/bitable-structure" target="_blank">文档</a>，注意不同类型的字段必须匹配相应的格式。比如，在表格中设置「豆瓣链接」的类型为超链接，这里就必须提供<code>text</code>和<code>link</code> ；「出版时间」设置为日期，就需要提交时间戳而非字符串；「封面图」设置为附件，就需要提交<code>file_token</code>；还有一些数字格式，也要匹配具体的设置。</p><p>如果提交的数据和设置的字段类型不匹配就会报错，所以需要仔细 debug 一下。代码比较简单，大家应该能看明白：</p><pre class="language-python"><code>def insert_book_info_to_feishu(book_info, file_token, access_token):
+    url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{table_apptoken}/tables/{table_id}/records"
+
+    payload = json.dumps({
+        "fields": {
+            "书名": book_info["书名"],
+            "作者": book_info["作者"],
+            "出版社": book_info["出版社"],
+            "出版时间": book_info["出版时间"],
+            "页数": book_info["页数"],
+            "定价": book_info["定价"],
+            "ISBN": book_info["ISBN"],
+            "豆瓣评分": book_info["豆瓣评分"],
+            "评分人数": book_info["评分人数"],
+            "豆瓣链接": {
+                "text": book_info["书名"],
+                "link": book_info["豆瓣链接"]
+            },
+            "豆瓣简介": book_info["豆瓣简介"],
+            "封面图": [
+                {
+                    "file_token": file_token
+                }
+            ]
+        }
+    })
+    payload = construct_payload(book_info, file_token)
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {access_token}'
+    }
+    response = requests.request("POST", url, headers=headers, data=payload)
+    print(response.json())
+    print(f'飞书接口状态：{response.status_code}')
+    return response.status_code</code></pre><p>哦对顺便说一句，如果是专业搞飞书应用开发的，可以直接用 Python SDK，我手搓代码是这次因为一共也就两三个接口的事。</p><h2>使用扫码枪录入 ISBN</h2><p>完成以上准备工作之后，我们就可以开始录入数据了。这时就要祭出「扫码枪」了。具体来说，我用到的这种扫码枪叫做「红光一维码扫码枪」<sup class="ss-footnote" href="" title="红光扫码枪：一种利用红色激光扫描条形码以快速读取其数据的设备。 一维码：由不同宽度的平行线条及其间隔组成的条形码，通常用于表示数字或字母信息。">3</sup>：</p><p>大家现在用的更多的是手机扫描二维码。其实扫码枪这玩意儿一点都不神秘，超市收银台标配。而且一维码条形发明都几十年了，被广泛应用于商品标识。</p><p>扫码枪的原理其实很简单，就是通过光学扫描系统读取条形码中的数据，将其转换为电信号，再经过处理器处理后，模拟键盘输入的形式将数据传递给计算机等设备。</p><p>不过我用的并不是那种「有线枪式」的扫码枪，而是一个便携的蓝牙扫描枪（不带货哈）。所以对于电脑来说，扫码枪类似于一个无线键盘：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/e2130f5366d42620008d63d708347f7d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>对于用户来说，只需要知道，连接扫码枪之后，你把键入的光标放在哪里，它就会把扫码结果直接输入到哪里（我录了个短视频，不知道能不能看清楚）。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/8e649a842a1fd730c7054773ee149427.gif" /></figure><p>扫码枪也有许多设置项，其中一项便是扫码结尾的字符，如果不做设置，扫码枪在连续扫描时就会录入一长串字符，所以一般来说会在结尾设置<code>\n</code>换行符。</p><p>到此我们就可以把以上所有工作流程串在一起了，运行起来的效果大概是这样：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/5df9f5566fac6140ee6bc7a7c975b3ef.gif" /></figure><p>比较费时间的其实是下载和上传图片。大家注意看最后几秒，在自动上传一条新纪录后，多维表格的快捷 AI 会根据我们的设置，自动填充好「一句话总结」和「AI 分类」两个字段。</p><p>这样基本上就能 10s 内录完一本书的数据，而且全程只需要做一个动作，就是扫码，很快就能整理出家里的图书数据库。</p><p>有了基础的数据表之后，就可以根据自己的需要创建更多视图。所谓视图，就是展现数据的不同方式。大家可以根据自己的数据类型和情况探索一下展示效果，这里不再详细介绍了~</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/de25193e115c5147763da0626ff810fd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>而且你别说，做完这个图书数据表之后，我觉得其他家庭数据库也挺有搞头的，用类似的思路，可以很快搭建出「<strong>家庭药箱</strong>」「<strong>家庭食品保质期</strong>」「<strong>老婆的化妆品</strong>」等等数据表，无非就是替换一下条形码查询数据的接口，而且类似这种需要注意保质期的数据表，还能利用多维表格中的到期提醒功能自动发送提醒。下周有空就做。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/21/article/3446778d13de2700d754211509d885bb.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>最后我把全部代码分享一下，由于是自己用的，所以并没有刻意做什么整理，大家随便看看，仅供参考。</p><p>以上。</p><hr /><p>附录（本文用到的全部代码）：</p><pre class="language-python"><code>import requests
+from bs4 import BeautifulSoup
+import json
+import os
+from requests_toolbelt import MultipartEncoder
+import time
+from datetime import datetime
+import re
+#设置飞书应用id
+feishu_appid = ''
+feishu_app_secret = ''
+#设置飞书表格的id
+table_apptoken = ''
+table_id = ''
+def access_token():
+    url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"
+    payload = json.dumps({
+        "app_id": feishu_appid,
+        "app_secret": feishu_app_secret
+    })
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    response = requests.request("POST", url, headers=headers, data=payload)
+    # print(response.json())
+    return response.json()['tenant_access_token']
+def upload_media(file_path, access_token):
+    file_size = os.path.getsize(file_path)
+    url = "https://open.feishu.cn/open-apis/drive/v1/medias/upload_all"
+
+    form = {
+        'file_name': os.path.basename(file_path),
+        'parent_type': 'bitable_image',
+        'parent_node': table_apptoken,
+        'size': str(file_size),
+        'file': (open(file_path, 'rb'))
+    }
+    print(form)
+    multi_form = MultipartEncoder(form)
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': multi_form.content_type
+    }
+
+    response = requests.request("POST", url, headers=headers, data=multi_form)
+    print(response.json())
+    if response.status_code == 200:
+        return response.json().get('data', {}).get('file_token')
+    else:
+        return None
+def get_book_info_by_isbn(isbn):
+    # 请求书籍搜索建议接口，获取书籍的URL和封面图片链接
+    # 如请求失败，修改headers或增加cookies
+    headers_suggest = {
+        'sec-ch-ua': '"Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0',
+        'x-requested-with': 'XMLHttpRequest',
+    }
+    params = {'q': isbn}
+    response_suggest = requests.get('https://book.douban.com/j/subject_suggest', params=params, headers=headers_suggest)
+    if response_suggest.status_code != 200 or not response_suggest.json():
+        return "未找到相关书籍信息"
+    book_suggest = response_suggest.json()[0]
+    book_url = book_suggest['url'].replace('\\', '')
+    pic_url = book_suggest['pic'].replace('\\', '').replace('subject/s','subject/l')
+    # 请求书籍详情页，提取书籍的详细信息
+    # 如请求失败，修改headers或增加cookies
+    headers_detail = {
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,
+*/*
+;q=0.8,application/signed-exchange;v=b3;q=0.7',
+        'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0',
+    }
+    response_detail = requests.get(book_url, headers=headers_detail)
+    soup = BeautifulSoup(response_detail.text, 'html.parser')
+    # 提取信息
+    try:
+        author = soup.find('span', text=' 作者').find_next_sibling('a').text.strip()
+    except AttributeError:
+        author = ''
+    try:
+        publisher = soup.find('span', text='出版社:').find_next_sibling('a').text.strip()
+    except AttributeError:
+        publisher = ''
+    try:
+        pub_year = soup.find('span', text='出版年:').next_sibling.strip()
+        pub_year = convert_to_timestamp(pub_year)
+    except AttributeError:
+        pub_year = ''
+    try:
+        pages = int(soup.find('span', text='页数:').next_sibling.strip())
+    except AttributeError:
+        pages = ''
+    try:
+        price = float(re.search(r"(?:CNY\s*)?(\d+(?:\.\d+)?)(?:\s*元)?", soup.find('span', text='定价:').next_sibling.strip().replace('元', '')).group(1))
+    except AttributeError:
+        price = ''
+    try:
+        rating = float(soup.find('strong', class_='rating_num').text.strip())
+    except:
+        rating = ''
+    try:
+        votes = int(soup.find('span', property='v:votes').text.strip())
+    except AttributeError:
+        votes = ''
+    try:
+        intro_div = soup.find('div', class_='intro')
+        paragraphs = intro_div.find_all('p')
+        intro = "\n".join([p.get_text() for p in paragraphs])
+    except AttributeError:
+        intro = ''
+    # 整合提取的书籍信息
+    book_info = {
+        "书名": book_suggest['title'],
+        "作者": author,
+        "出版社": publisher,
+        "出版时间": pub_year,
+        "页数": pages,
+        "定价": price,
+        "ISBN": isbn,
+        "豆瓣评分": rating,
+        "评分人数": votes,
+        "豆瓣链接": book_url,
+        "封面图链接": pic_url,
+        "豆瓣简介": intro
+    }
+    return book_info
+def download_cover_image(cover_url, save_path):
+    response = requests.get(cover_url)
+    if response.status_code == 200:
+        with open(save_path, 'wb') as file:
+            file.write(response.content)
+        return save_path
+    else:
+        return None
+def convert_to_timestamp(date_str):
+    # 使用正则表达式匹配不同的日期格式
+    date_formats = [
+        r'^(\d{4})-(\d{1,2})-(\d{1,2})
+$',  # 2023-02-01
+        r'^(\d{4})-(\d{1,2})$
+',            # 2023-02 或 2023-2
+        r'^(\d{4})$',                      # 仅有年份 2023
+    ]
+    for date_format in date_formats:
+        match = re.match(date_format, date_str)
+        if match:
+            groups = match.groups()
+            if len(groups) == 3:  # 解析到年-月-日
+                year, month, day = int(groups[0]), int(groups[1]), int(groups[2])
+            elif len(groups) == 2:  # 解析到年-月
+                year, month, day = int(groups[0]), int(groups[1]), 1  # 默认设置为1日
+            elif len(groups) == 1:  # 仅解析到年份
+                year, month, day = int(groups[0]), 1, 1  # 默认设置为1月1日
+            # 构造日期对象并转化为时间戳
+            date_obj = datetime(year, month, day)
+            timestamp = int(date_obj.timestamp() * 1000)  # 转为毫秒级时间戳
+            return timestamp
+    raise ValueError("无法解析日期格式")
+def construct_payload(book_info, file_token):
+    # 初始化空的字段字典
+    fields = {}
+    # 动态构造需要提交的字段，跳过空值的字段
+    if book_info.get("书名"):
+        fields["书名"] = book_info["书名"]
+    if book_info.get("作者"):
+        fields["作者"] = book_info["作者"]
+    if book_info.get("出版社"):
+        fields["出版社"] = book_info["出版社"]
+    if book_info.get("出版时间"):
+        fields["出版时间"] = book_info["出版时间"]
+    if book_info.get("页数"):
+        fields["页数"] = book_info["页数"]
+    if book_info.get("定价"):
+        fields["定价"] = book_info["定价"]
+    if book_info.get("ISBN"):
+        fields["ISBN"] = book_info["ISBN"]
+    if book_info.get("豆瓣评分"):
+        fields["豆瓣评分"] = book_info["豆瓣评分"]
+    if book_info.get("评分人数"):
+        fields["评分人数"] = book_info["评分人数"]
+    if book_info.get("豆瓣链接") and book_info.get("书名"):
+        fields["豆瓣链接"] = {
+            "text": book_info["书名"],
+            "link": book_info["豆瓣链接"]
+        }
+    if book_info.get("豆瓣简介"):
+        fields["豆瓣简介"] = book_info["豆瓣简介"]
+    if file_token:
+        fields["封面图"] = [{"file_token": file_token}]
+    # 构造最终的 payload
+    payload = json.dumps({"fields": fields})
+    return payload
+def insert_book_info_to_feishu(book_info, file_token, access_token):
+    url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{table_apptoken}/tables/{table_id}/records"
+
+    payload = json.dumps({
+        "fields": {
+            "书名": book_info["书名"],
+            "作者": book_info["作者"],
+            "出版社": book_info["出版社"],
+            "出版时间": book_info["出版时间"],
+            "页数": book_info["页数"],
+            "定价": book_info["定价"],
+            "ISBN": book_info["ISBN"],
+            "豆瓣评分": book_info["豆瓣评分"],
+            "评分人数": book_info["评分人数"],
+            "豆瓣链接": {
+                "text": book_info["书名"],
+                "link": book_info["豆瓣链接"]
+            },
+            "豆瓣简介": book_info["豆瓣简介"],
+            "封面图": [
+                {
+                    "file_token": file_token
+                }
+            ]
+        }
+    })
+    payload = construct_payload(book_info, file_token)
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {access_token}'
+    }
+    response = requests.request("POST", url, headers=headers, data=payload)
+    print(response.json())
+    print(f'飞书接口状态：{response.status_code}')
+    return response.status_code
+def upload_book_to_feishu(isbn):
+    # 获取飞书的 access_token
+    token = access_token()
+
+    # 获取书籍信息
+    book_info = get_book_info_by_isbn(isbn)
+    print(book_info)
+
+    # 下载封面图片
+    cover_url = book_info['封面图链接']
+    save_path = f"./{isbn}.jpg"
+    cover_file_path = download_cover_image(cover_url, save_path)
+
+    if cover_file_path:
+        # 上传封面图片至飞书并获取file_token
+        file_token = upload_media(cover_file_path, token)
+
+        if file_token:
+            # 插入书籍信息到飞书表格
+            status_code = insert_book_info_to_feishu(book_info, file_token, token)
+            return status_code
+        else:
+            print("封面图片上传失败")
+    else:
+        print("封面图片下载失败")
+#使用示例
+def scan_isbn_and_upload():
+    print("请使用扫码枪输入ISBN，按 Ctrl+C 结束程序。")
+    while True:
+        try:
+            # 等待用户通过扫码枪输入ISBN
+            isbn = input("扫描ISBN: ").strip()  # .strip() 用于去除前后多余的空白和换行符
+
+            if isbn:
+                print(f"正在处理ISBN: {isbn}")
+                upload_book_to_feishu(isbn)  # 调用函数上传书籍信息
+                print(f"ISBN: {isbn} 处理完成\n")
+            else:
+                print("未检测到有效的ISBN，请重试。")
+
+        except KeyboardInterrupt:
+            # 用户按下 Ctrl+C 后，退出循环
+            print("\n程序已终止。")
+            break
+#调用函数，开始监听扫码输入
+scan_isbn_and_upload()</code></pre><p>题图来自 <a href="https://pixabay.com/users/kollinger-15617407/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5211309">Hermann Kollinger</a>, <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5211309">Pixabay</a></p><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/93195</id>
             <title>派早报：Apple 回应 Apple Intelligence 入华进度、微信推出查看单删好友功能等</title>
             <link>https://sspai.com/post/93195</link>
@@ -428,28 +803,6 @@ sudo cp *.TTF *.ttf *.OTF *.otf /usr/share/fonts/Windows_TTF/</code></pre><ul><l
       &lt;bool&gt;false&lt;/bool&gt;
     &lt;/edit&gt;
   &lt;/match&gt;</code></pre><ul><li><strong>第三步：</strong>设置完成后，更新字体缓存：</li></ul><pre class="language-shell"><code>fc-cache -fv</code></pre><p>这样，重新打开相应的程序，你就会看到字体渲染有了明显改善：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/10/20/aac428086c4c070c030e54757b740ab2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>禁用 hinting 后，没有了点阵，宋体的显示效果与打印效果一致。</figcaption></figure><h2>写在最后</h2><p>作为日常使用 Arch Linux 的作者，笔者一直致力于让自己的电脑用起来更加舒服，尤其是字体显示的表现。</p><p>以上的经验，就是我自己在「调教」Arch Linux 字体显示中积累而成的，一步步实践下来，现在屏幕上的字体显示格外舒适，无论是日常使用，还是作为重中之重的办公，都与 Windows 不相上下，扫清了顾虑，迎来了舒爽。</p><p>如果你也像我一样日常使用 Linux，或者是因工作需要而离不开 Linux──尤其是使用政企统一配备的国产电脑、国产 Linux 发行版，那么期待这篇教程能对你有所启发。</p><h4>关联阅读：</h4><ul><li><a href="https://sspai.com/post/90194" target="_blank">终于可以在 Linux 下愉快打印了：Linux 发行版配置打印机攻略</a></li><li><a href="https://sspai.com/post/91396" target="_blank">终于可以愉快地扫描了：Linux 扫描仪配置与使用攻略</a></li><li><a href="https://sspai.com/post/89194" target="_blank">没错，我日常就用 Linux：谈谈我的 Linux 发行版使用体会</a></li></ul><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://sspai.com/link?target=https%3A%2F%2Fwww.xiaohongshu.com%2Fuser%2Fprofile%2F63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的&nbsp;<a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/93094</id>
-            <title>派早报：腾讯会议将调整免费版权益，美满电子向客户发函通知涨价等</title>
-            <link>https://sspai.com/post/93094</link>
-            <guid isPermaLink="false">https://sspai.com/post/93094</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 22 Oct 2024 00:00:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 腾讯会议, 美满电子, Firefox, AI欺诈检测  
-<br><br>  
-总结: 腾讯会议宣布将调整免费版会议时长至40分钟，并推出更强的专业版和商业版。美满电子因AI需求激增，通知客户全线产品将涨价。Mozilla警告旧版Firefox的根证书将在2025年到期，影响核心功能。Internet Archive仍在遭受黑客攻击，部分服务恢复缓慢。美国财政部利用AI追回了40亿美元的欺诈损失，并预防了30亿美元的潜在损失。 </div>
-                        <hr>
-                    
-                    <h2>你可能错过的新鲜事</h2><h3>腾讯会议将逐步调整免费版权益</h3><p>腾讯会议官方于 10 月 20 日发布通知，宣布腾讯会议免费版单场会议时长将逐步调整为 40 分钟（2 人会议不限时），未来将推出具备更强 AI 与丰富权益的专业版、以及升级商业版的权益组合，助力更多组织和用户开展高效协同。目前腾讯会议 2 人以上的会议限时时长为 60 分钟，支持最多 100 人参会。升级商业版和会员版后，单场会议将不限时，同时参会人数将得到提升（可选择不同规模人数进行购买）。<a href="https://www.ithome.com/0/803/699.htm">来源</a></p><h3>美满电子向客户发函通知涨价</h3><p>10 月 21 日，据台媒《经济日报》报道，美国知名数据中心云优化芯片组合供应商 Marvell 美满电子近期发函通知客户，由于 AI 需求激增，全线产品线将于明年 1 月 1 日起调涨。通知函署名为美满电子全球销售执行副总裁 Dean Jarnac。函中称全球对加速运算与 AI 需求激增，整个半导体供应链都在进行「前所未有的投资」，美满电子因投资金额扩增而调价，并将尽可能降低涨价幅度，「避免对客户造成太大影响」。函中还建议客户依交期下单，并提供准确的需求预测。<a href="https://money.udn.com/money/story/5612/8304699">来源</a></p><h3>旧版 Firefox 浏览器根证书即将到期</h3><p>Mozilla 近期发布公告，表示目前旧版 Firefox 使用的某个根证书将在 2025 年 3 月 14 日到期，过期后将影响 Firefox 浏览器的大多数核心功能。该证书主要是验证 Firefox 的签名内容以及扩展程序，到期后扩展可能无法使用，同时有关 DRM 解密功能也会失效。Mozilla 在 Firefox v128 版本开始更新该证书，所有此前版本的 Firefox 浏览器都会受到影响，普通用户需要尽快更新至最新版本。而对于使用 ESR 长期支持版本的用户，其 Firefox 版本应该升级到至少 Mozilla Firefox v115.13 ESR 及之后的版本。<a href="https://www.landiannews.com/archives/106207.html">来源</a></p><h3>Internet Archive 仍受黑客影响</h3><p>近期，<i>The Verge</i> 发现攻击网络存档服务 Internet Archive 的黑客开始以回复过往工单邮件的形式嘲讽该服务的安全措施。疑似黑客在邮件中称，Internet Archive 在发现漏洞（遭受攻击）的两周后仍未采取有效措施，甚至未能轮换泄露的 API 密钥，其中包括一个能够访问官方支持邮箱自 2018 年起超过 80 万条工单的 Zendesk 令牌。Internet Archive 在此前的大面积 DDoS 攻击后正在缓慢恢复，包括互联网页面存档服务 Wayback Machine 在内的部分服务已逐渐重新上线，但仍有大量数字存档尚不可用。<a href="https://www.theverge.com/2024/10/20/24274826/internet-archive-hackers-replying-zendesk-tickets">来源</a></p><h3>美国财政部称已使用 AI 挽回数十亿欺诈损失</h3><p>近日，美国财政部发布新闻稿，称已将机器学习 AI 作为诈骗检测流程的一部分。在新流程的帮助下，部门已追回不当付款 40 余亿美元，其中约十亿是机器学习 AI 识别到疑似支票诈骗的直接结果；此外，部门称通过识别与优先处理高风险转账、基于风险的筛查等措施预防了共 30 亿美元的损失。<a href="https://www.techradar.com/pro/us-treasury-claims-to-have-won-back-billions-of-dollars-lost-to-fraud-using-ai">来源</a></p><h2>看看就行的小道消息</h2><ul><li>游戏科学在《黑神话：悟空》官方 X 账号宣布 PS5 实体版游戏光碟会很快（very soon）发布。<a href="https://x.com/BlackMythGame/status/1847911254234468563">来源</a></li><li>世嘉宣布 Nintendo Switch 重制版《人中之龙 极》将于 10 月 25 日开售，港服定价 158 港币。<a href="https://weibo.com/2219299801/OCxVzm08G">来源</a></li><li>有报道称快手将负责 AI 芯片设计的异构计算与芯片事业部孵化为凌川科技独立运营。<a href="https://www.ithome.com/0/803/913.htm">来源</a></li><li>iOS 18.1 可能于下周正式推送，Apple 智能首批功能、AirPods Pro 2 助听器功能等将在审批通过地区同步上线。<a href="https://www.macrumors.com/2024/10/21/airpods-pro-hearing-features-launching-in-ios-18-1/">来源</a></li></ul><h2>少数派的近期动态</h2><ul><li>少数派联合老朋友「香蕉攀岩」推出攀岩体验课程，欢迎你在下班之后走入附近的香蕉攀岩门店，体验攀岩带来的独特感受。<a href="https://sspai.com/post/92982">进一步了解</a></li><li>双十一临近，我们为你带来了「满血版」的 K3：少数派定制版 Keychron K3 Max，Max 版本在保留了 K3 系列基本卖点的前提下，最大的改进就是新增了 2.4G 的连接方式，使之成为一款有线 / 蓝牙 / 2.4G 的三模键盘。<a href="https://sspai.com/post/92779"><strong>进一步了解</strong></a></li><li>上个月买了啥？与派友们一起回顾消费、评价产品，为「双十一买什么」来点参考。<a href="https://sspai.com/bullet/1727776810"><strong>参与讨论</strong></a></li></ul><h2>你可能错过的文章</h2><ul><li><a href="https://sspai.com/post/92888">城市漫步指南：香港，繁体的花花世界陌生也新鲜</a></li><li><a href="https://sspai.com/post/92654">口之于味，有同嗜焉：在短视频中重识中华美食的现在、过去和未来</a></li><li><a href="https://sspai.com/post/93083">派评 | 近期值得关注的 App</a></li></ul><p>&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>
