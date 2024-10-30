@@ -5,6 +5,228 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2024/10/coze.html</id>
+            <title>AI 开发的捷径：工作流模式</title>
+            <link>http://www.ruanyifeng.com/blog/2024/10/coze.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2024/10/coze.html</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 31 Oct 2024 03:24:05 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: AI开发, 工作流模式, 模板商店, API调用  
+<br><br>  
+总结: 本文介绍了AI开发的三种模式：自建模型、API调用和工作流模式，其中工作流模式最为简单，适合普通用户上手。作者选择了工作流模式，并展示了如何使用国内的AI开发平台“扣子”进行应用开发。通过工作流，用户可以将AI应用分成多个步骤，便于操作和管理。此外，文章还提到模板功能，用户可以将自己的工作流保存为模板，供他人使用和借鉴。最后，作者鼓励读者尝试开发自己的AI应用，并参与相关活动。 </div>
+                        <hr>
+                    
+                    <h2>一、引言</h2>
+
+<p>大部分人使用 AI，大概都跟我一样，停留在初级阶段。</p>
+<p>平时，就是向 AI 提问（又称聊天），偶尔也用一些现成的服务：生成图片、生成代码、翻译文章等等。但是，时间久了，就觉得不够用，很多个性化需求，根本找不到工具，需要自己想办法。</p>
+
+<p>我想，这是很多人面临的问题：<strong>如果深入使用 AI，就必须自己做开发</strong>。</p>
+
+<p>今天，我就介绍一种 AI 开发的简单方法，没有那么高的门槛，普通人也可以上手。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102701.webp" title="" /></p>
+
+<h2>二、AI 开发的三种模式</h2>
+
+<p>按照从难到易，我把 AI 开发分成三种模式。</p>
+
+<p><strong>（1）自建模型</strong>：自己搭建 AI 模型，并寻找数据进行训练。</p>
+
+<p>这种模式难度高，成本大，必须是 AI 专业人士或大公司，才会使用。</p>
+
+<p><strong>（2）API 调用</strong>：自己编写脚本，去调用他人运行的模型 API。</p>
+
+<p>这种模式要求使用者必须会编程，优点是适应性强，什么需求都能编程解决，缺点是编写和调试脚本要花不少时间，还要自己部署服务端。</p>
+
+<p><strong>（3）工作流模式</strong>：<u>采用 AI 服务商提供的工作流（workflow），编排每个步骤，形成自动化操作。</u></p>
+
+<p>这种模式最简单，不懂编程的人也能上手，可以不编写脚本，有现成的服务端，省时省事。缺点是受限于 AI 服务商提供的能力，对方不提供，就做不了。</p>
+
+<p>我是 AI 新手，就选择了最后这种模式，尝试 AI 开发。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102702.webp" title="" /></p>
+
+<h2>三、GPT 商店和 Copilot 模板</h2>
+
+<p>很多 AI 大厂都提供"工作流模式"，允许开发者在他们的模型上，定制自己的应用。</p>
+
+<p>最有名的大概就是 OpenAI 公司的 <a href="https://gptstore.ai/">GPT 商店</a>。</p>
+
+<p>它开放 ChatGPT 的底层能力，让开发者定制某个领域的专用 GPT，比如学术论文的 GPT、处理 Excel 文件的 GPT 等等。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102703.webp" title="" /></p>
+
+<p>微软的 Copilot 也有类似的功能，叫做"<a href="https://www.copilot.com/templates">模板</a>"（template）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102704.webp" title="" /></p>
+
+<p>不过，这些都是国外的服务，需要收费，服务器在境外。好在国内有免费的替代品，我就选择了国内产品。</p>
+
+<h2>四、工作流演示</h2>
+
+<p>我先演示一下，工作流的操作界面。大家就能明白，它是怎么回事了。</p>
+
+<p><strong>工作流其实就是把一个 AI 应用，分成若干个步骤</strong>。每个步骤是一个节点，你在上面设置这一步的操作，然后所有节点按照流程，完成任务。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102708.webp" title="" /></p>
+
+<p>上图是<a href="https://www.coze.cn/?utm_source=ruanyifeng1028">扣子 AI</a>（coze.cn）的工作流编排界面，包含四个节点。</p>
+
+<p>扣子是字节跳动旗下、免费的 AI 应用开发平台。使用过程非常直观，就是在网页画布上，通过图形化操作，一步步创建 AI 应用。我就用它来演示。</p>
+
+<p>它的开发页面左侧是不同类型的节点，下图是其中一部分。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102709.webp" title="" /></p>
+
+<p>新建节点时，点击对应类型就可以了。一般来说，第一步总是新建"模型节点"或"插件节点"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102710.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102711.webp" title="" /></p>
+
+<p>新建模型节点后，如果你想用自己的数据训练模型，可以在项目管理页面上，新建一个知识库，上传数据文件。然后在工作流里面，创建一个"知识库节点"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102712.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102713.webp" title="" /></p>
+
+<p>如果你想启用持久记忆能力，记住用户的历史对话，那么可以新建数据库，保存用户数据，然后在工作流创建"数据库节点"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102714.webp" title="" /></p>
+
+<p>所有节点设置完毕，这个 AI 应用就可以运行了。最后一步，就是发布该应用。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102715.webp" title="" /></p>
+
+<p>扣子会让你选择发布渠道（上图），目前支持发布到商店（在扣子平台使用）、第三方平台（在飞书、抖音、微信使用），以及 API 和 SDK（在用户自己的软件使用）。</p>
+
+<p>以上就是工作流模式的使用界面，只是一个简单介绍，大家有一个大概的理解就可以了，具体操作可以看<a href="https://www.coze.cn/docs/guides/quickstart">文档</a>。</p>
+
+<p>它还是很容易上手的，熟练以后，开发一个 AI 应用，一两个小时就可以搞定。</p>
+
+<h2>五、工作流开发的例子</h2>
+
+<p>为了加深理解，我举一个实际开发的例子。某餐饮企业想要搭建一个 AI 应用，用来分析用户的点评。</p>
+
+<p>为此新建一个工作流，基本功能只需要三个节点----输入节点、分析用户点评的 AI 模型节点、输出节点。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102801.webp" title="" /></p>
+
+<p>然后，把这个工作流发布成 API。用户的点评传入这个 API，它就会返回一段 JSON 数据，里面有 AI 模型识别出的用户评价（正面、负面、中性），以及点评关键词（环境/服务/菜品）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102802.webp" title="" /></p>
+
+<p>上图是这个工作流的预览调试界面，输入了一段真实的点评，运行结果以 JSON 格式返回。</p>
+
+<p>可以看到，AI 识别出该用户对产品是中评，对环境是差评，对上菜速度是好评。</p>
+
+<h2>六、模板功能</h2>
+
+<p>工作流除了自己使用，还可以保存成模板（template），发布到<a href="https://www.coze.cn/store/agent?utm_source=ruanyifeng1028">模板商店</a>，让别人使用和借鉴。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102803.webp" title="" /></p>
+
+<p>在模板商店，你可以看到官方和其他用户搭建好的工作流，目前已经有上千个，还在快速增长。</p>
+
+<p>这些工作流可以直接使用，也可以作为模板复制。用户复制模板后，对它们进行学习和修改，将其改造为适合自己的应用。</p>
+
+<p>对于模板作者来说，可以对模板设置价格，实现变现。</p>
+
+<p>很多模板提供非常有意思的功能，值得一看。比如，"<a href="https://www.coze.cn/template/workflow/7375170277233442850?entity_type=23">抖音转小红书</a>"的模板。</p>
+
+<p>你输入一个抖音的短视频链接，AI 自动生成10个可用标题和一段文案，你可以把它们连同视频一起发到小红书。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102804.webp" title="" /></p>
+
+<h2>七、教程：情感故事爆文专家</h2>
+
+<p>网上已经有不少工作流模板的开发教程，大家可以去搜一下。</p>
+
+<p>我看到一篇"情感故事爆文专家"的<a href="https://mp.weixin.qq.com/s/rNtKofSJi-H2D7tw9I8WEQ">模板教程</a>，非常有趣。情感类的网文现在流量很好，作者就开发了一个 AI 应用，专门生成这类文章。</p>
+
+<p>先看成品，点击<a href="https://www.coze.cn/store/bot/7393353847667916836">这个模板链接</a>，体验一下它的效果。你输入一个文章主题，比如</p>
+
+<blockquote>
+  <p>一对情侣在大学里认识，毕业后分手，10年后再次相遇。</p>
+</blockquote>
+
+<p>这个 AI 应用会输出文章的大纲和正文。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102811.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102806.webp" title="" /></p>
+
+<p>还带有配图，可以直接发布。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102807.webp" title="" /></p>
+
+<p>它背后的工作流，大致分成六个节点。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102808.webp" title="" /></p>
+
+<blockquote>
+  <ol start="1">
+<li>开始节点：接收用户输入的文章主题</li>
+<li>AI 模型节点：通过 AI 模型，根据文章主题，生成文章的大纲。</li>
+<li>扩写节点：根据文章大纲，进行内容扩写，生成正文。</li>
+<li>内容总结节点：根据正文，生成文章的内容总结。</li>
+<li>文生图节点：根据内容总结，生成文章配图。</li>
+<li>结束节点：汇总所有内容，输出结果。</li>
+</ol>
+</blockquote>
+
+<p>设置完成后，点击"发布"按钮，这个 AI 应用就可以直接使用了。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102809.webp" title="" /></p>
+
+<h2>八、结束语</h2>
+
+<p>工作流模式相比自己从头写，容易和快捷很多，服务端也一起解决了。如果你有 AI 开发的需求，可以试试这种模式。</p>
+
+<p>下一步不妨就从<a href="https://www.coze.cn/docs/guides/welcome">文档</a>开始，做出你的第一个工作流节点，发布到模板商店。</p>
+
+<p>任何开发问题（估计肯定会遇到），可以加入官方咨询群去问，下面是微信群二维码。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102910.webp" title="" /></p>
+
+<p>我遇到问题，就咨询扣子的同学。他们告诉我，现在正好有两个活动，有大量的奖品，建议我参加。</p>
+
+<p>我看了觉得很不错，下面把活动信息转发出来。如果你正好做了模板，就不要错过。</p>
+
+<p>（1）<a href="https://www.coze.cn/docs/guides/template_challenge?utm_source=ruanyifeng1028">模板比赛</a></p>
+
+<p>工作流开发完成后，上架到模板商店，现在可以<a href="https://www.coze.cn/docs/guides/template_challenge?utm_source=ruanyifeng1028">获取奖励</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102812.webp" title="" /></p>
+
+<p>你可以对模板设置价格（官方审核通过后），实现模板变现，他人复制模板需要付费。在活动期间，官方根据模板复制的数量，会发放1000元到10000元的奖金，以及随机抽取的50个无线充电器的纪念奖。</p>
+
+<p>（2）<a href="https://www.coze.cn/s/iSpyGgW6/">万圣节抽奖</a></p>
+
+<p>官方现在有一个<a href="https://www.coze.cn/s/iSpyGgW6/">万圣节抽奖</a>，在那里上传你的照片，会得到一张万圣节主题照，以及一次抽奖机会。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024103015.webp" title="" /></p>
+
+<p>抽奖的奖品有 iPhone 16 Pro Max、Switch、咖啡机。</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2024-10-31T03:24:05+08:00">2024年10月31日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2024/10/weekly-issue-322.html</id>
             <title>科技爱好者周刊（第 322 期）：内容行业的内幕</title>
             <link>http://www.ruanyifeng.com/blog/2024/10/weekly-issue-322.html</link>
@@ -1941,431 +2163,6 @@ var romanToInt = function(s) {
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2024-09-27T08:13:53+08:00">2024年9月27日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2024/09/weekly-issue-318.html</id>
-            <title>科技爱好者周刊（第 318 期）：创业咖啡馆的记忆</title>
-            <link>http://www.ruanyifeng.com/blog/2024/09/weekly-issue-318.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2024/09/weekly-issue-318.html</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 20 Sep 2024 08:04:39 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 科技内容, 创业咖啡馆, 风险投资, 技术创新  
-<br><br>  
-总结: 本文记录了每周值得分享的科技内容，并回顾了中国创业咖啡馆的历史与现状。过去的创业咖啡馆是创业者聚集的地方，充满了活力和希望，而如今的风险投资环境却变得更加谨慎，创业者面临着更大的压力和风险。文章指出，风险投资的回购条款使得创业者承担了过多的风险，建议国家应明确相关法律以保护创业者。尽管当前环境严峻，但仍希望未来能重燃创业热潮，特别是在技术创新领域。 </div>
-                        <hr>
-                    
-                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
-<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/5090">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
-
-<h2>封面图</h2>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091402.webp" title="" /></p>
-
-<p>张大千最大的一幅画作《巨荷》，正在香港展出。巨大的荷花，随风招展，恣意生长，表现出蓬勃旺盛的生命力。（<a href="https://finance.sina.com.cn/roll/2024-09-13/doc-incnzrre5425572.shtml">via</a>）</p>
-
-<h2>创业咖啡馆的记忆</h2>
-
-<p>上周末，媒体在<a href="https://finance.sina.com.cn/wm/2024-09-14/doc-incpcuqh8269932.shtml">谈论</a>中国风险投资的现状。我不禁想起，它曾经多么火爆。</p>
-
-<p>大家还记得创业咖啡馆吗？</p>
-
-<p>我搜到了<a href="https://cnews.chinadaily.com.cn/2015-01/14/content_19316754.htm">一组照片</a>，拍摄于2015年1月6日的北京中关村"车库咖啡"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091501.webp" title="" /></p>
-
-<p>（1）咖啡馆内部非常拥挤，创业者都忙于自己的项目，正常喝咖啡的人反而没有。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091502.webp" title="" /></p>
-
-<p>（2）点一杯20元的咖啡，就可以坐一天，很多人把电脑搬进咖啡馆，把这里当成工作室。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091503.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091506.webp" title="" /></p>
-
-<p>（3）咖啡馆24小时营业，不少人会在里面过夜，要是半夜醒了，就继续干活。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091509.webp" title="" /></p>
-
-<p>（4）咖啡馆的墙上贴满了商业计划书，以及找合伙人的布告，更新速度非常快。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091508.webp" title="" /></p>
-
-<p>（5）人们用手机扫描布告的二维码，了解详情。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091504.webp" title="" /></p>
-
-<p>（6）每天中午都会有创业者自愿上台分享自己的项目和经历，希望拿到风投。台下的人见多不怪，继续低着头，专注手头的工作。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091505.webp" title="" /></p>
-
-<p>（7）随便找一个陌生人，他都愿意跟你侃侃而谈，介绍他的创业项目。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091507.webp" title="" /></p>
-
-<p>这就是十年前的创业氛围。</p>
-
-<p>这样的创业咖啡馆，现在已经消失了。即使还有人在咖啡馆里做创业项目，也只是把它当作一个工作空间，而不是寻找风投的地方。</p>
-
-<p>如果你问我，是不是怀念创业咖啡馆？老实说，我还挺怀念的。虽然它更多是泡沫，大部分的项目先天不足，甚至不乏欺诈，但是我怀念那时的人们充满干劲，相信自己可能是下一个马云马化腾，市场热火朝天，每天都有新东西出来。</p>
-
-<p>今天的风险投资，氛围已经全变了。不仅申请的难度大大上升，而且风险投资家处处在规避风险。他即使投给你，也往往要求加入回购条款。</p>
-
-<p>所谓"回购条款"，就是规定如果创业公司无法在指定日期前上市或被收购，创业者必须"回购"拿到的投资，即把钱还给风投公司。</p>
-
-<p>更有甚者，风投为了保证"回购条款"的执行，还要求创业者用个人财产做担保。就是说，如果创业失败了，公司的钱都亏光了，你还必须用个人的钱偿还风险投资。</p>
-
-<p>这还叫"风险投资"吗？风险都转嫁给了创业者，投资变成了借款。难怪大家现在不敢拿风投，害怕创业失败，背了一身债。</p>
-
-<p>我觉得，国家应该出一个司法解释，<strong>明确如果存在"回购条款"，就不是投资合同，而是借款合同</strong>，出资者获取的股权无效。只有这样，才能不把创业者吓跑。</p>
-
-<p>技术创新需要风险投资，我衷心希望中国的风险投资和创业热潮，有重新高涨的那一天。</p>
-
-<p>好消息是，《黑神话：悟空》最近的成功对游戏开发者是一个巨大的鼓舞，风险投资的信心有所恢复。但愿游戏业会带动风投，要是能结合元宇宙就更好了。</p>
-
-<h2>科技动态</h2>
-
-<p>1、<a href="https://gizmodo.com/these-hi-tech-bifocals-improved-my-eyesight-despite-making-me-look-dorky-2000496406">自动对焦眼镜</a></p>
-
-<p>一家日本公司推出了"自动对焦眼镜"，可以自动对焦。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091601.webp" title="" /></p>
-
-<p>这意味着，不需要配眼镜了，也不需要验光了。不管你的近视度数（或者远视度数），直接戴上这幅眼镜，它会自动调节镜片，直到你看清为止。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091602.webp" title="" /></p>
-
-<p>它相当于一台迷你验光机，内置电池，一次充电可以使用10个小时。如果要用一天，就需要准备两副眼镜。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091603.webp" title="" /></p>
-
-<p>它的售价是4000元人民币（555美元），重量是50克，比普通眼镜重，但可以接受。</p>
-
-<p>2、<a href="https://www.koc.com.tw/archives/565347">何同学的头盔</a></p>
-
-<p>上一期周刊提到，何同学在苹果发表会上，使用自制的头盔拍摄装置，引起了轰动。</p>
-
-<p>本周，他专门发了<a href="https://www.bilibili.com/video/BV1jxtxeFEsm/">视频</a>，介绍这个装置。下图是他最早购买的头戴式单反支架。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091804.webp" title="" /></p>
-
-<p>苹果不允许带入发布会现场，他只好自己重新设计制作，用 iPhone 取代单反相机，虽然牺牲了画质，但确保可以带入场。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091806.webp" title="" /></p>
-
-<p>他选择 AR 眼镜，连接头上的手机，这样就可以看到实时影像。为了避免看不到路，他拿掉了一块镜片（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091805.webp" title="" /></p>
-
-<p>装置左边还有一根伸缩的自拍棒，这样就能拍到自己，提供另一个视角。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091807.webp" title="" /></p>
-
-<p>此外，支架上还能放置遮阳伞、补光灯，甚至饮料瓶，满足外出拍摄的各种需求。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091808.webp" title="" /></p>
-
-<p>3、<a href="https://arstechnica.com/information-technology/2024/08/new-ai-model-can-hallucinate-a-game-of-1993s-doom-in-real-time/">AI 游戏合成</a></p>
-
-<p>谷歌和特拉维夫大学的研究人员，发表了一篇论文，提出可以用 AI 实时生成游戏画面。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091705.webp" title="" /></p>
-
-<p>举例来说，当你举枪向敌人射击，现在的游戏是按照预置的代码生成下一步的画面，研究人员提出，可以让 AI 想象出下一步的画面。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091706.webp" title="" /></p>
-
-<p>这是一个革命性的想法，游戏画面可以让 AI 生成，而不是人工编写。"当 AI 可以为你思考每个像素时，为什么要手动为软件编写规则呢？"</p>
-
-<p>不过，它有一个限制，就是必须基于现有的游戏进行训练，还做不到"发明"全新的游戏。</p>
-
-<p>4、<a href="https://newatlas.com/marine/abb-dynafin-marine-propulsion/">电动螺旋桨</a></p>
-
-<p>一家瑞典公司推出了一种新型的船用螺旋桨，在一个圆盘上面装了很多垂直的叶片。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024041602.webp" title="" /></p>
-
-<p>圆盘本身在转动，每一个叶片也可以独立转动，并且可以精确控制转动方向和转速。这样的设计据说可以节省推进的能量。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024041603.webp" title="" /></p>
-
-<p>而且，它是电动螺旋桨，结构较简单，建造和维护成本相对较低。如果被证明可行，它就为电动轮船的发展铺平了道路。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202404/bg2024041604.webp" title="" /></p>
-
-<p>5、<strong>其他</strong></p>
-
-<p>（1）中国启动22000米<a href="https://finance.sina.com.cn/tech/roll/2024-09-19/doc-incprwmx1561854.shtml">高空热气球载人实验</a>，目标是创造载人热气球飞行高度的世界纪录。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091901.webp" title="" /></p>
-
-<h2>文章</h2>
-
-<p>1、<a href="https://voussoir.net/writing/css_for_printing">怎么写 CSS 的打印样式</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024072207.webp" title="" /></p>
-
-<p>本文是一篇教程，介绍网页打印样式的 CSS 写法。 </p>
-
-<p>2、<a href="https://betterstack.com/community/guides/web-servers/caddy/">使用 Caddy 部署 Web 应用程序</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024072209.webp" title="" /></p>
-
-<p>一篇长文，介绍 Caddy 如何当作 Web 服务器的初学者教程。</p>
-
-<p>3、<a href="https://dunkels.com/adam/sentinel-toothpaste/">哨兵值是什么</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024081801.webp" title="" /></p>
-
-<p>这篇短文通过牙膏的例子，解释什么是编程使用的哨兵值（sentinel value）。</p>
-
-<p>4、<a href="https://review.firstround.com/how-stripe-built-one-of-silicon-valleys-best-engineering-teams/">Stripe 公司如何招聘工程师</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082012.webp" title="" /></p>
-
-<p>Stripe 公司的创始人，分享自己招聘工程师的方式，有参考价值。</p>
-
-<p>5、<a href="https://www.builder.io/blog/good-vs-bad-refactoring">好的重构 vs 坏的重构</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082014.webp" title="" /></p>
-
-<p>有些时候，重构之后的代码比之前还难懂。本文逐一举例，分析怎样的重构是好的，怎样是坏的。</p>
-
-<p>6、<a href="https://betterstack.com/community/guides/scaling-nodejs/understanding-abortcontroller/">Node.js 的 AbortController 指南</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024082202.webp" title="" /></p>
-
-<p>使用 Node.js 时，取消异步草走（比如网络请求和文件系统读取）一直很棘手。本文教你怎么用 AbortController 做到这一点。</p>
-
-<h2>工具</h2>
-
-<p>1、<a href="https://github.com/kristoff-it/superhtml">SuperHTML</a></p>
-
-<p>一个 HTML 的 LSP 实现（语言服务器协议），可以在代码编辑器（比如 VS Code 和 Vim）实时检测 HTML 代码是否正确，参见<a href="https://kristoff.it/blog/first-html-lsp/">教程</a>。</p>
-
-<p>2、<a href="https://github.com/glzr-io/glazewm">GlazeWM</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091604.webp" title="" /></p>
-
-<p>一个专门用于 Windows 的平铺式窗口管理器，类似于 i3，自动实现新窗口的平铺。</p>
-
-<p>3、<a href="https://xnapper.com/app">Xnapper</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091703.webp" title="" /></p>
-
-<p>一个截图美化的在线工具，可以为截图加各种边框。</p>
-
-<p>4、<a href="https://github.com/frost-beta/sisi">sisi</a></p>
-
-<p>命令行的图像语义搜索工具，让你用自然语言搜索本地图像。</p>
-
-<p>5、<a href="https://github.com/usual2970/certimate">Certimate</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091710.webp" title="" /></p>
-
-<p>一个自搭建的开源平台，可以为自己的域名申请、部署、续期 SSL 证书，支持阿里云、腾讯云、七牛云等。（<a href="https://github.com/ruanyf/weekly/issues/5155">@usual2970</a> 投稿）</p>
-
-<p>6、<a href="https://github.com/fanchenio/DawnLauncher">Dawn Launcher</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091711.webp" title="" /></p>
-
-<p>一个开源的 Windows 快捷启动工具，分门别类管理桌面快捷方式。（<a href="https://github.com/ruanyf/weekly/issues/5157">@fanchenio</a> 投稿）</p>
-
-<p>7、<a href="https://github.com/Simon-He95/common-intellisense">common-intellisense</a></p>
-
-<p>VS Code 插件，为多种常用的前端 UI 库提供注释和类型提示。（<a href="https://github.com/ruanyf/weekly/issues/5160">@Simon-He95</a> 投稿）</p>
-
-<p>8、<a href="https://github.com/wa008/PopTranslate">PopTranslate</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091712.webp" title="" /></p>
-
-<p>一个 Chrome 浏览器插件，选中文字后，直接将翻译显示在右上角的弹窗，不需要点击按钮。（<a href="https://github.com/ruanyf/weekly/issues/5161">@wa008</a> 投稿）</p>
-
-<p>9、<a href="https://github.com/niedev/RTranslator">RTranslator</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202406/bg2024061905.webp" title="" /></p>
-
-<p>一个开源的安卓 App，可以实现语音对话的实时离线翻译。</p>
-
-<p>10、<a href="https://gladysassistant.com/">Gladys Assistant</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091803.webp" title="" /></p>
-
-<p>智能家居的一个控制系统，类似于 Home Assistant，但用起来更简单，面向普通用户。</p>
-
-<p>11、<a href="https://github.com/omnivore-app/omnivore">Omnivore</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202310/bg2023101609.webp" title="" /></p>
-
-<p>一个开源应用，用于收藏稍后阅读的文章。</p>
-
-<p>12、<a href="https://cvbee.ai/zh-CN">cvbee.ai</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091404.webp" title="" /></p>
-
-<p>免费生成或修改简历。（<a href="https://github.com/ruanyf/weekly/issues/5148">@dddm25896</a> 投稿）</p>
-
-<p>13、<a href="https://github.com/sz3/libcimbar">libcimbar</a></p>
-
-<p>一种特殊的二维码格式，可以把小于 33MB 的文件压缩成一个二维码，用他们提供的 App 扫码解压即可得到文件。（<a href="https://github.com/ruanyf/weekly/issues/5171">@joyc</a> 投稿）</p>
-
-<h2>资源</h2>
-
-<p>1、<a href="https://daojishi.fun/">退休年龄计算器</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091713.webp" title="" /></p>
-
-<p>用户输入出生年月和性别，该网站根据新政策，计算对应的退休年龄。（<a href="https://github.com/ruanyf/weekly/issues/5162">@wincatcher</a> 投稿）</p>
-
-<p>2、<a href="https://franzelio.franzai.com/">Franzelio</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091701.webp" title="" /></p>
-
-<p>一个有意思的网页小游戏，在网页上画线，反弹小球，发出的声音组成旋律。</p>
-
-<p>3、<a href="https://www.worldstandards.eu/electricity/plugs-and-sockets/">插头 + 插座组合</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023092001.webp" title="" /></p>
-
-<p>全世界共有15种"插头 + 插座"组合，这个网页把它们全列出来。</p>
-
-<p>4、<a href="https://github.com/ForrestKnight/open-source-cs">计算机科学自学课程</a>（英文）</p>
-
-<p>这个仓库按照学习顺序，列出对应的欧美大学的计算机科学开放课程。全部学完，就等于上完计算机学位课程了。</p>
-
-<h2>图片</h2>
-
-<p>1、<a href="https://www.bbc.com/travel/article/20240910-how-water-has-shaped-new-york-city-for-400-years">曼哈顿岛的历史</a></p>
-
-<p>纽约的主要部分就是曼哈顿岛，今年是该岛建市400周年。</p>
-
-<p>1624年，荷兰人选中这个地方，作为荷兰殖民地。因为这个岛位于两块陆地之间，可以作为避风港，并且有水路通往内陆。</p>
-
-<p>下面就是当时荷兰人看到的曼哈顿岛。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091707.webp" title="" /></p>
-
-<p>事后证明，这个地方是一个世界级良港，这里的海水很宽，很深，很少结冰，适合停靠大量的大型船舶。</p>
-
-<p>19世纪末，纽约港已经成为世界第一大港。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091708.webp" title="" /></p>
-
-<p>下面是21世纪的曼哈顿岛。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091709.webp" title="" /></p>
-
-<p>2、<a href="https://bigthink.com/the-past/chinese-mummy-worlds-oldest-pants-ancient-fashion/">世界最古老的裤子</a></p>
-
-<p>上个世纪70年代初期，中国考古学家在塔里木盆地的洋海古墓，发现了约500具木乃伊。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023091401.webp" title="" /></p>
-
-<p>2014年，中国和德国的考古专家最终确实，其中一具木乃伊穿着的裤子，距今有3200年，是现存最古老的裤子。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023091402.webp" title="" /></p>
-
-<p>这条裤子的基本设计与今天大多数人穿的很相似，它采用斜纹布，还有花纹。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202309/bg2023091403.webp" title="" /></p>
-
-<h2>文摘</h2>
-
-<p>1、<a href="https://world.hey.com/dhh/why-don-t-more-people-use-linux-33b75f53">为什么没有更多的人使用 Linux？</a></p>
-
-<p>下面是著名程序员、Rails 框架的作者 DHH 的最新文章。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091801.webp" title="" /></p>
-
-<p>几周前，我看到一条推文问道："如果 Linux 这么好，为什么没有更多的人使用它？"</p>
-
-<p>这个问题听上去很有道理。你们都说 Linux 好，它甚至是免费的，那为什么没有大规模采用呢？</p>
-
-<p>但是，如果你仔细想一想，就会发现生活中到处是这样的情况。</p>
-
-<p>如果锻炼如此有益健康，为什么没有更多的人去做呢？</p>
-
-<p>如果阅读如此有教育意义，为什么没有更多的人这样做呢？</p>
-
-<p>如果垃圾食品对你如此有害，为什么还有那么多人吃它？</p>
-
-<p>......</p>
-
-<p>世界上充满了值得尝试的事情和事物，但大多数时候却被大多数人忽视。现实世界的真实情况是，变得肥胖和无知要比保持健康和学习更容易。</p>
-
-<p><strong>大多数人总是选择最容易、最不需要努力的事情。</strong></p>
-
-<p>Linux 就不容易，比微软和苹果的商业产品对使用者的要求更高。为了用好它，你需要学习一些东西，还要自己尝试解决问题。</p>
-
-<p>我完全理解为什么大多数计算机用户对 Linux 不感兴趣，因为他们只想浏览网页或使用应用程序，并不希望成为计算机的高级用户。</p>
-
-<p>但是，程序员不一样，对于他们，深入了解计算机是工作必需。这就是为什么程序员往往使用 Linux，也应该使用 Linux 的原因。</p>
-
-<p>Linux 就跟生活中很多其他事情一样，<strong>选择它不是因为容易，而是因为它值得</strong>。</p>
-
-<h2>言论</h2>
-
-<p>1、</p>
-
-<p>2023年中国电影总票房是人民币550亿元，你猜游戏业规模如何？单单腾讯的游戏部门年收入就达1799亿，一个部门的业绩就三倍于整个电影业。</p>
-
-<p>-- <a href="https://www.facebook.com/zhouruopeng/posts/pfbid0A9K6rW2hS3CfwhBMjKDMJjN2d97Pb9swptVaSuHafDX8ZKbmQVNecS5iMy5EYhJ2l">周若鹏</a></p>
-
-<p>（补充一下，2023年中国国内的游戏收入是3030亿元，彩票收入是5800亿元。）</p>
-
-<p>2、</p>
-
-<p>我们的软件产品，总是有客户要求我们编写自定义模块，我们的回答一律是：</p>
-
-<p>"我们不会为个别公司编写自定义模块，因为无法在代码中维护如此多的分支，后面根本顾不过来。"</p>
-
-<p>-- <a href="https://www.codingrequired.com/post/tell-me-why">codingrequired.com</a></p>
-
-<p>3、</p>
-
-<p>一位教育专家建议，要允许孩子们感到无聊，这会鼓励他们想象、观察、探索周围的世界，从而激发想象力和独立思考。</p>
-
-<p>-- <a href="https://www.bbc.com/news/education-21895704">BBC</a></p>
-
-<p>4、</p>
-
-<p>如果没有月球，地球就是一颗非常孤独的星球，最近的天体将是金星和火星，距离为3800万到 5600万公里，是地月距离的一百倍甚至更多。地球与它们的往返通信需要几分钟而不是几秒钟，单程旅行需要几个月而不是几天，往返旅程至少需要一年而不是一周左右。</p>
-
-<p>正是月球，让我们感到地球在宇宙中不是那么孤独。</p>
-
-<p>-- <a href="https://bigthink.com/starts-with-a-bang/7-destroying-moon-earth/">《月球消失会给地球带来7大变化》</a></p>
-
-<p>5、</p>
-
-<p>即使身处最冷的寒冬，我知道自己的内心深处，有一个不可战胜的夏天。</p>
-
-<p>-- <a href="https://theamericanscholar.org/how-to-live-with-dying/">加缪</a>，著名法国小说家</p>
-
-<h2>往年回顾</h2>
-
-<p><a href="https://www.ruanyifeng.com/blog/2023/09/weekly-issue-271.html">非线性的世界，线性的你</a>（2023 #271）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2022/09/weekly-issue-221.html">全世界最繁荣的行业</a>（2022 #221）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2021/08/weekly-issue-171.html">云服务流量有多贵？</a>（2021 #171）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2020/08/weekly-issue-121.html">为什么人类没有越来越闲？</a>（2020 #121）</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2024-09-20T08:04:39+08:00">2024年9月20日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
