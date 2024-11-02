@@ -22,6 +22,23 @@
         </item>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/67259c0232f03efa77c9b667</id>
+            <title>AI探索站 11月02日</title>
+            <link>https://m.okjike.com/originalPosts/67259c0232f03efa77c9b667</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67259c0232f03efa77c9b667</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 02 Nov 2024 03:26:58 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    In-Context LoRA 这个项目太强了啊。<br /><br />非常适合用来直接生成AI视频中需要的连续图生视频关键帧。<br /><br />这个项目可以一次生成多张风格和ID一致但是内容相互关联的图片集。<br /><br />支持电影故事板生成、ID一致人像摄影、字体设计、PPT排版设计、家居装饰摄影。<br /><br />最关键的是基于FLUX。<br /><br />项目地址，非常期待开源，我已经想了很多玩法了：https://ali-vilab.github.io/In-Context-LoRA-Page/
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/672539bea8855e724b8a7798</id>
             <title>AI探索站 11月01日</title>
             <link>https://m.okjike.com/originalPosts/672539bea8855e724b8a7798</link>
@@ -153,23 +170,6 @@
                 <![CDATA[
                     
                     🎯 Critique Shadowing：<br />一个让AI稳定输出优质内容的实用工作流<br /><br />我相信很多AI团队和我们一样，都头疼这个工程问题：如何保证AI生成质量的优质与稳定？<br /><br />fine-tune也好，RAG也好，RL也好，结合具体的业务场景，我们也花了很多精力研究最适用的、更低成本、ROI更高的方法。<br /><br />不得不说，最近发现的Critique Shadowing 工作流，让我觉得很有启发💡<br /><br />这个方法来自 Hamel Husain 最新发表的一篇重磅文章🔗https://hamel.dev/blog/posts/llm-judge/，整整 6000 字的干货。<br /><br />这个工作流本质上是在构建一个能够对齐领域专家判断的 LLM 评估系统。整个工作流包括：<br /><br />1. 首先找到真正的领域专家<br />2. 建立多样化的测试数据集<br />3. 让专家进行系统评判和详细解释<br />4. 根据反馈进行迭代优化<br />5. 构建和训练 LLM 评判器<br />6. 进行全方位的错误分析<br /><br />这个工作流通过系统化地将专家经验转化为可扩展的 AI 评估系统，特别适合那些需要专业判断但又面临大规模数据的场景。<br /><br />这也让我想起 Hamel 之前那篇广受好评的 🔗https://hamel.dev/blog/posts/evals/index.html，都是非常务实的方法论。<br /><br />在我看来，Critique Shadowing 的价值在于它不是纯理论的框架，而是一个能够真正落地、能够帮助团队构建可信赖的 AI 评估体系的方法。<br /><br />👉 工作流程详解<br /><br />1. 领域专家选择（Principal Domain Expert）<br />- 需具备深入的领域知识和丰富实践经验<br />- 能够清晰表达判断标准和评判理由<br />- 愿意参与迭代优化过程<br /><br />2. 数据集创建<br />- 生成覆盖所有用例的多样化examples<br />- 结合真实和合成的用户交互数据<br />- 从小规模高质量样本开始，逐步扩充<br /><br />3. 专家评审<br />- 进行通过/不通过的基础判断<br />- 提供详细的评判理由（用于训练 LLM）<br />- 记录关键决策点和评判标准<br /><br />4. 错误修正<br />- 发现问题后修正并返回步骤3进行专家验证<br />- 持续积累和分类错误模式<br />- 重复验证直至专家确认问题解决<br /><br />5. LLM 评判器构建<br />- 将专家示例转化为 few-shot examples<br />- 测试与专家判断的一致性<br />- 持续优化prompt直至达到满意的一致性水平<br /><br />6. 错误分析与优化<br />- 计算不同维度的错误率并识别分布规律<br />- 必要时建立专门的评估器<br />- 出现系统性问题时返回步骤3<br /><br />👉 个人实践启发<br /><br />在涉及到我们团队具体的工程实践上，我理解 Critique Shadowing 相当于在向用户输出output前的workflow里，自行加了一步evaluation，评估通过则展示给用户，评估不通过则返回继续生成再评估，循环往复直至评估通过为止再输出。流程如下：<br /><br />    A[用户输入] --&gt; B[LLM生成回答]<br />    B --&gt; C[Critique评估器]<br />    C --&gt;|通过| D[展示给用户]<br />    C --&gt;|不通过| E[重新生成/优化]<br />    E --&gt; B<br /><br />再进一步地，我还想到，也可以通过 Critique Shadowing 的评估结果来指导 prompt 优化。流程如下：<br /><br />    A[用户输入] --&gt; B[LLM生成回答]<br />    B --&gt; C[Critique评估器]<br />    C --&gt;|不通过| D[分析不通过原因]<br />    D --&gt; E[自动调整Prompt]<br />    E --&gt; B<br />    C --&gt;|通过| F[记录通过模式]<br />    F --&gt; G[更新Prompt库]<br /><br />总结来看，这个方法特别适合内容质量控制、代码审查自动化、用户反馈分析等需要专业判断同时又面临大规模数据处理的场景。<br /><br />但是也很显然，这个方法论明显的弊端就是系统的复杂度及其token成本。实践中首先还是要基于自己的业务场景做合理评估，以ROI为导向，选择最适合自己的LLM质量控制策略。<br /><br />我也很好奇大家都是怎么解决AI生成质量的优质及稳定性问题的？以及大家都在做哪些内容场景？不同的内容场景对内容质量及稳定性的需求差异还是挺明显的。<br /><br />大家有什么好思路或者心得体会，也求分享😊
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/671f7e4905d74a80abd555af</id>
-            <title>AI探索站 10月28日</title>
-            <link>https://m.okjike.com/originalPosts/671f7e4905d74a80abd555af</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/671f7e4905d74a80abd555af</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 28 Oct 2024 12:06:33 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    AI降本增效，一开始最好简单粗暴。<br /><br />差生文具多，如果要做优等生，先得抛弃对工具无休止的追逐。<br /><br />哪怕是AI博主，也应该回归基本，主动熵减，把日常使用的AI工具控制在 20个以内。<br /><br />我的工作场景主要围绕AI职场办公，智能体开发和媒体制作。如果按付费意愿，真正会坚持用的会有以下几个：（无广）<br /><br />1.主力AI模型<br />GPT+Claude<br />平替：豆包+文小言（移动版）+kimi<br />GPT越来越有被Claude替代的趋势，尤其是代码。但是GPTs还是增强了我的使用粘性。豆包的TTS语音国内无法被替代。文小言有一些我喜欢的功能，比如信息聚合订阅。<br /><br />2.主力IM<br />飞书<br />平替：Notion+企微<br />我知道Notion很强。但是鉴于复杂的操作+国内网络不稳定+数据安全是真不太喜欢用。<br />创业以来我觉得最值得投入学习时间的并不是任何一款AI软件，而是飞书本身。好的SaaS就是最佳实践的产品化。企微是出于私域+客户对公不得不用。<br /><br />3.数据分析<br />Excel+GPT+各平台数据看板<br />平替：飞书多维表单<br />Excel没有平替。AI只是帮我解锁高阶功能，比如VBA和宏。多维表单的插件生态值得投入时间学习。<br /><br />4.设计<br />Midjourney+ideagram<br />平替：Canvas+稿定设计+佐糖<br />比起Mj，Ideagram的出图更具场景感，配合简单工具出海报+商图+封面+运营位都很方便。<br /><br />5.PPT<br />PPT+islide插件+彩璇PPT<br />平替：Gamma，aippt<br />目前没有同时满足不要钱、支持定制模板、不科学上网、智能还可控性强的方案。但是PPT+islide已经增效超过50%。Gamma是应急神器。<br />彩璇PPT比较小众，是一个方便做课件分享+编辑的平台，对咨询师/老师有刚需。<br /><br />6.剪辑<br />剪映（含AI）+即梦AI<br />初学者够用，为了省事就用字节系的。<br /><br />7.文本创作<br />飞书文档+flomo+GPT<br />平替：记事本<br />简单点好。如果开发一个支持flomo api导出直接AI生成标题/思路/文章大纲的工作流会不会有需求？<br /><br />8.智能体开发<br />Coze/Dify<br />平替：百度智能体<br />目前还在钻研工作流场景。已经做了20多个Bot。Coze/Dify各有千秋，百度则是打通了支付环节和数字人形象的交互。待继续钻研好和大家分享。<br /><br />9.代码辅助<br />Cursor+Claude<br />平替：字节豆包Marscode<br /><br />10.工作流编排<br />Coze+飞书+各类Github（开源项目）<br />通过飞书机器人平台把各类BOT接入到飞书群里。实现在IM办公软件中使用自己调试过的AI数字员工。<br /><br />#AI工作流
                 ]]>
             </content:encoded>
         </item>
