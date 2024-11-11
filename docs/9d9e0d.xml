@@ -5,6 +5,57 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6731edb09c3d17b69b20b79d</id>
+            <title>AI探索站 11月11日</title>
+            <link>https://m.okjike.com/originalPosts/6731edb09c3d17b69b20b79d</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6731edb09c3d17b69b20b79d</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Nov 2024 11:42:40 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    原来我在 GPT 眼里已经这么老了，好奇大家的<br /><br />prompt ：<br />based on what you know about me. draw a picture of what you think my current life looks like
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6731c6f0a41c1e81558ebe5f</id>
+            <title>AI探索站 11月11日</title>
+            <link>https://m.okjike.com/originalPosts/6731c6f0a41c1e81558ebe5f</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6731c6f0a41c1e81558ebe5f</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Nov 2024 08:57:20 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    如何做一个真正靠谱的擦边虚拟女友？推荐听一下这期《42章经》。和 Character.ai、星野这些聊天 bot 的产品路线不同，EVE 团队选择从游戏切入。团队之前做了国内首款男性向恋爱游戏，流水做到接近两个亿。一些比较有启发的点：<br /><br />- 最有意思的是团队如何建立在“陪伴”这件事上的认知和数据壁垒。为了能够将陪聊的情绪价值做到位，团队在现实中找了很多顶级的真人陪聊（888元包天的那种），让这些陪聊和指定的男生用户聊天，收集了几百个真人陪聊的数据用作 post training 注入到模型中。“我们要直接拿到真实的聊天数据，在这个过程中提炼她们的方法论，我们要去研究比如到底如何去定义一个人，到底如何去制造一个好的聊天，到底什么叫情绪价值，什么叫男友，什么叫女友，我们都做了很多很多的定义…这个陪聊她坐在一个位置上，她两边都是我们招的心理学家。这两个心理学家每天在 hack 这个陪聊的大脑，因为陪聊她其实完全靠天赋，所以这两个心理学家每天在 hack 她黑盒里面的思维链到底是什么… 我们现在其实也在研究所谓的情感 COT ，当你看到一句话的时候，你的脑海中其实分了很多个步骤。我看到这句话，OK，这个人背后动机是什么？然后像在我们刚刚的框架里面，我看到这句话，我会去调相关的记忆，我召回的记忆是什么？然后当前的话题我和他聊天是在处于什么样的状态？所以我该做怎么样的回复？此刻我的目的是什么？有可能这样的东西组合起来。当然我这个现在说的有点玄，我们还没有真的把这个情感  COT 做进去。”<br /><br />- 经过这种长期调研之后，团队现在的认知是：“陪伴”和“内容消费”是两个不同的概念。Character.ai、星野本质上是一种互动内容，类似于互动小说，是用户用自己的 强 UGC 能力去跟 LLM 共创一个故事，完全不是陪伴。陪伴是有一个跟你超级对齐的灵魂伴侣陪你一起去面对这个不确定的世界。这个产品它就是一个你的异地恋的女友或者男友。你们能在微信上做的一切的事情，在这个产品上它都能做，级别高了还可以开车。<br /><br />- 什么是好的 AI 陪伴？团队认为需要有四个要素，第一是“超级对齐”，她需要有一个很好的常识记忆系统， 记录你们俩足够多的共同经历，然后再通过游戏化的方式来去推进你去跟他聊这么多轮。第二是“真实时空感知”，AI 她需要具备对真实世界的实时感知，同时又必须承认自己是 AI。第三点是“独立人格”，AI 不能是一个躲在屏幕后面等着你回家的一个小猫。它得有自己的行为，有自己的目标，有自己的生活，只是它恰好选择跟你在一起了而已。这样其实就是构成了现实中人与人之间的情侣关系。第四个点是“荷尔蒙”，人是视觉的动物，然后很多人跟 AI 聊不下去的原因其实就是因为他对 AI 是没有所求的，因为 AI 不可能跑到现实中跟你奔线，对吧？所以荷尔蒙相关的设计就很重要，所以我们做了很 fancy 的 3D 视觉，我们做了很多很棒的 PVC 剧情，就是为了去把这个钩子给到你。<br /><br />- 如何构建一个足够好的常识记忆系统？团队给出的方案是：被动记忆（RAG，更类似关键字搜索）+主动记忆（128 个记忆槽位，本质上是将日常沟通的内容分了 128 类标签）。通过 500 -1000 轮的聊天，就可以将这 128 个槽位和真人对齐填满。<br /><br />- 对话中，需要大量的工程实践，每一轮对话的逻辑：（输入用户对话）记忆召回（RAG被动召回 + 128个记忆槽的主动找回） + 对话总控模型（当前状态分析，选择后续对话策略）+ 后续Action（话题制造、深度思考等）<br /><br />- 选择 3D 写实风格，主要原因是希望画风的通用性更强，能够被更大的用户群接受。3D 成本不低，即便有经验的团队，搭管线也需要一年左右时间。但相比 3D 来说，更难的还是剧情和人设，如何做一个好的擦边？这包括如何构建一个能够给人提供情绪价值的虚拟人设，如何做激励和成就体系，如何做数值系统等等。在游戏剧情和人设上积累的经验也是团队最大的壁垒。<br /><br />- 现有对话成本远高于现有类似 Character.ai 的模型，考虑到后续成本每年下降 75%，所以现阶段成本低于用户 LTV 即可。<br /><br />- 商业模式：除了订阅（cover token 成本）之外，更多游戏化付费方式，比如服装、卡牌、互动收费等。<br /><br />总之这期真心推荐听一下，对于什么是 AI 时代的数据和认知壁垒会有较好的启发。虽然产品我还没有体验到，但感觉团队收集数据和 knowhow 的动作方向是很对路的。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6731c489f5aaa2af9858657b</id>
+            <title>AI探索站 11月11日</title>
+            <link>https://m.okjike.com/originalPosts/6731c489f5aaa2af9858657b</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6731c489f5aaa2af9858657b</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Nov 2024 08:47:05 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    今天更这个，周报<br /><br />https://mp.weixin.qq.com/s/KTXw1Jha0X291S9Oigi2-Q
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6731af749c3d17b69b1c2795</id>
             <title>AI探索站 11月11日</title>
             <link>https://m.okjike.com/originalPosts/6731af749c3d17b69b1c2795</link>
@@ -17,6 +68,23 @@
                 <![CDATA[
                     
                     关于月之暗面的预言回收。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/67319e895e4e6d56a65d5e47</id>
+            <title>AI探索站 11月11日</title>
+            <link>https://m.okjike.com/originalPosts/67319e895e4e6d56a65d5e47</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67319e895e4e6d56a65d5e47</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 11 Nov 2024 06:04:57 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    著名的游戏杂谈老将 Sinbasara 最新的一期关于游戏里的 LGBT 内容的最后一段话写的很好，我想分享一下。<br /><br />“只有把无聊当有趣的傻逼，才会希望破坏一切有趣的东西，才会希望世界呆板而对立，才会愿意把所有高于现实的精神追求重新拖回到最基础的正确。<br /><br />游戏、电视、小说、音乐、社交媒体等等娱乐方式从来都只有一个目的，那就是把无聊闲散的时光变得有趣，而不是变得有意义。<br /><br />假如每个人都要求自己看到的一切东西都有意义，那么所有人都会成为被规训的那种人，互相劝阻，互为藩篱，谁都无法成为一个真实自由的自己。<br /><br />人类的性别可能有九十多种，但性格只有有趣和把无趣当有趣两种，而且彼此互斥，极端对比。我只是希望，最终被歧视和孤立的是后面那种傻逼。”<br /><br />虽然是写游戏的但是对于所有内容产业都是通用的。<br /><br />我之前在 NotebookLM 代表的模态互转生产内容的 AI 新交互范式中说过，评判这个能力是否成熟的唯一标准是是否可被消费。<br /><br />其实用他这里提到的是否有趣更加合适一些。<br /><br />内容消费者根本不关心你的人种、性别你制作的时候使用的工具，有没有使用 AI，他们只关心你的内容是否有趣。
                 ]]>
             </content:encoded>
         </item>
@@ -73,23 +141,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/673036c09cc9f8ffe6236255</id>
-            <title>AI探索站 11月10日</title>
-            <link>https://m.okjike.com/originalPosts/673036c09cc9f8ffe6236255</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/673036c09cc9f8ffe6236255</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 10 Nov 2024 04:29:52 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    脑海中有个概念：信息审美。<br /><br />读书时代，随着阅读文字日渐增多，大脑对文字的感知分辨率也在提升，有点像品酒师能尝出各种葡萄酒的细微差别一样，有深厚阅读底蕴的人，也能感知到文字背后的韵味层次。<br /><br />信息时代，信息过载，人类(可能)进化出适应信息社会的信息审美能力，每人拥有独属的信息偏好(不一定是离客观真相更近的)，这个偏好在某种程度上定义了「我是谁」这个根本性问题。<br /><br />AI时代，人类会不会发展出对于AI文本的特殊审美感知能力？ 去ai味道，是一种审美， 那会不会有专门欣赏ai 味道的审美？ ai生成内容很快，会不会有专门的抵抗派审美，追求慢，追求深度思考？ 或者折中派，会不会有混合审美，人的思考结合ai生成，图文并茂，更上一层楼？
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/673006eba59d13d6d14f1b36</id>
             <title>AI探索站 11月10日</title>
             <link>https://m.okjike.com/originalPosts/673006eba59d13d6d14f1b36</link>
@@ -102,57 +153,6 @@
                 <![CDATA[
                     
                     当下的ai，我感觉有两个利基市场，一个往下走，解决ai上手使用的问题(什么是ai，a场景有什么好用的x工具等等)。另一个往上走，解决之前人都搞不定(或不好搞)的问题。<br /><br />当下ai圈的好多人，恰恰在这两者之间扑腾，既看不到(或看不上)前者的巨大套利时间窗口，也解决不了后者的难度。<br /><br />ignoramus.
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/672f7dc7c79063fd7b0429bb</id>
-            <title>AI探索站 11月09日</title>
-            <link>https://m.okjike.com/originalPosts/672f7dc7c79063fd7b0429bb</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/672f7dc7c79063fd7b0429bb</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 09 Nov 2024 15:20:39 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    抖音的AI图真是遥遥领先 几十秒出图
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/672f671bc826ffe910c30f00</id>
-            <title>AI探索站 11月09日</title>
-            <link>https://m.okjike.com/originalPosts/672f671bc826ffe910c30f00</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/672f671bc826ffe910c30f00</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 09 Nov 2024 13:43:55 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    核心辐射学习法<br /><br />这是我常用的一种学习和思考方法。<br /><br />学习一项新知识，新技术的时候。如果直接面对一整个庞大的系统性知识，容易产生畏难心理、记忆负担、认知迷茫等问题，同时容易陷入知其然不知其所以然的地步。<br /><br />为了让自己更快更深的理解掌握一项新知识，我会希望尽可能的抛弃掉所有的复杂性，先从最小核心出发，再慢慢掌握基础，然后实践，然后提升，然后拓展。<br /><br />以 RAG为例 (个人不专业的回答，欢迎批评指正):<br /><br />1. 最小核心:  知识 + 指令 构成的提示词。 最简单的做法就是我们读文献的时候，手动将知识复制粘贴给AI (人工检索知识)，然后要求AI 根据知识回答问题。<br /><br />2. 基础层。人工检索效率低，所以最小核心的人工检索知识变为机器检索知识。<br />知识太多，无法一次输入，所以需要对知识进行分片，于是有了知识切片的各种方法。<br />为了检索的准，于是有了关键词检索，语义检索等技术。<br />为了进行语义检索，需要将文字转换为向量，所以有了转换的embedding 模型，要对这些向量操作，所以需要向量数据库。<br />机器将检索到的知识和指令结合构成提示词，引导模型生成回答。<br /><br />3. 实践层。基本上使用上面这些就能构建一个小的rag系统，花时间实验，试错，调优。在优化的过程中发现更多问题，检索不准的问题，生成不理想的问题等等。<br /><br />4. 提升层。为了优化检索效果，检索的时候使用各种混合方法，有些问题依赖的知识分布在多段内容中，因此使用多段内容。但是这些内容和问题直接的相关性等又有不同，希望筛选出最相关的，于是有了对检索得到的知识的排序，有了排序模型。为了进一步提升系统效果，使用更好的模型，更好的参数，对生成数据流优化，各个步骤上的参数测试优化等等。<br /><br />5. 拓展层。进一步进行系统层面的优化，对系统稳定性，易用性，产品设计等方面优化。比如在实际使用过程中发现很多问题是重复的，这时候就可以构建缓存系统，第一次回答之后下次类似问题进来直接使用缓存的已有答案。<br /><br />思考是这个核心辐射的逆过程，不断剔除掉外在的复杂性，观察事物是否成立，最后只保留下最小的不可去除的核心。<br /><br />个人按这个思路，Agent 和 RAG 如果不断去除掉复杂性，最终保留到最小核心的话，可以回退到 prompt 的构造法。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/672b66834b51510e0a4e36b0</id>
-            <title>AI探索站 11月06日</title>
-            <link>https://m.okjike.com/originalPosts/672b66834b51510e0a4e36b0</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/672b66834b51510e0a4e36b0</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 06 Nov 2024 12:52:19 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    离职流程终于走完了, 正式自我介绍下~<br /><br />个人情况: <br />前某中型上市公司, 6年AI算法工程师, 算法团队负责人. 小型团队, 也造就了我全栈的能力.<br /><br />现正式成为AI独立创业者. <br /><br />爱好阅读、喜欢深度思考; 得到深度用户, obsidian, flomo深度用户<br /><br />喜欢用工具也喜欢造工具. 1年emacs使用经验, 5年neovim深度使用者<br /><br />相信AI寒武纪即将到来, 且躬身入局~<br /><br />为什么:<br />1.因我本身就是做算法的, chatgpt发布后, 这两年算是经历了道心破碎和道心重塑的过程, 我使用AI在生活工作的方方面面, 从阅读、思考到实际做事, 思路与以往完全不一样. 所以AI对我自身能力的扩展是阶跃的, 同时我也热爱使用AI帮助更多的人.<br /><br />2.我翻阅大量历史, 没有一次科技革命的影响是自上而下被设计出来的, 反而都是环境发展到了一定阶段, 各行各业各种产品自下而上生长出来的. 所以我要给自己创造环境, 一个尽可能对齐未来AI寒武纪, 应用大爆发的环境, 并置身其中.<br /><br />目标(未来一年):<br />1. 关键是在接下来的一年中, 能够在以成功为目标的前提下, 允许自己快速试错, 获得感受和思考, 逐步成为下一个时代最需要的AI产品工程师 (我造的词哈哈, 指深度理解AI, 同时具备较高的认知水平, 理解人性和社会, 能够做出被时代需要的, 于时代有益的产品)<br /><br />2. 所以这一年, 我的重点在赋能, 帮助我所见、识的人事物. 做有趣有用的产品出来, 赚钱是重点但不关键.<br /><br />欢迎关注, 同时期待各种形式的交流, 也考虑各种形式的合作~<br /><br />---<br />微信公众号: Kaijien AI<br />github repo: github.com/Kaijien<br />小破站, 得到, 某音,小🍠 全网同名: 凯祭恩Kaijien
                 ]]>
             </content:encoded>
         </item>
