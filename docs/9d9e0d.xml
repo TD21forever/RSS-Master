@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/67347eca8d6dd8c09cfdf6bd</id>
+            <title>AI探索站 11月13日</title>
+            <link>https://m.okjike.com/originalPosts/67347eca8d6dd8c09cfdf6bd</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67347eca8d6dd8c09cfdf6bd</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Nov 2024 10:26:18 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    秉承Build in Public，分享下使用Cursor实战开发一个前后端分离的网站的经验，希望对大家有帮助，有问题评论区留言，我看到会回复<br />✅1.明确技术栈<br />Cursor中模型我选的是cluade 3.5 sonnet，openai用过就知道根本没法比。拿到一个需求，首先让claude推荐能实现这个需求的技术栈，然后在cursor setting全局配置中的Rules（图1）和项目根目录的.cursorrules中包含对应的技术栈,这个网页中有很多cursorrule的模版，我就是在里面找的https://cursor.directory/<br />✅2.设计架构，逐一实现（图2）<br />就和写作文一样，你要先写一个大纲，然后根据大纲填入对应的内容<br />千万别上来就和cursor说我要你帮我实现一个文生图网站，人工智能不是神。<br />你就是架构师，cursor就是程序员，我通常会这样对cursor说：“好的，让我们一起来实现这个需求。你先把整体的架构列给我，先不要写代码”<br />然后cursor列出架构后，你根据自己的需要，增加或者减少<br />✅3.遇到报错保持耐心，运用好command+回车(macOS, windows我不知道是什么)<br />command+回车在cursor里面是可以让cursor阅读你当前项目的全部文件。像我这次项目代码特别多，光api的文件就7个还是8个。（图3）<br />我举个例子，比如有生成图片api,生成音频api，提取pdf文件api，如果你添加了某个功能代码开始报错或者进行本地调试怎么都运行不了，你可以这样子和cursor说:”现在我们遇到了一个报错，控制台日志如下：xxxx，你先不要急着写代码，先分析下可能是哪些文件中的代码出了问题，告诉我需要提供代码的文件，你再修改”<br />✅4.如果遇到要修改现有文件的代码，一定一定要给cursor这个提示：“先阅读一遍我目前的代码，再进行修改”，你不这样说，cursor可能不知道你目前代码的结构，把你关键功能直接改没了都可能<br />✅5.前端页面如何快速实现？<br />你可以选择上v0.dev或者别的文生图，生成一个界面的图片，再发给claude让你复刻。我对界面没什么要求，我就是这样提示cursor的：“我们的网站主题是ai播客生成，我希望整体的设计风格是充满活力和激情的，请你以此基础发挥想象力设计我的ui界面。<br />首页组件我要求包括但不限于：1.Hero 2.cta 3.faq 4.how it works....”<br />✅6.最重要的一点，你和cursor对话的时候通常会开多个聊天框（看图4右侧滑动按钮我完成这个项目开了多少聊天框），一个聊天框聊的东西多了就特别容易抽风，怎么保持让cursor的记忆同步呢？<br />每聊完一个聊天框，你要开启新聊天框的时候，就和cursor说：“请你回顾我们前面全部对话，总结更新我的项目架构文件，供未来别的开发人员使用“<br />✅7.总结：<br />cursor很强大，也很弱，取决于你会不会使用。<br />我前端是用next.js,后端用python，中间还涉及一些我从来没有接触过的服务器，命令行等运行命令。你一定要把前提和背景告诉cursor，举个简单的例子，我要在hugging face space上部署项目，但是发现服务器启动的时候日志疯狂报错，你千万不要直接把报错日志丢给cursor，这样子解决不了问题，你要这样说:“这是我部署到hugging face space服务器的时候的错误日志，请你看一遍，然后你告诉我可能是哪里出了问题，需要我提供哪些代码文件给你，我嗯先不急着写代码，先一起讨论下”<br />希望对大家有帮助，以后还会继续分享我在实战中使用cursor的经验。我是完全0代码基础，我可以，你一样可以，不要对未知的技术畏惧，不懂的就耐心去问cursor
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/673449678d6dd8c09cfa054b</id>
             <title>AI探索站 11月13日</title>
             <link>https://m.okjike.com/originalPosts/673449678d6dd8c09cfa054b</link>
@@ -34,23 +51,6 @@
                 <![CDATA[
                     
                     我的第一个产品:Ai播客生成器现在上线了！<br />地址 https://mypodmates.com/<br />这是一个你可以放入PDF或网页，自动生成双人对话的播客。你会看到有两个ai机器人在对你输入的内容进行聊天和讨论<br />✅核心内容：<br />1.PDF分析：目前最高支持上传15-20页，5M以内的文件<br />2.网页分析：上传网页链接，分析网页内容<br />3.问题导向：可以输入你想重点聊的话题，比如放入一篇关于苹果简介的pdf文档，想重点关注苹果的生产地有哪些，播客内容会重点围绕这部分<br />❌待提升：<br />1.目前只支持英文，多语言(包括中文)未来可能放入，主要看用户反馈，不知道中文需求多不多<br />2.语音生成能力待提高：现在已经找到了更好的语音生成模型和解决方案，打算先收集一下用户反馈<br />3.PDF更长的文件支持<br /><br />由于成本问题，我自己也是今年刚毕业，没什么储蓄，所以目前新用户免费赠送2次生成音频的额度，如果有更多的使用需求欢迎付费。关于产品的任何反馈或者疑问也欢迎向我提出<br /><br />最后感谢：<br />GitHub开源库：https://github.com/meta-llama/llama-recipes<br />感谢豆哥的社群技术支持@艾逗笔 <br />感谢飞哥的社群seo支持@哥飞 <br />还有感谢一些路上为我排忧解难的朋友，太多了就不一一艾特了。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6733f0ea8dc1346967ab8852</id>
-            <title>AI探索站 11月13日</title>
-            <link>https://m.okjike.com/originalPosts/6733f0ea8dc1346967ab8852</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6733f0ea8dc1346967ab8852</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 13 Nov 2024 00:20:58 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    Bolt New 的产品和销售数据出来了！<br /><br />- 4周时间，从0到400万美金的 ARR！<br />- 使用的 Claude API 消耗量每天翻倍式增长<br />- 每周有十万人持续使用<br /><br />这种爆发式的增长，核心是因为它解决了一个一直以来的行业难题：<br />Web 是世界上使用最广泛的平台，但开发者却无法在浏览器中构建 Web 应用。<br />通过开创性的 WebContainers 技术和先进的 AI Coder 解决了这个问题。<br /><br />Bolt 认为未来人人都是开发者，十亿级别的开发者！<br />一个现实的例子是，一位用户在 Upwork 上获得了 5000 美元的报价和 2-3 个月的时间来打造她的 MVP。几天后 Bolt 发布，她购买了 50 美元/月的计划，并在不到 2 周的时间内构建并推出了她的产品。<br /><br />引用链接：https://www.anthropic.com/customers/stackblitz
                 ]]>
             </content:encoded>
         </item>
