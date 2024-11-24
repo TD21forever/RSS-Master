@@ -5,6 +5,366 @@
         <link>https://www.36kr.com/information/technology</link>
         
         <item>
+            <id>https://www.36kr.com/p/3049834751822729</id>
+            <title>经典卡尔曼滤波器改进视频版「分割一切」，网友：好优雅的方法</title>
+            <link>https://www.36kr.com/p/3049834751822729</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3049834751822729</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 24 Nov 2024 03:58:24 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <Meta, SAM 2, SAMURAI, 卡尔曼滤波器>
+<br>
+<br>
+总结: Meta推出的Segment Anything Model 2（SAM 2）在跟踪快速移动目标时存在缺陷，特别是在拥挤场景中容易跟丢。全华人团队提出的改进版SAMURAI通过经典的卡尔曼滤波器技术，解决了这一问题，显著提升了目标跟踪的准确性和鲁棒性。SAMURAI采用运动建模和运动感知记忆选择两大关键技术，能够在复杂场景中有效预测目标运动并动态选择相关记忆。实验结果显示，SAMURAI在多个视觉目标跟踪基准上超越了SAM 2，表现出色。 </div>
+                        <hr>
+                    
+                    <p>金磊 发自 凹非寺量子位</p>
+  <p>Meta的视频版<strong>分割一切</strong>——Segment Anything Model 2（SAM 2），又火了一把。</p>
+  <p>因为这一次，一个<strong>全华人</strong>团队，仅仅是用了个<strong>经典方法</strong>，就把它的能力拔到了一个新高度——</p>
+  <p><strong>任你移动再快，AI跟丢不了一点点！</strong></p>
+  <p>例如在电影《1917》这段画面里，主角穿梭在众多士兵之中，原先的SAM 2表现是这样的：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_3aaa396c90ed4bf1a847f6fdab789932@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>嗯，当一大群士兵涌入画面的时候，SAM 2把主角给跟丢了。</p>
+  <p>但改进版的SAM 2，它的表现截然不同：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_eca048b496b94b93931dd7abd4a389e3@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>这个改进版的SAM 2，名叫<strong>SAMURAI</strong>（武士），由华盛顿大学<strong>全华人</strong>研究团队提出。</p>
+  <p>一言蔽之，这项工作就是把SAM 2之前存在的缺点（记忆管理方面的局限性）给填补上了。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_e8a94a39b9484d57b44d6db9a5cff5e0@000000_oswg87005oswg1080oswg256_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>更有意思的是，这项改进工作所用到的核心关键方法，是非常经典的<strong>卡尔曼滤波器</strong>（Kalman Filter，KF）。</p>
+  <p>并且还是无需重新训练、可以实时运行的那种！</p>
+  <p>前谷歌产品经理、国外知名博主Bilawal Sidhu在看完论文后直呼<strong>“优雅”</strong>：</p>
+  <blockquote>
+   <p>有时候你不需要复杂的全新架构——只需要聪明地利用模型已知的信息，再加上一些经过验证的经典方法。</p>
+   <p>我们的“老朋友”卡尔曼滤波器，这么多年过去了，它的表现依然如此出色。有时候老派的方法就是管用。</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_ba0dc137b90e41edade46b182cfdbbab@000000_oswg702909oswg942oswg1204_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>嗯，颇有一种“姜还是老的辣”的感觉了。</p>
+  <h2><strong>黑悟空、女团舞蹈，统统都能hold住</strong></h2>
+  <p>我们先继续看下SAMURAI能力实现的更多效果。</p>
+  <p>团队在项目主页中便从多个不同维度秀了一波实力。</p>
+  <p>首先就是<strong>打斗游戏</strong>场景，例如在<strong>《只狼：影逝二度》</strong>中，即便人物都“弹出”了画面，SAMURAI也能再次把目标捕捉回来：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_d5baff1c12bb4b2883834227a61ca1e8@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>《黑神话：悟空》的打斗名场面，人物动作变化可以说是非常之快，而且和背景非常复杂的交织在一起。</p>
+  <p>即便如此，SAMURAI也能精准跟踪，细节到金箍棒的那种：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_78a5bee1f9754f72b25f786f1f2ef761@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>但毕竟这两个游戏场景的例子，所涉及到的主体还不够多，那么我们接下来继续看下更复杂的case。</p>
+  <p>例如<strong>橄榄球比赛</strong>场景，不仅人物移动的快，后来队员们都扑到了一起，SAMURAI也能hold住：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_647faaf37ede4c1f867163934968fab6@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>在<strong>女团舞蹈</strong>的案例中，人物在变换队形的时候都已经被其他队员挡住了，也挡不住SAMURAI的“眼神锁定你”：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_dfc7009a6d91429990f85f3419045be4@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <h2><strong>很work的经典方法</strong></h2>
+  <p>在看完效果之后，我们接下来扒一扒SAMURAI的技术细节。</p>
+  <p>正如我们刚才提到的，这项工作弥补了SAM 2此前存在的缺点。</p>
+  <p>主要的问题就是处理视觉目标跟踪时，尤其是在拥挤场景中快速移动或遮挡的物体时，它会出现跟丢了的情况。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_331ed1beac5f4a86b2c1d041c54d7e08@000000_oswg603157oswg1080oswg464_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>SAM 2的组成部分包括图像编码器、掩码解码器、提示编码器、记忆注意力层和记忆编码器。</p>
+  <p>在视觉目标跟踪中，SAM 2使用提示编码器来处理输入的提示信息，如点、框或文本，这些提示信息用于指导模型分割图像中的特定对象。</p>
+  <p>掩码解码器则负责生成预测的掩码，而记忆注意力层和记忆编码器则用于处理跨帧的上下文信息，以维持长期跟踪。</p>
+  <p>然而，SAM 2在处理快速移动的对象或在拥挤场景中，往往忽视了运动线索，导致在预测后续帧的掩码时出现不准确。</p>
+  <p>特别是在遮挡发生时，SAM 2倾向于优先考虑外观相似性而非空间和时间的一致性，这可能导致跟踪错误。</p>
+  <p>而SAMURATI，作为SAM 2的增强版，可以说是很好地解决了此前的痛点。</p>
+  <p>整体来看，SAMURAI主要包含两个技术关键点：</p>
+  <p><strong>运动建模</strong>（Motion Modeling）</p>
+  <p><strong>运动感知记忆选择</strong>（Motion-Aware Memory Selection）</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_b9042d54b09a42e3b832c0d537f8e85b@000000_oswg166643oswg1080oswg430_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <h4><strong>让目标“动”起来</strong></h4>
+  <p><strong>运动建模部分</strong>的目的是有效地预测目标的运动，从而在复杂场景中，如拥挤场景或目标快速移动和自遮挡的情况下，提高跟踪的准确性和鲁棒性。</p>
+  <p>而这里用到的具体方法，就是那个经典的<strong>卡尔曼滤波器</strong>，以此来增强边界框位置和尺寸的预测，从而帮助从多个候选掩码中选择最有信心的一个。</p>
+  <p>在SAMURAI中，状态向量包括目标的位置、尺寸及其变化速度；通过预测-校正循环，卡尔曼滤波器能够提供关于目标未来状态的准确估计。</p>
+  <p>目标的状态向量被定义为：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_8bf72171f0174b90a41c0192fbbaafbe@000000_oswg13855oswg732oswg128_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>其中，x和y表示目标边界框的中心坐标；w和h表示边界框的宽度和高度；后四个变量则表示坐标与尺寸的速度。</p>
+  <p>滤波的过程则主要分为两个步骤。</p>
+  <p>第一个就是预测阶段，即根据目标的上一帧状态，预测下一帧位置：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_a3736bd9a4784b38a3929acd3a4a7723@000000_oswg4293oswg586oswg146_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>其中，F是状态转移矩阵。</p>
+  <p>第二个则是更新阶段，会结合实际测量值（目标的候选掩膜），校正预测值：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_e03147697185477693fb4f9f7765d67b@000000_oswg16902oswg964oswg154_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>在运动建模部分，除了基于卡尔曼滤波器的运动预测之外，还涉及运动分数（Motion Score）。</p>
+  <p>主要是通过计算 Kalman 滤波器预测的边界框与候选掩膜之间的交并比（IoU），生成运动分数sKf，用以辅助掩膜选择：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_d78d8febeab74f01a030084189bb47cf@000000_oswg15433oswg606oswg130_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>最终的掩膜选择基于运动分数与掩膜亲和分数的加权和：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_6e44bcc5256044ff9dd978c1a2e0e6a4@000000_oswg40803oswg1080oswg111_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <h4><strong>挑出最关键的记忆</strong></h4>
+  <p>SAMURAI第二个关键技术，则是<strong>运动感知记忆选择</strong>（Motion-Aware Memory Selection）。</p>
+  <p>主要是为了解决SAM 2的固定窗口记忆机制容易引入错误的低质量特征，导致后续跟踪的误差传播的情况。</p>
+  <p>这部分首先涉及一个<strong>混合评分系统</strong>，包括掩膜分数、目标出现分数和运动分数三种评分，用于动态选择记忆库中最相关的帧。</p>
+  <p>掩膜分数smask：衡量掩膜的准确性。</p>
+  <p>目标出现分数 sobj：判断目标是否存在于该帧中。</p>
+  <p>运动分数 skf：预测目标位置的准确性。</p>
+  <p>其次是一个<strong>记忆选择机制</strong>——</p>
+  <p>如果某帧满足以下条件，则其特征会被保留到记忆库中：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_b8a110828766497cad12a8cc3a0df65b@000000_oswg40380oswg1080oswg135_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>动态选择的记忆库可以跳过遮挡期间的低质量特征，从而提高后续帧的预测性能。</p>
+  <p>从实验结果来看，SAMURAI在多个视觉目标跟踪基准上表现出色，包括 LaSOT、LaSOText和GOT-10k数据集。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_7136a1b3f1474606b1993160c2254cfe@000000_oswg373797oswg1080oswg709_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>值得一提的是，SAMURAI是在无需重新训练或微调的情况下，在所有基准上都超过了SAM 2，并与部分有监督方法（如 LoRAT 和 ODTrack）表现相当。</p>
+  <h2><strong>全华人团队出品</strong></h2>
+  <p>SAMURAI这项工作背后的研究团队，有一个亮点便是全华人阵容。</p>
+  <p>例如Cheng-Yen Yang，目前是<strong>华盛顿大学</strong>电气与计算机工程系的一名四年级博士生。</p>
+  <p>研究方向主要包括在复杂场景（水下，无人机，多相机系统）中的多目标跟踪（单视图，多视图，交叉视图）。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_18c6c52101f54e1995d004aa04f40c60@000000_oswg225101oswg1080oswg409_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>Hsiang-Wei Huang和Zhongyu Jiang也是华盛顿大学电气与计算机工程系的博士生，而Wenhao Chai目前则是攻读研究生。</p>
+  <p>他们的导师是华盛顿大学教授<strong>Jenq-Neng Hwang</strong>。</p>
+  <p>他是IEEE信号处理协会多媒体信号处理技术委员会的创始人之一，自2001年以来，黄教授一直是IEEE院士。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_5e3a5a3247624d9883d01b5131783f41@000000_oswg677287oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&amp;mid=2247760692&amp;idx=1&amp;sn=58f3643eaa8d796ec5829d3d41dbc384&amp;chksm=e9fe0d6da6aa52e31cfa2242cf1eb43d903463db2c4f466211e5225eca35fd8533146ccfa105&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“量子位”（ID：QbitAI）</a>，作者：关注前沿科技，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3048483889286023</id>
+            <title>SiC价格跳水，开启下半场战役</title>
+            <link>https://www.36kr.com/p/3048483889286023</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3048483889286023</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 24 Nov 2024 02:18:34 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 碳化硅, 产能扩张, 价格下探, 行业竞争  
+<br><br>  
+总结: 2023年，国内碳化硅（SiC）衬底行业涌现大量新玩家，产能扩张达到前所未有的规模，6英寸SiC衬底销量超过100万片。随着全球6英寸SiC片产能释放及电动汽车需求减缓，SiC价格持续下探，预计2024年中期价格将跌至500美元以下，甚至可能降至400美元，给制造商带来财务压力。行业竞争加剧，导致价格战愈演愈烈，许多小型制造商面临严峻挑战。与此同时，行业巨头如Wolfspeed和罗姆半导体也受到影响，业绩下滑和投资削减。未来，市场将逐步向8英寸SiC衬底转型，预计2026年将取代6英寸产品。 </div>
+                        <hr>
+                    
+                    <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241123/v2_7d8ba160749a4d27a33149e286554abf@000000_oswg384839oswg896oswg897_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">题图</p>
+  <p>2023年，国内碳化硅（SiC）衬底行业涌入大量的玩家，众多项目在全国各地落地，产能扩张达到空前规模。</p>
+  <p>据行业数据显示，2023年国内SiC衬底的折合6英寸销量已超过100万片，许多厂商的产能爬坡速度超过预期。直至如今，6英寸SiC衬底的扩产动作仍在继续。</p>
+  <h2><strong>01</strong></h2>
+  <h2><strong>SiC产能，持续开出</strong></h2>
+  <p>不完全统计，中国大陆约有20余家SiC衬底企业，分别包括天岳先进、天科合达、 东尼电子 、烁科晶体、同光晶体、世纪金光、 露笑科技 等。</p>
+  <p><strong>天岳先进</strong>上海临港新工厂已于2023年5月开始交付6英寸导电型SiC衬底，目前产能和产量均在持续爬坡中。按照目前的进展来看，天岳先进预计将提前实现达产。在此基础上，天岳先进在2023年下半年决定将6英寸SiC衬底的生产规模扩大至96万片/年。上海临港工厂达产后，将成为天岳先进导电型SiC衬底主要生产基地。</p>
+  <p><strong>天科合达</strong>徐州SiC芯片二期项目于去年8月开工，项目总投资8.3亿元，达产后，可实现年产SiC衬底16万片。2023年12月28日，该项目已全面封顶，预计今年投产。2024年2月27日，由天科合达子公司深圳重投天科负责运营的第三代半导体SiC材料生产基地也在深圳宝安区启动，预计今年衬底和外延产能达25万片。</p>
+  <p><strong>烁科晶体</strong>SiC二期项目今年顺利通过竣工验收，二期项目的建成，预计将为烁科晶体带来每年新增20万片6-8英寸SiC衬底的产能，其中包括N型SiC单晶衬底20万片/年、高纯衬底2.5万片/年、莫桑晶体1.3吨/年。<strong>东尼电子</strong>的“年产12万片SiC半导体材料”项目于2023年上半年实施完毕。今年3月，湖州市生态环境局公示了对 东尼电子 扩建SiC项目的环评文件审批意见，此次本次公示的项目，则是在该募投项目上的进一步扩建。根据公告内容，东尼半导体计划利用东尼五期厂区厂房，实施扩建年产20万片6英寸SiC衬底材料项目。</p>
+  <p><strong>三安光电</strong>去年年底在投资者问答中表示，目前SiC产能在逐步释放，预计2023年末至2024年初，公司6英寸SiC产能规划扩产至1.8-2万片/月。</p>
+  <p><strong>重投天科</strong>建设运营的第三代半导体材料产业园于今年年初正式揭牌，该产业园围绕生产衬底和外延等制造芯片的基础材料，重点布局了 6 英寸 SiC 单晶衬底和外延生产线，预计 2024 年衬底和外延产能达 25 万片。</p>
+  <h2><strong>02</strong></h2>
+  <h2><strong>SiC价格，持续下探</strong></h2>
+  <p>随着全球6英寸SiC片产能释放，加之电动汽车需求暂缓，这给今年SiC价格带来下行压力。</p>
+  <p>据悉，2024年中期，6英寸SiC衬底价格已跌至500美元以下，接近中国制造商的生产成本线。然而，到第四季度，价格将进一步跌至450美元甚至400美元，给大部分制造商带来沉重财务压力。值得注意的是，国际供应商的报价在 2023 年底仍高达 850 美元。如今已经有一些一线供应商已经在寻求出售业务，以避免巨额亏损的持续扩大。</p>
+  <p>对于价格下降的原因，行业分析师将其归因于供应过剩和市场竞争加剧。一线中国供应商为抢占市场份额而发起的价格战愈演愈烈，小制造商也加入竞争，导致市场不稳定。尽管国内 SiC 衬底产能增长迅速，但不同供应商之间的良率差异较大，部分企业在订单履行方面面临着严峻挑战。供应商之间的激烈竞争使得价格不断走低，许多厂商被迫亏本销售。</p>
+  <p>这种竞争环境增强了全球买家的谈判地位，博世和英飞凌等主要国际IDM获得了越来越优惠的价格协议。</p>
+  <p><strong>与此同时，SiC 衬底的主要应用领域 —— 电动汽车和光伏发电市场（SiC 器件最大的市场），由于长达 6 个月到 1 年的验证期，使得客户在选择供应商时尤为谨慎，担心验证期结束后供应商可能已破产。这一情况进一步拖累了供应链的流动性。</strong></p>
+  <p>业内人士预计，原本应在2026年左右到来的SiC衬底行业整合潮，可能会因价格战的激化而提前至2025年中期。</p>
+  <p>在近日的业绩会上，有投资者向 天岳先进 提问：“4英寸、6英寸等传统SiC衬底产品价格是否有进一步下探的空间？”</p>
+  <p>天岳先进 董事长、总经理宗艳民表示，SiC衬底价格会下降，这一方面是由于技术的提升和规模化效应推动衬底成本的下降；另一方面，目前<strong>SiC衬底价格比硅衬底高</strong>，而价格下降有助于下游应用的扩展，推动SiC更加广阔的渗透应用。</p>
+  <p>中国供应商的快速扩产和大幅降价也让国际竞争对手措手不及，全球行业形势正在悄然发生变化。</p>
+  <h2><strong>03</strong></h2>
+  <h2><strong>SiC巨头，也受到影响</strong></h2>
+  <p><strong>行业巨头，面临挑战</strong></p>
+  <p>近日，总部位于达勒姆的 Wolfspeed 公司有多则坏消息传出。</p>
+  <p>Wolfspeed曾是全球范围内首家8英寸(200mm)SiC晶圆制造厂，从2015年项目发布到2022年建成投产以及实现量产共历时7年。2023年，为了加速转型，Wolfspeed出售射频业务给MACOM，此后Wolfspeed专注于SiC业务。</p>
+  <p>然而随着SiC市场竞争持续加剧，Wolfspeed业绩持续亏损、深陷“财务危机”。根据Wolfspeed公布的2025财年第一财季财报显示，该财季营收同比下滑1.37%至1.95亿美元，净亏损虽同比收窄了28.68%，但仍亏损达2.82亿美元。</p>
+  <p>受业绩持续亏损影响，Wolfspeed日前还宣布启动了一项耗资4.5亿美元设施关闭和整合计划，即关闭其在美国北卡罗来纳州达勒姆的 150 毫米SiC工厂，同时减约20%的员工，目前该公司有5000名员工，也就是说需要裁撤1000个工作岗位。展望2025财年的第二季度，Wolfspeed预计其非GAAP净亏损额将在1.45亿至1.14亿美元之间。</p>
+  <p>11月18日，Wolfspeed发布公告称，其董事会已决定同意Gregg Lowe于本月辞去Wolfspeed总裁兼首席执行官和董事会成员的职务。虽然Gregg Lowe本人和Wolfspeed董事会均未说明其辞职的原因，但是外界猜测这与Wolfspeed近几个季度的业绩表现脱不了干系。</p>
+  <p><strong>罗姆的SiC业务有重大调整</strong></p>
+  <p>Wolfspeed遭受逆风的同时，另一家SiC大厂罗姆半导体的日子也不太好过。</p>
+  <p>11月7日，罗姆半导体公布了2024财年上半年（2024年4月至9月）业绩报告。该时间段内，罗姆半导体实现营收2320亿日元（约合人民币109.04亿），同比下滑3%。次日罗姆举行了财务业绩发布会，并透露了SiC业务进展及未来规划。</p>
+  <p><strong>首先是投资金额削减</strong>，罗姆半导体原计划在2021年至2027年针对SiC业务投资5100亿日元（约合人民币239.7亿），现在将降至4700亿-4800亿日元（约合人民币220.9亿-225.6亿），具体来看，2024财年的投资额降至1500亿日元（约合人民币70.5亿），2025财年则降至1000亿日元（约合人民币47亿）以下。</p>
+  <p><strong>其次是增长计划放缓</strong>，此前，罗姆半导体为其SiC业务设定了2025财年达到1100亿日元（约合人民币51.7亿）的销售额目标。然而，由于工业设备和电动汽车市场放缓，目标被推迟到2026-2027年。</p>
+  <p><strong>最后是产能安排调整</strong>，罗姆半导体正在推动8英寸SiC的量产，其中筑后工厂计划于2025年开始大规模生产，宫崎第二工厂预计在2025年投产。另一方面，罗姆半导体原计划2025 财年将SiC功率半导体的产能提高至2021财年的 6.5 倍，但该目标将延迟一年后实现。</p>
+  <h2><strong>04</strong></h2>
+  <h2><strong>SiC，开启下半场！</strong></h2>
+  <p>当下，6 英寸SiC晶圆价格持续陷入内卷困境，大量厂商将目光投向尺寸更大的 SiC 衬底，试图以此探寻新的发展契机和突破方向。</p>
+  <p>目前，8英寸便是SiC战役的下半场。</p>
+  <p>根据Wolfspeed 报告显示，以 32mm²面积的裸片（芯片）为例，6 英寸可以切出448颗，8 英寸可以切出 845 颗，8 英寸SiC衬底上的裸片数量相比6 英寸增加近90%；由于边缘芯片的良率较低，6 英寸的边缘裸片数量占比会达到 14%，8 英寸的这一占比降低至7%，8英寸衬底利用率相比 6 英寸提升了 7%。根据SiC衬底厂商天科合达的测算，从6英寸提升到 8 英寸，单位成本预计能够降低 35%。</p>
+  <p>截至2023年，海外已经形成从 8 英寸衬底到晶圆制造的产业链布局，海外头部大厂在8 英寸SiC衬底技术上的发展和产品研发在近两年明显加快。除了已实现量产的 Wolfspeed，还有7 家SiC衬底、外延、器件厂预计在未来 1-2 年实现 8 英寸衬底的量产。其中，Wolfspeed 的8 英寸衬底及MOSFET已实现批量应用，并持续建设 JohnPalmour SiC衬底厂，推动衬底产能扩充、配合其8英寸晶圆厂的扩产需求；ST 意法半导体也向 8 英寸领域投资，其联合湖南三安半导体建设8英寸SiC晶圆厂，三安配套自建一座 8 英寸SiC衬底厂，保障合资工厂的材料供应稳定性。</p>
+  <p>根据 YOLE 报告预测，2024 年 8 英寸SiC衬底将大批量进入市场。业界预计从2026年至2027年开始，现在的 6 英寸SiC产品都将被 8 英寸产品替代。据集邦咨询数据显示，目前8英寸的产品市占率不到 2%，预计 2026 年市场份额将成长到 15%左右。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241123/v2_11984982c8e348f290a4511bd546f84b@000000_oswg561260oswg1080oswg1034_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关图表</p>
+  <p>国内厂商的量产突破步伐也在加快。目前已超10 家企业8英寸SiC衬底进入了送样、小批量生产阶段，包括烁科晶体、晶盛机电、天岳先进、南砂晶圆、天科合达、科友半导体、湖南三安半导体、超芯星、粤海金等。投资方面，烁科晶体、南砂晶圆、天岳先进、天科合达、科友半导体、三安光电等均有 8 英寸衬底相关扩产计划，旨在提前为后续中下游客户做好材料产能供应的准备。</p>
+  <p>近日，天岳先进表示正在稳步推进临港工厂二期8英寸SiC衬底扩产计划。其临港工厂的8英寸SiC总体产能规划约60万片，将分阶段实施。与此同时， 天岳先进 还于2024德国慕尼黑半导体展览会上首次推出了12英寸(300mm)SiC衬底产品,正式宣告超大尺寸SiC衬底时代的大幕拉开。</p>
+  <p>今年6月，士兰微电子8英寸SiC功率器件芯片制造生产线项目（士兰集宏）在厦门市海沧区正式开工。项目总投资为120亿元人民币，分两期建设，两期建设完成后将形成8英寸SiC功率器件芯片年产72万片（6万片/月）的生产能力。其中第一期项目总投资70亿元，预计在2025年三季度末实现初步通线，2025年四季度试生产并实现产出2万片的目标；2026年-2028年持续进行产能爬坡，最终将形成年产42万片8英寸SiC功率器件芯片的生产能力。</p>
+  <p>湖南三安SiC项目一期在全线投产后，为顺应6英寸向8英寸转型大趋势，二期项目全部导入8英寸生产设备和工艺。今年中旬，湖南三安8英寸SiC产线取得了积极进展。7月， 三安光电 在投资者互动平台表示，湖南三安项目后续扩产将生产8英寸SiC产品，目前，8英寸SiC衬底已开始试产，8英寸SiC芯片预计于12月投产。</p>
+  <p>同日，据西永微电园官微消息，重庆三安半导体SiC衬底工厂已完成主设备进机仪式。据重庆三安基建负责人透露，该项目目前整体建设进度已完成95%以上，正处于设备进场安装调试的关键阶段，预计8月底将实现衬底厂的点亮通线。</p>
+  <p>资料显示，重庆三安意法SiC项目总规划投资约300亿元人民币，项目达产后将建成全国首条8英寸SiC衬底和晶圆制造线，具备年产48万片8英寸SiC衬底、车规级MOSFET功率芯片的制造能力，预计营收将达170亿人民币。</p>
+  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MzkxMjIyNzU0MA==&amp;mid=2247774333&amp;idx=1&amp;sn=3c9f667215248c1ee8bc8adb91f8c90d&amp;chksm=c0c45cf8dede3bf8036656e5b1151b7dae5456a94c3448ff67c9e5c3fb28d85c9e3e94ab9e56&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“半导体产业纵横”（ID：ICViews）</a>，作者：丰宁，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3049626971196297</id>
+            <title>中国首个人造子宫，在郑州诞生</title>
+            <link>https://www.36kr.com/p/3049626971196297</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3049626971196297</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 24 Nov 2024 01:45:51 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 人造子宫, 胎儿存活, 科技创新, 伦理问题  
+<br><br>  
+总结: 文章介绍了中国郑州大学第一附属医院的人造子宫研究团队的最新进展，成功进行了“去ECMO化”人造子宫动物实验，胎羊在母体外存活达90分钟。团队的目标并非批量生产婴儿，而是为无法在母体内继续生存的胎儿提供生存机会。人造子宫的研究旨在解决生育过程中的医学难题，缓解女性在生产中面临的痛苦和焦虑。尽管技术面临伦理质疑，但团队希望通过不断努力推动人造子宫的实际应用。 </div>
+                        <hr>
+                    
+                    <p>将胎儿放进一个“特殊装置”，</p>
+  <p>用管道和母体连接，</p>
+  <p>任何和胎儿血型一致的人，</p>
+  <p>都能这样在体外“孕育生命”。</p>
+  <p>机器孕育生命、体外“怀孕”，</p>
+  <p>这些科幻电影里的场景，</p>
+  <p>或许正逐渐走向现实。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_72da484e84a64b3e92db146bf2a08a80@000000_oswg94118oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">也门分子生物学家Hashem Al-Ghaili构想的“人造子宫工厂”的概念图</p>
+  <p>今年7月，郑州大学第一附属医院完成了第四次“去ECMO化人造子宫动物实验”，</p>
+  <p>胎羊在母体外存活达90分钟，</p>
+  <p>为世界首例成功案例。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_9fcbdd05a53c4780a6f204f2a8b51df6@000000_oswg140691oswg1080oswg738_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>中国人造子宫团队正在做第四次“去ECMO”人造子宫动物实验</p>
+  <p>这个中国唯一的人造子宫团队，‍‍‍</p>
+  <p>其中大部分人是90后，</p>
+  <p>由医院胸外科、妇产科、麻醉科、体外循环科的临床医生自发组成。</p>
+  <p>他们像个“先锋队”，</p>
+  <p>没有固定实验室，常常“换地方”，</p>
+  <p>没有舆论支持，就拿自己的情怀凑。</p>
+  <p>面对伦理质疑，</p>
+  <p>团队负责人赵高峰解释，</p>
+  <p>人造子宫不是为了批量生产婴儿，‍‍</p>
+  <p>而是为了让没法继续留在子宫的胎儿继续生存。‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍</p>
+  <p>“人造子宫要解决的不是人的生产问题，</p>
+  <p>而是生存问题。”</p>
+  <p>编辑：张雅兰</p>
+  <p>责编：倪楚娇</p>
+  <h2>01 人造子宫，正在走向现实</h2>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_db7bba4eea474b26aa802d4cc9f4dca4@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">赵高峰，郑州大学第一附属医院肺移植外科主任，中国人造子宫团队负责人</p>
+  <p>‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍7月13日，在郑州一所高校的实验室外，一只从商丘宁陵运到郑州的母羊正安静地卧在实验室门外。它已经怀孕4个月，还有1个月就可以生产。</p>
+  <p>实验室里，十几位来自郑州大学第一附属医院的医生正在安装监护仪，铺设实验床，调整灯光。因为没有固定的实验室，他们刚从几十公里外的医院将器材搬运过来，实验准备工作，要从零开始。</p>
+  <p>他们是国内第一个，也是目前唯一的人造子宫研究团队。2021年，团队完成了国内第一例ECMO辅助下人造子宫动物实验，而今天他们即将进行中国第四次去ECMO化“人造子宫实验”。</p>
+  <p>此前，国外的人造子宫动物实验全部使用了ECMO作为体外供氧设备，给脱离母体子宫的胎儿供氧。但这种设备维护成本高，容易形成血栓、出血或感染。这次实验，在前三次实验的基础上，继续采取“去ECMO”方案，用母体为胎儿供氧，实现人造子宫实验新的突破。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_bf4fe6c9be04466d8e96213396ec07be@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>胎羊与母体建立并体循环，靠母体维持胎羊的生命体征</p>
+  <p>一切就绪，完成麻醉、气管插管、监护等前期工作，开始手术。医生将胎羊从母体子宫取出，放置到人工羊水中。</p>
+  <p>因为胎羊主要靠脐带获取氧气和营养。医生分离出脐带动、静脉，与母体建立并体循环，靠母体维持胎羊的生命体征，以此代替ECMO。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_0146ca0a379f4db7b469aa599fce146d@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">将胎羊放入“人造子宫”</p>
+  <p>一个小时后，胎羊生命体征一切正常，他们将脐带彻底离断，将胎羊放置于盛满人工羊水的恒温箱内。最终，胎羊成功存活90分钟。这也意味着，世界首例“去ecmo人造子宫”实验初步成功，至少验证了“去ECMO”的理念完全可行。</p>
+  <p>接下来，他们还要攻克新的难题，比如人工羊水精细化配制、人造胎盘模型的建立等。</p>
+  <p>赵高峰是郑州大学第一附属医院肺移植外科主任，也是这个人造子宫团队的领导者，对他来说，人造子宫并非是想实现“批量生产婴儿”的科幻图景，而是为了解决医生临床实践里的真实问题。</p>
+  <p>有时候，需要做手术的对象是还未出生的胎儿，但是子宫内做手术，风险系数相当高，要求时间短，技术高，即便手术成功，也可能造成孕妇流产。在世界范围内，能做宫内手术的医院非常少。</p>
+  <p>那如果将胎儿取出来做手术呢？胎儿与母体通过脐带相连增加了手术难度，即使成功后将胎儿放回母体，也容易产生一系列并发症。赵高峰便想，能不能制造一个类似于子宫的容器，干脆让胎儿在体外完成剩下的孕期？这成了最初研究人造子宫的动力。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_c38c204c1f894ca580100f1c7838ffed@000000_oswg121556oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_0f09482665784cd89473351da6cb7bff@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">荷兰埃因霍温理工大学的人造子宫模型 图片来源：TUeCursor</p>
+  <p>“所谓人造子宫，就是在人体之外，模拟子宫的生理状态、功能、环境，建立一个模型，将胎儿放进去，脱离母体，在这个装置内正常发育生长。”赵高峰解释。</p>
+  <p>目前，全世界共有5个团队正在研究人造子宫。荷兰埃因霍温理工大学、美国费城儿童医院以及中国郑州大学第一附属医院等等。1923年，生理学家霍尔丹（Haldane, J.B.S.）第一次提出了“人造子宫”的概念。他预言，人类在21世纪将不再遵从原始的本能生儿育女，70%的婴儿可能来自“体外发育”。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_a14cbc67593e4cbf8a3967f580d12912@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>EXTEND装置曾在动物身上试验成功：</p>
+  <p>2017年，美国费城儿童医院团队</p>
+  <p>将相当于人类23-24周的胎羊放入“生物袋”，</p>
+  <p>小羊经过4周“孕期”顺利出生</p>
+  <p>美国费城儿童医院正在研究的装置内，充满了含电解质的液体，人工模拟羊水环境。医生会将早产儿脐带血管连接到充氧系统，让胎儿的心脏能够像在自然子宫中一样泵血。</p>
+  <p>从经验、设备上来说，郑州大学第一附属医院的人造子宫团队与世界有巨大差距，但目前他们已经摆脱了ECMO设备，从这个层面来说，他们已经走在了世界最前列。</p>
+  <h2>02 缓解生育之痛</h2>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_3c6f73553a4e4d68b874e9c8ff7dd75b@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">张振宇和医院里的产妇</p>
+  <p>生殖医学更需要这样的技术。</p>
+  <p>已经工作8年的产科医生张振宇，也是赵高峰团队里的一员。起初听到赵高峰提起这个概念，他也觉得异想天开，“如果有人造子宫，我们产科医生岂不是都要失业了？”但他仔细一想，人类面临很多难解的问题，尤其是医学，常常让人束手无策，为什么不再大胆一些，往前迈一步？</p>
+  <p>首先，许多人因为身体原因，无法生出一个健康的孩子，包括夫妻不孕不育、高龄生产风险、婴儿器官发育不完全等等。根据中国人口协会、国家计生委发布的数据，在中国每6对夫妇中就有1对正在经历不孕不育。</p>
+  <p>工作后，张振宇对生育也有了新的理解，“在当医生前，我一直觉得生孩子，挺自然，挺顺利就结束了。这8年，见到那么多复杂的病例，才知道，生孩子真的很复杂，有很多关要过。”</p>
+  <p>比如曾有一个孕妇，到了孕中期才发现自己有心脏病，这是妊娠大忌，医生建议引产，但孩子不满24周，属于超早产，能成功活下来的几率只有10%。即使勉强救活，孩子也可能大脑发育不全，免疫力低。</p>
+  <p>还有一个孕妇，因为怀孕困难，尝试了多年的试管婴儿，等到终于怀孕，却查出脊柱上有一个恶性肿瘤。她面临两个选择，要么引产，化疗救自己，要么放弃治疗，保住孩子。无论是哪个选择，都是极艰难的。</p>
+  <p>张振宇也曾遇到很多突发的紧急情况。一位即将生产的孕妇在医院待产，半夜的时候宫缩强烈，羊水破了，脐带也流了出来，但此时胎儿依然在子宫内。在短短7、8分钟内，胎儿就会失去胎心死亡。</p>
+  <p>情况紧急，当时已经来不及打麻醉药，孕妇同意后，医生只能在没有给她打任何麻醉的况下进行手术，生生将胎儿剖了出来。</p>
+  <p>“危险、疼痛，就是妇产科常常看到的”，张振宇觉得，虽然人造子宫代替生产不太现实，但或许在未来，人造子宫能够为这样的病例提供新的选择，降低女性生产的痛苦，也提高胎儿的存活率。</p>
+  <p>除了解决医学难题，人造子宫或许能够缓解生育焦虑，“很多孕妇会面对羊水栓塞等棘手的问题，虽然发生率很低，但她们在生产前就陷入了焦虑。还有生育带来的损伤，盆底肌松弛、妊娠纹、长胖……都成了女性拒绝生育的原因之一。”张振宇说。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_7af8a88d785d4eb5a64d425e949b4d4b@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">《坡道上的家》讲述女性因育儿， 在家庭和社会上遭受极大不公</p>
+  <p>身体的损害之外，很多女性也面临着产后抑郁症，职场发展瓶颈等问题，很多人觉得，人造子宫或许能将女性从生育中“解放”出来，达成生育层面的男女平等。</p>
+  <p>但是，人造子宫也一直面临着各种伦理拷问，如果未来这项技术成熟，人类是否会被“批量化”生产？如果人在人体以外的设备中被“人工孕育”，是否会磨灭掉人类最基本的人性？母亲和孩子之间的联结会不会减弱？</p>
+  <p><strong>以下是赵高峰的讲述。</strong></p>
+  <h2><strong>03 众人拾柴火焰高</strong></h2>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_9a1157ed43924c37b9b77e1fb5959963@000000_oswg116181oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">中国人造子宫团队全体成员，在第一次实验后合影</p>
+  <p>当我提出做人造子宫的研究后，反对声一片。</p>
+  <p>起初很多人都不理解我们要干什么，申请课题也申请不到。因为这完全突破了传统的理念，大家觉得怎么可能将一个胎儿取出来，做完手术后还能被放回一个子宫继续怀孕？他们觉得是异想天开，根本不可能，就是瞎折腾……我得到的几乎全都是否定回答。</p>
+  <p>但是我们团队都觉得前景非常好，其实除了能够未来给胎儿做手术，在畜牧业的应用前景也很广。</p>
+  <p>因为缺少科研项目的支持，我们一直在自己做研究。每年的花费大概是30到40万，都是团队大夫们从自己的工资里挤出来凑到一起的。这几年总共花了100多万，其中70%都是我自己凑的，让团队里年轻医生们的压力小一些。我们自己想做的事情，不会计算得失回报，都为了共同的目标和情怀。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_37b49d654131402bb6d9062bd02d0cb0@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">相关配图</p>
+  <p>每次做实验，都要将全部器材搬运过去</p>
+  <p>因为没有单独的专门实验室，每次实验的时候，我们只能借别人的实验室，早期阻力也很大，但我们从来没想着算了。</p>
+  <p>实验要用到很多医疗器械和设备，但我们经费有限，没法全部出去买，而且没有渠道，也很难买到。目前的实验器材都是兄弟科室帮我们筹集的。</p>
+  <h2>因为没有固定的实验室，每次做实验，我们都要找推车，大包小包地把器材运到临时借来的实验室。但大家都没怨言，这也让我非常感动。</h2>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_857703a260484d56b9993ef1736193f1@000000_oswg180432oswg1080oswg1818_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">赵高峰和实验羊提供者王伟（左）</p>
+  <p>最开始，我们实验用的羊是山东一个小伙子提供的。之前我给他做了一个胸部的手术，术后恢复很好，所以他一直对我们医生很有感情。后来他听说我们做实验需要用羊，就提出帮我们找。</p>
+  <p>因为他生活在农村，周围很多人家里都在养羊。每次他帮我们找好怀孕的羊，都开个三轮车，从山东运到河南，路程很远很辛苦。刚开始他一分钱都不要，后来我们实在过意不去，他才收了一部分。</p>
+  <p>其实，实验用羊需要用国家级种羊场的羊，刚开始的时候，没办法要求那么高。</p>
+  <p>我们团队里大部分医生都是90后，平均年龄30多岁，非常年轻。他们有很多临床工作要做，要看诊、查房、换药、做科研，比我还要忙，但周六还要抽时间参与人造子宫动物实验。</p>
+  <p>其中有个医生，他对羊毛过敏，挺严重的，但是他还是坚持每次实验都参加了，他们都很不容易，之所以愿意投入，是觉得能学到东西，觉得这件事有价值。</p>
+  <p>总而言之，众人拾柴火焰高，这件事慢慢做起来了，很多人看到了我们的坚持，也开始支持我们。</p>
+  <h2>04 男人怀孕 不是不可能</h2>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_06351d9d9ea04305992edb16cf9af001@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">大众想象中的人造子宫Ectogenesis 图片来源：Hashem Al-Ghaili</p>
+  <p>未来如果这个技术真正成熟，让男性“怀孕”也不是不可能。首先，看你怎么理解怀孕的概念，如果只是用一个器皿孕育生命，那按照我们的实验结果，我们完全可以将胎儿和父亲“连”在一起。</p>
+  <p>将胎儿从母体里取出来以后，放进人造子宫里，也许是个“袋子”一样的东西，然后我们将胎儿和父亲的血管连接，让父亲给胎儿提供氧气和营养。事实上，任何一个血型和胎儿一致的人，都可以成为供养者。</p>
+  <p>这个父亲就可以在体外背着这个“袋子”，到处工作、旅行，都不影响。父亲累的时候，就用一个小插管和孩子的母亲连接起来，两个人可以轮流替换。甚至他们自己就可以完成这个操作。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_4909f38968f042a89f8c914f28da363d@000000_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图片来源:&nbsp;Hashem Al-Ghaili</p>
+  <p>当然，现在谈论这个还是太遥远了，其中也涉及很多伦理问题。我们研究人造子宫，并不是要解决人类的生产问题，其实还是要解决很多胎儿的生存问题。</p>
+  <p>我们不是直接将胚胎放进一个容器里培养，而是让胎儿先在人类子宫里成型，在不得已的情况下，再把它请出来，放在人造子宫内继续存活下去。</p>
+  <p>比如，有些胎儿超早产，如果离开子宫就会死掉，那我们就能把胎儿放进人造子宫，或者有些胎儿先天有些畸形，不适合在子宫里发育，我们也可以把胎儿放进人造子宫里。</p>
+  <p>而且，在一个透明的容器里观察胎儿，我们可以看到它的肢体动作、吞咽状态等等，这些优势是人类的子宫没法比拟的。</p>
+  <p>无论是什么科技，包括试管婴儿，在初次面世的时候，都引起了非常大的争议，但等到它们发展成熟，这些问题也都不再是问题。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_ddd772d8e8bb446d8b52250fec8adf69@000000_oswg128528oswg1080oswg994_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">很多人想象中的“人造子宫”：夫妻用机器在家养育孩子，图片来源：Usbek &amp; Rica</p>
+  <p>我认为，人造子宫要真的发展成熟，还有几个阶段要走。</p>
+  <p>首先是ECMO人造子宫，现在全世界都在做这个研究。其次是去ECMO的人造子宫，我们已经处在这个阶段。接下来的目标，是实现胎盘化的人造子宫。</p>
+  <p>我们最终希望实现的，是“全信息化”的人造子宫。其实胎儿在母体内，不光是获得营养物质，母亲说的话、触摸、情绪、她的激素分泌，可能都会对这个胎儿的发育有影响。如果人造子宫能够达成这一步，肯定就是最高级别的，但这方面的信息我们掌握很少，目前还不知道要怎么做到。</p>
+  <h2>05 要埋头苦干，也要抬头看太阳</h2>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_bb34a0ac6d334f05b49ce85af286d148@000000_oswg46844oswg596oswg1034_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">赵高峰正在查房</p>
+  <p>我之前在郑州做了7年外科大夫，后来又去美国哈佛医学院学习、工作了10年。我一直觉得临床工作中要做一些实际的事情。</p>
+  <p>外科大夫可能都一根筋，比较倔，我在实际工作里发现了这个问题，就特别想知道怎么解决这个问题。平时我也很喜欢去思考，包括去ECMO的人造子宫，也是我在有一天吃饭的时候，突然想到的。</p>
+  <p>我是农村出身的，小时候家里经济条件不好，上学的时候我就打了很多零工，去洗盘子、发传单、卖鞋垫，什么都做过。可能是因为一路都在吃苦，现在做科研，我也敢拼，敢打恶仗。我和普通的老百姓之间没什么隔阂，我知道他们生病、看病不容易，你了解他们的处境，也能感同身受。</p>
+  <p>每年过春节的时候，我会组织医院医生，给环卫工人发些吃的穿的，给家庭情况特殊的病人捐款。</p>
+  <p>我每天都很忙，比如今天，我早上去医院查房，查了100多个病人，然后去门诊，中间离开去手术室做了个手术，中午简单休息一下，下午就去做人造子宫的动物实验。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241124/v2_7e77938ecc39482d83c692700e4b6b25@000000_oswg108227oswg1080oswg965_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">工作之余，赵高峰总会挤出时间读书、运动</p>
+  <p>但我还是会抽出很多时间去运动，我的办公室里常年放着几个羽毛球拍，我经常下班拎起一个拍子就走了，每天至少打1小时羽毛球。</p>
+  <p>我最近也开始学滑板、学滑翔伞，周末去郊区种地，以前就想做的事情，现在都开始做了。</p>
+  <p>我觉得无论是做医生还是做科研，身体是很重要的，别人老说看我像打了鸡血一样，每天精神头很足。我总是有一股冲劲，要做，就要做到一个行业、一个领域里真正的专家，尤其是科研，不能急功近利，要有自己的情怀。</p>
+  <p>所以我希望能给老百姓看好病的同时，也真正在科研上做出一些创新，做出一些引领性的东西。我们在埋头苦干的同时，也要抬头看天，抬头看太阳。</p>
+  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MjM5MDI5OTkyOA==&amp;mid=2665860473&amp;idx=1&amp;sn=74ce31a726a66287425b384bf7ac2a8a&amp;chksm=bc81ce457ece9dca90b3968f50d60a185cd3e0c41bc5ad9d40fa70947d97e9a5c4e658c69777&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“一条”（ID：yitiaotv）</a>，<span style="letter-spacing: 0px;">编辑：张雅兰，</span><span style="letter-spacing: 0px;">责编：倪楚娇</span><span style="letter-spacing: 0px;">，36氪经授权发布。</span></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.36kr.com/p/3048739130198658</id>
             <title>旧去新来，拥抱更辽阔的世界丨WISE2024 商业之王Day2看点大揭秘</title>
             <link>https://www.36kr.com/p/3048739130198658</link>
@@ -2050,285 +2410,6 @@
   <p>创投日报记者注意到，2021年，合肥国资以6.22元/股的价格认购欧菲光股份，总金额为12亿元。目前，欧菲光股价在16元/股左右，为当初合肥国资出手时的2倍多。也就是说，不到5年时间，合肥国资在该笔投资上已收获不少。&nbsp;</p>
   <p>彭志强总结道，收购后，地方国资可以将上市公司作为平台，进行增发、可转债、持续并购或孵化，或装入辖区内有潜力的资产。“并购后的整合难题，是地方国资面对的机遇和挑战。”&nbsp;</p>
   <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/wyO8CbhFS7KqTJVJ84XiDQ" rel="noopener noreferrer nofollow" target="_blank">“创投日报”</a>，作者：陈美，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3047230838537990</id>
-            <title>不再只是听音，AI耳机大爆发：要做个人万能搭子？</title>
-            <link>https://www.36kr.com/p/3047230838537990</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3047230838537990</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Nov 2024 08:29:44 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: TWS耳机, AI耳机, 市场竞争, 功能创新  
-<br><br>  
-总结: 根据Canalys的统计数据，2023年第三季度全球TWS真无线耳机销量达到9230万台，显示出该行业的活力。尽管市场竞争加剧，尤其是苹果的市场份额遥遥领先，但耳机行业的头部化并不严重，仍有品牌成长为巨头的机会。AI耳机的兴起为行业注入新活力，现有产品如FIIL GS Links提供会议录音、同声传译等功能，适合职场人士和学生使用。尽管AI耳机的功能具备实用价值，但价格仍是普及的关键因素，未来市场规模扩大可能会导致价格下降。 </div>
-                        <hr>
-                    
-                    <p>Canalys统计数据显示，今年第三季度全球TWS真无线耳机销量为9230万台，同比增长高达15.5%。与手机、PC、平板电脑等陷入瓶颈期的行业不同，TWS耳机行业仍保持着较强的活力。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_81d74d5d8d6e473293aaa3633349621f@1547419282_oswg41040oswg607oswg391_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图源：Canalys）</p>
-  <p>然而，行业飞速发展的盛况之下，厂商们却倍感压力。从数据能够看出，除了苹果的份额实现了断崖式领先，销量前五的其他厂商市场份额差距不算太大，而且前五的品牌累计份额仅有49.9%。</p>
-  <p><strong>该数据意味着耳机行业头部化并不严重，任何品牌都有成长为巨头的机会，耳机厂商之前的竞争可能会不断加剧，延续大鱼吃小鱼的局面。</strong>来自竞争的压力迫使厂商加快探索突破点，寻找成为行业巨头的契机。</p>
-  <p>到目前，蓝牙耳机已经存在头戴式、入耳式、半入耳式、挂脖式、耳挂式、耳夹式等多种形式，耳机厂商几乎将各种设计理念探索了一遍。外观设计太容易被模仿，很难拉开实质性差距。在此大环境下，不少厂商瞄准了新领域——AI。</p>
-  <h2><strong>01 AI耳机，会议、网课、境外游好帮手？</strong></h2>
-  <p>为耳机加入AI功能，并没有听起来那么简单，考虑到耳机的功耗、性能、网络等因素，耳机的部分AI功能大概率仍要与手机联动。技术难题先放在一边，<strong>AI耳机的功能是否可以打动消费者，才是AI耳机销量的决定性因素。</strong></p>
-  <p>现阶段已有不少AI耳机在售，以日前FIIL发布的新品GS Links为例，该耳机联动了豆包AI大模型，可提供会议录音摘要、通话录音摘要、同声传译三大功能。据FIIL介绍，这款耳机内置存储芯片，一次充电可以记录4小时内容，且支持双耳交替记录，可识别四川话、粤语、上海话等方言。</p>
-  <p>在豆包AI大模型的加持下，FIIL GS Links的识别准确率可达98%以上，而且可以脱离手机单独使用。无论是通话还是线上线下会议，FIIL GS Links都能一键录制，并通过App转写成文字，还能够一键摘要，提取重要信息。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_b69f04406a3f4ea8aab50e0b4b390891@1547419282_oswg57052oswg1440oswg1138_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图源：FIIL）&nbsp;</p>
-  <p>FIIL GS Links的同声传译功能则可以智能识别英语，并进行翻译，通过手机App，还能将用户所说的中文翻译成英语文本给对方看。对于有与外国人交流，且英语水平有限的用户而言，FIIL GS Links可以帮助他们告别语言不通的困境。</p>
-  <p>另外，FIIL GS Links可识别中、英、日、韩、法、俄、西班牙、葡萄牙、印尼语、马来语等全球主流语言，且均支持文本互译，可基本满足用户的对外交流需求。&nbsp;</p>
-  <p>录音转文本+重点摘要和同声传译功能，是今天AI耳机普遍支持的功能。如时空壶推出的W4 Pro AI同传耳机，专注于同声传译功能，支持40种语言、93种口音互译；科大讯飞录音降噪会议耳机Pro 2会议录音、转写、摘要，以及同声传译功能。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_72b82df608bf4f1d8208ac11f0bff613@1547419282_oswg187428oswg1440oswg1511_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图源：FIIL）&nbsp;</p>
-  <p><strong>单纯考虑实用价值，AI耳机的功能特性适合职场人士、学生、境外旅游人群。</strong>AI耳机可以帮助职场人士记录会议、摘要重点内容，从而提高工作效率。学生党则可以通过AI耳机记录课堂内容，并在AI大模型的帮助下摘录和总结重点，以便于课后复习。经常到境外旅游的人群，则可以利用同声传译功能与外国人交流，不用担心因语言不通造成诸多不便。</p>
-  <p>选购AI耳机还要考虑价格因素，当前AI耳机普遍价格不菲，时空壶W4 Pro AI同传耳机和科大讯飞录音降噪会议耳机Pro 2价格都在千元以上。不过，市场面上也不缺价格相对实惠的AI耳机，FIIL GS Links价格仅为499元，几乎相当于普通开放式耳机白送AI功能。</p>
-  <p><strong>总的来说，现阶段AI耳机所能提供的功能，已具备一定的实用价值，虽然部分产品价格高达数千元，但也不乏实惠的产品。不过会议录音、转写和总结功能，现今许多手机、PC、平板电脑支持，一些软件也能够实现，除了同声传译，AI耳机的其他功能好用、有用，却并非无可替代。因此，AI耳机仍需加入更多功能。</strong></p>
-  <h2><strong>02 AI耳机潜力无限，功能仍有待丰富</strong></h2>
-  <p>洛图科技数据显示，今年8月国内电商平台AI耳机销量同比增长763.3%，销售额翻了近14.5倍。该数据表明，国内AI耳机市场正以极快的速度发展，均价也翻了一倍。然而AI耳机在耳机/耳麦品类中的份额占比却仅有1.4%，仍有较大提升空间。可以预见，未来加入布局AI耳机品类的企业会逐渐增多，行业的竞争也会更加激烈。</p>
-  <p>事实上，耳机早已与AI功能密不可分，只是过去耳机的AI功能集中在AI降噪、AI通话等方面，所带来的体验提升不够新奇和特殊。录音、转写、摘要，以及同声传译的到来，为行业注入了新活力，而加入更多功能，则是耳机厂商面对行业竞争必须做的事，<strong>唯有丰富AI耳机的功能，方能提高产品的竞争力。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_7a712e0b970e49a09b04d95f8547e6d0@1547419282_oswg98937oswg1440oswg1432_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图源：FIIL）&nbsp;</p>
-  <p><strong>小雷认为，AI耳机可以考虑在AI体征监测、端侧AI大模型两方面尝试突破，并通过加入新功能细化市场，提供多元化产品供消费者选择。</strong></p>
-  <p>AI体征监测，是指AI耳机通过传感器实时监测用户的心率、压力等信息，甚至捕捉用户的动作。国内健身人群日益庞大，其中许多人不喜欢戴手表，却喜欢佩戴耳机，边运动边听音乐，支持AI体征监测的耳机，可以满足这部分用户的需求，还能在用户运动的同时，根据身体数据进行指导。</p>
-  <p><strong>未来AI体征监测或许还可以搭配AR和VR，监测和记录用户的动作，或成为设备感知现实世界的触点。</strong></p>
-  <p>从近几年各大AI公司、手机厂商、PC厂商的表现不难看出，AI大模型正在从云侧转向成本更低、隐私安全性更高的端侧。各大企业也纷纷推出了参数量更低的小型大语言模型，部分模型的参数量甚至不到30亿。</p>
-  <p>耳机厂商为实现AI功能脱离手机使用，也在为耳机或耳机仓内置AI算力芯片，并本地部署模型。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_f5d33aae51854e72b0644b5030b2da21@1547419282_oswg534525oswg1482oswg1493_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图源：科大讯飞）&nbsp;</p>
-  <p><strong>将AI耳机和耳机仓打造成集合端侧AI大模型的设备，提供日程记录、快速笔记、AI解答疑问等功能，并且一定程度加入对手机设备的控制能力，将能够释放AI耳机的潜力。</strong>在连接手机App的情况下，AI耳机还可以将云侧大模型和端侧大模型融合，提供更丰富的功能，例如语音搜索、语音控制AI绘图、AI聊天等。</p>
-  <p>过去，曾有许多尖端科技，包括元宇宙、区块链等被奉为“第四次工业革命”，但小雷认为真正有潜力成为第四次工业革命驱动力的，现在看来唯有AI。<strong>AI时代的到来，为数码科技、家电等品类的产品带来了变革与机遇，顺应时代发展的方向，方能提升产品的功能与价值，并对产品销量提升起到促进作用。</strong></p>
-  <h2><strong>03 挑战与机遇并存，价格成普及关键</strong></h2>
-  <p>头部化并不严重的耳机行业，既有苹果、小米、华为等手机巨头，也有索尼、FIIL、漫步者等音频王者，还有科大讯飞这类跨行入场的企业，更不用说诸多中小厂商。<strong>多年时间发展，令耳机结构设计的探索基本走到了尽头，AI则赋予了耳机品类更多可能。</strong></p>
-  <p>FIIL、科大讯飞、时空壶等部分企业，已率先入局，将耳机与AI功能融合，为用户提供同声传译、会议录制和总结等实用功能。<strong>未来，与AI大模型融合，进一步丰富AI耳机的功能，或为该行业的发展趋势。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_c4b7f8efedbc47dab78e40044b6b2d08@1547419282_oswg133728oswg1619oswg1080_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图源：雷科技摄制）&nbsp;</p>
-  <p>已将AI融入系统底层架构的手机巨头，在AI耳机领域具备先天优势，但传统耳机厂商依然机会很大。</p>
-  <p>除了更加丰富的功能，价格也将成为影响产品销量和AI耳机普及度的重要因素。各大品牌已推出的AI耳机，基本在千元以上，部分产品价格甚至高达三四千元，仅499元的FIIL GS Links反而属于“异类”。<strong>价格是影响AI耳机普及能力的重要因素，过于昂贵的产品恐怕难以承担普及AI耳机的重任。</strong></p>
-  <p>好在，AI耳机产品贵原因或在于未能大规模量产，导致生产成本压不下来。<strong>待AI耳机市场规模进一步提升，平摊了生产成本后，AI耳机很可能迎来一波大降价，买耳机送AI功能近在眼前。</strong>499元的FIIL GS Links拉开了平价AI耳机的序幕，更多实惠的产品即将到来，尚未入场的耳机厂商们，预计也将在近两年陆续进场。</p>
-  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s/2F2LMdsX36AouvCd1rlf_A" rel="noopener noreferrer nofollow" target="_blank">“雷科技”</a>，作者：雷科技，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3047161676204932</id>
-            <title>“官网订间会议室只需2500美元”，联合国成了小红书博主制造“精英人设”的流水线工厂？</title>
-            <link>https://www.36kr.com/p/3047161676204932</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3047161676204932</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Nov 2024 08:29:09 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 联合国, 精英人设, 付费体验, 社交媒体  
-<br><br>  
-总结: 文章探讨了联合国作为一个精英人设的象征，越来越多的博主和年轻人通过参观和演讲来塑造自己的精英形象。联合国的参观和活动逐渐商业化，成为一种可以通过金钱获得的体验，甚至有人花费高额费用参加特朗普的就职典礼。文章还提到，社交媒体平台如小红书上，精英人设的展示和塑造成为一种流行趋势，许多人通过参与联合国活动来提升自己的社交地位。尽管这种现象引发了质疑，但仍有不少人愿意为此付费。 </div>
-                        <hr>
-                    
-                    <p>“一夜之间我关注的博主都去了联合国”，记忆里出现在高中课本和电视机上的联合国正在化身为国际组织版Dior，前有奢侈品疯狂批发大使，现有国际组织为精英人设保驾护航。&nbsp;</p>
-  <p>联合国甚至成为一个博主赛道，贴满了学霸的、世界的精英标签。参观联合国复刻易烊千玺同款图已经变成了精英们的基本操作，越来越小众的玩法还有“今天下课后联合国演讲”，“<strong>睡一觉之后再去联合国领个奖</strong>”。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_aa170746c8974e4d951fd96a72547483@000000_oswg257395oswg1080oswg1834_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p>小众，但又能被快速复制。</p>
-  <p>最具时代性的精英人设是<strong>花49999美元参加特朗普明年的宣誓就职典礼</strong>，第一排c位还有专门摄像师服务，就为让精英们能够“见证顶级权力交接”。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_31ebaece31304537a3ea07a94761eebc@000000_oswg122320oswg1080oswg1441_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：小红书@夜行锦衣&nbsp;</p>
-  <p>你对着手机屏幕看到这张颇有微商色彩的宣传海报，一边感慨“手机，你这是把我带到了哪里”，一边怀疑：“这怕不是特朗普想自己赚一笔”。</p>
-  <h2><strong>01 实现《我在联合国度过一天》，需要几步？</strong></h2>
-  <p>曼哈顿太大，纽约也有穷人区，位于纽约曼哈顿的联合国总部才是精英人设的最佳演绎地。</p>
-  <p>就像小红书一位走精英路线的颜值博主——Shirley林，与比尔盖茨一起吃晚宴，和谷爱凌等人一起参加全明星晚宴，最近因频繁出现的“联合国”title而走红。</p>
-  <p>“这个会议厅是小时候来参观时第一个看到的厅，如今学有所成回到一切的起点，来联合国演讲和领奖。”</p>
-  <p>看着Shirley林穿着裁剪精致的黑色西装、干练的黑色打底，再配上富家千金同款大波浪和精致妆容，至此“<strong>小说里的高干女主角有了脸</strong>”。当年《小时代》的四姐妹只能在上海相爱相杀，想来还是郭敬明没有见过“真正的上流家族”。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_58a9d5da2e754ef08cc84d0ddc565474@000000_oswg1505380oswg1080oswg1392_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：小红书@Shirley林&nbsp;</p>
-  <p>恰好姓林，又恰好生活在纽约，有几百米豪宅也有硕大的祖母绿项链，网友看着Shirley林越来越熟悉，莫不就是《爱情公寓》里的清醒女性代表、曾经的故人林宛瑜？“<strong>林氏国际银行千金</strong>”就这样有了现实版本。</p>
-  <p>Shirley林只是纽约富二代勇闯联合国的一个代表，还有嘴上时刻挂着成长、能量和学习的精英们，也把联合国当作人设跳板。<strong>去参观是“看看世界”，要演讲才能算是实现了20多岁时的梦想。</strong></p>
-  <p>相比之下，那些从小在模拟联合国打转、张口闭口就能掌握5国语言的名校学霸都显得小镇青年味十足，仿佛一个在书写奋斗史，一个在讲述上个世纪的夜上海（纽约版）。</p>
-  <p>但随着联合国精英扎堆，质疑声也开始出现：<strong>联合国也喜欢批发精英？</strong></p>
-  <p>“<strong>联合国大楼的会议室对公众开放，吃饭也只需花几百块钱买票，甚至有人80美元就让市长出席婚礼，和比尔盖茨共进晚餐的名额更是有人花1200刀买到过</strong>。”在Shirley林出席联合国演讲的视频下，有网友科普。</p>
-  <p>联合国精英人设真的可以花钱买到吗？实现《我在联合国度过一天》又需要几步？</p>
-  <p>“<strong>只需要四步</strong>”。</p>
-  <p>正如学校有985和211之分，联合国精英虽然都冠以“联合国”的title，但也有高低之分。首先从参观开始，当你还在惊叹留子们“打卡联合国”时，联合国早已悄悄把打卡、游览做成了产业链。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_a43ab94fdfac4c3fb1c3b71b68fc5090@000000_oswg169106oswg1080oswg1130_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p>小红书早就写好了预约纽约总部的攻略：<strong>打开官网就能看到巨大的“book”（预定），从儿童到成人单人费用15-26美元不等</strong>，还有来自13个国家的专业导游团队为你讲解，全程1小时左右。到了那张背景为大会议室的经典景观位，<strong>贴心的导游还会给你留下2分钟的拍照时间</strong>，保准你可以在朋友圈惊艳所有人。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_4e6b62eaaa1e441084a6781dc92120ec@000000_oswg266479oswg1080oswg1405_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：小红书@拔丝地瓜&nbsp;</p>
-  <p>也有不花钱的选择，直接走到总部大门进行访客登记就可以和一排排整齐的各国国旗合照，至于发布文案是“在<strong>上东区散步正好散到了联合国</strong>”彰显本地人的local感，还是“<strong>刚下飞机，谢谢联合国邀请</strong>”的知乎体，主要看你喜欢哪种精英人设。</p>
-  <p>诚如参观国内名校必须要一顿名校饭才能种出智慧的种子，到了咱联合国的地盘，能不能留下吃饭、吃什么、怎么吃也是考验精英人士的重要一环。</p>
-  <p>即使不少曾在联合国实习、工作的网友曾透露，“<strong>想在联合国总部吃饭很方便，花钱就能进去</strong>”。但真正的“联合国总部干饭王”一定要体现出自己的privilege，纵使咱吃饭的地儿或许一样，你是自己花钱，而精英们“参加的私人宴会，是只有国际代表才能享受的内部预约”。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_e58dda2805f04e1e95754e8786a543e9@000000_oswg281830oswg1080oswg1572_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：小红书@张小姐不是赛琳娜&nbsp;</p>
-  <p>正如你不懂同一份饭放在饭盒和锅里能有什么本质区别，名校生吃得也是五谷稻麦黍菽稷，再精英的人也是流鼻涕上厕所统统在行。联合国私人晚宴也逃不饭缩力极强的白人饭，但你知道这就是和食堂大锅饭不一样，<strong>这叫做精英的味道</strong>。</p>
-  <p>不过，无论是去联合国参观还是吃饭都仅仅只是玩转朋友圈，在人均年薪百万、每天问出“年薪50万在北京活不下去”的互联网版纽约、富婆聚集地之小红书上，这些不过尔尔。对于见过大世面的小红书网友来说，去联合国参观比你到家门口的711买饭还要简单。如今，或许是为了匹配小红书的超高调性，<strong>小红书博主们已经升级到把【联合国演讲】当作精英的时尚单品</strong>。</p>
-  <p>虽然真正演讲镜头里只有一个联合国演讲台，画面持续5秒并匹配中英翻译，剩下的都是你花钱就能买到的联合国内部参观，但对于骨子里就有着对美好事物想象的网友来说，足够了。</p>
-  <p><strong>而联合国的会议室，早已开放对外出租的业务</strong>。</p>
-  <p>进入联合国官网，打开“会议室服务”预定服务，就能看到“对联合国常见的会议、NGO和其他类型的组织开放”，不仅提供了电话和邮箱方便你联系，并且你可以根据口袋的厚薄依次选择口译、名牌、讲台标志和房间设置、在《联合国日刊》上发表材料以及网络直播服务等等服务。</p>
-  <p>要么说联合国能联合各国，服务也是极为顶级。根据业内人士指出，“<strong>联合国总部大会议室官方报价2500美元一天</strong>”。我本想拿着公费体验做一次联合国精英，先是被价格劝退，其次被美签阻碍。所以说想要成为联合国精英也没有那么容易，这是属于纽约留子的天下。</p>
-  <p>正如在纽约大学读书的“超级富婆”Shirley林，活动主题叫做《赋能未来领袖，实现可持续未来》，像极了你领导喜欢平常喜欢写的八股文，从主题到参会嘉宾处处透露着“身在外也不忘祖国”，看着会议各位嘉宾的名字，你就知道大抵都和国人有着千丝万缕的关系。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_90d6dd828fb445b8a77777588f73388d@000000_oswg548438oswg1062oswg884_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源网络&nbsp;</p>
-  <p>而邀请联合国内部人士参与本身也是联合国兜售的一个业务，官网直接挂出：<strong>有联合国内部演讲、网上参与、或者参与外部演讲活动3种模式任君选择，模式不同价格不等</strong>。</p>
-  <p>最受欢迎的“联合国内部听讲座”，每场需要20-25名参与者，价格165美元起。近期想要拍摄《我在联合国内部听讲座》的精英们需要抓紧，昨天我查询这项活动已经预约到了明年一月份。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_691d373333d34a7694a57273cb59a9e4@000000_oswg397237oswg725oswg339_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p>如今联合国参会和演讲开始变得泛滥，联合国精英们也急了，于是抓耳挠腮挖掘出打造人设的最后一步——<strong>【拿奖】</strong>。</p>
-  <p>不过联合国精英似乎极其喜欢【未来】和【青年】二字，所涉奖项仿佛致力于打造下一个明日之星。</p>
-  <p>眼瞅着明日之星扎堆批发，网友纳闷：“<strong>联合国的奖是什么人都能领的吗？</strong>”Shirley林获得的是“未来精神领袖”，颁发机构是全球人居论坛GFHS，“并非联合国下属任何部门，只是与联合国各个机构合作”，有业内人士指出，“恰好这个组织今年的论坛举办地在联合国总部。GFHS官网列出了今年论坛的9个奖项，每项有1人获奖，但没有Shirley林的名字”。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_8dfbdd3a7829481db37d6db29867da2b@000000_oswg93522oswg1080oswg1369_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：小红书@yi只煎饺&nbsp;</p>
-  <p>但你不能说这就不是“去联合国领奖”，地点、事项每一个都能对得上。</p>
-  <p>所以，你只需要花钱预约进联合国大楼，再花钱租一间会议室，最后拉着亲朋好友建立一个“全球海外华人联合国菁英会”或者创业者峰会，名字要高大上，最后对着镜头来一段云里雾里的关于青年、全球、未来的英文演讲，<strong>你就是互联网上振奋人心的大女主，你就是传言中的归国千金富二代，你也可以拥有《在联合国度过的一天》</strong>。</p>
-  <p>还担心英文演讲不会写？“直接找GPT”。</p>
-  <h2><strong>02 “见证顶级权力的交接，仅需49999美元”</strong></h2>
-  <p><strong>精英，一个可上可下、会被崇拜也会被调侃的流动性人设</strong>。</p>
-  <p>前有精英杰出代表“金融男”们变得人人喊打，嘴上说着玩转A股一天进账七位数，结果吃饭A钱能精确到小数点后一位。后有周受资因tiktok听证会横空出世，藤校新加坡CEO每一条都对标小说男主角，至此说起精英的故事连脸部线条都分析得有模有样。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_06a56a942fd04dffa1ecbb1215d98586@000000_oswg142360oswg1080oswg938_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p>但无论是金融男还是周受资都比不过<strong>aka纯金真精英：前北美地产大亨，现美国第47任顶级权力特朗普</strong>。</p>
-  <p>随着78岁红脖老头重回白宫，精英们打造人设的市场又红火了起来。</p>
-  <p>起初是一张叫做“<strong>1月19日-20日，49999美元见证美国第47任顶级权力的宣誓就职典礼</strong>”的海报在互联网上掀起了腥风血雨，毕竟兜售顶级权力就职典礼这事儿段子手敢说，网友都不敢想象。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_9265e42faeca4595bef24554c57d6913@000000_oswg126370oswg800oswg1431_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p>“这算志愿时长吗？给学分吗？能算实习吗？”一生热爱刷分的网友看到参会2字首先提出三问，再一看时间又犹豫起来：“有点赶，18号还得看杨子回归家庭大直播”，毕竟美国大选四年举办一次，遇上特朗普你估摸着在现场还得吃可口可乐和麦当劳，但杨子《再见爱人》一生就这么一次。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_f5cf471688ae4f899bc4df1a89ceb744@000000_oswg40136oswg1080oswg392_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p>网友把售卖美国权力交接当笑话讲，本着为精英们增加更多可能性的初心，我咨询了一家主要业务为境外旅游的旅行社，没想到得到的答案是：“<strong>49999美元的门票已经卖光了</strong>”。</p>
-  <p>仅需49999美元，你就可以<strong>在1月19日参加华盛顿希尔顿酒店的“黑领带和靴子”顶级权力就职舞会</strong>，OOTD向老钱风靠拢，女士长裙男士燕尾服，在21世纪享受当年盖茨比的纸醉金迷。发布文案就叫：<strong>有幸受邀参加了川普的人生舞会</strong>。</p>
-  <p>不过就职舞会的拍照还得你自己带，相比之下，第二天<strong>在国会山的美国新一任顶级权力宣誓就职典礼</strong>服务就能更加到位，49999美元能让你站在人群c位，川普的下巴阴影处，并且全程有“专属人员现场帮你拍摄现场，沉浸式体验全球顶级经济体的权力交接”。</p>
-  <p>所以别说小红书喜欢打卡拍照，这明明是人类的本性，精英也逃不过，只不过这次的拍照道具变成了美国老大。</p>
-  <p>考虑到精英们的急迫需求，我进一步咨询是否还有其他位置可以买。旅行社的人摆出一副“<strong>有钱人太多了</strong>”的模样，问我“你很想去吗？如果很想去，我再去问问美国那边的供应商”。</p>
-  <p>皇天不负苦心人，还有一些边角料位置等着精英们选购，3000美元站在最角落，“因为想去的基本都先买贵的”，旅行社人透露，“<strong>想买就要抓紧，感兴趣可以先付2000美元的定金</strong>”。考虑到我还要写稿，就把信息提供给各位读者，感兴趣的精英们可以自行选择。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_6f3e64ad1510498aadc00f85392f9e07@000000_oswg426323oswg712oswg621_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p>“特朗普之前就售卖过晚宴名额”，另一位业内人士小黄透露，“<strong>出席比尔盖茨的晚宴和福布斯排行等等只要有钱有渠道都可以买到</strong>。”</p>
-  <p>花钱就为了见政界商界人士作，小黄指出“这其实粉丝见明星没有本质区别”，追星是人类的本质，只不过精英们把见更高层的精英当作人设的升级方式。</p>
-  <p>这样花钱买人设升级的方式再往前推，学生时代也有。</p>
-  <p>最出圈的就是此前<strong>花2.8万买下摩根斯坦利实习</strong>，《南方人物周刊》此前曾采访留学中介徐婉指出，“<strong>付费实习在2020年二三月时刚起头，到了2021年尤为夸张</strong>，“学生们为了包装简历，花2-5万去各大券商、各顶尖企业实习非常常见。”</p>
-  <p>“付费实习在金融和互联网行业早已是心照不宣的潜规则”，《南方周末》此前也曾报道过，即使许多实习生花钱实习得到是一份dirty work，甚至还有人曝光花钱买了假实习，但为了让自己的人设更完美一点，永远有人为贷款上班买单。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_474fe7b2051c440192c59a0cbde6734e@000000_oswg107699oswg1080oswg1375_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：小红书@爆锤内推中介&nbsp;</p>
-  <p>“<strong>诺贝尔得主写推荐信、 联合国实习内推和大学合作项目这些都可以明码标价</strong>”，相比起来和明星见面、请明星来年会舞台唱首歌，已经简单到了发条小红书：家人们有谁能联系到顶流吗？我老板年会上想请他跳舞。</p>
-  <p>相比10年前去维也纳金色大厅包厅唱歌，或者去年流行的花599上美国时代广场大屏幕都显得颇为小儿科。<strong>但精英人设只是表面，重要的是可以赚钱。</strong></p>
-  <p>当年相继花200-400多万美元和巴菲特吃饭的中国人才是真金白银挣了大钱。以211.01万美元的高价拍下午饭的赵丹阳在吃饭时和巴菲特推荐了自己持有的一只股票，午餐结束后无意透露“巴菲特也表示关注”，<strong>一周后他凭借着这支股票狂赚1.5亿港币</strong>。</p>
-  <p>此后巴菲特下了第一个午餐禁令“不准谈个股”，但后续聪明的中国人还是通过巴菲特午餐炒作自己或者自家公司，直到巴菲特不再和中国人吃饭。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_aaa2e95e18f544f79ae90e1ccfd16cb6@000000_oswg2024260oswg1080oswg1620_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：小红书@Olga姐姐&nbsp;</p>
-  <p>Shirley林之前也只是一个穿着牛仔裤和白T，对着镜头唱歌的女孩，今年却彻底精英化：“联合国白宫我常去，谷爱凌我朋友”，就连白t都变成了胸前的硕大祖母绿项链。</p>
-  <p>有网友分析了她的联合国精英人设是如何被打造出来的：<strong>《7天涨粉百万，30天全网涨粉近500万》，通过3场活动、3种标签</strong>、捆绑利用爱情公寓和林宛瑜，以“放学后参加比尔盖茨的晚宴”为噱头，直到“她身上看到了幸福的具象化”，逐渐从纽约留子成为实打实的银行千金。</p>
-  <p>前有《令人心动的offer》，后有mcn体系化运营，如今的Shirley林已经开始参加纽约百万博主局，一条20秒以内的广告要价15万。</p>
-  <p>精英为什么是可以用来盈利的人设？</p>
-  <p>一方面是永远存在对精英的美好想象，听证会后的周受资直接从当年雷军身边的“那个男的”，变成了“智性恋的天花板”；</p>
-  <p>另一方面吐槽精英男开始流行，小红书于“精英男”的话题浏览量近3000万，其中最高的讨论都是解构精英男：精英男们讲话中英混杂，说话之间总是不经意透露自己的人脉，结果操作的股票比韭菜还绿。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_d1fed40b9bf8482b87f1d678df9b98b3@000000_oswg989262oswg1080oswg950_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p>电影《美国精神病人》的男主角帕特里克·贝特曼，哈佛本硕、27岁就在投行做VP，西装全部来自阿玛尼们的定制，手表是劳力士，满足了一切关于金融男的想象，随便发个笔记在小红书上都是几万赞。</p>
-  <p>后来他吐露“<strong>这些都是和《纽约时报》学的</strong>”以出门在外，身份都是自己给的。没有谁一出生就懂得奢侈品的条条框框，看得懂联合国的入门法则，落地即精英。</p>
-  <p><strong>我们都可以拥有《在联合国度过的一天》，“我为什么不去体验？说的好像我能办下来美签一样</strong>。”</p>
-  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzIwMDQ2NTA4MQ==&amp;mid=2247642525&amp;idx=1&amp;sn=34095ddd007cb42528a49b6927d6e953&amp;chksm=9730bbea0afbd600905d1c12259e1bfedff542ca8b9dc767ce6b3475d7aec65005ee91c0d36f&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“Vista氢商业”（ID：Qingshangye666）</a>，作者：嘴嘴，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3047219300404101</id>
-            <title>靠代写回忆录赚钱的年轻人，被AI卷哭了</title>
-            <link>https://www.36kr.com/p/3047219300404101</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3047219300404101</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Nov 2024 08:28:16 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: <回忆录, 银发经济, AI写作, 市场化>
-<br>
-<br>
-总结: 文章探讨了代写回忆录行业的现状与挑战，指出随着中国老年人口的增加，代写回忆录成为一种新兴的市场需求。尽管行业热度上升，但实际成交量却不高，许多从业者面临着市场标准不清晰和客户资源稀缺的问题。AI技术的介入虽然降低了写作门槛，但仍无法完全替代人工创作的深度和情感。行业内的竞争加剧，价格战愈演愈烈，导致回忆录的价值被低估。最终，文章强调了回忆录作为一种精神治愈和自我理解的工具的重要性。 </div>
-                        <hr>
-                    
-                    <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_1acd0debc99c4681b32f00a3c120ea5c@000000_oswg52754oswg1080oswg607_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">题图 | 《住宅区的两人》&nbsp;</p>
-  <p><strong>“任谁都会老去，让无数普通人的过去得以被看见、被尊重，才是人手一本回忆录真正的意义所在。”</strong></p>
-  <p>办公室不到六十米，几个小隔间挤着十个员工，敲打键盘的声音与翻译器交错，偶尔传来老人特有的低沉嗓音。贺章低着头，一边听一边记录。&nbsp;</p>
-  <p>贺章从事的是一个小众而时髦的工作——用AI帮老人代写回忆录。&nbsp;</p>
-  <blockquote>
-   <p>数据显示，中国60岁及以上的老年人达2.97亿，超过总人口的两成，到2050年左右，这个数字将升至4.8亿。而找人代写回忆录，成为了一批有闲有钱的老年人的新乐趣。&nbsp;</p>
-  </blockquote>
-  <p>这并非什么新鲜事物。十多年前，北京就曾出现过由政府购买服务、社工志愿团体为老人撰写回忆录的公益项目。后来，由于代写回忆录逐渐走向市场化，社交平台上涌现出了以兼职和自由职业者为主的独立写手。&nbsp;</p>
-  <p>、2024年，随着银发经济的持续升温，越来越多的机构跨界涉足这一领域，包括拥有写手资源的传媒公司，以及捕捉到落地商机的AI机构。他们开始传授经验、销售课程，将这门曾经的小众业务，转变为一门正式的生意。&nbsp;</p>
-  <p>代写回忆录正以肉眼可见的速度，飞上一个看似暴利的风口。只是相比外界对回忆录行业的跨界热情，真正位于中心的业内人却显得相对冷静。&nbsp;</p>
-  <p>一名回忆录写手向新周刊吐槽，这几个月光看到噌噌冒出来的同行，客户却不多一个。贺章同样透露，尽管后台每天收到上百条客户咨询信息，但真正成交的订单却寥寥无几。在短短几个月内，他已经烧光了投入的数百万资金。&nbsp;</p>
-  <p>正如贺章等人对业绩的担忧，银发经济或许是充满想象力的蓝海，但代写回忆录这条赛道仍是一条小溪——价格和内容的标准不清晰、市场没有那么普适，同时周期难把控，以至于有从业者直言：“想靠这件事很轻松地赚很多钱，似乎不存在一个好的商业逻辑。”&nbsp;</p>
-  <p>代写回忆录，真风口还是假风口？这门生意真的赚钱吗？在回答这两个问题之前，这个还在襁褓中的行业，已经站满了人。&nbsp;</p>
-  <h2><strong>01 月入过万的白日梦</strong></h2>
-  <p>从事回忆录代写十二年，朱家轩没有见过行业这般的热闹。找兼职的白领、待业在家的图书编辑、破产的广告公司老板，还有AI创业者……几乎各行各业的人都在摩拳擦掌，随时扑向这片银发蓝海。&nbsp;</p>
-  <p>在社交媒体上，“代写回忆录”已与“财富自由”划上等号——“小县城帮退休老年人写了3本回忆录，收入够买一辆车”“靠给老人写自传赚了18万，文笔不好也能做”“一年实现10万副业不是梦……”诸如此类的文案充斥小红书，甚至有业内人士声称，写回忆录不需要科班出身，初中毕业也能写。&nbsp;</p>
-  <p>种种描述下，这一行俨然成了低门槛生意。“锚定最有消费能力的老人，对文字又没有敬畏心，觉得写东西而已，谁都会，这事儿门槛特别低。”谈到最近的热潮，家传编辑部联合创始人韩馨儿反而略显愤愤。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_809150fbd9034875a1b7b20b98d5c0bb@000000_oswg1096761oswg759oswg1212_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">撰写回忆录正在成为一门生意。（图/小红书截图）</p>
-  <p>过去一周，韩馨儿频繁接到了朋友转来的一篇讲述代写回忆录的文章，标题上“初中毕业”“月入过万”等关键词，让她感到疑惑：“代写回忆录什么时候成了门槛这么低的事情？”&nbsp;</p>
-  <p>这是韩馨儿开始写回忆录的第三年。革命岁月的地下党父母爱情故事、20世纪为逃离封建家庭而远走南洋的女性、家道中落的财阀少爷故事……韩馨儿走进过几十个老人的一生。在她看来，回忆录写作绝非如大多数人理解般，是为老人撰写“童话故事”。&nbsp;</p>
-  <p>“华人口述史之父唐德刚在替胡适之写口述历史时曾提到，胡先生的口述只占全书的50%，另外一半要自己找材料加以印证补充。回忆录也一样，写作者需要尽可能从浩如烟海的史料中找到佐证，力求真实。”&nbsp;</p>
-  <p>韩馨儿将这个过程形容为“找拼图”。&nbsp;</p>
-  <p>从100年前的同学录上找到家乡线索，在档案馆中挖掘出祖辈照片，自20个G的黑白影像中拼凑出老人的留洋经历……韩馨儿记录下的故事往往跨越半个世纪，常常面向逝者寻求答案。“正如傅斯年所说，上穷碧落下黄泉，动手动脚找东西。这是我们研究一个家传人物的特性，而不是外界想象的，回忆录只是一种听和记的关系。”&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_7f13674ee2ed48bdb3b36f92b79559df@000000_oswg808162oswg831oswg567_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">韩馨儿在采访一位传主。（图/受访者供图）</p>
-  <p>“以为回忆录能赚钱就扑上来，肯定会吃亏。真正懂回忆录的人，都知道这里面的门道儿有多深。”编导专业出身的朱家轩，自2015年开始为老人代写回忆录。这样一位行业老炮儿，却被当下的人潮汹涌弄得哭笑不得。“大众对回忆录存在误解。这绝对不是暴富的好法子——甚至在现阶段都谈不上是一门好生意。”&nbsp;</p>
-  <p>代写回忆录的优势在于高客单价，每本报价通常都在3万—10万之间，这也是自媒体上宣称作者能月入2万的原因。“但跟风而至的人往往碰着一鼻子灰，因为他们看不见摸不着的隐性成本。”朱家轩说。&nbsp;</p>
-  <p>代写回忆录是一个既耗时又费力的过程，寻找客户、采访、写作、排版、成品书籍设计，甚至申请书号，每一环节都需要大量人力和时间的投入。朱家轩向新周刊透露，他编写一本精品回忆录通常需要六个月到一年时间。为追求真实体感，还得沿着老人前半生的足迹，重访对方的故乡、工作单位等地。而当中产生的出差费用也是一笔不小的成本，往往需要写手与传主方协调解决。&nbsp;</p>
-  <p>除此之外，回忆录还是高度个性化、定制化的产品。看似有钱有闲的老人可不好“糊弄”，要求也是千奇百怪，小到模仿金庸风格作著，大到家族历史断层的考究，都需要反复敲定和修改。时间一长，还会碰到半路跑单的情况。“别看一本书大几万，很可能均摊下来，部分正职写手的月入一万还做不到。”&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_ebf11506a0c84078ac1123ead5fd2599@000000_oswg421291oswg830oswg467_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">灵感忽现，停下车就开始动笔写作。（图/受访者供图）</p>
-  <p>正因为门槛高、投入产出不成正比，多年来，这个行当并没有走出切实可行的商业化模式。&nbsp;</p>
-  <p>2015年，朱家轩在老家山东聊城创立传家传记公司，尝试探索商业模式、标准化写作，但直到现在，光靠代写回忆录仍难以撑起公司的生存。“这行痛点很多。内容、价格标准一直不清晰，也没有跑出龙头。很长一段时间，我们这批写回忆录根本谈不上生意，就是情怀。”&nbsp;</p>
-  <h2><strong>02 千元AI流水线</strong></h2>
-  <p>对于代写回忆录在今年的爆火，韩馨儿将由头指向了AI。&nbsp;</p>
-  <p>过去一年里，数家AI公司上门找韩馨儿合作，大多声称只要一键自动化成书。“AI的介入给到业内业外一种错觉——或许可以用技术手段以打造流水线的方式，降低回忆录准入门槛和成本。这让很多人迫不及待地涌向这个新风口。”&nbsp;</p>
-  <p>贺章正是这批“赶风口”的人之一。3年前，贺章辞去了70万年薪的国企“铁饭碗”，在辗转一家投资公司后，决定下海创业。他将目标锚定在人人可触达的第四次工业革命——AI赛道。至于这个宏大叙事怎么和回忆录扯上关联，贺章坦言“当时大家急于为大模型找到应用场景，回忆录是个不错的落地选择”。&nbsp;</p>
-  <p>贺章团队推出的AI+回忆录App工具号称“一键生成上万文字，15天完成200页书册”，还能自动写采访大纲、在线自动语音采访，老人只要对着App讲述故事录入即可。根据他介绍，项目自6月启动后，目前已经面向了几千位老人。且相比市面上3万元的均价，用AI代写的回忆录要便宜得多，7999元就能给一位老人出版一本书。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_55b9f87246a34cc4a2160dcb5b0bd825@000000_oswg521494oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">老年回忆录写作能否用AI取代。（图/受访者供图）</p>
-  <p>&nbsp;</p>
-  <p>低价又高效，似乎在AI的加持下，困扰回忆录从业者的痛点不存在了。可事实真的如此吗？</p>
-  <p>“AI从业者很容易将回忆录的制作过程想象为‘语音转文字’——让老人口述，将录音交给AI大模型进行整理、编译。”不久前，韩馨儿刚刚受一家AI独角兽企业邀请，讨论用AI工具做轻量回忆录的可行性，但最终的结论是“完全不行，AI目前最多用来做校对”。&nbsp;</p>
-  <p>“不适用”的争议集中在采访环节，“从三大改造完成到改革开放以前的，AI提供不出一个字的问题”；被动录入也有问题，这代老人普遍有方言口音，国内最顶尖的科大讯飞都做不到100%准确翻译；成品写作上，AI时常出现“低情商”，比如在老人讲述温饱的悲惨童年时，不合时宜插入一段“阳光明媚”的环境描写。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241122/v2_d324b58f459a45988aac848acb281e16@000000_oswg88371oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
-  <p class="img-desc">AI尚不能完美适用于采访环节。（图/pexels）</p>
-  <p>就连贺章也承认，如果完全交由AI的写作，回忆录经常处于无法交付的情况。“自动化是个坑，在各个环节，依旧需要写手线上采访介入，把控质量。”&nbsp;</p>
-  <p>说到底，回忆录本质上还是一门面对面的生意、陪伴性消费。一方面，采访者要现场揣摩老人的心理和表情，关注那些藏在话语外的情绪。另一方面，老人选择代写的初衷，本身也怀了一份希望有人陪他、纾解的心思，这是“代写”能够提供的情绪价值。&nbsp;</p>
-  <p>尽管AI代写回忆录技术的成熟度有待商榷，但这并不妨碍入局者借此商机掘金。一位AI从业者在两个月前开放了回忆录的培训课程和写作系统，批量制造小镇回忆录写手，报名费5万/人。而在短短两周内，就先后有6个人报名，包括前媒体人、大学生、印刷胶水生意人……&nbsp;</p>
-  <p>“无论你是高中还是大学毕业，按操作流程来，靠着我们自研的AI系统，都能产出80分水平的回忆录。最快一个月一本书，一年接十单，在小县城直接就能躺平。”该从业者如此说道。&nbsp;</p>
-  <p>至于这套系统的原理，以及跟直接使用通用大模型有何区别，对方只是淡淡一笑，“这涉及我们的商业机密”。&nbsp;</p>
-  <p>对于这批AI闯入者，朱家轩又爱又恨。&nbsp;</p>
-  <p>“不可否认，AI确实降低了一部分写作门槛。”作为行业发展见证者，朱家轩希望更多人进来，让小众的行业被看到。但如今的局面并不如他想象中美好，不断涌进的人，让本就狭小的赛道更加拥挤和无序。&nbsp;</p>
-  <p>过去几个月，朱家轩被问得最多的是“一万字作品的收费是多少”“别人收几千一本，为什么你能收十几万”。朱家轩不得不花费大量精力去解释。更令他担忧的是，良莠不齐的市场环境，有可能劝退本就稀缺的客户资源。&nbsp;</p>
-  <p>韩馨儿有个老年客户尝试用 AI 写回忆录。刚开始老人对“新玩具”很上瘾，每天都对着语音机器人忆往昔。但过了一个月再问，对方连忙摆手，甚至对写回忆录这件事已经兴致全无。&nbsp;</p>
-  <p>“明明是一个小众的赛道，为什么要把它搞死呢？”朱家轩不解。&nbsp;</p>
-  <h2><strong>03 等待一个“iPhone时刻”</strong></h2>
-  <p>回忆录行业正面临标准混乱的难题，代写一本回忆录的价格一路下行，一万就能写一本，甚至有小白为了拓客宣称“免费代写”。&nbsp;</p>
-  <p>交稿时间也在缩短，AI技术的应用让成书时间从三四个月缩短到个把月。为了节约成本，大多数写作者将面对面的采访搬到了线上。&nbsp;</p>
-  <p>贺章对此却不以为意，“你始终得相信一句话，性价比”。相比搅浑水的入局者，这批从业者对于把蛋糕做大，显然更急切。尝试用AI代写回忆录的半年后，一个残酷的现实正摆在他面前——大多数的中国老人，似乎对回忆录没有那么买账。&nbsp;</p>
-  <p>眼下，市场情绪高涨，但“内部静悄悄”。&nbsp;</p>
-  <p>贺章的团队已与深圳几个大型养老社区合作，覆盖了约八九万老年人，但转换率却不到万分之一。这显然承载不了团队商业化的目标，“回忆录任谁都能说出来一块大蛋糕，但谁又能熬到那个时候呢？”&nbsp;</p>
-  <p>这艘蓝海上的孤舟依旧前途未知——后台每天都有上百条客询消息，但真正的成交单量只有寥寥数本。贺章投入的几百万，短短几个月就已经烧光。&nbsp;</p>
-  <p>朱家轩同样感知到了这一点。“同行多了一倍不止，但客户依旧没增加多少。”在他看来，回忆录长期存在的痛点，是目标群体和受众过于小众，而这很大程度源于价格带问题。&nbsp;</p>
-  <p>过去，回忆录的价格动辄数万甚至十几万，高昂的决策成本让大多数人望而却步。韩馨儿曾在采访一位老人时，遭到对方儿媳的阻拦，上来就喊着“我们要生活口粮，不要精神食粮”。&nbsp;</p>
-  <p>“所有人都在等待一个‘iPhone时刻’，让回忆录能真正意义上转变为一门蓝海生意。”一位回忆录从业者向新周刊说道。&nbsp;</p>
-  <p>目前，业内中位数价格已经降至约4、5万元/本，他预计，当这个数字达到1万时，市场将出现十倍的增长。他用AI写作收窄成本后，把收费定在1万多，得到了一个相对喜人的信号：客户群出现了更多的普通人，包括卡车司机、乡下农民。&nbsp;</p>
-  <p>为了进一步打开市场，贺章决定再把门槛往下降降，推出了售价999元的回忆录。砍去不必要的包装盒、页数，书皮摸起来粗糙、印刷的图片模糊，整体更像一本小册子。但贺章不在意，“走低客单价、大流量的路线”，他的目标很清晰“把价格打到底，人手一本回忆录，就像日常购物，形成一种潮流”。&nbsp;</p>
-  <p>对此，韩馨儿则认为，相比一味打价格战，关键在于让人看到回忆录本身的价值。在市场科普教育的初期，大部分老人面对回忆录时总有一个疑问：“那不是名人才会写的东西吗？”在大众眼里，著书立传的往往是企业家、退休干部等社会的高精尖人群，普通人总有一种不配得感。&nbsp;</p>
-  <p>“老人内心普遍是需要被看见的，回忆录本身是一种精神的治愈和延续。”韩馨儿说，国内的心理医生有时会建议，患有创伤记忆或抑郁倾向的老人撰写或阅读传记，作为一种心理治疗手段，有助于他们理解自己的生命轨迹。&nbsp;</p>
-  <p>“时代怎么影响他的，大多数老人一辈子都没有想清楚。”而透过一本回忆录，老人更能清晰看懂自己来时的路。&nbsp;</p>
-  <p>在过去几年里，通过代写回忆录，韩馨儿见证了不少传主和家人、时代之间更深的连接：&nbsp;</p>
-  <p>身处地球两端的姑妈和侄女，半个多世纪没见面，因为回忆录又重新聚到一起。在一起向上海档案馆捐赠了包括家传、家族在内的史料后，有位长辈赶紧掏出手机加微信，说“不能再走散了”。&nbsp;</p>
-  <p>儿子记恨了已故父亲一辈子，只因父亲草草轻生，独留母子孤苦无依。直到数十年后，看到记载着父亲当年经历的苦难的回忆录，儿子才真正感受到时代的悲凉和无奈，选择与父亲、与自我和解。&nbsp;</p>
-  <p>经历了无数人到暮年的释怀，韩馨儿看见老年人渴求，以及自己这份工作的价值。“任谁都会老去，让无数普通人的过去得以被看见、被理解、被尊重，才是一本回忆录真正的意义所在。”&nbsp;</p>
-  <p>（应受访者要求，贺章为化名）&nbsp;</p>
-  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MjM5ODMzMDMyMw==&amp;mid=2654759382&amp;idx=1&amp;sn=640666f0e200311d00d912b845f11608&amp;chksm=bc37966e1c4edd9628a8ca693cba173dd80d53436517435e45fd6d0d0c62f4fdbb98f4cda84b&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“新周刊”（ID：new-weekly）</a>，作者：郭草莓，36氪经授权发布。</p>
                 ]]>
             </content:encoded>
         </item>
