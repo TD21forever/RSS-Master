@@ -5,6 +5,101 @@
         <link>https://www.36kr.com/information/web_news</link>
         
         <item>
+            <id>https://www.36kr.com/p/3054271867752839</id>
+            <title>Scaling Law百度最早提出？OpenAI/Claude都受它启发，Ilya出现在致谢名单中</title>
+            <link>https://www.36kr.com/p/3054271867752839</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3054271867752839</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 27 Nov 2024 07:14:23 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <Scaling Law, 百度, 深度学习, 泛化误差>
+<br>
+<br>
+总结: Scaling Law最早由百度在2017年提出，研究了训练集大小、计算规模与模型精度之间的关系。通过实证研究，发现泛化误差与训练集大小呈幂律关系，模型大小与数据大小之间存在缩放关系。研究表明，随着训练集的增大，模型性能提升，但优化变得更加困难。该研究对深度学习的研究和实践具有重要影响，能够指导模型调试和计算系统设计。 </div>
+                        <hr>
+                    
+                    <p>什么？Scaling Law最早是百度2017年提的？！</p>
+  <p>Meta研究员翻出经典论文：</p>
+  <p>大多数人可能不知道，Scaling law原始研究来自2017年的百度，而非三年后（2020年）的OpenAI。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_f6affc354c6c4f279cd6c46db3e32ef7@5091053_oswg376783oswg788oswg990_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>此研究由吴恩达主持，来自百度硅谷人工智能实验室 (SVAIL) 系统团队。</p>
+  <p>他们探讨了深度学习中训练集大小、计算规模和模型精度之间的关系，并且通过大规模实证研究揭示了深度学习泛化误差和模型大小的缩放规律，还在图像和音频上进行了测试。</p>
+  <p>只不过他们使用的是 LSTM，而不是Transformer；也没有将他们的发现命名为<strong>「Law」</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_4a7987d7ad3045cb8109fc670f63aff4@5091053_oswg5650oswg226oswg223_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>再回头看，其中一位作者Gregory Diamos给自己当年在百度的介绍还是<strong>LLM Scaling Law Researcher</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_4cf958afae504d629bfdfa31386e45fd@5091053_oswg92790oswg976oswg452_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>又有一网友发现，OpenAI论文还引用了2019年这位作者Gregory Diamos等人的调查。但却不知道他们2017年就有了这么一项工作。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_6445fa26e8824857817a84d96a9ce1cf@5091053_oswg188466oswg778oswg408_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>网友们纷纷表示这篇论文非常值得一读，而且完全被低估。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_f3bde3b0beec42e895c7d04b0e76446e@5091053_oswg58882oswg792oswg250_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_c4ee7e47a5da4b548155342397c393da@5091053_oswg47008oswg784oswg260_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>来赶紧看看这篇论文。</p>
+  <h2><strong>深度学习Scaling是可预测的</strong></h2>
+  <p>在深度学习领域，随着模型架构的不断探索、训练数据集的不断增大以及计算能力的不断提升，模型的性能也在不断提高。</p>
+  <p>然而，对于训练集大小、计算规模和模型精度之间的具体关系，一直缺乏深入的理解。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_4fdb6a1fa43e44d3b7d86dbe4165f6f7@5091053_oswg194541oswg1080oswg560_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>本文通过大规模的实证研究，对多个机器学习领域（如机器翻译、语言建模、图像分类和语音识别）进行了测试，发现了一些规律：</p>
+  <p>泛化误差（模型在新数据上的表现误差）与训练集大小呈现幂律关系，即随着训练集的增大，泛化误差会以一定的幂次下降。</p>
+  <p>模型大小与与数据大小也存在Scaling（缩放）关系，通常模型大小的增长速度比数据大小的增长速度慢。</p>
+  <p>具体来说，结合以往工作，团队将注意力集中在准确估计学习曲线和模型大小的缩放趋势上。</p>
+  <p>按照一般测量方法，是选择最先进的SOTA模型，并在训练集的更大子集（碎片）上训练这些模型的 “超参数缩减 ”版本，以观察模型的准确性如何随着训练集的大小而增长。</p>
+  <p>因此针对这四个领域，机器翻译、语言建模、图像分类和语音识别，找到了他们在大型数据集上显示出 SOTA 泛化误差的模型架构。</p>
+  <p>这里的 “大型数据集 ”是指规模可以缩小 2-3 个数量级，但仍足以进行有价值的模型架构研究的训练集。他们为某些 ML 领域选择了一种以上的模型架构，以比较它们的扩展行为。</p>
+  <p><strong>机器翻译</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_4c1ade9032de4b40ba7569b4e9483e05@5091053_oswg100827oswg892oswg426_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>团队注意到，随着训练集规模的增大，优化变得更加困难，而且模型会出现容量不足的情况，因此经验误差会偏离幂律趋势。</p>
+  <p><strong>词语言模型</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_ca818a3151d84843a14aaa1337eacb87@5091053_oswg112938oswg638oswg314_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这一结果表明，最佳拟合模型随训练分片大小呈次线性增长。</p>
+  <p><strong>字符级语言模型</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_c3e084719a1648cfa9f8a73336d7f382@5091053_oswg68976oswg642oswg320_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>为了测试字符级语言建模，他们训练了深度为 10 的循环高速公路网络（RHN），结果发现该网络在十亿单词数据集上能达到最先进的（SOTA）准确率。</p>
+  <p><strong>图像分类</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_92ba2eebe916407d96fc08e19d5cc1d8@5091053_oswg51305oswg656oswg292_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>图像分类同样呈现出幂律学习曲线和模型大小的缩放关系。并且还表明，在非常小的训练集上，准确率会在接近随机猜测的水平上趋于平稳。</p>
+  <p><strong>语音识别</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_42ab15cb40ad4e07b48b0560262c44d7@5091053_oswg32746oswg372oswg318_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>团队训练了一系列跨度较大的模型尺寸，所以针对每个训练数据大小得出的模型尺寸缩放结果，其意义不像在语言模型（LMs）或图像分类中那么明显。</p>
+  <p>随着数据量的增加，大多数模型会经历幂律泛化改进，直至数据量接近其有效容量。在这种情况下，参数为 170 万的模型的准确率在大约 170 小时的音频数据时开始趋于平稳，而参数为 600 万的模型在大约 860 小时的音频数据时趋于平稳（也就是说，大约是前者的 5 倍，这与模型尺寸的差异情况类似）。更大的模型（例如，参数为 8700 万的模型）在更大的数据集规模下，其泛化误差也更接近最佳拟合趋势。</p>
+  <p>最后对于这一发现，他们表示，这些比例关系对深度学习的研究、实践和系统都有重要影响。它们可以帮助模型调试、设定准确度目标和数据集增长决策，还可以指导计算系统设计，并强调持续计算扩展的重要性。</p>
+  <h2><strong>博客致谢中还有Ilya的名字</strong></h2>
+  <p>此次研究主要是由当年吴恩达主持下，百度硅谷人工智能实验室 (SVAIL) 系统团队。</p>
+  <p>当时的一群合著者们已经各自去到各个机构实验室、大厂继续从事大模型相关的研究。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_e070073628584e07a746b142b5645fb2@5091053_oswg103797oswg902oswg342_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在当年博客致谢中，还出现了Ilya的名字，感谢他们参与了这一讨论。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_bdfeb771101c4276b6f1c94b3abb0c28@5091053_oswg117762oswg1080oswg214_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>两年后，也就是2019年，其中一位作者Gregory Diamos又带领团队探讨了深度学习的计算挑战。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_fc6b6af303964613bcb85cf392c56f67@5091053_oswg160915oswg1080oswg368_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>后面的OpenAI论文正是引用了这篇论文的调查讨论了Scaling Law。</p>
+  <p>值得一提的是，Anthropic CEO<strong>Dario Amodei</strong>在百度研究院吴恩达团队工作过，他对Scaling Law的第一印象也是那时研究语音模型产生的。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_a3e422c1687a49c9a4bdf21609fb8fe0@5091053_oswg72782oswg1080oswg734_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Amodei刚开始研究语音神经网络时有一种“新手撞大运”的感觉，尝试把模型和数据规模同时扩大，发现模型性能随着规模的增加而不断提升。</p>
+  <p>最初，他以为这只是语音识别系统的特例。但到了2017年，看到GPT-1的结果后意识到这种现象在语言模型上同样适用。</p>
+  <p>当年（2015年）他一作发表的论文Deep Speech，合著者中这位Sharan Narang正是两年后这篇论文的主要作者之一。如今后者先后去到了谷歌担任PaLM项目TL大模型负责人，然后现在是Meta当研究员。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_f004eca4012d4a9e859780ac40d8cb4c@5091053_oswg58689oswg916oswg332_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_bde2f47d484148e9865d42abaef0535a@5091053_oswg212453oswg1080oswg519_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>如今这一“冷知识”再次出现在大家的视野，让不少人回溯并重温。</p>
+  <p>这当中还有人进一步表示：真正的OG论文使用了<strong>seq2seq LSTM</strong>，并且确定了参数计算曲线。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_587e96f39d944e3a9ed05d6eeb422ba3@5091053_oswg35309oswg778oswg176_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_2658f20a2fae4e0aace878b2715be72d@5091053_oswg34196oswg1080oswg440_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>当年的一作正是Ilya Sutskever。</p>
+  <p>参考链接：</p>
+  <p>[1]https://arxiv.org/abs/1512.02595</p>
+  <p>[2]https://arxiv.org/abs/1909.01736</p>
+  <p>[3]https://research.baidu.com/Blog/index-view?id=89</p>
+  <p>[4]https://www.linkedin.com/in/gregory-diamos-1a8b9083/</p>
+  <p>[5]https://www.linkedin.com/in/dario-amodei-3934934/</p>
+  <p>[6]https://x.com/jxmnop/status/1861473014673797411?s=46&amp;t=iTysI4vQLQqCNJjSmBODPw</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/mBgXZZLpg-7bcQqlrXu8EA" rel="noopener noreferrer nofollow" target="_blank">“量子位”</a>，作者：白小交，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.36kr.com/p/3053975978655235</id>
             <title>华为百万豪车，盯上特斯拉面子活</title>
             <link>https://www.36kr.com/p/3053975978655235</link>
@@ -75,117 +170,6 @@
   <p><strong>相比马斯克押注Robotaxi，通过技术来塑造品牌差异化，不断堆高品牌形象，则成为余承东选择的另一条品牌差异化路径。</strong></p>
   <p>尊界S800上市之后，能否帮助华为智选车业务争夺来新的用户，暂未可知，但可以确定的是，余承东借此也算圆了想为华为潜在车主打造百万豪车的梦想。2022年8月问界M7交付仪式上，余承东曾讲到，有朋友告诉他M7唯一的缺点就是价格太便宜了，“因为他过去都是买一两百万元以上的车，贵一点能体现到他的身份。”</p>
   <p>本文来自微信公众号“字母榜”，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3053967119334913</id>
-            <title>马斯克暴怒，加州新提案让买特斯拉，没补贴</title>
-            <link>https://www.36kr.com/p/3053967119334913</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3053967119334913</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 27 Nov 2024 04:19:42 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 美股, 特朗普, 关税, 特斯拉  
-<br><br>  
-总结: 美股在美联储会议纪要的支持下收高，市场关注特朗普对墨西哥和加拿大的关税威胁。尽管关税政策超出预期，市场反应平淡，投资者认为这可能是特朗普的谈判策略。汽车制造业受到较大影响，通用汽车和福特股价下跌。特斯拉面临加州新补贴政策的挑战，可能影响其在加州的业务和员工。整体来看，电动车行业正经历从政策驱动向市场驱动的转型。 </div>
-                        <hr>
-                    
-                    <p>美股周二收高，美联储货币证策会议纪要显示，官员们认为未来会降息，但只会逐步降息。市场正在评估美国当选总统特朗普发出的关税威胁。</p>
-  <p>截至收盘，道指涨幅为0.28%。标普500上涨0.57%，纳指上涨0.63%。虽然道指一度下跌超过300点，但最终逆转上涨，创下了盘中和收盘的新高。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_92d91f34bd6041f396b98184235966f7@5576020_oswg19343oswg593oswg264_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>市场的焦点之一来源于特朗普证府关于关税的威胁。特朗普于周一宣布，计划对墨西哥和加拿大的产品征收25%的关税，并对中国产品实施额外10%的关税。此外，他还提出对所有进口商品征收最高20%的关税，并对中国产品加征至少60%的额外关税。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_2b784f850b26468fbd1251f3ed22f4c1@5576020_oswg20609oswg792oswg201_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>尽管这番言论超出了大多数市场预期，显得更加激进，但市场反应相对平淡。</p>
-  <p><strong>美股投资网分析认为，投资者并未完全相信这些关税证策最终会落地，更可能是特朗普的谈判策略，旨在施压对手，这与他一贯的风格一致。</strong>当前，投资者的注意力更多集中在年底季节性强势因素和强劲的企业盈利上，因此美股指数波动较小。</p>
-  <p>同时，墨西哥总统克劳迪娅·谢因鲍姆对特朗普的关税威胁作出回应，表示如果美国对墨西哥商品加征新关税，墨西哥将采取报复性措施。这一全球贸易紧张局势无疑为未来经济增添了更多不确定性。</p>
-  <p>不过有一个板块受特朗普关税言论的影响较大，那就是汽车制造业。</p>
-  <p>今日，通用汽车（GM）跌幅达到9%。福特跌2.6% ，两大汽车巨头在墨西哥和加拿大设有众多工厂，若关税证策落地，其生产成本将大幅上升，利润空间被严重挤压。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_c3f1241190ff43419160758a0da19e56@5576020_oswg19271oswg428oswg154_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>此外，以生产墨西哥啤酒Corona和Modelo闻名的星座品牌公司（STZ）股价亦下跌逾3%，盘后再下跌6%。墨西哥是美国啤酒的主要进口来源，关税证策将直接推高啤酒的生产成本，进而影响公司的盈利能力。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_0f9c40bead764331b9804d459c5e8afe@5576020_oswg20073oswg375oswg154_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>根据瑞银的数据显示，汽车行业占美国从墨西哥进口商品的比例超过四分之一，而来自加拿大的进口则占12%。自1994年北美自由贸易协议（NAFTA）生效以来，美国汽车制造商对墨西哥和加拿大的生产链条依赖不断加深。</p>
-  <p>行业分析师预计，若实施这些关税，美国每辆汽车的生产成本可能增加约3000美元，最终成本将由消费者承担。此外，关税的施行可能导致供应链中断及成本上升，进而影响汽车制造商的利润率和市场竞争力。</p>
-  <p><strong>下午2点，美联储会议纪要公布，内容并未带来意外。</strong>纪要指出，如果未来数据符合预期，通胀回落至目标水平且就业市场保持稳定，美联储预计将逐步降息，并强调降息将是渐进的，而非立即大幅降息。这一证策指引有助于提振市场信心，对股市产生积极影响。</p>
-  <h2><strong>加州新证或让特斯拉“重挫”</strong></h2>
-  <p>根据美股投资网的了解，如果特朗普取消电动车购买的联邦税收抵免政策，加州州长加文·纽森（Gavin Newsom）正计划调整州内的电动车补贴方案。</p>
-  <p>具体而言，纽森州长提议推出一个更新版的“清洁车辆补贴计划”，以替代将在2023年失效的旧版计划。旧版计划曾助力超过59.4万辆电动车的购买，并累计节省了超过4.56亿加仑的燃油。新版计划旨在通过引入激励机制来促进市场创新和竞争，<strong>但这一变化可能会导致特斯拉等企业不再符合补贴的资格条件。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_525a6cee2ebc487f98e0b3e923bd677d@5576020_oswg83900oswg1080oswg230_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_59c6d60ef7644a9f92166ff46c761d78@5576020_oswg575897oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>对此，特斯拉CEO马斯克在X平台强烈抨击该提案<strong>“荒谬”！</strong>指出特斯拉是唯一在加州本地生产电动车的企业，却可能被排除在外。特斯拉目前在加州拥有大量员工，包括弗里蒙特工厂的生产团队以及多个研发团队。<strong>马斯克警告，若证策实施，特斯拉或不得不削减在加州的岗位。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_4325d11257cb481a9da4b4db1c4943cd@5576020_oswg128656oswg1080oswg1346_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>加州州长办公室在声明中回应称，“消费者已用实际行动证明零排放车辆是未来趋势。我们的目标是让这类车辆更加平价，而非停止支持。”补贴资金将来自加州温室气体减排基金，主要由污染企业通过碳交易缴纳费用。然而，官员尚未披露新版计划的具体预算规模，也未明确对消费者的实际影响。</p>
-  <p><strong>特斯拉当前在加州补贴证策中的占比高达42%。新计划一旦实施，不仅可能影响特斯拉的销量，还可能对其在该州的整体业务布局产生连锁反应。</strong></p>
-  <p>更广泛来看，加州累计售出超200万辆零排放车辆，但明年的预算赤字预计将达20亿美元，这也为新证策的落地增加了不确定性。</p>
-  <p>这一系列变动反映了电动车行业从证策驱动向市场驱动转型的趋势。对特斯拉而言，短期内或面临一定压力，但这也可能成为其降低补贴依赖、深化成本控制与技术创新的重要契机。</p>
-  <p>本文来自微信公众号“美股投资网”（ID：tradesmax），36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3054048540234118</id>
-            <title>阿里系冲出一家网约车IPO</title>
-            <link>https://www.36kr.com/p/3054048540234118</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3054048540234118</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 27 Nov 2024 03:16:22 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 港股, 盛威时代, 网约车, 阿里巴巴  
-<br><br>  
-总结: 盛威时代科技股份有限公司于11月13日向港交所递交招股书，主要依靠网约车服务作为收入来源。尽管公司营收在过去几年内逆势增长，但净利润持续亏损，三年半累计亏损超过18亿。盛威时代的网约车服务占公司营收的85.3%，并且是中国第二大网约车平台。公司在阿里旅行的支持下发展，阿里旅行为第一大股东。尽管营收增长，毛利率波动且网约车服务的毛利率较低，主要由于激励司机的成本。 </div>
-                        <hr>
-                    
-                    <p>港股迎来一家网约车公司冲刺上市。</p>
-  <p>11月13日，盛威时代科技股份有限公司（简称“盛威时代”）向港交所递交了招股书，保荐机构是中信建投国际。</p>
-  <p>这家公司背靠阿里巴巴集团旗下的阿里旅行，以网约车服务为主要收入来源；过去几年内，尽管行业经历了波动，但是公司营收逆势增长，不过净利润却持续亏损。</p>
-  <p>接下来让我们一起透过招股书来看看公司的详细情况。</p>
-  <h2><strong>用友网络前副总裁创业，阿里一路扶持</strong></h2>
-  <p>盛威时代于2012年9月28日成立，创始人是姜生喜，他于1998年7月获得中国北方交通大学（现称北京交通大学）会计学学士学位。后分别于2007年11月及2021年9月获得香港科技大学及中国长江商学院的EMBA学位。</p>
-  <p>姜生喜在软件行业有逾20年的经验，2001年2月至2013年3月的12年间，他任职于用友网络科技股份有限公司（股票代码：600588.SH），最后职位为副总裁。</p>
-  <p>在2016年7月的A轮增资中，公司引入了阿里旅行，此后阿里旅行一路增资，成为盛威时代的第一大股东；此外公司还吸引了宁波软银、贵阳软银、上海明赫，弘鑫天时、广州淡水泉等知名投资机构参投。</p>
-  <p>根据2024年11月最后一轮股权转让的对价计算，<strong>盛威时代在一级市场的估值为22.16亿元。</strong></p>
-  <p>截至递表，阿里旅行直接持股27.01%，为第一大股东；姜生喜紧随其后持股20.67%；软银实体合计直接及间接控制10.72%股权。</p>
-  <p>不过，公司的控股股东并非阿里旅行。据招股书，姜生喜与王嘉伟先生、成都盈创、盈创世纪、余浪先生、海岱柱石、陈树林先生、时代众成及时代信成，于该公司股东大会上，共同有权控制行使约42.20%投票权，构成该公司一组控股股东。</p>
-  <h2><strong>网约车服务贡献8成以上营收</strong></h2>
-  <p>盛威时代是一家城际及城内道路客运信息服务提供商，主要提供城际道路客运服务及城市内网约车服务，业务覆盖全国30多个省、自治区及直辖市。其运营的平台包括“出行365”，以及信息系统“云站务”、“客运达”。</p>
-  <p>公司的业务包括以下几大板块：</p>
-  <p><strong>1、客运服务：2023年占公司营收的比重为5.7%。</strong>根据弗若斯特沙利文的资料，公司于2023年成为中国按售票量计最大的城际道路客运信息服务提供商；可以细分为联网售票服务和定制客运服务。</p>
-  <p><strong>2、网约车服务：2023年占公司营收的比重为85.3%。</strong>截至2024年6月30日，按《网络预约出租汽车经营许可证》数量计算，公司是中国第二大的网约车平台。截至最后实际可行日期，公司已经获得191张《网络预约出租汽车经营许可证》，而注册司机数量累计达至约150万名。</p>
-  <p><strong>3、数字化及业务解决方案：2023年占公司营收的比重为9%。</strong>公司的数字化及业务解决方案主要包括(i)软件的开发、交付及维护；(ii)硬件的采购、实施及维护；及(iii)为客户提供该等软件硬件组件的系统集成。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_0ad01a3bbde54be9b887863c18293b83@1743780481_oswg163277oswg830oswg503_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">公司各项业务占比，来源：招股书</p>
-  <p><strong>网约车服务是公司收入的主要来源</strong>。</p>
-  <p>从行业来看，自2018年起，中国网约车市场由1831亿元增长至2019年的1939亿元。2020年至2022年，由于COVID-19的影响、全国疫情再起及出行限制均导致中国网约车行业的衰退。</p>
-  <p>2023年，随着疫情控管全面放开以及国家及地方政府出台的政策，可预见政策整体鼓励网约车行业发展，同时通过持续更新惯例及标准确保行业的未来发展。市场将按19.5%的复合年增长率增长，并预期将于2028年达致人民币6474亿元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_4771b14575e7499fb9b04a9b53546474@1743780481_oswg93943oswg830oswg476_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">网约车市场规模，来源：招股书</p>
-  <h2><strong>增收不增利，三年半亏损超18亿</strong></h2>
-  <p>与网约车行业总规模的波动相比，报告期内盛威时代的营收一直保持较高的增速。</p>
-  <p>2021年、2022年、2023年、2024年1-6月（报告期），公司的收入分别为5.5亿元、8.16亿元、12.1亿元、7.26亿元，2021年至2023年的复合年增长率为47.6%。</p>
-  <p><strong>不过，公司的净利润却持续亏损</strong>。报告期内亏损分别为5.87亿元、4.99亿元、4.82亿元、2.85亿元，3年半累计亏损18.5亿元。</p>
-  <p>扣除向投资者发行的赎回权账面值变动及以权益结算以股份为基础的付款等项目的影响后，經調整虧損淨額（非国际财务报告准则计量）分别为5560万元、5050万元、1780万元、1670万元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_d517b80c067d48a2a1a1f1911cdaf483@1743780481_oswg56827oswg685oswg787_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">公司关键财务指标，来源：招股书</p>
-  <p>报告期内，<strong>盛威时代的综合毛利率分别为8.6%、6.6%、7.1%、3.5%，存在波动。</strong></p>
-  <p>其中，客运服务业务的毛利率相对较高，2024年1-6月的毛利率为57.0%，原因是收入按净额基准确认。</p>
-  <p>而占公司收入大头的网约车服务业务的毛利率相对较低，由2021年的2.3%降至2024年1-6月的-0.5%。主要是由于公司建立了一套具竞争力的定价机制，并向司机提供激励以在网约车市场竞争。</p>
-  <p>由此也不难理解，公司销售成本的最大组成部分为司机服务费。2024年1-6月，公司支付予司机的服务费总额（包括适用的司机奖励）为5.67亿元，占销售成本的81%。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241127/v2_3bd08d98c5eb42c9b68775d82d8fe208@1743780481_oswg124467oswg831oswg440_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">公司分业务毛利率情况，来源：招股书</p>
-  <p>在微薄的毛利率下，销售及营销、研发开支又构成了盛威时代最大的两项开支。2024年1-6月，销售及营销开支占比为2.8%，研发开支占比为2.2%。</p>
-  <p>值得注意的是，<strong>盛威时代的网约车服务业务依赖与有限数量的聚合平台的合作</strong>，特别是与阿里旗下高德的合作。</p>
-  <p>报告期内，公司通过高德产生的GTV分别占网约车服务业务总GTV的95.3%、92.9%、89.5%及93.4%。2019年盛威时代开始透过高德为用户提供聚合网约车服务，乘客可通过高德等主要聚合平台及公司的自营平台365约车使用公司的网约车服务。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/RHb9qMyC2ACsgqh6J5VNig" rel="noopener noreferrer nofollow" target="_blank">“格隆汇新股”</a>，作者：发哥说新股，36氪经授权发布。</p>
                 ]]>
             </content:encoded>
         </item>
