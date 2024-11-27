@@ -5,6 +5,40 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/67469876ba0429bf87824471</id>
+            <title>AI探索站 11月27日</title>
+            <link>https://m.okjike.com/originalPosts/67469876ba0429bf87824471</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67469876ba0429bf87824471</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 27 Nov 2024 03:56:38 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    聊几点我对 Anthropic MCP 的看法：<br /><br />1. 并没有像自媒体鼓吹的那样夸张，还不至于让 AI 行业变天，依然有很长的路要走；<br /><br />2. 可以简单理解跟大模型已经支持的 Function Calling 是同一个东西，本质是为了让大模型可以调用外挂的服务，对接更多的数据和能力，再作为补充上下文回答用户的问题；<br /><br />3. 区别点在于：Function Calling 由大模型通过 HTTP 请求第三方的外挂 API，而 MCP 是由大模型通过 RPC 请求第三方的外挂服务；<br /><br />4. 从接入方式上看，Function Calling 更简单，第三方只需要写一个 API，再在大模型配置对 API 的请求参数即可。MCP 接入起来要复杂一些，第三方需要写个服务，实现协议里定义的 RPC 方法，再在大模型里面配置服务地址和参数，大模型客户端在启动的时候需要做一次服务发现，再连接到配置的 RPC 服务，才能在后续对话过程调用；<br /><br />5. Function Calling 和 MCP 的核心和难点都在于大模型侧的意图识别，用户随机提问，如何找到匹配的外挂服务，实现 RAG，这是所有大模型面临的通用难题（比如 ChatGPT 有几百万的 GPTs 应用，如何根据用户提问路由到最匹配的那个 GPTs 来回答问题），MCP 协议并不能解决这个问题。Claude 客户端目前的实现方式，是让用户自己写个配置文件，告诉大模型有哪些可以调用的服务，再由 Claude 在对话时自动识别，跟 ChatGPT 之前让用户选择使用哪些 Plugins 的逻辑一致；<br /><br />6. MCP 的亮点是定义了一套标准且相对完善的协议，对于大模型和应用的生态协同有很大的指导意义。类似由微软提出并在 VS Code 实现的 LSP 协议一样（定义了编辑器如何与第三方语言服务交互，实现代码补全/类型约束/错误提示等功能）。MCP 协议的适用对象主要是大模型/应用客户端和第三方服务，跟 LSP 不同的是，编程语言的数量相对有限，最多几百个语言服务，社区协同下很快就能全部支持，编辑器可以根据文件的后缀快速定位到要调用的语言服务。MCP 适用的第三方服务是海量的，MCP 的发展取决于有多少第三方服务愿意基于这套协议去实现 RPC 服务，最关键的还是大模型/应用客户端对海量 MCP 服务的路由寻址问题（没有固定的后缀，只能靠意图识别或者人工配置）。<br /><br />7. OpenAI 最初开放的 API 协议已经成了一个约定俗成的标准，后来的大模型在开放自家 API 时都会选择兼容 OpenAI 的 API，主要原因有两个：一是 OpenAI 的 API 开放的早，很多应用接入了，兼容它对第三方接入友好；二是 OpenAI 的 API 实现的确实很规范，照着模范生抄作业何乐不为。MCP 会不会也跟 OpenAI 的 API 协议一样，成为行业内的新标准，这个问题取决于先有鸡还是先有蛋：如果有足够多的第三方服务基于这套协议开放了自己的服务，其他大模型/应用客户端应该会跟进；如果主流的大模型/应用客户端都支持了这套协议，那么作为一个第三方，也肯定愿意按这套协议开放自己的服务（比起为 GPTs / Coze / Dify 分别写一个 API 给智能体调用，MCP 服务只需要写一次，可以在任意支持 MCP 的客户端调用）。<br /><br />8. MCP 目前不支持 Remote Server，不能在网页版调用，只能在 Claude 桌面版使用。我写了一个用 Claude 客户端分析群聊记录的程序，结合实例来看 MCP 的应用，很好理解。MCP 的想象空间还是很大的，未来可期。<br /><br />个人经验之谈，有表达不当之处，欢迎补充讨论。🌚
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6745bbf85f3c97961e12d089</id>
+            <title>AI探索站 11月26日</title>
+            <link>https://m.okjike.com/originalPosts/6745bbf85f3c97961e12d089</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6745bbf85f3c97961e12d089</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 26 Nov 2024 12:15:52 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Qwen2vl-Flux 这个模型用 Qwen2VL 替换了 FLUX 中的 T5 模型。<br /><br />让 FLUX 的多模态图像理解和提示词理解变得很强。<br /><br />- 无文本图像直接基于图像生成图像<br />- 类似 IPA 将图片和文字结合生成对应风格的图片<br />- GridDot控制面板，细致的风格提取<br />- ControlNet 集成，支持 Depth 和 canny<br /><br />模型下载：https://huggingface.co/Djrango/Qwen2vl-Flux
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6745b8908dc1346967e00edf</id>
             <title>AI探索站 11月26日</title>
             <link>https://m.okjike.com/originalPosts/6745b8908dc1346967e00edf</link>
@@ -22,23 +56,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6745b60340a2741999f9ec1c</id>
-            <title>AI探索站 11月26日</title>
-            <link>https://m.okjike.com/originalPosts/6745b60340a2741999f9ec1c</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6745b60340a2741999f9ec1c</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 26 Nov 2024 11:50:27 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    除了有点斗鸡眼，还是很像我的！
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/6745a48453ab99f7fde103a5</id>
             <title>AI探索站 11月26日</title>
             <link>https://m.okjike.com/originalPosts/6745a48453ab99f7fde103a5</link>
@@ -51,23 +68,6 @@
                 <![CDATA[
                     
                     AI带娃很有搞头。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/674497e18dc1346967cc09e5</id>
-            <title>AI探索站 11月25日</title>
-            <link>https://m.okjike.com/originalPosts/674497e18dc1346967cc09e5</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/674497e18dc1346967cc09e5</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 25 Nov 2024 15:29:37 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    Bolt 发福利了，又可以白嫖了。<br /><br />截止11月30日，每个Pro用户都可以获得200万Token！<br /><br />所有免费用户可以获得两倍的每日和每月Token限额。
                 ]]>
             </content:encoded>
         </item>
