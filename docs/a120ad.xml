@@ -5,6 +5,360 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2024/12/no-code-ai-tutorial.html</id>
+            <title>AI 应用无代码开发教程：工作流模式详解</title>
+            <link>http://www.ruanyifeng.com/blog/2024/12/no-code-ai-tutorial.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2024/12/no-code-ai-tutorial.html</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 02 Dec 2024 18:39:07 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: AI应用, 低代码, 工作流模式, 文言文生成器
+<br>
+<br>
+总结: 本文介绍了如何使用扣子（Coze）平台搭建一个简单的AI应用，具体示例为“AI文言文生成器”。文章强调了图形化、低代码/无代码的工作流模式，使得没有编程基础的用户也能轻松上手。通过详细的步骤，读者可以创建项目、配置业务逻辑和用户界面，最终实现应用的发布。作者鼓励读者尝试不同的AI应用开发，展示了该平台的灵活性和便捷性。 </div>
+                        <hr>
+                    
+                    <h2>一、引言</h2>
+
+<p>一个月前，我写了一篇<a href="https://www.ruanyifeng.com/blog/2024/10/coze.html">《AI 开发的捷径：工作流模式》</a>，引起了很多读者的兴趣。</p>
+<p>大家都认同，AI 应用是开发者的机会，而<strong>图形化、低代码/无代码、不需要编程基础的"工作流模式"</strong>，正是 AI 应用开发的入门捷径。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120115.webp" title="" /></p>
+
+<p>但是，我的那篇文章只介绍概念，没有操作步骤。很多读者实际上手时，遇到了困难，有些地方不理解，做不下去。</p>
+
+<p>今天就是后续，我详细演示，一步步图解，<strong>没有编程基础，如何搭建一个最简单的 AI 应用</strong>。只要你跟着做，就能做出来。</p>
+
+<h2>二、开发工具</h2>
+
+<p>这篇教程使用的开发工具是<a href="https://www.coze.cn/">扣子（Coze）</a>，所有操作都在它的浏览器 IDE（集成开发环境）中完成，</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024112706.webp" title="" /></p>
+
+<p>选择扣子（Coze），主要原因有三个。</p>
+
+<p>（1）它是国产的 AI 应用开发平台，字节跳动的产品，界面、文档、客服都是中文。</p>
+
+<p>（2）它有无代码编辑器 Project IDE，包含组件拖拽的 UIBuilder，可以生成全功能的前端界面，上手门槛相对低。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113001.webp" title="" /></p>
+
+<p>同时，它也提供后端数据库，可以数据读写。</p>
+
+<p>（3）它免费使用（只要不超过使用额度），发布上线也不收费，适合新手练习。</p>
+
+<h2>三、示例项目</h2>
+
+<p>我们的示例项目，是一个最简单的"AI 文言文生成器"。</p>
+
+<p>大家先看<a href="https://www.coze.cn/s/iDCT55nY/">成品</a>，可以点进去试用。（建议 PC 访问，UI 还没有适配手机。）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120114.webp" title="" /></p>
+
+<p>输入一段汉语白话文，点击按钮，AI 就会自动生成文言文。</p>
+
+<p>架构上，它非常简单：前端是一个网页表单，将用户的输入发送给后端的 AI 模型，并展示后端的返回结果。</p>
+
+<p><strong>它的开发只需要两步，第一步先让后端的 AI 模型跑起来，第二步做一个网页，连接后端即可。</strong></p>
+
+<p>扣子的方便之处在于，前后端的生成都是图形化操作：后端是编排工作流的节点，前端是 UIBuilder 的界面拖拽组件。</p>
+
+<p>下面就是开发步骤。为了保证大家跟得上，我写得比较详细，看起来有点长，但是实际操作是很快的，熟练的话，10分钟就能完成。</p>
+
+<h2>四、创建项目</h2>
+
+<p>首先是开发的准备工作，先创建 AI 应用。</p>
+
+<p>（1）访问<a href="https://www.coze.cn/">扣子官网</a>，点击右上角的"基础版登录"。（基础版只比专业版少一些企业级功能，普通用户完全够用。）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120116.webp" title="" /></p>
+
+<p>（2）登录后，自动跳转到个人主页，点击左侧菜单的"工作空间"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113003.webp" title="" /></p>
+
+<p>工作空间里面，有"项目开发"和"资源库"两个页面。进入"项目开发"，可以看到你所有的项目。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113004.webp" title="" /></p>
+
+<p>（3）点击右上角的"创建"按钮，跳出一个弹框。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113005.webp" title="" /></p>
+
+<p>上面有两个选项，"创建智能体"是创建一个传统的 AI 聊天，"创建应用"则是创建一个自定义界面的 AI 应用。</p>
+
+<p>（4）选择"创建应用"，这时会让你选择应用模版，点击"创建空白应用"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113006.webp" title="" /></p>
+
+<p>接着，输入项目的名称，这里是"AI 文言生成器"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113007.webp" title="" /></p>
+
+<p>至此，项目创建完毕，系统会自动进入"AI 文言生成器"的应用主页（下图），正式的开发工作就要开始了。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113008.webp" title="" /></p>
+
+<h2>五、业务逻辑</h2>
+
+<p>应用主页的最上方，有"业务逻辑"和"用户界面"两个分页，默认是"业务逻辑"页面。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113009.webp" title="" /></p>
+
+<p>这一节就讲解如何创建业务逻辑，也就是后端的 AI 模型。</p>
+
+<p>我们采用工作流模式，即将业务逻辑编排成一个个节点。</p>
+
+<p>（1）点击左侧菜单的"工作流"后面的"+"号，选择"新建工作流"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113010.webp" title="" /></p>
+
+<p>输入工作流的名称和描述。（注意，名称只能是英文字母、数字和下划线，本例是 classical<em>chinese</em>creator。）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113011.webp" title="" /></p>
+
+<p>（2）工作流创建成功后，名称会出现在左侧菜单的"工作流"标签下方。点击它，就进入该工作流的"节点编排"画布。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113012.webp" title="" /></p>
+
+<p>画布上，默认有"开始"和"结束"两个节点。</p>
+
+<p>（3）点击下方的"添加节点"，添加一个新节点，类型设为"大模型"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113013.webp" title="" /></p>
+
+<p>然后，将这三个节点连起来（通过拖动边框上的控制点）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113014.webp" title="" /></p>
+
+<p>（4）配置"开始"节点。双击该节点，在配置框增加一个 content 变量，表示用户的输入内容。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113015.webp" title="" /></p>
+
+<p>（5）配置"大模型"节点。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113016.webp" title="" /></p>
+
+<p>配置窗口的各个选项，填写如下。</p>
+
+<p>模型：可以按自己的需要选择，这里保持默认值"豆包 Function call 模型"。</p>
+
+<p>输入：将原来的 input 参数改名为 content，并跟"开始节点"的 content 变量连接起来。</p>
+
+<p>系统提示词：输入以下内容，用来设定大模型的行为。</p>
+
+<blockquote>
+  <h1>角色</h1>
+
+<p>你是一个专业的汉语文言文作者，能够准确地将用户输入的汉语白话文内容改写为文言文，不进行随意扩写。</p>
+
+<h2>技能</h2>
+
+<h3>技能 1：文言文写作</h3>
+
+<ol start="1">
+<li>当用户提供一段汉语白话文时，迅速将其改写成文言文。</li>
+<li>确保改写后的文言文的准确性和完整性。</li>
+</ol>
+
+<h2>限制：</h2>
+
+<ul>
+<li>只进行文言文改写，不回答与文言文改写无关的问题。</li>
+<li>严格按照用户提供的汉语白话文进行改写，不得擅自增加内容。</li>
+</ul>
+</blockquote>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113017.webp" title="" /></p>
+
+<p>用户提示词：输入以下内容，作为给系统的直接命令。</p>
+
+<blockquote>
+  <p>将用户输入的汉语白话文{{content}}改写成文言文。</p>
+</blockquote>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113018.webp" title="" /></p>
+
+<p>上面文本中的<code>{{content}}</code>，表示此处系统将插入 content 变量的内容。</p>
+
+<p>输出：将输出格式改为"文本"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113019.webp" title="" /></p>
+
+<p>（6）配置"结束"节点。首先点击配置框上部的"返回文本"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113020.webp" title="" /></p>
+
+<p>输出变量：将 output 参数关联"大模型"节点的 output 变量。</p>
+
+<p>回答内容：输入<code>{{output}}</code>（表示插入 output 变量的内容），并打开"流式输出"（即打字机效果）。</p>
+
+<p>至此，整个工作流的搭建全部完成，可以单击画布右上角绿色的"试运行"按钮，测试工作流是否正常运行。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113021.webp" title="" /></p>
+
+<p>在 content 输入框，输入测试内容，比如"今天天气很好"。</p>
+
+<p>然后，点击下方的运行按钮，就可以得到运行结果（今日，天善）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113022.webp" title="" /></p>
+
+<p>如果一切正常，就可以开始搭建用户界面。</p>
+
+<h2>六、用户界面的搭建：页面布局</h2>
+
+<p>（1）点击进入画布上方的"用户界面"分页。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113023.webp" title="" /></p>
+
+<p>（2）在左侧菜单的组件面板，找到布局组件 > 容器组件，将其拖入中间的画布，作为页面的标题区域。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113024.webp" title="" /></p>
+
+<p>系统自动将这个容器命名为 Div1，双击进行配置。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113026.webp" title="" /></p>
+
+<p>尺寸：宽度为100%，高度为 60px。</p>
+
+<p>布局：排列方向为"横向"。</p>
+
+<p>样式：去除背景色，将边框设为灰色（#E2E8F0）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113027.webp" title="" /></p>
+
+<p>（3）在 Div1 下方，再拖入一个容器组件，系统自动命名为 Div2，用作功能区域。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113028.webp" title="" /></p>
+
+<p>配置基本一样：尺寸部分，宽度和高度都设为填充容器；布局部分，排列方向为横向；样式部分，去除背景色。</p>
+
+<p>（4）在 Div2 内部的左侧部分，拖入一个容器组件 Div3，用作用户输入区域。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113029.webp" title="" /></p>
+
+<p>宽度设为50%，高度设为 550px，样式删除背景色。</p>
+
+<p>（5）在 Div2 内部的右侧部分，拖入一个容器组件 Div4，用作展示结果区域。</p>
+
+<p>宽度设为50%，高度设为 550px，样式删除背景色。</p>
+
+<p>至此，页面布局如下图。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024113030.webp" title="" /></p>
+
+<h2>七、用户界面的搭建：页面细化</h2>
+
+<p>做好布局后，下一步完善页面细节。</p>
+
+<p>（1）在 Div1 内部，拖入推荐组件 > 文本组件，作为标题文本。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120102.webp" title="" /></p>
+
+<p>标题内容设为"AI 文言文生成器"，字号改成24，字重为粗体。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120101.webp" title="" /></p>
+
+<p>（2）在 Div3 中拖入一个表单组件，删除不需要的元素，只剩下文本输入框和按钮。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120103.webp" title="" /></p>
+
+<p>表单组件：宽度和高度都设为填充容器，并删除边框。</p>
+
+<p>文本输入框：拉伸高度，宽度设为填充容器，标签和占位文案设为"输入汉语白话文"。</p>
+
+<p>按钮：文本改为"生成文言文"。</p>
+
+<p>完成后的表单效果如下图。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120104.webp" title="" /></p>
+
+<p>（3）在 Div4 中拖入一个展示组件 > Markdown 组件，作为展示文言文区域。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120105.webp" title="" /></p>
+
+<p>删除 Markdown 组件的已有内容，改成"###### 生成结果"。高度和宽度改为填充容器，圆角设为10，内边距设为20，边框设为灰色（#CBD5E1）。</p>
+
+<p>至此，页面细化完成，单击属性面板上方的预览，查看效果。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120106.webp" title="" /></p>
+
+<h2>八、用户界面的搭建：配置事件</h2>
+
+<p>页面外观做完后，要配置事件，将后端的业务逻辑与用户界面连接起来。</p>
+
+<p>（1）点击"生成文言文"按钮，在配置面板切换到"事件"，点击"新建"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120107.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120108.webp" title="" /></p>
+
+<p>事件类型设为"点击时"，执行动作设为"调用 Workflow"，workflow 设为已经创建好的"classical<em>chinese</em>creator"，并将工作流的入参<code>content</code>设为文本输入框的值 {{ Textarea1.value }}。</p>
+
+<p>（2）配置生成结果区域，展示工作流的返回结果。</p>
+
+<p>选中 Markdown 组件，点击"内容"栏的扩展按钮。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120109.webp" title="" /></p>
+
+<p>扩展面板中，在<code>###### 生成结果</code>后面添加一行，插入工作流的返回结果<code>{{ classical_chinese_creator.data }}</code>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120110.webp" title="" /></p>
+
+<p>完成所有配置后，单击右上角"预览"按钮，测试整体效果。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120114.webp" title="" /></p>
+
+<p>如果一切正常，这个 AI 应用就算开发完成了。</p>
+
+<h2>九、应用发布</h2>
+
+<p>开发完成后，就可以发布该应用，让其他人也可以使用。</p>
+
+<p>点击右上角"发布"按钮，版本号设为 v0.0.1，发布平台设为发布到扣子商店。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024120113.webp" title="" /></p>
+
+<p>至此大功告成，"<a href="https://www.coze.cn/s/iDCT55nY/">AI 文言生成器</a>"就登录扣子商店，向世界公开了。</p>
+
+<h2>十、总结</h2>
+
+<p>大家可以根据这个示例，改变输入 AI 模型的提示，让它做不同的任务，就能变化出很多不同功能的应用。</p>
+
+<p>比如，官方的"<a href="https://www.coze.cn/docs/guides/app_quickstart">AI 翻译</a>"示例，就是让 AI 把用户输入的中文译成其他语言，跟"AI 文言文生成器"异曲同工。</p>
+
+<p>除了文本生成，扣子还提供许多其他能力，比如抓取外部数据、数据库读写等，从而可以做出更强大的 AI 应用。</p>
+
+<p>总之，<strong>"工作流模式"使用图形化界面搭建一个 AI 应用，简单而便捷</strong>，随时查看效果，一键发布，值得大家尝试。</p>
+
+<p>（此处有分割线。）</p>
+
+<p>最后是一个活动预告。</p>
+
+<p>扣子邀请我，参加<strong>12月19日在上海举行</strong>的"<a href="https://mp.weixin.qq.com/s/adDVoDSIxtAMH-havVpvPA">扣子开发者日</a>"，也欢迎大家参加。</p>
+
+<p>届时，字节的 AI 工程师会跟大家面对面交流，如何开发和推广 AI 应用。这是很好的学习交流、获取资源的机会，<a href="https://mp.weixin.qq.com/s/adDVoDSIxtAMH-havVpvPA">点击这里</a>了解详情。</p>
+
+<p>扫描下方海报二​维码，或者<a href="https://www.i-hudong.com/www/FORCE?page=42">点击链接</a>，<strong>现在就可以线下报名参加，或者线上预约直播</strong>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024112809.webp" title="" /></p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2024-12-02T18:39:07+08:00">2024年12月 2日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2024/11/weekly-issue-327.html</id>
             <title>科技爱好者周刊（第 327 期）：没有链接的互联网</title>
             <link>http://www.ruanyifeng.com/blog/2024/11/weekly-issue-327.html</link>
@@ -2203,228 +2557,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2024-11-01T08:08:15+08:00">2024年11月 1日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2024/10/coze.html</id>
-            <title>AI 开发的捷径：工作流模式</title>
-            <link>http://www.ruanyifeng.com/blog/2024/10/coze.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2024/10/coze.html</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 31 Oct 2024 03:24:05 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: AI开发, 工作流模式, 模板商店, API调用  
-<br><br>  
-总结: 本文介绍了AI开发的三种模式：自建模型、API调用和工作流模式，其中工作流模式最为简单，适合普通用户上手。作者选择了工作流模式，并展示了如何使用国内的AI开发平台“扣子”进行应用开发。通过工作流，用户可以将AI应用分成多个步骤，便于操作和管理。此外，文章还提到模板功能，用户可以将自己的工作流保存为模板，供他人使用和借鉴。最后，作者鼓励读者尝试开发自己的AI应用，并参与相关活动。 </div>
-                        <hr>
-                    
-                    <h2>一、引言</h2>
-
-<p>大部分人使用 AI，大概都跟我一样，停留在初级阶段。</p>
-<p>平时，就是向 AI 提问（又称聊天），偶尔也用一些现成的服务：生成图片、生成代码、翻译文章等等。但是，时间久了，就觉得不够用，很多个性化需求，根本找不到工具，需要自己想办法。</p>
-
-<p>我想，这是很多人面临的问题：<strong>如果深入使用 AI，就必须自己做开发</strong>。</p>
-
-<p>今天，我就介绍一种 AI 开发的简单方法，没有那么高的门槛，普通人也可以上手。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102701.webp" title="" /></p>
-
-<h2>二、AI 开发的三种模式</h2>
-
-<p>按照从难到易，我把 AI 开发分成三种模式。</p>
-
-<p><strong>（1）自建模型</strong>：自己搭建 AI 模型，并寻找数据进行训练。</p>
-
-<p>这种模式难度高，成本大，必须是 AI 专业人士或大公司，才会使用。</p>
-
-<p><strong>（2）API 调用</strong>：自己编写脚本，去调用他人运行的模型 API。</p>
-
-<p>这种模式要求使用者必须会编程，优点是适应性强，什么需求都能编程解决，缺点是编写和调试脚本要花不少时间，还要自己部署服务端。</p>
-
-<p><strong>（3）工作流模式</strong>：<u>采用 AI 服务商提供的工作流（workflow），编排每个步骤，形成自动化操作。</u></p>
-
-<p>这种模式最简单，不懂编程的人也能上手，可以不编写脚本，有现成的服务端，省时省事。缺点是受限于 AI 服务商提供的能力，对方不提供，就做不了。</p>
-
-<p>我是 AI 新手，就选择了最后这种模式，尝试 AI 开发。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102702.webp" title="" /></p>
-
-<h2>三、GPT 商店和 Copilot 模板</h2>
-
-<p>很多 AI 大厂都提供"工作流模式"，允许开发者在他们的模型上，定制自己的应用。</p>
-
-<p>最有名的大概就是 OpenAI 公司的 <a href="https://gptstore.ai/">GPT 商店</a>。</p>
-
-<p>它开放 ChatGPT 的底层能力，让开发者定制某个领域的专用 GPT，比如学术论文的 GPT、处理 Excel 文件的 GPT 等等。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102703.webp" title="" /></p>
-
-<p>微软的 Copilot 也有类似的功能，叫做"<a href="https://www.copilot.com/templates">模板</a>"（template）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102704.webp" title="" /></p>
-
-<p>不过，这些都是国外的服务，需要收费，服务器在境外。好在国内有免费的替代品，我就选择了国内产品。</p>
-
-<h2>四、工作流演示</h2>
-
-<p>我先演示一下，工作流的操作界面。大家就能明白，它是怎么回事了。</p>
-
-<p><strong>工作流其实就是把一个 AI 应用，分成若干个步骤</strong>。每个步骤是一个节点，你在上面设置这一步的操作，然后所有节点按照流程，完成任务。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102708.webp" title="" /></p>
-
-<p>上图是<a href="https://www.coze.cn/?utm_source=ruanyifeng1028">扣子 AI</a>（coze.cn）的工作流编排界面，包含四个节点。</p>
-
-<p>扣子是字节跳动旗下、免费的 AI 应用开发平台。使用过程非常直观，就是在网页画布上，通过图形化操作，一步步创建 AI 应用。我就用它来演示。</p>
-
-<p>它的开发页面左侧是不同类型的节点，下图是其中一部分。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102709.webp" title="" /></p>
-
-<p>新建节点时，点击对应类型就可以了。一般来说，第一步总是新建"模型节点"或"插件节点"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102710.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102711.webp" title="" /></p>
-
-<p>新建模型节点后，如果你想用自己的数据训练模型，可以在项目管理页面上，新建一个知识库，上传数据文件。然后在工作流里面，创建一个"知识库节点"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102712.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102713.webp" title="" /></p>
-
-<p>如果你想启用持久记忆能力，记住用户的历史对话，那么可以新建数据库，保存用户数据，然后在工作流创建"数据库节点"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102714.webp" title="" /></p>
-
-<p>所有节点设置完毕，这个 AI 应用就可以运行了。最后一步，就是发布该应用。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102715.webp" title="" /></p>
-
-<p>扣子会让你选择发布渠道（上图），目前支持发布到商店（在扣子平台使用）、第三方平台（在飞书、抖音、微信使用），以及 API 和 SDK（在用户自己的软件使用）。</p>
-
-<p>以上就是工作流模式的使用界面，只是一个简单介绍，大家有一个大概的理解就可以了，具体操作可以看<a href="https://www.coze.cn/docs/guides/quickstart">文档</a>。</p>
-
-<p>它还是很容易上手的，熟练以后，开发一个 AI 应用，一两个小时就可以搞定。</p>
-
-<h2>五、工作流开发的例子</h2>
-
-<p>为了加深理解，我举一个实际开发的例子。某餐饮企业想要搭建一个 AI 应用，用来分析用户的点评。</p>
-
-<p>为此新建一个工作流，基本功能只需要三个节点----输入节点、分析用户点评的 AI 模型节点、输出节点。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102801.webp" title="" /></p>
-
-<p>然后，把这个工作流发布成 API。用户的点评传入这个 API，它就会返回一段 JSON 数据，里面有 AI 模型识别出的用户评价（正面、负面、中性），以及点评关键词（环境/服务/菜品）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102802.webp" title="" /></p>
-
-<p>上图是这个工作流的预览调试界面，输入了一段真实的点评，运行结果以 JSON 格式返回。</p>
-
-<p>可以看到，AI 识别出该用户对产品是中评，对环境是差评，对上菜速度是好评。</p>
-
-<h2>六、模板功能</h2>
-
-<p>工作流除了自己使用，还可以保存成模板（template），发布到<a href="https://www.coze.cn/store/agent?utm_source=ruanyifeng1028">模板商店</a>，让别人使用和借鉴。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102803.webp" title="" /></p>
-
-<p>在模板商店，你可以看到官方和其他用户搭建好的工作流，目前已经有上千个，还在快速增长。</p>
-
-<p>这些工作流可以直接使用，也可以作为模板复制。用户复制模板后，对它们进行学习和修改，将其改造为适合自己的应用。</p>
-
-<p>对于模板作者来说，可以对模板设置价格，实现变现。</p>
-
-<p>很多模板提供非常有意思的功能，值得一看。比如，"<a href="https://www.coze.cn/template/workflow/7375170277233442850?entity_type=23">抖音转小红书</a>"的模板。</p>
-
-<p>你输入一个抖音的短视频链接，AI 自动生成10个可用标题和一段文案，你可以把它们连同视频一起发到小红书。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102804.webp" title="" /></p>
-
-<h2>七、教程：情感故事爆文专家</h2>
-
-<p>网上已经有不少工作流模板的开发教程，大家可以去搜一下。</p>
-
-<p>我看到一篇"情感故事爆文专家"的<a href="https://mp.weixin.qq.com/s/rNtKofSJi-H2D7tw9I8WEQ">模板教程</a>，非常有趣。情感类的网文现在流量很好，作者就开发了一个 AI 应用，专门生成这类文章。</p>
-
-<p>先看成品，点击<a href="https://www.coze.cn/store/bot/7393353847667916836">这个模板链接</a>，体验一下它的效果。你输入一个文章主题，比如</p>
-
-<blockquote>
-  <p>一对情侣在大学里认识，毕业后分手，10年后再次相遇。</p>
-</blockquote>
-
-<p>这个 AI 应用会输出文章的大纲和正文。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102811.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102806.webp" title="" /></p>
-
-<p>还带有配图，可以直接发布。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102807.webp" title="" /></p>
-
-<p>它背后的工作流，大致分成六个节点。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102808.webp" title="" /></p>
-
-<blockquote>
-  <ol start="1">
-<li>开始节点：接收用户输入的文章主题</li>
-<li>AI 模型节点：通过 AI 模型，根据文章主题，生成文章的大纲。</li>
-<li>扩写节点：根据文章大纲，进行内容扩写，生成正文。</li>
-<li>内容总结节点：根据正文，生成文章的内容总结。</li>
-<li>文生图节点：根据内容总结，生成文章配图。</li>
-<li>结束节点：汇总所有内容，输出结果。</li>
-</ol>
-</blockquote>
-
-<p>设置完成后，点击"发布"按钮，这个 AI 应用就可以直接使用了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102809.webp" title="" /></p>
-
-<h2>八、结束语</h2>
-
-<p>工作流模式相比自己从头写，容易和快捷很多，服务端也一起解决了。如果你有 AI 开发的需求，可以试试这种模式。</p>
-
-<p>下一步不妨就从<a href="https://www.coze.cn/docs/guides/welcome">文档</a>开始，做出你的第一个工作流节点，发布到模板商店。</p>
-
-<p>任何开发问题（估计肯定会遇到），可以加入官方咨询群去问，下面是微信群二维码。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024103101.webp" title="" /></p>
-
-<p>我遇到问题，就咨询扣子的同学。他们告诉我，现在正好有两个活动，有大量的奖品，建议我参加。</p>
-
-<p>我看了觉得很不错，下面把活动信息转发出来。如果你正好做了模板，就不要错过。</p>
-
-<p>（1）<a href="https://www.coze.cn/docs/guides/template_challenge?utm_source=ruanyifeng1028">模板比赛</a></p>
-
-<p>工作流开发完成后，上架到模板商店，现在可以<a href="https://www.coze.cn/docs/guides/template_challenge?utm_source=ruanyifeng1028">获取奖励</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102812.webp" title="" /></p>
-
-<p>你可以对模板设置价格（官方审核通过后），实现模板变现，他人复制模板需要付费。在活动期间，官方根据模板复制的数量，会发放1000元到10000元的奖金，以及随机抽取的50个无线充电器的纪念奖。</p>
-
-<p>（2）<a href="https://www.coze.cn/s/iSpyGgW6/">万圣节抽奖</a></p>
-
-<p>官方现在有一个<a href="https://www.coze.cn/s/iSpyGgW6/">万圣节抽奖</a>，在那里上传你的照片，会得到一张万圣节主题照，以及一次抽奖机会。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024103015.webp" title="" /></p>
-
-<p>抽奖的奖品有 iPhone 16 Pro Max、Switch、咖啡机。</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2024-10-31T03:24:05+08:00">2024年10月31日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
