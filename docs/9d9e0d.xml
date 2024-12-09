@@ -141,6 +141,23 @@
         </item>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/674fbf234d5ebf375432e3b5</id>
+            <title>AI探索站 12月04日</title>
+            <link>https://m.okjike.com/originalPosts/674fbf234d5ebf375432e3b5</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/674fbf234d5ebf375432e3b5</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 04 Dec 2024 02:32:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    #每日一个idea <br /><br />我去年写了一个叫ChatSum的群聊总结工具，用wechaty框架实时收集微信消息，在群里@机器人提问，请求大模型 API，总结群聊话题。<br /><br />当时的方案是在提问时拿到群聊消息发给 Claude2  总结，会有隐私问题，也受到了 Claude 模型长度的限制，总结效果不太好，后面这个项目就搁置了。<br /><br />上周 Anthropic 发布 MCP 协议之后，我打算把这个项目捡起来，技术方案调整了一下：<br /><br />1. 用 wechaty 在自己电脑上运行微信机器人，实时收集微信消息，存储在本地文件<br /><br />2. 在自己电脑运行一个 mcp-server-chatsum 程序，接收查询请求，从本地文件返回匹配的微信消息（根据群名/联系人/话题组合查询）<br /><br />3. 使用 Claude 桌面版作为交互入口，随时查询和总结微信消息，由 Claude 桌面版与本地的 mcp-server-chatsum 进程通行，再由 Claude 内置的大模型完成总结回复<br /><br />比如我可以这么问：<br /><br />- 今天早上大家都在聊啥？<br /><br />- 关于 MCP 最近有哪些讨论？<br /><br />- idoubi 在哪些群分享了什么内容？<br /><br />- AI-Native 群最活跃的 5 个用户和关心的话题是什么？<br /><br />比起去年的实现方案，用 MCP Server 来实现 ChatSum 的功能有一些不同点：<br /><br />- 消息存储和查询总结完全解耦，灵活性更高<br /><br />- 由 Claude 客户端做服务发现/意图识别/参数提取 / 流程串联等步骤，准确性更高（之前用的是 Function Calling)<br /><br />- 虽然现在交互入口用的是 Claude 桌面版，按照 MCP 协议的约定，后面可以自己实现一个 MCP Client，调用本地的大模型，实现完全私有化，数据安全性更高<br /><br />MCP Client 作为个人电脑的超级入口，AI 助理 2.0 时代即将到来。<br /><br />最后很高兴宣布，今天的 idea 已经落地了。<br /><br />微信机器人和消息总结 MCP Server 代码已开源👇<br /><br />https://github.com/mcpservers/mcp-server-chatsum<br /><br />用我自己的微信跑了一些查询，总结效果良好，再也不用担心加群太多消息看不过来了。😄<br /><br />欢迎自行部署体验。<br /><br />我会写一篇文章总结实现 mcp-server-chatsum 的技术细节，敬请期待。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/674cf0568dc13469675b3a3e</id>
             <title>AI探索站 12月01日</title>
             <link>https://m.okjike.com/originalPosts/674cf0568dc13469675b3a3e</link>
@@ -153,23 +170,6 @@
                 <![CDATA[
                     
                     🧵 ChatGPT 两周年之际，汇集 Hans 过去的原创心法和实践感悟 。愿这份小专辑鼓励更多人展开AI 探索之旅、在创造中遇见未知：<br /><br />Prompts 不是神圣的咒语，更像是我们认知的镜子。 [1] <br /><br />AI Summary 不是学习的替代品，它是引发好奇、发现主题的引子，无法替代认知攀登的过程。[2] <br /><br />直到充分认识、实践并创造之前，任何Prompt 对你而言都毫无意义——就像没有落地场景的代码，再优雅也只是抽象的符号。真正的理解，诞生于创造的过程。[3] <br /><br />不要把AI 仅看成效率工具，将其视为意义放大器。[4] <br /><br />像对待一个导师、智者那样和AI 深度对话，你将会受益匪浅。它远远不是搜索和知识查询工具，而是各种维度的创意伙伴。 对话的深度，取决于你思考的广度。[5]<br /><br />你无法提出你不知道的问题，你也无法创造你没有热情的产品。 这是一个复利循环：深度对话建构你理解AI的边界，而对话后的智慧成为你的创造杠杆。[6]<br /><br />和写作一样， 终极的挑战在于清晰的思考；而Prompt Engineering是在清晰思考之上的工程力。 [7]<br /><br />在AI加持下，产品、研发、营销的界限正在消失；每个角色都在演化为全栈版本的自己。 [8]<br /><br />AI 和大脑的本质都是预测机器。 如同我们大脑遇见未完成的旋律，你也能想象整个乐章；每一个精妙的Prompt，像是在激活大模型知识体系的「启动效应」。<br /><br />在无数的可能性中，最容易被忽视的是你的坚定的目标和创造的勇气。 [9]<br /><br />危险不在于AI超越人类的智力，而在于我们满足于对AI 变革的想象边界。就像导演卡梅隆深刻指出： 当AI 全面为我们做出决策时，我们又该如何寻找生活的意义？[10] <br /><br />⛰️ 后记：<br /><br />每一次深度对话，都是一次认知的跃迁；每一次创新实践，都在拓展人机关系的边界。 乔布斯在斯坦福演讲的箴言，始终熠熠生辉： <br /><br />「Keep looking , Don’t Settle」<br /><br />📶 注释与出处：<br /><br />[1] 认知镜子 https://m.okjike.com/originalPosts/648d0224b0f25cc9182b521d<br />[2] AI Summary 不是学习替代品 https://m.okjike.com/originalPosts/66d929e6a13e0a67af775529<br />[3] 创造即理解 https://m.okjike.com/originalPosts/65deaf513b9c66cae417c54c<br />[4] 意义放大器 https://m.okjike.com/originalPosts/6719b92ba8855e724bbe4933<br />[5] 深度对话https://m.okjike.com/originalPosts/6448b36b174fdd04a795736e  <br />[6] 复利循环  https://m.okjike.com/originalPosts/66f8cb981cdc5cd9315a5824<br />[7] 核心技能只有一个 https://m.okjike.com/originalPosts/66136bb938849f879f3eab07<br /> [8] 全栈的自己https://m.okjike.com/originalPosts/67402b6fb9e8a87878a069d5<br />[9] 长期主义 https://m.okjike.com/originalPosts/67450f4e5f3c97961e05fa1d<br />[10] 《What' next》  https://m.okjike.com/originalPosts/66ef906f758bcded62bd0f74
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6749555c40798c2586c47f77</id>
-            <title>AI探索站 11月29日</title>
-            <link>https://m.okjike.com/originalPosts/6749555c40798c2586c47f77</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6749555c40798c2586c47f77</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 29 Nov 2024 05:47:08 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    说说一个误区：<br />当你开发一个新产品时，总是先想着要把AI融入到产品中，甚至AI才是其核心的功能。<br />当你的产品定位确实是以AI为主时，没问题。<br />但是更多的时候，用户的需求都和AI没什么关系，这样思考容易限缩了你的思维。<br /><br />这样思考比较好：<br />1.先从用户的真实需求出发，去收集需求<br />2.然后分析这些需求当中，哪些可以用AI来辅助提效，让原来需要一个公司干的活，现在一个人加一个AI就能搞定了<br /><br />并没有那么多AI的需求，但是有很多可以用AI来提效，让你完成以前不可能完成的需求。<br />提供AI服务和AI相关产品，只是众多需求当中的一个。<br />到目前为止，我还是比较认可AI核心功能还是提效。AI起到的作用，是放大。<br />画图、写文章、制作视频，这些我们都能做，而有了AI，效率可以提高几十上百倍。
                 ]]>
             </content:encoded>
         </item>
