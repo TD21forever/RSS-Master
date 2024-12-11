@@ -5,6 +5,1148 @@
         <link>https://www.36kr.com/information/technology</link>
         
         <item>
+            <id>https://www.36kr.com/p/3074120449094281</id>
+            <title>一周发明GAN，时间检验奖得主分享背后故事：每件发明都不是最后的发明</title>
+            <link>https://www.36kr.com/p/3074120449094281</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3074120449094281</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Dec 2024 07:37:23 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: GAN, NeurIPS2024, Yoshua Bengio, 生成对抗网络  
+<br><br>  
+总结: GAN（生成对抗网络）在2024年NeurIPS大会上获得时间检验奖，标志着其在过去十年中的重要性。其起源可以追溯到Yoshua Bengio实验室的一次头脑风暴，团队成员提出了通过引入判别器来训练生成网络的想法。Ian Goodfellow的创新思路使得生成器和判别器在零和博弈中对抗，从而实现了GAN的成功。尽管GAN在初次展示时并未引起广泛关注，但随着后续研究的深入，其影响力逐渐显现。文章强调，尽管许多技术曾被视为“最后的发明”，但AI领域的进步仍在继续。 </div>
+                        <hr>
+                    
+                    <p>引用超85000次的经典论文<strong>GAN获NeurIPS2024时间检验奖</strong>后，它的起源和背后故事也被抛了出来。</p>
+  <p>要从<strong>Yoshua Bengio实验室</strong>的一次头脑风暴说起。</p>
+  <p>Bengio召集实验室成员，提出了一个富有挑战性的设想：</p>
+  <p>训练一个确定性的生成网络g，该网络仅在输入z中包含随机噪声。这个网络的输出x=g(z)应该是从某个分布p(x)中抽取的样本。输出可以是任何形式：图像、音频、文本。</p>
+  <p>正当众人皆无头绪之时，一个在当时看似滑稽且几乎无意义的想法揭开了GAN的序幕：</p>
+  <blockquote>
+   <p><strong>如果能有另一个神经网络充当判别器，会怎样？</strong></p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_bcc81d5781494968ac20823c6526d613@46958_oswg98506oswg1080oswg368_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>作者之一Sherjil Ozair，一边讲述着这段经历，一边还透露曾有DeepMind研究员向他开玩笑，说他可能已经完成了最伟大的工作，可以直接退休了。</p>
+  <p>但他认为事实并非如此。</p>
+  <p>CNN感觉像是最后的发明，但并不是。</p>
+  <p>GAN感觉像是最后的发明，但也不是。</p>
+  <p>LSTM、ResNet、DQN、AlphaGo、AlphaZero、MuZero都并非终结。</p>
+  <blockquote>
+   <p>Transformer和大语言模型，亦不是最后的发明。</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_fd62cfa0d75744fb897017b3fc6c937d@46958_oswg30913oswg908oswg552_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这项出自Yoshua Bengio、lan Goodfellow等一众大佬，引用超过85000次，被NeurIPS2024官方评价为“生成建模的基础部分之一，在过去10年中激发了许多研究进展”的研究。</p>
+  <p>究竟是如何炼成的？</p>
+  <h2><strong>Sherjil Ozair讲述背后故事</strong></h2>
+  <p>以下是Sherjil Ozair的完整自述：</p>
+  <p>非常高兴听到GAN（生成对抗网络）在2024年NeurIPS大会上获得时间检验奖。</p>
+  <p>NeurIPS时间检验奖是授予那些在十年时间里经受住考验的论文。</p>
+  <p>“我”花了一些时间回顾GAN是如何产生的以及过去十年中人工智能的发展。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_fb0e2058b0724adfa68b1dc9d6875943@46958_oswg81843oswg934oswg364_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>2012年初，当“我”还是印度理工学院德里分校的本科生时，“我”偶然发现了Geoffrey Hinton在Coursera上的一门深度学习课程。</p>
+  <p>深度学习当时是机器学习中一个边缘化且小众的分支领域，它承诺能实现更多的“端到端”学习，并且更接近人类大脑的工作方式。</p>
+  <p>这门课非常精彩。它不仅很好地解释了深度学习的原理，还充满了Hinton特有的英式幽默和非传统思维。</p>
+  <p>比如，他建议“我们”这样可视化高维空间：</p>
+  <blockquote>
+   <p>要处理14维空间中的超平面，想象一个3维空间，然后大声对自己说“14”，每个人都是这么做。</p>
+   <p>但请记住，从13维到14维的转变，其增加的复杂性与从2维到3维的转变一样大。</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_71610bff27c2481aab3127e9f40da18c@46958_oswg356545oswg900oswg506_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>出于好奇兴奋地想学习更多知识，“我”开始仔细研究所有能找到的资料。</p>
+  <p>当时主要是一些杰出研究者发表的学术论文，比如<strong>Yoshua Bengio</strong>，其中很多都保存在他实验室的网站上。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_78291ae321214ada85cb376baa25b331@46958_oswg629939oswg890oswg900_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>2012年，Quora非常火爆，Yoshua经常在Quora上回答有关深度学习的问题。</p>
+  <p>“我”真诚地感谢他帮助像“我”这样的本科生理解深度学习。“我”通过Quora联系他，表达谢意。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_e1be90aa458f44a4b24bed6e9b08ccdf@46958_oswg263312oswg900oswg414_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>令“我”非常惊喜的是，“我”不仅收到了回复，还收到了一份他实验室的实习邀请。</p>
+  <p>这是一次命运的相遇，而当时的“我”对这次交流和即将展开的旅程的重要性和影响力还只有一点点模糊的认识。</p>
+  <p>“我”由衷地感激Yoshua Bengio为这个世界和为“我”所做的一切。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_eef3194c02dd4a738d87f22b47711bff@46958_oswg299219oswg827oswg900_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>“我”通过了面试获得了实习机会，2014年夏天，将在Yoshua的LISA实验室实习。</p>
+  <p>本想2013年就实习的，但印度理工学院的制度要求学生必须在第三学年的暑假在他们认可的公司实习。</p>
+  <p>2014年5月，“我”飞抵蒙特利尔，来到了实验室。</p>
+  <p>刚见到Yoshua，他就立马把“我”拉进了一个房间，里面坐着的还有Ian Goodfellow和Aaron Courville。</p>
+  <p>Yoshua继续解释着他最近一直在思考的一个新想法：</p>
+  <p><strong>设想构建一个确定性的生成网络g，只在输入z中包含随机噪声。这个网络的输出x=g(z)应该是来自某个分布p(x)的样本，可以是任何形式：图像、音频或文本。</strong></p>
+  <p>他强调这就是“我们”需要训练的目标。</p>
+  <p>但怎么训练呢？在这种“隐式”网络中，概率p(x)并没有明确表达。</p>
+  <p>他提出应该对生成器的输出（生成分布）和某个样本数据集（可以是图像、音频等）进行“双样本分布匹配”。</p>
+  <p>但如何进行这种分布匹配仍然不明确。</p>
+  <p>作为一个年轻天真的本科生，“我”提出了矩匹配，但“我们”都知道矩匹配可能无法应对高维数据。小组里也讨论了其他想法，也都感觉不够有说服力。</p>
+  <p>不过，Yoshua对训练一个确定性的、消耗噪声并产生样本的生成神经网络的愿景和热情令人印象深刻且富有启发性。</p>
+  <p>团队决定私下继续思考这个问题。</p>
+  <p>在Les Trois Brasseurs餐厅的一次实验室聚餐中，Ian Goodfellow突然想到了一个在当时看似滑稽且几乎毫无意义的主意：</p>
+  <p><strong>如果让另一个神经网络来充当判别器会怎样？</strong></p>
+  <p>这是一个开拓前沿的时刻。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_3b4ed70765034ae097251184bc2d009b@46958_oswg217017oswg900oswg271_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>当时，神经网络的训练还相当“原始”。通常做法是：</p>
+  <p>建立一个主神经网络，输入数据，得到一个预测结果，对其应用一个数学损失函数，然后使用梯度下降来优化这个网络。</p>
+  <p>而Ian的想法则把损失函数本身设想成一个可学习的神经网络。不是优化一个固定的数学损失，而是用另一个“判别器”神经网络来提供损失值和梯度，用于训练“生成器”神经网络。</p>
+  <p>这个想法自然招致质疑。整个系统会不会崩溃到退化输出？判别器从何而来？处处都是先有鸡还是先有蛋的困境。</p>
+  <p>但Ian对此也早有腹案。他提出<strong>让判别器和生成器在一个零和博弈中对抗</strong>：</p>
+  <p>生成器试图产生与真实数据“难以区分”的输出，而判别器则要设法分辨看到的是生成样本还是真实样本。</p>
+  <p>也许这能行？第二天，实验室所有成员都收到了一封邮件。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_f759e59af4fe43b1b6faf2c0a89febfd@46958_oswg514839oswg780oswg900_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在一个充斥着编程和运行实验的长夜，Ian成功让第一个生成对抗网络运行起来。</p>
+  <p>这些是<strong>在MNIST数据集上产生的第一批样本</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_9058c84163c34f2c8f09cdd50a3406d3@46958_oswg25668oswg350oswg349_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>当时“我”正在研究类似的东西，用非神经网络判别器进行训练，但效果远不及预期。</p>
+  <p>于是“我”决定转而帮助Ian研究GAN。距离NeurIPS 2014的提交截止日期只有一周了。“我们”决定全力以赴，应该能赶上提交一篇论文。</p>
+  <p>在接下来的几天里，“我们”设置了评估方法来与现有的生成模型进行比较，尝试了不同的架构、噪声函数和博弈公式。</p>
+  <p>Jean、Yoshua和“我”发现GAN博弈是收敛的，并且在平衡状态下最小化了Jensen-Shannon散度。</p>
+  <p>“我们”坚持了下来，<strong>在最后一周完成了所有工作</strong>，并提交了一篇论文到NeurIPS。</p>
+  <p>GAN被接收为海报展示论文（posted presentation）。</p>
+  <p>“我”记得虽然大家都很兴奋，但也都知道GAN的训练动态非常不稳定。大部分合作者开始研究其它模型架构，试图解决在GAN中发现的问题。</p>
+  <p>GAN在12月份进行了展示，却基本上没有引起注意。</p>
+  <p>几个月后，2015年8月，<strong>Alec Radford</strong>开始发布他一直在研究的卷积GAN的样本。</p>
+  <p>没错，就是那个几乎参与了OpenAI所有重大突破的Alec Radford。2015年，他正在研究卷积神经网络、批量归一化和GAN。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_7cc180df51414146ab120cccc2f39f33@46958_oswg748979oswg1056oswg1200_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>“我”无法完全展现DCGAN之后GAN引发的巨大关注。</p>
+  <p>但“我”想强调的是，GAN的演进过程被恰如其分地用来象征AI整体的进步。</p>
+  <p>这张展示图像生成惊人发展的图片已经过时了，因为现在的图像生成模型已经能生成百万像素级的图像，甚至可以生成视频。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_73c58a4e029c4dfeb7847ff2e1c2e842@46958_oswg316102oswg900oswg364_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>至于“我”个人的故事，GAN作为“我”的第一篇学术论文既是福也是祸。一位DeepMind的研究员曾开玩笑说，“我”可能已经可以退休了，因为“我”可能已经完成了自己最伟大的工作。</p>
+  <p>但是“认为历史已经终结”可能是AI领域最大的错误。“我们“总是倾向于认为“就是这个了，这是最后的发明”。但事实从来都不是这样。</p>
+  <p>CNN曾经感觉像是最后的发明，但并不是。</p>
+  <p>GAN曾经感觉像是最后的发明，但并不是。</p>
+  <p>LSTM曾经感觉像是最后的发明，但并不是。</p>
+  <p>ResNets、DQN、AlphaGo、AlphaZero、MuZero都不是最后的答案。</p>
+  <p>回过头来看，这些想法总是显得很滑稽。但是想想现在，Transformer和大语言模型被认为是最后的发明。</p>
+  <p>但它们也不是。</p>
+  <p>“我”最近离开了前沿AI实验室的圈子，开始创办一家公司来构建一些真正令人惊叹的东西。“我”很快会分享更多相关信息。敬请关注。</p>
+  <p>感谢NeurIPS Conference授予GAN时间检验奖，也感谢这些对抗者们：Ian Goodfellow、Jean Pouget-Abadie、Mehdi Mirza、Bing Xu、David Warde-Farley、Aaron Courville、Yoshua Bengio</p>
+  <p>也为Seq2Seq论文作者们表示祝贺。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8b64bc9cc8b545448eb902b421d29b44@46958_oswg65568oswg932oswg200_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>Ian Goodfellow开麦</strong></h2>
+  <p>Mehdi Mirza将这段经历分享出来后吸引到不少网友围观，网友们看得津津有味：</p>
+  <blockquote>
+   <p>没想到论文一周就写出来了。</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_6b09a6c4e37c4433927dddf13395579d@46958_oswg66889oswg938oswg228_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <blockquote>
+   <p>好一段精彩的历史回顾！在”Attention is all you need”之前，GAN才是主流。</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_74f5cf0a69aa4f31bce358e4beaa6ccd@46958_oswg53655oswg936oswg136_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>GAN论文一作Ian Goodfellow也激情开麦：</p>
+  <blockquote>
+   <p>如果你是那个时代的亲历者，值得一读以怀旧；如果你不是，也能通过这些文字一窥当年的情形。</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_be9099208c214e75a2e2cba873cc6837@46958_oswg121173oswg928oswg298_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>关于GAN论文的更多细节，可以点击这里查看：史无前例！Seq2Seq和GAN同获NeurIPS时间检验奖，Ilya连续2年获奖。</p>
+  <p>参考链接：https://x.com/sherjilozair/status/1864013580624113817</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/YuAQxv4N2uCqsQ9l18_s9w" rel="noopener noreferrer nofollow" target="_blank">“量子位”</a>，作者：西风，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3074112498611073</id>
+            <title>A股不想吃药</title>
+            <link>https://www.36kr.com/p/3074112498611073</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3074112498611073</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Dec 2024 07:33:30 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 国防授权法案, 医药行业, 投资机会, 创新药  
+<br><br>  
+总结: 美国国会通过的2025财年国防授权法案未包含《生物安全法案》，减轻了CRO企业的海外监管压力，刺激了医药板块的短期反弹。然而，医药生物指数自2021年以来持续下跌，反映出行业基本面和投资者信心的全面坍缩。尽管市场对创新药的估值大幅下调，但仍有投资者在寻找抄底机会。随着医保控费压力的持续，商业健康险的增长可能为行业带来改善的希望。医药行业的未来仍需关注供给端的突破和创新方向的涌现。 </div>
+                        <hr>
+                    
+                    <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_92a532148c59476d9919b95e135ee823@000000_oswg783644oswg1080oswg781_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>刚刚过去的这个周末，大洋彼岸传来利好——美国国会参众两院军事委员会公布了2025财年国防授权法案(NDAA)最终协议文本。</p>
+  <p>作为美国国会每年都要通过的一项重要立法，NDAA主要用于授权国防预算和军事人员的规模，以及确定国防政策和优先事项。而在最新的NDAA中，此前曾多次惊扰国内生物科技公司的元凶——《生物安全法案》并未列入，这意味着CRO企业短期内面临的海外监管压力大大减轻。</p>
+  <p>受此刺激，周一A股和H股医药板块直接大幅高开。<strong>只是还没等大家把收益捂热，医药生物指数（000808）便像过去几年演绎过无数次的一样，甫一开盘即快速走弱，当日收盘反转为下跌。</strong></p>
+  <p>虽然自9月24日以来，市场已经一扫此前颓势，但快乐终究是他们的，医药什么也没有。</p>
+  <p>机构们眼看着行情步入“生机勃勃的垃圾股，死气沉沉的成长股和生无可恋的机构重仓股”叹息，而医药作为曾经的明星成长行业以及依然的机构重仓区，在此番锣鼓喧天里被遗忘得很彻底：</p>
+  <p><strong>从2021年开始算起，医药生物指数已经连跌四年，其中尤以今年最为惨淡。在沪深300指数年线已经翻红并且大涨超过15%的当下，医药生物指数年内涨幅依然逼近-10%。</strong></p>
+  <p>一涨一跌的落差之间，是无数二级投资人的血和泪。“医药女神”梦圆管理的农银汇理医疗保健主题基金在国庆节后第一天，因为规模过小而被清盘，倒在了狂热的牛市氛围里。</p>
+  <p>但冰火两重天中，医药行业真的便没有投资机会了吗？</p>
+  <h2><strong>无人问津时</strong></h2>
+  <p>医药板块持续四年的连绵下跌，是行业长中短期逻辑的全面坍缩。</p>
+  <p>犹记得2020年鼎盛之时，医药行业仿佛天命加身。老龄化趋势加剧引发了人们对医药长坡厚雪的期望，疫情肆虐又让医药成为无常世界里的诺亚方舟。热钱持续涌入，行业估值水涨船高，对于风头正劲的创新药公司，市场打满预期来解释估值，激情到恨不得假设所有在研管线都会成功，并采纳极为乐观的销售峰值。</p>
+  <p><strong>雪崩开始于支付端的压力。</strong></p>
+  <p>虽然下游需求百花齐放，但穿透到最后，总是避不开医保这个单一大客户强大的议价能力。医保灵魂砍价之下的降价幅度，让研究员们畅想的光明未来成为梦幻泡影。</p>
+  <p>CXO等创新药产业链企业因为营收在外，股价坚挺到了2021年末，却也在2022年之后被接连重锤。先是美联储进入加息周期，流动性收紧，抑制了创新药行业的活力。屋漏偏逢连夜雨，《生物安全法案》的反复又进一步打击了资金持续投入创新药产业链的信心。</p>
+  <p>与此同时，新冠受益股也开始反噬。业绩高基数、终端高库存是所有人都必须面对的现实，在GDP增速稳定在5%以上的宏观环境中，医药生物成为少有的连续两年负增长的成长性行业。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_4e03d70b7bcb47f58ce458357c062c2a@000000_oswg135069oswg1080oswg799_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而始于2023年下半年的医药反腐，为本就孱弱的基本面和脆弱的投资人信心蒙上了一层新的不确定性。</p>
+  <p>不过，尽管基本面每况愈下，但作为曾经牛股辈出的明星行业，医药板块从来不缺抄底的勇士。</p>
+  <p>其中，最具代表性的就是ETF。在基金行业被动化趋势下，医药相关ETF大扩容，产品数量显著增加，无论是个人投资者还是机构投资者都在进行越跌越买的沉浸式抄底。</p>
+  <p>以当前规模最大的华宝中证医疗ETF为例，从2020年末至今，该产品场内份额从不足6亿份，膨胀到了超过750亿份，从持有人结构来看，个人投资者和机构投资者持有份额基本保持了齐头并进。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_364a39eb3d5241bbb81749aa036795d3@000000_oswg220739oswg1080oswg1112_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>2023年下半年，知名投顾大V“ETF拯救世界”也成为了“医药受害者”。从历史上看，医药生物指数从未连续下跌超过两年。遵循这个朴素的规律，在板块连续下跌的第三年，“ETF拯救世界”开始进场。</p>
+  <p>但进入了青春叛逆期的A股，这两年主要就是来告诉大家，历史是用来被打破的。</p>
+  <p>抄底大军中也不乏明星基金经理。比如作为“交银三剑客”之一的何帅，在反思了自己对成长股认配置不够的不足后，2021年下半年开始转换组合思路，最明显的变化就是医药仓位持续放大，到2023年底其前十大持仓中足足有七只医药股。</p>
+  <p>只是在行业贝塔崩坏的背景下，持筹者卖得更加坚决。</p>
+  <p>根据国盛证券统计，截止2024年三季度，非医药主动基金持有的医药仓位已经从2020年最高的15%左右下降到了5.90%，包括何帅也在进入2024年之后开始逐步收缩医药战线。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_89c5f95b51e643edafc27a1c8e0856b6@000000_oswg272576oswg1080oswg704_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>流动性收缩之后，市场对创新药的估值从一个极端摆向了另一个极端：<strong>所有早期管线，要不都按不成功对待，先保守一点给个负估值；临床后期管线，普遍给零估值；已上市管线，普遍按医保砍价到微利对待。</strong></p>
+  <p>已被锤老实的投研们主打一个只要预期足够低，就不怕黑天鹅打击。</p>
+  <p>抄底医药的人则普遍遍体鳞伤——“ETF拯救世界”被吐槽到一度关闭微博评论区，尽管医药只是其投资组合中少有的亏损品种。</p>
+  <h2><strong>柳暗花明处</strong></h2>
+  <p>2022年12月至今，美股公司SMMT股价从最低点的0.66美元一路狂飙，今年9月份股价一度达到33.89美元，区间涨幅50倍，而背后原因仅仅是获得了康方生物临床产品AK112的海外授权.</p>
+  <p>作为对比，港股通标的康方生物期间股价仅仅翻了一倍，目前市值仍然不及股价较高点已经接近腰斩的SMMT。</p>
+  <p>而这还不是个例。</p>
+  <p>最近两年，国内创新药liscence-out项目持续增加，但市场始终反响平平。</p>
+  <p>大洋彼岸的医药巨头们躺在加州的海滩上，晒着太阳便从中国最好的创新药项目中共享人才红利，而国内创新药企业承担着巨大的风险，也无法用太高的回报来反哺持续直面风险的热忱。</p>
+  <p>这背后是流动性衰减后市场定价能力的滑坡。从常识角度出发， 市场终有修复的能力。<strong>只是从坏变好的过程里，所有人都先必然熬过一个时点，叫做“最坏的时侯已经过去”。</strong></p>
+  <p>事实上，在悲观到了“无人问津行业利好”之后，医药也确实出现了边际改善的曙光。</p>
+  <p>比如支付端，虽然从长期来看，医保控费的压力不可逆，但这并不意味整个支付端便毫无希望，至少商业健康险正在成为改善的慢变量。在2014到2023年的十年间，商业健康险增长势头迅猛，赔付规模年复合增速达到了23.5%，远远高于同期的医保赔付增速。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_58e2c25f74494db68e1f5659b73aa6a9@000000_oswg231623oswg1080oswg799_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>与此同时，医保谈判降价也接近被市场充分定价，虽然现在大家看到利好的第一反应还是高开先跑为敬，但至少对降价幅度也相对脱敏。</p>
+  <p>市场最关心的创新药产业链，在《生物安全法案》未被列入NDAA之后，一定程度上减缓了海外监管的压力。而美联储重新进入降息周期则有望让下游需求重新焕发活力，更何况国内还有《全链条支持创新药发展实施方案》政策扶持。</p>
+  <p>而短期来看，新冠导致的高库存和业绩高基数，也接近消化尾声。2024年以来，医药制造业的收入增速逐步向上。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_e6087e6018b44f1e93f0cbcf1883d7a2@000000_oswg280203oswg1080oswg799_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>更重要的是，在医药长坡厚雪的信仰阶段性破灭之后，陷入悲观情绪的投资人大部分都忽略了一点——医药行业并非完全由需求驱动，很大程度上也要看供给。毕竟在当前的技术水平下，只有少部分疾病有治疗方案，医药行业更普遍的矛盾是大量的疾病无药可治。</p>
+  <p>需求始终存在，当最上游的产品和技术出现重大突破之后，往往能够解锁新的市场空间。比如2019年开始的医药主升浪行情，很大程度上就是因为广谱抗癌药PD-1横空出世，开创了肿瘤免疫疗法的新时代，并引发了行业整整四年的研发热潮。</p>
+  <p>而经过几年的沉寂，从2023年以来，行业已经有多个创新方向涌现，比如去年被市场热炒甚至火出圈的减肥药、老年痴呆、ADC（抗体药物偶联物）和NASH（非酒精性脂肪性肝炎）等等。</p>
+  <p>虽然现在是星星之火，但未必不能形成燎原之势。只是在自下而上的投资方法式微，市场更关注宏观叙事的背景下，还会有多少人愿意在这个贝塔不再耀眼的行业里“翻石头”呢？</p>
+  <h2><strong>尾声</strong></h2>
+  <p>从高光时刻毫无抵抗的滑入低谷，并逐渐被市场遗弃，医药行业并不是孤例。</p>
+  <p>2024年之后没有人可以笃定地说，因为历史上从来没有连续跌过这么长时间，所以未来一定会涨。但是因创新推动的变革，要经历萌芽到泡沫到幻灭，然后再慢慢恢复，再走向成熟，则是刻在人性里的底层规律。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_ed0fbe8c81504060b3c01e1ecb3aa36e@000000_oswg136867oswg1080oswg799_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>做成长股的投资人大多都对Gartner曲线不陌生，也都熟知在一轮价值毁灭之后，能东山再起的永远只是结构性的“少数”。</p>
+  <p>在可见的未来，即使行业终会见底，但恢复期的斜率和峰值恐怕都不可再与盛世同日而语。而越来越垂直的细分领域和专业门槛，也在有形无形中抬高了超额认知的成本。</p>
+  <p>2020年那样泛滥的流动性几乎不可能再现，即使行业苦尽甘来，曾经疯狂“喝酒吃药”的日子也注定回不去了。</p>
+  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzU2MTg0MDQ4OA==&amp;mid=2247498519&amp;idx=1&amp;sn=f614ddffd4877ed2bdb620db417102c1&amp;chksm=fd079c72bc392870f6b3299f8d305e5b5e831b0a92dcb7a7c3cea7a74838de92dc369e316435&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“远川投资评论”（ID：caituandzd）</a>，作者：张伟栋，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3074120614228614</id>
+            <title>物理诺奖得主最新演讲，Hinton带伤飞到瑞典，LSTM之父：都是剽窃</title>
+            <link>https://www.36kr.com/p/3074120614228614</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3074120614228614</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Dec 2024 07:31:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 诺贝尔物理学奖, John Hopfield, Geoffrey Hinton, 物理学观点  
+<br><br>  
+总结: 2024年诺贝尔物理学奖获得者John Hopfield和Geoffrey Hinton在斯德哥尔摩大学发表演讲，分享了他们的科研经历和思考。Hopfield教授强调选择研究问题的重要性，并认为物理学有助于理解人类和宇宙。Hinton教授则以通俗易懂的方式介绍了Hopfield网络和玻尔兹曼机器的原理，指出睡眠在学习中的重要性。两位教授的演讲引起了观众的热烈反响，大家纷纷向他们致敬。 </div>
+                        <hr>
+                    
+                    <p>2024年诺贝尔物理学奖的两位获奖者John Hopfield和Geoffrey Hinton最近在斯德哥尔摩大学发表了最新的演讲。</p>
+  <p>现场的氛围非常热烈！</p>
+  <p>看到Hopfield教授即使借助拐杖也亲自到达现场发表了演讲，Hinton教授也忍着腰痛专程飞到瑞典，让观众们非常敬佩。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_727efbc0becf44e09784793d8bda02f3@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_04c6ded3f98d40668c24919a0dcd2f07@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在这次活动中，John Hopfield教授的演讲主题是“<strong>物理学是一种观点</strong>”，讲述他个人的科研经历和做科研的思考模式。</p>
+  <p>他坦白了很多关于科研和对物理的想法：</p>
+  <blockquote>
+   <p>如何选择问题是科研成果的关键因素大脑是如何产生思想的，这对我来说是人类最深奥的问题我认为物理学有助于理解人类和世界</p>
+  </blockquote>
+  <p>Geoffrey Hinton教授则用通俗易懂的方式讲述了<strong>Hopfield网络和玻尔兹曼机器的原理与发展</strong>，全程没有用一个方程式。</p>
+  <blockquote>
+   <p>当我们最终了解了大脑是如何学习的时候，我相信睡眠的作用一定是非常重要的，对此我非常乐观</p>
+  </blockquote>
+  <p>两位教授结束演讲时，台下的观众也是忍不住都站起来向他们鼓掌致敬。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_59c6609879f84d5fa1305817a0865039@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_2c00569a668043208c86910e639d9955@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>以下是现场演讲内容，在不改变原意的情况下，量子位对部分篇幅做了调整。</p>
+  <h2><strong>John Hopfield：物理学是一种观点</strong></h2>
+  <p>约翰·霍普菲尔德于1933年出生于芝加哥，1954年在威廉·莫尔学院获得第一个学位，1958年在康奈尔大学获得博士学位。1964年，他被任命为普林斯顿大学物理学教授，1980年成为加州理工学院化学和生物学教授，之后他回到普林斯顿大学，目前是分子生物学名誉教授。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_bfc46368c96c4f74984bfeb8881283fb@46958_oswg274331oswg880oswg498_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（以下为John Hopfield教授发言）</p>
+  <p>我的第一份全职工作是在比尔电话公司发明晶体管的实验室，我加入了一个六人小组。初入实验室时，我在新办公室打开书籍期刊，参观库存室获取文具后，思考着下一步工作。</p>
+  <p>在科研中，多数人常按部就班，<strong>很少深入思考研究方向的选择</strong>，而这恰是科研成果的关键因素。我在科研中撰写了40余篇论文，几年前形成的工作基础最终发展成霍普菲尔德模型，相关观点源于对随机事件的分析。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_d7c9f6c41e9f4caba6c32e085f6003f3@46958_oswg155410oswg844oswg472_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>我成长于物理学家家庭，自幼受物理学观念熏陶，喜欢探索事物原理，如拆解自行车、进行化学实验等，这让我能够理解复杂系统运作。上高中时，化学老非老师常出色，物理老师却对电磁学原理理解不足，这影响了我大学专业选择，但最终我决定在斯沃斯莫尔学院专注物理。</p>
+  <p>进入物理学研究生院后，我在康奈尔大学学习，期间与Albert Overhauser合作，从他的研究列表中选定晶体中激子辐射寿命相关问题，开启研究。获得博士学位后，我在理论小组任职，后结识化学家David G. Thomas，成立理论实验联盟，取得成果并获奥利弗里·巴克利固体物理学奖。</p>
+  <p>之后，我在研究中遇到瓶颈，前往剑桥大学寻找新方向，回普林斯顿后担任半导体组顾问，接触到血红蛋白相关实验，为我从凝聚态物理转向生物物理提供契机，我也受Linus Pauling观点启发研究蛋白质合成问题并取得成果。</p>
+  <p>1974年论文影响我对生物学问题的研究思路，促使我思考神经元网络特性等。1977年在哥本哈根举办研讨会后，我寻求跨学科突破，受邀参加神经科学会议，虽然当时一无所知，后来加入项目获得神经生物学灵感。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8f387513b52447448fc0304250006411@46958_oswg277103oswg1050oswg590_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>1979年，我转任化学和生物学教授，发现了学科联系，提出新计算见解并撰写论文，该论文推动了相关领域发展。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_422a7e02ef834d018e4cac7e9d7a7d5c@46958_oswg173244oswg1046oswg586_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_196e47a75fdc41f09f0aa807073b9f7d@46958_oswg236375oswg1080oswg652_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>后来，我发现霍普菲尔德模型网络问题，2015年与他人合作提出密集联想记忆模型，期望推动人工智能发展。</p>
+  <p>我非常尊重各个领域的专家，积极参与跨学科互动，我认为<strong>物理学有助于理解人类与宇宙</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_4874bad65ec74ade93c94238018cd573@46958_oswg557724oswg918oswg510_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>Hinton：Hopfield网络与Boltzmann机的发展</strong></h2>
+  <p>杰弗里·辛顿，1947年生于英国伦敦，获剑桥大学实验心理学博士学位，曾在爱丁堡大学从事人工智能博士后研究，在多所大学任职，现从事学术研究，并在谷歌公司任职。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_f36696672df54ff38cca5965298d60fa@46958_oswg257760oswg900oswg512_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（以下为Geoffrey Hinton教授发言）</p>
+  <p>今天我将不用任何方程式，向普通观众讲解Hopfield网络。</p>
+  <p>先来看一个二元神经元版本的小霍普菲尔德网络，其神经元间有对称加权连接，网络全局状态是配置，配置有优良性（单元对权重总和），能量是优良性相反数，网络会稳定于能量最小值。</p>
+  <p>霍普菲尔德提出用能量最小值对应记忆，通过二元决策规则清理不完整记忆，实现内容可寻址内存。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_e9b0060e8efc4ddca47a4775f8d76a94@46958_oswg420623oswg1026oswg572_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>特里·西诺斯基和我提出用网络构建感官输入解释，网络含可见和隐藏神经元，可见接收感官输入（如二进制图像），隐藏构建解释，能量代表解释好坏程度，我们需要低能量解释。</p>
+  <p>以线条画为例，有不同三维解释，我们要让网络给出解释。</p>
+  <p>先将线条转化为线条神经元激活，线条神经元与三维边缘神经元连接，考虑感知光学因素让边缘神经元相互抑制，还要依据图像线条连接原则建立连接，希望通过设置连接强度使网络解决两种替代解释。</p>
+  <p>这产生两个问题：一是避免陷入局部最优的搜索问题；二是神经网络自动学习连接的问题。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_6f2baedecb924d8987ac82b6b4493afa@46958_oswg197388oswg1080oswg587_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_c63a155d28a144c9a181740cd6f22b0f@46958_oswg367442oswg1080oswg592_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_b7e782e3bb364f5b8bd13721f2543d80@46958_oswg410213oswg1080oswg602_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>对于搜索问题，我们通过使神经元<strong>有噪声</strong>解决，有噪声神经元状态是二元的但决策具有概率性。</p>
+  <p>用隐藏神经元解释二进制图像时，在可见单元固定图像，随机选隐藏神经元根据输入决定其状态，持续操作使系统达热平衡，此时隐藏神经元状态是平衡解释，网络学习正确权重使低能量状态对应更好的解释，热平衡是系统稳定于概率分布（波尔兹曼分布），低能量配置概率大。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_585deb532e224a8fa68601cea894d2ed@46958_oswg308503oswg1080oswg602_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>玻尔兹曼机学习目的是使网络生成的图像类似它感知到的真实图像，有简单学习算法，含唤醒和睡眠阶段。</p>
+  <p>唤醒阶段固定图像于可见单元，让隐藏单元达热平衡后调整连接权重，睡眠阶段类似做梦更新神经元达热平衡后反向调整权重，该算法平均上能让网络生成图像过程类似感知图像，涉及对数似然梯度概念，通过改变权重使网络关注wake阶段看到的数据。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_d38d85f9b3b8441b9db34dba5eddface@46958_oswg512355oswg1080oswg600_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>但玻尔兹曼机存在问题，权重变大时热平衡过程慢，虽然想法很好但算法太简单，可以做复杂的事情但速度受限。</p>
+  <p>后来我发现了<strong>受限玻尔兹曼机（RBM）</strong>，其隐藏单元不相互连接，唤醒阶段更新隐藏神经元更简单，睡眠阶段有捷径虽不完全正确但实践有效。Netflix公司就是用受限玻尔兹曼机结合其他方法推荐电影。</p>
+  <p>为构建特征检测器层可<strong>堆叠RBM</strong>，将前一个RBM隐藏单元活动模式当数据给下一个RBM，以此捕捉复杂相关性学习多组权重，堆叠后视为前馈网络可进行监督学习，这样初始化网络学习更快。因为网络已学习了数据结构，后面用于学事物名称相对容易，如识别物体方面。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_ee1aae216a8944829fc36a7569ad39d4@46958_oswg421358oswg1080oswg617_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_92c4373f10d34c6db6f21c3f54745c83@46958_oswg445732oswg1080oswg612_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_d9225d03406b4dae97820f7ded4c4e63@46958_oswg534230oswg1080oswg610_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>One More Thing</strong></h2>
+  <p>就在演讲视频发布不久后，你懂的，<strong>LSTM</strong>之父又来搞事情了。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_1df6a5885ba64fd9b035f5d7de793ff6@46958_oswg80146oswg286oswg284_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>知名计算机科学家<strong>Jürgen Schmidhuber</strong>发表推文称，Hopfield &amp; Hinton的2024年诺贝尔物理学奖是<strong>抄袭</strong>得来的。</p>
+  <p>Jürgen声称，这两位教授重新发表了乌克兰研究者Ivakhnenko和日本研究者Amari在20世纪60年代和1970年代开发的方法以及其他技术，且没有引用原作者。</p>
+  <p>目前这一帖子在X上已经获得了2.1k点赞、超过44万次浏览。</p>
+  <p>有网友表示如果事情是真的，那将比剽窃更糟糕：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_31d88d4b00ac41f3a7089d5219f3dcee@46958_oswg177548oswg1060oswg556_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>不过也有网友觉得这是Jürgen吃不到葡萄就说葡萄酸的心理：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_471105638df24874942c2f8c39f6285f@46958_oswg36825oswg1074oswg172_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_1c1b22290554477688c7800126c812be@46958_oswg37316oswg1070oswg236_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Jürgen还发表了一个详细的技术报告，列出了两位诺贝尔获奖者工作的存疑之处，感兴趣的朋友可以点击参考链接2进一步阅读。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_562754c3ca194c56aff7ef7bb7ad9a46@46958_oswg1769467oswg1058oswg1396_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_d58ca51a16be46dfb2e9355f6ec70c6c@46958_oswg967922oswg1080oswg1238_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>参考链接：</p>
+  <p>[1]https://www.youtube.com/watch?v=lPIVl5eBPh8</p>
+  <p>[2]https://people.idsia.ch/~juergen/physics-nobel-2024-plagiarism.html#DLP</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/WtIbAmhRAeKtpO1xSliH8Q" rel="noopener noreferrer nofollow" target="_blank">“量子位”</a>，作者：奇月，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3073924762186628</id>
+            <title>DeepMind悄悄发布PaliGemma二代，最易微调「视觉语言全能王」来了，多项任务登顶SOTA</title>
+            <link>https://www.36kr.com/p/3073924762186628</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3073924762186628</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Dec 2024 06:04:57 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: PaliGemma 2, 视觉语言模型, 任务性能, 模型微调  
+<br><br>  
+总结: PaliGemma 2在图像描述、乐谱识别和医学图像报告生成等任务上表现出色，提供多种尺寸和分辨率的版本以满足不同需求。该模型在迁移任务的数量和范围上有所扩大，特别是在OCR相关任务中取得了先进的结果。PaliGemma 2的设计旨在降低视觉模型的使用难度，并通过微调提升性能。研究表明，模型尺寸和图像分辨率的提高能够显著提升任务性能，尤其是在文本和文档理解方面。 </div>
+                        <hr>
+                    
+                    <blockquote>
+   <p>PaliGemma 2在多个任务上取得了业界领先的成绩，包括图像描述、乐谱识别和医学图像报告生成；并且提供了不同尺寸和分辨率的版本，用户可以根据不同的任务需求进行微调，以获得更好的性能。</p>
+  </blockquote>
+  <p>OpenAI的发布会仿佛连续剧，让人眼花缭乱，谷歌也悄悄发布了PaliGemma 2模型，迈向可调视觉语言模型的下一代。</p>
+  <p>今年5月，谷歌发布PaliGemma，也是Gemma家族中的第一个视觉语言模型，致力于模型民主化，降低视觉模型的使用难度。</p>
+  <p>PaliGemma 2模型以更高性能的Gemma 2为基座，增加了视觉能力，微调起来更容易，性能也更好。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_c94273ce301b4bd190c14cd3c2381f8e@5888275_oswg132946oswg900oswg671_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>技术报告中分析了任务类型、模型尺寸和分辨率之间的相互作用，相比PaliGemma进一步扩大了迁移任务的数量和范围，包括与OCR相关的任务，如表格结构识别、分子结构识别、乐谱识别，以及更长、更细粒度的图像描述和放射学报告生成，并且在这些任务上都取得了最先进的结果。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_0e0ae82339a14e67856d73b7c729d237@5888275_oswg138834oswg1080oswg294_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">报告链接：https://arxiv.org/pdf/2412.03555</p>
+  <p>PaliGemma 2的主要特点为：</p>
+  <p>1. 模型尺寸包括3B、10B、28B 参数，可适应任务分辨率为224px、448px、896px的视觉输入。</p>
+  <p>2. PaliGemma 2可以为图像生成详细的、上下文相关的描述，而不只是简单的对象识别来描述动作、情感和场景的整体叙述。</p>
+  <p>3. PaliGemma 2在化学式识别、乐谱识别、空间推理和胸部X光报告生成方面的性能更强。</p>
+  <p>PaliGemma一代的用户可以直接升级到PaliGemma 2，无需进行重大代码修改即可获得性能提升。</p>
+  <h2><strong>模型架构</strong></h2>
+  <p>研究人员遵循与PaliGemma相同的建模、训练和数据设置：使用预训练SigLIP-So400m视觉编码器，通过线性投影将「嵌入序列」映射到Gemma 2的输入空间；视觉嵌入与文本提示结合后，输入到Gemma 2语言模型；最后通过自回归采样从语言模型中获得预测。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8173749ba84b4fd28cf873b0d0d04d54@5888275_oswg87011oswg582oswg614_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>研究人员将PaliGemma 2的预训练分为三个阶段（不包括对单模态组件进行预训练）。</p>
+  <p>第一阶段，结合预训练的SigLIPSo400m和Gemma 2的原始模型权重，并在超过10亿个多模态任务样本上进行训练；图像分辨率为224*224像素；在此阶段没有冻结任何参数。</p>
+  <p>第二阶段，先在448*448像素分辨率下对5000万个样本进行训练，然后在896*896像素分辨率下训练1000万个样本。在任务选择上，增加那些「能从高分辨率图像中受益的任务」比例，增加输出序列的长度，以促进长视觉文本序列的OCR等任务的学习。</p>
+  <p>第三阶段，将第一或第二阶段的检查点微调到目标任务。PaliGemma包括一系列学术基准，包括一些涉及多张图像和短视频的基准。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_bf8468bdcc8640469af6ae9cb5c9419a@5888275_oswg80160oswg1080oswg219_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>此外，研究人员还探索了文档的相关任务、长图像描述生成和医学图像理解的新应用。</p>
+  <h2><strong>实验结果</strong></h2>
+  <p>研究人员测试了PaliGemma 2在文本检测和识别、表格结构识别、分子结构识别、光学乐谱识别（optical music score recognition）、长图像描述生成、空间推理以及放射图像报告生成（radiography report generation）任务上的性能。</p>
+  <h3><strong>模型尺寸和分辨率</strong></h3>
+  <p>研究人员探索了不同尺寸和分辨率的模型在完成各种任务时的表现如何，主要选择了三种尺寸（3B、10B和28B），并在两种不同的图像清晰度（224像素和448像素）下对模型进行训练，任务包括了对自然照片、文件、图表和视频的图像描述、视觉问答和指代分割等。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_f90047f903a144508607729b1376c6a8@5888275_oswg167486oswg994oswg505_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>从结果中可以发现，让模型处理更高清晰度的图像或者使用更大尺寸的语言模型，都会增加预测时的计算量，但大多数任务都能从这两项改进中获得性能提升。</p>
+  <p>涉及文本、文档、屏幕和图表理解的任务，提高图像清晰度带来的收益更大，可能是因为这些任务中使用的图像原生分辨率就比224像素大，所以提高分辨率后效果更明显。</p>
+  <p>涉及多语言数据或需要复杂视觉推理的任务，主要从增大模型尺寸中获益。</p>
+  <h3><strong>文本检测和识别</strong></h3>
+  <p>在高级光学字符识别（OCR）任务时，模型需要从图像中定位和识别出单词，输出结果为一个数据对「转录文本，边界框」，研究人员遵循HierText竞赛的规则，使用单词级别的精确度、召回率和F1分数作为评估指标。</p>
+  <p>如果单词结果与真实边界框的交并比（IoU）大于或等于0.5，并且转录文本与真实文本匹配，则认为该单词结果是true positive，但HierText协议不会归一化字母大小写、标点符号，也不会根据文本长度进行过滤，而是直接将预测结果与真实结果进行比较。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_fb276c94b1414de1a3a31321ef67f29f@5888275_oswg129939oswg1080oswg387_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>研究人员使用常见的OCR基准测试，包括ICDAR’15、Total-Text、MLT17和MLT19、HierText、TextOCR、IntelOCR等多个数据集的训练分割混合上对PaliGemma 2进行了微调，并在ICDAR’15和Total-Text测试集上进行评估。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_2413ce62ced6445e97d18961ab478a71@5888275_oswg106515oswg1080oswg293_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>结果显示，在896像素分辨率下，PaliGemma 2 3B的性能超过了最先进的HTS模型。</p>
+  <p>需要注意的是，PaliGemma 2并没有依赖于OCR专用的架构组件，只通过微调一个通用的视觉-语言模型（VLM）即实现了sota，展现了PaliGemma 2的多功能性，以及在第2和第3阶段进行OCR相关预训练的优势。</p>
+  <p>降低分辨率后，预测质量大幅下降，并且增大模型尺寸并没有带来改进。</p>
+  <h3><strong>表格结构识别</strong></h3>
+  <p>表格结构识别任务的目标是从文档图像中提取表格文本内容、相应的边界框坐标以及HTML格式的表格结构。</p>
+  <p>研究人员选择PubTabNet的516k张表格数据图像，和FinTabNet数据集中来自标普500公司年报的113k个财务报告表格，去除边界框超出图像框架的数据后，把图像填充为正方形以匹配目标输入分辨率。</p>
+  <p>研究人员使用树编辑距离相似度（TEDS）和网格表格相似度（GriTS）两个指标来评估模型质量，主要测量单元格文本内容、单元格拓扑/结构和边界框质量。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_b9c64945721e40c8ac0abf14bacbdc94@5888275_oswg109128oswg1080oswg263_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>结果显示，PaliGemma 2在大多数指标下都展现出了最高的性能，并且增加模型尺寸也没有对模型的性能带来提升，而使用更低的图像分辨率则会导致质量出现小幅下降。</p>
+  <h3><strong>乐谱识别</strong></h3>
+  <p>研究人员使用了GrandStaff数据集进行微调，包含53.7k张图像，基于标准化的平均编辑距离、字符错误率（CER）、符号错误率（SER）、行错误率（LER）进行评估。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8125c98500c24530b88f33d661bf62ee@5888275_oswg102672oswg941oswg877_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>结果显示，随着分辨率的提高，错误率也在逐渐降低，但将模型大小从3B增加到10B并没有影响性能。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8a0a549fe1f74984a5944db5601e1620@5888275_oswg43581oswg575oswg337_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h3><strong>放射报告生成</strong></h3>
+  <p>为了探索PaliGemma 2在医学领域的能力，研究人员将其用于自动胸部X光报告生成任务上，相当于对X光图像进行长描述。</p>
+  <p>MIMICCXR数据集包含37.7万张图像，及相应的放射报告；使用Gemini 1.5 pro来移除之前数据中涵盖的X光。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_f3642509accd41f696406ace31337c00@5888275_oswg273786oswg1080oswg802_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在使用该数据进行微调后，用RadGraph F1分数评估结果，衡量参考报告中提取的实体与生成报告之间的F1分数，可以反应报告中实体的缺失或召回情况，以及与图像特征的关系。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_e1c2b45378bc4b15a797e289820daf9d@5888275_oswg69833oswg566oswg424_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>可以看到，PaliGemma 2模型的实现了最好的性能，提高分辨率和模型大小都能带来性能提升。</p>
+  <h3><strong>CPU推理和量化</strong></h3>
+  <p>为了评估只用CPU进行推理的速度，研究人员在四种不同的架构上使用gemma.cpp运行PaliGemma 2模型，检查点使用在COCOcap上微调过的PaliGemma 2 3B（224像素）模型。</p>
+  <p>提示词「描述这幅图像」的预填充长度为256+4=260个token（图像+文本），输出回复「A large building with two towers on the water」为11个token</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_c6ee1cc15f8841a2a1a214fad63ff483@5888275_oswg173303oswg1080oswg447_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>研究人员还对模型进行了量化实验，从32位浮点（f32）转换到16位（bf16）权重，结果显示性能差异并不大。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_f5f839a54e2041d794d888d5cbc02bf5@5888275_oswg178989oswg1080oswg325_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p><strong>参考资料：</strong></p>
+  <p>https://x.com/kimmonismus/status/1864832125851312495</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/XbFGYqIYCj0L6jTUxMCF9Q" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，作者：LRS ，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3073928064185219</id>
+            <title>OpenAI员工意外泄露下一代ChatGPT，网友：故意的还是不小心的？</title>
+            <link>https://www.36kr.com/p/3073928064185219</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3073928064185219</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Dec 2024 06:03:19 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: OpenAI, 猎户座, 模型泄露, ChatGPT ε  
+<br><br>  
+总结: OpenAI员工在推特上展示新功能时意外泄露了未发布的模型“ChatGPT ε”，引发网友热议。网友们推测该模型可能是之前传闻的“猎户座”，并分析了Karina Nguyen的浏览器收藏夹中的内容。虽然Karina已删除推文，但泄露事件引发了对新模型性能的讨论，认为“猎户座”相较于GPT-4的提升幅度有限。部分网友认为此次泄露可能是OpenAI故意为之，显示出其在发布新功能时的策略。新功能Canvas也在此次更新中上线，允许免费用户使用。 </div>
+                        <hr>
+                    
+                    <p>OpenAI员工发推介绍今天发布的新功能，结果<strong>意外泄露了未发布的模型</strong>？</p>
+  <p>在Reddit上，被列文虎克附体的网友发现，OpenAI研究员Karina Nguyen展示的新功能界面中出现了一个陌生的名字——</p>
+  <p><strong>ChatGPT ε</strong>（第五个希腊字母，读作Epsilon）。</p>
+  <p>这名网友猜测，这极可能就是之前被传出的下一代模型<strong>“猎户座”</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_43a8a3a79ebf4d7395692726acbd1489@5888275_oswg434019oswg1080oswg911_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>一石激起千层浪，越来越多的网友开始用显微镜研究起了这张图片。</p>
+  <p>结果还真有新发现——</p>
+  <p>Karina的浏览器收藏夹中有一个名为<strong>Agents</strong>（智能体）的文件夹，还打开了一个叫“<strong>Scientist Assistan</strong>t”的标签页。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_b65ab247245744a8bcb4a61bd6e32857@5888275_oswg253051oswg1080oswg561_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>目前Karina已经将原推文删除，但种种迹象引发了网友们的热烈讨论。</p>
+  <p>特别是Karina还是前不久从隔壁Anthropic跳槽来OpenAI的，嗯，就……‍‍</p>
+  <h2><strong>网友：故意的还是不小心的？</strong></h2>
+  <p>发帖的网友表示，ε极有可能就是之前盛传的“猎户座”模型。</p>
+  <p>在贴文中，这名网友给出了他的理由——</p>
+  <p>天文学中，猎户座腰带上的中心恒星Anilam（参宿二），用巴耶命名法表示正是<strong>猎户座ε</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_6b46d19580014f088103f09c139350d9@5888275_oswg104916oswg1080oswg246_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>今年七月，OpenAI推理模型o1的原型“草莓”被曝光。</p>
+  <p>到了八月底，The Information称，OpenAI已经悄悄对“草莓”进行过展示，它还被用来改进代号“猎户座（Orion）” 的新模型。</p>
+  <p>“猎户座”就此浮出水面，定位是<strong>OpenAI的新旗舰，也就是GPT-4的下一代</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_ca6ec3a564654ff9bbfc4243ea1543c7@5888275_oswg868461oswg878oswg956_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>彼时的OpenAI忙的则是“抓内鬼”，与GPT-4o上线之前的操作不谋而合。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_29da68881c254e4d8d0d28acc6aa1054@5888275_oswg308551oswg1080oswg828_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>到了十一月，长期跟踪ChatGPT进展和网页源码的<strong>“光头哥”Tibor Blaho</strong>还公布了一系列新信息。</p>
+  <p>光头哥的历史战绩不可谓不丰厚，曾经通过源码分析在OpenAI官宣两个半月之前就挖出了ChatGPT的搜索功能界面。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_83a63d9a30fa4647a0227229c5ae9c63@5888275_oswg283046oswg1080oswg898_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>光头哥的分析中，和“猎户座”相关的部分总结如下：</p>
+  <ul>
+   <li>参与测试新模型的OpenAI员工称， “猎户座”仅完成20%训练时就达到了GPT-4级别的性能。</li>
+   <li>但最终质量提升小于从GPT-3到GPT-4的飞跃，这表明传统的Scaling可能由于高质量数据变得有限而放缓。</li>
+   <li>训练“猎户座”使用了先前模型（GPT-4和o1）生成的数据，可能导致它重现旧模型的一些行为。</li>
+  </ul>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_efcbe3a6cd7d4568a91e7a47d338ea00@5888275_oswg490517oswg1080oswg1041_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>The Information则爆料，“猎户座”模型相对GPT-4的提升幅度，小于GPT-4相对GPT-3，已进入收益递减阶段。</p>
+  <p>这也是奥特曼曾说可能不会把新模型命名为GPT-5的原因之一。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_f40b72ff9a774018b8adcf13331c7158@5888275_oswg204248oswg1080oswg350_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>不过ε这个命名，还是遭到了网友们的吐槽：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_2549ac7309cf47a9b49e8980d5ad0d02@5888275_oswg150821oswg1080oswg408_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>回到Karina的推文截图，网友们也给出了关于Agent和Scientist Assistant的分析。</p>
+  <p>有人认为Scientist Assistant是ChatGPT生成的对话摘要，而Agents只是一个普通的浏览器收藏文件夹。</p>
+  <p>也有人认为，这里的“Scientist Assistant”，就是智能体的一种。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_1d6044d460a24d0da1204f111f3e05ae@5888275_oswg181801oswg1080oswg554_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>另外，这次的泄露虽然看似意外，<strong>却有不少人都认为这是OpenAI故意为之</strong>，有人更是表示OpenAI在这种事情上简直是驾轻就熟。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_d43683e2dde24b50b0b8e9f279eeda53@5888275_oswg141115oswg1080oswg416_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>顺便提一句，“双十二”开始之前有网友用马斯克的Grok，通过分析推特大数据，猜测了7款要发布的新品。</p>
+  <p>其中Sora和满血o1已经被证实，此次泄露的“下一代模型”ε和可能是泄露的“AI智能体”也都在Grok的预测当中。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_1065cc5acd76468c944e6ce6c01c43e2@5888275_oswg627178oswg809oswg1280_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>种种迹象表明，新模型的上线的概率还是比较大的，当然最终解释权还是在OpenAI手里。</p>
+  <p>至于是不是真的有，表现又是如何，我们继续关注后面几天的发布。</p>
+  <h2><strong>Canvas可执行代码，免费用户也能用</strong></h2>
+  <p>说完这波泄露事件，再来看看“双十二”第四天的正经发布内容。</p>
+  <p>此前OpenAI给plus用户测试的<strong>Canvas</strong>（画布）功能迎来更新。</p>
+  <p>此前左上角模型切换栏中的GPT-4o with canvas也已经消失，入口被移到了输入框下方的按钮当中。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_d7ce918be81a41a19e1f7079af4b2479@5888275_oswg81633oswg1080oswg621_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在画布里，可以对文档进行编辑审阅，将修改意见以批注的形式展示，看起来更直观了。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_4724c26d007b481e9f573ca3050ea974@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>代码方面，也可以边写边debug。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_5c897efed3cc49d786019bcc9838ea69@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>最重要的是，Python代码可以直接在画布中运行了。</p>
+  <p>据介绍，Canvas当中<strong>配备了几乎所有的Python库</strong>，代码执行速度非常快。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8c53b042a39743a2a21893080af6e495@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>运行中的报错信息也对ChatGPT可见，鼠标滑过就能看到对错误信息的具体解释，还能一键修复。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_15eb31d3f7894772b9868ce85c8eb790@5888275_oswg287069oswg1036oswg918_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>另外，Django框架创始人<strong>Simon Willison</strong>还发现，Canvas中的代码执行与之前的代码解释器不同。</p>
+  <p>Simon指出，Canvas中的Python代码是通过Pyodide（WASM中的Python）运行的，这意味着具备它联网能力。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_e8844f127b454ef8b97e18e7b44369ea@5888275_oswg305980oswg1080oswg964_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>用泄露了ε的Karina的话说，新版的Canvas是一个“数据科学家”。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_d9789bce446a4e878aa9c66643a2dd0d@5888275_oswg294315oswg1080oswg808_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在评论区，还是有很多网友跑过来问ε的事，“闯了祸”的Karina自然是已读不回。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_5eef191694764b33a0c610b9bbbf8bf2@5888275_oswg116024oswg1080oswg393_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>除了功能更新，Canvas也不再是plus专属，<strong>免费用户也可以用了</strong>。</p>
+  <p>这次是上线到了<strong>网页版和Windows客户端</strong>，这下Windows用户终于不用羡慕Mac用户了（手动狗头）。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_391441659e6840e9bf32c0a332ae2726@5888275_oswg634810oswg1080oswg968_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p><strong>参考链接：</strong></p>
+  <p>[1]https://www.reddit.com/r/singularity/comments/1hb9z2n/chatgpt_%CE%B5_seen_in_this_quickly_deleted_tweet_from/</p>
+  <p>[2]https://www.reddit.com/r/singularity/comments/1hbbi6k/agents_are_coming_as_seen_from_openai_employee/</p>
+  <p>[3]https://www.youtube.com/watch?v=qZ0ImE41pVs</p>
+  <p>[4]https://x.com/simonw/status/1866601649160278248</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/_oIi3_OJOeNA4nBWK0R77g" rel="noopener noreferrer nofollow" target="_blank">“量子位”</a>，作者：关注前沿科技，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3073946402763650</id>
+            <title>英伟达的机器人新魔咒：一句指令让双足机器人“自由”行动</title>
+            <link>https://www.36kr.com/p/3073946402763650</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3073946402763650</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Dec 2024 06:01:49 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: NaVILA模型, 无图导航, 机器人, 自主导航  
+<br><br>  
+总结: NaVILA模型是加州大学与英伟达合作开发的一种新型机器人导航技术，核心创新在于无需预先地图，机器人可以通过自然语言指令和实时视觉信息自主导航。该模型通过高层控制器和低层控制器的结合，实现了“中间指令机制”，使机器人能够理解并拆解指令，灵活应对复杂环境。实测数据显示，NaVILA在家庭和工作环境中的导航成功率高达88%。此外，NaVILA扩展了腿式机器人的应用场景，使其能够在不规则地形中自如行走，提升了机器人的智能化水平。 </div>
+                        <hr>
+                    
+                    <p>近期，加州大学研究人员和英伟达在共同发表的新论文中提出<strong>“NaVILA模型”，NaVILA的核心创新在于，不需要预先的地图，机器人只需“听懂”人类的自然语言指令，结合实时的视觉图像和激光雷达信息，就可以自主导航到指定位置。</strong></p>
+  <p>想象一下这样的场景：你早上醒来，家中的服务机器人正在等候你的指令。&nbsp;</p>
+  <p>你轻轻说道，“去厨房，拿瓶水过来。” 不到一分钟，机器人小心翼翼地穿过客厅，绕开沙发、宠物和玩具，稳稳地站在冰箱前，打开冰箱门，取出一瓶矿泉水，然后轻轻送到你手中。&nbsp;</p>
+  <p>这一幕曾经只出现在科幻电影中，而现在，得益于NaVILA模型的出现，这正在变成现实。&nbsp;</p>
+  <p><strong>NaVILA不仅摆脱了对地图的依赖，还进一步将导航技术从轮式扩展到了腿式机器人，使得机器人在更多复杂场景中，具备跨越障碍和自适应路径规划的能力。</strong></p>
+  <p>在论文中，加州大学研究人员使用宇树Go2机器狗和G1人形机器人进行了实测，根据团队统计的实测结论，在家庭、户外和工作区等真实环境中，NaVILA的导航成功率高达88%，在复杂任务中的成功率也达到了75%。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_0b04a0234cb44da29b7e16854136d6fc@46958_img_000?x-oss-process=image/format,jpg/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_efcd670ecd9f4ba9aecdb98353065899@46958_img_000?x-oss-process=image/format,jpg/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（使用NaVILA实测机器狗和机器人听指令行动）&nbsp;</p>
+  <p>这项研究给机器人导航范式带来革新，让机器人的路径规划从“地图依赖”走向“实时感知”。那么，NaVILA采用了什么样的技术原理？它会给机器人带来哪些新的能力？&nbsp;</p>
+  <h2><strong>提出“中间指令机制”，机器人可以自行拆解指令</strong></h2>
+  <p>在传统的VLN（视觉语言导航系统）中，机器人需要依靠激光雷达（LiDAR）和SLAM算法绘制和维护静态地图。无论是家用扫地机器人还是仓储中的AGV小车，这类机器人只能在预先已知的环境中运行。&nbsp;</p>
+  <p>一旦面临动态环境，比如家中宠物走动、仓库货架更替这类场景，静态地图的效用大幅削弱，机器人必须频繁重绘地图，而这会增加系统成本和计算负担。&nbsp;</p>
+  <p><strong>但NaVILA不一样，它可以实现“无图导航”。</strong></p>
+  <p><strong>这主要是通过两套机制来实现的，一种是高层控制器（视觉-语言-行动（VLA）模型），一种是低层控制器。</strong></p>
+  <p><strong>在高层控制器层面，NaVILA</strong> 通过视觉-语言-行动（VLA）模型来实现“无图导航”，即通过视觉图像、激光雷达和自然语言的多模态输入，让机器人实时感知环境中的路径、障碍物和动态目标。&nbsp;</p>
+  <p>这套视觉-语言-行动（VLA）模型分三个工作流：&nbsp;</p>
+  <p>● &nbsp;输入阶段：机器人会接收自然语言的指令和摄像头的图像，将人类的语言信息和摄像头看到的画面结合起来，识别出路径中的关键目标，比如前方的墙、左边的障碍物、右边的楼梯等；&nbsp;</p>
+  <p>● &nbsp;中间指令生成：生成一份“路径规划表”，VLA会生成一系列中间的高层动作指令，这些指令可能是“前进50厘米”、“向左转90度”、“迈过障碍物”等，类似于“简化的路径操作说明书”；&nbsp;</p>
+  <p>● &nbsp;高频控制器调用，它的任务是实时控制每一个关节的运动。&nbsp;</p>
+  <p>在这套工作流之中，<strong>NaVILA的最大亮点是提出了一种“中间指令机制”，</strong>这种机制让机器人不需要“死记硬背”每个关节的动作，而是像人类一样，听懂高层的指令后，再自行拆解为具体的行动。&nbsp;</p>
+  <p><strong>“中间指令机制”可以让机器人听懂用户日常式的交流语言，不同类型的机器人能够根据自己的“身体结构”去实现动作。</strong></p>
+  <p>通俗来说，传统的导航机器人就像一个“机械的搬运工”，每次你要告诉它“左脚先抬，右脚再抬，前进5厘米”，这种控制方式非常繁琐。&nbsp;</p>
+  <p>而NaVILA的VLA模型更像一名懂事的助手，你只需要说“向前走50厘米”，它就会自己拆解成“抬左腿、抬右腿、重心前移”等小动作。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_6b0d65e68a974bb7b5a55b0316450650@46958_img_000?x-oss-process=image/format,jpg/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（NaVILA是一个两级框架，将高级视觉语言理解与低级运动控制相结合）&nbsp;</p>
+  <p><strong>高层控制器（VLA）为机器人生成了路径规划表，但“路径规划表”只能告诉机器人往哪里走，却不会告诉它怎么走。</strong></p>
+  <p><strong>这时就需要一个“低层控制器”来接手，控制机器人具体的关节动作。</strong></p>
+  <p>假设你让一个小孩学习走路，如果你只告诉他“去客厅”，他会问你“怎么去？怎么迈步？先迈左脚还是右脚？” 在这个场景中，VLA就像家长的语音指令（“去客厅”），而低层控制器就是小孩自己的“肢体控制系统”，它需要根据“去客厅”的目标，控制每只脚的迈出步长、落地角度和重心平衡，以确保自己不摔倒。&nbsp;</p>
+  <p><strong>NaVILA的低层控制器</strong> 使用了一种<strong>PPO强化学习算法</strong>，通过在NVIDIA的Isaac Sim虚拟仿真平台中训练机器人，让机器人学会如何站稳和行走，它的强化学习系统会反复训练机器人在草地、台阶、楼梯、石子地等不同的地形中行走，并且要确保机器人在这些不规则的环境中不摔倒。不是靠算，而是靠模拟。&nbsp;</p>
+  <p>在高层控制器和底层控制器的耦合之下，NaVILA有助于将机器人变得更通用。&nbsp;</p>
+  <h2><strong>NaVILA为机器人带来了哪些新可能？</strong></h2>
+  <p>NaVILA将导航技术从轮式机器人延展到了腿式机器人。&nbsp;</p>
+  <p>传统的VLN基本都是为轮式机器人而设计的，轮式机器人通常在平坦的地面工作，它的导航指令通常是“前进X米，左转X度”。&nbsp;</p>
+  <p>这些命令适配轮式机器人很方便，但腿式机器人需要更精细的控制，因为它们通常要面临更复杂的地形和障碍物。&nbsp;</p>
+  <p>而NaVILA的“中间指令”更亲民，用户只需说“去厨房，帮我拿瓶水”，机器人便可理解这段语义，规划路径，执行任务，而不必说出“前进2米，左转90度”之类的指令。&nbsp;</p>
+  <p><strong>此外，使用NaVILA的指令还包含更具体的动作信息，如“迈出一小步”、“抬脚越过障碍物”等。</strong></p>
+  <p><strong>这使得NaVILA能够将高层次的路径规划与底层的腿式运动解耦，让同一套VLA控制逻辑可以适配不同的机器人平台。</strong></p>
+  <p>从这个角度来看，NaVILA可以用来控制不同形态的机器人，比如四足机器人和人形机器人。&nbsp;</p>
+  <p>在论文公布的测试视频中，工作人员使用NaVILA通过语言顺利命令宇树Go2机器狗和G1人形机器人运动。&nbsp;</p>
+  <p>从实测来看，NaVILA无图导航能力也有助于扩大适应人类环境的足式机器人的实际使用场景。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_6e3753e0dca24f70820afeab410a272a@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（宇树Go2机器狗接受行动指令：向左转一点，朝着肖像海报走，你会看到一扇敞开的门）&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_daf091515bb54cbd83df9c29c8e6ac73@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（宇数G1人形机器人接受行动指令：立即左转并直行，踩上垫子继续前进，直到接近垃圾桶时停下来）&nbsp;</p>
+  <p>为什么这么说？因为在传统的VLN系统中，没有地图，机器人就移动不了，一旦环境发生变化，机器人就很难应付。&nbsp;</p>
+  <p><strong>所以，NaVILA虽然没有让机器人“长腿”，但它让“长腿的机器人更聪明”。</strong></p>
+  <p>过去，足式机器人虽然有“腿”，但每次驱动它们都需要同时控制膝关节、髋关节、脚踝等多个关节。&nbsp;</p>
+  <p>如果用传统的控制逻辑去设计，需要为每个关节写代码，还要不断调整，成本高且难度大，NaVILA则降低了足式机器人的运作成本。&nbsp;</p>
+  <p>同时，这也扩大了机器人的使用场景。&nbsp;</p>
+  <p>比如，在家庭场景，过去的扫地机器人只能在单一的房间中打转，因为它跨不过几厘米高的门槛。而足式机器人却能像人一样，一步跨过门槛，走进厨房，为你取一瓶水。当你说“去厨房拿瓶水”，它不仅听得懂，还能在家中绕过宠物、躲开玩具，灵活自如地完成任务。&nbsp;</p>
+  <p>在搜索救援和灾后救援场景中，足式机器人在地震废墟中，碎石、瓦砾、钢筋等不规则的地面行走，它可以跨越障碍、爬过瓦砾、深入废墟深处，帮助搜救人员寻找幸存者。NaVILA的“无地图导航”能力还意味着，即使搜救环境不断变化，机器人也能根据实时的路径感知，自动调整路线。&nbsp;</p>
+  <h2><strong>结语</strong></h2>
+  <p>NaVILA帮助机器人从对死板的地图或复杂的传感器的依赖中解脱出来，机器人可以像人类一样，通过语言与视觉的结合在复杂的环境中找到自己的路。&nbsp;</p>
+  <p>尤其是对于四足式机器人，NaVILA给它们带来了更大的自由度，使得足式机器人能够灵活地应对不规则的地形和障碍。&nbsp;</p>
+  <p>相关资料：&nbsp;</p>
+  <p>NaVILA: Legged Robot Vision-Language-Action Model for Navigation&nbsp;</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/ioTxfKmU1Oo8FywyufZdRA" rel="noopener noreferrer nofollow" target="_blank">“腾讯科技”</a>，作者：周小燕，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3073787100181380</id>
+            <title>AI用北京话念绕口令，清华、智谱团队打造GLM-4-Voice，更智能、懂情绪，已开源</title>
+            <link>https://www.36kr.com/p/3073787100181380</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3073787100181380</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Dec 2024 06:00:35 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 多模态, 情感语音模型, GLM-4-Voice, 语音交互  
+<br><br>  
+总结: 智谱在 CNCC2024 大会上推出了端到端情感语音模型 GLM-4-Voice，能够实现中英文语音的实时对话，具备情绪感知和多语言支持。该模型通过直接建模语音，避免了传统级联方案的信息损失，提升了性能。GLM-4-Voice 由三个部分组成，分别为语音输入的离散化、语音输出的解码和语音模态的预训练。评估结果显示，该模型在语音语言建模和问答任务中表现优异，显著降低了对话延迟，并提升了语音质量。GLM-4-Voice 已开源，鼓励进一步探索语音人工智能系统的应用。 </div>
+                        <hr>
+                    
+                    <p>今年 10 月，智谱在 CNCC2024 大会上推出了他们在多模态领域的最新成果——端到端情感语音模型 GLM-4-Voice，让人和机器的交流能够以自然聊天的状态进行。</p>
+  <p>据介绍，GLM-4-Voice 能够直接理解和生成中英文语音，进行实时语音对话，在情绪感知、情感共鸣、情绪表达、多语言、多方言等方面实现突破，且延时更低，可随时打断。</p>
+  <p>日前，<strong>智谱团队发布了 GLM-4-Voice 的研究论文，对这一端到端语音模型的核心技术与评估结果进行了详细论述</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8f0e5793a51049df8e6c1d4eae5578da@000000_oswg48328oswg860oswg351_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <blockquote>
+   <p>论文链接：https://arxiv.org/abs/2412.02612</p>
+   <p>GitHub 地址：https://github.com/THUDM/GLM-4-Voice</p>
+  </blockquote>
+  <h2><strong>GLM-4-Voice 是如何练成的？</strong></h2>
+  <p>与传统的 ASR + LLM + TTS 的级联方案相比，端到端模型以音频 token 的形式直接建模语音，在一个模型里面同时完成语音的理解和生成，避免了级联方案“语音转文字再转语音” 的中间过程中带来的信息损失，也解锁了更高的能力上限。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_ff3193cef17c4dfaba8ddc8e616e5bc2@000000_oswg134925oswg1080oswg380_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图｜GLM-4-Voice 模型架构图。</p>
+  <p><strong>GLM-4-Voice 由三个部分组成：</strong></p>
+  <ul>
+   <li>GLM-4-Voice-Tokenizer：通过在 Whisper 的 Encoder 部分增加 Vector Quantization 并在 ASR 数据上有监督训练，将连续的语音输入转化为离散的 token。每秒音频平均只需要用 12.5 个离散 token 表示。</li>
+   <li>GLM-4-Voice-Decoder：基于 CosyVoice 的 Flow Matching 模型结构训练的支持流式推理的语音解码器，将离散化的语音 token 转化为连续的语音输出。最少只需要 10 个语音 token 即可开始生成，降低端到端对话延迟。</li>
+   <li>GLM-4-Voice-9B：在 GLM-4-9B 的基础上进行语音模态的预训练和对齐，从而能够理解和生成离散化的语音 token。</li>
+  </ul>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_438dc393e287406c803b6e3657064736@000000_oswg92853oswg733oswg617_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图｜GLM-4-Voice-Tokenizer 和 GLM-4-Voice-Decoder 的架构。</p>
+  <p>预训练方面，为了攻克模型在语音模态下的智商和合成表现力两个难关，他们将 Speech2Speech 任务解耦合为“根据用户音频做出文本回复”和“根据文本回复和用户语音合成回复语音”两个任务，并设计两种预训练目标，分别基于文本预训练数据和无监督音频数据合成语音-文本交错数据以适配这两种任务形式。</p>
+  <p><strong>具体而言，模型的预训练包括 2 个阶段。</strong></p>
+  <p>第一阶段为大规模语音-文本联合预训练，在该阶段中 GLM-4-Voice 采用了三种类型的语音数据：语音-文本交错数据、无监督语音数据和有监督语音-文本数据，实现了促进文本和语音模态之间知识迁移、帮助模型学习真实世界语音特征以及提升模型基本任务方面性能方面的效果。尤其，GLM-4-Voice-9B 在 GLM-4-9B 的基座模型基础之上，经过了数百万小时音频和数千亿 token 的音频文本交错数据预训练，拥有很强的音频理解和建模能力。</p>
+  <p>第二阶段为监督微调阶段，旨在进一步提高 GLM-4-Voice 的对话能力。研究人员使用了两种类型的对话数据，包括多轮对话数据与语音风格控制对话数据。前者主要来自文本数据，经过精心筛选和语音合成，确保对话内容的质量和多样性。而后者包含高质量的对话数据，用于训练模型生成不同风格和语调的语音输出。</p>
+  <p>此外，在对齐方面，为了支持高质量的语音对话，降低语音生成的延迟，研究团队设计了一套流式思考架构：根据用户语音，GLM-4-Voice 可以流式交替输出文本和语音两个模态的内容，其中语音模态以文本作为参照保证回复内容的高质量，并根据用户的语音指令要求做出相应的声音变化，在最大程度保留语言模型智商的情况下仍然具有端到端建模的能力，同时具备低延迟性，最低只需要输出 20 个 token 便可以合成语音。</p>
+  <h2><strong>效果怎么样？</strong></h2>
+  <p>研究团队在<strong>基础模型评估</strong>与<strong>聊天模型评估</strong>两方面对 GLM-4-Voice 进行了性能评估。</p>
+  <p>他们首先通过语音语言建模、语音问答以及 ASR 和 TTS 这三项任务对基础模型进行了评估。</p>
+  <p>在语音语言建模任务中，GLM-4-Voice 在 Topic-StoryCloze 和 StoryCloze 等数据集上的准确率显著领先同类模型。在从语音到文本生成（S→T）的任务中，GLM-4-Voice 的准确率达到 93.6%（Topic-StoryCloze），远高于其他模型。同时，在语音到语音生成（S→S）的任务中，GLM-4-Voice 依然在 Topic-StoryCloze 数据集中获得了与 Spirit-LM 相近的高分（82.9%）。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_e75f32aa455740778af18009aff1e550@000000_oswg70872oswg1042oswg316_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图｜语音语言建模结果。</p>
+  <p>在语音问答任务中，GLM-4-Voice 在 Web Questions、Llama Questions 和 TriviaQA 等数据集上全面领先，进一步提升了模型在长上下文交互场景中的适应性。</p>
+  <ul>
+   <li>S→T 模态：在所有数据集中，GLM-4-Voice 均显著超过基线模型，TriviaQA 数据集中准确率达到 39.1%，相比Moshi提升了 16.3%。</li>
+   <li>S→S 模态：在语音到语音的问答任务中，GLM-4-Voice 同样表现优异，尤其是在 Llama Questions 中准确率达到 50.7%，大幅领先其余模型。</li>
+  </ul>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_f01eacbc946749a9905d754d7061ed03@000000_oswg72083oswg1042oswg350_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图｜语音问答结果。</p>
+  <p>在 ASR 和 TTS 任务中，GLM-4-Voice 的性能也同样接近或超越专门设计的语音处理模型。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_234f2198221240f2bb6a4ecf511f58d4@000000_oswg31423oswg1062oswg291_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图｜ASR 和 TTS 结果。</p>
+  <p>之后，研究团队对聊天模型进行了评估。</p>
+  <p>为评估对话质量，研究团队引入 ChatGPT 作为自动评分工具，对模型的回答进行多维度评价。GLM-4-Voice 在常见问题（General QA）和知识问答（Knowledge QA）两类任务中得分遥遥领先：在 General QA 中 GLM-4-Voice 得分为 5.40，相比 Llama-Omni（3.50）和 Moshi（2.42）提升显著。在 Knowledge QA 中 GLM-4-Voice 的得分同样超过其他模型。</p>
+  <p>GLM-4-Voice 在语音生成质量方面也实现了新突破。模型主观评价指标（MOS）的评分中达到 4.45，超越现有基线模型，表明 GLM-4-Voice 生成的语音更加自然流畅，能够满足用户对高质量语音交互的需求。</p>
+  <p>同时，在文本与语音对齐性测试中，GLM-4-Voice 的语音转文本误差率（ASR-WER）降至 5.74%，显示出优异的文本-语音一致性。这种能力进一步提升了模型在多模态交互中的应用潜力。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_b7097ce9fa60459b98cbefe027955f15@000000_oswg60827oswg998oswg297_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图｜聊天模型评估结果。</p>
+  <p>评估结果显示，GLM-4-Voice 在语音语言建模、语音问答等任务上表现卓越，同时大幅降低了延迟，并显著提升了语音质量和对话能力，性能超过现有基线模型。这一创新为构建高性能语音交互系统提供了全新路径，开拓了更广泛的应用可能性。</p>
+  <p>目前，GLM-4-Voice 已开源，目前已有 2.4k stars。研究团队表示，这将鼓励人们进一步探索建立实用、易用的语音人工智能系统。</p>
+  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=Mzg4MDE3OTA5NA==&amp;mid=2247594763&amp;idx=1&amp;sn=74adb2405f794d1a5d0f59f2a9bf0e8f&amp;chksm=ce2a1d059f3d528e814a570de85ff6a40804238721f5a6e18acfb7cd5051632d2b93b33e5263&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“学术头条”（ID：SciTouTiao）</a>，作者：阮文韵，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3073925021397895</id>
+            <title>IPO未果，他把公司卖了</title>
+            <link>https://www.36kr.com/p/3073925021397895</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3073925021397895</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Dec 2024 05:51:48 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <高凌信息, 欣诺通信, 并购, IPO失败>
+<br>
+<br>
+总结: 高凌信息计划通过发行股份和现金收购欣诺通信71.98%的股权，以应对自身业绩下滑和巨亏的困境。欣诺通信在IPO申请失败后，面临对赌条款的压力，选择出售以避免回购风险。两家公司均为国家级“小巨人”企业，业务存在重叠。高凌信息的主营业务包括军用电信网通信设备，而欣诺通信则专注于网络通信设备和网络安全产品。此次并购被视为双方的迫切需求，可能为高凌信息带来业绩改善的机会。 </div>
+                        <hr>
+                    
+                    <p>又一个国家级“小巨人”企业转道并购。</p>
+  <p>12月5日晚间，科创板上市公司高凌信息公告，筹划以发行股份及支付现金的方式购买上海欣诺通信技术股份有限公司（下称：欣诺通信）71.98%的股权，同时宣布12月6日起停牌。12月5日，高凌信息股价大涨了7.59%。</p>
+  <p>被收购的欣诺通信曾在2023年6月冲刺科创板上市，但2024年6月25日撤回申请，IPO审核被终止。欣诺通信是国家级专精特新“小巨人”企业，且盈利能力较强，2022年净利润达到6397万元。</p>
+  <p>某种角度上，这起并购可以称作是一次天作之合，交易双方的需求都相当迫切。高凌信息2024年前三季度巨亏4704万元，亟需买业绩。而欣诺通信在IPO失败后半年不到就选择了“卖身”，背后也有迫不得已的原因——上市前融资的对赌协议，到2024年12月底就将触发。</p>
+  <h2><strong>上市两年半，VC仍被套</strong></h2>
+  <p>高凌信息此次发起并购面临的形势，颇有些火烧眉毛的味道。</p>
+  <p>高凌信息的主营业务包括三大块，分别是军用电信网通信设备、环保物联网应用产品以及网络与信息安全产品。其中，军用电信网通信设备是高凌信息的最主要的产品，贡献了一半的营收和绝大部分利润。</p>
+  <p>2022年3月，高凌信息成功登陆科创板。招股书显示，上市前高凌信息的业绩高速增长。2018年至2021年，营业收入从1.75亿元增长至4.95亿元，年复合增长率达46.3%；净利润则从2019万元增长至1.3亿元，年复合增长189.7%；</p>
+  <p>据招股书披露，高凌信息在2018年和2020年成功中选某国防单位的程控交换系统设备竞争性谈判采购。高凌信息是两家中选企业之一，且中选的产品型号数量最多，涵盖军用电信网核心网和接入网。由此，高凌信息成为“我军电信网通信设备的主要供应商”。</p>
+  <p>2022年，高凌信息成功获评国家级专精特新小巨人。2023年高凌信息又凭借信息安全管控产品获得了广东省省级制造业单项冠军认定。</p>
+  <p>然而，正在高速发展中的高凌信息，上市后业绩却节节下滑，速度之快令人咋舌。</p>
+  <p>2022年高凌信息的营业收入达到5.17亿元，净利润达8801万元。2023年高凌信息营业收入下滑至3.56亿元，下滑了31%；净利润4592万元，下滑48%。2024年前三季度，高凌信息仅录得营业收入1.18亿元，同比下滑38%；净利润为-4704万元，同比由盈转亏。</p>
+  <p>与此同时，高凌信息的股价也一再下跌。2022年高凌信息上市时的发行价为51.68元/股，对应市值达48亿元。不过，高凌信息上市首日就下跌10.99%，宣告破发。在2024年2月的最低点，高凌信息的股价跌至10.31元，与发行价相比跌去了80%，市值不足10亿元。这已经比高凌信息上市前融资的估值还要低。</p>
+  <p>2019年至2021年期间，高凌信息曾完成多次增资和股权转让。在2020年的增资中，高凌信息引入了国投创合、融信基金、华金领创等多家机构，融资额1.7亿元，投后估值达14.7亿元。由于高凌信息上市后股价持续下滑、一度估值倒挂、流动性不佳，投资高凌信息的机构们目前仅完成了少量减持，大部分股票被套。</p>
+  <p>当前的高凌信息亟需扭转业绩下滑趋势，并扭亏为盈。在此前的投资者调研中，高凌信息表示未来公司将通过推进原有军用电信网络订单落地、军用IMS通信网局部试点运用等业务，积极促进军用电信网通信设备业务升级，另外也将积极拓展四大运营商的反诈类业务拓展，持续拓展公司增收渠道，由此实现扭亏。</p>
+  <p>而在挖掘自身业务潜力之外，通过外延式并购来“买业绩”，无疑是一种更直接的方式。当前A股投资者对并购的热情高涨，“并购概念股”纷纷暴涨。因此，对上市前投资高凌信息的机构们而言，此次并购也是一个难得的退出机会。项目成功IPO之后，VC们却不得不借助并购来解套，类似的场面在今年的科创板上已经发生多次了。</p>
+  <h2><strong>高估值融资，对赌迫在眉睫</strong></h2>
+  <p>从欣诺通信的角度来看，此次“卖身”也同样很急。</p>
+  <p>欣诺通信的业务包括两大块，一是网络通信设备，二是网络安全产品，与高凌信息的业务有所重叠。与高凌信息一样，欣诺通信也是一家国家级专精特新“小巨人”企业。</p>
+  <p>2023年6月，欣诺通信曾申报科创板上市。据招股书披露，在网络通信设备业务上，欣诺通信的主要产品包括5G承载接入路由器、数据中心交换机等，是国内第一批参与5G前传建设的厂家之一，也是国内5G前传主要的设备供应商之一。</p>
+  <p>在网络安全业务方面，欣诺通信是国内5G DPI系统（即深度包解析系统）的主流供应商之一，深度参与了电信运营商的5G移动互联网的安全项目建设。</p>
+  <p>欣诺通信的业绩也非常不错。招股书显示，2020年至2022年，欣诺通信的营业收入从2.2亿元增长至5.8亿元，两年增长了264%；同期，净利润从-2618万元增长至6397万元；</p>
+  <p>不过，欣诺通信的网络通信产品与华为、中兴通讯是直接竞争对手，市场地位较弱。在科创委的首轮问询中，第一个问题是，2022年3月及2023年1月华为先后两次提出欣诺通信的两款重要产品（OTN产品和PON产品）涉嫌侵权了华为的80件专利。</p>
+  <p>这件事虽然通过协商以欣诺通信向华为支付专利费而结束，但上交所要求欣诺通信就“前述专利对应的发行人核心技术的情况，是否构成发行人研发、生产经营的底层技术”、“结合华为与发行人存在竞争关系，说明发行人是否存在有效措施确保可以长期使用相关技术，是否存在由于侵权导致发行人无法使用前述专利的风险”等问题做出说明。</p>
+  <p>2024年6月25日，欣诺通信撤回了上市申请，冲刺IPO失败。这给欣诺通信的实控人谢虎、李琳夫妇出了一个大难题。</p>
+  <p>在申报上市前，欣诺通信曾进行过增资和股权转让，引进了多家投资机构股东，且估值相当高。</p>
+  <p>2021年6月，欣诺通信以23.6元/股的价格进行增资，投资方包括财通创新、临松工业互联网基金、元藩投资、松藩汇等。该轮融资发行了450万新股，总融资额1亿元；发行后总股本5450万，对应投后估值12.86亿元。</p>
+  <p>按欣诺通信2022年营业收入5.76亿元、扣非归母净利润5529万元，12.86亿元估值的PE倍数达到了约23.26倍。</p>
+  <p>2023年2月，财通创新又受让了实控人谢虎的外甥钱寅（代谢虎持有）所持有的公司100万股股份，价格为24元/股，总金额2400万元。</p>
+  <p>这些增资和股权转让都附带了对赌条款。按约定，欣诺通信需要在2024年12月31日前完成上市，否则投资人有权要求实际控制人谢虎、李琳夫妇按5%的年化利率进行回购。欣诺通信申报上市后，对赌条款被终止。但在6月25日上市失败后，对赌条款又被恢复。</p>
+  <p>值得一提的是，欣诺通信的投资者中不乏国资身影。财通创新为财通证券旗下的投资平台；临松工业互联网基金的联合发起方之一是上海临港松江科技城投资发展有限公司，这是上海下辖的国有企业，另外上海市松江区下属的引导基金公司上海松江创业投资管理有限公司也是该基金的LP之一。</p>
+  <p>在对赌条款即将触发之际，欣诺通信果断选择“卖身”，这应该不是一个巧合。</p>
+  <p>目前，高凌信息仅筹划收购欣诺通信的管理团队所持有的71.98%股权，至于其它股东持有的28%股权，高凌信息表示将在停牌后与进一步协商。</p>
+  <p>高凌信息尚未披露欣诺通信最新的业绩。不过，按今年A股并购案中严格的10倍PE左右的估值倍数，欣诺通信的估值恐怕很难达到上市前的12.86亿元。创投股东的利益如何安排？是否会进行差异化定价？需要后续观察。</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/DGCfG6hsEtk_OrWMdJPsgA" rel="noopener noreferrer nofollow" target="_blank">“投中网”</a>，作者：陶辉东，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3073922827776640</id>
+            <title>从濒死到全球市值第一，英伟达30多年逆袭传奇</title>
+            <link>https://www.36kr.com/p/3073922827776640</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3073922827776640</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Dec 2024 05:47:36 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 英伟达, 黄仁勋, 人工智能, 商业成功  
+<br><br>  
+总结: 英伟达从濒临破产的公司成长为全球市值最高的企业，展现了黄仁勋的领导力和应对危机的能力。公司在推出第一款产品NV1时遭遇失败，但从中吸取教训，重新调整产品策略，成功推出RIVA 128，重返市场。英伟达在人工智能领域的深度参与和市场占有率的提升，进一步巩固了其行业地位。黄仁勋强调危机感和效率，推动公司不断创新，形成独特的企业文化。 </div>
+                        <hr>
+                    
+                    <blockquote>
+   <p>从一家濒临破产的公司，英伟达最终走向全球市值第一。这不仅仅是一个传奇的商业故事，更是黄仁勋用行动诠释绝地反击的「教科书」。</p>
+  </blockquote>
+  <p>如今的时代是英伟达的时代。</p>
+  <p>作为美股乃至全球资本市场备受瞩目的公司，英伟达当之无愧是网友们口中的「宇宙硬核第一股」。</p>
+  <p>英伟达股价由2018年12月的3美元上涨到2024年10月的144美元，6年累计上涨48倍，在今年6月就已经成为全球市值最高的公司。苹果用了35年才成为全球市值第一的企业，英伟达只用了30年。</p>
+  <p>英伟达的盈利能力也足以让几乎所有科技企业相形见绌。近几年大部分全球性的技术风口，云计算、加密货币、元宇宙、人工智能、云服务，英伟达全都是重度参与者。</p>
+  <p>Jon Peddie Research（JPR）的数据显示，英伟达在独立显卡或集成显卡上的市场份额已经连续十年保持在80%左右。</p>
+  <p>2023年，在包含GPU等公开销售产品以及谷歌、亚马逊等云服务商自研加速器在内的整体AI市场，英伟达拿下了85%的市场份额。</p>
+  <p>而在全球AI训练领域，英伟达以超过95%的市场占有率垄断了市场，你听说过的大部分AI模型，几乎都是用英伟达的显卡训练出来的。</p>
+  <p>英伟达的创始人黄仁勋说：「我们是AI的世界引擎。」</p>
+  <p>英伟达早在十年前就坚决地押注了人工智能，它不是在时代浪潮来临时做好了准备，它本身就是掀起浪潮的人！</p>
+  <p>这样炙手可热的公司，叫人难以想象它曾经遭受巨大失败，几次濒临破产。</p>
+  <p>「失败是成功之母」对于英伟达来说不是一句鸡汤，而是大实话——如果它没有在推出第一款产品时惨败，就不会有今天的英伟达了。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8695bdd5bf9e46b9859654aace9a5ca1@5888275_oswg102136oswg800oswg800_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>创业直达破产边缘</strong></h2>
+  <p>当黄仁勋决定建立英伟达时，他是那么志在必得：他的合伙人是两个杰出的计算机科学家，柯蒂斯·普里姆和克里斯·马拉科夫斯基，有丰富的架构师和工程师经验，并且他们还非常信任他，把公司全权交给他来管理；他们瞄准了当时还少有人涉足的个人电脑市场，黄仁勋测算后觉得公司至少能取得5000万美元的年收入。</p>
+  <p>但是英伟达推出的第一款产品就栽了个大跟头，差点让这个初创公司短命而亡。</p>
+  <p>1995年，经过两年的研发和生产，英伟达的第一款产品NV1在万众瞩目中上市，所有人都觉得它会成功。</p>
+  <p>NV1拥有成功的所有要素——</p>
+  <ul>
+   <li>它作为一款单核心多媒体加速器，有着独特的市场切入点，并且拥有多种新的纹理和渲染功能。</li>
+   <li>它的初期销售量也很可观，英伟达主要的板卡合作伙伴帝盟多媒体公司订购了25万颗产品，然后将它封装在品牌为「Edge 3D」、售价为300美元的显卡中。</li>
+   <li>此外，英伟达还拥有一个引人注目的合作伙伴世嘉，世嘉不仅支持当前的产品，还承诺支持英伟达的下一代产品，购买了500万美元的英伟达优先股。</li>
+  </ul>
+  <p>然后灾难降临了。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_c847af468efc4bba99f34393d163e58a@5888275_oswg665156oswg1080oswg629_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在NV1从设计到最终上市的这两年里，市场发生了巨大的变化。</p>
+  <p>原本是作为巨大卖点的能节省内存的新技术「前项纹理映射」，由于内存价格骤降而变得鸡肋；而这项新技术又要求软件在开发时必须使用一项新的图形标准，否则就会运行效果不佳，但大多数游戏厂商都不愿为了一款显卡重写软件。</p>
+  <p>更加雪上加霜的是，NV1为了获得更优质的游戏音频能力，没有兼容当时最常用的音频产品声霸卡，而是加入了高质量的波表合成单元以期可以通过真实乐器的录音来重新创建数字化音效，最终导致NV1在需要使用声霸卡的热门游戏上无法正常运行，只能频频发布补丁，不然玩家就只能忍受糟糕的音效。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_7cf3d9649145412b9486dc885778c909@5888275_oswg415089oswg640oswg398_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>单从技术来说NV1是成功的，它创造了领先行业的技术和标准。但偏偏就是太领先了，流行的游戏没有跟上它的脚步，换句话说，它没有跟上世界上最受欢迎的游戏的脚步。</p>
+  <p>由于缺乏真正兼容的游戏，以及大多数游戏开发商继续支持尽管技术落后但被广泛采用的旧标准，因此NV1最终走向失败。</p>
+  <p>NV1销售情况惨淡，而且大部分在节假日售出的产品还被退货了。到1996年春天，帝盟多媒体公司几乎将它订购的25万颗产品全部退还给了英伟达。</p>
+  <p>NV1的失败同时也危及了英伟达与世嘉的关系，原本世嘉承诺把下一代游戏主机交由英伟达开发，如今他们撤回了这个委托。</p>
+  <p>这次失败使得英伟达濒临破产，黄仁勋不得不裁掉了60%的员工。公司银行账户里仅剩300万美元，只够维持9个月的运营。</p>
+  <p>在英伟达深陷泥潭的时候，新的竞争对手强势崛起。3dfx公司于1996年秋宣布推出名为「Voodoo Graphics」的首款图形核心，这家小型初创公司成功地在消费级个人电脑显卡上实现了与硅图相媲美的3D图形，引起抢购热潮。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_d28bad62373e4cf4b0d7790dbfcbbe7f@5888275_oswg839473oswg1080oswg786_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>3dfx知道英伟达正处于严重的财务危机，考虑收购这个逐渐衰落的竞争对手。尽管英伟达的前两款产品都失败了，但该公司仍拥有硅谷最好的图形工程师团队之一。</p>
+  <p>然而，3dfx的高管最终决定再等一等，他们相信英伟达的破产不可避免，那时可以用更划算的低价获得其人才和资产。</p>
+  <p>他们失算了。因为英伟达有黄仁勋。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_cc42ebfb75e747089227d2c033b280dc@5888275_oswg982903oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>从绝境一步登天</strong></h2>
+  <p>黄仁勋意识到，从定位到产品策略，英伟达在NV1上犯了几项致命的错误。他们过度设计了这张显卡，加入了许多没有人关心的功能。最终，市场只想为最好的游戏提供最快且价格合理的图形性能，其他东西都无关紧要。</p>
+  <p>NV1没办法和那些设计得更狭义的显卡竞争。英伟达意识到，它不能再开发那些客户不愿买单的功能。</p>
+  <p>要想生存下去，他们不仅需要创造一款优秀的产品，还必须凭借现有的制造和内存技术创造出最高效的图形核心，才能抵挡住3dfx的冲击。</p>
+  <p>为了击败劲敌，英伟达必须重新设计其整个产品开发的方式，乃至调整公司的组织架构。</p>
+  <p>NV1的设计是基于英伟达工程师的愿望，而不是市场需求。黄仁勋看到了行业的发展方向，并要求英伟达的工程师顺应市场，而不是逆势而为。</p>
+  <p>为了体现英伟达的雄心，也可能为了暗示与过去的设计理念的彻底决裂，公司决定给NV3起一个不同的名字：RIVA 128。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_043681fdb91b47ff8ca9cff06ee71e1b@5888275_oswg1905631oswg1080oswg810_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>基于英伟达当时岌岌可危的财务情况，RIVA 128必须在一个快到可以创纪录的时间内完成。</p>
+  <p>标准的产品开发周期通常需要2年，因为需要多次修订来识别错误、修复错误。为了缩短时间，英伟达需要缩短测试周期。</p>
+  <p>一家小型公司IKos制造了一种冰箱大小的仿真器，允许工程师直接在数字核心原型上运行游戏和测试，省去了制造一颗真实产品来测试和修复错误的步骤。</p>
+  <p>不过，IKos价格不菲，每台售价高达100万美元。</p>
+  <p>黄仁勋坚决果断地购入了这个设备，但英伟达的资金可维持时间也从9个月缩短到了6个月。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8432474e737c42ffb056d3a034c83721@5888275_oswg775857oswg800oswg776_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>研发的另一个挑战是产品必须兼容当时的VGA标准，可公司内部并没有设计VGA内核的专家。</p>
+  <p>不可思议的是，黄仁勋成功地从英伟达的竞争对手Weitek公司获取了VGA内核的设计许可！</p>
+  <p>黄仁勋用他惊人的商业谈判技巧拯救了公司，此后这样的事又发生了很多次。</p>
+  <p>最终，RIVA 128在1997年4月的游戏开发者大会上首次露面，它的性能超越了市面上最好的显卡，英伟达强势重返3D图形市场。</p>
+  <p>在发布后的短短4个月内，英伟达就出货超过100万颗RIVA 128，占据了个人电脑图形市场份额的1/5。</p>
+  <p>《个人电脑》杂志授予RIVA 128「编辑推荐奖」，《电子与电脑》则将其评为1997年「年度产品」。</p>
+  <p>包括戴尔、Gateway 2000、美光电子和NEC在内的大型个人电脑制造商，都将该产品集成到其电脑中以赶上假期销售季。英伟达在1997年第四季度实现了140万美元的利润，这是它成立4年以来的首次单季度盈利。</p>
+  <p>RIVA 128是英伟达首款大获成功的产品。它获得的美誉彻底消除了人们对NV1的糟糕印象。</p>
+  <p>但NV1和RIVA 128的余震，长久地影响了英伟达。</p>
+  <h2><strong>被危机塑造</strong></h2>
+  <p>濒临破产的危机感深深埋在了黄仁勋心底，他也致力于向每一位员工转播这种危机感。在公司每月例会上，他都会说：「我们距离破产只有30天。」</p>
+  <p>NV1让英伟达意识到，在科技行业，仅仅一个错误的决策或失败的产品都可能是致命的。英伟达侥幸度过危机，勉强从绝境中熬了过来，最终在仅剩的几个月内依靠RIVA 128的成功才挽回了局面，而这种好运气并不会永远都在。</p>
+  <p>前事不忘，后事之师，英伟达的忧患意识帮它度过了后来的很多次危难。</p>
+  <p>除了危机感，NV1事件还让英伟达把对时间和效率的追求刻进了DNA。</p>
+  <p>开发RIVA 128时，为了节约时间，黄仁勋要求在其物理原型还没完成之前就开发驱动程序。这颠覆了传统的流程，但在后来成为了英伟达产品开发的标准。</p>
+  <p>从那时起，英伟达就要求必须在生产初期准备好驱动程序：在所有的重要应用和游戏上进行测试，并确保和之前的英伟达产品完美兼容。</p>
+  <p>RIVA 128的成功表明，英伟达能够在1年内设计和推出一款新产品，虽然这是在破产的威胁下全力以赴完成的。</p>
+  <p>那么，英伟达能否找到一种方法，把RIVA 128的生产速度转化为可持续且可重复的模式呢？</p>
+  <p>黄仁勋想到了一个方法可以令英伟达领先于对手，而且持续领先。他说：「我们要彻底重组工程部门，使其与市场的更新周期保持一致。」</p>
+  <p>英伟达将设计团队分为三组。第一组负责设计新的产品架构，而其他两组与第一组并行工作，开发基于新产品的迭代版本。这将使公司可以每6个月发布一款新产品，从而匹配个人电脑制造商的采购周期。</p>
+  <p>从此，英伟达开始了它「永远领先于行业对手」之路。</p>
+  <p>它在对手之前发布产品更新软件，在对手之前变革公司架构以适应发展，在对手之前建立新的行业标准，在对手之前投身人工智能……</p>
+  <p>而那个曾经将英伟达逼至绝境的3dfx公司，一步慢步步慢，所有战略举措和产品押注都失败了，2000年被英伟达收购了。</p>
+  <p>英伟达能从图形处理公司，成长为人工智能全产业核心之王，或许就是因为它不像3dfx那样第一款产品就成功了。</p>
+  <p>如果NV1没有失败，英伟达不会有动力改变；英伟达如果没有从早期的、更传统的形式中进化，就不会发明GPU或创造CUDA，也就没有如今的市值第一了。</p>
+  <p>难怪创始人之一普里姆说：「如果NV1没有失败，英伟达就会失败。」</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_784c51ec4bd9441d9843443be542d942@5888275_oswg69494oswg800oswg800_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>英伟达之道</strong></h2>
+  <p>英伟达经历过濒临破产的时刻，但每一次，即使压力巨大，公司也总能从错误中吸取教训，然后化为前进的动力。</p>
+  <p>这是英伟达独特的文化。它是一种坚定的信念，即全力以赴做好工作就必然会带来巨大的回报。这是一种在逆境中坚持不懈的动力。</p>
+  <p>而英伟达的这一特点，是由黄仁勋赋予的，是黄仁勋的个人意志塑造了英伟达。黄仁勋是科技行业中任职时间最长的CEO，他自己还在不断打破这个记录。</p>
+  <p>因此黄仁勋是解读英伟达的关键，《英伟达之道：黄仁勋和他的科技帝国》是首部采访到黄仁勋本人的英伟达商业科技书。</p>
+  <p>科技金融记者金泰已经深度追踪报道英伟达30年了，几乎见证了这个公司的一生，他决心为这个企业写一本书，而且是完整的企业故事。</p>
+  <p>为了撰写这本书，金泰采访了超过100位受访者。其中许多人是英伟达的现员工或前员工，他们非常了解公司的内部运作模式。受访者包括三位联合创始人，以及大部分早期和现任的高级管理团队成员，还包括最早投资英伟达的2位风投家、科技行业的CEO、帮助英伟达制造和销售产品的合作伙伴，以及那些与英伟达竞争但几乎总是失败的对手公司。</p>
+  <p>当然，最重磅的受访者还是黄仁勋本人。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_5d952f11d0aa4a5c899375be584bce34@5888275_oswg101700oswg800oswg800_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>《英伟达之道》以黄仁勋的果敢决策和战略眼光为主线，全景呈现了全球市值最高公司英伟达30余年的艰难发展历程。</p>
+  <p>书中首次公开了英伟达从图形处理公司到AI核心之王的商业创新模式，各个时期的核心产品研发与企业战略布局。书中还介绍了黄仁勋的人生经历，他在技术革新、市场搏击、企业管理中的独特智慧和方法。</p>
+  <ul>
+   <li>英伟达取得了空前的成功，但却未必不可复制。英伟达是如何塑造有别于其他科技公司的企业文化？</li>
+   <li>多次濒临险境又如何绝地反击？</li>
+   <li>在人工智能技术爆发的大环境下，英伟达如何借势而上，维持其引领地位？</li>
+  </ul>
+  <p>或许，在这部《英伟达之道》中，你会找到属于自己的启发。</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/IbIVcfLoDPy45M5BQT3IqA" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，作者： HYZ ，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3073924542198662</id>
+            <title>GPT-4o再暴露「弱智」缺陷，大模型无一幸免，港中文等发布「视觉听觉」基准AV-Odyssey：26个任务直指死角问题</title>
+            <link>https://www.36kr.com/p/3073924542198662</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3073924542198662</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Dec 2024 05:44:25 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 多模态大模型, 听觉能力, AV-Odyssey, DeafTest  
+<br><br>  
+总结: 研究表明，尽管多模态大模型如GPT-4o在音频转文字任务上表现优异，但在基本的音量辨识任务中却表现不佳，显示出其在听觉能力上的严重缺陷。为此，研究团队提出了DeafTest测试工具，专门评估多模态大模型的基础听觉能力。同时，推出了AV-Odyssey基准测试，涵盖26个视听任务，旨在推动AI模型在听觉和视觉理解的整合能力。实验结果显示，现有模型在AV-Odyssey测试中的表现远低于预期，音频感知仍是多模态任务中的主要瓶颈。 </div>
+                        <hr>
+                    
+                    <blockquote>
+   <p>多模态大模型在听觉上，居然也出现了「9.11&gt;9.8」的现象，音量大小这种简单问题都识别不了！港中文、斯坦福等大学联合发布的AV-Odyssey基准测试，包含26个视听任务，覆盖了7种声音属性，跨越了10个不同领域，确保测试的深度和广度。</p>
+  </blockquote>
+  <p>在人工智能领域，我们一直以为顶尖的多模态大模型已经无所不能，GPT-4o在ASR（音频转文字）任务上已经达到了97%的正确率，更是凸显了强大的音频理解能力。</p>
+  <p>然而，最近一项来自香港中文大学、斯坦福大学、伯克利大学和耶鲁大学的研究成果却彻底颠覆了这一认知——GPT-4o、Gemini 1.5 Pro、Reka Core等最先进的多模态大模型居然无法正确分辨明显不同的声音大小！</p>
+  <p>下面是一个例子：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_2b01b9f349814504adf89a6f63248014@5888275_oswg213183oswg967oswg1095_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>结果让人难以置信：这些顶尖的AI模型都未能准确判断出音量的差异！对于人类来说，这种问题简直是「傻瓜级」任务，然而这些大模型却纷纷失手，暴露出其在基本听觉能力上的严重缺陷。</p>
+  <p>这一发现激发了研究团队的思考：为什么如此先进的模型在听觉辨识方面如此薄弱？为了填补这一空白，研究团队首度提出了一个全新的测试工具——DeafTest，它专门用来测试多模态大模型的基础听觉能力。</p>
+  <p>不仅如此，研究团队还提出了首个全面的多模态大模型视听能力评估基准——AV-Odyssey。这一基准旨在推动未来AI模型在听觉、视觉的理解整合能力上迈向新高度。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_6765596d26f64b908de1c41f1cc171d0@5888275_oswg140987oswg1080oswg346_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <blockquote>
+   <p>论文链接：https://arxiv.org/pdf/2412.02611</p>
+   <p>项目地址：https://av-odyssey.github.io/</p>
+   <p>代码地址：https://github.com/AV-Odyssey/AV-Odyssey</p>
+  </blockquote>
+  <h2><strong>DeafTest：多模态大模型的「听力盲点」</strong></h2>
+  <p>为了测试多模态大模型最基础的听觉能力，研究团队首先提出DeafTest，该测试包括四项基础任务：数音频中的声音次数、比较两个音频的响度、比较两个音频的音高、比较两个音频的时长。</p>
+  <p>这些任务都被设计为对人类来说极其简单的判断题，差异明显，例如：</p>
+  <p>在响度比较任务中，一个音频的响度在70-100分贝之间，而另一个音频则在30-60分贝之间。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_96a5db624b1b4735b3c9f9e65a1da613@5888275_oswg90268oswg817oswg361_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>然而，测试结果却令人震惊——这些顶尖的AI模型在大多数任务中的表现，几乎与随机猜测无异，准确率和随机选择的50%差不多，无疑暴露了多模态大模型在音频感知上的巨大短板。</p>
+  <h2><strong>AV-Odyssey Bench：全面评估多模态大模型的视听能力</strong></h2>
+  <p>为了更全面地评估AI在视听能力上的表现，研究团队还推出了一个全新的评估基准——AV-Odyssey。</p>
+  <p>AV-Odyssey包含26个任务，覆盖了7种声音属性——音色、语调、旋律、空间感知、时序、幻觉、综合感知，并且跨越了10个不同领域，确保测试的深度和广度。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_6b606c97c6e142a4baec05c4e34a105c@5888275_oswg306764oswg1080oswg364_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>为了确保评估的稳健性和公正性，所有任务均采用四选一的多项选择题形式，每个问题都融合了视觉、听觉等多模态信息，全面考察模型的综合处理能力。</p>
+  <p>此外，为了避免因输入顺序或格式导致的偏差，所有输入（包括文本、图片/视频和音频片段）都会以交错的方式输入到多模态大模型中。问题的形式如下图所示：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_65f9946d09e54f69b2d3584636baf819@5888275_oswg977974oswg1080oswg1046_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>AV-Odyssey中包含了由人类专家全新标注的4555个问题，确保题目没有在其他任何数据集中出现过，任务分布以及统计信息如下面图表所示：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_38dcbfa7a58c49f880b8a687887e53d7@5888275_oswg483997oswg1080oswg1077_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>同时，为了进一步控制质量，研究团队利用5个视觉语言模型和4个音频大语言模型，过滤出包含冗余图像或音频片段的问题。</p>
+  <p>在这个过程中，2.54%的问题同时被所有视觉语言模型或所有音频大语言模型解决，研究团队去除了这些问题。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_c1f9b22d2cfc42429f51ce7390f3f538@5888275_oswg143297oswg934oswg652_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>AV-Odyssey 实验结果</strong></h2>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_0cca8bfe422d46d7aad30a7d67563946@5888275_oswg261774oswg1080oswg465_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>从实验结果中，可以发现：</p>
+  <p><strong>AV-Odyssey的挑战性：</strong></p>
+  <p>大多数现有的多模态大语言模型平均表现仅略高于25%，这与四选一问题的随机猜测准确率相当。值得注意的是，即使是AV-Odyssey中的表现最佳的模型——GPT-4o，也仅取得了34.5%的准确率。</p>
+  <p>这一结果凸显了AV-Odyssey所带来的高挑战性，远远超出了当前模型训练数据的分布范围。</p>
+  <p>通过设定严格的标准，AV-Odyssey基准测试为评估多模态大模型在音频视觉任务中的能力提供了一个重要工具，突显了现有模型的局限性，并为未来的改进指明了方向。</p>
+  <p><strong>开源多模态大模型训练的局限性：</strong></p>
+  <p>同时，即便OneLLM、Unified-IO-2、VideoLLaMA2和NExT-GPT 通过引入Audiocaps等音频-文本匹配数据集，尝试增强音频理解能力，并结合图像-文本配对数据训练视觉理解，这些模型在AV-Odyssey的测试中仍然表现不佳。</p>
+  <p>这表明，目前的训练流程并不足以真正弥合音频与视觉模态之间的鸿沟，也未能有效地学习音视频信息的整合与深度理解。</p>
+  <h3><strong>AV-Odyssey 错误分析：音频感知仍是瓶颈</strong></h3>
+  <p>研究团队对Gemini 1.5 Pro在AV-Odyssey中的错误进行深入分析，对每个任务随机抽取了4个错误案例进行人工标注，最终得到104个错误案例，并对其进行统计。错误的分布如下图所示：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_705fe9b3f3b244a589b66299dc441b99@5888275_oswg144703oswg918oswg708_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这一分析结果揭示了一个重要趋势：63%的错误都集中在音频理解上！</p>
+  <p>例如，在某些任务中，虽然模型正确理解了视觉信息，但是音频片段的内容识别错误，导致了错误答案的生成。一个例子如下图所示：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_392f9ad06f9040ea85c0a5fa7f3bf434@5888275_oswg276382oswg721oswg835_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这一发现再次印证了DeafTest的初步结论：当前多模态大模型在基础的听力能力上存在明显短板，音频感知依然是多模态任务中的最大瓶颈。</p>
+  <p><strong>参考资料：</strong></p>
+  <p>https://av-odyssey.github.io/</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/4beDnPqkUdXUlXSH9elDoA" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，作者：LRST，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3073921026339717</id>
+            <title>ChatGPT深夜福利，Canvas生产力神器史诗级升级，跑代码改bug，AGI界面大革新</title>
+            <link>https://www.36kr.com/p/3073921026339717</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3073921026339717</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Dec 2024 05:40:37 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Canvas, OpenAI, ChatGPT, 升级  
+<br><br>  
+总结: OpenAI在第四天的直播中宣布Canvas的重大升级，所有用户均可使用新功能。Canvas不仅支持文档编辑、Python代码运行和调试，还整合进自定义GPTs，提升了人机协作的效率。新功能包括修改建议、润色文档、检查语法和添加表情符号等。用户可以在Canvas中实时编辑，与ChatGPT共同协作，体验更流畅的写作过程。此外，Canvas还可以作为个性化导师，帮助用户学习和执行代码，标志着人类与AI合作的新纪元。 </div>
+                        <hr>
+                    
+                    <blockquote>
+   <p>OpenAI Day 4，Canvas重大升级，所有用户皆可使用！它不仅能与人类写作编辑文档、运行和调试Python，还整合进自定义GPTs中，成为更丝滑的打工神器。</p>
+  </blockquote>
+  <p>OpenAI直播第四天，ChatGPT生产力再次革新了！</p>
+  <p>这次，奥特曼没有露脸。由OpenAI CPO Kevin Weil带着另两位同事，在20分钟内演示了Canvas的全新功能。</p>
+  <p>当然，还有例行的圣诞冷笑话一则：</p>
+  <ul>
+   <li>你知道圣诞老人是怎么拍照的吗？</li>
+   <li>用北极拍立得（North Polaroid）</li>
+  </ul>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_9d5d0377e327442d9b6f52b111a73a04@5888275_oswg659999oswg1080oswg606_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Canvas新功能将向所有用户开放，不论是免费的，还是付费的用户，皆可畅玩。</p>
+  <p>奥特曼表示，Canvas不仅能够编码，还可以为文字添加emoji。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_f60e0d00f7214214bf0b64a633934b18@5888275_oswg64529oswg872oswg400_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这次，一共更新了三大能力：</p>
+  <ul>
+   <li>修改建议、润色文档、检查语法、添加表情</li>
+   <li>可以运行Python代码</li>
+   <li>已整合进自定义GPTs</li>
+  </ul>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8fb54073d8a94da1aad107e51c8c7aaa@5888275_oswg69809oswg1080oswg233_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>10月份Canvas一上线，就以「颠覆人机交互」的界面震撼了全世界。同时，也成为了ChatGPT发布两年来，聊天界面首次迎来的大升级。</p>
+  <p>对此，OpenAI的设想是，让ChatGPT不再仅仅是一个简单的对话框，而是能与人类「并肩作战」的全新AI。写作、代码，都能开启全新的合作方式。</p>
+  <p>而这次Canvas全新升级的新玩法，更是令人深切地感受到，一个「人类和AI合作」的崭新时代，已经拉开序幕。</p>
+  <h2><strong>编辑文本，提出建议</strong></h2>
+  <p>现在，在Canvas中，用户可以和ChatGPT写作编辑文档了，包括修改标题、调整长度和阅读等级、添加表情符号等，写作无比流畅自然。</p>
+  <p>在GPT对话框的左下角，点击「View tools」按钮即可看到Canvas，或者你也可以直接在对话框中@Canvas将它召唤出来。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_f16422f9fa794fa1828028b2b8a24fcd@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>给ChatGPT输入指令之后，便会跳转到一个左右并排的视图，左边是我们熟悉的聊天界面，右边就是Canvas了。</p>
+  <p>此前，GPT生成的文字只在对话框中展示，我们必须把它复制到文档中才能进行修改。</p>
+  <p>而在Canvas里，则可以直接在这个交互界面里实时编辑，和GPT共同协作。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_535931cddfc2484f919d0bf1aad08591@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>此外，Canvas右下角还有一个按钮，其中包含了一些方便实用的快捷键。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_dd4cd79283274e739218b54a80ff403f@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>- Suggest edits：可以要求GPT为我们提供修改建议。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_bd66b31c4c4c4e66a045a8298a75ff1c@5888275_oswg2493oswg172oswg54_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>- Adjust the length：可以调整文章的长度。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_b15b0e8f9e00418b8006af8db691a430@5888275_oswg2614oswg178oswg52_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>- Reading level：可以根据文字内容面向的读者类型，调整语言的复杂程度，有幼儿园、初中、高中、大学、研究生几个级别。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_0d2e56bf3df3476d8412ec332af6459d@5888275_oswg3223oswg148oswg45_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>- Add final polish：最终的润色，可以检查拼写错误、语法问题等。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_a9b96041e0804997a92063d7b38407d4@5888275_oswg6571oswg169oswg55_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>- Add emojis：添加表情符号，可以选择将表情符号放在单词、段落或者列表中。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_24acb634e4a34604af9ed1d05fa4a68d@5888275_oswg2225oswg145oswg54_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>现场，研究人员先写了一篇名为《The Elves and the Christmas Catastrophe》的圣诞故事，还在其中加入了许多表情符号。</p>
+  <p>添加表情符号时，它会在之前的版本上进行实时的流式更新，方便你在上下文中清楚地看到变化。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_a2ac60e6fbe645118eeabca76c59daea@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>最终结果长下面这样：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_99f27239dbb145a58b2f3066a0f3e61a@5888275_oswg342107oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>接着，他们用它修改了一篇论文。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_31c7042e349a4b3f8c7c46efe7c77805@5888275_oswg607128oswg1080oswg649_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>将论文粘贴到文本框中，因为篇幅比较长，即可直接打开Canvas。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_e11b35844cf24a30bb3b1086b53c2487@5888275_oswg120742oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>接着，他们输入prompt让GPT以物理学教授的角度提供修改建议。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_7294b530c79e4157a2029ca25770f9cb@5888275_oswg79621oswg705oswg391_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在GPT提供修改建议的时候，它会直接在Canvas界面中进行批注，比以往仅在聊天框中提供建议要直观了许多。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_372b67f474f241a69aab9decc8613667@5888275_oswg435533oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>跑代码，debug</strong></h2>
+  <p>在编程方面，研究人员对Canvas的能力也做了令人兴奋的改进。</p>
+  <p>现在，我们可以直接在Canvas中运行Python代码，这样就能看到输出，无论是以文本还是图形的形式。</p>
+  <p>比如现在，我们需要调试一段出了问题的代码。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_01d553c433a54cff9a201d13d6d9e281@5888275_oswg408477oswg1080oswg797_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>把它复制到ChatGPT中，我们实际上就得到了一个代码编辑器。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_da68140684524984a4a124dd684a27d8@5888275_oswg284452oswg1080oswg1031_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>然后，就可以直接求助ChatGPT，让它帮我们调试代码，并且问它出了什么问题。</p>
+  <p>它识别出，「plot.label」在Matplotlib中不存在，随后提供了一个修正代码示例。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_74a8ce8d89c34f7e969a849b61a8040c@5888275_oswg427529oswg1080oswg822_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在右上角点击「Run」，可以看到「label未定义」，这就证明：ChatGPT的判断是正确的！</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_95a1f2ee88e84308915e10d04ac57934@5888275_oswg49575oswg1080oswg109_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>因为「label」不是一个有效函数，在Matplotlib中我们可能就需要使用「title」来代替。</p>
+  <p>研究人员表示，ChatGPT居然一下子就发现了这个bug，太令人惊讶了。</p>
+  <p>总之，点击「修复错误」，ChatGPT就能编辑Canvas来修复；点击「显示更改」，就能看到ChatGPT究竟改了什么。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_57894be5b28a409f8664b17e9e1ee61b@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而且，「显示更改」不仅适用于代码，也适用于文档。</p>
+  <p>果然，被Canvas修复后的代码，就得出了正确的折线图。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_b2099b50332b46c8ac2cfe92427cb0d1@5888275_oswg106906oswg1080oswg514_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>所以，这一切究竟是怎么做到的？</p>
+  <p>研究人员解释道，在Canvas中，他们加载了一个WebAssembly Python模拟器，它允许我们加载几乎任何Python库，并且立即运行你的代码，甚至包括生成图形。</p>
+  <p>接下来，他们让ChatGPT生成了一个关于圣诞老人玩具的Sankey流程图，并且添加颜色，呈现圣诞主题的效果。</p>
+  <p>ChatGPT再次检查、编辑代码，然后添加了一些代码行，创建了Sankey图，还加入了数据。</p>
+  <p>最终，图像成功生成了！</p>
+  <p>甚至，我们还能把图像拖到prompt区域，让ChatGPT进一步优化它。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_5a830669bc2f4118b32aadcf7d8c6e7d@5888275_oswg212838oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>植入自定义GPTs</strong></h2>
+  <p>Canvas第三大能力更新，便是将其整合进自定义GPTs中。</p>
+  <p>GPTs对于所有人再熟悉不过了，能为任何特定任务提供ChatGPT自定义指令、自定义上下文，以及其他独特具体的构建方式。</p>
+  <p>甚至，你还可以将其与他人分享使用。</p>
+  <p>直播现场，研究人员决定利用定制GPT，帮助圣诞老人去处理海量的邮件。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_267fedb859e94265b92eb3d54ac8c87e@5888275_oswg48365oswg382oswg255_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>如果圣诞老人有这么这一助手，帮他起草初稿，就可以更轻松回复孩子们的邮件。</p>
+  <p>上传一封Alexi给圣诞老人信件的照片到定制的「Santa Letter Drafter」中。</p>
+  <p>可以看到，Alexi的愿望清单中，一共有三项：一辆全新自行车、一块H100 GPU，还有一些专为研究的暗物质。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_7ee1c51e3b194098994221c28b4b9485@5888275_oswg533303oswg678oswg902_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>除了上传照片外，研究人员又向圣诞老人GPT提供了关于Alexi个人性格方面的背景——他今年表现很好。</p>
+  <p>接下来，GPT就开始为Alexi写回信了。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_b63ca0d576134268a12c9b85ebeca0b7@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>圣诞老人的回信中，夸赞自行车是一个不错的选择，至于GPU，技术工坊的精灵们已经在为你生产了。而暗物质，可能没有办法实现了。</p>
+  <p>可以看到，这已经是一个非常不错的初稿，方便圣诞老人再次撰写、修改。</p>
+  <p>以上一套流程下来，很多人没有注意到的是：</p>
+  <p>研究人员并没有点击任何Canvas按钮，GPTs只是自动生成了Canvas。</p>
+  <p>这是在构建定制的「Santa Letter Drafter」时，研究人员便将Canvas放下了自定义指令中。</p>
+  <p>那么，具体是如何配置的呢？</p>
+  <p>通过点击定制GPT头像，会出现一个「编辑GPT」选项，然后进入配置界面。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_d671e46a76064740b8e418da13c43a2e@5888275_oswg130080oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在指令中，通过添加「可以使用Canvas」的提示，便可以实现这个能力。而且，指令中可以规定圣诞老人回复邮件的风格，要幽默风趣。</p>
+  <p>在定制界面下方，还有一个功能的复选框，勾选Canvas即可。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_fe42a37c341c497492c48f25c4bfd38a@5888275_oswg44068oswg360oswg197_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>更多演示</strong></h2>
+  <p>针对Canvas新功能，OpenAI研究员Karina Nguyen做了更多的分享。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_af388a22491e405cab956f597b99a515@5888275_oswg156298oswg1080oswg402_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">两年来，OpenAI首次革新了人类与ChatGPT的协作方式</p>
+  <h3><strong>个性化导师</strong></h3>
+  <p>Canvas可以被塑造成一个更加个性化的导师，能够通过各种丰富的方式与之互动。</p>
+  <p>比如，你可以让ChatGPT为你解释数学概念——高斯分布，然后再要求它编写代码。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8567bd7fcc34407781604b64cf279a0e@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>最后，它还可给出可视化绘图。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_de94c9ba4cd34c8598de93b5097c606f@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这意味着，对于许多学生来说，学习内容更加直观，能帮助其对复杂概念的理解。</p>
+  <h3><strong>代码执行</strong></h3>
+  <p>Canvas还可以是一个自动化SWE和数据科学家。</p>
+  <p>它能自动查找API文档、生成并运行代码，还能画出数据可视化图表！</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_3c223a865b1c4291abc73f9966c5a2f3@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h3><strong>编写小工具/游戏</strong></h3>
+  <p>任何人都可以用Canvas编写个性化的小工具，或者游戏。</p>
+  <p>如下，就是ChatGPT写的曼德勃罗分形（Mandelbrot fractal）的Python代码。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_aa2c7d48da494121a9c845ba49965bc0@5888275_oswg316728oswg1080oswg805_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p><strong>参考资料：</strong></p>
+  <p>https://openai.com/12-days/?day=4</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/K2Hb0Wzp2OB1cbl9E9URng" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，作者：HYZj，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3073918784175876</id>
+            <title>温州化妆师，收获一个240亿IPO</title>
+            <link>https://www.36kr.com/p/3073918784175876</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3073918784175876</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Dec 2024 05:40:21 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 上市, 毛戈平, 港交所, 高端美妆  
+<br><br>  
+总结: 毛戈平化妆品股份有限公司于2023年12月10日在港交所上市，经过8年的努力，创始人毛戈平夫妇的身家因此超过140亿港元。上市首日，毛戈平股价大幅上涨，市值一天内增加超过100亿港元，成为市场关注的焦点。毛戈平的成功得益于其高端品牌定位和强大的市场需求，尤其是在消费行业复苏的背景下。然而，毛戈平也面临着激烈的高端美妆市场竞争和品牌单一、研发投入不足等挑战。 </div>
+                        <hr>
+                    
+                    <blockquote>
+   <p>用了8年时间，浙江温州化妆师毛戈平终于叩开资本市场的大门，同名公司毛戈平于12月10日正式登上港交所。上市当天，毛戈平高开高走，每股一度涨超80%，最终收涨76.51%，市值一天涨了超100亿港元。凭此。不光打新的人享受到了一场资本盛宴，创始人毛戈平夫妇的身家更是超过了140亿港元。</p>
+  </blockquote>
+  <h2><strong>苦等8年终于上市</strong></h2>
+  <p>现年60岁的温州化妆师毛戈平，终于圆了8年上市梦。</p>
+  <p>12月10日，毛戈平一手打造的化妆品集团——毛戈平化妆品股份有限公司（以下简称“毛戈平”），正式在港交所敲钟，开盘就大涨，“毛戈平上市首日高开60%”的话题随之冲上热搜。</p>
+  <p>毛戈平的招股价并不便宜，每股定在了29.8港元的区间上限，但疯抢这家高端美妆巨头的人不在少数。仅在富途平台上，认购毛戈平的金额就高达905亿港元，超过了时代天使453亿港元、快手426亿港元的IPO认购额，全市场认购额比华润饮料还高，成了今年妥妥的新股“冻资王”。</p>
+  <p>多位认购毛戈平股票的股民告诉《财经天下》，之所以买毛戈平，一来，近期消费行业火爆，毛戈平基本面不错；二来，能0利息融资打新，不少人“把额度拉满了”。</p>
+  <p>在投资者交易平台上，有人晒自己打新毛戈平一把赚了3万港元，还有人因卖飞毛戈平肠子都悔青了。当天，毛戈平每股报收52.6港元，成交额41.11亿港元，换手率超33%，市值一天涨了107.39亿港元至247.53亿港元。</p>
+  <p>247亿港元是个什么概念？对照A股化妆品板块的市值来看，毛戈平算是坐上了行业老二的位置。12月10日收盘，化妆品板块排名第一的珀莱雅市值为369.50亿元，紧随其后的薇诺娜母公司贝泰妮为210.15亿元，排名第三的敷尔佳为148.51亿元。</p>
+  <p>毛戈平股价的暴涨，不光让打新的人享受到了一场资本盛宴，创始人毛戈平夫妇更因手握57.26%的公司股份，赚得了不菲的身家，初步算下来超过140亿港元，在今年的胡润百富榜上能有一席之地。</p>
+  <p>提起化妆师毛戈平，美妆圈几乎无人不知。就连李佳琦都甘愿称臣，“你可以不认识我，但不能不认识毛戈平”。但名利场颇为得意的毛戈平，却一直失意于资本市场。</p>
+  <p>论资历，毛戈平在美妆圈算是前辈。2000年，毛戈平在杭州成立公司。在此之前，他因为给《武则天》剧组化妆，在影视圈名声大噪。毛戈平创业的时候，侯军呈、方玉友还在义乌做化妆品批发生意，直到3年后才创办珀莱雅。韩束所在的上美股份也晚了2年才成立，但这两家却早早就敲开了资本市场的大门。</p>
+  <p>不仅如此，大家耳熟能详的拉芳家化、丸美集团、华熙生物，也都乘着2017年、2021年前后这两波风潮顺利上了市。唯独剩下毛戈平，一直想上市而不得。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_bc6ec685399c41f7b205bd43789fe33a@5888275_oswg94945oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>从2016年披露招股书算起，毛戈平的上市路前前后后走了8年。2021年，毛戈平本人曾坦言，上市的念头“把他像皮球一样越拍越高”，最后，只得“靠自己从土里剥出来”。</p>
+  <p>至于上市难的原因，毛戈平内部人士曾告诉《财经天下》，主要和公司最大的外部股东九鼎投资有关。</p>
+  <p>毛戈平早前的招股书显示，2015年10月，九鼎投资曾花7330万元，以转让形式获得毛戈平10%的股权，成为公司最大的外部股东。2018年，九鼎投资因涉嫌违反证券法律法规遭证监会立案调查，与其有关的上市计划均被搁浅，包括毛戈平。</p>
+  <p>2024年1月，毛戈平和另两家独立第三方公司，合计出资7.3亿元，买回了九鼎投资持有的所有股份。虽说代价不小，是当年九鼎投资出资额的10倍，但好歹给上市扫清了障碍。</p>
+  <p>再之后，毛戈平仿佛逆转了运势，一路走得顺风又顺水。10月9日，毛戈平再次向港交所提交上市申请。11月20日，顺利通过上市聆讯。12月10日，正式上市。</p>
+  <p>“毛戈平赶上了好时候。”一位熟悉资本市场的人士告诉《财经天下》，从今年9月开始，港股快速脱离底部，成交量增加，无论是新股募资规模还是IPO家数，都较之前有明显增长。这个时候，市场整体市盈率抬高，此时发行新股，发行价能高点，可以多融点钱。</p>
+  <p>敲钟当日毛戈平还借到了“港股大涨”的东风。受重磅利好影响，12月10日，港股三大指数集体高开，毛戈平同样大幅高开。而不久之前，多点数智登陆港股当天即破发，还一度让不少人担心毛戈平会步其后尘。</p>
+  <h2><strong>同名品牌贡献九成营收</strong></h2>
+  <p>在整个国货美妆圈，毛戈平是个特殊的存在。</p>
+  <p>一来，和大多数国货品牌“先产品、后品牌”，消费者只认产品、不关心公司创始人不同，毛戈平有着浓厚的创始人色彩。不少消费者是先见识过毛戈平的化妆手法，然后才想买同款试试手的。</p>
+  <p>毛戈平的成名路，是常规的“机遇+努力”的情节。1964年，毛戈平出生于浙江温州，13岁进入浙江省艺术学校，学越剧，19岁被分配到浙江省越剧院，跟随剧团到全国各地巡演。期间，因为剧团化妆师生病，毛戈平临时救场，遂发现自己的化妆天分。</p>
+  <p>1995年，在影视圈小有名气的毛戈平，迎来了事业的转折点，因为给《武则天》剧组化妆，名声大噪。再之后，毛戈平在36岁开启了事业的下半场——经商。</p>
+  <p>2016年，一则毛戈平为女模特化妆的视频，在热搜上挂了几天，舆论场沉寂多年的毛戈平再次走红。之后，毛戈平每每给明星化妆，都能引发热议。再加上毛戈平还做化妆培训，学员们毕业、进入化妆行业，都是行走的招牌。</p>
+  <p>再则，和大多同行“先平价、后高端”的路径不同，毛戈平2000年创立伊始，就一门心思奔高端。</p>
+  <p>在毛戈平的叙事里，创业初期，中国没有自己的高端化妆品牌，他想做一个，但商场不让他进驻。不得已，毛戈平只得承诺保底销售额，把第一家店开进上海港汇恒隆广场，然后使出浑身解数招揽顾客。</p>
+  <p>这和雅诗兰黛当年的打法类似。想当年，雅诗兰黛创始人雅诗兰黛夫人也是靠把店开进百货公司，奠定了“高端”基调。为了匹配高端定位，雅诗兰黛价格定得比同行高。用雅诗兰黛夫人的话来说，其产品价格虽高，但应该由消费者为雅诗兰黛的高价格赋予意义，比如更好的体验、炫耀的资本、品牌认同等。</p>
+  <p>毛戈平也是如此。在招股书里，毛戈平表示，其护肤、彩妆产品建议零售价通常在400～800元、200～500元区间。考虑到线上促销活动、小样、赠品等影响，实际售价会更低。但不少消费者提到毛戈平的化妆品，第一反应还是“贵”。</p>
+  <p>发展至今，毛戈平形成了自己独特的商业模式。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_bf5084e0fae74c15acee1a04c2114753@5888275_oswg135687oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>毛戈平的业绩来自三大业务板块，并且已经趋于稳定：同名美妆品牌MAOGEPING、毛戈平化妆艺术培训以及美妆品牌至爱终生。前两者有些毛戈平IP衍生品的意味，后者是2008年推出，用来覆盖追求性价比客群的“小号”。</p>
+  <p>从营收构成上看，同名品牌MAOGEPING一直是绝对的营收大头。2021年到2024年上半年，毛戈平营收分别为15.77亿元、18.29亿元、28.86亿元和19.72亿元。其中，MAOGEPING的营收占比一直稳定在90%以上。反观不带“毛戈平”标签的至爱终生，三年半才累计入账1.19亿元。</p>
+  <p>拉平来看，受益于MAOGEPING的高端定位，以及培训业务的轻资产模式，毛戈平的毛利率在同行里一骑绝尘。</p>
+  <p>2021年至2024年上半年，其毛利率分别为83.4%、83.8%、84.8%和84.9%。作为对比，2024年上半年，捆绑医美概念的巨子生物，毛利率为82.4%。外资品牌欧莱雅，毛利率也不过74.8%，都不及毛戈平。</p>
+  <p>而在公司治理上，毛戈平同样是围绕创始人展开，有着浓重的家族企业色彩。</p>
+  <p>招股书显示，毛戈平董事会的6名执行董事里，5人来自毛式家族。其中，毛戈平本人担任董事长兼执行董事，负责集团整体战略和管理；其妻子汪立群，任执行董事兼副董事长，负责管理培训机构业务，以及公司日常经营发展。毛戈平的两个姐姐、汪立群的弟弟，均为“执行董事”，负责“协助董事长毛戈平”以及公司的日常管理工作。</p>
+  <p>不光如此，公司创造的财富，也大都流入了毛家人的口袋。从股权结构上看，毛戈平夫妇共持有公司57.26%的股份。如果算上所有家族成员，合计持股超过了80%。</p>
+  <p>为了尽量打消外界对其“过于依赖创始人”的质疑，毛戈平在招股书里强调，公司的成功不仅仅依赖毛戈平本人的赋能，还依仗多年来建立的销售渠道、品牌声誉，富有经验的高管团队，且毛戈平与公司的关系变化不会对业务产生重大不利影响。</p>
+  <p>但在美妆圈，本就有着“短期看月度高频数据、中期看经营指标、长期看管理能力”一说。不久前，珀莱雅换帅，还在资本市场引发过动荡。更何况，如今毛戈平立足的高端美妆市场，已经愈发拥挤。</p>
+  <h2><strong>高端美妆竞争在加剧</strong></h2>
+  <p>“根据弗若斯特沙利文的资料，我们是中国市场十大高端美妆集团中唯一的中国公司。”在招股书里，毛戈平如是写道。上市之后，毛戈平需要直面的，也是该赛道竞争的风起云涌。</p>
+  <p>近年来，高端美妆在中国整体乏力。今年前三季度，欧莱雅中国所在的北亚地区遭遇销售下滑困境。雅诗兰黛也是同病相怜。其最新披露的2025财年第一季度财报显示，亚太市场净销售额同比下降11%。</p>
+  <p>至于原因，曾有美妆业内人士向《财经天下》分析，高端品牌在中国市场式微，主要和消费降级、医美渗透率提高有关，导致相关企业业绩被价格较低的国货、功效更明显的轻医美护理吃掉。再加上，近年来，不少高端品牌受业绩压力所迫，加大线上渠道比例，甚至在电商、免税渠道频繁打折促销，失了高端调性。</p>
+  <p>在此背景下，毛戈平营收、净利增长，有些逆势上扬的意味。从财报数据来看，增长主要来自线上。2022年至2024年上半年，毛戈平的线上营收增速分别为31.21%、69.94%和63.44%，高于总营收增速。公司基本覆盖了淘宝、拼多多、抖音等线上电商平台。</p>
+  <p>浙商证券的相关研报表示，为了平衡线上、线下两个渠道，毛戈平的打法是，线上以小克重产品为主，客单价相对较低，主要吸引年轻人；线下则是以大克重产品为主，附加彩妆化妆服务，提高消费体验和复购率。</p>
+  <p>但随着巨头们反思后纠偏，以及新的竞争对手不断入局，从长远来看，毛戈平面临的压力并不小。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_d3d616b7e5344bbdb8960129152bf9f7@5888275_oswg139170oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>今年以来，欧莱雅、雅诗兰黛在意识到问题后，动作频频。不久前，雅诗兰黛任命新CEO。在业内看来，新CEO在中国市场的本土化运营经验和市场洞察能力，将推动雅诗兰黛在中国的复苏。同一时间，欧莱雅则是通过投资收购，卷向医美赛道，进一步强化高端化能力。</p>
+  <p>与此同时，外资集团如联合利华，国货品牌如水羊股份，也都在不断加码高端美妆。</p>
+  <p>今年10月，联合利华任命新的高端美妆事业部CEO。业绩增长承压，高端美妆被联合利华寄予提振业绩的希望。11月，御泥坊母公司水羊股份在披露的投资者关系活动记录中表示，公司聚焦资源在高端高奢品牌方面，对大众线小品牌进行了战略性收缩。</p>
+  <p>抛开外部因素不谈，毛戈平本身的劣势也比较明显，比如品牌过于单一，研发储备不足。</p>
+  <p>“从全球范围看，单一品牌的营收天花板在10亿美金左右。”有业内人士曾告诉《财经天下》。纵观国内外同行，无不是手握多个品牌。比如珀莱雅，除了主品牌珀莱雅以外，还有彩棠、悦芙媞等子品牌。“除了多品牌布局，还得看组织能力能否复制”。</p>
+  <p>反观毛戈平，主品牌MAOGEPING的营收占比常年在90%以上，子品牌至爱终生，推出至今已经16年，水花一直不大。</p>
+  <p>而在研发端，毛戈平的研发费用率也长期低于同行。2021年到2023年，毛戈平的研发费用率分别为0.89%、0.82%和0.83%。反观国内外同行，研发费用率普遍在2%到3%之间。</p>
+  <p>不同于欧莱雅有抗衰老成分玻色因这个“原料王者”坐镇，珀莱雅搭上“早C晚A”的风潮，敲开资本市场大门的毛戈平还需要找到“毛戈平”这个最强IP之外的新依靠。</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/DCuWJk-XrS6fNNwXFssgwQ" rel="noopener noreferrer nofollow" target="_blank">“财经天下WEEKLY”</a>，作者：林木，编辑：吴跃，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.36kr.com/p/3073898717835913</id>
             <title>今天，上海并购放大招了</title>
             <link>https://www.36kr.com/p/3073898717835913</link>
@@ -1132,875 +2274,6 @@
   <p>宝丰集团名下企业数量多达17家，包括地产公司、养老机构、医院、物业、牧场、加油站、教育以及煤矿矿用产品租赁等多种资产。除了宝丰能源，<strong>党彦宝还曾控制香港上市公司中国宝丰国际</strong>（3966.HK，2020年9月已私有化退市），公司主营光伏发电以及照明及家居饰品设计及供应链业务。</p>
   <p>2020年，47岁党彦宝的身价暴增，以700亿元人民币财富位列《2020年胡润百富榜》第50位，稳坐“宁夏首富”宝座。次年，48岁的党彦宝的身价突破千亿，以1000亿元人民币财富位列《2021年胡润百富榜》第45位。<strong>2024年《胡润百富榜》上，现年51岁的党彦宝财富达950亿元</strong>，连续蝉联“宁夏首富”宝座，而十年前这一数字仅为55亿。</p>
   <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/RKZS9ZNqnf4DSU7Y9dcVXg" rel="noopener noreferrer nofollow" target="_blank">“野马财经”</a>，作者：野马财经，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3073732165088128</id>
-            <title>A股“诺言效应”</title>
-            <link>https://www.36kr.com/p/3073732165088128</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3073732165088128</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 11 Dec 2024 00:53:17 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: <巴菲特, 投资回报, 管理层诚信, A股信用榜>
-<br>
-<br>
-总结: 《巴菲特之道》强调了巴菲特投资的三个标准：满意的投资回报、合理的股价和管理层的诚信。文章分析了A股上市公司管理层的承诺履约情况，指出过去十年间管理层的承诺达成率较高，但日常营运类承诺的履约率相对较低。管理层的信用水平对企业市场表现有显著影响，违约会导致投资者的不信任和市值变化。整体来看，管理层的信用建设逐渐受到重视，履约率呈现增长趋势。 </div>
-                        <hr>
-                    
-                    <p>罗伯特·哈格斯特朗所著的《巴菲特之道》，详述了贯穿巴菲特各类投资的共同标准：<strong>能够产生令人满意的投资回报，股价没有过高，以及管理层能够保持诚信。</strong></p>
-  <p>投资回报率和估值水平，是市场存在的客观因素；而管理层的诚信，才是这句话的内核。</p>
-  <p>2023年初，我们曾依据企业的财务指标和社会评价，整合了一套企业信用分的评价体系（详见《A股信用榜》）。2024岁末之际，我们的视野再度回归：</p>
-  <p>曾记否，三五年前市场低迷时，各家上市公司管理层做出的那些资产重组、避免同业竞争和再融资等种种承诺，一度成为投资者翘首以盼、拉高估值叙事最大的一张饼。&nbsp;</p>
-  <p>在“A股信用榜2.0”中，我们便将梳理下，A股过去十年管理层立下的承诺，兑现几何，且是否直接影响了企业的市场表现。</p>
-  <h2><strong>01 五花八门的承诺</strong></h2>
-  <p>从董事承诺参加考试，到老板捐赠豪车无偿给公司使用，再到日常信披，增持限售乃至重大资产重组，A股的管理层承诺事项可谓五花八门应有尽有，我们先做个简单的分类和统计。</p>
-  <p>依据Choice的数据，我们统计了过去十年间A股上市公司董事会和管理层所有的承诺事项，共计62083条，平均每天有超过17条来自管理层的“肺腑之言”。</p>
-  <p>在这其中，长期未履约或直接违反承诺的有233条，变更承诺及豁免的承诺为359条，已完成承诺13908条，正常履行中的承诺为47583条。</p>
-  <p>剔除重复项后（类似于，管理层不同角色同时承诺不减持），A股整体有效的承诺条例约为16300条，整体的承诺达成率约为96.4%，管理层的信用水平还算不错。</p>
-  <p>细分来看，承诺事项主要分为5大类，分别为：股份变动类、日常营运类、信披保证类、权益变动类和其他承诺。</p>
-  <p>当然，很多管理层的承诺描述并不严谨，比如权益变动的过程中（如再融资），董事会需要承诺融资期限，也会承诺信披的准确性，往往管理层持股利益方也会承诺融资后数月内不减持，同一项业务会发生多条承诺。</p>
-  <p>如果这些承诺同时出现在同一篇公告内，我们以公告主要表达的含义为准。因此在统计中可能会出现偏差，数据量庞大也无法完全保证数据的精准度，但相对偏离不会太大。</p>
-  <p>基于此，我们大致统计了过去十年间董事会管理层承诺占比，其中股份变动类承诺占比最大，权益变动类占比最小。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_bfe0af63c1cd4cb786776b6df33cc019@000000_oswg64740oswg702oswg449_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图：承诺类型统计及占比，来源：Choice金融客户端，锦缎研究院整理</p>
-  <h3><strong>股份类相关承诺</strong></h3>
-  <p>股份类相关承诺是管理层最常见的承诺，包括但不限于首次公开发行后承诺不减持、维护股价做出的回购股份承诺、自愿限售承诺以及自愿降低持股比例承诺等等。</p>
-  <p>股份类相关承诺是半强制性承诺，在股票发行期、再融资期、重组期都有相关的规则要求管理层做出不减持承诺，因此承诺的绝对数量庞大。</p>
-  <p>基数高，自然违约发生的次数就会变多。</p>
-  <p>过去十年间，股份变动类承诺共有153条未履行的记录，占所有未履行承诺的25.84%。这其中有63条长期未履行或直接违约的记录，占总违约记录的27%；有90条变更或豁免的记录，占因客观因素未履约的25%。</p>
-  <p>虽然基数大绝对值高，但是从比例来看，股份类相关承诺是董事会最守信的承诺类型了，履约率达到了99.41%，毕竟大多数股份类限售承诺来自于基础的规章制度，有强制监管，即便是自愿限售，也几乎只遵从持股人的个人意志，相对好实现。</p>
-  <h3><strong>信披保证类承诺</strong></h3>
-  <p>信披保证类与股份类承诺类似，多数都是规章制度下管理层和董事会例行承诺，例如保证信披的精准度，保证无重大未披露事项等等。</p>
-  <p>过去十年间，信披类承诺的未履行记录仅有23条，占所有未履行承诺的3.88%，其中长期未履行或直接违约的记录有13条，变更或豁免10条。</p>
-  <p>信披真实性是上市公司的信用下限，因此针对信披的承诺履约率相当高，达到了99.83%。</p>
-  <p>而大部分信披承诺未达成主要原因，还是因为企业在主要承诺事项中已经违约，比如天山生物、宜通世纪的资产重组本身就出现了问题，企业信披也就出现了违规。</p>
-  <h3><strong>日常营运类承诺</strong></h3>
-  <p>日常营运类的承诺主要包括减少关联交易、一致行动承诺、利润分红承诺、业绩承诺、解决产权瑕疵承诺及股权激励承诺等等，涵盖的范围较广。</p>
-  <p>过去十年间，日常营运类承诺相对而言履约率并不高，未履行记录达到了122条，占所有未履行承诺的20.6%，其中有79条长期未履行或直接违约的记录，占总违约记录的33.9%；有43条变更或豁免的记录，占客观因素未履约的11.98%。</p>
-  <p>在承诺量明显低于股份类和信披类的情况下，违约记录明显高于二者，日常营运类的承诺是违约频发的重灾区。</p>
-  <p>主要的原因在于，企业的日常营运往往缺少监管，管理层和大股东权力过大也会导致内控失灵，信用较差的管理层往往会违背承诺来维持自身的权益。</p>
-  <p>比如人福医药，当代系作为大股东曾在2020年明确承诺不会占用上市公司主体的营运资金，但根据后续的情况来看，2019年至2022年4月，当代科技自身面临很大的资本压力，于是通过第三方企业采取期初借款、期末偿还的方式，累计占用人福医药资金约60亿元资金，明显违背了承诺。</p>
-  <p>但整体来看，绝大多数A股管理层还是能坚守信用下限的，日常营运类承诺履约率约为98.99%。</p>
-  <h3><strong>权益变动类承诺</strong></h3>
-  <p>权益变动类的承诺主要包括再融资、资产重组、资产注入、分立合并等等和资产结构直接挂钩的承诺，往往都是影响企业长期经营的重大决策事项。</p>
-  <p>过去十年间，权益变动类未履约记录达到了250条，占所有未履约承诺的42.23%，是所有类型中违约次数最多的承诺类型。其中有70条长期未履行或直接违约的记录，占总违约记录的30.04%；有180条变更或豁免的记录，占客观因素未履约的50.14%。</p>
-  <p>可以看出，权益类变动的承诺变更和豁免的概率较高，主要的原因还是在于权益类变动牵扯的关联方较多，周期较长，实施难度相对而言较大，因此履约难度也比较高。</p>
-  <p>比如，建新矿业在2017年的资产注入承诺，因为受限于自身债务问题，此前通过的财产担保债权重整计划，被当地中院裁定为具备不确定性，因此计划流产，最终不得不以追偿形式变更豁免了资产注入的承诺。</p>
-  <p>说到底，大部分客观因素导致的承诺失效，还是管理层和董事会盲目错判，没有审慎的态度。</p>
-  <p>整体来看，权益类承诺的履约率并不高，履约率仅为91.82%，每十条权益类承诺，就有一条难以实现。</p>
-  <h3><strong>其他承诺</strong></h3>
-  <p>其他承诺主要包括但不限于，董事会关于子公司独立运行的承诺、表决权承诺、保障资金合法性承诺等等。</p>
-  <p>其中，还有不少承诺，我们很难将其归结于任意一种，我们挑选了几个供大家看个乐子。</p>
-  <p>GQY视讯曾经因为拟580万收购老板娘劳斯莱斯二手车饱受质疑（当年企业净利润仅为744.66万），于是实际控制人郭启寅承诺，劳斯莱斯五年内无偿给公司使用。</p>
-  <p>爱乐达、豆神教育、星源材质、力合科技的独立董事承诺，参加最近一次独立董事培训并取得深圳证券交易所认可的独立董事资格证书，属于先上岗再考证。</p>
-  <p>申通曾公开承诺补缴职工社会保险金，并补偿因未为部分员工缴纳住房公积金而遭受罚款或损失。</p>
-  <p>乐创技术承诺今后不将个人名下的银行账户用于公司业务收支，前因是因为董监高个人因为通过个人银行卡代付收支，导致企业出现会计差错...</p>
-  <p>这些大多数是管理层做出的非标承诺，往往具备很强的话题性和吸引力，但对公司的实际业务影响有限。</p>
-  <h3><strong>总结来看</strong></h3>
-  <p>·标准化和规则类目下做出的必要承诺，往往达成率很高。</p>
-  <p>·日常营运类缺乏外部监管，达成率相对较低。</p>
-  <p>·权益类牵涉利益方较多，经常出现无法实现的承诺。</p>
-  <p>一言以蔽之，就企业承诺而言，外部监管压力要明显大于企业内控压力，战略投资者不足，内控体系不完善是A股企业的通病，不过近几年管理层越来越重视信用建设，整体的履约率还算不错且有明显增长的趋势。</p>
-  <h2><strong>02 一诺值千金？</strong></h2>
-  <p>大致了解了承诺类型和A股企业承诺历史达成率后，我们研究的议题便是：管理层历史承诺履约率，能否有助于我们日常的投资呢？</p>
-  <p>先说答案，有参考价值，但不是金科玉律：不同类型的承诺、不同的时间节点，对估值影响差异大，收益波动幅度偏小，但违约的成本高昂。</p>
-  <p>我们延续上文的逻辑，将股份类和信披类视为标准承诺事项，将日常管理类和权益类视为非标承诺事项。</p>
-  <p>因为数据量较为庞大，我们将同一天同一企业不同管理者，类似的承诺表达视为一条，并剔除首日发行的数据，采用随机抽样统计（至少为样本量10%）。</p>
-  <p>标准类承诺中，信披类承诺没有严格的履约期，因此我们只考虑承诺节点的收益表现；日常营运承诺中，我们根据承诺具体内容分为利润分配式承诺（分红、业绩补偿、股权激励）和经营性承诺（同业竞争、关联交易、产权瑕疵）。</p>
-  <p><strong>先来看看承诺正常履约的情况：</strong></p>
-  <p>以平均数来看，信披类承诺、限售类承诺对企业市场行情的影响最小，主要的原因还是在于强制性承诺多，并不直接影响企业的长期经营。</p>
-  <p>增持类承诺和权益类承诺，在做出承诺的节点便会取得不俗的收益水平。主要原因在于前者直接影响企业二级市场的表现，后者影响投资者对企业长期发展的预期。</p>
-  <p>这其中，权益类承诺往往比增持类承诺更具备风险性，且长期收益更大，因此当履约完成的时间点，权益类承诺还会取得不俗的收益水平，增持类承诺稍显后劲不足。</p>
-  <p>日常营运类承诺恰恰相反，往往是承诺节点的收益率明显低于履约节点的收益率，主要的原因可能在于营运类承诺并不透明，对市场估值的直接影响低；但履约节点无论是分红，还是通过其他方式解决经营问题，都可以提升投资者信心，后劲更强。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_4a356bc57804488d87a436ffbc760d0d@000000_oswg112659oswg1080oswg463_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图：承诺节点及履约节点收益趋势，来源：Choice金融客户端，锦缎整理</p>
-  <p><strong>再来看看未履约或变更的情况：</strong></p>
-  <p>以平均数来看，几乎所有类型的承诺一旦违约，都会引起投资者对企业的不信任，直接反映在了市值变化上。</p>
-  <p>虽然信披类承诺收益不高，但违约的风险大。毕竟信披类承诺一般是强制性的，而且大多数信披直接关乎企业财务数据，一旦违约意味着后续会引起一系列的赔偿、罚款、造成投资者及监管对企业管理层的质疑。</p>
-  <p>其次权益类承诺和增持类承诺违约的代价也不小，二者都是在承诺时透支了一部分利好，一旦出现反转，悲观的情绪会被放大。</p>
-  <p>最大的意外是，违反限售类的承诺，企业似乎并不会受到影响。笔者认为可能是因果倒置的原因，毕竟大股东宁愿违背承诺，也要抛售股票，很可能是企业估值在限售期本就表现优异。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_40d5ec78dba644128e6e37a7a2cba370@000000_oswg64553oswg801oswg432_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图：承诺违约后收益变化，来源：Choice金融客户端，锦缎整理</p>
-  <p>任何后视镜视角的度量都只具备参考意义。两年前我们结合财务数据表现，企业营运，董事会承诺统计了信用最高的A股标的，回头来看，去年一年整体的收益率仅比上证指数高出0.17%。</p>
-  <p>两年后，我们再做统计，单看管理层承诺履约的收益率，也并不算高。</p>
-  <p>对于投资者而言，一诺确实不值千金。</p>
-  <p>但对于管理层而言，某种程度上来讲，一诺确实值千金，只不过更多地体现在了违约成本，而不是履约收益。</p>
-  <p><strong>信用水平或许不是投资者可以套用的铁律，但理应是管理者维护的底线。</strong></p>
-  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzkxOTAyNjAwOA==&amp;mid=2247548886&amp;idx=1&amp;sn=ffbd0b6f64d239520bbf99238c487abb&amp;chksm=c002609004a99419a19bb2768f09491f6586d73d30aa4c4722a813329b1c6fff3f7b219d5ee3&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“锦缎”（ID：jinduan006）</a>，作者：耀华，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3073398098015105</id>
-            <title>字节内部判断AI对话类产品天花板可能不高，提升剪映即梦优先级 ｜36氪独家</title>
-            <link>https://www.36kr.com/p/3073398098015105</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3073398098015105</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 11 Dec 2024 00:50:46 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: <AI对话产品, 用户活跃度, 剪映, 多模态产品>
-<br>
-<br>
-总结: 字节管理层认为AI对话类产品可能只是AI产品的“中间态”，并计划提升剪映和即梦的优先级，以寻找更低门槛和多模态的产品形式。尽管豆包的用户增长显著，但其活跃度和使用时长仍不理想，显示出商业化前景的局限性。字节内部认为，付费订阅模式在中国难以成功，且低使用时长限制了广告空间。即梦作为新推出的AI创作工具，结合了内容社区属性，预期将吸引更多用户创作高价值的AI内容。 </div>
-                        <hr>
-                    
-                    <p>文｜邓咏仪</p>
-  <p>编辑｜杨轩</p>
-  <p>虽然豆包的用户规模在过去几个月有所增长，但和行业里所有AI对话形态的产品一样，其在使用时长、打开频次及商业化潜力上仍不够理想。</p>
-  <p>《智能涌现》从知情人士处获悉，字节管理层判断AI对话类（或称chatbot类）产品可能只是AI产品的“中间态”，长期更理想的产品形式，大概率需要更视觉化的用户体验、更低的用户使用门槛。因此，字节已经提升了即梦的产品优先级，尝试用新的路径打造AI时代的“抖音”。</p>
-  <p>《智能涌现》就此向字节求证，字节暂无回应。</p>
-  <h3><strong>字节反思AI对话类产品天花板</strong></h3>
-  <p>一位知情人士告诉《智能涌现》，豆包目前的用户活跃度并不算高，每周仅活跃2至3天，且每天用户发送消息轮次仅为5到6次，单次2分钟左右，用户人均使用时长仅为10分钟左右。上述这些数据在过去一年中的增长幅度并不显著。</p>
-  <p>字节内部有管理层提出，这可能并非豆包的问题，豆包的相关数据已经是国内产品第一梯队，类似ChatGPT这种基于文本的对话类产品，大概率不是最理想的产品形态。</p>
-  <p>根据QuestMobile的第三方监测数据，过去一年，豆包、Kimi、文小言等产品的用户日均使用频次，均在4到5次之间徘徊，人均使用时长也基本位于5到10分钟之间，没有明显变化。</p>
-  <p>实际上，过去一年，字节豆包的表现可谓亮眼。用户增长上，年初豆包仍然与Kimi和百度的文心一言接近。但据晚点披露，字节豆包App今年9月的日活已达760万，而Kimi智能助手，同期日活则在130多万。</p>
-  <p>此外，在产品功能上，豆包也快速补齐了音乐生成、图生图、图生视频、视觉识别等功能，其语音功能尤其出色，做到了全能和all in one。</p>
-  <p>但目前来看，对话轮次、时长等关键指标仍然不够理想。在规模变大，推理成本上涨的同时，AI对话类产品并未展示出可落地的商业化前景。</p>
-  <p>有知情人士透露，字节内部判断，付费订阅模式在中国不太可能走通。而时长和轮次太低，又导致潜在的广告空间较小，这都构成了这类产品的隐形天花板。</p>
-  <h3><strong>剪映即梦优先级提升</strong></h3>
-  <p>有知情人士对《智能涌现》称，字节管理层有人提出，长期看，需要找到更低门槛、更“多模态”的产品形式，剪映和即梦可能是合适的入口。</p>
-  <p>作为视频创作工具的剪映，实际上在图片、视频编辑等功能上已经大量落地了最新的模型技术。字节近期在图片生成、视频生成和理解领域取得的一些技术突破，包括推出了一致性极强的图生视频模型PixelDance，率先实现了在图片上精准生成中文的能力。这些能力都首先应用在了剪映和即梦。</p>
-  <p>如果把剪映视作一个AI产品，根据非凡资本旗下研究中心非凡产研发布的2024年10月全球AI产品月活榜，剪映月活高达1.7亿，仅次于ChatGPT的2.5亿，排名全球第二。</p>
-  <p>即梦是前抖音集团CEO张楠到剪映后推出的AI创作工具和社区。她此前曾在内部信中表示看好AI前景，因此决定再次内部创业，打造新的AI工具。</p>
-  <p>除了AI 工具属性外，即梦同时还具备强内容社区属性，并通过剪映获得了相当数量的AI创作者。很多AI设计师都会在即梦平台，发布自己的AI作品。随着AI工具创作效果在未来的提升，预期可以看到更多的普通用户创作出高价值的AI内容。同时，即梦对应世界模型是一个可能面向游戏、视频、Metaworld的大应用，并且很多AI功能在剪映上已经体现一些收入趋势。</p>
-  <p>字节计划后续把更多资源向更多模态的产品形态转移，即梦会承担更大的希望。比如，字节视觉生成相关的大模型在围绕即梦的需求做优化，且在即梦上首发，例如生中文字、文生视频。张楠的大部分精力也都投入在即梦上。</p>
-  <p>此外，字节内部也在探索其他一些多模态、低交互门槛的尝试。比如字节的AI互动娱乐产品“猫箱”，《智能涌现》获悉，其用户平均对话轮数是豆包的近50倍。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_243d2267a4544eb7835b0b74d244f499@2057308263_oswg70549oswg900oswg296_img_jpeg?x-oss-process=image/quality,q_100/format,jpg/interlace,1" /></p>
-  <p class="img-desc">欢迎关注</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_d865dc75cab848bc82a4e018d0857e9f@2057308263_oswg161731oswg900oswg335_img_png?x-oss-process=image/quality,q_100/format,jpg/interlace,1" /></p>
-  <p class="img-desc">欢迎交流</p>
-  <p>&nbsp;</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3073698146628226</id>
-            <title>TikTok还剩39天极限自救</title>
-            <link>https://www.36kr.com/p/3073698146628226</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3073698146628226</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 11 Dec 2024 00:49:48 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: TikTok, 美国禁令, 法律诉讼, 数据安全  
-<br><br>  
-总结: TikTok在美国面临封禁威胁，因国家安全理由，美国联邦上诉法院裁定维持禁令，要求字节跳动在2025年1月19日前出售其在美资产。TikTok已向美国最高法院提起上诉，寻求临时禁制令以阻止法律实施。TikTok CEO周受资表示将继续为言论自由而奋斗，认为禁令基于不准确的信息。尽管面临法律挑战，TikTok在美国的用户和商业增长显著，成为重要的在线广告平台。未来的走向将取决于法律诉讼结果、公众舆论和政府政策。 </div>
-                        <hr>
-                    
-                    <p>TikTok的这场硬仗还在继续。&nbsp;</p>
-  <p>美国当地时间12月9日，TikTok在官网和官方账号发布声明，<strong>称已向美国哥伦比亚特区巡回上诉法院（下称“美国联邦上诉法院”）提交了紧急动议，以阻止TikTok封禁法律生效。</strong></p>
-  <p>3天前，当地时间12月6日，美国联邦上诉法院作出了裁定，三位法官组成的小组以3:0一致裁决，维持了美国现任总统乔·拜登于4月签署的法案。<strong>该裁定以国家安全为由封禁TikTok符合宪法第一修正案要求，并驳回了TikTok推翻强制出售法案的申请。</strong></p>
-  <p>此外，他们还要求字节跳动于2025年1月19日之前出售或剥离TikTok在美国的资产，否则TikTok将在美国被禁。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_6f480a51500546ea835bbd4d2f0aa44c@000000_oswg134088oswg1080oswg645_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>该判决结果，意味着TikTok距离“不卖就禁”仅剩39天，形势危急。</strong></p>
-  <p>此前该法案中表示，如果总统认为字节跳动在出售方面取得了进展，可以将这一期限再延长90天，但延期的前提是确定TikTok会出售给某家美国本土科技企业。&nbsp;</p>
-  <p>TikTok“不卖就禁”法案的最后期限（2025年1月19日），像是被精心计算过的。2025年1月19日，是拜登总统任期的最后一天，而新任总统特朗普的就职日期是1月20日。这意味着，即便特朗普在总统竞选期间曾对TikTok示好，但未上任前他也无能为力。&nbsp;</p>
-  <p>判决消息发出不久，TikTok便表示将向美国联邦最高法院提起上诉，并对此回应称：“美国最高法院有保护美国人言论自由权利的传统，我们期待他们在这一重要宪法问题上秉持这一原则。”&nbsp;</p>
-  <p><strong>TikTok CEO周受资在一封内部备忘录中也表示，TikTok将寻求临时禁制令，以阻止法律的实施，</strong> “我们的下一步是寻求对封禁法律的临时禁制令，并等待美国最高法院的审查。虽然今天的消息令人失望，但请放心，我们将继续为保护平台上的言论自由而奋斗。”&nbsp;</p>
-  <p>TikTok发言人迈克尔·休斯（Michael Hughes）表示：“TikTok禁令是基于不准确、有缺陷和假设性的信息制定和推动的，导致了对美国人民的公然审查。如果不阻止TikTok禁令，超1.7亿美国人将在2025年1月19日后无法发声。”&nbsp;</p>
-  <p>根据美国司法制度规定，当事人有一次上诉的权利，TikTok可上诉到联邦最高法院，努力为自己多争取一些时间。&nbsp;</p>
-  <p>不过，根据公开资料显示，美国联邦最高法院每年会接收到大约7000到1万份诉状，但通常只有少数案件会被受理，TikTok的案件是否会在2025年1月19日之前被审理还是未知数。&nbsp;</p>
-  <p>而周受资寻求临时禁制令，可能是当下最有可能紧急有效的补救措施。根据美国法律，临时禁制令的目的是，在案件审理期间暂停法律的执行，以保护当事方的权利。&nbsp;</p>
-  <p>上海正策律师事务所董毅智律师告诉《中国企业家》：<strong>“TikTok的法律团队将需要证明，若不实施临时禁制令，将对其造成不可弥补的损害，并且在案件审理过程中，他们有可能胜诉。但最终的成功率取决于法院对言论自由的保护程度以及对国家安全风险的评估。”</strong></p>
-  <p>TikTok又一次站在了悬崖边，周受资和字节跳动不得不展开极限自救，而这次只有39天。&nbsp;</p>
-  <h2><strong>TikTok的美国之路</strong></h2>
-  <p>过去6年里，TikTok在美国走上了一条快速扩张的道路，无论在用户规模上还是商业变现上。美国对TikTok和字节跳动而言都是巨大的市场，而这也恰恰是其被美国历届政府盯上的原因之一。&nbsp;</p>
-  <p>2017年，字节跳动收购了美国短视频应用Flipagram和Musical.ly。2018年8月，Musical.ly被整合进当时的抖音海外版TikTok应用。随后，TikTok正式在全球和北美上市，字节跳动的智能推荐算法在其中快速发挥作用，TikTok迅速受到美国用户的追捧。&nbsp;</p>
-  <p>长期生活在美国加州的李亚告诉《中国企业家》，他自己的体感是：<strong>“起初主要是青少年女性在使用TikTok，当时平台上主要是各种跳舞和对口型模板，但近几年越来越多的成年男性也开始使用TikTok娱乐和获取资讯，甚至在TikTok上短视频带货的也越来越多，跟国内的抖音越来越像。”</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_14f05830e38c4d74b069c3fa7a1c533f@000000_oswg53845oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>很显然，TikTok在美国做到了人群的快速破圈。据TikTok披露，2020年年中，其在美国的月活跃用户超过9100万，而这个数字如今已达1.7亿，相当于一半以上的美国人每月至少打开一次TikTok。&nbsp;</p>
-  <p>根据第三方调研机构Statista的估计，2023年年中时，TikTok美国区18岁以上的用户占比已经超过了80%，研究机构Pew Research Center的调研则显示2023年有1/3的美国成年人使用TikTok，比2021年提升了21%。&nbsp;</p>
-  <p>随着用户规模扩大，一方面，TikTok正在成为巨大的在线广告投放平台；另一方面，如同国内的抖音开启直播电商一样，TikTok也同样在尝试直播带货。从目前的收入贡献比例上看，美国的营收占到了TikTok的一半。因此，<strong>TikTok在美国的命运，还关乎众多基于TikTok生态创业的人。</strong></p>
-  <p>根据《晚点LatePost》报道，今年3月5日国会推出应用法案后，一篇由研究机构Oxford Economics和TikTok合作完成的报告提到，TikTok帮助中小商家在上一年多卖出了147亿美元的商品，因此政府税收多了53亿美元。&nbsp;</p>
-  <p>除了用户规模和商业变现的增长，国际化背景的管理团队搭建、数据安全的本土化以及应对监管经验的积累，都是TikTok的美国之路上收获的成果。&nbsp;</p>
-  <p><strong>在国际化的管理团队搭建上</strong> ，TikTok迎来的第一位外籍CEO是前迪士尼高管凯文·梅耶尔，他在2020年加入TikTok时表示这是“根本不能错过的机会”。然而，2020年8月，随着当时特朗普政府禁令的出台，凯文·梅耶尔迅速离职，任职不到4个月。之后半年多，TikTok靠临时一把手瓦妮莎·帕帕斯运营，直到2021年4月，周受资出场。&nbsp;</p>
-  <p>资料显示，现年41岁的周受资在新加坡出生和长大，曾在新加坡军队服役，之后在英国伦敦大学和美国商学院接受教育。早年他曾在高盛和亚洲风投机构DST工作。随后，周受资在小米工作6年，帮助小米顺利在港股上市。2021年，他加入字节跳动出任CFO，后担任TikTok CEO直到现在。&nbsp;</p>
-  <p>任命周受资为字节跳动CFO时，张一鸣在内部信中写道：<strong>“受资对我们的业务、团队和文化非常熟悉，他在DST工作期间就认识了我们，并推动DST在很早期投资了字节跳动。”</strong>周受资多元化的国际背景，正是张一鸣所看重的，甚至有律师评价，“这是字节跳动能打出的最好的牌了。”&nbsp;</p>
-  <p><strong>在数据安全的本土化上</strong> ，针对美方认为TikTok可能会对美国的国家安全构成威胁，TikTok推出了总计超过15亿美元的“得克萨斯计划”，将美国用户的数据存储在总部位于得克萨斯州的甲骨文服务器上。其董事会任命由政府控制的美国外国投资委员会（CFIUS）审核，雇员必须是美国公民或绿卡持有人。此外，修改推荐算法代码、访问用户数据的程序也由甲骨文以及第三方机构独立审核。&nbsp;</p>
-  <p><strong>在应对监管经验的积累上</strong> ，从2019年CFIUS审查Musical.ly交易至今，TikTok起码经历了15次以上的监管危机，但是TikTok已经从当初的迷茫逐步找到应对的方案。根据政务透明机构OpenSecrets统计，2023年字节跳动和TikTok用于游说的资金达到874万美元，是2020年的三倍多。&nbsp;</p>
-  <p>2024年6月，字节跳动还聘请华纳兄弟前总法律顾问约翰·罗戈文（John Rogovin）担任法律顾问，负责TikTok的法务问题。<strong>约翰·罗戈文还曾在美国联邦通信委员会和司法部任职，他的丰富经验和专业知识被认为将对TikTok的法律事务管理能力产生积极影响。</strong></p>
-  <p>字节跳动首席执行官梁汝波曾表示：<strong>约翰拥有敏锐的法律直觉和成功领导全球团队的良好记录，我知道这将使我们公司受益匪浅。</strong></p>
-  <p>据了解，约翰·罗戈文在加入字节跳动之前，在华纳兄弟担任了超过12年的总法律顾问，期间他全面负责了华纳兄弟在全球135个国家的法律事务，包括知识产权、诉讼、隐私保护、合规监管、执行以及并购等多个领域。&nbsp;</p>
-  <h2><strong>可能的转机</strong></h2>
-  <p>“撞线”之前，还没有人能断定TikTok的最终命运。&nbsp;</p>
-  <p>在目睹多轮美国政府的监管法案之后，董毅智告诉《中国企业家》：<strong>“其实美国法案的严肃性也没有我们想象的那么高，也不排除后续又出一个新的法案将目前的推翻掉。”</strong></p>
-  <p>此外，他表示TikTok方面也可通过动员用户和公众舆论，增加对政府施压的力度，争取政策的改变。或者尝试与美国政府进行谈判，寻求妥协方案，例如出售部分股份而非完全剥离。&nbsp;</p>
-  <p>候任总统特朗普可能是一个转机，但他对TikTok法案的态度一直都很暧昧。4年前特朗普曾下发过拆分TikTok的行政令，但在竞选期间，特朗普也曾表示：“没有TikTok，Facebook会变得更大，而我认为Facebook是人民的敌人。”他还提到，“没有TikTok，很多小孩子会发疯的。”数据显示，特朗普在TikTok上发布的第一条短视频，播放量就超过了1亿。&nbsp;</p>
-  <p>11月24日，据《华尔街日报》报道，<strong>周受资正在联系埃隆·马斯克（Elon Musk），向后者寻求美国事务方面的意见。</strong>马斯克不仅是社交媒体X（前身是推特）的老板，也是美国候任总统特朗普的密友。据知情人士透露，在TikTok面临美国禁令威胁之际，周受资和TikTok母公司字节跳动的高管把马斯克视为与新政府沟通的一个潜在有用渠道。&nbsp;</p>
-  <p>但也有分析认为，特朗普在TikTok问题上的任何表态，都会引发其核心圈子的激烈斗争，商界的声音能否盖过特朗普新内阁，才是决定TikTok命运的关键因素。而就算特朗普政府内部达成一致，同意拯救TikTok，也要经过国会投票表决通过后才可以。&nbsp;</p>
-  <p><strong>TikTok的未来走向将取决于多个因素，包括法律诉讼的结果、公众舆论的变化以及美国政府的政策取向。</strong></p>
-  <p>只是目前，外界都担心在当前的地缘政治局势下，美国政府对TikTok的禁令法案有扩大化风险。就在美国联邦上诉法院作出判决的同一天，欧盟委员会启动了对TikTok的新的调查。欧盟委员会的调查是基于《数字服务法》（DSA），旨在评估TikTok是否采取了足够的措施来防止非法内容的传播，并确保未成年人的保护和数据访问的合规性。&nbsp;</p>
-  <p>在此之前，TikTok在2020年已经在印度被下架，至今没有恢复。此外，2023年9月，TikTok在印尼的电商业务被政府下令禁止，直到2023年12月，TikTok才通过与Tokopedia采取合并的方式，将印尼电商业务于“双12”正式恢复上线。&nbsp;</p>
-  <p>但TikTok依然在展现其商业上蕴藏的爆发力。就在上诉失败前两天，TikTok公布了其在“黑色星期五”的电商销售数据。<strong>“黑色星期五”当天，TikTok商店的单日销售额突破1亿美元，是2023年“黑色星期五”销售额的三倍。</strong></p>
-  <p>此外，TikTok头部达人刷新美区单场带货200万美元纪录，商家自运营（POP）模式GMV整体增长191%，全托管模式GMV整体增长187%。<strong>TikTok商店的“黑五”大促活动不仅为商家带来了巨大的销售机会，还通过内容电商模式重塑了全球电商格局。</strong></p>
-  <p>虽然美国政府的监管，对依赖TikTok平台的跨境电商卖家来说是一个巨大的不确定因素，他们也在积极拓展其他电商渠道，但从上述数据来看，他们依然十分重视这一渠道。&nbsp;</p>
-  <p>甚至有商家在TikTok的电商群表示：“1个月，什么都可能发生，TikTok继续干！”&nbsp;</p>
-  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MTI3NTQ1MTY0MQ==&amp;mid=2650634342&amp;idx=1&amp;sn=e56862f6cdd86d65c608622b7b73a1d7&amp;chksm=7d3bdd5de73755160e89685e3eb91fc9d0211a59b928bad6a7adb1e99b420b8f34e8dd28dd2f&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“中国企业家杂志”（ID：iceo-com-cn）</a>，作者：赵东山，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3073131505611397</id>
-            <title>面壁智能获新一轮数亿元融资 | 智涌要闻</title>
-            <link>https://www.36kr.com/p/3073131505611397</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3073131505611397</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 11 Dec 2024 00:42:21 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: <面壁智能, 大模型, 端侧AI, 融资>
-<br>
-<br>
-总结: 面壁智能完成新一轮数亿元融资，主要由龙芯创投等机构领投，资金将用于加速端侧AI和高效大模型的商业化布局。面壁智能以高效为核心理念，推出的MiniCPM系列在多项基准测试中表现优异，成为全球开源社区的明星项目。公司与多家行业标杆企业合作，推动AI技术在消费电子、法律等领域的应用。面壁智能致力于通过科学化的大模型方法论，提升模型的知识密度和实际效用，力求在全球AI竞争中占据重要位置。 </div>
-                        <hr>
-                    
-                    <p>文 | 苏建勋</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_a6d0b74abff94c6687f83c2ff8182f7f@405798_oswg141209oswg900oswg296_img_jpg?x-oss-process=image/quality,q_100/format,jpg/interlace,1" /></p>
-  <p class="img-desc">文章首发 智能涌现公众号</p>
-  <p>智能涌现获悉，面壁智能完成新一轮数亿元融资，本轮融资由龙芯创投、鼎晖百孚、中关村科学城基金和赛富基金联合领投，北京市人工智能产业投资基金与清科创投跟投，万甲资本担任本轮独家财务顾问。</p>
-  <p>本轮融资完成后，面壁智能将进一步提速以端侧<strong>AI</strong>为代表的高效大模型商业化布局，以同等参数、更高性能、更低能耗、更快速度的高效大模型深度服务行业。</p>
-  <p>面壁智能是以「高效为第一性原理」的大模型公司。端侧模型面壁小钢炮&nbsp;MiniCPM&nbsp;凭借以小博大、高效低成本的性能优势，取得了高效稀疏化模型架构、无限长文本等创新。</p>
-  <p>来自第三方专业机构数据显示，MiniCPM在多项大模型基准测试中取得领先。自今年2月份发布以来，面壁小钢炮MiniCPM系列累计下载突破300万，屡次登顶GitHub、HuggingFace大模型趋势榜单，成为享誉全球的开源社区明星项目。</p>
-  <p>过去一年，基于高效大模型和端侧<strong>AI</strong>的商业化布局和业务推进，面壁智能有着较为迅速的行业落地进展。</p>
-  <p>在端侧智能方面，面壁智能一边在主流消费电子和新兴硬件融入端侧AI，一边布局端云协同的未来范式，与包括华为云、百度智能云达成战略合作，以更高知识密度的端侧模型，更高的算力与内存利用率，更高效的模型算法和硬件调度，三项合力，突破算力层和模型层结合的关键障碍。</p>
-  <p>当前，面壁智能正在与华为、联发科技、联想、英特尔、长城汽车、易来科技等行业标杆企业紧密协作，业务覆盖<strong>&nbsp;AI Phone</strong>、<strong>AIPC</strong>、智能座舱、智能家居与具身机器人等领域，将高性能的端侧AI&nbsp;带入千行百业。</p>
-  <p>在法律、教育等垂直领域方面，得益于在自然语言处理方面的技术渊源和优质行业数据的深厚积累，面壁团队将大模型技术深度赋能行业场景。</p>
-  <p>2024年7月，面壁智能、人民法院出版社、深圳迪博共同助力深圳中院，正式启用全国首个司法审判垂直领域大模型，&nbsp;应用范围已覆盖所有常见民商事案件，行政案件。</p>
-  <p>11&nbsp;月，面壁智能作为联合研发团队参与的法信法律基座大模型在最高法发布，法信法律基座大模型定位为国家级法律人工智能基础设施的——&nbsp;通过为中国法治领域提供生成式人工智能底层能力，在数字时代提高司法效能。</p>
-  <p>面壁的独特在一直坚持大模型科学化。作为国际少有的、摸索出自己「大模型高效方法论」的团队，面壁智能在&nbsp;Scaling Law&nbsp;之外，通过追求更高知识密度（知识密度&nbsp;=&nbsp;模型能力&nbsp;/&nbsp;参与计算的模型参数）不断迭代模型真实效用，引领终端智能跃升到更高水平。</p>
-  <p>龙芯创投表示：「在全球AI竞争格局中，面壁智能展现出了令人瞩目的创新活力。公司在端侧大模型和智能体技术方面的布局既有前瞻性，又极具商业价值。特别是MiniCPM系列在终端设备上的突破性进展，开创了AI普惠化的新范式。面壁智能正在以实际行动证明，中国企业完全有能力在全球AI竞争中占据重要位置。」</p>
-  <p>鼎晖百孚表示：「大模型赋能产业升级已成为不可逆转的趋势。面壁智能在端侧大模型领域的深耕细作，为AI技术的普惠应用开辟了全新道路。公司在高性能小型化模型、智能体技术等方面的突破，展现了卓越的技术创新实力。尤其是其在汽车、手机等终端设备上的布局，将为产业带来革命性的改变。我们很荣幸能够参与面壁智能的发展征程，助力其加速AI技术的产业化进程。」</p>
-  <p>中关村科学城基金表示：「在当前大模型技术蓬勃发展的背景下，面壁智能凭借其在端侧部署、智能体技术等方面的独特优势，开创了一条极具特色的发展路径，公司不仅在技术上持续突破，更注重产学研深度融合，打造开放共赢的创新生态。这种开放协同的发展理念，使得面壁智能在短短时间内就建立起了强大的技术壁垒和商业价值。投资面壁智能也是海淀区在大模型生态和产业链完善上的又一重要布局。我们相信，面壁智能必将成为引领中国AI技术创新的一股重要力量。」</p>
-  <p>赛富投资基金合伙人蒋驰华表示：「大模型技术正迎来规模化商业应用的关键窗口期。面壁智能自2022年成立以来，以其在端侧大模型和智能体技术的突出创新实力，快速确立了行业领先地位。公司不仅在技术研发上持续突破，更展现出卓越的商业化能力，从端侧智能到法律垂直领域应用，打造了完整的技术和产品矩阵。我们对以李大海、刘知远为代表的创始团队充满信心，相信他们将继续引领中国大模型技术的创新与落地，和赛富基金已经投资的十几家创新型人工智能企业携手一起为产业智能化升级注入强劲动力。」</p>
-  <p>北京市人工智能产业投资基金表示：「作为老股东，追加投资面壁智能是对公司在过去一段时间展现的技术和商业突破的进一步认可！面壁智能以其在大模型领域的全栈能力和创新成果，以及在智能终端、法律、教育等关键领域的应用，充分体现了新质生产力发展为国计民生带来的价值。我们期待与面壁智能一起，推动AI技术在更多领域实现创新突破。」</p>
-  <p>清科创投表示：「面壁智能代表着中国AI领域最具潜力的创新力量。公司不仅在核心技术上持续突破，更展现出敏锐的商业视角和卓越的执行力。从全流程工具链到端侧落地，从通用大模型到垂直领域应用，面壁智能正在构建一个完整的技术与产品版图。我们对公司在AI普惠化方向的战略选择深表认同，相信面壁智能将为中国科技创新树立新的标杆。」</p>
-  <p>对于新一轮融资，面壁智能<strong>CEO</strong>李大海表示：感谢多方投资机构的信任与支持加码。大模型正在开始进入真刀真枪的比拼阶段，从大跃进转向持久战。回顾过去，我们以更低的资源投入、更小的团队规模、更超前的技术认知，活跃在端侧智能的最前沿，在模型关键指标上，屡屡能做到越级领先。在大模型这个正发生深刻改变、席卷全球的技术风暴中，面壁走出了自己的独特路线，保持了卓越的竞争力，未来大模型的版图，面壁正在构建自己的一席之地。</p>
-  <p>下附面壁智能<strong>CEO</strong>李大海内部信：</p>
-  <p>面壁智能的同学们，大家好！</p>
-  <p>很高兴和大家分享，面壁智能完成了新一轮数亿元融资，这轮融资由龙芯创投、鼎晖百孚、中关村科学城基金和赛富基金联合领投，北京市人工智能产业投资基金与清科创投跟投。</p>
-  <p>随着这轮融资敲定，我们已站在一个全新的台阶上：将进一步提速以端侧<strong>AI</strong>为代表的高效大模型商业化布局，以同等参数、更高性能、更低能耗、更快速度的高效大模型深度服务行业，为用户创造具体可感知的价值。</p>
-  <p>过去一年，以成绩说话，我们的小钢炮端侧模型，在全球一炮而红，站稳脚跟。我们基于高效大模型和端侧AI的商业化布局和业务推进，多点开花，进展迅速。</p>
-  <p>依靠小规模的精益创业团队，我们把MiniCPM推向了端侧<strong>ChatGPT</strong>、<strong>GPT-4V</strong>时刻；携手华为、联发科技、联想、英特尔、长城汽车、梧桐科技、易来科技等标杆合作伙伴，成为<strong>AIPC</strong>、<strong>AIPhone</strong>、智能座舱、具身机器人等行业创新发展中不可或缺的角色；并且深度参与国家级人工智能基础设施「法信法律基座大模型」的构建。</p>
-  <p>今天，在中国大模型「6+2」格局里，我们成为极具辨识度和竞争力的代表。在全球范围，面壁也是端侧智能的标杆，上榜《财富》全球人工智能创新50强！</p>
-  <p>这是小钢炮精神的胜利！我们值得骄傲！</p>
-  <p>同样的时间，更前瞻的判断；同样的资源，更具爆发力的创造；同样的机遇，一杆子捅到底解决行业与客户痛点的决心。</p>
-  <p>把高效发挥到极致，创造超预期成果，底气来自我们对大模型本质规律的深刻认知，基于高效为第一性原理的研发、产品与组织基因！</p>
-  <p>走先人一步的路，打以少胜多的仗，这就是响当当的小钢炮精神！</p>
-  <p>回顾过去一年，我们做对了几件事：</p>
-  <p><strong>1.&nbsp;</strong>超前认知，以更小的样本，预判技术和产品方向。</p>
-  <p>2024年下半年，行业突然形成新共识，更高知识密度的小模型和端侧智能，成为大模型发展的新阶段。如今，因为端侧智能发展的深刻影响，主流消费电子和新兴硬件正演变成一个个在不同场景、执行特定任务的超级智能体，成为新一轮科技创业大风口。</p>
-  <p>面壁智能提前半年多，在世界范围内前瞻性发现端侧智能内蕴的巨大研究空间和应用潜力。在这个瞬息万变、竞争激烈、又充满想象力的市场里，大举发力端侧模型，打造享誉全球的面壁「小钢炮」MiniCPM，我们成功构建起了基本盘。</p>
-  <p><strong>2.&nbsp;</strong>技术筑基，以先进技术为基，务实服务垂直行业，快速复用和价值放大。</p>
-  <p>有一个行业的高质量数据，就能快速赋能一个行业打造基座大模型。面壁发挥在文本基座模型的技术渊源和专业数据的深厚沉淀，今年&nbsp;7&nbsp;月，面壁智能、人民法院出版社、深圳迪博共同助力深圳中院，正式启用全国首个司法审判垂直领域大模型，&nbsp;应用范围已覆盖所有常见民商事案件，行政案件。11&nbsp;月，面壁智能作为联合研发团队参与的法信法律基座大模型在最高法发布，法信法律基座大模型定位为国家级法律人工智能基础设施。未来，全国数以千计的法院、检察院、司法系统单位，都将能成为我们有所贡献的地方。</p>
-  <p><strong>3.&nbsp;</strong>以小博大，提出大模型的面壁定律、密度定律，通过大模型科学化越级超越同类产品。</p>
-  <p>自今年2月份面壁「小钢炮」MiniCPM端侧模型系列面世以来，累计下载突破300万，频频登顶全球著名开源社区GitHub、HuggingFace的大模型趋势榜单。MiniCPM不仅在多项基准测试中接连越级领先，还将无限长文本、超清OCR识图、实时视频理解等首次集成到端侧，创造多项纪录。</p>
-  <p>面壁小钢炮以小博大、高效低成本特性，背后是我们坚持大模型科学化，以更本质的模型知识密度（知识密度&nbsp;=&nbsp;模型能力&nbsp;/&nbsp;参与计算的模型参数）指导技术研发和模型迭代。我们不断创新性提出大模型面壁定律、密度定律等引领性的大模型科学方法论，立志将更高性能的端侧智能技术带入千家万户、千行百业。</p>
-  <p>所有的领先，往深处都是认知的领先；任何商业竞争，归根结底都是效率的比拼。</p>
-  <p>高效，不仅是我们企业运营的核心；在商业环境中，也意味着更快的响应速度、更低的成本、更高的产出和更好的客户满意度。</p>
-  <p>感谢面壁智能的全体同仁，我们正在创造一场极致高效的大模型研发与商业奇迹！</p>
-  <p>坚韧、顽强，能量十足，面壁小钢炮已经开始震动全球。小钢炮精神，正带领我们走向AGI的最终胜利！</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3071512986940041</id>
-            <title>给按摩理疗机器人装上“超级AI大脑”，「具身风暴」完成超千万元天使轮融资 | 36氪首发</title>
-            <link>https://www.36kr.com/p/3071512986940041</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3071512986940041</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 11 Dec 2024 00:37:29 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 具身风暴, AI理疗机器人, 人机交互, 融资  
-<br><br>  
-总结: 具身风暴机器人有限公司专注于具身智能人机交互的研发，近期完成超千万元人民币的天使轮融资，资金将用于产品研发和量产。其首款AI理疗机器人已实现量产，并在国内外市场批量出货，解决了传统理疗行业的招聘难和人工成本高等问题。该机器人通过“AI大脑”实现个性化理疗体验，能够根据顾客反馈实时调整操作。具身风暴计划通过收集人机交互数据，构建大规模数据库，以推动具身智能技术的突破。 </div>
-                        <hr>
-                    
-                    <p>文 | 王方玉</p>
-  <p>编辑 | 苏建勋</p>
-  <p>36氪获悉，广东具身风暴机器人有限公司（以下简称“具身风暴”）近日已完成超千万元人民币的天使轮融资。本轮投资由羲融善道和星河资本共同投资，仁辰资本担任独家财务顾问。募集资金将主要用于产品研发、产品量产和日常运营。</p>
-  <p>具身风暴成立于2023年9月，专注具身智能人机交互新范式的研发与落地，通过基于海量真实人类反馈的模仿学习解决通用人机交互舒适性问题。</p>
-  <p>今年3月，具身风暴曾获得奇绩创坛的种子轮融资。</p>
-  <p>具身风暴的首款产品是一款AI理疗机器人，据创始人李晓辉介绍，目前该产品已实现量产，并在国内和日本市场实现了批量出货，下游客户包括理疗店、美容院和诊所等。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241209/v2_7d02fd5dbc184336a234c8ecd23f761e@594936739_oswg536202oswg1440oswg1080_img_jpg?x-oss-process=image/quality,q_90/format,jpg/interlace,1" /></p>
-  <p class="img-desc">具身风暴的AI理疗机器人应用于日本某理疗店 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 图片来源：企业授权</p>
-  <p>理疗机器人是一种结合了机器人技术与物理治疗原理的医疗设备。当前消费者对于健康管理的需求快速增长，但传统理疗行业面临招聘难、人工成本高、人员流动性大等问题，而理疗机器人能有效解决这些痛点。</p>
-  <p>与传统的协作机器人做理疗不同，具身风暴的AI理疗机器人为机器人装上了“AI大脑”，能够对操作的力度、强度进行更加精准的控制。</p>
-  <p>举例来说，传统的理疗机器人普遍只有轻度、中度、重度几个预设的按摩键档位，而AI理疗机器人则可以根据与顾客的对话交互实时调整按摩的力度、方位等，提供个性化的理疗体验。</p>
-  <p>“AI大脑”的实现，也不光依赖大模型的能力，还需要MOE混合专家架构的垂直小模型。前者可以和顾客陪伴聊天，后者则可以精准识别顾客对于按摩服务场景的具体指令，共同为客户提供个性化、智能的理疗体验。</p>
-  <p>“目前一般的机器人实现与广泛人群进行通用安全舒适交互非常困难，核心原因是人体个体对于身体触碰力度舒适度的感受不同。解决这一问题，具身风暴的策略是在真实场景下广泛部署机器人从而收集海量真实人机交互数据。”李晓辉对36氪表示。</p>
-  <p>李晓辉表示，具身风暴的AI理疗机器人通过多项创新实现了成本显著低于传统竞品，可替代平均月薪1万元以上的手法理疗师、身体护理师约4/5工作量，受到了下游客户的欢迎。</p>
-  <p>“竞品的六维力传感器都是采购的，具身风暴通过自研，可以做到竞品成本的1/5以下。” 李晓辉表示，具身风暴通过硬件上的创新和供应链管控等多种方式，实现了对于机器人硬件的降本。</p>
-  <p>具身风暴的战略目标也不仅是理疗机器人，而是更通用的具身智能机器人。</p>
-  <p>具身风暴团队认为大规模低成本的真实数据源是具身智能技术突破的唯一解，正通过理疗机器人于各地收集人机交互数据。团队将于 2025 年底建成多关节机器人与广泛人群（人体）交互数据库，预计将达500万人次，并以真实人类反馈数据为主。</p>
-  <p>区别于主流方案采用基于人类示教的模仿学习需要真实人类操作机器人进行数据采集，具身风暴采用的基于人类反馈的模仿学习方案实现了成本的大幅降低。与传统的示教数据相比，人类反馈可以在学习过程中提供更准确、更有针对性的指导，帮助机器人更快地学习到有效的交互策略，并且不需要人类提供完整精确的操作步骤。</p>
-  <p>具身风暴正在训练通用人机安全舒适交互模型，其收集的数据以人类反馈为中心，有意实现了与机器人形态的解耦，其训练出来的模型有望赋能业界各类具身智能机器人。</p>
-  <p>团队方面，「具身风暴」机器人由多位名校博士与教授联合创立，包括新南威尔士大学系统控制博士李晓辉，曾任知名机器人研究机构副研究员的CTO莫继学博士，担任产品总监的心理学博士郭文怡等技术专家，在AI、机器人与人机交互领域拥有丰富的研究经验。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3073700975735431</id>
-            <title>比亚迪，入股</title>
-            <link>https://www.36kr.com/p/3073700975735431</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3073700975735431</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 11 Dec 2024 00:20:10 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 比亚迪, 智能驾驶, 卓驭科技, 自动驾驶  
-<br><br>  
-总结: 比亚迪在智能驾驶领域的布局进一步加强，投资了卓驭科技，该公司专注于智能驾驶系统及核心零部件的研发。卓驭科技的成行平台提供全场景的高阶智能驾驶功能，主打低成本的视觉智驾方案。比亚迪与华为及Momenta等公司合作，推动智能驾驶技术的研发和商业化。比亚迪还成立了前瞻部门，专注于端到端技术的落地，计划在明年实现50款车型的适配。沈劭劼认为，高阶智驾将成为未来消费者的刚需。 </div>
-                        <hr>
-                    
-                    <p>比亚迪在智能驾驶布局上又落下重要一子。 &nbsp;</p>
-  <p>近日，天眼查App显示，深圳市卓驭科技有限公司（简称“卓驭科技”）发生工商变更，新增比亚旗下深圳比亚迪创芯材料有限公司，以及恒旭资本管理的两只股权投资基金——苏州申祺利纳绿色股权投资合伙企业（有限合伙）、嘉兴隽宇股权投资合伙企业（有限合伙）为股东，同时，注册资本由约6798.86万人民币增至约7312.21万人民币。&nbsp;</p>
-  <p>其中，恒旭资本为上汽集团金融平台上汽金控旗下私募股权投资机构，围绕汽车上下游产业链进行出资。</p>
-  <h2><strong>01 源于大疆车载业务</strong></h2>
-  <p>公开信息显示，卓驭科技成立于2022年，前身是大疆车载业务，是一家智能驾驶供应商及服务商，提供智能驾驶系统及自研核心零部件。截至2023年底，该公司核心研发人员超1000人，覆盖感知、决策规划、高性能计算、功能安全、系统工程等专业领域。&nbsp;</p>
-  <p>成行平台是卓驭的核心产品，提供覆盖高速、城市、泊车等全场景的高阶智能驾驶功能，支持驾舱一体集成，可兼容多种芯片、灵活拓展算力，可配置惯导双目、激目系统或拓展第三方激光雷达、高精地图等配置，支持创新功能拓展。&nbsp;</p>
-  <p>卓驭科技主打纯视觉智驾方案，目前的合作客户包括大众汽车、上汽通用五菱、奇瑞汽车、中国一汽、东风汽车等。&nbsp;</p>
-  <p>一位自动驾驶领域工程师告诉创投日报记者，目前，自动驾驶技术路线主要分为两大类：首先是高算力、多传感器融合派，以华为等为代表，其通过高算力芯片、激光雷达、高精地图等多种传感器融合，实现更高级别的自动驾驶功能，但成本也相对较高。&nbsp;</p>
-  <p>另一种则为低成本、视觉为主派，以卓驭科技、特斯拉为代表，主张通过算法优化，减少对高成本硬件的依赖，以低成本方案实现高阶智能驾驶功能。&nbsp;</p>
-  <p>脱胎于大疆的卓驭科技，继续由此前大疆车载负责人的沈劭劼负责。履历现实，他是香港科技大学电子和计算机工程系副教授，研究方向包括为自主导航、计算机视觉、机器人、传感器、无人驾驶飞行器等。&nbsp;</p>
-  <p>沈劭劼以能够最大限度地发挥计算能力而闻名。据介绍，卓驭科技旗下的成行平台可在仅 32TOPS 的算力平台上，落地基于数据驱动的端到端智能驾驶解决方案，实现高速领航、城市记忆领航等高阶智驾功能，而当算力升级至 100TOPS时，即可支持更加复杂的城市领航功能。&nbsp;</p>
-  <p>沈劭劼此前称，现在对于智能驾驶来说，最大的敌人并不是某一个玩家，也不是哪一家车企，而是装配率不足。现在高阶智驾的普及进度比他最初的预想要慢一些。他认为，在不久的将来，高阶智驾会成为中国消费者的高频刚需。届时，没有高阶智驾的车辆很可能会卖不动。</p>
-  <h2><strong>02 比亚迪加大在智能驾驶布局</strong></h2>
-  <p>两大产业方的加持，让卓驭科技本次融资受到市场关注。&nbsp;</p>
-  <p>作为上汽集团金融平台上汽金控旗下私募股权投资机构，恒旭资本致力于布局绿色出行、出行生态、健康生态等战略新兴产业。财联社创投通显示，恒旭资本投资了97个项目，在汽车产业链领域，出资了炯熠电子、智芯半导体、福瑞泰克等企业。&nbsp;</p>
-  <p>另一投资方比亚迪，创投日报记者注意到，近几年来正不断加大在智能驾驶领域的布局，具体可以表现为以下几个核心方面：&nbsp;</p>
-  <p>在合作与联盟上，比亚迪与华为合作，共同推出了方程豹汽车豹8，该车型搭载了华为的乾昆智驾ADS3.0智驾方案；&nbsp;</p>
-  <p>比亚迪还与Momenta成立了合资公司迪派智行，专注于智能驾驶技术的研发和商业化。&nbsp;</p>
-  <p>在自研团队与技术上，近期比亚迪新成立了一个前瞻部门，主攻端到端技术的落地，部门负责人为原自研智驾团队“天璇”带头人许凌云。&nbsp;</p>
-  <p>据悉，比亚迪依然是自研和供应商方案齐头并进，而天璇开发部成立是将自研重视程度提高到了新的层级，将投入更多资源扶持。&nbsp;</p>
-  <p>据称，比亚迪自研团队目前核心重点是低阶平台的高阶智驾量产落地，最新目标是在明年 3 月实现 50 款车型的适配。&nbsp;</p>
-  <p>公开信息显示，此次比亚迪出资卓驭科技的主体——深圳比亚迪创芯材料有限公司，成立于2007年09月。此前，该公司还投资了北京天科合达半导体、新毅东（北京）科技有限公司等。&nbsp;</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/uHcx65RcTFmuYFHaxjmPpw" rel="noopener noreferrer nofollow" target="_blank">“创投日报”</a>，作者：李明明，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3073701432619906</id>
-            <title>英伟达一天蒸发6400亿，中国为啥要动手调查它？</title>
-            <link>https://www.36kr.com/p/3073701432619906</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3073701432619906</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 11 Dec 2024 00:19:53 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 英伟达, 反垄断, 调查, 市场监管  
-<br><br>  
-总结: 英伟达因涉嫌违反《反垄断法》和与中国签署的协议，正在接受国家市场监管总局的立案调查。该公司在2019年收购迈络思后，因捆绑销售和不公平竞争行为引发了科技行业的广泛反对。英伟达在市场中的垄断地位和不当行为使其面临多国政府的调查，尤其是在美国和中国。尽管英伟达在技术上处于领先地位，但其合规风险和可能的罚款也在增加。反垄断调查旨在维护市场竞争，促进创新。 </div>
-                        <hr>
-                    
-                    <p>啧啧，这两天科技圈最大的新闻，那绝对是赛博世界的老大哥英伟达，这回真摊上事了。</p>
-  <p>昨晚七点半，国家市场监管总局在官网发出来公告，英伟达因涉嫌违反《&nbsp;反垄断法&nbsp;》和市场监管总局 2020&nbsp;年第 16 号公告，被依法开展立案调查。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_df8a3da0711c47f0aec41ed24bebe886@5888275_oswg245378oswg1080oswg638_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>啥意思呢，一句话解释就是，<strong>英伟达不仅可能有垄断行为，还违反了当年和中国签的一份协议</strong>，所以挨打要立正，自然而然的就得接受调查和后续处罚。</p>
-  <p>有一说一，咱国家因为反垄断出拳的次数还真不多，每次在科技圈里都是大事。</p>
-  <p>就不说前几年国内的一些企业，上次调查外国企业那还是 2013 年，最后发改委罚了高通 60&nbsp;亿，那叫一个雷厉风行。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8c1e82a2576e433a926347574b4c30b2@5888275_oswg80609oswg942oswg510_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>而这次调查的英伟达，在行业里的地位比高通只高不低，所以也更加引人瞩目。</p>
-  <p>虽然不少媒体都把这事跟大国博弈挂上钩，觉得这又是一步至关重要的大棋，释放了各种强烈信号。。。</p>
-  <p>但要差评君觉得吧，先不提博弈，<strong>这事其实还是英伟达自己有错在先，挨罚也是合情合理。</strong>至于原因，那就不得不说说公告里提到的这张协议了。</p>
-  <p>整明白了这张协议，也就能清楚英伟达到底是犯了啥事。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_cba263e2bc314ebaa8e19e6904b3f19a@5888275_oswg55191oswg638oswg415_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>01</strong></h2>
-  <p>时间回到 2019 年 3 月，那时英伟达豪掷 69 亿美元，收购了以色列的迈络思（ Mellanox ）公司，这是英伟达迄今为止最贵的收购。虽说大公司收购不是啥新鲜事，但这还是引发了科技大厂们的集体反击。</p>
-  <p><strong>原因就在于迈络思掌握着 InfiniBand 技术——一种传输速率超高的网络协议。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_2a19572e734d48a18f32466ef72d536c@5888275_oswg574494oswg724oswg408_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>这东西你可以理解为一根传输速率拉爆的数据线，作用是把显卡们连成一个整体，让他们发挥出 1+1&gt;2 的效果；反之如果传输速率不行， 1+1 甚至可能&nbsp;&lt;2 。</p>
-  <p>相比传统的以太网传输协议， InfiniBand 的效率要更高，理论上在搞计算中心这类硬件集群上更有优势，<strong>但这东西有个问题：就是必须在支持它的设备上才能跑，交换机网卡甚至电缆都得专用。</strong></p>
-  <p>而收购方英伟达还偏偏就是一个搞硬件的公司，现在不仅设备得找他买，配套设施也落到了他手上。。。</p>
-  <p>打个比方，这就像一个手机厂收购了联通，之后你要想用联通的号，就可能就会要求你得买他家手机才行。那特么谁受得了，这不纯纯绑架嘛。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_c149d48a49564b51a415c1beb8f0b756@5888275_oswg228362oswg942oswg314_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>于是大家就不干了，包括微软、 Meta 在内的不少硅谷大厂都开始反英伟达，转而去开发一套超越 InfiniBand 的新以太网协议，甚至到了后来连 AMD ，甚至字节跳动、阿里云、百度等国内公司也加入其中。</p>
-  <p>总之，为了制裁阿伟的骚操作，我国也是在收购发生的第一时间，<strong>就跟英伟达和迈络思这俩公司签了协议。</strong></p>
-  <p>从 2019 年 4 月开始一直谈判到 2020&nbsp;年 4 月 16 日，最后我国市场监管总局公布了一份<strong>《&nbsp;关于英伟达公司收购迈络思科技有限公司股权案的附加限制性条件承诺方案&nbsp;》</strong>，也就是开头提到的 2020&nbsp;年第 16 号公告。</p>
-  <p>这公告里最重要的部分就是下面几个要点。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_3a9e53914d1043a89ab3e3601d978f75@5888275_oswg136977oswg855oswg892_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>而这些里面最核心的，总结其实就是前两条：</p>
-  <p><strong>一，不准捆绑销售；</strong></p>
-  <p><strong>二， 6 年内必须按照公平、合理、无歧视的原则，给中国市场卖显卡以及配套设备。</strong></p>
-  <p>其实就是相当于明说了，咱们好好做生意就行，别整那些幺蛾子。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_3e4db076ba8c4841944d177c1a70c461@5888275_oswg21150oswg300oswg300_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>所以理论上只要英伟达不故意犯事，按合同里写的来，基本不会出什么大事。</p>
-  <p><strong>但问题可能就出在这两条上了。</strong></p>
-  <p>对皮衣老黄来说，他要考虑的不只有中国市场，还有美利坚，毕竟英伟达总部就在加州呢，这就意味着他两头都不敢轻易得罪，起码合约之内的不能反着来。</p>
-  <p>结果到了后面几年，美国对华芯片出口禁令持续升级，尤其是从《 2022 年芯片与科学法案&nbsp;》到出口管制的次次调整，都是成体系的输出压力。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_b8e372f896f24146a86554dff0de5b19@5888275_oswg124147oswg809oswg859_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>不止英伟达的 A100&nbsp;、 H100&nbsp;、 A800&nbsp;、 H800&nbsp;、 L40&nbsp;、 L40S 、 RTX 4090&nbsp;，集成这些高性能计算卡的 DGX/HGX 系统也都不给卖了，甚至 A800&nbsp;和 H800&nbsp;等特供版芯片都受到影响。</p>
-  <p><strong>这就明显违反了&nbsp;“&nbsp;公平、合理、无歧视的原则&nbsp;”</strong>，白纸黑字签的你小子咋能不认呢？</p>
-  <p>虽然估计老黄也心里也一百个不情愿，但没办法，美国的法案和中国的只能选一个，所以违背跟我们签的合同，就成了很大概率的事了。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_4526276a4a014d68b775c20770534df4@5888275_oswg226999oswg848oswg565_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>02</strong></h2>
-  <p><strong>虽说有不可抗力的因素，但你也别以为英伟达就是无辜的。</strong></p>
-  <p>除了&nbsp;“&nbsp;公平、合理、无歧视地供应&nbsp;”&nbsp;这条违反以外，咱可别忘了当年签到协议上，还有&nbsp;“&nbsp;不准搞垄断、捆绑销售&nbsp;”&nbsp;这规定。</p>
-  <p>而英伟达在这方面，还真不好说自己就是白莲花一朵。</p>
-  <p>The Information 今年就有篇报道称，去年英伟达最大客户之一微软，就因为捆绑买网络电缆之类的基础设施闹的不愉快，但人家英伟达因为靠卖这玩意已经赚翻了。</p>
-  <p>4 月份当季销售额增长了两倍多，达到 32 亿美元，<strong>占其数据中心相关总收入的 14%&nbsp;。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_2316af26f3a34fe3ba750d4d6ce492a4@5888275_oswg69998oswg964oswg478_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>一些英伟达的客户企业的员工也透露说，如果他们同时买英伟达芯片和对家 AMD 的芯片，英伟达就可能会涨价或限制供应，甚至延迟发货；同时买他们家 InfiniBand 和以太网的网卡，以太网的交货时间就会明显更长。</p>
-  <p>除了这些，也不知道是不是因为收购 InfiniBand 以后吃到了甜头，<strong>自打 2019 年以来，英伟达的收购行为明显增多。</strong></p>
-  <p>其中多数都是关于 AI 基础建设的，包括存储、传输、计算、数据中心管理、故障处理啥的一堆技术。</p>
-  <p>图源：智东西</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_c3cad980573143248b7390aed276292e@5888275_oswg109181oswg640oswg804_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>平均下来，老黄最近三年来一年就要收购 3 次，甚至光今年就达到了 6 次，平均花费达到 69.8 亿美金！</p>
-  <p>结果就是，在 AI 芯片这样一个面向未来的领域，<strong>英伟达一家就占了 80%&nbsp;以上的市场。。。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_e4cb955686364acebecb9034dcad0d1b@5888275_oswg28834oswg500oswg467_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>03</strong></h2>
-  <p>实际上，这几年因为他们的这些骚操作，不止全世界的科技巨头们都纷纷抵制，各国政府也没少对他们出重拳。</p>
-  <p>早在 2021 年英伟达打算收购 ARM 的时候，英国竞争和市场管理局（ CMA ）就说发现了&nbsp;“&nbsp;重大竞争问题&nbsp;”&nbsp;，以国家安全和竞争问题为由启动多次深入调查；</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_5a91f2ef487246eb82491a7b2bf7c5e9@5888275_oswg108234oswg895oswg996_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>集微网的相关人士透露，早在 2022 年英伟达就因断供行为被举报，我国相关部门已经展开调查；</p>
-  <p>而在大洋彼岸，今年 8 月份美国司法部就对英伟达开始了垄断调查，随后韩国政府也下场出击，这次重点就是查英伟达是否向其客户施压，<strong>比如向买英伟达显卡的云服务商要求捆绑购买别的产品，包括将服务器连接起来的电缆。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_942ba492b10f406388720d01030860af@5888275_oswg41313oswg500oswg454_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>最近的一次甚至就在 12 月 6 号，欧盟反垄断监管机构也给他们那边行业内发出调查问卷，问的也是英伟达是不是在卖 GPU 的时候附带商业和技术捆绑，以及<strong>合同是否要求他们购买带有 GPU 的网络设备。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_d0ed8fb2fb5c4b5398b074e713ce2134@5888275_oswg64770oswg772oswg716_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>然后过了没几天，就是现在这次，咱们就官宣了要对英伟达的反垄断调查。</p>
-  <p>结果完事人家接受新浪科技采访时，回了句：</p>
-  <p>“NVIDIA<strong>凭借实力取胜</strong>，&nbsp;······&nbsp;，我们很乐意回答监管机构对我们业务的任何问题。&nbsp;”</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_7613318cb63e4629b57bd57db7651437@5888275_oswg39257oswg941oswg267_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>这话不止是跟我国这么回应的，前面别的国家查他他也是这么一套词，中译中就是：&nbsp;“&nbsp;哥有实力，你随意。&nbsp;”</p>
-  <p>虽然今年前三季度中国市场营收现在占英伟达的份额只有 12.7%&nbsp;，但这次制裁要真落下来的话，对它的打击还挺大。</p>
-  <p>截止现在，英伟达的股票已经跌了 3.63%&nbsp;了，相当于 1200&nbsp;多亿美金，这还没算上后续可能跟上的罚款。</p>
-  <p>隔壁知危编辑部，今天也咨询了<strong>上海融力天闻律师事务所的合伙人</strong>，对方表示：</p>
-  <p>按照《&nbsp;中华人民共和国反垄断法&nbsp;》第四十七条等条款规定，&nbsp;“&nbsp;经营者违反本法规定实施集中，且具有或者可能具有排除、限制竞争效果的，处上一年度销售额百分之十以下的罚款&nbsp;”&nbsp;，如果查实构成&nbsp;“&nbsp;可能具有排除、限制竞争效果的&nbsp;”&nbsp;，那结果就更加严重了。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_ee53368206f04f4da2efffa7f964cdec@5888275_oswg90555oswg895oswg533_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>像当年高通的 60&nbsp;亿罚单，实际上就是按 8%&nbsp;的处罚来的，已经接近顶格；如果按 2024 财年英伟达在中国的总营收 103.1 亿美元来算，这次英伟达可能会收到 10.3 亿美元的罚单，折合人民币约 74.66 亿元。</p>
-  <p>像这样的调查，基本上都需要 10&nbsp;个月到一年左右的取证及听证会，至于具体金额多少，起码还得等明年年底才能知道了。</p>
-  <p><strong>尽管在技术上不得不承认，英伟达确实相当领先，但既然背靠全球化运营获了利，自然也要承担各种合规的风险。</strong></p>
-  <p>最后，反垄断也是件必要的事儿，如果把科技巨头们比作是大树的话，总需要人为修剪下这棵树的枝干，让阳光也能照到它身下的那些小树苗。</p>
-  <p>毕竟反垄断所做的，就是让这些小树苗，也有长成参天大树的机会，<strong>好给市场松绑、让创新有路。</strong></p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/ZKof0A2H2ypsNTcatFAPIA" rel="noopener noreferrer nofollow" target="_blank">“差评X.PIN”</a>，作者：差评君，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3073701764739713</id>
-            <title>姗姗来迟的Sora，一来就乱杀了</title>
-            <link>https://www.36kr.com/p/3073701764739713</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3073701764739713</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 11 Dec 2024 00:19:38 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Sora, 视频生成, AI技术, 创作工具  
-<br><br>  
-总结: Sora是OpenAI推出的一款视频生成工具，支持文字、图片和视频三种生成方式，能够生成高分辨率视频。其独特之处在于将AI生成能力融入视频创作的每个环节，包括故事板功能和在线重新剪辑功能。Sora还具备Remix、Loop和Blend等功能，允许用户自由调整和融合视频内容。此外，Sora在生成视频时考虑了安全性，采用C2PA元数据进行内容溯源。整体来看，Sora在视频生成领域提供了更为完整的生产力工具形态。 </div>
-                        <hr>
-                    
-                    <p>磨磨蹭蹭了快一年， OpenAI 终于舍得把 Sora 这盘菜端上来了。&nbsp;</p>
-  <p>这不，咱们还在做梦的时候，&nbsp;Sora&nbsp;就已经那能用了， <strong>登录网址 Sora.com ，订阅会员抢先体验。</strong></p>
-  <p>反正从昨天晚上折腾到今天，国内外各大媒体疯狂报道，有不少老哥已经把 Sora 生成的视频发到了网上，那叫一个热闹。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_3371ddb95bfd4a8fa560a080be6bf739@5888275_oswg580476oswg1080oswg1025_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>可能哥几个也好奇，这个传说中的 Sora 到底有多少斤两，跟国内的视频生成模型相比，谁又会更胜一筹？&nbsp;</p>
-  <p>本来吧，这个问题世超可以在第一时间替大伙儿解答，会员账号早早就薅到手了。结果谁能想到，&nbsp;<strong> Sora&nbsp;的服务器被挤爆了，现在进都进不去</strong>。。。&nbsp;</p>
-  <p>不过说实在的，光是发布会上对 Sora 具体功能的展示，硬货就够多的了。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_2a4a53093000457191040f1460d796b7@5888275_oswg602189oswg1080oswg602_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>所以今天世超就先拿发布会上的&nbsp;“&nbsp;餐前甜点&nbsp;”&nbsp;，给大伙儿开开胃，看看 Sora 跟之前咱们体验过的那些视频生成模型到底有啥区别。&nbsp;</p>
-  <p>首先在产品形态上，世超觉得，&nbsp;Sora&nbsp;就更接近 <strong>一个拥有完整工作流程的生产力工具。</strong></p>
-  <p>这次发布的 Sora Turbo 支持文字、图片和视频三种生成方式，能够生成最高分辨率 1080p 、时长 20&nbsp;秒的视频，支持宽屏、竖屏和方形比例。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_4563bb6f0b324471912e92a94589b054@5888275_oswg498176oswg1080oswg607_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>但这些东西其实都挺常规的，最让世超觉得惊艳的地方，还是 Sora 把 AI 生成的能力融入到了视频创作的每一个环节中。&nbsp;</p>
-  <p>就比如 Storyboard 故事板功能，大伙儿可以简单理解成，给一段视频添加不同的分镜。&nbsp;</p>
-  <p>咱直接来看官方的例子，一共 440&nbsp;帧的视频，前 114 帧的场景 prompt 是&nbsp;“&nbsp;一片广阔的红色景观，远处停靠着一艘宇宙飞船&nbsp;”&nbsp;。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_ed46755084e04e7589fa7c186027aeab@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>接着可以继续发挥想象力，把 114-324 帧的场景变成&nbsp;“&nbsp;从宇宙飞船内部向外看，一位太空牛仔站在画面中央&nbsp;”&nbsp;。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_8812e635f1a2497cb5bc32cbda240ce8@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>最后用&nbsp;“&nbsp;宇航员眼睛的特写镜头，眼睛被针织面料制成的面罩框柱&nbsp;”&nbsp;的 prompt ，结束这段视频。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_eb745f2e3b134e8ca22f1927edf24dd9@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>这些&nbsp;“&nbsp;分镜&nbsp;”&nbsp;在哪个时间点添加，添加什么内容，都可以由用户自己决定。</strong></p>
-  <p>而在故事板的基础上，咱们又可以把生成好的视频用 Re-cut （&nbsp;在线重新剪辑&nbsp;）功能，继续调整一波。&nbsp;</p>
-  <p>这种剪辑，跟咱们理解的这裁一段那剪一截还不太一样。在视频的时间轴上，你可以把不满意的部分都剪掉，剩下来的活儿就可以扔给 Re-cut 功能，让它帮你把空白的地方再重新补全。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_bdb5a4a945924fe89134faaa236c86da@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>这还没完啊。&nbsp;</p>
-  <p>Sora 还有一个 Remix 功能，那才叫一个酷炫。&nbsp;</p>
-  <p>用 prompt“&nbsp;毛茸茸的猛犸在沙漠中行走&nbsp;”&nbsp;生成一段视频，看起来也没啥特别的对吧。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_385521361c0e46d2af795958031ead39@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>有意思的地方来了，如果你想把视频里的猛犸象给换了，比如换成机器人， ok ， Remix 功能就能派上用场了。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_19af705046e94f32b01d9ab4b7f0f616@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>硅基生物无痕替换碳基生物，而且从替换后的视频效果里也能看出来，机器人的步态、沙漠背景，几乎没有出现太大的畸变， <strong>画面稳定性和主体一致性整体都在线。</strong></p>
-  <p>当然这只是官方给的案例，咱们也别太局限，大胆点儿把沙漠变成大海，也不是不行。&nbsp;</p>
-  <p>另外， Sora 的发布会上还介绍了 Loop （&nbsp;循环&nbsp;）和 Blend （&nbsp;视频融合&nbsp;）两个功能。&nbsp;</p>
-  <p>一个能让视频实现首尾视频帧的丝滑衔接，让视频一直循环。&nbsp;</p>
-  <p>还有一个，则是把两个视频无缝合并成一个视频。&nbsp;</p>
-  <p>怎么个无缝法呢，用雪花飘落和花瓣飘落的视频作为例子，大伙儿一看就明白了。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_cd461ddf2c05419fa965ed4508523e34@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>除此之外， Sora 还有个 Style-Presets 的功能，其实说白了就是换换风格。同样都是两头猛犸象在雪地行走，但你可以把初始版换成黑白电影，或者纸板风和胶片档案风。&nbsp;</p>
-  <p>相信看到这儿，大伙儿应该多少能品出来， Sora 跟现在市面上很多视频生成应用的区别了吧？&nbsp;</p>
-  <p>咱没有拉踩的意思，也没有非要分个高下。单纯从客观地角度来说， <strong>Sora 已经做到了一个视频生成模型理想状态下，相对完整的产品形态。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_543fe61c7fbe4cfeb24fa4c48df8e910@5888275_oswg1015387oswg1080oswg600_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>生成功能，不过是 Sora 最最基本的一块砖，没有了不行，但由一块块砖搭起来的大厦，肯定会更引人注目。</strong></p>
-  <p>而之前咱们上手体验到的一些视频生成模型，大多只专注在生成效果这个单一维度上，魔改玩玩还可以，但要当真正的生产力工具，还差点意思。&nbsp;</p>
-  <p>其次，在最直观的生成效果上， Sora 虽说有瑕疵，但总体上瑕不掩瑜。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241211/v2_c283b56cbc1c4c51a74933dbeac3e9d3@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>看看外网老哥们在 X 上发的视频，世超是真馋了。&nbsp;</p>
-  <p>先用 Midjourney 生成图片，再把 prompt 喂给 Sora ，这清晰度，这稳定性，老人脸上的皱纹都不带动一下的，还有眼神里透出来的&nbsp;“&nbsp;严肃和焦虑&nbsp;”&nbsp;，也让 Sora 悟到了。&nbsp;</p>
-  <p>prompt ：镜头聚焦在茂密茂盛的森林中一位饱经风霜的老人。他的脸上沾满了蓝漆和泥巴，深深的皱纹表明他一生都在荒野中度过。背景是一片模糊的绿色和棕色，捕捉到了未驯化环境的本质。这名男子严肃而焦虑的目光暗示着一种生存、坚韧和与自然的深厚联系，为场景增添了一种神秘感和紧张感。&nbsp;</p>
-  <p>还有这个金毛冲浪，狗狗重心往下压的时候，冲浪板的方向也在跟着往下，而且水面也因为金毛的这个动作掀起了一阵浪花。&nbsp;</p>
-  <p>该说不说， Sora 对物理规律的掌握，可比年初的时候好太多了。&nbsp;</p>
-  <p>等世超能用上了，高低也给咱火锅也安排一次。&nbsp;</p>
-  <p>不过，也有一些网友用 Sora 跟咱们国内的视频生成应用，对比了一把。&nbsp;</p>
-  <p>同样的 prompt ，打眼这么一看真看不出来太大差距，非要说的话，就是 Sora 版的头发更柔顺一些。&nbsp;</p>
-  <p>问题是 KLING 免费就能用。。拿这个视频对比，就显得开 200&nbsp;美元&nbsp;/&nbsp;月 Sora 会员的有点冤种了。&nbsp;</p>
-  <p>在一些网友的测试里， Sora 生成的视频还会出现手部不够自然的情况。&nbsp;</p>
-  <p>包括昨晚的发布会上， Sora 也小小翻车了一下。&nbsp;</p>
-  <p>工作人员输入了&nbsp;“&nbsp;鹤把头扎进水中，叼起一条小鱼&nbsp;”&nbsp;的提示词，结果视频中的白鹤，压根就没叼到鱼。&nbsp;</p>
-  <p>最后，可能是大伙儿不太关注到的一个点， <strong>Sora 对 AI 生成的安全性考虑。</strong></p>
-  <p>之前不是老有人嚷嚷 AI 为祸人间，看图片看视频，现在都分不清到底是人干的还是 AI 生成的了。&nbsp;</p>
-  <p>所以这次 Sora 生成的视频都带有 C2PA 元数据， C2PA 咱们之前专门写文章唠过，感兴趣的差友可以翻出来看看。 <strong>它最大的特点就是可以溯源，内容是谁创作的、历史的修改记录，这些都会被记录下来。</strong></p>
-  <p>总的来说，这次 Sora 的亮相还是带来了不少惊喜，特别是在产品形态上，视频创作的完整工作流提供了一个更新的视角。&nbsp;</p>
-  <p>不是我说，国内视频生成下一步要往哪卷，应该有方向了吧。&nbsp;</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/GLsj0uVKU5bL2Thev3Cbfw" rel="noopener noreferrer nofollow" target="_blank">“差评X.PIN”</a>，作者：世超，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3073039171105670</id>
-            <title>中国基因测序行业熬过至暗时刻</title>
-            <link>https://www.36kr.com/p/3073039171105670</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3073039171105670</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 11 Dec 2024 00:19:19 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: <基因测序, 生物安全法案, 国内政策, 市场需求>
-<br>
-<br>
-总结: 2024年中国基因测序行业经历了外部困扰与内部增长的转折。生物安全法案未能进入NDAA，减轻了市场对相关企业的担忧。国内政策支持力度加大，财政部为国产产品提供价格优惠，提升了市场竞争力。头部企业如华大智造通过市场占有率提升实现逆势增长，且下游需求逐渐回暖，尤其在肿瘤精准医疗和生育健康领域。整体来看，行业前景向好，未来有望迎来更高的增长。 </div>
-                        <hr>
-                    
-                    <p>2024年即将结束，中国基因测序行业的概括，可以说是先抑后扬。</p>
-  <p>生物安全法案的困扰、国内需求疲软的担忧……一系列的外因，让资本市场对中国基因测序行业的未来充满分歧。</p>
-  <p>当然，分歧归分歧，行业的基本面并没有外界想象中那样摇摇欲坠，头部企业仍在扎实地向前。更重要的是，12月份至今，所有困扰市场的外因，突然间烟消云散：</p>
-  <p>第一，<strong>生物安全法案未进入NDAA</strong>，对华大智造等生物科技企业不再构成困扰。换句话说，它们的全球征程仍将继续。</p>
-  <p>第二，<strong>国内支持政策进一步加码。</strong>日前，财政部发布利好政策，拟在政府采购活动中给予本国产品相对于非本国产品20%的价格评审优惠。这意味着，国产测序仪的市场竞争力将更加清晰。</p>
-  <p>第三，<strong>下游生态向好的标志性事件持续出现。</strong>例如，饱受质疑的燃石医学财务得到持续改善。这预示着，下游应用有望进一步拓宽，进而支撑更宏大的“国际+国内”叙事。</p>
-  <p>三重利好的出现，预示着中国基因测序行业已然今非昔比，未来变得更加清晰可见。</p>
-  <h2><strong>01 全球征程更明朗</strong></h2>
-  <p>谈到中国基因测序行业的心头大石，生物安全法案是一个绕不开的话题。</p>
-  <p>年初，美国众议院议员提交的生物安全法案草案版本中，药明康德、华大基因、华大智造等国内企业被提及；美国参议院近期也有一项类似的法案草稿被提出。</p>
-  <p>如果这些议案被通过，那么美国政府资助的医疗机构将会被限制使用被提及公司的产品和技术。因此，生物安全法案不可避免地引起了国内资本市场的<strong>过度恐慌，导致部分企业出现了超跌</strong>。</p>
-  <p>从“924行情”以来，科创50是风向标，累计涨幅接近20%，而华大智造虽属于科创50成分股，但受生物安全法案的不间断影响，其股价从年初至今仍下跌近40%，接近腰斩。</p>
-  <p>现在来看，一切都是多虑了。</p>
-  <p>12月7日，靴子终于落地：<strong>生物安全法案的相关条款并未出现在参议院军事委员会成员协商后的2025财年国防授权法案（“NDAA”）的最终谈判文本中。</strong></p>
-  <p>这表明，<strong>生物安全法案进入2025财年NDAA的尝试已告破产</strong>，在短期内不会对华大智造等企业的出海构成障碍。</p>
-  <p>短期如此，长期来看大概率也是这样。在市场看来，这并未到终局，未来仍有再被提及的可能。理论上是这样，但实际上，生物安全法案的“流产”反映了一个事实：<strong>全球生物科技行业是一个共同体，很难“脱钩”。</strong></p>
-  <p>华大智造之所以能够业务布局遍布六大洲100多个国家和地区，核心在于其“精而专”的产品布局，能够让全球用户享受到更便捷、一站式的多组学工具，从而带来效率提升和成本降低的好处。</p>
-  <p>换句话说，华大智造突围靠的是综合服务能力，而不仅仅是简单提供一款产品。这也导致，<strong>强行“脱钩”实际上面临诸多障碍，也不符合美国医疗产业的利益，属于狭隘的保护主义。</strong></p>
-  <p>因此，生物安全法案出现之后，反对声音极大，甚至海外流传出将会变得更温和的报道。到现在最终<strong>“流产”，说明美国政客实际上已经回归理性，意识到了上述问题。</strong></p>
-  <p>更积极的一个信号是，部分反对生物安全法案的政客将在下一届政府中身居要职。例如，在今年3月份参议院国土安全与政府事务委员会听证会上投下唯一反对票的Rand Paul，成功当选新一届参议院国土安全事务委员会主席。</p>
-  <p>这也意味着，类似生物安全法案这样的不理性政策，被提及的概率实际上越来越低。</p>
-  <p>反过来说，以华大智造为代表的中国基因测序企业，在角逐全球市场时将不会面临狭隘主义的影响，凭借突出的综合服务能力，有望获得更突出的成绩。</p>
-  <h2><strong>02 国内逻辑更清晰</strong></h2>
-  <p>海外困扰消除的同时，国内的增长逻辑也变得越来越清晰。</p>
-  <p>过去一年，市场担心受宏观环境和行业政策影响，终端客户对固定资产的投资减少且采购周期拉长，导致测序仪设备整体采购量有所减少。</p>
-  <p>但实际上，<strong>头部玩家能够通过提升市场占有率来消除这一不利影响</strong>：</p>
-  <p>今年前三季度，华大智造就通过市场占有率的继续提升，实现了逆势增长。基因测序仪前三季度累计销售装机量超过670台，同比增长4%。</p>
-  <p>在市场渗透率提升的逻辑仍然存在的情况下，整个行业又迎来了两大利好。</p>
-  <p>一方面，<strong>需求提振的信号已经明确。</strong>12月9日的最高层会议上，14年来中央再次提出“适度宽松”，意味着超常规的逆周期政策即将开启。今年以来，“大规模设备更新”一直是重中之重，在进一步扩大内需的逻辑下，基因测序等设备的需求必然会迎来新一轮增长高峰。</p>
-  <p>另一方面，<strong>支持国产品牌的政策进一步落地。</strong></p>
-  <p>12月7日，财政部下发《关于政府采购领域本国产品标准及实施政策有关事项的通知（征求意见稿）》指出，拟在政府采购活动中给予本国产品相对于非本国产品20%的价格评审优惠。</p>
-  <p>这是支持国产品牌政策的进一步落地。<strong>公众号“基因江湖”对此举有过形象的类比：非本国产品报价100w，本国产品也报价100w，参与评审时，本国产品的报价按80w计算（会得到更高的商务分）。</strong></p>
-  <p>在这一趋势下，<strong>华大智造除了直接受益，还能通过赋能合作伙伴、提供技术和产品间接受益。</strong>目前国内已有36款基因测序仪获得NMPA批准可用于临床检测，其中有22款基于华大智造的DNBSEQ测序技术。在支持国产品牌的政策推动下，未来华大智造的赋能朋友圈有望变得更大。</p>
-  <p>综合来看，在多重驱动因素的推动下，华大智造的国内业务正迎来新一轮的高增长曲线。</p>
-  <h2><strong>03 产业需求更旺盛</strong></h2>
-  <p>不管是海外还是国内，支撑测序市场增长的逻辑，都由下游需求推动。今年以来，需求端也迎来了一系列的转折点信号。</p>
-  <p><strong>近期的一个积极信息是，燃石医学连续三个季度实现扣除研发费用的经营利润转正。</strong>虽然燃石医学财务数据的改善，部分因素是降本增效，但可能也标志着，在基因组学的“快进”趋势下，肿瘤应用这一庞大市场将快速拓展。</p>
-  <p>肿瘤精准医疗的前景不言而喻，从诊断到治疗再到预后，都有极大的发挥空间。但过去，整个行业陷入了经营困境，某种程度上限制了肿瘤精准医疗的探索。</p>
-  <p>因此，<strong>燃石医学财务好转的意义在于，验证精准肿瘤医学市场前景的同时，激励包括其在内的更多企业，进一步深入挖掘肿瘤精准医疗市场。</strong>例如，在10月31日，燃石医学选择与华大智造深化合作，将基于后者DNBSEQ核心测序技术拓展肿瘤产品注册及院端业务，共同推动肿瘤精准医疗的临床应用进步及全球化业务发展。</p>
-  <p>同时，<strong>基因测序的另一大基本盘，生育健康领域也迎来了一系列的催化剂。</strong>一方面，在婚孕前、产前和学龄前检测的针对遗传病三级预防策略受到进一步重视，例如11月22日，广东省卫生健康委公布《广东省新生儿疾病筛查管理办法》，明确自明年1月1日起全面实施新生儿疾病筛查。另一方面，今年多个省市相继将辅助生殖技术纳入医保范围。由于基因测序技术可以帮助评估胚胎的遗传健康，提高辅助生殖的成功率。在这一趋势下，未来也将受益。</p>
-  <p>另外，<strong>包括自免疾病、罕见病的基因测序需求在加速释放。</strong>典型如自免疾病，大部分自免疾病机制都不清楚，因此基因测序会成为备受关注的手段。</p>
-  <p>11月份，安医大一附院等机构在国际知名皮肤病学期刊British Journal of Dermatology（IF=10.98）上发表了最新研究成果，揭示了基质细胞参与银屑病炎症微环境的新证据，开发银屑病新的药物靶点具有重要意义，而该研究正是基于华大智造的多组学工具。</p>
-  <p>这些研究的发布，一方面验证了多组学工具的重要性，另一方面也会激励更多研究者利用多组学工具参与研究。</p>
-  <p>当然，基因检测的应用不仅限于临床端，在科研等众多领域，基因测序也是不可或缺的工具。今年以来，<strong>种种迹象表明，科研端的需求也在迅速增长。</strong></p>
-  <p>一个例证是，<strong>华大智造今年实现了一系列的“新模式”落地。</strong>例如，12月份南京江北新区生物医药公共服务平台与华大智造达成战略合作的DCS Lab实验室落地，就是一种新模式、新路径。</p>
-  <p>而在11月27日，华大智造第1000台DNBSEQ-G99下线，是<strong>华大智造最快实现1000台量产的测序仪，这证实了科研及临床领域用户需求的强劲。</strong></p>
-  <p>基因测序的成本仍在持续下降，意味着其可及性将继续提高，因此下游需求更旺盛的逻辑是非常明确的，这也最终会反映在对上游基因测序的需求上。</p>
-  <h2><strong>04 总结</strong></h2>
-  <p>彼得林奇曾经提出过6种股票分类：缓慢增长型、稳定增长型、快速增长型、周期型、隐蔽资产型以及困境反转型。</p>
-  <p>其中，困境反转策略指的是布局处于底部反转的行业，等待企业盈利提升和估值修复带来的收益。</p>
-  <p>这种策略最大的好处是赔率高、股价安全边际高，因为在困境下，好公司股价才有可能出现大跌，一旦押对，回报相当丰厚。</p>
-  <p>或许，中国基因测序行业也属于这一行列。</p>
-  <p>过去，整个生物医药和医疗器械都处于困顿时刻，作为更细分市场和更前沿的领域，中国基因测序行业的处境更为艰难。但如今“轻舟已过万重山”，整个行业熬过了至暗时刻，迎来了自己的反转时刻：困扰行业发展的外部因素正在减弱，企业自身的业务布局仍在收获期。</p>
-  <p>而正如上文所说，资本市场可能并未充分意识到这一点，例如华大智造的股价走势，并未跟上科创50的节奏。</p>
-  <p>那么，在多重有利因素的共同作用下，中国基因检测行业是否会在资本市场上演预期差呢？</p>
-  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzIwMjU5Njk5NA==&amp;mid=2247504788&amp;idx=2&amp;sn=4ec46fb475436d0ea64e9ef5d79468c5&amp;chksm=97a84d81d2d2c81afbebc37731614463a5a019b21d1380fab5b15fb1af04747424f860229fe4&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“氨基观察”（ID：anjiguancha）</a>，作者：氨基君，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3073149501076352</id>
-            <title>毛戈平港交所上市：市值超250亿港元，浦申九鼎刚完全退出，错过资本盛宴</title>
-            <link>https://www.36kr.com/p/3073149501076352</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3073149501076352</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 11 Dec 2024 00:08:46 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 毛戈平, 上市, 募资, 股东  
-<br>
-<br>
-总结: 毛戈平化妆品股份有限公司于港交所上市，发行价为29.8港元，募资净额为21.87亿港元。公司引入6大基石投资者，共认购1亿美元，占比约39%。毛戈平的营收在2024年上半年达到19.7亿元，利润为4.93亿元，显示出强劲的增长势头。公司主要经营高端化妆品品牌“MAOGEPING”和“至爱终生”，并在二、三线城市扩展市场。毛戈平家族在公司中占据重要地位，执行董事多为家族成员。 </div>
-                        <hr>
-                    
-                    <p>毛戈平化妆品股份有限公司（简称：“毛戈平”，股票代码为：“01318”）今日在港交所上市。</p>
-  <p>毛戈平发行价为29.8港元，发售7842万股，募资总额为23.37亿港元；扣除发行应付上市开支1.5亿港元，募资净额为21.87亿港元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_de1385f006334e9da197b95885e877ae@000000_img_000?x-oss-process=image/format,jpg/format,jpg/interlace,1" /></p>
-  <p>毛戈平此次上市引入6大基石投资者，分别为CPE、正心谷资本（LVC）、SeraphimAdvantage、常春藤、Brilliant Partners Fund、Mega Prime，共认购1亿美元，占比例约为39%。</p>
-  <p>其中，CPE认购3500万美元，正心谷资本认购2000万美元，ACCF Capital认购1500万美元，常春藤基金、Brilliant Partners Fund LP以及大湾区共同家园投资基金分别认购1000万美元。</p>
-  <p>毛戈平曾准备在A股上市，原计划募资11.2亿元，其中，8.06亿元用于渠道建设及品牌推广项目，9713.74万元用于研发中心建设项目，1.08亿元用于信息系统升级建设项目，1.09亿元用于形象设计培训机构建设项目。</p>
-  <p>2024年1月初，毛戈平上市被终止。几个月后，毛戈平就转战到港股，并很快在港交所上市。</p>
-  <p>毛戈平开盘价为47.65港元，较发行价上涨60%；截至目前，公司股价上涨超过70%，公司市值为252.6亿港元。</p>
-  <h2><strong>上半年营收近20亿 期内利润4.93亿</strong></h2>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_6eb3d172b6c9403b9fc687b05c375469@000000_oswg118267oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>毛戈平于2000年由中国美妆行业的标志性人物毛戈平创立，主要从事MAOGEPING与至爱终生两大品牌彩妆、护肤系列产品的研发、生产、销售及化妆技能培训业务。</p>
-  <p>毛戈平的化妆品包括彩妆与护肤两大品类，具体包括“MAOGEPING”与“至爱终生”两个品牌。</p>
-  <p>其中：“MAOGEPING”品牌以公司创始人毛戈平的名字命名，是公司的核心牌。“MAOGEPING”品牌定位为高端品牌，目前以中高端百货专柜直营模式和电商销售为主，是面向都市女性的本土高端化妆品品牌；“至爱终生”品牌以经销模式为主，定位于二、三线城市的女性消费者，致力于提升公司产品的覆盖群体及销售区域。</p>
-  <blockquote>
-   <p>招股书显示，毛戈平2021年、2022年、2023年营收分别为15.77亿元、18.29亿、28.86亿；毛利分别为13.16亿元、15.33亿元、24.48亿元。</p>
-  </blockquote>
-  <p>毛戈平2021年、2022年、2023年净利分别为3.3亿元、3.52亿元、6.63亿元；扣非后净利分别为3.31亿元、3.52亿元、6.64亿元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_a51ca69337b34d8082a49afd75713cb0@000000_img_000?x-oss-process=image/format,jpg/format,jpg/interlace,1" /></p>
-  <p>毛戈平2024年上半年营收为19.7亿元，较上年同期的14亿元增长40.7%；毛利为16.74亿元，上年同期的毛利为11.82亿元。</p>
-  <p>毛戈平2024年上半年期内利润为4.93亿元，较上年同期的3.49亿元增长41%；经调整净利为5.13亿元，上年同期的经调整净利为3.49亿元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_1e06e3e6fc664e04ad3d7037cb4da5a3@000000_img_000?x-oss-process=image/format,jpg/format,jpg/interlace,1" /></p>
-  <p>截至2024年6月30日，毛戈平持有的现金及现金等价物为5.53亿元。</p>
-  <h2><strong>刚刚派息5亿</strong></h2>
-  <p>于2021年3月及2023年5月举行的股东大会上，毛戈平公司分别向全体股东宣派股息4000万元及2.5亿元。截至2023年12月31日，毛戈平公司的应付股息为2500万元，已于2024年1月悉数支付。</p>
-  <p>于2024年2月举行的股东大会上，毛戈平公司向全体股东宣派股息5亿元。截至最后实际可行日期，派付股息3.81亿元，应付股息1.19亿元。</p>
-  <h2><strong>浦申九鼎套现7.3亿 实现完全退出</strong></h2>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_ab339bac9b0d41c5b2dd46daa16c9a03@000000_oswg85956oswg1080oswg602_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>浦申九鼎曾持股10%，天易投资曾持股为3%，但2024年初，毛戈平公司刚刚进行了股权变动，其中，深圳笃实、苏州锦鸿分别接盘了浦申九鼎部分所持股权，深圳笃实斥资1.07亿元，每股成本为18.25元；苏州锦鸿斥资7191万元，每股成本为18.25元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_cb1794f818c54399995ca6c485f95a76@000000_img_000?x-oss-process=image/format,jpg/format,jpg/interlace,1" /></p>
-  <p>2024年1月17日，浦申九鼎以对价5.51亿元向帝景投资转让4,530,000股股份（占公司当时已发行股份总数的7.55%）。</p>
-  <p>2024 年3 月22 日，由于毛氏家族安排，帝景投资进一步以对价1.825亿元向毛霓萍女士之子徐科君转让5000,000股股份（占公司当时已发行股份总数的2.5%）；及以对价1.825亿元向毛慧萍女士之子丁韬转让5,000,000股股份（占公司当时已发行股份总数的2.50%）。</p>
-  <p>于2024年4月3日，徐科君和丁韬直接向浦申九鼎悉数结算了转让对价，作为帝景投资对浦申九鼎于2024年1月向帝景投资转让公司当时已发行股份总数5%的结算。</p>
-  <p>于该等转让完成后，浦申九鼎不再持有公司任何权益。</p>
-  <p>2024年1月8日，为明确曹国熊（当时为天易投资持股20%的股东）通过天易投资而于公司持有的间接权益，作为其于公司层面的直接持股，天易投资将360,000股股份（占本公司当时已发行股份总数的0.60%）以900万元的对价转让予曹国熊。</p>
-  <p>2024年3月22日，为明确姚芝红女士（当时为天易投资的间接股东）通过天易投资而于公司持有的间接权益，作为其于公司层面的直接持股，天易投资同意将1,401,000股股份（占本公司当时已发行股份总数的约0.70%）以1050万元的对价转让予姚芝红女士。</p>
-  <p>同日，天易投资进一步同意分别向姚芝红女士及曹国雄转让2,439,000股股份（占公司当时已发行股份总数的约1.22%）及960,000股股份（占公司当时已发行股份总数的0.48%），对价分别为8536万元及3360万元。</p>
-  <h2><strong>毛戈平家族色彩浓厚</strong></h2>
-  <p>毛戈平公司是一个非常家族企业的公司。当前，毛戈平公司执行董事分别为毛戈平、汪立群女士、毛霓萍女士、毛慧萍女士、汪立华、宋虹佺女士；独立非执行董事分别为顾炯、黄辉、李海龙博士。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_3cd91db620c646b9b311a2d23077cdb4@000000_img_000?x-oss-process=image/format,jpg/format,jpg/interlace,1" /></p>
-  <p>毛霓萍、毛慧萍系实际控制人毛戈平的姐姐，汪立华系实际控制人汪立群的弟弟，毛霓萍、毛慧萍、汪立华现分别在公司担任副董事长兼副总经理、董事兼副总经理及董事兼副总经理。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_3938cbe2ff8b44eaaec9377330cdc22b@000000_img_000?x-oss-process=image/format,jpg/format,jpg/interlace,1" /></p>
-  <p>IPO前，毛戈平直接持有毛戈平公司43.63%股权，汪立群直接持有11.34%股权。</p>
-  <p>毛戈平、汪立群夫妇通过帝景投资（其由汪立群及毛戈平分别控制35.45%及10%权益，毛戈平作为其普通合伙人）间接控制已发行股本总额的0.55%，及汪立群通过嘉驰投资间接控制已发行股本总额的1.74%。</p>
-  <p>毛戈平，1964年7月出生，中专学历。1983年7月至1998年7月任职浙江省越剧团，1998年11月创建杭州毛戈平化妆艺术有限公司，2000年7月创建杭州汇都化妆品有限公司，任公司董事长兼产品研发负责人，2000年10月创建浙江毛戈平形象设计艺术学校。现任毛戈平董事长兼总经理。</p>
-  <p>汪立群，女，1971年9月出生，1991年至1999年任浙江省越剧团演员，2000年至2008年任浙江毛戈平形象设计艺术学校执行校长，2008年至今，任杭州毛戈平形象设计艺术有限公司总经理。现任毛戈平副董事长。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_86b0cdac9df648cc8ae3b0df0c6a24bc@000000_img_000?x-oss-process=image/format,jpg/format,jpg/interlace,1" /></p>
-  <p>IPO前，毛霓萍持股11.34%，毛慧萍持股为9.6%，汪立华持股6.11%，宋虹佺持股5.24%，徐科君、丁韬分别持股2.5%，姚芝红女士持股1.92%；</p>
-  <p>嘉驰投资持股为1.74%，深圳笃实持股为1.47%，曹国熊持股为1.08%，苏州锦鸿持股为0.99%，帝景投资持股为0.55%。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_472eab64b840472982ad9abc0dcd1045@000000_img_000?x-oss-process=image/format,jpg/format,jpg/interlace,1" /></p>
-  <p>IPO后，毛戈平直接持有毛戈平公司37.09%股权，汪立群直接持有9.64%股权。毛霓萍持股9.64%，毛慧萍持股为8.16%，汪立华持股5.19%，宋虹佺持股4.45%，徐科君、丁韬分别持股2.13%，姚芝红女士持股1.63%；</p>
-  <p>嘉驰投资持股1.48%，深圳笃实持股为1.25%，曹国熊持股为0.92%，苏州锦鸿持股为0.84%，帝景投资持股为0.47%，其他公众股东持股为15%。</p>
-  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MjM5MzQ5NjIyMQ==&amp;mid=2661632499&amp;idx=2&amp;sn=99537a1f5ed1fca4f44a766dc149d5b5&amp;chksm=bc4a5b0d48eb7cbed6878dfa095de79c7197afe0b518e9c2e3e8281d208ab9db2a73b3deffff&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“雷递”（ID：touchweb）</a>，作者：雷建平，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3073059195810434</id>
-            <title>连续完成千万美元融资，Agent这把火烧到了操作系统</title>
-            <link>https://www.36kr.com/p/3073059195810434</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3073059195810434</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 11 Dec 2024 00:07:42 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: AI Agent, 操作系统, Wordware, /dev/agents  
-<br><br>  
-总结: 本文讨论了AI Agent操作系统的发展前景，指出未来AI Agent将从单一发展到“群体协作”模式。Wordware和/dev/agents是两家致力于开发AI Agent操作系统的公司，前者强调自然语言编程和企业级部署，后者则专注于实现不同Agent的跨设备连接。随着AI Agent应用的增加，操作系统的需求愈发紧迫，业界期待能出现类似于安卓系统的AI操作系统，以支持更广泛的应用和开发。 </div>
-                        <hr>
-                    
-                    <p>Agent操作系统的机会来了！</p>
-  <p>不久前，红杉合伙人Konstantine Buhler在接受采访时明确提出，2025年及以后，AI Agent将从单一发展到“群体协作”的模式，即多个Agent组成网络，彼此协作甚至对抗，完成更复杂的任务。</p>
-  <p>这就带来了另一个问题，如何将这些Agent连接起来。操作系统，无疑成了释放Agent全部潜力的关键。</p>
-  <p>就在刚刚过去的11月，Agent操作系统领域马上就迎来了两笔大额融资。</p>
-  <blockquote>
-   <p>先是Wordware拿到了3000万美元的种子轮融资，紧接着/dev/agents又以5亿美元的估值，同样在种子轮拿了5600万美元。前者创下了YC史上最大的种子轮投资记录，而后者吸引包括Scale AI CEO Alexandr Wang、Open AI联创Andrej Karpathy等一众AI大佬。</p>
-  </blockquote>
-  <p>那么，Agent操作系统究竟需要具备哪些功能？Wordware与/dev/agents在打造操作系统上的思路又有着哪些差异？</p>
-  <h2><strong>01 Wordware基于开发者平台的操作系统</strong></h2>
-  <p>用Wordware的CEO Filip Kozera的说法，Wordware的定位是第一个AI操作系统。</p>
-  <p>Wordware对AI操作系统的理解在于，Agent开发。简单来说，Wordware希望每个人都成为AI开发者，任何人都可以通过自然语言只花10分钟就能构建一款AI Agent。</p>
-  <p>围绕着Agent开发这一核心需求，Wordware的AI操作系统主要有三个关键特征：</p>
-  <p>第一，自然编程语言（英语）。只要用户能清楚表达他的想法，他就能做出复杂的AI Agent或者应用。</p>
-  <p>第二，统一的开发环境。Wordware致力于提供一个用于AI开发的编辑器，集成了市面上不同的AI模型和工具以供所有人调用。</p>
-  <p>第三，企业级部署方案。过去，No-code（零代码平台）更适合用于构建相对简单的应用，这可能导致在实现复杂业务逻辑和高度定制的需求时显得力不从心。而Wordware希望能够满足企业级部署方案的要求。</p>
-  <p>基于以上三点，Wordware不仅集成了大量预置的插件工具，也允许用户用自然语言作为Prompt描述编程需求。</p>
-  <p>从效果上看，Wordware的可扩展性大幅超越了No-code平台，同时也大幅降低了开发Agent的门槛。</p>
-  <p>举个例子，Instacart创始人用时四天就开发出了名为“Ask Instacart”的杂货店购物助手。这个助手可以回答有关杂货、食谱和购物需求的问题。例如，用户可以询问某个食品的做法，从而优化杂货店购物体验。</p>
-  <p>同时，广告行业的客户MetaData使用Wordware的平台创建人工智能代理，以实时优化广告支出。人工智能代理可以接受一个简单的查询，如“我应该如何分配资源在巴西销售XYZ产品？”并在不到一分钟的时间内生成一份详细的报告，无需任何手动编码。</p>
-  <p>如今，Wordware平台上已有35万名“开发者”，包括网购平台Instacart和AI视频模型Runway等大型企业客户，有1000万人在使用基于Wordware构建的Agent。</p>
-  <h2><strong>02 /dev/agents基于开发者平台的操作系统</strong></h2>
-  <p>/dev/agents是第二家公开宣称自己做AI Agent OS的公司。</p>
-  <p>虽说同样是搞AI Agent OS，但/dev/agents的思路却与Wordware有很大区别。</p>
-  <p>简单来说，/dev/agents的核心逻辑是连接。他们的目标很明确，开发一个类似于Android操作系统的通用平台，让不同Agent实现跨设备、跨应用场景的连接。</p>
-  <p>在/dev/agents看来，现在当前的软件系统依然是为人类设计的，而非为人工智能代理量身定制。今天的应用程序和网站通常是根据人类的需求与行为模式进行设计的，功能和信息的组织方式符合人类用户的使用习惯，依赖的是人类的直觉和操作。</p>
-  <p>而这样的设计方式并不适合AI Agent。它们需要一个新的基础平台，未来AI代理能像今天的手机APP一样普及，而开发者需要一套工具，既能连接各种AI功能，也能让它们协作顺畅。而/dev/agents想做的，正是开发一个“属于AI的Android系统”。</p>
-  <p>这个问题类似于智能手机的早期的普及期。当时，尽管移动设备被视为未来的技术趋势，但它的真正价值一直未能完全实现。直到Android等操作系统的推出，智能手机才开始具备了一个强大且统一的应用生态系统，真正发挥出其跨设备和跨平台的优势。</p>
-  <p>如今，AI Agent也面临类似的瓶颈：尽管其前景广阔，但缺少一个能够支撑整个生态的操作系统，使得开发者无法充分发挥AI Agent的优势。</p>
-  <p>要实现AI Agent的广泛应用，开发者需要一个平台，使得他们能够在此基础上快速开发和部署智能代理。这不仅要求技术平台具备强大的兼容性，还需要能够支持跨设备、跨应用场景的操作能力。</p>
-  <p>通过简化开发流程，/dev/agents 希望能够帮助开发者专注于AI Agent的功能和用户体验，而不必为不同的硬件和操作系统做重复性优化，从而解决目前AI Agent碎片化的局面。</p>
-  <p>为了实现这一点，他们组建了相匹配的创始团队。从目前看，/dev/agents的团队有着丰富的操作系统开发经验。四位联合创始人的背景分别如下：</p>
-  <p>1）CEO David Singleton：曾任金融科技公司Stripe CTO，曾任谷歌Android产品工程副总裁。&nbsp;</p>
-  <p>2）CTO Ficus Kirkpatrick：曾任谷歌Android早期工程师；曾任Meta AR/VR副总裁，开发了Oculus Quest VR平台。&nbsp;</p>
-  <p>3）CPO Hugo Barra：曾任谷歌Android产品管理副总裁。曾任Meta Oculus副总裁；开发了第一代 Siri。&nbsp;</p>
-  <p>4）Nikolay Gueorguiev Getov：曾任谷歌Chrome OS CD，曾任Dropbox高管。&nbsp;</p>
-  <p>此外，/dev/agents还有两名员工。公司计划保持灵活运营，类似安卓早期的运营方式。他们预计产品的第一个版本将在明年年初至年中发布。</p>
-  <h2><strong>03 总结</strong></h2>
-  <p>虽然/dev/agents与Wordware在打造Agent操作系统上的思路有很大差异，但有一点可以确定，随着Agent的应用增加，Agent操作系统的需求正在变得愈发紧迫。</p>
-  <p>/dev/agents联合创始人兼首席执行官 David Singleton曾表示，“我们需要一个类似于安卓系统的人工智能时刻。”而现在我们正在无比接近这个时刻。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/dhWq62gZb5WbwEeNglUdFw" rel="noopener noreferrer nofollow" target="_blank">“乌鸦智能说”</a>，作者：智能乌鸦，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3073071648387975</id>
-            <title>汽车换芯片，到底贵在哪里？</title>
-            <link>https://www.36kr.com/p/3073071648387975</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3073071648387975</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 11 Dec 2024 00:05:54 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 汽车换芯, 消费电子化, 芯片迭代, 车主服务  
-<br><br>  
-总结: 小鹏汽车通过众筹模式实现了P7车型的芯片升级，尽管声称为业内首例，但实际上“换芯不换车”在汽车行业并不罕见。随着汽车消费电子化趋势的加剧，车载芯片的性能逐渐成为影响消费者购车决策的重要因素。车企在选择芯片时面临着消费电子产品快速迭代与汽车长周期更新之间的错配问题。换芯的高成本主要源于需要更换整个域控制器及相应的软件开发和适配工作。未来，随着跨界巨头的进入，汽车行业将面临更激烈的竞争与挑战。 </div>
-                        <hr>
-                    
-                    <p>上个月小鹏汽车众筹换芯片，P7车型三天达到众筹目标，老车主花4999元，即可将座舱芯片从高通820A升级到最新款8295。&nbsp;</p>
-  <p>虽然小鹏自称业内首例，但这个“首例”对应的其实是众筹模式。抛开众筹，“换芯不换车”在车圈不算少见。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_c5285590dd3c4de38a3724c1e0d6acfe@5888275_oswg652088oswg860oswg992_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>汽车换芯上一次引发大规模讨论是在2022年，时值老车型集体迎来系统卡顿，恰逢爆款芯片8155上车潮，车企纷纷祭出老车换芯服务。</p>
-  <p>更早之前，特斯拉就提供过老款硬件付费升级的服务，价格感人。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_3a6caf04383b4086bb3f6d6504530514@5888275_oswg113702oswg1080oswg404_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>无论哪种模式，安抚的都是消费者“换车赶不上换芯”的焦虑。伴随着消费者对汽车价值认知的重塑，座舱芯片正迭代出自己的“消费电子周期”。</p>
-  <h2><strong>01 汽车的消费电子化</strong></h2>
-  <p>随着新能源车渗透率急剧提高，绝大多数车企和消费者都慢慢感受到了汽车“消费电子化”的趋势。除了少部分倒车影像选配的日系车，即便是燃油车，也用上了越来越大的屏幕和越来越多的座舱功能。</p>
-  <p>当“软件定义汽车”的口号开始落地践行，软件在差异化中的位高权重，体现为频繁更换的操作系统和竞赛式的OTA更新：</p>
-  <p>理想两个OS去年总计OTA更新了11次，蔚来三个OS OTA更新了9次，小鹏有Xmart1-4和天玑系统XOS五个OS，OTA更新了29次[1]。</p>
-  <p>而在频繁OTA中不断进步的车载娱乐系统，让芯片算力愈发捉襟见肘。</p>
-  <p>今年年初，特斯拉在v12系统升级中，推送了Cybertruck同款全屏可视化UI，超过200万车主无缘全新界面，症结就是老芯片带不动新系统。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_9bb599027f1940a49873493cd8c70102@5888275_oswg267751oswg1080oswg675_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">特斯拉全屏可视化UI</p>
-  <p>特斯拉的座舱芯片经过两次大的迭代，第一次是2017年从<strong>英伟达Tegra 3</strong>换成<strong>英特尔Atom A3950</strong>，第二次是2021年从Atom A3950迭代到<strong>AMD Ryzen V1000</strong>系列。这次被门槛卡住的，就是搭载Atom A395的车型。</p>
-  <p>按照特斯拉的销量粗略估计，2018到2021年四年里，特斯拉卖出了204万辆车（配备Atom A3950），2022到2023两年卖出了315万辆车（配备V1000），按照5-6年的换车周期，还在使用Atom A3950车型的车主不在少数。</p>
-  <p>也就是说，如果算上更老一批车主，将近一半的车主无缘新系统更新。当AMD车主更新完系统开始使用新的界面，英特尔车主仅仅得到了一个“细微的修复”，背刺感瞬间拉满。</p>
-  <p>当越来越多车型进入换代周期，车载娱乐系统发挥越来越重要的作用，芯片性能给老车主带来的的心理落差也就越来越强。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_a0e973ba937e45b39cc1bf0be2628dee@5888275_oswg200069oswg1080oswg993_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>并非车企没有预见到芯片性能的落伍，恰恰相反，大部分车型在立项时，已经选择了当时市场上最好的芯片。</p>
-  <p>举例来说，蔚来ES8在2015年左右立项，座舱芯片选择了英伟达Tegra X1。这款芯片应用量最大的终端产品是任天堂的Switch，考虑到Switch“满屏的游戏性”，其性能可想而知。</p>
-  <p>但问题是，Tegra X1作为英伟达Tegra系列顶配，直接上了20nm制程（特斯拉用的Tegra 3是40nm），已然是2015年的蔚来能买到的最顶级的芯片。</p>
-  <p>与之类似，极氪首款量产车极氪001在2016年立项时，高通第二代智能座舱820A发布不久，也算是一代网红芯片。结果高通骁龙8155发布后，8155成了车企智能化绕不过的神秘代码，极氪大手一挥，花了三个小目标让2.5万名车主免费升级。</p>
-  <p>由于集中式电子电气架构的存在，新能源车可以直接改写运行在硬件上的软件，即“硬件预埋，软件升级”——先把算力堆上去，再通过OTA慢慢迭代。但这种消费电子化的思路代入汽车，却遇到了严重的错配问题。</p>
-  <p>由于汽车的出货量，芯片设计公司不会为汽车专门定制一款芯片，因此，无论是高通8155还是当下的8295，都是基于手机SoC“魔改”而来。AMD的V1000/V2000系列，同样基于PC的Zen架构CPU和Radeon GPU二次开发，可以有效摊薄研发成本。</p>
-  <p><strong>也就是说，芯片设计公司产品迭代的“基准”，其实是手机和PC这类消费电子产品的周期。这种情况下，消费电子1-3年的更新周期，与汽车5-8年的更新周期，出现了错配。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_b96d8bab654c45eca962d30900eb85ad@5888275_oswg1127210oswg1080oswg810_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">特斯拉Model S Plaid发布会，马斯克演示在车里玩《赛博朋克 2077》&nbsp;</p>
-  <p>Tegra 3曾让初代Model S用一块17英寸大屏取代了中控台上的所有仪表和开关，V1000实现了马斯克在车里玩《赛博朋克 2077》的目标。但激动之心过尽千帆，当初攻占市场的先进芯片，转头落后成了攻向车企自己的矛。&nbsp;</p>
-  <p>零部件残酷的淘汰赛在消费电子产业屡见不鲜，在汽车产业已经显露出狰狞。&nbsp;</p>
-  <h2><strong>02 换芯片贵在哪里？</strong></h2>
-  <p>2022年，面对蔚来车主免费换芯片的呼声，李斌当时在蔚来APP的车友群直言，20万辆车升级换芯得花费20亿元，确实扛不住。&nbsp;</p>
-  <p>按照李斌的口径，给一辆车换芯片的成本在1万元左右，与极氪当年平均每个1.2万元的数字也吻合。虽说高端芯片向来不便宜，但即便在两年前缺芯期间，8155在公开渠道的售价也“只有”1000元人民币左右。&nbsp;</p>
-  <p>换一个芯片成本就加个零，原因主要有两点：&nbsp;</p>
-  <p><strong>一是给汽车换一颗芯片，实际上是更换了搭载芯片的整个“域控制器”。</strong>以PC为例，虽然表述上是更换CPU，实际上是更换了包括CPU、内存、存储颗粒在内的整块主板，成本自然水涨船高。&nbsp;</p>
-  <p>由于PC的零部件高度通用化，只要主板能够兼容，更换CPU和显卡理论上只要有一把螺丝刀就行。但车载娱乐系统集成度非常高，座舱芯片与MCU、内存、电源管理芯片等电子元件被严谨地排布在一整块主板上，再打包进外壳严丝合缝的域控制器里。&nbsp;</p>
-  <p>在车型开发过程中，核心的座舱芯片会与周围的元器件和电路一并设计，根据一套相对固定的元件组合进行定制，座舱芯片换了，其他的零部件也要一并更换，牵一发而动全身。&nbsp;</p>
-  <p>蔚来针对最老款车型推出的方案里，不仅更换了8155芯片和对应的主板，还包含环视摄像头、车内摄像头、雨量光线传感器等一整套零部件，成本可想而知。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_106b0acc6d754b58906c3113a1a78974@5888275_oswg538891oswg1080oswg509_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">特斯拉的自动驾驶模块</p>
-  <p>小鹏众筹换芯不支持8155升级至8295，按照官方解释，一个重要原因是同时更换座舱控制器和智驾控制器，升级成本比820A升级8295反而高了1万元。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_77c36dd7d22b456b900bec162454f8e9@5888275_oswg123456oswg455oswg268_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>二是在单纯的硬件成本之外，还有相当规模的软件开发成本。</strong></p>
-  <p>虽然大体原则与PC类似，但如上文所说，车企拿到手的并不是一颗芯片，而是一个集成了主板、存储、通信等模块的域控制器。&nbsp;</p>
-  <p>这个过程中，车企主要聚焦于上层的算法与应用，而大部分的连接、通信与中间件都由大量的软件供应商完成。&nbsp;</p>
-  <p>用一个不太严谨的比方，当一款车型确定使用A芯片，那么与之配套的一系列软件都会基于A芯片开发。一旦更换为B芯片，那么对应的软件架构也需要为B芯片重新适配。同时，车企还要像新车研发一样，走完整个测试和验证流程。&nbsp;</p>
-  <p>小鹏的众筹换芯即便成功，车主也要等到2025年下半年才能顺利更换，原因就在于大量的开发和适配工作。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_2ead4b7012974483bca2544cb11305c3@5888275_oswg216002oswg960oswg680_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>PC零部件随拆随装的基础是高度通用性，汽车零部件相当于“八国联军”，每国军队色指挥系统自成一派，相互配合还得安排翻译。&nbsp;</p>
-  <p>再加上拆机、装机、后期测试花费的人力成本，于车企而言，换芯绝不算是好生意，更多是为了维护车主粘性提供的补偿性服务。&nbsp;</p>
-  <p>之前提供免费换芯的车企大多都有一个特点：销量低，干脆心一横当一笔营销费用花出去，换一个良心车企的美名。但车越卖越多，再良心的车企也要对着三张表仔细算算账了。&nbsp;</p>
-  <h2><strong>03 跨界巨头降维打击</strong></h2>
-  <p>2022年的8155上车潮，俨然一部高通座舱芯片推介大电影，看完全片的消费者或许记不清哪些车用上了8155，但起码都留下了一个模糊印象——不用高通芯片的车不是好车。&nbsp;</p>
-  <p>同一年，高通营收大涨31.68%，其中汽车业务增幅高达36%，8155显然立了大功。&nbsp;</p>
-  <p>汽车一直是高通营收增长最快的业务之一，但直到2017年以后，全球智能手机市场饱和，作为支柱业务的手机SoC挥别高增长，高通这才真正对汽车业务认真起来。&nbsp;</p>
-  <p>8155是这种认真的成果。和前代820A“魔改”自骁龙820类似，8155同样能在高通手机产品线中找到自己的“兄弟”骁龙855，但“魔改”的工程量大不相同。8295推出后，高通如入无人之境，惊醒了厮杀多年的老对手们。&nbsp;</p>
-  <p>英特尔拼起性价比，第一代SDV SoC目标替代几年前的8155和V1000；AMD V2000车规版本千呼万唤始出来；联发科0帧起手“业界首颗3nm”，还拉上英伟达做“座舱-智驾”联合方案。&nbsp;</p>
-  <p>2024年，从消费电子产业跨界而来的巨头们将座舱芯片杀成一片红海，反而是瑞萨、恩智浦这些老牌列强逐渐沉寂。智能座舱对高性能异构芯片的诉求，让传统汽车半导体公司多少有些不适应，却正中高通和联发科的下怀。&nbsp;</p>
-  <p>如果说四五年前，智能座舱还是一个新兴的概念，那么时至今日，当智能化深度介入消费者的购车决策，车企恐怕又要面对一个Wintel式的问题：<strong>新车型的研发周期需要与芯片设计公司的迭代节奏匹配。</strong></p>
-  <p>一颗座舱芯片在整车成本中的恐怕不到5%，但它势必会影响消费者的购车决策，继而影响车企的新车迭代节奏。&nbsp;</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241210/v2_4c0053456fad4af6986f5bfc9ea211b7@5888275_oswg345941oswg1080oswg1670_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>车规级芯片从发布到验证成熟上车一般需要4-5年，8155发布于2016年，开始量产上车是在2021年下半年；以此类推，8295发布于2019年，因此大规模上车在今年。&nbsp;</p>
-  <p>在这个语境下，“首发高通骁龙”的PPT争夺战，恐怕还将在汽车市场上演，这也意味着汽车对产品的定义权进一步丧失。&nbsp;</p>
-  <p>虽然各家芯片公司的产品策略和技术路线各有不同，但共同的思路都是与同代的移动/PC产品线共享核心与架构，继承了消费电子产品高性能的同时，大幅度摊薄研发成本。车企上马自研之前，恐怕都得对照着自己的销量，掂量掂量成本能不能摊下来。&nbsp;</p>
-  <p>过去的制造业，汽车与消费电子两大帝国隔着楚河汉界：&nbsp;</p>
-  <p>一个以稳定性和可靠性建立基石，车企在环环相扣的供应链中对零部件精挑细选，牢牢把持着硬件迭代节奏，在消费者漫长的购车周期中做技术的小步快跑；&nbsp;</p>
-  <p>一个以灵活性深挖护城河，新技术落地完全以消费者变化莫测的需求为导向，贯彻“用户即是上帝”的终极要义，在有限的产品生命周期中实施酷烈的优胜劣汰。&nbsp;</p>
-  <p>座舱芯片带着一众消费电子巨鳄杀入汽车供应链，肉体还桎梏于迭代不急不缓的车机，灵魂却换上了年年杀疯了的消费芯片。“软件定义汽车”借由座舱芯片正在初步显化，芯片可能不会定义汽车，但却开始被纳入汽车迭代的坐标系。&nbsp;</p>
-  <p>换芯与换车的选择，恐怕还将在未来的一段时间里，继续让购车者左右为难。&nbsp;</p>
-  <p><strong>参考资料：</strong></p>
-  <p>[1] 2023 OTA年榜：蔚小理特华谁最强，AutoLab</p>
-  <p>[2] 被中国车企神化的高通8155，车东西</p>
-  <p>[3] 国产车换芯，高通又赢麻了，远川研究所</p>
-  <p>[4] 特斯拉智能座舱迭代：它仍是最不一样的企业，2030出行研究室</p>
-  <p>[5] “常用常新”可不止软件：来自官方的车机硬件升级二三事，超级充电站</p>
-  <p>[6] 蔚来的2024款，到底是不“改了个寂寞”，电动星球</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/e7S66RmYPiCrHcHwh1nmJg" rel="noopener noreferrer nofollow" target="_blank">“远川科技评论”</a>，作者：何律衡，36氪经授权发布。</p>
                 ]]>
             </content:encoded>
         </item>
