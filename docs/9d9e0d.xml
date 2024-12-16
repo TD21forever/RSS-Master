@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/675fd26ccc17b0c5d33f4f8c</id>
+            <title>AI探索站 12月16日</title>
+            <link>https://m.okjike.com/originalPosts/675fd26ccc17b0c5d33f4f8c</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/675fd26ccc17b0c5d33f4f8c</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 16 Dec 2024 07:10:36 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    用 Flux Redux Fill 一键给饼饼换衣服 💜<br />实现娃娃穿衣自由<br />今天也是没有抢到限量的一天
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/675fb59b8fdd3dc43012d709</id>
             <title>AI探索站 12月16日</title>
             <link>https://m.okjike.com/originalPosts/675fb59b8fdd3dc43012d709</link>
@@ -16,7 +33,7 @@
             <content:encoded>
                 <![CDATA[
                     
-                    在500+小时的AI编程经验，加上一晚上的测试验证后，我把Cursor、Windsurf索引代码的逻辑搞清楚了！<br /><br />对新手来说，内容理解可能有难度，可以看看结论就好了，对于老手来说，我相信这篇内容对于你理解平时用AI编程工具时遇到的问题会有一些启发，你大概会能理解此前你为什么会遇到哪些问题。<br /><br />太长不看的话，你也可以看看下面最重要的结论：<br /><br />1、对新手而言，初始执行基础任务时：Windsurf &gt; Cursor Agent &gt; Cursor Composer normal<br />在agent模式下，执行初级任务的表现都优于常规的Cursor Composer模式，因为agent模式会基于任务理解代码库，找代码文件，读代码，再一步步执行操作帮你完成任务<br />Windsurf的agent，在理解任务和执行多步操作的能力上，调优效果优于Cursor Composer模式下的agent<br /><br />2、Agent模式的主要缺陷是不完整读代码文件，这会导致复杂项目和长代码文件的问题<br />Cursor agent模式下，默认读一个代码文件的前250行，如果不够，偶尔会主动续读，增加250行；在部分要求明确的情况，Cursor会执行搜索，每次搜索结果最多为100行代码。<br />Windsurf每次读代码文件200行，如果发现不够，会尝试再次读取，最多尝试3次，共读取600行。<br /><br />3、Cursor与Windsurf @ 单个代码文件时，执行逻辑不同，Cursor远优于Windsurf<br />Cursor中如果@ 某个代码文件，cursor会尽量完整读取（测试临界点2000行）<br />windsurf的 @代码文件和cursor的 @代码文件不是一个逻辑。在windsurf中你@某个代码文件仅仅是说你帮助windsurf找到了对应的文件。但是他并不会真的认为这个文件很重要而进行完整读取。<br /><br />4、在你能理解项目结构的情况下，Cursor中 @单一代码文件效果远优于 @codebase<br />如前面所说，如果你理解你自己在做什么，你要执行的任何和哪个代码文件有关，那么Cursor中 @ 你将获得好得多的效果。如果 @codebase，目前的判断是cursor会用自己的小模型执行对每个代码文件的理解并总结，他没有完整将必要的代码都纳入上下文。
+                    在500+小时的AI编程经验，加上一晚上的测试验证后，我把Cursor、Windsurf索引代码的逻辑搞清楚了！<br /><br />对新手来说，内容理解可能有难度，可以看看结论就好了，对于老手来说，我相信这篇内容对于你理解平时用AI编程工具时遇到的问题会有一些启发，你大概会能理解此前你为什么会遇到哪些问题。<br /><br />为了更好的阅读体验，我特意发了个公众号文章：https://mp.weixin.qq.com/s/Fl-K-tdRuhlT9I-bcLbtdg<br /><br />太长不看的话，你也可以看看下面最重要的结论：<br /><br />1、对新手而言，初始执行基础任务时：Windsurf &gt; Cursor Agent &gt; Cursor Composer normal<br />在agent模式下，执行初级任务的表现都优于常规的Cursor Composer模式，因为agent模式会基于任务理解代码库，找代码文件，读代码，再一步步执行操作帮你完成任务<br />Windsurf的agent，在理解任务和执行多步操作的能力上，调优效果优于Cursor Composer模式下的agent<br /><br />2、Agent模式的主要缺陷是不完整读代码文件，这会导致复杂项目和长代码文件的问题<br />Cursor agent模式下，默认读一个代码文件的前250行，如果不够，偶尔会主动续读，增加250行；在部分要求明确的情况，Cursor会执行搜索，每次搜索结果最多为100行代码。<br />Windsurf每次读代码文件200行，如果发现不够，会尝试再次读取，最多尝试3次，共读取600行。<br /><br />3、Cursor与Windsurf @ 单个代码文件时，执行逻辑不同，Cursor远优于Windsurf<br />Cursor中如果@ 某个代码文件，cursor会尽量完整读取（测试临界点2000行）<br />windsurf的 @代码文件和cursor的 @代码文件不是一个逻辑。在windsurf中你@某个代码文件仅仅是说你帮助windsurf找到了对应的文件。但是他并不会真的认为这个文件很重要而进行完整读取。<br /><br />4、在你能理解项目结构的情况下，Cursor中 @单一代码文件效果远优于 @codebase<br />如前面所说，如果你理解你自己在做什么，你要执行的任何和哪个代码文件有关，那么Cursor中 @ 你将获得好得多的效果。如果 @codebase，目前的判断是cursor会用自己的小模型执行对每个代码文件的理解并总结，他没有完整将必要的代码都纳入上下文。
                 ]]>
             </content:encoded>
         </item>
@@ -51,23 +68,6 @@
                 <![CDATA[
                     
                     跟 @李继刚 9年网友，初次见面，聊了半个小时，可能也是我了解LLM以来最受震动的半个小时… 继刚太有感染力了。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/675bf3b2139a099980557991</id>
-            <title>AI探索站 12月13日</title>
-            <link>https://m.okjike.com/originalPosts/675bf3b2139a099980557991</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/675bf3b2139a099980557991</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 13 Dec 2024 08:43:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    突然理解很多人觉得学习AI编程，或学习任何东西的难和苦了。<br /><br />我之前在用Cursor过程中也是遇到了一大堆问题，每天做项目每天解bug，但是这个过程我是始终觉得太有趣太好玩了。怎么能有这么好玩的事情，每次尝试不同路径的解法去处理掉一个难题后，都和在游戏里打败了一个大boss，通关了一般有快感。<br /><br />所以我很不理解为什么很多人说AI编程很难用，“你不会编程怎么debug”，“你不会编程怎么会上架AppStore”之类的问题，你不会你学不就好了么？<br /><br />但是当我最近接了些自己没那么感兴趣的产品的商单时，我就强烈感受到了这个痛苦，这玩意儿也太难用了，或者这东西怎么这么反人类。完全没有解题的快感和强烈的学习的冲动了。<br /><br />说到底，是因为我没那么相信要学的这个东西，我是为了赚钱而去的，我想尽快完成中间的过程，我只想要最终的结果，中间要历经的时间越长，对我越是一种痛苦。<br /><br />所以，认为某个东西难，痛苦的话，可以还需要转头看看自己的动机，去回望一下自己为何没法享受那个旅途。
                 ]]>
             </content:encoded>
         </item>
