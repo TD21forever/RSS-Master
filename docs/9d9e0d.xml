@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6764de0f8dc1346967fd4cbf</id>
+            <title>AI探索站 12月20日</title>
+            <link>https://m.okjike.com/originalPosts/6764de0f8dc1346967fd4cbf</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6764de0f8dc1346967fd4cbf</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 20 Dec 2024 03:01:35 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Anthropic 说 2025 年将是 Agentic 系统年<br /><br />所以发了一个 Agents 综述的文章，介绍了他们构建 Agentic 系统的一些发现。<br /><br />原文地址：https://www.anthropic.com/research/building-effective-agents<br /><br />非常适合入门看，这里是大致的笔记：<br /><br />1. 代理系统的基本概念<br />- 工作流(Workflows):通过预定义的代码路径编排LLM和工具<br />- 代理(Agents):LLM动态指导自己的流程和工具使用<br /><br />2. 何时使用代理系统<br />- 建议从最简单的解决方案开始<br />- 仅在必要时增加复杂性<br />- 需权衡延迟和成本与任务性能的关系<br /><br />3. 框架使用建议<br />- 常见框架:LangGraph、Amazon Bedrock、Rivet、Vellum等<br />- 建议开发者从直接使用LLM API开始<br />- 使用框架时需理解底层代码<br /><br />4. 主要构建模式<br /><br />A. 基础构建块:增强型LLM<br />- 具备检索、工具使用和记忆能力<br />- 通过Model Context Protocol实现工具集成<br /><br />B. 工作流模式:<br />- 提示链(Prompt chaining):将任务分解为连续步骤<br />- 路由(Routing):对输入分类并导向专门任务<br />- 并行化(Parallelization):<br />  - 分段:将任务分解为并行子任务<br />  - 投票:多次运行获取不同输出<br />- 编排者-工作者(Orchestrator-workers):中央LLM分配任务<br />- 评估者-优化者(Evaluator-optimizer):循环评估和改进<br /><br />C. 代理模式:<br />- 可自主规划和操作<br />- 需要环境反馈<br />- 适用于开放性问题<br /><br />5. 实践应用领域<br />- 客户支持:结合对话流程和工具集成<br />- 编码代理:可验证且结构化的问题领域<br /><br />6. 工具设计原则<br />- 注重工具文档和接口设计<br />- 考虑模型使用便利性<br />- 进行充分测试和迭代<br /><br />7. 核心建议<br />- 保持设计简单性<br />- 确保透明度<br />- 精心设计代理-计算机接口(ACI)<br />- 仅在简单方案不足时增加复杂性<br /><br />这篇文章为开发者提供了构建代理系统的实用指南,强调了从简单开始、逐步优化的方法论。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/676430439c67bea07c20b07b</id>
             <title>AI探索站 12月19日</title>
             <link>https://m.okjike.com/originalPosts/676430439c67bea07c20b07b</link>
@@ -34,23 +51,6 @@
                 <![CDATA[
                     
                     卧槽，这个真牛批了，无限画布AI计算机<br /><br />tldraw computer，一台AI计算机，没有代码，只有自然语言和流程组件。<br /><br />支持流程分支、切换和循环，而且项目还能变成模版跟其他人共享。<br /><br />Andrej Karpathy 也给了很高评价<br /><br />试了一下没找到地方交钱，还是免费的？<br /><br />这里尝试：https://computer.tldraw.com/
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/67630e238d6dd8c09c21eb56</id>
-            <title>AI探索站 12月18日</title>
-            <link>https://m.okjike.com/originalPosts/67630e238d6dd8c09c21eb56</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67630e238d6dd8c09c21eb56</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 18 Dec 2024 18:02:11 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    和ai攻击型领导聊天
                 ]]>
             </content:encoded>
         </item>
