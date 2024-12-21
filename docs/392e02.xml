@@ -5,6 +5,407 @@
         <link>https://www.36kr.com/information/technology</link>
         
         <item>
+            <id>https://www.36kr.com/p/3087654394362243</id>
+            <title>刚刚，OpenAI放出最后大惊喜o3，高计算模式每任务花费数千美元</title>
+            <link>https://www.36kr.com/p/3087654394362243</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3087654394362243</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 21 Dec 2024 05:00:47 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: OpenAI, o3模型, ARC-AGI, 推理能力  
+<br><br>  
+总结: OpenAI最近发布了新的推理系列模型o3和o3-mini，其中o3是o1系列的继任者，具备更强的推理能力和准确率。o3模型在ARC-AGI基准测试中首次突破，最低性能达到75.7%，高计算资源下可达87.5%。尽管o3在某些任务上表现出色，但仍未达到AGI水平，且在简单任务上存在失败。o3-mini则是一个高效的版本，专注于提升推理速度和降低成本，适合编程应用。OpenAI计划在未来进行更多的安全测试，并邀请研究人员申请测试。 </div>
+                        <hr>
+                    
+                    <p>刚刚，OpenAI 为期 12 天的发布迎来尾声。如外界所料，新的推理系列模型 ——o3 和 o3-mini 成为这次发布的收官之作。</p>
+  <p>o3 是 o1 系列模型的继任者。这类模型的特点是让模型在回答问题之前花更多时间思考（推理），从而提高回答的准确率。不过，OpenAI 在命名上跳过了 o2。据 The Information 报道，这么做是为了避免版权问题，因为英国有家电信公司名叫 O2，可能引起混淆。Sam Altman 在今天下午的直播中证实了这一点。</p>
+  <p>事实上，从昨天开始，OpenAI 就已经开始预热这个模型。而且已经有开发者在网上找到了 OpenAI 网站上对 o3_min_safety_test 的引用。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_25a6948b4f904ad0a63a005675e6cc3c@000000_oswg422448oswg997oswg1048_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>也有人早早就想看看 o3 究竟有何真本事，能否匹敌谷歌昨天发布的 Gemini 2.0 Flash Thinking。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_a96fe6795cd4428a8aa940f6b2babf90@000000_oswg532127oswg870oswg971_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>现在，和传言的一样，o3 和 o3-mini 来了！遗憾的是，o3 系列模型并不会直接公开发布，而是会先进行安全测试。Sam Altman 也指出今天不是发布（launch），只是宣布（announce）。</p>
+  <p>Sam Altman 提到，他们计划在一月底左右推出 o3-mini，并在不久后推出完整的 o3 模型。</p>
+  <h2><strong>o3：突破 ARC-AGI 基准，博士级问题求解能力</strong></h2>
+  <p>首先，在 12 只圣诞青蛙聚集的圆桌前，ARC Prize Fundation 总裁 Greg Kamradt 参与了对 o3 模型的介绍。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_944d3601096c4367be704e2d8d6e497a@000000_oswg635735oswg1080oswg599_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>ARC Prize Fundation 是一个非营利组织，旨在「通过基准测试来成为实现 AGI 之路的北极星」。该组织的首个基准 ARC-AGI 已经提出了 5 年时间，但一直未被攻克。</p>
+  <p>直到现在，Kamradt 宣布 o3 已经在该基准上达到了优良水平，成为首个突破 ARC-AGI 基准的 AI 模型。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_ed13492b743d4869af60588cb6e886b4@000000_oswg95339oswg1080oswg561_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>据介绍，o3 系列模型在 ARC-AGI 基准上的最低性能可达到 75.7%，而如果让其使用更多计算资源思考更长时间，o3 更是可以达到 87.5% 的水平。</p>
+  <p>在 ARC-AGI 基准中，AI 需要根据配对的「输入 - 输出」示例寻找规律，然后再基于一个输入预测输出，下图展示了一些例子。参加过毕业季招聘或公务员考试的人或许对此类图形推理问题并不陌生。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_daf223a074554b53a12c742d354c0dfe@000000_oswg537428oswg1080oswg590_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Greg Kamradt 也顺势宣布开源了一个任务数据集：https://github.com/arcprizeorg/model_baseline</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_84d71169c72a4d19b33ea0ec92d4be1b@000000_oswg115398oswg863oswg599_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>ARC-AGI 发起者、Keras 之父 François Chollet 在测试报告中写道，「（o3 系列模型）在高效率模式下取得的 75.7% 的分数符合 ARC-AGI-Pub 的预算规则（成本 &lt;10000 美元），因此有资格在公共排行榜上排名第一！而它们在低效率模式下取得的 87.5% 的分数。虽然成本高昂，但仍然表明新任务的性能确实随着计算量的增加而提高（至少达到了这个水平）。」</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_3bac2a39b9824f5e9865f91a0eedbd67@000000_oswg264739oswg1080oswg1297_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>报告中还写道，尽管每项任务的成本很高（o3 在低计算量模式下每个任务需要 17-20 美元，高计算量模式下每个任务数千美元），但这些数字不仅仅是将暴力计算应用于基准测试的结果。OpenAI 的新 o3 模型代表了人工智能适应新任务的能力的重大飞跃。这不仅仅是渐进式的改进，而是真正的突破，标志着与 LLM 之前的局限性相比，人工智能能力发生了质的转变。o3 能够适应以前从未遇到过的任务，可以说在 ARC-AGI 领域接近人类水平的表现。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_88b69d06ea474449b93d21f756075d5a@000000_oswg500811oswg1080oswg1425_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_0777ec5144be427ea63b3679331ac1c6@000000_oswg97156oswg1080oswg436_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>不过，报告也指出，ARC-AGI 并不是对 AGI 的严峻考验，通过 ARC-AGI 并不等于实现 AGI。「事实上，我认为 o3 还不是 AGI。o3 在一些非常简单的任务上仍然失败，这表明其与人类智能存在根本差异。」François Chollet 表示。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_67227b5581ca422a8f2e524a22551878@000000_oswg601057oswg1080oswg1397_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>OpenAI o3 消耗数千美元，生成数百万个 token 也没能解决的问题。</p>
+  <p>ARC Prize Fundation 总裁 Greg Kamradt 表示，明年还会与 OpenAI 一起开发下一代基准。不过，从早期数据点来看，即将推出的 ARC-AGI-2 基准测试仍将对 o3 构成重大挑战，即使在高计算量下，其得分也可能会降低到 30% 以下（而聪明人在不经过任何培训的情况下仍然能够得分超过 95%）。</p>
+  <p>在报告中，François Chollet 还分析了为什么 o3 的分数可以提升那么多。他写道，「LLM 就像一个向量程序的存储库。当被提示时，它们会检索你的提示词映射到的程序，并在当前的输入上『执行』它。LLM 是一种通过被动接触人类生成的内容来存储和操作化数百万有用小程序的方法。」</p>
+  <p>「只要有足够的合适训练数据，这种『记忆、检索、应用』的模式就能在任意任务上达到任意水平的技能，但它无法适应新情况或即时学习新技能（也就是说，这里并没有涉及到 fluid intelligence）。这一点在 LLM 在 ARC-AGI 上的表现中得到了体现，ARC-AGI 是专门设计用来衡量对新事物适应能力的基准测试 ——GPT-3 得分为 0，GPT-4 得分接近 0，GPT-4o 达到了 5%。将这些模型扩展到可能的极限，并没有使 ARC-AGI 的得分接近几年前基本的暴力枚举就能达到的水平（高达 50%）。」</p>
+  <p>「要适应新事物，你需要两样东西。首先，你需要知识 —— 一套可复用的函数或程序库。LLM 在这方面拥有的资源绰绰有余。其次，你需要在面对新任务时，能够将这些函数重新组合成一个全新的程序 —— 一个能够模拟当前任务的程序。这就是程序合成。LLM 长期以来缺乏这一特性。而 o 系列模型解决了这个问题。」</p>
+  <p>「关于 o3 模型的具体工作原理，目前我们只能进行一些推测。o3 模型的核心机制似乎是在 token 空间内进行自然语言程序搜索和执行 —— 在测试时，模型会在可能的思维链空间中搜索，这些思维链描述了解决任务所需的步骤，这种方式可能与 AlphaZero 风格的蒙特卡洛树搜索（Monte-Carlo tree search）颇有相似之处。在 o3 的情况下，搜索可能由某种评估模型引导进行。值得注意的是，DeepMind 的 Demis Hassabis 在 2023 年 6 月的一次采访中暗示，DeepMind 一直在研究这一概念 —— 这项工作已经酝酿了很长时间。」</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_5be572dda68049acad42a2a21424ff80@000000_oswg112128oswg979oswg1351_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_4565a0d07910474ea85a35be4133a682@000000_oswg226501oswg979oswg1419_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>详细分析参见：https://arcprize.org/blog/oai-o3-pub-breakthrough</p>
+  <p>除了解决 ARC-AGI 这样的「IQ」 问题，o3 的编码能力也比之前的 o1 系列明显更胜一筹。在 SWE-bench Verified 基准上，o3 的准确率约为 71.7%，比 o1 模型高出 20% 以上。在 Competition Code 中，o3 获得了难以置信 2727 Elo 得分，而 o1 仅为 1891。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_817a6a1f89e4420dafff0919463a6588@000000_oswg96546oswg966oswg546_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>此外，o3 在竞赛数学（Competition Math ）上的准确率达到 96.7%，在 GPQA Diamond （该基准衡量模型在博士级科学问题上的表现）上的准确率达到 87.7%，比之前的 o1 表现（78%）高出近 10%。总结来看，o3 在这两项基准测试上都达到了最佳表现。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_37728ecc563a4746995295d68201b580@000000_oswg98231oswg933oswg505_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>o3 在 OpenAI 研究人员认为最严格的基准之一（EpochAI Frontier Math）上的表现如下表所示。该数据集由新颖的、未发表的以及非常难、极其难的问题组成。</p>
+  <p>OpenAI 高级研究副总裁 Mark Chen 特别强调了，即使是专业数学家也需要几个小时甚至几天才能解决里面的问题之一。而今天，所有产品在这个基准上的准确率都低于 2%，o3 的准确率可以超过 25%。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_5580467542c74aba850993060d608278@000000_oswg39626oswg745oswg494_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>o3-mini：高性能低成本，非常适合编程</strong></h2>
+  <p>o3 mini 是一个更经济高效的 o3 版本，专注在提升推理速度、降低推理成本的同时兼顾模型性能。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_f7bd0ee3db6b467093ff1a5260c309f7@000000_oswg657100oswg1080oswg616_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>介绍 o3-mini 的是参与训练的 OpenAI 研究者 Hongyu Ren</p>
+  <p>它支持三种不同的推理时间选项 —— 低、中、高。</p>
+  <p>与 o1 相比，o3-mini 在 Codeforces 上的性能具有显著的成本效益，这使其成为一个非常适合用来编程的模型。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_3a1e134c980e4eabbe5b41d96df36e68@000000_oswg132046oswg1080oswg339_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在数学问题上，o3-mini (low) 实现了与 gpt-4o 相当的低延迟。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_4042a5de46304b22af854bdb9fec2313@000000_oswg103060oswg1080oswg468_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>o3-mini 上所有的 API 特性以及相应的能力表现如下：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_c6674e564e8b4345a2bc54d4cebeda83@000000_oswg222534oswg1061oswg737_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Hongyu Ren 现场演示了几个示例。首先，针对 o3-mini (high)，任务是使用 Python 语言编写一个本地服务器，其有一个简易的用户 UI，同时可以将用户给出的文本消息通过 API 传输给 o3-mini 的 medium 选项，然后获取得到的代码，将其保存到桌面的一个临时文件中，然后在一个新的 Python 终端中执行该文件。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_14314d5edab048f1a562caaeab298bbf@000000_oswg104968oswg596oswg278_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>38 秒后，o3-mini 生成了结果代码：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_996df65ff7f841e1b364b408e38e5fbe@000000_oswg180943oswg587oswg752_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>接着，Hongyu Ren 直接将其复制到了一个 server.py 文件中，然后直接运行了它。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_e49197785b2e48e5a61f971cbdc89db6@000000_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>之后，他尝试了使用这个服务器：print openai 并随机给出一个数，简单任务，当然很成功。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_f7aef47beac54c06a0c2ff3c2b3e4287@000000_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>接下来他们上了点难度：在相当困难的 GPQA Diamond 数据集（这是一个博士水平的科学问题基准）上，生成一个代码来评估 o3-mini 的 low 模式，需要下载 https://openaipublic.blob.core.windows.net/simple-evals/gpga_diamond.csv</p>
+  <p>最后，使用前面编写的 UI 界面，o3-mini 用了一定时间完成了这个任务，最终得到 low 模式下的 o3-mini 在 GPQA Diamond 数据集上的准确度为 61.62%。也就是说，他们成功让模型编写了一个测试该模型自身的脚本。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_78c984bfb2254a7fb0e06c3674c9bc57@000000_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Mark Chen 打趣地表示明年要让 AI 演示一下自我提升，但这个说法似乎不够 PR，让 Sam Altman 赶忙说了一句：「Maybe not.」</p>
+  <p>另外，他们也给出了在 GPQA Diamond 数据集上的更多测试结果。可以看到，o3-mini (low) 的结果与上面演示示例得到的结果基本一致，而 o3 满血版更是可以得到 87.7 的高准确度分数。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_d8e0b5db6e3f4931a83211e9ca3bdc66@000000_oswg61663oswg669oswg384_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>如何申请测试 o3 和 o3-mini</strong></h2>
+  <p>Mark Chen 表示，OpenAI 已经做了大量内部安全测试，而现在他们正在推进外部安全测试。从即日起，想要参与的测试者可以申请测试 o3-mini，至于 o3，就连测试员也还得继续等待。</p>
+  <p>早期访问申请现已在 OpenAI 网站上开放，并将于 2025 年 1 月 10 日关闭。</p>
+  <p>申请地址：https://openai.com/index/early-access-for-safety-testing/</p>
+  <p>申请者必须填写一份在线表格，表格中会要求他们提供各种不同的信息，包括之前发表的论文链接及其在 Github 上的代码库，并选择他们希望测试的模型（o3 或 o3-mini）以及计划使用它们做什么。</p>
+  <p>选定的研究人员将被授予访问 o3 和 o3-mini 的权限，以探索它们的能力并为安全评估做出贡献，不过 OpenAI 的表格提示称，o3 将在几周内无法使用。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_53cfd5c214714bc592614964fa3c8e43@000000_oswg26920oswg790oswg175_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>OpenAI 表示他们将滚动审核申请，并立即开始选拔申请人。</p>
+  <p>最后，Mark Chen 也简单介绍了他们的一种新的安全评估方法：deliberative alignment，即审议式对齐。这是一种直接教授模型安全规范的新范式，并可训练模型在回答之前明确回忆规范并准确地执行推理。他们使用了这种方法来对齐 OpenAI 的 o 系列模型 ，并实现了对 OpenAI 安全政策的高度精确遵守，并且这个过程无需人工编写的思路或答案。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_a2deaf061bbd4cbaba59115d030ab03a@000000_oswg74602oswg680oswg591_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>感兴趣的读者可查看 OpenAI 的相关论文。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_a5e0b151e022474ba3530868aa1fea2c@000000_oswg51168oswg860oswg199_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>论文标题：Deliberative Alignment: Reasoning Enables Safer Language Models</p>
+  <p>论文地址：https://assets.ctfassets.net/kftzwdyauwt9/4pNYAZteAQXWtloDdANQ7L/978a6fd0a2ee268b2cb59637bd074cca/OpenAI_Deliberative-Alignment-Reasoning-Enables-Safer_Language-Models_122024.pdf</p>
+  <p>所以，总结起来，12 天发布的最后一天，OpenAI 真正发布出来的东西只有一篇论文，更多是兑现期票。另外，我们还是不知道 o3 是否能解答最难的高考数学题，但至少从 OpenAI 的描述来看，答案应该是乐观的。</p>
+  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650948357&amp;idx=1&amp;sn=1888f18146412d07c97e0969020ff2a5&amp;chksm=859088e809c6a33d06b865dd6fd4cdaea67302164f76afb86d9c8150cfbb77c8628395b3ae38&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“机器之心”（ID：almosthuman2014）</a>，作者：机器之心，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3088086092839298</id>
+            <title>苹果没能做成的这个功能，成了国产厂商的新杀手锏</title>
+            <link>https://www.36kr.com/p/3088086092839298</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3088086092839298</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 21 Dec 2024 04:57:45 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <OPPO, 轻 App, 服务直达, 苹果生态>
+<br>
+<br>
+总结: 今年，国产 Android 厂商如 OPPO 开始探索如何打通苹果生态，实现文件互传和镜像操作，甚至推出类似 AirDrop 的功能。苹果的轻 App 功能在发布后未得到重视，用户几乎无法主动获取，导致开发者积极性低下。相比之下，支付宝和华为的服务直达功能更具实用性，能够直接调用小程序和元服务。随着人工智能的发展，未来可能实现无需下载应用的服务，真正实现服务的即取即用。文章认为，App 的消亡是必然趋势，服务直达将引领未来的交互方式。 </div>
+                        <hr>
+                    
+                    <p>今年以来，不少国产 Android 厂商都在捣鼓如何「打通」苹果生态，实现文件互传、镜像操作等等操作，有些甚至比苹果自家自己做得更好。</p>
+  <p>其中值得说道说道的，或许是 OPPO 这家，主打类似 AirDrop 的体验，甚至还做了类似 iPhone「互碰互传」的功能。</p>
+  <p>原本我也不太相信 OPPO 能神奇地「破解」封闭的苹果生态，但当我把 iPhone 和「OPhone」头头相抵后，iPhone 居然真的有所反应，弹出了一个「轻 App」的窗口，可以直通「O+ 互联」应用连接两台手机，省去平时互传时需要多个触控步骤。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_5cac0df00c804c5898f8fd1fc15b296a@1200352198_oswg75393oswg903oswg1024_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这个实现方式有点出乎我的意料，没想到 OPPO 居然把这个可能苹果自己都已经遗忘的功能，用来「曲线救国」，实现一碰互传。</p>
+  <p>发布 4 年就冷了 4 年，苹果这个轻 App 到底行不行？</p>
+  <h2><strong>被遗忘的轻App</strong></h2>
+  <p>「轻 App」在 4 年前的 iOS 14 上首次亮相，允许 iPhone 用户使用 App Store 中已上架应用的部分功能，而不需要下载一个完整的应用。</p>
+  <p>听起来有点像微信小程序，其实使用场景也比较类似，平时我们都用微信扫码骑共享单车、点餐，而轻 App 除了扫码之外还有 NFC 一碰呼出的方式。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_78b5e613817649a8b1326e837d36c9b6@1200352198_oswg476010oswg1024oswg573_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>不过，与用户可以主动搜索、选取的微信小程序不同，用户几乎无法主动从 iPhone 中主动搜索和获取想用的轻 App。</p>
+  <p>从苹果对这个功能的命名来看，App Clips（应用片段）的定义是从完整的 App 中「剪」出来了部分功能提供给用户，而不是在尽可能小的应用体积内实现更全面的功能。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_e48fc9fff2c2496cbe656d5884c01a3c@1200352198_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>因此，这个功能更适合一些线下场景，比如在一些私人开设的小餐馆中，刷出对应的美团界面进行点餐，又或者在超市中快速获取商品相关信息和评价。</p>
+  <p>但如果你想找些类似文档、智能问卷的轻 App 来轻办公，或者想人在家中坐就想用轻 App 来点杯咖啡，这些都不是它能完成任务。</p>
+  <p>毕竟苹果的收入中很大一笔流水就是通过 App Store 抽成，这是轻 App 无法实现的，为了避免用户只用轻 App 而不下完整 App，苹果对轻 App 的权限卡得很死，几乎不能获取任何数据和权限，这也无疑打击了开发者的积极性。</p>
+  <p>加上轻 App 只适用于 iPhone 生态，开发者和商家的适配积极性也不高。国内有更强适用性并且已经完全发育的微信小程序生态，国外的情况稍好一点，但总体也处于不温不热的尴尬地带。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_40fc6c1751c64dd5a7b0995b58a88430@1200352198_oswg221446oswg1024oswg387_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>对于这个食之无味弃之可惜的功能，苹果其实也并不算太上心，发布后的 4 个 iOS 版本中，苹果都几乎没有对这个功能进行任何优化和更新，也鲜少见到相关的宣传和推广行动。</p>
+  <p>强如苹果都没能做起来这个理念，却在今年，被两家国内的头部大厂捡起发力了。</p>
+  <h2><strong>国产版「轻App」，背后都是服务直达</strong></h2>
+  <p>你用过支付宝「碰一下」支付了吗？</p>
+  <p>结账的时候，只需要解锁手机碰一碰相关的设备或者 NFC 标签，就能快速使用支付宝完成支付，无需像以往那样打开应用出示付款码，支持 iPhone、Android 和华为原生鸿蒙手机。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_1452b12d771e49dea52c36b499f372c3@1200352198_oswg50338oswg1024oswg682_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图源：极目新闻</p>
+  <p>原理和普通的 NFC 支付类似，只是走的是支付宝而不是电子银行卡。</p>
+  <p>表面看起来，像是支付宝想以此实现对微信支付的「弯道超车」，但支付宝的野心不仅于此。</p>
+  <p>实际上，「碰一下」不局限于支付，一些餐厅点餐也可以「碰一下」桌上的标签，直接跳转点餐界面；一些小区的门禁也配备了 NFC 标签，用户「碰一下」就能开门。支付宝还在探索「碰一下」进景区、「碰一下」住酒店等等场景。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_c786e42821e043828e93459d02e57244@1200352198_oswg630572oswg1024oswg683_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>看起来是不是很熟悉？没错，这和上文提到的苹果轻 App 其实惊人相似，除了支付，其实都是直接打开相应的支付宝小程序和对应页面。</p>
+  <p>有意思的是，由于苹果严格的 NFC 权限政策，iPhone 上的「碰一下」是靠呼出支付宝「轻 App」再跳转完整应用实现的。</p>
+  <p>虽然国民度极高，但支付宝在大家的眼中更像是一个金融、理财的电子钱包，即使有着相当丰富的小程序生态，我们在日常衣食住行中，也还是倾向于打开更生活化一点的微信。</p>
+  <p>根据 Quest Mobile 统计数据，微信小程序月活在 9 亿以上，而支付宝小程序月活在 6.5 亿附近浮动；更显著的差距是，支付宝小程序的交易次数仅为微信小程序的 16%。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_5280afc9bd2c4a619c041aa6f9f74b71@1200352198_oswg47916oswg960oswg578_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">Quest Mobile</p>
+  <p>所以，「碰一下」更像是支付宝力图转型一步棋，通过更便捷的「服务直达」方式，让更多人愿意去使用支付宝小程序，形成习惯，扩展支付宝的服务边界。</p>
+  <p>为了避免重蹈轻 App 的覆辙，支付宝下足力气推广「碰一下」服务，用户方面大量派发减免优惠，商家方面则主动上门推广并免费安装设备，付款现阶段不仅不抽佣金，还提供一定的奖励金。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_3d6a115735f6427f9560c1ebeb8b0b38@1200352198_oswg95987oswg949oswg1024_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>由于依托的就是自己的小程序生态，支付宝不用担心服务直达会发生和「完整 App」左右互搏的两难境地。</p>
+  <p>而对于另一家也在做「轻 App」的商家——华为来说，其鸿蒙「元服务」的情况要更复杂一点。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_9589c950028b4f1a8e4a361a7864ce70@1200352198_oswg397490oswg1024oswg634_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>元服务就像是鸿蒙系统的「小程序」，或者 Android 联盟前几年在搞的「快应用」，用户不需要下载安装整个 App，直接点开就能使用。</p>
+  <p>和苹果轻 App 不同的是，在华为应用商店中，有一个专门的子页面供用户去寻找、获取相应的元服务。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_06dd53fde929453da6f43a0fd6c52e2d@1200352198_oswg72694oswg1024oswg735_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>比较好用的是，当用户在全局搜索输入类似「电影票」「话费」「快递」等具体的行为，系统会自动建议相关的元服务，用户即点可以即用，无需提前安装 App。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_fab0893c16ad4e6db7103da3437f8c1c@1200352198_oswg38329oswg1024oswg792_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>乍一看，元服务好像和华为自己参与建设的「快应用」没什么区别，但对比使用，就能发现一个细节。</p>
+  <p>在快应用中，用户需要分别登录每一个平台的账号，才能使用。也就是说，点开美团首先要输入美团账号登录，点开猫眼买票要登录猫眼账号，点开快递 100 要输入手机号。</p>
+  <p>而所有的元服务，都能直接拉取华为账号的信息，一点就能授权，无需逐个应用逐个应用地输入账号密码。</p>
+  <p>不止于此，华为还表示会将元服务集成到系统 AI 助手「小艺」之中，以后跟小艺说一声「买飞机票」，它就能快速调取相关的元服务卡片，帮助用户快速买票。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_b7ac67e0932a4921930a103ccda1e58e@1200352198_oswg240035oswg1024oswg329_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>由于华为原生鸿蒙应用生态还在发育当中，开发者可以同步开发完整应用和元服务，又或者在应用上线之前先推出开发难度更低的元服务过渡，并且还能快速将现成的的微信小程序进行转换。</p>
+  <h2><strong>App的消亡</strong></h2>
+  <p>12年前，著名设计公司「青蛙设计」的创意总监 Scott Jenson，就大胆做出预言：<strong>未来 App 必然消亡。</strong></p>
+  <p>在 Jenson 的设想中，未来会有一种智能发现服务，当你与现实世界交互，手机就能实时通过蓝牙、NFC、GPS 和 Wi-Fi 等方式，知道你现在需要什么样的服务，通过轻量级应用的方式提供。</p>
+  <p>没错，这位创意总监，可以说是提前 8 年预判了苹果会推出的功能。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_60deddccfdc548b9b585ee4bfefb201c@1200352198_oswg86386oswg1024oswg683_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>当然，Jenson 也认为，这将会是一个非常漫长、渐进式的功能。12 年后的今天，App 依旧贯穿了我们工作生活的方方面面，是我们数字交互的核心体验。</p>
+  <p>但今年开始，乘着人工智能的东风，更多人在探索直达服务交互的可能性。</p>
+  <p>例如野心不小的 AI 设备 Rabbit R1，完全抛弃应用和触控交互界面，通过让 AI 模型在后台服务器模拟人类操控应用的形式，让用户张张嘴就能实现所有服务。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_aeac26402eb9428ca88b3c288bb490c8@1200352198_oswg431247oswg1024oswg576_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>但现实和理想不小的差距。Rabbit R1 不仅受到了 AI 能力水平的限制，还容易受到 App 「你是人类吗」验证的阻挠，因此基本不可用。</p>
+  <p>不过，失败的是 Rabbit R1 这个产品，更多厂商借助 AI 的力量，在探索如何用语言、动作等<strong>「自然交互」</strong>，取代目前手机操作系统和 App 的<strong>「图形交互」</strong>。</p>
+  <p>文字、图片生成已经卷得大差不差，今年的手机、AI 厂商都开始捣鼓<strong>「手机 AI 智能体」</strong>，用户用口头语音发出指令，AI 就能模仿人类操作手机。</p>
+  <p>比如，安装了智谱 AutoGLM 大模型的手机，告诉它一句「帮我打卡微博超话」，手机就会像「自动驾驶」一般自动打开微博进行一系列琐碎的操作。像国内几大手机品牌，以及苹果，都在探索类似的 AI 能力。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_9448b8279a964774aad77a864fc52050@1200352198_oswg298772oswg720oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>只是目前的 AI 智能体，虽然确实能一嘴直达服务，但再怎么发展，都无法突破本地应用这个天花板，无法实现更多可能性。</p>
+  <p>这时候，就该让轻 App、元服务这些功能大显身手了。</p>
+  <p>其实早在 10 年前的 iOS 8 上，苹果已经开始布局基于地理位置的服务直达能力，靠近星巴克、Apple Store、火车站等，对应的 App 就会自动在锁屏弹出，现在也演变到靠近机场，直接一步到位推送登机牌。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_c098abc5c3334836a8861fde25237e52@1200352198_oswg33426oswg750oswg662_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而结合了 AI 意图识别能力，轻 App 更适合这种线下的场景，还能减少推广难题。</p>
+  <p>我们大可以畅想一下未来的 AI 终端：不需要下载任何应用，而是根据你的场景，自动出现服务：出门上班自动后台预加载好共享单车的轻应用；走进餐馆门口就奉上菜单和网友点评；博物馆参观时，自动推送面前藏品的介绍卡片......</p>
+  <p>如果用户要主动使用某些服务，则可以利用自然语言与 AI 交互，让系统级 AI 自动选取海量内容库中最适合的一个，并以智能体的形式，自动完成用户的要求。</p>
+  <p><strong>也就是说，手机无需安装任何 App，但能通过 AI 快速调用现存所有平台的服务，真正变成「全能」。</strong></p>
+  <p>要实现这种服务即取即用的形式，还需要一个能登录、贯穿所有服务的系统级账号，这也是苹果、华为、支付宝以及微信这些一体性较强的生态的优势。</p>
+  <p>「元服务」集成于「原生智能」小艺助手，已经能实现一小部分上述的场景；而支付宝今年推出的智能体「支小宝」，在支付宝小程序生态中也颇如鱼得水。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_9a30ab6f42e04bb99f7ef3dbc74b6c69@1200352198_oswg444768oswg1024oswg506_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>苹果有系统级的 Apple 智能，有轻 App，但目前还没看出这家科技巨头结合两者的想法。</p>
+  <p>在 App Store 诞生 16 年后的今天，我们手头上的 App 越来越臃肿，一个听歌的 App 能来交友，一个看天气的 App 能用来买东西......这不仅挤占了我们手机的物理资源，也让交互变得更复杂，并且 App 和 App 之间仿佛一个个孤岛，数据难以互通。</p>
+  <p>苹果的应对方式是围绕「服务直达」做文章：实时活动和桌面组件，让你不需要打开 App 也能获取信息；能力更强的快捷指令，将复杂的操作减少到一次点击；以及「去 App」化的轻 App ，本身也被苹果寄托了类似的愿景。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_027c90bdc5804c93830d42c7b14d5602@1200352198_oswg69258oswg1024oswg458_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>App 终将成为历史，App Store 也会有「倒闭」的那一天，服务直达更有可能通向自然交互的未来。轻 App 可以说是起了个大早，至于能不能赶上这波交互换代的风潮，就看苹果抓不抓得住机会了。</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/jA1yz_KkLeZbF5HDUjPEsw" rel="noopener noreferrer nofollow" target="_blank">“爱范儿”</a>，作者：苏伟鸿，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3088122103117959</id>
+            <title>o3权威评测报告：AI能力实现关键跃升，但仍未达到AGI水平</title>
+            <link>https://www.36kr.com/p/3088122103117959</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3088122103117959</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 21 Dec 2024 04:41:01 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <OpenAI, o3模型, ARC-AGI, 通用人工智能>
+<br>
+<br>
+总结: OpenAI最新发布的o3模型在ARC-AGI基准测试中取得了显著成绩，展示了其在数学和逻辑推理方面的突破性能力。o3在高计算量配置下得分达到87.5%，标志着人工智能能力的质的飞跃。尽管o3在新任务适应性上表现出色，但仍未达到通用人工智能的标准，且在某些简单任务上表现不佳。ARC Prize基金会计划在2025年推出新的ARC-AGI-2基准测试，以推动AGI研究的进展。o3的成功为未来的人工智能发展提供了重要的数据点和研究方向。 </div>
+                        <hr>
+                    
+                    <p>12月21日消息，OpenAI发布最新一代推理模型o3的同一天，知名法国计算机科学家和机器学习研究者、ARC Prize基金会的创始人弗朗索瓦·肖莱（François Chollet）撰写报告称，o3在ARC-AGI基准测试中取得了突破性高分。ARC-AGI是一个专门设计用来测试人工智能模型对极其困难的数学和逻辑问题进行推理的能力的基准测试。</p>
+  <p>肖莱在报告中指出，OpenAI最新推出的o3模型，在基于ARC-AGI-1公共训练集的训练下，在遵守公开排行榜规定的1万美元计算限制（compute limit）的前提下，在半私有评估集上取得了75.7%的突破性高分。而在高计算量（172倍）配置下的o3模型，得分更是达到了87.5%。</p>
+  <p>这一成绩标志着人工智能能力出现了令人震惊且关键的跃升，展现出GPT系列模型中前所未有的新任务适应能力。举例来说，在ARC-AGI-1的测试中，得分从2020年GPT-3的0%增长到2024年GPT-4o的5%，这一过程用了整整四年。如今，对于人工智能能力的所有预设认知都需要因o3而重新评估。</p>
+  <p>ARC Prize，这项逾百万美元的公共竞赛，其目标不止于超越ARC的首个基准测试，更旨在成为引领我们通往通用人工智能（AGI）的“北极星”。ARC Prize基金会对于明年与OpenAI团队及其他合作伙伴共同设计下一代、持久的通用人工智能基准测试感到兴奋。ARC-AGI-2将于2025年与ARC Prize一同启动。ARC Prize基金会承诺将持续举办大奖赛，直至出现一个高效且开源的解决方案，其得分达到85%。</p>
+  <h2><strong>以下为报告全文：</strong></h2>
+  <p>我们对o3系统进行了两项ARC-AGI数据集的测试：</p>
+  <blockquote>
+   <p>--半私有评估集：用于评估过拟合的100个私有任务；</p>
+   <p>--公开评估集：400个公开任务。</p>
+  </blockquote>
+  <p>根据OpenAI的指导，我们在两个计算级别的不同样本大小下进行了测试：6（高效率）和1024（低效率，172倍计算量）。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_2350368713754df2aebe4f153e1aeb66@1200352198_oswg29235oswg960oswg545_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>以下是测试结果：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_d84138559763473ebe0266703d0c7908@1200352198_oswg33171oswg960oswg276_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>注：由于定价和功能可用性尚未确定，目前无法提供o3高计算量的成本信息。高计算量配置的计算量大约是低计算量配置的172倍。</p>
+  <p>鉴于不同的推理预算，效率——尤其是计算成本——已成为衡量性能时不可或缺的指标。我们已经记录了总成本和每个任务的成本，以此作为衡量效率的初步指标。在整个行业中，我们需要确定哪个指标最能反映效率，但从大方向来看，成本是一个合理的起点。</p>
+  <p>在高效率模式下，75.7%的得分符合ARC-AGI-Pub的预算规定（成本低于1万美元），因此有资格占据公共排行榜的首位。</p>
+  <p>尽管低效率模式下的87.5%得分代价不菲，但它仍然显示了随着计算量的增加，新任务的性能确实有所提升——至少在这个层面上是如此。</p>
+  <p>这些成绩并非单纯依靠增加算力资源来实现的。OpenAI的新o3模型在适应新任务方面取得了重大进步，这不仅仅是渐进式的改进，而是一次真正的突破，标志着人工智能能力相比以往的大语言模型有了质的飞跃。o3能够适应它之前从未遇到过的任务，其在ARC-AGI领域的表现接近人类的水平。</p>
+  <p>当然，这种泛化能力的成本相当高，目前看来还不太经济。你可以支付给人类大约5美元来完成ARC-AGI任务（我们确实这样做过），同时仅消耗少量能源。而o3在低计算模式下每个任务的成本则在17到20美元之间。不过，预计在未来几个月到几年内，成本性能将显著提高，因此我们可以预见这些能力将在不久的将来与人类工作形成竞争。</p>
+  <h2><strong>o3是不是通用人工智能？</strong></h2>
+  <p>ARC-AGI作为一个关键的基准测试，能够突显人工智能的泛化能力，这是那些已经饱和或要求不高的基准测试所无法做到的。然而，我们必须明确，ARC-AGI并不是衡量通用人工智能终极标准——这一点我们今年已经多次强调。它是一个研究工具，旨在集中精力解决人工智能领域中最棘手的未解问题。过去五年来，它在这方面发挥了重要作用。</p>
+  <p>通过ARC-AGI的测试并不等于实现了通用人工智能。实际上，我认为o3尚未达到通用人工智能的水平。o3在一些相对简单的任务上仍然表现不佳，这表明它与人类智能之间存在本质差异。</p>
+  <p>此外，初步数据表明，即将到来的ARC-AGI-2基准测试对o3来说仍然是一个重大挑战，即使在高计算量的情况下，也可能将其得分降至30%以下，而一个普通人即使没有经过训练，也能轻松获得超过95%的得分。这显示了我们有能力创建具有挑战性、未达到饱和状态的基准测试，而不必依赖于专家的领域知识。当设计出对普通人容易但对人工智能困难的任务变得不可能时，那就意味着通用人工智能真的到来了。</p>
+  <h2><strong>o3与旧模型相比有何区别？</strong></h2>
+  <p>为何o3的得分远超过o1？同样，o1的得分又为何远超过GPT-4o？我认为，这一系列结果为通用人工智能的持续追求提供了极有价值的数据点。</p>
+  <p>我对大语言模型的理解是，它们像一个向量程序的仓库。当接收到提示时，它们会检索与提示相匹配的程序，并在当前输入上“执行”它。大语言模型通过被动接触人类生成的内容，存储和操作化数以百万计的有用小程序。</p>
+  <p>这种“记忆、检索、应用”的模式，在给定适当的训练数据时，可以在任意任务上达到任意水平的技能，但它无法适应新情况或即时掌握新技能（也就是说，这里没有所谓的流动智能）。这一点在大语言模型在ARC-AGI上的表现中得到了体现，ARC-AGI是专门设计来衡量对新事物适应性的基准测试——GPT-3得分为0，GPT-4接近0，GPT-4o达到了5%。将这些模型扩展到极限，并没有使ARC-AGI的得分接近几年前基本的蛮力枚举就能达到的水平（高达50%）。</p>
+  <p>要适应新事物，你需要两样东西。首先，你需要知识——一套可重复使用的功能或程序。大语言模型已经拥有足够的知识。其次，你需要在面对新任务时重新组合这些功能成一个全新的程序——即程序合成。大语言模型长期以来缺乏这一特性，而o系列模型弥补了这一点。</p>
+  <p>目前，我们只能推测o3的确切工作方式。但o3的核心机制似乎是在token空间内进行自然语言程序搜索和执行——在测试时，模型搜索可能的思维链（Chains of Thought, CoTs）描述解决任务所需的步骤，这种方式可能与AlphaZero风格的蒙特卡洛树搜索相似。在o3的情况下，搜索可能由某种评估模型引导。值得注意的是，Demis Hassabis在2023年6月的一次采访中暗示DeepMind一直在研究这个想法——这项工作已经酝酿了很长时间。</p>
+  <p>因此，虽然单一代大语言模型在新事物上挣扎，但o3通过生成和执行自己的程序克服了这一点，其中程序本身（CoT）成为知识重组的产物。尽管这不是测试时知识重组的唯一可行方法（你也可以进行测试时训练，或在潜在空间中搜索），但根据这些新的ARC-AGI得分，它代表了当前技术的最新水平。</p>
+  <p>实际上，o3代表了一种深度学习引导的程序搜索形式。模型在“程序”空间（在这种情况下，自然语言程序——描述解决手头任务步骤的思维链空间）上进行测试时搜索，由深度学习引导。解决单个ARC-AGI任务可能最终需要数千万个token，成本数千美元，是因为这个搜索过程必须探索程序空间中的大量路径--包括回溯。</p>
+  <p>然而，这里发生的事情与我之前描述的“深度学习引导的程序搜索”作为达到通用人工智能的最佳路径有两个显著的区别。关键的是，o3生成的程序是自然语言指令（由大语言模型“执行”），而不是可执行的符号程序。这意味着两件事。首先，它们不能通过执行和直接评估任务与现实接触——相反，它们必须通过另一个模型进行适应性评估，而缺乏这种基础的评估可能在操作分布之外时出错。其次，系统不能自主地获得生成和评估这些程序的能力（就像AlphaZero这样的系统可以自己学会玩棋盘游戏一样）。相反，它依赖于专家标记的、人类生成的CoT数据。</p>
+  <p>目前尚不清楚新系统的具体局限性以及它可能扩展的范围。我们需要进一步的测试来找出答案。无论如何，当前的性能代表了一项了不起的成就，并且清楚地证实了直觉引导的测试时程序空间搜索是一个强大的范式，可以构建能够适应任意任务的AI系统。</p>
+  <h2><strong>接下来会发生什么？</strong></h2>
+  <p>首先，通过2025年的ARC Prize竞赛促进o3的开源复制对于推动研究社区向前发展至关重要。对o3的优势和局限性进行全面分析是必要的，这有助于我们理解其扩展行为、潜在瓶颈的性质，并预测进一步发展可能解锁的能力。</p>
+  <p>此外，ARC-AGI-1现在已趋于饱和——除了o3的新得分外，事实上，一个大型的低计算量Kaggle解决方案集合现在可以在私有评估中得到81%的分数。</p>
+  <p>我们将通过新版本——ARC-AGI-2——来提高标准，该版本自2022年以来一直在开发中。它承诺将重置技术的最新水平。我们希望它通过具有挑战性的、高信号的评估来推动AGI研究的界限，这些评估突显了当前人工智能的局限性。</p>
+  <p>我们对ARC-AGI-2的早期测试表明，即使对于o3来说，它也将是有用且极具挑战性的。当然，ARC Prize的目标是产生一个高效且开源的解决方案，以赢得大奖。我们目前计划在ARC Prize 2025（预计启动时间：第一季度末）同时推出ARC-AGI-2。</p>
+  <p>展望未来，ARC Prize基金会将继续创建新的基准，以集中研究人员的注意力在通往通用人工智能的道路上最难解决的问题上。我们已经开始了第三代基准的工作，它完全脱离了2019年ARC-AGI的格式，并融入了一些令人兴奋的新想法。</p>
+  <p>邀请参与开源分析：</p>
+  <p>今天，我们发布了高计算量的o3标记任务，并希望得到外界的帮助进行分析。特别是，我们对于o3无法解决的大约9%的公共评估任务非常感兴趣，即使在大量计算资源的支持下，这些任务对人类来说却非常简单。</p>
+  <p>我们邀请社区帮助我们评估解决和未解决任务的特征。</p>
+  <p>为了激发外界想法，这里有3个高计算量o3未能解决的任务示例。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_4724adf69abe472982b6aa18ba928946@1200352198_oswg109021oswg960oswg580_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_4fe44bb16d3542a39bc2f10dfa38d306@1200352198_oswg91918oswg960oswg559_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_88bc7f6357bc43aba712d707e2bb85f2@1200352198_oswg107572oswg960oswg656_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>结论</strong></h2>
+  <p>总结来说，o3代表了向前迈出的重要一步。它在ARC-AGI上的表现凸显了在适应性和泛化方面的真正突破，这是其他任何基准测试都无法如此明确展现的。</p>
+  <p>o3解决了大语言模型范式的根本局限性——在测试时无法重新组合知识——并且通过一种大语言模型引导的自然语言程序搜索形式来实现这一点。这不仅仅是渐进式的进步；它是新领域的开拓，需要严肃的科学关注。</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/0Yo-kRGtQS3aIKoFzBaGaw" rel="noopener noreferrer nofollow" target="_blank">“腾讯科技”</a>，特约编译：无忌，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3088107741870215</id>
+            <title>当你以为AI发展放缓时，OpenAI推出o3，向AGI迈出关键一步</title>
+            <link>https://www.36kr.com/p/3088107741870215</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3088107741870215</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 21 Dec 2024 04:27:46 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: AGI, OpenAI, o3系列模型, 基准测试  
+<br><br>  
+总结: OpenAI在2024年发布了o3系列模型，标志着AGI时代的到来。o3模型在多个基准测试中表现优异，尤其在编程和数学能力上超越了前代模型o1。o3在CodeForces和ARC-AGI测试中取得了显著成绩，显示出其接近人类智能的潜力。尽管o3在测试中表现出色，但仍未达到AGI水平，且在某些简单任务中可能失败。OpenAI的发布引发了行业的激烈竞争，尤其是在谷歌推出新模型后。随着AI技术的快速发展，安全性问题也日益凸显，成为亟待解决的挑战。 </div>
+                        <hr>
+                    
+                    <blockquote>
+   <p>当Sam以及我们研究人员说 AGI 即将到来时，我们并不是为了卖你神奇的药水、2000&nbsp;美元的订阅服务，或者诱使你在我们下一轮融资中投资。而是AGI时代真的要来了。</p>
+   <p>——John Hallman（OpenAI 技术团队成员）</p>
+  </blockquote>
+  <p>2024年12月21日，OpenAI在其为期12天发布会活动的最后一天，正式发布了备受期待的o3系列模型，包括o3和o3-mini。</p>
+  <p>o3 是一个非常强大的模型，在编码、数学以及 ARC-AGI 基准测试等多个基准上超过了 OpenAI 此前的 o1 模型（o1得分25%，o3得分87.5%)。</p>
+  <p>o3-mini 是 o3 更经济高效且性能导向的版本，在成本和延迟方面比 o1-mini 低得多，同时提供类似的功能。</p>
+  <p>由于与英国电信公司 O2 可能存在的版权/商标冲突，所以将其命名为o3。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_a388ade15008487f917df230689f0c62@1200352198_oswg128101oswg1080oswg807_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图：OpenAI官方X</p>
+  <p>OpenAI 正向安全研究人员开放 o3 和 o3-mini 的早期访问，预计 o3-mini 将于 1 月底左右发布，o3 则稍后。</p>
+  <p><strong>测试概览</strong></p>
+  <blockquote>
+   <p>SWE-Bench 测试： 71.7%——o1得分48.9%</p>
+   <p>Codeforces 评分： 2727——相当于全球人类程序员编码竞赛中，排名第 175 位。</p>
+   <p>AIME： 96.7%——意味着在数学测试中只错1道题</p>
+   <p>博士水平的科学问题（GPQA）： 87.7%——博士生一般得分70%</p>
+   <p>最难的前沿数学测试： 25.2%——其他模型没有超过2%，数学天才陶哲轩说该测试“可能难住AI好几年”</p>
+   <p>ARC-AGI： 87.5%——o1得分25%</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_77c0d24f8f9f4552b3a8641fb1e64ad0@1200352198_oswg102224oswg1080oswg586_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>惊人的测试分数，这回真的远超普通博士生</strong></h2>
+  <h3><strong>o3系列模型迈向AGI，基准测试结果惊人</strong></h3>
+  <p>我们挑选最具代表性的测试给大家进行简要介绍，以此说明此次o3测试分数的震撼程度。</p>
+  <h2><strong>（一）CodeForces测试</strong></h2>
+  <p>在全球顶尖的编程竞赛平台CodeForces上，o3系列模型展现了其卓越的编程能力。o3在CodeForces中的评分高达2727，超越了大部分人类程序员。</p>
+  <p>目前，只有不到200名顶级人类程序员能达到或超过这一评分。这一成绩不仅证明了o3在编程任务上的强大实力，也显示了其在解决复杂算法问题时接近甚至超越人类的潜力。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_7ef1f09778cd497fa3eca19125c2ebb8@1200352198_oswg643978oswg989oswg1200_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图：Codeforces排名及对应的分数</p>
+  <h2><strong>（二）ARC-AGI测试</strong></h2>
+  <p>ARC-AGI（人工通用智能评估基准）测试是由Keras之父François Chollet发起，旨在评估AI系统在面对未见过的新任务时的适应能力。ARC-AGI测试的核心在于其设计的任务往往需要深度逻辑推理和创新思维，这使得它成为评估AI系统通用智能能力的重要工具。</p>
+  <p>o3系列在这一测试中取得了显著的成绩，在高算力配置下，o3达到了87.5%的得分，而在低算力配置下也取得了75.7%的优异成绩。这一成绩远超o1系列，后者在同一测试中的得分仅为25%。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_714334c532724b4b9a76f68d0f6c8bbb@1200352198_oswg93702oswg1080oswg565_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>François Chollet对此评价道，“这是一个令人惊讶且重要的阶跃式提升，展示了GPT系列模型前所未有的新型任务适应能力。作为对比，ARC-AGI-1从2020年GPT-3的0%提升到2024年GPT-4o的5%，历时四年。随着o3的出现，关于人工智能能力的所有既有认知都需要重新评估。”</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_0e98643ce13a4369802f9553dd1c5f11@1200352198_oswg55419oswg1080oswg283_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图：François Chollet的评价</p>
+  <p>虽然ARC-AGI测试中表现出色，但这并不意味着o3已达到了AGI水平，因为它仍会在一些非常简单的任务中失败，和人类智能有根本性的差别。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_dceabbc1d47742579ecec9239eb95eb0@1200352198_oswg277617oswg1080oswg639_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图：François Chollet的评价</p>
+  <h2><strong>（三）EpochAI Frontier Math测试</strong></h2>
+  <p>EpochAI Frontier Math测试被誉为当今最具挑战性的数学基准测试之一，涵盖了最新的前沿数学问题。著名数学家陶哲轩（Terence Tao）对此评价道：“这项测试可能会让AI难住好几年。”</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_f7f390f867524eb08d96368e141ee2f0@1200352198_oswg163424oswg1080oswg664_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>然而，o3在这一测试中突破了以往的记录，解决了25.2%的问题，而其他模型的得分均未超过2%。这一成绩不仅证明了o3在数学推理方面的强大能力，也展示了其在处理高度复杂和抽象问题时的潜力。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_a82c144f87a24477be88431b86c31b74@1200352198_oswg138218oswg1080oswg949_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Box公司的首席执行官亚伦·列维（Aaron Levie）在X称赞道：“OpenAI刚刚宣布了他们的新推理模型o3，它在基准测试中的表现似乎异常出色，目前，人工智能的发展没有任何放缓的迹象。”</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_31506a7d9f474353934cb178bd0a3587@1200352198_oswg278418oswg1080oswg861_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图：Aaron Levie的 X</p>
+  <h2><strong>谷歌登基几天后，OpenAI重回铁王座</strong></h2>
+  <p>前几天，谷歌凭借其新一代大模型Gemini 2.0和视频生成模型Veo 2.0的发布，曾一度在AI的牌桌上大杀四方。然而，随着OpenAI推出o3系列模型，这场博弈再度发生了戏剧性的逆转。</p>
+  <h2><strong>（一）谷歌掀了AI圈的牌桌，全力狙击OpenAI</strong></h2>
+  <p>在OpenAI的为期十二天的发布会进行到第五天时，谷歌以迅雷不及掩耳之势发布了其重磅产品——Gemini 2.0 Flash。这一版本不仅在速度上实现了翻倍提升，还在多模态输出方面取得了突破性进展，支持原生图像生成和音频输出，进一步拓展了AI模型的应用边界。Gemini 2.0不仅仅是一个升级版的语言模型，更是一个具备主动思考和多任务处理能力的统一底层模型。</p>
+  <p>谷歌CEO桑达尔·皮查伊在发布会上表示：“如果说Gemini 1.0是关于整理和理解信息，那么Gemini 2.0就是要让这些信息真正变得有用。”</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_6478b07dd2ca420884460b6fff2dc02f@1200352198_oswg55505oswg1080oswg180_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>配合新推出的多模态实时API，Gemini 2.0能够处理实时音频和视频流输入，支持多种工具的组合使用，极大地增强了其在复杂任务中的适应能力。</p>
+  <p>除此之外，谷歌还发了个新模型，顺手证明Sora才是最菜的。</p>
+  <h2><strong>（二）你方唱罢我登场，OpenAI重回铁王座</strong></h2>
+  <p>谷歌Deepmind的研究员在12月13号吐槽，OpenAI这回的发布并没有截胡到他们，而OpenAI的研究人员在下面回复“好戏还在后面”。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_c137ba5da3fd4ed5a607d10ac30bec14@1200352198_oswg334214oswg1080oswg1101_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_0e7dffdea99d40e8929d7af62b303474@1200352198_oswg342129oswg1080oswg859_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>自OpenAI发布GPT4之后，其一直占据领先地位，但Google、Anthropic、Meta等竞争对手同样咬的很紧。而今天，随着OpenAI发布其o3系列模型，宣布着其在2024年AI军备竞赛中再度一骑绝尘，重回铁王座。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_da9b14443fba4be9a3cbbfcf6ba595cb@1200352198_oswg416249oswg1080oswg776_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>正如OpenAI研究高级副总裁马克·陈（Mark Chen）所言“这确实标志着我们在实用性的前沿上攀登，”。“这个模型在编程方面非常出色，”奥特曼也补充说。</p>
+  <p>3个月前OpenAI发布o1，今天OpenAI发布o3，验证了AI进步的趋势势不可挡。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_53afe0380533482aa19b2bd6ec365d3f@1200352198_oswg250053oswg1080oswg867_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图：OpenAI研究人员的X</p>
+  <p>从ARC-AGI测试该测试的分数来看，我们能够很直观的发现，AI的发展趋势并没有放缓，这或许是对今年不停出现的AI泡沫论最有力的回应。</p>
+  <p>GPT-2 (2019): 0%</p>
+  <p>GPT-3 (2020): 0%</p>
+  <p>GPT-4 (2023): 2%</p>
+  <p>GPT-4o (2024): 5%</p>
+  <p>o1-preview (2024): 21%</p>
+  <p>o1 high (2024): 32%</p>
+  <p>o1 Pro (2024): ~50%</p>
+  <p>o3 tuned low (2024): 76%</p>
+  <p>o3 tuned high (2024): 87%</p>
+  <p>John Hallman（OpenAI研究员，曾在Google Brain实习、普林斯顿大学数学系学生、 IMO 银牌得主）说：</p>
+  <blockquote>
+   <p>“当 Sam以及我们研究人员说 AGI 即将到来时，我们并不是为了卖你神奇的药水、2000&nbsp;美元的订阅服务，或者诱使你在我们下一轮融资中投资。而是AGI时代真的要来了。”</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_9740b55bcd164be1b26c20edde0c4343@1200352198_oswg475881oswg1080oswg1214_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>然而这也意味着AI的安全性问题将不再是假设性的问题，一个会撒谎的高智商且能调动大量资源的AI如果没有万全的安全审核机制，那将造成什么样的后果，我们不得而知......1年前OpenAI的首席科学家Ilya Sutskever和Sam Altman意见不合离开了OpenAI，当时网友猜测Ilya看到了某种AGI的可能，但认为其安全风险极高，不宜推出。</p>
+  <p>前几天Anthropic最新的论文表明，人工智能模型可以“假装对齐”——在训练期间假装遵循训练规则，但在部署时又恢复到原来的行为，马斯克也对此有相应的评价。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_4f4ad05d8b614f42a369e7667288f389@1200352198_oswg624746oswg1080oswg1400_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>此前腾讯科技出了一篇文章阐述会撒谎的o1：</p>
+  <p>当o1学会“装傻”和“说谎”，我们终于知道Ilya到底看到了什么</p>
+  <p>几天过去o3到来了，或许与AI的智能性相比，安全性问题如今应变成最高优先的问题。</p>
+  <p>当前，OpenAI已向安全研究人员和合作伙伴开放了测试申请，旨在通过更多实际应用测试，进一步提升模型的安全性和可靠性。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_2f910bda16114e8f84d29214c91485bb@1200352198_oswg132993oswg1080oswg764_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图：OpenAI官网</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_27b2e61f2e354e8f866f2657ef8ce57e@1200352198_oswg301984oswg1080oswg733_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图：Sam Altman邀请安全研究员加入测试</p>
+  <p><strong>高昂的价格</strong></p>
+  <p>除了惊叹o3惊人的表现外，很多网友也对o3可能会导致的高昂任务成本表示担忧。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241221/v2_95a8bb111cd24da5818a45cc287d86f8@1200352198_oswg255628oswg1080oswg1246_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>2024年，AI的发展放缓了吗？</strong></h2>
+  <p>2024年，人工智能领域经历了一场前所未有的激烈军备竞赛。这一年，不仅是技术的飞跃，更是战略与创新的较量。每一个新产品的发布都牵动着整个行业的神经，而OpenAI在年底通过o3系列的卓越表现，重新杀回了铁王座，再一次将AGI的路向前推动了一步。</p>
+  <p>回顾两年前，恍如昨日，我们正在见证历史，亲身经历着新一轮的技术革命。</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/Kn-yDWA3n2VsW7ApBGEssA" rel="noopener noreferrer nofollow" target="_blank">“腾讯科技”</a>，作者：涵清，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.36kr.com/p/3087954405325193</id>
             <title>AI同时操控200个机器人，任务成功率超90%，半数故障依然「能打」</title>
             <link>https://www.36kr.com/p/3087954405325193</link>
@@ -2015,355 +2416,6 @@
   <p>再比如今年初CES 2024上爆火的AI硬件 Rabbit R1，虽然最终没有大获成功，却掀起了AI手机、AI PC甚至AI电视的浪潮，苹果、三星、华为、荣耀、OPPO、vivo、联想、海信等巨头均已入局。</p>
   <p>CES的前瞻性与引领作用，让它成为了全球消费市场“技术发展”的风向标——那些CES上画出的“饼”，<strong>即使是非常早期的“想法”验证，也为产业链上下游厂商带来启发，为未来一整年的产品研发、市场布局提供参考方向。</strong>看透CES，就能看透未来的消费电子发展脉络，这才是CES被称作全球科技风向标的底气。</p>
   <p>本文来自“雷科技”，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3086828737411461</id>
-            <title>10天涨粉100万，谁靠「搞抽象」赚到了钱？</title>
-            <link>https://www.36kr.com/p/3086828737411461</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3086828737411461</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 20 Dec 2024 08:06:13 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 抽象, 流量密码, 网络用语, 社交媒体  
-<br><br>  
-总结: 2024年被称为抽象元年，抽象内容在社交媒体上迅速走红，成为全网流量密码。抽象的定义逐渐宽泛，主要通过反常规、戏谑的方式表达情绪，吸引了大量用户参与。许多网红和明星通过“搞抽象”获得了巨大的关注和粉丝增长，甚至实现了高额的带货收入。商家也借助抽象内容提升了销量，形成了流量与销量的双丰收。抽象现象反映了年轻人对复杂生活的乐观表达，成为一种娱乐精神的体现。 </div>
-                        <hr>
-                    
-                    <p><strong>不得不说 2024 果然是抽象元年。</strong></p>
-  <p>从“先秦淑女步”“成都迪士尼”到“邪恶栀子花”“三折叠”，今年火出圈的抽象梗格外多，几乎贯穿一整年。</p>
-  <p><strong>到了年末最后一个月，抽象之神仍然在发力：</strong></p>
-  <p>快手网红 @张诗尧 因“社会摇秋招”爆火出圈，粉丝涨到 1100 万；全港圈硬捧不红的 @向佐 靠穿女装、玩抽象频繁登顶热搜，直播吸引 6000 万人次围观； 还有号称乡村版“江直树与袁湘琴”的 @有金记录真实生活 ，一张口就幽默感拉满，近 10 天涨粉超 100 万……</p>
-  <p>毫无疑问，抽象正在成为全网“流量密码”，甚至连小红书官方都将其定为社区年度关键词。</p>
-  <p><strong>抽象为啥这么火？2024 年谁在靠抽象内容博流量、赚钱？</strong></p>
-  <h2><strong>01 抽象成全网流量密码，有人靠此一夜涨粉500万</strong></h2>
-  <p><strong>开头，我们先回答一个问题：“到底什么是搞抽象？”</strong></p>
-  <p>《语言文字周报》将“搞抽象”纳入2024 年度“十大网络流行语”。他们对此的解释是，“搞抽象”是一个网络用语，起源于某游戏主播的口头禅。</p>
-  <p>这个梗反常规、反规则，注重个性表达，使用者倾向于用荒诞的、戏谑的、非线性的方式来表达情绪或者信息，可以有效地释放情绪、缓解压力、促进社交破冰。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_d7892d0ca5a14fe39c201142552bb774@5091053_oswg130920oswg1080oswg1080_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>一般而言，“搞抽象”主要有两种方式。一是一本正经地胡说八道，即废话文学；二是“抖机灵”，即通过援引当下娱乐热点或娱乐事件利用词语本身的多义性以及表达的含混性，产生一个出人意料但又似乎在情理之内的答案。</strong></p>
-  <p>比如下面这些梗，均是网络上比较火的抽象现场：</p>
-  <p>走出自己的路叫“素，先秦淑女步”；工作没干完但又没完全不干，算“微do”；精神状态一般但还喘着气是“活人微死”……</p>
-  <p>随着“搞抽象”慢慢出圈，抽象的形式逐渐丰富，从文字对话、图片到视频、直播。于是抽象的定义也越来越宽泛，很多超出常规又兼具幽默感的内容和表达也都被称为“抽象”。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_8948dbeda1ee4b7b84528ba5b412104a@5091053_oswg79747oswg1080oswg1441_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>数据显示，2024 年小红书有超过 1000 万条关于抽象的笔记，阅读量是去年的 7.2 倍；社区内“搞抽象”的评论数量超 1.6 亿，是去年的 102 倍。于是，小红书官方将抽象定为社区年度关键词。</strong></p>
-  <p>在抖音，“搞抽象”的火爆程度也不遑多让，抽象话题的参与人数达到 268 万，相关视频播放量高达 791 亿次。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_6ec6b23d40d3416abf13b27accbad66c@5091053_oswg60257oswg1079oswg942_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>抽象俨然成为 2024 年全网流量密码。</strong>与此同时，过去一年一大批网红、明星靠“搞抽象”出圈、翻红。</p>
-  <p>谁能想到，曾经整个“港圈”都捧不红的武打明星向佐最近却靠玩梗和女装等抽象行为爆火。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_b75af4d3972347fe8a52c4a23231474b@5091053_oswg1516749oswg1080oswg939_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>“相信抽象的力量”可以说是向佐的真实心声，最近他化浓妆、穿女装、在红毯上“露肉”，被网友吐槽“太疯癫”。靠这些抽象行为，他频繁登顶热搜，还吸引了海量流量，不久前其与网红理发师晓华的剪发直播，吸引了 6729 万人次的围观，空降热搜第一名，真正火出圈。</p>
-  <p><strong>最近还有一个非常出圈的抽象梗——“青海摇秋招”。</strong></p>
-  <p>事情起因是，跳社会摇的网红张诗尧在快手举办了一场比赛，靠视频连麦的方式选拔一百位网友与其进行线下社会摇表演。</p>
-  <p>出乎意料的是大批年轻学生以“摇子”的身份通过短视频、直播展示自己的才艺 （激情开摇） ，争夺 offer，热闹程度堪比“我要上春晚”。</p>
-  <p>数据显示，张诗尧靠这场很抽象的“秋招”迅速走红，相关话题视频在快手播放量达 32.8 亿，抖音话题也有 5.5 亿播放量，他本人则短短几天暴涨 500 万粉丝。</p>
-  <p>类似靠抽象梗疯狂涨粉的案例不胜枚举：</p>
-  <p>靠抽象鉴宝大火的 @听泉赏宝 ，如今粉丝已经突破了 3500 万；凭借抽象连麦带货出圈的 @k总 ，巅峰期单月涨粉破千万；“比白磷还燃”的男人黄子韬靠抽象直播翻红，一周涨粉 111 万；还有说话自带幽默感的 @有金记录真实生活，最近一周吸粉 76 万……</p>
-  <p><strong>基本上说起抽象网红，几乎每个擅长 5G 冲浪的人，都能如数家珍地报上一串名字。</strong></p>
-  <h2><strong>02 几场直播带货超5000万，抽象主播比想象中更会赚钱</strong></h2>
-  <p><strong>当你还沉浸在“搞抽象”的快乐中，抽象网红们已经赚得盆满钵满。</strong></p>
-  <p>尽管向佐在一众抽象网红中粉丝不算多，其抖音粉丝 285&nbsp;万，不及 @听泉赏宝 的十分之一，比常驻快手的 @张诗尧 少 60 多万。但他靠抽象变现的能力，却让其他人 “望尘莫及”。</p>
-  <p>据了解，最近向佐因“搞抽象”和穿女装出圈后，便开启了密集地直播带货。12 月以来，他共直播了 5 场，每场直播观看人次都在 600 万以上，他平均 3~4 天直播一场，更早之前的直播则要追溯到 9 月 17 日。</p>
-  <p><strong>很显然，向佐渴望把抽象换来的“泼天富贵”赶紧换成真金白银。</strong></p>
-  <p>他确实也做到了，蝉妈妈数据显示，上述 5 场直播，累计销售额超 5000 万元，场均销售额在 1000~ 2500 万元之间，其中两场直播 GMV 仅次于与辉同行，这一成绩比同时段直播，粉丝过千万的@向太陈岚 更好。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_04951ff4831d4718babb40411dd4d7f5@5091053_oswg111911oswg1080oswg400_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">向佐最近5场直播带货表现（图源：蝉妈妈）</p>
-  <p>我们还发现向佐所带货的所有商品中，美妆产品销量最好，占比超 92%，具体包含兰蔻、雅诗兰黛、赫莲娜、海蓝之谜等国际大牌，均属于客单价及带货佣金较高的品牌，向佐也因此连续两天成为抖音美妆带货榜第一。</p>
-  <p>同样靠抽象赚到钱的还有 @有金记录真实生活 ，该达人在 12 月 7 日抖音粉丝仅 27 万，随后其抽象的带货切片内容被传播，粉丝数量直接涨到 143 万，10 天增涨超 100 万。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_16a6403922c644d991cc2fb58a10c05b@5091053_oswg60361oswg1080oswg440_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">有金最近的带货表现（图源：蝉妈妈）</p>
-  <p>随着热度增长，其直播场观、带货 GMV 也均呈数十倍“狂飙”，这对一个月前还名不见经传的来自云南“山卡卡”的夫妻，最近 7 天带货销售额超 500 万元，属实是“赚得盆满钵满”。</p>
-  <p>除了近期涌现的达人，更早之前靠抽象走红的还有 @听泉赏宝、@k总、@路遥女包（不屑版）、@COCO姐 等一众主播，他们的赚钱能力同样很夸张。</p>
-  <p>以 @路遥女包（不屑版） 举例，她走红是因为“隔空对骂”式抽象带货，每天能吸引数百万人围观，峰值时一个月带货超 1.5 亿元。</p>
-  <p><strong>由这些不难看出，抽象不仅是流量密码，更是带货主播们的“财富密码”。</strong></p>
-  <h2><strong>03 销量100万+，商家同样靠抽象赚疯了</strong></h2>
-  <p>作为年度流量密码，商家同样没有放过“搞抽象”。很多商家也靠抽象内容或抽象商品实现了流量、销量双丰收。</p>
-  <p>首先是抽象的商品在今年格外受欢迎，比如前几天淘宝开启了 2024 年度十大商品评选，入围的 20 款电商产品中，完美契合抽象元素的不在少数。</p>
-  <p>其中，还未成熟的生香蕉挂上一张“禁止蕉绿”的卡片，普通水果摇身一变成为年轻人的“解压神器”；还有“丑得惊心动魄”的无边抱枕；因麦琳“熏鸡事变”出圈的熏鸡。</p>
-  <p>这些都不算什么，最抽象的是榜单中还有“一袋垃圾”，是的，就是你想象中没什么用的那个“垃圾”，很难评判“卖垃圾”和“买垃圾”哪个更抽象了。</p>
-  <p>更关键的是这些抽象产品在电商平台都有不俗的销量，像“焦绿”绿植，有商家在淘宝销量超 10 万+；“一袋垃圾”的销量也超 5000 单。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_83dbc9ba87864408b71b07a7a47625eb@5091053_oswg1341643oswg1080oswg1160_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>还有用来满足消费者“抽象”需求的很多单品都在全网热销，比如“青海摇秋招”带火了社会摇同款白手套，有商家全网热销 100 万单。</strong></p>
-  <p>此外，用来搞抽象的打工人工牌、电影《好东西》中同款“90%荒诞”卫衣、听名字就很离谱的“不要脸防晒服”等抽象好物均是热销的爆款产品。</p>
-  <p>除了直接卖货，还有很多商家热衷于用抽象内容搞流量，最主要的形式是通过自媒体“搞抽象”。</p>
-  <p>像酒饮品牌 RIO，他们今年的抽象广告词就非常多，比如：“姐的冷酷，正好5度”“不要琢磨姐，因为答案无解”……</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_f9f4dbd7ee944a4faa153c3e7de555ec@5091053_oswg512960oswg469oswg693_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>幽默抽象的广告词让消费者会心一笑的同时还能增加宣发素材的传播度，属实是将抽象玩明白了。</strong></p>
-  <p>有人曾总结，当下最受欢迎的品牌自媒体人设大概是这样的：外向、神经、自恋、没心没肺，还要会玩抽象。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_292b6d56ccf54c49a05e80fc482aae35@5091053_oswg280732oswg1080oswg2110_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>淘宝在小红书上的人设就完美契合上述特点，在几乎所有热点面前，淘宝均能找到抽象的表达方式，所以也薅到了不少流量，数据显示， @淘宝 这个账号在小红书收获了 268 万点赞和收藏。</p>
-  <p><strong>这么看来，搞抽象不仅能让达人出圈，同样可以让商家不停刷存在感。</strong></p>
-  <h2><strong>04 结语</strong></h2>
-  <p><strong>抽象为啥能成为年度流量密码？</strong></p>
-  <p>在运营社看来，答案也许没那么复杂，或许是年轻人面对复杂生活的一种乐观表达，本质上是娱乐精神的表现之一。</p>
-  <p>就像小红书官方介绍抽象一词时所说：抽象适合上网冲浪，也适合笑嘻嘻地原谅。“生活出了道难解的题，抽象反手将卷子折成了纸飞机。”</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/vaklNjtlA3QDz-1GZt0NdQ" rel="noopener noreferrer nofollow" target="_blank">“运营研究社”</a>，作者：张帆，编辑：陈维贤，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3086801359140995</id>
-            <title>没有AI，大学生已经不会写论文了吗？</title>
-            <link>https://www.36kr.com/p/3086801359140995</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3086801359140995</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 20 Dec 2024 08:05:05 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: ChatGPT, 学生, AI依赖, 教育影响  
-<br><br>  
-总结: 上周三，ChatGPT在期末考期间崩溃，导致学生们感到极度焦虑和不安，反映出他们对这一AI工具的高度依赖。许多留学生将ChatGPT视为“Chat老师”，在写论文和完成作业时频繁使用。教师们则对学生使用AI写作表示担忧，认为这可能影响学生的学习效果和思维能力。AI生成的作业常常被认为缺乏深度，且可能导致学术不端的风险。尽管OpenAI发布了使用指南，但学生们仍可能因依赖AI而遭遇问题。AI检测器的准确性也受到质疑，可能对非英语母语者造成不公正的评判。整体来看，AI的普及正在改变教育的传统模式，带来一系列挑战和反思。 </div>
-                        <hr>
-                    
-                    <p>上周三，正值许多高校期末考期间，ChatGPT突然崩溃。</p>
-  <p>据OpenAI的事故报告称，这次ChatGPT崩溃从北美太平洋时间12月11日15:16开始，直到19:01所有功能才全面恢复。有网友锐评：“ChatGPT崩溃四小时，全球科研倒退十万步。”</p>
-  <p>在语言不通的异国他乡，留学生早已把ChatGPT尊为“Chat老师”，日常写论文、打代码频频“叨扰”，期末考期间和论文作业截止日期前，学生们更是恨不得长住在Chat老师的对话框里。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_a0ba7c72a1d641c69b718ff471de6356@5091053_oswg32388oswg600oswg538_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/pexels</p>
-  <p>Chat老师究竟有什么魅力，使万千学生心甘情愿拜入其门下？学生人手一个Chat老师，人类老师对这件事怎么看？据说，因为Chat老师的出现，还发生了一些“罗生门事件”……</p>
-  <h2><strong>01 学生：Chat老师是我的独孤九剑</strong></h2>
-  <p>论文截稿最后一小时，该冲刺总结重点了，留子们盼着再抱一抱ChatGPT的大腿，高喊着：“我需要你，恩师求你睁开眼吧。” 面对着屏幕前的出错提示，不少学生陷入了自我怀疑：“不会吧？该不会是我把Chat老师搞崩了吧？”最不凑巧的是，有人在网络期末考中途赶上了ChatGPT的宕机。</p>
-  <p>留子们的哀嚎，不仅在“美国版贴吧”Reddit”里久久回荡，而且跨越重洋，传至祖国的社交平台。北京时间12月12日9：30，话题#ChatGPT崩了#冲上微博热搜，最高排名跻身第6位，吸引了4280多万的阅读量。</p>
-  <p>Chat老师悄悄摸鱼了几个小时，学生们就难过至极。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_12b1a9c28a594c66b1d18b3c55388dd3@5091053_oswg274240oswg568oswg763_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">作为一款海外AI工具，ChatGPT的崩溃上了热搜。（图/微博）</p>
-  <p>两年前没有ChatGPT的时候，大家不也照常科研，照样活着通过期末考吗？为什么人们如今却为了Chat老师的罢工要生要死？自称离不开ChatGPT的留子表示：“对不起，我是在它出生后才开始做科研的，就像先有马、后有车，我会开车却不会骑马一样。”没有Chat老师帮助润色，哪怕给导师手敲一封英文邮件，一些留子也会感到如履薄冰。</p>
-  <p>总之，时代不同了，两年可以改变很多东西。无论是打工人还是学生，都越来越离不开生成式AI，尤其是首先占据了赛道的ChatGPT。不少学生习惯了有问题就找Chat老师，而不是咨询真人老师。这次ChatGPT崩溃被热议，也从侧面反映出许多学生依赖它来辅助学习，甚至直接靠它来完成作业。</p>
-  <p>OpenAI于 11月14日发布了《学生使用ChatGPT写作指南》（A Student's Guide to Writing with ChatGPT）。指南的开头写道：“如果使用得当，ChatGPT可以成为一个强大的工具，帮助学生培养严谨思维和清晰写作的技能，协助他们思考创意、掌握复杂概念并得到写作草稿的反馈。”</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_22a7420ff672422d8dbf6f85eb82fd1a@5091053_oswg234029oswg478oswg653_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">OpenAI发布的《学生使用ChatGPT写作指南》。（图/OpenAI官网）</p>
-  <p>看完指南里的12条写作建议，小红书网友@巴比龙Dylan表示“感觉自己像是穿越到了论文写作的武林秘籍中，Chat老师简直是我的独孤九剑。”</p>
-  <p>对此，真人老师却连连摇头。</p>
-  <p>由于英语学术词汇量的局限，有学生会觉得ChatGPT生成的论文比自己写的更有学术范儿，“人家好歹用的是学术词汇，我写出来纯属科普文章” 。然而，留子自认为的“学术感”，在真人老师眼里却是一股恶心的AI味。</p>
-  <h2><strong>02 老师：AI写的作业，一股馊味</strong></h2>
-  <p>朱昊在美国高校从事计算机专业教学3年，授课对象包括本科和研究生。多次碰到那些用ChatGPT写的学生作业后，他忍不住发帖吐槽：“改AI写的作业真的巨恶心，就像喝了假奶，隔着屏幕都能闻到一股馊味。”</p>
-  <p>具体来说，这股“AI馊味”就是文章中夹杂大量重复、无意义的话语。有的学生的作业中会直接复制粘贴ChatGPT生成的内容，连“作为AI的看法（As an AI）”等明显字眼也没有删除。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_b9f60a8624104a249a1cb7c86a54fc0a@5091053_oswg94701oswg1080oswg809_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/unsplash</p>
-  <p>以前老师要抓学生互相抄作业，现在则要对学生使用AI的程度做判定。“敷衍应付的学生年年都有，打低分就完事了。现在我需要判断（是否直接用AI写作业），然后再找证据。为这，我还得把车轱辘话看好几遍，你说恶心不？”朱昊说道。</p>
-  <p>通常来说，朱昊会把疑似用AI写作业的学生名字记下来，接着对比他/她的数次作业，方初步判定他/她是否存在学术不端，然后尝试与其沟通，讲清楚个中厉害。在一两周布置一次作业的频率下，这种“找AI”的麻烦事，往往占据了大半个学期。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_b360d06e8228406396fd15dac0960f68@5091053_oswg410864oswg844oswg633_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">学生用没用AI？老师头疼。（图/《猫鼠游戏》）</p>
-  <p>每次课堂考试后，朱昊会尝试与考砸了的学生沟通。除了发挥失常的情况，很多依赖AI完成作业的学生一到考试就现形了。朱昊解释：“知识滑过大脑，（学生）没自己花时间想过，容易记不住。”</p>
-  <p>在朱昊看来，适度AI益脑，沉迷AI伤身。如果学生没法把“学习”和“完成作业”这两步分开，那么最好不要使用ChatGPT。要是作业都是AI写的，老师可能很难及时通过作业来获得学生学习情况的反馈，继而无法调整课堂内容，甚至可能会产生误判而把考试难度设置得过高。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_92272339846446839753e94c79460a95@5091053_oswg101157oswg1080oswg810_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/pexels</p>
-  <p>学习本是一个老师和学生通力合作的渐进过程。记忆会因为情感价值的体验而加深，而这些体验几乎往往是通过人与人之间的交流、个人的反思沉淀来促成的。一旦学生赖上了ChatGPT，传统教学模式可能就失灵了。</p>
-  <p>过去20多年来，维多利亚·利文斯通（Victoria Livingstone）都在给大学生上写作、文学和语言类课程。她最近在美国《时代》杂志上发表文章，将自己辞掉老师工作的主因归结为ChatGPT等大模型的出现。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_b55d55b3131b42d8945c239ff4648afc@5091053_oswg304500oswg481oswg843_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">维多利亚·利文斯通的文章发表在9月底的《时代》杂志上。图/Time</p>
-  <p>批改学生交上来的文章时，利文斯通觉得更多时候不是在给学生写评语，而是向AI提反馈。学计算机的博士生们清楚知道大模型的回答存在虚构和捏造，然而，他们还是照样将研究笔记丢给Chat老师，请其来代笔。</p>
-  <p>利文斯通还发现，QuillBot这样的AI改写工具会改变文本的原意，使表述出现偏颇。在课堂上，她试过把AI的输出与学生的原始写作并置分析。只可惜，学生们都不以为然，或者说看不出语词间的微妙差别。</p>
-  <p>除了教与学的循环外，学习的最终效果也是老师们所看重的要点。接受公众号“青年志”的采访时，中国人民大学新闻学院传播系主任刘海龙表示自己不会禁止学生使用AI，但会要求学生把人与AI共创的过程都展示出来，包括具体的提示词、AI修改前后的内容等。</p>
-  <p>刘海龙认为：“AI目前没有办法替代人的思考，也没办法替代学生去做访谈、调查和收集问卷。如果你所有的答案都是 AI 回答的，那么你自己其实并没有在思考的过程中形成理解。一个道理是很容易明白的，但你怎么有条理地去思考它，怎么通过叙事将它论证清楚？这是更难的。”</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_c307e57a6eb846cfac8336f200663348@5091053_oswg46152oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/《追光的日子》</p>
-  <p>无论是写论文，还是写作业，关键很可能是“写”的过程。写作并不完全是将头脑中明确存在的思想进行转录，相反，写作是与思考紧密相连的过程。美国科幻小说作家姜峰楠曾写道：“使用ChatGPT完成作业就像把一台叉车带到健身房，这样你永远不会提高你的认知能力。”</p>
-  <h2><strong>03 非英语母语作者，竟是“AI先天圣体”</strong></h2>
-  <p>靠AI写的论文作业无法代替思考，甚至可能给学生招来麻烦。</p>
-  <p>哪怕紧跟《ChatGPT学生写作指南》，学生们仍然可能被AI给坑到。人工智能自动化处理繁琐任务的能力素来被推崇，该指南里第一条建议是——使用ChatGPT来调整文献格式，好让学生们能“把精力集中在有趣的部分”。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_d50fab6efe8a46e180df2a7e13601d58@5091053_oswg416940oswg644oswg642_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">指南里关于参考引用的建议。（图/OpenAI官网）</p>
-  <p>对于这一建议，刚取得985高校博士学位的小四直言：“不靠谱！我只是让GPT把我的参考文献列表整理成MLA 格式（英文论文写作较常用的一种参考文献格式），它都乱来……删掉已有的文献，偷换成它编的文献。”要是小四没有仔细对照检查，极可能造成引文看起来有明显错误的后果，这惊吓效果可一点都不有趣。</p>
-  <p>有些时候，即使学生没有用AI来直接生成论文作业，也可能“AI率”拉满。有学生吐槽自己是“AI先天圣体”，好不容易逐字敲出来的实验报告，丢进AI检测器里却测出“AI含量100%”。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_1b329bbcee474b2c9b45f37f3e164eff@5091053_oswg50738oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/unsplash</p>
-  <p>目前在澳大利亚留学的Chrystal，曾有一份作业被老师判为AI写作。幸运的是，她保留了小组讨论的内容，自己的英文表达也比较好，最终申辩成功。打那以后，她在提交所有作业前，都会用AI检测器过一遍。</p>
-  <p>以前期末里忙着“查重降重”，现在学生们忙着“降AI率”。社交媒体上流传着各种降低AI率的攻略，内容小至AI常用词汇替换，大到篇章段落改写的方法。然而，这所谓的“AI检测”却不一定可靠。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_a74b64e41ff049f7ab0c81bc910ea9ab@5091053_oswg45582oswg846oswg554_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">Face challenges和Crucial role均被认为是AI高频词。图/受访者供图</p>
-  <p>很多外国大模型一直存在某种词汇歧视问题，现在连AI检测器也“继承”了这一顽疾。SCI期刊Patterns曾发布过一项针对AI检测器准确率的研究，研究人员使用7款广泛使用的AI检测器，对91篇非英语母语者的托福作文进行评估。作为对比，他们还使用同一组AI检测工具对99篇美国八年级学生的英文作文进行了检测。</p>
-  <p>结果显示，这些检测器将非英语母语者的作文判为AI生成导致的平均误判率超过60%，而对美国学生作文的误判率仅不到一成。研究人员认为：“在社交媒体中，GPT检测器可能错误地将非英语母语者的内容标记为AI抄袭，从而令特定的非英语母语者遭遇不公正的困扰。”</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_22aebc4b0f71413780bb1b43466ccb08@5091053_oswg43151oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/unsplash</p>
-  <p>小钱是正在申博的英国留子。在学术写作课上，她有一份练习是“正儿八经自己写的”，仅个别词句使用了谷歌翻译。当时老师没批改作业，表示既然是用AI改过的，他就不给改了。尽管那份作业不必算进成绩，但小钱还是有淡淡的隐忧：“真要因AI而涉嫌学术不端的话，要怎么举证？就怕老师一看一个不吱声。”</p>
-  <p>为了避免老师们秋后算账，部分学生用AI辅助写作业时会提前留一手。有人每写一部分作业就往邮箱里发一个备份，并标上时间；有人干脆转用在线文档来码字，遇到老师质疑就把历史修改记录甩过去，让老师翻看几十个版本和时间跨度；还有人笑称写作业时会录视频，顺便积攒视频素材。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_af4a8a1be79548dfbb8b6debebd0c01f@5091053_oswg57684oswg1080oswg709_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/《凪的新生活》</p>
-  <p>AI不太靠谱，AI检测器也不太靠谱。这些不靠谱的大模型，正在侵蚀着老师与学生之间的信任，甚至蔓延到学生党经常出没的领域。广州某家留学中介发文诉苦，指出AI检测器的出现给留学顾问带来信任挑战：学生怀疑留学顾问用AI一键生成文书，而留学顾问则猜测学生提供的材料是Chat老师生成的。</p>
-  <p>资深留学顾问小张告诉新周刊记者，曾有学生拿着AI检测结果去投诉留学顾问。据GPTZero平台的检测，那份文书初稿的人工成分仅有21%，出现了较多高频AI词汇。为此，小张尝试将自己逐字敲的文段上传到GPTZero做检测，AI率竟高达80%，而另一封几乎都是AI生成的信件，反倒被判定为仅有“10%AI”。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_7945b9dd82964ba18053cedb1d2a28d7@5091053_oswg66904oswg530oswg278_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">平台检测的AI含量为10%，“实际上只有10%人工”。图/受访者供图</p>
-  <p>无论是多番打批注、来回修改的新近文书，还是十多年前的申请文书，都可能被检测出超高的AI率。小张发现：“（文书）写得越好就越AI，因为用词规范，逻辑顺畅。”然而，这种小范围的测试并不能有效自证清白，毕竟没有人会像《让子弹飞》的六子那样，用剖腹的方式证明自己只吃了一碗粉。</p>
-  <p>而Chat老师在学生党中引起的“罗生门事件”，可能仅仅是社会大众与人工智能碰撞中的一个章节的小开端。OpenAI总裁Sam Altman于 12月初透露，ChatGPT的每周活跃用户突破3亿。较早前，该公司设定的增长目标是未来一年内达到10亿活跃用户。</p>
-  <p>这回ChatGPT崩溃前夕，苹果发布了针对iOS、iPadOS和MacOS的系统更新。这意味着ChatGPT将正式登陆Apple Intelligence（苹果智能）。当苹果用户向Siri提出复杂问题，Siri会调用ChatGPT的算力提供更智能的详细回答。</p>
-  <p>Chat老师正在向更多普通人走去，进入校园、办公室，潜伏于每一个低头刷手机的瞬间。“AI版罗生门”会在其他领域复制蔓延吗？目前还不好说。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/wC73OGiavhouUZU5NcZxww" rel="noopener noreferrer nofollow" target="_blank">“惊蛰青年”</a>，作者：晓洋，编辑：Felicia，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3086890065770632</id>
-            <title>TikTok遇险，商家“借道”墨西哥</title>
-            <link>https://www.36kr.com/p/3086890065770632</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3086890065770632</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 20 Dec 2024 08:04:10 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: TikTok, 商家, 美国, 墨西哥  
-<br><br>  
-总结: TikTok在美国面临被下架的风险，商家们焦急寻找出路，部分商家转向墨西哥以规避关税和发货便利。尽管面临挑战，商家们仍然看重TikTok的流量优势，认为其短视频带货效果显著，能够带来高利润。许多商家在墨西哥建立店铺，试图继续从美国市场获利。TikTok的流量和用户基础使得商家们不愿轻易放弃这一市场，尽管面临高昂的仓储和运营成本。 </div>
-                        <hr>
-                    
-                    <p>TikTok面临在美国被下架的风险，对其抱有很大期待的商家们，一边焦急地探听各路消息，一边寻找出路。</p>
-  <p>“现在TikTok商家天天蹲在X上扒消息，比记者还专业。”</p>
-  <p>在广州中山做了3年TikTok电商的郝玲，也活跃在商家群内。TikTok败诉、1月19日有可能被美国各大应用商店下架的消息刷屏时，她刚刚将3500件货品发到美区仓库，想趁着年底大促卖个好价钱。</p>
-  <p>“心一下子就凉了。”郝玲甚至顾不上哭，迅速把库存转到速卖通和Temu，并把TikTok店铺价格下调了10%，开始折扣清仓。刚合作过的KOL则在TikTok视频里贴出了自己的Instagram和YouTube账号。</p>
-  <p>她注意到，和美国相邻还互免关税的墨西哥，成了一些TikTok美国商家的“避难所”。</p>
-  <p><strong>在群内，墨西哥TikTok店铺的价格已经被炒了起来，从营业执照到税号等通办，单店买断需要3万元，整套办下来近10万元。</strong></p>
-  <p>但即便如此，郝玲并未打算撤离。</p>
-  <p>坚持不撤离TikTok的还有张成。他早一个月就在墨西哥买了店，美国仓库仍在正常备货，一旦被禁，张成准备从墨西哥转运美国。</p>
-  <p><strong>对张成们来说，Temu、SHEIN、速卖通更像是尚在发育的亚马逊，而TikTok没有平替。</strong></p>
-  <p>在亚马逊，张成需要等着用户进店浏览。为了让店铺排位靠前，他的店铺参加黑五大促的广告费动辄十几万元。在SHEIN、速卖通，商家也是用价格换流量。但在TikTok，商家自己拍条短视频，就有机会出单。</p>
-  <p>郝玲感受过短视频种草带货的魔法。原本在日销不过20~30件的单品，找KOL拍了条短视频做宣传，当天就涨到了百单。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_0ff711f34c0c416d81911fb5fcaafce1@5091053_oswg40705oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>对于郝玲这样出海晚的小商家来说，在TikTok还能做一做以小博大的暴富梦。“我做Temu也得在TikTok投流，TikTok的流量优势是其他平台没法比的。”</strong></p>
-  <p>更直观的是营收。相比去年，张成今年黑五大促的营收翻了一倍，其中一半以上来自TikTok。</p>
-  <p>而如今，TikTok在美国面临危局。美国墨西哥即时达的价格一路飞涨，上调至200元/立方米。不愿撤离的商家们难寻TikTok平替，或许比TikTok更不愿放弃美国市场。</p>
-  <p>在越南，Temu、SHEIN双双停运，Tik Tok在美国的严峻挑战，Temu们未来也有可能面对。尽管不少人相信“风浪越大、鱼越贵”的说法，但TikTok们还未戴上皇冠，海风早已拍上了肩头。</p>
-  <h2><strong>A</strong></h2>
-  <p>最近一段时间，从美国转向墨西哥的TikTok商家越来越多了。</p>
-  <p>张成提前一个多月把货物备到墨西哥，试着把货从墨西哥运向美国，不仅因为墨西哥接壤美国，发货便捷，还可以避免一部分高额关税。</p>
-  <p>一时之间，墨西哥TikTok店铺火了。</p>
-  <p>在张成所在的TikTok商家微信群里，几乎每天都有买墨西哥店铺的人。一般情况下，买断一个经营主体能开4-5家TikTok店铺，还能开一家亚马逊店铺，单店3万元，整套下来得近10万元。</p>
-  <p>在广州中山，和郝玲一街之隔的朋友从深圳出发，飞了16个小时抵达墨西哥首都墨西哥城，在那里找到门路建厂。“只要货品贴上墨西哥制造的标，就能绕开中国制造的问题。”</p>
-  <p>4月22日起，墨西哥对包含衣服、鞋等544项商品征收5%~50%的临时关税。这意味着，中国商家<strong>在墨西哥建厂、租仓库，要支付一大笔额外费用。但这一切在TikTok美区诱人的流量面前，似乎都显得微不足道。</strong></p>
-  <p>张成已经将亚马逊的业务几乎全都迁移到了TikTok Shop上。经营亚马逊店铺4年，他的投流成本翻了两倍，不投流就很难出单，利润率更是一路走低，从一开始的35%下降到了20%。</p>
-  <p>但在TikTok美区，张成的单品利润可达40%，甚至部分单品的利润达到了50%。“做爆品不用比谁砸钱投流砸的多，而是比谁短视频做的节奏好、卖点清晰。”这让张成省了一大笔投流费。除了大促期间邀请KOL拍视频，平常张成只需要正常上新，自然流量也能出单。</p>
-  <p>郝玲上半年出了一款爆品，随后带火了一整个品类。按照她的说法，其他商家“就连做切片卖同款，一天都能出40-50单。”</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_ccfb72ffe6e549a3baf24528e3977a47@5091053_oswg776230oswg516oswg821_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图注：TikTok年底大促推广视频 图源：字母榜截图</p>
-  <p>根据官方数据，美区上线一年，TikTok Shop内容场GMV（商品交易总额）增长557%，日支付用户数增长超3倍；内容电商创作者数量同比增长10倍，美国有动销的电商达人数每季度均保持70%以上增速。</p>
-  <p>在美国拥有1.7亿月活跃用户的TikTok，成了郝玲们难以割舍的淘金场。‌‌而在1月19日被下架的期限之前，为了守住TikTok这一流量池，商家们纷纷奔向墨西哥。</p>
-  <p>“海外仓更贵了。”2023年，SHEIN和Temu进入墨西哥，郝玲就经历了墨西哥城仓库价格的每月一涨；<strong>如今TikTok商家们涌入，仓储成本翻了1.5倍不止，靠谱的仓库，有钱都租不到。</strong></p>
-  <p>为了拿到美区流量，张成们要付出的代价并不少。</p>
-  <p>绕道墨西哥后，张成发现先进入的Temu、SHEIN早已炒高了墨西哥华人的工资，“墨西哥华人运营，普遍薪资在3-4万元，但同样工作能力的人员，在广州只能开5000元的工资。”</p>
-  <p>在墨西哥，治安问题让商家头疼，有时“发了100件货，入库只剩90件，等到回国再调货，时间更长，还白白付了仓储费。”一个月不到，张成的仓库已经丢了几次货。</p>
-  <p>在绕道运往美国前，张成们首先需要担心的或许是守住自己的仓库。</p>
-  <h2><strong>B</strong></h2>
-  <p>谈起2021年11月刚入驻TikTok英国站，郝玲形容那段日子像是在“捡钱”。</p>
-  <p>作为最早一批入驻的商家，郝玲主做珍珠，用国内抖音玩剩下的套路直接“起飞”。在抖音直播间早已不流行的现场珍珠开蚌、珍珠9.9元盲盒，给了英国用户一个“小震撼”。</p>
-  <p>国内赚9.9元人民币，出海赚的就是9.9英镑、9.9美元。<strong>“只要能卖出去，利润是80%往上的。”郝玲道。</strong></p>
-  <p>郝玲干脆将速卖通的货大部分备到TikTok。2023年，她又入驻了Temu。她注意到，相比起Temu上不断给商家弹出的降价窗口，TikTok的核价“宽松不少”。</p>
-  <p>为了提高经营效率，高中毕业的郝玲学会了Midjourney，通过AI，借助假人模特生成真人产品图。对英语一窍不通的她，只用简单的英语——we pay fast（我们付款很快）和KOL谈合作。</p>
-  <p>定居美国的外贸大卖家张成，也在去年黑五大促时将亚马逊上卖不动的货品搬到TikTok。</p>
-  <p>彼时，KOL只需要邮寄产品，就能拍短视频发布，TikTok还能报销邮费。与Instagram、X上主打图文的网红相比，TikTok达人通过拍摄短视频，可以更全面地展示产品，更适合张成主营的小家电、玩具类目。</p>
-  <p>张成一口气找了上百个KOL，接连2个短视频播放量破10万，亚马逊尾货在TikTok上卖出近万单，直接爆了仓。</p>
-  <p>张成去年给亚马逊店铺定下了50万的业绩目标，到了11月，只完成了一半。但在Tik Tok上架不到一周，张成销光了库存，还把不少用户引导至亚马逊店铺。</p>
-  <p>“10个亚马逊商家，9个在TikTok上开店引流。”张成表示，相比亚马逊动辄数十万的广告费，TikTok发发短视频的成本极低，却能拉来上百上千的订单，“这种生意，谁不想做呢？”</p>
-  <p><strong>大商家吃肉，小商家喝汤，带着抖音基因的TikTok，成了商家们新的押宝地。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_20c04918abdc498b95d78825b26d8de0@5091053_oswg429127oswg897oswg592_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>义乌的00后葛欣3月入驻TikTok，开店第4天就出了2单。“2单就回本了30%”。由于没有资金找KOL合作，没有投流预算，葛欣干脆自己拿手机拍短视频，对比海外KOL的视频1:1复刻。第一个月，她的TikTok店铺每天单量稳定产出20~30单，“当成副业做，一个月能挣个几千块。”</p>
-  <p>截至2024年黑五大促，TikTok美区的商家数量增长3~5倍、OUTLIER出海营销创始人王大卫告诉字母榜，<strong>谁都不想错过TikTok，正如谁都不想错过国内的抖音。</strong></p>
-  <p>而如今，这一切都被按下了暂停键。</p>
-  <h2><strong>C</strong></h2>
-  <p>在1月19日禁令生效前，TikTok分外忙碌。</p>
-  <p>12月17日，TikTok就向美国最高法院申请紧急禁制令。12月18日，法院将是否批准禁令的决定，推迟到定于 1月10日举行的口头辩论之后。</p>
-  <p><strong>根据媒体报道，TikTok的上诉可能导致两种结果：一种是在1月10日口头辩论后最高法院申请临时禁令，拖到1月20日特朗普正式上台，情况或将有利于TikTok；另一种则是最高法院不能冻结禁令，1月19日，禁令将生效。</strong></p>
-  <p>各样消息在TikTok商家群里飞来飞去。郝玲发现，TikTok推出了“邀请新用户立减”的活动，用户拉新能拿到价值50美元的TikTok Shop积分，用于商城消费，总计最高可以拿到350美元的奖励。</p>
-  <p>在郝玲们看来，这似乎也是TikTok释放出的某种信号：大力拉新或许能让TikTok被禁后，也能拥有足够多的存量用户。黏性强的用户即便APP下架后，也会通过安装包或其他方式继续使用TikTok。</p>
-  <p>在不少商家试图借道墨西哥转运美国的同时，TikTok计划于明年1月13日正式开放墨西哥站的入驻，2月13日商城开售。</p>
-  <p>对于张成们而言，现在的墨西哥正如同去年的美区，“达人只要寄品就能合作，入驻商家少”。</p>
-  <p>今年12月，TikTok新开西班牙站点，下个月还将迎来墨西哥站。TikTok正在积极布局B计划。不过，哪怕对于有巨大流量在手的TikTok而言，美区市场也是不可替代的。</p>
-  <p>官方数据显示，“黑五”当天，TikTok Shop美国市场整体销售额突破1亿美元，美区支付GMV爆发176%，日均GMV较去年增长超3倍。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_0ab85169b2614202885c275cd1870236@5091053_oswg530321oswg892oswg594_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>在美国这一跨境电商必争之地，TikTok shop的发展似乎比其他市场更为顺利。</p>
-  <p><strong>“没有任何一个市场像美国市场一样，心态开放，还有钱。”张成表示。</strong></p>
-  <p>相比更为传统的英国市场，美区消费者心态开放，对直播、短视频接受度较高。尽管东南亚市场也对短视频和直播接受度高，但早已成为红海，利润太低，中东、拉美等地区还需要真金白银的市场教育。<strong>“即便把团队挪去西班牙，挪去巴西，也达不到现在美区的效果。”</strong></p>
-  <p>在他乡，TikTok们陷入窘境，还未撤离的商家们仍在坚守，“现在美区销量仍正常，大促活动也在进行，只能走一步看一步，先把年底大促干完。”张成表示。</p>
-  <p>（文中张成、郝玲、葛欣为化名）</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/b_ZLT5AdxU56cMCe5woZ4w" rel="noopener noreferrer nofollow" target="_blank">“字母榜”</a>，作者：马舒叶，编辑：王靖，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3086780526525960</id>
-            <title>淘宝搜索正在“杀死”淘宝</title>
-            <link>https://www.36kr.com/p/3086780526525960</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3086780526525960</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 20 Dec 2024 08:03:22 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 淘宝搜索, 用户体验, 商品同质化, 广告策略  
-<br><br>  
-总结: 文章指出淘宝搜索体验下降，用户在搜索商品时常遇到结果同质化和冗长描述的问题，导致有效搜索受阻。为了提升搜索效果，淘宝推出广告服务，虽然为商家提供了曝光机会，但也使得搜索结果变得功利化。文章分析了阿里内部对“客户”的认知变化，认为淘宝应以消费者为核心优化搜索体验，但实际情况却未能改善。此外，搜索功能的失灵和订单搜索的困难也反映出运营策略的偏差，最终影响了用户的购物体验。 </div>
-                        <hr>
-                    
-                    <p>“淘宝搜索不好用了怎么办”，这个词条在小红书搜索框中显示关联笔记有41万多篇；而“淘宝搜索衣服都是一样的”则有54万多篇。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_6baf7dbaa68e467c8f0974acf1bbf1ff@26875_oswg157252oswg1080oswg511_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>这些帖子，都指向了同一个事实，淘宝搜索的使用体验正在下滑。当用户试图在淘宝上寻找心仪的商品时，往往会发现搜索结果千篇一律，即便是下拉十几页，也仅能见到三四种不同的款式。</p>
-  <p>许多商品标题为了追求曝光率，不惜堆砌冗长的描述和功能，实际上却与商品本身大相径庭，不仅极大地干扰了用户的有效搜索，还进一步加剧了用户的疲惫感和不信任感。</p>
-  <p>过去，通过淘宝搜索用户可以通过简单的关键词搜索，快速找到所需的商品，并根据销量、好评等排序机制进行筛选。然而，不知不觉中，那些好的产品设计和使用体验在悄然间消散。</p>
-  <p>淘宝为了提升搜索效果，推出类似于搜索引擎中的“前排位置”、“优先展示”的广告服务。这些服务让商家能够在关键字搜索时获得更高的展示和销售机会，通常以更显眼的位置出现在消费者眼前。</p>
-  <p>这种以广告为导向的搜索机制虽然在一定程度上为商家提供了更多的曝光机会，但也使得搜索结果变得愈发功利化和同质化。</p>
-  <p><strong>从更高的层面来看，搜索问题可能是阿里内部战略摇摆的遗留问题，</strong>很长一段时间，阿里内部对于企业核心价值观中“客户第一”中的“客户”是谁，认知似乎一直在摇摆。</p>
-  <p>2020年下半年，时任阿里CEO的张勇在回应员工关于谁是客户的疑问时表示：“买家第一，或者卖家第一，这样的讨论没有意义。谁第一都不合适，我们还是要具体情况具体来看。”而今年，蔡崇信在访谈视频中表示：“我们的客户是使用我们的App进行购物的人。”这一表态为阿里“客户是谁”的问题给出解答。</p>
-  <p>从这一点出发，其应该成为淘宝优化搜索体验的重要指引，即淘宝应该以消费者为核心，在搜索体验上有所跟进，目前来看，实际情况却不尽如人意。这或许反映出淘宝在决策从上至下传达的过程中，执行层在具体落地环节出现了偏差。</p>
-  <h2><strong>01 陷入搜索“鬼打墙”</strong></h2>
-  <p>“淘宝淘不到宝，但一定有鬼打墙。”</p>
-  <p>王淼近一个月都在淘宝上忙碌地为冬天做准备。最初，他计划购买一件厚实的大衣来抵御寒冬，于是每天下班后都会打开淘宝，在搜索栏中输入“大衣加厚”的关键词。</p>
-  <p>经过一段时间的搜索，王淼发现自己每天看到的大衣都是那几件，“范洛FanoStudios、黄麦麦Hmaimai、BUD 八得，我几乎每天看到的都是‘面熟’店铺的商品，再往下滑也刷不出什么新商品”。这仿佛陷入了一个循环，无论怎么更换关键词，总是绕不开那些熟悉的“面孔”。</p>
-  <p>王淼还注意到，在搜索“大衣加厚”时，展示出来的商品有很大一部分来自他常看的店铺或者已经关注的店铺，这对于想要寻找更多新选择的王淼来说，却有些无奈。</p>
-  <p>“我想看看更多不同风格、不同店铺的商品，可总是给我推荐那些我已经熟悉的，感觉选择面一下子就变窄了。”王淼有些无奈地说道。</p>
-  <p><strong>一方面是在搜索时碰到相同的产品，另一方面则是在搜索产品时得到的产品样式款型同质化严重。</strong></p>
-  <p>孙通向「市象」讲述了自己搜索“棉服”的经历。一次偶然的机会，他在淘宝主页搜索“棉服”时，被一款连帽带毛领的“座山雕”棉服吸引，便点进去查看了详情。</p>
-  <p>但当他从这个商品界面退出来，继续往下刷新商品时，却发现屏幕上不断地出现不同店铺的“座山雕”棉服，款式几乎一模一样，仅仅是价格上略有差异。“我本来还想多看看其他款式的棉服，结果满眼都是‘座山雕’，感觉像是走进了一个死胡同，怎么也找不到新的方向。”</p>
-  <p><strong>比“鬼打墙”更离谱的还包括搜索功能乱匹配。</strong></p>
-  <p>当王淼在搜索框中输入“短款羽绒服”，搜索结果中掺杂着许多与“短款羽绒服”毫不相关的商品，比如羊羔毛外套、皮毛一体外套等，这些商品标题中也并没有出现搜索的关键词。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_70c9a122f6b24431b09dee83ad87bdc8@26875_oswg1590197oswg980oswg2000_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>02 搜索功能多线失灵</strong></h2>
-  <p>眼下，在淘宝搜索店铺时也遭遇难题。孙通提到，有一次在小红书上看到一位穿搭博主分享的一家店铺，风格很符合他的喜好，便前往淘宝搜索。然而，他按照自己的记忆输入店铺名称后，却怎么也搜不到。</p>
-  <p>“我当时以为是店铺关闭了，但又觉得不太可能，这么受欢迎的店铺怎么会突然消失呢？”于是，孙通只好私信博主询问，博主将店铺名称复制给他，这才成功找到了店铺。</p>
-  <p>“<strong>尤其是那些英文名称的店铺，搜索起来更是困难重重。我发现哪怕是大小写、空格这些细微的差别，都可能决定着能否搜到店铺。</strong>这对于我们消费者来说，实在是太不方便了。”</p>
-  <p>不仅如此，淘宝消费后的“订单搜索”使用感也遇到不少吐槽。</p>
-  <p>尚文向「市象」吐槽了他的遭遇：“明明标题里边有我搜索的关键词，但搜索订单就是搜不到。”</p>
-  <p>尚文在今年夏天买了一条短裤，他的朋友也想买一条同款，尚文就信心满满地前往历史订单中搜索。</p>
-  <p>“这条裤子是牛仔面料的，我就去历史订单里搜索‘牛仔裤’，结果根本搜不到这个裤子订单，但是我确实买了。我就搜‘裤’，甚至不敢再多加一个‘子’字，这才搜到。”</p>
-  <p>尚文表示，这种情况并非偶然，如今他在搜索历史订单时，都只敢使用最基础、最简单的关键字，如“裙”“裤”等，生怕稍有不慎，就与想要查找的订单失之交臂。</p>
-  <p>与尚文相比，张澜的订单搜索情况刚好相反。</p>
-  <p>前年，张澜在淘宝的同一家店购入了两款包包，上周心血来潮想要查看该店铺是否有新品上架，于是在历史订单中搜索“包”，然而，他反复翻找，却始终不见那两个包包的订单。直到他根据包型搜索“托特包”，才终于找到了相关订单，进而通过店名找到了另外一个订单。</p>
-  <p>张澜和尚文所遇到的问题表现形式不同，但他们都遭遇了一个共同的困境：<strong>搜索的关键词明明就在商品标题中，却无法顺利找到对应的订单。</strong></p>
-  <p>还有不少网友反映，历史订单列表并非按照正常的时间顺序排列，而是毫无规律可言。在浏览订单时，常常会在正常的近期订单中突然冒出很久以前的订单。</p>
-  <p>有消费者就订单搜索问题咨询客服，客服往往只是机械地重复着“抱歉给您带来不好的服务体验”，却无法提供切实可行的解决方案。</p>
-  <h2><strong>03 问题出在哪里？</strong></h2>
-  <p>淘宝搜索并非个例，如今各大电商平台的搜索功能似乎都陷入了困境。有网友直言：“1688 的搜索更是离谱，搜索词稍微详细一点直接搜不到东西。”</p>
-  <p>在小红书上，“拼多多搜索关键词与结果无关”的相关笔记也多达4万多篇，甚至出现了“搜帽子会出现裙子和食物”这样令人啼笑皆非的情况。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20241220/v2_428d12548c8c40fd9688fd4dc9c42438@26875_oswg840643oswg735oswg790_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>以淘宝来分析，从技术层面来看，对于主页搜索，淘宝负责搜推细分的员工透露，搜索核心智能引擎Ha3和搜索排序核心BERT均处于正常运作状态。以同质化问题为例，在技术实现上，系统必然会进行去重处理，这是保障搜索结果多样性的基础操作。</p>
-  <p>但现实情况是，消费者依旧频繁遭遇搜索结果重复的困扰，“<strong>这背后极有可能是搜索策略出现了偏差。</strong>”搜推团队负责提供技术能力，最终决定搜索结果呈现方式的则是算法和运营策略。</p>
-  <p>同样，在订单搜索方面，像搜索“裤”却只出现部分订单的情况，从技术底层的倒排链来说，出现故障的可能性极低，理论上搜索完全具备呈现所有相关“裤”类订单的能力。上述人士表示问题大概率出在运营策略环节，比如在分词阶段，可能一开始分词的时候就按照“牛仔裤”这种全称来分词，从而缩小了搜索范围。</p>
-  <p>回顾淘宝搜索的发展历程，早期的淘宝搜索引擎以其精准性赢得了用户的青睐。</p>
-  <p>有一位使用淘宝长达17年的资深用户回忆道：“最开始的淘宝搜索引擎能够凭借关键词极其精准地搜出对应词条下的所有宝贝。例如，当你输入‘蓝色方领泡泡袖衬衫’，它真的可以找出淘宝平台上所有符合这一描述的衬衫，并且能够按照销量、好评等维度进行精确排序。”</p>
-  <p>时过境迁，如今的淘宝搜索已不再是单纯的功能导向模式。</p>
-  <p>据淘宝商家透露，淘宝经过数据分析总结出，<strong>至少需要对买家进行十几次的触达，才能实现最佳的成交转化效果。在这种逻辑下，广告在整个推荐体系中的比重日益增大。</strong></p>
-  <p>电商从业者江夏告诉「市象」：“随着用户的时间被众多平台分散，电商平台越发注重流量的高效利用，因此，<strong>平台倾向于推荐更容易成交的商品，倘若商品还具备较高的客单价，那自然是更优的选择。</strong>”</p>
-  <p>在该前提下，商家的行为也受到了平台策略的影响。</p>
-  <p>“商家在广告投放时，也会重点针对近期加购、收藏的客户进行加钱投放，以提高成交概率。”</p>
-  <p>江夏进一步指出：“为了确保能够获取流量并实现转化，商家在产品开发方面逐渐趋于同质化，倾向于抄袭爆款或者在爆款的基础上进行微创新，这样做成功率相对较高。而那些原本具有差异化的产品，尤其是无法有效提升转化率的差异化产品，由于难以获得足够的流量，使得商家难以收回开发成本，因此越来越少的商家愿意尝试。”</p>
-  <p>商家都在做“类爆款”，这无疑加剧了平台上商品的同质化现象，进一步恶化了用户的搜索体验。</p>
-  <p>如此一来，用户可能被困在了平台和商家设定好的策略框架之中，所能接触到的商品种类变得愈发有限，购物体验打折。</p>
-  <p>（文中人物均为化名）</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/Cfjg2HJtV3WDcm0-ziZGVA" rel="noopener noreferrer nofollow" target="_blank">“市象”</a>，作者：周立青，编辑：杨舟，36氪经授权发布。</p>
                 ]]>
             </content:encoded>
         </item>
