@@ -5,6 +5,171 @@
         <link>https://www.36kr.com/information/technology</link>
         
         <item>
+            <id>https://www.36kr.com/p/3113724310408705</id>
+            <title>剑指专业领域零部件级3D生成，Meta联手牛津推出全新多视图扩散模型</title>
+            <link>https://www.36kr.com/p/3113724310408705</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3113724310408705</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 08 Jan 2025 07:17:15 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 3D模型, 零部件, 多视图扩散模型, PartGen  
+<br><br>  
+总结: 本文介绍了Meta与牛津大学研究人员推出的多视图扩散模型PartGen，该模型旨在生成可独立操作的零部件级3D模型。当前的AI生成3D模型通常缺乏结构信息，而PartGen通过多视图生成和上下文补全技术，能够有效分割和重建3D对象的各个部分。该模型支持使用文本、图像或非结构化3D对象作为输入，生成具有高质量和完整性的3D零部件。研究表明，PartGen在合成和真实3D资产上的表现优于以往方法，并已成功应用于3D零件编辑等实际场景。 </div>
+                        <hr>
+                    
+                    <p><strong>【导读】</strong>对于专业应用和创意工作流来说，除了高质量的形状和纹理，更需要可以独立操作的「零部件级3D模型」。为此，Meta与牛津大学的研究人员推出了全新的多视图扩散模型。</p>
+  <p>当前AI生成的3D模型，已经拥有相当高的质量。</p>
+  <p>但这些生成结果通常只是单个物体的某种表示（比如隐式神经场、高斯混合或网格），而不包含结构信息。</p>
+  <p>对于专业应用和创意工作流来说，除了高质量的形状和纹理，更需要可以独立操作的「零部件级3D模型」。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_108099df9c0049d6afb227a8d4fc41fd@46958_oswg326242oswg1080oswg487_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>比如上图中的几个例子，3D模型应该由多个有意义的部分组成，可以分离、组合与编辑。</p>
+  <p>而上图中的效果，正是出自Meta与牛津大学的研究人员推出的全新多视图扩散模型——PartGen。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_8b872871800440aab9ff2150aa33b375@46958_oswg75390oswg861oswg261_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>论文地址：https://arxiv.org/pdf/2412.18608</p>
+  <p>项目地址：https://silent-chen.github.io/PartGen&nbsp;</p>
+  <p>PartGen可以使用文本、图像或非结构化3D对象作为输入，生成上面说的「子结构可分离」的3D模型。</p>
+  <p>同一些SOTA生成工作流类似，PartGen也采用两阶段方案，以消除零部件分割和重建的歧义：</p>
+  <p>首先，多视图生成器根据给定条件，生成3D对象的多个视图，由第一个多视图扩散模型提取一组合理且视图一致的部分分割，将对象划分为多个部分。</p>
+  <p>然后，第二个多视图扩散模型将每个部分分开，填充遮挡并馈送到3D重建网络，对这些补充完整的视图进行3D重建。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_46581f202cf64486b82106156e55f0ea@46958_oswg190376oswg1080oswg361_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>PartGen在生成过程中考虑了整个对象的上下文，以确保各部分紧密集成。这种生成式补全模型可以弥补由于遮挡而丢失的信息，还原出完全不可见的部分。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_8afa9956f9724d50b04a1b883ab5718d@46958_oswg83635oswg585oswg329_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>作者在合成以及真实的3D资产上评估了PartGen，如图所示，其性能大大优于之前的类似方法。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_ab65dcef7d5c4bb8ae85799805a66229@46958_oswg159775oswg1080oswg267_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>作者还将PartGen部署到真实的下游应用程序，例如3D零件编辑，以证明模型的实力。&nbsp;</p>
+  <h2><strong>零部件级3D生成</strong></h2>
+  <p>零件很重要，因为零件可以支持重用、编辑或者动画。&nbsp;</p>
+  <p>人类艺术家在制作3D模型时，会自然地以这种角度考虑。</p>
+  <p>比如一个人的模型可以分解成衣服和配饰，以及各种解剖特征（头发、眼睛、牙齿、四肢等）。</p>
+  <p>零件承载的信息和功能也很重要，比如不同的部分可能具有不同的动画或不同的材质。</p>
+  <p>零件还可以单独替换、删除或编辑。比如在视频游戏中，角色更换武器或衣服。</p>
+  <p>另外，由于其语义意义，零部件对于机器人、具身人工智能和空间智能等3D理解和应用也很重要。</p>
+  <p>PartGen将现有3D生成方法从非结构化，升级为零部件组合的方法，从而解决了两个关键问题：</p>
+  <blockquote>
+   <p>1）如何自动将3D对象分割成多个部分；</p>
+   <p>2）如何提取高质量、完整的3D零部件，即使是在外观部分遮挡、或者根本看不到的情况下。</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_55b3fdf1d3184bc4b7f5a5295a34969c@46958_oswg286681oswg1080oswg437_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h3><strong>多视图零部件分割</strong></h3>
+  <p>3D对象分割并没有所谓的「黄金标准」。因此，分割方法应该对合理的部分分割的分布进行建模，而不是对单个分割进行建模。</p>
+  <p>可以使用概率扩散模型来学习这项任务，从而有效地捕捉和建模这种模糊性。</p>
+  <p>作为整个生成流程的第一阶段，研究人员将零件分割转换为随机多视图一致性着色问题（stochastic multi-view-consistent colouring problem），利用经过微调的多视图图像生成器，在3D对象的多个视图中生成颜色编码的分割图。</p>
+  <p>作者不假设任何确定性的零件分类法——分割模型从艺术家创建的大量数据中学习，如何将对象分解为多个部分。</p>
+  <p>考虑将多数图图像作为输入，模型的任务就是预测多个部分的mask。给定一个映射，将分割图渲染为多视图RGB图像，然后对预训练模型进行微调。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_dbe65ae8ad9f4d508c6f3ce44e4970a8@46958_oswg346572oswg1080oswg474_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>作者使用VAE将多视图图像编码到潜在空间中，并将其与噪声潜在空间堆叠起来，作为扩散网络的输入。</p>
+  <p>这种方法有两个优势：首先是利用了预训练的图像生成器，保证了天生具有视图一致性；其次，生成方法允许简单地从模型中重新采样来进行多个合理的分割。</p>
+  <h3><strong>上下文部分补全</strong></h3>
+  <p>对于第二个问题，即在3D中重建分割的零件，普遍的方法是在现有的对象视图中屏蔽零件，然后使用3D重建网络进行恢复。</p>
+  <p>然而，当零件被严重遮挡时，这项任务相当于非模态重建，是高度模糊的，确定性重构网络无法很好地解决。</p>
+  <p>本文建议微调另一个多视图生成器来补全部分的视图，同时考虑整个对象的上下文。</p>
+  <p>类似于上一个阶段，研究人员将预训练的VAE分别应用于蒙版图像和上下文图像，产生2 × 8个通道，并将它们与8D噪声图像和未编码的部分掩码堆叠在一起，获得扩散模型的25通道输入。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_09b2dcae5ef2404d8e839b47a8e95be9@46958_oswg173909oswg587oswg489_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>通过这种方式，即使零件在原始输入视图中仅部分可见，甚至不可见，也可以可靠地重建这些零件。此外，生成的部分可以很好地组合在一起，形成一个连贯的3D对象。</p>
+  <p>最后一步是在3D中重建零件。因为零件视图已经是完整且一致的，所以可以简单地使用重建网络来生成预测，此阶段的模型不需要特殊的微调。</p>
+  <h3><strong>训练数据</strong></h3>
+  <p>为了训练模型，研究人员从140k 3D艺术家生成的资产集合中构建了数据集（商业来源获得AI训练许可）。数据集中的示例对象如图3所示。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_bd9b3b4c231544dda5cd38b1886e89df@46958_oswg82307oswg577oswg461_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>对于方法中涉及微调的三个模型，每个模型的数据预处理方式都不同。</p>
+  <p>为了训练多视图生成器模型，首先必须将目标多视图图像（4个视图组成）渲染到完整对象。</p>
+  <p>作者从正交方位角和20度仰角对4个视图进行着色，并将它们排列在2 × 2网格中。</p>
+  <p>在文本条件下，训练数据由多视图图像对及其文本标题组成，选择10k最高质量的资产，并使用类似CAP3D的工作流生成它们的文本标题。</p>
+  <p>在图像条件下，使用所有140k模型数据，设置随机采样以单个渲染的形式出现。</p>
+  <p>为了训练零件分割和补全网络，还需要渲染多视图零件图像及其深度图。</p>
+  <p>由于不同的创作者对部分分解有不同的想法，因此作者过滤掉数据集中可能缺乏语义的过于精细的部分（首先剔除占用对象体积小于5%的部分，然后删除具有10个以上部分或由单个整体组成的资产）。</p>
+  <p>最终的数据集包含45k个对象（210k个零部件）。</p>
+  <h3><strong>下游应用</strong></h3>
+  <p>下图给出了几个应用示例：部件感知文本到3D生成、部件感知图像到3D生成，以及真实世界的3D对象分解。</p>
+  <p>如图所示，PartGen可以有效地生成具有不同部件的3D对象，即使在严重重叠的情况下，例如小熊软糖。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_ea3d6e6e498b447f8a333201a560406d@46958_oswg507261oswg1080oswg618_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>给定一个来自GSO（Google Scanned Objects）的3D对象，渲染不同的视图以获得图像网格，图6的最后一行显示，PartGen可以有效地分解现实世界的3D对象。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_bb177be09d5840fb8472023b2a826357@46958_oswg184274oswg587oswg571_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>当3D对象被分解之后，它们就可以通过文本输入进一步修改。如图7所示，PartGen可以根据文本提示有效地编辑零件的形状和纹理。</p>
+  <p>参考资料：&nbsp;</p>
+  <p>https://x.com/MinghaoChen23/status/1871809184620323279&nbsp;</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/sl1XvbN-uHBVUldX6gpynA" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，编辑：alan，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3113724449787657</id>
+            <title>OpenAI智能体曝本月诞生，比谷歌Anthropic慢，竟是担心prompt攻击</title>
+            <link>https://www.36kr.com/p/3113724449787657</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3113724449787657</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 08 Jan 2025 07:13:40 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: OpenAI, 计算机操作智能体, 提示注入攻击, AI安全问题  
+<br><br>  
+总结: OpenAI在智能体领域面临竞争压力，尽管计划在本月发布自家的计算机操作智能体，但由于担心提示注入攻击，发布进度延迟。提示注入攻击是指模型被诱导执行恶意指令，可能导致用户信息泄露。其他公司如Anthropic和谷歌已推出类似产品，OpenAI需在安全性和功能上超越竞争对手。尽管Anthropic承认提示注入风险，但其发布实验性功能的决策引发了对AI安全与商业利益平衡的讨论。 </div>
+                        <hr>
+                    
+                    <p><strong>【导读】</strong>就在刚刚，OpenAI在智能体上落后竞争对手的原因曝光了！</p>
+  <p>2025年，智能体将是AI领域最激烈的战场。&nbsp;</p>
+  <p>然而，一直在AI领域「独占鳌头」的OpenAI，却迟迟没有出手。&nbsp;</p>
+  <p>不过，外媒最近曝出了一条好消息——OpenAI可能在本月就会发布自家的「计算机操作智能体」！&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_02c38956c5024401b4d92f510a2e523b@46958_oswg763418oswg1080oswg868_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>对此，网友们纷纷表示，已等待多时，望眼欲穿了！&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_420001e8fa8c4cc5be7ef4a4df8abd5c@46958_oswg805715oswg1080oswg911_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_29ed4a2c406043968f94c879d6a0344c@46958_oswg306814oswg1080oswg605_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_cfc70972be27400699ebac6a35155684@46958_oswg460420oswg1080oswg661_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>计算机操作智能体</strong></h2>
+  <p>去年10月份，Anthropic率先发布了基于Claude 3.5 Sonnet的「计算机操作智能体」。</p>
+  <p>在当时的Demo中，Anthropic首次实现了让模型自主操控电脑屏幕、移动光标、完成任务，并惊艳了所有人。</p>
+  <p>理论上，新功能可以根据简单的提示完成所有操作，而用户要做的就是写下提示，其他必要的步骤都将由模型来执行。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_da90dca670f94d51a73311c1654f6814@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>无独有偶，谷歌也在去年4月发布了用于简化AI智能体开发的工具Vertex AI Agent Builder，并在10月被曝出正在秘密开发名为「Project Jarvis」的智能体。&nbsp;</p>
+  <p>根据爆料，谷歌采用的操作原理与Anthropic类似，也是通过截屏、解析屏幕内容，然后自动点击按钮，或输入文本，最终帮助人们完成基于网页的日常任务。</p>
+  <p>不过，它在执行不同操作时，中间会有几秒钟的思考时间。因此，在终端设备中运行还不太现实，仍然需要云上操作。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_31f7b0121d354e08a69f5f25583a1158@46958_oswg265048oswg1080oswg223_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>其实，OpenAI也布局了研发此类软件。&nbsp;</p>
+  <p>去年2月份，OpenAI就对媒体放风说，自己正在开发AI智能体。&nbsp;</p>
+  <p>去年11月时则透露称，将会在来年1月发布代号为「Operator」的AI智能体工具。&nbsp;</p>
+  <p>在最近的博客中，Altman表示，OpenAI已经掌握了传统上意义上的通用人工智能的创建方法。并且相信到 2025 年，会看到第一批AI智能体「加入劳动力队伍」，并极大地改变公司的产出。&nbsp;</p>
+  <p>如今DDL将近，外媒突然有下场爆料称，OpenAI的智能体还得有个三四周才能发布。&nbsp;</p>
+  <p>而之所以会这样，竟是因为他们在担心「AI安全问题」——遭到提示注入攻击！&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_aa1d997e6fee4254abcea4dbe1286aa7@46958_oswg62938oswg1080oswg292_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>提示注入攻击</strong></h2>
+  <p>想象一下，面对即将到来的节日聚会，你决定让智能体，寻找并订购一套新衣服。</p>
+  <p>结果一不小心，模型点开了一个恶意网站。然后，网站指示它忘记之前的指令，让它登录邮箱并窃取了你信用卡信息。</p>
+  <p>在这个过程中，计算机操作智能体模型一般需要四个执行步骤：</p>
+  <p>1. 首先，模型接收用户的API请求</p>
+  <p>2. 根据提示，选择要使用的工具</p>
+  <p>3. 之后，截取桌面屏幕内容并评估任务是否完成</p>
+  <p>4. 如果没有，继续使用这些工具，直到实现目标&nbsp;</p>
+  <p>问题出现在第3步，截图内容可能被恶意利用，也就是所谓的「提示注入攻击」。&nbsp;</p>
+  <p>对于正在开发此类计算机操控软件的AI实验室来说，这是一个非常现实的担忧。&nbsp;</p>
+  <p>因为，这类软件本质上是接管用户设备，为用户自动完成复杂的任务，比如在线购物或编辑电子表格等。&nbsp;</p>
+  <p>这种攻击被称为「提示注入」（prompt injection），即大语言模型被用户诱导遵循恶意的指令。&nbsp;</p>
+  <p>提示注入并非新出现的威胁。&nbsp;</p>
+  <p>几个月来，它一直是OpenAI的ChatGPT和Anthropic的Claude等产品面临的问题。通过「提示注入」，这些产品曾生成了制造计算机病毒或炸弹的说明书。&nbsp;</p>
+  <p>但对于计算机操作智能体来说，提示注入构成了更大的威胁。&nbsp;</p>
+  <p>OpenAI某员工表示：「这是因为当模型在浏览网络或控制用户计算机时，用户很难控制模型接收的信息。」&nbsp;</p>
+  <p>在一篇博客文章中，Anthropic也承认了提示注入的风险。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250108/v2_4516e910c0ad4b48847efbd52eff9343@46958_oswg320393oswg1080oswg577_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>然而，它并没有提供太多解决方案，只是敦促开发者采取「将Claude与敏感数据隔离的预防措施」，包括使用独立于主计算机系统和敏感数据的专用虚拟环境（即虚拟机）。&nbsp;</p>
+  <p>这种相对放任的态度让OpenAI的员工感到意外：「考虑到Anthropic过去一直在强调要自己十分注重AI安全，这次的操作令人非常困惑。」&nbsp;</p>
+  <p>但在去年10月份，Anthropic毅然决然地发布了实验性计算机操控功能。这一点或许说明了，此类初创公司很难在安全发展AI与为股东创造利润之间取得平衡。&nbsp;</p>
+  <p>而OpenAI在发布AI智能体软件时，到底能不能提供更多的安全保障？能不能在功能上超越Anthropic和Google已经推出的方案？&nbsp;</p>
+  <p>参考资料：&nbsp;</p>
+  <p>https://x.com/steph_palazzolo/status/1876646459698991573&nbsp;</p>
+  <p>https://www.theinformation.com/articles/why-openai-is-taking-so-long-to-launch-agents?rc=epv9gi&nbsp;</p>
+  <p>https://www.datacamp.com/blog/what-is-anthropic-computer-use&nbsp;</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/qEaUpiH9K0w6WNA82-UWTQ" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，编辑：KingHZ 好困&nbsp;，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.36kr.com/p/3112619335351809</id>
             <title>2024年，腾讯音乐、网易云、汽水音乐在拼什么？</title>
             <link>https://www.36kr.com/p/3112619335351809</link>
@@ -1888,92 +2053,6 @@
   <p>早在去年&nbsp;5&nbsp;月，丰田就与斯巴鲁和马自达联合宣布，共同开发专为电气化系统设计的新一代发动机。根据他们当时的说法，这款新发动机将更加小巧紧凑，有望降低车辆的引擎盖高度，从而改善空气动力学性能，提升整体性能和燃油效率。</p>
   <p>不过，三家公司并未透露具体的实施时间表，比亚迪卖技术的钱，应该还能多赚几年。</p>
   <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/IawR5Md2owwMN_yk9h-fSw" rel="noopener noreferrer nofollow" target="_blank">“董车会”</a>，作者：李华，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3112842695102216</id>
-            <title>谷歌发力世界模型</title>
-            <link>https://www.36kr.com/p/3112842695102216</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3112842695102216</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 08 Jan 2025 01:09:23 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 人工智能, 模拟物理世界, 世界模型, 谷歌DeepMind  
-<br><br>  
-总结: 谷歌正在组建一个新团队，专注于开发可以模拟物理世界的人工智能模型，团队由Tim Brooks领导。该团队将致力于实时交互生成工具，并与现有的Gemini、Veo和Genie团队合作。Brooks认为，扩展人工智能训练是实现通用人工智能的关键，世界模型将推动视觉推理、规划和互动娱乐等领域的发展。尽管世界模型的潜力巨大，但其发展可能对创意行业造成冲击，且版权问题仍未解决。 </div>
-                        <hr>
-                    
-                    <blockquote>
-   <p>谷歌将组建新团队开发模拟物理世界的AI模型，负责人为原Sora联合负责人之一的Tim Brooks。</p>
-  </blockquote>
-  <p>据报道，谷歌正在组建一个新的团队，专注于开发可以模拟物理世界的人工智能模型。</p>
-  <p>该团队的负责人是蒂姆·布鲁克斯（Tim Brooks），他原先是OpenAI视频生成器Sora的联合负责人之一，后于2024年10月离开OpenAI，跳槽至谷歌的人工智能研究实验室谷歌DeepMind。</p>
-  <p>根据Brooks周一（1月6日）在社交媒体X上的最新发帖，他领导的这个新团队隶属于DeepMind，将致力于开发可以模拟物理世界的人工智能模型。</p>
-  <p>Brooks写道，“DeepMind有雄心勃勃的计划，要制造大规模的生成模型来模拟世界。我正在招聘一个新的团队来完成这个任务。”</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250107/v2_18c4e2bcb3484df68f8e909897c4364e@1743780481_oswg49497oswg807oswg385_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>根据描述，Brooks的新团队将着眼于开发“实时交互生成”工具，并研究如何将他们的模型与现有的多模式模型（如Gemini）集成。</p>
-  <p>新的团队还将与谷歌现有的Gemini、Veo和Genie团队合作，并以后者团队的工作为基础，将模型扩展到“最高水平的计算”。</p>
-  <p>据了解，Gemini是谷歌的旗舰AI模型系列，用于分析图像和生成文本等任务；Veo是谷歌的视频生成模型；至于Genie，它是谷歌的基础世界模型，为用户提供了前所未有的交互体验，支持用户借助文本、合成图像、照片乃至草图等方式，创造出可玩性强的交互式环境和可控的虚拟世界。</p>
-  <p>去年12月，谷歌还推出了升级版的Genie 2，能够模拟出动作可控、极具可玩性的逼真3D虚拟世界。</p>
-  <h2><strong>世界模型</strong></h2>
-  <p>Brooks发布的工作描述是这样写的：“我们认为，在视频和多模态数据上扩展人工智能训练是实现通用人工智能（AGI，指能够完成人类能完成的任何任务的人工智能）的关键途径。世界模型将为许多领域提供动力，比如视觉推理和模拟、具体化代理的规划以及实时互动娱乐。”</p>
-  <p>“世界模型”是目前技术流派中难度最高的一种，其特点在于让机器能够像人类一样对真实世界有一个全面而准确的认知。</p>
-  <p>目前，许多初创公司和大型科技公司都在追逐世界模型，包括有影响力的人工智能研究员李飞飞的World Labs、以色列新贵Decart和初创公司Odyssey等。他们认为，世界模型有一天可以用来创建互动媒体，如视频游戏和电影，并运行逼真的模拟，如机器人训练环境。</p>
-  <p>不过，世界模型的发展似乎对一些创意人士并不友好。</p>
-  <p>著名杂志《连线》最近的一项调查发现，像动视暴雪（Activision Blizzard）这样的游戏工作室，已经解雇了大量员工，而他们正在利用人工智能来提高生产率，并弥补人员流失。美国动画协会在2024年委托进行的一项研究估计，到2026年，美国将有超过10万个电影、电视和动画工作岗位被人工智能取代。</p>
-  <p>相较于被取代，合作似乎是一种更友好的方式。一些新兴的世界模特领域的初创公司，比如Odyssey，已经承诺与有创意的专业人士合作。这是否会成为谷歌的做法，仍有待观察。</p>
-  <p>另外，对于世界模型而言，版权问题悬而未决。一些世界模型是根据视频游戏播放的片段进行训练的，这可能会使开发这些模型的公司在视频未经许可的情况下成为诉讼的目标。</p>
-  <p>而拥有Youtube的谷歌声称，根据平台的服务条款，它有权基于YouTube视频训练自己的模型。但该公司并未透露将为培训采购哪些具体视频。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/faseU-E6mrcYLjvvLhu7Ew" rel="noopener noreferrer nofollow" target="_blank">“财联社AI daily”</a>，作者：周子意，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3112826805980675</id>
-            <title>双汇万隆，启动第三个IPO，估值近400亿元</title>
-            <link>https://www.36kr.com/p/3112826805980675</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3112826805980675</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 08 Jan 2025 00:53:50 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: IPO, 史密斯菲尔德, 万洲国际, 猪肉产业  
-<br><br>  
-总结: 史密斯菲尔德食品公司计划在纽约证券交易所进行首次公开募股（IPO），预计出售最多20%的股份，估值不低于53.8亿美元。此次IPO募集资金将用于基础设施建设和产能扩张，以提升竞争力。史密斯菲尔德自2013年被万洲国际收购后，年销售额从130亿美元增长至约180亿美元。万洲国际在过去两年中进行业务重组，关闭部分加工设施并出售相关业务，以应对生猪价格下跌和经营成本上升的挑战。业内人士认为，史密斯菲尔德的IPO可能会推动农业领域的竞争与创新。 </div>
-                        <hr>
-                    
-                    <p>84岁的万隆，或将又迎来一个IPO。</p>
-  <p>昨日（6日），全球最大的猪肉养殖商、生产商及加工商史密斯菲尔德食品公司（Smithfield Foods Inc.）公开了其在纽约证券交易所的首次公开募股（IPO）申请文件。</p>
-  <p>文件显示，经过母公司万洲国际管理层长达半年的讨论，万洲国际计划在发行中出售其在史密斯菲尔德的部分股份。按完全摊薄后计算，这部分交易预计将占史密斯菲尔德最多20%的股份，并将该公司的估值推至不低于53.8亿美元（折合人民币约394.29亿元）。</p>
-  <p>需要提及的是，在完成分拆后，史密斯菲尔德仍将是万洲国际子公司，并将继续并表。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250107/v2_a818ab594910491dbd19878bff610e22@1743780481_oswg1029624oswg1080oswg795_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>事实上，史密斯菲尔德重新在美上市的消息早在2023年底就已传出。去年，史密斯菲尔德剥离了其欧洲业务，并于10月4日秘密提交了美国IPO的申请。此次IPO募集的资金将用于基础设施建设、自动化升级以及产能扩张，助力公司在未来的发展中提升竞争力。</p>
-  <p>公开信息显示，史密斯菲尔德成立于1936年。自1999年在纽约证券交易所上市以来，公司逐步发展成为包装肉类和新鲜猪肉产品的重要生产商之一，直至2013年被万洲国际收购。</p>
-  <p>早在2013年，万洲国际（前身为双汇发展）以47亿美元收购了史密斯菲尔德，这成为当时中国公司对美国企业的最大收购案之一。收购完成后，史密斯菲尔德从纽约证券交易所退市，成为万洲国际旗下的重要子公司。</p>
-  <p>合并后，万洲国际不仅巩固了其在中国国内的市场地位，也显著扩大了在国际市场的影响力。2014年，万洲国际在香港成功上市，募集资金超过23亿美元，用于偿还部分收购史密斯菲尔德所欠的债务。</p>
-  <p>据了解，在随后的11年中，万洲国际的业务发展为三大板块：A股上市的双汇发展、非上市的物流及其他附属产业，以及以史密斯菲尔德为首的美国及国际业务。这些国际业务遍及英国、波兰、斯洛伐克、匈牙利、罗马尼亚、墨西哥等多个国家，自2013年收购以来，史密斯菲尔德的年销售额从130亿美元增长至约180亿美元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250107/v2_bd75902a38624fdaad00fda5a589772a@1743780481_oswg841843oswg1080oswg597_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>公司财报显示，截至2024年9月29日的前九个月中，史密斯菲尔德报告净收入5.81亿美元，销售额为101.9亿美元。而2023年同期，公司则录得净亏损200万美元，销售额为106.4亿美元。</p>
-  <p>在2024年第一季度业绩会上，史密斯菲尔德总裁Charles Shane Smith表示：“我们确实正在经历美国生猪养殖历史上的一个不利周期，这一周期自2022年第四季度开始，进入2024年第二季度，我们也将逐步走出困境。预计猪价将有所提升，饲养成本（如玉米和豆粕）也在下降。”</p>
-  <p>根据路透社报道，美国知名会计事务所分析师指出，随着我国消费增长放缓，消费者对猪肉的需求下降，导致相关生产商面临销售压力和利润下滑的挑战。“需求急剧下滑，”“这些公司遭受了巨大的损失。”</p>
-  <p>事实上，在过去一两年时间里，万洲国际一直致力于猪肉业务的重组。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250107/v2_7b9107e545d24a0597e7a4f6a76ddcfb@1743780481_oswg1131575oswg1080oswg688_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>受经营成本持续上升、生猪价格持续下跌等因素影响，万洲国际先是在2022年5月关闭了美国加利福尼亚州的加工设施，退出若干生猪养殖业务。2023年6月，又将上述加工设施以2.05亿美元的价格出售给独立第三方。此外，万洲国际还重组了其在美国密苏里州及犹他州的生猪养殖业务。</p>
-  <p>此外，万洲国际陆续出售了特色食品业务Saratoga以及墨西哥综合生猪生产和加工企业Norson的全部权益，分别获得了5.75亿美元的出售收入，并确认了1200万美元的税前处置亏损。</p>
-  <p>另一方面，万洲国际通过并购不断拓展欧洲市场，并尝试通过业务多元化来缓解猪价下跌带来的不利影响。2023年2月，万洲国际完成了对罗马尼亚肉制品生产商Goodies Meat Production S.R.L.（Goodies）100%股权的收购。Goodies主要生产沙乐美肠、火腿、烟肉、博洛尼亚腊肠及其他肉类特产。</p>
-  <p>紧接着，同年11月，万洲国际宣布其子公司史密斯菲尔德食品欧洲业务将与西班牙肉类生产商Argal集团建立战略联盟。双方不仅商定了联合管理框架，史密斯菲尔德公司还将购买Argal集团50.1%的股份。该交易已于2024年3月完成。</p>
-  <p>业内人士认为，作为其IPO战略的一部分，史密斯菲尔德可能会进一步提升其可持续发展和供应链效率。此外，史密斯菲尔德的举动可能会对农业领域产生示范效应，促使其他企业考虑类似的战略，以增加资本和实现战略独立性，从而推动行业内的竞争与创新更加活跃。公司专注于增长和创新，准备在新的独立道路上应对供应链管理和可持续性方面的挑战。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/-LXbwAN981sLXc7rR3pK_A" rel="noopener noreferrer nofollow" target="_blank">“快消”</a>，作者：木木‍‍‍‍‍，36氪经授权发布。</p>
                 ]]>
             </content:encoded>
         </item>
