@@ -5,18 +5,35 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/67847edcce5dfe56eedb880e</id>
+            <id>https://m.okjike.com/originalPosts/67854736536d817aad6e4598</id>
             <title>AI探索站 01月13日</title>
-            <link>https://m.okjike.com/originalPosts/67847edcce5dfe56eedb880e</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67847edcce5dfe56eedb880e</guid>
+            <link>https://m.okjike.com/originalPosts/67854736536d817aad6e4598</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67854736536d817aad6e4598</guid>
             <pubDate></pubDate>
-            <updated>Mon, 13 Jan 2025 02:47:56 GMT</updated>
+            <updated>Mon, 13 Jan 2025 17:02:46 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    最近 X 上在讨论为什么大语言模型 O1，有时候会用中文思考？<br /><br />转发一段 Hugging Face 王铁震老师的想法：<br /><br />--- DeepSeek 机翻<br /><br />我一直觉得，会两种语言不仅仅是能用两种语言交流，而是能根据话题和场景，自然地用更合适的语言去思考。比如，我更喜欢用中文做加减乘除，因为每个数字只有一个音节，算起来干脆利落。但一提到“无意识偏见”这种话题，我就会不自觉地切换到英语，毕竟这些概念我最开始就是从英语里学来的。<br /><br />这让我想到编程语言：大多数程序用什么语言都能写，但我还是会用 Bash 写命令行脚本，用 Python 搞机器学习，因为每种语言都有自己最顺手的地方。现实中的语言也一样，我们会根据语言的特点和自己的习惯，选择最顺手的语言去表达特定的内容。<br /><br />这也是为什么我觉得，在训练大语言模型（LLM）时，保持所有语言和文化的多样性和包容性特别重要。就像哲学家维特根斯坦说的：“语言的界限就是世界的界限。”只有包容每一种语言的细微差别，才能让模型学到更全面的思维。即使两种语言里的两个词意思一样，它们在模型中的 Embedding 也可能完全不同，因为它们背后的文化和使用方式截然不同。在我看来，这种包容性不仅能打造更公平、更准确的模型，还能让它处理更多样化的任务，汇聚全人类的智慧。
+                    Kokoro 82M 这个 TTS 模型也太好了<br /><br />模型大小只有不到 300M，生成的音频质量很高<br /><br />在 T4 上，只需要 4.5 秒就能生成 2 分 25 秒的语音<br /><br />可惜的是只支持英文，不过可以按他们的架构训练其他语言，只需要不到 100 小时的音频数据<br /><br />模型下载：https://huggingface.co/hexgrad/Kokoro-82M<br />模型演示：https://huggingface.co/spaces/hexgrad/Kokoro-TTS
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/678500d6ce5dfe56eee51382</id>
+            <title>AI探索站 01月13日</title>
+            <link>https://m.okjike.com/originalPosts/678500d6ce5dfe56eee51382</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/678500d6ce5dfe56eee51382</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 13 Jan 2025 12:02:30 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Huggingface 发布了一个基于 smolagents 的 Agent 课程<br /><br />非常基础，而且带了 Colab 笔记<br /><br />主要分成三个项目：搜索智能体、代码智能体和自定义函数<br /><br />地址：https://github.com/huggingface/smol-course/tree/main/8_agents
                 ]]>
             </content:encoded>
         </item>
@@ -34,23 +51,6 @@
                 <![CDATA[
                     
                     分享一个快速完成 privacy-policy、terms-of-service 和 about 页面、README 文件的方法。<br /><br />以前要写这样的页面，我会给Claude发送网站的详细描述，如果一次描述不完整，就要对话好几轮才能改好。<br /><br />现在直接在 Cursor 上面使用 @ codebase 功能，让AI浏览代码，根据代码内容来编写，这样写出来的内容非常精准，省事不少。<br /><br />用法一：代码比较简单，像 p1 那样直接让 AI 生成结果；<br />用法二：代码量比较大，存在一部分没有实际用到的代码，参考 p2-p5，先让 AI 总结网站功能再开始写，这种情况 AI 会把没用到的代码也考虑进去，所以生成内容可能会有偏差，只需要你澄清一下功能，就能重新生成正确的结果。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6783d5e3dce1743f06094233</id>
-            <title>AI探索站 01月12日</title>
-            <link>https://m.okjike.com/originalPosts/6783d5e3dce1743f06094233</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6783d5e3dce1743f06094233</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 12 Jan 2025 14:46:59 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    AI Hacker House 要办首场活动啦！有幸邀请到最有创造力、最有凝聚力、最有 build 力的 AI 社群 Demo Inn Shanghai 联合举办。 @海辛Hyacinth <br /><br />如果你想参与这次 demo inn 的活动，请通过以下链接进行报名：https://lu.ma/pr3s2hpy<br /><br />🏡 🏡 🏡 <br />AI Hacker House 由「十字路口」和「Aligns AI」在上海漕河泾开发区发起，「Spark Lab」作为驻地团队常驻运营 （aka，啦啦队长是我们，靠谱队长是 @Ryan.eth ）
                 ]]>
             </content:encoded>
         </item>
