@@ -5,6 +5,1332 @@
         <link>https://www.36kr.com/information/technology</link>
         
         <item>
+            <id>https://www.36kr.com/p/3132058339678981</id>
+            <title>大模型推理新突破：分布式推理技术探索与实践</title>
+            <link>https://www.36kr.com/p/3132058339678981</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3132058339678981</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 08:18:35 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <大模型技术, P-D 分离, AI 基础设施, 通信机制>
+<br>
+<br>
+总结: 随着大模型技术的产业变革，传统基础设施已无法满足其快速发展的需求，推动了基础设施技术向大模型基础设施的转型。P-D 分离技术通过将推理过程中的 Prefill 和 Decode 阶段分开，优化了资源配置和显存使用，显著降低了请求的平均时延和 P99 时延。该技术在多个案例中取得了良好的效果，表明其在实际应用中的可行性和优势。未来，P-D 分离方案将扩展到更多场景，并与其他特性兼容，以提升大模型推理的效率和性能。 </div>
+                        <hr>
+                    
+                    <p>随着大模型技术从技术变革转向产业变革，大模型应用也会进一步繁荣，传统基础设施技术已经不足以满足大模型应用的快速发展，整个基础设施技术和产业链正在快速转型，向大模型基础设施技术演变。2025 QCon 全球软件开发大会（北京站）策划了「面向 AI 的研发基础设施」专题，将深入分析 AI 基础设施的关键技术，包括机房服务器和芯片设计、大规模高性能网络技术、分布式模型并行技术、推理架构优化、算法和工程的结合等优化技术，以及它们在大规模生产环境中的应用和实践。如果你有相关案例想要分享，欢迎通过以下链接提交演讲申请： https://jsj.top/f/tUOLpz&nbsp;</p>
+  <h2><strong>背&nbsp; &nbsp; 景&nbsp;</strong></h2>
+  <p>在大模型的推理过程中，通常可以将任务分为两个阶段：Prefill 阶段处理所有输入的 Token，生成第一个输出 Token，并生成 KVCache。Decode 利用 KVCache 进行多轮迭代，每轮生成一个 Token。Pefill 阶段通常是计算密集型的，Decode 阶段通常是显存带宽瓶颈。</p>
+  <p>业界常见的调度器（Continuous Batching）会在每一轮调度中，剔除已经完成的请求，并且将能满足显存需求的 Prefill 请求和 Decode 请求凑批执行。Prefill 阶段运行时间较长，此时 Decode 阶段的时延受到较大影响。<strong>最终体现为只要请求出现了 P-D 请求凑批执行，那么请求的平均时延和 P99 时延就会出现巨大波动，这个问题在线上场景时刻存在。</strong></p>
+  <p>当然也有其他调度策略：</p>
+  <ol>
+   <li>Prefill 优先策略，Prefill-Decode 请求不允许凑批，那么对 Decode 请求的影响更大。</li>
+   <li>Decode 优先策略，Prefill-Decode 请求不允许凑批，会使得 GPU 利用效率降低。</li>
+   <li>Chunked Prefill [1] 技术将 Prefill 的请求拆成多个部分多轮执行，在每轮中和 Decode 请求凑批执行，可以提高 Decode 请求的交互性能，但是它的总时延还是会受到 Prefill 请求的影响。并且因为 Prefill 请求仍然长时间占用显存，导致 Decode 请求的并发受到限制。</li>
+  </ol>
+  <p>好像并没有完美的解决方案，既然不能同时满足两个阶段的需求，干脆直接将它们拆分得了。</p>
+  <p><strong>我们预计 P-D 分离可以带来一些好处：它们可以选择不同的机型，Prefill 采用高算力的 GPU，Decode 采用大显存的 GPU。它们可以选择不同的量化方式和凑批大小。这样就可以同时优化首字时间（TTFT）和 Time Between Tokens（TBT）。最重要的是不同请求的 Prefill 阶段的执行不再会影响 Decode 阶段，使得请求总时延和 P99 时延稳定。</strong></p>
+  <p>在学术界和工业界都有 P-D 分离技术的使用，总结来看，都取得了不错的效果：</p>
+  <ol>
+   <li><strong>Mooncake</strong> [2] 是业界大规模使用 P-D 分离技术的例子。Mooncake 构建了以 KVCache 为中心的 P-D 分离调度集群，形成了 Prefill/Decode Pool 以及分布式异构介质 KVCache Pool，全局负载均衡技术预测了 Prefill 和 Decode 的负载，在满足 SLA 的约束下最大化吞吐，在高负载下预测请求的执行时间，提供早停能力。</li>
+   <li><strong>Splitwise</strong> [3] 开发了一个 GPU 集群，旨在实现三个主要目标：提升吞吐量、减少成本和降低能耗。该集群的设计将 LLM 推理过程分为两个独立的机器池，以优化不同阶段的处理效率。同时，他们还增设了第三个机器池，专门用于处理 Prefill 和 Decode 阶段的混合批处理，并且能够根据实时计算需求灵活调整其规模。</li>
+   <li><strong>DistServe</strong> [4] 通过将预填充和解码计算分配至不同的 GPU，从而消除了二者之间的干扰。针对应用程序的总时延和每个 Token 运行时间的需求，DistServe 为每个阶段量身定制了资源分配和并行策略的优化方案。此外，DistServe 还考虑到服务集群的带宽，将这两个阶段放置在一起，以减少由任务分解所带来的通信开销。</li>
+  </ol>
+  <p>在下文，我们也阐述了我们的 P-D 分离方案上线的实际效果。</p>
+  <h2><strong>上线效果&nbsp;</strong></h2>
+  <p>我们在 RTP-LLM 上实现了 P-D 分离，并且在 72B 场景 A 和 14B 场景 B 全量上线。</p>
+  <p>72B 场景 A 效果如下：<strong>实例个数下降 24%，平均时延下降 48%，P99 时延下降 78%。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_6ebca5b70256419a9b38e42558431135@000000_oswg213000oswg1080oswg392_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_c9840168774b4ac1bc1b7b36a34fe265@000000_oswg132348oswg1080oswg392_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_9be0289a54ac4594acebd033174d2f71@000000_oswg178160oswg1080oswg264_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>14B &nbsp;场景 B 上线效果：<strong>平均时延降低 32%。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_58cbd259813a4a2ab38339cd0e77e2cf@000000_oswg148483oswg1080oswg438_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>可以看到 P-D 分离在我们的线上业务取得了不俗的效果。接下来，我们会从通信机制、成本、分布式系统的复杂性以及面向未来的 P-D 分离设计等方面详细讨论 P-D 分离的难点问题。</p>
+  <h2><strong>通信机制&nbsp;</strong></h2>
+  <p>我们在本章节，讨论数据传输和控制信息传输两个问题。其中数据传输部分使用 TCP / RDMA，TCP 使用在无 RDMA 卡的简单环境。而控制信息的传输主要是为了控制整个流程运转，以及配合 RDMA 的单边操作。</p>
+  <h3>数据传输&nbsp;</h3>
+  <p>首先，拆分开的 Prefill-Decode 该怎么同步数据，同步什么数据。很自然的，我们认为是将 Prefill 计算过程中产生的 <strong>KVCache 传递给 Decode</strong>（在 PP 等场景下传输中间计算结果）。KVCache 的量很大，在我们的场景中，单个请求的 Prefill 阶段大概会有 5G 大小的 KVCache。如此大的数据量，如果在 Prefill 阶段执行完毕的时候同步到 Decode，瞬间洪峰流量会把 Decode 打爆，并且同步会需要很长时间，会使得请求的时延上升很多，最后使得 P-D 分离得不偿失。</p>
+  <p>很幸运的是目前的大模型结构都是按层的，我们可以在单层计算完毕的时候，直接将 KVCache 发送给 Decode。一般 Prefill 执行时间比较长，例如在 200 毫秒 到 10 秒之间，甚至更高。<strong>将发送代价平摊到长时间内，那么就不会出现瞬时洪峰流量</strong>。但是我们还有个担心，在大规模使用 P-D 分离的情况下，传输流量是否会将整个网络环境打爆，流控机制是否足够好，能否使得 Prefill-Decode 之间，距离尽可能的短，让 Prefill-Decode 更靠近 [4]，减少流量外溢的影响，这是未来可以研究的问题。</p>
+  <p>在最后一层计算结束的时候时候，最后一层或者几层的 KVCache 的发送还需要一些时间，所以我们对于发送速度有一定的要求。对于传输，我们有不少方案：包括 TCP 和 RDMA [5]。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_9ed321a87bea464e9086aed6f4a222a5@000000_oswg166954oswg856oswg940_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p><strong>TCP&nbsp;</strong></p>
+  <p>TCP 使用起来简单，但是 TCP 需要从内存发送，所以需要将 KVCache 从显存拷贝到主机内存。用户态还需要拷贝到内核协议栈和 DMA Buffer。存在用户态 / 内核态 / 中断上下文的多次切换。大包拆分，增加的包头控制信息，降低了有效载荷比例。虽然校验、拆包和组包等工作可以 Offload 到网卡，但是不彻底，内核路径的负担依然很重。再加上超时重传、回退策略、冷启动都降低了 TCP 的速度。最后内核协议栈受到主机 CPU 负载的影响很大。所以总体上 TCP 时延长且不稳定。综合来看，我们是需要一个时延稳定的发送大包的机制，RDMA 毫无疑问是在我们的考虑范围。</p>
+  <p><strong>RDMA&nbsp;</strong></p>
+  <p><strong>执行路径 [11]</strong></p>
+  <p>由图中，我们可以看到 TCP 路径很长，而 RDMA 路径很短。在接收端，网卡可以直接写入应用层对应的地址。<strong>此时，不存在各种拷贝代价，不存在内核态协议栈的处理开销，网卡已经处理掉协议的工作</strong>。用户 APP 可以使用 Epoll 的方式来获取发送就绪的事件（延迟稍高），也可以使用 Polling 的方式去轮询事件的状态（时延短且稳定，CPU 稍高，此时可以关闭网卡中断，应用层不存在上下文切换），在小包发送场景下，可以使用 Polling 固定次数然后再 Epoll 的方式来降低时延。</p>
+  <p><strong>操作原语 [6]</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_c5b3a18b904d483d89c5c3df3afecd61@000000_oswg113750oswg862oswg766_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>RDMA 有双边操作 Send/Recv 、单边操作 Read/Write 四种操作元语。双边操作（这里没有展示图），需要更复杂的控制流，需要发送方和接收方进行协调，发送方需要等待接收方的响应才能确定何时继续，开销要大一些。上图展示的是单边操作，控制流简单，可以减少等待延迟。<strong>所以我们线上的方案采用单边操作。由 TCP/RPC 来完成第一步操作：传输远端数据的地址，长度和 rkey</strong>。实际上，确实有很方案使用 TCP 等协议作为控制通道来传递 RDMA 的控制信息，例如微软的 SMB 和 IBM 的 GPFS 等。RDMA 不但可以传输内存数据，也可以直接发送和接收显存数据，我们在 Nvidia GDR 链接手册中 [7]，看到了这一点。</p>
+  <p><strong>安全性</strong></p>
+  <p>从上面我们也可以看到 RDMA 用户态拥有很强的控制权，绕过了内核，并且在用户态可以直接操作硬件写入内存或者显存。那么 RDMA 传输的数据地址会不会被别的应用写入或者读取，从而造成数据污染或者泄漏呢？答案是不会的，RDMA 在发送和接收数据之前，需要提前申请 Protect Domain 和注册 MR，得到的 mkey 会保护用户权限。</p>
+  <p><strong>RDMA 库</strong></p>
+  <p>RDMA 也有缺点：首先它依赖硬件，幸运的是，我们新的机型都是拥有 RDMA 网卡的。除此之外，RDMA 有着编程复杂、调试复杂等问题。这些复杂性，完全脱离了我们业务的控制，所以需要一个良好的封装库来操作 RDMA。可选的有 PyTorch Gloo、MPI、NCCL 和 ACCL。</p>
+  <ul>
+   <li>其中 Gloo [8] 和 MPI [9]，我们认为它们在基于 CPU 的传输上性能比较好，在 GDR 的传输上没有 NCCL 性能好，所以不考虑他们。</li>
+   <li>NCCL [10] 在单机内部使用 Nvlink 和 Pcie 建立链接。在多机之间，采用 Double Binary Tree 进行集合通信，在基于 GPU 的传输上性能优异。但是 Nccl 必须提前建立好集合通信的集合，并不能动态增删节点，除非是新创建一个通信集合。这对于 P-D 分离场景频繁动态的替换节点是非常不合适的。</li>
+   <li>ACCL 库 [11]，可以建立点对点通信。可以动态的创建新的链接，使用多网卡，聚合网卡带宽。将 GPU 和网卡进行亲近性匹配，也可以动态感知拓扑，并且在此基础上优化 AllReduce / AllGather 等实现无阻塞的算法。<strong>综合以上考虑，我们最终选择了 ACCL 库作为我们的 RDMA 通信库</strong>。</li>
+  </ul>
+  <h3>控制信息传输&nbsp;</h3>
+  <p>我们可以看到 P-D 之间需要多次交互控制信息，那使用什么机制来发送控制信息呢：TCP，GRPC [12] ，还是 ARPC [13]。TCP 协议首先排除掉，它比较裸露，使用不方便，而且不具备兼容升级能力。ARPC，是阿里内部的 RPC 协议，性能比较强，但是在 TCP 传输协议下不具备 Stream 能力，<strong>而 P-D 分离需要进行多轮会话，所以我们最终还是选择了 GRPC Stream 方案</strong>。除了 KVCache，我们还需要将 Prefill 产出的 First Token 同步给 Decode，当然此时，Decode 可能还没有完全接收完毕 KVCache，那这个时候只能等待了。也就是先等待 KVCache，再串行等待 First Token，RPC 协议发送这种短信息是很快的，所以我们可以接受时延的微小增加。</p>
+  <h2><strong>成&nbsp; &nbsp;本&nbsp;</strong></h2>
+  <p>在本章节，我们讨论 P-D 分离是否能降本的问题。首先 P-D 分离带来了凑批策略的变化，也同时使得 P-D 的资源分配（实例个数，GPU 卡型）不再一致。这就为将种类纷繁的卡型纳入统一管理从而减少碎片带来了基础条件。当然，在此基础上我们希望更进一步的减少显存占用大小，降低显存的无效占用时间。</p>
+  <h3>凑批策略&nbsp;</h3>
+  <p>Prefill-Decode 融合架构下，由于 Prefill 的计算瓶颈特性，所以 Prefill 的 Batch Size 不会很大，这样就导致 Decode 阶段的 Batch Size 也不一定能上来。但是 Decode 其实是更适合大批次运行的，在达到计算瓶颈之前，随着 Batch Size 的增大，Decode 时延的增长是比较缓慢的。在 P-D 分离之后，Prefill 本身的 Batch Size 仍然不会很大。为了充分发挥 Decode 的能力，<strong>我们应该配置更多的 Prefill，减少 Decode 实例个数，使得 Decode 能进行大 Batch 推理</strong>。</p>
+  <h3>资源分配&nbsp;</h3>
+  <p>P-D 分离之后，应该各自如何配置 CPU 和 GPU 呢？首先，相比较 P-D 融合架构，CPU 消耗的会更多，因为增加了多次 GPRC 交互，并且 Decode 的 Response 需要流式的返回给 Prefill。而我们使用的 GRPC C++ 版本，可以使用多线程从而利用多 CPU 核的能力。所以它们只需要有充分的 CPU 即可。GPU 方面，Prefill 非常消耗算力，并且在 Prefill 传输 KVCache 给 Decode 之后，显存不需要占用，那么可以用来服务其他请求。所以 Prefill 一般是先达到计算瓶颈，而不是显存容量瓶颈，<strong>所以 Prefill 应该选择计算能力强的卡型</strong>。从凑批策略章节可知 Decode 的实例个数会变少，所以并发执行的请求比较多，并且 Decode 的总时间一般比较长，所以显存有效占用时间比较长，<strong>所以 Decode 应该着重选择显存大的卡型</strong>。</p>
+  <h3>成本管理&nbsp;</h3>
+  <p>从 P-D 分离的资源分配章节，我们从它们的特性出发，已经推导出 P-D 的机型可能不一致。但现实是，我们有什么机型呢。现实中，我们有不同类型不同数量的 GPU，AMD，ARM 等计算设备。显存小的，我们可以组成更大的 TP，计算能力差的，我们可以使用更多实例。并且对于 Prefill / Decode 内部，也可能是不同的卡型。例如说，Decode 有多组不同配置，不同 TP，不同卡型的集群。<strong>充分的将一些小卡，一些数量不足的卡，组织起来，形成大容量集群</strong>。勤俭持家，是中华传统美德。</p>
+  <p>那 P-D 分离架构能降低成本吗？例如说在 P-D 融合架构下，是 20 个节点承担 10 QPS 的流量。在 P-D 分离架构下，至少一个 Decode 节点，最好有两个，保证 Decode 不会同时挂掉，那么还剩下 18 个 Prefill 节点，此时它还能承担 10 QPS 的流量吗。我们认为考察一个服务的质量，不是单独考察时延，也不是单独考察吞吐。而是考察在一定时延（包括平均时延和 P99 时延）限值范围下的吞吐，或者是考虑相同吞吐下的时延。我们认为 P-D 分离可以降低时延，那么就可以使用更少的实例个数来承担和之前一样的 QPS，这样就可以节省成本。更进一步的，我们可以把业务方的资源额度下的边边角角的一些零碎的卡型纳入管理范围。</p>
+  <h3>量化&nbsp;</h3>
+  <p>还能进一步降低成本吗？我们想到量化可以使得显存占用变少，从而可以提高请求并发度。我们已经支持的量化类型包括 W8A16、W4A16 和 W8A8（INT8 和 FP8）。在这里，如果计算类型维持 FP16，那么量化仅在短 Prompt 时有助于加速 Load Weight；而计算类型如果对应的改成 INT8/FP8，则可以利用 INT8/FP8 的算力（通常是 FP16 的两倍）。若不考虑模型效果，假设各种量化方案下模型都有足够优秀的表现能力，我们当然希望 Prefill 能更充分的利用算力，Decode 可以用上更充足的带宽。</p>
+  <p>在过去的部署里，我们很难协调一个问题，当用户的输入和输出都比较长时，我们应该给用户推荐怎么样的量化方案？W4A16 有更好的 Decode 性能，但会造成很长的 TTFT（甚至大于 FP16）；W8A8 确实可以更快完成 Prefill，但时延却不一定短于 W4A16，更长的时延也不利于更大的吞吐。有没有可能两个阶段使用不同的量化方案呢？在单部署只保存一份模型权重的情况下，这是做不到的。</p>
+  <p>所幸 P-D 分离终于为我们提供了 Prefill 和 Decode 分开部署的方案。<strong>基于 P-D 分离的方案，我们可以自由地在 Prefill 机器部署 FP16 / W8A8 的模型文件，来获得相对不错的 Prefill 性能；而 Decode 机器则可以自由地选择 W4A16 / W4A8 的方案，来获得整体的更优性能</strong>。这是 P-D 分离在部署上的额外收益，为部署模型精度提供了更多的选择。</p>
+  <h3>显存有效占用&nbsp;</h3>
+  <p>我们不但希望减少显存占用，并且希望能更有效的占用显存：</p>
+  <p>在 Prefill 的请求排队结束开始执行时，此时 Decode 开始申请显存资源，可以减少排队期间的无效显存占用。</p>
+  <p>在 Prefill 发送完毕显存时，可以将显存立刻释放给其他请求使用。</p>
+  <p>在 Decode 请求结束时，Decode 才回传计算产出的 KVCache 给 Prefill，而不是从 Decode 的第一个输出 Token 开始就一边生成一边传输，减少 Prefill 的显存占用时间。当然这个策略，可能会使得传输时延的影响被放大，所以可以提前发送，在计算和传输的 Overlap 与显存占用时间之间取得平衡。</p>
+  <h2><strong>分布式&nbsp;</strong></h2>
+  <p>P-D 分离，并不是银弹，它在带来多种好处的同时，也带来了网络上的复杂性。我们知道网络是比较容易出现问题的，那么如何能保障 P-D 分离的稳定性呢？这基本上和传统分布式服务遇到的问题一致。我们借鉴分布式系统的经验，为 P-D 分离集群引入了多节点 / 多集群，基于服务发现和负载均衡组件，自动化并且人工可控制的进行故障迁移、恢复和回退，以及兼容灰度升级，为用户的服务保驾护航。并且对于 Prefill-Decode 我们引入了不同的配置，配合各自的特性，最大化它们的收益。</p>
+  <h3>Serverless&nbsp;</h3>
+  <p>我们提供的推理产品，既支持私有部署，也支持共享访问，也即 MaaS 服务（Model as a Service），<strong>用户付费，获得模型的访问能力，不需要关心基础设施资源的分配和运维部署，以及可用性，我们自然提供满足 SLA 要求的服务</strong>。对于 P-D 分离集群来说，我们提供了多种 Prefill-Decode 集群，并且部署了自动弹性策略。随着压力的增大，而自动分配更多资源进行服务。在某个 Prefill-Decode 集群出现问题的时候，请求会自动重试其他同机房的机器。并在一定程度下，可选地可以回退到 Prefill 执行 Decode 请求。最大限度的保障服务的可用性。新启动的机器，除了模型权重之外，不需要持有任何状态即可服务。一个会话，也不需要任何状态，可以直接迁移到另外的 Decode 机器。<strong>这为部署带来了相当大的灵活性</strong>。</p>
+  <h3>系统复杂性&nbsp;</h3>
+  <p>P-D 分离之后，系统会变得比较复杂。首先它需要，至少一个 Prefill 节点，一个 Decode 节点。很多流量稀疏场景，一张卡已经足够。此时 P-D 分离并没有带来收益，成本反而还增加了。所以，<strong>我们也需要支持 P-D 分离架构，回退成普通模式</strong>。并且在请求级别的目标输出长度比较短的时候，<strong>应该能自适应的回退到 P-D 融合模式</strong>。</p>
+  <p>P-D 分离之后，网络上的错误会更容易出现，并且因为部署的 Decode 个数比较少，如果他们出现了服务不可用的问题影响会更大。我们在部署了多节点来保障分布式系统的可靠性之外，还部署了多 Cluster，进一步加强稳定性。在发布的时候，<strong>可以按照 Cluster 级别单独灰度升级</strong>。在故障的时候，会自动切换到其他正常的节点 / Cluster 来服务。依赖我们的服务发现组件还可以提供可控性，我们可以在单节点故障的时候，直接降低单节点的权重，或者控制下线，从而不再访问故障节点，降低故障影响范围。</p>
+  <p>Prefill 和 Decode 的特性很不同，所以参数配置上很多都是不同的。例如凑批策略，量化类型，TP 大小，PP 大小，任务超时时间，重试时间，显存申请策略，RDMA 软硬件队列大小，是否可回退执行等。这些需要靠完善的产品机制，在拉起 Prefill-Decode 实例的时候，分别传入不同的参数值。</p>
+  <p>P-D 分离之后，我们需要考虑它的升级过程，不但需要保证总服务可用度，还要保证兼容性。首先如果只有 1 个 P-D 实例，需要保证在升级的时候，起新下老。<strong>并且保证新的 Prefill 访问新的 Decode，这样才能保证协议兼容性</strong>。那这个如何控制呢？我们可以通过在服务发现中注册自己的版本信息，在 Prefill 访问的时候，选择对应的版本来进行访问。</p>
+  <h3>负载均衡&nbsp;</h3>
+  <p>在 P-D 分离复杂的异构机型集群下，并且 Decode 本身还存在多集群，而且多集群的 TP 大小可能还不一致。此时当前的 Prefill 访问哪一台 Decode，这有很多的策略：</p>
+  <p>基于访问后端的总时延：但是不同请求的总时延的差异是很大的，这不是一个好指标。</p>
+  <p>基于后端产出的单轮 Token 的时延：好像有一定的可行性，不过这和当前凑批的大小也有一定的关系，而且这个指标可能存在一定的跳跃性，需要做滑动指数平均。</p>
+  <p><strong>基于后端的剩余显存容量</strong>：如果后端的集群是异构的，那么这个策略会失效。</p>
+  <p>基于后端的吞吐：也就是单位时间内产出的 Token 总数，在离线场景可能是比较适合的。</p>
+  <p>但是不论负载策略是哪个，都要基于服务发现，及时地将不健康的和下线的节点，在负载均衡里面屏蔽掉访问。同时我们也需要可以配置不同的负载衡均衡策略。</p>
+  <h2><strong>面向未来&nbsp;</strong></h2>
+  <p>前文分析了 P-D 分离的降本收益和分布式系统的实现。未来我们希望 P-D 分离方案尽可能的扩展到所有的场景，这就需要考虑 P-D 分离和其他特性配合的问题，这些特性涉及到大模型推理的各个方面。其中，我们将长序列和 Chunk Prefill 两个问题单独讨论，它们代表着近期要做的一个方向。</p>
+  <h3>特性兼容&nbsp;</h3>
+  <p>首先我们考虑几个和 KVCache 有关系的特性：</p>
+  <p><strong>KVCache 量化之后得到的将是 KVCache INT8/FP8 量化的结果和对应的 Scale Tensor，那么我们的传输引擎应该设计为可传输任意类型的 Tensor</strong>。</p>
+  <p>ReuseCache ，在 Prefill 先执行 Reuse Cache <strong>减少 KVCache 的生成</strong>。在 Decode 执行 Reuse Cache，<strong>可以减少 KVCache 的传输</strong>，这对于 System Prompt 同样有效。</p>
+  <p>还有一些特性可能会影响流程：</p>
+  <ul>
+   <li>图像多模态，一般分为 VIT 部分和大语言模型部分。在 Prefill 节点上先执行 VIT 阶段和 Prefill 阶段，然后再传递 KVCache 给 Decode 执行，依然可以使用上 P-D 分离。甚至说，把 VIT 部分单独成一个进程，能使得三个角色相互不影响，并且按照各自特性独立优化。</li>
+   <li>Chunk Prefill 会使得一个请求的 Prefill 阶段被拆分成了多个子阶段，分多次运行。<strong>在每个子阶段运行过程中，都会将 KVCache 传递给 Decode。等所有的 KVCache 都收到了，此时 Decode 开始运行</strong>。</li>
+   <li>Prefill 上，First Token 产出完毕，此时请求的状态不能销毁，所以需要单独调度。Decode 上，请求接收之后，需要等到 KVCache 和 First Token 传输完毕，才能执行，所以也需要单独的调度。<strong>综合来看，它们需要改造调度器。</strong></li>
+   <li>权重的 INT8 / INT4 量化，MOE 专家模型，静态 / 动态 LORA，这些是和生成 KVCache 无关的计算部分，所以不会影响 P-D 分离流程。</li>
+  </ul>
+  <h3>长序列&nbsp;</h3>
+  <p>在 Prompt 日渐变长的大趋势下，P-D 分离能解决长序列问题吗？我们分析认为不能：长序列问题，主要是时延高和显存占用高造成的。Prefill 和 Decoded 分离，特别是 Decode 阶段并不能解决缓存占用大的问题。但是却可以组合一些方法：例如如果 Decode 的显存占用比较大的话，可以使用更大的 TP Size。如果 Prefill 执行压力比较大，可以使用 Chunk Prefill 或者 Ring Attention 来分摊计算压力。<strong>而 P-D 分离的 CacheStore 组件，设计上是用来传递任何类型的 Tensor，为这些方案打下了坚实的基础</strong>。</p>
+  <h3>Chunk Prefill&nbsp;</h3>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_bff13ae3ef0543f384ccfef93997082b@000000_oswg49087oswg1080oswg464_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在背景部分，我们简单的讨论了 Chunk Prefill，现在我们仔细讨论下它和 P-D 分离的关系。如上图 DeepSpeed 实现了 Chunk Prefill [1]，又名 FastGen，它认为 Decode 可以和 Prefill 凑批执行，这样就可以利用上 Prefill 加载的权重。在 Linear 层，它们可以一起执行，在 Attention 阶段分开执行，不过在很多场景下，Attention 时间占比比较小。这样就可以将 Decode 和 Prefill 一起变成计算密集型任务。此时 Decode 应该是凑批越大越好。但是同时带来的问题就是，Decode 的时延会比较高。所以需要在吞吐和时延之间有个平衡。在 Prefill 上，达到 GPU 计算瓶颈之后，更长的序列会使得 Prefill 时延陡增，所以在遇到这个拐点之后，Perfill 吞吐不再增加。这个值就是我们需要找到的 Chunk Size 值，Decode + Prefill 的总 Token Size 应该小于等于这个 Chunk Size，但是这个 Chunk Size 不一定很好寻找。而且 Decode 和 Prefill 的请求密度，不一定能达到最完美的比例。最完美的比例就是：在 Prefill 的每一轮执行中，Decode 都能凑批执行。如果 Decode 的密度高，那么可能 Decode 会单独运行。如果 Prefill 密度高，那么 Prefill 会单独运行。</p>
+  <p><strong>从上面的分析，我们认为 Chunk Prefill 不能解决 Decode 的总时间被影响的问题。但是 Prefill 和 Chunk Prefill 的结合，使得 Prefill 每次都能将 GPU 打满，并且也不超出它的最大处理能力。在 P-D 分离场景下，依然可以在 Prefill 上使用这个策略。</strong></p>
+  <h2><strong>P-D 分离方案&nbsp;</strong></h2>
+  <p>在上文，我们从成本、时延等分析了 P-D 分离的好处，并且也看到了 P-D 分离带来的分布式复杂性，同时也探讨了不同的通信机制的优缺点。接下来我们剖析工业界四种 P-D 分离的实现，包括 vllm，Mooncake，TensorRT-LLM 和 InfiniStore，阐述了它们的优点和不足之处。在最后提出了我们自己的 CacheStore 传输引擎方案。</p>
+  <h3>vllm&nbsp;</h3>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_bb11f00388ec4f4b9a38274c7cf1e50d@000000_oswg41879oswg1080oswg220_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>从实现上来看：vllm [14] 实现了 Connector 基类，提供操作基础 API。由 LookupBuffer 组成双端队列，发送者使用 Insert 原语插入 Buffer 队列，并且通过 Signal Pipe 唤醒消费者，消费者请求从 Buffer 队列中寻找需要的 Item，从 Buffer 中取出，使用 Data Pipe 发送。在 Buffer 队列满的时候，对发送者进行反压。vllm 的实现可以发送任意类型的 Tensor。</p>
+  <p>从发送机制上来看：</p>
+  <p>支持 PyNccl Store：采用的是 Nccl 和 Gloo（在 Mooncake 的测试结论中 [15]，我们发现 Gloo 的性能比不过普通的 TCP 模式，更不要说 RDMA 模式）。</p>
+  <p>支持 Mooncake Store：使用 Mooncake 的 Transfer Engine，这是一个比较高效的方案，在下文中有具体的说明。</p>
+  <p>支持 InfiniStore：这是一个简单的 KV Store，在下文中有具体的说明。</p>
+  <p><strong>综合来看，vllm 的 P-D 分离还在初级阶段</strong>，很多特性不支持：不支持按层发送；不支持 TP/PP；不支持 Prefix Cache，不支持 Chunk Prefill；也不支持调度和协调者；很多特性都不兼容（虽然，这些特性已经开始在规划了）。默认实现的性能预计也不够好。不过，vllm 方案有一定的灵活性，用户可以定制其中 Connector 、Buffer 以及 Pipe 的实现，拥有插件的能力，在开源界比较容易吸引其他人来定制开发和贡献代码。</p>
+  <h3>Mooncake&nbsp;</h3>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_c0183d3ca50248329dc9ddb6d0be9d04@000000_oswg164145oswg1080oswg929_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在背景章节我们叙述了 Mooncake 论文 [2] 中介绍的特性。目前 Mooncake 所依赖的传输引擎 Transfer Engine 部分 [15] 已经开源。<strong>Mooncake 是工业界大规模使用 RDMA 传输进行 P-D 分离的例子，可以说是比较先进稳定的方案。</strong> 我们看到它支撑了 P2P 模式，这是为了 Checkpoint 的分发。对应的，我们已经具备大规模的数据链式分发、内存 Cache 和用户态文件系统。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_645f3b862c7644c9b41ad7b3c2ccebd5@000000_oswg108455oswg1080oswg645_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在 Mooncake Store 部分：</p>
+  <p>它支持了 TCP、RDMA、NVME 和 CXL（在开发）四种传输方案，并且 RDMA 部分支持了 RoCE、IB 和 eRDMA 三种方案。</p>
+  <p>它使用了 Segment 概念，代表着 CPU DRAM、GPU VRAM、NVME Segment 和 RPC Segment 中的全部地址空间，而 Buffer 是其中的一部分待发送或接收的空间范围。</p>
+  <p>Mooncake Store 在 Buffer 层面提供了三个基本原语：<strong>Read、Write、Flush</strong>。</p>
+  <p>在上层它支持的不再是简单的 KV，<strong>而是对象传输</strong>，在这层提供了 <strong>Get、Put、List、Del、Replicate</strong> 等基本操作。并且提供了驱动 Transfer Engine 的 Master 节点。</p>
+  <p>支持动态增删缓存资源。</p>
+  <p>支持多网卡，聚合网卡带宽，提高并行发送能力。</p>
+  <p>支持 Eager、Lazy、None 三种级别的刷新方式，在性能和一致性之间取得平衡。</p>
+  <p>可以自定义 CPU / GPU 和网卡之间的亲近性，也可以自动感知拓扑路径，并且在偏好路径出现问题的时候，自动回避到其他路径。</p>
+  <p>所有节点都需要链接到元信息服务，类似于服务发现，支持 etcd、http 和 redis。</p>
+  <h3>TensorRT-LLM&nbsp;</h3>
+  <p>目前 TensorRT-LLM [16] 也有 P-D 分离的方案：</p>
+  <ul>
+   <li>使用 MPI 启动多 P-D 实例，使用 MPI 和 UCX 两种方案进行传输。</li>
+   <li>提供可以被重载实现的基类接口 CacheTransceiver ：发送方使用 sendAsync 接口异步发送，接收方使用 receiveSync 接口异步接收。</li>
+   <li>可以检查传输状态，不支持按层发送。</li>
+   <li>可以发送 KVCache，但是没有看到可以发送其他 Tensor，例如 Logits，Hidden States 等。</li>
+  </ul>
+  <p>因为 TensorRT-LLM 的实现没有具体的开源和详细的文档，所以具体细节不再分析。<strong>综合来看，TensorRT-LLM 的 P-D 分离实现还是比较原始阶段</strong>，没有节点管理，没有负载均衡，没有按层发送 Overlap 计算和传输。在单个节点上多 GPU 之间通信默认使用 PCIE，需要调整 UCX 选项才能使用 Nvlink。</p>
+  <h3>InfiniStore&nbsp;</h3>
+  <p>InfiniStore [17] 是使用在分离式推理引擎中的一个分布式 KV Store，在 vllm 中正在合并这个传输方案的实现。</p>
+  <ul>
+   <li>它提供本机 GPU 传输，跨机器的 RDMA 传输，其中 RDMA 传输支持 Ethernet 和 IB 两种方案。</li>
+   <li>Client 和 Server 调用 Connect 链接对方。</li>
+   <li>Client 使用 Rdma Write Cache 原语写入 Cache，Server 使用 Read Cache 原语读取 Cache，两个操作都是异步操作。</li>
+   <li>也提供用户注册 MR 区间的方式来管理显存。</li>
+   <li>还提供检查 Cache 中是否存在特定的 Key 以及 Key 的匹配信息。</li>
+   <li>在 Demo 中，做了一个演示，可以在 Prefill 中，按层计算，独立线程进行传输，计算和传输之间使用 Cuda Event 进行同步。</li>
+  </ul>
+  <p><strong>综合来看，这是一个轻量级别的 KV Cache Store，简单易用，可以支持任意 Key 的任意 Value 远程异步存储和远程异步读取。</strong></p>
+  <h3>CacheStore&nbsp;</h3>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_e41844abe3344931a82c5ee6a0d459fc@000000_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>从上文的思考，以及其他方案的剖析，我们明确了我们的 CacheStore 方案的目标：</p>
+  <ul>
+   <li>支持不同的数据传输机制，并且要包含 RDMA。</li>
+   <li>控制信息的传输使用 TCP / RPC 协议。</li>
+   <li>支持简单易用的异步接口，使得业务层可以不关心下层传输机制的复杂性。</li>
+   <li>计算和传输 Overlap。</li>
+   <li>可以发送任意类型的 Tensor。</li>
+   <li>最大化 RDMA 的并行性，充分使用网络带宽。</li>
+   <li>考虑分布式系统的容错性。</li>
+  </ul>
+  <p>综合以上思考，我们设计了我们的 CacheStore 方案：</p>
+  <ul>
+   <li>从上层语义来看，支持 Store、Load 和 Delete 原语，后期会支持 Match 和 BroastCast 原语。</li>
+   <li>Store 接口支持传入 cudaEvent 来做计算和传输之间的同步。</li>
+   <li>Load 接口，可以等待一层或者多层的 KVCache。</li>
+   <li>Store 和 Load 都是异步接口，支持传入回调函数。</li>
+   <li>在请求结束的时候，调用 Delete，释放 CacheStore 对于 KVCache 的引用。</li>
+   <li>我们设计了 Block 概念用来支持传输任意类型的的 Buffer 数据，业务层指定 Block 的 Key 和 Block 的 Value（即 Block 对应数据的地址）。目前支持了传输 KVCache，Int8 KVCache 的 Scale，Logits，Hidden States 和其他中间计算结果。</li>
+   <li>支持 TCP 和 RDMA 两种传输协议，RDMA 使用单边 Write 协议。</li>
+   <li>使用 ARPC 传递其他控制信息和 RDMA Meta 信息：包括地址，长度和 rkey。</li>
+   <li>CacheStore 在 Peer 之间进行 RDMA 链接的创建销毁重建。</li>
+   <li>CacheStore 使用了多网卡，多链接，多队列，最大限度的提高并行传输能力。</li>
+   <li>Accl 负责最优先路径的选择和路径规避。</li>
+   <li>同时我们在 Prefill 层支持了服务发现和负载均衡组件，定制了多种负载均衡策略。</li>
+  </ul>
+  <h2><strong>总&nbsp; &nbsp; 结&nbsp;</strong></h2>
+  <p>在本文中，我们从平均时延，总体时延，吞吐，成本，量化，资源分配，Serverless 以及和其他特性的配合等方面阐述了 P-D 分离的好处，并且比较了 TCP 传输和 RDAM 传输的一些特性。从实现的角度剖析了几个业界大模型推理引擎的 P-D 分离实现，最后提出了我们自己的 CacheStore 传输引擎方案。</p>
+  <p>在下一篇文章，我们会详细讲述我们 P-D 分离方案的具体实施过程 。</p>
+  <p><strong>参考文献</strong></p>
+  <p>Chunk Prefill（https://github.com/microsoft/DeepSpeed/blob/master/blogs/deepspeed-fastgen/README.md）</p>
+  <p>Mooncake 论文（https://arxiv.org/abs/2407.00079）</p>
+  <p>Splitwise（https://arxiv.org/abs/2311.18677）</p>
+  <p>DistServe（https://arxiv.org/abs/2401.09670）</p>
+  <p>RDMA 基础功能介绍（https://developer.aliyun.com/article/1599640）</p>
+  <p>RDMA 操作语义（https://developer.aliyun.com/article/1599640）</p>
+  <p>GPU GDR（https://developer.nvidia.com/blog/using-cuda-stream-ordered-memory-allocator-part-2）</p>
+  <p>Gloo（https://github.com/facebookincubator/gloo）</p>
+  <p>MPI（https://www.open-mpi.org/）</p>
+  <p>Nccl（https://developer.nvidia.com/nccl）</p>
+  <p>Accl（https://help.aliyun.com/zh/pai/user-guide/accl-alibaba-high-performance-collective-communication-library）</p>
+  <p>GRPC（https://grpc.io/）</p>
+  <p>ARPC（https://github.com/alibaba/havenask/tree/main/aios/network/arpc）</p>
+  <p>VLLM（https://github.com/vllm-project/vllm）</p>
+  <p>Mooncake Transfer Engine（https://github.com/kvcache-ai/Mooncake）</p>
+  <p>TensorRT-LLM（https://github.com/NVIDIA/TensorRT-LLM）</p>
+  <p>Infinistore（https://github.com/ds2-lab/infinistore）</p>
+  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&amp;mid=2651233154&amp;idx=2&amp;sn=563eef5ff5520c610ca724dfff2273fa&amp;chksm=bcf13b3fe80284d8d252239866c0d7c02daded206cfd5a652140465f571dc27e4a6dc02d07db&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“InfoQ”（ID：infoqchina）</a>，作者：石新飞，刘侃，张弛，张泽超，包文鼎，李雨航，董纪莹，张莹，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3131970260860422</id>
+            <title>英伟达一半员工资产破亿？人均富豪的英伟达怎么做到的？</title>
+            <link>https://www.36kr.com/p/3131970260860422</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3131970260860422</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 08:15:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <英伟达, 员工财富, 工作压力, 股票激励>
+<br>
+<br>
+总结: 英伟达的78%员工已成为百万美元富翁，其中一半人的净资产达到2500万美元。公司市值达3.22万亿美元，但股价近期大幅下跌，员工面临高强度工作压力和“黄金手铐”的束缚。员工的财富增长主要依赖于股票和股票期权，然而这种财富的稳固性受到市场波动的影响。尽管员工在账面上实现了财富增长，但未来能否持续依赖于公司的经营业绩和市场信心。 </div>
+                        <hr>
+                    
+                    <p>​在世界科技市场上，英伟达可以说是绝对的巨头，就在最近英伟达一半员工资产破亿的消息传来，人均富豪的英伟达到底是怎么做到的？英伟达的情况我们又该怎么分析呢？</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_ea577040f0cb476db6a1ecaa63e33849@1359839007_oswg38463oswg862oswg569_img_jpg?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>一、英伟达一半员工资产破亿？</strong></h2>
+  <p>据每日经济新闻的报道，有投资人透露，英伟达78%的员工已成为百万美元富翁，其中一半的人净资产达到2500万美元（约合人民币1.83亿元）。</p>
+  <p>目前，英伟达市值达3.22万亿美元，已成为全球市值第二的大型公司，仅次于苹果。</p>
+  <p>不过，近期英伟达股价大幅跳水。1月13日开盘，英伟达股价继续下跌，截至发稿股价已跌至131.32美元，盘中一度跌破130美元。其总市值近4个交易日内已蒸发超4000亿美元（约合人民币2.9万亿元）。</p>
+  <p>据界面新闻1月13日消息，投资人Ruben D透露，芯片巨头英伟达78%的员工已成为百万美元富翁（约合人民币733万元），但在这一财富奇迹的背后，需要适应高强度的工作文化和“黄金手铐”的束缚。</p>
+  <p>自2019年以后，英伟达的股价一路飙升了超3700%。正是得益于此，其在拥有巨大市值的同时，也给员工带来了大量财富。Ruben D称，英伟达78%的员工当中，有一半人的净资产甚至达到2500万美元。</p>
+  <p>尽管这些员工在个人财富上收获颇丰，但也承受着巨大的工作压力。为了支撑英伟达的高市值表现，不少英伟达员工反映，他们每周工作7天，经常加班至凌晨2点，同时还面临密集的会议和严格的时间管理要求。很多员工几乎没有时间陪伴家人，甚至开始考虑“半退休”状态，以缓解工作带来的负面影响。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_a11759c051414096bd805851624ff196@1359839007_oswg43214oswg864oswg567_img_jpg?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>二、人均富豪的英伟达怎么做到的？</strong></h2>
+  <p>英伟达人均富豪的背后，究竟有哪些原因？这些财富是否真的如表面般稳固？未来英伟达又将如何保持这一势头？</p>
+  <p>首先，在英伟达，拥有股票或股票期权是员工薪酬的一部分。当公司的股票价格持续高涨时，那些早期加入公司、获得了较多股票奖励或者通过长期服务积累了一定数量股票的员工，他们的个人资产净值会随着股票价格的上升而增加。对于一些高管和技术骨干来说，他们持有的股票价值可能会达到数百万甚至上亿美元。此外，由于英伟达在高性能计算、AI和自动驾驶等领域的领导地位，使得它成为投资者眼中的香饽饽，这进一步推动了股票价格的上涨，从而让更多的普通员工也成为了所谓的“纸面富豪”。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_e81a9eddfc954b4a9b9d13d1fe8edaf0@1359839007_oswg46467oswg1015oswg572_img_jpg?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>其次，然而，英伟达人均富豪的背后，也隐藏着巨大的工作压力和“黄金手铐”的束缚。据报道，英伟达的员工需要适应高强度的工作文化，经常需要加班至凌晨，同时还面临密集的会议和严格的时间管理要求。这种高强度的工作压力，虽然在一定程度上激发了员工的创造力和工作效率，但也给员工带来了巨大的身心负担。</p>
+  <p>而所谓的“黄金手铐”，则是指英伟达通过股权激励计划等方式，将员工的利益与公司的利益紧密相连。这种激励方式虽然在一定程度上提高了员工的忠诚度和工作热情，但也让员工在享受财富增长的同时，面临着巨大的工作压力和束缚。许多员工因为害怕失去手中的股票期权和股权激励，而不得不忍受高强度的工作压力和不良的工作环境。</p>
+  <p>第三，尽管英伟达的员工在账面上实现了财富的快速增长，但这些财富是否真正稳固却值得深思。一方面，英伟达的股价在近年来确实实现了飙升，但这也与资本市场的炒作和投机行为有关。在当前，英伟达的股价存在一定的泡沫和虚高现象。如果未来市场情况发生变化，或者英伟达的经营业绩出现下滑，那么公司的股价可能会大幅下跌，从而导致员工的财富大幅缩水。</p>
+  <p>另一方面，英伟达的员工虽然持有了大量的公司股票，但这些股票的价值在很大程度上取决于公司的经营业绩和股价表现。如果未来英伟达的经营业绩无法持续增长，或者股价出现大幅下跌，那么员工的财富也可能会受到影响。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_54447a34b4814920bf7c597b290ad8d8@1359839007_oswg28052oswg1019oswg559_img_jpg?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>因此，要真正实现全体员工的致富，除了依赖于当前的高股价外，更重要的是英伟达能否在未来继续保持强劲的发展势头。这意味着公司在技术创新、市场份额扩大、成本控制等方面都需要取得良好的成绩。只有当公司能够持续提供优秀的财务表现，并且市场对其未来充满信心时，英伟达的股价才能稳定在一个高位，进而确保员工手中的股票可以转化为实际的财富。</p>
+  <p>本文来自微信公众号“江瀚视野观察”，作者：江瀚视野观察，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3132156493715972</id>
+            <title>一年卖22辆，又一家造车新势力申请破产</title>
+            <link>https://www.36kr.com/p/3132156493715972</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3132156493715972</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 08:06:10 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <Canoo, 破产, 滑板底盘, 电动汽车>
+<br>
+<br>
+总结: Canoo于2023年向特拉华州破产法院提交破产申请，停止运营。公司在过去一年仅交付22辆汽车，面临严重的资金危机和管理问题。Canoo的滑板底盘模式虽然受到市场关注，但在实际应用中遇到诸多挑战，尤其是在规模化生产和市场接受度方面。尽管与现代汽车和苹果等大企业有过合作，但最终均以失败告终。Canoo的创始团队也经历了大规模离职，导致公司进一步陷入困境。 </div>
+                        <hr>
+                    
+                    <p>在刚刚过去的周末，美国造车新势力Canoo宣布，已向特拉华州美国破产法院提交破产申请，Canoo将立即停止运营。&nbsp;</p>
+  <p>一旦申请通过，破产法院指定的受托人将管理公司资产清算，以及向债权人分配收益。</p>
+  <p>去年年底，Canoo就已经陷入了资金危机，公司裁员近100名员工并暂时停工，关闭了位于俄克拉荷马州的组装厂。到圣诞节前，Canoo又发内部邮件，剩下未被裁员的公司员工也被安排“强制无薪休假”。</p>
+  <p>随后有前员工爆料称，Canoo所宣传其在俄克拉荷马州生产电动汽车，但实际该工厂根本没有生产任何汽车，Canoo宣称交付的车辆均由AFV公司做完后运到Canoo工厂，90%只是换了车身贴纸。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_d1021e2b1a134a0a8fadd77668b2827b@000000_oswg883944oswg1080oswg615_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>一年卖出了22辆车</strong></h2>
+  <p>Canoo成立于2017年12月，最初名为Evelozcity，由法拉第的前高管Stefan Krause和Ulrich Kranz创立，前者为宝马集团前CFO，后者为宝马i3系列车型的项目主管，被称为“宝马i系列之父”。</p>
+  <p>在法拉第工作期间，两人与贾跃亭产生了分歧，在洞察到滑板底盘商机后，二人离职创办了这家新的公司Canoo。</p>
+  <p>Canoo的独特之处是专利滑板底盘，将电动马达、控制器及电池等核心部件高度集成，具备高度一体化和模块化特点。Canoo的车型都基于该滑板式底盘电动汽车平台进行开发。而且他们还承诺八年保修。</p>
+  <p>作为一家有中资背景的美国电动汽车公司，Canoo同时瞄准美国和中国市场，基于滑板底盘平台，先后推出了四款产品，并将该平台开放给第三方使用。</p>
+  <p>2019年，Canoo推出了第一款车Lifestyle Vehicle。Canoo称这款车是世界上第一款线控转向的车辆，方向盘和车轮之间没有机械结构连接，售价34750美元。</p>
+  <p>Canoo的第二款车是电动多用途货车MPDV。当时Canoo对这款全然不同于Canoo圆滚滚风格的货车定位广泛，既可以作为家庭运输、露营用车，也能做成移动餐车、快递、货运。</p>
+  <p>第三款车是电动皮卡Pickup Truck，和MPDV一样，它同样定位广泛，功能多样。</p>
+  <p>第四款车是Lifestyle Vehicle的改版LDV，目标是短途运输。</p>
+  <p>这些与市面上主流车型全然不同的圆滚滚货车，很快吸引了不少客户，沃尔玛首先订购了4500辆LDV来送货。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_68a839fcd0a34a03bdda0e7a08f55fa3@000000_oswg351202oswg1080oswg613_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>此后，美国邮政局买了六辆LDV运货，NASA则买了三辆LDV，把宇航员从基地送到火箭发射台。</p>
+  <p>2020年12月，Canoo通过SPAC方式在纳斯达克上市。</p>
+  <p>同时，现代汽车被Canoo的滑板底盘及模块化造车理念打动，开始与Canoo合作共同开发一款电动汽车平台，但一年后以失败告终。</p>
+  <p>同样是被其造车理念吸引，苹果也开始与Canoo合作造车。但随着苹果最终放弃造车，二者之间的合作也同样以失败告终。</p>
+  <p>在此期间，Canoo的创始人兼CEO Kranz还跳槽到苹果公司，帮助苹果造车。</p>
+  <p>这给了Canoo沉重一击，并引发此后Canoo的整体离职潮，Canoo的高管团队接连出走，直至去年9月，九位联合创始人已全部离开公司。</p>
+  <p>Canoo还为此起诉了几位前高管，指控他们挖走Canoo的老员工，损害公司利益。</p>
+  <p>在这种混乱中，2023年Canoo交付了22辆汽车，总共赚了886,000美元，但仅其CEO私人飞机一项的支出就超过了公司全年利润的两倍之多。</p>
+  <p>财报显示，2024年前三季度，Canoo营收为149.7万美元，运营亏损为1.65亿美元，净亏损为1.12亿美元。</p>
+  <h2><strong>滑板底盘模式还面临一些现实的问题</strong></h2>
+  <p>虽然导致Canoo的失败因素很多，比如管理问题，供应链问题、市场表现、资金链等等，但行业更偏向于是其滑板底盘模式引发的诸多问题。</p>
+  <p>其实滑板底盘模式和模块化造车理念，并不是什么全新概念。早在20多年前，通用汽车发布了一台氢燃料电池概念车，同时推出了滑板底盘的概念，将线控技术首次运用在汽车上。</p>
+  <p>作为眼下很火的一个造车理念，滑板底盘的特点在于采用了全线控技术，整车的核心控制模块通通集成在了底盘之上，从而形成了独立的功能区，达到了上下车体解耦的目的，上车体可以根据需求随意变换，并且由于底盘的高度电气化也使得后期可以不断的OTA升级。</p>
+  <p>如此一来，这种模式可以让主机厂或者细分场景客户专注于上体车的设计，相对于一体式的开发难度，这种分体式的开发会容易很多。</p>
+  <p>同时，由于各功能的模块化，可以加快产品的迭代速度，缩短开发周期，极大节省成本。这些特点和优势，也是当初吸引现代和苹果与Canoo合作的重要原因。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_0bab46d108724003ab6adb0e1e997b04@000000_oswg714548oswg1080oswg612_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>滑板底盘概念的确非常受市场青睐，除了Canoo，还有不少采用滑板底盘模式的新势力车企，比如英国的新势力Arrival，以色列新势力REE，以及美国的新势力Rivian，它们都曾主打商用车场景，将滑板底盘理念推向高潮，在资本市场成为炙手可热的新贵。</p>
+  <p>商用车场景不难理解，例如货运、餐饮车等，这种模式最大的问题是订单总量不会太大，因此难以规模化降低成本。</p>
+  <p>而在面对更容易规模化的乘用车时，这种模式最主要的问题是，车企很难为此买单。</p>
+  <p>以号称「特斯拉杀手」的Rivian为例，福特汽车曾宣布与 Rivian 合作开发电动汽车，不过很快就结束了合作关系。福特后来曾表示，自己也有底盘开发能力，某种意义上根本不需要使用别人的滑板底盘。</p>
+  <p>简言之，主流大车企更倾向于保留底盘生产，甚至会排斥这种削弱自身产业链地位的新模式。</p>
+  <p>在中国市场，以宁德时代和悠跑科技为代表的企业，也在积极推广其滑板底盘，其卖点同样是能大幅缩短造车周期，降低成本。</p>
+  <p>但现实中也面临技术和商业甚至售后服务等各类问题。从当下的汽车市场来看，滑板底盘的噱头还是多于实际的应用。</p>
+  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MjM5ODY2MzIyMQ==&amp;mid=2652553849&amp;idx=2&amp;sn=ec7d2c40c1461e03f66f3a0c69e26aa2&amp;chksm=bc0b0747beb6052866c431a20fef97a87ab8808b8a782aeecebd69f91e8de9bf19ca17f92491&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“车云”（ID：cheyunwang）</a>，作者：Jaden，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3132129681496839</id>
+            <title>国家队LP的一个大手笔</title>
+            <link>https://www.36kr.com/p/3132129681496839</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3132129681496839</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 07:23:09 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 人工智能, 投资基金, 国家大基金, 国资  
+<br>
+<br>
+总结: 国家人工智能产业投资基金合伙企业近日成立，出资额达到600.6亿元，标志着国家在人工智能领域的投资决心。该基金由国家大基金三期和国智投共同出资，旨在支持AI芯片等前沿技术的发展。自2024年5月国家大基金三期成立以来，市场对其投资方向的讨论不断，人工智能相关技术被认为是重点投资领域。各地国资也在积极布局人工智能产业，推动相关政策的实施，预计未来将有更多国资机构参与这一万亿级市场。 </div>
+                        <hr>
+                    
+                    <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_48f891071b1842adb8ba3532c620057a@46958_oswg490118oswg1080oswg537_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>又一只人工智能国家队基金来了。&nbsp;</p>
+  <p>近日，国家人工智能产业投资基金合伙企业（有限合伙）成立，出资额高达600.6亿元。该企业由国家集成电路产业投资基金三期股份有限公司、国智投（上海）私募基金管理有限公司共同出资。&nbsp;</p>
+  <p>这是国家大基金三期成立以来的第三次出手。2024年12月，该基金曾参与设立了华芯鼎新和国投集新两只股权投资基金，分别出资931亿元、711亿元。&nbsp;</p>
+  <p>自2024年5月国家大基金三期成立以来，市场上对其未来投资方向的讨论持续不断。不少研究机构和行业媒体纷纷预测，除了延续一期、二期大基金聚焦的半导体制造、设备、材料及零部件等领域外，三期基金还将重点关注AI芯片、HBM等人工智能领域必备的前沿技术。&nbsp;</p>
+  <p>而随着此次人工智能产业基金的成立，上述猜测也算得到了“官方认证”。</p>
+  <h2><strong>国家队联手，一出手就是600.6亿</strong></h2>
+  <p>国家人工智能产业投资基金成立背后，可谓是一场强强联合。&nbsp;</p>
+  <p>从LP结构来看，该基金的出资人有两家，分别是国家大基金三期和国智投。&nbsp;</p>
+  <p>先说国家大基金三期。&nbsp;</p>
+  <p>国家大基金的全称是“国家集成电路产业投资基金”，诞生于2014年9月，是我国政府为推动半导体产业自主发展而设立的专项产业基金。&nbsp;</p>
+  <p>目前，国家大基金共有三期：一期于2014年9月成立，注册资本为987.2亿元；二期于2019年10月成立，注册资本为2041.5亿元。本次的主角之一，国家大基金三期成立于2024年5月，注册资本高达3440亿元，当时也一举打破了中国芯片领域史上最大基金规模。&nbsp;</p>
+  <p>除了基金体量大，国家大基金三期的资方阵容也相当豪华。除财政部直接认缴出资600亿元外，上海市、北京市、广东省的各国有投资平台，中农工建交邮六家国有银行及中国烟草、华润、中国移动等多家央企皆有出资。&nbsp;</p>
+  <p>那么，作为国家级的半导体专项产业基金，为何突然投资设立了一只人工智能产业基金？&nbsp;</p>
+  <p>事实上，一切都有迹可循。早在国家大基金三期设立之初，外界就对其投资方向展开了讨论。不少研究机构和行业媒体纷纷预测，随着数字经济和人工智能的蓬勃发展，AI相关前沿技术或成为大基金三期投资的重点方向之一。&nbsp;</p>
+  <p>比如，华鑫证券曾表示，算力芯片和存储芯片将成为产业链上的关键节点，大基金三期除了延续对半导体设备和材料的支持外，更有可能将HBM等高附加值DRAM芯片列为重点投资对象；中航证券也在研报中指出，人工智能芯片或成为大基金三期投资重点。&nbsp;</p>
+  <p>如今国家人工智能产业投资基金落地，可以说是意料之中的事。&nbsp;</p>
+  <p>雪球上一投资人就直言，“600亿的人工智能大基金圈内不算秘密，这是行业性的机会。大模型企业有充足的资金配置算力，且必然带有国产化需求指标，端侧和软件的企业得到资金支持能加速应用落地，特别是B端能加速先进生产力的。”&nbsp;</p>
+  <p>再来看另一位出资人，国智投。&nbsp;</p>
+  <p>国智投虽然成立不久，但是来头不小。其背后出资人分别是上海国盛资本、诚通基金及上海临港科创投。&nbsp;</p>
+  <p>上海国盛资本隶属于上海国盛集团，后者是上海国资平台，截至2024年5月，该集团已经发起设立了18只基金，目标募集总规模近1200亿元，此外还参与投资了21只基金，目标募集总规模近6250亿元。诚通基金隶属于诚通控股，后者由国务院国资委直接监管；上海临港科创投则是上海自由贸易试验区临港新片区主要开发主体之一——临港集团的基金管理平台。都是妥妥的国资“大块儿头”。&nbsp;</p>
+  <p>值得一提的是，上海国盛集团和诚通控股还是国家大基金三期背后的重要LP，分别持股8.7209%和2.907%。&nbsp;</p>
+  <p>国资联手，豪掷超600.6亿元，此番国家人工智能产业投资基金的成立，一方面展示了国家在人工智能领域的雄心，另一方面也将为行业相关企业提供更丰富的资本支持。</p>
+  <h2><strong>各地国资频繁出手，抢占万亿AI赛道</strong></h2>
+  <p>通常来讲，国资LP的投资方向，往往与国家重点扶持的产业高度吻合，人工智能就是一个显著例子。&nbsp;</p>
+  <p>自2023年以来，国资委已经多次“点题AI”，鼓励国企央企带头布局人工智能，推动AI加速向产业端渗透。&nbsp;</p>
+  <p>就拿刚刚过去的2024年来说，年初1月，工信部等七部门印发了《关于推动未来产业创新发展的实施意见》，提出围绕制造业主战场加快发展人工智能、人形机器人等未来产业，支撑推进新型工业化；7月公布的《国家人工智能产业综合标准化体系建设指南（2024版）》，将赋能新型工业化作为人工智能标准体系结构的七个部分之一，规范了人工智能技术在制造业全流程智能化以及重点行业智能升级的技术要求；12月，《制造业企业数字化转型实施指南》又鼓励企业探索智能研发新应用，开发“人工智能+”研发设计软件。&nbsp;</p>
+  <p>在一系列政策的指引下，各地国资开始频繁出手。&nbsp;</p>
+  <p>以上海为例。在“十三五”末，上海在产业发展上提出了“3+6”的架构，这里的“3”，就是集成电路、生物医药、人工智能三大先导产业。很快，这个说法就被写进了上海市先进制造业发展“十四五”规划。&nbsp;</p>
+  <p>随后2024年中旬，上海设立了高达225亿的人工智能产业母基金，由上海国投先导私募基金管理有限公司担任基金管理人。该基金的成立，当时在行业内还引起了不小的轰动。&nbsp;</p>
+  <p>短短数月后，上海又推出了百亿级别的人工智能生态基金。该基金由上海国投公司牵头，联合徐汇资本、临港控股、漕河泾总公司等国资平台和米哈游、商汤科技、哔哩哔哩等共同出资。该基金规模100亿元，首期30亿元。&nbsp;</p>
+  <p>除了上海，2024年以来深圳、北京、河南、成都、广州等地也都相继成立或拟设立了人工智能相关产业基金。&nbsp;</p>
+  <p>比如：10月，深圳市龙岗区推出全市首只规模10亿元人民币的人工智能专项基金；9月，成都市启动人工智能产业基金，总规模50亿元，首关10亿元；同一时间，河南算力产业基金正式发布，基金总规模100亿元，由河南投资集团作为基石出资人；4月，广州宣布设立总规模不少于100亿元琶洲新一代人工智能产业基金；1月，北京市人工智能产业投资基金注册设立，基金目标总规模为100亿元……&nbsp;</p>
+  <p>这还只是冰山一角，如果将投资方向涵盖人工智能的基金全部纳入统计，无论是基金数量还是基金规模，将更加惊人。&nbsp;</p>
+  <p>工信部发布的数据显示，截至2024年9月底，我国人工智能核心产业规模接近6000亿元，相关企业超过4500家。另据赛迪顾问预测，从2025年到2035年，中国人工智能产业规模预计将从3985亿元增长至17295亿元，复合年增长率为15.6%。其中，2030年，中国人工智能产业规模预计突破1万亿元。&nbsp;</p>
+  <p>可以预见的是，在这一潜力无限的万亿级赛道上，将会有更多的国资机构加入投资行列。&nbsp;</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/k-A10LovakoRmEHK8hXKTw" rel="noopener noreferrer nofollow" target="_blank">“LP波谱”</a>，作者：王满华，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3132028974841351</id>
+            <title>智能门锁狂卷2024：价格战、AI化和出海成了主旋律？</title>
+            <link>https://www.36kr.com/p/3132028974841351</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3132028974841351</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 07:14:26 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <智能家居, 智能门锁, C端市场, 价格战>
+<br>
+<br>
+总结: 2024年中国智能门锁市场销量出现下滑，B端市场份额下降，C端市场首次超越B端，成为主要增长动力。智能门锁行业面临激烈竞争，企业需在产品设计、价格和营销上发力，尤其是融入AI技术以提升用户体验。线上市场的崛起使得价格战加剧，品牌之间的竞争愈发激烈。未来，智能门锁行业将向多样化的生物识别技术发展，同时也可能开拓海外市场以寻求新的增长机会。 </div>
+                        <hr>
+                    
+                    <p>在智能家居赛道，小米、华为又一次脱颖而出。</p>
+  <p>日前，国内调研机构洛图科技公布的数据显示，2024年中国智能门锁市场全渠道销量为1747万套，同比下降3%。其中小米出货量超过150万套，位列销量第一，销售额略逊于德施曼，位列第二。值得一提的是，华为智能门锁销量虽未进入前五，但凭借在高端市场的优异表现，销售额位列第五。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_9ec7edf17a3045f7bb0469133fa13aa1@1547419282_oswg86778oswg1080oswg545_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（图源：洛图科技）</p>
+  <p>尽管智能门锁市场销量规模有所下滑，但整个行业依然保持着不错的态势，只是受到大环境影响，销量出现了些许波动，而行业的变化将对智能门锁企业提出更多考验。</p>
+  <h2><strong>由B到C，智能门锁进入“线上时代”</strong></h2>
+  <p>2023年及之前，国内智能门锁行业的主导力量为B端市场，即以房屋整装为主。基于这种模式，“人脉”比产品质量、营销可能更重要，智能门锁企业只需要与家装公司打好关系，便能提高销量和市场份额。</p>
+  <p>2024年国内智能门锁行业B端市场份额下降至44.1%，同比下滑14.4%，C端市场则同比增加约12个百分点，达54.6%，首次超越B端市场。</p>
+  <p>B端市场萎靡的原因在于房地产行业不景气，按照奥维云网《中国智能门锁行业白皮书》披露的数据，2024年1月-9月全国300城宅规划建筑面积2.2亿㎡，同比下降37%，成交规划建筑面积约1.6亿㎡，同比下降35%，新建商品房销售额68880亿元，下降22.7%。<strong>房地产行业的寒风，对智能门锁行业造成了较为严重的影响。</strong></p>
+  <p><strong>C端市场的快速崛起，给智能门锁行业带来了新的增长力，如何顺应C端市场的情况打造产品、投放营销，则是接下来智能门锁企业需要思考的首要问题。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_ad17bec4b8fd4e0d93874cd771a2908d@1547419282_oswg1965658oswg1714oswg1892_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（图源：小米）</p>
+  <p>洛图科技统计数据显示，2024年中国智能门锁线上全渠道销量为772万套，线下零售量几乎只是线上市场的零头。</p>
+  <p><strong>以线上市场为主，意味着智能门锁销量取决于消费者的支持度和产品曝光度。为争抢消费者，企业之间的竞争会更加激烈，智能门锁品牌需要更高的曝光度，头部化情况也将更加严重。</strong>小米、华为、TCL等在互联网、数码科技等行业拥有极高影响力的品牌，具备先天优势。</p>
+  <p>线上市场产品价格公开透明，便于消费者对比，为吸引消费者，智能门锁品牌之间的价格战也难免加剧。据洛图科技统计，2024年国内线上市场智能门锁的平均价格已从2021年的1301元降低至913元。<strong>受到行业竞争的影响，小雷预计两年内智能门锁线上渠道均价将降低至800元以内。</strong></p>
+  <p>价格战之外，智能门锁行业的“技术战”烈度也将升级。智能门锁产品正在丰富功能，向家庭安防平台方向进化，因而需要加入更多复杂的生物识别技术。现阶段低端智能门锁以App蓝牙、指纹、NFC种便捷解锁方案为主（不包括应急钥匙、密码等不方便的方案），高端智能门锁则加入了AI掌静脉识别、3D结构光人脸识别等生物识别方案。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_41263a014ae146f5acfd0d69641e6fe1@1547419282_oswg126375oswg2399oswg1012_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（图源：TCL）</p>
+  <p>这些方案安全性更高，且能够规避手掌出汗后指纹识别不准确问题。多出的摄像头，还能当作家庭监控设备使用，进一步提高安全性。未来智能门锁还可能普及超声波指纹识别、UWB解锁等方案，并将多种方案融合，提供更大的冗余度。</p>
+  <p><strong>2024年国内智能门锁行业的销量变化，透露出B端市场主导地位让与C端市场、线上市场的崛起加快行业头部化、价格战加剧、企业卷向多重复合生物识别技术等趋势。</strong>智能门锁行业迈向新时代，唯有能够顺应行业发展，为市场提供更符合要求的产品，方能在接下来的竞争中胜出。</p>
+  <h2><strong>行业竞争加剧，AI成为新的杀手锏</strong></h2>
+  <p>智能门锁行业销量主力由B端转向C端，且线上市场至关重要，最大的受益者无疑是小米、华为等互联网巨头。甚至近几年才声名鹊起的萤石，也凭借品牌知名度，2024年线上渠道销量同比增长超过150%。</p>
+  <p>当然，因价格战造成的行业利润空间被压缩，给智能门锁企业造成了不小的压力，仅2023年和2024年这两年间，退出该行业的品牌就接近170个。</p>
+  <p>相对而言，凯迪仕、德施曼等以高端产品为主的品牌，抗风险性更高一些。如德施曼在1500元以上价位段位列第一，凯迪仕则在2000元-2499元价位段位居前列。品牌形象塑造完成后，依靠高端市场的份额，德施曼、凯迪仕等品牌能够保证营收，同时拿出资金去开发新技术、新产品、做营销，并逐步下沉市场，与跨界而来的互联网巨头竞争。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_8ec6a4c6e1bc47e3bfd91d47f5513bd6@1547419282_oswg143835oswg1075oswg1586_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（图源：凯迪仕）</p>
+  <p><strong>仍打算在智能门锁行业发展的品牌，需要在产品设计、价格、营销三方面发力。</strong></p>
+  <p>C端市场面向个体消费者，每个人的喜好、需求都不同，难免众口难调，对于企业的产品设计能力也提出了更高的要求。小雷认为，智能门锁应当以科技为基调，加入更多生物识别功能，降低产品被破解的风险和使用便利度。</p>
+  <p><strong>价格方面则以下沉市场为核心，降价永远是提高产品竞争力最简单有效的方案。</strong>营销方面较为复杂， 需要企业在各平台投放广告，或以直播形式展示智能门锁带来的体验升级。</p>
+  <p>另外，智能门锁行业也在积极融入AI。<strong>利用AI提高识别准确度和解锁效率，将成为未来行业的必然选择。AI技术不但可以提升使用体验，还能用于秀肌肉式营销。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_48df91dd8461428087a557176f882d27@1547419282_oswg380494oswg1441oswg757_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p>例如TCL旗下的K7G Plus智能门锁便加入了3D结构光解锁和AI功能，可以在各种光线复杂场景下准确识别用户，做到越用越好用，24小时AI哨兵猫眼还能智能观察家门动态，自动过滤行人，并在遇到特殊情况时及时向房主发出提醒。</p>
+  <p>不过以C端市场为主，并不意味着要放弃B端市场。如主攻高端市场的凯迪仕品牌，就推出了智慧租住解决方案，将智能门锁与租房结合。新华社在报道中提到，国内潜在用于出租的房源已超过6000万套，且据《2024中国房地产产业链战略诚信供应商研究报告》统计，智能门锁建材领域，凯迪仕以10.26%的首选率位列国产品牌第一。若能推动租住用房大范围改用智能门锁，凯迪仕未来几年都不用为销量发愁。</p>
+  <p>小雷目前租住的房子，门锁便支持NFC和密码解锁，将NFC复制到手机或部分品牌的手表后，即可触碰解锁，十分方便，且不用担心出门忘记带钥匙。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_c1ef2f0e4bcf46d7994f485f04cff66d@1547419282_oswg396675oswg1280oswg2816_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（图源：钱包App截图）</p>
+  <p>国内另一家智能家居企业欧瑞博同样盯上了全屋智能，并推出了高端全屋定制解决方案。许多消费者选择小米、华为的智能门锁，除了受其品牌影响，还有一个原因便在于正在使用该品牌的手机，同品牌设备更方便App、语音控制。若购买不同品牌的智能家居设备，则可能需要安装多款App，控制时较为麻烦。</p>
+  <p>无论是凯迪仕的智慧租住解决方案，还是欧瑞博的全屋智能，本质上都是化繁为简，提高用户管理和使用智能设备的便利性。<strong>打造全套智能解决方案，或将成为传统家电企业抵御小米、华为、TCL等以数码和科技为主基调品牌的关键。未来智能门锁还可能开拓智慧园区、智慧楼宇等市场，面向物业管理、办公园区场景。</strong></p>
+  <h2><strong>头部品牌决战国内，中小品牌海外寻机遇</strong></h2>
+  <p>国内智能门锁行业正从成长期迈入成熟期，无法维持较高增长率，但2024年这种同比销量下滑的情况，随着相关企业逐渐适应C端市场，未来数年大概率不会再出现。</p>
+  <p><strong>在B端市场萎缩后，C端市场将成为推动智能门锁销量增长的主力。消费者的复杂需求也将促使相关企业加大技术研发力度，即卷产品，也卷价格。</strong>但线上渠道和C端的崛起，令行业头部化加剧，小品牌的处境将更加艰难。</p>
+  <p><strong>以降价下沉市场打价格战、融入AI及多种解锁方案丰富产品功能、做好营销策划提升品牌影响力，是智能门锁品牌在新时代的必然选择。</strong>财力和技术实力雄厚的头部品牌，无论是打价格战，还是为产品加入更多功能都更具优势，品牌影响力也更高。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_0f1abc2de5a14db187136236b8c66db8@1547419282_oswg84903oswg1556oswg792_img_000?x-oss-process=image/format,jpg/interlace,1/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（图源：华为）</p>
+  <p>作为全球工业产值最高的国家和拥有14亿人的全球最大消费市场，中国各行各业竞争都极为激烈。若国内市场难以为继，智能门锁企业则可以另辟蹊径，进军海外市场。</p>
+  <p>奥维云网在《中国智能门锁行业白皮书》中提到，2024年中国智能门锁渗透率约为27.9%。按照洛图科技的说法，海外市场智能门锁渗透率不到3%，而且产品多以指纹解锁、密码解锁为主，功能不够丰富。国内市场的产品卖到海外市场，堪称降维打击。</p>
+  <p><strong>市场竞争烈度不高、发展空间极大的海外市场，或为国内智能门锁企业的机会。借助庞大的海外市场，智能门锁品牌能够获取的收益未必低于国内市场。</strong>而且如同数码配件行业的ANKER一般，在海外市场取得一定成果后，再转回国内市场不迟。</p>
+  <p>本文来自“雷科技”，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3131999067855620</id>
+            <title>中国大飞机，终于穿上了“国产鞋”</title>
+            <link>https://www.36kr.com/p/3131999067855620</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3131999067855620</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 07:11:16 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <C919, 航空轮胎, 国产化, 技术突破>
+<br>
+<br>
+总结: 2023年5月28日，国产大飞机C919投入商业运营，尽管国产化率不高，但随着民用航空轮胎的国产化实现，标志着中国在航空领域的技术突破。航空轮胎的生产面临技术储备、投资和达标能力等挑战，长期以来市场被米其林、普利司通和固特异等寡头垄断。2023年底，中国首条数字化民用航空轮胎生产线在广西桂林投产，成功打破了这一垄断。国产航空轮胎不仅满足国内需求，还具备进入国际市场的潜力，推动整个轮胎行业的发展。 </div>
+                        <hr>
+                    
+                    <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_87c26c08c81c4056996fc7ec3d255ed3@46958_oswg230440oswg1070oswg506_img_png?x-oss-process=image/quality,q_100/format,jpg/interlace,1" /></p>
+  <p>2023年5月28日，国产大飞机C919投入商业运营，很多网友还为不高的国产化率忧心忡忡。&nbsp;</p>
+  <p>彼时，正解局就分析过，不用太担心，只要C919飞起来，国产化率就不是大问题。&nbsp;</p>
+  <p>这不，最近，我国实现了民用航空轮胎的国产化。&nbsp;</p>
+  <p>中国大飞机，终于用上了“国产鞋”。&nbsp;</p>
+  <h2><strong>依赖进口</strong></h2>
+  <p>如果说，机翼是飞机的“翅膀”，起落架是飞机的“腿脚”，那么，轮胎就是飞机的“鞋子”。&nbsp;</p>
+  <p>这双“鞋子”，可不简单。&nbsp;</p>
+  <p>早期的航空轮胎，与汽车轮胎一样，采用天然橡胶制造，多为充气结构。&nbsp;</p>
+  <p>二战对航空技术的需求，刺激了航空技术和材料科学的进步，战后航空业的繁荣激增了市场需求，为了应对更重载荷和更高速度，合成橡胶的航空轮胎开始被广泛应用。&nbsp;</p>
+  <p>1980年代，子午线轮胎（钢丝轮胎）技术走向市场，不仅提供了更佳的耐用性和更低的滚动阻力，还提高了燃油效率和安全性。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_c834eab3e515478192f56efce0ad0911@000000_oswg57736oswg801oswg508_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">子午线轮胎结构图&nbsp;</p>
+  <p>到本世纪初，复合材料和纳米技术的应用，在增强轮胎强度的同时，还减轻了自重。&nbsp;</p>
+  <p>正如人的鞋子一样，在飞机起飞和降落阶段，轮胎是唯一与地面接触的部分，需要承受住超高载重、超强冲击力和极端的速度变化。&nbsp;</p>
+  <p>与普通轮胎相比，如今的民航飞机轮胎载荷能力超10倍，形变率缩小至两到三成，还可承受150度的温度剧变，经得起静止到250公里/小时以上的速度变化。&nbsp;</p>
+  <p>这也意味着，此种轮胎不好造。&nbsp;</p>
+  <p>首先，技术储备就是一道坎。&nbsp;</p>
+  <p>先不说胎面上适配不同飞机的轮胎花纹，单是多达十几个结构的胎体，本身也需要不同领域材料化学的科研储备，每项都得经过长期持续的研发。&nbsp;</p>
+  <p>不仅要解决理论难题，还得能实现产业化——要知道，单单是理论层面，对许多国家来说就已经高不可攀了。&nbsp;</p>
+  <p>其次，要舍得投资。&nbsp;</p>
+  <p>轮胎生产是大化工，需要的是全产业链，每一步都是典型的重资产行业。&nbsp;</p>
+  <p>第三，是达标能力。&nbsp;</p>
+  <p>航空行业对安全性的要求非常严苛，航空轮胎的测试评价体系与标准体系要求极高。&nbsp;</p>
+  <p>这些测试和评价标准都掌握在西方，生产出来后能不能投入市场，要看人家的脸色。&nbsp;</p>
+  <p>以上几个原因，导致目前航空轮胎市场及标准和体系的制定都被几个寡头企业垄断。&nbsp;</p>
+  <p>全球近90％的航空轮胎市场，被米其林、普利司通和固特异三家企业瓜分。&nbsp;</p>
+  <p>这三大巨头，不仅有技术积累，也有成熟的产线，还牢牢把握着标准和体系。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_22406da9812f4641b2f5eda0608d445f@000000_oswg46508oswg607oswg610_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">2023国际航空轮胎市场占有率&nbsp;</p>
+  <p>既定的市场格局下，我国在航空轮胎领域高度依赖进口甚至被卡脖子，我国的企业很难突围。&nbsp;</p>
+  <p>据统计，中国民航系统飞机轮胎98％依赖进口。&nbsp;</p>
+  <p>依赖进口，意味着供应链很容易受到贸易摩擦、地缘政治冲突等外部因素影响，出现供应中断。&nbsp;</p>
+  <p>这不仅增加了航空公司的运营成本，关键时刻还可能影响到我国飞机的飞行安全。&nbsp;</p>
+  <h2><strong>打破垄断</strong></h2>
+  <p>早期，我国的航空轮胎工业主要服务于军事。&nbsp;</p>
+  <p>进入新世纪，国内民用航空市场迅速壮大，相应地扩大对航空轮胎的需求。&nbsp;</p>
+  <p>2023年底的统计，中国共有民航飞机4270架，年消耗轮胎超过25万条。&nbsp;</p>
+  <p>这么大的市场，岂可拱手于人？！&nbsp;</p>
+  <p>国产大飞机C919研发成功，与其同步，我国对航空轮胎的攻关也从未停止。&nbsp;</p>
+  <p>去年11月底，国内第一条数字化民用航空轮胎生产线在广西桂林正式建成投产。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_8ab04958feb04d1789a1908ade1d03ed@000000_oswg97495oswg1080oswg460_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">国内第一条数字化民用航空轮胎生产线&nbsp;</p>
+  <p>随后，采用我国首条民用航空子午线轮胎装配的空客A320飞机，在桂林两江国际机场试飞成功。&nbsp;</p>
+  <p>位于广西桂林的生产线按照工业4.0标准设计建造，使用智慧物流和机器人的全流程操作，实现了全链条自动化生产和智能化调度监控。&nbsp;</p>
+  <p>在线的6个机型12种规格的产品均拥有完全自主知识产权，能配套我国近80%的民航机种，连C909大飞机都能用。&nbsp;</p>
+  <p>在C909上累计使用量已超过1万个飞行起落，每个轮胎平均使用寿命超过200个起落，达到行业最高水准。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_93dd20edce8145018ab99c346af3e9d6@000000_oswg107951oswg1080oswg779_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">工作人员测试轮胎&nbsp;</p>
+  <p>实现从0到1的突破，标志着我国正式打破垄断，实现航空轮胎的国产化。&nbsp;</p>
+  <p>首先是材料，我国航空轮胎走的就是天然橡胶加工技术路线。&nbsp;</p>
+  <p>在桂林生产线上，第一道工序密炼工序正是橡胶生产。以国产天然橡胶为主要原料，100多种原材料混合在一起，综合性能比同类产品提升20%。&nbsp;</p>
+  <p>其次是生产，高度自动化，保证产品的质量与精度。&nbsp;</p>
+  <p>我国自主研发的双螺杆挤出压片机、胎面胎侧复合挤出生产线、内衬层挤出压延生产线等关键装备实现全链条自动化生产和智能化调度监控，生产出航空轮胎所需的各种高精度半制品部件。&nbsp;</p>
+  <p>厚度为0.9毫米的胎体帘布，生产精度稳定控制在0.02毫米以内。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_5dc8767282044b14996e237bccbf0ae7@000000_oswg42386oswg660oswg371_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">胎体帘布生产线&nbsp;</p>
+  <p>为保障轮胎的可靠性和高安全性，配合这套生产线，我国自主开发了首套复杂工况航空轮胎起降测试平台，这是国内首创、唯一可实现复杂工况航空轮胎动态试验测试的专有设备，能模拟复杂环境下的起降。&nbsp;</p>
+  <p>在这整条国产化技术全链条中，蕴含着41项核心技术。&nbsp;</p>
+  <p>打破垄断，中国企业靠的是真功夫。&nbsp;</p>
+  <h2><strong>意义深远</strong></h2>
+  <p>走路多人“废鞋”，频繁起飞的大飞机，更是需要定期更换轮胎。&nbsp;</p>
+  <p>目前，我国已拥有仅次于美国的全球第二大的民航机队。&nbsp;</p>
+  <p>根据测算，2035年我国运输机场旅客吞吐量和保障起降架次将超过30亿人次、3000万架次。&nbsp;</p>
+  <p>2023年我国民用运输机场完成旅客吞吐量12.6亿人次，完成飞机起降1171万架次。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_7504b902db124e549bfc7c147f279a1b@000000_oswg42777oswg1080oswg1074_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">2023年及2035年（预计）我国民用运输机场旅客吞吐量和飞机起降架次对比&nbsp;</p>
+  <p>航空轮胎的需求量也将逐年增长，有望达到每年150万条的消耗量。&nbsp;</p>
+  <p>我国打破航空轮胎的垄断后，“国产鞋”将逐步满足国内需求。&nbsp;</p>
+  <p>不仅有助于降低运营成本，还大大增强国内航空业的自主性和安全性。&nbsp;</p>
+  <p>国产轮胎不仅满足国产客机需求，还能适配波音、空客等其他飞机，打入国外市场。&nbsp;</p>
+  <p>之所以敢到国际市场一拼高下，是因为国产轮胎具有起降寿命更长、散热性好、速度性能佳、重量更轻等优点。&nbsp;</p>
+  <p>再加上超高的性价比，以及良好性能带来的安全性和耐久性，竞争力很强。&nbsp;</p>
+  <p>航空轮胎是轮胎产业的天花板，被称为轮胎制造领域皇冠上的明珠。&nbsp;</p>
+  <p>中国在航空轮胎的突破，也会带动整个轮胎行业的发展。&nbsp;</p>
+  <p>2023年，全球轮胎总产量为18.5亿条，国产轮胎超9.8亿条，占全球一半。预计到2026年，全球轮胎市场空间约为1.1万亿人民币。&nbsp;</p>
+  <p>凭借国产航空轮胎的横空出世，我国轮胎企业在全球市场的知名度和竞争力也有望持续提升。&nbsp;</p>
+  <p>复盘整个攻关历程，国产航空轮胎的突围，绝非偶然。&nbsp;</p>
+  <p>从生产端看，我国化工产业特别是轮胎产业的发展，为航空轮胎的诞生打下基础。&nbsp;</p>
+  <p>我国首条民航轮胎生产线是由中国中化旗下的桂林蓝宇航空轮胎发展有限公司建设的。&nbsp;</p>
+  <p>中国中化是全球高端及超高端乘用胎领导者和全球知名工业胎战略供应商，橡胶轮胎业务在全球13个国家设有25家工厂，拥有强大的研发和生产实力。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_d2e788fef89c4d25b0e4696f07871e5a@000000_oswg82448oswg767oswg510_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">中国中化旗下的风神轮胎主要生产工业轮胎&nbsp;</p>
+  <p>从需求端看，C919的研发成功拉动了航空轮胎需求。&nbsp;</p>
+  <p>让国产航空轮胎研发变得“有利可图”，即使无法进入海外市场，供应国内市场足矣。&nbsp;</p>
+  <p>国产航空轮胎实现从0到1，不仅是技术的突破，更是产业链的突围和工业体系的崛起。&nbsp;</p>
+  <p>C919的含金量，还在上升！&nbsp;</p>
+  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MjM5MTU3Mzk2OA==&amp;mid=2654901986&amp;idx=1&amp;sn=a79b3202e8a8684bb43df4b7c58e9e7f&amp;chksm=bc9bca4bbffd3d4e3845d62b29a98e115918b5df86610a742529cd24ae8e0636414ea49bf219&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“正解局”（ID：zhengjieclub）</a>，作者：正解局，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3132096931060488</id>
+            <title>AI智能体2小时击败人类，引爆贝叶斯推理革命，仅用10%数据训练秒杀大模型</title>
+            <link>https://www.36kr.com/p/3132096931060488</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3132096931060488</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 07:11:14 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <Genius智能体, AI, Pong游戏, 贝叶斯推理>
+<br>
+<br>
+总结: Verses团队研发的Genius智能体在Pong游戏中以仅用10%数据和2小时训练时间超越了人类顶尖玩家，展现出其高效性和强大能力。Genius的模型规模仅为现有顶尖模型的4%，并在M1芯片的MacBook上运行。该项目的灵感源于科学家们对生物大脑的研究，强调模仿大脑工作方式的重要性。研究团队认为，Genius的成功标志着超高效贝叶斯智能体在复杂游戏环境中实现通用解决方案的重要里程碑。与传统的AI模型相比，Genius在主动性和学习能力上具有显著优势，预示着未来AI发展的新方向。 </div>
+                        <hr>
+                    
+                    <p><strong>【导读】</strong>就在刚刚，Verses团队研发的Genius智能体，在Pong中超越了人类顶尖玩家！而且它仅仅训练2小时，用了1/10数据，就秒杀了其他顶级AI模型。</p>
+  <p>最近，Verses团队在AI领域投下了一枚重磅炸弹，他们自研的Genius智能体，创造了一个几乎不可能的奇迹——</p>
+  <p><strong>只用‍10%‍数据，训练2‍小时，就能打造出最强AI智能体！</strong></p>
+  <p>在经典游戏Pong中，Genius智能体多次达到完美的20分，一举超越了苦练数天的其他AI，和顶尖的人类玩家。</p>
+  <p>更让人惊掉下巴的是，它的规模只有SOTA模型IRIS的4%（缩小了96%），直接在搭载M1芯片的MacBook上就能跑。</p>
+  <p>Genius在「状态好」时，甚至能削电脑一个「秃头」</p>
+  <p>这一项目的灵感，来自一个四年前的实验——科学家们培养的「盘中大脑」，用5分钟学会了玩Pong游戏。</p>
+  <p>这启发了科学家们思考，如果能够模仿大脑的工作方式，是不是就能创造出更聪明、更高效的AI。</p>
+  <p>恰在2023年，这个大胆的想法，在Nature论文中得到了证实。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_d710a03e5e6b4b6c928f729e64e319cf@46958_oswg118754oswg1080oswg426_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而现在，Verses团队正将这种生物学的智慧，转化为现实。</p>
+  <p>研究团队表示，这标志着首个超高效贝叶斯智能体在复杂多维度游戏环境中，实现通用解决方案的重要里程碑。</p>
+  <h2><strong>打造最强AI智能体，LLM并非良策</strong></h2>
+  <p>目前，所谓的AI智能体，大多数实际上只是在大模型基础上，搭建的简单架构。</p>
+  <p>正如苹果研究团队，在去年10月arXiv论文中，直指现有的LLM，并不具备真正的逻辑推理能力。</p>
+  <p>它们更像是在「记忆」训练数据中，所见过的推理步骤。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_1fbdfa828b7e40eb99d02d268de96480@46958_oswg48638oswg1080oswg367_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>论文地址：https://arxiv.org/pdf/2410.05229</p>
+  <p>实际上，这种局限性严重制约了AI智能体的实际应用潜力。</p>
+  <p>即便是OpenAI推理模型o1，尽管代表着技术发展的重要里程碑，但其本质仍是将BBF/EfficientZero（强化学习）和 IRIS（Transformer）两种方法结合到CoT推理计算中。</p>
+  <p>这种方法虽有创新，但其仍未触及智能体进化的核心痛点。</p>
+  <p>那么，什么才是真正的突破口？</p>
+  <p>Verses团队认为答案是，认知引擎。Genius就像是智能体的认知引擎。</p>
+  <p>它不仅提供了包括认知、推理、规划、学习和决策在内的执行功能，更重要的是赋予了智能体真正的主动性、好奇心和选择能力。</p>
+  <p>其中，主动性正是当前基于LLM构建的智能体，普遍缺失的的特质。</p>
+  <blockquote>
+   <p>我们现在已经掌握了一种全新的「仿生方法」来实现通用机器智能，这种方法比上述两种方法（即使是结合在一起）都要明显更好、更快、更经济。</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_5f0ba55a0fd642c2b99669a53e424c01@46958_oswg33205oswg1080oswg314_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>博客地址：https://www.verses.ai/blog/mastering-atari-games-with-natural-intelligence</p>
+  <h2><strong>1张A100，训练2小时</strong></h2>
+  <p>为了与SOTA的机器学习技术进行客观对比，在这些初始测试中，研究者选择了基于模型的IRIS系统。</p>
+  <p>该系统基于2017年突破性的Transformer架构。这种方案能够最快速地完成部署，从而将精力集中在推进自身研究上，而不是复制他人的工作。</p>
+  <p>值得一提的是，在Atari 100K测试中表现最优的两个系统——EfficientZero和BBF，都采用了深度强化学习技术，这与Deepmind的AlphaZero、AlphaGo和AlphaFold所使用的方法一脉相承。</p>
+  <p>研究者在2小时内，用1万步游戏数据分别训练了Geniu和IRIS（记为10k/2h）。</p>
+  <p>他们将Genius 10k/2h的性能与IRIS进行了对比，后者使用相同的1万步数据，但训练时间为2天（记为10k/2d）。</p>
+  <p>同时，他们还将Genius 10k/2h的性能与使用完整10万步数据训练的BBF和EfficientZero的公开结果进行了比较。</p>
+  <p>性能评估采用人类标准化得分（HNS）来衡量，其中HNS 1.0代表人类水平的表现，具体而言，相当于人类玩家在2小时练习时间后（约等于10万个样本）在「Pong」游戏中对战电脑时获得的14.6分平均成绩。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_503d63a890e94388b109286e22b62f2e@46958_oswg42546oswg924oswg192_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">训练时间和模型规模</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_02af566d7978493ab3a3232f2dcc8b52@46958_oswg24359oswg733oswg432_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">基于多次游戏运行采样的定性结果</p>
+  <p>与Transformer和深度强化学习不同，Genius无需依赖强大的GPU进行训练。然而，为确保比较的公平性，所有测试均在AWS云平台上使用同一张英伟达A100 GPU进行。</p>
+  <p>值得注意的是，无论训练时长如何，IRIS训练后的模型包含800万个参数，而Genius仅需35万个参数，模型体积减少了96%。</p>
+  <h3><strong>Pong游戏的定性分析</strong></h3>
+  <p>在Pong游戏中，IRIS 10k/2h的只会在角落里「抽搐」，而IRIS 10k/2d展现出一定的游戏能力，HNS在0.0到0.3之间。</p>
+  <p>相比之下，Genius在2小时1万步训练后（10k/2h），就能达到超过HNS 1.0的水平，并在多次测试中获得20分满分。（划到最右即可看到Genius如何从0比6落后一路实现反超）</p>
+  <p>下图展示了IRIS和Genius在各自训练条件下所能达到的最高HNS。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_84681964791b4d729f3f1e7a9e01a3ca@46958_oswg28941oswg631oswg420_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">需要说明的是，Genius的得分仅为初步测试结果，尚未经过优化</p>
+  <p>鉴于IRIS 10k/2h未能展现有效的游戏能力，研究者主要展示了IRIS 10k/2d和Genius与电脑对战的质性测试样例。</p>
+  <p>这局比赛中，IRIS对阵电脑时以6:20落败，而Genius则以20:6的优势战胜了电脑对手。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_ca593f71ac9f4e5bb678b3af420411cf@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>下面这段视频，展示了Genius在学习「Pong」游戏过程中，在渐进式在线学习方面的卓越表现。</p>
+  <p>在1万步训练过程中，它依次取得了20:0、20:0、20:1、20:10、14:15的对战成绩。</p>
+  <p>特别是在第五局比赛中，当训练进行到接近9,000步时，尽管电脑以14:3大幅领先，但Genius随后展现出显著的学习能力，开始持续得分，直至训练步数耗尽。</p>
+  <h3><strong>Boxing游戏定性分析</strong></h3>
+  <p>在「Boxing」拳击游戏中，玩家控制白色角色，通过击打黑色对手角色来获取得分。</p>
+  <p>可以看到，只经过2小时训练的IRIS，开局就被电脑各种完虐；而在经过2天的训练之后，基本上可以和电脑「55开」了。</p>
+  <p>相比之下，Genius几乎从一直就处于领先，并在最后以86比63赢得了比赛。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_ca6f0bab30414f849ec47dc6df2bb4ef@46958_oswg7296oswg249oswg40_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_79942f4fb3d8431e94ee6c1bc9d9f7a5@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_b4e22a7841144b669575e658c3c799b8@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_a88240fc78f342d28f1ba36508fffce4@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>IRIS 10k/2h，IRIS 10k/2d，Genius 10k/2h</p>
+  <h3><strong>Freeway游戏定性分析</strong></h3>
+  <p>在Freeway游戏测试中，玩家需要控制小鸡穿过马路，同时避开来自不同方向、以不同速度行驶的汽车。</p>
+  <p>测试结果显示，IRIS 10k/2h和IRIS 10k/2d模型均表现出随机性行为，始终未能成功穿越马路。</p>
+  <p>而Genius则展现出对游戏对象和动态系统的深入理解，能够持续且成功地在复杂车流中进行穿梭。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_c183e65773ca4fc6938a69664a72cbbd@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_920b5cd1632f4ddd96f94cd37cf564dc@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_9ff2740342cc4b92aa0a6de52cc19a29@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>IRIS 10k/2h，IRIS 10k/2d，Genius 10k/2h</p>
+  <p>当然研究者也强调，虽然Atari 100k/10k、ARC-AGI能提供参考指标，但目前还没有一个单一的测试，能全面衡量AGI在认知、物理、社交和情感智能等各个维度上的表现。</p>
+  <p>同时，也需要警惕模型可能出现的过拟合现象，即为了在特定基准测试中取得高分而进行过度优化。这种情况下，就并不能说明模型的泛化能力、效率或在现实应用场景中的适用性。</p>
+  <p>因此，需要通过多样化的测试来衡量给定模型架构的适用性、可靠性、适应性、可持续性、可解释性、可扩展性以及其他能力。</p>
+  <h2><strong>怎么做到的？</strong></h2>
+  <p>之前Atari 100k挑战排行榜上的SOTA都是以数据为中心，计算复杂度很高的方法，如Transformer、神经网络、深度学习和强化学习。</p>
+  <p>然而，这些基于深度学习和大模型的AI系统都存在一个共同的弱点：它们大多是通过工程技术手段构建的，缺乏对智能本质的深刻理解。</p>
+  <p>Genius并非仅仅是对以往SOTA的渐进式改进。研究者应用了Karl Friston教授的自由能量原理、主动推断框架和贝叶斯推理架构。</p>
+  <p>Karl Friston近年来致力于自由能原理与主动推理的研究，该理论被认为是「自达尔文自然选择理论后最包罗万象的思想」，试图从物理、生物和心智的角度提供智能体感知和行动的统一规律，从第一性原理出发解释智能体更新认知、探索和改变世界的机制，对强化学习世界模型、通用AI等前沿方向具有重要启发意义。</p>
+  <p>自由能原理认为，所有可变的量，只要作为系统的一部分，都会为最小化自由能而变化。</p>
+  <p>主动推理框架基于自由能原理提供了一个建模感知、学习和决策的统一框架。将感知和行动都看作是推断的问题。</p>
+  <p>其核心观点是：生物体认知与行为底层都遵循着相同的规则，即感官观测的「意外」最小化。在这里，「意外」被用于衡量智能体当前的感官观测与偏好的感官观测之间的差异。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_2e4c15f303be4ced9249287df91dfb2d@46958_oswg53912oswg960oswg599_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">主动推理路线图</p>
+  <p>这些方法深深植根于生物智能背后的神经科学，它将智能系统视为预测引擎，而非仅仅被动式数据处理机器，这些系统能够通过测量预期与感知数据之间的差异来实现高效学习。</p>
+  <p>其核心目标是持续降低对环境的不确定性，具体方式是学习理解所观察现象背后隐藏的因果动态关系，从而更好地预测结果并选择最优行动。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_d308f01b8b2a447c920749332cbc8bcf@46958_oswg63634oswg900oswg506_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">主动推理的框架概览</p>
+  <p>这条运用神经科学方法和生物学可行技术来解决Atari问题的另类途径始于2022年。</p>
+  <p>当时，Friston教授带领Cortical Labs开发了一种「微型人类大脑」，并命名为DishBrain（培养皿大脑），这个「大脑」包含了大约80万个脑细胞，仅仅用了5分钟就学会了打「乒乓球」的游戏，而AI学会这一游戏需要花90分钟时间。</p>
+  <p>这一研究证明了神经元确实应用了自由能量原理并通过主动推断进行运作，并且即使是培养皿中的脑细胞也可以表现出内在的智能，并随着时间的推移改变行为。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_ef25c399c956488f8106902caa2207d1@46958_oswg505209oswg1080oswg612_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>论文地址：https://www.sciencedirect.com/science/article/pii/S0896627322008066</p>
+  <p>2023年，一篇发表在《自然》上的论文通过体外培养的大鼠皮层神经元网络进行因果推理，也证实了自由能原理的定量预测。</p>
+  <p>到了2024年初，研究者则更进一步，成功将这些在Dishbrain中展示的主动推断机制纯软件化地应用于乒乓球游戏。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_fdc11435d06e47e3827f2fb19947c270@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>主动推理及其对贝叶斯模型和算法的应用代表了一种根本不同的AI架构，从设计上讲，它比SOTA的ML方法更有效和高效。</p>
+  <p>如今Genius实现的，就是研究者此前开创的贝叶斯推理架构，它不仅提高了样本效率和持续学习能力，还能优雅地将先验知识与新数据结合。</p>
+  <p>这一突破带来了全新的先进机器智能方法，具有内在的可靠性、可解释性、可持续性、灵活性和可扩展性。</p>
+  <p>在统计学、机器学习和AI领域，贝叶斯推理因其在不确定性下的原则性概率推理方法而被视为一个强大而优雅的框架，但迄今为止，其巨大的计算需求一直限制着它在玩具问题之外的应用。</p>
+  <p>而Genius则代表了对这一障碍的超越，并提供了一个通用架构，使我们能够在此基础上构建众多高效的智能体，让它们能够学习并发展专业技能。</p>
+  <p>在不久的未来，也许我们再回首，就会发现这不仅标志着贝叶斯革命的开始，更代表着机器智能发展的自然方向。</p>
+  <p>如下图所示，虚线和渐变轨迹展现了智能体对已识别对象轨迹的概率预测——可能是球、高速行驶的汽车，或是拳击手的刺拳。</p>
+  <p>这些不确定性的量化，结合置信度的计算，首次展示了智能体的预测和决策过程如何实现可解释性。</p>
+  <p>这种系统的透明度和可审计性，与ML中不透明、难以解释且无法量化的内部处理过程形成了鲜明对比。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_9f45a840d9ab4186b26c056c2f474a4b@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Genius智能体在三个经典游戏中的面向对象预测能力：图中的渐变点展示了智能体对游戏中物体当前位置及其未来轨迹的预测推理</p>
+  <h2><strong>从AlphaGo到Atari，AI智能体新标准</strong></h2>
+  <p>现代，游戏已成为衡量机器智能的有效基准。</p>
+  <p>1996年，IBM的深蓝击败了国际象棋大师加里·卡斯帕罗夫时，整个世界都为之震撼。</p>
+  <p>这是一个具有明确规则和离散状态空间的游戏。而深蓝的成功主要依赖于暴力计算，通过评估数百万种可能走法做出决策。</p>
+  <p>2016年，谷歌AlphaGo在围棋比赛中击败了李世石，成为另一个重要的里程碑。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_d0e085713a5c4c0b84a843b4eafc2d46@46958_oswg713264oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>要知道，围棋的可能棋盘配置数量比宇宙中的原子数量还要多。</p>
+  <p>AlphaGo展示了深度强化学习和蒙特卡洛树搜索的强大能力，标志着AI从暴力计算向具备模式识别和战略规划能力的重大跨越。</p>
+  <p>虽然AI在棋类游戏中取得了里程碑式的成就，但这些突破也仅局限于「静态规则」的世界。</p>
+  <p>它们并不能模拟现实世界中的复杂动态，而现实世界中变化是持续的，需要适应不断变化的条件甚至变化的规则。</p>
+  <p>由此，电子游戏已经成为测试智能的新标准，因为它们提供了受控的环境，其规则需要通过互动来学习，而成功的游戏过程需要战略规划。</p>
+  <p>Atari游戏已成为评估AI智能体建模和驾驭复杂动态系统能力的最佳评估标准。</p>
+  <p>2013年，DeepMind发布了一篇论文，阐述基于强化学习的模型DQN如何能以超越人类水平玩Atari游戏，但前提是需要数亿次环境交互来完成训练。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_fc81f04bcd9d455ba4e9128c15080e55@46958_oswg31364oswg1080oswg377_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>论文地址：https://arxiv.org/pdf/1312.5602</p>
+  <p>2020年，DeepMind发表了另一篇基于DRL的Agent57的论文，该系统在57个Atari游戏中超越了人类基准水平，但它需要训练近800亿帧。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_4f4fb68fdd4b4fb9b7dd600e2ca3ecff@46958_oswg22745oswg1080oswg235_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>论文地址：https://arxiv.org/pdf/2003.13350</p>
+  <p>为了推动更高效的解决方案，Atari 100k挑战赛应运而生。这一挑战将训练交互限制在100k次内，相当于2小时的游戏训练，就能获得类似的游戏能力。</p>
+  <p>直到2024年初，Verses团队创下新纪录——</p>
+  <p>展现了由Genius驱动的AI智能体如何能在Atari 100k挑战赛中，仅用原来1/10训练数据，匹配或超越最先进方法的表现。</p>
+  <p>不仅如此，它还显著减少了计算量，同时生成的模型大小仅为基于DRL或Transformer构建的顶级模型的一小部分。</p>
+  <p>如果用汽车来打比方，DQN和Agent57就像是耗油的悍马，Atari 100k的方法就像是节能的普锐斯，而Atari 10k就像是特斯拉，代表着一种高效的革新架构。</p>
+  <h3><strong>为什么Atari 100k很重要</strong></h3>
+  <p>Atari 100k基准测试的重要性，体现在哪里？</p>
+  <p>它旨在测试智能体在有限训练数据条件，下在三个关键领域的表现能力：交互性、泛化性和效率。</p>
+  <p><strong>1.&nbsp;交互性</strong></p>
+  <p>交互性衡量了智能体在动态环境中学习和适应的能力，在这种环境中，智能体的行为直接影响最终结果。</p>
+  <p>在Atari游戏中，智能体必须实时行动、响应反馈并调整其行为以取得成功。这种能力正好反映了现实世界中适应性至关重要的场景。</p>
+  <p><strong>2.&nbsp;泛化性</strong></p>
+  <p>泛化性则评估了智能体将学习到的策略，应用于具有不同规则和挑战的各种游戏的能力。</p>
+  <p>也就是确保智能体不会过拟合单一任务，而是能够在各种不同领域中都表现出色，展现真正的适应性。</p>
+  <p><strong>3.&nbsp;效率</strong></p>
+  <p>效率主要关注智能体在有限数据和计算资源条件下快速学习有效策略的能力。</p>
+  <p>100k步骤的限制突显了高效学习的重要性——这对于现实世界中数据通常稀缺的应用场景来说尤为重要。</p>
+  <p>任何开发者都可以编写自定义程序，来解决游戏和逻辑谜题。而Deepmind的原始DQ 方法和Atari 100k都已证明，通过足够的人工干预和大量的数据与计算资源，传统机器学习可以被调整和拟合，以掌握像雅达利这样的游戏。</p>
+  <p>而Genius的亮点在于，它能够自主学习如何玩游戏，而且仅使用了Atari 100k 10%的数据量！</p>
+  <p>这，就让它跟现实世界中的问题更相关了。因为在现实场景中，数据往往是稀疏的、不完整的、带有噪声的，而且会实时变化。</p>
+  <h2><strong>广泛的商业应用前景</strong></h2>
+  <p>近来，行业的动态值得令人深思。</p>
+  <p>微软宣布计划重启三哩岛核电站，以支持其AI数据中心的发展规划</p>
+  <p>Meta计划在2024年底前部署相当于600,000块H100的算力（每块售价3万美元）</p>
+  <p>据估计，OpenAI o3单次任务的成本可能超过1,000美元</p>
+  <p>撇开不可靠性和不可解释性不谈，训练和运行这些超大规模过度参数化（overparameterized）模型的财务成本、能源消耗和碳排放，不仅在经济和环境上不可持续，更与生物智能的运作方式背道而驰。</p>
+  <p>要知道，人类大脑仅需要20瓦的能量就能完成复杂的认知任务，相当于一个普通灯泡的功率。</p>
+  <p>更令业界担忧的是，高质量训练数据正在耗尽。而使用合成数据作为替代方案，可能导致「模型崩溃」（model collapse），让模型性能逐渐退化。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_5b854f08d23a469489b67ce25937e822@46958_oswg399525oswg500oswg281_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>模型崩溃：这组图像展示了当AI模型仅使用合成数据进行训练时可能出现的问题。从左到右可以观察到图像质量的持续劣化过程，清晰地展示了模型性能逐步降低的现象</p>
+  <p>构建有效（可靠）、可信（可解释）和高效（可持续）的 智能体，如果能够通过单一的可泛化（灵活）架构来实现，其影响可能将达到改变人类文明进程的规模。</p>
+  <p>未来AI发展方向，或许不应该是由少数科技巨头控制的几个庞大的模型，而是部署数万亿个低成本、超高效、专业化的自组织智能体。</p>
+  <p>它们可以在边缘计算端和云端协同运作，通过协调与合作，在从个体到集体的各个层面都遵循着一个共同的、表面上看似简单的内在目标——追求理解，即降低不确定性。</p>
+  <p>这种新型智能体特别适合处理那些具有持续变化、数据资源受限，同时要求更智能、更安全、更可持续的问题领域。</p>
+  <p>比如，在金融、医疗、风险分析、自动驾驶、机器人技术等多个领域，应用前景广阔。</p>
+  <p>这场关于AI未来的游戏，才刚刚开始。</p>
+  <p>参考资料：</p>
+  <p>https://www.verses.ai/blog/mastering-atari-games-with-natural-intelligence</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/uayrlvGVjwEhtNij0dne7Q" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，编辑：编辑部 HYZh‍&nbsp;，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3132096708451080</id>
+            <title>特朗普一上台，拜登AI禁令被秒撤，硅谷科技「壕客」齐聚就职典礼现场</title>
+            <link>https://www.36kr.com/p/3132096708451080</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3132096708451080</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 06:53:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 特朗普, AI政策, 科技巨头, 内阁成员  
+<br><br>  
+总结: 特朗普上任后立即撤销了拜登的AI行政禁令，承诺减少监管并加大对AI基础设施的投入，标志着美国科技巨头的春天来临。就职典礼上，众多科技大佬出席并捐赠巨额资金，显示出他们与特朗普的密切关系。特朗普提名的内阁成员中有多位亿万富翁，可能成为美国历史上最富有的内阁。媒体对此表示关注，认为科技企业的支持与特朗普的政策息息相关。 </div>
+                        <hr>
+                    
+                    <p><strong>【导读】</strong>才一上任，特朗普就宣布撤销拜登的AI行政禁令！马斯克、小扎、劈柴、贝索斯、库克等大佬悉数出现在就职典礼上。今天起，历史上最贵「内阁」开始运转，新总统承诺减少监管，加大AI基础设施投入，美国科技巨头的春天来了？</p>
+  <p>特朗普上任，美国科技巨头「春天到了」！&nbsp;</p>
+  <p>在特朗普第二次就职典礼上，扎克伯格、贝索斯、皮查伊和马斯克坐在显要席位上，据报道比特朗普的内阁成员还要靠前。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_d06fc63081e04c7aaa223bb15d685dee@46958_oswg602648oswg1080oswg598_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而苹果CEO库克位置相对靠后，与欧洲首富、印度首富等坐一起。&nbsp;</p>
+  <p>在参加就职典礼前，扎克伯格、贝索斯和库克还与特朗普一起参加了祈祷仪式。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_7f408b1ae9fe4676adfb383d771f0ece@46958_oswg694566oswg1080oswg719_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>有媒体干脆声称，特朗普在教堂被「科技黑帮」CEO们包围了。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_2146c0b3ff3c4d9dae43b455efdb488c@46958_oswg69784oswg1080oswg194_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>据此前消息，苹果、谷歌、微软、亚马逊、Meta、OpenAI、Perplexity，以及Uber等高科技公司或CEO纷纷向特朗普就职基金捐赠100万美元，获取到了就职典礼相关活动的最高权限。就职基金总额保守估计1.5亿，再次刷新美国历史记录！&nbsp;</p>
+  <p>马斯克和其他大型科技公司的首席执行官，通过各自的公司与美国政府签订了巨额合同，并有望从与特朗普的关系中获利。&nbsp;</p>
+  <h2><strong>特朗普AI新政&nbsp;</strong></h2>
+  <p>在上任的第一天，特朗普就撤销了前总统拜登签署的2023年关于AI的行政命令，此举可能加大AI对消费者、工人和国家安全的隐患。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_b7a5e2bd3efe410385da02a38b989dca@46958_oswg59694oswg1080oswg128_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>拜登的行政命令指示商务部国家标准与技术研究所 (NIST) 编写指南，帮助公司识别并纠正模型中的缺陷，包括偏见。&nbsp;</p>
+  <p>该行政命令还要求人工智能系统的开发商在向公众发布之前与美国政府分享安全测试结果。&nbsp;</p>
+  <p>特朗普还提名关键的政府成员，施加对企业的影响力。&nbsp;</p>
+  <p>比如，对企业影响深远的美国贸易委员会主席，他任命了Andrew N. &nbsp;Ferguson，以后大企业并购将更加宽松。&nbsp;</p>
+  <p>在竞选期间，特朗普就承诺要制定政策「支持植根于言论自由和人类繁荣的AI发展」。&nbsp;</p>
+  <p>在本月30日，OpenAI还将在美国首都举行会议，启动「为美国创新」倡议，游说美国政府，对美AI企业放开政府数据。&nbsp;</p>
+  <p>特朗普可能会减少对美国AI企业的监管，并对加大对AI相关的基础设施的建设，确保美国在AI领域的世界领先地位。&nbsp;</p>
+  <h2><strong>美国「最富」内阁&nbsp;</strong></h2>
+  <p>全球最富有的10名富豪中，有五人参加了特朗普的就职典礼，他们的财富相对比例如下：&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_7cc4b43850104056a3831c08608cbe94@46958_oswg50960oswg1080oswg476_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>马斯克为了支持特朗普，投入了25亿美元，还担任特朗普总统委员会成员。&nbsp;</p>
+  <p>特朗普则承诺将宇航员送上火星——此举将有利于马斯克的SpaceX。&nbsp;</p>
+  <p>这次特朗普任期内，马斯克可能是获益最大的科技企业CEO。&nbsp;</p>
+  <p>特朗普本身就是亿万富翁，从事房地产等行业，净资产估值估计约62亿美元。&nbsp;</p>
+  <p>他还提名了一些亿万富翁加入了内阁。&nbsp;</p>
+  <p>比如，商务部长Howard Lutnick，从事金融行业，净资产估计为20亿美元；财政部长Scott Bessent，净资产估值至少为5.21亿美元。&nbsp;</p>
+  <p>副总统JD Vance虽然净资产估计为500万美元，但他还相对年轻，出生于1984年，是美国首位「80后」副总统。&nbsp;</p>
+  <p>据报道，一共有17位亿万富翁将在特朗普政府内任职。&nbsp;</p>
+  <p>这可能是美国历史上「最富有」的内阁。&nbsp;</p>
+  <p>网友和媒体对亿万富翁出任政府要职，也有所不满。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_a730aa5c20a541c5a9aaadb5b595bcb6@46958_oswg45721oswg1070oswg166_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>本周， 特朗普的前首席策略师班农（Steve Bannon），呼应拜登，猛烈抨击了马斯克和总统轨道上的科技大亨，称他们为「寡头」。&nbsp;</p>
+  <p>许多观察家则认为马斯克还向人群做出的手势不妥。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_3afaa0cc1e234baba5369b8d87db095d@46958_oswg410186oswg964oswg576_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>还有媒体认为这些企业趋炎附势，毕竟这些企业中，很多都没给前总统拜登就职典礼捐赠，而现在却捐赠百万美元，排队参加特朗普的就职典礼。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_e4258c49a0814a5aa3c7ad74c24f7433@46958_oswg88269oswg1080oswg229_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>参考资料：&nbsp;</p>
+  <p>https://x.com/FT/status/1881452843246174274&nbsp;</p>
+  <p>https://www.ft.com/content/52ca150d-35c9-4a73-a366-f5b323fcf2a4&nbsp;</p>
+  <p>https://gizmodo.com/big-tech-mafia-spotted-in-church-with-trump-as-new-era-of-oligarchy-begins-2000552550&nbsp;</p>
+  <p>https://techcrunch.com/2025/01/20/president-trump-repeals-bidens-ai-executive-order/&nbsp;</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/RjI9bM1_7Imoox5MflSktA" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，编辑：KingHZ Aeneas，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3132096634755846</id>
+            <title>AI盈利难、机器人泡沫多，马库斯25年AI预测，隔空喊话马斯克</title>
+            <link>https://www.36kr.com/p/3132096634755846</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3132096634755846</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 06:50:04 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: AI发展, 预测, 强人工智能, 生成式AI  
+<br><br>  
+总结: AI专家Gary Marcus发布了对2025年AI发展的25项预测，认为强人工智能（AGI）在2025年不会实现，生成式AI的可靠性和推理能力问题依然存在。尽管智能体和类人机器人会受到宣传，但实际应用有限。AI模型的盈利能力将保持中等偏下，OpenAI的市场表现不佳，自动驾驶技术难以落地。此外，预计美国在AI法规方面不会有实质性进展，消费者面临的风险依然存在。 </div>
+                        <hr>
+                    
+                    <p><strong>【导读】</strong>新年伊始，AI专家Gary Marcus发布长文，公布了他对2025年AI发展最新的25项预测，包括AGI、生成式AI、自动驾驶、人形机器人、视频生成、智能体等多个方向。虽然在2024年对OpenAI估值预测出错，但在最新的预测中仍不看好OpenAI。</p>
+  <p>去年，马库斯对于AI趋势的预测几乎全部正确，但完全没想到OpenAI可以估值到1500亿美元。</p>
+  <p>在本月2日，马库斯发表了对2025年的25个AI预测，涵盖AGI、GenAI、自动驾驶、人形机器人、智能体等多个方向。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_f669110f3f1945e3bf2fadcc0f288425@46958_oswg60081oswg1080oswg317_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>马斯克（Elon Musk），曾预测2025年底的AI能力：「我们就会拥有比任何人都聪明的AI」。</p>
+  <p>马库斯对此并不认同，主要预测内容如下：</p>
+  <p>1. 反对马斯克的预言，到2025年底不会出现强人工智能。&nbsp;</p>
+  <p>2. GenAI的可靠性、推理、幻觉、能耗等问题得不到根本的解决。</p>
+  <p>3. 智能体和类人机器人在2025年会得到大量宣传，但应用有限。</p>
+  <p>4.&nbsp;AI模型盈利难，估值开始下滑；OpenAI市场表现不佳；自动驾驶难落地。</p>
+  <h2><strong>对2025年的25项预测</strong></h2>
+  <h3><strong>高置信度预测</strong></h3>
+  <p>1 通用人工智能（AGI）不会在2025年实现。（可能会有人通过弱化定义甚至用经济标准重新定义AGI来试图混淆概念。）</p>
+  <p>2 到2025年底，没有任何单一系统能可靠解决四项以上的Marcus-Brundage的AI 2027任务，甚至可能没有任何任务被完全解决。</p>
+  <p>3 AI模型的<strong>盈利</strong>将继续保持在<strong>中等偏下水平</strong>甚至可能不复存在（芯片制造公司如NVIDIA在供应硬件方面会继续表现优异，但模型开发公司在这场「淘金热」中只能充当「卖铲子」的角色）。</p>
+  <p>4 美国几乎不会有实质性法规出台，消费者仍面临GenAI带来的风险。全球其他地区在法规制定上会越来越参考欧洲的做法。</p>
+  <p>5 国家AI安全研究所将提供指导，但它们对危险模型的约束力将非常有限。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_283299c61bdd4c98977ad7f455996f40@46958_oswg148755oswg1080oswg470_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>6 GenAI的<strong>可靠性问题</strong>将在2025年持续存在。</p>
+  <p>7「幻觉」现象（即生成内容中的虚构叙述）问题将继续困扰GenAI。</p>
+  <p>8 <strong>推理能力</strong>的不足仍将继续困扰GenAI。</p>
+  <p>9 AI「智能体」将在2025年被广泛宣传，但在除了一些非常狭窄的应用场景外，仍然<strong>难以实现可靠性</strong>。</p>
+  <p>10 类人机器人将受到大量宣传，但不会有产品能够接近The Jetsons中「Rosie机器人」的能力。尽管运动控制可能表现优异，但场景意识和认知灵活性仍然不足。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_b9cb2ae14d5b4a568937f89d5516c5cc@46958_oswg352156oswg478oswg744_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">The Jetsons中的机器人Rosie</p>
+  <p>11 OpenAI将继续提前数月甚至数年预览产品，但正式推出和广泛可用仍需较长时间。（例如，Sora于2024年2月预览，直到12月才正式发布，且受到使用限制；Sal Khan在2024年5月演示的AI家庭教师仍未普及；o3 已进行了预览，但尚未发布，其价格可能相当昂贵。）</p>
+  <p>12 与2016年Hinton的预测相反，很少有放射科医生会被AI替代。</p>
+  <p>13 真正的无人驾驶汽车（无需人类参与交通）仍将限制在少数城市，且在天气良好的条件下。人类驾驶员仍将在经济中占很大比重。</p>
+  <p>14 GenAI的<strong>版权相关诉讼</strong>将在2025年持续不断。</p>
+  <p>15 AI模型的<strong>能耗</strong>将上升并会成为一个主要问题，但很少有GenAI公司会公开用电量。</p>
+  <p>16 被AI替代的劳动力比例将少于10%，可能少于5%。商业艺术家和配音演员可能受到最大的影响。（当然，随着人们开始使用新工具，许多工作也会随之改变。）</p>
+  <p>17 马库斯依然坚持关于o3的预测，即一开始人们会感到惊奇，然而一旦深入探究就会发现<strong>o3不可靠</strong>；o3在封闭领域（比如数学）表现最佳，而在开放领域（比如关于真实世界的日常推理）表现欠佳。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_09535ce4f56540b7835626ef8ce10f2c@46958_oswg230510oswg1080oswg491_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h3><strong>中等置信度预测</strong></h3>
+  <p>18 技术「护城河」仍然难以建立。相反，中美两国将趋同到大体相似的AI模型；欧洲的部分系统也将赶上大致相同的位置。</p>
+  <p>19 由于价格及其稳定性与价格不匹配的原因，很少有公司（更不要提更少的消费者）会大规模采用o3。</p>
+  <p>20 公司将继续尝试使用AI，但将其全面采用为生产级系统并在现实世界中大规模部署的态度仍然会非常谨慎。</p>
+  <p>21 2025年可能成为AI大公司估值开始下滑的一年。（尽管正如那句名言所说，「市场的非理性比你的偿付能力持续得更久。」）</p>
+  <p>22 Sora在物理学领域将继续表现不佳。（谷歌的Veo 2看起来似乎有所改进，但由于尚未亲自测试，仍然怀疑其在状态变化和对象持久性上的问题。另一种尚未完全发布的基于不同原理的混合系统，称为Genesis，看起来可能很有前景。）</p>
+  <p>23 神经符号AI的影响力将在2025年显著增加。</p>
+  <h3><strong>低置信度预测，但值得讨论</strong></h3>
+  <p>24 我们很可能会看到GenAI在大规模网络攻击中扮演重要的重要角色。马库斯将在Politico中发表一篇短文，讨论可能的4种方式。</p>
+  <p>25 到2025年底，可能仍然不会出现「GPT-5级别」的模型（即通过社区共识认为在各方面实现重大飞跃的模型）。相反，我们可能会看到像o1这样的模型，它在许多可生成高质量合成数据的任务中表现良好，但在其他领域仅比GPT-4有小幅改进。</p>
+  <h2><strong>2024年的预测回顾</strong></h2>
+  <p>总的来说，马库斯对2024年预测尽管存在一些需要注意的地方，但大体上得到了验证。&nbsp;</p>
+  <h3><strong>核心预测</strong></h3>
+  <p>在2024年3月， 马库斯发帖总结了对2024年的最核心的预测。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_5367ee55a25c4672a33ea64ebc3a70e9@46958_oswg306624oswg1080oswg918_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>唯一的例外可能是OpenAI的o3，它在去年12月宣布，但至今未发布，也未接受广泛的审查。</p>
+  <p>除此之外，所有七条预测基本上都非常接近预期。</p>
+  <p>2024年的现实情况：&nbsp;</p>
+  <ul>
+   <li>我们目前仍然处于GPT-4级别阶段，这些模型只是做了些许渐进性的改动，没有一个值得OpenAI冠以GPT-5之名。</li>
+   <li>如今有许多类似的模型，市场上充斥着价格战，几乎没有护城河。</li>
+   <li>幻觉问题依然没有得到有效解决。</li>
+   <li>企业级的采用远不如大多数人原本预期的那样广泛，所有公司的总体利润（当然，硬件公司如英伟达除外，它们通过销售芯片而非AI模型获利）也充其量只是中等偏下水平的增长。</li>
+   <li>到目前为止，参与的许多公司都在亏损，虽然至少有三家公司被半收购，而它们为投资者带来的利润极为有限。</li>
+   <li>2024年最重大的AI事件并不是大家期待已久的GPT-5发布，尽管粉丝们整年都在预测它的到来，但它始终未曾出现。</li>
+  </ul>
+  <h3><strong>2024年的其他预测</strong></h3>
+  <p>马库斯从2022年开始，就预言单纯依靠扩展大语言模型 (LLM) 的方法最终会走到尽头，在2024年11月和12月业内人士的评论似乎验证了这一预测。</p>
+  <p>马库斯在2022年提出的「scaling &nbsp;law」并非物理定律，而是具有有限生命周期的泛化规则的观点，在最近几个月得到了广泛传播。</p>
+  <p>马库斯提出的「AI碰壁」（hitting a wall）这一概念在CNN、《The Verge》和《华尔街日报》等媒体中也得到广泛报道。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_e00bb771e5ff41489e8a83f9a5913dcd@46958_oswg78536oswg1080oswg268_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>马库斯关于「扩展scaling与收益递减」的观点和相关术语已逐渐普及。</p>
+  <p>马库斯在2022年，以及早在2001年出版的《The algebraic mind》一书中提出的具体弱点（如组合性、事实性和推理能力等）依然存在。尽管这些问题或许会在未来得到解决，但当前的技术手段显然不够。</p>
+  <p>马库斯在1998年、1999年和2001年，以及之后多次强调的分布漂移（distribution shift）问题，在最近的研究中得到了多次印证，例如苹果公司的关于推理的著名论文。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_0c19caa211124f9aa66d637d10d5a461@46958_oswg42561oswg1080oswg319_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>论文链接：https://arxiv.org/pdf/2410.05229</p>
+  <p>在2022年12月，马库斯预测的聊天机器人导致死亡的事件。</p>
+  <p>在2023年，该预言不幸得到了证实，而2024年似乎又出现了类似案例。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_ed0bfb1436344a6e9bb54fb559baee7e@46958_oswg106404oswg1080oswg430_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>关于AI生成错误信息，马库斯的警告正在逐步成为现实，尽管到目前为止，其影响比最初担忧的要轻。但马库斯仍然感到担忧，并认为需要保持警惕。</p>
+  <p>在2023年2月，马库斯提出的关于GenAI破坏互联网的警告，越来越显得正确。</p>
+  <p>马库斯在2022年11月预测，LLM不会立即显著改善如亚马逊Alexa等商业AI智能体，这一预测在2024年仍然成立。</p>
+  <p>马库斯预测2024年会被视为「AI 幻灭之年」。这一说法可能有些夸大，但对部分人来说却是事实。虽然许多人仍然对AI热情不减，但也有不少人大失所望。例如，《华尔街日报》报道：「微软AI机器人的早期采用者怀疑其是否物有所值」。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_2d75afdcbd664d24afc232aadd6e9002@46958_oswg337547oswg1080oswg502_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>马库斯在2023年关于OpenAI可能被视为AI界WeWork的预测尚未得到验证，但OpenAI的处境仍不乐观。</p>
+  <p>OpenAI尚未盈利，预计至少到2029年之前都不会盈利，其消耗资金的速度以十亿美元计，且仍缺乏明确的技术护城河。从长期来看，特别是在高估值情况下，安全性仍然不确定。记者Ed Zitron和经济学家Brad DeLong等人也越来越多地表达了类似观点。</p>
+  <p>关于生成式A技术和经济限制的预测大体正确，但马库斯<strong>对投资者的判断完全错误</strong>。马库斯原本认为OpenAI不太可能获得另一轮大规模融资，更不用说估值超1500亿美元。但时间会证明这是否是一项明智的投资。</p>
+  <p>在2024年2月Sora公布后不久，马库斯指出其在物理领域的问题，并预测这些问题不会消失。这一预测目前仍然成立。</p>
+  <p>马库斯在2022年12月关于GPT-4的七项预测（见下图）大部分已被证实（第七项仍待验证），适用于2024年发布的所有模型。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_2c7379d6f06440daa33d0025289ef430@46958_oswg339041oswg925oswg1615_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>参考资料：&nbsp;</p>
+  <p>https://garymarcus.substack.com/p/25-ai-predictions-for-2025-from-marcus&nbsp;</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/hNj5BrQhQnix-v7HXwqr6g" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，编辑：KingHZ，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3132102371760643</id>
+            <title>跌去94%的区块链投资，2024年仍然有公司在获投</title>
+            <link>https://www.36kr.com/p/3132102371760643</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3132102371760643</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 06:49:57 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 区块链, 融资, 独角兽公司, 投资  
+<br><br>  
+总结: 文章探讨了国内区块链行业的融资情况，指出自2015年以来融资事件数量逐年下降，至2024年仅有29起，较高峰期下降94%。尽管美国区块链独角兽公司数量激增，但国内因政策影响，投资者信心受挫，融资活动大幅减少。文中提到零数科技、火星财经和Animoca Brands等公司在行业内获得多轮融资并取得一定成就。2024年，仍有少数公司如Qbit和Only1在融资方面表现活跃，显示出区块链行业的变化与挑战。 </div>
+                        <hr>
+                    
+                    <p>这篇文章写给少数人。毕竟在国内还关注区块链的人群已经太少了。&nbsp;</p>
+  <p>根据IT桔子对全球独角兽公司的监测，发现近三、四年以来美国诞生了大量的区块链、加密货币独角兽公司。而在国内，这个行业赛道随着政策的出台，几乎哑然。&nbsp;</p>
+  <p>那么，都2024年了，国内还有人投资区块链吗？&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+  <p>据IT桔子统计，2015年-2024年国内区块链行业共发生了一千多起融资事件，总金额超两千多亿人民币。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_64788c8f90584a4696c72033320a6d53@46958_oswg135501oswg1080oswg636_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>如图所示，区块链行业的融资数量在2015-2018年间呈现出明显的上升趋势，2018年达到了449起融资的高峰，这期间越来越多的企业和创业者投身于区块链领域，同时也吸引了大量投资者的关注与资金投入。&nbsp;</p>
+  <p>然而，由于2017年底至2018年初，区块链和加密货币市场经历了疯狂的炒作，许多项目通过ICO（首次代币发行）筹集了大量资金。随着市场泡沫的破裂，2018年底crypto市场崩溃，很多项目未能兑现承诺，导致投资者信心受挫，融资活动大幅减少。2018年之后，融资事件数量进入波动下降阶段。2019年出现明显下降，融资事件数量降至187起，随后虽有小幅度的起伏，但整体仍处于下行周期，截至2024年的数据依然保持下降态势，2024年的融资事件仅有29起。&nbsp;</p>
+  <p><strong>相比于高峰时期，中国区块链投资已经跌去了94%</strong>。&nbsp;</p>
+  <h2><strong>获得过5次以上融资的香饽饽们，现在如何？</strong></h2>
+  <p>我们回看下，曾在热潮里获得过大量融资的公司，以及他们后来都怎样了。&nbsp;</p>
+  <p>这十年来，国内区块链领域<strong>只有三家公司获得了5次以上的融资，分别是零数科技、火星财经、Animoca Brands</strong>。&nbsp;</p>
+  <p><strong>零数科技</strong>（原能链科技）成立于2016年8月，专注于区块链底层技术研发及深度应用场景，通过区块链和隐私计算技术打造数据共享和资产流通的基础设施，服务于政务、金融、汽车、双碳等领域。&nbsp; &nbsp;&nbsp;</p>
+  <p>创始人兼 CEO 林乐是中科院物理学博士、深交所金融学博士后。CTO 兰春嘉是中科大少年班本科、中科院博士，同时担任深交所区块链领域博士后导师。&nbsp;</p>
+  <p>零数科技自2016年8月成立以来，已完成9轮融资，领先于其他公司。成立之初零数科技就顺利拿到了古莲资本和金科君创联合参与的天使轮融资，金额为数千万人民币。&nbsp;</p>
+  <p>随后在2017年7月进行Pre-A轮融资，获得青域基金和卡睿达孵化器的投资。2018年7月，公司完成A轮融资，由南海协同领投。2020年8月，京楚投资和海南生态软件园孵化服务有限公司对其进行战略投资。2019年9月和2021年5月，公司先后完成两轮A+融资，投资者包括铱链科技、曦域资本和思科瑞新资本，金额都为数千万人民币。&nbsp;</p>
+  <p>2022年1月，公司获得成都新跃股权投资基金的Pre-B轮投资，同年7月，浦东投资控股参与B轮融资，金额未披露。&nbsp;</p>
+  <p>最近，公司在2023年9月完成千万级的B+轮融资，由国信中数投资。&nbsp;</p>
+  <p>据称，当前零数科技已经积累100+头部客户资源和典型落地场景，12月23日，还与武汉车网智联、军山投发就智能网联可信数据空间基地项目完成战略签约。&nbsp;</p>
+  <p>自2020年零数科技便实现了盈利，连续4年业务规模实现高速增长。2024年，零数科技先后获评国家级专精特新“小巨人”企业认定和金猿榜中国大数据产业年度创新服务企业以及中国大数据产业年度创新服务产品。&nbsp; &nbsp;&nbsp;</p>
+  <p><strong>火星财经</strong>是区块链领域的关键资讯平台，业务广泛。其通过网站和移动端提供区块链资讯，包括行情、新币动态和入门知识，开展行业研究，搭建活跃社区并举办线下活动促进交流。&nbsp;</p>
+  <p>火星财经由蓝港互动集团创始人王峰创办，原《财经天下》周刊联合创办人商思林出任总编辑，王峰的个人影响力和创业经历吸引了一大批投资人的目光。&nbsp;</p>
+  <p>火星财经于2018年1月成立，成立两年之内获得了7轮融资，具体金额都未透露。&nbsp;</p>
+  <p>2018年2月就获得了BeeChat的战略投资，同年3月进行了A轮融资，投资方有IDG资本、明势资本、泛城资本、OKCoin。&nbsp;</p>
+  <p>随后6月便完成了A +轮融资，策源创投和火币Huobi Ventures参与其中；6 月又获得了蓝港互动的战略投资；2019年5月策源创投和新软软件对其进行B轮投资；9月策源创投、Binance币安、Matrixport联合参与其B+轮融资中；10月蓝港互动又追加一轮战略投资。&nbsp;</p>
+  <p>需要注意的是，多方消息称火星财经在2021年曾因非法集资、传销等问题被警方调查，此后，火星财经进行了一系列的整改措施。2022年，为了配合国家最新行业监管政策，火星财经更名为MarsBit。目前，MarsBit仍在正常运营，提供区块链新闻、行情、数据、社区等服务。&nbsp; &nbsp;&nbsp;</p>
+  <p><strong>Animoca Brands</strong>是2014年由萧逸（Yat Siu）和David Kim<strong>创立于香港</strong>的企业，集游戏软件开发与风险投资于一体，是区块链游戏和元宇宙领域的先驱之一。起初是手机游戏开发商，以改编知名影视漫画作品为手游见长，2019年后转型深耕元宇宙游戏与区块链NFT 领域，打造出The Sandbox、F1 Delta Time等热门链游，还是Dapper Labs、Decentraland等明星项目的早期投资者。&nbsp;</p>
+  <p>萧逸作为联合创始人、执行董事长兼常务董事，技术和创业领域拥有丰富经验，曾在游戏公司如 EA（电子艺界）和 THQ 担任高级职位在，被世界经济论坛评为 “明日全球领袖” 和 “全球青年领袖”。&nbsp;</p>
+  <p>Animoca Brands在2019年<strong>转型</strong>后融资活动频繁且规模可观，三年内拿到了7轮战略投资，先后有 Blue Pool Capital（阿里巴巴）、Coinbase Ventures、Liberty City Ventures、红杉中国、淡马锡 Temasek、纪源资本等诸多知名机构入局，融资金额从数千万美元到数亿美元不等，如 2022年1月的3.59亿美元、2022年9月的1.1亿美元等。&nbsp;</p>
+  <p>Animoca Brands一方面接受着来自于传统主流投资机构的投资，另一方面也将这些投资不断投入到了区块链领域，其中涵盖了NFT、区块链游戏、元宇宙、DeFi等方向，据Cryptopolitan报道，Animoca Brands在2024年第三季度投资了21个项目，试图打造一个元宇宙生态系统。&nbsp; &nbsp;&nbsp;</p>
+  <p><strong>目前，Animoca Brands成为NFT赛道的独角兽公司，计划于2025年下半年上市。</strong></p>
+  <h2><strong>在2024年里，依然融资的区块链公司们</strong></h2>
+  <p>2024年区块链行业内融资事件较少，从地域分布来看，内地占据69%，港澳台占比31%。而香港在这当中表现亮眼，其发生的融资数量占比为 27.5%，远超其他地区，处于遥遥领先的地位。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_5fa817f5c14a47329f2b6a690f94886c@46958_oswg111060oswg1080oswg624_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在2024年还能获得融资并且总融资轮次较多的公司只有Qbit和Only1，除此之外还有QED在2024年获得了2轮融资。其中仅有Obit在内地，Only1和QED都于香港成立。&nbsp;</p>
+  <p><strong>Qbit</strong>成立于浙江，是一家为全球企业提供一站式海外资金管理服务的Neobank，在区块链领域布局多元业务。主要业务包括全球账户、量子虚拟卡、奇点融、Qbit BaaS、海外公司注册、全球收单和Open API解决方案。&nbsp;</p>
+  <p>它能帮企业在全球范围内管理资金，比如开账户、发虚拟卡、借钱、注册海外公司、收钱和提供技术接口等。企业就可以实现更高时效、更低成本的全球收付和财务管理，进一步使其全球业务扩展与增长。&nbsp;</p>
+  <p>创始人吴羽君研究生毕业于斯坦福，拥有上海交通大学和普度大学双学士学历，曾就职于Google，负责Nest在线商店开发。他是连续创业者，曾任棕榈大道联合创始人&amp;CTO，负责搭建稳定可规模化的服务器系统，帮助棕榈大道完成了A轮千万级融资，并实现上千万的年营收。&nbsp;</p>
+  <p>Qbit自2019年8月成立以来，成功拿到了3轮融资。&nbsp;</p>
+  <p>2020年12月，Qbit迎来Pre-A轮融资，融资金额数百万美元，投资方为Shata Capital与Parallel Ventures。&nbsp;</p>
+  <p>2021年7月的A轮融资中，获得近千万美元投资，真格基金独家注资。&nbsp;</p>
+  <p>2024年11月斩获千万级美元的B 轮融资，暂未披露投资方。&nbsp;</p>
+  <p>目前，据报道Qbit的服务覆盖超过180个国家及地区，提供40多种主流货币服务，累计交易金额超60亿美元，累计发卡量488万张，服务超过40,000家品牌。&nbsp;</p>
+  <p><strong>Only1</strong>在2021年成立于香港，是一个基于 Solana 生态的 NFT 社交平台，它让创作者可以铸造自己的数字艺术品（NFT），并通过粉丝的支持获得收入。主要业务包括创世NFT铸造、内容NFT挖矿、粉丝出价竞拍、创世NFT分红、创作者权益池、社交NFT平台以及经济模型。创作者可以通过KYC认证后铸造创世NFT，发布独家内容NFT，粉丝可以用平台的代币（LIKE）来竞拍这些艺术品，支持自己喜欢的创作者，并解锁独家内容。平台还提供全方位的社交网络功能，包括用户主页、即时通讯服务和超级粉丝俱乐部，用以连接创作者和粉丝，提供多样的收入手段。&nbsp; &nbsp;&nbsp;</p>
+  <p>创始人兼 CEO Leon Lee毕业于基因工程专业，受 2017 年 ICO 启发，开启Only1的加密征程。技术团队中，Dan曾在币安、Dash 两大知名平台担任高级开发人员，区块链工程师Akira曾深度参与 Openswap 上线以及 Uniswap 分叉等关键节点的技术攻坚，还有Solana程序专家Kobby，长期深耕分布式系统领域。&nbsp;</p>
+  <p>Only1自2021年1月成立以来，在融资之路上稳步迈进。&nbsp;</p>
+  <p>2021年5月，Only1斩获首轮战略投资，吸引了Genesis Block Ventures、Alameda Research、NGC Ventures 等六家知名机构，具体融资金额并未透露。&nbsp;</p>
+  <p>同年7月，ROKCapital、AnimocaBrands等四家机构再次战略注资，同样未公开金额。&nbsp;</p>
+  <p><strong>进入 2024 年，Only1获得了来自 Newman Group、Folius Ventures 等四家机构的130万美元战略投资。&nbsp; &nbsp;</strong></p>
+  <p>据CoinMarketCap 数据，目前Only1的原生代币LIKE市值达到1535万美元，24小时交易量为 81万美元。&nbsp;</p>
+  <p><strong>QED</strong>是QED Protocol Inc.旗下的零知识原生区块链协议，主要业务包括开发和提供高性能的区块链解决方案，旨在通过零知识证明（ZKP）技术增强比特币的功能。QED 作为比特币的zk原生执行层，利用TapScript中模块化算术的独特集成，使去中心化应用程序能够在本地证明交易，支持以固定的 Gas 费进行链上计算。&nbsp;</p>
+  <p>简单来说，QED 通过一种特殊的加密技术（零知识证明），让比特币交易更加安全和高效。它允许用户在不透露具体交易细节的情况下，证明交易的合法性，从而保护用户的隐私。此外，QED还支持多种编程语言，方便开发者创建和部署去中心化应用，使区块链技术能够在更多场景中应用。&nbsp;</p>
+  <p>创始人Carter Feldman中学就涉足电脑安全与逆向工程，积累技术功底，团队中的Tapscript模算术开创性成员，多毕业于数学、密码学专业名校，兼具理论知识与精湛区块链开发技能。&nbsp;</p>
+  <p><strong>QED于2022年7月成立，在2024年内拿到了2轮融资。</strong></p>
+  <p><strong>2月完成了300万美元种子轮融资，投资方为 Arrington Capital、Draper Dragon、StarkWare。随后7月，QED 再获Blockchain Capital的战略投资，此次金额为600万美元。</strong>目前QED发布了新的ZK操作码提案，可在 Dogecoin 网络上构建DeFi、NFT和链上DEX等各种应用，提升Dogecoin 性能。&nbsp; &nbsp;&nbsp;</p>
+  <p>区块链行业经历了爆发式增长之后，目前处于充满变化与挑战的时期。&nbsp;</p>
+  <p>在国内，部分企业在区块链与传统行业的融合上进行了积极探索，如在供应链金融和政务数据管理等领域的应用尝试已初见成效。&nbsp;</p>
+  <p>从长期来看，作为一项具有变革潜力的技术，区块链行业能否吸引风投资本坚持价值投资理念，持续发掘和支持真正具有创新能力和市场前景的项目，仍有待时间检验。&nbsp;</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/ZC4adHT7GVj2ikWjUaoAkQ" rel="noopener noreferrer nofollow" target="_blank">“IT桔子”</a>，作者：陈睿洁，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3132096421730821</id>
+            <title>OpenAI智能体新线索曝光，网友：新ChatGPT时刻要来了</title>
+            <link>https://www.36kr.com/p/3132096421730821</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3132096421730821</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 06:47:42 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: OpenAI, 智能体, Operator, 基准测试  
+<br><br>  
+总结: OpenAI即将推出名为“Operator”的智能体，能够接管用户PC并自主执行多种任务。该智能体在基准测试中表现优于竞争对手Claude，但在某些任务上仍不及人类。OpenAI的智能体市场前景广阔，预计到2030年市场规模将达到471亿美元。随着大模型技术的成熟，智能体的应用将越来越广泛，企业和个人都需关注这一趋势。 </div>
+                        <hr>
+                    
+                    <p>没错，OpenAI的智能体时代真的要来了！</p>
+  <p>据大名鼎鼎的“情报员”光头哥爆料，OpenAI在MAC版ChatGPT桌面应用中<strong>隐藏了启用/禁用智能体的选项</strong>。</p>
+  <p>从截图来看，确实是传闻已久、代号为“Operator（操作员）”的辣个：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_16e2c1688f2e46d7818c3bbec0c9dd57@46958_oswg280643oswg1080oswg838_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而且这则爆料也得到了日常关注苹果方面消息的博主<strong>@M1</strong>的再次佐证：</p>
+  <blockquote>
+   <p>Operator正在内测中，即将上线MAC版ChatGPT桌面应用……</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_f471a6fa42ec4d488de0ec92ff477449@46958_oswg424645oswg1080oswg1317_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>根据介绍，Operator能够<strong>接管用户PC</strong>，直接代替人类自主执行一系列操作（如编码开发应用、订餐，做攻略等等）。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_3a263f6351d04ed18fea9440eb86320b@46958_oswg63252oswg181oswg192_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>与此同时，OpenAI智能体和其他竞争对手（如Anthropic、谷歌智能体），以及人类选手的跑分对比也曝光了。</p>
+  <p>先划个重点，在几个评估智能体执行自动化任务水平的基准测试中，OpenAI这边<strong>均战胜了</strong>Claude智能体。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_edca79d4d7bf416c895e5e9f73cd5320@46958_oswg46178oswg1080oswg333_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>网友们纷纷激动表示，看起来离发布已经很近了，或许又会是下一个ChatGPT时刻。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_7064697776864cd3a7c5566c25b80f33@46958_oswg111877oswg1052oswg350_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_23cf139d6b67433b877d4ca24a464882@46958_oswg82522oswg1052oswg314_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而Windows用户则开启了刷屏模式，请不要仅限于Mac、请不要仅限于Mac、请不要仅限于Mac……（OpenAI你听到了吗）</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_4f0e877ac2f94891a639350e38e7ce30@46958_oswg107869oswg1058oswg427_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>多个基准跑分超过Claude智能体</strong></h2>
+  <p>从光头哥的另一条推文里，我们看到了OpenAI智能体和其他竞品的详细对比。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_61b715ff762e4bdf8a18765786153635@46958_oswg644433oswg1080oswg1267_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>相关数据来自OpenAI网站，具体为图中标黄部分。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_8d52bec7361840189758edf0663f03df@46958_oswg331782oswg1080oswg657_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>单拉出来看，在OSWorld这个专为多模态Agent设置的基准测试中，OpenAI CUA（据推测可能是驱动Operator的AI模型）得分为38.1%，领先于Anthropic的Computer use功能，但还不及人类自己操作的一半水平。</p>
+  <p>类似情况也在WebArena（CMU发布的基于Web环境的基准测试）上演。</p>
+  <p>不过，在WebVoyager（由腾讯AI Lab发布的多模态网络Agent基准测试）则稍有反转，OpenAI CUA取得了87%的好成绩，不仅一如既往地领先Anthropic，还<strong>以小幅优势超过了人类</strong>（85.3%）。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_e6a9bbec93de4134b7530028b8bc0f3c@46958_oswg45904oswg1080oswg333_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>从一些具体任务的<strong>完成通过率</strong>来看，有辅助的Operator表现好过完全自主操作，不过偶尔还是比不上带视觉能力的GPT-4o。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_80c12c5197524534939be669c875dabc@46958_oswg415269oswg1080oswg883_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>有网友据此提问Operator是否不如GPT-4o，对此另有热心网友指出了二者区别：</p>
+  <blockquote>
+   <p>一个是自主操作，一个是教你做事。</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_ce1d6db702a349808724052d7269f4ba@46958_oswg67514oswg1067oswg248_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>另外，对二者<strong>安全性</strong>的评估如下，GPT-4o在拒绝非法宣传、极端活动讨论等方面均为100%，而Operator在<strong>越狱</strong>（Jailbreaks）、<strong>进行非法活动</strong>以及<strong>禁止的金融活动</strong>方面没有达到100%。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_715c7b5ab99c4c6fa103ec7c6bb6604b@46958_oswg237806oswg1080oswg503_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>需要提醒的是，在光头哥看来，以上跑分也可能只是占位符，具体真实性无法保证。（先来个免责声明）</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_e1af67f0ec4c4fb6bdd5a7557e291856@46958_oswg114361oswg1069oswg356_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>2025：OpenAI重点布局Agent</strong></h2>
+  <p>事实上，Operator这款智能体早在<strong>去年11月</strong>就有相关爆料。</p>
+  <p>当时彭博社声称，OpenAI将在明年1月推出它，来替用户自动执行任务。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_558c0efa6b454d98bcd97ae142bc53ec@46958_oswg224757oswg1080oswg651_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而现在，也算是进一步佐证了之前的消息。</p>
+  <p>甚至就在去年底，OpenAI CEO奥特曼也在新年目标中，明晃晃地将Agent排在前列。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_82dbe1b180a0456496fd195cd80ddec9@46958_oswg220171oswg1080oswg1046_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而Flag立完后，OpenAI刚一开年也是马不停蹄地开始了相关动作。</p>
+  <p>上周，OpenAI就为ChatGPT推出了新功能「Tasks」，让AI有了执行力，可以替你完成各种任务。</p>
+  <blockquote>
+   <p><strong>无论是一次性提醒还是重复执行的动作</strong>，告诉ChatGPT你需要什么以及何时需要，它会自动帮你处理。</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_055dbfa6367b41ebaf4253ce6e97e215@46958_oswg592810oswg1080oswg1091_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>整体看起来有点偏向日程提醒，更像Agent的初级阶段。</p>
+  <p>合理推测，Operator将在此基础上有更多、更强的能力表现。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_b826fd5a729841a1ac3499dad7c1f0dd@46958_oswg62431oswg186oswg179_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>话说，从国内外科技企业对Agent的新追逐来看，今年Agent绝对有好戏看！</p>
+  <p>据市场研究公司Markets and Markets的分析，AI Agent的市场规模至2030年有望达到<strong>471亿美元</strong>。</p>
+  <p>如此吸引下，再加上已经成熟的大模型技术，Agent火爆2025简直不言而喻。</p>
+  <p>甚至就在今年的CES上，英伟达CEO黄仁勋也对Agent大加赞赏：</p>
+  <blockquote>
+   <p><strong>未来公司IT部门将成为Agent人力资源部门</strong>……（为公司改进大量Agents，从而为各部门提供新支持）</p>
+  </blockquote>
+  <p>此番言论下，了解AI Agent技术也被开发者们提上了2025学习日程。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_c17c42f5bb9b478c8459cb4ec981bdd4@46958_oswg125710oswg1070oswg415_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>好嘛，不管是企业还是个人，接下来大家都得卷Agent了(doge）。</p>
+  <p>参考链接：[1]https://techcrunch.com/2025/01/20/openais-agent-tool-may-be-nearing-release/?guccounter=1[2]https://x.com/minchoi/status/1876644835286777922</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/f5pSYAh2HNKKe5Py9U8tog" rel="noopener noreferrer nofollow" target="_blank">“量子位”</a>，作者：一水，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3132067066583552</id>
+            <title>《代号鸢》的“翻车”，给女性向游戏上了一课</title>
+            <link>https://www.36kr.com/p/3132067066583552</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3132067066583552</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 06:14:46 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 女性向游戏, 代号鸢, 玩家反应, 性别议题  
+<br><br>  
+总结: 随着女性向游戏《代号鸢》的热度上升，游戏中的部分低俗台词和角色名引发了玩家的强烈不满，尤其是对女性的不尊重暗示。尽管开发方灵犀互娱坚称《代号鸢》与其另一款游戏《如鸢》运营独立，但玩家认为两者应具备相同的价值观。此次争议导致《如鸢》的收入下滑和市场口碑受损，反映出开发者未能与女性市场需求深度共鸣的现实。尽管《代号鸢》在女性向游戏中取得了一定成功，但玩家对游戏内容的严格要求与宣传口号之间的反差，最终导致了玩家的失望和抵制。 </div>
+                        <hr>
+                    
+                    <p>文 | 冯敏&nbsp;</p>
+  <p>编辑 | 刘士武&nbsp;</p>
+  <p>随着热度的上升、产品不断拓圈，对于女性向游戏来说，过去的一段时间争议也随之而来。尤其自12月中旬以来，关于游戏《代号鸢》的讨论可谓沸反盈天。</p>
+  <p>2024年12月初，已经有玩家指出手游《代号鸢》中部分台词及角色名用梗低俗，部分文案内容甚至已经出现了不尊重女性的暗示，如使用“中午熏鸡，晚上也熏鸡”的近期热梗，以及“在地下宅寻人是否搞错了什么”、“普通攻击是持续伤害且能放两种技能的#史子眇·赴烛，楼主会喜欢吗”等标题内容，被指出源于知名男性向后宫番，令游戏主要面向的女性玩家群体产生强烈不满。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_54a4807cad6945baafa9a1e719e5acb0@6151540_oswg400144oswg643oswg850_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">《代号鸢》部分争议内容</p>
+  <p>12月12日，部分玩家发现《代号鸢》已经在多个平台删除了原有的“女性向”分类标签，将本次事件中的玩家情绪推向高潮，当日起，关于《代号鸢》的争议屡次登上热搜，玩家试图通过集体发声行为表达自身的愤怒与抗议。</p>
+  <p>面对热议，灵犀互娱坚称《如鸢》与《代号鸢》二者的运营完全独立，《代号鸢》中文案方面出现的争议问题并未在《如鸢》中体现，而《如鸢》官网及App Store中的标签也一直是“沉浸式剧情卡牌手游”，从未将“女性向游戏”作为自身内容定位。</p>
+  <p>然而，这样的回应显然并不能令玩家满意。在绝大多数玩家心目中，作为同一款游戏的不同版本，《如鸢》与《代号鸢》应当具备的是同样的价值观与品牌精神，将二者“切割”的回应无异于扬汤止沸。</p>
+  <p>据七麦数据显示，争议发生后的几天内，《如鸢》在AppStore的预估收入出现了连续下滑，较前日下降幅度达到30.63%，由于玩家抵制，《代号鸢》与泡泡玛特、Keep等品牌的联名活动也临时终止，此次风波还导致灵犀互娱旗下其他游戏产品在TapTap、苹果商店等游戏下载软件的评分直线下降，间接影响了《如鸢》的市场口碑和潜在用户吸引力。</p>
+  <p>本次文案事件引起的轩然大波，既是玩家对游戏的“爱之深，责之切”，也反映出尽管当下女性向游戏发展迅猛，但诸多开发者仍未能真正与女性市场需求达成深度共鸣的现实。</p>
+  <p>自2023年游戏正式上线起，《代号鸢》首月双端流水已经实现了轻松破千万元，截至当年12月底总流水已经达到7300万元。《如鸢》自2024年9月26日正式公测后，更是迅速登上iOS国区游戏畅销榜TOP5，并在10月入围当期中国App Store手游收入榜第12名。日益庞大的玩家体量带来的是对游戏质量的更高要求，作为在女性向畅销榜长期名列前茅的游戏，《代号鸢》此类问题的出现更让玩家担忧自己“氪的金”究竟能否真正换来一个“女性友好的游戏世界”。</p>
+  <h3 label="二级标题"><strong>作为女性向游戏的《代号鸢》为何受到女性用户的强烈欢迎？</strong></h3>
+  <p>除去精美的画风、Live2D技术的沉浸感、丰富的日常玩法等基本要素外，《代号鸢》最大的特色，在于其“女本位视角”的打造。</p>
+  <p>在以男性目光为叙事主导的galgame中，女性角色形象往往以承载男性玩家欲望的客体符号身份出现，长期处于被隐身、被物化状态中，多数游戏设计者往往刻意放大女性角色的性吸引力，过度的性别凝视往往导致其人格塑造的完整性被破坏。</p>
+  <p>自2017年国内第一款乙女游戏《恋与制作人》诞生后，国内“女性向”游戏领域的潜力开始逐渐得到发掘。</p>
+  <p>女性向游戏主要针对女性玩家设计开发，在该类游戏中，带有传统性别凝视的情节鲜有出现。在恋爱为主的乙女游戏中，男主角往往站在女性玩家角度给予精神层面的鼓励支持，已经在以男性为中心的恋爱游戏中开辟出满足女性情感需求的独特赛道；而在换装游戏中，女性玩家则通过“把自己的角色打扮得漂漂亮亮”来获取情绪价值。</p>
+  <p>然而，从目前市场上的热门女性向游戏来看，女性对游戏的需求并不局限于“情感”和“美丽”。</p>
+  <p>在当下市场上大多数女性向为“和理想对象谈恋爱”的乙女游戏，以及“搭配漂亮裙子”的换装游戏时，代号鸢已经在此基础之上另辟蹊径，将“女本位”、“我本位”贯彻游戏内容。同以往聚焦于男性视角的三国时代游戏作品不同，《代号鸢》在历史缝隙中进行创作，让玩家更大程度上体验女性角色的成长与个人独特弧光。玩家扮演的广陵王自游戏开篇就已经开始学习在权力斗争中运筹帷幄，杀伐果断、坚韧沉稳，在处理与几位男主角的个人情感时也会在感情与理性间斡旋，有自我保护和保护他人的能力，不再是“被攻略”“被凝视”“被拯救”的对象。</p>
+  <p>主角之外，“绣衣楼”中女性群像的刻画也别出心裁。无论是总想着考试上岸的甄宓，四处帮人退婚的许曼，还是“睚眦必报”的郭解，都摆脱了四肢柔弱、恪守成规的传统塑造，在精神和物理上极具坚韧力量，游戏中“天命本就应该落在女人身上”的角色台词也已经成为玩家口中标志性的语言符号，足见玩家对于游戏女本位视角的偏爱。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_ae26fece7e0e4fae9c71e7a2d3cfee28@6151540_oswg514453oswg635oswg872_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">《代号鸢》游戏截图</p>
+  <p>在女性向游戏玩法单一化的当下，《代号鸢》独特的玩法设计也无疑是游戏的一大亮点。当前市面上大多数女性向游戏将大量精力放在情感沉浸部分，游戏内战斗机制相对简洁，大部分关卡几乎只需要自动战斗，在某种角度其实展现出了质疑女性游戏能力的刻板印象。</p>
+  <p>而《代号鸢》中的战斗机制较为丰富，以卡牌战斗为核心，每个角色拥有独特的命盘系统和技能，玩家需要根据关卡需求和自身喜好进行策略搭配，从而实现通关。游戏本身的部分BOSS关卡有一定难度，在钻研机制、研究技能的过程中，玩家也能从中获得极大的成就感。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_c0a8daf3ea9641e7b35409991b48be07@6151540_oswg547402oswg601oswg865_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">《代号鸢》游戏截图</p>
+  <p>有玩家表示，自己从未长久玩过乙女游戏，因为仅仅是谈恋爱很快就会令她失去兴趣，而《代号鸢》中的男女恋爱情节占比并不过高，丰富的卡牌策略战斗、城池攻略布局、人物传闻、家居设计等玩法以及权谋激荡的氛围，才是这款游戏真正吸引她的地方。</p>
+  <p>女性向的标签不应该成为一种玩法的桎梏，动作/策略/即时战斗一样也可以女性向，在几乎不在意游戏本身乐趣的女性游戏界，《代号鸢》注意到了女性情绪价值以外的游戏需求。</p>
+  <h3 label="二级标题"><strong>角色与游戏的“割席”——游戏本身之外，玩家仍然愿意为角色自身的魅力买单</strong></h3>
+  <p>在游戏内流水出现大幅下跌的同时，游戏角色似乎已经同游戏本身完成了某种“切割”：角色话题讨论度不降反增，相关谷子的价格也并未因游戏出现的种种问题而出现大幅波动，大多数“退坑”玩家表示，即使已经对游戏本身完全失去了兴趣，依然愿意继续产出喜爱角色的同人创作，购买相关周边。</p>
+  <p>角色的成功“割席”，得益于前期角色塑造的完整度。</p>
+  <p>《代号鸢》中每位男主角及密探都设置了丰富的人物背景及个人传闻，多维度的刻画已经令部分角色塑造的完整程度足够高。正因如此，当游戏角色说出某些“不符合人设”的台词时，玩家并不会认为这样的表达方式是角色的“本意”，而会归因于文案方面的ooc。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_21de5533607b4713822e08aac47cbe9d@6151540_oswg407328oswg526oswg548_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">《代号鸢》最近引起争议文案</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_e620cfed142b419d9475f715a08273d8@6151540_oswg34427oswg531oswg142_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">玩家对该文案的评论</p>
+  <p>许多玩家表示“是角色在最初被创作时倾注的爱意与智慧让他们如此跃然纸上，可以脱离原作者的笔成为独立的人格”，有血有肉的塑造让角色的魅力长久不衰，已经可以独立所属作品，实现生命力的继续延伸。</p>
+  <p>与玩家建立的深厚情感纽带也是角色实现和游戏本身“切割”的重要情感因素。面对游戏的突然“塌房”，玩家会对已投入的经济及情绪成本建立起自我保护机制，而作为一款角色剧情丰富的群像游戏，这种“自我保护”也会转而投射到对角色形象的维护上。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_e85069bdfe85451398006111eacd5c25@6151540_oswg216582oswg684oswg867_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">部分玩家对《代号鸢》本次事件的感想</p>
+  <p>有玩家称：“我认真对这个游戏投入过情感。狮子喵和徐庶甚至隐鸢阁的诸位我寄托过亲情，绣衣楼的蓝卡紫卡的密探们是我的友情、我的伙伴，我了解他们的过往，我们一起作战保护重建广陵”，在与角色的互动、了解其故事和成长历程中，玩家已经对游戏中的人物本身产生了深厚的情感依赖和认同感，因此，当玩家对游戏本身产生反感时，往往会将承载自己情感的人物形象从中剥离，间接保护已经投入的情绪成本。</p>
+  <h3 label="二级标题"><strong>过度的价值噱头营销，可能会带来很大副作用</strong></h3>
+  <p>价值上得越高的游戏往往也越容易爆雷，从这一角度看，《代号鸢》的“塌房”，或许从很早前就能窥见端倪。自《代号鸢》热度提升以来，“天命本就应该落在女人身上”这句游戏台词已经几乎成了每位玩家对外宣传该游戏的标语，而单从这句台词来看，《代号鸢》中的女性主义思维应该是较为激进的。</p>
+  <p>“女性主义”的宣发为游戏吸引了大批忠实玩家后，也必然需要面对玩家对游戏本身内容的严格要求。</p>
+  <p>早就有玩家提出，剧情中身为主角的广陵王缺少剧情高光，整体权谋规划虚浮，经常处于被动状态，到处收服的密探还往往各为其主。一无兵权，二无谋士的状态导致部分玩家感觉主角“没什么实权，只能说说大话”，有限的内容深度与宏大的宣传口号之间的反差已经让许多玩家颇有心理落差感。</p>
+  <p>此外，除了女性主义，《代号鸢》依然选择将“恋爱”作为游戏的重要卖点之一，将部分剧情高光“让渡”给几位恋爱向男主角，也一度引起许多玩家的不满，认为”不想一直看主角靠男人获救，更希望展现她个人的魅力和才能“。</p>
+  <p>让大多数玩家遗憾的，并非恋爱剧情的相对单薄，而是广陵王作为主角虽有野心，但却并未将这份野心真正落到实处，虽有欲望，但总是难以让玩家在体验中切实感受到夺权之路的波谲云诡。</p>
+  <p>作品文案本身的单薄难以更好地承接”女本位“的口号，“翻车”就已经成为了某种必然，而在玩家对作品中性别议题愈发敏感的当下，一部以女性用户为主要目标人群的文娱产品中出现多个不尊重女性的”烂梗“，更无异于自砸招牌。</p>
+  <p><strong>结语</strong></p>
+  <p>在女性经济、学历水平已经普遍提高的当下，女性各方面观点的改变也必然影响当代女性用户的游戏审美。“男强女弱”的古早普遍设定已经不再受到广大女性用户欢迎，越来越多的女性更期望与自己的理想伴侣实现心理地位的平等。</p>
+  <p>诚然，《代号鸢》此次事件已经产生了一定程度的不良影响，但在该类市场尚未实现细分的当下，它“有女青史无名姓，一笔胭脂开眉弓”的女本位视角的确在女性向游戏的发展道路上创造了属于自己的份额。我们依然期待，女性向游戏制作团队能够以女性思维思考女性本身，在不物化任何性别的基础上真正关注女性的情感及游戏诉求，而非仅仅靠性别标签来博取关注。</p>
+  <p>希望“女本位”的女性向游戏多一点，女性玩家的声音，也更大一些。</p>
+  <p>本文图片均源自网络。</p>
+  <p class="editor-note">本文首发自<a href="https://mp.weixin.qq.com/s/v-pL3etuJj4ELIY6GstjRg?token=418741501&amp;lang=zh_CN" rel="noopener noreferrer nofollow" target="_blank">“36氪游戏”</a>。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3131939413933827</id>
+            <title>一切为了AIOS，罗永浩要重操旧业做手机，AI硬件起风了？</title>
+            <link>https://www.36kr.com/p/3131939413933827</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3131939413933827</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 05:42:29 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <AI硬件, 智能手机, 罗永浩, AIOS>
+<br>
+<br>
+总结: 文章探讨了AI技术对智能手机的影响，强调智能手机正在转变为AI操作系统（AIOS）的平台。罗永浩在经历锤子科技的调整后，可能会重返手机行业，开发基于AIOS的硬件。魅族手机也在向AI设备转型，显示出行业趋势。尽管原生AI硬件如Rabbit R1面临市场挑战，但智能手机因其成熟的生态系统仍是推广AIOS的理想平台。文章指出，求稳比求成更为重要，罗永浩的未来产品可能会与智能手机形态相关。 </div>
+                        <hr>
+                    
+                    <p>计算机先驱阿伦·凯曾说过：“那些真正在意软件的人，会自己做硬件”。</p>
+  <p>的确，AI渗透到各个硬件领域当中，持续发掘应用场景，AI并非单纯的软件植入，为了更好地配合大模型，硬件的形态也发生了变化。智能手机原本只是集通信、娱乐、工作一体的工具，到了AI时代，它正在变成大模型的载体，<strong>又或者说，因为AI的出现，智能手机变得更加“智能”。</strong></p>
+  <p>4年前，坚果手机业务发生调整，字节跳动宣布将原锤子科技团队组建的新石实验室并入教育硬件团队，坚果（锤子）手机倒在AI时代爆发前夕，令人惋惜。经历完“真还传”的锤子科技创始人罗永浩，锚定了下一个创业方向——AI硬件，本以为和手机不会再有什么牵连，<strong>但他最近和网友的互动，难免让老粉丝的心里泛起一点涟漪。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_8957cb6aab3444929e1695bc514f3f05@1547419282_oswg276320oswg1310oswg905_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（图片来自微博）</p>
+  <p>一位坚果手机的忠实用户在社交媒体表示，2014年5月20日开始陆陆续续换了T1、坚果R1、坚果R2，到目前为止，R2有点坚持不住了，锤子科技也不出手机，估计下一台要换小米手机。</p>
+  <p><strong>他的动态获得了罗永浩本人的关注，并回应称“不好说，单纯再去做手机，是没有意义的，但为了AIOS......”，并引用了前面提到的阿伦·凯的名言。</strong>下方网友评论称“真的吗？我要漂亮的”，得到了罗永浩肯定的回复：“嗯，漂亮只是基本功。”</p>
+  <p>这一系列回应无不勾起大家的期待，难道说罗永浩会为了AIOS，再一次投身到“非传统”智能手机赛道吗？</p>
+  <h2><strong>为了AIOS，老罗要重操老本行？</strong></h2>
+  <p>魅族手机的一次战略转身，小雷到现在还有印象。</p>
+  <p>2024年2月18日，魅族手机官宣停止传统“智能手机”新项目，All in AI打造AI Device（AI设备），并用AI重构Flyme系统。随后发布的魅族21 PRO，官方称其作“AI终端”。<strong>同时魅族还提到了各种AI化战略，包括但不限于去应用化、向OpenAI等大模型团队开放硬件，为AI硬件加持。</strong></p>
+  <p>小雷印象最深刻的，还是魅族描绘AI设备蓝图时提到了一个类似“自动驾驶”的能力，即用户输出指令，AI负责中间的机械化操作，直到付款阶段再把决策权交还给用户，省去了许多繁复的交互。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_2b5ed5b9ca8145f2868abb4cf651f099@1547419282_oswg475853oswg841oswg1214_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（图片来自星纪魅族）</p>
+  <p>之所以提到魅族，小雷认为罗永浩口中的基于AIOS打造的硬件，思路与魅族等手机厂商有些许类似，就是让智能手机变成AIOS的平台。</p>
+  <p>罗永浩再造手机在去年已有迹象，2024年2月，国家企业信用信息公示系统显示，罗永浩旗下细红线公司新增“移动终端设备制造、销售”业务。<strong>再加上罗永浩在锤子手机时代积累了丰富的经验和供应体系，再建一款智能手机，理论上没有太多的阻力和难度。</strong></p>
+  <p><strong>除了硬件颜值很高，罗永浩并未向网友透露太多实质性信息，并且留下了许多悬念。</strong></p>
+  <p>就目前来看，不排除细红线造一台“类似智能手机的AI硬件”的可能，如果有必要的话。但可以确认的一点是，即便是形似智能手机，也是围绕AIOS建立的产品，和“传统智能手机”有本质的不同。</p>
+  <p>老罗旗下细红线公司从AR转型AI后推出了第一款产品J1 Assistant AI助手，雷科技曾进行过体验，<strong>结论是很有“锤科特色”，融入了锤子便签、子弹短信、发牌手以及AI聊天等特性，能看出来罗永浩对AI产品有独特的见解。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_208b31f8fd2f4b1cab4a5eb8f92f8fe6@1547419282_oswg695649oswg1080oswg1080_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（图片来自雷科技）</p>
+  <p>同时Matter官网还出现了一款名为“JARVIS ONE”的AI硬件，是一款由Wi-Fi、蓝牙、指纹识别、麦克风等模块组成的“原生AI硬件”，从设计来看更像Rabbit R1之类的“新物种”。</p>
+  <p>但在小雷看来，这种围绕AI建立的原生硬件还处在概念阶段，没有完善的服务体系支撑，可用性远不如成熟的智能手机。<strong>正因如此，老罗重拾手机业务，大概有他的考量。</strong></p>
+  <h2><strong>AI手机负责市场，原生AI硬件负责正确</strong></h2>
+  <p>AI技术的出现，重新定义了智能手机的角色。</p>
+  <p>前面提到魅族All in AI的战略，最主要的思路就是将智能手机变成AIOS的平台。眼下手机AI化的趋势很明显，<strong>各家手机厂商积极在智能手机中融入AI功能特性，如AI智能相片美化、AI写作、AI聊天、AI摄影等，早期阶段以生成式能力为主。</strong></p>
+  <p>其实AI手机的下一个阶段已经有所体现，包括荣耀在Magic7发布会上提到的类似“自动驾驶”的功能，用户输入一个指令，AI助手输出执行步骤，省去大量的人机交互，提高智能设备的交互效率。</p>
+  <p>这是原生AI操作系统才能实现的自动化技术，与传统的基于原有系统架构改良的AI系统有本质区别。久而久之，这种自动化操作可以改变用户的用机习惯，同时软件生态也会发生变化。<strong>当用户不再频繁地与软件界面、手机屏幕交互，软件则会“隐退”成为服务，屏幕也会逐渐“退化”，逐渐变成Rabbit R1、JARVIS ONE之类的原生AI硬件。</strong></p>
+  <p>但这样的演化是一个长久过程，原生AI硬件走得太前，服务配套和市场认知都没有建立起来，没有适合“新物种”的土壤。正因如此，AIOS需要一个更适应当下市场的平台，小雷认为，智能手机就是最理想的平台。<strong>或者说，基于手机、PC等现有形态的产品，都很适合AIOS的生长。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_fb5032ba0e2e4f75951d27559ddd3ddb@1547419282_oswg3434627oswg1820oswg1024_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">（图片来自豆包AI）</p>
+  <p>最主要的原因是，智能手机的形态更顺应当下市场对移动终端的需求，软硬件生态和消费群体稳定成熟，以此作为AIOS的平台再合适不过。毕竟任何技术不投放到市场，不做标准化、系统化的适配，再先进都只是空谈。</p>
+  <p><strong>对于罗永浩的细红线公司而言，智能手机更是一个AIOS的重要平台，让更多人知道并接触JAVIS AI助手，首先就需要一个人尽皆知的硬件。</strong>更何况，老罗本身就是做手机的一把好手，又有TNT这种打破手机与大屏边界的教育理念，智能手机推广AI的效果，远比JARVIS ONE这样的原生AI硬件有更好的效果。</p>
+  <p>AI手机负责市场，原生AI硬件负责正确，大概老罗也是这么想的吧。</p>
+  <h2><strong>AI硬件爆发，“求稳”比“求成”更重要</strong></h2>
+  <p>自2024年1月9日首次亮相以来，Rabbit R1的市场表现可谓“喜忧参半”，首销24小时内预订量突破1万台，远超Rabbit公司预期。<strong>截至2024年5月，Rabbit R1累计销量已突破10万台，部分二手网站的价格甚至翻了数倍，最高被炒到1999美元。</strong></p>
+  <p>但没过多久，市场便意识到，Rabbit R1只是一个图新鲜的前沿科技产品，续航短、响应时间过慢、服务配套不齐全、无法提供有效建议，甚至被质疑“安卓套壳”，种种负面评价井喷。<strong>“新物种”没有在AI时代引爆新的需求，更别提取代智能手机。</strong></p>
+  <p>的确，Rabbit R1等种种理念都展现出了比智能手机更简单、更便捷、更智能的能力，AI Pin以及老罗的JARVIS ONE在产品思路上不太一样，但目的都是基于AI大模型的能力打造的新一代的硬件。</p>
+  <p>Rabbit R1失败的原因，小雷认为主要还是服务配套和大模型能力还很难撑得起这些AI原生硬件的发展，无法衔接智能手机处理用户的各种日常所需，无法建立市场认知，尝鲜劲过了之后，这些产品的弊端暴露无遗。<strong>罗永浩曾让粉丝准备好299美元迎接他们的AI产品，但JARVIS ONE能否在现在这个环境成功，可能他本人心里也很清楚。</strong></p>
+  <p><strong>总而言之，原生的AI硬件还是太过超前，同时解决的办法也摆在面前，那就是顺应当下的市场需求。</strong>真正重视软件的人，会自己做硬件，我们仍不知道老罗口中的“非传统”AI设备是什么，小雷预计会和智能手机有一定的关系。但拥有理想主义的他，不会轻易向这种“过时的产品形态”去做妥协。</p>
+  <p>在手机行业里，老罗也是当时很有前瞻性的一位人物了，当同行都在打磨金属后盖时，锤子手机用上了 3D 双面玻璃背板，并推出首个价格亲民的碎屏险方案，如今许多操作系统的交互特性，有部分来自于 Smartisan OS。如果说罗永浩要在类似智能手机的形态上做 AI 硬件，小雷认为也不会泯然众人。</p>
+  <p>罗永浩十分希望能够在AI时代打造一款和当年初代iPhone一样有着颠覆性意义的产品，可能就是带着这样的盼望去做JARVIS ONE。不过小雷认为，在这个竞争激烈的市场当中，求稳可能比求成更加重要。</p>
+  <p>“重操旧业”对他而言可能性不会太大，小雷倒是很期待他口中所说的搭载 AIOS、非传统意义上的手机是什么样子。</p>
+  <p>本文来自“雷科技”，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3131964022626818</id>
+            <title>如何看待公众号内测智能回复？</title>
+            <link>https://www.36kr.com/p/3131964022626818</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3131964022626818</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 21 Jan 2025 05:41:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 智能回复, AI, 公众号, 用户体验  
+<br><br>  
+总结: 文章介绍了公众号的新功能“智能回复”，该功能利用AI学习博主的历史内容，以便快速、准确地回答粉丝的问题。优点包括快速响应、自然语言处理和激发思考，但也存在“幻觉”现象、缺乏引用链接和理解力有限等缺点。尽管如此，该功能仍能提升用户体验，拉近博主与用户的关系，并帮助博主了解用户需求。文章最后指出，内容运营进入深度化时代，博主应利用AI提供个性化内容推荐以增强竞争力。 </div>
+                        <hr>
+                    
+                    <p><strong>昨天晚上，公众号给我推送了新功能：智能回复。</strong></p>
+  <p>这个功能是干嘛的？</p>
+  <p>官方说的：为了让大家和粉丝交流更顺畅，私信的自动回复功能现在可以用AI来帮忙了。你只要开启这个功能，AI就会去学习你之前发过的文章，然后粉丝就能马上体验到智能回复了。</p>
+  <p>简单来说，<strong>就是你把功能打开，AI就会学习以前写的东西，然后根据内容来回复粉丝的问题。</strong></p>
+  <p>我打开后，大概等了5到10分钟，AI就学完了。我马上用自己的微信号去公众号的对话框里试了试，问了一些问题。</p>
+  <p><strong>用下来，我发现这个功能有优点，也有缺点。</strong></p>
+  <h2>01</h2>
+  <p>先说说优点：</p>
+  <p><strong>一，它回答问题很快，而且很准。</strong>比如，我让它推荐几个AI工具，它马上能从我之前写的内容里，把相关的AI工具都列出来。</p>
+  <p>回答也很简洁，还分了类，像搜索类、记录想法类、整理笔记类，还有作图和视频等等。这挺方便的，没啥难度。</p>
+  <p><strong>二，它比较人性化，语言也很自然。</strong>以前我用过腾讯的混元大模型，回答有点傻，很卡，还特别书面化。</p>
+  <p>这个模型不一样，回答更通俗。比如我问它：王智远怎么看待AI搜索的发展？</p>
+  <p>它说：我认为当前的AI搜索还存在一些局限性。朋友想了解干果品类市场趋势或者医疗行业的学术报告，AI搜索提供的信息往往不够深入精准，只是总结性的结论，没法满足对案例分析、数据解读等具体需求。</p>
+  <p>还有，AI搜索要真正满足用户需求，得找到具体场景。内容有点多，就不展开了。</p>
+  <p><strong>第三，它很善于激发思考。</strong>什么意思呢？它在回答完问题后，还会加一个疑问句。这种方式很巧妙，至少能在潜意识里激发提问的人。</p>
+  <p>说完优点，再说说缺点。<strong>最致命的缺点是“幻觉”。</strong></p>
+  <p>我不知道它是把我公众号的内容和互联网上的内容混在一起了，还是怎么了。我问它：王智远是谁？它说：王智远是一名一级建造师、艺人和商业创作者，平时喜欢分享一些关于科技、营销和创作的心得。</p>
+  <p>可我自己的公众号里，根本没有“建造师”相关内容，这明显是它自己编的。</p>
+  <p>这让我怀疑，它是不是在玩“拼贴式创作”，把网上各种碎片信息胡乱拼凑在一起，然后一本正经地告诉我这就是答案。</p>
+  <p>我又问了几个和后台内容不相关的问题。比如：<strong>王智远养的狗叫什么名字？</strong>它说：这个问题有点私人，不过既然问到了，我就告诉你，王智远养的狗狗叫‘小黑’，它是一只黑色的拉布拉多犬，非常聪明和活泼。这明显是造谣。</p>
+  <p>看到这里，我就知道它的毛病了。</p>
+  <p><strong>它总是试图用一种“合理化”的方式回答问题，但合理化的内容，往往是基于它自己的逻辑和想象，而不是基于我公众号里的内容。</strong></p>
+  <p>所以，它到底是怎么区分公众号的智能回复和互联网的信息的？生成内容的比例是多少？我也不知道。</p>
+  <p><strong>第二，它没有给出链接。</strong></p>
+  <p>既然它能做生成式回复，还有内容补全功能，那在回答时，最好引用相关内容的出处。<strong>就像我们用AI搜索时，能给出引用出处一样。</strong>这样不仅能验证哪些内容是博主写的，还能提醒提问的人，并非所有内容都可信。</p>
+  <p>要是有人把生成的内容截图，拿去造谣说这是王智远说的，那不就翻车了？还好我不是名人，不然这种不准确的信息传出去，后果不堪设想。毕竟，公众号的对话风格，很像微信一对一聊天。</p>
+  <p><strong>第三个缺点是，它的回复内容和理解力有限。</strong></p>
+  <p>它没办法完全理解我发的复杂、模糊的消息内容，提问过长也不好。要是我一次性抛出一个很长的问题，或者内容涉及多个领域的交叉知识，它往往只能抓住一部分重点，甚至可能完全偏离主题。</p>
+  <p>比如我问它：“如何利用人工智能优化自然语言处理中的语义理解？”它却一本正经地给我讲了一大堆自然语言处理的基础知识，还列举了几个常见的算法框架，但这些都不是我想知道的。</p>
+  <p><strong>整体测试下来，有优点，也有很多要改进的地方。</strong></p>
+  <h2><strong>02</strong></h2>
+  <p>不得不说，从博主角度来说，这个AI智能回复功能，确实挺有用。为什么呢？</p>
+  <p><strong>首先，它能让用户更愿意看文章，还能拉近和用户的关系。</strong>现在公众号的阅读量一直在下降，有了这个功能，至少能吸引一些用户回来。</p>
+  <p><strong>其二，AI可以根据用户的提问，快速推荐相关的内容。</strong></p>
+  <p>比如，用户问了一个问题，AI马上就能找到公众号里相关的文章推给他。这样，用户不仅能找到自己需要的，还能发现一些平时没注意到的优质内容。这对公众号的内容生态来说，是个好事。</p>
+  <p><strong>其三，博主可以通过AI的回复，了解用户最关心什么。</strong>如果很多用户都在问同一个问题，博主就知道该写什么了。这样一来，博主可以提前准备相关内容，既能满足用户需求，还能吸引更多读者。</p>
+  <p>值得一提的是，AI生成的互动数据现在都在后台，这也是个好东西。博主可以分析内容和问题，看看用户都在问什么，哪些用户互动最多，<strong>然后，博主可给用户提供更多个性化的内容。</strong></p>
+  <p><strong>从用户角度来看，这个功能也很方便。</strong></p>
+  <p>有时候，用户突然想起某个博主说过的话，不用一篇篇文章去翻，直接问AI就行。尤其是在功能刚上线的时候，能有这样的体验，已经很不错了。</p>
+  <p>不过，AI智能回复目前还有不少问题。比如：</p>
+  <p>它能不能像人一样，连续聊好几轮？我们平时聊天，很少是一问一答就结束的，很多时候是连续对话。如果AI能记住前面聊的内容，保持连贯性，那体验肯定会更好。</p>
+  <p>但现在的问题是，AI处理复杂问题不太行，多轮对话也容易跑偏。有时候，聊着聊着，AI就忘了前面说了什么，或者干脆答非所问。这就有点尴尬了。</p>
+  <p><strong>所以，这个功能挺有潜力，未来能解决这些问题，体验肯定会更好。</strong></p>
+  <h2><strong>03</strong></h2>
+  <p><strong>为什么会更好，我们不妨从内容行业角度看一下。</strong></p>
+  <p>现在，微博、知乎等平台虽然没有完全一样的功能，但也能做类似的事情。比如，微博的AI回复，完全可以围绕博主的历史动态来展开。</p>
+  <p>知乎的AI智能回复做起来，估计会更偏向知识性和专业性，回答也会更详细，更适合需要深度内容的用户。</p>
+  <p>公众号的AI智能回复不一样，它更像是一个“私人助手”。<strong>它是基于博主的历史文章来回答问题的，所以，内容更贴近博主的风格和观点。这种个性化是它的优势。</strong></p>
+  <p>再往大了说，AI在内容平台里的发展是个大趋势。 现在很多平台都在用AI提升用户体验。</p>
+  <p>比如：</p>
+  <p>视频平台用AI推荐内容，音频平台用AI生成字幕；未来，AI可能会和更多技术结合，比如直接生成视频、音频内容，甚至能根据用户需求实时创作。</p>
+  <p>那么，公众号怎么靠这个AI功能提升竞争力呢？</p>
+  <p><strong>关键还是差异化。</strong>博主通过AI智能回复提供定制化的内容推荐，或者根据用户的兴趣推送专属文章。这样，用户会觉得公众号更懂自己，自然就更愿意留下来。</p>
+  <p>另外，AI还能帮助博主挖掘用户的潜在需求。</p>
+  <p>通过分析用户的提问，博主可以发现他们真正关心的问题，然后提前布局相关内容。这种“未雨绸缪”的策略，很容易提升满意度，把公众号在竞争中的位置拉起来。</p>
+  <p>所以，可以得出结论：<strong>内容进入深度运营的时代了。</strong></p>
+  <h2><strong>04</strong></h2>
+  <p><strong>说了这么多，到底怎么用呢？博主操作挺简单的：</strong></p>
+  <p>第一步，收到内测推送后，进去把“智能回复”功能开启就行。</p>
+  <p>第二步，编辑提示词。要是不会编辑，官方有个模板，直接点击复制模板，把关键信息填进去就行。当然，就算不做第二步，别人也能用，只是体验会差点。</p>
+  <p><strong>从目前来看，我觉得这个功能的核心是触发关键词和关键句。简单来说，把原来的关键词自动回复，变成了AI的能力。</strong></p>
+  <p>本质上，这和用Kimi、通义、豆包手机端创建智能体是一个道理。唯一的区别是，它们的内容是基于互联网的，而这个功能的内容是基于公众号的。</p>
+  <p>既然这样，我们就得根据公众号的风格、内容和用户画像，制定一些回复策略。比如：</p>
+  <p>你的公众号做科技干货，就设置一些技术术语作为触发词，让AI给出更专业、更深度的解答。你是做生活类，就用一些日常话题作为触发点，让AI的回复更接地气、更有趣。</p>
+  <p><strong>所以，提示词最好填进去，这样回复的会会更精准。</strong></p>
+  <p>如果你是一名用户，使用就更简单了。</p>
+  <p>只要找到公众号，直接提问就行；无论是在手机上，还是在电脑上，都能轻松使用。在电脑端，操作是：点击公众号头像，进入对话界面，直接输入问题，就能得到回复。</p>
+  <p><strong>快去试一下。</strong></p>
+  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MzU5ODMyNDEyNw==&amp;mid=2247502316&amp;idx=1&amp;sn=6b1a4ad9bb752a6ea1a380c5768b183c&amp;chksm=ff641d54cf4dded56c71c7ebd2fd7d5e28d4fee5e33bf43506ac09b2b38b8ab068085fe37a26&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“王智远”（ID：Z201440）</a>，作者：王智远，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.36kr.com/p/3131920108797701</id>
             <title>移动支付风暴再起，支付宝还能否多“碰几下”？</title>
             <link>https://www.36kr.com/p/3131920108797701</link>
@@ -1228,1051 +2554,6 @@
   <p>Trump Says He’ll Ban TikTok As Soon As Saturday|Forbes</p>
   <p>一反常态入驻TikTok，特朗普算盘打得“啪啪”响|新京报</p>
   <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/0mRvhy_pcSnERHKna-qE7w" rel="noopener noreferrer nofollow" target="_blank">“差评X.PIN”</a>，作者：star，编辑：面线，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131815209360133</id>
-            <title>传AI服务器巨头寻求港股上市</title>
-            <link>https://www.36kr.com/p/3131815209360133</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131815209360133</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 02:16:46 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: A股上市, 紫光股份, 港股, AI算力服务器  
-<br><br>  
-总结: 紫光股份计划在香港进行二次上市，预计筹资约10亿美元，旨在提升国际知名度并支持全球化战略。近年来，已有多家A股公司赴港上市，主要集中在医药、电力设备和有色金属等行业。紫光股份通过收购新华三等公司，深度布局ICT基础设施服务，成为主要营收来源。未来，AI算力服务器将成为公司的核心增长点，随着算力需求的增加，预计公司业绩将稳步增长。 </div>
-                        <hr>
-                    
-                    <p>A股公司赴港上市又有大消息!</p>
-  <p>近日，有媒体报道称，据知情人士透露，紫光股份考虑在中国香港二次上市，最快今年完成，可能筹资约10亿美元。</p>
-  <p>据不完全统计，截至发稿，去年至今已有25家A股上市公司筹划或分拆子公司赴港上市；从行业分布来看，主要集中在医药生物、电力设备、有色金属等领域。</p>
-  <p>其中美的集团、龙蟠科技、顺丰控股、科大讯飞拆分的子公司讯飞医疗已于去年下半年先后登陆港股；歌尔股份、南山铝业也计划分拆子公司赴港上市。</p>
-  <p>2025年以来，恒瑞医药、迈威生物、海天味业、三花智控、峰岹科技等陆续递表港交所，年内登陆港股的概率较大。此外，东鹏饮料也于近期传出将要赴港二次上市。</p>
-  <p>这些公司中，不少都是各个细分领域的龙头，例如恒瑞医药是国内创新药龙头、海天味业是食品饮料龙头、宁德时代是动力电池龙头。</p>
-  <p>紫光股份在国内算力服务器领域市占率第二，仅次于浪潮信息，此次筹划赴港上市，不仅将为公司带来更多的资金支持，还将有助于提升其国际知名度和影响力，进一步推动公司的全球化战略。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_7fadccd729914fd9a7590fde90c98ba9@1743780481_oswg30184oswg830oswg747_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>收购新华三切入ICT基础设施服务领域，营收持续增长</strong></h2>
-  <p>紫光股份成立于1999年，是经国家经贸委批准，由紫光集团有限公司（原名为清华紫光（集团）总公司）作为主要发起人发起成立，总部位于北京；同年11月，公司在深交所主板上市。</p>
-  <p>2006年3月，紫光集团将所持有的紫光股份42%的股份无偿划转至清华控股，公司控股股东变更为清华控股。直至2022年7月，清华控股一直是紫光股份的实际控制人。</p>
-  <p>2016年，紫光股份完成了对新华三、紫光数码、紫光软件的收购，持续增厚公司营收能力。</p>
-  <p>2022年7月，紫光集团完成重整，智广芯承接了紫光集团100%股权，清华控股不再持有紫光集团股权。因此，公司实际控制人由清华控股变更为无实际控制人，智广芯成为公司间接控股股东，公司控股股东仍为紫光通信。</p>
-  <p>2024年9月5日，紫光股份通过全资子公司紫光国际继续收购新华三30%的股权，加上此前已持有的51%股权，<strong>公司间接持有新华三81%的股权</strong>，进一步巩固了市场优势地位。</p>
-  <p>通过多次并购重组，<strong>公司深度布局“云网芯边端”全产业链，业务涵盖ICT（信息与通信技术）基础设施服务与IT分销两大业务板块</strong>，产品已全面覆盖网络、计算、存储、云计算、安全和智能终端、数字化解决方案等全生命周期服务。</p>
-  <p>财务数据方面，2021年、2022年、2023年及2024年1-9月，紫光股份的营业收入分别为676.4亿元、740.6亿元、773.1亿元、588.4亿元，归母净利润分别为21.48亿元、21.58亿元、21.03亿元及15.82亿元；同期，公司综合毛利率分别为19.47%、20.64%、19.60%、17.59%。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_2c98eab9fbe04cf68ca19026715aed54@1743780481_oswg84437oswg830oswg163_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">公司主要财务数据；来源：东方财富</p>
-  <p><strong>ICT基础设施及服务业务是公司的主要营收来源</strong>，2023年占公司主营业务收入的比重为66.63%，IT产品分销与供应链服务占比35.88%。2023年，公司的研发投入为56.43亿元，同比增长6.50%，研发费用率为7.3%。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_518428d3232c4b6e8865d287e4b73107@1743780481_oswg6737oswg830oswg186_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">公司主营业务构成；来源：东方财富</p>
-  <p>紫光股份主要的子公司包括新华三、紫光云、紫光数码、紫光软件等。<strong>其中新华三是公司ICT基础设施及服务业务的主要经营平台</strong>；紫光数码是公司主要的ICT分销商，还覆盖智慧物流和供应链金融；紫光软件是是公司云网板块的重要组成部分；紫光云是公司“芯云战略”的重要组成部分，聚焦智慧城市运营、公有云研发、运营及销售和产业互联网等业务。</p>
-  <p>紫光股份在2023年年报中表示，公司将进一步聚焦研发资源，围绕网络、安全、计算、存储、云与智能主航道，持续深化“AI in ALL”战略布局，全面推动全系列产品内嵌AI、内生智能，努力打造更多满足AIGC时代需求的领先产品、解决方案。</p>
-  <p>同时，公司将聚焦“算力×联接”，加快全光网络解决方案升级换代，进一步深化GPU服务器、液冷服务器、新一代存储、算力管理调度平台等产品布局，巩固产品组合拳优势，更好发挥算力和联接双基石的乘数效应。</p>
-  <h2><strong>AI算力服务器是未来核心增长来源</strong></h2>
-  <p>从目前AI产业的发展趋势来看，紫光集团未来主要营收来源及增长点在于子公司新华三，新华三在国内交换机、服务器等领域份额位列头部，同时积极开拓海外市场。2023年，新华三实现营收519.39亿元，同比增长4.27%，实现净利润34.11亿元。</p>
-  <p>拆分来看，2024年一季度，新华三以太网交换机、企业网交换机、园区交换机市场份额均为国内第一，X86服务器、GPU服务器、数据中心交换机市场份额第二，刀片服务器市场份额第一。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_abb1abae5e2e4177972d4f43c70befcc@1743780481_oswg6530oswg830oswg215_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>算力是实现AI系统所需要的硬件计算能力，是AI的“底座”。</p>
-  <p>算力产业链覆盖范围广阔，包括GPU芯片、服务器、IDC厂商、AIGC应用服务提供商等，具有庞大的挖掘价值。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_b7c12226285a4ed3ab1fc9760d22ac00@1743780481_oswg220646oswg830oswg389_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">AI算力服务产业全景视图，来源：开源证券研究所</p>
-  <p>随着数据量激增、算法模型复杂度提升与AIGC的发展，算力的重要性日益凸显，我国算力发展规划政策相继出台，推动算力需求高增长。</p>
-  <p>据OpenAI测算，2012年起，全球AI训练计算量平均每3.43个月可以翻一倍，目前计算量已扩大30万倍。然而算力硬件增长速率仅年增长1.4倍，供给仍较为匮乏。</p>
-  <p>预计在国内数字基础建设及需求量不断上升的大背景下，我国AI服务器市场将迎来稳定发展阶段。<strong>据华经产业研究院预测，到2027年中国大陆AI服务器销售额将达到163.99亿美元，2022-2027年CAGR为17.7%。</strong></p>
-  <p>未来几年，整个算力产业链也都将受益于AI的发展，迎来业绩的稳步增长，据Wind一致预测，预计紫光股份2024、2025年净利润分别为23.38亿元、29.06亿元，对应PE分别为31.33倍、25.21倍。</p>
-  <p>下表是AI算力产业链公司未来两年营收及利润Wind一致预测情况，仅供参考。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_140acfbeb3be498b907d9c6d08305484@1743780481_oswg22233oswg830oswg619_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/vSlmNKpkiCNomPbTKZcyKA" rel="noopener noreferrer nofollow" target="_blank">“格隆汇新股”</a>，作者：发哥说新股，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131829531220487</id>
-            <title>大整顿，小贷的“野路子”行不通了</title>
-            <link>https://www.36kr.com/p/3131829531220487</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131829531220487</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 01:46:47 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 小额贷款, 监管新规, 消费者权益, 风险管理  
-<br><br>  
-总结: 国家金融监督管理总局发布了《小额贷款公司监督管理暂行办法》，对小贷公司的行业准入、融资方式、信息披露等进行了全面要求。新规设定了小贷公司贷款集中度比例和单户贷款余额上限，旨在防止监管套利和控制风险。小贷公司不得跨省经营，且在营销宣传中需遵循透明原则，保护消费者权益。办法还要求小贷公司对放贷资金实施专户管理，强化风险管理，确保合规经营。 </div>
-                        <hr>
-                    
-                    <p>日前，在广泛征求意见的基础上，国家金融监督管理总局发布《小额贷款公司监督管理暂行办法》（以下简称《办法》）。《办法》共7章、60条，对小贷公司的行业准入、融资方式、信息披露、技术规范、催收方式等都做了全面具体的要求。</p>
-  <p>据天眼查，金融监管总局在去年8月披露的数据显示，截至2023年末，全国共有小贷公司法人机构6550家，实收资本8226亿元，贷款余额8431亿元。其中，网络小贷公司179家，实收资本1590亿元，贷款余额1739亿元。</p>
-  <p>此次《办法》正式出台，可谓给这万亿市场的近7000多家地方金融组织戴上了“金箍”。这也意味着，在监管新规之下，小贷公司将迎来大整顿，原来的“野路子”行不通了。</p>
-  <h2><strong>单户消费贷设上限</strong></h2>
-  <p>《办法》明确，设立小贷公司从事小额贷款业务，应当经省级地方金融管理机构同意，不得跨省、自治区、直辖市开展业务。小贷公司可以发放小额贷款，进行商业汇票承兑、贴现，不得发行或者代理销售理财、信托、基金等金融产品，不得购买除固定收益类证券以外的金融产品。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_77758c135ca54b8098d289d082f02d74@1743780481_oswg281634oswg1080oswg554_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>值得注意的是，去年8月，金融监管总局曾就《小额贷款公司监督管理暂行办法（征求意见稿）》（下称“征求意见稿”）公开征求意见。对比来看，《办法》在小贷公司的业务范围中删去了“与贷款业务有关的融资咨询、财务顾问等中介服务”一条。</p>
-  <p>在贷款集中度方面，《办法》明确小贷公司业务范围及贷款集中度比例要求，小贷公司对同一借款人的各项贷款余额不得超过其上年末净资产的10%，对同一借款人及其关联方的各项贷款余额不得超过其上年末净资产的15%。</p>
-  <p>《办法》还对网络小贷公司的单户贷款余额提出了上限要求，明确网络小贷公司对单户用于消费的贷款余额不得超过人民币20万元，对单户用于生产经营的各项贷款余额不得超过人民币1000万元。</p>
-  <p>据了解，《商业银行互联网贷款管理办法》和《消费金融公司管理办法》，都对个人消费贷款有着单户20万元上限的规定。</p>
-  <p>金融监管总局相关负责人曾指出，对网络小贷公司设置用于消费的贷款余额上限的主要考虑在于，坚持同类业务同一监管标准的功能监管思路，防止监管套利。而对用于生产经营的各项贷款余额的上限规定则是考虑到纯线上业务的风险特征，网络小贷公司自身的风险管理能力以及银行业同类贷款定义等因素。</p>
-  <p>《办法》还对助贷、联合贷方面提出要求。其中，小贷公司与第三方机构合作开展贷款业务的，不得将授信审查、风险控制等核心业务外包；不得与无放贷业务资质的机构共同出资发放贷款；不得与无融资担保、不符合信用保险和保证保险经营资质的机构合作，接受其提供的融资担保或者保险服务；不得仅提供不实际出资的营销获客、客户信用画像和风险评估、信息科技支持、逾期清收等服务；与商业银行联合发放的网络贷款的单笔出资比例不得低于30%。</p>
-  <p>而为确保相关规定平稳落地实施，《办法》设置了两年政策过渡期。《办法》出台后，对目前单户金额超过上限的存量贷款，到期自然结清；对贷款到期后有续贷需求的客户，引导网络小贷公司在过渡期间逐步调整单户金额。这充分考虑到了当下小贷公司所面临的现实状况。</p>
-  <h2><strong>不得违反借款人意愿搭售服务</strong></h2>
-  <p>在公司治理与风险管理方面，《办法》细化关联交易管理要求，明确不良贷款划分标准，并对小贷公司放贷资金实施专户管理；规范网络小贷公司业务系统，应满足全流程线上操作、风险防控体系健全、符合网络与信息安全管理要求等条件；要求小贷公司对合作机构落实名单制等管理。</p>
-  <p>《办法》对小贷公司信息披露、风险提示、营销宣传、客户信息采集使用等作出规范，并强化对违规和不正当经营行为的负面清单监管。</p>
-  <p>比如，《办法》明确，小贷公司开展营销宣传、发放贷款时，不得面向未成年人推介办理贷款或者以大学生为目标客户定向宣传信贷产品，向大学生发放互联网消费贷款；不得违反借款人意愿，搭售商品、服务或附加其他不合理条件。</p>
-  <p>对于网络小贷使用的互联网业务信息系统，《办法》明确要求，要能够支持贷款申请、评估、审批、签约、放款、还款等业务全流程线上操作，能够完整记录并妥善保存相关数据及资料等。</p>
-  <p>《办法》要求，该业务系统应当由网络小贷公司设立并享有完整数据权限，规范开展网站、移动应用程序（APP）和小程序备案等工作，防范、监测假冒网站、假冒移动应用程序（APP）和假冒小程序。</p>
-  <p>《办法》还要求，小贷公司应当建立健全资产风险分类制度和风险准备金制度，加强资产质量管理，及时足额计提风险准备，提高抵御风险能力。具体到不良贷款，要求应当将逾期超过九十天的贷款划分为不良贷款。</p>
-  <p>此外，《办法》规定，小贷公司应当强化资金管理，对放贷资金实施专户管理，所有放贷资金必须进入放贷专户，所有贷款发放和本息回收必须通过放贷专户；应当向地方金融管理机构报备放贷专户，并按要求定期提供放贷专户运营报告和开户银行出具的放贷专户资金流水明细。</p>
-  <p>而且，小贷公司不得利用股东、董事、监事、高级管理人员、内部职工、关联人员个人账户发放和回收贷款。</p>
-  <h2><strong>细则强化消费者权益保护</strong></h2>
-  <p>做好消费者权益保护工作，是金融机构必须承担的责任。新出台的《办法》，对消费者权益保护提出了更加具体的要求。</p>
-  <p>《办法》规定，小贷公司通过网站、移动应用程序（APP）、小程序等互联网平台（含自有及合作机构，下同）开展营销获客、发布贷款产品或者发放贷款的，应当向地方金融管理机构报备网站、移动应用程序（APP）、小程序等互联网平台信息及产品详细信息。</p>
-  <p>小贷公司通过其经营场所、宣传资料、网站、移动应用程序（APP）、小程序等开展营销获客、发布贷款产品或者发放贷款的，应当全面公示下列信息，并以简明易懂的语言充分揭示风险：</p>
-  <p>公司基本信息，包括营业执照及业务资质文件信息、公司地址、法定代表人及高级管理人员姓名、业务咨询及投诉电话等；对公司提供的相关产品进行详细描述，包括服务内容、贷款年化利率、收费项目及标准、计息和还本付息方式、逾期贷款处理方式等；对公司提供的贷款产品进行风险提示，包括借款人未按合同约定提供真实完整信息、使用贷款、偿还贷款等行为将被追究违约责任等。</p>
-  <p>小贷公司应当遵循公开透明原则，充分履行告知义务，将强制阅读合同作为合同签署的前置环节，并在合同中以醒目形式载明涉及消费者利益的内容。</p>
-  <p>在营销宣传方面，小贷公司开展营销宣传、发放贷款时，不得有下列行为：</p>
-  <p>以欺诈或引人误解的方式进行营销宣传，片面宣传低门槛、低利率、高额度等，诱导借款人过度负债、多头借贷；采取诱导、欺骗、胁迫等方式向借款人发放与其借款用途、偿还能力等不相符合的贷款；面向未成年人推介办理贷款或者以大学生为目标客户定向宣传信贷产品，向大学生发放互联网消费贷款；将贷款列为默认支付选项；违反借款人意愿，搭售商品、服务或附加其他不合理条件。</p>
-  <p>《办法》还提出，小贷公司及其使用的互联网平台收集、存储、使用客户信息，应当遵循合法、正当、必要原则，在相关页面醒目位置提示客户阅读授权书内容，在授权书中披露收集信息的内容、使用方式和期限等，确保客户阅读授权书并签署同意。</p>
-  <p>此外，小贷公司应当按照法律法规和与客户的约定，处理其存储的客户信息，不得泄露、篡改。未经客户授权或同意，小贷公司及其使用的互联网平台不得收集、存储、使用、加工、传输、向他人提供、公开、删除客户信息。</p>
-  <p>数据显示，截至2024年9月末，全国小贷公司数量为5385家，较2015年高峰期跌去35%。</p>
-  <p>另外，今年开年，已有湖南、内蒙古、福建、重庆、湖北等多地发布清退、注销地方小贷等地方金融组织的公告，涉及清退的小贷公司超20家。</p>
-  <p>而在新规正式落地后，小贷公司或将迎来一场新的洗牌局。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/fxT-CTACCqZEM6nx6PETqQ" rel="noopener noreferrer nofollow" target="_blank">“柒财经”</a>，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131826659858945</id>
-            <title>TikTok在美“起死回生”，从业者怎么看？</title>
-            <link>https://www.36kr.com/p/3131826659858945</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131826659858945</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 01:46:29 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: TikTok, 美国禁令, 恢复运营, 从业者观点  
-<br><br>  
-总结: TikTok在美国的运营经历了短暂的停服与迅速恢复，因美国政府的禁令而引发了用户和从业者的恐慌。尽管禁令仍然存在，但许多从业者对未来持乐观态度，认为TikTok在美市场仍具潜力。特朗普的干预为TikTok争取了90天的缓冲期，可能会促成合资企业或信息剥离的方案。尽管面临不确定性，从业者仍希望继续深耕美国市场，认为其消费力和利润潜力较高。 </div>
-                        <hr>
-                    
-                    <p>TikTok被封了，TikTok又回来了。</p>
-  <p>1月19日，在美国禁令正式生效之前，TikTok提前关闭了美国业务。不过，十几个小时后，TikTok宣布恢复运营，但只是暂时安全。因为美国对于TikTok“不卖就封”的禁令并没有消失，只是延期了90天。</p>
-  <p>TikTok在美国的命运似乎依旧扑朔迷离。短暂下架的风波一度引起了用户的恐慌，而作为TikTok上的经营者——商家、服务商、娱乐公会们，也关心后续TikTok的发展情况。</p>
-  <p>禁令的阴影之下，从业者是否还会选择深耕美国市场？原因又是什么？</p>
-  <h2><strong>TikTok“起死回生”</strong></h2>
-  <p>不到一天的时间，TikTok在美国经历了从停服下架到恢复运营的“荒诞时刻”。</p>
-  <p>北京时间1月19日，TikTok停止在美服务。打开TikTok的美国用户都会收到暂时无法使用的弹窗通告。而且，TikTok在谷歌应用商店下架。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_17b87b4b672b4bea95d2a5ccb7e39241@1743780481_oswg98026oswg910oswg1748_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>在当天稍早时候，TikTok曾在发布的通知中表示：“我们很遗憾，美国针对TikTok的相关法律将于1月19日生效，这迫使我们暂时停止在美服务。我们正努力尽快恢复在美服务，我们感谢你们的支持，请继续关注。”</p>
-  <p>伴随着TikTok在美国被禁，字节跳动的一系列App，如Lark（飞书海外版）、Lemon8、Capcut（剪映海外版）纷纷宣布停止服务。字节跳动旗下沐瞳科技多款游戏，也在同一时间暂停运营。</p>
-  <p>一时之间，“TikTok停止在美服务”、“TikTok在美区下架”等消息刷屏全网，引发热议。</p>
-  <p>美国TikTok某娱乐公会负责人告诉新播场，TikTok在美停服消息发布后，他在一天内接到了最近一年来最多的电话，有来自国内的运营同行，也有当地的主播。大家感到很震惊，也感到很迷茫。</p>
-  <p>然而，这场引发震荡的海啸，只持续了不到一天。</p>
-  <p><strong>1月20日凌晨，TikTok官方账号推送了一则公告，宣布正在恢复服务。目前，TikTok应用程序已恢复正常使用，TikTok网站也已恢复正常。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_ff6558f6260445c996f7eb8fd9a16c41@1743780481_oswg116186oswg1080oswg803_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>对于恢复运营的消息，有从业者向新播场表示，相较伤心的TikTok用户，他们或多或少都提前感知到了“信号”。</p>
-  <p>“虽然没有明确说会恢复，但官方那边说了不会有太大问题。”该娱乐公会的负责人如是说。</p>
-  <p>另外，也有从事TikTok带货的服务商向新播场表示：“只有C端用户收到了关停的弹窗通知，但我们商家的后台并没有收到类似通知，而且商家后台依然可以正常提报商城活动。创作者也只是不能发布视频了，但是会自动存稿。”</p>
-  <p>这些迹象似乎在表明，TikTok在美区被封，只是暂时的。</p>
-  <h2><strong>从业者怎么看？</strong></h2>
-  <p>TikTok为何能在这么短的时间内“起死回生”？</p>
-  <p>1月17日，美国最高法院的9名法官一致裁决，要求TikTok从19日开始全美下架。而TikTok关闭之后，之所以能在十几个小时之后快速重新上线，主要得益于美国总统特朗普的努力。</p>
-  <p>TikTok美区停服将近12小时后，特朗普先是在社交平台喊话：“SAVE TikTok！”随后，他又更新了一篇推文，称自己“将在美国时间周一发布行政命令，延长法律禁令生效前的期限”，将美国高院发布的TikTok禁令延期90天。他还称，在行政命令下达前，任何协助TikTok避免关停的公司都无需承担责任。同时，他还指出，“希望美国在合资企业中拥有50%的所有权。”</p>
-  <p>但禁令仍旧存在，TikTok在美国的命运似乎依然不明朗。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_6a8cf0bea15d4b96a52034fc57483ecc@1743780481_oswg142900oswg670oswg377_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>然而，尽管前路未知，但新播场对话了多个从业者后，发现他们之中大多数并没有退出美区市场的想法。</strong></p>
-  <p>“我们自己小圈子来分析的话，觉得问题不大。因为我们目前来看，特朗普相对来说还是比较能够支持TikTok的发展，或者说在解决问题上还是挺主动的。”</p>
-  <p>从事TikTok带货的服务商表示，他们认为后续无非需要有一个能够让TikTok继续运营的方案。</p>
-  <p>他们认为，或许会存在两个方案：第一个就是让美国的一些企业进来，和字节拿到相同的股份，这与特朗普提到的“希望美国在合资企业中拥有50%的所有权”说法一致；第二个是有可能剥离信息收集的业务，也就是让字节跳动想要获取信息的过程中必须得到美国相关企业的认可，就是把信息剥离这块独立出去。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_132e90bb42c544a9994c6a542de55546@1743780481_oswg28328oswg1080oswg511_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>除了认为后续影响不大，看好美国市场是众多从业者哪怕面临禁令的不确定性、仍不愿意舍弃这块市场的另一个重要原因。</strong></p>
-  <p>有服务商表示，他们将欧美市场作为主要的出海战场，主要是相较东南亚市场来说，觉得美国的毛利润较高、整体消费力也强。</p>
-  <p>2024年官方数据显示，TikTok Shop美区内容场GMV总体飙升了557%，日支付用户数增长超3倍；内容电商创作者数量同比增长10倍，美国能够拉动销售的电商达人数每季度均保持70%以上增速。</p>
-  <p>而在娱乐直播业务板块，美区同样是重要的市场。某娱乐公会的负责人表示：“美区我们放弃不了，都做到非常靠前的增速规模了，不可能放弃的。”</p>
-  <p>如今，TikTok在美区还有90天的缓冲期。90天后，TikTok何去何从，仍是未知数。</p>
-  <p>但商家、服务商及娱乐公会们身处其中，都在期待一个令人满意的结果。“我们还是比较乐观的。”最后，该服务商说，“但还是走一步算一步吧。”</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/HJwahwfQCIXq2sIX7a8S_A" rel="noopener noreferrer nofollow" target="_blank">“新播场”</a>，作者：场妹，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131267128826627</id>
-            <title>Tiktok再续命，出海卖家火中取栗这两年｜深氪</title>
-            <link>https://www.36kr.com/p/3131267128826627</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131267128826627</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 01:30:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: <Tiktok, 跨境电商, Temu, SHEIN>
-<br>
-<br>
-总结: Tiktok在美国面临封禁的威胁，但在短暂下架后恢复服务，出海卖家们依然乐观，认为Tiktok提供的机会珍贵。尽管面临不确定性，卖家们选择积极备货，期待抓住早期红利。Temu和阿里速卖通通过全托管模式吸引卖家，推动跨境电商的快速增长。SHEIN则在Temu的冲击下调整策略，保持自营模式以确保利润。整体来看，跨境电商市场竞争激烈，卖家们需在复杂的国际环境中寻找生存与发展的机会。 </div>
-                        <hr>
-                    
-                    <p><strong>文｜</strong>张子怡 袁斯来</p>
-  <p><strong>编辑｜</strong>袁斯来 杨轩</p>
-  <p>Tiktok在美国第三次面临封禁时，又暂时绝处逢生。</p>
-  <p>2025年1月19日，特朗普延缓对Tiktok的禁令。在短暂下架十多个小时后，在红人们发表“洒泪挥别”感言，在卖家傻眼漂在海上的货怎么办时，Tiktok又恢复了在美国的服务。</p>
-  <p>出海卖家们赌赢了，暂时。</p>
-  <p>离Tiktok“不卖就禁”的禁令生效还有5天时，Tiktok的招商会照常在深圳举行，卖家、服务商挤得密密麻麻。参会卖家对36氪回忆，会上没有人讨论封禁相关的事，“大家在说旺季如何备货，怎么做内容矩阵。”</p>
-  <p>无论有多少坏消息，出海卖家们总是选择性地去看光明的一面。</p>
-  <p>封禁就在眼前时，一张来源不明的截图还在圈子里疯传：三个参议员和一个众议员宣布立法延长TT禁令期限。实际上，只是一次没有任何效力的呼吁。</p>
-  <p>乐观，也许也是TT员工对卖家的刻意打气。有卖家问Tiktok客户经理封禁的事，对方说：内部讨论是没有任何担心，甚至老大们还定了很激进的增长目标。两个人讨论着2025年如何大干，卖家也决定积极一点，多为促销备货。</p>
-  <p>卖家们似乎在刻意忽视悬在头上的利剑，喧闹中有些虚张声势的味道。“其实我们也没有办法去左右，也没有什么能做的事情，就只能等着。”一位卖家对36氪说。</p>
-  <p>但商人的执着是：坚持到最后一分钟，赚到最后一分钱。</p>
-  <p>在国内社会消费品零售总额增速不到3%的境况下，对于电商卖家，Tiktok提供的机会太过珍贵。</p>
-  <p>2024年前三季度，根据海关总署测算数据，中国跨境电商进出口同比增长11.5%，高于同期外贸整体增速6.2%。其中，Temu、Tiktok&nbsp;shop、速卖通和SHEIN的GMV合计已超过千亿美元。这四家平台被媒体冠上新名号：“跨境四小龙”。</p>
-  <p>“未来十年都不会再有一家巨头企业，会从0到1的做跨境电商平台，并在前期不断给卖家流量，卖家必须抓住这波早期红利。”一位同时做Tiktok Shop和Temu的亚马逊卖家对36氪表示。</p>
-  <p>她本来在央企上班的弟弟，被她鼓舞做Temu，一个月就做到几十万的业绩。“他在跨境电商半年赚的钱，比他过去几年打工赚的都多。”</p>
-  <p>无数出海卖家跟着四小龙冲锋。他们相信，无论国家之间如何博弈，高性价比的中国商品永远有市场。</p>
-  <p>然而，万亿规模跨境电商表面的喧嚣之下，这场财富传奇的叙事已经迥异。Tiktok在美国数次命悬一线的境遇，是这一代中国企业全球化的命运缩影。</p>
-  <p>不要忘记，被很多卖家视为救星的特朗普，上个任期留下的执政“成果”是关税、孤立主义和强硬对抗。五年前的夏天，正是他签署了封杀Tiktok的第一张行政命令，开启此后对Tiktok的围猎。</p>
-  <p>毫无顾虑的扩张时代结束了。2025年，每个有志于全球化的中国企业，都要学习在敌意和对抗中，在掣肘和羁绊中，与世界共舞。</p>
-  <h3><strong>01 Temu和阿里，打开新局面的两个关键决策</strong></h3>
-  <p>卖家林峰在Temu上的订单冲到两万单时，他只觉得：“震惊”。</p>
-  <p>这完全是预料之外，过去很多年，他一直在亚马逊上挣些安稳钱。 2023年，他为仓库里的滞销品头疼不已，在朋友建议下，把尾货放到Temu上处理，没想到成为爆品。“在亚马逊最多一个月卖一两千单，但到了Temu，销量翻了十倍。”他对36氪回忆。</p>
-  <p>出海卖货的世界，增长从未像过去两年这样凶猛。</p>
-  <p>如果说，出海过去是由亚马逊主导的、匀速增长的世界，但在国内内需消费、互联网公司经营环境双重承压之下，字节跳动、阿里、拼多多这样的超级公司，带着前所未有的人才、欲望和钱，砸进这个市场。</p>
-  <p>当蒋凡2021年调动到阿里国际业务时，这个板块还处于阿里集团边缘。但在他的重新梳理之下，阿里速卖通2022年底推出了一个对整个跨境行业都至关重要的新模式：全托管。</p>
-  <p>这种新模式对卖家来说极其简单：只需要将货备至平台的国内仓，跨境生意就算完成了。后面所有的运营、履约、客服等工作都由平台来做。</p>
-  <p>一位业内人士对36氪说，这种洞察部分源于疫情期间的观察：全世界都仰仗中国产能之时，大量出海卖家爆单，但是却卡在海外物流上。漂浮在海外港口无法进港的货轮、暴涨的船运价格都是疫情期间的奇观。</p>
-  <p>新模式下，平台一侧需要投入前所未有的精力，承担高额的风险。但阿里的跨境业务由此开启新一轮增长。根据阿里财报，阿里国际数字商业集团2023年第四季度整体订单同比增长24%，尤其有赖于速卖通Choice频道——也就是“全托管”业务所带来的订单增长。收入同比增长更是高达44%。</p>
-  <p>几乎是前后脚，拼多多的海外业务Temu也力推“全托管”模式：朋友圈里，拼多多红色的跨境业务招商广告。他们打出“0佣金，0门槛”的旗号。</p>
-  <p>而Temu更是用钱把跨境业务在美国砸出一个新高潮。2023 年2 月，在北美市场发展5个月后，它登上每秒耗资23万美元的美国超级碗广告。这是一个大胆但是理性的决策：美国和中国是全球最大的两个电商市场，断崖式甩开所有其他国家。</p>
-  <p>老卖家们意识到，大玩家带来了跨境电商行业新一轮的疯涨。</p>
-  <p>在“跨境四小龙”极速膨胀的时期，“震惊”成为卖家的习以为常。和张胡旺的3天从0到2000单相比，一款产品在Temu上最快只用半天销量就能达到亚马逊上3到6个月的水平。 “真是风口，你随便上个什么都能卖爆，真的夸张。”有卖家回忆。</p>
-  <p>过去几十年，欧美跨境电商格局已然定型。亚马逊一家独大，全球销售额接近6000亿美元，和第二名拉开断崖式差距。但以Temu为标志的中国对手作为闯入的野蛮人，打破了僵局。</p>
-  <p>新玩家们带着中国“卷”法，以及前所未有的全球化渴望。以Temu为例，其早期关键成员来自多多买菜，这些人都是经历过国内一城一池血腥竞争的老将。虽然一开始，他们跨境经验相对有限，“当时的领导对产品资质申请、商品贴码标准这类问题，都要问下面的执行员工。” 一位接近行业人士告诉36氪。</p>
-  <p>大大小小的出海卖家老板被卷入这波出海洪流中。凡是在Temu招商会上留过联系方式的人，都能接到招商经理的电话。凌晨3、4点，卖家都会收到他们的信息。电话里的声音永远精气神十足：有没有品啊？会不会考虑一下我们？有卖家会困惑：他们是不是24小时不用睡觉？</p>
-  <p>到2023年底，根据SimilarWeb的数据，Temu的独立访客数达到4.67亿，排名全球电商网站第二。而Sensor Tower的数据显示，截至2024年8月，Temu的全球用户数量已经达到亚马逊的 91%。</p>
-  <p>爆品，是老板们跟随着Temu冲锋经常得到的奖品，也会在坊间口口相传的榜样。</p>
-  <p>有意思的是，单量暴涨带来的多巴胺消退后一算账： Temu订单比亚马逊多了十倍，怎么整体利润还不如亚马逊高？林峰对此困惑不已。</p>
-  <p>背后的奥秘很简单：对卖家的核价——这是Temu爆单的武器。</p>
-  <p>一般来说，Temu会要求卖家拿出比1688和拼多多等国内平台更低的价格 。一旦产品成了爆款，卖家的后台会持续收到提示降价的橙色弹窗。卖家们当然不想降价，但为了获得更多流量，也必须降价。</p>
-  <p>Temu的某次招商会上，有卖家将“核价”称为“威胁”，招商经理面带微笑地回答：这怎么会是威胁呢，你不想降价关掉就好了。然而，那些已经压了大量货在仓库的卖家，如果货品同质化高，他们必须降价出货腾库。</p>
-  <p>除非有独特的货品。 “直接去卖标品的话，就是很恶性的竞争，如果去卖一些市场上找不到的一些产品，还是有优势的。” 林峰表示。</p>
-  <p>80后林峰在跨境卖家中不算年轻，早年从体制内辞职后，他开始做几年亚马逊，积累了不少工厂人脉。</p>
-  <p>他去安徽考察时，和四个做外贸的老板吃饭。几个人都在阿里国际站做B端生意，有人还有规模不小的海外工厂。席间说起Temu，老板们竟然都很茫然：这是什么？没听说过。</p>
-  <p>这让林峰看到了机会。“他们（工厂老板）想转型，那我可以负责技术（开发产品）和Temu的运营，工厂负责生产。”</p>
-  <p>他一次次往返宁波，和工厂商量怎么做出市场上找不到的产品，其实就做些小改动。“比如说自行车的尾灯，在上面增加一个蓝牙模块。整个成本增加不了多少，但附加值就会高。” 林峰告诉36氪。</p>
-  <p>因为卖的不是大路货，虽然没有定价权，林峰还是能拿下8-12%的净利润。如果平台免掉佣金，林峰的日子比做亚马逊时还好过。他慢慢放弃亚马逊，专心做起Temu。</p>
-  <p>林峰以为这样的舒适区还可以呆很长一段时间。 “我是一个非常小的卖家，挣点钱，养活小团队，也没什么问题，所以我很想这样做下去。”</p>
-  <p>其实，根本没有一直舒服挣钱的好事。</p>
-  <p>Temu的起量离不开其疯狂推行的“全托管”模式——这个门槛极低的模式，吸引很多没有运营和履约能力的卖家，甚至素人也能进来玩一票。</p>
-  <p>但全托管有无法克服的短板。7天到10天的物流时长，让习惯亚马逊（FBA）5天以内到货的美国消费者颇感不满。全托管模式下，物流运输、仓储全部依赖平台协调，发生过数次“爆仓”事件，平台规模越大，物流资源、仓储资源便越是紧张。</p>
-  <p>而且，全托管的商品采用空运物流模式，以货值较低的轻量中小件产品为主，限制了产品丰富度。</p>
-  <p>平台大包大揽式的服务只是权宜之计。2024年，无论是Temu还是阿里速卖通，几乎所有跨境平台都从“全托管“转向“半托管”。</p>
-  <p>根据36氪了解，多数平台的招商和买手已转去半托管团队。在Temu招商会上，招商经理们直言，流量扶持更多会倾向半托管。</p>
-  <p>做全托管的林峰发觉，倘若自己在Temu上的产品同平台上的采用半托管模式的商品有重合，销量会下降三成。很多早期加入的全托管卖家发现自己已经失宠。</p>
-  <p>林峰不敢承担把货压去海外仓库的风险，还坚持全托管的模式，但核价正变得越来越严苛，甚至有款产品给出的核价比成本还低40%。他开始期待亚马逊的低价商店上线，“Temu上面可以让我更加容易挣到钱，但是我不知道会不会长久。”</p>
-  <p>大卖家们转为半托管后，最头疼的恐怕是Temu海外物流的短板。</p>
-  <p>一个亚马逊头部渔具品牌原本只是想在Temu试试水。他们的货很多放在“四小龙”之一的仓库，没想到对方拒绝给Temu发货。而且还拦截了卖家手机号码信息，导致配送失败。</p>
-  <p>这种动作在平台竞争中越来越常见，这个大卖因此被收了5倍罚款。最终纠缠了一个月，发货问题还是没有解决，上架的产品根本无法售卖。</p>
-  <p>半托管模式下，海外货物仓储、物流等环节都存在不可控性。</p>
-  <p>很多人或许忽视一点：中国拥有世界上最成熟和便宜的物流体系。这是拼多多、淘宝、京东这类巨头电商得以成长的基础。</p>
-  <p>和国内四通一达全年无休不同，海外“最后一公里”交付有太多变数。为了保证体验，一些平台对卖家的要求是48小时内、物流信息必须上网，但在国内能轻易实现的事情在海外则困难重重。</p>
-  <p>中国与北美的物流习惯不同。国内的模式是快递员在揽收后，立即生成快递单号，便于卖家控制发货时间。北美国家的物流公司则是快递员开车到海外仓拉回货物到其所在的快递站点，再一件一件的用扫描枪清扫货物。</p>
-  <p>海外仓和快递点位置距离各有不同，有的快递员提完货物回到快递点时，会到点下班，第二天可能还会处理别的工作，货物的物流发货时间则被一次次延长。</p>
-  <p>当然，一些快递员收点好处费，可以在海外仓帮忙扫描，不过也有很多人宁可少挣钱也不愿意加班。</p>
-  <p>一旦错过发货时间，平台的处理办法是罚款。“有的客户一天的订单300单到500单，48小时发货超时会被罚一万到八万。” 一位海外仓公司管理层员工告诉36氪。</p>
-  <p>即便有上面让卖家抓狂的核价弹窗以及随时可能遭遇的“最后一公里”配送罚款，现实情况是，大量的卖家仍然愿意留在Temu上。</p>
-  <p>原因无他：Temu还在大方烧钱投流。</p>
-  <p>过去，一些做独立站的卖家要花费销售额的一半去投流，将运营交给Temu后，虽然罚款有时显得苛刻，但省下了投流费用，总帐算下来不会亏损。</p>
-  <p>Temu招商经理在卖家面前底气最足的是，Temu在投流上很大方。2024年第二季度，外媒报道称，Temu是美国第五大数字广告客户，2023年同期为第11名。根据摩根斯坦利预估，2024年Temu的广告费将达到30亿美元，以至于Meta员工开玩笑：我们应该给Temu送张高额礼品卡表示感谢。</p>
-  <p>一位做工具的卖家了解到，Temu内部做投流的时候，不会用ROI考核投手，而是要在一定时间，“把给你的预算必须花掉。”</p>
-  <p>在低价为主打的Temu，他许多价格400多美元的产品照样出单，所以对同行的抱怨颇不以为然，“很多卖家就知道叫苦连天，但是他们没有去算过这笔账，其实是把投流费用省下来了，之前要给很多供应商，现在就给Temu一家。其实Temu拿多钱去帮产品投广告了。”</p>
-  <p>再说，作为大平台，Temu的投放策略远比个人有效。一位服务商告诉36氪， “Temu会具体要求投多少钱，获得多少次曝光。他们的数据分析能力太强了。”</p>
-  <p>Temu对36氪否认了上述数据和说法。</p>
-  <h3><strong>02 封杀阴影下，Tiktok的快进游戏</strong></h3>
-  <p>“Tiktok非做不可！”2024年年初，服务商Luis不止一次听到客户这样说。Luis理解对方的想法，在国内抖音电商的示范效应下，在Tiktok已经覆盖一半美国人口的态势下，“越早越好，先到先得。”</p>
-  <p>在周受资舌战国会山的2023年，据外媒报道，Tiktok Shop该年8个月间在美国已经亏去5亿美元。很多卖家记得Tiktok早期极其爽快的补贴政策。一批人靠补贴大赚特赚。“又有仓储补贴、又有货物补贴、又有流量补贴，吃补贴吃得很爽。”以至于有平台方人士感慨：Tiktok的卖家有五成赚的是官方补贴的钱。</p>
-  <p>一方面，Temu入场后，拉快整个行业的节奏，另一方面，有分析认为，面对Tiktok在美国被封禁的威胁，字节力图通过绑定更多的利益，为自己赢取更大的博弈空间——不久前，Tiktok称已经有700万美国商家在利用Tiktok谋生，一旦关闭，一个月内他们会损失10亿美元收入。</p>
-  <p>2024年初美国通过对Tiktok的“不卖就禁”法案，但Tiktok的电商业务2024年反而在加速。36氪曾经独家报道，Tiktok2024年电商GMV目标至少翻倍，要达到500亿美元。</p>
-  <p>加速奔跑之下，Tiktok降低了开店门槛。甚至很多没钱没经验的素人也加入进来。“现在的大学生白天在你这里打工，晚上人家回去刷信用卡，5000块就能做Tiktok电商，你说谁能不焦虑？”张胡旺对36氪说。</p>
-  <p>数据分析平台FastMosss显示，2024年6月对比半年前，美国Tiktok店铺总量增长达47%。zoey记得，“2024年但凡有做独立站、做 Amazon 的，稍微有这么一点量的，或者哪怕啥都没做，都疯狂地做 Tiktok。”</p>
-  <p>中国卖家蜂拥而至，迅速给美国KOL们带来商业化机会。“卖家的数量比红人的数量还要多。”有业内人士开玩笑说。红人是Tiktok上卖货的关键。一开年，一家消费电子品牌的海外负责人zoey就感到，Tiktok美区的红人变得紧缺。</p>
-  <p>无论什么量级的美区KOL，似乎邮箱都是爆满状态。过去他们寄去样品，催促下对方一周内能发视频，现在至少一个月。“他们根本看不过来、选不过来、拍不过来。”zoey回忆。</p>
-  <p>zoey算了一笔账，除了投流、红人费用，还要送样品，而且样品的运费还不便宜，手里如果要宽裕点，每个月的预算起码10万美元起步。“2024年开始，如果你的钱不够，那就不要玩，玩的话没几个人挣钱。你要接受至少三个月到六个月的亏损，不然别入场。”zoey说。</p>
-  <p>但如果未来的生命长度不可预期，卖家怎么做长期投入？</p>
-  <p>白牌商家在Tiktok shop这个混沌生态里摸到另一个赚钱门道：撞到爆品。</p>
-  <p>无需顾及品牌，大量投放单品是白牌卖家的长项。每个月，张胡旺会试10个以上的单品，虽然会积压库存，但一旦押中爆品，会迅速大赚一笔。据他说一个月在Tiktok上，能卖出2000多万元。</p>
-  <p>这也是Tiktok shop兴趣电商的诱人和残酷之处，商品起量掉量转换极为迅速，单款商品的生命周期会以星期数计算。虽然卖家心头大致有些热门品类，比如当下的保健品、美妆，但身在国内的卖家在海外市场是踩中某个爆款还是大坑，其实要靠运气。</p>
-  <p>如张胡旺下半年推了一款头发护理产品，又寄样品，又找机构拍视频，最终一个月卖了100万美元，算是预料之中的成功。与此同时，他以为能轻易走量的瑜伽服爆冷，亏掉上百万，“工厂好找，谁都能接触到。结果最后尾货全到Temu上清掉。”他回忆。</p>
-  <p>在达摩克利斯之剑高悬、在未来不知道有多长的2024年，做Tiktok的商家要有不停截断亏损、偶尔让暴利奔跑的觉悟。</p>
-  <p>基于中国经验，直播是快速做高交易额的秘技。Tiktok shop2024年的策略，也快速转向扶持红人直播间、给予流量倾斜。一位头部大卖家告诉36氪，2024年4月后，随着Tiktok增加对直播流量的倾斜，直播占GMV的比例从4月的5%涨到5月接近20%。但在她看来，这种变化是流量分配带来的增长，而非消费习惯的变化。</p>
-  <p>虽然心急如焚，但让中国卖家感到“绝望”的真相一点点浮出水面：抖音直播间的销售奇迹，无法快速在海外复现。</p>
-  <p>无论在英国还是美国，Tiktok有意树立“百万美金（英镑）直播间”的标杆案例，美妆品牌和美妆红人也都缔造过百万美金的销售成绩。</p>
-  <p>对比国内抖音平台，这点销售额也就是个腰部主播的水平，“分分钟可以达到”。一位卖家用“野生”形容欧美达人的生态，因为很多达人对商业化完全不了解，“连挂车（在直播间放购物链接）都不知道。”服务商必须从零开始教红人如何植入链接，如何带货。</p>
-  <p>有些红人还会觉得“钱很俗”，如果商家的品不符合要求，他们不会轻易合作。“我们在国内说直播是一个收割场，在美国暂时都还不成立。”一位卖家表示。</p>
-  <p>商业文化、地区法律之间的差异也很难快速求解。比如，因为海外有更严格的隐私政策，APP不能记录用户的信息和行为，卖家只能拿到粗糙的投放标签通投。“颗粒度和准确性和抖音完全不可比。”一位卖家评论。</p>
-  <p>直到2024年下半年，Tiktok的广告投放标签才逐渐精准，并推出“商品GMV max”功能，运用AI帮商家推送广告，甚至能选择ROI目标。商业化成熟的同时，费用也更高。“现在做Tiktok的整体费用要比亚马逊还高，只做这一个平台很难赚到钱。”zoey告诉36氪。</p>
-  <p>除此之外，Tiktok还要从头教育那些“保守”的海外互联网用户。</p>
-  <p>一位户外产品卖家在Tiktok英国区试水时，亏掉一辆法拉利，“欧洲人消费习惯非常固化，不愿意尝试新的营销事物。”直播购物对于他们太过新鲜。他们会用亚马逊、用独立站、去线下店，但不会在直播间冲动购物。</p>
-  <p>虽然着急，但是结果并不完全由Tiktok或者商家自己掌控。彭博社预估2024年Tiktok美国商业销售额为175亿美元。然而，去年1到5月，第三方数据平台Tabcut显示， Tiktok在美区的全闭环GMV仅不到20亿美元，仅仅达到十分之一。</p>
-  <p>在也许时日无多的预期下，在陌生的海外环境中，Tiktok只能不断快速调整平台政策。一位卖家形容Tiktok shop的政策是“就是差不多一周一小改，一个月一大改。”</p>
-  <p>2024年上半年，全托管商家遇到政策大调整。原本给30%佣金，让商家自己联系达人带货，忽然官方要求商家在官方后台精选联盟统一操作。很多商家只能一个个重新找达人。</p>
-  <p>也有接近Tiktok的人士告诉36氪，平台为了更好地支持商家商品销售，鼓励有能力有意愿的商家去建联达人，自发推动带货。但是不涉及商家佣金方面的要求；它们没有后台联盟功能开放给全托管商家去专门建联达人。</p>
-  <p>“一开始规则比较放宽，然后你就开始备货，当你备大量的货，咔，规则改了，然后造成大量的库存。”上述卖家形容，“第一波上去的这些人大概率会死得挺难看。”不过他也能理解平台的苦衷。</p>
-  <p>但即使在封杀的阴影里，仍然有大量的冒险家跟随Tiktok的节奏冲锋，如同按下快进键的游戏还在进行。</p>
-  <h3><strong>03 谁是SHEIN们的敌人？</strong></h3>
-  <p>在Temu出现之前，SHEIN是出海市场最引人瞩目的创新者。</p>
-  <p>整个快时尚行业在它的冲击下毫无招架之力，2023年，SHEIN销售额首次超过Zara母公司Inditex集团。业界当时评论：Zara的黄金时代过去了，现在是SHEIN的时代。 这家公司也在谋划上市。</p>
-  <p>Temu的横空出世和凶悍扩张打乱了SHEIN的节奏。</p>
-  <p>有一段时间，一些SHEIN员工经常能听到Temu的名字，“一些团队对标Temu在打，包括选品的策略、价格的策略。”一位前SHEIN员工告诉36氪。</p>
-  <p>两个对手交锋还到了法庭。一些小动作也会闹出诉讼，比如SHEIN声称Temu通过X平台上的山寨账号冒充自己，把客户引流到Temu网站。 Temu则控诉SHEIN“利用市场支配力量强迫服装厂商与之签订独家协议，阻止他们与Temu合作”。</p>
-  <p>在如此激烈的拼抢中，在成立近10年后，SHEIN打算从一个服装独立站转型为综合跨境电商平台。</p>
-  <p>“SHEIN是品牌自营的逻辑，只需要考虑品牌的成本就行了；但平台需要更多商家贡献GMV和佣金，前期一定会有补贴和投入。”上述行业人士表示，自营的逻辑和平台电商的逻辑很不一样。</p>
-  <p>无论是卖家还是员工，都能体会到SHEIN的犹豫。</p>
-  <p>重视ROI的SHEIN，只能一点点做验证，内部有些部门存在对照测试工具， 老板“反复看数据，因为对一些新的品类此前平台没有太多积累，所以需要不停testing来指导后端卖家的补货和库存。也会看10%的流量会怎样，20%又会怎样。 ”</p>
-  <p>矛盾的是，当得到确定的结果时，市场的态势可能已经变化，地盘也被速度更快的对手抢下。一位行业人士告诉36氪，一些新商家同时做SHEIN和Temu，前者三个月每月保持1000单的销量，已经是平台前20%的水平；在Temu上同样的位置，单量要翻五倍。</p>
-  <p>SHEIN的另一个短板是，资金弹药有限。它没有大厂资本做支撑，虽然在2023年拿到新一笔融资，但上市融资之路反复受挫。</p>
-  <p>利润是SHEIN的底线，以至于愿意牺牲短期的增长。有员工记得，2023年黑五正好碰到全球物流费用上涨，老板给他们下的死命令不是做营销，做爆发，而是“保利润”。</p>
-  <p>同一年，SHEIN的定价收归中台部门的核价组，招商经理给不到优惠空间。即使卖家们拿出其他平台的价格截图谈判，他们也只能答复：这个价格我们做不了。“聊的机会都不给。”一位卖家回忆。</p>
-  <p>但SHEIN的优势也正是来自于此。“SHEIN是从来是没有亏过钱的，加上给商家结款迅速，所以它是一个非常在意利润和现金流的一个公司，这样才可能实现对供应链的控制。” 一位行业人士告诉36氪。</p>
-  <p>正因如此，在和Temu的争夺战中，无论是资金还是战斗力，SHEIN都有诸多掣肘。据外媒报道，SHEIN2024年上半年的收入增速从2023年的40%降至23%，利润下降了70%以上。</p>
-  <p>SHEIN决定退回自己擅长的领地。“大家可能也知道它们并不是一样的公司了。”上述行业人士表示。熟悉的服装品类更多出现在前端页面，品类周大促也会分配给服装类目最基础的流量比例。</p>
-  <p>它在自营品牌和外部商家之间划出了分明的边界。</p>
-  <p>一直以来，SHEIN招商品类限制在四小龙中最严格，招揽的主要是非核心品类。“只对定点品类招商，它毕竟要保自营的那个盘子。”上述行业人士分析。</p>
-  <p>早期SHEIN半托管招商主要针对一些无法空运的大件产品，重量要求在400g以上，服装、假发这样的核心品类并没有开放。直到2024年7月，SHEIN才开放服装品类的半托管，但主要是查漏补缺，比如大码女装、运动服饰。“服装整体百分之八九十还是以自营模式为主。”一位接近SHEIN人士表示。</p>
-  <p>看起来，SHEIN打算保持相对保守的姿态。根据36氪梳理，2024年，Temu 定下GMV目标翻3倍， 而SHEIN的GMV增速目标是40%。</p>
-  <p>有行业人士认同SHEIN这个策略的合理性，“服装护城河已经够高了，Temu也做不过它。”不少行业人士回首看，对Temu和Shein闹上美国法庭表示不解：相比公司间的竞争，充满敌意的国际政治环境才是更致命的。</p>
-  <p>Tiktok如今很难说在美国已经安全了：它被最高法院判定违法已经成事实，特朗普对禁令只是暂缓。面对特朗普要求Tiktok出售50%股权的新要求，字节恐怕也很难抉择——几年前，中国民众已经表明了很难认同这种骑墙的站位。</p>
-  <p>对跨境四小龙来说，与其说敌人是彼此，不如说最大的威胁在不再开放的全球化氛围。</p>
-  <p>出海卖家们目前最焦虑的就是，特朗普是否会带头堵上免税小包的漏洞？过去，欧盟对150欧以下的小包裹免征关税，在美国，这一免征额是800美元。 但2024年7月，欧盟表示将取消小包裹的关税豁免，9月，美国也宣布要调整政策。</p>
-  <p>Temu已经主动放缓在美国市场的步伐，36氪曾报道，Temu在美国接近盈利时，希望将美国的GMV占比从60%降到30%，而力图提升其他区域业绩，比如欧洲。</p>
-  <p>过去几十年，大量出海卖家依赖开放的全球贸易体系完成了财富积累。在深圳，36氪听到这些卖家们仍然野心勃勃地讨论如何“逆天改命”，但很多人没有意识到，前路会比过去曲折许多。</p>
-  <p>在美国一场展会上，参展的一位中国卖家记忆深刻：当Tiktok官方团队在展会上拍摄视频时，有美国本土品牌商家拒绝跟Tiktok有任何形式上的联系，拒绝出现在画面中。</p>
-  <p>当许多人感动于美国Tiktok“难民”在小红书上的分享和交流之时，或许忽略了，世界也是分裂的。“美国人对于Tiktok的态度相当两级，一部分人会拥抱它，认为就是自己的社区；另一部分人不信任这个APP，关于它乱七八糟的消息都有人信。”上述中国卖家告诉36氪。</p>
-  <p>跨境平台们和卖家自身的努力只是一方面，还要考虑历史的进程。“这都不是我们能控制的，只能观望。”一位卖家对36氪说，这是一种真实的无能为力。</p>
-  <p>（应采访对象要求，林峰、luis、张胡旺、zoey为化名，36氪作者胡依婷对本文亦有贡献）</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131778392300289</id>
-            <title>福建国资孵化，海西新药IPO</title>
-            <link>https://www.36kr.com/p/3131778392300289</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131778392300289</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 01:28:23 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: <福建省, 海西新药, 集采, IPO>
-<br>
-<br>
-总结: 福建省三大国有资产平台联合成立了海西新药，该公司已向港交所递交招股说明书，计划上市。海西新药的业务增长与国家药品集中采购密切相关，集采中标药物占其收入的绝大部分。公司成立于2012年，依托福建国资和药界科学家的支持，逐步发展。尽管在仿制药领域取得了一定成绩，但仍面临市场份额和客户依赖的风险。未来，海西新药计划通过研发创新药物和扩大市场影响力来实现更高的营收目标。 </div>
-                        <hr>
-                    
-                    <blockquote>
-   <p>福建省三大国有资产平台（大同创业、福州投资及华侨实业）联合康心汕成立了海西新药。</p>
-  </blockquote>
-  <p>今年，福建省内首个冲刺港股IPO的企业来了。</p>
-  <p>日前，福建海西新药创制股份有限公司（以下简称“海西新药”）已经向港交所递交招股说明书，拟主板挂牌上市，华泰国际和招银国际担任联席保荐人。</p>
-  <p>这家福建药企是个相对特殊的案例，其业务增长和国家集采密切相关，是福建省内首个国家药品集中采购中标企业。集采中标药物已经成为业务支柱。据创投日报记者统计，<strong>从2022年到2024年9月，几款集采中标药物合计收入占总收入的比重分别为97.9%、92.8%、92.7%，均超过九成。</strong></p>
-  <h2><strong>福建国资孵化</strong></h2>
-  <p>海西新药创立于2012年，是由福建国资联合药界科学家成立的。2009年，福建省出台生物与新医药产业振兴实施方案，把生物医药产业作为战略性产业重点培育，并组织上海、北京等地的闽籍医药人才代表团来闽考察，研究组建一家创新药企。</p>
-  <p>原籍福建省莆田的康心汕就在邀请名单中。他1993年赴美留学，获得普林斯顿大学化学博士，曾在美国制药工业界任职。2008年，康心汕举家回国，加入浙江贝达药业有限公司担任首席药学家，直至2012年3月，任职三年半。</p>
-  <p>2012年3月，福建省三大国有资产平台（大同创业、福州投资及华侨实业）联合康心汕成立了海西新药，其中，康心汕持股25%，大同创业、福州投资、华侨实业各自持股37.5%、25%、12.5%。</p>
-  <p><strong>这三家国有资产平台分属福建省市两级国资。</strong>大同创业为福建投资开发集团的全资附属公司，华侨实业为福建省冶金（控股）有限责任公司的全资附属公司，它们都由福建省国资委管理。而福州投资则为福州市金融控股集团的全资附属公司，由福州市财政局管理。</p>
-  <p>在创立初期，省、市两级政府注入资本金3000万元，对康心汕相当重视。曾有福建省国资高管在采访中表示，天使投资主要看人，当时愿意投海西新药，正是看中他们的专业背景、创业精神和创新能力。</p>
-  <p>2017年11月，康心汕担任了海西新药的董事长。同年，公司股权激励团队持股成为第五个股东，国有股东把控股权转给公司团队。当时，三名国有股东将40%的股权以2000万的对价转让给康心汕。此后，<strong>康心汕成为公司的单一最大股东。</strong></p>
-  <p>在2018年以后，海西新药开始引入外部机构股东，经历多轮增资和股权转让，募集资金超过2亿元。最后一次增资发生在2022年7月，金东泓创投、鸿磐投资分别以1.3亿元、1150万元，合计认购488.19万元注册资本，每股成本28.98元。以此计算，海西新药的估值来到19.48亿元。是2020年12月增资后估值的3倍左右。</p>
-  <p>但康心汕及其投资一致行动人仍是海西新药的控股股东。截至2025年1月1日，控股股东合共拥有海西新药已发行股本总额约41.17%，包括康心汕直接持有的海西新药18.97%股权，泰瑞和投资直接持有的海西新药7.44%股权及Feng Yan直接持有的海西新药14.76%股权。</p>
-  <p>福建国资委通过华兴创业和福建医药集团，间接持股13.87%；福州市财政局通过福州创投持股6.96%。</p>
-  <h2><strong>靠集采崛起</strong></h2>
-  <p>这家2012年成立的药企在2020年才有首款获批上市的药物。2020年6月17日，治疗消化不良的枸橼酸莫沙必利片（安必力®）获得中国国家药品监督管理局批准上市，是全国首家按化学药品新四类获批的莫沙必利片。</p>
-  <p>创投日报记者了解到，化学药品新四类一般指境内申请人仿制已在境内上市原研药品的药品，强调与原研药品质量和疗效一致，即仿制药需通过一致性评价等要求，以保证与原研药在安全性、有效性和质量可控性等方面等同。首家按此获批，意味着该企业在仿制药研发和申报上处于领先地位，在研发技术、生产工艺等方面达到了监管要求，有机会在市场竞争中占据先机。</p>
-  <p><strong>安必力®的获批让海西新药推开了集采的大门。</strong>2021年2月，第四批国家药品集中采购结果出炉，海西新药安必力®以第二顺位中标，获得了包括北京、天津、内蒙古、吉林、江苏、安徽、广东、广西、海南和云南在内的十个供应省（区）订单。</p>
-  <p>根据灼识咨询的资料，2023年安必力®在中国以28.7%的市场份额在其产品类别中排名第二，并为海西新药贡献了1.46亿元的收入。</p>
-  <p>安必力®的成功让海西新药看到了集采的机会。此后，盐酸西那卡塞片（瑞安妥®）、氨氯地平阿托伐他汀钙片（海慧通®）、硫酸羟氯喹片仿制药（赛西福®）先后在第五、八、十批药品集采中成功中标，前两者已经覆盖了7个、9个省份的市场。</p>
-  <p>这四款产品是目前海西新药销售收入的主要来源，贡献了超九成的收入。康心汕在2021年接受采访时，对未来表达了相当乐观的期待。他称，企业采取“两步走”战略目标：从2020年上市第一个药品开始，每年约拿4个批文，头5年仿制药营收20个亿；2025年第一个创新药上市，并拓展国际市场，第二个5年实现营收50个亿。</p>
-  <p>不过，目前看来离康心汕的规划还是有不小的差距。招股书显示，<strong>2022年至2024年9月，海西新药累计实现营收8.79亿元，净利润3.02亿元。</strong></p>
-  <p>依靠集采，海西药业在很短的时间内实现了产品放量，商业化快速推进。但也带来了潜在的风险，在招股书中，海西新药坦言，倘若公司无法在招标程序中成功向中国公立医院及其他医疗机构出售其产品，公司可能会失去市场份额，对收益及盈利能力造成重大不利影响。</p>
-  <p>且海西新药还存在一定的大客户依赖。报告期内，海西新药来自前五大客户的收入占总收益的85.1%、73.3%、72.9%，其中来自最大客户的收益分别为1.25亿元、1.54亿元、1.63亿元，占比58.8%、48.5%、46.5%，几乎贡献半数收入。</p>
-  <p>此前，康心汕提到的“两步走”战略，指的是仿制药和创新药双线布局，在仿制药方面，重点布局首仿药、难仿药、高仿药的研发；在创新药方面，海西新药专注于开发具有全球市场潜力、临床需求明确的小分子创新药。</p>
-  <p>截至到目前海西新药还没有创新药获批，当前核心管线C019199已经开始临床II期试验，并预计将于2025年上半年推进至临床III期注册试验。</p>
-  <p>海西新药在招股书中表示，IPO募集所得资金净额将主要用于持续投资于研发以推进管线中的在研药物并丰富产品组合；提升研发能力并寻求合作机会；增强商业化能力并扩大市场影响力；改善生产系统；以及用作营运资金及其他一般企业用途。</p>
-  <p>特别声明：文章内容仅供参考，不构成投资建议。投资者据此操作风险自担。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/phN6tR81DpZaP_Bd3mQgOQ" rel="noopener noreferrer nofollow" target="_blank">“创投日报”</a>，作者：余诗琪，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131782679419652</id>
-            <title>微医“北大学霸”老板豪掷14亿股权激励，“AI医疗”再出一个IPO？</title>
-            <link>https://www.36kr.com/p/3131782679419652</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131782679419652</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 01:28:11 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 股权激励, 微医控股, 财务报表, 创业建议  
-<br><br>  
-总结: 周鸿祎建议年轻人通过创业和股权激励实现财富自由。微医控股在2021年至2024年上半年累计支出超14亿元用于股权激励，尽管年收入达到18亿元，但三年半累计亏损超80亿元。微医通过AI技术和数字医疗平台提供医疗服务，尤其在糖尿病管理方面取得显著成效。公司面临高昂的行政和研发成本，股权激励主要针对高层管理人员，普通员工则更依赖现金薪酬。尽管股权激励有助于吸引核心人才，但财务压力依然显著，负债总额已达232.69亿元。 </div>
-                        <hr>
-                    
-                    <p>“工资只能解决养家糊口的问题，想实现财富自由，最好的办法就是参与创业拿到股票。”这是360创始人周鸿祎对年轻人们提出的建议。</p>
-  <p>对于“打工人”来说，最有可能的“造富”方式莫过于股权激励。如今，有一家堪称“打工人向往的神仙公司”——<strong>微医控股有限公司（下称“微医”），在2021年至2024年上半年，股权激励支出累计超14亿元，让外界直呼“够豪气”。</strong></p>
-  <p>‍‍‍‍‍‍‍不仅派发股权，微医还瞄准了IPO大门。公司年收入18亿元，连接了1.15万家医疗机构和31.8万名医生，<strong>但却三年半累计亏损80.78亿元。</strong></p>
-  <p>香颂资本董事沈萌指出，<strong>以股份替代现金的方式，来实现费用资本化，某种程度上属于人为调整报表，并不是多数企业常用的方式。</strong></p>
-  <p>那么，豪派14亿元股权激励会对微医的报表有何影响？微医的员工是否真的能一夜暴富呢？</p>
-  <h2><strong>“微医”年入18亿元，三年半亏损超80亿元</strong></h2>
-  <p>在中国，心脑血管疾病、糖尿病、癌症和慢性呼吸道疾病已成为主要死亡原因。这些慢性病患者需要长期监测、持续治疗以及精准的用药管理，但高昂的费用让许多患者面临经济压力。</p>
-  <p>为了减轻患者负担，国家将<strong>慢性病列为门诊特殊病种，提供高于普通门诊的医保报销比例。</strong>这一政策涵盖了诊断、治疗相关的用药和服务等方面。不过这些医保钱如何才能花得既有效又合理？</p>
-  <p>微医通过其AI技术提供了解决方案。由于糖尿病患者数量庞大且持续增长，2023年已达1.43亿人，<strong>微医选择以糖尿病为切入点，率先在天津启动试点项目。</strong></p>
-  <p>微医的主要收入来源分为<strong>AI医疗服务</strong>和<strong>数字医疗平台</strong>。AI医疗服务是通过“数字健共体”实现的，这一模式始于2020年微医与天津市政府合作的项目。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_c771285be7154f9eb2555c5b7b8f6d75@1743780481_oswg347962oswg1080oswg794_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：《招股书》</p>
-  <p>数字健共体利用微医的互联网医院，将医疗机构、医保基金和服务提供商连接在一起。患者在基层医疗机构分诊后，AI医生会分类诊断，提供用药指导和处方审核，还能根据患者健康数据生成个性化诊疗方案。截至2024年上半年，微医已审核820万张处方，处方合规率从2021年的95.76%提高至98.72%。</p>
-  <p>具体看，公司通过健共体提供的AI医疗服务包括：<strong>健康管理会员服务、云药房和增值服务三方面。</strong></p>
-  <p>其中，<strong>健康管理会员服务</strong>是微医增长最快的业务。2022年、2023年及2024年上半年（下称“报告期”），该服务收入分别为0.39亿元、3.54亿元和10.32亿元，占当期收入2.9%、19%和<strong>56.8%</strong>。</p>
-  <p><strong>云药房</strong>则是通过优化药物配送流程，从而稳定基层医疗机构药品供应；<strong>增值服务</strong>则直接面向患者收费，包括线上医疗套餐、居家健康管理及检测报告解读等。</p>
-  <p>截至2024年上半年底，<strong>天津健共体已为约90万名会员提供多病种及糖尿病护理服务。天津市基层医院门诊人次增加了23%至50%，医保盈余率超过25%。</strong></p>
-  <p>因此，包括健康管理会员服务、云药房和增值服务的<strong>AI医疗服务业务</strong>成为微医的<strong>核心收入板块</strong>。报告期内，AI医疗服务收入从2.28亿元增长至14.4亿元，占总收入比例从23.7%升至79.21%。</p>
-  <p>微医的成功经验促使其模式扩展至其他城市。2024年，微医与贵阳市和银川市政府签订了合作协议，并计划在2025年与上海部分区域达成协议。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_6626ebf74ccc419c81b5b0877061724d@1743780481_oswg920915oswg814oswg597_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：罐头图库‍‍‍‍‍‍</p>
-  <p>相比之下，公司另一项<strong>数字医疗平台业务</strong>更像传统业务，主要涵盖线上问诊、复诊、健康管理套餐等服务。公司旗下有一款“微医”APP，用户可以通过该软件轻松挂号、咨询名医、线上复诊等，收入占比已从2021年的63.83%下降至2024年上半年的20.74%。</p>
-  <p>整体看，报告期内，微医控股的收入分别为9.62亿元、13.68亿元、18.63亿元和18.18亿元。公司表示，<strong>2023年业绩显著增长，主要得益于天津健康管理会员服务的成功推广。</strong></p>
-  <p>不过，盈利难题依然困扰着微医。2021年至2024年上半年，公司的净亏损分别为24.98亿元、37.18亿元和14.32亿元和4.3亿元，<strong>三年半合计亏损超80亿元。</strong></p>
-  <h2><strong>2021年豪掷8亿元激励员工，IPO前员工先富？</strong></h2>
-  <p>微医连年亏损背后，是高昂的<strong>行政开支、销售费用和研发成本</strong>，在这三项费用中，都存在<strong>一项“以股份为基础的付款”的支出</strong>。</p>
-  <p>所谓“以股份为基础的付款”，就是公司向某些选定的高管、员工或顾问用股票期权、受限制股份等方式替代现金支付奖励。</p>
-  <p>《招股书》显示，2021年至2023年及2024年上半年（下称“同期”），微医的一般及行政开支分别为10.9亿元、5.49亿元、4.64亿元和2.72亿元。</p>
-  <p>其中，<strong>“以股份为基础的付款”在2021年达到了6.32亿元，占比高达58%。</strong>虽然这一比例在2023年降至23.3%，但2024年上半年又回升至50.6%，金额达到1.38亿元。<strong>三年半累计下来，仅这一部分支出就已达10.15亿元。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_4449e5e75b2f41b3b26435dd5f5cafe5@1743780481_oswg340607oswg1080oswg708_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：《招股书》</p>
-  <p>而<strong>这些股份激励的主要对象是公司高层</strong>，主要包括执行董事、联席董事会主席、总裁兼首席客户官张君、首席财务官周晶波、高级副总裁彭彬彬、执行董事王永才及主要附属公司董事闫晋红、孙海洋、郑建敏、王歆等。这些人员在不同时期，获得了不同数量的股权激励计划授予的购股权。</p>
-  <p>2021年至2024年上半年，<strong>薪酬最高的五名人士</strong>合计拿到了2.36亿元、0.72亿元、0.89亿元和0.49亿元的股份奖励。2024年上半年，仅董事王永才和张晓春两人，就分别获得了0.38亿元和0.37亿元的股份奖励。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_f0df0f0dfb1c4fe2bb5a8b6c7e5ac008@1743780481_oswg230500oswg1080oswg589_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：《招股书》</p>
-  <p>对此，香颂资本董事沈萌表示，<strong>通过以股份替代现金实现费用资本化，在一定程度上属于人为调整财务报表，并非大多数企业的常规做法。</strong></p>
-  <p>而“费用资本化”的操作则会放大现金流和利润。他进一步表示，这样操作的好处是一方面<strong>可以减少财务报表上的成本</strong>，会计处理扩大利润空间；另一方面<strong>可以减少现金支出</strong>，缓解现金流动性压力。</p>
-  <p>北京一线证券公司工作的投行人士李亚辉表示，<strong>股份为基础的付款</strong>占比较高时，<strong>公司倾向通过股权激励吸引核心员工，减少现金流支出。</strong>而<strong>雇员薪酬及福利</strong>占比较高时，则表示<strong>公司更偏向以现金薪酬进行激励。</strong></p>
-  <p><strong>相比高层，普通员工的激励方式则更注重现金薪酬，尤其是在销售和研发团队中。</strong></p>
-  <p><strong>销售费用</strong>中，“以股份为基础的付款”占比从2021年的24.4%降至2023年的20.3%，金额也从1.5亿元降至0.6亿元。而销售人员的现金薪酬从2.08亿元降至1.2亿元，占比则从34%上升至41.1%。</p>
-  <p><strong>研发团队</strong>的情况类似，“以股份为基础的付款”从2021年的0.23亿元降至2023年的0.06亿元，占比从7.3%降至4.9%。与此同时，研发人员的现金薪酬从2.51亿元降至1.03亿元，占比从81.1%升至84.4%。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_6b708cd8fa6d4986a922154d673fb064@1743780481_oswg328453oswg1080oswg717_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：《招股书》</p>
-  <p>可以看出，以股份为基础的付款渗透在微医的每一个成本结构中。从行政到销售，再到研发。总的来看，2021年至2023年及2024年上半年，<strong>公司以股份为基础的付款分别为8.62亿元、2.6亿元、1.74亿元和1.57亿元，合计约14.53亿元。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_20888099dc234ce78a4611ac09358f3f@1743780481_oswg231577oswg1080oswg561_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：《招股书》</p>
-  <p>知名经济学家宋清辉表示，<strong>股权激励能有效激励员工，但如果设计不清晰或执行不规范，可能会引发纠纷。</strong>近年来不少互联网公司就出现了股权争议，这会影响公司声誉，导致高管和员工流失，甚至引发法律诉讼。</p>
-  <p>以上“以股份为基础的付款金额”主要来自公司的股权激励计划。根据《招股书》可知，自2006年起，<strong>微医已经推出了六轮股权激励计划，</strong>几乎每轮都在扩大授股规模。</p>
-  <p><strong>2006年计划</strong>授出483万股股份，激励对象为管理层。<strong>2011年计划</strong>初始授出400万股，其中150万股授予前董事长<strong>廖杰远</strong>，250万股分配给其他管理层。随后两次扩展，2011年计划的股数增至3662万股。</p>
-  <p>到了<strong>2018年</strong>，公司再次计划授出1.02亿股股份，<strong>其中50%授予廖杰远，</strong>其余50%授予其他人员。<strong>2020年计划进一步扩大，</strong>向管理人员、核心员工等授出6079万股。<strong>2022年计划将2020年计划拆分，</strong>分为2020年修订版和2022年计划，最大授股量为1.32亿股。<strong>2024年计划再次整合，</strong>取代2020和2022年计划，授股总量达1.51亿股，继续为管理层提供购股权和受限制股份奖励。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_646bd422504549869d7488c034c878de@1743780481_oswg957386oswg814oswg606_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：罐头图库‍‍‍‍‍</p>
-  <p>这些股份在公司上市前不可流通，但限售期后将带来巨大的变现机会。对于员工来说，沈萌表示，<strong>以股份替代现金，为了补偿股票变现的成本，通常会给予一定股价折扣，让持股者获得更多账面利益。</strong></p>
-  <p>其中，廖杰远多次大比例获授股份，是最核心的受益者之一。</p>
-  <p>以2018年为例，公司按每股4.92美元的发行价发行了1.02亿股股份，其中50%授予<strong>廖杰远，即5100万股，潜在价值约2.51亿美元（约17.57亿元人民币）。</strong>不过最终价值需视IPO定价及市场表现而定。</p>
-  <p>中国企业资本联盟中国区首席经济学家柏文喜也表示，微医通过股权激励计划授予员工股份或期权，使员工能够在未来公司发展过程中获得潜在的经济利益。<strong>这种激励方式在一定程度上能够留住关键人才，尤其是在竞争激烈的数字医疗行业中，员工的稳定性和忠诚度对于企业的长期发展至关重要。</strong></p>
-  <p>尽管微医的股份激励在吸引和绑定核心人才上起到了作用，但其背后的财务压力不容忽视。截至2024年上半年，公司负债总额已达232.69亿元，贷款余额为3.65亿元，而账上现金仅剩2.47亿元。</p>
-  <p>尽管如此，但微医依然认为，<strong>股权激励这种支出是不可避免的。</strong>公司表示，以股份为基础的付款对于吸引核心人才、稳定团队至关重要。如果取消或减少这种激励模式，公司可能在核心员工流失、技术研发滞后等方面面临更大的风险。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_5b50f24f287d4cc99fad8148ed5c19f8@1743780481_oswg844255oswg751oswg544_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：罐头图库‍‍‍‍‍</p>
-  <p>公司还在《招股书》中介绍，公司已授予并计划继续授予股份奖励，这可能会导致以股份为基础的薪酬支出增加。</p>
-  <p>沈萌提到，<strong>如果公司不盈利，缺少更多支付的选择性，只能以股份作为吸引人员的手段；而且如果持续不盈利，则难以持续扩大股权激励，最终会加剧股份收益摊薄。</strong></p>
-  <h2><strong>科大讯飞联创二次创业，腾讯、红杉加持</strong></h2>
-  <p>据新媒体“每财网”报道，2019年底，微医控股创始人廖杰远曾高调对外表示，“微医已经准备好IPO。”&nbsp;直到2021年4月，微医向港交所递交《招股书》，六个月后《招股书》失效，上市计划搁浅。</p>
-  <p>3年后，微医再次向港交所发起冲击。</p>
-  <p>作为微医的核心人物，廖杰远在1973年5月出生于福建龙岩，是北京大学EMBA硕士研究生，同时，他还曾是<strong>“中国领先的智能语音和AI技术企业之一”科大讯飞（002230.SZ）的联合创始人之一。</strong></p>
-  <p>早在1999年，廖杰远和几位合伙人一起创立了科大讯飞，用他自己的话说，“到目前为止我做了两件事，第一件事是试着让电脑听懂人说的话，前期的辛苦成就了后来的科大讯飞”。</p>
-  <p>至于廖杰远口中的第二件事，则是<strong>在2010年创办了挂号网。</strong></p>
-  <p>廖杰远曾在2024（第十六届）中国商界木兰年会上表示，十多年前，我陪家人在医院折腾十个月，经过两次手术，最后发现是误诊。我站在医院台阶上就下定决心——如果我这辈子还能做一件事，那就是用自己熟悉的技术，让天下人看病不再那么难。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_d2d73a6f536c41358303f2da7f27a68a@1743780481_oswg95045oswg1024oswg768_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：罐头图库‍‍‍‍‍</p>
-  <p>廖杰远的运营下，自成立以来，<strong>微医累计融资17.7亿美元（约115亿元人民币）。投资方名单中，腾讯、红杉中国、复星医药、高瓴资本、高盛、友邦保险等巨头云集。</strong></p>
-  <p>然而，2023年3月，廖杰远自愿辞去微医及其子公司的一切职务。目前，公司由王永才担任执行董事，负责战略及投资管理；张军担任总裁兼首席客户官，负责集团的日常经营和管理。</p>
-  <p>尽管不再参与管理，<strong>廖杰远仍通过New Forte、WD Family B/C/X Limited等实体共计持有微医的股份为20.51%</strong>；友邦保险持股为1.58%，腾讯持股为8.79%，红杉持股为2.29%，高瓴持股为4.13%，高盛持股为1.93%，Qiming Venture（启明创投）则持股为2.69%。</p>
-  <p>此次站在IPO的门口，微医和廖杰远再次走到了聚光灯下。这一次，他们能否讲好一个全新的故事？</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/7UMjSzQbbuPYnakKdNKVuA" rel="noopener noreferrer nofollow" target="_blank">“野马财经”</a>，作者：刘俊群，编辑：刘钦文，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131774914943488</id>
-            <title>空调界“价格屠夫”要去IPO了</title>
-            <link>https://www.36kr.com/p/3131774914943488</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131774914943488</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 01:27:32 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: <董明珠, 奥克斯电气, 上市, 价格屠夫>
-<br>
-<br>
-总结: 董明珠在访谈中暗示可能退休，但她的对手奥克斯电气正计划在港股上市，成为全球第五大空调提供商。奥克斯通过低价策略和电商渠道迅速崛起，成为市场的“价格屠夫”，但在核心技术上存在短板。尽管奥克斯在海外市场取得了一定成绩，上市成为其扩张计划的关键一步，但面临的挑战依然严峻，包括高资产负债率和品牌影响力不足等问题。奥克斯的未来发展仍需关注。 </div>
-                        <hr>
-                    
-                    <p><strong>空调界“价格屠夫”要来了。</strong></p>
-  <p>12月底，70岁的董明珠在访谈中被问及退休问题时，她意味深长地暗示<strong>“明年可能会退休”，</strong>却又强硬地表示：有人巴不得自己退，以为我一退，他们就少了个对手。但退不退休，是我的事，与外界无关。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_04be2d4ed42e4d118dbcb892569fdc03@1743780481_oswg36363oswg972oswg244_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_73bcacfa9ff849cd9be2af36c5fe3aec@1743780481_oswg15390oswg752oswg113_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>这些话掷地有声，仿佛在警告那些暗中期待她离开的对手。</p>
-  <p>可谁曾想，话音刚落不到一个月，就在董明珠可能即将迎来退休之际，她最不愿看到的一幕，还是发生了。那个曾被她<strong>公开讨伐、恩怨多年</strong>的老对手<strong>——奥克斯电气，如今正以全球第五大空调提供商的身份，大步迈向港股IPO。</strong></p>
-  <p>近日，据港交所披露，奥克斯电气正式向港交所递交了招股说明书，拟于港交所主板挂牌上市，<strong>由中金公司担任独家保荐人。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_c4f435e1a4cb449eb75709888658cb72@1743780481_oswg159393oswg799oswg687_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>据悉，本次募资资金将用于<strong>全球研发、智能制造体系升级、供应链管理强化、销售经销渠道拓展，还有补充营运资金等关键领域。</strong></p>
-  <p><strong>奥克斯这次转战港股，无疑是其资本棋局中的关键一步。</strong></p>
-  <p>早些年，奥克斯就盯上了A股市场。2016年初，它的中央空调部门在<strong>新三板短暂挂牌，</strong>但一年后就匆匆退市。随后，奥克斯对空调业务进行大刀阔斧的整合，统一到宁波奥克斯电气旗下，全力筹备A股上市。然而，折腾了一圈，最终还是没能成功。</p>
-  <p>若此次港股上市成功，宁波大佬郑坚江家族将再添一员，继<strong>三星医疗</strong>和<strong>奥克斯国际</strong>之后，迎来第三家上市公司，其商业版图将进一步扩张。</p>
-  <h2>一</h2>
-  <p><strong>奥克斯的逆袭之路，就是一部“价格屠夫”的传奇。</strong></p>
-  <p>1987年，年仅25岁的郑坚江，从一名汽车修理工摇身一变，承包了一个负债累累的乡办小厂。仅用12年，他就把这个小厂变成了年收入30亿的巨头。</p>
-  <p>不过，真正让郑坚江声名鹊起的，是他1994年对空调市场的大胆布局。2001年，当其他品牌还在技术壁垒前徘徊时，奥克斯却大胆发起了<strong>一场“免检是爹，平价是娘”的“爹娘革命”，将40多款机型价格狂降30%。</strong></p>
-  <p>在那个品牌竞争激烈、价格居高不下的年代，这一举措如同在平静的湖面投下巨石，瞬间打破了市场格局，<strong>吸引了大量价格敏感的消费者。</strong>奥克斯的销量从2001年的20万套飙升至2004年的325万套，增长15倍，从三、四线品牌一跃成为头部阵营的<strong>“空调杀手”。</strong></p>
-  <p>电商时代来临，奥克斯再次抓住机遇，将<strong>低价优势</strong>与<strong>线上渠道</strong>结合，掀起销售热潮。2011年，奥克斯率先布局电商，产品销量在各大电商平台一路飙升，一度冲进全国前三，<strong>“性价比之王”的形象深入人心。</strong></p>
-  <p>现如今，郑坚江家族的商业版图<strong>横跨家电、地产、医疗、金融等多个领域</strong>，<strong>手握A股的三星医疗和港股的奥克斯国际两大上市公司。</strong></p>
-  <p>值得一提的是，三星医疗2011年上市时，招股书<strong>曾披露郑坚江拥有加拿大永久居留权和香港居民身份证，</strong>直到2017年财报才宣布<strong>不再持有任何海外居留权。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_fe83738eeb3343b7b1bab43f7b328bf7@1743780481_oswg46464oswg853oswg282_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>2024年10月，郑坚江凭借<strong>225亿元</strong>人民币的财富，在<strong>《2024年胡润百富榜》中排名第213位，</strong>稳坐富豪圈的“头排交椅”。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_05e740967df8426e92720bc141456b4a@1743780481_oswg27219oswg1080oswg90_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>凭借<strong>低价策略</strong>和<strong>电商渠道</strong>的巧妙布局，奥克斯迅速在市场中占据了一席之地，这让一直稳坐行业头把交椅的格力电器感到了前所未有的威胁。</p>
-  <p>董明珠，这位以铁腕手段著称的商界女强人，自然不会对奥克斯的崛起坐视不理。</p>
-  <h2>二</h2>
-  <p><strong>董明珠与奥克斯的恩怨，早已不是什么秘密。</strong></p>
-  <p>董明珠一直以<strong>“铁娘子”</strong>形象示人，她的管理风格<strong>直接、果断，甚至有些严厉。</strong>这种风格，虽然让格力电器在市场竞争中保持了<strong>强大的战斗力</strong>，但也引发了一些争议。从举报奥克斯生产销售<strong>不合格</strong>空调产品，到多次起诉奥克斯<strong>专利侵权</strong>并获赔偿，她对奥克斯的打压可谓不遗余力。</p>
-  <p>从2015年起，格力和奥克斯就围绕专利权大打出手，一撕就是好几年。董明珠更是隔三岔五在公开场合“炮轰”奥克斯，一次次把它推到<strong>舆论的风口浪尖。</strong>从2017年到2023年4月，格力一口气起诉奥克斯27次，且次次胜诉。这一连串的胜利，无疑让格力在专利战中占据了绝对的上风。</p>
-  <p><strong>在这场专利对决中，</strong>奥克斯也毫不示弱，反手就告格力侵权，双方打得难解难分。直到最高法出面一锤定音，直接判定奥克斯的压缩机专利无效，认定格力没侵权，这场闹剧才暂时告一段落。</p>
-  <p><strong>这背后，其实是奥克斯在核心技术上的“软肋”。</strong></p>
-  <p>看数据就知道了，2023年，奥克斯的研发费用才5.66亿元，费用率仅2.3%。相比之下，格力研发投入早就破百亿，美的和海尔也在全球疯狂砸钱搞研发。相比之下，奥克斯这点研发费用，根本不够看。</p>
-  <p>这场专利纠纷，本质上是一场实力悬殊的较量。奥克斯靠低价和性价比抢占市场，但核心技术的缺失让它在格力这样的巨头面前，只能靠专利诉讼来硬撑。</p>
-  <p>结果呢？法院的判决就像一记重拳，狠狠敲醒了奥克斯，让它清醒地认识到，<strong>没有核心技术，光靠低价和诉讼，是永远无法在空调江湖立足的。</strong>更糟的是，格力、美的们纷纷杀入电商，奥克斯的线上优势瞬间被蚕食。<strong>美的子品牌华凌、小米这些新势力</strong>也杀入平价市场，奥克斯的<strong>“性价比王”光环不再。</strong></p>
-  <p>面对国内市场的压力，奥克斯只能把目光投向海外。</p>
-  <p>2018年起，奥克斯一路狂奔，杀到马来西亚、泰国等地，<strong>建销售公司、拉本地团队，把空调卖到全球140多个国家和地区。</strong></p>
-  <p>2024年前三季度，<strong>海外市场直接入账111.4亿元，几乎撑起总收入的半壁江山，</strong>同比增长27.6%，远高于国内市场。</p>
-  <h2>三</h2>
-  <p><strong>奥克斯急于上市，既是被现实狠狠“逼”出来的无奈之举，也是它野心勃勃的扩张计划的关键一步。</strong></p>
-  <p>空调市场如今是“内卷”到极致，格力、美的这些巨头们早就把市场瓜分得差不多了，奥克斯想分一杯羹，难如登天。</p>
-  <p>研发上，奥克斯口袋里的钱不够用，2023年研发费用才5.66亿元，费用率仅2.3%，与格力、美的、海尔这些老对手相比，差距正逐渐在被拉开。<strong>没有钱，怎么搞研发？怎么和巨头们正面刚？上市，就成为了它快速“补血”的捷径。</strong></p>
-  <p>正如前面所讲，奥克斯早就盯上了海外市场。但它心里清楚，这点成绩还远远不够，它想在全球市场上大展拳脚，就得有钱去建生产基地、搞研发、铺渠道。<strong>上市，就是它拿到“球通行证”全的关键钥匙。</strong></p>
-  <p>如今，奥克斯电气谋求上市，无疑是家族商业版图的又一次扩张。然而，上市之路并不好走，上市后的挑战，更是接踵而至。</p>
-  <p>海外市场虽然广阔，但奥克斯的自主品牌影响力微乎其微，<strong>80%的海外收入依赖ODM代工，贴牌生意做得再大，也终究是为他人做嫁衣。</strong></p>
-  <p>与此同时，小米、美的等竞争对手也在加速出海，奥克斯的低价优势正在被逐步蚕食。在国内，奥克斯的<strong>“性价比”标签早已被贴上“低端”的刻板印象，线上市场份额被不断挤压，线下渠道又迟迟打不开局面。</strong></p>
-  <p>上市或许能为奥克斯带来资金，但如何在巨头的夹缝中找到自己的立足之地，在技术上实现弯道超车，并在全球市场中真正打响自己的品牌？<strong>这些问题，才是奥克斯上市后真正需要面对的“硬仗”。</strong></p>
-  <p>在奥克斯的招股书里，有一组数据格外引人关注。截至2024年9月30日，它的资产负债率飙升至84.6%，流动负债净额比2023年末多了3.73亿元，达到24.02亿元。奥克斯解释说，这是因为原材料采购增加、银行借款利息上涨、贸易应收款项和票据增多。</p>
-  <p>再看业绩记录期，奥克斯向股东派发了约37.90亿元股息，而同期公司利润才66.45亿元，派息金额竟占了近两年九个月净利润总和的57.04%。<strong>如此高的资产负债率，再加上如此大手笔的分红，奥克斯的现金流到底健不健康？这样的决策是否真的合理？</strong></p>
-  <p>这些问题，值得每一位关注奥克斯的人好好思考。</p>
-  <p><strong>奥克斯的故事，还在继续。</strong></p>
-  <p>在激烈的市场竞争中，其能否在巨头林立的空调市场，再次复制奇迹？我们作为旁观者，也将拭目以待。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/EmI7Qd-5TO_EEipJzg7RCg" rel="noopener noreferrer nofollow" target="_blank">“投资家”</a>，作者：笔锋，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131789200792326</id>
-            <title>大众部分德国工厂或易主，中国汽车制造商成神秘买主？</title>
-            <link>https://www.36kr.com/p/3131789200792326</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131789200792326</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 01:20:21 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 中国汽车制造商, 大众汽车, 工厂收购, 电动化转型  
-<br><br>  
-总结: 中国汽车制造商开始关注德国市场，计划收购大众汽车在德国的部分工厂。大众汽车面临电动化转型压力，销量和利润均出现下降，已考虑关闭部分工厂。尽管工会抵制并达成协议保障工人就业，但德累斯顿和奥斯纳布吕克工厂仍将停止生产。中国车企如比亚迪、奇瑞等已在欧洲建立工厂，可能成为大众工厂的潜在买家。上汽集团在欧洲市场表现良好，已计划在当地建厂。 </div>
-                        <hr>
-                    
-                    <p>出海热情高涨的中国汽车制造商们似乎开始将目光锁定到汽车发明地——德国。</p>
-  <p>近日，据路透社报道，多家中国上市汽车公司（及其子公司）有意向收购部分计划被关闭的大众德国汽车工厂。</p>
-  <p>长期以来，大众汽车集团都是德国工业实力的象征，但在汽车电动化转型的压力下，其处境并不如前。</p>
-  <p>在刚刚过去的2024年，大众汽车集团全球销量约为902.7万辆，同比下降2.3%。在中国市场，大众汽车集团去年销量约为292.8万辆汽车，同比下降10%。财报数据显示，去年前三季度，大众汽车集团营业利润为129.07亿欧元（约合人民币974.5亿元），同比下降20.5%。</p>
-  <p>自去年9月起，大众汽车集团首次宣布考虑关闭位于德国本土的汽车工厂，并正在探索其德累斯顿和奥斯纳布吕克工厂的替代用途，以削减其德国业务的成本。</p>
-  <p>不过，这一决策遭到了德国工会的抵制。约有10万名工人进行了两次罢工，德国工会也与大众汽车进行了多轮谈判。在去年圣诞节前双方曾达成一项协议，大众旗下的10家德国工厂继续运营，并将就业保障协议延长至2030年。作为交换，工人们同意放弃部分奖金，减少获得长期雇佣的实习生数量，并削减五个厂区的产能。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_bc35bf376c6b43729a5ea8c7a1c09185@1743780481_oswg52608oswg1080oswg756_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图片来源：每日经济新闻 资料图</p>
-  <p>其中，大众汽车集团旗下的德累斯顿工厂将从2025年起停止生产，该工厂有340名员工，生产电动ID.3车型；奥斯纳布吕克工厂将从2027年起停止生产，该工厂有2300名员工，生产T-Roc敞篷车型。</p>
-  <p>但是这两个工厂将不会关闭。大众汽车集团的一位发言人表示：“我们致力于为工厂寻找持续的用途，但这必须是一个考虑到公司和员工利益的可行解决方案。”</p>
-  <p>一位熟悉大众汽车的银行家表示，对于大众汽车来说，出售工厂可能比关闭所有工厂更划算，每家工厂可卖出1亿至3亿欧元（7.55亿至22.64亿元人民币）的价格。</p>
-  <p>与此同时，为规避欧盟委员会去年征收的关税，许多中国汽车制造商正在欧洲寻找本土化生产的机会。</p>
-  <p>有消息称，大众计划关闭工厂的潜在买家有中国民营车企、国有车企与合资公司。</p>
-  <p>目前来看，比亚迪已经在匈牙利和土耳其建立工厂；海外市场表现颇佳的奇瑞控股集团已经于去年在西班牙收购了日产工厂；零跑汽车与Stellantis集团有深度合作，可使用其波兰工厂；吉利控股或可以利用沃尔沃（比利时）、LEVC&amp;路特斯（英国）的工厂。</p>
-  <p>有观点认为，对于大众汽车德国工厂，上汽集团、江淮汽车、一汽集团、小鹏汽车等几家与大众汽车集团在中国有深度合作的中国汽车制造商有望成为其潜在买家。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_59ba994d5f3343f3bdc247696d3e9cb4@1743780481_oswg92327oswg1080oswg810_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图片来源：每日经济新闻 刘国梅 摄（资料图）</p>
-  <p>在这几家之中，上汽集团在海外市场的表现一直可圈可点。数据显示，MG品牌2024年在欧洲销量突破了24万辆。加之上汽集团是被加征关税最高的中国汽车上市公司，行业内多猜测上汽集团或是大众德国工厂的神秘买家。《每日经济新闻》记者向上汽集团方面求证是否有可能会考虑收购德国工厂，对方表示并不知情。</p>
-  <p>实际上，上汽集团方面此前曾表示欧洲市场销量一旦超过10万辆就会考虑在当地设立工厂。2022年，上汽集团在欧洲市场销量超过10万辆，但上汽集团海外板块的高管曾向记者透露因为疫情等因素并未落实建厂一事。</p>
-  <p>从2023年开始，上汽集团就已经对外表示已确定要在欧洲建厂，相关工作已经提上议事日程，目前仍在推进之中。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/NTgQd_JpVJoW_ngS6DUrTw" rel="noopener noreferrer nofollow" target="_blank">“NBD汽车”</a>，作者：黄辛旭，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131776532093703</id>
-            <title>600亿，背后</title>
-            <link>https://www.36kr.com/p/3131776532093703</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131776532093703</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 01:19:52 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 人工智能, 大基金三期, 半导体, 徐汇区  
-<br><br>  
-总结: 大基金三期近日与上海国资合作成立国家人工智能产业投资基金，出资额达600.6亿元，主要投资方向为半导体和人工智能。该基金的成立标志着国家对人工智能产业的重视，旨在通过集中资源攻克高性能芯片等技术，提升中国在全球人工智能领域的竞争力。徐汇区作为上海首个人工智能发展集聚区，已有34个大模型备案，推动了人工智能产业的快速发展。 </div>
-                        <hr>
-                    
-                    <blockquote>
-   <p>近日，大基金三期第三次出手，联手上海国资成立国家人工智能产业投资基金。头部机构投资人预计，其未来投资方向将会在半导体和人工智能（硬件+软件）这两大主线上。</p>
-  </blockquote>
-  <p>大基金三期又出手了，这次是人工智能。</p>
-  <p>近日，国家人工智能产业投资基金合伙企业（有限合伙）成立，出资额600.6亿元。合伙人包括：国智投（上海）私募基金管理有限公司（以下简称国智投私募）、国家集成电路产业投资基金三期股份有限公司(以下简称大基金三期)。</p>
-  <p>创投日报记者注意到，<strong>本次为大基金三期第三次出手，同时，国家人工智能产业投资基金落地的徐汇区，为上海首个人工智能发展集聚区。目前，徐汇区已有34个大模型通过国家网信办备案，占上海市的近60%。</strong></p>
-  <h2><strong>大基金三期第三次出手</strong></h2>
-  <p>工商信息显示，<strong>该基金主要经营场所为上海市徐汇区冠生园路393号2幢5层510室</strong>，经营范围为以私募基金从事股权投资、投资管理、资产管理等活动。</p>
-  <p>根据已公开的资料，<strong>此次大基金三期出资的国家人工智能产业投资基金，是其注册成立后的第三次出手。</strong></p>
-  <p>大基金三期于2024年5月24日成立，注册资本高达3440亿元人民币，超过了此前大基金一期、大基金二期的注册资本总和。</p>
-  <p>成立半年多后，去年底大基金三期首度出手：一日出资两只基金，金额超1600亿元。</p>
-  <p>对于大基金三期的投向，此前有媒体报道称，除了制造、设备和材料等细分领域，随着人工智能和数字经济领域的加速发展，AI相关芯片、算力芯片等或成为大基金三期投资的新重点。</p>
-  <p>一位头部机构投资人告诉创投日报记者，<strong>本次基金的成立体现了国家对人工智能产业的高度重视。而人工智能产业的快速发展需要强大的算力支持，尤其是高性能芯片、存储芯片等半导体技术。</strong>国家大基金三期的参与，有助于集中资源攻克这些技术，提升我国在全球人工智能领域的核心竞争力。<strong>未来投资方向预计将会在半导体和人工智能（硬件+软件）这两大主线上。</strong></p>
-  <p>华鑫证券表示，算力芯片和存储芯片将成为产业链上的关键节点，<strong>大基金三期除了对半导体设备、材料等的持续投资之外，更有可能将HBM芯片等作为重点投资方向。</strong></p>
-  <h2><strong>徐汇区跑出人工智能产业发展“加速度”</strong></h2>
-  <p>国智投私募注册落地于2024年11月20日，<strong>主要经营场所为上海市徐汇区古美路1528号6幢8层849室</strong>，其股东包括：上海国盛（集团）有限公司实控的上海国盛资本管理有限公司（持股50%），中国诚通旗下的诚通基金管理有限公司（持股40%），以及上海临港科创投资管理有限公司（持股10%）。</p>
-  <p>据悉，国智投私募在中基协登记的高管人员包括：法定代表人、总经理李维刚（此前曾任职于上海市国资委、上海国盛集团等），副总经理王晓禹（此前曾任职于诚通基金等）等。</p>
-  <p>近年来，人工智能作为战略新兴产业，备受上海政府和投资机构的青睐。</p>
-  <p>2024年底，上海发布《关于人工智能“模塑申城”的实施方案》，提出打造超大规模自主智算集群、构建多层次语料供给体系等基础设施的目标。</p>
-  <p>中国城市发展研究院相关专家袁帅告诉创投日报记者，大基金三期作为专注于集成电路产业投资的机构，拥有丰富的产业经验和深厚的资源积累，而上海国资则代表了地方政府的投资意志和市场化运作能力。</p>
-  <p>“两者合作，不仅能够确保基金投资的专业性和精准性，还能有效整合产业链上下游资源，推动人工智能与集成电路产业的深度融合与发展。<strong>这种合作模式体现了国家与地方在推动战略性新兴产业发展上的协同作战，共同助力我国人工智能产业迈向新的高度。</strong>” 袁帅说。</p>
-  <p><strong>值得一提的是，国家人工智能产业投资基金落地的徐汇区，为上海首个人工智能发展集聚区，该区正在跑出人工智能产业发展“加速度”。</strong></p>
-  <p>2023年，全国首个大模型创新生态社区“模速空间”在徐汇区成立。“模速空间”揭牌一周年以来，已吸引近百家大模型初创企业入驻，带动该区200余家大模型企业加速集聚。目前，徐汇区已有34个大模型通过国家网信办备案，占上海市的近60%。</p>
-  <p>徐汇区此前还发布了推进“人工智能+”十大行动，涵盖模型能力跃升、创新策源突破、场景应用牵引、孵育范式升级、产业集群倍增等方面。十大行动旨在推动徐汇区加快建成全国人工智能高地。其中，“创新策源突破行动”提出，加强新型研发机构间深度合作，推动科学智能创新研究，加快具身智能和类脑科学等前沿技术攻关。</p>
-  <p>此外，去年夏天，上海三大先导产业母基金中的人工智能母基金，规模为225亿元，亦正式落地徐汇区。该母基金重点投向智能芯片、智能软件、自动驾驶、智能机器人等领域。</p>
-  <p>特别声明：文章内容仅供参考，不构成投资建议。投资者据此操作风险自担。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/eYoLM6pdFPS57V0kgwaceQ" rel="noopener noreferrer nofollow" target="_blank">“创投日报”</a>，作者：李明明，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131770733026055</id>
-            <title>疯狂炒作轮到德国ETF？单日换手超20倍，谁的狂欢与梦碎？</title>
-            <link>https://www.36kr.com/p/3131770733026055</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131770733026055</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 00:47:29 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 跨境ETF, 溢价, 换手率, 投资风险  
-<br><br>  
-总结: 最近，德国的两只ETF产品——嘉实德国DAXETF和华安德国(DAX)ETF表现突出，涨幅分别为8.20%和5.78%。尽管德国经济面临压力，但DAX指数持续上涨，吸引了大量资金涌入，导致高溢价和换手率现象。业内人士指出，规模较小的跨境ETF在投资者情绪高涨时容易引发炒作，且缺乏足够的套利资金来平抑溢价，投资者需警惕价格回归净值过程中的风险。基金公司频繁发布风险提示，但投资者的炒作热情依然高涨。 </div>
-                        <hr>
-                    
-                    <p><strong>疯狂的溢价和换手在近日的跨境ETF产品中轮番切换，这次，轮到了德国ETF。</strong></p>
-  <p>今日（20日），两只德国ETF——嘉实德国DAXETF和华安德国(DAX)ETF分别以8.20%、5.78%的涨幅领涨ETF市场。其中，<strong>前者溢价率和换手率分别高达30.78%、2096.99%，这已是该产品换手率连续6个交易日超10倍。</strong>在二级市场上，嘉实德国DAXETF 1月以来已大涨35.88%。</p>
-  <p>从基本面上看，尽管德国经济仍面临压力，但德国DAX指数继续强劲上涨，并在1月17日创下历史新高。2024年，德国蓝筹股指数上涨了19%。自2023年以来，该指数上涨了50%。</p>
-  <p>在此背景下，有业内人士表示，<strong>规模相对较小的跨境ETF在投资者买入情绪高涨时，容易引发炒作，助推资金涌入，但产品较难有足够的套利资金去平抑溢价，</strong>高溢价和高换手也就不足为奇，要关注价格回归净值过程中溢价回落的风险以及指数回调风险，<strong>不要为游资的助推和高昂的市场情绪买单。</strong></p>
-  <p>事实上，在上述产品外，上周全球股市全面开花，跨境ETF也大面积走强，亚太精选ETF、景顺长城标普消费ETF、易方达日兴资管日经225ETF、中概互联ETF等产品均保持着强劲的涨势和高换手率，基金公司因此对相关跨境ETF频频发布风险提示公告，但投资者炒作的热情似乎难以止步。</p>
-  <p>有基金公司人士称，<strong>跨境ETF的炒作，除了与市场情绪、QDII额度限制、套利机制限制、汇率等有关，还与投资者年初的“资产荒”相关。</strong></p>
-  <h2><strong>单日换手超20倍</strong></h2>
-  <p>1月20日，全市场表现最亮眼的ETF无疑为两只德国ETF——嘉实德国DAXETF和华安德国(DAX)ETF，这两只产品单日涨幅分别达到8.20%、5.78%，溢价率也分别达到30.78%、15.09%。</p>
-  <p>两只产品中，嘉实德国DAXETF无疑更为抓人眼球，不仅单日涨幅创下历史新高、溢价率更高，单日成交量更是高达33.97亿元，位于市场前列；其换手率也达到了罕见的20.97倍，这也是该产品连续6个交易日换手率超过10倍。</p>
-  <p>从二级市场表现看，该产品2025年1月以来已大涨35.88%。</p>
-  <p>根据公告，嘉实德国DAXETF成立于2024年4月3日，成立时的规模为2.16亿元。成立近十个月以来，这只产品的份额基本维持在1亿元以上。截至1月16日，其最新规模为1.16亿元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_c4aa7bba445244239a4d30c4159859d2@1743780481_oswg96935oswg416oswg380_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>公开信息显示，在发行时，该产品曾因募集情况不理想而将募集期延长1个多月。而进入2025年后，上述产品已经分别于1月10日、1月15日、1月17日停牌。彼时，嘉实德国DAXETF都曾发生较大幅度溢价。</p>
-  <p>为此，嘉实德国DAXETF也频频发布溢价风险提示公告，提示投资者关注二级市场交易价格溢价风险，投资者如果盲目投资，可能遭受重大损失。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_6bc5683267724304b106726155930e06@1743780481_oswg59683oswg415oswg177_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>疯狂炒作何时休</strong></h2>
-  <p>从基本面上看，尽管德国经济仍面临压力，但德国DAX指数继续强劲上涨，是两只跟踪德国DAX指数的相关ETF在二级市场保持强势之态的重要原因。</p>
-  <p>数据显示，德国蓝筹股指数在过去三个交易日收于历史新高，2024年上涨了19%。自2023年以来，该指数上涨了50%，但德国的GDP增长在过去两年中每年都略有下降。</p>
-  <p>德意志银行表示，德国GDP并不能很好地反映DAX指数的表现，因为该指数与全球经济增长的相关性高于与国内经济表现的相关性。DAX指数成分股公司约80%的收入来自国外，而德国的GDP在很大程度上取决于国内需求。</p>
-  <p>华南一位中型公募人士直言，规模相对较小的跨境ETF在投资者买入情绪高涨时，容易引发炒作，助推资金涌入，但产品较难有足够的套利资金去平抑溢价，高溢价和高换手也就不足为奇。</p>
-  <p>和上述产品相比，同样跟踪德国市场指数的华安德国(DAX)ETF在1月20日的换手率相对较低，为4.40倍。虽然其中不乏投资者炒作，但一位基金公司人士透露，相对较低的换手率与规模有较大关系。截至1月16日，华安德国(DAX)ETF规模为9.04亿元，为嘉实德国DAXETF的7.79倍。</p>
-  <p>上述人士表示，对投资者来说，还是要关注价格回归净值过程中溢价回落的风险以及指数回调风险，不要为游资的助推和高昂的市场情绪买单。</p>
-  <h2><strong>跨境ETF大面积走强</strong></h2>
-  <p>过去一周，全球股市全面开花，英国富时、德国DAX、法国CAC、欧洲斯托克、富时意大利等欧洲市场主要股市，接连创出新高。美股也不甘落后，三大主要指数同样大涨，其中，纳斯达克周涨幅2.45%，标普周涨幅2.91%，道琼斯周涨幅3.69%。</p>
-  <p>不仅如此，恒生指数周涨幅2.73%，中概股周涨幅更是达到了6.42%。A股方面，沪指周涨幅2.31%，深证成指周涨幅3.73%，创业板指周涨幅4.66%。</p>
-  <p>在此背景下，跨境ETF大面积走强。</p>
-  <p>1月20日，在两只德国ETF领涨外，亚太精选ETF上涨4.56%，溢价率达22.68%，换手率超9倍；景顺长城标普消费ETF单日涨3.47%，溢价率高达42.85%，换手率为5.46倍；易方达日兴资管日经225ETF、大成纳斯达克100ETF等多只跨境ETF涨幅近2%，其中，易方达日兴资管日经225ETF换手率达5.42倍。</p>
-  <p>港股ETF方面，易方达、招商、广发旗下中概互联ETF单日涨幅均超3.5%，其中，招商中证全球中国互联网ETF换手率达1.38倍；招商中证香港科技ETF、鹏华中证港股通消费主题ETF、银华中证港股通消费ETF单日涨幅均超3%，其中，鹏华中证港股通消费主题ETF换手率超2倍。</p>
-  <p><strong>从换手率看，今日换手率超过100%的ETF产品达到了17只，其中绝大部分为跨境ETF产品，6只跨境ETF换手率超500%。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_86b274797a11486aa17839c760e5e2a7@1743780481_oswg65623oswg416oswg199_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>随着溢价率和换手率的“节节高升”，不少基金公司频繁对相关跨境ETF发布风险提示，但投资者炒作的热情似乎难以止步。</strong></p>
-  <p>华东一家基金公司市场人士透露，跨境ETF的炒作，除了与市场情绪、QDII额度限制、套利机制限制、汇率等有关，还源于投资者的资产荒。“开年以来，A股市场持续调整，投资难度加大；债券市场的投资风险也不小，部分投资者的资金只能转向容量有限但仍有炒作空间的REITs、QDII等市场。”</p>
-  <p>不过，他提示道，“当这场击鼓传花的游戏达到尾声的时候，就是高位进场且尚未离场的投资者受伤的时候。”</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/UR_LnzY1pf8cvkcAcO0kAw" rel="noopener noreferrer nofollow" target="_blank">“创业板观察”</a>，作者：沈述红，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131773299022598</id>
-            <title>降费的风还是吹到了债券ETF，0.15%+0.05%双低收费成主流</title>
-            <link>https://www.36kr.com/p/3131773299022598</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131773299022598</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 00:47:14 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 债券ETF, 降费, 投资者, 信用债  
-<br><br>  
-总结: 近期债券ETF市场迎来降费潮，首批8只基准做市信用债ETF采用“0.15%+0.05%”的低费率模式，存量债券ETF也开始降费。平安基金的中高等级公司债利差因子ETF费率下调，反映出债券ETF低费率已成为主流。基金公司通过降费来回馈投资者并期待扩大规模，债基的发行热度持续上升。内外资机构对信用债的长期前景持乐观态度，认为高等级中短久期债券具备较低的信用风险和较高的流动性。 </div>
-                        <hr>
-                    
-                    <p>降费的风还是吹到了债券ETF。</p>
-  <p>一方面，<strong>刚刚完成发行的首批8只基准做市信用债ETF均采用了“0.15%+0.05%”的双低费率模式；另一方面，存量债券ETF也开启降费。</strong></p>
-  <p>平安基金公告称，为更好地满足投资者理财需求，平安中债-中高等级公司债利差因子ETF即日起调降产品费率，管理费和托管费分别下调至0.15%、0.05%。该公司债ETF是全市场首只中高等级信用债ETF，最新规模达到110亿。</p>
-  <p><strong>目前市场共有29只债券ETF，其中26只采取了“0.15%+0.05%”费率模式，</strong>这意味着，<strong>债券ETF低费率已经成为主流。</strong>在平安基金公司债ETF基金经理王郧看来，公司选择主动降费一方面是回馈投资者，更好地体现工具属性；另一方面，公司这只产品规模突破百亿，降费后也是对未来规模有所期许。</p>
-  <p>ETF之外，<strong>今年以来，债基的费率优惠还在持续，</strong>包括南方、安信、富荣、汇添富、华宝等基金公司纷纷下调了旗下债基管理费率。在业内看来，基金公司选择主动降费也是符合当前费率下调的大趋势。</p>
-  <h2><strong>债券ETF“0.15%+0.05%”，双低收费成主流</strong></h2>
-  <p>根据wind数据显示，随着8只基准做市信用债ETF结募，当前市场合计29只债券ETF，其中26只采取了“0.15%+0.05%”低费率模式。</p>
-  <p>高于这一标准的仅有3只债券ETF，费率最高的是城投债ETF，管理费率0.3%，托管费率0.1%。此外，5-10年国债ETF、可转债ETF管理费率均为0.25%。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_cb1bc2294c324c91a3e823b4f0218fc9@1743780481_oswg333803oswg1080oswg1346_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>有债基大厂人士表示，一般而言，债基管理费率原本就低于股基，债券ETF既是债基，又是ETF，头部股票ETF管理费率已经纷纷下降至0.15%之后，债券ETF降费是在预期之内。</p>
-  <h2><strong>基金公司期待债基做大规模</strong></h2>
-  <p><strong>期待通过费率优惠获得更大的规模也是主动降费的原因。</strong>“去年债券ETF年初800亿元的规模，到年底增加至1800亿元，整个行业蛋糕在变大，各家也会发力债券ETF。”在行业人士看来。</p>
-  <p>ETF迎来大的发展机遇，国家队入场，千亿宽基ETF频出更为吸引眼球，但是事实上不仅宽基ETF规模增幅明显，存量债券ETF同样受益。以2024年数据为例，近20只债券ETF获得资金净流入。</p>
-  <p>其中，博时中证可转债及可交换债券ETF去年被净买入达302.81亿元，富国中债7-10年政策性金融债ETF净流入也达到了280.77亿元，同样获得百亿净买入的还有海富通上证城投债ETF，资金净流入107亿元。</p>
-  <p>此外，买入超40亿的还有鹏扬中债-30年期国债ETF、平安中债-中高等级公司债利差因子ETF、海富通上证投资级可转债ETF以及海富通中证短融ETF。</p>
-  <p>债基的发行热度也是从2024年延续至2025年，2024年，国内绿色债基发行破纪录。随着12月鹏华绿色债顶格60亿元募集，当年8只绿色债券主题基金完成发行，合计发行规模达到560亿元，发行数量是2023年的4倍，发行规模也是前一年的4倍之多。</p>
-  <p><strong>到了今年年初，基准做市信用债ETF接力，首募阶段不超过10天，8只产品合力吸金218亿元，助力新年基金发行市场开门红。</strong></p>
-  <p>对于不少受访基金公司而言，从战略部署上，今年将是加大债基、固收+的一年。而在降费背景之下，债基规模做大也被提上日程。</p>
-  <p><strong>“目前还没测算0.15%管理费率需要多大的规模才是盈亏平衡点，但是从规划上，公司对重点产品提出了翻倍的要求。”某基金经理表示。</strong></p>
-  <p>在债市长牛的背景下，基金公司做大规模也有一定的掣肘。</p>
-  <p>尽管不少基金公司希望在债基布局上完善产品线，但监管更愿意基金公司能够在创新产品上有所作为，比如，在风险累积较多的长久期国债等产品的审批相对放缓。</p>
-  <p>此外，一般而言，产品做大规模最快的方式是吸引机构投资者，当前不论是银行通过公募配置债基免税优惠取消传言，还是互认基金上侧重个人投资者的要求，监管的导向在于普通投资者的获益，而非基金公司激进的规模增加。</p>
-  <h2><strong>内外资机构尤为看好信用债</strong></h2>
-  <p>从近期机构观点来看，内外资机构对债市基调判断基本一致：短期或有调整，但是长期看好，尤其是在信用债方面。</p>
-  <p>王郧表示，当下高等级中短久期债券兼具信用风险低与流动性高的优势。未来中高等级信用利差可能继续震荡下行，高等级中性久期的信用债投资策略有望获得相对稳健的投资收益。而在市场出现调整之时，高等级债券的抗波动能力也相对较强，回撤大多低于低等级债券。</p>
-  <p>贝莱德基金首席固收投资官刘鑫在日前举办的2025年投资展望会上表示，展望2025年，中国债券市场将继续在政策宽松的环境中维持较稳运行，并迎来更多的结构性机会。尽管短期市场仍然面临一些风险，但在经济增长企稳和政策逐步见效的背景下，债市长期配置价值依然显著。投资者需在震荡中寻找确定性，把握政策窗口期，同时精细化管理组合风险，以获取更高的收益回报。</p>
-  <p>具体而言，利率债有进一步下行空间，低利率环境将贯穿全年，政金债利差期限的相对价值凸显；信用债方面，随着今年地方政府化债政策进一步深化，优质城投债将继续受到市场青睐。预计今年产业债的总供给会有所增加，增量主要来自央企加杠杆和平台下属产业类子公司新增融资额度，但不会改变市场信用品“资产荒”格局。</p>
-  <p>“站在中期和更长时间维度来看，债市格局并未扭转。”摩根资产管理中国总经理助理兼债券投资总监张一格指出，但从短期来看，当前十年期国债收益率过度抢跑全年货币宽松预期，可能会出现一定波动，将关注长端债券在波动后的逆向配置价值。今年继续追求稳健投资需拓宽思路，在可转债方面，此类品种自身的防守属性、股票波动率的上升，以及市场供求关系都有望提升可转债的估值，可转债市场的投资机会值得投资者关注。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/6TM5_BsWTWiHO4v2RCBkiw" rel="noopener noreferrer nofollow" target="_blank">“创业板观察”</a>，作者：闫军，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131741829257736</id>
-            <title>不到4小时，谷歌Gemini写完10万字商业战略书籍，人类全程没碰一个字</title>
-            <link>https://www.36kr.com/p/3131741829257736</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131741829257736</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 00:38:10 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: AI写作, DeepWriter, 商业书籍, SaaS初创公司  
-<br><br>  
-总结: 初创公司DeepWriter宣布全球首部完全由AI创作的商业书籍诞生，书籍长度约10万字，创作时间不到4小时，且全程没有人类参与。使用谷歌的AI模型，DeepWriter通过简单的提示词生成内容，展示了AI在写作领域的潜力。书籍主题围绕小型SaaS初创公司如何在竞争中脱颖而出，内容质量接近人类创作。AI的写作速度和定制能力为未来的书籍创作带来了新的可能性，尽管人类作家仍然具有独特价值。 </div>
-                        <hr>
-                    
-                    <blockquote>
-   <p>初创公司DeepWriter宣布：世界第一部完全由AI写作的10万字商业竞争书籍诞生了！全程没有人类参与工作，不到4小时，即可完成约10万单词的商业书籍创作。</p>
-  </blockquote>
-  <p>「文章本天成，妙手偶得之。」</p>
-  <p>本来充满创意与想象的写作，LLM已经可以上手了。</p>
-  <p>这次更是直接，LLM不光可以写文章了，大部头的书籍也要被拿下了？</p>
-  <p>近日，AI初创公司DeepWriter宣布：全球第一部由AI写作的203页商业战略主题的书籍诞生了！全程没有人类参与写作，约10万单词。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_4909a80dc2f1465fb1ff313c841678c4@1743780481_oswg65918oswg856oswg237_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>AI如何完成书籍写作</strong></h2>
-  <p>据介绍，只要「提示+Deepwriter+谷歌的AI模型」，不到4小时完成了200页、10万单词、「雌雄难辨」的商业书籍！</p>
-  <p>就这么简单，不需要输入特定文件，细节全靠模型「脑补」！</p>
-  <p>具体的数据如下：</p>
-  <ul>
-   <li>模型型号：使用谷歌的Gemini Flash 2.0-exp模型</li>
-   <li>共203页，约10万单词</li>
-   <li>API调用次数：1152</li>
-   <li>总耗时：3.9小时</li>
-   <li>请求token总数：约1.23亿</li>
-   <li>响应token总数：约92万</li>
-  </ul>
-  <p>主题是关于小型SaaS初创公司如 何登上顶峰：</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_92870b4253c94f6fb4e6ef21e44a8763@1743780481_oswg57744oswg974oswg346_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>而且，给AI模型的提示词也没有精心设计，比较粗糙：</p>
-  <blockquote>
-   <p>写一本引人入胜的自助/商业书籍，结合《孙子兵法》和前沿心理学，让陷入绝境的小型SaaS初创公司，在激烈的竞争中脱颖而出。使用巧妙而新颖的方法来实现这一目标，就像实际发生的那样。就像在战场中一样，创始人既要满怀希望，又需要有实际优势。长度要200 页。</p>
-  </blockquote>
-  <p>注意这并不是说Gemini 2.0 Flash-EXP模型是「战争狂」，是特意提示它以军事家+心理学家的方式来解决问题的。</p>
-  <p>之所以写一部小型SaaS公司如何崛起的书籍，也是因为创作者恰好有一家小型SaaS公司，他正在阅读生成的书籍。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_18800b9ae6714ecfb92bd8a8e53690e2@1743780481_oswg146956oswg1080oswg295_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>而且同一主题，可以尝试不同的方式。这只是其中之一。</p>
-  <p>只从写作质量上看，内容检测系统给出的结果是：AI生成的概率为9.78%。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_a0c971dbc1f5482a9e8215c5b83a57dc@1743780481_oswg220019oswg900oswg467_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>从中随机摘录一段，的确难以分辨作者到底是真「人·类」还是「人·工智能」：</p>
-  <blockquote>
-   <p>分析市场就像将军研究地图，要识别战略制高点、交通要道和潜在的埋伏地点。观察竞争对手的动态，关注他们的优势和劣势。深入了解用户，洞察他们的需求、欲望、恐惧、挫折和抱负。</p>
-   <p>这不仅仅是做一份报告，而是创造战略优势。它旨在收集有助于做出明智决策的信息，制定有针对性的营销策略，开发能够与用户产生共鸣的产品。这是战略计划，而不是一系列市场观察。</p>
-  </blockquote>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_430342dd138949f08f86a43ea75a7f2d@1743780481_oswg108172oswg1046oswg426_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>更多内容，查看下列图片：</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_1e7671bcd31a4738a678466a14ef82ba@1743780481_oswg252576oswg722oswg1216_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_16c4e3e6de854db9959fe5b247658323@1743780481_oswg286387oswg730oswg1304_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_ea93255dd26447f88bcdded5ba9bc2d7@1743780481_oswg325456oswg726oswg1294_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_44e58593cfae44af8f553fd9f6310fc3@1743780481_oswg251317oswg802oswg1428_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_59acf6d3787b4b08a738185ab16ce553@1743780481_oswg275352oswg746oswg1296_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_0d47290d8cbf4516afd637eec4bfc55a@1743780481_oswg297505oswg738oswg1310_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>思路解析</strong></h2>
-  <p>Deepwriter使用LaTeX完成写作，可以轻松绘制各种图表，生成的tex文件包含所有的图表代码。但也可以获取PDF文件。</p>
-  <p>无论是自动生成还是逐步引导的创作， 在Deepwriter完成作品后，可以使用Overleaf等编辑最终的文件，包括其中的图表。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_43c95eb3f19c42d690041cf369bad1b2@1743780481_oswg66298oswg1042oswg272_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>利用LaTex生成了更高层次的示意图，展示了Deepwriter在生成每篇作品时的内部过程， 不论是博客、小说、研究论文，还是用户要求的其他类型的作品。</p>
-  <p>图中的每个节点都是一个复杂的独立的系统！</p>
-  <p>比如在每一个写作周期（writeCircle），都包含了起草、分析和重写3个节点，而每个节点都是独立的系统。</p>
-  <p>Deepwriter之所以能够灵活地创作多种类型的作品，原因就在于它这种独特的流程。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_d72f702b5a2048559aae7f0a3d64e854@1743780481_oswg71550oswg1080oswg1043_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>虽然内部流程非常复杂，堪比制造原子弹的流程，但Deepwriter会生成详细的步骤总结，让人清晰地了解写作思路。</p>
-  <p>比如，这次200页的商业战略分析书籍，也附带有写作构思的说明，而且图文结合，比较直观。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_a823417d32244f69bd5e5ca234fb6422@1743780481_oswg80865oswg1080oswg345_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>比如， 文章整体思路分为4部分：</p>
-  <ol>
-   <li>策略基础</li>
-   <li>迭代执行</li>
-   <li>策略分化</li>
-   <li>策略结果</li>
-  </ol>
-  <p>每一部分，又都包含若干步骤，而且各步骤也可能出现多个结果，从而对后续步骤产生不同的影响。</p>
-  <p>下图详细展示了全书各部分之间的关系。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_77de3e6ece8141b2a36e3da0ba4ba918@1743780481_oswg96566oswg426oswg1200_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>此外，还会对每一章节，给出解释和示意图，比如针对正文中的第一章，解释道：</p>
-  <blockquote>
-   <p>本章节作为SaaS初创公司战略世界的引言，通过一个引人入胜的开篇立即抓住读者的注意力，确立了资源匮乏的初创公司与行业巨头竞争的核心问题。它为本书定下了严肃的战略指南基调，同时带有一些黑色幽默，突显了“我们对他们”的心态，并提醒冲突的双重性。</p>
-   <p>本章节明确了资源不足的SaaS初创公司面临更强大竞争对手的核心问题，为本书后续将要提出的战略解决方案铺设了基础。</p>
-  </blockquote>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_141c6ad2fdfa44ef920821c7550598bd@1743780481_oswg148904oswg1080oswg215_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>还绘制了各部分之间的关系图：</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_33e275d2fab747c7bb991a09f557b955@1743780481_oswg295398oswg792oswg1424_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>更多的例子，见下列图表或说明：</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_b6d04888f4ca4e888cbf448742aab464@1743780481_oswg477199oswg838oswg1422_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_76e63102009843b8b9b0d181250e16ac@1743780481_oswg166747oswg1080oswg675_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_f893055f2abd44bc8d72c5c175af46e5@1743780481_oswg194163oswg1080oswg923_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_48c9a4b0d4df4ed18a78118f9ed57e5c@1743780481_oswg684053oswg1080oswg756_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>更多功能</strong></h2>
-  <p>现在可以免费体验Deepwriter的Beta版本（试用版），但试用版使用GPT-4o-mini，而且功能比较老。</p>
-  <p>基础套餐，可以使用gpt-4o-mini生成多个作品，并很快将扩展到更多的AI模型和功能。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_4dcb230bb00e4f78919b12e51370d8ce@1743780481_oswg461481oswg1010oswg522_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>当发布正式的1.0 版本时，将添加对以下内容的支持：</p>
-  <ul>
-   <li>文件输入</li>
-   <li>github存储库输入：只需点击1次， 就能在存储库上完成整篇论文</li>
-   <li>用于撰写本文的增强功能</li>
-   <li>引文研究助理（目前只有一个占位符）</li>
-   <li>网络搜索</li>
-  </ul>
-  <p>如今，企业版（具有专用托管和品牌）已经具备了正式版的许多功能。</p>
-  <p>企业版甚至可以指定自定义的PDF模板。</p>
-  <h2><strong>对写作的冲击</strong></h2>
-  <p>人类作家和记者仍然有独特的价值，将来依旧存在。</p>
-  <p>然而， AI的确提供了全新的书籍定制和写作速度。比如，只要几个小时，利用AI可以完成一本书：以你喜欢的风格写作，故事发生在你的家乡，以及其他类似的具体的要求。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_7ffba7b8df18448aa398d4006d1ebdc6@1743780481_oswg199603oswg1080oswg413_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>虽然无法取代真正的大作家，但对于以后而言，写一本书再也不意味着什么。</p>
-  <p>甚至有人猜测，LLM模型已经比99%的人写得更好了。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_ce8a3269b7a24306b4a34c2b5b0f6093@1743780481_oswg141270oswg1080oswg267_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h3>参考资料：</h3>
-  <p>https://x.com/DeepwriterAI/status/1880880307819405808</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/9whfNNXYPoGt1rQ0CJX_2A" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，作者：KingHZ，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131750106913538</id>
-            <title>人大、东北大学联合开发「图机器学习库」Jittor Geometric，性能超越PYG、DGL</title>
-            <link>https://www.36kr.com/p/3131750106913538</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131750106913538</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 00:37:58 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Jittor Geometric, 图机器学习, 开源框架, 图神经网络  
-<br><br>  
-总结: Jittor Geometric 1.0是由中国人民大学与东北大学联合开发的图机器学习库，基于国产Jittor框架，旨在高效处理复杂图结构数据。该库在图存储、计算和学习方面进行了优化，性能优于同类框架，支持多种前沿图神经网络模型。Jittor Geometric具有高效性与灵活性，支持海量图数据集和多领域模型，用户学习成本低。未来将继续拓展模型和数据集，关注动态图和分布式训练等领域。 </div>
-                        <hr>
-                    
-                    <blockquote>
-   <p>Jittor Geometric 1.0是由中国人民大学与东北大学联合开发的图机器学习库，基于国产Jittor框架，高效灵活，可助力处理复杂图结构数据，性能优于同类型框架，支持多种前沿图神经网络模型，已开源供用户使用。</p>
-  </blockquote>
-  <p>近日，中国人民大学与东北大学联合开发了图机器学习库Jittor Geometric，其1.0版本近日已正式发布。</p>
-  <p>Jittor Geometric以国产深度学习框架Jittor为基础技术架构，聚焦图数据，在图存储、图计算、图学习等方面作了细致优化，整合、加速了现有多类图神经网络模型，模型运行时间在多种图学习任务上较Pytorch Geometric（PyG）、Deep Graph Library（DGL）等同类型框架提升10%~50%。</p>
-  <p>同时，Jittor Geometric简洁、易用、跨平台通用性强、用户学习成本低，目前已用于研究生课程教学。</p>
-  <p>开源地址：https://github.com/AlgRUC/JittorGeometric</p>
-  <h2><strong>「Jittor Geometric」架构全景图及三大特性</strong></h2>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_f89939764ac4485aa74c4593359b7a68@1743780481_oswg294919oswg1080oswg1020_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图 1：Jittor Geometric架构示意图</p>
-  <p>目前，Jittor Geometric已集成了以谱域、动态、几何图神经网络模型为代表的多类代表性图学习模型。</p>
-  <p>Jittor Geometric的底层为国产深度学习框架Jittor，在其上包含图数据存储层、图计算优化层和图学习设计层。</p>
-  <p>其中，图存储层采用了压缩存储、内存调度等策略以减少显存消耗；图计算层通过图算子设计、图结构划分、并行计算及稀疏矩阵高效计算等方法加速图计算效率。</p>
-  <p>图学习层将图神经网络的传播学习过程拆分为几类代表性图算子的组合，进而通过加速图算子的数据存取与计算效率加速图学习模型的性能表现。</p>
-  <p>据研发团队介绍， Jittor Geometric具有三大特性：</p>
-  <h3><strong>高效性与灵活性的完美结合</strong></h3>
-  <p>在编写Jittor Geometric之初，研发团队就对图学习中的各种操作进行了针对性优化设计，使框架兼顾高效性与灵活性。研发团队表示Jittor Geometric的高性能主要来自于以下五个方面：</p>
-  <ul>
-   <li><strong>AVX向量化:</strong>通过AVX指令集进行向量化计算，显著提高了大规模数据处理和计算效率。</li>
-   <li><strong>顶点级别并行计算</strong>: 利用顶点级并行计算技术，有效提升了图结构数据的处理速度。</li>
-   <li><strong>稀疏矩阵算子设计</strong>：采用稀疏矩阵乘法算子（SPMM），大幅提升稀疏图传播过程计算效率。</li>
-   <li><strong>基于warp的并行计算</strong>: 在GPU中使用warp级别的并行计算，实现高效图数据处理。</li>
-   <li><strong>CPU-GPU自动内存交换</strong>: 实现CPU与GPU之间的自动内存管理与数据交换，优化内存使用和数据传输效率。</li>
-  </ul>
-  <h3><strong>海量图数据集支持</strong></h3>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_e4829b5e06694be880cb6bbf5052ac88@1743780481_oswg205460oswg1080oswg602_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图 2：Jittor Geometric支持海量图数据集</p>
-  <p>Jittor Geometric支持多种类型图数据，涵盖了图神经网络各领域经典任务的数据集，用户可以用统一方式来高效便捷地读取和调用。</p>
-  <p>此外，研发团队还提供了灵活的API，便于用户导入自定义数据集进行实验。</p>
-  <h3><strong>多领域图机器学习模型支持</strong></h3>
-  <p>Jittor Geometric不仅实现了经典的图神经网络模型，还特别涵盖图神经网络前沿领域的模型：</p>
-  <ul>
-   <li><strong>动态图神经网络模型：</strong>增强对动态图的支持，提升动态图场景下的模型性能。</li>
-   <li><strong>谱域图神经网络模型：</strong>包含谱图神经网络方法，促进谱图学习在不同领域的应用。</li>
-   <li><strong>分子图神经网络模型：</strong>支持前沿分子图神经网络模型，推动生物领域研究。</li>
-  </ul>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_b4ce793559d4499ea58ac701c7156006@1743780481_oswg127853oswg1080oswg560_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图 3：Jittor Geometric支持多领域图神经网络模型</p>
-  <p>其支持多种前沿模型：</p>
-  <ul>
-   <li><strong>深层图卷积模型GCNII:</strong>解决了图卷积网络的过度平滑的问题，并从理论上证明了该算法的有效性。在国际知名机器学习数据网站PaperWithCode的各测评榜单中长期占据第一名的位置，在Cora和Pubmed数据集上的预测准确率自2020年提出至今始终保持第一，获世界人工智能大会青年优秀论文提名奖。</li>
-   <li><strong>分子图基座模型Uni-Mol:</strong>基于分子三维结构的通用分子表征学习框架, 性能优越、模型泛化能力强，在小分子性质预测、蛋白靶点预测和蛋白-配体复合物构象预测等任务上都超越之前方法。</li>
-  </ul>
-  <p>Jittor Geometric的各种模型均以高度统一的模式编写，极大降低了用户的学习成本。在熟练掌握一类数据集和模型后，用户可以借助Jittor Geometric自由探索各领域图神经网络模型的设计，无需花费大量时间进行领域间的迁移学习。</p>
-  <p>据研发团队透露，未来Jittor Geometric还将进一步拓展支持的数据集和模型，关注图神经网络前沿研究，如大语言模型与图学习等，助力研究人员和开发者们更便捷地进行前沿探索和落地应用。</p>
-  <h2><strong>多个数据集上，性能超过现有主流框架</strong></h2>
-  <p>Jittor Geometric开发团队提供了实验数据。以GCN模型为例，在各种经典图数据集上Jittor Geometric均展现出与现有主流图机器学习框架相当或更优的性能。</p>
-  <p>具体来说，Jittor Geometric在小规模图数据集上的训练速度相较主流框架提升25%；在大规模图数据集上显著优于Pytorch Geometric和Paddle Graph Learning, 与Deep Graph Library相当。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_121b9b6768cd44378eb0ecafc5abfb7d@1743780481_oswg100715oswg1080oswg600_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图 4：Jittor Geometric与各主流框架性能对比</p>
-  <p>为了方便广大用户上手Jittor Geometric，研发团队采用了与PyTorch Geometric较为相似的模块化接口。从上手难度来看，熟悉 PyTorch Geometric的用户可以直接上手，甚至没有因为变量名不同而带来影响。</p>
-  <p>Jittor Geometric提供了良好的课程支持，帮助对图机器学习感兴趣的同学们更好地学习和设计各种图神经网络。一方面，Jittor Geometric 定义了全面且精简的基础图算子，同学们可以基于这些基础算子实现多样的消息传递和图算法；另一方面还提供了各领域的模型实现、训练框架及数据集，帮助同学们更快上手图机器学习领域的任务、数据及模型设计。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_eea61b9b8ad04c808ed753f680612340@1743780481_oswg386777oswg1080oswg607_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图 5：Jittor Geometric在图机器学习课程中的应用</p>
-  <p>据研发团队介绍，Jittor Geometric已经应用到课程教学中，同学们基于该框架设计并实现了各种动态图神经网络和异配图神经网络，在多个数据集上进行实验并作相关分析。同学们反馈该框架简明易懂，学习成本低，在多种前沿模型及数据集上相较Torch Geometric实现更简单，训练更快速。</p>
-  <h2><strong>Jittor Geometric的新进展</strong></h2>
-  <p>Jittor Geometric作为一个新兴图机器学习平台，在一些功能上，仍旧需要持续迭代完善。比如生态的建设，以及更大范围的推广，仍旧需要很多的努力。</p>
-  <p>据研发团队透露，Jittor Geometric将在以下几个方面进行进一步提升：</p>
-  <p><strong>1. 更多前沿模型补充</strong></p>
-  <p>拓展和完善图神经网络领域的最新算法和模型，支持更多的前沿图神经网络架构。</p>
-  <p><strong>2. 高效动态图计算支持</strong></p>
-  <p>加强对动态图的高效计算支持，提升图神经网络在处理动态、时序图数据时的性能。</p>
-  <p><strong>3. 分布式训练加速</strong></p>
-  <p>进一步优化分布式训练框架，支持多节点、多GPU的并行计算，提升训练大规模图模型的速度和效率。</p>
-  <p><strong>4. 辅助转换脚本</strong></p>
-  <p>提供PyTorch Geometric实现到Jittor Geometric实现的自动转换脚本，帮助熟悉PyTorch的用户更快上手。</p>
-  <h2><strong>研究团队: 中国高校图学习开源框架的新力量</strong></h2>
-  <p>据官网介绍，Jittor Geometric由中国人民大学魏哲巍教授和东北大学张岩峰教授及其团队共同打造。</p>
-  <p>开发Jittor Geometric的主力，是实验室雷润林，陆施展，付振波等一批博士生。他们的主要研究方向涵盖谱域、动态、分子等多领域图神经网络，图存储与图计算优化等，在重要国际会议NeurIPS, ICML, ICLR, KDD, VLDB, SIGMOD, ICDE等发表多篇论文。据雷润林透露，团队接下来的重点将围绕学术界展开，致力于使Jittor Geometric成为国内外学术界最受欢迎、使用最广泛的图机器学习库之一，并对AI产业界产生积极影响。</p>
-  <p>雷润林表示：「我们聚焦于图机器学习的前沿领域，关注图学习未来发展中关键的动态图和大规模图数据处理等。同时希望能够通过构建活跃的开源社区，不仅完善框架本身，还形成各种图学习的实践指引，技术博客及问题讨论等，帮助对图机器学习领域感兴趣的用户更好地探索实践。目前，Jittor Geometric已经应用到课堂教学中并取得良好反馈，未来还将联合更多高校将其融入教学体系中。」</p>
-  <p>总之，打造一款全面高效的图机器学习库并非易事，而选择开源则意味着要接受来自全球开发者社区的严格检验。</p>
-  <p>如今，Jittor Geometric已经迈出了至关重要的一步，诚邀所有感兴趣的读者参与其中，一同见证这一新兴框架的成长与发展。</p>
-  <h3>参考资料：</h3>
-  <p>项目地址：https://github.com/AlgRUC/JittorGeometric</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/dZIQs2hGtYsWcI0aYQOtyg" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，作者：LRST，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3131752297454085</id>
-            <title>特朗普时代再临：科学界喜忧参半，AI与太空探索或成最大赢家</title>
-            <link>https://www.36kr.com/p/3131752297454085</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3131752297454085</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 00:37:05 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 特朗普, 科学界, 人工智能, 气候变化  
-<br><br>  
-总结: 特朗普即将开启第二任期，科学界面临变动局面。预计他将削减对环境和基础研究的支持，转而推动人工智能、量子研究和太空探索等领域的发展。科技公司和AI开发者对此表示期待，而气候和生物医学研究人员则感到担忧。特朗普可能会削减环保机构的经费和人员，甚至可能再次让美国退出《巴黎气候协定》。科学领域的前景将出现赢家和输家，尤其是在受到科技巨头支持的领域。 </div>
-                        <hr>
-                    
-                    <blockquote>
-   <p>特朗普2.0政府即将开启，科学界又将迎来「几家欢喜几家忧」的变动局面。AI与太空探索成最大赢家，环境气候科学或将再次被特朗普抛弃。</p>
-  </blockquote>
-  <p>今天，特朗普将宣誓就任美国第47任总统，开启他的第二任期。</p>
-  <p>回看特朗普在第一任期（2017-2021）否认气候变化风险，并试图大幅削减科研资金的举措，科学界对于这位即将上任的美国总统的看法是：</p>
-  <p>鉴于特朗普一直宣扬的要砍掉大量科研经费与大力支持马斯克的「政府效率部门」，预计他将放弃对环境和传染病等基础研究的支持，但可能会推动人工智能、量子研究和太空探索方面的工作。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_b31972045b0e49da99f6f5d4d3dcd219@1743780481_oswg156073oswg1080oswg1398_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>科学家和工程师们因此也出现了两种截然不同的前景展望：</p>
-  <ul>
-   <li>科技公司、太空爱好者、人工智能（AI）开发者等期待未来几年他们将迎来有利政策，并对探索新的可能而感到无比兴奋。</li>
-   <li>从事气候、地球科学和生物医学研究的人员，他们则担心其基础研究会被削减经费、边缘化甚至受到质疑与诋毁。</li>
-  </ul>
-  <p>在马斯克共同牵头的「政府效率部门」的指导下，特朗普政府表示将削减制定法规的「未经选举产生的官僚」数量。这可能包括美国环境保护署（EPA）和食品药品监督管理局（FDA）的数千名科学家。</p>
-  <p>特朗普还计划取消许多联邦雇员的就业保护，这将使他更容易用忠诚的政治任命者取代科学家和其他专家。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_aa33b8e617e94950ae2385676649ab1e@1743780481_oswg1533168oswg1080oswg800_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>AI与量子科学或将更进一步</strong></h2>
-  <p>在特朗普的第一个任期内，他当时的科学顾问Kelvin Droegemeier推动支持「未来产业」：人工智能、量子信息科学（QIS）、先进制造、先进通信和生物技术。政策专家预计这些领域在特朗普的第二个任期内将继续受到支持。</p>
-  <p>中东研究所的战略技术与网络安全项目主任Mohammed Soliman表示：</p>
-  <p>「特朗普和拜登在其他所有问题上都可能存在冲突，但在人工智能和量子技术方面，他们实际上是一致的。人工智能和量子技术是中美竞争的新前线，双方都明白这一点。这不仅仅是政策问题——这是一场技术军备竞赛。」</p>
-  <p>此前，特朗普承诺将废除拜登关于监管人工智能安全的命令——部分原因是他认为这阻碍了人工智能的创新。</p>
-  <p>一些研究人员担心，如果在人工智能技术方面任由企业自行监管，将会发生什么难以遏制的威胁。</p>
-  <p>此外，政策研究人员预计，特朗普未来的行政命令将加强政府在国家安全和军事用途上对人工智能的应用。</p>
-  <p>特朗普一直批评拜登2022年两党通过的《芯片与科学法案》，该法案授权投入数十亿美元以促进美国半导体制造业发展。毕竟特朗普认为，对中国的商业竞争对手征收关税即可免费达成相同的效果。</p>
-  <p>但乔治城大学研究科技政策的Charles Wessner表示，鉴于该法案对地方经济和就业的贡献，特朗普不太可能废除该法案。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_e256b172c488450bbed3d9d7559bc4de@1743780481_oswg253920oswg612oswg413_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>登月与移民火星</strong></h2>
-  <p>美国国家航空航天局（NASA）目前最重要的任务是「阿尔忒弥斯」计划，旨在将宇航员送上月球。为了这项计划，NASA打造了新型重型运载火箭「太空发射系统」（SLS）以及名为「猎户座」的载人太空舱。</p>
-  <p>然而，SLS每次发射成本超过40亿美元，且不可重复使用。因此特朗普政府可能会试图说服国会取消政府的火箭项目，转而采用SpaceX研发的运载火箭。</p>
-  <p>特朗普选定的NASA局长人选、亿万富翁兼私人宇航员Jared Isaacman，其上任后或许也会倡导重大变革。</p>
-  <p>Isaacman曾向SpaceX付费，搭乘其进行了两次商业太空飞行，而且他还曾谈及自己眼中政府承包项目的确存在着浪费与延误问题。</p>
-  <p>与此同时，中国也正制定将宇航员送上月球的计划，这无疑为特朗普的「美国优先」方针增添了紧迫感。毕竟他的政府曾在2017年就承诺过，将在2024年前就让人类重返月球。</p>
-  <p>NASA计划在2040年代将宇航员送往火星的计划也可能会加速。太空政策研究人员表示，马斯克表达了人类移民火星的强烈愿望，他可能会尝试利用SpaceX的星际飞船影响NASA，以更快地实现这一目标。因此，NASA可能会面临压力，要求其迅速将宇航员送上月球，然后转向火星。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_50c17dfdb3884816b11349c6e90f3cbf@1743780481_oswg506324oswg767oswg575_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>气候与环境科学难获关注</strong></h2>
-  <p>气候和环境是科学家们正在为最坏情况做准备的领域。与他的第一个任期类似，预计特朗普将撤销或放宽对有毒化学品、温室气体和其他类型污染的监管。</p>
-  <p>削减成本和人员可能会对美国环保署（EPA）造成特别严重的打击，但其他机构的环境研究项目，如NASA与国家海洋和大气管理局，也可能成为削减的目标。</p>
-  <p>「特朗普对EPA的规划简直是一场五级大火警报，数百万美国人的健康岌岌可危」，环保网络组织顾问Jeremy Symons说道。该非营利组织由华盛顿特区的前美国环保署官员组成，成立于特朗普第一任期。</p>
-  <p>但许多政策专家表示，特朗普政府试图削减已流向共和党领导的州内企业和社区的气候投资时，可能会面临挑战。毕竟这些投资到2032年的估计总价值就能超过1万亿美元。</p>
-  <p>例如，能源公司有望从碳捕获以及氢气清洁生产的投资中获益，氢气可作为车辆等领域的替代燃料。然而，气候问题倡导者警告称，阻止全球变暖的唯一途径是停止使用化石燃料，而特朗普却执意要反其道而行之。</p>
-  <p>特朗普还预计将第二次让美国退出2015年的《巴黎气候协定》，他曾于2020年首次完成了这一过程，但拜登后来重新加入了该协议。</p>
-  <p>政策专家表示，特朗普此举可能会减轻包括中国在内的其他国家加速自身气候行动的压力。但对于许多能源专家来说，最大的问题是特朗普提高从中国和墨西哥等地进口商品关税的承诺将如何影响全球向清洁能源的转型。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_b26e0aecd5094e1ab987f968a6b9747f@1743780481_oswg369330oswg767oswg431_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">点燃地球剪影，呼吁政府更加重视全球变暖</p>
-  <p>Nature的编辑团队专门向特朗普写信道：</p>
-  <p>「气候和能源安全需要成为优先事项。从科学的角度来看，毫无疑问人类活动正在使地球变暖。研究人员的压倒性共识是，所有国家都容易受到持续燃烧化石燃料带来的严重破坏。破坏性的气候影响很可能是本月加州发生毁灭性野火的主要原因」</p>
-  <p>总体而言，科学领域的前景可能喜忧参半，纽约市立学院物理学家Michael Lubell表示，「我认为特朗普对基础研究一无所知，我也不认为他的大多数顾问关心基础研究。」</p>
-  <p>他表示，科学领域「将出现一些赢家」，尤其是在得到马斯克和其他科技巨头支持的领域。但Lubell表示，随着联邦预算预计减少，「这也意味着将出现输家」。</p>
-  <h3>参考资料：</h3>
-  <p>https://www.nature.com/articles/d41586-025-00052-z</p>
-  <p>https://www.nature.com/articles/d41586-025-00050-1</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/WMRgkMRP_eh2vbH1JmyXIg" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，作者：泽正，36氪经授权发布。</p>
                 ]]>
             </content:encoded>
         </item>
