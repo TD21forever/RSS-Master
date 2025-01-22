@@ -5,6 +5,818 @@
         <link>https://www.36kr.com/information/technology</link>
         
         <item>
+            <id>https://www.36kr.com/p/3133600514955783</id>
+            <title>UC伯克利等提出具身智能「动作Tokenizer」，效率飙升5倍</title>
+            <link>https://www.36kr.com/p/3133600514955783</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3133600514955783</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 22 Jan 2025 08:14:01 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: FAST, 动作Tokenizer, 机器人控制, 离散余弦变换  
+<br><br>  
+总结: 研究者提出了FAST，一种高效的动作Tokenizer，结合离散余弦变换（DCT）和字节对编码（BPE），显著缩短了训练时间并提高了复杂任务的执行效率。FAST旨在解决传统动作Tokenization方法在处理精细任务时的挑战，提升了VLA模型在高频机器人控制任务中的表现。通过在1万小时的机器人数据上训练，FAST与最先进的扩散VLA模型效果相当，训练时间缩短最多5倍。FAST能够将动作以离散Token表示，增强了机器人执行语言指令的能力，并首次实现在DROID数据集上通过自然语言命令进行零样本执行。 </div>
+                        <hr>
+                    
+                    <p><strong>【导读】</strong>研究者提出了FAST，一种高效的动作Tokenizer。通过结合离散余弦变换（DCT）和字节对编码（BPE），FAST显著缩短了训练时间，并且能高效地学习和执行复杂任务，标志着机器人自回归Transformer训练的一个重要突破。</p>
+  <p>来自π，伯克利和斯坦福的研究者近期提出了FAST，一种为VLA模型设计的高效动作Tokenizer。&nbsp;</p>
+  <p>FAST旨在解决传统动作Tokenization方法在处理精细任务时面临的挑战，为VLA模型在更复杂、高频的机器人控制任务带来了显著改进。&nbsp;</p>
+  <p>将FAST与π0 VLA结合，在1万小时的机器人数据上对π0-FAST进行训练，效果与最先进的扩散VLA相当，训练时间最多缩短5倍。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_d41185ada00a4319a315f74a34b23f05@46958_oswg123204oswg1080oswg390_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>论文链接：https://arxiv.org/abs/2501.09747&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_479846a1626e48518f2fb384b8d16a37@46958_oswg109284oswg942oswg911_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>想训练Transformer来控制机器人，具体该怎么做？&nbsp;</p>
+  <p>Transformer输出的动作块是一小段机器人动作序列，例如手臂关节角度。对于不太精细的系统，其动作序列可能包含3-5个动作；而对于高频灵巧机器人，动作序列可能会有20-50个动作。&nbsp;</p>
+  <p>用合适的方法表示这些动作，对于高效学习非常重要。&nbsp;</p>
+  <p>现有的VLA模型常用简单的离散划分方法，这种方法对于简单的任务是可行的，但对于需要高精度和高频控制的复杂精细技能，就不太管用了。&nbsp;</p>
+  <p>扩散方法或流匹配通常展现出更好的性能，如π0模型。然而，扩散方法的训练时间会更长。&nbsp;</p>
+  <p>那么，如何表示这些动作，才能在保持灵活性和精确性的同时，快速地训练Transformer呢？&nbsp;</p>
+  <p>为解决这个问题，Physical Intelligence提出一款专为机器人动作设计的新型Tokenizer「FAST」。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_1bc3449b640d4b4ab25d9f913b71549b@46958_oswg328814oswg1080oswg688_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>借助FAST，研究者开发出了一种高效的机器人动作Tokenization方法，让机器人技术能够与自回归Transformer训练流程无缝衔接。&nbsp;</p>
+  <p>FAST能把动作像语言一样，用离散Token表示。FAST提升了从大规模互联网数据预训练的迁移能力，增强了机器人执行语言指令的能力。&nbsp;</p>
+  <p>借助FAST，首次实现在DROID数据集上训练出只需通过简单的自然语言命令，机器人就能在新环境中零样本执行多种操作任务。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_3cad37e3f85f47ee8dc7836da5cf25e5@46958_oswg268044oswg1080oswg535_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>FAST Tokenizer</strong></h2>
+  <h3><strong>用离散余弦变换（DCT）压缩</strong></h3>
+  <p>FAST通过在训练前压缩原始动作块，能显著提升基于灵巧机器人数据的策略训练和推理效率。&nbsp;</p>
+  <p>FAST使用了一种基于离散余弦变换（DCT）的压缩算法，来提高VLA模型的训练速度。DCT是一种频域变换，因简洁和计算高效，常用于压缩算法，如JPEG图像压缩、MP3音频的编解码。&nbsp;</p>
+  <h3><strong>FAST Tokenization算法</strong></h3>
+  <p>研究者利用离散余弦变换（DCT）设计了FAST，它是一种快速且高效的机器人动作Tokenization方法。下图展示了从原始机器人动作到动作token的步骤。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_34e47c0b10df4815bc1a52954b03d3b7@46958_oswg111093oswg1080oswg508_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>首先，对输入的动作进行归一化。完成归一化后，每个动作维度分别应用离散余弦变换（DCT）。&nbsp;</p>
+  <p>研究者用字节对编码（BPE）压缩DCT矩阵，BPE是训练LLM常用的压缩算法。将DCT和字节对编码（BPE）结合，就能把原始动作块压缩成数量少但更密集的动作Token。&nbsp;</p>
+  <p>通常每个动作块包含30-60个Token，和以前的动作Tokenization方法相比，压缩率提高了10倍。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_d6cdff28f9a64551a9d2fd697e2a97d2@46958_oswg104739oswg886oswg518_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h3><strong>通用机器人动作Tokenizer</strong></h3>
+  <p>基于FAST，研究者发布了FAST+，这是通用的机器人动作Tokenizer，用100万个真实机器人动作序列上训练而成。&nbsp;</p>
+  <p>FAST+ Tokenizer能高效地标记各种机器人动作序列，包括单臂、双臂和移动机器人。FAST+能当黑盒Tokenizer，对各种机器人的动作序列编码，涵盖多样的动作空间和控制频率。&nbsp;</p>
+  <p>借助这个Tokenizer训练自己的策略，只需三行代码即可实现：&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_1d36c5c03e8c475e803706e492505d12@46958_oswg47782oswg1080oswg164_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>π0-FAST：开箱即用</strong></h2>
+  <p>研究者将FAST和π0模型结合进行测试。</p>
+  <p>以往的离散化VLA模型只能处理简单操作任务。但有了FAST，就能借助它训练自回归Transformer策略，完成像折叠衣物、收拾餐桌、打包购物袋这类高难度的精细任务。同时，模型的训练速度快了5倍。</p>
+  <p>下面是一些能用FAST策略解决的任务。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_c8faab98e25e4657bf5882ff4c6cbe3a@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_42200d8f43944907bb056e575d2b51b9@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_aecccccb6d324621a30e35b7900d4d2f@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>借助FAST，研究者首次在DROID数据集上训练出通用策略，能在新环境中对多种指令实现泛化执行。</p>
+  <p>DROID数据集是一个由全球大型机器人研究联盟历经两年收集的开源数据集，包含多样化的场景和机器人操作任务，涵盖从大学建筑到真实家庭等多种场景。</p>
+  <p>到目前为止，尚未有一种方法能在DROID数据集上训练出通用策略，在新环境中零样本执行语言指令。&nbsp;</p>
+  <p>但借助FAST，研究者实现了这一目标。快来看看它的实际表现！&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_04625de9a21448ad854a2de982fc42c3@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_3df792ff4ded4ea6995d307a87fd7493@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_0a5fbf4ccbc44b029ff5fb5de6c29318@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在美国三所大学（加州大学伯克利分校、斯坦福大学、华盛顿大学）的测试环境中，都能直接完成简单的操作任务。&nbsp;</p>
+  <p>即便在执行任务失败，它也会基于常识去尝试解决问题。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_bb4bcfc9358c4c1c990f7d197075a2c9@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_9e4245e037364fd88bff58f545cd30a9@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_9ef432cd8a814f49907039003668f286@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>虽然这一策略尚不完善，却为我们描绘了未来的图景：未来能直接下载并使用通用机器人模型，就像今天使用语言模型一样。&nbsp;</p>
+  <h2><strong>实验结果</strong></h2>
+  <p>表中展示了FAST Tokenizer与先前方案在压缩率方面的比较。</p>
+  <p>FAST对所有数据集的输入动作序列都实现了显著压缩，对高频动作数据的数据集压缩效果更明显。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_8dd8425df87a4728a530fa39f131a1cf@46958_oswg62616oswg1011oswg291_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>基于100万条真实机器人动作序列训练的通用动作Tokenizer FAST+与之前的VLA相比显著提高了训练效率。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_afb9cdebd4454825a0134928b4e929ec@46958_oswg58115oswg1080oswg378_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>FAST+ Tokenizer在各类机器人数据集上有良好的压缩性能，且在各种机器人形态、动作空间和控制频率范围中都展现出有效性。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_030ef6fd28e14a79b6ddbc28b2037f31@46958_oswg95784oswg1080oswg510_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>研究者借助FAST Tokenizer成功训练出首个自回归通用策略π0-FAST。它基于之前的π0模型，沿用相同的模型架构和训练数据集。&nbsp;</p>
+  <p>研究者把π0-FAST与最先进的扩散π0 VLA进行对比。&nbsp;</p>
+  <p>总体而言，自回归π0-FAST模型的表现与扩散π0模型相当，即便在最具挑战性的洗衣折叠任务上也是如此，且所需计算量显著更少。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_66a11965b4314c81ba6dbe02237f43ce@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_0d9db0eba6e94021bc4f3d06a0208442@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>因其采用简单的自回归离散化方法，π0-FAST的收敛速度比扩散π0模型快得多，所需的训练GPU小时数减少5倍。&nbsp;</p>
+  <p>对于最先进的VLA训练，通常需数千个GPU小时，计算资源减少5倍至关重要。&nbsp;</p>
+  <p>基于FAST的方法可在复杂的机器人任务上训练自回归VLA，而先前的方法在这些任务上效果不佳。&nbsp;</p>
+  <p>研究者对于自回归VLA训练的前景感到十分兴奋。然而，当前的模型存在一个较为显著的缺点，即推理速度较慢。π0-FAST采用自回归解码的方式，其速度明显比不上π0所使用的流匹配解码。&nbsp;</p>
+  <p>未来，LLM中广泛应用的加速离散自回归Transformer模型推理的技术，或许能为提高VLA推理速度带来启发。&nbsp;</p>
+  <p><strong>参考资料：&nbsp;</strong></p>
+  <p>https://www.pi.website/research/fast&nbsp;</p>
+  <p>https://arxiv.org/abs/2501.09747&nbsp;</p>
+  <p>https://huggingface.co/physical-intelligence/fast&nbsp;</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/gR2Mo6m_yu7xdljzsHgLTg" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，编辑：英智&nbsp;，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3133600559930120</id>
+            <title>41%博士后逃生学术界，顶刊PNAS揭残酷真相，名校光环背后曝职业危机</title>
+            <link>https://www.36kr.com/p/3133600559930120</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3133600559930120</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 22 Jan 2025 08:12:31 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 博士后, 学术界, 发表成果, 职业成功  
+<br><br>  
+总结: 研究表明，博士后阶段的发表成果与留在学术界的成功密切相关，41%的博士后最终选择离开学术界。博士后阶段的发表率比博士生阶段更为重要，适度改变研究主题与未来职业成功正相关。出国进行博士后研究有助于提高教职获得的机会，而名校的博士更容易成功。研究还指出，博士后培训的随意性和系统性瓶颈导致许多博士后难以获得教职。 </div>
+                        <hr>
+                    
+                    <p><strong>【导读】</strong>博士后压力巨大，41%最终选择离开学术界，留在学术界困难重重。近日，一篇PNAS论文揭秘了在学术界生存的关键因素。</p>
+  <p>去年，随着LLM产品化和工程化的发展，工业界的研究岗迅速缩减，许多AI博士面临巨大的就业压力，纷纷表示后悔读博。&nbsp;</p>
+  <p>工业界机会稀少，学术界同样问题重重。 为此，有的博士生甚至转行去当了主播。&nbsp;</p>
+  <p>现在，更是有研究曝出，那些已经半只脚踏入学术圈的博士后，有高达41%的人选择了离开。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_5ad730225b594f1ba74daa99debe9619@46958_oswg115412oswg1080oswg487_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">如此惊人的「劝退率」，第一时间便引起了Nature的注意</p>
+  <p>在这篇1月20日发表在《美国国家科学院院刊》（PNAS）的论文中，作者从科学学（science of science）角度，揭示了博士后发表成果与成功留在学术界的关系，并为刚获得博士学位的学者提供了全面且有统计依据的建议。</p>
+  <p>其中，主要亮点如下：</p>
+  <p>发表率与教职之间存在强相关性</p>
+  <p>博士后阶段的发表成果似乎比博士生阶段的更为重要</p>
+  <p>适度改变研究主题与未来的职业成功正相关</p>
+  <p>博士后出国，更容易获得教职</p>
+  <p>名校的博士更容易成功，但欧洲、加拿大和美国除外</p>
+  <p>少数名校为整个美国学术界培养了教职人员</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_41c5551b662344e1842a529ba173d330@46958_oswg94961oswg1080oswg252_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>论文链接：https://www.pnas.org/doi/epdf/10.1073/pnas.2402053122&nbsp;</p>
+  <h2><strong>研究内容</strong></h2>
+  <p>博士后是专门设计的学术界第一个职业阶段。从这个意义上来说，这也是第一次将离开学术界视为失败的节点。&nbsp;</p>
+  <p>然而，博士后阶段也是一个瓶颈——许多博士后难以成功获得教职。&nbsp;</p>
+  <p>博士后阶段的低产出，几乎没有可以归咎的理由，所以这一阶段的压力陡然增加。&nbsp;</p>
+  <p>因此，博士后经历的普遍印象往往是负面的：「失望」、「压力过大」、「不幸福」和「被剥削」等词频频出现于近期文献中。&nbsp;</p>
+  <p>然而，并非所有博士后都离开了学术界。有些人坚持下来，成为科学领域的「人生赢家」。&nbsp;</p>
+  <p>那么，这些成功者有哪些共同点呢？&nbsp;</p>
+  <p>例如，最近针对美国学术界的研究表明，博士授予机构的声望不仅对教职聘用有显著影响，还对教职成员的留任和流失产生重要影响。&nbsp;</p>
+  <p>实际上，<strong>少数高声望大学为整个美国学术界培养了教职人员</strong>。后续研究认为，教职聘用延续了这些结构性偏见。&nbsp;</p>
+  <p>基于数据的学术就业市场研究，大多数都将博士学位授予机构作为解释变量，但极少研究博士后阶段的影响。&nbsp;</p>
+  <p>但有研究发现，获得博士后奖学金对于早期学术生涯的成功至关重要，其重要性与顶刊的第一作者相当。&nbsp;</p>
+  <p>此外，博士后经历有助于建立长期的国际学术联系。&nbsp;</p>
+  <p>但缺乏针对博士后的数据驱动研究，可能是因为对博士后普遍的负面被动的描述是——博士后是一个等待或试用期。&nbsp;</p>
+  <p><strong>新研究为刚获得博士学位的学者，提供全面且有统计依据的职业建议</strong>。&nbsp;</p>
+  <h2><strong>博士后的瓶颈</strong></h2>
+  <p>作者收集了包括出版物数据库（微软学术图谱，MAG）和大型在线职业网络的数据。</p>
+  <p><strong>根据调查的数据，41%的博士后最终选择离开学术界。</strong></p>
+  <p><strong>这种退出现象反映了系统性瓶颈，与个人资质无关——许多博士后在设计之初就注定要离开学术界。</strong></p>
+  <p><strong>大量证据表明博士后培训的随意性，例如一些有潜力的新博士生被分配到最终没有产出成果的项目。</strong></p>
+  <p>这表明，将研究生阶段与博士后阶段的发表率进行比较，可能提供宝贵的见解。&nbsp;</p>
+  <p>在图1A中，可以清楚地看到，发表率的变化与获得教职机会之间存在强相关性。&nbsp;</p>
+  <p>进一步分析表明，这种关系独立于绝对发表率的高低。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_f93899deabf64ee1a078cea6e7dcd9ff@46958_oswg105560oswg1080oswg525_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图1：谁在博士后阶段后退出学术界？&nbsp;</p>
+  <p>图A显示了博士后期间发表率相对于博士阶段的变化与博士后进入教职的比例之间的关系。&nbsp;</p>
+  <p>图A中，分组方法将观察数量平均分配，但 -∞ 点（表示博士后阶段未发表任何论文的人）包含更多的观察数据，这一点通过面积的增大体现出来。&nbsp;</p>
+  <p>图B展示了在博士生阶段或博士后阶段发表高影响力论文的影响。&nbsp;</p>
+  <p>图B中，「Y」表示博士阶段有发表过高影响力论文，「N」表示没有高影响力论文，比如类别「YN」表示在博士生阶段发表过高影响力论文，但博士后阶段没有发表高影响力论文的个体，其他类别以此类推。&nbsp;</p>
+  <p>与发表过高影响力论文的博士后相比，未发表过高影响力论文的博士后，更不可能留在学术界。&nbsp;</p>
+  <p>然而，学术资本不仅仅局限于生产力。&nbsp;</p>
+  <p>引用次数可能对职业发展可能更重要。&nbsp;</p>
+  <p>一种普遍的观点认为，早期的引用成功是获得教职的必要条件。&nbsp;</p>
+  <p>在图1B中，结果展示了，<strong>如果博士后能够发表高影响力论文——即引用率位于其领域年度前5%的论文，留在学术界的概率会显著提高</strong>。&nbsp;</p>
+  <p>值得注意的是，<strong>博士后阶段的发表成果似乎比博士生阶段的更为重要</strong>。&nbsp;</p>
+  <p>结合图1A的结果，这些发现强调了博士后阶段在教职生涯起步中的关键作用。&nbsp;</p>
+  <p><strong>早期教职成功的路径</strong></p>
+  <p>量化成功本身是一个长期存在的难题，尤其在学术界，职业目标和个人目标因人而异。</p>
+  <p>因此，新研究选择以标准学术绩效指标为基础，从<strong>生产力</strong>和<strong>引用影响力</strong>两方面入手，构建专为早期教职人员设计的成功衡量标准。</p>
+  <p>博士后培训的直接影响，在教职初期最为显著。&nbsp;</p>
+  <p>因此，重点分析从首次<strong>获得教职开始两到四年内的科学产出</strong>。&nbsp;</p>
+  <p>前两年的间隔用于排除博士后期间研究成果的影响。随后两年的测量期受到期刊影响因子的定义启发。&nbsp;</p>
+  <p>为了回答这个问题，研究团队开发了衡量科学产出的指标，称为η指数，用作成功的代理指标。&nbsp;</p>
+  <p>这是一种折衷方法，以教职后两到四年间发表论文的h指数为基础，兼顾论文数量和质量。&nbsp;</p>
+  <h2><strong>短期发表指标</strong></h2>
+  <p>初步观察表明，较短期的发表指标——如博士生或博士后阶段的高影响力论文，不仅能够预测是否留在学术界，还能预测那些留下来的在职业早期能否成功。&nbsp;</p>
+  <p>一个显著差异在于，只在博士生或博士后其中一个阶段，发表过高影响力论文的研究人员，具体阶段的影响并不显著。&nbsp;</p>
+  <p>然而，同时在两个阶段都有高影响力论文的研究人员，η指数显著提高；而缺乏高影响力论文的研究人员，η指数明显降低。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_00960bbfe8d84075b717e5f398a95d08@46958_oswg32030oswg454oswg696_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>图A显示了成功指标η的平均值，与图1B中的分类相同，分析对象是博士后阶段后仍留在学术界的个体。&nbsp;</p>
+  <h2><strong>改变研究主题</strong></h2>
+  <p>对于个人而言，博士后阶段是「获得推进职业发展的科学、技术和专业技能的机会」。&nbsp;</p>
+  <p>这种技能的获取意味着在不同环境中扩展自己的能力组合；图2中B图显示了博士生和博士后阶段发表主题变化与未来绩效之间的关系（通过论文主题的Jensen-Shannon散度测量）。&nbsp;</p>
+  <p>确实，<strong>适度改变研究主题与未来的职业成功正相关</strong>。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_3a4da8197cc64705968a53f8f71d259b@46958_oswg80439oswg902oswg686_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图B展示了η指标与博士生和博士后阶段论文主题Jensen-Shannon散度的关系。&nbsp;</p>
+  <h2><strong>出国</strong></h2>
+  <p>更换机构是拓宽经验的另一种方式。&nbsp;</p>
+  <p>在图C中，比较了不同博士后群体的绩效，这取决于他们是留在博士学位授予机构、在本国内更换大学，还是前往另一个国家。&nbsp;</p>
+  <p>研究结果表明，<strong>出国进行博士后</strong>研究与较高的η指数相关联，而在同一国家内更换大学对绩效的影响微乎其微。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_433536e88edd461bb7e6106d2a360074@46958_oswg69311oswg572oswg660_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图C显示了流动性的平均η值，分析了博士后是否从一个国家迁移到另一个国家，从同一国家的大学迁移到另一所大学，或留在同一大学的情况。&nbsp;</p>
+  <h2><strong>更换机构</strong></h2>
+  <p>另一种更常见的流动类型是不同声望层次的研究机构之间的流动。&nbsp;</p>
+  <p>研究表明，学术界具有显著的等级特性，新教职人员通常来自层级较高的博士学位授予机构。&nbsp;</p>
+  <p>然而，对于博士后阶段，情况则正好相反，有2.4倍的人从低声望机构流向高声望机构，而不是相反。&nbsp;</p>
+  <p>下图D图显示，机构声望对η指数的影响总体不显著，但<strong>对于那些博士学位来自欧洲、加拿大和美国以外地区的年轻教职人员，拥有高声望机构的博士学位似乎具有显著影响</strong>。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_3456752f4eb24268ba483f4fa76e2555@46958_oswg63285oswg616oswg696_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>最后，图D展示了不同类别的博士后职业路径的平均η值，包括是否从或前往排名前10的大学或研究机构，是否在排名前10的机构内流动，以及这些流动如何依赖于博士学位授予机构的地区（欧洲、美国和加拿大，以及其他地区）。&nbsp;</p>
+  <p>对此，澳大利亚墨尔本大学高等教育研究中心副主任Gwilym Croucher认为，这项研究填补了如何推进学术生涯的重要空白。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_e626b80cbb15442c84dccbd0b38f5746@46958_oswg65331oswg181oswg180_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>不过，他指出，新研究没有考虑的其他因素也可能产生影响，比如教学经验。&nbsp;</p>
+  <p>此外，该分析的研究人员样本有限，并倾向于能够通过社交媒体网络验证身份的研究人员。&nbsp;</p>
+  <p>他表示：「如果希望全面了解不同学科和不同高等教育体系的情况，还有许多其他因素需要研究。」&nbsp;</p>
+  <p><strong>作者介绍</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_dac20d6d89c74b55a227a85f156a481a@46958_oswg99918oswg256oswg256_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>作者Yueran Duan目前就读于中国地质大学（北京）和阿尔托大学。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_79900c090a2147659dfe7222cc6df1a5@46958_oswg199427oswg512oswg512_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>作者Qing Guan是中国地质大学（北京）信息工程学院的副教授。&nbsp;</p>
+  <p>她于2018年获得中国地质大学（北京）的博士学位。并曾是美国伊利诺伊州阿贡国家实验室的访问学者。&nbsp;</p>
+  <p>她的研究兴趣包括复杂网络中的链接预测与图数据挖掘，研究应用涵盖能源网络和金融网络。&nbsp;</p>
+  <p>参考资料：&nbsp;</p>
+  <p>https://www.nature.com/articles/d41586-024-03222-7</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/C80z3gQUtwmqBoqMmTJO4w" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，编辑：KingHZ 好困&nbsp;，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3133435576376071</id>
+            <title>智驾大牛余轶南机器人创业：首轮融资近亿，他的老东家地平线百度都投了</title>
+            <link>https://www.36kr.com/p/3133435576376071</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3133435576376071</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 22 Jan 2025 07:41:29 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 具身智能, 维他动力, 融资, 自动驾驶  
+<br><br>  
+总结: 维他动力刚完成近亿元人民币的种子轮融资，吸引了地平线和高瓴资本等知名投资方。创始人余轶南曾在地平线和百度深度学习研究院工作，具备丰富的自动驾驶和计算机视觉经验。维他动力专注于研发、制造和销售具身智能机器人，团队成员大多来自于顶尖的自动驾驶和智能汽车领域。公司认为，自动驾驶技术与机器人在技术上高度通用，具备独特的生态优势，能够推动机器人行业的创新与发展。 </div>
+                        <hr>
+                    
+                    <p><strong>具身智能</strong>赛道蓬勃，又一笔<strong>热钱</strong>砸向了明星团队。</p>
+  <p>智能车参考刚刚获悉，<strong>维他动力</strong>刚刚官宣种子轮融资，<strong>金额近亿元</strong>。</p>
+  <p>也是这支初创团队首次对外公开发声、官宣亮相。</p>
+  <p>种种爆料传闻随消息水落石出：具身智能赛道，来了一位出生就自带强大生态的新玩家。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_6f4041b11b424e14809c67d2648425d7@000000_oswg38742oswg960oswg640_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而维他动力的创始人不是别人，正是前地平线智驾一号位，从百度IDL就跟随余凯的AI博士余轶南。</p>
+  <h2><strong>维他动力，亮相融资</strong></h2>
+  <p>维他动力刚刚完成的完成近亿元人民币种子轮融资，领投方有<strong>地平线</strong>、<strong>高瓴资本</strong>。</p>
+  <p><strong>元璟资本</strong>、<strong>柏睿资本</strong>、<strong>百度风投</strong>和<strong>初心资本</strong>等跟投。</p>
+  <p>据透露这笔钱将主要用于核心团队搭建和产品研发。</p>
+  <p>领投之一地平线创始人兼CEO余凯博士这样评价：</p>
+  <blockquote>
+   <p>“地平线的初心是成为智能机器人时代的Wintel（Windows+Intel），滋养出一个繁荣的机器人生态……（余）轶南是地平线智能驾驶平台从0到1的搭建者，在前瞻技术研发和规模化量产上都有丰富的经验。我相信他的AI Vision必将为面向大众市场的机器人行业带来新的生机。我和地平线都将给予大力支持。”</p>
+  </blockquote>
+  <p>高瓴创投项目负责人则表示：</p>
+  <blockquote>
+   <p>“……高瓴从种子轮开始就投资了地平线，在此后地平线 9 年的发展历程中，高瓴始终长期陪伴，共计进行了 7 轮投资。这种长期的支持与信任，不仅见证了地平线的成功上市，也为如今投资维他动力团队奠定了坚实的基础。相信维他动力凭借其在自动驾驶技术上的深厚积累，将推动机器人行业的创新与发展，为客户及行业创造长期价值。”</p>
+  </blockquote>
+  <p>其他投资方的评论中最高频出现的词有：智能驾驶、长期深耕、技术协同、繁荣生态等等。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_578594f735c54655990dc7c288d71422@000000_oswg308453oswg1080oswg503_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>尤其是BV百度风投特别提到：余轶南博士曾负责百度深度学习研究院的基础视觉技术研发工作，期间两次获得百度“最高奖”…</p>
+  <p>机器人、具身智能赛道火热，融资消息不断当下，<strong>维他动力</strong>值得特别关注，核心原因已在投资人口中透露。</p>
+  <h2><strong>谁是维他动力？</strong></h2>
+  <p>投资方中的地平线、百度，其实都是维他动力创始人<strong>余轶南</strong>的老东家。</p>
+  <p>余轶南是中国科学院自动化所的博士，研究方向是当时还未大热的深度学习，师从计算机视觉专家、原自动化所所长谭铁牛院士。</p>
+  <p>2013年加入百度深度学习研究院(百度IDL)，继续从事计算机视觉的研究，当时余凯是IDL的常务副院长，还有报道称余凯也是余轶南在IDL的导师。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_57e86934eba2422f9144e0a65c3a6c6b@000000_oswg701717oswg1080oswg588_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>2015年，余凯离开百度创立了地平线，余轶南追随余凯，成为地平线005号员工，后来担任研发总监，在地平线拿下主机厂的关键战役中屡立战功。</p>
+  <p>2020年8月，余轶南先是率队拿下了地平线第一个芯片前装量产项目，长安UNI-V。</p>
+  <p>在地平线发布征程3后，余轶南又负责理想ONE定点，成功交付。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_aff05034d7af426bb2ec9c2cc25dbfc2@000000_oswg362625oswg1080oswg492_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>理想ONE上市后大卖，也让主机厂注意到了地平线，地平线得以获得更多定点，打开了局面。</p>
+  <p>在此过程中，地平线发展壮大，业务越来越广，余轶南后来成为软件平台产品线的总裁，并主要负责中低阶智驾方案的量产交付。</p>
+  <p>去年7月，地平线进行业务调整，重组智驾团队，交由华为系苏箐统一指挥。</p>
+  <p>而余轶南有了新的使命，也是地平线的初心：</p>
+  <p><strong>带队具身智能机器人</strong>。</p>
+  <p>维他动力首次对外官宣亮相，也明确了公司目前的状态：</p>
+  <blockquote>
+   <p>瞄准To C机器人产品，研发、制造、销售、服务一体。</p>
+   <p>目前团队共20人左右，几乎全部出自头部自动驾驶、智能汽车团队。</p>
+  </blockquote>
+  <p>除余轶南本人，还包括理想汽车前智能驾驶产品总监赵哲伦、地平线前软件平台总架构师、智驾创始团队成员宋巍，这二位挂联合创始人。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_080c1911f47b4fa8b479fe59c264d7ae@000000_oswg29895oswg700oswg445_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>为什么有这样的团队构成，维他动力披露了对具身智能赛道的真实想法。</p>
+  <p>从技术角度出发，自动驾驶汽车其实就是“四个轮子的机器人”，二者在技术上具有极高的通用性。或者说，机器人在软硬件两个维度，都是自动驾驶技术的延伸：更大的算力、更轻便的传感器、认知能力更完善的模型、复杂度更高的规划控制、能量密度更高的电池…</p>
+  <p>而从2023年<strong>大模型浪潮</strong>带来的<strong>智能涌现</strong>，则在基础架构层面为机器人的自然交互、自主运动、自主操作以及自主学习能力提供了可以落地的基础，突破了传统机器人“自动化”的技术范畴。</p>
+  <p>另外，维他动力认为自身还具备独特优势：除了自动驾驶产品大规模量产成功经验外，还有与生俱来的生态优势。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_b9904887dccd475d99b5a970fcb0e7a5@000000_oswg114879oswg1080oswg810_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>地平线以终端计算硬件闻名，汽车之外，其实早就有包括边缘计算、机器人等等产品线。去年内部相关团队成立了<strong>地瓜机器人</strong>，专门提供具身智能所需的底层硬件。</p>
+  <p>此外，投资方中的柏睿资本，也是巨头宁德时代联合创始人出资创办的…其他投资方也都是长期专注AI、机器人和硬件领域投资，可以带来更多协同效应。</p>
+  <p>从这个角度看，机器人火热，但有技术有生态，甚至起步就有关键供应链的维他动力，尤其值得关注。</p>
+  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzkzOTE3Nzc5MA==&amp;mid=2247539436&amp;idx=1&amp;sn=f0d15f0cff1b679808596cc2e83c9e74&amp;chksm=c35127fd159fd3b71a5e4b8110192034bf22c59819dc6d9cbece6a9aeffa3be4d8f0fd1ff8ba&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“智能车参考”（ID：AI4Auto）</a>，作者：贾浩楠，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3133546621622786</id>
+            <title>国产AI卷翻硅谷，奥特曼发文“阴阳”，类o1模型都在卷什么？</title>
+            <link>https://www.36kr.com/p/3133546621622786</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3133546621622786</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 22 Jan 2025 07:37:48 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <国产推理模型, Kimi k1.5, DeepSeek-R1, AI技术>
+<br>
+<br>
+总结: 近期，国产推理模型Kimi k1.5和DeepSeek-R1的发布引起了全球AI界的广泛关注，二者在推理能力上对标OpenAI的正式版o1。Kimi k1.5是国内首个多模态推理模型，支持文本和图像的联合推理，而DeepSeek-R1则以极高的性价比著称。两款模型的技术报告吸引了大量海内外同行的解读，显示出中国AI在推理模型领域的快速进步。尽管OpenAI的CEO对外界的炒作表示冷静，但国产模型的崛起被认为是中国AI技术追赶的重要标志。 </div>
+                        <hr>
+                    
+                    <p>两个国产推理模型的发布，让全球AI圈“提前过年”了。</p>
+  <p>前两天，月之暗面推出了Kimi k1.5多模态思考模型，DeepSeek也发布了DeepSeek-R1文本推理模型，二者都在推理能力上对标OpenAI正式版o1。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_d4da83fdb1fc4af69bd6b04d3ad2f2c3@000000_oswg212649oswg768oswg520_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>不到两个月，国产推理模型就实现了对OpenAI o1满血版（2024年12月上线）的对标，而且与OpenAI藏着掖着的技术秘诀不同，两家中国公司双双公开了他们的特色技术道理：<strong>DeepSeek R1的极高性价比，kimi k1.5原创技术long2short 高效思维链+原生多模态。</strong></p>
+  <p>因此Kimi/DeepSeek“双子星”一夜卷翻硅谷，技术报告paper一放出，就吸引了大量海内外同行的关注和解读，在github的热度飙升。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_dcff882a922e4eb7b917d62b2bd6afbc@000000_oswg167744oswg771oswg457_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>目前来看，海外同行的反馈以振奋为主流。比如Answera公司的创始人保罗·库弗特（Paul Couvert）就感叹，两款中国o1同日发布，（中国AI）追赶速度越来越快了！</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_bcf887724bb941a8a8ececa2288628b8@000000_oswg83045oswg1080oswg302_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>当然，自然也少不了“泼冷水”的。</p>
+  <p>OpenAI CEO奥特曼在社交媒体说，“twitter hype is out of control”（推特上的各种炒作已经失控了）。他认为外界猜测的“AI即将取代大部分中层岗位”（主要靠推理模型）过度夸大了。希望大家冷静下来，把期待值降低100倍（cut your expectations 100x）。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_937d85146de24bf1a83cc0f2e642b80c@000000_oswg113456oswg1080oswg402_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>或许有人好奇，国产推理模型真的崛起了吗？大模型技术如何从“规模扩展”发展到“推理扩展”？对于推理模型这个路线，我们到底该保持兴奋还是冷静一下？本文就来给大家一一解读。</p>
+  <h2><strong>国产推理模型， 这一次为什么炸场硅谷?</strong></h2>
+  <p>两个中国AI公司的新模型，吸引了全球海内外同行的高度关注。原因很简单，推理模型太火了。</p>
+  <p>2024年第四季度，出现了reasoning model的新形态LLM，采用思维链进行“慢思考”，在推理阶段投入更多计算（推理拓展思路），这种创新带给大模型超前的推理能力，可以减少幻觉，提高可靠性，处理更为复杂的任务，达到人类专家/研究生级别的智能，被认为是规模拓展Scaling Law撞墙后最具潜力的新技术。</p>
+  <p>o1系列之后，头部模厂都开始向“慢思考”的推理模型技术路线投入，包括大厂谷歌、百度、阿里、科大讯飞、夸克，以及AI六小虎中的智谱、DeepSeek、阶跃星辰等，此前也都推出过准o1的推理模型，但一直没有全面对标正式版o1的国产推理模型。</p>
+  <p>要证明国产推理模型的崛起，有两个前提条件<strong>：一是经得起全球同行的审视；二是具备原创能力而非简单跟随，全面对标而非部分达标。</strong></p>
+  <p>目前来看，Kimi k1.5/ DeepSeeK R1达到了上述条件。</p>
+  <p><strong>Kimi k1.5/ DeepSeeK R1首次真正对标了正式版o1，取得了SOTA成绩。</strong>其中，k1.5还是国内首个多模态o1，同时支持文本和图像推理。这在全球推理模型领域都是比较亮眼的成绩。</p>
+  <p>而且，不同于OpenAI o1藏着掖着的风格，Kimi和DeepSeeK都发布了详细的技术报告，分享模型训练技术的探索经验，立刻在海外AI圈掀起了解读论文的热潮。</p>
+  <p>比如英伟达的研究科学家第一时间开扒，得出的结论是，Kimi和DeepSeeK的研究“振奋人心”。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_23c5d83fbd21412d80ec9507c6f02df6@000000_oswg663944oswg1080oswg968_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>作为当前AI领域最主流的叙事和技术高地，推理模型的风吹草动，都会引发全球从业者的目光。而中国公司一口气在推理模型赛道上，拿出两个重磅论文，模型含金量高，经过了目光聚焦且严苛的审视，其中还包含很多原创技术。</p>
+  <p>可以说，从Kimi k1.5/ DeepSeeK R1的“双子星”开始，国产推理模型是真的崛起了。</p>
+  <h2><strong>中国原创AI，点亮推理拓展的技术版图</strong></h2>
+  <p>推理模型，国内AI公司是怎么追赶的？我们和海外AI圈一起“黑着眼眶熬着夜”，苦读kimi/ DeepSeek论文，简单总结一下：</p>
+  <p><strong>总路线上，k1.5和R1都使用了强化学习（RL）技术，来提升模型推理能力。但在技术细节上，kimi/ DeepSeek都拿出了全新的思路。</strong></p>
+  <p>DeepSeek没有采用业界普遍的监督微调（SFT）作为冷启动的方案，提出了一种多阶段循环的训练方式，用少量冷启动数据，微调模型作为强化学习的起点，然后在RL环境中通过奖励信号来自我进化，实现了非常好的推理效果。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_e2ea9a48717649358b58372fa7978dbc@000000_oswg185713oswg1080oswg679_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p><strong>Kimi k1.5则首创了long2short思维链</strong>，让LLM通过奖励机制进行探索性学习，自主扩展训练数据，来扩展上下文长度，从而优化RL训练表现，在短链思维推理方面取得了SOTA成绩。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_3d674d1f47834efabc9d59258107d0fa@000000_oswg124358oswg1080oswg638_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p><strong>性能最强的long-CoT版本Kimi k1.5，数学、代码、多模态推理能力可以达到长思考SOTA模型OpenAI o1正式版的水平。</strong></p>
+  <p>基于long-CoT版本简化的short-CoT，性能依旧强悍，但推理更加高效，大幅超越了全球范围内短思考SOTA模型GPT-4o和Claude 3.5 Sonnet的水平，领先达到550%。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_3fe9533aaa574f64ae906813f96def7c@000000_oswg398130oswg1080oswg886_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p><strong>除此之外，两大国产推理模型还各有亮点。</strong></p>
+  <p><strong>DeepSeek-R1延续了“AI界拼多多”的优秀传统</strong>，API每百万输出tokens 16 元，与o1每百万输出tokens 60美元的定价一比，性价比拉满。</p>
+  <p><strong>Kimi k1.5则是OpenAI之外，首个达到o1多模态推理性能的模型，</strong>k1.5支持文本、图像交叠的多模态输入，可以进行联合推理，填补了国内多模态思考模型的空白。</p>
+  <p>在人类的感官中，视觉信息占比超过70%，有了多模态能力，认识自家的Benchmark图表自然不在话下。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_0c23f898a4a747f0816a36ceb3adb366@000000_oswg135730oswg1080oswg419_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>众所周知，o1要么用起来贵（200美元每月的订阅费），要么根本用不上（OpenAI不向国内提供服务）。因此，国产推理模型的上述亮点，带给海内外AI开发者的价值不是一般大，很多开发者都倍感兴奋。</p>
+  <p>一位开发者在论坛感叹，这两个中国实验室“用更少的资源做更多的事情，他们对模型效率和精炼的巨大关注，造福我们所有人”。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_dd460d86253b4553a5f46261295f85ec@000000_oswg219018oswg813oswg343_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Amarok开发者Mark Kretschmann也在社交媒体上不吝褒奖，直呼k1.5是“多模态AI领域的重大突破”。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_02e8e379d2a14c7c809a4cf98a2d8537@000000_oswg294213oswg1080oswg757_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>可以看到，面对“推理拓展”这个全新技术领域，中国AI“双子星”靠原创硬实力稳稳拿下，并走出了一条有别于OpenAI的发展创新之路。</p>
+  <h2><strong>&nbsp;中国AI，按下推理模型的应用加速键</strong></h2>
+  <p>OpenAI奥特曼建议大家放低预期，那么，中国AI公司发力推理模型，价值究竟有没有、有多大？</p>
+  <p><strong>对于中国AI公司来说，点亮推理模型的技术版图，有两方面的意义：</strong></p>
+  <p><strong>一是仰望星空，可以拉近中美AI的技术距离。</strong>大模型的领先不会从天上掉下来，而是日拱一卒、水滴石穿的努力，保持对最新技术路线的跟进，能让中国AI的水平快速提高。对标ChatGPT用了半年左右，而对标正式版o1只用了不到三个月。</p>
+  <p>以Kimi为例，去年11月推出k0-math数学模型，12月发布k1视觉思考模型，今年1月发布k1.5多模态思考模型，三个月三次迭代，进化速度极快。说明对天花板技术的贴身跟进，是中国AI最快最好的练兵场。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_5f1d67761f9d40a5aabc3fb1f5d28d08@000000_oswg110560oswg1080oswg641_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p><strong>二是脚踏实地，中国的行业沃土为国产AI提供了更广阔的落地场景，推理模型的落地情况会比o1更好。</strong>海外AI多以个人消费者为主，o1的主要用例是程序员的代码助手、数据分析师、个人开发者，普通人上手门槛高。而国产大模型更多面向行业场景，AI改造的业务场景中包含大量容错率低的严肃生产场景，以前的大语言模型很难解决复杂任务，十分需要少幻觉、高可靠的推理模型。所以，国产推理模型的落地也许会更快、更广。</p>
+  <p>从这些角度看，在各行各业引入专家级AI的推理模型，加速行业智能化，恐怕仍会由国产AI率先垂范。k1.5、R1等国产推理模型，将在其中贡献不可或缺的基座价值。Kimi官方也表示，2025会继续沿着路线图，加速升级k系列强化学习模型，带来更多模态、更多领域的能力和更强的通用能力。</p>
+  <p>所以不出预料的话，我们很快就能用上花钱少、出活好的专家级国产AI了。</p>
+  <p>中国AI“双子星”炸开的2025年大模型开局，分外精彩。推理模型作为模厂的下一个分水岭，谁抓住了国产推理模型的崛起时刻，也就先一步抓住了未来。</p>
+  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzUxNTUyMjE4Mw==&amp;mid=2247525918&amp;idx=1&amp;sn=af796a12689a3b4ca01a5ab7e5ef4231&amp;chksm=f82895eb9a651289d842a3a69244ebf5cdf2083d9a9747d2da948b4f387f60bc9a1ec91ee375&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“脑极体”（ID：unity007）</a>，作者：藏狐，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3133494098696960</id>
+            <title>2024年IPO之王：中金资本夺魁，高瓴创投第二，红杉中国第三</title>
+            <link>https://www.36kr.com/p/3133494098696960</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3133494098696960</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 22 Jan 2025 07:36:28 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: IPO, 资本市场, 并购, 高质量发展  
+<br><br>  
+总结: 2024年中国资本市场的IPO数量和募资总额大幅下降，分别为100家和673.53亿元，创下历史新低，显示出IPO市场的严峻形势。证监会自2023年8月起收紧IPO节奏，推动高质量IPO成为主旋律，导致IPO受理数量锐减，终止IPO事件频发。并购逐渐成为新的退出方式，2024年前三季度并购退出渠道占市场的29%。硬科技行业仍然是IPO的主要领域，广东、浙江和江苏位居IPO发行家数前三。尽管环境艰难，仍有部分投资机构在IPO中取得了优秀成绩。 </div>
+                        <hr>
+                    
+                    <p>在2023年的资本寒冬中，我们总说要展望未来。那么2024年的环境如何呢？</p>
+  <p>根据融中财经梳理，2024年A股IPO数量为100家，比2023年的313家降低了68.05%；募资总额为673.53亿元，比2023年的3565.39亿元降低了81.11%，并且创下2014年（640.45）以来的历史新低。港交所在2024年收获70个IPO，仅仅是与2023年持平。</p>
+  <p>可以看出，在这个投资人万众期待的2024年，IPO仍是处在“难于上青天”的状态。</p>
+  <p>2024年的IPO情况，可以用一个“严”字简单概括。事实上，自2023年8月起。证监会就曾表态将阶段性收紧IPO节奏、发挥逆周期调节机制后，IPO的步伐开始明显放缓。而到2024年，这股态势进一步蔓延。</p>
+  <p>2024年新“国九条”发布以来，“严把发行上市准入关”成为IPO市场2024年全年的主旋律。也由此开始，IPO受理数量锐减，并且出现了大量终止IPO的事件发生。据悉，2024年IPO终止数量达到437家，甚至超过2023年全年的上市家数。</p>
+  <p>推动“高质量”IPO发展是2024年的主旋律。在这一目标之下，IPO的数量缩紧似乎是必然发生的事件，投资人们的处境甚至更艰难于2023年。</p>
+  <p>风涛险我，我险风涛。</p>
+  <p>哪怕在这样的环境下仍有一批取得优秀成绩的投资机构。其中，中金资本以15个IPO的成绩位列今年机构IPO退出榜首，并且在其IPO成绩单中不乏茶百道、地平线机器人、连连数字、爱迪特等优秀企业；高瓴创投以12个IPO排名第二，投出了包括嘀嗒出行、绿联科技、太美医疗科技、地平线机器人等行业龙头；红杉中国以11个IPO排名第三，投出了小马智行、重塑能源、星宸科技等优秀企业；深创投以10个IPO数量排名第四，其中包括美信科技、骏鼎达、星宸科技、广合科技等；君联资本投出了地平线、黑芝麻智能等，以8个IPO数量排名第五。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_0314c12f7f5c418eaa84a2740aa801e1@000000_oswg278421oswg1080oswg767_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">公开信息整理，融中财经制图</p>
+  <p>值得一提的是，今年年初时，迈瑞医疗收购科创板上市公司惠泰医疗。以此为起始，并购逐渐成为IPO缩紧后，退出的新关键词。</p>
+  <p>据数据，2024年前三季度并购退出渠道占整个退出市场的29%。自2024年9月份证监会发布《关于深化上市公司并购重组市场改革的意见》（即“并购六条”）后，上海、安徽等多地相继出台并购重组支持举措。政策的叠加助推下，并购退出尤其火热。</p>
+  <p>攻守之道，在于伺机而动，应时而变。时代的胜利者永远不是止步不前，而是勇于抓住机遇，调整策略。在2023年的资本寒冬后，2024年的处境依然不好，但是却潜藏着种种机遇。在崭新的2025年，谁又能抓住机会笑到最后？还需要时间来给出答案。</p>
+  <h2><strong>IPO难，难于上青天</strong></h2>
+  <p>为什么说2024年可以用一个“严”字形容？首先在2024年，中国资本市场对IPO审核标准进行了全面升级，“推动高质量IPO”的信号传遍一级市场。</p>
+  <p>3月15日，中国证监会发布实施《首发企业现场检查规定》。证监会表示，将大幅提高现场检查比例、扩大覆盖面，从源头上提高上市公司质量；4月30日，沪深北三大交易所分别发布股票上市规则系列新规，主板、创业板修订申报财务指标要求，上市门槛提高。主板企业三年累计净利润的门槛从1.5亿元提高至2亿元，创业板更加注重企业的成长性和抗风险能力；还有就是4月12日，也就是继2004、2014年之后的第三个新版“国九条”。从新的“国九条”内容来看，除了有关资本市场高质量发展的目标设定之外，还包括了严把发行上市准入关、严格上市公司持续监管，加大退市监管力度。国内资本市场，特别是股市发展从过去注重规模，注重一级市场，注重鼓励企业融资，开始转向提升上市公司质量，保护投资者利益。</p>
+  <p>诸多政策的叠加之下，2024年的IPO门槛进一步提高，进而导致了IPO缩紧的情况。</p>
+  <p>以因推果，在严政策之下，2024年的IPO数据更惨于2023年的资本寒冬。具体来看，根据融中数据2024年全年共计有464个项目完成IPO，而2023年则有630个，下降约26％。分开来看，创业板38家，北交所23家，沪市主板17家，科创板15家，深市主板7家。A股募资额上来看，2024年总募资673.53亿元，较2023年下降81％。A股IPO市场整体表现较为低迷，IPO数量和募资规模均显著下降。</p>
+  <p>但是与A股的表现相反，港股2024年成绩单颇为优秀，这也得益于2024年发展港股市场的激励政策推出。</p>
+  <p>4月份，中国证监会发布了5项资本市场对港合作措施，支持内地行业龙头企业赴港上市，激活香港市场。8月23日，港交所下调特专科技公司上市时的市值门槛，同时下调SPAC（特殊目的收购公司）并购交易最低独立第三方投资额，并对第三方投资者的独立性做了重新规定。政策之下，港交所较2023年有了更好的回暖迹象。2024年，港股共70只新股IPO上市，上市新股数量与2023年持平。不过，2024年新股首发募集资金累计约876亿港元，远超2023年的463亿港元，同比增长89%，这主要得益于美的集团、地平线机器人、顺丰控股、华润饮料这些大型IPO上市的拉动。</p>
+  <p>美股方面，2024年，美股市场共有225家企业完成IPO，募集资金总额为382.6亿美元。2024年是自2021年达到募资规模3166亿美元峰值以来美国首次公开募股活动最好的一年。另外，2024年78家中概股企业在美国纳斯达克或纽交所成功上市，共计占到美股IPO市场的34.7%。其中，64家中概股企业完成传统IPO，13家完成SPAC IPO；另有1家中概股企业完成OTC转板纳斯达克上市。</p>
+  <p>从募资规模来看，国货航压哨成为A股2024年最大IPO，募集资金约35亿元。其次分别为永兴股份（24.3亿）、艾罗能源（22.26亿）、达梦数据（16.52亿）、诺瓦星云（16.29亿）。港交所方面，美的IPO募资266.81亿，成为2024年港交所最大IPO，其次分别为顺丰（49.25）、地平线（44.74）、华润（42.65）、茶百道（21.43亿），2024年港股股权融资市场募资额远超2023年，重回全球第四大新股市场排名。</p>
+  <h2><strong>硬科技依然是宠儿，广东、浙江、江苏排名前三</strong></h2>
+  <p>从2024年的IPO行业和地区分布来看，与2023年的趋势大差不差。</p>
+  <p>从行业分布来看，2024年硬科技依然是IPO最大的宠儿。根据融中数据，共计464个IPO中，先进制造行业共计出现86个IPO、新一代信息技术62个，硬科技项目占最大比例。</p>
+  <p>2024年6月19日，中国证监会发布“科创八条”，强化科创板“硬科技”定位，严把入口关，优先支持新产业新业态新技术领域突破关键核心技术的“硬科技”企业在科创板上市。相关政策的加持让硬科技行业的火热继续蔓延。</p>
+  <p>2024年A股的IPO主要集中在工业、科技和材料行业，这三个行业的IPO数量及筹资额占全年总量的88%和90%。在2024年的前十大IPO中，有6家企业来自科技行业，其他多数企业也属于“硬科技”领域。进一步统计，2024年科创板公司IPO合计融资131.48亿元。其中，6家IPO融资超过10亿元，6家融资在5亿元—10亿元之间，3家融资在5亿元以内。2024年，达梦数据以IPO融资16.52亿元居首，上海合晶和成都华微均融资15亿元。此外，合合信息、联芸科技和佳驰科技3家融资规模都在10亿元以上。</p>
+  <p>港股方面，由于港股18C的特殊机制，硬科技企业港交所上市门槛降低。所以在2024年，港交所的硬科技企业IPO迎来一波小高潮。其中，以智能化、自动化驱动的药物研发科技公司晶泰科技于2024年6月13日正式在港交所主板挂牌上市。成为港股18C特殊规则下的第一家上市企业。再到8月8日，自动驾驶芯片企业黑芝麻智能顺利在港交所挂牌上市，首发募集资金8.27亿，成为港股18C下的第二家硬科技上市企业。除此之外，港交所挂牌上市的硬科技企业中还包括地平线、越疆科技、佑驾创新、讯飞医疗等。</p>
+  <p>除此之外，2024年的消费行业取得的IPO成绩也很不错，共计发生29个IPO事件。其中包括大型IPO美的集团和华润饮料，以及梦金园、百菲乳业、汽车街等。除了美的和华润饮料两个大型消费IPO外，茶百道的IPO也备受瞩目。</p>
+  <p>4月23日，由兰馨亚洲、正心谷资本、中金资本、番茄资本等机构共同投资的“茶百道”母公司四川百茶百道实业股份有限公司正式在港交所主板挂牌上市，成为登陆港交所的“加盟制茶饮第一股”。</p>
+  <p>如果按地区分布来看，2024年A股广东省和浙江省IPO发行家数最多，位居榜首，江苏排在第三。</p>
+  <p>从发行上市企业的数量来看，排名前十的地区分别是：广东（17家）、浙江（17家）、江苏（16家）、上海（8家）、安徽（7家）、北京（5家）、湖北（5家）、四川（5家）、福建（4家）、河北（4家）、山东（4家）。</p>
+  <p>往年，浙江和广东就是IPO大省，2024年也同样如此。</p>
+  <h2><strong>VC/PE们的退出成绩单</strong></h2>
+  <p>在2024年时，已有不少投资人吐槽，投资数量少、IPO难等问题。“一整年都是假装自己很忙，但实际投资数量和IPO少的可怜。”一名投资机构人员向融中财经吐槽到。</p>
+  <p>退出一向是VC/PE们最关注的，而IPO则是一级市场长久以来公认的最佳退出方式。历史数据表明，大型市场投资机构靠IPO来退出的占比是最大的。</p>
+  <p>那么2024年以来，VC/PE们的IPO退出成绩如何呢？</p>
+  <p>夺魁机构中金资本共计收获15个IPO，其中包括爱迪特，茶百道，地平线机器人，珂玛科技，连连数字，美中嘉和，上海合晶，同源康医药，一脉阳光，佑驾创新，越疆科技，晶泰科技，华昊中天，讯飞医疗，健康之路。</p>
+  <p>高瓴创投以12个IPO排名第二，红杉中国以11个IPO数量排名第三，深创投以10个IPO排名第四，君联资本以8个IPO数量排名第五，顺为资本、IDG资本和经纬创投共同收获6个IPO，并列排名第六。同创伟业和毅达资本以5个IPO数量并列排名第七。以上为2024年VC/PE们的IPO成绩单。</p>
+  <p>而2023年时，夺魁的深创投一举收获了多达23个IPO，包括中科飞测、中芯集成、百果园等明星项目。海通开元以15个IPO位居第二，红杉中国和高瓴创投均以14个IPO并列第三。24年夺魁的中金资本放到2023年的排名中还可以排到第二的成绩，但排名第二的高瓴创投以2024年12个IPO的数量只能排到2023年的第七位置。两年的成绩单对比也能看出2024年的IPO缩紧更加严重。</p>
+  <p>上文中提到，在严政策接连出台的2024年，IPO出现了缩紧，而其他退出的方式逐渐火了起来。</p>
+  <p>无法过分依赖IPO退出，那么并购、回购、S交易等都是重点讨论的退出话题。其中，以并购退出最为火热。</p>
+  <p>于2024年6月份推出的创投“17条”中提到，一方面，充分发挥沪深交易所主板、科创板、创业板和北交所、区域性股权市场以及其“专精特新”专板功能，拓宽并购重组退出渠道。另一方面，同时落实好境外上市备案管理制度，畅通外币创业投资基金退出渠道。后续的9月24日，证监会发又发布了“并购六条”，给并购退出方式再添一把火。</p>
+  <p>如果说人工智能是2024年最火的行业代表词，但并购无疑是退出中最喧闹的热点。但是，雷声大、雨点小，融中财经发现2024年的并购退出在退出方式的占比中仅有三成。</p>
+  <p>新趋势下，政府、国资、上市公司正在积极出手并购。其中，全国各地纷纷发布并购重组的鼓励政策，并且积极构建并购基金。A股上市公司为参与主体的并购事件高达2200多起。其中两笔最大规模的并购事件是：中国船舶工业换股吸收合并中国船舶重工关联交易预案，以及国泰君安吸收合并海通证券事件，交易规模分别达到1151.5亿元、976亿元。</p>
+  <p>与之相比，并购退出似乎VC/PE们关联不大，原因或许在于退出后所得利益相关。</p>
+  <p>并购后的标的企业估值普遍为净利润的10-20倍，以2024年发生半导体并购事件为例，普遍估值在20亿—30亿左右，30亿以上是非常少的占比。对于VC/PE们来说，这样的估值只有部分早期机构才能赚取收益。最初的投资与最后承担的风险不成正比。</p>
+  <p>但是，因为IPO独木桥的缩紧，2024年以来，还是有不少投资机构在尝试其他方式的退出。比如君联资本，2024年共计收获了8个IPO，但是机构通过其他方式退出的数量高达15个。</p>
+  <p>此外，2024年年初，科创板上市的模拟芯片龙头思瑞浦发布公告称，拟收购创芯微85.26%股份。这是2024年中国VC/PE行业的第一单并购，背后深创投、盛宇投资、创东方投资、龙岗区创业投资引导基金等十几家创投机构借此退出；还有1月24日，博创科技发布公告称，已实施完成现金收购长芯盛（武汉）科技股份有限公司42.29%股份，并已完成全部二期交易价款的支付。长芯盛背后投资阵容包括云锋基金、小米长江产业基金、美团龙珠、深创投、晨壹并购基金等，悉数借此实现退出；2020年7月时，高瓴创投曾参与医疗数字化企业争渡健康的Pre-A轮融资，到2024年1月4日，高瓴创投通过并购的方式成功退出。</p>
+  <p>可以预料的是，并购退出将会在2025年继续大放异彩。在喧嚣与冷静并存的一级市场，VC/PE们如何迈过并购退出的“槛”？这或许将是2025年最重要的议题之一。</p>
+  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MjM5MjI0Nzk5NA==&amp;mid=2650208697&amp;idx=1&amp;sn=af6e28ef37b051c741d7bc3335fc5283&amp;chksm=bfea249ab26a94b2afdeb5c3f44c345568d28cb8f9655f65fb82a0dc6f482bc5b0759761a8e1&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“融中财经”（ID：thecapital）</a>，作者：王涛，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3133371788639746</id>
+            <title>18岁小伙，靠着ChatGPT套壳，狂赚5600万</title>
+            <link>https://www.36kr.com/p/3133371788639746</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3133371788639746</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 22 Jan 2025 07:34:01 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <AI应用, 财务自由, 卡路里追踪, 营销策略>
+<br>
+<br>
+总结: 本文讲述了两个年轻人Zach Yadegari和Blake Anderson通过开发卡路里追踪AI应用Cal AI实现财务自由的故事。Cal AI凭借其简单的拍照识别食物热量功能和高达90%的准确率，迅速获得市场认可，月收入在上线一个月后超过100万。成功的背后是对健康饮食趋势的深刻洞察和有效的营销策略，包括KOL营销和付费广告。Anderson在此之前还成功推出了两个AI应用，显示出无代码开发的潜力和市场机会。整体而言，人才、创意与执行力在AI时代的成功中显得尤为重要。 </div>
+                        <hr>
+                    
+                    <p>当大部分人还在讨论AI将如何改变世界，已经有人靠着套壳ChatGPT，实现了财务自由。</p>
+  <p>这个AI暴富故事属于两个00后——18岁的Zach Yadegari和23岁的Blake Anderson。</p>
+  <p>去年4月，这两个小伙做出了一款卡路里追踪AI应用Cal AI。这个产品功能很简单，通过拍照来识别食物热量。</p>
+  <p>没想到，Cal AI一上线，就展现了超强的赚钱能力。</p>
+  <p>上线一个月后，Cal AI的月收入就超过了100万，且逐月递增。到去年年底，Cal AI的ARR达到了800万美元。</p>
+  <p>Cal AI的成功不是偶然。像这么猛的事，之前还发生过两次。</p>
+  <p>在做Cal AI前，Anderson已经做出过两个AI应用：恋爱助手Plug AI和穿搭助手Umax。</p>
+  <p>前者赚了228万美元，后者赚了600万美元。</p>
+  <p>更夸张的是，Anderson完全不懂编程，产品基于ChatGPT的无代码开发。靠着这三个产品，Anderson的个人净资产已经超过1000万美元。</p>
+  <p>那么，Cal AI究竟是如何成功的？</p>
+  <h2><strong>两点吊打竞品：AI识图追踪热量，准确率达90%</strong></h2>
+  <p>在开发Cal AI前，Zach就已经做出判断：</p>
+  <p>“Cal AI类卡路里追踪应用能在社交媒体上迅速走红”。</p>
+  <p>之所以有这个判断，完全基于他对健康饮食趋势的深刻洞察。</p>
+  <p>这两年，健康饮食成了欧美人上上下下的共识，而卡路里追踪是最常用的方法。</p>
+  <p>在TikTok上，“卡路里计算”话题标签积累了1.47亿条帖子。部分欧美企业甚至直接将卡路里追踪应用于员工健康计划。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_c373177b6e4e4eea9aa71eb14c7b150a@6038047_oswg92519oswg1080oswg607_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">▲ins上卡路里标签的相关搜索</p>
+  <p>欲望在前，需求产品在后。在健身和饮食类类应用中，Cal AI类卡路里追踪应用霸榜前列，有的甚至有了超2亿注册量。</p>
+  <p>不仅如此，Apple Watch等主流可穿戴设备也添加了卡路里追踪功能。</p>
+  <p>显然，Cal AI不是第一个做卡路里追踪的，为什么这个产品还能跑出来？</p>
+  <p>这得益于两点差异化设计：</p>
+  <p>首先，Cal AI<strong>明确聚焦于卡路里追踪这一核心需求</strong>，简化应用设计。</p>
+  <p>Zach注意到，传统应用过时且复杂，比如MyFitnessBell还停留在手动输入的时代。于是他在设计Cal AI原型时，摒弃其他类似应用繁杂功能，如追踪睡眠、水合作用等，围绕“拍照获取热量报表”打造体系。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_e95999e657594df591dd008e293a8bc5@6038047_oswg71577oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">▲Cal AI 与其他竞争应用的用户界面对比</p>
+  <p>简单来说，Cal AI仅凭AI图像识别就能评估营养成分。</p>
+  <p>根据Zach在官网的分享，当打开Cal AI对着食物拍照时，手机上的深度传感器会计算出食物的体积。根据这些信息，借助经过数千张食物图片训练的AI会将用户的餐食分解成不同的部分，计算它们相应的比例，并实时计算出卡路里和营养素。</p>
+  <p>也正因为如此，Cal AI打出了“只需一张图片即可追踪您的卡路里”的Slogan。</p>
+  <p>让Cal AI与众不同，还有<strong>数据精准</strong>。</p>
+  <p>Cal AI后端由ChatGPT模型处理，能够根据用户反馈来更迭模型。根据他们的测试，Cal AI的识别技术准确率一般可达90%。“这比食品包装上的营养标签还靠谱，规定允许厂家在标签上将热量少标不超过20%。”Zach谈到。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_4c2ccdcb6897445c9eb03cd0a68873e8@6038047_oswg658652oswg1080oswg601_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">▲Cal AI的识别示例</p>
+  <p>当然，光产品好还不够，Cal AI在营销和商业化能力上，也是杠杠的。</p>
+  <h2><strong>玩转TikTok营销，7个月ARR 800万</strong></h2>
+  <p>Cal AI快速出圈，离不开其成功的营销策略。</p>
+  <p>纵观Cal AI的营销打法，大致有KOL营销、付费广告、病毒式传播三种方式：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_da0c270a405c42ab8a02a7f490226487@6038047_oswg933551oswg1080oswg695_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">▲Cal AI创始人制作了极具视觉吸引力的视频，进行最初期的宣传</p>
+  <p>①<strong>KOL营销</strong>：</p>
+  <p>筛选健康和健身领域KOL联系合作。通过支付预付款、捆绑视频数量等策略降低成本，每月为KOL支付100美元到10万美元不等。KOL在生活类视频中自然植入Cal AI广告，而Zach团队进行控评和引导。（是不是很眼熟，简直是小红书的打法。）</p>
+  <p>③<strong>付费广告</strong>：</p>
+  <p>尝试Facebook、Instagram、TikTok和苹果搜索广告等付费广告形式。苹果搜索广告可验证产品竞争力，付费广告每日投入7000美元。虽然付费广告的盈利能力不如KOL营销，但这是扩大收入规模的重要方式。</p>
+  <p>③<strong>病毒式传播策略</strong>：</p>
+  <p>Cal AI的拍照显示热量功能本身具有传播属性。其在感恩节期间计划推出免费活动，鼓励用户分享。同时，团队开发内部工具辅助营销，并将在viral.tech平台发布，帮助他人进行营销。</p>
+  <p>以上的推广方法让Cal AI以很低的推广成本，接触到了广大受众，也使得Cal AI迅速提高了知名度和用户参与度。</p>
+  <p>而为了更好地留住这些用户，Cal AI采用了远低于市场价格的定价策略。</p>
+  <p>比如，Cal AI无免费试用版本，月费10美元或年费30美元（多数用户选择了按年付费），而MyFitnessPal等健康管理类产品的收费几乎是Cal AI的双倍，年费达到了79.99美元。</p>
+  <p>为什么定价这么实惠？Zach解释，Cal AI优先考虑用户获取和市场渗透，而不是立即获得高额的每位用户收入。</p>
+  <p>出色的用户增长策略加上优势性的定价，让Cal AI在短时间内实现了极为可观的商业回报。</p>
+  <h2><strong>无代码开发两个爆款AI，狂赚千万</strong></h2>
+  <p>你以为Cal AI已经很厉害了。但你可能不知道，这样的故事已经发生过两次了。</p>
+  <p>Cal AI的另一个联合创始人Anderson在开发这个产品前，已经推出过两个下载量超百万的应用——Plug AI和Umax。</p>
+  <p>更夸张的是，与Zach不同，Anderson完全不懂编程，产品开发全靠ChatGPT。</p>
+  <p>先介绍第一个应用Plug AI，这是一款AI恋爱聊天助手。</p>
+  <p>用户可以上传自己的对话截图，Plug AI会提供回复建议。产品发展之初，回复容易有“AI味儿”，而Anderson利用ChatGPT进行提示词调整，改进了输出质量，让回复听起来更有魅力了。</p>
+  <p>Plug AI自2023年7月上架谷歌商店，短短四个半月内下载量就突破150万次。Plug AI的月营收达到了19万美元，利润率高达60%。如今，Plug AI已变现400万美元。</p>
+  <p>Anderson的营销手段也颇为特别。他仅凭两位网红和100美元的合作费，为应用在一周内带来20万次下载，首月收入8万美元，相当于这两段视频有20万美元的经济价值。</p>
+  <p>他解释说，他判断这两位网红有很高的活跃粉丝数量，视频观看次数与关注者数量高度匹配。</p>
+  <p>在Plug AI获得成功后，Anderson又推出针对男性的穿搭应用Umax。</p>
+  <p>Umax提倡“男性颜值提升”，会根据用户上传的照片提供个性化建议，由图像识别GPT Vision（OpenAI的视觉功能API）进行分析。</p>
+  <p>营销，营销，还是营销。</p>
+  <p>为了推广Umax，Anderson与时尚KOL合作，比如潮流博主Sam Zia。初期的合作视频，每个可以带来数千次下载量，Umax首月收入达到了10万美元，随后月收入稳定在50万美元以上。</p>
+  <p>自在2023年年底上线以来，Umax拥有了1500万以上下载，创收600万美元以上。</p>
+  <p>作为Plug AI、Umax和Cal AI这三款应用的创始人，Anderson个人的净资产也超过了1000万美元。</p>
+  <p>Zach与Anderson的成功告诉了我们一个道理：</p>
+  <p>在AI时代的浪潮中，能够脱颖而出的团队，未必是财大气粗的头部大厂。当AI逐渐抹平技术鸿沟后，人才、创意与执行力才是比拼的关键。</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/p8cKB7hLzW17RhEYKp8iDQ" rel="noopener noreferrer nofollow" target="_blank">“乌鸦智能说”</a>，作者：朗朗，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3133393993023239</id>
+            <title>联想意外曝光英伟达N1芯片，AI PC要迎来“质变”时刻了？</title>
+            <link>https://www.36kr.com/p/3133393993023239</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3133393993023239</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 22 Jan 2025 07:23:45 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <英伟达, N1芯片, AI PC, Project DIGITS>
+<br>
+<br>
+总结: 在CES 2025上，英伟达推出了Project DIGITS，展示了GB10超级芯片的潜力，并透露了N1芯片的相关信息。N1芯片基于ARM架构，采用台积电3nm制程，性能显著高于市场上大多数AI PC。尽管N1芯片的高昂售价限制了其普及，但其出现将推动AI PC软件生态的转型，促进本地AI运算的发展。N1芯片的发布标志着AI PC行业的质变，未来将为企业用户提供更多选择，尤其是在对数据安全有高要求的行业中。 </div>
+                        <hr>
+                    
+                    <p>CES 2025上，英伟达用全新的Project DIGITS重新定义了桌面AI超算，也让外界看到了Blackwell CPU和Grace CPU组成的GB10超级芯片的无尽潜力。<strong>毕竟在英特尔NUC的成功案例下，不少品牌都开始将桌面迷你电脑打造成高性能移动工作站。</strong>而且英伟达也表示未来将与第三方伙伴一起推进Project DIGITS，未来我们完全有可能在其他形态的产品中看到GB10的身影。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_569dc750d4b94091bae6f316fe4cd0df@1547419282_oswg863318oswg5168oswg3448_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图片来源：雷科技</p>
+  <p>但让大家都没想到的是，“未来”来得这么快。</p>
+  <p>前段时间，一则联想的招聘信息在网上流传。联想招聘这件事本身没有什么值得大家讨论的，但这个岗位的工作描述，却引起了大家的关注：<strong>（该职位）负责新一代 SoC（NV N1x）在公司内部进行的硬件设计与开发工作。</strong></p>
+  <p>没错，英伟达的新芯片，就这么“水灵灵”地曝光了。</p>
+  <h2><strong>英伟达N1芯片到底有多强？</strong></h2>
+  <p>尽管英伟达和联想都未对N1芯片做过多介绍，但N1系列芯片的大致规模依旧被热心网民挖了出来。<strong>首先，“N1”处理器是一个基于ARM架构的芯片系列，分为面向高端市场的N1x和面向中端市场的N1，当然我们也不能排除N1系列拥有次级阶梯型号的可能性。</strong>工艺方面，英伟达N1系列采用的是台积电3nm制程工艺，整体由英伟达和联发科合作设计，采用Blackwell结构。</p>
+  <p>其实看到这里，大家应该能意识到，<strong>所谓N1系列芯片，其实就是英伟达GB10超级芯片的同源芯片。</strong>但和Project DIGITS这种桌面迷你电脑相比，笔记本的产品形态在性能释放方面还是稍有劣势，<strong>所以N1芯片理论上不会是完整的20核心版本的GB10超级芯片，相信这也是N1实际性能只有180-200TOPS的原因。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_470d4ce9a35246ee98ba7b9650424014@1547419282_oswg2729316oswg1759oswg1080_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图片来源：英伟达</p>
+  <p>但如果我们横向对比市面上主流的AI PC的算力，不难发现N1芯片是一个“恐怖”的存在——市面上绝大多数采用CPU+NPU+核显方案的AI PC笔记本，其算力通常不会超过50TOPS。<strong>单从数字上看，N1的性能已经追平了曾经的RTX独显笔记本。</strong></p>
+  <p>相关硬件方面，已经确定的是英伟达N1会在联想的新二合一笔记本中发布，该电脑预计在年中的台北电脑展中亮相，并在2025Q4出货。<strong>考虑到英伟达Project DIGITS高达3000美元的售价，N1芯片的笔记本售价预计应该会在万元以上。</strong></p>
+  <h2><strong>AI PC终于要迎来“质变”了？</strong></h2>
+  <p>尽管<strong>N1芯片商品化后的高昂售价注定了这一芯片不会成为“大多数用户”的购买选择——根据洛图科技的数据，2024Q3中国大陆线上笔记本市场的平均售价为6472元人民币；亚马逊2024全年销量前十的笔记本电脑平均售价更是只有653美元，约合4776元人民币，</strong>愿意花上万元买一台高性能笔记本消费者始终还是少数。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_a53ca3091ec142479db72155594b62a1@1547419282_oswg548048oswg4895oswg3266_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图片来源：雷科技</p>
+  <p>但从AI PC行业长期发展来讲，N1芯片的出现仍具有非同一般的意义。首先，N1这种真正高性能的AI PC芯片的出现，可以从硬件侧推动AI PC软件生态的转型。<strong>CES 2025中，不少品牌都将端侧AI能力列为来年首要任务。</strong>不同于市面上主流的混合AI方案，端侧AI意味着AI PC必须拥有足够强的本地AI算力，而不是像过去那样将大型AI任务发到云端服务器中处理。<strong>换句话说，N1芯片的出现，恰恰为本地、端侧AI运算提供了硬件基础。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_50d9a6aab7a44dca9b76436f5986ac4a@1547419282_oswg694246oswg5168oswg3448_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图片来源：雷科技</p>
+  <p>可以肯定的是，以N1X为首的高性能ARM Based AI PC将对现有的AI PC工作站（比如Xeon W系列的移动工作站）带来极大的冲击。<strong>更高的硬件整合度、更好的AI接口支持与更ARM架构标志性的功耗优势，将为端侧AI PC工作站带来新的可能性。</strong></p>
+  <p>举个例子，在体育赛事转播领域，性能更强的AI移动工作站可以极大减少现场高性能服务器的部署数量。对于F1等“全球飞”的赛事来说，减少大型设备的数量意味着更低的物流成本和更快的转场速度。</p>
+  <p>另外，N1芯片WoA（Windows on ARM）的特性，也能推动ARM PC生态的发展，<strong>发挥ARM架构在低功耗本地AI推理、实时模型处理的优势，带动整个WoA生态的进步。</strong>同时，企业基于ARM架构SoC开发的硬件技术也可以快速复用在手机、平板等其他ARM架构移动设备上，开启一轮低功耗高性能的性能军备竞赛。</p>
+  <p>而从AI行业的角度来说，<strong>本地高性能AI工作站的出现，也标志着AI PC将迎来真正的性能分水岭。</strong>目前非独显笔记本的主流算力普遍不到50TOPS，这意味着他们主要的AI功能均需连接云端服务。<strong>而高性能AI PC的出现，意味着AI PC用云端算力补贴本地算力的时代已经过去。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_b7bbf29c2b3540d1bec026c4a9bc92de@1547419282_oswg2566031oswg5065oswg3379_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图片来源：雷科技</p>
+  <p>对一般消费者来说，云端算力与本地算力在体验上的差距并不算大。但对政企用户，尤其是医疗、金融等对信息有强保密需求的行业用户来说，<strong>端侧高性能AI PC意味着他们可在本地封闭环境下执行深度学习推断或数据处理，让敏感行业也能接触AI技术。</strong>当然，在本地算力不足的时代，这些敏感行业的用户也可以部署自己的私有端侧AI服务器，搭建自己可控的AI算力。<strong>但从搭建门槛和维护成本的角度看，高性能AI PC工作站显然是性价比更高的做法。</strong></p>
+  <h2><strong>本地计算和云端计算并不冲突</strong></h2>
+  <p><strong>从长远来看，本地算力并不会完全取代云端计算，毕竟大规模模型训练和海量数据处理仍旧需要超算集群的支持。</strong>但高性能性能AI PC的出现仍拓宽了终端侧计算的边界，降低对云端资源的过度依赖，也扩大了AI应用的覆盖面，为企业用户带来更多选择空间。</p>
+  <p>随着行业对移动高算力需求的持续增长，可以肯定的是，<strong>在发展端侧AI这个2025“行业共识”的引导下，未来我们还将看到更多类似N1这样的高性能商用AI解决方案。</strong>同时AI算力本地化进程的潮流，也将从软件生态的角度促进消费级设备的AI性能提升。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_62c393c6835c4f54b6dbcd7dfadb859b@1547419282_oswg643926oswg5168oswg3448_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图片来源：雷科技</p>
+  <p>要知道，在用云端AI算力打响AI PC这一标签后，PC行业不可避免地陷入了AI用例同质化的局面——<strong>毕竟提供云端AI服务的供应商只有那么几个，电脑本地的AI算力又不足以支撑更复杂的模型。</strong>对PC品牌来说，想在同质化的AI PC浪潮中再寻找新的增长点，端侧AI算力不可或缺。</p>
+  <p>在大模型智能体、RTX 50系显卡与英伟达N1芯片的共同推动下，AI PC品类终于等来了“质变”。对品牌方乃至整个产业链而言，<strong>这种算力的转变不光意味着硬件架构与产品迭代步调的升级，也对开发者生态、软件框架以及AI行业商业模式提出了更高的匹配要求，</strong>为下一阶段聚焦本地智能化的演进奠定了坚实基础。</p>
+  <p>至于在“质变”后AI PC还将给我们带来怎样的惊喜，或许在明年CES上，我们就能看到答案。</p>
+  <p>本文来自“雷科技”，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3133376713948676</id>
+            <title>加钱抢票是智商税，12306官方警告，第三方平台吃相太难看？</title>
+            <link>https://www.36kr.com/p/3133376713948676</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3133376713948676</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 22 Jan 2025 07:11:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 抢票, 12306, 加速包, 第三方平台  
+<br><br>  
+总结: 春运期间，抢票成为热门话题，但12306再次警告用户，第三方抢票软件的加速包并无实际效果。12306表示未与任何第三方平台合作，用户的购票希望不应寄托于这些加速包。虽然第三方平台可以提供组合购票方案，但其加速服务和“专人抢票”实际上并不比用户自己操作更有效。12306的候补机制已足够完善，用户应直接使用其候补功能。最后，提醒大家谨慎选择抢票方式，避免不必要的支出。 </div>
+                        <hr>
+                    
+                    <p>铁子们？抢到回家的车票了没？</p>
+  <p>每年到了春运期间，如何买票回家就成为中国人最热议的话题之一，各种抢票攻略和抢票软件的体验也成为热点话题。但是，<strong>当你花几十上百块购入加速包来抢票时，是否有想过可能根本就没有用呢？</strong></p>
+  <h2><strong>加速包没任何用！12306再次警告</strong></h2>
+  <p>前几年，不少抢票软件喜欢在公告和介绍里将自己隐晦地描述为12306的官方合作伙伴，随后引来了12306的警告，<strong>对外公告说明没有任何第三方合作平台。虽然12306几乎每年都要强调一次，但是架不住仍然有人信以为真，将自己回家的希望寄托在抢票平台的加速包和助力上。</strong></p>
+  <p>小雷也理解这种心情，眼看着春节假期临近，自己还没抢到回家的票，着急是必然的。甚至对于不少人来说，这是一年中唯一回家看望父母的机会，错过了就要等下一个春节，更是加剧了“抢票焦虑症”。</p>
+  <p>正是利用用户的这种急躁心态，多数抢票软件都会在春运期间推出各种助力加速包，美其名曰“助你回家”。说实话，如果这些加速包真的有用，那么大家也不会有什么意见，即使要多花钱，归根结底也就是各取所需罢了。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_3594ba681e844548b299773a4a5d1d7a@1547419282_oswg116877oswg522oswg491_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图源：雷科技</p>
+  <p>但是，如果花了钱却没有效果呢？近日，铁路12306科创中心副主任单杏花在接受央视采访时再次表示：</p>
+  <blockquote>
+   <p>“我们铁路12306实际上没有跟任何第三方平台开展合作，在12306上购票的时候，也没有提供什么加速包，加价等等一系列的这种加收费用的服务。”</p>
+  </blockquote>
+  <p>那么如何解释12306上显示没票，但是抢票软件上却显示有余票或有机会抢票的情况呢？对此，12306也给出了解释：<strong>“只要12306显示没票，那么就说明肯定是没有了，如果第三方平台显示有票，基本上都是让你多买或少买几站，并非真的有票”。</strong></p>
+  <p><strong>简单来说，第三方平台上的车票大多是根据各种方式“拆借”出来的，只要用过抢票软件，估计都见识过第三方平台的各种奇葩组合方案。</strong></p>
+  <p>那么加速包真的有用吗？单杏花（12306系统奠基人）对此进行了否认，表示内部做过测试，加速和不加速的情况下，最终结果都是一样的，并再次强调12306售票和候补的规则都是有票就卖，候补则先来后到，不存在加塞的功能。</p>
+  <p>而且，第三方平台除了候补订单外，还会使用自己的服务器对12306的服务器进行持续访问，刷新票仓获取车票数据。在春节这样的高流量时期，这种行为本身就会对正常购票的朋友造成影响，比如导致服务器变卡顿、响应变慢等，前两年不少人吐槽12306一到节假日就崩，其实与第三方平台有很大关系。</p>
+  <p><strong>为了解决第三方平台疯狂刷新和抢票的行为，12306甚至对此开发了专门的应对技术，降低抢票等行为的成功率，并且减少其对正常用户使用的影响。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_2a66aeee7cee4567834161244158853d@1547419282_oswg147290oswg600oswg552_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图源：微博</p>
+  <p>其实，换个角度想也能明白，<strong>12306作为民生基础服务的一部分，本身也不可能推出加钱插队之类的服务，这有违社会公平原则，唯一可能“加钱有票”的情况是购买尚未售罄的更高价位座席，比如一等、商务或卧铺。</strong></p>
+  <p>而且只要通过第三方平台抢票，都应该记得在开始抢票前app会让你登录12306的账号，实际上就是将你的账号托管在后台，然后帮你提交候补订单，效果和你自己去12306候补是一样的。</p>
+  <p>如果是12306修改候补机制前（最早只能提交几个车次的候补），这个功能还是有用的，可以帮你关注不在候补列表中的车次。<strong>但是从去年开始，12306就将每个人最高可提交的车次提升至60个，基本解决了候补数量不够用的问题。</strong></p>
+  <p>从小雷过去几次节假日的购票体验来说，只要提交的候补数量超过20个，基本上候补中标的概率就非常高，而且越早提交越好。即使在开售时显示无票，大概率也只是第一批车票售罄，后续的阶段性放票时会优先考虑候补订单。</p>
+  <p>所以，想要抢票的朋友们还是建议直接去12306用候补功能，只要增加候补的日期和车次，还是有机会买到回程车票的。</p>
+  <h2><strong>第三方平台毫无价值？倒也未必</strong></h2>
+  <p>虽然12306屡次强调第三方平台并不会增加抢票成功率，但是从个人体验来看，第三方平台也有可取之处，比如在没有票的情况下，可以通过组合的方式来帮你到达目的地。</p>
+  <p>什么意思？简单来说，就是通过购买不同路段的车票，来避开无票的区间，比如我要从广州坐高铁去南昌，但是直达的车票已经售罄，<strong>第三方平台就会根据沿线各个车站的余票情况，制定换乘计划，比如先从广州坐商务座到赣州，再从赣州换乘二等座到南昌。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_7ca35da2b72249aab6e803cba14ffa31@1547419282_oswg168992oswg547oswg860_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图源：雷科技</p>
+  <p>如果按照这套方案执行，票价就从原本二等座直达的533元变成1264元，主要是因为第一个行程的商务座价格过于昂贵，不过好歹是给你送回家了，而且全程都在同一趟列车上，无需下车换乘。</p>
+  <p>此外，要是你接受下车换乘的话也有更优惠的方案，不过一般需要花费更多的时间。如果说你时间充裕的话，倒也不失为好方案，若是换乘间隔时间过长，出车站去市区逛逛也是个不错的选择。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_b7c99e1467a14e29835d7a8c06e4adc3@1547419282_oswg167379oswg553oswg863_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图源：雷科技</p>
+  <p>虽然在12306上也可以用类似的方式买票，但是整个过程也会麻烦和复杂很多，首先你要逐个确认目标车次的有票区间，然后再组合购票。如果有票的区间不包括或超出你想要去的目的地，那么还要换一个车次继续重复确认。</p>
+  <p>考虑到其中的工作量，我倒是宁愿给第三方平台付一笔小钱，让他们计算哪些车次有换乘的车票可售。不过，好在类似的方案在第三方平台基本上都无需加价（只要你不买那些奇奇怪怪的保险和会员），可以说是性价比最高的抢票方式。</p>
+  <p><strong>除了换乘等方案外，买多乘少或买少补票也是第三方平台提供的方案之一</strong>，不过12306一般不建议这样的买法，因为会造成车辆超载或运力浪费等问题，只能说在实在没有选择的情况下，作为最后的保险方案。</p>
+  <p>另外，小雷也建议大家在抢不到火车票时，可以考虑一下其他出行方式，比如顺风车等出行方式也是可行的，还有被不少人遗忘的市际或省际大巴，如果路途不算遥远的话也是可选方案之一。</p>
+  <h2><strong>大多数抢票服务是智商税，勿用！</strong></h2>
+  <p>合理运用第三方平台，确实可以增加你买到车票的概率，不过有些抢票方式就真的不建议大家选择，比如第三方平台的各种加速包，特别是“7*24小时专人抢票”之类的加价服务，<strong>虽然“专人抢票”听起来给力，但是从抢票效率和速度来说，人类是远无法与机器相比的。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_3e83b4e9d6c84d3192f97a9dbcba4722@1547419282_oswg43788oswg466oswg225_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图源：雷科技</p>
+  <p>相信大家都还记得大麦上的演唱会门票有多难抢吧？在人脸识别购票等措施上线之前，全自动的抢票软件几乎能秒掉所有人类，因为软件的抢票速度只取决于网络延迟，而人类还要经历「看到、大脑做出反应、点击」等一系列流程，当你刚点下购票时，软件已经进入付款阶段了。</p>
+  <p>所以，加价包、专人帮抢等服务，基本上都是无用的，顶多就是实在抢不到的时候，让客服为你一对一进行咨询，看看能否采用别的方案来买到车票，这些所谓的“专人方案”实际上就是前面提到的换乘等组合购票的方式，实质上没有多少区别。</p>
+  <p>对于第三方平台来说，加价包和专人帮抢都是无本买卖，因为本质上都是利用12306的候补系统买票，候补到了就安心收下用户额外支付的「加速费」，没抢到也就是直接退款而已，没有一丝一毫的损失。</p>
+  <p>另外，最近网上也一直在流传如果没票可以买学生票的传闻，一些网友实测确实是可行的，因为铁路系统有针对学生专门预留的车票，避免学生无法返乡被困在学校，以至于让一些人觉得有可乘之机。</p>
+  <p><strong>实际上类似的行为在最近的多次新闻报道中都被提及，并且也被警告这种方法是违规的，因为学生票属于特殊票，在入站时需要核实学生证等信息，如果没有相关证件的话，车站可以直接拒绝入站并取消已购买的车票。</strong></p>
+  <p>即使车站允许通过补票等方式入站乘车，购票者也需要在补齐学生票的差价基础上再支付差价50%的罚款，也就是花125%的车票价格来购票。前提是车站工作人员愿意帮你操作，否则就只能承担20%的退票费用然后重新抢票，更浪费时间和精力。</p>
+  <p>最后，祝大家都能抢到回家过年的票，度过一个愉快的春节。</p>
+  <p>本文来自“雷科技”，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3133516613320194</id>
+            <title>瑞士工程科技公司Apheros研发新型金属泡沫，可将数据中心冷却效率提升90% | 瑞士创新100强</title>
+            <link>https://www.36kr.com/p/3133516613320194</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3133516613320194</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 22 Jan 2025 06:35:28 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: <Apheros, 金属泡沫, 数据中心, 冷却系统>
+<br>
+<br>
+总结: 瑞士工程科技公司Apheros成立于2023年，专注于研发新型金属泡沫，旨在提升数据中心的冷却性能。该金属泡沫表面积比普通泡沫高出1000倍，能有效降低数据中心能耗20%。Apheros采用专有的室温粉末制造工艺，解决了现有工艺的一致性和结构强度问题，同时降低了生产成本。其金属泡沫适用于液体冷却和双相冷却，能够广泛应用于高功率计算、汽车和航空航天等领域。Apheros已获得多项融资，计划扩大与冷却系统制造商的合作。 </div>
+                        <hr>
+                    
+                    <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_233654e95ba741aea6f7e81b305751f4@5898759_oswg345656oswg1234oswg694_img_jpg?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图源Apheros</p>
+  <p>瑞士工程科技公司Apheros成立于2023年，其致力于研发新型金属泡沫。该金属泡沫拥有超高表面积及高开孔率，可极大提升各类冷却系统散热性能，广泛应用于数据中心等领域。</p>
+  <p>Apheros为苏黎世联邦理工学院的衍生公司，由Julia Carpenter与Gaëlle Andreatta联合创立。Julia Carpenter目前担任公司首席执行官，拥有苏黎世联邦理工学院材料学博士学位，其在攻读博士学位期间开发了获得专利的金属发泡工艺。Gaëlle Andreatta目前担任公司首席技术官，拥有16年技术经验，是瑞士创新署（Innosuisse）创新委员会成员。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_299d439c8faa435a8739c4eefcda0270@5898759_oswg135869oswg1244oswg700_img_jpg?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图源Apheros</p>
+  <p>数据中心是数字时代的重要支柱，伴随AI的高速发展，市场对数据中心的需求日益增长，这也导致数据中心能耗大幅激增。尤其是AI使用复杂算法及深度学习模型，须有GPU、TPU等专用硬件支持，极大推高了能源消耗。预计到2030年，专门用于数据中心冷却的能源消耗量将占全球总能源消耗量的6%。</p>
+  <p>目前数据中心冷却主要采用暖通空调，该方法具备一定效率，但空气冷却十分耗能。近年来，浸入式冷却与片上冷却作为替代方案被逐渐采用。前者是将服务器浸入介电液体当中，后者则将冷却剂直接连接到芯片冷板进行冷却循环。两种方案均基于热交换原理，为了提升散热性能，冷却系统供应商需采用各类技术增加芯片表面积，以促进芯片与冷却介质接触时的热量传递效率。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_604eeae4f8bb481ca316713f7dc8c302@5898759_oswg191234oswg650oswg866_img_jpg?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图源VentureBeat</p>
+  <p>Apheros开发了新型金属泡沫，该泡沫表面积比普通泡沫高出 1000 倍，具有良好热导率和相互连通的孔隙结构，能使芯片与周围液体的热交换提高 90%，从而将数据中心的能耗降低20%。该金属泡沫能直接替代散热器和热交换器，与数据中心日益采用液体冷却系统的趋势相兼容。</p>
+  <p>不同于其他熔模铸造生产工艺，Apheros的金属泡沫采用了专有室温粉末制造工艺。该工艺可让用户灵活地选择铜、镍、铁、不锈钢等适合自身需求的金属基质制造金属泡沫，保留导热性、导电性和稳定性等金属的基本特质，并解决了现有工艺存在的一致性低、结构强度低等问题，同时极大地降低了生产成本。</p>
+  <p>基于该专利制造工艺，Apheros的金属泡沫具备高散热性能、高可用性、成本效益等优势。Apheros的金属泡沫表面积比普通泡沫高出1000倍，其开放与互连的孔状结构有效确保了流体流动及传输速率并提供优异的润湿性能，就像一块具有超细孔隙的海绵，可直接放在芯片上，引导冷却剂流过并带走热量，实现卓越的散热性能。同时，Apheros的金属泡沫可通过粘合、焊接和加工等标准工艺无缝集成到数据中心现有冷却系统中，直接替代现有的散热器和交换器，无需对数据中心进行额外改造。在扩展性和成本效益方面，Apheros的金属泡沫密度区间为0.9-2.2g/cm³，是轻质部件的理想材料；其制造工艺高度可扩展，使该金属泡沫在冷却系统最终价格中占比不到5%。</p>
+  <p>Apheros的金属泡沫可广泛应用于冷却领域，是高功率计算、数据中心热管理、汽车或航空航天等领域的理想选择，其首个试点产品为铜制金属泡沫散热器。Apheros的金属泡沫尤其适用于液体冷却和双相冷却。在液体冷却应用中，其高表面积能够促进其与冷却剂之间的高效热交换，高开孔率有利于液体流动，最大限度提升散热性能；在双相冷却应用中，Apheros金属泡沫的高表面积为蒸汽气泡的形成提供了大量的成核点，高开孔率则有利于蒸汽快速逸出，确保冷却性能。</p>
+  <p>在冷却领域之外，Apheros的金属泡沫还可应用于绿氢电解材料、锂离子电池组件与化学催化等行业，能够为电解器、电池组件及异相催化平台性能提升提供巨大帮助。</p>
+  <p>2024年8月，Apheros完成了185万美元的种子前轮融资；12月，Apheros获得了来自瑞士创新署Innosuisse的110万瑞士法郎资助；资金将用于金属泡沫中试规模生产，并加速产品上市进程。未来，Apheros将不断扩大与冷却系统制造商的合作规模，提升产品在全球数据中心的部署，并不断探索其在其他行业中的进一步应用。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_3faa2ce95e8a4b52ac1224b89b8ea79c@5898759_oswg433694oswg1078oswg1421_img_jpg?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <blockquote>
+   <p>Apheros是2024年《瑞士创新100强》（TOP100 Swiss Startups）上榜企业。《瑞士创新100强》汇聚了最佳“瑞士制造”的初创及成长期科技创新企业，是瑞士科技创新领域最具国际影响力的标杆榜单。自2011年以来，该榜单每年在瑞士全国范围内评选出100家最具开创性和市场前景的瑞士创新企业和25家最具独角兽潜力的瑞士成长期企业，覆盖生命科学、工程机械、机器人、信息通信、低碳科技、食品科技等领域。《瑞士创新100强》及系列品牌活动是瑞士创新生态圈的标志性活动，代表着瑞士创新最高地和国际投融资最前沿。</p>
+   <p>2024年《瑞士创新100强》中文版由以明科技（Insight Tech）荣誉发布。以明科技是《瑞士创新100强》的中国授权合作方，负责《瑞士创新100强》在中国的运营推广并协助榜单项目对华商业合作。作为中欧（瑞士）科技创新投资与产业化运营商，以明科技为瑞士创新和中国产业的双向合作提供投融资和商业拓展服务并开展股权投资业务。</p>
+   <p>获取2024年《瑞士创新100强》完整榜单及行业榜单，请访问以明科技公号或官网。</p>
+  </blockquote>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3132337709203208</id>
+            <title>没有一名美国大学生，能笑着走出学费对账区</title>
+            <link>https://www.36kr.com/p/3132337709203208</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3132337709203208</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 22 Jan 2025 06:23:30 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 学生贷款, 学费, 美国大学生, 债务压力  
+<br><br>  
+总结: 美国大学生面临高额学费和沉重的学生贷款债务，导致许多人在毕业后仍需多年偿还。数据显示，美国4500万人背负的学生贷款总额已达1.8万亿美元，平均需20年还清，近1/4成年人一半工作时间用于偿还贷款。高昂的学费和债务压力使得不少学生感到绝望，甚至影响心理健康。与此同时，尽管高等教育的学费持续上涨，许多大学却面临倒闭，反映出人们对高等教育价值的质疑。 </div>
+                        <hr>
+                    
+                    <p>小红书的对账游戏，把不少背负“天价学贷”的美国大学生一度干到抑郁和沉默。</p>
+  <p>公开数据显示，美国4500万人背负的学生贷款债务总额已经高达1.8万亿美元，平均要20年左右才能还清。</p>
+  <p>这意味着，美国近1/4成年人一半工作时间都在还大学贷款。</p>
+  <p>去年5月，纽约研究机构“社会研究新学院”发布的报告指出，约220万55岁以上的美国人仍未还完学生贷款，这成为他们毕生的枷锁。</p>
+  <p><strong>于是江湖上流行一个传说，在闯进小红书学费对账区后，再也没有一名美国大学生能笑着走出去。</strong></p>
+  <p><strong>作者</strong>&nbsp;| 杜一兰</p>
+  <p><strong>编辑&nbsp;</strong>| 木&nbsp; &nbsp;木</p>
+  <p>“我和一个中国新朋友聊天，他们的法学院每年学费只需要798美元，而我已经背负了45万美元的贷款。<strong>这是奴隶合同，我一辈子都还不起了。</strong>”</p>
+  <p>最近，一名美国网友完成对账后一时破防崩溃大哭的镜头，给不少国人留下深刻印象。</p>
+  <p>798美元VS45万美元，美国的学费真有这么贵吗？</p>
+  <p>带着疑问，橡树实验室联系上几位美国大学生，和他们聊了聊学习和生活。至于债务压力，因各自家庭情况或所选大学、专业的不同，每个人面临的境遇与体感并不一样。</p>
+  <p><strong>但学费高昂、债务高企，确实是不少美国大学生需要面对甚至一生去逃离的困境。</strong></p>
+  <p><strong>天价学费背后</strong></p>
+  <p><strong>一场对大学生的“金融收割”？</strong></p>
+  <p>“I’m a medical student in USA，ask me questions!”</p>
+  <p>几天前，24岁的Leo在小红书上发出了自己的第一条动态，一下收获4000多位粉丝的关注。</p>
+  <p>Leo就读于美国东弗吉尼亚医学院临床医学专业2年级，他也留意到小红书上的“对账单”。</p>
+  <p>“公立学校每年2万美元是正常的，私立学校每年4万美元左右，差别很大。”而Leo每年的学费是6万美元。</p>
+  <p>和中国国内不同的是，在美国申请医学院并不容易，前提条件是获得学士学位，而医学入学考试一般在大学最后一年举行。</p>
+  <p>因此Leo在就读医学院之前，其实还读了4年大学，拿到了生物化学专业的学士学位，当时的学费是每年2万美元。</p>
+  <p>成功申请医学院之后，Leo还需要读4年，然后在选定的专业实习，通常实习期为3～5年，即使是工作后，也需要考试，“这就是所谓的继续医学教育，需要维持认证。”</p>
+  <p>“我依靠贷款生活和学习，还得想办法以后怎么偿还。”Leo表示，他的大多数学费都是通过贷款支付，有时候父母能够帮助或者完全支付，但每个月还有必要的生活开支，大概在1500-2000美元。</p>
+  <p>从上大学到最后毕业工作，Leo估算了一下：<strong>8年下来，他在学费和生活费上的花销将超过40万美元。</strong></p>
+  <p>“会有一些压力。”Bob今年22岁，就读于华盛顿一所公立大学经济学专业，和私立学校比起来，美国公立大学的学费要低一些，学费和学杂费加起来一学期差不多8000美元，一年约1.6万美元。</p>
+  <p>政府援助了Bob50%的学费。但另外一半，仍需要他靠贷款解决。</p>
+  <p>此外，美国州内和州外的学生学费也有一些区别。</p>
+  <p>“我在本地上学，学费是11000美元一年，州外的学生来我们这上学，学费是35000美元。”Ella对橡树实验室表示，她目前是广告学专业的一名大三学生，5年下来的学费为6万美元，而州外的学生则需要支付超过17万美元。</p>
+  <p>Lucas也提到，州外和州外学生的学费差距很大。他是一名来自美国马萨诸塞州的大学生，同很多年轻人一样，喜欢玩电子游戏和看动漫。</p>
+  <p>本科期间，Lucas每年的学费为1.7万美元，如果要参加夏季学期或冬季学期，花费更多，但压力也更大。</p>
+  <p>“这个学费水平算是中等，一些艺术类专业的学费更高。”Lucas透露，父母支付了他第一年的学费，然后他自己申请了政府和学校的援助，能够覆盖他的大学学费，而日常的吃、住等生活开支，则靠勤工俭学。</p>
+  <p>课余时间，Lucas有很多勤工俭学的工作，不仅在食堂工作，每小时能拿到11美元的薪酬，还是学校助教，能拿到更高的时薪，43美元。</p>
+  <p>即使这样，他也没有落下学习。在交谈中，Lucas介绍自己的成绩不错，GPA3.7，已经完成了学士学位和硕士学位。</p>
+  <p>但顺利毕业，并不意味着能松一口气，还要面临偿还助学贷款的压力。</p>
+  <p><strong>公开数据显示，美国4500万人背负的学生贷款债务总额高达1.8万亿美元，平均要20年左右才能还清。</strong></p>
+  <p>这意味着，美国近1/4成年人一半工作时间都在还大学贷款。</p>
+  <p>美国的学贷利率高达5%～8%之间，毕生还助学贷，成为很大一批美国人的噩梦。</p>
+  <p>去年5月，纽约研究机构“社会研究新学院”发布报告指出，约220万55岁以上的美国人仍未还完学生贷款。</p>
+  <p>不少网友坦言，这是美国教育系统对学生的一场“金融收割”，银行则通过高利率贷款获利。</p>
+  <p>遇到吐槽的美国同龄人，中国网友们积极地发挥雷锋精神。Ladybird在小红书上贴出了自己的书本费账单，说每次开学都是大流血，光是买教科书就要花几百美元，她坦言这会影响她其他支出。难以理解的中国网友则纷纷支招说，“你可以买二手！”</p>
+  <p>但Ladybird说，这背后其实是一笔“生意经”，教科书是自己的教授与图书公司合作编写，需要她凭身份证才能在线访问，其他地方买不到，<strong>“而如果不买，就会挂科。”</strong></p>
+  <p><strong>400份简历捞不到一个面试</strong></p>
+  <p><strong>高负债并未保障高就业</strong></p>
+  <p>拥有音乐硕士学位的网友PracticePad说，他的学费是85000美元。他不得不打两份工，并且搬去和父母住在一起，以减少租房开支，负担学费。</p>
+  <p>为了降低学费投入，还有一些美国大学生会选择两年制的社区大学，来自德克萨斯州的Oliver就是其中一员。</p>
+  <p>去年高中毕业后，Oliver选择就读当地的一所社区学院，主修艺术，学制为两年，每学期学费2000美元，两年的大学生活将花费34000美元。</p>
+  <p>在他看来，上两年社区大学相当于上两年四年制大学。因此，与其在普通大学读满四年，不如在社区学院读完两年后再转学，去普通大学读最后两年，“这样就不用支付大学四年的学费，会便宜一些。”</p>
+  <p>在美国，社区大学大多是由当地政府筹办的公立大学，为学生提供两年制的初级高等教育。大部分社区大学结合了大学课程和职业教育培训课程，学生毕业后，可获得被普遍认可的副学士学位。</p>
+  <p>Oliver也介绍道，社区学院的最大特点是数量少，任何人，无论年龄大小（儿童除外）都可以就读社区大学，不过入学也需要测试，但即使不合格，也可以被录取。“对于许多美国人来说，社区大学是一个全新又性价比很高的开始。”</p>
+  <p>不过和普通大学比起来，社区大学没有那么多的有趣活动，课后，Oliver通常就回家或者和朋友出去玩。他还喜欢玩各种各样的游戏，比如堡垒之夜、马里奥，也喜欢小马宝莉，并且还选择了小马宝莉的一张角色图片当作小红书头像。</p>
+  <p>他也有许多大学生的通病——熬夜，凌晨一两点（当地时间）都还在积极回复网友消息，“上大学意味着我的睡眠时间很糟糕。”</p>
+  <p>当被问到会不会有学业压力，Oliver表示，“完全没有，因为我喜欢尝试新事物。”</p>
+  <p>相比之下，医学生Leo要辛苦得多，每学期要参加5—6次考试，从考试前一周开始，他就要保持每天学习8个小时，还会经常练习缝合和用手打结，因为他梦想成为一名血管外科医生。</p>
+  <p>“还不知道，我太累了。”当聊到未来的安排，是否会继续深造或者工作，Lucas更是直言，想休息一年。</p>
+  <p><strong>美国大学生也很“卷”的背后，是严峻的就业市场。</strong></p>
+  <p>Oliver表示，拥有社区大学学位也能找到工作，但大多数公司更希望应聘者拥有学士学位，同时他也会担心找不到工作，“现在的就业市场不景气，雇主们都认为人工智能比学生更好用。”</p>
+  <p>Ella表示，视情况而定，有时候找工作很容易，有时学生毕业后需要花几个月的时间才能找到工作。</p>
+  <p>Leo则认为，对于大多数学位来说，很难找到工作，许多人都是跨专业找工作。</p>
+  <p>《纽约时报》曾报道，一位纽约大学数学系毕业的硕士，在投出去400份简历后，收到了40封拒绝的回信，<strong>一个面试机会都没得到。</strong></p>
+  <p>当地时间1月10日，据美国劳工统计局公布的数据显示，2024年12月美国失业率环比降至4.1%，非农业部门新增就业人数为25.6万。虽然去年12月美国失业率环比下降0.1个百分点，但同比仍高出0.4个百分点。</p>
+  <p><strong>学费继续迎来普涨</strong></p>
+  <p><strong>多地美国高校却面临“倒闭”</strong></p>
+  <p>去年，美国大学理事会发布的《2023年大学学费和学生资助趋势报告》显示，近20年，高等教育的学费总体呈上升趋势。</p>
+  <p>具体来看，2023-2024学年公立四年制的大学平均学费为29150美元，与2022—2023学年相比，平均学费增长了850美元，涨幅为3%。而私立大学的平均学费为42540美元，与上一学年相比，学费平均增长了1600美元，涨幅达到4%。</p>
+  <p>学费上涨的同时，学生的生活成本也在增加。以公立四年制大学为例，对于州外学生而言，2023-2024学年食宿、交通平均支出12770美元，与前一学年相比，增长了460美元。而对于公立二年制大学、私立大学而言，生活成本的增长从360美元到620美元不等。</p>
+  <p>不仅如此，美国部分大学还发布了2024-2025学年的学费调整消息，包括一些美国顶尖高校。</p>
+  <p>斯坦福大学董事会已批准学费上涨5.5%，食宿费上涨7%，全日制全额学杂费将达到87225美元。</p>
+  <p>普林斯顿大学的学费从59710美元上涨至62400美元，涨幅4.5%。</p>
+  <p>麻省理工学院本科学费从59750美元上涨到61990美元，增长幅度为3.75%……</p>
+  <p><strong>2024年4月，有美媒报道，美国辍学大学生越来越多。</strong></p>
+  <p>沙利美公司调查发现，辍学的学生中有一半表示他们很难负担学费及其他相关费用，如课本、住宿和食品。</p>
+  <p>数据显示，从2023至2024学年，四年制私立大学的学费、杂费加食宿等开支平均为56190美元。</p>
+  <p>一边是不断上涨的学费，另一边美国高校也迎来一波“倒闭潮”。</p>
+  <p>去年4月以来，美国两所百年历史的高等学府韦尔斯学院、费城艺术大学相继宣布闭校。</p>
+  <p>另据美国国家教育统计中心（NCES）发布的数据显示，<strong>2024年以来，美国高校关闭速度急剧加快，平均每周有1所高校停办</strong>。</p>
+  <p>而这些宣布关闭的高校中，大多数具有相同的特征：规模较小、私立、依赖学费而捐赠微薄，且入学人数多年来一直在下滑，无法从持续的损失中恢复过来。</p>
+  <p>事实上，随着美国高等教育的运营成本不断攀升、出生率下降，人们对高等学位的价值越来越持怀疑态度。</p>
+  <p>2024年7月，美国盖洛普和卢米纳基金会发布的一项新调查报告显示，32%的受访者对高等教育没有信心或信心不足。</p>
+  <p>其中37%的受访者批评高等教育没有教授相关技能，大学学位的意义不大，无法帮助毕业生找到工作；28%的受访者提及高等教育价格高昂和债务负担。</p>
+  <p>“投资回报率很低，而且看起来还会更糟糕。”Leo表示，在美国，医生也很辛苦，门诊每天接待40名患者是很常见的现象，虽然有周末和假期，但有些科室的医生也会加班。</p>
+  <p>他透露，美国医生的平均年薪约为23万美元，规培期间也有约6万美元的年收入，具体要看工作的医院和专业，护士的平均年收入约8万美元。</p>
+  <p>不过相比其他行业，这样的薪资水平在美国已经很可观了。</p>
+  <p>“我是一名心理健康治疗师，年收入约为6.8万美元。为了做这份工作，我攻读了学士学位和硕士学位，仍欠学生贷款11.5万美元。”</p>
+  <p>“我是一名律师助理，年收入约为5.3万美元，丈夫是一名卡车司机，收入约为8万美元。我们还没有房子，老实说，我有点放弃了。”</p>
+  <p>“我每月收入约3500美元，房租是每月1800美元，付完生活必需品等账单后，我可能还剩大约100美元。”</p>
+  <p>……</p>
+  <p>小红书上，不少美国网友晒出了自己的收入和支出情况，可以看到，不同地区、不同行业，差异也很大。而这样的对账游戏，仍在小红书每天上演。</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/YqBJTsZ6oJdToItwFpQgBA" rel="noopener noreferrer nofollow" target="_blank">“橡树实验室”</a>，作者：橡树作者，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.36kr.com/p/3133366172932615</id>
             <title>孙正义等向特朗普表示对美AI投资5000亿美元</title>
             <link>https://www.36kr.com/p/3133366172932615</link>
@@ -1348,679 +2160,6 @@
   <p>马克·普尔迪是Beacon Thought Leadership的联合创始人兼董事，这是一家专注于内容开发和培训服务的独立咨询公司。</p>
   <p>Kimi | 译 &nbsp;周强 | 编校</p>
   <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MjM5NzY4MzQyMQ==&amp;mid=2650145759&amp;idx=1&amp;sn=0d6f949230810d06d367ce99d37beac0&amp;chksm=bf59142828437f129511a22e038e2ce2141679302727b8c8207d587ea26cf520c17555039296&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“哈佛商业评论”（ID：hbrchinese）</a>，作者：HBR-China，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3133153502518021</id>
-            <title>AI假新闻，霸占我的家族群</title>
-            <link>https://www.36kr.com/p/3133153502518021</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3133153502518021</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 22 Jan 2025 00:44:40 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: AI假新闻, 情感驱动, 后真相时代, 虚假信息  
-<br><br>  
-总结: 本文探讨了在“后真相”时代，AI技术如何助长虚假新闻的传播，情感驱动使人们对冲击性内容产生直接反应而非冷静思考。通过实例分析，指出AI生成的假新闻不仅降低了制作成本，还通过情感操控吸引观众，导致人们对信息的真实性缺乏质疑。文章强调，随着虚假新闻的泛滥，人们的情感可能被稀释，最终可能导致社会的麻木和冷漠。 </div>
-                        <hr>
-                    
-                    <blockquote>
-   <p>我们已经身处“后真相”时代。情感驱动着人们对这些具有高度冲击性的内容做出直接反应，而非看完之后进行冷静思考。这也正是AI合成的虚假新闻产生的温床。</p>
-  </blockquote>
-  <h2><strong>AI假新闻，收割眼泪和流量</strong></h2>
-  <p>人们再一次被AI假新闻骗走了眼泪。</p>
-  <p>1月7日上午9时5分，西藏日喀则市定日县发生6.8级地震。由于震级和海拔较高，这次地震灾害在互联网上得到了各方的持续关注。在众多讲述灾情和救灾情况的文字信息之中，一段视频抓住了众人的眼球：一个头戴彩色帽子、身穿同款毛衣的小孩被压在倒塌的建筑物下，脸和身子上布满了灰尘。这样一个具有强烈对比和冲击性的画面，很难不让人动容。</p>
-  <p>“这个孩子让我哭了一天。”“这个孩子现在还好吗？有没有人知道？”……视频中受灾儿童的情况，牵动着无数网友的心。</p>
-  <p>多家自媒体发布这段视频时，带上了日喀则地震的信息以及“祈祷震区朋友们平安无事”等语句。这让观众下意识地认为，视频中的儿童正是日喀则地震的受灾者。人们纷纷转发、关注，为受灾儿童祈祷。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_1ae4d14cd9654110839c9732a8fc98e7@000000_oswg455152oswg700oswg436_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">戴彩色帽子的孩子被压在倒塌的建筑物下这段视频被大量转发。（图/社交媒体截图）</p>
-  <p>但实际上，早在2024年11月，这一短视频便已经在互联网出现，其创作者声明，它是AI生成的内容。有记者采访了这名创作者，对方称，当时创作视频的初衷是为了反映战争背景下民众饱受摧残的生存状况，而非为了造谣。</p>
-  <p>只不过，经过视频和文字的移花接木，这一短视频与毫不相关的日喀则地震产生了关联性。发布者们用预制素材蹭上了灾难的热度，收割了感动，也获得了流量。</p>
-  <p>如果说AI生成的废墟下的儿童画面被带上地震信息是一种肆意拼贴，那么由AI根据现有新闻素材生成的图片、视频内容，则是另一种“无中生有”。</p>
-  <p>当地时间2024年11月7日起，美国加利福尼亚州洛杉矶多地连续发生山火，火势不断蔓延。一段视频在社交媒体上广为流传，视频中，洛杉矶著名地标——“好莱坞”（HOLLYWOOD）广告牌正被山火吞噬。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_9b7429953af04b23bbe4a3ad7addb44b@000000_oswg161902oswg640oswg309_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">网传的“好莱坞”广告牌被吞噬的AI照片中，多了一个字母O。（图/社交平台截图）</p>
-  <p>事实上，据法新社驻洛杉矶记者在 现场确认，“好莱坞”未见损毁；全球火情监测系统FIRMS的地图上，也未显示该地附近有火情发生。网络上所流传的“好莱坞”燃烧的视频，都是由AI生成的。</p>
-  <p>AI技术污染新闻内容的现象，早在几年前就显露苗头。“甘肃一火车撞上修路工人，致9人死亡 ”“五角大楼发生爆炸”“广东省五华县华阳镇一70多岁老人被殴打致昏迷，其孙子为此跳河自杀，打人者一审被判九年十个月”……如果留意，会发现这些肉眼难辨的AI假新闻经常集中于城乡发展、阶层矛盾、性别对立、国际局势等备受关注的议题。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_a8569655b9c94d04bcfe3c9d630d1757@000000_oswg307800oswg641oswg649_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">有网友输入“特朗普在被捕过程中摔倒_新闻报道画面”字样，AI便生成了这一合成画面。（图/推特）</p>
-  <p>面对这些虚假新闻图片和视频带来的强烈冲击，人们的第一反应是在情感上给予反馈。在或愤怒、或震惊、或悲伤时，人们往往忘记了追问那个最基本的问题：这一切都是真的吗？</p>
-  <p>流量至上时代，虚假信息泛滥已经成为世界性难题。“后真相”（post-truth）一词曾当选《牛津英语词典》的“2016年度英文词汇”，它表明，在舆论面前，事实不再是第一顺位，个人的情感和态度才是最大的影响因子。</p>
-  <p>情感驱动着人们对这些具有高度冲击性的内容做出直接反应，而非看完之后进行冷静思考。在虚假新闻中，受困于废墟的儿童有六根手指，“好莱坞”广告牌多了一个“O”，而这些明显不符合常理的错漏，并未引起人们的关注。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_2aa1b06266b14001a9897a7087dbfa7a@000000_oswg192812oswg1080oswg709_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图/《曼克》）</p>
-  <h2><strong>谁在制造AI假新闻？</strong></h2>
-  <p>从“眼见为实，耳听为虚”到“眼见也未必为实”，从“有图有真相”到“有图也未必有真相”，AI技术屡屡试探新闻真实的边界。那么，究竟是谁在制造AI假新闻？他们为何要制造假新闻？</p>
-  <p>在AI技术的加持下，虚假新闻的制假成本和所需的技术条件，并不像人们所想象的那么高。</p>
-  <p>2023年7月4日，浙江绍兴警方抓获了一个利用ChatGPT制作虚假新闻的团伙。这个团伙中，有一个此前从未接触过电脑技术、仅有初中学历的成员。她利用ChatGPT技术，学会了自动生成“脚本”和相关视频素材，最后一键生成有音乐、字幕的虚假视频，需时最短仅1分钟。</p>
-  <p>根据警方介绍，该团队首先在网络上收集热门话题，通过AI软件生成视频，再通过视频号发布。“有阅读量就会有收益。”在被警方问及发布虚假内容能否牟利时，其中一人如此回答道。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_c211715d19a044518e154c28ed27e6cc@000000_oswg416119oswg766oswg560_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">只需等待数秒，AI软件便可以根据指令输出相应的文字、图片和视频。（图/豆包）</p>
-  <p>而在2024年4月披露的一则案件中，涉案人员使用一款叫“翠绿笔墨”的写稿软件，先从大量社会热点新闻中抓取用户关心的内容，再通过同义词转换、段落颠倒等方式，自动生成文稿，每日产出的文章数量可达19万篇。这些拼凑而成的文章，流向6000多个自媒体账号，最终触达用户。用户对新闻事件的关注，转化为平台给予的阅读量奖励。</p>
-  <p>AI虚假新闻的牟利方式，简而言之就是“降本增效”。低廉的制作成本，使得虚假新闻的盈利空间相应扩大。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_fea8207b15d8446d82b07bbccc7588c4@000000_oswg472026oswg1080oswg607_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图/《黑镜》第三季）</p>
-  <p>如果要验证一条新闻的真实性，须进行事实核查——一般需要经过评估信源、上报可疑内容、厘清核查点、追溯虚假信息的传播路径等过程。但要制造一条仿真度极高的AI假新闻、一张AI假图片，只需借助AI技术，输入指令，等待几秒。</p>
-  <p>受众的需求也让AI合成的假新闻有了持续产出的动力。年轻一代或许会通过多方途径查验某条信息的真实性，而家族群里的长辈不一定有分辨信息的意识。对于在传统媒体环境下成长的长辈，他们会默认媒体所发布的内容是可信的。更何况，在他们的认知中，视频不可能造假，而是对事件的真实记录。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_687e7215c0904a3f896a43a4d626056a@000000_oswg834104oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图/《聚焦》）</p>
-  <p>因此，那些煽情的虚假新闻视频总有自己的受众。热衷国际政治的，会被AI特朗普的虚假发言煽动；关心身体健康的，会点进AI张文宏卖威化蛋白棒的链接地址并激情下单；即便没有什么爱好的人，也会把报道天灾人祸、人间真情的各种真假难辨的信息，一股脑地发到家族群里并@所有群成员观看。</p>
-  <p>结果就是，真相还在穿鞋，而AI假新闻已经坐上标题党的快车，走出了家门。</p>
-  <h2><strong>我们的情感，也被预制了吗？</strong></h2>
-  <p>在AI能轻松生成逼真内容的时代，人们的感动和震撼，时常被预制的虚假新闻占据。这种情况下，很难保证人类情感的含金量可以和过去同日而语。</p>
-  <p>哲学家本雅明曾经敏锐地捕捉“震惊”这一现代人特有的心理模式。他认为，陌生化的震惊和刺激，能够激发新的语境，最后引发人们的深度思考。本雅明以电影工业为例，批判电影工业不断复制震惊和惊奇，沦为大众寻求刺激的消遣。</p>
-  <p>而到了人工智能时代，媒介所带来的冲击非但没有偃旗息鼓，反而愈演愈烈。批量制造的AI假新闻更是如此。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_72072a7f066748c0acc8c9a66450ac35@000000_oswg572893oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图/纪录片《真相背后：虚假新闻与信息的代价》）</p>
-  <p>AI根据人类投喂的素材，创造出适配互联网风向和传播趋势的内容。它足够聪明，能迅速掌握观众会被什么样的苦情情节打动，又会被什么样的热点事件牵引情绪。观众的所有反应，早已被AI虚假新闻提前预设。</p>
-  <p>对于人类来说，关注当下发生的新闻，关心远方的人和事，本是人性使然。只是，当我们的悲悯和感动都来自预制的AI生成内容，它们是否在一定程度上稀释了我们的情感？在难以辨明真伪的内容面前，我们甚至不能确定，是不是真的有一个孩子身处苦难，是不是真的有人正在等待帮助。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_9f794a38e9aa41d487deea3881811846@000000_oswg527034oswg960oswg544_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图/纪录片《真相背后：虚假新闻与信息的代价》）</p>
-  <p>当我们被所见所闻的东西深深触动，却被告知，它们可能都是虚假的产物；那么，就像那个著名的“狼来了”的故事，下一次，因为不知真假，我们似乎不能保证自己还会对远方的哭声保持悲悯之心。最后的结果，可能就是人们逐渐变得麻木、冷漠。而这，或许是AI合成的虚假新闻最令人后怕的一点。</p>
-  <h3>参考资料</h3>
-  <p>[1] 中国新闻网.绍兴警方侦破利用ChatGPT技术团伙制作虚假视频案</p>
-  <p>[2] 极目新闻.用AI伪造“新闻”牟利日产19万篇，一批造谣者被抓</p>
-  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MjM5ODMzMDMyMw==&amp;mid=2654809930&amp;idx=1&amp;sn=51afb92fa3fd7fd663ee80a754f93f7b&amp;chksm=bc96c7e2f50092dabcd1b1e2ddb8f59ca66f528dd9a4237a0d6e115316cca9a74db4c1805d9a&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“新周刊”（ID：new-weekly）</a>，作者：张文曦，编辑：谭山山，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3132561455159812</id>
-            <title>“非主流”AI语言App爆火，单月流水冲上百万美金</title>
-            <link>https://www.36kr.com/p/3132561455159812</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3132561455159812</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 22 Jan 2025 00:09:08 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: AI, 口音纠正, BoldVoice, 语言学习  
-<br><br>  
-总结: AI 学习语言的市场竞争激烈，BoldVoice 通过“口音纠正”切入，迅速获得用户关注。其“英语口音测试”在简中互联网走红，吸引了大量用户参与。BoldVoice 的创始人 Anada Lakra 认为，口音改善是非英语母语者的进阶需求，市场潜力巨大。该应用结合 AI 评分和真人演示，帮助用户改善发音，提升自信。随着用户群体的扩大，BoldVoice 的收入和市场影响力也显著增长。 </div>
-                        <hr>
-                    
-                    <blockquote>
-   <p>AI 学语言是在 AI 经历了两年快速发展之后，少数看到了明朗商业化前景的细分赛道之一，也因此，同时也是目前 AI 应用中最为拥挤、竞争最为激烈的赛道之一。</p>
-  </blockquote>
-  <p>但就在最近，一家初创公司却凭借着“口音纠正”这样的差异化切入点杀出一条血路。</p>
-  <h2><strong>口音测试，风靡简中互联网</strong></h2>
-  <p>最近，简中互联网上“英语口音测试”突然风靡。玩法很简单，只需要访问特定链接，按照指示录制一段英文语音，数秒后你将会得到一个检测到口音归属国家的结果。（访问网址：https://start.boldvoice.com/accent-guesser）</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_bdb58da4d74c4465b3a246fa48da5dbc@000000_oswg251649oswg774oswg436_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_5823d9241ec5453ead4d253a93fa1819@000000_oswg101054oswg783oswg367_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>这个简单的口音测试游戏让众多网友玩得乐此不疲。</p>
-  <p>有人模仿日本人、法国人的口音，企图骗过 AI。也有人因为被多次识别为 100% 中式英语而“恼羞成怒”，用奇怪腔调、甚至四川话应对，却意外得到了母语者的超高评价，靠不靠谱另说，但节目效果拉满。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_69cd8f8c975947f8a36e407ecdb0237a@000000_oswg38876oswg575oswg202_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：小红书</p>
-  <p>类似的热闹景象也发生在外网。“成分复杂”的海外网友争先恐后地让 AI 检测自己的口音成分，部分检测结果准得惊人。比如以下这位曾经在中、美、韩三国有长期生活经验的网友，最终的识别结果即为拥有以上三地口音。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_93fcbfd25f284e8a8c691b1e1091cd10@000000_oswg643209oswg781oswg684_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">这则短视频在TikTok上拥有超过200万的浏览量｜图源：TikTok</p>
-  <p><strong>网友在这场游戏中得到了快乐，其背后的厂商 BoldVoice 则获得了获得了喜人的增长。</strong></p>
-  <p>BoldVoice 是一家成立于 2021 年的美国公司，其同名应用 BoldVoice 致力于帮助非英语母语者减少口音。Similarweb 数据显示，BoldVoice 官网 12 月访问量相较上月增长了 3308%，达到 723 万次。增长另一方面体现为收入飙升，SensorTower 数据显示，BoldVoice 移动应用版本的月内购收入首次来到了 96 万美元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_61c1606524f9497daf1e2a3d0ea5f84a@000000_oswg35538oswg851oswg164_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">BoldVoice移动应用版本的12月内购收入为96万美元｜图源：Sensor Tower</p>
-  <h2><strong>减少口音，潜在量级达千万的细分语言市场</strong></h2>
-  <p>区别于多邻国、Speak 在内的常见语言学习产品，口音改善应用瞄准的完全是另一波人。<strong>后者已经完成了语法和词汇的学习，却困于母语口音的影响无法自信流利的表达，属于进阶需求。</strong>这一需求的发现源于 BoldVoice 创始人 Anada Lakra 的亲身经历，同时她认为这一市场非常广大。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_0a3b8bad82b74cd584ee64f153371c25@000000_oswg478565oswg1080oswg571_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">BoldVoice应用商店海报</p>
-  <p>Lakra 出生于阿尔巴尼亚，当年来耶鲁大学读本科时，她是全家第一个去过美国的人。新环境让她很兴奋，但很快，英语交流成为了最大障碍之一。</p>
-  <p>来到美国之前，Lakra 差不多学了 10 年的英语，也通过了所有申请美本需要的英语标化考试，她一向对自己的英语能力自信满满，但是和母语者交流却狠狠打击了一下这位初来乍到的小姑娘。Lakra 发现，本地人总是听不懂她的话，要她重复，更要命的是在课堂、工作等正式场景中，口音问题往往会分散人们对于内容的关注，最终影响了她公开表达的意愿和信心。而这种困扰在英语作为第二语言的国际学生、移民群体中相当普遍。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_6261616127f4424eb08af9099dd0c630@000000_oswg154253oswg1080oswg382_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">Reddit网友讨论口音偏见问题｜图源：Reddit</p>
-  <p>研究表明，人们可能会因为口音，认为某个人不够聪明、受教育程度低甚至能力不行。具体到工作等正式场合，一项发表在《应用心理学杂志》的研究表明，口音会左右管理者对员工语言流利度的看法，并进一步影响对其表达能力的预期，指向了口音与职业机会相关。这项研究还表明，口音问题可能会导致人们在工作中觉得被排斥和被贬低。而口音问题波及的不只是学生和打工人，<strong>即使是老板也可能会被“另眼相待”。</strong></p>
-  <p>著名的创业孵化器 Y Combinator 的创始人 Paul Graham 在对外交流中承认，当他考虑是否让某位企业家进入旗下项目时，“浓重的外国口音”通常对候选人不利。后来他澄清，“问题不在于口音所传递的文化信号，而在于当人们无法理解你时，一家初创公司的起步会变得更加困难”。口音的确无可避免地会携带有关说话人的出生地、经济阶层等背景信息，与此同时，更直接的是对沟通效率的影响，也正是 Anada Lakra 经历的“本地人听不懂她说的英语”。</p>
-  <p>截至 2023 年，美国有 4780 万移民，最常见的原籍国依次是是墨西哥、印度、中国和菲律宾（皮尤研究中心数据），多数移民都因为母语非英语而带有不同程度的口音；类似 Lakra 的情况，每年都有 100 万的国际学生来到美国；而随着英语成为全球主要的商业语言，赴美经商/工作的人增加，更多的非英语母语者会有意愿突破“口音”这道语言学习的最后屏障。</p>
-  <p>然而要纠正一个人养成多年的发音习惯并不容易，一直以来，市面上最主要的口音问题解决方案是参加真人“口音训练班”，这类课程普遍收费不低。视线上/线下授课、老师经验程度不同，定价在 50 美元/小时到数百美元/小时不等，没有这笔预算的人就只能自学，这也是 Anada Lakra 早年选择的路径，她深知其中的艰辛。所以当 2021 年她听到越来越多有关 AI 和语音模型的消息，她立马意识到自己可以做点什么来帮助非英语母语者来克服口音难题。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_d8483a983483419198a475675b25ef28@000000_oswg177902oswg1080oswg383_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">某1v1口音课程的售价为 90 美元一小时</p>
-  <h2><strong>两位非英语母语者，打造“口腔健身房”</strong></h2>
-  <p>本科毕业后，Lakra 曾先后在 Peloton 和麦肯锡工作，后又到哈佛商学院攻读 MBA；另一位担任 CTO 的联创 Ilya Usorov 也不是英语母语者，他毕业于纽约大学，曾就职于在线商业课程平台 Section4。BoldVoice 在起步不久就得到了来自 YC 的投资，最新一轮融资发生在 2023 年 8 月（种子轮），融资总额达到了 610 万美元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_0bd6b2426f6741ada13a9bf07f8ca5af@000000_oswg73066oswg861oswg574_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">BoldVoice 联合创始人（从左到右）：Ilya Usorov 和 Anada Lakra</p>
-  <p>Lakra 对发音练习的认识是，<strong>区别于词汇、语法等更偏向大脑记忆和理解层面的学习，发音发生在口腔，是对口腔肌肉的控制练习</strong>，后者更关注恰当的舌头放置位置以及口腔张合程度等等，因此 BoldVoice 被团队戏称为“口腔健身房”，也导致了其教学方法和常规的语言学习产品不太一样。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_2897ecf6489a4a5fbf94d8e516e698a9@000000_oswg548852oswg1080oswg596_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">BoldVoice｜图源：BoldVoice</p>
-  <p>BoldVoice 结合了真人演示和 AI 纠音两大教学模式。用户先录制自己的语音，借助 AI 评分找出改进之处；再观看好莱坞口音教练的视频演示，观察、模仿地道的发音方法。虽然不少语言学习产品已经包含发音纠正功能，但专注的 BoldVoice，功能设计上还是有诸多不同，除了设计了专门的发音课程之外，在自由对话版块，后者会将对话目标精确设定到使用特定单词、使用后缀 “-ing” 的单词三次等，而完全省略对词汇量扩充或语法纠正的关注，最终指向的是针对重点单词、音标的发音建议。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_771f2abdba8d49c19e2855ba3dad72a6@000000_oswg459355oswg1080oswg604_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">从句子、单词到回归音标的发音练习 ｜图源：BoldVoice</p>
-  <p>BoldVoice 在发布后的很长一段时间里，都是以美国本土的非母语者为主要用户，其中相当一部分应该是移民。AppMagic 数据显示，BoldVoice上线至今超 7 成的收入由美国用户贡献，下载量也有超 6 成来自美国。然而 12 月爆火的“英语口音测试”已经逐步打开了 BoldVoice 在美国之外的市场的声量，并进一步突破产品收入的天花板。当月,美国市场的收入/下载占比均降至 3 成左右，在韩国、中国、日本、加拿大收入均有明显的增长，去年 4 月 BoldVoice 刚宣布达成 100 万美元的 ARR，如今仅 12 月单月的内购收入就已接近这一数字。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_3c7b71aeace340e38f06135c6deafa51@000000_oswg94007oswg972oswg380_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">BoldVoice 11 月至今收入变化曲线｜图源：点点数据</p>
-  <h2><strong>写在最后</strong></h2>
-  <p>所以 BoldVoice 推出的口音测试真的准吗？由推特博主 ChristoGrozev@bsky.social 发起的，一项由 577 人参与的投票显示，超过7成人认为 AI 猜得很准。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_03b577bf3546400b93629b2a09847a27@000000_oswg94177oswg824oswg384_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图源：X</p>
-  <p>而一个引发病毒式增长的口音趣味测试背后，可能更加值得思考的是，团队如何发现这一细分需求，又如何包装“减少口音”这个可能涉及复杂的文化和情感因素的需求点。可以看到的是，BoldVoice 始终没有把口音“问题化”，强调给予帮助，而非要求用户迎合某种标准。作为一款全球化背景下的语言学习产品，这种对于文化敏感性的深刻理解，或许值得厂商参考借鉴。</p>
-  <h3><strong>参考文章：</strong></h3>
-  <p>《Accent Bias: How Can We Minimize Discrimination In The Workplace?》， Forbes</p>
-  <p>《This Mobile App Helps Non-Native English-Speakers Craft A Confident, Bold Voice》， Forbes</p>
-  <p>《BoldVoice: Perfect Your Accent with an AI Coach | Startup Story | Ep 1》，The Lobster Talks</p>
-  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MzA3NTQ4NjczNw==&amp;mid=2650667071&amp;idx=1&amp;sn=db06b2f7b5a5aacd3f415bb76ee5a598&amp;chksm=867dd315ffdd8add6cdd74057195701edb524ce80d039afa3fc207a1b5c632ca360b502bad9c&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“白鲸出海”（ID：baijingapp）</a>，作者：李爽，编辑：殷观晓，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3132750024834563</id>
-            <title>对话中国能源研究会王卫权：海上风电、分布式光伏配储前景光明</title>
-            <link>https://www.36kr.com/p/3132750024834563</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3132750024834563</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 22 Jan 2025 00:08:09 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 清洁能源, 海上风电, 分布式光伏, 核电安全  
-<br><br>  
-总结: 2024年，中国的清洁能源，特别是风电和太阳能，迎来了快速发展，但在能源转型中仍面临挑战。海上风电的发展受到海域利用、建设成本和施工难度等因素的制约，但其前景广阔，尤其在沿海地区。分布式光伏在市场化改革中受到冲击，但在特定省份仍有发展潜力，结合储能技术可实现商业化。核电作为稳定的基础电源，技术上具备优势，但公众对安全和环境的担忧仍需通过科普宣传来缓解。 </div>
-                        <hr>
-                    
-                    <p>2024年，无论是光伏还是风电，中国的清洁能源再次迎来了高速发展。据1月21日国家能源局发布的统计数据，2024年全国风电、太阳能新增装机分别达到7925万千瓦和27717万千瓦。截至2024年底，全国风电、太阳能累计装机分别达到52068万千瓦、88666万千瓦。那么，在能源转型方面，还存在哪些待解难题，2025年又该聚焦哪些方面发展？</p>
-  <p>对此，预见能源与中国能源研究会可再生能源专业委员会副秘书长王卫权做了一次对话访谈。</p>
-  <h2><strong>王卫权</strong></h2>
-  <p>中国能源研究会可再生能源专业委员会</p>
-  <p>副秘书长</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_f6dbdad99d034208ba2adcaae4cd1581@1743780481_oswg27841oswg681oswg524_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>Q&amp;A</strong></h2>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_b47a7af6d0e540da9db03bb05ab1fb87@1743780481_oswg76628oswg1000oswg539_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>预见能源</strong>：2024年12月26日，浙江深远海风电母港在温州开工，计划到2030年打造千亿级风电产业集群，抢占全国乃至全球深远海风电发展高地。这也是全国首个面向深远海的风电母港项目。</p>
-  <p>我们注意到，2024年以来，还有一些沿海省份，比如说福建、浙江，都在发展海上风电。</p>
-  <p>就您目前了解的情况，海上风电的技术难点有哪些？我们知道海上风电的建设投资要比陆上和近海要大，您怎么看海上风电这股热潮？</p>
-  <p><strong>王卫权：</strong>我觉得这个问题可以从几个方面来看。</p>
-  <p><strong>先说海上风电的制约因素。</strong></p>
-  <p>第一个就是我们的海域用途很多，它有渔业，有交通，有军事，有气象。在多种用途的情况下，发展海上风电并不属于一个优先的方向，首先要满足军事，这是最重要的一个方面。因此，由于受到用海的限制，所以很多项目的开发会受到限制，尤其是近海项目，所以现在就要往深远海走。至少是离海边30公里，或者是水深超过30米的地方去走。</p>
-  <p>那由此就带来几个方面的影响。第一，离海越远，水深越深，风电的建设成本就会越高。</p>
-  <p>第二个就是它的施工难度也会增加。因为离海越远，受台风的影响就越大，它的施工难度也会越大，施工吊装的负荷越大。</p>
-  <p>第三就是离海岸线越远，输电线路会越远，因为你要把电再输回到岸上，海上很难有什么用电的地方，你就要把它收回来——这些对于海上空间都是挑战。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_f0e5fb9915ce4c2681a8ddf32d673c89@1743780481_oswg62417oswg1080oswg603_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>王卫权：</strong>第二个层面，是有利的方面。</p>
-  <p><strong>对于海上风电来讲，它是沿海这些区域发展新能源重要方面</strong>，因为在陆地上实在是没有足够的土地去建了。</p>
-  <p>大规模的风电建设和光伏对比的话，第一，它的资源有限。光是普照的，但是并不是每个地方都有风，只有一些特殊的风口地方才有。</p>
-  <p>第二，就是在陆地上土地资源也会受到限制。所以大规模地发展陆上风电目前已经受到很大的限制，所以海上风电就成了很多地方发展的方向。</p>
-  <p>另外，海上风电其实是和制造业连为一体的，浙江为什么要建风电母港，因为母港会带来很多像做叶片的、做塔筒的，做齿轮箱的，做整机的……这些制造企业入驻。</p>
-  <p>除了浙江，江苏的盐城就是一个风电的母港。所以包括广东的湛江，还有阳江等等，都希望能打造风电母港，因为能够带来制造企业的入驻，发展地方的经济，所以沿海的很多区域发展风电不仅仅是要推动能源转型和科技能源发展，同时要带动经济的发展。所以在这两个因素的叠加下，沿海从辽宁一直到海南现在都在大力地发展海洋工业。</p>
-  <p>就海上风电现在的成本来说，发一度电的成本是比火电略高一些，但是，随着技术的进步，规模的扩大，成本会逐渐下来，同十几年前光伏很贵，现在已经很便宜了一样，只要规模不断地扩大，技术不断地进步，成本就会不断地下降，到最后能够实现商业化。</p>
-  <p>从各省规划的容量来讲，未来至少有好几倍的增长，每个省的规划都很大。那这些在十五五或者是在2035年之前，会慢慢地去实现。</p>
-  <p>简单地讲，<strong>海上风电面临着的最大挑战是海域利用的问题</strong>，并不在海上风电本身。海上风电即使走到了30米，现在最远的大概有四五十公里，水深也有也更深，像德国、丹麦，还有挪威、英国，他们现在最远的都距离海岸100多公里。但是也在技术上都可行，通过漂浮式的平台是能够解决这些问题的。但是就是经济性需要时间才能够通过规模的扩大技术的进步，才能够实现商业化。</p>
-  <p><strong>所以总结起来就是前景广阔</strong>。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_094f16fb9ff144fca4db32d340662944@1743780481_oswg334192oswg1024oswg684_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>预见能源</strong>：感谢！我们还有一个光伏方面的问题向您请教， 2024年，我们观察到，随着电力市场化改革，分布式光伏受到了不小的冲击，导致这这一投资出现了波动，甚至有一些部分央企开始退出了这个领域。</p>
-  <p>许多从业者都反映有点看不清，说这个分布式光伏到底前景如何，明年还能不能干，怎么个干法，比较迷茫。</p>
-  <p>您怎么看分布式光伏2025年以及接下来两三年的前景？</p>
-  <p><strong>王卫权</strong>：对于分布式光伏来讲，去年国家能源局出了一个分布式光伏发电管理办法的征求意见稿，里边对分布式光伏做了一些规定，就是6兆瓦以下的，20兆瓦和50兆瓦分了几个档次。</p>
-  <p>6兆瓦以下的可以并网，到20兆瓦的项目优先自发自用余电上网，超过50兆瓦的就必须自用，不能并网。</p>
-  <p>通过这种方式，就是要鼓励自发自用，尽量地减少并网，减少对电网的挑战。</p>
-  <p>从这个前景来看，我个人觉得，分式光伏未来依然是要高速发展的。尤其是在比较重要的几个省份，如广东，江苏，浙江，安徽，河南，山东。这些省份能源转型的压力大，化石能源占比高，土地资源也有限，因此要想发展新能源，只能充分的利用各种边角角的地方来大力发展，像屋顶、还有分散式的地面。关于分布式光伏的前景，我觉得，方向合格，前景是没有问题的。</p>
-  <p>可再生能源入市确实会对分布式光伏的收益产生影响，所以2024年工商业储能就发展很快。</p>
-  <p>分布式光伏加上储能就可以实行两充两放，就是低谷的时候、电价便宜的时候充电，那电价高的时候再放电给用户供电。这样就能够峰谷价差套利，比如说两毛钱充的，卖的时候卖一块钱，那一度电能够赚半毛钱。通过这样的方式就能够把光伏白天低谷时发的电储存起来。等到它高峰的时候再卖出去。</p>
-  <p>刚才提到的像广东、浙江、江苏等这些地方其实是能够实现商业化的，只要高峰尖峰时段的电价和低谷电价的价差足够大，这些都可以商业化运行，所以工商业在2024年的增长很快，大概工商业储能大概能有十几个吉瓦时。</p>
-  <p>对于户用光伏这一部分，如果能够实现自发自用的话，收益还是可以的。现在居民电价基本上都在五毛钱左右，但光伏度电成本如果不配储能的话，现在已经是两毛多钱了。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250122/v2_e2eedc63b0d442e98ddef9c4ed18a6b3@1743780481_oswg83342oswg958oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p><strong>杨锐</strong>：还有一个问题，就是去年的咱们核电这一块建设的速度也比较快。但是目前来讲，从社会民众这个角度讲，还是有一些担忧。</p>
-  <p>您怎么看咱们目前的核电的安全和环境的保障问题？</p>
-  <p><strong>王卫权</strong>：核电属于第一电源，特别的稳定，基本上能够发到8000小时，一年总共才8760个小时，能发到8000个小时，所以是作为一个最稳定的基础电源来运行的。</p>
-  <p>目前在全球来看，中国的核电技术都还是可以的，尤其我们华龙一号投入使用之后，我们的核电技术又有了新的提升。所以，从技术的角度，我们技术是领先的，所以要发展。</p>
-  <p>另外一方面，核电最稳定，又不排放二氧化碳，所以也是要发展的，但是核电一个关键的问题就是安全，这个是大家最为担心的，国家其实也充分考虑到这个问题，尤其选址方面。</p>
-  <p>日本福岛事件之前，曾经选过内陆的一些省份，但是事件一出，内陆省份的项目全部停了，所以现在咱们的核电基本上还是都在沿海区域。这样的话，可以尽可能减少对人口密集区的影响。</p>
-  <p>第二个关于安全，从目前在运行的核电站的角度来讲，中国众多核电站安全性都很高。一般的公众对这些有疑虑，是因为不了解，所以就比较担心。我觉得可能需要更多的核电专家去做一些科普宣传。</p>
-  <p>另外一个，核电在建设和运营过程当中。对于环境的影响不是特别大，最难处理的是核废料。核废料处置以后还是有放射性，如何能够永久地去除，避免辐射再次产生污染，这是非常重要的。但是因为我不是核方面的专家，所以我只能以有限的知识去回答。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/ywn5T-Q6WHq9pHUrxcK7Mw" rel="noopener noreferrer nofollow" target="_blank">“预见能源”</a>，作者：杨锐，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3132736233799176</id>
-            <title>“跨界王”中科云网：转型之路坎坷重重，赔偿3200万再添重负</title>
-            <link>https://www.36kr.com/p/3132736233799176</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3132736233799176</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 22 Jan 2025 00:07:32 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 跨界转型, 财务困境, 投资者索赔, 光伏行业  
-<br><br>  
-总结: 中科云网面临重大危机，因“证券虚假陈述责任纠纷”被判赔偿3000多万元，财务状况严峻。自2013年以来，公司连续11年扣非净利润为负，尝试多次跨界转型未能改善财务状况。尽管在光伏行业有所布局，但收入和利润依然处于亏损状态。公司高层变动及管理问题进一步加剧了其困境，未来能否渡过难关仍需关注。 </div>
-                        <hr>
-                    
-                    <h2>01</h2>
-  <p><strong>屡战屡败的“跨界王”中科云网这次又遇到重大危机。</strong></p>
-  <p>2025年1月6日，中科云网公告称，近日收到北京市高级人民法院的终审判决书，驳回了公司的上诉请求，维持了一审判决，中科云网需要向投资者赔付3000多万元。</p>
-  <p>据悉，这起案件源于2018年，当时中科云网首次披露了因“证券虚假陈述责任纠纷”而被多名投资者起诉的情况，同时部分投资者还要求前控股股东孟凯承担连带赔偿责任，即<strong>中科云网需向投资者赔偿投资损失3176.05万元，并承担54.60万元的诉讼费，总计高达3230.65万元。</strong></p>
-  <p>此次投资者索赔案件的判决结果，让中科云网的财务困境雪上加霜。据公司财报显示，截至2024年9月30日，中科云网的货币资金仅为651.3万元，远不足以支付投资者赔偿。此外，公司还有大量短期借款和其他应付款需要偿付，财务状况十分严峻。</p>
-  <p>值得注意的是，<strong>自2013年以来，中科云网已经连续11年扣非净利润为负</strong>。尽管公司曾试图通过出售资产、引入战略投资者等方式改善财务状况，但效果并不明显。此次投资者索赔案件的判决结果，无疑是对中科云网跨界转型失败的一次沉重打击。</p>
-  <p>回顾中科云网的历史，其跨界之路可谓波澜壮阔又充满坎坷。资料显示，中科云网是中国第一家在国内A股上市的民营餐饮企业集团，于2009年在深圳证券交易所正式挂牌上市。</p>
-  <p>其前身为北京湘鄂情集团股份有限公司，创始人是来自湖北武汉的孟凯，当年孟凯赶着“下海潮”，一头扎进昔日小渔村深圳，在这个当年充满魔力的城市认识了未来妻子——来自湖南的周长岭，湘鄂情也由此而来。</p>
-  <p>在深圳干了几年后，1995年，年仅26岁的孟凯和妻子在深圳蛇口开了家湘菜馆，后面随着生意越来越好，当初40平米的小饭馆也变成1000多平的酒楼。但孟凯并没有把眼光局限在这一亩三分地，而是在1998年凑齐300万北上，在北京海淀区开了第一家湘鄂情，随后自然也是业绩火热，2002年北京湘鄂情的年营业额达5500万元。</p>
-  <p>然而，好景不长，随着国家对“三公消费”的打击，高端餐饮消费急剧下滑，中科云网也未能幸免。<strong>2013年，公司亏损高达5.64亿元，扣非后净利润更是亏损4.45亿元，与前一年盈利8193万元的辉煌形成鲜明对比。</strong></p>
-  <p>面对困境，孟凯开始谋求转型，先后尝试进入环保、互联网、大数据等行业。然而，这些努力并未能显著改善公司的财务状况。反而，由于频繁跨界导致的资金分散和管理不善，公司的财务状况每况愈下。2014年，湘鄂情更名为中科云网科技集团股份有限公司，并宣布转型新媒体大数据领域。</p>
-  <p>而据财报显示，<strong>中科云网2013年亏损5.64亿元，2014年再度亏损6.84亿元</strong>，并因连续两年亏损被“带星带帽”（*ST、退市风险警示）。此后，尽管中科云网通过出售旗下酒楼、食品加工等资产实现归母净利润为正，暂时解除退市风险等方式暂时解除了退市风险，但扣非后净利润依然亏损严重，2015年当年归母净利润为6557万元，但扣非净利润为-2.18亿元。</p>
-  <p>而不断尝试转型后，中科云网也是一直没有缓过来，在15年刚摘下帽子，在17年又因为因为期末净资产为负，公司股票简称由“中科云网”变更为“*ST云网”。而中科云网创始人孟凯也因将公司股权质押给上海臻禧企业管理咨询合伙企业(有限合伙)（以下简称“上海臻禧”）获得借款，最后失去一手创办的中科云网。2018年7月16日，公司控股股东由孟凯变更为上海臻禧企业管理咨询合伙企业（有限合伙），实际控制人由孟凯变更为陈继。</p>
-  <h2>02</h2>
-  <p>而在陈继接手中科云网后，中科云网也未停下跨界脚步，在面对如此严峻的财务困境和司法判决情况下，<strong>中科云网在巩固和扩大餐饮团膳产业规模的同时，积极尝试通过外延式并购或合作等方式拓展互联网游戏推广及运营业务，并且再次将转型目光投向了光伏领域。</strong></p>
-  <p>2020年，在“双碳”政策的刺激下，光伏行业迅速扩张，中科云网似乎看到了新的转型曙光。于是2022年底，中科云网成立了子公司——中科云网（高邮）新能源科技有限公司，宣布进军N型高效晶硅电池片领域。2023年4月，中科云网更是宣布拟通过子公司投资建设5GW单晶N型TOPCon高效电池项目，项目投资金额高达50亿元。</p>
-  <p>来到2024年，前期的布局在这个时候开花结果了。2024年5月中科云网一连斩下3个电池订单，先后获得了协鑫、一道新能以及某光伏企业合计4.08GW的电池片采购订单。另外，12月18日，中科云网还发布公告称，其成为浪潮硅太阳能电池片采购项目三期第一成交候选人。电池片采购量为3,000万片，公示项目所涉金额约7,011万元，占中科云网2023年度营业总收入的36.79%。</p>
-  <p>此外，2024年8月，中科云网又宣布将业务扩展至光伏组件和支架领域，并成立全资子公司科云网（扬州）智能科技有限公司。但坏消息是，这个开花结果的日子恰逢“行业寒冬”，在2024年光伏产业价格内卷之际，光伏组件及相关上下游相关产品大多都在“跌跌不休”。</p>
-  <p>具体可以从中科云网的财务报表上看。据披露的2024年半年报显示，来自新能源光伏行业的收入仅为489.27万元，同期营业成本为469.12万元。若算上其他开支，中科云网的光伏业务大概率仍处于亏损状态。此外，公司还因拖欠供应商货款等问题被媒体曝光，进一步加剧了其财务困境。</p>
-  <p>而据中科云网2024年最新的三季报显示，中科云网主营收入1.11亿元，同比下降23.06%；净利润-3858.26万元，同比上升64.6%。</p>
-  <p>其中2024年第三季度，中科云网单季度主营收入4449.0万元，同比上升36.74%；净利润-1030.78万元，同比上升36.56%；负债率83.36%，投资收益5.79万元，财务费用264.11万元，毛利率12.64%。因此中科云网在光伏领域的尝试并未能显著改善其财务状况</p>
-  <p>此外，<strong>除了财务困境和司法判决外，中科云网还面临着管理层变动等内部问题</strong>。2025年1月8日晚间，中科云网发布公告称，公司董事会于2025年1月7日收到公司第六届董事会非独立董事陈叶秋女士提交的书面辞职报告，陈叶秋女士因个人原因申请辞去公司董事及内部控制委员会委员职务，辞职后将不再担任公司及子公司任何职务。</p>
-  <p>这一辞职事件无疑给本就动荡不安的中科云网再添一重打击。公司财务告急、民事诉讼不断、大笔赔偿需要支付、光伏行业外部环境又差，此时公司高层突然辞职，可谓是内忧外患。</p>
-  <p>因此此次中科云网能否撑过这个寒冬，还需继续关注。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/0JqcCe8CfIJ4StosFTdTrQ" rel="noopener noreferrer nofollow" target="_blank">“预见能源”</a>，作者：柯阳明，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3132689569201666</id>
-            <title>年报巨亏，董事长辞职，控股股东拍卖股份，又一光伏老将陷危机</title>
-            <link>https://www.36kr.com/p/3132689569201666</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3132689569201666</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 22 Jan 2025 00:07:13 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 光伏行业, 亿晶光电, 业绩下滑, 控股股东  
-<br>
-<br>
-总结: 亿晶光电在2024年预计将面临巨额亏损，净利润下降幅度超过2894%。公司因光伏行业供需错配和市场竞争加剧，导致主营业务电池及组件价格下跌，盈利能力下降。尽管亿晶光电拥有完整的产业链和丰富的经验，但在当前市场环境中仍难以自救。控股股东唯之能源的股份因债务违约被司法拍卖，增加了公司控制权变更的风险。此外，近期公司高层人事动荡，董事长及多名董事辞职，给公司的稳定发展带来冲击。 </div>
-                        <hr>
-                    
-                    <h2>01</h2>
-  <p>光伏老将的年关难过。</p>
-  <p>1月15日，亿晶光电正式发布了预亏公告。公告显示，2024年该公司预计2净利润将在-19.00亿元至-23.00亿元之间徘徊。与去年同期相比，这一数字将呈现出巨大的下滑态势，<strong>同比下降幅度预计超过2894%至3482%</strong>。</p>
-  <p>在公告中表示，亿晶光电由于光伏行业产能与市场需求出现阶段性供需错配，市场竞争加剧，产业链价格持续下跌，盈利能力下滑，其主营业务电池及组件产品价格下跌，公司计提了存货跌价准备，对固定资产等长期资产进行减值测试，并计提相应的资产减值准备。</p>
-  <p>成立于2003年的亿晶光电可谓光伏老将，其自2007年就逐渐建立起单晶硅棒—硅片—电池片—电池组件封装的完整产业链。2011年11月，该公司借壳海通集团，成为中国第一家在A股上市的专业太阳能电池组件生产商。</p>
-  <p>目前，亿晶光电主营业务已涵盖了高效晶体硅太阳能电池、组件的研发、生产和销售，同时还具将产业链进一步延伸至光伏电站领域。</p>
-  <p>然而，尽管在行业内拥有深厚的底蕴和丰富的经验，但面对当前的市场环境，亿晶光电仍然难以独善其身。</p>
-  <p>回顾亿晶光电的发展历程，不难发现，荀建华在推动公司上市方面做出了巨大的贡献，其一手推动了公司在2011年底的借壳上市。借壳上市后荀建华持股比例39.56%，为公司实控人。</p>
-  <p>在亿晶光电最风光无限的那几年，荀建华曾多次登上福布斯富豪榜。如2009年以20.5亿元的财富值位列《福布斯中国富豪榜》第383名，2012又以年薪酬额155万元位列《福布斯中国A股CEO薪酬榜》第130位。</p>
-  <p>然而，随着市场环境的变化和行业竞争的加剧，荀建华等人对亿晶光电2010-2013年的业绩承诺逐渐成了沉重负担。除了2010年外，其余数年的业绩承诺均未能实现，这使得荀建华不得不做出变卖股份、出让控制权的决定，对此荀建华还在2013年的投资者交流会上感慨：<strong>“上市上市，上到倾家荡产。”</strong></p>
-  <p>2017年，荀建华开始筹划让出亿晶光电的控制权。</p>
-  <p>经过两年的努力，这一事项终于在2019年5月尘埃落定。勤诚达投资（现名：深圳唯之能源）通过协议转让的方式取得了荀建华所持21.65%的亿晶光电股份，由此成为公司的控股股东，实际控制人也变更为古耀明。</p>
-  <p>然而，好景不长，2021年年初，古耀明将持有的勤诚达投资99%股权赠与其子古汉宁，后者变更为公司实控人。2023年3月，亿晶光电的控股股东名称再次发生变更，由勤诚达投资变更为唯之能源。然而，这一系列的变更并未能改变亿晶光电面临的困境。</p>
-  <p>值得一提的是，<strong>因为业绩承诺而被迫出局的荀建华并没有因此停息，而是转头成立了另外一家光伏公司——华耀光电</strong>。</p>
-  <p>据悉，2019年8月1日，同样担任亿晶光电原董事的姚志中设立华耀光电，又在仅11天后将华耀光电100%股权转让给华耀投资，华耀投资由夫妻分别持股51%、49%，而荀耀、姚晶则分别是荀建华的儿子以及儿媳妇。</p>
-  <p>另组公司后，荀建华试图卷土重来，华耀光电曾于2023年年5月冲击创业板IPO，但在短短51天后其就因种种原因撤回申请文件，IPO流程就此终止。</p>
-  <h2>02</h2>
-  <p>然而，在经历股权变更之后，亿晶光电的经营状况并未因此蒸蒸日上。</p>
-  <p>根据财报数据，从2019年至2023年，亿晶光电的营业收入分别为35.59亿元、40.98亿元、40.83亿元、98.76亿元和81.02亿元；而净利润则分别为-3.03亿元、-6.52亿元、-6.03亿元、1.27亿元和0.68亿元。</p>
-  <p><strong>可以说，亿晶光电既是是在光伏的好年头，也没赚回此前的亏损。</strong></p>
-  <p>进入2024年，亿晶光电在前三个季度依然未能摆脱亏损的局面。营收与去年同期相比下降了58.93%，减少了超过一半；净利润方面则亏损了5.72亿元，同比下降幅度高达289.62%。</p>
-  <p>此外，根据最新的2024年年度财务预报，亿晶光电在第四季度的亏损额更是超过了前三季度亏损总和的两倍。</p>
-  <p>据最新公告披露，该公司常州基地 5GW PERC电池产能和滁州基地 7.5GW TOPCon 电池产能已经停产。</p>
-  <p><strong>除了业务上的泥潭，亿晶光电还面临着控股股东股份被司法拍卖的困境。</strong></p>
-  <p>在同日发布的公告中，亿晶光电披露其控股股东唯之能源持有的54,696,214股无限售流通股将于2025年2月11日至12日被司法拍卖，占公司总股本的4.61%。这一消息无疑给公司的未来发展蒙上了一层阴影。</p>
-  <p>据了解，本次唯之能源持有股份被拍卖的原因是由于其为深圳市勤诚达集团有限公司提供贷款担保导致的债务违约被诉。因此，唯之能源所持亿晶光电的全部2.55亿股无限售流通股被全部轮候冻结，占公司总股本的21.47%。</p>
-  <p>此外，截至1月15日，唯之能源因对外提供担保导致的债务违约涉及诉讼共7起，担保债务违约本金合计约59.69亿元。亿晶光电表示，如后续唯之能源被轮候冻结的剩余股票被提起法拍，则公司存在控制权变更的风险。</p>
-  <p>这些之外，<strong>亿晶光电还面临着人事动荡的问题</strong>。</p>
-  <p>早在1月8日，公司就发布了刘强辞去公司非独立董事、董事长等职务的公告。值得注意的是，刘强出任董事长尚且不到一年。同时，孙铁囤和张婷也分别辞去了公司非独立董事等职务。三人的辞职理由均为“工作原因”。然而，这一系列的辞职事件无疑给公司的稳定发展带来了不小的冲击。</p>
-  <p>在收到上述辞职申请的同一天，公司控股股东唯之能源及时补上了空缺。</p>
-  <p>据亿晶光电披露，唯之能源提名戴苏河、赵争良及霍智义为公司第八届董事会非独立董事候选人。<strong>这三人均具备呼和浩特市政府相关工作经历，因此有不少人认为呼和浩特市国资局可能会借此契机入主亿晶光电。然而，到目前为止，这些仅仅是推测，并未得到官方证实。</strong></p>
-  <p>实控人多次变更、董事长上任不到一年就辞职、业绩急剧下滑，亿晶光电在光伏行业中经历了无数的风风雨雨。然而，在当前行业寒冬的严峻考验下，亿晶光电是否会迎来第三次实际控制权的变更？这次能否成功穿越光伏行业黑暗时刻，这些仍然充满不确定性。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/zSO-35JZQGT0h5OqCnnujA" rel="noopener noreferrer nofollow" target="_blank">“预见能源”</a>，作者：柯阳明&nbsp;杨锐，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3132532724882182</id>
-            <title>B站小店上线，闯出电商新天地？</title>
-            <link>https://www.36kr.com/p/3132532724882182</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3132532724882182</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 22 Jan 2025 00:05:57 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: B站, 电商, 小店, UP主  
-<br><br>  
-总结: B站正在升级其电商布局，将商家后台管理平台“B站工房”升级为“B站小店”，并推出虚拟物品售卖交易服务。这一系列举措旨在寻求电商业务的突破，尽管B站在电商领域的商业化进展缓慢，但其2024年第三季度财报显示出首次单季度盈利的迹象。B站小店将UP主的内容创作与商品推荐深度融合，提升用户购物体验。尽管面临用户参与度低和缺乏补贴等挑战，B站仍需在多个维度持续发力，以建立完善的电商生态。 </div>
-                        <hr>
-                    
-                    <p>Tech星球独家获悉，B站正在加码电商方面的布局，把此前的商家后台管理平台“B站工房”升级为“B站小店”，并将在本周分批上线虚拟物品售卖交易服务。此外，“UP主”主页的原带货“橱窗”也升级成为“小店”，用户可以通过小店直购或者跳转至淘宝等外部平台购买商品。这一系列举措意味着，B站正在寻求在电商业务上的突破。</p>
-  <p>一直以来，B站虽然有着独特的社区生态和庞大的年轻用户群体，但其商业化却差强人意。直到去年11月有所改观，据B站公布2024年第三季度财报显示，经调整后净利润2.4亿元，实现上市以来首次单季度盈利。</p>
-  <p>从2024年第三季度财报来看，B站营收主要来自于四大部分：增值服务、广告、移动游戏、IP衍生品及其他，分别贡献2024年三季度总营收的38%、29%、25%、8%。其中，电商方面数据仅将GMV数据呈现在广告营收部分的财报中，可见电商业务在B站的整体营收架构里，尚未成长为独当一面的核心力量，但这也凸显出其蕴含的巨大潜力与可拓展空间。</p>
-  <p>随着此番B站小店的上线，B站也将开启电商业务的全新探索。这不仅是对现有商业板块的有力补充，更是为未来多元化发展奠定了重要基石。不过，B站能做好电商这个热门生意吗？</p>
-  <h2><strong>B站推出新电商功能</strong></h2>
-  <p>“小店”已成为各大平台对电商业务的称谓，譬如，抖音小店、微信小店、快手小店等，如今，B站也推出了专属的B站小店。</p>
-  <p>目前，B站小店入住的商家类型为个人身份、个体工商户和公司企业，商家可通过申请入驻，本周将对商家分批上线虚拟商品交易服务，进一步丰富B站小店内销售的商品库。</p>
-  <p>升级为B站小店后，最大的变化是“UP主”主页的橱窗变成了小店，并且会显示总销量。</p>
-  <p>进入小店后，可以看到UP主售卖的商品，商品会以双列瀑布流的形式进行展示，包括显示商品图片、名字、价格以及销量等。此外，还可以看到新品、评价等信息。相比于原来的橱窗，小店也支持店铺内搜索商品，方便用户精准定位想要买的商品。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_4ebb617152c4448d9026f66d5c8ff258@000000_oswg255202oswg1080oswg2260_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>不仅仅是“UP主”主页的橱窗变成了小店，UP主下方的原“商品”栏也会变成“小店”，同步排列UP主售卖的商品。用户可以通过B站小店，在B站内完成从选品到下单支付的全流程。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_0272c09b0067407a82dd799d984390e9@000000_oswg113652oswg1080oswg1080_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图注：左为原带有橱窗功能的UP主界面，右为带有“小店”功能的UP主界面。</p>
-  <p>值得注意的是，UP主的小店除了可以售卖商品外，也支持带第三方平台商品的货物链接，包括淘宝、京东等平台，这些更加适合只想赚取带货佣金，以及无货源的UP主。</p>
-  <p>从产品逻辑看，推出小店后，UP主能在主页展示小店，将内容创作与商品推荐深度融合。例如，美食区 UP 主在分享烹饪教程时，可通过小店推荐相关厨具、食材；科技区 UP 主评测电子产品后，能引导粉丝在小店购买同款产品。</p>
-  <p>这种小店模式，不仅让用户在获取优质内容的同时满足购物需求，还增强了UP主与粉丝之间的互动和联系，使用户对B站的依赖度更高，进一步巩固社区生态，同时，也成为了UP主带货和用户消费的重要窗口。</p>
-  <h2><strong>B站电商加速冲刺</strong></h2>
-  <p>2023年的业绩会上，哔哩哔哩董事长陈睿曾经对外表示，2023年不再单纯地追求MAU（月活跃用户），要关注更有质量的DAU以及商业价值转换效率。</p>
-  <p>换句话说，在过去，B站虽积累了海量用户，但在将这些用户流量高效转化为实际商业价值方面，存在提升空间。现在，B站着重提升商业价值转换效率，旨在优化平台内各个商业环节，包括广告投放精准度、电商业务转化率、增值服务的吸引力等。</p>
-  <p>特别是电商业务，此前B站在电商方面的尝试效果有限，在此背景下，B站小店可能成为B站电商突破的关键“胜负手”。</p>
-  <p>B站小店通过优化商家入驻与管理流程，打通UP主与商品销售的链路，正是提升商业价值转换效率的重要举措。借助UP主的影响力，将优质内容精准导向相关商品推荐，从而提高用户购买转化率。</p>
-  <p>而且，与成熟的电商平台相比，此前的B站的购物场景缺乏连贯性和便捷性。在淘宝、京东等平台，用户从搜索商品、浏览商品详情、查看用户评价到下单购买，整个流程简洁流畅，各个环节紧密相连。B站小店则在复刻这一购物链路，优化平台购物体验，逐步引导用户在B站形成购物习惯。</p>
-  <p>实际上，小店模式也是当下电商领域极具成效的发展路径。</p>
-  <p>以抖音小店为例，其在抖音电商业务的崛起中扮演了关键角色。通过提供便捷的开店流程、多元的商品展示途径，抖音小店吸引了海量商家入驻，有力推动了商品交易的活跃。这不仅为用户带来了丰富的购物选择，也让抖音电商业务得以蓬勃发展，进而成为字节跳动的重要营收增长点。</p>
-  <p>除了推出B站小店外，最近一个月，B站在电商领域动作频频。一方面，重启针对UP主的直播带货激励项目——“Bi star”，该项目由B站和淘宝联盟联合举办，专为站内外潜力UP主定制直播带货激励计划，同时给予他们货盘和运营支持。</p>
-  <p>另一方面，B站App端新增广告位“UP主分享好物”，该广告位显示于视频详情页中“相关推荐视频”上方，提升带货效率。</p>
-  <p>不难看出，B站电商正在加速冲刺。</p>
-  <h2><strong>B站电商能否闯出一片新天地？</strong></h2>
-  <p>在互联网商业版图中，B站以其独特的社区文化和庞大的年轻用户群体独树一帜。但在电商领域，尽管B站进行了诸多尝试，却始终难以跻身电商头部阵营。</p>
-  <p>B站做电商并不算晚，可以说是与抖音、快手在同时期开启电商业务。2021年，B站下场做电商，与抖音、快手等平台在早期发展电商业务一样的策略，即帮第三方电商平台引流带货赚佣金的生意，并上线能够带货的“小黄车”功能。</p>
-  <p>2022年，B站在直播分区正式上线购物专区，该专区内的直播间全量放开了购物“小黄车”功能，UP主几乎都添加了“小黄车”购物链接进行带货，并宣布加入当年的“双11”大战，期间，为了扶持电商业务还推出“直播电商UP主招募激励计划”。</p>
-  <p>不过，彼时的电商业务并未带来理想的成绩，2022年第三季度财报显示，B站第三季度IP衍生品及其他（含电商业务）收入为7.58亿，同比增长仅3%。反映出用户对B站电商业务的参与度不高。</p>
-  <p>淡薄的消费氛围成为阻碍平台商业化的主要原因之一。一位深度B站用户告诉Tech星球，每日在B站观看各类动漫、游戏、知识科普视频的时间可达2小时，参与热门话题讨论与UP主互动的时间也有半小时左右，但对于UP主的电商商品其实并不感冒。</p>
-  <p>此外，B站售卖的商品，主要以与B站的社区氛围——游戏、二次元、手办、玩具类相关的商品为主，意味着B站电商的品类仍有局限。</p>
-  <p>而且，电商业务要想做成，离不开大量的烧钱补贴。而B站在电商补贴方面，相比淘宝、京东，鲜少有大规模、持续性的补贴举措。在大型促销节点，B站鲜少推出像淘宝、京东那样力度的满减、消费券、百亿补贴等活动。</p>
-  <p>另外，UP主带货的方式是将内容流量转化为电商销量，但在实际操作中，这种模式存在诸多挑战。由于缺乏专业的销售技巧和产品知识培训，难以精准向粉丝传递产品价值，导致带货效果不佳。部分UP主在视频中植入电商推荐内容时，难以巧妙融合，过于生硬的广告植入，也容易引发用户反感。</p>
-  <p>B站小店的上线，对于B站而言只是关键的一步，面对电商这块难啃的骨头，仍需从用户习惯重塑、供应链完善、内容与电商深度融合等多个维度持续发力，建立完善的电商生态，才有望在电商领域闯出出一片新天地。</p>
-  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MzU5MTczNjIyNA==&amp;mid=2247602283&amp;idx=1&amp;sn=15120ebf2f7980e04c7495b67163377f&amp;chksm=ff73da4af931bbbe1eea291c6f419a40a657b5c96cbed277fed8e0d4cde138b13835c1613aea&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“Tech星球”（ID：tech618）</a>，作者：陈桥辉，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3132445428924161</id>
-            <title>千亿市值龙头，谋求子业务IPO</title>
-            <link>https://www.36kr.com/p/3132445428924161</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3132445428924161</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 23:54:20 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: <歌尔微, 上市, 业绩, 芯片依赖>
-<br>
-<br>
-总结: 歌尔微电子股份有限公司计划在香港联交所上市，标志着其在经历了A股上市申请撤回后的重启。尽管曾是中国第一MEMS传感器企业，歌尔微的业绩在2021年达到高峰后连续下滑，2023年因业绩未达标导致股权激励计划部分注销。公司在2024年4月的估值为280亿元，面临业绩瓶颈。歌尔微的业务依赖于苹果，且在外购芯片方面仍需关注，尽管其自研芯片出货量有所增加。 </div>
-                        <hr>
-                    
-                    <p>宣告“A拆H”5个月后，近千亿市值的声光电龙头企业，正式迈出第一步。</p>
-  <p>1月20日，歌尔微电子股份有限公司（下称：歌尔微）递交招股书，计划在香港联交所主板上市。这也是该公司创业板IPO撤单8个月后，再次重启IPO。</p>
-  <p>早在2020年11月，歌尔股份就曾宣告“A拆A”上市计划。然而在2022年10月过会后，歌尔微一直未提交注册，并于2024年5月，正式撤回A股上市申请。</p>
-  <p>四年多时间，市场风云变幻，歌尔微更难言风光。</p>
-  <p>头顶“中国第一MEMS传感器企业”光环，歌尔微的业绩在2021年达到高峰后，连续两年下滑，并因2023年“业绩未达标”导致其股权期权激励计划中对应的部分“注销”。</p>
-  <p>此外在估值方面，早在2021年3月进行Pre-IPO轮融资时，歌尔微的估值就已超200亿元。历经三年多发展，歌尔微在2024年4月的胡润《2024全球独角兽榜》上，仍是一家价值达280亿元的独角兽企业。</p>
-  <p>换言之，业绩接连下滑、“业绩不达标”阴影下的歌尔微，企业估值似乎也正处于“瓶颈期”。</p>
-  <p>如今，歌尔股份二度筹划分拆上市，歌尔微转战港交所，急什么？底气何在？</p>
-  <h2><strong>千亿市值龙头，一举拆出逾200亿估值超级独角兽</strong></h2>
-  <p>歌尔股份是中国电声行业龙头企业，也是全球微电声领域领导厂商。</p>
-  <p>自2010年打入“果链”后，歌尔股份股价、业绩双双驶入快车道。2021年前后，其股价一度接近60元/股，市值最高更是突破2000亿元。截至1月21日收盘，歌尔股份涨8.41%报27.20元/股，总市值945.46亿元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_73afbbaec8e041869acacb57f4887121@1629410002_oswg290829oswg1038oswg1126_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">2008年至今歌尔股份股价走势，来源：雪球</p>
-  <p>但作为“果链”企业，无论是歌尔股份，还是歌尔微，都存在对苹果的依赖性。近年来，苹果在全球进行供应链调整。当看到其他果链因失去订单跌落时，打破这种依赖，也成为了歌尔股份业务调整的重要方向。</p>
-  <p>2020年以来，受政策支持，“A拆A”频现，分拆子公司一度成为理顺业务架构、拓宽融资渠道、获得合理估值、提升整体竞争力的重要方式。</p>
-  <p>分拆歌尔微，正是歌尔股份在多重因素影响下的“未雨绸缪”和“顺势而为”。</p>
-  <p>结果证明了歌尔股份敏锐的洞察力，2023年，该公司“突然”遭遇了苹果砍单。据其2023年报，歌尔股份当年实现营业收入985.74亿元，同比下滑6.03%，归母净利润为10.88亿，同比下降37.79%。2024年前三季度，歌尔股份营收则为696.46亿元，较上年同期下降5.82%。</p>
-  <p>经过20多年的发展，歌尔股份逐步发展成为拥有精密零组件、智能声学整机、智能硬件三大主营业务的大型企业。其中，歌尔微正是歌尔股份精密零组件业务的重要组成部分。在重组前，歌尔微的部分销售和采购业务通过歌尔股份下属子公司开展，从而形成了代销和代采关系。</p>
-  <p>2019年12月，歌尔股份以微电子业务资产包对其全资子公司潍坊微电子进行增资，将微电子业务相关的资产、负债转移至潍坊微电子，随后以潍坊微电子100%股权及荣成微电子100%股权对歌尔微有限增资，从而完成了微电子业务重组。</p>
-  <p>此后，歌尔微迅速启动客户、供应商认证及合同转签等工作。在递交A股招股书前，该公司就基本完成了该项工作。</p>
-  <p>背靠歌尔股份，再加上不俗的市场表现，也让歌尔微在资本市场上获得了较高的估值。据悉，在2021年3月，歌尔微进行了Pre-IPO轮融资，微电子创新、共青城春霖、青岛恒汇泰等对公司合计增资约19.50亿元，增资价格为22.86元/股，歌尔集团同样斥资2亿元参与了增资，本轮投资者合计取得歌尔微增资扩股后10.4075%股权。</p>
-  <p>据此计算，歌尔微此轮融资的估值约206.58亿元，已跻身独角兽行列。如果按照此前歌尔微创业版IPO发行12%股份，募资31.9133亿元计算，其发行估值达265.94亿元。</p>
-  <p>招股书显示，IPO前，歌尔股份直接持有歌尔微83.40%股份，系控股股东。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_8593a4b5db4d4e2fb722481bf2e6f32f@1629410002_oswg82995oswg1080oswg412_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">来源：歌尔微招股书</p>
-  <p>此外，微电子创新持股为3.93%，唐文波持股2.00%，共青城春霖持股1.93%，宋青林持股1.76%，青岛恒汇泰持股为1.43%，歌尔集团直接持股0.92%。</p>
-  <p>需要注意的是，近期伴随IPO节奏收紧，“A拆A”在资本市场上逐渐降温，2024年以来，已有上汽集团拆分捷氢科技、大族激光分拆大族富创得、拓邦股份分拆研控自动化、沃尔核材分拆乐庭智联等四家分拆上市计划终止。</p>
-  <p>如今，歌尔股份二度筹划分拆上市、歌尔微重启IPO赴港上市，或许与后者业绩回暖不无关系。</p>
-  <h2><strong>去年前9月营收超32亿，正努力改善芯片外采依赖</strong></h2>
-  <p>招股书显示，歌尔微是一家智能传感交互解决方案提供商，以一站式智能传感交互平台为核心，能够为消费电子、汽车电子、智能家居、工业应用、医疗健康等领域提供智能化的传感交互体验。</p>
-  <p>歌尔微构建了一站式平台UniSense，涵盖了材料研发、芯片设计、封装测试、算法软件开发、系统设计等智能传感交互解决方案所有关键技术环节。该平台令歌尔微能够在不同的应用领域快速复用及扩展其全栈能力，使得公司能够根据客户需求以最优的成本提供覆盖传感器、SiP及传感交互模组在内灵活多样的高性能智能传感交互解决方案。</p>
-  <p>根据CIC的报告，以2023年销售额计，歌尔微是全球第八大、中国第一大智能传感交互解决方案提供商。于往绩记录期间，公司的传感器累计出货量超过40亿颗。以2023年销售额计，歌尔微是全球第四大传感器提供商和全球第一大声学传感器提供商。</p>
-  <p>歌尔微的解决方案种类丰富，截至2024年9月30日，已超400种，广泛搭载于智能手机、智能耳机、VR/AR设备、智能汽车及智能家居等约30种智能终端，根据CIC的报告，公司是中国智能传感交互解决方案组合最丰富的提供商。其主要终端客户包括苹果、荣耀、小米、OPPO、哈曼、法雷奥等，并与Meta、蔚来、大疆等客户建立了业务关系。</p>
-  <p>招股书显示，2019-2023年及2024年前三季度（下称：报告期），歌尔微的营业收入分别约为25.66亿、31.60亿、33.48亿、31.21亿、30.01亿、32.66亿元，归母净利润/期内利润分别约为3.09亿、3.46亿、3.29亿、3.26亿、2.89亿、2.43亿元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_c9b65be1fa08479e9048c2b44ccf0424@1629410002_oswg316049oswg1080oswg939_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">来源：歌尔微招股书</p>
-  <p>不难看出，在经历2021年的高峰后，歌尔微曾连续两年业绩下滑。基于此，歌尔股份也在2023年财报中提到：因子公司歌尔微2023年度业绩未达标，其2020年股权期权激励计划第三个行权期未达行权条件，歌尔微已将对应的股权期权进行注销。</p>
-  <p>2024年前三季度业绩大幅回暖，歌尔微方面表示，主要归因于毛利增加，主要由于消费电子行业的市场需求增加及推出性能更高、价格更高的传感器，导致传感器的销量增加及平均售价上涨；用于耳机的SiP解决方案出货量增加；车载类传感模组和消费类传感模组销售增加。</p>
-  <p>需要注意的是，潜藏在业绩波动之下，歌尔微“外购芯片”，仍需保持关注。</p>
-  <p>歌尔微自身，也在风险提示中提到，假如“公司无法以及时且具成本效益的方式取得关键材料或元器件，特别是芯片，或无法提高自研芯片的利用率，我们解决方案的质量、生产及销售可能会受到重大不利影响”。</p>
-  <p>所谓外购芯片业务，即歌尔微就外购芯片的参数、工艺向供应商提出建议，对供应商芯片进行设计变更，与外购芯片供应商共同开发适合客户产品的芯片。</p>
-  <p>招股书显示，报告期内，歌尔微向英飞凌采购金额分别约为14.08亿、15.86亿、15.44亿、12.12亿、9.11亿、14.55亿元，占采购总额的比例分别为64.81%、65.40%、58.78%、52.7%、47.2%、55.7%。</p>
-  <p>在业务开展中，歌尔微芯片原材料以外购为主、自研为辅。根据此前歌尔微A股招股书，2019-2022年，公司搭载自研芯片的MEMS产品合计出货量分别为2.38亿、2.49亿、1.92亿、1.46亿颗，总体呈下降趋势。当然，歌尔微也在积极寻求改变。截至2024年9月30日，公司搭载自研芯片的传感器出货量猛增至4.47亿颗，占同期总出货量的29.7%。</p>
-  <p>受自研芯片比例较小的影响，歌尔微毛利率一直处于较低水平。报告期内，公司毛利率分别为22.85%、22.37%、22.87%、18.5%、17.2%、19.4%。作为对比，仅2020年至2023年上半年，歌尔微可比同行的平均毛利率就分别为45.27%、44.08%、45.23%、47.10%。</p>
-  <p>值得一提的是，自研芯片自然与研发投入呈正相关。招股书显示，报告期内，歌尔微的研发投入分别约为1.15亿、2.04亿、2.65亿、2.59亿、2.64亿、2.24亿元，呈逐年上涨趋势。</p>
-  <p>截至2024年9月30日，歌尔微持有的现金及现金等价物为20.49亿元。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/7bnTnX6NHIPBR4Srz0xycg" rel="noopener noreferrer nofollow" target="_blank">“猎云精选”</a>，作者：王非，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3132450856229376</id>
-            <title>大学生寒假第一课：“解救”网瘾老人</title>
-            <link>https://www.36kr.com/p/3132450856229376</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3132450856229376</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 23:48:56 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: <老年人, 手机, 网瘾, 应用程序>
-<br>
-<br>
-总结: 文章探讨了老年人因不熟悉手机操作而频繁误触，导致手机中安装大量不必要的应用程序，形成“培养皿”现象。大学生们在寒假期间承担起帮助老人解决手机问题的任务，发现老人手机中有170个APP，其中许多并不适合他们使用。老年人因误触广告而被动下载新软件，形成了网瘾，影响了他们的作息和健康。尽管大学生们努力帮助老人抵抗网瘾，但老年人仍然乐于使用手机填补内心的空虚。 </div>
-                        <hr>
-                    
-                    <blockquote>
-   <p>因为不熟悉操作而容易频繁误触的老年人，成为诱人的便宜流量。</p>
-  </blockquote>
-  <p>这届大学生有自己的寒假作业。</p>
-  <p>为家里老人解决手机出现的问题，是其中标配。智能手机普及到老家，成为很多老人打发时间的最佳工具，也由此引发出问题。比如，有人会在直播间网购并不需要的奇怪商品、有人会拿1个月退休金打赏。</p>
-  <p>更多的老年人，手机沦为了APP的“培养皿”——你很难想象一部手机里能塞进170个APP，其中大部分是年轻人从未见过的。</p>
-  <p>而这只是老年人网瘾的一个缩影。</p>
-  <h2><strong>01 培养皿</strong></h2>
-  <p>“几个月没回家，爷爷的手机已经变成培养皿了”。</p>
-  <p>当大学生们放假回家，面临一年一度的“固定任务”——帮助家里甚至整个村里的老人解决手机操作中出现的各种问题时，有人看着他们内存严重不足的手机，发出了这样的感慨。</p>
-  <p>这部被称为“培养皿”的手机，安装了足足170个应用，占据了手机桌面的7页，全部展示一遍就要花费7秒。它们囊括了各个领域，一半以上的名字和图标都极为相似，<strong>其中还有很多看起来不像是以老年人为主要用户的APP，</strong>比如：人人视频、熊出没、姨妈记、新氧医美、BOSS直聘等。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_1c98cf91feb340639b74bce636f2b122@000000_oswg190702oswg1080oswg1757_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>全面程度令网友不禁感叹：应用商店都得从这进货。</p>
-  <p>大学生奥奇在这学期开学时帮爷爷奶奶换了新的智能手机，还特意关闭了所有软件安装的权限，但寒假回来，他还是陷入到重复工作之中：<strong>卸载、反复卸载。</strong></p>
-  <p>因为两部手机的内存都只剩下10%。他花费一整个上午，卸载了奶奶手机上的130个APP，并给两部手机都安装了可以跳过广告的APP，但几天后，两部手机上还是多出了十几个新软件——爷爷奶奶已经养成每天在视频软件看广告赚钱的习惯，关闭弹窗时经常误触，导致下载了广告中的软件。</p>
-  <p>看起来，奥奇的手机清理工作，就像是一场西西弗斯式的徒劳。</p>
-  <p>某种程度上，这是由老年人网瘾带来的大学生寒假作业。</p>
-  <p>QuestMobile发布的《2024银发人群洞察报告》显示，截至2024年9月，银发人群月活跃用户达到3.29亿，月人均使用时长129小时。由于对手机操作的不熟练，他们很容易误触广告，被动下载APP，又不知道如何卸载。</p>
-  <p>正如细胞会在培养皿内吸收养分迅速生长，<strong>这些软件在吃掉手机内存的同时，又会弹出新一波的广告，引导用户安装新的软件。</strong></p>
-  <p>它们的下载通道隐藏在各处。</p>
-  <p>在当下投放的移动广告（指用户通过手机、平板等移动设备访问应用或网页时显示的广告）中，这些软件占据着较高的比例，这让老人误触所带来的流量能够很大程度上流向它们。</p>
-  <p>根据移动广告情报分析平台AppGrowing发布的《2024年上半年移动广告流量白皮书》，2024年上半年，全网在投广告数量超过4.6亿条，且整体广告投放数呈上升趋势。具体来看，社交婚恋、游戏和文化娱乐行业投放比例均在10%以上，生活服务、综合电商和工具应用的投放比例也都超过了5%。</p>
-  <p>上述白皮书列出的APP推广总榜中，前50名中，有超过一半的软件并不大众化，甚至榜单第一也是如此——这个叫做“爱聊”的交友软件，相比同赛道的头部选手soul、陌陌，知名度显然要略逊一筹。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_04054354bd404a92bc82794b795df05e@000000_oswg62984oswg1080oswg222_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_72299137d64d49f7ac2058fff78924b0@000000_oswg73665oswg1080oswg219_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_f2c680135ebe449d8c5be15976cce0a8@000000_oswg62098oswg1080oswg213_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图：七麦数据显示，2025年1月中旬在苹果应用商店的单日下载量为3284次，而soul、陌陌均在万次以上</p>
-  <p>爱聊还算是具备一定知名度的APP，老年人的手机里，还有很多年轻人完全没见过的APP。</p>
-  <p>一般来说，软件开发者的盈利方式主要有两种：广告、用户收费。小APP大多是前者，它们知名度不够，连主动下载都很难获得，更别说是收费了。于是，它们更通常的做法是在软件内部设置广告位，通过用户的点击浏览获得收益。</p>
-  <p>某种程度上，它们就是流量生意里的二道贩子，通过投放广告获得流量，再以广告位等方式，把流量倒手卖出去。</p>
-  <p>大多投放平台采用推荐机制，广告的转化率，即广告投放后用户从触达到采取行动（点击、下载、购买等）的比例，往往与后续的曝光能够达到正相关。即使误触造成的点击和下载并没有直接带来用户，广告的转化率也会有所提高，而系统算法会因此增加这条广告的曝光频次，使其触及更大范围的群体。</p>
-  <p><strong>因为不熟悉操作而容易频繁误触的老年人，成为诱人的便宜流量。</strong></p>
-  <h2><strong>02 网瘾</strong></h2>
-  <p>除了桌面上密密麻麻的软件，深夜里亮着的手机屏幕和几乎不间断传来的声音，同样以很难让人忽视的方式，将老年人的网瘾问题直观地展现在众人面前。</p>
-  <p>以至于出现一个荒谬的景象：双方位置调转，大学生需要反过来提醒长辈“吃饭的时候不要玩手机”“晚上看手机对眼睛不好”，并呼吁各大平台推出防沉迷模式。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_38e07969e54b4f689e751c797db3e306@000000_oswg194716oswg1080oswg1152_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>新京智库发布的《2024老年群体网络防沉迷调查报告》显示，在60周岁以下的年轻群体眼中，老年人使用网络存在导致作息不规律、身体健康问题、影响家庭关系的潜在影响。</p>
-  <p>沉迷手机，的确已经让许多老人的生活方式发生了变化——规律作息、早睡早起、做事高效，这些曾经属于他们的“美德”一去不复返，取而代之的是作息颠倒，甚至在70岁“喜提”近视。《2024老年群体网络防沉迷调查报告》中，有超过63%的老年人表示偶尔感到身体疲劳或视力问题，17.26%的人表示经常出现这些症状。</p>
-  <p>他们都在用手机干什么？</p>
-  <p>刷短视频、资讯类软件是首选，《2024银发人群洞察报告》指出，银发人群使用总时长占比最高的三个行业分别是短视频、即时通讯、综合资讯，其中短视频和资讯的占比达到35.1%和11.3%。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_b4ab096e35da48ed9b116a7a3d9dbb10@000000_oswg59795oswg956oswg585_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>除此之外，包括在线阅读和有声听书两个细分领域的数字阅读，是2024年一级行业中银发人群的活跃渗透率增长最快的。</p>
-  <p>更具体的来说，是看霸道总裁题材的短剧小说，听说书形式的时事解读、掺杂着明显错误的科普，为上演着离谱抓马剧情的直播间买单，进行被年轻人称作“电子捡纸壳”的活动——通过刷视频看广告的方式赚以分、毛为单位的钱。</p>
-  <p>即使这些举动在家人眼中十分无法理解，他们依然乐此不疲。</p>
-  <p>学新传的团子用学过的专业知识，将这种现象解读了一番：<strong>缺少工作、家庭贡献和社交带来的成就感和满足感，老年人只能依赖媒体内容填补内心的空虚，</strong>这与青少年网络成瘾的原因没有本质区别；而能否解决，就要看周边环境和个人的条件了。</p>
-  <p>虽然理解老年人也存在娱乐需求，作为“过来人”更了解娱乐软件的上瘾性，但出于健康考虑，大学生们还是纷纷决定行动起来，帮助他们抵抗网瘾。</p>
-  <p>小碧是其中之一。</p>
-  <p>面对前段时间做了手术，却不遵循“多休息、适当运动”的医嘱，反而以行动不便为由整天刷手机的爷爷，她想遍了办法，最终根据爷爷之前练毛笔字的习惯，得出了一套解决方案。</p>
-  <p>她为他布置了一个任务：每天为自己写一张毛笔字，作为节后返校送给同学和老师的礼物。前七天，她每天花了一小时的时间来监督爷爷从短视频中抽身，终于从第八天开始，她还没有提醒，爷爷便自觉地拿出了纸和笔。</p>
-  <p>虽然写字之后的时间里，爷爷依然会看短视频，但最起码，爷爷找回了之前的兴趣，使用手机的时长变少了，她觉得，这算是一种进步。</p>
-  <p>想要将老人们完全从线上“解救”出来，固然并不简单，但这份寒假作业，他们用心地做了。</p>
-  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MjM5ODQyNDEyMQ==&amp;mid=2257540452&amp;idx=1&amp;sn=1953428b6ea37ce6a7725a493f4e7099&amp;chksm=a483c533ac80866c33b3b3872a58ac2fa590930a1e7464c90dea6aaf6bcfb061960e8418ae11&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“略大参考”（ID：hyzibenlun）</a>，作者：小遥，编辑：原野，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3132501862898438</id>
-            <title>联想收购以色列Infinidat：高端存储产业的重磅整合，剑指全球市场新机遇</title>
-            <link>https://www.36kr.com/p/3132501862898438</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3132501862898438</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 23:42:03 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: <联想, Infinidat, 收购, 人工智能>
-<br>
-<br>
-总结: 联想集团宣布收购以色列企业存储解决方案提供商Infinidat，旨在增强其在全球企业存储市场的竞争力。Infinidat以高端企业存储解决方案闻名，具备多项先进技术。此次收购将帮助联想拓展高端存储市场，并借助Infinidat的资源进入以色列市场。尽管Infinidat面临激烈竞争和内部管理问题，联想的收购可能为其提供资金支持和管理优化的机会。整体来看，此次并购是联想战略布局的重要一步。 </div>
-                        <hr>
-                    
-                    <blockquote>
-   <p>不只是联想，最近并购以色列企业的科技巨头还有英伟达。</p>
-   <p>2024 年 4 月，英伟达宣布收购以色列人工智能初创公司 Run:ai，交易价值约 7 亿美元。不过，该交易在过程中遭遇了监管障碍，欧盟和美国司法部分别对此展开了调查。</p>
-   <p>最终，在 2024 年 12 月，欧盟批准了这一交易，英伟达才得以完成对 Run:ai 的收购。</p>
-   <p>而联想能否在以色列进一步成功布局，还需要时间来检验。</p>
-  </blockquote>
-  <p>近日，全球科技巨头联想集团（股票代码：00992.HK）宣布，其附属公司已与以色列高端企业存储解决方案提供商 Infinidat Ltd. 达成最终收购协议。</p>
-  <p>Infinidat 成立于 2011 年，由 EMC（易安信）前员工 Moshe Yanai 创立，专注于高端企业存储解决方案的研发与提供。该公司累计融资达 3.5 亿美元，并在上一轮融资中获得了超过 16 亿美元的估值。Infinidat 以其高性能、任务关键型的企业存储解决方案而闻名，能够实现可扩展、网络弹性的数据管理，并拥有强大的软件研发能力。</p>
-  <p>联想集团表示，此次收购是其向市场推出差异化技术解决方案的发展战略的一部分，旨在进一步加强联想在全球的企业存储产品，并彰显其致力于提供创新存储解决方案以满足现代数据中心不断发展需求的承诺。</p>
-  <p>此次并购的正式成交尚待监管批准并满足其它条件，双方并未透露这笔交易的细节条款。</p>
-  <h2><strong>Infinidat：存储领域的技术强者</strong></h2>
-  <p>Infinidat 的技术积累涵盖了多个关键领域。首先，其 InfiniRAID 技术采用独特的14+2数据存储模式，通过分割数据段和增加奇偶校验段，实现了高效的数据保护和快速故障恢复。这种设计不仅提高了系统的可靠性，还减少了对物理热备用驱动器的依赖。</p>
-  <p>Infinisnap技术作为一项专利非锁定快照技术，能够在不影响性能的情况下为企业级大规模数据提供即时快照，支持高达 10&nbsp;万个快照，几乎不占用额外容量。此外，Neural cache 技术利用机器学习算法优化缓存操作，通过单个DRAM池实现更高的数据可见性和突发写入能力，显著提升了存储系统的性能。</p>
-  <p>Infinisafe技术则通过不可变快照和逻辑气隙，为企业提供了强大的网络弹性能力，能够在极短时间内完成数据恢复。</p>
-  <p>最后，Infiniops 技术通过集成 AIops 和 DevOps 功能，简化了平台的管理和使用，进一步提升了用户体验。</p>
-  <p>在业务布局方面，Infinidat 推出了包括 Infinibox 系列、Infinibox SSA 系列和 Infiniguard 数据保护系统在内的多样化存储产品。这些产品能够提供高性能、可扩展的企业级存储服务，适配数据库、虚拟化等多种应用场景，也能满足人工智能、大数据分析等对高性能和低延迟有要求的企业应用需求，同时数据保护系统还能全方位保障数据安全可靠。凭借这些优质产品与服务，Infinidat 的业务广泛渗透至金融、医疗、电信和能源等多个行业，充分满足不同行业对高性能存储的需求。</p>
-  <h2><strong>融资亮眼却竞争承压，牵手联想能否破局？</strong></h2>
-  <p>2015 年，Infinidat 在 B 轮融资中成功获得 1.5 亿美元，此轮融资由 TPG Growth 领投；2017 年，Infinidat 完成 C 轮融资，获得 9500 万美元。到了 2020 年 6 月，公司顺利完成 D 轮融资，融资金额为 9900 万美元。在财务表现上，Infinidat 于 2023 年第一季度的预订量同比增长了 59%，并且据估算，其 2024 年的年收入约为 9320 万美元。</p>
-  <p>尽管 Infinidat 在高端存储领域具备出色的技术实力，但其市场份额较为有限，正面临着戴尔、惠普等行业巨头以及众多云服务提供商的激烈竞争。在此背景下，与联想展开合作，能够让 Infinisafe 借助联想的资源与渠道优势有效扩大自身市场份额，同时还能弥补其在硬件方面存在的不足。</p>
-  <p>另一方面，当前市场竞争的日益加剧以及技术快速迭代带来的压力，有可能导致 Infinidat 出现资金紧张的状况。若被收购，公司则可以获得充足的资金支持，以保障业务的持续发展。此外，投资人或许也期望通过出售公司来实现投资回报。</p>
-  <p>从 Infinidat 内部管理层面来看，2020 年公司曾发生员工纠纷事件，在此之前还出现过合伙人离职、员工辞职等一系列问题，这些内部的不稳定因素在过去扰乱了公司的正常运营，对公司的发展产生了负面影响。</p>
-  <p>因此，一旦被收购，Infinidat 也能够借助联想先进的管理经验，对内部运营进行优化和改善。</p>
-  <h2><strong>借道Infinidat，剑指以色列市场，联想能否顺利突围？</strong></h2>
-  <p>近年来，联想存储业务增长迅猛。根据IDC的最新报告，联想在价格低于2.5万美元的主流存储市场类别中连续两个季度排名第一。联想在全球存储市场的整体表现也十分出色，已连续多个季度排名全球存储营收第五大制造商。</p>
-  <p>从具体业务数据来看，联想存储产品组合的收入同比增长 138%，其中全闪存阵列（AFA）类别增长超过 100%，中端存储增长 22%，联想 TruScale 基础设施即服务（IaaS）同比增长更是超过 600%。</p>
-  <p>此外，联想的存储产品线主要面向中小企业，涵盖 ThinkSystem DG 全闪存、DM 混合存储和 DE SAN 阵列等多个系列，这些产品大多为 NetApp ONTAP 存储系列的 OEM 产品，具备高性能、高可靠性和高可扩展性等优势。</p>
-  <p>不过，尽管在中低端存储市场成绩斐然，联想在高端存储领域仍存在拓展空间。恰好 Infinidat 专注于高端企业存储解决方案，若联想并购 Infinidat，将有助于完善自身存储业务的产品线，实现从入门级和中端市场向高性能及AI市场的延伸，进一步提升整体竞争力。</p>
-  <p>在战略布局方面，开拓以色列市场是联想的重要战略方向之一。而 Infinidat 作为以色列的企业，为联想进入以色列市场提供了合适的切入点。以色列拥有丰富的顶尖科技人才，该国教育水平高，在数学、物理、计算机科学等领域培养出众多优秀人才。同时，以色列活跃的创新生态系统也极具吸引力，众多科技初创企业和创新机构在人工智能、大数据、云计算等领域拥有先进的技术和解决方案，联想可借助 Infinidat 与当地企业和机构建立更紧密的合作，获取前沿技术和创新理念，拓展业务领域。</p>
-  <p>从市场潜力和商业机会的角度来看，以色列作为一个经济发达的国家，对高科技产品和服务的需求旺盛。当地企业和消费者对新技术的接受程度较高，且愿意投资先进的信息技术解决方案。Infinidat 在以色列及全球市场已经积累了一定的客户资源和市场份额，联想并购 Infinidat 后，可借助其渠道和品牌影响力，更好地满足当地市场需求，实现业务增长和盈利提升。</p>
-  <p>此外，以色列政府对科技创新的重视以及出台的一系列优惠政策，如为科技企业提供研发补贴、税收优惠、土地和办公空间优惠等，也为联想并购 Infinidat 后的发展提供了有利条件。</p>
-  <p>事实上，不只是联想，最近有意并购以色列科技企业的科技巨头还有英伟达。2024 年 4 月，英伟达宣布收购以色列人工智能初创公司 Run:ai，交易价值约 7 亿美元。不过，该交易在过程中遭遇了监管障碍，欧盟和美国司法部分别展开了调查。最终，在 2024 年 12 月，欧盟批准了这一交易，英伟达才得以完成对 Run:ai 的收购。而联想能否在以色列进一步成功布局，还需要时间来检验。</p>
-  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MjM5MjczNjk1NQ==&amp;mid=2650296212&amp;idx=1&amp;sn=585624eaf4a8dbb14ade118ea7d59878&amp;chksm=bf552133fd923640ef625abc1b380b32867a1ff49ec9de21fa4fcbfa0016db3979af1045aa6c&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“晨哨并购”（ID：MW-Group）</a>，作者：赵梓涵，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3132500453883649</id>
-            <title>当“杀猪盘”在脉脉上公开招聘</title>
-            <link>https://www.36kr.com/p/3132500453883649</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3132500453883649</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 21 Jan 2025 23:36:39 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 职场社交, 脉脉, 杀猪盘, 诈骗  
-<br>
-<br>
-总结: 脉脉作为一款职场社交软件，吸引了大量用户，但也成为诈骗分子的目标。诈骗者利用真实的职业信息，通过假冒名企员工的身份与用户搭讪，诱导其在第三方平台进行投资，形成“杀猪盘”骗局。尽管脉脉已建立多重防诈风控措施，但仍有部分假冒用户通过认证，发布招聘信息，导致用户上当受骗。用户对脉脉的信任度下降，频繁遭遇诈骗的现象让人感到不安，许多人开始拒绝在平台上更新个人信息。 </div>
-                        <hr>
-                    
-                    <p>号称 1.2 亿职场人都在用的职场社交软件脉脉，正在成为“杀猪盘”的精准信息来源地。疑似诈骗人员利用脉脉上存在的真实职业信息，针对性地对平台用户发起聊天搭讪。</p>
-  <p>多名脉脉注册用户向《山上》表示，她们在脉脉上频频遇到疑似假冒微软、谷歌等头部公司员工的诈骗分子，对方以介绍工作或扩宽行业人脉为由发起聊天，进而诱导用户在第三方社交软件沟通，熟悉后以高额收益引诱用户在境外理财网站投资——也就是业内俗称的“杀猪盘”。</p>
-  <p>社交平台上有大量用户发帖，“新型诈骗——脉脉求职”“脉脉找工作遭遇杀猪盘骗子”“杀猪盘大军进军脉脉”等等。即便在脉脉社区内部，亦有多名用户发帖称多次在脉脉遭遇疑似诈骗人员，“为什么在脉脉上会发生这种事？脉脉的监管在哪里？”</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_9e89eb72d7344847b75041fcdcd5cc43@6035051_oswg577772oswg1080oswg874_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">以“脉脉 诈骗”为关键词搜索社交平台</p>
-  <p>一位脉脉注册用户向《山上》称，她从两年前开始在脉脉遇到疑似诈骗分子，此后愈演愈烈，最多时一天就有两三个包装成外企高管的疑似诈骗分子添加好友，“脉脉已经成为杀猪盘的新阵地。”</p>
-  <p>一位此前试图通过脉脉找工作的女生说，她刚刚注册脉脉、完善个人信息和简历之后，就有多个所谓财务总监或经理人士加她好友，但三人话术高度相似，均似诈骗人员，“不好用，注销卸载！”</p>
-  <p>脉脉向《山上》表示，平台收到过相关投诉（疑似诈骗人员的假冒用户），也专门针对性地做了反诈骗的风控策略。脉脉表示，假冒的用户一旦被发现或被举报，经过平台核实后，账号会被永久封禁。</p>
-  <p>脉脉称，脉脉投入大量技术资源构建了全方位的防诈风控模型，除了包括实名认证、职业认证、招聘认证等多重认证体系外，对于用户从注册登录到使用 App 的各个节点构建识别策略，部署多重次管控手段，及时阻断风险。</p>
-  <p>即便如此，仍有疑似诈骗分子会通过平台的重重监管，获得职业认证，堂而皇之地在脉脉平台内发布正规的岗位招聘，精准定位受害者。</p>
-  <p>一位在脉脉上被一则微软招聘信息吸引到的用户向《山上》表示，她向对方投递简历求职，建立联系之后才发现对方是只是以招聘为由，根本目的是吸引她到不知名理财网站投资。</p>
-  <p>她无法理解，为何脉脉上的正规招聘信息，却混入了疑似诈骗人员？</p>
-  <h2><strong>01｜名校、外企和高管</strong></h2>
-  <p>“一个名校背景，清北或者国外头部高校；一家大公司，比如微软、谷歌、联想等头部公司；再加上一个特别大的 Title，总监、总经理等等。”在脉脉遭遇疑似诈骗人员的赵月梅（化名）对《山上》说，多次被疑似诈骗人员搭讪之后，她当下已经可以总结出这些疑似诈骗人员的规律。</p>
-  <p>通常来说，相关疑似诈骗人员首先会从个人信息上包装自己，往往是名校毕业，名企任职，在企业内担任区域负责人或总经理级别的中高管身份。</p>
-  <p>此外，多名遭遇疑似诈骗人员的脉脉用户向山上表示，这些疑似诈骗人员往往未经过职业认证，但大多都购买了脉脉的商务会员。这是脉脉面向用户推出的一种会员体系，可以添加更多好友。</p>
-  <p>“他们的套路就是这样，先从脉脉聊天，之后加微信，继而诱导用户使用 Teams 交流，最后用高额理财收益引诱投资。”赵月梅说。</p>
-  <p>Teams 是微软推出的一款职场聊天软件，和国内要求实名制注册的社交平台不同，Teams 可以使用邮箱方式注册，监管并不完善。此前，亦有多家主流媒体发布报道称，警惕 Teams 上的诈骗骗局。</p>
-  <p>何桦（化名）完整经历了疑似诈骗分子从脉脉搭讪到引诱理财投资的完整过程。她介绍，2023 年 12 月，搭讪她的疑似诈骗分子冒用了北京一家公司的董事长身份。“对方加我之后，我专门查询了工商信息，他的公司名称、姓名都和真实情况相符。”但对方并未通过脉脉的职业认证。</p>
-  <p>由于此前何桦也经常在脉脉上扩展行业人脉、交流行业信息，因此对方打招呼之后，她并未起疑。“最早对方就是和我聊一些个人情况，说他认识一些朋友可能要招人，如果刚好和我的预期岗位相符，就介绍给我。”何桦说。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_ea46a1945053454e9315ba2b9fbb2c74@6035051_oswg385267oswg656oswg1522_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">何桦与疑似诈骗人员的脉脉聊天截图</p>
-  <p>她和对方聊过几次之后，对方就邀请她在 Teams 上交流。何桦说，对方在脉脉聊天中提出在 Teams 上继续聊天时，脉脉并未弹出风险提示。一开始双方在 Teams 上的交流还算正常，没有涉及钱财方面，聊天话题大多是生活习惯、日常爱好之类。</p>
-  <p>但经过一段时间熟悉之后，对方就开始旁敲侧击聊起理财投资话题。多名在脉脉遭遇疑似诈骗人员的用户称，诈骗人员的聊天套路基本一致，无论最早是从饮食爱好、职场交友、招聘内推等不同话题开始，最后都会落脚到理财投资上。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_6e5395d7e777478ba1c76c7f2b2034ec@6035051_oswg165497oswg1080oswg2337_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">何桦与疑似诈骗人员的聊天记录</p>
-  <p>“对方不断给我发出一些理财收益的截图。”何桦说，“他的话术有点高高在上的感觉，像是在审视你一样，类似于你怎么跟不上他的脚步。”</p>
-  <p>那时何桦已经觉察出对方可能是骗子，她决定将计就计。何桦说，她认为第一笔对方肯定先要让她挣到钱，之后才能吸引她继续投资。于是，她先照对方的意思投入几百元试水，很快盈利 130 元。她提现后，就删除了对方，不再联系。事情并未结束，删除对方后，何桦又接二连三地在脉脉上遇到相似包装和话术的高管人士搭讪。</p>
-  <p>脉脉称，针对脉脉业务场景，平台已经积累建立了较成熟的防诈风控模型，聊天中一旦有词汇命中“teams、skype、缅北”等命中风控模型中的高危词库，系统会立即弹出警示，提醒用户注意防范。&nbsp;除了主动提示以外，如果风控模型通过上下文监测到相关高危内容且符合诈骗特征，也会主动封禁账号。</p>
-  <p>亦有脉脉用户向《山上》表示，相较于一两年前最早在脉脉上遭遇疑似诈骗人员时，目前脉脉的举报封禁速度更快。“之前可能要过 24 小时才会有响应，现在常常还没有举报就发现已经被封禁了。”</p>
-  <h2><strong>02｜职场人的社交平台，精准的“狩猎场”</strong></h2>
-  <p>脉脉成立于 2012 年，最早以互联网职场为切入点，过去十年逐渐发展成为国内最大的职场交流社区。</p>
-  <p>一直以来，脉脉都以平台上的中高端人才为傲。脉脉官网页面表示，脉脉是“中高端人才阵地”，段位高、密度高、活跃度高。平台对外推出的招聘业务称之为“脉脉高聘”，定位于中高端人才求职招聘第一平台。</p>
-  <p>同时，脉脉格外强调平台用户的真实性，称拥有海量用户的职业身份认证，包括真实职业&amp;教育档案、实名认证的职业身份以及真实职场观点等。</p>
-  <p>不少用户都将脉脉视作扩宽职场人脉、寻找工作的高端职场社区，用户往往会详细填写个人教育背景、职业经历，脉脉亦会鼓励用户在填写个人信息时进行相关职业认证或教育认证。几位与《山上》交流的脉脉用户也表示，她们最早对脉脉的印象颇为高端，是一个扩展高端职场人脉的介质。</p>
-  <p>但也正是平台上存在的大量真实职业信息，吸引了大量疑似诈骗人员的注意。</p>
-  <p>“早期我对脉脉是不设防的。”在医药行业工作的 Kelly 说，她此前经常在脉脉上扩展行业人脉，添加好友或者交换个人联系方式，因此最早对于骗子发来好友申请时警惕性并不高。此前曾在微软工作的赵月梅说，她在遇到假冒微软员工的疑似诈骗人员时，也很难第一时间分辨出来。“刚开始我不会觉得这是一个骗局，我在微软工作过，对方又自称是微软的员工，我就觉得他可能真的是前同事来向我打听情况。”赵月梅说。</p>
-  <p>一些疑似诈骗分子还会针对潜在受害者的职业经历，精心构筑与之相似的行业经历和个人背景，以此提高可信度。</p>
-  <p>比如在医药行业工作的 Kelly，遇到的往往是以辉瑞、诺华、默沙东这样的医药行业公司包装的骗子。一位与游戏行业相关的人士称，她在脉脉上遇到的疑似诈骗人士，包装身份则是一家游戏公司的合伙人。“我第一反应是这家公司的老板加我，并且他们公司业务和我的工作也相关，是不是我可以扩展业务了？”但在后续沟通中，对方开始诱导她在 Teams 上交流，最后向她发送不知名理财网站链接，试图吸引她投资。</p>
-  <p>由于脉脉用户往往会更新详细的职业信息，部分疑似诈骗人员还会专门挑选正处于离职或待业阶段的用户，通过招聘、内推等名义发起聊天。多位与《山上》交流的脉脉用户均表示，她们是在求职过程中被骗子盯上。</p>
-  <p>脉脉平台内有多种认证手段来保证用户职业信息的真实性，比如劳动合同、企业办公软件、个人所得税 App 录屏等。未通过职业认证的用户，个人信息页面会显示“！”，提醒该用户的信息真实性未通过审核。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_e39aef5311a445c6ba04692f4de59ecb@6035051_oswg72019oswg782oswg1038_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">脉脉 App 内对职业身份认证的介绍</p>
-  <p>但用户在具体使用过程中，有时会忽略掉相关的认证提醒。“其实像感叹号这块，有时我们自己换了工作后也不会那么及时地更新。”Kelly 说。</p>
-  <p>她识别多数疑似诈骗人员，往往是通过个人主页上的信息，比如职业经历简单，往往只有一段工作经历，头像也多选用网图，再加上真实好友不多等信息，“很多你一看就会很假。”</p>
-  <p>脉脉向《山上》表示，脉脉投入大量的技术资源构建了全方位的防诈风控模型。对于用户从注册登录到使用 App 的各个节点构建识别策略，部署多层次管控手段，及时阻断风险。</p>
-  <p>脉脉介绍，具体措施包括全用户全场景覆盖及实时处置机制。全用户全场景覆盖中，脉脉会对地理位置监控，识别高危地区、可疑 IP、黑产 IP，设备安全识别会筛查高危设备，行为模式分析将检测发帖、私信、加好友等行为频率。实时处置机制上，系统自动识别高危行为并即时响应，对确认的账号采取永久封禁措施。</p>
-  <h2><strong>03｜公开发布招聘的“杀猪盘”</strong></h2>
-  <p>即便脉脉构建了多重防诈风控措施，但平台似乎仍有漏洞。</p>
-  <p>在互联网公司工作的市场公关人士李水（化名）向《山上》介绍，去年 4 月，她在脉脉上刷到一则微软公司的官方招聘信息，发布者是一位经过了企业认证的微软外派市场总监，在页面上点击“感兴趣”之后，她开始与对方建立联系。</p>
-  <p>“对方就说我的履历很符合他们要求，并向我索要了简历。”李水说，无论是从对方发布岗位需求的专业程度，还是对方经过平台认证的职业身份、以及平台官方渠道发布的招聘需求，她最初都没有都没有对这则招聘产生怀疑，一直以为就是微软在脉脉上发布的官方招聘。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250121/v2_342268e914694894a46f2448de4ec634@6035051_oswg131126oswg828oswg1673_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">疑似诈骗人员在脉脉上发布的公开招聘</p>
-  <p>经过一段时间沟通，她才发现对方是假冒微软员工的疑似诈骗分子，招聘只是对方吸引受害者的幌子，更真实的意图是吸引她向境外理财网站投资。李水介绍，多次向对方发送简历后，应聘完全没有进展，在对方开始向她发送不知名网站的理财收益截图时，她才最终认定该人员疑似诈骗。目前，上述假冒微软员工的账号已被脉脉封禁。</p>
-  <p>“正常来讲，脉脉不应该出现这种情况。”李水说，自己注册脉脉时需要实名认证，职业认证也需要提交工作软件的名片截图等多种认证手续。但上述假冒微软员工的账号却通过了平台认证，甚至发布了正规的岗位招聘。</p>
-  <p>脉脉向《山上》表示，针对招聘场景平台至少有三重审核，包括实名认证、职业认证及招聘身份认证等认证手段，针对岗位信息进行机器+人工双重审核，系统针对招聘双方聊天的安全检测等。脉脉称，“针对脉脉业务场景，已经积累建立了较成熟的防诈风控模型。”</p>
-  <p>脉脉表示，涉事账号于 2024 年 4 月 23 日通过了实名认证和职位认证，并于同日发布了招聘职位。平台在 5 月 2 日收到用户关于其涉嫌“杀猪盘”欺诈的投诉后，立即对该账号进行了永久封禁处理。在此次事件中，用户被引导到 Teams 进行交流，并被诱导购买理财产品，所幸用户及时甄别，诈骗行为未能得逞。</p>
-  <p>脉脉介绍，当前网络诈骗的常见模式是：犯罪分子利用社交或招聘平台作为跳板，诱导用户转移到管理不完善的其他平台实施诈骗。对于此类诈骗，脉脉早已加强了对用户的安全提醒，特别提示用户警惕任何诱导转入第三方平台的行为，尤其是涉及理财、转账等敏感操作的信息。日常通过审核和举报发现的疑似诈骗线索，脉脉会主动同步公安机关，积极配合打击犯罪行为。</p>
-  <p>脉脉表示，在招聘身份审核方面，脉脉已建立符合行业标准的审核机制。我们呼吁用户保持警惕，并及时通过平台举报可疑行为。</p>
-  <p>事实上，在脉脉上发布一则企业招聘并不困难。《山上》调查发现，在企业已经经过脉脉平台认证之后，相关企业的员工只需得到脉脉的职业认证，就可在脉脉上公开发布招聘需求。一位头部互联网公司员工向《山上》表示，在经过职业认证后，他就能进入脉脉的招聘岗位发布页面，无需上传企业营业执照等信息。</p>
-  <p>一位招聘行业人士向《山上》表示，国内多数招聘网站对招聘方基本上都是采用类似的资质审核，相关漏洞在行业内普遍存在。</p>
-  <p>2021 年 3 月施行的《网络招聘服务管理规定》对于从事网络招聘服务的人力资源服务机构有明确规定。《网络招聘服务管理规定》第十七条要求，从事网络招聘的人力资源服务机构应当建立完备的网络招聘信息管理制度，依法对用人单位所提供材料的真实性、合法性进行审查。</p>
-  <p>审查内容应当包括以下方面：（一）用人单位招聘简章；（二）用人单位营业执照或者有关部门批准设立的文件；（三）招聘信息发布经办人员的身份证明、用人单位的委托证明。</p>
-  <p>多位在脉脉上遭遇疑似诈骗人员的用户均向《山上》表示，骗子的套路固定，多次遇到后她们已经能在交流中识别出对方。十余位与《山上》交流的脉脉用户均表示，她们没有遭遇钱财损失。</p>
-  <p>即便没有受骗，但相关情况的泛滥仍然导致用户对脉脉认可度下滑。Kelly 说，她每隔一段时间甚至隔几天，就会收到疑似诈骗人员的脉脉好友申请，“太泛滥了。”</p>
-  <p>一些用户开始拒绝在脉脉上继续更新个人信息。赵月梅说，现在脉脉已经变成一个骗子关注的渠道了，他们除了搭讪、招聘，可能还会有其他更新型、更成熟的骗局，所以还是会让人提高对脉脉的警惕。</p>
-  <p>“最近这份工作我就没有再更新到脉脉上。”赵月梅说，“对我来说太不安全了。”</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/kRpUXuyT1YNJj0XankPRMQ" rel="noopener noreferrer nofollow" target="_blank">“山上”</a>，作者：薛星星，编辑：王彬，36氪经授权发布。</p>
                 ]]>
             </content:encoded>
         </item>
