@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/67a5a9a3887087ba0401f2aa</id>
+            <title>AI探索站 02月07日</title>
+            <link>https://m.okjike.com/originalPosts/67a5a9a3887087ba0401f2aa</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67a5a9a3887087ba0401f2aa</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 07 Feb 2025 06:35:15 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    可以搞自己的本地推理模型了家人们，太强了<br /><br />Unsloth AI 优化了 R1 核心算法 GRPO<br /><br />只需要 15G 显存就能在本地将 15B 的模型训练为推理模型，极限情况下 7G 显卡也可以<br /><br />前几天即使是为 Qwen2.5（1.5B）实现推理也需要 160G 显存<br /><br />而且不是对 R1 蒸馏模型微调，而是将标准模型转化为完整的推理模型<br /><br />核心技术创新：GRPO算法优化1 Unsloth团队通过Group Relative Policy Optimization(GRPO)算法实现了两大突破：<br /><br />资源效率革命：将训练VRAM需求从160GB(A100x2)降至7GB(T4单卡)<br /><br />自主推理涌现：模型无需标注思维链数据，通过强化学习自主生成推理过程<br /><br />技术实现路径<br /><br />1. 组间竞争机制<br />模型批量生成多组响应<br />通过自定义奖励函数评分（如答案正确性、拼写准确性）<br />组内相对评分取代绝对分值<br />强化高分响应模式<br /><br />2. 动态量化支持<br />4bit/16bit混合量化策略<br />vLLM引擎深度整合<br />单卡支持70B参数模型训练<br />推理速度达4000 tokens/s (A100)<br /><br />开发者生态转变<br /><br />训练成本：从$3000+/天的云服务降至本地T4可训<br />工具链整合：支持QLoRA/LoRA适配，兼容Hugging Face生态<br />开源协作：集成TRL/vLLM等技术栈，验证周期缩短70%<br /><br />详细介绍：https://unsloth.ai/blog/r1-reasoning
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/67a55026e4593dbfaf8d0e9d</id>
             <title>AI探索站 02月07日</title>
             <link>https://m.okjike.com/originalPosts/67a55026e4593dbfaf8d0e9d</link>
@@ -102,23 +119,6 @@
                 <![CDATA[
                     
                     今天早上，Lex Fridman 发布了一个颇有深度的播客，总长约 5 个小时。<br /><br />在这个对谈中，Lex Fridman 与半导体分析专家 Dylan Patel（SemiAnalysis 创始人）和人工智能研究科学家 Nathan Lambert（艾伦人工智能研究所）展开对话，深入探讨 DeepSeek AI 及其开源模型 V3 和 R1，以及由此引发的 AI 发展地缘政治竞争，特别是中美在 AI 芯片和技术出口管制领域的博弈。<br /><br />我做了一个全文翻译...全文超 10 万字...
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/67a19dbf2d8ef3d9a067b992</id>
-            <title>AI探索站 02月04日</title>
-            <link>https://m.okjike.com/originalPosts/67a19dbf2d8ef3d9a067b992</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67a19dbf2d8ef3d9a067b992</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 04 Feb 2025 04:55:27 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    再发一个简化版，送给国内广大网友
                 ]]>
             </content:encoded>
         </item>
