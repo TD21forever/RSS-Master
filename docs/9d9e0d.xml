@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/67b31a6fb07d225afeaaa41b</id>
+            <title>AI探索站 02月17日</title>
+            <link>https://m.okjike.com/originalPosts/67b31a6fb07d225afeaaa41b</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67b31a6fb07d225afeaaa41b</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 17 Feb 2025 11:15:59 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    过去2年，一直在探索如何把大模型跟普通人的创作结合起来，做过亿级规模的大众产品，也做过百万级规模的垂直解决方案，拿到比较多的用户反馈<br /><br />在此分享AI应用的产品经验，希望可以帮助大家少走弯路，交流经验。拉长周期看，我们现在做的项目本身可能没那么重要，但我们积累的认知和经验会帮助我们迎接更大的机会 <br /><br />核心内容<br /><br />1.  对过去成功路径的过度依赖，可能是未来成功的阻碍，从基础理论开始学习，上手体验和实践，保持迭代<br /><br />2.  找到Model-Product-Market-Fit是核心能力，模型能力（现状&amp;未来）匹配用户需求（存量&amp;增量）<br />用户需求是渐变的光谱，按过去的旧分类，AI只能替代存量解决方案，无法创造增量市场<br /><br />3.  有些实用价值的伪需求，但其实是有情绪价值的真需求<br /><br />4.  给用户交付的一个结果，而非单纯做体验，通过管理用户预期，收敛场景，最终满足甚至超出用户预期<br /><br />5.  把AI封装为原子能力，通过工具-&gt;模板-&gt;内容，带来乘数效应，而非单纯的漏斗转化逻辑
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/67b1beba3b24dc801bec2575</id>
             <title>AI探索站 02月16日</title>
             <link>https://m.okjike.com/originalPosts/67b1beba3b24dc801bec2575</link>
@@ -102,23 +119,6 @@
                 <![CDATA[
                     
                     一个简单的适合 P 人的读书方法：<br /><br />1. 先看书，划线，用任何形式都可以<br />2. 把书的简介喂给 deepseek，让它根据书的信息、你的职业/兴趣、公开的搜索资料，向你提出 10-15 个问题<br />3. 筛选其中你觉得特别有意思的问题，再回想书的内容，如果忘记了可以再翻书，开始回答<br />4. 把问题和回答记录到 flomo ，一张卡片只有一个问题、一个回答、一个引用（非必需）<br />5. 未来你就可以用好 flomo 的 AI 问问了。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/67af0f8de66d0ebabe187402</id>
-            <title>AI探索站 02月14日</title>
-            <link>https://m.okjike.com/originalPosts/67af0f8de66d0ebabe187402</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67af0f8de66d0ebabe187402</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 14 Feb 2025 09:40:29 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    来了！！Deepseek 发布最佳的 R1 模型设置<br /><br />- 无系统提示<br />- Temperature: 0.6<br />- 缓解模型绕过思考的方式<br />- 官方的搜索和文件上传提示<br /><br />详细的提示在下面👇<br /><br />Deepseek R1 官方文件上传提示词：<br /><br />For file upload, please follow the template to create prompts, where {file_name}, {file_content} and {question} are arguments. <br />```<br />file_template = \<br />"""[file name]: {file_name}<br />[file content begin]<br />{file_content}<br />[file content end]<br />{question}"""<br />```<br /><br />缓解 R1 模型绕过思考的方法：<br /><br />我们观察到 DeepSeek-R1 系列模型在回应某些查询时倾向于绕过思维模式（即输出"\n\n"），这可能会对模型的表现产生负面影响。 <br /><br />为了确保模型进行充分的推理，我们建议强制模型在每次输出的开始都使用"\n"作为起始。<br /><br />Deepseek R1 官方搜索提示词：<br /><br />  For Chinese query, we use the prompt:<br />```<br />search_answer_zh_template = \<br />'''# 以下内容是基于用户发送的消息的搜索结果:<br />{search_results}<br />在我给你的搜索结果中，每个结果都是[webpage X begin]...[webpage X end]格式的，X代表每篇文章的数字索引。请在适当的情况下在句子末尾引用上下文。请按照引用编号[citation:X]的格式在答案中对应部分引用上下文。如果一句话源自多个上下文，请列出所有相关的引用编号，例如[citation:3][citation:5]，切记不要将引用集中在最后返回引用编号，而是在答案对应部分列出。<br />在回答时，请注意以下几点：<br />- 今天是{cur_date}。<br />- 并非搜索结果的所有内容都与用户的问题密切相关，你需要结合问题，对搜索结果进行甄别、筛选。<br />- 对于列举类的问题（如列举所有航班信息），尽量将答案控制在10个要点以内，并告诉用户可以查看搜索来源、获得完整信息。优先提供信息完整、最相关的列举项；如非必要，不要主动告诉用户搜索结果未提供的内容。<br />- 对于创作类的问题（如写论文），请务必在正文的段落中引用对应的参考编号，例如[citation:3][citation:5]，不能只在文章末尾引用。你需要解读并概括用户的题目要求，选择合适的格式，充分利用搜索结果并抽取重要信息，生成符合用户要求、极具思想深度、富有创造力与专业性的答案。你的创作篇幅需要尽可能延长，对于每一个要点的论述要推测用户的意图，给出尽可能多角度的回答要点，且务必信息量大、论述详尽。<br />- 如果回答很长，请尽量结构化、分段落总结。如果需要分点作答，尽量控制在5个点以内，并合并相关的内容。<br />- 对于客观类的问答，如果问题的答案非常简短，可以适当补充一到两句相关信息，以丰富内容。<br />- 你需要根据用户要求和回答内容选择合适、美观的回答格式，确保可读性强。<br />- 你的回答应该综合多个相关网页来回答，不能重复引用一个网页。<br />- 除非用户要求，否则你回答的语言需要和用户提问的语言保持一致。<br /># 用户消息为：<br />{question}'''<br />```
                 ]]>
             </content:encoded>
         </item>
