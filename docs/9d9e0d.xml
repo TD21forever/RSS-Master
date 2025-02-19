@@ -22,18 +22,18 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/67b3fafcea6d7830c92523ff</id>
-            <title>AI探索站 02月18日</title>
-            <link>https://m.okjike.com/originalPosts/67b3fafcea6d7830c92523ff</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67b3fafcea6d7830c92523ff</guid>
+            <id>https://m.okjike.com/originalPosts/67b552e933215b3c012b257a</id>
+            <title>AI探索站 02月19日</title>
+            <link>https://m.okjike.com/originalPosts/67b552e933215b3c012b257a</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67b552e933215b3c012b257a</guid>
             <pubDate></pubDate>
-            <updated>Tue, 18 Feb 2025 03:14:04 GMT</updated>
+            <updated>Wed, 19 Feb 2025 03:41:29 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    我的新产品：CopyWeb 正式发布了。🎉<br /><br />只需输入一个 URL 或者上传一张截图，一键复刻网页组件，还原度 80% 以上。<br /><br />跟 bolt / v0 等产品的主要区别是，CopyWeb 目前专注于做 UI 组件的设计与复刻，在复刻精准度和样式方面有更好的效果。可以理解为是一个垂直领域的 AI Coding Agent。<br /><br />欢迎体验，感谢支持。期待各位老师的反馈。👇<br /><br />https://copyweb.ai
+                    可能很多人跟我一样不太理解 MCP 能干嘛<br /><br />Windsurf 出了一个视频教程，介绍了：<br /><br />- MCP 的核心价值<br />- MCP 技术架构<br />- 实战案例：集成 Slack 频道<br /><br />下面有整理的笔记👇：<br /><br />1. MCP 的核心价值<br /><br />背景痛点：传统 Copilot（如 Codium）仅能基于代码库回答问题，但无法执行文件操作、搜索外部数据源（如文档、网络）等动作。<br />Agent（代理）的进化：Cascade 作为新一代 Agent，通过工具扩展能力（文件编辑、搜索等），但仍需连接更多数据源（如 Slack、GitHub、Google Drive）。<br />MCP 的作用：提供标准化接口，让 Cascade 等代理安全访问外部数据源，将数据转化为可操作的上下文。<br /><br />2. MCP 技术架构<br /><br />三大组件：Client（客户端）：Windsurf/Cascade 作为使用者。<br />Server（服务器）：轻量级本地进程，通过 API 连接数据源（如 Slack API）。<br />Data Source：本地（如文件系统）或远程（如 Slack 频道）数据源。<br /><br />关键特性：无需自建服务器：可使用开源预构建服务器（提供资源链接）。<br />标准化协议：统一接口简化工具集成。<br /><br />3. 实战案例：集成 Slack 频道<br />场景需求：让 Cascade 访问 Slack 频道中的编码规范讨论，指导代码重构。<br />配置步骤：创建 Slack App：获取 API 令牌和团队 ID。<br />编辑 MCP 配置文件：在 Windsurf 的 MCPconfig.json 中添加 Slack 服务器配置（粘贴 JSON 片段）。<br />验证连接：通过 Cascade 的 "MCP 服务器" 图标刷新并激活服务。<br /><br />使用示例：提问："What are my coding best practices for JavaScript? Check Slack channel # XYZ."<br />结果：Cascade 调用 MCP 工具读取频道历史，提取命名规范、语法风格等规则。<br />应用：直接要求 Cascade 按规范重构 index.ts 文件。<br /><br />4. MCP 的优势<br />扩展性：无缝接入企业知识库（如设计讨论、内部文档）。<br /><br />易用性：开箱即用的服务器 + 可视化配置（无需编码）。<br /><br />安全性：本地服务器进程控制数据访问权限。<br /><br />5. 资源与后续步骤<br />开源 MCP 服务器：提供预构建的 Slack/GitHub 等服务器下载链接。<br />配置文档：JSON 字段说明（如 slackbot_token、team_id 的获取方式）。<br />总结：MCP 是 Windsurf 实现 "智能体即服务" 的关键，通过标准化协议将企业内外数据转化为 AI 可操作的上下文，显著提升代码生成质量和场景适用性。
                 ]]>
             </content:encoded>
         </item>
