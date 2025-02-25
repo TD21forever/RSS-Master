@@ -5,6 +5,258 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/96562</id>
+            <title>划词翻译、OCR 文字提取：我用 AutoHotKey 给自己写了一个小工具</title>
+            <link>https://sspai.com/post/96562</link>
+            <guid isPermaLink="false">https://sspai.com/post/96562</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 25 Feb 2025 07:08:55 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;<br />文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>我是一个 Mac 用户，因为工作原因，不得不在办公时使用一台性能堪忧的 Windows 笔记本电脑。</p><p>在此前的<a href="https://sspai.com/post/90212" target="_blank">一篇文章</a>里，我介绍了自己如何利用 PowerToys 和 AutoHotKey(下文简称 AHK) 等工具来改善我的 Windows 使用体验，提高办公效率。当时我提到自己在 Mac 上使用的翻译软件 Bob，主要功能是划词（句）翻译和截图识别文字，除了自带服务外，还可以接入各大服务商，借助各种模型完成翻译；而在 Windows 上，翻译功能我使用 PowerToys 自带的 PowerToys Run 加上有道翻译插件，配合 AHK 热键，实现复制选中内容并立即唤出 PowerToys Run 翻译。识别文字则直接使用的 PowerToys 自带的「文本提取器」工具。</p><p>很显然，上述替代方案不够好用，一是响应速度一般，二是翻译和识别的质量不好，特别是对于较长的文本和扫描件。</p><p>于是，我首先找到了 Windows 上各方面都和 Bob 挺相似的工具 <a href="https://github.com/ZGGSONG/STranslate" target="_blank">STranslate</a>，STranslate 说实话已经基本可以满足我的需求，但我还是产生了想要折腾一下的念头——当然这也不是全无原因的，一来可能是 STranslate 的用户相对较少，第三方插件不如 Bob 多，虽然 STranslate 已经提供了相当多的服务商选择，但我目前使用的 API 服务商还未在列表中；二来，要么是我的办公电脑性能太差、要么是办公网的限制，现有服务响应速度并不是特别快，这导致我往往得盯着弹出的窗口等待半天；三来，可能还是因为电脑不行，有时会出现热键失效，或者划词（句）翻译无法正确翻译被选中语句的情况，重启软件后才恢复正常。</p><figure class="image ss-img-wrapper image_resized" style="width: 442px;"><img src="https://cdnfile.sspai.com/2025/02/20/506be2787f05ea75775cc86dafb1efe2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>本着能轻便就轻便，能少开一个进程就少开一个的原则，我打开了一直在后台默默工作的 AHK 脚本。我的目标是模仿 Bob 和 STranslate，利用 AHK 脚本和大模型 API，实现翻译选中文字，以及截图识别文字的功能。</p><p>在实现的过程中，我借助了 DeepSeek 和 Gemini 等 AI 来起草代码，效果相当不错，其中翻译功能的核心部分基本上可以拿 AI 给出的示例直接使用，识别文字的功能错误相对较多（经测试加上联网搜索效果会好一些）。在理解 AI 给出的代码后，经过各种小修小补，补上我自己的额外需求，最终得到了我想要的效果。</p><p>这是我写的第一个利用大模型 API 的小工具，写的过程还是十分有趣的。下面我将介绍 AHK 是如何实现这两个功能的，并在最后给出完整的代码示例。</p><h2>准备工作</h2><p>首先，需要 AHK 这个脚本工具（<a href="https://sspai.com/post/www.autohotkey.com" target="_blank">官方网址</a>），AHK 有很多教程，其文档也有中文<a href="https://autohotkey.top/AutoHotkey2.0/docs/index.htm" target="_blank">翻译版本</a>，我在<a href="https://sspai.com/post/90212" target="_blank">上一篇文章</a>中也对此做了不少介绍，此处就不再赘述。</p><p>需要注意的是，如果你跟我一样使用 AHK 2.0 版本（推荐使用这个最新的版本），<strong>在询问 AI 时一定要强调使用 AHK 2.0 版本的语法</strong>，并且即使如此，AI 偶尔也会给出不能够在 2.0 版本中使用的代码，这时候针对错误要求 AI 修改即可；<strong>其次在向大模型服务商发送请求时要使用 JSON 格式，需要使用 JSON 库</strong>，这里我用的是<a href="https://github.com/thqby/ahk2_lib/blob/master/JSON.ahk" target="_blank">这个</a>，下载后放在同 AutoHotkey.exe 同目录的 Lib 文件夹内（如无就新建一个）就可以<sup class="ss-footnote" href="" title="比如对我而言这个地址是 C:\Program Files\AutoHotkey\v2\Lib">1</sup>。</p><p><strong>类似的，在截图文字识别中，要将剪贴板中的截图保存下来发送请求，需要使用到 GDIP 库</strong>。这里我走了很多弯路，一是 AI 总是给出不存在的语法，比如什么 <code>Clipboard.GetData()</code>；二是调用 Windows API 函数 <code>GetClipboardData</code>，但在我这里尝试了许多次、换了都没有成功；三是网上的 GDIP 库很多是基于旧语法的，在 AHK 2.0 中不能使用。最终我找到的可用于 AHK 2.0 的 GDIP 库来自这个<a href="https://github.com/mmikeww/AHKv2-Gdip" target="_blank">地址</a>。</p><p>在下载上述两个库并放在指定位置后，在脚本中加入这样两行代码，后续即可使用里面的函数：</p><pre class="language-null"><code>#Include &lt;JSON&gt;
+#Include &lt;GDIP_ALL&gt;</code></pre><p><strong>最后，是需要准备大模型 API，或者翻译 API</strong>，目前有大量选择，这里不做任何推荐，请注意保留好自己的 API KEY（可能有 ID 等）不要对外泄露。不同的 API 在请求服务时的代码有所不同，需要查阅各家提供的文档，当然更方便的方式是请 AI 查阅这些文档并给出相应的 AHK 2.0 代码。因为我自己使用的是 OpenRouter（<a href="https://openrouter.ai/docs/quickstart" target="_blank">文档地址</a>），其他服务商在代码上与此可能有差异的地方，下面我会尽量做出提示。</p><h2>设置热键、获取文字和截图</h2><p><strong>首先我们要针对翻译和文字识别功能，设置不同的热键（快捷键）</strong>：</p><pre class="language-null"><code>^+d:: translate()
+^+1:: ocr()</code></pre><p>这里我分别使用的是<code> Ctrl + Shift + D</code>，以及 <code>Ctrl + Shift + 1</code>，没有什么特殊的原因，单纯是这个按键和我在 Mac 上使用的 Bob 设置相同。需要说明的是，我个人是交换了 Ctrl 和 Alt 的，所以这里其实使用的是键盘上的 Alt 按键。如果使用 Alt，只要将上面的 ^ 修改为 !。</p><p><strong>然后我们需要获取文字和图片，这里我都使用的是剪贴板</strong>。并且对于返回的结果，我也会保存到剪贴板，如果你不想要让剪贴板受到「污染」，可以考虑加上以下代码来临时保存剪贴板内容再还原回去（<a href="https://wyagd001.github.io/v2/docs/lib/ClipboardAll.htm" target="_blank">参考文档</a>），我自己未使用这个方式。</p><pre class="language-null"><code>ClipSaved := ClipboardAll() ; 保存剪贴板内容
+;（完成后续需要使用剪贴板的各种操作）
+A_Clipboard := ClipSaved ; 恢复剪贴板
+ClipSaved := ""</code></pre><p>所谓划词（句）翻译，就是把选中的词句翻译为指定语言，因此这时候操作上一定是选中了要翻译的内容，这里发送 Ctrl + C 复制就可以，等待剪贴板存在文字内容后，继续后续操作。</p><pre class="language-null"><code>translate(){
+A_Clipboard:= ""
+Send "^c"
+ClipWait() ; 等待剪贴板存在文字
+text:= A_Clipboard
+;（完成后续的各种操作）
+}</code></pre><p>截图识别相对复杂，也是上面我提到走了不少弯路的地方，截图利用系统自带的 <code>Windows + Shift + S</code> 就可以，由于我自己在工作时常开着微信，微信截图在我这里稍快一点，且截图选框后还可以修改范围，所以我用的是微信截图快捷键 <code>Ctrl + Alt + A</code>。等待剪贴板存在内容后，这里需要临时将截图保存到某个文件中，文件的地址可以自己指定，事后会删除。</p><pre class="language-null"><code>ocr(){
+A_Clipboard:= ""
+Send "^!a" ; 系统截图使用 #+s，微信截图使用 ^!a
+ClipWait(, 1) ; ClipWait 第二个参数指定为 1，意思是任何类型的数据，否则默认仅限于文本或文件
+
+file_tmp:= "tmp_clipboard_pic_" A_YYYY A_MM A_DD ".png" ; 选一个不会与已有文件重复的名字即可
+path:= "C:\Users\用户名\Downloads\" file_tmp
+; 下面几行是使用 GDIP 库的一系列操作，用途只有把图片临时保存并写入文件，然后再读取这个文件，存入变量 img
+pToken:= Gdip_Startup()
+pBitmap := Gdip_CreateBitmapFromClipboard()
+Gdip_SaveBitmapToFile(pBitmap, path)
+Gdip_DisposeImage(pBitmap)
+Gdip_Shutdown(pToken)
+img:= FileRead(path, "RAW")
+;（完成后续的各种操作）
+FileDelete(path)
+}</code></pre><h2>发送请求以获取翻译结果、识别文字结果</h2><p>从这一部分开始，不同 API 服务商操作会有所不同，以我使用的 OpenRouter 为例，首先我需要获取请求的网址，以及我申请的 API KEY，然后选择使用的模型。这里可以一次性填入多个模型，注意识别文字需要使用具有视觉功能的模型，下面以翻译功能为例，识别文字部分详见后面的完整代码。如果使用的是腾讯翻译，则需要的是 API ID 和 API KEY，且不需要选择模型。</p><pre class="language-null"><code>url:= "https://openrouter.ai/api/v1/chat/completions"
+api:= "" ; 填入申请的 API KEY
+models:= ["",] ; 填入模型名称，可以填写多个，用引号包围，用逗号隔开（均为英文标点）
+w_model:= 1
+langs:= ["中文", "英文",] ; 如果有其他语言需要，可以继续填入
+t_lang:= 1</code></pre><p>可以看到，我这里设置了两个初始为 1 的标记变量，目的是用来切换使用的模型和目标语言，以目标语言为例，默认选项 <code>t_lang = 1</code> 时，数组 <code>langs[t_lang]</code> 为 “中文”（注意 AHK 数组是从 1 开始的）。为此，我当然也设置了切换使用模型和目标语言的热键，并且，在切换后会显示切换的结果，持续一小段时间。以下以切换目标语言为例：</p><pre class="language-null"><code>^+2:: switch_target_lang()
+switch_target_lang(){
+global t_lang
+t_lang:= Mod(t_lang, langs.Length) + 1 ; 循环切换数字，也就是对数组长度求余后加一
+ToolTip Format("翻译为{}", langs[t_lang]) ; 显示当前设置为翻译成什么语言
+SetTimer () =&gt; ToolTip(), -1200 ; 让显示窗口在短时间内消失
+}</code></pre><p>效果如下：</p><figure class="image ss-img-wrapper image_resized" style="width: 120px;"><img src="https://cdnfile.sspai.com/2025/02/20/9c41d8b50aaaa104e7927c0a4d6c0d1e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>事实上，OpenRouter 也支持自动选择或自动切换使用的模型（<a href="https://openrouter.ai/docs/features/model-routing" target="_blank">参考文档</a>），目前我采用自己切换选中模型的方式，主要是为了确定翻译结果来自于哪个模型，以便于比较各模型速度和效果。</p><p>接下来是获取翻译，将前面选中并复制的文字 <code>text</code>，以及选中的目标语言 <code>langs[t_lang]</code> 以及选择的模型 <code>models[w_model]</code> 分别传入以下函数。这部分内容因选择的服务商而异，在构造请求方面有不同，腾讯 API 似乎还有一个签名的过程，这部分可以请 AI 查阅对应服务商的文档来帮助我们起草：</p><pre class="language-null"><code>get_translation(text, lang, model){
+; 使用 COM 组件，其中 HTTP 请求头 Header 怎么构造在服务商的文档中一般有写
+req:= ComObject("WinHttp.WinHttpRequest.5.1")
+req.open("POST", url, true)
+req.SetRequestHeader("Authorization", "Bearer " api)
+req.SetRequestHeader("Content-Type", "application/json")
+&nbsp;
+; 构造请求的内容，一般就是要翻译的内容，对于大模型而言需要加上提示词
+prompt:= "你是一位精通多种语言的专业翻译，请将内容精准地翻译为" lang "，只返回译文不要额外内容。"
+message:= [
+Map("role", "system", "content", prompt),
+Map("role", "user", "content", text)
+]
+&nbsp;
+; 发送请求
+req.Send(JSON.Stringify(Map(
+"model", model,
+"messages", message,
+"temperature", 0.5 ; 大模型的温度参数，越高越有创造力，越低越严谨
+)))
+req.WaitForResponse()
+&nbsp;
+; 收到并返回结果
+response:= JSON.Parse(req.ResponseText)
+return response["choices"][1].Get("message").Get("content")
+}</code></pre><p>对于识别文字可能还有一些额外步骤，比如对于 OpenRouter，需要把图片先转换为 Base64 编码，以下是我测试后可行的转换方法，即调用 Windows API 函数 <code>CryptBinaryToString</code>，网上其实也有针对 AHK 2.0 的 Base64 库，如果以下方法不行，也可以尝试使用库（我的测试方法是，把转换后的 img_64 赋值给剪贴板 A_Clipboard，然后网上找一个 Base64 解码为图片的在线网站试一下能不能把它还原回去）：</p><pre class="language-null"><code>DllCall("crypt32\CryptBinaryToString", "ptr", img.Ptr, "uint", img.size, "uint", 0x1, "ptr", 0, "uint*", &amp;size := 0)
+buf := Buffer(size * 2)
+DllCall("crypt32\CryptBinaryToString", "ptr", img.Ptr, "uint", img.size, "uint", 0x1, "ptr", buf.Ptr, "uint*", &amp;size)
+img_64:= StrGet(buf.Ptr)</code></pre><p>识别文字使用的提示词和请求内容（毕竟要告知大模型这是 Base64 编码的图片）也有所不同：</p><pre class="language-null"><code>prompt:= "提取图片中的全部文字（保持原文换行）, 只需要回答提取的文字内容。"
+message:= [
+Map("role", "system", "content", prompt),
+Map("role", "user", "content", [
+Map("type", "text", "text", prompt),
+Map("type", "image_url", "image_url", Map("url", "data:image/png;base64," img_64))
+])
+]</code></pre><p>其余部分则没什么差异，与上面的翻译函数基本一致，这里就不展示了，详见后文完整代码。</p><h2>显示、复制返回的结果</h2><p>在得到上述翻译、识别文字结果后，我遇到了一个额外的困难，这部分我不确定是否是 OpenRouter 服务商独有的，那就是我得到的结果是一串乱码，从其颇有规律的排布来看应该是某种编码，经过一些测试，我发现它是 ISO-8859-1（Latin-1）编码。</p><figure class="image ss-img-wrapper image_resized" style="width: 509px;"><img src="https://cdnfile.sspai.com/2025/02/20/ead657bbacfcecbb66644bd8e72c1c82.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>因此额外地，我需要将结果再转为 UTF-8 编码：</p><pre class="language-null"><code>str:= get_translation(text, langs[t_lang], models[w_model]) ; 获取翻译结果
+; 以下三行的效果是将结果从 ISO-8859-1 编码（在 AHK 中为 cp28591）转为 UTF-8 编码
+byte:= Buffer(StrPut(str, "cp28591"))
+StrPut(str, byte, "cp28591")
+result:= StrGet(byte, "utf-8")</code></pre><p>显示结果有至少两种方法，一种是使用 <code>ToolTip</code>，效果是显示一个工具提示的小窗口，考虑到文字较小，且一次性翻译或识别文字的文字量较大，没有选择让它一段时间后自动消失，而是设计为任意位置点击左键消失，之后将内容复制到剪贴板，方便使用或再次查看。</p><pre class="language-null"><code>ToolTip result
+KeyWait("LButton", "D") ; 等待一次左键点击
+ToolTip() ; 关闭工具提示窗口
+A_Clipboard:= result ; 将结果复制到剪贴板</code></pre><p>这种做法的优点是不会弹出额外窗口，显得很轻便，但缺点是文字较多的时候看起来较为不便。所以另一种选项是使用 <code>msgbox</code>，弹出一个对话框来显示结果，由于窗口的文字框的大小更合适，可以考虑把原文和译文都显示出来，如下所示：</p><pre class="language-null"><code>msgbox Format("原文：{}`r`n`r`n`r`n译文：{}", text, result)
+A_Clipboard:= result</code></pre><p>我自己使用的仍然是 <code>ToolTip</code> 方法，因为我觉得这看起来更轻便，全屏任意位置点击左键关闭窗口也更不影响操作。</p><h2>其他</h2><p>考虑到请求服务可能失败，为了让自己知道请求已经失败了而不是网络太慢，可以使用 <code>try</code> 语句在失败时抛出错误。</p><pre class="language-null"><code>try{
+;（获取翻译的一些列操作）
+} catch as e {
+ToolTip Format("翻译失败：{}", e.Message) ; 显示翻译失败和报错内容
+SetTimer () =&gt; ToolTip(), -1800 ; 短时间后自动关闭显示
+}</code></pre><p>自己写的脚本有一个好处，就是可以随时根据需要修改或添加功能，比如前面提到的切换模型，在每次只输出一个结果的使用场景下，切换模型比 Bob 等工具还要方便一点。同样的道理，也可以写一个切换不同服务商的开关并分配热键，或者像是 Bob 那样，同时显示多个不同的模型的输出结果，从上到下依次排布。</p><p>最后，给出我的完整代码供大家参考：</p><pre class="language-null"><code>#Requires AutoHotkey v2.0
+#Include &lt;JSON&gt;
+#Include &lt;GDIP_ALL&gt;
+&nbsp;
+url:= ""
+api:= ""
+models:= ["",]
+w_model:= 1
+langs:=["中文", "英文",]
+t_lang:= 1
+&nbsp;
+url_ocr:= ""
+api_ocr:= ""
+models_ocr:= ["",]
+w_model_ocr:= 1
+&nbsp;
+&nbsp;
+^+d:: translate()
+^+1:: ocr()
+^+2:: switch_target_lang()
+^+3:: switch_model()
+^+4:: switch_model_ocr()
+&nbsp;
+switch_target_lang(){
+global t_lang
+t_lang:= Mod(t_lang, langs.Length) + 1
+ToolTip Format("翻译为{}", langs[t_lang])
+SetTimer () =&gt; ToolTip(), -1200
+}
+&nbsp;
+switch_model(){
+global w_model
+w_model:= Mod(w_model, models.Length) + 1
+ToolTip Format("使用以下模型：{}", models[w_model])
+SetTimer () =&gt; ToolTip(), -1800
+}
+&nbsp;
+switch_model_ocr(){
+global w_model_ocr
+w_model_ocr:= Mod(w_model_ocr, models_ocr.Length) + 1
+ToolTip Format("使用以下模型：{}", models_ocr[w_model_ocr])
+SetTimer () =&gt; ToolTip(), -1800
+}
+&nbsp;
+translate(){
+A_Clipboard:= ""
+Send "^c"
+ClipWait()
+text:= A_Clipboard
+&nbsp;
+try{
+str:= get_translation(text, langs[t_lang], models[w_model])
+byte:= Buffer(StrPut(str, "cp28591"))
+StrPut(str, byte, "cp28591")
+result:= StrGet(byte, "utf-8")
+&nbsp;
+ToolTip result
+KeyWait("LButton", "D")
+ToolTip()
+A_Clipboard:= result
+} catch as e {
+ToolTip Format("翻译失败：{}", e.Message)
+SetTimer () =&gt; ToolTip(), -1800
+}
+}
+&nbsp;
+get_translation(text, lang, model){
+req:= ComObject("WinHttp.WinHttpRequest.5.1")
+req.open("POST", url, true)
+req.SetRequestHeader("Authorization", "Bearer " api)
+req.SetRequestHeader("Content-Type", "application/json")
+&nbsp;
+prompt:= "你是一位精通多种语言的专业翻译，请将内容精准地翻译为" lang "，只返回译文不要额外内容。"
+message:= [
+Map("role", "system", "content", prompt),
+Map("role", "user", "content", text)
+]
+&nbsp;
+req.Send(JSON.Stringify(Map(
+"model", model,
+"messages", message,
+"temperature", 0.5
+)))
+req.WaitForResponse()
+response:= JSON.Parse(req.ResponseText)
+return response["choices"][1].Get("message").Get("content")
+}
+&nbsp;
+&nbsp;
+ocr(){
+A_Clipboard:= ""
+Send "#+s" ;^!a
+ClipWait(, 1)
+&nbsp;
+file_tmp:= "tmp_clipboard_pic_" A_YYYY A_MM A_DD ".png"
+path:= "C:\Users\用户名\Downloads\" file_tmp
+pToken:= Gdip_Startup()
+pBitmap := Gdip_CreateBitmapFromClipboard()
+Gdip_SaveBitmapToFile(pBitmap, path)
+Gdip_DisposeImage(pBitmap)
+Gdip_Shutdown(pToken)
+img:= FileRead(path, "RAW")
+&nbsp;
+try{
+str:= get_ocr(img, models_ocr[w_model_ocr])
+byte:= Buffer(StrPut(str, "cp28591"))
+StrPut(str, byte, "cp28591")
+result:= StrGet(byte, "utf-8")
+&nbsp;
+ToolTip result
+KeyWait("LButton", "D")
+ToolTip()
+A_Clipboard:= result
+} catch as e {
+ToolTip Format("识别失败：{}", e.Message)
+SetTimer () =&gt; ToolTip(), -1800
+}
+&nbsp;
+FileDelete(path)
+}
+&nbsp;
+get_ocr(img, model){
+DllCall("crypt32\CryptBinaryToString", "ptr", img.Ptr, "uint", img.size, "uint", 0x1, "ptr", 0, "uint*", &amp;size := 0)
+buf := Buffer(size * 2)
+DllCall("crypt32\CryptBinaryToString", "ptr", img.Ptr, "uint", img.size, "uint", 0x1, "ptr", buf.Ptr, "uint*", &amp;size)
+img_64:= StrGet(buf.Ptr)
+&nbsp;
+req:= ComObject("WinHttp.WinHttpRequest.5.1")
+req.open("POST", url, true)
+req.SetRequestHeader("Authorization", "Bearer " api)
+req.SetRequestHeader("Content-Type", "application/json")
+&nbsp;
+prompt:= "提取图片中的全部文字（保持原文换行）, 只需要回答提取的文字内容。"
+message:= [
+Map("role", "system", "content", prompt),
+Map("role", "user", "content", [
+Map("type", "text", "text", prompt),
+Map("type", "image_url", "image_url", Map("url", "data:image/png;base64," img_64))
+])
+]
+&nbsp;
+req.Send(JSON.Stringify(Map(
+"model", model,
+"messages", message,
+"temperature", 0.5
+)))
+req.WaitForResponse()
+response:= JSON.Parse(req.ResponseText)
+return response["choices"][1].Get("message").Get("content")
+}</code></pre><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/96352</id>
             <title>海上破冰、攀登火山、高原越野、古街漫步：用照片回顾我的 2024</title>
             <link>https://sspai.com/post/96352</link>
@@ -158,38 +410,6 @@
                         <hr>
                     
                     <h2>☕️ TL;DR</h2><ul><li>近期佳作推荐：[电影] 隔壁房间、[电影] 秋日何时来、[电影] 你的颜色、[国产] 三叉戟 2、[英剧] 探长薇拉 第十四季 / 最终季、[动画] 你的好邻居蜘蛛侠 第一季、[动画] 群花绽放，彷如修罗、[纪录片] 全美缉凶：O · J · 辛普森、[真人秀] 野兽游戏</li><li>几则精彩预告：《白雪公主》真人电影发布新预告、《编号 17》内地定档 3 月 7 日、《怪诞故事》发布首支预告、《夜魔侠：重生》发布新预告</li><li>几则影视资讯：《孤独摇滚！》将制作第二季、《倩女幽魂》4K 修复版将于 3 月 21 日重映、《黎明的一切》确认引进</li></ul><h2>👀 N 部作品推荐</h2><p>根据读者反馈，如果推荐语涉及剧透（对故事核心、暗线、伏笔、结局等关键要素的透露），我们会在对应作品的标题前增加 🔦 的 Emoji。</p><p>往期推荐可 <a href="https://sspai.com/tag/%E6%9C%AC%E5%91%A8%E7%9C%8B%E4%BB%80%E4%B9%88">点此</a> 或点击文末 tag #本周看什么，更多主题片单可 <a href="https://sspai.com/topic/419">点此</a> 查看；想要查看更多深度影视内容，可以关注我们的衍生栏目「<a href="https://sspai.com/topic/416">看什么 Café</a>」。如有其他建议也欢迎在评论区提出，感谢大家对「看什么」栏目的喜爱和支持。</p><h3>[电影] 隔壁房间</h3><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/21/article/99c12da08541b966372d8f84817852b1.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>关键词：剧情</p><p>片长：107 分钟；<a href="https://movie.douban.com/subject/36687720/">豆瓣链接</a></p><blockquote><p>My way of fighting.</p></blockquote><p>@利兹与青鸟：在一场新书签售会上，作家英格丽得知多年不见的好友玛莎罹患癌症，前往医院探望。病房内的装潢色彩鲜艳，窗外的曼哈顿天际线缥缈而梦幻。两人在沙发上畅谈玛莎的战地记者经历、疏远的亲子关系，在树木和花丛围绕下聊艺术、聊创作、戏剧化的爱情故事，还有英格丽恐惧的、而玛莎早已接受的死亡话题。在玛莎的央求下，英格丽陪她住在如霍普画作般的度假别墅里，走过人生的最后旅程。</p><p>西班牙导演佩德罗·阿莫多瓦的这部新片在第 81 届威尼斯电影节拿下金狮奖，朱丽安·摩尔、蒂尔达·斯文顿两位影后也在面部的特写镜头下，贡献了细腻而动人的表演。电影的美术风格一如阿莫多瓦过往作品的鲜明特征——高饱和度色彩、高对比撞色和空间分割的运用，鲜艳的红与克兰因蓝、明亮的橘色、黄色与绿色，让观众会不自觉地沉浸而享受于这场精致的视觉艺术。电影由大段的对话推进，有种非日常的文学性，像散文，探讨病痛与年老让自我慢慢消逝的折磨，生命的终点是否能如雪花般轻盈飘落。</p><h3>[电影] 秋日何时来</h3><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/21/89630dda747834b5ac49767c56aba6ee.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>关键词：剧情</p><p>片长：102 分钟；<a href="https://movie.douban.com/subject/36639612/">豆瓣链接</a></p><blockquote><p>我一直都很喜欢吃蘑菇。</p></blockquote><p>@利兹与青鸟：米歇尔在法国乡下的别墅中独居，每天都期待着女儿瓦莱丽带外孙卢卡斯来度假。秋意正浓，米歇尔和好友玛丽去林子里采蘑菇，尽管对照着蘑菇图谱书籍认真挑选了蘑菇，可瓦莱丽还是中毒了。瓦莱丽怀疑母亲是故意的，带着卢卡斯负气离开，愧疚不已的米歇尔就这样失去了与外孙的相处时光。玛丽的儿子文森特出狱后，米歇尔雇佣他做些杂活，而他的介入，却无形中促成了瓦莱丽的悲剧，间接达成了米歇尔的心愿。</p><p>电影的故事一波三折，叙事节奏和镜头语言却平稳自然，与悬疑片相去甚远。但当你沉浸在温馨典雅的乡下别墅、美丽的秋日田园光景中时，电影又会用那些令人生疑的细节和捉摸不透的心理动机，让观众陷入深深不安之中。这就是弗朗索瓦·欧容电影的魅力，优雅地埋下细思极恐的引线，挖掘人性的复杂，探索道德的边界，剖开正常表象下的病态心理，却不告诉你事情的真相，激发你的思考。优雅的老太、乖巧的男孩、出狱的男人、冷漠失意女人，每个人都不是表面看起来那样。</p><h3>[电影] 你的颜色</h3><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/21/b0e57e48fecb5b1693b5caec454452d8.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>关键词：音乐 / 青春 / 治愈</p><p>片长：101 分钟 / 96 分钟（中国大陆），有片尾彩蛋</p><p>观看渠道：院线上映中；<a href="https://movie.douban.com/subject/36177245/">豆瓣链接</a></p><blockquote><p>All is colour within.</p></blockquote><p>@SHY：在教会学校就读的少女日暮窦子，能看见他人内心的色彩，却不知道自己的颜色。色彩亮丽的同学作永君突然退学后，在旧书店与其重逢的窦子，又结识了同样明亮的少年影平路易。各有心结的三人组成乐队，焕发属于自己的色彩。</p><p>挑战历史题材后，于新作重回舒适区的山田尚子，与老搭档吉田玲子和牛尾宪辅携手带来又一则多彩的青春故事。承继从《轻音少女》到《利兹与青鸟》的诸多演出技法，本作能看出山田一众过往作品的影子，思路又有细微的变化。影片刻意弱化叙事，注重对氛围的塑造，精准把握细节，捕捉流动的情绪，将片段组合为心旷神怡的影像。</p><p>以「颜色」为意象，明快的色调和空灵的旋律互相作用，调和能够容纳五彩纷呈的纯白。代表三原色的主角团，满是青春期的迷茫和伤痛，但基调绝不沉重，将一切融化在轻盈的调子内。学会接受无法改变的事，尝试改变力所能及的事，当少年少女完成自我发现与成长，矛盾也在 Live 的高潮中达成和解，迎着飘扬的彩带，放飞往日的纠结。</p><h3>[国产] 三叉戟 2</h3><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/21/c8d4cb5df85c247de1c1a23e1e1eb1c4.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>关键词：剧情 / 犯罪</p><p>片长：45 分钟左右（单集）× 34 集</p><p>观看渠道：<a href="https://www.iqiyi.com/v_1cvuif6tb10.html">爱奇艺视频</a>；<a href="https://movie.douban.com/subject/35633775/">豆瓣链接</a></p><blockquote><p>老三位，你们可真行！</p></blockquote><p>@潘誉晗 ：崔铁军、徐国柱和潘江海这天本该美美地和爱人一起享受假期，却无意发现了一桩传销案。随后，他们又发现了案件的主犯，疑似与二十年前的夏春生所办的案件息息相关。为了弥补老夏留下的这一份遗憾，「三叉戟」团队化身「三叉戟工作室」，再次出击。</p><p>作为一部续作，《三叉戟 2》可谓是诚意满满。首先，剧集完美延续了上一部的风格，用诙谐又幽默的方式去叙述故事。其次，在案件的选择和筛选上，也很接地气：公益夕阳旅行团、免费为老人体检还送鸡蛋、以房养老诈骗、整容贷、电信诈骗、虚拟货币等，都是近年来在网络上引起热议的社会性事件，具有一定的警醒作用。陈建斌、董永、郝平这三位的演绎，也依然精彩。演技值得信任的演员们再次联手，更加默契，化学反应十足。新人女警官的加入也亮点十足，有勇有谋有眼力，而且身手也好，确实是一位不拖老三位后腿的优秀女警。</p><h3>[英剧] 探长薇拉 第十四季 / 最终季</h3><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/21/2e1c89925c53d50120a5695abe321e5c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>关键词：悬疑 / 犯罪</p><p>片长：90 分钟左右（单集）× 2 集；<a href="https://movie.douban.com/subject/36864930/">豆瓣链接</a></p><blockquote><p>再见了，可爱的薇拉探长！</p></blockquote><p>@潘誉晗 ：两位钓鱼佬来到河边准备钓鱼，却发现了一具躺在河边的尸体，薇拉一行对案件展开调查，发现这起案件，刚好与一桩交给薇拉的、20 年前的旧案有关联；某观鸟爱好者这天想寻找一处绝赞的观鸟地点，没想到成为了一起命案的第一发现人，薇拉接到报案后前来，发现这次尸体出现的地点，承载着她童年一段并不美好的回忆。</p><p>虽然这一季的内容只有两集，但是作为「探长薇拉」系列的最终季，剧集还是保证了以往的风格和质量。古典又舒缓的叙述中，需要抽丝剥茧出真相的案件，被设计得巧妙而精致。讨论出一个疑点，便带出一种可能性，而这样的一种可能性，又引出了不一样的嫌疑人。于是通过对案件的逐步侦查，观众也看到了人性中颇为复杂的那一面。而第二案的处理，则更显紧凑，不仅找出了真凶是谁，又挖掘出了薇拉的过往经历，对于薇拉探长这一人物的收尾，有着很不一样的意义。</p><h3>[动画] 你的好邻居蜘蛛侠 第一季</h3><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/21/839546e5eabf75d726db4186b623c388.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>关键词：剧情 / 喜剧 / 动作 / 科幻 / 动画 / 奇幻 / 冒险</p><p>片长：27 分钟左右（单集）× 10 集；<a href="https://movie.douban.com/subject/35659893/">豆瓣链接</a></p><blockquote><p>With great power comes great respect.（能力越强，越受尊重。）</p></blockquote><p>@潘誉晗 ：彼得·帕克这天刚上学，天空就突然出现了一个奇怪的圆洞。某种不知名的奇怪生物出现，奇异博士追逐着怪物而来，怪洞也带来了一只拥有某种能力的蜘蛛。被蜘蛛咬了一口的彼得，就这样变身成拥有超能力的蜘蛛侠。</p><p>Disney+ 最近又推出了一部以蜘蛛侠作为主角的动画，虽是旧调不断重弹的 IP ，但这次动画确实利用平行宇宙的设定，对剧情做了很不错的创新，诸多人物的引入和角色关系的新设定，颇有亮点。比如这次诺曼成为了蜘蛛侠成长路上的导师，哈利还多了层网红的身份。不过最值得称赞的，还是动画牢牢把握住了彼得·帕克作为街道好邻居这一接地气的形象。就像片头曲唱的那样：「 Need my city, my city need me（我需要城市，城市需要我）.」在街头维护和平的蜘蛛侠，与这个城市紧密关联。能够拯救世界当然好，但是我们的好邻居蜘蛛侠最想做的，还是回到街道中，去守护这座城市的正义。</p><h3>[动画] 群花绽放，彷如修罗</h3><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/21/d78466d8cdeaaf8e0ddec8a57ccbb3ce.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>关键词：漫画改 / 校园 / 青春 / 日常&nbsp;</p><p>片长：23 分钟（单集）× 12 集，每周二更新&nbsp;</p><p>观看渠道：<a href="https://acg.gamer.com.tw/acgDetail.php?s=139915">巴哈姆特动画疯</a> / <a href="https://t.bilibili.com/1034851410585321474">哔哩哔哩</a>（期间限定）；<a href="https://movie.douban.com/subject/36929958/">豆瓣链接</a></p><blockquote><p>不要说自己一无所有，连我都为你的才能倾倒。</p></blockquote><p>@SHY：在离岛上长大的少女春山花奈，最大的爱好是为岛上的孩子们朗读书本。偶然撞见花奈的朗读会的学姐薄赖瑞希，极力邀请她加入自己担任社长的李子丘高中广播社。以小小的部室为舞台，关于播音和朗读的青春物语开始放送。</p><p>改编自《吹响吧！上低音号》作者武田绫乃的同名漫画，本作从主要角色的人设，到全国大赛的目标，都有似曾相识的味道。挖掘每个人的心事，描绘才能与努力的冲突，写起驾轻就熟的青春群像剧。改编动画由努力拓宽戏路的 Studio Bind 担纲制作，不仅呈献一如往常的精细作画，还对原著进行了有理有据的调整，将情节梳理得更加自然。</p><p>对于重中之重的声音，动画颇费了一番心思。与吹奏相比，朗读对表现力的要求更高，本作借助「领域展开」式的场景变换，直观传达话语蕴含的意境。声优的精彩演技配合横山克的剧伴，塑造和煦舒适的氛围，连磕磕绊绊的棒读都感情饱满。值得一提的，还有片尾曲《朗朗》，将朗读融入歌词，道来万千思绪，第 5 集的清唱版也别有一番韵味。</p><h3>[纪录片] 全美缉凶：O · J · 辛普森</h3><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/21/735c78184fe489ddd4e9935c4ab2d536.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>关键词：纪录片</p><p>片长：60-92 分钟不等（单集）× 4 集</p><p>观看渠道：<a href="https://www.netflix.com/jp/title/81700899">Netflix</a>；<a href="https://movie.douban.com/subject/37206464/">豆瓣链接</a></p><blockquote><p>一件匪夷所思的荒唐事。</p></blockquote><p>@潘誉晗 ：Netflix 这部纪录片《全美缉凶：O·J·辛普森》通过四集的内容，再次回顾了发生于 1994 年的辛普森杀妻案。</p><p>大概是因为辛普森本人于去年病逝，因此，在这一次的纪录片中，我们可以看到一些从未出现过或者未被呈上法庭的证据，看到了受访者更为坦诚的表述。在这样的前提下，观众更好地了解到了当时的细节，也因此在看的过程中，越发觉得不可思议。因为明明是众人皆知的真相，可在当时的判决中，正义却无法实行。因为这桩被称为好莱坞式的案件，远比想象中的更加复杂。</p><p>虽然只有短短四集，但纪录片的素材却非常丰富，除了就案件本身的重温之外，还进一步从社会的各个层面去深入探讨了这个案件所造成的深远影响：辛普森的名人效应、辛普森有色人种身份所带来的种族问题，因警方在现场勘测时造成失误，而导致后续一系列问题的回顾等等，都做了一定的讨论。</p><h3>[真人秀] 野兽游戏</h3><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/21/edfa805743a70c3ba1593c66a309da53.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>关键词：真人秀</p><p>片长：45 分钟左右（单集）× 10 集；<a href="https://movie.douban.com/subject/37135422/">豆瓣链接</a></p><blockquote><p>都是人性，哪来的游戏。</p></blockquote><p>@潘誉晗 ： YouTube 的头部视频博主野兽先生（Mr.Beast）和亚马逊合作推出了一档真人秀大挑战，一共集合了 2000 名选手参赛，竞争 500 万美金（后追加到 1000 万美金）。</p><p>《鱿鱼游戏》的现象级播出带动了许多类似真人秀，但相较于其他节目，《野兽游戏》的规格明显大了许多，不仅奖酬设置很高，游戏的设计也很有意思。毕竟这次真人秀的发起人野兽先生，本就很能整活：第一关就先扔出 100 万美金的诱惑，如果你选择退出，就能直接平分，拎钱走人；第二关按列分组，只要有人愿意牺牲自己，那么这一列其他的选手都可以晋级；大家一定很想入住野兽之城吧？很抱歉，床位只有 500 人，这个位置，你们得自己竞争……</p><p>各种未知的、充满挑战的游戏就这样诞生，可这真的只是纯粹的游戏而已吗？选手们面面相觑，都说着不要放弃，可当放弃的奖金给得越来越高之后，很多人都开始动摇了——野兽游戏，玩的明明是人性。</p><h3>更多</h3><p><a href="https://movie.douban.com/subject/36502222/">[台剧] 童话故事下集</a> @利兹与青鸟：事无巨细的强势婆婆、隐形的公公、妈宝的老公、催生的压力、失去私人空间、生活习惯也不同的窒息环境，似有似无的精神出轨，但也会被丈夫的真诚可爱打动，林宜玲的「离婚」也只是心里想想、嘴上说说。撕开「王子和公主从此过着幸福生活」的童话，写满让人又爱又恨的婚姻生活，柯佳嬿、刘以豪、曾敬骅的演技和颜值都很养眼，是一部会血压升高、也搞怪有爱的喜剧。</p><p><a href="https://movie.douban.com/subject/36524608/">[韩剧] 我的完美秘书</a> @潘誉晗：本剧以猎头公司 CEO 姜智允和其秘书刘恩浩为主角，讲述了一段发生于职场的爱情故事。剧集以性转版「霸道总裁爱上我」的形式出现，给爱情喜剧市场带来了一抹不小的新鲜感，尤其是男主角单亲爸爸的设定很不错。家庭与事业平衡的不易，这次以男性视角呈现也很有意义；与孩子们的相处，也给剧集注入了一股家的温暖。</p><p><a href="https://movie.douban.com/subject/36990089/">[日剧] 小圆 26 岁，在做实习医生！</a> @潘誉晗：根据水谷绿同名漫画所改编的剧集，讲述了医生若月圆在青樱医院的实习生活。作为一名年轻医生，初入职场的小圆需要应对不少问题。例如因实习医生的身份被认定「只是来实习罢了」，还有在不同科室轮岗的日子很辛苦，但好在剧集的整体风格轻松又愉快，所以我们可以在小圆医生身上收获满满的元气和动力。</p><p><a href="https://movie.douban.com/subject/36342936/">[瑞典] 奥勒谋杀案</a> @潘誉晗：剧集根据瑞典作家维维卡·斯滕系列畅销改编，以一位来自斯德哥尔摩的女警汉娜作为故事的主角。汉娜原计划在滑雪胜地奥勒小镇度假，因为一名少女失踪的案件，她还是没能忍住刑警的本能，和当地的警探丹尼尔一起调查真相。剧集整体的发挥较为中规中矩，但奥勒小镇的风光很美，衬得案件也多了份凄美的味道。</p><p><a href="https://movie.douban.com/subject/36174712/">[美剧] 零日风暴</a> @利兹与青鸟：零日是指一次针对软件系统中未知漏洞的网络入侵，这一天控制交通、通讯及其他基础设施的电脑系统彻底被劫持，出现大规模停电、交通事故和大量伤亡，每个人手机上都出现了「this will happen again」的威胁，颇具威望的前总统穆伦也参与到调查当中。政党对弈、阴谋诡谲、挑战人性、讽刺现实，罗伯特·德尼罗主演的 6 集政治惊悚剧有点意思。</p><p><a href="https://www.bilibili.com/bangumi/play/ss48807">[动画] 请吃红小豆吧！食物世界 第一季</a> @利兹与青鸟：红小豆每天作为食材上班、梦想着被吃掉，但每次都被剩下。有天下班，因为食物中毒事件红小豆被食察局带走，借此我们看到了食材们居住的「食物世界」——一个让浪费掉的食物还能被吃掉的地方。每天睁开眼就是朋友助力抢单、挤地铁、上班、体检消毒……十分接地气。五六分钟一集，有不少新角色登场，主线清晰，有梗又可爱。</p><p><a href="https://movie.douban.com/subject/36780044/">[动画] 一杆青空</a> @SHY：缺乏爱好的少女青羽美波，偶然来到了附近的高尔夫球场，在天才球手茜遥的搭话下，首次握起球杆，逐渐发掘自己的兴趣。演绎自 2021 年的同名短片，曾担任《SSSS.古立特》总作监的齐藤健吾如愿当上 TV 动画导演，也为本作赋予了一定的即视感。用清爽的人设和画风，讲述轻巧的日常运动故事，叙事节奏张弛有度，大石昌良献唱的 OP 活力满满，整体观感相当舒适。</p><h2>📅 本周新预告</h2><h3>《白雪公主》真人电影发布新预告</h3> <p>2 月 15 日，《白雪公主》真人电影发布了新预告，将于 3 月 21 日在北美上映。本作翻拍自 1937 年经典动画电影，马克·韦布（《超凡蜘蛛侠》《和莎莫的500天》）执导，瑞秋·泽格勒饰演白雪公主，盖尔·加朵饰演恶毒皇后，安德鲁·伯纳普饰演原创男主角强纳森。 <a href="https://x.com/DisneyStudios/status/1890446096096186830">来源</a></p><h3>《编号 17》内地定档 3 月 7 日</h3> <p>2 月 18 日，电影《编号 17》发布了中国内地定档预告，将于 3 月 7 日同步北美上映。奥斯卡最佳导演奉俊昊执导，罗伯特·帕丁森领衔主演，主角米奇发现自己陷入了极不寻常的处境，为了完成雇主的要求，必须不断经历死亡，才能换取重生。 <a href="https://weibo.com/2236550925/PePaFcpjI">来源</a></p><h3>《怪诞故事》发布首支预告</h3> <p>2 月 18 日，电影《怪诞故事》发布了首支预告，将于 4 月 4 日在北美上映。安娜·波顿、瑞安·弗雷克（《惊奇队长》）执导、编剧，佩德罗·帕斯卡、安格斯·克劳德、本·门德尔森、杰·埃利斯等出演，由四个相互关联的故事组成，发生在 1987 年的加州奥克兰，有些是真实的，有些是虚构的。 <a href="https://www.youtube.com/watch?v=-2e8SYmofZM">来源</a></p><h3>《夜魔侠：重生》发布新预告</h3> <p>2 月 19 日，漫威新剧《夜魔侠：重生》发布了新预告，贾斯汀·本森、艾伦·穆尔黑德等执导，「夜魔侠」查理·考克斯再披地狱厨房战袍，文森特·多诺费奥、乔·伯恩瑟、黛博拉·安沃尔、埃尔登·汉森、威尔逊·贝索尔、阿耶莱特·祖里尔等回归出演，将于 3 月 4 日上线 Disney+。 <a href="https://x.com/Daredevil/status/1891895456999018908">来源</a></p><h3>更多</h3><p><a href="https://www.bilibili.com/video/BV1zJA5eTEG5/"><strong>电影《全知读者视角》首支预告：</strong></a>改编自同名网络小说，金秉祐（《恐怖直播》）执导，李敏镐、安孝燮、金智秀、林珍娜、蔡秀彬等主演，随着城市成为炼狱，熟悉的小说角色纷纷登场，而金独子将是知晓新世界结局的唯一一个读者，7 月在韩国上映。 <a href="https://www.youtube.com/watch?v=YRIW33DftIM">来源</a></p><p><a href="https://www.bilibili.com/video/BV1FpAzeGETs/"><strong>《忍者蝙蝠侠大战极道联盟》发布正式预告：</strong></a>2 月 19 日，动画电影《忍者蝙蝠侠大战极道联盟》发布了正式预告，将于 3 月 18 日上线流媒体平台。《忍者蝙蝠侠》原班主创打造，水崎淳平、高木真司执导，中岛一基编剧，菅野祐悟配乐，神风动画制作，从战国日本回到现代哥谭的蝙蝠侠，与占领城市的极道作战。 <a href="https://www.youtube.com/watch?v=QleeDtH_WWE">来源</a></p><p><a href="https://www.bilibili.com/video/BV1FjAqeBEDC/" target="_blank"><strong>《我的世界大电影》内地定档：</strong></a>杰瑞德·赫斯执导，杰克·布莱克、杰森·莫玛、詹妮佛·库里奇、艾玛·迈尔斯、丹妮尔·布鲁克斯等主演，四个异类人物被传送到奇异方块世界，打破现实边界，开启未知冒险。 将于 4 月 4 日同步北美上映。<a href="https://weibo.com/7945037763/PedEux8US">来源</a></p><h2>📽 影视新闻周报</h2><h3>《孤独摇滚！》将制作第二季</h3><p>2 月 15 日，TV 动画《孤独摇滚！》宣布将制作第二季，并发布了 <a href="https://www.bilibili.com/video/BV1tpAPesEke/">制作决定 PV</a> 和先导视觉图，第一季和剧场总集篇副导演山本裕介初执导筒，吉田惠里香继续编剧，小田景门、陆田青享担任人物设定，CloverWorks 制作，档期待定。 <a href="https://x.com/BTR_anime/status/1890727010978132322">来源</a></p><figure class="image ss-img-wrapper image_resized" style="width: 366px;"><img src="https://cdnfile.sspai.com/2025/02/21/article/a04c52fbf09cd715750bd6d2033dceec.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>《倩女幽魂》4K 修复版将于 3 月 21 日重映</h3><p>2 月 19 日，《倩女幽魂》4K 修复版发布重映定档海报。影片由程小东执导，徐克监制，张国荣、王祖贤、午马领衔主演，刘兆铭、林威主演，将于 3 月 21 日全国上映。</p><figure class="image ss-img-wrapper image_resized" style="width: 368px;"><img src="https://cdnfile.sspai.com/2025/02/21/0e219d9c548623f027b257c026ff3c60.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3><strong>《黎明的一切》确认引进</strong></h3><p>2 月 19 日，电影《黎明的一切》确认引进中国内地，档期待定。三宅唱执导，松村北斗、上白石萌音主演，讲述患有经前综合征的藤沢美纱和患有恐慌症的山添孝俊彼此间抱团取暖，成了既不是朋友也不是恋人的同志关系，<a href="https://sspai.com/post/91111">本周看什么 240802 期</a> 亦有推荐。 <a href="https://weibo.com/6776159567/PeYBF0CYR">来源</a></p><figure class="image ss-img-wrapper image_resized" style="width: 358px;"><img src="https://cdnfile.sspai.com/2025/02/21/db32bab0946c503f4849ec33da072cd8.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>🎪 彩蛋</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/21/9620f56bdf312f003536faa344c6955d.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>本期彩蛋是由中奖读者 <a class="ss-atUser" href="https://sspai.com/u/mxkfyd2v">@真是滑稽有趣</a> 提供的「看图猜电影」，首位猜中片名的读者，可获得彩蛋提供名额 1 次（彩蛋内容包括但不限于「猜电影」「你喜欢的经典影视作品/影人/台词」「电影冷知识」），和我们不定期发放的奖品。本期猜中「第一名」的读者是 <a class="ss-atUser" href="https://sspai.com/u/LionQ_A">@LionQ_A</a>，请这位朋友注意站内私信~本期答案：<a href="https://movie.douban.com/subject/25934014/" target="_blank">爱乐之城 La La Land (2016)</a></p><p>&gt; 小红书 📕 关注 <a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4">少数派sspai</a>、<a href="https://www.xiaohongshu.com/user/profile/62fb4cf90000000012002431">本周看什么</a>，找到数字时代更好的生活方式 🎊</p><p>&gt; <a href="https://sspai.com/topic/416">看什么 Café</a> / <a href="https://sspai.com/topic/419">主题片单</a> 专题页、<a href="https://sspai.com/page/2021/movie">2021 年度回顾</a>，更多影视推荐尽在 <a href="https://sspai.com/tag/%E6%9C%AC%E5%91%A8%E7%9C%8B%E4%BB%80%E4%B9%88">#本周看什么</a> 🎬</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/96591</id>
-            <title>如何通过自定义域名上任意地址收发邮件</title>
-            <link>https://sspai.com/post/96591</link>
-            <guid isPermaLink="false">https://sspai.com/post/96591</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 21 Feb 2025 09:16:06 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 一站一邮, 隐私邮箱, Catch-all 邮箱, 业务邮件投递  
-<br><br>  
-总结: 近年来，许多人选择「一站一邮」的注册策略，以保护隐私和便于管理。常见的方法包括使用子地址和隐私邮箱服务。子地址易于生成但隐私保护效果有限，而隐私邮箱则需额外成本且不易记忆。Catch-all 邮箱提供了一种解决方案，允许用户使用自定义域名注册服务并接收邮件。虽然邮件转发服务通常不支持发件，但业务邮件投递服务可以满足从任意地址发件的需求，适合电子商务和客户服务场景。 </div>
-                        <hr>
-                    
-                    <p>近年来，出于保护隐私、便于管理等动机，很多人会选择「一站一邮」的账号注册策略，即为每个服务或应用填写不同的注册邮箱。</p>
-<p>这有两种常见实现方法：一是通过在用户名中任意增加句点（<code>.</code>）或加号（<code>+</code>）引导的后缀构建子地址（subaddress），例如从 <code>johnappleseed@example.com</code> 变形为 <code>john.appleseed@example.com</code> 或 <code>johnappleseed+icloud@example.com</code> 等。向这些子地址发送的邮件仍会送达原地址，但易于通过过滤规则自动化处理。二是使用市面上各类隐私邮箱服务，例如 <a href="https://support.apple.com/zh-cn/guide/icloud/mm9d9012c9e8/icloud">iCloud Hide My Email</a>、<a href="https://relay.firefox.com/">Firefox Relay</a>、<a href="https://simplelogin.io/">SimpleLogin</a> 等。它们允许生成一系列随机地址，并将发往这些地址的邮件转发到用户指定邮箱。</p>
-<p>这两种方法各有利弊。如果使用子地址，好处是可以任选替身邮箱名，并且无需额外设置；但由于很容易从子地址推出原始地址，并不能起到真正的隐私保护作用。如果使用隐私邮箱，除了有额外成本，每次注册新服务前都要手动生成一个地址。这种随机地址也很难直接记住，几乎必须依赖密码管理器。当然，还有很多「精明」的服务干脆拒绝用子地址或常见的隐私邮箱域名注册。</p>
-<p>有什么能兼顾的方案呢？在邮件服务配置中，有一个「catch-all 邮箱」的概念。Catch-all 邮箱可以「捕获」发送到同域名中任何无效地址的邮件，而不会导致退信。因此，只要自己有一个域名，为之配置一个 catch-all 邮箱，就可以使用以这个域名结尾的任何邮箱地址注册服务，并且总是能收到所注册服务发来的邮件。又因为这是一个自定义域名，也不容易被自动化的屏蔽机制针对。（但注意回避 <code>.top</code>、<code>.vip</code>、<code>.xyz</code> 这些声誉极差的低价顶级域名，否则可能被<a href="https://github.com/apache/spamassassin/blob/trunk/rulesrc/sandbox/pds/20_ntld.cf#L10-L30">默认拉黑</a>。）</p>
-<p>Catch-all 邮箱的支持情况和配置方法因服务商而异，一般在邮件服务商文档中以此为关键词搜索就能找到步骤，目前见过用户体验最好的是 Fastmail。不过，自定义域名邮箱服务需要额外成本，这里介绍一个更简单的方法：包括 <a href="https://developers.cloudflare.com/email-routing/">Cloudflare</a>、<a href="https://www.namecheap.com/support/knowledgebase/article.aspx/308/2214/how-to-set-up-free-email-forwarding/">Namecheap</a>、<a href="https://www.name.com/blog/how-to-get-a-free-forwarding-email-address-for-your-domain-name">Name.com</a>、<a href="https://www.namesilo.com/support/v2/articles/email/email-forwarding">NameSilo</a> 等在内的常见域名托管商都提供了免费的全局邮件转发服务（链接为各自文档），可以在无需配置完整收件服务的情况下，将发至你域名的所有邮件转发到一个指定地址。</p>
-<p>以 Cloudflare 为例，在控制台选择要配置的域名，从左侧选择 <i>Email</i> &gt; <i>Email Routing</i>，然后选择 <i>Add records and enable</i>，按提示添加相关 MX 记录。然后前往 <i>Routing rules</i>，选择 <i>Create address</i> 添加一个转发地址即可。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/21/3089c385e7c1d39277f984e0bb6c4daa.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>需要注意，这类邮件转发服务和其他域名邮箱服务是互斥的：如果同时配置，根据 MX 记录的机制，来件只会被发送到优先级更高的服务器，或者相同优先级中最先响应的服务器。如果手头没有多余的域名，用当前域名的一个子域名就行了。例如你一般用 <code>example.tld</code> 来收件，可以考虑留出 <code>srv.example.tld</code> 来注册服务。</p>
-<p>解决了收邮件的问题，剩下的问题是如何从自定义域名上的任意地址发邮件。诚然，从专门用来注册账号的邮箱发邮件是比较低频的需求，但在找售后、发工单等需要与商家沟通的场合还是有必要的，否则可能导致一些不必要的解释成本。可惜，包括 Cloudflare 在内的域名托管商一般都只支持收件，而不支持发件。</p>
-<p>这里还有必要做一点知识背景铺垫。当我们说一封邮件的发件地址时，一般是指写在邮件头部 <code>From</code> 字段中的地址，又称 P2 地址。收件客户端就是将这个地址显示在「发件人」一栏。除此之外还有一个 P1 地址，又称信封地址，由 SMTP 服务器在通讯时使用，起到邮件路由、服务器验证、退信接收等作用。不过，SMTP 协议并不关心这两个地址是否一致，也不关心它们与用来登录 SMTP 服务器的账户是否匹配；是否允许用户用不同地址发件，更多是邮件服务器层面的配置决策。诚然，常见场景下的「合理」选择是只允许用户从有权控制的地址发件，但也有需要允许这些地址彼此不匹配的例外。</p>
-<p>业务邮件投递（transactional email delivery）就是这样一个例外。在电子商务、客户服务等场景，经常需要从一些特殊地址向用户发送通知，或者将工单交付给特定客服处理，这都依赖于从任意地址发件的能力；业务邮件投递服务就是为此而生的。虽然这些服务主要针对 B 端，正式方案收费不低，但一般都会提供免费的测试额度，每天几十封到几百封不等，完全足够个人使用。</p>
                 ]]>
             </content:encoded>
         </item>
