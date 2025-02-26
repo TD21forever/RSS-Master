@@ -5,6 +5,440 @@
         <link>https://www.36kr.com/information/technology</link>
         
         <item>
+            <id>https://www.36kr.com/p/3183065387703683</id>
+            <title>何恺明开辟分形图像生成新范式，计算效率提高4000倍，首次实现高分辨率逐像素生成</title>
+            <link>https://www.36kr.com/p/3183065387703683</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3183065387703683</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 26 Feb 2025 08:11:53 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>何恺明再次开宗立派！开辟了生成模型的全新范式——</p>
+  <p><strong>分形生成模型</strong>&nbsp;Fractal Generative Models，首次使逐像素生成高分辨率图像成为可能，论文名字依旧延续以往的大道至简风格。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_33dcc5f9ae4f4e09831798d308c57197@46958_oswg83259oswg1080oswg501_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>团队将生成模型本身抽象为可复用的<strong>“原子模块”</strong>&nbsp;。</p>
+  <p>通过递归地在生成模型中调用这些原子生成模块，可以构建出一种自相似的分形架构。</p>
+  <p>其灵感源于数学中的分形思想。它相当于一个粗糙或零碎的几何形状分成数个部分，每一部分都（至少近似地）是整体缩小后的形状。即具有自相似的性质。</p>
+  <p>嗯，就是像俄罗斯套娃（Matryoshka）那样子。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_bb6106886fe34f159172fbf5c4989754@46958_oswg47509oswg786oswg224_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>By the way，「俄罗斯套娃」这个词已经被其他论文用过了，sad。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_03f6f9281f3a496b9901ecd9fb913f4b@46958_oswg53454oswg1080oswg431_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>团队提出用参数化的神经网络作为分形生成器，从数据中学习这种递归法则，实现对高维非序列数据的建模，也可用于材料、蛋白质等。</p>
+  <p>结果在「逐像素图像生成」这一任务中表现出色。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_54a139c9a2634338ab5d6a5583cde2be@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>看到这张图，不免让人想到此前何恺明的代表作之一掩码自编码器MAE。<strong>‍</strong></p>
+  <p>通过对输入图像的随机区块进行掩蔽，然后重建缺失的像素。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_09ff10abeaff405686c5a825578603df@46958_oswg353793oswg866oswg352_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>此次团队也结合MAE的成果探索了一些可能性。目前该成果代码已开源。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_b2b3f76b00bb4718a36f939999134c98@46958_oswg124990oswg1080oswg534_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>逐像素生成高分辨率图像</strong></h2>
+  <p>如何使用自回归模型作为分形生成器？</p>
+  <p>首先考虑到目标是对一大组随机变量的联合分布进行建模 ，直接使用单个自回归模型的计算量令人望而却步。</p>
+  <p>团队采取的关键策略是“分而治之”，将自回归模型抽象成一个模块化单元。</p>
+  <p>由于每个级别的生成器都可以从单个输入生成多个输出，因此分形框架可以在只需要线性数量的递归级别的情况下实现生成输出的指数级增长。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_1ed48b6a32fb465db1618a04c50edba1@46958_oswg56286oswg610oswg600_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>最终，在每个分形级别中，自回归模型接收来自前一个生成器的输出，将其与相应的图像块连接，并使用多个transformer模块为下一个生成器生成一组输出，逐步从图像块到像素细化生成过程。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_018d9b3b29f044be8be93fdc2ab77a4d@46958_oswg113919oswg714oswg772_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>之所以选择像素级图像生成这个任务，是由于原始图像数据具有高维度和复杂性，像素之间存在丰富的结构模式和相互依赖关系。</p>
+  <p>这类高维生成问题任务在逐个元素生成数据，但又与长序列建模不同，通常涉及非顺序数据，像分子结构、蛋白质、生物神经网络等数据也符合这个特点。</p>
+  <p>团队认为分型生成模型不仅是一个计算机视觉方法，还能展示分形方法在处理这类高维非顺序数据建模问题上的潜力，为其他数据领域的应用提供参考。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_9b8ebbedb106475e9d7bddd05394eff1@46958_oswg104241oswg676oswg382_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>不过还是来看看它在像素级图像上的表现：</p>
+  <p>首先是直观的视觉效果，在ImageNet 256x256数据集上，逐像素生成一张图需要1.29秒。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_d4ed0d3de4e14d20924aa7f829eaf37e@46958_oswg1205324oswg1080oswg794_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>测试指标方面，分形模型在ImageNet 64×64无条件生成上实现了3.14bits/dim的负对数似然，超越此前最佳的自回归模型。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_00cd78669aa3444f8f9d339d26f8c5fe@46958_oswg261860oswg716oswg1140_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在图像质量上，FractalMAR-H 模型达到6.15的FID和348.9的Inception Score。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_52e906cfe8f342f681ca1003c15491cb@46958_oswg33495oswg652oswg408_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>更值得关注的是，分形架构将计算效率提高到传统方法的4000倍，逐个像素生成高分辨率图像首次成为可能。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_6136d6702c394996af81126ebde6c69e@46958_oswg116740oswg688oswg406_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>团队还探索了将掩码重建与分形生成模型结合起来，实验发现也可以准确预测被掩蔽的像素。</p>
+  <p>此外，它可以有效地从类标签中捕获高级语义，并将其反映在预测的像素中，比如最后一列，把猫的脸替换成狗的脸，这些结果证明了该方法在已知条件下预测未知数据的有效性。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_64add26b346a47f4abb7386db76678da@46958_oswg563253oswg688oswg1046_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>最后附上更多生成结果样本。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_5a07c9be111b47b49a7032cce8b4a274@46958_oswg2002087oswg1080oswg1382_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>何恺明MIT天团，一作黎天鸿</strong></h2>
+  <p>此次成果是由MIT何恺明团队和谷歌DeepMind全华人班底完成，并由谷歌提供TPU、GPU资源支持。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_eba0c4a1d4044ee697a41fa5aad151cb@46958_oswg18218oswg1056oswg232_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>一作何恺明的学生<strong>黎天鸿</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_5efc2b6fd3b748e99371c92b6f6c48d0@46958_oswg642714oswg858oswg808_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>黎天鸿本科毕业于清华叉院姚班，在MIT获得了硕博学位之后，目前在何恺明组内从事博士后研究。</p>
+  <p>他的主要研究方向是表征学习、生成模型以及两者之间的协同作用。目标是构建能够理解人类感知之外的世界的智能视觉系统。</p>
+  <p>此前曾作为一作和何恺明开发了自条件图像生成框架RCG，团队最新的多项研究中他也都有参与。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_c3c80801a95b48e8ae312211b6efb102@46958_oswg157703oswg1080oswg469_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Qinyi Sun，目前MIT三年级本科生。</p>
+  <p>范丽杰，清华计算机系校友，去年博士毕业于MIT CSAIL，目前在谷歌DeepMind担任研究科学家，致力于生成模型和合成数据。</p>
+  <p>此前曾与黎天鸿共同参与过FLUID的研究——</p>
+  <p>一个可扩展的自回归文本转图像模型，无需VQ。10B参数模型实现SOTA性能。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_b7416d84b4174a44864f4ad7a3b7de4e@46958_oswg1262000oswg1080oswg1184_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>论文地址：</p>
+  <p>https://arxiv.org/abs/2502.17437v1</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/SK89sa0N7Hj-yr8lI1PD_w" rel="noopener noreferrer nofollow" target="_blank">“量子位”</a>，作者：白交 梦晨，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3182925292852614</id>
+            <title>宇树机器人「租赁神话」：日租近万元、40天「回本」、订单排到四月</title>
+            <link>https://www.36kr.com/p/3182925292852614</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3182925292852614</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 26 Feb 2025 07:31:54 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>近日，一则“小伙30多万买机器人对外租8000一天”的消息登上热搜。</p>
+  <p>事件主人公是来自湖南长沙的雷先生，他以31.9万元的价格订购了宇树科技旗下的人形机器人G1，后因出租爆火于网络。</p>
+  <p>雷先生告诉新浪科技，他是湖南地区首个个人订购并拿到产品的用户。几天时间，他发布的相关视频播放量已超过1000万。不少人对租赁这台机器人表示兴趣，其中既有学校希望用于教学科普，也有商家希望它为店铺引流，“目前租赁的档期已经排到4月份”。</p>
+  <p>若以此计算，近32万元的购买费用，雷先生只需要40天就“回本”了。</p>
+  <p>事实上，由于宇树科技机器人产品供不应求，订单等待时间长达90天以上，因此催生了一门新的生意——机器人租赁。众人追逐“新风口”享受乐趣，另有人借机发财，并戏称机器人是“天价打工人”。</p>
+  <h2><strong>“最后悔的是当时没有多预定几台”</strong></h2>
+  <p>谈及自己为什么会第一时间购买宇树科技机器人，雷先生表示，自己从小对这个机器人特别感兴趣，梦想有一个机器人，因此十分关注机器人的消息。去年，宇树机器人发布的一系列视频，自己第一时间下单，有幸成为首批预定客户，“等了两个月，最近才到货，我是在湖南个人订购里面，第一个拿到这个机器人的”。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_69eaa4c1fbb041c69cdd8f35ba22a147@1743780481_oswg612137oswg574oswg765_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>不过，雷先生也表示：“它（机器人）本身它的功能还是比较受限的，有一些基础的动作，包括起立、挥手、行走等等。所以目前可玩性还不是很高，它的功能还需要进一步开发。”</p>
+  <p>很快他发现，在发布几个视频后，很多人前来咨询，并有人提出了租赁的想法。“这些人还包括一些学校的老师，他们想租这个机器人，给学生做科学教育和科普。刚好他们买不到，所以我就想到了出租。这确实是一个商机，可以满足很多人”。</p>
+  <p>由于宇树机器人有很高的关注度，雷先生的机器人已经被预订到今年4月，目前这些天都没有档期。他表示，来租的客户除了给学生做科普外，一般多是展示用途，“因为现在机器人很火，大家都比较好奇，所以有些商家会来租赁，做一些流量上面的展示，吸引眼球”。</p>
+  <p>雷先生提到，目前宇树机器人起租价格是每天8000元，会根据地址以及具体时间，有所调整“有些时候可以租到1万多一天。不管是本地还是外地，要租这台机器人，都需要给再配一个操作师来帮忙控制”。</p>
+  <p>目前，他最后悔的是“当时没有多预定几台”。如今想要预定，至少要等两三个月时间。</p>
+  <h2><strong>手握机器人的商家在“狂欢”</strong></h2>
+  <p>在闲鱼等平台上，搜索宇树机器人、机器人出租等关键词，同样能看到不少租赁帖，官方甚至专门开了一个板块来展示相关内容。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_035659ac823b45c49efe02c8a0c096df@1743780481_oswg1006566oswg985oswg1013_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>其中也有一些浑水摸鱼的商家，直言“出租帖子只是先挂着，公司买来自己做研究，需要等以后才能租出去。”另外，还有商家提到，租金会随着租用日期变化，长期租用可以有一定程度的优惠。</p>
+  <p>值得注意的是，几乎所有的商家都在出租G1人形机器人。因为它的身高只有1.3米，体重70kg，可完成单腿跳跃、360度转身等高难度动作，更重要的是相比较于春晚台上的H1机器人昂贵的65万元售价，G1的起步价最低仅售129999元。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_996fa5fdfe664f28b96a52381621693b@1743780481_oswg269134oswg704oswg962_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>目前，在宇树科技京东官方店铺，其人形机器人G1 共有4个版本，包括G1标准版、G1 Edu标准版、G1 Edu进阶版和G1 Edu旗舰版，售价从129999元起，最贵的版本售价349000元，雷先生购买的则是售价319000元的G1 Edu进阶版。但是，目前京东平台下订之后需要等待至少90天才能交付，并且还需要用户全款预订。</p>
+  <p>此外，近期频频在宇树科技官方微博展示的不同视频中，G1机器人都是“主角”，不仅曾表演了川剧变脸，还可以同台跳舞、表演即兴舞蹈、表演武术等，肉眼可见其动作的灵活以及性能的优秀，也因此成为商家们争抢的对象。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_f656bb9b431947f6aaf88e1df718a17b@1743780481_oswg474206oswg1080oswg699_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>对于宇树科技机器人的这波“出租”商机，行业分析师张书乐表示，宇树机器人由于真正适用的场景并不明显，因此其未来前景需要加入诸如DeepSeek这样具有推理能力的人工智能大脑，才能实现更多场景的突破。随着更多购买者深耕场景，未来出租机器人将大有可为。</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/9r9W2uqhpjX0imd7v6SSSA" rel="noopener noreferrer nofollow" target="_blank">“新浪科技”</a>，作者：罗宁，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3183065104424582</id>
+            <title>谷歌发布最强「科研辅助神器」，能帮你提新idea，三大真实场景实证</title>
+            <link>https://www.36kr.com/p/3183065104424582</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3183065104424582</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 26 Feb 2025 07:25:44 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><strong>【导读】</strong>AI co-scientist系统基于Gemini 2.0开发，能够协助科研人员生成新的研究假设、制定实验方案，并通过自我改进提升结果质量。在生物医学应用中，AI co-scientist成功预测了药物再利用方向、提出新的治疗靶点，并解释了抗菌耐药机制。</p>
+  <p>在科学探索的过程中，研究人员需要对以往发表的文献进行观察总结，提出一些新颖、可行的研究方向，最后通过全面的实验进行idea验证。&nbsp;</p>
+  <p>科研人员需要对探索的宽度和深度进行平衡，由于精力有限，不能探索过多的研究方向，同时还要保证对目标主题的研究深度。</p>
+  <p>最近，谷歌、斯坦福大学等机构的研究人员开发了一个多智能体、基于Gemini 2.0的AI协同科研（AI co-scientist）系统，具备跨复杂主题的综合能力和进行长期规划、推理的能力，除了传统的文献综述、总结功能之外，还可以辅助科研人员提出新的、原创知识，或是基于先前的成果制定研究假设(hypotheses)和计划(proposal)。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_30d6b323283948a5b6dc23d95726fea9@46958_oswg114101oswg1080oswg546_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>论文链接：https://storage.googleapis.com/coscientist_paper/ai_coscientist.pdf</p>
+  <p>AI co-scientist系统的输入为一段用自然语言描述的研究目标，输出为全新的研究假设、详细的研究概述和实验方案。</p>
+  <p>根据科研活动本身的特性，开发者设计了多个专用智能体用来「生成、反思、排名、进化、邻近性检查、元审查（meta review）」，使用自动反馈信号来迭代生成、评估和改进假设，构成了一个自我修正、改进的循环机制，逐步生成质量更高、创新性更好的假设。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_96241fa8abcb413fb78922e675db9f42@46958_oswg398477oswg1080oswg516_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>系统的核心思路就是「协助科研」，所以开发者设计了多种方式让研究人员与系统进行互动，比如「直接提供种子想法」进行探索或是对生成的结果提供「自然语言反馈」。</p>
+  <p>系统还用到了外部工具，如网络搜索和专用AI模型，以增强生成假设的依据和质量。</p>
+  <p>AI co-scientist将分配的目标解析为研究计划配置，由监督智能体（supervisor agent）负责将专用智能体分配到工作队列并分配资源，使得系统能够灵活扩展计算能力，并迭代地提高其科学推理能力，以实现指定的研究目标。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_80d25499cb45429d9d0cb79a319dbef5@46958_oswg191823oswg1080oswg423_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>测试时计算（test-time compute）</strong></h2>
+  <p>AI co-scientist使用「测试时计算」技术来迭代推理、进化和改进输出，如进行自我对弈（self-play）科学辩论以生成新假设，对所有假设进行质量排名对比，或是不断进化假设等，可以让智能体不断进行自我批评，使用工具进行反馈以细化假设和提案。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_57cbcca96c0f41419f3c8a0aa07af8af@46958_oswg45021oswg1080oswg223_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>论文链接：https://arxiv.org/abs/2408.03314</p>
+  <p>系统的自我提升能力主要依赖于Elo自动评估指标，通过对模型的输出进行对比竞赛，最终可以得到一个Elo值，研究人员分析了Elo自动评级与GPQA中diamond set（有难度的问题集合）准确率的匹配度，结果发现Elo评级与输出质量呈正相关。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_5684302c666e40f493272dbd166d8fc2@46958_oswg147108oswg1080oswg699_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">AI co-scientist（蓝色线）和Gemini 2.0（红色线）的平均准确率对比，按Elo评级分组</p>
+  <p>七位领域专家在其专业领域内精心挑选了15个开放研究目标和最佳解决方案，使用自动化的Elo指标，结果发现AI co-scientist在复杂问题上的表现优于其他最先进的智能体和推理模型。</p>
+  <p>随着系统在推理和改进上花费更多时间，结果的自我评估质量提高，并超越了模型和无助的人类专家。</p>
+  <p>结果也验证了「使用从科学方法中归纳出的先验知识」进行「测试时计算」扩展的优势：系统在推理和改进上花费的时间越多，结果的自我评估质量越高，最终超越了其他模型和人类专家。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_d2ce68b5457a43e8b0ca751267e32b6e@46958_oswg179081oswg1080oswg707_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_97c5fb29732f4818853f90bea04c6841@46958_oswg185872oswg1080oswg707_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">AI co-scientist的性能会随着系统在计算上花费时间更多而逐步提高</p>
+  <p>在11个研究目标的小子集上，专家们评估了AI co-scientist生成结果相对于其他基线模型在新颖性（novelty）和影响潜力（impact）的总体偏好，虽然样本量较小，但专家们普遍认为AI co-scientist更受欢迎，与之前引入的Elo自动评估指标一致。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_cd0342a7261c4a64bfa6487bf2b21656@46958_oswg106724oswg1080oswg797_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_58e4c3f3034f497bbb84412b85ed40f7@46958_oswg99704oswg1080oswg797_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p><strong>真实场景应用</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_6d2756c66104447fbd299aa5e677eac0@46958_oswg58728oswg1080oswg363_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h3><strong>药物再利用治疗急性髓系白血病</strong></h3>
+  <p>药物研发是一个耗时且昂贵的流程，新的治疗方法需要重新启动发现和开发流程，以治疗不同的适应症或疾病。</p>
+  <p>药物再利用（drug repurposing）通过发现现有药物超出其原始预期用途的新治疗应用来克服该难题，但由于任务复杂，需要广泛的跨学科专业知识。</p>
+  <p>研究人员使用AI co-scientist来辅助预测潜在的药物再利用研究方向，模型提出了针对急性髓系白血病（AML）全新的、可再利用的候选药物，随后与合作团队通过计算生物学、专家临床医生反馈和体外实验验证了模型的预测结果，证实该药物在多个AML细胞系中，在临床相关浓度下能够抑制肿瘤活力。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_9aa95a80551647bd9ecd8927be6cbe59@46958_oswg27905oswg982oswg402_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">三种新型AI合科学家预测的 AML 再利用药物之一的有效剂量反应曲线；KIRA6在临床相关浓度下抑制KG-1（AML细胞系）的存活，能够在较低药物浓度下降低癌细胞存活，减少了脱靶副作用的可能性</p>
+  <h3><strong>推进肝纤维化目标发现</strong></h3>
+  <p>识别新型治疗靶点比药物再利用更复杂，通常会导致假设选择效率低下、体外及体内实验优先级排序不当。人工智能辅助靶点发现有助于简化实验验证过程，降低开发时间成本。</p>
+  <p>AI co-scientist通过识别基于临床前证据并具有显著抗纤维化活性的表观遗传学靶点（3D、多细胞组织培养，由人类细胞衍生并设计来模拟人类肝脏的结构和功能），展现了其在提出、排序和生成针对发现假设的假设和实验方案方面的潜力，相关报告即将与合作者斯坦福大学共同发布。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_f30b02890c874622b3d9fca56f05ea6f@46958_oswg77761oswg928oswg689_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">AI co-scientist建议的治疗方案与纤维化诱导剂（阴性对照）和抑制剂（阳性对照）的治疗效果对比</p>
+  <h3><strong>解释抗菌药物耐药机制</strong></h3>
+  <p>研究人员指示AI co-scientist探索小组内已经进行过新颖发现但尚未公开的课题，解释囊膜形成噬菌体诱导的染色体岛（cf-PICIs）如何在多种细菌物种中存在？</p>
+  <p>「微生物进化出的抵抗感染治疗药物的机制」涉及到理解基因转移（接合、转导和转化）的分子机制，以及推动抗菌药物耐药性（AMR）基因传播的生态和进化压力。</p>
+  <p>AI co-scientist系统独立提出，cf-PICIs 与多种噬菌体尾部相互作用以扩大宿主范围，在之前进行的实验中得到了验证，进一步说明AI co-scientist作为辅助技术的价值，能够利用数十年前的研究结果。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_362e46f7dcf74cda9117a880bb278869@46958_oswg299519oswg1080oswg564_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">AI co-scientist重新发现新型基因转移机制的时间线。蓝色：cf-PICI发现实验研究流程时间线。红色：AI co-scientist在没有先验知识的情况下发展和重现这些关键发现</p>
+  <p>参考资料：&nbsp;</p>
+  <p>https://research.google/blog/accelerating-scientific-breakthroughs-with-an-ai-co-scientist/&nbsp;</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/XQCM_wBfrKkMarWgbmzPSw" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，编辑：LRS&nbsp;，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3183064570453376</id>
+            <title>准确率达97%，澳大利亚团队新成果基于深度学习凭颅骨CT鉴定性别，赶超人类法医</title>
+            <link>https://www.36kr.com/p/3183064570453376</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3183064570453376</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 26 Feb 2025 07:24:45 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>针对遗骸性别鉴定，西澳大学、新南威尔士大学和印度尼西亚哈萨努丁大学的研究团队，提出了使用基于深度学习的自动化框架，以提升性别判断的准确性和减少偏见的影响。其测试了 3 种基于深度学习的网络配置，其中最准确的深度学习框架依据颅骨特征进行判断，分类准确率可达 97%，显著高于人类观察者的 82%。</p>
+  <p>近年来，随着几部悬疑、犯罪类题材的影视剧叫好卖座，一个充满神秘色彩的学科也被带到了观众面前——法医学。简单来说，法医学就如同隐藏于黑暗中寻求真相的「福尔摩斯」，它凭借专业的知识和先进的技术，通过解读遗骸、物证中的无声证言，能够做到识骨寻踪，为无数棘手案件提供侦破方向，可谓是保障司法公正的坚固基石，重要性自然不言而喻。</p>
+  <p>而在众多法医学的研究领域中，<strong>遗骸的性别鉴定又是极为重要的一环。</strong>当面对森森白骨时，以往的方法主要依赖于经验丰富的法医学家按照已发布的标准进行推测和评估，然而这些方法通常会受到主观因素的影响，难免使结果发生偏差。如今在计算机和深度学习技术大行其道的当下，如何借用科学之手，解决其受到的人类偏见的影响便成为一个新课题。</p>
+  <p>近期，澳大利亚西澳大学、新南威尔士大学和印度尼西亚哈萨努丁大学的团队，<strong>提出了使用基于深度学习的自动化框架，以提升性别判断的准确性，并减少了认知偏见的影响。</strong></p>
+  <p>该研究利用印度尼西亚一家医院的 200 次颅骨 CT 扫描，训练并测试了 3 种基于深度学习的网络配置，其中最准确的深度学习框架能够将性别和颅骨特征结合在一起进行判断，<strong>分类准确率可达 97%，显著高于人类观察者的 82%。</strong>该实验证实了深度学习框架在法医人类学中具有深度应用的潜力。</p>
+  <p>相关研究成果以「Deep learning versus human assessors: forensic sex estimation from three-dimensional computed tomography scans」为题，发表于学术期刊 Scientific Reports。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_008463587d034347b357d0324e40768f@46958_oswg36349oswg595oswg387_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h4><strong>论文地址：</strong>https://www.nature.com/articles/s41598-024-81718-y</h4>
+  <h4><strong>开源项目「awesome-ai4s」汇集了 200 余篇 AI4S 论文解读，并提供海量数据集与工具：</strong></h4>
+  <h4>https://github.com/hyperai/awesome-ai4s</h4>
+  <h2><strong>更进一步让 AI 「可信可用」</strong></h2>
+  <p>在法医人类学中，骨骼结构隐藏着诸多性别特征上的差异，特别是在颅骨中。<strong>现代法医实践中最流行的一种形态学颅骨性别鉴定方法是由 Phillip L. Walker 所提出的 5 个颅骨二态性特征（以下称为 Walker 特征），</strong>即观察男性和女性颅骨在颏隆凸 (mental eminence, MEN)、眉间 (glabella, GLA)、眶上缘 (supraorbital margin, SUP)、颈区 (nuchal crest, NUC) 和乳突 (mastoid process, MAS) 方面的差异。</p>
+  <p>比如研究中提到，男性的眉间通常较为突出、宽阔，可能有明显隆起或结节状；女性的眉间则较为平滑、纤细。男性的眼眶形状多为方形或长方形，四角锐利且整体更为硬朗；女性眼眶则更倾向于圆形，眼眶边缘过度自然、柔和，没有明显棱角。</p>
+  <p>不过，随着法医人类学活动的发展，该方法也出现了一些不适用的情况。<strong>一方面，</strong>该方法为代表的鉴别手段所分析得到的数据样本均来自于物理记录，即需要收集大量的物理骨骼才能得到足够的样本；<strong>另一方面，</strong>该方法的样本来自于生活在 19 世纪和 20 世纪的英、美及美洲原住民，这也导致研究对象在时间效力和空间效力上具有一定的局限性。</p>
+  <p>而虚拟人类学的出现为法医人类学实践提供了新出路。在数据集获取方面，不似 Walker 研究时采用的数据收集方式，临床数字成像技术如计算机断层扫描 (CT) 能够使研究人员获得足够多的骨骼数据集，相比物理骨骼的收集，通过临床成像记录的虚拟骨骼数据集无疑更容易建立。此外，随着 CT 在现代医学中的广泛使用，通过该手段得到的数据集也更能代表当代人群。</p>
+  <p>在分析处理方面，基于深度学习的技术也被应用于法医人类学当中，研究人员利用深度学习来处理大型数据集，构建评估骨骼性别的模型，以协助法医人类学家进行生物学评估。比如 Bewes 等人开发的 GoogleNet，将从头颅 CT 扫描的 2D 侧向图像进行 3D 重建，并据此进行骨骼性别鉴定，<strong>实现了男性 96% 和女性 94% 的分辨准确率。</strong></p>
+  <p>值得注意的是，虽然这些方法都已经取得长足进展，但以往基于深度学习的骨骼性别鉴定方法仍会存在一些挑战——<strong>全自动和可解释性。</strong></p>
+  <p>首先，一些研究依靠的是商业软件来去除周围的结构，并通过用经验值设定 Hounsfield Unit (HU) 阈值来提取头骨，这可能会受到软件可访问性、噪声、伪影、不需要的骨骼结构以及 HU 值可变性等问题的影响。</p>
+  <p>其次，与人类观察者识别颅骨特征不同，基于深度学习的网络通常被称为「黑匣子」，其中隐藏层通常难以被结构，因此也使得基于深度学习的网络存在着可解释性的限制。</p>
+  <h2><strong>多种设计造就超越人类的 AI 框架</strong></h2>
+  <p>在本次研究中，研究人员开发了一个全自动 AI 框架，使用颅骨 CT 扫描来进行法医学性别鉴定，同时通过 Walker 所提特征对模型进行检验。</p>
+  <p><strong>该 AI 框架由一个预处理阶段和一个性别分类网络组成。</strong>首先使用预训练的深度学习网络进行颅骨分割，随后不同的分类网络配置使用不同的输入组成进行训练，采用多任务学习来生成 Walker 特征分数并进行性别鉴定，或采用单任务学习来进行性别鉴定。具体网络设置如下图所示：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_039cd1f13a3d4da5877d5d08f87a31ce@46958_oswg8711oswg948oswg517_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">基于深度学习的网络配置及其相关输出</p>
+  <h4>*&nbsp;I 为预处理的 CT 图像；</h4>
+  <h4>*&nbsp;(I, S) 为双通道输入，包括预处理的 CT 图像和颅骨面罩；</h4>
+  <h4>* I∩S 表示单独的颅骨区域；</h4>
+  <h4>* N1 和 N2 采用组合损失函数，N3 采用二元交叉熵损失函数。</h4>
+  <p>3 种深度学习网络的变体 N1、N2 和 N3 基于 ResNet 构建，ResNet 由一个 Input Block 和 3 个 Residual Block 组成，包括 3D 卷积 (Conv3D)、批量归一化 (Batch Norm) 和修正线性单元 (rectified linear unit,ReLU) 激活层。Input Block 由 32 个滤波器组成，Residual Block 分别有 64、128 和 256 个滤波器。Conv3D 的内核大小为 3 x 3 x 3。如下图所示：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_f71628a594494f9395c56d6caa67e248@46958_oswg228068oswg1036oswg512_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">ResNet 主干网</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_c680c49f210b4bfab6dfc5b3ccde9db0@46958_oswg233982oswg1006oswg512_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">由 ResNet 主干网构建的 3 种网络架构变体 N1、N2、N3</p>
+  <p>所有网络均使用 Python v3.9 在 Torch 2.0 中实现，在具有 16GB RAM 的 NVIDIA Tesla P100 GPU 上进行训练。</p>
+  <p>本次研究中所使用的数据集来自于印度尼西亚瓦希丁・苏迪罗索多综合医院 (Dr Wahidin Sudirohusodo General Hospital, RSWS)，主要包含了 2020 年 1 月至 2022 年 8 月期间在该医院进行放射学检查的部分患者的多层 CT 扫描 (Multi-Silce CT, MSCT)，<strong>共计 200 张，其中女性 87 名，男性 113 名。</strong>数据集中的 166 张图像用于训练，34 张图像用于测试。</p>
+  <p>具体来看 3 种网络架构，N2 的多任务配置（在不同分支分别估计 Walker 的颅骨二形态特征分数和性别）在不同输入下实现了最高的 AUROC 和准确性，是性别鉴定最平衡的模型。当以颅骨区域作为输入时，<strong>N2 达到了最高 0.97 的准确率和 0.30 的最低对数损失。</strong></p>
+  <p>N1 的多任务配置（按顺序估计 Walker 的颅骨二形态特征分数，再估计性别）使用颅骨区域作为输入时，<strong>其准确率为 0.91，</strong>但在不同输入下的 AUROC 低于 N2 和 N3，且对数损失更高。</p>
+  <p>单任务网络 N3 （直接估计性别）在不同输入下的 AUROC 与 N2 相似，但当使用颅骨作为输入时，<strong>其准确率仅为 0.85，</strong>为所有网络中最低。具体结果如下图所示：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_705bc7244bca4518aa388f1edd85ba5e@46958_oswg15037oswg954oswg568_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">3种网络模型与人类观察者的性能指标</p>
+  <p>值得注意的是，当与人类观察者的表现相比较时，3 种基于深度学习的网络模型在性别分类方面都取得了比人类观察者更高的准确性。具体来看，<strong>N2 实现了 97% 最高的性别鉴定准确率，而人类观察者仅为 82%。</strong></p>
+  <p>为了提升网络决策过程的可解释性，研究团队采用梯度加权类激活映射 (Gradient-weighted class Activation Mapping, Grad-CAM) 来可视化网络识别的判别性颅骨区域。Grad-CAM 是一种用于解释卷积神经网络决策的方法，其关键思想是将输出类别的梯度与该层的输出相乘，然后取平均，得到一个「粗糙」的热力图，<strong>该热力图可以被放大并叠加到原始图像上，已显示模型在分类时最关注的区域。</strong>其优点是可用于任何卷积神经网络，无需进行结构修改或重新训练。</p>
+  <p>下图显示了使用头骨作为输入时，网络 N1 和 N2 的 Walker 特征分支中每个特征预测相关的 Grad-CAM 热图，其中 a、b、c、d、e 依次为 GLA、MAS、 MEN、 NUC、 SUP，热图特别突出了 GLA 和 NUC。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_a1c5651245244ea9b79ac3c06d165c10@46958_oswg378617oswg961oswg530_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>下图显示了使用头骨作为输入时，3 个网络的输出 Grad-CAM 热图。可以观察到，除 GLA 被激活外，颅骨周围的区域也被激活，尤其 N3 的热图更为明显。鉴于 CT 图像被预处理为统一的物理大小，<strong>这可能表明模型正在分析整个头骨的形态，</strong>也许是它的大小和形状，因为头骨的大小和形状是反应人类性别二态性的关键特征，男性头骨总体比女性会更大、更重。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_6fdaf317f7fc4150aba0b1eafd44821f@46958_oswg377583oswg640oswg789_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>总而言之，该实验通过证明基于深度学习的全自动 AI 框架在提高骨骼性别鉴定的准确性方面的有效性，证实了其相对于已开发的基础方法，具有明显更广泛的法医适用性。同时，该框架还有着超越人类观察者的潜力，挖掘了其辅助法医人类学更加智慧化、自动化的潜力。</p>
+  <p>另外 Grad-CAM 也表明了基于深度学习的网络模型在通过颅骨鉴定性别时可解释性。这些整合为法医人类学带来了更加标准化和客观的评估，减少了认知偏见和可变性的影响。</p>
+  <h2><strong>AI 开启法医人类学新篇章</strong></h2>
+  <p>事实上，关于通过 AI 赋能法医人类学中性别鉴定的研究并不在少数，无独有偶，Scientific Reports 上收录的相关论文便揭示了诸多突破性方法。</p>
+  <p>例如一篇题为「Sex estimation using skull silhouette images from postmortem computed tomography by deep learning」的研究，通过 CT 扫描获得二维剪影图像进行深度学习，通过增强颅骨的轮廓形状，然后以不同角度观察剪影图像和多数投票来进行性别判定。</p>
+  <h4><strong>论文地址：</strong>https://www.nature.com/articles/s41598-024-74703-y</h4>
+  <p>四川大学计算机学院、四川大学华西基础医学与法医学院合作开发的一种基于深度学习的颅面重建方法，成功从 CT 扫描的颅骨数据中自动复原出颅面图像。其中提到，研究团队突破颅面复原技术难点，开发了首个颅面重建人脸检索系统，该系统根据一个颅骨数据生成一系列不同年龄和性别但身份一致的复原人脸，消除了年龄甚至形变变化对身份识别的影响，从而提高识别的精度。</p>
+  <p>论文以「CR-GAN: Automatic craniofacial reconstruction for personal identification」为题，发表于模式识别领域顶级期刊 Pattern Recognition。</p>
+  <h4><strong>论文地址：</strong>https://www.sciencedirect.com/science/article/abs/pii/S0031320321005768</h4>
+  <p>当然，根据骨骼来鉴定性别并非只能依靠颅骨，正如前文所提，骨骼结构中隐藏诸多男女特征上的差异化信息，比如由于男女两性骨盆所担负的生理功能不同，骨盆在性别分辨方面具有十分明显差异化特征。根据这些特征，相关的基于深度学习鉴定性别的方法也在同步研究。</p>
+  <p>总而言之，AI 的普及为法医人类学中的性别鉴定问题提供了一个客观而可持续的解决方案，同时也让这个神秘而小众的领域从古老的鉴定方式中走了出来，逐渐像其他领域一样拥抱智慧化、自动化。</p>
+  <p><strong>参考资料：</strong></p>
+  <p>1.https://www.nature.com/articles/s41598-024-81718-y</p>
+  <p>2.https://www.csiro.au/en/news/All/News/2025/February/CSIRO-develops-AI-tool-for-rapid-identification-in-forensic-investigations</p>
+  <p>3.https://blog.csdn.net/qq_68308828/article/details/132663304</p>
+  <p>4.https://mp.weixin.qq.com/s/bpZCZMM5MJRShhZvI2fcsw</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/HeEFdpD5PQxTTDCVbP2c6A" rel="noopener noreferrer nofollow" target="_blank">“HyperAI超神经”</a>，作者：哇塞，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3183064875179395</id>
+            <title>阿里开源版Sora上线即屠榜，4070就能跑，免费商用</title>
+            <link>https://www.36kr.com/p/3183064875179395</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3183064875179395</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 26 Feb 2025 07:21:57 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>开源模型，还是得看杭州。</p>
+  <p>前脚发完QwQ-Max，阿里就在深夜开源了视频生成模型<strong>Wan 2.1</strong>，14B参数直接<strong>屠榜VBench</strong>，什么Sora、Gen-3通通不是它的对手。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_7b250416634240ca940ecf438fe5e19a@46958_oswg201694oswg1080oswg604_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>从官方Demo中看，复杂运动细节非常到位，<strong>5个人一起跳hip-hop也能做到动作同步</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_332b896a9324489f88238dc0d33d7ae8@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而且在静态图像生成中都还是老大难问题的<strong>文字</strong>，现在也被万相给攻克了。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_7d535e51cf75435dbf836247684dcba4@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>当然了，14B的参数量说大不大，但在个人消费级显卡上本地部署还是比较吃力的。</p>
+  <p>不过14B（支持分辨率720P）之外，还有一个1.3B的小号版本（支持分辨率480P），在一块<strong>4090上占用显存是8个多GB</strong>，消耗时间4分21秒。</p>
+  <p>如此观之，用12GB的<strong>4070，也是能带动的</strong>。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_5dda7593f47a4d9885a07269f644c632@46958_oswg356851oswg1080oswg442_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>同时阿里还上线了两个图生视频模型，都是14B但分为480P和720P两个版本。</p>
+  <p>四个模型全都是<strong>Apache 2.0</strong>，也就是免费商用。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_0319db37582f4dca97f9027a0cd65a23@46958_oswg77663oswg1080oswg226_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而且官方也放出计划表，AI创作者们非常喜欢的ComfyUI，之后也会集成。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_f78e7a0f18854d029cae683fe084b928@46958_oswg171424oswg1080oswg751_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>视频生成模型会写字了</strong></h2>
+  <p>目前可以玩到Wan 2.1的途径有很多，最简单的方法是通过通义万相自己的平台。</p>
+  <p>在平台里，1.3B和14B版本分别叫做极速版和专业版，每次消耗5个或3个“灵感值”（新用户默认有50个，还可通过签到等多种方式免费获得）。</p>
+  <p>不过由于热度实在太高，等待的时间也会比较长，甚至有时会出现“过于火爆”的情况。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_064b3afbeb554da2adc3837fc71110a2@46958_oswg42574oswg1080oswg162_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>动手能力稍强的话，可以根据官方的教程通过HuggingFace、魔搭社区或者本地等方式自行折腾，当然还有一些第三方平台也进行了跟进。</p>
+  <p>网友们也是玩出了各种花活，有人用它生成了《我的世界》风格的故事场景。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_d33432b3cd6c4b49a6d368e00b5af754@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">△</p>
+  <p>再看看官方案例，从效果维度上看，Wan 2.1最大的亮点，可能就是支持在视频中生成文字了。</p>
+  <p>而且不是生硬地加入，会根据文字所处位置的材质进行合理变化，以及随载体一同运动。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_8211f695fe5b43f8b7d3a62be2e05a87@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>当然相对文字来说更基础的动作细节，技术也同样过关。</p>
+  <p>让两个人跳一段华尔兹，多次转身前后人物形象依然保持一致，背景的转动也很自然。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_6b1f07781c094de6bf684c0de6218839@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>并且也更懂物理规律，一支箭射出后，弓弦的抖动刻画得非常到位。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_e641ae1d1c834d4ab1c981e77bfa7501@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>小狗切菜的过程当中，被切的西红柿也没有出现畸变。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_21511a7dd4a44c13ae6ed67aa880e325@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>还有像人从水面中探出头这种场景，不仅界面处处理得很好，带起的水也是从水流逐渐变化成水滴。</p>
+  <p>唯一的瑕疵之处是，头出来的时候人物的嘴是张着的。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_846478c43bc04650871bf8d742f7a86b@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>另外关于图像生视频，也有网友进行了体验，没用任何提示词就得到了这样的日漫风动画：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_d6a91a6861a647ff8c2f0be0cfc776d6@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">△</p>
+  <p>除了效果本身，1.3B版本8个多GB的低显存占用，对个人创作者来说也是一个极好的消息。</p>
+  <p>那么，Wan 2.1是如何实现又好又省的呢？</p>
+  <h2><strong>创新3D变异自动编码器</strong></h2>
+  <p>和主流的视频生成技术路线一样，Wan 2.1的主体采用了DiT（Diffusion Transformer）架构。</p>
+  <p>Wan利用T5编码器对输入的多语言文本进行编码，并在每个Transformer块内加入交叉注意力机制，将文本嵌入到模型架构中。</p>
+  <p>此外，Wan采用线性层和SiLU层来处理输入时间嵌入并分别预测六个调制参数。这样的MLP在所有Transformer块之间共享，每个块都学习一组不同的偏差。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_528ae82d2080404eb1238324eb427098@46958_oswg228311oswg1080oswg550_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>编码上，Wan采用了<strong>3D变异自动编码器</strong>，这是一种专门为视频生成设计的3D因果关系体系结构。</p>
+  <p>它<strong>在卷积模块中实现了特征缓存机制</strong>，并结合了多种策略来改善时空压缩，减少记忆使用情况并确保时间因果关系。</p>
+  <p>具体来说，由于视频序列帧数遵循1+T输入格式，因此Wan将视频分成1+T/4个块，与潜在特征的数量一致。</p>
+  <p>在处理输入视频序列时，该模型采用逐块策略，其中每个编码和解码操作仅处理与单个潜在表示相对应的视频块。</p>
+  <p>基于时间压缩比，每个处理块中的帧数最多限制为4，从而有效防止GPU内存溢出。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_68122fe54d0a4bf59a3448bac0bad7d9@46958_oswg164304oswg1080oswg331_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>实验结果表明，在单块A800上，Wan的VAE的重建速度比现有的SOTA方法快2.5倍。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_43e0425969d645bfae7268f1ab955f87@46958_oswg112744oswg1080oswg594_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>为了使模型扩展并提高训练效率，Wan对编码器采用FSDP模型切分与上下文并行性（CP）相结合的分布式策略；对于DiT模块则采用DP、FSDP、RingAttention、Ulysses混合的并行策略。</p>
+  <p>在推理阶段，为了使用多卡减少生成单个视频的延迟，还需要通过CP来进行分布式加速。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_49364814ef6d46d189c1da88c0eb40e2@46958_oswg30903oswg1080oswg253_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在14B版本的Wan上，2D上下文并行和FSDP并行策略，让DiT达到了几乎线性的加速。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_39ffa724b12d4619a013d0cc4e94bb2a@46958_oswg130856oswg1080oswg754_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>I2V部分 ，Wan引入了额外的条件图像作为第一帧来控制视频合成，用CLIP图像编码器从条件图像中提取特征表示。</p>
+  <p>具体而言，条件图像沿时间轴与零填充帧连接，形成指导帧。然后，这些指导帧由3D VAE压缩为条件潜在表示。</p>
+  <p>另外由于I2V DiT模型的输入通道比T2V模型多，因此I2V版本中还使用了额外的投影层，并用零值初始化。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_cb926a391b1e4bd58ff55d9406e615b0@46958_oswg225754oswg1080oswg465_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>之后阿里还会放出更详细的报告，对技术细节感兴趣的读者可以持续关注~</p>
+  <p>参考链接：https://mp.weixin.qq.com/s/SRj06E-VCSpCiQZqE0gpHAGitHub：https://github.com/Wan-Video/Wan2.1Hugging Face：https://huggingface.co/Wan-AI魔搭社区：https://www.modelscope.cn/models/Wan-AI</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/-BhVYPkza157KXpL4KG8-Q" rel="noopener noreferrer nofollow" target="_blank">“量子位”</a>，作者：克雷西，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3183071456025993</id>
+            <title>CEO锦囊·出海季：当跨境电商遇上DeepSeek，赚麻了？</title>
+            <link>https://www.36kr.com/p/3183071456025993</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3183071456025993</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 26 Feb 2025 06:34:57 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>DeepSeek爆火，不只是给人工智能领域带来极大的震撼，也在短时间内提高了大家使用 AI大模型的体验，甚至DeepSeek已经丝滑地应用到各行各业。当跨境电商遇上DeepSeek，AI如何彻底重构跨境电商的游戏规则？当AI开始接管选品、客服、库存甚至战略决策，跨境生意会迎来人力解放还是行业洗牌？普通人该如何抓住这波红利？</p>
+  <p>带着这些问题，36氪《CEO锦囊》邀请到了紫鸟浏览器合伙人、亚马逊亿级卖家大兵，以及清华大学人工智能方向博士后、ProBoost.ai 创始人/CEO李多全，跟我们一起聊聊：AI时代，如何走出一条成功的跨境电商之路。</p>
+  <p><strong>本次直播主要聚焦以下问题：</strong></p>
+  <ol>
+   <li>各种大模型已经在跨境中非常丝滑的用起来了，跨境生意门槛是在急速降低吗？</li>
+   <li>DeepSeek相比去年的GPT-4等模型，在跨境场景中的独特优势是什么？</li>
+   <li>选品在跨境电商中至关重要，Deepseek怎么帮助卖家实现爆款预测？</li>
+   <li>DeepSeek是怎么帮跨境卖家解决营销推广的痛点？</li>
+   <li>客服在跨境电商中同样重要，Deepseek等大模型真的能替代人工客服吗？</li>
+   <li>案例拆解：AI如何帮一家20人团队的跨境家居企业月省50万？</li>
+   <li>如何更改用Deepseek 做跨境电商，请分别总结出三条最为关键的锦囊妙计</li>
+  </ol>
+  <p><strong>以下为两位嘉宾和36氪的对谈，部分内容经过整理编辑：</strong></p>
+  <h2><strong>36氪：各种大模型已经在跨境中非常丝滑的用起来了，跨境生意门槛是在急速降低吗？</strong></h2>
+  <p><strong>李多全：</strong>第一个变化是我们作为普通用户的感受：现在使用搜索引擎的频率越来越低了。很多时候，我们在寻找问题答案或方法时，会通过大模型来获取和组织信息，这是一个非常明显的体感变化。</p>
+  <p>第二个变化是，我发现身边的跨境老板们几乎都在关注 DeepSeek。他们下载后都会来找我探讨它背后的实现逻辑以及与传统工具的差异。以前多数人对这些技术不太了解，也不太深入思考，但现在所有人都非常感兴趣。最近很多老板问我，能否帮他们打造公司专属的 AI 智能体，以提升运营效率、质量和盈利能力。大家的接受度和热情达到了前所未有的高度。</p>
+  <p><strong>大兵：</strong>我最近有一种强烈的感觉，特别是过完年后，觉得2025年将是新时代和旧时代的分界点。虽然AI在前两年已经很火热，但无论是中国的跨境卖家还是普通人，都感觉我们处于跟随的状态，而不是主战场。自从 DeepSeek出现后，我们感觉自己也成为了主战场的一部分。</p>
+  <p>这对跨境带来的变化有几点：</p>
+  <p>第一，我们可以更便捷地使用 DeepSeek，不再担心中文表达不被理解，它对中文的理解比其他模型更友好，降低了使用 AI 的心理门槛。</p>
+  <p>第二，跨境电商卖家在使用AI时，有些流程不是一家大模型公司就能单独改变的。例如，备货需要更多数据链支持来做决策，这部分场景应由 ERP公司融入AI 来提供给卖家使用。因此，卖家主要使用的是AI结合RPA 工具、飞书等，打造小型AI工具应用于业务中。在数据颗粒度维度上，目前的大模型对跨境电商数据的理解还不够实。例如，亚马逊的广告数据AI无法直接获取，只有通过API对接或下载数据后，AI才能感知问题并提供帮助。因此，做跨境电商不应焦虑，而应逐步梳理业务模型，明确哪些可以自己做，哪些可以交给第三方公司。我们应成为AI的驾驶者，而不是试图造一辆车。如何利用好 AI，是跨境电商需要长期思考的话题。</p>
+  <h2><strong>36氪：去年我们就聊过一期AI+跨境的主题，根据两位的经验和观察，DeepSeek相比去年的GPT-4等模型，在跨境场景中的独特优势是什么？</strong></h2>
+  <p><strong>大兵：</strong>DeepSeek只是大模型的一种，它的特点是思考过程会清晰地展示出来。但对于跨境电商来说，我们通常是多模型并行的。抛开民族情怀，我们会在不同模型之间选择最适合的工具。比如，做美国市场时，如果觉得DeepSeek在某些方面不足，我们会用ChatGPT来补充，这都是很正常的。这些大模型本身也在不断进化，接入成本并不高。因此，跨境电商的整体业态是多模型并用的，我们不会局限于单一工具。</p>
+  <p><strong>李多全：</strong>模型背后其实对数据的依赖性是很强的。我们在帮助客户时，也会将不同模型的能力组合起来，形成所谓的“agent”。举个例子，比如多模态内容的理解，像视频的理解，GPT-4 在这方面表现很好。即使视频中没有语音或字幕，它也能通过人物的动作理解内容。因此，我们在一些场景中会结合使用不同模型。</p>
+  <p>我举一个典型场景：在海外做内容时，我们会从社交平台上抓取一些表现好的广告素材。然后分析这些素材，找到视频中最吸引人的“黄金 3 秒”，或者哪些帧能引起观众的长时间停留，GPT在这方面非常擅长。基于这些帧，我们可以快速生成图片，再从图片生成视频。中国有两家公司在这方面做得很好，抖音和快手。比如抖音的“即梦AI”，可以从图片生成高质量的视频，非常强大。分析广告数据后，基于这些内容生成脚本或分镜头，这时 DeepSeek又显示出其优势。因此，我们需要理解不同模型的特点，将它们的优势结合起来解决问题。</p>
+  <h2><strong>36氪：选品在跨境电商中至关重要，Deepseek怎么帮助卖家实现爆款预测？</strong></h2>
+  <p><strong>大兵：</strong>DeepSeek在跨境电商选品中的应用，其实还是需要结合行业内的专业数据。比如我们在使用 DeepSeek选品时，可以结合亚马逊的专业软件 Keeper，它记录了所有ASIN的实时数据。将Keeper的数据与DeepSeek结合后，DeepSeek获取的数据会更准确、更及时。这时我们可以向DeepSeek 提问，比如你想选择夏季产品，可以问：“哪类产品适合？克重是多少？单价是多少？毛利率和销量如何？”问题问得越细，DeepSeek给出的决策建议就越精准，从而大大缩短选品时间。原来一天可能只能选 10 款产品，现在可以选 100 款。</p>
+  <p>另外，在做 Listing 时，原来需要调研图片如何设计才能更有吸引力、点击率更高。现在可以把不同平台的 Listing 交给DeepSeek 分析，并提出具体要求，比如第一张主图、第二张主图分别要达到什么效果，DeepSeek会给出建议。同时，你还可以输入关键词，DeepSeek 会帮你丝滑地嵌入 Listing 中。</p>
+  <p>但DeepSeek能帮我们赚钱吗？其实它只能在效率上帮我们找到更多机会。一旦进入实际运营阶段，大家都在用DeepSeek时，比拼的就是运营策略了，比如广告投入、决策能力等。所以做跨境电商时，评论区有人问如何快速赚钱，这种心态本身不可取。我们需要深入业务模型，让决策更高效、更准确，这样才能更快赚钱，而不是依赖工具直接帮我们赚钱。</p>
+  <p><strong>李多全：</strong>选品和品类规划是所有跨境商家的业务起点，也是老板最关注的。如果品类没规划好，团队辛苦一年可能也白做了，GMV和利润都起不来。大模型不仅能提高效率，还能帮我们做一些深度的分析，比如趋势预测。举个例子，可以把 TikTok、Instagram和亚马逊的数据喂给大模型，分析热门标签的增长情况。比如TikTok上某个家装标签的热度，结合亚马逊上的提及情况和用户反馈，可以帮助我们判断市场的成长性和竞争度。</p>
+  <p>此外，另一个场景是竞品监测。我们通常需要盯着竞争对手，但以前主要靠人工监测，现在通过数据抓取和大模型的能力，可以及时跟进竞品的动态，比如爆发力、好评和差评，及时预警，这对我们的创新或与竞争对手的竞争合作都非常有帮助。前提是我们需要有足够多的数据，包括社交媒体趋势标签、Google Trends 关键词以及竞品数据。结合这些数据，大模型可以帮助我们更好地规划品类和应对竞争。</p>
+  <h2><strong>36氪：营销推广也是跨境电商运营的关键环节之一，DeepSeek是怎么帮跨境卖家解决营销推广的痛点？</strong></h2>
+  <p><strong>李多全：</strong>从营销的角度来看，我们做的所有营销都是给别人看的，而不同国家的文化差异非常大，这是中国企业走向全球时面临的一个大问题。AI能告诉我们什么？能告诉我们最优秀的同行是怎么做的，比如传统的货架、电商listing，怎么写关键词？怎么写标题？因为AI非常擅长学习。社交媒体既是商品的传播，也文化的传播，怎么跟当地文化结合？这也是AI非常非常擅长的。</p>
+  <p>跨境的从业者流动性还挺大的，一个公司的平均水平能维持在80-85分，那这家公司是很有竞争力。新员工其实是有很长的适应期，这个期间他们产出的质量不太可控。但AI进来以后，刚才除了讲的更高阶、更文化的适配，非常重要的就是能把整个公司的平均拉到比较稳定的状态。比方说写listing、广告文案、视频内容、SEO的内容，能够达到行业比较高的水准上。这对一个跨境卖家来讲非常有价值，除了效率的提升，还能在整个公司的组织扩大过了以后，让整个公司的基本质量有保障，组织能力更依赖于人。</p>
+  <p>总的来讲，AI平权过后，能把一个公司的组织能力、专业度拉到比较高的稳定水位，这个非常非常重要。</p>
+  <p><strong>大兵：</strong>跨境电商的营销主要分为几类：</p>
+  <p><strong>平台型营销</strong>：在平台封闭环境下进行营销，比如亚马逊。AI可以帮助快速分析平台内部数据，提升效率。但由于平台规则限制（如首图、白底图等），AI 并不能让营销变得花样百出，而是在规则内优化。</p>
+  <p><strong>社交型营销</strong>：AI可以帮助批量生成图、视频和文字，快速响应热点，短时间内实现大规模曝光。没有AI，这种效果很难实现。此外，AI还能监控细分类目和全行业的社交动态，这也是人工难以完成的。</p>
+  <p><strong>搜索型营销</strong>：以独立站为主，涉及SEO 优化。AI可以提升文章输出质量，从而提升独立站的流量深度。SEO做得好，可以带来更多免费流量。</p>
+  <p>有人可能会说，效率提升后，大家效率都高了，等于没提升。但实际上，在新事物面前，总有一些懒人，而懒人占大多数。同样，在AI工具的运用上，最先用且用得好的人，虽然技术含量不高，但能获得信息差带来的流量红利。跨境电商的核心就是流量变现。</p>
+  <p>对于新事物，有些人会畏惧或焦虑，担心起个大早赶个晚集。实际上，AI会拔高整个行业的下限，但不会决定上限。即使你躺平，行业下限被抬高后，你也会受益。AI可能是未来十年、二十年的主旋律，像空气和水一样成为日常必需品。效率越高，信息差越明显，信息差的价值也越大。</p>
+  <h2><strong>36氪：客服在跨境电商中同样重要，Deepseek等大模型真的能替代人工客服吗？</strong></h2>
+  <p><strong>李多全：</strong>在创业之前，我负责过“大淘系”的客户服务体验。那时没有大模型，智能客服的能力有限，对人的意图理解不够强，经常出现答非所问的情况。多轮对话后，双方都不知道在聊什么。但现在有了大模型，参数和语料丰富度大幅提升，对意图和场景的理解能力显著增强，客服场景特别容易大模型发挥作用。</p>
+  <p>客服的核心是解决问题，这些问题通常分为两类：</p>
+  <p><strong>平台规则类问题</strong>：比如退货、换货、赔偿等，平台有明确的规则。</p>
+  <p><strong>公司售后规则类问题</strong>：比如维修、送配件等，公司也有明确的处理规则。</p>
+  <p>这些规则可以通过向量数据库建立，让大模型训练和理解，从而直接回答大部分问题。</p>
+  <p>客服场景可以分为三层：</p>
+  <p><strong>AI 直接回复</strong>：90%的问题可以通过大模型自动回复。</p>
+  <p><strong>AI 推荐解决方案</strong>：有些场景的问题它判断得不太准的时候，由人来解决。如已经有明确的售后服务规则问题，AI会把解决方案推给人，通过人的方式来提供服务。这部分占到剩下10%的95%。</p>
+  <p><strong>人工处理新场景</strong>：对于全新问题，AI会去识别这个场景原来没有出现过，然后路由到人工处理，并生成新的解决方案。这部分所占比例极其小。</p>
+  <p><strong>大兵：</strong>我对客服有一些不同见解。国外平台的购物流程通常是先购物，有问题再发邮件沟通，因此客服比例比国内低很多。在国内，有些买家会问“这件白色 T 恤是白的吗？”这种让人哭笑不得的问题。但在国外，这种问题很少，可能只有不到 1% ，而且多采用邮件沟通。所以跨境电商在客服上的压力并不大。</p>
+  <p>此外，跨境电商卖家不必自己开发智能客服系统，因为市场上已经有太多专业公司提供智能客服解决方案。无论是专业度还是边际成本，使用第三方服务都比自己开发更划算，卖家只需要选择合适的工具即可。</p>
+  <p>对于客服，最重要的是通过客服反馈分析产品的改进点，而不是单纯提高客服效率。因为客服量本身不大，效率提升的实际作用有限。国外的客服场景以文字为主，上下文明确，这对AI大模型来说非常容易处理。</p>
+  <h2><strong>36氪：案例拆解：AI如何帮一家20人团队的跨境家居企业月省50万？</strong></h2>
+  <p><strong>大兵：</strong>对于家居类企业，产品通常是大件，涉及美国的本地运输问题。</p>
+  <p>AI可以帮助判断每张订单的最合理运输方式，仅这一项一年节省的费用就不止50 万。此外，AI 还可以优化库存分布地点和运输方式的选择。家居产品的销售平台选择也很重要，美国有很多垂直类平台，AI可以帮助卖家在选品时接入更多平台，选出更流行的家具产品。</p>
+  <p><strong>李多全：</strong>20人的团队在跨境行业中不算小，尤其是家居品类。这一品类客单价较高，通常这类公司的人均年产出在70-100万美元之间，做得好的公司可以达到 1,000万美元，20人团队的销售额应该在1亿以上。</p>
+  <p>大老师提到的物流环节优化，确实能带来显著的成本节省。此外，AI 还可以提升人效，比如，图片和视频的制作，AI可以帮助节省1-2 个人的工作量。</p>
+  <p>另一个关键点是产品开发。传统方式下，开发一个产品需要三周左右的时间。要支持1亿的销售额，可能需要开发 50-100个产品，这需要3-4个人全职投入。通过 AI，1-2个人就能完成同样的工作，且质量不会差。仅从人效角度，AI可以帮助节省 3-4个人，按每人月薪 1 万计算，每月可节省不少。再加上物流和库存优化的节省，月省50万是可行的。</p>
+  <p>AI 只是工具，最终的选择和策略还是由人来决定。对于零起步的卖家，建议先从高效的环节入手，比如图片和视频制作、品类规划、VOC（客户声音）洞察等。这些领域 AI 已经非常成熟，先用起来，不需要一开始就问特别复杂的问题。</p>
+  <h2><strong>36氪：如何更改用Deepseek 做跨境电商，请分别总结出三条最为关键的锦囊妙计。</strong></h2>
+  <p><strong>李多全：</strong></p>
+  <p>第一点，大数据跟大模型结合起来。既有一个全局的扫描仪，又有一个看具体的显微镜，帮助公司做好这个品类规划、竞品监测和用户洞察。站在老板的角度，既有全局的扫描仪，也有局部的数据显微镜。</p>
+  <p>第二点，营销上更加规模化地生成很多高质量的内容。所有的从业者，无论是做货架、兴趣、独立站的，要拥抱大模型，要利用AI来帮我们做大量内容。无论是哪类型的电商，高质量的内容对我们来说都非常重要。</p>
+  <p>第三点，内部整合。企业经营的时候数据都是零散的，决策会比较随机。到一定规模的企业，有能力的话，要用AI来构建自己的运营大脑，就是把自己内部的运营数据、外部的市场跟竞争和跟供应链的协同等等这些数据打通，让自己公司的经营能够更加的立体，更加及时地实现数据驱动。总的来说，就是打造组织的AI经营大脑。</p>
+  <p><strong>大兵：</strong></p>
+  <p>第一点，企业多用年轻人。年轻人对新鲜事物的接受和学习能力更强，每一个时代都有每一个时代的红利，年轻人的AI红利已经到来。</p>
+  <p>第二点，要利用AI来做深业务，更加专注。我们的信息量会增大到一个无法想象的地步，你在争的时候，大家都会争。这个时候AI是可以帮助我们做深入思考的，深入思考是一种战略性。有时候A公司和B公司往往看起来表面没有什么差别，但是在战略性上做深远思考的这个公司是会盈于未来。</p>
+  <p>第三点，在解决 0-1这种问题上，我们应该用AI快速地进行放大。 在全球化的过程中，AI就可以跨越每个民族、语言、地域门槛，实现全球化就是本地化。</p>
+  <p><strong>更多精彩内容，可点击观看完整直播回放：</strong></p>
+  <p class="loading-entity">&amp;amp;nbsp;</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.36kr.com/p/3182915853440390</id>
             <title>“并购女王”刘晓丹入职百度，李彦宏在下一盘大棋</title>
             <link>https://www.36kr.com/p/3182915853440390</link>
@@ -1461,435 +1895,6 @@
   <p>目前，利源股份表示，已经采取措施积极回款。</p>
   <p>从电子产品到从事房地产，再从房地产到汽车零部件，张源的投资策略似乎总能踩中时代热门行业，利源股份能在张源手中扭亏、翻盘吗？</p>
   <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/Eegc1cM7xs9pj-tR1sn23A" rel="noopener noreferrer nofollow" target="_blank">“野马财经”</a>，作者：赵普，编辑：高岩，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3182748511573385</id>
-            <title>阿里自我重估进行时</title>
-            <link>https://www.36kr.com/p/3182748511573385</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3182748511573385</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 26 Feb 2025 01:42:17 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>2月25日，阿里巴巴推出QwQ-Max-Preview模型，这是一款基于AI基础大模型千问旗舰版Qwen2.5-Max的深度推理模型。</p>
-  <p>据官方介绍，QwQ-Max-Preview还是一个预览版本，正式版本将很快推出。同时，为了便于用户使用这一最新的推理模型，阿里巴巴还推出了qwen.ai域名，用户可直接访问登录。</p>
-  <p>阿里巴巴表示，Qwen2.5-Max以及最新的推理模型QwQ-Max都将开源，预计为开发者和企业在代码生成、多模态处理和复杂任务解决等方面提供推理能力。</p>
-  <p>阿里巴巴此次开源既包括模型本身，还涵盖了更小版本，如QwQ-32B等版本模型都可以部署在本地设备上。</p>
-  <p>阿里巴巴CEO吴泳铭在2月20日的2025财年第三财季（下称“2025Q3”，即自然年2024年第四季度）财报电话会上，重点提及上述推理模型。他介绍，截至1月底，通义千问的全球衍生模型突破9万个，在主流组织中排名第一。</p>
-  <p><strong>“未来三年，阿里巴巴将围绕AI这个战略核心，在AI基础设施、基础模型平台以及AI原生应用、现有业务的AI转型等三方面加大投入。”</strong>吴泳铭在电话会上表态。</p>
-  <p>四天后，阿里巴巴宣布，<strong>未来三年将投入超3800亿元，用于建设云和AI硬件基础设施，总额超过去十年总和。</strong></p>
-  <p>“AI将是一次几十年一遇的行业变革。”在吴泳铭看来，AI爆发远超预期，而国内科技产业方兴未艾，潜力巨大。为此，阿里巴巴将不遗余力加速云和AI硬件基础设施建设。</p>
-  <p>吴泳铭说，阿里巴巴集团在AI战略里面的首要目标是AGI（通用人工智能）的实现，这可能远远超过现在可见的任何一个应用场景。</p>
-  <h2><strong>AI收入狂飙六季后</strong></h2>
-  <p>2025Q3财报显示，阿里云外部商业化收入重回双位数增长，实现营收317.42亿元，同比增长13%；<strong>阿里云板块下的AI相关产品收入连续六个季度实现三位数同比增长。</strong></p>
-  <p>一年前，吴泳铭曾指出，阿里巴巴集团的最高优先级是让电商和云计算两大核心业务重燃增长动力。从2025Q3财报数据看，阿里云的营收增速较上一季度的7%近乎翻倍。摩根士丹利在研报中用“低估”形容其市场表现。</p>
-  <p>目前，国内外多家科技巨头在加码AI基础设施建设，比如：亚马逊预计2025年支出超1000亿美元投资AI基础设施建设，微软计划在2025财年投入800亿美元建设AI数据中心；国内包括字节跳动、腾讯在内，在AI基础设施建设方面投资动辄超千亿元。</p>
-  <p>阿里巴巴超3800亿元的投资规模，创下中国民营企业在云和AI硬件基础设施建设领域的最大规模纪录。<strong>摩根士丹利分析，阿里巴巴的这笔资本开支将大幅增强其在云计算市场的竞争力，云业务收入有望在三年内翻倍。</strong></p>
-  <p>2月中旬，阿里巴巴集团董事会主席蔡崇信确认苹果公司已选择与阿里巴巴合作，基于通义千问大模型集成至苹果iPhone在中国提供AI服务。</p>
-  <p>咨询机构Counterpoint Reserach分析，苹果通过接入通义千问系列大模型的API，让Apple Intelligene实现中文语境下的服务优化，阿里巴巴也将借助苹果在华2.5亿活跃设备，让通义千问的用户数量级得到提升。</p>
-  <p>基于AI相关的服务合作，阿里云也将作为云服务商，为苹果提供定制化的云与AI基础设施服务，受牵手苹果公司效应影响，阿里云或能吸引更多B端客户，增强其在全球云计算市场的竞争力。</p>
-  <p>Wind数据显示，2025年以来，阿里巴巴港股股价涨幅接近70%，创近三年新高，股价高点曾达140.9港元/股。</p>
-  <p>市场普遍认为，阿里巴巴今年的股价增势受益于AI。</p>
-  <h2><strong>重估阿里进行时</strong></h2>
-  <p>在2月20日晚的财报电话会上，一众分析师的问题围绕AI展开，无一问及电商这一核心业务。</p>
-  <p>招商证券商业互联网行业首席分析师丁浙川接受经济观察网采访时称，除了阿里巴巴的科技业务，电商业务的超预期表现也提升着估值修复空间。</p>
-  <p>核心电商业务中代表国内零售的淘天集团，在2025Q3营收为1360.91亿元，同比增长5%，上一季度仅同比微增1%。其中值得关注的指标客户管理收入（CMR)，在2025Q3突破千亿元大关，同比增速9%。</p>
-  <p>过去很长一段时间，受拼多多以及新式电商平台抖音的影响，电商行业竞争加剧。丁浙川在研报中指出，阿里巴巴电商主业的货币化率提升，进一步让确定性增强，伴随基本面改善，电商估值也在整体提升。</p>
-  <p>2025Q3财报还预计，阿里巴巴国际数字商业集团（AIDC）将在下个财年实现首个盈利季度。此前担任AIDC总裁的蒋凡已于2024年末调任阿里巴巴电商事业群CEO，由他统一管理国内、国际两大电商业务。</p>
-  <p>履新三个月后，蒋凡现身2025Q3财报电话会称，国际业务的盈利路径清晰，只是很难预判其比国内业务能盈利更多。</p>
-  <p>自2020年被调任负责海外电商板块后，蒋凡逐步将国际电商业务发展为阿里增速最快的业务，2025Q3财报显示，国际电商业务同比增长32%。</p>
-  <p>同期，淘天集团则承受着巨大的增长压力，期间不仅引得阿里巴巴创始人马云为其变革指出方向——回归淘宝、回归用户、回归互联网，吴泳铭也在2024年上任淘天集团CEO，明确了“用户为先”的目标。</p>
-  <p>春节假期过后，阿里电商事业群一开工，蒋凡便确定2025年的最高优先级战略是“增长”。在蒋凡看来，淘宝已经成功接入更多用户的支付渠道，这让国内电商领域展现出巨大的用户增长潜力，他也强调要在用户端进行持续投资。</p>
-  <p>其实，阿里巴巴自我重估，重金投入云与AI相关业务，与核心电商突出要回归用户一脉相承。</p>
-  <p>厘清新技术周期的机遇与自身的业务布局重心后，<strong>除了科技业务，吴泳铭还指出，阿里巴巴要继续专注国内外电商业务以及互联网平台产品。</strong></p>
-  <p>“AI技术升级将带来用户价值的巨大提升机会，阿里将运用AI技术深度改造升级电商和其他互联网平台业务。”在吴泳铭上述表态前，阿里巴巴早就展开一系列动作，重点发力“AI To C”。</p>
-  <p>2024年末，阿里巴巴将通义App团队从阿里云分拆至阿里智能信息事业群，在AI战略布局上采取To B、To C“两条腿”走路。</p>
-  <p>一位阿里智能信息事业群人士告诉记者，通义App会同事业群下的AI产品夸克、天猫精灵等落地更多应用创新，共同挖掘C端市场用户，而事业群下的四大创新业务夸克、闲鱼、钉钉、1688，也将和通义千问大模型进行更为深度的协作，实现AI化改造和升级。</p>
-  <p>阿里巴巴管理层还透露，集团内部也在推动像高德这样的应用，在生活领域实现AI化改造，从而提升用户市场。</p>
-  <p>在吴泳铭看来，像高德这样一款日活跃用户超1.7亿的导航工具，有机会通过AI技术的应用，成为生活服务的入口。</p>
-  <p>经历变革、调整之后的阿里巴巴，除了更加聚焦核心业务，也在积极地退出非核心资产与投资。</p>
-  <p>阿里巴巴集团CFO徐宏指出，阿里巴巴在2025Q3先后退出大润发、银泰百货的交易，预计在2025年上半年完成，而对盒马，目前没有出售计划，还将采取开放心态，引进战略投资者等。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/sDDt97j1-VeWoqOIej-zlQ" rel="noopener noreferrer nofollow" target="_blank">“经济观察报”</a>，作者：钱玉娟，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3182746975982978</id>
-            <title>重注5000亿美元，苹果要自己造芯片，特朗普亲自感谢</title>
-            <link>https://www.36kr.com/p/3182746975982978</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3182746975982978</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 26 Feb 2025 01:42:01 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>25日，知名分析师郭明錤发文表示，苹果计划在德克萨斯州休斯顿建立一家芯片工厂，用于生产配备高性能M5芯片的AI服务器，并且为“Apple Intelligence（苹果智能）”提供帮助。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_b3ca40e20d6a418c905ed4002c46c07c@1743780481_oswg92724oswg1080oswg567_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>有报道称，这家工厂将与富士康进行合作。此前富士康已经在休斯敦建成了工厂，去年又为新项目购买了土地。在新工厂投产后，这些服务器将配备由台积电生产的高端M5芯片。</p>
-  <p>而这些芯片很有可能就是由美国本土的台积电晶圆厂生产——在3年前的凤凰城台积电晶圆厂装机庆典上，台积电高调宣布位于美国的第二家晶圆厂将生产更先进的3nm工艺，时间节点也跟苹果芯片工厂的投产时间非常吻合。</p>
-  <p>那天，拜登激动地当场宣告：“美国制造业回来了。”</p>
-  <p>美国本土生产的AI服务器用上美国本土生产的高端芯片，这听上去就噱头满满。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_1faab85da521452582a43df6ce82a3d3@1743780481_oswg227936oswg441oswg603_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>苹果重注5000亿</strong></h2>
-  <p>自特朗普赢下总统大选后，美国的科技巨头们集体开始疯狂投资计划，苹果自然也不例外。</p>
-  <p>除了开头提到的工厂以外，在苹果创始人乔布斯诞辰70周年之际，这家科技巨头宣布未来4年在本土投资5000亿美元,预计将新增约2万个就业岗位，24家工厂。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_c2271dffa5664c1f9574b0a37050a5fb@1743780481_oswg122719oswg606oswg618_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>另外，苹果还计划在密歇根州设立一所学院，用培养下一代美国制造业人才，以及增加其在美国的研发投资，以支持芯片等前沿领域的发展。</p>
-  <p>最后，在研发和内容创作方面，这笔巨额投资还可能包括对研发、数据中心、供应链支持、培训以及为Apple TV+服务制作原创内容（电影和节目）等方面的支出。</p>
-  <p>库克表示：我们对美国创新的未来充满信心，很自豪能通过这笔5000亿美元的承诺，巩固我们在美国长期以来的投资。从增加一倍先进制造基金，到在德州建设先进技术工厂，我们很高兴能扩大对美国制造业的支持。</p>
-  <p>简单来说，这笔巨额投资可以看作是特朗普“美国制造”政策的积极回应，同时也反应了苹果在AI领域的决心。</p>
-  <h2><strong>半躲不过政治的“算盘”</strong></h2>
-  <p>事实上就在一周前，特朗普在海湖庄园接受采访时透露，计划对进口汽车、半导体和药品加征约25%的关税，具体政策最早将于4月2日正式宣布。</p>
-  <p>此时苹果推出巨额投资计划，显然就是对特朗普政策的回应。</p>
-  <p>这并非苹果第一次“配合演出”。早在特朗普的第一个任期内，苹果就承诺五年内投资3500亿美元，从而避免了iPhone关税。</p>
-  <p>如今，面对新一轮贸易压力，苹果再次选择“用钱开路”，这当然也是希望换取政策豁免，同时换来“美国制造”的标签。</p>
-  <p>换个角度来说，目前美国半导体进口额占比超30%，而对于苹果这种依赖供应链的企业来说，芯片成本的上涨更是敏感。</p>
-  <p>提前做好计划让供应链迁回美国本土，不仅更利于长期的发展，也能让投资者保持信心。</p>
-  <p>有趣的是，在消息公布后，苹果美股盘前一度跌超1%（盘后上涨）。</p>
-  <p>显然有台积电美国工厂以及英特尔美国工厂的例子在前，投资者们也在担心5000亿美元的投资是否会拖累利润率等关键指标。</p>
-  <p>这场既要迎合政治，又要布局未来的巨额投资，现在来看也算得上是一次“豪赌”。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/sPSlIHhNB88ut26EdXhDmw" rel="noopener noreferrer nofollow" target="_blank">“镁客网”</a>，作者：jh，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3182085037148544</id>
-            <title>2月27日发，小米新品一箩筐：人车家生态落地，高端化成了？</title>
-            <link>https://www.36kr.com/p/3182085037148544</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3182085037148544</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 26 Feb 2025 01:39:47 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>不久前，小米宣布将在2月27日举行小米15 Ultra暨小米SU7 Ultra新品发布会。</p>
-  <p>卢伟冰还在微博动态当中调侃道：彩排完，又删了一轮PPT。小米上半年的新品出了名的多，毕竟除了关注度比较高的手机、汽车，IoT和智能家电也会迎来一波大更新。<strong>以前都说一年一度的苹果发布会是“科技春晚”，现在看来这个名号要易主了。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_54f73aa2e92248b4b0cf974328f925f5@1547419282_oswg58911oswg1351oswg433_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图片来自微博）</p>
-  <p>近些天，无论是中央空调，还是小米15 Ultra和SU7 Ultra，相关的讨论有很多，小雷发现，<strong>批判小米高端的声音其实已经明显变少，虽然不打极致性价比牌，但冲击高端的小米也保留了性价比时代的那份实在。</strong></p>
-  <p>高端产品逐渐成为小米新品发布会的主要角色，其影响力也在不断扩大，这波新品能够帮助小米站上高端市场的新高度吗？</p>
-  <h2><strong>小米15 Ultra：长焦夜景迎来“夜神”时代</strong></h2>
-  <p>这两天小米和OPPO两家高管的发言引起了不小的争论，原因在于小米15 Ultra内部代号为“夜神”，卢伟冰对它的预期也不低，表示它是“夜拍之神”，另一边OPPO周意保也将OPPO Find X8 Ultra冠以“夜神”的标签，一时间网友们为了“真假夜神”吵得不可开交。</p>
-  <p>专业相机圈子里被冠以“夜神”称号的镜头，都是光学素质顶级的产品，如徕卡Noctilux-M系列、尼康Nikkor Z。<strong>手机厂商集体用“夜神”做营销，想必也是为了突出影像旗舰光学硬件层面的领先。</strong></p>
-  <p>小米15 Ultra的影像方案的确是最大的看点，除了一英寸型主摄，这次还加入了2亿像素超大底潜望镜方案，原生等效焦段为100mm。小雷曾在爆料汇总当中提到，大底高像素在进光量和解析力有显著的光学优势，<strong>尤其是在光线弱的夜间场景，比传统的高倍率小底方案有更强的表现力，这两年有许多影像旗舰转向2亿像素潜望镜方案，不难看出背后的原因。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_ba546ff50c97498f99e6f59107fb1d83@1547419282_oswg787361oswg1091oswg1181_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图片来自小米）</p>
-  <p>此次官宣当中出现的小米15 Ultra恰好是此前曝光的设计，还是独特的素皮+玻璃拼接的配色方案，致敬经典相机外形，也做出了辨识度。作为2025年首款中国品牌的Ultra旗舰，目前来看小米的竞争优势很大。</p>
-  <p>不过市场肯定不会只关心产品力，价格更是销量的驱动因素。不过雷军在此前的问答当中透露，<strong>上一代小米14 Ultra的定价为6499元，这一年来研发成本，元器件成本越来越高。从盈亏角度上来说，一定需要涨价。</strong></p>
-  <p>也就是说，小米15 Ultra有一定涨价的概率，就看发布会现场有没有“连夜说服高管”了。</p>
-  <h2><strong>小米Buds 5 Pro：4000元内TWS王者？</strong></h2>
-  <p>并非只有小米手机在冲击高端市场，可以说小米将性价比这个“包袱”交给REDMI之后，整个品牌的产品调性都在往高处走，Ultra级的手机只是其中一部分，也包括周边的IoT产品。</p>
-  <p>一同官宣的还有小米最高端的耳机产品Buds 5 Pro，这次官方没有释放具体的配置信息，不过根据一些爆料消息来看，<strong>小米Buds 5 Pro会比上一代小米Buds 4 Pro强很多，稳定性、声音表现力、硬件单元和音频协议方面有显著升级，调音还有Harman AudioEFX加持。</strong></p>
-  <p>从官方释出的金色和白色两款来看，整体设计还是延续之前的蚌式开盖方案，金色在视觉上更有高亮金属的质感，而白色还有金线点缀，比较显贵气。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_9400487e02e24ea6aa7993b21ff7df1e@1547419282_oswg235342oswg1280oswg1280_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图片来自小米）</p>
-  <p>小米内部对Buds 5 Pro的预期似乎也不是一般的高，卢伟冰表示这将是4000元内音质最好的耳机，还不带任何限定词。<strong>一开始小雷还以为有多打一个“0”的嫌疑，但小米Buds 4 Pro的起售价为999元，不至于“以上犯下”，所以可以看出小米对Buds 5 Pro会有相当的自信。</strong></p>
-  <p>考虑到超级小爱等多设备互联特性的出现，用户对生态的考量应该会越来越多，但不代表他们会忽略音质、稳定性、音频协议支持等方面，敢于越级对标是勇气，“疗效”到位才是市场支持的根本。</p>
-  <h2><strong>SU7 Ultra：小米汽车的“超豪华”升级</strong></h2>
-  <p>2月27日，雷军也会去到小米发布会的现场，但应该不是给大家讲手机，而是汽车了。汽车圈最为期待的小米SU7 Ultra也会在此次发布会正式上市，这将是小米集团旗下最贵的产品。</p>
-  <p>小米SU7 Ultra的参数和能力有目共睹，<strong>搭载两台V8s电机和一台V6s电机，最大马力1548ps，最高车速可达350km；配备宁德时代第二代麒麟赛用高功率电池包，容量为93.7kWh，电量从10%充至80%只要12分钟。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_59786e4a9f3a431c98e7adca542fb051@1547419282_oswg3448874oswg1721oswg944_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图片来自小米）</p>
-  <p>为了更符合赛道驾驶，SU7 Ultra还配备了碳陶瓷刹车盘、闭式双腔空气弹簧、前六活塞后四活塞Akebono制动卡钳，还有主动可调扩散器、碳纤维尾翼以及U形风刀等赛用套件。</p>
-  <p><strong>此前雷军公布过小米SU7 Ultra的预售价为81.49万元，预售开启10分钟，便获得超3680份小订订单，内部的年销量预期为10000辆。</strong></p>
-  <p>SU7 Ultra的定位必然不是为了走量，更多是为了塑造雷军所说的属于国产车的“超豪华”格局，近期不断征服赛道刷新记录，甚至在上赛中超越了保时捷Taycan Turbo GT创下的赛道记录，话题量不是一般的大。<strong>不过以小米的影响力，的确有重塑超豪华汽车格局的能力，就看最终的售价是多少了。</strong></p>
-  <p><strong>小雷觉得，年销量10000辆这个目标还是有点保守。</strong></p>
-  <h2><strong>米家中央空调Pro：价格屠夫出手了</strong></h2>
-  <p>小米的另外一个核心竞争力，小雷认为是米家。小米从小家电做起，不断积累技术、市场经验，直到今天全线家电产品冲击高端市场，可以说是一步一个脚印。</p>
-  <p>中央空调是小米高端家电的又一个“第一次”，而且是空调当中技术密度最高、品控等级最严苛、服务体系最完善的品类。<strong>小米踏足中央空调，正好说明小米智能家电的售后体系、技术水平都上升到了一个新的层次。</strong></p>
-  <p>卢伟冰表示，小米首款中央空调将会对标行业的标杆大金空调，解决了中央空调冬季制热性能差的品类痛点，并在节能技术节能体验、生态互联能力上做到“绝对领先”。而根据小米集团大家电的家中空调负责人吴庆壮的说法，米家中央空调Pro会采用单风扇、双风轮进风的设计，面积更大，效率更高，主打高效运行。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_0c6f3fa581754f9e97f4aeb1b180609e@1547419282_oswg1720372oswg1357oswg1280_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图片来自小米）</p>
-  <p>小米商城显示，米家中央空调Pro一共有一拖三、一拖四、一拖五、一拖六 四个版本，均有超一级能效，<strong>小雷之前在京东App国补页面当中发现，米家中央空调Pro的定价为23999元，对比同级别的产品，小米似乎还拿出了一个很劲爆的价格。</strong></p>
-  <p>不过中央空调的在空调品类中十分特殊，是属于前装产品，一般在新房装修时安装，主要面向B端，小米的智能家电一直以来都只卖给个人消费者，B端市场经验似乎不是很丰富，但既然有自信踏足新领域，对标行业最强品牌和产品，想必不是空口说大话。</p>
-  <h2><strong>REDMI Book Pro 2025：主打满配的AIPC</strong></h2>
-  <p>一同进入官宣队列的还有米系的新笔记本，不过是在REDMI品牌下的。</p>
-  <p>小米首款AI专业办公笔记本REDMI Book Pro 16 2025将在2月27日发布，主打满配硬件。根据官方释放的消息，<strong>REDMI Book Pro 16 2025首批搭载第二代英特尔酷睿Ultra处理器，AI算力达到96TOPS，整机散热系数较上代提升34.4%。同时，电池、屏幕等核心配置全线拉满。</strong></p>
-  <p>Ultra级别的处理器，REDMI Book Pro 16 2025同样“Ultra”，小米笔记本官方如此形同新机。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_92773a67a22346a9838e89d8162905ad@1547419282_oswg1121069oswg1352oswg1028_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图片来自小米）</p>
-  <p>软件上，REDMI Book Pro 16 2025会首发小米AIPC引擎，支持苹果设备文件互传。AI和“果化”并不局限于智能手机、平板电脑等产品，笔记本作为办公产品，AI创造的需求越来越多，AI方面的计算需求不断膨胀，<strong>于是，AI算力变成了如今衡量AIPC的金指标，由此也可以预测，小米的AIPC引擎会附带一个用于本地部署的小模型，支持一定的离线AI生成需求。</strong></p>
-  <p>苹果文件的互传和兼容，在生态互通方面也有重大意义，尤其是在办公场景，文档格式的相互兼容和转换，<strong>意味着更高的文件传递效率和生产效率。REDMI笔记本也是性价比的体现，估计售价会有惊喜。</strong></p>
-  <p>只可惜，小米品牌的笔记本已经有段时间没有更新了，小雷很希望在未来的某个节点看到小米笔记本重出江湖。</p>
-  <h2><strong>一步一个脚印，小米高端化终于成气候了</strong></h2>
-  <p>除了以上这些已经官宣的产品，有传闻称小米发布会现场的新品还不止这些，超级小爱音箱、变频除湿机、洗烘套装洗衣机Pro、双系统冰箱Pro都可能会发布。但考虑到官方没有对这一系列新品官宣，小雷就先不一一列举了。</p>
-  <p>此外，小米还透露大家电产品的命名方式将会逐渐统一，按照标准版、Pro、Ultra区分低中高三个定位，产品的规划也会更加细致。之前为了产品覆盖，小米大家电的产品还比较混乱，命名复杂，<strong>想要在一堆产品中找到自己想要的，并没有那么容易。顺着这个产品命名的逻辑去猜测，小米下一波高端大家电的布局，应该会采用最高的“Ultra”级别的命名。</strong></p>
-  <p>不断的产品调整，推陈和出新，其实还都是小米品牌站上高端市场的举措，品牌高端化一方面要在产品和技术方面做加法，另一方面，产品线的构成则需要做减法，理清不同定位的产品之间的差异，用简单的命名统一规范，更有利于形成市场认知。</p>
-  <p>小米冲击高端，手机的产品线做了有效精简精简，“青春版”“Lite”等后缀产品慢慢放弃，<strong>数字系列标准版、Pro、Ultra划分清晰，Civi主打轻薄、年轻和时尚，极致性价比则交给REDMI品牌。大家电、汽车等生态产品，无外乎也是遵循着这种思路。</strong></p>
-  <p>正如小雷前面所说，小米的高端化其实就是一步一个脚印，早期投放大量产品“大浪淘沙”，随着品牌定位不断升级，<strong>哪些产品应该“断舍离”，哪些产品应该保留并精尽，小米已经有了一套自己的方法论，也证明了一件事，高端品牌不一定要名字听起来高端。</strong></p>
-  <p>接下来小米15 Ultra和SU7 Ultra两款产品会在各自的领域当中发光发热，首款中央空调也有可能给传统的中央空调市场注入新活力。雷科技也将会在第一时间跟进2月27日的新品发布会，给大家带来新品的发布信息。</p>
-  <p>本文来自“雷科技”，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3182078900654212</id>
-            <title>Claude发布全球首款混合推理模型，这会是AI的新标准？</title>
-            <link>https://www.36kr.com/p/3182078900654212</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3182078900654212</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 26 Feb 2025 01:39:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>北京时间 2 月 25 日，Anthropic 最新发布的 Claude 3.7 Sonnet 和 Claude Code，让 AI 技术圈再次炸开了锅。</p>
-  <p>对于开发者来说，基于 Claude 3.7 Sonnet 模型打造 Claude Code 是一份意外惊喜。作为一个面向代码编辑、测试和命令行交互的 AI 工具，Claude Code 的亮相迅速引发了开发者的热议，很多开发者在进行了开发尝试后，都在 X（原 Twitter）上直呼「哇塞」。</p>
-  <p>有人用一句话就创建出了「立等可玩」的仿《我的世界》游戏：</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_048601b6c85d43b7a5732d773fc08b44@1547419282_oswg284833oswg1188oswg1144_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/ X</p>
-  <p>有人用一句话写好了一个动效自然的天气卡片：</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_9b1f2fe5b01143d8a2ae1e8d43ca001a@1547419282_oswg351743oswg1202oswg942_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/ X</p>
-  <p>还有人用一句话直接生成了一个带光影变化的 3D 城市：</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_f77dec77fde34f4aa2bdfff5b97509be@1547419282_oswg1115115oswg1210oswg1180_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/ X</p>
-  <p>但如果把视角拉远，从 AI 发展的产品策略来看，更值得关注的可能还是：<strong>Claude 3.7 Sonnet 是全球第一个混合推理模型。</strong></p>
-  <p>简单来说，Claude 3.7 Sonnet 拥有标准模型和扩展模型（高级推理）两种模式，前者是 Claude 3.5 Sonnet、（OpenAI）GPT-4o、DeepSeek V3 这类「传统模型」，后者则是 DeepSeek R1、OpenAI o1 这类「推理模型」。</p>
-  <p>但不同于 OpenAI、DeepSeek 将两种模型独立运行，Claude 3.7 Sonnet 选择了「融合」：<strong>既可以像传统模型那样迅速给出回答，又能在复杂问题上调用更深层次的推理能力进行思考，并给出更好的回答。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_16dff84af3ff4f77ba325c1b92336b23@1547419282_oswg1772044oswg640oswg360_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/ Claude</p>
-  <p>在此之前，AI 需要在「快」和「准」之间做选择。要么是 GPT-4o 这样的传统模型，获得快速但不一定严谨的回答；要么转向 DeepSeek R1 或 OpenAI o1 这样的推理模型，等待更久，但换来更高的计算精度和更合理的回答。</p>
-  <p>现在，Claude 3.7 Sonnet 试图打破这个割裂，让 AI 在效率和智能之间找到平衡，而 Anthropic 迈出的这一步，也在试图定义 AI 未来的产品形态。</p>
-  <h2><strong>Claude 3.7 Sonnet 升级，不只是编程能力提升</strong></h2>
-  <p>和所有 AI 版本升级一样，Claude 3.7 Sonnet 的强大，首先可以从各类 Benchmark 跑分中直观地体现出来。</p>
-  <p>在 MMLU（大规模多任务语言理解）、GSM8K（数学推理）和 HumanEval（代码生成）等测试中，Claude 3.7 Sonnet 的表现全面超越 3.5 版本，甚至在部分任务上已经能与 Claude 3 Opus（教师模型）相媲美。</p>
-  <p><strong>Anthropic 甚至还让 Claude 3.7 Sonnet 跑了《宝可梦》游戏测试，也展现出了超越前代模型的决策与规划能力。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_5e4914d36e8b441188e172bab3d4a2fe@1547419282_oswg78329oswg640oswg423_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/ Claude</p>
-  <p>不过更明显的升级，还是体现在代码理解这类高度依赖推理能力的任务上，Claude 3.7 Sonnet 取得了跨代式的跃迁，本来就公认领先的软件开发能力，又有了大幅提升。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_9deeff86e56344d9a039ad3ea1748d4a@1547419282_oswg222204oswg1920oswg1145_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/ Claude</p>
-  <p>但跑分只是冰冷的数字，真正让人印象深刻的，是它在实际应用中的表现。对于开发者来说，最直观的感受来自编程能力的提升，Claude 3.7 Sonnet 能给出比前代更高效的代码逻辑，甚至可以检测潜在的安全漏洞，提出合理的修复方案。</p>
-  <p>当然，Claude 3.7 Sonnet 在数学推理上的升级也不可不提。之前 Claude 3.5 Sonnet 在 GSM8K 这类测试中表现并不算顶尖，偶尔还会翻车，给出错误答案。</p>
-  <p>但 3.7 版本的升级，显然补齐了这块短板——有人测试发现，它在涉及多步推理的题目上正确率明显提高，甚至可以在解答数学题时，自己检查并修正推导过程，就像一个经验丰富的考生，答完题后还会主动回头检查答案。</p>
-  <p><strong>而这一切提升，最终导向了 Claude 3.7 Sonnet 最核心的变革——混合推理模式。</strong></p>
-  <p>正如前文所提，Claude 3.7 Sonnet 在原本标准模型的基础上融入了新的扩展模型，实现了「一个模型，两种思考方式」，<strong>既能快速反应，又能深入思考。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_e461822658ff4c0ea0b9270b3ad5a32e@1547419282_oswg297503oswg2188oswg1578_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/ Claude</p>
-  <p>作为 Claude 3.5 Sonnet 的升级版，Claude 3.7 Sonnet 除了编程和工具调用能力，在标准模式下的整体性能升级其实不大。而在扩展模式下，Claude 在回答前会进行自我反思（思考链），从而提高了在数学、物理、指令遵循、编码和其他许多任务上的表现。</p>
-  <p>更重要的是，你可以选择何时让模型正常回答，何时让它思考更长的时间后再回答。同时针对 API 调用，Claude 3.7 Sonnet 还支持自定义「思考链」的长短限制，允许开发者根据实际场景在回答质量（以及成本）与速度之间进行权衡。</p>
-  <h2><strong>推理模型的痛点，Claude 一招就破解了？</strong></h2>
-  <p>OpenAI o1、DeepSeek R1 这类推理模型流行后，相信大家都发现了，虽然 推理模型确实在数学、代码、逻辑推理等任务上远胜传统模型，但它们普遍存在一个致命短板：思考过程长、响应延迟明显。</p>
-  <p>输入一个问题，往往要等待十几秒甚至更长时间，才能得到答案。</p>
-  <p>如果说面对复杂问题，推理模型往往能够给出准确度更高的答案，值得等待；<strong>但如果只是日常聊天或信息检索，这种等待显然过于昂贵，更遑论推理模型的「幻觉」并没有减少，甚至可能更高。</strong></p>
-  <p>这也导致，用户如果想在「速度」和「深度」之间做选择，就必须在两个不同模型之间切换。比如，日常交流时用 GPT-4o 或者 DeepSeek V3，但如果遇到复杂的数学推理或者代码逻辑问题，改用 OpenAI o1 或 DeepSeek R1 这类推理模型。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_9c64a7a42f36462bbd603a9325e514db@1547419282_oswg99821oswg872oswg473_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/ X</p>
-  <p>但这种选择真的「绕不开」吗？在当前的技术架构下，AI 的推理能力和响应速度，几乎是一个此消彼长的关系。推理模型的核心优势是更强的逻辑能力，但代价是计算量更大，生成速度更慢，甚至需要额外的服务器资源支持。</p>
-  <p><strong>而这，正是 Claude 3.7 Sonnet 没有简单复制 o1 或 R1，而是选择了「混合推理」模式的关键原因。</strong></p>
-  <p>采用混合推理模式，AI 可以在标准模式和扩展模式之间自由切换。打个比方，这就像是一个经验丰富的咨询师，面对简单问题可以立刻给出答案，而面对复杂问题时，会停下来认真思考，而不是让客户自己去决定该用哪种方式。</p>
-  <p><strong>这也直接带来了两个好处：普通用户不用烦扰选择，开发者也可以灵活调整 AI 的思考方式。</strong></p>
-  <p>一方面，在普通对话、搜索信息、文案写作等日常任务中，Claude 3.7 Sonnet 依旧保持流畅的响应速度，和 GPT-4o 这样的模型表现类似。但当提出数学计算、编程、逻辑推理等高复杂度任务时，根据需要进行适度的「深度思考」，实现效果、体验与成本的平衡。</p>
-  <p>另一方面，在对实时性要求较高的场景或者应用（比如 AI 语音助手、客服系统）中，开发者可以尽可能缩短 AI 的思考链，甚至仅使用标准模型，保证最快地响应。可以在对精度要求较高的任务（比如代码审计、法律分析、金融预测）中，适当调整模型推理的深度，让 AI 更仔细地思考每个步骤。</p>
-  <h2><strong>混合推理会成为AI主流趋势？</strong></h2>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_69d1c0e102494f57af0215286d0ba519@1547419282_oswg272072oswg1666oswg1121_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/ Claude</p>
-  <p>当然，混合推理模式并非完美无缺，比如 AI 如何判断某个任务是否需要进入「深度推理」？这个判断一旦出错，要么导致延迟过长（不必要地进入深度模式），要么导致答案不够精准（应该深度推理但没有执行）。</p>
-  <p>但从产品策略来看，它极有可能成为 AI 未来的主流趋势。因为它抓住了一个核心问题：用户并不想纠结于模型的选择，只关心 AI 对话的结果和体验。</p>
-  <p>换句话说，如果 Anthropic 能进一步优化动态判断的精准度，并通过 API 让开发者可以更灵活地调整推理策略，「混合推理模式」可能会成为大模型发展的下一个标准配置。</p>
-  <p>届时，OpenAI 和 DeepSeek 等大模型厂商也可能会一起跟进，将自己的推理模型与传统模型进行整合，共同促成一次 AI 产品范式的转变。</p>
-  <p>本文来自“雷科技”，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3181893894493316</id>
-            <title>特斯拉FSD来了，但还没真正来｜焦点分析</title>
-            <link>https://www.36kr.com/p/3181893894493316</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3181893894493316</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 26 Feb 2025 01:00:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>文丨李安琪</p>
-  <p>编辑丨李勤</p>
-  <p>万众瞩目的特斯拉FSD中国落地终于有了实质进展。</p>
-  <p>2月25日，特斯拉中国官方发布了FSD智能驾驶软件更新的消息。</p>
-  <p>从功能描述上看，特斯拉将向用户推送的“城市道路Autopilot自动驾驶辅助”功能，车辆能在城市道路直行、左右转、掉头、自动变道等。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_99f838657b024df49dc4fe2b8814a3c4@5636972_oswg128439oswg978oswg889_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图源：特斯拉小程序）</p>
-  <p>不过特斯拉客服回应称，该功能仅为L2级辅助驾驶，尚无法实现美国FSD的完全无人驾驶功能。</p>
-  <p>这或许是特斯拉官网将“FSD 完全自动驾驶”的表述改为“FSD智能辅助驾驶功能”的原因。特斯拉强调，未来用户车辆将能够在驾驶员极少干预的情况下完成绝大多数的驾驶任务。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250225/v2_3bf5608eaa1a4b198155d7c9bdffaf59@5636972_oswg88372oswg788oswg368_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">（图源：特斯拉官方）</p>
-  <p>但这基本与特斯拉在北美推出的FSD主体功能一致，也与当下国内华为、小鹏、理想等车企的城区领航功能类似。也就是说，特斯拉FSD功能引进中国市场的消息盛传一年多后，终于迈出实质性一步——开始上车交付。</p>
-  <p>FSD（全称Full Self-Driving）是特斯拉的高级智能驾驶辅助系统，也是马斯克的Robotaxi（无人驾驶出租车）蓝图的基础，是其眼中的“万亿美元机遇”。</p>
-  <p>36氪汽车与特斯拉销售交流获悉，被交付FSD的车主需要具备两个条件：其一，2023年10月后搭载了特斯拉4.0芯片硬件的车辆，其二，买了6.4万元FSD软件包。满足这两个条件的车主，就会陆续收到功能推送。</p>
-  <p>该销售人士告诉36氪汽车，功能的推送会首先面向用户，门店试驾车辆暂未收到该推送消息。</p>
-  <p>不过，目前的功能版本大概率还不是特斯拉FSD在北美等地区的“完整版”。</p>
-  <p>此前，特斯拉CEO马斯克在1月财报会上表示，特斯拉FSD的入华确实遇到了一些挑战，“中国不允许我们把训练的视频上传到海外，而美国不允许我们在中国训练模型。所以我们现在有点困扰，可以说是进退两难。”</p>
-  <p>比如公交车专用车道等特殊场景，特斯拉FSD就难以适应。为此，特斯拉的智驾团队从网络上的中国街道视频中提取标志和交通规则，来给智驾模型训练。</p>
-  <p>有头部造车公司智驾工程师告诉36氪汽车，已经初步了解特斯拉FSD功能在中国的实际表现。“不太担心，目前看水平一般。”对方表示，但同时也坦言，以特斯拉的技术能力，假以时日仍然值得警惕。据36氪汽车了解，多家车企智驾部门都在想办法尽快评测特斯拉FSD在中国地区的实际表现。</p>
-  <p>对于特斯拉来说，在中国地区交付“FSD”才迈出第一步，而想要实现FSD在北美地区的丝滑智驾与拟人表现，特斯拉还要面临数据积累、大模型适配、训练算力搭建等多重挑战。</p>
-  <h3><strong>「特斯拉FSD来了，但还没完全来」</strong></h3>
-  <p>特斯拉为FSD已经筹谋许久。从2019年在上海建立工厂之后，特斯拉在中国的商业生态得以顺利打开。</p>
-  <p>但其FSD的迅猛迭代一直与国内用户无缘。尤其特斯拉FSD在2023年11月进化到“端到端”智驾后，已经建立起了海量数据、巨大算力与大模型训练的进化范式。</p>
-  <p>特斯拉FSD进入中国一直面临着较大合规门槛。有知情人士告诉36氪汽车，此前，特斯拉的计划是想将收集到的智驾数据进行出境训练，“特斯拉一直在推进向监管部门推进该计划，但进展不顺利。”</p>
-  <p>另一方面，“特斯拉也曾计划将算力集群放到国内，但美国方面又不允许。可能是新政府上台后，政策有所松动。”</p>
-  <p>有外网用户观察到，特斯拉FSD此次在华落地的版本，大概率跟北美地区目前的版本一致。</p>
-  <p>而特斯拉FSD在国内此次落地，也意味着特斯拉选择将FSD做本地化部署与训练。未来特斯拉中国智驾团队可能会一边采集数据，一边交付调试，进入与中国车企智驾团队类似的迭代节奏。</p>
-  <p>事实上，据36氪汽车此前报道，去年特斯拉就已在中国建立了数据标注团队、运营团队，并从美国总部派遣智驾工程师来华并进行培训。</p>
-  <p>从长期角度来看，随着特斯拉规模向用户推送功能，FSD在中国的演进速度可能会越来越快，其真正能力也会被激发。这值得中国同行警惕。</p>
-  <p>在特斯拉的引领下，智能驾驶的实现依赖于大模型、海量数据、训练算力，已经成为行业共识。</p>
-  <p>例如，特斯拉就在北美构建起了能容纳10万张训练显卡H100/H200的数据超算中心。</p>
-  <p>但特斯拉在中国可能无法复制这一盛况。一方面是，特斯拉所使用的高性能显卡H100等目前难在国内流通，另一方面对特斯拉而言，这是重复的硬件投入。</p>
-  <p>不过据36氪汽车了解，特斯拉一直在与国内的云厂商有密切合作。例如在数据合规方面，特斯拉使用的是百度云，经过脱敏处理的数据可以用于FSD模型训练等；特斯拉还在与阿里云进行云基础设施合作；此外，特斯拉还在与火山引擎开展大模型相关合作。</p>
-  <p>至于数据层面，“数据就是最大的优势。”不少行业人士向36氪汽车表示。</p>
-  <p>智驾公司Momenta创始人曹旭东也告诉36氪汽车，中国道路的黄金数据含量更高，其训练的智驾模型如果在中国能跑100分，到欧洲、日本道路也能跑70-80分。</p>
-  <p>而特斯拉的百万级用户车主，能够提供相当庞大与恐怖的数据量，这将迅速补足特斯拉的场景数据库。其智驾模型的迭代也可能因此加速。</p>
-  <p>尽管FSD入华的道路可能不符合马斯克的最初设想，但特斯拉已经没有更多筹备时间了。因为中国智驾市场已经风起云涌，而特斯拉已经错过了太多先机。</p>
-  <h3><strong>「特斯拉FSD入华，已经等不及」</strong></h3>
-  <p>当比亚迪用百万级车辆规模掀起“智驾普及战”时，特斯拉的标志性能力FSD在进入中国的时机上，已经没有太多选择。</p>
-  <p>去年，特斯拉的全球销量出现了罕见下滑，去年卖车178.9万辆‌，同比下降1.1%‌。北美大本营与欧洲市场销量分别同比下滑5.1%与超10%，中国则是其销量扛鼎市场，同比增长8.8%。</p>
-  <p>且中国市场在特斯拉全球市场中的占比已经高达37%，超过美国本土的35%。“特斯拉中国，这个市场非常庞大。”马斯克在1月的财报电话会上说。</p>
-  <p>但在这个市场，特斯拉主力车型今年遭遇的围攻可能会更强烈：已经蓄势待发的小米YU 7、理想刚刚亮相的纯电SUV i8、智界R7等车型选手的竞争力都不弱。更重要的是，这些车型的智驾都是国内第一梯队阵营。</p>
-  <p>尤其在国内比亚迪等老牌车企以百万辆级推广智驾后，吉利、奇瑞等车企也在试图跟进。</p>
-  <p>换句话说，2025年是车企建立用户智驾心智的最后窗口期，特斯拉FSD如果持续流失风口，可能会错失市场。所以即便“满血版”的FSD还没完全准备好，特斯拉也要先行一步了。</p>
-  <p>与推出FSD同一天，特斯拉在官方平台宣布，首批焕新版车型Model Y即将开启交付。而FSD能否明显促销，还有待验证。</p>
-  <p>另一方面，特斯拉推崇的订阅收费模式，也可能遭遇一定挑战。目前，特斯拉FSD在北美地区的订阅收费是每月99美元，买断价格为8000美元；在中国市场，FSD的收费为6.4万元。</p>
-  <p>但国内车企的主流做法是，将智驾的成本包含在新车整车价格之内。“买车送智驾”才是国内的智驾产品商业生态，甚至比亚迪7.88万元的海鸥车型具备高阶智驾能力。</p>
-  <p>用户对特斯拉FSD依然充满期待。一些特斯拉用户从6年前就购买了FSD功能，还有一位拥有多款特斯拉车型的用户向36氪汽车表示：“FSD出了，我一定买。”</p>
-  <p>但FSD想要复刻北美地区的胜局，无论在技术产品、商业生态上都需要进一步适应中国市场。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3182736848296073</id>
-            <title>看完去年全球市场报告，我发现苹果的日子变难过了</title>
-            <link>https://www.36kr.com/p/3182736848296073</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3182736848296073</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 26 Feb 2025 00:54:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>说起来啊，这应该算得上是一个年更选题。</p>
-  <p>2024 年不是刚过去么，最近托尼从 IDC、Canalys、TechInsights、Omdia、Counterpoint Research、洛图科技等各大权威调研机构，搜集了一波有关去年手机、平板、PC、电视领域的市场数据。</p>
-  <p>结果发现，这些数据呈现出来的行业趋势跟格局变化还挺有意思，老样子，先跟各位来个省流版 ——</p>
-  <p>2024年，全球数码市场终于结束了长达两年的 “ 躺平期 ”，迎来久违的复苏，智能手机出货量止跌回升，平板电脑上演 “ 鸿蒙逆袭 ”，PC 市场暗流涌动，折叠屏从 “ 土豪玩具 ” 回归到 “ 理性选择 ”。</p>
-  <p>而在这场混战当中，中国厂商集体开启了 “ 狂暴模式 ” ——<strong>小米传音海外 “ 农村包围城市 ”，华为 vivo 国内联手 “ 围剿苹果 ”，联想则借助供应链优势 “ 横扫全球 ”，它们都获得了相当亮眼的成绩。</strong></p>
-  <h2><strong>手机市场：全球混战，国产崛起</strong></h2>
-  <p>先来说说竞争最激烈的手机市场吧。</p>
-  <p>前几年，国内外手机市场给人的感觉就是 —— “ 大环境贼差 ”，手机厂商卷得不行，你追我赶的，可大家换手机的频率却越来越低，以前咱们可能一两年就会考虑换手机，现在恨不得用上个三四年。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_a99abe7d53b048d7a6f9fe26a82bc96c@1743780481_oswg213408oswg1024oswg724_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">CIRP：iPhone 用户平均换机周期</p>
-  <p>这换机频率一降，市场可不就跟着受影响嘛，你看像 2022 年还有 2023 年，智能手机出货量就同比下降了 11.3% 和 3.2%，直接打破了 2013 年以来的最低年度出货量，手机厂商的日子是真不好过。</p>
-  <p>但到了 2024 年，<strong>全球智能手机市场直接扫光了前两年的阴霾，出货量实现了 7% 的增长，达到了 12.2 亿部。</strong></p>
-  <p>之所以手机市场能够回暖，主要还是因为今年手机综合配置有了大幅提升，同时渠道也开始大规模铺货，换机需求被进一步释放出来了，再加上 5G 普及到更多地区，新兴市场的人也更乐意换新手机。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_2001c3b410f0418cb88535563f5265a3@1743780481_oswg596017oswg1080oswg614_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>而这老大的交椅，依旧被苹果稳稳坐着，虽说 iPhone 出货量下降了 1%，去年总共卖了 2.259 亿部，但人家靠着开拓新市场加上北美和欧洲市场的稳定输出，愣是把中国市场的那点挑战给化解了。</p>
-  <p>至于三星则是排第二，去年它和苹果一样，总的出货量都超过了 2 亿台，不过跟前一年相比也下降了 1%。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_652fb7eabe2d4bfa80e45e6ff2fd3524@1743780481_oswg587040oswg1080oswg605_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>在我看来呢，现阶段苹果、三星多少有点挤牙膏、吃老本的味道，每次新机升级都像是小打小闹，更新幅度并不算大，照这趋势下去，说不定过不了几年，国产厂商就能彻底把这俩巨头拍在沙滩上。</p>
-  <p>要说 2024 年度最大黑马，肯定非小米莫属了，小米去年出货量高达 1.686 亿台，同比增长 15.4%，一下子跻身到了全球前三的位置，我相信过年的时候，雷军的笑容肯定比小米 SU7 的车尾灯还亮~</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_90eaafe928d94fb08fd54432fb6639f3@1743780481_oswg304674oswg983oswg603_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>之所以小米能取得这么好的成绩，一方面是它在国内卖得太火爆了，光国内市场，出货量增速就飙到了 42%；另一方面，这些年它在东南亚的深耕也获得了成效，如今更是做到了 16% 的市场份额。</p>
-  <p>国内狂打价格战，国外猛推性价比，再辅以线下渠道疯狂铺货，一招鲜吃遍天，有一说一小米这波战略，简直把一众友商拿捏得死死的，<strong>同样卖中低端机型的三星，接下来将在海外直面小米这一劲敌。</strong></p>
-  <p>另外你敢信，那个在国内没啥 “ 存在感 ”，但在国外被称为 “ 非洲手机之王 ” 的中国企业传音，竟然一声不响做到了全球第四的位置，出货量高达 1.067 亿台，比排名第五的 OPPO 还多卖了几百万台。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_5a11ee064b7a44e1bb0798fc9f24bc64@1743780481_oswg323748oswg955oswg609_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>我还特意花时间搜了下，除了非洲这个最大的基本盘，目前传音在南亚、东南亚、中东和拉美等市场，也都开拓出了一片天地，简直就是闷声发财的典范，<strong>你别说，有时候选对赛道还真比瞎努力重要~</strong></p>
-  <p>当然人家能做到这份上，肯定也是有真本事的，而它的秘诀就是 “ 无视参数内卷，专注刚需痛点 ”，像什么多卡多待、超大容量电池、超高音量喇叭这些，对那边的人来说就是刚需，传音全给整上了。</p>
-  <p>换句话说，当地人需要什么样的手机，它就造什么，堪称 “ 机圈五菱 ”。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_ca5abcf3f5ed4318b8838dbc1b31f292@1743780481_oswg955509oswg1080oswg735_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>另外联想的去年表现说实话有点出乎我的意料，虽然它在国内市场份额不足百分之 2%，连前五榜单都没进。</p>
-  <p>但在国际市场它的表现堪称亮眼，在美国市场，联想凭借 12% 的份额位居第三，仅次于苹果和三星；在拉美市场稳居第二；墨西哥市场位列第三；西欧市场成功打入第四；甚至还跻身法国市场前五。</p>
-  <p>如此出色的海外表现，直接让联想拿下了全球手机市场份额第八的名次，看来当初联想花 29.1 亿美元收购摩托罗拉的选择非常正确，很多厂商这会儿还在琢磨怎么出海，联想动动钞能力就给做到了。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_6ebecc3dc27a4ef59ec10b02b6d12e6a@1743780481_oswg75095oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>这么说吧，放眼望去，去年在全球手机市场做到份额前十的手机品牌当中，除了苹果、三星，其余八家都是来自中国，<strong>这充分表明咱们国内的手机品牌正在强势崛起，在全球占据了越来越重要的位置。</strong></p>
-  <p>不过大家也别高兴太早，我看了下去年出货量最高的手机，好家伙，几乎全被各种型号的 iPhone 和三星给包圆了，<strong>只能说在高端市场这块，国产厂商和苹果、三星相比，确实还有好长一段路得走。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_9d55c4addc444876a074d58088239a26@1743780481_oswg202674oswg895oswg501_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>当然了，如果我们把目光聚焦到国内，中国智能手机市场的竞争那也是相当激烈，而且情况还有点不太一样。</p>
-  <p>2024 年国内市场总的出货量是 2.714 亿台，同比增长 3.7%，其中 vivo 已经连续四年，稳坐国产手机品牌头把交椅，同时华为已实现对苹果的全面反超，包括市场份额跟前一年相比也是增幅最大的。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_7d85c6182fb742acaa8f0fbec65ec270@1743780481_oswg357311oswg1009oswg565_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>说实话，华为去年的表现真的让人有点意外，前几年它遇到那么多麻烦事儿，大家都替它捏把汗，结果没想到人家不仅没被打倒，还打了个漂亮的翻身仗，上演了一波 “ 王者归来 ”，妥妥的爽文主角。</p>
-  <p>而 vivo 能有这表现可以说在意料之中，蓝厂这些年主打一个 “ 稳扎稳打 ” —— 低端卷续航、中端卷配置，高端卷影像，正是得益于这种在不同价位段都精准发力的策略，让它实现了口碑销量双丰收。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_bbd9ede960d648c08a88c13372ff0f5e@1743780481_oswg376604oswg1080oswg537_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>相比之下，苹果在国内的日子就没那么好过了。</p>
-  <p>虽然各家调研机构的统计口径不太一样，导致最后得出的结果有些许差别，<strong>但它们给出的数据，无一例外都反映出了苹果出货量和份额都在双双往下滑，说白了就是 iPhone 在国内没那么好卖了。。。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_1cd3ac6929ad45cda4ee61a7ec628924@1743780481_oswg169176oswg1080oswg678_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>你看今年 iPhone 16 系列的跳水速度就知道了，不止第三方渠道在降价，就连官方渠道也罕见的迎来了全系降价，不管果粉们承不承认，这些年 iPhone 在国内高端市场的竞争力，就是一直在减弱。</p>
-  <p>至于原因相信大伙也都知道，iPhone 年年挤牙膏式升级，可以说跟国产厂商在影像、系统体验等方面的大步迈进形成了鲜明反差，这些年包括华为在内，一众国产厂商在高端市场对苹果形成了直接冲击。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_a1a4da0ba03f4f5283a66198eb0ecf65@1743780481_oswg362993oswg1080oswg521_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>再加上因为合规问题，国行版 iPhone 至今都还没用上苹果 AI，这就使得它的竞争力被进一步削弱。</p>
-  <p>反观国产阵营，像小米、OPPO、vivo 等厂商，在推出功能强大的 AI 助手的同时，还在系统上开始强行兼容苹果生态，iOS 独占优势越来越小，<strong>对此我只想说，你的下一台 iPhone，可以不必是苹果~</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_e94f83c5213542a7a16587146919bcf4@1743780481_oswg426601oswg1072oswg680_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>而且我有预感 2025 年的数据还会更好 —— 原因你们也懂，国补来了！</p>
-  <p>讲道理，国补对市场成交量的推动作用还挺明显，这不，央视已经报道过了，2000 元以下、2000-4000 元、4000-6000 元价位段的手机，它们销售量跟上一年春节假期相比分别同比增长了 10%、52% 和 108%，简直猛得一批！</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_14a1b4372355467eb42921d3a3109b53@1743780481_oswg293826oswg1080oswg702_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>综合今年开年各家手机厂商的表现，国内手机市场年度销冠会花落谁家还真不好说，就让我们一起拭目以待。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_0ef9c55eb59b42c191ba2cfe0c1a126c@1743780481_oswg307581oswg1080oswg682_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>折叠屏手机：从尝鲜到刚需</strong></h2>
-  <p>除了传统形态的直板手机，折叠屏手机市场的数据也挺有意思。</p>
-  <p>2024 年全球折叠屏出货量在 1830-2000 万台区间，其中国内市场将近占了一半，出货量为 917 万台，同比增长 30.8%，但增速较前几年有着明显放缓，第四季度更是首次出现同比下降 9.6% 的情况。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_5b30aa7b124444b7ab4981713d94ac3c@1743780481_oswg209530oswg885oswg650_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>这表明整个折叠屏市场已经开始从高速扩张转向理性调整，比如原先有一部分人买折叠屏手机，可能单纯只是为了尝鲜或者装 X，但现在它的主力消费群体，变成了那帮本身就对大屏和便携有需求的人。</p>
-  <p>而且大折叠手机在国内出货量占比就超过了 70%，小折叠手机相对来说就没那么好卖了，甚至我看到网上已经有消息称 OPPO、vivo 等厂商这会儿已经暂停了小折叠产品线，转而专注大折叠手机研发。</p>
-  <p>不过国内折叠屏市场，光华为就占据了 48.6% 的市场份额，真就应了那句 “ 遥遥领先 ”，这可把其他国产厂商给逼得够呛。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_71227f8686fb462793b96a288a11b5c0@1743780481_oswg134732oswg825oswg670_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>鉴于这点，其他厂商接下来的大折叠手机，很可能会放弃性能、影像我全都要的全能旗舰路线，而是学华为走轻薄和商务化，像 vivo X Fold3 Pro 这种影像追平同期直板旗舰的大折叠，以后估计不会有了。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_7dde5e8194cb42de9c18aca805d02b94@1743780481_oswg233787oswg1080oswg463_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>你看 OPPO 已经这么干了，Find N5 完全抛弃了过往 Find N 系列特立独行的路子，开始追求极致轻薄，遮住 logo 说它是华为 Mate X7 我也信。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_48b87457b3ef4be6919a322274e5428d@1743780481_oswg413410oswg943oswg474_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>考虑到苹果首款折叠屏手机，大概在明年就会问世，到时候折叠屏手机市场竞争指定会更激烈，我个人倒是挺期待果子到底会整出啥新活儿，也好奇其他厂商会拿出怎样的手段来应对，肯定相当有看头~</p>
-  <h2><strong>平板市场：全球两强，国产逐鹿</strong></h2>
-  <p>说完手机，接下来让我们再来看看平板市场，说实话，平板这边的情况跟手机有点类似。</p>
-  <p>去年全球平板电脑出货量为 1.476 亿台，同比增长了 9.2%，全球出货量份额 TOP 5 分别是苹果、三星、华为、联想和小米，其中 iPad 以绝对领先的优势做到了全球第一，但增速最快的还属小米和华为。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_cc72cb39565a47f3b7c652f88780c23c@1743780481_oswg164464oswg1080oswg685_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>与此同时，2024 年中国平板出货量为 2985 万台，同比增长 4.3%，国内平板电脑出货量 TOP 5 分别是华为、苹果、小米、荣耀以及联想，其中除了苹果份额同比下跌，其他几家或多或少都迎来了上涨。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_b21246686bad4e24ae1d914015a84e84@1743780481_oswg81901oswg909oswg673_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>看来不止 iPhone 在国内越来越不好卖，连 iPad 也是一样，不过倒不是因为它不好用，而是国产平板实在太香。</p>
-  <p>两三千预算，在苹果这边可能只能买到基础款 iPad，要高刷没高刷，要容量没容量，但要是放在国产阵营，性能、高刷、续航和容量都安排得明明白白，性价比直接拉满，换做是我也会优先考虑国产平板。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_2c966940dcd04f298892698a1db5005e@1743780481_oswg234891oswg1080oswg564_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>我倒是有个想法，苹果不妨把 120Hz ProMotion 高刷下放到非 Pro 版机型上，这么一来，果子没准还能靠这波操作在国内多抢回点份额，不然销量继续下跌被其他国产厂商追上来，面子上也不好看不是~</p>
-  <h2><strong>PC 市场：老牌争霸，联想称王</strong></h2>
-  <p>跟前面手机和平板市场有所不同，2024 年全球 PC 市场，还是由联想、惠普、戴尔等老牌厂商占据主导地位。</p>
-  <p>2024 年全球 PC 出货量约 2.627 亿台，联想以约 6180 万台的出货量、23.5% 的市占率，同比增长 4.7%，稳坐头把交椅，绝对算得上是 PC 界的 “ 老大哥 ”，而惠普和戴尔紧跟其后，再后面就是苹果跟华硕。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_5ff3aad002fc4bf19c8ce86e0d6e63b6@1743780481_oswg540878oswg1080oswg904_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>虽然网上对于联想这个品牌一直都存在各种各样的争议，但不可否认人家确实有这个实力，旗下供应链已经相当成熟且完善，而且消费级、商务级还有游戏产品线基本上全覆盖了，它能做到全球第一绝非偶然。</p>
-  <p>然而我是实在没想到苹果竟然能排到第四的位置，要知道苹果产品线并不算丰富、价格也偏高，在这种情况下还能取得这样的成绩，可见内容创作者有多青睐 Mac 了（ 话说不会有人是为了打游戏才买 Mac 吧~</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_08185cb3ca5047b98d285d1e857af42b@1743780481_oswg237908oswg1080oswg672_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>至于国内 PC 市场的出货量数据，我在网上逛了一圈都没找到，只找到了一些季度数据。</p>
-  <p>比如 2024 年第一季度，PC 出货量下跌了 12%、第二季度下降 6%、第三季度下降了 1%，国内对于 PC 的需求量总体呈下跌的趋势，要不是下半年国补出来提前刺激了一波消费，出货量可能会下滑得更厉害。</p>
-  <h2><strong>电视市场：国产 Mini LED 崛起</strong></h2>
-  <p>跟 PC 一样，电视出货量同样下跌的厉害，去年一整年，中国电视市场品牌整机的出货量是 3596 万台，跟 2023 年相比下降了 1.6%，直接刷新了从 2010 年开始，这十多年来中国市场出货量的最低纪录。。。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_43b4efa7859b4b27afba5d4052677fba@1743780481_oswg77256oswg700oswg403_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>不过呢，这事说起来也挺有意思，虽然电视出货量是跌了，但去年中国电视市场的零售额居然达到了 1202 亿，跟之前比起来增长了 12.3%，<strong>这从侧面说明现在很多人买电视，更愿意为那些高端电视买单了。</strong></p>
-  <p>反馈到具体数据上，你会发现 Mini LED 电视在去年全年销量飙升到了 416 万台，增幅高达 352%；而且其中 75 寸电视销量占比高达 23.2%，已经反超前年占比最高的 65 英寸，成为卖得最好的电视尺寸。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20250226/v2_970695b16abd467c8454d78c4436e739@1743780481_oswg34819oswg730oswg371_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>2024 年中国电视市场出货量排名（ 含各家子品牌 ）依次为 —— 海信、小米、TCL、创维、长虹、康佳、海尔以及华为，其他外资品牌比如索尼、三星，它们市占率都不到 5%，加在一起都没超过一百万台。</p>
-  <p>国产电视这波啊，属实是扬眉吐气了一把。</p>
-  <h2><strong>最后简单来个总结</strong></h2>
-  <p>2024 年的数码江湖，给人的感觉就活脱脱一部《 复仇者联盟 》——</p>
-  <p>华为扛着麒麟芯片和卫星通信，在国内上演了一波 “ 五年磨一剑，光寒苹果城 ”；</p>
-  <p>小米左手价格屠刀、右手生态大饼，对国际友商来了一句亲切问候 ——“ Are You OK ” ；</p>
-  <p>传音更绝，非洲兄弟可能还没搞明白 5G 是啥，人家已经靠 “ 四卡四待 + 广场舞喇叭 ” 登顶全球第四；</p>
-  <p>至于苹果？库克一边给 iPhone 16 “ 战略性降价 ”，一边看着华为把 “ 高端 ” 俩字刻进 Mate 70 的卫星天线里；</p>
-  <p>要说最惨的还属电视圈，自从国产厂商借助 MiniLED 弯道超车把高端电视价格打下来后，直接把索尼、三星逼成了 “ others ”，真就应了那句话 —— 三十年河东、三十年河西，莫欺少年穷。。。</p>
-  <p>总之，2024 年教会我们一个真理 —— 别跟中国厂商比狠，它们卷起来连自己都怕。</p>
-  <p>至于 2025，就让这暴风雨来的更猛烈些吧~</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/sXFntLZCnfczv1b1L-ia8A" rel="noopener noreferrer nofollow" target="_blank">“差评X.PIN”</a>，作者：胖虎，编辑：米罗&nbsp;&amp; 面线，36氪经授权发布。</p>
                 ]]>
             </content:encoded>
         </item>
