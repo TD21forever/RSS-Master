@@ -5,6 +5,27 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/96764</id>
+            <title>把树莓派改造成一个电视盒子</title>
+            <link>https://sspai.com/post/96764</link>
+            <guid isPermaLink="false">https://sspai.com/post/96764</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 27 Feb 2025 07:00:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;<br />文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><h2>前言</h2><p>在树莓派 4B 刚发布的时候，我买了一个打算折腾着玩，后来不小心溅上水，当时就开不了机了，我以为坏掉了又买了个新的，结果新的到手后发现旧的树莓派有奇迹般的故事自己好了，于是我就有了两个吃灰的树莓派 4B 🤣。</p><p>这段时间在家，发现家里运营商送的电视盒子变得非常卡，而且除了官方商店少数的几个应用，也无法安装第三方应用，盒子自带的一个 USB 接口似乎也被屏蔽了，插 USB 设备没有任何反应，所以几乎没办法折腾刷机什么的。</p><p>于是我想到了吃灰的树莓派，虽然性能也不算太强，但比家里的电视盒子应该还是好很多的，于是我就打算将一个树莓派改造成一个电视盒子，用来替代运营商送的电视盒子。</p><h2>系统选择</h2><p>一开始我是打算安装 <a href="https://libreelec.tv/">LibreELEC</a> 这个系统的，这是一个使用 kodi 作为前端界面的 Linux 系统，但是尝试了一下之后我就放弃了，主要是它基于 Linux，额外软件的安装比较麻烦，而且操作对于家里人来说学习门槛也有点高了。</p><p>最后我决定安装 Android TV 系统，操作更简单，而且软件安装也比较方便。经过一番搜索，我找到了 <a href="https://konstakang.com/devices/rpi4/">KonstaKANG</a> 构建的非官方的 LineageOS 系统，这个网站提供了 LineageOS 16-22 多个版本，分别对应了 Android 的 9-15，有普通的 Android 系统，也有 Android TV 系统。我最后选择了 LineageOS 20 版本的 Android TV，因为 21 和 22 版本经我测试发现因为版本太新导致一些国内电视 APP 安装不上（比如当贝市场），更老的版本我没测试，有兴趣的可以试试看。从<a href="https://app.filen.io/#/f/c290bd9a-53a7-469f-8890-45d90cb82551%231hHHm4ng6GKgK9CFmDr4mMQirfm5Y90k">这里</a>可以下载到对应的系统镜像。</p><h2>安装与首次启动</h2><p>系统的安装还是比较简单的，使用刷写工具将镜像写入到 SD 卡内，树莓派插入 SD 卡，连接键鼠，接上电视插电开机就行。</p><p>首次启动速度可能比较慢，开机后会进入引导界面，第一步就是要连接蓝牙遥控器，在我之前测试 LineageOS 21 和 22 时，这个界面都可以很简单地跳过，但在 LineageOS 20 这里，似乎不能直接跳过了，据说等待足够久的话还是可以自动跳过的，不过我没试过，而是直接随便找了个蓝牙键盘配对连接一下，就能继续了。</p><p>之后便是常规的语言选择、连接网络等操作了，这个界面可能比较卡顿，不用担心，进入系统后会流畅很多，默认的系统主界面十分简洁。左上角的语音和搜索功似乎不能用，不过倒也问题不大。</p><h2>进一步配置</h2><h3>adb 和 ssh 连接</h3><p>接下来就要对系统进行一些额外配置了，首先配置 adb 和 ssh 连接，以方便后续的操作：</p><ul><li>首先进入设置 - 系统 - 关于，拉到最下面，连续点击 Android TV 操作系统版本，直到提示开发者选项已经打开；</li></ul><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/25/f862da1f751f88ad9e95ff09121b4a46.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>之后进入设置 - 系统 - 开发者选项，打开 USB 调试、Rooted Debugging 以及 ADB over network；</li><li>在电脑上安装必要的 adb 工具，之后之后运行 <code>adb connect 192.168.0.7</code>，记得把 ip 改成树莓派的 ip，第一次连接可能会失败，在电视屏幕上会弹窗询问是否允许 USB 调试，允许以后在电脑上再次尝试连接就能正常连接上了，之后就可以使用各种 adb 命令了，比如 <code>adb install package.apk</code> 可以把本地的软件安装包传输到树莓派上并安装；</li></ul><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/25/c52432a9f5e358c6819417beb449db59.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>接着配置 ssh 连接，进入设置 - 系统 - Raspberry Pi settings，找到 ssh，打开开关，启用 ssh 服务；</li></ul><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/25/6c7264a67c38c40a5f706956051aa7fa.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>连接到 adb 后，运行 <code>adb root</code>，获取到 root 权限，然后运行 <code>adb pull /data/ssh/ssh_host_ed25519_key my_private_key</code>，来获取到 ssh 私钥，私钥会保存到当前目录，名为 <code>my_private_key</code>，如果直接用这个私钥文件连接树莓派的 ssh 服务，会提示私钥权限太开放，导致无法连接，在 Linux 系统上，要收紧权限，需要运行 <code>chmod 600 my_private_key</code>，表示只有文件所有者才能查看和修改，之后运行 <code>ssh -i my_private_key root@192.168.0.7</code>，就可以连接到 ssh 服务了。</li></ul><h3>声音输出</h3><p>这个 LineageOS 系统默认设置的是从 3.5mm 耳机孔输出声音，但是也支持从 HDMI 输出声音，同样进入 之前的 Raspberry Pi settings 界面，找到 Audio devices，便可以选择声音输出设备了，HDMI0 是靠近 TypeC 接口的那个，而 HDMI1 是远离 TypeC 接口的那个。更改输出设备后需要重启系统才能生效。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/25/f2f1e7e2b80913a3d109ff4799c4c791.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不过不知是我家电视的问题，还是树莓派的问题，当设置了声音从 HDMI 输出后，如果只关闭电视而不关机树莓派，下一次电视打开后就会没有声音，需要将树莓派系统整个重启一下才行，不过我家的旧电视本来声音就挺差劲的，借着这个机会我直接买了对 3.5mm 接口的小音箱，用来当声音输出，虽然也不是多贵的音箱，但音质还是比老电视自带的好不少的。</p><h3>遥控器</h3><p>作为电视盒子，遥控器肯定是必不可少的，如果没有遥控器，其实也可以用键盘操作，一些常用的遥控器操作可以用键盘的 F 键代替：F1 = 主页，F2 = 返回，F3 = 多任务，F4 = 菜单，F5 = 电源，F11 = 音量减，F12 = 音量加。</p><p>我在很久之前买过一个便携小键盘，大概是下图这样，打算给 我的 ROG 掌机用，不过后来吃灰了，拿出来用 2.4G 接收器连接到树莓派上，竟然还挺好用，小键盘上方的电视按键基本上都能被正常识别。唯一有问题的按键是左上方的电源键，只能控制关机，不能控制开机，不过电源键下方的 TV 键倒是能正常作为电源键使用，既可以开机又可以关机，当然用这种遥控器控制开关机并不是真正的开关机，只是进入到了待机模式，如果树莓派是处于完全关机的状态下，就只能手动插拔电源才能开机了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/25/96614cb2794e731ef9114421ef7fa83b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在购物平台上通过关键词「2.4G 遥控器」可以搜到很多类似功能的遥控器，不一定非要按着我的买，不过听说有些遥控器的按键识别可能有问题，这个就需要自己买来测试了。另外这类 2.4G 连接的遥控器在树莓派完全关机的状态下都不能直接开机，这是硬件限制，没有办法。</p><p>另外这个 Android TV 也支持 HDMI CEC，可以用一个遥控器同时控制电视和树莓派，不过我家的电视比较老，不支持 HDMI CEC，就没办法演示了。</p><p>如果想要用红外遥控器，其实也有办法，可以通过将红外接收器连接到树莓派的 GPIO 接口上，从而使用红外遥控器。这个我没折腾过，<a href="http://kuring.me/post/watch-tv-2/">这篇博客</a>里有相关的配置过程，感兴趣的可以参考下。</p><h3>空间扩容</h3><p>安装完系统后，在设置 - 系统 - 存储空间中可以看到总共可用的存储空间只有大约 7G，这是因为系统的镜像默认只分配了 7G 的大小。我用的 SD 卡是 32G 的，要想使用全部空间，就要进行空间扩容。</p><ul><li>在<a href="https://app.filen.io/#/d/359e14ab-fe03-4fa5-8382-d8bab79de308%23OcYCkizytCC8RXhUGHoeP1c3ejocPZDr">这里</a>下载扩容包，复制到树莓派的系统存储内；</li><li>打开设置 - 系统 - Buttons，打开 Advanced restart，之后打开设置 - 系统 - 重新启动，重启到 Recovery，等待重启进入到 TWRP 界面。这里比较推荐连接鼠标操作，如果遇到鼠标断联等问题，可以试试重新插拔鼠标，实在不行就换一个鼠标。</li></ul><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/02/25/c4a85e5f0174e13858e74fe5860ab071.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/25/fc6ee424482427d22086d2a20f3554d6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>点击 Install，找到刚刚下载的扩容包，选择刷入即可。刷写完成，重启进入 Android TV 系统，就可以看到所有 SD 卡的空间都已经被分配了。</li></ul><h3>网络连接受限（并未完全解决）</h3><p>因为网络原因，一些类原生的安卓系统会提示网络连接受限，在此状态下，其实大部分软件也可以正常使用，国内的 APP 也都能正常连接网络，但是会导致 WIFI 无法自动连接，每次重启后都要手动连接。参照<a href="http://kuring.me/post/pi5-1/#%E8%A7%A3%E5%86%B3%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E5%8F%97%E9%99%90">这篇博客</a>，连接到 adb 后：</p><pre class="language-"><code>adb shell settings put global ntp_server ntp1.aliyun.com
+
+adb shell settings put global captive_portal_detection_enabled 1
+
+adb shell settings put global captive_portal_https_url https://connect.rom.miui.com/generate_204</code></pre><p>之后重启，理论上就可以解决连接受限的问题了，但不知是我操作有误还是其他原因，试了好几次都还是会报连接受限。因为我家的路由器就放在电视旁边，最后我就懒得折腾了，直接用网线连接，一劳永逸解决问题，有线连接网络还更稳定一些，树莓派 4B 自带的无线网卡速度真挺一般的，再加上用的是一个金属外壳，让 WIFI 信号雪上加霜了。</p><h3>界面缩放</h3><p>LineageOS 20 版本我遇到了一个界面缩放的 bug，默认是最小缩放比例，而且在设置 - 显示和声音 - 文字缩放这里无法调整，一点开就直接闪退，在 LineageOS 21 和 22 版本上我没有发现有这个 bug。由于我家的电视本身尺寸就不大，最小的缩放比例看着还有有点费劲的，为了解决这个问题，就需要用 adb 命令了。</p><p>按照前面的内容，通过 adb 连接到树莓派，之后运行 <code>adb shell wm density 320</code>，最后面的数字 320 是代表缩放的大小，数值越大说明缩放比例越大，320 是在我家电视上观感比较合适的大小，根据电视的分辨率和尺寸不同，需要按需调整。</p><p>不过诡异的是，在我用 adb 调整过缩放大小后，本来会直接闪退的文字缩放设置奇迹般地自己好了，之后就可以直接在这里调整缩放大小了，不需要再用 adb 命令调整缩放了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/25/96a3a48ee13b0b6e14318f3d950613e6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>时间同步</h3><p>树莓派 4B 没有自带主板时钟，这会导致每次彻底断电再开机后系统会忘记当前时间，如果系统时间不对的话，我发现有些应用虽然可以正常联网，但有时会无法加载图片和视频之类的资源。虽然可以通过 ntp 服务联网自动同步时间，但我发现开机后往往需要等上好几分钟才能成功同步时间。</p><p>为了解决这个问题，我买了个树莓派主板时钟模块，大概是下图这样，也就十几块钱，需要注意的是，模块的型号必须是 DS3231，因为这个型号的模块是这个版本的 LineageOS 明确说明支持的，其他型号的模块可能不支持。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/25/6d4d16445acdeb5c9abe3bbccd8cf388.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>至于安装方式，我找了个树莓派 GPIO 定义图，商家的图片看的不太清楚，开始我还以为是要接到 2 4 6 8 10 引脚上的，结果发现不对，实际上是要接到 1 3 5 7 9 引脚上，也就是我在图中圈出的那几个引脚。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/02/25/a6ac450900df081377f45b254b5fb7e7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/25/2d37c4d0b5858d78db0cd4aa7f9da9b2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>安装好开机后，进入设置 - 系统 - Raspberry Pi settings，找到 Real time clock，选择 DS3231 on I2C，然后重启，系统应该就能从时钟模块上自动读取时间了。如果发现时间还是不对，那可能是时钟模块的时间没有同步，需要手动同步时钟模块的时间：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/02/25/7931bd048c3dc9c0223c2c3dba48f16d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>按照前文的方法连接到 ssh；</li><li>运行 <code>ls /dev/rtc0</code> 查看设备是否被成功识别；</li><li>如果 <code>/dev/rtc0</code> 存在，说明时钟模块已经被成功识别了，接着运行 <code>hwclock -w -f /dev/rtc0</code> 来将当前系统时间同步到时钟模块。</li></ul><p>如果用的是树莓派 5，应该就不用这么麻烦了，因为树莓派 5 自带了有主板时钟，不过没有主板电池，要想使用树莓派 5 自带的主板时钟，只需安装一个主板电池即可。</p><h2>日常体验</h2><p>因为主要打算给家里人用，所以一些更进阶的东西，比如 google play 服务、magisk 之类的，我就不折腾了，大概率也用不到。</p><p>一段时间用下来，用树莓派 4B 当电视盒子，体验比运营商送的盒子要好一些，但还算不上完美。</p><p>视频解码能力方面，树莓派 4B 是可以比较流畅地播放 1080p 视频的，4K 视频就有些吃力了。相比之下，运营商送的盒子，用同样的软件播放同样的 1080p 视频，经常卡到动不了。考虑到我家的电视比较老，分辨率也只有 1080p，所以这样的视频播放能力完全够用。听说树莓派 5 的视频解码能力要强很多，可以流畅播放 4K 视频，因为我手上没有，是真是假就不得而知了。</p><p>另外这个树莓派电视盒子，对一些软件的兼容性似乎还有些问题。比如我想播放存放在阿里云盘里的视频，因为我有阿里云盘的第三方权益包，我开始尝试了一些支持阿里云盘第三方权益的电视端软件，比如网易爆米花和小白云盘，结果发现这些软件在树莓派电视盒子上都特别的卡，相比之下体积更臃肿，界面更复杂的阿里云盘官方电视端运行反而十分流畅。</p><p>我还尝试过 B 站的客户端，官方的客户端有一点卡，但还没到完全没法用的地步，并且视频播放还是比较流畅的，比较难受的是相比手机端缺失了一些功能，我又尝试了一下一个第三方的 B 站电视端软件 BBLL，这个软件实现了大部分手机端常用的功能，还是比较好用的，并且界面也流畅很多，但是在视频播放方面我遇到了一些问题，有一部分视频播放比较流畅，但另一部分却很卡，关于什么样的视频播放起来会卡，暂时还没发现规律，我在设置中把解码相关的选项每个都试了下，好像也没效果，而且同一个视频，在 BBLL 播放会卡，在官方客户端播放就很流畅，具体原因就不清楚了（另外，今年的春晚我就是用树莓派电视盒子在 BBLL 上看的，运气比较好，直播十分流畅）。</p><p>总的来说，我个人觉得，除非是像我一样在手里吃灰，否则我是不太推荐用树莓派当作电视盒子的，因为树莓派并不是专门设计用来当电视盒子的，所以会存在一些小问题，而且在相同价位，完全可以买到性价比更高的替代品，也可以买回来自己刷机。不过对于我家目前的情况来说，用树莓派当电视盒子还是比较够用的。</p><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/96788</id>
             <title>最便宜的入门款，也有意料外的惊喜：iPhone 16e 首发体验</title>
             <link>https://sspai.com/post/96788</link>
@@ -153,258 +174,6 @@
                 <![CDATA[
                     
                     <p>除了首页时间流和侧栏的精选展位，少数派 Matrix 社区还有很多优秀内容因条件所限无法得到有效曝光，因此我们决定重启 Matrix 周报，并在此基础上添加更多社区内容、作者投稿新玩意呈现给大家。</p><hr /><h2>🔥一周热评</h2><p>来自文章<a href="https://sspai.com/post/96534">《你 Brain rot（脑腐）了吗？数字极简主义指南》</a>：</p><blockquote><p><strong>我不是尼克 </strong>(+2) 看文章的过程中意识到自己虽然规避了对短视频上瘾，却有种对B站长视频上瘾的趋势，其实本质上都是面临注意力被褫夺、时间被占用而自身毫无所得毫无发展的局面，稍微惊醒过来。</p><p>觉察是改变的第一步。</p></blockquote><blockquote><p><strong>楚杰 </strong>(+1) 我个人非常赞同戒除这种「数字上瘾」的观点，以前一班朋友坐着聊天很快乐，现在坐着很沉默。信息流刷刷刷地过，留在心里可以分享的竟然没有一条，可悲。</p></blockquote><blockquote><p><strong>jdchi </strong>(+0) 我现在减少手机的使用方法，就是马上唤出小爱，叫她「20分钟的专注模式」，让手机不可用一段时间，自己的那个冲动劲就被抑制过去了。</p></blockquote><p>来自文章<a href="https://sspai.com/post/95586">《取舍有道——小鹏 MONA M03 体验分享》</a>：</p><blockquote><p><strong>林克labalaba </strong>(+5) 可以用「小熊油耗」来记录充电数据，我之前也用表格维护过一段时间，改用这个app之后方便很多</p></blockquote><blockquote><p><strong>害怕网络暴力 </strong>(+2) 2022年smart #1 首批车主表示羡慕，当年一半价格的车已经能做到全方位领先。个人感觉寒冷对能耗影响确实大，我66度带热泵的电池包冬天市区正常也就300公里不到。</p></blockquote><blockquote><p><strong>一条大鱼 </strong>(+1) 哈哈，遇到同道中人了，也是在北京等待指标的过程中先上车了（去年终于排到了）。从最开始的油车到换了电车，一共在北京开了8年的外地车，总共交了1分100块的限行费，麻烦是麻烦了点儿，但毕竟条条大路通罗马。</p><p>至于长途出行其实问题也不大，我标续500km的虚标王小破车，去年春节跑了一趟烟台。今年过年一咬牙一口气干到南京了，出发前规划下行程和充电点，多利用吃饭和逛街的时间补能，避免在高速上充电。这两趟都是全程没有充电排队，也很少坐车里干等。今年2300km充电一共花了500块钱，还是挺香的。</p><p>毕竟北京除了纯电也没得选，咱只能自适应了🤣</p></blockquote><p>来自文章<a href="https://sspai.com/post/96353">《老旧小区门禁对讲电梯远程智能化改装》</a>：</p><blockquote><p><strong>mivansaka </strong>(+1) 😂大哥你连电梯主控都改了呀，太猛了，电梯的改造是要有特种资质的，这个要注意一下，下次电梯维保的时候和电梯厂家记得沟通一下吧</p></blockquote><blockquote><p><strong>Infovores </strong>(+0) 最老的对讲门禁，本来接入模块后想实现手机进入地理围栏自动触发开门，但是无论是米家自动化和快捷指令自动化都不成功，可能是获取位置信息的权限问题，最终放弃，改为手机上侧边操作按钮手动触发快捷指令开门。</p></blockquote><p>来自文章<a href="https://sspai.com/post/96586">《Obsidian 商用免费，我是如何用它搭建团队知识库的？》</a>：</p><blockquote><p><strong>多数pia </strong>(+2) 确实刚工作的话，对于搭建知识库的痛点是感受十分深刻的。Obsidian上手难度真的会成为团队成员使用的最大阻碍。我目前的想法就是即使不能搭建成为团队的知识库，能够成为自己的个人工作知识库也是可以接受的，并且希望后面来的新人能够接受这种方式就好了。十分感谢提出的搭建方案，真的是最近就在思考版本控制问题，这就来了个完整方案，属于是及时雨了。</p></blockquote><blockquote><p><strong>Monolith </strong>(+0) 仅个人使用角度有些疑问，自己在用Logseq，但是感觉内容多了稳定性好像不行，滑动时自动回撤、单页图片过多会导致在下面打字乱跳并部分被删除，有点忍不了了，想迁Ob，大家觉得Ob现在稳定性咋样？之前自己研究了一下Ob感觉门槛比Logseq还高就没迁移，现在感觉不得不准备起来了</p></blockquote><p>来自文章<a href="https://sspai.com/post/96150">《Deepseek 教我的法则：不是要「会提问」，而是要「早动手」》</a>：</p><blockquote><p><strong>ZEROAONE </strong>(+6) 作者写得挺好的，特别是点出了：比起 why 和 how，真正重要的是 what，先问是不是，再问为什么。我觉得这是在生成式AI突飞猛进的时代作为人类最关键的价值所在了。作为研究人员我也认为LLM的进步就是极大的缩小了试验 to do 的成本，你可以快速的入门并掌握去试验一个想法。</p></blockquote><p>来自文章<a href="https://sspai.com/post/96593">《本周看什么 | 最近值得一看的 9 部作品》</a>：</p><blockquote><p><strong>刘sir </strong>(+1) 鹊刀门传奇第二季也看看吧，贼好笑</p></blockquote><blockquote><p><strong>潘誉晗 </strong>(+1) 🤪 我真的超级推荐《三叉戟2》给家里有长辈的看看，围绕的就是「诈骗」这样的主题，题材很接地气。然后观看的过程就是很轻松很愉快，老三位的搭档太妙了，我现在在看最后一案，因为省厅负责云货币的案子，也不想老三位干涉，所以局里特别安排他们去乡下当看路门神，美曰其名是蹲点嫌疑人，蹲到了就通知局里。完了他们直接做局，不仅抓到人也审完了。这一季的女警人设特别好，比去年年底只会喊「秦爸」的好太多了。这周我刷第二季我妈把《三叉戟》先给补了，都看得很开心～～～</p><p>《我的好邻居蜘蛛侠》一开始开分是7.6的，第一季完结之后直接8.1了，我第一集看完之后觉得soso，后面是等完结之后第二集开始一口气看完的，很爽，这才是《what if》第三季，然后墓石也加入这个动画宇宙了。现在的欧美圈是无法脱离政治正确了，但是在这样情况下，只要剧本okay我觉得也没事，目前第一季看来，诺曼父子还是很不错的～～～</p></blockquote><p>来自文章<a href="https://sspai.com/post/96380">《2025，让我们一起上台，好好说话》</a>：</p><blockquote><p><strong>少数派06381854 </strong>(+2) 罗永浩说，克服恐惧的其中一个办法就是把台下的人全部想象成不穿衣服</p></blockquote><blockquote><p><strong>西郊次生林 </strong>(+2) 读研以来做了前所未有多的presentation，一开始非常社恐，总想把pre的事情推给别人，但是没有成功（其他人也是这样想的），只能强行逼自己站到台上汗如雨下。后来，我在众目睽睽之下讲垮了不知道多少次，还出了几次事故，却没有产生任何后果（因为老师要求的pre是没人听的），我也开始享受起「全体目光」向我看齐那一瞬间带来的那种紧张刺激又兴奋的感觉。不过对我来说，能面向公众说一些话的机会其实不多，能够真正找到一群人谈自己感兴趣的事的机会更是几乎没有。所以真正来说，文字才是我的演讲，各大网络论坛才是我的讲台。我也很希望有朝一日能像作者一样，不再让大家自己去看，而是亲自给各位说说我的想法。</p></blockquote><p>来自文章<a href="https://sspai.com/post/96207">《【雷鸟V3】说点好听的，说点不好听的》</a>：</p><blockquote><p><strong>不器 </strong>(+10) 要是眼镜能支持麻将计算就好了，这样不会打牌的人也可以上场不至于主家担心客人无聊了😂</p></blockquote><blockquote><p><strong>超级流浪者 </strong>(+1) 我用的三星手机，可以使用原装的磁吸充电线，眼镜直接连接手机充电。大概耗费不到5%的电量就能充满雷鸟v3了，充电速度20-30分钟充满，就可以少带一个充电宝。</p></blockquote><p>来自文章<a href="https://sspai.com/post/96349">《2024 年总结：我是个学生，也是个「公司老总」》</a>：</p><blockquote><p><strong>xT星听 </strong>(+7) 没想到一人公司的概念，变成了个人思维上的管理。</p><p>不同的角色转换，确实会发现不同的注意点。</p><p>销售：自我外貌意识和产品不管怎样，我只管卖。</p><p>生产：专注于现有，精深下去。</p><p>研发：新业务开拓精神。</p><p>领导：对信息的视角拔高和目标的聚焦。</p><p>评论里的后勤：关注如何激励和发福利。</p></blockquote><p>来自文章<a href="https://sspai.com/post/95878">《致曾经智能手机百花齐放的时代》</a>：</p><blockquote><p><strong>鲍勃迪伦的口琴 </strong>(+20) 自认为近几年滚筒洗衣机式摄像头是最蠢最丑的设计（仅代表个人观点）</p></blockquote><blockquote><p><strong>自然风派 </strong>(+10) 这一定不是一篇LLM写出来的文章，个中感悟与经历如此的真切，深深打动了我这个同道中人，我是MIUI开始接触刷机，哪个百花齐放的时代，哪些无数个看到点亮手机屏的兴奋不已的夜晚，那些游走与各大论坛翻找新rom的日子，都是让人回味经历。今年已经踏入45岁了，对电子产品依然有着仪式般的追求，手机、电脑、平板、穿戴设备、nas等等还有各种的智能家居设备，时常的更换折腾，然而正如楼主说的一样，找不回过往那时的哪种感觉，特别在更换手机的时候，冲动购买那一刹那，把握几分钟新鲜感便消失，但每年都改变不了这种冲动，也许是内心想留着哪个曾经少年的自己。</p></blockquote><blockquote><p><strong>catbus </strong>(+10) 怀念那个百机齐放的时代，每天看各种手机的评测都乐此不疲。现在一个手机用三四年还没有换机的欲望。</p></blockquote><blockquote><p><strong>Leobai </strong>(+9) 只能说，工业设计趋同某种程度上是制造业发展的必然，所有产品向着固定统一的「主导设计」发展来在市场中占据稳定的份额获得稳定的利润也是从 19 世纪末到 21 世纪的太多行业的必经之路。不如说 201x 年智能手机刚刚兴起时的众多探索更像是草创期才会有的抓瞎，一旦确定摄像、大屏、全面屏比例之类形成了能够极大影响市场的稳定卖点后，厂商为了在当下主流市场中还有一席之地就必须在这三个领域开卷。而且当屏幕成为主要交互元件，奠定当今智能手机的主导设计以后，在它迄今为止短暂的历史里还能蹦出这么多创新（而不只是两个标准联盟在争怎样实现大容量光盘）实在是难能可贵。</p></blockquote><h2>📒社区摘要</h2><ul><li><strong>内山莉塔：</strong>《<a href="https://sspai.com/post/96642">2024，在非洲，得生命之自由</a>》</li><li><strong>StephenFang：</strong>《<a href="https://sspai.com/post/96610">在 2025 年重新体验 OS X Mavericks</a>》</li><li><strong>故事熊：</strong>《<a href="https://sspai.com/post/95696">法意瑞十一日游-瑞士篇（3天）：进入仙境</a>》</li><li><strong>Duuuuuuke：</strong>《<a href="https://sspai.com/post/96272">废物利用极限改造：Synology RS815+ DIY 升级 16GB 内存 + SSD 缓存</a>》</li><li><strong>午夜煎饼：</strong>《<a href="https://sspai.com/post/96558">猫咪知识分享-关于得猫瘟这件事</a>》</li><li><strong>大以：</strong>《<a href="https://sspai.com/post/96552">我的2025：合作 | 碰撞 | 出发</a>》</li><li><strong>BillXuHAHAHA：</strong>《<a href="https://sspai.com/post/96639">西西弗斯的游戏：我作为一个典型ADHD的接纳与重塑</a>》</li><li><strong>fredlian：</strong>《<a href="https://sspai.com/post/96609">日本小城游记---松本2.5日</a>》</li><li><strong>德坤：</strong><a href="https://sspai.com/post/96630">读书笔记256《你杀了谁》</a></li></ul><h2>🆕作者的新玩意</h2><p>为了让作者的投稿尽快与广大读者见面，我们调整了《新玩意》栏目中作者投稿部分的呈现方式和周期，作者投稿的「新玩意」后续会迁移至本栏目。投稿渠道与奖励方式仍与以往完全一致，详情参见文末。我们相信新鲜火热出炉的分享更能赢得大家的喜爱，也欢迎广大读者朋友们踊跃投稿。</p><h3>@yuchen_lea：MagSafe 磁吸+机械快拆贴片</h3><p>在 <a href="https://sspai.com/post/79095">新玩意 | iPad Pro 移动工作站 </a>中，我分享了自己在平板保护壳上使用了<strong>老爆科技的强力磁吸片</strong>作为平板与支架的连接方案。它的磁吸力确实很强，吸附 12 寸的大平板也不在话下。然而，磁吸总归是不如机械结构牢固，再加上我用的是平板，尺寸更大，有更大的概率因为碰撞而脱离磁吸。在一次起身不慎碰到了磁吸在支架上的平板，导致平板差点摔落的事件后，我决心找一个相比磁吸更可靠的方案。</p><p>常见的固定设备的方案有 2 种：</p><ol><li><strong>MagSafe 磁吸</strong>：装拆方便，外观简洁，有很多兼容的磁吸配件，但是不稳固。</li><li><strong>机械夹具</strong>：稳固性高，但是安装和拆卸相对麻烦。此外，更容易对设备造成划伤，iPad 等设备甚至有被夹弯的风险。</li></ol><p>经验告诉我，最好的方案不是 A，不是 B，而是 A+B：各取所长，优势互补。于是 ，经过搜索，我发现了还有一种「<strong>磁吸 + 机械夹具方案</strong>」：</p><ul><li>兼容 Magsafe 磁吸：一般可以通过磁吸固定设备的初步位置，另外也兼容其他的 Magsafe 磁吸配件</li><li>使用机械夹具增强稳定性：确保平板在任何情况下都不容易松动。</li></ul><p>跟「MagSafe 磁吸方案」类似，「磁吸 + 机械夹具方案」也由<strong>贴片</strong>和<strong>底座</strong>两部分构成，只不过除了磁铁，还包含了机械锁紧的组件，一般<strong>在贴片上是凹进去的组件，在底座上是凸出来的组件</strong>。因此，如果你在手机等设备上使用了「磁吸 + 机械夹具方案」的贴片，可以同时用于「MagSafe 磁吸方案」和「磁吸 + 机械夹具方案」的底座。但是「MagSafe 磁吸方案」的贴片不能用在「磁吸 + 机械夹具方案」的底座上。</p><figure class="image ss-img-wrapper image_resized" style="width: 449px;"><img src="https://cdnfile.sspai.com/2025/01/31/69b09ada74682f62cbcd7517b66081ea.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我买了 3 个品牌的「磁吸 + 机械夹具方案」进行对比：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/01/31/28b3c112c7109e104682b4c55a38f152.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>Peak Design SlimLink 是最早生产这类产品的品牌之一，以其精致的设计和纤薄的外观著称。能够快速、安全地连接到各种配件：<strong>安装直接吸附即可自动机械锁紧，拆卸时按下按钮就能轻松取下</strong>。由于发展较早，周边的各种配件也非常丰富。</p><figure class="image ss-img-wrapper image_resized" style="width: 400px;"><img src="https://cdnfile.sspai.com/2025/01/31/0e7644f3fc5714a8831b72e159f0cb6b.gif" /></figure><p>VRIG Claw Mini 看上去与 Peak Design SlimLink 很像，但是二者并不兼容，也就是说，<strong>你不能把 VRIG Claw Mini 的贴片和 Peak Design SlimLink 的底座配合使用，反之也不行</strong>。它的设计依然很纤薄，装拆和 Peak Design SlimLink 一样方便：直接吸附即可自动锁紧，按下即可取下。此外，采用的强力汝铁硼磁铁圆环提供了更强的磁力，底座配备的 1/4 螺口，相比球头有更好的兼容性。最重要的是，VRIG Claw Mini 的价格比 Peak Design SlimLink 亲民很多。</p><figure class="image ss-img-wrapper image_resized" style="width: 400px;"><img src="https://cdnfile.sspai.com/2025/01/31/2665d007661ddc5ba532fb5c02340b87.gif" /></figure><p>优篮子的 O-LOCK 磁吸快拆系统与前两者相比，做工显得扎实得多，外观也更加厚重。需要注意，<strong>安装时需要用力按下，而不是像前两者直接吸附即可自动锁紧</strong>。旋转时，O-LOCK 采用滚珠设计，每 15° 卡位。底座配置了 3 个 1/4 螺口，可以支持更多样化的设备安装。</p><figure class="image ss-img-wrapper image_resized" style="width: 400px;"><img src="https://cdnfile.sspai.com/2025/01/31/9c0ac289929f5ad56af980a3ce0463a5.gif" /></figure><p>具体对比如下：&nbsp;</p><figure class="image ss-img-wrapper image_resized" style="width: 400px;"><img src="https://cdnfile.sspai.com/2025/01/31/ae7f335e6104207ba28897ad5f74c822.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>贴片的磁铁位置</figcaption></figure><figure class="table"><table><thead><tr><th>&nbsp;</th><th>&nbsp;</th><th>VRIG Claw Mini</th><th>Peak Design SlimLink</th><th>优篮子 O-LOCK</th></tr></thead><tbody><tr><td rowspan="4">贴片</td><td>磁吸力</td><td>👍 汝铁硼磁铁圆环，强，<a href="https://www.amazon.com/VRIG-MG03L-Magnetic-Compatible-Adjustment180%%20C2%%20B0/dp/B0CN6HL367">20N</a></td><td>磁铁在四角，较弱，<a href="https://www.bilibili.com/video/BV14T4y1Y7ck/?share_source=copy_web&amp;t=91"> 网评 </a>比苹果设备强 2-3 倍</td><td>圆环，强，12N</td></tr><tr><td>厚度</td><td>3.5mm</td><td>👍 2.6mm</td><td>4.8mm</td></tr><tr><td>尺寸</td><td>边长 58.0mm，内边长 19.5mm</td><td>56.7，内边长 20.0mm</td><td>直径 60.0mm，内径 27.0mm</td></tr><tr><td>材料</td><td>PC 扣环 + 尼龙帆布</td><td>氧化锆陶瓷扣环（边缘锋利）+ 尼龙帆布（防雨）</td><td>？</td></tr><tr><td colspan="2">底座</td><td>👍 1/4 螺口、冷靴座</td><td>1 英寸球头（直径约 25mm）</td><td>👍 3 个 1/4 螺口</td></tr><tr><td rowspan="3">使用</td><td>安装</td><td>👍 直接吸附自动锁紧</td><td>👍 直接吸附自动锁紧</td><td>需要用力按下</td></tr><tr><td>拆卸</td><td>按下取下</td><td>按下取下</td><td>按下取下</td></tr><tr><td>旋转</td><td>依靠底座旋转，每 90° 一卡位</td><td>依靠球头旋转</td><td>依靠滚珠，每 15° 一卡位</td></tr><tr><td rowspan="3">价格</td><td>贴片</td><td>👍 36</td><td>255</td><td>👍 38</td></tr><tr><td>底座</td><td>👍 99</td><td>425</td><td>👍 60</td></tr><tr><td>合计</td><td>👍 129，有 88 套装</td><td>780</td><td>👍 98</td></tr></tbody></table></figure><p>经过对比，<strong>我最后留下的是 VRIG Claw Mini</strong>。36 元的贴片相比 30 元的老爆科技强力磁吸片也贵不了多少，就算机械卡扣磨损了，换新也不心疼。同时，更能满足我对稳定性、纤薄度的需求，相关配件也足够丰富，使用一年多了，我很满意。</p><h3>@阿扎哲健甫：米家即热饮水机S1</h3><ul><li>参考价格：本体￥189，配件￥18.9</li><li>购入渠道：闲鱼、淘宝</li></ul><p>前一阵子去朋友家玩桌游时种草了即热式饮水机，但是在几个商场逛了一圈后发现这个品类在线下很难见到实体。于是本着「小家电无脑相信小米」的念头，我把目光锁定在了米家即热饮水机 S1，这款饮水机已经能满足我所有基本的饮水需求了：</p><p>1. 随时喝到热水，并支持每 1℃可调节</p><p>2. 可触摸控制</p><p>3.<strong> </strong>好看</p><figure class="image ss-img-wrapper image_resized" style="width: 299px;"><img src="https://cdnfile.sspai.com/2025/02/23/a4949a01e1775682de735b6827c93221.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>米家即热饮水机 S1 完全体</figcaption></figure><p>但是悲伤的是我所在的地区无法使用这款产品的国补，于是只能去海鲜市场收留可怜的年会奖品，最终以 189 的价格拿下！</p><figure class="image ss-img-wrapper image_resized" style="width: 299px;"><img src="https://cdnfile.sspai.com/2025/02/23/adf04f0b52c868cddfc12df2cfc49f39.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>所在地区无法使用国补🥲</figcaption></figure><p>小米果然没让我失望，体验了一段时间，商品介绍上的功能确实都很好用：</p><ul><li><strong>即热出水：</strong>通过陶瓷管道加热技术，3 秒之内就能加热并出水；</li><li><strong>温度调节：</strong>40℃~90℃区间内的水支持每 1℃可调节，虽然默认的四档水温：常温、泡奶（45℃）、泡茶（75℃）、开水（95℃）已经能够覆盖我 90% 的使用场景了，但这个功能真的很加分；</li><li><strong>自适应童锁：</strong>当水温到达 50℃以上时，会自动开启童锁，这应该也是各类饮水机的标配了；</li><li><strong>水量控制：</strong>可随接随停，并支持三档固定出水量 250ml、500ml、750ml，让你在接水时不用傻傻等待，合理利用碎片时间（bushi）；</li><li><strong>智能唤醒：</strong>待机状态下，感应到水杯放到接水盒的位置会自动亮屏唤醒机器，虽然只是一个传感器的事情，但是切实体会到了「只要你给小米一个 Wi-Fi 芯片，恨不得把所有家具都接入智能家居」的态度。</li><li><strong>触屏操控：</strong>饮水机配备了 LED 数显屏，所有操作都可以通过触摸操控</li></ul><figure class="image ss-img-wrapper image_resized" style="width: 299px;"><img src="https://cdnfile.sspai.com/2025/02/23/7621d2fdf00de8fcf997edef3f8c61ac.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>触屏操控</figcaption></figure><p>那么，接下来到吐槽环节了。</p><ul><li><strong>出水比较慢：</strong> 这应该是所有即热式饮水机的通病了，但我也没有特别着急用热水的场景，这个痛点也就还好。</li><li><strong>智能唤不醒：</strong> 刚才提到的自动亮屏唤醒功能，我家里有几个杯子不能识别，直到我看到了商品页面详情上的一行小字「常见水杯都能正确感应并唤醒屏幕，刻花或多菱面水晶杯由于散射光线较多，有可能识别迟缓或无法正确识别」于是家里的冰川纹杯逐步实行下岗计划。</li></ul><figure class="image ss-img-wrapper image_resized" style="width: 300px;"><img src="https://cdnfile.sspai.com/2025/02/23/d61bf8c20eff6beb69c4b2853a7cecb2.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>无法识别的冰川纹杯</figcaption></figure><ul><li><strong>需要频繁添水：</strong> 水箱虽然有 3L，但是需要经常倒入直饮水并且需要定期清洗水箱的操作明显不符合我一个 <s>工科男 </s>懒人的减少重复工作的观念。但是官方卖的软管连接配件实在是太丑了，好像后脑勺被砍了一截，而且拆下来的水箱还需要另外找地方存放，实在是不太方便。</li></ul><figure class="image ss-img-wrapper image_resized" style="width: 299px;"><img src="https://cdnfile.sspai.com/2025/02/23/ef68def36f7c7b42a57684e2cfd38039.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>小米官方软管配件</figcaption></figure><p>某一天万能的淘宝给我推送了民间高手自己改装的软管配件商品，这不就是把我想要的都做出来了嘛，火速下单！收到货后参考商家发来的教程视频捣鼓一会儿就好了，十分简单！水箱不仅能够放在原位，保持美观的同时还能隐藏线管、存放用不到的配件，一举多得！改装后的饮水机才是图 1 展示的完全体，我立马把这个配件推荐给我另外一个也买了这款饮水机的朋友，替换掉了他买的官方配件。</p><figure class="image ss-img-wrapper image_resized" style="width: 299px;"><img src="https://cdnfile.sspai.com/2025/02/23/f3201f5c2147179227e373f41ea8ffac.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>装上改装软管配件后的水箱内部探秘</figcaption></figure><p>以前家里囤了好多矿泉水，经常是夜里渴了喝一口，第二天看着几乎满满一瓶的隔夜矿泉水，心里总有点膈应，这种情况再也没有发生过了，并且冬天随时都能喝到热水，也让我多喝了不少水✌️</p><h2>💬一派热议</h2><p>在上期第 197 期一派投票《<a href="https://sspai.com/bullet/1739851586">开工几日，聊聊你的「办公搭子」？ </a>》中，共有 365 名派友热情参与，十分感谢！</p><p><strong>别惹小炸毛 </strong>(+71) 也不算办公搭子吧，算是上班搭子，我叫它 「菠萝」，因为几乎跟我的上班路线是一致的，而且出发时间也差不多，经常会在路上遇到，相信车主肯定是一个十分热爱生活的人</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/18/800d60d0913fa6168a8171acef048e1a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>起东 WEI </strong>(+40) 硬件设施：Mac Mini M 联合创新 27 英寸 4KIPS 显示器、金豪 e2 美国网 + 躺舒宝</p><p>软件工具：Microsoft 36WPS 大会员、滴答清单、豆包、Kimi、deepseek</p><p>氛围营造：某奶茶店小鸭子装饰（约 100 只）、我派獭（2 只）、挂画、鲜花、茶盘、加湿器、小风扇等</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/02/18/56018d3a9f3795dc73edf689e2820234.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/18/8e0fbba6481c2cee5bd42f8c5936f7f2.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/18/86c3336e545c13819aa0e7801ab21de8.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>我叫镇三环 </strong>(+27) 又继续陪伴我新一年开始的 K380，好用，耐用，方便，轻巧。</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/18/cda0ef88f6a655001d3546422efe14ec.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>古枂易 </strong>(+19) 新年过来，新组了一把键盘</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/18/avatar/29cadfc3e7d6ae8485cd8d762b8f2012.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>追风青松 </strong>(+19) 年年有余，天天不加班，明天再弄😁</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/18/avatar/250c3a7f0cd547638d0ed8d230b97ad8.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>Rofix </strong>(+17) 格格巫～</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/18/b370872ac1caad22a56d7cfd959bc006.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>柯里昂 </strong>(+16) 居家办公：</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/19/avatar/a5b6734f4dcb836a9147ec4ae7640b17.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>阿狸阿立分不清 </strong>(+16) 用 ThinkPad X1 很多年了，主要是这款电脑天然就自带数据流量，当时购买的时候送了一整年的无限流量（目前已经到期，但自己购买了一年 1500G 的流量），也就是说这台笔记本脱离无线网络依然可以保证上网运行，这是最大的优点（市场上同类型的貌似真的很少），同时，X1 在材质和重量上也控制的很商务，本身的配置也非常适合办公需求。</p><p>个人觉得，ThinkPad 系列笔记本，对商务工作的适配度几乎无人能敌！</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/19/avatar/3cc812bafa232867cda3be95b8cedfe2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>面具熊 </strong>(+15) 我的办公搭子们，看着就赏心悦目心情好！</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/02/19/avatar/0de22802b1da3635ec732b5864d0af7e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/19/avatar/a1b87e0984ad9904c20bcc13a88f0671.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/02/19/avatar/f239669f835119c6cc687b828c152f7c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/19/avatar/165693565ec325c8399b7acd0df3c4ee.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>刘不住 </strong>(+11)&nbsp;</p><ul><li>推荐产品：罗技 k860 商用版。</li><li>购买渠道及价格：我在转转上消费 413 元购买了这款 99 新人体工程学键盘，比京东全新买便宜了 300。</li><li>到手体验及适宜人群：到手功能完好、外观确实 99 新。推荐打字多的编辑、记者、作家朋友们使用。</li><li>供电方式及功能：它用的是两节干电池（官称续航两年）、支持蓝牙和 4g 专用接收器（没有有线连接）、支持 macos&amp;win&amp;ios&amp; 安卓四种系统并可以用按键快速切换、在上方的 fn 按键中，集成了快速截图、快速闭麦、快速计算器等常用的功能、同样它也支持搭配罗技鼠标和 flow 功能在 win 和 macOS 无缝使用并拖拽文件。</li><li>使用体验：一开始是不适应的，因为我经常会用右手按 b 键，但是在键盘上被分配到了左手，盲打惯了的我，需要看着键盘打字。用一段时间后准确率提升了又可以盲打了。我最高记录是坐了三个小时写了篇 3000 字的视频逐字稿，写完后，没有感觉到手肘、手腕关节处有之前用 mac 原装键盘的肌肉绷紧的不适感，推荐大家都可以用用。</li></ul><p>转转现在也有 7 天无理由了，但是要在下单时看清楚 7 天无理由的条件，我就是看有七天无理由才下单的，想着不合适可以退，没想到还挺合适的，算是安全下车了。</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/18/9b0dcd15d4dd2d994314b41c6d9f6649.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>Abbott97 </strong>(+10) Macbook Pro 2019 intel i5 ，Mac mini M1 首发最低配，iPad pro 2018 已弯 + 2 代笔。五年了，从留学到进入单位，他们的配合在我这里依旧丝滑，和我的工作流结合的恰到好处，甚至在背包里的位置都严丝合缝。最近单位开发新系统只能下载在 Windows，研究打算入个 thinkpad 16p，希望它的加入可以带着我们这个大家庭开启新的五年计划。</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/19/862f67d966403e76862b19385f73c54f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>害怕网络暴力 </strong>(+9) 我的老腰就靠你守护了 — 赫曼米勒 Aeron2</p><p>个人理解，你在工位上使用频率越高的产品，无论公司给不给配，也有必要自己投资一下。比如一把好椅子守护身板，一个好显示器守护眼睛。买把好椅子真的是很划算的投资，比如赫曼米勒座网的设计绝对是目前市面上没有能比拟的，久坐不累，价格虽然贵点但是有 12 年质保期，二手市场保值率高，综合下来的每年投入其实并不大，健康绝对不是小事，推荐很多抱着公司不发绝对不会自费上班心态的朋友转换一下思路，而且就算买了放公司，椅子也是自己的不是公司的。</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/20/7288a9a67104296422e44791b1cb36e9.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>Gurri </strong>(+8) 今年最爱的办公搭子是 1688 入手的全套手冲咖啡工具。其它搭子还有自己做的便当，公仔若干，共同点是都和生产力都没什么关系（</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/02/19/040f22f38f21017d7617f39e6fcde574.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/19/4833a3b123b8887c34329c0eb458f4c7.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/19/c9d85a633b01b3c87250711e9c302368.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/02/19/0c85eee2f1b458d6d4bc1ed076b0c12b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/19/7ad63a43035f5602e9d284ae1958413b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/19/bc62d78629bc66c65745bf6f1c70eadf.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>Monolith </strong>(+7) 硬件：</p><p>新买了舒躺家（国补 750 左右），其实本身预算更高，但看博主推荐买了龙纹特网那款，先说缺点，我这款不带扶手联动，躺着时看手机有点不舒服，手无处安放。然后的话就是主打之一的多少 D 扶手，这个扶手我个人觉得很难用，前后左右的滑动没有一个固定卡住的机械结构，导致起身永远在咔哒哒哒，不喜欢。优点的话，脚垫能用，腰靠还行，比较舒服，稳定性不错，总结的话，都是一些基础的东西做的还行。「增值」 加钱的很多都不够让人满意（卖点：扶手）。</p><p>然后就是一些老物件了，服役两年多年的 G304 和 Vgn 98pro 一代，联合创新 4K 显示器，闲鱼收的显示器挂灯，双十二买的 Freeclip。</p><p>新囤货：</p><p>蒸汽眼罩（miniso 的还是那么强啊，自从五六年前看评测来，间断的买了许多，归来王者还是 miniso 的），最近感觉累的眼睛要瞎掉了；粘毛器，年前 pdd 看到杂牌特惠 5 买了十卷 + 柄，日常鼠标垫总是落灰，买来定期滚一滚；VB，VC，VD 京东薅一堆，熬夜需要修复，蔬菜吃得少，不晒太阳，只能吃吃吃。</p><p>软件：</p><p>工作唯二强推 Sinpaste，贴到屏幕上功能日常必备；Powertoys，主要用 Always On Top，都是应对现在的多窗口层级问题的。</p><p>One more thing：</p><p>终于找到了 win11 classic menu 把公司电脑还原了 win10 右键，可喜可贺！</p><p><strong>晕船的章鱼 </strong>(+6) 陪我两年的套件，经手很多键盘，一直留着这一把。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/02/21/985e113e0dcf299371a6d09ae4c9c13c.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/21/b5c4770dc19d73b68a789b5ab81bc9d9.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>fugu </strong>(+4) 罗技 Mx Keys Mini，是薄膜键盘，打字声音很小，很轻柔，键程很短，手指基本不用怎么发力，买到他的时候我正好学会了盲打，现在走哪里都带着他，平板笔记本电脑多台设备都能切换</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/21/avatar/65a9bc6265024a255236574c3574fdbe.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>一直住楼顶 </strong>(+3) 腰是自己的，家里 Embody，公司 Gesture</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/02/23/0cccf7acae1d3407e8fd23eb76c7b7c0.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/23/bfbd2a8166cc2f94e9a59ad9fb7f3b92.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>锋利的勺子 </strong>(+3) 很喜欢在家的学习套件</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/23/avatar/6a57d8104b9e2704cfb0c30bafef7854.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>火总 </strong>(+3) 荣耀 magicbookV14：办公、学习，看片没给我拖过后腿，去年 steam 玩黑神话到黑风大王没带起来，换 start 玩通关了，是立过功的电脑，可惜年初发现运行时间长发热的话，按 6 附近的键会锁定电脑，超崩溃</p><p>落菲 dot 无线键盘：买了有 6 年了，给媳妇上班用过一段时间，最近还给我了，手感很不错，关键是不会再触发锁屏了</p><p>讯飞录音笔 s702：在山东做工程管理，懂得都懂，有些人说话跟放屁一样随便，留录音以防背刺，正好有时候出差开会，需要转录</p><p>蘑菇灯无线充：苹果手机、耳机、手表无线充一个搞定，20w 输入电源即可，还挺方便，价格是个谜：在拼多多上第一次买花了 140，第二次买花了 100 出头，每次看价格都不一样，用会员赠的券比不过随机推送的活动，最近在戒断手机，手机手表放上面立即离开，找到自己的仪式感</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/21/avatar/c54df8bdb024af059a98dbf519fc016f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>ZephyrZ </strong>(+3) 新的一年，新搞的键盘，和新来的阿耿，以及同事春节去日本带给我的扭蛋圣代皮卡丘</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/02/19/1388821913ff42fdf87e0fbdb30dc91f.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/19/6d16925e1f819ab13f55a53b894b33fd.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>Verfassung </strong>(+2) 作为一个苦逼，但是又早早结婚的博士狗，办公搭子必须是电脑 + 显示器。</p><p>先来说说显示器：</p><p>由于我在学校和租的房子里都有办公需求，因此我在 28 和 210 先后入手了 LG UQ850-W 和 - V 两台显示器。</p><p>尽管没有高刷，但是我只有在触摸设备上才有刚性的高刷需求；即便我的两台电脑都支持高刷了，但是显示器没有高刷这件事意外地被我接受了。</p><p>两台 UQ850 子型号的区别据说是 LG 和 BOE 面板的区别，但是我还真看不出来。两款显示器在我看来都足够优秀：亮度够高，有一线通，显示细腻，色彩准确。</p><p>再来说说笔记本：</p><p>我确实没想到，206 开始到现在不到一年的时间，我更换掉了我手头的两台笔记本：二手的 Surface Pro X 在 206 被更新为 Surface Pro 11 32+1T；二手的 ThinkPad Z13 则在这个月被替换为 Surface Laptop 7 32+1t。也就是说，我现在不仅是两台笔记本，而且是两台 Surface，还是两台 arm 的 Surface。</p><p>这个搭配组合显然无法让人理解：为啥要两个 Surface？为啥要两个 WOA？</p><p>但对于我来说，这样的搭配组合反而有其优势：从模具来说，Surface Pro 的模具已经趋于成熟；去年新推出的 Flex 键盘在我看来做到了平板键盘的天花板。Laptop 7 正好经历了模具更新，可维护性大幅度提升，同时引入了高刷和全域压感触摸板。从性能来说，X elite 芯片的离电性能非常不错，续航也是薄纱了除了 lunar lake 以外的所有 windows 平台芯片。最后从搭配来说，两个机器一样的配置、一样的键盘布局，均高于平均线的续航，能带来近乎一致的办公体验</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img alt="" src="https://cdnfile.sspai.com/2025/02/19/e34d5f02ec49d17439a419053c314f71.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>DEPYKUNG </strong>(+1) 给我的少数派联名 K3 换了套键帽，虽然大键换不了，但总体新鲜感足了。而且没想到换键帽后，手感更好，打工咔咔快！</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/02/19/avatar/ea9fa221f8a6cfee22a8d3bab20d34bd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/02/19/avatar/8c9c7cf6ccc945eaa64b341912c4dde6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>如果你也想分享「新玩意」🔉：</strong></p><ul><li>获取 Matrix 社区写作权限并签署 <a href="https://sspai.com/post/72089" target="_blank">Matrix 共创计划</a>；</li><li>在少数派独家发布一篇文章，在标题中标注「新玩意」前缀；</li><li>用至少 800 字介绍产品，并配上 2-3 张产品的实拍图片；</li><li><strong>在网站个人信息中补充支付宝账号。</strong></li></ul><p>成功入选本栏目还可以得到 108 元的「剁手红包」🧧。如果你有兴趣参与，就赶紧来稿吧！</p><p>&gt; 下载少数派 <a href="https://sspai.com/page/client" target="_blank">客户端</a>、关注 <a href="https://sspai.com/s/J71e" target="_blank">少数派公众号</a>，了解更多的新玩意 🆒</p><p>&gt; 特惠、好用的硬件产品，尽在 <a href="https://shop549593764.taobao.com/?spm=a230r.7195193.1997079397.2.2ddc7e0bPqKQHc" target="_blank">少数派 sspai 官方店铺 </a>🛒</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/96562</id>
-            <title>划词翻译、OCR 文字提取：我用 AutoHotKey 给自己写了一个小工具</title>
-            <link>https://sspai.com/post/96562</link>
-            <guid isPermaLink="false">https://sspai.com/post/96562</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 25 Feb 2025 07:08:55 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;<br />文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>我是一个 Mac 用户，因为工作原因，不得不在办公时使用一台性能堪忧的 Windows 笔记本电脑。</p><p>在此前的<a href="https://sspai.com/post/90212" target="_blank">一篇文章</a>里，我介绍了自己如何利用 PowerToys 和 AutoHotKey(下文简称 AHK) 等工具来改善我的 Windows 使用体验，提高办公效率。当时我提到自己在 Mac 上使用的翻译软件 Bob，主要功能是划词（句）翻译和截图识别文字，除了自带服务外，还可以接入各大服务商，借助各种模型完成翻译；而在 Windows 上，翻译功能我使用 PowerToys 自带的 PowerToys Run 加上有道翻译插件，配合 AHK 热键，实现复制选中内容并立即唤出 PowerToys Run 翻译。识别文字则直接使用的 PowerToys 自带的「文本提取器」工具。</p><p>很显然，上述替代方案不够好用，一是响应速度一般，二是翻译和识别的质量不好，特别是对于较长的文本和扫描件。</p><p>于是，我首先找到了 Windows 上各方面都和 Bob 挺相似的工具 <a href="https://github.com/ZGGSONG/STranslate" target="_blank">STranslate</a>，STranslate 说实话已经基本可以满足我的需求，但我还是产生了想要折腾一下的念头——当然这也不是全无原因的，一来可能是 STranslate 的用户相对较少，第三方插件不如 Bob 多，虽然 STranslate 已经提供了相当多的服务商选择，但我目前使用的 API 服务商还未在列表中；二来，要么是我的办公电脑性能太差、要么是办公网的限制，现有服务响应速度并不是特别快，这导致我往往得盯着弹出的窗口等待半天；三来，可能还是因为电脑不行，有时会出现热键失效，或者划词（句）翻译无法正确翻译被选中语句的情况，重启软件后才恢复正常。</p><figure class="image ss-img-wrapper image_resized" style="width: 442px;"><img src="https://cdnfile.sspai.com/2025/02/20/506be2787f05ea75775cc86dafb1efe2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>本着能轻便就轻便，能少开一个进程就少开一个的原则，我打开了一直在后台默默工作的 AHK 脚本。我的目标是模仿 Bob 和 STranslate，利用 AHK 脚本和大模型 API，实现翻译选中文字，以及截图识别文字的功能。</p><p>在实现的过程中，我借助了 DeepSeek 和 Gemini 等 AI 来起草代码，效果相当不错，其中翻译功能的核心部分基本上可以拿 AI 给出的示例直接使用，识别文字的功能错误相对较多（经测试加上联网搜索效果会好一些）。在理解 AI 给出的代码后，经过各种小修小补，补上我自己的额外需求，最终得到了我想要的效果。</p><p>这是我写的第一个利用大模型 API 的小工具，写的过程还是十分有趣的。下面我将介绍 AHK 是如何实现这两个功能的，并在最后给出完整的代码示例。</p><h2>准备工作</h2><p>首先，需要 AHK 这个脚本工具（<a href="https://sspai.com/post/www.autohotkey.com" target="_blank">官方网址</a>），AHK 有很多教程，其文档也有中文<a href="https://autohotkey.top/AutoHotkey2.0/docs/index.htm" target="_blank">翻译版本</a>，我在<a href="https://sspai.com/post/90212" target="_blank">上一篇文章</a>中也对此做了不少介绍，此处就不再赘述。</p><p>需要注意的是，如果你跟我一样使用 AHK 2.0 版本（推荐使用这个最新的版本），<strong>在询问 AI 时一定要强调使用 AHK 2.0 版本的语法</strong>，并且即使如此，AI 偶尔也会给出不能够在 2.0 版本中使用的代码，这时候针对错误要求 AI 修改即可；<strong>其次在向大模型服务商发送请求时要使用 JSON 格式，需要使用 JSON 库</strong>，这里我用的是<a href="https://github.com/thqby/ahk2_lib/blob/master/JSON.ahk" target="_blank">这个</a>，下载后放在同 AutoHotkey.exe 同目录的 Lib 文件夹内（如无就新建一个）就可以<sup class="ss-footnote" href="" title="比如对我而言这个地址是 C:\Program Files\AutoHotkey\v2\Lib">1</sup>。</p><p><strong>类似的，在截图文字识别中，要将剪贴板中的截图保存下来发送请求，需要使用到 GDIP 库</strong>。这里我走了很多弯路，一是 AI 总是给出不存在的语法，比如什么 <code>Clipboard.GetData()</code>；二是调用 Windows API 函数 <code>GetClipboardData</code>，但在我这里尝试了许多次、换了都没有成功；三是网上的 GDIP 库很多是基于旧语法的，在 AHK 2.0 中不能使用。最终我找到的可用于 AHK 2.0 的 GDIP 库来自这个<a href="https://github.com/mmikeww/AHKv2-Gdip" target="_blank">地址</a>。</p><p>在下载上述两个库并放在指定位置后，在脚本中加入这样两行代码，后续即可使用里面的函数：</p><pre class="language-null"><code>#Include &lt;JSON&gt;
-#Include &lt;GDIP_ALL&gt;</code></pre><p><strong>最后，是需要准备大模型 API，或者翻译 API</strong>，目前有大量选择，这里不做任何推荐，请注意保留好自己的 API KEY（可能有 ID 等）不要对外泄露。不同的 API 在请求服务时的代码有所不同，需要查阅各家提供的文档，当然更方便的方式是请 AI 查阅这些文档并给出相应的 AHK 2.0 代码。因为我自己使用的是 OpenRouter（<a href="https://openrouter.ai/docs/quickstart" target="_blank">文档地址</a>），其他服务商在代码上与此可能有差异的地方，下面我会尽量做出提示。</p><h2>设置热键、获取文字和截图</h2><p><strong>首先我们要针对翻译和文字识别功能，设置不同的热键（快捷键）</strong>：</p><pre class="language-null"><code>^+d:: translate()
-^+1:: ocr()</code></pre><p>这里我分别使用的是<code> Ctrl + Shift + D</code>，以及 <code>Ctrl + Shift + 1</code>，没有什么特殊的原因，单纯是这个按键和我在 Mac 上使用的 Bob 设置相同。需要说明的是，我个人是交换了 Ctrl 和 Alt 的，所以这里其实使用的是键盘上的 Alt 按键。如果使用 Alt，只要将上面的 ^ 修改为 !。</p><p><strong>然后我们需要获取文字和图片，这里我都使用的是剪贴板</strong>。并且对于返回的结果，我也会保存到剪贴板，如果你不想要让剪贴板受到「污染」，可以考虑加上以下代码来临时保存剪贴板内容再还原回去（<a href="https://wyagd001.github.io/v2/docs/lib/ClipboardAll.htm" target="_blank">参考文档</a>），我自己未使用这个方式。</p><pre class="language-null"><code>ClipSaved := ClipboardAll() ; 保存剪贴板内容
-;（完成后续需要使用剪贴板的各种操作）
-A_Clipboard := ClipSaved ; 恢复剪贴板
-ClipSaved := ""</code></pre><p>所谓划词（句）翻译，就是把选中的词句翻译为指定语言，因此这时候操作上一定是选中了要翻译的内容，这里发送 Ctrl + C 复制就可以，等待剪贴板存在文字内容后，继续后续操作。</p><pre class="language-null"><code>translate(){
-A_Clipboard:= ""
-Send "^c"
-ClipWait() ; 等待剪贴板存在文字
-text:= A_Clipboard
-;（完成后续的各种操作）
-}</code></pre><p>截图识别相对复杂，也是上面我提到走了不少弯路的地方，截图利用系统自带的 <code>Windows + Shift + S</code> 就可以，由于我自己在工作时常开着微信，微信截图在我这里稍快一点，且截图选框后还可以修改范围，所以我用的是微信截图快捷键 <code>Ctrl + Alt + A</code>。等待剪贴板存在内容后，这里需要临时将截图保存到某个文件中，文件的地址可以自己指定，事后会删除。</p><pre class="language-null"><code>ocr(){
-A_Clipboard:= ""
-Send "^!a" ; 系统截图使用 #+s，微信截图使用 ^!a
-ClipWait(, 1) ; ClipWait 第二个参数指定为 1，意思是任何类型的数据，否则默认仅限于文本或文件
-
-file_tmp:= "tmp_clipboard_pic_" A_YYYY A_MM A_DD ".png" ; 选一个不会与已有文件重复的名字即可
-path:= "C:\Users\用户名\Downloads\" file_tmp
-; 下面几行是使用 GDIP 库的一系列操作，用途只有把图片临时保存并写入文件，然后再读取这个文件，存入变量 img
-pToken:= Gdip_Startup()
-pBitmap := Gdip_CreateBitmapFromClipboard()
-Gdip_SaveBitmapToFile(pBitmap, path)
-Gdip_DisposeImage(pBitmap)
-Gdip_Shutdown(pToken)
-img:= FileRead(path, "RAW")
-;（完成后续的各种操作）
-FileDelete(path)
-}</code></pre><h2>发送请求以获取翻译结果、识别文字结果</h2><p>从这一部分开始，不同 API 服务商操作会有所不同，以我使用的 OpenRouter 为例，首先我需要获取请求的网址，以及我申请的 API KEY，然后选择使用的模型。这里可以一次性填入多个模型，注意识别文字需要使用具有视觉功能的模型，下面以翻译功能为例，识别文字部分详见后面的完整代码。如果使用的是腾讯翻译，则需要的是 API ID 和 API KEY，且不需要选择模型。</p><pre class="language-null"><code>url:= "https://openrouter.ai/api/v1/chat/completions"
-api:= "" ; 填入申请的 API KEY
-models:= ["",] ; 填入模型名称，可以填写多个，用引号包围，用逗号隔开（均为英文标点）
-w_model:= 1
-langs:= ["中文", "英文",] ; 如果有其他语言需要，可以继续填入
-t_lang:= 1</code></pre><p>可以看到，我这里设置了两个初始为 1 的标记变量，目的是用来切换使用的模型和目标语言，以目标语言为例，默认选项 <code>t_lang = 1</code> 时，数组 <code>langs[t_lang]</code> 为 “中文”（注意 AHK 数组是从 1 开始的）。为此，我当然也设置了切换使用模型和目标语言的热键，并且，在切换后会显示切换的结果，持续一小段时间。以下以切换目标语言为例：</p><pre class="language-null"><code>^+2:: switch_target_lang()
-switch_target_lang(){
-global t_lang
-t_lang:= Mod(t_lang, langs.Length) + 1 ; 循环切换数字，也就是对数组长度求余后加一
-ToolTip Format("翻译为{}", langs[t_lang]) ; 显示当前设置为翻译成什么语言
-SetTimer () =&gt; ToolTip(), -1200 ; 让显示窗口在短时间内消失
-}</code></pre><p>效果如下：</p><figure class="image ss-img-wrapper image_resized" style="width: 120px;"><img src="https://cdnfile.sspai.com/2025/02/20/9c41d8b50aaaa104e7927c0a4d6c0d1e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>事实上，OpenRouter 也支持自动选择或自动切换使用的模型（<a href="https://openrouter.ai/docs/features/model-routing" target="_blank">参考文档</a>），目前我采用自己切换选中模型的方式，主要是为了确定翻译结果来自于哪个模型，以便于比较各模型速度和效果。</p><p>接下来是获取翻译，将前面选中并复制的文字 <code>text</code>，以及选中的目标语言 <code>langs[t_lang]</code> 以及选择的模型 <code>models[w_model]</code> 分别传入以下函数。这部分内容因选择的服务商而异，在构造请求方面有不同，腾讯 API 似乎还有一个签名的过程，这部分可以请 AI 查阅对应服务商的文档来帮助我们起草：</p><pre class="language-null"><code>get_translation(text, lang, model){
-; 使用 COM 组件，其中 HTTP 请求头 Header 怎么构造在服务商的文档中一般有写
-req:= ComObject("WinHttp.WinHttpRequest.5.1")
-req.open("POST", url, true)
-req.SetRequestHeader("Authorization", "Bearer " api)
-req.SetRequestHeader("Content-Type", "application/json")
-&nbsp;
-; 构造请求的内容，一般就是要翻译的内容，对于大模型而言需要加上提示词
-prompt:= "你是一位精通多种语言的专业翻译，请将内容精准地翻译为" lang "，只返回译文不要额外内容。"
-message:= [
-Map("role", "system", "content", prompt),
-Map("role", "user", "content", text)
-]
-&nbsp;
-; 发送请求
-req.Send(JSON.Stringify(Map(
-"model", model,
-"messages", message,
-"temperature", 0.5 ; 大模型的温度参数，越高越有创造力，越低越严谨
-)))
-req.WaitForResponse()
-&nbsp;
-; 收到并返回结果
-response:= JSON.Parse(req.ResponseText)
-return response["choices"][1].Get("message").Get("content")
-}</code></pre><p>对于识别文字可能还有一些额外步骤，比如对于 OpenRouter，需要把图片先转换为 Base64 编码，以下是我测试后可行的转换方法，即调用 Windows API 函数 <code>CryptBinaryToString</code>，网上其实也有针对 AHK 2.0 的 Base64 库，如果以下方法不行，也可以尝试使用库（我的测试方法是，把转换后的 img_64 赋值给剪贴板 A_Clipboard，然后网上找一个 Base64 解码为图片的在线网站试一下能不能把它还原回去）：</p><pre class="language-null"><code>DllCall("crypt32\CryptBinaryToString", "ptr", img.Ptr, "uint", img.size, "uint", 0x1, "ptr", 0, "uint*", &amp;size := 0)
-buf := Buffer(size * 2)
-DllCall("crypt32\CryptBinaryToString", "ptr", img.Ptr, "uint", img.size, "uint", 0x1, "ptr", buf.Ptr, "uint*", &amp;size)
-img_64:= StrGet(buf.Ptr)</code></pre><p>识别文字使用的提示词和请求内容（毕竟要告知大模型这是 Base64 编码的图片）也有所不同：</p><pre class="language-null"><code>prompt:= "提取图片中的全部文字（保持原文换行）, 只需要回答提取的文字内容。"
-message:= [
-Map("role", "system", "content", prompt),
-Map("role", "user", "content", [
-Map("type", "text", "text", prompt),
-Map("type", "image_url", "image_url", Map("url", "data:image/png;base64," img_64))
-])
-]</code></pre><p>其余部分则没什么差异，与上面的翻译函数基本一致，这里就不展示了，详见后文完整代码。</p><h2>显示、复制返回的结果</h2><p>在得到上述翻译、识别文字结果后，我遇到了一个额外的困难，这部分我不确定是否是 OpenRouter 服务商独有的，那就是我得到的结果是一串乱码，从其颇有规律的排布来看应该是某种编码，经过一些测试，我发现它是 ISO-8859-1（Latin-1）编码。</p><figure class="image ss-img-wrapper image_resized" style="width: 509px;"><img src="https://cdnfile.sspai.com/2025/02/20/ead657bbacfcecbb66644bd8e72c1c82.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>因此额外地，我需要将结果再转为 UTF-8 编码：</p><pre class="language-null"><code>str:= get_translation(text, langs[t_lang], models[w_model]) ; 获取翻译结果
-; 以下三行的效果是将结果从 ISO-8859-1 编码（在 AHK 中为 cp28591）转为 UTF-8 编码
-byte:= Buffer(StrPut(str, "cp28591"))
-StrPut(str, byte, "cp28591")
-result:= StrGet(byte, "utf-8")</code></pre><p>显示结果有至少两种方法，一种是使用 <code>ToolTip</code>，效果是显示一个工具提示的小窗口，考虑到文字较小，且一次性翻译或识别文字的文字量较大，没有选择让它一段时间后自动消失，而是设计为任意位置点击左键消失，之后将内容复制到剪贴板，方便使用或再次查看。</p><pre class="language-null"><code>ToolTip result
-KeyWait("LButton", "D") ; 等待一次左键点击
-ToolTip() ; 关闭工具提示窗口
-A_Clipboard:= result ; 将结果复制到剪贴板</code></pre><p>这种做法的优点是不会弹出额外窗口，显得很轻便，但缺点是文字较多的时候看起来较为不便。所以另一种选项是使用 <code>msgbox</code>，弹出一个对话框来显示结果，由于窗口的文字框的大小更合适，可以考虑把原文和译文都显示出来，如下所示：</p><pre class="language-null"><code>msgbox Format("原文：{}`r`n`r`n`r`n译文：{}", text, result)
-A_Clipboard:= result</code></pre><p>我自己使用的仍然是 <code>ToolTip</code> 方法，因为我觉得这看起来更轻便，全屏任意位置点击左键关闭窗口也更不影响操作。</p><h2>其他</h2><p>考虑到请求服务可能失败，为了让自己知道请求已经失败了而不是网络太慢，可以使用 <code>try</code> 语句在失败时抛出错误。</p><pre class="language-null"><code>try{
-;（获取翻译的一些列操作）
-} catch as e {
-ToolTip Format("翻译失败：{}", e.Message) ; 显示翻译失败和报错内容
-SetTimer () =&gt; ToolTip(), -1800 ; 短时间后自动关闭显示
-}</code></pre><p>自己写的脚本有一个好处，就是可以随时根据需要修改或添加功能，比如前面提到的切换模型，在每次只输出一个结果的使用场景下，切换模型比 Bob 等工具还要方便一点。同样的道理，也可以写一个切换不同服务商的开关并分配热键，或者像是 Bob 那样，同时显示多个不同的模型的输出结果，从上到下依次排布。</p><p>最后，给出我的完整代码供大家参考：</p><pre class="language-null"><code>#Requires AutoHotkey v2.0
-#Include &lt;JSON&gt;
-#Include &lt;GDIP_ALL&gt;
-&nbsp;
-url:= ""
-api:= ""
-models:= ["",]
-w_model:= 1
-langs:=["中文", "英文",]
-t_lang:= 1
-&nbsp;
-url_ocr:= ""
-api_ocr:= ""
-models_ocr:= ["",]
-w_model_ocr:= 1
-&nbsp;
-&nbsp;
-^+d:: translate()
-^+1:: ocr()
-^+2:: switch_target_lang()
-^+3:: switch_model()
-^+4:: switch_model_ocr()
-&nbsp;
-switch_target_lang(){
-global t_lang
-t_lang:= Mod(t_lang, langs.Length) + 1
-ToolTip Format("翻译为{}", langs[t_lang])
-SetTimer () =&gt; ToolTip(), -1200
-}
-&nbsp;
-switch_model(){
-global w_model
-w_model:= Mod(w_model, models.Length) + 1
-ToolTip Format("使用以下模型：{}", models[w_model])
-SetTimer () =&gt; ToolTip(), -1800
-}
-&nbsp;
-switch_model_ocr(){
-global w_model_ocr
-w_model_ocr:= Mod(w_model_ocr, models_ocr.Length) + 1
-ToolTip Format("使用以下模型：{}", models_ocr[w_model_ocr])
-SetTimer () =&gt; ToolTip(), -1800
-}
-&nbsp;
-translate(){
-A_Clipboard:= ""
-Send "^c"
-ClipWait()
-text:= A_Clipboard
-&nbsp;
-try{
-str:= get_translation(text, langs[t_lang], models[w_model])
-byte:= Buffer(StrPut(str, "cp28591"))
-StrPut(str, byte, "cp28591")
-result:= StrGet(byte, "utf-8")
-&nbsp;
-ToolTip result
-KeyWait("LButton", "D")
-ToolTip()
-A_Clipboard:= result
-} catch as e {
-ToolTip Format("翻译失败：{}", e.Message)
-SetTimer () =&gt; ToolTip(), -1800
-}
-}
-&nbsp;
-get_translation(text, lang, model){
-req:= ComObject("WinHttp.WinHttpRequest.5.1")
-req.open("POST", url, true)
-req.SetRequestHeader("Authorization", "Bearer " api)
-req.SetRequestHeader("Content-Type", "application/json")
-&nbsp;
-prompt:= "你是一位精通多种语言的专业翻译，请将内容精准地翻译为" lang "，只返回译文不要额外内容。"
-message:= [
-Map("role", "system", "content", prompt),
-Map("role", "user", "content", text)
-]
-&nbsp;
-req.Send(JSON.Stringify(Map(
-"model", model,
-"messages", message,
-"temperature", 0.5
-)))
-req.WaitForResponse()
-response:= JSON.Parse(req.ResponseText)
-return response["choices"][1].Get("message").Get("content")
-}
-&nbsp;
-&nbsp;
-ocr(){
-A_Clipboard:= ""
-Send "#+s" ;^!a
-ClipWait(, 1)
-&nbsp;
-file_tmp:= "tmp_clipboard_pic_" A_YYYY A_MM A_DD ".png"
-path:= "C:\Users\用户名\Downloads\" file_tmp
-pToken:= Gdip_Startup()
-pBitmap := Gdip_CreateBitmapFromClipboard()
-Gdip_SaveBitmapToFile(pBitmap, path)
-Gdip_DisposeImage(pBitmap)
-Gdip_Shutdown(pToken)
-img:= FileRead(path, "RAW")
-&nbsp;
-try{
-str:= get_ocr(img, models_ocr[w_model_ocr])
-byte:= Buffer(StrPut(str, "cp28591"))
-StrPut(str, byte, "cp28591")
-result:= StrGet(byte, "utf-8")
-&nbsp;
-ToolTip result
-KeyWait("LButton", "D")
-ToolTip()
-A_Clipboard:= result
-} catch as e {
-ToolTip Format("识别失败：{}", e.Message)
-SetTimer () =&gt; ToolTip(), -1800
-}
-&nbsp;
-FileDelete(path)
-}
-&nbsp;
-get_ocr(img, model){
-DllCall("crypt32\CryptBinaryToString", "ptr", img.Ptr, "uint", img.size, "uint", 0x1, "ptr", 0, "uint*", &amp;size := 0)
-buf := Buffer(size * 2)
-DllCall("crypt32\CryptBinaryToString", "ptr", img.Ptr, "uint", img.size, "uint", 0x1, "ptr", buf.Ptr, "uint*", &amp;size)
-img_64:= StrGet(buf.Ptr)
-&nbsp;
-req:= ComObject("WinHttp.WinHttpRequest.5.1")
-req.open("POST", url, true)
-req.SetRequestHeader("Authorization", "Bearer " api)
-req.SetRequestHeader("Content-Type", "application/json")
-&nbsp;
-prompt:= "提取图片中的全部文字（保持原文换行）, 只需要回答提取的文字内容。"
-message:= [
-Map("role", "system", "content", prompt),
-Map("role", "user", "content", [
-Map("type", "text", "text", prompt),
-Map("type", "image_url", "image_url", Map("url", "data:image/png;base64," img_64))
-])
-]
-&nbsp;
-req.Send(JSON.Stringify(Map(
-"model", model,
-"messages", message,
-"temperature", 0.5
-)))
-req.WaitForResponse()
-response:= JSON.Parse(req.ResponseText)
-return response["choices"][1].Get("message").Get("content")
-}</code></pre><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>
