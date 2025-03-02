@@ -1,14 +1,27 @@
 import json
 import logging
+from typing import Dict, Any, Optional
 
-import openai
-
+from openai import OpenAI
 from .openai_price_cost import calculate_pricing
 
 logger = logging.getLogger()
 
+# 移除全局客户端
+# client = OpenAI()
 
-def gpt_summary(query, model):
+def gpt_summary(query: str, model: str, client: Optional[OpenAI] = None) -> Dict[str, Any]:
+    """
+    Generate a summary of the provided text using OpenAI's API.
+    
+    Args:
+        query: The text to summarize
+        model: The OpenAI model to use
+        client: OpenAI client instance. If None, will create a new client.
+        
+    Returns:
+        Dictionary containing the summary, cost, and token usage
+    """
     # Define a default response structure
     response = {
         "summary": "",
@@ -38,33 +51,36 @@ def gpt_summary(query, model):
     Text: <{query}>
     """
 
-    messages = [{"role": "user", "content": prompt}]
-
     try:
-        # Request GPT completion
-        chat = openai.ChatCompletion.create(
+        # 如果没有提供客户端，则创建一个新的客户端
+        if client is None:
+            client = OpenAI()
+            logger.debug("Creating new OpenAI client")
+        
+        # Request GPT completion using the provided or new client
+        chat_completion = client.chat.completions.create(
             model=model,
-            messages=messages,
-            temperature=0,  # More deterministic result
-            n=1,            # Only one response
+            messages=[{"role": "user", "content": prompt}],
             timeout=30
         )
+        
         # Calculate the cost and total tokens used
-        total_tokens = chat['usage']['total_tokens']  # type: ignore
-        cost = calculate_pricing(
-            model=model,
-            token_input=chat.usage.prompt_tokens,  # type: ignore
-            token_output=chat.usage.completion_tokens  # type: ignore
-        )
+        total_tokens = chat_completion.usage.total_tokens
+        
+        # cost = calculate_pricing(
+        #     model=model,
+        #     token_input=chat_completion.usage.prompt_tokens,
+        #     token_output=chat_completion.usage.completion_tokens
+        # )
 
         # Extract content from the response
-        content = chat["choices"][0]["message"]["content"]  # type: ignore
+        content = chat_completion.choices[0].message.content
 
         # Populate response
         response.update({
-            "price": cost,
+            "price": 0,
             "tokens": total_tokens,
-            "summary": content
+            "summary": content or ""
         })
 
     except Exception as e:

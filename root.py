@@ -1,5 +1,9 @@
 import os
 from functools import partial
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 absolute = partial(os.path.join, BASE_DIR)
@@ -11,8 +15,8 @@ RSS_TEMPLATE_PATH = absolute("resource/template.xml")
 RSS_HTML_TEMPLATE_PATH = absolute("resource/template.html")
 CONFIG_PATH = absolute("resource/config.yml")
 
-
-BASE_URL = "https://www.dcts.top/rssdocs/"
+# Allow customization of BASE_URL through environment variables
+BASE_URL = os.getenv("RSS_BASE_URL", "https://www.dcts.top/rssdocs/")
 
 CACHE_PATH = absolute("resource/cache.pkl")
 

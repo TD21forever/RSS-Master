@@ -2,6 +2,9 @@ from math import ceil
 
 model_price_map = {
 
+    # deepseek v3
+    "deepseek-chat-input": 0.002,
+    "deepseek-chat-output": 0.008,
     # OpenAI o1-preview
     'o1-preview-input': 0.015,
     'o1-preview-output': 0.060,
