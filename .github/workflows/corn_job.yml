@@ -32,6 +32,7 @@ jobs:
       - name: ls_show
         env: 
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
         run: |
           export TZ='Asia/Shanghai'
           python main.py
