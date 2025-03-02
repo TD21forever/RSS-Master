@@ -46,6 +46,8 @@ class RSSProcessorApp:
         # Configure OpenAI API key
         api_key = os.getenv("OPENAI_API_KEY")
         base_url = os.getenv("OPENAI_BASE_URL")
+        logger.info(f"OPENAI_API_KEY: {api_key}")
+        logger.info(f"OPENAI_BASE_URL: {base_url}")
         if api_key:
             if base_url:
                 self.openai_client = OpenAI(api_key=api_key, base_url=base_url)
