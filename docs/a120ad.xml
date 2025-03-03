@@ -5,6 +5,252 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2025/03/trae.html</id>
+            <title>Trae 国内版出来了，真的好用吗？</title>
+            <link>http://www.ruanyifeng.com/blog/2025/03/trae.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/03/trae.html</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 03 Mar 2025 16:00:56 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: AI IDE, Trae, 字节跳动, 编程工具
+
+<br>
+<br>
+总结: 字节跳动发布了面向海外的 AI IDE 工具 Trae，并推出了国内版。Trae 国内版使用国内模型，连接稳定快速，界面根据国内用户习惯定制。Trae 与 MarsCode 插件由同一团队开发，适用于不同场景。Trae 提供 Chat 和 Builder 两种模式，支持代码生成和项目构建，内置的 AI 模型免费无限量使用。虽然 Builder 模式尚不完善，但 Trae 整体体验流畅，界面友好，适合开发者使用。未来 AI IDE 可能成为 IDE 发展的主要方向。 </div>
+                        <hr>
+                    
+                    <p>年初一月份，我就看到新闻，字节面向海外发布了一款 AI IDE，叫做 <a href="https://sourl.cn/g3vtkm">Trae</a>。</p>
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030302.webp" title="" /></p>
+
+<p>我心想，现在的 IDE 都有 AI 插件，功能完备，字节自己也有 <a href="https://www.marscode.cn/workbench">MarsCode 插件</a>，有必要再做一款单独的 IDE 吗？</p>
+
+<p>我就没有特别关注这个工具。</p>
+
+<p>上周，我遇到字节的同学，得知 Trae 国内版就在本周发布，我还提前拿到了内测版，这可是国内市场的首个 AI 原生 IDE。</p>
+
+<p>今天，就来说说我的使用心得，顺便也探讨一个更大的问题：<strong>AI 工具已经这么多了，该不该造新的轮子？</strong></p>
+
+<p>先透露一下结论：Trae 国内版值得用。它作为一个 AI IDE，整体比插件好用，而且内置的大模型----豆包 1.5 pro、DeepSeek 满血版----无限量免费使用。</p>
+
+<h2>一、国外版与国内版</h2>
+
+<p>介绍使用体会之前，我先解释一下，两个版本的区别，主要是模型的差异。</p>
+
+<p>Trae 国外版使用国外的模型，对于国内用户来说，存在连接不上、等待时间长、网速较慢等问题。</p>
+
+<p>Trae 国内版使用国内的模型，连接可以保证稳定快速，界面也根据国内用户的习惯进行了定制。</p>
+
+<p>我也问了字节的同学，Trae 国内版和 MarsCode 是什么关系。回答是，<strong>它们是同一个团队的作品，适用于不同场景</strong>。</p>
+
+<p>如果你想保留原来使用的 IDE，只增加 AI 编程相关功能，那就用 MarsCode 插件。如果想体验一个全新的围绕 AI 设计的原生 IDE，那就试试 Trae。</p>
+
+<p>这两个产品后续都会长期开发，可以根据自己的需要选择。</p>
+
+<h2>二、安装</h2>
+
+<p>Trae 国内版需要去官网 <a href="https://sourl.cn/g3vtkm">trae.com.cn</a>下载。</p>
+
+<p>目前，有三个版本：Windows 版、macOS Intel 芯片版、macOS M 系列芯片版。</p>
+
+<p>安装启动后，会出现下面的画面。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030202.webp" title="" /></p>
+
+<p>接着，让你选择亮色/暗色主题，以及语言（简体中文）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030203.webp" title="" /></p>
+
+<p>它还会问你，要不要导入原来 IDE（VS Code/Cursor）的配置，算是很贴心的设计了。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030204.webp" title="" /></p>
+
+<p>最后，问你要不要登录。不登录也可以用，只是某些功能会受到限制。登录的话，就跳转到 Trae 官网，用你的手机号登录。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030205.webp" title="" /></p>
+
+<p>一切完毕，就会进入使用界面。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030206.webp" title="" /></p>
+
+<h2>三、使用界面</h2>
+
+<p>Trae 的使用界面，相当简洁。左侧就是 VS Code 的界面，熟悉的话，上手没有任何难度。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030207.webp" title="" /></p>
+
+<p>界面的右侧是 AI 区域。可以看到，它分成两个模式：Chat 和 Builder。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030208.webp" title="" /></p>
+
+<p>Chat 模式是默认模式，也就是问答模式。AI 回答问题，也可以生成代码，但不会生成项目，需要自己手动把代码复制过去。</p>
+
+<p>Builder 模式是项目模式，你给出文字描述，让 AI 一键生成项目。</p>
+
+<p>下面，就来试试这两个模式。</p>
+
+<h2>四、Chat 模式</h2>
+
+<p>Chat 模式的主体就是一个对话框，右下角按钮可以选择底层模型。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030209.webp" title="" /></p>
+
+<p>国内版目前有三个模型可供选择。</p>
+
+<blockquote>
+  <ul>
+<li>豆包 1.5 pro</li>
+<li>DeepSeek R1</li>
+<li>DeepSeek V3</li>
+</ul>
+</blockquote>
+
+<p>这三个模型都是<strong>免费无限量使用，DeepSeek 系列模型都是满血版</strong>。我实测，速度令人满意，能够较快地给出回答，没有遇到"服务器繁忙"的提示，包括最耗时的 DeepSeek R1 模型都是如此。</p>
+
+<p>至于，回答问题的质量，老实说，现阶段领先的大模型，这方面已经没有太多可挑剔的了。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030210.webp" title="" /></p>
+
+<p>任何问题都可以问，包括非技术类的问题。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030211.webp" title="" /></p>
+
+<p>我直接让它生成代码，回答的格式非常友好。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030212.webp" title="" /></p>
+
+<p>大家注意，上图中，第一个代码块是终端代码，右上角有三个按钮（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030213.webp" title="" /></p>
+
+<p>上图右上角的三个按钮，分别是"复制"、"添加到终端"和"运行"。如果点击后两个按钮，会直接把代码传入 Trae 内置的终端，就像下面这样。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030301.webp" title="" /></p>
+
+<p>这部分，我感觉用起来比插件版流畅，整体感更强，这大概就是把 AI 做成 IDE 的好处了。</p>
+
+<h2>五、Builder 模式</h2>
+
+<p>再看 Builder 模式，它可以一键生成项目。</p>
+
+<p>点击上方的标签页，切换到该模式。可以看到，第一次进入，会有一个"启动 Builder"按钮（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030219.webp" title="" /></p>
+
+<p>系统会提示你（下图），这里可以从零到一完成项目构建，并且所有修改会自动保存，并显示两个示例项目：贪吃蛇和 Todo List。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030220.webp" title="" /></p>
+
+<p>为了测试正常的流程，我就直接在下方的对话框输入："请用 React 生成一个 Todo List 应用。"</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030230.webp" title="" /></p>
+
+<p>系统会提示你指定一个目录，作为项目目录。然后，它不断给出操作步骤（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030231.webp" title="" /></p>
+
+<p>上图中，需要执行具体的命令时，它会附有"运行"按钮，要你点击确认。</p>
+
+<p>点击后，Trae 会自动打开内置的终端，执行该命令（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030232.webp" title="" /></p>
+
+<p>然后，它会一个个生成所需的文件，要求你审查。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030228.webp" title="" /></p>
+
+<p>所有文件生成完毕，就出现了启动本地预览服务器的命令。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030233.webp" title="" /></p>
+
+<p>运行后，Trae 会启动一个内置的 webview 页面，展示渲染效果，实时更新。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030235.webp" title="" /></p>
+
+<p>这个很赞，任何修改都可以马上看到结果。</p>
+
+<p>但是我必须说，不知道是不是内测版的缘故，Builder 模式目前还不完善，只适合为项目生成架构，做不到一步到位，离理想状态有些差距。我试了多次，如果需求复杂一点，生成的代码很难一次就跑起来，需要多次修改。大家对它要抱有合理期待，这个模式后续还需要不断完善。</p>
+
+<h2>六、其他功能</h2>
+
+<p>除了两大模式，Trae 的其他功能也可圈可点。</p>
+
+<p><strong>（1）代码智能补全。</strong></p>
+
+<p>这是 AI 编程助手的基本功能，就不多说了。只要按回车键换行，Trae 会阅读并理解当前代码，然后自动补全后续代码。</p>
+
+<p>如果有注释，它会根据注释，生成缺少的代码。</p>
+
+<p><strong>（2）指定上下文。</strong></p>
+
+<p>Trae 允许指定对话的范围（上下文）。具体方法是在对话框输入<code>#</code>号。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030218.webp" title="" /></p>
+
+<p>上图中，在对话框输入<code>#</code>后，系统就会自动弹出一个菜单，让你选择上下文（context），一共有四种。</p>
+
+<blockquote>
+  <ul>
+<li>Code（代码）</li>
+<li>File（文件）</li>
+<li>Folder（文件夹）</li>
+<li>Workspace（工作区）</li>
+</ul>
+</blockquote>
+
+<p>默认的上下文是当前工作区（Workspace，即目前打开的项目），也可以指定为某个函数或类（Code）、某个文件（File）、某个文件夹（Folder）。</p>
+
+<p>一旦指定了上下文，AI 的回答会更有针对性。比如生成代码时，就会结合上下文的场景。</p>
+
+<p><strong>（3）一键转对话。</strong></p>
+
+<p>为了方便地将代码编辑框的内容，传送给 AI，Trae 提供"一键转对话"按钮，省去了复制粘贴的麻烦。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030236.webp" title="" /></p>
+
+<p>上图中，选中某段代码，系统就会弹出"添加到对话"的浮动菜单，一键复制到 AI 对话框，便于提问。</p>
+
+<p>终端窗口的报错信息，也有这个功能（下图），这就很方便让 AI 来 debug。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030223.webp" title="" /></p>
+
+<p><strong>（4）模型自定义功能。</strong></p>
+
+<p>我听字节的同学说，Trae 后面会支持模型自定义功能，用户可根据自己的喜好，接入对应的模型API。</p>
+
+<h2>七、总结</h2>
+
+<p>我试用 Trae 国内版后，感到它有几个显著优点。</p>
+
+<p>（1）产品设计周全，最常用的场景都考虑到了，用户体验比较流畅。</p>
+
+<p>（2）界面友好，交互设计良好，开发者容易上手。</p>
+
+<p>（3）AI 模型（包括满血版 DeepSeek）无限量免费使用，响应始终稳定快速。</p>
+
+<p>不足之处是 Builder 模式还不够强，生成的程序有 bug，第一次生成往往跑不起来，需要不断调整，耗时较多。</p>
+
+<p>总结就是，<strong>一个完整的 AI IDE 还是比 AI 插件，用起来更容易</strong>，有"一体感"，达到了更大的定制程度。</p>
+
+<p>随着 AI 的能力进一步发展，AI IDE 的想象空间会更大，也许会成为未来 IDE 发展的主要方向。</p>
+
+<p>Trae 国内版刚刚上线，开发团队希望大家<a href="https://sourl.cn/g3vtkm">下载试用</a>，多提宝贵意见。</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2025-03-03T16:00:56+08:00">2025年3月 3日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2025/02/weekly-issue-339.html</id>
             <title>科技爱好者周刊（第 339 期）：代币是什么</title>
             <link>http://www.ruanyifeng.com/blog/2025/02/weekly-issue-339.html</link>
@@ -2181,428 +2427,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2025-01-24T08:06:14+08:00">2025年1月24日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2025/01/weekly-issue-334.html</id>
-            <title>科技爱好者周刊（第 334 期）：年终笔记四则</title>
-            <link>http://www.ruanyifeng.com/blog/2025/01/weekly-issue-334.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/01/weekly-issue-334.html</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 17 Jan 2025 08:17:52 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 科技分享, 开源杂志, 工作利息, 巴菲特的选人标准, 快乐机, 未来能力, 浏览器自动化, VR审判, 亚马逊最大的树, 中文互联网语料资源平台
-
-<br>
-<br>
-总结: 本文介绍了科技分享的开源杂志，内容包括工作利息的概念、巴菲特的选人标准、快乐机的哲学假设、未来所需的三种关键能力、浏览器自动化工具Midscene.js、VR在法庭审判中的应用、亚马逊最大的树的发现、以及中文互联网语料资源平台的发布。文章还涉及了其他科技动态、工具、AI相关资源、图片和文摘等内容。 </div>
-                        <hr>
-                    
-                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
-<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/5830">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
-
-<h2>封面图</h2>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011608.webp" title="" /></p>
-
-<p>武汉光谷是今年春节晚会的分会场，将表演灯光秀，非常有科幻感。（<a href="https://m.jstv.com/photo/2025/1/10/1327223884412051456.html">via</a>）</p>
-
-<h2>年终笔记四则</h2>
-
-<p>下面是过去的笔记，我读到有意思的文章时，记录下来的感想，每一则都不长。</p>
-
-<p>前几天翻阅，觉得可以放在一起，重新发布，今天先发四则。</p>
-
-<h3>一、工作也有利息</h3>
-
-<p>银行存款有利息，存得越久，利息越多。</p>
-
-<p>工作也是一样，也有利息。如果今年的工作可以节省明年或未来的工作时间，就是一份<a href="https://www.linkedin.com/pulse/time-value-mike-speiser/">有利息的工作</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011621.webp" title="" /></p>
-
-<p>工作有利息，意味着你未来的工作时间会变少，多出来的时间，就可以去做别的事情，创造更多的价值。</p>
-
-<p>这提示我们：</p>
-
-<p>（1）不要轻易更换工作领域，否则以前积累的利息就作废了。只有在同一个工作领域，才可能产生长期积累，以前的工作为以后打基础，最终产生巨大的利息。</p>
-
-<p>（2）在职业生涯的早期，积累效果最好，最容易产生复利。开始积累越晚，产生复利就越少。</p>
-
-<p>（3）有些劳动没有积累效果，不会产生利息，比如重复性的机械劳动（快递、咖啡店员、门卫......），你明年还是要重复做这些事情。</p>
-
-<p>（4）最好的人生策略就是，找到你深感兴趣、可以长期做下去的领域，在上面投入大量的工作时间（包括质量和数量），然后随着年龄增长，享受以前工作的复利。</p>
-
-<h3>二、巴菲特的选人标准</h3>
-
-<p>巴菲特说，他考察候选人，就看<a href="https://www.inc.com/marcel-schwantes/warren-buffett-hiring-top-talent-characteristics.html">三个"i"</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202207/bg2022071611.webp" title="" /></p>
-
-<blockquote>
-  <ul>
-<li>integrity（正直）</li>
-<li>intelligence（智慧）</li>
-<li>initiative（主动）</li>
-</ul>
-</blockquote>
-
-<p>这三个"i"当中，"主动"最重要。"正直"和"智慧"的人到处都是，但如果不主动，不是自己想去做些什么，就什么也不会发生。</p>
-
-<h3>三、快乐机</h3>
-
-<p>1974年，一个美国哲学家提出一个假设，如果世界上有"<a href="https://en.wikipedia.org/wiki/Experience_machine">快乐机</a>"，只要插上电源，就能带来源源不断的快乐，并且无法分辨，这种机器快乐与现实世界的快乐有何不同。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202202/bg2022022609.webp" title="" /></p>
-
-<p>哲学家说，我们就可以观察人们的选择。</p>
-
-<p>如果大多数人选择快乐机，而不是现实生活，这就证明人生的目标是体验尽可能多的快乐（享乐主义）。</p>
-
-<p>当时因为不可能造出快乐机，所以无法验证他的假设是否正确。现在不一样了，有了游戏机、VR 头盔、短视频平台......</p>
-
-<h3>四、未来的三种关键能力</h3>
-
-<p>未来，你需要三种能力。</p>
-
-<p>（1）专业能力。你需要有一个专长。</p>
-
-<p>（2）写作能力。未来是远程工作，团队成员分散在各地，以写作----而不是当面交流----作为主要的沟通手段。</p>
-
-<p>（3）视频制作能力。以前，文字能影响大众，现在视频是最强的大众传播渠道。如果你能制作好看的视频，将想法和产品可视化，就更容易让更多用户看见。</p>
-
-<h2>[本周软件] Midscene.js：浏览器自动化利器</h2>
-
-<p>本周介绍一个很特别的浏览器自动化工具：<a href="https://github.com/web-infra-dev/midscene">Midscene.js</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011306.webp" title="" /></p>
-
-<p>它的最大特点，就是自然语言驱动（需要自行<a href="https://midscenejs.com/zh/model-provider.html">接入 AI 模型</a>），操作浏览器，以及理解网页内容，将结果以 JSON 数据返回。</p>
-
-<p>大家可以安装它的<a href="https://chromewebstore.google.com/detail/midscene/gbldofcpkknbggpkmbdaefngejllnief">浏览器插件</a>，直接输入自然语言指令，进行体验。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011305.webp" title="" /></p>
-
-<p>比如，交互指令（点击搜索按钮）、查询指令（返回所有商品的链接）、断言指令（页面是否有三个按钮）。</p>
-
-<p>有了它，你可以编写 <a href="https://midscenejs.com/zh/automate-with-scripts-in-yaml.html">YAML 脚本</a>，完成浏览器自动化；也可以将它接入 Puppeteer 和 Playwright，让后两者接受自然语言指令。</p>
-
-<p>使用自然语言驱动之后，自动化脚本变得容易维护、效果更稳定。</p>
-
-<p>总之，如果你需要浏览器 UI 测试，或者抓取网页数据，就不要错过 <a href="https://midscenejs.com/zh/">Midscene.js</a>。它在 GitHub 已经获得2700颗星。</p>
-
-<h2>科技动态</h2>
-
-<p>1、<a href="https://www.instagram.com/p/DEVcSZ7SaZQ/">VR 审判</a></p>
-
-<p>美国最近的一起民事案件的审判中，被告律师让法官戴上了 VR 头盔。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025010609.webp" title="" /></p>
-
-<p>律师说，他们制作了一段 VR 动画，可以让法官从被告的视角，沉浸式了解整个案件的过程。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025010610.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025010611.webp" title="" /></p>
-
-<p>这是历史上第一次，法庭审判使用 VR 头盔。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025010613.webp" title="" /></p>
-
-<p>所有人在法庭上都戴着 VR 头盔，场景很魔幻。完全可能的是，整个审判以后可能都会搬到虚拟世界，不必所有人到场。</p>
-
-<p>2、<a href="https://ctrees.org/news/largest-tree-amazon-with-fabien-wagner-63">亚马逊最大的树</a></p>
-
-<p>亚马逊原始森林有无数棵树，没人知道哪一棵最大。</p>
-
-<p>一个美国科学家通过卫星照片，找到了一棵可能是亚马逊最大的树。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025010501.webp" title="" /></p>
-
-<p>卫星照片只能拍到树冠，只要识别出最大的树冠，就应该是最大的树。</p>
-
-<p>科学家发现，有一棵树的树冠，直径超过60米，相当于树下可以停五辆头尾相连的大巴，可谓树王。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025010502.webp" title="" /></p>
-
-<p>3、<strong>其他</strong></p>
-
-<p>（1）<a href="https://corpus.cybersac.cn/#/dataSet">中文互联网语料资源平台</a>发布，一共 2.7TB 中文资料，向社会开放，专门用来训练大模型。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011101.webp" title="" /></p>
-
-<p>（2）一位国外用户购买了<a href="https://old.reddit.com/r/mildlyinfuriating/comments/1hx5wkq/my_amazon_tv_now_unmutes_itself_during_prime/">亚马逊的视频会员</a>，震惊地发现，电视机明明开了静音，但是广告时间居然会自动取消静音。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011102.webp" title="" /></p>
-
-<h2>文章</h2>
-
-<p>1、<a href="https://javayhu.com/2018-nian-yi-ge-xiao-fu-ye-de-kai-fa-xin-de/">一个副业应用的开发心得</a>（中文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011520.webp" title="" /></p>
-
-<p>本文总结2018年作者为自己的安卓应用，加了一个收费功能的开发心得。（<a href="https://github.com/ruanyf/weekly/issues/5924">@javayhu</a> 投稿）</p>
-
-<p>2、<a href="https://mp.weixin.qq.com/s/4O69yhwYgB0s0vP7skTWlw">俄罗斯和乌克兰各自有哪些知名软件？</a>（中文）</p>
-
-<p>本文介绍了两国的知名软件，都有不少很厉害的项目。（<a href="https://github.com/ruanyf/weekly/issues/5935">@mzhren</a> 投稿）</p>
-
-<p>3、<a href="https://takashiidobe.com/gen/writing-compilers">为什么要学习写编译器</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202405/bg2024051601.webp" title="" /></p>
-
-<p>作者谈为什么你应该试试自己写一个编译器，并且提供了三个入门的学习资源。</p>
-
-<p>4、<a href="https://xquant.substack.com/p/where-have-the-international-math-0d9">国际数学奥林匹克金牌得主的去向</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202408/bg2024080406.webp" title="" /></p>
-
-<p>国际数学奥林匹克是高中生的数学比赛，作者做了一个调查，历届金牌得主后来怎么样？</p>
-
-<p>5、<a href="https://kerkour.com/aws-s3-vs-cloudflare-r2-price-performance-user-experience">AWS S3 与 Cloudflare R2 比较</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024112805.webp" title="" /></p>
-
-<p>AWS S3 是一个老牌的存储服务，Cloudflare R2 是它的新兴对手。本文比较这两种服务。</p>
-
-<p>6、<a href="https://blog.logto.io/css-only-infinite-scroll">无限滚动轮播的 CSS 实现</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024090703.webp" title="" /></p>
-
-<p>本文教你只用 CSS 实现类似弹幕的无限滚动轮播效果，还能用鼠标悬停。</p>
-
-<p>7、<a href="https://www.xda-developers.com/how-use-laptop-second-monitor/">如何将笔记本用作第二个显示器</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024100505.webp" title="" /></p>
-
-<p>一篇电脑使用的教程，如何将笔记本当作显示器使用。</p>
-
-<h2>工具</h2>
-
-<p>1、<a href="https://barba.js.org/">barba.js</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202403/bg2024033002.webp" title="" /></p>
-
-<p>一个 JS 库，让网站页面的切换产生平滑的动画效果。</p>
-
-<p>2、<a href="https://github.com/cle-b/httpdbg">httpdbg</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024092810.webp" title="" /></p>
-
-<p>一个 Python 程序的桌面调试器，在类似浏览器控制台的环境里调试 HTTP 请求。</p>
-
-<p>3、<a href="https://github.com/609529897/bilibili_music">BiliMusic</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011618.webp" title="" /></p>
-
-<p>一个 macOS 桌面程序，让用户播放 B 站收藏的音乐。（<a href="https://github.com/ruanyf/weekly/issues/5937">@609529897</a> 投稿）</p>
-
-<p>4、<a href="https://screenshot.onionai.so/">ScreenShot</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011517.webp" title="" /></p>
-
-<p>免费的 App 预览图制作工具，支持华为、小米、OPPO、VIVO、鸿蒙、AppStore的应用商店预览图制作。（<a href="https://github.com/ruanyf/weekly/issues/5906">@ovelv</a> 投稿）</p>
-
-<p>5、<a href="https://github.com/Hacker233/resume-design">猫步简历</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011518.webp" title="" /></p>
-
-<p>免费开源的简历制作工具，提供各种模版和主题，可以定制化模块。（<a href="https://github.com/ruanyf/weekly/issues/5910">@Hacker233</a> 投稿）</p>
-
-<p>6、<a href="https://github.com/jaywcjlove/key-clicker">KeyClicker</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011521.webp" title="" /></p>
-
-<p>开源的 macOS 应用，打字时模拟机械键盘和打字机的声音，有200多种声效。（<a href="https://github.com/ruanyf/weekly/issues/5925">@jaywcjlove</a> 投稿）</p>
-
-<p>7、<a href="https://peekfoc.us/">Peek Focus</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011522.webp" title="" /></p>
-
-<p>一个 Chrome 插件，点击时，不在新的标签页、而在页面浮层里打开链接。（<a href="https://github.com/ruanyf/weekly/issues/5926">@zerosoul</a> 投稿）</p>
-
-<p>8、<a href="https://github.com/topcss/docker-pull-tar">Docker 镜像拉取工具</a></p>
-
-<p>该工具用于下载 Docker 镜像，无需 Docker 环境，支持自定义仓库地址，配置国内镜像源。（<a href="https://github.com/ruanyf/weekly/issues/5931">@topcss</a> 投稿）</p>
-
-<p>9、<a href="https://www.taojuju.com/">壁纸样机生成器</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011614.webp" title="" /></p>
-
-<p>生成电子设备壁纸效果图的免费工具。（<a href="https://github.com/ruanyf/weekly/issues/5932">@leven-z</a> 投稿）</p>
-
-<p>10、<a href="https://www.blog-keeper.com/">BlogKeeper-文捕</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011615.webp" title="" /></p>
-
-<p>在线博客文章解析下载工具，支持微信公众号/博客园/CSDN/掘金/简书/思否等平台，可以保存成多种格式。（<a href="https://github.com/ruanyf/weekly/issues/5933">@GailZhangJY</a> 投稿）</p>
-
-<h2>AI 相关</h2>
-
-<p>1、<a href="https://raphael.app/zh">Raphael AI</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011619.webp" title="" /></p>
-
-<p>基于 Flux.1-DEV 模型的 AI 图像生成网站，免费、无使用量限制、不需要注册。（<a href="https://github.com/ruanyf/weekly/issues/5939">@markliuyuxiang</a> 投稿）</p>
-
-<p>2、<a href="https://chromewebstore.google.com/detail/ai-shortcuts-for-chatgpt/dkhpgbbhlnmjbkihoeniojpkggkabbbl">AI Shortcuts</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011516.webp" title="" /></p>
-
-<p>Chrome 浏览器扩展，一键查询不同 AI 。（<a href="https://github.com/ruanyf/weekly/issues/5904">@taoAIGC</a> 投稿）</p>
-
-<p>3、<a href="https://podcast.zeabur.app/">Audio Transcription</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011617.webp" title="" /></p>
-
-<p>将播客或音频转录成文本，并给出摘要，基于 Next.js 和 OpenAI Whisper，<a href="https://github.com/winterfx/Podcast-Transcription">代码开源</a>。（<a href="https://github.com/ruanyf/weekly/issues/5934">@winterfx</a> 投稿）</p>
-
-<p>4、<a href="https://givemeachinesename.com/">Get Your Perfect Chinese Name</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011620.webp" title="" /></p>
-
-<p>AI 给外国人起中文名字。（<a href="https://github.com/ruanyf/weekly/issues/5940">@syhdeclan</a> 投稿）</p>
-
-<h2>资源</h2>
-
-<p>1、<a href="https://www.bestblogs.dev/">BestBlogs.dev</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011616.webp" title="" /></p>
-
-<p>精选中文科技文章的阅读平台。（<a href="https://github.com/ruanyf/weekly/issues/5909">@ginobefun</a> 投稿）</p>
-
-<p>2、<a href="https://github.com/zhangchenchen/self-consistent-coder">自洽的程序员</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011519.webp" title="" /></p>
-
-<p>一本中文电子书，作者分享如何调整心态，解决职场常见问题，提供<a href="https://self-consistent-coder.readthedocs.io/zh-cn/latest/">在线阅读</a>。（<a href="https://github.com/ruanyf/weekly/issues/5919">@zhangchenchen</a> 投稿）</p>
-
-<p>3、<a href="https://dement.dev/">我的 3D 主页</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011607.webp" title="" /></p>
-
-<p>作者用 React Three Fiber 构建的 3D 个人主页，非常华丽。</p>
-
-<p>4、<a href="https://staying.fun/zh">Staying</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011609.webp" title="" /></p>
-
-<p>代码可视化网站，可以将 Python 和 JS 代码的运行步骤，以动画形式展示，内置了许多常见算法的演示。（<a href="https://github.com/ruanyf/weekly/issues/5929">@lezhu1234</a> 投稿）</p>
-
-<h2>图片</h2>
-
-<p>1、<a href="https://www.charlespetzold.com/blog/2025/01/Very-Wrong-Math.html">错误的数学</a></p>
-
-<p>一位美国网友注意到，一家设计公司在社交媒体上，发布了下面的图片。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011201.webp" title="" /></p>
-
-<p>图片声称，33000英尺（1万米）高空的飞机，比5000英尺（1500米）的飞机，在飞向同样目的地时，花费的时间是后者的4倍（假定飞行速度相同）。</p>
-
-<p>这位网友第一反应是，这是在开笑话吗？它为什么忽略地球半径。</p>
-
-<p>地球半径（设为 R）大约是1800万英尺，这意味着外圈长度只比内圈，多了不到1%。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011202.webp" title="" /></p>
-
-<p>而且，由于33000英尺高空的空气阻力减小，该高度的飞行时间实际上可能更少。</p>
-
-<p>2、<a href="https://en.wikipedia.org/wiki/Time_ball">报时球</a></p>
-
-<p>报时球（time ball）是19世纪港口使用的一种报时装置，供海上的水手校准时间。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023111506.webp" title="" /></p>
-
-<p>平时，球都在杆子顶部。每天中午1点，球就会落到杆子的底部，看到的人就知道1点到了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023111507.webp" title="" /></p>
-
-<p>在1点前5分钟，球会落到杆子的一半，让大家做好准备。完全落下后，过了两三分钟，球就会重新升起。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023111508.webp" title="" /></p>
-
-<h2>文摘</h2>
-
-<p>1、<a href="https://bigthink.com/the-past/genius-and-blood-how-cheap-light-transformed-civilization/">照明的历史</a></p>
-
-<p>工业革命之前，世界是漆黑的，灯光极其昂贵，火是唯一的人造光源。</p>
-
-<p>历史上，人造光一直是富人和有权势的人的特权，生产和维护既费力又肮脏，可用性和质量都很差。穷人很难获得人造光，总是生活在黑暗中。</p>
-
-<p>古代房屋在夜晚有蜡烛照明，是巨大财富的标志。当时，蜂蜡制成的优质蜡烛是最好的光源，但天然蜂蜡的供应有限，加上手工制作的繁琐，除了最富有的人之外，其他人都买不到优质蜡烛。</p>
-
-<p>一位作家写道："打开你的冰箱门，你召唤出的光线比18世纪大多数家庭所享受的光线总量还要多。"</p>
-
-<p>后来人们发现，鲸油（鲸鱼的皮下脂肪）是更好的蜡烛材料，燃烧时发出干净、稳定的光，是工业革命早期了最好的照明，但它也非常昂贵。</p>
-
-<p>捕鲸业为世界带来了照明，但也将一些鲸鱼物种推向了灭绝的边缘。仅在1700年至1800年间，为了得到鲸油，就至少有300,000头鲸鱼被屠杀。</p>
-
-<p>1800年代初，欧洲和美国出现了燃气照明，燃烧煤气来发光。然而，燃气照明的安装和维护费用昂贵，而且有危险。所以，煤气灯一般不用在家里，而用在工商业和大城市的路灯。</p>
-
-<p>煤气灯很亮，比之前的任何灯至少亮20倍。使用燃气照明是人类第一次体验明亮的照明。</p>
-
-<p>1846年，天然气生产的副产品煤焦油（简称煤油）做成灯，用来照明。煤油开始取代鲸油，导致照明成本直线下降，并且燃烧时明亮、无味。</p>
-
-<p>正是因为煤油，夜间第一次变得明亮了，天黑后也能生产和娱乐。</p>
-
-<p>19世纪后半期，托马斯·爱迪生（Thomas Edison）发明了电灯，电照明的时代从此来临。</p>
-
-<h2>言论</h2>
-
-<p>1、</p>
-
-<p>人类一种可能的未来是，人工智能精英坐拥惊人的财富，与世隔绝，然后拿出最少量的施舍，来保证广大的失业人员不闹事。</p>
-
-<p>-- 李开复《AI·未来》</p>
-
-<p>2、</p>
-
-<p>互联网早就不是缺少管制、充满颠覆性创新的领域了，如今人们正在寻找一种新的监管和治理框架，以应对极少数大型数字企业对互联网的垄断。</p>
-
-<p>-- <a href="https://www.potaroo.net/ispcol/2025-01/addr2024.html">《2024年 IP 地址报告》</a></p>
-
-<p>3、</p>
-
-<p>如果你仔细想想，最好的书实际上是一个极其漫长的咒语，它让你在余生中变成另一个人。</p>
-
-<p>-- <a href="https://bsky.app/profile/thisone0verhere.bsky.social/post/3ld4fibye4s2s">@thisone0verhere.bsky.social</a></p>
-
-<p>4、</p>
-
-<p>父亲要求我，只要有时间，就总是参加葬礼，哪怕这对我有一些不方便和情绪压抑。因为这样做，你就参与分担了他人生活中那些不可避免的、偶尔发生的灾难。</p>
-
-<p>-- <a href="https://www.npr.org/2005/08/08/4785079/always-go-to-the-funeral">《总是参加葬礼》</a></p>
-
-<p>5、</p>
-
-<p>我不明白，99%进入 AI 底层模型开发的公司，能得到什么好处？</p>
-
-<p>如果 AI 模型真的像宣传的那样，能做到任何事情，那么大多数公司只需要等待，就能获得跟自行开发模型同样的好处。很多公司似乎都非常害怕错失良机，其实根本不存在这一点。</p>
-
-<p>-- <a href="https://news.ycombinator.com/item?id=42431415">Hacker News 读者</a></p>
-
-<h2>往年回顾</h2>
-
-<ul>
-<li>#287：<a href="http://www.ruanyifeng.com/blog/2024/01/weekly-issue-287.html">禄丰恐龙谷记行</a></li>
-<li>#237：<a href="http://www.ruanyifeng.com/blog/2022/12/weekly-issue-237.html">真实方位是如何暴露的？</a></li>
-<li>#187：<a href="http://www.ruanyifeng.com/blog/2021/12/weekly-issue-187.html">元宇宙会成功吗</a></li>
-<li>#137：<a href="http://www.ruanyifeng.com/blog/2020/12/weekly-issue-137.html">Slack 被收购，以及企业的技术选型</a></li>
-</ul>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2025-01-17T08:17:52+08:00">2025年1月17日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
