@@ -5,6 +5,40 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/67c8790f7cb8c547e2422e2b</id>
+            <title>AI探索站 03月05日</title>
+            <link>https://m.okjike.com/originalPosts/67c8790f7cb8c547e2422e2b</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67c8790f7cb8c547e2422e2b</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 05 Mar 2025 16:17:19 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    这是我人生中第一次导一条产品发布片，也是我职业生涯以来最自豪，最具想象力，最圆满的一个作品。搞 AI 20 个月，交出这样的答卷我是真的尽力了，也非常满足。话不多说，大家自己去感受吧。 manus.im
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/67c81db892fdb6dbc6f0501f</id>
+            <title>AI探索站 03月05日</title>
+            <link>https://m.okjike.com/originalPosts/67c81db892fdb6dbc6f0501f</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67c81db892fdb6dbc6f0501f</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 05 Mar 2025 09:47:36 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    最近很多人问我，为啥我用 Claude 写的应用就没那么漂亮？<br /><br />所以教大家一些非常简单的技巧，用上了以后你也能搞定这么漂亮的界面<br /><br />👇下面是具体的技巧和完整提示词<br /><br />完整内容这里：https://mp.weixin.qq.com/s/tUOAfd4OI56QxD94-0PPKw<br /><br />1️⃣第一个技巧：<br /><br />不用非得用语言来描述你想要的界面样式，可以去一些设计平台找一些你喜欢的设计稿将图片上传到图片让模型参考。<br /><br />如果你不知道去哪找的话，国内推荐站酷、海外的话推荐 Dribbble 和 Layers。<br /><br />在跟 Claude 说的时候就可以忽略那些不好描述的地方，重点描述静态图片无法表现的部分，比如下面的这个卡片组件。<br /><br />我就让 Claude 注意交互的动画和输入框聚焦之后的渐变动画上，界面内容和风格就让他按图片生成。<br /><br />2️⃣第二个技巧：<br /><br />在让 Claude 生成界面的时候，你会发现 Claude 生成的页面没有图片，本来应该是图片的部分经常是空白的，这个就很影响结果的视觉表现。<br /><br />其实我们可以要求他引用一些在线的图片来填充到页面需要图片的部分。<br /><br />这里首先推荐 unsplash，他是一个开源图片网站，里面有世界各地的设计大神上传的图片，而且可以直接引用。<br /><br />可以看下面加上图片之后的卡片是不是就好看很多了。<br /><br />3️⃣第三个技巧：<br /><br />另外 claude 在生成页面的时候本来应该是图标的地方，他喜欢用 emoji 来代替，emoji 也很好，但是在一些严肃的页面上就会显得格格不入。<br /><br />这里可以要求 Claude 在生成页面的时候引用在线的图标库，比如Font Awesome或Material Icons，这些开源图标库可以通过 CDN 直接引用，而且不需要部署。<br /><br />可以看到引用了 Font Awesome 图标库的图标之后我们的界面变得更加简洁和整齐。<br /><br />4️⃣第四个技巧：<br /><br />我们常用的前端样式代码是用 CSS 写的，但是 CSS 本身的一些样式其实没有太考虑美观度的要求。<br /><br />这就导致你让 Claude 写样式的时候他就会过渡自己发挥，美观度也就没办法得到保障，而且你对样式要求多之后他要从头写的 CSS 也就越多浪费很多 Token。<br /><br />这里我们可以要求 Claude 用 CDN 引用 TailwindCSS 来写组件样式，Tailwind CSS 封装了一套非常美观和简洁的样式，可以让 Claude 直接调用，确保在色彩、响应式和基础组件的美观度不出大问题。<br /><br />🌟提示词：<br /><br />方括号［］的部分就是你需要填写的部分。<br /><br />我需要创建一个[具体描述你的页面/组件类型]，请帮我生成美观且响应式的HTML+CSS代码。<br /><br />## 设计参考<br />我希望设计风格类似于以下参考：<br />[上传参考图片或描述设计灵感来源]<br /><br />## 技术要求<br />- 请使用HTML、TailwindCSS和少量必要的JavaScript<br />- 引用Tailwind CSS（v3.0+）通过CDN<br />- 页面需完全响应式，在移动设备和桌面端都能良好显示<br /><br />## 图片资源<br />- 请使用Unsplash API提供的图片作为内容图片 <br />- 根据内容主题选择合适的关键词<br /><br />## 图标要求<br />- 使用Font Awesome或Material Icons等专业图标库 (通过CDN引用)<br />- 避免使用emoji作为图标替代品<br /><br />## 交互细节<br />[描述任何需要的交互动画或效果，例如：]<br />- 按钮悬停时有轻微放大效果<br />- 表单输入框聚焦时显示渐变边框<br />- 卡片在悬停时有阴影加深效果<br /><br />## 特别注意<br />- 确保代码干净且有适当注释<br />- 提供完整可运行的HTML文件，包含所有必要引用<br />- 优化视觉层次和间距，确保设计美观专业<br /><br />5️⃣如何生成设计稿：<br /><br />昨天群里一个朋友提了一嘴能不能转设计稿想了一下，居然还真可以，而且可以帮你生成带自动布局的 Figma 设计稿和对应可复用的组件。具体的方法也很简单<br /><br />只需要将你生成的代码部署到线上，如果你用 Claude 或者 POE 都有这个功能，如果你用的软件没有发布能力的话可以用这个 http://yourware.so 产品。<br /><br />获得了线上的链接之后，我们只需要使用 http://html.to.design 这个 Figma 插件就可以很好的将网页转换为
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/67c6dd1133215b3c0168d10d</id>
             <title>AI探索站 03月04日</title>
             <link>https://m.okjike.com/originalPosts/67c6dd1133215b3c0168d10d</link>
@@ -73,23 +107,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/67c6845444f7865d137d6294</id>
-            <title>AI探索站 03月04日</title>
-            <link>https://m.okjike.com/originalPosts/67c6845444f7865d137d6294</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67c6845444f7865d137d6294</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 04 Mar 2025 04:40:52 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    优化了下提示词策略，Cursor+Claude 3.7生成的原型图更真实了，依然是一小段提示词完成，没经过任何多余的调优，确实有点离谱的。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/67c56b4aea6d7830c960b8ae</id>
             <title>AI探索站 03月03日</title>
             <link>https://m.okjike.com/originalPosts/67c56b4aea6d7830c960b8ae</link>
@@ -102,23 +119,6 @@
                 <![CDATA[
                     
                     字节在今天终于发布了Trae的国内版本<br /><br />可以直接从国内下载使用，依旧免费！<br /><br />这也是国内首个AI原生IDE，界面是中文，而且针对国内常见的开发方式做了优化，更懂中国用户。<br /><br />👇下面是详细的功能介绍和入门教程：<br /><br />Trae功能特性详细介绍：<br />Builder模式自动化开发能力 ——AI 自动化执行任务，端到端生成<br />Context深度理解能力，代码仓库级理解，深度理解 IDE 内信息，# 指定上下文<br />补全能力—— 实时续写和预测<br />一键 apply，快速修改和应用<br />对话式开发，版本随时回退（非常有安全感）<br />免费使用，不像其他的类似软件需要付费<br />支持Mac和Windows全平台<br /><br />写了一篇比较详细的入门教程，如果你对这类软件完全没认知可以看看：https://mp.weixin.qq.com/s/NMOG5ZuhmryxJZIiEJLRvw<br />也可以直接在这里下载：http://trae.com.cn/?utm_source=content&amp;utm_medium=vx_kol&amp;utm_campaign=guizang<br /><br />还用 Trae 国内版试了一个复杂的前端效果实现，改了一次就成了，第一次没对齐。<br />提示词在图里<br /><br />另外Trae 不止可以用来写代码，当本地知识库也是挺好的，这里是之前的教程：https://mp.weixin.qq.com/s/3mlhd5lRBSz3t8NSR8o3yg<br /><br />不要觉得自己没有写程序的能力或者需求就不接触Trae这类AI IDE。<br /><br />很多小需求小工具我们日常工作中都需要，AI编程不是非要写一些大的项目和完善的产品，更可以帮你解决日常工作中非常繁琐的一些小工序和小事。<br /><br />慢慢的我们每个人都会有一套自己的AI工具集，毕竟你的需求只有你自己才清楚，你自己写的工具也不会上一些垃圾功能和收费功能来恶心你。<br /><br />简单的试一试，门槛真的很低。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/67c503e7aaae3d06a7d8383d</id>
-            <title>AI探索站 03月03日</title>
-            <link>https://m.okjike.com/originalPosts/67c503e7aaae3d06a7d8383d</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67c503e7aaae3d06a7d8383d</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 03 Mar 2025 01:20:39 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    在 GitHub 上发现一款实时语音转文字工具：WhisperChain。<br /><br />让语音秒变正式文档，真正实现"开口即成章"。<br /><br />主要是能自动优化语言表达，去掉口头禅，让内容更加流畅、正式，非常适用于会议记录、写作辅助、语音笔记整理等场景。<br /><br />核心功能<br />- 实时语音转文字<br />- 自动润色文本<br />- 自动复制到剪贴板<br />- 全局快捷键录音<br />- 简洁的网页界面<br /><br />GitHub：https://github.com/chrischoy/WhisperChain
                 ]]>
             </content:encoded>
         </item>
