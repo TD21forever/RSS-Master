@@ -5,6 +5,57 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/67d00537dc6b6d48533bafae</id>
+            <title>AI探索站 03月11日</title>
+            <link>https://m.okjike.com/originalPosts/67d00537dc6b6d48533bafae</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67d00537dc6b6d48533bafae</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 11 Mar 2025 09:41:11 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    昨天发了可以将任何文档变成精美网页杂志的提示词<br /><br />我本来就是随手发一下，没想到远远低估了这套提示词的价值。<br /><br />看到大家的玩法才发现这玩意太有用了。<br /><br />👇下面是升级版提示词和如何插入图片和视频：<br /><br />这次主要的升级点就是如何插入视频和图片。<br /><br />因为是在线引用所以我们需要获得在线视频和图片的链接才行，关于图片链接，如果你是在网页上的图片只需要右键在新标签页中打开图片就可以获得图片的在线链接了。<br /><br />如果你是自己下载的图片，我们可以使用图床托管，我用的 sm. ms 只需要登录之后上传图片就行，他会给你图片的在线链接。<br /><br />我们现在已经获得图片链接了，然后怎么办呢。<br /><br />我推荐将是所有的文字和图片链接都放在一个 Markdown 文件中，你甚至可以用图片插入的 Markdown 语法给图片进标记：![]() 方括号写图片的标记比如这张图片是东京，就可以写东京，这样模型就会把它插入描写东京的位置，圆括号里面放你刚才获得的图片链接就行。<br /><br />当然如果你不会 Markdown 语法用 Doc 也是一样的，直接用文字写上东京：链接就行。<br /><br />然后是视频如何嵌入。<br /><br />其实各大视频网站在分享的时候你都会看到一个按钮是嵌入，点这个按钮你就会获得一串代码，只需要把这串代码粘贴到你刚才要准备的文档里面就可以了。<br /><br />所以这时候我们就会获得一个包含视频、图片链接和文案内容的资料文档。<br /><br />最后一步就是提示词出场的时候了，复制下面提示词粘贴到 Claude 、POE、Monica 等可以使用 Claude 3.7 的软件中，然后把文档也拖进去，点击回车，结束了，你获得了一个精美的展示类网页、简历、攻略......<br /><br />记得把下面提示词中我的名字和推特链接换成你的：<br /><br />我会给你一个文件，分析内容，并将其转化为美观漂亮的中文可视化网页：<br /><br />## 内容要求<br /><br />- 所有页面内容必须为简体中文<br />- 保持原文件的核心信息，但以更易读、可视化的方式呈现<br />- 在页面底部添加作者信息区域，包含：<br />    - 作者姓名: [歸藏]<br />    - 社交媒体链接: 至少包含Twitter/X：https://x.com/op7418<br />    - 版权信息和年份<br /><br />## 设计风格<br /><br />- 整体风格参考Linear App的简约现代设计<br />- 使用清晰的视觉层次结构，突出重要内容<br />- 配色方案应专业、和谐，适合长时间阅读<br /><br />## 技术规范<br /><br />- 使用HTML5、TailwindCSS 3.0+（通过CDN引入）和必要的JavaScript<br />- 实现完整的深色/浅色模式切换功能，默认跟随系统设置<br />- 代码结构清晰，包含适当注释，便于理解和维护<br /><br />## 响应式设计<br /><br />- 页面必须在所有设备上（手机、平板、桌面）完美展示<br />- 针对不同屏幕尺寸优化布局和字体大小<br />- 确保移动端有良好的触控体验<br /><br />## 媒体资源<br /><br />- 使用文档中的Markdown图片链接（如果有的话）<br />- 使用文档中的视频嵌入代码（如果有的话）<br /><br />## 图标与视觉元素<br /><br />- 使用专业图标库如Font Awesome或Material Icons（通过CDN引入）<br />- 根据内容主题选择合适的插图或图表展示数据<br />- 避免使用emoji作为主要图标<br /><br />## 交互体验<br /><br />- 添加适当的微交互效果提升用户体验：<br />    - 按钮悬停时有轻微放大和颜色变化<br />    - 卡片元素悬停时有精致的阴影和边框效果<br />    - 页面滚动时有平滑过渡效果<br />    - 内容区块加载时有优雅的淡入动画<br /><br />## 性能优化<br /><br />- 确保页面加载速度快，避免不必要的大型资源<br />- 图片使用现代格式(WebP)并进行适当压缩<br />- 实现懒加载技术用于长页面内容<br /><br />## 输出要求<br /><br />- 提供完整可运行的单一HTML文件，包含所有必要的CSS和JavaScript<br />- 确保代码符合W3C标准，无错误警告<br />- 页面在不同浏览器中保持一致的外观和功能<br /><br />请根据上传文件的内容类型（文档、数据、图片等），创建最适合展示该内容的可视化网页。<br /><br />最后是分享：如果你用的 Claude 和 POE 都可以直接点击分享按钮获得分享的网页链接直接给别人看。<br /><br />如果你用的其他不支持分享代码渲染结果的客户端的话可以用我推荐的 YOURWARE （www.yourware. so）复制代码然后点击按钮就能获得一个可以分享的链接。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/67cfaaddc0c7aafcb6079986</id>
+            <title>AI探索站 03月11日</title>
+            <link>https://m.okjike.com/originalPosts/67cfaaddc0c7aafcb6079986</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67cfaaddc0c7aafcb6079986</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 11 Mar 2025 03:15:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    2 个目前已经自负盈亏的的 AI 项目招人<br /><br />招产品经理、前端、后端<br /><br />什么项目<br />一个是 AI 海外达人营销 saas 系统，目前垂直赛道第一<br />一个是月收入几十万的的严肃恋爱dating app 的 AI 方向改造<br /><br />想找什么人<br />产品经理：负责 AI dating app 的改造策略执行和思考，不做傻傻的 AI 辅助聊天，让 AI 在脱单这件事情上做他能做的<br /><br />前端、后端：需要你喜欢写代码，喜欢做产品，喜欢用 AI 提效，目前的 2 个 AI 项目都重度依赖数据的筛选和推荐<br /><br />有兴趣的可以加我微信：630443747<br /><br />对 AI 的观点<br />今天的 AI 笨笨的，但是好的 AI 手艺人可以在细分任务上，让 AI 产生实际价值
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/67ceb605b447d544c92d8df3</id>
+            <title>AI探索站 03月10日</title>
+            <link>https://m.okjike.com/originalPosts/67ceb605b447d544c92d8df3</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67ceb605b447d544c92d8df3</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 10 Mar 2025 09:51:01 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    再收集一个高保真原型提示词, 大家可以用各个模型去生成PK一下, 看看哪个美感最佳:<br /><br />我想开发一个{类似小宇宙的播客app}，现在需要输出高保真的原型图，请通过以下方式帮我完成所有界面的原型设计，并确保这些原型界面可以直接用于开发：1、用户体验分析：先分析这个 App 的主要功能和用户需求，确定核心交互逻辑。2、产品界面规划：作为产品经理，定义关键界面，确保信息架构合理。3、高保真 UI 设计：作为 UI 设计师，设计贴近真实 iOS/Android 设计规范的界面，使用现代化的 UI 元素，使其具有良好的视觉体验。4、HTML 原型实现：使用 HTML + Tailwind CSS（或 Bootstrap）生成所有原型界面，并使用 FontAwesome（或其他开源 UI 组件）让界面更加精美、接近真实的 App 设计。拆分代码文件，保持结构清晰：5、每个界面应作为独立的 HTML 文件存放，例如 home.html、profile.html、settings.html 等。- index.html 作为主入口，不直接写入所有界面的 HTML 代码，而是使用 iframe 的方式嵌入这些 HTML 片段，并将所有页面直接平铺展示在 index 页面中，而不是跳转链接。- 真实感增强：  - 界面尺寸应模拟 iPhone 15 Pro，并让界面圆角化，使其更像真实的手机界面。  - 使用真实的 UI 图片，而非占位符图片（可从 Unsplash、Pexels、Apple 官方 UI 资源中选择）。  - 添加顶部状态栏（模拟 iOS 状态栏），并包含 App 导航栏（类似 iOS 底部 Tab Bar）。请按照以上要求生成完整的 HTML 代码，并确保其可用于实际开发。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/67ceb04f2a1c7d70d27fc071</id>
             <title>AI探索站 03月10日</title>
             <link>https://m.okjike.com/originalPosts/67ceb04f2a1c7d70d27fc071</link>
@@ -17,23 +68,6 @@
                 <![CDATA[
                     
                     很多朋友问如何将下面的这种全是字的文档，变成上面这种美观、直观的网页。<br /><br />👇分享一下提示词和逻辑：<br /><br />其实大部分的技巧和提示词来自我前几天写的这个教程：https://mp.weixin.qq.com/s/tUOAfd4OI56QxD94-0PPKw<br /><br />我又加了几条要求，确保你可以将任何文件扔进去，不需要一个字的修改就能生成美观的网页：<br /><br />因为我们很多的文件都是英文的，所以我加了让他变成中文的要求<br />另外让他参考 Linear App 的设计语言，这个灵感来自 Padphone 老师<br />还有就是可以在页面加上你的社交媒体链接和你的名字，方便网页传播之后大家可以找到作者<br />去掉了 Unsplash 的图片要求，因为免费的 API 不太好查找对应的主题图片<br /><br />完整的提示词：<br /><br />我会给你一个文件，分析内容，并将其转化为美观漂亮的中文可视化网页：<br /><br />## 内容要求<br />- 所有页面内容必须为简体中文<br />- 保持原文件的核心信息，但以更易读、可视化的方式呈现<br />- 在页面底部添加作者信息区域，包含：<br />  * 作者姓名: [作者姓名]<br />  * 社交媒体链接: 至少包含GitHub、Twitter/X、LinkedIn等主流平台<br />  * 版权信息和年份<br /><br />## 设计风格<br />- 整体风格参考Linear App的简约现代设计<br />- 使用清晰的视觉层次结构，突出重要内容<br />- 配色方案应专业、和谐，适合长时间阅读<br /><br />## 技术规范<br />- 使用HTML5、TailwindCSS 3.0+（通过CDN引入）和必要的JavaScript<br />- 实现完整的深色/浅色模式切换功能，默认跟随系统设置<br />- 代码结构清晰，包含适当注释，便于理解和维护<br /><br />## 响应式设计<br />- 页面必须在所有设备上（手机、平板、桌面）完美展示<br />- 针对不同屏幕尺寸优化布局和字体大小<br />- 确保移动端有良好的触控体验<br /><br />## 图标与视觉元素<br />- 使用专业图标库如Font Awesome或Material Icons（通过CDN引入）<br />- 根据内容主题选择合适的插图或图表展示数据<br />- 避免使用emoji作为主要图标<br /><br />## 交互体验<br />- 添加适当的微交互效果提升用户体验：<br />  * 按钮悬停时有轻微放大和颜色变化<br />  * 卡片元素悬停时有精致的阴影和边框效果<br />  * 页面滚动时有平滑过渡效果<br />  * 内容区块加载时有优雅的淡入动画<br /><br />## 性能优化<br />- 确保页面加载速度快，避免不必要的大型资源<br />- 图片使用现代格式(WebP)并进行适当压缩<br />- 实现懒加载技术用于长页面内容<br /><br />## 输出要求<br />- 提供完整可运行的单一HTML文件，包含所有必要的CSS和JavaScript<br />- 确保代码符合W3C标准，无错误警告<br />- 页面在不同浏览器中保持一致的外观和功能<br /><br />请根据上传文件的内容类型（文档、数据、图片等），创建最适合展示该内容的可视化网页。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/67ce93ce2a1c7d70d27dca60</id>
-            <title>AI探索站 03月10日</title>
-            <link>https://m.okjike.com/originalPosts/67ce93ce2a1c7d70d27dca60</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67ce93ce2a1c7d70d27dca60</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 10 Mar 2025 07:25:02 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    新玩法 get，一套提示词将任何文档变成可视化网页<br /><br />这不比 PPT 和 PDF 更方便传播和理解？<br /><br />比如这个全是文字的 Stripe 年度报告 PDF 文件<br /><br />- 支持响应式设计、夜间模式切换<br />- 一次成功无需调整<br /><br />以后随着模型能力增强估计内容展示方式也需要变化<br /><br />灵感来自 padphone 老师，你可以在这里预览这个网页：https://lqb9jj5ryz.yourware.so/
                 ]]>
             </content:encoded>
         </item>
@@ -73,23 +107,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/67cad86e181ba09cc22088ce</id>
-            <title>AI探索站 03月07日</title>
-            <link>https://m.okjike.com/originalPosts/67cad86e181ba09cc22088ce</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67cad86e181ba09cc22088ce</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 07 Mar 2025 11:28:46 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    Raphael AI 是我创业后发布的第一款产品，从0起步，到超过100万月活用户，只用了一个月的时间！刚拿下了本月全球AIGC产品增长榜15名。 https://raphael.app  <br /><br />用户来源于自传播，我没做SEO、也没做任何的付费营销推广。 <br />​<br />团队只有我自己，是AI工具帮我实现了这一切。  <br /><br />一个「只要有想法就能做产品赚钱」的时代到来了！
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/67c95d739f9979a85a1a29d2</id>
             <title>AI探索站 03月06日</title>
             <link>https://m.okjike.com/originalPosts/67c95d739f9979a85a1a29d2</link>
@@ -119,23 +136,6 @@
                 <![CDATA[
                     
                     刚才连线听了 Manus team 早晨的小型朋友沟通会，几点 takeaway:<br /><br />1. 做产品实现了 SOTA，打榜超越 OpenAI DeepResearch 的那一晚， @PeakJi <br /> 和 @hidecloud 泪洒办公室；<br /><br />2. 做垂直领域的 AI Agent “可能有点不靠谱”，Manus 打败了 YC W25 几乎 3/4 的 Agent startups<br /><br />3. 团队做 Manus 过程中，最关键的一个信念：「Less Structure, More Intelligence」<br /><br />5. AI Agent 产品的指标不应该是 DAU，而是：AHPU - Agentic Hours Per User<br /><br />6. 从 Manus 开始，AI Agent 相比于 Chatbot，对 token 的消耗是指数级的翻越，今年的推理需求会 100-1000 倍的上涨。利好 NVDIA 和云厂商。<br /><br />7. 目前 Manus 单任务成本 2 USD，是远低于业内平均的水平，但仍有继续优化的弹性。<br /><br />8. 最后一个（不是今天分享会上提到的）小彩蛋，在给 Manus 起名字时，我也参与了一丢丢脑爆和讨论，一度很上头「dodo.ai」这个名字（域名注册 get），slogan 就叫做「Just DODO it」，会非常有记忆点。但最后选择「Manus」，它是拉丁语中「手」的意思。<br /><br />9. 从 2025 年开始，AI 要卷的不再是「思考」能力，而是「行动」能力，这也是「十字路口」2025 开年第一期播客，和 @yusen（同样是 Manus 投资人）对谈的标题：《2025 开年对谈： AI 关键之年，Agent 开启元年》<br /><br />————<br />看到 Manus 掀起这样的热浪，我从昨晚到现在都非常兴奋，this is the best age.<br /><br />也想起昨天「暗涌」文章末尾的这句话：等到 2035 年，回看这十年发生什么，我赌 AI 跟机器人会到处都是，新一代的创业者还会打造更多大疆和 DeepSeek。那时候，我们一定会清醒自己经历了以最好的 vintage。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/67c81db892fdb6dbc6f0501f</id>
-            <title>AI探索站 03月05日</title>
-            <link>https://m.okjike.com/originalPosts/67c81db892fdb6dbc6f0501f</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67c81db892fdb6dbc6f0501f</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 05 Mar 2025 09:47:36 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    最近很多人问我，为啥我用 Claude 写的应用就没那么漂亮？<br /><br />所以教大家一些非常简单的技巧，用上了以后你也能搞定这么漂亮的界面<br /><br />👇下面是具体的技巧和完整提示词<br /><br />完整内容这里：https://mp.weixin.qq.com/s/tUOAfd4OI56QxD94-0PPKw<br /><br />1️⃣第一个技巧：<br /><br />不用非得用语言来描述你想要的界面样式，可以去一些设计平台找一些你喜欢的设计稿将图片上传到图片让模型参考。<br /><br />如果你不知道去哪找的话，国内推荐站酷、海外的话推荐 Dribbble 和 Layers。<br /><br />在跟 Claude 说的时候就可以忽略那些不好描述的地方，重点描述静态图片无法表现的部分，比如下面的这个卡片组件。<br /><br />我就让 Claude 注意交互的动画和输入框聚焦之后的渐变动画上，界面内容和风格就让他按图片生成。<br /><br />2️⃣第二个技巧：<br /><br />在让 Claude 生成界面的时候，你会发现 Claude 生成的页面没有图片，本来应该是图片的部分经常是空白的，这个就很影响结果的视觉表现。<br /><br />其实我们可以要求他引用一些在线的图片来填充到页面需要图片的部分。<br /><br />这里首先推荐 unsplash，他是一个开源图片网站，里面有世界各地的设计大神上传的图片，而且可以直接引用。<br /><br />可以看下面加上图片之后的卡片是不是就好看很多了。<br /><br />3️⃣第三个技巧：<br /><br />另外 claude 在生成页面的时候本来应该是图标的地方，他喜欢用 emoji 来代替，emoji 也很好，但是在一些严肃的页面上就会显得格格不入。<br /><br />这里可以要求 Claude 在生成页面的时候引用在线的图标库，比如Font Awesome或Material Icons，这些开源图标库可以通过 CDN 直接引用，而且不需要部署。<br /><br />可以看到引用了 Font Awesome 图标库的图标之后我们的界面变得更加简洁和整齐。<br /><br />4️⃣第四个技巧：<br /><br />我们常用的前端样式代码是用 CSS 写的，但是 CSS 本身的一些样式其实没有太考虑美观度的要求。<br /><br />这就导致你让 Claude 写样式的时候他就会过渡自己发挥，美观度也就没办法得到保障，而且你对样式要求多之后他要从头写的 CSS 也就越多浪费很多 Token。<br /><br />这里我们可以要求 Claude 用 CDN 引用 TailwindCSS 来写组件样式，Tailwind CSS 封装了一套非常美观和简洁的样式，可以让 Claude 直接调用，确保在色彩、响应式和基础组件的美观度不出大问题。<br /><br />🌟提示词：<br /><br />方括号［］的部分就是你需要填写的部分。<br /><br />我需要创建一个[具体描述你的页面/组件类型]，请帮我生成美观且响应式的HTML+CSS代码。<br /><br />## 设计参考<br />我希望设计风格类似于以下参考：<br />[上传参考图片或描述设计灵感来源]<br /><br />## 技术要求<br />- 请使用HTML、TailwindCSS和少量必要的JavaScript<br />- 引用Tailwind CSS（v3.0+）通过CDN<br />- 页面需完全响应式，在移动设备和桌面端都能良好显示<br /><br />## 图片资源<br />- 请使用Unsplash API提供的图片作为内容图片 <br />- 根据内容主题选择合适的关键词<br /><br />## 图标要求<br />- 使用Font Awesome或Material Icons等专业图标库 (通过CDN引用)<br />- 避免使用emoji作为图标替代品<br /><br />## 交互细节<br />[描述任何需要的交互动画或效果，例如：]<br />- 按钮悬停时有轻微放大效果<br />- 表单输入框聚焦时显示渐变边框<br />- 卡片在悬停时有阴影加深效果<br /><br />## 特别注意<br />- 确保代码干净且有适当注释<br />- 提供完整可运行的HTML文件，包含所有必要引用<br />- 优化视觉层次和间距，确保设计美观专业<br /><br />5️⃣如何生成设计稿：<br /><br />昨天群里一个朋友提了一嘴能不能转设计稿想了一下，居然还真可以，而且可以帮你生成带自动布局的 Figma 设计稿和对应可复用的组件。具体的方法也很简单<br /><br />只需要将你生成的代码部署到线上，如果你用 Claude 或者 POE 都有这个功能，如果你用的软件没有发布能力的话可以用这个 http://yourware.so 产品。<br /><br />获得了线上的链接之后，我们只需要使用 http://html.to.design 这个 Figma 插件就可以很好的将网页转换为
                 ]]>
             </content:encoded>
         </item>
