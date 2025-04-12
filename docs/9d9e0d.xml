@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/67f9dd6f01500b93afc788f4</id>
+            <title>AI探索站 04月12日</title>
+            <link>https://m.okjike.com/originalPosts/67f9dd6f01500b93afc788f4</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67f9dd6f01500b93afc788f4</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 12 Apr 2025 03:26:39 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    一套宝藏提示词，彻底解放即梦AI的字体使用<br /><br />即梦AI的中文字体目前效果极好，但需要配合文本大模型来做提示词引导才能发挥出最佳效果。<br />今天看到阿真的这套元提示词，是我见过的最好能发挥即梦AI字体能力的提示词，在这里分享给大家。<br />元提示词的意思，是一套大语言模型的提示词，让大语言模型来写文生图模型的提示词。<br /><br />道生一，一生万物。<br /><br />完整提示词和详细的6000字介绍地址：<br />https://mp.weixin.qq.com/s/H4Xd8H51SVNhgF_x-e-aOw
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/67f8dc6c7cb8c547e27ee07e</id>
             <title>AI探索站 04月11日</title>
             <link>https://m.okjike.com/originalPosts/67f8dc6c7cb8c547e27ee07e</link>
@@ -68,23 +85,6 @@
                 <![CDATA[
                     
                     谷歌昨晚最大的发布是这个 AI 编程工具 firebase studio<br /><br />这玩意太猛了，充分利用谷歌的基建<br /><br />可以看作是 lovable+cursor+replit+windsurf 合体应用<br /><br />支持一键构建后端、前端和安卓应用，从生产到发布都在一个地方完成<br /><br />应用发布后还带有数据监控能力<br /><br />这里尝试：https://firebase.studio/
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/67f642109890b72d9b53fba1</id>
-            <title>AI探索站 04月09日</title>
-            <link>https://m.okjike.com/originalPosts/67f642109890b72d9b53fba1</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67f642109890b72d9b53fba1</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 09 Apr 2025 09:46:56 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    上周我写 MCP 教程的时候说，希望有大厂可以搞个一键安装的 MCP 商店<br /><br />没想到这一天来的这么快<br /><br />阿里云百炼平台推出了业界首个全生命周期MCP服务<br /><br />企业、开发者甚至个人用户可以一键部署 MCP 服务，可视化构建 Agents！<br /><br />👇下面写个简单的教程，这下你肯定可以学会了：<br /><br />阿里百炼具体特点有：<br /><br />一键部署：提供一键部署、无需运维的MCP服务<br />超多 MCP 供给：内置了 MCP 市场默认提供了相当多官方的 MCP 和三方 MCP<br />低成本服务托管：业级MCP服务托管，函数计算资源动态启用，弹性按量付费<br />全链路工具兼容：在智能体和工作流中快速引用MCP服务<br /><br />这里用两个例子给大家展示一下怎么用百炼的 MCP 服务构建自己的 Agents 应用：<br /><br />首先是高德查询天气并生成网页<br /><br />需要访问百炼平台（https://bailian.console.aliyun.com/?tab=mcp#/mcp-market）的 MCP 市场，从市场里面找到高德的 MCP 服务。<br /><br />开通之后我们就需要创建一个应用来调用高德的 MCP 服务，切到应用 Tab 的应用管理部分，然后点击「新增应用」按钮，这里推荐选智能体应用就行。<br /><br />进来之后我们首先需要选模型，这里默认的千问 Max 就行，我选 Deepseek 来着，但是看起来好像没有支持 MCP，希望后面可以快点支持。<br /><br />之后我们需要在智能体中添加高德的 MCP 服务，点击「+MCP」在侧边栏勾选你刚才开通的高德 MCP 就行。<br /><br />最后就只需要填写提示词就可以开整了，我也把我的提示词放这里给大家参考。<br /><br />如果你有其他需求不会写也没关系，百炼也提供了提示词优化的功能，写下你的提示词点击优化按钮就行。<br /><br />然后是获取任意网页内容总结并记录到 Flomo<br /><br />把你想要总结的网页链接发给 AI 后他会自动获取内容并且总结，然后自动将总结内容记录到你的 Flomo 笔记里，还会带上标签。<br /><br />这里因为用到了 Firecrawl 和 Flomo 的服务所以我们需要去这两个平台获取一下 API Key。<br /><br />首先去 Firecrawl 这里，在侧边栏找到 API Keys 然后复制备用。<br /><br />之后到 Flomo  复制我们的专属记录 API备用。<br /><br />之后我们继续回到百炼的 MCP 广场找到这两个 MCP 服务开通，开通的时候输入我们刚才申请的 MCP 就行。<br /><br />然后我们继续回到应用 Tab，新建应用，添加模型和选择我们刚才开通的两个 MCP 服务。<br /><br />然后就是写提示词了，刚开始我发给他网页链接之后这里的 Firecrawl 一直获取不到网页信息，我还怀疑我的 API 不会是有问题吧，我又去 Firecrawl 官方试了一下，结果可以返回。<br /><br />然后仔细看了一下模型的请求内容发现，他的参数都没写，应该是不知道应该写哪些参数，于是我就在提示词里面加了一个示例，果然就 OK 了。<br /><br />如果你要用的话可以参考我的提示词。<br /><br />之后我们输入一篇文章测试，就可以看到 MCP 正常返回了网页的 Markdown 格式内容，并且自动将总结结果记录到了 Flomo 里面。<br /><br />上次我在我的 MCP 教程里面说过：<br /><br />过技术的民主化与易用性之间总是存在矛盾。一方面我们希望技术足够开放和灵活，另一方面又希望它足够简单直观。<br /><br />这种矛盾在每一项新兴技术发展初期都会出现，但随着生态的成熟，这种矛盾终将被解决。<br /><br />没想到解决的这么快，就在我写完这段话一周后，太离谱了，这就是 AI 速度朋友们。<br /><br />如果你也对 MCP 感兴趣原先苦于高门槛没办法尝试的话，我推荐你现在试试。
                 ]]>
             </content:encoded>
         </item>
