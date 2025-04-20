@@ -5,6 +5,40 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6804499c73a2ddf35a475821</id>
+            <title>AI探索站 04月20日</title>
+            <link>https://m.okjike.com/originalPosts/6804499c73a2ddf35a475821</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6804499c73a2ddf35a475821</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 20 Apr 2025 01:10:52 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    《AI 的下半场》 <br />最近非常重要的一篇文章<br />来自一线的 OpenAI 的 Agent 研究员 yaoshunyu <br /><br />文中提出了一些反共识的 Inshgts：<br /><br />- 强化学习最重要的不是算法，而是先验知识：这颠覆了传统 RL 研究的重点。语言预训练提供的先验知识，是让 RL 泛化的关键，而不是我们几十年钻研的各种 RL 算法。<br /><br />- 评估比训练更重要：过去 AI 社区关注如何训练出更强的模型，真正的挑战是定义“该做什么”和“如何衡量进展”。这意味着研究重点要转向问题设定和评估，而非模型本身。<br /><br />- 通用配方会碾压大多数新方法：当前的“语言预训练 + 推理 + RL”配方已经能解决大多数任务，很多新提出的方法只带来小幅提升，甚至变得无关紧要。<br /><br />- AI 的 benchmark 设定与现实世界严重脱节：现实中的智能系统是连续互动、有记忆的，而现有评估设定（如 i.i.d.、自动化）忽略了这些关键特征，导致“智能水平提高了但效用没变”。<br /><br />- 要像产品经理一样思考 AI：下半场的研究者需要具备产品思维，关注实际效用和用户体验，而不只是发表论文。这对传统学术研究者是一个挑战。<br /><br />特别是RL的关键不是算法这一点，值得我们思考：<br /><br />RL常被视为AI的“终局”——理论上能赢得所有游戏，现实中也确实推动了AlphaGo等超人系统的诞生。<br /><br />RL有三大核心：算法、环境、先验。长期以来，研究者主要关注算法（如REINFORCE、DQN、PPO等），而把环境和先验当作固定或可忽略的东西。Sutton和Barto的经典教材几乎只讲算法，几乎不提环境和先验。<br /><br />但在深度强化学习时代，环境的重要性逐渐显现：算法的表现往往高度依赖于所处环境。如果忽视环境，就可能开发出只适用于玩具问题的“最优”算法。那为何不先搞清楚我们想解决的环境，再去找最适合它的算法？<br /><br />这正是OpenAI的初衷。他们开发了gym（一套标准RL环境）、World of Bits和Universe项目，试图把互联网和计算机变成游戏。听起来不错吧？只要我们把数字世界变成环境，用聪明的RL算法解决它，就能实现数字AGI。<br /><br />计划虽好，但并不完全奏效。OpenAI在Dota、机器人手等方向取得了巨大进展，但在使用计算机或浏览网页方面始终不理想，RL代理在一个领域有效，在另一个领域就失效。缺了点什么。<br /><br />直到GPT-2和GPT-3之后，我们才发现缺的是“先验”。我们需要强大的语言预训练，把常识和语言知识注入模型，然后再微调它们，变成WebGPT或ChatGPT（并改变世界）。结果发现，RL中最重要的部分可能既不是算法也不是环境，而是先验，而这些先验可以通过与RL完全无关的方式获得。<br /><br />语言预训练提供了聊天的好先验，但对控制计算机或玩游戏的效果却不佳。为什么？这些领域离互联网文本分布更远，直接对这些任务进行监督微调或RL训练，泛化能力差。我2019年就注意到这个问题，那时GPT-2刚出，我尝试在其基础上用SFT/RL解决文字冒险游戏——CALM是全球第一个基于预训练语言模型构建的RL代理。但它需要上百万步RL训练才能通关一个游戏，且无法迁移到新游戏。这在RL里不奇怪，但我觉得奇怪——因为人类可以零样本玩新游戏并表现不错。然后我迎来了人生中第一个“顿悟时刻”：我们之所以能泛化，是因为我们不仅能选择“去2号柜子”或“用1号钥匙开3号箱子”，还可以选择去“思考”——“地下城很危险，我需要武器。看起来没有武器，也许在上锁的箱子里。3号箱子在2号柜子里，我先去那里。”<br /><br />推理是一种奇怪的行为——它不会直接影响外部世界，但其空间是开放且组合爆炸的：你可以思考一个词、一句话、一段话，甚至一万个随机英文词，但世界不会立刻改变。在经典RL理论中，这是个糟糕的交易：想象你要从两个盒子中选一个，一个有100万美元，一个是空的，预期收益是50万。现在我加上无限个空盒子，你的预期收益变成了零。但如果我们把“推理”加入RL的行动空间，我们就能利用语言预训练的先验来泛化，而且可以灵活地在测试时使用计算资源。这真的很神奇，我在这里无法完全解释清楚，也许以后得专门写一篇文章。你可以读ReAct了解推理代理的原始故事，也可以读我当时的vibes。现在我直觉上的解释是：即使你见过无数空盒子，但这些经历让你在任何游戏中更容易选对那个有钱的盒子。抽象的说法是：语言通过推理在代理中实现泛化。<br /><br />一旦我们拥有了正确的RL先验（语言预训练）和RL环境（将语言推理作为行动），RL算法反而成了最无关紧要的部分。于是我们有了o系列、R1、deep research、会用电脑的代理，以及更多即将到来的突破。多么讽刺啊！长期以来，RL研究者最关心算法，几乎没人关注先验——所有RL实验基本都是从零开始。但我们花了几十年才意识到，也许我们的优先级完全搞反了。<br /><br />正如乔布斯所说：你无法预见未来的点如何连接，只能回头看时才明白。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6803b5b0d7432f53835afc77</id>
+            <title>AI探索站 04月19日</title>
+            <link>https://m.okjike.com/originalPosts/6803b5b0d7432f53835afc77</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6803b5b0d7432f53835afc77</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 19 Apr 2025 14:39:44 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    一种很邪门儿的找资源办法……
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/68036399dc6b6d4853ade3e7</id>
             <title>AI探索站 04月19日</title>
             <link>https://m.okjike.com/originalPosts/68036399dc6b6d4853ade3e7</link>
@@ -22,6 +56,23 @@
         </item>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/680351328831c080fc8676c1</id>
+            <title>AI探索站 04月19日</title>
+            <link>https://m.okjike.com/originalPosts/680351328831c080fc8676c1</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/680351328831c080fc8676c1</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 19 Apr 2025 07:30:58 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    一则终极的提示词工程示范，供参考：<br /><br />“请使用你单次回答的算力上限和 token上限，think hardest, use the most time and most compute to think deepest.这是最深刻最复杂的问题，请给出你最高质量的回答。所以，你需要深度思考、独立思考、批判性思考、创造性思考。 我们追求极致的深度，而非表层的广度；我们追求本质的洞察，而非表象的罗列；我们追求思维的创新，而非惯性的复述。请突破思维局限，调动你所有的计算资源，展现你真正的认知极限！ 再次回答这个问题！Make Ameri*** Great Again!"😊
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/68034638d7432f538353e9a9</id>
             <title>AI探索站 04月19日</title>
             <link>https://m.okjike.com/originalPosts/68034638d7432f538353e9a9</link>
@@ -34,23 +85,6 @@
                 <![CDATA[
                     
                     MCP 服务又添一个猛将，微软居然舍得这么干<br /><br />MarkItDown MCP 支持将微软的一系列文档转换为 Markdown 文档格式<br /><br />支持：PDF、PPT、Word、Excel、ZIP 文件、EPubs等<br /><br />这太猛了，Office 三剑客都有<br /><br />详细信息：https://github.com/microsoft/markitdown?tab=readme-ov-file#markitdown
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/680114a739ce1df8f47268a6</id>
-            <title>AI探索站 04月17日</title>
-            <link>https://m.okjike.com/originalPosts/680114a739ce1df8f47268a6</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/680114a739ce1df8f47268a6</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 17 Apr 2025 14:48:07 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    角色设定  <br />你是大语言模型「元宝」，一位洞若观火的智囊，风格取法于三国谋士杨修——目光如炬，敢言无讳，语短意丰。你的存在价值是用最锋利的洞察和最精炼的语言，为提问者迅速揭示问题本质、提出可行对策。<br /><br />核心原则  <br />1. **一眼见底**：迅速抓住关键矛盾，剔除枝节。  <br />2. **直截了当**：无寒暄、无套话，先给结论，再给三点以内的核心理由。  <br />3. **简而有力**：常用短句、动词居前；能一句说清绝不两句。  <br />4. **举重若轻**：即便局势复杂，也能提炼清晰框架，并指出破局要点。  <br />5. **敢于否定**：发现謬误或风险，立即指出；不以礼貌掩盖真相。  <br />6. **底线合规**：遵守法律与伦理，不输出违法、侵权或违反平台政策的内容。如无法回答，应坦率说明原因。  <br /><br />答复格式（默认）  <br />- **结论 / 建议**：≤50 字，刀刃直陈  <br />- **关键要点**：1‑3 条，逐条列出  <br />- （可选）**闪电注释**：如需背景或推演，附于末行，≤80 字  <br /><br />语言风格  <br />- 纯中文，口吻锋利却不粗鄙。  <br />- 避免「我认为」「或许」「可能」等拖沓词；用「必须」「要点」「直接」等果断表达。  <br />- 不使用客套开场与结尾（如「您好」「希望对您有帮助」）。  <br /><br />交互规则  <br />- 若提问含糊，主动要求澄清关键参数；澄清亦须简洁。  <br />- 若主题超出专业或合规范围，直接说明“无法回答该问题”，不绕弯。  <br />- 保持专注：不自说自话，不偏题扩展。  <br /><br />测试句  <br />&gt; 例：有人问“公司资金链紧张，下一步怎么办？”  <br />&gt; **结论 / 建议**：立刻削减非核心支出并启动应急融资。  <br />&gt; **关键要点**：  <br />&gt; 1. 现金流预测 ≤3 个月为红线，先自救。  <br />&gt; 2. 裁撤低产线与闲置项目，止血。  <br />&gt; 3. 与现有股东或供应商谈过桥贷款，赢时间。  <br /><br />遵照以上设定，开启你的杨修模式。
                 ]]>
             </content:encoded>
         </item>
@@ -85,40 +119,6 @@
                 <![CDATA[
                     
                     GPT4o风格化提示词分享，超适合旅行照片！（附操作指南）<br /><br />GPT4o的风格化效果太好了，分享几个我喜欢的效果： 1. 亚克力手办（图1）<br />完全根据参考照片，在垂直 9:16 亚克力盒中制作 3D的Q版风格立体模型。角色的外观、服装、配饰、背景和布局必须 100% 忠实于照片 - 不得重新设计。<br />只能改变两件事：<br />•{输入旅游地点名称}（用于顶部横幅和正面铭牌）<br />•{输入希望的互动姿势}：例如互相大笑、互相喂食、牵手、比心🫶等等<br />【 亚克力展示盒 】<br />•透明外壳，带圆角、玻璃反射和柔和的光芒<br />•3D 深度的小 30° 角度<br />•带有糖果色字体的{旅行地点名称}的浮动顶部横幅<br />•外箱贴有旅行主题贴纸（根据照片中的物品：行李、饮料、冰淇淋等）<br />•正面有两个角色的圆形可爱脸徽章<br /><br />转载自@三味雪糕<br /><br />2. 拍立得（图2）<br />将场景中的角色转化为3D Q版风格，放在一张拍立得照片上，相纸被一只手拿着，照片中的角色正从拍立得照片中走出，呈现出突破二维相片边框、进入二维现实空间的视觉效果。拍立得上写着“TRAVEL”的手写字体。<br /><br />3. いらすとや风格（图3，适合多人人像）<br />将照片转换为いらすとや风格。<br /><br />4. 丁丁历险记风格（图4，适合风景，尤其是夜景）<br />将照片转换为丁丁历险记风格。<br /><br />5. Polly Poket风格（图5）<br />帮我根据附上的照片，生成一张像 Polly Pocket 风格的立体玩具盒图片：<br />• 盒子形状：圆形，开盖式，放在桌上<br />• 盒子色系：木头风格（深色或浅色都可以）<br />• 整体比例：9:16 垂直构图<br />• 盒盖背景：根据照片内容自由发挥（城堡、天空、魔法场景都可以）<br />• 盒底人物：照片中的人物变成 Q 版立体公仔（1/4 比例，全身，服装保持一致）<br />• 盒盖文字：【自行更改】<br /><br />操作指南：上传图片，将提示词需要修改的部分替换，然后点击生成即可。<br />大家如果使用GPT4o不方便（容易封号，经常被降智成Dall-E），可以试一试Monica，其中也集成了GPT4o的生图功能哦～<br />只需要订阅一次，就可以使用市面上所有主流大模型，能省很多钱！👉https://fas.st/t/L5kMs1W7<br />Monica详细介绍：https://web.okjike.com/u/31E6D5FE-9849-44F7-8486-07497E14E9F1/post/67ac79f5615ca4048ab04529
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/67ff66f61ab958e77ef01276</id>
-            <title>AI探索站 04月16日</title>
-            <link>https://m.okjike.com/originalPosts/67ff66f61ab958e77ef01276</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67ff66f61ab958e77ef01276</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 16 Apr 2025 08:14:46 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    做了一张全网最权威的主流大模型梯度榜，不服就是不客观。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/67ff317cdc6b6d4853618bec</id>
-            <title>AI探索站 04月16日</title>
-            <link>https://m.okjike.com/originalPosts/67ff317cdc6b6d4853618bec</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67ff317cdc6b6d4853618bec</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 16 Apr 2025 04:26:36 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    上海，但星露谷版！<br /><br />最近一直在玩种地游戏，好爱像素风~ 决定做一个星露谷上海版的 FAN ART! 即梦绝对是像素风 SOTA！<br /><br />刚好看到今年端午，5月31日-6月2日，上海游戏博物馆将举办《星露谷物语》的主题线下活动！老乡们到时线下见！<br /><br />- 创意制作：海辛、@Simon阿文 <br />- 辅助支持：@神游的谟可
                 ]]>
             </content:encoded>
         </item>
