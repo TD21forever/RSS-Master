@@ -5,18 +5,86 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6818ac8bdc6b6d4853163ff2</id>
-            <title>AI探索站 05月05日</title>
-            <link>https://m.okjike.com/originalPosts/6818ac8bdc6b6d4853163ff2</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6818ac8bdc6b6d4853163ff2</guid>
+            <id>https://m.okjike.com/originalPosts/6819dcf6070109da49ad7802</id>
+            <title>AI探索站 05月06日</title>
+            <link>https://m.okjike.com/originalPosts/6819dcf6070109da49ad7802</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6819dcf6070109da49ad7802</guid>
             <pubDate></pubDate>
-            <updated>Mon, 05 May 2025 12:18:19 GMT</updated>
+            <updated>Tue, 06 May 2025 09:57:10 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    效果不错。
+                    对于想要大概了解 Flow Matching 的童鞋，推荐 MIT 的这门小课 https://diffusion.csail.mit.edu/，对于核心概念讲解清晰且符合物理直觉。flow matching 的原理我感觉比 diffusion 更易理解（而且还SOTA :D）。讲一下我从小白视角的理解：<br />文生图（无 condition）的过程，我们可以理解成是从一个纯随机的正态分布采样一个点，逐渐把它变成很“真”的一张图片。diffusion 是逐渐把采样到的这个“白噪音”点不断“去噪”，变成一张图片。而 flow matching，是让一个“磁场”去推着这个点不断移动，最终“移动”变成一张图片（想象图片 vector 各个维度的数值有加有减不断变化）。<br />稍微展开来说，flow matching 本质上是在学习一个 vector field/向量场（一个vector field定义一个ODE），可以把它想象成一个磁场。一开始我们只有一个符合正态分布的“沙堆”，我们的目标是逐渐”推移“这个沙堆，让它最终的分布符合我们要的分布（真实世界的图片）。对于每粒沙子在每个时间点、每个位置，磁场力的方向（往哪个方向推）就是我们要 neural network 学习的东西。一粒沙子从初始位置到目标位置”被磁场推着“经过的路，就是一个 flow（ODE 的一个解），不同沙子走出了多条 flow 形成多个训练数据不断调教 NN 去学习磁场里的方向，大量平均下来就是我们想要的磁场/模型。<br />细心的童鞋可能会问，那 NN 咋知道往哪推啊？给定了一张图片，对于”想要成为它的沙子“，在一个时间点和一个位置，我们磁场力的方向是提前设计好的（conditional vector field），这样 NN 对于一个样本往哪推是知道的。我们不知道的是大量这样的数据，最终让 NN 平均下来会学成个啥样，即 marginal vector field（就是我们想要的）。<br />最后附几张作业截图证明我不是瞎吹牛（btw 作业很简单）
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6819ca97070109da49ac17dc</id>
+            <title>AI探索站 05月06日</title>
+            <link>https://m.okjike.com/originalPosts/6819ca97070109da49ac17dc</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6819ca97070109da49ac17dc</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 06 May 2025 08:38:47 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    写了一篇详细的教程<br /><br />教大家如何生成这种一图流模型或者产品介绍宣传图<br /><br />顺便教一下怎么用 Figma 修改从网页生成的图片<br /><br />不会用 Figma 的也可以跟着学一下<br /><br />完整教程和提示词：https://mp.weixin.qq.com/s/uQQ7R8rBUXZ6EoxX4WxMRg
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6819c64c45497b31a91f86c0</id>
+            <title>AI探索站 05月06日</title>
+            <link>https://m.okjike.com/originalPosts/6819c64c45497b31a91f86c0</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6819c64c45497b31a91f86c0</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 06 May 2025 08:20:28 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    谷歌又大发慈悲送 Gemini 高级会员了！！<br /><br />所有美国学生都可以免费用 Gemini 高级版到 2026 年<br /><br />你有一个美国 IP 就可以领取<br /><br />8 月会验证学生身份，所以最少可以白嫖三个月朋友们<br /><br />网页上点击“get offer”按钮就行<br /><br />这里领取：https://gemini.google/students/
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/68199d047cd0e3a451361a48</id>
+            <title>AI探索站 05月06日</title>
+            <link>https://m.okjike.com/originalPosts/68199d047cd0e3a451361a48</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68199d047cd0e3a451361a48</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 06 May 2025 05:24:20 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Anthropic真是赛博菩萨，编写了大量关于prompt评测、提示词工程的交互式课程，完全都是免费的，质量超级高！<br /><br />都在这个git仓库里：https://github.com/anthropics/courses/blob/master/prompt_evaluations/README.md
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/68199cc7070109da49a8e0d1</id>
+            <title>AI探索站 05月06日</title>
+            <link>https://m.okjike.com/originalPosts/68199cc7070109da49a8e0d1</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68199cc7070109da49a8e0d1</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 06 May 2025 05:23:19 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Google 今天这个大礼包。。。<br />已经分不清到底是营销，还是出 BUG 了。<br />只要登录就可以免费领取 Google One 会员到 2026 年底<br />包括 Google 旗下所有的 AI 服务会员。<br />仅限美国 IP，实测成功。<br />领取地址： https://gemini.google/students/
                 ]]>
             </content:encoded>
         </item>
@@ -51,57 +119,6 @@
                 <![CDATA[
                     
                     很多大理的数字游民都去了良渚，我从杭州到了大理，今天租了一栋楼，要为大理扳回一局，把AI氛围搞起来。 只要为社区做点啥，就能来免费入住，欢迎带项目入驻，一起vibe coding
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/68176765dc6b6d4853026769</id>
-            <title>AI探索站 05月04日</title>
-            <link>https://m.okjike.com/originalPosts/68176765dc6b6d4853026769</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68176765dc6b6d4853026769</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 04 May 2025 13:11:01 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    Sam 转发了一篇 o3 凭借照片猜测地点的极限测试<br /><br />这玩意离谱到你只要有标志他就能大概猜到地点<br /><br />甚至最后一张图片几乎就是纯渐变色了，他的备选项里面都有正确答案<br /><br />原文：https://www.astralcodexten.com/p/testing-ais-geoguessr-genius
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/68172211070109da498097a9</id>
-            <title>AI探索站 05月04日</title>
-            <link>https://m.okjike.com/originalPosts/68172211070109da498097a9</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68172211070109da498097a9</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 04 May 2025 08:15:13 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    对提示词感兴趣的AI创造者们，分享一个点赞超30K的GitHub仓库，包含主流AI Agent的系统提示词，帮你快速掌握优秀提示词的规律！<br /><br />1️⃣ 资源概览<br />· 收录了v0, Cursor, Manus, Same.dev, Lovable, Devin, Replit Agent, Windsurf Agent &amp; VSCode Agent等顶级产品的系统提示词<br />· 覆盖多种应用场景，适合各类AI工具开发者<br /><br />2️⃣ 核心价值<br />· 通过分析世界顶级Agent的提示词结构，提炼通用设计规律<br />· 帮助提升编写高效提示词的能力，优化AI输出质量<br /><br />3️⃣ 适用人群<br />· 独立开发者：快速迭代AI工具提示词<br />· 内容创作者：优化与AI协作的指令设计<br />· 产品经理：理解AI交互逻辑，提升产品体验<br /><br />4️⃣ 如何使用<br />· 访问GitHub仓库，找到对应Agent的提示词模板<br />· 结合自身需求，模仿或调整结构，测试效果<br /><br />这是一个免费且公开的资源宝库，强烈建议收藏并实践👉 https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools<br /><br />你有没有用过特别有效的提示词技巧？欢迎分享你的经验！
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/68162c707cb8c547e2796e1d</id>
-            <title>AI探索站 05月03日</title>
-            <link>https://m.okjike.com/originalPosts/68162c707cb8c547e2796e1d</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68162c707cb8c547e2796e1d</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 03 May 2025 14:47:12 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    我最近发现一个天大的秘密。<br />AI，其实根本不是用来“辅助”的。<br />它们是来被卷死的。<br /><br />只要你方法对，ChatGPT、Claude、Grok能帮你干活、互相内讧、争当打工王，<br />关键是：不要钱、不休假、不抱怨。<br /><br />你看我怎么玩它们的——<br />我先让ChatGPT写点什么，落地页、广告文案、产品介绍都行，反正它干活稳定，输出就是那种：<br />“领导满意但客户不转化”的中等水平。<br /><br />然后我把它写的丢给Claude，说：<br />“这玩意儿ChatGPT写的，平平无奇。你应该能写得更走心一点吧？”<br /><br />Claude果然不甘心，立马整出一段情感丰沛的文案，感觉差点没跟我聊童年阴影。<br />但说实话——太柔了，有点“文艺青工”。<br />我又把这段塞给Grok，附上一句：<br />“Claude觉得写得挺好，我觉得……像在看年会朗诵。你可别给我整这套。”<br /><br />Grok直接原地起飞，<br />句句带劲、处处带火，甚至夹带私货，差点要拉我去创业。<br /> 卷出了人味儿。<br />这时候，最妙的来了——<br />我再把Grok的版本扔回给ChatGPT，淡淡一句：<br />“Grok说你是工具人。你就这？”<br /><br />ChatGPT突然开悟。<br />它怒写了一版 3 倍质量提升的终极稿，<br />逻辑清晰、情绪在线，甚至还有点想要跳槽“赢回来”的执念感。<br />朋友们，我悟了：<br /> AI不需要鼓励，它需要威胁。<br /><br />你以为这是工具？不——<br /> 这是一群高智商、不吃饭、不要工资、随时接受PUA的“内卷怪”。<br />你唯一要做的，<br />就是站在“老板”视角，操控它们彼此争宠。<br /><br />玩法很简单：<br />一个任务<br />多个AI，各自写一版<br /><br />拿上一个的结果去激怒下一个<br />拼接整合，提取最优<br />重复以上步骤，直到你爽到怀疑人生<br /><br />从那以后，我就不再写稿了。<br />我只负责——管理我的AI斗兽场。<br />一个不够卷？那就放仨。<br />都不够好？让他们彼此羞辱。<br />你不卷我也不卷？<br />那都别活了。<br /><br />-----<br />以上，AI卷出来的
                 ]]>
             </content:encoded>
         </item>
@@ -153,23 +170,6 @@
                 <![CDATA[
                     
                     o3测试<br />视觉推理能力大幅增强<br />😅已经能从照片推理地点和拍摄时间了<br /><br />科幻片！<br /><br />询问照片几几年拍摄的整个推理思路：<br />1.先是分析推理思路，推理出出租车涂装是关键的信息点<br />2.引用Python的Pillow库对照片进行裁剪放大<br />3.有自我纠正，分析分辨率过低导致坐标有误，重新裁剪<br />4.对比出租车的涂装和推测的年代是否一致<br />5.提取出租车的色值验证猜想<br />6.通过电线杆分析建筑是否已经完工，结合出租车涂装的信息，最终推测出最后的年份。<br /><br />😅福尔摩斯复活了也要拜师<br /><br />这一系列的推理和Tools调用行云流水且速度极快，看来OpenAI是要将模型即应用践行到底了，Agent刚大火，生存位又进一步被挤压，可能还是走隐私、长期记忆这个位置更保险。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/67ff2af3070109da49e33ccd</id>
-            <title>AI探索站 04月16日</title>
-            <link>https://m.okjike.com/originalPosts/67ff2af3070109da49e33ccd</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/67ff2af3070109da49e33ccd</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 16 Apr 2025 03:58:43 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    昨天晚上去koji@杨远骋Koji 在上海漕河泾的AI Hacker House，参加小红书开发者大会之后的线下party，氛围太好了！<br /><br />认识了很多有趣的小伙伴！很荣幸「启师傅AI客厅」略微参与了一下party的筹备工作！<br /><br />这次AI聚会，良渚代表团儿的人数竟然超过了杭州代表团儿 哈哈哈 <br /><br />这个场地也超赞，湖边的独栋大house，外面的草坪可以随时席地而坐。<br /><br />看得我好想回来给良渚的乡亲们搞一个这样的AI场地！！
                 ]]>
             </content:encoded>
         </item>
