@@ -5,6 +5,415 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2025/05/weekly-issue-349.html</id>
+            <title>科技爱好者周刊（第 349 期）：神经网络算法的发明者</title>
+            <link>http://www.ruanyifeng.com/blog/2025/05/weekly-issue-349.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/05/weekly-issue-349.html</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 23 May 2025 08:12:32 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 神经网络算法,深度学习,ImageNet比赛,AI时代
+
+<br>
+<br>
+总结: 文章讲述了神经网络算法的发展历程和关键人物。杰弗里·辛顿是神经网络算法的奠基人，提出了反向传播算法；杨立昆引入了卷积算法并开发了首个实用神经网络；亚历克斯·克里泽夫斯基和伊尔亚·苏茨克维在2012年使用卷积神经网络赢得了ImageNet比赛。AI的成功需要算法、大数据和高速计算硬件的结合，这三者在2012年同时具备，标志着AI时代的开始。 </div>
+                        <hr>
+                    
+                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
+<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/6771">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
+
+<h2>封面图</h2>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025052105.webp" title="" /></p>
+
+<p>北京的护城河公共绿道，位于鼓楼附近。（via <a href="https://www.instagram.com/p/DJi3qkuOTZ5/">visuals_china@instagram</a>）</p>
+
+<h2>神经网络算法的发明者</h2>
+
+<p>上周的<a href="https://www.ruanyifeng.com/blog/2025/05/weekly-issue-348.html">《李飞飞自传》读后感</a>，还有后续。</p>
+
+<p>那篇文章的结尾是，2012年一支加拿大团队使用神经网络算法，夺得了 ImageNet 比赛冠军。</p>
+
+<p>今天就来说说，这支加拿大团队的故事。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025052104.webp" title="" /></p>
+
+<p>大家看了就知道了，神经网络算法是怎么诞生的，背后的推手又是谁。</p>
+
+<p><strong>（1）杰弗里·辛顿</strong>（Geoffrey Hinton，1947-）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051807.webp" title="" /></p>
+
+<p>辛顿出生于英国，后移居加拿大。他是神经网络算法的奠基人和主要发明者。</p>
+
+<p>神经网络的概念，是上世纪40年代后期提出的（提出人不是辛顿）。当时的想法是，既然人类通过神经网络进行思考，那么只要让机器模拟神经网络，机器就能思考了。</p>
+
+<p>但是，那只是一个概念，并没有具体的算法。机器怎么模拟思考，人们并不知道。</p>
+
+<p>1984年，辛顿在加州大学担任博士后，与两个同事一起提出了反向传播算法。</p>
+
+<p>这个算法可以建立多层网络，产生一个输出结果，让神经网络变成了现实，也是后来更高级算法的基础。</p>
+
+<p>由于它需要多层计算，后一层在前一层的结果上学习，所以被称为"深度学习"，辛顿因此成为"深度学习之父"。</p>
+
+<p>辛顿后来因为这个贡献，获得了图灵奖（2018年）和诺贝尔物理学奖（2024年）。</p>
+
+<p><strong>（2）杨立昆</strong>（1960-）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051808.webp" title="" /></p>
+
+<p>杨·安德烈·勒坎（Yann André Le Cun，中文名杨立昆）是法国人。上个世纪80年代，他是多伦多大学博士后。</p>
+
+<p>这一时期，辛顿也来到了多伦多大学任教，担任他的指导教师。</p>
+
+<p>所以，杨立昆是辛顿的大弟子，继承和发展了辛顿的算法。他的主要成就是，为神经网络引入了卷积算法，并且做出了第一个有实际用途的神经网络。</p>
+
+<p>1990年代，他用神经网络识别银行支票的手写数字，成功获得了企业的采用。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051809.webp" title="" /></p>
+
+<p>但是，这个应用也暴露了卷积神经网络的弱点：它需要大量样本的训练，耗费巨大的算力。银行支票只需要识别10个阿拉伯数字，如果是更多样化的场景，当时的计算能力难以做到。</p>
+
+<p>学术界因此认为，卷积神经网络只适用特定的、计算量较小的场景，不具备推广的价值。这导致这种算法，以及辛顿和杨立昆，被冷落了二十年。</p>
+
+<p>这二十年，杨立昆一直混迹于企业实验室和大学教研室。等到世界重新认识卷积神经网络，他在2018年与辛顿一起获得了图灵奖，现在是 Meta 公司的副总裁和 AI 首席科学家。</p>
+
+<p><strong>（3）亚历克斯·克里泽夫斯基</strong>（Alex Krizhevsky，1986-）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051810.webp" title="" /></p>
+
+<p>亚历克斯·克里泽夫斯基是乌克兰人，少年时随家人移民到加拿大。2007年，他进入多伦多大学，成为辛顿的博士生。</p>
+
+<p>这时距离杨立昆提出卷积神经网络，已经过去快20年了。辛顿始终没忘记它，他鼓励亚历克斯和稍后要提到的伊尔亚·苏茨克维，使用这种算法，去挑战李飞飞的 ImageNet。</p>
+
+<p>亚历克斯就写了一个程序，用 ImageNet 的1500万图片，来训练他的卷积神经网络。但是，计算量太大了，他的个人计算机根本跑不动，他就买了两块 Nvidia 显卡，每天24小时一刻不停地运算。</p>
+
+<p>事实证明，卷积神经网络+大训练集+高速计算硬件，超过了其他一切已知的算法。最终，他们的三人团队以巨大优势，夺得了2012年第三届 ImageNet 算法比赛冠军。</p>
+
+<p>这件事轰动了业界，各大互联网公司纷纷邀请辛顿和他的学生加入。百度也伸出橄榄枝，邀请辛顿担任首席科学家，但是最后输给了谷歌。</p>
+
+<p>2013年，谷歌以4400万美元收购了辛顿成立的空壳公司，将辛顿、亚历克斯、伊尔亚三个人一起招入麾下。</p>
+
+<p>2017年，亚历克斯辞职，现在一家创业公司研究 AI 技术。</p>
+
+<p><strong>（4）伊尔亚·苏茨克维</strong>（Ilya Sutskever， 1986-）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051811.webp" title="" /></p>
+
+<p>伊尔亚·苏茨克维出生于前苏联，后去了以色列，然后来到加拿大。他是亚历克斯·克里泽夫斯基在多伦多大学的博士同学，也是辛顿的博士生。</p>
+
+<p>他与亚历克斯组成团队，共同赢得了2012年的 ImageNet 算法比赛。辛顿作为指导老师，也是团队一员。</p>
+
+<p>他在2013年跟随辛顿加入谷歌，2015年辞职，成为 OpenAI 的联合创始人和首席科学家，后来是 ChatGPT 的主要作者之一。2024年，他离开 OpenAI，现在创立了自己的 AI 公司。</p>
+
+<p><strong>（5）安德烈·卡帕斯</strong>（Andrej Karpathy，1986-）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051812.webp" title="" /></p>
+
+<p>安德烈·卡帕斯出生于斯洛伐克，15岁随家人来到加拿大，在多伦多大学读完了本科。</p>
+
+<p>他跟伊尔亚·苏茨克维很可能大学里就认识。但是，他没在多伦多大学读博士，而是去了斯坦福大学，指导老师就是李飞飞。</p>
+
+<p>他的方向也是卷积神经网络，博士期间开设了斯坦福大学第一门深度学习课程，担任主讲。</p>
+
+<p>2015年，他跟随伊尔亚一起加入 OpenAI，成为主要研究人员。</p>
+
+<p>2017年，他离开 OpenAI，去了特斯拉，担任特斯拉 AI 总监，2022年离职。</p>
+
+<p><strong>（6) 总结</strong></p>
+
+<p>上面五人是神经网络算法的主要创立者和推动者。没有他们，就不会有今天的 AI 大模型。</p>
+
+<p>但是，单单靠他们的算法，AI 不会成功。因为算法需要大量的数据进行训练，而训练需要高速计算的硬件。这三者缺一不可。</p>
+
+<p>只有等到2012年，才万事俱备。神经网络算法 + 李飞飞的 ImageNet 训练集 + Nvidia 高速显卡，同时出现了。</p>
+
+<p>历史于是翻开了新的一页，AI 时代正式来临。</p>
+
+<h2>科技动态</h2>
+
+<p>（1）一家深圳公司推出了，可能最炫酷的<a href="https://liliputing.com/pironman-5-max-turns-a-raspberry-pi-5-into-a-mini-tower-with-a-transparent-case-rgb-lighting-and-dual-nvme-ssd-support/">树莓派机箱</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051009.webp" title="" /></p>
+
+<p>它自带机箱显示屏、RGB 灯光、风扇、NVMe SSD 扩展板，很适合用作 NAS 和 AI 边缘计算。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051010.webp" title="" /></p>
+
+<p>（2）芬兰尝试在<a href="https://www.smithsonianmag.com/smart-news/avoid-deer-strikes-finland-painting-deer-antlers-reflective-paint-180949792/">驯鹿的鹿角</a>，涂上荧光粉。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042409.webp" title="" /></p>
+
+<p>这是为了方便司机在夜间看到驯鹿，目前每年在芬兰公路上被撞死的驯鹿有4000头。</p>
+
+<p>（3）在线会议软件 Google Meet，推出<a href="https://www.engadget.com/apps/google-brings-live-translation-to-meet-starting-with-spanish-174549788.html">实时语音翻译</a>，首先提供西班牙语版本。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025052203.webp" title="" /></p>
+
+<p>在线会议时，对方说西班牙语，你听到的却是英语，而且声音、语调和情感‌都不变。</p>
+
+<p>（4）意大利开源硬件公司 Arduino，研发出了<a href="https://blog.arduino.cc/2025/04/22/arduino-is-at-work-to-make-bio-based-pcbs/">可降解 PCB</a>（电路板），减轻对环境的污染。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051201.webp" title="" /></p>
+
+<p>这种可降解电路板，将电路印刷在植物亚麻材料上，而不是传统的玻璃纤维和树脂。</p>
+
+<p>不过，电路板上的铜无法降解，需要在丢弃电路板之前先回收。</p>
+
+<p>（5）一家美国创业公司，准备发射卫星，将 <a href="https://www.ycombinator.com/companies/starcloud">AI 机房建在太空</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051403.webp" title="" /></p>
+
+<p>它依靠24小时的太阳能供电，也不用担心散热。</p>
+
+<p>该公司希望通过这种方法，解决 AI 服务器的耗电和冷却问题。</p>
+
+<h2>文章</h2>
+
+<p>1、<a href="https://holdtherobot.com/blog/2025/05/11/linux-on-android-with-ar-glasses/">手机的 Linux 桌面环境</a>（英文）</p>
+
+<p>作者出门不带笔记本，只带手机，再配上蓝牙键盘和 AR 眼镜。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051903.webp" title="" /></p>
+
+<p>他的安卓手机在获取 root 权限后，通过 chroot 安装了 Linux 发行版，从而可以运行桌面环境。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051904.webp" title="" /></p>
+
+<p>2、<a href="https://sketch.dev/blog/agent-loop">AI 应用的核心逻辑</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051905.webp" title="" /></p>
+
+<p>作者提出，AI 应用（AI agent）的核心逻辑只需要9行代码。</p>
+
+<p>3、<a href="https://www.keenformatics.com/ports-that-are-blocked-by-browsers">浏览器默认屏蔽的端口</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051906.webp" title="" /></p>
+
+<p>你可能不知道，浏览器无法打开下面的网址<code>localhost:6000</code>，原因是6000是浏览器默认屏蔽的端口。</p>
+
+<p>4、<a href="https://www.xda-developers.com/i-tried-every-method-to-remotely-access-my-pc-this-method-is-the-best/">推荐 RustDesk 远程桌面</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025040506.webp" title="" /></p>
+
+<p>Mac 电脑访问 Windows 电脑，一种方法就是使用远程桌面，作者推荐远程桌面工具 RustDesk。</p>
+
+<p>5、<a href="https://cassidoo.co/post/css-for-dialogs/">HTML <code>&lt;dialog&gt;</code> 的 CSS 技巧</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025011910.webp" title="" /></p>
+
+<p>HTML 有一个原生的弹窗元素<code>&lt;dialog&gt;</code>，本文介绍两个配套使用的 CSS 技巧。</p>
+
+<p>6、<a href="https://blog.gitbutler.com/how-git-core-devs-configure-git/">Git 配置详解</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202502/bg2025022504.webp" title="" /></p>
+
+<p>本文详细解释 Git 配置命令 git config 的几个最常见的设置。</p>
+
+<h2>工具</h2>
+
+<p>1、<a href="https://github.com/facebook/pyrefly/">Pyrefly</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051801.webp" title="" /></p>
+
+<p>Meta 公司发布的 Python 代码的类型检查器，参见<a href="https://engineering.fb.com/2025/05/15/developer-tools/introducing-pyrefly-a-new-type-checker-and-ide-experience-for-python/">介绍文章</a>。</p>
+
+<p>2、<a href="https://github.com/zen-browser/desktop">Zen Browser</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025052202.webp" title="" /></p>
+
+<p>新发布的一个开源浏览器，基于 Firefox，国外评价非常高，使用体验好，参见<a href="https://www.xda-developers.com/zen-browser-better-brave-arc-chrome/">介绍文章</a>。</p>
+
+<p>3、<a href="https://github.com/xtool-org/xtool">xtool</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051701.webp" title="" /></p>
+
+<p>Xcode 的替代品，在 Linux/Win/macOS 开发 iOS 应用。</p>
+
+<p>4、<a href="https://nextbconvert.com/">Zero Convert</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051703.webp" title="" /></p>
+
+<p>在线批量转换文件，基于 WebAssembly 技术，完全本地完成，还可以编辑图片。（<a href="https://github.com/ruanyf/weekly/issues/6864">@xiaoshangmin</a> 投稿）</p>
+
+<p>5、<a href="https://github.com/tnb-labs/panel">耗子面板</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051804.webp" title="" /></p>
+
+<p>Go 语言开发的服务器管理面板。（<a href="https://github.com/ruanyf/weekly/issues/6881">@devhaozi</a> 投稿）</p>
+
+<p>6、<a href="https://github.com/goravel/goravel">Goravel</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051805.webp" title="" /></p>
+
+<p>Go 语言的 Web 开发框架，与 PHP 的 Laravel 框架保持一致，方便快速上手。（<a href="https://github.com/ruanyf/weekly/issues/6882">@devhaozi</a> 投稿）</p>
+
+<p>7、<a href="https://github.com/game1024/OpenSpeedy">OpenSpeedy</a></p>
+
+<p>开源的游戏变速工具，通过调整 Windows 系统时间函数来实现游戏速度变化。（<a href="https://github.com/ruanyf/weekly/issues/6884">@game1024</a> 投稿）</p>
+
+<p>8、<a href="https://github.com/SimonAKing/AnimatedGallery">SimonAKing-Gallery</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051901.webp" title="" /></p>
+
+<p>后端的 JS 相册应用，瀑布流展示图片，指定图片目录，直接运行即可。（<a href="https://github.com/ruanyf/weekly/issues/6886">@SimonAKing</a> 投稿）</p>
+
+<p>9、<a href="https://github.com/agent-kilo/jwno">Jwno</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025052101.webp" title="" /></p>
+
+<p>网友开源的 Windows 10/11 平铺窗口管理器，键盘驱动。（<a href="https://github.com/ruanyf/weekly/issues/6891">@agent-kilo</a> 投稿）</p>
+
+<p>10、<a href="https://github.com/didi/dimina">星河小程序</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025052204.webp" title="" /></p>
+
+<p>滴滴公司开源的跨平台开发框架，支持将小程序打包成为安卓、iOS、鸿蒙和 Web 四个平台的原生 App。（<a href="https://github.com/ruanyf/weekly/issues/6912">@dos1in</a> 投稿）</p>
+
+<h2>AI 相关</h2>
+
+<p>1、<a href="https://github.com/JuergenFleiss/aTrain">aTrain</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051802.webp" title="" /></p>
+
+<p>一个跨平台、图形界面的自动语音识别工具，基于 Whisper 模型，支持识别50多种语言，参见<a href="https://www.xda-developers.com/i-switched-from-otter-to-this-self-hosted-audio-transcription-app/">介绍文章</a>。</p>
+
+<p>2、<a href="https://aiimageeditor.me/">AI Image Editor</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025051803.webp" title="" /></p>
+
+<p>在线的免费图像处理工具，提供多种 AI 功能，比如图片增强、去除水印、风格转换等十几种。（<a href="https://github.com/ruanyf/weekly/issues/6883">@worminone</a> 投稿）</p>
+
+<h2>资源</h2>
+
+<p>1、<a href="https://mayeclair.itch.io/museum-of-all-things">万物博物馆</a></p>
+
+<p>一个跨平台的桌面软件，将维基百科变成一个虚拟博物馆。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025031008.webp" title="" /></p>
+
+<p>每件展品与维基百科的一篇文章相对应，墙上的画框就是文章图片，讲解牌就是文章内容。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025031009.webp" title="" /></p>
+
+<p>走廊则根据文章的链接通向其他展厅，有几乎无限的展厅可以参观。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025031010.webp" title="" /></p>
+
+<h2>图片</h2>
+
+<p>1、<a href="https://www.facebook.com/groups/1740302472949408/permalink/3918177945161839">《星球大战》的机器人</a></p>
+
+<p>《星球大战》的第一部电影，拍摄于1976年，里面有一个机器人 R2-D2，会四处走动，做各种动作，还会说话。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025052106.webp" title="" /></p>
+
+<p>其实，它根本没那么高科技，拍摄的时候，就是里面藏了一个真人演员。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025052107.webp" title="" /></p>
+
+<p>2、<a href="https://nautil.us/five-things-we-still-dont-know-about-water-3383/">冰为什么体积大？</a></p>
+
+<p>水变成冰以后，体积会增大10%，密度因此小于水，使得冰可以浮在水面上。</p>
+
+<p>那么，冰的体积为什么会增大呢？</p>
+
+<p>答案是冰的分子结构，跟水的分子结构不一样。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202203/bg2022031408.webp" title="" /></p>
+
+<p>上图左侧是液态水的分子结构，右侧是冰的分子结构。其中，白色节点为氢原子，红色节点为氧原子。</p>
+
+<p>可以看到，液态水是紧密聚合的网络结构，冰则是中空的网络结构。也就是说，冰的分子结构不是那么密合，所以体积就变大了。</p>
+
+<h2>文摘</h2>
+
+<p>1、<a href="https://blog.jim-nielsen.com/2023/examples-of-great-urls/">Slack 公司的 URL</a></p>
+
+<p>Slack 是一家即时通信的软件公司。它的官网有一个"公司介绍"的页面，通常来说该页面的 URL 会是<code>slack.com/about</code>，但是 Slack 没有采用这种做法。</p>
+
+<p>它将这个页面命名为<code>is</code>，并分拆成若干个子页面。</p>
+
+<p>所以，"公司介绍"页面的 URL 是<code>slack.com/is</code>。</p>
+
+<p>子页面的 URL 如下。</p>
+
+<blockquote>
+  <ul>
+<li>slack.com/is/team-communication</li>
+<li>slack.com/is/everything-in-one-place</li>
+<li>slack.com/is/wherever-you-are</li>
+</ul>
+</blockquote>
+
+<p>这样的好处是单单看 URL，就知道页面想要传递的信息，URL 本身就是对公司的一种宣传。</p>
+
+<p>这种 is 的巧妙做法，后来被广泛借鉴。碰巧的是，<code>is</code>也正好是一个顶级域名，代表冰岛（iceland）。很多名人就申请了 is 域名，作为个人主页。</p>
+
+<p>比如，艺术家杰西卡·希斯切（Jessica Hische）的个人网站，域名就是<code>jessicahische.is</code>，她介绍自己的页面 URL 就都是<code>jessicahische.is/xxx</code>的形式。</p>
+
+<h2>言论</h2>
+
+<p>1、</p>
+
+<p>我们很快会跟大家分享一个低调的研究成果。我们会给它起一个比 chatGPT 更好的名字，以防它流行起来。</p>
+
+<p>-- <a href="https://x.com/sama/status/1923104596622246252">Sam Altman</a>，OpenAI 的 CEO</p>
+
+<p>2、</p>
+
+<p>加尔定律经常被引用："一个有效的复杂系统，总是从一个有效的简单系统进化而来。"</p>
+
+<p>但是，它的推论很少被引用："一个从零开始设计的复杂系统永远不会有效，你必须从一个可以运行的简单系统开始。"</p>
+
+<p>-- <a href="https://www.stackstaves.net/post/2023-12-07-theres-more-to-that/">Stack Staves</a></p>
+
+<p>3、</p>
+
+<p>宇宙有两种可能：要么我们是孤独的，要么我们并不孤独。这两种可能性都同样令人恐惧。</p>
+
+<p>-- <a href="https://www.planetary.org/articles/the-fermi-paradox-where-are-all-the-aliens">阿瑟·克拉克</a>，英国著名科幻小说家</p>
+
+<p>4、</p>
+
+<p>太阳绕银河系公转一圈需要2.3亿年，上一圈的时候，地球的主宰还是恐龙。</p>
+
+<p>-- <a href="https://www.reddit.com/r/Paleontology/comments/18wqvba/it_takes_the_sun_230_million_years_to_orbit_once/">Reddit 网友</a></p>
+
+<p>5、</p>
+
+<p>我关注了一些教育工作者，他们都报告了同样的现象：他们的学生什么事情都用 ChatGPT，结果什么也没学到。</p>
+
+<p>最终可能会出现这样一代人，自己的智力很低下，完全依赖于他们不理解的技术，一旦技术崩溃，他们永远无法从头开始重建。</p>
+
+<p>-- <a href="https://simonwillison.net/2025/May/18/neal-stephenson/#atom-everything">尼尔·斯蒂芬森</a>（Neal Stephenson），美国科幻小说家，"元宇宙"一词的创造者</p>
+
+<h2>往年回顾</h2>
+
+<p><a href="https://www.ruanyifeng.com/blog/2024/05/weekly-issue-302.html">创业虽然好，不敢推荐了</a>（#302）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2023/04/weekly-issue-252.html">互联网创业变难了</a>（#252）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2022/04/weekly-issue-202.html">三个有启发的学习方法</a>（#202）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2021/04/weekly-issue-152.html">从北大到技校</a>（#152）</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2025-05-23T08:12:32+08:00">2025年5月23日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2025/05/weekly-issue-348.html</id>
             <title>科技爱好者周刊（第 348 期）：李飞飞，从移民到 AI 明星</title>
             <link>http://www.ruanyifeng.com/blog/2025/05/weekly-issue-348.html</link>
@@ -1696,237 +2105,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2025-04-22T15:08:03+08:00">2025年4月22日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2025/04/coze-space.html</id>
-            <title>办公类 AI 初探：扣子空间</title>
-            <link>http://www.ruanyifeng.com/blog/2025/04/coze-space.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/04/coze-space.html</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 21 Apr 2025 10:50:46 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: AI风口,办公类AI,扣子空间,Agent智能体  
-
-总结: 文章认为AI领域的真正风口是企业级办公AI，而非面向大众或开发者的产品。办公市场潜力巨大但当前产品稀少，主要受限于AI能力和产品形态的不成熟。作者重点介绍了国内平台"扣子空间"，它能自动调用多种Agent智能体完成办公任务，支持文档生成、表格处理、专家系统等功能。通过实际案例展示了其撰写报告、输出多种格式文件、数据处理等能力。评价该产品设计思路正确、完成度高，是实用的办公助手，代表了办公AI的发展方向。 </div>
-                        <hr>
-                    
-                    <h2>一、AI 的风口</h2>
-
-<p>问问大家，AI 产品的风口是什么？</p>
-<p>我的意思是，什么样的产品有最大的机会。</p>
-
-<p>现在的 AI 多如过江之鲫，大部分都是昙花一现，走不远。</p>
-
-<p>在我看来，最有机会的产品，既不是面向普通大众的问答类 AI，或者内容生成 AI，也不是面向开发者（API 用户）的编程 AI。</p>
-
-<p><strong>真正的风口是办公类 AI</strong>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025041901.webp" title="" /></p>
-
-<p>企业和个人的办公市场巨大无比，而且有真金白银。</p>
-
-<p>谁能把 AI 引入文档、会议、决策......，谁就会吃到肉。就像 Office 软件是商业软件之王一样，企业级办公 AI 也一定会是 AI 的销售之王。</p>
-
-<h2>二、办公类 AI 的现状</h2>
-
-<p>不过，办公类 AI 眼下寥寥无几。不要说赢得市场，就连想得起名字的产品都不多。</p>
-
-<p>究其原因，一是 AI 现阶段的能力，还达不到企业级软件的安全、稳定、准确、高效。</p>
-
-<p>二是办公类 AI 到底是什么样的产品形态，大家还在摸索。</p>
-
-<p>我一直非常关注这个领域，对于新出现的办公类 AI 有着强烈的兴趣。</p>
-
-<p>下面介绍一个新产品"<a href="https://space.coze.cn/">扣子空间</a>"，我这些天一直在试用。大家看看，它怎么用 AI  完成办公任务。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025041902.webp" title="" /></p>
-
-<h2>三、扣子空间</h2>
-
-<p>先说一下，<a href="https://www.coze.cn/home">扣子</a>（coze.cn）是一个国内的平台，提供基于浏览器的低代码环境，来搭建 AI 应用，有免费额度。</p>
-
-<p>我一直是它的用户，以前还写过文章，介绍它的<a href="https://www.ruanyifeng.com/blog/2024/10/coze.html">工作流模式</a>：在图形化界面上，用鼠标编排 AI 工作流，生成独立应用。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024102708.webp" title="" /></p>
-
-<p>工作流模式号称不需要编码，小白也能用，但用户最好有编程基础，所以还是有一点点门槛。</p>
-
-<p>于是，扣子现在又推出了"扣子空间"，真正零基础，无门槛完成任务。</p>
-
-<p>它的最大特点是，<strong>内部自动调用各种 Agent（智能体），不需要用户介入，就能完成各种任务</strong>。你可以把它想象成一个"Agent 的自动调用器"。</p>
-
-<p>对于用户来说，因为有了底层的 Agent 能力，它不仅可以回答问题，还能解决问题（任务），从而成为你的办公助手和工作搭子。</p>
-
-<p>正如它的宣传语："和 Agent 一起开始你的工作"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025041903.webp" title="" /></p>
-
-<p>注意，它现在需要邀请码，可以去扣子公众号和扣子空间官网（space.coze.cn）领取。</p>
-
-<h2>四、界面</h2>
-
-<p>扣子空间的网址是 <a href="https://space.coze.cn/">space.coze.cn</a>，点进去就可以使用。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042005.webp" title="" /></p>
-
-<p>界面很简单，左侧是任务列表，右侧是一个对话框，用来输入新任务。</p>
-
-<p>执行任务要求时，默认是"探索模式"，AI 自动完成各个步骤，速度较快。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025041905.webp" title="" /></p>
-
-<p>你也可以改成"规划模式"，显示 AI 思考的中间步骤，便于随时调整。</p>
-
-<p>除此以外，就没有需要设置的地方了，很符合直觉。</p>
-
-<h2>五、任务示例</h2>
-
-<p>下面是我的一些使用实例，都是办公类的任务。</p>
-
-<p>大家看看，它完成得怎么样，像不像一个精通各种技能的实习生。</p>
-
-<h3>5.1 撰写研究报告</h3>
-
-<p>最常见的办公任务，肯定是撰写文档。我让 AI 撰写下面的研究报告。</p>
-
-<blockquote>
-  <p>我需要一篇研究报告，关于上海茶饮行业近几年的发展情况，以及投资机会的分析，包括行业发展、热门产品等信息。</p>
-</blockquote>
-
-<p>注意，文档类的任务最好指定输出格式，否则生成的内容以 Markdown 格式展示在对话页上，不方便利用。</p>
-
-<p>我一般是在提示词最后，加上这样一句。</p>
-
-<blockquote>
-  <p>同时做一个可视化的网页。</p>
-</blockquote>
-
-<p>开始运行后，它就会分解任务，按步完成。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042006.webp" title="" /></p>
-
-<p>最后，它给出生成的 markdown 文件和网页文件。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042007.webp" title="" /></p>
-
-<p>你可以在新窗口打开网页预览。下面就是它生成的网页，图文并茂，有数据也有论述。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042008.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042009.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042010.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042011.webp" title="" /></p>
-
-<p>整个报告分成四个部分，可以根据需要增减，自己使用或交差，总体上没有问题。</p>
-
-<h3>5.2 多种输出格式</h3>
-
-<p>前面说过，扣子空间内置了各种 Agent。</p>
-
-<p>除了生成网页的 Agent，还有生成 Office 文档、PDF、飞书文档的 Agent，都可以用，下面是一个例子。</p>
-
-<blockquote>
-  <p>帮我比较一下T3、滴滴出行、高德，作为新手网约车司机，在重庆跑，哪个平台最推荐，并说明详细原因，输出一份飞书文档。</p>
-</blockquote>
-
-<p>由于飞书文档是带有布局的，实际生成时，也是从文字报告生成网页，然后系统提示你将网页内容复制到飞书。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042012.webp" title="" /></p>
-
-<p>如果输出 PDF 文件或幻灯片 PPT 文件，系统会直接给出文件下载。</p>
-
-<blockquote>
-  <p>我正在编排行程，目的是安徽皖南地区，包括黄山和当地的其他风景点，请详细研究行程、交通路线、景点介绍、门票、住宿和当地饮食等信息，形成一份完整的行程安排，以 PPT 形式展示。</p>
-</blockquote>
-
-<p>它生成了一个28页的 PPT 文件，下载后，完全可以直接上台演示。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042116.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042117.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042118.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042119.webp" title="" /></p>
-
-<h3>5.3 表格能力</h3>
-
-<p>办公类的 AI，一定要有表格处理能力。</p>
-
-<blockquote>
-  <p>请生成一个表格，包含上证50指数成分股，及其最新的收盘价。</p>
-</blockquote>
-
-<p>默认情况下，表格生成后，会显示在网页上。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025041914.webp" title="" /></p>
-
-<p>系统还会给出一个 csv 文件，供下载。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025041915.webp" title="" /></p>
-
-<p>如果想要完备的电子表格功能，可以把 csv 文件导入电子表格软件。</p>
-
-<h3>5.4 其他功能</h3>
-
-<p>扣子空间内置的 Agent 很多，还可以调用高德地图、生成网页游戏等等。</p>
-
-<blockquote>
-  <p>请生成一个互动式的学习网站，帮我学习 CSS 的 oklch 颜色函数。</p>
-</blockquote>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025041916.webp" title="" /></p>
-
-<p>上面是网页小游戏的例子，下面是调用地图的例子。</p>
-
-<blockquote>
-  <p>用高德地图分析一下上海外滩地区所有瑞幸咖啡的门店选址，做成一个可视化的网页给我。</p>
-</blockquote>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025042013.webp" title="" /></p>
-
-<p>如果内置的 Agent 不足以满足需求，你还可以设置让它接入各种 MCP，扩展能力。</p>
-
-<h3>5.5 专家系统</h3>
-
-<p>最后，它还自带了专家系统，也就是高级的专业知识库，提供深度的分析能力。</p>
-
-<p>目前，内置了两个专家系统：用户研究专家和 A 股观察助手。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202504/bg2025041918.webp" title="" /></p>
-
-<p>前者用来用户问卷调查、访谈、生成分析报告；后者用来分析自选股和大盘，提供研究分析报告。</p>
-
-<p>深度的分析和处理任务，需要特定的专业知识，可以试试它们。</p>
-
-<h2>六、总结</h2>
-
-<p>经过初步的试用，我对扣子空间评价很好，<strong>非常好用的办公助手和 AI 实习生</strong>，确实能够提高办公效率。</p>
-
-<p>我觉得，它的设计思路很正确，自动调用各种 Agent，既能扩展各种能力，又能消除了上手难度，同时具备深度研究（deep research）能力。</p>
-
-<p>更难得的是，它的完成度相当不错，没遇到明显的 bug，可以用于实际的办公。</p>
-
-<p>总之，作为办公类的 AI 产品，它的"工作搭子"的模式，我觉得可用也可行。</p>
-
-<p>后面，办公类 AI 产品相信会大量涌现，鉴于它的重要性，我还会介绍和评测更多。</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2025-04-21T10:50:46+08:00">2025年4月21日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
