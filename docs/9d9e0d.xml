@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/68468cf4747af0f12129117c</id>
+            <title>AI探索站 06月09日</title>
+            <link>https://m.okjike.com/originalPosts/68468cf4747af0f12129117c</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68468cf4747af0f12129117c</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 09 Jun 2025 07:27:48 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    前几天发了 FLUX Kontext 的很多案例<br /><br />虽然大概教了一下怎么用，但还是有很多人不会<br /><br />这次刚好发现 Liblib 上线了 Kontext，不需要本地跑 Comfyui ，可以在线处理<br /><br />索性手把手一步一步教大家用，顺便分享一下常见用法的 Comfyui 工作流：https://mp.weixin.qq.com/s/5M35Fr7pU1nzIc3Cm3_2Kg<br /><br />链接不太方便，我把 Kontext 工作流上架到 Liblib 了，搜索「藏师傅」就行，双图和三图超分的都有。<br /><br />在 Web UI 上简单体验 Kontext<br /><br />这里先教一下如何用最基本的 WebUI 里的 Kontext 对图片进行修改，需要注意的是 Web UI 只支持单图。<br />首先我们需要在 liblib 首页找到 F.1 Kontext，然后进到详情页里面点加模型库。<br />然后我们在侧边栏找到“在线生成”就可以进入到 web UI 的界面了，下面跟着我的操作设置就行：<br />1️⃣在页面最上面 CHECKPOINT 部分选择你刚刚加入到模型库的 F.1 Kontext 模型<br />2️⃣然后选择图生图模式<br />3️⃣之后输入提示词，Liblib 这里的提示词输入框可以一键帮你把中文提示词翻译为英文，非常省心<br />4️⃣我们可以在页面下方这里调整你期望生成的图像比例<br />5️⃣最后点击开始生图就好，我们的厨神 Labubu 就诞生了<br />另外，Web UI 近几天也会上线 Kontext 的多图参考能力。<br /><br />Comfyui 上解锁 Kontext 高级技巧<br /><br />可能很多人听到 Comfyui 又头疼了。<br />没事，在 Liblib 不需要你处理复杂的插件安装和模型下载问题。<br />即使是最复杂工作流搭建我也帮你搞好了你直接用就行。<br /><br />单图 Kontext 工作流使用<br /><br />首先我们需要在 Liblib 左侧导航找到“在线工作流”，然后打开页面之后将你获取到的「FLUX Kontext 单图工作流」拖入到界面中就可以了。<br />我们其实需要关注的就是三个地方，首先在「加载图像」节点上传你需要修改的图片。<br />然后在 Liblib Translate 节点输入中文的提示词，这个节点会自动帮你将提示词翻译为英文传输到 Kontext 节点里。<br />之后我们需要关注的就是 Kontext 节点中的 aspect_ratio 参数，这里的意思是输出图片的比例，按你需求的来就行。<br />最后点击右上角的运行按钮，等待就行。<br /><br />双图和三图 Kontext 工作流的使用<br /><br />接下来我们就真正到 Kontext 最独特的功能了，他支持将多张图片的元素融合在一张图片中，比如将产品放在指定环境的图片里面，让模特穿上指定的服饰等。<br />而且 Kontext 不止支持双图的融合还支持三图进行融合非常强大。<br />我们还是先将双图工作流拖放到 Liblib 的 Comfyui 界面中。<br />跟单图的时候区别不大，只是这次需要我们上传两张图片。<br />之后会自动拼合为一张传给模型，然后输入提示词选择生成图片的比例就行。<br /><br />这里我们输入的提示词就是“将化妆品瓶子放在周围有橘子和花的白色石块上，保留海报文字”。<br />一般在多图融合的时候 Kontext 会尽量还原产品的细节，但是环境图片的细节会跟原图有出入。<br />她会优先保证自然度，比如上面这里石头的位置和画面角度都不适合将瓶子放在小石头上，它机会自己提取石头元素和橘子元素重新布局画面。<br /><br />接下来三图也是一样的操作，我们现在可以混合更加复杂的场景，比如让模特拿着指定的化妆品站在指定的场景中。<br />你还是只需要设置你的三张图片、提示词和生成图像的比例，其他不需要管。<br /><br />最后其实 Kontext 生成的图片分辨率不太高，所以可能很多时候大家有放大图片的需求。<br />索性在 liblib 的 Comfyui 有很多其他的基建，所以藏师傅就找了一个图像放大流程然后整合到了里面。<br />而且我还加上了一个我训练的 FLUX Lora，可以非常好的去掉 FLUX 的有你感觉，可以看到人物的肤质、服装材质和画面颜色都好了很多。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6845a08faceddcdd1485340a</id>
             <title>AI探索站 06月08日</title>
             <link>https://m.okjike.com/originalPosts/6845a08faceddcdd1485340a</link>
@@ -22,18 +39,35 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6843f8f76ee6b02834f1030e</id>
-            <title>AI探索站 06月07日</title>
-            <link>https://m.okjike.com/originalPosts/6843f8f76ee6b02834f1030e</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6843f8f76ee6b02834f1030e</guid>
+            <id>https://m.okjike.com/originalPosts/6845326a8234c5c369104848</id>
+            <title>AI探索站 06月08日</title>
+            <link>https://m.okjike.com/originalPosts/6845326a8234c5c369104848</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6845326a8234c5c369104848</guid>
             <pubDate></pubDate>
-            <updated>Sat, 07 Jun 2025 08:31:51 GMT</updated>
+            <updated>Sun, 08 Jun 2025 06:49:14 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    豆包 AI 的“用嘴 P 图”功能又升级了。<br /><br />测试：<br />▶  给照片上的人批量换晚礼服。<br />▶  做手绘菜单/酒单。<br />▶  修改照片天气。<br /><br />手机上打打字就能改好图，真是越来越方便了。
+                    最近尝试了用 AI 工具做 PPT，尝试了市面上各种工具，比如美图秀秀、夸克、通义千问，还有刚出的一个专门为 Office 三件套设计的 AI 工具——天工。体验下来，感觉完成度最高的还是 天工，但坦白说，它做出来的 PPT 只能算 勉强够用，后期调整的工作量还是挺大的。可能是因为它把 HTML 代码转成 PPT 格式，编辑上有天然劣势，虽然表现不错，但离正式商用还有段距离。<br /><br />然后我换了个思路，用 AI 生成 HTML 代码，再通过插件转成 Figma 设计稿，这样后期编辑就方便多了，效果也更好！分享下我的具体操作：我用的是 Claude 3.7，把想复刻的 PPT 图片（比如粉色风格的页面）丢给它，让它根据内容和配色，生成一个同款色系但布局和风格不同的设计，最后在 Figma 稍作调整比例就完成了，效果还挺惊喜的！<br /><br />前两张 PPT 是一比一复刻的，最后一张我没完全照搬，而是把我预设的结论发给 Gemini，让它找一些关于“年轻人对线下二次元演出更有追求”的数据案例。Gemini 会进行DeepSearch ，提供近期研究报告里的数据和结论。然后就是沿用之前的设计风格，做出了 PPT。<br /><br />不过这个过程中有些文字和样式的溢出问题，后来我换了能力更强的 Claude 4 来做页面设计，基本一次就搞定。不得不说，Claude 4 在代码理解和设计上的能力确实更胜一筹！<br /><br />以上就是我用 AI 做 PPT 的一些小探索，涉及到的工具有 Claude 3.7、Gemini 和 Claude 4，后期编辑用的是 Figma。希望对想尝试 AI 做 PPT 的朋友有点参考价值！
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/68439e41dfa0f1ef3ad1cbb8</id>
+            <title>AI探索站 06月07日</title>
+            <link>https://m.okjike.com/originalPosts/68439e41dfa0f1ef3ad1cbb8</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68439e41dfa0f1ef3ad1cbb8</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 07 Jun 2025 02:04:49 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    分享一个自用的数据打标小工具<br /><br />前段时间女朋友在加班加点给数据打标<br />我一看，这不就是我天天用API干的事情（狗头<br />直接用Claude4搓了一个小前端，唯一的用户反馈还不错，就整理了一下开源出来，希望能够让大家轻松体验下指挥AI牛马的感觉<br /><br />设计的核心思路是用户只需要用自然语言描述任务（如p2），Prompt设计和实际打标任务都由模型完成，尽量简化操作<br />另外加了一些保存API和当前任务的配置，方便复现之前的结果<br />最后考虑到并不是所有人都会在电脑上安装Python和配环境，所以还打包成了exe，保证下载即用<br />欢迎大家体验，希望大家多多提意见！<br /><br />👉 在线玩（注意不要保存API Key和敏感数据）：https://tablelabelingtool-bingxuan.streamlit.app<br />🔧 Win免安装版：https://pan.quark.cn/s/d0360a24b2af<br />🐙 GitHub源码和使用指南：https://github.com/DOGEwbx/table_labeling_tool
                 ]]>
             </content:encoded>
         </item>
@@ -51,23 +85,6 @@
                 <![CDATA[
                     
                     我个人目前觉得垂直领域做得最好的AI产品<br />OpenEvidence （医疗）<br />Harvey （法律）<br />Lovart（设计）<br />Gamma（PPT）<br />FateTell（命理）<br />欢迎补充
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6842cd91a26304532600fa4d</id>
-            <title>AI探索站 06月06日</title>
-            <link>https://m.okjike.com/originalPosts/6842cd91a26304532600fa4d</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6842cd91a26304532600fa4d</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 06 Jun 2025 11:14:25 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    即梦AI的图片3.0上线了智能参考<br /><br />可以基于上传的图像，生成任何你想要生成的内容，这太爽了！<br /><br />不管是海报、电商封面、小红书封面还是视频封面，甚至只是想给你的照片添加一些装饰，都能搞定<br /><br />我还写了套提示词帮你复刻任何你喜欢的电商或者小红书封面的排版样式<br /><br />这里是详细的提示词和介绍：https://mp.weixin.qq.com/s/_kt9OLylR95sG7U37wseSw<br /><br />基本能力测试<br /><br />首先是照片和人像的测试，我们分别从大面积到小细节分别对一个人像照片进行修改。<br />从更换背景到增加配饰再到更改姿势，都没啥问题，只改了需要改的地方，更改的位置跟原有的融合度不错，人眼看不出来更改过。<br />然后我还让他给照片加了滤镜，测试了在上面覆盖内容的这种修改，也很好。<br /><br />再然后就是即梦的看家本事了，中文生成，这次还要加上修改。<br />我们先来看一下生成，这里我那一张原有的图片让即梦帮我给这个武器设计加上文字。<br />可以看到即梦对于文字样式和位置的响应非常精准。<br /><br />然后是改字，我在社区找了一个非常复杂的文字效果，除了字体不是常规字体外，还有 3D Q 版挤压效果。<br />然后让他修改的时候也增加了难度，没有单独改某个字而是让他把原来上面的三个字变成五个字，没想到搞得还挺好，新增的文字基本上都有类似的立体效果和挤压效果。<br /><br />日常应用场景<br /><br />我们日常分享照片的时候一般就是几类需求：<br />- 给照片加滤镜<br />- 修改照片内容，改变照片比例<br />- 给照片增加装饰帮助表达<br />- 用 AI 给照片转换风格<br /><br />前三种基本上都是之前美图、醒图这类图片软件最常见的需求，现在即梦全都可以搞定了。<br />比如最近很火的撕拉片风格照片，我们只需要上传你拍的照片加一点提示词就可以用即梦图片3.0直接生成。<br /><br />即梦图片3.0 还可以自己分析图片内容给图片生成海报和装饰，你只需要在提示词输入海报两个字就行，这门槛够低了吧。<br />这里就是模型自己搞的，生成的字体和装饰都非常契合原来照片的风格和感觉。<br /><br />如果你不喜欢他自己加的文字的话也可以自己在提示词里面写一下，这种方式可以极大的增加日常分享照片的表现力。<br />比如对于每天喝咖啡的人完全可以给自己每天喝的咖啡加上日期和咖啡种类的标记，当做打卡方式，当时我记得就单纯给照片加水印这个功能有些软件就活得很不错了，现在要啥水印你自己定义。<br /><br />营销物料生成<br />之前在图片3.0 发布的时候即梦生成的封面就已经很强了，主要就剩下跟现实照片相关的内容没办法做。<br /><br />主要就是两类：<br />一类是电商商品，商品的还原度非常重要，所以原来直接生成不行。<br />另一类是小红书或者视频封面，一些主打 IP 的非常需要将 up 自己的人像放在封面上。<br /><br />现在这两类直接全部都解决了，而且我还整理了一套生成提示词的提示词，你可以用来复刻你喜欢的博主的封面或者店铺的宣传图。<br />你只需要找一个支持多模态的 LLM，将你想要参考的排版和下面这段提示词放进去，就能直接生成对应的即梦智能参考提示词。<br /><br />首先是电商的商品展示或者营销内容<br /><br />可以看到人物和商品的 ID 都没有变化，甚至他还帮你把照片背景和封面的粉色背景做了渐变让两者更加融合。<br /><br />当然你要是懒得输入提示词，其实即梦的智能参考也没问题。<br />比如这里我就写了一个“29.9 元蛋糕新品海报”，他就帮我生成了一个非常可爱和漂亮的蛋糕营销海报。<br />甚至连文案都帮我补充好了，萌趣造型，甜蜜诱惑这种词你让我想我想不出来反正，太强了。<br /><br />然后是常见的小红书封面或者说视频封面。比如这种宣传旅游景点或者露营景点的，完全可以在保证照片是对应位置的情况下加上文字排版。<br /><br />如果说这种风景图简单的话我们来个人像的。类似很多探店视频都是这种将人物抠出来加上其他店里的内容展示在加标题的方式，以往这一套还是挺麻烦的，现在一句话搞定。<br /><br />模型信息&amp;如何使用<br /><br />刚好今天他们发了这个模型的公众号文章，原来这一个功能是有两个模型驱动的，分别是SeedEdit3.0和DreamPoster模型。<br />改文字、做海报功能调用的模型是字节的 DreamPoster模型。<br />智能参考的使用方式也很简单，选择图片图片3.0 模型，然后上传图片，默认就是智能参考，输入提示词直接生成就行。<br /><br />目前这个功能在内测阶段，下周就会全量上线，到时候就可以拿着藏师傅的宝典操练起来了。
                 ]]>
             </content:encoded>
         </item>
@@ -102,23 +119,6 @@
                 <![CDATA[
                     
                     目前最好的讲MCP的课程<br /><br />Anthropic 和 Deeplearning 合作推出了MCP系列课程，希望系统了解mcp推荐看这个课程。<br /><br />一样是一个小时左右，从概念讲到host，讲到 client 和 server，再讲到mcp内的各个组件 tools，prompts，resources，同时还分享了目前在逐渐支持的 stream http和正在发展的 roots sampling，mcp registry 等情况。<br /><br />看完对整个mcp的当下、现在和未来的路线图一下就清晰了。<br /><br />还有一个比较触动我的点是: 好的应用是实践"生长"出来的。<br /><br />anthropic 说mcp，artifacts 都是由内部实践诞生出来的项目，自己用了好用，发现是刚需就打磨发布出来了，都成了口碑和价值俱佳的产品。<br /><br />https://www.deeplearning.ai/short-courses/mcp-build-rich-context-ai-apps-with-anthropic/
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/68402141b7f4ddcfdf80acc2</id>
-            <title>AI探索站 06月04日</title>
-            <link>https://m.okjike.com/originalPosts/68402141b7f4ddcfdf80acc2</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68402141b7f4ddcfdf80acc2</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 04 Jun 2025 10:34:41 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    这是我的 AI 产品的使用习惯，看起来跟大家也没有太大区别。<br /><br />资料整理，海外，搭配搜索：Gemini &gt; ChatGPT &gt; 腾讯元宝（DeepSeek） &gt; 秘塔 &gt; DeepSeek &gt; 豆包<br /><br />资料整理，国内，搭配搜索： 腾讯元宝（DeepSeek）&gt; 秘塔 &gt; 夸克 &gt; Gemini &gt; ChatGPT &gt; DeepSeek&gt; 豆包 <br /><br />深度整理，搭配文档：ChatGPT<br /><br />文章查漏补缺：Gemini、ChatGPT、腾讯元宝（DeepSeek）、DeepSeek 、豆包<br /><br />学习常识：腾讯元宝（DeepSeek）、豆包<br /><br />知识库问答：ima.coplit<br /><br />美工：Midjourney、ChatGPT o3<br /><br />翻译转写：Claude 4 、豆包<br /><br />代码编程：Trae<br /><br />边拍边学：ChatGPT o3、豆包<br /><br />旅行中搭配的深度阅读：Gemini 、ChatGPT、夸克 <br /><br />办事文档撰写：ChatGPT、腾讯元宝（DeepSeek）、Gemini、百度文库<br /><br />记录梦境/照片处理：ChatGPT o3<br /><br />视频：Veo 3、即梦、可灵<br /><br />音频：MiniMax、NotebookLM、扣子空间
                 ]]>
             </content:encoded>
         </item>
