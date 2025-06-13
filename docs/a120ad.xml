@@ -5,6 +5,431 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2025/06/weekly-issue-352.html</id>
+            <title>科技爱好者周刊（第 352 期）：Bug 追踪系统的正确样子</title>
+            <link>http://www.ruanyifeng.com/blog/2025/06/weekly-issue-352.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/06/weekly-issue-352.html</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 13 Jun 2025 07:35:45 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
+<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/6965">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
+
+<h2>封面图</h2>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060801.webp" title="" /></p>
+
+<p>6月6日凌晨，太原基地发射的长征六号火箭，飞过西安城墙。（<a href="http://news.cnwest.com/bwyc/a/2025/06/06/23130650.html">via</a>）</p>
+
+<h2>Bug 追踪系统的正确样子</h2>
+
+<p>上周的话题是 <a href="https://github.com/features/issues">GitHub Issues</a>，把它当作笔记工具，很强悍。</p>
+
+<p>但是，有些话来不及说。<strong>它的本职工作----Bug 追踪系统----并不好用</strong>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060805.webp" title="" /></p>
+
+<p>你用它来管理 Bug，就会发现有设计缺陷，用起来不顺手。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060806.webp" title="" /></p>
+
+<p>现在还活着的、历史最悠久的 Bug 追踪系统是 <a href="https://www.bugzilla.org/">Bugzilla</a>。</p>
+
+<p>它的一个早期工程师，前不久写了<a href="https://www.bozemanpass.com/everythings-a-bug-or-an-issue/">一篇文章</a>，介绍 Bugzilla 的四条设计原则。</p>
+
+<p>他说，只有满足这四点，才是一个好的 Bug 追踪系统（bug tracking system），我感到很有启发。</p>
+
+<p><strong>（1）所有任务都要列入 Bug 追踪</strong>。不仅包括代码 Bug，还包括待开发的新功能、缺失的文档、令人困惑的用户体验、糟糕的性能等等。</p>
+
+<p>换言之，Bug 追踪系统本质是任务管理，应该当作项目管理系统来用。</p>
+
+<p><strong>（2）Bug 的状态有多种，不只"打开"和"关闭"两种。</strong></p>
+
+<p>大公司的 Bug 处理流程，可能很复杂，下面是一张从 <a href="https://www.bugzilla.org/docs/3.6/en/html/lifecycle.html">Bugzilla 文档</a>拷贝的流程图。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060807.webp" title="" /></p>
+
+<p>Bug 追踪系统应该足够灵活，可以自定义优先级、严重程度、是否已分配、是否有依赖等等，以便适配各种流程。</p>
+
+<p><strong>（3）每个 Bug 只能由一人负责。</strong> </p>
+
+<p>这样才能明确责任，方便查看每个人正在做什么、接下来要做什么、以及最近做了什么。这也有利于培养开发者的归属感和成就感。</p>
+
+<p><strong>（4）支持自定义视图。</strong></p>
+
+<p>由于 Bug 有多种状态，追踪系统必须支持自定义视图查看，拥有强大的查询功能。</p>
+
+<p>系统的默认视图：按照优先级，列出当前版本的所有没有关闭的 Bug。</p>
+
+<p>开发者的个人视图：列出分配给他们的所有 Bug，同样按优先级排序。另外，用户可以保存自己的自定义视图。</p>
+
+<p>以上四条，就是好的 Bug 追踪系统的标准。问题是 GitHub Issues 一条都没做到。</p>
+
+<blockquote>
+  <ol start="1">
+<li>项目管理功能太弱。</li>
+<li>状态只能靠标签。</li>
+<li>任务可以分配给多个人。</li>
+<li>视图默认按创建时间排序，且只能切换成标签视图。</li>
+</ol>
+</blockquote>
+
+<p>在这方面，GitHub 甚至不如 Gitea。</p>
+
+<p>举例来说，GitHub 没有办法让最重要的 Bug（P0 级别），自动出现在第一位（下图），除非手动置顶。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060809.webp" title="" /></p>
+
+<p>相比之下，Gitea（包括分叉的 Forgejo）提供了"<a href="https://docs.gitea.com/administration/customizing-gitea#labels">标签集</a>"（label set），允许一个标签有多个值，并可以按同一个标签的值排序。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060810.webp" title="" /></p>
+
+<p>上图中，标签"Priority"（优先级）有多个值，然后系统允许按照 Priority 的值排序。</p>
+
+<h2>[本周软件] 开源知识库 PandaWiki</h2>
+
+<p>小团队和个人，如何管理大量文档，搭建自己的知识库？</p>
+
+<p>今天，介绍一个刚刚开源的知识库管理系统 <a href="https://github.com/chaitin/PandaWiki">PandaWiki</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060601.webp" title="" /></p>
+
+<p>它采用维基形式，可以随意编排文档，既能搭建传统的文档站，也能做成 FAQ 和博客。</p>
+
+<p><strong>它原生支持 AI 创作、AI 问答、AI 搜索等能力</strong>。你可以用自然语言跟知识库对话，也能使用嵌入模型，找出相关文档。</p>
+
+<p>大家可以去 <a href="http://47.96.9.75/">Demo</a> 体验一下，详细了解看<a href="https://pandawiki.docs.baizhi.cloud/">官方文档</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060602.webp" title="" /></p>
+
+<p>它的后端使用 Go 语言编写，速度非常快。安装使用 Docker，一行命令就能跑起来。</p>
+
+<p><a href="https://github.com/chaitin/PandaWiki">代码库</a>放在 GitHub，可以从那里上手，目前已经有600多颗星星。</p>
+
+<h2>任正非专访</h2>
+
+<p>本周，《人民日报》头版刊登<a href="https://finance.sina.com.cn/roll/2025-06-10/doc-inezpuqu9256330.shtml">任正非专访</a>。</p>
+
+<p>下面是一些摘录。</p>
+
+<p>（1）芯片问题其实没必要担心。我们单芯片还是落后美国一代，我们用数学补物理、非摩尔补摩尔，用群计算补单芯片，在结果上也能达到实用状况。</p>
+
+<p>（2）软件是卡不住脖子的，那是数学的图形符号、代码，一些尖端的算子、算法垒起来的，没有阻拦索。困难在我们的教育培养、人才梯队的建设。</p>
+
+<p>（3）当我国拥有一定经济实力的时候，要重视理论特别是基础理论的研究。如果不搞基础研究，就没根。即使叶茂，欣欣向荣，风一吹就会倒的。</p>
+
+<p>（4）我们要理解支持搞理论工作的。理论科学家是孤独的，我们要有战略耐心，要理解他们。他们头脑中的符号、公式、思维，世界上能与他们沟通的只有几个人。对理论科学家要尊重，因为我们不懂他的文化，社会要宽容，国家要支持。</p>
+
+<p>（5）买国外的产品很贵，因为价格里面就包含他们在基础研究上的投入。中国搞不搞基础研究，也要付钱的，能不能付给自己搞基础研究的人。</p>
+
+<p>（6）华为一年1800亿投入研发，大概有600亿是做基础理论研究，不考核。1200亿左右投入产品研发，投入是要考核的。没有理论就没有突破，我们就赶不上美国。</p>
+
+<p>（7）人工智能也许是人类社会最后一次技术革命，当然可能还有能源的核聚变。发展人工智能要有电力保障，中国的发电、电网传输都是非常好的，通信网络是世界最发达的，东数西算的理想是可能实现的。</p>
+
+<p>（8）赞声与骂声，都不要在意，而要在乎自己能不能做好。把自己做好，就没有问题。</p>
+
+<h2>科技动态</h2>
+
+<p>（1）中国科大提出"<a href="https://www.guancha.cn/industry-science/2025_06_07_778547.shtml">火星电池</a>"的方案。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060705.webp" title="" /></p>
+
+<p>这种电池可以在火星上，储存太阳能的发电，在夜间释放出来。</p>
+
+<p>它的原理是，电解火星大气的二氧化碳，将其转为氧气和甲烷等燃料气体，在夜间再点燃发电。</p>
+
+<p>（2）华为旗下的深圳引望公司，申请了一个"<a href="https://www.cnenergynews.cn/news/2025/06/09/detail_20250609215301.html">可收纳方向盘</a>"专利。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025061003.webp" title="" /></p>
+
+<p>根据描述，这个专利可以将方向盘折叠起来，放入操作台里面。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025061004.webp" title="" /></p>
+
+<p>（3）瑞士建造了<a href="https://ethz.ch/en/news-and-events/eth-news/news/2025/05/from-confectioners-to-robots-tor-alva-in-mulegns-is-unveiled.html">世界最高的 3D 打印建筑</a>：一个高达30米的观光塔，外形酷似当地的一种著名糖果。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025052704.webp" title="" /></p>
+
+<p>为了增加承重能力，施工方采用了特制的混凝土材料。并且，增加了第二台机器，每打印20厘米，就往建筑物里面加入钢筋。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060104.webp" title="" /></p>
+
+<p>（4）苹果公司本周发布的新版 macOS，出现了一个细小的调整。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025061104.webp" title="" /></p>
+
+<p>文件管理器 Finder 的图标<a href="https://512pixels.net/2025/06/wwdc25-macos-tahoe-breaks-decades-of-finder-history/">左右反转</a>了，上图左是原来的图标，右是新版图标。目前不知道，为什么要这样反转。</p>
+
+<h2>文章</h2>
+
+<p>1、<a href="https://simonwillison.net/2025/Jun/6/six-months-in-llms/">过去半年的大模型回顾</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060804.webp" title="" /></p>
+
+<p>Simon Willison 点评过去半年的大模型，可以当成大事记来读。</p>
+
+<p>AI 的进展实在太快，去年底的模型已经是上一代了。</p>
+
+<p>2、<a href="https://steipete.me/posts/2025/claude-code-is-my-computer">我使用 Claude Code Max 的感受</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060405.webp" title="" /></p>
+
+<p>作者购买了 Claude Code 的 Max 会员，一个月要200美元，使用后认为完全物有所值。</p>
+
+<p>3、<a href="https://blog.sagyamthapa.com.np/interactive-guide-to-rate-limiting">速率限制交互式指南</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060701.webp" title="" /></p>
+
+<p>如何限制访问速率？本文介绍了四种常用算法：令牌桶、漏水桶、固定窗口、滑动窗口。</p>
+
+<p>4、<a href="https://www.ducktyped.org/p/why-is-it-called-a-cloud-if-its-not">Amazon VPC 图解</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060903.webp" title="" /></p>
+
+<p>本文用插图解释，云服务器的虚拟私有网络（VPC，Virtual Private Cloud 的缩写）是什么。</p>
+
+<p>5、<a href="https://www.xda-developers.com/replacements-for-pocket-that-are-self-hosted/">五个自搭建的书签服务</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025061002.webp" title="" /></p>
+
+<p>本文介绍五个开源软件，可以自己架设网址书签的收藏服务。</p>
+
+<p>6、<a href="https://corentin.trebaol.com/Blog/8.+The+Homelessness+Experiment">我的香港露营实验</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060802.webp" title="" /></p>
+
+<p>2016年，一个老外在香港留学，他的奖学金很少，就想在海边搭帐篷居住，省下房租。本文是他对这段生活的总结，挺有意思的。</p>
+
+<h2>工具</h2>
+
+<p>1、<a href="https://github.com/tiagorangel1/cap">Cap.js</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060116.webp" title="" /></p>
+
+<p>一个网页上的机器人识别工具，用作 CAPTCHA 方案，采用 SHA-256 工作量证明算法。</p>
+
+<p>2、<a href="https://github.com/jackyzha0/quartz">Quartz</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060803.webp" title="" /></p>
+
+<p>Markdown 文档的静态站点发布器，适合用作收费服务 Obsidian Publish 的替代品。</p>
+
+<p>3、<a href="https://github.com/theopfr/somo">somo</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025061001.webp" title="" /></p>
+
+<p>在 Linux 终端查看端口占用情况的工具。</p>
+
+<p>4、<a href="https://github.com/ruanyf/weekly/issues/7029">OOMOL Studio</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025061108.webp" title="" /></p>
+
+<p>一款创新的桌面 IDE，把自己编写的函数设成节点，然后通过图形界面，把节点编排成工作流。（<a href="https://github.com/ruanyf/weekly/issues/7029">@BlackHole1</a> 投稿）</p>
+
+<p>5、<a href="https://www.jicesys.com/">极测</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025061109.webp" title="" /></p>
+
+<p>免费的通信调试助手，模拟 UDP、TCP、串口、WebSocket、ZeroMQ 等常见协议，进行通信测试。（<a href="https://github.com/ruanyf/weekly/issues/7032">@seasonlaw</a> 投稿）</p>
+
+<p>6、<a href="https://github.com/apple/container">container</a></p>
+
+<p>苹果官方发布的 Mac 电脑运行 Linux 容器的工具。也就是说，Mac 电脑可以不装 Docker，就运行 Docker 容器。</p>
+
+<p>7、<a href="https://github.com/doxx/darkflare">DarkFlare</a></p>
+
+<p>一个命令行工具，在 CDN 上，将 TCP 流量伪装成 HTTPS 流量传输。</p>
+
+<p>8、<a href="https://jdownloader.org/">JDownloader</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060901.webp" title="" /></p>
+
+<p>开源的全平台下载工具，参考<a href="https://www.xda-developers.com/raspberry-pi-downloading-device-entire-network/">这篇教程</a>，用树莓派搭建下载服务器。</p>
+
+<p>9、<a href="https://github.com/autoscrape-labs/pydoll">Pydoll</a></p>
+
+<p>一个操作浏览器的 Python 库，通过 Chrome DevTools Protocol，实现脚本操作本机的 Chrome 浏览器。</p>
+
+<p>10、<a href="https://github.com/xiangechen/chili3d">Chili3D</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025061103.webp" title="" /></p>
+
+<p>基于浏览器的 3D CAD 软件，代码开源。</p>
+
+<h2>AI 相关</h2>
+
+<p>1、<a href="https://github.com/khaledh/pagemagic">Page Magic</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060402.webp" title="" /></p>
+
+<p>一个 Chrome 的 AI 插件，输入你对当前网页的修改描述，它自动将改好的网页呈现在浏览器里，需要 Anthropic API。</p>
+
+<p>2、<a href="https://wallecho.com/">壁响</a>（WallEcho）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060702.webp" title="" /></p>
+
+<p>根据输入的文本，免费生成手机或电脑桌布。（<a href="https://github.com/ruanyf/weekly/issues/6999">@twjiem</a> 投稿）</p>
+
+<p>3、<a href="https://github.com/justlovemaki/CloudFlare-AI-Insight-Daily">AI 洞察日报</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060703.webp" title="" /></p>
+
+<p>通过 Cloudflare Workers 抓取指定数据源，生成每日精选的 AI 日报，<a href="https://justlovemaki.github.io/CloudFlare-AI-Insight-Daily/today/book/">效果预览</a>。（<a href="https://github.com/ruanyf/weekly/issues/7009">@justlovemaki</a> 投稿）</p>
+
+<p>4、<a href="https://github.com/glidea/zenfeed">zenfeed</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060704.webp" title="" /></p>
+
+<p>智能信息助手，对于关注的新闻或话题，使用 AI 自动收集、筛选出要看的文章，并总结内容。（<a href="https://github.com/ruanyf/weekly/issues/7012">@glidea</a> 投稿）</p>
+
+<p>5、<a href="https://github.com/caol64/wenyan-mcp">文颜 MCP Server</a></p>
+
+<p>AI 模型接入这个 MCP，就可以将排版好的内容，自动发布到微信公众号，参见<a href="https://babyno.top/posts/2025/06/let-ai-help-you-manage-your-gzh-layout-and-publishing/">介绍文章</a>。（<a href="https://github.com/ruanyf/weekly/issues/7048">@caol64</a> 投稿）</p>
+
+<h2>资源</h2>
+
+<p>1、<a href="https://laosheng.top/fuwu/yuanxiao">高等院校三千所</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025061201.webp" title="" /></p>
+
+<p>这个网站收录中国大学网址全集。（<a href="https://github.com/ruanyf/weekly/issues/7047">@DiamonWoo</a> 投稿）</p>
+
+<p>2、<a href="https://leta.mullvad.net/">Mullvad Leta</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025053003.webp" title="" /></p>
+
+<p>Mullvad 公司推出的一个搜索引擎。它从谷歌和 Brave 获取搜索结果，但是提供隐私保护，防止搜索引擎识别用户。</p>
+
+<p>我试用感觉不错，速度很快，没有广告。</p>
+
+<p>3、<a href="https://www.joindns4.eu/">DNS4EU</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025060902.webp" title="" /></p>
+
+<p>欧盟推出的公共 DNS，自带过滤广告功能。</p>
+
+<h2>图片</h2>
+
+<p>1、<a href="https://www.bbc.com/future/article/20250605-the-hunt-for-marie-curies-radioactive-fingerprints-in-paris">居里夫人故居的门把手</a></p>
+
+<p>著名物理学家居里夫人，由于长期接触放射性元素，手上总是沾有镭矿石的微粒。</p>
+
+<p>她在法国巴黎的故居，过了100年，至今仍能测出，门把手有微弱的放射性。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025061106.webp" title="" /></p>
+
+<p>1934年，居里夫人死于过量辐射导致的再生性贫血。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025061107.webp" title="" /></p>
+
+<p>2、<a href="https://www.hagerty.com/media/automotive-history/since-the-60s-ford-has-stored-cars-underground-in-a-kansas-city-cave/">洞穴停车场</a></p>
+
+<p>美国密苏里州早年有石灰矿，挖出了巨大的地下空洞。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024111103.webp" title="" /></p>
+
+<p>后来，矿产挖光以后，这些空洞就废弃了。</p>
+
+<p>上个世纪50年代，福特汽车公司看中了这个地方。因为这里的地下空间非常大，可以容纳5000人，没有风吹雨打，没有下雪结冰，干燥，终年恒温，很适合改造成停车场，存放新车。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024111104.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024111105.webp" title="" /></p>
+
+<p>这个地下停车场直到今天还在运作，可能是史上最大的地下商业设施。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202411/bg2024111106.webp" title="" /></p>
+
+<h2>文摘</h2>
+
+<p>1、<a href="https://jigsawstack.com/blog/what-even-is-a-small-language-model-now--ai">小模型</a></p>
+
+<p>在机器学习的早期，"小模型"指的是可以在家用电脑 CPU 运行的基本神经网络。</p>
+
+<p>到了2018年，如果你问别人什么是"小模型"，他们可能会说，就是那种在树莓派或手机上运行的、只有几百万个参数的模型。</p>
+
+<p>但是，后来出现了 Transformer 和大型语言模型（LLM）。这些模型越变越大，"小模型"的定义已经改变。</p>
+
+<p>今天，任何不需要 A100 显卡集群就能运行的模型，都可以看成小模型。</p>
+
+<p>我们把300亿个参数（30B）的模型也称为"小模型"，因为它们只需要一个 GPU 就能运行。</p>
+
+<p>今天的"小模型"，更多的是指模型的可部署性，而不仅仅是模型的规模。</p>
+
+<p>如果能在个人设备上部署某个模型，那么这个模型就是小模型。它可以分成下面两类。</p>
+
+<p>（1）可以在移动设备或边缘硬件上运行的模型，用例为语音助手、手机翻译、离线摘要、嵌入的聊天机器人。</p>
+
+<p>（2）只需一个 GPU 的模型，在这一类中，即使是 30B 或 70B 规模的模型也可以算作"小型"。</p>
+
+<p>现在，一张4090显卡就能运行 70B 的模型，并有不错的输出速度，这在几年前还只是科幻小说的情节。</p>
+
+<p>小模型固然比不上大模型的能力，但也有自己的优势：更适合小型的任务，在单一领域更准确，更适合微调和快速发布。</p>
+
+<p>而且，小模型的成本更低，更适合个人和创业公司部署，并可以在本地部署。</p>
+
+<p>这就是为什么小模型很有用，因为它让我们可以在家里运行自己的 AI 模型，得到的结果与 GPT-3.5 不相上下，从而可以用更少的资源完成更多的任务。</p>
+
+<h2>言论</h2>
+
+<p>1、</p>
+
+<p>很多人总是拖拖拉拉，抱怨自己没有做事的动力。但是，动力恰恰源自行动，只要你开始做一些事情，只要能朝着目标前进，你就会发现动力随之而来。</p>
+
+<p>所以，当我遇到一个很艰巨的任务时，我会把问题分解成若干更简单的部分，此时我的目标不是完成任务，而只是让自己能够行动起来，向前迈出一小步。</p>
+
+<p>-- <a href="https://spectrum.ieee.org/getting-past-procastination">《摆脱拖延症》</a></p>
+
+<p>2、</p>
+
+<p>最安全的代码并非优美、巧妙或优雅的代码，而是枯燥乏味的代码。</p>
+
+<p>Go 语言就奉行这种理念，故意去除了那些富有表现力或优雅的写法，只保留简洁和可读的写法。这使得代码易于审查、难于滥用，不容易发生安全漏洞。</p>
+
+<p>-- <a href="https://blog.asymmetric.re/boredom-over-beauty-why-code-quality-is-code-security/">《无聊胜过美丽》</a></p>
+
+<p>3、</p>
+
+<p>人们总是喜欢新东西，读书喜欢读新出版的书，听歌喜欢听新歌。</p>
+
+<p>据统计，美国2024年流媒体音乐一共播放了1.4万亿次，其中近50%是2020年至2024年期间发行的歌曲，近80%是2010年或之后发行的歌曲。歌越老，听的人越少。</p>
+
+<p>-- <a href="https://apnews.com/article/taylor-swift-sabrina-carpenter-luminate-2024-report-9d3436e71d481a07d88aa13940a68c76">美联社</a></p>
+
+<p>4、</p>
+
+<p>新 API 的采用速度将会大大减缓。因为大模型的学习内容仅限于已有的内容，新的 API 出现时，可供学习的内容必然很少。</p>
+
+<p>另外，那些依赖大模型的人也会犹豫是否采用新 API，因为大模型使用旧 API 可以更快地完成相同的工作。</p>
+
+<p>-- <a href="https://news.ycombinator.com/item?id=43953957">Hacker News 读者</a></p>
+
+<h2>往年回顾</h2>
+
+<p><a href="https://www.ruanyifeng.com/blog/2024/06/weekly-issue-305.html">随机数，这是一个问题</a>（#305）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2023/05/weekly-issue-255.html">对待 AI 的正确态度</a>（#255）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2022/05/weekly-issue-205.html">互联网风口过去了吗？</a>（#205）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2021/04/weekly-issue-155.html">数字货币是打破美元霸权的武器吗？</a>（#155）</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2025-06-13T07:35:45+08:00">2025年6月13日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2025/06/weekly-issue-351.html</id>
             <title>科技爱好者周刊（第 351 期）：GitHub Issues（几乎）是最好的笔记应用</title>
             <link>http://www.ruanyifeng.com/blog/2025/06/weekly-issue-351.html</link>
@@ -2180,116 +2605,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2025-05-09T08:09:32+08:00">2025年5月 9日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2025/05/notebooklm.html</id>
-            <title>谷歌的 NotebookLM 能生成中文播客了</title>
-            <link>http://www.ruanyifeng.com/blog/2025/05/notebooklm.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/05/notebooklm.html</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 01 May 2025 12:26:24 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 谷歌, NotebookLM, 中文播客, AI笔记  
-<br>  
-<br>  
-总结: 谷歌AI笔记产品NotebookLM新增支持50种语言生成播客功能，包括中文。用户可上传PDF、TXT或Markdown格式文件，生成由一男一女对话形式的播客内容。该功能还支持网站和YouTube视频转播客，中文播客效果优秀。免费账户每天限生成三个播客。NotebookLM还提供AI笔记功能，可搜索学习材料并生成各类笔记，如摘要、常见问题等。作者认为这是一款革命性工具，将改变学习和笔记方式。 </div>
-                        <hr>
-                    
-                    <p>两天前，谷歌发了一个<a href="https://blog.google/technology/google-labs/notebooklm-audio-overviews-50-languages/">公告</a>。</p>
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025050102.webp" title="" /></p>
-
-<p>它旗下的 AI 笔记产品 <a href="https://notebooklm.google.com/">NotebookLM</a>，现在支持50种语言生成播客了（原来只支持英文）。</p>
-
-<p>我一定要分享这个消息，终于能生成中文播客了。这是我一直想要的功能，相信也是很多朋友想要的。</p>
-
-<p>我演示一下，大家听听效果，会惊到你的。</p>
-
-<p>首先，访问它的<a href="https://notebooklm.google.com/">官网</a>，点开右上角的设置，选择"Output Language"（输出语言）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025050103.webp" title="" /></p>
-
-<p>切换到"中文（简体）"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025050104.webp" title="" /></p>
-
-<p>然后，在首页新建一个笔记本。一般来说，一个学习主题，对应一个笔记本。</p>
-
-<p>作为演示，我新建了一个"中国小说"的笔记本。进入后，在 Source（原始材料）标签页上传了鲁迅的《阿Q正传》。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025050105.webp" title="" /></p>
-
-<p>注意，上传的文件格式目前只限于 PDF、TXT 和 Markdown。</p>
-
-<p>另外，经过我测试，如果是图片扫描的 PDF 文件，它会自动进行文字识别。</p>
-
-<p>接着，切换到 Studio（工作室）标签页，点击 Generate（生成）按钮，它就开始生成播客。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025050107.webp" title="" /></p>
-
-<p>几分钟以后，<a href="https://on.soundcloud.com/Hd6Q4ArTbUWRpSDE6">播客</a>就生成了，里面是一男一女在谈论你上传的资料。</p>
-
-<p><div style="font-size: 10px; color: #cccccc; overflow: hidden; white-space: nowrap; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;"><a href="https://soundcloud.com/koqtv3xgxhpw" style="color: #cccccc; text-decoration: none;" target="_blank" title="ruanyf">ruanyf</a> · <a href="https://soundcloud.com/koqtv3xgxhpw/q" style="color: #cccccc; text-decoration: none;" target="_blank" title="阿Q正傳">阿Q正傳</a></div></p>
-
-<p>大家听听看，是不是很像那些精心准备的真人播客。</p>
-
-<p>NotebookLM 不仅可以上传文本材料，还可以针对网站和 Youtube 视频，生成播客。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025050108.webp" title="" /></p>
-
-<p>我随便找了一个 <a href="https://www.youtube.com/watch?v=Z0I_ji5E4P4">Youtube 的英文视频</a>，内容是国产旗舰手机的摄影能力比较。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025050109.webp" title="" /></p>
-
-<p>下面是<a href="https://on.soundcloud.com/Q2N6xYWN6PKcCzCw8">生成的播客</a>。</p>
-
-<p><div style="font-size: 10px; color: #cccccc; overflow: hidden; white-space: nowrap; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100;"><a href="https://soundcloud.com/koqtv3xgxhpw" style="color: #cccccc; text-decoration: none;" target="_blank" title="ruanyf">ruanyf</a> · <a href="https://soundcloud.com/koqtv3xgxhpw/vivo-x200-ultra" style="color: #cccccc; text-decoration: none;" target="_blank" title="Vivo X200 Ultra 相机评测">Vivo X200 Ultra 相机评测</a></div></p>
-
-<p>我听了以后，觉得都不必看视频了。而且，中文播客比英文视频，更容易抓住重点。</p>
-
-<p>总之，有了中文播客以后，任何枯燥的学习资料，都能变成平易近人的播客节目。走路、休息、锻炼、开车的时候都能听，学习时间和途径都变多了。</p>
-
-<p>需要注意的是，免费账户一天只能生成三个播客，更多需要付费。</p>
-
-<p>除了播客，NotebookLM 的 AI 笔记功能，也非常好用。</p>
-
-<p>你可以上传自己的学习材料，也可以用它搜索某个主题的学习材料。</p>
-
-<p>下面是我用它搜索 PostgreSQL 数据库的学习材料。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025050111.webp" title="" /></p>
-
-<p>指定学习材料以后，你可以跟这些材料聊天。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025050113.webp" title="" /></p>
-
-<p>它还会自动生成各种笔记：学习指导、内容摘要、常见问题、时间线等等。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025050114.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025050115.webp" title="" /></p>
-
-<p>以上就是 NotebookLM 的基本用法。</p>
-
-<p>我的评价是，NotebookLM 是一款革命性的笔记工具，属于少数几个真正有重大用处的 AI 产品。</p>
-
-<p>它会改变做笔记的方式和学习方式，每个学习者都应该知道有这样一个工具。</p>
-
-<p>它属于谷歌的产品，似乎还没有竞品，希望国内的厂商能够做出替代品。</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2025-05-01T12:26:24+08:00">2025年5月 1日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
