@@ -39,18 +39,18 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/685a1c2be913e738f00c5f73</id>
+            <id>https://m.okjike.com/originalPosts/6859f7c83deae26422eda888</id>
             <title>AI探索站 06月24日</title>
-            <link>https://m.okjike.com/originalPosts/685a1c2be913e738f00c5f73</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/685a1c2be913e738f00c5f73</guid>
+            <link>https://m.okjike.com/originalPosts/6859f7c83deae26422eda888</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6859f7c83deae26422eda888</guid>
             <pubDate></pubDate>
-            <updated>Tue, 24 Jun 2025 03:31:55 GMT</updated>
+            <updated>Tue, 24 Jun 2025 00:56:40 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    Devin 的开发商 Cognition 开发了一种新的虚拟机快照格式<br /><br />blockdiff，实现了秒级快照（相较原来提升约 200 倍）<br /><br />这个对 Manus 这种需要虚拟机的云端 Agent 很有帮助啊<br /><br />下面是详细介绍👇<br /><br />blockdiff 的作用<br /><br />blockdiff 是一个开源工具（GitHub 地址 ：https://github.com/CognitionAI/blockdiff），用于 VM 磁盘的块级差异比较和快照。其核心思想是只存储与基准镜像不同的磁盘块，极大减少了存储和传输的数据量。<br /><br />为什么需要增量快照<br />开发环境复用：用户的开发环境只需保存变更部分，避免冗余存储整个操作系统镜像。<br />休眠与唤醒：只需保存会话状态，传输小体积快照，提升唤醒速度。<br />磁盘回滚：支持多层增量快照，便于会话中随时回滚。<br /><br />设计目标<br />紧凑：快照文件大小与变更量成正比。<br />瞬时：快照操作几乎不涉及磁盘 I/O，仅操作元数据。<br />零开销：不影响 VM 的读写性能。<br />简单：实现尽量简洁，减少出错和调试成本。<br /><br />技术实现<br />主要依赖 Linux XFS 文件系统的 Copy-on-Write（CoW）特性。<br />通过 FIEMAP 系统调用获取文件块映射（extent map），只需比较元数据即可找出差异块。<br />blockdiff 文件格式包含头部（magic string、文件大小、块范围等）和连续存储的差异块数据，写入快照时只需操作元数据，极快完成。<br /><br />为什么不用现有方案<br />二进制 diff：全盘扫描太慢。<br />OverlayFS：不支持无重挂载的增量快照，且与 Docker 冲突。<br />ZFS：只能回滚 home 目录，且快照逻辑需在 VM 内部实现，性能不理想。<br />qcow2：不支持纯元数据操作，转换大文件时速度慢。<br /><br />Linux 文件系统基础<br />稀疏文件：只为非零数据分配空间，逻辑大小远大于实际占用。<br />CoW：只有在写入时才分配新块，节省空间和时间。<br />磁盘镜像即文件：VM 磁盘就是宿主机文件系统上的文件，便于管理和快照。
+                    各种狗狗奥运会跳水
                 ]]>
             </content:encoded>
         </item>
