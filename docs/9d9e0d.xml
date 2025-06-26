@@ -5,6 +5,57 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/685d3eceb7f4ddcfdf740a0e</id>
+            <title>AI探索站 06月26日</title>
+            <link>https://m.okjike.com/originalPosts/685d3eceb7f4ddcfdf740a0e</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/685d3eceb7f4ddcfdf740a0e</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 26 Jun 2025 12:36:30 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    冲了 明天到
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/685d36a76ca09034bbde7992</id>
+            <title>AI探索站 06月26日</title>
+            <link>https://m.okjike.com/originalPosts/685d36a76ca09034bbde7992</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/685d36a76ca09034bbde7992</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 26 Jun 2025 12:01:43 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    聊一下最近圈子热议的话题<br /><br />Shopify CEO 和Andrej Karpathy 都同意的观点：提示工程的名称是否应该改为上下文工程<br /><br />主要包括：<br />- 各路大神的观点<br />- 为什么上下文工程如此重要<br />- 上下文工程的三大策略<br />- 其他实践经验与建议<br /><br />完整的文章在这里看，这里发一下文章的总结：https://mp.weixin.qq.com/s/wWR-1lLMhJ9OTj62JXaM_g<br /><br />近期AI圈热议“提示工程”是否应更名为“上下文工程”，因为后者更准确地描述了为大模型（LLM）提供任务所需全部信息的工作。<br />Shopify CEO Tobi Lutke 和 Andrej Karpathy 等人认为，“上下文工程”更能体现工业级LLM应用中对上下文的精细管理和填充。<br />上下文工程不仅仅是写好提示词，还包括任务描述、样本、RAG（检索增强生成）、多模态数据、工具、状态、历史和信息压缩等。<br /><br />上下文工程的重要性<br /><br />Cognition 和 Anthropic 等公司在多Agent系统中强调上下文管理的重要性。<br />不充分的上下文会导致Agent工作不一致，过长或不相关的上下文会增加成本、降低性能。<br />多轮对话中，指令遵循性下降，优化上下文长度和准确性尤为关键。<br /><br />上下文工程的三大策略<br /><br />1. 压缩（Compression）<br />目标：每轮对话只保留最有价值的Token。<br />方法：上下文摘要（如Claude Code自动压缩、Cognition用微调模型压缩）。<br />难点：高质量摘要难以实现。<br /><br />2. 持久化（Persistence）<br />目标：构建可长期存储、保存和检索上下文的系统。<br />存储方式：文件（如CLAUDE .md）、嵌入式文档、知识图谱等。<br />保存策略：用户手动或Agent自动生成/更新记忆（如Reflexion机制）。<br />检索方式：直接加载或基于嵌入向量/图检索，需防止检索出错导致“跑题”。<br /><br />3. 隔离（Isolation）<br />目标：在不同Agent或环境间划分上下文。<br />方法：结构化上下文模式（如Pydantic模型）、多Agent分散上下文、环境隔离（如HuggingFace的沙盒环境）。<br />多Agent系统可提升性能，但也带来Token消耗和协调难题，适合可并行化任务。<br /><br />实践经验与建议<br />工具先行，优先关注数据和Token追踪。<br />明确Agent状态，梳理运行时所需信息。<br />在工具边界处进行上下文压缩。<br />从简单记忆功能做起，逐步优化。<br />多Agent方案适用于可并行化任务，但需注意协调难题。<br /><br />结论<br />上下文管理是构建健壮AI Agent的核心，需在性能、成本和准确性间平衡。<br />上下文工程是一门平衡的艺术，良好的语境和清晰表达需求是获得优质LLM输出的关键。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/685cc4cfd82bae994a6ee4ac</id>
+            <title>AI探索站 06月26日</title>
+            <link>https://m.okjike.com/originalPosts/685cc4cfd82bae994a6ee4ac</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/685cc4cfd82bae994a6ee4ac</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 26 Jun 2025 03:55:59 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Anthropic 这个 Claude Artifacts 升级太牛皮了！<br /><br />现在构建 AI 应用变得前所未有的简单<br /><br />只要跟 Claude 说“帮我创建一个 AI 应用程序”，后面跟上提示词<br /><br />就会帮你创建可以调用 Claude 的网页，而且其他人用的时候用的他们自己的账号额度<br /><br />我用这个功能创建创建了一个分享图生成工具。<br />用的我原来那个 Bento Grid 风格 提示词。<br />现在每个人都可以用这个网页快速生成对应文案的分享图片了！<br /><br />这里尝试，需要 Claude 账号：claude.ai/public/artifacts/f6cda2d3-2ff3-41ff-a8c1-3d19b8e18bb7
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/685c1966aabc50af59654394</id>
             <title>AI探索站 06月25日</title>
             <link>https://m.okjike.com/originalPosts/685c1966aabc50af59654394</link>
@@ -39,18 +90,18 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/685aa3823deae26422fa3905</id>
-            <title>AI探索站 06月24日</title>
-            <link>https://m.okjike.com/originalPosts/685aa3823deae26422fa3905</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/685aa3823deae26422fa3905</guid>
+            <id>https://m.okjike.com/originalPosts/685b65582b50c68918a1279b</id>
+            <title>AI探索站 06月25日</title>
+            <link>https://m.okjike.com/originalPosts/685b65582b50c68918a1279b</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/685b65582b50c68918a1279b</guid>
             <pubDate></pubDate>
-            <updated>Tue, 24 Jun 2025 13:09:22 GMT</updated>
+            <updated>Wed, 25 Jun 2025 02:56:24 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    这个当前城市的天气卡片提示词有意思<br /><br />外面是机舱的窗户样式<br /><br />右边是现在北京真实天气，给我热麻了<br /><br />提示词，来自X Howard Chen：create image with 1:1 ratio <br />surreal minimal aesthetic, airplane window frame on subtle gradient backdrop with same color, through the oval window showing random iconic landmark scenery of [Country Name], an overlay weather ui interface on the center of window, from top to bottom, contain the small weather icon, huge temperatures with elegant light weight font, and small location tag beneath it, the bottom is the country name, generate with extreme weathers, the window will affect by the weather, the color combo of subtle gradient backdrop is resonate with the weather, natural lighting, soft shadows, subtle reflections on glass, great negative space
+                    这段AI视频在24小时内获得了五千万播放量😱<br /><br />在过去这几周，不断有新的AI视频成为超级大爆款，几个常见赛道：<br />ASMR<br />动物奥运会<br />肥胖奥运会<br />AI自然灾害<br />......<br /><br />要产出爆款，不是让AI产出多接近人的视频，而是让AI产出多“离谱”的视频
                 ]]>
             </content:encoded>
         </item>
@@ -68,57 +119,6 @@
                 <![CDATA[
                     
                     用ai建模给自己打了个盗版“labubu”（少一颗牙版）<br />想要什么就自己去打<br />毫不费力手办自由🙊
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/685a2e2e7f7f027278939e81</id>
-            <title>AI探索站 06月24日</title>
-            <link>https://m.okjike.com/originalPosts/685a2e2e7f7f027278939e81</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/685a2e2e7f7f027278939e81</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 24 Jun 2025 04:48:46 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    Kimi 更新了深度研究能力，收到测试资格之后深度使用了一天。<br /><br />发现在内容丰富度、准确性和逻辑严谨性上都非常能打。<br /><br />全文在这里看：https://mp.weixin.qq.com/s/TYWQRn_0MB1-bnqZ-8aZ0Q<br /><br />下面是详细的介绍👇<br /><br />与其他近期类似产品不同，月之暗面这个深度研究是他们自己训练的基于端到端自主强化学习技术训练的Agent 模型。<br /><br />而且他们会开源基础的预训练模型和后面经过强化学习的模型，这个太值得期待了。<br /><br />在HLE (Humanity’s Last Exam) 和红杉的 Agent 测试上 kimi 深度研究模型都取得了不错的成绩。<br /><br />案例一：商业与IP分析——解构泡泡玛特与Labubu的爆火之路<br /><br />任务设定： 模拟投资人或市场分析师，要求Kimi深度研究“泡泡玛特（Pop Mart）”这家公司，并重点分析其IP“Labubu”从诞生到成为顶流的全过程。<br /><br />测评亮点分析： 在分析Labubu爆火原因时，Kimi展现了极强的逻辑推理和自主探索能力。它的搜索路径颇具章法，从宽泛的整体搜索开始，逐步聚焦到粉丝经济、海外传播、早期发展历程乃至近期的价格波动等具体方面，整个过程如同一位真正的好奇研究员。最终生成的近一万九千字报告，其目录结构逻辑清晰，从IP设计理念、产品迭代，到运营策略、粉丝经济和二手市场，层层递进，将各类信息恰当地组织在预设的分析框架下，而非简单堆砌。这充分证明Kimi能够自主形成深度分析的逻辑链条，深刻洞察一个商业现象背后的多元驱动因素。<br /><br />案例二：科技产品分析——透视小米发布会的核心信息<br /><br />任务设定： 模拟产品经理或行业分析师，对小米2025年6月26日的发布会提出一个极其复杂的研究需求，涵盖信息整理、竞品对比、销量预测及供应链分析等。<br /><br />测评亮点分析： 面对一个包含多重任务的复杂指令，Kimi深度研究功能并未在长下文中出现能力衰减。它生成了近一万七千字的详尽报告，有效完成了信息检索、可信度标记、竞品参数对比、多维度销量预测等高级任务。在报告中，Kimi不仅展现了出色的信息准确性和时效性，例如捕捉到小米YU 7座舱系统采用骁龙8 Gen3芯片这一新近消息，其用户体验设计也值得称道，点击引用来源即可高亮原文数据，极大地方便了事实核查。在销量预测和供应链分析部分，它给出了严谨的假设前提与判断依据，超越了简单的数据罗列，为专业人士提供了极具价值的决策参考。<br /><br />注入美学，让专业报告“活”起来<br /><br />再强大的功能，如果不能被轻松理解和使用，价值也将大打折扣。Kimi的交付物在“好用”和“好看”上做到了统一。<br />除了生成文档之外，kimi 也会同步生成一份研究报告的可视化网页。<br /><br />内容与形式兼备： Kimi生成的可视化网页内容详实，与万字报告保持同步，绝非内容缩水的“玩具”。左侧的大纲导航让用户可以轻松在不同章节间跳转。<br /><br />智能化的场景美学： 报告并非千篇一律的模板。AI会根据研究对象匹配相应的主题风格，如分析小米时会采用标志性的橙色。同时，嵌入的图片、甚至视频素材都与内容高度相关，极大增强了报告的定制感和沉浸感。<br /><br />直观高效的交互： 网页排版清晰，符合现代审美。思维导图和可自由拖拽缩放的图表，让复杂信息一目了然。在竞品对比等环节，巧妙利用高亮、色块背景和图表，直观地区分优劣势，显著提升了信息获取和理解的效率。<br /><br />测试和介绍到这里就结束了。<br /><br />虽然都是深度研究，Kimi 这个基于强化学习的模型还是展现出了跟使用常见模型通过提示词和工具使用上非常不同的结果倾向，让我们看到了复杂检索任务不依赖大 Prompt 工程的的强大之处。<br /><br />期待 Kimi 即将开源的预训练与 RL 权重，应该能造福非常多有类似功能的产品。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6859f7c83deae26422eda888</id>
-            <title>AI探索站 06月24日</title>
-            <link>https://m.okjike.com/originalPosts/6859f7c83deae26422eda888</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6859f7c83deae26422eda888</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 24 Jun 2025 00:56:40 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    各种狗狗奥运会跳水
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6858e8d3b7f4ddcfdf2766c5</id>
-            <title>AI探索站 06月23日</title>
-            <link>https://m.okjike.com/originalPosts/6858e8d3b7f4ddcfdf2766c5</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6858e8d3b7f4ddcfdf2766c5</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 23 Jun 2025 05:40:35 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    MiniMax 上周发的 Hailuo02，在外网有个网友做的猫咪跳水视频，火出圈。<br /><br />Hailuo02 发布时就很强调自己还原极限运动、体操动作的优势，没想到有人脑洞大开，运用到猫咪身上。<br /><br />真是应证了：万物「喵」化就能火～
                 ]]>
             </content:encoded>
         </item>
