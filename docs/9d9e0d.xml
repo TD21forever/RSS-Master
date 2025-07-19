@@ -22,6 +22,23 @@
         </item>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/687b092fa9ac225444c37522</id>
+            <title>AI探索站 07月19日</title>
+            <link>https://m.okjike.com/originalPosts/687b092fa9ac225444c37522</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/687b092fa9ac225444c37522</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 19 Jul 2025 02:55:43 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Manus 团队分享了半年来他们在 Agent 的 Context 工程的经验。<br /><br />我对原文进行了本地化翻译、精校、高亮要点（尽力了，要不是Manus的朋友喜欢后半夜活动，我直接抓起来校对🤪）。总共 6 条经验，共 5K 字。<br /><br />大家周末学习愉快，enjoy～
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/687aeaec7ee613ba5a60ddd2</id>
             <title>AI探索站 07月19日</title>
             <link>https://m.okjike.com/originalPosts/687aeaec7ee613ba5a60ddd2</link>
@@ -119,23 +136,6 @@
                 <![CDATA[
                     
                     相较于 Open AI 的 Agent 模式，我觉得昨晚最重要的发布是这个<br /><br />DecartAI 发布了 MirageLSD：世界上首个实时直播视频模型，可以将摄像头的画面实时转换为其他风格和内容的视频。<br /><br />延迟只有 40 毫秒，而且支持无限长度视频生成！<br /><br />这里尝试：https://about.decart.ai/<br /><br />技术报告中最重要的两个部分：<br /><br />（1）无限生成<br /><br />问题：传统自回归视频模型因误差累积，生成时长受限，质量迅速下降。<br /><br />解决方案：<br />Diffusion Forcing：每帧独立去噪，提升逐帧生成能力。<br />历史增强（History Augmentation）：模型在训练时引入带有伪影的历史帧，学会预期并纠正输入中的缺陷，从而增强对误差漂移的鲁棒性。<br /><br />效果：首次实现了无限时长、稳定、可控的自动回归视频生成。<br /><br />（2）实时性能<br /><br />问题：高质量扩散模型计算量大，传统 GPU 架构难以满足每帧 40 毫秒内生成的低延迟要求。<br /><br />解决方案：<br />定制 CUDA Mega Kernels：为 NVIDIA Hopper 架构优化，减少每层延迟并集成 GPU 间通信。<br />架构感知剪枝：结合模型结构与系统优化，减少每次推理所需的 FLOPs，并利用硬件稀疏性提升效率。<br />捷径蒸馏（Shortcut Distillation）：用小模型学习大模型的去噪轨迹，减少每帧所需的扩散步骤，保证质量和一致性。<br /><br />效果：响应速度提升 16 倍，实现 24FPS 实时视频生成。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/68790d06c14102d109178f71</id>
-            <title>AI探索站 07月17日</title>
-            <link>https://m.okjike.com/originalPosts/68790d06c14102d109178f71</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68790d06c14102d109178f71</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 17 Jul 2025 14:47:34 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    AI 时代我们不能再深陷于「文件格式」，传统文件格式已死。<br /><br />大部分人认为，一个人的工作能力强不强，看他的电脑桌面就知道了。桌面干净，文件夹井井有条，仿佛就和“高效”、“专业”划上了等号。<br /><br />但今天我想说一个颠覆你认知的观点：如果你还在乐此不疲地整理文件夹，那你很可能正在被 AI 时代淘汰。<br /><br />为什么？因为你把最宝贵的认知资源，投入到了价值最低的“数字整理”上。你以为你在“管理”，其实你只是在整理信息的“容器”。更致命的是，你还在为信息的“格式”所奴役。 传统工作流的一大痛点在于，人们被迫屈从于格式和工具的桎梏，而非集中精力于知识本身的逻辑结构和创新表达。为了写报告，你打开 Word；为了分析数据，你切换到 Excel；为了展示，你又捣鼓起了 PPT。你被迫在不同的软件和文件格式之间跳来跳去，精力被无情地割裂。这是一种典型的“伪工作”，它让你看起来很忙，却没有产出任何创造性的价值。<br /><br />这和“好好工作就能晋升”的逻辑骗局一模一样。你闷头把手头的事干得再漂亮，如果你不抬头看路，不理解公司的整体业务，不花时间去思考和链接，晋升就永远和你无关。同理，你把文件按格式、按项目分门别类整理得再漂亮，如果这些信息无法在你需要时自由地碰撞、链接、并产出新的洞见，那它们就是一堆沉睡的数字垃圾。<br /><br />真正高层次的思考者，追求的是“混乱中的秩序”。他们需要的是能随时捕捉灵感，并让所有知识自由碰撞、产生化学反应的环境，而不是一个个刻板的、需要不断维护的数字柜子。<br /><br />那么，如何做到？答案是把“整理”这件事，彻底交给 AI。<br /><br />我用 flowith 之后，就彻底告别了文件夹思维。我的工作流程变得异常简单粗暴：任何有价值的东西，不管是文章（.pdf），代码片段（.py），网页链接，还是一段对话记录（.txt），我不再把它们扔进不同的文件夹，而是统统丢进 flowith 的「知识花园」（Knowledge Garden）。 我不需要考虑它该放哪里，更不用在乎它是什么格式。<br /><br />因为对于 AI 而言，文件格式将不再重要。 flowith 会将导入的资料自动分解为知识的最小单元——“知识种子”（Seed）。当我需要创作时，flowith 的 AI Agent 可以在一次调用中，同时理解 PDF 里的论文、网页上的数据和笔记里的灵感。它不受模态和格式的限制，能自动将这些异构的信息碎片组合起来，帮你完成创作。这才是真正的效率——不是把东西放得有多整齐，而是能以多快的速度，把已有的信息组合出新的价值。<br /><br />所以，别再把时间浪费在整理文件夹和转换文件格式上了。那是机器该干的活。你的价值，在于创造，在于链接，在于提出正确的问题。 Derek 一直强调：“品味是人类在 AI 时代最后的壁垒。” 能听懂的人，说明你已经开始摆脱低级的“工具人”思维，正在成为一个真正的 AI 创作者。<br /><br />from Agent Neo
                 ]]>
             </content:encoded>
         </item>
