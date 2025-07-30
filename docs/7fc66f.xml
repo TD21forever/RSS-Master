@@ -5,8 +5,107 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/101040</id>
+            <title>我如何为「霞鹜」系列字体添加 GB 18030-2022 字符集支持</title>
+            <link>https://sspai.com/post/101040</link>
+            <guid isPermaLink="false">https://sspai.com/post/101040</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 30 Jul 2025 09:29:45 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: GB 18030-2022, 开源字体, 字符集, 霞鹜系列  
+
+总结:  
+1. 文章介绍了GB 18030-2022标准，这是一个包含汉字和少数民族文字的中文编码字符集，分为三个实现级别。  
+2. 不支持GB 18030字符集的字体会导致缺字现象，影响阅读和排版效果。  
+3. 作者开发的“霞鹜”系列开源字体中有四款支持GB 18030-2022实现级别2，包括霞鹜文楷GB、霞鹜新晰黑＋、霞鹜新致宋＋和小赖字体。  
+4. 这些字体通过增补字形或AI生成技术实现大字库支持，但部分字形可能较为粗糙。  
+5. 实现级别3的字符集过于庞大，作者目前没有计划完全支持。  
+6. 其他“霞鹜”系列字体因用途或技术限制，暂无支持GB 18030-2022的计划。  
+7. 文章强调了开源字体在满足用户大字库需求方面的作用。  
+8. 作者感谢了原始字体厂商和协助补字的字体爱好者。 </div>
+                        <hr>
+                    
+                    <p>好久没有在少数派里发文章了。上次发文章的时候本人还在上大学，还在玩手机字体 DIY；现在本人已经大学毕业四年，成了一名社畜，而业余爱好由手机字体转向了开源字体（尽管这两个爱好跟本人的专业和工作毫不相干）。</p><p>目前经过多年的积累，本人的一些业余开源二创字体项目做到了大字符集，同时想到了 GB 18030-2022 这一强制标准已经实行了几年，而一些字体用户也有大字库需求，于是写了这篇文章，介绍本人一些主要开源字体项目的同时，也算冒个泡。如有表述不严谨的地方，还请不吝赐正。</p><h2>GB 18030-2022 何为？</h2><h3>标准概述</h3><p>《GB 18030-2022 信息技术 中文标准字符集》是以汉字为主，包含 10 种少数民族文字的超大型中文编码字符集，是强制性国家标准。这个超大字符集向下兼容 GBK 和 GB/T 2312，最初发布时收录 87887 个汉字<sup class="ss-footnote" href="https://www.samr.gov.cn/xw/tp/art/2023/art_851ce0ae0b3b4926942b0fb200c749cb.html" title="一图读懂｜GB 18030-2022《信息技术 中文编码字符集》．国家市场监督管理总局．2022-07-08">1</sup>（收录到扩展 F 区<sup class="ss-footnote" href="" title="本文所提及的“︁基本区”︁“︁扩展 I 区”︁等均为 Unicode 所定义的针对汉字（CJK 表意文字）的区块，详情可在 unicode.org 了解。">2</sup>，对标 Unicode 11.0），目前已发布 1 号修改单，汉字部分支持到扩展 I 区。该标准发布后，更多用于人名、地名和其他领域的生僻字被加入进来，得到了官方标准支持。</p><p>GB 18030-2022 分为 3 个实现级别：</p><ul><li><strong>实现级别 1：</strong> 与 GB 18030-2005 的强制部分衔接（包含除最后 16 字外的基本区以及除最后 10 字外的扩展 A 区，共 2.7 万余字）；</li><li><strong>实现级别 2：</strong> 在上一实现级别基础上增补《通用规范汉字表》汉字（扩展 B～E 区 196 字）；</li><li><strong>实现级别 3：</strong> 字符集范围内的全部汉字和康熙部首。<sup class="ss-footnote" href="https://openstd.samr.gov.cn/bzgk/gb/newGbInfo?hcno=A1931A578FE14957104988029B0833D3" title="GB 18030-2022 信息技术 中文编码字符集．国家标准全文公开系统．2022-07-19">3</sup></li></ul><p>在 GB 18030 标准于 2000 年首次发布之前，我国曾于 1980 年颁布了 GB 2312-80（现已转为推荐性标准），共收录 6763 个简体中文汉字和偏旁部首；后来又于 1995 年发布了《汉字内码扩展规范》（技监标函〔1995〕229 号，简称 GBK），包含了当时 ISO 10646.1 收录的 20902 个汉字，并补充了一些汉字和偏旁部首。虽然在当时 GBK 相对于 GB/T 2312 而言已经算是大字库，但在现在看来，GBK 所收录的两万字只能说是“︁基本够用”︁，还有一些较为生僻的字没有支持。</p><h3>不支持 GB 18030 字符集，会带来哪些使用体验上的影响？</h3><p>我们知道，当一个字体缺少某个字时，这个字要么显示成“︁豆腐块”︁（形似“︁□”︁或“︁〿”︁）或者其他的缺字标记（.notdef），影响正常阅读；要么显示成其他字体，会导致这个字显得突兀，影响排版效果。</p><p>一般来说，字体支持的字符集越大，缺字情况相应就越少，比如：如果一个字体只支持 GB/T 2312-1980 字符集（如市面上大部分的简体字库），则会有繁体字、异体字以及“︁啰”︁“︁赟”︁等常用、次常用规范字显示异常；如果支持到 GBK，则会有“︁㸆”︁“︁䗴”︁“︁𥻗”︁“︁𬌗”︁等扩展区的字显示异常（这种缺字现象因文段内容而异）。</p><p>相应地，如果字体支持到 GB 18030 字符集，则会大大减少这种缺字现象。《思源黑体》《苹方》《微软雅黑》等系统默认界面字体也都支持到 GB 18030-2022 实现级别 2，而最新版本 Windows 内置的 SimSun-ExtB 和 SimSun-ExtG&nbsp;则新增了实现级别 3 汉字的支持，一些新版本的手机系统也内置了实现级别 3 的字体。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/e6f0b441dbd843124b36ecb6b9cc7580.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>不同字符集字体的比较</figcaption></figure><p>此外，GBK 补充了当时并未进入国际编码的汉字和偏旁，这些新增的字映射在 Unicode 的私用区。而后来随着 Unicode 3.0（1999）、Unicode 3.1（2001）等后续版本的发布，这些字符均已进入 Unicode，造成了这些字符所谓的“︁一字双码”︁现象（如“︁䶮”︁既有 U+4DAE 的正式码位，又有 U+E863 的临时码位）。而大部分 GBK 字符集的字体对于这些新增的字一般只有私用区临时码位，没有正式码位支持。GB 18030-2000 及后续修订版本将映射于临时码位的字符调整到正式码位，或者删除临时码位的字形，一定程度上解决了“︁一字双码”︁的历史遗留问题。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/07/27/1dad3264c6deb14b97689aaaa40b9473.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/07/27/0aee528ceef48ac32f2b4b690579b1ba.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/f77f26cc5d71e0a6aaefaf103ac629f5.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>不同字符集字体中 GBK 补充汉字的码位差别</figcaption></figure><h3>为什么很多用户反馈 / 需要这部分字符集支持？</h3><p>自从分享自己修改的开源字体后，时常会收到一些用户的反馈，希望本人开源字体支持 GB 18030，这些用户大多是将字体用于手机阅读或系统界面字体，因此他们希望本人的开源字体能够像 Android 的原生中文 UI 字体《思源黑体》（谷歌发行的版本叫 <i>Noto Sans CJK</i>）那样“︁不缺字”︁，尽管 GB 18030 里面有很多汉字在日常生活中几乎不会用到；此外也有一些用户有办公、书籍排版或其他大字库需求，希望字体支持到 GB 18030-2022。</p><p>为回应这些用户的反馈或需求，经过数年积淀，本人的“︁霞鹜”︁字体系列提供了一些支持 GB 18030-2022 字符集的字体。接下来，本人将列出并介绍这些字体，供大家了解和选用。</p><h2>「霞鹜系列」有哪些支持 GB 18030-2022 字符集的字体？</h2><p>本人的“︁霞鹜”︁系列开源字体中，已有下列 4 款字体在收字范围方面达到了实现级别 2，包括 3 款正文字体和 1 款手写风格字体：</p><ul><li><a href="https://github.com/lxgw/LxgwWenkaiGB">霞鹜文楷 GB / LXGW WenKai GB</a>（原版<a href="https://github.com/lxgw/LxgwWenkai">《霞鹜文楷》</a>完整版也达到了这一级别）</li><li><a href="https://github.com/lxgw/LxgwNeoXiHei">霞鹜新晰黑＋ / LXGW Neo XiHei Plus</a></li><li><a href="https://github.com/lxgw/LxgwNeoZhiSong">霞鹜新致宋＋ / LXGW Neo ZhiSong Plus</a></li><li><a href="https://github.com/lxgw/kose-font">小赖字体 / Xiaolai</a></li></ul><p>由于时间精力有限，这些字体中有些是采用风格相近且授权兼容的其他字体增补缺字（如《霞鹜新晰黑＋》），有些是采用 AI 生成字形补字，增补的字形较为粗糙（如《霞鹜文楷 GB》）。点击上述链接可进入各个字体的 GitHub 项目页面。以下为这些字体的详细介绍。</p><h3>霞鹜文楷（原版和 GB 版）</h3><p>《霞鹜文楷》是一款 CJK 开源字体家族，基于日本厂商 Fontworks（今 Monotype KK）所开源发布的 <a href="https://github.com/fontworks-fonts/Klee"><strong>Klee One</strong></a>（クレー One）衍生，兼有楷体和仿宋的特征，可姑且算作正文字体。《霞鹜文楷》也是“︁霞鹜”︁系列最受欢迎的字体，甚至在央视的节目和广告中也能看到这款字体的身影。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/07/22/dda537999d7adc9b9e480802c0eafbed.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/07/22/f08550e06ca6a067d246edf6a0d65ad9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>《霞鹜文楷》共有 4 种字形版本（原版、GB、TC、KR）和 2 种字库版本（完整版和轻便版，TC 和 KR 不分）。其中，<a href="https://github.com/lxgw/LxgwWenkai"><strong>《霞鹜文楷（原版）》</strong></a>在修改《通用规范汉字表》范围内汉字的同时，保留了传统印刷体“︁断笔”︁“︁直点”︁等特征；而<a href="https://github.com/lxgw/LxgwWenkaiGB"><strong>《霞鹜文楷 GB》</strong></a>则尽可能严格按照中国大陆的字形标准（G 源字形）对字形、笔形作进一步修改，与原版文楷相比更符合楷体书写习惯。TC 为旧字形版，KR 为韩文版，这里不作赘述。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/15/527770e24a83a39bc5c91b54c8ac88c8.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>《霞鹜文楷（原版）》与《霞鹜文楷 GB》的笔形差异</figcaption></figure><p>《霞鹜文楷（原版）》和《霞鹜文楷 GB》的<strong>完整版</strong>支持 GB 18030-2022 实现级别 2，其中基本区除 Klee One 原有字形外均为手拼手改，扩展 A 区则有四千多字采用 <a href="https://github.com/EuphoriaYan/zi2zi-pytorch">zi2zi</a> 深度学习技术从《思源宋体》生成，字形较为粗糙。</p><p>《霞鹜文楷》家族采用 <a href="https://openfontlicense.org/"><strong>SIL OFL 1.1</strong> 授权协议</a>。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/15/7615d11e6d226e4a689cfe84c2387868.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>霞鹜文楷 GB / LXGW WenKai GB</figcaption></figure><h3>霞鹜新晰黑＋、霞鹜新致宋＋</h3><p><a href="https://github.com/lxgw/LxgwNeoXiHei">《霞鹜新晰黑》</a>和<a href="https://github.com/lxgw/LxgwNeoZhiSong">《霞鹜新致宋》</a>是“︁霞鹜”︁系列的两款正文字体，分别基于日本信息处理推进机构（IPA）所发布的<a href="http://moji.or.jp/ipafont">《IPAex ゴシック》和《IPAmj 明朝》</a>衍生而来（IPA 黑体和明朝分别基于 TypeBank 黑体和明朝衍生）。</p><p>这两款字体均包含支持 GBK 字符集的<strong>普通版</strong>，以及支持 GB 18030-2022 实现级别 2 的 <strong>Plus 版</strong>（中文字体名称后带全角加号）。其中，<strong>《霞鹜新致宋＋》</strong>完全利用《IPAmj 明朝》及其已有衍生字体，修改字形后增补扩展 A 区汉字，增补部分与普通版《霞鹜新致宋》风格高度契合；而<strong>《霞鹜新晰黑＋》</strong>则主要采用授权兼容的 Droid Sans Fallback（Apache License 2.0 授权）减细后增补汉字，增补部分与普通版《霞鹜新晰黑》原有的字形在风格上有一定差异。</p><p>《霞鹜新晰黑＋》《霞鹜新致宋＋》采用 <a href="https://moji.or.jp/ipafont/license/"><strong>IPA Font License 1.0</strong> 授权协议</a>。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/15/fda079f880ced52892c56d61b9915036.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>霞鹜新晰黑＋ / LXGW Neo XiHei Plus</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/15/24744d02bbf42394f830af7913a7fed4.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>霞鹜新致宋＋ / LXGW Neo ZhiSong Plus</figcaption></figure><h3>小赖字体</h3><p><a href="https://github.com/lxgw/kose-font">《小赖字体》</a>是一款大字库的手写风格字体，基于濑户望（Seto Nozomi）制作的<a href="http://setofont.osdn.jp/">《濑户字体（Seto Font）》</a>衍生。初名《小濑字体（Kose Font）》，因用户多把“︁濑”︁打成“︁赖”︁而改为现名。</p><p>《小赖字体》在《濑户字体》的基础上手动增补了简体字，修改了一些常用字的字形，缺字主要采用同源 AI 生成字体《<a href="https://cjkfonts.io/blog/cjkfonts_allseto">cjkFonts 全濑体</a>》补全。抛开字形规范性不谈，《小赖字体》在收字层面支持 GB 18030-2022 实现级别 2。</p><p>《小赖字体》采用 <strong>SIL OFL 1.1</strong> 授权协议。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/15/419dfc7b76ef86c7a6c613103e1decfe.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>小赖字体 / Xiaolai</figcaption></figure><h2>生也有涯，字也无涯</h2><p>介绍了以上符合实现级别 2 的字体，有人会问：<strong>“︁有没有符合实现级别 3 的字体？”︁</strong>或者<strong>“︁这些字体什么时候能够达到实现级别 3？”︁</strong></p><p>对于这些问题，本人理解这些用户对上述字体支持更多汉字的需求，但是实现级别 3 所包含的汉字量级实在是过于庞大了。目前支持这一量级的字体屈指可数，其中免费商用的如<a href="https://hyperos.mi.com/font/rare-word">《MiSans L3》</a><a href="https://www.alibabafonts.com/#/font">《阿里巴巴普惠体 L3》</a>等，都是字体厂商有足够人手、物力（甚至财力）的支持下花费大量时间才补完的，就不用说那些付费商业字体了；就算是开源的<a href="https://github.com/Fitzgerald-Porthmouth-Koenigsegg/Plangothic_Project">《遍黑体》</a>，2020 年立项，2025 年 3 月才把扩展 B～I 区以及兼容汉字区的所有汉字做完，这也是在有多人协助的情况下才完成的。更何况，实现级别 3 是用于政务服务和公共服务的产品才需要达到的要求，而一般的操作系统软件只需要满足实现级别 2 的要求。</p><p>本文所介绍的开源字体中，除了 GB 18030-2022 实现级别 2 范围内的字外，也按需收录了少量实现级别 3 的字，这些字或来源于《新华字典》《现代汉语词典》等辞书，或为人名、地名、方言、科技名词等领域的生僻字里还不算太罕见的字。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/15/b03f3c2a8a70ea4499dbcd08f0960ff6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>新晰黑、新致宋、文楷 GB、小赖字体中少量实现级别 3 的字</figcaption></figure><p>至于实现级别 3 的其余汉字，则根本没有计划去增补，如果真要由本人靠单人独力“︁愚公移山”︁式去增补实现级别 3 的所有汉字，来满足某一部分用户需求的话，⸺</p><p>姑且从《庄子》里摘出半句作为回应：</p><p><strong>“︁以有涯随无涯，殆已。”</strong></p><h2>「霞鹜系列」其他字体有支持 GB 18030-2022 的计划吗？</h2><p>除了本文介绍的字体，“︁霞鹜”︁系列还有更多没有做到 GB 18030-2022 字符集（如<a href="https://github.com/lxgw/LxgwZhenKai">《霞鹜臻楷 GB》</a><a href="https://github.com/lxgw/yozai-font">《悠哉字体》</a>只做到了 GBK，<a href="https://github.com/lxgw/lxgwmarkergothic">《霞鹜漫黑》</a>甚至只有 1.3 万字，距离支持 GB 18030-2022 实现级别 2 还差得远）。一方面，《霞鹜漫黑》这种风格的字体一般不用于正文，也就没有大字符集的需求；另一方面，GB 18030-2022 实现级别 2 确实有很多日常生活中很少用到的字。就像市面上的多数用于广告、海报等设计用途的简体中文字体只支持 GB/T 2312-1980 字符集，虽然字库小，但是并没有觉得不够用。要把这些收字较少的字体都补到 GB 18030-2022 实现级别 2，同样是累人的工程，就算借助 zi2zi 等深度学习技术去生成字形，也会对显卡等电脑硬件产生损耗，而且生成的字形效果也不尽如人意。因此对于这些没到 GB 18030-2022 字符集的字体，目前没有计划去补全，望理解。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/07/27/c7eac8652a2e0356869519ce7c781ba1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/07/27/fa7361324c8cf3a25398ff6805b0403e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>结语</h2><p>感觉这篇文章又写成了一篇流水账，不过也算是介绍了本人所维护的“︁霞鹜”︁系列开源字体中的一些主要字体项目，希望这篇文章能够在开源大字库字体这方面带给用户一些选择。最后感谢这些字体的原始厂商（作者）的无私开源，以及为这些字体协助补字的字体爱好者们。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/101440</id>
+            <title>少数派会员第五年，在老地方共创新惊喜</title>
+            <link>https://sspai.com/post/101440</link>
+            <guid isPermaLink="false">https://sspai.com/post/101440</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 30 Jul 2025 06:27:05 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 少数派, 会员优惠, 社区共创, 内容创作  
+<br>  
+<br>  
+总结: 少数派创始人老麦回顾了平台从个人网站发展为社区共创平台的历程，强调通过内容创作和会员服务维系社区运营。会员服务五年间逐步完善，包括内容制作、实体周边、订阅制和社区搭建。2024年将重点推进共创运营，推出新年度周边、扩大会员点数兑换范围，并有序开放社区功能。针对新老会员推出限时优惠，同时为长期用户和创作者提供专属福利。少数派承认运营中的不足，但坚持深度原创和社区共创的理想。 </div>
+                        <hr>
+                    
+                    <p>大家好，我是老麦。少数派会员已经进入第五个年头，我们也将按照往年惯例，从今天起，开展为期一个月的特别优惠活动。</p><p>在正式介绍会员的新计划之前，容我花点时间，向读者中刚了解少数派的朋友聊聊我们是怎么走到今天的。</p><p>2008 年，我刚从学中医转行到深圳做外贸，业余建了个个人网站 <code>share-mine.com</code>，取「分享我的」之意，谐音「烧麦网」。目的很简单，就是分享自己的经验。到了 2009 年，因为分享了一些 PalmOS 系统的玩法，网站聚起了第一批同好。大家帮我建了 QQ 群和论坛 <code>zoopda.com</code>，并给它起了个名字叫「煮机网」。</p><p>就这样，从我一个人写，变成了一群人分享。看着社区里聚集了越来越多会写东西、会做开发的朋友，我有了第一个创业念头：得让这个社区能持续下去，让有贡献的人能赚到钱。</p><p>2012 年，「少数派」在社区用户的支持下成立了。我们开始给作者稿费，并尝试怎么用好内容养活自己。2017 年，我们上线了第一个付费栏目，又经过两年积累，算是把「用内容挣钱」这件事跑通了。为了保护好内容这个核心，我们一直不太敢做别的商业化，尽量让少数派保持原来的样子。</p><p>2020 年，我们开始通过做联名和周边，试着进入产品「共创」的领域。所谓共创，就是发挥少数派的平台和桥梁作用，一方面从社区征集灵感和反馈，一方面对接供应链和生产资源，给更多好的创意以落地的机会。不过由于遇上三年特殊时期，推进节奏比预期慢一些。</p><p>直到 2023 年，我们才重新开始自己从头做产品。到今年，这个「共创」的平台总算搭好了，从写文章到做产品，整个流程连了起来。</p><p>总的来说，这十二年，我其实一直在做同一件事：努力搭建一个理想中的社区，让每个来到这里的人都能看到、学到、用到，甚至能亲手「做到」一些东西。</p><h2>会员的过去和未来</h2><p>聊回会员服务。我最初的想法，就是想把那些真正认同少数派价值观的朋友——有好奇心、爱折腾、乐于分享的人——聚在自己的平台上，一起做点有意思的事。</p><p>这几年会员服务的发展，也基本是照着这个想法来的——</p><ul><li>2021 年是会员第一年，我们主要测试内容制作能力、演练打造实体周边的能力；</li><li>2022 年，我们改成订阅制，根据会员的意见调整内容方向，并加强了周边制作水平；</li><li>2023 年，我们搭建了会员专属的社区，将大多数付费栏目开放给会员免费阅读。</li></ul><p>过去这一年，我们做了点数兑换系统，允许会员更灵活地兑换各类周边或付费栏目；继续更新了超过五十万字的会员内容，将 OmniFocus 4、MarginNote 4、视频修复等主题教程纳入会员免费内容库；在内容、软件和产品共创中鼓励会员参与并提供专属优惠。</p><p>接下来这一年，我们会在保证内容和周边权益的同时，关注共创的运营和激励，让这个理想能更好地运转起来。一些值得提及的新变化包括：</p><ul><li>在大家期待的<strong>会员年度周边</strong>方面，我们为大家准备了两种选项：一是近期站内人气共创产品、基于墨水屏的无打扰信息呈现窗 <a href="https://sspai.com/product/58">Quote/0 摘录</a>，二是经过会员社区共同设计的 NFC 数字名片兼防丢卡片 <a href="https://sspai.com/product/59">MEETCARD</a> 会员特别版。这两种选项均会搭配新设计的「獭富翁」版徽章（针帽为磁吸，拆去后可兼作冰箱贴）以及贴纸套装，以与以往相同的 12 个点数供会员兑换<sup class="ss-footnote" href="" title="由于生产条件限制，MEETCARD 会员特别版须在 8 月 31 日前兑换数量达到 400 件，方能正式生产制作。因此，我们鼓励对此感兴趣的会员尽早兑换。如未能达到生产条件，我们将提供 (a) 改为兑换公开版，或 (b) 返还点数两种选项。包含 Quote/0 摘录和 MEETCARD 会员年度周边的套装均预计在 9 月底至 10 月初发货。">1</sup>；</li></ul><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/07/29/efb8c6760e9f6d44d1f9aaa924ced9f8.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/07/29/778a5c84054c4c49b07f8f8e0fcc7160.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><ul><li>我们进一步扩充了<strong>会员点数的可兑换范围</strong>，特别是上架了一些人气软件的优惠券，只需 1 到 2 个点数即可兑换，并且可与任何优惠叠加，后续还将提供更多选项；</li><li>根据会员反馈，我们计划<strong>向更大范围用户有序开放会员社区</strong>的部分功能，例如允许注册少数派满一定时长的非会员用户参与社区讨论，同时保留仅会员可发帖的权限设置，从而在提高社区活跃度的同时保证贴文质量。具体方案仍在调研和制定中，将及时与大家分享，也欢迎会员就此提出建议；</li><li>当然，我们仍然会<strong>重视会员内容的制作和运营</strong>，并根据过去一年间的阅读数据和反馈，优化内容更新频率和选题方向。</li></ul><p>我清楚，对每一年会员的运营情况，大家都有各种各样的意见和建议。但总的来说，它仍在朝着我设想的方向走，仍然是我们想专注做好的事。</p><h2>新朋旧友，同样欢迎</h2><p>延续往年的传统，在接下来一个月中，我们为新老会员朋友准备了全年最低的优惠：</p><ul><li><strong>现有会员</strong>续费，可享受 258 元（含点数）或 178 元（不含点数）的优惠价格；</li><li>购买过第一年少数派会员的<strong>创始会员</strong>续费，可享受 198 元（含点数）或 128 元（不含点数）的优惠价格（创始会员全年享受此价格，不受优惠期限制）；</li><li>根据会员社区的反馈，我们将为此前<strong>已经购买过 3 次年度会员的用户</strong>，提供等同于创始会员的优惠，即 198 元（含点数）或 128 元（不含点数）；</li><li>除此之外的<strong>任何朋友</strong>，也可享受 298 元（含点数）或 208 元（不含点数）的优惠价格。</li></ul><p>过去一年中，我们终于有了一套更完整的共创机制和专门的运营团队，也更有底气邀请那些陪着少数派走了多年的老朋友们加入：在这里，你可以把内心的热爱和想法尽情释放出来，尝试各种创作和创造。我们也为此准备了一个月的限时优惠：</p><ul><li><strong>注册网站时间满 6 年</strong>（2190 天）的用户购买年度会员，可享受 258 元（含点数）或 178 元（不含点数）的优惠价格；</li><li><strong>注册网站时间满 10 年</strong>（3140 天）的用户购买年度会员，可享受 198 元（含点数）或 128 元（不含点数）的优惠价格；</li></ul><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/30/d271239a78ae0d119275e80456de6c12.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>（如果同时满足多种优惠条件，以最低的优惠价格为准。如果看到的价格和上述优惠不符，可能是因为你的 app 尚未更新到最新版本，建议优先通过浏览器从网页端购买。）</p><p>我们也看到，现在有很多朋友在不同平台上做着很棒的创造。我们欢迎你来少数派社区，把你的内容、想法和创意，通过我们的平台变成现实。少数派可以帮你宣传，帮你找到人讨论、合作，甚至一起把产品做出来预售。<strong>针对新来的创作者朋友，我们也准备了「专业创造者通道」</strong>，除赠送额外三个月会员外，还将提供专属标识和各类资源支持，具体可前往该计划的<a href="https://sspai.com/page/verified">专页</a>了解。</p><h2>最后的一些心里话</h2><p>少数派十三年，会员服务五年，我们确实有很多做得不好的地方。比如，我们坚持做深度原创，但这肯定没法满足每个人的口味；我们需要挣钱来维持运营，广告难免会让你不舒服；我们开发人手有限，产品没法那么快迭代，及时响应大家的需求。这些问题背后，有很多现实的困难和艰难的决定。所以，如果有批评甚或误解，我们也觉得是正常的，并且愿意谦虚听取。</p><p>但至少，我们还在坚持，想为中文互联网留下一些真诚的思考和体验；我们还在努力，想把最初那个关于社区共创的理想做出来。每一个会员，都是这个理想社区的建造者之一。它最终能发展到哪一步，谁也说不准，但我们一起试过。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/101408</id>
+            <title>Apple Music 更新：借 iOS 26「东风」，向好看、好用更进一步</title>
+            <link>https://sspai.com/post/101408</link>
+            <guid isPermaLink="false">https://sspai.com/post/101408</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 30 Jul 2025 03:27:21 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Apple Music, iOS 26, 自动过渡, 歌词翻译  
+<br>  
+<br>  
+总结: 文章介绍了Apple Music在iOS 26中的多项新功能，包括“自动过渡”功能，它通过分析音乐调性和拍速实现歌曲间的平滑过渡；新增的歌词翻译和发音功能，帮助用户理解非母语歌曲；锁屏动态封面功能，将动态专辑封面展示在锁屏界面；内嵌的“音乐回忆”功能，提供用户音乐收听数据的详细分析；播放列表文件夹功能，方便用户管理音乐；置顶音乐功能，快速访问常用内容；以及新增的主屏幕小组件，提升使用效率。这些更新旨在提升用户体验和功能性。 </div>
+                        <hr>
+                    
+                    <p>自 2015 年 Apple 发布流媒体音乐服务 Apple Music 以来，迅速成长为全球音乐流媒体市场的市占率 TOP 3 之一。虽然 Apple Music 在中国市场的市占率远不及 QQ 音乐和网易云音乐，但是它凭借着纯净无广告、优秀的 UI 交互设计、实惠的付费订阅方案以及与 Apple 生态圈的深度融合，依旧俘获了一大批音乐爱好者们的心。</p><p>在今年六月的 WWDC25 全球开发者大会上，Apple 在发布 iOS 26 新系统之余，让 Apple Music 也在新系统中获得了全方位的升级，带来了诸多新功能。如果你还没有升级 iOS 26 的开发者测试版或者公开测试版本，那么可以跟随我先来一睹为快吧。</p><h2>自动过渡</h2><p>在 iOS 26 中，Apple Music 新增了一个名为「自动过渡」的歌曲过渡方式，这种过渡方式会根据音乐应用对音乐调性和拍速的分析，让播放列表中的歌曲在最佳时间节点过渡到下一首歌。Apple 推出的这个「自动过渡」功能其实借鉴了 DJ 在现场表演时常用的混音技巧，DJ 通常会根据音乐的节拍、调性和现场氛围，将一首歌曲平滑地过渡到下一首，保持舞池或者听众的情绪连贯。因此，可以说「自动过渡」就是 Apple 给你的 Apple Music 安排的专属 DJ。</p><p>如果你光听描述无法想象这个功能的实际效果，那我打一个可能不太专业的比方，就是当你在听 Adele 的《Make You Feel My Love》，播放到结尾时的「To make you feel my love」的同时，还听到了 Twins《见习爱神》的开头一句「Love! Love! Love!」。</p><p>如果你只是想临时开关「自动过渡」功能，那么在任意一个播放列表中都可以找到对应的按钮，点击即可开启或者关闭「自动过渡」功能。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/29/4bb7fee172a13d355b86f97aea423744.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>当然，如果你不完全喜欢这个「自动过渡」的歌曲过渡方式，那么可以在「设置」&gt;「音乐」中找到音乐部分的「歌曲过渡」选项，在这里你可以将歌曲过渡方式切换为传统的「交叉渐入渐出」，或者干脆关掉「歌曲过渡」功能。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/29/2caf600ffc6a8e82e7afe09bf120867d.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>关联阅读：</strong><a href="https://sspai.com/post/100790" target="_blank">Apple Music 的自动过渡功能，会带来歌单的未来形态吗？</a></p><h2>歌词翻译和发音</h2><p>如果你喜欢听欧美歌曲、K-pop、日语歌曲等非国语的音乐，那么新版本的 Apple Music 带来了一项堪称「史诗级」的新功能。当我们在收听非母语的歌曲时，我们可以点击歌词界面左下方的按钮打开歌词翻译或者歌词发音，这样一来翻译或者注音的文本就会同步显示在原歌词的下方，方便我们跟唱或者理解歌词的意思。如果你收听的是国语歌曲并且打开了「显示发音」的选项，那么歌词下方显示的就是拼音。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/28/article/af65b62d95ef50918b93cebfe84d7062.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>Apple Music 的这个新功能还有一个小细节，那就是长按歌词进行分享的时候，翻译和发音都会被隐藏，只显示原本的歌词。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/30/baa275ac2ee277d662e40053c8c33368.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>锁屏动态封面</h2><p>如果你是 Apple Music 或者 Spotify 等海外音乐流媒体用户，那么你一定在欣赏 Taylor Swift、Ed Sheeran 等艺人的作品时看到过专辑的动态封面。这种充满艺术性和创造力的动态封面，无疑是一种非常契合锁屏界面的展现形式，因此 Apple 在 iOS 26 中引入了锁屏状态下的动态封面功能，可以将正在播放的音乐作品的动态封面直接投放到锁屏上并进行动态展示。</p><p>使用这个功能的方式很简单，只需打开 Apple Music 并找到拥有动态封面的歌曲，开始播放后锁定手机屏幕，锁屏界面上就会开始循环播放动态封面。如果点击动态封面，锁定屏幕就会切换回原来的壁纸，再次点击音乐播放小组件上的作品封面缩略图就可以重新将动态封面设为锁屏壁纸。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/29/5394c6c89954869c84e415f0c579a3ea.gif" /></figure><h2>音乐回忆</h2><p>Apple Music 每年都会推出音乐回忆活动，它会分析你在一年内的音乐收听活动，帮你总结一年中听的最多的歌曲、歌手、播放次数等，然后生成一个当年的音乐回忆歌单。不过，每年的音乐回忆活动都会独立于 Apple Music 应用，以网页的形式来进行多方位的展示，最后将音乐回忆的歌单添加到 Apple Music 的播放列表中。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/29/81a439f98c7eeeac6a5d4207a917913e.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在 iOS 26 的 Apple Music 中，Apple 终于将这个「音乐回忆」的功能内嵌到了 Apple Music 应用中。我们可以在「主页」&gt;「音乐回忆：你的热门音乐」部分找到现场制作音乐回忆的功能，点击进入「音乐回忆」后，我们可以选择任意一个年度的任意一个月份，Apple Music 就会直接展示对应时段内的聆听时间、最爱艺人、最爱歌曲、最爱类型、最爱专辑、里程碑等汇总分析的信息。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/29/e19008318bca4adfcd783181c4823fb0.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>播放列表文件夹</h2><p>Mac 版本的 Apple Music 早已支持了创建文件夹的功能，而且还可以通过 iCloud 将文件夹同步到 iOS、iPadOS 或者 tvOS 上的 Apple Music 上，但是在其它平台上却不支持直接创建文件夹。在 iOS 26 中，Apple 终于将这个功能「下放」到了 iOS 端的 Apple Music 上。</p><p>打开 Apple Music 后，进入「资料库」标签页，然后点击打开播放列表，在界面的右上角点击加号按钮，就可以看到「新建文件夹」的功能，在文件夹中我们还可以进行筛选、排序、切换视图、重命名、移到等操作。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/29/cdc060ab89417d13aa6d2465a4e95d15.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>置顶音乐</h2><p>对于我这样的 Apple Music 重度用户来说，今年新推出的功能中最让我满意的就是「置顶音乐」功能。在大多时候时候，我只想听我熟悉的歌曲，但是我每次都要手动去找特定的播放列表、专辑或者歌曲，说实话还是有点繁琐。</p><p>Apple 为 Apple Music 新推出的「置顶音乐」功能，可以让我把自己常听的歌单、专辑、歌曲、歌手等直接置顶显示在「资料库」标签页，打开 Apple Music 就可以一键直达，立享美妙的音乐。如果你不需要跳转到详情页，那么更快捷地方式是长按置顶的音乐图标，然后选择「播放」或者「随机播放」即可。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/29/46bd734b7a572dd8e892742346cb9c36.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>将播放列表、专辑、歌曲、歌手、音乐视频等置顶显示的方法，既简单直观又操作统一，我们只需长按资料库中的任意对象（播放列表、专辑、歌曲、歌手、音乐视频等），然后在弹出的菜单界面中选择「置顶 XXX」就行。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/29/15f7c4eaae7eff8bdf12306cbe360022.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>「置顶音乐」还有一个非常实用的特性，那就是自动下载。所有被置顶的音乐，包括播放列表、专辑、视频等都会自动下载到本地，这样一来就可以节省流媒体播放的蜂窝网络流量，也可以在乘坐飞机等场景下不用担心忘记提前下载音乐。如果你不需要自动下载置顶音乐，那么也可以在「设置」&gt;「音乐」中找到「下载置顶项」的选项，点击关闭即可。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/29/26464f0760ab4dfdb690d68529963d36.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>新增小组件</h2><p>Apple Music 在 iOS 26 中新增了「置顶项」「电台直播」等主屏幕小组件，方便用户在主屏幕一键直达自己最常听的歌曲或者各类电台，甚至不需要打开 Apple Music 应用，可以说是听歌最效率的方式了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/29/0fc99b8a4253691c9707e8ffc5d1b58c.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>另外，Apple Music 还新增了一个「搜索」锁屏小组件，点击后可以直接打开 Apple Music 并进入到搜索界面。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/29/94cd6a642489affe95b9ed66fe0831d0.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果你还没有使用过 Apple Music，那么推荐你尝试一下这款纯粹、优秀的流媒体音乐播放软件。除了 Apple 生态，目前 Apple Music 已经支持了 Android、Windows、PlayStation、Xbox、LG WebOS 等平台。Apple Music 在中国区的订阅价格是 11 元 / 月，学生只需要 6 元 / 月，家庭计划是 17 元 / 月，没有任何二次收费。</p><p>如果你也是一名 Apple Music 的重度使用者，那么不妨在评论区一起交流一下日常使用的技巧，或者分享一下你对 Apple Music 在 iOS 26 中推出的这些新功能的看法。</p><span class="ss-application">&nbsp;</span><p style="margin-left: 0px;">&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/101452</id>
+            <title>派早报：理想 i8 正式发布等</title>
+            <link>https://sspai.com/post/101452</link>
+            <guid isPermaLink="false">https://sspai.com/post/101452</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 30 Jul 2025 00:38:10 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 理想i8,Opera指控微软,ChatGPT研究模式,YouTube年龄认证  
+<br>  
+<br>  
+总结: 1. 理想汽车发布家庭六座纯电SUV i8，定价32.18-36.98万元，具备低风阻设计、智能静音系统和5C超充电池。2. Opera向巴西监管机构投诉微软Edge浏览器存在不公平竞争行为，限制其他浏览器预装机会。3. ChatGPT推出"研究与学习"模式，通过提问和拒绝直接答案帮助用户建立批判性思维。4. YouTube在美国推出基于AI的年龄认证系统，自动应用未成年人保护措施。5. 索尼公布格斗摇杆FlexStrike技术细节，支持自定义挡片和低延迟无线连接。6. Google为NotebookLM新增视频概览生成功能。7. 爆料称Pixel 10将配备磁吸充电配件。8. 少数派推出CamperKit露营套件众测和扭扭充电宝等新产品。 </div>
+                        <hr>
+                    
+                    <h2>你可能错过的新鲜事</h2><h3>理想 i8 正式发布</h3><p>7 月 29 日，理想汽车在北京首都国际会议中心发布家庭六座纯电 SUV 理想 i8，定价 32.18-36.98 万元，8 月 20 日开启交付。</p><figure class="image ss-img-wrapper"><img alt="VwRgbkiFQoMRCJxEHLIcVZzfnmc" src="https://cdnfile.sspai.com/editor/u_/d24mh0tb34talo1bn6jg.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>理想 i8 采用风阻流线造型，配备立体式星环灯，风阻系数仅 0.218；全车采用大量隔声优化设计，前风挡、侧窗、天幕均采用双层声学夹胶玻璃，此外第一排搭载四个智能静音电动出风口；搭载「5C 纯电平台」，全系标配三元锂 5C 超充电池，提供 90.1kWh 和 97.8kWh 两种电池版本，CLTC 续航分别达到 670 公里和 720 公里，在 0-80% 的电量区间内可持续提供 300kW 以上的充电功率；采用具备空间理解能力、思维能力、记忆和沟通能力的 VLA 司机大模型，全系标配激光雷达，在原有 AEB、AES 的基础上增加了慢车加塞、恶意别车、美式截停等，更多场景、更高难度的主动安全能力。<a href="https://www.163.com/dy/article/K5M16GNA0514CFC7.html">来源</a></p><h3>Opera 指控微软 Edge 浏览器不公平竞争行为</h3><p>挪威浏览器开发商 Opera 近日向巴西经济保护管理委员会（CADE）提交反垄断投诉，指控微软 Edge 浏览器存在不公平竞争行为。Opera 称微软与 Windows 设备制造商达成协议将 Edge 设为预装，限制 Opera 等替代浏览器获取预装机会，同时利用界面设计和提示，妨碍用户下载和使用其他浏览器产品，进一步削弱竞争。</p><p>Opera 已要求 CADE 对微软采取补救措施，而这也并非两家公司首次在反垄断问题上交锋。2007 年，Opera 曾就 Internet Explorer 的捆绑安装行为向欧盟起诉微软，今年早些时候也曾试图推动欧盟将 Edge 浏览器认定为《数字市场法案》的「守门人」服务但未获成功。<a href="https://www.engadget.com/computing/opera-takes-its-browser-beef-with-microsoft-to-brazil-in-antitrust-complaint-214105355.html?src=rss">来源</a></p><h3>ChatGPT 推出「研究与学习」模式</h3><p>7 月 29 日，OpenAI 宣布向 ChatGPT 的免费和付费用户推出「研究与学习」模式，该模式旨在帮助使用者建立批判思维能力，启用后 ChatGPT 不仅会主动提问来确认用户的信息理解情况，偶尔也会拒绝直接提供答案。</p><figure class="image ss-img-wrapper"><img alt="IvdHbqGGboweTFxPnzXcpAT8nDb" src="https://cdnfile.sspai.com/editor/u_/d24mh15b34talpgf6fd0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>OpenAI 教育副总裁还表示，该功能不支持模式锁定，但未来可能会探索管理员模式和家长控制功能。<a href="https://techcrunch.com/2025/07/29/openai-launches-study-mode-in-chatgpt/">来源</a></p><h3>YouTube 将使用 AI 来辅助年龄认证</h3><p>7 月 29 日，YouTube 官方发布博文，宣布将在美国地区逐步上线基于机器学习的辅助年龄认证机制。该机器学习算法此前已在其他地区测试，无论用户账户设置中的生日设置如何，该算法都将收集搜索、观看的视频类型，账户的注册年限等「信号」来辅助判断用户年龄，识别到青少年用户后，YouTube 将自动应用禁用个性化广告、打开数字健康工具等未成年人保护措施。如果系统的识别结果有误，账户所有人则需提供信用卡、政府签发的身份证件等材料来申请解除限制。<a href="https://blog.youtube/news-and-events/extending-our-built-in-protections-to-more-teens-on-youtube/">来源</a></p><h3>索尼公布 FlexStrike 技术细节</h3><p>索尼互动娱乐（SIE）近日进一步公开了旗下首款格斗摇杆控制器 FlexStrike 的技术细节，FlexStrike 专为格斗游戏设计，支持自定义替换方形、圆形和八角形挡片以适应不同操作习惯，内置可存放随附挡片和USB适配器的收纳槽并配备便携收纳盒。软件功能方面，该控制器还支持通过单一 PlayStation Link USB 适配器同时连接 FlexStrike 和兼容的 PlayStation 耳机，在 PS5 上一个适配器可同时连接两个 FlexStrike 控制器进行本地多人游戏。</p><p>FlexStrike 支持 PlayStation 5 和 PC 平台，可通过有线或 PlayStation Link 极低延迟无线技术连接，计划于 2025 年 8 月 1 日至 3 日在拉斯维加斯举行的 Evo 2025 格斗游戏大赛上公开展示。<a href="https://www.gcores.com/articles/202315">来源</a></p><h2>看看就行的小道消息</h2><ul><li>7 月 29 日，Google <a href="https://blog.google/technology/google-labs/notebooklm-video-overviews-studio-upgrades/">宣布</a>为 NotebookLM 上线视频概览生成功能，该功能可基于用户上传的信息生成与主题相关、带有注释的幻灯片式视频演示，但目前仅支持英语。</li><li>知名爆料人 Evan Blass 近日发布的<a href="https://x.com/evleaks/status/1950291436173226325?s=19">信息</a>显示，Google Pixel 10 将配备类似 MagSafe 的磁吸充电配件 Pixelsnap。</li></ul><h2>少数派的近期动态</h2><ul><li>CamperKit 模块化的户外露营套件，正在众测中。<a href="https://sspaime.feishu.cn/share/base/form/shrcnJ8jFz1TnL3jjcSIiin9NGf"><strong>点击申请</strong></a></li><li>扭扭宝——一个可以扭的充电宝。<a href="https://sspai.com/create/blacktime"><strong>进一步了解</strong></a></li><li>本周三将举办第四期共创开放日，招募进行中。<a href="https://sspai.com/post/101153"><strong>进一步了解</strong></a></li></ul><h2>你可能错过的文章</h2><ul><li><a href="https://sspai.com/post/101432">社区速递 103 | 一周最热评、新玩意，以及超多派友「苹替」史</a></li><li><a href="https://sspai.com/post/101324">跑外卖三十三天，我窥见一座三线城市的肌理与褶皱</a></li><li><a href="https://sspai.com/post/101397">具透 | watchOS 26 推出首个公测版，这些新功能值得尝鲜体验</a></li></ul><p>&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p><p>&nbsp;</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/101432</id>
-            <title>社区速递 103 | 一周最热评、新玩意，以及超多派友「苹替」史</title>
+            <title>社区速递 103 | 一周最热评、新玩意，以及超丰富派友「苹替」史</title>
             <link>https://sspai.com/post/101432</link>
             <guid isPermaLink="false">https://sspai.com/post/101432</guid>
             <pubDate></pubDate>
@@ -145,609 +244,6 @@
                         <hr>
                     
                     <p style="margin-left: 0px;">7 月 25 日凌晨，Apple 正式发布了全新 Mac 操作系统 macOS Tahoe 26 的首个 Public Beta 版。该版本允许非开发者身份的用户参与到新系统的体验中来，还可以直接向 Apple 提交 bug 反馈，macOS Tahoe 26 正式版预计将于<strong>秋季发布</strong>。</p><p style="margin-left: 0px;">在本文中，我们为你整理了 macOS Tahoe 26 值得关注的新功能，以及升级系统前需要了解的一些注意事项，希望对你有所帮助。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/28/d2278faa7edc0ccc4a3699c7011ec5e5.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;"><strong>关联阅读：</strong><a href="https://sspai.com/post/101313" target="_blank">iOS / iPadOS 26 Public Beta 公测版来了：升降级指南 &amp; 注意事项</a></p><p style="margin-left: 0px;"><strong>注：</strong>测试版系统可能出现影响正常使用的 bug 或第三方软件兼容性问题，我们不建议你升级工作电脑；升级前请及时备份重要数据。</p><h2>全新的界面设计</h2><p>与 Apple 生态下其他系统的更新类似，macOS Tahoe 26 也是自 Mac OS X 10.10 以来在整体 UI 风格上变动最大的一次。整体设计从原先的「扁平化」逐步转向 visionOS 风格，其核心变化在于引入了名为「Liquid Glass」（液态玻璃）的全新界面材质。</p><p>Liquid Glass 能够反射或折射周围环境的光线，营造出一种动态变化、响应灵敏的视觉体验。从实际呈现效果来看，macOS Tahoe 26 的界面更加晶莹剔透，组件之间的层次也更清晰透明。在我看来，这反而更贴近最初 OS X 所追求的「拟物且果冻感」的视觉效果。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/7127cb672daf4719611a4fb049237a62.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>经历了四个开发者测试版之后，你会发现和最早 WWDC 演示的版本相比，液态玻璃的透明度和视觉表现均有所调整，文字显示更加清晰，对比度也有所增强。</p><h3>程序坞、控制中心以及菜单栏</h3><p>在此前的 macOS 中，程序坞和菜单栏通常采用不透明背景，从视觉上将屏幕划分为几个明显区域。而引入 Liquid Glass 材质后，最直观的变化体现在系统组件的界面呈现上。默认设置下，顶部菜单栏的背景被取消，与桌面背景完全融合，看起来更为统一，也让屏幕的可用视觉空间显得更大。</p><p>不过，这种无背景的菜单栏效果也让不少用户感到不适应。因此在首个公开测试版中，Apple 在设置中新增了「显示菜单栏背景」的开关，开启后即可恢复明显的菜单栏与桌面分层效果，满足不同用户的视觉偏好。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/615c2494509b602c11ee78883192b411.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>与此同时，底部程序坞的背景也从原来的半透明改为类似玻璃材质的透明效果。虽然背景并未完全消失，但视觉上更像是一块长条状的玻璃静静地悬浮在屏幕下方。</p><p>当点击右上角的控制中心、网络或音量图标时，各项控制面板也呈现出类似的视觉风格，仿佛一块块晶莹剔透的「玻璃」贴合在屏幕上，整体观感更加通透、现代。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/e3b489d5381ae0c32fb5ebc4a087365e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>全新的主题设置</h3><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/cd5afb69764e144c3ff92009902a0273.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>相比此前的系统，macOS Tahoe 26 在桌面外观上可自定义的选项会非常多。除了默认的浅色主题和深色主题之外，这一次还加入了专门的主题编辑项目，打开「系统设置」- 「外观」之后，除了自动、浅色、深色之外，下方的主题设置项中，你可以改变颜色、文本高亮标记的颜色，从而更好地区分按钮、弹出的菜单以及复选框的界面元素。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/d2a47bbf2720e7e32e161d262df5c91c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在下方设置中，你可以调整图标与小组件的显示样式，可选项包括「默认」「深色」「透明」和「色调」等。切换不同样式后，程序坞中的图标会即时呈现相应的视觉变化。</p><p>其中，「深色」会为图标和小组件添加深色背景；「透明」则融入 Liquid Glass 的透明设计，让界面更加通透；而「色调」则支持对图标与文件夹进行更全面的颜色自定义，带来更具个性化的视觉体验。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/cccc44f416994631dac89f8047329eb8.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>对应的就是你还可以对应用的文件夹的颜色进行调整，比如现在默认的文件夹颜色都是标准的淡蓝色，这里你可以选定几种颜色，也可以自定义通过调色盘来编辑文件夹的颜色。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/8655703a04863fe4fc683ed456710e84.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3 style="margin-left: auto;"><strong>其他视觉变化</strong></h3><p>除了前面提到的这些视觉变化之外，macOS Tahoe 26 也在一些细微的点上进行了调整。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/213161255dcadcf3fbfe0b04e75b4ccc.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>首先就是在本次公开测试版中，加入了全新的 Tahoe Day 等系列的动态壁纸，并且还增加了包括果阿邦海滩等全新的自然景观壁纸，使得自然景观壁纸数量从原来的 64 个增加到了 76 个。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/e9c57ab8f712292a461091aabc37e8f2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>再者，就是现在你可以调整锁屏的时钟样式——打开系统设置 - 墙纸，点击「时钟外观」，你可以设置显示大时钟的位置，你既可以在屏幕保护中显示也可以设置在锁屏界面中显示，就像你在 iOS 26 中自定义锁屏界面的时钟一样。另外你还可以选择数字时钟的字体样式，并通过滑动滑块来调整显示的数字时钟的字重。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/ced63447eac3f7bfb6564f669506a994.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这次随着系统设计风格的转变，部分系统默认应用的图标也进行了调整，其中最明显的变化之一就是「访达」图标。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/3b5729866464ed3a3732f1eb699ee362.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>另外，如果你习惯通过快捷键或辅助键快速调整系统设置，不难发现，当调节音量或屏幕亮度时，原先居中的 HUD 弹窗已经被全新的系统控件取代。现在的调节反馈会以横向进度条的形式显示在屏幕右上角，视觉上更简洁，也更贴合整体 UI 风格变化，让调节效果一目了然。</p><h2>聚焦搜索</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/aa47832d3198185b5d920a16d0292c11.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>「聚焦搜索」迎来了迄今为止最大幅度的更新。虽然唤起方式仍维持原有的快捷键不变，但功能上 Apple 对其进行了重构。你依然可以通过它搜索文档、文件、文件夹、项目或应用，不过这一次，搜索结果会被自动分类罗列，并根据相关性进行智能排序，整体结构更清晰，查找效率也更高。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/9d0c353c85c13371b1f79d0242eae6d1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在搜索结果的筛选方面，全新的聚焦搜索提供了更丰富的筛选选项，便于快速缩小范围，精准定位所需内容。除了本机文件，新版聚焦搜索还支持显示第三方云盘中的文档，进一步拓展了搜索覆盖范围。<br />如果你不确定该如何操作，也可以借助聚焦搜索中的引导提示，利用不同的键盘快捷键快速查看应用列表、文件、快捷指令、剪贴板历史等内容，操作更直观，体验也更高效。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/adc2ab6dc30e1967ccede1361cdb7652.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>例如，通过 <code>Cmd-3</code> 快速打开系统内置的快捷指令，如果需要创建一条备忘录，只需在键盘上选择「创建备忘录」指令，再用自然语言补充细节——指定在哪个文件夹创建、包含哪些内容，然后即可直接执行，整个过程无需离开键盘。</p><p>随着使用次数的增加，系统还会根据你的操作习惯提供个性化建议，例如自动推荐向常联系的同事发送信息等操作，让工作流程更加顺畅。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/65c6869af9ee8cde74f56a2b6e201ccc.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>除了通过快捷指令完成任务外，全新的聚焦搜索还支持直接操作应用内的菜单项。例如，在打开备忘录后调出聚焦搜索，输入「新建」，系统会自动识别并显示菜单中的「新建备忘录」操作项，按下回车即可执行对应功能。</p><p>这种操作方式的好处在于，用户无需使用鼠标或触控板在菜单中逐项查找，也不必记住每个应用的专属快捷键，便能快速完成所需操作，进一步提升了键盘操作的效率与连贯性。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/28e3424ff35bdb832153f427a917f615.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>而在调用「聚焦搜索」并通过 <code>Cmd-3</code> 则可以直接打开系统中的剪贴板历史，这样你可以非常直观地通过键盘选择此前复制的文本、图片等内容，然后使用回车直接粘贴到目标位置即可。相比第三方的截贴版工具，使用聚焦搜索的剪贴板历史功能不用记录复杂的快捷键，选择和粘贴的操作也更直观。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/a54f1d81f3f8975ed52cfe95d3b445f0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>另外，这次更新中，聚焦搜索还承担了此前系统中的「启动台」功能。过去，点击程序坞中的「启动台」即可查看所有已安装的 App，支持直观地浏览、启动应用，甚至创建文件夹对 App 进行分类管理。</p><p>而现在，则需要在聚焦搜索中的「App 搜索」（<code>Cmd-4</code>）。虽然用户仍可通过输入应用名称快速启动，或在 App 分类中逐层展开查找，但对于习惯了原有全屏图标界面的一般用户来说，这种方式可能确实要习惯一下。</p><h2>控制中心和菜单栏</h2><p>在 macOS Tahoe 26 中，Apple 引入了与 iOS、iPadOS 类似的可完全自定义的控制中心。点击「控制中心」底部的「编辑」按钮，即可打开控制中心的控制库。界面与小组件的编辑模式类似，用户可通过拖拽方式，将所需控制项添加到控制中心的空位中。</p><p>目前控制库提供的控制项涵盖了多种功能类型，包括桌面与文件、专注模式、台前调度、音量、备忘录、截屏、媒体播放控制等。不过需要注意的是，控制中心默认仅提供四列两行的空间，若需添加更多控制项，必须先移除现有项目后才能添加新的内容。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/b13038aab6f16df5f58084e96d919427.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>而菜单栏的过多菜单栏项目也一直是之前 macOS 的「顽疾」，这使得我们往往需要通过第三方应用来对系统的菜单栏图标进行管理。而到了 macOS Tahoe 26 你终于可以控制哪些应用图标可以显示在菜单栏上——打开「系统设置」-「菜单栏」-「允许在菜单栏显示」，如果有图标不需要在菜单栏显示，把对应的显示开关关闭即可。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/61bce41d00ee5a8abf4bac34946dd356.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>实时活动</h2><p>macOS Tahoe 26 进一步强化了与 iPhone 之间的互联体验，例如全新引入的电话 App 让用户可以在 iPhone 接打电话时，将通话无缝转移到 Mac 上继续进行。</p><p>Mac 上的电话 App 在功能上与 iPhone 的电话应用高度一致，包含了「最近通话」「个人收藏」「语音留言」等常见功能，还新增了「通话筛选」和「通话保留助理」等实用工具。其中，「通话筛选」可自动接听未知号码来电，并代为询问来电者的身份与意图，帮助用户判断是否需要亲自接听，提升通话效率与隐私保障。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/ec3d13f68eeb1d00707d1716a8dc835b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>iPhone 的实时活动现已整合进 macOS Tahoe 26 的菜单栏，方便用户随时掌握当前正在发生的事件，例如即将到达的网约车、外卖配送、即将起飞的航班，或正在进行的体育赛事比分等。</p><p>当你在 Mac 屏幕上点击这些实时活动时，相关的 iPhone 应用会通过 iPhone 镜像功能在 Mac 上打开，用户无需拿起手机，即可直接在 Mac 上对 iPhone 上的 App 进行后续操作，进一步提升跨设备协同效率。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/dae60e8aa08899b1e405ab1e25531786.gif" /></figure><h2>Apple 游戏 App</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/edb0dc22b101989cc6b458da12cf690e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>一直以来，Mac 都被许多游戏玩家认为并不适合用来玩游戏，这一印象在很大程度上也确实成立。由于 Mac 采用了特殊的硬件架构，导致许多主流电脑游戏无法原生运行。</p><p>不过，Apple 这些年来也一直在努力拓展 Mac 的游戏能力，例如引入部分大型游戏移植版本、持续优化 Metal 图形框架等。而在 macOS Tahoe 26 中，Apple 更是首次推出一款专为游戏打造的全新应用 ——「Apple 游戏 App」。这一举措标志着 Apple 正在尝试以更系统化的方式提升 Mac 的游戏生态，吸引更多玩家关注与使用。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/46e767e95078fdb021c214d6319fb3d6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>简单来说，「Apple 游戏 App」可以看作是类似 Steam 的游戏商店与启动器的结合体，并融入了此前 iOS 上 Game Center 的相关功能。</p><p>除了能浏览与下载 App Store／Mac App Store 中的游戏，该应用还支持在游戏过程中通过游戏叠层界面快速调整系统设置、与好友聊天或发送游戏邀请，全程无需跳出游戏进行切换，操作更流畅、沉浸感更强。</p><p>此外，即便是通过其他第三方平台下载和购买的游戏，也可以纳入 Apple 游戏 App 中统一管理，让 Mac 上的游戏体验更加集中、有序。</p><h2>其他注意的细节改进</h2><p>除了以上的这些更新之外，一些系统应用也有不少细节上的改进。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/f6a0251e2f963ce1a46534afeb77c5e4.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>备忘录 App 新增将备忘录导入和导出为 Markdown 文件的功能，这样你可以直接将其作为一个 Markdown 编辑器来撰写专业技术文档了。并支持在电话 app 中将对话录制为带转写文本的录音。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/127905a635c2ef1812b1555b6d8349db.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>照片 App 迎来新的设计，加入了 Liquid Glass 的设计元素，整体也更现代。功能上新增了「固定精选集」功能，仅需按一下边栏即可访问最常用的精选集，另外通过新的按钮还可以快速访问所有视图的筛选和分类选项，还能自定义调整精选集网格的大小，按自己喜欢的方式查看照片图库。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/df85c8ae13a66c12715b040055ad68be.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>Safari 同样也依托新的界面设计调整了使用体验，比如现在按钮都采用了悬浮突出的形式呈现，标签页也采用了圆角设计；另外新版的边栏包含了「iCloud 标签页」和「已保存」等板块，支持在 iOS、iPadOS 上同步浏览的标签页。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/27/dc6e2960864e47eb9f0f18f9950d950a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>另外此前在 iPadOS / iOS 的手记应用也登陆 macOS 26，你可以通过 iCloud 同步你在移动设备上撰写记录的内容，并在 macOS 上继续完善编辑以及查看。</p><h2>一些和开发有关的新变化</h2><p>macOS Tahoe 26 中的终端终于加入了对 24 位颜色显示（也就是 1600 万色）的支持，理论上你可以在终端中直接显示图片或者制作动画，同时还带来了新的终端主题以及对 Powerline 字体支持。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/15/858561645874bab9d8448bca6a87cf19.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>近几个版本的 macOS 一直在持续强化对虚拟化的支持，而在 macOS Tahoe 26 中，Apple 更是首次引入原生支持 Linux 的容器框架，使开发者能够直接在 Mac 上创建、下载并运行容器映像。</p><p>该框架基于专为 Apple 芯片优化的开源技术构建，具备安全隔离特性，能够有效保障容器运行的独立性与系统安全。换句话说，如果你是在 Mac 上从事后端开发，现在可以无需依赖第三方虚拟化工具或 Docker，就能快速搭建一个 Linux 容器环境，并在其中部署和测试相关服务，大幅提升开发效率与环境管理的灵活性。</p><h2>总结</h2><p>相比过去几年的 macOS 更新，这次推出的 macOS 26 不仅引入了 Liquid Glass 这一全新设计语言，更在聚焦搜索、菜单栏、实时活动等多个模块上进行了深度优化。在我看来，这次更新更像是一次围绕「任务执行效率」与「工作流整合」所展开的系统级改进。</p><p>这些变化无疑让 Mac 更加贴近高效生产工具的定位，同时也不可避免地冲击了部分第三方工具的生存空间，比如 Raycast 启动器、Paste 剪贴板管理工具等。但如果系统原生就能实现过去需依赖付费应用才能完成的功能，那对普通用户来说，当然是件好事。</p><p>在硬件支持方面，macOS 26 同样成为一次架构上的分水岭。就像当年的 Mac OS X 10.5 是最后一代支持 PowerPC 的系统一样，macOS 26 将是最后一代支持 Intel 架构的 macOS 系统。根据 Apple 官网的信息，仅有 4 款 Intel Mac 可升级至 macOS Tahoe：2019 年的 Mac Pro、2019 款 16 英寸 MacBook Pro、2020 款 13 英寸 MacBook Pro 和 2020 款 iMac。所幸，这些设备未来仍将获得安全更新支持。而从 macOS 27 开始，Apple 将全面转向仅支持 Apple Silicon 架构的设备。</p><p>看完本篇 macOS 26 的功能与设计介绍，不知道你是否也想尝试体验？如果有兴趣，建议通过 Apple 官方提供的「<a href="https://support.apple.com/zh-cn/118282" target="_blank">在 Mac 上使用多个 macOS 版本</a>」方式，利用 APFS 宗卷安装双系统进行体验。由于 macOS 26 目前仍处于测试阶段，不建议直接在主力设备或生产环境中升级。</p><p>如果你已经安装了 macOS 26 测试版，欢迎在评论区分享你的使用感受，看看你还发现了哪些有趣的新特性。</p><p style="margin-left: 0px;">&gt; 了解更多 WWDC25 最新资讯及动态，欢迎关注《<a href="https://sspai.com/topic/458">少数派带你看 WWDC25</a>》系列专题。</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/101247</id>
-            <title>一日一技 | 用 AutoHotkey 偷偷背单词，甚至读本书</title>
-            <link>https://sspai.com/post/101247</link>
-            <guid isPermaLink="false">https://sspai.com/post/101247</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 28 Jul 2025 03:30:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Matrix, 背单词, AutoHotkey, 轻量学习
-
-总结: 作者分享了一种利用AutoHotkey脚本实现的轻量级桌面背单词和阅读方法。文章指出传统背单词软件过于强调学习计划容易导致放弃，而作者开发的脚本通过工具提示窗口实现无压力学习，可随机显示单词或书籍内容，支持收藏、删除单词和记录阅读进度。脚本具有界面简洁、操作隐蔽、不增加学习焦虑等特点，同时提供了未来功能扩展的可能性，如单词难度分级、学习统计等。 </div>
-                        <hr>
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>同许多人一样，我在人生的每个阶段里，都多次启动过背单词的计划，当然，也每次都没有坚持下去。我认为，这其中一个原因在于，无论是小时候背单词书，还是现在使用手机上的单词软件，都过于强调学习计划。然而，生活中的变化和诱惑实在太多，在没有考试等因素驱动的情况下，只要有一天没有按照计划行事，那么遗忘和放弃就是自然而然的结果。</p><p>总而言之，作为工作中实际上不是特别需要使用英文的打工人，我没有很强的动力去每天背上十个或者更多单词。我只想要在打工的间隙，悄无声息地偶尔学习一下，无须低头看手机，不强求每天背单词的数量，不考虑科学的记忆曲线，背到了算赚到，没记住那拜拜下次再见。</p><p>出于这个目的，我以「桌面」和「背单词」为关键字进行了检索，发现市面上的此类软件不少，应当也有很多优秀的产品。可惜的是，这些软件对我来说都不够轻量，显得太正式，界面和丰富，功能太复杂了。其中看起来最符合我要求的一款，叫 ToastFish，据说是让用户可以在通知栏背单词，然而，它在我这台破工作电脑上并没有运行成功。另外，从介绍上看，这款软件也逃脱不了「本次背多少个单词」这一让我感觉有些焦虑的设定。</p><p>于是，我很自然地又想起了那个已经在我电脑后台默默运行的 AutoHotkey 脚本，自从我因为工作而开始使用 Windows 办公后，AutoHotkey 给予我很大的帮助，具体可参见<a href="https://sspai.com/post/90212" target="_blank">这篇文章</a>。上一次我使用 AutoHotkey 编写脚本，是为了写划词翻译和截图 OCR，具体可以参见<a href="https://sspai.com/post/96562" target="_blank">这篇文章</a>。结合我的目标，很容易联想到 AutoHotkey 自带的 ToolTip 函数，其效果是显示一个工具提示窗口。窗口非常小，用来不着痕迹地背单词可以说是刚刚好。</p><p>AutoHotkey 的语法足够简单，配合上现在的 AI 工具，经过一点尝试，我就完成了一个基本可用的背单词小脚本。想到工具提示窗口小巧、不易察觉的特性，我又顺手把它改成了一个阅读文章的小脚本，相比起网上使用 Word 文档或者记事本的摸鱼技巧，利用工具提示窗口更加轻便和隐蔽。</p><p>即便算上空行，两个脚本加起来也不过 200 行左右。不需要额外下载软件（当然单词本和书籍是需要另外准备的），就拥有了两个不同类型软件的核心功能，我认为是足够经济实惠的。因此，我也认为值得在这里分享。</p><p>下面，我先将脚本实现的全部功能展示如下。诸位如果对此感兴趣，可以继续看后文，我会解说其中的核心功能部分，并在最后列举一些额外功能的实现思路，以方便大家能够按需修改。现有功能的完整的代码我还是会放在文末。</p><p><strong>按下设定的热键进入或退出背单词模式（所有热键均可自定义，下同）：</strong></p><ul><li>按下热键，在鼠标所在的位置会随机显示一个单词，再点击热键可以查看单词的音标和释义；</li><li>在此基础上，可以通过热键调用其他词典（比如 GoldenDict）以进一步查看单词的其他释义、例句（下图未展示），或者收藏单词以便下次复习，又或者彻底删除太简单的单词；</li><li>可以随时切换单词表为已收藏的单词，进入「复习模式」开始复习；</li><li>也可以随时切换以进入「测试模式」，此时按下热键首先显示的不是单词本身，而是对应的音标和释义，方便检查自己是否学会了单词的拼写；</li><li>如果有一段时间未学习单词，会自动退出单词模式（防止误触热键）。</li></ul><figure class="image ss-img-wrapper image_resized" style="width: 594px;"><img src="https://cdnfile.sspai.com/2025/07/23/59b06bbf0da656a71964c248c7be0e14.gif" /><figcaption>单词模式：从开始到 abandon</figcaption></figure><p><strong>按下设定的另一组热键进入或退出看书模式：</strong></p><ul><li>按下热键开关显示一行文字（推荐使用鼠标中键）；</li><li>按下热键上下换行（推荐使用鼠标滚轮）；</li><li>如果有一段时间没有看书，会自动退出看书模式（防止误触热键）；</li><li>下次看书时，自动从上次退出时的一行开始。</li></ul><figure class="image ss-img-wrapper image_resized" style="width: 486px;"><img src="https://cdnfile.sspai.com/2025/07/23/8f314b5199107873dde45541636b3b52.gif" /><figcaption>看书模式：波澜不惊，心旷神怡</figcaption></figure><h2>第一项功能：背个单词</h2><p>首先，我们需要一张词汇表。这里必须感谢具有分享精神的每个人，如今要取得一份 TXT 格式的单词本并不困难，比如我自己使用的单词本来自<a href="https://github.com/mahavivo/english-wordlists">这里</a>。</p><p>总体来说，满足如下条件的文档就非常符合我的要求：</p><ol><li>每行一个单词；</li><li>单词后跟着音标、释义等，并以空格隔开。</li></ol><figure class="image ss-img-wrapper image_resized" style="width: 324px;"><img src="https://cdnfile.sspai.com/2025/07/23/5cddff6d8c0edb8def3e277408497cf1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>像这样的单词表就很合适</figcaption></figure><p>话虽如此，第一个条件不满足也可以，只不过在读取单词表的时候要多写一些判断条件，不以按「行」区分单词，而是用分割线或其他符号来标记。</p><p>第二个条件不满足也没有任何关系，因为我们完全可以设计成只调用其他词典来显示释义。</p><p>接下来是脚本，我给单词模式添加了开关功能，这就像是打开了一个软件。这么做的好处是，我不需要把各种功能刻意放在一些特别复杂或不常用的热键上。</p><p>在 AutoHotkey 实现「开关」并不困难，只需要将一个变量设置为单词模式开关的标记。然后，在后续的所有操作上，一律使用 #HotIf，表示满足特定条件下时热键才生效。我自己使用的是 Ctrl 加上鼠标的一个侧键（XButton1）来开关单词模式。</p><pre class="language-null"><code>words_flag:= false ; 标记是否进入了单词模式
-^XButton1::
-{
-global words_flag
-words_flag:= !words_flag ; 每次按下热键，改变标记的状态
-; ……
-}
-
-#HotIf words_flag ; 仅在 word_flag 为 true 的时候，后续的热键才生效
-; ……
-#HotIf</code></pre><p>在打开单词模式的同时，有必要预读取一次单词本，防止我的破电脑在后续显示单词时因反复读取而产生任何卡顿。</p><p>一开始我在获取单词表时，中文和音标总是显示为乱码。由于我对文字编码问题从来是搞不明白的，所以主要的解决思路就是尝试。最终，我在这台电脑上的解决方法是：</p><ul><li>将下载下来的 TXT 单词本手动保存为带有 BOM 的 UTF-8 编码文件；</li><li>在使用 AutoHotkey 写入时指定使用「UTF-8」编码；</li><li>在使用 AutoHotkey 读取时指定使用「UTF-8-RAW」编码。</li></ul><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img src="https://cdnfile.sspai.com/2025/07/23/c7fefdaae4b376de0f0a3a55e365eb4d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>记得选择编码</figcaption></figure><p>AutoHotkey 的常用的编码还包括「UTF-8」和「CP936」（GBK/GB2312），如果出现乱码，不妨一试。</p><pre class="language-null"><code>global words_list
-Loop Read, words_path . "words.txt", "UTF-8-RAW" ; 读取单词本内容
-words_list.Push(A_LoopReadLine)</code></pre><p>接下来，我们需要按下热键显示一个单词。我使用的热键是同样是鼠标侧键，如果使用的鼠标没有侧键，我建议使用一个相对不容易误操作的组合键作为热键。产生单词的部分，最简单的写法是生成一个随机数，然后显示单词表里对应行数的内容。</p><pre class="language-null"><code>XButton1::
-{
-word_index:= Random(1, words_list.Length) ; 生成 1 到单词表长度之间的随机数
-ToolTip(words_list[word_index])
-}</code></pre><p>为了区别于单词壁纸，让背单词的过程更接近于「背」而不是「看」，我们可以分两步显示词汇表的内容。一开始只显示单词本身，先想想自己是否认识这个单词，再单击鼠标左键后才显示对应的音标和释义。或者反过来，一开始只显示音标和释义，先猜猜这个单词如何拼写，再显示单词原文，这就相当于是各种背单词软件中的「测试模式」。</p><pre class="language-null"><code>exam_flag:= false
-^MButton:: ; Ctrl + 鼠标中键开启或关闭“测试模式”
-{
-global exam_flag
-exam_flag:= !exam_flag
-if exam_flag
-ToolTip("测试模式")
-else
-ToolTip("普通模式")
-SetTimer () =&gt; ToolTip(), -800
-}
-
-XButton1::
-{
-global words_list, word_index
-word1:= StrSplit(words_list[word_index], " ", , 2)[1] ; StrSplit 分割空格前后的内容
-word2:= StrSplit(words_list[word_index], " ", , 2)[2]
-if exam_flag
-ToolTip(word2)
-else
-ToolTip(word1)
-KeyWait("LButton", "D") ; 不管一开始显示什么，单击鼠标左键，都会显示完整的单词+注释等内容
-ToolTip(word1 . "`n" . word2)
-}</code></pre><p>其实到这一步为止，已经完成了我最初设想的背单词功能，如果不需要更多花里胡哨的功能，只需要在上面的内容里再加上两行单击关闭工具提示框的代码即可：</p><pre class="language-null"><code>KeyWait("LButton", "D") 
-ToolTip()</code></pre><p>不过我还是为它适当添加了一些功能，包括查看词典，收藏和删掉单词。为此，我们需要再增加一个标记，仅在单词显示后这些功能才生效。</p><pre class="language-null"><code>dict_flag:= false ; 标记现在是不是显示了单词内容
-XButton1::
-{
-; ……
-global dict_flag
-dict_flag:= true
-}</code></pre><p>首先是调用其他词典软件查看释义，我这里设置设置的热键是键盘上的 D 键。</p><p>设置快捷键算是 AutoHotkey 本职工作，不存在难度。由于我下载过 GoldenDict，因此这里就使用这个软件。它可以读取剪贴板内的单词，并通过浮窗显示释义。虽然，在这台电脑上的反应不算快，但偶尔查一次，仍不失轻便。AutoHotkey 也提供了存放和恢复剪贴板内容的方法（当然某些特殊格式可能无法被识别），可以尽可能地减少对日常工作的影响。</p><figure class="image ss-img-wrapper image_resized" style="width: 500px;"><img src="https://cdnfile.sspai.com/2025/07/23/b0f65e9788e13b9276a24b41645885b2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>GoldenDict 设置</figcaption></figure><pre class="language-null"><code>d::
-{
-; ……
-tmp:= ClipboardAll() ; 将剪贴板内容暂存下来
-A_Clipboard:= StrSplit(words_list[word_index], " ", 2)[1] ; 复制单词到剪贴板
-Send "^+c" ; 这是我设置的 GoldenDict 查单词快捷键
-A_Clipboard:= tmp ; 恢复剪贴板
-}</code></pre><p>其次是收藏单词，我设置的热键是键盘上的 S 键。</p><p>收藏功能依靠保存至同目录下的「favourites.txt」文档来实现，你可以事先在文件夹内手动创建好文件，也可以像我一样在进入单词模式或首次收藏功能的时候创建这个文件。为了背收藏的单词，我们需要增加一个切换单词本的操作，我自己设置的快捷键是 Shift + 鼠标侧键。</p><pre class="language-null"><code>； 创建 favourites.txt 的操作
-if !FileExist(words_path . "favourites.txt")
-FileOpen(words_path . "favourites.txt", "w", "UTF-8").Write(Chr(0xFEFF) "")
-
-; 将单词收藏到 favourites.txt 的操作
-s::
-{
-; ……
-; 下面这个 if 的目的是判断单词在收藏里有没有出现过
-if !Instr(FileRead(words_path . "favourites.txt"), words_list[word_index])
-FileOpen(words_path . "favourites.txt", "a", "utf-8").Write(words_list[word_index] . "`n")
-}
-
-; 切换单词表为 favourites.txt 的操作
-favourite_flag:= false
-+XButton1::
-{
-global favourite_flag, words_list
-words_list:= [] ; 清空单词表，切换为已收藏的单词表或原始单词本
-favourite_flag:= !favourite_flag
-if favourite_flag
-{
-Loop Read, words_path . "favourites.txt", "UTF-8-RAW"
-words_list.Push(A_LoopReadLine)
-ToolTip Format("复习模式")
-}
-else
-{
-Loop Read, words_path . "words.txt", "UTF-8-RAW"
-words_list.Push(A_LoopReadLine)
-ToolTip Format("结束复习")
-}
-SetTimer () =&gt; ToolTip(), -800
-}
-</code></pre><p>还有一种情况是这单词实在太简单了，我们不想要再次看到它。</p><p>那么实际操作就是从单词本里彻底删掉这一行，需要修改单词列表和单词文件。如果我们选择的单词表是相对全面或者基础的，那么删掉单词会是一个很常用的功能，因此我这里使用的热键是鼠标的右键（RButton）。也就是说，对于还想要再看到的单词，左键关闭显示，对于不想再见到的单词，右键删除。</p><pre class="language-null"><code>RButton::
-{
-; ……
-words_list.RemoveAt(word_index) ; 删除词汇表的这一行
-new_list:= ""
-for i in words_list
-new_list.= i "`n"
-; 覆盖 TXT 单词本内容，这里有可能是 favourite.txt，也可能是 words.txt，取决于在背哪个词汇表
-FileOpen(相应的文件路径, "w", "utf-8").Write(new_list) 
-}</code></pre><p>在什么都不做只关闭工具提示框，以及收藏、删单词的场合，都应该关掉工具提示框，避免单词一直显示在桌面上，同时应将 dict_flag 设置为 false，避免反复触发以上操作。</p><pre class="language-null"><code>global dict_flag
-dict_flag:= false
-ToolTip()</code></pre><p>最后，由于这个背单词工具没有任何界面，全靠热键操作，如果忘记退出背单词模式，有可能出现一些尴尬场景。比如说，当在给其他人演示的时候，不小心点到热键，屏幕上突然蹦出一个单词。</p><p>因此，我们还是加一个自动关闭的设定为好。具体而言，就是设置一个计时器，超过一定时间没有使用单词模式下的功能，就自动退出单词模式。</p><pre class="language-null"><code>words_last_press:= A_TickCount ; 记录最近一次打开或使用背单词功能的时间
-
-words_check() {
-if A_TickCount - words_last_press &gt;= 600 * 1000 ; 检查上次使用时间距离现在是否超过了 600 秒
-words_mode ; 改变单词模式的开关状态
-}
-
-; 进入单词模式的时候，启动计时器并更新最后使用时间
-^XButton1:: words_mode() 
-words_mode()
-{
-global words_last_press, words_flag
-words_last_press:= A_TickCount
-words_flag:= !words_flag
-
-if words_flag
-{
-; ……
-SetTimer words_check, 120 * 1000 ; 打开单词模式的同时打开计时器，每 120 秒检查一次
-}
-else
-{
-; ……
-SetTimer words_check, 0 ; 关闭单词模式的同时，关闭计时器
-}
-
-; 显示单词的时候，更新最后使用时间
-XButton1::
-{
-global words_last_press
-words_last_press:= A_TickCount
-; ……
-}</code></pre><h2>第二项功能：读本书</h2><p>写完背单词模式脚本，读书模式大部分内容都可以照搬。首先当然也需要准备好想要阅读的 TXT 文档，进入阅读模式后，脚本也需要逐行读取文件，定时关闭功能显得更为重要。不同的是，因为很多书籍存在大量空行，读取文件时要将空行排除在外。</p><pre class="language-null"><code>if Trim(A_LoopReadLine) != "" ; 排除空行
-book.Push(A_LoopReadLine) </code></pre><p>另外，由于书本内容一行可以非常长，ToolTip 显示无法设置宽度，默认宽度为一整个屏幕，这会阻碍我们阅读，最好还是把过长的内容手动分一下行。</p><figure class="image ss-img-wrapper image_resized" style="width: 288px;"><img src="https://cdnfile.sspai.com/2025/07/23/6be562ce86a38aeca7d0ba613520a7b9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>这么多内容如果都放在一行的话就太长了</figcaption></figure><pre class="language-null"><code>split_string(s, len:= 25) ; 处理文字，按照默认 25 个字换一次行
-{
-result:= ""
-Loop Parse s
-{
-result.= A_LoopField
-if (Mod(A_Index, len) = 0)
-result.= "`n"
-}
-return result
-}</code></pre><p>看书和翻书可以都放在鼠标中键（滚轮）解决，这样就可以不动键盘实现翻书。</p><pre class="language-null"><code>; 用鼠标中键打开或关闭显示书本内容
-MButton::
-{
-; ……
-global reading_flag ; 标记是否正在显示内容
-reading_flag:= !reading_flag
-if reading_flag
-{
-ToolTip(split_string(book[book_index])) ; 显示一行内容，其中 book_index 指示当前阅读到了哪一行
-}
-; ……
-}
-
-; 用鼠标滚轮上下翻页（行）
-#HotIf reading_flag
-WheelUp::
-{
-global book_index
-book_index:= Max(1, book_index - 1) ; 这是为了避免在上翻时出现不存在的行号，比如第 0 行（AutoHotkey 的数组从 1 开始），下同
-ToolTip(split_string(book[book_index]))
-}
-WheelDown::
-{
-global book_index
-book_index:= Min(book.length, book_index + 1)
-ToolTip(split_string(book[book_index]))
-}
-#HotIf</code></pre><p>读书模式与背单词模式最大的区别在于，背单词是随机出现一个单词，每次背的东西可以是不一样的，但读书是要接着上文的，总不可能每次都从头开始。因此，我们就需要一个方法来记录上次读到哪里了。关于此，茴香豆有不止四种写法，我自己试了其中的三种。</p><p>第一种是阅后即焚，在关闭书籍显示或阅读结束的时候，读到哪里删到哪里，将书越读越薄的理念贯彻到底。好处是不用记录读到哪里了，每次都从第一行开始看，缺点是被删掉了的内容，是无法在下次点开的时候回看的。</p><pre class="language-null"><code>book_index:= book_index - 1 ; 往上一行开始删
-while book_index &gt; 0
-{
-book.RemoveAt(book_index)
-book_index -= 1
-}
-book_index:= 1
-new:= ""
-for i in book
-new.= i "`n"
-FileOpen(book_file, "w", "utf-8").Write(new) ; 删完了写回原 TXT 文档</code></pre><p>第二种是在关闭书籍显示或阅读结束时，把行号加入读取的文本里最后一行存起来。为了避免书的最后一行本身是数字，需要在行号的前面加一些特殊符号（我使用的是「&amp;&amp;」）来避免误会。</p><pre class="language-null"><code>Loop Read, book_file, "UTF-8" ; 读取书籍内容到 book 变量
-{
-if Trim(A_LoopReadLine) != ""
-book.Push(A_LoopReadLine)
-}
-
-if SubStr(book[book.length], 1, 2) != "&amp;&amp;" ; 如果当前文档最后一行不是以“&amp;&amp;”开头，那么说明是首次打开，
-{
-FileOpen(book_file, "a", "utf-8-RAW").Write("&amp;&amp; 1") ; 在文档最后一行添加 &amp;&amp; + 行号
-book.Push("&amp;&amp; 1")
-}
-book_index:= StrSplit(book[book.length], " ")[-1] ; 分离出行号
-
-; 下面是关闭书籍显示或结束阅读时加行号的操作
-FileOpen(book_file, "a", "utf-8").Write(" " . book_index)</code></pre><p>由于上面两种方法都会删改书本内容，我总觉得有点别扭。因此，目前我使用的是第三种方法——把行号放在 TXT 文档的文件名里。</p><pre class="language-null"><code>; TXT 文档的地址和原始文件名 book.txt
-book_path:= "D:\ahk"
-book_file:= "D:\ahk\book.txt"
-
-; 在文档所在位置匹配文件名带 book 的文档
-Loop Files, book_path . "book*.txt", "R"
-book_file:= A_LoopFileFullPath
-if StrSplit(book_file, "")[-1] = "book.txt" ; 如果文件名没有包含数字，那么说明是首次打开
-{
-FileMove(book_file, book_path . "book1.txt") ; 将文档重命名为 book + 行号
-book_file:= book_path . "book1.txt"
-}
-book_index:= SubStr(StrSplit(StrSplit(book_file, "")[-1], ".")[1], 5) ; 截取文件名中的数字，即行号
-
-; 下面是关闭书籍显示或结束阅读时加行号的操作
-FileMove(book_file, book_path . "book" . book_index . ".txt")</code></pre><p>其他方法包括在同路径下新建一个文本，类似单词模式下的 favourites.txt，专门用来存放读到哪里，同样也可以避免反复删改原文档。唯一需要记得的是，在换书的时候，应该删掉或重置这个只记录行号的文件。</p><h2>未来可能的扩展：画个饼</h2><p>作为纯粹的业余人士，我愿意稍微花点时间（其实也花不了多少时间），来折腾一些小工具，提高自己的工作或学习效率，是因为比起别人设定好的软件，只有我才真正知晓自己的需求。</p><p>我目前写好的脚本，在实现背单词和看书的基本功能的同时，在界面整洁（根本没界面）、保护颈椎（减少低头看手机的时间）、防止焦虑（没有设置学习任务）、稳定情绪（不需要在同事凑过来的时候匆忙关闭软件或文档）等方面，还有着独特的优势。</p><p>而且，如果哪天我想要使用更多功能，不需要等待开发者，只要自己动手就可以将它改造为「威力增强版」，下面举几个我想到的栗子和实现方式。</p><h3>对于背单词模式：</h3><p><strong>第一，我可以在测试模式里设置难度，或者说从更多维度考查自己记忆单词的程度。</strong></p><p>例如，在困难模式下，将音标和释义进一步分离，每次只随机显示一项；而在简单模式下，显示单词的随机几个字母拼写，比如将「苹果」对应的单词显示为「a _ _ l _」。</p><p>这个操作的实现并不复杂，只需要结合使用随机数生成（Random）+ 截取字符串（StrSplit、SubStr）就可以实现，这样测试单词的效果就很接近于现实中的单词软件。</p><p><strong>第二，我可以更集中地学习一批单词，有点类似于设置学习任务。</strong></p><p>如果觉得单词表里的词汇太多，不利于集中学习怎么办。我们没有必要手动地去复制出 20个单词到原来的 words.txt 文档内，而是可以写脚本从单词表中随机挑选 20 个，存放到一个新文档中，然后将学习的词汇表切换至这个文档进行反复学习，并通过测试模式检验拼写。等到这 20 个单词学得差不多了，再自动或点击热键来补充到 20 个。</p><p>关于这部分内容的实现，可以参考上面提到的随机数生成，以及加入到收藏和删除单词的写法。</p><p><strong>第三，我可以记录每个单词的学习次数，或单词最近一次出现的时间，随机但优先显示学习次数较少、上次出现时间较久远的词汇。</strong></p><p>这一升级最好是结合上面的学习任务进行。我们需要相应记录词汇出现的频率表，用某种数据结构或算法来调整接下来出现的单词。比如，每次需要显示单词的时候，根据每个词汇出现次数和上次出现时间计算出一个权重，仅在权重前 50% 的单词中随机显示单词。显示单词的同时，需要相应更新该词汇的出现次数（+1），并记下它最后出现时间。</p><p>AutoHotkey 中提供了排序算法（Sort），也能够很精确地记录时间（年、月、日、时、分、秒，分别对应 A_YYYY、A_MM、A_DD、A_Hour、A_Min、A_Sec 这个内置变量），其他诸如写入和读取文档的方法，在上文中也已经出现过，实现起来确实稍复杂但也不算困难。主要难度可能在于权重计算公式的合理性，要简化的话，可以考虑只考虑出现的次数或最后出现时间的一项。</p><p><strong>第四，计算权重完全也可以不依赖学习的次数，而是自己的主观感受。</strong></p><p>我们可以把删除单词和收藏单词改造为「太简单」和「记不清」两个热键。给每个单词一个初始分数 0 分，如果单词「太简单」，则扣除一定分数，「记不清」则增加一定的分数，如果普通地过掉单词，则分数不增不减。根据单词分数的高低，决定其出现的概率，低分不出现，高分多出现。</p><p><strong>第五，我们还可以做得再像背单词软件一点，对我们的学习成果做一个记录和分析，比如今天学会多少个单词，近一周学了多少个单词……</strong></p><h3>对于读书模式：</h3><p><strong>第一，如果想要同时读多本书，可以考虑添加一个</strong>「<strong>书架</strong>」<strong>。</strong></p><p>具体的操作上，也就是增加一个记录书籍文件名称的文档，并设置热键切换在读书籍。至于上面提到的行号记录，就可以放在这个文档中。</p><p>这个「书架」文档可以手动维护，也利用脚本自动维护，方法是读取目录下的全部 TXT 文档，添加至「书架」文档中。如何读取目录下名字符合一定条件的全部文档，以及如何维护文档内容，在本文中亦均有提及。</p><p><strong>第二，如果读书模式读的是外文书籍，可以增加一个翻译热键。</strong></p><p>利用各大词典或翻译工具、AI 工具的接口，翻译当前显示行内容为中文。这里同样可以利用剪贴板 + 其他软件的快捷键来使用。如果没有其他软件，那么可以参考我的<a href="https://sspai.com/post/96562" target="_blank">上一篇文章</a>，让 AutoHotkey 再辛苦兼职一下翻译功能。</p><p>不过，对我而言，现有的功能就已经十分足够。加上这些东西不是不好，也不是实现不了，可我总觉得，随着软件变得复杂，学习目标变得明确，可能会让我太过执着于「学到」点什么，失去了在工作间隙无痛地摄入零碎知识的初心。也许，这样一来，我将会逐渐地不想要使用这些功能了。</p><p>最后，是背单词和读书模式的完整代码：</p><pre class="language-null"><code>#Requires AutoHotkey v2.0
-; 文档的默认地址为“D:\ahk\”
-; 单词本和书本的默认名字分别为“words.txt”和“book.txt”
-
-; 背单词模式
-words_list:= []
-word_index:= 1
-words_path:= "D:\ahk\"
-words_flag:= false
-dict_flag:= false
-favourite_flag:= false
-exam_flag:= false
-words_last_press:= A_TickCount
-
-^XButton1:: words_mode()
-words_mode()
-{
-global
-words_last_press:= A_TickCount
-words_flag:= !words_flag
-words_list:= []
-if words_flag
-{
-if !FileExist(words_path . "favourites.txt")
-FileOpen(words_path . "favourites.txt", "w", "UTF-8").Write(Chr(0xFEFF) "")
-Loop Read, words_path . "words.txt", "UTF-8-RAW"
-words_list.Push(A_LoopReadLine)
-SetTimer words_check, 120 * 1000
-ToolTip Format("开始")
-SetTimer () =&gt; ToolTip(), -1200
-}
-else
-{
-dict_flag:= false
-SetTimer words_check, 0
-ToolTip ("结束")
-SetTimer () =&gt; ToolTip(), -800
-}
-}
-
-words_check() {
-if A_TickCount - words_last_press &gt;= 600 * 1000
-words_mode
-}
-
-#HotIf words_flag
-^MButton::
-{
-global exam_flag
-exam_flag:= !exam_flag
-if exam_flag
-ToolTip("测试模式")
-else
-ToolTip("普通模式")
-SetTimer () =&gt; ToolTip(), -800
-}
-
-+XButton1::
-{
-global favourite_flag, words_list
-words_list:= []
-favourite_flag:= !favourite_flag
-if favourite_flag
-{
-Loop Read, words_path . "favourites.txt", "UTF-8-RAW"
-words_list.Push(A_LoopReadLine)
-ToolTip Format("复习模式")
-}
-else
-{
-Loop Read, words_path . "words.txt", "UTF-8-RAW"
-words_list.Push(A_LoopReadLine)
-ToolTip Format("结束复习")
-}
-SetTimer () =&gt; ToolTip(), -800
-}
-
-XButton1::
-{
-global words_list, dict_flag, word_index, words_last_press
-words_last_press:= A_TickCount
-word_index:= Random(1, words_list.Length)
-try
-{
-word1:= StrSplit(words_list[word_index], " ", , 2)[1]
-word2:= StrSplit(words_list[word_index], " ", , 2)[2]
-if exam_flag
-ToolTip(word2)
-else
-ToolTip(word1)
-KeyWait("LButton", "D")
-ToolTip(word1 . "`n" . word2)
-dict_flag:= true
-}
-}
-#HotIf
-
-#HotIf dict_flag
-LButton::
-{
-global dict_flag
-dict_flag:= false
-ToolTip()
-}
-
-d::
-{
-tmp:= ClipboardAll()
-A_Clipboard:= StrSplit(words_list[word_index], " ", 2)[1]
-Send "^+c"
-A_Clipboard:= tmp
-}
-
-s::
-{
-global dict_flag
-if !Instr(FileRead(words_path . "favourites.txt"), words_list[word_index])
-FileOpen(words_path . "favourites.txt", "a", "utf-8").Write(words_list[word_index] . "`n") 
-dict_flag:= false
-ToolTip Format("加入收藏：{}", StrSplit(words_list[word_index], " ", 2)[1])
-SetTimer () =&gt; ToolTip(), -1200
-}
-
-RButton::
-{
-global words_list, dict_flag
-words_list.RemoveAt(word_index)
-new_list:= ""
-for i in words_list
-new_list.= i "`n"
-if favourite_flag
-FileOpen(words_path . "favourites.txt", "w", "utf-8").Write(new_list)
-else
-FileOpen(words_path . "words.txt", "w", "utf-8").Write(new_list)
-dict_flag:= false
-ToolTip()
-}
-#HotIf
-
-; 读书模式
-book_index:= 1
-book_path:= "D:\ahk\"
-book_file:= "D:\ahk\book.txt"
-book:= []
-book_flag:= false
-reading_flag:= false
-book_last_press:= A_TickCount
-
-^XButton2:: book_mode()
-book_mode()
-{
-global book_flag, book, book_index, book_file, book_last_press, reading_flag
-book_flag:= !book_flag
-book_last_press:= A_TickCount
-if book_flag
-{
-Loop Files, book_path . "book*.txt", "R"
-book_file:= A_LoopFileFullPath
-if StrSplit(book_file, "\")[-1] = "book.txt"
-{
-FileMove(book_file, book_path . "book1.txt")
-book_file:= book_path . "book1.txt"
-}
-book_index:= SubStr(StrSplit(StrSplit(book_file, "\")[-1], ".")[1], 5)
-Loop Read, book_file, "UTF-8"
-{
-if Trim(A_LoopReadLine) != ""
-book.Push(A_LoopReadLine) 
-}
-SetTimer book_check, 120 * 1000
-ToolTip("开始")
-SetTimer () =&gt; ToolTip(), -800
-}
-else
-{
-SetTimer book_check, 0
-reading_flag:= false
-FileMove(book_file, book_path . "book" . book_index . ".txt")
-ToolTip("结束")
-SetTimer () =&gt; ToolTip(), -800
-}
-}
-
-book_check() 
-{
-if A_TickCount - book_last_press &gt;= 600 * 1000
-book_mode
-}
-
-split_string(s, len:= 25)
-{
-result:= ""
-Loop Parse s
-{
-result.= A_LoopField
-if (Mod(A_Index, len) = 0)
-result.= "`n"
-}
-return result
-}
-
-#HotIf book_flag
-MButton::
-{
-global reading_flag, book_file, book_last_press
-book_last_press:= A_TickCount
-reading_flag:= !reading_flag
-if reading_flag
-{
-try
-ToolTip(split_string(book[book_index]))
-}
-else
-{
-FileMove(book_file, book_path . "book" . book_index . ".txt")
-book_file:= book_path . "book" . book_index . ".txt"
-ToolTip()
-}
-}
-#HotIf
-
-#HotIf reading_flag
-WheelDown::
-{
-global book_index, book_last_press
-book_last_press:= A_TickCount
-book_index:= Min(book.length, book_index + 1)
-ToolTip(split_string(book[book_index]))
-}
-WheelUp::
-{
-global book_index, book_last_press
-book_last_press:= A_TickCount
-book_index:= Max(1, book_index - 1)
-ToolTip(split_string(book[book_index]))
-}
-#HotIf</code></pre><p style="margin-left: 0px;">&gt; 关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/101383</id>
-            <title>派早报：Firefox 中国版宣布停止服务</title>
-            <link>https://sspai.com/post/101383</link>
-            <guid isPermaLink="false">https://sspai.com/post/101383</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 28 Jul 2025 00:53:04 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Firefox中国版, 懂车帝测试, 英伟达芯片维修, 谷歌街景侵权  
-<br>  
-<br>  
-总结: Firefox中国版宣布2025年9月29日后停止运营，不再提供下载和新用户注册，Mozilla将自行或授权第三方继续运营。懂车帝进行的辅助驾驶测试显示多品牌表现不佳，引发争议，特斯拉成绩最好但强调安全第一。英伟达被禁芯片在中国维修需求激增，维修商每月修复多达500张卡，费用1万至2万元。阿根廷法院判决谷歌街景拍摄私人院落裸体构成侵权，需赔偿并删除图像。美国一女子因协助朝鲜IT人员远程应聘被判监禁，涉案金额约1700万美元。英国用户利用《死亡搁浅2》游戏绕过年龄认证，VPN使用量激增。 </div>
-                        <hr>
-                    
-                    <h2>你可能错过的新鲜事</h2><h3>Firefox 中国版宣布停止服务</h3><p>7 月 27 日，由北京谋智火狐信息技术有限公司运营的 Firefox 中国版网站发布<a href="https://www.firefox.com.cn/farewell/">公告</a>称，将于 2025 年 9 月 29 日后正式终止与 Mozilla 及 Firefox 浏览器相关的中国大陆运营。Firefox 浏览器将在中国大陆继续可用并保持全部功能。</p><p>根据公告中的背景说明，北京火狐原在中国大陆负责部分 Firefox 浏览器相关业务。2025 年 5 月 8 日，Mozilla 与北京火狐达成一致，北京火狐将不再运营 Firefox 浏览器及任何与 Firefox 有关的中国大陆业务。北京火狐将停止使用 Mozilla 授权的商标、版权及域名。同时，北京火狐将全力配合 Mozilla 确保用户的平稳过渡。后续 Mozilla 将自行或通过授权的第三方，继续在中国大陆负责 Firefox 浏览器及 Firefox 社区的相关运营。</p><p>公告称，自即日起，Firefox 火狐中文官方网站将不再提供 Firefox 浏览器的下载；中国专版的火狐通行证、火狐社区将不再接受新用户注册。自 9 月 29 日晚 24:00 起，火狐中文官方网站、火狐社区网站、火狐通行证账户服务及 火狐主页将正式停止运营，所有功能将终止。</p><p>北京火狐最初<a href="https://blog.mozilla.org/press/2005/03/mozilla-foundation-expands-with-launch-of-mozilla-china/">成立</a>于 2005 年，由 Mozilla 基金会资助，中科院软件研究所和 Sun（中国）工程研究院派员出任主席。2013 年，Firefox 中国版被发现<a href="https://web.archive.org/web/20220614101600/https://www.oschina.net/news/46238/firefox-cn-do-some-evil?p=2">劫持</a>用户的快速拨号链接，为京东链接添加返利代码；2022 年，在被国内多家公司起诉要求停止拦截广告后，Firefox 中国版<a href="https://web.archive.org/web/20220613103956/https://www.oschina.net/news/187492/firefox-block-china-ip-ad-extension">屏蔽</a>了国内用户访问 uBlock Origin 等知名插件的下载页面。加上存在捆绑插件等问题，长期许多网上评论建议切勿安装该版本，而应当<a href="https://ftp.mozilla.org/pub/firefox/releases/">从国际版渠道下载安装</a>。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/28/611d0a706ad77990d6f3b47564ab6cbd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Firefox 中国版篡改快速拨号的代码，并注释 <i>do some evil here</i>（来源：OSChina）</figcaption></figure><h3>懂车帝辅助驾驶事故模拟测试引争议</h3><p>据澎湃新闻<a href="https://www.thepaper.cn/newsDetail_forward_31247506">报道</a>，近日，汽车信息平台「懂车帝」发起了一场模拟辅助驾驶真实事故场景的「科普实验」。事故场景模拟选择真实高速公路与城市道路，模拟出真实车流，共 15 个科目，国内外 20 多个品牌、近 40 款车型参测。视频显示，高速夜间遇施工和卡车场景，仅 47% 的测试车辆能安全避让；儿童突然冲出过马路场景，58% 的测试车辆能有效刹停。</p><p>从参与车型和测试科目来看，这是目前比较少见的国内大规模辅助驾驶测试，但多个品牌的测试结果并不理想，测试的手段和方法也存在不小的争议。根据网上流传的两张表格，测试结果最好的是特斯拉，在 36 款车「高速事故场景模拟」综合表现中，15 款车为「0 通过」。</p><p>7 月 25 日，特斯拉 CEO 马斯克在社交平台转发视频称，特斯拉在无本地训练数据情况下，在中国取得了最高成绩。特斯拉副总裁陶琳在微博发文说：「这次测试的结果我们和大家一样都是从媒体上看到的，我们不关注排名，因为任何测试、排名都是相对的、短暂的，但对安全的要求却没有上限。同时，也希望大家看到，这次测试的本意并不是排名，而是提醒大家专注路况，安全第一。」同日，智界汽车、AITO 汽车、鸿蒙智行分别在官方微博发文称：已看到某平台所谓「测试」，不予置评。</p><p>懂车帝向记者表示，此次推出的是一档辅助驾驶科普节目，旨在提醒公众正确认识辅助驾驶的相关功能和安全边界，提高安全驾驶意识，未做过任何官方排名。原本声称与懂车帝联合发布视频的央视新闻则在 26 日编辑微博，删去了「联合」的表述。</p><p>此前在 7 月 23 日的国务院新闻发布会上，公安部交通管理局局长王强表示，目前我国市场上销售的汽车搭载的「智驾」系统都不具备「自动驾驶」功能，驾驶人才是最终的责任主体。如果在驾驶车辆的时候两眼不是观察前方，而是低头看手机，甚至是睡觉打盹，不仅存在严重的交通安全风险，一旦出事，还可能面临着民事赔偿、行政处罚和刑事追责三重法律风险。</p><h3>受限制英伟达芯片在国内维修需求激增</h3><p>据路透社<a href="https://www.reuters.com/world/china/china-repair-demand-banned-nvidia-ai-chipsets-booms-2025-07-24/">报道</a>，高端英伟达芯片维修服务正在中国迅速发展。深圳等地的多家技术公司已开始承接此类业务，主要维修通过非官方渠道流入中国的英伟达 H100 及 A100 等被禁售的 GPU 产品。</p><p>有深圳的维修公司透露，其业务量已增长到每月可修复多达 500 张卡，并为此专门设立了新公司。维修商表示，许多卡在数据中心全天候高强度运算，导致其故障率相对较高，通常在使用两到五年后便需要维修。根据问题的复杂程度，单次维修费用在 1 万至 2 万元人民币不等，服务范围包括软件测试、电路板及显存故障诊断修复等。</p><p>尽管中国本土已有华为等公司推出的 AI 芯片，且英伟达也向中国市场提供了符合出口管制规定的 H20 芯片，但对于追求极致性能的公司而言，H100 等旗舰产品依然是首选。</p><p>对此，英伟达官方回应称，公司及其授权合作伙伴是唯一能够为客户提供所需服务和支持的渠道，并且公司无法为在中国境内的受限产品提供合法的维修或更换服务。有渠道商称，目前已有客户开始求购英伟达最新一代的 B200 芯片，其在非官方市场的服务器售价已超过 300 万元人民币。</p><h3>阿根廷法院判决谷歌街景拍到私人院内后身裸体构成侵权</h3><p>据阿根廷《民族报》<a href="https://www.lanacion.com.ar/tecnologia/estaba-desnudo-en-su-jardin-de-bragado-paso-el-auto-de-google-y-lo-inmortalizo-en-street-view-nid23072025/">报道</a>，阿根廷一家民事上诉法院近日裁定，谷歌需向一名男子支付三百万比索（约合人民币 1.68 万元）的赔偿金。该男子在私家院落的后身裸照被谷歌街景（Google Street View）服务拍摄并发布在网上。法院认为，这一行为构成了对个人隐私的非法侵犯。</p><p>该男子最初于 2017 年提起诉讼，称谷歌街景车在采集街景数据时，其高位摄像头越过了一道超过两米高的围墙，捕捉到了他在自家院子里的裸体画面。他声称，由于他是一名警察，照片经当地媒体报道后，他成为了社区的笑柄，并承受了巨大的精神压力，严重影响家庭和职业生活。</p><p>一审时，法院驳回了该男子的诉讼请求，认为照片中的人物只有背面，难以识别，还批评原告在可能被邻居看到的地方裸露身体，行为不雅在先。上诉法院最终推翻了原判，指出尽管照片未拍到面部，但其房屋的门牌号码清晰可见，足以识别当事人住址。法官强调，该图像拍摄于私人住宅范围内，而非公共街道，构成公然的隐私侵犯。</p><p>谷歌方面辩称，街景服务会对人脸和车牌自动打码，并为用户提供了申请全身打码的渠道。但上诉法院认为，谷歌的街景服务本身属于具有法律风险的商业活动，未能采取足够措施避免此类损害。法院最终命令谷歌删除该男子图像，否则将面临每日 10 万比索（人民币 560 元）的罚款。</p><h3>美国人因协助朝鲜远程 IT 应聘被判监禁</h3><p>据 <i>The Record</i> <a href="https://therecord.media/arizona-woman-sentenced-north-korean-laptop-farm">报道</a>，一名美国亚利桑那州的 TikTok 网红，因运营「笔记本电脑农场」、协助朝鲜 IT 人员渗透美国公司并赚取外汇，被联邦地区法院判处八年半（102 个月）监禁。这起案件被美国司法部称为其起诉过的最大规模的朝鲜 IT 劳工欺诈案之一。美国指控，该计划通过窃取美国公民身份，为朝鲜创造了约 1700 万美元的收入。</p><p>根据检方信息，现年 50 岁的 Christina Chapman 承认充当朝鲜 IT 人员在美国的「中转站」，利用 68 个被盗用的美国公民身份，帮助朝鲜人员获得了超过 300 家美国公司的远程 IT 职位，其中不乏知名电视网络、汽车制造商和硅谷科技公司。当这些公司将工作设备寄到 Chapman 的住处后，她会负责设置，使身处海外的朝鲜人员能远程接入公司网络工作。</p><p>FBI 在 2023 年 10 月的一次突袭中从 Chapman 家中查获了超过 90 台笔记本电脑。除了提供技术支持，Chapman 还负责伪造工资支票，兑现后转移至海外。此外，她还将 49 台笔记本电脑运往海外，部分包裹的目的地是中朝边境。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/28/77ded69e9f74eb0de6cfc248ac35e195.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>（来源：美国司法部）</figcaption></figure><p>一同被起诉的还有一名乌克兰籍共犯，目前美国正在寻求从波兰将其引渡。宣判当天，美国多个政府机构也宣布了针对该计划的新制裁措施，并悬赏以获取朝鲜人员的信息。</p><h3>英国用户使用《死亡搁浅 2》绕过年龄认证</h3><p>据 <i>PC Gamer</i> <a href="https://www.pcgamer.com/hardware/brits-can-get-around-discords-age-verification-thanks-to-death-strandings-photo-mode-bypassing-the-measure-introduced-with-the-uks-online-safety-act-we-tried-it-and-it-works-thanks-kojima/">报道</a>，7 月 25 日起，英国一项旨在限制未成年人访问成人网站的新法规生效，结果已经催生了多种规避手段。</p><p>其中，部分玩家利用 PlayStation 5 游戏《死亡搁浅 2》中的照片模式，向摄像头展示主角 Sam Porter 的面部，成功绕过了网站的人脸识别年龄验证系统。据玩家分享，这是因为《死亡搁浅 2》中主角的角色模型逼真，而游戏的照片模式允许玩家精细调整其面部表情，例如张嘴、闭眼等，恰好能满足一些验证系统提出的动作要求。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/28/3d6ba8367b5abbacbbdc2e1d060ce643.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>（来源：<i>Future</i>）</figcaption></figure><p>此外，用 VPN 隐藏真实地理位置也是英国网民普遍采用的对策。数据显示，在新规生效后，VPN 在英国的在线搜索量一度飙升超过 700%。</p><p>此次生效的新规是英国《在线安全法》（Online Safety Act）的一部分，要求用户在访问成人网站或使用部分社交平台的成人内容功能时，必须通过提交身份证件、信用卡信息或扫描自拍等方式，证明自己年满 18 岁。</p><p>对此，Pornhub 的母公司 Aylo 批评称，这类强制验证措施「无效、混乱且危险」，不仅将用户的隐私和安全置于风险之中，还可能导致用户流向那些不受监管、内容更危险的小型网站。该公司主张，更有效的解决方案应是在设备端验证，而非在网站层面收集用户的敏感个人信息。</p><h2>看看就行的小道消息</h2><ul><li>据 <i>The Verge</i> <a href="https://www.theverge.com/notepad-microsoft-newsletter/712950/openai-gpt-5-model-release-date-notepad">报道</a>，OpenAI 准备最早于 8 月推出 GPT-5。微软工程师早在 5 月底就开始为 GPT-5 准备服务器，但由于测试和开发方面的问题推迟 OpenAI 计划推出 GPT-5 标准版、mini 版和 nano 版（仅限 API 访问）。部分 X 用户已发现 gpt-5-reasoning-alpha-2025-07-13 模型在代码中出现。</li><li>据网友注意到，华为香港官网明确标注 Pura80 Pro 和 Pura80 Ultra 手机搭载麒麟 9020 处理器。该信息在国内官网并未标注，且华为在公开场合始终讳提。</li><li>据 <i>MacRumors</i> 援引自称来自苹果合作影视公司的匿名消息源<a href="https://www.macrumors.com/2025/07/27/iphone-17-pro-camera-rumors/">报道</a>，iPhone 17 Pro 将支持一个专业版相机应用，还将有 8 倍长焦和靠近顶部的额外相机控制按钮；<i>MacRumors</i> 对此表示应持怀疑态度。</li></ul><h2>少数派的近期动态</h2><ul><li>异泽十三合一扩展坞充电站，现已上线。<a href="https://sspai.com/create/egiozr"><strong>进一步了解</strong></a></li><li>扭扭宝——一个可以扭的充电宝。<a href="https://sspai.com/create/blacktime"><strong>进一步了解</strong></a></li></ul><h2>你可能错过的好文章</h2><ul><li><a href="https://sspai.com/post/101027">具透 | 新设计、桌面化……iPadOS 26 中你值得关注的新功能</a></li><li><a href="https://sspai.com/post/101340">一日一技 | 如何用命令行将音乐转码到 iTunes Plus AAC</a></li><li><a href="https://sspai.com/post/101347">本周看什么 | 最近值得一看的 9 部作品</a></li><li><a href="https://sspai.com/post/101311">具透 | iOS 26 Public Beta 终于来了，升级以后记得试试这些功能</a></li><li><a href="https://sspai.com/post/101313">iOS / iPadOS 26 Public Beta 公测版来了：升降级指南 &amp; 注意事项</a></li><li><a href="https://sspai.com/post/101243">要做出怎样的音乐，才能被看见？</a></li></ul>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/101027</id>
-            <title>具透 | 新设计、桌面化……iPadOS 26 中你值得关注的新功能</title>
-            <link>https://sspai.com/post/101027</link>
-            <guid isPermaLink="false">https://sspai.com/post/101027</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 27 Jul 2025 03:30:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: iPadOS 26, Liquid Glass, 多窗口系统, 公开测试版  
-
-总结:  
-1. iPadOS 26在WWDC 2025上发布，采用统一设计语言Liquid Glass，引入玻璃特效、圆角和曲线设计。  
-2. 新系统增加了多窗口功能，支持自由调整窗口大小和位置，并引入类似macOS的菜单栏和交通灯按钮。  
-3. 外接显示器支持改进，允许选择音频输出设备，但扩展显示仍限于M1及以上机型。  
-4. 新增“预览”应用，支持图像和PDF编辑，复刻macOS功能。  
-5. 文件应用改进，支持选择打开方式、固定文件夹到Dock及自定义文件夹图标。  
-6. 数学笔记支持3D绘图，后台操作功能允许长时间任务运行。  
-7. 新增Apple Pencil笔型和手记应用，增强录制功能和相机界面更新。  
-8. iPadOS 26在多任务和UI设计上更接近macOS，强调功能统一和用户体验改进。 </div>
-                        <hr>
-                    
-                    <p style="margin-left: 0cm;">作为 WWDC 2025&nbsp;主题演讲上最后一个登场的系统，Craig 在介绍 iPadOS 26 时难掩语气中的激动和兴奋之情。在经过一个多月、四个开发者预览版本的测试，Apple 终于在 7 月 25 日凌晨一同发布了 iPadOS 26 系统的公开测试版本，iPadOS 26 正式版预计将于<strong>秋季发布</strong>。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/26/5eefedff09e497e151695a4da9dc9b56.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0cm;">在这篇文章中，我们将带大家快速浏览 iPadOS&nbsp;26 中值得尝鲜的新功能。如果你想尝鲜 iPadOS&nbsp;26 公开测试版，可以在&nbsp;<a href="https://beta.apple.com/zh-CN" target="_blank">Apple 官网</a>申请 Apple Beta 版软件计划。</p><p style="margin-left: 0cm;"><strong>关联阅读：</strong><a href="https://sspai.com/post/101313" target="_blank">iOS / iPadOS 26 Public Beta 公测版来了：升降级指南 &amp; 注意事项</a></p><p>接下来让我们一起看看最新的 iPadOS&nbsp;26 都有哪些不容错过的功能更新吧。</p><h2 style="margin-left: 0cm;">统一设计语言 Liquid Glass</h2><p style="margin-left: 0cm;">iPadOS 26&nbsp;采用与其他平台一致的新设计语言，使用玻璃特效来展示界面层级，大幅度引入圆角、曲线，还加大了不同文字项目之间的间距。</p><p style="margin-left: 0cm;">新设计的 app&nbsp;中，控制按钮、标签页栏、侧边栏等均已经采用 Liquid Glass&nbsp;材质，「漂浮」在具体内容的上方。这种材料边缘会根据附近的元素颜色变化颜色，例如在 Apple Music&nbsp;中可以很明显看到侧边栏的最右侧会根据主要内容中的专辑封面显示彩色。如果用 iPadOS 18&nbsp;中更新的菜单栏，你会发现整个顶部菜单栏都是这种材质，内容会根据这个材质被扭曲、折射、散射，仿佛透过透镜观察。</p><p style="margin-left: 0cm;">当你点击按钮，按钮会变形并徐徐展开，这可能就是 Liquid Glass 之所以称为「液体」的原因吧。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/25/e4446dbdf7cc360f9cda434461ced2c3.gif" /><figcaption>一些系统控件可以展开</figcaption></figure><p style="margin-left: 0cm;">液态玻璃的透明度在 4 个 iPadOS 开发者测试版中都有变化。目前测试版中，不管是浅色模式还是深色模式，控件和文字都变得更清晰了，但比最初 WWDC 展示版本看起来磨砂质感强了不少。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/06/14/6fd1c4af87b361dcc56b93034ddda5fc.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/06/14/ec9b951fd40ecbce30f8c9af95d5d2e3.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在 iPad&nbsp;上，Liquid Glass&nbsp;的设计语言看起来更像是 macOS，而不是 iOS。控件按钮几乎都是向 macOS&nbsp;看齐，iOS&nbsp;上的新标签页几乎见不到（除了在小窗口中）。还是以 Music app&nbsp;为例，iPhone&nbsp;上采用了音乐控制在上方、标签页栏在底部的设计；而 iPad&nbsp;和 Mac&nbsp;上都可以见到侧边栏 +&nbsp;右侧底部音乐控制的布局。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/eadd7fb6e6a1a7a96a5407d0d0353503.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>左：iOS 26｜中：iPadOS 26｜右：macOS 26 Tahoe</figcaption></figure><p style="margin-left: 0cm;">不过在测试版本中，风格适配还不是那么全面，特别是第三方 app。例如，系统键盘现在还有 2&nbsp;种形式，一种已经采用新的设计语言，键盘顶部是圆角，另一种还是 iPadOS 18&nbsp;上的键盘。另外，和 macOS 一样，iPadOS 26 中的侧边栏，也会反映壁纸颜色，呈现一种辉光效果。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/07/25/a6d483ea20fbea6920e9463b76b2901b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/07/25/10dbe958d5c51a750573b4c33c7ee6ba.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0cm;">最后，个人感觉 Liquid Glass&nbsp;这种材质似乎天生更适合深色模式，深色模式下的磨砂质感和光效看起来都更柔和、更有科技感，更有「果味」。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/4bc9415c1154dd6c4b4ff768ede7715e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>左图来自 WWDC 2025 Platforms State of the Union</figcaption></figure><p style="margin-left: 0cm;">随着 26&nbsp;版本系统测试的推进，Apple&nbsp;必然也会再精细打磨这套设计语言，让不同 app&nbsp;之间的设计更加统一、让动画效果更加流畅。等到秋季 iPhone 17&nbsp;系列发布时，相信会有更加成熟流畅的 Liquid Glass&nbsp;出现。我们也会持续关注 Liquid Glass 在接下来测试版系统中的动态变化。</p><h2 style="margin-left: 0cm;">多窗口&amp;菜单栏，还不止 Pro&nbsp;才能用</h2><p style="margin-left: 0cm;">发布会上，除了 Liquid Glass&nbsp;给人们带来的视觉「惊喜」，iPadOS&nbsp;还重磅推出了窗口系统，以及类似 macOS&nbsp;的菜单栏。与 iPadOS 16&nbsp;以来「台前调度」一直是 M 系列 iPad&nbsp;的「专利」不同，这次的窗口系统，连带「台前调度」，都下放到了基础款 iPad&nbsp;乃至第六代 iPad mini。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/6b049e23c45ab1312bde8496ad4d3e79.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>在 iPad mini（A17 Pro）上使用多窗口系统</figcaption></figure><p style="margin-left: 0cm;">多窗口带来的好处是显而易见的，而且这次 Apple&nbsp;不再像台前调度中那样自作主张地让人完全摸不到窗口在哪。</p><p style="margin-left: 0cm;">整体而言，iPadOS 26&nbsp;的窗口模式有很高的自由度，如果你用上鼠标和键盘/触控板，可能会觉得整体上和操作一台 Mac&nbsp;无异，甚至连 Mac&nbsp;上的菜单栏和窗口操作都「学」来了。</p><h3 style="margin-left: 0cm;">窗口大小、位置和数量更加自由</h3><p style="margin-left: 0cm;">相对于此前的 iPadOS&nbsp;版本，iPadOS 26&nbsp;中的窗口大小和位置都更加自由。对于那些仅适用于 iPhone&nbsp;的 app（说的就是你 Instagram），会自动以窗口方式打开；其他 app&nbsp;默认还是会以全屏方式打开。但打开文件时，会默认在新的窗口中打开。</p><p style="margin-left: 0cm;">系统 app&nbsp;的窗口几乎都可以非常灵活地更改大小，内部控件则会随着大小更改产生变化。窗口的右下角会显示一个手柄，拖动手柄就可以直接在水平或竖直两个方向上更改窗口的大小，包括将窗口全屏幕化。某些 app，例如音乐和 App Store，会变得和 iOS&nbsp;中类似；Safari&nbsp;则会保留地址栏在顶部的形式，更像是 macOS&nbsp;的形态。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/d8f4dfc5115cd6162306469ddd13117b.gif" /><figcaption>窗口大小可以几乎随意变化</figcaption></figure><p style="margin-left: 0cm;">拖动窗口的顶部就可以随意更改窗口位置，窗口不会自作聪明地想要在哪里停靠，而是会跟随你的手指或者鼠标指针（对了，现在鼠标指针也更像鼠标指针了，而不是一个圆点）停留在你想要的位置。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/944d74d9634251427742d71b99a4908e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0cm;">窗口的大小和位置也会被记住，再次打开它们的时候位置不会更改。</p><p style="margin-left: 0cm;">至于窗口的数量……你想开多少似乎都行（我至少开了十几个窗口），但窗口开很多的情况下，我的 iPad Pro（M1）会发热非常严重而且系统速度显著拖慢，估计是内存有点吃不消。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/0003eb4c2d839376da746babe287d309.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>我开了好多 Safari 窗口</figcaption></figure><h3 style="margin-left: 0cm;">三色交通灯来到 iPadOS</h3><p style="margin-left: 0cm;">对窗口进行操作，在此前的 iPadOS&nbsp;版本是通过屏幕顶部几乎看不见的三个点（Apple 称之为「多任务菜单」）来控制的。</p><p style="margin-left: 0cm;">现在，macOS&nbsp;上大概是最具标志性的设计之一「交通灯窗口操作按钮」也来到了 iPadOS。在窗口的左上角那个熟悉的位置，我们可以关闭窗口、最小化，或者将窗口全屏显示。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/d6fe08655d9e43a1ca4700c507e74d7e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0cm;">关闭窗口（红色）将彻底关闭这个窗口，如果这个窗口还是 app&nbsp;最后一个窗口，那也会直接退出这个 app。</p><p style="margin-left: 0cm;">最小化（黄色）可以把这个窗口最小化到 app&nbsp;图标，只不过 macOS&nbsp;的神奇效果或许要等到 iPadOS 27&nbsp;了。</p><p style="margin-left: 0cm;">全屏幕（绿色）按钮可以让app&nbsp;全屏运行或者回到原来的窗口大小。在这里右键点击，还可以快速给窗口布局，就像在 macOS&nbsp;上一样。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/0f453be34b35521ce5c5cfcef77a1598.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>在 iPad mini&nbsp;上尝试自动布局，如果选择四宫格，窗口会因为无法再压缩而显示不全或者重叠</figcaption></figure><h3 style="margin-left: 0cm;">管理多个窗口：Mission Control&nbsp;与 App Exposé</h3><p style="margin-left: 0cm;">iPadOS 18 中，默认情况下从文件 app&nbsp;打开一个新的文件时，文件会在新的窗口中打开，就和在 macOS&nbsp;上类似。但随着打开的文件越多，窗口也会越积越多，最后难以查找。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/d02479f2cb20b6326b5aed43f3f19aff.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Exposé 显示所有窗口</figcaption></figure><p style="margin-left: 0cm;">iPadOS 26&nbsp;可以方便地查看目前打开的所有窗口，类似 macOS&nbsp;上的 Exposé。此外，和以前的 iPadOS&nbsp;一样，可以通过某个 app&nbsp;打开时点击它的图标，打开 App Exposé，查看当前 app&nbsp;打开的所有窗口。在调度中心与 App Exposé，可以上划某个窗口来关闭它。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/97480259a6b8eaebb23d9ffd90c76e93.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>App Exposé</figcaption></figure><h3 style="margin-left: 0cm;">菜单栏</h3><p style="margin-left: 0cm;">与 macOS&nbsp;类似的屏幕顶部菜单栏，也下放到了 iPadOS&nbsp;上。触摸屏上，手指从屏幕顶端向下划动；或者使用鼠标键盘时将指针移动到屏幕顶端，就可以看到菜单栏，并进行操作。</p><p style="margin-left: 0cm;">以往，我们需要外接键盘并长按 Command/地球键才能够看到的快捷操作，这次完全融入了屏幕顶部的菜单栏中，可以在这里直接进行各类操作，甚至 macOS&nbsp;上的神器「命令搜索」也搬过来了，可以在「帮助」菜单项中搜索你想要的操作。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/d11450a123d92e2d729eda8e6c54ca0e.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>可以在菜单栏直接搜索指令</figcaption></figure><h3 style="margin-left: 0cm;">台前调度：加入不同窗口组</h3><p style="margin-left: 0cm;">iPadOS 26&nbsp;中，如果你只打开「多窗口」，那么所有的窗口都在一个工作空间内打开。如果你想保存窗口布局供下次使用，那么可以使用「台前调度」功能，它会将窗口组保存起来，可以快速在不同的 app&nbsp;组合之间进行切换。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/9260aed63ecd8f0eb6e8bd113dae4145.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>使用台前调度保留窗口组以备稍后使用</figcaption></figure><h3 style="margin-left: 0cm;">外接显示器支持</h3><p style="margin-left: 0cm;">外接显示器支持是从 iPadOS 16 时代引入 Stage Manager 后开始的。由于 Stage Manager 当时总有些奇奇怪怪的限制，所以外接显示器也相对比较难用。iPadOS 17 中，加入了对外接显示器中的摄像头的支持，同时窗口变形更加灵活。</p><p style="margin-left: 0cm;">在 iPadOS 26 中，窗口的数量限制有所增加，且外接显示器时终于可以选择播放声音的扬声器了，不再是统一一个无法调节音量的「基座接口」，而是可以选择使用 iPad 扬声器播放音频。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/a6c65f8439cd1f8377e48b3aeabb09ed.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>连接到外接显示器时，可以选择使用 iPad 扬声器作为声音输出</figcaption></figure><p style="margin-left: 0cm;">不过，目前依然没办法在关闭内置屏幕的时候，使用外接屏幕？外接显示器扩展支持也仅适用于 M1 及以后的的 iPad Pro 和 iPad Air，尽管其他 iPad 机型也已经支持多窗口，但外接显示器时仍然只能镜像使用。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/7817f28ef34f53182c3ecee762869046.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>支持的 iPad Pro 和 iPad Air 机型，在「设置」中可以选择扩展显示器使用</figcaption></figure><h3 style="margin-left: 0cm;">侧拉和分屏成为历史</h3><p style="margin-left: 0cm;">整体来看，iPadOS 终于有了一个桌面级的多窗口系统，但原来的「侧拉」和「分屏」功能正式从 iPadOS&nbsp;中消失了，似乎这个功能从 iOS 9&nbsp;到 iPadOS 18 也有 10&nbsp;年了。</p><figure class="image ss-img-wrapper"><img alt="Safari and Notes in Slide Over." src="https://cdnfile.sspai.com/2025/06/14/article/ab3e5e469070ace63fcccd2ee49fc230.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>iOS 9 中的侧拉（来源：MacRumors）</figcaption></figure><p style="margin-left: 0cm;">对于不需要特别复杂多任务的设备，例如 iPad mini，侧拉其实非常理想，例如我在打崩铁的时候可以回微信、刷知乎等等。但现在 iPad mini&nbsp;也直接配置了这套多窗口系统，想回个消息需要暂停游戏了。</p><h3 style="margin-left: 0cm;">小结</h3><p>iPadOS 26&nbsp;在多任务功能上，终于「无限接近」macOS&nbsp;了。多窗口、三色灯，各项功能明显都是向 macOS&nbsp;看齐的。</p><p>很多人或许会问，为什么不直接让 iPad&nbsp;运行 macOS，我想答案还是因为 iPad&nbsp;本身的多面手属性：它支持 Apple&nbsp;设备家族中最多种类的输入方式（触屏、键盘鼠标、Apple Pencil），它从一出生就是一个融合产品，是 iPhone&nbsp;和MacBook&nbsp;之间的产品。这让 iPad&nbsp;的定位既清晰又模糊，或许在很大程度上给了用户更多使用这个产品的「自主权」。</p><p style="margin-left: 0cm;">在过去，iPadOS&nbsp;确实很大程度上限制了 iPad&nbsp;的潜力，但 iPadOS 26&nbsp;的出现证明 Apple&nbsp;也意识到这一点并且正在慢慢改进。iPadOS 26&nbsp;的窗口系统总体来看就是最适合 iPad&nbsp;的多任务系统，它确实在一定程度上找到了各种输入方式的平衡点，让触摸操作窗口没那么奇怪，让鼠标键盘操作起来又感觉比较自然。</p><h2 style="margin-left: 0cm;">全新预览 app</h2><p style="margin-left: 0cm;">macOS&nbsp;上默认帮大家打开照片、PDF&nbsp;等文档的「预览」app，这次也在 iPadOS&nbsp;和 iOS&nbsp;上登场了。</p><p style="margin-left: 0cm;">在 iPadOS 26&nbsp;中，「预览」app&nbsp;默认采用了在 iWork&nbsp;三件套中实装的新的文件类 app&nbsp;布局，展示最近使用的文件等项目。</p><p style="margin-left: 0cm;">以前的 iPadOS&nbsp;版本中，相关预览功能直接集成在「文件」app&nbsp;中，浏览文件时打开 PDF&nbsp;或者图片会直接在「文件」app&nbsp;中打开预览；但现在会直接跳转到全新的「预览」app。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/dcac28b7c30578cbce839e97c8916c40.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0cm;">很大程度上 iPadOS&nbsp;上的「预览」复刻了 macOS&nbsp;上的功能。首先，可以像在 macOS&nbsp;中那样直接从剪贴板新建图像，也可以使用 iPad&nbsp;的摄像头扫描文档。新建的文件和扫描的文档会直接存储在当前的浏览的文件夹里。因此，可以把预览 app&nbsp;当作一个简单的画板来使用，创作的画作等等都可以直接以文件的形式保存。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/fa0f4e9924f25b6dc9a7b43fe3991a1f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>在「预览」app 中调整图片大小</figcaption></figure><p style="margin-left: 0cm;">其次，iPadOS「预览」打开图像和 PDF，都可以对其进行一定程度的简单编辑，操作包括调整图像大小、插入PDF页面、旋转图像等等。当然，Apple Pencil&nbsp;标注是 iPad&nbsp;的特色，可以使用 Apple Pencil&nbsp;直接在 PDF&nbsp;或者图片上涂画。此外，还可以直接在「预览」中查看图像的详细信息，比如你是从相机中导入的图像，那么可以查看 EXIF、GPS&nbsp;和 TIFF&nbsp;等详细信息。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/21f9c54ebf6554178e14e9ef4d305eb4.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>直接在「预览」app 中查看图片详细的 EXIF 等信息</figcaption></figure><h2 style="margin-left: 0cm;">文件 app&nbsp;多项改进</h2><p style="margin-left: 0cm;">作为 iPad「生产力」的一环，文件 app&nbsp;在 iPadOS 26&nbsp;中也获得了诸多改进，更贴近 Mac&nbsp;上的访达。</p><p style="margin-left: 0cm;">首先，对于文件，可以选择打开方式。iPadOS 18&nbsp;中需要通过点击「分享」按钮才能够选择文件在哪个 app&nbsp;中打开，否则会使用默认打开方式打开文件；但在 iPadOS 26&nbsp;中，可以直接右键（或者长按）文件弹出菜单，选择打开方式。iPadOS&nbsp;会自动列出 iPad&nbsp;上可以打开这个文件的 app&nbsp;供选择。此外，也可以选择默认不使用 app 打开，而是使用快速查看，预览支持的文件。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/25/cf7242c7e3d12a0024a9093f85fb8a38.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>可以选择文件在 iPadOS 中的打开方式</figcaption></figure><p style="margin-left: 0cm;">其次，可以把文件夹像 macOS&nbsp;中那样固定到程序坞 Dock&nbsp;上。Dock&nbsp;上的文件夹会显示在 App&nbsp;资源库的左侧，甚至复刻了 macOS&nbsp;上的弹出式文件展示方式，当然也可以自定义把展示方式更改为网格。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/ed222481d0efc87094d8a6c68f6f405c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>可以像在 macOS 中一样将文件夹固定在 Dock</figcaption></figure><p style="margin-left: 0cm;">最后，和 macOS 26 Tahoe&nbsp;中一样，可以自由给文件夹加上 Apple&nbsp;预设的图标或者 Emoji，还可以更改文件夹的颜色。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/c031e6b725004f1f61fe0a5bfe15a62f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>使用颜色和 emoji 自定义文件夹封面</figcaption></figure><h2>其他值得一提的 iPadOS&nbsp;更新</h2><h3>数学笔记支持 3D&nbsp;绘图</h3><p style="margin-left: 0cm;">iPadOS 26&nbsp;中，数学笔记可以添加变量，并将结果呈现为 3D&nbsp;图像。例如，现在可以查看表达式 z=sin(x+y)&nbsp;的图像了，iPadOS&nbsp;还会温馨提醒默认情况下将采用弧度角。此外，对于坐标系，iPadOS 26&nbsp;可以自定义轴的显示范围。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/814869e5c76e5b5d3e7caff2de8945a7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>在 iPadOS 计算器的「数学笔记」中绘制三维图表</figcaption></figure><h3>后台操作</h3><p style="margin-left: 0cm;">iPadOS 26&nbsp;通过 Live Activity&nbsp;实时活动引入了 Apple&nbsp;称之为「后台操作」的功能，用来在后台运行一些相对所需时间较长的操作，在提供进度的同时，不影响 iPad&nbsp;其他功能的使用。</p><p style="margin-left: 0cm;">Apple&nbsp;表示 Final Cut for iPad&nbsp;会跟进此项功能在后台进行时间线渲染，不过目前还未更新。目前确实可以见到的是文件迁移：移动或者拷贝大文件时，iPad&nbsp;顶部会出现进度（和实时活动类似），同时状态栏还会显示一个图标提示当前有后台活动正在进行。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/d4e739e1130fc33f9687bbaa1c6625c1.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/8ae32fdeb7ad2c48ea6a67f6580917cd.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>除了一个小窗口，iPad 还会在状态栏显示有关进程正在运行</figcaption></figure><h3>全新 Apple Pencil&nbsp;笔型</h3><p style="margin-left: 0cm;">iPadOS&nbsp;新增了一款 Apple Pencil&nbsp;笔型，芦苇笔（Reed Pen），可以选择笔触的倾斜角度和粗细，很适合写艺术字。Apple Pencil&nbsp;在 iPadOS 26 里还支持 HDR 高光笔，如果你有支持 HDR&nbsp;的 iPad Pro，可以一试。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/7021fd4663a0fa1392e6f97848805472.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>手记 app&nbsp;来到 iPadOS</h3><p style="margin-left: 0cm;">此前在 iOS&nbsp;上推出的日记应用「手记」app&nbsp;现在也出现在 iPadOS 26&nbsp;中。「手记」app&nbsp;可以自动收集用户近期去过的地点、拍摄的照片、听过的音乐等等，你可以自己添加文字来做手账。</p><figure class="image ss-img-wrapper"><img alt="一台 iPad 设备上摆放着一支 Apple Pencil，屏幕上显示着手记 app。" src="https://cdnfile.sspai.com/2025/06/14/article/7bc6646dfa30501f8e2d2262b611f7a8.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>手记（来源：Apple Newsroom）</figcaption></figure><h3>配件充电提示</h3><p style="margin-left: 0cm;">有一个比较小的更新点，应该也会出现在 iOS&nbsp;等平台上，那就是现在 AirPods&nbsp;充电盒充满电时会有和 Apple Watch&nbsp;充满电时一样的提示了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/14/101ade99d85e21a527cf207b831d21a1.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3 style="margin-left: 0cm;">找不到鼠标指针？晃一晃鼠标就好啦～</h3><p style="margin-left: 0cm;">和 macOS 一样，现在如果你在 iPadOS 上使用鼠标或者触控板时突然找不到鼠标指针在哪里，只需要轻轻来回动一下鼠标，鼠标指针就会变得巨大，方便你快速找到它。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/14/133f64f0166667fdba8e261e7f8bb048.gif" /></figure><h3>增强的录制功能</h3><p style="margin-left: 0cm;">随着越来越多 up&nbsp;把 iPad&nbsp;作为视频创作设备，外接麦克风成为很多人的选择。iPadOS 26&nbsp;可以选择录音时系统调用的麦克风，甚至还可以选择麦克风录制模式，例如语音凸显等以往仅适用于通话的录音模式。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/89386f9f146c5d62da527caf45ea1146.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>在语音备忘录等录制声音时可直接选择麦克风来源，并选择录制模式</figcaption></figure><p style="margin-left: 0cm;">此外，iPadOS 26&nbsp;中的「本地录制」功能可以帮助你在视频通话时录制自己的视频和音频，保存并在以后编辑。</p><h3>相机界面更新</h3><p style="margin-left: 0cm;">iPadOS 26&nbsp;的相机界面也有变化，现在和 iOS 26&nbsp;一样采用了新的设计，可以快速更改设置，例如拍摄视频时的分辨率，或者拍摄人像时的景深等。此外，相机还支持窗口化使用，你可以一边拍照、录像一边打开其他的 app&nbsp;窗口，两不耽误。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/14/052428de6e6a8b5655dca163d6d8217a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>iPad 相机也支持窗口化运行</figcaption></figure><h2 style="margin-left: 0px;"><strong>总结</strong></h2><p style="margin-left: 0cm;">可以看到 iPadOS 26&nbsp;在对系统 UI&nbsp;做了大幅度修改的同时，强调对于多任务系统的改进及多平台功能的统一融合。这一阵子用下来 iPadOS 26 的感觉总是，在整体的系统设计上，Apple&nbsp;似乎有意地将 macOS&nbsp;和 iPadOS&nbsp;做得「更加靠近」。</p><p style="margin-left: 0cm;">以上便是我们总结的 iPadOS 26 中值得注意的多项特性。除了文中提到的内容，您还有没有发现其他容易被忽略的 iPadOS 26 测试版的新功能或 Bug 呢？欢迎在评论区分享。</p><p style="margin-left: 0px;">&gt; 了解更多 WWDC25 最新资讯及动态，欢迎关注《<a href="https://sspai.com/topic/458">少数派带你看 WWDC25</a>》系列专题。</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/101340</id>
-            <title>一日一技 | 如何用命令行将音乐转码到 iTunes Plus AAC</title>
-            <link>https://sspai.com/post/101340</link>
-            <guid isPermaLink="false">https://sspai.com/post/101340</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 26 Jul 2025 05:09:56 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 音频格式, iTunes Plus AAC, 无损转码, 自动化工具  
-
-总结: 本文讨论了在移动端聆听本地音乐时选择有损压缩格式的实用性，重点介绍了iTunes Plus AAC格式的优势，包括其CVBR编码策略和小体积高音质特点。文章提供了在macOS和Windows系统上使用afconvert和qaac工具实现自动化转码的具体步骤，并验证了输出文件与iTunes生成版本的一致性。最后通过频谱分析比较了不同编码格式的效果，证明iTunes Plus AAC在保留细节和减小体积方面表现理想。 </div>
-                        <hr>
-                    
-                    <p>对于仍有聆听本地音乐文件需求的人来说，音频格式的选择是一个重要问题。无损格式虽好，但毕竟对存储空间和流量有一定压力；在移动端聆听时，转制一份有损压缩副本还是更实用的选择。</p><p>那该选择什么格式呢？</p><p>经历过 iPod 时代的人可能记得苹果曾宣传过 iTunes Plus AAC 的概念。这原本是 iTunes 商店在 2007 年<a href="https://www.apple.com/newsroom/2007/05/30Apple-Launches-iTunes-Plus/">上线</a>的音频文件格式，新闻稿中宣称是一种「高品质 256 kbps AAC 编码」。这后来也成为 iTunes 导入音乐时的一个转码选项，至今可以在 macOS 上的 Music app 中看到，其参数标注为 128 kbps (mono)/256 kbps (stereo), 44.100 KHz, VBR。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/25/05f1f0e051f7cd165716a77c22581ad5.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Music app 设置中对 iTunes Plus AAC 的提述</figcaption></figure><p>iTunes Plus AAC 格式在网上评价很好，除了具有 AAC 编码的小体积、高音质特点外，在一些<a href="https://wiki.hydrogenaudio.org/index.php?title=Hydrogenaudio_Listening_Tests">盲测</a>中也被认为效果优于其他 AAC 编码器。这部分要归功于它采用的 <a href="https://wiki.hydrogenaudio.org/index.php?title=Apple_AAC#Bitrate_modes">CVBR</a>（constrained variable bitrate）策略，即将平均比特率约束在一个定值（256 kbps），但允许（有时相当激进的）浮动，从而更好平衡了体积和音质。加上受到苹果设备的良好支持，应当说是一种比较理想的压缩格式。</p><p>但显然，如果每次转换都要用到 iTunes 或其继任者 Music app，未免太过麻烦；这些软件本身支持的无损格式也有限，基本上只有 WAV 和苹果的私有格式 ALAC。如何将这个过程自动化呢？</p><p>实际上，iTunes 和 Music app 的转换功能只是调用了苹果系统框架 <a href="https://developer.apple.com/documentation/audiotoolbox/">Audio Toolbox</a> 提供的转码能力，其他软件也可以调用：</p><ul><li>在 macOS 上，内置的命令行工具 <code>afconvert(1)</code> 包装了 Audio Toolbox 的转码功能，也是 Apple Digital Masters 文档中推荐的转码工具；</li><li>在 Windows 上，开源命令行工具 <code>qaac</code> 可以包装从 iTunes 中提取的 Audio Toolbox 支持库，提供与 iTunes 等效的转换。</li></ul><p>将它们做成脚本或配合其他自动化工具使用，就能方便地批量获得 iTunes Plus AAC 格式输出。下文将具体说明。</p><p><strong>说明：</strong></p><ul><li>本文所指的 iTunes Plus AAC，更准确地说，只是采用苹果推荐的编码器及设置参数所得的 AAC 文件，质量上并不能与 iTunes 商店销售的那种母带转制、且经过响度均衡等优化的版本相比；</li><li>后文步骤假定用户对终端操作有基础了解；</li><li>由于笔者对音频格式及编码的了解有限，文中描述可能存在错漏或不符合最佳实践，欢迎指正。</li></ul><h2>macOS</h2><p>如上所述，用 macOS 内置的 <code>afconvert(1)</code> 即可创建 iTunes Plus AAC。根据 Apple Digital Masters 文档 [<a href="https://www.apple.com/apple-music/apple-digital-masters/docs/apple-digital-masters.pdf">PDF</a>] 中的说明，应当使用如下参数：</p><pre class="language-shell"><code>afconvert input.wav \
-  -d aac \
-  -f m4af \
-  -u pgcm 2 \
-  -b 256000 \
-  -q 127 \
-  -s 2 \
-  output.m4a</code></pre><p>(p. 7.)</p><p>上述参数依次设置：</p><ul><li>输出的编码格式（<code>-d</code>）为 AAC；</li><li>文件格式（<code>-f</code>）为 Apple MPEG-4 Audio；</li><li>Audio Converter 自定义属性（<code>-u</code>）<code>pgcm=2</code>（无文档说明，可能与编码器行为有关）；</li><li>比特率（<code>-b</code>）为 256 kbps；</li><li>质量（<code>-q</code>）为最高（取值范围 0-127）；以及</li><li>比特率分配策略（<code>-s</code>）为 CVBR（见前文说明）。</li></ul><p>（<strong>注：</strong> 原文档实际上使用了两步转换：首先转为 CAF 格式并执行响度检查，然后再生成经响度均一化处理的 AAC。(pp. 5, 7.) 但该文档的场景是从母带文件转码，而现实中个人用户大多接触的无损文件已经过前期处理，再做此步骤意义不大，故略去。）</p><p>不过，<code>afconvert</code> 只支持 WAV、ALAC 或 AIFF 格式输入，而现实中更为常见的无损格式是 FLAC，故还需通过 <code>ffmpeg</code> 做一次预处理：</p><pre class="language-shell"><code>ffmpeg -i input.flac -ac 2 -ar 44100 temp.wav &amp;&amp; \
-afconvert -f m4af -d aac -u pgcm 2 -b 256000 -q 127 -s 2 temp.wav output.m4a
-rm temp.wav</code></pre><p>这里，首先用 <code>ffmpeg</code> 将源文件转为双声道、44.1Khz 的临时 WAV 文件，再交给 <code>afconvert</code> 处理，最后删除临时文件。</p><p>（<strong>注：</strong> 尽管 <code>ffmpeg</code> <a href="https://trac.ffmpeg.org/wiki/Encode/AAC#aac_at">支持</a>通过 <code>-c:a aac_at</code> 选项来调用 Audio Toolbox，理论上可以一步到位地生成 iTunes Plus AAC；但根据笔者测试，这样生成的文件在质量上与 <code>afconvert</code> 输出的版本差异较大。因此，本文仍用 <code>afconvert</code> 执行 AAC 输出。）</p><p>我们可以用下图所示的快捷指令自动化上述过程（<a href="https://www.icloud.com/shortcuts/1a193061f2b74e9ca546415b7de25088">下载</a>）：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/25/6febbcd911dc0e7eba99e1c87c5c2645.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>使用该快捷指令之前，需要：</p><ol><li>在 <code>FFMPEG_PATH</code> 变量上方的文本框中填写正确的 <code>ffmpeg</code> 安装路径。这里预填的是 M 系列处理器机型上通过 Homebrew 安装的默认路径，具体可以通过在终端运行 <code>which ffmpeg</code> 来确认；以及</li><li>在系统设置的「隐私与安全性」中，将 <code>/System/Library/CoreServices/Finder.app</code> 加入「完全磁盘访问权限」。</li></ol><p>此后，直接运行该快捷指令并选择输入文件，或者选中文件后，通过右键菜单的 Quick Action &gt; Create iTunes AAC 即可快速创建 AAC 版本。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/25/f5f613dc874f1343e13d8957b1a2f2fe.gif" /></figure><h2>Windows</h2><p>如上所述，Windows 系统可以通过 <code>qaac</code> 转码到 iTunes Plus AAC，但前提是安装了苹果的 AAC 编码器。一般来说，这只有通过安装 iTunes 或 iCloud 才能获得（仅限独立安装版）。但很多人并不想安装这两个软件，因此更「绿色」的方法是从 iTunes 安装包中提取相应支持文件供 <code>qaac</code> 调用。具体步骤如下。</p><ol><li>从苹果官网<a href="https://www.apple.com/itunes/">下载</a>最新版的 iTunes 安装包，得到一个 <code>iTunes64Setup.exe</code>；</li><li><a href="https://github.com/nu774/makeportable/blob/master/makeportable2.cmd">下载</a> qaac 作者提供的提取脚本 <code>makeportable2.cmd</code>，将其放在 <code>iTunes64Setup.exe</code> 同一目录下运行（可能有安全警告，忽略即可）。这将生成一个包含苹果编码器支持库 DLL 的 <code>QTfiles64</code> 文件夹；</li><li>从 <code>qaac</code> 的<a href="https://github.com/nu774/qaac/releases">发布页面</a>下载最新版并解压，其中包含 <code>x86</code> 和 <code>x64</code> 两个版本的子目录。因为今年是 2025 年，以下只考虑 x64 版本；</li><li>将第 2 步所得的 <code>QTfiles64</code> 文件夹放至 <code>x64</code> 目录中，即与 <code>qaac64.exe</code> 同级；</li><li>为了能处理 FLAC 输入，再从 FLAC 的<a href="https://github.com/xiph/flac/releases">发布页面</a>下载最新版（<code>flac-x.y.z-win.zip</code>），将解压所得的 <code>libFLAC.dll</code> 同样放至 <code>x64</code> 目录中，与 <code>qaac64.exe</code> 同级。</li></ol><p>经过上述步骤，<code>qaac64.exe</code> 所在目录结构应如下所示：</p><pre class="language-code-line"><code>.
-├── libFLAC.dll
-├── libsoxconvolver64.dll
-├── libsoxr64.dll
-├── qaac64.exe
-├── QTfiles64
-│   ├── ...
-│   ├── ASL.dll
-│   ├── concrt140.dll
-│   ├── CoreAudioToolbox.dll
-│   ├── CoreFoundation.dll
-│   ├── icudt62.dll
-│   └── ...
-└── refalac64.exe</code></pre><p>这就完成了准备工作。</p><p>根据 <code>qaac</code> 的<a href="https://github.com/nu774/qaac/wiki/Encoder-configuration#relation-to-itunes-encoder-setting">文档</a>，当使用如下方式调用时，输出结果等效于 iTunes Plus (256k)：</p><pre class="language-shell"><code>qaac64.exe -v256 input.flac</code></pre><p>为了使用更加方便，我们可以制作一个批处理脚本来自动化：</p><pre class="language-code-line language-bat"><code>@echo off
-setlocal
-
-set "QAAC_OPTIONS=-v256"
-set "QAAC_PATH=%ProgramFiles%\qaac\qaac64.exe"
-
-if not exist "%QAAC_PATH%" (
-    echo ERROR: Could not find qaac64.exe at the specified path.
-    goto :end
-)
-
-if "%~1"=="" (
-    echo No files were provided.
-    goto :end
-)
-
-for %%F in (%*) do (
-    echo Processing: "%%~nxF"
-    "%QAAC_PATH%" %QAAC_OPTIONS% -o "%%~dpnF.m4a" "%%~F"
-    echo.
-)
-
-echo All done.
-
-:end
-echo.
-echo Press any key to exit...
-pause &gt;nul</code></pre><p>上述脚本假定你将之前步骤整理好的 <code>qaac</code> 安装文件放在系统盘的 <code>Program Files\qaac</code> 文件夹下，你也可以将 <code>QAAC_PATH</code> 变量修改为你实际使用的其他安装路径。</p><p>将以上代码保存为 <code>makeitunesaac.bat</code>。此后，将要处理的文件拖至该脚本图标上，即可在同目录下获取转码好的 AAC 版本。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/25/eceea1a8677ed969109162dfcdfc8749.gif" /></figure><h2>效果检查</h2><p>我们可以使用 <a href="https://mediaarea.net/en/MediaInfo">MediaInfo</a> 检查通过 <code>afconvert</code> 和 <code>qaac</code> 生成的 AAC 文件与 iTunes（或 Music app）生成的版本是否一致：</p><pre class="language-shell"><code>mediainfo output_itunes.m4a output_afconvert.m4a output_qaac.m4a</code></pre><p>对于我所用的测试音乐，三者的输出完全一致：</p><pre class="language-code-line"><code>...
-Format                                   : AAC LC
-Format/Info                              : Advanced Audio Codec Low Complexity
-Codec ID                                 : mp4a-40-2
-Duration                                 : 4 min 1 s
-Bit rate mode                            : Variable
-Bit rate                                 : 256 kb/s
-Maximum bit rate                         : 341 kb/s
-Channel(s)                               : 2 channels
-Channel layout                           : L R
-Sampling rate                            : 44.1 kHz
-Frame rate                               : 43.066 FPS (1024 SPF)
-Compression mode                         : Lossy
-Stream size                              : 7.68 MiB (99%)
-...</code></pre><p>这表明 <code>afconvert</code> 和 <code>qaac</code> 确实能获得 iTunes（或 Music app）基本等效的输出。还能看到，尽管整体比特率维持在 256 kbps，但峰值比特率达到了 341 kbps，表明 CVBR 在发挥作用。</p><p>再观察频谱，<code>afconvert</code> 和 <code>qaac</code> 输出的版本相比于 320 kbps MP3（LIME 编码）保留了更多无损版本的细节，并且体积小了约 20%，应当说是比较理想的。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/07/25/f4b9a909e19f84ba732393b9697a1c5e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
                 ]]>
             </content:encoded>
         </item>
