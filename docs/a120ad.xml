@@ -5,6 +5,429 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2025/08/weekly-issue-359.html</id>
+            <title>科技爱好者周刊（第 359 期）：Palantir 值得关注</title>
+            <link>http://www.ruanyifeng.com/blog/2025/08/weekly-issue-359.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/08/weekly-issue-359.html</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 01 Aug 2025 08:06:22 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Palantir, AI编程助手, 科技动态, 开源工具
+
+<br>
+<br>
+总结: 本文介绍了美国高科技公司Palantir的背景、业务和文化特点，包括其神秘性、独特招聘方式和“无头衔”管理理念。同时提到了一款带有管理后台的开源AI编程助手MonkeyCode。科技动态部分涵盖了奔驰车载Teams、艾滋病疫苗、AI学习模式、印度手机产业和智能交通灯等内容。最后列举了多种开源工具和资源，涉及Web组件、Ansible管理、WebSocket调试等领域。 </div>
+                        <hr>
+                    
+                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
+<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/7408">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
+
+<h2>封面图</h2>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073011.webp" title="" /></p>
+
+<p>在湖南的一家工厂，工人们正在建造107米长的风力涡轮机叶片模具。（<a href="https://www.instagram.com/p/DMse9ANgRca/">geosteinmetz@instagram</a>）</p>
+
+<h2>Palantir 值得关注</h2>
+
+<p>Palantir（中译帕兰提尔，或者帕兰泰尔）是一家美国的高科技公司。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073010.webp" title="" /></p>
+
+<p>它在中国不出名，但在美国鼎鼎大名。最近两年，股价涨了十几倍，市值达到4000多亿美元，排进世界前30大公司，高于三星。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073009.webp" title="" /></p>
+
+<p>它有鲜明的意识形态，自称使命是"防止西方的衰落"，要使用高科技，巩固自由民主制度，支持美国及其盟友。</p>
+
+<p>它的业务主要是，接受美国政府和美军的订单，为它们做咨询和开发软件，提升美国的军事实力。</p>
+
+<p>举例来说，它帮助美军在阿富汗识别路边的炸弹，帮助美国移民局发现非法移民，以及参与以色列的军事行动。</p>
+
+<p>传说中，发现本拉登的藏身之处，也有它的功劳。它对此既不承认，也不否认。</p>
+
+<p>它对于自己的业务和客户严格保密，从不泄漏，即使在美国，也是一家非常神秘的公司。</p>
+
+<p>上周，我读到一篇 Palantir 离职员工的<a href="https://nabeelqu.substack.com/p/reflections-on-palantir">回忆文章</a>，透露了很多公司的内部情况，很有意思，下面是一点摘录。真的极其特别，我觉得，大家应该关注这家公司。</p>
+
+<p>1、</p>
+
+<p>找工作的时候，我想找那种能够接触医疗保健、航空航天、安全等关键行业的工作，但又想要硅谷的工作文化，Palantir 基本上是唯一的选择。</p>
+
+<p>我就是因为这一点加入的。</p>
+
+<p>2、</p>
+
+<p>刚进 Palantir 的时候，我发现里面充满了奇怪的人。事实上，如果你是一个怪咖，会更容易加入这家公司。</p>
+
+<p>有一个同事，办公室放了好几个降低二氧化碳浓度的设备，杯子里还放了一大堆冰块，跟我交谈时，不停地嚼着冰块。据他说，这样可以促进认知能力。</p>
+
+<p>3、</p>
+
+<p>公司的 CEO 亚历克斯·卡普（Alex Karp）是一个哲学博士，面试候选人时，他喜欢没有任何资料直接面试，避免先入为主的成见。</p>
+
+<p>他不看重候选人的经历，而会观察他们如何分解问题，能否从不同视角理解问题。</p>
+
+<p>面试的问题通常与工作或软件无关，他甚至花了一个小时跟我讨论哲学家维特根斯坦。</p>
+
+<p>4、</p>
+
+<p>公司要求员工，同时具有宏大的知识背景和激烈的竞争精神，是具有奇思妙想的知识型思考者。</p>
+
+<p>公司的各种制度，都是为了挑选出一种特定类型的人：独立思考，专注于目标，不会过度关注坏消息。</p>
+
+<p>正是因为它招聘了众多优秀的、与众不同的员工，进而吸引了更多这样的人。</p>
+
+<p>5、</p>
+
+<p>它要求员工每周有3～4天去客户办公室，在那里工作，掌握复杂行业的业务流程和各种知识，然后运用这些知识，设计出能够真正解决问题的软件。</p>
+
+<p>我的第一个客户是空中客车公司，我因此搬到法国图卢兹待了一年，每周四天在工厂与制造人员一起工作，在那里开发软件。</p>
+
+<p>6、</p>
+
+<p>公司的整体氛围，有点像一个要拯救世界的邪教团体，而非一家普通的软件公司。</p>
+
+<p>但重要的是，它对批评非常宽容和欢迎。有人给我看了一封电子邮件，一位初级软件工程师正与公司一位董事进行公开的、激烈的争论，全公司（大约一千人）都抄送了这封邮件。</p>
+
+<p>我对宗教不感兴趣，但喜欢看到，有人深切关注并探讨世界的发展方向，以及软件如何融入其中，这才是真正有趣的事情。</p>
+
+<p>7、</p>
+
+<p>公司的一个理念就是不给员工头衔，每个人的头衔都是"项目工程师"。除此之外，还有五六位董事和一位首席执行官。</p>
+
+<p>原因是公司相信，如果创造出头衔，人们就会开始想要它，最终在公司滋生内部政治，破坏团结。最好还是给每个人同样的头衔，让大家专注于目标。</p>
+
+<p>因为大家头衔都一样，也就没有等级，没有人可以指挥别人该做什么。你完全可以不在意别人，或者他怎么看你，直接无视他们，去做一些你认为正确的事情。</p>
+
+<p>公司文化就是推崇无视上级的意见、但开发出了关键的基础设施的人。这种事在公司被当作榜样来效仿。</p>
+
+<p>8、</p>
+
+<p>"无头衔"的代价是，你常常感觉公司缺乏明确的战略或方向，更像是一个培养皿，里面的聪明人各自建立小领地，然后朝着随机的方向发展。</p>
+
+<p>但这也带来了令人难以置信的创造力，人们低估了 Palantir 涌现出多少新颖的概念和想法。</p>
+
+<h2>AI 编程助手缺什么</h2>
+
+<p>大家使用 AI 编程助手，有没有感到，缺少一样东西？</p>
+
+<p>它们只有系统设置，没有管理后台，无法查看仪表盘和使用统计。</p>
+
+<p>现在出来一个新的开源项目 <a href="https://github.com/chaitin/MonkeyCode">MonkeyCode</a>，就是<strong>带有管理后台的 AI 编程助手</strong>（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072501.webp" title="" /></p>
+
+<p><strong>它有独立的服务端，可以私有化部署，支持纯离线使用</strong>。安装它的 VS Code 插件以后，AI 操作都会经过服务端，便于统一控制和统计。</p>
+
+<p>它的后台可以配置 AI 模型，除了代码补全和生成，还能进行代码安全扫描。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072502.webp" title="" /></p>
+
+<p>用户使用时必须登录（上图），所有操作记录都会保存，很适合公司和团队了解每个成员怎么使用 AI。</p>
+
+<p>它的代码在 <a href="https://github.com/chaitin/MonkeyCode">GitHub</a>，具体的安装/使用方法看<a href="https://monkeycode.docs.baizhi.cloud/welcome">官网文档</a>。</p>
+
+<h2>科技动态</h2>
+
+<p>1、<a href="https://media.mercedes-benz.com/article/931e7af1-2d57-4e90-9e1e-252289e70648">奔驰汽车</a>宣布，将在车载电脑上，内置微软的远程会议软件 Teams。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025071708.webp" title="" /></p>
+
+<p>你一边开车，一边参加线上会议。对方可以从车载摄像头看到你，但为了行驶安全，你在车内显示屏看不到对方，只能对话。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025071707.webp" title="" /></p>
+
+<p>我有点想不通，如果真想在车内开会，手机打开 Teams，不就行了吗？</p>
+
+<p>2、美国食药局 FDA 本周批准了，世界第一种<a href="https://newatlas.com/infectious-diseases/hiv-prevention-fda-lenacapavir/">艾滋病疫苗</a>，一年打两次，就不会感染艾滋病。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073002.webp" title="" /></p>
+
+<p>这种曾经无药可治的绝症，已经被解决了。</p>
+
+<p>3、继推理模式之后，OpenAI 推出"<a href="https://openai.com/zh-Hans-CN/index/chatgpt-study-mode/">学习模式</a>"。用户输入一个学习主题，AI 会分解该主题，一步步教会用户。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073102.webp" title="" /></p>
+
+<p>国内公司估计很快跟进，打入利润丰厚的补习班行业。</p>
+
+<p>相关消息还有，谷歌的 AI 笔记工具 NotebookLM，推出了<a href="https://blog.google/technology/google-labs/notebooklm-video-overviews-studio-upgrades/">视频功能</a>，可以根据课本生成教课视频（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073107.webp" title="" /></p>
+
+<p>目前，它生成的视频就是 PPT 配上讲解音频。以后，只会照本宣读的老师，完全会被 AI 替代。</p>
+
+<p>4、印度成为<a href="https://finance.sina.cn/7x24/2025-07-29/detail-inficfvy9389574.d.html">美国手机最大的供应国</a>，占今年二季度市场份额的44%。第二是越南30%，第三是中国25%。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073006.webp" title="" /></p>
+
+<p>短短几年，印度就能搞定 iPhone，说明电子组装业真没有门槛，完全是劳动力行业。印度最大优势就是源源不断的廉价劳动力。</p>
+
+<p>5、比利时安装了"<a href="https://www.vrt.be/vrtnws/en/2025/07/24/200-000-flemish-drivers-can-turn-traffic-lights-green-but-waze/">智能交通灯</a>"，它会根据路口的拥堵情况，智能切换红绿灯。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073008.webp" title="" /></p>
+
+<p>有意思的地方是，它不用摄像头判断车流，而是要求司机安装一个专门 App，开车时打开。系统读取路口的 App 的实例数，判断车流。</p>
+
+<h2>文章</h2>
+
+<p>1、<a href="https://www.bitestring.com/posts/2023-03-19-web-fingerprinting-is-worse-than-I-thought.html">浏览器用户指纹测试</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072421.webp" title="" /></p>
+
+<p>我们知道，JS 脚本可以生成用户指纹，用来追踪用户。作者测试了 Chrome/Firefox/Tor，看看它们能否阻断用户指纹。默认情况下，只有 Tor 通过了测试。</p>
+
+<p>2、<a href="https://empatheticdeveloper.wordpress.com/2025/07/20/why-java-is-still-worth-learning-in-2025-a-developers-25-year-journey/">为什么2025年仍然值得学习 Java</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072607.webp" title="" /></p>
+
+<p>作者是一个资深 Java 程序员，向新人解释 Java 的优点。这门语言一直在进化，已经今非昔比。文章还给出了学习资源。</p>
+
+<p>3、<a href="https://docs.astral.sh/uv/guides/scripts/">Python 脚本运行器 uv 教程</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072805.webp" title="" /></p>
+
+<p>uv 可以用来运行 Python 脚本，本文是一篇初学者教程。</p>
+
+<p>4、<a href="https://www.xda-developers.com/how-i-use-paperless-ngx-to-monitor-my-inbox/">邮件附件 PDF 文件的处理方案</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072608.webp" title="" /></p>
+
+<p>很多邮件带有 PDF 附件（比如发票、合同），很难管理。</p>
+
+<p>作者想出了一个解决方案，使用文档管理系统 <a href="https://docs.paperless-ngx.com/">Paperless-ngx</a> 自动下载邮件，实现附件的分类、排序、搜索。</p>
+
+<p>5、<a href="https://www.judy.co.uk/blog/using-fortune-to-reinforce-habits/">如何定制 Bash 环境</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072610.webp" title="" /></p>
+
+<p>作者以自己为例，讲述怎么改造 Bash 环境，每次打开都会自动输出一个提醒（上图）。</p>
+
+<p>6、<a href="https://matklad.github.io/2025/07/16/font-size-adjust.html">CSS 的 font-size-adjust 属性</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072606.webp" title="" /></p>
+
+<p>如果网页使用了多种字体，font-size-adjust 属性可以让它们看上去一样大小。</p>
+
+<h2>工具</h2>
+
+<p>1、<a href="https://kelpui.com/">Kelp</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072609.webp" title="" /></p>
+
+<p>一个基于 Web Components 的网页组件库，提供网页样式的完整解决方案。</p>
+
+<p>2、<a href="https://github.com/ethersync/ethersync">Ethersync</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073007.webp" title="" /></p>
+
+<p>一个同步服务器，使用者安装后，再选择它的编辑器插件（NeoVim/VScode/Web），就可以实现编辑器同步。</p>
+
+<p>3、<a href="https://github.com/sky22333/ansible-ui">Ansible Web 管理面板</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072602.webp" title="" /></p>
+
+<p>提供 Ansible 的 Web 界面（批量主机管理、运行剧本任务、命令执行、文件传输和 Web 终端等）。（<a href="https://github.com/ruanyf/weekly/issues/7352">@sky22333</a> 投稿）</p>
+
+<p>4、<a href="https://github.com/law-chain-hot/websocket-devtools">WebSocket DevTools</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073104.webp" title="" /></p>
+
+<p>Chrome 开源插件，专门用于 WebSocket 调试，提供监控、拦截、模拟、收藏等功能。（<a href="https://github.com/ruanyf/weekly/issues/7407">@law-chain-hot</a> 投稿）</p>
+
+<p>5、<a href="https://github.com/WCY-dt/ponghub">PongHub</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072604.webp" title="" /></p>
+
+<p>一个开源的服务监控平台，通过 GitHub Actions 去监控服务是否正常在线。（<a href="https://github.com/ruanyf/weekly/issues/7361">@WCY-dt</a> 投稿）</p>
+
+<p>6、<a href="https://github.com/sansan0/TrendRadar">TrendRadar</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072806.webp" title="" /></p>
+
+<p>开源的新闻热点助手，通过 GitHub Pages 抓取国内11个主流平台的热点新闻，可以指定主题。（<a href="https://github.com/ruanyf/weekly/issues/7375">@sansan0</a> 投稿）</p>
+
+<p>7、<a href="https://github.com/coolcode/musix">MUSIX</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072807.webp" title="" /></p>
+
+<p>Rust 语言写的终端 MP3 播放器。（<a href="https://github.com/ruanyf/weekly/issues/7382">@coolcode</a> 投稿）</p>
+
+<p>8、<a href="https://github.com/hzbd/imagekit">ImageKit</a></p>
+
+<p>批量图片处理的命令行工具，使用 Rust 语言编写。（<a href="https://github.com/ruanyf/weekly/issues/7387">@hzbd</a> 投稿）</p>
+
+<p>9、<a href="https://github.com/MaskerPRC/refresh-rate-expericence">刷新率体验</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073001.webp" title="" /></p>
+
+<p>一个 Web 应用，让用户拖动虚拟窗口，体验不同的屏幕刷新率造成的 UI 延迟，<a href="https://fps.agitao.me/">代码开源</a>。（<a href="https://github.com/ruanyf/weekly/issues/7396">@MaskerPRC</a> 投稿）</p>
+
+<p>10、<a href="https://github.com/yinzhenyu-su/weekly-git-summary">weekly-git-summary</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073005.webp" title="" /></p>
+
+<p>一个命令行工具，根据 Git 提交记录生成周报。（<a href="https://github.com/ruanyf/weekly/issues/7398">@yinzhenyu-su</a> 投稿）</p>
+
+<p>11、<a href="https://github.com/ibarryyan/issue2file">Issue2File</a></p>
+
+<p>一个 Go 语言编写的工具，一键将 GitHub 仓库的所有 issue 导出，保存为 Markdown 文件。（<a href="https://github.com/ruanyf/weekly/issues/7403">@ibarryyan</a> 投稿）</p>
+
+<h2>AI 相关</h2>
+
+<p>1、<a href="https://github.com/sligter/LandPPT">LandPPT</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072605.webp" title="" /></p>
+
+<p>自搭建的 PPT 生成平台，支持多种 AI 模型，将文档内容转换为 PPT。（<a href="https://github.com/ruanyf/weekly/issues/7360">@sligter</a> 投稿）</p>
+
+<p>2、<a href="https://github.com/itMrBoy/resumePolice">简历警察</a></p>
+
+<p>AI 开发平台 <a href="https://dify.ai/">Dify</a> 的插件，让 AI 修改简历，具体的修改点可以参考它的<a href="https://github.com/itMrBoy/resumePolice/blob/main/prompt/resume_police_Zh.md">提示词</a>。（<a href="https://github.com/itMrBoy/resumePolice">@Disdjj</a> 投稿）</p>
+
+<p>3、<a href="https://belindoc.com/zh">Belin Doc</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073003.webp" title="" /></p>
+
+<p>免费的翻译站点，让 AI 翻译文档，可以保留格式，支持 PDF/PPTX/EPUB/DOCX 等多种文件（<a href="https://github.com/ruanyf/weekly/issues/7384">@K8S666</a> 投稿）</p>
+
+<p>4、<a href="https://www.text-well.com/zh/app">Text Well</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073103.webp" title="" /></p>
+
+<p>免费在线 AI 工具，用于修改润色文章。（<a href="https://github.com/ruanyf/weekly/issues/7404">@oil-oil</a> 投稿）</p>
+
+<p>5、<a href="https://github.com/justlovemaki/AIClient-2-API">AIClient-2-API</a></p>
+
+<p>这个工具将 Google Gemini CLI 和 Kiro 客户端封装为本地 API 服务，提供 OpenAI 兼容接口，方便调用。（<a href="https://github.com/ruanyf/weekly/issues/7405">@justlovemaki</a> 投稿）</p>
+
+<p>6、<a href="https://github.com/MaskerPRC/everything-ai-chat">Everything AI Chat</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073105.webp" title="" /></p>
+
+<p>Windows 文件搜索工具 <a href="https://www.voidtools.com/zh-cn/">Everything</a> 的 AI 搜索客户端。（<a href="https://github.com/ruanyf/weekly/issues/7409">@MaskerPRC</a> 投稿）</p>
+
+<p>7、<a href="https://www.aipex.quest/">AIpex</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073106.webp" title="" /></p>
+
+<p>Chrome 的开源插件，使用 AI 一键整理标签页。（<a href="https://github.com/ruanyf/weekly/issues/7410">@buttercannfly</a> 投稿）</p>
+
+<h2>资源</h2>
+
+<p>1、<a href="https://langshift.dev/">LangShift.dev</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072601.webp" title="" /></p>
+
+<p>通过比较不同的计算机语言，学习新语言，<a href="https://github.com/erweixin/langshift.dev">源码开源</a>。（<a href="https://github.com/ruanyf/weekly/issues/7346">@erweixin</a> 投稿）</p>
+
+<p>2、<a href="https://pipeak.share4y.cn/">LaTeX 训练营</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073004.webp" title="" /></p>
+
+<p>Latex 的免费中文课程，学习数学公式语法，在线动手练习，<a href="https://github.com/prehisle/pipeak">代码开源</a>。（<a href="https://github.com/ruanyf/weekly/issues/7397">@prehisle</a> 投稿）</p>
+
+<h2>图片</h2>
+
+<p>1、<a href="https://basicappleguy.com/basicappleblog/macos-icon-history">苹果的图标设计语言</a></p>
+
+<p>苹果的图标，历史上不断演变，从拟物化到扁平化，再到液态玻璃。</p>
+
+<p>词典</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070314.webp" title="" /></p>
+
+<p>笔记本</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070604.webp" title="" /></p>
+
+<p>App 商店</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070605.webp" title="" /></p>
+
+<p>2、<a href="https://www.futilitycloset.com/2024/12/15/tidy-2/">代数公式的图形化证明</a></p>
+
+<p>大家在中学代数课程，都学过下面的基本公式。</p>
+
+<blockquote>
+  <p>a<sup>2</sup> - b<sup>2</sup> = (a + b) (a - b)</p>
+</blockquote>
+
+<p>它可以用几何图形证明。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024121906.webp" title="" /></p>
+
+<h2>文摘</h2>
+
+<p>1、<a href="https://hardcoresoftware.learningbyshipping.com/p/234-if-writing-is-thinking">人们不再阅读完整内容</a></p>
+
+<p>我很担忧，AI 的广泛应用，使得人们不再完整阅读任何内容。</p>
+
+<p>人们以前就不愿意阅读长篇内容。长篇报告都会做成幻灯片，以求大家看一眼，即便如此，还要反复向听众强调幻灯片的重点内容。如果不这样做，人们一看到大段文字就会跳过去，最多看一眼图片。</p>
+
+<p>现在有了 AI，人们就更不会阅读完整内容了。他们只会让 AI 去读，然后看一眼生成的内容总结。</p>
+
+<p>视频、电视剧、电影也会如此。花两个小时看电影？太浪费时间了，让 AI 提炼出30秒的片段吧。</p>
+
+<p>以后，看过原著的人越来越少，大家都看 AI 让我们看的东西。</p>
+
+<h2>言论</h2>
+
+<p>1、</p>
+
+<p>学习自己真正想学的东西，最容易学进去，学习效果最好。做自己想做的事，最有动力，最有满足感。</p>
+
+<p>这就是为什么你要锻炼意志力。只有意志坚强，你才能做出决定并付诸行动，选定自己的目标，去学去做。</p>
+
+<p>-- <a href="https://simonwillison.net/2025/Jul/24/recurse-center/">《用 AI 发展自己》</a></p>
+
+<p>2、</p>
+
+<p>对我来说，编程远不止是一项技能，而是一种探索、尝试和满足好奇心的方式。</p>
+
+<p>我好几次放弃编程了，但最终都重新捡起。编程是我与世界互动的方式。</p>
+
+<p>--<a href="https://esafev.com/notes/why-i-do-programming/">《我为什么从事编程》</a></p>
+
+<p>3、</p>
+
+<p>迟早有一天，互联网将变成一个信息污水池，99%都是 AI 生成的信息污水，搜索引擎不再有效。</p>
+
+<p>--<a href="https://nonint.com/2023/03/09/gpt-might-be-an-information-virus/">《GPT 可能是一种信息病毒》</a></p>
+
+<p>4、</p>
+
+<p>我进入软件行业是因为我对此充满热情。十年后，大部分热情都消失了，我被敏捷开发的 Scrum 仪式和无休止的产品需求变更打败了。现在，我做完我的工作就会回家。</p>
+
+<p>-- <a href="https://news.ycombinator.com/item?id=42639087">Hacker News 读者</a></p>
+
+<h2>往年回顾</h2>
+
+<p><a href="https://www.ruanyifeng.com/blog/2024/08/weekly-issue-312.html">从英特尔看"美国制造"</a>（#312）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2023/07/weekly-issue-262.html">告别密码</a>（#262）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2022/07/weekly-issue-212.html">人生不短</a>（#212）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2021/06/weekly-issue-162.html">生活就像《吃豆人》游戏</a>（#162）</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2025-08-01T08:06:22+08:00">2025年8月 1日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2025/07/weekly-issue-358.html</id>
             <title>科技爱好者周刊（第 358 期）：如何拯救一家濒临倒闭的创业公司</title>
             <link>http://www.ruanyifeng.com/blog/2025/07/weekly-issue-358.html</link>
@@ -1660,393 +2083,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2025-07-11T08:00:44+08:00">2025年7月11日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2025/07/weekly-issue-355.html</id>
-            <title>科技爱好者周刊（第 355 期）：两本《芯片战争》</title>
-            <link>http://www.ruanyifeng.com/blog/2025/07/weekly-issue-355.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/07/weekly-issue-355.html</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 04 Jul 2025 08:02:04 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 芯片战争,科技动态,AI工具,开源项目  
-
-总结:  
-1. 文章介绍了两本同名书籍《芯片战争》，分别由中国作者余盛和美国作者克里斯·米勒撰写，内容聚焦芯片行业发展史而非技术细节。  
-2. 国人版侧重中国芯片产业历史，包含独家材料；老美版以商业史视角梳理全球脉络，偶有技术概念通俗讲解。  
-3. 科技动态包括苹果图标设计争议、AR广告屏蔽实验、程序员车载生活、特斯拉无人交付等案例。  
-4. 推荐多款开发工具如VS Code网页版、网络监控软件Sniffnet、自建域名服务平台WR.DO等。  
-5. AI领域涉及Meta天价挖角人才、微软强制员工使用AI考核、验证码自动识别脚本等进展。  
-6. 资源部分提供Rust教程、B树互动教学、全球雨水路径可视化等实用内容。  
-7. 文摘节选芯片分类知识，分为逻辑芯片、存储芯片（DRAM/NAND）及其他功能芯片。  
-8. 言论集收录关于AI数据污染、HTTP协议演变、城市建筑与孤独等观点。 </div>
-                        <hr>
-                    
-                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
-<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/7169">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
-
-<h2>封面图</h2>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070201.webp" title="" /></p>
-
-<p>重庆某消防站，改造成赛博朋克风格，霓虹灯都是一些防火标语。网上走红以后，该装饰现已被拆。（<a href="https://news.qq.com/rain/a/20250625Q05NCB00">via</a>）</p>
-
-<h2>两本《芯片战争》</h2>
-
-<p>前些日子，我想找芯片知识的书籍，想起有一本很有名的畅销书，叫做《芯片战争》。</p>
-
-<p>搜索发现，《芯片战争》居然不止一本，而有两本书都叫这个名字。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025062802.webp" title="" /></p>
-
-<p><a href="https://book.douban.com/subject/35659418/">《芯片战争》</a>，余盛（华中科技大学出版社，2022）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025062803.webp" title="" /></p>
-
-<p><a href="https://book.douban.com/subject/36350632/">《芯片战争》</a>，[美]克里斯·米勒（浙江人民出版社，2023）</p>
-
-<p>一本是中国人写的，另一本是美国人写的。我都读了，下面就是简单的读后感。</p>
-
-<p>为了便于区分，我把中国人写的那本称为"国人版"，美国人那本称为"老美版"。</p>
-
-<p>这两本书的内容，都是芯片行业的发展史。读完以后，我的最大感受是，<strong>它们可以帮你了解芯片历史，但是帮不了你了解芯片知识</strong>。</p>
-
-<p>因为它们不是科普图书，更不是技术图书，而是经管图书。</p>
-
-<p>我有点后悔，没查一下作者背景。读了才发现，这两个作者，都不是芯片行业人士，甚至不是科技从业者。</p>
-
-<p>国人版的作者是会计系毕业，后来在食品公司工作，他的上一本书写的是粮油贸易。</p>
-
-<p>老美版的作者是政治系毕业，现在是大学教授，专门研究地缘政治，上一本书写的是俄罗斯历史。</p>
-
-<p>可想而知，这样的作者写芯片行业，不会有深入浅出的技术分析，只会关注商业经营层面。</p>
-
-<p>事实上，国人版的内容，不客气地说，全部都是从新闻报道搜集整理而来，编辑成一个个故事，完全是商战书籍。</p>
-
-<p>老美版相对好一些，作者采访了一些当事人，有第一手资料，内容条理比较清楚，更像一本商业历史书。</p>
-
-<p>虽然我对缺乏技术讲解挺失望的，但是<strong>我认为，这两本书还是能带给读者收获</strong>。</p>
-
-<p>很多内容我以前就知道，比如晶体管是怎么来的、集成电路的发明人之争，但还有不少事情是这次读了才知道。</p>
-
-<p>国人版有一个专门的部分，介绍中国芯片发展史，收集了很多相关材料，我还没在其他地方见过，比如江上舟的故事、张汝京的故事、汉芯造假事件、从武汉新芯到长江存储等等，内容详细，带给人很多冲击。</p>
-
-<p>老美版的优点，前面说了，有第一手材料，站得比较高，按照编年史顺序，以人物故事的形式，理清了行业的发展脉络。虽然作者的专业是政治学，但总体上没有加入政治观点，写得比较中性客观。</p>
-
-<p>另外，老美版偶尔会有一些技术概念的通俗讲解，写得挺好。我摘录了一段芯片的种类介绍，放在后面的文摘部分，大家可以看看。</p>
-
-<p>我的结论就是，如果你单纯想了解芯片行业的基本历史，可以读老美版；如果还想了解国内芯片行业的历史，可以读国人版。</p>
-
-<h2>科技动态</h2>
-
-<p>1、苹果的"液态玻璃"设计，曾经将 macOS <a href="https://512pixels.net/2025/06/finder-icon-fixed/">文件浏览器 Finder 的图标</a>左右反转。</p>
-
-<p>网友质疑后，苹果在下一个测试版又改回来了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025062603.webp" title="" /></p>
-
-<p>上图左边是原来的图标，中间是第一个测试版，右边是第二个测试版。</p>
-
-<p>最新图标依然采用玻璃材质，看起来感觉还不错。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025062604.webp" title="" /></p>
-
-<p>2、一个比利时工程师写了一个程序，让 AR 眼镜<a href="https://www.tomshardware.com/maker-stem/engineer-creates-ad-block-for-the-real-world-with-augmented-reality-glasses-no-more-products-or-branding-in-your-everyday-life">实时识别路边广告</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025062902.webp" title="" /></p>
-
-<p>一旦发现广告区域，就在其上覆盖一个红色遮盖层，相当于视觉屏蔽广告。</p>
-
-<p>这是我看到的最有创意的 AR 用法。</p>
-
-<p>3、媒体报道，<a href="https://m.huxiu.com/article/4267559.html">一个41岁的深圳程序员</a>不租房，在车里住了3年。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070307.webp" title="" /></p>
-
-<p>他老家在300公里外的广东阳江，周末开车回去看妻子孩子，平时睡在车里。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070309.webp" title="" /></p>
-
-<p>他说，以前在出租屋住，一个月要2500元，很小的单间，环境非常差。现在，"车上开着空调，很舒服的"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070310.webp" title="" /></p>
-
-<p>停车一晚是6元，平时洗漱在公园卫生间（上图）。他每天都去健身房，洗完澡开车回公园睡觉。至于脏衣服，周末带回老家去洗。</p>
-
-<p>4、<a href="https://www.engadget.com/transportation/tesla-shows-off-its-first-fully-autonomous-delivery-to-convince-us-its-self-driving-cars-work-163805707.html">特斯拉</a>上周采用无人驾驶，向客户交付了一辆汽车。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070102.webp" title="" /></p>
-
-<p>汽车从工厂下线后，自己开到客户家里，全程30分钟，中间还走了一段高速公路。</p>
-
-<p>5、美国本周启用"<a href="https://finance.sina.com.cn/stock/wbstock/2025-07-02/doc-infeasqa7814647.shtml">鳄鱼恶魔岛</a>"监狱，用来拘留非法移民。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070202.webp" title="" /></p>
-
-<p>这个监狱位于热带的佛罗里达州，建在废弃飞机场的跑道上。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070203.webp" title="" /></p>
-
-<p>它根本没有墙，因为周围都是大型沼泽地（上图），里面生活着大量鳄鱼，囚禁者没法越狱。想到在这个地方建设监狱的人，真是有想象力。</p>
-
-<p>6、微软正式规定，评估员工绩效时，要<a href="https://finance.sina.cn/7x24/2025-06-30/detail-infcwksi6186007.d.html">考核 AI 使用量</a>，强制要求员工必须使用 AI。</p>
-
-<h2>文章</h2>
-
-<p>1、<a href="https://archive.is/Xp9cN">Meta 的 AI 人才名单</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025063008.webp" title="" /></p>
-
-<p>《华尔街日报》的报道，Meta 公司搞了一个50人的名单，包括了世界最顶尖的 AI 人才，准备把他们都挖过来，甚至传言开出了1亿美元的天价薪水。</p>
-
-<p>我们可以从中了解，AI 人才的身价有多高，争夺有多么激烈。</p>
-
-<p>2、<a href="https://2ality.com/2025/06/ecmascript-2025.html">ECMAScript 2025 的新增语法</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025062901.webp" title="" /></p>
-
-<p>JS 语法标准发布了2025版，本文罗列了今年的7个新增语法。</p>
-
-<p>3、<a href="https://github.com/ruanyf/weekly/issues/7184">2010年江西高考理科数学压轴题</a>（中文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070104.webp" title="" /></p>
-
-<p>知乎上有个问题是高考数学最后一题可以有多难？公认史上最难高考数学题就是2008年江西高考理科数学压轴题，2010年的题目也很难。（<a href="https://github.com/ruanyf/weekly/issues/7184">@longluo</a> 投稿）</p>
-
-<p>4、<a href="https://halcy.de/blog/2025/06/27/transmitting-data-via-ultrasound-without-any-special-equipment/">通过超声波发送数据</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025063010.webp" title="" /></p>
-
-<p>本文介绍如何让手机浏览器发送超声波，并把数据编码在里面，从而就可以在用户毫无察觉的情况下，跟其他设备通信。</p>
-
-<p>5、<a href="https://emptysqua.re/blog/from-python-programmer-to-distributed-systems-researcher-in-10-years/">我的程序员人生</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070106.webp" title="" /></p>
-
-<p>作者的一篇回忆文章，总结了自己的人生，写得很鼓舞人。</p>
-
-<p>他在高中想学舞蹈，但是被 3D 动画片吸引，去读了计算机本科，毕业后成了 Python 程序员，后来靠着自学和努力，现在是分布式系统研究员。</p>
-
-<p>6、<a href="https://jsdev.space/tts-sentence-reader/">如何用 JS 写一个浏览器的语音朗读器</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025062706.webp" title="" /></p>
-
-<p>本文是一篇 JS 教程，教你用浏览器的 API，通过内置的 TTS 语音引擎，写一个句子朗读器。</p>
-
-<p>7、<a href="https://simonwillison.net/2025/Jun/26/sandboxes/">Cloudflare 和 Vercel 的沙盒功能</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025062705.webp" title="" /></p>
-
-<p>最近，<a href="https://blog.cloudflare.com/containers-are-available-in-public-beta-for-simple-global-and-programmable/">Cloudflare</a> 和 <a href="https://vercel.com/changelog/run-untrusted-code-with-vercel-sandbox">Vercel</a> 这两家公司，不约而同推出了沙盒功能，运行不受信任的 JS 代码，主要用例是执行大模型生成的代码。</p>
-
-<h2>工具</h2>
-
-<p>1、<a href="https://github.com/coder/code-server">code-server</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025063009.webp" title="" /></p>
-
-<p>VS Code 的一个服务器版本，让用户通过浏览器使用这个代码编辑器，不需要本地安装，参考<a href="https://www.xda-developers.com/i-self-hosted-this-vs-code-fork/">介绍文章</a>。</p>
-
-<p>2、<a href="https://github.com/stan-smith/OpenFLOW">OpenFLOW</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070105.webp" title="" /></p>
-
-<p>绘制网络基础设施图的开源工具。</p>
-
-<p>3、<a href="https://sniffnet.net/">Sniffnet</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025063011.webp" title="" /></p>
-
-<p>一个开源的跨平台桌面应用，用来监控本机的网络通信。</p>
-
-<p>4、<a href="https://github.com/oiov/wr.do/blob/main/README-zh.md">WR.DO</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070103.webp" title="" /></p>
-
-<p>一个自搭建的域名服务平台，可以基于域名创建子域名、短链接、邮件地址，并提供 API 接口。（<a href="https://github.com/ruanyf/weekly/issues/7173">@oiov</a> 投稿）</p>
-
-<p>5、<a href="https://github.com/yaolifeng0629/Pip-Helper">Pip-Helper</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025063003.webp" title="" /></p>
-
-<p>开源的浏览器插件，为主流视频网站提供画中画播放功能。关闭浏览器，画中画窗口依然打开。（<a href="https://github.com/ruanyf/weekly/issues/7163">@yaolifeng0629</a> 投稿）</p>
-
-<p>6、<a href="https://github.com/SimonAKing/Gwitter">Gwitter</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025063005.webp" title="" /></p>
-
-<p>自搭建的个人微博平台，数据存储在 GitHub issues。（<a href="https://github.com/ruanyf/weekly/issues/7166">@SimonAKing</a> 投稿）</p>
-
-<p>7、<a href="https://github.com/ValueMelody/melody-auth">Melody Auth</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070302.webp" title="" /></p>
-
-<p>自搭建的身份认证服务，支持社交平台、邮箱、短信等认证方式，可以作为 Auth0 的替代品。（<a href="https://github.com/ruanyf/weekly/issues/7197">@byn9826</a> 投稿）</p>
-
-<p>8、<a href="https://www.svgto3d.com/zh">SVG to 3D</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025063004.webp" title="" /></p>
-
-<p>这个网站将平面的 SVG 文件，免费转成 3D。（<a href="https://github.com/ruanyf/weekly/issues/7165">@wujieli0207</a> 投稿）</p>
-
-<p>9、<a href="https://www.codebox.club/zh">CodeBox</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025063006.webp" title="" /></p>
-
-<p>一个在线的二维码生成平台，可以定制各种属性。（<a href="https://github.com/ruanyf/weekly/issues/7168">@gdfsdjj145</a> 投稿）</p>
-
-<p>10、<a href="https://technitium.com/dns/">Technitium</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025062903.webp" title="" /></p>
-
-<p>一个自搭建的家用 DNS 服务器，带有 Web 界面，参见<a href="https://www.xda-developers.com/pihole-alternative-called-technitium/">介绍文章</a>。</p>
-
-<h2>AI 相关</h2>
-
-<p>1、<a href="https://github.com/microsoft/vscode-copilot-chat">GitHub Copilot</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070303.webp" title="" /></p>
-
-<p>微软开源了 VS Code 的 GitHub Copilot Chat 插件，用来跟 AI 对话。据说，GitHub Copilot 本体（主要完成代码补全和生成）很快也会开源。</p>
-
-<p>2、<a href="https://github.com/ezyshu/UserScript/tree/main/CAPTCHA-automatic-recognition">CAPTCHA-automatic-recognition</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070107.webp" title="" /></p>
-
-<p>一个油猴脚本，通过 AI 自动识别填充网页验证码。（<a href="https://github.com/ruanyf/weekly/issues/7187">@ezyshu</a> 投稿）</p>
-
-<h2>资源</h2>
-
-<p>1、<a href="https://github.com/InkSha/rust-tutorial">Rust 新手快速教程</a></p>
-
-<p>一个针对新手的 Rust 快速教程，从零开始写一个管理 Todos 的命令行程序。（<a href="https://github.com/ruanyf/weekly/issues/7188">@InkSha</a> 投稿）</p>
-
-<p>2、<a href="https://planetscale.com/blog/btrees-and-database-indexes">B 树互动教程</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202409/bg2024091213.webp" title="" /></p>
-
-<p>这篇教程通过很多互动示例，讲解数据库常用的 B 树数据结构。</p>
-
-<p>3、<a href="https://river-runner-global.samlearner.com/">River Runner Global</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202501/bg2025012904.webp" title="" /></p>
-
-<p>全球任意地点的一滴雨，会流到哪里？这个网站给出雨水的流动路径，点击下雨的地点，它会可视化雨水的地面路径。</p>
-
-<p>4、<a href="https://traffic.cv/">Traffic.cv</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070319.webp" title="" /></p>
-
-<p>免费的网站流量信息查询工具。（<a href="https://github.com/ruanyf/weekly/issues/7202">@typewe</a> 投稿）</p>
-
-<h2>图片</h2>
-
-<p>1、<a href="https://x.com/djcows/status/1940149135426167002">xAI 办公室</a></p>
-
-<p>推特上面，有人贴出了马斯克 xAI 的办公室照片。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070305.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025070306.webp" title="" /></p>
-
-<p>你要知道，那里员工的身价都是百万美元、千万美元级别的。</p>
-
-<p>2、<a href="https://kottke.org/25/06/chris-ware-creates-stamps-for-usps">美国邮政（USPS）250周年</a></p>
-
-<p>美国邮政局（USPS）成立于独立战争期间，具体日期是1775年6月26日，上周是250周年纪念日。</p>
-
-<p>为了纪念这个日子，它发行了一组20枚连在一起的套票。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025062801.webp" title="" /></p>
-
-<p>邮票上是一个典型的美国小镇，街道上唯一的车辆是递送信件和包裹的邮车。大家可以数一下，一共有几辆。</p>
-
-<p>邮票共分4行，每行5枚，从上到下描绘了四个季节。</p>
-
-<h2>文摘</h2>
-
-<p>1、<strong>芯片的种类</strong></p>
-
-<p>摘自《芯片战争》，[美]克里斯·米勒（浙江人民出版社，2023）</p>
-
-<p>21世纪初，半导体已分为三大类。</p>
-
-<p>第一类是逻辑芯片，就是以逻辑运算为主要功能的芯片，智能手机、计算机、服务器的处理器都属于这一类。</p>
-
-<p>它的性能强弱主要跟制造工艺有关，内部集成的晶体管越小，性能越强。摩尔定律讲的就是这一类芯片。</p>
-
-<p>第二类是存储芯片，就是存储数据的芯片，分为 DRAM（内存芯片，短期存储数据）和 NAND（记忆卡芯片，长期存储数据）。</p>
-
-<p>DRAM 过去有几十家生产商，但现在主要是三大巨头：美光、三星和 SK 海力士。后两家都是韩国厂商，美光虽然是美国公司，但它的工厂大多收购而来，所以主要也是在亚洲生产。</p>
-
-<p>NAND 的生产商之中，三星最大，占据了35%的市场份额，其余有韩国的 SK 海力士、日本的铠侠、美国的美光和西数。</p>
-
-<p>第三类是其他芯片，包括模拟信号转换为数字信号的模拟芯片、与手机网络进行通信的射频芯片，以及管理设备如何使用电力的电源芯片。</p>
-
-<p>这一类芯片的功能与制造工艺基本无关，而与设计有关，所以摩尔定律对它们不生效，大约四分之三的此类芯片还在用180纳米或以上的工艺生产。</p>
-
-<p>由于不需要使用更小的晶体管，也不需要经常升级，它们的制造成本要低得多。如今，最大的模拟芯片制造商是德州仪器（TI）。</p>
-
-<h2>言论</h2>
-
-<p>1、</p>
-
-<p>2022年11月30日是一个永载史册的日子，就像第一颗原子弹爆炸，OpenAI 公司推出了 ChatGPT，从此人类再也没有了未被 AI 污染的新数据。</p>
-
-<p>-- <a href="https://www.theregister.com/2025/06/15/ai_model_collapse_pollution/">theregister.com</a></p>
-
-<p>2、</p>
-
-<p>HTTP 原本用于学术论文。现在它运行着文明。</p>
-
-<p>-- <a href="https://worksonmymachine.substack.com/p/mcp-an-accidentally-universal-plugin">《MCP：一个意外的 AI 插件系统》</a></p>
-
-<p>3、</p>
-
-<p>孤独是一个建筑问题。</p>
-
-<p>现在的很多建筑物，不利于人们聚集。我们需要的建筑物，应该是方便步行，并且免费，不属于任何人。以前的城市，有很多这样的地方。</p>
-
-<p>-- <a href="https://buttondown.com/monteiro/archive/how-to-leave-the-house/">《如何走出家门》</a></p>
-
-<p>4、</p>
-
-<p>20世纪90年代，一些工程师意识到：显卡本质就是一个并行处理设备。</p>
-
-<p>在屏幕上进行图像渲染，这是一个可以并行处理的计算任务----每个像素点的色彩可以独立计算，不需要考虑其他像素点。</p>
-
-<p>-- 余盛《芯片战争》</p>
-
-<p>5、</p>
-
-<p>我感觉，如果美国取消芯片出口管制，中国政府就会实施芯片的进口管制，以保护国内芯片产业，打造一个真正能与英伟达/台积电/苹果/谷歌抗衡的芯片制造商。</p>
-
-<p>-- <a href="https://news.ycombinator.com/item?id=44442771">Hacker News 读者</a></p>
-
-<h2>往年回顾</h2>
-
-<p><a href="https://www.ruanyifeng.com/blog/2024/07/weekly-issue-308.html">工作找不到，博士能读吗？</a>（#308）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2023/06/weekly-issue-258.html">卡马克的猫</a>（#258）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2022/05/weekly-issue-208.html">晋升制度的问题</a>（#208）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2021/05/weekly-issue-158.html">内容渠道的贬值</a>（#158）</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2025-07-04T08:02:04+08:00">2025年7月 4日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
