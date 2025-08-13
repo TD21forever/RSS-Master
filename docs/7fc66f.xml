@@ -5,6 +5,61 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/101744</id>
+            <title>一日一技 | 用 TLP 解锁 Linux 笔记本的长续航体验</title>
+            <link>https://sspai.com/post/101744</link>
+            <guid isPermaLink="false">https://sspai.com/post/101744</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 13 Aug 2025 09:06:06 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Linux省电, PowerTOP, TLP, 电池优化
+
+<br>
+<br>
+总结: 本文介绍了在Archlinux系统上通过PowerTOP和TLP工具优化笔记本电池续航的方法。作者对比了MacBook和Windows笔记本的续航表现，指出Linux默认缺乏电源管理导致续航较短。核心方案包括安装配置TLP服务、调整CPU调频驱动(amd-pstate)、设置能源性能偏好(EPP)、管理充电阈值等。通过降低屏幕亮度、关闭动态组件等基础措施，结合TLP的进阶配置，最终将85Wh电池的续航从3-5小时提升到8小时左右。文章还提供了具体的命令行操作和配置参数，特别说明了ThinkPad和非ThinkPad设备的电池护理设置差异。 </div>
+                        <hr>
+                    
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><h2>背景</h2><p>我一直很羡慕 Mac 笔记本，尤其是 MacBook Air，轻薄便携的机身与惊人的续航几乎就是它的标志。通过 MacOS 系统和 M 系列芯片的软硬件深度整合，苹果给 MacBook Air 带来的省电体验实在是让人印象深刻。</p><p>相比之下，Windows 笔记本虽然难以完全复刻这种表现，但随着 AMD 和 Intel 在芯片架构与制程工艺上的进步，加上各大 OEM 厂商的省电模式与大容量电池的配合，现在的 Windows 笔记本也能做到办公场景下 8~10 小时的续航。其中的佼佼者，如 Lunar Lake 系列的笔记本，已经达到甚至超越了 Mac。</p><p>然而，我的笔记本上运行的则是 Archlinux。由于几乎没有进行过任何电源优化，即使这台笔记本拥有 85 Wh 的电池，离电续航却往往只有 3~5 小时。于是为了提示笔记本的离电使用时间，我决定探索一下 Linux 上的省电方案。</p><h2>核心工具</h2><p>Linux 下有两款工具可以用来协助用户进行功耗控制：PowerTOP 和 TLP。</p><ul><li>PowerTOP：顾名思义，类似 <code>top</code>，用于监控系统中各个软件与硬件组件的功耗情况，并能生成详情报告与优化建议。即使不使用它来直接进行具体的配置，它本身依然是一个非常优秀的功耗分析工具，可以帮助定位设备上主要的耗电来源。</li><li>TLP：这是一款功能丰富的命令行工具，能够在无需深入研究技术细节的情况下，轻松延长笔记本电脑的续航时间。TLP 默认针对电池寿命进行了优化，并且开箱即用地实现了 PowerTOP 的推荐配置。因此大部分情况下，只需要安装并启用 TLP 服务，就可以得到不错的省电效果。</li></ul><h2>基础措施</h2><p>在启用 TLP 之前，先调整一些离电状态下的基础配置（如屏幕亮度与键盘背光）。这些设置通常已集成在桌面环境的电源管理中，可以立即减少功耗。以 KDE 为例，可在“系统设置 → 电源管理”中，对电池供电时的屏幕亮度与键盘背光进行调节。我自己的设置是将屏幕亮度降低到了 20%，并完全关闭键盘背光。因为我离电场景多是在室内光照环境下，不需要更高的屏幕亮度和键盘背光。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/10/f3e566d726aeda3d14039a08ac29c8eb.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&nbsp;</p><p>另一个容易被忽略的功耗来源是桌面环境的动态组件，例如天气挂件、系统监控以及动态壁纸等。这些组件在离电状态下仍然可能会占用不少的系统资源，从而拖累整体的续航时间。可以根据自身的需求，调整这些组件的运行策略，例如：天气类挂件可以延长数据的刷新间隔，动态壁纸组件也可以设置为电池模式时停止动态特效。这样减少动态组件的活动频率，也可以进一步延长使用电池时的续航。</p><p>接下来，就是安装并启用 PowerTOP 和 TLP：</p><pre class="language-bash"><code># 安装 PowerTOP（功耗分析工具）
+sudo pacman -S powertop
+
+# 安装 TLP（实际的电源管理服务）
+sudo pacman -S tlp
+
+# 安装 tlp-rdw（提供根据特定事件启用或禁用蓝牙/Wi-Fi和WWAN设备的功能，需要NetworkManager）
+sudo pacman -S tlp-rdw 
+
+# 启用 TLP 服务（可以使用 --now 参数立即启动服务）
+sudo systemctl enable tlp.service
+
+# 启用 tlp-rdw 需要的 NetworkManager-dispatcher.service 
+sudo systemctl enable NetworkManager-dispatcher.service
+
+# 屏蔽 systemd-rfkill 相关服务避免冲突，确保 TLP 的无线电设备切换选项正常工作
+sudo systemctl mask systemd-rfkill.service 
+sudo systemctl mask systemd-rfkill.socket</code></pre><p>启动 TLP 服务后，可以通过以下命令检查其运行状态：</p><pre class="language-bash"><code>sudo tlp-stat -s</code></pre><p>若一切正常，应该可以看到 TLP 输出的系统信息和 TLP 服务状态。</p><p>以上就是一个基本的电源管理配置了。大部分情况下，TLP 提供的默认配置已经足够了。但因为 TLP 本身也是可以进行高度定制化的，所以还可以针对自己设备的情况，进行更深入的设置。</p><h2>进阶配置</h2><p>TLP 本身是一个纯命令行的工具，其配置文件路径位于 <code>/etc/tlp.conf</code>，可以通过修改配置文件来修改它的配置。或者也可以使用 TLPUI 之类的图形界面来进行可视化的配置操作，这也是我主要使用的配置方式。</p><pre class="language-bash"><code># TLPUI 位于 AUR 仓库中
+yay -S tlpui</code></pre><p>安装完成后，打开 TLPUI，就可以使用它来更改 TLP 的配置了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/10/bca936144de54fe963f0f5eae8a9e195.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>CPU DRIVER OPMODE</h3><p>TLPUI 的 CPU 选项中的第一个项目是 CPU DRIVER OPMODE，这个项目中配置的是 CPU 的调频驱动。在较新的 AMD CPU（Zen 2 或更新版本）和内核版本中（内核 6.3 或更新），推荐的 CPU 调频驱动是 <code>amd-pstate/amd-pstate-epp</code>，可以通过下面的命令来检查当前 CPU 调频驱动的模式：</p><pre class="language-bash"><code>cat /sys/devices/system/cpu/amd_pstate/status</code></pre><p>如果输出的信息是 <code>active</code>，说明 <code>amd-pstate</code> 驱动已经启用并被设置为了 <code>active</code>，也称 <code>amd-pstate-epp</code>，这是推荐的现代模式。该驱动模式下，低级别控制权会被交给 CPU 硬件本身，硬件可以根据能源性能偏好（Energy Performance Preference，EPP）来优先考虑性能或能效。</p><p>如果上面的命令输出了其他结果或者文件并不存在，那么在 6.3 或更新的内核上，可以将 <code>amd_pstate=active</code> 加入到内核启动参数中使其永久生效：</p><pre class="language-bash"><code>sudo vim /etc/default/grub</code></pre><p>找到 <code>GRUB_CMDLINE_LINUX_DEFAULT</code> 这一行，在引导参数中加入 <code>amd_pstate=active</code>：</p><pre class="language-diff"><code>- GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
++ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash amd_pstate=active"</code></pre><p>保存后，重新生成 GRUB 配置文件并重启：</p><pre class="language-bash"><code>sudo grub-mkconfig -o /boot/grub/grub.cfg    
+sudo reboot</code></pre><p>再次执行下面的命令：</p><pre class="language-bash"><code>cat /sys/devices/system/cpu/amd_pstate/status</code></pre><p>此时应该可以看到输出为 <code>active</code>。</p><p>在 TLP 配置中，也可以手动更改 <code>CPU_DRIVER_OPMODE_ON_AC/BAT</code> 的选项，如需区分插电和离电时的调频驱动模式，那么就可以在这里进行配置，否则只需要在启动参数中统一设置就足够了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/10/d1f383a9770b6ec725f5fc49f049ba27.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&nbsp;</p><p>这里也结合 TLP 的文档对 <code>guided</code> 和 <code>passive</code> 简单进行一下说明：</p><ul><li><code>guided</code>：需要 6.4 或更高的内核版本，可以配置最大和最小频率，处理器将在指定范围内自动选择工作频率。基本上可以将 <code>guided</code> 视为强制限定了频率范围的 <code>active</code> 模式。</li><li><code>passive</code>：可以结合 Linux 的 CPU 调速器（Governor）使用，也就是 TLP 中的 CPU SCALING GOVERNOR 选项。CPU 将按照调速器的配置决定频率。</li></ul><p>还可以通过下面的命令来验证当前 CPU 的调频驱动：</p><pre class="language-bash"><code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver</code></pre><p>如果是 <code>active</code> 模式，那么结果应该是 <code>amd-pstate-epp</code>。<code>guided</code> 或 <code>passive</code> 模式下，这个命令输出的可能是 <code>amd-pstate</code> 或其他结果（例如文件不存在等）。</p><h3>CPU SCALING GOVERNOR</h3><p>这个配置项目用于选择自动频率调节的 CPU 调速器，TLP 的默认设置的插电和离电的调速器都是 <code>powersave</code>。可以通过下面的命令，确认当前驱动模式下可用的调速器：</p><pre class="language-bash"><code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors</code></pre><p>当 <code>amd-pstate</code> 为 <code>active</code> 模式时，可用的选项有 <code>performance</code> 和 <code>powersave</code>，当 <code>amd-pstate</code> 处于 <code>guided</code> 或 <code>passive</code> 模式时，全部的选项有 <code>conservative</code>、<code>ondemand</code>、<code>userspace</code>、<code>powersave</code>、 <code>performance</code> 和 <code>schedutil</code> 这六个。对这些调速器的更具体说明，可以参考相关的<a href="https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt">文档</a>。</p><p>因为我已经激活了 <code>amd-pstate-epp</code>驱动，所以我只有 <code>performance</code> 和 <code>powersave</code> 这两个选项，并且这两个选项在当前模式下，实际上并不是像真正的调速器那样工作，而是会被转换为 CPU 内部的能源性能偏好提示去进行工作。因此我这里保持了默认的状态，并没有进行设置。</p><p>另外需要说明的是，TLP 配置项中明确提到了，如果要配置此项，必须禁用发行版的调速器设置，否则会发生冲突。在 KDE 和 GNOME 桌面环境中，这个发行版的调速器设置通常可能是 <code>power-profiles-daemon</code> 管理的。</p><p>可以通过验证服务状态来确认：</p><pre class="language-bash"><code># 检查 power-profiles-daemon 服务是否在运行
+systemctl status power-profiles-daemon.service
+
+# 如果服务在运行中，可以选择停止并禁用该服务
+sudo systemctl stop power-profiles-daemon.service
+sudo systemctl disable power-profiles-daemon.service
+
+# 或者屏蔽该服务
+sudo systemctl mask power-profiles-daemon.service</code></pre><h3>CPU ENERGY PERF POLICY</h3><p>这个配置项目在 <code>amd-pstate-epp</code> 驱动下才是主要控制 CPU 能源消耗的配置项。在大多数情况下，它的可选值有 5 个：<code>performance</code>，<code>balance_performance</code>，<code>default</code>、<code>balance_power</code> 和 <code>power</code>。这 5 个节能的程度依次加深。</p><p>同样的，可以通过命令来确认自己 CPU 可用的 EPP 选项：</p><pre class="language-bash"><code>cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_available_preferences</code></pre><p>我将插电时的 EPP 设置为了 <code>performance</code>，离电时则改为了最节能的 <code>power</code>。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/10/be6c406863adb751bec7701aba4b0f53.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>TLP 的其他设置</h3><p>使用电池时关闭睿频：</p><pre class="language-txt"><code>CPU_BOOST_ON_BAT=0</code></pre><p>设置平台（Platform）的整体电源级别：</p><p>当前可用的配置值可以使用下面的命令查看：</p><pre class="language-bash"><code>$ cat /sys/firmware/acpi/platform_profile_choices
+low-power balanced performance</code></pre><p>我的配置如下：</p><pre class="language-txt"><code>PLATFORM_PROFILE_ON_AC=performance
+PLATFORM_PROFILE_ON_BAT=low-power</code></pre><p>还有一些别的配置项目，如硬盘、WIFI 以及 USB 的省电，也可以通过 TLPUI 进行检查。这时候就会发现，TLP 在默认情况下的确已经进行了不少的配置了。所以这些配置项目我也就没有再进行进一步的更改了。</p><h2>电池</h2><p>最后的部分是电池本身的护理。电池护理并不会直接降低功耗，但能够减少容量的衰减，延长使用寿命。在 TLPUI 中，这部分的配置位于「ThinkPad 电池」标签，但这个配置并不只适用于 ThinkPad 机型。实际可用的参数取决于笔记本厂商与驱动的支持情况，具体的配置可以参考 TLP 的<a href="https://linrunner.de/tlp/settings/bc-vendors.html">相关文档</a>。</p><p>以我的 ThinkBook 为例，属于联想的非 ThinkPad 系列，使用的是 <code>ideapad_laptop</code> 驱动。可以通过 <code>lsmod | grep ideapad_laptop</code> 命令来确认，如果看到该模块已加载，就可以进行对应的电池阈值配置：</p><pre class="language-txt"><code>START_CHARGE_THRESH_BAT0=0  # dummy value
+STOP_CHARGE_THRESH_BAT0=1</code></pre><p>这样电池的最大充电量就会被限制在 80%，减少高电量长期保持带来的电池老化。</p><p>但是，如果让电脑始终保持在 80% 的电量，难道不就是平白无故地损失了 20% 的容量吗？这里其实可以区分不同的使用场景：</p><ul><li>日常插电为主时：保持 80% 的上限，延长电池寿命。</li><li>临时需要外出时：可以通过命令 <code>tlp fullcharge</code> 临时将电源充满，达到最长的续航效果。</li></ul><p>另一个配置项，RESTORE_THRESHOLDS_ON_BAT 就是结合这种情况使用的。当使用 <code>tlp fullcharge</code> 将电池充满后，TLP 的阈值限制会在下一次开机后才恢复。启用这个配置项，可以在电脑切换回插电状态后，自动恢复用来的充电阈值。这样就能兼顾长期的电池寿命和临时的续航需求。</p><h2>最终结果</h2><p>完成以上的配置后，我再次在离电状况下启动了 PowerTOP 观察自己笔记本的功耗表现，发现设备的整体功耗已经被限制在了 8~10 w 左右（网页浏览和笔记记录等轻度工作）。这个功耗结合 85 Wh 的电池，已经足够给我带来 8 小时左右的续航了。</p><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/101761</id>
             <title>深入 Nothing Phone (3)：这是 2025 年最好玩的手机</title>
             <link>https://sspai.com/post/101761</link>
@@ -226,61 +281,6 @@
                         <hr>
                     
                     <blockquote><p><strong>在喧嚣的信息洪流中，Quote/0 为你和 TA 留住每一刻心动。</strong></p></blockquote><p>Quote/0 双人套装，专为情侣打造——两台墨水屏，互联心意，随时随地传递爱意。</p><p>定制属于你们的浪漫屏幕：一句情话、一个纪念日、一次共同的约定……轻轻触碰 NFC，即刻唤起甜蜜回忆。</p><p>吸附在冰箱、书架的 Quote/0，不仅是科技的点缀，更是你们爱情的见证。</p><span class="ss-externalProduct" title="Quote/0 七夕节礼盒" type="externalproduct">&nbsp;</span><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/11/article/d9e41003ef6d53d89d435661db13b5ec.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>情感连接</h2><p>双机套装强调的是「双份」与「同步」，是情侣间独一无二的连接方式。通过两台设备，可以实现信息的同步、情感的传递和默契的培养。</p><h2>功能实用性</h2><p>Quote/0 强大的功能可以满足情侣共同的需求，如共同的待办清单、情侣专属的日程提醒、异地恋间的实时情话传递等，使其成为一个既有情感价值又有实际用途的礼物。</p><h2>创意与个性化</h2><p>开放的 API 让情侣可以共同创造属于自己的「双屏」体验，展现独特的个性和爱情故事，这远比一个单纯的礼品更具吸引力</p><figure class="image ss-img-wrapper image_resized" style="width: 449px;"><img src="https://cdnfile.sspai.com/2025/08/11/article/99bb2fd72b5d91672903a57c04d18953.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>共同生活</h2><p>一台放在客厅提醒共同的待办，一台放在书桌记录各自的灵感。生活琐事，也能因为同步的默契，而充满甜蜜。</p><p>Quote/0 双机套装，让我们的生活有更多交集。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/11/article/5b5512911095890c2f733daa39b66e79.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>异地恋</h2><p>距离，让思念更浓。</p><p>把「早安」、「晚安」，和每一个想念你的瞬间，通过 Quote/0 即时同步。屏幕不发光，爱却一直在。</p><p>双机套装，让心不再有距离。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/11/article/147b723bb34b38aaea061a28ea2bf808.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>纪念日/节日</h2><p>厌倦了千篇一律的礼物？</p><p>将你们的第一次见面、第一次旅行，使用 Quote/0 API 做成专属的墨水屏模板。每一次轻触，都是一次甜蜜的回忆。</p><p>Quote/0 双机套装，给爱一个 「新」 意。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/11/article/567c229d0c5ece7cd5ee28a17f7911d6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>套装内容</h2><ul><li>七夕情人节专属包装。</li></ul><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/12/5ec3d9f7333e2d6e8cbde09ac4084e74.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>包装示意图</figcaption></figure><ul><li>Quote/0 两台，引磁贴两片（可粘在没有磁力的物体表面）及派派獭情人节限定贴纸两份。</li><li>优惠价：¥299（原价 <s>¥359</s>）</li><li>发货日期：8 月 24 日前发货，确保大家节日前拿到礼品。</li><li>限量 500 份，先到先得，点击下方链接即可购买。</li></ul><span class="ss-externalProduct" title="Quote/0 七夕节礼盒" type="externalproduct">&nbsp;</span><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/08/11/4dbeb94df0f5be5dde7651efd6836149.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/08/11/c77da732336bb7e5b80e44468614e643.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/101744</id>
-            <title>Archlinux 笔记本省电设置</title>
-            <link>https://sspai.com/post/101744</link>
-            <guid isPermaLink="false">https://sspai.com/post/101744</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 10 Aug 2025 21:54:21 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Linux省电, PowerTOP, TLP, 电池优化
-
-<br>
-<br>
-总结: 本文介绍了在Archlinux系统上通过PowerTOP和TLP工具优化笔记本电池续航的方法。作者对比了MacBook和Windows笔记本的续航表现，指出Linux默认缺乏电源管理导致续航较短。核心方案包括安装配置TLP服务、调整CPU调频驱动(amd-pstate)、设置能源性能偏好(EPP)、管理充电阈值等。通过降低屏幕亮度、关闭动态组件等基础措施，结合TLP的进阶配置，最终将85Wh电池的续航从3-5小时提升到8小时左右。文章还提供了具体的命令行操作和配置参数，特别说明了ThinkPad和非ThinkPad设备的电池护理设置差异。 </div>
-                        <hr>
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><h2>背景</h2><p>我一直很羡慕 Mac 笔记本，尤其是 MacBook Air，轻薄便携的机身与惊人的续航几乎就是它的标志。通过 MacOS 系统和 M 系列芯片的软硬件深度整合，苹果给 MacBook Air 带来的省电体验实在是让人印象深刻。</p><p>相比之下，Windows 笔记本虽然难以完全复刻这种表现，但随着 AMD 和 Intel 在芯片架构与制程工艺上的进步，加上各大 OEM 厂商的省电模式与大容量电池的配合，现在的 Windows 笔记本也能做到办公场景下 8~10 小时的续航。其中的佼佼者，如 Lunar Lake 系列的笔记本，已经达到甚至超越了 Mac。</p><p>然而，我的笔记本上运行的则是 Archlinux。由于几乎没有进行过任何电源优化，即使这台笔记本拥有 85 Wh 的电池，离电续航却往往只有 3~5 小时。于是为了提示笔记本的离电使用时间，我决定探索一下 Linux 上的省电方案。</p><h2>核心工具</h2><p>Linux 下有两款工具可以用来协助用户进行功耗控制：PowerTOP 和 TLP。</p><ul><li>PowerTOP：顾名思义，类似 <code>top</code>，用于监控系统中各个软件与硬件组件的功耗情况，并能生成详情报告与优化建议。即使不使用它来直接进行具体的配置，它本身依然是一个非常优秀的功耗分析工具，可以帮助定位设备上主要的耗电来源。</li><li>TLP：这是一款功能丰富的命令行工具，能够在无需深入研究技术细节的情况下，轻松延长笔记本电脑的续航时间。TLP 默认针对电池寿命进行了优化，并且开箱即用地实现了 PowerTOP 的推荐配置。因此大部分情况下，只需要安装并启用 TLP 服务，就可以得到不错的省电效果。</li></ul><h2>基础措施</h2><p>在启用 TLP 之前，先调整一些离电状态下的基础配置（如屏幕亮度与键盘背光）。这些设置通常已集成在桌面环境的电源管理中，可以立即减少功耗。以 KDE 为例，可在“系统设置 → 电源管理”中，对电池供电时的屏幕亮度与键盘背光进行调节。我自己的设置是将屏幕亮度降低到了 20%，并完全关闭键盘背光。因为我离电场景多是在室内光照环境下，不需要更高的屏幕亮度和键盘背光。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/10/f3e566d726aeda3d14039a08ac29c8eb.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&nbsp;</p><p>另一个容易被忽略的功耗来源是桌面环境的动态组件，例如天气挂件、系统监控以及动态壁纸等。这些组件在离电状态下仍然可能会占用不少的系统资源，从而拖累整体的续航时间。可以根据自身的需求，调整这些组件的运行策略，例如：天气类挂件可以延长数据的刷新间隔，动态壁纸组件也可以设置为电池模式时停止动态特效。这样减少动态组件的活动频率，也可以进一步延长使用电池时的续航。</p><p>接下来，就是安装并启用 PowerTOP 和 TLP：</p><pre class="language-bash"><code># 安装 PowerTOP（功耗分析工具）
-sudo pacman -S powertop
-
-# 安装 TLP（实际的电源管理服务）
-sudo pacman -S tlp
-
-# 安装 tlp-rdw（提供根据特定事件启用或禁用蓝牙/Wi-Fi和WWAN设备的功能，需要NetworkManager）
-sudo pacman -S tlp-rdw 
-
-# 启用 TLP 服务（可以使用 --now 参数立即启动服务）
-sudo systemctl enable tlp.service
-
-# 启用 tlp-rdw 需要的 NetworkManager-dispatcher.service 
-sudo systemctl enable NetworkManager-dispatcher.service
-
-# 屏蔽 systemd-rfkill 相关服务避免冲突，确保 TLP 的无线电设备切换选项正常工作
-sudo systemctl mask systemd-rfkill.service 
-sudo systemctl mask systemd-rfkill.socket</code></pre><p>启动 TLP 服务后，可以通过以下命令检查其运行状态：</p><pre class="language-bash"><code>sudo tlp-stat -s</code></pre><p>若一切正常，应该可以看到 TLP 输出的系统信息和 TLP 服务状态。</p><p>以上就是一个基本的电源管理配置了。大部分情况下，TLP 提供的默认配置已经足够了。但因为 TLP 本身也是可以进行高度定制化的，所以还可以针对自己设备的情况，进行更深入的设置。</p><h2>进阶配置</h2><p>TLP 本身是一个纯命令行的工具，其配置文件路径位于 <code>/etc/tlp.conf</code>，可以通过修改配置文件来修改它的配置。或者也可以使用 TLPUI 之类的图形界面来进行可视化的配置操作，这也是我主要使用的配置方式。</p><pre class="language-bash"><code># TLPUI 位于 AUR 仓库中
-yay -S tlpui</code></pre><p>安装完成后，打开 TLPUI，就可以使用它来更改 TLP 的配置了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/10/bca936144de54fe963f0f5eae8a9e195.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>CPU DRIVER OPMODE</h3><p>TLPUI 的 CPU 选项中的第一个项目是 CPU DRIVER OPMODE，这个项目中配置的是 CPU 的调频驱动。在较新的 AMD CPU（Zen 2 或更新版本）和内核版本中（内核 6.3 或更新），推荐的 CPU 调频驱动是 <code>amd-pstate/amd-pstate-epp</code>，可以通过下面的命令来检查当前 CPU 调频驱动的模式：</p><pre class="language-bash"><code>cat /sys/devices/system/cpu/amd_pstate/status</code></pre><p>如果输出的信息是 <code>active</code>，说明 <code>amd-pstate</code> 驱动已经启用并被设置为了 <code>active</code>，也称 <code>amd-pstate-epp</code>，这是推荐的现代模式。该驱动模式下，低级别控制权会被交给 CPU 硬件本身，硬件可以根据能源性能偏好（Energy Performance Preference，EPP）来优先考虑性能或能效。</p><p>如果上面的命令输出了其他结果或者文件并不存在，那么在 6.3 或更新的内核上，可以将 <code>amd_pstate=active</code> 加入到内核启动参数中使其永久生效：</p><pre class="language-bash"><code>sudo vim /etc/default/grub</code></pre><p>找到 <code>GRUB_CMDLINE_LINUX_DEFAULT</code> 这一行，在引导参数中加入 <code>amd_pstate=active</code>：</p><pre class="language-diff"><code>- GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
-+ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash amd_pstate=active"</code></pre><p>保存后，重新生成 GRUB 配置文件并重启：</p><pre class="language-bash"><code>sudo grub-mkconfig -o /boot/grub/grub.cfg    
-sudo reboot</code></pre><p>再次执行下面的命令：</p><pre class="language-bash"><code>cat /sys/devices/system/cpu/amd_pstate/status</code></pre><p>此时应该可以看到输出为 <code>active</code>。</p><p>在 TLP 配置中，也可以手动更改 <code>CPU_DRIVER_OPMODE_ON_AC/BAT</code> 的选项，如需区分插电和离电时的调频驱动模式，那么就可以在这里进行配置，否则只需要在启动参数中统一设置就足够了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/10/d1f383a9770b6ec725f5fc49f049ba27.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&nbsp;</p><p>这里也结合 TLP 的文档对 <code>guided</code> 和 <code>passive</code> 简单进行一下说明：</p><ul><li><code>guided</code>：需要 6.4 或更高的内核版本，可以配置最大和最小频率，处理器将在指定范围内自动选择工作频率。基本上可以将 <code>guided</code> 视为强制限定了频率范围的 <code>active</code> 模式。</li><li><code>passive</code>：可以结合 Linux 的 CPU 调速器（Governor）使用，也就是 TLP 中的 CPU SCALING GOVERNOR 选项。CPU 将按照调速器的配置决定频率。</li></ul><p>还可以通过下面的命令来验证当前 CPU 的调频驱动：</p><pre class="language-bash"><code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver</code></pre><p>如果是 <code>active</code> 模式，那么结果应该是 <code>amd-pstate-epp</code>。<code>guided</code> 或 <code>passive</code> 模式下，这个命令输出的可能是 <code>amd-pstate</code> 或其他结果（例如文件不存在等）。</p><h3>CPU SCALING GOVERNOR</h3><p>这个配置项目用于选择自动频率调节的 CPU 调速器，TLP 的默认设置的插电和离电的调速器都是 <code>powersave</code>。可以通过下面的命令，确认当前驱动模式下可用的调速器：</p><pre class="language-bash"><code>cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors</code></pre><p>当 <code>amd-pstate</code> 为 <code>active</code> 模式时，可用的选项有 <code>performance</code> 和 <code>powersave</code>，当 <code>amd-pstate</code> 处于 <code>guided</code> 或 <code>passive</code> 模式时，全部的选项有 <code>conservative</code>、<code>ondemand</code>、<code>userspace</code>、<code>powersave</code>、 <code>performance</code> 和 <code>schedutil</code> 这六个。对这些调速器的更具体说明，可以参考相关的<a href="https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt">文档</a>。</p><p>因为我已经激活了 <code>amd-pstate-epp</code>驱动，所以我只有 <code>performance</code> 和 <code>powersave</code> 这两个选项，并且这两个选项在当前模式下，实际上并不是像真正的调速器那样工作，而是会被转换为 CPU 内部的能源性能偏好提示去进行工作。因此我这里保持了默认的状态，并没有进行设置。</p><p>另外需要说明的是，TLP 配置项中明确提到了，如果要配置此项，必须禁用发行版的调速器设置，否则会发生冲突。在 KDE 和 GNOME 桌面环境中，这个发行版的调速器设置通常可能是 <code>power-profiles-daemon</code> 管理的。</p><p>可以通过验证服务状态来确认：</p><pre class="language-bash"><code># 检查 power-profiles-daemon 服务是否在运行
-systemctl status power-profiles-daemon.service
-
-# 如果服务在运行中，可以选择停止并禁用该服务
-sudo systemctl stop power-profiles-daemon.service
-sudo systemctl disable power-profiles-daemon.service
-
-# 或者屏蔽该服务
-sudo systemctl mask power-profiles-daemon.service</code></pre><h3>CPU ENERGY PERF POLICY</h3><p>这个配置项目在 <code>amd-pstate-epp</code> 驱动下才是主要控制 CPU 能源消耗的配置项。在大多数情况下，它的可选值有 5 个：<code>performance</code>，<code>balance_performance</code>，<code>default</code>、<code>balance_power</code> 和 <code>power</code>。这 5 个节能的程度依次加深。</p><p>同样的，可以通过命令来确认自己 CPU 可用的 EPP 选项：</p><pre class="language-bash"><code>cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_available_preferences</code></pre><p>我将插电时的 EPP 设置为了 <code>performance</code>，离电时则改为了最节能的 <code>power</code>。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/08/10/be6c406863adb751bec7701aba4b0f53.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>TLP 的其他设置</h3><p>使用电池时关闭睿频：</p><pre class="language-txt"><code>CPU_BOOST_ON_BAT=0</code></pre><p>设置平台（Platform）的整体电源级别：</p><p>当前可用的配置值可以使用下面的命令查看：</p><pre class="language-bash"><code>$ cat /sys/firmware/acpi/platform_profile_choices
-low-power balanced performance</code></pre><p>我的配置如下：</p><pre class="language-txt"><code>PLATFORM_PROFILE_ON_AC=performance
-PLATFORM_PROFILE_ON_BAT=low-power</code></pre><p>还有一些别的配置项目，如硬盘、WIFI 以及 USB 的省电，也可以通过 TLPUI 进行检查。这时候就会发现，TLP 在默认情况下的确已经进行了不少的配置了。所以这些配置项目我也就没有再进行进一步的更改了。</p><h2>电池</h2><p>最后的部分是电池本身的护理。电池护理并不会直接降低功耗，但能够减少容量的衰减，延长使用寿命。在 TLPUI 中，这部分的配置位于「ThinkPad 电池」标签，但这个配置并不只适用于 ThinkPad 机型。实际可用的参数取决于笔记本厂商与驱动的支持情况，具体的配置可以参考 TLP 的<a href="https://linrunner.de/tlp/settings/bc-vendors.html">相关文档</a>。</p><p>以我的 ThinkBook 为例，属于联想的非 ThinkPad 系列，使用的是 <code>ideapad_laptop</code> 驱动。可以通过 <code>lsmod | grep ideapad_laptop</code> 命令来确认，如果看到该模块已加载，就可以进行对应的电池阈值配置：</p><pre class="language-txt"><code>START_CHARGE_THRESH_BAT0=0  # dummy value
-STOP_CHARGE_THRESH_BAT0=1</code></pre><p>这样电池的最大充电量就会被限制在 80%，减少高电量长期保持带来的电池老化。</p><p>但是，如果让电脑始终保持在 80% 的电量，难道不就是平白无故地损失了 20% 的容量吗？这里其实可以区分不同的使用场景：</p><ul><li>日常插电为主时：保持 80% 的上限，延长电池寿命。</li><li>临时需要外出时：可以通过命令 <code>tlp fullcharge</code> 临时将电源充满，达到最长的续航效果。</li></ul><p>另一个配置项，RESTORE_THRESHOLDS_ON_BAT 就是结合这种情况使用的。当使用 <code>tlp fullcharge</code> 将电池充满后，TLP 的阈值限制会在下一次开机后才恢复。启用这个配置项，可以在电脑切换回插电状态后，自动恢复用来的充电阈值。这样就能兼顾长期的电池寿命和临时的续航需求。</p><h2>最终结果</h2><p>完成以上的配置后，我再次在离电状况下启动了 PowerTOP 观察自己笔记本的功耗表现，发现设备的整体功耗已经被限制在了 8~10 w 左右（网页浏览和笔记记录等轻度工作）。这个功耗结合 85 Wh 的电池，已经足够给我带来 8 小时左右的续航了。</p><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>
