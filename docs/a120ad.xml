@@ -5,6 +5,439 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2025/08/weekly-issue-362.html</id>
+            <title>科技爱好者周刊（第 362 期）：GitHub 工程师谈系统设计</title>
+            <link>http://www.ruanyifeng.com/blog/2025/08/weekly-issue-362.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/08/weekly-issue-362.html</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 22 Aug 2025 08:17:06 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 系统设计,数据库,缓存,后台作业
+
+<br>
+<br>
+总结: GitHub工程师分享系统设计经验，指出程序设计是组装代码而系统设计是组装服务。良好的系统应从简单有效开始发展，避免从零设计复杂系统。系统设计难点在于状态管理，应尽量减少有状态组件并使用数据库管理状态。数据库常成为系统瓶颈，可通过读写分离和缓存优化性能。耗时应放入后台作业队列处理，缓存适用于数据生成与读取速度不匹配的场景。事件中心适用于发送方不关心处理结果的场景，但不要过度使用事件。数据传送可选择拉取或推送方式，具体取决于场景需求。 </div>
+                        <hr>
+                    
+                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
+<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/7408">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
+
+<h2>封面图</h2>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025082101.webp" title="" /></p>
+
+<p>中国首艘火箭回收船"星际归航"本月成功下水，它的40米x60米的甲板，将用于火箭在海上降落。该船的拥有者是民营航天公司"星际荣耀"。（<a href="https://www.geekpark.net/news/352799">via</a>）</p>
+
+<h2>GitHub 工程师谈系统设计</h2>
+
+<p>上周，我读到一篇文章，作者是 GitHub 的高级工程师<a href="https://www.seangoedecke.com/">肖恩·戈德克</a>（sean goedecke）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081814.webp" title="" /></p>
+
+<p>文章题目是<a href="https://www.seangoedecke.com/good-system-design/">《我所知的良好的系统设计》</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081818.webp" title="" /></p>
+
+<p>读完后，我觉得写得不错。GitHub 工程师总结经验，教大家设计一个良好的系统，不是空泛之谈。下面是我的一些摘录。</p>
+
+<p>1、</p>
+
+<p>程序设计是组装代码，系统设计是组装服务。</p>
+
+<p>程序设计的组件是变量、函数、类等，系统设计的组件是服务器、数据库、缓存、队列、事件总线、代理等。</p>
+
+<p>2、</p>
+
+<p>如果一个系统很长时间不出错，它的设计就是良好的。</p>
+
+<p>如果你进一步看了代码，脱口而出："哈，这比我想的要简单"，或者"这个部分不用我操心，即使出问题也容易解决"，它的设计就是优秀的。</p>
+
+<p>3、</p>
+
+<p>良好的系统设计，总是从一个有效的简单系统发展而来。千万不要从零开始设计一个复杂的系统。</p>
+
+<p>4、</p>
+
+<p>系统设计的难点在于状态。尽量采用无状态组件，最小化"有状态组件"的数量。</p>
+
+<p>状态的复杂性在于，你无法简单地重启服务。一旦出错，往往需要手动修复状态。</p>
+
+<p>5、</p>
+
+<p>状态需要保存在数据库。数据库是最重要的系统组件，用来管理状态。</p>
+
+<p>数据库的设计目标是每张表易于理解：打开看一下表结构，就能大致了解存储的数据内容及其原因。</p>
+
+<p>千万不要采用复杂的表结构（也就是数据结构），会给代码带来极大的复杂性和性能约束。</p>
+
+<p>6、</p>
+
+<p>数据库往往是系统瓶颈，因为每个页面请求可能要调用数十次、数百次数据库，而且是按顺序调用。</p>
+
+<p>为了避免瓶颈，数据库可以做成一个写入节点和多个只读副本。数据查询都发往只读副本，数据写入发往写入节点。</p>
+
+<p>写入节点与只读副本之间，存在数据复制延迟。如果更新一条记录后，你需要立即读取它，那么可以将数据放入内存，写入数据库成功后从内存读取。</p>
+
+<p>7、</p>
+
+<p>耗时的操作要拆分出来，放在后台作业（即系统外部的单独服务），排队完成。</p>
+
+<p>后台作业主要分成两个组件：一个队列服务，一个作业运行器（从队列中获取任务并执行）。</p>
+
+<p>队列任务的软件，可以用 Redis（需要尽快执行的任务），也可以用数据库（不着急的任务）。</p>
+
+<p>8、</p>
+
+<p>如果数据的生成速度和读取速度不匹配，经典解决方案就是缓存。</p>
+
+<p>缓存的最简单做法，就是把数据保存在内存，否则就使用专门的键值存储软件（比如 Redis 或 Memcached），后者的好处是多个服务器可以共享缓存。</p>
+
+<p>初级工程师希望缓存所有内容，而高级工程师希望尽量少用缓存。因为缓存是状态的来源，不可避免需要校验状态和处理状态过期。</p>
+
+<p>9、</p>
+
+<p>除了缓存和后台作业，大型系统通常还有事件中心，一般用的是 Kafka。</p>
+
+<p>事件中心也是一个队列，存放的是"某件事发生了"的消息。比如，用户注册触发了"新帐户创建"事件，该事件就放入事件中心，然后由事件中心去通知订阅该事件的多个服务：发送欢迎电子邮件、设置个人空间等等。</p>
+
+<p>事件中心适用于，发送事件的代码不关心其他服务如何处理事件，或者事件量很大且对响应时间不太敏感。</p>
+
+<p>不要过度使用事件，很多时候，更简单的做法是让一个服务请求另一个服务的 API。</p>
+
+<p>为了便于除错，所有日志最好都放在一起，你可以立即看到另一个服务的响应。</p>
+
+<p>10、推拉</p>
+
+<p>如果数据需要传送到多处，有拉取（pull）和推送（push）两种选择。</p>
+
+<p>一般来说，拉取比较简单（比如大多数网站采用的轮询），推送更节省资源，不需要用户主动请求数据，一旦后端数据发生变化，服务器主动将数据推送给每个客户端。</p>
+
+<p>如果你确实需要向100万个客户端提供最新数据（就像 GMail 那样），应该采用推送还是拉取？这要视情况而定。如果采用推送，就要把每次推送放入一个事件队列，并让一大群事件处理器从队列中拉取数据并推送。如果采用拉取，就要部署一堆（比如100台）快速的只读缓存服务器，处理所有读取流量。</p>
+
+<h2>谷歌的两个 AI 新产品</h2>
+
+<p>谷歌本周公开了两个新产品。</p>
+
+<p>1、<a href="https://aistudio.google.com/prompts/new_image">Imagen 4 模型</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081708.webp" title="" /></p>
+
+<p>这是谷歌最新的"文生图"模型，可以在官网<a href="https://aistudio.google.com/prompts/new_image">免费使用</a>，参见<a href="https://developers.googleblog.com/en/announcing-imagen-4-fast-and-imagen-4-family-generally-available-in-the-gemini-api/">介绍文章</a>。</p>
+
+<p>我觉得，图片生成速度很快，效果相当好（比如下图"机器人拿着一块红色滑板"）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081707.webp" title="" /></p>
+
+<p>2、<a href="https://learning.google.com/experiments/learn-about/signup">Learning About</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081805.webp" title="" /></p>
+
+<p>Learning About 是谷歌的<a href="https://learning.google.com/experiments/learn-about?src=signup">新型学习平台</a>，使用 AI 生成学习教程。</p>
+
+<p>先输入你想要学习的主题，比如 Java 语言。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081806.webp" title="" /></p>
+
+<p>它会返回一篇简单的教程，</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081807.webp" title="" /></p>
+
+<p>除了总体介绍，里面还会列出各种学习主题，可以进一步深入学习。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081808.webp" title="" /></p>
+
+<h2>科技动态</h2>
+
+<p>1、英国内政部宣布，英国的警车将加装<a href="https://news.sky.com/story/facial-recognition-vans-to-be-rolled-out-across-police-forces-in-england-13410613">面部识别系统</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081815.webp" title="" /></p>
+
+<p>警车一边开，一边扫描路上行人的面孔，跟警方的数据库比对。如果发现可疑人士，就发出警报。</p>
+
+<p>据称，该技术在伦敦试运行期间，12个月内已抓到了580名嫌疑人。</p>
+
+<p>2、很多人喜欢旅行时邮寄明信片，作为纪念。</p>
+
+<p>但是，明信片需要手写，而且只能传递文字，在手机时代显得很落伍。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081302.webp" title="" /></p>
+
+<p>一家美国公司最近推出了 <a href="https://www.sendkeeps.com/">Keeps</a>（上图）。用户在它的网站，上传照片，并留下一段语音（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081303.webp" title="" /></p>
+
+<p>它会把照片打印成明信片，背后是一个二维码，然后把明信片寄给你指定的收件人。对方收到后，手机扫描二维码，就能听到你留下的语音。</p>
+
+<p>3、维基百科的条目，有各种语言的版本。你知道最多语言的条目，是哪一篇吗？</p>
+
+<p>出乎意料，居然是一个名不见经传的艺术家，名叫<a href="https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost/2025-08-09/Disinformation_report">大卫·伍德沃德</a>（David Woodard）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081304.webp" title="" /></p>
+
+<p>他的条目居然有335种语言版本，是所有条目中最多的。</p>
+
+<p>他的大部分语言版本都是一个叫做 Swmmng 的用户创建的，而且 IP 地址也一样，时间跨度持续了十多年。</p>
+
+<p>很显然，这是一起自我推销行为，这个艺术家为了出名，为自己生成各种语言的维基百科条目。现在，他的大部分语言版本已被删除，只留下20种语言。</p>
+
+<h2>文章</h2>
+
+<p>1、<a href="https://github.blog/ai-and-ml/llms/solving-the-inference-problem-for-open-source-ai-projects-with-github-models/">GitHub Models 的免费 AI 服务</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025082008.webp" title="" /></p>
+
+<p>我刚刚知道，GitHub 提供免费的 AI 模型调用，有 GPT-4o、DeepSeek-R1、Llama 3 等模型，不过有用量限制。</p>
+
+<p>2、<a href="https://jrsinclair.com/articles/2025/joy-of-immutable-data-recursion-pure-functions-javascript-mazes/">用 JavaScript 生成迷宫</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025082006.webp" title="" /></p>
+
+<p>本文用通俗的语言，介绍一种生成迷宫的简单算法，给出 JS 的实现。</p>
+
+<p>3、<a href="https://magecdn.com/blog/2025/08/11/cloudflare-not-a-cdn/">Cloudflare 不是 CDN</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081816.webp" title="" /></p>
+
+<p>Cloudflare 提供无限流量的免费 CDN，那么为什么它还有收费的 CDN？本文告诉你，除了流量，CDN 还有其他指标。</p>
+
+<p>4、<a href="https://tylercipriani.com/blog/2025/08/15/git-lfs/">Git 如何处理大文件</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081713.webp" title="" /></p>
+
+<p>几十 MB 的大文件，不适合放入 Git 仓库。如果一定要放，要使用一个扩展 Git LFS。但是它不太好用，作者提出改进建议。</p>
+
+<p>5、<a href="https://www.xda-developers.com/vs-code-extensions-i-cant-live-without/">10个有用的 VS Code 插件</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025052504.webp" title="" /></p>
+
+<p>作者介绍10个他已经离不开的 VS Code 插件。</p>
+
+<p>6、<a href="https://jeclark.net/articles/tcp-initcwnd/?tag=performance">TCP 初始拥塞窗口的问题</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081706.webp" title="" /></p>
+
+<p>TCP 协议有一个"拥塞窗口"的设计，会根据网络状况，自动调整发送数据包的数量。本文通俗地解释这个概念，并提出改进的方案。</p>
+
+<h2>工具</h2>
+
+<p>1、<a href="https://github.com/bgreenwell/doxx">doxx</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081809.webp" title="" /></p>
+
+<p>终端查看 docx 文件的命令行工具。</p>
+
+<p>2、<a href="https://github.com/weynechen/intrascribe">IntraScribe</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081601.webp" title="" /></p>
+
+<p>面向企事业单位内网环境的一个"语音转文字"的管理协作平台。（<a href="https://github.com/ruanyf/weekly/issues/7542">@weynechen</a> 投稿）</p>
+
+<p>3、<a href="https://github.com/miroslavpejic85/p2p">P2P Remote Desktop</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081602.webp" title="" /></p>
+
+<p>一个开源的 Windows 远程桌面工具，直接运行可执行文件打开远程桌面，无需配置和安装。（<a href="https://github.com/ruanyf/weekly/issues/7547">@miroslavpejic85</a> 投稿）</p>
+
+<p>4、<a href="https://github.com/AkenClub/CuteClock">CuteClock</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081703.webp" title="" /></p>
+
+<p>一个开源硬件项目，基于 ESP8266 的智能时钟，可以显示时间和天气，支持小爱同学语音控制，自带 Web 和小程序客户端。（<a href="https://github.com/ruanyf/weekly/issues/7553">@AkenClub</a> 投稿）</p>
+
+<p>5、<a href="https://github.com/GitDzreal93/clean-your-mac">CleanYourMac</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081704.webp" title="" /></p>
+
+<p>开源的 Mac 应用，智能清理工具，使用 AI 分析要删除的文件。（<a href="https://github.com/ruanyf/weekly/issues/7555">@GitDzreal93</a> 投稿）</p>
+
+<p>6、<a href="https://github.com/chromium-style-qrcode/next-qrcode-generator">Next QR Code Generator</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081801.webp" title="" /></p>
+
+<p>Firefox 浏览器的开源插件，为页面生成类似 Chrome 的二维码。（<a href="https://github.com/ruanyf/weekly/issues/7563">@liuliangsir</a> 投稿）</p>
+
+<p>7、<a href="https://github.com/AnYi-0/Translator">Translator 快速翻译</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081802.webp" title="" /></p>
+
+<p>Chrome 浏览器的离线翻译插件，基于浏览器新的 Translator API 和 Language Detector API，不用网络也能翻译。（<a href="https://github.com/ruanyf/weekly/issues/7562">@AnYi-0</a> 投稿）</p>
+
+<p>8、<a href="https://ipynbtopdf.net/">Jupyter Notebook 转换网站</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025082003.webp" title="" /></p>
+
+<p>这个网站可以将 ipynb 文件转化为 PDF、HTML 和 Python。（<a href="https://github.com/ruanyf/weekly/issues/7587">@CurioChen77</a> 投稿）</p>
+
+<p>9、<a href="https://github.com/luckfu/docker_pull">Docker Pull Script</a></p>
+
+<p>一个 Python 脚本，用于从指定镜像源下载 Docker 镜像，支持并发下载、智能缓存（layer 增量更新）。（<a href="https://github.com/ruanyf/weekly/issues/5931#issuecomment-3205330268">@luckfu</a> 投稿）</p>
+
+<p>10、<a href="https://makegraph.app/editor">Make Graph</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025082102.webp" title="" /></p>
+
+<p>在线图表制作网站，支持主流图表类型，可导出 SVG。（<a href="https://github.com/ruanyf/weekly/issues/7597">@bimohxh</a> 投稿）</p>
+
+<p>另有一个类似工具 <a href="https://chartfromtext.com/">ChartFromText</a>，输入数据，在线生成各种图表。（<a href="https://github.com/ruanyf/weekly/issues/7601">@StevenWuHao</a> 投稿）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025082104.webp" title="" /></p>
+
+<h2>AI 相关</h2>
+
+<p>1、<a href="https://progress.openai.com/">OpenAI Progress</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081709.webp" title="" /></p>
+
+<p>OpenAI 的官方项目，展示 AI 的发展历程：每一年，同样的提示语，不一样的输出。</p>
+
+<p>2、<a href="https://mcpso.cc/kchat/index.html">MCP Playground</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081701.webp" title="" /></p>
+
+<p>这个 Web 应用可以用作 MCP 客户端，指定 AI 模型和 MCP 服务器，在线使用。（<a href="https://github.com/ruanyf/weekly/issues/7550">@mcpexplorer</a> 投稿）</p>
+
+<p>3、<a href="https://github.com/Blushyes/coro-code">Coro Code</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081803.webp" title="" /></p>
+
+<p>基于终端的 AI 编码代理，Claude Code 的开源替代品。（<a href="https://github.com/ruanyf/weekly/issues/7561">@Blushyes</a> 投稿）</p>
+
+<p>4、<a href="https://github.com/leeguooooo/claude-code-usage-bar">Claude Code Status Bar Monitor</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025082005.webp" title="" /></p>
+
+<p>Claude Code 的插件，实时显示使用量和重置时间等信息。（<a href="https://github.com/ruanyf/weekly/issues/7588">@leeguooooo</a> 投稿）</p>
+
+<h2>资源</h2>
+
+<p>1、<a href="https://zedex.github.io/mandarin-reading-resource/">中小学语文示范诵读库</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081705.webp" title="" /></p>
+
+<p>中央人民广播电台<a href="https://edu.cnr.cn/eduzt/ywkwsfsd/">中小学语文示范诵读库</a>的 Web 前端，课文按年级、学期分类。（<a href="https://github.com/ruanyf/weekly/issues/7556">@ZedeX</a> 投稿）</p>
+
+<p>2、<a href="https://volumeshader.org/zh">在线硬件测试平台</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081702.webp" title="" /></p>
+
+<p>网页测试各种硬件（GPU、屏幕、网络、摄像头、声音、鼠标、键盘）。（<a href="https://github.com/ruanyf/weekly/issues/7552">@linhuaqian</a> 投稿）</p>
+
+<p>3、<a href="https://github.com/AlliotTech/ham-exam-web">业余无线电执照考试模拟</a>（2025 题库）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025082002.webp" title="" /></p>
+
+<p>基于官方最新题库构建的在线模拟与练习的 Web 应用。（<a href="https://github.com/ruanyf/weekly/issues/7585">@AlliotTech</a> 投稿）</p>
+
+<p>4、<a href="https://www.citywalki.com">Citywalki</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081804.webp" title="" /></p>
+
+<p>这个网站让你感受在世界200多个城市步行/开车/飞无人机。选择城市和移动方式后，它会全屏播放相应的 Youtube 视频，体验不错。</p>
+
+<h2>图片</h2>
+
+<p>1、<a href="https://kottke.org/25/08/roll-on-you-crazy-tire">滚动时间最长的滚轮胎</a></p>
+
+<p>推荐 Youtube 的<a href="https://www.youtube.com/watch?v=tLpQ5bcxouw">一个视频</a>。</p>
+
+<p>一群艺术家爬上智利最高的沙丘之一，在上面扔下一只轮胎，用无人机全程拍摄，看看它会滚动多久。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081710.webp" title="" /></p>
+
+<p>轮胎在沙漠里，差不多滚动了三分钟，视频就是这三分钟的全程滚动，非常壮观和纾压。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081711.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081712.webp" title="" /></p>
+
+<h2>文摘</h2>
+
+<p>1、<a href="https://daringfireball.net/linked/2025/08/15/woz-on-slashdot">沃兹尼亚克的故事</a></p>
+
+<p>今年8月11日，是苹果公司联合创始人史蒂夫·沃兹尼亚克 (Steve Wozniak) 75 岁的生日。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025082103.webp" title="" /></p>
+
+<p>网络论坛 Slashdot 转载了新闻媒体关于他的生日报道。有人留言，惋惜地说，如果他没有卖掉苹果股票，早就是世界数一数二的富翁了。</p>
+
+<p>沃兹尼亚克本人看到这条留言，在下面回复了一段话。</p>
+
+<blockquote>
+  <p>"我卖掉和捐赠了所有苹果股票，原因是财富和权力不是我生活的目的。</p>
+
+<p>我更希望自己拥有快乐和幸福。我资助了圣何塞（我出生在那里）的许多博物馆和艺术团体，他们还以我的名字命名了一条街道。</p>
+
+<p>二十年来，我一直公开演讲，收入可能达到1000万美元。这足够我用了。"</p>
+</blockquote>
+
+<p>这段话令人想起一本介绍苹果公司历史的书籍，里面曾经提到沃兹的故事。</p>
+
+<p>从学生时代起，他就对自己的财富漫不经心。后来有钱了，也依然如此。</p>
+
+<p>他从不记录自己的开销，也懒得听取理财建议。别人寻求帮助时，他经常当场开出支票。</p>
+
+<p>与乔布斯严格保管自己的苹果股票不同，他送给了父母、姐姐和弟弟400万美元股票，送给了朋友200万美元股票。父亲在他车里捡到过25万美元的未兑现支票，感叹说："像他这样的人不应该有那么多钱。"</p>
+
+<p>有一次，他来到苹果公司大声宣布："我的律师建议多元化投资，所以我刚刚买下了一家电影院。"但这件事后来引起了一些麻烦。这家电影院位于圣何塞东区贫民窟，放映了一部黑帮电影，引发了社区的抗议。他参加了几次社区会议，听取了当地居民的意见，承诺他的剧院不会放映暴力或色情电影，然后他在空荡荡的、黑暗的剧院里度过了几个下午，坐着不停看电影，扮演审查员的角色。</p>
+
+<h2>言论</h2>
+
+<p>1、</p>
+
+<p>我计划写一本 Gleam 编程语言的书。但是，AI 已经能非常清晰地解释 Gleam 了，而且还能回应读者的任何要求。</p>
+
+<p>虽然我自信，自己目前写得要比 AI 好，但是实在没有理由，说服自己去这样做。你花数百小时写书，赚到的钱根本不值得这样付出。</p>
+
+<p>有了 AI，我不知道，人们以后写书的动力是什么，大概只会为了乐趣而写作。</p>
+
+<p>-- <a href="https://dusty.phillips.codes/2025/06/08/my-ai-driven-identity-crisis/">《AI 引发的身份危机》</a></p>
+
+<p>2、</p>
+
+<p>让我难以抗拒的是，与中国打交道比与世界其他任何地方打交道都容易得多。我给中国某人发邮件，对方肯定会在24小时内回复，更有可能在4小时内。</p>
+
+<p>给一家欧盟或美国公司发邮件，通常要等上好几天才能收到回复。在与中国公司打交道时，我从未见过这种情况，一次也没有。而且，他们的 B2B 大型电商平台几乎总是提供全天候在线客服和采购支持。</p>
+
+<p>-- <a href="https://news.ycombinator.com/item?id=44936016">Hacker News 读者</a></p>
+
+<p>3、</p>
+
+<p>AI 不会减少你掌握新技能所需要付出的努力，只会让你产生不必学习就已经学会的错觉。 </p>
+
+<p>-- <a href="https://playtechnique.io/blog/ai-doesnt-lighten-the-burden-of-mastery.html">《AI 让人产生虚假的掌控感》</a></p>
+
+<p>4、</p>
+
+<p>可靠、透明的程序通常不符合程序设计者的利益。</p>
+
+<p>-- <a href="https://en.wikiquote.org/wiki/Niklaus_Wirth">尼克劳斯·维尔特</a>（Niklaus Wirth），计算机科学家，图灵奖得主</p>
+
+<h2>往年回顾</h2>
+
+<p><a href="https://www.ruanyifeng.com/blog/2024/08/weekly-issue-315.html">一份谷歌离职报告</a>（#315）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2023/08/weekly-issue-265.html">WiFi 的后面是 LiFi</a>（#265）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2022/07/weekly-issue-215.html">互联网最喜欢的行为模式</a>（#215）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2021/07/weekly-issue-165.html">全端 App 的时代</a>（#165）</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2025-08-22T08:17:06+08:00">2025年8月22日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2025/08/weekly-issue-361.html</id>
             <title>科技爱好者周刊（第 361 期）：暗网 Tor 安全吗？</title>
             <link>http://www.ruanyifeng.com/blog/2025/08/weekly-issue-361.html</link>
@@ -1840,216 +2273,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2025-07-24T14:16:26+08:00">2025年7月24日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2025/07/tangzong-diary.html</id>
-            <title>《唐纵日记》摘录</title>
-            <link>http://www.ruanyifeng.com/blog/2025/07/tangzong-diary.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/07/tangzong-diary.html</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 22 Jul 2025 14:48:37 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 唐纵日记,国民党腐败,蒋介石,抗战时期重庆  
-<br>  
-<br>  
-总结: 本文介绍了唐纵的生平及其日记内容。唐纵是蒋介石的心腹幕僚，长期负责情报工作。他的日记记录了国民党高层政治、抗战时期重庆的社会状况，包括物价飞涨、日军轰炸等。唐纵对国民党内部的腐败问题有清醒认识，认为官僚地主集团的腐败导致了国民党的衰落。他一生忠于蒋介石，认为国民党的问题并非蒋介石的责任。日记还包含对共产党的看法及官场处世之道的总结。 </div>
-                        <hr>
-                    
-                    <p>去年，我读了一本好书<a href="https://book.douban.com/subject/6877289/">《唐纵日记》</a>。当时做了很多摘录，今天整理出来。</p>
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072103.webp" title="" /></p>
-
-<h2>一、唐纵其人</h2>
-
-<p>唐纵（1905--1981），湖南酃县（今株洲炎陵县）人，毕业于黄埔军校六期，蒋介石的心腹幕僚，军统头目戴笠的密友。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072104.webp" title="" /></p>
-
-<p>黄埔军校毕业后，他在国民党的情报部门工作，是特务机构的骨干。</p>
-
-<p>1936年，他被派往德国，担任驻德使馆助理武官。回国后，进入蒋介石的秘书处"侍从室"，成为第六组的组长，负责情报事务，每天选出重要情报并附上个人见解，向蒋介石呈报。</p>
-
-<p>抗战胜利后，他担任过内政部政务次长、保密局副局长、警察总署署长。1949年去台湾，任国民党总裁办公室资料组组长、台湾省政府秘书长、国民党中央委员会秘书长等，1981年10月26日病逝于台北。</p>
-
-<p>唐纵在大陆期间，有写日记的习惯，保持了20年没有间断。他的日记非常保密，连老婆都不让看。</p>
-
-<p>1949年逃离大陆时，他来不及把日记带走，被解放军缴获。文化大革命后，大陆整理出版了他的日记（1936～1946）。</p>
-
-<h2>二、日记的风格</h2>
-
-<p>唐纵的日记不是长篇大论，他没有时间写，只是每天记录一些简单的片段，发表个人看法，直抒胸臆。</p>
-
-<p>他几乎不谈个人生活，关于家庭的记录寥寥无几，主要记录的是时局、高层政治、外交、军事等，披露了很多内幕，参考价值很高。</p>
-
-<p>因为没有打算给别人看，所以日记内容的可信度很高。</p>
-
-<h2>三、抗战时期的重庆</h2>
-
-<p>整个抗战期间，他大部分时间都呆在重庆，记录了一些重庆的社会状况。</p>
-
-<p>百姓生活非常困难，物价飞涨，物质缺乏。</p>
-
-<blockquote>
-  <p>重庆市的批发物价指数，五金电料类已涨至战前24倍，衣料已涨至16倍，食料已涨至6倍，燃料已涨至15倍。（1940年12月10日）    </p>
-</blockquote>
-
-<blockquote>
-<p>近来物价飞涨，人心浮动，咸谓非惩办囤积居奇者，不足以平抑市价。闻重庆囤户甚多，委座下令缉捕。缉捕后为孔祥熙所保释。闻者无不叹气!（1940年8月7日）</p>
-</blockquote>
-
-<p>日军虽然没有进攻重庆，但是经常派飞机轰炸，伤亡惨重。</p>
-
-<blockquote>
-  <p>昨日神仙洞一八零号公共防空洞被炸，一弹中门口，一弹中另一门口。天下有如此之巧事！计死亡一百七十七人，重伤一百六十七人，轻伤一百七十二人。因该处多全家遇难，故领恤者寥寥云。（1941年8月8日）</p>
-</blockquote>
-
-<p>著名的<a href="https://baike.baidu.com/item/%E5%A4%A7%E9%9A%A7%E9%81%93%E6%83%A8%E6%A1%88/7064195">大隧道惨案</a>也有提到。</p>
-
-<blockquote>
-  <p>（日机）夜袭，隧道窒息，发生大惨局。（夜间）七时许入防空洞，至十二时始解除。</p>
-
-<p>较场口隧道因人数过多，时间太久，而防护团不许人外出换气，将门倒锁，致发生窒息而死者数千人。</p>
-
-<p>此次惨况，闻在八时即已发生。当时，防护团员以维持秩序，不许人民外出，致洞内人向外拥挤，以不得外出，均倒毙拥塞于洞口。死者难受，自将衣服撕毁，且有握发力拔，死后犹拔发在握。其状诚不可言。（1941年6月5日）</p>
-</blockquote>
-
-<h2>四、对蒋介石忠心耿耿</h2>
-
-<p>唐纵的一生忠于蒋介石，日记提到蒋介石的地方，都是正面评价。蒋介石也很重视重用他。</p>
-
-<blockquote>
-  <p>委座对我可谓相当重视，一周之内，三迁其位，我将如何努力以报答领袖知遇之隆也!（1939年5月17日）</p>
-</blockquote>
-
-<p>唐纵认为，国民党存在的各种严重问题，都不是蒋介石的原因，而是底下的官僚地主集团太过腐败。</p>
-
-<blockquote>
-  <p>抗日三年，有钱者未尝减少，且因国难而膨胀其资财。中间层以薪水为生活之士大夫阶级，因物价之上涨而日见感受生活之痛苦，其思想感情，逐渐左倾，加以我政治之无能，腐化依旧，建树毫无，此在客观环境上，均于共党有利，如再过一年两年，纵敌军不深入夔门，社会亦将有巨大之变动!</p>
-
-<p>思及此，终夜未成眠。欲上书痛陈，继思以委座之聪明才智，岂尚不知，以委座应变之长才，岂尚无策，吾人何必过虑。（1940年8月14日）</p>
-</blockquote>
-
-<p>蒋介石对国民党的问题心知肚明，无奈客观条件制约，利益交错纵横，无力彻底改革。</p>
-
-<blockquote>
-  <p>时局已病入沉疴，决非局部更新可以奏效，必须领袖宸衷独断，下最大之决心，确立方针，调整组织，更新人事，始有回春之望！</p>
-
-<p>张部长谓如何能使委座下此决心！余曰，忖度委座在目前，不愿多所更张，战后当有一番改革，然而并非彻底之改革！且其时机过迟，是否有效，颇为可虑！（1944年9月14日） </p>
-</blockquote>
-
-<h2>五、腐败的国民党</h2>
-
-<p>唐纵对国民党内部的腐败问题有清醒的认识。</p>
-
-<blockquote>
-  <p>全国公务员、教职员和大多数老百姓都生活不了，天灾人祸，物价高涨，大家都在死亡线上挣扎。此时<strong>强者铤而走险，弱者死于沟壑</strong>。</p>
-
-<p>政府事事要办而无一事办好，人力分散，财力分散，显得处处薄弱，处处危险。在职的公务员，个个忙乱，精力分散。在下的忙于柴米油盐，在上的忙于妻财子禄，精力另有所托，另有所耗，对公事敷衍塞责，任何问题，不能解决。（1946年5月17日）</p>
-</blockquote>
-
-<p>他对此深恶痛绝，却也无力回天，只有叹息。</p>
-
-<blockquote>
-  <p>几个意见，均蒙领袖采纳，但是交下实施时，便无下落。自己坐在侍从室，眼见如此，真是有些心痛。（1938年10月6日）</p>
-</blockquote>
-
-<blockquote>
-<p>现在还在资本家官僚者把持得势之时，凡是违背他们利益时，任何主张意见，均无法实施。故虽委座苦口婆心，痛哭流涕，终无效力。（1941年1月7日）</p>
-</blockquote>
-
-<blockquote>
-  <p>现在官场中，自己不做事，又不愿旁人做，误事误国，言之慨然。如此政治非革命不可，但从何处下手是好，滔滔者天下皆是，就是撒手不问，也无可以生存之处，<strong>贪污的大的无人敢过问，小的做了替死鬼</strong>。（1941年9月9日） </p>
-</blockquote>
-
-<blockquote>
-<p>走私经商的不是党政机关就是军队，而纯粹商人走私经商已不容易了。今日犯科作奸的都是有力量的人，政治的败坏，自上而下，所有经济政治军事全都坏了，欲图挽救还是须要自上而下。如果不能彻底有所改革，社会真是不可收拾。（1944年6月29日）</p>
-</blockquote>
-
-<blockquote>
-  <p>本党在此次会议中完全表现为一保守性之政党而非革命性之政党。查其原因，国民党党员大部分为公务人员，此种党员在十余年来一党专政的长时期中，地位提高了，财产增大了，生活优裕了，大家希望保持其原有生活与地位，故不希望改革，以动摇其自己之地位。（1945年5月31日）</p>
-</blockquote>
-
-<blockquote>
-<p>本党政治的腐化不但引起党外的反感，亦且失了党内的同情，如果没有显著的改革，全国人心将不可收拾。（1945年6月30日）</p>
-</blockquote>
-
-<p>抗战期间，国民党政府和军队的萎靡状态，简直难以想象。</p>
-
-<blockquote>
-  <p>上午委座召集部长以下、科长以上职员训话，大骂人心披靡，精神不振，禁止以后不许嫖、赌、跳舞，在茶楼酒馆挥霍游荡，如有发觉，定予严惩。（1938年12月18日）</p>
-</blockquote>
-
-<blockquote>
-<p>现在士兵日不能饱，时思逃跑，官长，则时以防止士兵逃跑为急务，因不如此，则其赔偿损失将不堪负累矣。带兵且如此困难万分，遑论练兵，既不训练，何能作战?故每战辙北，非无因也，一叹！（1940年9月20日）</p>
-</blockquote>
-
-<blockquote>
-  <p>有人谓前方吃紧，后方紧吃，前方有什吃什，后方吃什有什。前方一身流血，后方满口流油。（1941年3月31日）</p>
-</blockquote>
-
-<blockquote>
-<p>上级干部在追求权位，下级同志在追求生活。主义、政治、革命，都已忘却了，消失了!（1943年4月28日） </p>
-</blockquote>
-
-<p>唐纵认为，国民党无力改革的根本原因，在于它是一个地主阶级政党，首先保卫自己的利益，而不是全民的利益。</p>
-
-<blockquote>
-  <p>救国必先救党，党不健全，便无法领导政治走上轨道，如何才能健全党呢？必须清理党的成分。据统计，目前青年团团员，百分之八十五是公务员，国民党的党员大都是地主资本家小资产阶级，与三民主义的精神正相反，何能望其执行三民主义之政策。（1940年11月8日）</p>
-</blockquote>
-
-<h2>六、对共产党的看法</h2>
-
-<p>唐纵对共产党的看法也很清醒，认为国民党的腐败导致了共产党的兴起。</p>
-
-<blockquote>
-  <p>许多地方治安不好，一有乱子，便归咎中共的煽动，其实以现在政治经济情形，没有中共也要出乱子。在民国以前没有共产党，历史上常常有农民暴动的事发生。把所有变乱的原因都归结于共产党的煽动，这是自己逃避责任。（1941年4月24日）</p>
-</blockquote>
-
-<blockquote>
-<p>广东东江之米，达四千多元一石，人民生计，艰苦达于极点，都是为共产党造机会。（1944年5月6日）</p>
-</blockquote>
-
-<h2>七、为人处世的经验</h2>
-
-<p>他的日记里面，还有很多官场观察和感叹。</p>
-
-<blockquote>
-  <p>历史上刚直孤僻者，未有不失败。官场亨通的人多半是圆滑，江洲上的石头没有一个是方峭的，方的都给水荡平了。山峰也是圆的，方的终会给风雨削平了。树木的干儿，也都是圆的，这是适者生存的道理。人类也不能逃出这个例子。历史上有能用刚直孤僻的人，是最成功的，但是刚直孤僻的人就不容易遇着这长官的。（1944年5月29日）</p>
-</blockquote>
-
-<p>他还有一篇最有趣的日记，对官场的生存之道进行了长篇总结。</p>
-
-<blockquote>
-  <p>一、品格高尚者为人赞扬，但攫权得势者多为小有才智，恭顺权贵，为权贵所赏识提携。</p>
-
-<p>二、学识渊博者为人称道，但踞高位者，多为善权术长机智，应变有方，处事圆滑之人。</p>
-
-<p>三、对上要善承意旨，不可自作主张，上之所欲者集全力为之，上之所恶者竭力避免，是非曲直不必计及，信任第一，是非其次。</p>
-
-<p>四、对同僚，应酬可以换取同情，同情即是友谊的保障，一切过失误会，皆可消释。</p>
-
-<p>五、对下属操纵在手牵制得法，苛刻严峻，反为当权者得意之作，宽恕仅为儒生之谈助。</p>
-
-<p>六、初起时必须利用机会，假借名义，自抬身价，大吹法螺，便可幸进，埋头苦干者未必得直。</p>
-
-<p>七、及在位，多做事多烦恼，不做事大家好，一年不倒，资格到手，二年不倒，官位稳固。</p>
-
-<p>八、洁身自好，是个好人，好人是个空名誉，忠厚老实是无用之别名，老实人只能粗茶淡饭，莫想乘肥马衣轻裘，妄想必多灾难，倒不如安分下场。（1942年8月）</p>
-</blockquote>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2025-07-22T14:48:37+08:00">2025年7月22日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
