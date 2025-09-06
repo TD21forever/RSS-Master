@@ -444,7 +444,7 @@ function getEnv() {
 }
 
 function joinHomebrewPath() {
-  return [process.env.PATH, "/opt/homebrew/bin", "/opt/homebrew/sbin"].filter(Boolean).join(":");
+  return [process.env.PATH, "/usr/local/bin", "/opt/homebrew/bin", "/opt/homebrew/sbin"].filter(Boolean).join(":");
 }</code></pre><h3>Change Log</h3><p>开发完成后，需要在 CHANGELOG.md 补充一条变更记录。</p><p>遵循 <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a> 写法，要求如下：</p><ul><li>格式必须是 <code>## [xxx] - {PR_MERGE_DATE}</code></li><li><code>[]</code> 内的为本次变更的标题</li><li><code>{PR_MERGE_DATE}</code> 为合并日期。因为从提交 PR 到审核通过可能要好几天，被合并时会自动替换</li></ul><blockquote><p>更多请看<a href="https://developers.raycast.com/basics/prepare-an-extension-for-store#version-history">这里</a></p></blockquote><pre class="language-text"><code># WeChat DevTool Changelog
 
 ## [New Version] - {PR_MERGE_DATE}
