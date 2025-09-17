@@ -5,6 +5,237 @@
         <link>https://sspai.com/matrix</link>
         
         <item>
+            <id>https://sspai.com/post/102575</id>
+            <title>数字基石·壹：我的 Android 最小启动单元</title>
+            <link>https://sspai.com/post/102575</link>
+            <guid isPermaLink="false">https://sspai.com/post/102575</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 16 Sep 2025 12:38:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>近日看到同站文章<a href="https://sspai.com/post/102151">《2025，你还折腾刷机吗？》</a>感触颇深，曾几何时我亦是刷机大军中的一员，然而随着政策收紧、年岁增加，心中已无折腾之意，用最少的精力打造最适合自己的系统逐渐成了我的首要目标。更何况刷机这行对技术要求高，风险也高（深夜尤甚），终究只得少数人青睐，遂决定写一系列短文，讲讲如何在不刷机、不解 BL、不 ROOT 的前提下，对各个操作系统进行非侵入式改造，使其更加简洁、更加个性化。以下这是我接触每一台 Android 手机都会执行的最小启动单元，通过少许应用调试，从开机起逐步打造自己的专属数字环境。另，出于某些原因，下文对于网络设置、跳过广告及其他不便展示的应用将不作着墨。微信、支付宝等日常必备应用亦不赘述。</p><p>封面由 Nano Banana 生成。</p><h3><a href="https://localsend.org/">LocalSend</a></h3><p>当崭新发亮的手机出于某些原因暂时无法下载某些 APP 时怎么办？LocalSend 闪亮登场，只要将设备连接到同一个 WiFi 即可快速发送接收文件。<strong>开源免费！</strong></p><p>关联阅读：<a href="https://sspai.com/post/78334">放过微信放过自己，跨设备传文件还有这些姿势</a></p><h3><a href="https://github.com/aistra0528/Hail">雹（Hail）</a></h3><p>系统预装的 APP 看不顺眼怎么办？卸载不掉怎么办？雹，一款 Android 应用冻结软件，可以快速停止、停用、卸载软件。本人除了微信、支付宝之外的所有国产软件皆冻结在此，要用时才搜索开启。请务必确保不要误封重要系统组件导致系统异常，裁员裁到大动脉。<strong>开源免费！</strong></p><h3><a href="https://shizuku.rikka.app/">Shizuku</a></h3><p>提起它可谓是无人不知，无人不晓。一款让应用程序直接使用系统 API 的工具，可简单理解为让软件在不 ROOT 的情况下也能拥有更高的权限，上下文提到的 Hail、AppOps 等软件都会用到它。配上无线调试功能，只需 WiFi 便可快速启动，简单好用。<strong>开源免费！</strong></p><p><strong>关联阅读</strong>：<a href="https://sspai.com/post/73294">别被 root 挡在门外：Shizuku 让 Android 玩机更简单</a></p><h3><a href="https://play.google.com/store/apps/details?id=me.piebridge.brevent">黑阈（Black Hole）</a></h3><p>也是省电老师傅了，能有效防止应用在后台运行，让手机更加持久流畅。 不开源，免费版已够用。</p><h3><a href="https://appops.rikka.app/zh-hans/">App Ops</a></h3><p>应用权限集中管理软件，自觉最好用的是「忽略」选项，可以让应用在请求权限的时候放行但返回空结果。不开源，免费版已够用。</p><p><strong>关联阅读：</strong><a href="https://sspai.com/post/61348">在权限管理上跑过 iOS 14 和 Android 11：App Ops 4.0 上手指南</a></p><h3><a href="https://github.com/stratumauth/app">Stratum</a></h3><p>一款双重身份验证 (2FA) 应用，支持加密备份、图标、分类和高度自定义。<strong>开源免费！</strong></p><h3><a href="https://bitwarden.com/">Bitwarden</a></h3><p>密码管理器，支持多端同步，快速填入，1Password 有的它都有而且。<strong>开源免费！</strong></p><p><strong>关联阅读：</strong><a href="https://sspai.com/post/61694">通过 Bitwarden 管理你的密码</a></p><h3><a href="https://www.coolapk.com/apk/com.ktls.fileinfo">存储空间清理</a></h3><p>适合中国宝宝体质的存储空间清理应用，有专属国内软件的清理规则，我会定期用它清缓存、大文件等。不开源且付费，但便宜，一杯奶茶钱。如果希望使用开源免费的替代品，也可试试 SD Maid SE FOSS 之类。</p><h3><a href="https://m.wandoujia.com/apps/7748079">河图-岁寒输入法</a></h3><p>心目中移动端最强的双拼变种输入法，使用点按+滑动的方式进行快速输入，大大减少了我使用 26 键时的误触，上手也不难，配合 Xperia 瘦长的机身甚至可以做到丝滑地单手操作。还能快速选中常用标点符号，长按空格进行语音输入，单手党福音。不开源且高级功能（韵母键族）及多设备同步需要付费。</p><p><strong>关联阅读：</strong></p><p><a href="https://sspai.com/post/46182">当滑动输入遇上双拼，岁寒输入法想让你的手机打字效率再高一点</a></p><p><a href="https://sspai.com/post/37642">我是如何开发岁寒输入法的：滑行输入的探索之路丨Matrix 精选</a></p><h3><a href="https://www.coolapk.com/">酷安</a></h3><p>本人寻找国产应用下载途径的顺序：Github / F-droid &gt; Google Play &gt; 酷安 &gt; 官网。酷安作为一个应用下载的第三方商店，体验还是很不错的。不开源但免费。</p><h3><a href="https://github.com/NeoApplications/Neo-Store">Neo Store</a></h3><p>一个现代且功能丰富的 F-Droid 客户端，界面好看。<strong>开源免费！</strong></p><h3><a href="https://gitlab.com/AuroraOSS/AuroraStore">Aurora Store</a></h3><p>允许用户在不登录 Google Play 账户的情况下下载 Play 商店中的应用，支持查看应用描述、截图、更新和评论。<strong>开源免费！</strong></p><h3><a href="https://play.google.com/store/apps/details?id=bitpit.launcher">Niagara Launcher</a></h3><p>心目中的安卓最佳启动器，有简洁、流畅的动画以及超高的颜值。由于我日常使用的 APP 只有七个，用这个简直刚刚好。不开源且需要付费。</p><p><strong>关联阅读：</strong><a href="https://sspai.com/post/71818">让桌面「流」起来，多是一件美事：Niagara Launcher</a></p><h3><a href="https://mixplorer.com/">MiXplorer</a></h3><p>系统自带的文件管理器从来就没有好用过，所以用 MiXplorer 代替，除了本地文件管理外，支持按视频、图片、APK 等进行分类管理，支持挂载网盘，并且内置 EPUB/MOBI/PDF 阅读器、图像查看器、媒体播放器和文本编辑器。鉴于我在手机上处理文件的次数并不多，它已经完全够用。不开源但免费。</p><h3><a href="https://github.com/WirelessAlien/ZipXtract">ZipXtract</a></h3><p>尽管 MiXplorer 支持压缩包操作，但似乎有 BUG 总是解压失败，故使用它来代替，支持解压 rar, zip, tar, bz2, gz, 7z, xz, jar 等类型。<strong>开源免费！</strong></p><h3><a href="https://play.google.com/store/apps/details?id=net.sjava.officereader">Office Reader</a></h3><p>偶尔在手机上看 Office 文件就用它。不开源，免费够用。</p><h3><a href="https://play.google.com/store/search?q=QRbot&amp;c=apps">QRbot</a></h3><p>免不了要扫二维码就用它，当然现在很多手机的相机应该也自带扫码功能了。不开源但免费。</p><h3><a href="https://github.com/breezy-weather/breezy-weather">Breezy Weather</a></h3><p>天气应用，界面流畅简洁而且没有任何广告，可以自定义天气源。<strong>开源免费！</strong></p><h3><a href="https://play.google.com/store/apps/details?id=me.i38.gesture">微动手势</a></h3><p>利用手机三轴陀螺仪识别并操控手机的应用，无需触摸屏幕，通过识别手机绕横轴、纵轴和Z轴的三种转动动作，对我这种单手党极其友好。不开源，免费版够用。</p><p><strong>关联阅读：</strong><a href="https://sspai.com/post/53892">「摇一摇」就能控制手机，微动手势让你的全面屏手势更完美 | App+1</a></p><h3><a href="https://slidebox.co/">Slidebox</a></h3><p>整理图片的利器，单击即可迅速将图片保存到指定文件夹中，上划即可删除。不开源但免费。</p><p>关联阅读：<a href="https://sspai.com/post/29246">对占内存的陈年旧照划划手指，好走不送：Slidebox</a></p><h3><a href="https://github.com/fork-maintainers/iceraven-browser">Iceraven</a></h3><p>一款基于 Mozilla Fenix 版 Firefox 的网络浏览器，致力于提供更多用户自定义功能、删除遥测并且提供更多扩展支持，本人在所有设备上的浏览器都基于 Firefox，并使用 Firefox 账户进行同步。<strong>开源免费！</strong></p><p><strong>关联阅读：</strong><a href="https://sspai.com/post/76688">想要逃离 Chrome？请收下这份 Firefox 终极隐私指南</a></p><h3><a href="https://viayoo.com/">Via</a></h3><p>一款名声在外、极致轻量化和简洁浏览器，当我只是想作简单搜索时就会用它而不是 Iceraven，几乎没有延迟的搜索和网页加载速度，非常舒适。不开源但免费。</p><p><strong>关联阅读：</strong><a href="https://sspai.com/post/29083">麻雀虽小，五脏俱全：Via 浏览器</a></p><h3>Yamby</h3><p>简洁实用的 Emby 第三方客户端，界面美观、操作丝滑，看电影看剧全靠它。不开源，免费够用。</p><h3><a href="https://music.aqzscn.cn/">音流</a></h3><p>一款 NAS 音乐串流播放器，支持 Subsoni, Navidrome, Emby, Jellyfin, AudioStation, Plex 等音乐服务，界面美观功能齐全，听音乐全靠它。不开源，下载等高级功能需要付费。</p><p><strong>关联阅读：</strong><a href="https://sspai.com/post/89420">Navidrome：自建音乐库新选择</a></p><p>&nbsp;</p><p>以上。二〇二五年九月十六日。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/102429</id>
+            <title>从 Nextcloud 到 Immich + Syncthing : 我的自托管媒体文件管理方案</title>
+            <link>https://sspai.com/post/102429</link>
+            <guid isPermaLink="false">https://sspai.com/post/102429</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 16 Sep 2025 01:23:15 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2>背景</h2><p>&nbsp;</p><p>在之前的<a href="https://sspai.com/post/102337" target="_blank">《用 Termux + Syncthing 自动定时备份 Android 媒体文件》</a>一文中，我提到了自己采用 “Syncthing + Immich” 作为媒体文件的同步与管理方案。那篇文章中解决是的客户端的问题：如何将散落在手机上的媒体文件统一集中并备份到服务端。这篇文章则是对服务端应用的改造补充，讲述了我从 Nextcloud 到 Syncthing + Immich 的实践过程。</p><p>在开始之前，或许有必要说明一下我对 Nextcloud 有什么不满。客观来讲，作为一个私有云盘，Nextcloud 是一个非常合格的应用。我能想到的，它与之对标的闭源软件是 Microsoft 的 OneDrive。再加上 Nextcloud 的 App Store 中，官方和社区提供的丰富插件生态，使得用户完全可以以 Nextcloud 为中心，构建一个自己的 ALL IN ONE 工作台。 但是我使用 Nextcloud 的诉求，除了单纯的备份，还包括了图片的管理。固然在 Nextcloud 中提供了简单的图片浏览和管理功能，但比较专门的图片管理应用，它的体验只能说是“聊胜于无”，远谈不上优秀。因此，我希望寻找一个更加现代的相册管理应用。</p><h2>方案比较</h2><p>这里，有必要回顾一下当初的选型过程。Github 上，有一个<a href="https://github.com/meichthys/foss_photo_libraries">仓库</a> 对自托管的照片库进行了比较。严格来说，这里比较的都是 FOSS（Free and Open-Source Software，自由及开源软件）软件，所以自然不包括 MTPhotos 或群晖相册之类的商业方案。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/11/28b59b783f27cc0ed5160605b218a6af.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><br />从这里的功能比较中可以看到，Nextcloud 自带的照片功能，在 LivePhotos 和 Videos 的支持上的确较差，并且在 Albums、Timeline 和 Search 等照片展示和检索功能上也不尽如人意。<br />这里面我最关注的是两个应用，一个就是有着压倒性 stars 数量的 Immich，另一个就是与 Nextcloud 集成的 Nextcloud Memories。</p><h3>Memories</h3><p>先来说 Memories 方案，这是我的一开始尝试的方案。理由很简单，Memories 可以直接与 Nextcloud 服务集成，只需要在当前应用内部安装插件并进行配置就好了，不用引用额外的新服务。看起来很简单，但是在执行时还存在不少需要注意的地方，例如：</p><ul><li>Nextcloud 的<a href="https://hub.docker.com/_/nextcloud/">社区镜像</a> 需要手动构建镜像才能支持硬件加速。</li><li>Memories 本身并不直接提供人脸识别功能，还需要依赖其他的插件，如 <a href="https://github.com/nextcloud/recognize">Recognize</a> 或 <a href="https://github.com/matiasdelellis/facerecognition">Face Recognize</a> 插件。</li><li>针对中国大陆的网络环境需要对 Nextcloud 的 App Store 进行配置。</li></ul><p>总得来说，Memories 仍然是 Nextcloud 的一个插件，并不是一个独立的应用服务。它的很多功能，如媒体转码、同步备份和人脸识别都与 Nextcloud 高度耦合。如果是重度依赖 Nextcloud 生态的用户，那么将 Memories 作为对 Nextcloud Photos 的增强替代，是非常合适的选择。无需单独再维护一套新的服务，只需要完成插件配置，就可以直接在原有的 Nextcloud 服务中，获得良好的照片管理体验。<br />但是对我来说，Nextcloud 的在线协作反而是多余的功能，所以我最终还是选择了单独部署图片服务的方案，Nextcloud 的部署配置就放在后文仅供参考了。</p><h3>Immich</h3><p>Immich 虽然被很多人视为“自托管版的 Google Photos”，但<a href="https://immich.app/">官网</a> 的免责声明，即这段：</p><blockquote><p>⚠️ The project is under&nbsp;<strong>very active</strong>&nbsp;development. Expect bugs and changes. Do not use it as&nbsp;<strong>the only way</strong>&nbsp;to store your photos and videos!”</p></blockquote><p>让我一开始还是有些犯怵。但在 demo 环境进行尝试后，Immich 更现代的 UI 设计、更优秀的 AI 识别以及其他开箱即用的相册功能还是吸引了我。再加上它完善的官方文档和活跃的社区环境，最终促使我决定了这次迁移。<br />在方案设计上，虽然 Immich 安卓端提供了备份的功能，但通过 Immich 备份的相册目录是由应用自身来管理的，不能保留原本的文件结构。因此本着“专业的人干专业的事” 的原则，我将 Nextcloud 拆分为专门的同步应用 Syncthing 和专门的照片管理应用 Immich 来分别进行部署。</p><h2>方案实施</h2><p>部署采用的是 Docker Compose 方式，这也是 Immich 官方推荐的方式，在开始前，需要确保系统已经安装了 Docker 和 Docker Compose，并且有可以拉取镜像的网络环境。</p><h3>准备工作</h3><p>我当前对 docker 应用的数据是全部存放在 <code>/docker</code> 路径下，并以应用来划分的。以 Nextcloud 为例，一个 <code>docker-compose.yml</code> 文件中包含了应用（Nextcloud）、数据库（mysql）和缓存（redis），那么它的路径结构在宿主机上可能是这样的：</p><pre class="language-shell"><code>/docker/nextcloud/
+├── app
+│&nbsp;&nbsp; ├── ...
+│&nbsp;&nbsp; └── nextcloud_data
+├── db
+│&nbsp;&nbsp; ├── conf
+│&nbsp;&nbsp; └── data
+└── cache
+    └── data</code></pre><p>在原本以应用为主的结构中，是不存在问题的，因为一个应用的数据只独属于这个应用容器。但是在现在拆分后方案中，媒体数据既需要 Syncthing 来进行同步，又需要在 Immich 中作为外部媒体库来进行管理，再按原来的方式进行处理就不是那么合适了。<br />因此，独立于应用的数据，我单独创建了一个 <code>/data</code> 路径专门来存放。例如这里 <code>/data/pictures</code> 就专门用来存放图片数据，<code>/data/documents</code> 则存放原本使用 Nextcloud 同步的文档数据。</p><h3>数据迁移</h3><p>有了上面的配置后，先进行的就是数据迁移工作。在磁盘有足够空间的情况下，这里可以先不用贸然将原来的数据直接移动（<code>mv</code>）到新路径，可以先复制一份保持冗余，等新应用稳定后，再进行归档或删除。<br />我先前的 Nextcloud 的文件存放在 <code>/var/www/html/data/用户名/files/</code> 下，以我的配置文件为例，对应的宿主机路径为 <code>/docker/nextcloud/app/data/用户名/files</code>。这里只需要通过 <code>rsync</code> 迁移到新的目标路径即可：</p><pre class="language-shell"><code># 归档模式进行复制
+# 参数说明：
+#    -a：归档模式，递归传输文件并保留所有文件属性
+#    -v：详细模式，增加输出的详细程度
+#    -P：显示进度并允许在传输中断后恢复部分传输的文件
+#    -h：以人类易读的格式显示文件大小信息
+# 如果有权限问题可能需要 sudo 执行
+sudo rsync -avPh /docker/nextcloud/app/data/用户/files/pictures/ /data/pictures/
+
+# 如果文件权限不一致（例如 nextcloud 中可能是 www-data 用户和用户组）执行
+# sudo chown -R 1000:1000 /data/pictures</code></pre><p>通常来讲，Linux 的第一个创建的用户的 UID 和 GID 都是 1000，因此后续都默认以 <code>1000:1000</code> 为例。也可以通过 <code>id -u</code> 和 <code>id -g</code> 确认当前用户的 UID 和 GID。</p><h3>Syncthing 配置</h3><p>Syncthing 的部署本身是不复杂的，只是我针对自己的情况进行了一些改动：</p><pre class="language-yaml"><code>services:
+  syncthing:
+    image: linuxserver/syncthing:2.0.3
+    container_name: syncthing
+    # linuxserver 的镜像支持 PUID 和 PGID 参数
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+    volumes:
+    # 应用自身相关的配置，挂载在 /docker/syncthing 下
+      - /docker/syncthing/config:/config
+    # 外部数据单独挂载在 /data 路径下
+      - /data/documents:/data/documents
+      - /data/pictures:/data/pictures
+      - /data/encrypted:/data/encrypted
+    ports:
+      - 8384:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
+    restart: unless-stopped</code></pre><p>然后启动 Syncthing 服务后就可以通过访问 <code>http://&lt;服务器IP&gt;:8384</code>，进行同步设备和同步文件夹的配置了。<br />Syncthing 默认是没有密码的，可以在 GUI 中设置身份验证，并且将默认监听的地址配置为局域网访问地址以增加安全性。Android 上使用 Syncthing-Fork 进行同步的话不需要额外进行这些操作，因为开发者已经进行了开箱即用的设置。</p><h3>Immich 配置</h3><p>Immich 的部署主要参考官方推荐的 <a href="https://immich.app/docs/install/docker-compose/">Docker Compose</a>。官方在 Github 仓库提供了<a href="https://github.com/immich-app/immich/blob/main/docker/docker-compose.yml">文件</a>，我只是针对自己使用外部媒体库的情况进行了一些小改动：</p><pre class="language-diff"><code>services:
+  immich-server:
+    container_name: immich_server
+    image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
++   # 添加核显映射
++   # 核显设备路径为 /dev/dri/renderD128，用户组为 render
++   # 需要通过 cat /etc/group | grep render 来查看 render 组的 GID
++   user: "1000:1000"
++   group_add:
++     - "106"
++   devices:
++     - /dev/dri/renderD128:/dev/dri/renderD128 
+    # extends:
+    #   file: hwaccel.transcoding.yml
+    #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
+    volumes:
+      # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
+      - ${UPLOAD_LOCATION}:/data
++     # 中文地理位置编码配置
++     - /docker/immich/geodata:/build/geodata
++     - /docker/immich/i18n-iso-countries/langs:/usr/src/app/server/node_modules/i18n-iso-countries/lan
++     # 只读挂载外部媒体库
++     - /data/pictures:/data/pictures:ro
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - .env
+    ports:
+      - '2283:2283'
+    depends_on:
+      - redis
+      - database
+    restart: always
+    healthcheck:
+      disable: false
+
+  immich-machine-learning:
+    container_name: immich_machine_learning
+    # For hardware acceleration, add one of -[armnn, cuda, rocm, openvino, rknn] to the image tag.
+    # Example tag: ${IMMICH_VERSION:-release}-cuda
+    image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}
+    # extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
+    #   file: hwaccel.ml.yml
+    #   service: cpu # set to one of [armnn, cuda, rocm, openvino, openvino-wsl, rknn] for accelerated inference - use the `-wsl` version for WSL2 where applicable
+    volumes:
+-     - model-cache:/cache
++     - /docker/immich/cache:/cache
+    env_file:
+      - .env
+    restart: always
+    healthcheck:
+      disable: false
++   # 对资源进行限制，避免占用过多宿主机资源
++   deploy:
++     resources:
++       limits:
++         cpus: '2.00'
++         memory: 6G
++       reservations:
++         cpus: '0.50'
++         memory: 4.5G   
+# 其他部分保持不变</code></pre><p>我对官方的 <code>docker-compose</code> 文件进行了一些改动，首先是映射了核显设备，使得 Immich 服务可以利用核显加速，另一个就是对机器学习的容器进行资源限制，避免占用宿主机过多资源。Immich 服务挂载的持久卷中，参考了 <a href="https://github.com/ZingLix/immich-geodata-cn">Immich 反向地理编码汉化</a> 这个项目，以便为反向地理编码提供中文支持。配置成功后，在 Immich 的地图就可以看到的显示为中文的地理信息了。</p><blockquote><p>注意， Immich 的部署需要准备两个文件，除了 <code>docker-compose.yml</code>，还需要下载 <a href="https://github.com/immich-app/immich/blob/main/docker/example.env">example.env</a> 文件并更名为 <code>.env</code> 文件，并在其中对数据库密码等必要参数进行配置。</p></blockquote><p>Immich 服务启动后，可以访问 <code>http://&lt;服务器IP&gt;: 2283</code> ，创建并登录管理员账户。然后点击管理员账户下面的“系统管理”，进入管理页面配置外部图库，将挂载对应路径的外部图库进行导入，等待任务处理完成，刷新首页的时间线，应该可以看到外部图片成功展示。</p><h3>Nextcloud 配置</h3><p>仅作为参考：</p><ul><li>镜像补丁：Memories 支持视频和 Live Photos 的转码，以及核显的硬件加速。但这些功能并不是开箱即用的。如果和我一样，使用的是 Nextcloud 的<a href="https://hub.docker.com/_/nextcloud/">社区镜像</a> 来进行部署的话，这个镜像中并不包含核显的驱动以及 FFmpeg 转码工具，需要自行构建镜像（如果你不希望每次重建容器都执行安装命令的话）。一个示例的 <code>Dockerfile</code> 可能如下：</li></ul><pre class="language-dockerfile"><code># 基础镜像
+FROM nextcloud:stable
+
+RUN \
+    # 设置 DEBIAN_FRONTEND 为非交互模式，避免 apt-get 安装时卡住
+    export DEBIAN_FRONTEND=noninteractive &amp;&amp; \
+    \
+    # 1. 替换镜像源并添加 non-free 组件
+    sed -i -e "s|deb.debian.org|mirrors.tuna.tsinghua.edu.cn|g" \
+           -e "s|security.debian.org|mirrors.tuna.tsinghua.edu.cn/debian-security|g" \
+           -e 's/ main$/ main contrib non-free non-free-firmware/g' \
+           /etc/apt/sources.list.d/debian.sources &amp;&amp; \
+    \
+    # 2. 更新并安装软件包
+    apt-get update &amp;&amp; \
+    apt-get install -y --no-install-recommends \
+        ffmpeg \
+        intel-media-va-driver-non-free \
+        vim &amp;&amp; \
+    \
+    # 3. 进行清理
+    apt-get clean &amp;&amp; \
+    rm -rf /var/lib/apt/lists/*</code></pre><p>&nbsp;</p><ul><li><code>docker-compose.yml</code> 配置：</li></ul><pre class="language-yaml"><code>services:
+  app:
+    # 使用重新构建后添加了核显渠道的镜像
+    image: nextcloud:stable-patched
+    container_name: nextcloud
+    restart: unless-stopped
+    # 如果使用非 root 用户，需要添加核显设备的用户组
+    group_add:
+      - "106"
+    ports:
+      - "18080:80"
+    depends_on:
+      - db
+      - cache      
+    environment:
+      - TZ=Asia/Shanghai
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_HOST=db
+    # 数据库配置，需要和下面 MySQL 中的配置保持一致
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=your_nextcloud_mysql_password
+      - REDIS_HOST=cache
+      - PHP_MEMORY_LIMIT=2048M
+    volumes:
+      - /docker/nextcloud/app:/var/www/html
+    # 核显设备映射
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128  
+    # 资源使用限制 
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 4G
+        reservations:
+          memory: 2G       
+    networks:
+      - nextcloud
+
+  db:
+    image: mysql:8
+    container_name: nextcloud-db
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=your_mysql_root_password
+    # 数据库配置，需要和上面 Nextcloud 中的配置保持一致
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=your_nextcloud_mysql_password    
+    volumes:
+      - /docker/nextcloud/db/data:/var/lib/mysql
+      - /docker/nextcloud/db/conf:/etc/mysql/conf.d    
+    networks:
+      - nextcloud
+  cache:
+    image: redis:7
+    container_name: nextcloud-cache
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /docker/nextcloud/cache/data:/data
+    command: redis-server --save 60 1 --loglevel warning
+    networks:
+      - nextcloud
+
+networks:
+  nextcloud:
+    name: nextcloud
+    external: false</code></pre><h2>优化配置</h2><h3>硬件加速</h3><p>如果参考我的 Immich 配置了硬件加速，可以在“系统管理” -&gt; “设置”中，拉到最下面的“视频转码设置”。在倒数第二个选项卡“硬件加速”，设置加速器 API 为 VAAPI，如果是 Intel 7 代以上的 CPU，还可以选择 Quick Sync 选项。</p><h3>中文地图编码</h3><p>参考项目 <a href="https://github.com/ZingLix/immich-geodata-cn">immich-geodata-cn</a> 进行配置。在 Relases 中，下载和当前 Immich 一致的 geodata 文件，并解压到服务器指定路径，geodata 文件级别参考项目的说明。注意，因为 Immich 更新较快，适配最新版本的 Immich 的文件可能是自动更新版本。</p><h3>机器学习设置</h3><p>默认的模型是不支持中文的，如果希望语义搜索可以获得较好的效果，<a href="https://immich.app/docs/features/searching/">官方文档</a> 提供了可选的多语言模型和它们的配置参考。比如，主要以中文检索的情况，可以选择 <code>nllb-clip-large-siglip__v1</code> 模型，它的内存要求是 4226 MB，这也就是我在前面的配置中，为 <code>immich-machine-learning</code> 预留了 4.5 G 内存的原因。如果服务器资源拮据，也可以考虑使用默认的模型或者关闭机器学习功能。<br />同样的，需要在“系统管理” -&gt; “设置”中找到“机器学习设置”中进行配置，这里只需要将智能搜索选项卡中的 CLIP 模型更换为选择的模型即可，<code>immich-machine-learning</code> 服务会自动进行模型下载。如果遇到网络问题，可以安装 <code>git</code> 的 <code>lfs</code> 插件，通过<a href="https://hf-mirror.com/">镜像网站</a>手动拉取模型到本地。同样以我的配置为例，本地的模型路径为 <code>/docker/immich/cache/clip</code>。因此只需要在这个路径下执行 <code>git clone https://hf-mirror.com/immich-app/nllb-clip-large-siglip__v1</code> 即可。</p><h2>写在最后</h2><p>如果设备的性能不是太好，Immich 的 AI 识别可能会运行较长的时间。以我的 12300T，近 1.5 万张照片和图片，运行了大约 8 个多小时。对移动设备上的照片备份，我也额外设置了同步脚本的配置。<br />通过拆分，我获得了什么？在告别了对我而言稍嫌鸡肋的 Nextcloud 后，我获得了一个更加现代的照片管理应用和一个更加纯粹的同步应用。我不再试图在一个“大而全”的应用中解决全部问题，而是让不同的应用各司其职，最终组合为一个协调配合的系统。这大概就是自托管的魅力。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/102433</id>
             <title>iPhone17出了，国内能用苹果智能了吗？</title>
             <link>https://sspai.com/post/102433</link>
@@ -322,23 +553,6 @@ add_action('wp_footer', 'add_chatbase_script');
         </item>
         
         <item>
-            <id>https://sspai.com/post/102378</id>
-            <title>解构Notion狂：差点儿成了一名图书管理员</title>
-            <link>https://sspai.com/post/102378</link>
-            <guid isPermaLink="false">https://sspai.com/post/102378</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 09 Sep 2025 00:22:04 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p style="margin-left: 0px; text-align: justify;"><i><strong>我们以为自己在“管理知识”（管理自己的大脑），其实，确实是在“管理知识”（作为管理员，管理不属于自己的东西）</strong></i></p><hr /><p style="margin-left: 0px; text-align: justify;">Notion的全球注册用户数已突破1亿。这一数字标志着Notion从“小众笔记工具”到“全球生产力平台”的跨越，用户覆盖个人、初创团队以及500强企业。</p><p style="margin-left: 0px; text-align: justify;">而与其类似的国产笔记工具，如 我来、幕布、飞书、印象笔记、有道云笔记......用户群体也非常庞大，包括我自己也经常使用。</p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><p style="margin-left: 0px; text-align: justify;">Notion们 可提供诸如 Markdown编辑、思维导图、任务管理、时间管理、Database可视化、分享协同、多维表格、云同步、AI助手等等众多功能。但<strong>元功能或者说核心价值主张是——被称为第二大脑的“个人知识库搭建”。</strong></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/08/794bdf60a8bdd0637fc9a5dbe28be538.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>B站对“Notion”的检索结果</figcaption></figure><p style="margin-left: 0px; text-align: justify;">网上已有大量对这些软件工具进行推荐、测评、对比、使用教学的内容；它们确实能够提升效率，有毋庸置疑的可能高达90%的积极作用。所以，<strong>我们不再赘述这些。</strong></p><p style="margin-left: 0px; text-align: justify;">在“效率工具狂热”的当下，我发现控制不住自己把时间花在“如何把表格排得整整齐齐”，就觉得 是时候稍微关注下，那<strong>10%的暗角</strong>了，即：</p><p style="margin-left: 0px; text-align: justify;"><strong>我们在使用时，如何警惕自己沦为一名“知识的图书管理员”？</strong></p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><p style="margin-left: 0px; text-align: justify;">先从<strong>知识的</strong>&nbsp;<strong>获取-存储-梳理-使用</strong>&nbsp;过程，谈一谈笔记工具可能存在的隐患。</p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><h2 style="margin-left: 0px; text-align: center;"><strong>01 只管存放，不管拥有</strong></h2><h3 style="margin-left: 0px; text-align: justify;"><strong>◎ 获取：“真实知识”的缺席</strong></h3><p style="margin-left: 0px; text-align: justify;">鲍德里亚在《物体系》中提到，<strong>现代人已不需要“物品”，而只需要“操作”。</strong>这不只是Notion们的问题，所有计算机软件都存在这个问题，在自动化办公中，越来越只要求人的身体的最低限度的参与：盯着屏幕、点击鼠标或敲打键盘。你在观察一头雄狮，没错，但只是透过屏幕，闻不到它的气味，也感受不到它的杀气。</p><p style="margin-left: 0px; text-align: justify;">尽管计算机软件和AI对信息的处理以人脑为模板，但实际上已经<strong>摒弃了以人为中心的大部分参考点，也摆脱了所谓的“自然尺度”</strong>，而献身于信息的复杂性，越来越独立于人的干预，从而导致世界真实的缺席。而能够帮助我们分类、规划知识的AI助手，则进一步加剧了“我”的缺席。</p><blockquote><p style="margin-left: 0px;"><i>就连所谓原始人的那些最微不足道的技术，也需要进行必须已经理解和学习了的极为复杂的手工和智力活动。每当人们从事这些活动时，它们都要求智慧、主动和审美。</i></p><p style="margin-left: 0px;"><i><strong>不是每棵树型至树上的每个部分都可以做成弓，而且树干的形状和每年每月砍伐的时间也不是没有区别。</strong>给木料粗加工、细加工、刨光，准备用于弓弦的绳子，捆扎并固定，所有这些动作都需以经验、感觉和判断为前提。</i></p><p style="margin-left: 0px;"><i>……每个人与邻居成果的区别微乎其微，没有经过训练的人无法发现。但操作的人能够识别这些差异，它们使作者理所当然地引以自豪。</i></p><p style="margin-left: 0px;">《遥远的目光》，列维-斯特劳斯</p></blockquote><p style="margin-left: 0px; text-align: justify;">即 “用树干打造一张弓”这个“工作过程”，其实也是一种“知识获取的过程”。如 挑树的种类、选砍伐时间，这些看似是“工作”内容以外的知识，却能<strong>保持“事物”作为研究和思考对象的本体地位。</strong></p><figure class="image ss-img-wrapper image_resized" style="width: 318px;"><img src="https://cdnfile.sspai.com/2025/09/08/08343e179c2adb9f6090a6b7cf6f4a2e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>制弓教学-麻绳如何缠绕手柄（来源网络）</figcaption></figure><p style="margin-left: 0px; text-align: justify;">然而，计算机办公软件乃至笔记工具，让人与知识进一步疏离，甚至把知识搞乱。制作弓箭时手眼身心的全情投入，与 在Notion里把文字复制粘贴然后打上“传统工艺”标签，手指滑动，内心毫无波澜——是绝然不同的。<strong>知识被抽象为文字、符号、标签和图表，失去与现实世界的直接联系。</strong>当我们研究的对象不过是真实知识的剪影，我们越发熟练的操作也变得十分荒谬。</p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><h3 style="margin-left: 0px; text-align: justify;"><strong>◎&nbsp;存储：</strong>对知识的虚假占有</h3><p style="margin-left: 0px; text-align: justify;">大量的知识，被规整地放在不同层级的文件夹里，可利用各种图表进行数据可视化展示，甚至还有监测和导航重点信息的仪表盘。</p><p style="margin-left: 0px; text-align: justify;">问题是，<strong>汽车仪表盘反映的是汽车系统的工况，笔记工具的仪表盘指向的是我们的大脑吗？</strong>还是类似于图书馆或银行金库，我们只是管理员，而并非真正拥有这些知识和价值？</p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><p style="margin-left: 0px; text-align: justify;">很多时候，<strong>收藏、整理知识的快感取代了知识运用的实感。</strong></p><p style="margin-left: 0px; text-align: justify;">我们像一只只“数字仓鼠”，把200+网页囤到收藏夹里，却从没打开看过第二遍；整理了100+笔记，却写不出论文，甚至无法不依赖AI助手用几句话描述出笔记核心观点。然而，还幻觉式地认为自己已经掌握了这些知识，并为此感到满足。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/08/877f78c174d7ac777a4788968ac0090d.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>“宫殿记忆法”练习示意图（来源网络）</figcaption></figure><p style="margin-left: 0px; text-align: justify;">Notion们对知识的模块化移动、分类与存放，在一定程度上，与古早的“宫殿记忆法”异曲同工，把零散的信息，存放到有序的空间位置。</p><p style="margin-left: 0px; text-align: justify;">但两者的本质差异是，<strong>“记忆宫殿”是我们大脑自带的“集成硬盘”，而Notion们则是“外接硬盘”</strong>，却骗我们它在对大脑升级。并且，当出现云存储故障或格式兼容问题时，这些知识会永久丢失。</p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><h3 style="margin-left: 0px; text-align: justify;"><strong>◎&nbsp;梳理：</strong>自有逻辑体系被规训</h3><p style="margin-left: 0px; text-align: justify;">根据海德格尔的“技术座架”理论，技术把世界从“自在的事物”变成“待取用的资源库”，好比 森林=可砍伐的木材资源，员工＝可量化KPI的劳动力，所有事物都是技术流程play的一环。</p><p style="margin-left: 0px; text-align: justify;"><strong>Notion们作为现代技术系统的一部分，亦是用“高效”框架绑架了思考的“野性”。</strong>其模块化设计将知识切割为可量化的单元，而非有机的整体；这种结构本身，又反过来潜移默化塑造了用户的知识管理方式。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/08/c2c12177c754ace9bace70b382ab4f80.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Notion界面截图</figcaption></figure><p style="margin-left: 0px; text-align: justify;">与纸质笔记相比，在软件工具中我们入库、整理知识，必须遵从软件基本的结构框架（细分规则或逻辑可由用户自己定制，但无法脱离软件大框架或功能），而非纯粹自主的设计、规划逻辑体系。这导致，<strong>我们必须像把面团塞进月饼模具里一样，把我们的知识塞进笔记工具里</strong>，面团得够软，太硬的、格式不对的塞不进；多出来的，要么硬塞硬匹配，要么只能丢一边；模具看似挺多的，吉祥话、口味、动物、水果形状的都有，但我想要做个“五条人”的，没有。</p><p style="margin-left: 0px; text-align: justify;">此外，当前大部分笔记工具中的AI助手，正在通过算法逻辑重塑用户的知识组织方式，<strong>这让我们逐渐放弃对知识的主动分类和关联，转而依赖工具的“最佳实践”。</strong>这不是说AI不好，而是，它会悄悄替我们“做决定”。</p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><p style="margin-left: 0px; text-align: justify;">而有时，像打造QQ空间或者Sim4游戏中的自家房屋一样，花2小时调Database的颜色、排版首页界面布局，并不属于知识“梳理”，更像是“装修”数字知识库。</p><p style="margin-left: 0px; text-align: justify;">当知识被作为收藏品欣赏，当知识库被修缮得井井有条、格调非凡，我们也许不再是公共图书馆的管理员，而是私人图书馆的管理员了。<strong>过于强调“表面秩序”容易让人陷入视觉化陷阱</strong>，这种本末倒置，反而让“掌握知识”低效甚至失效。</p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><h3 style="margin-left: 0px; text-align: justify;"><strong>◎&nbsp;使用：</strong>人机关系异化</h3><p style="margin-left: 0px; text-align: justify;">由于这些知识并非存于我们的脑中，当我们使用时，需要进行“取”这个动作，可以说是一种依赖了。<strong>重度依赖的话，甚至不亚于瘸子与拐棍的关系，这显然本不该是人与知识的关系。</strong></p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><p style="margin-left: 0px; text-align: justify;">而当我们在笔记工具中“取”某个具体信息时，除了根据对应文件库一层层查找，很多时候都会使用全局检索功能。</p><p style="margin-left: 0px; text-align: justify;">这当然足够高效，但不同于在纸质笔记本上或本地电脑，每翻找一次其实都在强固自己的记忆结构框架，<strong>过于便捷的“检索”穿透了所有框架，直抵目的地，不但让思维结构变得模糊，亦让知识变得孤立。</strong></p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><p style="margin-left: 0px; text-align: justify;">此外，频繁“查找-找到”形成的是浅表的熟悉感。过度使用外包的知识库会导致“记忆卸载”，我们可能会逐渐丧失对核心知识的主动记忆能力：</p><p style="margin-left: 0px; text-align: justify;"><strong>从“知识分子”，到“知道分子”，最终沦为“检索分子”。</strong></p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><h2 style="margin-left: 0px; text-align: center;"><strong>02 兼职图书管理员的生存指南</strong></h2><p style="margin-left: 0px; text-align: justify;">也许可考虑的调整——</p><h3 style="margin-left: 0px; text-align: justify;"><strong>◎&nbsp;</strong>认知：<strong>弱化形式</strong></h3><p style="margin-left: 0px; text-align: justify;">在一定程度上，摒弃“形式主义”，拒绝过度美化笔记外观，勿沉溺于“数据可视化”幻觉。</p><p style="margin-left: 0px; text-align: justify;">知识库不是给外人看的，不用常常邀请朋友来做客，不必苛求完美把“房子”装修得很得体，把“知识们”摆放得很规整。重要的不是方便你下次找到它，而是别让它们结满赛博蜘蛛网。需要把“整理笔记”的满足感，转变成“用知识解决一个问题”的兴奋感。</p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><h3 style="margin-left: 0px; text-align: justify;"><strong>◎&nbsp;</strong>行为：<strong>手写优先</strong></h3><p style="margin-left: 0px; text-align: justify;">脑洞阶段，可以尝试手写，让思维野蛮生长。</p><p style="margin-left: 0px; text-align: justify;">不用追求工整，哪怕是看不出逻辑的思维导图，也搭建了独属于自己的逻辑结构框架。我写这篇文章时，用草稿本梳理了三次“隐患”Part，虽然画得很乱，字也烂得一批，但还是比在Notion里拖卡片快多了，而且可以保证思路不停顿，创作的“劲”不会被工具打断。</p><p style="margin-left: 0px; text-align: justify;">当然，<strong>如果能做到偶尔完全不用工具，靠大脑短跑一次，或者有意识训练记忆，会更好。</strong><br />&nbsp;</p><figure class="image ss-img-wrapper image_resized" style="width: 520px;"><img src="https://cdnfile.sspai.com/2025/09/08/d1c3b0622ca2445f98d7e7efe77550ca.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>钱钟书手稿（来源网络）</figcaption></figure><h3 style="margin-left: 0px; text-align: justify;"><strong>◎&nbsp;</strong>验证：<strong>回归现实环境</strong></h3><p style="margin-left: 0px; text-align: justify;"><strong>知识必须“走出库房”</strong>，在真实场景中使用知识，而不能仅数字囤积。</p><p style="margin-left: 0px; text-align: justify;">获取知识后，尽量能用它和朋友探讨、争论，努力让知识至少“活”过一次。即便我们无法亲自过去坦桑尼亚大草原实地考察，也至少可以给身边的朋友讲一讲《乞力马扎罗的雪》的读后感~</p><p style="margin-left: 0px; text-align: justify;">&nbsp;</p><p style="margin-left: 0px; text-align: justify;">我个人没有完全抵制使用笔记工具的意思，毕竟写这篇文章时，我也是不能免俗地还在开着它们。在工具化时代，我们不能也无法完全否定工具，但不得不提醒自己，需要始终捍卫人的主体性。</p><p style="margin-left: 0px; text-align: justify;"><strong>即便难以避免成为一名图书管理员，也尽可能只做个兼职的吧哈哈~</strong></p><hr /><p style="margin-left: 0px; text-align: center;"><strong>欢迎关注&amp;讨论！</strong></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/08/7b067e17c3ca07c581bf2ff021770eca.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px; text-align: center;"><br />&nbsp;</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://sspai.com/post/102337</id>
             <title>用 Termux + Syncthing 自动定时备份 Android 媒体文件</title>
             <link>https://sspai.com/post/102337</link>
@@ -577,23 +791,6 @@ exit 0</code></pre><p>最后别忘了给脚本可执行权限：</p><pre class="
 ~ $ chmod +x scripts/scan_and_move_media.py
 
 ~ $ chmod +x scripts/scan_and_move_media.sh</code></pre><p>完成配置后，让 Termux 在后台保持运行即可。一段时间后，可以通过检查日志文件，确定定时任务的执行情况。</p><h2>优化</h2><ul><li>开机启动：可以安装 <a href="https://wiki.termux.com/wiki/Termux:Boot" target="_blank">Termux:Boot</a> 应用，配置 <code>crond</code> 命令在安卓设备开机时自动启动。</li><li>后台保活：让 Termux 获取唤醒锁或者将 Termux <a href="https://dontkillmyapp.com/" target="_blank">加入电池优化白名单</a>，避免定时任务执行失败。</li><li>媒体库刷新：需要执行 <code>pkg install termux-api</code>，并在手机上安装 <a href="https://wiki.termux.com/wiki/Termux:API" target="_blank">Termux:API</a>应用。然后配合 Python 脚本中执行的 termux-media-scan 命令即可。</li></ul><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/102350</id>
-            <title>英伦深度亲子游三：城市、建筑、历史印记</title>
-            <link>https://sspai.com/post/102350</link>
-            <guid isPermaLink="false">https://sspai.com/post/102350</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 07 Sep 2025 07:58:23 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>提起英伦印象，我相信大部分人脑海中都会浮现出一些经典画面：可能是大本钟前行色匆匆的风衣男女，可能是红色双层巴士驶过巴洛克风格的建筑，可能是泰晤士河上的游轮正好穿过伦敦塔桥，也可能是身着红色制服、头戴黑色熊皮帽的士兵正在白金汉宫前进行换岗。</p><p>这些深刻的印象大多来自伦敦，来自那些宏伟的教堂与古老的城堡，但无一例外，它们都来自英国的城市。从苏美尔人在美索不达米亚平原建立人类第一座城市开始，城市就是文明最集中的体现。因此，在英国的城市中，我们可以感受到最纯正、最浓郁的英伦文化。这次旅行，我们一家三口走街串巷，或是乘坐双层巴士的上层，从伦敦到爱丁堡，从格拉斯哥到贝尔法斯特，从利物浦到约克，在不同的城市中看到了迥异却又一脉相承的风景。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/07/12c9ad8f4a739307b41411b531b76210.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在英国城市中最值得看的，当然是那些质量极高且门槛极低的博物馆与美术馆，我在上一篇《眼花缭乱的博物馆》中已有详细介绍。但除此之外，城市本身就是一个更宏大、更生动的展场。以伦敦为例，走在街上，最无法让人忽视的就是建筑。相信建筑专业的行家必然会有不一样的视角，不过大部分游客包括我们都只是小白。</p><p>我姑且能区分哥特式的尖顶、罗马式的圆拱、巴洛克式的华丽，也能认出都铎风格的半木结构和维多利亚风格的红砖排屋。但也仅限于此了，所以比起建筑史的专业解读，我更着迷于建筑背后的故事、它所见证的事件，以及那些功能与巧思中浅显而直观的智慧。</p><h2><strong>时间的剖面：刻在石头上的城市传记</strong></h2><p>英国的城市建筑，就像一本可以触摸的立体史书，新的和旧的堆叠在一起，每一座城市都是一个独特的章节。要知道能够做到这一点是非常不容易的：</p><ol><li>首先需要有漫长的文明史，经历足够悠久的发展，产生足够的印记；</li><li>关键在改建的时候不能拆旧造新，完全抹去旧时的一些痕迹；</li><li>这就需要拥有长时间稳定的政治传承，以及足够的保留旧有建筑的理由；</li><li>所以在设计建造之初，旧的建筑需要在质量和风格上做百年工程的打算。</li></ol><p>这也正是英国的独特之处，近几百年来英国本土的政治环境一直比较稳定，但历史事件却不少；国力的强盛和国民心态的自满使当时的建筑标准都极高，甚至网上都说，越接近现在，英国的建筑质量越糟糕。幸运的是作为游客，可以从中看到不同的“城市进化史”。</p><p>在伦敦，你可以触摸到两千年前古罗马人砌筑的城墙遗迹，转角又能看到在1666年大火（The Great Fire）后由雷恩爵士主持重建时设计的教堂。当我们漫步在一些古老的街区，时常会看到一排维多利亚风格的红砖房中间，突兀地夹着一栋格格不入的现代建筑。这不是刻意的设计，而是来自二战时期的“伦敦大轰炸”（The Blitz）。</p><figure class="image ss-img-wrapper image_resized" style="width: 560px;"><img src="https://cdnfile.sspai.com/2025/09/07/e99c930402455440703924bf4da2fecf.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这种新旧交织的“城市补丁”，无声地诉说着伦敦人民的坚韧。在天际线上，小黄瓜和碎片大厦则代表了伦敦的现代建筑，给人带来一种强烈的时空交错感。</p><p><strong>北上至苏格兰，城市的表情又截然不同。</strong>爱尔兰一边是遵循中世纪肌理、蜿蜒曲折的老城，另一边则是启蒙运动时期规划的、严谨对称的乔治亚风格新城，中央是矗立在死火山岩上的城堡俯瞰着全城。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/08/bd2453a642d188a5d4fd02baa0781057.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>回到英格兰中北部，城市的建筑语言变成了坚实的“工业红”。</strong> 曼彻斯特和利物浦，这两座工业革命的引擎，它们的城市传记是用红砖和铸铁写就的。漫步在曼彻斯特的运河边，或是利物浦的阿尔伯特码头，那些由旧仓库和棉纺厂改造而成的公寓、博物馆和创意空间，没有被推倒重建，而是被赋予了新的生命，这种对工业遗产的尊重与活化，令人印象深刻。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/08/a43f0c248a2dca9ecb2ad1ae63acb40b.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2><strong>城市的基石：不止于信仰的教堂</strong></h2><p>我妈常说去欧洲玩就是看“宫保鸡丁”，前三个指宫殿、城堡、基督教堂，最后一个指什么我忘了。在观察欧洲城市建筑时，有一个部分是无法绕开的，那就是无处不在的教堂。从威斯敏斯特大教堂的宏伟哥特式尖顶，到散落在街区中不知名却依然精致的社区小教堂，它们共同构成了英国城市的天际线。但真正让我感到惊讶的，是它们在当下的社会角色。</p><p>与国内许多寺庙主要作为宗教场所或旅游景点不同，英国的教堂依然保持着强大的社区影响力。我们常常看到，教堂门口的布告栏上贴满了社区音乐会、二手市集、亲子活动甚至分发食物的通知。它们是社区的议事厅、艺术中心、慈善据点，也是任何人在喧嚣都市中可以随时推门而入，寻求片刻宁静的庇护所。我常常在逛累的时候会进入教堂休息，有一次还幸运的看到了交响乐队在十字架下排练。</p><figure class="image ss-img-wrapper image_resized" style="width: 400px;"><img src="https://cdnfile.sspai.com/2025/09/07/82b70515204ea3adb53a18d73c6ff553.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>每次欧洲之旅都会给我一种深刻的体会，不了解基督教，就很难真正读懂欧洲。</p><p>我们会发现所有的城镇核心就是教堂，这让我经常联想到一些中世纪城市建设游戏，往往第一步就是建设教堂，随后然后整个城镇才围绕着它慢慢生长起来。现实中正是如此，教堂往往就是一座城镇历史的起点和地理的中心。</p><p>这种认知，也延伸到了艺术欣赏中。在参观美术馆时，面对大量以《圣经》故事为题材的画作和雕塑，如果没有相关的宗教知识背景，你将无法理解画面的叙事、人物的象征意义，以及教会作为当时最大的艺术赞助人，是如何深刻影响了艺术的创作方向和风格。</p><p>战胜巨人歌利亚的少年大卫，为耶稣洗礼的施洗者约翰，代表女性母爱的圣母玛利亚，这些都是欧洲人耳熟能详的文化符号，一如我们的“武圣”关羽、“诗仙”李白或代表叛逆的孙悟空。</p><p>在建筑、生活、艺术之外，宗教也带来了一种“关心到每个人”的人本理念。</p><h2><strong>人本的尺度：从乡村延伸到城市的温度</strong></h2><p>这里的城市道路大多狭窄、蜿蜒，并非我们国内游客习惯的宽阔笔直的“康庄大道”。无论是爱丁堡那些被称为“Close”的陡峭小巷，还是曼彻斯特北区（Northern Quarter）迷宫般的街道，它们都遵循着数百年前的路径，天然地限制了车速，将空间的主导权悄悄还给了行人。</p><p>在英国的城市中走街串巷无疑是一种享受，小路蜿蜒不知道转角会有什么惊喜，道路两边店铺林立橱窗设计令人惊叹，随处都是公园、广场、市集，这里的道路就是目的地，而不是可以省略的过程。作为在多个国家驾驶过的十几年老司机，我对交通一直很感兴趣。这源于我在国内驾驶时常常思考的问题，好的交通设计应该是什么样子的？</p><p>核心是人车分离。往往那些最混乱的交通场景，都是人车混行的结果。行人、车辆、自行车的通行设计理念是截然不同的，车辆需要的是通行效率，但行人要结合城市商业的发展，享受城市发展的红利。市民应该有权利在他们建设的城市中，舒适愉快的瞎转悠。不过分离的设计极其考验规划，像有些动辄八车道、十车道的马路，用冰冷的隔离带将城市切割成一个个巨大的街区，看似气派，实则拉远了人与人、人与城市的距离，对行人极不友好。</p><p>这种“人本”的理念也体现在商业街景上。英国的店铺招牌五花八门，各有特色，从字体、材质到设计都彰显着店主的个性和品味，共同构成了一条充满活力的街道。相比之下，我们很多城市为了“市容整洁”而推行的“统一招牌”，虽然整齐划一，却也抹杀了城市的个性和烟火气，显得呆板而乏味。有时出门旅游看见满大街熟悉的汉庭、银行、地产广告、统一外立面，不禁会让人沮丧。</p><figure class="image ss-img-wrapper image_resized" style="width: 432px;"><img src="https://cdnfile.sspai.com/2025/09/07/74e6b37e347aa0e8e7e59225f43a8576.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>更不用说那些无处不在的公园和绿地了。它们就像城市的“客厅”和“后花园”，为市民和游客提供了充足的休憩空间。英国的公园设计理念与国内也是截然相反的，国内的公园除了设计好的路线外，其余90%的面积都是景观区，甚至恨不得用栅栏将道路围起来，再种上拉人的蛇草。英国人却恨不得将公园的每个角落都能让你可以“随地大小躺”，草坪又松又软，随处都是儿童游乐场。一个城市是否宜居、是否对家庭友好，看它为孩子们提供了多少自由玩耍的空间就知道了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/08/6e9df000d0c180aedfe39135e7fe9444.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我去过许多城市，特拉维夫、香港、曼谷、纽约、首尔等等，它们最让人深刻的不是宏伟的高楼，而是骑楼和连廊，是那些作为人在城市中感受到的温度和尊重。</p><h2>城市的灵魂：流淌在街巷间的文化印记</h2><p>英国的城市之所以好逛、好玩，不仅仅因为那些固定的景点，更因为它是一个巨大的文化舞台，在这里发生过的故事、诞生过的旋律，远比建筑本身更动人。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/08/aadb59acc13e65f38b2dfcc15218544c.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在决定旅行目的地的时候，有些地方你绝不希望敷衍地走过，潦草地归来，英国，正是如此。</p><ul><li><strong>假如你是一个乐迷</strong>，这里是现代音乐的圣殿。你可以去利物浦的洞穴俱乐部，追寻披头士最初的足迹；可以走上伦敦的艾比路（Abbey Road），复刻那张经典的专辑封面；可以想象皇后乐队如何在温布利球场震撼世界，或是感受大卫·鲍伊如何用音乐定义一个时代。从滚石、绿洲到Coldplay，这片土地的空气里，永远流淌着叛逆而动人的旋律，而电影《海盗电台》的故事，正是对那个黄金年代最浪漫的注脚。</li><li><strong>假如你是一个影迷</strong>，英国就是一座巨大的天然片场。你可以在泰晤士河畔眺望军情六处（MI6）大楼，想象007的矫健身影；可以在爱丁堡的街巷穿行，感受《猜火车》那生猛的青春；可以在温莎城堡里，体会《国王的演讲》中那份历史的厚重；更可以在诺丁山的蓝色大门前，重温休·格兰特与朱丽叶·罗伯茨的浪漫邂逅。当然，还有海克利尔城堡，那座《唐顿庄园》里真实存在的贵族府邸，正静候着你的到访。</li><li><strong>假如你是一个音乐剧迷</strong>，那么伦敦西区（West End）就是你的梦想之地。这里是与纽约百老汇齐名的世界戏剧中心，你可以走进女王陛下剧院，聆听《歌剧魅影》那穿越半个世纪的动人旋律；可以在皇后剧院，感受《悲惨世界》带来的革命激情与人性光辉。从经久不衰的经典到不断上演的新作，这里的每一个舞台，都在讲述着一个让你沉醉的故事，每一次幕布的拉开，都是一场视听的极致盛宴。</li><li><strong>假如你是一个“哈迷”</strong>，那这趟旅程将是一次“回家”之旅。在国王十字车站的9¾站台推着行李车，在华纳兄弟伦敦摄影棚寻找鼻涕味的软糖，在牛津大学的食堂里寻找霍格沃茨大厅的影子，或是在约克的“肉铺街”漫步，感受对角巷的神奇氛围。这里的每一个角落，似乎都在轻声呼唤着“Mischief Managed”（恶作剧完毕）。</li><li><strong>假如你是一个文学迷</strong>，这里的每一寸土地都浸润着墨香。你可以去巴斯，走进简·奥斯汀笔下的优雅社交圈；可以来到贝克街221B，在福尔摩斯的公寓里进行一场推理；更可以站在莎士比亚环球剧场的舞台下，感受四百年前戏剧的魅力。从勃朗特姐妹的荒原到狄更斯的雾都，英国文学的版图在你脚下真实地展开。</li><li><strong>假如你带着孩子同行</strong>，这里更是童话成真的地方。你们可以在帕丁顿车站寻找那只来自秘鲁的小熊，和它的铜像合个影，也可以去各个城市寻找散落各地的街头雕塑；也可以去牛津寻找爱丽丝仙境漫游中的兔子洞和红桃皇后；还有小猪佩奇、比得兔、火车头托马斯、小羊肖恩，到处都是他们的身影。</li><li><strong>假如你是一个历史迷</strong>，这里的迷雾与传奇会让你沉醉。你可以参加一次“开膛手杰克”的夜行导览，在伦敦东区的昏暗灯光下追寻百年前的悬案；也可以去苏格兰的斯特灵，在华莱士纪念碑下，感受《勇敢的心》那声动天彻地的“Freedom！”；在诺丁汉，寻找劫富济贫的绿林好汉罗宾汉。从巨石阵的史前谜团，到伦敦塔里的王室秘辛，历史不再是书本上的文字，而是可以触摸的现实。</li><li><strong>假如你是一个科学迷</strong>，这片土地是现代科学的摇篮，无数改变世界的思想火花在这里迸发。你可以去格林尼治皇家天文台，亲身跨越本初子午线；可以去剑桥，在牛顿的苹果树下（的后代）思考万有引力，或是在老鹰酒吧（The Eagle Pub）举杯，纪念沃森和克里克在这里宣布发现DNA双螺旋结构的那个历史性中午；你还可以前往布莱切利园（Bletchley Park），在图灵破解德军恩尼格玛密码的旧址，感受信息时代的曙光。</li><li><strong>假如你是一个王室迷</strong>，那么英国本身就是一部恢弘的、仍在续写的皇家史诗。你可以在白金汉宫前等待一场盛大的换岗仪式，想象女王在阳台上挥手的经典瞬间；可以在威斯敏斯特教堂里，感受从威廉征服王到今日的历代君主加冕、婚嫁甚至安葬的庄重与传承；可以去温莎城堡，探访女王最爱的居所，感受千年王权的厚重；更不要错过伦敦塔，那里不仅有璀璨夺目的王冠珠宝，也囚禁着安妮·博林等王室人物的幽魂与叹息。</li><li><strong>假如你是一个体育迷</strong>，欢迎来到现代体育的竞技场和规则诞生地。你可以去温布利、老特拉福德或安菲尔德，在山呼海啸般的助威声中，体验一场英超足球的朝圣之旅；可以在温布尔登的草地上，品尝着草莓奶油，感受网球运动最古老也最优雅的传统；可以去苏格兰的圣安德鲁斯，在这片高尔夫的故乡挥上一杆。在这里，体育早已超越了胜负，成为一种融入血脉的文化与信仰。</li></ul><p>这种体验贯穿了我们的整个旅程。在爱丁堡，我们寻找着 J.K.罗琳写作《哈利·波特》的大象咖啡馆；在伦敦，我和安安在国王十字车站的9¾站台挥舞魔杖；在“一毛不拔之地”的克拉克森农场，我们享受了午后的啤酒；在海格力克城堡，我们缓缓地走下大厅内的楼梯。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/09/07/f03701ca033f0794b238f0e3d96d12f0.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/09/07/d53f01683b751311b195df5ba02fd10b.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这些故事、电影、音乐和历史事件，像无数条看不见的线，将我们与脚下的这片土地紧密地联系在一起。你知道得越多，旅行的乐趣就越浓。一个普通的街角，可能就是福尔摩斯追捕莫里亚蒂的路线；一栋不起眼的房子，墙上可能就挂着一块标明牛顿或狄更斯曾在此居住的蓝色牌匾。</p><p>有人说旅行无聊，这太离谱了，空虚且无知的始终是灵魂本身。</p><h2>未完待续…</h2><p>归根结底，城市旅行的乐趣，在于“阅读”。</p><p>你阅读它的建筑，看到的是一部关于文明演进、工业崛起与战火重生的史诗；你阅读它的街道，体会到的是一种尊重个体、以人为本的设计哲学；你阅读它的文化印记，则是在与无数的传奇故事和经典旋律进行跨越时空的对话。</p><p>在这些城市里，我们不仅看到了风景，更亲眼见证了不同人的不同活法，理解了历史如何塑造今天，文化如何滋养生活。安安或许还不能完全理解工业革命的意义，但她会记住曼彻斯特运河边红砖仓库的独特样貌；她或许此前不知道披头士是谁，但她会记得在洞穴俱乐部里和我们一起手舞足蹈的快乐。</p><p><strong>下一篇，是关于英国乡村的，敬请期待。</strong></p><span class="ss-linkCard">&nbsp;</span><span class="ss-linkCard">&nbsp;</span><span class="ss-linkCard">&nbsp;</span><span class="ss-linkCard">&nbsp;</span><p>&nbsp;</p>
                 ]]>
             </content:encoded>
         </item>
