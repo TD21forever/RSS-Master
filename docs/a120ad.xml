@@ -5,6 +5,186 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2025/10/glm-4.6.html</id>
+            <title>一天之内，智谱和 Anthropic 都发了最强编程模型</title>
+            <link>http://www.ruanyifeng.com/blog/2025/10/glm-4.6.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/10/glm-4.6.html</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 01 Oct 2025 19:05:15 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>1、</p>
+
+<p>假期前最后一天（9月30日），热闹非凡。</p>
+<p>上午，Anthropic 公司发布了 <a href="https://www.anthropic.com/news/claude-sonnet-4-5">Claude Sonnet 4.5 模型</a>。</p>
+
+<p>下午，智谱公司发布了 <a href="https://mp.weixin.qq.com/s/0zJBg5hBbHLgGsoHjXADiQ">GLM 4.6 模型</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202509/bg2025093008.webp" title="" /></p>
+
+<p>我觉得，对于程序员，这个动态很重要。</p>
+
+<p>因为<strong>这两个模型都属于目前最先进的 AI 编程模型</strong>。你想让 AI 生成代码，首选就是它们。</p>
+
+<p>这就是说，一天之内，AI 编程模型又达到了新高度。</p>
+
+<p>2、</p>
+
+<p>Anthropic 发布公告的第一句话，就毫不谦虚地用了三个"世界之最"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202509/bg2025093009.webp" title="" /></p>
+
+<blockquote>
+  <p>"Claude Sonnet 4.5 是世界上最好的编码模型。它是构建复杂代理的最强大模型。它是使用计算机的最佳模型。它在推理和数学方面表现出显著的进步。"</p>
+</blockquote>
+
+<p>智谱的发布公告也是当仁不让。</p>
+
+<blockquote>
+  <p>"我们再次突破大模型的能力边界。</p>
+
+<p>GLM-4.6是我们最强的代码 Coding 模型（较 GLM-4.5 提升27%）。在真实编程、长上下文处理、推理能力、信息搜索、写作能力与智能体应用等多个方面实现全面提升。"</p>
+</blockquote>
+
+<p>为了让人信服，智谱的<a href="https://mp.weixin.qq.com/s/0zJBg5hBbHLgGsoHjXADiQ">发布公告</a>还给出了详细的测试结果。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202509/bg2025093010.webp" title="" /></p>
+
+<p>上图一共是8个测试基准的结果图。每个图的蓝柱是 GLM-4.6，绿柱是 GLM-4.5。对照组是前两天刚发布的 DeepSeek V3.2 Exp、Claude sonnet 4、Claude sonnet 4.5。</p>
+
+<p>可以看到，蓝柱基本上都是排名前列，甚至第一。智谱还声称，GLM-4.6 非常节省 Token（也就是省钱），"比 GLM-4.5 节省30%以上，为同类模型最低"。</p>
+
+<p>所以，它的结论就是："GLM-4.6 在部分榜单表现对齐 Claude Sonnet 4/Claude Sonnet 4.5，<strong>稳居国产模型首位。</strong>"</p>
+
+<p>这就有意思了，一个自称"世界上最好的编码模型"，另一个自称"稳居国产模型首位"。</p>
+
+<p>下面，我来测试，GLM-4.6 相比 Claude sonnet 4.5 到底怎么样。</p>
+
+<p>3、</p>
+
+<p>需要说明的是，这两个模型的比较，不完全是为了测试，也有实际的意义。</p>
+
+<p>Anthropic 公司虽然产品很强，但是它限制中国人使用，国内用户正常途径无法开通它的服务。另一方面，它是付费模型，价格也不便宜，百万 token 的输入输出价格是3美元/15美元。</p>
+
+<p>形成鲜明对照的是，GLM-4.6 是完完全全的国产模型，来自北京智谱公司。它采取彻底的开源路线（MIT 许可证），<a href="https://huggingface.co/zai-org/GLM-4.6/tree/main">模型代码</a>完全公开，可以任意使用。</p>
+
+<p>你要想自己在家里安装，也是可以的。但是，它的硬件要求太高，家用设备达不到，所以，一般都使用它的云服务。</p>
+
+<p>目前，智谱的官网（<a href="https://bigmodel.cn/">BigModel</a> 和 <a href="https://z.ai/">Z.ai</a>），通过 Web 界面使用 GLM-4.6 是免费的。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100101.webp" title="" /></p>
+
+<p>它的 API 调用需要付费，入门套餐（coding plan）好像是一个月20元人民币。</p>
+
+<p>另外，它有完备的中文支持（文档+客服），这也是 Anthropic 没有的。</p>
+
+<p>总之，我的测试目的，也是想看看，它是不是真如官方宣称的那样强大，能不能替代 Claude Sonnet 模型。</p>
+
+<p>4、</p>
+
+<p>我的测试方法很简单。Anthropic 公司事先邀请了著名程序员西蒙·威利森（Simon Willison），试用 Claude Sonnet 4.5 模型。</p>
+
+<p>西蒙·威利森已经在他的网站上，公布了<a href="https://simonwillison.net/2025/Sep/29/claude-sonnet-4-5/">试用结果</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100102.webp" title="" /></p>
+
+<p>我就拿他的几个测试，用在 GLM-4.6 上面，然后比较一下运行结果就可以了。</p>
+
+<p>大家可以跟着一起做，打开<a href="https://chat.z.ai/">官网</a>，把题目粘贴进去（最好贴英文），这样会有更深切的感受。</p>
+
+<p>AI 终端工具（比如 Claude Code、Cline、OpenCode、Crush 等）也可以用，参考<a href="https://docs.bigmodel.cn/cn/coding-plan/tool/claude">官方文档</a>进行设置（需要先开通 API）。</p>
+
+<p>5、</p>
+
+<p>第一个测试。</p>
+
+<blockquote>
+  <p>拉取代码仓库 https://github.com/simonw/llm ，然后通过下面的命令运行测试用例。</p>
+
+<p>pip install -e '.[test]'</p>
+
+<p>pytest</p>
+</blockquote>
+
+<p>这个测试需要联网获取代码，然后在后台运行。</p>
+
+<p>智谱官网的 Web 界面跟 Claude 一样，提供 Python 和 Node.js 的服务器沙箱环境，可以生成后直接执行代码。</p>
+
+<p>我省略它中间的推理步骤了，最后结果如下图（官网查看<a href="https://chat.z.ai/s/3b8c1fcc-cd3d-42a1-b0c4-1b5156cef513">完整对话</a>）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100103.webp" title="" /></p>
+
+<blockquote>
+  <p>278个测试用例通过，耗时 18.31s</p>
+</blockquote>
+
+<p>整个运行过程（拉取、安装依赖、执行命令）跟 Claude Sonnet 是一样的。奇怪的是，Claude Sonnet 运行了466个测试用例，多出来100多个，不知道为什么。</p>
+
+<p>6、</p>
+
+<p>第二个测试是较复杂的编程任务，原始提示是英文，我翻译成中文。</p>
+
+<blockquote>
+  <p>1、 代码仓库 https://github.com/simonw/llm 是一个 AI 对话应用，它将用户的提示和 AI 的响应存储在 SQLite 数据库中。</p>
+
+<p>2、它目前使用线性集合，保存单个对话和响应。你尝试在响应表中添加一个 parent<em>response</em>id 列，并通过该列将对话的响应建模为树状结构。</p>
+
+<p>3、编写新的 pytest 测试用例，验证你的设计。</p>
+
+<p>4、编写一个 tree_notes.md 文件，首先将你的设计写入该文件，然后在运行过程中将该文件用作笔记。</p>
+</blockquote>
+
+<p>大家可以查看完整的<a href="https://chat.z.ai/s/131ae064-6239-47ad-aadd-26600bab3587">对话记录</a>。</p>
+
+<p>GLM-4.6 运行了几分钟，不停地吐出生成的代码。最终，它修改了脚本，增加了 API 和命令行调用接口，并编写和运行通过了测试用例。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100104.webp" title="" /></p>
+
+<p>它还生成了一个 tree_notes.md 文件，里面是本次修改的详细说明。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100105.webp" title="" /></p>
+
+<p>大家可以比较它的运行结果与 <a href="https://claude.ai/share/9d5b0729-b58d-4b15-9e45-ab1e7152b89e">Claude Sonnet 的运行结果</a>。</p>
+
+<p>从结果上看，它们的差异不大，都做到了提示的要求，并且代码都是可运行的。差异主要是实现细节，这个就需要详细阅读代码了。</p>
+
+<p>7、</p>
+
+<p>第三个测试是西蒙·威利森独家的，就是让 AI 生成一个鹈鹕骑自行车的 SVG 图片（Generate an SVG of a pelican riding a bicycle）。</p>
+
+<p>这是现实中不存在、且没有参考物的景象，考察模型的想象和生成能力。</p>
+
+<p>下面是 GLM-4.6 打开深度思考后<a href="https://chat.z.ai/s/abc034d4-c1cc-4612-9250-36ecec967f31">生成的图片</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100108.webp" title="" /></p>
+
+<p>下面是 Claude sonnet 4.5 打开深度思考后生成的图片。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100107.webp" title="" /></p>
+
+<p>两者的结果相当接近，只是 Claude 生成的鸟喙更明显，更能看出是一只鹈鹕。</p>
+
+<p>8、</p>
+
+<p>测试就到这里，我觉得总结来说，GLM-4.6 是一个非常强的国产模型，编码能力确实很优秀，可以当作目前公认的最强模型 Claude Sonnet 的替代品。</p>
+
+<p>它的功能全面，除了编码，其他任务也能完成，而且响应速度快，<a href="https://bigmodel.cn/claude-code">价格低</a>，性价比非常突出。</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2025-10-01T19:05:15+08:00">2025年10月 1日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2025/09/weekly-issue-367.html</id>
             <title>科技爱好者周刊（第 367 期）：Nano Banana 的几个妙用</title>
             <link>http://www.ruanyifeng.com/blog/2025/09/weekly-issue-367.html</link>
@@ -2079,439 +2259,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2025-08-29T08:11:28+08:00">2025年8月29日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2025/08/weekly-issue-362.html</id>
-            <title>科技爱好者周刊（第 362 期）：GitHub 工程师谈系统设计</title>
-            <link>http://www.ruanyifeng.com/blog/2025/08/weekly-issue-362.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/08/weekly-issue-362.html</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 22 Aug 2025 08:17:06 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 系统设计,数据库,缓存,后台作业
-
-<br>
-<br>
-总结: GitHub工程师分享系统设计经验，指出程序设计是组装代码而系统设计是组装服务。良好的系统应从简单有效开始发展，避免从零设计复杂系统。系统设计难点在于状态管理，应尽量减少有状态组件并使用数据库管理状态。数据库常成为系统瓶颈，可通过读写分离和缓存优化性能。耗时应放入后台作业队列处理，缓存适用于数据生成与读取速度不匹配的场景。事件中心适用于发送方不关心处理结果的场景，但不要过度使用事件。数据传送可选择拉取或推送方式，具体取决于场景需求。 </div>
-                        <hr>
-                    
-                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
-<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/7408">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
-
-<h2>封面图</h2>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025082101.webp" title="" /></p>
-
-<p>中国首艘火箭回收船"星际归航"本月成功下水，它的40米x60米的甲板，将用于火箭在海上降落。该船的拥有者是民营航天公司"星际荣耀"。（<a href="https://www.geekpark.net/news/352799">via</a>）</p>
-
-<h2>GitHub 工程师谈系统设计</h2>
-
-<p>上周，我读到一篇文章，作者是 GitHub 的高级工程师<a href="https://www.seangoedecke.com/">肖恩·戈德克</a>（sean goedecke）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081814.webp" title="" /></p>
-
-<p>文章题目是<a href="https://www.seangoedecke.com/good-system-design/">《我所知的良好的系统设计》</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081818.webp" title="" /></p>
-
-<p>读完后，我觉得写得不错。GitHub 工程师总结经验，教大家设计一个良好的系统，不是空泛之谈。下面是我的一些摘录。</p>
-
-<p>1、</p>
-
-<p>程序设计是组装代码，系统设计是组装服务。</p>
-
-<p>程序设计的组件是变量、函数、类等，系统设计的组件是服务器、数据库、缓存、队列、事件总线、代理等。</p>
-
-<p>2、</p>
-
-<p>如果一个系统很长时间不出错，它的设计就是良好的。</p>
-
-<p>如果你进一步看了代码，脱口而出："哈，这比我想的要简单"，或者"这个部分不用我操心，即使出问题也容易解决"，它的设计就是优秀的。</p>
-
-<p>3、</p>
-
-<p>良好的系统设计，总是从一个有效的简单系统发展而来。千万不要从零开始设计一个复杂的系统。</p>
-
-<p>4、</p>
-
-<p>系统设计的难点在于状态。尽量采用无状态组件，最小化"有状态组件"的数量。</p>
-
-<p>状态的复杂性在于，你无法简单地重启服务。一旦出错，往往需要手动修复状态。</p>
-
-<p>5、</p>
-
-<p>状态需要保存在数据库。数据库是最重要的系统组件，用来管理状态。</p>
-
-<p>数据库的设计目标是每张表易于理解：打开看一下表结构，就能大致了解存储的数据内容及其原因。</p>
-
-<p>千万不要采用复杂的表结构（也就是数据结构），会给代码带来极大的复杂性和性能约束。</p>
-
-<p>6、</p>
-
-<p>数据库往往是系统瓶颈，因为每个页面请求可能要调用数十次、数百次数据库，而且是按顺序调用。</p>
-
-<p>为了避免瓶颈，数据库可以做成一个写入节点和多个只读副本。数据查询都发往只读副本，数据写入发往写入节点。</p>
-
-<p>写入节点与只读副本之间，存在数据复制延迟。如果更新一条记录后，你需要立即读取它，那么可以将数据放入内存，写入数据库成功后从内存读取。</p>
-
-<p>7、</p>
-
-<p>耗时的操作要拆分出来，放在后台作业（即系统外部的单独服务），排队完成。</p>
-
-<p>后台作业主要分成两个组件：一个队列服务，一个作业运行器（从队列中获取任务并执行）。</p>
-
-<p>队列任务的软件，可以用 Redis（需要尽快执行的任务），也可以用数据库（不着急的任务）。</p>
-
-<p>8、</p>
-
-<p>如果数据的生成速度和读取速度不匹配，经典解决方案就是缓存。</p>
-
-<p>缓存的最简单做法，就是把数据保存在内存，否则就使用专门的键值存储软件（比如 Redis 或 Memcached），后者的好处是多个服务器可以共享缓存。</p>
-
-<p>初级工程师希望缓存所有内容，而高级工程师希望尽量少用缓存。因为缓存是状态的来源，不可避免需要校验状态和处理状态过期。</p>
-
-<p>9、</p>
-
-<p>除了缓存和后台作业，大型系统通常还有事件中心，一般用的是 Kafka。</p>
-
-<p>事件中心也是一个队列，存放的是"某件事发生了"的消息。比如，用户注册触发了"新帐户创建"事件，该事件就放入事件中心，然后由事件中心去通知订阅该事件的多个服务：发送欢迎电子邮件、设置个人空间等等。</p>
-
-<p>事件中心适用于，发送事件的代码不关心其他服务如何处理事件，或者事件量很大且对响应时间不太敏感。</p>
-
-<p>不要过度使用事件，很多时候，更简单的做法是让一个服务请求另一个服务的 API。</p>
-
-<p>为了便于除错，所有日志最好都放在一起，你可以立即看到另一个服务的响应。</p>
-
-<p>10、推拉</p>
-
-<p>如果数据需要传送到多处，有拉取（pull）和推送（push）两种选择。</p>
-
-<p>一般来说，拉取比较简单（比如大多数网站采用的轮询），推送更节省资源，不需要用户主动请求数据，一旦后端数据发生变化，服务器主动将数据推送给每个客户端。</p>
-
-<p>如果你确实需要向100万个客户端提供最新数据（就像 GMail 那样），应该采用推送还是拉取？这要视情况而定。如果采用推送，就要把每次推送放入一个事件队列，并让一大群事件处理器从队列中拉取数据并推送。如果采用拉取，就要部署一堆（比如100台）快速的只读缓存服务器，处理所有读取流量。</p>
-
-<h2>谷歌的两个 AI 新产品</h2>
-
-<p>谷歌本周公开了两个新产品。</p>
-
-<p>1、<a href="https://aistudio.google.com/prompts/new_image">Imagen 4 模型</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081708.webp" title="" /></p>
-
-<p>这是谷歌最新的"文生图"模型，可以在官网<a href="https://aistudio.google.com/prompts/new_image">免费使用</a>，参见<a href="https://developers.googleblog.com/en/announcing-imagen-4-fast-and-imagen-4-family-generally-available-in-the-gemini-api/">介绍文章</a>。</p>
-
-<p>我觉得，图片生成速度很快，效果相当好（比如下图"机器人拿着一块红色滑板"）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081707.webp" title="" /></p>
-
-<p>2、<a href="https://learning.google.com/experiments/learn-about/signup">Learning About</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081805.webp" title="" /></p>
-
-<p>Learning About 是谷歌的<a href="https://learning.google.com/experiments/learn-about?src=signup">新型学习平台</a>，使用 AI 生成学习教程。</p>
-
-<p>先输入你想要学习的主题，比如 Java 语言。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081806.webp" title="" /></p>
-
-<p>它会返回一篇简单的教程，</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081807.webp" title="" /></p>
-
-<p>除了总体介绍，里面还会列出各种学习主题，可以进一步深入学习。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081808.webp" title="" /></p>
-
-<h2>科技动态</h2>
-
-<p>1、英国内政部宣布，英国的警车将加装<a href="https://news.sky.com/story/facial-recognition-vans-to-be-rolled-out-across-police-forces-in-england-13410613">面部识别系统</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081815.webp" title="" /></p>
-
-<p>警车一边开，一边扫描路上行人的面孔，跟警方的数据库比对。如果发现可疑人士，就发出警报。</p>
-
-<p>据称，该技术在伦敦试运行期间，12个月内已抓到了580名嫌疑人。</p>
-
-<p>2、很多人喜欢旅行时邮寄明信片，作为纪念。</p>
-
-<p>但是，明信片需要手写，而且只能传递文字，在手机时代显得很落伍。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081302.webp" title="" /></p>
-
-<p>一家美国公司最近推出了 <a href="https://www.sendkeeps.com/">Keeps</a>（上图）。用户在它的网站，上传照片，并留下一段语音（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081303.webp" title="" /></p>
-
-<p>它会把照片打印成明信片，背后是一个二维码，然后把明信片寄给你指定的收件人。对方收到后，手机扫描二维码，就能听到你留下的语音。</p>
-
-<p>3、维基百科的条目，有各种语言的版本。你知道最多语言的条目，是哪一篇吗？</p>
-
-<p>出乎意料，居然是一个名不见经传的艺术家，名叫<a href="https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost/2025-08-09/Disinformation_report">大卫·伍德沃德</a>（David Woodard）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081304.webp" title="" /></p>
-
-<p>他的条目居然有335种语言版本，是所有条目中最多的。</p>
-
-<p>他的大部分语言版本都是一个叫做 Swmmng 的用户创建的，而且 IP 地址也一样，时间跨度持续了十多年。</p>
-
-<p>很显然，这是一起自我推销行为，这个艺术家为了出名，为自己生成各种语言的维基百科条目。现在，他的大部分语言版本已被删除，只留下20种语言。</p>
-
-<h2>文章</h2>
-
-<p>1、<a href="https://github.blog/ai-and-ml/llms/solving-the-inference-problem-for-open-source-ai-projects-with-github-models/">GitHub Models 的免费 AI 服务</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025082008.webp" title="" /></p>
-
-<p>我刚刚知道，GitHub 提供免费的 AI 模型调用，有 GPT-4o、DeepSeek-R1、Llama 3 等模型，不过有用量限制。</p>
-
-<p>2、<a href="https://jrsinclair.com/articles/2025/joy-of-immutable-data-recursion-pure-functions-javascript-mazes/">用 JavaScript 生成迷宫</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025082006.webp" title="" /></p>
-
-<p>本文用通俗的语言，介绍一种生成迷宫的简单算法，给出 JS 的实现。</p>
-
-<p>3、<a href="https://magecdn.com/blog/2025/08/11/cloudflare-not-a-cdn/">Cloudflare 不是 CDN</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081816.webp" title="" /></p>
-
-<p>Cloudflare 提供无限流量的免费 CDN，那么为什么它还有收费的 CDN？本文告诉你，除了流量，CDN 还有其他指标。</p>
-
-<p>4、<a href="https://tylercipriani.com/blog/2025/08/15/git-lfs/">Git 如何处理大文件</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081713.webp" title="" /></p>
-
-<p>几十 MB 的大文件，不适合放入 Git 仓库。如果一定要放，要使用一个扩展 Git LFS。但是它不太好用，作者提出改进建议。</p>
-
-<p>5、<a href="https://www.xda-developers.com/vs-code-extensions-i-cant-live-without/">10个有用的 VS Code 插件</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025052504.webp" title="" /></p>
-
-<p>作者介绍10个他已经离不开的 VS Code 插件。</p>
-
-<p>6、<a href="https://jeclark.net/articles/tcp-initcwnd/?tag=performance">TCP 初始拥塞窗口的问题</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081706.webp" title="" /></p>
-
-<p>TCP 协议有一个"拥塞窗口"的设计，会根据网络状况，自动调整发送数据包的数量。本文通俗地解释这个概念，并提出改进的方案。</p>
-
-<h2>工具</h2>
-
-<p>1、<a href="https://github.com/bgreenwell/doxx">doxx</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081809.webp" title="" /></p>
-
-<p>终端查看 docx 文件的命令行工具。</p>
-
-<p>2、<a href="https://github.com/weynechen/intrascribe">IntraScribe</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081601.webp" title="" /></p>
-
-<p>面向企事业单位内网环境的一个"语音转文字"的管理协作平台。（<a href="https://github.com/ruanyf/weekly/issues/7542">@weynechen</a> 投稿）</p>
-
-<p>3、<a href="https://github.com/miroslavpejic85/p2p">P2P Remote Desktop</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081602.webp" title="" /></p>
-
-<p>一个开源的 Windows 远程桌面工具，直接运行可执行文件打开远程桌面，无需配置和安装。（<a href="https://github.com/ruanyf/weekly/issues/7547">@miroslavpejic85</a> 投稿）</p>
-
-<p>4、<a href="https://github.com/AkenClub/CuteClock">CuteClock</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081703.webp" title="" /></p>
-
-<p>一个开源硬件项目，基于 ESP8266 的智能时钟，可以显示时间和天气，支持小爱同学语音控制，自带 Web 和小程序客户端。（<a href="https://github.com/ruanyf/weekly/issues/7553">@AkenClub</a> 投稿）</p>
-
-<p>5、<a href="https://github.com/GitDzreal93/clean-your-mac">CleanYourMac</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081704.webp" title="" /></p>
-
-<p>开源的 Mac 应用，智能清理工具，使用 AI 分析要删除的文件。（<a href="https://github.com/ruanyf/weekly/issues/7555">@GitDzreal93</a> 投稿）</p>
-
-<p>6、<a href="https://github.com/chromium-style-qrcode/next-qrcode-generator">Next QR Code Generator</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081801.webp" title="" /></p>
-
-<p>Firefox 浏览器的开源插件，为页面生成类似 Chrome 的二维码。（<a href="https://github.com/ruanyf/weekly/issues/7563">@liuliangsir</a> 投稿）</p>
-
-<p>7、<a href="https://github.com/AnYi-0/Translator">Translator 快速翻译</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081802.webp" title="" /></p>
-
-<p>Chrome 浏览器的离线翻译插件，基于浏览器新的 Translator API 和 Language Detector API，不用网络也能翻译。（<a href="https://github.com/ruanyf/weekly/issues/7562">@AnYi-0</a> 投稿）</p>
-
-<p>8、<a href="https://ipynbtopdf.net/">Jupyter Notebook 转换网站</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025082003.webp" title="" /></p>
-
-<p>这个网站可以将 ipynb 文件转化为 PDF、HTML 和 Python。（<a href="https://github.com/ruanyf/weekly/issues/7587">@CurioChen77</a> 投稿）</p>
-
-<p>9、<a href="https://github.com/luckfu/docker_pull">Docker Pull Script</a></p>
-
-<p>一个 Python 脚本，用于从指定镜像源下载 Docker 镜像，支持并发下载、智能缓存（layer 增量更新）。（<a href="https://github.com/ruanyf/weekly/issues/5931#issuecomment-3205330268">@luckfu</a> 投稿）</p>
-
-<p>10、<a href="https://makegraph.app/editor">Make Graph</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025082102.webp" title="" /></p>
-
-<p>在线图表制作网站，支持主流图表类型，可导出 SVG。（<a href="https://github.com/ruanyf/weekly/issues/7597">@bimohxh</a> 投稿）</p>
-
-<p>另有一个类似工具 <a href="https://chartfromtext.com/">ChartFromText</a>，输入数据，在线生成各种图表。（<a href="https://github.com/ruanyf/weekly/issues/7601">@StevenWuHao</a> 投稿）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025082104.webp" title="" /></p>
-
-<h2>AI 相关</h2>
-
-<p>1、<a href="https://progress.openai.com/">OpenAI Progress</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081709.webp" title="" /></p>
-
-<p>OpenAI 的官方项目，展示 AI 的发展历程：每一年，同样的提示语，不一样的输出。</p>
-
-<p>2、<a href="https://mcpso.cc/kchat/index.html">MCP Playground</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081701.webp" title="" /></p>
-
-<p>这个 Web 应用可以用作 MCP 客户端，指定 AI 模型和 MCP 服务器，在线使用。（<a href="https://github.com/ruanyf/weekly/issues/7550">@mcpexplorer</a> 投稿）</p>
-
-<p>3、<a href="https://github.com/Blushyes/coro-code">Coro Code</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081803.webp" title="" /></p>
-
-<p>基于终端的 AI 编码代理，Claude Code 的开源替代品。（<a href="https://github.com/ruanyf/weekly/issues/7561">@Blushyes</a> 投稿）</p>
-
-<p>4、<a href="https://github.com/leeguooooo/claude-code-usage-bar">Claude Code Status Bar Monitor</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025082005.webp" title="" /></p>
-
-<p>Claude Code 的插件，实时显示使用量和重置时间等信息。（<a href="https://github.com/ruanyf/weekly/issues/7588">@leeguooooo</a> 投稿）</p>
-
-<h2>资源</h2>
-
-<p>1、<a href="https://zedex.github.io/mandarin-reading-resource/">中小学语文示范诵读库</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081705.webp" title="" /></p>
-
-<p>中央人民广播电台<a href="https://edu.cnr.cn/eduzt/ywkwsfsd/">中小学语文示范诵读库</a>的 Web 前端，课文按年级、学期分类。（<a href="https://github.com/ruanyf/weekly/issues/7556">@ZedeX</a> 投稿）</p>
-
-<p>2、<a href="https://volumeshader.org/zh">在线硬件测试平台</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081702.webp" title="" /></p>
-
-<p>网页测试各种硬件（GPU、屏幕、网络、摄像头、声音、鼠标、键盘）。（<a href="https://github.com/ruanyf/weekly/issues/7552">@linhuaqian</a> 投稿）</p>
-
-<p>3、<a href="https://github.com/AlliotTech/ham-exam-web">业余无线电执照考试模拟</a>（2025 题库）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025082002.webp" title="" /></p>
-
-<p>基于官方最新题库构建的在线模拟与练习的 Web 应用。（<a href="https://github.com/ruanyf/weekly/issues/7585">@AlliotTech</a> 投稿）</p>
-
-<p>4、<a href="https://www.citywalki.com">Citywalki</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081804.webp" title="" /></p>
-
-<p>这个网站让你感受在世界200多个城市步行/开车/飞无人机。选择城市和移动方式后，它会全屏播放相应的 Youtube 视频，体验不错。</p>
-
-<h2>图片</h2>
-
-<p>1、<a href="https://kottke.org/25/08/roll-on-you-crazy-tire">滚动时间最长的滚轮胎</a></p>
-
-<p>推荐 Youtube 的<a href="https://www.youtube.com/watch?v=tLpQ5bcxouw">一个视频</a>。</p>
-
-<p>一群艺术家爬上智利最高的沙丘之一，在上面扔下一只轮胎，用无人机全程拍摄，看看它会滚动多久。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081710.webp" title="" /></p>
-
-<p>轮胎在沙漠里，差不多滚动了三分钟，视频就是这三分钟的全程滚动，非常壮观和纾压。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081711.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202508/bg2025081712.webp" title="" /></p>
-
-<h2>文摘</h2>
-
-<p>1、<a href="https://daringfireball.net/linked/2025/08/15/woz-on-slashdot">沃兹尼亚克的故事</a></p>
-
-<p>今年8月11日，是苹果公司联合创始人史蒂夫·沃兹尼亚克 (Steve Wozniak) 75 岁的生日。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025082103.webp" title="" /></p>
-
-<p>网络论坛 Slashdot 转载了新闻媒体关于他的生日报道。有人留言，惋惜地说，如果他没有卖掉苹果股票，早就是世界数一数二的富翁了。</p>
-
-<p>沃兹尼亚克本人看到这条留言，在下面回复了一段话。</p>
-
-<blockquote>
-  <p>"我卖掉和捐赠了所有苹果股票，原因是财富和权力不是我生活的目的。</p>
-
-<p>我更希望自己拥有快乐和幸福。我资助了圣何塞（我出生在那里）的许多博物馆和艺术团体，他们还以我的名字命名了一条街道。</p>
-
-<p>二十年来，我一直公开演讲，收入可能达到1000万美元。这足够我用了。"</p>
-</blockquote>
-
-<p>这段话令人想起一本介绍苹果公司历史的书籍，里面曾经提到沃兹的故事。</p>
-
-<p>从学生时代起，他就对自己的财富漫不经心。后来有钱了，也依然如此。</p>
-
-<p>他从不记录自己的开销，也懒得听取理财建议。别人寻求帮助时，他经常当场开出支票。</p>
-
-<p>与乔布斯严格保管自己的苹果股票不同，他送给了父母、姐姐和弟弟400万美元股票，送给了朋友200万美元股票。父亲在他车里捡到过25万美元的未兑现支票，感叹说："像他这样的人不应该有那么多钱。"</p>
-
-<p>有一次，他来到苹果公司大声宣布："我的律师建议多元化投资，所以我刚刚买下了一家电影院。"但这件事后来引起了一些麻烦。这家电影院位于圣何塞东区贫民窟，放映了一部黑帮电影，引发了社区的抗议。他参加了几次社区会议，听取了当地居民的意见，承诺他的剧院不会放映暴力或色情电影，然后他在空荡荡的、黑暗的剧院里度过了几个下午，坐着不停看电影，扮演审查员的角色。</p>
-
-<h2>言论</h2>
-
-<p>1、</p>
-
-<p>我计划写一本 Gleam 编程语言的书。但是，AI 已经能非常清晰地解释 Gleam 了，而且还能回应读者的任何要求。</p>
-
-<p>虽然我自信，自己目前写得要比 AI 好，但是实在没有理由，说服自己去这样做。你花数百小时写书，赚到的钱根本不值得这样付出。</p>
-
-<p>有了 AI，我不知道，人们以后写书的动力是什么，大概只会为了乐趣而写作。</p>
-
-<p>-- <a href="https://dusty.phillips.codes/2025/06/08/my-ai-driven-identity-crisis/">《AI 引发的身份危机》</a></p>
-
-<p>2、</p>
-
-<p>让我难以抗拒的是，与中国打交道比与世界其他任何地方打交道都容易得多。我给中国某人发邮件，对方肯定会在24小时内回复，更有可能在4小时内。</p>
-
-<p>给一家欧盟或美国公司发邮件，通常要等上好几天才能收到回复。在与中国公司打交道时，我从未见过这种情况，一次也没有。而且，他们的 B2B 大型电商平台几乎总是提供全天候在线客服和采购支持。</p>
-
-<p>-- <a href="https://news.ycombinator.com/item?id=44936016">Hacker News 读者</a></p>
-
-<p>3、</p>
-
-<p>AI 不会减少你掌握新技能所需要付出的努力，只会让你产生不必学习就已经学会的错觉。 </p>
-
-<p>-- <a href="https://playtechnique.io/blog/ai-doesnt-lighten-the-burden-of-mastery.html">《AI 让人产生虚假的掌控感》</a></p>
-
-<p>4、</p>
-
-<p>可靠、透明的程序通常不符合程序设计者的利益。</p>
-
-<p>-- <a href="https://en.wikiquote.org/wiki/Niklaus_Wirth">尼克劳斯·维尔特</a>（Niklaus Wirth），计算机科学家，图灵奖得主</p>
-
-<h2>往年回顾</h2>
-
-<p><a href="https://www.ruanyifeng.com/blog/2024/08/weekly-issue-315.html">一份谷歌离职报告</a>（#315）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2023/08/weekly-issue-265.html">WiFi 的后面是 LiFi</a>（#265）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2022/07/weekly-issue-215.html">互联网最喜欢的行为模式</a>（#215）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2021/07/weekly-issue-165.html">全端 App 的时代</a>（#165）</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2025-08-22T08:17:06+08:00">2025年8月22日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
