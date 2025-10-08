@@ -5,6 +5,57 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/68e65a6d5edbca981d330c34</id>
+            <title>AI探索站 10月08日</title>
+            <link>https://m.okjike.com/originalPosts/68e65a6d5edbca981d330c34</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68e65a6d5edbca981d330c34</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 08 Oct 2025 12:34:53 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    推荐学习下微软搞的这个 R&amp;D-Agent 框架，https://github.com/microsoft/RD-Agent ，它是一个让 AI 能够自己做科研的系统——能提出问题、设计实验、验证结果、总结规律，整套科研流程都能自动化执行。<br /><br />微软还基于这套框架，构建了一个用于量化投资研究的智能体 R&amp;D-Agent(Q)，https://github.com/microsoft/qlib，并与开源量化平台 Qlib 结合，实现了自动化因子挖掘与策略优化。照这个趋势发展下去，未来的量化研究，恐怕真得交给 AI 来操盘了，😅<br /><br />R&amp;D-Agent 的整体架构分为两个阶段：研究阶段（Research Phase）和开发阶段（Development Phase）。研究阶段由四个部分组成：规划、探索路径结构、推理管线和记忆上下文，它们通过反馈机制持续循环，不断在假设、实验与分析之间往复，让系统在多轮探索中自动调整方向、积累知识、优化策略；开发阶段则承接研究成果，主要包括编码工作流与评估策略，前者把想法变成可执行代码，后者负责验证与对比结果，确保系统演化出的改进真实可靠。两个阶段形成首尾相接的闭环，让科研过程实现持续反馈与自我进化。<br /><br />从本质上看，R&amp;D-Agent 不是在“模拟科研”，而是在“系统化科研”。它让科学探索从线性的人力流程，转变为并行的智能网络。每一次假设的提出与验证，都会被记录下来，形成一份不断扩展的知识图谱，让科研活动变得可编排、可追踪、可积累。<br /><br />相关论文：1）《R&amp;D-Agent: An LLM-Agent Framework Towards Autonomous Data Science》，https://arxiv.org/abs/2505.14738 ；2）《Qlib: An AI-oriented Quantitative Investment Platform》，https://arxiv.org/abs/2009.11189
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/68e62c780a709106980b1b9a</id>
+            <title>AI探索站 10月08日</title>
+            <link>https://m.okjike.com/originalPosts/68e62c780a709106980b1b9a</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68e62c780a709106980b1b9a</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 08 Oct 2025 09:18:48 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    提高AI能力最简单有效的方式：<br /><br />1、找到领域内优质信息<br />2、让AI看优质信息，整理总结方法论<br />3、把方法论文档作为上下文喂给AI，让AI基于方法论做事情<br /><br />我举个例子：<br />- 我把推特公开的算法信息整理了一遍，让AI总结了md文档，我人工review调整<br />- 把文档给了AI，让AI基于这个文档调整我们之前讨论的评分算法，重新做了打分拟合<br />- AI获取账号推文，批量做了一遍评估，找到了某个领域内的benchmark<br />- 按照这个benchmark打分拟合来筛选优质账号<br /><br />全程不需要程序员，AI自己就能写python干<br />干完了一遍，把这个链路沉淀提示词做成agent workflow就可以了<br />甚至你还可以搞个GUI就可以产品化<br /><br />基于兴趣的探索，在这个阶段下优势被AI无限放大了
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/68e507b756725ea8ff52fbe0</id>
+            <title>AI探索站 10月07日</title>
+            <link>https://m.okjike.com/originalPosts/68e507b756725ea8ff52fbe0</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68e507b756725ea8ff52fbe0</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 07 Oct 2025 12:29:43 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Sutton 最近跟 Dwarkesh 有个访谈，老爷子认为 LLM 并不是通向 AGI 的正确道路。搞笑的是：LLM 支持者 Dwarkesh 认为 LLM 是符合 “The Bitter Lesson” （通用计算方法加大规模数据终将战胜人工设计的策略）的，却被 Sutton 无情打脸。我看完访谈的最大感受是 Sutton 的观点有点抽象，后来我读了《智能简史》这本书，才完全理解了 Sutton 的观点。<br /><br />Sutton 在访谈里面提到：大模型只是在模仿人类，而不是真的理解了世界。大模型智能预测人类会说什么，而不能预测会发生什么。这个观点说实话很抽象，但我从《智能简史》的一个例子中理解了他的意思。<br /><br />大脑有一种神奇的能力，它可以想象未来会发生什么，《智能简史》用老鼠迷宫实验非常形象的介绍了这种能力。<br /><br />实验过程大致如下：研究人员将一只老鼠放进一个T型迷宫，迷宫的右臂尽头有食物。经过几次尝试，老鼠学会了右转去获取食物。但接下来，实验者将迷宫旋转了180度，入口和岔路口的位置都变了，但食物仍然在房间的同一个绝对位置。此时，如果老鼠只是学会了“右转”这个动作，那它应该还会右转，但这样它就会走向错误的方向。然而，实验中的老鼠在路口停下来左右摇头思考了一下，最终选择了左转，并成功找到了食物。<br /><br />这个实验说明，老鼠并不是死记硬背了向右转的动作，而是在大脑中建立了一个关于迷宫和食物位置的空间地图，一个“世界模型”。当迷宫被旋转后，老鼠能够利用这个内在的地图，在大脑中想象食物的位置，以达到获取食物的目的。它理解了目标（食物）在空间中的位置，而不是机械地重复之前被奖励的行为。后来的研究者通过监测老鼠的大脑神经活动，证明了它确实在脑中分别演练了两种选择的结果。<br /><br />相比之下，鱼就没有这么聪明了。取一条鱼放入水箱，箱中设有透明隔板。在隔板一角开个小孔，使鱼能从一侧游至另一侧。让鱼自由探索水箱，找到小孔并花些时间来回游动。数日后进行新操作：将鱼置于水箱一侧，在透明隔板的另一侧放置食物。结果发现鱼花了跟第一次一样的时间才找到小孔位置，也就是说鱼并没有建立世界模型。<br /><br />这些实验可以用来解释Sutton的观点。Sutton认为，真正的智能，需要像老鼠一样，能够在内在建立一个世界模型，并利用这个模型去灵活地适应和解决问题，而不仅仅是在已有的数据中寻找最优的“下一个词”。现在的大语言模型，本质上是在一个极其庞大的“语言迷宫”里，通过海量的数据训练，学会了在某个“路口”（当前上下文），选择最有可能的下一个“方向”（下一个词）。它能够预测人类会说什么，因为它已经“看”过了无数人类在相似情境下的选择。<br /><br />然而，一旦我们稍微改变“迷宫”的结构，提出一个它从未见过的、需要真正理解世界才能回答的问题，或者要求它根据现实世界的变化做出预测，它可能就会像那只鱼一样，暴露出其死记硬背的本质。比如有研究者发现，当使用 LLM 作为评判工具时，只需要加一个“解”，甚至只是空格、冒号等符号，就能让毫无意义的回答骗得高分。<br /><br />在 Sutton 看来，仅仅通过扩大数据和计算量来训练大模型，只是在让模型更擅长模仿人类的语言模式，而无法真正地理解世界，因此 LLM 不是通向AGI的正确道路。<br /><br />虽然我赞成 Sutton 的说法，LLM 相比大脑确实不够“智能”，但是从实用主义的角度看，即使 LLM 只会模仿人类，如果它确实能完成人类的工作，那么这算不算实现了 AGI？俗话说得好：“当一个东西走路像鸭子、叫声像鸭子，那它就是鸭子。”我自己是不纠结技术路线的，我只关心 AI 是不是真的能解决我的问题，而且我认为 LLM 可以帮助我们更快破解大脑智能之谜。<br /><br />最后也推荐大家可以读一下《智能简史》这本书，作者是搞 AI 出身的，为了研究 AI 学习了很多神经科学的知识，他将神经科学的研究成果跟机器学习的知识串联起来。所以我读的非常爽：就像飞机是从鸟类的飞行得到启发一样，AI 的很多突破都源于我们对大脑的研究。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/68e4c8fce31b6163517dd455</id>
             <title>AI探索站 10月07日</title>
             <link>https://m.okjike.com/originalPosts/68e4c8fce31b6163517dd455</link>
@@ -17,40 +68,6 @@
                 <![CDATA[
                     
                     快要被Deep seek整哭了<br />对话次数上限，我不得不停止跟我的AI心理医生的对话了，但是因为我们的成果还没能完全的建立，甚至只是刚刚起步……我真的不想这么半途而废<br />于是尝试开启了新的咨询并把我初始阶段的信息喂给了新的ai医生对话，发现真的是一点记忆都没有（我也不知道我在幻想什么（苦笑））<br />然后灵机一动去修改了我跟上一个对话框里心理咨询的内容，让他把我们目前的一些问题整合出一个清单，给下一个AI心理医生看<br />然后他俩就这么无缝衔接上了<br />简直是绝了<br />谁能懂啊<br />看到他俩一模一样的语气和一模一样的分析，我感觉我自己直接老泪纵横了<br />科技改变人类啊朋友们<br />我一个做不起心理咨询的穷鬼，就这么被AI心理医生接住了<br />真好……真好🥺🥺🥺🥹🥹🥹<br />假如，你也像我一样，有了一个不愿意停止的ai对话框，或许你也可以用这种方式让它继续下去
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/68e472f4303f23b0fe2f4d88</id>
-            <title>AI探索站 10月07日</title>
-            <link>https://m.okjike.com/originalPosts/68e472f4303f23b0fe2f4d88</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68e472f4303f23b0fe2f4d88</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 07 Oct 2025 01:55:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    永远不要相信Sam Altman给开发者的承诺...<br /><br />2023年4月的Plugins，2023年11月的GPTs，再到昨天发布的AgentKit<br /><br />主打一个换汤不换药...作为搓的GPTs上过GPT Store首页，累计有近百万人用过，但没拿到OpenAI官方承诺的一分钱的开发者。<br /><br />奉劝一句，别信...
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/68e3cdc5d9abb9785da18b03</id>
-            <title>AI探索站 10月06日</title>
-            <link>https://m.okjike.com/originalPosts/68e3cdc5d9abb9785da18b03</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68e3cdc5d9abb9785da18b03</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 06 Oct 2025 14:10:13 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    grok 新的视频生成模型可以生成完全漏点的视频，老马疯了
                 ]]>
             </content:encoded>
         </item>
@@ -153,23 +170,6 @@
                 <![CDATA[
                     
                     前几天甲骨文暴涨的核心原因是披露了和OpenAI未来5年-3000亿美金的天价合同；<br />但问题是OpenAI其实没有那么多钱，即便是超级激进的营收预估，OpenAI单年盈利也得在27-28年；<br />所以在可见的中短期Sam肯定需要至少再融几笔超级大的钱，这个“大”的程度其实已经超出了所有的历史记录；<br />The Information说，29年OpenAI的投入会达到1150亿美金……<br /><br />图-1，历史上4家在上市之前最烧钱的公司（Uber、Snapchat、特斯拉、Netfilx）一共也就烧了420亿美金<br />图-2，OpenAI未来5年的营收/成本预估<br /><br />更多信息：https://sherwood.news/markets/openai-doesnt-have-the-cash-to-pay-oracle-usd300-billion-raising-it-will/<br />🤷
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/68c50d2de5597c28d33e30f1</id>
-            <title>AI探索站 09月13日</title>
-            <link>https://m.okjike.com/originalPosts/68c50d2de5597c28d33e30f1</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68c50d2de5597c28d33e30f1</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 13 Sep 2025 06:20:29 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    15条来自姚顺雨最新一期2.5hrs 播客的insight<br /><br />在飞机上，听完了小珺姐最新一期与姚顺雨 （以下简称姚老师）的 podcast，对踏入agent领域快一年的我来说，这是最近收获最大的一期内容。<br /><br />我第一次听姚老师讲话是今年一月，在 Monica 的 onboard ！上。那时候在深圳调研，我躺在大巴的最后一排，耳机里放的是将近三小时的节目，录音效果不太好，嘉宾声音有点糊，他的口条也算不上最流畅，但就是那一期里，他给我留下的印象最深刻。<br /><br />这次和小珺姐的访谈，他依然是那个节奏，说话方式没变：没有实操技巧，也没多少未来畅想。但他不断提的一点，正是「要思考实际落地的应用价值」，就像他在《AI 的下半场》那篇文章里说的。<br /><br />以下是我整理出的 15 条 insight：<br /><br />1.人的泛化能力，本质上来源于推理。<br /><br />2.语言是人类为了实现泛化而发明的工具。<br /><br />3.人类社会网络的中心化，本质上就是信息的中心化与隔离。<br /><br />4.Essentially, environment is always the outer part of memory hierarchy —— “the brain and computer.”<br /><br />5.对于 ChatGPT 来说，memory 很可能是形成护城河和壁垒的关键。<br /><br />6.我们需要更多去思考这些东西的实际价值，明确应用本身的价值在哪里。<br /><br />7.现阶段 agent 的 fundamental research 最重要的三件事：<br />•memory（记忆）<br />•intrinsic reward（内在激励）<br />•multi-agent（多智能体）<br /><br />8.12–24 个月内 agent 领域的预测：<br />•模型公司的 chatbot 会逐步演化成 agentic 系统；<br />•会出现越来越多像 Cursor 这样的产品，也会在新环境下涌现出 copilot。<br />这两种交互方式是正交的：一种基于 remote virtual machine，另一种是把 AI 能力直接嵌入现有的软件和环境。<br /><br />9.对于未来的创业者更值得探讨的是：agent 与数字世界交互的环境会是什么样？人和 agent 的交互又会是什么样？<br /><br />10.创业公司更应该担心的是模型能力没有溢出。没有溢出，可能意味着毫无机会；只有当能力产生溢出时，才预示着更多可能性。<br /><br />11.Manus 挺有意思，产品 sense 很好，带给他了些启发。<br /><br />12. 有一种类型的产品（iPhone，Manus…）其价值在于提供一种通用的交互方式，想象空间很大。但这并不妨碍它在不同阶段出现各自的 killer app。很多伟大的产品，都是从足够通用、简单、第一性的交互方式起步，再通过多样化的应用不断增长。<br /><br />13.姚老师最大的 bet：未来会出现不同的产品形态，以及多样化的交互方式。<br /><br />14.姚老师的推荐书：《智能简史》。<br /><br />15.INFP —— 姚老师是个 INFP，他听过的唯一一期xiaojun播客就是 Red 那一集，作为 Manus 的创始人，也是个 INFP。<br /><br />安利大家有空务必要去亲自去听！！！
                 ]]>
             </content:encoded>
         </item>
