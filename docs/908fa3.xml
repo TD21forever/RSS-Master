@@ -5,80 +5,78 @@
         <link>https://www.36kr.com/information/web_news</link>
         
         <item>
-            <id>https://www.36kr.com/p/3501456488946568</id>
-            <title>Apple Vision Pro 可以看自己拍的沉浸式视频了，它离成为下一个 iPhone 还有多远？</title>
-            <link>https://www.36kr.com/p/3501456488946568</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3501456488946568</guid>
+            <id>https://www.36kr.com/p/3503293196540808</id>
+            <title>百度地图携手美团、携程，直指阿里到店战略</title>
+            <link>https://www.36kr.com/p/3503293196540808</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3503293196540808</guid>
             <pubDate></pubDate>
-            <updated>Thu, 09 Oct 2025 13:45:28 GMT</updated>
+            <updated>Fri, 10 Oct 2025 13:02:59 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <p>经过三个月的测试工作，Apple 在 9 月正式为 Apple Vision Pro 推出了 visionOS 26 系统更新。</p>
-  <p>除了大家耳熟能详的小组件、新版自影像以外，还有一项特性也获得了不少人的关注，那就是对于来自 Insta360、GoPro 和佳能设备拍摄的 180 度、360 度和宽视场内容原生播放的支持。刚好我手里有一台 Insta360 X5，便研究了一下在 visionOS 26 播放第三方沉浸式视频的相关细节，在此作一个简单分享。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_4df43fd0b4e14f8ea3643b3e40ddd640@000000_oswg51635oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>visionOS 中的视频类型</strong></h2>
-  <p>在开始之前，先简单介绍一下 visionOS 目前支持播放的几种视频类型。</p>
-  <h3><strong>2D 和 3D 视频</strong></h3>
-  <p>顾名思义，2D 视频与我们使用 iPhone、Mac 等平面设备观看的视频并无二致，内容通过窗口播放，可以内嵌在网页或者独立的 app 中。</p>
-  <p>当我们在平面设备上观看 2D 内容时，可以点击最大化按钮，让视频以全屏形式占满整个屏幕播放；在 Apple Vision Pro 中 2D 平面视频内容虽然无法「全屏」播放，但也有相应的「最大化」按钮，Apple 将其称为「扩展式播放」。</p>
-  <p>扩展式播放的 2D 视频内容会以独立窗口的形式，在 Apple Vision Pro 的环境中占满整个窗口播放；如果开发者为自己的 app 使用了 Apple 官方提供的 Reality Composer Pro 或 AVKit 开发工具，扩展式播放窗口还可以切换至「悬停状态」停靠在 visionOS 空间中的指定位置，此时窗口位置、大小不可调整，环境会根据窗口播放内容实时模拟呈现窗口屏幕在环境中的动态光线反射效果，类似虚拟影院的感觉。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_70366c1e94174b7d9451e3ab2247fe7c@000000_oswg44358oswg1080oswg606_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">悬停播放</p>
-  <p>3D 视频的播放与 2D 视频类似，但可以提供类似在电影院观看的窗口 3D 视频效果。为了达到这一效果，Apple 为开发者提供了多视图编码 (MV-HEVC) 格式，与传统 VR 内容的左右或上下帧合并形式不同，多视图编码在视频工程文件的同一轨道里存储了多个独立视图层，使左右眼帧的画面具有相同分辨率并共享时间轴，这样也能保证最终视频文件能够向下兼容普通 HEVC 格式播放。</p>
-  <p>对于开发者而言，视频片源需要分别提供时长和帧率完全一致的左右眼文件，且使用高位深格式和 HDR 色彩空间重新将文件编码为 MV-HEVC，MV-HEVC 轨道会通过 vexu 扩展 (Video Extended Usage) 标明该轨道的左右眼视图和默认视图，以便播放器确定如何将每个视图映射到用户的左眼或右眼。</p>
-  <p>目前在 Apple Vision Pro 中，我们主要可以通过视频 app (外区) 或 Disney+ app 观看众多 3D 版本的热门影视内容，获得影院级的 3D 观影体验。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_5df34f4d0df740d3b4fcb5e9975f0ac2@000000_oswg55250oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h3><strong>空间视频</strong></h3>
-  <p>空间视频是 Apple 在 visionOS 中提出的新概念，视频内容可以按照真实尺寸呈现在视野中，同时窗口边缘会以淡出的形式与周围环境形成自然过渡的效果。这种处理方式能够让画面与环境之间不致于突然产生强烈的深度错觉，同时提供身临其境的观看感受 ￼。同样地，空间视频也做到了向下兼容，能够在 Apple Vision Pro 或 iPhone 等设备中以传统 2D 画面的形式播放。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_22efed26b4d84ef489ec49c37c317055@000000_oswg52780oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">空间视频</p>
-  <p>从技术角度来看，空间视频同样采用了 MV‑HEVC 编码格式，将左眼与右眼视图分别存储在多视图图层轨道中，并通过 QuickTime 容器的 vexu 扩展加入了描述左右视图、默认视图、视差等关键信息 ￼。此外，空间视频还含有额外的元数据，如实际拍摄距离等，这些数据会影响窗口深度和视角的呈现。</p>
-  <h3><strong>180°、360° 和宽视场视频</strong></h3>
-  <p>在 visionOS 26 中，Apple 将传统的 180°、360° 和宽视场视频统称为「沉浸式视频」，与前述的 2D、3D 和空间视频采用直线投影 (Rectilinear projection) 不同，在 Apple Vision Pro 这样的空间计算设备中，渲染空间并不仅局限于我们观看前方的平面区域，开发者也可以在虚拟环境中的观看者周围铺满像素，并且需要考虑镜头曲率或弯曲变换，因此需要采用非直线投影 (Nonrectilinear projection) 方式渲染视频内容。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_072dcc77d66049d88379cd16844720f5@000000_oswg94801oswg1080oswg606_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">直线投影</p>
-  <p>180° 视频通过「半等距柱状投影」将正方形的画面映射到半球区域中 ￼，内容会填满观看者前方的半球区域视野。360° 视频则采用「等距柱状投影」，画面为宽高比为 2:1 的矩形画面，这样可以使画面在投射时水平轴能够覆盖 −180° 至 +180° 的区域，垂直轴能够覆盖 −90° 至 +90° 的区域，将观看者完全包围在沉浸空间中，也是 VR 行业通用的投影方式。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_36ee03cd5aed4047ac6bd315cb73bfe2@000000_oswg64664oswg1080oswg625_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">半等距柱状投影</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_65b3ea03f56f4e8fba14245b5e6220f0@000000_oswg75764oswg1080oswg633_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">等距柱状投影</p>
-  <p>宽视场视频是 visionOS 26 中新支持的非直线投影视频类型，采用「参数化投影」方式。宽视场视频会根据每个广角或鱼眼镜头的内部参数和畸变模型生成投影函数，再通过 visionOS 26 引入的 APMP 格式文件存储的镜头焦距、光学中心、畸变矩阵等参数，由播放器矫正弯曲曲线后映射画面，可在曲线上复原真实视角，同时消除画面中的畸变和鱼眼效果，让直线看起来不再弯曲。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_f3a55c60caae4f3f85c4d7d3f6ad86e0@000000_oswg36516oswg1080oswg629_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>这三种非直线投影类型的 3D 视频同样采用了 MV-HEVC 视频编码技术，作为高效视频编码技术 HEVC 的「立体」版本，MV-HEVC 能够将左右眼的画面像素分别编写到不同的缓冲区中，并根据双眼画面的相似性仅编码不一致的部分，这样不仅能够有效降低立体视频文件的体积大小，也有利于提高视频编码渲染的效率。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_28682c711994498db6751740ba1fbdaa@000000_oswg37918oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h3><strong>Apple Project Media Profile</strong></h3>
-  <p>上述提到 visionOS 26 引入了新的 APMP 元数据规范，全称为 Apple Projected Media Profile，包含 Projection Box、Lens Collection Box 和 View Packing Box，分别记录投影类型、镜头内参 / 畸变模型以及视图排列方式 。APMP 只负责描述「如何投影」以及「镜头参数是什么」，并不规定视频编码。现有的 180° / 360° 视频可通过工具注入 APMP 元数据后，在 visionOS 26 中获得原生播放体验。</p>
-  <p>APMP 文件通过 vexu 扩展存储的元数据信号指明视频所采用的投影方式，以便播放器在渲染时正确还原视频效果，同时提供向下兼容性。可以说，APMP 为非直线投影视频提供了统一的描述和兼容层，使其既向下兼容已有的 180° / 360° 内容，也能向上支持新一代宽视场和双眼立体拍摄视频内容。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_1eca8599e8f04a4397238333a661d76c@000000_oswg39561oswg1080oswg564_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>也正是得益于此，用户得以凭借手中的消费级设备，就能在 visionOS 26 中原生播放自己拍摄的 180 度、360 度和宽视场内容。</p>
-  <h2><strong>在 Apple Vision Pro 中播放 Insta360 全景视频</strong></h2>
-  <p>在 visionOS 26 正式推出之后，我也尝试用手里的 Insta360 X5 全景相机拍摄了一些视频内容，并将他们导入至 Apple Vision Pro 中播放。Insta360 X5 配备了双 1/1.28 英寸像素传感器，支持 8K 30 fps、5.7K 30 fps、5.7K 60 fps 以及 4K 60 fps 的高规格视频拍摄，接下来我们先看看用它怎么拍、再看看它拍得怎么样。</p>
-  <p>以 Insta360 X5 的普通录像模式为例，这个模式下拍摄的单个视频会在存储卡中分别生成后缀格式为 .insv 和 .lrv 的文件，其中前者为 Insta360 的专有文件格式，用于存储高比特率的两路鱼眼视频数据以及陀螺仪 / 加速度计数据、曝光值、时间戳等各类传感器信息，是拍摄得到的主要文件内容；后者是 Insta360 相机为拍摄内容自动生成的低分辨率代理文件 (Low-Resolution Video)，用于快速查看或在剪辑工具中预览调用，以减少硬件负载和渲染压力。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_1052437cf67146028ee597d6a7b57225@000000_oswg38370oswg1080oswg584_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>可想而知，Insta360 X5 拍摄得到的 .insv 视频文件并不能直接在 Apple Vision Pro 中预览和播放，这时候就要用到 Insta360 Studio 这款软件对文件进行导出处理 (其它支持品牌的相机也需要经过类似操作)。</p>
-  <p>对于 Insta360 Studio 的其它功能，这里不作展开介绍，直接看导出菜单。打开 Insta360 Studio 选中相应视频并选择导出后，我们需要在导出菜单中选择「全景视频」，并勾选下方的「APMP」选项，勾选导出时 Insta360 Studio 会将成片按 APMP 投影媒体规范封装与标记，让其在 Apple Vision Pro 中能被识别成可原生播放的沉浸式视频，同时在不支持的设备上能够回退为普通 2D 视频形式播放。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_1c5134b466d044569406809f7f502b35@000000_oswg76929oswg844oswg1514_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>体验与感受</strong></h2>
-  <p>如上所述，Insta360 X5 是一台支持 8K 30 fps、5.7K 30 fps、5.7K 60 fps 以及 4K 60 fps 等高规格视频拍摄的全景相机，用它拍摄能够在 Apple Vision Pro 中沉浸式播放的视频，想想就很美好。</p>
-  <p>但结果却不尽如人意。最开始我用 Insta360 X 拍摄完 5.7K 60 fps 和 4K 60 fps 的视频之后，不论是在 iPhone、Mac 还是 Apple Vision Pro 中播放平面视频时都没有任何问题：画面清晰度高，帧率表现也相当顺滑。但在通过 Insta360 Studio 导出成符合 APMP 标准的视频文件之后，Apple Vision Pro 确实可以直接以沉浸式观看形式播放了，但清晰度却低得看不清任何细节。</p>
-  <p>我转而用 Insta360 X5 拍了一些 8K 30 fps 的素材再次测试，此时 Apple Vision Pro 中的沉浸式画面清晰度依然很低，但勉强到了将就能看的程度。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251009/v2_33c01796f7904f278a9d18f7719542ca@000000_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">动图经过压缩</p>
-  <p>经过一番研究之后，我发现「问题」并不出在 Insta360 身上，而是出在显示端即 Apple Vision Pro 上。如上所述，当我们在 Apple Vision Pro 观看 360° 的沉浸式视频时，显示区域实际上为一个球状表面，即使通过 8K 的规格 (7680x3840，总像素约 3000 万) 拍摄视频，这些像素会被分布在这个完整的球面上。</p>
-  <p>这与我们观看平面视频不同，当在 iPhone 或 Mac 这样的屏幕上观看平面视频时，视频的所有像素均完整呈现在屏幕中，这时从传统意义上看即使是更低清晰度的 2K 甚至是 1080P 视频，实际观感也不至于太差。但在 Apple Vision Pro 这样的 VR 设备中观看沉浸式视频时，所有画面像素会被投影在「包裹」观看者的整个球状平面上，而作为观看者的我们实际上只能看到视场角以内的部分像素，这就导致了同一个视频分别在 VR 设备以沉浸式播放与在平面设备上播放时，视野内的有效像素密度有很大的差异。</p>
-  <p>根据网络上已有的测试结果来看，Apple Vision Pro 的水平视场角约为 100°、垂直视场角约为 90°，经过<strong>不准确的大致计算</strong>：(100/360)x(90/180)=0.139=1/7.2，实际上在 Apple Vision Pro 中观看由 Insta360 X5 拍摄的 8K 规格视频时，我们仅能看到整个球面约 1/7 的区域，实际可见区域的有效分辨率密度会大幅降低，因此导致了画面清晰度不足的问题发生。</p>
-  <p>但是话说回来，即使是在画面清晰度不足的情况下观看，通过 Apple Vision Pro 看到过去某一时刻的情景重现，依然会有一种奇妙的感受，要比观看空间视频的体验更加有意思。</p>
-  <p>对了，还有一点需要注意的是，从 visionOS 中已有的官方沉浸式内容里不难看出，Apple 为了提供更好的观看体验也是下足了功夫：这些视频大部分都在画面部分尽量避免机位的长时间大幅度运动，镜头移动也使用了专业的云台、机械臂等设备以确保画面平滑展开，能够更大程度上降低观看 VR 内容可能导致的晕眩等问题。</p>
-  <p>但是，我们自行拍摄的视频一般都是随意的日常记录，没有事先准备好的分镜策划、也没有专业的器材辅助，画面抖动等情况在所难免，我在观看这些自己拍摄的视频内容时，很快就产生了头晕的症状，在看官方内容时则没有这个问题。</p>
-  <h2><strong>结语</strong></h2>
-  <p>像是 Insta360、GoPro 这样的消费级设备能与 visionOS 26 联动，让这些曾经的回忆在虚拟现实中重现，这是一个令人期待的开始，很高兴 Apple 与这些品牌们一起先迈出了第一步，即使它们的效果目前还没有那么好。说不定日后通过 AI 技术还原或者更强大的硬件设备，我们真的能够在像 Apple Vision Pro 这样的设备中，完全真实地还原彼时彼刻的此情此景也不一定。</p>
-  <p>话说回来，通过 Insta360 X5 这样的全景相机，我们已经能够将难忘的时刻以全景记录的形式留存下来，并通过 iPhone 或 Mac 这样的设备高清回看，这已然是一份足够珍贵的数字存档。当然也期待日后能有在 Insta360、GoPro 和佳能之外，更多品牌能够给我们带来更为多样与生动的回忆呈现方式。</p>
-  <h3>原文链接</h3>
-  <p>https://sspai.com/post/102896?utm_source=wechat&amp;utm_medium=social</p>
-  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MzU4Mjg3MDAyMQ==&amp;mid=2247598403&amp;idx=1&amp;sn=da8163af1169cbde763015deb45d4c03&amp;chksm=fc080bdfbf76c2d1cd152edeb16a6e91eded09dd8d2501c4245227e87fde7aca2bb486ed72d8&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“少数派”（ID：sspaime）</a>，作者：waychane，36氪经授权发布。</p>
+                    <p>从高德推出榜单产品高德扫街榜，到淘宝闪购与饿了么试点团购业务，阿里方面已然将搅局到店赛道的意图摆在了明面上。随后，抖音生活服务上线“烟火小店扶持计划”，小红书则推出了本地生活会员服务小红卡。种种迹象表明，尽管用补贴开道的外卖大战硝烟尚未散去，但又一轮到店大战也已蓄势待发。</p>
+  <p>在这样的背景下，又有一家大厂要加入这个战局，而且还再次上演了一场“师夷长技”的戏码。</p>
+  <p>近日百度地图App迎来更新，新增本地生活服务榜单产品“AI去·榜中榜”。与高德扫街榜一样，百度地图的“AI去·榜中榜”也是基于真实出行数据，让用户“用脚投票”。不过需要注意的是，“AI去·榜中榜”集合了大众点评与携程口碑榜，并且还与美团打通，引入了后者的团购商品。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251010/v2_81e7e47dee5f42de89fbea95b30fbfb4@000000_oswg104208oswg681oswg750_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>此时距离高德扫街榜9月10日的上线时间不过两个多星期，考虑到跨平台数据打通与打造产品的工期，百度地图这个动作不可谓不快。其实，百度地图此举也不难理解。</p>
+  <p>虽然高德此番出击的主要目的或许是配合淘宝闪购、饿了么的团购业务，但对其而言这一步同样也有诸多积极意义。毕竟即用即走的用户习惯始终是困扰地图等工具类产品的难题，而这主要是因为用户在打开App之前，心中其实已经有了目的地。在这样的情况下，地图的作用就是作为工具来帮助用户到达目的地。可点评与榜单却涉及决策环节，能帮助用户筛选目的地、甚至吸引用户发表评价，从而改善即用即走的局限性，进而获得更多的用户时长，并带来更多商业化的可能。</p>
+  <p>同为地图App，百度地图与高德地图面临的困境无疑是一样的。以商业化为例，仅今年以来，百度地图便已相继在导航服务、打车服务中开辟了更多广告位。进一步来说，其实不仅仅是百度地图，整个百度如今的日子也过得并不舒坦。近年来受短视频平台的分流，以及AI搜索兴起对于搜索广告产生冲击等方面的影响，百度的核心收入来源广告业务持续承压。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251010/v2_5c15a6f3cb824ea1b77f819bdc641f78@000000_oswg54507oswg600oswg526_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>而且在用户规模上，百度地图与高德地图也存在相当的差距。根据QuestMobile不久前发布的《2025全景生态流量秋季报告》显示，截至8月高德去重月活为9.62亿，百度地图去重月活则是5.94亿。所以即便是出于防守的目的，为避免用户规模的差距持续拉大，百度方面必然也要有所行动。</p>
+  <p>既然高德身为阿里在到店赛道的排头兵，已经抡起胳膊大造声势，百度地图此时入局也就能蹭一波流量，有望实现事半功倍的效果。</p>
+  <p>至于百度地图为什么要拉来美团、携程的原因，其实也很简单。要知道光有流量不足以构成业务闭环，还需要核销的手段。事实上，高德地图本身并不具备这样的条件，但其背后的阿里却拥有庞大的本地生活服务生态。这也就意味着高德扫街榜无需自己完成交易闭环，而是可以作为“流量中枢”，为淘宝闪购、飞猪等成熟业务来提供支撑。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251010/v2_7053f60152484fd9b662241de50f51c6@000000_oswg147893oswg530oswg234_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>相比之下，百度地图虽然也曾是百度O2O业务的前哨站，但后者早早地便撇开本地生活服务，自身已经不具备实现交易闭环的条件，所以如今就只能寻求外援的帮助。</p>
+  <p>而且从外卖到即时零售、再到到店，一再被挑衅的美团显然不待见阿里。可以看到，如今面对高德地图的攻势，美团方面已经发起多轮反击。日前就有消息源透露，为解决商家借优惠索要好评等现象，大众点评将于10月17日开始更改星级计算体系。至于携程，虽然目前尚未受到太大波及，却显然也有担心飞猪借大淘宝生态快速抢占市场份额的担忧。</p>
+  <p>鉴于敌人的敌人便是朋友，百度与美团和携程可谓是各需所需。总而言之，“AI去·榜中榜”相当于为美团和携程提供了一个共有的地图工具，使得其能够与阿里形成对位竞争。与此同时，百度也能借此成为本地生活服务的新入口，进可收过路费、退可借流量来提升用户规模。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251010/v2_56707707fed74c9582dbf4e20a650f23@000000_oswg86465oswg681oswg750_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>当然，高德地图也好、百度地图也罢，如今摆在他们面前共同的难题，是随着对榜单、团购等业务的不断加码，就需要在变得越来越“重”的同时，避免离一个纯粹、好用的地图产品越来越远。</p>
+  <p>但不论如何，到店赛道两大集团对垒的局面已经基本形成，这或许便是奠定未来5年、甚至10年本地生活服务市场竞争格局的重要战役。而第一战的战场，便是此次国庆假期。</p>
+  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MzA4MTk2NTk5Nw==&amp;mid=2649896779&amp;idx=4&amp;sn=544949c2ab93a35b0ba4cc49e7950b46&amp;chksm=86b1980f22a0828021929a5010927d6c889518d536198b955d639e193d16ee88bff3c6532a2c&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“三易生活”（ID：IT-3eLife）</a>，作者：三易菌，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3503264927603841</id>
+            <title>倒计时4天，Win10将正式“停服”，全球4亿设备或陷入危险，微软还进一步收紧了Win11升级限制？</title>
+            <link>https://www.36kr.com/p/3503264927603841</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3503264927603841</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 10 Oct 2025 11:58:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>距离 Windows 10 停止支持只剩下短短&nbsp;4&nbsp;天时间——10 月 14 日，微软将正式关闭这一操作系统的安全更新通道。这一消息对于全球数亿用户而言，无疑是个巨大冲击。</p>
+  <p>而与此同时，近日微软还进一步收紧了&nbsp;Windows 11 的升级限制，使得更多老设备用户面临升级受限甚至被迫淘汰的境地：在最新的 Windows 11 预览版中，微软正式移除了&nbsp;Windows 安装程序（OOBE）中用于创建本地帐户的已知机制。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20251010/v2_ae2375ec2ae04ab790ba6f1c781ff20b@1743780481_oswg715847oswg1080oswg810_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>OOBE&nbsp;离线安装被判“死刑”</strong></h2>
+  <p>先简单介绍一下。在微软对此进行限制之前，过去用户在安装Windows 11时，系统会要求先进行网络连接并登入Windows账号，但用户可以在此界面按下shift + F10并输入oobe\bypassnro，等待重启后便会出现“没有网络连接”的选项，以此跳过Windows网络激活，使用本地账号来安装Windows。</p>
+  <p>过去，微软对本地账户的使用可谓相当宽容，在Windows 10初始设置中甚至还专门保留了本地账户按钮。但在此次Windows 11预览版中，微软却说使用本地账户会令你的电脑“未完全配置”：</p>
+  <blockquote>
+   <p>“我们正在移除那些在 Windows 安装体验（OOBE）中创建本地账户的现有机制。虽然这些机制常被用于跳过微软账户设置，但也可能误导用户跳过重要设置画面，导致设备退出OOBE后未完全配置。”</p>
+  </blockquote>
+  <p>而为了确保设备能正确设置，微软现在要求：必须联网 + 必须微软账号登录，才能完成 Windows 11 的初始设置流程——换句话说，离线安装 + 本地账户 = 被判死刑。</p>
+  <p>虽然微软提供了一个“补偿机制”，允许用户自定义在线账户资料夹路径，但这对于想要完全本地化、避免绑定微软生态的用户而言，几乎无实质帮助。当然，对于有经验的技术用户来说，仍有多种方式可以“纯本地安装”系统，如无人值守部署（Unattended Setup）、自定义镜像或者第三方装机工具（如 Rufus、Ventoy 等），但对于普通用户来说，这些方法的门槛明显较高。</p>
+  <h2><strong>4&nbsp;天后&nbsp;Win10 停服，全球 4 亿设备或陷入风险</strong></h2>
+  <p>就在 Windows 11 提高安装门槛的同时，4&nbsp;天后，也就是10 月 14 日，微软将正式停止支持 Windows 10，这意味着：</p>
+  <p>●&nbsp;微软不再提供安全更新或漏洞修复</p>
+  <p>●&nbsp;软件缺陷也将不再被主动发现和修复</p>
+  <p>●&nbsp;被黑客攻击的风险将急剧上升</p>
+  <p>要知道，根据&nbsp;FBI 数据显示：2024 年，美国用户因网络攻击损失超过 160 亿美元，同比增长 33%；60 岁以上人群损失超过 50 亿美元，报告数量最高。而据统计，目前全球仍有约 42% 的 Windows 设备在运行 Windows 10，而在美国这一比例为 36.38%。</p>
+  <p>其中，近 43% 的设备无法升级到 Windows 11，主要是因为其硬件要求过高：64 位处理器、64GB 存储、720p 分辨率显示屏以及 TPM 2.0 支持，这让 2017 年及以前的老笔记本几乎无法升级。</p>
+  <p>基于此，消费者和环保组织警告称，这次&nbsp;Windows 10&nbsp;停服可能导致多达 4 亿台电脑成为易受攻击的目标，或者直接进入电子垃圾回收流程。据粗略估计，仅美国就将产生超过 1 亿磅的电子废弃物。</p>
+  <p>与此同时，对于普通消费者和小型企业来说，换新设备升级 Windows 11&nbsp;也并非易事。通常，新款入门级 Windows 11 笔记本约 300 美元起，高性能机型甚至超过 3000 美元。这些成本对于很多低收入家庭和失业人群来说，显然是沉重负担。更何况，当前美国失业率达到近 4 年新高（4.3%），经济压力进一步放大了这一问题。</p>
+  <p>对此，PIRG（美国公共利益研究组织）“维修权”行动负责人 Nathan Proctor&nbsp;谴责道：“微软此举相当于是在劫持用户的设备安全当筹码。难道拥有一台安全的电脑，今后要变成有钱人的特权吗？”他还补充说，这次情况与当年&nbsp;Windows 8 停服时完全不同：“Windows 8 停止支持时，只有不到 4% 的用户还在使用它；但现在，全球仍有 42% 的 Windows 电脑在用 Windows 10，规模相当惊人。”</p>
+  <p>颇为讽刺的是，微软五年前曾公开承诺：“到 2030 年实现碳负排放&amp;‘零废弃’运营。”然而，这次 Windows 10 停服将导致超过 4 亿台设备提前淘汰，产生巨量电子垃圾，与环保承诺形成明显反差。Nathan Proctor&nbsp;指出：“微软声称此举不会影响环保承诺？这显然是自欺欺人。”</p>
+  <h3>参考链接</h3>
+  <p>https://www.techspot.com/news/109763-microsoft-removing-ability-easily-install-windows-11-local.html</p>
+  <p>https://prospect.org/power/2025-10-02-microsoft-abandoning-windows-10-hackers-celebrating/</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/66l1U9tQm30qhpCdEcnrOQ" rel="noopener noreferrer nofollow" target="_blank">“CSDN”</a>，作者：郑丽媛 ，36氪经授权发布。</p>
                 ]]>
             </content:encoded>
         </item>
