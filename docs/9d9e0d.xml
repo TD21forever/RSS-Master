@@ -39,6 +39,23 @@
         </item>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/68e7f01f3ea7571a78ecf5bb</id>
+            <title>AI探索站 10月09日</title>
+            <link>https://m.okjike.com/originalPosts/68e7f01f3ea7571a78ecf5bb</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68e7f01f3ea7571a78ecf5bb</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 09 Oct 2025 17:25:51 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    在国内上一个网站要经过几步：<br />1. 准备网站项目代码；<br />2. 阿里云买服务器；<br />3. 阿里云买域名，并进行域名备案；<br />4. 代码部署到服务器ecs中，dev和build通过；<br />5. 买dns解析，没错，阿里云dns解析是要钱的；<br />6. 买证书，或者搞免费证书；<br />7. 配置nginx，用证书写在配置文件中，搞定域名的https解析；<br />8. 域名备案的备案号要更新到网站页面中。<br /><br />在海外上一个网站要几步：<br />1. 准备网站项目代码；<br />2. 上传到github；<br />3. vercel自动解析github的更新并deploy；<br />4. cloudflare配置域名dns解析；
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/68e753e296a4bc9b3904d3af</id>
             <title>AI探索站 10月09日</title>
             <link>https://m.okjike.com/originalPosts/68e753e296a4bc9b3904d3af</link>
@@ -85,23 +102,6 @@
                 <![CDATA[
                     
                     推荐学习下微软搞的这个 R&amp;D-Agent 框架，https://github.com/microsoft/RD-Agent ，它是一个让 AI 能够自己做科研的系统——能提出问题、设计实验、验证结果、总结规律，整套科研流程都能自动化执行。<br /><br />微软还基于这套框架，构建了一个用于量化投资研究的智能体 R&amp;D-Agent(Q)，https://github.com/microsoft/qlib，并与开源量化平台 Qlib 结合，实现了自动化因子挖掘与策略优化。照这个趋势发展下去，未来的量化研究，恐怕真得交给 AI 来操盘了，😅<br /><br />R&amp;D-Agent 的整体架构分为两个阶段：研究阶段（Research Phase）和开发阶段（Development Phase）。研究阶段由四个部分组成：规划、探索路径结构、推理管线和记忆上下文，它们通过反馈机制持续循环，不断在假设、实验与分析之间往复，让系统在多轮探索中自动调整方向、积累知识、优化策略；开发阶段则承接研究成果，主要包括编码工作流与评估策略，前者把想法变成可执行代码，后者负责验证与对比结果，确保系统演化出的改进真实可靠。两个阶段形成首尾相接的闭环，让科研过程实现持续反馈与自我进化。<br /><br />从本质上看，R&amp;D-Agent 不是在“模拟科研”，而是在“系统化科研”。它让科学探索从线性的人力流程，转变为并行的智能网络。每一次假设的提出与验证，都会被记录下来，形成一份不断扩展的知识图谱，让科研活动变得可编排、可追踪、可积累。<br /><br />相关论文：1）《R&amp;D-Agent: An LLM-Agent Framework Towards Autonomous Data Science》，https://arxiv.org/abs/2505.14738 ；2）《Qlib: An AI-oriented Quantitative Investment Platform》，https://arxiv.org/abs/2009.11189
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/68e62c780a709106980b1b9a</id>
-            <title>AI探索站 10月08日</title>
-            <link>https://m.okjike.com/originalPosts/68e62c780a709106980b1b9a</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68e62c780a709106980b1b9a</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 08 Oct 2025 09:18:48 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    提高AI能力最简单有效的方式：<br /><br />1、找到领域内优质信息<br />2、让AI看优质信息，整理总结方法论<br />3、把方法论文档作为上下文喂给AI，让AI基于方法论做事情<br /><br />我举个例子：<br />- 我把推特公开的算法信息整理了一遍，让AI总结了md文档，我人工review调整<br />- 把文档给了AI，让AI基于这个文档调整我们之前讨论的评分算法，重新做了打分拟合<br />- AI获取账号推文，批量做了一遍评估，找到了某个领域内的benchmark<br />- 按照这个benchmark打分拟合来筛选优质账号<br /><br />全程不需要程序员，AI自己就能写python干<br />干完了一遍，把这个链路沉淀提示词做成agent workflow就可以了<br />甚至你还可以搞个GUI就可以产品化<br /><br />基于兴趣的探索，在这个阶段下优势被AI无限放大了
                 ]]>
             </content:encoded>
         </item>
