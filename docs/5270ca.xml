@@ -72,7 +72,7 @@
     image: ghcr.io/karakeep-app/karakeep:release
     restart: unless-stopped
     ports:
-    - 8088:80
+      - 8088:3000
     volumes:
       - /path/to/your/karakeep:/data
     environment:
