@@ -239,6 +239,65 @@
         </item>
         
         <item>
+            <id>https://sspai.com/post/102935</id>
+            <title>App+1 | 用 Karakeep 搭建你的个人收藏夹</title>
+            <link>https://sspai.com/post/102935</link>
+            <guid isPermaLink="false">https://sspai.com/post/102935</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 11 Oct 2025 02:31:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;<br />文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>起因是昨天刷到的一条微博里提到了 Karakeep，顿时来了兴趣，试了一下发现很符合我的需求，于是决定写一下部署过程。</p><p>我猜，除非你很早就有了整理意识，大多数人上网冲浪看到想收藏的东西，或是想记下的只言片语，都是直接在微信发给文件传输助手或者自己。久而久之就攒下了一大堆不知道是啥的网址，搜也不好搜 —— 至少我是这样的。</p><p>Karakeep 就很好地解决了这个需求，简单来说：</p><ul><li>它能存纯文字，能存照片</li><li>也可以直接扔进去一个 URL，它会替你把这个网页生成一个卡片</li><li>不错的搜索能力</li><li><strong>接入第三方 LLM API 之后可以自动打标签（最吸引我的点）、生成总结</strong></li></ul><h2>部署</h2><p>官方文档里就有<a href="https://docs.karakeep.app/installation/docker" target="_blank">部署教程</a>，问题不大。我个人习惯用 Docker Compose 写好编排后扔到 NAS 上跑。下面给出我的 <code>compose.yml</code> 供参考：</p><pre class="language-null"><code>services:
+  karakeep:
+    image: ghcr.io/karakeep-app/karakeep:release
+    restart: unless-stopped
+    ports:
+      - 8088:3000
+    volumes:
+      - /path/to/your/karakeep:/data
+    environment:
+      - DATA_DIR=/data
+      - MEILI_ADDR=http://meilisearch:7700
+      - MEILI_MASTER_KEY=random_meli_key
+      - BROWSER_WEB_URL=http://chrome:9222
+      - NEXTAUTH_URL=http://192.168.x.y:8088
+      - NEXTAUTH_SECRET=another_random_key
+    depends_on:
+      - meilisearch
+      - chrome
+  meilisearch:
+    image: getmeili/meilisearch:v1.13.3
+    restart: unless-stopped
+    volumes:
+      - /path/to/your/meilisearch:/meili_data
+    environment:
+      - MEILI_MASTER_KEY=random_meli_key
+      - MEILI_NO_ANALYTICS=true
+  chrome:
+    image: ghcr.io/zenika/alpine-chrome:124
+    restart: unless-stopped
+    command:
+      - --no-sandbox
+      - --disable-gpu
+      - --disable-dev-shm-usage
+      - --remote-debugging-address=0.0.0.0
+      - --remote-debugging-port=9222
+      - --hide-scrollbars</code></pre><p>里面有几处地方需要你手动替换的：</p><ul><li><code>8088</code> 是服务会在你 NAS 上监听的端口，和 <code>NEXTAUTH_URL=http://192.168.x.y:8088</code> 对应，假如你的 NAS 内网 IP 为 192.168.10.2，希望它放在 <code>9999</code> 端口，那么后者也对应改成 <code>http://192.168.10.2:9999</code> 即可。这也是你访问 Karakeep 所使用的地址</li><li><code>MEILI_MASTER_KEY</code> 有两处，使用 <code>openssl rand -base64 36</code> 命令生成，注意这两处需要一致</li><li><code>NEXTAUTH_SECRET</code> 同样使用 <code>openssl rand -base64 36</code> 生成，和上面的不一样</li><li><code>/path/to/your/karakeep</code> 用于持久化保存 Karakeep 的数据，你需要在 NAS 上你认为合适的地方建一个文件夹，得到完整路径替换它</li><li><code>/path/to/your/melisearch</code> 同理，用于持久化保存搜索索引</li></ul><p>实际上我还用 Tailscale 和 Traefik 给服务搭了个内网穿透和 HTTPS 子域名 —— 但那样写起来就太长了，略了略了。</p><p>到了这一步，执行 <code>docker compose up -d</code> 之后就可以把服务跑起来并且通过浏览器打开访问并创建账号用起来了。但是下面才是重点，一些让它更好用的配置。</p><h3>对接大模型，让 AI 替你打标归类</h3><p>Karakeep 让我惊喜的能力之一就是它能自己对接 OpenAI 或兼容的 LLM 平台，利用 LLM 的能力为收藏的内容打 tag、生成总结。</p><p>众所周知，OpenAI 在国内不太容易用上。好在 5202 年的今天，大模型在国内基本上遍地开花了，模型服务提供商们基本上也提供了和 OpenAI 兼容的 API 接口可以直接用。</p><p>我这这里就拿阿里云的 Qwen3 举例了。理论上，你也可以用腾讯云、硅基流动之类的平台，都一样。<s>广告位招租（不是</s></p><p>在上面那份 <code>compose.yml</code> 的 <code>karakeep</code> 的 <code>environment:</code> 里增加：</p><pre class="language-null"><code>      - OPENAI_API_KEY=你申请到的KEY
+      - OPENAI_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+      - INFERENCE_TEXT_MODEL=qwen-flash
+      - INFERENCE_IMAGE_MODEL=qwen3-vl-plus
+      - INFERENCE_LANG=中文
+      - INFERENCE_NUM_WORKERS=5</code></pre><p>解释：</p><ul><li><code>OPENAI_API_KEY</code> - 在大模型平台上申请到的 API KEY</li><li><code>OPENAI_BASE_URL</code> - 平台提供的 OpenAI 兼容接口</li><li><code>INFERENCE_TEXT_MODEL</code> - 用于对文本生成标签的模型，我就随便拍脑袋选了 Qwen3 Flash。这个任务不复杂，用不着 DeepSeek-R1 之类的推理模型。主要考虑输出速度和价格，又快又便宜就行</li><li><code>INFERENCE_IMAGE_MODEL</code> - 用于给图像生成标签的模型，同理，只要是个具备视觉理解能力的模型就行</li><li><code>INFERENCE_LANG=中文</code> - 要求模型使用中文生成标签。没有这一行的话默认会用英文</li><li><code>INFERENCE_NUM_WORKERS=5</code> - 同时进行的 LLM 调用数，没啥特别，拍脑袋写的</li></ul><h3>启用视频下载</h3><p>同样是那份 <code>compose.yml</code> 的 <code>environment:</code>：</p><pre class="language-null"><code>      - CRAWLER_NUM_WORKERS=5
+      - CRAWLER_VIDEO_DOWNLOAD=true
+      - CRAWLER_VIDEO_DOWNLOAD_MAX_SIZE=-1</code></pre><p>加上上面的配置后，对于<a href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md" target="_blank">支持的网站</a>，利用自带的 <code>yt-dlp</code> 自动把视频下载到本地。最多同时进行5个下载任务，下载大小不限。</p><h2>浏览器扩展和手机 App</h2><p>就算搭好了 Karakeep，要是没有便捷的录入方式，最后我肯定还是会懒得专门为了这么点事打开网页把东西贴进去。</p><p>好在 Karakeep 提供了 Chrome 扩展和手机 App。</p><h3>手机 App</h3><ul><li><a href="https://play.google.com/store/apps/details?id=app.hoarder.hoardermobile&amp;pcampaignid=web_share" target="_blank">安卓（Play Store）</a></li><li><a href="https://apps.apple.com/us/app/karakeep-app/id6479258022" target="_blank">iOS（App Store）</a></li></ul><p>有了手机 App，平常看到什么就可以直接通过系统分享扔过去。也可以复制链接之后打开 App 贴进去。也可以用来当成一个普通的标签。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/10/08/2c9c46331247dd8d4aff03af91a57794.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/10/08/a4fdaa2ffd1eebfc27bc1026d4b3c2f4.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>可恶啊，写到这里发现还是得有内网穿透才玩得转，但是这样会占用很多篇幅……</p><h3>浏览器</h3><ul><li><a href="https://chromewebstore.google.com/detail/karakeep/kgcjekpmcjjogibpjebkhaanilehneje" target="_blank">Chrome 扩展</a></li></ul><p>配置好后只要在浏览器右上角一点，就把当前在看的 URL 收录到 Karakeep 里。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/08/ea6cdf980eb37767c3397f3d475ea4f7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>还有很多</h2><p>Karakeep 它是开源的，本身也提供了 API，可以自己搭建更多玩法。比如接个 Telegram Bot 什么的。</p><p>要说有什么遗憾吗？有的，但不太是 Karakeep 本身的问题 —— 前面说到 Karakeep 会自动为你抓取链接内容并且生成缩略图、标签和总结。但这套逻辑遇到抖音、小红书这类反爬虫机制比较严格的平台，效果就不太理想了。</p><p>这些后面有机会再继续分享吧（如果没鸽的话…… _(:зゝ∠)_</p><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/102996</id>
             <title>本周看什么 | 最近值得一看的 11 部作品</title>
             <link>https://sspai.com/post/102996</link>
@@ -347,65 +406,6 @@
 <p>文档里面澄清了许多问题，尤其是透露了狗牛的真实姓名：克拉鲁斯 (Clarus)。（这是在拿苹果内部一个进展非常缓慢、名为 Claris 的项目开玩笑。）</p>
 <p>作为「狗牛生物学」的首席研究员，Mark Harlan 为我们带来了丰富的研究成果：</p>
 <p>「你在野外是不可能见到狗牛的，因为它生活在 2D 平面世界，即使你一不小心碰到它，它也可能侧过身来让你无法找到。狗牛并没有天敌，但由于它们有在悬崖边吃草的愚蠢习性，其数量也未能爆发式增长。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/102935</id>
-            <title>用 Karakeep 搭建你的个人收藏夹</title>
-            <link>https://sspai.com/post/102935</link>
-            <guid isPermaLink="false">https://sspai.com/post/102935</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 08 Oct 2025 03:50:21 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;<br />文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>起因是昨天刷到的一条微博里提到了 Karakeep，顿时来了兴趣，试了一下发现很符合我的需求，于是决定写一下部署过程。</p><p>我猜，除非你很早就有了整理意识，大多数人上网冲浪看到想收藏的东西，或是想记下的只言片语，都是直接在微信发给文件传输助手或者自己。久而久之就攒下了一大堆不知道是啥的网址，搜也不好搜 —— 至少我是这样的。</p><p>Karakeep 就很好地解决了这个需求，简单来说：</p><ul><li>它能存纯文字，能存照片</li><li>也可以直接扔进去一个 URL，它会替你把这个网页生成一个卡片</li><li>不错的搜索能力</li><li><strong>接入第三方 LLM API 之后可以自动打标签（最吸引我的点）、生成总结</strong></li></ul><h2>部署</h2><p>官方文档里就有<a href="https://docs.karakeep.app/installation/docker" target="_blank">部署教程</a>，问题不大。我个人习惯用 Docker Compose 写好编排后扔到 NAS 上跑。下面给出我的 <code>compose.yml</code> 供参考：</p><pre class="language-null"><code>services:
-  karakeep:
-    image: ghcr.io/karakeep-app/karakeep:release
-    restart: unless-stopped
-    ports:
-      - 8088:3000
-    volumes:
-      - /path/to/your/karakeep:/data
-    environment:
-      - DATA_DIR=/data
-      - MEILI_ADDR=http://meilisearch:7700
-      - MEILI_MASTER_KEY=random_meli_key
-      - BROWSER_WEB_URL=http://chrome:9222
-      - NEXTAUTH_URL=http://192.168.x.y:8088
-      - NEXTAUTH_SECRET=another_random_key
-    depends_on:
-      - meilisearch
-      - chrome
-  meilisearch:
-    image: getmeili/meilisearch:v1.13.3
-    restart: unless-stopped
-    volumes:
-      - /path/to/your/meilisearch:/meili_data
-    environment:
-      - MEILI_MASTER_KEY=random_meli_key
-      - MEILI_NO_ANALYTICS=true
-  chrome:
-    image: ghcr.io/zenika/alpine-chrome:124
-    restart: unless-stopped
-    command:
-      - --no-sandbox
-      - --disable-gpu
-      - --disable-dev-shm-usage
-      - --remote-debugging-address=0.0.0.0
-      - --remote-debugging-port=9222
-      - --hide-scrollbars</code></pre><p>里面有几处地方需要你手动替换的：</p><ul><li><code>8088</code> 是服务会在你 NAS 上监听的端口，和 <code>NEXTAUTH_URL=http://192.168.x.y:8088</code> 对应，假如你的 NAS 内网 IP 为 192.168.10.2，希望它放在 <code>9999</code> 端口，那么后者也对应改成 <code>http://192.168.10.2:9999</code> 即可。这也是你访问 Karakeep 所使用的地址</li><li><code>MEILI_MASTER_KEY</code> 有两处，使用 <code>openssl rand -base64 36</code> 命令生成，注意这两处需要一致</li><li><code>NEXTAUTH_SECRET</code> 同样使用 <code>openssl rand -base64 36</code> 生成，和上面的不一样</li><li><code>/path/to/your/karakeep</code> 用于持久化保存 Karakeep 的数据，你需要在 NAS 上你认为合适的地方建一个文件夹，得到完整路径替换它</li><li><code>/path/to/your/melisearch</code> 同理，用于持久化保存搜索索引</li></ul><p>实际上我还用 Tailscale 和 Traefik 给服务搭了个内网穿透和 HTTPS 子域名 —— 但那样写起来就太长了，略了略了。</p><p>到了这一步，执行 <code>docker compose up -d</code> 之后就可以把服务跑起来并且通过浏览器打开访问并创建账号用起来了。但是下面才是重点，一些让它更好用的配置。</p><h3>对接大模型，让 AI 替你打标归类</h3><p>Karakeep 让我惊喜的能力之一就是它能自己对接 OpenAI 或兼容的 LLM 平台，利用 LLM 的能力为收藏的内容打 tag、生成总结。</p><p>众所周知，OpenAI 在国内不太容易用上。好在 5202 年的今天，大模型在国内基本上遍地开花了，模型服务提供商们基本上也提供了和 OpenAI 兼容的 API 接口可以直接用。</p><p>我这这里就拿阿里云的 Qwen3 举例了。理论上，你也可以用腾讯云、硅基流动之类的平台，都一样。<s>广告位招租（不是</s></p><p>在上面那份 <code>compose.yml</code> 的 <code>karakeep</code> 的 <code>environment:</code> 里增加：</p><pre class="language-null"><code>      - OPENAI_API_KEY=你申请到的KEY
-      - OPENAI_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
-      - INFERENCE_TEXT_MODEL=qwen-flash
-      - INFERENCE_IMAGE_MODEL=qwen3-vl-plus
-      - INFERENCE_LANG=中文
-      - INFERENCE_NUM_WORKERS=5</code></pre><p>解释：</p><ul><li><code>OPENAI_API_KEY</code> - 在大模型平台上申请到的 API KEY</li><li><code>OPENAI_BASE_URL</code> - 平台提供的 OpenAI 兼容接口</li><li><code>INFERENCE_TEXT_MODEL</code> - 用于对文本生成标签的模型，我就随便拍脑袋选了 Qwen3 Flash。这个任务不复杂，用不着 DeepSeek-R1 之类的推理模型。主要考虑输出速度和价格，又快又便宜就行</li><li><code>INFERENCE_IMAGE_MODEL</code> - 用于给图像生成标签的模型，同理，只要是个具备视觉理解能力的模型就行</li><li><code>INFERENCE_LANG=中文</code> - 要求模型使用中文生成标签。没有这一行的话默认会用英文</li><li><code>INFERENCE_NUM_WORKERS=5</code> - 同时进行的 LLM 调用数，没啥特别，拍脑袋写的</li></ul><h3>启用视频下载</h3><p>同样是那份 <code>compose.yml</code> 的 <code>environment:</code>：</p><pre class="language-null"><code>      - CRAWLER_NUM_WORKERS=5
-      - CRAWLER_VIDEO_DOWNLOAD=true
-      - CRAWLER_VIDEO_DOWNLOAD_MAX_SIZE=-1</code></pre><p>加上上面的配置后，对于<a href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md" target="_blank">支持的网站</a>，利用自带的 <code>yt-dlp</code> 自动把视频下载到本地。最多同时进行5个下载任务，下载大小不限。</p><h2>浏览器扩展和手机 App</h2><p>就算搭好了 Karakeep，要是没有便捷的录入方式，最后我肯定还是会懒得专门为了这么点事打开网页把东西贴进去。</p><p>好在 Karakeep 提供了 Chrome 扩展和手机 App。</p><h3>手机 App</h3><ul><li><a href="https://play.google.com/store/apps/details?id=app.hoarder.hoardermobile&amp;pcampaignid=web_share" target="_blank">安卓（Play Store）</a></li><li><a href="https://apps.apple.com/us/app/karakeep-app/id6479258022" target="_blank">iOS（App Store）</a></li></ul><p>有了手机 App，平常看到什么就可以直接通过系统分享扔过去。也可以复制链接之后打开 App 贴进去。也可以用来当成一个普通的标签。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/10/08/2c9c46331247dd8d4aff03af91a57794.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/10/08/a4fdaa2ffd1eebfc27bc1026d4b3c2f4.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>可恶啊，写到这里发现还是得有内网穿透才玩得转，但是这样会占用很多篇幅……</p><h3>浏览器</h3><ul><li><a href="https://chromewebstore.google.com/detail/karakeep/kgcjekpmcjjogibpjebkhaanilehneje" target="_blank">Chrome 扩展</a></li></ul><p>配置好后只要在浏览器右上角一点，就把当前在看的 URL 收录到 Karakeep 里。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/08/ea6cdf980eb37767c3397f3d475ea4f7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>还有很多</h2><p>Karakeep 它是开源的，本身也提供了 API，可以自己搭建更多玩法。比如接个 Telegram Bot 什么的。</p><p>要说有什么遗憾吗？有的，但不太是 Karakeep 本身的问题 —— 前面说到 Karakeep 会自动为你抓取链接内容并且生成缩略图、标签和总结。但这套逻辑遇到抖音、小红书这类反爬虫机制比较严格的平台，效果就不太理想了。</p><p>这些后面有机会再继续分享吧（如果没鸽的话…… _(:зゝ∠)_</p><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>
