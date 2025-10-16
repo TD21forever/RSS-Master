@@ -5,6 +5,175 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/103145</id>
+            <title>具透 Plus | iOS 26 密码导出功能幕后；Pixel 5G 网络启用方案遭封堵</title>
+            <link>https://sspai.com/post/103145</link>
+            <guid isPermaLink="false">https://sspai.com/post/103145</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 16 Oct 2025 09:56:24 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2>iOS/macOS 26 密码导出功能幕后</h2>
+<p><a class="ss-atUser" href="https://sspai.com/u/platyhsu">@PlatyHsu</a>：如今，密码管理工具的选择不可谓不多。苹果也凑上了热闹，在去年的系统更新中加入了独立的「密码」app。然而，要在这些工具之间迁移，传统上是非常困难的。每个工具都使用互不兼容的格式；即使导出为 CSV 格式，由于双方的字段定义和功能集不同，也几乎无法无损转换。</p>
+<p>近年 passkey（通行密钥）的普及进一步加重了这个问题。passkey 基于非对称加密，其中的私钥存放在设备的安全芯片里，公钥存放在网站或应用的服务器上。登录时，网站用公钥生成一个只有使用私钥才能通过的验证（challenge），从而验证身份。</p>
+<p>显然，要保证这个机制的安全，私钥必须牢牢绑定在硬件上，不可轻易复制或导出，否则就和一个普通的密码无异了。因此，目前 passkey 的迁移和同步通常都是厂商在自己的生态内通过加密传输实现的，很难互相打通。这就导致了 passkey 经常受到的一种批评：明明是为了通用和便捷而采用的技术，反而造成了更多的封闭和麻烦。</p>
+<p>macOS 26 和 iOS 26 引入的一些新变化，显示出这些问题得到改善的迹象。WWDC25 讲座《<a href="https://developer.apple.com/videos/play/wwdc2025/279/">通行密钥更新</a>》提到，通过一项与 FIDO 联盟（一个成立于 2013 年，旨在制定和推广身份验证标准的产业协会）成员合作的标准化数据格式，现在可以安全地在密码管理器之间迁移。迁移过程中，无须向磁盘导出任何不安全的明文密码，数据完全在应用之间传输。</p>
+<p>你目前已经可以在 iOS 26 上尝试这个功能。首先，安装第三方密码管理器 Bitwarden，这是目前唯一<a href="https://www.businesswire.com/news/home/20250915119188/en/Bitwarden-Leads-FIDO-Alliance-Credential-Exchange-Standards-for-Passkey-Portability-on-iOS-26">正式支持</a>接收 Password app 导出数据的第三方工具。然后，在自带的 Password app 中点击右上角的「…」，选择 Export Data to Another App。从列表中选择要导出的条目，再选择导出到 Bitwarden。经过 Face ID 验证后，就可以在 Bitwarden 中看到结果了。整个过程不需要导出外部文件，也不需要在应用之间来回切换。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/66f14f2cf5a7f879a5f78fe4f02d355a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>（macOS 上的 Password app 也有相同功能的菜单项，但本文写作时暂时还没有发现能显示在导出选项中的第三方工具。不知为何，<a href="https://support.apple.com/zh-cn/guide/iphone/iphf28f2e93e/26/ios/26">iOS</a> 和 <a href="https://support.apple.com/zh-cn/guide/passwords/mchl35b12625/2.0/mac/26">macOS</a> 的用户手册都完全忽略了这项新功能。）</p>
+<p>要支持这项新的导入和导出体验，第三方应用需要支持 iOS/macOS 26 的新增 API <a href="https://developer.apple.com/documentation/AuthenticationServices/ASCredentialExportManager"><code>ASCredentialExportManager</code></a> 和 <a href="https://developer.apple.com/documentation/AuthenticationServices/ASCredentialImportManager"><code>ASCredentialImportManager</code></a>。不过，如上述 WWDC 讲座所介绍，这些并不是苹果独自发明的，而是对一项通用标准的实现。</p>
+<p>根据这项名为「凭证交换协议」（Credential Exchange Protocol, CXP）的标准，新旧两个密码管理器可以根据这样的流程来安全传输凭证：</p>
+<pre class="language-code-line"><code>       ┌──────────────────────────────────────────────────────┐
+       │                  Authorizing Party                   │
+       └─────┬──────────────────────────────────────────┬─────┘
+
+             │   (2) Determine        (1) Create Export │
+                  Migration Key              Request
+┌────────────┴──┐                                  ┌────┴──────────┐
+│               ◀─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┤               │
+│               │                                  │               │
+│               │                                  │               │
+│               │                                  │               │
+│┌─────────────┐│                                  │               │
+││ (3)Encrypt  ││                                  │               │
+││ Credential  ││                                  │               │
+││    Data     ││                                  │               │
+│└─────────────┘│                                  │               │
+│               │       (4) Send Export Response   │               │
+│               │─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ▶┌─────────────┐│
+│               │                                  ││ (5) Decrypt ││
+│               │                                  ││   Bundle    ││
+│               │                                  │└─────────────┘│
+│               │                                  │               │
+│               │                                  │               │
+│               │                                  │               │
+│               │                                  │               │
+│   Exporter    │                                  │   Importer    │
+│               │                                  │               │
+└───────────────┘                                  └───────────────┘
+</code></pre>
+<p>用通俗的话来描述：</p>
+<ol>
+    <li>导入方（新密码管理器）创建一个导出请求，其中包含请求范围、自己的公钥、加密配置以及一项身份验证等；</li>
+    <li>导出方（旧密码管理器）收到请求后，提示用户授权。获得用户同意后，用导入方的公钥和自己的私钥计算出一个加密密钥，用来加密导出的凭证数据。同时，在导入方发来的身份验证上签名，以证明自己的身份；</li>
+    <li>导出方将加密的凭证数据、自己的公钥以及对身份验证的签名回复打包成一个导出响应，发送给导入方；</li>
+    <li>导入方收到响应后，验证签名，确认导出方的身份。然后，使用自己的私钥和导出方的公钥，独立计算出加密密钥，进而解密凭证数据，解析后存入自己的数据库中。</li>
+</ol>
+<p>可以看出，这个机制的一个优势在于加密密钥无需传输，而是由双方独立计算得出。这确保了即使传输过程被拦截，攻击者也无法解密凭证数据。</p>
+<p>此外，CXP 还支持多种导出「模式」来适应不同的场景。iOS 和 macOS 此次新增的导出功能属于「直接传输」（direct）模式，也就是两个应用通过 API 直接通讯并传输响应。而如果涉及跨设备迁移等无法直接传输的情况，也可以使用「间接传输」（indirect）模式，让旧应用将相应内容存储为一个加密文件，然后手动导入新应用。最后还有一种特殊的「自传输」（self）模式，本质上就是一种安全备份功能，可以将凭证数据导出为加密文件，以便日后恢复。</p>
+<p>解决了传输安全性的问题，还要考虑如何实现不同应用之间的格式兼容。这就是与 CXP 配套的「<a href="https://fidoalliance.org/specs/cx/cxf-v1.0-ps-20250814.html">凭证传输格式</a>」（Credential Exchange Format, CXF）要解决的问题。CXF 实际上提供了一套用 JSON 来描述凭证信息的通用模板，它的顶层结构大概长得像这样：</p>
+<pre class="language-code-line language-json"><code>{
+    "version": {
+        "major": 1,
+        "minor": 0
+    },
+    "exporterRpId": "exporter.example.com",
+    "exporterDisplayName": "Exporter app",
+    "timestamp": 1705228800,
+    "accounts": [
+        {
+            "id": "DZSXp7iBQY-Fg-OofakQtQ",
+            "username": "jane_smith",
+            "email": "jane.smith@example.com",
+            "fullName": "Jane Smith",
+            "items": [
+                {
+                    "id": "9OF-QjVDQo2Wp2xWPw6ZhA",
+                    "creationAt": 1705142400,
+                    "modifiedAt": 1705228800,
+                    "title": "GitHub Login",
+                    "scope": {
+                        "urls": ["https://github.com"],
+                    },
+                    "credentials": [
+                        // ...
+                    ]
+                },
+                // ...
+            ],
+            "collections": [
+                // ...
+            ]
+        }
+    ]
+}</code></pre>
+<p>可以看出，数据的开头给出了格式版本、导出方信息和时间戳等信息，然后是一个 <code>accounts</code> 数组，其中包含了此次导出的一或多个用户账户，是导出数据的核心。<code>accounts</code> 的内部是一个三层结构：</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/103144</id>
+            <title>新玩意 223｜少数派的编辑们最近买了啥？</title>
+            <link>https://sspai.com/post/103144</link>
+            <guid isPermaLink="false">https://sspai.com/post/103144</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 16 Oct 2025 09:46:32 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2><strong>关于栏目</strong></h2><p style="margin-left: 0px;">很多读者都会好奇少数派的编辑们到底平时都「买了啥」。我们希望通过「编辑部的新玩意」介绍编辑部成员们最近在用的新奇产品，让他们自己来谈谈这些新玩意的使用体验究竟如何。</p><p style="margin-left: 0px;">内容声明：《新玩意》栏目如含有商务内容，将会在对应条目标注「广告」；来源为「厂商送测」的产品并无内容干涉。</p><hr /><h2>@Tp：PSP Go</h2><ul><li>参考价格：¥750</li></ul><p>把时间拨回 11 年前，那时候还在上高中的我，陆续攒钱买了曾经爱而不得的掌机。那时候，我萌生出了一个不切实际的幻想，便是把从 GameBoy 到 3DS、PSP 到 PSV 的各种型号都收藏一台。到了现在，看着自己满满一柜子的掌机，这个幻想似乎正在慢慢照进现实。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/e6573032321e30f580a3aa5577a73b0f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果要我在这些掌机里挑一个设计最「精致」的设备，那么 PSP Go 一定会是我的不二之选。合盖情况下，正面只有屏幕和扬声器，这样的设计即便放在今天来看也丝毫不显过时。而 PSP Go 的屏幕也是我认为 PSP 全系列中观感最好的一块屏幕，在分辨率不变的情况下，因为屏幕尺寸缩小了，以至于 PSP Go 的屏幕在视觉观感上会更加细腻。尽管 PSP Go 并没有采用全贴合屏，但内外屏之间的距离极小，画面观感比常规尺寸的 PSP 还是要好上不少的。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/1a3102b280f6824137ba121667e47483.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不仅如此，PSP Go 相比常规 PSP 还新增了蓝牙（虽然只是蓝牙 2.0）和暂时中断的功能，尤其是暂时中断功能，在一些需要反复刷素材的游戏中非常实用，可以作为即时存档功能的替代品。</p><p>这其实并不是我的第一台 PSP Go 了，早在 10 年前，我就入手过一台 PSP Go，并且用它陆续通关了《428：被封锁的涩谷》《弹丸论破》等游戏。但后来由于某些原因把它出掉了，直到前段时间才在女友的支持下重新入手了一台成色不错的 PSP Go。</p><p>要是只把 PSP Go 当一个藏品，它的设计的确总能惊艳到我。但追求轻薄和小尺寸所带来的后果就是相对糟糕的游戏手感。如果只是玩回合制游戏，或是一些 GalGame 倒还好，可一旦要玩比较考验操作的游戏，那么 PSP Go 作为一台游戏设备的手感并不算太好。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/1ae742497d645a72e646b4544106e45f.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>客观来说，在 2025 年的当下，买一台 PSP 实机除了还童年债以外，几乎无法给你带来更多的价值。不同于 NDS、3DS 等设备，PSP 本身在硬件上并没有特别的地方（甚至连 PSV 都有背触以至于无法完美模拟实机体验）。PSP 的模拟器早已成熟，用更现代的设备不但可以开启多倍分辨率获得更好的画面观感，即时存档等功能也能极大地提高游戏效率。</p><p>但是，将掌机捧在手里，在最原始的平台上玩到那些经典游戏的心理满足感，对我来说是任何模拟设备无法比拟的。这也正是即便现在有很多更「现代」的游戏方案，我依然选择淘老掌机来玩的原因。</p><h2>@Microhoo：DJI OSMO Nano</h2><ul><li>参考价格：¥1698（国补后）</li></ul><p>孩子（干儿子）妈想要不落俗套地晒娃，在我的强烈要求下删掉美图秀秀后从技艺到灵性都突飞猛进，也开始主动去了解各种新奇有趣的拍摄方式。于是在晒娃这个赛道上我已经渐渐跟不上她的角度，至少红极一时的「蚊子视角」是她推荐后我才知道。但那会儿的拍摄设备选择只有 insta360 的 GO3S，我曾体验过这台机器，尽管是从产品形态巧思到影像规格都非常令人敬佩的产品，但受限于传感器尺寸在暗光表现下非常捉襟见肘，自然有碍于多是室内逆光拍摄的「蚊子视角」。彼时无论迭代产品还是大疆即将入局都传得沸沸扬扬，我就让她多等等。</p><p>最近 insta360 GO Ultra 和 DJI OSMO Nano 都已经问世，选择 OSMO Nano 有两个原因，其一是看到网上一些实机分享，方形设计的 GO Ultra 安装在帽檐上拍摄不如条形的 OSMO Nano 便利和隐秘——后者主要是为了不吸引小朋友注意力；其次 GO Ultra 不内置机身存储，倒不是舍不得这点内存卡的钱，只是既然是追求小巧的设备，还要额外插卡多少有点返璞归真了。总而言之，考虑到孩子妈的重点需求，OSMO Nano 是最合适的选择。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/5a0728957de00447c5ec56045e11eed8.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/b48ec4f44545e61a092d6a162e9d736a.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>庆幸这个决定非常正确，因为小朋友还不足两岁，尚不是可以听指挥的年纪，而相对无感的条形 OSMO Nano 已经会被他突如其来的注意力一把扯掉，就很难想方形 GO Ultra 的存活时间。所以如果你的使用场景主要围绕这般自由洒脱的小宝，我是推荐 OSMO Nano 更多一些。于是，孩子妈也如愿以偿得到了她在朋友圈获赞无数的「蚊子视角」。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/6bf4242d61859408f6637d9598a916d4.gif" /></figure><p>因为 GIF 压缩的原因，画质不堪大家看个乐就行，又因为孩子妈是完全没有影片拍摄经验的新手鼓捣，角度、光线等都还有很大的进步空间，祝她越来越好。也感谢互联网和这些不设限的数码厂商，相比我只能对着傻瓜相机呲牙咧嘴的小时候，现在时间过得很快，但我们留下它的方式也更多了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/58159e81baa6c0110c23d0553629c5a9.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>考虑到可能有的朋友没有接触过拇指相机，所以也唠两句 OSMO Nano 机器本身吧。Nano 和 Action 这样的运动相机最大区别就是它的摄像头模组为可拆卸设计，一种使用场景是前面那样受益于小巧机身，用穿戴或配件固定等方式拍摄常规大型设备比如手机、相机等不易获得的创意视角；另一种使用场景则是手持作为监视器使用，两两配合更自由地完成更灵动的画面。</p><p>就我比较主观的感受，如果说 Action 类运动相机是最理想的第一人称视角拍摄设备，那么 OSMO Nano 则能远超期待的完成各种第三视角拍摄，尤其是你单兵作战时。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/7ddb65f8283c131321534c565c420e2a.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>最大的功臣除了各种意想不到的外挂配件，还有 OSMO Nano 摄像头模块内置强磁铁，所以你可以吸附在任何磁性金属表面，好固定，也有好视角。其次则是大疆强大的产品力了，GO3S 不过一年前问世，彼时尽管如传感器、拍摄规格等略不尽如人意，但已经是我认为这类相机的极限了；但仅隔一年问世的 OSMO Nano，差不多就是如今手持最新影像旗舰手机回望十几年前 500 万像素「高清摄像头」的感觉。</p><p>OSMO Nano 有 1/1.3 英寸的 CMOS 和最高 4K/120fps 的最高影像规格，虽然没有作过严谨测试，但实际拍摄效果与当下的运动相机相比已经不落下风。尽管 90 分钟（官方数据，加上图传模块最长 200 分钟）的续航时间稍有不足，但对于创意视角拍摄和中轻度 Vlog 记录也绰绰有余了，主要这可是一个只有 52g 的拇指相机（图传模块 72g），很难想。</p><p>不过参数并不是最重要的，正如毫无经验的孩子妈下个 app 鼓捣几下就能拍出尚且不错的创意视频，OSMO Nano 的意义多是赋予更多普通人记录生活、把时间具像化的能力。网速很快，世界太吵，流淌的时间被截取成生动的珍藏，除了博君一笑，更是点点滴滴存在过的骄傲。</p><h2>@北鸮：DxO ONE 打印外壳</h2><ul><li>参考价格：¥104</li></ul><p>得益于<a href="https://sspai.com/post/100607">富士 X half</a> 的神秘定价，<a href="https://sspai.com/post/91507">DxO ONE</a> 这个怪咖老相机又被人抬了出来并委以重任，凭借同样是一英寸的底成了「四千多块相机的平替」。这相机最大的毛病就是不连手机单独使用时不好握持，快门键在机顶，竖握不太稳定。但多亏它便宜（而且因为直出效果一般，炒了一圈热度后反而更便宜了），这波热度让几位 3D 打印玩家也注意到了这个玩意，做了好几种看起来都有点道理的打印外壳。平常一直在用正常相机的我冷落 DxO ONE 多时，就搞了一个来玩玩。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/99a02bbf7820bb7ce64afe2a59270b0c.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我选了一个形态相对保守的款式。壳子整体精度不错，装配只需要简单调整。相机顶带有一个冷靴口，给没配手机的 DxO ONE 添上了外置补光。快门杆弹性有余硬度不足，基本可以把快门按键的两段手感传导过来。底部补了一个 1/4 螺口——这个我倒完全没用过，把它固定在三脚架上多少有点幽默。外壳不会影响连接手机，不过上了这个壳子后我基本也就没连过手机了，一手端着握把稳稳当当，成品几率大大增加。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/a9f4f2c6a98ed30f97ea1e67a6f1dcb1.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>虽然体积大了一点，能让这个玩具多点实用性也是好事，至少随手拿出门不用只等晴天了。跟被迫对标的半格相机比，这个半截相机的直出画面确实是不够看，我就设成了必开 RAW，权当训练自己学调色了，不过仍然无法改变它对焦一般、取景困难的问题，只是变成了一个更好玩的玩具相机。回头玩腻了，再换个别的造型的壳子，又能当新相机玩上一阵。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/19c80d6b971832a8581d3bf1ba2749b9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>直出 JPG，已经比我之前动不动就拍糊好太多了</p><h2>@Lotta：可口可乐唇膏</h2><ul><li>参考价格：¥29</li></ul><p>可能因为秋天到了，我的嘴唇最近经常干裂甚至流血，除了笑起来有点痛之外我也没太放在心上，但亲友看不下去勒令我速速买一个唇膏。其实我平时不是很喜欢涂唇膏，因为总觉得每次喝水都会喝掉一些，四舍五入像在吃唇膏，于是想着从网上看看，选来选去拖几天这件事也许就被抛到脑后了。没想到亲友直接打开外卖软件点开屈臣氏让我选，不仅有常规的草莓、柑橘、薄荷、椰子味，还有定胜糕桃花红豆味，甚至可口可乐味。</p><p>这个可口可乐唇膏实在太吸引人了，大家请看图：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/9bdb850da95f0c4928d1d13871dd4955.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>谁能拒绝一杯插好吸管的冰可乐呢！</figcaption></figure><p>这款 LiP SMACKER 和可口可乐的联名唇膏的外形就是一杯冰可乐，杯身镭射表面、冰块晶莹剔透，就算是作为模型摆件也绰绰有余，而它 7.4g 的净含量配上 29 元的价格也很便宜，再加上我对唇膏的功效没什么要求，所以一眼就选中了它。摆在工作台上，看到开心了就拿起来涂一涂，至少可以避免嘴巴干的时候舔嘴唇让起皮更严重。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/6b7d9cffaae8b3904391f01b7c1af467.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>白色的杯口以上其实就是唇膏盖子的部分，旋转就可以拧开，关闭时听到「咔哒」一声就拧紧了。膏体也在盖子的部分，是子弹头的形状，杯身是空的，打开后手持盖子直接涂抹即可。膏体气味往好里说是可口可乐软糖的味道，往坏里说也有点像橡皮泥，但上嘴之后就基本闻不到任何气味了，所以使用起来影响不大。唇膏上嘴无色，薄涂一层也不会有很油腻的感觉，使用体验良好。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/0316baf01b4cb893eddc5710464aaf1a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>除了可口可乐款，这个系列好像还有芬达、雪碧等多个款式，甚至还和迪士尼有联名款，感兴趣的朋友可以自行搜索。</p><hr /><p style="margin-left: 0px;">我们近期开通了新玩意的社媒帐号，更有更多新奇产品和服务以视频方式呈现，快来关注我们吧！</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/19/bd248e2ea53452a6dc50cb0b640735d8.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;"><strong>如果你也想分享「新玩意」🔉：</strong></p><ul><li>获取 Matrix 社区写作权限并签署 <a href="https://sspai.com/post/72089" target="_blank">Matrix 共创计划</a>；</li><li>新发布一篇文章，在标题中标注「新玩意」前缀；</li><li>用至少 800 字介绍产品，并配上 2-3 张产品的实拍图片；</li><li><strong>在网站个人信息中补充支付宝账号。</strong></li></ul><p style="margin-left: 0px;">成功入选本栏目还可以得到 108 元的「剁手红包」🧧。如果你有兴趣参与，就赶紧来稿吧！</p><p style="margin-left: 0px;">&gt; 下载少数派 <a href="https://sspai.com/page/client">客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，了解更多的新玩意 🆒</p><p style="margin-left: 0px;">&gt; 特惠、好用的硬件产品，尽在 <a href="https://shop549593764.taobao.com/?spm=a230r.7195193.1997079397.2.2ddc7e0bPqKQHc" target="_blank">少数派 sspai 官方店铺 </a>🛒</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/102845</id>
+            <title>借助捷径，不写代码也能玩转 Quote/0</title>
+            <link>https://sspai.com/post/102845</link>
+            <guid isPermaLink="false">https://sspai.com/post/102845</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 16 Oct 2025 07:38:47 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>墨水屏一直是我非常偏爱的产品形态：低功耗、不依赖背光，同时具备可刷新特性，几乎天生就是为信息看板而设计的。遗憾的是，我并非硬件工程师出身，始终没能亲手做出一块完全符合自己需求的墨水屏。</p><p>几年前，我购买了两块超市电子价签，并在好奇心的驱动下，逆向分析出它们的蓝牙通信协议，由此写下了<a href="https://sspai.com/post/78993" target="_blank">《抓包解协议，代码造布局：电子墨水价签改造 NAS 监控屏小记》</a>。</p><p>也正因如此，当 <a href="https://sspai.com/s/eOyP" target="_blank">Quote/0</a> 出现时，我格外期待。它在官方丰富模板之外，还提供了更灵活的数据更新方式，可以直接通过苹果的捷径（Shortcuts）进行扩展，让墨水屏的玩法不再局限于预设场景。</p><h2>如何驱动 Quote/0 更新</h2><p>要在日常中使用 Quote/0，主要依赖以下三点：</p><ul><li>对捷径 App 的基本操作（Shortcuts）</li><li>官方或第三方 App 对 Siri Intent 的支持</li><li>Quote/0 的设备码和 API Key</li></ul><p>通过这些条件，就能构建出灵活的自动化更新方案。下面以几个场景为例。</p><h3>场景一：日程提醒</h3><p><strong>捷径 + 日历 App + Quote/0 文字 API</strong></p><p>苹果自带的日历应用可以与捷径配合，获取即将到来的日程信息，再通过 <a href="https://sspai.com/s/eOyP" target="_blank">Quote/0</a> 展示在墨水屏上。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/55543381ffe41369a7891f708732c0dd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>iOS 日历日程安排，在 Shortcuts 里用来请求更新 Quote/0</figcaption></figure><p>效果示例：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/7ca1b2138ebe29b26987f8061916b0b0.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>场景二：节假日查询</h3><p><strong>捷径 + 休息日 App + Quote/0 文字 API</strong></p><p>「休息日」是一款提供节假日信息查询的 App，全面支持 Siri Intent。通过配置捷径触发流程，可以快速获取节假日安排并同步到 <a href="https://sspai.com/s/eOyP" target="_blank">Quote/0</a>。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/fe43e9e0f49e4b5f39847c7fce0aa7af.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>休息日模板 - 复制上一个配置 - 休息日提供的 Siri Intent</figcaption></figure><p>示例效果：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/3346da6e176bbe39e48736c02485b5ef.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>场景三：生日 / 纪念日提醒</h3><p><strong>捷径 + 唯记 App + Quote/0 文字 API</strong></p><p>「唯记」是一款专注于生日和纪念日提醒的 App，同样支持 Siri Intent 调用。借助捷径，你可以灵活获取倒数日信息并投放到墨水屏。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/00a23de10c94585a8fcd473498598d51.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>效果示例：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/f167b589c34d752893631b60e87efb61.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>自动化轮播</h2><p>在捷径 App 中切换到底部的<strong>「自动化」</strong>标签，点击右上角<strong>「添加」</strong>，选择<strong>「特定时间」</strong>后，绑定之前配置好的快捷指令。接着，可以根据需求设置不同时间段展示的不同信息。</p><p>这样一来，<a href="https://sspai.com/s/eOyP" target="_blank">Quote/0</a> 就能与手机信息保持同步，实现自动摘要与定时轮播，让它真正成为一个动态更新的桌面信息小组件。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/41242ca6228949aa07003f65ee47f2ab.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>iOS 捷径自动化配置</figcaption></figure><h2>进阶玩法：图片 API</h2><p>文字展示并不是终点。<a href="https://sspai.com/s/eOyP" target="_blank">Quote/0</a> 更强大的能力在于 <strong>图片 API 更新</strong>。在 Node.js 环境下，可以使用虚拟 Canvas （无需借助浏览器或客户端）动态生成画布，并输出图片，再推送到墨水屏，实现更丰富的视觉效果。</p><p>例如下图的黄金走势图：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/3db39ae703a964e378b64a4936320c4c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>相关示例代码已更新至 <a href="https://github.com/gadore/ink-screen-bluetooth" target="_blank">GitHub 仓库</a>，供参考与拓展。</p><h2>写在最后</h2><p><a href="https://sspai.com/s/eOyP" target="_blank">Quote/0</a> 的出现，让墨水屏的使用方式变得前所未有的灵活。通过捷径、Siri Intent 和 API 的结合，每个人都可以根据自身需求，快速定制出独一无二的应用场景。</p><p>当然，这种玩法也高度依赖应用开发者对 Siri Intent 的<strong>适配</strong>，如果没有适配，就只能走写代码这条老路了，但借助 AI 大模型，现在好像也不是不可逾越的高墙了，勇敢的少年啊，赶紧去尝试吧～</p><span class="ss-externalProduct" title="Quote/0 摘录" type="externalproduct">&nbsp;</span><p>&gt; 下载少数派 <a href="https://sspai.com/page/client" target="_blank">客户端</a>、关注 <a href="https://sspai.com/s/J71e" target="_blank">少数派公众号</a>，了解更多的新玩意 🆒</p><p>&gt; 特惠、好用的硬件产品，尽在 <a href="https://shop549593764.taobao.com/?spm=a230r.7195193.1997079397.2.2ddc7e0bPqKQHc" target="_blank">少数派 sspai 官方店铺 </a>🛒</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/103108</id>
+            <title>一起共创｜我们想打造一个墨水屏体验空间，让数字生活回归「纸感」</title>
+            <link>https://sspai.com/post/103108</link>
+            <guid isPermaLink="false">https://sspai.com/post/103108</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 16 Oct 2025 03:00:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>Quote/0 摘录的持续火热帮助少数派敲开了墨水屏的大门，我们开始逐渐意识到有很多的用户对于墨水屏产品的喜爱。随着信息的爆炸，越来越多的人开始追求更专注、更沉浸的数字生活方式。墨水屏设备凭借其接近纸张的观感、保护视力的特性以及天然的「去干扰」属性，正成为这股浪潮中的理想之选。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/15/fa63ac202ac5ab2f269f29e5ed1f2db0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>站内可以搜索出上百篇关于「墨水屏」的文章</figcaption></figure><p>在少数派，从 Matrix 社区广场到会员社区讨论，我们积累了大量关于墨水屏产品的评测、技术探讨和使用分享，这里已然成为了一个活跃的墨水屏爱好者社群。然而，市面上的墨水屏产品五花八门，不同品牌在显示效果和系统交互上的差异巨大。用户仅凭线上的文字和图片，往往难以做出准确的购买决策。</p><p>正是基于对「高效、健康、沉浸式」生活方式的共同追求，以及对用户「亲身体验」需求的深刻理解，少数派决定与专业的墨水屏社区——暖风家联手，将线上的理念和产品，具象化为一个可以触摸、可以停留的线下空间：<strong>少数派✕暖风家 墨水屏线下体验空间</strong> 应运而生。</p><h2>少数派深圳后海汇线下店：效率理念的实体化展示</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/15/a752bbd28289d3b05168c2cfab7f43fe.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>少数派深圳后海汇线下店</figcaption></figure><p>少数派一直致力于推广「高效工作与优质数字生活」的理念。我们位于深圳后海汇的线下店，不仅是各种新奇好物产品的展示地，更是一个思想交流的场所。在这里，我们定期举办各类有趣的活动，它是少数派效率生活理念的实体化空间。</p><p>为了提供更完善的体验，我们近期大幅丰富了线下店的产品线，引入了更多注重体验和交互的产品。而此次，我们将在店内开辟一个<strong>专属的墨水屏体验区</strong>。我们将努力营造出一种平静、专注的氛围，提供一个没有干扰的环境，让用户能真正沉浸其中，感受回归纸面的「专注力量」。</p><h2>暖风家：18 年墨水屏领域专家</h2><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/10/15/4606a82773afedf0bd06700bead41e49.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/10/15/44dbc4aacc45282fee00b510f11f37bb.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>暖风家作为国内知名的墨水屏专业社区，是国内电子阅读器市场的核心渠道与战略合作伙伴，目前是文石（BOOX）、掌阅（iReader）、汉王（Hanvon）、大我（Bigme）、大上（DASUNG）、墨案（MOAAN）等头部品牌及众多消费电子品牌的核心代理商。</p><p>暖风家已经在上海和长沙开设了两个墨水屏体验空间，他们的专业优势体现在：</p><p><strong>深度产品理解：</strong> 对不同品牌、尺寸、技术路线的墨水屏设备有深入的评测和对比经验。</p><p><strong>个性化服务：</strong> 能够根据用户的阅读习惯、工作需求和预算，给出专业、中肯的推荐建议。</p><p>这次与少数派的合作，是优质内容平台与垂直产品专家的强强联合。我们确保每一个来到体验空间的用户，不仅能接触到市面上最好的产品，还能获得最专业的解答。</p><h2>打造体验空间的价值：打破「盲选」壁垒</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/15/2ff01887ea45cfb47f80fb2c085dc7d7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>墨水屏展示空间概念图</figcaption></figure><p>建立墨水屏线下体验空间，我们希望能解决用户的实际痛点，提升选购体验。其中最重的价值有两点。</p><h3>一站式对比，消除选购盲区</h3><p>墨水屏产品的核心参数（如屏幕刷新率、背光均匀度、手写延迟、系统开放性）很难仅凭线上描述了解清楚。在体验空间，我们将系统陈列市面上主流的阅读器、墨水屏平板乃至墨水屏显示器。用户可以：</p><p><strong>亲手对比手写：</strong> 体验不同设备的手写笔触、延迟感和压感。</p><p><strong>观察屏幕细节：</strong> 在自然光和不同亮度的背光下，观察屏幕的细腻度和均匀度。</p><p><strong>体验系统交互：</strong> 现场操作不同品牌的系统，感受其在工作流和笔记功能上的差异。</p><h3>沉浸式场景，融入日常生活</h3><p>我们不希望这里是简单的产品陈列，而是模拟了用户真实的阅读、学习和办公场景：</p><p><strong>阅读角：</strong> 舒适的单人沙发和柔和的暖光，让用户在最放松的状态下，感受墨水屏纯粹的阅读体验。</p><p><strong>办公区：</strong> 将墨水屏设备作为副屏或高效笔记工具，让用户体验如何将其无缝融入到日常工作流中。</p><p>我们希望用户感受到的，不仅是一款电子产品，而是一种理想的、专注的生活方式。</p><h2>诚邀共创：一起「玩转」墨水屏空间</h2><p>我们相信，最好的体验空间是开放和不断成长的。因此，我们诚挚邀请所有用户，一起来定义这个空间的「玩法」！你可以在评论区告诉我们你的想法（任选一即可）：</p><ol><li>你最希望体验到哪些类型的墨水屏设备？阅读器，显示器或者像摘录一样的新概念设备？说说为什么你喜欢它。</li><li>你最希望线下空间提供什么服务？咖啡角，墨水屏设备借阅或者拍照区？说说你为什么需要它。</li><li>你最希望在线下空间举办哪些类型的活动？墨水屏新品发布会，技术分享论坛或者其他好玩的活动。告诉大家你热爱这些活动的原因。</li></ol><figure class="image ss-img-wrapper image_resized" style="width: 297px;"><img src="https://cdnfile.sspai.com/2025/10/15/2383cc86cbc67cb64ee1c33cac602693.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>此外也欢迎加入墨水屏空间共创微信群，让我们一起进行更深入的互动与交流。</p><p><strong>互动奖励：</strong></p><p>我们会定期筛选优质、有洞察力的内容和有趣的「空间玩法」，并赠送少数派和暖风家联合提供的精选周边。你的想法可能会真正改变线下专区的面貌！</p><p>我们希望使用少数派的效率方法论，加上暖风家的专业产品知识，再结合你的创意与反馈，共同为你打造理想的数字生活专区。</p><p><strong>欢迎您来，亲自感受这份回归纸面的专注与平静。</strong></p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/103129</id>
+            <title>派早报：Apple 更新 M5 系列新品、荣耀发布 Magic 8 系列手机等</title>
+            <link>https://sspai.com/post/103129</link>
+            <guid isPermaLink="false">https://sspai.com/post/103129</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 16 Oct 2025 00:25:26 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2><strong>少数派的近期动态</strong></h2><ul><li>10 月 14 日晚 19:30，MeetCard 正式上线，欢迎来到直播间一探究竟。<a href="https://sspai.com/post/102977"><strong>进一步了解</strong></a></li><li>少数派 1024 程序员节征文：码上，与鸿蒙一起进击。<a href="https://sspai.com/post/102635"><strong>进一步了解</strong></a></li><li>少数派 x Khadas 哈达电脑众测活动现已发布，体验新机赢大奖。<a href="https://sspai.com/post/103074"><strong>进一步了解</strong></a></li></ul><h2>你可能错过的好文章</h2><ul><li><a href="https://sspai.com/post/103120">来自中国的年度 iPhone 游戏大奖，Tim Cook 拜访《剑与远征》开发商</a></li><li><a href="https://sspai.com/post/102899">黑苹果的黄昏：我用一台七年老本，为它举行最后的葬礼</a></li><li><a href="https://sspai.com/post/102951">鸿蒙 1024｜在鸿蒙建一间美术馆，我也登上了更大的舞台</a></li></ul><p>&gt; 关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/103120</id>
             <title>来自中国的年度 iPhone 游戏大奖，Tim Cook 拜访《剑与远征》开发商</title>
             <link>https://sspai.com/post/103120</link>
@@ -85,206 +254,6 @@
                 <![CDATA[
                     
                     <p><strong>如果你也想分享「新玩意」🔉：</strong></p><ul><li>获取 Matrix 社区写作权限并签署 <a href="https://sspai.com/post/72089" target="_blank">Matrix 共创计划</a>；</li><li>在少数派独家发布一篇文章，在标题中标注「新玩意」前缀；</li><li>用至少 800 字介绍产品，并配上 2-3 张产品的实拍图片；</li><li><strong>在网站个人信息中补充支付宝账号。</strong></li></ul><p>成功入选本栏目还可以得到 108 元的「剁手红包」🧧。如果你有兴趣参与，就赶紧来稿吧！</p><p>&gt; 下载少数派 <a href="https://sspai.com/page/client" target="_blank">客户端</a>、关注 <a href="https://sspai.com/s/J71e" target="_blank">少数派公众号</a>，了解更多的新玩意 🆒</p><p>&gt; 特惠、好用的硬件产品，尽在 <a href="https://shop549593764.taobao.com/?spm=a230r.7195193.1997079397.2.2ddc7e0bPqKQHc" target="_blank">少数派 sspai 官方店铺 </a>🛒</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/88541</id>
-            <title>我就是想继续用 Windows 10：那安全漏洞怎么办？</title>
-            <link>https://sspai.com/post/88541</link>
-            <guid isPermaLink="false">https://sspai.com/post/88541</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 14 Oct 2025 07:00:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>2025 年 10 月 14 日，也就是今天，微软正式结束对 Windows 10 的支持。此后，微软将不再提供功能更新与安全补丁，除非用户注册扩展安全更新（ESU）计划，或升级至 Windows 11。与 Windows XP 和 Windows 7 相比，Windows 10 的生命周期仅维持 10 年。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/076d999aa053c695c5250616735bc814.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>现实情况是，Windows 11 对硬件有明确要求，部分老旧设备无法通过常规方式安装。还也有一部分朋友「坚守」Windows 10 的原因则是为了相对更少的广告、更好的兼容性等等原因……但毕竟是电脑，如果不更新安全补丁，新发现的漏洞又可能带来额外的安全风险。</p><p>所以，我们整理出 7 个可行方案，帮助你在 Windows 10 停止支持后依然可以保持系统安全。</p><h2 style="margin-left: auto;"><strong>方案一：注册 Windows 10 消费者版扩展安全更新程序 (ESU)</strong></h2><ul><li>优点：官方提供最为可靠的系统安全和保护支持，获取门槛低。</li><li>缺点：计划仅为一年，未来是否可以继续使用暂不清楚。</li></ul><p>虽然微软已决定在 2025 年 10 月 14 日结束对 Windows 10 的官方支持，但为了让用户有更多时间过渡到 Windows 11，微软推出了扩展安全更新计划（ESU），并提供相对低成本的注册方式。也就是说，普通消费者只需注册该计划，便能获得与企业版相同的 Windows 10 安全更新支持。</p><p>不过，根据微软的设定，注册 Windows 10 消费者版扩展安全更新计划（ESU）仍需满足一定条件：</p><ul><li>系统版本必须为 Windows 10 22H2，并限于 Home、Professional、Pro Education 或 Workstations 版本；</li><li>系统需已安装最新的 Windows 更新；</li><li>用户需使用 Microsoft 账户登录，且该账户具备管理员权限。</li></ul><p>只有在满足以上条件后，才能进行 ESU 注册。至于注册方式，微软提供了三种可选方案：</p><ul><li>付费 30 美元获取一年的扩展安全支持；</li><li>将当前使用 Microsoft 账户登录的电脑的设置同步到云端；</li><li>使用 1000 个 Microsoft Rewards 积分兑换；</li><li>欧盟地区的 Windows 10 用户可以直接获取。</li></ul><p style="margin-left: 0px;"><strong>关联阅读：</strong>《<a href="https://sspai.com/post/100943" target="_blank">一日一技 | 用欧盟纯净版 Windows 11，享真正的数字选择权</a>》</p><p>在满足上述条件后，打开「设置 &gt; 更新和安全 &gt; Windows 更新」。设备符合要求时，系统将显示 ESU 注册入口。此时点击「立即注册」，即可启动扩展安全更新注册流程。如果当前使用本地账户登录，系统会提示你切换至 Microsoft 账户；如果已启用设备设置备份，系统将进一步提示为该设备注册 ESU。</p><figure class="image ss-img-wrapper"><img alt="扩展安全更新程序 (ESU) 计划注册界面" src="https://cdnfile.sspai.com/2025/10/13/article/8d8ee61c73591526ade02ae2ccc63b24.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>注册 ESU 后，一份已有的许可证最多可用于 10 台设备。你只需前往「设置 &gt; 更新和安全 &gt; Windows 更新」，在其他设备上选择「立即注册」。如果当前设备使用的是注册首台设备时的 Microsoft 账户，只需点击「添加设备」即可；如果未使用相同账户登录，系统会提示你先登录注册时所用的 Microsoft 账户。</p><p>需要注意的是，微软尚未明确说明是否会在一年后继续提供 Windows 10 消费者版扩展安全更新计划。根据官方公告，该计划预计将在 2026 年 10 月 13 日结束。因此，如果你计划在未来几年继续使用 Windows 10，这项方案只能确保一年内获得安全支持，一年后仍可能面临安全更新中止的风险。</p><h2>方案二：「移花接木」安全更新</h2><ul><li>优点：直接获得最新的 Windows 10 安全更新。</li><li>缺点：需要和 Windows 10 Enterprise LTSC 的版本保持一致、目前需要手动更新安装安全更新。</li></ul><p>如果你可能还记得 Windows XP 官方宣布结束扩展支持后，我们依然可以通过第三方手段获取安全更新。利用仍在扩展支持期内的 Windows Embedded POSReady 2009 的安全更新，通过修改注册表「欺骗」Windows Update 服务器，让这些更新能够安装在已结束生命周期的 Windows XP 上。</p><p style="margin-left: 0px;">这种方法同样适用于 Windows 10。不过，与 Windows XP 的情况不同，这里不需要修改注册表信息。你只需根据微软每月公布的安全更新知识库手动查找离线更新包并进行安装。考虑到未来会继续获得更新的版本是 Windows 10 Enterprise LTSC 2021，而该版本基于 Windows 10 21H2，所以最好你当前的 Windows 10 版本就是 21H2。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/14/86aa89b2dfa9c74e6744c23f2410a608.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">首先，需要访问微软官方网站上的 <a href="https://learn.microsoft.com/zh-cn/windows/release-health/release-information" target="_blank">Windows 10 版本信息支持库</a>。在网站上，定位到 Windows 10 的发布信息中的 Version 21H2 (OS build 19044)。由于面向消费者的 Windows 10 21H2 版本已经停止服务，因此列表中显示的都是 LTSC 的发布渠道。需要做的是找到本月的知识库文章编号，即以 KB 开头的后续编号，这个编号就是当月安全更新的编号。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/06/a2c5a4d9c4a14d9a6a2ec00e567309f9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>接着访问 <a href="https://www.catalog.update.microsoft.com/Home.aspx">Microsoft® Update Catalog</a>，这是微软官方提供的离线安全更新下载网站。在网站的搜索框中直接输入当月的知识库文章编号，也就是以 KB 开头的编号。例如，如果你想下载 2024 年 9 月 9 日的离线安全更新包 KB5065429，只需在搜索结果中找到适用于 Windows 10 Version 21H2 的更新包。</p><p>为了兼容性，我建议选择下载 Cumulative Update（累积更新）。在找到相应的更新后，点击列表右侧的「Download」按钮进行下载，下载完成后即可安装。这样可以确保你的系统获得最新的、最完整的安全补丁和功能改进。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/14/95bcc48e7bf0682c5672656c17f5dfe4.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">这个方案的最大优势是，即便无法通过 Windows Update 直接获取安全更新，我们仍然可以下载 LTSC 版本的每月安全质量更新来维护基本的信息安全。缺点也很明显，那就是需要几乎每月都手动下载并安装安全更新。当然，也不排除第三方开发者会推出半自动的工具来帮助我们延长 Windows 10 系统的生命周期。</p><h2 style="margin-left: auto;">方案三：换用 Windows 10 Enterprise LTSC 版本</h2><ul><li>优点：延续 Windows 10 的使用体验、需登录 Microsoft 账户、官方精简系统。</li><li>缺点：LTSC 2021 的 EOL 也仅到 2027 年、属于批量授权协议<sup class="ss-footnote" href="" title="对普通用户而言激活较麻烦">1</sup>。</li></ul><p style="margin-left: 0px;">对于企业用户或追求稳定的普通使用者而言，更换系统或进行大版本更新会带来相当大的迁移和学习成本，继续使用 Windows 10 是更不错的选择。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/a0f776f16a4e77cd5afb4fd8a3585ed2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">LTSC 版本，即微软针对企业和教育等领域提供的长期服务渠道版本。</p><p style="margin-left: 0px;"><strong>关联阅读：</strong>《<a href="https://sspai.com/prime/story/windows-macos-version-number-explained">你的名字到底有几种写法？——聊聊 Windows 和 macOS 的版本号</a>》</p><p style="margin-left: 0px;">与其他 Windows 10 版本相比，LTSC 的主要区别在于不频繁接收<strong>功能更新</strong>，并移除了包括 Microsoft Store 在内的某些功能。LTSC 版本的支持周期不受普通版本 Windows 10 结束支持时间的影响。目前，Windows 10 Enterprise LTSC 2019 版本的延长支持日期至 2029 年 1 月 9 日，而基于 Windows 10 21H2 的 Windows 10 Enterprise LTSC 2021 的主流支持期至 2027 年 1 月 12 日。选择 Windows 10 Enterprise LTSC 可以在一段较长时间内免去 Windows 大版本迁移的顾虑。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/733d9c02b3bdff1493fc1813a63acadd.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">Windows 10 Enterprise LTSC 的安装过程与一般 Windows 10 的安装类似。唯一的区别在于 OOBE（首次开机体验）阶段的账号登录选择。虽然系统默认要求使用工作或学校的 Microsoft 账户登录，但通过点击左下角的「改为域加入」可以创建本地账户。如有需要，安装完成后进入系统，还可以选择切换到 Microsoft 在线账户。根据我的测试，系统内切换到 Microsoft 在线账户同样支持一般的 Microsoft 账户。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/7d159eadd7ce18d2535ce02c34512db9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">安装并激活后，你可以在「设置」-「关于」中查看到 Windows 10 Enterprise LTSC 的版本信息。显示的内部版本号为 <code>19044.xx</code>，与 Windows 10 21H2 相同，因此支持 Windows 10 21H2 的软件也可以在 Windows 10 Enterprise LTSC 2021 上正常运行。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/0f3a3d6e0e7c9b19619328a9e3e00462.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">当然，如果你后续希望使用 Microsoft 在线服务（比如 Microsoft Store）的话，也可以通过第三方工具来手动安装 Microsoft Store，比如通过 <a href="https://github.com/kkkgo/LTSC-Add-MicrosoftStore">Add Store to Windows 10 Enterprise LTSC</a> 这个工具，这样你就可以在应用商店下载应用，同时使用其他面向一般消费者的微软在线服务。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/2b189f91aeb5c81c5603939264d8327a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2 style="margin-left: auto;"><strong>方案四：使用第三方工具将 Windows 10 强行升级到 Windows 11</strong></h2><ul><li>优点：保留原先 Windows 10 的所有配置项和文件，平滑升级到 Windows 11。</li><li>缺点：需要一定的技术操作能力。</li></ul><p>当然，鉴于 Windows 10 终将退出历史舞台，也是时候升级到 Windows 11 了。很多用户仍选择使用 Windows 10 的主要原因还是硬件限制——例如系统必须支持 TPM 2.0，处理器至少为 Intel 第 8 代酷睿系列才能满足 Windows 11 的安装标准。那么，有没有办法让老旧硬件也能顺利安装 Windows 11 呢？</p><p>Flyoobe 是一款可帮助用户将不符合硬件要求的 Windows 10 电脑快速升级到 Windows 11 的工具。这里首先我们从 Github 上<a href="https://github.com/builtbybel/Flyoobe/releases/download/1.30.513/FlyoobeApp.zip">下载最新的版本</a>并解压缩到任何文件夹，然后运行文件夹中 <strong>Flyo</strong> 这个应用。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/e1bafff734b4f09afded6078b4a0fcb4.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>打开应用后，先点击「Get Windows 11」。此处提供多种方式可供选择：你可以直接从 Microsoft 官网下载，也可以通过 Media Creation 工具获取镜像。假如你已经下载好 Windows 11 的系统镜像，只需将其拖入 Patch 区域，应用便会自动运行必要的脚本，帮助你跳过 Windows 11 的硬件检测。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/705e17765ec375dd721a913e069a5c4e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>实际上，Flyoobe 通过使用 Windows Server 的安装介质来绕过 Windows 11 的硬件检测，随后安装程序会继续执行 Windows 11 的正式安装。在此过程中，你可以选择「保留文件、设置和应用」，然后按照系统升级向导的步骤依次进行，即可顺利完成将不符合 Windows 11 硬件要求的 Windows 10 系统升级为 Windows 11。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/77e0e24c534437dc9b40ad3db6a6f565.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>方案五：修改 Windows 11 安装镜像</h2><ul><li>优点：适用于任何版本的 Windows 11，兼容性更高。</li><li>缺点：需要自行下载安装镜像、手动升级，有误删数据的风险。微软可能会再次对不符合条件的设备施加升级限制。</li></ul><p style="margin-left: 0px;">类似方案四，只不过我们这里修改 Windows 11 安装镜像后，再创建对应的引导 U 盘，升级到 Windows 11。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/7edcceff368742537d8b6affc0d198b2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;"><a href="https://rufus.ie/zh/" target="_blank">Rufus</a> 的最新版本已能区分 Windows 11 和 Windows 10 的镜像。当你选择 Windows 11 镜像并点击开始时，会弹出一个 Windows 用户体验选项框。普通用户可以直接勾选「移除对 4GB + 内存、安全引导和 TPM 2.0 的要求」。如果你不希望在 OOBE 中登录微软账户，还可以选择「移除对登录微软账户的要求」，这样可以在安装过程中先创建本地账户，再在系统启动后选择切换。</p><p style="margin-left: 0px;">安装的时候还需要注意选择「升级」而不是「自定义」，多硬盘的用户也要选择正确的硬盘或分区。通过这种方式生成的 Windows 11 安装镜像，其安装流程与 Windows 10 基本相同。唯一需要注意的是，未来在系统进行大版本更新时，微软可能会再次对不符合条件的设备施加升级限制。</p><h2 style="margin-left: auto;">方案六：升级至 Windows 11 IoT Enterprise</h2><ul><li>优点：获得更长时间的安全更新、体验类似 Windows 11 桌面版。</li><li>缺点：该版本同样采用了批量授权。</li></ul><p>除了像方案五那样使用 Rufus 绕过限制外，还可以选择安装 Windows 11 IoT Enterprise 版本，以跳过硬件检测。</p><p>这一版本的特别之处在于，它主要面向配置较低的瘦客户端等设备，这类硬件往往难以满足标准版 Windows 11 的要求。正因如此，微软在 Windows 11 IoT 中有意移除了硬件检测机制，使得老旧设备无需通过修改注册表等「非官方」方式，也能顺利升级到 Windows 11。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/2f84938cafa66c3ad1912e26f6cded43.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">我选择的是 Windows 11 Enterprise LTSC 2024 安装镜像。这个镜像包含了三个版本的 Windows 11，分别是 Windows 11 Enterprise LTSC 和两个 Windows 11 IoT Enterprise LTSC 版本。其中只有 Windows 11 Enterprise LTSC 会在安装时进行硬件检查，而后两个 IoT 版本在安装过程中则不会进行硬件检查。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/1df385188b5433c0fa20290f94648692.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">Windows 11 IoT Enterprise LTSC 在安装过程中也会跳过 OOBE 等设置页面，系统会在安装过程中会自动创建<strong>无密码的本地管理员账户</strong>，一些基础设置<sup class="ss-footnote" href="" title="比如：联网和激活">2</sup>都需要在系统完成安装后，启动到系统桌面后才可以设置。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/761f4c384889c3de10918a1ba47d2085.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">由于默认会创建一个无密码的本地账户，如果你希望后续切换至微软在线账户，需要先为本地账户设置一个密码。此外，切换到在线账户的步骤与之前的 Windows 10 LTSC 有所不同。你需要在「设置」-「账户」-「电子邮件和账户」-「其他应用使用的账户」中添加你的微软账户并登录，系统随后会自动将本地账户切换为在线账户。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/00287dc6d4840e412264dfad7f9d1d34.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">这种方法确实存在一些缺点。首先，对于普通用户来说，Windows 11 Enterprise 版本属于批量授权的版本，因此系统激活并不方便。</p><p style="margin-left: 0px;">其次，通过这种方式升级到的 Windows 11，并不会像普通版本的 Windows 11 那样获得最新的「花哨」的功能更新，不过胜在稳定。如果你真的需要及时跟上功能更新的话，请参考方案二。</p><p style="margin-left: 0px;">如果你还希望通过 Microsoft Store 安装应用，可以采用类似于 Windows 10 Enterprise LTSC 中安装 Microsoft Store 的<a href="https://github.com/kkkgo/LTSC-Add-MicrosoftStore">方法</a>。</p><h2>方案七：第三方精简版 Windows 11</h2><ul><li>优点：激活方式类似消费版 Windows 11、移除了臃肿的 Windows 组件但依旧可以获得例行安全更新。</li><li>缺点：精简可能导致系统兼容性变差、需要下载安装中文语言包。</li></ul><p style="margin-left: 0px;">当然更多的人不愿意升级到 Windows 11 大概不是因为硬件不支持，而是 Windows 11 里没用的东西太多了，又或者广告太多了。这里我们给出一个有别于上述官方镜像以外的另一个选择：第三方精简版 Windows 11。</p><p style="margin-left: 0px;">这里我们选择 Tiny11 精简版，我们可以直接在<a href="https://archive.org/download/tiny-11-NTDEV">其镜像发布地址</a>下载适用自己处理器架构的镜像，然后使用 Rufus 将镜像烧录到 U 盘中，需要注意的是 Tiny11 的镜像已经移除了硬件检测，同时也移除了对登录微软账户的要求，因此烧录时不需要勾选任何设置项。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/3d8b5d7746b78b488ba7ffedf11d1ad9.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>安装 Tiny11 的过程相对简单，基本上只需点击「下一步」，然后创建本地账户即可自动进入系统。需要注意的是，由于 Tiny11 是基于英文版 Windows 11 镜像制作的，因此在登录系统后，你需要手动添加<sup class="ss-footnote" href="" title="流程如下：「Setting」-「Time&amp;language」-「Language&amp;region」-「Add a language」，在搜索框中输入「China」，选中「中文」并勾选相关选项来等待下载安装后重启即可进入到中文用户界面了。">3</sup>中文语言支持。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/6bceff741a8a2de81d470de0642f341f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">不过即使添加了中文语言支持，仍可能遇到中文内容显示不正常的问题。这是因为中文默认字体在精简过程中被移除了。你还需要下载制作组提供的中文字库包。将其解压并安装到系统中，然后重启电脑，即可恢复中文显示功能。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/5d5b380702ee7f78fe4583215c223868.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">安装后的系统非常干净，仅仅保留了 Microsoft Store 以及微软账号服务等大多数人常用的核心组件。所以该系统的资源占用相当低，整体运行后的内存占用大约在 3GB 左右，即使是十年前的电脑硬件也能流畅运行。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2024/05/05/2bdfd8e060dd5f22eae3270addf9f585.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">因为 Tiny11 对 Windows 11 的系统组件进行了大幅度的精简，系统稳定性肯定不如官方的 Windows 11。因此，不建议在企业生产环境中使用精简系统。</p><h2>总结</h2><p>信息安全对于普通用户和企业来说都极为重要。随着大部分 Windows 10 版本逐渐接近其生命周期终点（EOL），我们也应该找找别的出路了。</p><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://sspai.com/link?target=https%3A%2F%2Fwww.xiaohongshu.com%2Fuser%2Fprofile%2F63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的&nbsp;<a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/103074</id>
-            <title>众测 | 邀你一同探索模块化迷你主机 Khadas Mind 2</title>
-            <link>https://sspai.com/post/103074</link>
-            <guid isPermaLink="false">https://sspai.com/post/103074</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 14 Oct 2025 03:28:06 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>近年来，桌面计算设备正朝着「小型」「极简」的方向演进。大家普遍希望，在保持桌面整洁的同时，获取不妥协的性能体验。但如果计算机可以进一步脱离「桌面」这一场景限制，在不同设备形态间无缝切换，又会带来怎样的想象空间？</p><p>这正是模块化迷你主机先行品牌 Khadas 想要探讨的未来。为此，我们很高兴与 Khadas 合作，共同发起一项最新产品 Khadas Mind 2 的众测活动。通过本次众测，我们希望邀请同样身为「技术先行者」的少数派用户一同探索这款模块化迷你主机的实际表现，并听取大家的独到见解。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/14/article/90cd5918b4a167dae5c6260175be08bf.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>产品介绍</h2><p>Khadas Mind 是一款能放进口袋的高性能计算机主机。它的核心理念，是将计算单元与外围设备分离，让一个「主机大脑」通过模块化自由扩展，无缝融入你的多元工作流，实现「创造不中断」的体验。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/14/article/366c3fa61e95b8026ce053374b123353.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/14/article/2c841ce8f776ede0b90bca2eb84a5d60.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>核心，是自由的开始</h3><p>Mind 主机是整个生态的起点。它重量仅 450 克，尺寸接近四分之一张 A4 纸，可以轻松携带。其内部搭载了第 13 代英特尔酷睿 i7-1360P 处理器（4 性能核+ 8 能效核）和锐炬 Xe 显卡，辅以最高 32GB 的 LPDDR5 板载内存和 1TB 内置 PCIe 4.0 固态硬盘（并提供一个 M.2 扩展插槽），以应对专业且繁重的工作。</p><h3>模块化生态，为场景而生</h3><p>当然，便携只是基础。Mind 的强大之处在于其不断扩展的模块化生态系统 —— Mind Family。它就像一套「乐高积木」，让你能根据当下需求，即刻搭建出最适合的生产力系统。</p><p>目前，Khadas 围绕 Mind 主机构建了两款扩展模块，以对应不同的使用需求：</p><ul><li>Mind Dock 是一款全功能扩展坞，通过磁吸与主机连接，提供 2.5Gbps 以太网口、多个 USB 3.2 Gen1 接口、HDMI 2.0、SD 读卡器和 3.5 毫米耳机孔，还集成了指纹识别模块、6W 扬声器和音量旋钮。与主机搭配时，可同时连接 4 个 4K 显示器或两个 8K 显示器，应对多任务协同办公。</li><li>Mind Graphics 是一款外置显卡扩展坞，内置了桌面级的英伟达 RTX 4060Ti 显卡，通过 PCIe 4.0 与 Mind 主机直连，提供了包括 USB 4、DisplayPort 1.4a、HDMI 2.1a、SD 4.0 读卡器在内的多种接口，并集成 300W 氮化镓电源和高效散热系统，将便携主机变为一台专业的创意工作站。</li></ul><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/14/article/eb6e8fe0f1380f2060667171603fd8e1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/14/article/55678863ab8d54b1a5b2f43863309a81.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>工作流不中断，思绪不断点</h3><p>为了与这些模块配合，Mind 主机配有专利扩展接口 Mind Link，通过 PCIe 5.0、USB 3.2 Gen2、HDMI 2.1 等高速协议，实现主机与扩展模块间的数据和电力传输。</p><p>为实现跨场景的无缝切换，Mind 主机内置了一块 5.55Wh 的备用电池。当用户将主机从一个扩展坞上取下时，系统会自动进入睡眠模式，保存当前工作状态。当连接到新的扩展模块或电源时，系统会即时唤醒，用户可从中断处继续工作，无需关机或保存文件。</p><h2>活动详情</h2><p>本次众测活动将分两期举行，每期将挑选 10 名少数派用户，免费提供包含上述主机和所有扩展模块的全套 Mind Family 供体验。</p><p>每位用户的体验期为 30 天（自收到产品之日起计算）。参测用户需要在体验期结束前，在少数派发布一篇详尽、客观的体验文章。文章长度、体例不限，但应反映对产品外观设计、性能表现、散热控制、模块化生态，以及对个人使用场景中的助益等方面的观察和思考。</p><p>活动结束后，我们将根据文章质量评选出若干优秀文章，并提供不同等级的奖励：</p><ul><li>每期优胜奖一名：获得 Mind Family 一套</li><li>每期优秀奖一名：获得 akko MOD007B 三模磁轴机械键盘一个</li><li>参与奖：所有按时提交符合要求的文章作者，都将获得少数派周边及 Khadas 产品优惠券</li></ul><h2>报名方式</h2><p>请对参与本次众测感兴趣的用户在 10 月 17 日（周五）结束前填写如下表单。名额先到先得，并会优先考虑在少数派等内容平台发表过优质文章的作者以及少数派会员用户。我们将陆续通过站内信通知选中的用户并寄送产品，敬请留意。</p><p><a href="https://sspaime.feishu.cn/share/base/form/shrcnRuT4c903D8MWlgKPqJN1Rc">前往报名</a></p><hr /><p><strong>条款与条件</strong></p><p>提交申请前，请仔细阅读并理解以下条款，申请将被视为已同意所有内容。</p><ol><li>你须根据活动介绍和报名表的要求，提供真实、准确、完整的个人资料与体验计划。如存在不实信息，少数派保留取消资格和奖项的权利。</li><li>本次活动提供的所有测试产品所有权归属于产品提供方。你在体验期间仅拥有产品的使用权。你应以测试和评估为唯一目的使用产品，并应妥善保管，避免产品遭受任何非正常使用导致的损坏、丢失或被盗。在体验期结束后，你须根据少数派的指引，将测试产品及其所有配件完好寄回。（奖励发放独立于上述产品回收流程。）如因你的人为原因导致产品严重损坏或丢失，少数派保留要求相应赔偿的权利。</li><li>你须在规定期限内，独立完成并提交一篇原创的评测文章。文章内容需客观、真实，不得包含任何形式的抄袭、AI 生成内容或数据造假。你知悉并理解，本次活动提供的测试产品可能为工程样品，其性能、软件或外观可能与最终零售版存在差异。</li><li>你同意，一旦提交评测文章，即授予少数派及其合作伙伴（包括但不限于 Khadas）一项全球范围、永久、免版税、独家的使用许可，其范围包括以推广、存档或展示为目的，在任何媒体平台（包括但不限于官方网站、社交媒体、合作渠道）上发布、复制、改编或分发你的评测内容（包括文字、图片与视频）。评测文章的署名权永久归创作者（你）所有。</li></ol>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/103071</id>
-            <title>派早报：vivo 发布 X300 系列等新品，iPhone Air 发售定档等</title>
-            <link>https://sspai.com/post/103071</link>
-            <guid isPermaLink="false">https://sspai.com/post/103071</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 14 Oct 2025 00:35:14 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <h2>少数派的近期动态</h2><ul><li>10 月 14 日晚 19:30，MeetCard 正式上线，欢迎来到直播间一探究竟。<a href="https://sspai.com/post/102977"><strong>进一步了解</strong></a></li><li>少数派 1024 程序员节征文：码上，与鸿蒙一起进击。<a href="https://sspai.com/post/102635"><strong>进一步了解</strong></a></li></ul><h2>你可能错过的文章</h2><ul><li><a href="https://sspai.com/post/102738">鸿蒙 1024｜沽酒家 × 鸿蒙：何以诗天下？</a></li><li><a href="https://sspai.com/post/102934">为捕捉新视角提供更多可能：摄影师 Austin Mann 评 iPhone 17 Pro</a></li><li><a href="https://sspai.com/post/103067">派评 | 近期值得关注的 App</a></li></ul><p>&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/103067</id>
-            <title>派评 | 近期值得关注的 App</title>
-            <link>https://sspai.com/post/103067</link>
-            <guid isPermaLink="false">https://sspai.com/post/103067</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 13 Oct 2025 10:06:41 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>欢迎收看本期《派评》。你可以通过文章目录快速跳转到你感兴趣的内容。如果发现了其它感兴趣的 App 或者关注的话题，也欢迎在评论区和我们讨论。</p><h2>值得关注的新 App</h2><p>虽然少数派一直在为大家发现和介绍各平台上的优质 App，但仍有不少设计、功能、交互、体验都非常优秀的 App，还没有被我们发掘和介绍。它们可能是一款老 App，也可能是近期上架的新 App，我们会在这里介绍给你。</p><h3>Sora：AI 视频创作新高度，以假乱真难分辨</h3><ul><li>平台：iOS</li><li>关键词：AI、视频生成</li></ul><p><a class="ss-atUser" href="https://sspai.com/u/whoops">@Vanilla</a>：最近一个月，OpenAI 可以说牢牢占据着 AI 领域的聚光灯，除了先后与英伟达、AMD 等公司达成了股份和硬件上的合作之外，推出的 Sora 2 视频生成模型也是让人感到非常惊艳，已经达到了非常高的可用度。国庆长假期间，我看 <a class="ss-atUser" href="https://sspai.com/u/a5xddvxl">@玉树芝兰</a> 老师每天都在朋友圈不亦乐乎地发着 Sora 2 生成的视频，于是找朋友要了一个邀请码体验了一下。</p><p>打开 Sora 应用后，它会提示你扫描你的人脸，以生成个性化的视频。如果你不想使用自己的人脸，可以跳过，后面如果想要添加也能方便重新扫描。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/article/7257746ef883c863efd5e9ff4c02b06e.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>Sora 应用的核心功能自然是创建视频，点击界面底部的加号按钮即可。在编辑界面中，我们可以添加图片和文字描述，也可以添加人物，而这个功能是 Sora 2 的灵魂，因为它可以将所有创作者上传的真实模样融入到 AI 创作的视频中。我们可以通过 @ 功能来将 Sora 应用中已经上传的任意人物加入到视频中，而这些被加入的人物也可以看到包含他们真实模样的所有视频。如果你希望用你自己的真实模样来创作 AI 视频，那么点击「Add yours」按钮就可以重新扫描你的人脸。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/article/c275d4acb15f4d6d97f6fb015c62228c.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>需要说明一下，我们不能在 Sora 中创作涉及公众人物的 AI 视频，除非这些公众人物（比如亲自上阵的 Sam Altman）通过 Sora 上传了人像 cameo 并且同意了协议，否则 Sora 会拒绝生成相关的视频。</p><p>除了创作界面，Sora 的应用主要分为了四个标签页，分别是主页、搜索、活动、个人。主页就是大家熟悉的短视频流，在这里可以浏览通过 Sora 创建的 AI 视频，你可以进行点赞、评论、二创、分享、关注等操作，同时还能切换 For You、Following、Latest 等不同的时间流。很意思的是，你还可以根据自己的心情来挑选视频流，只需在「Pick a mood」这里输入关键词即可，Sora 就会为你挑选相应的 AI 视频。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/article/2cb3bb2c5b19df59d05c09f831293f60.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>搜索和活动界面就顾名思义了，我们可以在这两个标签页中通过关键词搜索 Sora 用户并查看他的主页，以及查看自己在 Sora 应用中进行的所有活动。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/article/b6ea9a95a37eeaa3709f81f3575e77fb.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在个人界面中，我们可以查看自己创建的人像 cameo 以及所有自己生成视频，包括草稿和发布的视频。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/article/7796c9e80871758e9c52d9be20c45c51.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>Sora 应用可以在 <a href="https://apps.apple.com/us/app/sora-by-openai/id6744034028?l=zh-Hans-CN">App Store (外区)</a> 中免费下载，不过目前仍需要邀请码才可以正常使用。</p><span class="ss-application">&nbsp;</span><h3>2Camera：旧设备也能用上双重拍摄</h3><ul><li>平台：iOS</li><li>关键词：视频拍摄</li></ul><p><a class="ss-atUser" href="https://sspai.com/u/ul0vcezb">@Snow</a>：iPhone 17 系列的发布，让双摄前后同步录制这一功能火了起来。其实在 Apple 官方推出之前，诸如 DoubleTake、Dualgram、美颜相机等诸多应用早已可以帮你实现该功能。9 月底上架的这款由 <a href="https://sspai.com/search?q=MenubarX">MenubarX</a> 开发者开发的 2Camera，则在实现「双重拍摄」功能的基础上，采用了 iOS 26 Liquid Glass 设计，让你使用旧设备也可以获得接近于原生的双重拍摄体验。</p><p>2Camera 的 UI 设计非常简洁，点击底部中心的「快门」按钮即可开始录制视频。如果你只需要拍摄照片，点击快门右侧的「模式切换」按钮，则可以在视频录制和照片拍摄间进行切换。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/cd3bf0af4861744f64f06ea84765cdaa.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>应用首次启动默认为「画中画」布局，按住画中画小窗，你可以将其移动至屏中任意位置，双击屏幕则可以快速对调双摄像头内容，而且 2Camera 支持在视频录制过程中进行小窗移动和切换操作，如果你想录一些鬼畜视频，它甚至可以为你省去一些后期工程。</p><p>点击底部最右侧的「更多」按钮打开菜单，点击切换布局，即可在画中画、上下分屏、左右分屏、单摄像头共 4 种布局间进行切换，你也可以在「更多-设置-外观-布局」中进行更直观的快速切换。在外观设置中，你还可以对画中画形状、尺寸以及边框的粗细、颜色、透明度进行自定义。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/2bf18fc8622387c6eed7bb4f6966d4d8.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>相比于画面呈现上的高自由度，2Camera 在功能和录制规格上，相较于同类应用就显得有些不足了。目前 2Camera 仅支持调用背后主摄与前置摄像头，无法像 DoubleTake 那样自定义调用超广角或长焦镜头。另外，2Camera 目前仅能在照片拍摄的模式下，同时输出拼合和独立素材，并可在 1080p 或 4K 分辨率间切换，视频拍摄则只能输出 1080p 30fps 的拼合内容，这个规格可能有点不太够用。</p><p>2Camera 目前最低支持搭载 iOS 17 的 iPhone 11 系列机型，如果你手持旧设备也想体验「双重拍摄」的乐趣，目前正在首发限免期的 2Camera 会是一个零门槛的选择。</p><p>你可以在 <a href="https://apps.apple.com/cn/app/2camera-%E5%8F%8C%E9%87%8D%E6%8B%8D%E6%91%84%E7%9B%B8%E6%9C%BA-%E5%89%8D%E5%90%8E%E5%8F%8C%E6%91%84%E5%83%8F%E5%A4%B4-%E5%90%8C%E6%AD%A5%E5%8F%8C%E6%8B%8D%E5%BD%95%E5%88%B6/id1584095090">App Store</a> 上免费下载 2Camera。</p><span class="ss-application">&nbsp;</span><h3>QRAlarm：用二维码克服你的起床困难症</h3><ul><li>平台：Android</li><li>关键词：闹钟</li></ul><p><a class="ss-atUser" href="https://sspai.com/u/69zxdqx8">@大大大K</a>：闹钟用久了之后，每次铃声一响，我靠肌肉记忆就能按掉铃声、翻个身子继续睡。以前我也尝试过各种「另类」闹钟 App，例如需要做数学题或者拍摄某个指定照片的闹钟，但前者容易在床上计算完成后继续睡觉，后者则容易因为光线或物品挪动导致拍摄失败。不过今天我发现了这款能通过二维码来关闭闹钟的 QRAlarm。它既可以将二维码张贴在家里的任意位置、让我「强行起床」，也有更高的容错率，不会因为某些客观因素导致识别失败。</p><figure class="image ss-img-wrapper image_resized" style="width: 350px;"><img src="https://cdnfile.sspai.com/2025/10/13/article/82041b1c0d41f3d05d517891674bab62.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>QRAlarm 提供两种扫码方式，一种是在创建闹钟时导出 App 生成的二维码，然后我们自己打印出来贴到家里的某个角落；另一种方式我认为更方便，我们在创建闹钟时可以直接录入现成的二维码，比如家电能耗等级标签上的二维码，或者某个鞋盒上的二维码，而不需要我们自己打印后再张贴。</p><figure class="image ss-img-wrapper image_resized" style="width: 350px;"><img src="https://cdnfile.sspai.com/2025/10/13/article/441b18f3705f6b7b351f72fd92da1e0a.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>对于二维码可能突然破损或丢失的情况，QRAlarm 提供了一种「随机进度条」的应急模式。闹钟响铃后进入应急模式，我们必须将进度条拖动到 App 指定的数值并且完成多次后才能关闭响铃。这种模式需要进行更精细的操作，也能够让我们的意识变清醒。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/article/17f907cb3587311cf48af347c168ab28.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在闹钟功能方面，QRAlarm 也做得不错。除了常规的重复周期和稍后提醒设置，App 还支持部分手机自带闹钟都不支持的「温柔唤醒」功能。如果你的二维码包含网站链接，QRAlarm 还支持自动跳转网址，如果你恰好有一点开发能力，或许可以通过这个功能实现某种家居自动化控制。</p><figure class="image ss-img-wrapper image_resized" style="width: 351px;"><img src="https://cdnfile.sspai.com/2025/10/13/article/e9bc4570b49c534241dad6698703d4fd.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>你可以在 <a href="https://play.google.com/store/apps/details?id=com.sweak.qralarm">Google Play</a>、<a href="https://github.com/sweakpl/qralarm-android">GitHub</a> 和 <a href="https://f-droid.org/packages/com.sweak.qralarm/">F-Droid</a> 上免费下载 QRAlarm。</p><span class="ss-application">&nbsp;</span><h3>Remote Numpad：把手机变为掌心里的数字小键盘</h3><ul><li>平台：Android</li><li>关键词：数字键盘</li></ul><p><a class="ss-atUser" href="https://sspai.com/u/5isr02uh">@Peggy_</a>：出于各种各样的原因，我放弃了使用单位电脑上自带的原装键盘，过于长的键盘让它在我的桌面上显得无处安放，糟糕的手感直接让工作也变成了一种折磨。于是我随之更换了自己购买的 87 键键盘，但是缺少了专门的数字小键盘，偶尔遇到需要高频输入数字的场景（如输入成绩、统计身份证等信息）时又让工作效率大大降低。</p><p>Remote Numpad 则想要充分利用我们手边最常见的设备——手机来扩展出一个数字小键盘。这样一来，偶尔遇到短期高频输入数字的场景，手机这种捧在手里的小型工具反而更加趁手。既然想要在电脑上使用手机来控制输入，那么两边的设备都需要我们做一番工作，手机上直接下载 Remote Numpad 并给予「允许发现周边设备的权限」即可。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/article/87638f936c1b8728f0f4539d206da9ed.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>电脑上需要我们通过此 <a href="https://github.com/guillaumevpayet/remote-numpad-server/releases">github</a> 页面下载 Remote Numpad Server，安装后开启服务，从而使应用具备与电脑连接的能力。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/article/c54fbf251ea19a44c975ee1bc8d42836.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在手机端，我们需要进入设置界面，选择合适的连接方式，目前经过尝试，我这边最为稳定的方式是第三种。设置完成后回到主界面点击「连接」便能顺利完成所有前期工作了，接下来我们便能将手机作为电脑的数字小键盘来使用了。键盘上除了十个数字外，还有小数点以及常见的运算符号，并且给出了回车键，方便我们连续输入数据时快速切换。</p><figure class="image ss-img-wrapper image_resized" style="width: 349px;"><img src="https://cdnfile.sspai.com/2025/10/13/article/e406b5e827a9f532fd87fc054542efcb.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>此外， Remote Numpad 右上角的删除按钮可以点击来切换键盘锁定按钮，需要时随时点击切换即可。而如果你想要打字的反馈效果，那么也可以点击右上角开启振动，唯一美中不足的是，数字小键盘的手感如何全靠手机自身的振动效果来体现，自然是比不上实体键盘。</p><figure class="image ss-img-wrapper image_resized" style="width: 353px;"><img src="https://cdnfile.sspai.com/2025/10/13/article/9c129ee2fec7687264fce60b75069c2f.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果你恰好有需求，不妨通过 <a href="https://f-droid.org/packages/com.guillaumepayet.remotenumpad">F-Droid</a> 或 <a href="https://play.google.com/store/apps/details?id=com.guillaumepayet.remotenumpad&amp;hl=en_US">Play Store</a> 下载体验 Remote Numpad，应用完全免费。</p><h3>MinuteTick：灵活的 Mac 提醒小工具</h3><ul><li>平台：macOS</li><li>关键词：提醒</li></ul><p><a class="ss-atUser" href="https://sspai.com/u/liuxiaofengone">@化学心情下2</a>：MinuteTick 是一款 Mac 上的「小品应用」，功能很简单，它可以在你设置的每个小时内具体的分钟时间推送通知向你发送提醒，比如你希望每小时的半点提醒你喝水、每小时的第 45 分钟提醒你休息等等。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/article/bef5b436ce4fa2896a01b52de2b9f495.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>对于提醒时间的设置，MinuteTick 提供了丰富的选项：如果你想要系统随机提醒你，那么可以点击 Select Random；如果希望提醒的时间批量往前一分钟或者往后一分钟，可以点击 Shift Left 或者 Shift Right 批量调整时间。如果你希望提醒仅限制在工作日，可以在设置中的 Quiet Time 选项里选择 Disable All day on 并勾选具体的日期。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/article/fa1db277aeee772627df69608605b415.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>你可以选择让应用只发送提醒，也可以在提醒中加上自定义的文本内容，；如果你写了多条文本，也可以选择随机或者按照次序显示在每一次不同的提醒上。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/article/087ad98dc357fe75211be6a4b5fdcc41.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>除了发送自定义提醒，你还可以使用 MinuteTick 来「摸鱼」：应用里隐藏了一个贪食蛇游戏，只需要点击 Play Snake 就可以使用键盘方向键游玩，让紧张工作的你可以暂时放松身心。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/article/1b5b88f5255f0167b808065dab0c8ddd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>你可以在 <a href="https://apps.apple.com/us/app/minutetick/id6751045209?l=zh-Hans-CN&amp;mt=12">App Store</a> 下载购买 MinuteTick，应用售价 15 元。</p><span class="ss-application">&nbsp;</span><h2>不容错过的 App 更新</h2><p>除了「新鲜」App，App Store 中的许多老面孔也在不断迭代、更新，增加更多有趣和实用的功能。少数派希望帮你筛选 App Store 中值得关注的 App 动态，让你快速了解 App 和开发者们的最新动态。</p><h3>Blackmagic Camera：支持 iPhone 17、新增远程片段同步功能</h3><ul><li>平台：iOS、Android</li><li>关键词：影像、摄影</li></ul><p><a class="ss-atUser" href="https://sspai.com/u/914r3btn">@ElijahLee</a>：著名的手机端摄影应用 Blackmagic Camera 迎来了 3.0 版本的更新，新版对应用布局与导航进行了重构、引入了单镜头与变焦控制，加入对 iPhone 17 系列新硬件特性的支持，新增远程片段同步功能和内建 LUT 管理器等。这些更新使得 Blackmagic Camera 从一个较基础的移动摄影控制工具，向具备更专业控制能力的移动数字电影摄影机演进。</p><p>首先是应用 UI 与导航进行了重构。镜头取景器左右两侧各增加三个点按钮，这是新增的快速控制功能：点击左侧区域可以快速访问预设、场记板及相机控制；右侧新增支持三个可供编程的功能键 F1-F3，可以在「设置」&gt;「Function buttons」中自定义相应的功能，涵盖了从自动对焦、延时、显示参数等一系列控制操作。在 UI 布局方面，在镜头的顶部列示了一系列当前的摄影参数，包含镜头焦距、帧率、快门时间、ISO 等常用的参数。下方则是直方图、设备存储情况、麦克风等控制区域。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/67b7ba7e17adc9bc3079974d8bf2953b.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在右侧的功能区，引入了单镜头与变焦控制，加入对 iPhone 17 系列新硬件的支持，提供 48 mm、 100 mm、200 mm 等焦距控制，并且支持 Dolly Zoom 效果，可以实现更加丝滑的镜头推拉与变焦控制。FPS 控制面板扩展支持了慢速和延时选项。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/92fb63595ff722289050617606fc8074.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>新增的远程片段同步功能，可以直接从当前的控制设备同步来自远程摄影机的录制片段。在之前，远程摄影机的录制片段只能通过手动拷贝的方式，导入到当前设备。这项新功能需要在应用的「设置」&gt;「远程摄影机控制」&gt;「Sync Clips To Controller after Record」中打开。之后，在控制设备的媒体页面，我们就可以选择远程摄影机的录制片段并进行自动同步。这项功能进一步强化了多设备协同拍摄的创作效率。</p><p>Blackmagic Camera 3.0 版本内建 LUT 管理器，并在摄影机页面提供了独立的控制按钮，我们可以快速选择色彩空间，也可以导入、导出，并且已经支持全新的 Apple Log 2、Rec.709、Rec.2020、P3 D65 等色彩空间。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/13/f9f15f367942d16a6d1265052caf1de1.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在最新的版本中，Blackmagic 还支持了最高 1920x1440 分辨率的 OpenGate 视频机内录制，不像系统相机 app 录制 OpenGate 视频必须要接入外接硬盘；使用 Blackmagic 机内录制 OpenGate 视频，最高可以选择 ProRes 422 HQ 的编码格式，ProRes RAW 和 ProRes RAW HQ 编码格式目前依然必须外接硬盘才可以进行拍摄。</p><p>此外，Blackmagic Camera 3.0 版本还有更多新的功能，包括直方图和音频表可以扩展至全屏显示、在自动模式下支持自动曝光控制等。</p><p>你可以从 <a href="https://apps.apple.com/cn/app/blackmagic-camera/id6449580241">App Store</a> 免费下载使用 Blackmagic Camera，不包含任何内购。</p><span class="ss-application">&nbsp;</span><h2>App 速报</h2><ul><li>Apple <a href="https://support.apple.com/zh-cn/123359">宣布</a>停止维护并下架可立拍 app。</li><li>老牌自托管 RSS 服务 Tiny Tiny RSS <a href="https://community.tt-rss.org/t/the-end-of-tt-rss-org/7164">宣布</a>将停止维护并关停。</li></ul><p>&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/102976</id>
-            <title>陌生而有趣的训练伙伴——滑行盘和 TRX 训练带使用指南</title>
-            <link>https://sspai.com/post/102976</link>
-            <guid isPermaLink="false">https://sspai.com/post/102976</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 13 Oct 2025 09:45:01 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>常去健身房的朋友或许有同感：除了熟悉的哑铃和杠铃，总有些新奇的训练工具，让人好奇却又不知如何下手。经过一番探索，我发现这些工具各有其独特的魅力和功用，其中一些不仅适用于健身房，也非常适合居家训练。</p>
-<p>在之前的文章中，我们已经介绍了壶铃、药球、跳箱、敏捷梯、波速球和 ViPR 炮筒。今天，我们继续来认识两位新的训练伙伴——滑行盘（Gliding Discs）和 TRX 训练带。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/10/article/614a4c2c64fdcfe1a265e41eb8dc45ba.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<h2>置身溜冰场的「滑行盘」</h2>
-<p>在健身房的功能性训练区，你或许见过两个不起眼的「小圆盘」——它们一面是光滑的塑料，另一面是柔软的泡棉，这就是滑行盘。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/10/article/b50ee26652acbd9af5fd8455391d4f85.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>这个小工具由美国私人教练瓦莱丽·沃特斯（Valerie Waters）发明。据说，有一次她在客户家授课时，想带客户做滑动的弓步，因缺少工具便用毛巾代替，成功实现了想要的效果。后来，她发现用来移动重型家具的「家具滑垫」能达到更好的训练效果，受此启发，她开发并推广了专门用于健身的滑行盘，并以自己的名字命名为「ValSlide」。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/10/article/22eea748099153bbf0b493d2e606a731.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>这个故事也揭示了滑行盘的核心原理：<strong>利用光滑面制造低摩擦环境以实现滑动，同时用泡棉面确保与身体接触的稳定性。</strong></p>
-<p>使用滑行盘时，就仿佛置身于光滑的冰面，任何轻微的动作都会带来大范围的滑动。此时，你的身体需要保持高度稳定来防止失衡，这对全身的稳定肌群，特别是核心肌群来说，是极大的挑战。</p>
-<p>不过无需过分担心安全。与真实的冰场不同，滑行盘创造的是一个面积有限、完全可控的「打滑」环境。例如，你可以将一只脚踩在滑行盘上，另一只脚稳定地踩在地面；或者俯卧时双脚踩盘，双手接触地面。这些方式都能创造出安全而有效的滑动训练条件。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/10/article/573dfe09fa26b27407e6cf5cecc9812c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<h3>为什么滑行盘值得你一试？</h3>
-<p>滑行盘虽然未在传统力量健身领域普及，却已广泛应用于普拉提和瑜伽中。它体积虽小，但训练效益非常全面，尤其适合希望在家进行高效锻炼的人群。</p>
-<p><strong>小巧便携，你的</strong>「<strong>口袋健身房</strong>」</p>
-<p>滑行盘构造简单，价格亲民，是性价比极高的健身设备。其小巧的造型便于携带，可以轻松塞进背包或行李箱，是名副其实的「口袋健身房」，无论在家、出差还是旅行，都能随时拿出来锻炼。许多滑行盘还配备了布套，使其在木地板、瓷砖或地毯上都能无障碍使用。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/10/article/14a486d385afa3a8902fea1023cb48d7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p><strong>增加动作幅度，提升灵活性</strong></p>
-<p>在进行弓步等下肢训练时，使用滑行盘能让腿滑得更远，轻松实现比常规动作更大的运动范围。这个过程不仅是力量训练，更是一次动态拉伸，能有效提升肌肉柔韧性与关节灵活性，改善身体僵硬。</p>
-<p><strong>创造不稳定环境，提升稳定性</strong></p>
-<p>滑行盘的核心魅力在于「不稳定」。当你的手或脚在滑盘上时，身体为了控制滑动、维持平衡，核心及下肢的稳定肌群必须全程高度紧张。这种持续的张力能高效激活常规训练难以触及的深层稳定肌群，让你的核心力量和稳定性得到质的飞跃。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/10/8d103f82ec99105af2e545ae0debb20b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p><strong>用途多样，让训练告别枯燥</strong></p>
-<p>滑行盘的用途远不止锻炼腿和核心。将它置于手下，可以挑战滑行俯卧撑、开合俯卧撑；置于脚下，则能让登山跑、腿弯举等动作的难度瞬间升级，为你的训练计划注入新鲜感与趣味性。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/10/article/0fa44276d9d7c5c0b865b86c6c6dfd53.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<h3>学几个滑行盘训练动作</h3>
-<p>了解其好处后，我们来学习 5 个经典的滑行盘动作，全面感受它的作用。练习前，请确保地面平整，并根据地面材质选择滑行盘合适的一面朝下。</p>
-<p><strong>1. 滑盘后撤弓步</strong></p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/10/article/8f199c23ee255a752a189b1a4755a05e.gif" /></figure>
-<p>这个动作是传统弓步的升级版，能更深层地刺激臀腿，同时考验单腿平衡能力。</p>
-<p><strong>动作要领：</strong></p>
-<ul>
-    <li>自然站立，将一只脚的前脚掌踩在滑行盘中心，另一只脚（支撑腿）稳定踩地。</li>
-    <li>双脚与肩同宽，保持腰背挺直。可双手持哑铃或壶铃置于胸前进行负重。</li>
-    <li>支撑腿屈膝下蹲，同时踩着滑盘的腿向后平稳滑动，身体重心主要落在支撑腿上。</li>
-    <li>下蹲至前侧大腿与地面平行，后侧膝盖可轻触地面。</li>
-    <li>支撑腿发力站起，带动后腿向前滑回，恢复直立姿势。</li>
-</ul>
-<p><strong>重要提示：</strong></p>
-<ul>
-    <li>踩在滑盘上的腿主要负责维持稳定，不承担过多体重。</li>
-    <li>下蹲时，前腿膝盖与脚尖方向保持一致，全程挺直背部。</li>
-    <li>动作需缓慢且有控制，尤其是拉回过程。完成一侧的预定次数后，再换另一侧。</li>
-</ul>
-<p><strong>2. 滑盘侧弓步</strong></p>
-<p>侧弓步是锻炼大腿内侧和臀部外侧的绝佳动作，加入滑盘后，拉伸感和控制难度都会翻倍。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/10/article/1e03fedc5259617cc06f90a04c3bdcee.gif" /></figure>
-<p><strong>动作要领：</strong></p>
-<ul>
-    <li>自然站立，将一只脚的前脚掌踩在滑行盘中心，另一只脚（支撑腿）稳定踩地。</li>
-    <li>双脚与肩同宽，保持腰背挺直。可双手持哑铃或壶铃置于胸前进行负重。</li>
-    <li>保持支撑腿稳定，踩着滑盘的腿向外侧笔直滑出。</li>
-    <li>向外滑动的同时，臀部向后坐，身体重心落在支撑腿上，顺势下蹲。</li>
-    <li>滑到你能控制的最大幅度，感受滑动腿大腿内侧的拉伸感。</li>
-    <li>依靠支撑腿的臀腿力量及滑动腿内侧的收缩力，将身体拉回起始姿态。</li>
-</ul>
-<p><strong>重要提示：</strong></p>
-<ul>
-    <li>动作关键是臀部向后坐，而非膝盖向前顶。</li>
-    <li>支撑腿下蹲时，注意膝盖与脚尖方向一致。</li>
-    <li>用滑动腿的内侧肌群发力拉回滑盘，而不是单纯地向回蹬。</li>
-</ul>
-<p><strong>3. 滑盘腿弯举（离心）</strong></p>
-<p>这是一个针对大腿后侧肌群的离心动作（肌肉在发力过程中被逐渐拉长），你会感受到强烈的刺激。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/10/article/4959f6997e3a8a71b05f609e12811560.gif" /></figure>
-<p><strong>动作要领：</strong></p>
-<ul>
-    <li>仰卧在垫子上，抬起脚尖，将双脚脚跟踩在滑盘上。</li>
-    <li>首先屈膝，将脚跟滑向臀部。</li>
-    <li>臀部发力抬起，形成臀桥姿势。</li>
-    <li>呼气，缓慢伸直双腿，有控制地让脚跟向前滑动。</li>
-    <li>在下放过程中，始终保持臀部和核心收紧。</li>
-    <li>当双腿完全伸直时，臀部再完全落地。</li>
-    <li>吸气，重复动作。</li>
-</ul>
-<p><strong>重要提示：</strong></p>
-<ul>
-    <li>全程收紧腹部，避免腰部过度反弓。</li>
-    <li>下放时要刻意控制速度，对抗重力。</li>
-    <li>初学者可先从较小的滑动幅度开始，熟练后再增加距离。</li>
-</ul>
-<p><strong>4. 滑盘身体拉锯</strong></p>
-<p>这是滑行盘训练中的王牌核心动作，能让你的腹肌感受到前所未有的灼烧感。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/10/article/2dbeb84690a063807bef9f427285d0ed.gif" /></figure>
-<p><strong>动作要领：</strong></p>
-<ul>
-    <li>俯卧，进入手肘支撑的平板支撑姿势，双脚脚尖踩在滑行盘上，手肘位于肩膀正下方，身体呈一条直线。</li>
-    <li>呼气，用肩部和手臂发力，将整个身体向后推动，像锯子一样向后「锯」。</li>
-    <li>注意背部不要下榻，推到你能维持身体姿态的极限位置，稍作停留。</li>
-    <li>吸气，用肩部和手臂发力，将身体拉回起始位置，注意背部不要拱起。</li>
-</ul>
-<p><strong>重要提示：</strong></p>
-<ul>
-    <li>动作的核心在于「躯干刚性」，即全程核心收紧，身体像一块钢板一样稳定。</li>
-    <li>初学者可先从极小的滑动范围开始，感受核心发力。</li>
-    <li>宁可幅度小，也要保证姿势的绝对正确。</li>
-</ul>
-<p><strong>5. 滑盘俯卧撑</strong></p>
-<p>在常规俯卧撑基础上，滑行盘增加了不稳定性，并允许你做出「飞鸟」或「前伸」的动作，从而更深度地刺激胸肌、肩部和核心。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/10/article/8a29fee1f6ec45cdd5b0a3795d19f547.gif" /></figure>
-<p><strong>动作要领：</strong></p>
-<ul>
-    <li>采取俯卧撑准备姿势，可将膝盖跪地以降低难度。</li>
-    <li>将一只手掌放在滑行盘上，另一只手稳定地撑在地面。</li>
-    <li>吸气，身体下降的同时，将放在滑盘上的手向侧方或前方滑出。</li>
-    <li>下降至胸部接近地面，感受胸肌的拉伸。</li>
-    <li>呼气，发力推起身体，同时用胸部的力量将滑盘拉回到起始位置。</li>
-</ul>
-<p><strong>重要提示：</strong></p>
-<ul>
-    <li>核心全程收紧，防止身体在滑动中扭曲。</li>
-    <li>动作要慢而有控制，尤其是在将滑盘拉回的过程中。</li>
-    <li>完成一侧的预定次数后，换另一只手进行。</li>
-</ul>
-<h2>掌控自重的「TRX 训练带」</h2>
-<p>如果说滑行盘是在地面上创造不稳定，那么 TRX 训练带就是将不稳定带到了空中。你可能在健身房见过它：一根主尼龙带悬挂于高处，中下段分叉为两根，每根末端连接着把手。</p>
                 ]]>
             </content:encoded>
         </item>
