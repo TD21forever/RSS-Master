@@ -5,6 +5,181 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/103223</id>
+            <title>派评 | 近期值得关注的 App</title>
+            <link>https://sspai.com/post/103223</link>
+            <guid isPermaLink="false">https://sspai.com/post/103223</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 20 Oct 2025 09:57:41 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>欢迎收看本期《派评》。你可以通过文章目录快速跳转到你感兴趣的内容。如果发现了其它感兴趣的 App 或者关注的话题，也欢迎在评论区和我们讨论。</p><h2>值得关注的新 App</h2><p>虽然少数派一直在为大家发现和介绍各平台上的优质 App，但仍有不少设计、功能、交互、体验都非常优秀的 App，还没有被我们发掘和介绍。它们可能是一款老 App，也可能是近期上架的新 App，我们会在这里介绍给你。</p><h3>Mole：开源的 macOS 深度系统清理工具</h3><ul><li>平台：macOS</li><li>关键词：系统清理</li></ul><p><a class="ss-atUser" href="https://sspai.com/u/liuxiaofengone">@化学心情下2</a>：和 Windows 系统一样，macOS 在运行一段时间后也会生成大量的运行日志、文件 / 应用缓存、同样应用卸载后也会存在遗留文件等各种所谓的「垃圾文件」，尽管这些文件对于 Mac 系统运行影响有限，但却会实实在在地占用宝贵的存储空间，导致系统空间捉襟见肘。虽然已经有 CleanMyMac 这样的应用可以清理系统，但价格也十分高昂，那么还有没有别的好用不贵的选择呢？</p><p>Mole 就是这样一款基于命令行的 Mac 开源清洁工具，这款工具并没有类似 CleanMyMac 的图形化界面，却可以实现清除缓存和垃圾文件、卸载应用、查看磁盘占用情况等多个功能，甚至在深度系统清洁上采用更为高效的办法， 比起 CleanMyMac 更能找到一些不易发觉的系统垃圾文件。</p><p>安装上，我们可以通过两种方法安装，一种方法是打开你的终端，然后输入：</p><pre class="language-shell"><code>curl -fsSL https://raw.githubusercontent.com/tw93/mole/main/install.sh | bash</code></pre><p>或者是通过 Homebrew：</p><pre class="language-shell"><code>brew install tw93/tap/mole</code></pre><p>安装完成后，在终端输入 <code>mo</code> 就可以打开 Mole 了，这里其实主要提供了三个功能：</p><ul><li>清洁 Mac</li><li>卸载应用</li><li>磁盘存储分析</li></ul><p>你只需要使用键盘方向键选择并按下回车即可进入到对应的功能选项。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/23cec6a53c9771abc1686c6bfaf5456c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>首先进入到「清洁 Mac」中，在这里输入系统密码并提权之后，应用就会检查多个位置的缓存文件、运行日志等信息，相比于 CleanMyMac，Mole 还加入了对开发环境中相关工具缓存文件的查找。这里你无需等待确认，应用会自动把找到的缓存文件和日志文件删除。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/9dbcad1132c0146742de24ac91d561c2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果你需要确认哪些文件删除并在你的确认后再执行删除，则需要使用预览模式来清洁文件，只需在命令行输入：</p><pre class="language-shell"><code>mo clean --dry-run</code></pre><p>当然，如果你需要跳过一些应用的关键缓存，不使用 Mole 清理，可以使用如下命令来选择白名单：</p><pre class="language-shell"><code>mo clean --whitelist</code></pre><p>使用空格选中不需要清理缓存的位置，下次清理缓存时会就自动跳过白名单了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/9c92b0e779f591b386955cf51c9be591.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>总的来说，由于加上了对开发类工具的缓存清理支持，Mole 相比 CleanMyMac 的清理效率更高，也确实能清理出更多垃圾文件。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/4e18c044766ee3c66978b1c80f86e806.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>第二项功能则是卸载应用，除了输入 mo 通过选择菜单 Uninstall Apps 之外，也可以使用 <code>mo uninstall</code> 这个命令直接进入应用列表，使用方向键和空格选择需要卸载的应用即可。相比于在文件夹中直接删除应用，通过这种方式卸载应用不仅仅可以把应用本身删除，还可以把应用生成的路径、配置文件等一并全部删除。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/f9c7bedaef01edf779882eafc13fccdf.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>最后一项功能则是对整个磁盘进行空间分析，同样除了输入 mo 选择 Analyze Disk 之外，也可以通过直接使用命令 <code>mo analyze</code> 来选择从哪个路径分析，比如选择 Home Directory 来分析后，Mole 就会列出目录下的占用空间大小以及对应的文件大小，你就可以根据实际情况，选择是否删除相关的文件释放磁盘空间。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/e6d33443fc839f213548bf5f0b0c6e2b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>总的来说，相比于使用第三方图形化的 Mac 清理工具，Mole 的三个功能都做得相当到位，尤其是空间分析功能帮助我找到并删除了隐藏在磁盘上的多个历史遗留大文件，从而进一步释放了原本紧张的 Mac 存储空间。如果你还在纠结于如何更好地清理 Mac 上的大文件、文件缓存，不妨试试这个免费开源的命令行小工具。</p><p>你可以在 <a href="https://github.com/tw93/Mole">GitHub 项目页面</a>了解并下载 Mole。</p><h3>Tomato：「伪装」成番茄时钟的 M3 Expressive 最佳实践</h3><ul><li>平台：Android</li><li>关键词：番茄钟</li></ul><p><a class="ss-atUser" href="https://sspai.com/u/69zxdqx8">@大大大K</a>：Material 3 Expressive（以下简称 M3E）是 Google 为 Android 平台推出的全新设计语言，相比上一代 Material 3，M3E 带来了更加灵活的色块设计、更细腻的动效、更丰富的组件样式等等。不过由于 M3E 发布也才没几个月，很多 App 还没有进行更新，不过对于新开发的 App，直接采用 M3E 进行 UI 设计可以获得更好的视觉效果，就比如这款 Tomato 番茄时钟。</p><p>从功能上来说，Tomato 是一个比较完备的番茄闹钟，用户可以自定义番茄周期次数和各阶段时长，点击计时器也可以切换查看当前周期次数。作为「极简」流派的 App，Tomato 没有内置任何铃声，而是可以直接选取手机系统的提醒铃声，这也是大幅压缩应用体积的方式。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/1a1c2971f47234225f3bcb9ed7cc85a6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>作为采用了 M3E 设计的 App，将 Tomato 看作是 Android 原生 App 也丝毫不违和。除了采用 M3E 标准的风格设计、按钮样式以及动态取色之外，休息状态的圆环采用了与播放控件相同的波浪形进度指示器。App 还接入了 Android 16 的即时更新 API，在 Pixel 等设备上能够通过 AOD 直接查看番茄钟状态。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/8dd324dd71398b18830625cacc91a099.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>对于升级了 OneUI 8 的 Galaxy S24 及更新款式的三星手机，Tomato 也支持 OneUI 的即时简报功能（升级了 OneUI 8 的 S23 或更老型号三星手机用户可以等待 OneUI 8 即时简报「偷渡」方案）。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/64e0dbb771314287d4ca32e772f190fd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>当然了，如果你的手机并不支持任何一种形式的实时活动，Tomato 的标准通知栏控件也能够展示番茄钟进度以及跳过、暂停等操作，与实时通知功能相同，使用起来也是非常方便。现在，你可以在 <a href="https://github.com/nsh07/Tomato">GitHub</a>、<a href="https://f-droid.org/packages/org.nsh07.pomodoro">F-Droid</a> 或 <a href="https://apt.izzysoft.de/fdroid/index/apk/org.nsh07.pomodoro">IzzyOnDroid</a> 免费下载 Tomato。</p><h3>SUMRY：运动「文件管理器」</h3><ul><li>平台：iOS</li><li>关键词：运动记录、健康数据</li></ul><p><a class="ss-atUser" href="https://sspai.com/u/ul0vcezb">@Snow</a>：当你佩戴 Apple Watch 或 AirPods 运动时，每一次活动都会作为一条独立的体能训练记录被保存下来，官方的健康或健身应用，可以很容易地帮你评估近期的整体运动趋势，但却很难帮你细致到某个项目或具体时间段。10 月中刚迎来 1.3 版更新的 SUMRY，则可以像文件管理器一样，帮你将你的训练记录按需分类统计，将分散的数据转化为更清晰、更有意义的概览。</p><p>打开应用，点击右上角按钮打开菜单，即可通过手动选择训练记录或自定义时间区间的方式，生成新的项目概览。SUMRY 的概览包含时间区间、体能训练计数以及总卡路里、步数和距离。应用还会帮你汇总运动达标情况，并合成所有活动路线，如果你恰好参与了一个多阶段徒步行程，它可以为你提供一个更直观的「证明」。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/d830ab41504de5eae7ed836a3962e7bc.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>以时间区间框定项目概览时，你可以借助内置的筛选功能，针对某几类训练进行统计，如果你制定了固定周期的多类型的运动计划，这一功能可以很好地帮你统计系统性训练成果。当你开通 SUMRY+ 服务后，还可以对比任意两个项目，数据对比会更为清晰。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/858a99df8e8e3654dec95001626fb971.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>「文件管理器」自然需要文件夹管理功能，你如果有多类型、长跨度的活动项目需要统计，应用内置的多层级文件夹，可以帮你更有条理地进行管理。</p><p>SUMRY 包含一项内购服务，你可以按 8 元 / 月或 58 元 / 年的价格进行订阅，或一次性支付 128 元解锁日均数据拆解、锻炼类型筛选、项目对比等进阶性功能。建议你在尝试免费功能后，再行决定是否付费。</p><p>你可以在 <a href="https://apps.apple.com/cn/app/sumry-activity-insights/id1631515895">App Store</a> 免费下载 SUMRY。</p><span class="ss-application">&nbsp;</span><h2>不容错过的 App 更新</h2><p>除了「新鲜」App，App Store 中的许多老面孔也在不断迭代、更新，增加更多有趣和实用的功能。少数派希望帮你筛选 App Store 中值得关注的 App 动态，让你快速了解 App 和开发者们的最新动态。</p><h3>OneMockup：新增三维套壳</h3><ul><li>平台：iOS</li><li>关键词：套壳截图</li></ul><p><a class="ss-atUser" href="https://sspai.com/u/914r3btn">@ElijahLee</a>：一站式套壳截图应用 OneMockup 更新了 4.0 版本。新版新增三维套壳模板、自定义模板功能、桌面小组件、支持 iPhone 17 系列并适配了 iOS 26 玻璃风格。</p><p>首先是 OneMockup 为 iPhone、iPad 和 Mac 支持了高保真 3D 机型套壳模板。进入应用全新的「三维带壳」页面，在这里我们可以自由地缩放、旋转 iPhone 的 3D 模型，调节阴影效果、设备的位移等细节，以实现更加真实的展示效果。相比于 2D 平面套壳，3D 套壳可以带来更强的空间感与真实感，OneMockup 这次更新为 3D 套壳带来了质感和灵活度上的双重升级。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/087e3f7fe55f27560ad316c34fadb733.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>OneMockup 4.0 已同步支持 iPhone 17 系列模板，在二维套壳中支持了 iPhone 17 全系列和 iPhone Air 模板，覆盖相应的屏幕比例与边框颜色。但在三维套壳中还未更新 iPhone 17 系列，不过相信在不久的将来，应用也会支持这些新机型。</p><p>除了三维套壳模板，4.0 版本新增的「自定义模板」功能可以大幅提升出图效率。在「发现」页，应用提供了丰富的系统模板，此外我们还可以制作自定义模板。在编辑套壳截图时，我们设置好设备机型、背景风格、尺寸比例、阴影等参数后，点击右上角「…」即可直接保存为自定义模板，在以后制作新图时一键套用，无需重复调整。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/6b2bb4b5d88a277e7e7b2a45a2950c91.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>OneMockup 提供三种尺寸的桌面小组件，可以快速进入默认推荐、我的模板、自定义等多种功能。在适配方面，应用界面也全面适配 iOS 26 液态玻璃风格，图标、遮罩、窗口与小组件都呈现半透明玻璃质感，视觉层次更加统一，与系统整体观感保持一致。</p><p>你可以在 <a href="https://apps.apple.com/cn/app/onemockup-%E5%A5%BD%E7%9A%84%E6%88%AA%E5%9B%BE-%E5%B8%A6%E5%A3%B3%E6%88%AA%E5%B1%8F%E8%87%AA%E7%94%B1%E5%88%9B%E4%BD%9C/id1355476695">App Store</a> 免费下载 OneMockup，应用大多数功能都可以免费使用，也可以付费解锁高级功能，费用为 3 元 / 月、15 元 / 年、28 元买断。</p><span class="ss-application">&nbsp;</span><h3>VSCO 更新：AI Lab 上线，消除功能当先锋</h3><ul><li>平台：iOS / iPadOS / Web</li><li>关键词：照片编辑、AI</li></ul><p><a class="ss-atUser" href="https://sspai.com/u/whoops">@Vanilla</a>：作为照片编辑领域的「活化石」，VSCO 的大名我想很多人应该都听过。然而，随着 VSCO 全面转向订阅以及越来越多优秀同类应用的兴起，VSCO 在移动端照片编辑领域的声量逐渐式微。更重要的是，照片编辑作为 AI 应用领域的桥头堡，却没有在 VSCO 上看到积极跟进的信号。直到近日，VSCO 的 AI Lab 才姗姗来迟，而且只有一个消除功能已经上线，高像素放大和其他功能还在画饼中。那么，VSCO 的消除功能做得怎么样呢？接下来，就让我们一起来看一下。</p><p>在 VSCO 中导入图片，然后点击「AI Lab」，就可以看到 Remove 按钮，点击进入就可以看到三个选择工具，分别是笔刷、点击和拉索工具。如果使用笔刷工具，我们可以拖动滑块来控制笔触的粗细；如果使用点击工具，那么 VSCO 会通过 AI 来自动识别照片中建议消除的对象，并以黄色背景进行高亮显示，点击对象就可以选中；如果使用拉索工具，那就需要自己将想要消除的对象进行圈画，VSCO 会自动识别圈中对象的边缘，也是通过黄色背景进行高亮显示。在选择消除对象的过程中，我们也可以通过对照片进行缩放来达到更加精准的选择效果。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/03450129c367d58efec1230c3a161318.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/3a89f1e27fcbc61b656aed6697a60e59.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/article/0d4881d2805ebb47cd79da0e4702c400.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>三个选择对象的工具可以单独使用，也可以组合使用，根据选择的对象的具体情况进行针对性的调用。在选中多个消除对象后，我们可以点击 REMOVE 按钮批量消除。我们也可以在进行消除操作后，追加后续的对象选择和消除操作，不需要从头重新开始。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/8b80eaa5d05c27fe4c553403080dbf5b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/27da33b044c1dd8edda220e8979227a4.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/6280c40a425325d34f6a1dff7da6453e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不过，VSCO 的消除功能有一个其它工具中很少见的 REROLL 功能，它可以利用 AI 技术的输出结果随机性，让我们对消除操作不停地重新处理，让我们获得不同的消除结果，以获得最佳的效果。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/5ccf6510785d1056842bba7fff09605c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/b81f22bafc615d7e9331d5b6057f37f1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/ee3db02d66687ff0474bb60eca04a435.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>作为一个合格的消除功能，VSCO 也为它设计了一个基础功能，那就是前后对比，点击消除界面右上角的按钮就可以预览消除前的照片，松开后就回到了消除后的照片。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/5458088fa8c29cbfed596b1f790f44d1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/04356e5b1c4cfc9554293c49f559ba39.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/20/0e0927c8f5fd98bbf8c104cffd337b32.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在简单的体验之后，我发现 VSCO 的消除功能目前还存在两个问题，一个是拉索工具无法精准地选中我们圈画的对象，另一个是消除功能偶尔会莫名其妙消除掉我们没有选中的对象。另外，VSCO 的消除过程很慢，我不确定它是否需要将图片上传到服务器处理后再下载到本地。</p><p>VSCO 可以在 App Store 免费下载，不过需要订阅 Pro 会员或者 Plus 会员才可以正常使用各项进阶功能，其中 AI Lab 需要 Pro 会员，价格是每月 5 美元。</p><span class="ss-application">&nbsp;</span><h2>App 速报</h2><ul><li>脑图工具 <a href="https://setapp.com/apps/mindnode-next">MindNode Next</a> 加入 Setapp。</li><li>老牌 iPhone 影像配件品牌 Moment 宣布旗下相机应用 Moment Camera 新版，目前已在 <a href="https://apps.apple.com/hk/app/moment-pro-camera-ii/id6748837351">App Store</a> 开启预购。</li></ul><p>&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p><p><br /><br />&nbsp;</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/103170</id>
+            <title>为自己找一面「代谢的镜子」：动态血糖仪的选购与使用感受</title>
+            <link>https://sspai.com/post/103170</link>
+            <guid isPermaLink="false">https://sspai.com/post/103170</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 20 Oct 2025 07:23:16 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>早在 2020 年，我就看到有测评<a href="https://www.cell.com/cell/fulltext/S0092-8674(15)01481-6">指出</a>，每个人对食物的血糖反应与标准的 GI（血糖生成指数）图表存在个体差异，并不完全一致。受此启发，测评者自己购买了指尖血糖仪，用于观测日常饮食对血糖变化的影响。读完后我跃跃欲试，可惜当时市面上的血糖检测仪选择不多，大多需要指尖采血，操作繁琐，因此我的尝试仅持续了两天便无疾而终。</p>
+<p>不过近几年来，随着人们对健康生活方式的觉醒与转变，在健身房里、通勤路上，经常能看到人们手臂上硬币大小的动态血糖仪（CGM）。这个现象不是因为糖尿病患者变多了，而是曾经专属于糖尿病管理的医疗器械，如今明显进入了大众健康的主舞台。受《控糖革命》等书影响，有许多健康人群也开始更多地关注自己的身体健康，并把血糖监测作为理解自身生理情况的日常仪器之一，与用 Apple Watch 记录运动数据并无二致。</p>
+<p>我的好奇心也由此被点燃：作为一个长期坚持健康饮食与生活方式的人，血糖监测能否为我带来一些新的洞察呢？于是在社交网络上看了些测评后入手一款，断断续续用了一年多（用了 12 个传感器，实际使用时间半年左右），本文是我的分享和心得总结。</p>
+<figure class="image ss-img-wrapper"><img alt="CduKbD3nrovC3Lx0zKJckSgsnig" src="https://cdnfile.sspai.com/editor/u_/d3ove1tb34tfbe3paae0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>图源：Lingo</figcaption>
+</figure>
+<p>在正文开始前，我想先说明我的基本身体状况：无家族糖尿病史，OGTT（口服葡萄糖耐量试验）结果显示血糖健康，但月经周期会对身体和情绪产生一定影响。本文面向<strong>健康人群</strong>，如果您已被诊断患有糖尿病或相关代谢疾病，在尝试任何新设备或疗法前，请务必咨询了解您身体状况的医生。本文内容基于个人经验，<strong>不构成任何医疗建议</strong>。</p>
+<h2>血糖、胰岛素和糖尿病</h2>
+<p>想要通过理解自己的血糖数据改善健康，就首先要了解葡萄糖和相关激素 （比如胰岛素）在体内的作用。</p>
+<p>葡萄糖是人体中最主要的供能物质，像大脑、血红细胞和肾脏都非常依赖葡萄糖供能。吃下碳水化合物后，它们会被分解成葡萄糖，导致血糖上升。这促使胰脏内的 β 细胞泌胰岛素，将葡萄糖从血液内移动到肌肉和肝脏里并转化为糖原储存，以及促使脂肪细胞合成更多脂肪。空腹一段时间后，血糖下降，促使胰脏内的 α 细胞分泌胰高血糖素。它的作用是胰岛素的反面，促使糖原分解成葡萄糖。这两个激素的共同作用是让血液中的血糖水平维持在一个相对稳定的水平，保证身体主要器官有能量可以用（主要是大脑）。</p>
+<figure class="image ss-img-wrapper"><img alt="MHmNb2Q90o3Jn7xqFwrcgzEanNh" src="https://cdnfile.sspai.com/editor/u_/d3ove4db34tfbe3paaeg.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>身体内会影响血糖水平的不止这两个激素。比如饭后会从小肠分泌的肠促胰岛素（如 GLP-1 和 GIP，近几年很火的减肥药 Ozempic/司美格鲁肽就是一种 GLP-1 激动剂），肾上腺素和皮质醇、雌性生理期都会影响血糖水平。这些因素共同作用，使人体的血糖保持在一个合理稳定的区间。</p>
+<p>当食物进入你的肠道时，身体会释放肠促胰岛素，到达胰腺并发送信号，帮助关闭肝脏自身的糖分生产，减慢你的胃部工作速度，这样糖分就不会一下子涌入你的血液循环，甚至还会告诉你的大脑你开始感到饱了。这就是为什么在吃碳水化合物之前先吃蛋白质或蔬菜能有效防止血糖过山车：它能提早触发这些有益的「预警」激素，让你的身体准备好更平稳地处理碳水化合物。</p>
+<p>当你的身体感知到压力时，它会进入生存模式。它认为你可能需要逃离捕食者，所以它要确保你有大量的快速能量（葡萄糖）可用。为了做到这一点，它会释放应激激素，如皮质醇和肾上腺素。它们告诉你的肝脏向血液中倾倒更多的糖分，同时告诉你的肌肉和脂肪细胞，忽略胰岛素的作用，不要把血液里的葡萄糖拿来转化为糖原储存。因此即使你没有吃任何东西，你也会在 CGM 上看到血糖水平上升。这些激素对于生存至关重要，确保大脑在紧急情况下有足够的燃料。然而，在现代慢性应激、睡眠不佳或疾病的情况下，这些激素的水平也会持续升高，因而扰乱血糖稳态，使血糖管理变得困难。</p>
+<figure class="image ss-img-wrapper"><img alt="NYCPb41KZo3V6Exnb9dcanHqnqg" src="https://cdnfile.sspai.com/editor/u_/d3ove4lb34tfbc4bc0c0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>图源：知乎@芽谱</figcaption>
+</figure>
+<p>在一个代谢健康的、没有糖尿病的人体内，身体处理一餐的效率非常高，因此健康个体绝大部分时间血糖都维持在 3.9–7.8 mmol/L 这个范围内。一天下来，健康人的血糖趋势通常是这样的：</p>
+<ul>
+    <li>经过 8–10 小时的夜间禁食后，空腹血糖通常范围在 3.9–5.6 mmol/L 之间；</li>
+    <li>进餐开始后约 10 分钟，血糖水平开始上升。峰值浓度通常在摄入后约 60 分钟出现，并在餐后 2 至 3 小时内有效恢复到餐前水平。</li>
+</ul>
+<figure class="image ss-img-wrapper"><img alt="XmGMb9oJToYWVjxiZpccHSC4nYg" src="https://cdnfile.sspai.com/editor/u_/d3ove55b34tfb9vlhr4g.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption><a href="https://diabetesteachingcenter.ucsf.edu/about-diabetes/type-2-diabetes/insulin-basics-type-2-diabetes" target="_blank">健康人群 24 小时内的血糖（上）和胰岛素（下）水平变化</a></figcaption>
+</figure>
+<p>而如果你的身体不能对胰岛素作出适当的反应，身体内就更容易有更高的血糖水平。当你的空腹血糖水平超过 5.6 mmol/L 时，就说明你可能进入了所谓的「糖尿病前期」。此时你的身体已经出现了代谢问题（胰岛素抵抗），但还没有达到糖尿病指征（空腹血糖超过 7 mmol/L），通常也不会有明显的症状。可如果不加以控制，不仅可能发展成糖尿病，长久来看，还会对心血管和肾脏造成伤害。</p>
+<p>出现代谢异常的人体血糖变化通常有这些特点和趋势：</p>
+<ul>
+    <li>空腹血糖升高，超过 5.6 mmol/L；</li>
+    <li>餐后血糖峰值更高（常超过 7.8 mg/dL），而且至关重要的是，持续时间更长。恢复到基线水平的时间延迟，可能需要远超过 3 小时；</li>
+    <li>全天整体模式显示出峰谷之间更大的波动（即所谓的「血糖变异性增加」）。</li>
+</ul>
+<p>而血糖仪的作用就是直接或间接测量血糖水平，帮助人们分析自己的血糖是否处在正常区间内，以及更重要的，观察餐后血糖水平的变化。</p>
+<figure class="image ss-img-wrapper"><img alt="ZeWqb6AnAo8s2nxIlWochy2nnUh" src="https://cdnfile.sspai.com/editor/u_/d3ove5db34tfbbi19olg.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption><a href="https://nourishedbyscience.com/how-to-interpret-your-cgm-data/" target="_blank">由左至右依次：糖尿病人、糖尿病前期、健康人在一天之内的血糖波动</a></figcaption>
+</figure>
+<h2>新网红：动态血糖仪</h2>
+<p>动态血糖仪的结构通常很简单，一个发射器，一个探针，一块电池。安装也非常简单，通常在皮肤上做好清洁，用自带的安装器对准想要安装的部位，按一下就扎进去了。看起来比较痛，实际上几乎感觉不到针刺的疼痛。</p>
+<p>传感器探丝上的酶进入皮下组织后，会催化皮下组织葡萄糖的氧化反应，产生电信号。仪器上的发射器可以测量这个电信号，再通过蓝牙或 NFC 将数据传到手机里，经算法推算出血糖值，并在手机 app 上显示。</p>
+<p>也就是说，动态血糖仪测量的并不是血糖指数，而是皮下组织细胞间液里葡萄糖的浓度。而且因为葡萄糖从血液扩散到组织间液不是即时的，因此细胞间液的数据<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6712232/" target="_blank">相对血液约滞后 5–15 分钟</a>。相比之下，指尖血糖仪是用试纸直接检测血液中葡萄糖的浓度，因此效果更即时，数据也比动态血糖仪更准确。</p>
+<p>另外，我在网上看到很多用户反馈，前几天的数据往往不太准确，一般第三天后的读数才和指尖血糖仪的读数比较接近。一种建议是「先插上过几天再激活」，据说可以让数据更准确；现在不少 app 也加入了「用指尖血糖仪读数校准」的功能。如果你非常在意准确性，可以在用动态血糖仪的同时，买一个指尖血糖仪辅助校准试试。</p>
+<figure class="image ss-img-wrapper"><img alt="RkVtb9gtmo1yipxoM4eccLr8nrh" src="https://cdnfile.sspai.com/editor/u_/d3ove5db34tfbbi19om0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>关于血糖仪的选购，现在市面上已经有非常多的品牌，比如国内比较知名的：三诺，硅基，欧态，微泰，国外做了很多年糖尿病动态监测的 Freestyle Libre，以及近几年新兴的 Lingo 和 Stelo，可以根据预算和偏好选购。</p>
+<p>据我在医院工作的朋友介绍，CGM 的技术门槛不算特别高，各品牌差异不大，且都存在一定误差。因此，我个人选择在淘宝购买了性价比较高的产品。我认为，与其在不同品牌间切换，不如持续使用同一品牌，这样长期误差的方向相对一致，便于纵向比较。</p>
+<p>在选购时，我发现主要影响体验的因素是数据传输方式和读取频率。传输方式上，蓝牙优于 NFC，因为后者需要用手机贴近传感器才能读取，在冬季衣物较厚时尤为不便。读取频率通常为 3-5 分钟一次，少数品牌可达 1 分钟一次。起初我认为 1 分钟的频率会更精确，但实际使用 5 分钟间隔的产品后，并未感到任何不便。</p>
+<figure class="image ss-img-wrapper"><img alt="XndYb6DvQoQHlJxTulEcVpQrnoh" src="https://cdnfile.sspai.com/editor/u_/d3ove5tb34tfbc4bc0cg.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>NFC 读取数据需要每次都碰一下，不是很方便</figcaption>
+</figure>
+<p>通常激活传输器后 1 小时开始出现数据。大部分的动态血糖仪都宣称能用 14 天，考虑到可能有数据不准确的时段，每一枚大概能有 10 天左右的准确数据。不过我在小红书上还刷到过有人分析，所谓「一块电池只能用 14 天」不过是资本做的局，如果改装电路还是程序就能一个用 30 天，我很佩服但不建议没有电路改造基础的人乱学。</p>
+<p>另外，每一家都会建议你把动态血糖仪安装到手臂后侧，虽然从原理分析只要是富含皮下脂肪的地方都可以，但大部分厂家用来校准的数据往往都出自手臂，换在其他位置可能会影响读数的精准。另外手臂后侧算是比较不容易影响生活的部位，体表温度也稳定，只要不是睡觉时压到都不会影响读数。不过我体感贴在这个地方会影响手臂皮肤的细腻程度，还更容易留下针眼，于是之后都改在小腹了，优点是方便观察，缺点是可能会和裤子碰到，日常生活中更容易影响读数。</p>
+<figure class="image ss-img-wrapper"><img alt="KEtibfoYhob4bCxhz9acCBPGnZc" src="https://cdnfile.sspai.com/editor/u_/d3ove6lb34tfbc4bc0d0.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>具有丰富皮下脂肪的身体部位</figcaption>
+</figure>
+<figure class="table">
+    <table>
+        <thead>
+            <tr>
+                <th><strong>部位</strong></th>
+                <th><strong>优点</strong></th>
+                <th><strong>潜在问题</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th><strong>上臂后侧</strong></th>
+                <td>皮下脂肪适中、活动干扰少、表面温度稳定、方便佩戴</td>
+                <td>睡觉时若压到可影响读数</td>
+            </tr>
+            <tr>
+                <th><strong>腹部</strong></th>
+                <td>皮下脂肪厚、血流丰富</td>
+                <td>衣物摩擦、皮褶较多、影响贴合</td>
+            </tr>
+            <tr>
+                <th><strong>大腿外侧</strong></th>
+                <td>局部血流与吸收较稳定</td>
+                <td>运动时肌肉牵拉可能导致探头松动</td>
+            </tr>
+            <tr>
+                <th><strong>臀部/下背部</strong></th>
+                <td>皮下脂肪厚、稳定</td>
+                <td>不便观察、坐姿易压到</td>
+            </tr>
+            <tr>
+                <th><strong>上臂前侧/胸侧</strong></th>
+                <td>少见使用</td>
+                <td>皮下脂肪薄、活动影响大</td>
+            </tr>
+        </tbody>
+    </table>
+</figure>
+<h2>血糖仪的使用感受</h2>
+<p>在断断续续使用血糖仪的半年里，我主要会观察这些数据：</p>
+<ul>
+    <li>饥饿感和血糖水平变化的联系</li>
+    <li>不同运动类型（有氧、无氧、户外）对血糖的影响</li>
+    <li>不同月经周期血糖的变化（基线水平，上升/下降幅度和速度）</li>
+    <li>不同食物对血糖的影响</li>
+    <li>饮食习惯对血糖的关系（常见的比如先吃蔬菜再吃蛋白质和碳水）</li>
+    <li>旅游期间的血糖变化（结合饮食和运动信息看）</li>
+    <li>任何未曾预料的变化</li>
+    <li>如果改变生活方式，这些情况是否会改变</li>
+</ul>
+<p>需要注意这些数据都会和我的进食时间、进食量、月经周期、睡眠、压力、运动情况相互对照。我试图在生活中控制变量，不过可以控制的终究有限，只好尽量收集更多数据以减少误差。</p>
+<figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/10/17/6fb16847c8f6713612e9df3b3162a24b.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/10/17/29c1636a64bf3f55e45dea1deddead53.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>当然，我大多时候也不是特别在意数据的细节，更多在做定性而不是定量分析。比如碳水 A 会让我血糖上升到 7.6 mmol/L，而同样份量的碳水 B 让血糖升到了 7.8 mmol/L。看起来碳水 B 对血糖的影响更大，但在归纳总结的时候它们都会被归进「高升糖食物」里面。而比如同样的食材组合，餐 A 有更多的蛋白质和纤维，而餐 B 有更多的碳水，它们让我的血糖都上升到了一样的水平，这个时候更需要关注的就是血糖到达极值和开始回落的时间是否有不同。</p>
+<h3>标准食物升糖（GI）指数表真的适合我吗？</h3>
+<p>起初，我曾计划为自己量身打造一份个人版的 GI 指数表，但实践后发现控制变量极其困难。空腹时间、烹饪方法、食材来源、月经周期、运动量、压力水平等任何细节都可能改变血糖曲线的形态。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/103159</id>
+            <title>MeetCard 用户上手指南</title>
+            <link>https://sspai.com/post/103159</link>
+            <guid isPermaLink="false">https://sspai.com/post/103159</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 20 Oct 2025 05:30:14 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <span class="ss-externalProduct" title="MeetCard 碰碰卡 数字名片 防丢卡片" type="externalproduct">&nbsp;</span><p>欢迎使用 MeetCard 碰碰卡，本文档将为你说明 MeetCard 作为防丢器和数字名片的使用方式。</p><p>在视频指南中，我们将为您演示 MeetCard 作为防丢器和数字名片的配对和使用。如果您需要进一步的引导，可阅读详细的文字说明。</p> <hr /><h2><strong>首次使用前请完成配置</strong></h2><p>MeetCard 需要在 iOS 中「查找」中进行配对，才能使用其定位功能。「查找」应用是 iOS 系统自带程序，无需安装即可使用。在开始配对前请确认您的设备和系统设置：</p><ul><li>将设备更新至最新版本的 iOS 或 iPadOS。</li><li>打开「设置」App，然后轻点「蓝牙」，并确保它已打开。</li><li>打开「设置」App，轻点「隐私与安全性」&gt;「定位服务」，并确保「定位服务」已打开。然后向下滚动，轻点「查找」，并选取一种访问级别。为了获得最准确的位置，请打开「精确位置」。</li><li>打开 iCloud 钥匙串。</li><li>确认你已完成 Apple 账户设置。打开「设置」App，然后轻点你的姓名。检查有没有收到让你「更新 Apple 账户设置」的提醒。</li><li>确保你的无线局域网或蜂窝网络连接信号较强。</li></ul><h3><strong>将 MeetCard 与你的 iPhone 进行配对</strong></h3><ul><li>打开「查找」应用，在物品标签页中选择「添加物品」&gt;「其他支持的物品」。</li><li>按下 MeetCard 按钮 1 次；您将听到连续提示音。</li><li>从列表中选择物品名称，或选择「自定义名称」为您的 MeetCard 命名并选择表情符号，然后点击「继续」。</li><li>使用您的 Apple ID 注册 MeetCard，请再次点击「继续」。</li><li>点击「完成」，现在您可以将查找器附着在物品上，并在「查找」应用中查看它。</li><li>如果您在配对过程中遇到问题，请查看「常见问题」。</li></ul><h3><strong>将 MeetCard 连接你的 Bonjour! 账号</strong></h3><ul><li>确认已将手机的 NFC 功能打开，并处于解锁状态。</li><li>确保手机上已安装微信应用。</li><li>将 MeetCard NFC 区域靠近手机的 NFC 区域（找不到手机的感应区域？请查看「常见问题」中「如何找到手机的 NFC 区域？」），点击手机上弹出的 Bonjour! 小程序链接。</li><li>依照 Bonjour! 小程序的提示，完成账号注册或绑定。</li></ul><h3><strong>补充贴纸的使用方式</strong></h3><p>在产品包装中，提供了用于分享 Bonjour! 数字名片的补充贴纸，如下图：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/17/article/9f6a3e7cdd227b9ab71099e2c5e6b28e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>打开微信扫一扫，扫描贴纸二维码，即可以将二维码与您的 Bonjour! 数字名片进行绑定，以便于您在对方手机 NFC 功能无法使用时，通过扫码的方式，分享您的 Bonjour! 数字名片。</p><p>您可以自行选择是否使用补充贴纸，我们建议您将贴纸贴于产品背面的方框区域，如下图：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/17/article/163532b67c00f6dc4599e155e41b37cb.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><hr /><h2><strong>使用 MeetCard 分享你的数字名片</strong></h2><ul><li>确保对方手机已经处于解锁状态。</li><li>将您的 MeetCard 贴近手机的 NFC 感应区域 2-3 秒，即可在对方手机上弹出数字名片链接。</li><li>为了确保 NFC 感应区域与手机 NFC 区域有足够的接触面积，我们建议采取以下方式进行分享：</li><li>将 MeetCard 与手机后置摄像头区域接触 2-3 秒</li><li>将 MeetCard 与手机前置摄像头区域接触 2-3 秒</li></ul><hr /><h2><strong>常见问题</strong></h2><h3><strong>无法将 MeetCard 与 iPhone 进行配对？</strong></h3><ul><li>请确保您的 iPhone 已按照「配对前请确认您的设备和系统设置」完成设置。</li><li>如需设置多个 MeetCard，请确保每次只有一个查找器靠近您的设备。</li><li>如果您的 MeetCard 仍无法连接设备，请参考重置步骤进行设备充值。</li></ul><h3><strong>如何重置设备？</strong></h3><ul><li>在五秒钟内快速按下按钮五次，您将听到「嘀-嘀-嘀」三声提示音。</li><li>然后持续按住按钮六秒钟，您将听到两声「嘀嘀」的提示音，表示操作成功。</li></ul><h3><strong>如何关闭 MeetCard 的定位功能？</strong></h3><ul><li>长按按钮，直到听到两声「嘀嘀」的提示音。</li><li>放开按钮，当听到一声「嘀」的使用，表示定位功能已关闭。</li></ul><h3><strong>为什么会提示您的 MeetCard 已关联到其他 Apple ID？</strong></h3><p>请确保已在「查找」应用中移除此设备，以便使用其他 Apple ID 重新添加。</p><h3><strong>如何找到手机的 NFC 区域？</strong></h3><p>通常情况下，手机的 NFC 区域会放置在摄像头的旁侧，或者手机背部的中间区域。</p><ul><li><a href="https://sf.pay.xiaomi.com/views/cmsModelPages/nfcArea.html" target="_blank">小米手机NFC区域</a></li><li><a href="https://support.oppo.com/cn/self-service/#/articleDetail/?aid=2119608" target="_blank">OPPO手机NFC区域</a></li><li><a href="https://www.honor.com/cn/support/content/zh-cn15832765/" target="_blank">荣耀手机NFC区域</a></li></ul>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/103207</id>
+            <title>派早报：国家安全局表示国家授时中心受到美国攻击</title>
+            <link>https://sspai.com/post/103207</link>
+            <guid isPermaLink="false">https://sspai.com/post/103207</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 20 Oct 2025 00:55:25 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    派早报：国家安全局表示国家授时中心受到美国攻击
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/102887</id>
             <title>项目看板 3.0：在 Obsidian 中平衡专注与多元</title>
             <link>https://sspai.com/post/102887</link>
@@ -50,7 +225,7 @@
             <content:encoded>
                 <![CDATA[
                     
-                    <h2>📅 本周新预告</h2><h3>《杀戮轮回》发布正式预告</h3> <p>10 月 14 日，动画电影《杀戮轮回》发布了正式预告，定档 2026 年 1 月 9 日在日本上映。本作改编自樱坂洋的同名小说，秋本贤一郎执导，Studio 4℃ 制作，原著讲述被卷入轮回的新兵桐谷启二与不明怪物的战斗，曾改编为好莱坞真人电影《明日边缘》，动画将以女主角丽塔为视角。 <a href="https://x.com/aynk_anime/status/1978022968652669147">来源</a></p><h3>《猎杀游戏》发布新预告</h3> <p>10 月 13 日，电影《猎杀游戏》发布了新预告，将于 11 月 14 日在北美上映。本作改编自史蒂芬·金的小说，埃德加·赖特（《极盗车神》《僵尸肖恩》）执导，格伦·鲍威尔、乔什·布洛林、迈克尔·塞拉等主演，本·理查兹为拯救重病女儿孤注一掷，踏入在职业杀手的追猎下逃生的死亡游戏。 <a href="https://www.youtube.com/watch?v=UsmiRIozzvw">来源</a></p><h3>《奇迹人》发布正式预告</h3> <p>10 月 12 日，漫威剧集《奇迹人》发布了正式预告，定档 2026 年 1 月 27 日上线 Disney+。「黑蝠鲼」叶海亚·阿卜杜勒-迈丁主演，本·金斯利饰演失败演员特雷弗·斯莱特里，息影导演为拍新片重出江湖，英雄演员练习生、过气老鸟、势利经纪人都来大蹭一场，揭开好莱坞片厂最灰暗之处。 <a href="https://www.youtube.com/watch?v=lgoxHC7WF9w">来源</a></p><h3>沪语电影《菜肉馄饨》预告</h3> <p>10 月 13 日，沪语电影《菜肉馄饨》发布预告。影片由顾晓东担任制片人，金莹编剧，吴天戈执导，周野芒、潘虹、茅善玉、陈国庆、徐祥领衔主演，王琳特别主演，高博文主演，将于 2025 年内上映。故事讲述上海退休工程师的老汪因儿子婚事未决前往相亲角，与一群同样为子女婚事操碎心的父母不期而遇。</p><h3>更多</h3><p><a href="https://www.bilibili.com/video/BV1qx4CzBEQ2/"><strong>TV 动画《飙马野郎 JOJO 的奇妙冒险》中字先导预告：</strong></a>木村泰大、高桥秀弥执导，david production 制作，骑乘马匹横越北美大陆的世纪大赛 STEEL BALL RUN 开幕，为拿下高达 5 千万美元的冠军奖金，强悍的冒险家们展开争战，2026 年上线 Netflix。 <a href="https://www.youtube.com/watch?v=_WE6T2qU3G0">来源</a></p><p><a href="https://www.bilibili.com/video/BV1bd4Lz5E9Q/"><strong>电影《极限审判》首支预告：</strong></a>提莫·贝克曼贝托夫执导，「星爵」克里斯·帕拉特、「沙丘圣母」丽贝卡·弗格森主演，AI 法庭全面接管社会司法审判，创立者雷文却因被指控杀妻而坐上被告席，必须在 90 分钟内证明自己的清白，2026 年 1 月 23 日在北美上映。 <a href="https://www.youtube.com/watch?v=dSS4yqd0x6o">来源</a></p><p><a href="https://www.bilibili.com/video/BV1Cr4WzdEdK/"><strong>电影《寻她》定档预告：</strong></a>陈仕忠执导、编剧，舒淇、白客领衔主演，张本煜主演，郎月婷特别出演，意外失去女儿的陈凤娣执意寻找孩子下落，却面对来自家庭与世俗的重重压力，在命运的沉默里，发出想重新活一次的觉醒之声，定档 10 月 17 日上映。 <a href="https://weibo.com/1623886424/Q8BkM7X16">来源</a></p><p><a href="https://weibo.com/tv/show/1034:5222043776647211?from=old_pc_videoshow"><strong>《阿玛多伊斯》首曝预告：</strong></a>本剧聚焦传奇作曲家莫扎特，改编自彼得·谢弗的同名经典戏剧，乔·巴顿（《黑鸽》）编剧，由福田知盛饰演莫扎特，保罗·贝坦尼饰演充满嫉妒心的宫廷作曲家萨列里，将于 12 月在 Sky 播出。</p><h2>📽 影视新闻周报</h2><h3>《世界计划：无法歌唱的初音未来》内地定档 10 月 25 日</h3><p>10 月 11 日，动画电影《世界计划：无法歌唱的初音未来》发布了 <a href="https://www.bilibili.com/video/BV1brxyzWEJd/">中国内地定档预告</a> 和海报，将于 10 月 25 日上映。畑博之执导，米内山阳子编剧，P.A.WORKS 制作，世界以旋律而相连，梦想因同频而闪耀，初音未来等虚拟歌手们携手五大组合全员集结，共同传达歌声与心愿。 <a href="https://weibo.com/8497823148/Q8BkQvvix">来源</a></p><figure class="image ss-img-wrapper image_resized" style="width: 425px;"><img src="https://cdnfile.sspai.com/2025/10/17/article/e87556878c3c2bd184f2e5c1d4b1cee1.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>《天鹰战士：最后的冲击》确认引进</h3><p>10 月 15 日，动画电影《天鹰战士：最后的冲击》（又译《新·福音战士剧场版：终》）确认引进中国内地，档期待定。本作为 EVA 新剧场版系列最终章，讲述经过「第三次冲击」后陷入心灵封闭的碇真嗣，与同伴们踏上最终「补完」与救赎的旅程，<a href="https://sspai.com/post/68259">本周看什么 210813 期</a> 亦有推荐。 <a href="https://weibo.com/3173412402/Q9d2PDQmm">来源</a></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/17/article/d6cc122dc33166effba3f7c727ccb27b.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>《小林家的龙丫头：怕寂寞的龙》确认引进</h3><p>10 月 16 日，动画电影《小林家的龙丫头：怕寂寞的龙》（又译《小林家的龙女仆：怕寂寞的龙》）确认引进中国内地，档期待定。石原立也执导，山田由香编剧，京都动画制作，康娜父亲奇姆恩卡姆依决定带康娜归返，异世界两大阵营战火一触即发，小林一家将迎来前所未有的挑战。 <a href="https://weibo.com/8003251137/Q9mtkuU8N">来源</a></p><figure class="image ss-img-wrapper image_resized" style="width: 372px;"><img src="https://cdnfile.sspai.com/2025/10/17/cfa248b593482cc05bf39fccadfffa2b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>《惊天魔盗团 3》确认引进</h3><p>10 月 11 日，电影《惊天魔盗团 3》确认引进中国内地，并发布了 <a href="https://www.bilibili.com/video/BV1Lr44zWE1C/">预告</a> 和海报，档期待定。鲁本·弗雷斯彻执导，杰西·艾森伯格、伍迪·哈里森、艾拉·菲舍尔、摩根·弗里曼、戴夫·弗兰科、裴淳华等出演，初代四骑士热血重聚，与新人魔术师联手巧设惊天陷阱，将于 11 月 14 日在北美上映。 <a href="https://weibo.com/3225580471/Q8BkEoDXN">来源</a></p><figure class="image ss-img-wrapper image_resized" style="width: 406px;"><img src="https://cdnfile.sspai.com/2025/10/17/article/bb081716e8f9862e780d5341e19119c3.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>《女孩》定档 11 月 1 日</h3><p>10 月 17 日，舒淇自编自导的首部电影《女孩》发布了 <a href="https://www.bilibili.com/video/BV11bWyzyEPL/">导演特辑</a> 和定档海报，将于 11 月 1 日内地上映。邱泽、汤毓绮、白小樱、林品彤、赖雨霏等主演，影片从一个女孩的故事出发，最后拍给了所有女孩，女孩与女人在交错的命运中互相映照，像一面镜子照出彼此的伤却无能为力。 <a href="https://weibo.com/1623886424/Q9wFJ3M1U">来源</a></p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/10/17/8a75aa8656868f53dbede273cc6cb4c7.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/10/17/d11868303af45699e66095452da9e98f.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>🎪 彩蛋</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/17/9668bd4396f5f580d8817a54f107a383.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>本期的彩蛋是「看图猜电影」，首位猜中片名的读者，可获得彩蛋提供名额 1 次（彩蛋内容包括但不限于「猜电影」「你喜欢的经典影视作品/影人/台词」「电影冷知识」），和我们不定期发放的奖品。本期猜中的「第一名」将会在这篇文章中更新，届时也请各位参与互动的朋友注意站内私信~</p><p>&gt; 小红书 📕 关注 <a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4">少数派sspai</a>、<a href="https://www.xiaohongshu.com/user/profile/62fb4cf90000000012002431">本周看什么</a>，找到数字时代更好的生活方式 🎊</p><p>&gt; <a href="https://sspai.com/topic/416">看什么 Café</a> / <a href="https://sspai.com/topic/419">主题片单</a>专题页、<a href="https://sspai.com/page/2021/movie">2021 年度回顾</a>，更多影视推荐尽在 <a href="https://sspai.com/tag/%E6%9C%AC%E5%91%A8%E7%9C%8B%E4%BB%80%E4%B9%88">#本周看什么</a>🎬</p>
+                    <h2>📅 本周新预告</h2><h3>《杀戮轮回》发布正式预告</h3> <p>10 月 14 日，动画电影《杀戮轮回》发布了正式预告，定档 2026 年 1 月 9 日在日本上映。本作改编自樱坂洋的同名小说，秋本贤一郎执导，Studio 4℃ 制作，原著讲述被卷入轮回的新兵桐谷启二与不明怪物的战斗，曾改编为好莱坞真人电影《明日边缘》，动画将以女主角丽塔为视角。 <a href="https://x.com/aynk_anime/status/1978022968652669147">来源</a></p><h3>《猎杀游戏》发布新预告</h3> <p>10 月 13 日，电影《猎杀游戏》发布了新预告，将于 11 月 14 日在北美上映。本作改编自史蒂芬·金的小说，埃德加·赖特（《极盗车神》《僵尸肖恩》）执导，格伦·鲍威尔、乔什·布洛林、迈克尔·塞拉等主演，本·理查兹为拯救重病女儿孤注一掷，踏入在职业杀手的追猎下逃生的死亡游戏。 <a href="https://www.youtube.com/watch?v=UsmiRIozzvw">来源</a></p><h3>《奇迹人》发布正式预告</h3> <p>10 月 12 日，漫威剧集《奇迹人》发布了正式预告，定档 2026 年 1 月 27 日上线 Disney+。「黑蝠鲼」叶海亚·阿卜杜勒-迈丁主演，本·金斯利饰演失败演员特雷弗·斯莱特里，息影导演为拍新片重出江湖，英雄演员练习生、过气老鸟、势利经纪人都来大蹭一场，揭开好莱坞片厂最灰暗之处。 <a href="https://www.youtube.com/watch?v=lgoxHC7WF9w">来源</a></p><h3>沪语电影《菜肉馄饨》预告</h3> <p>10 月 13 日，沪语电影《菜肉馄饨》发布预告。影片由顾晓东担任制片人，金莹编剧，吴天戈执导，周野芒、潘虹、茅善玉、陈国庆、徐祥领衔主演，王琳特别主演，高博文主演，将于 2025 年内上映。故事讲述上海退休工程师的老汪因儿子婚事未决前往相亲角，与一群同样为子女婚事操碎心的父母不期而遇。</p><h3>更多</h3><p><a href="https://www.bilibili.com/video/BV1qx4CzBEQ2/"><strong>TV 动画《飙马野郎 JOJO 的奇妙冒险》中字先导预告：</strong></a>木村泰大、高桥秀弥执导，david production 制作，骑乘马匹横越北美大陆的世纪大赛 STEEL BALL RUN 开幕，为拿下高达 5 千万美元的冠军奖金，强悍的冒险家们展开争战，2026 年上线 Netflix。 <a href="https://www.youtube.com/watch?v=_WE6T2qU3G0">来源</a></p><p><a href="https://www.bilibili.com/video/BV1bd4Lz5E9Q/"><strong>电影《极限审判》首支预告：</strong></a>提莫·贝克曼贝托夫执导，「星爵」克里斯·帕拉特、「沙丘圣母」丽贝卡·弗格森主演，AI 法庭全面接管社会司法审判，创立者雷文却因被指控杀妻而坐上被告席，必须在 90 分钟内证明自己的清白，2026 年 1 月 23 日在北美上映。 <a href="https://www.youtube.com/watch?v=dSS4yqd0x6o">来源</a></p><p><a href="https://www.bilibili.com/video/BV1Cr4WzdEdK/"><strong>电影《寻她》定档预告：</strong></a>陈仕忠执导、编剧，舒淇、白客领衔主演，张本煜主演，郎月婷特别出演，意外失去女儿的陈凤娣执意寻找孩子下落，却面对来自家庭与世俗的重重压力，在命运的沉默里，发出想重新活一次的觉醒之声，定档 10 月 17 日上映。 <a href="https://weibo.com/1623886424/Q8BkM7X16">来源</a></p><p><a href="https://weibo.com/tv/show/1034:5222043776647211?from=old_pc_videoshow"><strong>《阿玛多伊斯》首曝预告：</strong></a>本剧聚焦传奇作曲家莫扎特，改编自彼得·谢弗的同名经典戏剧，乔·巴顿（《黑鸽》）编剧，由福田知盛饰演莫扎特，保罗·贝坦尼饰演充满嫉妒心的宫廷作曲家萨列里，将于 12 月在 Sky 播出。</p><h2>📽 影视新闻周报</h2><h3>《世界计划：无法歌唱的初音未来》内地定档 10 月 25 日</h3><p>10 月 11 日，动画电影《世界计划：无法歌唱的初音未来》发布了 <a href="https://www.bilibili.com/video/BV1brxyzWEJd/">中国内地定档预告</a> 和海报，将于 10 月 25 日上映。畑博之执导，米内山阳子编剧，P.A.WORKS 制作，世界以旋律而相连，梦想因同频而闪耀，初音未来等虚拟歌手们携手五大组合全员集结，共同传达歌声与心愿。 <a href="https://weibo.com/8497823148/Q8BkQvvix">来源</a></p><figure class="image ss-img-wrapper image_resized" style="width: 425px;"><img src="https://cdnfile.sspai.com/2025/10/17/article/e87556878c3c2bd184f2e5c1d4b1cee1.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>《天鹰战士：最后的冲击》确认引进</h3><p>10 月 15 日，动画电影《天鹰战士：最后的冲击》（又译《新·福音战士剧场版：终》）确认引进中国内地，档期待定。本作为 EVA 新剧场版系列最终章，讲述经过「第三次冲击」后陷入心灵封闭的碇真嗣，与同伴们踏上最终「补完」与救赎的旅程，<a href="https://sspai.com/post/68259">本周看什么 210813 期</a> 亦有推荐。 <a href="https://weibo.com/3173412402/Q9d2PDQmm">来源</a></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/17/article/d6cc122dc33166effba3f7c727ccb27b.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>《小林家的龙丫头：怕寂寞的龙》确认引进</h3><p>10 月 16 日，动画电影《小林家的龙丫头：怕寂寞的龙》（又译《小林家的龙女仆：怕寂寞的龙》）确认引进中国内地，档期待定。石原立也执导，山田由香编剧，京都动画制作，康娜父亲奇姆恩卡姆依决定带康娜归返，异世界两大阵营战火一触即发，小林一家将迎来前所未有的挑战。 <a href="https://weibo.com/8003251137/Q9mtkuU8N">来源</a></p><figure class="image ss-img-wrapper image_resized" style="width: 372px;"><img src="https://cdnfile.sspai.com/2025/10/17/cfa248b593482cc05bf39fccadfffa2b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>《惊天魔盗团 3》确认引进</h3><p>10 月 11 日，电影《惊天魔盗团 3》确认引进中国内地，并发布了 <a href="https://www.bilibili.com/video/BV1Lr44zWE1C/">预告</a> 和海报，档期待定。鲁本·弗雷斯彻执导，杰西·艾森伯格、伍迪·哈里森、艾拉·菲舍尔、摩根·弗里曼、戴夫·弗兰科、裴淳华等出演，初代四骑士热血重聚，与新人魔术师联手巧设惊天陷阱，将于 11 月 14 日在北美上映。 <a href="https://weibo.com/3225580471/Q8BkEoDXN">来源</a></p><figure class="image ss-img-wrapper image_resized" style="width: 406px;"><img src="https://cdnfile.sspai.com/2025/10/17/article/bb081716e8f9862e780d5341e19119c3.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>《女孩》定档 11 月 1 日</h3><p>10 月 17 日，舒淇自编自导的首部电影《女孩》发布了 <a href="https://www.bilibili.com/video/BV11bWyzyEPL/">导演特辑</a> 和定档海报，将于 11 月 1 日内地上映。邱泽、汤毓绮、白小樱、林品彤、赖雨霏等主演，影片从一个女孩的故事出发，最后拍给了所有女孩，女孩与女人在交错的命运中互相映照，像一面镜子照出彼此的伤却无能为力。 <a href="https://weibo.com/1623886424/Q9wFJ3M1U">来源</a></p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/10/17/8a75aa8656868f53dbede273cc6cb4c7.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/10/17/d11868303af45699e66095452da9e98f.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>🎪 彩蛋</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/17/9668bd4396f5f580d8817a54f107a383.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>本期的彩蛋是「看图猜电影」，首位猜中片名的读者，可获得彩蛋提供名额 1 次（彩蛋内容包括但不限于「猜电影」「你喜欢的经典影视作品/影人/台词」「电影冷知识」），和我们不定期发放的奖品。本期猜中的「第一名」将会在这篇文章中更新，届时也请各位参与互动的朋友注意站内私信~本期答案：<a href="https://movie.douban.com/subject/1299539/" target="_blank">悬崖上的野餐 Picnic at Hanging Rock (1975)</a></p><p>&gt; 小红书 📕 关注 <a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4">少数派sspai</a>、<a href="https://www.xiaohongshu.com/user/profile/62fb4cf90000000012002431">本周看什么</a>，找到数字时代更好的生活方式 🎊</p><p>&gt; <a href="https://sspai.com/topic/416">看什么 Café</a> / <a href="https://sspai.com/topic/419">主题片单</a>专题页、<a href="https://sspai.com/page/2021/movie">2021 年度回顾</a>，更多影视推荐尽在 <a href="https://sspai.com/tag/%E6%9C%AC%E5%91%A8%E7%9C%8B%E4%BB%80%E4%B9%88">#本周看什么</a>🎬</p>
                 ]]>
             </content:encoded>
         </item>
@@ -90,170 +265,35 @@
         </item>
         
         <item>
-            <id>https://sspai.com/post/103156</id>
-            <title>派早报：OPPO 发布 Find X9 系列新品、Google 推出四项新功能保护 Android 用户等</title>
-            <link>https://sspai.com/post/103156</link>
-            <guid isPermaLink="false">https://sspai.com/post/103156</guid>
+            <id>https://sspai.com/post/102931</id>
+            <title>教师数字文具盒 3：AI 自制“微应用”百宝箱</title>
+            <link>https://sspai.com/post/102931</link>
+            <guid isPermaLink="false">https://sspai.com/post/102931</guid>
             <pubDate></pubDate>
-            <updated>Fri, 17 Oct 2025 00:55:27 GMT</updated>
+            <updated>Tue, 14 Oct 2025 23:52:51 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <h2>少数派的近期动态</h2><ul><li>少数派 1024 程序员节征文：码上，与鸿蒙一起进击。<a href="https://sspai.com/post/102635"><strong>进一步了解</strong></a></li><li>少数派 x Khadas 哈达电脑众测活动现已发布，体验新机赢大奖。<a href="https://sspai.com/post/103074"><strong>进一步了解</strong></a></li></ul><h2>你可能错过的好文章</h2><ul><li>🔗 <a href="https://sspai.com/post/103108">一起共创｜我们想打造一个墨水屏体验空间，让数字生活回归「纸感」</a></li><li>🏃 <a href="https://sspai.com/post/102845">借助捷径，不写代码也能玩转 Quote/0</a></li><li>🌟 <a href="https://sspai.com/post/103144">新玩意 223｜少数派的编辑们最近买了啥？</a></li></ul><p>&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/103145</id>
-            <title>具透 Plus | iOS 26 密码导出功能幕后；Pixel 5G 网络启用方案遭封堵</title>
-            <link>https://sspai.com/post/103145</link>
-            <guid isPermaLink="false">https://sspai.com/post/103145</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 16 Oct 2025 09:56:24 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <h2>iOS/macOS 26 密码导出功能幕后</h2>
-<p><a class="ss-atUser" href="https://sspai.com/u/platyhsu">@PlatyHsu</a>：如今，密码管理工具的选择不可谓不多。苹果也凑上了热闹，在去年的系统更新中加入了独立的「密码」app。然而，要在这些工具之间迁移，传统上是非常困难的。每个工具都使用互不兼容的格式；即使导出为 CSV 格式，由于双方的字段定义和功能集不同，也几乎无法无损转换。</p>
-<p>近年 passkey（通行密钥）的普及进一步加重了这个问题。passkey 基于非对称加密，其中的私钥存放在设备的安全芯片里，公钥存放在网站或应用的服务器上。登录时，网站用公钥生成一个只有使用私钥才能通过的验证（challenge），从而验证身份。</p>
-<p>显然，要保证这个机制的安全，私钥必须牢牢绑定在硬件上，不可轻易复制或导出，否则就和一个普通的密码无异了。因此，目前 passkey 的迁移和同步通常都是厂商在自己的生态内通过加密传输实现的，很难互相打通。这就导致了 passkey 经常受到的一种批评：明明是为了通用和便捷而采用的技术，反而造成了更多的封闭和麻烦。</p>
-<p>macOS 26 和 iOS 26 引入的一些新变化，显示出这些问题得到改善的迹象。WWDC25 讲座《<a href="https://developer.apple.com/videos/play/wwdc2025/279/">通行密钥更新</a>》提到，通过一项与 FIDO 联盟（一个成立于 2013 年，旨在制定和推广身份验证标准的产业协会）成员合作的标准化数据格式，现在可以安全地在密码管理器之间迁移。迁移过程中，无须向磁盘导出任何不安全的明文密码，数据完全在应用之间传输。</p>
-<p>你目前已经可以在 iOS 26 上尝试这个功能。首先，安装第三方密码管理器 Bitwarden，这是目前唯一<a href="https://www.businesswire.com/news/home/20250915119188/en/Bitwarden-Leads-FIDO-Alliance-Credential-Exchange-Standards-for-Passkey-Portability-on-iOS-26">正式支持</a>接收 Password app 导出数据的第三方工具。然后，在自带的 Password app 中点击右上角的「…」，选择 Export Data to Another App。从列表中选择要导出的条目，再选择导出到 Bitwarden。经过 Face ID 验证后，就可以在 Bitwarden 中看到结果了。整个过程不需要导出外部文件，也不需要在应用之间来回切换。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/66f14f2cf5a7f879a5f78fe4f02d355a.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>（macOS 上的 Password app 也有相同功能的菜单项，但本文写作时暂时还没有发现能显示在导出选项中的第三方工具。不知为何，<a href="https://support.apple.com/zh-cn/guide/iphone/iphf28f2e93e/26/ios/26">iOS</a> 和 <a href="https://support.apple.com/zh-cn/guide/passwords/mchl35b12625/2.0/mac/26">macOS</a> 的用户手册都完全忽略了这项新功能。）</p>
-<p>要支持这项新的导入和导出体验，第三方应用需要支持 iOS/macOS 26 的新增 API <a href="https://developer.apple.com/documentation/AuthenticationServices/ASCredentialExportManager"><code>ASCredentialExportManager</code></a> 和 <a href="https://developer.apple.com/documentation/AuthenticationServices/ASCredentialImportManager"><code>ASCredentialImportManager</code></a>。不过，如上述 WWDC 讲座所介绍，这些并不是苹果独自发明的，而是对一项通用标准的实现。</p>
-<p>根据这项名为「凭证交换协议」（Credential Exchange Protocol, CXP）的标准，新旧两个密码管理器可以根据这样的流程来安全传输凭证：</p>
-<pre class="language-code-line"><code>       ┌──────────────────────────────────────────────────────┐
-       │                  Authorizing Party                   │
-       └─────┬──────────────────────────────────────────┬─────┘
-
-             │   (2) Determine        (1) Create Export │
-                  Migration Key              Request
-┌────────────┴──┐                                  ┌────┴──────────┐
-│               ◀─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┤               │
-│               │                                  │               │
-│               │                                  │               │
-│               │                                  │               │
-│┌─────────────┐│                                  │               │
-││ (3)Encrypt  ││                                  │               │
-││ Credential  ││                                  │               │
-││    Data     ││                                  │               │
-│└─────────────┘│                                  │               │
-│               │       (4) Send Export Response   │               │
-│               │─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ▶┌─────────────┐│
-│               │                                  ││ (5) Decrypt ││
-│               │                                  ││   Bundle    ││
-│               │                                  │└─────────────┘│
-│               │                                  │               │
-│               │                                  │               │
-│               │                                  │               │
-│               │                                  │               │
-│   Exporter    │                                  │   Importer    │
-│               │                                  │               │
-└───────────────┘                                  └───────────────┘
-</code></pre>
-<p>用通俗的话来描述：</p>
-<ol>
-    <li>导入方（新密码管理器）创建一个导出请求，其中包含请求范围、自己的公钥、加密配置以及一项身份验证等；</li>
-    <li>导出方（旧密码管理器）收到请求后，提示用户授权。获得用户同意后，用导入方的公钥和自己的私钥计算出一个加密密钥，用来加密导出的凭证数据。同时，在导入方发来的身份验证上签名，以证明自己的身份；</li>
-    <li>导出方将加密的凭证数据、自己的公钥以及对身份验证的签名回复打包成一个导出响应，发送给导入方；</li>
-    <li>导入方收到响应后，验证签名，确认导出方的身份。然后，使用自己的私钥和导出方的公钥，独立计算出加密密钥，进而解密凭证数据，解析后存入自己的数据库中。</li>
-</ol>
-<p>可以看出，这个机制的一个优势在于加密密钥无需传输，而是由双方独立计算得出。这确保了即使传输过程被拦截，攻击者也无法解密凭证数据。</p>
-<p>此外，CXP 还支持多种导出「模式」来适应不同的场景。iOS 和 macOS 此次新增的导出功能属于「直接传输」（direct）模式，也就是两个应用通过 API 直接通讯并传输响应。而如果涉及跨设备迁移等无法直接传输的情况，也可以使用「间接传输」（indirect）模式，让旧应用将相应内容存储为一个加密文件，然后手动导入新应用。最后还有一种特殊的「自传输」（self）模式，本质上就是一种安全备份功能，可以将凭证数据导出为加密文件，以便日后恢复。</p>
-<p>解决了传输安全性的问题，还要考虑如何实现不同应用之间的格式兼容。这就是与 CXP 配套的「<a href="https://fidoalliance.org/specs/cx/cxf-v1.0-ps-20250814.html">凭证传输格式</a>」（Credential Exchange Format, CXF）要解决的问题。CXF 实际上提供了一套用 JSON 来描述凭证信息的通用模板，它的顶层结构大概长得像这样：</p>
-<pre class="language-code-line language-json"><code>{
-    "version": {
-        "major": 1,
-        "minor": 0
-    },
-    "exporterRpId": "exporter.example.com",
-    "exporterDisplayName": "Exporter app",
-    "timestamp": 1705228800,
-    "accounts": [
-        {
-            "id": "DZSXp7iBQY-Fg-OofakQtQ",
-            "username": "jane_smith",
-            "email": "jane.smith@example.com",
-            "fullName": "Jane Smith",
-            "items": [
-                {
-                    "id": "9OF-QjVDQo2Wp2xWPw6ZhA",
-                    "creationAt": 1705142400,
-                    "modifiedAt": 1705228800,
-                    "title": "GitHub Login",
-                    "scope": {
-                        "urls": ["https://github.com"],
-                    },
-                    "credentials": [
-                        // ...
-                    ]
-                },
-                // ...
-            ],
-            "collections": [
-                // ...
-            ]
-        }
-    ]
-}</code></pre>
-<p>可以看出，数据的开头给出了格式版本、导出方信息和时间戳等信息，然后是一个 <code>accounts</code> 数组，其中包含了此次导出的一或多个用户账户，是导出数据的核心。<code>accounts</code> 的内部是一个三层结构：</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/103144</id>
-            <title>新玩意 223｜少数派的编辑们最近买了啥？</title>
-            <link>https://sspai.com/post/103144</link>
-            <guid isPermaLink="false">https://sspai.com/post/103144</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 16 Oct 2025 09:46:32 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <h2><strong>关于栏目</strong></h2><p style="margin-left: 0px;">很多读者都会好奇少数派的编辑们到底平时都「买了啥」。我们希望通过「编辑部的新玩意」介绍编辑部成员们最近在用的新奇产品，让他们自己来谈谈这些新玩意的使用体验究竟如何。</p><p style="margin-left: 0px;">内容声明：《新玩意》栏目如含有商务内容，将会在对应条目标注「广告」；来源为「厂商送测」的产品并无内容干涉。</p><hr /><h2>@Tp：PSP Go</h2><ul><li>参考价格：¥750</li></ul><p>把时间拨回 11 年前，那时候还在上高中的我，陆续攒钱买了曾经爱而不得的掌机。那时候，我萌生出了一个不切实际的幻想，便是把从 GameBoy 到 3DS、PSP 到 PSV 的各种型号都收藏一台。到了现在，看着自己满满一柜子的掌机，这个幻想似乎正在慢慢照进现实。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/e6573032321e30f580a3aa5577a73b0f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果要我在这些掌机里挑一个设计最「精致」的设备，那么 PSP Go 一定会是我的不二之选。合盖情况下，正面只有屏幕和扬声器，这样的设计即便放在今天来看也丝毫不显过时。而 PSP Go 的屏幕也是我认为 PSP 全系列中观感最好的一块屏幕，在分辨率不变的情况下，因为屏幕尺寸缩小了，以至于 PSP Go 的屏幕在视觉观感上会更加细腻。尽管 PSP Go 并没有采用全贴合屏，但内外屏之间的距离极小，画面观感比常规尺寸的 PSP 还是要好上不少的。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/1a3102b280f6824137ba121667e47483.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不仅如此，PSP Go 相比常规 PSP 还新增了蓝牙（虽然只是蓝牙 2.0）和暂时中断的功能，尤其是暂时中断功能，在一些需要反复刷素材的游戏中非常实用，可以作为即时存档功能的替代品。</p><p>这其实并不是我的第一台 PSP Go 了，早在 10 年前，我就入手过一台 PSP Go，并且用它陆续通关了《428：被封锁的涩谷》《弹丸论破》等游戏。但后来由于某些原因把它出掉了，直到前段时间才在女友的支持下重新入手了一台成色不错的 PSP Go。</p><p>要是只把 PSP Go 当一个藏品，它的设计的确总能惊艳到我。但追求轻薄和小尺寸所带来的后果就是相对糟糕的游戏手感。如果只是玩回合制游戏，或是一些 GalGame 倒还好，可一旦要玩比较考验操作的游戏，那么 PSP Go 作为一台游戏设备的手感并不算太好。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/1ae742497d645a72e646b4544106e45f.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>客观来说，在 2025 年的当下，买一台 PSP 实机除了还童年债以外，几乎无法给你带来更多的价值。不同于 NDS、3DS 等设备，PSP 本身在硬件上并没有特别的地方（甚至连 PSV 都有背触以至于无法完美模拟实机体验）。PSP 的模拟器早已成熟，用更现代的设备不但可以开启多倍分辨率获得更好的画面观感，即时存档等功能也能极大地提高游戏效率。</p><p>但是，将掌机捧在手里，在最原始的平台上玩到那些经典游戏的心理满足感，对我来说是任何模拟设备无法比拟的。这也正是即便现在有很多更「现代」的游戏方案，我依然选择淘老掌机来玩的原因。</p><h2>@Microhoo：DJI OSMO Nano</h2><ul><li>参考价格：¥1698（国补后）</li></ul><p>孩子（干儿子）妈想要不落俗套地晒娃，在我的强烈要求下删掉美图秀秀后从技艺到灵性都突飞猛进，也开始主动去了解各种新奇有趣的拍摄方式。于是在晒娃这个赛道上我已经渐渐跟不上她的角度，至少红极一时的「蚊子视角」是她推荐后我才知道。但那会儿的拍摄设备选择只有 insta360 的 GO3S，我曾体验过这台机器，尽管是从产品形态巧思到影像规格都非常令人敬佩的产品，但受限于传感器尺寸在暗光表现下非常捉襟见肘，自然有碍于多是室内逆光拍摄的「蚊子视角」。彼时无论迭代产品还是大疆即将入局都传得沸沸扬扬，我就让她多等等。</p><p>最近 insta360 GO Ultra 和 DJI OSMO Nano 都已经问世，选择 OSMO Nano 有两个原因，其一是看到网上一些实机分享，方形设计的 GO Ultra 安装在帽檐上拍摄不如条形的 OSMO Nano 便利和隐秘——后者主要是为了不吸引小朋友注意力；其次 GO Ultra 不内置机身存储，倒不是舍不得这点内存卡的钱，只是既然是追求小巧的设备，还要额外插卡多少有点返璞归真了。总而言之，考虑到孩子妈的重点需求，OSMO Nano 是最合适的选择。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/5a0728957de00447c5ec56045e11eed8.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/b48ec4f44545e61a092d6a162e9d736a.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>庆幸这个决定非常正确，因为小朋友还不足两岁，尚不是可以听指挥的年纪，而相对无感的条形 OSMO Nano 已经会被他突如其来的注意力一把扯掉，就很难想方形 GO Ultra 的存活时间。所以如果你的使用场景主要围绕这般自由洒脱的小宝，我是推荐 OSMO Nano 更多一些。于是，孩子妈也如愿以偿得到了她在朋友圈获赞无数的「蚊子视角」。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/6bf4242d61859408f6637d9598a916d4.gif" /></figure><p>因为 GIF 压缩的原因，画质不堪大家看个乐就行，又因为孩子妈是完全没有影片拍摄经验的新手鼓捣，角度、光线等都还有很大的进步空间，祝她越来越好。也感谢互联网和这些不设限的数码厂商，相比我只能对着傻瓜相机呲牙咧嘴的小时候，现在时间过得很快，但我们留下它的方式也更多了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/58159e81baa6c0110c23d0553629c5a9.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>考虑到可能有的朋友没有接触过拇指相机，所以也唠两句 OSMO Nano 机器本身吧。Nano 和 Action 这样的运动相机最大区别就是它的摄像头模组为可拆卸设计，一种使用场景是前面那样受益于小巧机身，用穿戴或配件固定等方式拍摄常规大型设备比如手机、相机等不易获得的创意视角；另一种使用场景则是手持作为监视器使用，两两配合更自由地完成更灵动的画面。</p><p>就我比较主观的感受，如果说 Action 类运动相机是最理想的第一人称视角拍摄设备，那么 OSMO Nano 则能远超期待的完成各种第三视角拍摄，尤其是你单兵作战时。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/7ddb65f8283c131321534c565c420e2a.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>最大的功臣除了各种意想不到的外挂配件，还有 OSMO Nano 摄像头模块内置强磁铁，所以你可以吸附在任何磁性金属表面，好固定，也有好视角。其次则是大疆强大的产品力了，GO3S 不过一年前问世，彼时尽管如传感器、拍摄规格等略不尽如人意，但已经是我认为这类相机的极限了；但仅隔一年问世的 OSMO Nano，差不多就是如今手持最新影像旗舰手机回望十几年前 500 万像素「高清摄像头」的感觉。</p><p>OSMO Nano 有 1/1.3 英寸的 CMOS 和最高 4K/120fps 的最高影像规格，虽然没有作过严谨测试，但实际拍摄效果与当下的运动相机相比已经不落下风。尽管 90 分钟（官方数据，加上图传模块最长 200 分钟）的续航时间稍有不足，但对于创意视角拍摄和中轻度 Vlog 记录也绰绰有余了，主要这可是一个只有 52g 的拇指相机（图传模块 72g），很难想。</p><p>不过参数并不是最重要的，正如毫无经验的孩子妈下个 app 鼓捣几下就能拍出尚且不错的创意视频，OSMO Nano 的意义多是赋予更多普通人记录生活、把时间具像化的能力。网速很快，世界太吵，流淌的时间被截取成生动的珍藏，除了博君一笑，更是点点滴滴存在过的骄傲。</p><h2>@北鸮：DxO ONE 打印外壳</h2><ul><li>参考价格：¥104</li></ul><p>得益于<a href="https://sspai.com/post/100607">富士 X half</a> 的神秘定价，<a href="https://sspai.com/post/91507">DxO ONE</a> 这个怪咖老相机又被人抬了出来并委以重任，凭借同样是一英寸的底成了「四千多块相机的平替」。这相机最大的毛病就是不连手机单独使用时不好握持，快门键在机顶，竖握不太稳定。但多亏它便宜（而且因为直出效果一般，炒了一圈热度后反而更便宜了），这波热度让几位 3D 打印玩家也注意到了这个玩意，做了好几种看起来都有点道理的打印外壳。平常一直在用正常相机的我冷落 DxO ONE 多时，就搞了一个来玩玩。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/99a02bbf7820bb7ce64afe2a59270b0c.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我选了一个形态相对保守的款式。壳子整体精度不错，装配只需要简单调整。相机顶带有一个冷靴口，给没配手机的 DxO ONE 添上了外置补光。快门杆弹性有余硬度不足，基本可以把快门按键的两段手感传导过来。底部补了一个 1/4 螺口——这个我倒完全没用过，把它固定在三脚架上多少有点幽默。外壳不会影响连接手机，不过上了这个壳子后我基本也就没连过手机了，一手端着握把稳稳当当，成品几率大大增加。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/a9f4f2c6a98ed30f97ea1e67a6f1dcb1.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>虽然体积大了一点，能让这个玩具多点实用性也是好事，至少随手拿出门不用只等晴天了。跟被迫对标的半格相机比，这个半截相机的直出画面确实是不够看，我就设成了必开 RAW，权当训练自己学调色了，不过仍然无法改变它对焦一般、取景困难的问题，只是变成了一个更好玩的玩具相机。回头玩腻了，再换个别的造型的壳子，又能当新相机玩上一阵。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/19c80d6b971832a8581d3bf1ba2749b9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>直出 JPG，已经比我之前动不动就拍糊好太多了</p><h2>@Lotta：可口可乐唇膏</h2><ul><li>参考价格：¥29</li></ul><p>可能因为秋天到了，我的嘴唇最近经常干裂甚至流血，除了笑起来有点痛之外我也没太放在心上，但亲友看不下去勒令我速速买一个唇膏。其实我平时不是很喜欢涂唇膏，因为总觉得每次喝水都会喝掉一些，四舍五入像在吃唇膏，于是想着从网上看看，选来选去拖几天这件事也许就被抛到脑后了。没想到亲友直接打开外卖软件点开屈臣氏让我选，不仅有常规的草莓、柑橘、薄荷、椰子味，还有定胜糕桃花红豆味，甚至可口可乐味。</p><p>这个可口可乐唇膏实在太吸引人了，大家请看图：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/9bdb850da95f0c4928d1d13871dd4955.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>谁能拒绝一杯插好吸管的冰可乐呢！</figcaption></figure><p>这款 LiP SMACKER 和可口可乐的联名唇膏的外形就是一杯冰可乐，杯身镭射表面、冰块晶莹剔透，就算是作为模型摆件也绰绰有余，而它 7.4g 的净含量配上 29 元的价格也很便宜，再加上我对唇膏的功效没什么要求，所以一眼就选中了它。摆在工作台上，看到开心了就拿起来涂一涂，至少可以避免嘴巴干的时候舔嘴唇让起皮更严重。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/6b7d9cffaae8b3904391f01b7c1af467.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>白色的杯口以上其实就是唇膏盖子的部分，旋转就可以拧开，关闭时听到「咔哒」一声就拧紧了。膏体也在盖子的部分，是子弹头的形状，杯身是空的，打开后手持盖子直接涂抹即可。膏体气味往好里说是可口可乐软糖的味道，往坏里说也有点像橡皮泥，但上嘴之后就基本闻不到任何气味了，所以使用起来影响不大。唇膏上嘴无色，薄涂一层也不会有很油腻的感觉，使用体验良好。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/16/article/0316baf01b4cb893eddc5710464aaf1a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>除了可口可乐款，这个系列好像还有芬达、雪碧等多个款式，甚至还和迪士尼有联名款，感兴趣的朋友可以自行搜索。</p><hr /><p style="margin-left: 0px;">我们近期开通了新玩意的社媒帐号，更有更多新奇产品和服务以视频方式呈现，快来关注我们吧！</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/06/19/bd248e2ea53452a6dc50cb0b640735d8.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;"><strong>如果你也想分享「新玩意」🔉：</strong></p><ul><li>获取 Matrix 社区写作权限并签署 <a href="https://sspai.com/post/72089" target="_blank">Matrix 共创计划</a>；</li><li>新发布一篇文章，在标题中标注「新玩意」前缀；</li><li>用至少 800 字介绍产品，并配上 2-3 张产品的实拍图片；</li><li><strong>在网站个人信息中补充支付宝账号。</strong></li></ul><p style="margin-left: 0px;">成功入选本栏目还可以得到 108 元的「剁手红包」🧧。如果你有兴趣参与，就赶紧来稿吧！</p><p style="margin-left: 0px;">&gt; 下载少数派 <a href="https://sspai.com/page/client">客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，了解更多的新玩意 🆒</p><p style="margin-left: 0px;">&gt; 特惠、好用的硬件产品，尽在 <a href="https://shop549593764.taobao.com/?spm=a230r.7195193.1997079397.2.2ddc7e0bPqKQHc" target="_blank">少数派 sspai 官方店铺 </a>🛒</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/102845</id>
-            <title>借助捷径，不写代码也能玩转 Quote/0</title>
-            <link>https://sspai.com/post/102845</link>
-            <guid isPermaLink="false">https://sspai.com/post/102845</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 16 Oct 2025 07:38:47 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>墨水屏一直是我非常偏爱的产品形态：低功耗、不依赖背光，同时具备可刷新特性，几乎天生就是为信息看板而设计的。遗憾的是，我并非硬件工程师出身，始终没能亲手做出一块完全符合自己需求的墨水屏。</p><p>几年前，我购买了两块超市电子价签，并在好奇心的驱动下，逆向分析出它们的蓝牙通信协议，由此写下了<a href="https://sspai.com/post/78993" target="_blank">《抓包解协议，代码造布局：电子墨水价签改造 NAS 监控屏小记》</a>。</p><p>也正因如此，当 <a href="https://sspai.com/s/eOyP" target="_blank">Quote/0</a> 出现时，我格外期待。它在官方丰富模板之外，还提供了更灵活的数据更新方式，可以直接通过苹果的捷径（Shortcuts）进行扩展，让墨水屏的玩法不再局限于预设场景。</p><h2>如何驱动 Quote/0 更新</h2><p>要在日常中使用 Quote/0，主要依赖以下三点：</p><ul><li>对捷径 App 的基本操作（Shortcuts）</li><li>官方或第三方 App 对 Siri Intent 的支持</li><li>Quote/0 的设备码和 API Key</li></ul><p>通过这些条件，就能构建出灵活的自动化更新方案。下面以几个场景为例。</p><h3>场景一：日程提醒</h3><p><strong>捷径 + 日历 App + Quote/0 文字 API</strong></p><p>苹果自带的日历应用可以与捷径配合，获取即将到来的日程信息，再通过 <a href="https://sspai.com/s/eOyP" target="_blank">Quote/0</a> 展示在墨水屏上。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/55543381ffe41369a7891f708732c0dd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>iOS 日历日程安排，在 Shortcuts 里用来请求更新 Quote/0</figcaption></figure><p>效果示例：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/7ca1b2138ebe29b26987f8061916b0b0.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>场景二：节假日查询</h3><p><strong>捷径 + 休息日 App + Quote/0 文字 API</strong></p><p>「休息日」是一款提供节假日信息查询的 App，全面支持 Siri Intent。通过配置捷径触发流程，可以快速获取节假日安排并同步到 <a href="https://sspai.com/s/eOyP" target="_blank">Quote/0</a>。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/fe43e9e0f49e4b5f39847c7fce0aa7af.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>休息日模板 - 复制上一个配置 - 休息日提供的 Siri Intent</figcaption></figure><p>示例效果：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/3346da6e176bbe39e48736c02485b5ef.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>场景三：生日 / 纪念日提醒</h3><p><strong>捷径 + 唯记 App + Quote/0 文字 API</strong></p><p>「唯记」是一款专注于生日和纪念日提醒的 App，同样支持 Siri Intent 调用。借助捷径，你可以灵活获取倒数日信息并投放到墨水屏。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/00a23de10c94585a8fcd473498598d51.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>效果示例：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/f167b589c34d752893631b60e87efb61.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>自动化轮播</h2><p>在捷径 App 中切换到底部的<strong>「自动化」</strong>标签，点击右上角<strong>「添加」</strong>，选择<strong>「特定时间」</strong>后，绑定之前配置好的快捷指令。接着，可以根据需求设置不同时间段展示的不同信息。</p><p>这样一来，<a href="https://sspai.com/s/eOyP" target="_blank">Quote/0</a> 就能与手机信息保持同步，实现自动摘要与定时轮播，让它真正成为一个动态更新的桌面信息小组件。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/41242ca6228949aa07003f65ee47f2ab.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>iOS 捷径自动化配置</figcaption></figure><h2>进阶玩法：图片 API</h2><p>文字展示并不是终点。<a href="https://sspai.com/s/eOyP" target="_blank">Quote/0</a> 更强大的能力在于 <strong>图片 API 更新</strong>。在 Node.js 环境下，可以使用虚拟 Canvas （无需借助浏览器或客户端）动态生成画布，并输出图片，再推送到墨水屏，实现更丰富的视觉效果。</p><p>例如下图的黄金走势图：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/09/30/3db39ae703a964e378b64a4936320c4c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>相关示例代码已更新至 <a href="https://github.com/gadore/ink-screen-bluetooth" target="_blank">GitHub 仓库</a>，供参考与拓展。</p><h2>写在最后</h2><p><a href="https://sspai.com/s/eOyP" target="_blank">Quote/0</a> 的出现，让墨水屏的使用方式变得前所未有的灵活。通过捷径、Siri Intent 和 API 的结合，每个人都可以根据自身需求，快速定制出独一无二的应用场景。</p><p>当然，这种玩法也高度依赖应用开发者对 Siri Intent 的<strong>适配</strong>，如果没有适配，就只能走写代码这条老路了，但借助 AI 大模型，现在好像也不是不可逾越的高墙了，勇敢的少年啊，赶紧去尝试吧～</p><span class="ss-externalProduct" title="Quote/0 摘录" type="externalproduct">&nbsp;</span><p>&gt; 下载少数派 <a href="https://sspai.com/page/client" target="_blank">客户端</a>、关注 <a href="https://sspai.com/s/J71e" target="_blank">少数派公众号</a>，了解更多的新玩意 🆒</p><p>&gt; 特惠、好用的硬件产品，尽在 <a href="https://shop549593764.taobao.com/?spm=a230r.7195193.1997079397.2.2ddc7e0bPqKQHc" target="_blank">少数派 sspai 官方店铺 </a>🛒</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/103108</id>
-            <title>一起共创｜我们想打造一个墨水屏体验空间，让数字生活回归「纸感」</title>
-            <link>https://sspai.com/post/103108</link>
-            <guid isPermaLink="false">https://sspai.com/post/103108</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 16 Oct 2025 03:00:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>Quote/0 摘录的持续火热帮助少数派敲开了墨水屏的大门，我们开始逐渐意识到有很多的用户对于墨水屏产品的喜爱。随着信息的爆炸，越来越多的人开始追求更专注、更沉浸的数字生活方式。墨水屏设备凭借其接近纸张的观感、保护视力的特性以及天然的「去干扰」属性，正成为这股浪潮中的理想之选。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/15/fa63ac202ac5ab2f269f29e5ed1f2db0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>站内可以搜索出上百篇关于「墨水屏」的文章</figcaption></figure><p>在少数派，从 Matrix 社区广场到会员社区讨论，我们积累了大量关于墨水屏产品的评测、技术探讨和使用分享，这里已然成为了一个活跃的墨水屏爱好者社群。然而，市面上的墨水屏产品五花八门，不同品牌在显示效果和系统交互上的差异巨大。用户仅凭线上的文字和图片，往往难以做出准确的购买决策。</p><p>正是基于对「高效、健康、沉浸式」生活方式的共同追求，以及对用户「亲身体验」需求的深刻理解，少数派决定与专业的墨水屏社区——暖风家联手，将线上的理念和产品，具象化为一个可以触摸、可以停留的线下空间：<strong>少数派✕暖风家 墨水屏线下体验空间</strong> 应运而生。</p><h2>少数派深圳后海汇线下店：效率理念的实体化展示</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/15/a752bbd28289d3b05168c2cfab7f43fe.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>少数派深圳后海汇线下店</figcaption></figure><p>少数派一直致力于推广「高效工作与优质数字生活」的理念。我们位于深圳后海汇的线下店，不仅是各种新奇好物产品的展示地，更是一个思想交流的场所。在这里，我们定期举办各类有趣的活动，它是少数派效率生活理念的实体化空间。</p><p>为了提供更完善的体验，我们近期大幅丰富了线下店的产品线，引入了更多注重体验和交互的产品。而此次，我们将在店内开辟一个<strong>专属的墨水屏体验区</strong>。我们将努力营造出一种平静、专注的氛围，提供一个没有干扰的环境，让用户能真正沉浸其中，感受回归纸面的「专注力量」。</p><h2>暖风家：18 年墨水屏领域专家</h2><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2025/10/15/4606a82773afedf0bd06700bead41e49.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2025/10/15/44dbc4aacc45282fee00b510f11f37bb.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>暖风家作为国内知名的墨水屏专业社区，是国内电子阅读器市场的核心渠道与战略合作伙伴，目前是文石（BOOX）、掌阅（iReader）、汉王（Hanvon）、大我（Bigme）、大上（DASUNG）、墨案（MOAAN）等头部品牌及众多消费电子品牌的核心代理商。</p><p>暖风家已经在上海和长沙开设了两个墨水屏体验空间，他们的专业优势体现在：</p><p><strong>深度产品理解：</strong> 对不同品牌、尺寸、技术路线的墨水屏设备有深入的评测和对比经验。</p><p><strong>个性化服务：</strong> 能够根据用户的阅读习惯、工作需求和预算，给出专业、中肯的推荐建议。</p><p>这次与少数派的合作，是优质内容平台与垂直产品专家的强强联合。我们确保每一个来到体验空间的用户，不仅能接触到市面上最好的产品，还能获得最专业的解答。</p><h2>打造体验空间的价值：打破「盲选」壁垒</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2025/10/15/2ff01887ea45cfb47f80fb2c085dc7d7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>墨水屏展示空间概念图</figcaption></figure><p>建立墨水屏线下体验空间，我们希望能解决用户的实际痛点，提升选购体验。其中最重的价值有两点。</p><h3>一站式对比，消除选购盲区</h3><p>墨水屏产品的核心参数（如屏幕刷新率、背光均匀度、手写延迟、系统开放性）很难仅凭线上描述了解清楚。在体验空间，我们将系统陈列市面上主流的阅读器、墨水屏平板乃至墨水屏显示器。用户可以：</p><p><strong>亲手对比手写：</strong> 体验不同设备的手写笔触、延迟感和压感。</p><p><strong>观察屏幕细节：</strong> 在自然光和不同亮度的背光下，观察屏幕的细腻度和均匀度。</p><p><strong>体验系统交互：</strong> 现场操作不同品牌的系统，感受其在工作流和笔记功能上的差异。</p><h3>沉浸式场景，融入日常生活</h3><p>我们不希望这里是简单的产品陈列，而是模拟了用户真实的阅读、学习和办公场景：</p><p><strong>阅读角：</strong> 舒适的单人沙发和柔和的暖光，让用户在最放松的状态下，感受墨水屏纯粹的阅读体验。</p><p><strong>办公区：</strong> 将墨水屏设备作为副屏或高效笔记工具，让用户体验如何将其无缝融入到日常工作流中。</p><p>我们希望用户感受到的，不仅是一款电子产品，而是一种理想的、专注的生活方式。</p><h2>诚邀共创：一起「玩转」墨水屏空间</h2><p>我们相信，最好的体验空间是开放和不断成长的。因此，我们诚挚邀请所有用户，一起来定义这个空间的「玩法」！你可以在评论区告诉我们你的想法（任选一即可）：</p><ol><li>你最希望体验到哪些类型的墨水屏设备？阅读器，显示器或者像摘录一样的新概念设备？说说为什么你喜欢它。</li><li>你最希望线下空间提供什么服务？咖啡角，墨水屏设备借阅或者拍照区？说说你为什么需要它。</li><li>你最希望在线下空间举办哪些类型的活动？墨水屏新品发布会，技术分享论坛或者其他好玩的活动。告诉大家你热爱这些活动的原因。</li></ol><figure class="image ss-img-wrapper image_resized" style="width: 297px;"><img src="https://cdnfile.sspai.com/2025/10/15/2383cc86cbc67cb64ee1c33cac602693.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>此外也欢迎加入墨水屏空间共创微信群，让我们一起进行更深入的互动与交流。</p><p><strong>互动奖励：</strong></p><p>我们会定期筛选优质、有洞察力的内容和有趣的「空间玩法」，并赠送少数派和暖风家联合提供的精选周边。你的想法可能会真正改变线下专区的面貌！</p><p>我们希望使用少数派的效率方法论，加上暖风家的专业产品知识，再结合你的创意与反馈，共同为你打造理想的数字生活专区。</p><p><strong>欢迎您来，亲自感受这份回归纸面的专注与平静。</strong></p>
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;<br />文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>本文中「微应用」指利用 AI 开发的、实现特定功能的单个 <code>HTML</code> 网页工具。</p><h2>排座位</h2><p>上个学年我入职到现在的学校，教九年级 16 个班的信息课。每个班有 60 多个学生，而机房却只有 56 台电脑，导致总有几个学生要坐在其他同学后面。为了公平起见，我跟学生约定每个月重新排一次座位，重新排座时之前共用电脑的学生则会独自一台电脑。</p><p>机房的座位并不像普通教室是一行行的布局，而是纵向的四列，每台电脑桌上按蛇形走位贴了座号。再加上，排座时我还会让男生女生间隔坐，有的学生可能会请长假，这些复杂的情况，让我在 Excel 中进行座位调整时并未找到便捷的方法。过去一学年，每到月底重新排座，我总要花上一两个小时完成这件任务。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdnfile.sspai.com/2025/10/13/article/7a1e45770a4df8122abcc87f01b31bfe.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>上面是上学年课程后期一个班级的座位表演示（学生姓名都已替换为随机三字母），我通过单元格填充蓝橙色区分男女（深蓝表示班长），姓名本身的颜色则表示和其他同学共用电脑的次数（黑色为 0、蓝色为 1、紫色为 2），最上面还有一块区域用于存放长期请假的学生。</p><p>9 月刚开始的这个学年，我继续任教九年级，但这次却变成了 18 个班级，排座位这件事对我来说变得更加头疼。之前我就想过让 AI 帮我制作一个工具来完成这件事情，这次任务量的增加让我开始认真对待这个想法。一开始我让 ChatGPT 制作了初始的几个版本排座工具，后来因为上下文容量的限制，我又转用 Gemini 完成了后续几个版本的调整，最终有了如下面动画所示效果的排座工具。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdnfile.sspai.com/2025/10/13/article/bb854b5f91d6775e5d11cac3e752d388.gif" /></figure><p>导入一个有两个工作表组成的表格文件（网页本身提供模板下载），一个工作表存储的是当前座位表（可能为空），另一个则存储 <code>学生姓名</code> <code>性别</code> <code>坐后面次数</code>（即与他人公用电脑的次数）这三项基本信息。导入后可以展示当前座位表（若有的话），也可以进行座位表的重新编排。</p><p>重新编排时将会综合平衡男女生间隔坐和之前公用电脑同学单独一台电脑的规则。对于呈现出的座位表，支持通过鼠标拖拽来进行单个学生的调整、删除，对于请长假的学生可以放到搁置区。最后，对于完成的座位表可以导出为表格文件，导出同时也会更新学生 <code>坐后面次数</code> 的数据以便用于下一次重新编排座位表。</p><p>有了这个工具后，我只需要每次上课前读取对应班级的表格文件就可快速呈现座位表给学生。而每个月初，我也只需通过重新编排功能就可以快速生成新的座位表，再通过导出覆盖之前的表格文件就能实现数据的更新。更进一步地，即使到了明年新的学年，我依然可以使用它完成排座位这件事情。</p><h2>几个工具</h2><p>有了排座位工具的经验后，我重新去看待学校工作中我需要完成的一些琐碎、重复性的任务，思考是否可以用类似的微应用来解决，下面是另外三个我最近制作的微应用。</p><h3>学生积分工具</h3><p>一个用来进行班级学生的积分管理工具，包含以下几个功能：</p><ul><li>导入导出功能，可导入学生名单，可导出学生积分表，包含学生积分总表每个学生的积分变化明细；</li><li>对每个学生可进行积分操作，积分操作包含加减分值和理由两项内容；</li><li>积分操作中的理由设置有灵活模式（自由添加，添加后可重复使用）和严格模式（只能选择预设理由）两种；</li><li>学生卡片可按照积分进行排序；</li><li>可通过 JSON 文件实现导入导出备份。</li></ul><figure class="image ss-img-wrapper"><img alt="" src="https://cdnfile.sspai.com/2025/10/13/article/362bb29638ae01d23400b8b516d14459.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这个工具是我尝试为年级里班主任们做的一个小工具，由于我并未担任班主任，也就没有进行实践使用。然而把这个工具做出来之后，我依然会很兴奋。八九年前刚开始做老师的时候，我担任过一年的班主任。那时候我就曾设想过，能否在班级的管理中通过积分来实现游戏化的管理。然而那时我对编程没有任何接触，又不知道有什么工具可以来实现这种方法，结果在班级中只能采用最原始的纸笔记录，后来也就不了了之了。</p><p>在小红书上也刷到很多相关的工具分享，比如下面这个，积分记录的基础上还有小组游戏化，是一个很好的微应用例子。</p><p><a href="https://www.xiaohongshu.com/explore/68e5af0f0000000003036472?app_platform=ios&amp;app_version=9.3.1&amp;share_from_user_hidden=true&amp;xsec_source=app_share&amp;type=video&amp;xsec_token=CBY4d2SDhCTMviHhvMnSi2C3I3-zuVwqqMSWIW1KstL6s=&amp;author_share=1&amp;xhsshare=CopyLink&amp;shareRedId=N0g6NDM6PUxJOz1DOTkwNjY0OzpJNzhA&amp;apptime=1759886429&amp;share_id=5088c8ecb987457c8c08d80979f10904">学生「上瘾」的班级积分系统｜一线老师必备 - 小红书</a></p><h3>周测监考安排</h3><p>九年级每周五晚上和周六上午会组织周测，在安排监考表的时候有以下几个因素要考虑：</p><ul><li>每次周测考试科目的顺序会发生变化；</li><li>晚上和白天监考的补贴不一样，需要平衡各位老师晚上与白天的监考场次数；</li><li>晚上的场次（2 场）有时会需要班主任在自己班级监考；</li><li>周六上午的场次学生则可以选择不参加，所以晚上和白天的场次会不一致；</li><li>涉及到周六，部分老师有时会有个人原因没法监考。更进一步地，部分老师会长期因为某些原因无法监考。</li></ul><p>针对上面这些因素，我借助 AI 完成了下面这个周测监考安排工具。导入表格数据后，考场设置方面可以修改考场数和考试科目时间。监考人员方面，监考老师可以优先设置班主任监考晚上场次，不能参与当次周测的老师可以取消勾选。每个老师后面的设置按钮可以针对详细的监考偏好设置，同时可以选择是否保存为长期偏好。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdnfile.sspai.com/2025/10/13/article/0f25397f2d9a20253fe01f750d4be2d9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img alt="" src="https://cdnfile.sspai.com/2025/10/13/article/e36d7795043adcc45156b10f111cafc6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>对于生成的监考安排，有时候需要进行细微调整，可以通过拖拽每个老师的姓名卡片完成。工具页面关闭之后，有时还会有临时调整，所以在导入表格文件时可以选择「修改模式」，对当前表格中存储的监考安排进行修改。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdnfile.sspai.com/2025/10/13/article/6008f464f6805da78a2b34b3d5d03c02.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>生成的监考表一方面需要保存为图片便于在老师群中下通知，另一方面需要导出为表格文件作为记录。同时，导出的表格文件也会汇总所有周测每个老师的晚上和白天监考场次总数。</p><p>实际上除了周测监考安排，还有月考与期中期末这种大型考试的监考安排，规则又不一样。由于场次较多且每场要有两位监考老师，在微调场次时找到有空闲的老师很麻烦，我就对应添加了两个换班功能：</p><ul><li>智能换班，对指定的两位老师，自动查找其中一人监考而另外一人无监考的场次，对调两人这个场次的安排；</li><li>生成的监考安排中，去掉某位老师，可提供当场次无监考的老师作为候选项。</li></ul><figure class="image ss-img-wrapper"><img alt="" src="https://cdnfile.sspai.com/2025/10/13/article/583d0fb502454a036a57db5b36155c2e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>月考考场安排</h3><p>月考除了上面涉及到老师的监考安排外，还需要对学生进行考场安排。考场安排的规则很简单，按照给定的学生名单顺序每个考场 56 个学生排考场即可。但麻烦的地方在于需要将考场安排呈现为下面 4 份表格文件：</p><ul><li>考生总表：包含班级、考场号、座号、姓名、学校信息的，用于学生条形码打印；</li><li>按班级呈现的学生名单：包含学生姓名、考场号、座号，用于班级内通知学生考场安排信息；</li><li>按考场呈现的学生名单：包含学生姓名、考场号、座号、班级，张贴到各个考场内；</li><li>按考场呈现学生桌贴：用于张贴到每个学生桌面上。</li></ul><p>这个微应用的的界面就比较简单，导入学生信息、设置考号，之后就可以一键导出上面所提到的四个文件。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdnfile.sspai.com/2025/10/13/article/04945c05edde066bf742ee7a3d7efddb.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>为教师而生：微应用的三点核心优势</h2><p>完成了上面几个微应用后，我开始意识到这种 AI 辅助下自制工具的便利性，以及与教师工作的契合。</p><p>成为一名老师之后，我才发现教师这份行业并不如大多数人想象得那么美好。在教师的本职教学工作之外，常常有很多琐碎的事务要去处理。与此同时，教学本身又是需要花很多心思去思考与创造的。当一个老师把精力放在琐碎事务上时，自然会挤压他思考教学的精力。</p><p>上面我举的几个微应用场景，或许都可以尝试通过编程（如 Python）或着 VBA（内嵌在 Excel、Word 等 Office 软件里的编程语言）来实现。但老师并不是全能的，编程的方式并不适合大多数老师。然而有了 AI 之后，老师可以不是全能的，但却可以借助「几乎」全能的 AI 来定制各种工具。</p><p>最近一段时间体验下来之后，我认为微应用有三大优点，非常适合教师工作。</p><h3>高度定制化</h3><p>具体到教学工作中，每个老师的需求是多样的。例如一开始我提到的排座位，机房和班级教室排座位的规则截然不同，具体到每个老师会有他自己的考量。如果我把我上面的排座位微应用发给其他老师，很可能并不适合他的需要。然而，对于每个老师截然不同的需求，从 AI 的角度来看并不难去实现。所以，每个老师都可以在 AI 的辅助下去高度定制满足自己需求的微应用。</p><p>在小红书上，算法最近也常常推送一些相关的分享帖子给我——学生成绩分析、教室安静程度检测、早读音量检测、作业完成统计、知识点交互动画……可以看到很多老师在 AI 的辅助下制作了各种各样的微应用来定制化地满足自己教学工作的需要。</p><h3>便捷分享与再定制</h3><p>虽然上面我刚刚写到微应用是高度定制化的，不同老师之间的需求不一样。但某些场景下需求一致时，微应用又十分便于分享。微应用本质上就一个单独的 HTML 网页，在任意一台电脑上都可以通过浏览器打开与使用，甚至手机上也可以。</p><p>这一特点和 VBA 工具（即 Office 中的宏工具）对比鲜明。由于宏工具的复杂性（高度依赖具体的操作系统、Office 软件版本），不同电脑上的通用性可能存在偏差。比如之前有同事分享给我一个成绩分析的 <code>.xlsm</code> 文件，但不知什么原因在我的 mac 电脑上其中包含的宏工具并不能正常运行。</p><p>在便捷分享的基础上，微应用又可以方便地进行再定制。例如我制作的排座位微应用，同学校的信息老师如果希望排座时不需要考虑男女生的性别。这时，他完全可以直接把得到的微应用传给 AI，然后让 AI 在其基础上修改代码去掉男女相关的规则，工具得到了适应个人需求的再定制。</p><h3>数据隐私</h3><p>由于这种微应用本身就只是一个电脑上的单网页文件，所有的操作也都是本地处理（除非在线引用了某些工具库），所以几乎不太可能泄露所处理的一些学生或教师数据。</p><h2>从零开始制作一个微应用</h2><h3>基本流程</h3><p>那么如何借助 AI 去制作这样一个微应用？回顾几次微应用的制作经历，我梳理了下面一套流程。</p><h4>明确需求</h4><p>让 AI 制作微应用的过程，有点像是老板指挥实习生完成任务，老板（我们）要做的是给出目标、不需要考虑具体如何实现，而实习生（AI）会根据目标尝试各种实现方法。所以微应用制作第一步，是要明确需求，想清楚要制作的微应用具有什么功能、可能包含哪些规则、是否要生成某种数据等等。</p><p>这有点像是声明式编程，我们只需要告诉 AI 要做成什么样，而 AI 自己就会去实现。</p><h4>指令构建</h4><p>发给 AI 怎样的指令（prompt）才能更好地创建微应用？这一步其实就可以交由 AI 来完成。下面这段是我询问 AI 制作单网页微应用工具使用该怎样的指令，AI 所给出的具体示范。</p><pre class="language-markdown"><code>（第一层：角色与目标）
+你现在是一名资深的前端开发工程师。
+请帮我创建一个“班级随机点名器”，它是一个单文件的 HTML 网页应用，老师可以粘贴学生名单，然后随机抽取一名学生。
+（第二层：功能与逻辑）
+这个应用需要实现以下功能：
+- 用户可以在一个文本输入框里，粘贴多行学生名单，每行一个学生名字。
+- 程序需要能自动忽略掉名单中的空行。
+- 点击“开始点名”按钮后，程序会从名单中随机抽取一名学生。
+- 被抽中的学生名字会清晰地显示在下方的结果区域。
+- 如果名单为空就点击按钮，应弹出一个提示“请输入学生名单”。
+（第三层：组件与布局）
+页面需要包含以下几个部分：
+- 一个标题，内容是“班级随机点名器”。
+- 一个多行文本输入框，并有提示文字“请在此处粘贴学生名单，每行一个”。
+- 一个按钮，文字是“开始点名”。
+- 一个用于显示结果的区域，初始内容是“祝你好运！”。
+（第四层：风格）
+风格要求：请让整体页面采用现代、简洁的设计风格。所有元素在页面中水平居中。输入框和结果区域有圆角和浅灰色边框。按钮使用圆角设计，蓝色背景，白色文字，鼠标悬停时有变色效果。</code></pre><p>核心主要是三点——角色、要求 HTML 单网页、应用功能。</p><ul><li>角色：借用上面实习生的比喻，AI 是一个多重身份的实习生，会计、医生、教师、程序员等等各种角色，指令中的角色让 AI 明确了它应采用的特定角色身份及相关领域知识。</li><li>单网页：明确微应用的呈现形式，单网页更容易分享。</li><li>应用功能：分点罗列的规则与功能需求，越明确细化，AI 越清楚要如何实现。</li></ul><h4>测试效果</h4><p>在输出成果（HTML 代码）时不同 AI 界面不同，DeepSeek、豆包、ChatGPT、Claude 中直接点击提供下载按钮下载保存为 <code>.html</code> 文件（后两者需先点击进入预览），而像 Kimi、Google Gemini 则只提供了复制代码按钮。对于后两者，可在电脑上创建 <code>.txt</code> 文档并修改后缀名为 <code>.html</code>，接着使用记事本应用打开文件后将代码复制粘贴到其中并保存。</p><p>打开微应用后，就可以按照预期的功能进行测试。特别地若微应用的功能涉及到数据的处理，由于在之后多次迭代的优化过程中可能会需要测试多种情况，我会建议制作一个测试清单与相应的测试数据。有了测试清单后按照清单一项项去测试微应用的效果，避免最终应用有所遗漏。</p><h4>迭代优化</h4><p>除非微应用的功能非常简单（比如第 2 步中我示范的随机点名工具），通常 AI 制作的第一版微应用并不能完全符合我们的预期，我们需要与 AI 进行持续的沟通去不断优化微应用。</p><p>在测试时，可能会发现某些功能 AI 并未能实现，也可能我们会产生新的功能需求，甚至还可能出现严重的错误而导致应用并不能顺利运行。不管是哪种情况，都做好记录，然后将其再发给 AI 并让其根据反馈进一步优化微应用。经过这样的多次迭代，我们最终才可能得到我们想要的效果。</p><h3>一些小技巧</h3><p>在制作微应用的过程中，我也逐渐发现一些有用的小技巧。</p><h4>保留关键版本、做好备注与标签</h4><p>在多次迭代优化的过程中，将会产生多个版本的微应用，某些情况下我们可能会需要用回某个旧的版本。有次我进入机房准备给班级上课，这时发现我那天刚让 AI 制作的新版本排座工具在机房教师电脑上无法打开，我就先用旧版本呈现座位表来让学生坐下，之后再来优化新版工具。</p><p>我会建议把一些可以成功实现部分预期效果的关键版本都保留下来，同时在文件名中备注此版本的重要变化，以便随时可以回退到旧版本使用。考虑到微应用都是简单的单个 <code>.html</code> 文件，使用 git 进行版本管理会有点大材小用，所以我会建议简单的多文件存储。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdnfile.sspai.com/2025/10/13/article/1ef58ad1cfabae1c239b904eccf255d7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>此外，在我最新版的排座微应用中，我还让 AI 加入了一个版本说明按钮，这样在最新版本的微应用中，我就可以快速回顾迭代过程中的多个重要节点。</p><figure class="image ss-img-wrapper"><img alt="" src="https://cdnfile.sspai.com/2025/10/13/article/5892788a7e34d1aad9d9f5aee5ea9b2b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h4>由小到大，小步前进</h4><p>当我们的微应用所使用的场景比较复杂，在一开始的时候，我们可能并不能把功能需求梳理地非常全面。我会建议把能想到的重要功能需求先提交给 AI 去制作微应用。当我们有了一个可运行版本的微应用后，测试的过程会进一步帮我们梳理需求，再让 AI 继续迭代优化。小步前进，会比一开始就想让完成一个「完美」的微应用要顺利许多。</p><h4>超上下文怎么办</h4><p>与 AI 对话的过程中，当前对话记录会有一个上下文限制，通俗一点讲就是我们和 AI 的单个对话会有总字数限制，当我们超过这个限制 AI 就会开始遗忘之前的聊天记录。微应用制作与迭代过程中 AI 将会多次输出大量代码，很容易就超出上下文限制。</p><p>超出上下文限制时，可以与 AI 开启一个新对话，将最新版本的微应用 <code>.html</code> 文件作为附件添加上，在简单概述微应用的功能需求。这样就可以在之前版本的基础上，让 AI 继续迭代优化。文章开头我提到的排座工具，一开始我用的是 ChatGPT，后来由于一些问题总不能得到解决，我就用这种方法转而让 Gemini 进行了后续的迭代开发。</p><h2>结语</h2><p>AI 时代的当下，老师这个职业却依然存在着许多繁琐的、事务性的工作。我们依然会被要求手写教案与听课记录作为教学常规的检查事项之一，会需要手写家访记录与学生谈话记录作为工作档案……种种事情在消磨着我们的热情，把我们从鲜活的教育者，一步步异化为教学流程上的工具。</p><p>AI 让我们每个人都可以成为设计师与创造者，我希望这篇文章所提到的微应用，可以帮教师同仁们尽量减少一些事务性工作，让各位同仁可以有更多的时间和精力去钻研教学、丰富自己与享受生活。</p><p>作为一名义务教育阶段的信息科技老师，我一直喜欢在工作中尝试各种数字工具。「教师数字文具盒」系列，是我对我使用的工具或方法所做的一系列介绍文章。具体包含：</p><ul><li><a href="https://monkeys.cafe/2024/09/03/%e6%95%99%e5%b8%88%e6%95%b0%e5%ad%97%e6%96%87%e5%85%b7%e7%9b%92-1%ef%bc%9a%e8%af%be%e8%a1%a8%e7%ae%a1%e7%90%86-istudiez-pro-%e6%97%a5%e5%8e%86/" target="_blank">教师数字文具盒 1：课表管理——iStudiez Pro + 日历</a></li><li><a href="https://monkeys.cafe/2024/09/19/%e6%95%99%e5%b8%88%e6%95%b0%e5%ad%97%e6%96%87%e5%85%b7%e7%9b%92-2%ef%bc%9a%e8%af%be%e7%a8%8b%e8%bf%9b%e5%ba%a6%e7%ae%a1%e7%90%86-notion/" target="_blank">教师数字文具盒 2：课程进度管理——Notion</a></li><li><a href="https://monkeys.cafe/2024/11/18/%e6%95%99%e5%b8%88%e6%95%b0%e5%ad%97%e6%96%87%e5%85%b7%e7%9b%92-%e7%95%aa%e5%a4%96%ef%bc%9a%e4%b8%aa%e4%ba%ba%e8%af%bb%e4%b9%a6%e9%9f%b3%e9%a2%91%e7%94%9f%e6%88%90-pythonfish-audio/" target="_blank">教师数字文具盒 番外：个人读书音频生成——Python+Fish Audio</a></li><li>教师数字文具盒 3：AI 自制「微应用」百宝箱（即本文）</li></ul><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>
