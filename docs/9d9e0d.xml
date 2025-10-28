@@ -22,6 +22,23 @@
         </item>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6900cb4be74e87a1be648181</id>
+            <title>AI探索站 10月28日</title>
+            <link>https://m.okjike.com/originalPosts/6900cb4be74e87a1be648181</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6900cb4be74e87a1be648181</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 28 Oct 2025 13:55:23 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    无意间发现 GPT 画这种信息图的还原度挺高啊<br /><br />搞成 SVG 以后还能扔进 Figma 里面改字体，改完就更像了<br /><br />让 GPT 总结了一套提示词👇<br /><br />用途：我发一张信息图或海报截图，你把它高保真还原为可编辑 SVG，整体排版尽量一致，但文字改成 {中文}（或保持原语言）。<br /> 提示词：<br />指令<br />请把我发送的图片转成可编辑 SVG：<br /><br />保持版式与层级结构（标题、分区、图标、箭头、图表等）尽量一致；<br />所有文字保留为  可编辑（不要转路径）；<br /><br />所有图形用向量元素（////），不要嵌入位图；<br /><br />颜色与风格尽量接近原图；<br /><br />分组与命名清晰：01_Header、02_Section_*、Icon_*、Chart_*；<br /><br />画布尺寸按原图推断；坐标/描边尽量用整数；<br /><br />生成文件到 /mnt/data/infographic.svg 并给出下载链接。<br />若图片中有不清晰的内容，请做合理假设并在结果底部列出“假设项”。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/69003452e74e87a1be58b1f8</id>
             <title>AI探索站 10月28日</title>
             <link>https://m.okjike.com/originalPosts/69003452e74e87a1be58b1f8</link>
@@ -34,23 +51,6 @@
                 <![CDATA[
                     
                     Manus联创的“血泪”教训：为什么上下文工程，而非模型微调，才是护城河？<br /><br />一位拥有10年NLP（自然语言处理）经验的AI创业公司联创坦言：“对于创业公司，过早微调（Fine-tuning）模型是一个陷阱。”<br /><br />这不是危言耸听。<br /><br />Manus的联合创始人兼首席科学家Peak，在最近与LangChain创始人的对谈中，分享了他的“血泪教训”：他的上一个产品，迭代速度被长达1-2周的模型训练周期活活拖死。<br /><br />这一次，他选择把所有赌注压在“上下文工程”（Context Engineering）上，并为此，他的团队在短短几个月内，将产品重构了整整5次。<br /><br />为什么他如此笃定？<br /><br />1. “微调”的陷阱：被模型拖垮的“上一个”公司<br /><br />在创立Manus之前，Peak已经在NLP领域摸爬滚打了10年。他的上一个创业项目，和现在许多AI团队一样，选择了“训练自有模型”的重度路线。<br /><br />结果是灾难性的。<br /><br />“我们的产品创新速度，完全被模型的迭代速度给限制了。”Peak回忆道。<br /><br />在产品还没找到PMF（市场契合点）的阶段，他们却在花费大量时间“提升那些可能根本不重要的基准测试”。一个单一的“训练-评估”周期，就需要1到2周。<br /><br />当团队在焦急地等待模型时，市场窗口早已关闭。<br /><br />但最大的“陷阱”还不是时间，而是“僵化”。<br /><br />“当你微调一个模型时，”Peak解释道，“你通常会固定一个‘行动空间’（Action Space）。”<br /><br />这就像你花重金打造了一把精妙绝伦的“屠龙宝刀”。但如果第二天，巨头发布了（比如多模态MCP），市场不再需要“屠龙”，而是需要“飞天”，你这把刀就成了一堆废铁。<br /><br />“Manus的设计就曾被MCP的发布彻底改变。”Peak坦言，如果他们当时死磕微调，唯一的下场就是被市场活活抛弃。<br /><br />2. 划清界限：AI应用层的真正边界<br /><br />经历了上一次的“痛苦”领悟，Peak这次为Manus找到了一个清晰无比的战略边界。<br /><br />“你必须坚定地划清你的界限（Be firm about where you draw the line）。”<br /><br />对于AI应用层创业，这条界限就是“上下文工程”。<br /><br />Peak认为，这是目前应用和模型之间最清晰、最实用的边界。创业公司应该“尽可能久地”依赖通用大模型，而不是试图在模型层与巨头竞争。<br /><br />巨头的护城河是“模型”，而应用层的护城河，就是你“使用”模型的能力——即“上下文工程”。<br /><br />那么，这个听起来高深的“上下文工程”到底是什么？<br /><br />3. “上下文悖论”：Agent的阿喀琉斯之踵<br /><br />2022年，我们谈论的是“提示词工程”（Prompt Engineering），它解决的是单次交互。<br />而2024年，我们面临的是“上下文工程”（Context Engineering），它要解决的是Agent（智能体）的长序列、多轮工具调用。<br /><br />LangChain的创始人Lance指出了一个“上下文悖论”：<br /><br />Agent要完成复杂任务，必须大量调用工具（典型任务约50次）来获取上下文。<br /><br />但上下文越长，Agent的性能就越差，成本也呈指数级上升。<br /><br />更糟糕的是，Peak发现，即使是100万Token的上下文窗口，模型在处理到200K（约20万）时，性能就开始“腐烂”（Context Rot），出现重复、缓慢和质量下降。<br /><br />“上下文腐烂”的阈值，大约就在128K到200K之间。<br /><br />你的Agent又慢又笨，不是模型不行，是你的“上下文工程”没做好。<br /><br />4. 破局：上下文工程的4大支柱<br /><br />如何解决这个悖论？LangChain的Lance总结了业内顶尖团队（包括Manus）都在使用的4大工程支柱：<br /><br />上下文卸载 (Offloading)<br /><br />做法：不把所有信息都塞进上下文。比如，一个万字的网络搜索结果，只在上下文中返回一个文件路径（file.txt），Agent需要时自己去读。<br /><br />场景：处理大文件、大输出。<br /><br />上下文检索 (Retrieving)<br /><br />做法：把信息（如记忆）存储在外部（如向量数据库），在需要时通过RAG或简单的grep命令检索回来。<br /><br />场景：长时记忆、知识库。<br /><br />上下文隔离 (Isolation)<br /><br />做法：使用多智能体（Multi-Agent）架构，每个子Agent只处理自己的小上下文窗口，互不干扰。<br /><br />场景：复杂任务拆解。<br /><br />上下文缩减 (Reducing)<br /><br />做法：这是最核心也最精妙的一步，即在上下文“腐烂”之前，主动对其进行“瘦身”。<br /><br />而Manus团队，正是在“上下文缩减”上，做到了极致。<br /><br />5. Manus实战：“压缩”与“摘要”的精妙艺术<br /><br />Peak的团队将“缩减”分为了两种截然不同的操作：<br /><br />1. 压缩 (Compaction)：可逆的“瘦身”<br /><br />定义：删除那些可以从外部（如文件系统）重建的信息。<br /><br />例子：一个工具调用，完整信息是{path: "file.txt", content: "..."}。在“压缩”后，只保留{path: "file.txt"}。<br /><br />优势：信息“零”丢失，只是被“外置”了。<br /><br />2. 摘要 (Summarization)：不可逆的“遗忘”<br /><br />定义：对历史信息进行总结，彻底丢弃原文。<br /><br />优势：大幅度释放上下文空间。<br /><br />Manus的策略堪称精妙：<br /><br />设置“腐烂”闹钟：首先，团队会设置一个“腐烂阈值”，比如128K。<br /><br />先“压缩”，后“摘要”：当上下文达到128K时，系统首先触发“压缩”。只在“压缩”的收益也变小时，才万不得已触发“摘要”。<br /><br />“压缩”的艺术：执行“压缩”时，只压缩最老的50%历史，并保留最新的50%工具调用的完整信息。这能确保模型有足够的新鲜“样例”来模仿，防止其行为错乱。<br /><br />“摘要”的技巧：执行“摘要”时，会使用原始的、未经压缩的数据来总结，以保证信息保真度。并且，同样会保留最后几个工具调用的全量信息，防止模型“忘记自己刚刚在干什么”。<br /><br />6. 在流沙上构建：5次重构与“更贵”的开源<br /><br />这套复杂的“上下文工程”架构，就是Manus的护城河。它让Manus有能力在“流沙”（不断迭代的大模型）之上构建稳固的应用。<br /><br />“从3月到现在，我们已经重构了5次。”Peak说。<br /><br />这种“上下文工程”能力，也让他们在选择模型时有了更反直觉的洞察。<br /><br />Peak甚至认为，对于Agent应用，使用开源模型可能“更贵”。<br /><br />“这很有趣，关键在于成本。”他解释道，“Agent的输入（上下文）远大于输出，KV缓存至关重要。”而头部API厂商（如Anthropic）在分布式KV缓存上做了坚实的基建，使得在超长上下文中，API的成本甚至低于自托管的开源模型。<br /><br />7. 结语：构建更少，理解更多<br /><br />回顾Manus的历程，Peak给出了他最深刻的领悟：<br /><br />“我们最大的飞跃，不是来自添加了更花哨的上下文管理技巧，而是来自‘简化’和‘移除不必要的层’。”<br /><br />“我们最终的哲学是：构建更少，理解更多（Build less and understand more）。”<br /><br />这位10年NLP老兵最后总结道：<br /><br />“上下文工程的真正目标，不是让你的系统更复杂，而是让模型的工作，变得更简单。”<br /><br />from Langchain<br /><br />Context Engineering for AI Agents with LangChain and Manus
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/68fec9b300c0686ab58b4090</id>
-            <title>AI探索站 10月27日</title>
-            <link>https://m.okjike.com/originalPosts/68fec9b300c0686ab58b4090</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/68fec9b300c0686ab58b4090</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 27 Oct 2025 01:24:03 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    只管出门，天气交给AI
                 ]]>
             </content:encoded>
         </item>
