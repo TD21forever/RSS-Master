@@ -5,6 +5,185 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2025/11/minimax-m2.html</id>
+            <title>大模型比拼：MiniMax M2 vs GLM 4.6 vs Claude Sonnet 4.5</title>
+            <link>http://www.ruanyifeng.com/blog/2025/11/minimax-m2.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/11/minimax-m2.html</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 04 Nov 2025 08:21:31 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>一、</p>
+
+<p>上个月，我写了<a href="https://www.ruanyifeng.com/blog/2025/10/glm-4.6.html">一篇文章</a>，比较了两个大模型。</p>
+<p>就有人留言，两个模型太少了，能不能加入其他模型？</p>
+
+<p>正好上周（10月27日），MiniMax 公司<a href="https://www.minimaxi.com/news/minimax-m2">发布了</a> M2 模型，代表了国产大模型的最新水平。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110301.webp" title="" /></p>
+
+<p>我就想，可以测测它的实战效果，跟智谱公司的 GLM 4.6 和 Anthropic 公司的 Claude Sonnet 4.5 对比一下。</p>
+
+<p>毕竟它们都属于目前最先进的编程大模型，跟我们开发者切身相关。</p>
+
+<p>二、</p>
+
+<p>先要说明，其实我不太熟悉 <a href="https://www.minimaxi.com/">MiniMax 公司</a>，它比较低调。</p>
+
+<p>我只知道，这家公司专门研发大模型，产品有文本模型、视频模型、音频模型等等，但都不是非常热门。我就没有特别关注。</p>
+
+<p>上周，我在滑推特的时候，看到一些老外在议论（<a href="https://x.com/reach_vb/status/1982705125157126590">1</a>、<a href="https://x.com/ivanfioravanti/status/1982103760819064967">2</a>、<a href="https://x.com/simonw/status/1982825075553493136">3</a>），这才知道 MiniMax 发布了新的旗舰模型 M2。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110302.webp" title="" /></p>
+
+<p>上面<a href="https://x.com/reach_vb/status/1982705125157126590">说话的这个人</a>是 HuggingFace 大模型社区的负责人，提到了 M2 模型在 Artificial Analysis 性能评比之中排名世界第五，开源模型第一。</p>
+
+<p>当天的 HuggingFace 热度榜上，它也是第一名。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110304.webp" title="" /></p>
+
+<p>OpenRouter 的大模型全球调用量排名，它这周排在第三。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110312.webp" title="" /></p>
+
+<p>我就来了兴趣，准备好好试用一下。</p>
+
+<p>三、</p>
+
+<p>根据 MiniMax 公司的说明，<strong>M2 模型的编程能力特别强</strong>，是目前最优秀的编程模型之一。</p>
+
+<p>大家知道，国际上最流行的编程模型现在是 Claude Sonnet 4.5，国内的 GLM 4.6 模型也很强，我就把它们三个放在一起对比。</p>
+
+<p>简单起见，我就直接在官方的网页版（<a href="https://agent.minimaxi.com/">国内版</a>，<a href="https://agent.minimax.io/">国外版</a>）上运行测试，大家可以跟着一起动手试试看。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110305.webp" title="" /></p>
+
+<p>网页版实际是官方的智能体产品 <a href="https://www.minimaxi.com/news/minimax-agent">MiniMax Agent</a>，底层用的就是 M2 模型。</p>
+
+<p>网页使用是免费的，API 调用现在也是<strong>免费期</strong>，为期两周。后面定价是百万 tokens 输入/输出 2.1元/8.4元人民币，官方宣传只有 Claude 价格的8%。</p>
+
+<p>它的其他链接，我也列一下，<a href="https://github.com/MiniMax-AI/MiniMax-M2">文档仓库</a>在 GitHub，<a href="https://platform.minimax.io/docs/guides/text-generation">API 调用指南</a>（兼容 OpenAI 和 Anthopic 格式）看官方文档，<a href="https://huggingface.co/MiniMaxAI/MiniMax-M2">模型下载</a>在 HuggingFace，下载以后可以本地部署使用（如果条件允许）。</p>
+
+<p>四、</p>
+
+<p>我的测试题来自著名程序员西蒙·威利森（Simon Willison），他的网站有 Cluase Sonnet 4.5 的<a href="https://simonwillison.net/2025/Sep/29/claude-sonnet-4-5/">测试结果</a>。</p>
+
+<p>此前，我用这些题目测过智谱公司的 GLM 4.6 模型，大家可以<a href="https://www.ruanyifeng.com/blog/2025/10/glm-4.6.html">参考</a>。</p>
+
+<p>本文主要是 MiniMax M2 的测试表现。</p>
+
+<p>五、</p>
+
+<p>第一题，测试模型理解和运行代码的能力。</p>
+
+<blockquote>
+  <p>拉取代码仓库 https://github.com/simonw/llm ，然后通过下面的命令运行测试用例。</p>
+
+<p>pip install -e '.[test]' <br />
+pytest</p>
+</blockquote>
+
+<p>上面的提示词要求模型抓取一个 Python 仓库，运行里面的测试用例，并返回结果。</p>
+
+<p>从网页的显示来看，Minimax Agent 显然内置了沙盒，会在隔离环境的命令行下运行代码（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110306.webp" title="" /></p>
+
+<p>整个运行过程大约三分钟，然后它给出了结果：运行通过了466个测试用例。这个结果完全正确。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110307.webp" title="" /></p>
+
+<p>令我惊喜的是，除了运行结果，它还给出了覆盖率分析（下图），指出测试用例覆盖了代码的哪些功能。我还没在其他模型见过主动提供覆盖率的。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110308.webp" title="" /></p>
+
+<p>完整的对话看<a href="https://agent.minimaxi.com/share/329839918691041?chat_type=1">这里</a>。</p>
+
+<p>六、</p>
+
+<p>第二题，测试大家最关心的代码生成能力，看看它能不能按照要求生成应用程序。</p>
+
+<p>我还是使用上面的仓库，要求 M2 为其增加一个功能，不仅需要修改代码，还需要修改数据库结构，并增加配套的测试用例。</p>
+
+<blockquote>
+  <p>1、代码仓库 https://github.com/simonw/llm 是一个 AI 对话应用，它将用户的提示和 AI 的响应存储在 SQLite 数据库中。</p>
+
+<p>2、它目前使用线性集合，保存单个对话和响应。你尝试在响应表中添加一个 parentresponseid 列，并通过该列将对话的响应建模为树状结构。</p>
+
+<p>3、编写新的 pytest 测试用例，验证你的设计。</p>
+
+<p>4、编写一个 tree_notes.md 文件，首先将你的设计写入该文件，然后在运行过程中将该文件用作笔记。</p>
+</blockquote>
+
+<p>这个任务比较复杂，运行时间稍微长一点。</p>
+
+<p>这里有一个插曲。在运行过程中，它突然提示读取 GitHub 仓库没有成功，这时出现了我意外不到的一幕。</p>
+
+<p>它竟自动切换到第三方的 deepwiki.com 去获取仓库。后面，分析数据库结构时，它又切换到 datasette.io 去分析 SQLite 数据库。这种第三方云服务的自动切换，我也是第一次见，可惜没来得及截图。</p>
+
+<p>任务完成后，它给出了一段总结（下图），详细描述了它做了哪些事情，包括修改数据库、新增测试用例等等。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110309.webp" title="" /></p>
+
+<p>它甚至增加了一个示例文件（下图），演示新增的功能怎么用，还有一个示例图，演示修改后的对话结构，提示词里面可没要求它这么做。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110310.webp" title="" /></p>
+
+<p>完整的对话看<a href="https://agent.minimax.io/share/329995155439860?chat_type=1">这里</a>。</p>
+
+<p>另外，官网的<a href="https://agent.minimaxi.com/">画廊</a>有很多它生成的应用，我觉得也值得看一下。</p>
+
+<p>七、</p>
+
+<p>第三题就是西蒙·威利森发明的"鹈鹕骑自行车"场景，测试它的理解和推理能力。</p>
+
+<blockquote>
+  <p>生成鹈鹕骑自行车的 SVG 图片。（Generate an SVG of a pelican riding a bicycle）</p>
+</blockquote>
+
+<p>这是现实中不存在的情景，全靠模型自己推理出来。理解能力越强，生成的图像就越逼真。</p>
+
+<p>下面就是它生成的结果，完整的对话看<a href="https://agent.minimaxi.com/share/329832235541493?chat_type=1">这里</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110311.webp" title="" /></p>
+
+<p>作为比较，我把另外两个模型的结果也贴出来。</p>
+
+<p>GLM 4.6</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100108.webp" title="" /></p>
+
+<p>Claude Sonnet 4.5</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100107.webp" title="" /></p>
+
+<p>我觉得，MiniMax M2 的结果（第一张图片）有两个值得注意的地方。首先，它添加了道路；其次，它的自行车结构相对更完整，只是缺了握把。另外，要是那只鹈鹕的姿势更像"骑车"就好了。</p>
+
+<p>八、</p>
+
+<p>测试就到这里，至于 <a href="https://www.ruanyifeng.com/blog/2025/10/glm-4.6.html">GLM 4.6</a> 和 <a href="https://simonwillison.net/2025/Sep/29/claude-sonnet-4-5/">Claude Sonnet 4.5</a> 的结果对比，大家可以看它们各自的链接，自行比较。</p>
+
+<p>我必须诚实地说，<strong>MiniMax M2 的表现超出了我的预期</strong>。</p>
+
+<p>最吸引我的地方，还不是运行结果本身，而是它处理问题的方式，对用户很友好，会添加一些帮助理解的辅助结果，让你觉得很易用（accessible）也很易懂，这也从侧面增强了生成结果的可靠性。</p>
+
+<p>我倾向于相信，各种评测结果确实是 M2 的真实实力。再考虑到它的 API 价格（现在还是免费期），我会在接下来的工作中使用它，也推荐大家试试看。</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2025-11-04T08:21:31+08:00">2025年11月 4日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2025/10/weekly-issue-371.html</id>
             <title>科技爱好者周刊（第 371 期）：一个乐观主义者的专访</title>
             <link>http://www.ruanyifeng.com/blog/2025/10/weekly-issue-371.html</link>
@@ -1841,186 +2020,6 @@ void DoSomething(int a, int b)
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2025-10-10T08:08:05+08:00">2025年10月10日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2025/10/glm-4.6.html</id>
-            <title>一天之内，智谱和 Anthropic 都发了最强编程模型</title>
-            <link>http://www.ruanyifeng.com/blog/2025/10/glm-4.6.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/10/glm-4.6.html</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 01 Oct 2025 19:05:15 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>1、</p>
-
-<p>假期前最后一天（9月30日），热闹非凡。</p>
-<p>上午，Anthropic 公司发布了 <a href="https://www.anthropic.com/news/claude-sonnet-4-5">Claude Sonnet 4.5 模型</a>。</p>
-
-<p>下午，智谱公司发布了 <a href="https://mp.weixin.qq.com/s/0zJBg5hBbHLgGsoHjXADiQ">GLM 4.6 模型</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202509/bg2025093008.webp" title="" /></p>
-
-<p>我觉得，对于程序员，这个动态很重要。</p>
-
-<p>因为<strong>这两个模型都属于目前最先进的 AI 编程模型</strong>。你想让 AI 生成代码，首选就是它们。</p>
-
-<p>这就是说，一天之内，AI 编程模型又达到了新高度。</p>
-
-<p>2、</p>
-
-<p>Anthropic 发布公告的第一句话，就毫不谦虚地用了三个"世界之最"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202509/bg2025093009.webp" title="" /></p>
-
-<blockquote>
-  <p>"Claude Sonnet 4.5 是世界上最好的编码模型。它是构建复杂代理的最强大模型。它是使用计算机的最佳模型。它在推理和数学方面表现出显著的进步。"</p>
-</blockquote>
-
-<p>智谱的发布公告也是当仁不让。</p>
-
-<blockquote>
-  <p>"我们再次突破大模型的能力边界。</p>
-
-<p>GLM-4.6是我们最强的代码 Coding 模型（较 GLM-4.5 提升27%）。在真实编程、长上下文处理、推理能力、信息搜索、写作能力与智能体应用等多个方面实现全面提升。"</p>
-</blockquote>
-
-<p>为了让人信服，智谱的<a href="https://mp.weixin.qq.com/s/0zJBg5hBbHLgGsoHjXADiQ">发布公告</a>还给出了详细的测试结果。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202509/bg2025093010.webp" title="" /></p>
-
-<p>上图一共是8个测试基准的结果图。每个图的蓝柱是 GLM-4.6，绿柱是 GLM-4.5。对照组是前两天刚发布的 DeepSeek V3.2 Exp、Claude sonnet 4、Claude sonnet 4.5。</p>
-
-<p>可以看到，蓝柱基本上都是排名前列，甚至第一。智谱还声称，GLM-4.6 非常节省 Token（也就是省钱），"比 GLM-4.5 节省30%以上，为同类模型最低"。</p>
-
-<p>所以，它的结论就是："GLM-4.6 在部分榜单表现对齐 Claude Sonnet 4/Claude Sonnet 4.5，<strong>稳居国产模型首位。</strong>"</p>
-
-<p>这就有意思了，一个自称"世界上最好的编码模型"，另一个自称"稳居国产模型首位"。</p>
-
-<p>下面，我来测试，GLM-4.6 相比 Claude sonnet 4.5 到底怎么样。</p>
-
-<p>3、</p>
-
-<p>需要说明的是，这两个模型的比较，不完全是为了测试，也有实际的意义。</p>
-
-<p>Anthropic 公司虽然产品很强，但是它限制中国人使用，国内用户正常途径无法开通它的服务。另一方面，它是付费模型，价格也不便宜，百万 token 的输入输出价格是3美元/15美元。</p>
-
-<p>形成鲜明对照的是，GLM-4.6 是完完全全的国产模型，来自北京智谱公司。它采取彻底的开源路线（MIT 许可证），<a href="https://huggingface.co/zai-org/GLM-4.6/tree/main">模型代码</a>完全公开，可以任意使用。</p>
-
-<p>你要想自己在家里安装，也是可以的。但是，它的硬件要求太高，家用设备达不到，所以，一般都使用它的云服务。</p>
-
-<p>目前，智谱的官网（<a href="https://bigmodel.cn/">BigModel</a> 和 <a href="https://z.ai/">Z.ai</a>），通过 Web 界面使用 GLM-4.6 是免费的。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100101.webp" title="" /></p>
-
-<p>它的 API 调用需要付费，入门套餐（coding plan）好像是一个月20元人民币。</p>
-
-<p>另外，它有完备的中文支持（文档+客服），这也是 Anthropic 没有的。</p>
-
-<p>总之，我的测试目的，也是想看看，它是不是真如官方宣称的那样强大，能不能替代 Claude Sonnet 模型。</p>
-
-<p>4、</p>
-
-<p>我的测试方法很简单。Anthropic 公司事先邀请了著名程序员西蒙·威利森（Simon Willison），试用 Claude Sonnet 4.5 模型。</p>
-
-<p>西蒙·威利森已经在他的网站上，公布了<a href="https://simonwillison.net/2025/Sep/29/claude-sonnet-4-5/">试用结果</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100102.webp" title="" /></p>
-
-<p>我就拿他的几个测试，用在 GLM-4.6 上面，然后比较一下运行结果就可以了。</p>
-
-<p>大家可以跟着一起做，打开<a href="https://chat.z.ai/">官网</a>，把题目粘贴进去（最好贴英文），这样会有更深切的感受。</p>
-
-<p>AI 终端工具（比如 Claude Code、Cline、OpenCode、Crush 等）也可以用，参考<a href="https://docs.bigmodel.cn/cn/coding-plan/tool/claude">官方文档</a>进行设置（需要先开通 API）。</p>
-
-<p>5、</p>
-
-<p>第一个测试。</p>
-
-<blockquote>
-  <p>拉取代码仓库 https://github.com/simonw/llm ，然后通过下面的命令运行测试用例。</p>
-
-<p>pip install -e '.[test]'</p>
-
-<p>pytest</p>
-</blockquote>
-
-<p>这个测试需要联网获取代码，然后在后台运行。</p>
-
-<p>智谱官网的 Web 界面跟 Claude 一样，提供 Python 和 Node.js 的服务器沙箱环境，可以生成后直接执行代码。</p>
-
-<p>我省略它中间的推理步骤了，最后结果如下图（官网查看<a href="https://chat.z.ai/s/3b8c1fcc-cd3d-42a1-b0c4-1b5156cef513">完整对话</a>）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100103.webp" title="" /></p>
-
-<blockquote>
-  <p>278个测试用例通过，耗时 18.31s</p>
-</blockquote>
-
-<p>整个运行过程（拉取、安装依赖、执行命令）跟 Claude Sonnet 是一样的。奇怪的是，Claude Sonnet 运行了466个测试用例，多出来100多个，不知道为什么。</p>
-
-<p>6、</p>
-
-<p>第二个测试是较复杂的编程任务，原始提示是英文，我翻译成中文。</p>
-
-<blockquote>
-  <p>1、 代码仓库 https://github.com/simonw/llm 是一个 AI 对话应用，它将用户的提示和 AI 的响应存储在 SQLite 数据库中。</p>
-
-<p>2、它目前使用线性集合，保存单个对话和响应。你尝试在响应表中添加一个 parent<em>response</em>id 列，并通过该列将对话的响应建模为树状结构。</p>
-
-<p>3、编写新的 pytest 测试用例，验证你的设计。</p>
-
-<p>4、编写一个 tree_notes.md 文件，首先将你的设计写入该文件，然后在运行过程中将该文件用作笔记。</p>
-</blockquote>
-
-<p>大家可以查看完整的<a href="https://chat.z.ai/s/131ae064-6239-47ad-aadd-26600bab3587">对话记录</a>。</p>
-
-<p>GLM-4.6 运行了几分钟，不停地吐出生成的代码。最终，它修改了脚本，增加了 API 和命令行调用接口，并编写和运行通过了测试用例。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100104.webp" title="" /></p>
-
-<p>它还生成了一个 tree_notes.md 文件，里面是本次修改的详细说明。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100105.webp" title="" /></p>
-
-<p>大家可以比较它的运行结果与 <a href="https://claude.ai/share/9d5b0729-b58d-4b15-9e45-ab1e7152b89e">Claude Sonnet 的运行结果</a>。</p>
-
-<p>从结果上看，它们的差异不大，都做到了提示的要求，并且代码都是可运行的。差异主要是实现细节，这个就需要详细阅读代码了。</p>
-
-<p>7、</p>
-
-<p>第三个测试是西蒙·威利森独家的，就是让 AI 生成一个鹈鹕骑自行车的 SVG 图片（Generate an SVG of a pelican riding a bicycle）。</p>
-
-<p>这是现实中不存在、且没有参考物的景象，考察模型的想象和生成能力。</p>
-
-<p>下面是 GLM-4.6 打开深度思考后<a href="https://chat.z.ai/s/abc034d4-c1cc-4612-9250-36ecec967f31">生成的图片</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100108.webp" title="" /></p>
-
-<p>下面是 Claude sonnet 4.5 打开深度思考后生成的图片。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100107.webp" title="" /></p>
-
-<p>两者的结果相当接近，只是 Claude 生成的鸟喙更明显，更能看出是一只鹈鹕。</p>
-
-<p>8、</p>
-
-<p>测试就到这里，我觉得总结来说，GLM-4.6 是一个非常强的国产模型，编码能力确实很优秀，可以当作目前公认的最强模型 Claude Sonnet 的替代品。</p>
-
-<p>它的功能全面，除了编码，其他任务也能完成，而且响应速度快，<a href="https://bigmodel.cn/claude-code">价格低</a>，性价比非常突出。</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2025-10-01T19:05:15+08:00">2025年10月 1日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
