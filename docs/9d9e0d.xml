@@ -5,18 +5,35 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6912cb740cc646ee8daa24a7</id>
+            <id>https://m.okjike.com/originalPosts/691356723ea7571a7865eba6</id>
             <title>AI探索站 11月11日</title>
-            <link>https://m.okjike.com/originalPosts/6912cb740cc646ee8daa24a7</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6912cb740cc646ee8daa24a7</guid>
+            <link>https://m.okjike.com/originalPosts/691356723ea7571a7865eba6</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/691356723ea7571a7865eba6</guid>
             <pubDate></pubDate>
-            <updated>Tue, 11 Nov 2025 05:36:52 GMT</updated>
+            <updated>Tue, 11 Nov 2025 15:29:54 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    有了 Gemini Nano Banana 这么久之后海马体和天真蓝竟然还没有倒闭足以说明市场不是有效的。
+                    看了一篇uber 在内部通过 agent 来做业务数据检索的实践，是很标准的 agent 逻辑，值得参考，如果你在产品里还没找到 AI 落地的方式，那么可以做一些内部提效的实践，积累经验<br /><br />《Uber 如何构建用于财务分析的对话式 AI 助手：让查数据像给同事发消息一样简单》https://ybzavo65ti.feishu.cn/wiki/SMRLwGE0eiWSfqkmnB8cGCFjn8f?from=from_copylink<br /><br />如果想查一些业务数据，要么自己去找风神/灯塔之类的数据后台，要么找数据分析师跑 sql，响应比较慢。于是 uber 做了一个对话式数据助手，在 slack 问 agent 数据问题，agent 直接回复，让数据检索如同向同事发送消息般简单。<br /><br />就像老板半夜问我一个数，如果周报里没有现成的，我就要看遍数据集，甚至求DS 帮我跑 sql，然后给老板一个直接、清晰、简洁的答案。<br /><br />几年前我和DS 说，能不能以后出来一个人工智能，老板想看什么数据，它就从数据库里跑出来，不要老是找我。DS 对我说，你不就是老板现成的人工智能吗...<br /><br />在字节的时候，风神里也有输入自然语言，然后AI 帮我写 sql，但是发现实际用处不大，那些字段、口径，你都不知道水有多深，最终还是要靠 DS。在字节头一年，我学会了数据分析，后两年，我学会了口径分析。<br /><br />这里总结一下 uber 的跑数 agent 的核心逻辑，我真希望各个公司都有这样的基建，让跑数不再反人性。<br /><br />1. multi-agent 架构<br /><br />主 agent做意图识别和分流，子 agent 处理对应的具体任务，比如写 sql。<br /><br />关于走 multi 还是 single，我觉得 uber 的场景走 multi 是合理的，因为每个 sub 的任务都比较独立且复杂，在 sub之间的传递信息也都比较明确，而很多业务场景其实用不到 multi架构，直接 single 就可以了。<br /><br />2. 数据处理<br /><br />最难的是数据源，因为不同数据集的字段都不一样，以及员工的自然语言的术语和数据集的字段名也不一样。如果直接把海量原始数据给 LLM，肯定是跑不出来靠谱的数。有两个关键方法<br /><br />1）统一不同数据集的字段：不是直接在包含大量连接的复杂数据库上运行查询，而是做了一个精心策划的、单一表格的数据集市 (curated, single-table data marts) ，作用是为 Finch 提供一个高速、高清晰度、预先整理好的数据源。数据治理一直是难题，是 DS 的泪，一般人都不敢主动碰。我不确定 uber 是否真的解决了这个问题。<br /><br />2）统一自然语言和字段名的映射：通过OpenSearch 来存储元数据。这些元数据包含了字段（列名）及其值对应的自然语言别名。这个持续维护也是比较难的。<br /><br />3. 效果测评：<br /><br />比较标准化，其实就是把环节拆分，分别用有标准答案的 case 来测评，最后端到端再验证。<br /><br />1）路由准确性：当用户提出问题时，主 agent需判定应由哪个子agent处理请求。<br /><br />2）子 agent 准确度：建一组常见用例，有正确可信的标准答案。通过将agent输出与预期答案比对，能及时发现准确率下降的情况。<br /><br />3）端到端验证：通过模拟真实场景的查询来确保从输入到输出的完整流程正常运行。这有助于发现组件单独测试时可能遗漏的系统性问题
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/691339cecbb1d41f0531b43c</id>
+            <title>AI探索站 11月11日</title>
+            <link>https://m.okjike.com/originalPosts/691339cecbb1d41f0531b43c</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/691339cecbb1d41f0531b43c</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 11 Nov 2025 13:27:42 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    AI 时代，还倡导加班的公司，不值得加入。
                 ]]>
             </content:encoded>
         </item>
@@ -85,23 +102,6 @@
                 <![CDATA[
                     
                     Notebook LM 其实是研究工具<br />但许多人认为它是 AI 写作工具<br /><br />研究的核心是获取洞见<br />写作的核心是发表观点<br /><br />更好的方法是<br />用 Notebook LM 来「研究你的研究」<br />再用自己的脑子来「撰写你的作品」
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6911d80d1ed9b53c78eac777</id>
-            <title>AI探索站 11月10日</title>
-            <link>https://m.okjike.com/originalPosts/6911d80d1ed9b53c78eac777</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6911d80d1ed9b53c78eac777</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 10 Nov 2025 12:18:21 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    我们自己怎么用 Manus 的？<br />- 商务团队的需求：“可以给我们生成 200 个 Stripe 专属折扣码吗？”<br />- 没有AI以前，这是个噩梦般的重复操作流程<br />- 现在，用 Manus + Stripe API 几分钟就能全部搞定<br />- 你完全不用懂写代码就能操作 API，效率爆表
                 ]]>
             </content:encoded>
         </item>
