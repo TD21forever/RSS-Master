@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/691700b900c0686ab58765e1</id>
+            <title>AI探索站 11月14日</title>
+            <link>https://m.okjike.com/originalPosts/691700b900c0686ab58765e1</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/691700b900c0686ab58765e1</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 14 Nov 2025 10:13:13 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    推荐大家看一下OpenAI最近关于Agent RFT的实战分享。对于一些已经深度做过Agent的同学来说，这可能是一个小范围的共识，但是对于刚开始做、或者做得比较浅的同学，这个思路大概率就是后面会经历的路径。<br /><br />为什么Agent需要RFT？<br /><br />我们先来说一下怎么构建Agent。逻辑很简单：基于一个强大的基础模型，给他写System Prompt，教他Know-how，再配上一系列工具Tool。这样它就能调用工具来完成任务，而不只是回答问题。<br /><br />在这个阶段，大家会不断调试PE。你会发现把Prompt写得更好一点，效果会提升；把基模换得更强，效果也会提升；把工具设计得更合理，拉开差异度，组合起来也能带出更好的效果。<br /><br />但是，你再继续调教下去，很快就会遇到瓶颈。<br /><br />尤其当你的垂直领域知识在公开语料中比较少时，模型会很难处理。你还会发现，可能自己本地调试跑得通，一旦部署到真正的线上环境，哪怕效果不错，但因为耗时长的问题，用户也不买单。可能用2个工具就能完成的事情，他可能要来回折腾10几下才搞定。<br /><br />这种情况严重限制了Agent在生产环境的效果和用户的接受度。而OpenAI分享的Agent RFT，其实就是为了解决这个特定场景的精调问题。<br /><br />RFT：如何用少量数据撬动性能飞跃<br /><br />RFT的训练方式很特别。首先，你只需要准备少量的样本，比如100个你这个垂直场景的User Prompt。<br /><br />然后，让Agent基于这些输入去跑任务。跑完之后，你需要对它跑的「整个轨迹」进行评分——注意，不仅是最终结果，中间的工具调用、思考过程全都要评，这样让Agent知道如何往正确的方向努力，学习曲线也不会那么陡峭。<br /><br />这个评分可以是你定义的一套规则，让LM去评，也可以是人工去评。一个user prompt，多跑几次，可以出来多个结果，有好的，也有不好的，好的加分，不好的扣分。这里是最核心，也是最难的部分。<br /><br />最后，用这些「带分数的轨迹数据」去精调模型。因为有得分，模型就知道哪些是「好过程」，哪些是「坏过程」，它就会往更好的表现上去迭代。<br /><br />这里跟SFT（Supervised Finetuning）有本质区别。<br /><br />SFT是准备一批海量的「标准好答案」，让Agent去模仿。这带来的问题是容易过拟合，而且数据准备成本极高。而RFT是让Agent自己去生成数据（轨迹），我们只负责定义一个Reward Model（评分标准）来「奖励」好过程。<br /><br />此外，SFT是基于大量的静态数据集，比如10000个数据对（input + output），然后一次去训，更新模型权重。而RFT是更加实时动态迭代的，先跑10个sample（user prompt + agent output + 打分），然后训练模型，基于更新后的模型权重，再跑下一批10个sample，如此持续，越来越强。<br /><br />这样带来的结果是，RFT的样本效率极高，OpenAI的分享里提到，100个sample就可能带来非常显著的提升。<br /><br />这里的核心逻辑，其实跟DeepSeek R1的训练方式是类似的。只不过，R1的训练（比如数学或Coding）是纯rule-based的reward，有标准答案。而Agent RFT要与外部工具交互，场景更开放、更复杂，所以它必须依赖自定义的、更复杂的Reward方式。<br /><br />RFT对业务的价值<br /><br />RFT在OpenAI的多个业务（如Devin、Genspark）中都得到了显著的效果。这种提升是生产环境最看重的：消耗的Token数在下降，延时在降低，任务的准确率在提升。<br /><br />哪怕你通过RFT之后，垂直任务的效果只是跟强大的基模打平，但是你的成本显著下降，耗时显著降低，这在业务侧的价值也是巨大的。<br /><br />这其实跟几个月前的内部讨论思路差不多。当时我们也在研究怎么在垂直场景下让Agent表现更好，在测试中也拿到了非常显著的提升。目前应该很多团队都在这样做。所以，RFT这条路将来应该会在各个垂直领域里都展开。<br /><br />推荐大家都可以去看一下原版分享，如果觉得吃力，可以把链接导入NotebookLM让他总结，也可以把DeepSeek R1的论文一起作为Source丢进去做比较。这样你就能更好理解SFT、RL、RFT之间的一些区别和相同之处。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6916a5041ed9b53c7855eabe</id>
             <title>AI探索站 11月14日</title>
             <link>https://m.okjike.com/originalPosts/6916a5041ed9b53c7855eabe</link>
@@ -51,23 +68,6 @@
                 <![CDATA[
                     
                     把新来的实习生说的话，打印出来放工位上
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69149b6e1ed9b53c7828a084</id>
-            <title>AI探索站 11月12日</title>
-            <link>https://m.okjike.com/originalPosts/69149b6e1ed9b53c7828a084</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69149b6e1ed9b53c7828a084</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 12 Nov 2025 14:36:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    我准备开始卷起来，体力和能量提升上来后，脑力必须也跟上：<br /><br />Part 1. 增长：连载100个全球AI产品，拆解他们是如何做增长的（先文字更新，后期有必要会录制视频和音频，每天5小时起步<br /><br />Part 2. 交易：连载300天交易心理/宏观事件/行业研究/资金走向/实盘持仓（文字为主，每天4小时起步<br /><br />Part 3. 运动：更新运动数据截图/优化动作，每天2小时起步<br /><br />这里已经花去了整天时间🥹
                 ]]>
             </content:encoded>
         </item>
