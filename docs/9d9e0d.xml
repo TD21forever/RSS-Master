@@ -5,35 +5,69 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/691700b900c0686ab58765e1</id>
-            <title>AI探索站 11月14日</title>
-            <link>https://m.okjike.com/originalPosts/691700b900c0686ab58765e1</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/691700b900c0686ab58765e1</guid>
+            <id>https://m.okjike.com/originalPosts/69187b9a1ed9b53c787f2604</id>
+            <title>AI探索站 11月15日</title>
+            <link>https://m.okjike.com/originalPosts/69187b9a1ed9b53c787f2604</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69187b9a1ed9b53c787f2604</guid>
             <pubDate></pubDate>
-            <updated>Fri, 14 Nov 2025 10:13:13 GMT</updated>
+            <updated>Sat, 15 Nov 2025 13:09:46 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    推荐大家看一下OpenAI最近关于Agent RFT的实战分享。对于一些已经深度做过Agent的同学来说，这可能是一个小范围的共识，但是对于刚开始做、或者做得比较浅的同学，这个思路大概率就是后面会经历的路径。<br /><br />为什么Agent需要RFT？<br /><br />我们先来说一下怎么构建Agent。逻辑很简单：基于一个强大的基础模型，给他写System Prompt，教他Know-how，再配上一系列工具Tool。这样它就能调用工具来完成任务，而不只是回答问题。<br /><br />在这个阶段，大家会不断调试PE。你会发现把Prompt写得更好一点，效果会提升；把基模换得更强，效果也会提升；把工具设计得更合理，拉开差异度，组合起来也能带出更好的效果。<br /><br />但是，你再继续调教下去，很快就会遇到瓶颈。<br /><br />尤其当你的垂直领域知识在公开语料中比较少时，模型会很难处理。你还会发现，可能自己本地调试跑得通，一旦部署到真正的线上环境，哪怕效果不错，但因为耗时长的问题，用户也不买单。可能用2个工具就能完成的事情，他可能要来回折腾10几下才搞定。<br /><br />这种情况严重限制了Agent在生产环境的效果和用户的接受度。而OpenAI分享的Agent RFT，其实就是为了解决这个特定场景的精调问题。<br /><br />RFT：如何用少量数据撬动性能飞跃<br /><br />RFT的训练方式很特别。首先，你只需要准备少量的样本，比如100个你这个垂直场景的User Prompt。<br /><br />然后，让Agent基于这些输入去跑任务。跑完之后，你需要对它跑的「整个轨迹」进行评分——注意，不仅是最终结果，中间的工具调用、思考过程全都要评，这样让Agent知道如何往正确的方向努力，学习曲线也不会那么陡峭。<br /><br />这个评分可以是你定义的一套规则，让LM去评，也可以是人工去评。一个user prompt，多跑几次，可以出来多个结果，有好的，也有不好的，好的加分，不好的扣分。这里是最核心，也是最难的部分。<br /><br />最后，用这些「带分数的轨迹数据」去精调模型。因为有得分，模型就知道哪些是「好过程」，哪些是「坏过程」，它就会往更好的表现上去迭代。<br /><br />这里跟SFT（Supervised Finetuning）有本质区别。<br /><br />SFT是准备一批海量的「标准好答案」，让Agent去模仿。这带来的问题是容易过拟合，而且数据准备成本极高。而RFT是让Agent自己去生成数据（轨迹），我们只负责定义一个Reward Model（评分标准）来「奖励」好过程。<br /><br />此外，SFT是基于大量的静态数据集，比如10000个数据对（input + output），然后一次去训，更新模型权重。而RFT是更加实时动态迭代的，先跑10个sample（user prompt + agent output + 打分），然后训练模型，基于更新后的模型权重，再跑下一批10个sample，如此持续，越来越强。<br /><br />这样带来的结果是，RFT的样本效率极高，OpenAI的分享里提到，100个sample就可能带来非常显著的提升。<br /><br />这里的核心逻辑，其实跟DeepSeek R1的训练方式是类似的。只不过，R1的训练（比如数学或Coding）是纯rule-based的reward，有标准答案。而Agent RFT要与外部工具交互，场景更开放、更复杂，所以它必须依赖自定义的、更复杂的Reward方式。<br /><br />RFT对业务的价值<br /><br />RFT在OpenAI的多个业务（如Devin、Genspark）中都得到了显著的效果。这种提升是生产环境最看重的：消耗的Token数在下降，延时在降低，任务的准确率在提升。<br /><br />哪怕你通过RFT之后，垂直任务的效果只是跟强大的基模打平，但是你的成本显著下降，耗时显著降低，这在业务侧的价值也是巨大的。<br /><br />这其实跟几个月前的内部讨论思路差不多。当时我们也在研究怎么在垂直场景下让Agent表现更好，在测试中也拿到了非常显著的提升。目前应该很多团队都在这样做。所以，RFT这条路将来应该会在各个垂直领域里都展开。<br /><br />推荐大家都可以去看一下原版分享，如果觉得吃力，可以把链接导入NotebookLM让他总结，也可以把DeepSeek R1的论文一起作为Source丢进去做比较。这样你就能更好理解SFT、RL、RFT之间的一些区别和相同之处。
+                    受浦东美术馆邀请，我们用 AI 为年底的卢浮宫上海首展，制作了官方宣传片！<br /><br />幸福死了，我超喜欢浦美，光是奥赛展就去了三次。这次有机会做官方宣传片，还是卢浮宫展，我今日即可圆寂。🙏
                 ]]>
             </content:encoded>
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6916a5041ed9b53c7855eabe</id>
-            <title>AI探索站 11月14日</title>
-            <link>https://m.okjike.com/originalPosts/6916a5041ed9b53c7855eabe</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6916a5041ed9b53c7855eabe</guid>
+            <id>https://m.okjike.com/originalPosts/69181f6200c0686ab5a01613</id>
+            <title>AI探索站 11月15日</title>
+            <link>https://m.okjike.com/originalPosts/69181f6200c0686ab5a01613</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69181f6200c0686ab5a01613</guid>
             <pubDate></pubDate>
-            <updated>Fri, 14 Nov 2025 03:41:56 GMT</updated>
+            <updated>Sat, 15 Nov 2025 06:36:18 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    不是，Open AI 真要干社交啊<br /><br />前几天泄露的群聊功能上了，会先在日本、新西兰、韩国、台湾上线，免费用户也可用<br /><br />点击 APP 右上角的人物添加人物图表就可以邀请好友，上下文会保持并且新开一个对话<br /><br />模型用的是 GPT‑5.1 Auto ，会根据提问者的会员等级切换模型，一点漏洞不给钻，真有你的 Sam<br /><br />支持搜索、图像和文件上传、图像生成以及听写功能。<br /><br />ChatGPT 在群聊中会遵循对话的流向，并根据群聊的上下文决定何时回复、何时保持沉默。<br /><br />群组管理能力也有，可以添加移除群成员，管理群名称等。
+                    我相信这是真的……<br />嗯～～～
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6917f74cd9abb9785dd67beb</id>
+            <title>AI探索站 11月15日</title>
+            <link>https://m.okjike.com/originalPosts/6917f74cd9abb9785dd67beb</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6917f74cd9abb9785dd67beb</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 15 Nov 2025 03:45:16 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    NotebookLM 里程碑式的一 步，终于支持用图像作为数据源了<br /><br />你的课堂拍摄的板书以及一些教科书的内容，还有表格，或者是街面上临时拍摄的照片，都可以作为数据源，然后检索。<br /><br />感觉对于学生党和听课的一些人来说非常有用。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69171f09d9abb9785dc3bd3e</id>
+            <title>AI探索站 11月14日</title>
+            <link>https://m.okjike.com/originalPosts/69171f09d9abb9785dc3bd3e</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69171f09d9abb9785dc3bd3e</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 14 Nov 2025 12:22:33 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    我的 AI 四大神兵利器，没有它们完全无法工作，排名如下：<br />1. Gemini 的 Deepthink，写 PRD 巨🐂🍺巨提效<br />2. Typeless，之前写了 https://m.okjike.com/originalPosts/69140b7da6137d337b7fca62?s=ewoidSI6ICI1NzljMzdmOTQzZmUwMzEyMDA2ZTBmYjgiCn0=<br />3. Granola，之前写了 https://m.okjike.com/originalPosts/68727f5bc14102d109a52cb1?s=ewoidSI6ICI1NzljMzdmOTQzZmUwMzEyMDA2ZTBmYjgiCn0=<br />4. Notebooklm，学习神器，听播客神器，出了 DeepResearch 之后我应该是会更爱它了
                 ]]>
             </content:encoded>
         </item>
@@ -85,40 +119,6 @@
                 <![CDATA[
                     
                     最近关于 AI 泡沫的讨论非常多，我画了两张图来表达我现在的想法。<br /><br />图一：这波以 ChatGPT 为代表的 AI 革命开始后，很多人心中 AI的进展可能像灰色虚线一样，是一个持续指数增长的过程。但实际上，它可能更像是个类似阶跃函数的S曲线。我们现在正在进入已有范式的平台期，所以会看到虽然投入资源增大，但模型的能力提升速度开始放缓。而下一个范式是什么，什么时候能开始应用又很不确定。<br /><br />新范式出来的时候，会有一段高速增长，超越预期的过程。而下一个新的范式还没出来的时候，可能就会有一段低于预期的过程。我们现在对未来的很多判断分歧在于，下一个新范式什么时候出现，以及它会是什么。<br /><br />图二：但实际上，如果我们退后一步，AI的进步从更宏观的尺度来看，就是不断地由不同的S 曲线范式组合所驱动。每个范式都会经历从低估到高估，从革命到泡沫的过程，而这些范式变化合起来是真正的 Scaling law。<br /><br />对新技术短期高估长期低估的amara law大概率会再一次生效，历史不会简单重复，但往往押韵。短期要谨慎，长期要有信心和耐心。<br /><br />再补充一点，和互联网相比的话，互联网基于的底层技术没有大的变化，30年前的网站底层技术和30年后差别没有那么大，所以互联网泡沫更多的是一个建设周期带来的波动。而AI的技术变化剧烈得多，10年前的技术栈和现在很不一样，其实叠加了技术周期和建设周期，所以AI带来的预期波动可能会大得多/多得多。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/691356723ea7571a7865eba6</id>
-            <title>AI探索站 11月11日</title>
-            <link>https://m.okjike.com/originalPosts/691356723ea7571a7865eba6</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/691356723ea7571a7865eba6</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 11 Nov 2025 15:29:54 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    看了一篇uber 在内部通过 agent 来做业务数据检索的实践，是很标准的 agent 逻辑，值得参考，如果你在产品里还没找到 AI 落地的方式，那么可以做一些内部提效的实践，积累经验<br /><br />《Uber 如何构建用于财务分析的对话式 AI 助手：让查数据像给同事发消息一样简单》https://ybzavo65ti.feishu.cn/wiki/SMRLwGE0eiWSfqkmnB8cGCFjn8f?from=from_copylink<br /><br />如果想查一些业务数据，要么自己去找风神/灯塔之类的数据后台，要么找数据分析师跑 sql，响应比较慢。于是 uber 做了一个对话式数据助手，在 slack 问 agent 数据问题，agent 直接回复，让数据检索如同向同事发送消息般简单。<br /><br />就像老板半夜问我一个数，如果周报里没有现成的，我就要看遍数据集，甚至求DS 帮我跑 sql，然后给老板一个直接、清晰、简洁的答案。<br /><br />几年前我和DS 说，能不能以后出来一个人工智能，老板想看什么数据，它就从数据库里跑出来，不要老是找我。DS 对我说，你不就是老板现成的人工智能吗...<br /><br />在字节的时候，风神里也有输入自然语言，然后AI 帮我写 sql，但是发现实际用处不大，那些字段、口径，你都不知道水有多深，最终还是要靠 DS。在字节头一年，我学会了数据分析，后两年，我学会了口径分析。<br /><br />这里总结一下 uber 的跑数 agent 的核心逻辑，我真希望各个公司都有这样的基建，让跑数不再反人性。<br /><br />1. multi-agent 架构<br /><br />主 agent做意图识别和分流，子 agent 处理对应的具体任务，比如写 sql。<br /><br />关于走 multi 还是 single，我觉得 uber 的场景走 multi 是合理的，因为每个 sub 的任务都比较独立且复杂，在 sub之间的传递信息也都比较明确，而很多业务场景其实用不到 multi架构，直接 single 就可以了。<br /><br />2. 数据处理<br /><br />最难的是数据源，因为不同数据集的字段都不一样，以及员工的自然语言的术语和数据集的字段名也不一样。如果直接把海量原始数据给 LLM，肯定是跑不出来靠谱的数。有两个关键方法<br /><br />1）统一不同数据集的字段：不是直接在包含大量连接的复杂数据库上运行查询，而是做了一个精心策划的、单一表格的数据集市 (curated, single-table data marts) ，作用是为 Finch 提供一个高速、高清晰度、预先整理好的数据源。数据治理一直是难题，是 DS 的泪，一般人都不敢主动碰。我不确定 uber 是否真的解决了这个问题。<br /><br />2）统一自然语言和字段名的映射：通过OpenSearch 来存储元数据。这些元数据包含了字段（列名）及其值对应的自然语言别名。这个持续维护也是比较难的。<br /><br />3. 效果测评：<br /><br />比较标准化，其实就是把环节拆分，分别用有标准答案的 case 来测评，最后端到端再验证。<br /><br />1）路由准确性：当用户提出问题时，主 agent需判定应由哪个子agent处理请求。<br /><br />2）子 agent 准确度：建一组常见用例，有正确可信的标准答案。通过将agent输出与预期答案比对，能及时发现准确率下降的情况。<br /><br />3）端到端验证：通过模拟真实场景的查询来确保从输入到输出的完整流程正常运行。这有助于发现组件单独测试时可能遗漏的系统性问题
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6912848cbec7facd1c28848e</id>
-            <title>AI探索站 11月11日</title>
-            <link>https://m.okjike.com/originalPosts/6912848cbec7facd1c28848e</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6912848cbec7facd1c28848e</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 11 Nov 2025 00:34:20 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    昨天和一个创业的朋友@Erix 聊 <br />总结出产品经理未来的三个趋势<br /><br />第一是：从文档到Demo<br /><br />从字节到阿里<br />老板们已经开始强制要求只看AI Coding出来的Demo了<br />这很好理解，比起文档和PPT<br />可交互的成品更容易理解<br /><br />很多年前蒋凡开会不带电脑<br />直接用iPad、手机看Demo<br /><br />只不过过去需要产研团队协作才能做到<br />现在甚至1-3人即可快速完成<br /><br />第二是：产品经理都要变成工程师<br /><br />这种偏Demo的工程师会由现在的产品和UI转行<br />之前的研发就是偏落地的工程师<br /><br />最后就全都是工程师<br />转不了的直接被淘汰<br /><br />最近参加的黑客松都体现了快速Demo<br />用社媒获客和迭代产品的强大趋势<br />产品经理落地能力将会得到质的飞跃<br />不再是办公室里吹空调比嘴皮子了<br /><br />第三是：Spec Coding必定盛行<br /><br />先写文档再开发，这本来也是产品的基本工作<br />所以新招人就直接招产品经理<br />然后学Vibe Coding直接开干<br /><br />再加上AI，可以生成非常详细的PRD<br />以及不断迭代的PRD<br />Spec = PRD = Code<br /><br />最后，为何这个变化不可逆<br /><br />效率与组织逻辑的必然<br />1. 减少沟通损耗<br />2. 大厂效率提升<br />3. 小团队崛起<br /><br />如果大厂也这么变化<br />“大团队和小团队没有什么成本和执行力的问题,没有区别了,最后就是想法。”
                 ]]>
             </content:encoded>
         </item>
