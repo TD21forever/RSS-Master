@@ -5,6 +5,152 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2025/11/trae-solo.html</id>
+            <title>终于有人做了 Subagent，TRAE 国内版 SOLO 模式来了</title>
+            <link>http://www.ruanyifeng.com/blog/2025/11/trae-solo.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/11/trae-solo.html</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 26 Nov 2025 08:17:19 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2>一、</h2>
+
+<p>全世界最好的 AI 编程工具，我不知道。</p>
+<p>但是，我知道全世界最卷的 AI 编程工具，那一定是 <a href="https://www.trae.cn/">TRAE</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112304.webp" title="" /></p>
+
+<p>为什么这么说？</p>
+
+<p>AI 编程工具一般有三种产品形态。</p>
+
+<p>（1）插件。最早的 AI 编程工具 GitHub Copilot 就是插件。</p>
+
+<p>（2）IDE。插件受制于宿主软件，有些公司不甘束缚，就开始做专门的 AI 编程 IDE，比如 Cursor、亚马逊的 Kiro、谷歌的 AntiGravity。</p>
+
+<p>（3）终端。还有一些公司，专门做基于终端（也就是命令行）的工具，比如 Claude Code、Codex CLI、Gemini CLI。</p>
+
+<p>所有的 AI 编程工具，基本上都属于这三大类之一。但是 TRAE 居然三种产品形态都做了，同时属于这三类！</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112305.webp" title="" /></p>
+
+<p>它最早是插件，后来做了<a href="https://www.ruanyifeng.com/blog/2025/03/trae.html">独立的 IDE</a>，现在居然有第三种产品形态：<a href="https://www.trae.cn/solo">SOLO 模式</a>。</p>
+
+<p>从插件到 IDE（国内版），我都是 TRAE 的用户。我没用国际版，原因很简单，因为国内版免费。</p>
+
+<p>今年7月份，TRAE 的国际版开始内测 SOLO 模式，反响热烈，我就很心动。现在终于正式发布了，本月12日国际版正式推出 SOLO 模式，国内版也在25日上线，更棒的是完全免费。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112403.webp" title="" /></p>
+
+<p>今天就来说说，什么是 SOLO 模式，为什么它很重要。</p>
+
+<p>或者说，到底是什么原因，让 TRAE 觉得一种产品形态还不够，不停添加其他形态？</p>
+
+<p>对于一个程序员来说，这三种产品形态，怎么选择？哪一种更好？</p>
+
+<h2>二、</h2>
+
+<p>插件没什么好说的。它调用的是 IDE 的内部接口，如果你有现成 IDE 环境需要加入 AI 功能，就选择它。</p>
+
+<p>IDE 相比插件，功能更强、性能更好、一体化程度更高，适合追求功能和性能的用户。</p>
+
+<p>至于 IDE 与终端，可以参考我的<a href="http://ruanyifeng.com/blog/2025/11/vs-code-minimax-m2.html">上一篇文章</a>。它们各有特点，不是替代关系，而是互补关系。</p>
+
+<p>IDE 强在它集成的那些功能，比如自动补全、智能感知（intellisense），终端没有。</p>
+
+<p>终端强在方便调用各种命令行工具，可以加入 CI/CD 流程，以及下面要介绍的 Subagent，这是 IDE 缺乏的。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112306.webp" title="" /></p>
+
+<p>这一次 TRAE 发布的 SOLO 模式，就引入了很多终端才有的功能，所以才单独做成一个模式，因为很难把这些功能加入 IDE 形态。</p>
+
+<p>习惯了 IDE 的同学，或者在 IDE 与终端之间犹豫的同学，有必要了解一下 SOLO 模式，也许有你要的功能。</p>
+
+<h2>三、</h2>
+
+<p>这次引入的新功能之中，<strong>最值得一提的就是 Subagent</strong>。</p>
+
+<p>我的印象中，国内还没有其他厂家做过这个功能。如果你想用好 AI 编程，一定要知道它。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112307.webp" title="" /></p>
+
+<p>顾名思义，Subagent 就是次一级的 agent（智能体）。可以理解成，<strong>它是一个 AI 应用之中的子任务</strong>。也就是说，它可以把一个大的 AI 编程任务拆分成若干个小任务。</p>
+
+<p>这特别适合大项目，你根据不同的任务或者子目录，建立相应的 Subagent。</p>
+
+<p>它有几个显著的优点。</p>
+
+<p><strong>（1）并行执行</strong>。多个 Subagent 可以同时执行，你把它们放在后台，自己在前台做其他事情，这大大节省了时间。IDE 就做不到这一点，只能顺序执行，这是终端独有的一个极大优点。</p>
+
+<p><strong>（2）节省上下文</strong>。通常来说，每次执行 AI 任务，都会把整个仓库作为上下文，发给模型。Subagent 可以指定不同的上下文，或者限制上下文局限于某一个目录，因此就节省了上下文，降低了费用。</p>
+
+<p><strong>（3）重复使用</strong>。子任务本身也是一个智能体，可以跨项目使用，也可与他人共享，简化了工作流程。</p>
+
+<p><strong>（4）灵活权限</strong>。每个子任务可以设置不同的访问权限，从而可以做出适合不同等级成员使用的 Subagent。</p>
+
+<p>总之，Subagent 非常实用，很多人不想使用 IDE，部分原因就是没有 Subagent。</p>
+
+<h2>四、</h2>
+
+<p>TRAE 这次的 SOLO 模式，一大亮点就是引入了 Subagent，用它实现了多任务并行执行。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112309.webp" title="" /></p>
+
+<p>进入 SOLO 模式后，整个工作区分成了三栏，最左侧多出了一个任务栏（上图的红框）。</p>
+
+<p>你可以在任务栏里面，点击"+"号，新建 Subagent 子任务(下图)。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112519.webp" title="" /></p>
+
+<p>上图中，新建子任务时，可以选择内置的智能体，也可以新建智能体，由不同的智能体负责执行子任务。</p>
+
+<p>多个子任务可以并行执行。你在任务栏随时切换，查看每个任务执行到哪一步了。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112520.webp" title="" /></p>
+
+<p>上图就是同时新建了三个子任务，每个任务都有中文标题，可以很清晰了解它们的用途。</p>
+
+<p>这个并行执行的任务栏，除了 TRAE 的 SOLO 模式，我在其他国产 AI 编程工具里面就没见过，希望能够跟进。</p>
+
+<h2>五、</h2>
+
+<p>SOLO 模型还提供其他一些 IDE 模式没有的功能。</p>
+
+<p>（1）Plan 功能：先对任务进行思考，产生一个"执行计划"，等你批准以后再实际执行（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112312.webp" title="" /></p>
+
+<p>（2）上下文压缩：智能压缩过长的上下文，防止上下文变得太长导致的模型效果下降，同时显著节省使用 AI 的成本。</p>
+
+<p>（3）代码变更：更好的代码 DiffView 视图，帮助用户快速了解 AI 对代码的变更。</p>
+
+<h2>六、</h2>
+
+<p>最后总结一下，TRAE 的 SOLO 模式提供了很多 IDE 模式下没有的功能，更接近终端的用法。</p>
+
+<p>由于贴近终端，所以它能做到多任务并行，以及任务执行过程中更好的实时感知。</p>
+
+<p>TRAE 在一个软件里面，集成了 IDE 和 SOLO 两种模式，无疑为程序员提供了最大的灵活性。</p>
+
+<p>再加上国内版完全免费，超大上下文窗口，对于那些既想拥有 IDE 的便捷性，又想拥有终端多任务并行能力的同学，可谓再合适不过的选择。</p>
+
+<p>TRAE 国内版和国际版，都有 SOLO 模式，区别是国内版免费，而国际版提供国外模型，大家可以根据需求选择下载。</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2025-11-26T08:17:19+08:00">2025年11月26日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2025/11/weekly-issue-374.html</id>
             <title>科技爱好者周刊（第 374 期）：6GHz 的问题</title>
             <link>http://www.ruanyifeng.com/blog/2025/11/weekly-issue-374.html</link>
@@ -1701,185 +1847,6 @@ $ claude-doubao
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2025-11-07T08:14:38+08:00">2025年11月 7日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2025/11/minimax-m2.html</id>
-            <title>大模型比拼：MiniMax M2 vs GLM 4.6 vs Claude Sonnet 4.5</title>
-            <link>http://www.ruanyifeng.com/blog/2025/11/minimax-m2.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/11/minimax-m2.html</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 04 Nov 2025 08:21:31 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>一、</p>
-
-<p>上个月，我写了<a href="https://www.ruanyifeng.com/blog/2025/10/glm-4.6.html">一篇文章</a>，比较了两个大模型。</p>
-<p>就有人留言，两个模型太少了，能不能加入其他模型？</p>
-
-<p>正好上周（10月27日），MiniMax 公司<a href="https://www.minimaxi.com/news/minimax-m2">发布了</a> M2 模型，代表了国产大模型的最新水平。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110301.webp" title="" /></p>
-
-<p>我就想，可以测测它的实战效果，跟智谱公司的 GLM 4.6 和 Anthropic 公司的 Claude Sonnet 4.5 对比一下。</p>
-
-<p>毕竟它们都属于目前最先进的编程大模型，跟我们开发者切身相关。</p>
-
-<p>二、</p>
-
-<p>先要说明，其实我不太熟悉 <a href="https://www.minimaxi.com/">MiniMax 公司</a>，它比较低调。</p>
-
-<p>我只知道，这家公司专门研发大模型，产品有文本模型、视频模型、音频模型等等，但都不是非常热门。我就没有特别关注。</p>
-
-<p>上周，我在滑推特的时候，看到一些老外在议论（<a href="https://x.com/reach_vb/status/1982705125157126590">1</a>、<a href="https://x.com/ivanfioravanti/status/1982103760819064967">2</a>、<a href="https://x.com/simonw/status/1982825075553493136">3</a>），这才知道 MiniMax 发布了新的旗舰模型 M2。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110302.webp" title="" /></p>
-
-<p>上面<a href="https://x.com/reach_vb/status/1982705125157126590">说话的这个人</a>是 HuggingFace 大模型社区的负责人，提到了 M2 模型在 Artificial Analysis 性能评比之中排名世界第五，开源模型第一。</p>
-
-<p>当天的 HuggingFace 热度榜上，它也是第一名。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110304.webp" title="" /></p>
-
-<p>OpenRouter 的大模型全球调用量排名，它这周排在第三。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110312.webp" title="" /></p>
-
-<p>我就来了兴趣，准备好好试用一下。</p>
-
-<p>三、</p>
-
-<p>根据 MiniMax 公司的说明，<strong>M2 模型的编程能力特别强</strong>，是目前最优秀的编程模型之一。</p>
-
-<p>大家知道，国际上最流行的编程模型现在是 Claude Sonnet 4.5，国内的 GLM 4.6 模型也很强，我就把它们三个放在一起对比。</p>
-
-<p>简单起见，我就直接在官方的网页版（<a href="https://agent.minimaxi.com/">国内版</a>，<a href="https://agent.minimax.io/">国外版</a>）上运行测试，大家可以跟着一起动手试试看。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110305.webp" title="" /></p>
-
-<p>网页版实际是官方的智能体产品 <a href="https://www.minimaxi.com/news/minimax-agent">MiniMax Agent</a>，底层用的就是 M2 模型。</p>
-
-<p>网页使用是免费的，API 调用现在也是<strong>免费期</strong>，为期两周。后面定价是百万 tokens 输入/输出 2.1元/8.4元人民币，官方宣传只有 Claude 价格的8%。</p>
-
-<p>它的其他链接，我也列一下，<a href="https://github.com/MiniMax-AI/MiniMax-M2">文档仓库</a>在 GitHub，<a href="https://platform.minimax.io/docs/guides/text-generation">API 调用指南</a>（兼容 OpenAI 和 Anthopic 格式）看官方文档，<a href="https://huggingface.co/MiniMaxAI/MiniMax-M2">模型下载</a>在 HuggingFace，下载以后可以本地部署使用（如果条件允许）。</p>
-
-<p>四、</p>
-
-<p>我的测试题来自著名程序员西蒙·威利森（Simon Willison），他的网站有 Cluase Sonnet 4.5 的<a href="https://simonwillison.net/2025/Sep/29/claude-sonnet-4-5/">测试结果</a>。</p>
-
-<p>此前，我用这些题目测过智谱公司的 GLM 4.6 模型，大家可以<a href="https://www.ruanyifeng.com/blog/2025/10/glm-4.6.html">参考</a>。</p>
-
-<p>本文主要是 MiniMax M2 的测试表现。</p>
-
-<p>五、</p>
-
-<p>第一题，测试模型理解和运行代码的能力。</p>
-
-<blockquote>
-  <p>拉取代码仓库 https://github.com/simonw/llm ，然后通过下面的命令运行测试用例。</p>
-
-<p>pip install -e '.[test]' <br />
-pytest</p>
-</blockquote>
-
-<p>上面的提示词要求模型抓取一个 Python 仓库，运行里面的测试用例，并返回结果。</p>
-
-<p>从网页的显示来看，Minimax Agent 显然内置了沙盒，会在隔离环境的命令行下运行代码（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110306.webp" title="" /></p>
-
-<p>整个运行过程大约三分钟，然后它给出了结果：运行通过了466个测试用例。这个结果完全正确。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110307.webp" title="" /></p>
-
-<p>令我惊喜的是，除了运行结果，它还给出了覆盖率分析（下图），指出测试用例覆盖了代码的哪些功能。我还没在其他模型见过主动提供覆盖率的。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110308.webp" title="" /></p>
-
-<p>完整的对话看<a href="https://agent.minimaxi.com/share/329839918691041?chat_type=1">这里</a>。</p>
-
-<p>六、</p>
-
-<p>第二题，测试大家最关心的代码生成能力，看看它能不能按照要求生成应用程序。</p>
-
-<p>我还是使用上面的仓库，要求 M2 为其增加一个功能，不仅需要修改代码，还需要修改数据库结构，并增加配套的测试用例。</p>
-
-<blockquote>
-  <p>1、代码仓库 https://github.com/simonw/llm 是一个 AI 对话应用，它将用户的提示和 AI 的响应存储在 SQLite 数据库中。</p>
-
-<p>2、它目前使用线性集合，保存单个对话和响应。你尝试在响应表中添加一个 parentresponseid 列，并通过该列将对话的响应建模为树状结构。</p>
-
-<p>3、编写新的 pytest 测试用例，验证你的设计。</p>
-
-<p>4、编写一个 tree_notes.md 文件，首先将你的设计写入该文件，然后在运行过程中将该文件用作笔记。</p>
-</blockquote>
-
-<p>这个任务比较复杂，运行时间稍微长一点。</p>
-
-<p>这里有一个插曲。在运行过程中，它突然提示读取 GitHub 仓库没有成功，这时出现了我意外不到的一幕。</p>
-
-<p>它竟自动切换到第三方的 deepwiki.com 去获取仓库。后面，分析数据库结构时，它又切换到 datasette.io 去分析 SQLite 数据库。这种第三方云服务的自动切换，我也是第一次见，可惜没来得及截图。</p>
-
-<p>任务完成后，它给出了一段总结（下图），详细描述了它做了哪些事情，包括修改数据库、新增测试用例等等。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110309.webp" title="" /></p>
-
-<p>它甚至增加了一个示例文件（下图），演示新增的功能怎么用，还有一个示例图，演示修改后的对话结构，提示词里面可没要求它这么做。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110310.webp" title="" /></p>
-
-<p>完整的对话看<a href="https://agent.minimax.io/share/329995155439860?chat_type=1">这里</a>。</p>
-
-<p>另外，官网的<a href="https://agent.minimaxi.com/">画廊</a>有很多它生成的应用，我觉得也值得看一下。</p>
-
-<p>七、</p>
-
-<p>第三题就是西蒙·威利森发明的"鹈鹕骑自行车"场景，测试它的理解和推理能力。</p>
-
-<blockquote>
-  <p>生成鹈鹕骑自行车的 SVG 图片。（Generate an SVG of a pelican riding a bicycle）</p>
-</blockquote>
-
-<p>这是现实中不存在的情景，全靠模型自己推理出来。理解能力越强，生成的图像就越逼真。</p>
-
-<p>下面就是它生成的结果，完整的对话看<a href="https://agent.minimaxi.com/share/329832235541493?chat_type=1">这里</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110311.webp" title="" /></p>
-
-<p>作为比较，我把另外两个模型的结果也贴出来。</p>
-
-<p>GLM 4.6</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100108.webp" title="" /></p>
-
-<p>Claude Sonnet 4.5</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025100107.webp" title="" /></p>
-
-<p>我觉得，MiniMax M2 的结果（第一张图片）有两个值得注意的地方。首先，它添加了道路；其次，它的自行车结构相对更完整，只是缺了握把。另外，要是那只鹈鹕的姿势更像"骑车"就好了。</p>
-
-<p>八、</p>
-
-<p>测试就到这里，至于 <a href="https://www.ruanyifeng.com/blog/2025/10/glm-4.6.html">GLM 4.6</a> 和 <a href="https://simonwillison.net/2025/Sep/29/claude-sonnet-4-5/">Claude Sonnet 4.5</a> 的结果对比，大家可以看它们各自的链接，自行比较。</p>
-
-<p>我必须诚实地说，<strong>MiniMax M2 的表现超出了我的预期</strong>。</p>
-
-<p>最吸引我的地方，还不是运行结果本身，而是它处理问题的方式，对用户很友好，会添加一些帮助理解的辅助结果，让你觉得很易用（accessible）也很易懂，这也从侧面增强了生成结果的可靠性。</p>
-
-<p>我倾向于相信，各种评测结果确实是 M2 的真实实力。再考虑到它的 API 价格（现在还是免费期），我会在接下来的工作中使用它，也推荐大家试试看。</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2025-11-04T08:21:31+08:00">2025年11月 4日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
