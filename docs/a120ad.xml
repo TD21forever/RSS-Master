@@ -5,6 +5,197 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2025/12/minimax-m2.1.html</id>
+            <title>我如何用 AI 处理历史遗留代码：MiniMax M2.1 升级体验</title>
+            <link>http://www.ruanyifeng.com/blog/2025/12/minimax-m2.1.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/12/minimax-m2.1.html</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 23 Dec 2025 19:28:38 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2>一、</h2>
+
+<p>最近，我写了好几篇 AI 教程，就收到留言，要我谈谈我自己的 AI 编程。</p>
+<p>今天就来分享我的 AI 编程，也就是大家说的"氛围编程"（vibe coding）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122302.webp" title="" /></p>
+
+<p>声明一下，我只是 AI 初级用户，不是高手。除了不想藏私，更多是为了抛砖引玉，跟大家交流。</p>
+
+<h2>二、</h2>
+
+<p>平时，<strong>我很少用 AI 生成新项目</strong>。因为每次看 AI 产出的代码，我总觉得那是别人的代码，不是我的。</p>
+
+<p>如果整个项目都用 AI 生成，潜意识里，我感觉不到那是自己的项目。我的习惯是，更愿意自己写新项目的主体代码。</p>
+
+<p><strong>我主要把 AI 用在别人的项目和历史遗留代码</strong>，这可以避免读懂他人代码的巨大时间成本。</p>
+
+<p>就拿历史遗留代码为例，（1）很多时候没有足够的文档，也没有作者的说明，（2）技术栈和工具库都过时了，读懂代码还要翻找以前的标准，（3）最极端的情况下，只有构建产物，没有源代码，根本无法着手。</p>
+
+<p>AI 简直就是这类代码的救星，再古老的代码，它都能读懂和修改，甚至还能对构建产物进行逆向工程。</p>
+
+<p>下面就是我怎么用 AI 处理历史遗留代码，平时我基本就是这样来 AI 编程。</p>
+
+<h2>三、</h2>
+
+<p>我的 AI 编程工具是 Claude Code。因为<a href="https://code.claude.com/docs/en/cli-reference">命令行</a>对我更方便，也容易跟其他工具集成。</p>
+
+<p>我使用的 AI 模型，大部分时间是国产的 <a href="https://www.minimaxi.com/">MiniMax M2</a>。我<a href="https://www.ruanyifeng.com/blog/2025/11/minimax-m2.html">测过</a>它的功能，相当不错，能够满足需要，它的排名也很靠前。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122105.webp" title="" /></p>
+
+<p>另外，它有包月价（29元人民币），属于最便宜的编程模型之一，可以放心大量使用，反复试错。要是改用大家都趋之若鹜的 Claude 系列模型，20美元的 Pro 套餐不够用，200美元的 Max 套餐又太贵。</p>
+
+<p>MiniMax 接入 Claude Code 的方法，参考我的<a href="https://www.ruanyifeng.com/blog/2025/11/doubao-seed-code.html">这篇教程</a>。</p>
+
+<h2>四、</h2>
+
+<p>就在我写这篇文章的时候，MiniMax 本周进行了一次大升级，<strong>M2 模型升级到了 M2.1</strong>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122303.webp" title="" /></p>
+
+<p>因为跟自己相关，我特别关注这次升级。</p>
+
+<p>根据官方的<a href="https://mp.weixin.qq.com/s/QOv0GLq5-T--gKGIF912RQ">发布声明</a>，这次升级特别加强了"<strong>多语言编程能力</strong>"，对于常用编程语言（Rust、Java、Golang、C++、Kotlin、Objective-C、TypeScript、JavaScript 等）有专门强化。</p>
+
+<p>它的 WebDev 与 AppDev 开发能力因此有大幅提升，可以用来开发复杂的 Web 应用和 Android/iOS 的原生 App。</p>
+
+<blockquote>
+  <p>"在软件工程相关场景的核心榜单上，MiniMax M2.1 相比于 M2 有了显著的提升，尤其是在多语言场景上，超过 Claude Sonnet 4.5 和 Gemini 3 Pro，并接近 Claude Opus 4.5。"</p>
+</blockquote>
+
+<p>根据上面这段介绍，它的编程能力，超出或接近了国外旗舰模型。</p>
+
+<p>这个模型已经上线了，现在就能用。那么，这篇文章正好测一下，官方的介绍是否准确，它的 Web 开发能力到底有没有变强。</p>
+
+<p>至于价格，跟原来一样。但是，官方表示"响应速度显著提升，Token 消耗明显下降"，也算变相降价了。</p>
+
+<p>M2.1 接入 Claude Code，我的参数如下。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122201.webp" title="" /></p>
+
+<h2>五、</h2>
+
+<p>我这次选择的历史遗留项目是 <a href="https://github.com/ruanyf/wechat-format/">wechat-format</a>，一个 Web 应用，将 Markdown 文本转为微信公众号的样式。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122101.webp" title="" /></p>
+
+<p>上图左侧的文本框输入 Markdown 文本，右侧立刻显示自动渲染的结果，可以直接复制到微信公众号的编辑器。</p>
+
+<p>它非常好用，大家可以去<a href="https://ruanyf.github.io/wechat-format/">试试看</a>。我的公众号现在就用它做排版，效果不错（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122202.webp" title="" /></p>
+
+<p>问题是，原作者六年前就放弃了，这个项目不再更新了。我看过源码，它用的是老版本的 Vue.js 和 CodeMirror 编辑器，没有任何文档和说明，还经过了编译工具的处理，注释都删掉了。</p>
+
+<p>如果不熟悉它的技术栈，想要修改这些代码是很困难的，可能要投入大量时间。</p>
+
+<p>那么废话少说，直接让 AI 上场，把这些代码交给 MiniMax M2.1 模型。</p>
+
+<h2>六、</h2>
+
+<p>接手老项目的第一步，是对项目进行一个总体的了解。</p>
+
+<p>我首先会让 AI 生成项目概述。大家可以跟着一起做，跟我的结果相对照。</p>
+
+<blockquote><pre class=" language-bash"><code class=" language-bash">
+# 克隆代码库
+$ git clone git@github.com:ruanyf/wechat-format.git
+
+# 进入项目目录
+$ cd wechat-format
+
+# 启动 Claude Code
+$ claude-minimax
+</code></pre></blockquote>
+
+<p>上面的<code>claude-minimax</code>是我的自定义命令，用来在 Claude Code 里面调用 MiniMax 模型（参见<a href="https://www.ruanyifeng.com/blog/2025/11/doubao-seed-code.html">教程</a>）。</p>
+
+<p>输入"生成这个仓库的概述"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122208.webp" title="" /></p>
+
+<p>AI 很快就给出了详细说明，包括项目的总体介绍、核心功能、技术栈和文件结构（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122209.webp" title="" /></p>
+
+<p>有了总体了解以后，我会让 AI 解释主要脚本文件的代码。</p>
+
+<blockquote>
+  <p>【提示词】解释 index.html 文件的代码</p>
+</blockquote>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122206.webp" title="" /></p>
+
+<p>它会给出代码结构和页面布局（上图），然后是 JS 脚本加载顺序和 Vue 应用逻辑，甚至包括了流程图（下图），这可是我没想到的。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122207.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122210.webp" title="" /></p>
+
+<p>做完这一步，代码库的大致情况应该就相当了解了，而 AI 花费的时间不到一分钟。</p>
+
+<h2>七、</h2>
+
+<p>既然这个模型号称有"多语言编程能力"，我就让它把项目语言从 JavaScript 改成 TypeScript。</p>
+
+<p>对于很多老项目来说，这也是常见需求，难度不低。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122304.webp" title="" /></p>
+
+<p>它先制定了迁移计划，然后生成了 tsconfig.json 和 types.d.ts，并逐个将 JS 文件转为对应的 TS 文件（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122305.webp" title="" /></p>
+
+<p>修改完成后，它试着运行这个应用，发现有报错（下图），于是又逐个解决错误。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122306.webp" title="" /></p>
+
+<p>最终，迁移完成，它给出了任务总结（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122307.webp" title="" /></p>
+
+<p>我在浏览器运行这个应用，遇到了两个报错：CodeMirror 和 FuriganaMD 未定义。</p>
+
+<p>我把报错信息提交给模型，它很快修改了代码，这次就顺利在浏览器跑起来了。</p>
+
+<p>至此，这个多年前的 JavaScript 应用就成功改成了 TypeScript 应用，并且所有内部对象都有了完整的类型定义。</p>
+
+<p>你还可以接着添加单元测试，这里就省略了。</p>
+
+<h2>八、</h2>
+
+<p>简单的测试就到此为止，我目前的 AI 编程大概就到这个程度，用 AI 来解释和修改代码。我也建议大家，以后遇到历史遗留代码，一律先交给 AI。</p>
+
+<p>虽然这个测试比较简单，不足以考验 MiniMax M2.1 的能力上限，但如果人工来做上面这些事情，可能一个工作日还搞不定，但是它只需要十几分钟。</p>
+
+<p>总体上，我对它的表现比较满意。大家都看到了，我的提示词很简单，就是一句话，但是它正确理解了意图，如果一次没有成功，最多再修改一两次就正确了。</p>
+
+<p>而且，就像发布说明说的一样，它运行速度很快，思考过程和生成过程最多也就两三分钟，不像有的模型要等很久。</p>
+
+<p>另外，不管什么操作，它都会给出详细的讲解和代码注释。</p>
+
+<p>总之，就我测试的情况来看，这个模型的 Web 开发能力确实很不错，可以用于实际工作。</p>
+
+<p>最后，说一点题外话。著名开发者 Simon Willison <a href="https://simonwillison.net/2025/Nov/24/claude-opus/">最近说</a>，评测大模型越来越困难，"我识别不出两个模型之间的实质性差异"，因为主流的新模型都已经足够强大，足以解决常见任务，只有不断升级评测的难度，才能测出它们的强弱。</p>
+
+<p>这意味着，对于普通程序员的常见编程任务，不同模型不会构成重大差异，没必要迷信国外的旗舰模型，国产模型就很好用。</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2025-12-23T19:28:38+08:00">2025年12月23日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2025/12/weekly-issue-378.html</id>
             <title>科技爱好者周刊（第 378 期）：预测是新的互联网热点</title>
             <link>http://www.ruanyifeng.com/blog/2025/12/weekly-issue-378.html</link>
@@ -1813,410 +2004,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2025-11-26T08:17:19+08:00">2025年11月26日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2025/11/weekly-issue-374.html</id>
-            <title>科技爱好者周刊（第 374 期）：6GHz 的问题</title>
-            <link>http://www.ruanyifeng.com/blog/2025/11/weekly-issue-374.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/11/weekly-issue-374.html</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 21 Nov 2025 08:10:12 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
-<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/8003">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
-
-<h2>封面图</h2>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111209.webp" title="" /></p>
-
-<p>香港湾仔新建成的"水上运动及康乐主题区"，是维多利亚港首个没有栏杆的堤岸，游人可拾级而下亲近海水。（<a href="https://www.hfc.org.hk/tc/hss/water-sports-and-recreation-precinct-wan-chai">via</a>）</p>
-
-<h2>6GHz 的问题</h2>
-
-<p>本周的<a href="https://www.lightreading.com/wifi/mobile-operators-beat-wi-fi-for-upper-6ghz-in-europe">新闻</a>，欧洲做出决定，6GHz 怎么分配。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111502.webp" title="" /></p>
-
-<p>欧洲把 6GHz 一分为二，较低的频段给 WiFi 使用，较高的频段留给手机通信。</p>
-
-<p>这跟美国和中国都不一样，美国把整个 6GHz 分配给 WiFi，中国则是全部分配给手机通信。</p>
-
-<p>我来说说，对于这个新闻的感想。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111503.webp" title="" /></p>
-
-<p>对于不了解的朋友，我先说说 6GHz 是怎么回事。</p>
-
-<p>家庭的无线局域网（WiFi）只能使用固定频率的信号。最早的频率是 2.4GHz，所有设备都用这个频率，就造成了信道拥挤、信号不稳定。</p>
-
-<p>后来，增加了 5GHz。但是这个频率现在也不太够用，在大城市的高层住宅，打开手机，能搜到几十个无线网络。那么多设备都用这个频率，通信就很拥挤了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111504.webp" title="" /></p>
-
-<p>大家就想到，再给 WiFi 增加一个频段，目光就瞄准了 6GHz。这个频段还没有指定用途。</p>
-
-<p>如果 6GHz 用作 WiFi，最大的好处就是不会发生拥堵。因为它的波长短，所以穿墙能力差，实际上不能穿墙。也就是说，你在屋里只能连上你自己的 6GHz 信号，别处的信号传不进来。</p>
-
-<p>而且，它的带宽大，网速更快，可以打造高速 WiFi，适合 VR 头盔这类吃带宽的设备。</p>
-
-<p>但是，问题就来了，6GHz 除了用作 WiFi，还可以用作手机通信。手机通信的频段能够供大量人群同时使用，比只供一家人使用的 WiFi，频段利用效率更高，公共效益更大。</p>
-
-<p>前面说了，中国的决定是，整个 6GHz 都留给手机通信，也就是说 WiFi 不能使用这个频段。</p>
-
-<p>所以，有些追求高网速的国内用户，就会去买国外的无线路由器，以及支持 6GHz 的硬件（比如<a href="https://support.apple.com/zh-cn/102285">苹果设备</a>），实现家庭的高速 WiFi。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111809.webp" title="" /></p>
-
-<p>我的想法是，WiFi 只有 2.4GHz 和 5GHz 确实不太够，如果能增加一个高速频段就很好，不仅满足大带宽通信，还能促进设备升级，带动消费。</p>
-
-<p>6GHz 的完整频段是 5925MHz 到 7125MHz，听过国内明确留给手机通信的是 6425MHz 到 7125MHz 这一段，至于剩下的 5925Mhz 到 6425MHz 怎么分配还没明文规定（参见<a href="https://baike.baidu.com/item/6GHz%E9%A2%91%E6%AE%B5/63143263">百度百科</a>）。</p>
-
-<p>如果是真的，是否可以考虑放出 5925Mhz 到 6425MHz 这一段，就像美国的规定，任何人无需许可就能使用这个频率。这样的话，个人和企业就有了一个可以自由使用的高速通信频率，为更多的创新创造条件。</p>
-
-<h2>科技动态</h2>
-
-<p>1、<a href="https://www.iflscience.com/on-november-13-2026-voyager-will-reach-one-full-light-day-away-from-earth-81432">一个光日</a></p>
-
-<p>1977年9月5日，美国发射宇宙飞船"旅行者1号"。它是目前飞行距离最远的飞行器，已经飞离了太阳系。</p>
-
-<p>根据计算，2026年11月13日，它将距离地球"<a href="https://www.iflscience.com/on-november-13-2026-voyager-will-reach-one-full-light-day-away-from-earth-81432">1光日</a>"（光在一天内传播的距离），成为首个达到这个距离的人造飞行器。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111303.webp" title="" /></p>
-
-<p>届时，旅行者1号将距离地球259亿公里，这段距离光只需要1天，它耗时近50年。</p>
-
-<p>在当前位置，地球的指令到达它需要23小时29分27秒，过了1光日，就要第二天才能收到。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111304.webp" title="" /></p>
-
-<p>科学家预计，再过300年，旅行者1号就会进入太阳系旁边的奥尔特云团，穿过该云团需要大约30000年。</p>
-
-<p>2、<a href="https://www.goodgoodgood.co/articles/austrian-power-giants-power-line-animals">输电铁塔</a></p>
-
-<p>奥地利正在改造输电铁塔，让其变得更美观，更像景观。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110204.webp" title="" /></p>
-
-<p>上图是鹳，另一个已经落成的设计是雄鹿（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110205.webp" title="" /></p>
-
-<p>奥地利电网公司打算一共设计9种动物形状的铁塔，象征奥地利的9个州，目前已经完成了两个。</p>
-
-<p>许多人都反对，在村庄旁边修建输电塔。电网公司希望，这些具有视觉吸引力的铁塔，可以让人们更容易接受它。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110206.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110207.webp" title="" /></p>
-
-<p>3、<a href="https://www.xda-developers.com/google-meet-makeup/">在线会议的 AI 化妆</a></p>
-
-<p>Google Meet 推出 AI 化妆按钮，帮你在线上会议"虚拟化妆"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025101410.webp" title="" /></p>
-
-<p>上图右侧是可选择的12种妆容，左侧窗口是预览画画，也就是别人看到的你的样子，数字化妆保证你看上去"光彩照人"。</p>
-
-<p>以后，颜值滤镜将是视频通话软件的标配。</p>
-
-<p>4、<a href="https://newatlas.com/photography/kodak-charmera-fun-camera-keychain/">钥匙扣相机</a></p>
-
-<p>柯达公司推出了一扣挂在钥匙扣上的相机，而且样子很复古。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202509/bg2025091802.webp" title="" /></p>
-
-<p>这款相机很小，重量仅30克，但是功能齐全，配有取景器、LCD 屏幕、Type-C 端口、闪光灯、microSD 插槽。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202509/bg2025091803.webp" title="" /></p>
-
-<p>它的画质不行，传感器只有 1/4 英寸，只能拍摄 1,440 x 1,440 的 JPEG 照片。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202509/bg2025091804.webp" title="" /></p>
-
-<p>但是，它的价格只有30美元，加上造型不错，还是有很多人愿意买单。目前，它在<a href="https://www.kodak.retopro.co/zh-hans/products/kodak-charmera-br-keychain-digital-camera-blind-box">柯达官网</a>出售，显示缺货。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202509/bg2025091805.webp" title="" /></p>
-
-<h2>文章</h2>
-
-<p>1、<a href="https://www.gleech.org/paper">中国 AI 模型是纸老虎</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111801.webp" title="" /></p>
-
-<p>一个美国人的文章，批评中国 AI 模型不如看上去那样好。</p>
-
-<p>我认为，他的观点太偏颇，很多论据站不住脚，读上去酸溜溜，但是可以作为参考。</p>
-
-<p>2、<a href="https://www.windowslatest.com/2025/11/12/meta-just-killed-native-whatsapp-on-windows-11-now-it-opens-webview-uses-1gb-ram-all-the-time/">WhatsApp 现在使用 WebView</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111309.webp" title="" /></p>
-
-<p>通信软件 WhatsApp 的 Windows 版，原先是一个原生桌面应用。</p>
-
-<p>作者震惊地发现，它的新版本居然退回了 WebView，成为网页版的包装器，性能急剧下降，内存占用 1GB。原因可能是 Meta 公司裁掉了 Windows 版的开发团队。</p>
-
-<p>3、<a href="https://mp.weixin.qq.com/s/roURrNNBJ2J5ZqdFuU1tkA">Vibe Coding 面试感受</a>（中文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112003.webp" title="" /></p>
-
-<p>作者团队的面试，开始改为让应聘者用 AI 实现一个功能，作者谈了实施的感受。（<a href="https://github.com/ruanyf/weekly/issues/8254">@thuwyh</a> 投稿）</p>
-
-<p>4、<a href="https://decrypt.co/348129/running-your-own-local-open-source-ai-model-easy-heres-how">本地运行 AI 模型的方法</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111808.webp" title="" /></p>
-
-<p>本文介绍在本地计算机运行 AI 模型的几种方法：<a href="https://lmstudio.ai/">LM Studio</a>、<a href="https://ollama.com/">Ollama</a>、<a href="https://lmstudio.ai/">LMStudio</a>。</p>
-
-<p>5、<a href="https://zed.dev/blog/zed-is-our-office">我们在 Zed 里面办公</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111402.webp" title="" /></p>
-
-<p>Zed 是一个全新的代码编辑器，正在密集开发。除了文档编辑以外，Zed 团队也用它来开会和讨论，它内置了讨论区和实时协作。</p>
-
-<p>6、<a href="https://dawranliou.com/blog/intermediate-dev/">中级程序员的标志</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111308.webp" title="" /></p>
-
-<p>今年是作者从事专业编程的第十年，他认为自己属于中级程序员，总结了自己的工作内容。</p>
-
-<p>他说，做到了这些事，你就达到了中级程序员的标准。</p>
-
-<h2>工具</h2>
-
-<p>1、<a href="https://github.com/kavishdevar/librepods">LibrePods</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111806.webp" title="" /></p>
-
-<p>在非苹果设备上（比如安卓手机和 Linux），使用 AirPods 耳机的工具。</p>
-
-<p>2、<a href="https://codeberg.org/IDEmacs/IDEmacs">IDEmacs</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111807.webp" title="" /></p>
-
-<p>将 Emacs 配置成 VS Code 样式的一套配置。</p>
-
-<p>3、<a href="https://github.com/ory/kratos">Kratos</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111310.webp" title="" /></p>
-
-<p>开源的身份认证服务器，支持多种认证方式，可以替代 Auth0 和 Okta。</p>
-
-<p>4、<a href="https://github.com/wood3n/biu">Biu</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111307.webp" title="" /></p>
-
-<p>一个开源的跨平台桌面应用，基于 API 来搜索和播放 Bilibili 平台的音乐，支持登录获取收藏夹歌曲。（<a href="https://github.com/ruanyf/weekly/issues/8202">@wood3n</a> 投稿）</p>
-
-<p>5、<a href="https://enjoygit.com/">Enjoy Git</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111401.webp" title="" /></p>
-
-<p>中文的 Git 桌面图形客户端，暂时只有 Windows 版。（<a href="https://github.com/ruanyf/weekly/issues/8207">@huangcs427</a> 投稿）</p>
-
-<p>6、<a href="https://github.com/readdig/readdig">Readdig</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111705.webp" title="" /></p>
-
-<p>开源 RSS 阅读和 Podcasts 播放网站。（<a href="https://github.com/ruanyf/weekly/issues/8223">@copilot-is</a> 投稿）</p>
-
-<p>7、<a href="https://github.com/hehehai/tiny-svg">Tiny SVG</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111706.webp" title="" /></p>
-
-<p>开源的网页版 SVG 压缩，可以<a href="https://tiny-svg.actnow.dev/">在线试用</a>。（<a href="https://github.com/ruanyf/weekly/issues/8225">@mutou981</a> 投稿）</p>
-
-<p>8、<a href="https://github.com/Mister-leo/fssh">fssh</a></p>
-
-<p>苹果笔记本的 SSH 私钥保护器，登录服务器时直接指纹认证。（<a href="https://github.com/ruanyf/weekly/issues/8226">@Mister-leo</a> 投稿）</p>
-
-<p>9、<a href="https://www.crossdesk.cn/">CrossDesk</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112001.webp" title="" /></p>
-
-<p>开源的远程桌面软件，跨平台，支持硬件加速和 Web 访问。（<a href="https://github.com/ruanyf/weekly/issues/8251">@kunkundi</a> 投稿）</p>
-
-<p>10、<a href="https://github.com/leochiu-a/git-pr-ai">Git PR AI</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112002.webp" title="" /></p>
-
-<p>一个命令行工具，跟 JIRA 配套，可以直接从 JIRA Ticket 生成 Git 分支，并带有 AI 功能。（<a href="https://github.com/ruanyf/weekly/issues/8252">@leochiu-a</a> 投稿）</p>
-
-<h2>AI 相关</h2>
-
-<p>1、<a href="https://antigravity.google">Antigravity</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111901.webp" title="" /></p>
-
-<p>谷歌本周发布的 IDE 产品，用于 AI 编程，也是基于 VS Code。</p>
-
-<p>2、<a href="https://codewiki.google/">Code Wiki</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111805.webp" title="" /></p>
-
-<p>谷歌新发布的服务，使用 Gemini 模型为代码库生成文档。</p>
-
-<p>3、<a href="https://github.com/xxnuo/open-coreui">Open CoreUI</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111704.webp" title="" /></p>
-
-<p>使用 Rust 语言重写的 Open WebUI，降低了内存和资源消耗，有服务器版和桌面版。（<a href="https://github.com/ruanyf/weekly/issues/8222">@xxnuo</a> 投稿）</p>
-
-<p>4、<a href="https://github.com/AnandChowdhary/continuous-claude">Continuous Claude</a></p>
-
-<p>一个命令行工具，可以对同一个任务循环运行 Claude Code，允许指定运行次数。</p>
-
-<h2>资源</h2>
-
-<p>1、<a href="https://random.tastemaker.design/">随机性测试指南</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111311.webp" title="" /></p>
-
-<p>这个网站给出一系列方法，测试某种随机数生成器是否足够随机，所有测试方法都有详细易懂的解释，可以用来学习统计学。</p>
-
-<p>2、<a href="https://github.com/MathFoundationRL/Book-Mathematical-Foundation-of-Reinforcement-Learning">强化学习的数学基础</a>（Mathematical Foundations of Reinforcement Learning）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025031101.webp" title="" /></p>
-
-<p>开源的英文电子书，介绍强化学习的基础数学知识。</p>
-
-<p>3、<a href="https://learnyousomeerlang.com/content">Erlang 初学者教程</a>（learn you some Erlang）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025031702.webp" title="" /></p>
-
-<p>Erlang 是一种函数式语言，适合分布式、高可用环境。这个网站是面向初学者的英文教程。</p>
-
-<h2>图片</h2>
-
-<p>1、</p>
-
-<p>一家巴基斯坦报纸，不慎将 <a href="https://x.com/omar_quraishi/status/1988518627859951986">AI 的对话</a>跟着文章一起发表了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111214.webp" title="" /></p>
-
-<p>上图文章结尾的红框处，写着："如果您愿意，我还可以生成一个更醒目的'首页风格'版本，配以简洁有力的单行统计数据和醒目、信息图表式的布局----完美契合最多读者需求。您希望我接下来生成这个吗？"（If you want, I can also create an even snappier "front-page style" version with punchy one-line stats and a bold, infographic-ready layout -- perfect for maximum reader impact. Do you want me to do that next?）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025112004.webp" title="" /></p>
-
-<p>如果报纸都用 AI 写稿，读者是否还有必要订阅？</p>
-
-<p>1、<a href="https://www.sydney.edu.au/news-opinion/news/2025/11/10/mysterious-holes-in-the-andes-may-have-been-an-ancient-marketplace-new-research-suggests.html">神秘的土坑带</a></p>
-
-<p>秘鲁南部的一个山谷，有着一条长长的土坑带，整齐地排列着5000多个土坑，非常神秘。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111903.webp" title="" /></p>
-
-<p>这明显是人工的，但是没有任何记载，不知道是谁修建的？有什么用途？</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111904.webp" title="" /></p>
-
-<p>上图中间的一长条，都是土坑。</p>
-
-<p>考古学家在土坑中发现了玉米花粉和芦苇。玉米是古代这个地区的主粮，而芦苇可以用来编织篮子。</p>
-
-<p>因此人们猜测，这里是印加帝国的一个大型集市，这些土坑用来存放货物。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025111905.webp" title="" /></p>
-
-<h2>文摘</h2>
-
-<p>1、<a href="https://one-from-nippon.ghost.io/worlds-first-app-store/">世界第一个 App 商店</a></p>
-
-<p>世界第一个 App 商店，出现在上个世纪80年代的日本，方便用户付费购买软件。</p>
-
-<p>它采用自动售货机的形式，因此也是世界第一台以数字形式出售软件的自动售货机。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110403.webp" title="" /></p>
-
-<p>1986年的时候，软件都是以磁盘形式出售。一个软件通常就是几百 KB，正好放到一张磁盘里面。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110501.webp" title="" /></p>
-
-<p>上图左下角就是当时的磁盘。</p>
-
-<p>需要新软件的时候，人们往往删除磁盘的旧数据，拿来拷贝。一家日本公司由此想到，可以制造一种机器，让人们插入磁盘，把选择的软件拷贝在上面。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202311/bg2023110502.webp" title="" /></p>
-
-<p>上面就是这家公司造出来的软件自动售货机。</p>
-
-<p>你把磁盘插入机器，在屏幕上选择自己想要的软件，支付费用后，机器自动把软件拷贝到磁盘上，然后你就可以带着软件回家。</p>
-
-<p>如果软件附带手册，它还会把手册打印出来给你。</p>
-
-<p>这在当时是一项革命性的发明，一经推出就轰动了市场。当时还没有互联网，购买软件都要去实体商店，有了这种机器，你在街角就可以购买软件。</p>
-
-<p>这种机器的致命伤在于，它内部的硬盘不够大，只能储存最热门的几种软件（大部分是游戏）。如果用户想购买其他软件，就必须等这台机器去远程下载。</p>
-
-<p>当时采用电话线拨号下载，网速只有每秒约 1.2 KB，一个游戏的下载时间有时达到20分钟。这段时间内，用户只能在机器旁边等着，其他人也不能使用这台机器。如果下载中途断线，就必须从头来过。</p>
-
-<p>为了解决这个问题，这家公司让机器每晚自动下载最新游戏。但还是不能完全避免用户的等待。</p>
-
-<p>最高峰时，这种机器在日本全国一共安装了300多台。直到1997年，才完全退出历史舞台。</p>
-
-<h2>言论</h2>
-
-<p>1、</p>
-
-<p>我希望让机器人坐在自动驾驶的出租车里运送包裹。</p>
-
-<p>出租车自动驾驶到达目的地后，机器人负责搬运货物到门口。</p>
-
-<p>-- <a href="https://stratechery.com/2025/robotaxis-and-suburbia/">马斯克</a>谈对于 Optimus 机器人的发展愿景</p>
-
-<p>2、</p>
-
-<p>亚洲常见的一种攻击方法是，诈骗分子打电话给受害者，冒充银行员工，警告受害者账户已被盗用，并指示他们安装一个应用程序来保护资金安全。</p>
-
-<p>诈骗分子还会蒙骗受害者，让他们在安装应用程序的过程中忽略安全警告。这个应用是伪装成合法应用的恶意软件，会窃取受害者的登录信息，并拦截访问银行账户所需的双因素验证码。</p>
-
-<p>-- <a href="https://www.engadget.com/apps/google-will-allow-experienced-users-to-sideload-unverified-android-apps-130000130.html">谷歌</a>用这个案例解释，为什么需要实施"安卓开发者认证计划"</p>
-
-<p>3、</p>
-
-<p>既然 AI 可以按需提供你的代码所需的特定功能，为什么还要增加额外的供应链风险，引入另一个依赖项呢？</p>
-
-<p>因此，小型的、低价值的依赖项在未来会消失。</p>
-
-<p>-- <a href="https://simonwillison.net/2025/Nov/17/the-fate-of-small-open-source/">《"小型"开源软件的命运 》</a></p>
-
-<p>4、</p>
-
-<p>基因疗法可能实现一次治愈病人，这对于公司的持续收入很不利。</p>
-
-<p>相比慢性疗法，治愈病人是一种可持续的商业模式吗？</p>
-
-<p>-- <a href="https://www.cnbc.com/2018/04/11/goldman-asks-is-curing-patients-a-sustainable-business-model.html">高盛公司</a>的一份研究报告</p>
-
-<p>5、</p>
-
-<p>去年，互联网上机器人流量第一次超过了人类流量。根据一份报告，自动化系统在2024年占所有网络流量的51%，而且 AI 生成的文章数量也在2024年底首次超过了人类撰写的文章。</p>
-
-<p>-- <a href="https://decrypt.co/348837/dead-internet-theory-gains-traction-ai-content-surges-online">《互联网已死》</a></p>
-
-<h2>往年回顾</h2>
-
-<p><a href="https://www.ruanyifeng.com/blog/2024/11/weekly-issue-327.html">没有链接的互联网</a>（#327）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2023/11/weekly-issue-277.html">工作台副屏的最佳选择</a>（#277）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2022/10/weekly-issue-227.html">脸书的公司入职教育</a>（#227）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2021/09/weekly-issue-177.html">iPad 的真正用途</a>（#177）</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2025-11-21T08:10:12+08:00">2025年11月21日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
