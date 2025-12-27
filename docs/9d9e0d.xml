@@ -5,18 +5,35 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/694d1d2af7b0b259deb52e9a</id>
-            <title>AI探索站 12月25日</title>
-            <link>https://m.okjike.com/originalPosts/694d1d2af7b0b259deb52e9a</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/694d1d2af7b0b259deb52e9a</guid>
+            <id>https://m.okjike.com/originalPosts/694dfe9ef9f724324f93b235</id>
+            <title>AI探索站 12月26日</title>
+            <link>https://m.okjike.com/originalPosts/694dfe9ef9f724324f93b235</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/694dfe9ef9f724324f93b235</guid>
             <pubDate></pubDate>
-            <updated>Thu, 25 Dec 2025 11:16:58 GMT</updated>
+            <updated>Fri, 26 Dec 2025 03:18:54 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    最近有位推友 Jeff 在推上问：谁在为 Manus 付费？在我们自己还没关注到这条推时，就有好多的 Manus 用户去下面发布自己的使用场景，一条条读过去，非常感动。最终 Jeff 那条原推有快 30 万的阅读量，并且我刚发现 YC 的前 CEO Michael Seibel也在下面留言说 Manus 是他使用最多的 AI 应用，🥹
+                    如何用Claude Skills训练你自己的AI员工？<br /><br />最近刷到一个国外网友分享了他使用Claude Skills的最佳实践，我必须分享给你们！<br /><br />你有没有感觉，AI的输出有时候太不稳定了？<br />同样一个需求，今天问Claude，它给你的答案特别惊艳。明天再问一遍，换了个说法，结果完全不是那么回事。<br /><br />你得反复调教、反复解释、反复给上下文，但效率没提升多少。<br /><br />这位博主说，大多数人用AI，其实是在用一个临时工。每次对话都是从零开始，你得重新介绍自己是谁、做什么业务、喜欢什么风格。<br /><br />而Claude Skills这个功能，本质上是让你把这个临时工变成正式员工。<br /><br />什么是Claude Skills？<br />Skills就是一套可以复用的自定义指令。<br />你把自己的业务背景、审美偏好、输出标准写进去，之后每次对话，Claude都会自动加载这些信息。<br /><br />听起来好像和系统提示词差不多，但区别在于，Skills更结构化。<br /><br />它是Anthropic官方设计的一套框架，内置了很多最佳实践。<br /><br />这位博主是做设计agency的，他创建了一个叫做转化率文案审核的Skill。<br />这个Skill的作用是：当他把App截图或者网站页面丢给Claude时，Claude会像一个专业的转化率优化专家一样，给出系统的诊断和修改建议。<br /><br />那他是怎么创建这个Skill的呢？<br />第一步，启用Skills功能。 <br />在Claude的设置里找到Capabilities，往下翻会看到Skills preview。<br />这个功能默认是关闭的，你得手动打开。<br /><br />第二步，通过对话创建Skill。 <br />点击Create with Claude，系统会引导你一步步描述你的需求。<br /><br />比如这位博主告诉Claude：我是做设计agency的，经常要给客户做App和网站，我需要一个能审核文案、提升转化率的助手。<br /><br />第三步，Claude会追问细节。 <br />它会问你：你通常做什么类型的产品？你会用什么方式提供素材？你希望审核哪些元素？你期待的反馈形式是什么样的？<br /><br />第四步，Claude自动生成Skill文件。 <br />根据你的回答，它会创建一套markdown文件，包括审核流程、评分标准、各种转化率优化框架比如AIDA、PAS这些，还有针对不同元素的具体指南。<br /><br />整个过程大概十分钟，你就拥有了一个专属的文案审核专家。<br /><br />Skills和Projects有什么区别？<br />Claude不是有Projects功能吗，也可以保存上下文，为什么还要用Skills？<br /><br />因为Projects是项目维度的，有开始有结束。比如你在做圣诞营销活动，结束之后那些上下文就没用了。<br /><br />而Skills是能力维度的，是长期有效的。<br /><br />Projects像是你给一个员工布置的具体任务，Skills则是这个员工本身具备的专业能力。<br />任务会变，但能力是持续积累的。<br /><br />很多公司做完一个项目，经验就散了，下次还得重新摸索。<br />而成熟的公司会把项目中的经验沉淀成组织能力，变成可复用的资产。<br />Skills其实就是在帮你做这件事。<br /><br />到这里其实已经很实用了，但博主又分享了一个进阶技巧，来自另一位叫boring marketer的AI从业者。<br />核心观点是：创建Skill的关键，是让AI像专家一样思考，而不是像机器人一样执行步骤。<br /><br />具体来说有几个要点。<br />首先是探索Claude的失败模式。<br />在没有任何引导的情况下，让Claude做同样的任务，看看它会在哪里翻车。<br />这些翻车的地方，就是你的Skill需要重点补强的地方。<br /><br />其次是做领域研究。<br />别只依赖Claude自己的知识，去找专业书籍、行业报告、专家访谈，把真正有价值的原则提炼出来写进Skill。<br /><br />然后是尽量精简。<br />每一个section都要问自己：这段话真的有必要吗？如果删掉会影响输出质量吗？<br />冗余的信息只会分散AI的注意力。<br /><br />最后是持续迭代。<br />Skills不是一次性产品，你用得越多，就越能发现它的问题，然后不断优化。这个过程很像训练一个真正的员工。<br /><br />如果你想尝试，我建议分三步走。<br />第一步，想清楚你的高频需求是什么。<br />不是所有任务都值得创建Skill，那些你反复在做、每次都要重新解释上下文的任务，才是最适合的。<br />比如周报撰写、内容审核、数据分析报告、客户邮件回复等等。<br /><br />第二步，先用Create with Claude功能快速搭建一个基础版。<br />不用追求完美，先跑起来再说。<br /><br />第三步，在使用过程中不断收集反馈。哪里输出不符合预期，就去修改Skill文件。<br />这是一个持续优化的过程。<br /><br />用好AI的人和用不好AI的人，差距会越来越大。<br />不是因为技术门槛高，而是因为很多人还停留在把AI当搜索引擎用的阶段。<br /><br />而那些愿意花时间去训练、去调教、去建立专属AI能力的人，效率会以指数级提升。<br />Skills只是一个开始，但从工具到队友，这一步迈出去，你和AI的关系就完全不一样了。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/694de8dae48f1bd7aba929ff</id>
+            <title>AI探索站 12月26日</title>
+            <link>https://m.okjike.com/originalPosts/694de8dae48f1bd7aba929ff</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/694de8dae48f1bd7aba929ff</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 26 Dec 2025 01:46:02 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    感谢卡兹用 Chat Memo 来存档这一年的 AI 记忆。<br /><br />AI 对话承载着这个时代最重要的个人记忆。但它们零散在各平台中，会因为“封号”、“过于零散”而丢失。<br /><br />我开发了Chat Memo，想帮助每个人打造"AI 记忆中枢"，将 AI 沉淀为可积累的个人资产。<br /><br />👉欢迎搜索 Chat Memo，从今天开始沉淀个人 AI 记忆
                 ]]>
             </content:encoded>
         </item>
@@ -85,23 +102,6 @@
                 <![CDATA[
                     
                     全球增长最快的 AI 应用公司，ARR 2亿美金的 Lovable 的增长负责人分享了增长认知<br />看完感觉 AI 行业真的太刺激了<br />竞争的速度已经比移动互联网时代快了 10 倍以上<br /><br />1. PMF 的保质期只有三个月，因为模型更新的周期是三个月。模型每次更新你就要重新赢得一次 PMF<br />2. MVP 已死，MLP 才行，如果没有共鸣，就不要发布<br />3. SEO 已死，社交媒体是唯一的有机增长<br />4. Aha Moment 已死，现在的产品必须让用户炸裂认知，必须要 Wow Moment 才可以<br />5. 长期 Roadmap 已死，今天不能定制超过3个月的产品路线图，因为3个月后，一切可能都已经变了，用户预期也变了<br />6. 放弃销售团队，2亿ARR没有任何销售团队<br />7. 放弃优化利润率，现在需要疯狂圈地，还没到赚钱的时候<br />8. 放弃晚期大众用户，聚焦先锋用户，今天 AI 发展太快，大部分人跟不上节奏<br />9. 技术不是护城河，唯二的护城河是发版速度和品牌好感度<br />10. 巨头的护城河也极其脆弱，即便是 OpenAI 这样的公司，如果不能迭代出好模型，也可以在几周内崩塌<br /><br />视频地址： https://youtu.be/6qAB6aUMIeA?si=5vaiNOF8JH62zFvC
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/694906d0f9f724324f1aa203</id>
-            <title>AI探索站 12月22日</title>
-            <link>https://m.okjike.com/originalPosts/694906d0f9f724324f1aa203</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/694906d0f9f724324f1aa203</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 22 Dec 2025 08:52:32 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    阿里的千问App发布了2025年的十大提示词，相当古怪，或者说，反直觉。<br /><br />我的理解是，可能受到千问在短时间内用高投放买量的影响，虽然用户规模上去了，但和常规增长积累的行为模式还是存在比较大的偏差，所以导致这个千问自己在脱敏之后统计出来的高频提示词，样本非常不典型。<br /><br />完整排名如下：<br /><br />1、股票<br />2、八字<br />3、情感咨询<br />4、朋友圈文案<br />5、景点推荐<br />6、双色球推荐<br />7、失眠<br />8、解答这道题<br />9、离婚财产分割<br />10、人生的意义<br /><br />😅<br /><br />姑且不论股票能排在第一的违和感，让AI去猜双色球号码以及离婚财产分割能排进前10也很离谱啊，这用户画像到底是怎样的⋯⋯
                 ]]>
             </content:encoded>
         </item>
