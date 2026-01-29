@@ -5,6 +5,170 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2026/01/kimi_k2.5.html</id>
+            <title>Kimi 的一体化，Manus 的分层</title>
+            <link>http://www.ruanyifeng.com/blog/2026/01/kimi_k2.5.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2026/01/kimi_k2.5.html</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 29 Jan 2026 16:02:30 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2>一、</h2>
+
+<p>前天，Kimi 突然发布了<a href="https://www.kimi.com/blog/kimi-k2-5.html">旗舰模型 K2.5</a>，事先没有一点风声。</p>
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012802.webp" title="" /></p>
+
+<p>在国内，Kimi 是比较低调的公司，关注度相对不高。但是，它的产品并不弱。</p>
+
+<p>半年前，K2 模型一鸣惊人，得到了很高的评价，公认属于全球第一梯队。所以，新版本 K2.5 出来以后，立刻上了新闻，在黑客新闻、推特等平台都是热门话题。</p>
+
+<p>著名开发者 Simon Willion 当天就写了<a href="https://simonwillison.net/2026/Jan/27/kimi-k25/">详细介绍</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012803.webp" title="" /></p>
+
+<p>但是，这一次真正有趣的地方，不是模型本身，而是 Kimi 做了另一件事。</p>
+
+<h2>二、</h2>
+
+<p>这次的 K2.5 很强，各方面比 K2 都有进步。官方给出的评测跑分，基本都是全球前三位，甚至第一名（见<a href="https://www.kimi.com/blog/kimi-k2-5.html">发布说明</a>）。</p>
+
+<p>根据 LMArena（现改名为 arena.ai）的<a href="https://x.com/arena/status/2016294725813465114">榜单</a>，Kimi K2.5 的编码能力，是所有开源模型的第一，在总榜上仅次于 Claude 和 Gemini（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012902.webp" title="" /></p>
+
+<p>但是，最大的亮点其实不是模型，而是 Kimi 同时发布了一个基于这个模型的 Agent（智能体）。</p>
+
+<p>也就是说，<strong>这次其实同时发布了两样东西：K2.5 模型和 K2.5 Agent</strong>。K2.5 是底层模型，K2.5 Agent 则是面向最终用户的一个网络应用。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012813.webp" title="" /></p>
+
+<p>我的印象中，这好像是第一次，大模型公司这么干。以前发布的都是模型本身，没见过谁把模型和 Agent 绑在一起发布的。</p>
+
+<p>这么说吧，Kimi 走上了一体化的道路。</p>
+
+<h2>三、</h2>
+
+<p>大家知道，大模型是底层的处理引擎，Agent 是面向用户的上层应用。</p>
+
+<p><strong>它们的关系无非就是两种：分层开发和一体化</strong>。前者是大模型跟 agent 分开，各自开发；后者是做成一个整体一起开发。</p>
+
+<p>前不久，被 Meta 公司高价收购的 Manus，就是分层开发的最好例子。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012814.webp" title="" /></p>
+
+<p>Manus 使用的模型是 Anthropic 公司的 Claude，它自己在其上开发一个独立的智能体，最终被收购。</p>
+
+<p>它的成功鼓舞了许多人投入智能体的开发。因为模型的投入太大，不是谁都能搞的，而智能体的投入比较少，再小的开发者都能搞。</p>
+
+<p>Kimi 这一次的尝试，则是朝着另一个方向迈出了一大步，把大模型和 Agent 合在了一起。毕竟，大模型公司自己来做这件事更方便，更有利于扩大市场份额、争取用户。</p>
+
+<p>很难说，这两种做法哪一种更好。就像手机一样，苹果和安卓的外部应用，可以更好地满足用户需求，而自带的内置应用则能充分跟操作系统融合，用起来更顺滑。</p>
+
+<h2>四、</h2>
+
+<p>模型的测试已经很多了，下面我就来测一下，这次发布的 K2.5 Agent。</p>
+
+<p>看得出来，Kimi 对 Agent 很重视，倾注了很大心血，<a href="https://www.kimi.com/blog/kimi-k2-5.html">发布说明</a>的大部分篇幅介绍的都是 Agent 的功能。</p>
+
+<p>其中有几个功能是比较常规的：</p>
+
+<blockquote>
+  <p>（1）<strong>Kimi Office Agent</strong>：专家级的 Word、Excel、PowerPoint 文件生成。</p>
+
+<p>（2）<strong>Kimi Code</strong>：对标 Claude Code 的命令行工具，专门用于代码生成。</p>
+
+<p>（3）<strong>长程操作</strong>：一次性完成最多1500步的操作，这显然在对标以多步骤操作闻名的 Manus。</p>
+</blockquote>
+
+<p>我比较在意的是下面两个全新的功能，都是第一次看到，其他公司好像没有提过。</p>
+
+<blockquote>
+  <p>（4）<strong>视觉编程</strong>：通过模型的视觉能力，理解图片和视频，进而用于编程。只要上传设计稿和网页视频，就能把网页生成出来。</p>
+
+<p>（5）<strong>蜂群功能</strong>（agent swarm）：遇到复杂任务时，Agent 内部会自动调用最多100个 Agent，组成一个集群，并发执行任务，比如并发下载、并发生成等。</p>
+</blockquote>
+
+<p>碍于篇幅，我就简单说一下，我的"视觉编程"测试结果。</p>
+
+<h2>五、</h2>
+
+<p>首先，打开 <a href="https://www.kimi.com/">Kimi 官网</a>，K2.5 已经上线了，能够直接使用（下图）。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012804.webp" title="" /></p>
+
+<p>注意，模型要切换到"智能体模式" K2.5 Agent。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012805.webp" title="" /></p>
+
+<p>我的第一个测试是动效生成，即上传一段动画效果的视频，让它来生成。下面是原始动画，是用 <a href="https://lottiefiles.com/free-animation/cat-playing-animation-1cwXJbHzz7">Lottie 库</a>做的。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012806.gif" title="" /></p>
+
+<p>上传后，在网页输入提示词：</p>
+
+<blockquote>
+  <p>视频里面的动画效果，一模一样地在网页上还原出来</p>
+</blockquote>
+
+<p>模型很快推断出，这是橘猫玩球的动画。然后，居然把动画每一帧都截图了，进行还原。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012807.webp" title="" /></p>
+
+<p>最终，它使用 Python 生成了 SVG 动画文件。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012809.webp" title="" /></p>
+
+<p>尾巴、眼球、小球滚动的动画效果，都正确还原出来了。可惜的是，主体的小猫是由多个 SVG 形状拼接而成，没法做到很像。</p>
+
+<p>大家可以去<a href="https://64iapat2s7a4k.beta-ok.kimi.link/">这个网址</a>，查看最终效果和网页代码。</p>
+
+<h2>六、</h2>
+
+<p>第二个测试是上传一段网站视频，让模型生成网站。</p>
+
+<p>我在 B 站上，随便找了一个<a href="https://www.bilibili.com/video/BV1kerYBeE6H">设计师网站的视频</a>。</p>
+
+
+
+<p>大家可以去访问<a href="https://www.mialumialu.com/">这个网站</a>，看看原始网页的效果。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012810.webp" title="" /></p>
+
+<p>我把视频上传到模型，然后要求"把视频里面的网站还原出来"。</p>
+
+<p>生成的结果（下图）完全超出了我的预期，还原度非常高，几乎可以直接上线。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012811.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026012812.webp" title="" /></p>
+
+<p>大家可以去<a href="https://rlxxxmcrekvqm.beta-ok.kimi.link/">这个网址</a>，查看生成的结果。</p>
+
+<h2>七、</h2>
+
+<p>经过简单测试，我的评价是，Kimi K2.5 Agent 的"视觉编程"不是噱头，确实有视觉理解能力，完全能够生成可用的结果。</p>
+
+<p>目前看上去，Kimi 这次"模型 + Agent"的一体化尝试是成功的。一方面，强大的 Agent 发挥出了底层模型的能力，方便了用户使用；另一方面，模型通过 Agent 扩展了各种用例，可以吸引更多的用户，有利于自身的推广。</p>
+
+<p>最后，在当下国际竞争的格局之中，一体化还有一个额外的优势。</p>
+
+<p>Manus 依赖的是美国模型，最终不得不选择在海外注册公司，而 Kimi 的底层模型是自研的，而且开源，完全不存在卡脖子的风险。</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2026-01-29T16:02:30+08:00">2026年1月29日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2026/01/weekly-issue-382.html</id>
             <title>科技爱好者周刊（第 382 期）：独立软件的黄昏</title>
             <link>http://www.ruanyifeng.com/blog/2026/01/weekly-issue-382.html</link>
@@ -1893,197 +2057,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2025-12-26T07:51:08+08:00">2025年12月26日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2025/12/minimax-m2.1.html</id>
-            <title>我如何用 AI 处理历史遗留代码：MiniMax M2.1 升级体验</title>
-            <link>http://www.ruanyifeng.com/blog/2025/12/minimax-m2.1.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2025/12/minimax-m2.1.html</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 23 Dec 2025 19:28:38 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <h2>一、</h2>
-
-<p>最近，我写了好几篇 AI 教程，就收到留言，要我谈谈我自己的 AI 编程。</p>
-<p>今天就来分享我的 AI 编程，也就是大家说的"氛围编程"（vibe coding）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122302.webp" title="" /></p>
-
-<p>声明一下，我只是 AI 初级用户，不是高手。除了不想藏私，更多是为了抛砖引玉，跟大家交流。</p>
-
-<h2>二、</h2>
-
-<p>平时，<strong>我很少用 AI 生成新项目</strong>。因为每次看 AI 产出的代码，我总觉得那是别人的代码，不是我的。</p>
-
-<p>如果整个项目都用 AI 生成，潜意识里，我感觉不到那是自己的项目。我的习惯是，更愿意自己写新项目的主体代码。</p>
-
-<p><strong>我主要把 AI 用在别人的项目和历史遗留代码</strong>，这可以避免读懂他人代码的巨大时间成本。</p>
-
-<p>就拿历史遗留代码为例，（1）很多时候没有足够的文档，也没有作者的说明，（2）技术栈和工具库都过时了，读懂代码还要翻找以前的标准，（3）最极端的情况下，只有构建产物，没有源代码，根本无法着手。</p>
-
-<p>AI 简直就是这类代码的救星，再古老的代码，它都能读懂和修改，甚至还能对构建产物进行逆向工程。</p>
-
-<p>下面就是我怎么用 AI 处理历史遗留代码，平时我基本就是这样来 AI 编程。</p>
-
-<h2>三、</h2>
-
-<p>我的 AI 编程工具是 Claude Code。因为<a href="https://code.claude.com/docs/en/cli-reference">命令行</a>对我更方便，也容易跟其他工具集成。</p>
-
-<p>我使用的 AI 模型，大部分时间是国产的 <a href="https://www.minimaxi.com/">MiniMax M2</a>。我<a href="https://www.ruanyifeng.com/blog/2025/11/minimax-m2.html">测过</a>它的功能，相当不错，能够满足需要，它的排名也很靠前。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122105.webp" title="" /></p>
-
-<p>另外，它有包月价（29元人民币），属于最便宜的编程模型之一，可以放心大量使用，反复试错。要是改用大家都趋之若鹜的 Claude 系列模型，20美元的 Pro 套餐不够用，200美元的 Max 套餐又太贵。</p>
-
-<p>MiniMax 接入 Claude Code 的方法，参考我的<a href="https://www.ruanyifeng.com/blog/2025/11/doubao-seed-code.html">这篇教程</a>。</p>
-
-<h2>四、</h2>
-
-<p>就在我写这篇文章的时候，MiniMax 本周进行了一次大升级，<strong>M2 模型升级到了 M2.1</strong>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122303.webp" title="" /></p>
-
-<p>因为跟自己相关，我特别关注这次升级。</p>
-
-<p>根据官方的<a href="https://mp.weixin.qq.com/s/QOv0GLq5-T--gKGIF912RQ">发布声明</a>，这次升级特别加强了"<strong>多语言编程能力</strong>"，对于常用编程语言（Rust、Java、Golang、C++、Kotlin、Objective-C、TypeScript、JavaScript 等）有专门强化。</p>
-
-<p>它的 WebDev 与 AppDev 开发能力因此有大幅提升，可以用来开发复杂的 Web 应用和 Android/iOS 的原生 App。</p>
-
-<blockquote>
-  <p>"在软件工程相关场景的核心榜单上，MiniMax M2.1 相比于 M2 有了显著的提升，尤其是在多语言场景上，超过 Claude Sonnet 4.5 和 Gemini 3 Pro，并接近 Claude Opus 4.5。"</p>
-</blockquote>
-
-<p>根据上面这段介绍，它的编程能力，超出或接近了国外旗舰模型。</p>
-
-<p>这个模型已经上线了，现在就能用。那么，这篇文章正好测一下，官方的介绍是否准确，它的 Web 开发能力到底有没有变强。</p>
-
-<p>至于价格，跟原来一样。但是，官方表示"响应速度显著提升，Token 消耗明显下降"，也算变相降价了。</p>
-
-<p>M2.1 接入 Claude Code，我的参数如下。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122201.webp" title="" /></p>
-
-<h2>五、</h2>
-
-<p>我这次选择的历史遗留项目是 <a href="https://github.com/ruanyf/wechat-format/">wechat-format</a>，一个 Web 应用，将 Markdown 文本转为微信公众号的样式。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122101.webp" title="" /></p>
-
-<p>上图左侧的文本框输入 Markdown 文本，右侧立刻显示自动渲染的结果，可以直接复制到微信公众号的编辑器。</p>
-
-<p>它非常好用，大家可以去<a href="https://ruanyf.github.io/wechat-format/">试试看</a>。我的公众号现在就用它做排版，效果不错（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122202.webp" title="" /></p>
-
-<p>问题是，原作者六年前就放弃了，这个项目不再更新了。我看过源码，它用的是老版本的 Vue.js 和 CodeMirror 编辑器，没有任何文档和说明，还经过了编译工具的处理，注释都删掉了。</p>
-
-<p>如果不熟悉它的技术栈，想要修改这些代码是很困难的，可能要投入大量时间。</p>
-
-<p>那么废话少说，直接让 AI 上场，把这些代码交给 MiniMax M2.1 模型。</p>
-
-<h2>六、</h2>
-
-<p>接手老项目的第一步，是对项目进行一个总体的了解。</p>
-
-<p>我首先会让 AI 生成项目概述。大家可以跟着一起做，跟我的结果相对照。</p>
-
-<blockquote><pre class=" language-bash"><code class=" language-bash">
-# 克隆代码库
-$ git clone git@github.com:ruanyf/wechat-format.git
-
-# 进入项目目录
-$ cd wechat-format
-
-# 启动 Claude Code
-$ claude-minimax
-</code></pre></blockquote>
-
-<p>上面的<code>claude-minimax</code>是我的自定义命令，用来在 Claude Code 里面调用 MiniMax 模型（参见<a href="https://www.ruanyifeng.com/blog/2025/11/doubao-seed-code.html">教程</a>）。</p>
-
-<p>输入"生成这个仓库的概述"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122208.webp" title="" /></p>
-
-<p>AI 很快就给出了详细说明，包括项目的总体介绍、核心功能、技术栈和文件结构（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122209.webp" title="" /></p>
-
-<p>有了总体了解以后，我会让 AI 解释主要脚本文件的代码。</p>
-
-<blockquote>
-  <p>【提示词】解释 index.html 文件的代码</p>
-</blockquote>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122206.webp" title="" /></p>
-
-<p>它会给出代码结构和页面布局（上图），然后是 JS 脚本加载顺序和 Vue 应用逻辑，甚至包括了流程图（下图），这可是我没想到的。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122207.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122210.webp" title="" /></p>
-
-<p>做完这一步，代码库的大致情况应该就相当了解了，而 AI 花费的时间不到一分钟。</p>
-
-<h2>七、</h2>
-
-<p>既然这个模型号称有"多语言编程能力"，我就让它把项目语言从 JavaScript 改成 TypeScript。</p>
-
-<p>对于很多老项目来说，这也是常见需求，难度不低。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122304.webp" title="" /></p>
-
-<p>它先制定了迁移计划，然后生成了 tsconfig.json 和 types.d.ts，并逐个将 JS 文件转为对应的 TS 文件（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122305.webp" title="" /></p>
-
-<p>修改完成后，它试着运行这个应用，发现有报错（下图），于是又逐个解决错误。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122306.webp" title="" /></p>
-
-<p>最终，迁移完成，它给出了任务总结（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025122307.webp" title="" /></p>
-
-<p>我在浏览器运行这个应用，遇到了两个报错：CodeMirror 和 FuriganaMD 未定义。</p>
-
-<p>我把报错信息提交给模型，它很快修改了代码，这次就顺利在浏览器跑起来了。</p>
-
-<p>至此，这个多年前的 JavaScript 应用就成功改成了 TypeScript 应用，并且所有内部对象都有了完整的类型定义。</p>
-
-<p>你还可以接着添加单元测试，这里就省略了。</p>
-
-<h2>八、</h2>
-
-<p>简单的测试就到此为止，我目前的 AI 编程大概就到这个程度，用 AI 来解释和修改代码。我也建议大家，以后遇到历史遗留代码，一律先交给 AI。</p>
-
-<p>虽然这个测试比较简单，不足以考验 MiniMax M2.1 的能力上限，但如果人工来做上面这些事情，可能一个工作日还搞不定，但是它只需要十几分钟。</p>
-
-<p>总体上，我对它的表现比较满意。大家都看到了，我的提示词很简单，就是一句话，但是它正确理解了意图，如果一次没有成功，最多再修改一两次就正确了。</p>
-
-<p>而且，就像发布说明说的一样，它运行速度很快，思考过程和生成过程最多也就两三分钟，不像有的模型要等很久。</p>
-
-<p>另外，不管什么操作，它都会给出详细的讲解和代码注释。</p>
-
-<p>总之，就我测试的情况来看，这个模型的 Web 开发能力确实很不错，可以用于实际工作。</p>
-
-<p>最后，说一点题外话。著名开发者 Simon Willison <a href="https://simonwillison.net/2025/Nov/24/claude-opus/">最近说</a>，评测大模型越来越困难，"我识别不出两个模型之间的实质性差异"，因为主流的新模型都已经足够强大，足以解决常见任务，只有不断升级评测的难度，才能测出它们的强弱。</p>
-
-<p>这意味着，对于普通程序员的常见编程任务，不同模型不会构成重大差异，没必要迷信国外的旗舰模型，国产模型就很好用。</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2025-12-23T19:28:38+08:00">2025年12月23日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
