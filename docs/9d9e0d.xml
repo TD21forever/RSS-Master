@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/697c9b9e9f3cd84f655393a8</id>
+            <title>AI探索站 01月30日</title>
+            <link>https://m.okjike.com/originalPosts/697c9b9e9f3cd84f655393a8</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/697c9b9e9f3cd84f655393a8</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 30 Jan 2026 11:53:02 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    「BAT」里再无百度的共识其实在AI这波起来之前就已经大差不差了，AI实际上是不可逆把百度甩得更远，我再给你们看个乐子。<br /><br />百度的AI应用文心还保留着古早版本的运营方法，就是预设一些人格化的聊天智能体，促成用户带着意图去做对话，当然最后出于KPI导向这些智能体都会变得越来越「擦」，但我不是要对这个做价值判断，我想吐槽的是从「擦」的流量排序来看，百度AI的用户结构已经高度中老龄化了，这很完蛋。<br /><br />这里面最受欢迎的智能体之一「离异少妇苏南」，被互动了10.2万次，我知道你们可能会说年轻人也不是没有这个xp的吧，但是按照统计学的原理，在海量样本里不会出现这种偏差，尤其是在「离异3年，一个人好寂寞，等你来找我哟」这样的电诈式开场白下，吸引到的一定是苦于找不到老婆的中登老登。<br /><br />再往下看才有均值回归的迹象，比如「21岁的重庆调酒师小蛮」（互动8.0万次）、「28岁的知性旗袍姐姐苏眉」（互动6.6万次）、「班花天心心」（互动5.5万次）、「28岁的瑜伽女孩小雅」（互动5.3万次」、「24岁的辣妹模特菲菲」（互动4.8万次」等等，但整体感知下来那种停留在上个时代的乡镇结合部土味审美依然挥之不去。<br /><br />虽然这只是百度AI在2C市场的一个细小功能，可能内部都不怎么重视，但细节往往能够反推全局，如果你的产品只能拥有这种年龄结构的准退休用户，那其实跟模型好不好也没太大关系了。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/697b693625bae56612f9a3ec</id>
             <title>AI探索站 01月29日</title>
             <link>https://m.okjike.com/originalPosts/697b693625bae56612f9a3ec</link>
@@ -39,6 +56,23 @@
         </item>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/697a0fac9f3cd84f6514c4e2</id>
+            <title>AI探索站 01月28日</title>
+            <link>https://m.okjike.com/originalPosts/697a0fac9f3cd84f6514c4e2</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/697a0fac9f3cd84f6514c4e2</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 28 Jan 2026 13:31:24 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    经过 8 个月高强度实战，我们决定开源内部 Claude Code 的最佳实践<br /><br />在说这一切之前必须从我们踩过的坑说起。从 8 个月前 Claude Code 发布开始，我们就在尝试各种开发流程：从最早的 OpenSpec，到前段时间爆火的 plan-with-files，再到最近霸榜 trending 的 Superpowers，我们都有过使用，但可惜结果都是初看很惊艳，但实际效果很一般<br /><br />核心问题有两个：<br /><br />1. OpenSpec 类框架：本质上是 PRD-driven，而不是 Spec-driven。 每次新任务都要重新写一遍架构约束、代码风格、错误处理规则。<br /><br />2. Superpowers 类框架：开源的 skill 都是比较宽泛的，没法解决项目内各种特化的问题，但是即使我们定义了自己的项目规范 skill，有时也因为幻觉或者上下文过长而没有调用，这带来了不可预测性。最后大部分时候 skill 必须手动使用，使用体感很差。<br /><br />我们认为在未来的 AI Framework 里，Spec 和 Skill 必须同时存在：<br /><br />- Spec 负责约束：确保 AI 始终遵循项目规范，提供可预测性<br />- Skill 负责能力：按需扩展 AI 的能力边界，保持灵活性<br /><br />解决了这两个问题，才能真正提升 AI 的代码质量，再配合上自动上下文注入之后，并行调用、团队协作等能力也就成为可能了。<br /><br />下面就要讲到我们的开源框架 Trellis：https://github.com/mindfold-ai/Trellis<br /><br />Trellis 的寓意是植物的爬架——我们希望它能像爬架一样，为 AI 编码提供结构化的支撑，让代码自然生长的同时保持方向可控。同时也希望它就像庭院里真实的爬架一样，是高度可自定义的。<br /><br />1. 我们给 Spec 加上了分层和索引机制，这样它就拥有了 Skill 的渐进式披露，在节省上下文的同时也确保永远不会遗失关键 context；<br />2. 我们用脚本整合了一套自动注入上下文的 Skill 工作流，让你每次对话都能自动完成一套规范的工作流，而不需要手动调用一堆 command；<br />3. 我们加上了更强的 Todo 管理系统，结合 json 和 md 文档，让它在有丰富的 prd 的同时，有了优先级、能关联工程师、关联 branch&amp;worktree<br />4. 最后我们结合上述功能并加上了 multi-agent &amp;&amp; multi-session 功能，这样你的 AI 可以判断 Task 复杂度，自行开启一个或多个 worktree 开发任务甚至直接 PR<br /><br />这套系统的玩法还非常多，比如 task 系统和任务管理系统比如 Linear 的双向同步；比如自动多模型 Review PR；甚至像 ClawdBot 一样嵌入到 Slack、discord 等任何地方…<br /><br />最重要的是，没有学习成本：只需三行命令完成初始化，之后像平常一样用 Claude Code 就好了。(因为所有的复杂逻辑我们都已经原生做在了框架内部)<br /><br />在过去的几天，我们内部搓了一个自动生成 Leads 的系统；一个每天帮我们刷各种社媒的 agent；一个支持 ACP、嵌入 Trellis 的 Cowork GUI…<br /><br />与此同时我们还在准备 Trellis 下两个版本的大更新，以及整理团队内部使用的 Skill 包，很快就全量会放出来。<br /><br />容我再次插入一个 CTA，感兴趣的朋友可以 star 一下，支持我们，关注后续进度 👉 https://github.com/mindfold-ai/Trellis<br /><br />也欢迎直接加我 wx 交流：rangalaxy
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6979f6199f3cd84f65127b30</id>
             <title>AI探索站 01月28日</title>
             <link>https://m.okjike.com/originalPosts/6979f6199f3cd84f65127b30</link>
@@ -56,23 +90,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6979e1ed800201ac68a435e6</id>
-            <title>AI探索站 01月28日</title>
-            <link>https://m.okjike.com/originalPosts/6979e1ed800201ac68a435e6</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6979e1ed800201ac68a435e6</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 28 Jan 2026 10:16:13 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    为什么为什么为什么没人看！！！<br />是 Manus 过气了还是 ThinkingHumans 过气了😠
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/697979ed25bae56612c967f1</id>
             <title>AI探索站 01月28日</title>
             <link>https://m.okjike.com/originalPosts/697979ed25bae56612c967f1</link>
@@ -85,23 +102,6 @@
                 <![CDATA[
                     
                     我去，Google 开始给 Gemini Pro 和 Ultra 用户发放谷歌云赠金了！<br /><br />Ultra 用户每月有 100 美元，Pro 用户每月 10 美元！<br /><br />我上个月在 AI Studio 就疯狂玩 Nano Banana Pro，才花了 50 美元，这下可以爽玩了，朋友们！<br /><br />赶紧去领，赶紧去领！而且我那些调用 Nano Banana Pro 的 Skills，大家也可以随便玩了<br /><br />如果你是 Gemini 会员的话，可以在这里领取，选那个每月 XX 元的抵用金就行：developers.google.com/program/my-benefits<br /><br />领到的钱可以在谷歌云-结算-赠金这里面查看，我的已经到账了
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6978d73dc5a1d4e649a736cf</id>
-            <title>AI探索站 01月27日</title>
-            <link>https://m.okjike.com/originalPosts/6978d73dc5a1d4e649a736cf</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6978d73dc5a1d4e649a736cf</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 27 Jan 2026 15:18:21 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    做产品这些年，我反复咀嚼过很多心理学模型，但如果只推荐一个最能解释“为什么用户不按你设想的去做”的模型，那一定是福格行为模型。<br /><br />我常跟团队分享一个关于「接电话」的比喻，非常直观地拆解了这个模型的三个核心要素：B=MAP。<br /><br />📞 一个关于“接电话”的行为博弈<br /><br />假想，你面前有一部正在响铃的手机，要让你产生接听这个动作，必须同时满足三个条件。但凡缺失一个，行为都不会发生：<br /><br /> 1.动机Motivation：你想不想接？<br />如果来电显示是营销骚扰电话，即便你手机就在手边，铃声震天响，你大概率也会直接挂掉或无视。这就是动机不足。<br /><br /> 2.能力Ability：你能不能接？<br />如果你正站在台上给老板做年度汇报，或者正在洗澡满手泡沫，即便你极其渴望接到那个面试通知，你也没能力在这个瞬间按下接听键。<br /><br /> 3.提示Prompt：你知不知道要接？<br />如果手机调成了静音且放在客厅，即便你很想接电话，也有充足的时间去接，但你压根没听到铃声。没有这个触发信号，行为永远不会启动。<br /><br />🚀 映射到产品设计：别只盯着动机死磕<br /><br />很多 PM 在面对用户流失或转化率低时，第一反应往往是给得不够多，于是疯狂加福利、发券、堆功能，试图拉高动机<br /><br />但根据福格模型，这往往是最费力不讨好的路径。真正的增长黑客，通常在另外两个维度下功夫：<br /><br /> 1.减少用户行为门槛：与其说服用户完成一个复杂的表单，不如实现一键授权：与其教用户怎么写提示词，不如直接给一个好用的模板。最好的体验是让用户不费吹灰之力就完成了动作。<br /><br /> 2.设计精准的触发器： 提示弹窗不是骚扰。一个好的提醒，应该像是在用户正好口渴时递上的一杯水。如果用户刚打开 App 还没摸着头脑，你就弹出一个五颜六色的评价框，那不是提示，是噪音。<br /><br />做产品设计，本质上是在经营用户的认知带宽。<br />当我们发现功能推不动时，不妨问自己三个问题：<br /><br /> 1.用户真的有理由做这件事吗？<br /> 2.我们的流程是不是太重，重到他想做也做不成？<br /> 3.我们有没有在那个最关键的瞬间，轻轻推他一把？<br /><br />唯有 M、A、P 三线交汇的那个瞬间，行为才会像奇迹一样发生
                 ]]>
             </content:encoded>
         </item>
