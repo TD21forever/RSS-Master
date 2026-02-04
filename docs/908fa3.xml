@@ -5,139 +5,182 @@
         <link>https://www.36kr.com/information/web_news</link>
         
         <item>
-            <id>https://www.36kr.com/p/3667552328868488</id>
-            <title>刚刚，腾讯姚顺雨团队首个成果发布，揭示大模型真正瓶颈</title>
-            <link>https://www.36kr.com/p/3667552328868488</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3667552328868488</guid>
+            <id>https://www.36kr.com/p/3668924272632704</id>
+            <title>两个“最强AI”塞进Xcode，苹果这波杀疯了</title>
+            <link>https://www.36kr.com/p/3668924272632704</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3668924272632704</guid>
             <pubDate></pubDate>
-            <updated>Tue, 03 Feb 2026 14:25:06 GMT</updated>
+            <updated>Wed, 04 Feb 2026 13:30:00 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <p>智东西2月3日报道，刚刚，腾讯混元官网正式上线<strong>姚顺雨团队最新成果</strong>，发布了专门评测大语言模型能否从上下文（Context）中学习新知识并正确应用的<strong>基准CL-bench</strong>。</p>
-  <p>这是<strong>姚顺雨加入腾讯混元担任首席AI科学家后，其团队首次发布研究成果</strong>，也是腾讯混元技术博客首次公开。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260203/v2_d4583fa9b82b47abad730c07d66995d0@000000_oswg404955oswg1080oswg1282_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">腾讯混元技术博客及致谢部分</p>
-  <p>大模型与人类在解决问题时关键区别为，大模型只能依赖预训练阶段的静态记忆，而人可以实时根据现场情况完成任务。腾讯混元研究团队实测发现，<strong>当前的SOTA模型几乎都不会从上下文中学习</strong>，表现最好的GPT-5.1（high）任务成功率也仅有<strong>23.7%</strong>。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260203/v2_d896f5f976b945bdac97ae48305fe7da@000000_oswg75323oswg1080oswg567_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>基于此，该团队打造CL-bench就只有一个核心目标：要求模型在解决每个任务时，都必须从上下文中学习模型预训练中不存在的新知识，并正确应用。</p>
-  <blockquote>
-   <p>腾讯混元技术博客地址：</p>
-   <p>https://hy.tencent.com/research</p>
-   <p>项目主页：</p>
-   <p>www.clbench.com</p>
-  </blockquote>
-  <h2><strong>01.让大模型不再死记硬背，新基准包含500个复杂上下文任务</strong></h2>
-  <p>过去几年，大语言模型进步飞快，能解开奥数级别的难题、推演复杂的编程逻辑，甚至能通过那些人类需要苦读数年才能拿下的专业资格考试。但其背后有一个关键门槛，大模型即使能在考场拿满分，但未必能胜任真实世界工作。</p>
-  <p>人类可以在执行任务中实时从眼前的环境进行学习。但大语言模型主要依赖“参数化知识”，即在预训练阶段被压缩进模型权重里的静态记忆。在推理时，模型更多是在调用这些封存的内部知识，而不是主动从当前输入的新信息中汲取营养。</p>
-  <p>因此，目前优化出的模型擅长对自己“已知”的事物进行推理，但用户需要的，却是让模型解决那些依赖于杂乱、动态变化的上下文的任务。</p>
-  <p>基于此，混元研究人员希望弥合这一差距，从根本上改变模型的优化方向，他们构建了专门评测大语言模型能否从上下文中学习新知识并正确应用的基准CL-bench。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260203/v2_f126a06319f44cdcbd72e2c1b35f41e6@000000_oswg137275oswg936oswg522_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">大语言模型的范式转变</p>
-  <p>CL-bench包含由专家制作的<strong>500个复杂上下文、1899个任务和31607个验证标准</strong>。其对模型的要求为：要求模型必须在解决每个任务都从上下文中学习到模型预训练中不存在的新知识，并正确应用。</p>
-  <p>模型需要学习的知识非常广泛，包括新的领域知识、不熟悉的规则系统、复杂的产品工作流，甚至是必须从实验数据中推导归纳出的定律或结论。</p>
-  <p>所有这些知识要么是由领域专家完全新构建的，要么是取自那些不太可能出现在当前前沿模型训练数据中的小众、长尾来源。因此，模型无法通过回忆静态的参数化知识来解决任务，都要求模型从提供的上下文进行学习并应用。</p>
-  <p>具体来说，CL-bench涵盖了四种广泛的现实世界上下文学习场景：</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260203/v2_613955554d4a40cd8ce9fe1aa4469e78@000000_oswg267451oswg954oswg390_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">CL-bench的上下文分类体系。</p>
-  <p><strong>领域知识推理</strong>：上下文提供特定的领域知识，例如虚构的法律体系、创新的金融工具或小众专业知识，模型需要利用这些知识来推理并解决具体问题。</p>
-  <p><strong>规则系统应用</strong>：上下文提供新定义的正式系统，例如新的游戏机制、数学形式体系、编程语法或技术标准，模型必须理解并应用这些规则来执行任务。</p>
-  <p><strong>程序性任务执行</strong>：上下文提供复杂的过程系统，例如工作流、产品手册和操作指南，模型必须理解并应用这些程序性信息来完成任务。</p>
-  <p><strong>经验发现与模拟</strong>：上下文提供复杂系统内的实验数据、观测记录或模拟环境。与前几类涉及演绎推理不同，这一类专注于归纳推理，模型必须从数据中发现潜在的定律或结论，并应用它们来解决任务。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260203/v2_e8d449ec875749159870133fb83a2199@000000_oswg475847oswg960oswg456_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">CL-bench示例，解决这些任务要求大语言模型从提供的上下文中学习</p>
-  <p>这些类别包含了大部分现实世界工作中常见的演绎推理和归纳推理任务，能衡量模型的上下文学习能力。</p>
-  <h2><strong>02.模型成功率仅为17.2%，得出5大关键结论</strong></h2>
-  <p>研究人员在CL-bench上评估了十个主流大语言模型。</p>
-  <p>平均来看，模型仅解决了<strong>17.2%</strong>的任务，其中GPT-5.1（High）解决了<strong>23.7%</strong>的任务。</p>
-  <p>换句话说，尽管上下文中拥有解决每个任务所需的全部信息，但模型还是在绝大多数任务上都失败了。这表明当前的SOTA模型几乎都不会从上下文中学习。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260203/v2_da5c433ed5894d7eb8496cca9351fdf3@000000_oswg177803oswg958oswg378_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">十个前沿模型在CL-bench上的任务解决率</p>
-  <p>混元研究团队得出几个关键结论：</p>
-  <p><strong>1）忽略或误用上下文是导致失败的主要原因。</strong></p>
-  <p>许多错误并非源于信息缺失，而是因为模型忽视了上下文中的关键细节，或错误地应用了它们。在许多情况下，模型只会利用预训练学习到的静态知识来解决任务，即使上下文明确定义了新的规则、概念或程序，模型也不会学习和利用。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260203/v2_3e8dae5524dd46688070a91e5458fed6@000000_oswg173115oswg952oswg358_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">各模型错误类型的分布</p>
-  <p><strong>2、长上下文推理和指令遵循是必要的，但不是充分条件。</strong></p>
-  <p>案例分析表明，那些难以跨长上下文追踪依赖关系或难以精确遵循约束的模型，往往表现得更差。然而，即使是能够处理长输入并可靠遵循指令的模型，仍然在许多任务上失败。上下文学习需要的能力，远不止长上下文理解和指令遵循能力。</p>
-  <p><strong>3、从实验数据和环境模拟中进行归纳推理比演绎应用更困难。</strong></p>
-  <p>演绎任务让模型根据上下文中明确给出的规则和流程进行应用，而经验发现和环境模拟类任务则要求归纳推理，也就是从数据中总结规律或在虚拟环境中探索。模型在这类任务上的表现明显较差，任务解决率通常低于10%，且结果波动大。这表明发现规律远比应用规则更具挑战性。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260203/v2_776711269da04c85847b7da470403717@000000_oswg244023oswg1052oswg466_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">GPT-5.1在高/低推理强度设置下，各子类别表现对比</p>
-  <p><strong>4、更高的推理强度通常能提升上下文学习效果。</strong></p>
-  <p>对部分模型来说，增加推理强度可以改善表现，使模型更深入地理解复杂上下文。例如，GPT-5.1在管理类和实验数据类任务上的表现提升约6%，但其他模型提升有限甚至可能下降，说明单靠更多推理并不足够，模型还必须能够正确吸收和组织上下文信息。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260203/v2_7c121622b6284e44b5426447f3c3dcef@000000_oswg302608oswg1046oswg562_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">不同输入长度下模型上下文学习表现的变化趋势</p>
-  <p><strong>5、上下文学习的难度与上下文长度相关，但短上下文也可能很复杂。</strong></p>
-  <p>较长的上下文通常让所有模型的任务更难，这验证了长上下文处理仍是关键瓶颈。然而，即使是短上下文，如果包含信息密集、规则隐含、依赖复杂或约束严格的内容，也依然很具挑战性，说明上下文学习的难度不仅仅来源于长度，也来自于其复杂度。</p>
-  <p>CL-bench充分解释了大语言模型在真实场景中为什么经常出错：即使有了上下文工程，给模型准备好了所需的上下文，模型也会失败。如果模型不能真正从中学习，仅仅提供上下文是不够的。上下文学习作为一项模型基础的学习能力，很大程度上被忽视了。</p>
-  <h2><strong>03.上下文都是自包含，测试任务采用无污染设计</strong></h2>
-  <p>CL-bench中的每个上下文都是完全自包含（Self-contained）的，解决任务所需的所有信息都显式地提供在上下文本身之中：不需要外部检索，也不允许隐藏假设。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260203/v2_3e04ab51606c48c29dae391068460bd6@000000_oswg388705oswg1052oswg428_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">解决CL-bench中的任务需要模型从相应的上下文中学习新知识</p>
-  <p>为了确保性能真正反映上下文学习，而不是记忆或数据泄露，CL-bench采用了无污染（Contamination-free）设计：</p>
-  <p><strong>虚构创作</strong>：专家创作完全虚构的内容，例如为虚构国家设计一套完整的法律体系，包括新颖的判例和法律原则，或创建具有独特语法和语义的新编程语言。</p>
-  <p><strong>现有内容的修改</strong>：专家修改现实世界的内容以创建变体，例如更改历史事件、改变科学和数学定义，或修改技术文档和标准。</p>
-  <p><strong>整合小众和新兴内容</strong>：专家纳入了在预训练数据集中代表性极低的小众或近期新兴内容，如前沿研究发现、新发布的产品手册或技术文档，以及来自专门领域的特定知识。</p>
-  <p>在不提供任何上下文的情况下，<strong>GPT-5.1（High）仅能解决不到1%的任务</strong>。这也证明数据是无污染的，模型若不从Context中学习，几乎完全无法解决这些任务。</p>
-  <p>此外，CL-bench的设计具有高复杂性和序列依赖性。其中，51.1%的任务需要序列依赖，意味着后续任务的解决方案取决于早期交互的结果。这种多轮次设计会增加任务难度。</p>
-  <p>平均而言，领域专家花费约20小时标注每个上下文，以确保任务构建的质量和深度。</p>
-  <p>与此同时，CL-bench中的每个任务都是完全可验证的。每个上下文平均关联63.2个验证标准，每个任务包含16.6个评估标准。</p>
-  <h2><strong>04.结语：大模型如何记忆，将成2026年核心主题</strong></h2>
-  <p>混元技术博客还提到了混元研究团队后续的关注重点，包括如何让模型提升上下文学习能力、如何让大模型从上下文中学习到的知识持久化。</p>
-  <p>如果模型的上下文学习能力能像之前其他能力那样被提升上去，人类在AI系统中的角色将发生转变：人类不再是主要的数据提供者（training data provider），而变成了上下文提供者。竞争的焦点将从“谁能把模型训练得更好”，转向“谁能为任务提供最丰富、最相关的上下文”。</p>
-  <p>他们认为，大模型如何记忆很可能成为2026年的另一个核心主题，要充分发挥大语言模型的潜力，可能需要新的架构、新的优化方式来决定“该保留什么”。</p>
-  <p>未来，一旦大模型上下文学习与记忆变得可靠，模型或许就能实现自主学习，它们将自主准备上下文，从中学习并自我巩固。</p>
-  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MzA4MTQ4NjQzMw==&amp;mid=2652796566&amp;idx=1&amp;sn=bdbfe52133b9746828a19fe19147fdc3&amp;chksm=8566d82d69078ccdcb86d9c29fb34623245de2be49328d5f5fe89973d4c322ff1f5a236ab2c5&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“智东西”（ID：zhidxcom）</a>，作者：程茜，编辑：心缘，36氪经授权发布。</p>
+                    <p><strong>还在Xcode里当「手搓侠」？苹果这次直接把Codex+Claude塞进IDE，堪称给开发者发了两把「外挂神剑」。苹果开发者终于「吃上好的了」！</strong></p>
+  <p>就在刚刚，苹果发布了<strong>Xcode 26.3</strong>的重磅更新！</p>
+  <p>这一次，不再是无关痛痒的修修补补，而是直接把「核武器」搬进了IDE——</p>
+  <p><strong>Codex和Claude正式入驻Xcode！</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_6150f587a55c4841abc61164f3fcad33@5888275_oswg265939oswg1080oswg525_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这意味着什么？</p>
+  <p>意味着你再也不用在写代码和ChatGPT网页之间疯狂Cmd+Tab切换了。</p>
+  <p>苹果这一次，是真的把<strong>AI的「灵魂」</strong>注入了开发者的指尖。</p>
+  <p><strong>左手OpenAI，右手Claude，这谁顶得住？</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_ca2256990c3540549e9f06f94976a3a5@5888275_oswg298839oswg1080oswg721_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>手快的网友们已经开始体验了。</p>
+  <p>下面是Xcode 26.3的启动画面</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_6875ba0a5d794e3485332113d4eedc21@5888275_oswg387512oswg920oswg1116_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Xcode 26.3引入了三个新的框架，全是和IDEIntelligence相关，第一个就是Agent。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_3ad68af39c8d49ec884764be71560800@5888275_oswg172759oswg1080oswg559_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>赶快去更新吧！</p>
+  <p>不过App Store里还没有最新的26.3，目前还是26.2，估计还需要等待几天。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_72526b1bcdbf4fa4b3b363c6dce5fec5@5888275_oswg82091oswg1080oswg390_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>但是你可以通过官网直接下载。</p>
+  <p>地址：https://developer.apple.com/news/releases/?id=02032026a</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_2292714f4045494fb85f730187fef7e7@5888275_oswg159765oswg1080oswg598_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>有老哥已经使用Xcode 26.3「一句话」就开发了一个iOS应用。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_2913671465a745a595e696d63bb58dc4@5888275_oswg706227oswg1080oswg849_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>想要快速了解Xcode 26.3可以看这个小哥的视频，速览一遍～</p>
+  <p>总之，这个消息对于苹果的开发者来说，简直不要太惊喜。</p>
+  <p>在过去，我们为了在Xcode里用上AI，要么忍受Siri的「人工智障」，要么得自己折腾各种第三方插件，甚至还得去GitHub找那些不太稳定的Swift Package。</p>
+  <p>但现在，Xcode 26.3直接以此原生方式集成了两大顶流模型。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_193dfbc8b6d848c186a5f0ff45237082@5888275_oswg131932oswg1080oswg258_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>苹果这次的开放程度简直令人咋舌。</p>
+  <p>开发者现在可以直接在Xcode的设置里，绑定自己的OpenAI或Anthropic账号。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_275f2e391a434c56b9c86eb521772182@5888275_oswg445469oswg1080oswg626_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>写代码卡住了？直接在编辑器里Claude，让它帮你重构这个乱成一团的Class。</p>
+  <p>报错看不懂？把Log甩给Codex，让它告诉你到底哪里空指针了。</p>
+  <p>文档不想写？一键生成，而且是根据你的代码逻辑实时生成的。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_1348967dde0e45099baa58e135fb52bb@5888275_oswg427291oswg1080oswg626_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>更有意思的是，Xcode 26.3引入了全新的<strong>「Coding Intelligence」</strong>功能。</p>
+  <p>这可不是简单的自动补全，它是真正的「Agentic Coding」（智能体编程）。</p>
+  <p>根据苹果官方的说法，这次的Agent获得了史诗级的权限提升。</p>
+  <p>Claude和Codex不再是只能写几行代码的「实习生」，而是能够掌控全局的「技术合伙人」。</p>
+  <p>它们可以打破沙盒，直接<strong>搜索开发文档</strong>、<strong>遍历整个项目的文件结构</strong>，甚至<strong>修改项目设置</strong>。</p>
+  <p>最炸裂的是，它们拥有了「视觉」——能够自动捕捉Xcode Previews的截图，通过视觉反馈来验证代码的效果，然后自我迭代修复Bug！</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_eb58b362c6224a58b76ae5a37c59f89f@5888275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>不仅如此，Xcode 26.3还引入了<strong>Model Context Protocol(MCP)</strong>开放标准。</p>
+  <p>这意味着，除了OpenAI和Claude，未来任何兼容该协议的模型都能接入Xcode。</p>
+  <p>想象一下，你告诉Xcode：「帮我写一个SwiftUI的登录页面，要有磨砂玻璃效果，还得适配暗黑模式。」</p>
+  <p>下一秒，Claude Agent不仅帮你写好了代码，甚至直接利用Xcode Previews跑给你看！</p>
+  <p>即使有UI细节不对，你只需要说一句「把按钮颜色改深一点」，它立刻就在阅览界面里给你改好了。</p>
+  <p>这次必须喊一句，苹果赛高！</p>
+  <h2><strong>苹果Xcode终于接入AI</strong></h2>
+  <p>这波更新，影响的可不是小数目。</p>
+  <p>根据最新数据，全球苹果注册开发者已经超过5000万，App Store上架应用超过190万款，整个生态系统在2024年创造了近1.3万亿美元的交易额。</p>
+  <p>开发者累计收入已突破5500亿美元。&nbsp;</p>
+  <p>换句话说，这次Xcode的AI升级，直接影响的是一个万亿级市场的生产工具。</p>
+  <h3><strong>这波更新，开发者们怎么看？</strong></h3>
+  <p>消息一出，社交媒体上的iOS开发者们瞬间炸锅了。</p>
+  <p>有人激动得凌晨发推：「终于不用在三个窗口之间来回切换了！Xcode+Claude+文档，现在全在一个界面里。」</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_7204ef9c04784ecf8cab442cc41fe494@5888275_oswg183772oswg1080oswg753_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>有人感慨：「入行十年，从Xcode 4用到Xcode 26，第一次觉得苹果是真的在听开发者的声音。」</p>
+  <p>也有人调侃：「以前是我写代码，Xcode负责崩溃。现在是AI写代码，Xcode负责看戏。」</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_ea8e84a4c287473b8549dbe2c71e6441@5888275_oswg461395oswg1080oswg1132_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>更有独立开发者直接算了一笔账：「以前做一个中等复杂度的App，从零到上架至少要3-6个月。现在有了AI Agent，UI一句话生成，业务逻辑AI帮写，文档自动补全......保守估计，开发周期能压缩30%-50%。」</p>
+  <p>不管怎样，有一点是确定的：iOS开发的门槛，正在被AI重新定义。</p>
+  <p>以前，你需要精通Swift、理解UIKit/SwiftUI、熟悉Combine、了解CoreData......才能写出一个像样的App。</p>
+  <p>现在，你只需要清晰地表达需求，AI会帮你把想法变成代码。这对于想入行的新人来说，是巨大的利好。但对于那些只会「搬砖」、不会思考的老油条来说，危机可能真的来了。</p>
+  <h2><strong>这一次，苹果不再固步自封</strong></h2>
+  <p>曾几何时，苹果的生态是出了名的封闭。</p>
+  <p>尤其是Xcode迟迟没有更新原生的AI Codingg功能。（当然，主要是苹果也没模型，狗头）</p>
+  <p>但这次Xcode的更新，让我们看到了一个不一样的苹果——一个愿意拥抱最强技术、愿意为开发者体验妥协的苹果。</p>
+  <p>无论是OpenAI的通用强大，还是Claude在代码领域的精细入微，现在都成为了Xcode开发者手中的利剑。</p>
+  <p>这一次，Xcode真的香了。</p>
+  <h3><strong>Xcode：苹果生态的「守门人」还是「拦路虎」？</strong></h3>
+  <p>作为苹果生态的唯一指定「入场券」，Xcode的地位从来无需多言。</p>
+  <p>想开发iOSApp？想上架App Store？甭管你是用Flutter、React Native还是原生Swift，最后都得过Xcode这一关。</p>
+  <p>它就像是苹果生态的「守门人」，握着通往数亿果粉设备的唯一钥匙。</p>
+  <p>但这个「守门人」，这么多年来，却让无数开发者「爱恨交织」，甚至「恨」多于「爱」。</p>
+  <p>你可以看看这个打分～</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_3153d000dc67494aa6e5c80fce1e776d@5888275_oswg83024oswg1080oswg417_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>爱它的人，离不开它原生支持的丝滑。</p>
+  <p>特别是Swift UI预览功能的出现，让UI开发一度变得像搭积木一样爽快。模拟器的高流畅度、调试工具的强大，也确实是业界标杆。</p>
+  <p>但恨它的人，理由简直能写成一本书。</p>
+  <p>「动不动就崩溃，Xcode是在用生命教我Save吗？」</p>
+  <p>「索引文件慢得像蜗牛，风扇转得像直升机，咖啡都喝完了它还在Indexing...」</p>
+  <p>「包越来越大，功能越来越杂，却连最基本的代码补全都经常『断片』。」</p>
+  <p>在VSCode靠着插件生态和轻量级体验攻城略地，甚至Cursor这种AI原生IDE异军突起的时候，Xcode显得越来越像个步履蹒跚的「旧时代遗老」。</p>
+  <p>很多开发者甚至形成了「VSCode写代码，Xcode只用来打包」的畸形工作流。</p>
+  <p>也就是说，Xcode就剩下一个预览和打包上传的功能了。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_ee3b686cc59c4e83af938210f74295f1@5888275_oswg79861oswg1080oswg462_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这对于苹果来说，简直是把自家的开发者生态往外推。</p>
+  <h3><strong>一场不得不打的「防守反击战」</strong></h3>
+  <p>所以，Xcode 26.3引入OpenAI和Claude，表面上是功能的升级，实则是苹果的一场「防守反击战」。</p>
+  <p>过去，苹果可以用「隐私」、「安全」的高墙把AI挡在门外。</p>
+  <p>但当AI已经成为生产力的核心，当Cursor只需要按几下Tab就能写出比手搓更优雅的代码时，Xcode如果继续固步自封，就真的要被时代抛弃了。</p>
+  <p>接入大模型，对Xcode的意义不仅仅是「变聪明了」。</p>
+  <p>它意味着苹果终于放下了身段，承认了在通用大模型领域的暂时落后，并选择了最务实的方案：</p>
+  <p>既然打不过，那就加入。</p>
+  <p>既然自家的AppleInte lligence还不够强力，那就把市面上最好的「外援」——OpenAI和Claude请进来。</p>
+  <p>让开发者在自己的地盘上，用上最顺手的武器。</p>
+  <p>这一招，既留住了开发者，又提升了生态的开发效率。</p>
+  <p>甚至可以说，这是苹果近年来在开发者工具上做的最正确的一个决定。</p>
+  <p>已经用上最新版Xcode的用户已经在晒了～</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_7326a4c2ec5548d5be32e480146b05d2@5888275_oswg446326oswg1080oswg1076_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h3><strong>苹果的大模型，还出不出了？</strong></h3>
+  <p>看到这里，可能有人要问：苹果自家的Ajax大模型呢？</p>
+  <p>那个传说中对标OpenAI的核武器去哪了？</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_55ed34af2b07477199b81b2bc66dfca0@5888275_oswg636612oswg1080oswg668_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这个问题，扎心了。</p>
+  <p>目前苹果AI战略的脉络是：</p>
+  <p><strong>端侧为主，云端为辅；基础体验自己做，高阶能力找「外援」。</strong></p>
+  <p>苹果在WWDC 2025发布的<strong>Foundation Models框架</strong>，就是这一战略的具体体现。</p>
+  <p>这个框架向第三方开发者免费开放了端侧30亿参数模型的调用权限，支持文本生成、摘要、工具调用等功能，而且完全在本地运行，无需联网。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260204/v2_37ae8b5ca7474e5b938d284e56d9a020@5888275_oswg54114oswg1080oswg342_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这是苹果的「护城河」——隐私。</p>
+  <p>无论OpenAI还是Claude再强大，用户对隐私的顾虑始终存在。而苹果用「本地优先」的策略，牢牢守住了这块阵地。</p>
+  <p>至于那些需要庞大算力和通用知识的任务，比如代码生成、复杂推理、多模态理解......苹果选择了与OpenAI和Anthropic合作，站在巨人的肩膀上。</p>
+  <p>这不仅是技术上的考量，更是商业上的精明。</p>
+  <p>与其花千亿美金去卷一个可能会「胡说八道」的通用大模型，不如把用户体验做到极致。</p>
+  <p>这一次，Xcode的「开放」，或许正是苹果AI战略成熟的标志。</p>
+  <p>不再死磕「全封闭生态」的虚名，而是真正回到原点：</p>
+  <p>这，到底能不能帮用户解决问题？</p>
+  <p><strong>这次 Xcode 给出的答案是：</strong></p>
+  <p><strong>能！而且可能会很香。</strong></p>
+  <p>参考资料：</p>
+  <p>https://developer.apple.com/xcode/&nbsp;</p>
+  <p>https://www.anthropic.com/news/claude-in-xcode&nbsp;</p>
+  <p>https://openai.com/blog/xcode-integration&nbsp;</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/7-ut1DB2MnuNmKLwlSA75Q" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，作者：新智元，36氪经授权发布。</p>
                 ]]>
             </content:encoded>
         </item>
         
         <item>
-            <id>https://www.36kr.com/p/3665582095016579</id>
-            <title>氪星晚报｜北京2026年首场土拍揽金85.6亿元，字节跳动28亿拿下海淀地块；全球最快人形机器人发布；2025年我国有色金属主要产品产量再创新高</title>
-            <link>https://www.36kr.com/p/3665582095016579</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3665582095016579</guid>
+            <id>https://www.36kr.com/p/3668990341915527</id>
+            <title>氪星晚报 ｜腾讯混元AI Infra核心技术开源；小米：辽宁营口SU7起火事故系车内遗留火源引燃周边可燃物所致</title>
+            <link>https://www.36kr.com/p/3668990341915527</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3668990341915527</guid>
             <pubDate></pubDate>
-            <updated>Tue, 03 Feb 2026 12:27:59 GMT</updated>
+            <updated>Wed, 04 Feb 2026 12:59:11 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <h2><strong>大公司：</strong></h2>
-  <p><a href="https://36kr.com/newsflashes/3667155095430025" rel="noopener noreferrer" target="_blank"><strong>采埃孚与宝马签署乘用车传动系统长期供应协议，合同金额数十亿欧元</strong></a></p>
-  <p>2月2日，采埃孚集团宣布与宝马集团正式签署乘用车传动系统长期供应协议。协议核心内容为成熟的8挡自动变速器的长期供应及后续研发，合同金额达数十亿欧元，合同有效期将持续至本世纪三十年代末期。（界面）</p>
-  <p><a href="https://36kr.com/newsflashes/3667099164123781" rel="noopener noreferrer" target="_blank"><strong>目标2027年实现量产，三星将半导体玻璃基板项目移交业务部门</strong></a></p>
-  <p>三星电机已着手推进半导体玻璃基板商业化项目，据确认，公司已将相关业务从原有的前沿技术研发组织转移至业务部门。一位熟悉内情的业内人士表示，此举意味着三星已开始为正式商用化做准备。不仅是在确保相关核心技术可用，同时也是在为量产和市场供货做准备。公司预计2027年以后实现量产，目前正在与全球客户共同开发样品。（新浪财经）</p>
-  <p><a href="https://36kr.com/newsflashes/3667345781940871" rel="noopener noreferrer" target="_blank"><strong>北京2026年首场土拍揽金85.6亿元，字节跳动28亿拿下海淀地块</strong></a></p>
-  <p>北京今日完成2026年首场土地拍卖，四宗地均以底价成交，合计成交金额85.6亿元。具体来看：海淀区蓝景丽家收储项目综合性商业金融服务业用地，被字节跳动以28亿元的价格斩获；石景山首钢地块由首钢地产以13.9亿元摘得；通州宋庄地块以15.62亿元成交；顺义新国展地块被中国铁工投资以28.1亿元获取。中指院分析师表示，根据供应计划，北京商品住宅用地供应量已连续四年缩减，且地块进一步向五环内核心区域集中，未来新房供应将更倾斜于城市核心区。（财联社）</p>
-  <p><a href="https://36kr.com/newsflashes/3667328233169536" rel="noopener noreferrer" target="_blank"><strong>Snowflake首席执行官谈与OpenAI新签2亿美元合作协议及软件股大规模抛售潮</strong></a></p>
-  <p>Snowflake今日宣布与OpenAI达成新合作协议，规模达2亿美元，双方将把OpenAI尖端模型直接接入Snowflake平台。去年12月，Snowflake曾与Anthropic签署同类合作协议，规模同样为2亿美元。Snowflake同时推出全新产品Cortex Code，该产品定位为人工智能编程助手。（新浪财经）</p>
-  <p><a href="https://36kr.com/newsflashes/3667286314902401" rel="noopener noreferrer" target="_blank"><strong>滴滴与海南航空会员合作上线，打车往返机场可领积分</strong></a></p>
-  <p>2月3日，滴滴正式宣布与海南航空围绕双方的会员体系建设开展深度合作，双方会员完成相应挑战任务后即可解锁权益。即日起至6月30日，滴滴用户完成 “海航金卡挑战”即可获得金鹏俱乐部相应的贵宾会籍等级，享受贵宾休息室、公务舱值机柜台、优先登机等多项会员礼遇。此外，滴滴还推出了打车往返机场可领海航金鹏俱乐部消费积分的活动，积分可兑换机票、舱位升级及实物礼品等。</p>
-  <p><a href="https://36kr.com/newsflashes/3667234234065539" rel="noopener noreferrer" target="_blank"><strong>1688推出源头旗舰生意金激励活动</strong></a></p>
-  <p>近日，1688推出源头旗舰“生意金激励”活动。据了解，此活动是1688面向“源头旗舰商家”首次推出的90天严选佣金限时返还政策。活动期间，平台将按商家纯严选订单销售额的一定比例返还数字营销红包，自动注入其数字营销账户，用于抵扣1688广告投放费用。该政策旨在通过资源反哺，助力优质源头商家降低经营成本，提升全店推广效率，高效承接高价值订单。</p>
-  <p><a href="https://36kr.com/newsflashes/3667489373315970" rel="noopener noreferrer" target="_blank"><strong>MOGOX与LG电子达成战略合作</strong></a></p>
-  <p>36氪获悉，2月3日，蘑菇车联与LG电子达成战略合作，双方将围绕自动驾驶车辆部署与运营、数字道路基础设施建设及城市智能治理等领域加强业务协同与合作，联合拓展中韩及全球自动驾驶市场。这也是继蘑菇车联与比亚迪和MKX Technologies、autonoma组成的联合体独家中标新加坡官方首个L4级自动驾驶巴士项目后，蘑菇车联在海外市场的又一次突破。</p>
+                    <h2>大公司：</h2>
+  <p><strong>南矿集团：董事兼常务副总裁龚友良拟减持不超1%股份</strong><br />36氪获悉，南矿集团公告，董事兼常务副总裁龚友良计划自公告披露之日起15个交易日后的3个月内（即2026年3月9日-2026年6月8日），以集中竞价方式减持公司股份不超过201.72万股，占公司总股本比例1.00%；减持原因为个人资金需求；股份来源为公司首次公开发行股票前已发行股份</p>
+  <p><strong>长安汽车：1月销量13.47万辆，同比下降51.14%</strong><br />36氪获悉，长安汽车公告，2026年1月，长安汽车销量134,701辆，同比下降51.14%。其中，新能源汽车销量36,621辆，同比下降45.74%。</p>
+  <p><strong>Uber：第四季度营收143.7亿美元，略高于市场预期</strong><br />优步（Uber）第四季度营收143.7亿美元，市场预期142.9亿美元；每股收益0.14美元。Uber预计第一季度调整后息税折旧摊销前利润将在23.7亿至24.7亿美元之间，市场预期为24.5亿美元。（财联社）</p>
+  <p><strong>小米：辽宁营口SU7起火事故系车内遗留火源引燃周边可燃物所致</strong></p>
+  <p>36氪获悉，小米公司发言人称，2月1日，辽宁省营口市一台小米SU7车辆的主驾驶座椅处冒烟并起火，经消防救援部门到场处置后迅速扑灭，现场无人员受伤。经向车主了解今日已收到认定书，该起事故系车内遗留火源引燃周边可燃物所致，非车辆自身原因产生。网传视频中所谓的“烟花”情况，系车辆安全气囊因燃烧引爆导致，与电池等无关。我们将协助客户妥善处理后续事宜。</p>
+  <p><strong>百胜中国第四季度营收28.2亿美元，同比增长8.8%</strong><br />36氪获悉，百胜中国第四季度营收28.2亿美元，同比增长8.8%，预估27.2亿美元；调整后每股收益0.40美元，上年同期0.30美元，预估0.35美元。肯德基餐厅数目12997，同比增长12%，预估13072。必胜客餐厅数目4168，同比增长12%，预估4165。</p>
+  <p><strong>丰田计划2028年将混合动力车产量提升30%</strong><br />据报道，丰田汽车计划在2028年将混合动力车产量较当前水平提升约30%。丰田预计2028年将生产670万辆混合动力车，而2026年混合动力车和插电式混合动力车的生产计划为500万辆，丰田还计划在美国大幅扩大混合动力车生产规模。（界面）</p>
+  <p><strong>乐聚机器人入股星源智机器人</strong></p>
+  <p>36氪获悉，爱企查App显示，近日，近日，北京星源智机器人科技有限公司发生工商变更，新增乐聚机器人关联公司乐聚智能（深圳）股份有限公司等为股东，同时注册资本增至157.6万元人民币。该公司成立于2025年8月，经营范围包括服务消费机器人制造、服务消费机器人销售、智能机器人的研发、智能机器人销售等。</p>
+  <p><strong>松下新设首席人工智能官</strong><br />松下2月4日宣布高管架构调整，新设解决方案营收官（SRO）职位，负责统筹跨领域举措以优化被列为优先领域的解决方案领域的盈利结构；同时设立首席人工智能官（CAIO）职位，推动加速运用人工智能解决客户问题并提升内部运营效率。新设职位将于4月1日生效。公告显示，Hirofumi Suzuki被任命为解决方案营收官，Akira Sakakibara被任命为首席人工智能官。（界面）</p>
+  <p><strong>七鲜小厨成北京首家正式备案线上养老助餐点</strong></p>
+  <p>36氪获悉，近日，京东旗下七鲜小厨成为北京市首家正式备案的线上专供养老助餐点，部分门店同步上线“长辈专区”，为老年人提供更加健康、便捷的用餐新选择。北京市东城区龙潭街道也以京东七鲜小厨全国首店为载体，创新打造“线上点餐—线下配送—金融支付”全链条养老助餐服务，构建“15分钟养老助餐服务圈”。</p>
+  <h2>投融资：</h2>
+  <p><strong>“云器科技”获B轮融资</strong></p>
+  <p>36氪获悉，AI数据基础设施服务商“云器科技”宣布完成B轮融资，由私募基金ALC Capital领投。此轮融资将用于核心技术研发，持续深耕AI+数据赛道。云器科技已累计融资超7亿元。</p>
   <h2>新产品：</h2>
-  <p><a href="https://36kr.com/newsflashes/3667102358184576" rel="noopener noreferrer" target="_blank"><strong>百度智能云推出OpenClaw限时免费一键部署服务</strong></a></p>
-  <p>36氪获悉，百度智能云宣布上线OpenClaw一键部署服务，并开启限时免费体验活动。开发者可以通过百度智能云轻量应用服务器，快速部署这款智能体产品，并借助千帆平台一键接入文心、DeepSeek、Qwen等主流大模型。</p>
-  <p><a href="https://36kr.com/newsflashes/3667169106568065" rel="noopener noreferrer" target="_blank"><strong>全球最快人形机器人发布</strong></a></p>
-  <p>近日，浙江大学杭州国际科创中心人形机器人创新研究院正式发布全尺寸人形机器人Bolt。该机器人以10米/秒的奔跑时速，成为目前全球跑得最快的人形机器人。该成果由科创中心联合镜识科技、凯尔达共同研发完成。（财联社）</p>
-  <p><a href="https://36kr.com/newsflashes/3667372391539330" rel="noopener noreferrer" target="_blank"><strong>摩尔线程AI Coding Plan上线</strong></a></p>
-  <p>36氪获悉，摩尔线程今日正式推出AI Coding Plan 智能编程服务。作为首个基于国产全功能 GPU 算力底座构建的智能开发解决方案，该服务以 MTT S5000 强劲的全精度计算能力为核心驱动，融合硅基流动推理加速引擎，并集成 GLM-4.7 顶尖代码模型，实现了国产芯片与国产大模型在 AI Coding 领域的关键突破。</p>
-  <h2><strong>其他值得关注的新闻：</strong></h2>
-  <p><a href="https://36kr.com/newsflashes/3667428481802884" rel="noopener noreferrer" target="_blank"><strong>2026年中央一号文件发布</strong></a></p>
-  <p>2026年中央一号文件2月3日发布，这也是“十五五”首个中央一号文件。《中共中央 国务院关于锚定农业农村现代化 扎实推进乡村全面振兴的意见》提出，锚定农业农村现代化，以推进乡村全面振兴为总抓手，以学习运用“千万工程”经验为引领，以改革创新为根本动力，提高强农惠农富农政策效能，守牢国家粮食安全底线，持续巩固拓展脱贫攻坚成果，提升乡村产业发展水平、乡村建设水平、乡村治理水平，努力把农业建成现代化大产业、使农村基本具备现代生活条件、让农民生活更加富裕美好，为推进中国式现代化提供基础支撑。这是党的十八大以来第14个指导“三农”工作的中央一号文件。（新华社）</p>
-  <p><a href="https://36kr.com/newsflashes/3667051399078537" rel="noopener noreferrer" target="_blank"><strong>2025年我国有色金属主要产品产量再创新高</strong></a></p>
-  <p>今天（2月3日），中国有色金属工业协会举行新闻发布会，介绍了2025年有色金属工业运行情况。协会相关负责人介绍，2025年我国有色金属主要产品产量再创新高，全球占比保持领先。2025年有色金属企业工业增加值增长6.9%，高于全国规上工业增加值增速1.0个百分点。十种有色金属产量首次突破8000万吨大关，达到8175万吨，比上年增长3.9%，“十四五”年均增速5.0%。（央视新闻）</p>
-  <p><a href="https://36kr.com/newsflashes/3667405409035137" rel="noopener noreferrer" target="_blank"><strong>全国外贸工作会议在京召开</strong></a></p>
-  <p>36氪获悉，据商务部消息，2月2日至3日，2026年全国外贸工作会议在京召开。商务部部长助理张力出席会议并作工作报告。会议强调，2026年是“十五五”开局之年，做好外贸工作意义重大。我国外贸发展面临的形势依然复杂严峻，战略机遇和风险挑战并存、不确定难预料因素增多。各级商务主管部门要把思想和行动统一到党中央决策部署上来，立足商务工作“三个重要”定位，坚持“政策+活动”双轮驱动，着力推进贸易投资一体化、内外贸一体化发展，千方百计稳外贸，发展外贸新动能，推动进出口平衡发展，全力实现“十五五”贸易强国建设良好开局。</p>
-  <p><a href="https://36kr.com/newsflashes/3667441402569605" rel="noopener noreferrer" target="_blank"><strong>西班牙拟禁止16岁以下青少年使用社交媒体</strong></a></p>
-  <p>西班牙首相佩德罗·桑切斯周二宣布，西班牙将寻求禁止儿童和青少年使用社交媒体平台。桑切斯在阿联酋举行的领导人峰会上表示，政府希望限制16岁以下年轻人使用这些平台。为了执行这项禁令，政府将寻求责令各平台实施年龄验证机制。现在全球正有越来越多政府限制儿童和青少年使用社交媒体。（新浪财经）</p>
+  <p><strong>腾讯混元AI Infra核心技术开源</strong></p>
+  <p>36氪获悉，腾讯混元AI Infra团队正式推出开源生产级高性能LLM推理核心算子库HPC-Ops。腾讯混元称，在真实场景下，基于HPC-Ops，混元模型推理QPM提升30%，DeepSeek模型QPM提升17%。<br /><strong>市场消息：雀巢新掌门谋划战略大调整以重振增长</strong></p>
+  <p>市场消息：雀巢新掌门谋划战略大调整以重振增长。（新浪财经）</p>
+  <h2>今日观点：</h2>
+  <p><strong>高鑫零售：暂时无法与首席执行官李卫平取得联系</strong><br />36氪获悉，高鑫零售在港交所公告，董事会得悉公司暂时无法与执行董事兼首席执行官李卫平女士取得联系。截至本公告日期，据董事所深知、尽悉及确信，该事项与集团之业务及营运并无关联。有鉴于此，董事会认为，该事项对本集团并无重大不利影响，且集团之业务及营运维持正常。在此期间，集团之日常业务营运及管理将由公司董事会主席华裕能暂时负责。董事会将密切关注事态发展，并将按《上市规则》及/或《证券及期货条例》之要求适时刊发进一步公告，并或会根据适用法律、公司章程及本公司既定政策采取进一步必要行动。</p>
+  <h2>&nbsp;</h2>
                 ]]>
             </content:encoded>
         </item>
