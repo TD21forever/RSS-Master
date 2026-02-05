@@ -5,18 +5,86 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6981d9f35444d17ebfa14606</id>
-            <title>AI探索站 02月03日</title>
-            <link>https://m.okjike.com/originalPosts/6981d9f35444d17ebfa14606</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6981d9f35444d17ebfa14606</guid>
+            <id>https://m.okjike.com/originalPosts/69842172e966f8ddcffa9fc9</id>
+            <title>AI探索站 02月05日</title>
+            <link>https://m.okjike.com/originalPosts/69842172e966f8ddcffa9fc9</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69842172e966f8ddcffa9fc9</guid>
             <pubDate></pubDate>
-            <updated>Tue, 03 Feb 2026 11:20:19 GMT</updated>
+            <updated>Thu, 05 Feb 2026 04:49:54 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    就真的，有时候会觉得语言模型毁了语言能力，海浪里细看全是塑料。
+                    Clawdbot 昨天更新官方集成了飞书插件<br /><br />终于可以用国产模型和国产 IM 去驱动 Clawdbot ！<br /><br />配置了一下，坑还不少，我看 github 也有不少类似的提问<br /><br />写了篇文章帮大家排下雷：https://mp.weixin.qq.com/s/yANheGk58kXVWR8YBFgG6g<br /><br />======<br /><br />第一步：在飞书开发者后台创建机器人<br /><br />去飞书开发者后台，创建一个新的机器人应用。这一步很简单，填写应用名称、应用描述，选个背景色和图标就行。<br /><br />创建完成后，你需要记下两个关键信息：App ID 和 App Secret，这两个 ID 在后面配置 Clawdbot 的时候要用到，都在「凭证与基础信息 - 应用凭证」这里能找到。<br /><br />------<br /><br />配置飞书机器人权限<br /><br />进入权限管理，找到「批量导入导出权限」，点击导入。在 Clawdbot 官方文档的飞书配置页面有现成的权限配置 JSON，直接复制过来，全选导入就可以了。<br /><br />导入完成后，点击「确认新增权限」就完成了权限配置。这一步是为了让机器人有接收消息、发送消息等必要的权限。<br /><br />------<br /><br />开启机器人能力<br /><br />在「机器人」配置页面，点击「如何开始使用」，随便输入一句欢迎语（比如"你好，我是 AI 助手"），然后点击保存，机器人能力就开启了。<br /><br />这一步是飞书机器人平台的必要配置，不开启的话后面无法接收消息。<br /><br />======<br /><br />第二步：在 Clawdbot 里配置飞书 Channel<br /><br />这部分在 Clawdbot 本地完成，坑比较多，要注意几个关键点。<br /><br />------<br /><br />运行安装向导命令<br /><br />在终端运行 openclaw channels add 命令，会启动一个交互式向导。选择飞书（Feishu/Lark）选项，因为飞书支持是通过 plugin 实现的，所以它会自动下载插件。<br /><br />这里第一个坑来了：如果提示"插件已存在"，然后又跳回上一层选项菜单，说明之前安装过但没安装成功。你需要手动去对应的文件夹删除这个插件文件夹，删除后重新运行 openclaw channels add 命令。<br /><br />系统会告诉你插件在哪个目录，按照提示去那个目录删掉整个插件文件夹就行。<br /><br />------<br /><br />解决 zod 依赖缺失问题<br /><br />删除插件重新安装后，它会问你是否用 npm 安装这个插件，选择确定。这时候第二个坑来了：会提示缺少 zod 依赖。<br /><br />正常情况下应该在当前文件夹安装 zod 依赖就行，但问题是如果你已经有了插件文件夹，它不让你安装；如果你删了插件文件夹，zod 依赖也被删了。这是个已知的 bug，很多人在报。<br /><br />解决方案是全局安装 zod 依赖，运行这个命令：npm install -g zod<br /><br />安装完成后，再重新运行 openclaw channels add 命令，选择飞书，这次就能顺利进行了。<br /><br />------<br /><br />填写配置信息<br /><br />安装成功后，会让你填写几个配置项：<br /><br />▸ Feishu account id：这个是用来区分多个飞书机器人的，随便填一个名字就行，比如"my-bot"<br /><br />▸ 选择飞书版本：中国版飞书还是海外版 Lark，根据你的实际情况选择，国内用户选中国版<br /><br />▸ 填写 App ID 和 App Secret：把之前在飞书开发者后台获取的两个 ID 填进去<br /><br />填写完成后，注意一定要选择「Finished」才算添加成功。我刚开始就是没点这个，结果一直没添加上，这是个容易忽略的细节。<br /><br />------<br /><br />配置私信访问策略<br /><br />接下来会问你几个配置问题：<br /><br />▸ Configure DM access policies now? 选择 Yes<br /><br />▸ Feishu DM policy：选择 Pairing（推荐，需要配对码才能使用）<br /><br />▸ Add display names for these accounts?：选择 No（可选）<br /><br />这几个配置按推荐选项走就行，主要是控制谁能跟机器人私聊。<br /><br />------<br /><br />重启网关<br /><br />所有配置完成后，运行 openclaw gateway restart 命令重启网关。这一步是让新的 channel 配置生效，必须重启才能建立连接。<br /><br />======<br /><br />第三步：回到飞书平台完成最后配置<br /><br />现在需要回到飞书开发者后台做最后的设置。<br /><br />------<br /><br />配置事件订阅方式<br /><br />进入「事件与回调」页面，在「事件配置」里找到「订阅方式」，选择「使用长连接接收事件」，然后点击保存。<br /><br />这里可能会提示"没有建立长连接"，不要慌，等一两分钟再点保存就行。如果等了几分钟还是不行，可能需要检查一下 Clawdbot 的日志，看看是不是网关没正常启动。<br /><br />如果你按照我前面的步骤操作，一般不会有问题。<br /><br />------<br /><br />添加接收消息事件<br /><br />在「事件配置」页面，点击「添加事件」，搜索 im.message.receive_v1 这个事件，点击添加。这个事件是用来接收用户发送的私信消息的，不添加的话机器人收不到消息。<br /><br />------<br /><br />发布版本<br /><br />进入「版本管理与发布」页面，点击「创建版本」，然后点击「发布」。如果你没有发布版本，系统会有提示引导你去创建，跟着提示走就行。<br /><br />只有发布了版本，机器人的配置才会真正生效。<br /><br />======<br /><br />第四步：配对机器人<br /><br />现在机器人已经可以用了，最后一步是完成配对。<br /><br />在飞书里找到你刚创建的机器人，发送一条消息，它会自动回复一个配对码，类似这样的格式：pair:XXXXXX。<br /><br />复制这个配对码，打开 Clawdbot 的 Web UI（就是你平时跟 Clawdbot 对话的网页），把配对码发给它，Clawdbot 会自动完成绑定。<br /><br />绑定成功后，你就可以在飞书里跟 Clawdbot 愉快交流了，也可以把机器人拉到公司群里，让所有小伙伴都能用。<br /><br />======<br /><br />配置完成后，你的飞书机器人就能正常工作了。如果你用的是国产模型（比如通过 API 接入的深度求索、月之暗面等），整套方案就完全是国产化的了。<br /><br />要注意的几个关键点：<br /><br />▸ zod 依赖缺失的问题，记得全局安装<br /><br />▸ 添加 channel 后一定要点 Finished<br /><br />▸ 配置长连接后等一两分钟再保存<br /><br />▸ 记得发布版本，否则配置不生效<br /><br />整个配置流程虽然有几个坑，但都有明确的解决方案，按照步骤来基本不会卡住。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69841656c5a1d4e649b67226</id>
+            <title>AI探索站 02月05日</title>
+            <link>https://m.okjike.com/originalPosts/69841656c5a1d4e649b67226</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69841656c5a1d4e649b67226</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 05 Feb 2026 04:02:30 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    我们恐惧 coding，就像原始人恐惧火。<br /><br />但 code 从来不是程序员的专利。38 亿年前，DNA 就开始在做这件事——用四个字母，编织出生命。<br /><br />宽泛地讲，食谱是 code、法律是 code，你每天坚持的习惯也是 code。追溯词源，你会发现 coding 的本质是「编排规则，让系统自行运转」——我们一直在做这件事。<br /><br />更重要的是，它是通用 Agent 时代最强大的力量，可能没有之一。藏在这四个字母里的，是解放人类创造力的终极钥匙。<br /><br />放下恐惧——像拥抱心跳一样，拥抱智能的编排本身。它沉默了数十亿年，此刻正在破土，以亿万天才之国的名义。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6983f6aa800201ac6897ad1c</id>
+            <title>AI探索站 02月05日</title>
+            <link>https://m.okjike.com/originalPosts/6983f6aa800201ac6897ad1c</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6983f6aa800201ac6897ad1c</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 05 Feb 2026 01:47:22 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    AI算是少有的需要真的把手弄脏，要真花时间动手用动手干才能真的理解发生了什么的领域。<br /><br />所以，面对那种只看了些新闻，就在下判断和分析，夸夸其谈的角色，要尤其谨慎。<br /><br />最容易没搞懂就开始挥斥方穹的角色包括但不限于大学教授、投资人、企业中高层...
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69832a4925bae56612b37905</id>
+            <title>AI探索站 02月04日</title>
+            <link>https://m.okjike.com/originalPosts/69832a4925bae56612b37905</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69832a4925bae56612b37905</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 04 Feb 2026 11:15:21 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Clawdbot 新版官方支持了飞书连接<br /><br />这下舒服了，可以用国产模型连飞书，完全不受网络环境影响了
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6982bfeb25bae56612a90820</id>
+            <title>AI探索站 02月04日</title>
+            <link>https://m.okjike.com/originalPosts/6982bfeb25bae56612a90820</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6982bfeb25bae56612a90820</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 04 Feb 2026 03:41:31 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    原来做文档的 Craft 团队出的 Craft Agent 也太牛逼了！<br /><br />界面非常漂亮，整个交互细节也做得非常到位，完爆昨天的 Codex App<br /><br />他们这套 Agent 的状态流转系统非常巧妙。<br /><br />系统会下意识地引导你去开启多个 Agent，然后你可以通过左边的状态和标签筛选，清晰地看到每一个任务的进展和大概状态。<br /><br />左边多 Agent 的卡片也做得很好看，可以一眼看到哪个 Agent 处在什么状态，是正在跑还是需要你审批。<br /><br />里面的聊天部分 UI 做得也很好。这个部分的交互非常值得参考：<br /><br />1. 当有文档的时候，它会在 UI 里嵌一个文档页面进行展示<br />2. 正常的每个进度都会有对应的图标和 UI<br />3. 审批时的 UI 很漂亮，并且会有一个黄色的警示告诉你那个按钮的具体功能<br />4. 下方会显示具体的执行指令或者是命令行内容<br /><br />推荐试试这个，太好了。如果你确实不习惯 Claude Code 的这种命令行的话，可以试试这个
                 ]]>
             </content:encoded>
         </item>
@@ -39,23 +107,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6980bb5e9f3cd84f65b728bb</id>
-            <title>AI探索站 02月02日</title>
-            <link>https://m.okjike.com/originalPosts/6980bb5e9f3cd84f65b728bb</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6980bb5e9f3cd84f65b728bb</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 02 Feb 2026 14:57:34 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    最近高强度使用了一下Obsidian➕Claude Code，绝对称得上是最强生产系统！<br />​<br />​这是一期非常详细的零基础入门教程，后面会逐渐给大家更新如何通过obsidian＋cc构建自己的高效内容生产系统🥰
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/697f9460c5a1d4e6494ca30a</id>
             <title>AI探索站 02月01日</title>
             <link>https://m.okjike.com/originalPosts/697f9460c5a1d4e6494ca30a</link>
@@ -68,40 +119,6 @@
                 <![CDATA[
                     
                     2026年最值得关注的英文 X 账号：<br /><br />@karpathy = LLMs king<br />@steipete = built openclaw<br />@gregisenberg = startup ideas king<br />@rileybrown = vibecode king<br />@corbin_braun = cursor king<br />@jackfriks = solo apps king<br />@levelsio = solo startups king<br />@marclou = solo startups king<br />@EXM7777 = AI ops + systems king<br />@eptwts = AI money twitter king<br />@godofprompt = prompt king<br />@vasuman = AI agents king<br />@AmirMushich= AI ads king<br />@0xROAS = AI UGCs king<br />@egeberkina = AI images king<br />@MengTo= AI landing pages king<br />@rryssf_ = automations king<br />@kloss_xyz = systems architecture king<br />@emollick = AI science king<br />@Hesamation = AI/ML king
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/697f2fd24efbba890af90a20</id>
-            <title>AI探索站 02月01日</title>
-            <link>https://m.okjike.com/originalPosts/697f2fd24efbba890af90a20</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/697f2fd24efbba890af90a20</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 01 Feb 2026 10:49:54 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    简单锐评一波元宝今天发红包的影响：<br /><br />- 确实贯彻了顶层意志，换任何产品——哪怕是腾讯其他业务线的——都不可能在微信里这么转一天的链接还不被「抖动」；<br /><br />- 所以可以给本日最佳的段子颁奖了，马化腾一大早就约了张小龙去打高尔夫，特意要求别带手机，专心打球；<br /><br />- 各个群里空前的刷屏，有没有达到马化腾预期的复刻十年前红包大战不知道，社交裂变的增长威慑倒是再次出现，人类终于回想起了被各种邀请砍一刀的恐怖；<br /><br />- 古典产品主义，加上运营暴力美学，是的，这很老登，但一代人有一代人的鸡蛋要领，薅补贴是一种人性，和年代无关；<br /><br />- Kimi当初买用户也是平均几十块钱一个人头，最后人没留下来，钱也花了，得利的都是营销号，元宝至少是真的把钱给用户了；<br /><br />- 还是说留存，字节的经验是，产品影响拉新，模型决定留存，春节之后人走茶凉，第一背锅位肯定不是元宝，所以现在最急的可能还是尧舜禹；<br /><br />- 鄙视链没毛病，但从业者其实还是比较羡慕嫉妒恨，大厂能用弹药和杠杆，平地起高楼，一天干完一个周期；<br /><br />- 提前开香槟or办葬礼都太急了，让子弹再飞一会儿，这才刚上前菜，越嘲笑元宝其实是越给元宝面子，能懂这个道理吧；<br /><br />- 春节前后至少有三个国产模型要同期发布，加上春晚赞助的明争暗斗，这轮AI大战会变得像「双11」，一赢各表；<br /><br />- 直到今天更新，元宝在App Store的介绍文案还是「DeepSeek+拍题P图搜⋯⋯」，我很关心混元上桌吃饭的时间；<br /><br />- 「派」这个玩法其实是有场景的，这个需要用户形成网络效应，所以非常依赖拉新，兵马未动，粮草先行，不算过分；<br /><br />- 2026年的AI发展会很分裂，前沿市场继续拼Agent和生产力，由程序员趣味主导，大众市场开始拼普适性，争当顺位第一的ChatBot。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/697ddc9bc64420067fe2f9ed</id>
-            <title>AI探索站 01月31日</title>
-            <link>https://m.okjike.com/originalPosts/697ddc9bc64420067fe2f9ed</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/697ddc9bc64420067fe2f9ed</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 31 Jan 2026 10:42:35 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    经常被问到平时都用什么 AI 工具，于是整理了一下我和@海辛Hyacinth 在工作流中常用的工具包。<br /><br />*工具迭代太快，本条动态永久更新（最新编辑日期：1月31日）<br />*都是我们做项目用的工具，你永远可以相信我写的工具推荐。<br />*排名先后只跟我们的使用频率有关。<br /><br />🖼️🖼️ 主力生图工具<br /><br />直接用 🍌Nano banana Pro 就够了，目前能力独一档。<br /><br />唯一尴尬的是 Google 官方应用做得太拉，无论 Gemini 还是 Flow，抑或是按次收费的 Google AI Studio，都无法把 🍌Nano banana Pro 4k 的最大潜力发挥出来。<br /><br />相反，接了 API 的第三方平台纯粹又好用。此时此刻我们在用 Lovart，最高档不仅可以批量无限🍌4k，还能解锁隐藏的 Veo 4s 和 6s 版本，唉…<br /><br />与此同时，很多曾经的明星模型的现状：<br />* GPT 的 image 1.5 无人问津<br />* Flux 新模型也无人问津<br /><br />·<br /><br />🎨 修图工具<br /><br />▶ 我目前主要的搭配是： 🍌Nano banana Pro 修改 + Photoshop 的 “协调” 功能改光影<br /><br />* 抠局部细节的时候还是会上手自己P，但这样的情况正在锐减（居然）。<br /><br />·<br /><br />📽️ 主力视频生成工具<br /><br />▶ Veo3.1：依然是目前最好，没有之一。清晰度问题终于解决了，不再是之前拉到不行的超分了，终于有1080 和 4k 了。正如前面所说，Veo 其实在 API 里提供 4s和6s版本，用来做视频衔接非常实用。（当然，Flow 里是没有的，笑）<br />▶ Sora 2：偶尔会用来找找分镜灵感，其余部分全方位鸡肋，也好久没开了。<br />▶ 即梦：新模型 Seedance 1.5 Pro 让我看到了中文/方言音画同步的希望。<br />▶ 可灵 2.6：老牌就是老牌，目前我都是 Veo 和可灵轮着用，期待 3.0 的表现。<br />▶ 通义万相 Wan 2.6：比起创建人物角色，我觉得动物角色更惊艳！<br /><br />* 别买 Sora 2 Pro……<br />* 很多模型更新都在迎合短剧，我目前还没看懂，不敢评价。<br /><br />·<br /><br />📽️ 其他视频生成场景（本月用得很少）<br /><br />▶ 视频 Agent：目前比较看好 Medeo（Chat 的部分很好用，但编辑功能能不能更新快一点）<br />▶ Luma Ray3 的视频编辑功能很不错，清晰度高，场景保持得很稳。<br />▶ 首尾帧我们用：Veo 3.1，可灵2.6<br />▶ 多参我们用：Vidu Q3<br />▶ 数字人我们用：Gaga<br /><br />* 正如你所见，我们越来越集中在某几款工具了。<br /><br />·<br /><br />🔍放大工具<br /><br />▶ 图片放大的需求变少了，毕竟 🍌Nano banana Pro 原生 4k……（我很久没开 Magnific 和 Krea 了）<br />▶ 视频放大用 Topaz，不是本地盗版那个，是线上那个：Astra<br /><br />·<br /><br />📽️ 3D 模型生成工具<br />▶ 我们用得最多的：Tripo，工具的完成度越来越高<br />▶ 混元3D的口碑超好<br />▶ Rodin 发布了🍌3D ，看 demo 也不错<br /><br />* 目前工作上用到的场景比较少，可以不看我的推荐，欢迎大家补充好用的 3D工具。<br /><br />其他想到再补充。
                 ]]>
             </content:encoded>
         </item>
@@ -153,23 +170,6 @@
                 <![CDATA[
                     
                     最近飞书、Plaud 这些硬件录音设备引起了不少讨论。大家最自然的质疑就是：“手机明明就能录音，还能转写，为什么要多带一个设备？”<br /><br />“如无必要，勿增实体。”既然手机能做，这个新“实体”还有存在的必要吗？<br /><br />如果只从“功能层”看，手机确实能录音，能转写，甚至能接 AI。<br /><br />但如果我们把视角切换到“交互层”，结论可能完全不同。工具改变的往往不是“能不能做”，而是“怎么做”。<br /><br />分享两点思考：<br /><br />1. 功能 vs 交互：<br /><br />很多人觉得打开 App 录音只是几秒钟。但在真实的会议、访谈或灵感迸发的瞬间，这几秒钟包含了：解锁手机、找到 App、进入录音界面、启动录音……其间可能还需要确认状态、担心电话打断，事后还要头疼录音文件在哪找。<br /><br />这一系列动作都在增加你的认知负荷，在不断把你的注意力从“正在发生的事情”上强行拉走。<br /><br />专用设备把“记录”从一个需要决策的操作，变成了一种不需要占用心智资源的自然反应。<br /><br />这让我想起“可供性”（affordance）这个产品设计领域的概念，简单说，就是物体本身在“暗示”你该怎么用它。<br /><br />手机作为一个通用设备，它的暗示是模糊的。而一个专门的录音设备，它的物理形态、按钮、指示灯，都在极其明确地告诉你：“不用多想，我就是干这个的”，通过物理形态降低你启动行为的门槛。手机是“能做”，硬件是“适合做”。<br /><br />专用录音设备的价值，不在于它“能不能录音”，而在于它让“记录”这件事变得足够简单、足够自然、足够不打扰。<br /><br />当一个工具通过更好的交互设计，让人更愿意去做一件本来就重要的事，它就不是多余的。<br /><br />2. 必要性不止取决于功能，还取决于人群<br /><br />如果一个月甚至几个月才录一次音，手机确实足够了。<br /><br />但是对于高频会议者、内容创作者或需要大量“先记录，再消化”的人来说，手机录音带来的摩擦感是不可接受的。<br /><br />“必要性”不仅要看功能，更要看“人群”。<br /><br />往往是那些身处其中、有原生痛点的创新者，能率先看到特定人群的“必要性”。<br /><br />所以，有一类硬件创新的机会常常在于：<br />你通过交互提升的体验，从特定人群那里挖掘出的「价值总量」到底有多大？<br /><br />当一个工具让人更愿意去做一件本来就重要的事，它就不是多余的实体。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6969acb99f3cd84f6588fc31</id>
-            <title>AI探索站 01月16日</title>
-            <link>https://m.okjike.com/originalPosts/6969acb99f3cd84f6588fc31</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6969acb99f3cd84f6588fc31</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 16 Jan 2026 03:12:57 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    ✨ 从「赋能」到「赋权」：Claude Code + Opus 4.5 带来的飞跃<br /><br />三天，我用 Claude Code 搭了一个 Blog 自动化系统。<br /><br />酝酿了蛮久，但是动手后就一路狂奔了。零开始，一个几乎全自动的 Agent 驱动长文写作系统，100% 代码由 Claude Code 来生成；架构的设计思路，则有由 Hans 和  Opus 4.5 共同完成的。这种协作更多是一种「高峰对话体验」，夜以继日的同时多 Session 进行。<br /><br />这个 AI 内容工厂的复杂性在于，它是一个从竞品 URL 或想法开始，不断由 Claude 提供主题选题、撰写、评价，再到自动化数据验证、自主迭代的完整流程。超过数十个 Claude Skills ，内嵌了大量的专业领域知识（例如 AEO 、SEO 评价体系和 Nana Banana pro 提示词技巧）以及多个第三方 API 集成数据验证。视觉风格高度可定制，且全部实现了模块化。所以它不仅仅是写篇文章那么简单，而是一套能够写出高品质长文内容的内容发布系统。<br /><br />此外，它的核心思想是我称“原子化”的编排思路，系统的可解耦性和可组合性、可迭代性极高。因此，这套系统对于过去时代全栈工程师和产品来说，可能要需要几个月才能开发完成。——所以，这次体验和一年前第一次用 Claude Code 时完全不同。不是更快、更强，而是自主性的「质变」。<br /><br />🧠 第一个震撼，来自 Opus4.5 的规划力<br /><br />Claude  Code  展现出一种超越执行的思考力——当你抛出一个产品方向或架构思想时，它会帮你补全信息盲区、延展思维边界。如果你是产品经理，它的规划会超越你对绝大多数技术的理解；如果你是设计师，它甚至在产品层面给出专家级的互补。如果你是资深工程师，它不断补齐你的需求理解。 <br /><br />换句话说，洞见依然是你的种子，但它负责轻松帮你看见更大的森林。<br /><br />🐜 第二个震撼，来自于模块化的系统构建<br /><br />整个过程更像搭乐高——不是纯代码堆砌，一旦你深刻玩会了积木的—— Claude  Skills，就停不下来了。起初你并不知道终点在哪里，但只要几颗有深度看法的洞见种子；随着一块块拼接，一个复杂的、几乎全自动的系统就这样涌现出来。对，一种真正的涌现～<br /><br />我称之为 AI 工厂蓝图，有自己的产品哲学——高度定制化、符合你的品牌视觉和文字风格，同时与内部所有系统形成互联。这不是通用模板，而是一个高度可定制的自动化工厂，然后，过程中不断完善模块本身。<br /><br />举个例子：当我说想要一种更好的预览效果时，它不只是给出答案，而是帮你安装各种 Python 库，找到一种本地预览的捷径，把最终成稿在本地自动完成并打开——从想法到图文并茂的完美呈现，几乎一气呵成。这种模块之间的可协作、可组合，才是系统真正的生命力。<br /><br />👑 但真正让我停下来思考的，是第三个层面的变化：从「赋能」到「赋权」。<br /><br />以前我们谈 AI 工具，说的是能力增强”——你还是你，只是变得更强。<br /><br />但这一次不同。原先被锁在开发、设计师、产品经理，甚至其他专长领域的合伙人手里的实现权、迭代权、决策权，正在被重新赋予给能动性高的创造者。<br /><br />这也会产生一种”你无所不能”的幻象，需要时刻警惕：因为真实世界极度复杂，自组织 Agent 还像幽灵一般活在你的电脑有限空间内，无法替代顶级专业团队的协作。但这种”赋权”，是 Claude Code 所代表的新一代工具带来的剧变——它对个体和组织，都将产生前所未有的冲击。<br /><br />当这些越来越强大智能体开始替你思考、替你决策，创造的游戏规则就不再是谁会用工具，范式转移可能在于——谁能深刻理解并「驾驭」这些强大的幽灵。
                 ]]>
             </content:encoded>
         </item>
