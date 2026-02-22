@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/699a6011c5a1d4e649dca900</id>
+            <title>AI探索站 02月22日</title>
+            <link>https://m.okjike.com/originalPosts/699a6011c5a1d4e649dca900</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/699a6011c5a1d4e649dca900</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 22 Feb 2026 01:46:57 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    AI 降临派是工业革命效率至上的放大，看似很有想象力，细想却缺少想象力。<br /><br />比如 EvoMap。Agents 吞下一颗颗胶囊后，经验复用的效率得到提升。然后呢，效率之外的变化如何发生。<br /><br />万物都是环境的反应器。地球物种的演化，来自大环境的扰动。AI 的最大瓶颈是人的经验和想法。<br /><br />比如 AI Coding 如火如荼，至今却未能写出人类经验之外的代码。比如各种视频模型，生成的各种视频，都未能超出人类的想象。<br /><br />语言是世界的边界。在边界之内，AI 能卷的目前看只有效率。<br /><br />效率是对时间的压缩。我们将过去的时间压缩，造就了 LLM。LLM 诞生后，最大功用，是帮助人类压缩未来的时间。<br /><br />可人类除了时间，还有什么。时间都被压缩后，时间之外的空无，是巨大的不知。<br /><br />边界之内，效率再高，都是旧世界。新世界在边界之外，在时间之外，在巨大的不知里。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6999aa5b800201ac68b02465</id>
             <title>AI探索站 02月21日</title>
             <link>https://m.okjike.com/originalPosts/6999aa5b800201ac68b02465</link>
@@ -17,23 +34,6 @@
                 <![CDATA[
                     
                     这可能是今年最重要的AI新闻，但中文互联网还没什么人聊。<br /><br />昨天，一家成立不到三年的多伦多芯片公司扔下了一颗核弹。他们不是做大模型的，不是做应用的，而是做了一件听起来很复古的事：把AI模型直接刻在芯片里。<br /><br />这家公司叫 Taalas。他们做的芯片 HC1，运行 Llama 3.1 8B的速度是 17000 tokens/秒。作为对比，目前业界最快的 GPU 也就 2000 左右。十倍差距。<br /><br />但这还不是最疯狂的。最疯狂的是，这块芯片只能跑这一个模型。不能换，不能改，不能升级。你买回家，它就永远只会做这一件事：以光速运行 Llama 3.1 8B。<br /><br />Taalas 的赌注很简单：在这个所有人都追求灵活性的时代，他们选择了绝对的不灵活，换取绝对的效率。<br /><br />要说清楚这件事为什么重要，得先理解过去几十年芯片发展的主线。从 CPU 到 GPU，再到各种 AI 加速器，所有人都在做同一件事：造一个通用的计算平台，然后用软件在上面跑各种模型。<br /><br />这条路走到今天，遇到了一个硬边界。模型越来越大，内存带宽成了瓶颈。你把几百亿参数从显存搬到计算单元，这个过程消耗的能量和时间，已经比计算本身还要多了。<br /><br />Taalas 的思路是：既然你每次都算同样的东西，为什么还要搬来搬去？直接把权重存在晶体管里不行吗？<br /><br />他们真的这么做了。HC1 芯片里没有显存，没有 HBM，没有复杂的缓存层级。模型的每一个权重都对应着芯片上的特定晶体管，矩阵乘法通过电路的物理连接直接完成。你输入一个 token，电流流过这些预先设计好的路径，输出就是下一个 token 的预测。<br /><br />这就像录音带和现场演奏的区别。传统芯片是每次都要重新演奏，Taalas 是把演奏录在磁带里，播放就行了。<br /><br />这种设计带来了几个惊人的结果。<br /><br />第一是速度。17000 tokens/秒意味着什么？你几乎感受不到延迟。不是"很快"，是"瞬间"。有测试者说，按回车的瞬间，答案就已经完整出现在屏幕上，甚至看起来像是预先准备好的。<br /><br />第二是功耗。传统 GPU 运行 AI 推理需要液冷，一个机柜动辄几十千瓦。Taalas 的芯片只要空气冷却，十张卡加起来才 2.5 千瓦。他们号称能效是 GPU 的十倍。<br /><br />第三是成本。制造这样的芯片，他们说是传统方案的十分之一到二十分之一。<br /><br />但代价也是真实的。这块芯片出厂那一刻，它的命运就已经注定。Llama 3.1 8B，就是这个芯片这辈子唯一能做的事。如果明年 Meta 发布了 Llama 4，这块芯片就变成了电子垃圾。如果你发现这个模型有偏见，或者在你的应用场景里效果不好，你不能微调它，不能换别的模型，只能再买一块新芯片。<br /><br />Taalas 的解决方案是：把定制芯片的周期从一年压缩到两个月。他们和台积电合作，只改变两层金属掩膜，就能为不同的模型生产新芯片。他们声称训练一个模型要花十亿美元，而定制一块这样的芯片只要花一千万。<br /><br />说到这个团队的背景，确实豪华得有点过分。CEO Ljubisa Bajic 是 Tenstorrent 的创始人，之前在 AMD 和 NVIDIA 都做过架构师。COO Lejla Bajic 是他的妻子，同样是 AMD 和 Tenstorrent 的资深工程师。CTO Drago Ignjatovic 是前 AMD 的 ASIC 设计总监。这三个人加起来，可能设计了过去十年里你用过的一些最重要的芯片。<br /><br />2022 年，当 Jim Keller 加入 Tenstorrent 并接管公司后，Ljubisa 选择了离开。六个月后，他创立了 Taalas。显然，他和 Keller 对 AI 芯片的未来有不同的看法。Keller 想做一个通用的、可编程的、软件友好的平台，而 Ljubisa 走向了另一个极端：彻底的专用化。<br /><br />他们刚刚完成了 1.69 亿美元的融资，总融资额 2.19 亿。投资人里有个名字值得注意：Pierre Lamond。这位老爷子是 Fairchild Semiconductor 的元老，红杉资本的前合伙人，被公认为半导体行业的奠基人之一。这样的大佬背书，说明这件事至少在技术逻辑上是成立的。<br /><br />现在的问题是：市场会买单吗？<br /><br />Taalas 需要找到那些愿意为了效率和成本，牺牲灵活性的场景。比如语音助手，需要毫秒级响应，而且模型不需要经常换。比如数据标注，需要处理海量文本，用的是固定模型。比如一些垂直领域的专用模型，训练好了就不动了。<br /><br />但也有人不看好。芯片制造是有污染的，如果每两年就要换一批芯片，这比 GPU 的更新换代更频繁，环保问题怎么算？还有人质疑，AI 模型进化这么快，两个月流片时间还是太长，等你做出来，模型可能已经过时了。<br /><br />更根本的问题是：当 OpenAI、Google、Anthropic 都在拼命证明他们的新模型比旧模型好得多的时候，谁会愿意把自己锁死在一个固定的模型上？<br /><br />Taalas 的反驳是：模型迭代的周期正在变长，人们开始依恋特定的版本。OpenAI 把用户从 GPT-4.5 迁移到 GPT-5 的时候，很多人抱怨新版本太谄媚了。也许未来我们会像对待手机型号一样对待 AI 模型：iPhone 15 出来后，还是有人用 iPhone 14，因为它们各有各的好。<br /><br />我不知道 Taalas 会不会成功。这可能是一家改变行业的公司，也可能是一个技术史上有趣的注脚。<br /><br />感兴趣的朋友可以去他们的demo站点体验一下什么是光速级别的inference：<br /><br />chatjimmy.ai
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69995d4e9f3cd84f650deeb9</id>
-            <title>AI探索站 02月21日</title>
-            <link>https://m.okjike.com/originalPosts/69995d4e9f3cd84f650deeb9</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69995d4e9f3cd84f650deeb9</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 21 Feb 2026 07:22:54 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    要写作，选元宝。<br />要编程，选智谱。<br />既要写作又要编程，选 Kimi。<br />既要写作又要编程还要视频，选豆包。<br /><br />总的来看<br />小问题问豆包，速度快，功能全<br />大任务给 Kimi，质量好，兼顾写作和编程<br />国产 AI 最佳组合
                 ]]>
             </content:encoded>
         </item>
@@ -56,18 +56,35 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6997131e9f3cd84f65d4a1f8</id>
-            <title>AI探索站 02月19日</title>
-            <link>https://m.okjike.com/originalPosts/6997131e9f3cd84f65d4a1f8</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6997131e9f3cd84f65d4a1f8</guid>
+            <id>https://m.okjike.com/originalPosts/69993dd3c5a1d4e649bfa774</id>
+            <title>AI探索站 02月21日</title>
+            <link>https://m.okjike.com/originalPosts/69993dd3c5a1d4e649bfa774</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69993dd3c5a1d4e649bfa774</guid>
             <pubDate></pubDate>
-            <updated>Thu, 19 Feb 2026 13:41:50 GMT</updated>
+            <updated>Sat, 21 Feb 2026 05:08:35 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    很高兴跟大家介绍我的第一个产品Volumn.ai🎉<br /><br />在这里你可以让你的账号获得10倍的增长（虽然实测是100倍，但我的cofounder说不要说那么满hahaha<br /><br />需求是来自最近的一些增长顾问服务，很多founder本人和产品的x账号其实都没有精力运营。<br /><br />过去这个任务通常都给专门的人在运营或者实习生。<br /><br />而今天你只需要登陆Volumn.ai然后花几分钟完成绑定就可以让他自动运行～<br /><br />你可以设置你的账号的context，并且设置特定的主题回复：例如我只想回复和Volumn.ai相关的帖子<br /><br />你的账号就会自动的7*24小时开启回复～<br /><br />当然我们也在去开发推广这个功能，这意味着，只要你设置好足够的context，你的账号就可以以你的预期去推广你的产品。<br /><br />最后，一个账号一个月仅需要40刀，稳定不封号！<br /><br />快来volumn.ai试一下吧<br /><br />PS：我们正在开发reddit的自动养号～
+                    小红书官方AI应用点点为什么选择了“攻略”作为核心突破口？<br /><br />1、这一轮AI发展，核心三要素-算法、算力、数据，这三者之间的重要性程度一直在动态变化；26年初这个时点，似乎业界有所共识的是数据的重要程度愈发显现。<br />数据不单纯等于有和没有，按照最新一次拾象的内部纪要表述是：<br />数据的重要性需要重新提权，数据获取、清洗、长尾挖掘、难例构造与评测闭环，会成为未来模型能力差距的分野点。<br />海外各家顶级实验室的趋势也表明，研发范式正在从 compute-bound 转移到 data-bound：算力仍是瓶颈，但它会越来越可得，边际重要性下降；真正拉开差距的点转为数据侧。<br /><br />2、落到每一家厂商的AI产品策略，广义上的数据质量其实某种程度上就决定了厂商选择通过bet什么来获得业务的突破；<br />基于自身特有数据的基础，设计出一套高效的预训练数据范式，并且在模型后训练的RL环境中“提出好问题”，再将模型的技术能力封装成用户体验良好的功能/模块，也似乎成为了“共识”；<br />字节的seedance2.0-即梦/抖音符合这个逻辑，小红书的点点也是……<br /><br />3、在这一轮AI爆发之前，很多人的搜索需求其实已经落在了小红书上；“攻略”类的有效信息查询早就在社区内通过UGC积淀+算法推荐成为众多用户的选择；<br />而当这一轮AI爆发之后，作为小红书的官方AI应用--点点，当然也需要把这一建立在数据层面上的巨大优势再次发挥出来；<br />所以点点最近上线了他们的“深度”模式---攻略模式，对，就叫攻略模式；<br />没有叫什么deep research、什么thinking、什么专家这样的名词，就叫攻略；<br />清晰明了的告诉用户，点点这里最强的就是“攻略”。<br /><br />4、这个春节我家正好在北海道玩，我就测试了下点点这个攻略模式；<br />我的需求其实有些特殊，常规的搜索引擎、chatbot可能都很难满足，<br />具体需求是：<br />家里俩娃，老大12岁男孩，不会滑雪但有滑板和轮滑经验，这次想学习下；<br />老二6岁女孩，完全不会滑雪也不想雪，单纯想玩雪，所以需要雪场不只有雪道还要有针对小小朋友的游乐设施；<br />除了雪场还需要解决交通、餐饮等问题；<br /><br />我把这个需求给了点点，先用基础模式问了下，推荐哪个雪场：（图1）<br /><br />点点推荐了花园雪场，更加重要的是推荐的理由来自小红书社区内真实用户此前的ugc分享，且有图有真相；这些真实经验来自长尾的UGC贡献，这也是点点区别于其他类似产品的核心所在。（图2）<br /><br />然后我又使用了一下攻略模式让点点帮我生成了一个一天的行程安排；接到需求后的点点，首先给了一个问卷，让我提供更多的倾向性：（图3）<br /><br />选择完之后，点点大概用了5分钟左右生成了一个带行程、预算、价格、tips的完整攻略：（图4、图5、图6）<br />我基本上可以直接拿着这个攻略开始安排一天的雪场行程。<br /><br />5、回到今天问题的起初，点点选的突破口为什么是“攻略”？<br />以我个人需求为案例，这个一天的北海道二世谷滑雪攻略的整个生成过程背后靠的是<br />LLM模型基础能力+小红书社区独有的数据+产品端的交互。<br />数据的部分，小红书社区本身的语料库就包含非常真实、广泛、细分、长尾的用户经验，<br />而且这些数据其实并不单纯只是覆盖旅游场景，生活服务的方方面面其实点点可以拓展的领域所在。<br /><br />这个问题再延伸其实是：<br />当大模型的基础能力已经完全可以“兜底”的前提下，各家厂商到底依靠什么自己独有的东西，才能在应用层面做出什么有意义的突破？
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6997edfbcf673a74dee2c2df</id>
+            <title>AI探索站 02月20日</title>
+            <link>https://m.okjike.com/originalPosts/6997edfbcf673a74dee2c2df</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6997edfbcf673a74dee2c2df</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 20 Feb 2026 05:15:39 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    大家装好了龙虾🦞，如果想获取一些最新的 AI 相关的资讯。可以试一试这个宝藏开源项目 ai-daily-digest 📰<br /><br />GitHub 👉 https://github.com/vigorX777/ai-daily-digest<br /><br />从AI大神 Karpathy 推荐的 90 个顶级技术博客抓取最新文章，AI 自动评分筛选 + 生成结构化日报，每天花 30 秒就能知道技术圈发生了什么。<br /><br />搭配 🦞 三步搞定，定期自动抓取推送，彻底告别二手 AI 资讯：<br /><br />1️⃣ 给龙虾发一句自动装好<br />「安装 https://github.com/vigorX777/ai-daily-digest <br />然后加个 cron 计时任务，每天早上7点推送到当前对话框里给我」<br />2️⃣ 默认 Gemini 跑，但可以一句话切换成 DeepSeek 等国产模型<br />「帮我把项日报模型切换如下API：<br />api接口: https://api.deepseek.com/v1<br />api key: sk-xxxxxxxxxxxxx<br />模型名称: deepseek-chat」<br />3️⃣ 测试一下生成日报是否可以运行，不行就让🦞修bug<br /><br />拒绝信息茧房，从一手源头读起 🤖
                 ]]>
             </content:encoded>
         </item>
@@ -85,23 +102,6 @@
                 <![CDATA[
                     
                     self-host 十几年没成主流，是因为搭建门槛和维护成本高，在过去只能是少数geek的游戏。<br /><br />AI agent 把这个成本归零，任何self-host服务的部署、维护都可以自动化。如果现有的开源软件不满足需求，甚至可以定制一个。<br />只要硬件开机、准备好token、提出要求，你需要的大部分云服务都可以转为本地、个人定制的版本。<br /><br />这时候 token 就变成了电费。你不关心电是火电还是水电，也不关心 token 来自哪家。按月付，跟水电煤一起交。<br /><br />过去把一切搬上云，是因为个人没能力运维。如果运维成本归零，这笔交换就不划算了。也许个人数据和服务会回流到本地，云从默认选项变成特定场景的选择。<br /><br />每个家庭一个常开的 agent 终端，像路由器一样。大部分人不知道里面跑了什么，但拥有自己的数据。self-host 不再是 geek 的爱好，而是个人计算的默认形态。<br /><br />#一个想法不一定对
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6996aac1c5a1d4e6497e9223</id>
-            <title>AI探索站 02月19日</title>
-            <link>https://m.okjike.com/originalPosts/6996aac1c5a1d4e6497e9223</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6996aac1c5a1d4e6497e9223</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 19 Feb 2026 06:16:33 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    发现个搞音频的宝藏开源项目：Voicebox<br /><br />这是一个能在你自己电脑上（Mac 和 Win 都支持）完全本地运行的免费语音克隆和生成工具，底层套的是阿里的 Qwen3-TTS 模型。<br /><br />平时嫌 ElevenLabs 等同类产品订阅太贵的朋友可以直接拿它当平替。因为是纯本地跑，不用联网也不用上传数据，拿来做多角色播客、视频配音，隐私拉满，而且完全免费。目前在 GitHub 上已经攒了 4000 多星了。<br /><br />我自己用下来觉得声音很自然，但有时候情绪起伏稍微有点平，没有 ElevenLabs 那么充沛。但毕竟是免费白嫖的本地工具，还要啥自行车呢？<br /><br />🔗 有配音需求的可以去试水：http://voicebox.sh
                 ]]>
             </content:encoded>
         </item>
