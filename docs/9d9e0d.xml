@@ -73,18 +73,18 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/69a63b47c5a1d4e649fc0ff6</id>
+            <id>https://m.okjike.com/originalPosts/69a6366fac4e7447c16cd172</id>
             <title>AI探索站 03月03日</title>
-            <link>https://m.okjike.com/originalPosts/69a63b47c5a1d4e649fc0ff6</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69a63b47c5a1d4e649fc0ff6</guid>
+            <link>https://m.okjike.com/originalPosts/69a6366fac4e7447c16cd172</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69a6366fac4e7447c16cd172</guid>
             <pubDate></pubDate>
-            <updated>Tue, 03 Mar 2026 01:37:11 GMT</updated>
+            <updated>Tue, 03 Mar 2026 01:16:31 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    🦞OpenClaw 极简安全实践指南 (Security Practice Guide) 是面向 OpenClaw 的黑手册。<br /><br />我尝试了其他一些方式来试图加固 OpenClaw，包括 Skill 方式，但是发现还不如给 OpenClaw 植入一个安全“思想钢印”来的有意思，这个“思想钢印”形成一个 md 文档，包含安全事前、事中、事后需要做的策略，但这里有个前提：<br /><br />尽量不影响 OpenClaw 的日常使用，安全不要干扰用户体验，需要给这只🦞足够的自由。但是吧，江湖险恶，一只有 Root 权限且诞生才一个多月的🦞，安全不让人放心…<br /><br />于是，这份面向 OpenClaw 的极简安全实践指南诞生了，目前是 v2.7 版本，此前我们内测了许多版本，也踩了不少坑。现在公布出来，大家玩之前务必仔细看这份指南的 README⚠️：<br /><br />https://github.com/slowmist/openclaw-security-practice-guide<br /><br />注意里面的说法。我相信你会很有收获。里面还推荐了我们实测在 OpenClaw 场景下聪明的模型，如果你有自己的感受，一定要和我们反馈。<br /><br />一切都很新，一定有不完善的地方，请大家多指正！<br /><br />⚠️最后，务必认真阅读 README，也务必肉眼扫描下你将喂给你🦞的“OpenClaw极简安全实践指南.md”，相信我，会非常有意思。
+                    养废几条龙虾后，我总结了3条避坑心得<br /><br />最近最火的产品莫过于OpenClaw的养龙虾，我在春节期间也加入了养虾大军，每天研究龙虾能干点啥，踩了不少坑，也慢慢摸出了一些门道。<br /><br />今天想和大家分享几个我的养虾心得，希望能帮大家少走一些弯路。<br /><br />1.养虾第一件事：先找到使用场景再养虾<br /><br />我刚装上龙虾的时候特别兴奋，感觉新世界的大门在向我打开。<br /><br />玩了两天之后，我问朋友最多的一句话就是：龙虾到底能干点啥啊？我没感觉出来它比Claude Code和Codex强在哪。<br /><br />我带着问题去看了很多大家用龙虾的案例，这才意识到我觉得龙虾没什么用的原因，在于没有找到真正适合它的使用场景。<br /><br />龙虾对比CC和Codex，它的优势在于这两个地方：<br /><br />第一，它能够接入各种IM工具，比如飞书、企微、Telegram，然后随时通过聊天对话来调用，便捷性上比CC和Codex好太多。<br /><br />第二，它能主动触发任务，可以在龙虾上设置好定时任务，让AI从一个被动的工具，变成一个会持续参与日常流程的助手。<br /><br />于是我基于它的优势去构建了这两个使用场景。<br /><br />一个是飞书知识库助手。<br /><br />我把龙虾连上飞书，给它开通了云文档的权限，当我有一些零散想法的时候，我可以直接扔给它，它能帮我汇总记录到文档里。<br /><br />同时它还能帮我快速查找文档内容，可以和我一起讨论飞书文档里的信息。<br /><br />一个是跑定时任务。<br /><br />像每日AI资讯汇总这种场景，我会把对应的工作流封装进龙虾里，让它每天自动运行，整理好内容后再推送给我，我只需要打开飞书阅读就好了。<br /><br />2.工具选择：刚开始养虾，先用开箱即用的产品<br /><br />尽量先用Clawdy、Kimi Claw这类已经封装好的龙虾产品，用起来非常省心，不用折腾任何环境配置，上手就能跑，几分钟就能开始和龙虾对话。<br /><br />新手尽量不要尝试原版本地部署，很容易变成一直在查bug，却没有真正开始养虾。<br /><br />养虾一段时间后，如果觉得确实能带来价值，那可以去给自己的虾买个Mac Mini的窝，或者换到云服务器上。<br /><br />3.养虾到最后，拼的依旧是人的水平<br /><br />龙虾养成的底层能力，考验的还是人对需求的理解和流程标准化的洞察，核心还是要围绕自己的高频场景去做深，去构建自己的壁垒。<br /><br />AI时代技能是学不完的，AI出新产品的速度也远超过人的学习能力。<br /><br />今天火Cursor，明天火OpenClaw，后天又有新Agent出来。<br /><br />与其追着学习各种工具和技能，不如围绕自己的高频场景做深，把真正重要的事情想清楚、跑通，再持续优化。<br /><br />早一点用晚一点用龙虾都可以，最重要的是要想清楚：龙虾到底用来做什么。
                 ]]>
             </content:encoded>
         </item>
