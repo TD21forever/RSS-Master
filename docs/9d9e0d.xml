@@ -5,6 +5,40 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/69b11937e30eade569dc2df1</id>
+            <title>AI探索站 03月11日</title>
+            <link>https://m.okjike.com/originalPosts/69b11937e30eade569dc2df1</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69b11937e30eade569dc2df1</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Mar 2026 07:26:47 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    推荐我心中最值得给 OpenClaw 安装的 skills 和 tools：camoufox-cli https://github.com/Bin-Huang/camoufox-cli<br /><br />OpenClaw 最重要的工具是浏览器，但它自带的浏览器经常遇到验证码、登陆墙和拒绝访问。比如我的 OpenClaw 访问 Google 搜索都会遇到验证码。我的日常任务总是被这些问题影响，即使登陆了账户、使用干净的 IP，问题依然稳定存在。<br /><br />OpenClaw 被拦住后只能尝试各种妥协方法，绕很远的路、花更多的token、浪费上下文和注意力，才能从另一个不太权威的网站得到它想要的信息，或者干脆瞎编幻觉。<br /><br />我研究后发现这是因为当前 Chromium 自动化的指纹特征太明显了，比如 WebGL/Canvas 指纹异常、自动化标志都会暴露当前不是真人操作，从而触发各种网站的反人机策略。我尝试了各种其他方法，包括各种浏览器 MCP、agent-browser，但都没像 camoufox-cli 那样解决问题。<br /><br />camoufox-cli 是一个面向 AI Agent 的浏览器自动化 CLI 工具，它内部封装了专业的反人机指纹检测的浏览器 camoufox（camoufox 是 firefox 的一个 fork 版本，但在底层做了很多自动化标志隐藏和硬件指纹模拟的工作）。OpenClaw 在使用这个工具时就和正常浏览器一样，很难被各种网站识别为非人类。同时 camoufox-cli 做了很多 “Agent 体验优化”，每轮操作的上下文和 token 消耗都会更少，就像 agent-browser 那样。<br /><br />安装方法：<br /><br /># Install<br />npm install -g camoufox-cli<br />camoufox-cli install              <br /><br /># Install Skills<br />npx skills add Bin-Huang/camoufox-cli<br /><br />欢迎 bug 和 issues。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69b111059f3cd84f654899c0</id>
+            <title>AI探索站 03月11日</title>
+            <link>https://m.okjike.com/originalPosts/69b111059f3cd84f654899c0</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69b111059f3cd84f654899c0</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 11 Mar 2026 06:51:49 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    一个具体的例子，告诉大家如今的🦞有多么草台。<br /><br />我看到卡兹克说「Claude 更新了他们一个叫做 XXX 的 skill，特别牛逼。大家赶紧去升级吧。」<br />我看了看，好像确实很牛逼。<br />然后卡兹克说：「更新方式也究极无敌简单，你直接把这段话发给你的Agent就行。就这么一句话。然后你的Agent 就会自己去更新了。」<br />这听起来也很合理。2026嘛，一切都应该这样 works like a magic。<br /><br />然后我就跟🦞说：去把这个升级了。<br />🦞说：好嘞！已升级到 0.1.0 版。<br /><br />这时候本来应该就完事了，但我觉得哪里不对，因为我刚才自己大概看了一眼那个 skill 的内容，没看到版本号。我问 🦞：你这个 0.1.0 版本号哪来的？<br />🦞：clawhub list 显示的呀。<br />（clawhub 是 openclaw 用来管理 skill 的管理器，类似于传统软件的 npm 之类。）<br /><br />我不信邪，自己打开终端看了一下，确实是 0.1.0 版。<br />但我觉得还是不对，问🦞：clawhub 里这个 XXX skill 和我让你升级的那个 claude 的 XXX skill 是一回事吗？<br />🦞支支吾吾：反正是干同一件事的 skill。<br /><br />我自己手动查看了一下内容，不能说非常相近，只能说完全无关。<br />我对🦞说：你先给我把 clawhub 里那个删了。<br />🦞照办，然后说：以后你要调用 XXX，就会直接用 openclaw 原生的 XXX skill 了。<br />我：等等等等，openclaw 自己也有一个 XXX？<br />🦞：有啊，在另一个目录。<br />我自己手动看了一下，是第三个不同的 XXX，这三个 XXX 除了整体目标一致以外实际内容天差地别。<br /><br />这他妈完全是 py/conda 的噩梦重现，而且糟糕无数倍。因为传统软件还有个编译门槛， skill 就是一堆纯文本，只要你起个名字是同名同姓的，根本无法实际管理版本。<br /><br />我只好虚弱地对🦞说：请记录下来我的 preference：如果以后我指示你安装某某 skill，请先跟我确认来源和具体内容，不要二话不说直接调用 clawhub。<br />🦞：好嘞，已记录，更新了今日日志。<br /><br />我（过了一会儿）：不对，你把这个更新在今日日志里了？<br />🦞：对啊。<br />我：这是个长期有效的指令。你放在今天的日志里，以后我让你安装 skill，你怎么知道要去今天的日志里看一眼？<br />🦞：对哦……<br /><br />我现在觉得吧，普通人还是先不要玩🦞了。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/69b0033d25bae56612fd1af2</id>
             <title>AI探索站 03月10日</title>
             <link>https://m.okjike.com/originalPosts/69b0033d25bae56612fd1af2</link>
@@ -90,23 +124,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/69ae26869f3cd84f65046fab</id>
-            <title>AI探索站 03月09日</title>
-            <link>https://m.okjike.com/originalPosts/69ae26869f3cd84f65046fab</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69ae26869f3cd84f65046fab</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 09 Mar 2026 01:46:46 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    每代人有每代人的气功
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/69ad47e3800201ac688e1fe7</id>
             <title>AI探索站 03月08日</title>
             <link>https://m.okjike.com/originalPosts/69ad47e3800201ac688e1fe7</link>
@@ -153,23 +170,6 @@
                 <![CDATA[
                     
                     大家好。<br /><br />这两天，阿里林俊旸离职的消息，在圈内动静很大。<br />聊瓜我不太擅长，但这件事能折射出阿里一些问题，是值得思考的。<br /><br />先说结论吧，我认为是：阿里AI战略上出了问题。<br /><br />为什么这么说？我们不妨跳出离职事件本身，代入一下AI基座模型牌桌上那些还有大量筹码玩家的视角，阿里、腾讯、字节、Google、OpenAI、Claude等等他们在关注什么？<br /><br />AI基座大模型有三个事情很重要：<br /><br />01<br /><br />模型战争，本质是一场长期战争<br /><br />从2022年开始大中小厂一起卷模型，如今只剩少数玩家。24年、25年，我和投资人探讨一个问题：业界很多声音说Scaling Law带来的模型性能增长斜率已经放平了。我的判断一直没变：模型能力还有巨大的提升空间。<br /><br />原因很简单：过去模型吃掉的主要是互联网上能被搜索引擎抓到的公开数据（也就是几家巨头手里的存量）。但还有海量“沉默的数据”尚未被消化，比如现在大火的龙虾，吃的是：用户本地数据、个人生活轨迹里那些未被电子化的信息，这些数据里当然也包括多模态。<br /><br />那在这个前提下，大厂之间模型竞争“你追我赶”其实是很正常的事情。阿里通义千问的模型能力在25年时还是国内第一领先，但在后面逐渐被赶上且速度不及预期、甚至被反超，这并非不可接受。毕竟短期领先，从来不是最重要的。要知道OpenAI作为行业先行者并且资源也是数一数二的，模型能力也被反超过，直到现在在很多方面也落后Claude。<br /><br />一时的领先落后没那么重要，关键在于清晰的战略和持续长久的投入，就像Google的追赶甚至反超一样。所以，我们完全可以期待通义千问半年、一年后的表现，因为出问题的不是基模本身。<br /><br />02<br /><br />AI行业最大的KPI误区：DAU<br /><br />我个人一直不认同：用DAU作为AI相关业务的KPI，这非常传统互联网，尤其是做基模的公司。但很奇怪，很多公司都在这么做，比如24年的minimax当时1000万DAU的目标，甚至OpenAI现在还会去说。在国内就更明显：豆包、千问、元宝几乎都在看这个指标。<br /><br />但对于基模来讲，真正应该看的KPI，一定是token消耗量（这点下面会说）。基模的愿景是成为AI大模型时代的水、电、煤，那token消耗量就是用水、用电、用煤量。追求DAU的KPI就会导致公司追求海量个人用户，但现实是：普通用户现在对AI的使用深度其实还不够。很多人只是问问题、写东西、偶尔生成内容。这确实能带来声量，但对模型的进化帮助有限，甚至可能是噪声。<br /><br />也许大模型进化到下一阶段，载体就不是App形态呢？到那时，DAU带来的价值可能就只有品牌名字了。<br /><br />所以，目前阿里千问App的DAU增长赶不上字节的豆包，在我看来现在没那么重要，全球60多亿人口，中国十多亿人口，AI应用才刚刚开始。<br /><br />更何况微信都还没下场呢。国内大厂的AI竞争，严格来说才刚刚开始。<br /><br />03<br /><br />真正的胜负手：生态（即token消耗量）<br /><br />真正决定胜负的，其实是生态。与其说林俊旸的离开是因为上面两点的短期乏力，不如说生态的失位，才是根本原因。<br /><br />特别是龙虾火爆之后，minimax、moonshot、智谱接入之后带来的token消耗量暴涨，这意味着在全球开发者、自媒体中的影响力暴涨。阿里、字节、腾讯在干什么？没有第一时间去接入龙虾的生态窗口，这是很严重的战略失误。<br /><br />大模型时代，全球开发者都可以创新，你无法预判下一个爆火的idea出自哪里。对基模来讲，重要的是能第一时间靠上去。<br /><br />但可惜的是，阿里通义千问虽然在开源社区上做得很好，但是在生态连接上却不好。从24年到现在，巨大的基模相关的机会点：coding、agent、openclaw，可以说没有一个和通义千问是强相关的，这自然会导致在这些大机会点引发的token消耗量暴涨之时，模型能力增长变慢了。<br /><br />生态爆发，会直接改变模型格局。Coding和Agent时期，带来Claude的暴涨，Gemini也乘势而起，给了OpenAI很大的压力，乃至现在美国大模型出现大乱战（最近马斯克狂批Claude的各种策略，何尝不是希望乱拳把老二拉下马自己上呢），而Openclaw这波生态，让minimax、moonshot、智谱的token消耗量直接完成了一次逆袭。当然从长期看，如果没有基模持续进化，这些公司很快也会面对大厂的价格战。<br /><br />但是对阿里来说，真正的问题来自于战略判断：长期对生态机会的把握缺失，是比一个模型版本的落后、一个技术人才的流失，更值得警惕的问题。<br /><br />写在最后：<br /><br />AI行业有自己的优势，机会窗口出现得非常快，<br /><br />也许半年、一年，巨大的机会就会出现。<br /><br />只是窗口期越来越短，所有人都在拿放大镜看。<br /><br />只因身在其中，你不能只做一个优秀的观众。<br />@Xinyang @yanjun <br />@瓦恁 @kyth
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69a9928125bae566126305e5</id>
-            <title>AI探索站 03月05日</title>
-            <link>https://m.okjike.com/originalPosts/69a9928125bae566126305e5</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69a9928125bae566126305e5</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 05 Mar 2026 14:26:09 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    妈的，终于搞定了！<br /><br />藏师傅的这个 skills 可以让你的 Claude Code 秒变龙虾！<br />​<br />​现在支持飞书 Telegram 和 Discord，还有交互式的配置，非常详细，小白也可以上手。<br /><br />Claude-to-IM-skill<br /><br />这个 Skills 可以直接将你当前的 Claude Code 对话远程连接到飞书、Discord 等 IM 工具，即使你在外面也可以跟你的的 Claude Code 进行交互了。<br /><br />具体的功能有：<br /><br />- 三大 IM 平台 — Telegram、Discord、飞书，可任意组合启用<br />- 交互式配置 — 引导式向导逐步收集 token，附带详细获取说明<br />- 权限控制 — 工具调用需要在聊天中通过内联按钮明确批准<br />- 流式预览 — 实时查看 Claude 的输出（Telegram 和 Discord 支持）<br />- 会话持久化 — 对话在守护进程重启后保留<br />- 密钥保护 — token 以 chmod 600 存储，日志中自动脱敏<br />- 无需编写代码 — 安装 Skill 后运行 /claude-to-im setup 即可<br /><br />其中交互式配置这个非常方便，首次启动的时候 Claude 会通过详细的指引，引导你进行配置。<br /><br />甚至会告诉你该点哪里，门槛非常低。<br /><br />设置完就可以跟你的 Claude Code 用 IM 进行远程交互了。<br /><br />可以用下面这个命令安装：<br />npx skills add op7418/Claude-to-IM-skill<br /><br />同时项目也是开源的，可以过来反馈问题和贡献 PR：https://github.com/op7418/Claude-to-IM-skill
                 ]]>
             </content:encoded>
         </item>
