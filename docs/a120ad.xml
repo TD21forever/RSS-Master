@@ -5,6 +5,416 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2026/03/weekly-issue-388.html</id>
+            <title>科技爱好者周刊（第 388 期）：测试是新的护城河</title>
+            <link>http://www.ruanyifeng.com/blog/2026/03/weekly-issue-388.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2026/03/weekly-issue-388.html</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 13 Mar 2026 07:59:16 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
+<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/9088">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
+
+<h2>封面图</h2>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030804.webp" title="" /></p>
+
+<p>重庆涪陵某景区架设了世界首座"巨石索桥"，桥面就是一块块巨石，一不小心就会踏空。（<a href="https://www.cbg.cn/a/77561/20260214/7b37135efeb74f0fbbaf272a9b7f6ae0.html">via</a>）</p>
+
+<h2>测试是新的护城河</h2>
+
+<p><a href="https://nextjs.org">Next.js</a> 是目前排名第一的 JS 框架。平时遇到的 JS 全栈应用，我估计，一半用它开发。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026022808.webp" title="" /></p>
+
+<p>两周前，这个框架被一则新闻颠覆了。</p>
+
+<p>一个 Cloudflare 工程师<a href="https://blog.cloudflare.com/vinext/">宣布</a>，<strong>他只用一个星期就用 AI 重新实现了 Next.js</strong>，起名为 <a href="https://vinext.io/">vinext</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026022809.webp" title="" /></p>
+
+<p>事实上，一天就生成产品原型了，后面几天只是在完善。</p>
+
+<blockquote>
+  <p>"真正动手是2月13日，当天晚上，基本功能已经实现。第二天下午，11个路由器做好了10个。第三天，已经部署到我们的服务器，实现了完整的客户端水合。</p>
+
+<p>接下来的几天，主要进行安全加固：修复极端情况，扩展测试套件，提升 API 覆盖率至 94%。"</p>
+</blockquote>
+
+<p>这个新的实现，比原版 Next.js 性能更好。</p>
+
+<blockquote>
+  <p>"早期基准测试中，构建速度提升了4倍，客户端软件包的体积缩小了57%，生产环境的 Next.js 应用已经直接跑在上面了。" </p>
+</blockquote>
+
+<p>这个 vinext 的<a href="https://github.com/cloudflare/vinext">代码</a>已经放出来了。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026022810.webp" title="" /></p>
+
+<p>我觉得，<strong>这件事对 Next.js 的打击非常大</strong>。</p>
+
+<p>Next.js 是 Vercel 公司的产品，背后有一个大型开发团队，每年都是巨额投入，已经整整做了10年。虽然是开源软件，但是企业版、云服务、插件、皮肤都要收费，去年的年收入达到2亿美元。</p>
+
+<p><strong>这种看似难以逾越的护城河，在 AI 面前不堪一击</strong>。一个工程师用了一个星期，就复刻了大团队十年的工作成果，现有的网页应用不改一行代码，放上去就能跑，原版的每个功能都支持。</p>
+
+<p>你知道花了多少钱？Token 费用仅仅为 1100 美元！</p>
+
+<p>这叫 Vercel 怎么再向 Next.js 的开发投钱，客户又怎么愿意再为某个功能付出高昂的使用费。</p>
+
+<p>推而广之，所有的商业软件都受到了重创。<strong>代码的护城河不存在了，只要投入一小笔金钱，AI 就能复刻出大型软件。</strong></p>
+
+<p>那么，为了保护自己，软件公司下一步肯定要防止 AI 复刻。</p>
+
+<p>怎么防呢？<strong>关键就是测试用例</strong>。</p>
+
+<p>Cloudflare 工程师这一次能够复刻成功，主要原因是 Next.js 有完备的文档、庞大的社区文章、以及完整的测试用例。AI 模拟的每一个 API，只要能够通过原有的接口测试，就能确认百分百兼容。</p>
+
+<p>如果拿不到测试用例，谁知道代码行为是否一致，谁敢放到生产环境运行。</p>
+
+<p>可以想象，为了防止复刻，大型软件项目一定会保护自己的测试用例。<strong>测试才是新的护城河。</strong></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030601.webp" title="" /></p>
+
+<p>世界最流行的数据库 <a href="https://sqlite.org">SQLite</a>，本身代码15.6万行，但是测试用例<a href="https://sqlite.org/testing.html">9205万行</a>，足足大了590倍！</p>
+
+<p>其中，最核心的测试套件 <a href="https://sqlite.org/th3.html">TH3</a> 是闭源的，不公开，主要测试航空、医疗等关键行业的极端情况和边缘案例，属于核心技术资产。正是这些保密用例，才让 SQLite 难以复刻。</p>
+
+<p>无独有偶，就在前两天，另一个开源项目 <a href="https://github.com/tldraw/tldraw/issues/8082">tldraw</a> 也准备将测试用例闭源。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026022811.webp" title="" /></p>
+
+<p>说实话，保密的测试用例肯定不利于开源项目的发展，但是开发者需要保护自己的利益。在日益强大的 AI 面前，越来越多的软件可能会选择这样做。</p>
+
+<h2>AI 复刻的版权问题</h2>
+
+<p>AI 复刻软件还有一个版权问题，也引起了<a href="https://tuananh.net/2026/03/05/relicensing-with-ai-assisted-rewrite/">很大争议</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030602.webp" title="" /></p>
+
+<p>Next.js 是最宽松的 MIT 许可证，所以复刻没有版权问题。但是，有人复刻了一个叫做 <a href="https://github.com/chardet/chardet">chardet</a> 的项目，就争议巨大。</p>
+
+<p>chardet 本来采用的许可证，是限制较多的 LGPL，复刻以后改成了 MIT 许可证，引发了原始作者的抗议。</p>
+
+<p>网上的意见也分成了两派。</p>
+
+<p>支持者说，AI 只复刻了功能和接口，代码完全不一样，当然可以更改许可证。</p>
+
+<p>反对者说，GPL 规定了，所有衍生作品都不能更改许可证，AI 复刻就属于衍生。</p>
+
+<p>更麻烦的是，美国法律规定，AI 生成产物无版权，属于公共领域。这意味着，<strong>AI 复刻的软件不能设置许可证，设置了无效。</strong></p>
+
+<p>按照这条法律，软件许可证就意义不大了。管你是什么许可证，任何人 AI 复刻一下就能规避，AI 实现的版本一律没有版权。</p>
+
+<h2>科技动态</h2>
+
+<p>1、<a href="https://decrypt.co/360183/roblox-using-ai-rewrite-chat-swears-slurs-real-time">AI 改写脏话</a></p>
+
+<p>游戏平台 Roblox <a href="https://ir.roblox.com/news/news-details/2026/Roblox-Launches-Real-Time-Chat-Rephrasing-to-Maintain-Civility-and-Gameplay-Flow/default.aspx">宣布</a>，将用 AI 实时修改玩家的对话，让其变得更文明。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030701.webp" title="" /></p>
+
+<p>以前，如果玩家在游戏里面骂脏话，系统只会将其过滤，显示为 <code>####</code>，你还是知道他在骂人。</p>
+
+<p>现在，AI 将重新修改整个句子，让表达变得更礼貌、更文明，你就察觉不到对方在骂人。</p>
+
+<p>虽然这样未免有点虚假，但确实有必要。网络论坛也应该跟进，不要让人身攻击毁掉交流氛围。</p>
+
+<p>2、<a href="https://www.esa.int/Applications/Connectivity_and_Secure_Communications/World-first_gigabit-per-second_laser_link_between_aircraft_and_geostationary_satellite">飞机的激光上网</a></p>
+
+<p>欧洲航天局成功进行了飞机的"激光上网"实验，通过激光将一架飞机与一颗卫星连接，实现了高速通信。 </p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030704.webp" title="" /></p>
+
+<p>飞机上网现在都通过无线电波，比如星链就通过无线电，让飞机连接卫星。本次实验则是通过激光连接卫星。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030705.webp" title="" /></p>
+
+<p>上图就是安装在飞机舷窗上的激光终端。</p>
+
+<p>激光通信的优点是带宽大，不受无线频谱的限制，这次实验的上网速度达到了 2.6Gbps，是星链的8到10倍。</p>
+
+<p>缺点是激光与卫星之间必须保持直线，不能有云层和大气的障碍物。所以采用这种方式，大概只有飞到高空时才能上网。</p>
+
+<p>3、<a href="https://www.theverge.com/ai-artificial-intelligence/890921/grammarly-ai-expert-reviews">Grammarly 的专家意见</a></p>
+
+<p>Grammarly 是一个写作服务，提供一个收费功能"专家意见"，让专家点评你的文章。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031002.webp" title="" /></p>
+
+<p>一个国外用户使用该功能时，震惊地发现，点评专家里面有他的前老板（下图），但是他知道老板已经去世了。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031003.webp" title="" /></p>
+
+<p>原来这不是真人点评，而是 AI 为每个专家建了一个分身，用他们各自的文章进行训练，然后让分身点评你的文章。</p>
+
+<p>这引起了争议，我们是否有权搭建别人的"数字分身"，然后冠以原始人物的名义（比如"孔子分身"或者"爱因斯坦分身"）？</p>
+
+<p>4、<a href="https://www.bbc.com/news/articles/cgln72rgrero">太阳能邮筒</a></p>
+
+<p>网络通信普及以后，传统的邮筒怎么办？</p>
+
+<p>英国皇家邮政想出一个办法，将英国各地3500个邮筒，变为"太阳能邮筒"。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110505.webp" title="" /></p>
+
+<p>邮筒顶部加装了太阳能光伏片，功能也从寄信，变成了收寄小包裹。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110506.webp" title="" /></p>
+
+<p>这样既保存了传统的红色邮筒，成为街道的景观，又为人们邮寄包裹提供了方便。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202511/bg2025110507.webp" title="" /></p>
+
+<h2>文章</h2>
+
+<p>1、<a href="https://grith.ai/blog/clinejection-when-your-ai-tool-installs-another">GitHub Issue 标题的注入攻击</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030703.webp" title="" /></p>
+
+<p>这可能是第一起 AI 模型注入的真实攻击。Cline 项目使用 AI 对 GitHub Issue 进行分类，有人就在标题插入恶意提示词，从而成功拿到 npm 令牌，发布了一个恶意版本。本文告诉你这是怎么做到的。</p>
+
+<p>2、<a href="https://www.infoq.com/news/2026/03/agents-context-file-value-review/">重新评估 AGENTS.md</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030901.webp" title="" /></p>
+
+<p>最近的一项研究提出，跟推荐做法相反，AGENTS.md 文件对 AI 编码不是促进，而是阻碍。</p>
+
+<p>它只是让模型"思考"得更多（成本上升），生成结果却没有更好（性能下降）。</p>
+
+<p>3、<a href="https://bloomberg.github.io/js-blog/post/temporal/">Temporal API 的九年历程</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031205.webp" title="" /></p>
+
+<p>本周，Temporal API 正式通过了第四阶段。这意味着，它进入了 ES2026 标准，成为了 JavaScript 语法的一部分。本文是这个标准的起草者对九年推进历程的回顾。</p>
+
+<p>4、<a href="https://decrypt.co/360596/benchmark-test-measures-ai-bullshit-most-models-fail">AI 的胡说测试</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031206.webp" title="" /></p>
+
+<p>国外有一个 <a href="https://petergpt.github.io/bullshit-benchmark/viewer/index.v2.html">BuillshitBench</a>，专门问 AI 一些胡说八道的问题，看 AI 能不能分辨这是胡说，还是一本正经地回答。</p>
+
+<p>5、<a href="https://www.zolkos.com/2025/12/03/vanilla-css-is-all-you-need">原生 CSS 就足够了</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202512/bg2025120704.webp" title="" /></p>
+
+<p>本文展示了 37Signals 公司的 CSS 代码，表明不使用任何框架（比如 Tailwind）和构建工具（比如 Sass），只用原生 CSS 代码完全可以。</p>
+
+<p>6、<a href="https://theconversation.com/physics-of-poo-why-it-takes-you-and-an-elephant-the-same-amount-of-time-76696">粪便物理学</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030802.webp" title="" /></p>
+
+<p>一篇很另类的科普文章，解释为什么动物不管大小，排便时间都在5～19秒之间，平均12秒。</p>
+
+<h2>工具</h2>
+
+<p>1、<a href="https://github.com/c0m4r/kula">KULA</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030706.webp" title="" /></p>
+
+<p>Linux 服务器的监控工具，只有一个二进制文件。</p>
+
+<p>2、<a href="https://github.com/lardissone/ansi-saver">AnsiSaver</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030803.webp" title="" /></p>
+
+<p>mac 电脑的屏保程序，用彩色的 Ansi 字符画作为屏保图案。</p>
+
+<p>3、<a href="https://github.com/eliasdorneles/upiano">upiano</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202308/bg2023081012.webp" title="" /></p>
+
+<p>在命令行下模拟钢琴弹奏。</p>
+
+<p>4、<a href="https://github.com/bostrot/wsl2-distro-manager">WSL Distro Manager</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031207.webp" title="" /></p>
+
+<p>一个开源 Windows 应用，通过图形界面管理 Windows Subsystem for Linux（WSL）发行版。</p>
+
+<p>5、<a href="https://github.com/tw93/Mole">Mole</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031213.webp" title="" /></p>
+
+<p>开源的 Mac 电脑清理和优化工具。</p>
+
+<p>6、<a href="https://github.com/janbjorge/pipegate">PipeGate</a></p>
+
+<p>一个将内网服务映射到外网的隧道工具，特点是比较简单，就是几个 Python 脚本，并且可以设置 UUID 客户端认证。</p>
+
+<p>7、<a href="https://www.hooklistener.com">HookListener</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202412/bg2024121804.webp" title="" /></p>
+
+<p>一个管理、测试 Webhook 的在线工具，个人可以免费使用。</p>
+
+<p>8、<a href="https://github.com/suzuran0y/CCTV-Smartphone-AI-Monitoring">Sentinel</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031201.webp" title="" /></p>
+
+<p>将安卓手机转化为网络摄像头，实现实时监控和图像采集。（<a href="https://github.com/ruanyf/weekly/issues/9201">@suzuran0</a> 投稿）</p>
+
+<p>9、<a href="https://github.com/chentao1006/FluxMonitor">Flux Monitor</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031203.webp" title="" /></p>
+
+<p>Mac 电脑的系统监控、管理面板。（<a href="https://github.com/ruanyf/weekly/issues/9207">@chentao1006</a> 投稿）</p>
+
+<h2>AI 相关</h2>
+
+<p>1、<a href="https://github.com/MrQianjinsi/agentic-metric">Agentic Metric</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030603.webp" title="" /></p>
+
+<p>一个 Python 命令行工具，监控本地各种 coding agent（比如 Claude Code、Codex、OpenCode）的使用量。（<a href="https://github.com/ruanyf/weekly/issues/9165">@MrQianjinsi</a> 投稿）</p>
+
+<p>2、<a href="https://github.com/chenhg5/cc-connect">cc-connect</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031202.webp" title="" /></p>
+
+<p>一个开源的连接器，将各种 AI 编程工具与手机聊天软件相连。（<a href="https://github.com/ruanyf/weekly/issues/9202">@chenhg5</a> 投稿）</p>
+
+<p>3、<a href="https://github.com/alibaba/page-agent">Page Agent</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030702.webp" title="" /></p>
+
+<p>只要在网页插入这个 JS 库，就可以使用自然语言操作页面，比如"点击导航栏的文档链接，总结其内容"。</p>
+
+<p>4、<a href="https://github.com/eugene1g/agent-safehouse">Agent Safehouse</a></p>
+
+<p>一个 macOS 沙箱工具，用来在沙箱里运行 AI 编程工具。</p>
+
+<p>5、<a href="https://github.com/qwibitai/nanoclaw/tree/main/repo-tokens">Repo Tokens</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026022801.webp" title="" /></p>
+
+<p>一个 GitHub Action，为你的仓库添加一个图形标签（上图），显示该仓库相当于多少 Token，用来大模型的计算量。</p>
+
+<h2>资源</h2>
+
+<p>1、<a href="https://www.worldmonitor.app">世界监控</a>（World Monitor）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026030801.webp" title="" /></p>
+
+<p>世界局势的一个实时看板，把各种消息源都放在一个网页里。</p>
+
+<p>2、<a href="https://fuelingcuriosity.com/game.html">炼油厂探索</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031204.webp" title="" /></p>
+
+<p>一个动画互动网站，展示炼油厂怎样将石油变成汽柴油。</p>
+
+<p>3、<a href="https://mechanical-pencil.com">Mechanical Pencil</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031001.webp" title="" /></p>
+
+<p>弹簧笔、打火机等生活小物品的机械装置动画。</p>
+
+<h2>图片</h2>
+
+<p>1、<a href="https://tesseral.com/blog/i-designed-some-more-user-friendly-methods-for-multi-factor-authentication">密码的替代方法</a></p>
+
+<p>一位程序员发明了一种新的密码方法，你觉得可行吗？</p>
+
+<p>系统向用户展示一副扑克牌，让其从52张牌中依次挑出5张，作为密码。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025073110.webp" title="" /></p>
+
+<p>下次登录时，用户必须按同样顺序挑出同样的5张牌。</p>
+
+<h2>文摘</h2>
+
+<p>1、<a href="https://news.ycombinator.com/item?id=31670526">复杂社会的崩溃</a></p>
+
+<p>我们都知道，一个软件的复杂度不断上升，超过某个极限后，就会难以维护，最后往往被放弃。</p>
+
+<p>美国历史学家约瑟夫·坦特（Joseph Tainter）认为，人类社会也是如此。如果社会的复杂度超过极限，这个社会最终也会崩溃。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031214.webp" title="" /></p>
+
+<p>1988年，他出版了一本名为《复杂社会的崩溃》的书，描述了罗马人、玛雅人和查科人等伟大文明的兴衰，试图回答几个世纪以来一直困扰着思想家的一个问题：<strong>为什么强大的社会会崩溃？</strong></p>
+
+<p>他认为，原因是这些社会有一个敌人----复杂性。</p>
+
+<p>随着文明的发展，社会增加了越来越多的复杂性：更多的等级制度、更多的官僚机构、更深层次的社会结构。</p>
+
+<p>一开始，新的等级、官僚、组织都是有用的，比如可以增加经济产出、税收等。但到了某个时刻，收益递减规律开始出现，每增加一点复杂度带来的回报越来越少，直至变成零甚至负数。</p>
+
+<p>（1）法律条文和官僚越多，政府开销也就随之上升，长期很可能令社会无法负担。</p>
+
+<p>（2）复杂度变大，会增加社会的不平等，因为能理解所有规则的人就越少，你就越离不开律师。懂规则的人会比其他人占优势。</p>
+
+<p>（3）规则越多，维护和执行这些规则的机构也就越多，不利于社会提高效率。</p>
+
+<p>（4）复杂性最终导致社会各阶层的差距变大，对立也随之而来。</p>
+
+<p>以上因素的共同作用，导致历史上很多强大的社会最终崩溃。</p>
+
+<h2>言论</h2>
+
+<p>1、</p>
+
+<p>2021年，我感觉做一名优秀的软件工程师棒极了。软件行业蓬勃发展，机会很多，我热爱这份工作，觉得可以永远做下去。</p>
+
+<p>2026年，我已经不确定软件行业十年后会怎样，即使还存在，必定与现在极不相同。我也许能找到出路，也许不得不离开这个行业。无论如何，我热爱的软件工作即将消失。</p>
+
+<p>-- <a href="https://www.seangoedecke.com/will-my-job-still-exist/">《我不知道十年后我的工作是否还存在》</a></p>
+
+<p>2、</p>
+
+<p>与强大的 AI 对抗会是什么感觉？</p>
+
+<p>你会感觉自己莫名其妙地弱了不少，AI 做的每件事都超出你的预期。</p>
+
+<p>这就好像你和一位实力强劲的玩家玩一款随机性很强的游戏，你会感觉这位高手总是运气爆棚。</p>
+
+<p>-- <a href="https://probablydance.com/2026/03/07/im-getting-a-whiff-of-iain-banks-culture/">probablydance.com</a></p>
+
+<p>3、</p>
+
+<p>阅读商战书籍是浪费时间。它们将简单的故事变成通用的建议，将偶然的成功转化为普遍的策略，并用激励人心的口号取代复杂的市场。</p>
+
+<p>这些书的成功并不是因为内容正确，而是因为易于阅读并且让读者感觉良好。</p>
+
+<p>-- <a href="https://antemedian.substack.com/p/why-reading-business-books-is-a-waste">《阅读商战书籍是浪费时间》</a></p>
+
+<p>4、</p>
+
+<p>我想让 AI 告诉我怎么使用一种全新的、AI 也不会用的工具，就会提示 AI "执行 xxx-tool --help 来了解该工具"（假定工具名字是 xxx-tool），然后 AI 就学会用了。</p>
+
+<p>-- <a href="https://simonwillison.net/2026/Mar/9/not-so-boring/">Simon Willison</a>，著名开发者</p>
+
+<p>5、</p>
+
+<p>时间是唯一不可再生的资源。AI 大模型是目前我所知的最便宜的赚取额外时间的方式。</p>
+
+<p>-- <a href="https://steipete.me/posts/2025/stop-overthinking-ai-subscriptions">《不要太看重 AI 大模型的订阅费》</a></p>
+
+<h2>往年回顾</h2>
+
+<p><a href="https://www.ruanyifeng.com/blog/2025/03/weekly-issue-341.html">低代码编程，恐怕不会成功</a>（#341）</p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2024/03/weekly-issue-291.html">AI 没有护城河</a>（#291）</p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2023/02/weekly-issue-241.html">中国的增长动力在内陆</a>（#241）</p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2022/01/weekly-issue-191.html">一个程序员的财务独立之路</a>（#191）</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2026-03-13T07:59:16+08:00">2026年3月13日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2026/03/arkclaw.html</id>
             <title>零安装的"云养虾"：ArkClaw 使用指南</title>
             <link>http://www.ruanyifeng.com/blog/2026/03/arkclaw.html</link>
@@ -1610,250 +2020,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2026-02-13T02:34:10+08:00">2026年2月13日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2026/02/glm-5.html</id>
-            <title>智谱旗舰 GLM-5 实测：对比 Opus 4.6 和 GPT-5.3-Codex</title>
-            <link>http://www.ruanyifeng.com/blog/2026/02/glm-5.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2026/02/glm-5.html</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 12 Feb 2026 09:26:13 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <h2>一、引言</h2>
-
-<p>刚才我看到，智谱新一代的旗舰模型 <a href="https://mp.weixin.qq.com/s/MVo6DIcGNje_YtLgVa4PaQ">GLM-5</a> 已经正式发布了。</p>
-<p>真的拼啊，非要赶在长假之前，上一个版本 GLM-4.7 发布还不到两个月呢......</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021001.webp" title="" /></p>
-
-<p>GLM-4.x 在国内外评价很高，公认是编程领域第一梯队的模型。新的大版本就让人很好奇，会有哪些改进。</p>
-
-<p>实话实说，上个星期，他们团队联系我参与内测，我已经使用这个模型好几天了。</p>
-
-<p>巧的是，也在上个星期，国外两个旗舰模型同时发了新版本：Anthropic 公司发了 Claude Opus 4.6，OpenAI 公司发了 GPT-5.3-Codex。</p>
-
-<p>这三个新模型都主打编程，我就忍不住进行了比较测试，看看它们有没有差别，我想这也是很多人感兴趣的。</p>
-
-<p>下面就是真实编程任务，在这三个 AI 模型上的生成结果。</p>
-
-<h2>二、GLM-5 简介</h2>
-
-<p>官方的发布说明，这样介绍 GLM-5：<strong>作为开源模型，GLM-5 完全对标顶尖闭源模型</strong>，在两个地方做了特别强化。</p>
-
-<p><strong>（1）复杂系统工程</strong></p>
-
-<p>GLM-5 不单善于生成前端网页，更善于处理后端任务、系统重构、深度调试，摒弃了"重前端审美、轻底层逻辑"的模式。</p>
-
-<blockquote>
-  <p>它具备极强的自我反思与纠错机制，能在编译失败或运行报错时，自主分析日志、定位根因并迭代修复，直到系统跑通。</p>
-</blockquote>
-
-<p><strong>（2）长程 Agent</strong></p>
-
-<p>它能够跑长程任务，即多阶段、长步骤的复杂任务，可以自主拆分需求，自动化连续运行长达数小时，并保持上下文连贯与目标一致性。</p>
-
-<p><strong>（3）小结</strong></p>
-
-<p>GLM-5 可以完成的任务，已经超越了生成前端 UI，而是可以<strong>生成系统级大型复杂项目</strong>，比如操作系统内核、浏览器内核、V8 引擎之类的。</p>
-
-<p>它的宣传语是"在大模型进入 Agent、大任务的时代，GLM-5 是你可以使用的开源选择。"</p>
-
-<h2>三、测试方法</h2>
-
-<p>我选择的测试题目，是 HuggingFace 公司的布道师亚历杭德罗·奥（Alejandro AO）测试 Opus 4.6 和 GPT 5.3 的题目。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021002.webp" title="" /></p>
-
-<p>他拍了一个<a href="https://www.youtube.com/watch?v=c31Ow23mErE">视频</a>，展示这两个模型的表现。</p>
-
-<p>我就拿同样的题目去测 GLM-5，再跟他的结果进行对比。</p>
-
-<p>一共四道题，前端和后端的都有。我已经把原始的提示词和原始脚本，做成了一个仓库，放到了 <a href="https://github.com/ruanyf/ai-test-case">GitHub</a>。</p>
-
-<h2>四、网页设计测试</h2>
-
-<p>第一个测试是网页设计和重构能力。</p>
-
-<p>原始页面非常简陋。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021003.webp" title="" /></p>
-
-<p>它只是把信息做了分类，然后堆叠在一起，我们让 AI 对这个网页进行重新设计，让它变得美观易用，透露出成熟可靠的专业感。</p>
-
-<p>前面说了，提示词和原始文件都在 <a href="https://github.com/ruanyf/ai-test-case">GitHub</a>，这里不重复贴了。大家可以拿来自己跑，也可以让其他模型跑。</p>
-
-<p>下面就是 GLM-5 的生成结果。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021004.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021005.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021006.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021007.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021008.webp" title="" /></p>
-
-<p>这个结果称得上美观又专业，所有信息组织得井井有条，而且带有动画效果，手机浏览（下图）也没有问题，简直可以直接上线。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021009.webp" title="" /></p>
-
-<p>我把这个页面发布出来了，大家可以<a href="https://f187q1hvnf51-d.space.z.ai">点击这里</a>去看。</p>
-
-<p>下面是 Opus 4.6 的生成结果，从视频截图的。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021013.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021011.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021012.webp" title="" /></p>
-
-<p>下面是 GPT-5.3 的生成结果。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021014.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021015.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021016.webp" title="" /></p>
-
-<p>这三个设计都是可用的，但是 GPT-5.3 有一个瑕疵（页眉没做成粘性页眉，往下拉就没了），而且在设计上也不如另外两者好看。</p>
-
-<p>所以，在这个测试中，GLM-5 和 Opus 4.6 表现更好，至于哪一个更出色，要看使用者的审美偏好。我个人更喜欢 GLM-5 的设计风格。</p>
-
-<h2>五、3D 沙盒测试</h2>
-
-<p>第二个测试看看 AI 模型的 3D 动画生成能力。</p>
-
-<p>要求是生成一个教育目的的网页 3D 沙盒，用动画展示太阳系的天体运动，并且能够调整质量、位置、速度等动画参数，还能手动增加新的天体。</p>
-
-<p>下面是 GLM-5 的生成结果。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021018.webp" title="" /></p>
-
-<p>页面的右侧是动画区，默认展示三个小行星围绕中间的恒星进行轨道运动，可以用鼠标拖拽进行360度旋状，以及放大和缩小。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021019.webp" title="" /></p>
-
-<p>页面的左侧是操控面板，做得挺不错。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021020.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021021.webp" title="" /></p>
-
-<p>上半部分可以调节动画和天体参数，下半部分用来增加新的天体，或者删除现有天体。</p>
-
-<p>作为比较，Opus 4.6 的生成结果。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021022.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021023.webp" title="" /></p>
-
-<p>GPT-5.3 的生成结果。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021024.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021025.webp" title="" /></p>
-
-<p>这三个生成结果，都满足了需求，都可以顺利运行。但是，GLM-5 的动画缺了引力网格线，而 GPT-5.3 的网格线太凌乱，因此动画效果方面 Opus 4.6 更好一些。</p>
-
-<p>操控面板方面，GLM-5 和 Opus 4.6 都设计得不错，GPT-5.3 有点简单。</p>
-
-<p>总体上，我感觉这一轮的最佳选手是 Opus 4.6，其次是 GLM-5，最后是 Codex 5.3。</p>
-
-<h2>六、网页游戏</h2>
-
-<p>第三个测试是生成一个网页游戏"愤怒的小鸟"（angry birds）。</p>
-
-<p>GLM-5 的生成结果还可以，挺像原作的，可以玩，但是游戏性不足，弹跳效果不够好。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021026.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021027.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021028.webp" title="" /></p>
-
-<p>Opus 4.6 的还原度很高，游戏体验也接近原作。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021029.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021030.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021031.webp" title="" /></p>
-
-<p>GPT-5.3 的生成结果令人尴尬，小鸟根本弹不出去，游戏不能玩。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021033.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021034.webp" title="" /></p>
-
-<p>这一轮很明显，Opus 4.6 最佳，GLM-5 其次。</p>
-
-<h2>七、Laravel 转为 Next.js</h2>
-
-<p>最后一个测试是，将一个基于 PHP 语言 <a href="https://github.com/ruanyf/ai-test-case/tree/main/case04/starter">Laravel 框架的 Web 应用</a>，转为 JavaScript 语言 Next.js 框架。</p>
-
-<p>GLM-5 在处理时，几乎没有出现任何麻烦，很快就将 PHP 语言转成了 JS 语言，并且给出了转换后的代码结构。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021035.webp" title="" /></p>
-
-<p>它还在转化后，贴心地自动安装了依赖的软件包，做好了脚本编译，提示用户：你只要接入外部 API，一键执行<code>npm run dev</code>就能直接运行了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021036.webp" title="" /></p>
-
-<p>我按照它的提示，运行很顺利，没有报错，打开<code>localhost:3000</code>就能访问应用了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021037.webp" title="" /></p>
-
-<p>这是一个查看城市天气的应用。因为没有要求改变样式，所以看上去跟 PHP 原版一模一样。</p>
-
-<p>右上角输入框，可以查询城市。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021038.webp" title="" /></p>
-
-<p>在查询结果中，选中你所要的城市。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021039.webp" title="" /></p>
-
-<p>点击进去，就是城市的详情页，有天气、日出日落时间、空气质量、地图等信息。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021040.webp" title="" /></p>
-
-<p>Opus 4.6 和 GPT-5.3 也生成了同样的结果，因为页面、功能完全一样，就不展示截图了。</p>
-
-<p>值得一提的是，GLM-5 和 GPT-5.3 的转换时间都在5分钟左右，Opus 4.6 似乎遇到了一点问题，花费了整整20分钟。</p>
-
-<p>这一轮单看结果，三个模型都很好，但是 GLM-5 花费的生成时间短，没有任何报错，全过程的用户体验好，我愿意投它一票。</p>
-
-<h2>八、总结</h2>
-
-<p>经过这些测试，GLM-5 的编程表现可圈可点，是拿得出手的，能够跟国外最新的旗舰模型放在一起。某些方面甚至还能赢出，即使不如人家的地方，往往也是细节问题，不是质的差别。</p>
-
-<p>它听说在训练和运行过程中，都使用了国产的"万卡集群"。可以想象，如果得到更多的卡、更多的算力，它的表现会更好，足以跟世界第一梯队的大模型公司正面 PK。</p>
-
-<p>另外，它这次特别强化的两个点----"复杂系统"和"长程任务"----是有感的。</p>
-
-<p>它生成的系统逻辑和后端代码，可靠性不错，无论是生成时还是运行时，报错都不多。缺失的地方往往就是一些功能的缺失，后期让 AI 再补上就可以了，不是架构出问题。另外，我有一项个人任务，它跑了足足两个小时，最后也完成了，没有乱掉。</p>
-
-<p>我愿意把官方的一段话，作为结尾。</p>
-
-<blockquote>
-  <p>2026年编程大模型正在从"能写代码"进阶为"能构建系统"，而 GLM-5 堪称开源界的"系统架构师"模型，从关注"前端审美"转向关注"Agentic深度/系统工程能力"，是 Opus 4.6 与 GPT-5.3 的国产开源平替。</p>
-</blockquote>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2026-02-12T09:26:13+08:00">2026年2月12日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
