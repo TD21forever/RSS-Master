@@ -5,6 +5,40 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/69be7afe5eaa6496f0485eff</id>
+            <title>AI探索站 03月21日</title>
+            <link>https://m.okjike.com/originalPosts/69be7afe5eaa6496f0485eff</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69be7afe5eaa6496f0485eff</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 21 Mar 2026 11:03:26 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    我现在的 OpenClaw 用法：<br />一次性任务→OpenClaw 直接跑<br />高重复任务→指挥 OpenClaw 创建一个 n8n Workflow 来跑<br />两者也可以互相转化，比如你有个一次性任务跑通了之后想重复，可以让 OpenClaw 在 n8n 里严格按照刚刚跑通的业务逻辑制作一个 Workflow。<br />OpenClaw 现在有完整的 n8n 技能和 MCP，操作 n8n 非常方便。<br />有人问我为什么都用 OpenClaw 了，不让它自己写个脚本定时执行呢？因为我不会代码，没法替它 debug。<br />但 n8n 就不一样了，万一重复性任务哪天不通了，我能直接去看一眼，就告诉龙虾发生了什么。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69bd63b9800201ac680d3e63</id>
+            <title>AI探索站 03月20日</title>
+            <link>https://m.okjike.com/originalPosts/69bd63b9800201ac680d3e63</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69bd63b9800201ac680d3e63</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 20 Mar 2026 15:11:53 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    CLI 这波热点，是流量逻辑。因为 for agents 的述事成了硅谷的吹捧，同时确实有 agents 想通过 CLI 来调用工具，于是传统工具们纷纷穿上新衣服，希望被调用，来获取流量或资本关注。<br /><br />然而 CLI 化有很难解决的问题：<br /><br />1. 参数爆炸问题。GUI 的功能远胜 CLI，要压缩成 CLI 参数，只能疯狂做减法。能敢于做减法的，已经是有认知的老板。没认知的老板，只会强压团队：所有功能都必须 CLI 化。可悲的是，用户根本不这么想。比如用户会在 IM 里按照自己对传统工具的 GUI 用法来描述需求，结果 agent 会发现：CLI 只能骗用户，或调调最基础的功能，稍微复杂的，还得是 computer use. 可用户已经急躁得骂娘了。<br /><br />2. 更严重的问题上，CLI 化很难跑通商业模式。此处太敏感，省略一万字。<br /><br />更好的解法，是别安装本地软件了，一切云端 API 化。Agent 也很擅长调用 API 的，而且很考验 API 的接口易用性和商业模式设计。越易用的 API，能有越多模型能调用成功。商业模式越好的 API，则越能更长久为用户提供性美价廉甚至免费的服务。<br /><br />提供 API 最有经验的公司，就是 SaaS 公司。优秀 SaaS 公司最核心的资产，也是 API。并不是界面。<br /><br />Agent 时代， 需要 CLI，然而更需要的，是优秀的 API 型 SaaS 服务。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/69bcd5219f3cd84f656041b0</id>
             <title>AI探索站 03月20日</title>
             <link>https://m.okjike.com/originalPosts/69bcd5219f3cd84f656041b0</link>
@@ -17,23 +51,6 @@
                 <![CDATA[
                     
                     Anthropic 官方插件终于来了～<br /><br />太惊喜了， 现在你的Claude Code可以由 Telegram发指令。<br /><br />花了5分钟配对后， 这种喜悦不亚于第一次跑通OpenClaw。 这个极其微小的plugin ，意义非凡。 <br /><br />当对话成为一种终极界面，Telegram 成为了如此不可或缺的平台💪<br /><br />https://github.com/anthropics/claude-plugins-official/blob/main/external_plugins/telegram/README.md
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69bccc211e8521d50fb30973</id>
-            <title>AI探索站 03月20日</title>
-            <link>https://m.okjike.com/originalPosts/69bccc211e8521d50fb30973</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69bccc211e8521d50fb30973</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 20 Mar 2026 04:25:05 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    自从有了Claude Code，不是，我2018-2020费劲学的Python啊SQL啊算什么？
                 ]]>
             </content:encoded>
         </item>
@@ -68,23 +85,6 @@
                 <![CDATA[
                     
                     普通人追求养龙虾，其实还不如养 Notion。<br /><br />举一个例子，来说明为什么 Notion 强大的上下文管理，让它的 AI 值得作为主要的 AI Chatbot 来用：医疗和健康咨询。<br /><br />在医疗和健康咨询这个领域，AI 最大的优势是不厌其烦和连续性。在国内来说尤其是如此，因为国内没有家庭医生和固定私人医生的制度，所以你去医院每次看病或咨询相关的问题，医生没法从很短的时间内获取你的全量信息，也就只能就事论事的来诊疗。<br /><br />这个问题我在之前关于 AI 在医疗方面的应用博客就讲过了。但 ChatGPT 和 Gemini App 其实也有这个问题，如果你在一个窗口里和它聊的时间过长，它就记不住了。而它本身对上下文的结构化存储又比较欠缺。<br /><br />但在 Notion 里就不存在这个问题，因为你可以把 Notion 的多个页面当成一个复杂的 Skill 来用。<br /><br />我首先建立了一个页面作为医疗顾问的总 Prompt，它里面定义了 Notion AI 在应对我医疗和健康咨询时的基础行为，我的基本信息。<br /><br />之后，又建立了两个数据库挂载在该页面里， 分别用于存储长期健康记忆，以及外部的检验、检查单据。<br /><br />单次设置完成后，每次只要 At 那个总 Prompt，就能像和一个拥有真正长期记忆和强大检索能力的健康顾问那样聊天了。<br /><br />类似的场景还有很多，不只局限于健康。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69ba9174c5a1d4e649e4b22d</id>
-            <title>AI探索站 03月18日</title>
-            <link>https://m.okjike.com/originalPosts/69ba9174c5a1d4e649e4b22d</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69ba9174c5a1d4e649e4b22d</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 18 Mar 2026 11:50:12 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    山河醒，燕归来。<br /><br />我们用 AI 为第十六届北京国际电影节制作了一支官方宣传片，让电影道具和北京地标组成天地片场，让无限连接的四合院组成胶片的长城，希望大家喜欢！<br /><br />这个春天，相聚北京，共赴光影盛会，来看世界最好的电影。<br /><br />▶ 出品：北京国际电影节组委会<br />▶ 创意制作：@Simon阿文 @海辛Hyacinth
                 ]]>
             </content:encoded>
         </item>
