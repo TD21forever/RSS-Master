@@ -5,18 +5,52 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/69bfadc325bae566127019a0</id>
-            <title>AI探索站 03月22日</title>
-            <link>https://m.okjike.com/originalPosts/69bfadc325bae566127019a0</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69bfadc325bae566127019a0</guid>
+            <id>https://m.okjike.com/originalPosts/69c095bbfb579d46ef41c104</id>
+            <title>AI探索站 03月23日</title>
+            <link>https://m.okjike.com/originalPosts/69c095bbfb579d46ef41c104</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69c095bbfb579d46ef41c104</guid>
             <pubDate></pubDate>
-            <updated>Sun, 22 Mar 2026 08:52:19 GMT</updated>
+            <updated>Mon, 23 Mar 2026 01:22:03 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    微信 ClawBot 按流程接入后默认是绑定到 OpenClaw 的 main agent 上。但我本身有用多 agents 的模式隔离工作区，所以我在给@星lv柠 的微信接入一个全新的子 agent 时，研究了下具体怎么配置，目前官方文档应该还没更新这方面的说明。如果你们有类似的需求，可以参考下图修改 openclaw 配置
+                    开源 WeClaw，让微信 ClawBot 接入任意 Agent 的桥接工具。<br /><br />一行命令启动，自动发现并连接你电脑上的 OpenClaw / Claude Code / Codex / Gemini / Cursor / Kimi / OpenCode 等终端 Agent，其他 Agent 可以自行配置接入。<br /><br />支持 ACP / CLI / HTTP 三种接入方式，可对接终端 Agent，桌面 Agent，Web Agent<br /><br />在微信 ClawBot 可以使用 /cc /gm /oc 等子命令指定接收消息的 Agent，支持配置和切换默认 Agent<br /><br />如何使用？<br /><br />1. 复制 WeClaw 项目的一键安装命令，在你的电脑上运行<br />2. 微信扫码登录，连接微信 ClawBot 与 WeClaw<br />3. 给微信 ClawBot 发消息，默认发给 Claude Code<br />4. 使用子命令切换其他 Agent 对话<br /><br />MIT 开源，欢迎体验，感谢支持。👇<br /><br />https://github.com/fastclaw-ai/weclaw
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69c08d086e2ee6f24c75ea3a</id>
+            <title>AI探索站 03月23日</title>
+            <link>https://m.okjike.com/originalPosts/69c08d086e2ee6f24c75ea3a</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69c08d086e2ee6f24c75ea3a</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 23 Mar 2026 00:44:56 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    深入使用 AI，大多人都缺少场景，从帮我讲个笑话，到帮我写个贪吃蛇游戏，再到帮我写个新闻 bot，至此，对 AI 的指挥基本就到创意的极限了。🐶<br /><br />比较推荐去构建自己专属的 AI Chat，因为真要整体 run 起来，你需要：<br /><br />了解 prompt 跟 AI 是怎么交互的；<br /><br />了解 AI 在干啥，thinking/tool-use/read-write-file/bash；还得搞清楚 mcp/skills 怎么被你的 AI 消费；<br /><br />聊天聊的多了，你期望你的 AI越来越懂你，你会去研究 Context 和 Memory；<br /><br />当你沉迷 AI 的时候，会想着如何让自己和电脑解绑，开始研究 remote 调用，让 AI去构建穿墙工具；<br /><br />再往下走，你会开始意识到，单次对话其实价值很低，真正有价值的是“连续性”。一次任务的完成只是结果，过程里的决策路径、错误尝试、工具调用、上下文演进，这些东西如果没有被结构化沉淀，下次还得再来一遍。于是你会开始搭自己的“记忆回路”，把对话、代码、结果、结论压缩成可以复用的片段，让 AI 不只是会做事，还能“延续之前的做事方式”。<br /><br />再往前一步，你会发现 prompt 本身也不再是临时输入，而是一种“资产”。哪些表达方式更容易让模型理解，哪些约束可以减少偏差，哪些结构可以提高稳定性，这些都会被你抽象出来，变成模板，甚至进一步封装成 skills。<br /><br />当你开始接入更多工具，事情会变得更有意思。AI 不只是回答问题，而是开始调度资源，调用外部能力，串联多个步骤完成复杂任务。你会逐渐把 mcp 当成接口，把 skills 当成方法，把 AI 当成 runtime，整个系统开始有点“操作系统”的味道。<br /><br />到这个阶段，人的角色会发生一点变化。你不再盯着每一步执行，而是盯着“目标是否被正确理解”和“系统是否稳定产出”。很多时候，你甚至不会去纠结某一次结果是否完美，更关注的是，这套机制是否可以在不同问题上持续复用。<br /><br />接下来，才是真正的开始，你会想着怎么让 AI把你脑子里的创意，短时间内实现，或娱乐，或工作，或学习……
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69bfe589eca59e0eca4cae10</id>
+            <title>AI探索站 03月22日</title>
+            <link>https://m.okjike.com/originalPosts/69bfe589eca59e0eca4cae10</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69bfe589eca59e0eca4cae10</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 22 Mar 2026 12:50:17 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    明天上午 9:40，发布一个非常旋转无敌好用的 Skill 「Web Access」<br />能让你的 Agent 的联网和浏览器能力，拉满到最强的一集<br /><br />并且 👉 用了很大的篇幅，开源这个 Skill 的设计思考（是我这两个月对 Skill 的不断摸索的总结），相信能对很多人都有启发<br /><br />装了这个以后，你可以让 Agent 代替你做很多事情：<br />1️⃣ 一次性打开操作 100+ 浏览器网页<br />2️⃣ 自动化模拟操作，发布各大社媒平台<br />3️⃣ 帮你直接找 B 站、网飞等并自动打开播放<br />4️⃣ 自动查美签系统，看可预约时间并预约<br />5️⃣ Agent 自动化测试 Web App<br />……每天使用我都在发现新的惊喜<br /><br />已知特性：<br />1️⃣ Claude Code、OpenClaw 等 Agent 均可用<br />2️⃣ 优化 Agent 联网方式的策略，减少只搜不浏览器，只 fetch 不搜等尴尬情况<br />3️⃣ Skill 内自动总结站点操作经验，每次执行都能优化下次执行速度！<br /><br />（长文到时候放在公众号里）
                 ]]>
             </content:encoded>
         </item>
@@ -56,23 +90,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/69be7afe5eaa6496f0485eff</id>
-            <title>AI探索站 03月21日</title>
-            <link>https://m.okjike.com/originalPosts/69be7afe5eaa6496f0485eff</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69be7afe5eaa6496f0485eff</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 21 Mar 2026 11:03:26 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    我现在的 OpenClaw 用法：<br />一次性任务→OpenClaw 直接跑<br />高重复任务→指挥 OpenClaw 创建一个 n8n Workflow 来跑<br />两者也可以互相转化，比如你有个一次性任务跑通了之后想重复，可以让 OpenClaw 在 n8n 里严格按照刚刚跑通的业务逻辑制作一个 Workflow。<br />OpenClaw 现在有完整的 n8n 技能和 MCP，操作 n8n 非常方便。<br />有人问我为什么都用 OpenClaw 了，不让它自己写个脚本定时执行呢？因为我不会代码，没法替它 debug。<br />但 n8n 就不一样了，万一重复性任务哪天不通了，我能直接去看一眼，就告诉龙虾发生了什么。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/69be055d25bae566124b1c8e</id>
             <title>AI探索站 03月21日</title>
             <link>https://m.okjike.com/originalPosts/69be055d25bae566124b1c8e</link>
@@ -102,23 +119,6 @@
                 <![CDATA[
                     
                     Anthropic 官方插件终于来了～<br /><br />太惊喜了， 现在你的Claude Code可以由 Telegram发指令。<br /><br />花了5分钟配对后， 这种喜悦不亚于第一次跑通OpenClaw。 这个极其微小的plugin ，意义非凡。 <br /><br />当对话成为一种终极界面，Telegram 成为了如此不可或缺的平台💪<br /><br />https://github.com/anthropics/claude-plugins-official/blob/main/external_plugins/telegram/README.md
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69bb6b1cc5a1d4e649f862fe</id>
-            <title>AI探索站 03月19日</title>
-            <link>https://m.okjike.com/originalPosts/69bb6b1cc5a1d4e649f862fe</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69bb6b1cc5a1d4e649f862fe</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 19 Mar 2026 03:18:52 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    普通人追求养龙虾，其实还不如养 Notion。<br /><br />举一个例子，来说明为什么 Notion 强大的上下文管理，让它的 AI 值得作为主要的 AI Chatbot 来用：医疗和健康咨询。<br /><br />在医疗和健康咨询这个领域，AI 最大的优势是不厌其烦和连续性。在国内来说尤其是如此，因为国内没有家庭医生和固定私人医生的制度，所以你去医院每次看病或咨询相关的问题，医生没法从很短的时间内获取你的全量信息，也就只能就事论事的来诊疗。<br /><br />这个问题我在之前关于 AI 在医疗方面的应用博客就讲过了。但 ChatGPT 和 Gemini App 其实也有这个问题，如果你在一个窗口里和它聊的时间过长，它就记不住了。而它本身对上下文的结构化存储又比较欠缺。<br /><br />但在 Notion 里就不存在这个问题，因为你可以把 Notion 的多个页面当成一个复杂的 Skill 来用。<br /><br />我首先建立了一个页面作为医疗顾问的总 Prompt，它里面定义了 Notion AI 在应对我医疗和健康咨询时的基础行为，我的基本信息。<br /><br />之后，又建立了两个数据库挂载在该页面里， 分别用于存储长期健康记忆，以及外部的检验、检查单据。<br /><br />单次设置完成后，每次只要 At 那个总 Prompt，就能像和一个拥有真正长期记忆和强大检索能力的健康顾问那样聊天了。<br /><br />类似的场景还有很多，不只局限于健康。
                 ]]>
             </content:encoded>
         </item>
