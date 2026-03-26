@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/69c4a7a79f3cd84f651058f6</id>
+            <title>AI探索站 03月26日</title>
+            <link>https://m.okjike.com/originalPosts/69c4a7a79f3cd84f651058f6</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69c4a7a79f3cd84f651058f6</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 26 Mar 2026 03:27:35 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    开源 FastClaw：做更好的 OpenClaw 发行版<br /><br />1. 使用 Go 开发，3000 行代码实现 OpenClaw 核心功能<br />2. 单二进制（5MB）分发，轻量级安装，无环境依赖<br />3. 秒级启动，资源占用小（内存占用约为 OpenClaw 的 1/7）<br />4. 支持可视化安装，上手门槛很低<br />5. 支持个人本地使用，原生支持云端多租户场景<br />6. 支持 OpenClaw 90% 功能，兼容 OpenClaw 生态。<br /><br />如何使用？<br /><br />1. 在项目主页复制 FastClaw 一键安装命令<br />2. 在电脑运行安装命令，自动打开可视化配置界面<br />3. 按照步骤，配置接入的模型和消息渠道<br />4. 安装完自动进入 FastClaw 管理面板，查看网关运行情况<br />5. 在接入的消息渠道开始对话<br /><br />跟 OpenClaw 有什么区别？<br /><br />1. 使用方式上没太大区别，都是命令行安装，配置各种功能，在自己习惯的消息渠道对话<br />2. 第一次配置，比 OpenClaw 简单，上手门槛更低<br />3. 运行过程中，比 OpenClaw 资源占用小，对电脑配置要求更低<br />4. 如果你想二次开发，代码量更少，改起来更轻松<br />5. 如果你要部署到云端，让多个用户接入使用，FastClaw 更适合，天然支持云端多租户<br />6. FastClaw 支持了 OpenClaw 大部分功能：多模型、多渠道、多 Agent 等，添加了额外的特性：沙盒、并发控制、数据库配置、消息持久化等<br />7. FastClaw 兼容 OpenClaw 的生态，比如 clawhub 安装 skills 等，配置参数跟使用习惯也尽量跟 OpenClaw 保持一致，减少用户切换成本<br />8. FastClaw 是 OpenClaw-Like 的 Agent 底层框架，不是 OpenClaw fork 版本，而是从底层重构的全新版本<br />9. 如果把 OpenClaw 比作 Linux，那么 FastClaw 想做的就是 Centos，面向企业场景、云部署场景、智能终端而设计的 Agent OS<br /><br />为什么做？<br /><br />1. 我做了一个月 OpenClaw 云托管服务，得出的结论是 OpenClaw 不适合云端多租户场景，主要是 OpenClaw 的架构是为本地使用场景而设计的，定位是个人 Agent<br /><br />- OpenClaw 在云端多租户场景需要每个用户一个隔离的 Pod，开销很大，成本很高<br />- OpenClaw 通过子进程完成复杂任务，多个任务串行排队，效率不高<br />- OpenClaw 的对话和记忆内容是存储在本地文件的，容易丢失，配置容易搞崩<br /><br />我需要一个更好的方案来降低云端部署的成本，让更多人拥有自己的龙虾。<br /><br />2. 随着微信 ClawBot 等入口的开放，使用 Agent 的用户会越来越多，不太可能每个用户都在自己的电脑部署一个 Agent，云端多租户是刚需。企业需要给员工分配 Agent，挂载知识库，统一管理。这些场景 OpenClaw 都不适合。<br /><br />3. 要建摩天大楼，需要先打地基。OpenClaw 有很多优秀的设计可以参考，但是代码太臃肿，没办法在此基础上改架构，所以只能自己写。<br /><br />------<br /><br />FastClaw 还在初期阶段，堆了很多功能，还没来得及完整测试，需要点时间完善。期待有更多的朋友参与共建，做一个更好的 OpenClaw-Like 的 Agent OS 发行版。<br /><br />MIT 协议开源，欢迎使用，感谢支持。<br /><br />https://github.com/fastclaw-ai/fastclaw
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/69c3f40fc17d4bfcdb5f8f78</id>
             <title>AI探索站 03月25日</title>
             <link>https://m.okjike.com/originalPosts/69c3f40fc17d4bfcdb5f8f78</link>
@@ -68,23 +85,6 @@
                 <![CDATA[
                     
                     Slop和Taste，是AI时代被频繁提及的两个概念。<br /><br />翻译过来，就是泔水和品味，它们看似针锋相对，但很多时候其实是一体两面。<br /><br />就像我经常看到，有人刚刚大赞Taste在AI时代有多重要，转头就把一条Slop搬到群里，浑然不觉其中矛盾。<br /><br />在我看来，AI带来的最大错觉，是让没脑子的人，以为自己也有脑子，而无法分辨区别，是用不用得好AI的分水岭。<br /><br />什么意思呢？<br /><br />就用写作来举例吧，AI可以生产70分的内容，但你必须要有90分的能力，才能知道怎样去使用那些70分的材料，如果你只有50分，那就意味着你只能全盘接受，而无从分辨对错。<br /><br />罗素他老人家说，「这个世界的问题就是，智者充满疑虑，蠢货坚信不疑」，要我说，疑虑的未必都是智者，坚信的一定是蠢货。<br /><br />AI几乎无限的生产能力带来的另外一个副产品，就是在发的长文底下总有大聪明说这是不是AI写的，不能说完全不糟心吧，就是非常倒反天罡：<br /><br />AI正是靠着我这样的人贡献的语料完成训练——而且我很确信自己的占比——才有了今天的本事，现在倒好，被强夺者被当成了索取者。<br /><br />我其实很能理解这类评论的用户画像，他们大概率是从来就没有消费长文的能力，在没有AI的时代会说「太长不看」，有了AI之后更会如此廉价化的对待一切无法复现的行为。<br /><br />一边被漫山遍野的Slop灌成泡芙，一边将所视之物都当作Slop予以简化，这就是我说的，没有分辨能力，就无从判断好坏。<br /><br />更重要的是，在很多人看来，写作是一件负担，是很辛苦的生产工作，因为自己自小如此，所以便不可能有人把写作视为乐趣，怎么可能会有人主动投入那么多的时间、写这么长的文章，要么是AI写的，要么是有人付钱的商单。<br /><br />和菜头前段时间也写过一篇文章「机器永不眠」，意思是在写作上去和机器卷效率是毫无意义的，AI可以让写东西变得简单、高效和自动化，但真正让他感到愉悦的，是在写作中遇到的麻烦和困难，以及如何塑造了自己。<br /><br />「我手里拿着来这个世界的单程票，我想我在最早一定有个什么目的，这个目的一定不是来这个世界上轻松躺着，等机器帮我完成一切。」<br /><br />是的，机器写作即便成功，大概也留不住读者，这是非常功利主义的实话，如果我真要兜售AI生产的商品，那无异于自断财路的自杀行为，我的每一个客户，都可以自己用AI生产内容，要我做甚。<br /><br />认知的边界，就是世界的边界，我谈科幻文艺，谈电影和宇宙，就是想分享这些，然后就有人忍不住自证，自己所处的方寸之间，才是天地，你的那些表达，王八念经，不听不听。<br /><br />而且计量单位也是一个让我很难有同理心的地方，为什么那么多人会对千字篇幅的文本喊长，这是要把大脑寄存到多么贫瘠的荒野里，才会出现的面露难色？<br /><br />比AI降智可怕一万倍的，是它让人类的降智。<br /><br />前几天看到祝佳音说，他看到一篇文章用了「不是、而是」的句式，下意识的以为这又是AI写的，然后看到发表日期是在2017年，这才重新陷入沉思。<br /><br />这也是我说的倒反天罡，我自己有时候都会特别注意，尽量避开「不是、而是」的表达，否则就会和AI「同流合污」了，但这实际上是不合理的，AI把一种经典的文本技巧用烂了用吐了，最后是要人类反过来迁就AI，这对吗？
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69c3a26125bae56612ca12ea</id>
-            <title>AI探索站 03月25日</title>
-            <link>https://m.okjike.com/originalPosts/69c3a26125bae56612ca12ea</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69c3a26125bae56612ca12ea</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 25 Mar 2026 08:52:49 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    做中国人，拿中国钱，上中国市，退中国出。
                 ]]>
             </content:encoded>
         </item>
