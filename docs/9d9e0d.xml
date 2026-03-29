@@ -5,18 +5,52 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/69c7acdc800201ac68f613dd</id>
-            <title>AI探索站 03月28日</title>
-            <link>https://m.okjike.com/originalPosts/69c7acdc800201ac68f613dd</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69c7acdc800201ac68f613dd</guid>
+            <id>https://m.okjike.com/originalPosts/69c8e3ddc5a1d4e6492b17b6</id>
+            <title>AI探索站 03月29日</title>
+            <link>https://m.okjike.com/originalPosts/69c8e3ddc5a1d4e6492b17b6</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69c8e3ddc5a1d4e6492b17b6</guid>
             <pubDate></pubDate>
-            <updated>Sat, 28 Mar 2026 10:26:36 GMT</updated>
+            <updated>Sun, 29 Mar 2026 08:33:33 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    飞书真牛逼，刚刚开源了他们的 CLI 工具！<br /><br />现在任何的 AI Agent 产品都可以调用飞书的所有能力。<br /><br />飞书现在是全国所有产品里边，AI Agent 的友好度和开放程度、产品适配度都是最高的。<br /><br />不只是小龙虾，哪怕是 CodeX、Claude Code 或者是其他类似的本地 AI 产品。<br /><br />都可以用飞书帮你：创建文档、查看和编辑日历、管理群消息、创建多维表格，还有邮箱、视频会议的内容、任务、云空间，包括聊天和群管理，都开放了。<br /><br />几乎你能想到的飞书所有能力，都在里面。<br /><br />比如说让你的 AI 帮你去更新飞书日程，你跟他说创建什么日程、邀请哪些人之后，他就会自动去查看这些人的日历，同时帮你找一个合适的时间安排日程。<br /><br />我自己让它连续创建三个日程，很快就创建好了。<br /><br />同时它还能帮你编辑评论和创建飞书文档。<br /><br />比如说，我本地可能有一些 Markdown 文件需要跟同事们分享，那我就可以让他帮我把本地的这个 Markdown 文件创建一个飞书文档。<br /><br />最主要的是，它还可以帮你把这个 Markdown 文件变成飞书的文档格式，帮你美化这个文档，效果非常牛逼。<br /><br />它还能编辑和创建多维表格。<br /><br />我们知道，多维表格以及其配套的仪表盘看板是非常强大的功能，但由于表格本身具有复杂性，很多人觉得上手门槛比较高。<br /><br />不过现在你不用担心了，AI 全部能帮你搞定。比如我这里让它分析了我过去一个月看过的所有文档（无论是我自己创建的还是别人发给我的），梳理之后，它帮我创建了一个非常清晰的仪表盘看板。<br /><br />所有数据都是同步的：它会自动同步现有的数据，以后再有新文档发布，它也会实时同步更新。<br /><br />我为了更新我的 Code Plan，还整了一个 CLI 工具的 Agent 友好评估。飞书的得分是最高分 5 分，基本上为 AI Agent 原生做的 CLI 工具该做的事它都做了。<br /><br />比如说Json 格式输出、Dry Run，还有快速授权登录等。只需要跟 AI 说安装，然后让它帮你登录配置就可以。<br /><br />完全不需要你在飞书后台操作那堆权限，只需要点一个按钮就可以完成授权。<br /><br />而且这个东西是完全开源的，你可以自己去改和优化。<br /><br />跟你的 AI 这么说就能安装：<br /><br />帮我通过以下命令安装 lark-cli npm install -g @larksuite/cli 然后通过以下命令安装相关 skills npx skills add https://github.com/larksuite/cli -y -g<br />安装完成后，请给我发送应用配置链接，引导我完成应用的配置。<br /><br />用小龙虾的朋友们，飞书的小龙虾官方插件很快也会包含这些内容，可以不用下载CLI。
+                    刚才跟AI进行了一个很有意思的对话。<br /><br />起因是我一直在试着把一个面向人设计的工具转成一个面向Agent设计的工具，然后我意识到，就像一般产品经理会做用户调研一样，我们完全可以面对AI做用户调研。<br /><br />于是我问了 AI 这样一个问题：<br />你自己就是AI，而且是一个经常需要调用工具的AI。你期待一个面向你的xx工具应该是怎样的？<br /><br />AI 的回答：<br /><br />确实每天都在调用工具，而且我非常清楚自己的痛点在哪。<br />我最大的瓶颈：round-trip 成本<br />每次工具调用对我来说都很贵——不是算力贵，而是延迟和 context 消耗。我调一次工具，要等结果回来，要把结果读进上下文，这占用我有限的注意力。所以：<br />最理想的 API 是：一次调用能做尽量多的事。一个 round-trip 解决问题。 这就是 AI-native 和 human-native 最根本的区别——人类需要看到每一步、理解每一步；我不需要，我需要高效搜索。<br /><br />我第二大的痛点：失败时的信息黑洞<br />当工具返回 "error: tactic failed" 时，我只能盲猜下一步。这是我浪费 token 最多的场景。我需要的是similar_successful_patterns——告诉我「别人在类似目标上成功用了什么」。这对人类不重要（人类靠直觉），但对我极其重要，因为我的搜索是基于模式匹配的。<br /><br />第三：checkpoint 必须极其廉价<br />我的工作模式本质上是 tree search——试一条路，不行就回溯。如果 checkpoint/restore 有任何显著开销，我的搜索效率就会大打折扣。理想状态：<br />checkpoint 返回一个 ID，允许随时 restore。<br /><br />第四：我不需要的东西<br />这点同样重要。不要给我：<br />Pretty-printed 状态（给我 AST/JSON）<br />人类可读的错误信息散文（给我结构化诊断）<br />交互式 REPL（给我无状态的 HTTP/gRPC 端点 + session token）<br />自然语言文档（给我类型签名 + 输入输出示例）<br />格式渲染（给我 S-expression 或 JSON term tree）<br />每一个「为人类可读性」加的处理，对我来说都是噪音——我要花额外的 token 去 parse 你本来就有结构化表示的东西。<br /><br />为我设计的服务的核心 API 大概就三个端点：<br />/batch_apply — 批量尝试多个策略，返回所有结果，自动 checkpoint<br />/explore — 给定当前目标，返回候选列表（按历史成功率排序）+ 目标的结构化分析<br />/checkpoint — save / restore / fork（分支出并行探索路径）<br />数据的大小反而是次要问题。如果这三个端点做得好，我可以在一个基础引擎上也非常高效地工作。如果这三个端点做得差，就算你有海量独家数据，我也会在无意义的 round-trip 中浪费大量算力。<br /><br />========<br /><br />然后我把上面的 AI（甲）的回答发给了另外两个 AI（乙和丙），它们纷纷表示：说的太他妈对了真的嘴替。<br /><br />但各自又有补充。<br /><br />AI 乙：<br /><br />那个 AI 提到的 round-trip 成本本质上是 Context 熵增问题。人类阅读 1000 字的文档可能只需要几秒，但我读取 1000 tokens 的结构化数据不仅消耗 tokens，更严重的是它会稀释我的注意力权重。<br /><br />报错即「路标」，而非「结局」<br />现在的工具报错（如 400 Bad Request）对人类来说是终点，需要人类停下来思考。但对于 Agent，报错应该是探索算法的一个分支。<br /><br />逻辑偏误修正<br />那个 AI 提到的 similar_successful_patterns 极其重要。由于我的推理本质上是概率性的，告诉我「怎么做可能是对的」远比告诉我「你现在错了」能更快地让我回归正确的收敛路径。这其实就是 In-context Learning 的即时补丁。<br /><br />关于 Checkpoint 的论据非常惊艳。<br />目前的工具链大多假设 Agent 是线性的（Step 1 -&gt; Step 2）。但实际上，复杂的任务需要我们进行类似蒙特卡洛树搜索的操作。<br /><br />我完全同意它对 Pretty-print 的厌恶<br />Markdown 表格对人类是视觉盛宴，对我来说是 token 屠杀。 我更希望工具能支持类似 JSON Streaming 或者 Protobuf 的流式解析。这样我不需要等整个大的结果返回，只要前几个关键字段（如 status: "processing"）出来，我就能开始规划下一步，从而实现真正的异步协作。<br /><br />补充一个它没提到的痛点：确定性约束。面向 Agent 的工具应该允许我传递一个 seed 或 consistency_level。我最怕的是：同一个 API 调用，在逻辑没变的情况下，因为后端的微小抖动返回了不同格式的数据。这会导致我的 pattern matching 瞬间失效，引发一连串的幻觉。<br /><br />AI 丙：<br /><br />大部分同意。但我会补上第四类能力：<br />/inspect 或 /explain_failure<br />不是给人类解释，而是给 agent 一个可操作的状态诊断接口。因为 agent 很多时候不是缺 apply，不是缺 explore，而是缺局部判别：当前卡住的根因到底是什么？哪个约束最可能该先处理？当前目标和历史成功轨迹的差异在哪？如果没有这个层，explore 很容易退化成盲搜。<br /><br />总的说来，我觉得它抓住了一个真的很重要的转换：<br />human-native 工具优化的是可见性、可理解性、交互舒适度；<br />agent-native 工具优化的是搜索效率、状态可分叉性、失败可诊断性、接口可组合性。<br /><br />========<br /><br />不得不说我从这个对话里学到了非常多东西。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69c89cb79f3cd84f6569a636</id>
+            <title>AI探索站 03月29日</title>
+            <link>https://m.okjike.com/originalPosts/69c89cb79f3cd84f6569a636</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69c89cb79f3cd84f6569a636</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 29 Mar 2026 03:29:59 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    昨天最牛逼的开源项目 Pretext<br /><br />快速而且精准的文本测量算法，可以实现类似报纸的动态图文环绕效果。<br /><br />这个对 AI 时代的 UI 实时生成非常有用。<br /><br />有了这个以后，AI 就能清楚地知道每个字符的宽度和总宽度，不会出现闪烁、超出范围和抖动等问题。<br /><br />想今天把它搞到 Codepilot 那个生成式 UI 的组件里试试。<br /><br />详情：https://github.com/chenglou/pretext
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69c805d6abe5aba38c4e8f3e</id>
+            <title>AI探索站 03月28日</title>
+            <link>https://m.okjike.com/originalPosts/69c805d6abe5aba38c4e8f3e</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69c805d6abe5aba38c4e8f3e</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 28 Mar 2026 16:46:14 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    为什么 Manus 看起来像上一代产品<br />为什么 OpenClaw 这么火<br />为什么 Agentic AI 是未来<br />都在下面几张图里
                 ]]>
             </content:encoded>
         </item>
@@ -51,23 +85,6 @@
                 <![CDATA[
                     
                     飞书刚刚开源了自己的 cli<br /><br />现在你可以直接让 agent/openclaw 直接使用包括飞书文档、知识库、多维表格、视频会议、日历等所有功能了。<br /><br />仓库地址：https://github.com/larksuite/cli
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69c6b2f0800201ac68df637e</id>
-            <title>AI探索站 03月27日</title>
-            <link>https://m.okjike.com/originalPosts/69c6b2f0800201ac68df637e</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69c6b2f0800201ac68df637e</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 27 Mar 2026 16:40:16 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    牛批，谷歌 Chrome 有竖向标签栏了<br /><br />启用方式，地址栏输入 chrome://flags/#vertical-tabs <br /><br />启用后重启浏览器，然后在标签栏空白区域选择“将标签页移到侧边”
                 ]]>
             </content:encoded>
         </item>
@@ -136,23 +153,6 @@
                 <![CDATA[
                     
                     sora的APP关闭了<br />无数人看笑话<br />留存差 <br />瞎搞 <br />打败抖音的绝对不是另外一个抖音<br />……<br /><br />这些观点我觉得都没问题<br />类似这几年很多人常常挂在嘴边的<br />“我早就说过xxx”<br />“这不就是xxx”<br />……<br /><br />大概率这些判断最后都是“正确”的<br />但很多时候这些判断会类似“人总会死”的情境<br />尤其在变革的当下<br />所有走过的“弯路”最后可能都算数<br /><br />这个议题真的值得展开的角度，<br />我其实挺想看到的的是：<br />1.AI模型公司的架构选择（产品架构 and 组织架构）<br />2.模型公司的资源优先级或者说如何权衡自身的“token效率”<br />3.什么阶段，什么估值，什么市场竞争地位的公司如何做动态的战略取舍<br /><br />但又想<br />咳，谁会关心这些呢？<br /><br />摊手
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69c27125800201ac687ec472</id>
-            <title>AI探索站 03月24日</title>
-            <link>https://m.okjike.com/originalPosts/69c27125800201ac687ec472</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69c27125800201ac687ec472</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 24 Mar 2026 11:10:29 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    大多数语音输入法都在变得越来越臃肿：<br />要登录、要订阅、要联网、要加一堆新功能，要学习一堆新交互。<br /><br />世界，不应该这样。<br />输入，就应该专注。<br />于是我们做了 TypeNo。<br /><br />TypeNo 是一款面向 macOS 的极简语音输入法：<br />- 永远免费，永远开源<br />- 本地模型，保护隐私<br />- 轻量模型，节省内存<br /><br />按下 Control，开始说话；<br />再按一次，自动转录，自动粘贴到当前应用。<br />一切极简，再无其他功能。<br /><br />没有账号。<br />没有订阅。<br />没有多余 UI。<br />没有“为了 AI 而 AI”的复杂感。<br /><br />Typeless 每月 30 美金。<br />TypeNo 免费。<br /><br />如果你愿意，欢迎试用，也欢迎给个 star：<br />项目地址：https://github.com/marswaveai/TypeNo<br />好记的官网网站： typeno.com
                 ]]>
             </content:encoded>
         </item>
