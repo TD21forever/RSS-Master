@@ -5,6 +5,57 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/69cce4b1b9abae9b4f088566</id>
+            <title>AI探索站 04月01日</title>
+            <link>https://m.okjike.com/originalPosts/69cce4b1b9abae9b4f088566</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69cce4b1b9abae9b4f088566</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 01 Apr 2026 09:26:09 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    有需要的吗？
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69cc888c25bae5661294c269</id>
+            <title>AI探索站 04月01日</title>
+            <link>https://m.okjike.com/originalPosts/69cc888c25bae5661294c269</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69cc888c25bae5661294c269</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 01 Apr 2026 02:53:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    既然Claude Code源码都泄漏了，我觉得我这75页的《CLAUDE CODE橙皮书📙》也该开源了。<br /><br />这份橙皮书是我和Claude Code花了两个多月一起写的实战手册，面向想用AI编程但不知道从哪开始的人。10章，从安装到独立做出一个完整产品。<br /><br />里面有什么：<br />• 核心工作流拆解（Plan/Auto模式、权限管理）<br />• CLAUDE.md写法——怎么给AI一张项目地图<br />• Skills、Hooks、MCP等扩展能力的实战用法<br />• 多Agent并行协作的完整机制<br />• Computer Use和Voice Mode等最新能力<br />• 一章完整的从零到上线产品实战<br /><br />信息源主要是Claude官方文档、CC之父Boris的分享、吴恩达的Claude Code课程，加上我自己用CC做了十几个产品的经验。内容更新到2026年3月底。<br /><br />和AI协作写的，内容量大，难免有幻觉。发现不准确的欢迎指正，我会持续更新。<br /><br />下载链接🔗：https://my.feishu.cn/wiki/JK1WwrRgJiYfRok7YxxceS5qn1J?from=from_copylink
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69cbe95b3788f4820c9faeee</id>
+            <title>AI探索站 03月31日</title>
+            <link>https://m.okjike.com/originalPosts/69cbe95b3788f4820c9faeee</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69cbe95b3788f4820c9faeee</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 31 Mar 2026 15:33:47 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    今天最有意思的事是 Claude Code 源码泄露，算是 A 厂最大的一次开源了<br /><br />各种隐藏功能已经有很多人在聊了，简单过一下：AI 宠物 Buddy、24 小时主动助手 Kairos、闲置时自动整理记忆的 Auto-Dream、后台常驻的 Daemon 模式、跨设备传送会话、云端 Bug 舰队审代码。<br /><br />我更好奇的是另一个问题： Claude Code 比其他同类工具优秀在哪里？<br /><br />花了半天时间，查资料，看架构，和 AI 对话，到现在砍得越来越兴奋。它工程设计值得每个做 Agent 的团队学习。下面是我的七个总结：<br /><br />1 prompt 每次都在变，根据场景实时拼装。<br /><br />大部分 Agent 产品的 prompt 就是一大段固定文本。Claude Code 有个函数像流水线一样工作：先拼固定模块（身份、规范、行为准则、工具规则、语气），再根据当前状态加料（记忆、环境、语言、连了哪些插件、开没开精简模式）。<br /><br />同一个用户前后两次对话，喂给模型的指令完全不同。而且这个拼装顺序是精心设计过的，前半段稳定的内容能被缓存，后半段会变的内容放后面，这样每天几万次请求能省下大量 token 费用。写 prompt 的时候考虑缓存节省 token，这个意识很多团队还没有。<br /><br />2 一套写死的“不要做清单”<br /><br />用过别的 coding agent 会发现让它改个 bug 它顺手重构半个文件，让它测一下它说"通过了"但根本没跑。CC 为了管住了这些毛病，逐条列好不要做清单：不加用户没要求的功能、不过度抽象、不瞎重构、不乱加注释、先读代码再改代码、不轻易建新文件、方法失败了先诊断再换策略、结果如实汇报不能假装测过了。<br /><br />3 六个 Agent 分工，做事的、查事的、规划的权限完全隔开<br /><br />至少六个内建角色各司其职。Explore Agent 只能读文件，连创建文件都不行。Plan Agent 也只能读，只管理解需求、分析架构、输出计划。Verification Agent 是"想尽办法做边界测试"：强制跑 build，前端改动要验页面，后端要实测响应。<br /><br />4 为防止工具调用错误，设立一条安检线<br /><br />模型想调一个工具，中间要过好几道关卡：先校验输入对不对，再预判这个操作有没有风险，然后走权限审批，全部通过了才真正执行。执行完还有后续检查，失败了有专门的兜底逻辑。<br /><br />还有个 Hook 机制，能在执行前改写输入、直接拒绝、补充上下文，但 Hook 放行不能绕过系统级的拒绝规则。很多 agent 翻车就是模型用错了工具直接执行了，比如一条 sed 命令正则写错整个文件就废了。这条线在动手前把风险拦住了。<br /><br />5 子 Agent 调度的省钱策略<br /><br />很多 Agent 系统第一天跑得挺好，跑一百天就一堆泄漏，一个子任务从触发到完成要走十几步：解析输入、判断类型、构造 prompt、组装工具、创建上下文、注册插件、进入执行循环、记录日志、清理资源。<br /><br />CC 的子任务会继承主线程的 prompt 前缀，目的是复用缓存少烧 token。执行完还会自动清理 shell 进程、MCP 连接、临时状态，不留垃圾。<br /><br />6 三套扩展机制，重点是模型自己知道该用什么<br /><br />Skill、Plugin、MCP 三套扩展能力装上去之后，都会通过各种通道告诉模型"我现在多了什么能力、什么场景该用"。<br /><br />很多平台也有插件市场，装完之后模型根本不知道有这回事。Claude Code 把清单和说明书都摆在模型看得见的地方，Skill 按需加载，MCP 指令按连接状态注入，需要什么上什么，不需要的不占空间。<br /><br />7 从目录结构看，这就是一个小型操作系统<br /><br />入口层、提示词系统、工具定义、运行时服务、命令系统、协调器、记忆系统、插件、Hook、任务系统。<br /><br />四个入口：CLI、初始化流程、MCP 模式、SDK。同一套内核跑四种界面。大部分开源 Agent 就是 main 加几个 tool 文件，这个复杂度完全不在一个级别。<br /><br />拿模型做产品的朋友可以参考上面方法，用工程系统设计弥补模型的不可控。模型会偷懒，就把规矩写死。模型会用错工具，就在中间加安检。模型自己验不好自己的活，就拆一个专门找茬的角色出来。上下文会爆，就从 prompt 拼装到子任务调度每一层都在省。<br /><br />谁先把这些层补上，谁的产品手感就会好一个台阶。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/69cbdd7625bae56612855591</id>
             <title>AI探索站 03月31日</title>
             <link>https://m.okjike.com/originalPosts/69cbdd7625bae56612855591</link>
@@ -39,23 +90,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/69cb12bf800201ac684360c0</id>
-            <title>AI探索站 03月31日</title>
-            <link>https://m.okjike.com/originalPosts/69cb12bf800201ac684360c0</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69cb12bf800201ac684360c0</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 31 Mar 2026 00:18:07 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    我前几天看了why not tv采访wenjiayi（openai的一个核心工程师），他非常笃定的说出宿命论和人绝对没有自由意志这个事情。<br />于是我又开始看佛学，看各种显化，觉得这个东西太神奇了。<br />我大概写一下：<br /><br />人类其实就是AI，没有区别，这个其实佛早就讲过了。<br /><br />佛说无我。说的就是这件事。你以为有一个”我”在做决定，在选择，在控制自己的人生。佛说，这个”我”是幻觉。真正在运作的，是五蕴，色受想行识，一堆因缘条件聚合在一起，产生了一个”我在这里”的感觉。<br /><br />就像河流。没有一滴水是固定的，但河的形状一直在。你是那个形状的暂时维持。缘起性空，一切都是条件聚合出来的，其实你也是。<br /><br />你是一条河，你必须run下去，你没有第二个选择。<br /><br />1980年代，科学家利贝特做了一个实验。他发现，人在”决定”做一件事之前，大脑的运动皮层已经激活了。早了将近半秒。意识感受到的”我选择了”，是大脑已经启动之后，产生的一个事后叙述。<br />意识，就像是在给一个已经发生的事情编个故事。<br />我们人类自以为我们的人生是开了一辆车去目的地，但是，其实车早就出发了，你只是车里的广播，播报行程罢了。<br />这个行程，你作为广播，你是没有能力去安排的。<br /><br />叔本华说，人类所有的行为都是”意志”在驱动。这个意志，是一股宇宙盲目的且没有目的的力量，借你的身体在表达。你想要那个东西，是意志通过你在想要。你是通道，也是工具。<br />这就是宿命论。<br /><br />在任何一个当下，你能做出的选择，已经被你的基因、你的成长经历、你接收过的所有信息、你此刻的物理化学状态，完全决定了。给定同样的初始条件，输出只有一个。<br />更高维度看，我们人类就是一段已经写好的代码在运行。时间，只是人类感知这段代码的方式。<br />你就是被写好的程序。上帝，老天爷，真主阿拉，or whatever you called，是坐在屏幕前写prompt的人。他写什么，你run什么，你甚至相信什么。<br /><br />那显化呢。显化，在这套框架里有一个跳脱。<br />你相信某件事会发生，大脑里的网状激活系统就开始过滤信息，让你只看到支持这个信念的证据。你的行为模式在你察觉之前，已经悄悄朝那个方向调整。神经元反复激活同一条回路，突触连接变强，思维和行为的默认路径，就这样慢慢改变了。<br />显化，是你作为ai，通过各种方式，改写prompt，整套系统开始按新的prompt跑。<br />但这里有个悖论。如果一切都是宿命，“改写prompt”这个动作本身，也是被决定好的。你在宿命里显化，那显化也是宿命的一部分。<br /><br />那还有什么出路。<br />出路，是觉知。<br /><br />冥想和正念训练的，是前额叶皮层对杏仁核的调节能力。杏仁核是情绪反应的发射台，前额叶是观察和调节的部分。训练觉知，是在神经层面上，加强那个”看着自己在跑程序”的回路。<br /><br />大多数人一辈子活在autopilot里。饿了吃，困了睡，有人夸就高兴，有人骂就难受，刷到什么想什么，遇到什么反应什么。程序在跑，然后自己全程缺席。<br />觉知，是程序里出现了一个能观察程序本身的子结构。这个子结构越活跃，你和自动反应之间的距离越大，痛苦的密度越低。<br />所以佛说一定要打坐。别的都不重要。<br />菩萨，就是这么度化众生的。<br />菩萨不是一个神仙，是老师，是教会你这套方法的老师。<br /><br />涅槃的巴利文原意，是熄灭。<br />佛学里，觉知的终点，是”能觉知的”和”被觉知的”之间的边界消融。观察者和被观察的，合而为一。连”我在观察”这件事，也放下了。<br />熄灭的，是那个一直以为自己是独立主体的感觉。<br /><br />所以，神经、哲学、佛学。一切好像成为了一个闭环。<br /><br />正念去了！拜拜。<br />正念才能让我意识我我其实是ai。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/69ca2ade9f3cd84f658ced04</id>
             <title>AI探索站 03月30日</title>
             <link>https://m.okjike.com/originalPosts/69ca2ade9f3cd84f658ced04</link>
@@ -73,23 +107,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/69c9d6ffc9f973544e71db30</id>
-            <title>AI探索站 03月30日</title>
-            <link>https://m.okjike.com/originalPosts/69c9d6ffc9f973544e71db30</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69c9d6ffc9f973544e71db30</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 30 Mar 2026 01:50:55 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    最近用 OpenClaw + 飞书多维表格 + MiniMax ，10分钟手搓了一套想法管理系统，核心功能：<br /><br />自动整理： 看到想法直接扔进去， AI 自动打标签、分类，帮你结构化。<br /><br />定时复盘：每天早上推送昨日记录，每周生成图表报告。<br /><br />想法可视化：清晰展示你的所有想法数，各个想法的状态情况。<br /><br />用了一周，最直接的感受：以前吃灰的想法，现在终于可以流动起来了。详细请看文章教程。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/69c8e3ddc5a1d4e6492b17b6</id>
             <title>AI探索站 03月29日</title>
             <link>https://m.okjike.com/originalPosts/69c8e3ddc5a1d4e6492b17b6</link>
@@ -102,23 +119,6 @@
                 <![CDATA[
                     
                     刚才跟AI进行了一个很有意思的对话。<br /><br />起因是我一直在试着把一个面向人设计的工具转成一个面向Agent设计的工具，然后我意识到，就像一般产品经理会做用户调研一样，我们完全可以面对AI做用户调研。<br /><br />于是我问了 AI 这样一个问题：<br />你自己就是AI，而且是一个经常需要调用工具的AI。你期待一个面向你的xx工具应该是怎样的？<br /><br />AI 的回答：<br /><br />确实每天都在调用工具，而且我非常清楚自己的痛点在哪。<br />我最大的瓶颈：round-trip 成本<br />每次工具调用对我来说都很贵——不是算力贵，而是延迟和 context 消耗。我调一次工具，要等结果回来，要把结果读进上下文，这占用我有限的注意力。所以：<br />最理想的 API 是：一次调用能做尽量多的事。一个 round-trip 解决问题。 这就是 AI-native 和 human-native 最根本的区别——人类需要看到每一步、理解每一步；我不需要，我需要高效搜索。<br /><br />我第二大的痛点：失败时的信息黑洞<br />当工具返回 "error: tactic failed" 时，我只能盲猜下一步。这是我浪费 token 最多的场景。我需要的是similar_successful_patterns——告诉我「别人在类似目标上成功用了什么」。这对人类不重要（人类靠直觉），但对我极其重要，因为我的搜索是基于模式匹配的。<br /><br />第三：checkpoint 必须极其廉价<br />我的工作模式本质上是 tree search——试一条路，不行就回溯。如果 checkpoint/restore 有任何显著开销，我的搜索效率就会大打折扣。理想状态：<br />checkpoint 返回一个 ID，允许随时 restore。<br /><br />第四：我不需要的东西<br />这点同样重要。不要给我：<br />Pretty-printed 状态（给我 AST/JSON）<br />人类可读的错误信息散文（给我结构化诊断）<br />交互式 REPL（给我无状态的 HTTP/gRPC 端点 + session token）<br />自然语言文档（给我类型签名 + 输入输出示例）<br />格式渲染（给我 S-expression 或 JSON term tree）<br />每一个「为人类可读性」加的处理，对我来说都是噪音——我要花额外的 token 去 parse 你本来就有结构化表示的东西。<br /><br />为我设计的服务的核心 API 大概就三个端点：<br />/batch_apply — 批量尝试多个策略，返回所有结果，自动 checkpoint<br />/explore — 给定当前目标，返回候选列表（按历史成功率排序）+ 目标的结构化分析<br />/checkpoint — save / restore / fork（分支出并行探索路径）<br />数据的大小反而是次要问题。如果这三个端点做得好，我可以在一个基础引擎上也非常高效地工作。如果这三个端点做得差，就算你有海量独家数据，我也会在无意义的 round-trip 中浪费大量算力。<br /><br />========<br /><br />然后我把上面的 AI（甲）的回答发给了另外两个 AI（乙和丙），它们纷纷表示：说的太他妈对了真的嘴替。<br /><br />但各自又有补充。<br /><br />AI 乙：<br /><br />那个 AI 提到的 round-trip 成本本质上是 Context 熵增问题。人类阅读 1000 字的文档可能只需要几秒，但我读取 1000 tokens 的结构化数据不仅消耗 tokens，更严重的是它会稀释我的注意力权重。<br /><br />报错即「路标」，而非「结局」<br />现在的工具报错（如 400 Bad Request）对人类来说是终点，需要人类停下来思考。但对于 Agent，报错应该是探索算法的一个分支。<br /><br />逻辑偏误修正<br />那个 AI 提到的 similar_successful_patterns 极其重要。由于我的推理本质上是概率性的，告诉我「怎么做可能是对的」远比告诉我「你现在错了」能更快地让我回归正确的收敛路径。这其实就是 In-context Learning 的即时补丁。<br /><br />关于 Checkpoint 的论据非常惊艳。<br />目前的工具链大多假设 Agent 是线性的（Step 1 -&gt; Step 2）。但实际上，复杂的任务需要我们进行类似蒙特卡洛树搜索的操作。<br /><br />我完全同意它对 Pretty-print 的厌恶<br />Markdown 表格对人类是视觉盛宴，对我来说是 token 屠杀。 我更希望工具能支持类似 JSON Streaming 或者 Protobuf 的流式解析。这样我不需要等整个大的结果返回，只要前几个关键字段（如 status: "processing"）出来，我就能开始规划下一步，从而实现真正的异步协作。<br /><br />补充一个它没提到的痛点：确定性约束。面向 Agent 的工具应该允许我传递一个 seed 或 consistency_level。我最怕的是：同一个 API 调用，在逻辑没变的情况下，因为后端的微小抖动返回了不同格式的数据。这会导致我的 pattern matching 瞬间失效，引发一连串的幻觉。<br /><br />AI 丙：<br /><br />大部分同意。但我会补上第四类能力：<br />/inspect 或 /explain_failure<br />不是给人类解释，而是给 agent 一个可操作的状态诊断接口。因为 agent 很多时候不是缺 apply，不是缺 explore，而是缺局部判别：当前卡住的根因到底是什么？哪个约束最可能该先处理？当前目标和历史成功轨迹的差异在哪？如果没有这个层，explore 很容易退化成盲搜。<br /><br />总的说来，我觉得它抓住了一个真的很重要的转换：<br />human-native 工具优化的是可见性、可理解性、交互舒适度；<br />agent-native 工具优化的是搜索效率、状态可分叉性、失败可诊断性、接口可组合性。<br /><br />========<br /><br />不得不说我从这个对话里学到了非常多东西。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69c89cb79f3cd84f6569a636</id>
-            <title>AI探索站 03月29日</title>
-            <link>https://m.okjike.com/originalPosts/69c89cb79f3cd84f6569a636</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69c89cb79f3cd84f6569a636</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 29 Mar 2026 03:29:59 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    昨天最牛逼的开源项目 Pretext<br /><br />快速而且精准的文本测量算法，可以实现类似报纸的动态图文环绕效果。<br /><br />这个对 AI 时代的 UI 实时生成非常有用。<br /><br />有了这个以后，AI 就能清楚地知道每个字符的宽度和总宽度，不会出现闪烁、超出范围和抖动等问题。<br /><br />想今天把它搞到 Codepilot 那个生成式 UI 的组件里试试。<br /><br />详情：https://github.com/chenglou/pretext
                 ]]>
             </content:encoded>
         </item>
