@@ -5,18 +5,35 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/69cfc129c5a1d4e649c98564</id>
-            <title>AI探索站 04月03日</title>
-            <link>https://m.okjike.com/originalPosts/69cfc129c5a1d4e649c98564</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69cfc129c5a1d4e649c98564</guid>
+            <id>https://m.okjike.com/originalPosts/69d1ea9d5effd6c397382949</id>
+            <title>AI探索站 04月05日</title>
+            <link>https://m.okjike.com/originalPosts/69d1ea9d5effd6c397382949</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69d1ea9d5effd6c397382949</guid>
             <pubDate></pubDate>
-            <updated>Fri, 03 Apr 2026 13:31:21 GMT</updated>
+            <updated>Sun, 05 Apr 2026 04:52:45 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    好了，已经在准备写下一本书了
+                    你的下一个员工，何必是同事。<br /><br />同事.skill这几天火了，把同事蒸馏成AI Skill。这个项目证明了一件事：蒸馏一个人的能力，是可行的。<br /><br />但我想问一个问题：既然我们已经有了蒸馏人的能力，为什么要蒸馏身边的同事？<br /><br />去蒸馏各领域最强的人。<br /><br />而且幸运的是，这些人留下了大量可以被蒸馏的材料。芒格有《穷查理宝典》和几十年的股东会演讲。费曼有全套讲义和自传。Naval有几百条推文和长篇播客。塔勒布有五本书和无数公开辩论。这些都是高纯度的思维原矿，等着被提炼。<br /><br />我之前就一直在干这件事。今天把方法论开源了，叫女娲。<br /><br />使用极其简单：输入一个名字就行。女娲自动启动6个Agent去找书、找播客、找推文、找批评者，自己调研、自己提炼、自己验证。你不需要准备任何材料。<br /><br />6个Agent并行采集著作、播客、社交媒体、批评者视角、决策记录、时间线。然后三重验证：一个观点要被收录为心智模型，必须跨2个以上领域出现过、能预测新问题立场、不是所有聪明人都会这么想。三条全过才留。<br /><br />决策前问芒格，写教程问费曼，评估风险问塔勒布。你想蒸馏谁就蒸馏谁。<br /><br />GitHub: https://github.com/alchaincyf/nuwa-skill<br />安装: `npx skills add alchaincyf/nuwa-skill`<br /><br />MIT协议，随便用，随便改，随便造。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69d10b81c5a1d4e649e749f5</id>
+            <title>AI探索站 04月04日</title>
+            <link>https://m.okjike.com/originalPosts/69d10b81c5a1d4e649e749f5</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69d10b81c5a1d4e649e749f5</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 04 Apr 2026 13:00:49 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    我是如何实现跨工具，跨电脑来管理 skill 的？<br /><br />今天在家办公，发现现在离开了Skill，根本没有办法工作，为了让自己在家里电脑也能用工作电脑的 skill，我把 100 多个 skill 做了一个同步和分类。<br /><br />可以实现跨工具、跨电脑、跨网络来使用和分享 skill。<br /><br />主要用到的方法就是用.claude/skills 来做全局 skill，其他工具如 codex 的skill 根目录做软链接同步.claude/skill。<br /><br />再对全局 skill 按类型拆分文件夹，并在 github 建仓同步，这就实现了跨网络/电脑/工具同步了，最后，再建立一个 skill-mannage 来定时自动推送 git。<br /><br />对于 git 的处理，强烈建议 GitHub CLI，可以实现让 Agent  无碍障增删改查 git。<br /><br />既然做了分类，就给大家分享一下我的四大类 skill，分类清晰更便于各位使用。<br /><br />共 100 多个 Skill 分了写作类、画图类、信息获取类、产品经理类，建了四个仓库<br /><br />1 写作类，write-skill，21 个 Skill，覆盖内容创作全流程：<br /><br />地址：https://github.com/zephyrwang6/write-skill<br /><br />2 画图类draw-skill，13 个 Skill，解决"AI 配图"全场景：<br /><br />地址：https://github.com/zephyrwang6/draw-skill<br /><br />3 信息获取类：info-skill，14 个 Skill，把散落各处的信息收回来。<br /><br />地址：https://github.com/zephyrwang6/info-skill<br /><br />4 产品经理类：protodesign，13 个 Skill，产品经理的工具箱：<br /><br />地址：https://github.com/zephyrwang6/protodesign<br /><br />所有 skill: https://github.com/zephyrwang6/myskill<br /><br />对于skill工作 的创造和管理，我已经在社群里分享过很多，如果大家感兴趣，可以点赞支持一下，后面再发长文分享制作技巧和管理方法，让你的 Agent 更有用
                 ]]>
             </content:encoded>
         </item>
@@ -51,23 +68,6 @@
                 <![CDATA[
                     
                     明明 ai帮你做了很多，为什么反而更耗？<br /><br />因为它天然对大脑认知资源收最贵的两种税，切换税和监控税，而且两者经常叠加一起出现，所以经常表现为：<br /><br />1.你总在做事和审稿之间来回跳，还得盯着一个时好时坏的系统。 <br />2.你必须持续保持半怀疑、半接纳的状态，这比纯创造更难进入稳定节律。<br /><br />这是在承担一种非常不便宜的监督负担。 <br /><br />因为太消耗，跟好几乎每天都泡在AI里的朋友聊天，他们说自己食量变大了，蛋白质需求更高了，更不爱动了，也懒得和其他人说话了，甚至大半夜会睡不着，从床上爬起起来点个宵夜，体重也蹭蹭往上涨🤦
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69cce4b1b9abae9b4f088566</id>
-            <title>AI探索站 04月01日</title>
-            <link>https://m.okjike.com/originalPosts/69cce4b1b9abae9b4f088566</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69cce4b1b9abae9b4f088566</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 01 Apr 2026 09:26:09 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    有需要的吗？
                 ]]>
             </content:encoded>
         </item>
