@@ -5,6 +5,382 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2026/04/weekly-issue-392.html</id>
+            <title>科技爱好者周刊（第 392 期）：axios 投毒与好莱坞式骗术</title>
+            <link>http://www.ruanyifeng.com/blog/2026/04/weekly-issue-392.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2026/04/weekly-issue-392.html</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 10 Apr 2026 07:17:13 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
+<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/9454">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
+
+<h2>封面图</h2>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040203.webp" title="" /></p>
+
+<p>今年就将启用的腾讯总部园区，俗称"企鹅岛"，里面不仅包括办公楼，还有多幢公寓楼。（<a href="https://www.nfnews.com/content/0oXLNmjJo9.html">via</a>）</p>
+
+<h2>axios 投毒与好莱坞式骗术</h2>
+
+<p>上周，著名软件库 axios 被<a href="https://cloud.tencent.com/announce/detail/2249">投毒</a>了。黑客拿到了发布令牌，直接发了一个新版本，里面加入了木马。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040703.webp" title="" /></p>
+
+<p>软件投毒不是新鲜事，新鲜的是发布令牌怎么泄漏的。背后的故事简直是好莱坞电影，根本防不胜防。</p>
+
+<p>axios 属于使用最广泛的 JS 软件库之一，每周下载量接近1亿次，所以这次投毒的感染面很大。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040704.webp" title="" /></p>
+
+<p>而且，木马的恶性程度很高。根据<a href="https://github.com/axios/axios/issues/10636#issue-4195231282">官方的清除说明</a>，如果不幸中毒，<strong>机器上所有的密钥、令牌和凭证都要作废</strong>。这个木马会扫描所有目录，收集密钥，然后发出去。</p>
+
+<p>大家要知道，像 axios 这种超级流行的软件库，每个环节都有完整防护，每一行代码都被严格审查。<strong>这次攻击完全是一场精心策划的社会工程</strong>，把这些防护都攻破了。</p>
+
+<p>攻击目标选定首席维护者 Jason Saayman。据<a href="https://github.com/axios/axios/issues/10636#issuecomment-4180237789">本人透露</a>，事件过程是这样的。</p>
+
+<blockquote>
+  <p>他们根据我的情况量身定制了这一流程，具体做法如下：</p>
+
+<ol start="1">
+<li>他们冒充某公司的创始人联系我，不仅克隆了该公司创始人的外貌，还克隆了该公司本身。</li>
+<li>他们随后邀请我加入一个真实的 Slack 工作区。这个工作区使用了该公司的品牌标识，名称也十分可信。Slack 的工作区设计得非常精巧，他们设有专门的频道来分享 LinkedIn 上的帖子。我猜这些 LinkedIn 帖子最终会发布到该公司的真实账号上，整体效果非常逼真。他们甚至还创建了一些我推测是该公司团队成员以及其他一些开源软件维护者的虚假账号。</li>
+<li>他们安排了一次与我的会面，目的是进行沟通。会议是在微软 Teams 上进行的。参会人员似乎是一群人。</li>
+<li>会议指出我系统上的某些东西过时了。我以为是和 Teams 有关，就安装了缺失的组件，结果发现是远程木马（RAT）。</li>
+<li>一切都安排得井井有条，看起来很正规，而且做事方式也很专业。</li>
+</ol>
+</blockquote>
+
+<p>可以看到，这个攻击是有剧本的，每一步都经过了策划，充分准备和排练，<strong>完全为你度身定制</strong>，就等你落入圈套。</p>
+
+<p>行骗者非常耐心，投入了巨大的前期成本。首先，假冒某公司的创始人联系你，为了提升可信度，还做了假的公司网站；然后，邀请你加入他们的 Slack 工作区，里面有各种讨论、项目文档、宣传物料，看上去就像真的一样；最绝的是，他们还让你在 Teams 软件上参加公司的视频会议，<strong>一群骗子亲自露面，陪你一起开会</strong>。</p>
+
+<p>会议开始后不久，主持人突然说："奇怪，你的系统怎么跟我们不一样，是不是微软的插件过时了，我发你一个最新版。"你就这样收到了传过来的安装包，看到别的与会者都在等你，你也就没有多想，直接双击执行了。哦喔，就这样中招了，发布令牌一秒钟就泄漏了。</p>
+
+<p>作假到这种程度，让人叹服。</p>
+
+<p>这让我联想到不久前看到的一条<a href="https://www.wsj.com/world/fake-cops-fake-judges-the-hollywood-style-scam-poised-to-go-global-e1e339a3?st=fXpKE6&amp;mod=1440&amp;user_id=66c4c9305d78644b3ac5df9c">印度新闻</a>，作假程度有过之而无不及，也是如同好莱坞电影。</p>
+
+<p>去年圣诞节，一位印度新德里的77岁老太太，收到了"警察局"的 Whatsapp 视频电话。视频右下角居然还有手语翻译。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040405.webp" title="" /></p>
+
+<p>警察跟她说，银行发现她的账户有洗钱记录，必须对她进行调查，如果不配合，账户资金将被没收，通知她远程出席法院的调查听证会。</p>
+
+<p>媒体后来披露了"警察局"的布景照片，大家看看多么逼真。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040406.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040407.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040408.webp" title="" /></p>
+
+<p>前三张照片是印度警察局，最后一张是巴基斯坦警察局，它们在一栋楼里，房间紧邻着。要知道这两个国家在现实中是对立的，但是不妨碍骗子两边都骗。</p>
+
+<p>再回到案子本身，几天后，老太太参加了线上听证会，在一个法院里举行，由"法官"亲自主持。他查看了资金记录，听取了"警察"的证词，向老太太询问了一些问题。</p>
+
+<p>最后，"法官"告诉老太太，当局需要核实她的所有资产是否合法。她必须每天都跟警察局连线，回答问题，直到查清为止。</p>
+
+<p>下面就是这个案件最精彩的部分，一连16天，老太太每天开着摄像头连线，大家看看骗子演到了什么程度。</p>
+
+<blockquote>
+  <p>在这16天里，老太太渐渐喜欢上了在假警局轮班的警官们。她开始称他们为自己的孩子们。而他们也反过来称她为"母亲"。</p>
+
+<p>晚上，她和最年轻的军官一起阅读印度教宗教经典，这位军官请她把她觉得特别感人的段落发给他。</p>
+
+<p>"他们就像家人一样，"老太太回忆说。"他们说，'女士，我们想尽快把事情解决。我们日夜为您工作。'"</p>
+</blockquote>
+
+<p>天哪，骗子从早到晚演了16天，跟老太太促膝长谈，一起读经典，请教人生问题，直到深夜。这要是拍成电影，该有多动人。</p>
+
+<p>老太太没有丝毫疑心，心甘情愿卖掉了自己的投资，累计九次向假警察局的账户总共转出了160万美元。</p>
+
+<p>第二天，她再跟"警察局的孩子们"连线，就连不上了。</p>
+
+<p>从上面两个案例，大家可以看到，现在的互联网骗局可以演到什么程度，完全是精准投放的"剧本杀"，成功率极高。要是再加上 AI 的加持，几乎不可能分辨真假、。</p>
+
+<p>网站开发有一条规则：客户端的每一个请求都不可信任，必须假定是恶意请求。以后，现实生活恐怕也是这样：每一个陌生人都不可信任，必须假定是恶意骗局。</p>
+
+<h2>算力依然不足</h2>
+
+<p>最近发生了三件事，说明算力当前依然很紧张。</p>
+
+<p>第一件事，OpenAI <a href="https://finance.sina.cn/stock/jdts/2026-04-07/detail-inhtsezc7221412.d.html">关闭</a>了视频生成服务 Sora，主要原因是算力不够，公司要把计算资源用于核心业务。</p>
+
+<p>第二件事，Anthropic 公司正式禁止将包月套餐用于第三方服务（比如 OpenClaw、OpenCode 等等）。</p>
+
+<p>原因是包月套餐如果足额使用，消耗的算力将远远超过套餐费用。公司的算力很宝贵，必须优先保证自家产品（比如 Claude Code），不能让外部产品增加机房负担。</p>
+
+<p>第三件事，有<a href="https://martinalderson.com/posts/what-next-for-the-compute-crunch/">文章</a>称，GitHub 今年前三个月的代码提交量是去年同期的14倍！</p>
+
+<p>原因显然是 AI 编程暴增，去年年初可没有 Claude Code。GitHub 的资源根本不足以应付这种增量，所以<a href="https://mrshu.github.io/github-statuses/">不断发生故障</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040810.webp" title="" /></p>
+
+<p>上图显示，GitHub 过去三个月的正常运行时间只有89.47%，合格数字应该是99.99%。</p>
+
+<p>以上三件事说明，主要的几家 AI 服务公司，算力资源都很紧张，硬件依然不足。</p>
+
+<p>这意味着，硬件价格暴涨还没到头，还会继续涨，而 GitHub 很可能会收紧免费服务，全面转向收费。</p>
+
+<h2>前端是不是重复劳动？</h2>
+
+<p>我看到一个开发者<a href="https://jonno.nz/posts/what-if-your-browser-built-the-ui-for-you/">说</a>，前端本质上是相同的工作：向用户展示一些数据，并让用户处理这些数据。</p>
+
+<p>他觉得，没必要重复解决同样的问题。</p>
+
+<p>他就做了一个"<a href="https://github.com/jonnonz1/adaptive-browser">自适应浏览器</a>"。它通过 AI 自动生成前端 UI，后端只需要提供数据，以及网页用途的描述。</p>
+
+<p>不知道这是不是前端的结局？</p>
+
+<h2>Adobe 修改 hosts 文件</h2>
+
+<p>Adobe 公司的主要产品是"创意云"套件（Creative Cloud），包含了许多著名软件，比如 Photoshop、Illustrator、Premiere。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040404.webp" title="" /></p>
+
+<p>一个网友安装后，震惊地发现，安装程序<a href="https://www.reddit.com/r/webdev/comments/1sb6hzk/comment/oe1ap9h/">修改</a>了他的 hosts 文件。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040403.webp" title="" /></p>
+
+<p>上图可以看到，Adobe 在 hosts 里面加了一个本地的 DNS 记录。</p>
+
+<p>一个应用程序为什么要修改系统文件呢？</p>
+
+<p>据知情人士透露，这是为了测试用户是否安装了 Creative Cloud。用户访问官网时，网页会向上图的域名发出一个请求，因为该域名的 DNS 记录只有本地才有，服务器收到了请求，就意味着用户安装了 Creative Cloud。</p>
+
+<p>这么著名的软件，居然想出这种类似"开后门"的解法，而且对象是付钱给他的人，真让人无语。</p>
+
+<h2>文章</h2>
+
+<p>1、<a href="https://developer.mozilla.org/en-US/blog/mdn-front-end-deep-dive/">MDN 新前端的底层结构</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040801.webp" title="" /></p>
+
+<p>MDN 是互联网最大的文档网站，本文介绍这个网站的前端架构，没想到这么复杂。</p>
+
+<p>2、<a href="https://windliang.wang/2026/03/31/%E6%9D%80%E6%AD%BB%E9%82%A3%E4%B8%AA%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%E4%BA%BA/">杀死那个写代码的人</a>（中文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040813.webp" title="" /></p>
+
+<p>作者是某大厂前端程序员，回顾自己这一年，从手写代码转变到 AI 编程。AI 改变了一切，消解了"35岁退休"。（<a href="https://github.com/ruanyf/weekly/issues/9545">@wind-liang</a> 投稿）</p>
+
+<p>3、<a href="https://jonno.nz/posts/built-an-sms-gateway-with-a-20-dollar-android-phone/">我如何用安卓手机搭建短信网关</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040302.webp" title="" /></p>
+
+<p>作者介绍如何在一部二手的安卓手机上，安装一个短信网关，通过网络收发短信（使用你自己的套餐）。</p>
+
+<p>4、<a href="https://www.hanshq.net/big-endian-qemu.html">使用 QEMU 进行大端字节序测试</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040402.webp" title="" /></p>
+
+<p>一篇 C 语言的初级教程，在本机上通过 qemu 虚拟机，运行一个不到十行的程序，就能查看某个架构是大端还是小端字节序。</p>
+
+<p>6、<a href="https://simonwillison.net/2025/Jun/20/python-importtime-graph/">Python 的 importtime 功能</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025062101.webp" title="" /></p>
+
+<p>Python 使用 import 命令输入模块，这有性能开销。本文介绍内置的 importtime 功能，可以显示每个模块加载所消耗的时间。</p>
+
+<p>6、<a href="https://rarehistoricalphotos.com/kursk-submarine-disaster-photos/">2000年库尔斯克号核潜艇灾难</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040808.webp" title="" /></p>
+
+<p>2000年8月，俄罗斯核潜艇"库尔斯克"号在演习中爆炸沉没，118名船员全部遇难。这场事故发生得十分缓慢，现场一片混乱，救援工作进展不断延迟，本文用大量照片还原了整个过程。</p>
+
+<h2>工具</h2>
+
+<p>1、<a href="https://apps.apple.com/nl/app/google-ai-edge-gallery/id6749645337">Google AI Edge Gallery</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040601.webp" title="" /></p>
+
+<p>本周，谷歌官方推出了一款苹果手机 App，为手机提供离线使用的 Gemma 4 模型。不需要上网，手机也能使用大模型了。</p>
+
+<p>2、<a href="https://apfel.franzai.com/">apfel</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040401.webp" title="" /></p>
+
+<p>Mac 电脑内置了一个本地大模型，可以离线使用。但是，默认只有苹果自家的 Siri 能调用，安装了这个工具以后，就可以自己在命令行调用它了。</p>
+
+<p>3、<a href="https://docking.cc/">Docking</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040701.webp" title="" /></p>
+
+<p>为 Linux 桌面添加类似苹果桌面的程序坞。</p>
+
+<p>4、<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a></p>
+
+<p>Rust 语言写的全文搜索引擎库，可以替代 Apache Lucene，参见<a href="https://www.paradedb.com/blog/tantivy-interview">介绍文章</a>。</p>
+
+<p>5、<a href="https://github.com/siddharthvaddem/openscreen">Open Screen</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040501.webp" title="" /></p>
+
+<p>跨平台的桌面应用，用来录屏后制作介绍视频，提供各种配套编辑功能。</p>
+
+<p>6、<a href="https://github.com/rafael1mc/epub-tts">epub-tts</a></p>
+
+<p>这个开源工具将 epub 文件转成音频文件，也就是电子书转成有声书。</p>
+
+<p>7、<a href="https://github.com/Syllo/nvtop">NVTOP</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202403/bg2024031301.webp" title="" /></p>
+
+<p>一个 Linux 系统的命令行程序，用来监控 GPU 显卡的状态，等同于显卡专用的 top 命令。</p>
+
+<p>8、<a href="https://github.com/PlayerYK/dmcheck">dmcheck</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040812.webp" title="" /></p>
+
+<p>检查某个主题词的域名占用情况。（<a href="https://github.com/ruanyf/weekly/issues/9542">@PlayerYK</a> 投稿）</p>
+
+<p>9、<a href="https://github.com/AmyangXYZ/reze-studio">Reze Studio</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040901.webp" title="" /></p>
+
+<p>开源的动画曲线编辑网站。（<a href="https://github.com/ruanyf/weekly/issues/9555">@AmyangXYZ</a> 投稿）</p>
+
+<p>10、<a href="https://github.com/unhappychoice/gitlogue">gitlogue</a></p>
+
+<p>这个工具可以将 Git 仓库的提交历史，在终端里面以动画形式重现，甚至可以显示为屏保。</p>
+
+<h2>资源</h2>
+
+<p>1、<a href="https://fojin.app/">佛津</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040301.webp" title="" /></p>
+
+<p>全球佛教古籍数字化聚合平台。（<a href="https://github.com/ruanyf/weekly/issues/9507">@xr843</a> 投稿）</p>
+
+<p>2、<a href="https://flight-viz.com/">Flight Viz</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040811.webp" title="" /></p>
+
+<p>实时 3D 显示全球的航班。（<a href="https://github.com/ruanyf/weekly/issues/9538">@haojiang99</a> 投稿）</p>
+
+<p>3、<a href="https://sheets.works/data-viz/every-gpu">GPU 时间线</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040809.webp" title="" /></p>
+
+<p>这个网站用图片展示了 GPU 显卡的发展历程，从1996年的 Voodoo 卡到2025年的 RTX 5090 显卡。</p>
+
+<h2>图片</h2>
+
+<p>1、<a href="https://www.sciencealert.com/how-12-000-tonnes-of-dumped-orange-peel-produced-something-nobody-imagined">绿化荒山的简单方法</a></p>
+
+<p>中美洲的哥斯达黎加出产橙汁，产生了大量的橘子皮，以前都是垃圾填埋。</p>
+
+<p>一个环保组织说服工厂，把12000吨橘子皮倾倒在荒山上，用来积肥。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040802.webp" title="" /></p>
+
+<p>山头覆盖了橘子皮，除此以外，没有做任何处理。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040803.webp" title="" /></p>
+
+<p>过了6个月，橘子皮彻底腐烂，成为了黑色的泥土，慢慢开始长东西了。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040804.webp" title="" /></p>
+
+<p>16年以后，当科学家重新来到现场时，那里已经是茂密的树林了。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040805.webp" title="" /></p>
+
+<p>这真是绿化荒山的最简单方法，只要堆满了橘子皮，任其腐烂就可以了。</p>
+
+<p>2、<a href="https://www.quantamagazine.org/global-physics-photowalk-2025-winners-revealed-20260401/">2025年全球物理摄影大赛</a></p>
+
+<p>美国、法国、日本等16个粒子物理实验室，联合举办了一个摄影比赛，邀请摄影师拍摄物理实验室，用来向大众宣传物理学。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040806.webp" title="" /></p>
+
+<p>上图是意大利国家核物理研究所 (INFN) 的低温探测器实验室，它可以将物质冷却到仅仅略高于绝对零度。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040807.webp" title="" /></p>
+
+<p>上图拍摄地是法国的重离子国家加速器研究中心，拍摄的装置是直线加速器的供电系统。</p>
+
+<p>更多照片看<a href="https://www.quantamagazine.org/global-physics-photowalk-2025-winners-revealed-20260401/">这里</a>。</p>
+
+<h2>文摘</h2>
+
+<p>1、<a href="https://www.mentalfloss.com/posts/why-is-sand-sticky">为什么沙子有粘性？</a></p>
+
+<p>我们去海边玩，沙子会粘在皮肤、鞋子、衣服和头发上。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202304/bg2023042604.webp" title="" /></p>
+
+<p>沙子的主要成分是二氧化硅，跟岩石一样。岩石没有粘性，为什么沙子会有粘性呢？</p>
+
+<p>原来，沙子本身没有粘性，但具有亲水性，它会吸水。人体也是亲水的，在烈日下汗流浃背。当沙子接触到湿润的东西时，水分子之间就会产生粘性。</p>
+
+<p>皮肤上往往还有油脂或者防晒霜，它们也会让沙子粘在皮肤上。</p>
+
+<p>另外，皮肤还有一些微小褶皱，也会卡住沙子。</p>
+
+<p>总之，想要去除沙子，就是等到皮肤变干，或者用水冲洗。</p>
+
+<h2>言论</h2>
+
+<p>1、</p>
+
+<p>如果你认为编写代码的速度是你的问题，那你面临的问题更大。</p>
+
+<p>-- <a href="https://andrewmurphy.io/blog/if-you-thought-the-speed-of-writing-code-was-your-problem-you-have-bigger-problems">Andrew Murphy</a>，澳大利亚程序员</p>
+
+<p>2、</p>
+
+<p>有一种兴奋，叫做2017年才刚接触加密货币的人才有的兴奋。</p>
+
+<p>-- <a href="https://andrewmurphy.io/blog/if-you-thought-the-speed-of-writing-code-was-your-problem-you-have-bigger-problems">Andrew Murphy</a>，澳大利亚程序员</p>
+
+<p>3、</p>
+
+<p>一项民意调查发现，美国年轻人对于婚姻、子女、信仰的重视程度，远不及他们的父母，对于传统的价值观----爱国主义、宗教、社区和家庭也很冷淡。</p>
+
+<p>年轻人把市场和金钱当作道德准则。在他们眼里，市场决定了事物的价值、事件的意义、谁是正确的、谁是赢家、谁举足轻重。</p>
+
+<p>-- <a href="https://www.derekthompson.org/p/we-havent-seen-the-worst-of-what">《预测市场的最糟糕后果》</a></p>
+
+<p>4、</p>
+
+<p>对我来说，未来城市实际上是像阿姆斯特丹那样的地方，到处都是舒适的街道和自行车道，而不是像迪拜那样的地方，有16车道的高速公路，以及一群被压迫的劳工阶级在俗气的豪华购物中心里工作。</p>
+
+<p>-- <a href="https://news.ycombinator.com/item?id=47643388">Hacker News 读者</a></p>
+
+<p>5、</p>
+
+<p>高校都要求博士生发表论文，至于你写什么、怎么写的、内容与研究方向有没有关系，系里其实都不在意。系里需要论文，因为论文能证明经费的合理性，而经费又能证明系的存在价值。学生只不过是达成这个目标的生产资料。</p>
+
+<p>-- <a href="https://ergosphere.blog/posts/the-machines-are-fine/">《机器没问题，有问题的是我们自己》</a></p>
+
+<h2>往年回顾</h2>
+
+<p><a href="https://www.ruanyifeng.com/blog/2025/04/weekly-issue-345.html">HDMI 2.2 影音可能到头了</a> (#345)</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2024/03/weekly-issue-295.html">巧妙的灯泡钟</a>（#295）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2023/03/weekly-issue-245.html">摩天大楼是反人类的</a>（#245）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2022/02/weekly-issue-195.html">你做过不在乎结果的项目吗？</a>（#195）</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2026-04-10T07:17:13+08:00">2026年4月10日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2026/04/weekly-issue-391.html</id>
             <title>科技爱好者周刊（第 391 期）：AI 的贫富分化</title>
             <link>http://www.ruanyifeng.com/blog/2026/04/weekly-issue-391.html</link>
@@ -1698,210 +2074,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2026-03-13T07:59:16+08:00">2026年3月13日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2026/03/arkclaw.html</id>
-            <title>零安装的"云养虾"：ArkClaw 使用指南</title>
-            <link>http://www.ruanyifeng.com/blog/2026/03/arkclaw.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2026/03/arkclaw.html</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 12 Mar 2026 16:01:06 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <h2>一、引言</h2>
-
-<p>大家这两天，有没有被"龙虾"（OpenClaw）刷屏？</p>
-<p>到处是它的新闻，就连两会代表和新华社都在谈论。真让人跌破眼镜，一个 AI 软件竟能引起这么大的反响。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031004.webp" title="" /></p>
-
-<p>人们的热情高涨，免费的线下安装活动人满为患，网上的"付费安装"生意兴隆。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031006.webp" title="" /></p>
-
-<p>很多人大概还不知道，现在有一种最简单的龙虾使用方法：<a href="https://www.volcengine.com/docs/82379/2229107?lang=zh">ArkClaw</a>。</p>
-
-<p>简单到你根本不需要操心安装，<strong>因为这是一个免安装的方案</strong>，它直接内置了龙虾，开箱即用。</p>
-
-<p>我也是昨天才开始用，迫不及待跟大家分享，初步使用的感受。没有用过的同学，也可以把它当作《龙虾零门槛上手》教程，看看龙虾到底是怎么回事。</p>
-
-<h2>二、ArkClaw 是什么</h2>
-
-<p>事情是这样的，老读者可能还记得，我在春节前<a href="https://mp.weixin.qq.com/s/e9NvGyPHlQfrUFCXKO4H7A">测评了</a>字节最新发布的 Seed 2.0 模型。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021416.webp" title="" /></p>
-
-<p>我在文章里说，这是字节目前最强的基础模型，手机豆包用的就是它，测试表现很不错。</p>
-
-<p>字节的同学后来就向我赠送了 <a href="https://www.volcengine.com/activity/codingplan">Coding Plan</a> 套餐，方便继续测试这个模型，各种 AI 编程工具都可以调用它的 API（当然套餐还包含其他国产模型，也是自由使用）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031007.webp" title="" /></p>
-
-<p>本周一，我突然发现，字节的这个 Coding Plan 套餐开通了一个捆绑服务，就是 ArkClaw。</p>
-
-<p>我问了客服才知道，<strong>只要现在开通 Coding Plan，就能免费使用龙虾</strong>。</p>
-
-<p>也就是说，只要你用字节的 AI 编程套餐，不用多花一分钱，字节就提供一台远程主机，里面安装好了龙虾，你可以自由使用。</p>
-
-<p>需要说明的是，Coding Plan 分成 lite（首月9.9元）和 Pro（首月49.9元）两种套餐。lite 套餐只能免费体验7天，只有 Pro 套餐可以长期使用 ArkClaw。</p>
-
-<h2>三、云养虾</h2>
-
-<p>ArkClaw 属于"云养虾"（又称"云龙虾"），就是把龙虾（OpenClaw）安装在火山方舟（字节的 AI 云服务品牌）的云主机上，它名字里的 ark 就是"方舟"的意思。</p>
-
-<p>除了"云养虾"，也可以把龙虾安装在本地计算机。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031008.webp" title="" /></p>
-
-<p>不了解的朋友可能会好奇，两者有什么区别，我简单说一下。</p>
-
-<p>首先，你要知道<strong>OpenClaw 属于自动化软件</strong>，它的作用就是让用户使用自然语言描述需求，它通过大模型找出满足需求的方法，然后自动去完成。</p>
-
-<p>当它安装在本地计算机（你的笔记本），就方便自动操作本地文件和本地设备，比如"找出拍摄于去年今日的照片"或者"关闭客厅的智能灯，并查询最近一周的耗电量"。</p>
-
-<p>当它安装在云端，就能 7x24 小时跟各种网络服务互动，比如"收到电子邮件时，自动生成30字的内容摘要，向手机发送通知"。</p>
-
-<p>所以，如果你需要自动化操作网络服务，并且需要长时间在线或者每天定时运行，那么就合适使用"云养虾"。</p>
-
-<h2>四、ArkClaw 基本操作</h2>
-
-<h3>4.1 界面</h3>
-
-<p>我给大家看一下，ArkClaw 的样子。</p>
-
-<p>进入<a href="https://console.volcengine.com/ark/region:ark+cn-beijing/experience/claw">控制台</a>，点击"立即创建"，创建一个龙虾实例。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031101.webp" title="" /></p>
-
-<p>创建完成后，就已经安装好了，直接使用。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031102.webp" title="" /></p>
-
-<p>界面非常简洁，就是一个对话框。ArkClaw 对龙虾的官方控制台做了定制，简化了操作界面。</p>
-
-<h3>4.2 抓取信息</h3>
-
-<p>你可以在对话框里面，跟 AI 模型对话，这跟其他模型的用法并无二致。</p>
-
-<p>举例来说，我们可以让它抓取信息。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031103.webp" title="" /></p>
-
-<p>可以看到，由于抓取的是动态内容，所以模型想到了很多实施方案，最后顺利完成。</p>
-
-<p>大家要记住，ArkClaw 就是一台远程主机，任何服务器可以用的技术方案，它都能用，这比安装在一般个人工作电脑上的龙虾更强大。</p>
-
-<h3>4.3 发送消息</h3>
-
-<p>获取信息以后，龙虾可以把这些信息发到手机。</p>
-
-<p>目前，ArkClaw 支持与企业微信、钉钉和飞书绑定。其中，飞书因为是自家的产品，绑定操作最简单，便捷快速，扫码即可。其他两家操作都比较麻烦，具体见<a href="https://www.volcengine.com/docs/6396/2249541?lang=zh">官方文档</a>。</p>
-
-<p>点击对话框上方的"飞书配对"按钮。（前面的"消息渠道"按钮，用于绑定企业微信和钉钉。）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031104.webp" title="" /></p>
-
-<p>系统会打开一个终端窗口，输出一个二维码，飞书扫描后可以创建一个机器人，跟当前的 ArkClaw 实例绑定。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031105.webp" title="" /></p>
-
-<p>通过这个机器人，你就可以在手机上跟当前这台 ArkClaw 实例对话了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031106.webp" title="" /></p>
-
-<p>你也可以在电脑上，通过 ArkClaw 网页控制台，向你的手机发消息。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031107.webp" title="" /></p>
-
-<p>电脑端输入上面指令后，手机端就会推送消息（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031108.webp" title="" /></p>
-
-<h3>4.4 定时任务</h3>
-
-<p>我们还可以规定，龙虾执行某些任务的时间和频率，也就是定时任务。</p>
-
-<p>首先，使用自然语言，在对话框设置定时任务。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031109.webp" title="" /></p>
-
-<p>设置完成后，你的手机就会每天收到消息了。</p>
-
-<p>如果要删除定时任务，也是使用自然语言发出指令。</p>
-
-<h2>五、Skill 和其他设置</h2>
-
-<h3>5.1 Skill</h3>
-
-<p>龙虾本身的能力是有限的，总会遇到一些它不知道如何处理的问题。这时，就可以通过 Skill（技能）扩展它的能力，这大大增加了龙虾的用途。</p>
-
-<p>什么是 Skill？简单理解，它就是一个文件包，里面包含了指令和示例，用来教模型如何完成某些特定的任务。</p>
-
-<p>网上已经有很多别人写好、分享出来的 Skill，只要挑一些自己需要的，让龙虾加载，就能扩展对应的能力。网站 <a href="https://clawhub.ai/">ClawHub.ai</a> 就收集龙虾专用 Skill，已经有近20000个了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031113.webp" title="" /></p>
-
-<p>我本来想用小红书 SKill 来举例，演示龙虾如何学会写小红书。但是，官方昨天发<a href="https://www.jiemian.com/article/14094710.html">公告</a>了，最近这样做的人太多了，现在开始封账号了。</p>
-
-<p>那么就换一个例子。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031115.webp" title="" /></p>
-
-<p>上面截图就是使用自然语言，让龙虾从 ClawHub 网站下载安装<a href="https://clawhub.ai/Dboy233/amap">高德地图（amap）的技能</a>。</p>
-
-<p>龙虾本来不知道怎么使用高德地图，有了这个技能就学会了，可以从中查询信息。这个技能的具体详细，可以<a href="https://clawhub.ai/Dboy233/amap">查看它的主页</a>。</p>
-
-<p>使用的时候，也是直接用自然语言描述需求，模型会自己加载调用所需的技能。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031116.webp" title="" /></p>
-
-<p>上图的截图就是通过高德地图，查询实时路况。</p>
-
-<h3>5.2 其他设置</h3>
-
-<p>ArkClaw 的其他功能，都在"设置"菜单（下图），比如调整底层模型。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031110.webp" title="" /></p>
-
-<p>只要是 Coding Plan 套餐提供的模型，这里都能使用。</p>
-
-<p>"设置"菜单还有两个很有用的功能。</p>
-
-<p>一个是"打开终端"，它会在网页上打开一个终端窗口，让你通过命令行直接操作 ArkClaw 所在的远程主机。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031111.webp" title="" /></p>
-
-<p>从上面的终端窗口截图可以看到，ArkClaw 底层是 Ubuntu 系统。</p>
-
-<p>另一个是"配置网盘"。某些情况下，你可能需要向 ArkClaw 上传/下载文件，这个功能允许当前主机与火山引擎的对象存储服务 TOS 绑定，相当于有了一个无限容量的网盘。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026031112.webp" title="" /></p>
-
-<h2>六、总结</h2>
-
-<p>以上就是我昨天第一天使用 ArkClaw 的主要内容。</p>
-
-<p>我的感受是，<strong>它确实大大简化了龙虾的使用</strong>，免安装、开箱即用，让龙虾的操作变得简单直观。通过自然语言加载调用 Skill，也很自然流畅。</p>
-
-<p><strong>它最大的强项就是跟字节生态深度融合</strong>，配合得十分丝滑：底层 Seed 2.0 模型 + 飞书推送 + 火山引擎网盘，完全不必复杂的配置。</p>
-
-<p>它是一个跟字节 Coding Plan 捆绑的服务，不用额外付费。相比自己从头搭建"云龙虾"，云主机和 AI 模型的费用就省掉了，这是一笔不小的费用。</p>
-
-<p>作为程序员，这个 AI 编程的 Coding Plan + 云龙虾 ArkClaw 主机的捆绑方案，还是很有吸引力的。</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2026-03-12T16:01:06+08:00">2026年3月12日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
