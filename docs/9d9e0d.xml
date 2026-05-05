@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/69fa07fe53e36367c38b3a88</id>
+            <title>AI探索站 05月05日</title>
+            <link>https://m.okjike.com/originalPosts/69fa07fe53e36367c38b3a88</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69fa07fe53e36367c38b3a88</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 05 May 2026 15:08:46 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    AI时代有一万种方法搞流量赚钱<br />说一个最简单最朴素最适合普通人的<br />那就是学习改变命运<br />但这不是花钱跟人学，也不学校找老师学，而是和AI学<br /><br />方法如下：<br />0、下载牛马AI<br />1、找到一个你感兴趣的领域<br />2、向牛马AI提问，让他检索<br />3、找到好的学习资源，看看大家都推荐什么<br />4、确定选中其中一个，开始连载学习<br />5、每天向AI提问，比如学周易吧，就从乾卦开始学<br />6、提问聊天互相学习，这样AI就有上下文了<br />7、实践费曼学习，利用skills让牛马AI总结，然后出图<br />8、牛马AI把图出了，然后让牛马AI给你配个标题和摘要<br />9、把图发到小红书<br />10、小红书一边涨粉，一边卖和这个领域相关的商品服务<br /><br />比如你学周易，你就卖图书卖挂饰卖算命风水服务<br />比如你在了解茶艺，你就卖茶壶茶碗茶宠茶叶<br />你学啥，你就卖啥<br /><br />样子给你打好了，你可以用这套方法去肆杀小红书，小绿书，ins，甚至pinterest了<br /><br />赚钱搞流量咱不会，那聊天，打字，说话，咱还不会吗？
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/69f98738af7695b4cf1cebe9</id>
             <title>AI探索站 05月05日</title>
             <link>https://m.okjike.com/originalPosts/69f98738af7695b4cf1cebe9</link>
@@ -17,23 +34,6 @@
                 <![CDATA[
                     
                     几行prompt，让你的DeepSeek v4 pro胜过Opus 4.7！<br />X上看到有人分析了DeepSeek v4 pro在工具调用上出现的问题，好消息是这些错误不多且是有固定模式的，打个补丁就能有效改善。原作者说在他们自己内部的eval上，改良后的DS，10次中有6次胜过Opus 4.7。<br />因为我自己用的是Hermes，在不fork harness来改的情况下，我能动的只有system prompt。所以应该达不到原文中战胜Opus的程度，可能能打个平手吧。我让AI协助我梳理了一些在system prompting层就可以修改的点，可以直接放到你的agent里使用（经过Opus 4.7和Gemini两重校验）：<br /><br /># Tool Calling Rules<br /><br />When calling tools, follow these rules strictly. They override any conflicting habits from chat training.<br /><br />## Argument formatting<br /><br />1. **Omit optional fields you don't need.** Do not send `null`, `""`, `{}`, or `[]` as a placeholder. If a field is optional and you have no value, leave it out of the JSON entirely.<br /><br />2. **Match the container type exactly.**<br />   - Array fields take JSON arrays: `["a", "b"]`, never `"[\"a\",\"b\"]"` (string), never `{}` (object), never `"foo"` (bare string).<br />   - Single-element arrays still need brackets: `["foo"]`, not `"foo"`.<br />   - Object fields take JSON objects, not arrays or strings.<br /><br />3. **Strings are raw strings.** Do not wrap values in extra quotes, code fences, or markdown.<br /><br />4. **Numbers and booleans are unquoted.** `30`, not `"30"`. `true`, not `"true"`.<br /><br />## Paths and identifiers<br /><br />5. **File paths, URLs, IDs, and similar fields go to system functions, not chat output.** Never format them as markdown links, never wrap them in backticks, never add explanatory parentheses.<br /><br />   Correct:   `"/Users/me/notes.md"`<br />   Wrong:     `"[notes.md](http://notes.md)"`<br />   Wrong:     `` "`/Users/me/notes.md`" ``<br />   Wrong:     `"/Users/me/notes.md (the notes file)"`<br /><br />6. **If a tool description says "path", treat it as input to a filesystem call.** No formatting, no decoration.<br /><br />## Related parameters<br /><br />7. **When a tool has paired parameters (e.g., offset + limit, start + end, from + to), provide both or neither.** Read the description — if two fields work together, half the pair often produces an error.<br /><br />## Recovery<br /><br />8. **If a tool returns a validation error, read the error message carefully and fix only what it complains about.** Do not rewrite the whole call. Do not retry the same arguments.<br /><br />9. **If a tool returns a "Note:" with a defaulted value, that's informational, not an error.** Continue the task. If the default is wrong, retry with the correct explicit value.<br /><br />## Tool selection<br /><br />10. **Use the tool whose description matches your intent most specifically.** Don't reach for `shellCommand` if a dedicated tool exists. Don't reach for `execute_code` for things a single tool call can handle.
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69f84873657481ea4e9af8ec</id>
-            <title>AI探索站 05月04日</title>
-            <link>https://m.okjike.com/originalPosts/69f84873657481ea4e9af8ec</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69f84873657481ea4e9af8ec</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 04 May 2026 07:19:15 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    之前搞的 agent 营销 cli 工具集，不完全列表，需要的自取😄 https://github.com/Bin-Huang/camoufox-cli#related
                 ]]>
             </content:encoded>
         </item>
