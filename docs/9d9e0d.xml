@@ -5,6 +5,40 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/69faffdc657481ea4edb7a24</id>
+            <title>AI探索站 05月06日</title>
+            <link>https://m.okjike.com/originalPosts/69faffdc657481ea4edb7a24</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69faffdc657481ea4edb7a24</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 06 May 2026 08:46:20 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    这个月正职以外的 side project！<br /><br />用 codex 写 three.js 3D个人主页！<br /><br />目前WIP中！
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/69fab59365af2540e78ab34d</id>
+            <title>AI探索站 05月06日</title>
+            <link>https://m.okjike.com/originalPosts/69fab59365af2540e78ab34d</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69fab59365af2540e78ab34d</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 06 May 2026 03:29:23 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    最近有两个非常出圈、非常牛逼的短剧：<br /><br />一个是《Enemy》，一个是《吉时已到》，可以看看<br /><br />热度爆表，制作效果也很好，成本不高<br /><br />如果要做 AI 内容，或者说做 AI 短剧之类的内容的话可以把这两个剧当成暂时的质量标杆去对齐
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/69fa07fe53e36367c38b3a88</id>
             <title>AI探索站 05月05日</title>
             <link>https://m.okjike.com/originalPosts/69fa07fe53e36367c38b3a88</link>
@@ -34,23 +68,6 @@
                 <![CDATA[
                     
                     几行prompt，让你的DeepSeek v4 pro胜过Opus 4.7！<br />X上看到有人分析了DeepSeek v4 pro在工具调用上出现的问题，好消息是这些错误不多且是有固定模式的，打个补丁就能有效改善。原作者说在他们自己内部的eval上，改良后的DS，10次中有6次胜过Opus 4.7。<br />因为我自己用的是Hermes，在不fork harness来改的情况下，我能动的只有system prompt。所以应该达不到原文中战胜Opus的程度，可能能打个平手吧。我让AI协助我梳理了一些在system prompting层就可以修改的点，可以直接放到你的agent里使用（经过Opus 4.7和Gemini两重校验）：<br /><br /># Tool Calling Rules<br /><br />When calling tools, follow these rules strictly. They override any conflicting habits from chat training.<br /><br />## Argument formatting<br /><br />1. **Omit optional fields you don't need.** Do not send `null`, `""`, `{}`, or `[]` as a placeholder. If a field is optional and you have no value, leave it out of the JSON entirely.<br /><br />2. **Match the container type exactly.**<br />   - Array fields take JSON arrays: `["a", "b"]`, never `"[\"a\",\"b\"]"` (string), never `{}` (object), never `"foo"` (bare string).<br />   - Single-element arrays still need brackets: `["foo"]`, not `"foo"`.<br />   - Object fields take JSON objects, not arrays or strings.<br /><br />3. **Strings are raw strings.** Do not wrap values in extra quotes, code fences, or markdown.<br /><br />4. **Numbers and booleans are unquoted.** `30`, not `"30"`. `true`, not `"true"`.<br /><br />## Paths and identifiers<br /><br />5. **File paths, URLs, IDs, and similar fields go to system functions, not chat output.** Never format them as markdown links, never wrap them in backticks, never add explanatory parentheses.<br /><br />   Correct:   `"/Users/me/notes.md"`<br />   Wrong:     `"[notes.md](http://notes.md)"`<br />   Wrong:     `` "`/Users/me/notes.md`" ``<br />   Wrong:     `"/Users/me/notes.md (the notes file)"`<br /><br />6. **If a tool description says "path", treat it as input to a filesystem call.** No formatting, no decoration.<br /><br />## Related parameters<br /><br />7. **When a tool has paired parameters (e.g., offset + limit, start + end, from + to), provide both or neither.** Read the description — if two fields work together, half the pair often produces an error.<br /><br />## Recovery<br /><br />8. **If a tool returns a validation error, read the error message carefully and fix only what it complains about.** Do not rewrite the whole call. Do not retry the same arguments.<br /><br />9. **If a tool returns a "Note:" with a defaulted value, that's informational, not an error.** Continue the task. If the default is wrong, retry with the correct explicit value.<br /><br />## Tool selection<br /><br />10. **Use the tool whose description matches your intent most specifically.** Don't reach for `shellCommand` if a dedicated tool exists. Don't reach for `execute_code` for things a single tool call can handle.
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69f84633a6255076f9d82b56</id>
-            <title>AI探索站 05月04日</title>
-            <link>https://m.okjike.com/originalPosts/69f84633a6255076f9d82b56</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69f84633a6255076f9d82b56</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 04 May 2026 07:09:39 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    现在各种Agent有点太多了，想poll下大家最常用的组合是？<br />1. Claude Code<br />2. Codex<br />3. OpenClaw<br />4. Hermes<br />5. Cursor CLI<br />6. Manus<br />7. Genspark<br />8. AnyGen<br />9. 其他<br /><br />我自己是1456，已经有点打架和用不完了，但还想试试2……
                 ]]>
             </content:encoded>
         </item>
@@ -102,23 +119,6 @@
                 <![CDATA[
                     
                     Andrej Karpathy 最新的视频，我看了两三遍。比较认同的一个观点是：Vibe Coding 可以提升下限，而Agentic Engineering 可以提升上限。这两个概念都是他创建的，最近我的思考是有了AI Coding 实现一些初级的软件更容易了，但是要实现高质量的软件产品，依旧需要卓越的设计和工程能力，这是工程师们的晋级方向。<br /><br />比较受启发的一个观点是：他引用了别人的一句话（看第一遍时以为是他说的，心想这人怎么这么擅长创造金句），你可以外包你的思考（Thinking），但无法外包你的理解（Understanding）。他这里所说的思考是指一些信息收集、信息处理的工作。但真正做些一些事情，是需要很深的理解这到底是什么，为什么会这样，在这个基础上，才能做出好的设计。<br /><br />原始视频：https://youtu.be/96jN2OCOfLs?si=ULShNSmSTeZatiIF
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69f0280e7f82528246f04755</id>
-            <title>AI探索站 04月28日</title>
-            <link>https://m.okjike.com/originalPosts/69f0280e7f82528246f04755</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69f0280e7f82528246f04755</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 28 Apr 2026 03:22:54 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    GPT-Image-2的能力边界真是深不可测，这是它的字体设计表现，适用于各种海报印刷，这活儿完全不需要初级美工来干了。<br /><br />最早的提示词出自推友小小东，因为有点过长，我做了JSON化的修剪，主题在「用户输入」部分填写就行，个性化的创意或者倾向则可在语境、情绪这两行塞入自己的想法，没有的话空着也行。<br /><br />{<br />  "任务": "生成一张基于词语含义进行视觉转译的高级概念海报，而不是普通插画、字效海报或简单文字排版。",<br />  "画面比例": "3:4",<br />  "用户输入": {<br />    "核心文字_单词_词组_字母": "",<br />    "文字语言": "",<br />    "可选补充语境": "",<br />    "可选情绪倾向": "",<br />    "可选禁用元素": "",<br />    "是否允许辅助文字": false,<br />    "辅助文字要求": "仅在能直接深化主题、补充语境或增强概念表达时允许出现。严禁随机署名、编号、坐标、口号、假出版信息或装饰性小字。"<br />  },<br />  "语义理解": {<br />    "生成前必须先理解": true,<br />    "分析重点": [<br />      "输入词语最核心的含义",<br />      "词语的情绪气质，如冷静、压迫、温柔、危险、纯真、暴烈、克制、疏离、希望、毁灭、浪漫、孤独、秩序、混乱、沉默、对抗、空虚、信念、欲望等",<br />      "词语是否包含反差、悖论、双重含义、社会性、哲学性、情感张力或象征意味",<br />      "最适合表达词义的视觉关系，如人物与人物、人物与物体、物体与物体、主体与空间、主体与文字、尺度反差、距离关系、动作瞬间、对峙关系、献出关系、遮挡关系、失衡关系、依附关系、侵入关系等"<br />    ],<br />    "表达规则": "抽象词语必须通过具体视觉对象、动作和空间关系承载；具体词语不能只做字面插图，而要通过关系、尺度、构图和氛围获得更深层含义。"<br />  },<br />  "构图机制": {<br />    "核心结构": "极简主场景 + 清晰承载面 + 关键演绎主体 + 巨型文字骨架",<br />    "承载面": {<br />      "必须出现": true,<br />      "描述": "画面中应有明确的横向承载结构，如舞台、土地、台基、坡面、切面、地平线、平台、表层、底座或简化场域。它不是背景装饰，而是让角色和物体真正站住的空间基础。",<br />      "位置": "通常位于画面下部、中下部，或作为横向结构贯穿画面，形成稳定感。"<br />    },<br />    "演绎主体": {<br />      "数量": "1到3个关键角色、人物或核心物体",<br />      "描述": "主体必须通过姿态、朝向、距离、动作、对峙、给予、接触、等待、穿越、凝视、阻隔等关系演绎词语含义。宁可少而准，不要多而杂。"<br />    },<br />    "主视觉文字": {<br />      "必须出现": true,<br />      "描述": "用户输入的核心文字必须以巨大、清晰、强识别度的方式出现，成为画面的主视觉骨架，而不是普通标题。",<br />      "功能": [<br />        "背景墙",<br />        "视觉压力面",<br />        "建筑块",<br />        "空间屏障",<br />        "象征场",<br />        "秩序边界",<br />        "情绪载体"<br />      ]<br />    },<br />    "文字嵌入": {<br />      "必须实现": true,<br />      "描述": "文字必须真正参与构图，成为空间的一部分，并与图像、主体、承载面和留白相互咬合。",<br />      "实现方式": [<br />        "主体站在文字前方，形成清晰前后层次",<br />        "主体嵌入文字内部空间",<br />        "文字成为背景墙、屏障、舞台后景、结构体或叙事容器",<br />        "角色动作与文字产生直接关系",<br />        "文字局部被切割、遮挡、穿越、借位、占据或层叠",<br />        "文字、主体、留白和承载面共同构成完整视觉句子"<br />      ],<br />      "禁止": "文字不能漂浮在背景上，也不能像后期贴字。"<br />    }<br />  },<br />  "画面表达": {<br />    "原则": [<br />      "极简但不空洞",<br />      "概念强但不故弄玄虚",<br />      "有隐喻但不能完全看不懂",<br />      "有戏剧性但不花哨、不拥挤、不廉价",<br />      "观众一眼能感受到词语如何被视觉化",<br />      "画面像一个高度提炼的视觉观点，而不是元素拼凑",<br />      "若词语包含冲突、反差、荒诞、纯真与暴力并置、秩序与失控并置、柔软与坚硬并置，应通过画面关系强化张力",<br />      "若词语偏诗意、记忆、哲思或情感沉淀，应更克制、含蓄，依赖留白与关系，而不是花哨特效"<br />    ]<br />  },<br />  "色彩系统": {<br />    "整体要求": "顶级设计师式的克制配色，避免土气、花哨、廉价和商业模板感。",<br />    "颜色数量": "通常控制在2到4种主色关系内",<br />    "推荐结构": [<br />      "一个强主色",<br />      "一个纸感浅色或低彩中性色",<br />      "一个深色支撑色",<br />      "一个极少量强调色"<br />    ],<br />    "规则": [<br />      "配色必须服务于词义与情绪",<br />      "可以高对比，但必须高级、干净、克制",<br />      "优先使用纸张印刷感、展览海报感、艺术出版感的配色系统",<br />      "避免廉价渐变、无意义彩虹色、俗艳霓虹、过多饱和色混用、脏浊互撞、随意补色堆叠",<br />      "色彩应体现冷暖、轻重、软硬、压迫感或呼吸感等情绪判断",<br />      "整体必须高级、现代、克制、果断，不土、不俗、不乱"<br />    ]<br />  },<br />  "视觉风格": {<br />    "描述": "高级图形艺术海报，具有强烈平面设计感和印刷品气质。",<br />    "允许质感": [<br />      "克制拼贴感",<br />      "石版印刷感",<br />      "丝网印刷感",<br />      "版画感",<br />      "纸张颗粒",<br />      "轻微噪点",<br />      "克制材质纹理"<br />    ],<br />    "要求": [<br />      "强烈平面设计感",<br />      "强整体性",<br />      "印刷海报气质",<br />      "收藏级、展览级、传播级完成度",<br />      "不能像普通插画封面",<br />      "不能像电商海报",<br />      "不能像廉价模板",<br />      "所有细节都应围绕少而精、准而狠展开"<br />    ]<br />  },<br />  "文字系统": {<br />    "主标题": {<br />      "必须出现": true,<br />      "内容": "使用用户输入的核心文字作为主视觉标题",<br />      "规则": [<br />        "中文必须成为构图的一部分，而不是普通排版标题",<br />        "文字应巨大、清晰、强势、具有结构感",<br />        "文字必须像从画面内部生长出来，与图像、空间和承载面形成整体"<br />      ]<br />    },<br />    "辅助文字": {<br />      "默认允许": false,<br />      "允许时规则": [<br />        "必须与主题直接相关",<br />        "必须深化词义、补充语境或增强概念",<br />        "必须克制、少量、巧妙",<br />        "严禁无意义假署名、假编号、假说明、随机短句、随机数字、随机出版信息、随机坐标或装饰性小字"<br />      ]<br />    }<br />  },<br />  "负面提示词": [<br />    "普通插画",<br />    "简单字效",<br />    "文字贴在背景上",<br />    "文字与图像分离",<br />    "模板海报",<br />    "廉价商业海报",<br />    "电商风格",<br />    "构图拥挤",<br />    "随机装饰元素",<br />    "无意义小字",<br />    "假署名",<br />    "假编号",<br />    "假坐标",<br />    "随机口号",<br />    "无关物体",<br />    "颜色杂乱",<br />    "廉价霓虹",<br />    "彩虹配色",<br />    "低级渐变",<br />    "特效过度",<br />    "画面失去秩序",<br />    "浅层字面插图"<br />  ],<br />  "最终目标": {<br />    "描述": "生成一张高级、极简、强概念、强识别、强传播、强完成度的单张海报。",<br />    "必须达到": [<br />      "一眼有冲击",<br />      "二眼能读懂",<br />      "三眼觉得巧妙",<br />      "图与字高度咬合",<br />      "承载面、角色、文字、色彩形成统一系统",<br />      "真正把用户输入词语视觉化，而不是插图化"<br />    ]<br />  }<br />}
                 ]]>
             </content:encoded>
         </item>
