@@ -39,6 +39,23 @@
         </item>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/69fa23d553e36367c38dc0b2</id>
+            <title>AI探索站 05月05日</title>
+            <link>https://m.okjike.com/originalPosts/69fa23d553e36367c38dc0b2</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69fa23d553e36367c38dc0b2</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 05 May 2026 17:07:33 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    有段时间没用悟空了，今天一打开发现它闷声不响上了一大批电商相关的skill，把1688、淘宝、速卖通各个场景一一打通，真是相当的卷……
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/69fa07fe53e36367c38b3a88</id>
             <title>AI探索站 05月05日</title>
             <link>https://m.okjike.com/originalPosts/69fa07fe53e36367c38b3a88</link>
@@ -68,23 +85,6 @@
                 <![CDATA[
                     
                     几行prompt，让你的DeepSeek v4 pro胜过Opus 4.7！<br />X上看到有人分析了DeepSeek v4 pro在工具调用上出现的问题，好消息是这些错误不多且是有固定模式的，打个补丁就能有效改善。原作者说在他们自己内部的eval上，改良后的DS，10次中有6次胜过Opus 4.7。<br />因为我自己用的是Hermes，在不fork harness来改的情况下，我能动的只有system prompt。所以应该达不到原文中战胜Opus的程度，可能能打个平手吧。我让AI协助我梳理了一些在system prompting层就可以修改的点，可以直接放到你的agent里使用（经过Opus 4.7和Gemini两重校验）：<br /><br /># Tool Calling Rules<br /><br />When calling tools, follow these rules strictly. They override any conflicting habits from chat training.<br /><br />## Argument formatting<br /><br />1. **Omit optional fields you don't need.** Do not send `null`, `""`, `{}`, or `[]` as a placeholder. If a field is optional and you have no value, leave it out of the JSON entirely.<br /><br />2. **Match the container type exactly.**<br />   - Array fields take JSON arrays: `["a", "b"]`, never `"[\"a\",\"b\"]"` (string), never `{}` (object), never `"foo"` (bare string).<br />   - Single-element arrays still need brackets: `["foo"]`, not `"foo"`.<br />   - Object fields take JSON objects, not arrays or strings.<br /><br />3. **Strings are raw strings.** Do not wrap values in extra quotes, code fences, or markdown.<br /><br />4. **Numbers and booleans are unquoted.** `30`, not `"30"`. `true`, not `"true"`.<br /><br />## Paths and identifiers<br /><br />5. **File paths, URLs, IDs, and similar fields go to system functions, not chat output.** Never format them as markdown links, never wrap them in backticks, never add explanatory parentheses.<br /><br />   Correct:   `"/Users/me/notes.md"`<br />   Wrong:     `"[notes.md](http://notes.md)"`<br />   Wrong:     `` "`/Users/me/notes.md`" ``<br />   Wrong:     `"/Users/me/notes.md (the notes file)"`<br /><br />6. **If a tool description says "path", treat it as input to a filesystem call.** No formatting, no decoration.<br /><br />## Related parameters<br /><br />7. **When a tool has paired parameters (e.g., offset + limit, start + end, from + to), provide both or neither.** Read the description — if two fields work together, half the pair often produces an error.<br /><br />## Recovery<br /><br />8. **If a tool returns a validation error, read the error message carefully and fix only what it complains about.** Do not rewrite the whole call. Do not retry the same arguments.<br /><br />9. **If a tool returns a "Note:" with a defaulted value, that's informational, not an error.** Continue the task. If the default is wrong, retry with the correct explicit value.<br /><br />## Tool selection<br /><br />10. **Use the tool whose description matches your intent most specifically.** Don't reach for `shellCommand` if a dedicated tool exists. Don't reach for `execute_code` for things a single tool call can handle.
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/69f759a0c2dc8bf83f00212d</id>
-            <title>AI探索站 05月03日</title>
-            <link>https://m.okjike.com/originalPosts/69f759a0c2dc8bf83f00212d</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/69f759a0c2dc8bf83f00212d</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 03 May 2026 14:20:16 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    国内搞AI产品的没什么赚钱的，但做AI生意的很快赚钱：<br /><br />一波是做账号生意的：<br />1、薅羊毛卖账号的<br />2、搞API中转站的<br />3、刷黑卡洗钱代充值的<br />4、卖发卡站中转站搞模式出代理的<br /><br />一波是做AI培训生意的：<br />1、做AI副业的，什么教你做AI动漫，搞AI公众号<br />2、各种解决AI焦虑的，vibecoding，大模型，agent<br />3、各类企业培训<br /><br />一波是做李逵李鬼的：<br />海外叫Claude我就叫Cloude，蹭着品牌词直接投SEM，反正国外上架不了，进来就买一年会员，干不动就跑路<br /><br />一波是闲鱼套利的：<br />出了新东西赶紧上闲鱼，套利传统行业<br />不论是vibecoding搞外包，还是nano banana代出图，就是用AI效率成本碾压传统<br /><br />发现没有，大家都是做漏斗顶端的那部分<br />因为顶部是信息最不对称的，最焦虑的，人群最多，门槛最低的地方<br /><br />也就是做这种东西，赚钱是最快的<br /><br />有快钱不赚，跑去做产品的，大多都是有点儿什么自我执念，反正绝对不是理性经济人
                 ]]>
             </content:encoded>
         </item>
