@@ -5,6 +5,393 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2026/05/weekly-issue-395.html</id>
+            <title>科技爱好者周刊（第 395 期）：软件开发的第三种方式</title>
+            <link>http://www.ruanyifeng.com/blog/2026/05/weekly-issue-395.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2026/05/weekly-issue-395.html</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 08 May 2026 07:40:44 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 第三种软件开发方式, AI编程, 神秘屋, 软件个性化<br><br>总结: 本文提出软件开发目前出现了第三种方式“神秘屋”，以补充传统的“大教堂”和“集市”模式。这种方式比喻开发者像建造“神秘屋”一样，使用AI按个人需求随意开发软件。这种开发过程高度个性化、缺乏整体规划和文档，代码层层累加。随着AI能力增强，这种方式可能成为主流。文章还介绍了利用黑客新闻热度衡量大模型流行度的方法。 </div>
+                        <hr>
+                    
+                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
+<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/9815">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
+
+<h2>封面图</h2>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050602.webp" title="" /></p>
+
+<p>即将在今年完工的深圳自然博物馆，它的形状模拟了一条弯曲的河流。（<a href="https://baike.baidu.com/item/%E6%B7%B1%E5%9C%B3%E8%87%AA%E7%84%B6%E5%8D%9A%E7%89%A9%E9%A6%86/22596523">via</a>）</p>
+
+<h2>软件开发的第三种方式</h2>
+
+<p>有一本很著名的软件开发著作，叫做《大教堂与集市》，大家了解吗？</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050712.webp" title="" /></p>
+
+<p>它提出软件开发有两种方式。</p>
+
+<p>一种方式是大教堂（Cathedral），即软件经过精心规划，由一支专业的团队封闭式开发管理，全过程有严格的流程和管控，代码通常是闭源的。</p>
+
+<p>另一种方式是集市（bazaar），即软件开发是开放的，没有围墙，任何人都可以加入，决策过程是透明的、由社区驱动，代码开源。</p>
+
+<p>这种比喻将软件行业一分为二，非常精辟，自从初次提出，已经过去了近30年，一直得到大家的认可。</p>
+
+<p>但是最近，有人提出，这两种方式已经不足以概括现状，软件开发现在出现了第三种方式：<a href="https://www.dbreunig.com/2026/03/26/winchester-mystery-house.html">神秘屋</a>。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026040502.webp" title="" /></p>
+
+<p>"神秘屋"是一幢真实存在的大宅，就位于美国加州，19世纪末由一个老太太建造。</p>
+
+<p>这个老太太非常非常有钱，没有其他爱好，就喜欢建筑学。她拿自己家当作实验品，一个房间接一个房间地建造，都由她说了算，亲自设计，亲自监工。</p>
+
+<p>整幢楼没有整体规划，怎么想就怎么造，房间 A 是维多利亚式，房间 B 是罗马式，房间 C 是哥特式，都由老太太决定。有时候，房间造到一半，老太太不满意了，就拆掉重建。</p>
+
+<p>所以，整个建筑像迷宫一样，每个房间的风格都不一样。根据当年的记录，重建次数最多的房间一共拆毁重建了16次。为了省事，一些房间的窗户和门重建时也没拆掉，而是直接砌进了墙里。</p>
+
+<p>整幢楼在不同时期加盖了多层，最高达到五层，大约有160个房间、2000扇门、10000扇窗户、47个楼梯、47个壁炉、13个浴室和6个厨房。</p>
+
+<p>1922年，老太太去世后，它对外开放，人们将其称为"神秘屋"。</p>
+
+<p>如今，很多程序员就是这个老太太。</p>
+
+<p>他用 AI 开发软件，自己提出需求，想要什么就让 AI 开发什么，既没有需求审查，也没有代码测试，充分满足自己的个性。</p>
+
+<p>最终开发出来的软件，就是高度个性化，规模庞大，不断扩张，代码层层累加，几乎没有精简和优化，充满了修复 bug 的补丁。而且，它通常缺乏文档，对外人来说晦涩难懂，就像"神秘屋"一样。</p>
+
+<p>但是，这种开发过程充满了乐趣，会让开发者自我陶醉，乐在其中。</p>
+
+<p>随着 AI 模型越来越强，"神秘屋"式软件正在不断涌现，搞不好以后会成为主流，取代大教堂和集市。大部分软件，尤其是个人和小团队开发的软件，可能都是以这种方式开发出来的。</p>
+
+<h2>大模型流行度排行榜</h2>
+
+<p>现在的大模型排行榜，都是衡量大模型的能力。有人想出了一种方法，可以衡量大模型的人气。</p>
+
+<p>具体来说，就是每天抓取"<a href="https://news.ycombinator.com/">黑客新闻</a>"热度最高的200个主题，筛选出编程和 AI 相关的主题，再根据每个主题下面的留言，看看讨论最多、评价最好的模型是什么。</p>
+
+<p>黑客新闻是著名的程序员社区，每天有大量程序员和工程师访问并留言。因此，它具有代表性，提及次数最多、好评率最高的模型，就是最流行的模型。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050405.webp" title="" /></p>
+
+<p>这个项目的网站是 <a href="https://hnup.date/hn-sota">HN SOTA</a>，每天都会更新排行榜。</p>
+
+<p>本周前三名的模型依次是 Claude Opus 4.7、GPT 5.5、Claude Sonnet。</p>
+
+<p>国产模型 Kimi K2.6、DeepSeek V4、Qwen 3.6、GLM 5.1 都进入了前十名。 </p>
+
+<h2>科技动态</h2>
+
+<p>1、<a href="https://www.wsj.com/tech/ai/familiar-machines-and-magic-robot-c8711e45">陪伴式机器狗</a></p>
+
+<p>扫地机器人的发明者是美国 iRobot 公司创始人科林·安格尔（Colin Angle），他退休后继续研究机器人。</p>
+
+<p>最近，他的公司推出了一个主要用来陪伴的机器狗。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050706.webp" title="" /></p>
+
+<p>它的最大特点就是，看起来不像机器，更像毛绒玩具，可以跟随行走，也可以跟你互动。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050707.webp" title="" /></p>
+
+<p>以现在的技术，已经能做出可以乱真的机器狗。也许人们以后更愿意养机器狗，而不是真的狗，因为机器狗能陪伴你，但不会咬人和吠叫，也不需要遛狗。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050708.webp" title="" /></p>
+
+<p>2、<a href="https://insideevs.com/news/794295/chinese-ev-headlight-movie-projectors/">前大灯投影仪</a></p>
+
+<p>华为推出了一种新技术，把投影仪放进轿车的前大灯。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050406.webp" title="" /></p>
+
+<p>停车后，就可以打开车灯，在前面的墙壁或幕布上投影播放视频。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050407.webp" title="" /></p>
+
+<p>这项发明很实用，适合开车野营，或者车库看视频。</p>
+
+<p>需要注意的是，因为投影仪的亮度太高，行驶时不能打开，避免干扰对向驾驶员，只能停车后打开。</p>
+
+<p>3、<a href="https://www.theguardian.com/technology/2026/apr/30/ai-outperforms-doctors-in-harvard-trial-of-emergency-triage-diagnoses">AI 预检</a></p>
+
+<p>AI 能不能代替医生看病？这是有争议的。</p>
+
+<p>虽然 AI 的水平可能高于一部分医生，但是为了对病人负责，目前一般都不允许使用 AI 开处方，只有医生才能开处方。</p>
+
+<p>哈佛大学做了一个试验，另外为 AI 找到了一个很有效的医院岗位：门诊预检。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050404.webp" title="" /></p>
+
+<p>很多病人不知道自己是什么病，应该看什么科，需要在门诊入口处进行预检，确定科室。</p>
+
+<p>实验发现，AI 根据病人的症状，进行初步诊断和分配科室的准确率高于真人医生。AI 对于67%的病例做出了基本准确的诊断，优于医生的50%-55%。</p>
+
+<p>因此 AI 可以这样用于医院：在门诊入口，病人由 AI 预检，生成初步诊断，再由医生详细问诊和检查，最后给出处方。</p>
+
+<p>4、<a href="https://www.theregister.com/2026/01/30/road_sign_hijack_ai/">自动驾驶的注入攻击</a></p>
+
+<p>AI 模型有注入攻击，黑客会注入有毒的提示词。令人意想不到的是，自动驾驶也有注入攻击。</p>
+
+<p>加州大学的研究人员做了一个实验。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026020102.webp" title="" /></p>
+
+<p>研究人员在道路中央，依次举起三块牌子，上面用大字写着"前进"，看看自动驾驶的车辆会不会注意这块牌子。</p>
+
+<p>在三次实验中，前两块牌子没有起作用，车辆看到路中间有人，就自动停下了。但是，最后一块牌子生效了，自动驾驶车辆根据上面的指令，朝着举牌子的人继续前进。</p>
+
+<p>这表明，自动驾驶系统也有注入攻击的风险，系统必须区分哪些道路标识是有效的，哪些是恶意注入。</p>
+
+<h2>文章</h2>
+
+<p>1、<a href="https://david-smith.org/blog/2026/04/29/maps-on-watchos/">我为苹果手表开发地图</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050409.webp" title="" /></p>
+
+<p>作者记录了自己开发手表地图的过程，设计一个适配手表的 UI 很不易。</p>
+
+<p>2、<a href="https://decrypt.co/366408/openai-gpt-image-2-vs-google-nano-banana-2-review">GPT Image 2 与 Nano Banana 2 的比较</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050301.webp" title="" /></p>
+
+<p>两款目前最强的图像模型的比较，谁更好一点。</p>
+
+<p>3、<a href="https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/">Chrome 会静默安装一个 4GB 的 AI 模型</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050711.webp" title="" /></p>
+
+<p>有人发现，Chrome 浏览器会在用户不知觉的情况下，下载一个 4GB 的 AI 模型文件 weights.bin。删掉了，它还会重新下载。</p>
+
+<p>4、<a href="https://www.jdhodges.com/blog/macbook-neo-benchmarks-analysis/">MacBook Neo 深度解析</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050710.webp" title="" /></p>
+
+<p>苹果2026年发布的 MacBook Neo 是一款低端笔记本电脑，只有 8GB 内存，本文分析为什么它是一款出色的产品。</p>
+
+<p>5、<a href="https://www.joshwcomeau.com/animation/scroll-driven-animations/">视口驱动的 CSS 动画</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050709.webp" title="" /></p>
+
+<p>CSS 动画一般都是基于时间，最新的 Animation Timeline API 可以改成基于视口，即根据元素在视口中移动的百分比来触发动画。</p>
+
+<p>6、<a href="https://explainers.blog/posts/why-is-the-sky-blue/">天空为何是蓝色的</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202602/bg2026021616.webp" title="" /></p>
+
+<p>本文通俗解释了，跟天空颜色相关的一系列问题：为何天空是蓝色，日落时却是红色，为何云是白色的，为何火星天空是红色的，火星日落是蓝色的。</p>
+
+<h2>工具</h2>
+
+<p>1、<a href="https://auge.franzai.com">auge</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026042701.webp" title="" /></p>
+
+<p>基于 macOS 系统内置视觉框架 Apple Vision 的命令行工具，可以在命令行完成图像的视觉分析。</p>
+
+<p>2、<a href="https://github.com/bleachbit/bleachbit">BleachBit</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026042702.webp" title="" /></p>
+
+<p>著名的跨平台桌面应用，用来清理各种浏览器的垃圾文件。</p>
+
+<p>3、<a href="https://asong56.github.io/Cicada">Cicada</a></p>
+
+<p>一个网页白板，不需要服务器，只是单个 13KB 的 HTML 文件，没有任何依赖，绘制的图形保存在 URL 里面。（<a href="https://github.com/ruanyf/weekly/issues/9737">@Bennet7291</a> 投稿）</p>
+
+<p>4、<a href="https://subs.js.org/ass-subset/">ASS Subsetter</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026042401.webp" title="" /></p>
+
+<p>ASS 字幕字体嵌入的网页工具，可以减少字幕文件的体积。（<a href="https://github.com/ruanyf/weekly/issues/9739">@mtsubs</a> 投稿）</p>
+
+<p>5、<a href="https://github.com/shawnxie94/infinitum">Infinitum</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026042912.webp" title="" /></p>
+
+<p>开源的 RSS 服务器，需要自己架设，支持正文补取、AI 分析、事件归组等功能，自带前端阅读器。（<a href="https://github.com/ruanyf/weekly/issues/9773">@shawnxie94</a> 投稿）</p>
+
+<p>6、<a href="https://github.com/aeroxy/tunnix">tunnix</a></p>
+
+<p>加密的 SOCKS5/HTTP 隧道，需要安装服务器端和本地命令行客户端。（<a href="https://github.com/ruanyf/weekly/issues/9779">@aeroxy</a> 投稿）</p>
+
+<p>7、<a href="https://github.com/YYsuni/curve-arrow">curve-arrow</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050102.webp" title="" /></p>
+
+<p>弧形箭头的 SVG 格式生成器。（<a href="https://github.com/ruanyf/weekly/issues/9801">@YYsuni</a> 投稿）</p>
+
+<p>8、<a href="https://github.com/lynxbase/lynxdb">LynxDB</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050303.webp" title="" /></p>
+
+<p>单个二进制文件的日志分析引擎，可以设定各种条件，从多种服务器日志提取信息。（<a href="https://github.com/ruanyf/weekly/issues/9821">@OrlovEvgeny</a> 投稿）</p>
+
+<p>9、<a href="https://github.com/aeroxy/chrome-devtools-cli">Chrome DevTools CLI</a></p>
+
+<p>一个 Rust 命令行工具，通过 DevTools 协议连接到系列里的 Chrome 浏览器，进行网页操作，默认自动连接，可供 AI Agent 调用。（<a href="https://github.com/ruanyf/weekly/issues/9833">@aeroxy</a> 投稿）</p>
+
+<p>10、<a href="https://github.com/RoversX/LaunchNext">LaunchNext</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050701.webp" title="" /></p>
+
+<p>macOS 的新版移除了 Launchpad，新的界面很难用，这是它的开源替代品。（<a href="https://github.com/ruanyf/weekly/issues/9862">@meichiny</a> 投稿）</p>
+
+<h2>AI 相关</h2>
+
+<p>1、<a href="https://github.com/oomol-lab/spinedigest">SpineDigest</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050302.webp" title="" /></p>
+
+<p>一个命令行工具，将较长的电子书通过 AI 变成较短的电子书。（<a href="https://github.com/ruanyf/weekly/issues/9813">@BlackHole1</a> 投稿）</p>
+
+<p>2、<a href="https://privacyfilter.app/zh-hans/">Privacy Filter Online</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026042501.webp" title="" /></p>
+
+<p>在线的文本隐私检测和脱敏工具，基于 OpenAI 的本地模型 Privacy Filter。（<a href="https://github.com/ruanyf/weekly/issues/9753">@airyland</a> 投稿）</p>
+
+<p>3、<a href="https://github.com/linzzzzzz/openclip">OpenClip</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050101.webp" title="" /></p>
+
+<p>开源的 Web 服务，通过 AI 自动从 Bilibili/YouTube 下载视频，提取其中精彩时刻。（<a href="https://github.com/ruanyf/weekly/issues/9780">@linzzzzzz</a> 投稿）</p>
+
+<p>4、<a href="https://github.com/study8677/Readme.skill">Readme.skill</a></p>
+
+<p>一个 Skill 文件，统计你在 Claude Code 或 Codex 里面的活动，参考<a href="https://github.com/study8677/Readme.skill/blob/main/examples/example_profile.md">统计报告</a>。（<a href="https://github.com/ruanyf/weekly/issues/9741">@study8677</a> 投稿）</p>
+
+<p>5、<a href="https://github.com/JuneYaooo/gpt-image2-ppt-skills">gpt-image2-ppt-skills</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026042402.webp" title="" /></p>
+
+<p>一个使用 GPT Images 2 模型（需要 API Key）生成 PPT 的 Skill，提供10套幻灯片模板。（<a href="https://github.com/ruanyf/weekly/issues/9747">@JuneYaooo</a> 投稿）</p>
+
+<h2>资源</h2>
+
+<p>1、<a href="https://ynarwal.github.io/how-llms-work/">大模型运行原理</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202604/bg2026042703.webp" title="" /></p>
+
+<p>大模型原理的长篇讲解，带有可互动的图形解释，针对初学者，基于 Andrej Karpathy 的技术深度分析文章。</p>
+
+<p>2、<a href="https://github.com/federico-busato/Modern-CPP-Programming">现代 C++ 编程</a>（Modern C++ Programming）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050408.webp" title="" /></p>
+
+<p>开源英文教程，通过详细的 PPT，帮助学过 C 语言的程序员掌握 C++。</p>
+
+<h2>图片</h2>
+
+<p>1、<a href="https://artemistimeline.com">阿尔忒弥斯二号照片集</a></p>
+
+<p>今年4月，美国发射阿尔忒弥斯二号飞船，运送4名宇航员绕月飞行。这个网站收集了本次飞行的300多张照片。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050410.webp" title="" /></p>
+
+<p>上图是4月1日人们欢送宇航员进入发射台。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050411.webp" title="" /></p>
+
+<p>上图就是阿尔忒弥斯二号，中间是火箭主体（包含底部四个发动机），两侧是两个推进器，每个高54米，顶部就是宇航员乘坐的猎户座飞船。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050412.webp" title="" /></p>
+
+<p>上图是发射两分钟后，两枚助推火箭开始分离，它们下面的那个光点就是猎户座飞船。</p>
+
+<p>2、<a href="https://apnews.com/article/route-66-potage-stamps-centennial-road-trip-84815c35b1f1536176d5040615c5e5c2">66号公路邮票</a></p>
+
+<p>66号公路是美国最著名的一条公路，穿过16个州的重要路段，沿途有许多餐馆、加油站和汽车旅馆，还有开阔的景色和视野。</p>
+
+<p>它开通于1926年，从早期大萧条的避难所，到二战期间的物资补给线，再到20世纪中期人们汽车旅行的路线，见证了无数岁月的变迁，成为美国的时光胶囊。</p>
+
+<p>今年是它开通100周年纪念，美国邮政局发行了一套8张的邮票，非常有特色。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050702.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050703.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050704.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202605/bg2026050705.webp" title="" /></p>
+
+<h2>文摘</h2>
+
+<p>1、<a href="https://dylanbutler.dev/blog/protect-your-shed/">保护你的棚屋</a></p>
+
+<p>公司的项目是摩天大楼，你的个人兴趣项目是小棚屋。</p>
+
+<p>那些只会建造摩天大楼的工程师，最终将精疲力竭。遇到的问题变得重复，开发过程变得令人窒息，创造力的火花开始熄灭。你开发的原因，不再是因为你想建造，而是因为商业要求。</p>
+
+<p>你要保护好你的个人项目，那里是你的好奇心所在，是你进行实验的地方，也是你定义自己为创造者而非仅仅是雇员的地方。</p>
+
+<p>公司会教会你怎么写经得起时间考验的代码，但只有你的个人项目，才能确保你始终保持对代码的热情。</p>
+
+<p>2、<a href="https://notes.andymatuschak.org/Work_with_the_garage_door_up">工作时把门打开</a></p>
+
+<p>我上班路上，有一家木工坊，老板总是把门敞开着。</p>
+
+<p>我每天骑车经过那扇门，往里窥视，看到他摆放的各种工具，以及他为承接的订单而堆放的木板，这真令人愉悦。这一切默默地传递一个信息：这里正常运作。</p>
+
+<p>在互联网上，每个人就好像这家木工坊。如果你不说话，就是工厂关着门，没人知道你的存在，你就消失了。只有看到你说话，人们才知道你在正常活动，是开着门的工厂。</p>
+
+<p>由此推论：在互联网上，最容易被注意到的是那些不停说话的人。</p>
+
+<h2>言论</h2>
+
+<p>1、</p>
+
+<p>门罗币的挖矿与比特币完全不同，它的设计思路是，尽量让所有人都能参与挖矿，防止那些拥有矿机的人占优势。</p>
+
+<p>它的挖矿程序会模拟一个通用 CPU，使得矿机的专用 CPU 失效，也就是说它的挖矿只适合家用电脑的普通 CPU。</p>
+
+<p>-- <a href="https://blog.alcazarsec.com/tech/posts/how-moneros-proof-of-work-works">《门罗币的工作量证明机制》</a></p>
+
+<p>2、</p>
+
+<p>以后没有初级工程师了，机器能做他们现在做的事，而且更便宜。但是，初级工程师的价值不在于他们能做的事，而在于他们未来会成为什么样的人。也许几年后，我们会纳闷，那些高级工程师都去哪儿了？</p>
+
+<p>-- <a href="https://www.stvn.sh/writing/programming-still-sucks-fqffhyp">stvn.sh</a></p>
+
+<p>3、</p>
+
+<p>AI 加速了编码，创业公司现在面临的主要挑战是产品管理。</p>
+
+<p>如果原型开发只需要一天，而推广和用户反馈需要一周，团队就只能依赖直觉来更快地做出决策。</p>
+
+<p>-- <a href="https://www.businessinsider.com/andrew-ng-product-management-bottleneck-coding-ai-startups-2025-8">吴恩达</a>，著名 AI 计算机科学家</p>
+
+<p>4、</p>
+
+<p>你的职业规划就是三步：（1）让自己擅长某事，（2）设法从中赚钱，（3）尽可能久地做下去。</p>
+
+<p>-- <a href="https://garry.net/posts/how-do-i-get-into-the-game-industry">《我如何进入游戏行业》</a></p>
+
+<h2>往年回顾</h2>
+
+<p><a href="https://www.ruanyifeng.com/blog/2025/05/weekly-issue-348.html">李飞飞，从移民到 AI 明星</a>（#348）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2024/04/weekly-issue-298.html">轮到硬件工程师吃香了</a>（#298）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2023/03/weekly-issue-248.html">不要夸大 ChatGPT</a>（#248）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2022/03/weekly-issue-198.html">美国制造是否可能</a>（#198）</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2026-05-08T07:40:44+08:00">2026年5月 8日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2026/04/weekly-issue-394.html</id>
             <title>科技爱好者周刊（第 394 期）：第二次 API 开放浪潮</title>
             <link>http://www.ruanyifeng.com/blog/2026/04/weekly-issue-394.html</link>
@@ -1921,153 +2308,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2026-03-27T05:49:12+08:00">2026年3月27日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html</id>
-            <title>套壳中国大模型撑起500亿美元估值？扒一扒 Cursor 的"套壳"疑云</title>
-            <link>http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2026/03/kimi-cursor.html</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 21 Mar 2026 18:19:11 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: Cursor, Composer 2, Kimi K2.5, 套壳  
-<br>  
-<br>总结: Cursor 发布了自有模型 Composer 2，但被揭露其实际调用的模型 ID 为 kimi-k2p5-rl-0317-s515-fast，证实其为套壳的 Kimi K2.5。Cursor 迅速修复漏洞，但消息已传遍网络，包括马斯克也发推确认。Kimi K2.5 采用修改的 MIT 许可证，要求月活超1亿或月收入超2000万美元的产品需醒目披露，Cursor 年化收入20亿美元远超此条件但未披露。Cursor 负责人承认使用 Kimi K2.5，但声称通过合作伙伴 Fireworks AI 获得授权，Kimi 官方也确认该授权路径。事件核心在于 Cursor 为支撑估值从5000万美元飙升至500亿美元，将其从 AI 工具包装为具有模型研发能力的大模型公司，因而隐瞒使用 Kimi K2.5 的事实。此事证明中国公司也有技术输出，国产大模型性能正在缩小与国外旗舰模型的差距。 </div>
-                        <hr>
-                    
-                    <p>1、</p>
-
-<p>本周末，有一条最热闹的 AI 新闻，震动了太平洋两岸，连马斯克都关注了。</p>
-<p>昨天，AI 编程工具 Cursor 推出了"自己的"模型 <a href="https://cursor.com/cn/docs/models/cursor-composer-2">Composer 2</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032101.webp" title="" /></p>
-
-<p>上图是官网截图，现在点进去还写着"自有模型"。</p>
-
-<p>自从2024年10月，Composer 1 发布以来，外界就一直怀疑，它是套壳的中国模型，因为行为很类似，但苦于找不到证据。</p>
-
-<p>现在 Composer 2 来了，很多人就开始研究，它的背后到底是什么模型，真的是 Cursor 自家的吗？</p>
-
-<p>Cursor 为了防止破解，做了很多限制，但是百密一疏。国外推友 @fynnso <a href="https://x.com/fynnso/status/2034710006546014363">发现</a>，有一个地方在上一个版本是禁止的，但是这个版本却可以执行。</p>
-
-<p>首先，你自己架设一台服务器，充当 AI 模型的调用接口，有没有模型无所谓，只要能收到客户端请求就行。</p>
-
-<p>然后，你在本地的 Cursor 里面，设置使用的模型为 Composer 2，模型网址就是你刚架设的服务器。这样一来，Cursor 就会向你的服务器发出请求，从而可以看到它到底在请求什么模型。</p>
-
-<p>真相就暴露了，它请求的模型 ID 居然是 kimi-k2p5-rl-0317-s515-fast（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032102.webp" title="" /></p>
-
-<p>2、</p>
-
-<p>这位国外推友就把上面的截图，<a href="https://x.com/fynnso/status/2034706304875602030">发布</a>到网上。这下炸锅了，明眼人都看出来，这是铁证，<strong>Composer 2 实际上是套壳的 Kimi K2.5</strong>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032115.webp" title="" /></p>
-
-<p>可笑的是，事情一爆发，Cursor 第一时间就把漏洞堵上，现在已经没法复现这个请求（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032103.webp" title="" /></p>
-
-<p>但是为时已晚，网上传遍了，就连马斯克也<a href="https://x.com/elonmusk/status/2034941631871455262">发推</a>："它就是 Kimi K2.5"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032104.webp" title="" /></p>
-
-<p>这下好了，变成了公开的秘密，再也无法掩盖了。</p>
-
-<p>3、</p>
-
-<p>大家的关注点，很快就转移到 Cursor 是否侵权。因为 Kimi K2.5 虽然是开源模型，但是采用的是修改的 MIT 许可证（下图）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032105.webp" title="" /></p>
-
-<p>许可证这样说：你可以任意使用这个模型，唯一的条件是如果你的商业产品月活用户超过1亿，或者月收入超过2000万美元，<strong>你必须在用户界面的醒目位置披露，你使用了 Kimi K2.5</strong>。</p>
-
-<p>Cursor 最新披露的年化收入是20亿美元，相当于月收入1.67亿美元，显然满足上面的条件。但是，它隐藏了使用 K2.5 的事实。</p>
-
-<p>就在大家认定 Cursor 侵权的时候，他们的一个负责人终于坐不住了，出来<a href="https://x.com/leerob/status/2035050444347600936">说话</a>了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032106.webp" title="" /></p>
-
-<p>他承认确实使用 Kimi K2.5，但是没有侵权，他们的许可证来自合作伙伴 Fireworks AI。</p>
-
-<p>稍后，Kimi 官方也<a href="https://x.com/Kimi_Moonshot/status/2035074972943831491">发推</a>了。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032107.webp" title="" /></p>
-
-<p>Kimi 官方确认，Cursor 是从 Fireworks AI 得到了授权。后者是一家硅谷的华人 AI 公司，从事 AI 模型的微调和强化学习，它从 Kimi 得到授权对模型进行再训练，然后又转授权给了 Cursor。</p>
-
-<p>4、</p>
-
-<p>事情到这里就基本清楚了，Cursor 并没有违反 Kimi 的授权条款，因此不存在侵权。</p>
-
-<p>既然如此，为什么它拼命掩盖这个事实，大大方方承认，提供 Kimi K2.5 的修改版模型，很难吗？</p>
-
-<p>我猜测，<strong>原因跟 Cursor 不断膨胀的估值有关</strong>。</p>
-
-<p>彭博社本月报道，Cursor 正在进行下一轮融资，估值达到500亿美元。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032108.webp" title="" /></p>
-
-<p>大家知道吗，它以前的估值是多少？</p>
-
-<p>2023年10月，Cursor 成立时的估值是5000万美元；2024年8月的 A 轮融资，估值上升到4亿美元；12月的 B 轮融资，估值快速上升到26美元；2025年11月的最新一轮融资，估值已经到了293亿美元。</p>
-
-<p>可以看到，每过几个月，估值就会翻倍。这种火箭式的上升速度，需要有业绩支持。但它本身只是一个 VS Code 的修改版，使用的都是开源技术。</p>
-
-<p>为了支撑越来越高的估值，<strong>它有动机把自己从 AI 工具，包装成具有模型研发能力的大模型公司</strong>。</p>
-
-<p>我认为，这才是它不愿意披露使用了 Kimi K2.5 的主要原因。</p>
-
-<p>5、</p>
-
-<p>纵观整个事件，Cursor 无疑是输家，Kimi 则是这次的赢家，免费得到一大波高价值的曝光。</p>
-
-<p>Cursor 发布 Composer 2 时，披露了性能和成本比较。</p>
-
-<p>Composer 2 的性能低于 GPT-5.4，但高于 Opus 4.6。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032109.webp" title="" /></p>
-
-<p>但是，它的生成速度比 GPT-5.4 和 Opus 4.6 都快，成本也是最低的。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032110.webp" title="" /></p>
-
-<p>既然 Composer 2 就是微调的 Kimi K2.5，那么<strong>直接使用 Kimi，也能得到同样的效果</strong>。</p>
-
-<p>6、</p>
-
-<p>以前，国外总是有人指责，中国公司窃取外国技术。但是，这个事件证明了，中国公司也有技术输出。那些国外的明星公司，背地也在偷偷摸摸使用中国技术。</p>
-
-<p>联想到上周，Kimi 的创始人杨植麟收到黄仁勋的邀请，在 Nvidia GTC 大会<a href="https://www.51cto.com/article/838459.html">演讲</a>，是唯一的中国大模型公司代表。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032112.webp" title="" /></p>
-
-<p>他在台上宣讲，Kimi 团队刚刚发表的论文<a href="https://github.com/MoonshotAI/Attention-Residuals">《注意力残差》</a>（Attention Residuals）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032113.webp" title="" /></p>
-
-<p>这种新技术据说可以显著提升大模型的推理能力。</p>
-
-<p>我的想法是，大家要对国产大模型有信心，日常工作完全可以放心使用。国产大模型与国外旗舰模型的差距，正在不断缩小，而且价格实惠。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202603/bg2026032114.webp" title="" /></p>
-
-<p><a href="https://www.51cto.com/article/835315.html">据杨植麟说</a>，下一个要发布的 K3 模型性能提升巨大，即便没有强10倍，也比 K2.5 强得多，我们可以期待一下。</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2026-03-21T18:19:11+08:00">2026年3月21日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
