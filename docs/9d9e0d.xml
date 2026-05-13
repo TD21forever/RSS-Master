@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6a03ae5eaf7695b4cf087eed</id>
+            <title>AI探索站 05月12日</title>
+            <link>https://m.okjike.com/originalPosts/6a03ae5eaf7695b4cf087eed</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a03ae5eaf7695b4cf087eed</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 12 May 2026 22:49:02 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    https://github.com/plidezus/flomo-save-reminder-skill  <br /><br />写了个保存对话到 flomo 的 skill。<br /><br />比预想的要复杂很多，尤其是时机判断和写入风格。<br /><br />大致实现了：<br />- 宁可不提醒，也不打扰：普通问答、临时任务、AI 自己的总结，都不值得保存。只有未来你可能回来翻的内容，才停下来问你一句。<br />- 写得像你，而不是像 AI：第一次使用会学你已有 memo 的格式、标签、语气——存下去的草稿，读起来是你写的，不是 ChatGPT 风格的小作文。<br />- 写入前先确认：默认只起草和提醒，你点头才存。AI 越自动，越要给你留刹车。<br />- 隐私只在本地发酵：你的写作风格画像存在本地，公开仓库里只有空结构。<br /><br />下面是一张讨论中，让它整理的一张卡片。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6a031c2f3a7b71ed0e7bd6b6</id>
             <title>AI探索站 05月12日</title>
             <link>https://m.okjike.com/originalPosts/6a031c2f3a7b71ed0e7bd6b6</link>
@@ -22,18 +39,18 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6a031304af7695b4cffb175b</id>
+            <id>https://m.okjike.com/originalPosts/6a029a6e0294f7395cdf32d0</id>
             <title>AI探索站 05月12日</title>
-            <link>https://m.okjike.com/originalPosts/6a031304af7695b4cffb175b</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a031304af7695b4cffb175b</guid>
+            <link>https://m.okjike.com/originalPosts/6a029a6e0294f7395cdf32d0</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a029a6e0294f7395cdf32d0</guid>
             <pubDate></pubDate>
-            <updated>Tue, 12 May 2026 11:46:12 GMT</updated>
+            <updated>Tue, 12 May 2026 03:11:42 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    女帝、2B、蕾塞、八重神子、Lucy、樱岛麻衣、菲比、芙莉莲、莱因哈特……
+                    # 字节跳动的 AI 编程团队，推荐了这 10 个 Skills<br /><br />---<br /><br />上个月字节 TRAE 团队发布了一本《2026 企业级 AI 编程实践手册》，里面有一份 Skills Top 10 排行榜。这是目前我看到的第一份来自大厂的 Agent Skills 推荐清单。<br /><br />先说背景。TRAE 是字节基于 Doubao-Seed-2.0-Code 模型做的企业级 AI 编程工具，定位是「真正的 AI 工程师」——不只是帮你补全代码，是自主拆需求、做任务规划、写代码、跑测试、部署，全流程。<br /><br />他们内部大规模使用 Agent 之后，沉淀出了这 10 个最常用的 Skills。排名有先后：<br /><br />1. frontend-design —— 前端设计。为什么排第一？因为 AI 写的 UI 真的太丑了。这个 Skill 教 AI 什么是好的设计。<br /><br />2. cache-components —— 组件缓存。让 AI 复用已生成的组件，而不是每次都重新造。省 token，也省时间。<br /><br />3. fullstack-developer —— 全栈开发。给 AI 一个全栈开发者的心智模型：前后端一起考虑，数据流怎么走，API 怎么设计。<br /><br />4. frontend-code-review —— 前端代码审查。<br /><br />5. code-reviewer —— 通用代码审查。注意：前 5 名里有两个 review Skill。说明字节很重视 AI 写出来的代码质量——不是能跑就行。<br /><br />6. webapp-testing —— Web 应用测试。<br /><br />7. pr-creator —— 自动创建 PR。写完代码 → 自动提 PR，省一步。<br /><br />8. fix —— Bug 修复。专门用来处理「这里有个 bug，帮我修」。<br /><br />9. update-docs —— 文档更新。代码改了，文档自动跟上。<br /><br />10. find-skills —— 发现 Skills。这个最特别——让 AI 自己去搜索和推荐 Skills。<br /><br />看完这个清单，有几个观察：<br /><br />第一，设计类 Skill 排第一不是偶然。字节的人显然被 AI 生成的紫色渐变和圆角卡片折磨够了。任何人只要用过 AI 写前端，就知道 frontend-design 为什么是刚需。<br /><br />第二，Top 10 里有两个 review Skill 和一个 testing Skill。这说明字节对 AI 代码的策略是「写得多不如写得对」——和 SkillsBench 那篇论文的结论一致：好 Skills 能提升 51%，差 Skills 能拉低 39%。<br /><br />第三，find-skills 这个 Skill 很有意思。它本质是一个元技能（meta-skill）——让 AI 自己去发现还需要什么技能。这个思路和 EvoSkill 的「自动进化」一脉相承：最好的 Skills 配置不是人写的，是 AI 在实践中自己找出来的。<br /><br />如果你在用 Claude Code 或 Codex，这份清单可以直接照搬。前 5 个装上去，你的 Agent 就已经有了大厂级别的 Skills 配置。<br /><br />手册全文：https://lcnziv86vkx6.feishu.cn/wiki/XZOSwI51wi5a5okxCF4cAxHSnBh
                 ]]>
             </content:encoded>
         </item>
@@ -51,23 +68,6 @@
                 <![CDATA[
                     
                     把 skills 整理了下, 大家可以用用看:<br /><br />https://github.com/lijigang/ljg-skills
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6a0168a3657481ea4e71c2e8</id>
-            <title>AI探索站 05月11日</title>
-            <link>https://m.okjike.com/originalPosts/6a0168a3657481ea4e71c2e8</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a0168a3657481ea4e71c2e8</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 11 May 2026 05:26:59 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    借AI之算力, 窃天之智,一天一本书,一天一篇论文.<br /><br />我有三种阅读配速：一天一本书，一周一本书，一月一本书。<br /><br />像是可伸缩的透镜，根据不同书籍，调整阅读分辨率。<br /><br />跑了一阵子, 效果不错, 诸君可以一试
                 ]]>
             </content:encoded>
         </item>
