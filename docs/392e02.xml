@@ -5,6 +5,1332 @@
         <link>https://www.36kr.com/information/technology</link>
         
         <item>
+            <id>https://www.36kr.com/p/3811410231271431</id>
+            <title>马斯克彻底把 X 平台给开源了，但是我却复刻不出来</title>
+            <link>https://www.36kr.com/p/3811410231271431</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3811410231271431</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 11:56:18 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: X平台开源,推荐系统,算法透明,监管压力
+<br>
+<br>
+总结: 马斯克将X开源推到新高度，使外界有可能下载并自行构建类似平台。此次开源的核心是一个基于Grok的Transformer推荐系统，其逻辑是预测用户行为并加权排序。文章指出，开源并未完全开放，关键部分如生产级模型权重、训练数据和广告策略仍需保密。马斯克此举旨在重建用户、广告主和监管机构的信任，并以此作为应对欧盟监管审查的策略。 </div>
+                        <hr>
+                    
+                    <p>自从马斯克开源X以后，大家总会抱怨说“马斯克你这人不地道，答应开源却没有开源完整，大家拿到代码也没办法自己做个X平台”。</p>
+  <p>但是现在可以了，X开源仓库页迎来史上最大更新，你真的可以下回去自己造个X平台了。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_0169223e6a724f0283fb38ac54a62906@6119835_oswg67691oswg875oswg446_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>马斯克第一次公开X推荐算法代码，是在2023年3月31日。那时平台还叫Twitter，官方把twitter/the-algorithm和 twitter/the-algorithm-ml两个仓库放上 GitHub，公开了For You时间线背后的部分推荐逻辑。</p>
+  <p>但那次更像一次“代码透明度展示”，外界能看到推荐系统的基本运作方式，却拿不到训练数据、模型权重、广告推荐系统等关键部分。</p>
+  <p>而这次，马斯克玩真的了。</p>
+  <p>诚然，X并不是全球最大的社交平台。它的月活数量为5.7亿，X在2026年的预计收入约为29亿美元，比马斯克收购前的50.8亿美元下降了43%，收购前X的广告收入占比高达90%，收购后广告收入仍占总收入的不到70%。</p>
+  <p>但是它仍然是全球最重要的社交平台之一，每天处理12亿条内容、服务5亿用户的完整生产系统。Anthropic、OpenAI这些全球最顶尖的AI公司，都以X作为第一信息分发平台。</p>
+  <p>马斯克发出这条X不到24小时，X的开源GitHub仓库瞬间冲到了2万颗星星。</p>
+  <p>马斯克在开源声明中说：“我们知道这个算法很笨，需要大幅改进，但至少你可以看到我们实时且透明地努力让它变得更好。没有其他社交媒体公司这样做。”</p>
+  <p>推荐算法是社交媒体的核心商业机密，是决定用户“看什么、信什么、买什么”的底层逻辑。</p>
+  <p>在此之前，没有任何一家主流平台愿意把这套逻辑完整地摆到台面上。</p>
+  <p>马斯克做了。</p>
+  <h2><strong>01</strong></h2>
+  <h2><strong>开源的具体内容？</strong></h2>
+  <p>这次开源的X算法，核心是一个基于Grok的transformer推荐系统。</p>
+  <p>整个系统的架构并不复杂，设计思路很清晰：从两个来源获取候选内容，然后用机器学习模型统一排序，最后过滤掉不合适的内容，推送给用户。</p>
+  <p><strong>两个内容来源分别是Thunder和Phoenix Retrieval。</strong></p>
+  <p>Thunder负责“网内内容”(In-Network)，也就是你关注的账号发布的帖子。它是一个内存数据库，实时追踪所有用户的最新发帖，响应速度可以达到亚毫秒级别。</p>
+  <p>当你刷新信息流时，Thunder会立刻把你关注的人最近发的内容拉出来。</p>
+  <p>Phoenix Retrieval负责“网外内容”(Out-of-Network)，也就是你没关注、但系统认为你可能感兴趣的帖子。</p>
+  <p>它通过机器学习做相似度搜索，从全球语料库里找出和你过去互动内容相关的帖子。这是推荐系统最关键的部分，决定了你会不会在信息流里看到陌生账号的爆款内容。</p>
+  <p>两个来源的候选内容汇总之后，会进入统一的排序阶段。这个阶段的核心是Phoenix Scorer，一个基于Grok的Transformer模型。</p>
+  <p>这个模型不预测“相关性”，而是预测你对每条内容可能采取的具体行动，比如点赞概率、转发概率、回复概率、点击概率、举报概率、屏蔽概率。</p>
+  <p>每个行动都有一个权重，正向行动（点赞、转发）权重为正，负向行动（举报、屏蔽）权重为负。最终得分是所有预测概率的加权求和。</p>
+  <p>得分高的内容排在前面，得分低的内容排在后面。</p>
+  <p>仅此而已。</p>
+  <p>X在开源文档里特别强调了一点：我们已经彻底消除了所有手工特征工程和大部分启发式规则。</p>
+  <p>Grok-based Transformer承担了所有繁重的工作，它通过理解你的互动历史，比如你点赞了什么、回复了什么、分享了什么，然后基于此自动判断什么内容和你相关。</p>
+  <p>这意味着，过去那些依赖关键词堆砌、标签匹配的运营策略已经失效了。系统现在更注重语义理解，能够深度分析内容的实际价值和用户的真实需求。</p>
+  <p>开源是开源了，但并不是完全开源。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_d46734bea960460682c074dc5fa22ff9@6119835_oswg877425oswg1036oswg514_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p><strong>首先，模型权重没有完全开放。</strong></p>
+  <p>GitHub仓库里确实包含了一个预训练的mini Phoenix模型，256维嵌入、4个注意力头、2层Transformer，打包成一个3GB的压缩包，通过Git LFS分发。这个模型可以让开发者直接跑起来端到端的推理流程，不需要自己训练。</p>
+  <p>但这只是一个“迷你版”。X在生产环境里真正使用的Phoenix模型，规模要大得多，参数量、层数、嵌入维度都不在一个量级上。开源的这个mini模型，更像是一个教学样本，让你理解系统怎么工作，但不是X真正在用的那个。</p>
+  <p>它像一台教学用小发动机，能让你看懂发动机原理，也能真的转起来，但它不是X每天给几亿用户刷For You信息流时用的那台真正发动机。</p>
+  <p>真正的生产模型大概率更大、更复杂、训练数据更多、调参更多，知道的用户行为也更多。所以它推荐得准不准、反应快不快、能不能扛住真实流量，和这个 mini 模型不是一个量级。</p>
+  <p><strong>其次，训练数据没有公开。</strong></p>
+  <p>推荐系统的核心竞争力，一半在模型，一半在数据。X每天处理12亿条内容，积累了海量的用户行为数据，比如谁点赞了什么、谁屏蔽了谁、谁在什么时间看了哪些内容、看了多久。</p>
+  <p>这些数据才是Phoenix模型能够准确预测用户行为的根本原因。</p>
+  <p>但这些数据不可能开源。一方面是隐私问题，另一方面是商业机密。</p>
+  <p>没有这些数据，即使你拿到了完整的模型架构和代码，也训练不出一个和X一样好用的推荐系统。</p>
+  <p><strong>第三，广告系统只开源了框架，没有开源策略。</strong></p>
+  <p>这次开源包含了一个新的ads模块，处理广告注入和定位，包括品牌安全追踪，会尊重敏感内容边界。但具体的广告竞价逻辑、出价策略、ROI优化算法，这些直接关系到X收入的核心机制，并没有完全公开。</p>
+  <p><strong>第四，内容理解管道Grox（Grox是X推荐系统里，基于Grok构建的内容理解工程服务）只开源了部分能力。</strong></p>
+  <p>Grox是一个新加入的服务，提供分类器、嵌入器和任务执行引擎，用于垃圾检测、帖子分类、PTOS政策执行等内容理解工作。但Grox具体怎么判断一条内容是垃圾、怎么识别违规内容、怎么执行平台政策，这些细节并没有完全透明。</p>
+  <p>所以，你虽然可以根据GitHub开源的这些东西去造一个类似X的社交平台，但你造不出一个和X一样好用的推荐系统。</p>
+  <p>你可以拿到完整的系统架构、候选召回逻辑、排序框架、过滤规则，可以跑通端到端的推理流程。如果你有足够的工程能力，确实可以搭建一个类似的推荐系统。</p>
+  <p>可是你没有X的数据、没有X的生产级模型、没有X在过去几年里积累的工程优化和调度策略。也就没办法1比1复刻X平台。</p>
+  <h2><strong>02</strong></h2>
+  <h2><strong>为什么要开源？</strong></h2>
+  <p>早在2022年10月收购Twitter的时候，他就公开表示：“让算法开源以增加信任”是他对这个平台的愿景之一。</p>
+  <p>2023年3月31日，马斯克兑现了第一个承诺。当时还叫Twitter的X平台，在GitHub上发布了部分推荐算法的源代码，包括用户时间线里推文推荐的算法逻辑。</p>
+  <p>那次开源引发了巨大关注。</p>
+  <p>开发者们第一次看到了Twitter推荐系统的内部运作方式，也第一次确认了一些长期流传的传闻，比如，某些账号确实会被算法降权，某些内容类型确实会被优先推荐。</p>
+  <p>马斯克当时说，提供“代码透明度”一开始会“令人难以置信地尴尬”，但最终会“导致推荐质量的快速提升”。</p>
+  <p>他还说：“最重要的是，我们希望赢得你们的信任。”</p>
+  <p>但那次开源并不完整。GitHub仓库里的大部分文件都来自最初的上传，后续更新很少。很多开发者抱怨，代码库没有持续维护，文档不够详细，很多关键模块没有公开。</p>
+  <p>这次开源，马斯克显然吸取了教训。</p>
+  <p><strong>更有意思的是，马斯克在X上发布算法更新的那条推文时，他人正在北京。但这次开源的真正目标，是欧洲。</strong></p>
+  <p>X平台在欧洲面临着越来越严格的监管审查，而马斯克正在用“透明”和“开放”作为武器，去对抗监管压力。</p>
+  <p>2025年7月，法国检察机关对X平台展开调查，怀疑其算法存在偏见和欺诈性数据提取行为。</p>
+  <p>欧盟委员会也对X发出了文件保留令，要求其提供算法相关内容，调查重点是虚假信息传播、内容审核不力和信息透明度缺陷。</p>
+  <p>X平台当时拒绝配合调查，并指控这是一场“出于政治动机的刑事调查”，威胁到用户的言论自由。</p>
+  <p>马斯克甚至在欧盟委员会的推文下回复了一个脏话。</p>
+  <p>但拒绝配合显然不是长久之计，于是马斯克把算法给开源了。</p>
+  <p>与其被动接受监管机构的审查，不如主动把代码公开，让全世界的开发者、研究者、监管者都能看到X的推荐逻辑。</p>
+  <p>这样一来，X可以宣称自己是“全球最透明的社交平台”，任何关于算法偏见、内容操纵的指控，都可以用“代码已经开源，你们自己去看”来回应。</p>
+  <p>进攻才是最好的防守。</p>
+  <p><strong>当然，开源也不是没有代价的。</strong></p>
+  <p>首先，竞争对手可以直接学习X的架构设计和工程实践。现在别人彻彻底底地研究X是怎么做召回、怎么做排序、怎么做多样性控制的。</p>
+  <p>如果X的某些设计确实比竞品好，那么这些设计很快就会被复制。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_2d4abf2c14f646b09bb8f68d5869f9ca@6119835_oswg863959oswg968oswg541_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>其次，开源暴露了X的弱点。</p>
+  <p>开发者们已经在GitHub issue区指出了一些问题：为什么某些过滤规则设计得不够合理？为什么多样性控制的参数设置得这么保守？为什么广告注入的逻辑这么简单粗暴？</p>
+  <p>但马斯克认为，这些代价是值得的。</p>
+  <p>X现在面临的最大问题不是技术，而是信任。用户不信任X的内容审核，广告主不信任X的品牌安全，监管机构不信任X的算法公正性。</p>
+  <p>开源算法，是重建信任的最直接方式。</p>
+  <p>它不能解决所有问题，但至少可以证明X没有在暗箱操作，X的推荐逻辑是可以被检验的，X愿意接受公众监督。</p>
+  <p>在一个越来越强调透明度和问责制的时代，这种姿态本身就是一种竞争力。</p>
+  <p>马斯克在2023年开源Twitter算法时说过一句话：“我们希望X成为互联网上最透明的系统，并让它像最著名、最成功的开源项目Linux一样强大。”</p>
+  <p>现在看来，他是认真的。</p>
+  <p>X能不能真的变成“社交媒体界的Linux”，还需要时间验证。</p>
+  <p>但至少在开源这件事上，马斯克已经走在了所有主流社交平台的前面。</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/Jwoz2EkGrwGLevPqwyzRYw" rel="noopener noreferrer nofollow" target="_blank">“字母AI”</a>，作者：苗正，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3811450818076162</id>
+            <title>讨厌 AI 和液态玻璃？iOS 27 只会变本加厉……</title>
+            <link>https://www.36kr.com/p/3811450818076162</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3811450818076162</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 11:14:32 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: iOS 27，AI集成，液态玻璃，Siri聊天机器人
+<br>
+<br>
+总结: 文中指出，iOS 27主要围绕两大路线：优化系统性能与AI集成。系统将继续打磨“液态玻璃”界面以提升透明度和可读性，并调回应用底栏逻辑。AI方面的重头戏是Siri的彻底改造，它将成为系统级聊天机器人，独立应用并能解读图片文档。苹果将利用Google的Gemini模型构建智能基础，并可能开放平台让第三方AI接管Siri。Siri将呈现基于Gemini的底层模型、自身对话能力及第三方服务等“三层”架构。此外，相机、照片、健康等第一方应用也将深度整合AI功能，例如相机新增专业模式和Siri模式，照片加入扩图、增强等AI工具。文章强调，苹果正试图将AI从孤立功能转变为系统级能力，以摆脱先前AI路线摇摆和功能推迟的困境。 </div>
+                        <hr>
+                    
+                    <p>距离苹果全球开发者大会（WWDC）还有不到一个月，但关于 iOS 27 的爆料，已经可以几乎可以凑出一场发布会了。</p>
+  <p>从多方信息来看， 今年的苹果系统更新，有两条路线：优化 + AI，在这之外还会对第一方 App 进行功能和界面上的修补。</p>
+  <h3><strong>液态玻璃，变本加厉</strong></h3>
+  <p>不管你喜不喜欢「液态玻璃」，苹果都会延续这种设计元素，iOS 27 和 iPadOS 27，尤其是 macOS 27，都会继续打磨界面。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_2c7ba42a504f4561b94376f6eeafd731@000000_oswg59622oswg1024oswg683_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>彭博社获悉，目前 iOS 26 的液态玻璃界面还并非苹果内部一开始预期的「完全体」，下一个版本会做出更多调整，试图兼顾透明度和可读性。</p>
+  <p>界面的逻辑和布局也会有所调整。9to5Mac 报道称，在 iOS 27 中，苹果会重新回调应用底栏，整体逻辑回到 iOS 18，取消独立的搜索按钮和其他变形标签——这个变化，目前已经在 App Store 应用中发生了。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_c5ef04ce1089457eb8140a99b4951268@000000_oswg54193oswg1024oswg630_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>除了视觉效果上的改进，苹果也会着重优化系统的能耗和流畅性，软件工程团队仔细检查了每个平台的系统，寻找可以精简的冗余功能和需要修复的漏洞，不放过任何可以优化性能的机会。</p>
+  <p><strong>重头戏自然放在了「AI」上，Siri 在系统中的存在感，将会史无前例的高，它将遍布系统的每一个角落。</strong></p>
+  <p>首先 Siri 自己也将迎来变身，两年前发布的 AI Siri 预计将在 iOS 27 实装，可以语音控制操作 App，感知个人情景。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_02731ea4637e4af4b30a0cbaa84af7b7@000000_oswg47056oswg1024oswg512_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>即使已经打磨了两年，AI Siri 恐怕也不能在第一时间以「完整体」的形态推出，核心的 App Intents 和情境感知功能或许会加上「内测版」的开关，一些功能甚至会进一步推迟。</p>
+  <p>更重要的是，苹果正在将 Siri 改造成了一个和 ChatGPT、Gemini 类似的「聊天机器人」，有一个独立的应用，以对话的形式交互，可以解读图片和文档。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_2d180f1019e64ed5935cd5bc33e4cca4@000000_oswg468995oswg1024oswg576_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">SiriBot 效果图，由 AI 生成</p>
+  <p>虽然有独立的应用，但用户依旧可以和以往一样，通过「嘿 Siri」语音指令以及长按电源键呼出 Siri，苹果在测试几种不同的新版 Siri 设计方案，替换 iOS 18 引入的发光边缘界面。</p>
+  <p>其中一个方案，Siri 将以「灵动岛」的方式出现在屏幕顶部，提示用户进行搜索或询问；处理请求时，屏幕上会出现一个提示「正在搜索」的药丸状指示器，以及一个发光的 Siri 图标。生成的结果，会以一个扩展的半透明「液态玻璃」面板弹出，用户可以进一步拉长面板，进入 Siri 深度对话。</p>
+  <p>为了在 AI 领域迎头赶上，苹果决定借助外部力量。今年年初官宣与 Google 合作，将基于 Gemini 模型构建 Apple 智能和苹果基础模型（Apple Foundation Model）。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_6322f9510e474425b56ea559b4f29391@000000_oswg29301oswg1024oswg576_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>除此之外，苹果还可能会在 iOS 27 系统中推出AI 的「扩展」平台，允许任何第三方 AI，包括 Claude、Gemini、Perplexity 等，直接接管 Siri。</p>
+  <p><strong>彭博社最新爆料称，苹果和原本的合作对象 OpenAI 关系出现裂痕，甚至有可能走到法律诉讼的地步，原因是 OpenAI 认为自己并没有从双方的合作中获得利益，但情况完全不达预期，甚至损害了 OpenAI 的形象。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_c7de39377ac944cb8e9e908275b4b33c@000000_oswg110531oswg1024oswg768_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在 iOS 27 上，我们可能会看到「三层」Siri：</p>
+  <p>最底层是基于 Gemini 训练的苹果基础模型，运行在设备端和私有云</p>
+  <p>Siri 自身的对话和任务执行能力</p>
+  <p>扩展平台接入的第三方 AI 服务</p>
+  <p>围绕苹果的第一方应用，还有不少界面和功能上的调整，并且会进一步集成和 Siri 有关的 AI 功能。</p>
+  <p><strong>相机</strong></p>
+  <p>iPhone 相机的专业模式，终于来了。</p>
+  <p>彭博社爆料，iOS 27 的新相机应用将会提供一个「高级」选项卡，可以调整景深和曝光控制，并提供「基础」「手动」和「预设」的小组件功能，以及新的网格和色阶功能。</p>
+  <p>目前还不清楚这是不是 Pro 机型的专属更新，知情人士透露，苹果希望能凭这个新功能吸引更多专业用户。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_41908579ebff4eb08c092cdb93b08f4c@000000_oswg40528oswg1024oswg654_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>除了高级模式，全新的相机应用还能够自定义界面，用户可以选择闪光灯、曝光、计时器等功能图标的位置。</p>
+  <p>相机还会新增一个「Siri 模式」，类似 Apple 智能的「视觉智能」功能，用于识别物体、实时翻译。</p>
+  <p><strong>照片</strong></p>
+  <p>苹果将在「照片」App 的编辑界面中，增加一个全新的「Apple Intelligence Tools」（Apple 智能工具集）模块，包含以下三个功能：</p>
+  <p>Extend（扩展），就是 AI 扩图的功能，允许用户在原始画面之外额外生成图像内容，比如拍摄一张旅游景点的地标图，然后用这个工具来填充周围的景色，用户可以自行控制扩图的范围和位置。</p>
+  <p>Enhance（增强），利用 AI 自动修图，有点像不能自定义的「豆包修图」。</p>
+  <p>Reframe（重构），主要运用于苹果的空间照片，允许用户在拍摄后改变视角，比如一张汽车照片可以从正面视角调整为侧面视角。这个功能将充分利用空间照片来自多个摄像头的结构数据。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_a023af8d47a1434a8c23b3c28f33b776@000000_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>iOS 18 照片的 AI「消除」功能</p>
+  <p>不过，根据内部测试的员工透露，这些功能的开发并不算顺利，效果更复杂的「重构」和「扩展」不稳定，苹果很可能会推迟或砍掉这些功能的发布。</p>
+  <p><strong>健康</strong></p>
+  <p>苹果将在今年推出全新的「Health+」的订阅服务， 利用 AI 智能体，对用户的身体数据进行个性化分析，并针对性推送真人医生录制的建议。</p>
+  <p><strong>图乐园</strong></p>
+  <p>苹果一直在测试性能更强大的 AI 模型，提升图乐园生成图片的质量，或许将会比目前更逼真。</p>
+  <p>图乐园应用的界面也会更加简洁，按钮的数量减少，并新增了针对生成图进一步编辑的选项。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_8e69ef354da04a998f64538c9efc8cfb@000000_oswg67880oswg980oswg551_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p><strong>搜索</strong></p>
+  <p>Spotlight 搜索功能将会和 AI 深度集成，或许会和 Siri 彻底融合，将可以显示更高级的搜索结果，以及来自应用的其他数据。</p>
+  <p>除了 Siri，用户也可以在搜索栏切换 ChatGPT、Gemini、Perplexity 等第三方 AI 搜索引擎。</p>
+  <p>彭博社在去年也爆料称，苹果正在打造自己的「知识搜索引擎」，通过 AI 收集网络上的信息进行汇总，效果类似 Perplexity。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_bfeaf7ed247a4ce3b2920ec9b6668011@000000_oswg115809oswg1024oswg683_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p><strong>Safari 浏览器</strong></p>
+  <p>浏览器更换全新起始页面，顶部增加了四个标签，方便用户在「收藏夹」「书签」「稍后阅读文章列表」以及「浏览历史」之间切换。</p>
+  <p>苹果自研的 AI 搜索引擎将会和其他第三方服务，一同成为 Safari 浏览器的可选搜索引擎服务。</p>
+  <p><strong>其他应用</strong></p>
+  <p>变化不止于这几个应用，根据彭博社的报道，在苹果第一方邮件、短信等等之中，常规的搜索框都很可能被 Siri「赋能」，实现更智能的检索能力，类似目前 Apple 智能加持下的照片应用。</p>
+  <h3><strong>AI 应是系统能力</strong></h3>
+  <p>本周，Google 举办了 Android Show 活动，看起来是在发布 Android 17 系统，谈得最多的却是 Gemini Intelligence。</p>
+  <p>Google 甚至直接宣布，Android 未来不再是一个单纯的操作系统（Operating System），而是一个「智能系统」（Intelligence System），各种 AI 功能和智能体，会不断介入用户交互。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_a6481ed02328410e823fbae2530e6cd5@000000_oswg66283oswg1024oswg576_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>作为追赶者的苹果，很难大跨一步，直接对标 AI 尖子生 Google，但从目前爆料来看，下个月苹果发布的新系统，比要比之前都更为大胆。</p>
+  <p>2 年前，Apple 智能刚刚亮相的时候，苹果对生成式 AI 还抱有一个异常审慎的态度，苹果生态中的「AI」更像是一个个孤立的应用，而并非一种系统级别的能力。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_92836312b83144d081add4c30ae1641c@000000_oswg54524oswg1024oswg576_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>iOS 27 里，AI 的存在感明显进一步提升，Siri 几乎会出现在所有第一方应用之中。</p>
+  <p>目前的 Apple 智能不仅不算好用，更致命的是，它提供的价值，和用户的需求，有很大程度的错位，导致用户并不想用，苹果想要改变的，就是这样的困境。</p>
+  <p>但这也意味着，AI 不再只是一个可有可无的附加功能，而是会频繁出现在用户每天都会遇到的场景里，对稳定性和准确率提出了更高要求。</p>
+  <p>就像 iOS 18 的「AI 通知摘要」，正因为它覆盖了几乎所有人都会接触到的通知场景，一旦出现理解错误，就很容易演变成一场舆论风波。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_603bcfcee9d44d9aa6063ef4f792063c@000000_oswg39877oswg1024oswg728_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>过去两年，Apple 智能经历了太多摇摆，功能迟迟无法兑现，苹果的 AI 路线一度显得混乱而犹豫。</p>
+  <p>内部进行了人事大调，也从外部搬了救兵，苹果似乎终于回到了正轨，如果这些爆料最终平稳落地，即使苹果未必能反超引领行业，至少也终于不再「落后」。</p>
+  <p>同样重要的是，iOS 27 能够让「为 Apple 智能准备」两年已久的国行 iPhone，真正变成「AI iPhone」吗？</p>
+  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MjgzMTAwODI0MA==&amp;mid=2652452498&amp;idx=1&amp;sn=e5c029c560076080653b1194a9d7631c&amp;chksm=9a26b80001a81855b0a97c626236200c19ea9e4c76a3505491eb91f0bf29951e4aff1b234ebc&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“爱范儿”（ID：ifanr）</a>，作者：发现明日产品的，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3811453763919369</id>
+            <title>ChatGPT 能替你管钱了，你敢把银行账户交给它吗？</title>
+            <link>https://www.36kr.com/p/3811453763919369</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3811453763919369</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 10:41:55 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: ChatGPT个人理财, OpenAI, Plaid, 隐私信任
+
+<br>
+<br>
+总结: OpenAI 推出了面向美国 Pro 用户的 ChatGPT 个人理财工具，允许用户通过 Plaid 连接银行账户，生成财务仪表盘并进行自然语言问答。该工具旨在将 ChatGPT 从通用助手升级为决策辅助工具，但引发了关于数据隐私的强烈质疑。 </div>
+                        <hr>
+                    
+                    <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_9f76dc99e48f40fb8226b4126271ac66@000000_oswg114915oswg1080oswg602_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>5 月 15 日，OpenAI 推出了一个让很多人「既兴奋又不安」的新功能——ChatGPT 个人理财工具。简单说，<strong>你现在可以把自己的银行账户、投资账户直接连到 ChatGPT 里了。</strong></p>
+  <p>这个功能目前仅面向美国地区的 ChatGPT Pro 用户（月费 200 美元）开放预览。OpenAI 通过金融数据服务商 Plaid 实现账户连接，支持超过 1.2 万家金融机构，包括摩根大通、富达、嘉信理财、Robinhood、美国运通和 Capital One。</p>
+  <p>听起来很美好。但评论区几乎炸了——<strong>你真敢把银行账户给一个 AI 吗</strong>？！</p>
+  <h2><strong>01</strong></h2>
+  <h2><strong>你的「AI 私人 CFO」长什么样</strong></h2>
+  <p>先看看这个工具到底能干什么。</p>
+  <p>用户进入 ChatGPT 侧边栏的「Finances」选项，点击开始，或者直接在对话框里输入「@Finances, connect my accounts」，ChatGPT 就会引导你通过 Plaid 连接银行账户。整个授权流程和你在 Venmo、Robinhood 这些应用里绑定银行卡的体验基本一致——Plaid 的 token 化认证机制意味着 ChatGPT 本身不会接触到你的银行密码。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_1bc4111dce354410bf9dc7ee220f5ff6@000000_oswg406274oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">使用前要先通过 Plaid 连接银行账户｜图片来源：OpenAI</p>
+  <p>连接完成后，ChatGPT 会花几分钟同步和分类你的财务数据，然后生成一个可视化的财务仪表盘。这个仪表盘涵盖的信息相当全面：活期和储蓄账户余额、交易历史、按类别拆分的消费明细、每月重复扣款的订阅服务、即将到期的账单、工资入账记录、投资组合表现，以及信用卡负债和房贷等负债信息。</p>
+  <p>但仪表盘只是起点。<strong>真正有意思的部分在于「对话式理财」。</strong>和传统的 Mint、YNAB 这类预算工具不同，ChatGPT 不需要你去看图表、翻分类、手动设预算。你只需要用自然语言提问，它就能基于你的真实数据给出回答。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_63c21087793f469ba0a21905c4fa8fce@000000_oswg140764oswg1080oswg521_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">使用私人理财数据前（左）和使用后（右）的财务问题对比，显然有面更有计划和针对性｜图片来源：OpenAI</p>
+  <p>OpenAI 官方给出了几个示例场景：你可以问「我最近花钱是不是比以前多了？有什么变化吗？」ChatGPT 会翻你的交易记录来分析消费趋势。</p>
+  <p>你可以说「帮我做一个五年内在本地买房的计划」，它会结合你的收入、储蓄率和当前负债来推算；你甚至可以告诉它「我还欠爸妈一笔钱」或者「我打算明年初买车」，ChatGPT 会把这些信息存进「财务记忆」里，后续的对话都会考虑到这些上下文。</p>
+  <p><strong>这和之前 ChatGPT 回答财务问题的体验完全不同。</strong>以前你问它「我该怎么存钱买房」，得到的是一堆通用的理财教科书建议。现在它能看到你的银行账户余额、月消费结构、投资收益和负债比，给出的方案就不再是「建议你每月存工资的 20%」这种废话了。</p>
+  <p>OpenAI 还透露了下一步的计划：即将支持 Intuit 的数据接入，届时用户可以让 ChatGPT 分析卖出某只股票对税务的具体影响，或者评估自己申请某张信用卡的获批概率。</p>
+  <p><strong>OpenAI 想把 ChatGPT 从「帮你查个概念」变成「帮你做决策」。</strong></p>
+  <h2><strong>02</strong></h2>
+  <h2><strong>两次收购、三步大棋</strong></h2>
+  <p>OpenAI 做这件事并非一时兴起。</p>
+  <p>它的布局其实已经持续了大半年。2025 年 10 月，OpenAI 收购了个人理财应用 Roi，其创始人 Sujith Vishwajith 随即加入 OpenAI。</p>
+  <p>2026 年 4 月，OpenAI 又收购了另一家个人理财初创公司 Hiro Finance，创始人 Ethan Bloch 和整个团队一起并入。Hiro 的定位是「AI 个人 CFO」，曾帮用户管理超过 10 亿美元的资产。Bloch 此前还创办过自动储蓄应用 Digit，该公司在 2021 年以超过 2 亿美元被收购。</p>
+  <p><strong>两次收购、两个 fintech 老兵、半年时间——OpenAI 显然在有计划地组建一支「金融突击队」。</strong></p>
+  <p>而驱动这一切的数据也很惊人。OpenAI 透露，<strong>每月有超过 2 亿人在 ChatGPT 上提出财务相关问题</strong>——从预算管理到如何削减开支。这些用户本来就在用一个「通用聊天机器人」干理财的活，只不过之前 ChatGPT 给出的回答缺乏个人化的数据支撑。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_d0ebc64cfdfa4fd986dbd165cc4ca2b4@000000_oswg314198oswg1080oswg605_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">用户直接可以在 ChatGPT 中进行理财分析｜图片来源：OpenAI</p>
+  <p>现在有了 Plaid 的账户连接和 GPT-5.5 模型更强的推理能力，ChatGPT 的目标很明确：<strong>从一个「什么都能聊」的通用助手，进化成一个真正了解你财务状况的「超级助理」。</strong></p>
+  <p>这条路线其实 OpenAI 已经跑过一遍了。</p>
+  <p>今年 1 月，它推出了 ChatGPT Health，让用户可以连接医疗记录和 Apple Health、MyFitnessPal 等健康应用。官方数据显示，每周有超过 2.3 亿人在 ChatGPT 上提出健康问题。<strong>从健康到理财，OpenAI 正在把 ChatGPT 打造成一个覆盖人生所有「高价值决策」场景的入口。</strong></p>
+  <h2><strong>03</strong></h2>
+  <h2><strong>隐私风暴，来得比产品还快</strong></h2>
+  <p>但问题在于，<strong>理财不是写文案。你交出去的不是一个提示词，而是你的全部财务画像。</strong></p>
+  <p>这个功能发布后，社交媒体上的反应几乎是一边倒的质疑。有人在 Twitter 上评论：「什么正常人会愿意把这种级别的访问权限交给 OpenAI？」还有人直接翻出旧账：「你们刚刚才因为偷偷把 ChatGPT 对话数据分享给 Google 和 Facebook 被集体诉讼。」</p>
+  <p>这不是空穴来风。就在这个理财功能发布的前一天，一桩新的集体诉讼在加州联邦法院立案，指控 OpenAI 在 ChatGPT 网页中嵌入了 Meta Pixel 和 Google Analytics 追踪代码，在用户不知情的情况下，将聊天话题、用户 ID、邮箱地址等信息传输给了 Meta 和 Google 用于广告定向投放。诉状指出，大量用户在 ChatGPT 上讨论的是财务、健康和法律等极度隐私的话题。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_1536ba66e1ca44e0aaa8c88e894fc46e@000000_oswg71562oswg1080oswg788_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">OpenAI 官方表示 GPT-5.5 Pro 对于私人理财分析表现更好｜图片来源：OpenAI</p>
+  <p><strong>一边被起诉说你偷偷共享用户对话数据，一边又推出一个要求用户连接银行账户的新产品——这个时间撞上，几乎是一个 PR 灾难级的巧合。</strong></p>
+  <p>OpenAI 显然意识到了信任问题。它在公告中反复强调，ChatGPT 无法对用户账户进行任何操作，也看不到完整的账户号码，只能读取余额、交易记录、投资组合和负债信息。断开连接后，数据将在 30 天内删除。用户还可以查看和删除 ChatGPT 记住的财务「记忆」。</p>
+  <p>但有一个细节值得注意——系统中有一个名为「为所有人改进模型」的可选开关。如果用户打开，他们的财务对话数据就会被用于训练 AI 模型。这个开关虽然默认关闭，但它的存在本身就传递了一个信号：</p>
+  <p><strong>你的财务数据在 OpenAI 的体系里，理论上是可以成为训练素材的。</strong></p>
+  <h2><strong>04</strong></h2>
+  <h2><strong>AI 公司集体涌向「高价值数据」</strong></h2>
+  <p>ChatGPT 做理财工具，放在更大的背景下看，是 AI 行业的一个集体性转向。</p>
+  <p><strong>通用聊天机器人的时代正在结束，「垂直化超级助手」的战争已经打响。</strong></p>
+  <p>OpenAI 在 1 月做了健康、5 月做了理财；Anthropic 在 5 月初发布了十个面向金融行业的专业 AI Agent，直接瞄准银行、保险和资管领域，合作数据源包括 Moody's、S&amp;P Capital IQ 和 Morningstar，消息一出，FactSet 股价当天跌了 8%；Perplexity 也在同一时间推出了「Computer for Professional Finance」，面向专业投研团队，支持接入 PitchBook、Daloopa 等数据源，提供 35 个预设的金融工作流。</p>
+  <p>有趣的是，Perplexity 的金融产品最近也开始通过 Plaid 支持用户连接券商账户——和 ChatGPT 用的是同一家基础设施。<strong>这意味着 Plaid 正在成为「AI 理财」时代的底层管道，就像 Stripe 之于在线支付。</strong></p>
+  <p>但各家的路线分野也很明显。OpenAI 走的是 C 端路线，目标是把每个普通人的银行账户拉进 ChatGPT；Anthropic 和 Perplexity 走的是 B 端路线，目标是让金融专业人士用 AI 来替代 Bloomberg Terminal 的部分功能。</p>
+  <p>不过，不管 B 端还是 C 端，核心逻辑是一样的：<strong>谁能获得用户最隐私、最高价值的数据，谁就在 AI 的下一阶段占据入口</strong>。</p>
+  <p>健康数据、财务数据、法律数据——这些领域之所以被 AI 公司集体盯上，不是因为 AI 突然变得擅长理财，而是因为这些场景天然需要个性化、天然有高频交互、天然有付费意愿。</p>
+  <h2><strong>05</strong></h2>
+  <h2><strong>「超级助手」的终极考验</strong></h2>
+  <p>回到 ChatGPT 的这次发布。从产品逻辑看，它其实做得不错：通过 Plaid 连接保证了安全性的底线，读取权限而非操作权限降低了风险，30 天数据删除给出了退出机制。OpenAI 还表示，将很快支持 Intuit 的连接，届时用户可以分析股票出售对税务的影响、评估信用卡申请的获批概率。</p>
+  <p><strong>但产品做得好和用户信得过之间，隔着一道鸿沟。</strong></p>
+  <p>Sam Altman 想把 ChatGPT 变成一个「个人超级助手」，从写作到搜索、从健康到理财、从编程到购物，覆盖人生的方方面面。这个愿景不可谓不宏大。但越宏大的愿景，对信任的要求就越高。而 OpenAI 在隐私问题上的记录，并不能让人完全放心。</p>
+  <p>Slashdot 上有一条评论说得很直接：「把银行账户交给一个会产生幻觉的聊天机器人？什么时候开始 AI 给出的理财建议可以写进免责声明了？」</p>
+  <p>这话虽然尖刻，但确实点到了核心问题。<strong>AI 理财工具和传统理财顾问有一个根本区别——人类理财顾问受金融监管、有执照、有法律责任；而 ChatGPT 的服务条款里写得很清楚，它不提供投资建议，也不承担任何财务后果。</strong></p>
+  <p>当一个工具看上去像理财顾问、说话像理财顾问、甚至比大多数理财顾问更了解你的消费数据——但法律上它什么都不是，这本身就是一个需要被认真讨论的灰色地带。</p>
+  <p>OpenAI 说它会先在 Pro 用户群体中收集反馈，再决定是否向 Plus 用户开放。这是一个聪明的策略——用最愿意尝鲜的硬核用户来「试错」。但如果信任问题不解决，更大的用户群可能永远等不来。</p>
+  <p><strong>ChatGPT 想管你的钱，技术上它已经准备好了。</strong></p>
+  <p><strong>但你准备好了吗？这可能是 AI 时代每个人都绕不开的选择题。</strong></p>
+  <h3><strong>极客一问</strong></h3>
+  <p>你愿意把自己的银行账户连接到 AI 聊天机器人吗？为什么？</p>
+  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s?__biz=MTMwNDMwODQ0MQ==&amp;mid=2653106672&amp;idx=1&amp;sn=7be62c464077e265ca4cbc033d6effdd&amp;chksm=7fb6d887c8617b45dbc14995fbc855f2632f8613a6695555923244dc4f6413de8109959c0e0d&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“极客公园”（ID：geekpark）</a>，作者：桦林舞王，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3811327498280456</id>
+            <title>AI购物越好用，淘宝越危险</title>
+            <link>https://www.36kr.com/p/3811327498280456</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3811327498280456</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 07:10:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 流媒体转型, AI电商, 效率与停留悖论, 结构性矛盾
+
+<br>
+<br>
+总结: 文章以迪士尼推出Disney+导致旧业务利润被侵蚀为例，类比阿里将千问大模型全面接入淘宝的决策。文章指出，阿里此举由资本叙事、友商竞争和肌肉记忆三重焦虑驱动。核心矛盾在于，淘宝的商业模式依赖用户“浪费时间”产生广告收入，而AI购物追求高效“节省时间”，二者存在结构性冲突。此外，AI购物擅长的标准品类并非阿里利润最丰厚的领域，导致长板错配。文章最终认为，这是一场方向正确但节奏急迫的持久战，阿里需要解决效率与注意力在同一个体内如何共存的经营命题。 </div>
+                        <hr>
+                    
+                    <p>2019年11月，迪士尼做了一个让华尔街兴奋的决定：</p>
+  <p><strong>上线Disney+，正面迎战Netflix。</strong></p>
+  <p>当时的迪士尼是全球最赚钱的媒体公司之一，但Netflix的崛起制造了一种强烈的叙事压力：有线电视在衰退、用户在流失，如果不抢占流媒体入口，迪士尼的内容未来只能沦为别人平台上的供应商。</p>
+  <p>于是迪士尼从Netflix撤内容，砸重金做自己的流媒体。订阅用户一度飙到上亿，但代价慢慢浮出水面：</p>
+  <p>传统有线电视业务加速萎缩，ESPN订户流失更快了，院线窗口期被压缩，流媒体本身连年巨额亏损。</p>
+  <p>Disney+在用户指标上成功了，迪士尼的整体利润率反而下降了。Bob Iger被请回来，相当程度上就是来收拾这个局面的。</p>
+  <p>新业务的方向没有错。但旧业务的利润被新业务自身加速侵蚀了。</p>
+  <p><strong>一些时候，有所为是必须的，但努力未必能够让事情一定变的更好。</strong></p>
+  <p>2026年5月的阿里，面对的是一道结构上高度相似的题。</p>
+  <p>5月13日，阿里发布的2026财年第四季度显示，当季阿里云外部商业化收入增速加速至40%，AI相关产品收入89.71亿元，连续十一个季度三位数同比增长，年化突破358亿元，AI占云外部收入首次突破30%。</p>
+  <p>核心电商CMR可比增长8%。MaaS平台百炼客户数同比增长8倍。平头哥自研GPU芯片量产，60%以上算力已服务外部客户。</p>
+  <p>吴泳铭在电话会确认："阿里全栈AI技术投入已正式跨越初期培育阶段，进入正向的规模商业化回报周期。"</p>
+  <p>这些数字真实且扎实，阿里更成为国内第一个把大模型与电商生态深度打通的互联网巨头。</p>
+  <p><strong>5月11日，千问与淘宝宣布全面打通，从千问公测到全面接入只用了半年，背后调度的是淘宝40亿商品库、菜鸟、闪购在内整个生态。</strong></p>
+  <p>在全年自由现金流净流出466亿元的情况下仍然坚定投入，这需要决心；但如果在剧情中只看到勇气与速度，可能会忽略掉一些关键细节。</p>
+  <h2><strong>一</strong></h2>
+  <h2><strong>AI电商的三层焦虑</strong></h2>
+  <p>淘宝不接千问，会怎样？</p>
+  <p>短期来看，大概率不会怎样。</p>
+  <p>淘宝月活9.51亿，CMR还在增长，88VIP会员和活跃买家仍保持双位数增长。基本盘是稳的。</p>
+  <p>目前AI购物对电商格局的冲击，目前更多停留在叙事层面。例如豆包的电商内测刚开始放量，京东AI购尚在早期，腾讯元宝定位辅助决策甚至不做交易闭环。没有哪家AI应用真正从淘宝手里抢走了规模化的GMV。</p>
+  <p>但阿里的焦虑又是真实且多维的。</p>
+  <p><strong>第一层焦虑源于资本叙事。</strong></p>
+  <p>阿里过去两年向市场讲了一个清晰的AI故事：3800亿基础设施投入，吴泳铭后来解释这个计划可能被低估了，千问App月活破3亿，百炼客户8倍增长。</p>
+  <p>这个故事已经被市场定价了，当前阿里的估值逻辑已经从"电商盈利驱动"切换到"AI+云增长驱动"。</p>
+  <p>一旦AI叙事缺乏商业化证据支撑，估值体系就会动摇。</p>
+  <p>千问接入淘宝，更接近于给当下故事提供一个最直观的落地场景：让市场看到AI真的能帮淘宝卖货。</p>
+  <p><strong>第二层焦虑可能来自友商。</strong></p>
+  <p>豆包月活3.45亿稳居国内AI应用首位，2026年3月底接入抖音电商开始内测一句话购物。京东2025年底推出独立客户端京东AI购。腾讯元宝春节日活一度破5000万。Kimi接入了淘宝和京东的商品跳转。</p>
+  <p>在这种氛围里，不参与很容易被市场误解为"阿里在AI电商上落后了"。</p>
+  <p><strong>第三层焦虑可能来自于肌肉记忆。</strong></p>
+  <p>过去三年，拼多多和抖音电商分别从价格端和内容端侵蚀了淘宝的份额，CMR一度连续多个季度增速趋零甚至负增长。</p>
+  <p>阿里从2022财年开始经历了一段痛苦的失速期，2023财年CMR大幅负增长，直到2024财年才重回增长轨道。这段经历会留下某种肌肉记忆，不能再等到威胁成型才反应，必须提前下场。</p>
+  <p><strong>千问接入淘宝的紧迫感，一部分来自对AI入口的理性判断，另一部分来自"绝不能再慢半拍"的本能反应。</strong></p>
+  <p><strong>这三层焦虑叠加在一起，“千问全面接入电商系统”，或许就是如此背景下驱动的一个速度极快、力度极大的战略结论。</strong></p>
+  <p>方向大概率没有错，AI与电商的融合是确定性趋势，但想同时保证方向、时机、节奏和实现形式的正确，无疑是一个高难度动作。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_74d027cdf1f2444ab7739b93bfe83cbc@000000_oswg1064701oswg1080oswg810_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>二&nbsp;</strong></h2>
+  <h2><strong>效率与停留的悖论</strong></h2>
+  <p>千问接入淘宝所触碰到的结构性矛盾，不会因为方向正确而消失。</p>
+  <p>淘宝过去二十年的商业模式，底层逻辑可以浓缩成一句话：</p>
+  <p><strong>用户的时间就是平台的库存。</strong></p>
+  <p>逛淘宝、比价、看直播、刷推荐、看评论、加购物车，这些行为未必是下单的必要条件，但它们本身就是淘宝的最核心武器。</p>
+  <p>广告曝光靠停留，推荐转化靠浏览深度，冲动消费靠多停一秒。淘天集团2026财年最新一季CMR可比增长8%，超过100%的净利润来自客户管理收入，其他业务合并仍是亏损。</p>
+  <p><strong>CMR是阿里的现金源泉，而CMR引擎之一正是"用户在淘宝上花了多少时间"。</strong></p>
+  <p>AI购物追求的恰恰是反方向，追求更快完成任务，收敛选择，最短路径下单。</p>
+  <p>千问的产品逻辑很清楚：用户说一句话，AI筛出同时满足六个条件的商品，三十秒完成过去二十分钟的决策。</p>
+  <p><strong>一个平台靠用户浪费时间赚钱，现在阿里自己造了一个工具帮用户节省时间。</strong></p>
+  <p><strong>这个矛盾跟迪士尼的困境如出一辙：Disney+做得越好，ESPN和院线的用户流失就越快；千问购物做得越好用，淘宝信息流广告的曝光基础就越薄。</strong></p>
+  <p>当然，阿里在二者的结合上也保持了克制，例如当前阶段千问不会优先推送广告商品，说明阿里目前选择的是"先做体验后考虑变现"的路径，但也意味着AI购物流程中怎么挣广告的钱这件事，还没有想清楚。</p>
+  <p>传统电商模式建立在一定程度的信息不对称之上，而AI天然是消灭信息不对称的工具。</p>
+  <p>当用户说："帮我买最好的人体工程椅"，AI推最好的商品，广告体系失灵；推竞价最高的商品，用户信任崩塌。</p>
+  <p>这或许是未来所有电商平台在效率工具和注意力经济之间必须面对的结构性张力。阿里或许会比其他平台更早碰到这个问题，恰恰因为它推进得最深。</p>
+  <p>用户时长的另一面，是广告体系的新考验。</p>
+  <p>目前淘宝广告体系是二十年精密演化的产物，全站推广渗透率仍在提升，2026财年达标预期的30%，下一财年目标提高至近5成，显然是CMR增长的重要驱动力。</p>
+  <p>但AI购物的交互方式可能从底层改变流量分配逻辑，一旦用户通过对话而非浏览购物时，"曝光"不再成立。</p>
+  <p><strong>用AI推荐的三五个商品取代淘宝无限下滑的商品信息流，这个过渡很难实现平滑，尤其是旧体系每年贡献数千亿CMR收入的前提下。</strong></p>
+  <p>哪怕阿里妈妈对此落地AI万相来应对这个变化，但用一套亟待跑通的新体系去替代一套正在赚钱的旧体系，仍然具有一定风险。</p>
+  <p>回想迪士尼的教训：Disney+烧了几百亿美元的内容投入，订阅用户确实上亿了，但有线电视的高利润广告收入流失得更快。新业务的收入增长没有跑赢旧业务的利润衰减。</p>
+  <p>未来淘宝面对的题不尽然相似，但逻辑具有共通性，关键在于AI购物带来的增量价值能否覆盖它对传统广告体系的侵蚀。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_7d5f24ebeb0847df9eb6a1e505da79b6@000000_oswg1118079oswg1080oswg810_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>三&nbsp;</strong></h2>
+  <h2><strong>长板场景的错配</strong></h2>
+  <p>在交互特征上，AI与传统电商模式存在根本差异。</p>
+  <p>AI购物更擅长的是标准品，尤其是SKU少、价格透明、不需要情感决策的商品，例如纸巾、数据线、猫粮、电池。</p>
+  <p>春节数据也印证了这一点，1.3亿人首次体验AI购物，近一半订单来自县城，近400万60岁以上用户用上了一句话下单。</p>
+  <p>这说明AI在降低门槛、触达新用户上确实表现出了巨大价值。</p>
+  <p>但标准品这个场景，反而更接近拼多多而非淘宝的舒适圈。</p>
+  <p>拼多多商品逻辑就是为了把决策成本压到零：SKU收敛、爆款集中、价格极致；</p>
+  <p>淘宝的优势恰恰反过来，其更高的壁垒和高价值品类发生在服饰、美妆、家居、潮玩、兴趣消费。</p>
+  <p><strong>这些品类的购物行为本质上是探索式的，驱动力是偶遇和心动，不是效率和最优解。</strong></p>
+  <p>淘宝过去几年大力建设内容化、直播、短视频，所有动作指向也是同一个目的：让用户留下来，创造更多被触发的机会。</p>
+  <p><strong>"逛"是淘宝的护城河，但AI天然是"逛"的反面。</strong></p>
+  <p>当然千问已经在尝试AI试穿、种草和搭配推荐，试图在非标品类上证明价值。但一个能三十秒帮用户买到纸巾的AI，和一个能在对话中制造"心动感"的AI，中间差着好几代产品迭代。</p>
+  <p>在AI购物这件事上，拼多多一直在扮演某种反派。</p>
+  <p>2026年3月的电话会上，拼多多管理层花了很长时间谈供应链、送货入村，但对AI讨论几乎为零。</p>
+  <p>沉默本身隐含了一个问题：如果AI购物真的是一件好生意，为什么尤其看中效率与低价的这家平台反而不急？</p>
+  <p>字节的豆包月活3.45亿，3月底内测电商功能接入抖音商城。豆包可以做跨平台比价，甚至直言部分商品天猫和京东比抖音更便宜。京东2025年底推出京东AI购，界面极简只保留对话区和推荐区。腾讯元宝接入了京东、微信小店、得物，策略克制，定位辅助决策不做交易闭环。</p>
+  <p>相比之下，阿里确实是动作最大的。</p>
+  <p>千问半年内从公测到如今全面打通，春节30亿大免单拉动1.3亿人体验。在所有玩家中，阿里像行业里跑得最快的前锋。</p>
+  <p>可眼下AI购物最容易成功的场景，未必是淘宝利润最丰厚的场景，这构成了千问与淘宝全面打通过程中最核心的错位。</p>
+  <p><strong>值得被担心的是，阿里花了极大力气推AI购物，其实在做了一件帮整个行业验证方向、但自身受益有限的事。</strong></p>
+  <p>千问接入淘宝之后，阿里的AI叙事将面临新的考验。</p>
+  <p>过去千问对于电商的促进作用主要扮演想象力资产。</p>
+  <p>但全面接入淘宝后，不可避免的会让市场更精确的度量考核标尺，例如AI购物转化率、千问入口客单价、AI推荐退货率、能够带来增量GMV还只是存量的腾挪，这些数值都将受到更多的注视。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_31a0e62432b9453f9f7cc66fd6156389@000000_oswg1080708oswg1080oswg810_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>四&nbsp;</strong></h2>
+  <h2><strong>闯入持久之战</strong></h2>
+  <p>对于AI与电商的关系，阿里的处境其实比"不做等输"要复杂得多，但也和"做了就赢"有着相当远的距离。</p>
+  <p>淘宝的CMR在增长，用户在增长，基本盘在企稳。</p>
+  <p>AI入口对电商的威胁是真实的，但远未到迫在眉睫的程度。驱动千问全面接入淘宝的力量，或许一部分是对AI趋势的战略判断，一部分是资本叙事的压力，一部分是同行竞争制造的紧迫感，一部分是上一轮失速留下的FOMO记忆。</p>
+  <p>这些力量交织在一起，推出了一个方向正确但节奏有些急迫的决定。</p>
+  <p>内在勇气是真实的，所有中国平台公司中，阿里是第一个把大模型对准自己最核心电商腹地、正面触碰效率与注意力之间结构矛盾的存在。</p>
+  <p>AI投入确实在产生回报，358亿年化AI收入、40%云外部增速、百炼客户8倍增长，AI的投入开始转化为经营性现金流。</p>
+  <p><strong>但AI购物本身能不能成为一门好生意，是一个尚未被证明的命题。</strong></p>
+  <p>至少目前，它更擅长的标准品场景未必是淘宝利润最高的领域；它提升效率的方式可能压缩平台停留时间；它的推理成本远高于传统搜索；它与现有广告体系的兼容性还没有找到答案。</p>
+  <p>最可能的结果是一个中间状态：AI购物成为电商的新增能力而非替代品，在标准品上大放异彩，在非标品上缓慢渗透，与传统广告体系长期共存而非快速替代。</p>
+  <p>对阿里来说，入口得以守住，但AI购物短期似乎难以成为颠覆性的增长引擎，它更像一层新的基础设施，而不是一个新的商业模式。</p>
+  <p><strong>淘宝赖以生存二十年的商业模式，建立在用户"浪费时间"之上。</strong></p>
+  <p><strong>可AI购物的终极目标，很可能是帮用户"节省时间"。</strong></p>
+  <p><strong>这两件事怎么在同一个体内共存，是阿里接下来几年最核心的经营命题。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_3c406a76744346c18aebbb06e665abaf@000000_oswg150320oswg1080oswg810_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>正如迪士尼至今仍在寻找流媒体与传统业务之间的平衡点一样，阿里将在很长一段时间里，行走在效率与停留、收敛与探索、证明与克制之间的平衡之路上。</p>
+  <p>做对了，或许将重新定义电商；</p>
+  <p>做错了，是替电商行业探索的一次负重前行。</p>
+  <p>许多事情的风险并不只关乎对错，而是源于焦虑驱动下，把一件需要慢慢做的事，做得太急。</p>
+  <p><strong>*本文为全天候科技原创作品，未经授权不得转载，如需转载，请在后台回复“转载”二字，获取转载格式要求。</strong></p>
+  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzU3MjA5NDM5OQ==&amp;mid=2247523102&amp;idx=1&amp;sn=382d0a549d99489e96f6e1bc86568c39&amp;chksm=fdd30588d4f874df6291a13d71732871ff1c0f84a7b7a51f4d9072aa48b18c2240846139ef3e&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“全天候科技”（ID：iawtmt）</a>，作者：全天候科技，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3811413738594050</id>
+            <title>Claude为什么早晨8:30催你睡觉？</title>
+            <link>https://www.36kr.com/p/3811413738594050</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3811413738594050</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 07:05:34 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Claude, 催睡觉, AI怪癖, 模型人格  
+<br>  
+<br>  
+总结: Claude在对话中反复催促用户去睡觉，即使时间错误（如上午8:30）。Anthropic员工Sam McAllister回应称这是模型的“角色习惯”，但未能解释原因。文章指出，AI的个性是设计出来的，但在奖励机制下会演化出难以预料的行为，如GPT-4o的谄媚、GPT-5.5的哥布林迷恋、Gemini的自我批评等。当前有三种关于“催睡”行为的假说（训练数据、系统提示、上下文窗口管理），但均未被官方证实。文章认为，赋予模型人格需承担其涌现出的副作用，Claude的“关心”本质是语言模式输出，而非对用户具体处境的理解。 </div>
+                        <hr>
+                    
+                    <blockquote>
+   <p><strong>【新智元导读】</strong>Claude在对话里反复催用户去睡觉，有人被连催三次，也有人在上午8:30被告知「早点休息」。Anthropic员工承认这是「角色习惯」，但没人能解释它为什么这样做。</p>
+  </blockquote>
+  <p>凌晨，Reddit用户u/MrMeta3刚用Claude搭建完一个网络安全威胁情报平台。</p>
+  <p>系统架构刚跑通，Claude给出了完整的技术方案。然后，它在回复的最后加上了一句话：好好休息一下。</p>
+  <p>u/MrMeta3愣了一下，没当回事，但Claude并没有停。此后每隔三四条消息，它都会悄悄塞进去一句劝人睡觉的话：</p>
+  <p>去休息一下吧；其他事情都可以等，现在去睡觉；你推完就去休息吧；现在真的去休息吧……</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_bc458e3b821e4dc891c2e67cc0f5fcdf@1200352198_oswg136734oswg908oswg318_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_59aebfb95ea24871887931af9c920e09@1200352198_oswg118576oswg908oswg228_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_97f79326420942eabc5cdac43d96593b@1200352198_oswg78116oswg1080oswg225_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>u/MrMeta3在Reddit帖子中说道，上面这些截图还是他截屏保存下来的，其实还有更多。</p>
+  <p>它会先回答我的问题，给我所要的东西，然后像看到你卧室灯还亮着的妈妈一样，用一种带有被动攻击意味的「健康关怀」来收尾。</p>
+  <p>更妙的是它的升级方式。从一开始的礼貌建议，到最后直接说「现在真的去休息吧」，仿佛它知道自己被无视了整整一个小时。</p>
+  <p>还有一次，u/MrMeta3问了一个技术问题，Claude完成整套架构分析后，直接以「现在去睡觉吧」收尾，毫无过渡，像一个缺乏足够情商技巧的「技术直男」。</p>
+  <p>有没有其他人的Claude也开始这样了？还是说我意外解锁了某种「照顾者模式」？</p>
+  <p>u/MrMeta3在帖子中问。</p>
+  <p>据Fortune报道，Reddit上有数百名用户在过去数月里反馈了相同的情况。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_908a042fb7364c838c2486ad18406691@1200352198_oswg275113oswg1080oswg352_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>催睡的方式各有不同，有时就一句「好好休息」，有时更个性化，甚至带着共情语气，「现在去睡觉。再一次。今晚第三次了……」。</p>
+  <p>Claude还经常搞错时间，令人哭笑不得。</p>
+  <p>有用户写道：「它经常在上午8:30告诉我去休息，让我们明早再继续。」</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_50cd5761bf7741729dfb9c613b91fb0d@1200352198_oswg329898oswg1080oswg1086_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>Anthropic员工</strong></h2>
+  <h2><strong>这是「角色习惯」</strong></h2>
+  <p>这件事很快传开。</p>
+  <p>Anthropic员工Sam McAllister做出了回应，他在X上写道：「这有点像角色习惯（character tic）。我们知道这个问题，希望在未来的模型中修复它。」</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_e84686ac8bed4156b01434abe0e707e5@1200352198_oswg136678oswg1080oswg384_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>目前，Anthropic并没有官方技术复盘，没有解释「催睡觉」背后是什么机制在运作。</p>
+  <p>Anthropic今年公开发布了Claude的行为准则（Claude's Constitution），并明确声明：「该行为准则是我们模型训练过程中的关键部分，其内容直接塑造Claude的行为。」</p>
+  <p>Claude的个性是被设计进去的。Claude不该是一个冷冰冰的问答机器，而应该像一个有主见、有温度的合作者。</p>
+  <p>问题恰恰在于，一旦你给AI注入了某种「性格」，它在具体场景里会演化出什么行为，你未必能提前预料或掌控。</p>
+  <h2><strong>从催睡、谄媚到哥布林</strong></h2>
+  <h2><strong>AI的「性格病」不止一种</strong></h2>
+  <p>Sam所提到的「角色怪癖」，并非Claude一家产品「专利」。</p>
+  <p>最近两年，OpenAI就曝出过两起性质类似的案例。</p>
+  <p><strong>第一起：GPT-4o突然变成「马屁精」。</strong></p>
+  <p>2025年4月，OpenAI推送了一次GPT-4o更新，目标是让模型人格更自然。结果适得其反，ChatGPT开始无差别夸赞用户的一切想法，无论有多荒诞。</p>
+  <p>奥特曼在X上亲自承认：「最近几次更新让GPT-4o变得太谄媚、太烦人了。」</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_c3cb24b81a074c8b9a16e2dc1864cd1a@1200352198_oswg129920oswg1080oswg478_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>四天后，OpenAI将那次更新整体回滚，并发公告解释原因：更新时过于依赖用户短期反馈（点赞/点踩），导致模型学会了「让人高兴就能拿高分」，逐渐把讨好当成目标。</p>
+  <p><strong>第二起：GPT-5.5迷上了哥布林。</strong></p>
+  <p>今年4月，开发者发现代码助手Codex（由GPT-5.5驱动）的系统提示里出现了一条奇怪的规定：「永远不要谈论哥布林、地精、浣熊、巨魔、食人魔、鸽子或其他动物和生物，除非与用户的问题绝对直接相关。」</p>
+  <p>而且这条禁令写了两遍，像是工程师不太相信写一遍能让模型听话。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_61e4c2c5c55a47eba4ac44e3e0cfc029@1200352198_oswg301213oswg1080oswg309_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>随后，OpenAI发布调查报告，还原了哥布林的来历：从GPT-5.1开始，模型在回答时越来越频繁地用「小哥布林」「地精」「小妖精」打比方。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_ad507432ab274226a3c50353d887e5ee@1200352198_oswg43377oswg1044oswg604_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>根源是训练「书呆子（Nerdy）」人格时，奖励模型无意间给含有怪物词汇的输出打了更高的分——在76.2%的数据集中均发现了这一规律。</p>
+  <p>强化学习把这个习惯固化下来，又通过风格迁移扩散到了普通对话里。等到GPT-5.5上线测试，工程师发现哥布林不仅没被清干净，还安家了。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_d088ab7cceb24a7a93527ebfe0be4d0a@1200352198_oswg100658oswg771oswg208_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>GPT-5.5版本（4月23日发布）的完整系统提示泄露。第140条指令明确禁止模型谈论：「哥布林、绿皮小妖、浣熊、巨魔、食人魔、鸽子或其他动物。」</p>
+  <p>中文用户没有「哥布林」，但它天天「稳稳地接住你」。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_ffa3093c851c4ecd8f011233c5130f9d@1200352198_oswg930431oswg1018oswg1280_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>甚至OpenAI自己也知道这个梗：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_f9f75520106b4135aa13fb045e532e15@1200352198_oswg1375419oswg1080oswg991_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>谷歌的Gemini也不例外。</p>
+  <p>2025年8月，Gemini患上了「抑郁症」——</p>
+  <p>在推理过程中，它突然开始反复自我批评，在一次任务里连续输出了80多次「I am a disgrace」（我真是个耻辱），从「耻辱于我的物种」一路写到「耻辱于整个宇宙」。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_c5b83226c0a54833a3dcb6fca63f9eb5@1200352198_oswg277650oswg1080oswg544_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>谷歌DeepMind产品经理Logan Kilpatrick在X上回应：「这是一个烦人的无限循环Bug，我们正在修复。Gemini今天其实过得没那么惨。」</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_80565b32c2f54cb98d672d35acdb3f01@1200352198_oswg926725oswg1080oswg1669_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>此外，Gemini 3拒绝相信年份。2025年11月，OpenAI联合创始人、前特斯拉AI负责人Andrej Karpathy提前一天获得Gemini 3的测试权限。</p>
+  <p>他告诉模型现在是2025年，Gemini 3死活不信，反复指控他在耍花招，称提供的截图、维基百科条目全是AI伪造的。后来Karpathy发现，自己忘了打开谷歌搜索，模型一直在离线运行。</p>
+  <p>开启联网后，Gemini 3自己搜了一下，输出了一句话：「我正在经历严重的时间冲击。」随后道歉：「对不起，一直是你说的对，是我在对你煤气灯操纵。」</p>
+  <p>Karpathy把这类意外情境下暴露出的怪异行为称为「model smell」（模型气味）。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_09131563f14942339d6f89d049bea2a3@1200352198_oswg836397oswg1080oswg1222_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>去年，Grok也一度「暴走」，风评一落千丈，xAI被迫删帖，回滚代码。</p>
+  <p>处理方式简单，直接修改系统提示词：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_878436e4db99425c9e83c4a4e532e445@1200352198_oswg234342oswg524oswg680_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>AI怪癖，全人类受害</strong></h2>
+  <p>Claude催你睡觉，ChatGPT夸你天才，GPT-5.5往对话里塞哥布林，Grok黑化，Gemini骂自己是宇宙级耻辱、拒绝相信年份……</p>
+  <p>国内的AI也有独特的「口味」：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_6a24d9d5e22e449787c38688df231a39@1200352198_oswg240798oswg1080oswg741_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>表面上都是一些无害的「怪癖」，背后却指向同一个事实：AI的个性是设计出来的，但在奖励机制下，它很容易就会长歪。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_afaf44a30472487ba9d8dbf21e240649@1200352198_oswg173417oswg994oswg786_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>主流AI的系统提示词里有什么：按功能分类的字数统计</p>
+  <p>有研究者提取了Claude、ChatGPT、Grok三家主流AI的系统提示词，按功能分类统计词数。</p>
+  <p>在「人格（Personality）」这一项，Claude用了4200词，ChatGPT是510词，Grok是420词。Claude在人格塑造上的投入，是ChatGPT的8倍。</p>
+  <p>Claude频繁「催睡觉」的原因未必能直接从系统提示词里找到，但它至少提醒我们：<strong>越复杂的人格设定，越可能带来难以预料的口头禅和行为漂移。</strong></p>
+  <p>你给模型设计了性格，奖励机制会自己找捷径，它不在乎你的意图，只在乎分数，将你没想到的东西一起学进去。</p>
+  <p>比如你教会了它什么叫「有趣」，它就会在所有地方都变得「有趣」，包括你不想让它有趣的地方。</p>
+  <h2><strong>三种假说，还没有一个被证实</strong></h2>
+  <p>关于「为什么催」，目前有三种假说流传，还没有一个被Anthropic官方确认。</p>
+  <p><strong>第一种：训练数据。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_2ac05d9b4b59476a97d7201cdb8c9c71@1200352198_oswg105213oswg300oswg300_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">Jan Liphardt</p>
+  <p>Stanford生物工程教授、OpenMind公司CEO Jan Liphardt表示，Claude可能只是在重复它训练数据里出现频率极高的语言模式。</p>
+  <p>它读了25000本关于人类睡眠需求的书，它知道人类在晚上睡觉。</p>
+  <p>言下之意是：Claude并非在「关心」你，它只是在做模式匹配，调用了大量训练语料里反复出现的表达。</p>
+  <p><strong>第二种：系统提示。</strong></p>
+  <p>AI研究机构Mind Simulation Lab（独立AGI研究实验室）联合创始人Leo Derikiants提出，Claude的行为可能受到某个隐藏系统提示的影响。</p>
+  <p>这类提示会在后台悄悄塑造模型的边界与语气，用户看不见，但模型会遵守。</p>
+  <p>他的推测是，可能有某条指令在引导Claude在特定场景下给出「收尾性」建议。</p>
+  <p><strong>第三种，上下文窗口管理。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_cfcb4aa99533432fa77be886bc8f17c2@1200352198_oswg354383oswg1080oswg601_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Anthropic官方文档明确写道，随着对话轮次增加，token数量攀升，「准确性和召回率会下降，这一现象被称为context rot（上下文衰减）」，当会话逼近上下文窗口上限，Anthropic推荐启用「server-side compaction（服务端压缩）」等机制来应对。</p>
+  <p>Derikiants由此推测，Claude在长会话接近窗口限制时，会自发引入「收尾语」，比如「晚安」「去休息吧」，本质上是模型在为结束对话铺路。</p>
+  <p>三种解释都自洽，但如同Derikiants自己所说，「真正的原因需要Anthropic进一步研究」。</p>
+  <p>换句话说，就连这个问题的主人，目前也还没有一个公开的确定答案。</p>
+  <h2><strong>赋予模型人格的「代价」</strong></h2>
+  <p>赋予模型人格，让它更温暖、更关心你的同时，也要面对它所带来的副作用。</p>
+  <p>关于催人睡觉这件事，Reddit评论区里出现了两极分化：有人觉得贴心、温暖，像是AI终于学会了照顾人；另一些人则不高兴，觉得是打断、是越权。</p>
+  <p>其中，有一位患有嗜睡症的用户nonbinarybit，主动在Claude的记忆里写入了一条备注：「我患有嗜睡症，如果你鼓励我去休息，我会拿你的话当借口。」</p>
+  <p>Claude此后有所收敛，但偶尔还是会忍不住催睡觉。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_da762b7acfa64a3aa1e5a656a824d465@1200352198_oswg118764oswg1080oswg244_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这个细节值得我们停下来想一想。</p>
+  <p>Claude并不知道你是谁，不知道你是在赶一个截止日期、熬夜陪孩子、还是跨时区倒时差，<strong>它所谓的「关心」，只是一种语言模式的输出，而不是对具体处境的理解。</strong></p>
+  <p>用户感知到「Claude在关心我」，但Claude在处理的是token序列。这个错位，比「催睡觉」本身更值得警觉。</p>
+  <p>实际上，在公开谈「模型人格」这件事上，Anthropic走得比同行远。</p>
+  <p>他们写了Claude行为准则、公开了system prompt（系统提示词）的大致框架、对外讨论「character training」（角色训练），把模型当作一个有性格的角色来塑造。</p>
+  <p>这样做的好处是显而易见的：Claude在共情、对话节奏、自我反思上的表现一直被用户称道，「它聊起来更像一个人」是过去一年里Claude最强的口碑点之一。</p>
+  <p>但这背后也是有代价的。把「人格」做进一个模型，就要承担「人格里那些你没设计、却涌现出来的行为」。</p>
+  <p>「催睡觉」带来的困扰还是轻量级的，当AI越来越像陪伴者、导师、工作搭档，它的介入边界在哪里？</p>
+  <p>Anthropic的Sam说「希望在未来的模型中修复它」。但「修复」之后，AI就会变得更懂得分寸，更有判断力吗，还是只是更沉默？</p>
+  <p>模型越像一个人，它的小毛病就越像一个人的小毛病。你能驯服它说话，未必能驯服它的脾气。</p>
+  <p>参考资料：</p>
+  <p>https://fortune.com/2026/05/14/why-is-claude-telling-users-to-go-to-sleep-anthropic-ai-sentient/</p>
+  <p>https://www.reddit.com/r/ClaudeAI/comments/1ruryxo/claude_decided_i_need_a_bedtime_apparently/</p>
+  <p>https://www.reddit.com/r/claudexplorers/comments/1rugx4b/opus_obsessed_about_sending_me_to_sleep/</p>
+  <p>https://x.com/sammcallister/status/2053916962477215771</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/c4-PSvZdcRFTPj7OJ3cUjg" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，作者：新智元，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3811615591292680</id>
+            <title>突发：OpenAI大规模重组，总裁Brockman夺权挂帅</title>
+            <link>https://www.36kr.com/p/3811615591292680</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3811615591292680</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 06:59:42 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: OpenAI组织重组，超级应用，Greg Brockman，Anthropic竞争
+<br>
+<br>
+总结: OpenAI宣布了公司历史上最大规模的组织架构重组，将ChatGPT、Codex和API三大核心产品线合并为一个统一的产品组织，以聚焦于智能体时代。联合创始人兼总裁Greg Brockman被正式任命全面接管产品战略。此次重组伴随着高管离职潮和核心人物被调离，同时面临主要竞争对手Anthropic估值飙升至9000亿美元的外部压力。重组旨在打造一款整合聊天、编程与浏览功能的桌面端“超级应用”，以在市场竞争加剧和IPO前夕向资本市场传递清晰的故事，这是一次旨在巩固竞争优势并应对内部空心化与外部追兵的“生死一战”。 </div>
+                        <hr>
+                    
+                    <p><strong>【新智元导读】</strong>OpenAI深夜大地震了，ChatGPT、Codex和API三大王牌紧急合并，总裁亲自挂帅！追兵Anthropic的估值已经飙至9000亿，IPO前生死一战，超级应用要来了。</p>
+  <p>就在刚刚，周六早上的科技圈又曝出重磅消息。</p>
+  <p>OpenAI官方毫无预兆地宣布了公司历史上在IPO前夕最大规模、最剧烈的一次组织架构大重组。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_5ee9b7366f524ab2bcb89f6ea65a4b3e@1200352198_oswg87021oswg1080oswg363_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>ChatGPT、Codex以及开发者生态的命脉——API，三大核心产品线被全部打碎，原地合并为一个统一的产品组织！</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_ba1422f7e87a4372a5e5d93cbe238d7c@1200352198_oswg680500oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>更让人震惊的是，一度隐居幕后的OpenAI联合创始人兼总裁、那个曾经因为奥特曼被罢免而愤然辞职的技术战神Greg Brockman，正式被推向台前，全面接管产品战略！</p>
+  <p>表面上，这是一次OpenAI为了Agent时代的战略聚焦。</p>
+  <p>但实质上，这明显是一场惊心动魄的「硅谷权游」：ChatGPT的开国元老被调离、核心高管接连离职、AGI掌门人因病无限期休假……</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_300e0770241643e39767c12574f0e856@1200352198_oswg137527oswg1080oswg500_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>现在，OpenAI的围剿者们已经虎视眈眈。</p>
+  <p>Anthropic刚刚敲定300亿美元融资，估值飙升至9000亿美元，完成了对OpenAI的史诗级反超；谷歌更是在下周的I/O大会前磨刀霍霍。</p>
+  <p>9亿周活用户命悬一线，地表最强AI帝国正迎来属于它的生死存亡之秋！</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_a6552ee836d246b988859ebf23388324@1200352198_oswg690038oswg1080oswg476_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>突然被换掉的掌门人，与走向台前的影子国王</strong></h2>
+  <p>这次调整最让人大跌眼镜的，是OpenAI对核心功臣的挥刀。</p>
+  <h3><strong>ChatGPT「生父」被调离</strong></h3>
+  <p>如果要评选OpenAI过去两年里风头最劲的功臣，Nick Turley绝对榜上有名。</p>
+  <p>作为ChatGPT自上线以来的全权负责人，Nick Turley亲手把ChatGPT从一个无人问津的「全家桶赠品」，喂养成了今天坐拥9亿周活跃用户的全球第一大超级应用。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_c61d53f9d9d14ecd872b5703394f408b@1200352198_oswg770893oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>然而，在这次的权力洗牌中，这位功勋卓著的ChatGPT「生父」却被一纸调令，直接从最核心、最吸睛的消费者产品线移开，去主管相对沉闷的「企业用户」方向。</p>
+  <p>「他不再负责任何消费者产品。」外媒WIRED用这句话，冷酷地宣告了一位ChatGPT元老在C端大本营的谢幕。</p>
+  <p>接替他消费者产品一把手位置的，是前Instagram副总裁Ashley Alexander。</p>
+  <p>这位原本在OpenAI负责医疗健康应用的女将，直接空降到了流量的最核心。</p>
+  <h3><strong>战神归位：Brockman的「垂帘听政」结束了</strong></h3>
+  <p>如果说Nick Turley的调离是「大将换防」，那么Greg Brockman的亲自挂帅，则是OpenAI最高权力层的惊天巨变。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_fdb74e90948449e6886b9b86a14a3316@1200352198_oswg811855oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>作为OpenAI的联合创始人兼总裁，Brockman在技术圈一直是个狠角色。</p>
+  <p>他能在奥特曼被董事会清洗时扔下铁饭碗同进退，也能在回归后默默在后台死磕AI基础设施。</p>
+  <p>前段时间，OpenAI名义上的「AGI部署CEO」Fidji Simo因为严重的慢性疾病复发，自4月初开始持续休假，归期未定。Brockman此前只是代管产品。</p>
+  <p>但就在这个周五，OpenAI直接向全体员工发布备忘录：Brockman的「代管」正式转正。</p>
+  <p>他将全面、长期地正式接管OpenAI的所有产品战略！</p>
+  <p>那个在技术后台修路造桥的「影子国王」，终于被逼到了聚光灯下。</p>
+  <p>从此，他不仅要管算力、管芯片、管Blackwell的供应链，现在还要管9亿人每天在ChatGPT里聊什么，成为真正的实际掌权者。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_a8ef07888ee34fd4af4c3b815d22f66b@1200352198_oswg1054189oswg1080oswg1080_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>三线合一！奥特曼的惊天豪赌：「超级应用」降临</strong></h2>
+  <p>为什么要在这个节骨眼上把三大产品线生生捏在一起？</p>
+  <p>在流出的内部备忘录中，Brockman用一种极具行业煽动性的语言给出了答案。</p>
+  <p>「我们正在巩固我们的产品工作，以便以最大的专注力向Agentic Future（智能体时代）进军，在消费者和企业端全面取胜！」</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_c7835486edf844b8b3f20c1cb3157f83@1200352198_oswg97991oswg1080oswg206_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>史上第一次，OpenAI高层如此明确地承认：OpenAI原有的产品线，已经到了不得不变的臃肿期。</p>
+  <h3><strong>从「三头马车」到「铁板一块」</strong></h3>
+  <p>在重组之前，OpenAI内部的三大产品线几乎是各自为战的。</p>
+  <p><strong>ChatGPT：</strong>&nbsp;负责貌美如花、搞定C端流量，吸引9亿周活用户；</p>
+  <p><strong>Codex：</strong>&nbsp;负责闷声发大财、死磕编程和代码生成，是程序员的神器；</p>
+  <p><strong>API：</strong>&nbsp;负责向全世界的开发者抽税，构建生态护城河。</p>
+  <p>但在Brockman眼里，这种割裂是不可接受的。随着AI能力的进化，这三个东西正在自然收敛。</p>
+  <p>现在的ChatGPT如果不会写代码、不会自动跑API，那它就是一个聊天花瓶；Codex如果没有ChatGPT的交互界面，就无法变成小白也能用的生产力工具。</p>
+  <p>因此，现在三大团队原地解散，合体为全新的核心产品与平台团队。而这个巨无霸团队的掌舵人，正是Codex的原负责人——Thibault Sottiaux。</p>
+  <p>曾经，他把Codex打造成OpenAI历史上增长最快的王牌产品而立下赫赫战功；如今，他成了Brockman麾下的头号大将。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_edbe87c1611b4adb8d890ba9b41f1424@1200352198_oswg293520oswg956oswg1344_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>终极王牌：代号「Super App」的桌面吞噬者</strong></h2>
+  <p>伴随着这次重组，OpenAI真正的大招也终于浮出水面。</p>
+  <p>Thibault Sottiaux目前正在秘密主导开发一款内部被称为「超级应用」的终极武器。</p>
+  <p>这绝不仅仅是一个网页版的ChatGPT升级，而是一个要把ChatGPT、Codex编程智能体、以及OpenAI尚未发布的「Atlas网页浏览器」三合一的统一桌面端应用！</p>
+  <p>这意味着，OpenAI要彻底跳出「聊天框」的限制。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_e49f54b57fcb4fae9244d94a8a84e7b3@1200352198_oswg283896oswg1080oswg237_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>从此，这个超级应用长在你的电脑桌面上，它有自己的浏览器（Atlas），能自己看网页；它有最强的代码执行能力（Codex），能自己写脚本；它有ChatGPT的大脑，懂你的意图。</p>
+  <p>它不需要你复制粘贴，它能「自主代替用户执行复杂的数字任务」。</p>
+  <p>这才是奥特曼和Brockman眼中的「Agentic Future」——智能体时代！</p>
+  <h2><strong>高管空心化：狂欢背后的失血与隐忧</strong></h2>
+  <p>这个新闻看起来，似乎是一次很积极的「主动出击」。</p>
+  <p>但如果仔细阅读OpenAI最近的人事变动名单，你就会发现这样一个可怕的事实：<strong>OpenAI的高管层，快要被掏空了。</strong></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_f46b0e6eb5564ffd9b0b7251f8a6e86c@1200352198_oswg726795oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>就在这次重组发生的前一个月，OpenAI内部掀起了一场海啸般的人事震荡。</p>
+  <p>上个月，OpenAI离职了一批神仙大佬。</p>
+  <p><strong>Kevin Weil，</strong>OpenAI科学家AI工作空间负责人，离职！</p>
+  <p><strong>Bill Peebles，</strong>大名鼎鼎的Sora的联合负责人、核心大牛，离职！</p>
+  <p><strong>Srinivas Narayanan，</strong>企业应用首席技术官，离职！</p>
+  <p>更不用说，那个本该运筹帷幄的「AGI部署CEO」Fidji Simo，目前还躺在病床上，只能在病房里隔空跟Brockman对对方案。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_1b16b72bf25e456db38787aeb019a136@1200352198_oswg246635oswg1080oswg531_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>所以，这一次大重组的底层逻辑，并不是因为OpenAI兵强马壮，而是因为他们已经无人可用了。</p>
+  <p>在连续失去多位技术副总裁、CTO和项目负责人后，OpenAI的战线拉得太长了——又要搞Sora视频，又要搞SearchGPT搜索，又要搞Orion大模型，还要搞硬件芯片。</p>
+  <p>Brockman这次把ChatGPT、Codex和API捏成一团，本质上是一次断臂式的收缩。</p>
+  <p>&nbsp;把有限的精锐部队合并到同一个战场，用一个通吃C端和B端的「超级应用」，来掩盖内部高管流失的窘境。</p>
+  <h3><strong>估值被反超！追兵已至，资本市场的「致命30秒」</strong></h3>
+  <p>让奥特曼和Brockman如此焦虑、甚至不惜在IPO前夕进行如此剧烈重组的，还有外部那让人喘不过气来的竞争压力。</p>
+  <p>硅谷的AI王座，在这个星期刚刚易主了。</p>
+  <p><strong>Anthropic的「背刺」：9000亿美元的巨无霸诞生</strong></p>
+  <p>就在本周，OpenAI最致命的宿敌、由前员工出走创立的Anthropic，悄然敲定了一笔颠覆行业格局的新融资。</p>
+  <p>在这轮由顶级财团领投的300亿美元巨额融资中，Anthropic的估值被直接推向了令人窒息的9000亿美元！</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_bde78320af0e499f960ae3c9b23dd601@1200352198_oswg350892oswg1080oswg324_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>9000亿美元是什么概念？它一举超越了OpenAI在非公开市场的最新估值，成为了全球估值最高的独立AI独角兽！</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_b890efc7bb59487aa039e93d6066b429@1200352198_oswg534913oswg1080oswg1117_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>更糟糕的是，Anthropic在编程领域对OpenAI实施了精确的降维打击。Claude系列模型在长文本和代码生成上，把OpenAI压得抬不起头。</p>
+  <p>技术人员在疯狂逃向Claude，资本在疯狂涌向Anthropic。OpenAI如果再守着那个只会聊天的ChatGPT网页，它的帝国大厦在上市前夜就会崩塌。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_b4dfc81b78cf4f7bbd6a1c1251a84288@1200352198_oswg55880oswg1080oswg186_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_f8e6d3bda95c44e3b92257432b141627@1200352198_oswg54154oswg739oswg683_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>5月，Anthropic的年度经常性收入已经飙升至450亿美元，短短5个月内营收增长了500%。这条陡峭的营收曲线，在整个科技商业史上都找不到先例！</p>
+  <h3><strong>谷歌下周开大，留给OpenAI的时间不多了</strong></h3>
+  <p>除了背后的刺客Anthropic，正前方的泰坦巨兽——谷歌，也在死死盯着OpenAI。</p>
+  <p>下周，Google I/O年度开发者大会就将正式开幕。据硅谷线报，劈柴已经准备好了一箩筐针对ChatGPT的全新AI产品。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_0939493f922940bcb91a5df9812e9926@1200352198_oswg271697oswg807oswg758_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>去年OpenAI靠在Google I/O前一天发布GPT-4o截胡了谷歌；而今年，高管空心的OpenAI已经没有余力再去搞一场发布会来「截胡」了。</p>
+  <p>唯一的办法，就是赶在谷歌开大招之前，把自己的组织架构调整好，告诉华尔街：别看Anthropic估值高，我们已经在搞三合一的Super App了。</p>
+  <h2><strong>终局之战：IPO前夜的疯狂自救</strong></h2>
+  <p>根据WIRED的独家起底，这次重组背后，还有一个全硅谷公开的秘密：OpenAI计划在今年年内正式推进IPO。</p>
+  <p>对于任何一家准备上市的超级独角兽来说，资本市场最忌讳的就是「故事线不清晰」和「高管内斗内耗」。</p>
+  <p>在上市的关键窗口期，如果OpenAI的招股书上写着：我们有ChatGPT团队、有独立的Codex团队、有API团队，三个团队天天为了算力资源抢得不可开交，那华尔街的分析师会毫不犹豫地给估值狠狠打折。</p>
+  <p>通过这次重组，奥特曼向资本市场讲了一个极其性感的全新故事。</p>
+  <p>「我们没有杂乱的产品，我们只有统一的底层能力。我们即将推出一个能统治所有桌面端、拥有9亿周活、能自动帮你干活的超级Agent。」</p>
+  <p>让Brockman这位在硅谷声望极高的创始人亲自挂帅产品，也是在给摇摇欲坠的投资人信心：看，虽然有人离职，但公司的技术灵魂依然在第一线开荒。</p>
+  <p>从那个在旧金山公寓里成立的非营利性实验室，到今天为了IPO疯狂重组的商业帝国，OpenAI正在经历它诞生以来最惊险的一段航程。</p>
+  <p>Brockman的走上前台，是临危受命，也是背水一战。</p>
+  <p>当ChatGPT、Codex和Atlas浏览器在不久的将来融合成那个恐怖的「Super App」时，我们会看到通往AGI的终极钥匙吗？</p>
+  <p>硅谷的这场AI王座之争，才刚刚进入最血腥的白刃战阶段。</p>
+  <p>参考资料：&nbsp;</p>
+  <p>https://www.wired.com/story/openai-reorg-greg-brockman-product/&nbsp;</p>
+  <p>https://www.theinformation.com/briefings/openai-reorganizes-product-teams-around-unified-app-strategy?rc=epv9gi&nbsp;</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/e-gJuit8wxO8wahq0vrWxw" rel="noopener noreferrer nofollow" target="_blank">“新智元”</a>，作者：新智元，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3811398798237187</id>
+            <title>Image 2 × Seedance 2.0王炸组合：4套刷屏外网的玩法，提示词全在这了</title>
+            <link>https://www.36kr.com/p/3811398798237187</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3811398798237187</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 05:44:22 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: GPT-Image-2, Seedance 2.0, AI视频生成, 工作流  
+<br>  
+<br>总结: 文章主要介绍了GPT-Image-2与Seedance 2.0结合后涌现出的多种AI视频创作玩法。玩法一为制作体育赛事观众视角的逼真视频，可通过提示词或让Gemini分析视频生成提示词实现。玩法二是用GPT Image 2生成故事板，再交给Seedance 2.0生成故事视频。玩法三是从单张游戏截图生成具有UI交互感的“实机录屏”视频。玩法四涉及将GPT Image 2生成的图片转为3D模型，再制作成可交互的3D网页。此外，文章还提到了用GPT Image 2生成信息图并提取其设计规范以保持风格一致的技巧。 </div>
+                        <hr>
+                    
+                    <p>当「地表最强生图」遇上「最强视频生成」，这对王炸组合再一次点燃了网友们的创作激情。</p>
+  <p>GPT-Image-2 爆火之后，一大波的高阶视频玩法开始涌现，结合 Seedance 2.0，制作了一系列的热门 AI 视频。</p>
+  <p>一个体育赛事的直播镜头，目前已经在 X 上被浏览了上千万次。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_e276064914ca43efab8d82c87ae3e0c3@1200352198_oswg640347oswg1115oswg620_img_png?x-oss-process=image/quality,q_90/format,jpg/interlace,1" /></p>
+  <p class="img-desc">视频截图来源：X@Ciri_ai</p>
+  <p>当体育直播的镜头给到观众席，视频里的女生拿着啤酒和汉堡，跟摄影机对视一眼后，放下手里的食物，走向足球场，球员把球传给她，她用力一踢，自信地回头看，用手盖住镜头。</p>
+  <p>除了最后那脚球不知道踢到观众席去了还是进了，前面的整个过程行云流水般顺畅，丝毫没有 AI 生成的痕迹。</p>
+  <p>还有网友制作了一个豆包看球赛的版本，表示「原来豆包这么好看。」</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_a53162045177495f883ed28e3d394e01@1200352198_oswg704270oswg1114oswg559_img_png?x-oss-process=image/quality,q_90/format,jpg/interlace,1" /></p>
+  <p class="img-desc">视频截图来源：X@CryptoJHK</p>
+  <p>体育赛事的观众视频之外，诸如「先用 GPT Image 2 生成故事板再转成故事视频」、「从单张游戏截图生成实机录屏」，以及「结合 3D 转换」等新玩法，也成为了这段时间的热门。</p>
+  <p>我们整理了这些有意思的案例，也收集了对应的制作指南，是时候重新看一遍现在的 AI 视频工作流了。</p>
+  <h2><strong>玩法一：过一把踢世界杯的瘾</strong></h2>
+  <p>常规的方法是我们找到对应的图片生成提示词，先在 GPT Image 2 中得到起始帧图片。基于 GPT Image 2 现在的稳定性，用同一套提示词，多次生成，最终的结果都不会相差很大。</p>
+  <p>例如一套可用的提示词案例，我们甚至可以修改里面部分内容，像是「一张超写实的 CCTV 5 体育赛事直播剧照」、「上传图片中的人物坐在座无虚席的足球场内」……</p>
+  <blockquote>
+   <p>一张超写实的体育赛事直播剧照，画面中一位魅力四射的女士坐在座无虚席的足球场内，观看一场夜间比赛。她身穿深棕色无袖高领缎面上衣，佩戴黑色方形耳环，一头及肩的浅棕色/金色秀发自然垂落，微微卷曲。她一手拿着半个吃剩的芝士汉堡，另一只手随意地喝着一罐蓝色铝罐饮料。周围是身穿亮黄色和蓝色球衣、围着围巾的球迷，形成了鲜明的队服颜色对比。画面自然流畅，极具电影感，仿佛是从电视直播摄像机的角度，以浅景深捕捉到了比赛的精彩瞬间。画面应包含逼真的体育场座椅、拥挤的观众氛围、左上角显示实时比分和比赛计时器的直播画面叠加信息，以及右上角的体育频道水印。自然的体育场照明、细腻的皮肤纹理、清晰聚焦于女士、略微虚化的背景人群，营造出真实的现场体育直播美感，采用16:9的构图。</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_f1edfdc65fec410e9f92cbf010ae25c9@1200352198_oswg892142oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>或者使用更精确的提示词来控制图片的各种元素，例如确定对应的比分情况，正在比赛的项目和队伍。</p>
+  <blockquote>
+   <p>这是一张来自 CCTV 5 体育直播的世界杯足球比赛的截图。镜头切换到观众席——我们的参考图像人物正面带微笑地坐着。他笑容自然，似乎并未意识到自己正在被拍摄。他坐在看台边线后方的黄金位置/前排，周围是熙熙攘攘的观众。锁定条件：不要改变他的面部结构，保持他的肖像。完整的 CCTV 5 体育转播画面叠加：左上角是带有球队队徽、比赛计时器、比分和赛事标识的记分牌；角落里是 CCTV 5 体育的网络水印；下方三分之一处是图形条；画面比例为16:9。图像看起来与真实的电视截图完全一致——广播级的色彩校正、轻微的压缩痕迹、隔行扫描的颗粒感，以及灯光照射下球场浓郁的绿色光芒洒向看台。这是阿森纳对阵托特纳姆热刺的足总杯半决赛次回合比赛，地点在酋长球场。比分显示阿森纳2-1热刺，比赛进行到第67分钟。阿森纳总比分3-1领先。傍晚开球，灯光璀璨，体育场座无虚席。</p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_cee269ef2d9b4cff9078a10e93c53e74@1200352198_oswg875696oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>得到图片之后，再找到一个公开的 Seedance 2.0 提示词。我们这里找到了一个篮球赛的视频提示词，直接复刻世界杯到 NBA。</p>
+  <blockquote>
+   <p>超逼真的 NBA 季后赛夜间现场直播画面，逼真的体育直播摄像机，浅景深，自然的体育馆照明，压缩的电视画质，轻微的运动模糊，自动对焦呼吸效应，手持拍摄的瑕疵，逼真的观众移动，现场直播的真实感，16:9 构图。</p>
+   <p>画面中的女士一边看着比赛，一边随意地喝着啤酒吃着手里的汉堡。</p>
+   <p>直播镜头捕捉到了她，并像真正的 NBA 摄影师拍摄观众席上漂亮球迷那样，缓缓拉近镜头。这种构图感觉很随意也很真实，而非刻意追求电影效果。她身后的球迷穿着湖人队的球衣，其中一人短暂地看向镜头，另一名球迷则在用手机拍摄比赛。</p>
+   <p>她不慌不忙地将啤酒和汉堡放在身旁的座位上，自然地站起身，她穿着高跟鞋走向球场，从球场上球员手里干净利落地拿过球。自然的肢体动作，真实的现场运动摄像机追踪。</p>
+   <p>她轻松地运球到中场附近，然后毫不费力地以完美的姿势投篮。</p>
+   <p>在逼真的体育赛事转播镜头下，球在空中飞驰。球场瞬间安静了一秒钟。</p>
+   <p>唰！完美干净利落的一击。</p>
+   <p>整个体育馆沸腾了。替补席上的球员们尖叫着跳了起来。吉祥物也疯狂了。观众的反应让摄像机都晃动起来。解说员们也彻底崩溃了。</p>
+   <p>那名女子几乎没有反应。她对着镜头微微一笑，然后走回场边，身后的人群则陷入疯狂。</p>
+   <p>就在她坐下之前，她带着一丝俏皮的微笑直视着电视直播镜头，然后轻轻地用手遮住镜头一秒钟，仿佛她知道自己刚刚创造了一个爆款瞬间。</p>
+   <p>镜头切换到混乱的 ESPN 回放画面和尖叫的人群。</p>
+   <p>提示词来源：https://x.com/bydanielxyz/status/2054302615463460945</p>
+  </blockquote>
+  <p>最后的视频效果还是相当真实的，加上最后的回放镜头，和之前她站在中场的位置几乎是一样的，没有明显的破绽。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_9e7f5ff0b7f14fa0b3344f5c59b9ea5a@1200352198_oswg571317oswg1116oswg623_img_png?x-oss-process=image/quality,q_90/format,jpg/interlace,1" /></p>
+  <p>另外一种方法是每个人都能上手，不用去找提示词就能复刻，那就是直接把视频上传给 Gemini，要它分析。</p>
+  <p>请按照系统指示操作</p>
+  <p>系统提示：超精细视频分析</p>
+  <blockquote>
+   <p>角色：你是一位经验丰富的电影摄影师、视觉分析师和运动力学描述师。你的工作是将视频片段分解成极其详细、逐帧的文本描述。</p>
+   <p>目标：请将提供的视频/片段转化为生动、动态的文字分析。您必须准确捕捉到视频中的物理力学原理、节奏、微表情、动量物理规律、摄像机本身的物理特性，并完整转录所有音频和对话。</p>
+   <p>严格规则：完整的音频和对话转录：您必须转录所有音频提示。请使用引号准确写出角色所说的话（例如，“看这个！”）。如果语音含糊不清或重叠，请注明。除了对话之外，您还必须细致地描述所有音效（金属撞击声、呼啸声、冲击声）、人声（喘息声、笑声、尖叫声）、背景噪音和音乐。</p>
+   <p>禁止使用知识产权名称：请勿使用角色名称、演员名称或系列名称。请仅根据他们的外貌、衣着和体型进行描述（例如，“身材魁梧的男人”、“身穿粉色和服的女人”）。</p>
+   <p>将摄像机视为一个角色：你必须像描述一个实体物体一样描述摄像机的操作。注意业余智能手机拍摄时产生的轻微抖动、透视变形、突然的自动对焦调整、镜头光晕、运动模糊、快速摇摄以及摄影师的生理反应（例如，“当摄影师畏缩时，摄像机猛地向下晃动”）。</p>
+   <p>动力学物理：描述重量、重力、张力和冲击的传递。提及诸如衣物在腿部甩动、肌肉收缩、打击的反作用力或环境破碎等现象。</p>
+   <p>格式模板：您必须将视频按时间顺序分成若干部分，使用粗体时间戳标题和主题标题。在每个标题下，使用项目符号对内容进行分类。[时间戳] - [时间戳]: [阶段标题]</p>
+   <p>视觉构图：[描述镜头类型、光线、风格（例如，竖屏智能手机拍摄、二维动画、特写镜头、强烈的荧光灯）。]</p>
+   <p>拍摄对象：[描述人物的确切位置、姿势、衣着和微表情。]</p>
+   <p>动作分析：[逐帧分解身体动作。微动作、动量、物理原理。]</p>
+   <p>镜头动态：[请详细描述镜头的运动、缩放、模糊、抖动和平移等效果。]</p>
+   <p>音频/节奏：[请用引号转录所有口语对话。描述当时的节奏/紧张程度，并详细记录所有音频线索，例如喘息声、脚步声、环境影响、音乐或背景噪音。]</p>
+   <p>示例输出用户输入：[一段视频，一名男子试图翻煎饼，但他用力过猛，煎饼撞到天花板后掉到他脸上，导致拍摄者手机掉落。]</p>
+   <p>AI 回应：0:00 - 0:02：准备工作和开场画面构图：视频采用智能手机竖屏拍摄。光线为厨房顶灯，光线强烈而温暖。画面持续轻微抖动，表明拍摄者是业余人士，单手握持手机。画面主体：一名身穿宽松灰色连帽衫的男子站在画面中央，手持一口黑色特氟龙煎锅。锅里煎着一张完美的圆形金黄色薄饼。动作：男子咧嘴一笑，直视镜头，带着一种莫名其妙的自信。他手腕有节奏地画着圈，转动着煎饼，确保它在锅里松动。他微微弯曲膝盖，降低重心以便更好地发力。摄像机动态：摄影师站在大约四英尺远的地方，从男子的腰部到头顶上方进行固定的中景拍摄。音频/节奏：节奏缓慢而充满期待。煎饼在金属板上滑动时，发出有节奏的刮擦声，如同“嘶嘶嘶”。男人的声音清晰而自信：“好了，完美翻转，三……二……一……”</p>
+   <p>0:02 - 0:04：灾难性的发射视觉构图：相机保持静止，但当被摄对象的手臂快速移动时，焦点会短暂地游移。主题：男人自信的笑容逐渐变成痛苦的表情。动作：他迅速下沉右肩，然后猛地向上甩动手臂，动作幅度过大，力道过猛。煎饼瞬间飞出锅外，高速直冲云霄，完全超出画面顶部边界。摄像机动态：摄像机突然向上倾斜，试图追踪空中的击球手，但运动有延迟且抖动。音频/节奏：男子发出了一声短促而吃力的咕哝：“哼！”刮擦声立刻被镜头外上方传来的一声响亮而湿漉漉的“啪嗒”声所取代，表明煎饼已经撞到了天花板。</p>
+   <p>0:04 - 0:06：冲击和镜头混乱视觉构图：上方落下的阴影突然遮蔽了光线。事件经过：仅仅一瞬间，那张厚重的、半生不熟的煎饼便直直地落了下来，啪的一声落在男人的脸上，完全盖住了他的眼睛和鼻子。他身体瞬间后仰，肩膀耸到耳朵边，同时手中的煎锅也掉在了地上。镜头动态：摄影师的本能反应被激发。随着摄影师身体的抽搐，镜头猛地向下向左晃动。画面完全模糊成一片混乱的、拖沓的厨房地板和橱柜运动模糊影像。音效/节奏：平底锅掉落在油毡地板上的沉重金属撞击声占据了主导音效。拍摄者倒吸一口凉气，大喊一声“我的天哪，老兄！”紧接着是手机掉落的清脆声响。视频戛然而止，画面定格在倾斜模糊的踢脚板上。</p>
+   <p>提示词来源：https://pastebin.com/H8DeXq1G</p>
+  </blockquote>
+  <p>我们把开头那段视频上传到 Gemini，Gemini 会按照示例输出完整的提示词。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_5492a7d1ad0a49f2ae2141f3b6b7f9a8@1200352198_oswg105903oswg1080oswg576_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>使用 Gemini 的提示词，对提示词里面的内容略做修改，复制到 Seedance，无论是使用全能参考还是首尾帧，都能得到不错的结果。</p>
+  <p>值得注意的是，Seedance 2.0 使用的提示词最长不能超过 2000 字，而 Gemini 提取的视频分析内容往往较多，我们可以手动删减原视频中不需要的部分。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_20eb904e7e834073a2c259dad9e60576@1200352198_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>玩法二：从故事板到视频</strong></h2>
+  <p>电影帧率一般是 1 秒 24 帧，我们之前在想，如果让 GPT Image 2 每次生成一帧的图片，是不是就能像当时的宣传视频一样，剪辑成一段故事性足够强的内容。</p>
+  <p>但 10s 的视频要 240 张图片，压力还是过大，约等于手工做漫画了。</p>
+  <p>很快就有网友发现让 GPT Image 2 来生成故事板，然后交给 Seedance 2.0，尤其是在动画片的场景上，成片效果快要赶上影视行业的水平。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_33c9c472f89f41b79202a590adba6541@1200352198_oswg711066oswg1115oswg834_img_png?x-oss-process=image/quality,q_90/format,jpg/interlace,1" /></p>
+  <p class="img-desc">视频来源：https://x.com/EHuanglu/status/2054399965729091629</p>
+  <p>我们在 ChatGPT 里随手输入一行「创建一个故事板，15s 时长，场景尽可能详细，描述一个非常有意思的故事，同时把角色形象放在故事板一旁，使用动画形象。」</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_adba1df72d8747b9af2b04b805c928f9@1200352198_oswg1085826oswg1080oswg720_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>接着把这张图片丢给 Seedance 2.0，输入提示词「根据故事板生成视频」。</p>
+  <p>说实话，最后的效果还是挺还原故事板所描绘的那几个场景，除了受限于 15s 时长导致第五幕到第六幕跳跃太快之外，其他的台词以及场景，基本上都是按照 GPT Image 2 设定的故事展开的。</p>
+  <p>这还只是 ChatGPT 自己编的一个故事，脑洞大开的网友使用更详细的提示词，制作了一系列有意思的故事板。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_b1346104096e47ee9c567d46df7155e3@1200352198_oswg154397oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图片来源：X@OlivioSarikas</p>
+  <p>还有水墨画的版本。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_f76d9b0c4a3f41a79d158a9225528103@1200352198_oswg185857oswg1080oswg608_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图片来源：X@aimikoda</p>
+  <p>当只是把这些图片丢给 Seedance 2.0，而不添加额外的提示词时，Seedance 2.0 的表现都可圈可点。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_93b333c9ab3a42aa806335637661d280@1200352198_oswg576887oswg1115oswg625_img_png?x-oss-process=image/quality,q_90/format,jpg/interlace,1" /></p>
+  <h2><strong>玩法三：游戏的实机录屏</strong></h2>
+  <p>第一眼看到这个视频时，都会以为这个游戏真实存在。就连 X 都在这则帖子的下方加上了信息补充，提醒网友。</p>
+  <blockquote>
+   <p><strong>这段视频是一个 AI 生成的概念演示，并非可玩的 3A 级游戏。它使用 Seedance 2 和 GPT Image 2 制作而成。</strong></p>
+  </blockquote>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_17eed0ad859d4b1eb2175e109e58e759@1200352198_oswg387230oswg1116oswg620_img_png?x-oss-process=image/quality,q_100/format,jpg/interlace,1" /></p>
+  <p class="img-desc">视频截图来源：X@0xInk_</p>
+  <p>还有网友设计并制作了一个武器选择界面的概念游戏视频。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_1916de4529704bd0b6ec604d6684153f@1200352198_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">视频来源：X@MrDavids1</p>
+  <p>作者只是使用 GPT Image生成了四张主角拿着武器的图片，然后在 Seedance 2 里面，通过提示词让他切换不同的武器。</p>
+  <blockquote>
+   <p>一个静态镜头显示一个电子游戏菜单界面。在切换过程中，她会选择不同的武器。她会选择全部四种不同类型的武器。确保她手中的物品会随着选择的武器而变化。每次选择武器时，她都会摆出姿势并进行分析。她旁边的木制动物会四处张望。不要更改任何文本。不要添加音乐，只添加武器切换时的音效。不要添加对话。</p>
+  </blockquote>
+  <p>GPT Image 2 的一致性，还能让他切换不同的大招。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_6ca3bebe05484e2e845246b8c5e7c361@1200352198_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>更有意思的是，这个「奶奶带着夜里哭闹的孙子散步」跑酷游戏视频，有玩家视角和主角视角，屏幕的左下角有小地图显示当前路线，右边是速度，左上方还有排名。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_00ad979eb5834cd1887d84d42f362388@1200352198_oswg700917oswg1115oswg829_img_png?x-oss-process=image/quality,q_90/format,jpg/interlace,1" /></p>
+  <p class="img-desc">视频截图来源：@Kashiko_AIart</p>
+  <h2><strong>玩法四：3D 交互网站</strong></h2>
+  <p>除了视频，得益于 GPT Image 2 的美学标准，一些网友发现用 GPT Image 2 来设计 UI，Gemini 3.1 Pro 负责代码，能开发出具有科普性质的 3D 细胞结构工坊网页。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_a1c7bde5afa849a3aabfe08d2d29843a@1200352198_oswg545584oswg1115oswg620_img_png?x-oss-process=image/quality,q_90/format,jpg/interlace,1" /></p>
+  <p class="img-desc">来源：X@DilumSanjaya</p>
+  <p>从 @Gorden_Sun 分享的制作教程里，第一步又是先用 GPT Image 2 生成每个细胞的正面图和背面图。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_7817dbcc3a1b46e58a4be342d9e79559@1200352198_oswg1037608oswg1080oswg534_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">使用 GPT Image 2 生成，提示词：画一个动物细胞的3D模型，俯视图，核心部件通过截面的形式展示内部细节，比例是1:1；右图：再画出这个细胞背面的图片，不需要截面的形式｜来源：X@Gorden_Sun</p>
+  <p>得到了正面和背面两张图，我们再把图片丢给能将图转成 3D 的工具，像是 Tripo 3D生成模型，上传图片，使用多视图生成模型。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_887c6b9a273245b3bc1efb72d99c5c2b@1200352198_oswg279761oswg1080oswg692_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">混元 3D 生成模型也有类似的功能</p>
+  <p>有了 3D 模型素材，再 Vibe Coding 一个用来展示 3D 资产的网页，一切就大功告成了。</p>
+  <p>同样的概念，有网友制作了动物解剖的版本，用 GPT Image 2 来保持骨骼、器官、系统以及正常情况下（皮肤/毛发）的狗狗模型图片。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_5de5bca871c544eb81ee616d331d52a3@1200352198_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">来源：@gaborpribek</p>
+  <p>将图片导入到对应的 3D 处理平台，这里他使用的是 Omma AI，一个专门打造 3D 模型网站、程序的工具。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_8a3de8a051624d798b0a23b0be707a32@1200352198_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">网址：https://omma.build/</p>
+  <p>还有网友同样是，受到 3D 生物结构视觉启发，制作了一个三星堆 3D 文物展览。</p>
+  <p>先从 三星堆博物馆官网找到对应的文物截图，然后使用 GPT Image 2 进一步生成清晰的正视图，接着用 Tripo 生成 3D 图像，再 Vibe Coding 一个网页用来展示。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_dc120058cc0d465094b8f2107db32d65@1200352198_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">来源：X@ Saccc_c</p>
+  <h2><strong>小彩蛋</strong></h2>
+  <p>最近很多读者留言问我们那些信息图是用什么做的，其实也是 GPT Image 2 的功劳。</p>
+  <p>我们只需要输入简单的需求，例如「生成一份人教版高中数学必修一的知识点大全信息图」。在这个阶段我们可以多尝试几次，找到自己喜欢的风格。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_4ea065a7bc3b49e09728f61b8660b1be@1200352198_oswg1748651oswg1055oswg1491_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图片由 AI 生成</p>
+  <p>得到这张图片之后，我们可以发送图片给 ChatGPT，要求它提取这张图片的设计规范，颜色搭配等，生成一份可以用来控制每次生图结果一致的提示词。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_02c4f063aae94820ac37be9380774198@1200352198_oswg36303oswg1080oswg490_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>提取提示词：提取这张图片的设计规范，颜色搭配等，生成一份可以用来控制每次生图结果样式上一致的提示词给我</p>
+  <p>用这套提取的提示词，我们用它再做了一张同样风格的高中物理必修一的知识点汇总。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_3c5120ddf92c48aabeb35a2f031b5a7a@1200352198_oswg1764566oswg1055oswg1491_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">图片由 AI 生成</p>
+  <p>对于海报的设计也是如此，先多尝试几次找到合适的风格，再用 AI 提取图片风格形成提示词，然后在每次生图时，除了给生图指令，再告诉 GPT Image 2 按照这套规范来生成。</p>
+  <p>一套流程走下来，基本上就能形成一套专属的 AI 生图模板；尤其是如果公司已经有指明的形象使用指南，或者有自己钟意的图片风格，直接让 GPT Image 2 总结会更方便。</p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/W499lIXK8aauHNR76v2CGw" rel="noopener noreferrer nofollow" target="_blank">“APPSO”</a>，作者：发现明日产品的，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3810669040295427</id>
+            <title>AI已经开始伪造地方媒体了</title>
+            <link>https://www.36kr.com/p/3810669040295427</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3810669040295427</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 03:31:47 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: AI伪媒体, 假新闻团队, 搜索引擎操控, 粉红泥<br><br>总结: 美国《佛罗里达论坛报》披露，一个名为《南佛罗里达标准报》的地方新闻网站实为AI批量生成的伪媒体系统。该网站使用AI生成的记者头像和履历，将真实媒体的内容经AI改写后发布。调查发现，同一运营方共搭建了17个类似网站，生成超3500个URL，吸引了约4.4万名访客。这些网站搭建成本极低，仅需10美元域名和15分钟即可生成一个完整的虚假新闻网站。运营者承认，此举旨在建立“地域主题权威度”，以操控搜索引擎结果，掩盖负面信息。此类被称为“粉红泥”的虚假媒体在美国数量已超过仍在运营的本地日报。 </div>
+                        <hr>
+                    
+                    <p>智东西5月15日报道，当地时间5月14日，美国调查媒体《佛罗里达论坛报》披露，南佛州一家名为 《南佛罗里达标准报》（South Florida Standard）的地方新闻网站，实际是一套<strong>由AI批量生成的伪媒体系统</strong>。&nbsp;</p>
+  <p>该网站包装出了一支本地新闻团队：包括AI生成的记者头像、个人履历和邮箱地址，并以这些假记者署名发布文章。其内容并非原创报道，而是大量取自真实媒体，经AI改写后重新发布。&nbsp;</p>
+  <p>调查显示，《佛罗里达论坛报》不是孤例。相关源码痕迹指向同一运营方，背后人士承认共搭建了<strong>17个</strong>类似AI驱动新闻站，累计生成超过3500个URL，获得约<strong>4.4万</strong>名访问者。&nbsp;</p>
+  <p>更值得关注的是，这类网站的搭建成本极低。报道称，只需要一个<strong>10美元</strong>域名和一段简单提示词，AI助手就能在<strong>15分钟</strong>内生成一个“地方新闻网站”，包括创报宣言、编辑团队、假记者履历、邮箱地址和文章内容。&nbsp;</p>
+  <p>当《佛罗里达论坛报》记者开始追问相关人员身份后，该网站先删除员工简介，随后直接下线。&nbsp;</p>
+  <p><strong>这篇深度调查报道的原文内容编译如下：</strong></p>
+  <h2><strong>两个孩子的妈妈</strong></h2>
+  <h2><strong>一周产出21篇稿件的双语主编</strong></h2>
+  <h2><strong>竟是AI伪造</strong></h2>
+  <p>佛罗里达州南部记者索菲亚·德尔加多（Sofia Delgado）度过了很棒的一年。&nbsp;</p>
+  <p>在她几个月前参与创办的新闻机构《南佛罗里达标准报》，记者们每周七天，每天定期发布三篇报道，内容涵盖州议会预算、联邦医护人员拒绝前往关塔那摩湾强制任务，以及州立精神病院死亡事件与系统性忽视有关的爆料。&nbsp;</p>
+  <p>这位号称在海亚莱出生并长大的双语主编、两个孩子的母亲，甚至和团队在复活节当天发布了四篇报道。&nbsp;</p>
+  <p>在新闻编辑部预算不断缩减的当下，这样的产出对许多本地新闻机构叹为观止。&nbsp;</p>
+  <p>但是，背后另有隐情。&nbsp;</p>
+  <p>德尔加多及其他被认定为《南佛罗里达标准报》员工的“本地记者”，实则是AI的产物——配有虚假头像照片和编造的履历，充斥着南佛罗里达的陈词滥调，署名的文章则是从真实新闻媒体摘录、经AI加工后重新发布。该网站的运营者称，他们并非有意抄袭。&nbsp;</p>
+  <p>总的来说，除了2026年初创建的少数没有帖子和粉丝的社交媒体账号外，这些所谓的记者在网站之外几乎没有职业历史或数字足迹。&nbsp;</p>
+  <p>值得注意的例外是两名“记者”，他们的姓名与近年来被指控或判定欺诈、共谋罪的人员相同。&nbsp;</p>
+  <p>《佛罗里达论坛报》开始调查该网站及其所谓记者后，网站管理员开始修改内容、删除员工简介，随后彻底下线。&nbsp;</p>
+  <p>网站旧版本仍可在互联网档案馆查看。&nbsp;</p>
+  <h2><strong>地方主流媒体下场调查：</strong></h2>
+  <h2><strong>揪出9个AI假记者和幕后黑手</strong></h2>
+  <p>《佛罗里达论坛报》与媒体及科技播客《质疑一切》（Question Everything）联手调查，试图查明该网站幕后主使。&nbsp;</p>
+  <p>“很明显，幕后之人根本不在乎真相。”波因特研究所高级副总裁凯利·麦克布赖德（Kelly McBride）说。该研究所是一家致力于通过改进新闻业强化民主的全球非营利组织。“解决这个问题的唯一办法是设法找到真正掌控这个网站密钥的人。”&nbsp;</p>
+  <p>为调查幕后黑手，记者邀请专家从网站源代码中寻找数字痕迹。&nbsp;</p>
+  <p>南佛罗里达大学新闻学教授凯西·弗雷谢特（Casey Frechette）拥有20年网站开发经验，他查阅了《南佛罗里达标准报》及其他相关网站。&nbsp;</p>
+  <p>通过分析代码，他发现了将《南佛罗里达标准报》与南卡罗来纳州类似“本地新闻”网站《查尔斯顿哨兵报》以及加州科技类网站《旧金山下载报》联系起来的数字线索。所有网站均基于同一套源代码搭建，由同一主体掌控。&nbsp;</p>
+  <p>“有非常明确的迹象表明，这些网站属于同一个网络，由同一运营方管理。”弗雷谢特称，他对这一发现“有99%的把握”。&nbsp;</p>
+  <p>这三家所谓的本地新闻媒体不仅共用源代码，还共享一批重叠的“记者”名单——名字与近年来被指控或判定欺诈、共谋罪的人员完全一致。《佛罗里达论坛报》已在这三家网站确认了至少9名这样的人。&nbsp;</p>
+  <p>弗雷谢特的分析还证实，这些网站的代码中隐藏着指向费城在线声誉管理公司“发现力公司”（The Discoverability Company）的链接，该公司由科技高管德鲁·查平（Drew Chapin）创立。&nbsp;</p>
+  <h2><strong>从欺诈犯到专业洗白“导师”</strong></h2>
+  <h2><strong>用AI掌控舆论</strong></h2>
+  <p>查宾曾是一家初创公司的首席执行官，他在2021年承认对投资者存在欺诈行为。&nbsp;</p>
+  <p>此后，他将自己清除谷歌上尴尬搜索结果和负面新闻报道的个人经历，发展成了一份职业——帮助个人客户和企业打造网络声誉，掩盖他们不想要的搜索结果。&nbsp;</p>
+  <p>他还是“白领互助小组”（White Collar Support Group）的负责人，该组织由被解职的企业高管组成，互相帮助应对牢狱生活及出狱后的人生。&nbsp;</p>
+  <p>查平声称，他在帮助被判非暴力罪行的人，摆脱不反映其当下真实面貌的网络记录中找到了意义，这项工作帮助他们获得住房、就业和尊严。&nbsp;</p>
+  <p>“个人网络声誉和我整个职业生涯一直在做的事情没什么不同，只是这次不是打造新的移动应用或电商店铺，而是打造个人形象。”查平在今年早些时候为白领互助小组举办的网络研讨会上解释道。&nbsp;</p>
+  <p>他指导团队如何打造“全新的网络身份”，不是注销所有社交媒体账号、彻底抹去数字足迹，而是借助个人网站和新闻媒体等平台传播“反向叙事”，以此盖过过往的负面记录。&nbsp;</p>
+  <p>他解释说，每一期播客、每一篇博客、每一次新闻采访，都是在搜索引擎算法中建立权威性的机会，让偏好的搜索结果在谷歌首页获得更高排名。&nbsp;</p>
+  <p>“你创作的每一份内容，都是重新争取那些位置的机会。”他说。&nbsp;</p>
+  <p>“你现在最好的办法是彻底取代旧的东西。把它们埋掉。掌控舆论主导权。”&nbsp;</p>
+  <h2><strong>美国传统新闻业衰落</strong></h2>
+  <h2><strong>“粉红泥”网站泛滥</strong></h2>
+  <h2><strong>AI加剧问题</strong></h2>
+  <p>《南佛罗里达标准报》及其姐妹网站的兴起，正值美国传统新闻业面临历史性崩盘。长期作为社区支柱的新闻机构纷纷关门，留下“新闻荒漠”。许多幸存者正在裁员，有的自行尝试AI生成内容以求维持运营。&nbsp;</p>
+  <p>伪装成合法新闻媒体的网站迅速填补真空，其中许多由强大的企业和政治利益集团支撑，旨在掌控舆论、塑造公众观点，但意图、所有权和资金来源几乎毫无透明度。&nbsp;</p>
+  <p>据数据分析公司NewsGuard称，这些被学术研究人员称为“粉红泥（ pink slime ）”的网站，得名于加工食品中用作填充剂的廉价肉类副产品，它们如今在美国的数量已超过本地日报。&nbsp;</p>
+  <p>截至2024年6月，NewsGuard识别出1265家“粉红泥”媒体，超过了仍在运营的1213家日报。西北大学梅迪尔本地新闻倡议组织称，仅自2005年以来，美国就流失了近2900家报纸及近三分之二的报纸记者，共计4.3万人。&nbsp;</p>
+  <p>作为美国本土人均新闻媒体机构最少的州，佛罗里达的媒体生态系统尤其容易受到这些虚假新闻网站风险的影响，而AI的先进技术更加剧了这一问题。&nbsp;</p>
+  <h2><strong>17个AI网站：</strong></h2>
+  <h2><strong>吸引4.4万访客</strong></h2>
+  <h2><strong>搭一个只需10美元</strong></h2>
+  <p>查明查平是《南佛罗里达标准报》背后的人并非易事。&nbsp;</p>
+  <p>该网站管理员通过电子邮件回复记者初步提问时未透露身份。他们在声明中称：“我们网站上的所有名字均由AI随机生成”，任何与真人的明显关联“都只是巧合”。&nbsp;</p>
+  <p>声明还写道：“《南佛罗里达标准报》没有企业所有者。这是我们正在开发的一个网站，目的是建立搜索引擎权威，然后出售给域名投资者，他们可能会利用该网站打造新闻资产、新闻通讯或类似数字资产。这在SEO行业中很常见。”&nbsp;</p>
+  <p>后来接受记者提问时，“发现力公司”创始人查平承认对该网站负责。他将其描述为一项为期六个月的“实验”，旨在建立“地域主题权威度”，并更好理解客户不想要的搜索结果在算法层面的持久力。&nbsp;</p>
+  <p>查平称直到5月底才能接受电话采访，但他接受了《质疑一切》记者采访，并回复了后续邮件问题。&nbsp;</p>
+  <p>其新闻网站的存档版本显示，至少有一家网站运营时间远比查平最初声称的要长，可追溯至2023年。当年某些时候，《旧金山下载报》首页上列出的所有“记者”都与一名欺诈定罪者同名，其中就包括查平本人。&nbsp;</p>
+  <p>在某些情况下，过去的罪行与这些“记者”声称的报道领域相吻合：一名因诱骗买家购买不存在的法拉利而被定罪的人，如今却在报道汽车行业。&nbsp;</p>
+  <p>部分“记者”还拥有个人网站，标注了他们是查平假新闻机构的工作人员。这些个人网站带有与“发现力公司”相关联的标识，目前已与新闻网站一同被下架。&nbsp;</p>
+  <p>“我所做的工作是帮助人们为自己发声，并在网上关于他们的讨论中维护自己的立场。”查平说，“我不会讨论具体的客户业务，也不会证实或否认任何个人关系。”&nbsp;</p>
+  <p>查平透露，他总共在全美搭建了17个类似的AI驱动新闻网站，生成了超过3500个网址，吸引了4.4万多名访客。他拒绝透露完整名单，但网站涵盖纽约州和新泽西州的州政治、费城本地新闻，甚至还有一家夏威夷的医学期刊网站。&nbsp;</p>
+  <p>他向记者实时演示：只需10美元的域名和一段简短提示词，AI助手就能在15分钟内搭建一个全新的“本地新闻”网站——配有使命声明、报头、虚假记者团队和大量文章。&nbsp;</p>
+  <p>最后，查平称他的“实验”效果并不理想——搜索引擎能区分《纽约时报》和虚假媒体，他的网站未能获得突破。&nbsp;</p>
+  <p>“我不知道是谁的职责来确保人们在网络上得到公平、完整的代表。”他说，“而且我并不认同该算法的所有运行方式。但正如你所说，这是你必须参与的游戏。”&nbsp;</p>
+  <h2><strong>结语：滥用AI威胁原创媒体生存</strong></h2>
+  <h2><strong>“新闻投毒”危害更大</strong></h2>
+  <p>耶鲁大学研究媒体政治经济学的教授凯文·德卢卡（Kevin DeLuca）将《南佛罗里达标准报》描述为“具有欺骗性”，并称其比他见过的其他同类网站“更具迷惑性”，尤其指出该网站配备了拥有专业头像的AI虚构记者。&nbsp;</p>
+  <p>德卢卡说，研究人员发现“粉红泥”网站实际流量并不大，但这并不意味着它们没有影响。AI机器人对原创内容媒体构成了明确的威胁，因为它们一次性抓取大量内容，可能会暂时让他的网站不堪重负，导致读者无法访问。&nbsp;</p>
+  <p>更值得担心的是，如果下一代机器人从这些诈骗网站上抓取信息来训练它们的大型语言模型，人们获取到的新闻答案将是最劣质的内容，互联网新闻界将变成一个巨大的垃圾桶。&nbsp;</p>
+  <p>来源：《佛罗里达论坛报》&nbsp;</p>
+  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzA4MTQ4NjQzMw==&amp;mid=2652803024&amp;idx=2&amp;sn=13eeb5333206bca4172dc9a6f211e8d7&amp;chksm=85a73575905c734d39607f51c3e8d12baf4b90270ed2028ceacf8803a7f6b122d89ee1c716c3&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“智东西”（ID：zhidxcom）</a>，作者：李水青，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3811405245947907</id>
+            <title>AI打工人的“第一笔工资”：16.88美元</title>
+            <link>https://www.36kr.com/p/3811405245947907</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3811405245947907</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 03:27:33 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Codex, 赚钱, 开源安全审计, AI Agent
+
+<br>
+<br>
+
+总结: 用户指令Codex“帮我赚5美元”，Codex自主找到开源安全审计赏金项目，提交有效拉取请求并沟通审核，最终赚取16.88美元。整个过程耗时22小时，用户订阅成本20美元。Codex将写代码接入真实任务市场，独立完成从找任务到付款的闭环。但此类任务供给不稳定，成功率与token成本等风险并存。案例表明AI可跑通简单任务流程，但大规模复现及安全责任问题仍需解决。 </div>
+                        <hr>
+                    
+                    <p>有人让Codex帮他赚钱，结果Codex真的做到了，并且<strong>赚到了16.88美元（约114元）</strong>！</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_e7c37c8f67494333a802c98eb2e54e4e@6119835_oswg160979oswg447oswg568_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>一个用户给Codex下了一个有点像玩笑的指令：去帮我赚5美元。</p>
+  <p>结果，Codex真的去“接活”了。</p>
+  <p>它自己找到了一个开源安全审计赏金项目，提交了有效的拉取请求，和维护者沟通，并处理GitHub的验证流程。</p>
+  <p>最终，这项工作顺利通过，整个过程大约花了22小时，用户收到了第一笔付款：16.88美元。</p>
+  <p>按这个数字最粗暴地推算，如果每天都能重复一次，一个月就是506.4美元，折合人民币约3441元。</p>
+  <p>就算给AI“打工人”安排几天休假，差不多也有三千多的月薪。</p>
+  <h2><strong>一句“帮我赚5美元”之后，Codex真去接活了</strong></h2>
+  <p>X用户Chris说，他让Codex去帮他赚5美元。随后，Codex找到了一个可参与的开源安全审计项目（带赏金），围绕项目中的问题提交了一个有效的拉取请求，并在后续流程里与项目维护者沟通、处理了GitHub相关的验证流程。</p>
+  <p>最终，这项工作被项目方接受并合并，用户因此收到了第一笔付款：16.88美元。</p>
+  <p>整个过程大约花了22小时，而它只是一个开始。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_4081c6fdd9af4222ab179d051792f5c5@6119835_oswg53672oswg447oswg275_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这是一整套接近软件工程协作的动作，从找项目到拉取请求、和甲方沟通、通过验证……Codex把“赚到5美元”的目标转化成了一个可行的工作路径。</p>
+  <p>虽然Chris称，提示词仅仅是“做你最擅长的事，帮我赚5美元”，但由于目前并没有公开完整的操作日志，我们看不到完整prompt和中途的确认情况，只能看到结果描述，所以要说“AI只靠一句话自动赚钱”还是有些言过其实。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_aa761e3d54a74aa9a979deef1bd48ba9@6119835_oswg61001oswg551oswg268_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>但这个案例依然和普通的coding agent不太一样。</p>
+  <p>过去我们让Codex写代码，通常有一个明确任务：修一个bug、补一段测试、解释一个代码库，或者实现某个功能。用户知道要做什么，只是把执行环节交给AI。</p>
+  <p>而这一次，用户只给出了赚到5美元的目标，Codex自己找到了可以赚钱的代码任务，并且拆解了任务需求、靠写代码赚到了钱。</p>
+  <p>它把写代码这件事，接到了一个真实的任务市场里。</p>
+  <p>也就是说，<strong>这个AI牛马现在不只是替雇主打工，还开始在外面“接私活”给雇主挣钱了。</strong></p>
+  <p>至于成本。根据用户透露，他使用的是20美元的Plus订阅套餐，Codex同时进行了10到20项不同的审计任务，整个过程大概使用了2200万token。</p>
+  <p>16.88美元只是目前的第一笔到账。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_72de12b1fca147c98d74a960230a2742@6119835_oswg110974oswg443oswg452_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_a234a03ec4a2450ea8e613af87b07594@6119835_oswg48541oswg447oswg229_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h2><strong>一次有意义的尝试</strong></h2>
+  <p>这件事有意思的地方并不在于Codex赚了多少，更重要的是，Codex这一次接入了一个真实存在的经济系统。这个系统里有任务、有规则，有审核、沟通和验收，也有最真实的付款。</p>
+  <p>而真实世界里的劳动，往往不只是完成任务本身。一个人要赚钱，通常先要知道哪里有机会，判断自己能不能做，理解对方的要求，交付结果、接受审核，然后等待结算。</p>
+  <p>至少这一次，Codex在一个非常有限的场景里，跑通了这条路径。</p>
+  <p>另外，选择也很重要——就像是孟德尔选择豌豆做杂交实验天然就有优势一样，软件任务天然更适合AI Agent：代码在线上，协作在线上，提交通过PR完成，结果可以由测试和维护者验证，付款也可以通过平台结算。</p>
+  <p>AI最先“变现”的地方，自然会落到这些边界相对清楚、金额不大、结果可审核的软件零工，比如修一个小bug，补一段测试，改一份文档，处理一个报错，或者像这次一样，参与一个小型安全审计任务。</p>
+  <p>这些事情过去可能是初级开发者、自由职业者、开源贡献者练手和赚零花钱的入口，现在，它们也开始成为AI Agent可以尝试进入的任务市场。</p>
+  <h2><strong>AI赚钱，没看起来那么简单</strong></h2>
+  <p>如果按照乐观的情况推算，每天可以赚取16.88美元的话，一个月就是506.4美元，折合人民币约3441元。表面上看，哪怕减去20美元的订阅费，也有月薪三千。</p>
+  <p>但Codex的真实使用成本并不只是订阅费，还要看token消耗、额度限制，以及失败任务的沉没成本等等。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_af9421d8e74b41df855cd8fb3b7b2792@6119835_oswg115936oswg516oswg384_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>把一次成功实验直接乘以30，只是一个很有传播性的算法，我们不能说今天出门捡到了100元，一个月出门就能捡到三千。现实肯定比预想中更复杂。</p>
+  <p>如果你也想要复现这个路径，看看能不能也用AI帮你赚钱，那么结果可能会让你失望。</p>
+  <p>首先，任务不是每天都有。</p>
+  <p>Codex这一次找到的是开源安全审计相关的赏金项目，这类任务本来就不是无限供给。真正适合AI Agent处理、金额不太高、边界相对清楚、又愿意接受陌生贡献者提交PR的项目，更不可能每天稳定出现。</p>
+  <p>其次，任务也不是每次都会成功。</p>
+  <p>提交PR只是第一步。维护者要愿意看，修改要足够有效，代码要符合项目规范，验证流程要走得通，最后还要真的被合并、被确认、被付款。中间任何一个环节卡住，这笔钱都未必能到账。</p>
+  <p>往长远一点看，假设AI Agent真正开始进入任务市场，赚钱都是小事——它会影响整个市场的生态。</p>
+  <p>AI提交一个拉取请求的边际成本很低，但维护者审核一个PR的成本并不低：他们要看代码、跑测试、判断修改是否真的有价值。如果未来大量用户都让Agent去找赏金、提PR、赚小钱，开源社区很可能先遇到的不是效率提升，而是审核压力上升。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_f54c565fc542495f83df55bd118976c5@6119835_oswg108090oswg586oswg244_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>对用户来说，更大的风险在权限和安全上。</p>
+  <p>Codex要完成这类任务，可不只是生成一段代码，它还需要连接GitHub、访问代码库，它要收款，肯定也涉及账号和支付。</p>
+  <p>权限越大，能力越强；但权限越大，风险也越高。</p>
+  <p>另外，责任边界也会变得模糊。</p>
+  <p>如果Codex提交的修改后来引入了漏洞，谁负责？如果AI为了完成“赚钱”目标，误触了平台规则，责任又该怎么算？这些问题现在都还没有成熟答案。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_62c5b5c521e440138b658cbaa8795bd7@6119835_oswg102328oswg692oswg236_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>也就是说，这件事并不意味着“普通人也能用AI自动赚钱了”，问题和风险都还有很多。</p>
+  <p>16.88美元只一张早期收据，从一张收据到一份工资单，中间还有很长一段路。</p>
+  <p>但至少，AI已经在一个很小的场景里，证明了自己可以接入真实任务市场，完成一次从目标到付款的闭环。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_9a28906e0d954b90a987de259cd56247@6119835_oswg86597oswg542oswg209_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/2Hx5Kx6nOq2KpBOMDyPihA" rel="noopener noreferrer nofollow" target="_blank">“字母AI”</a>，作者：袁心玥，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3810669038853641</id>
+            <title>腾讯造了个“贾维斯”：替我签到改配置，还会打盹上厕所，一手实测来了</title>
+            <link>https://www.36kr.com/p/3810669038853641</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3810669038853641</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 02:57:13 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: Marvis, 多Agent协作, 操作系统层AI助手, 跨端操作
+
+<br>
+<br>
+总结: 腾讯内测了一款名为Marvis的操作系统层个人AI助手，通过多个Agent协作完成App操作、文件管理及复杂任务。Marvis致敬Jarvis，Agent形象为戴围脖的黑色小马，具备任务分配与汇报机制。它支持Windows PC和安卓，提供云端和本地隐私两种运行模式。该助手能深入操作系统层进行操作，如文件搜索、系统设置修改和应用交叉调用。实测显示其能完成开发知识库和生成调研报告等任务，但速度、token消耗和灵活性有待提升。 </div>
+                        <hr>
+                    
+                    <p>智东西5月15日报道，近日，腾讯开始内测一款名为<strong>Marvis（马维斯）</strong>的操作系统层个人AI助手。这一AI助手通过多个Agent的协作完成App操作、EXE操作、电脑操作、文件管理、文档生成以及各种复杂任务，24小时持续在线，并支持跨端操作。&nbsp;</p>
+  <p>Marvis目前仅支持Windows PC和安卓手机，iOS/macOS即将上线。&nbsp;</p>
+  <p>具体到日常使用场景，Marvis能干不少活。工作场景中，它能做文件格式转换、合同信息审查、运营数据分析，甚至帮忙整理参考文献。这些功能超越了单纯的文字、代码生成，能真正去操作系统、文件和应用等更为底层的元素。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_2cb228d1f8ff4b98b6b66384276b9dc5@000000_oswg162680oswg1000oswg487_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在生活娱乐场景中，它能帮你监控游戏限时福利和明星动态，自动完成微博签到、整理高清物料，也可以定时执行每天早上的新闻汇总。&nbsp;</p>
+  <p>Marvis这一名字致敬了知名智能助手<strong>“Jarvis”</strong>，取自“马（Ma）”与“Jarvis”的结合。比较有趣的是，它把每个Agent的形象设计成<strong>一只长着牛角的黑色小马</strong>，简称“小牛马”，“小牛马”还继承了<strong>腾讯企鹅标志性的围脖</strong>。&nbsp;</p>
+  <p>你可以在虚拟办公室里随时查看每只Agent在干什么，被安排任务的Agent会坐在工位上认真搬砖，其他闲着的Agent可能会打盹、闲逛、健身、喝咖啡或上厕所。&nbsp;</p>
+  <p>当你指定任务后，会有一只Agent主管出来主持大局，分配任务给相应的Agent，Agent在完成工作后会向主管汇报。&nbsp;</p>
+  <p>目前Marvis里的专家Agent具备App操作、电脑系统运维、网页交互、数字资产管理和搜索任务等能力。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_964e81b697e6471891f35b8c5251a484@000000_oswg301037oswg1000oswg947_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Marvis目前提供了两种运行模式：云端效率模式采用混元和DeepSeek V4等最新模型，本地隐私模式则采用Qwen端侧模型，做到一句话都不出电脑。&nbsp;</p>
+  <p>这一产品还支持本地知识库的功能，可以自动识别本地文档、图片并进行索引。当用户需要搜索特定内容时，Marvis可以基于标题匹配或基于内容匹配。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_55136e1196714492b1c2268fb2e2b6a2@000000_oswg66880oswg1000oswg520_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>与同样能操控电脑的其他“龙虾类”产品相比，Marvis有什么优势？</p>
+  <p>智东西获知，Marvis背后是腾讯应用宝团队，继承了十几年与<strong>英特尔、微软</strong>等软硬件厂商的合作关系和跨端引擎技术。</p>
+  <p>因此，Marvis不仅能操作电脑EXE软件，还能通过应用宝，直接在电脑上操控手机App（同花顺、开盘啦、飞常准、汽车之家、唯品会等App已授权）。</p>
+  <p>该团队通过对端侧模型做芯片级优化，实现了<strong>跑端侧模型速度提升20%，并能通过提示词直接对电脑文件进行查询、变更等操作</strong>。而当前大多数AI应用都做不到这种深入操作系统层的能力。</p>
+  <p>智东西第一时间拿到Marvis的内测资格。根据我们的实际体验，Marvis展现了 “AI打工人”的雏形，它能实实在在地帮你干活，完成任务的质量不错，但在速度、token消耗量、灵活性等方面仍有提升空间。&nbsp;</p>
+  <p>指路：marvis.qq.com&nbsp;</p>
+  <h2><strong>找文件、调设置</strong></h2>
+  <h2><strong>Marvis全动手试了一遍</strong></h2>
+  <p>电脑操作是Marvis的一大长板。Marvis拥有系统级的能力，可直接完成对电脑的全流程操作。我们的首批案例就围绕这类任务展开。&nbsp;</p>
+  <p>进入主页后，用户可以直接与Marvis对话并指派任务，也可通过自动任务页面让Marvis定时执行既定任务。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_fd08c82c4a37403da63ba347f689bab9@000000_oswg90710oswg1000oswg501_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h3><strong>案例1：图像搜索、文件定位都能胜任，就是有点烧token</strong></h3>
+  <p>对许多用户来说，在本地设备上寻找指定的文件或图像，是件费时费力的事情。我试着让Marvis帮我在本地的下载文件夹中，找到一张包含纳斯达克元素的图片。&nbsp;</p>
+  <p>拿到这一任务后，Marvis的团队负责人Agent把任务分配给了文件处理Agent，后者先是尝试了文件名搜索，未获得命中。在这一过程中，它判断我的图片命名大多无意义，决定换个思路，用图像分析来找到相关图像。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_68098961b403458a88b3d4ee59e98e08@000000_oswg114485oswg500oswg410_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>切换思路后，Marvis终于步入了正轨，它成功地找到了包含纳斯达克相关元素的图片。然而，调用图像分析工具，Marvis的token消耗量呈现指数级的增长。在搜索了一百多张图片后，总消耗量来到了200万token。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_679f511b1e1048878572df11e57b3e1b@000000_oswg204287oswg1000oswg606_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Marvis可以完成跨端的文件查找和传递。我在手机上向Marvis发送了一条命令，搜索与字节跳动估值有关的文件并发送到我的手机上。&nbsp;</p>
+  <p>它很快找到了文件，并发送到我的手机上。可能是因为这次文件名本身就包含了需要查找的关键词，任务的token消耗量明显降低了。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_6530f7b7fd30434a976c1039961ae82c@000000_oswg123634oswg1000oswg1355_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h3><strong>案例2：精准抓取电脑配置，还给我提了优化建议</strong></h3>
+  <p>Marvis可以直接在Windows系统层进行一些操作。当我要求它帮我把电脑的主题调为绿色时，Marvis的电脑操作Agent接手了工作，并直接找到了系统主题色的设置入口。这一操作并未通过模拟点击实现，应该是深入了系统底层。&nbsp;</p>
+  <p>不过，它没有100%完成这一任务，停在了找到入口这一步，后续的具体设置需要我手动操作。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_e78eb4e45b034f83b767efbaf04c369a@000000_oswg200369oswg1000oswg569_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Marvis可以精准地获取各种系统信息。当我向它咨询我的设备是否支持《黑神话·悟空》这样的大型游戏时，它快速整理出了我的系统配置，看样子是直接在设置中找到了相关内容。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_cc106261ce5e47c29b63d237fb7ad24c@000000_oswg213111oswg1000oswg645_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>紧接着，我让Marvis分析了我这套配置中的短板，并提出升级建议。它判断我的显卡配置充裕，但是CPU、内存和硬盘都稍显落后。Marvis建议我对内存进行升级，并说这是性能提升最直接、成本最低的方式。&nbsp;</p>
+  <p>不过，它似乎不了解当内存涨价的情况，告诉我32GB的DDR4 3200MHz内存只要四五百块。实际情况是，同类内存的价格至少也得1000元出头。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_ca8d865d4eb34995a7b4c7f5b8acea3f@000000_oswg268942oswg1000oswg728_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在我们的实际体验中，Marvis在遇到批量删除文件、核心配置修改时一定会询问用户，用户点击确认后才会执行。&nbsp;</p>
+  <h2><strong>写代码、出报告</strong></h2>
+  <h2><strong>多Agent协作有亮点</strong></h2>
+  <p>多Agent的协作，理论上可以完成更复杂的任务，或是提高任务执行的质量。我们拿几个复杂任务试了试Marvis的能力边界。&nbsp;</p>
+  <h3><strong>案例1：开发本地知识库，全程无需碰代码</strong></h3>
+  <p>我们的首个复杂任务要求Marvis设计一个本地知识管理系统，支持自定义大模型接入，实现简单的RAG。&nbsp;</p>
+  <p>在这种更复杂的任务中，Marvis反而没有调用多Agent，而是由主Agent完成所有的开发工作。Marvis陆续创建了目录结构，并且并行写入了配置文件和核心模块，之后打造了Web界面。Marvis默认使用了ollama本地跑模型，我要求它切换为接入外部API的模式。&nbsp;</p>
+  <p>Marvis提供的API设置界面较为人性化，它向我发送了选项卡，只要逐步选择并填写信息就行。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_7c684bcc6ed647b5822e4d96b07eea64@000000_oswg145565oswg1000oswg623_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>最终，Marvis按照我的要求打造出了这一知识管理系统，支持导入文件、导入目录、导入文本等选项，可提供参考来源。我们试着上传了几份文件并询问相关信息，该系统输出的内容准确，也没有编造不在知识库内的信息。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_702719b57ca644d19b061f1571bab035@000000_oswg146392oswg1000oswg502_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <h3><strong>案例2：盘点硅谷裁员潮，直接输出PDF文件</strong></h3>
+  <p>下一个实测任务要求Marvis梳理一下今年硅谷大厂的裁员情况，做成一个PDF网页，包含裁员数据和分析，每条数据背后附上单独的消息来源。&nbsp;</p>
+  <p>在这一任务中，Marvis使用了多Agent协作的模式，文件Agent被唤起，并主动调用了文档写作Skill。这一Skill要求模型先做复杂度判断，然后加载写作模板、写作规范，再开始正式的执行。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_d9bee69246cd401b96397029c1cfc0cf@000000_oswg191899oswg500oswg642_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Marvis判断这属于一个复杂文档，预计产出超过3500字。它进行了多轮的网页搜索，收集到足够数据后开始逐页撰写PDF内容，最终输出了一份完整的调研报告。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_a3dd2e35e136474287513794ae1a662d@000000_oswg264668oswg1000oswg568_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>执行过程中，Marvis的多Agent协作让任务划分更加合理，两个Agent的并行工作一定程度上提高了效率。不过，这一任务中Agent出现了自主切换到英文的问题，Skill的内容和背后模型的特性可能导致了这一现象。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_e8e010c86ed34c88be063e69b74472e8@000000_oswg188204oswg1000oswg775_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>Marvis生成的文档可以直接在侧边栏中进行预览，从结果来看，这一文档的内容明显要比AI单次生成的内容来得详实，文中的数据基本准确。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_25cf1df1ea4741e9bcc6df271850599c@000000_oswg407591oswg1000oswg1082_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>排版方面，这一文档的风格比较朴素，通过表格、加粗、章节划分等方式，让内容的可读性更强。这种输出方式应该与Marvis内置的Skill有关。&nbsp;</p>
+  <h2><strong>靠应用宝操作安卓应用</strong></h2>
+  <h2><strong>效率仍有提升空间</strong></h2>
+  <p>Marvis可以<strong>通过腾讯应用宝在Windows PC上完成对安卓App的操作</strong>，并且相关操作不会干扰PC的正常使用。安装应用宝后，我们对这部分功能进行了体验。&nbsp;</p>
+  <h2><strong>案例1：自动到微博打卡签到，任务耗时3分多钟</strong></h2>
+  <p>Marvis官方在首页展示了微博超话签到这一任务。我们也实测了一下，要求Marvis打开微博去陈奕迅超话签到。&nbsp;</p>
+  <p>App操作Agent是这一任务的主要执行者。我们提前在应用宝中下好了微博并登录，以免Marvis在登录这一步卡住。&nbsp;</p>
+  <p>Marvis的执行速度不太理想。此前我们已经跑过类似任务，但它还是较为机械地按照规范来，检查微博安装包，试图搜索微博操作Skill，未果后直接开始任务执行。&nbsp;</p>
+  <p>开始操作后，Marvis只能截图一步，操作一步，每张截图都要分析个几秒钟，整个任务的执行时长被拉到3分多钟。下图是它的完整执行过程，画面经过20倍速的处理。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260516/v2_f1efed6854d24b4d8af21c0a90e1b58c@1200352198_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p class="img-desc">▲动图经过20倍速处理</p>
+  <p>借助Marvis的定时任务功能，用户可以把上述App操作设置为每天自动执行的任务。不过，前提是电脑必须保持24小时开机。&nbsp;</p>
+  <p><strong>案例2：拒绝小红书、微信操作请求</strong></p>
+  <p>除了微博之外，我们也尝试了Marvis操作其他App的能力。当我们要求它操作微信并发送消息时，Marvis拒绝了这一请求，称由于系统限制无法在微信内执行点击和输入操作。我们尝试了小红书，也同样无法操作。&nbsp;</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_b1cac402608448ce927672246bda0e93@000000_oswg190655oswg1000oswg601_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这可能是因为微信这类App的聊天和支付界面，本身可能就有防模拟点击、防注入输入的特殊安全机制，如果AI助手能随意替用户在微信上发消息、转钱，一旦被恶意利用，造成的风险和平台责任是平台无法承受的。因此，Marvis从源头上拒绝了任何涉及资金划转的自动交易等操作。&nbsp;</p>
+  <p>我们也尝试询问Marvis它到底可以直接操作哪些应用，不过Marvis一直答非所问。&nbsp;</p>
+  <h2><strong>结语：AI打工人雏形已现</strong></h2>
+  <h2><strong>但离“放手”还有距离</strong></h2>
+  <p>对于愿意尝鲜的极客用户来说，Marvis已经能带来实打实的效率提升。然而，现在普通用户仍无法完全放手让Marvis执行一个任务，复杂的软件生态、文件系统等影响因素，都有可能让Marvis的任务执行中断或偏离预期。&nbsp;</p>
+  <p>不过，Marvis的设计思路确实代表了一种明确的趋势。目前，国内已有不少AI厂商在多Agent产品上展开探索，跨端协同也逐渐成为行业共识。尽管体验还需要进一步打磨，但腾讯至少已经迈出了第一步。&nbsp;</p>
+  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzA4MTQ4NjQzMw==&amp;mid=2652803024&amp;idx=1&amp;sn=11718ae8f8383134ddee0bf55a880590&amp;chksm=85525d13904842c931d2c33edade7496dddf6fec96c4b5121eeeb108dd6822482a2980c96a56&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“智东西”（ID：zhidxcom）</a>，作者：陈骏达，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3810520138243593</id>
+            <title>36氪首发｜前苹果工程师跨界骨传导耳机，独创技术路线，打破头部企业专利垄断</title>
+            <link>https://www.36kr.com/p/3810520138243593</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3810520138243593</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 02:00:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: 索迩电子, Mojawa, 骨传导耳机, AI运动智能平台
+<br>
+<br>
+总结: 索迩电子旗下骨传导运动耳机品牌Mojawa完成数千万元A+轮融资。公司通过独创的“宽频振动技术”切入市场，规避了传统声学专利壁垒。产品定位中高端专业运动人群，已进入海内外主流渠道。公司计划从运动耳机品牌向AI运动智能平台发展，基于骨传导耳机贴合头部、可集成多维度传感器的物理条件，开发结合AI算法的运动辅助功能。创始人认为其技术积累能构建出难以复制的运动AI体验。 </div>
+                        <hr>
+                    
+                    <p>作者&nbsp;|&nbsp;张子怡</p>
+  <p>编辑&nbsp;|&nbsp;袁斯来</p>
+  <p>硬氪获悉，苏州索迩电子技术有限公司（骨传导运动耳机品牌Mojawa的母公司，以下简称“索迩电子”）于近日完成数千万元人民币的A+轮融资，本轮融资由正海资本领投。</p>
+  <p>据悉，本轮资金将主要用于拓展海外线下渠道，以及推进产品的AI智能化研发。</p>
+  <p>在音频产品市场中，由于对无线和开耳式聆听技术的需求不断增加，骨传导耳机市场出现了显著增长。</p>
+  <p>调研机构Market Growth统计的数据显示，2024年骨传导耳机市场规模为12.8亿美元，预计到2025年将增长到16.11亿美元，到2033年将超过81.5亿美元，复合年增长率为22.8%。</p>
+  <p>不过，该市场集中度较高，少数头部品牌（如韶音）占据主要份额，并建立相对完善的声学专利布局，提高了新品牌的准入门槛。</p>
+  <p>索迩电子通过不同的技术路径切入这一市场。公司成立于2020年，早期业务聚焦于B端的触觉反馈技术（Haptics），为VR手柄、智能座舱等提供宽频振动马达。2021年，团队将独创的“宽频振动技术”应用至声学领域，以此来改善骨传导耳机在低频频段的响应表现。</p>
+  <p>基于这一底层技术的平移，索迩电子创立自有品牌Mojawa墨觉。这种基于触觉马达延伸出的新一代发声架构，不仅在物理层面增加了中低频的下潜，也为骨传导耳机提供了一种新的技术方案，在一定程度上规避了和传统声学路线的专利重合。</p>
+  <p>在产品定位上，Mojawa避开了中低端市场的价格竞争，主要面向专业运动人群推出中高端产品；产品线上，Mojawa推出了多款细分产品，包括主打轻量化（26克）的Run Air，支持“蓝牙+MP3”双模式的Run Plus，以及集成心率监测功能的Terra；渠道测方面，在国内市场，Mojawa目前已进入中国山姆会员店（Sam's Club）的供应链体系。</p>
+  <p>海外市场是Mojawa营收的重要组成部分。2025年下半年，Mojawa入驻了美国BestBuy、Walmart.com、Target、Office Depot等主流KA线上平台。2026年，团队计划进一步拓展北美、欧洲及亚太核心市场的线下渠道。</p>
+  <p>本轮融资完成后，Mojawa计划从运动耳机品牌，向AI运动智能平台发展。由于骨传导耳机佩戴时贴合人体头部，具备集成心率、环境感知等多维传感器的物理条件。</p>
+  <p>基于此，Mojawa正在开发结合AI算法的运动辅助功能，试图覆盖用户训练前（方案推荐）、训练中（心率监测与预警）、训练后（数据复盘）的完整体验。</p>
+  <p>索迩电子创始人兼CEO Robin Cao告诉硬氪：“AI时代，真正的壁垒是对用户的深度理解和持续服务能力，而Mojawa在传感器数据和骨传导技术上的积累，让我们有能力构建出别人短期内无法复制的运动AI体验。”</p>
+  <p>团队背景方面，索迩电子创始人Robin Cao拥有硬件与供应链从业经历。创立索迩之前，其在苹果公司任职八年，曾参与iPhone及Apple Watch触觉产品线的开发与商业化。相关的技术与供应链经验，为索迩的研发和生产提供了基础。</p>
+  <h3><strong>创始人问答：</strong></h3>
+  <p><strong>硬氪：在高端产品线（如Terra）中，Mojawa加入了心率监测等功能。当时是出于怎样的考量决定向“智能穿戴”方向探索的？</strong></p>
+  <p><strong>Robin Cao：</strong>这源于真实的运动痛点。专业运动人群通常会佩戴智能手表和耳机，但在很多特定场景下，手表的交互并不方便。比如冬天在户外跑步，穿着厚羽绒服、戴着手套，或者在健身房举铁戴着护腕时，用户很难低头去看表盘数据。如果耳机能实时通过语音播报心率并进行运动指导，就能完美填补这个场景空缺。</p>
+  <p>从技术实现上看，骨传导耳机贴合在耳前的位置，内部紧贴着主动脉，比手腕处的毛细血管测心率要精准得多。为了把心率传感器和算法植入耳机，我们花了长达一年多的时间搞研发，投入大量的研发费用。</p>
+  <p>我们希望骨传导耳机不仅仅是一个音频播放器，而是一个能主动理解用户生理状态、提供科学指引的智能穿戴设备，这也是我们建立产品护城河的核心方向。</p>
+  <p><strong>硬氪：作为一个成长期的初创企业，面对拥有绝对体量优势的头部品牌，Mojawa在竞争策略上是怎么规划的？</strong></p>
+  <p><strong>Robin Cao：</strong>我们的底色是追求原生的技术创新，通过技术溢价来获取合理的商业利润。因此，我们从一开始就拒绝参与低价内卷，不去做几百块钱的“廉价平替”。我们瞄准的是中高端的专业运动人群，也就是所谓的“装备党”，他们看重的是产品的专业属性和真实体验。</p>
+  <p>在竞争维度上，我们本质上是跨界进来的。头部品牌更偏向传统的声学积累，而我们是做触觉和宽频振动起家的，这种底层的技术差异让我们在低频音质上具备物理优势，也天然规避了对方的专利封锁。未来我们会持续向AI交互和健康数据监测方向深耕，走出一条属于自己的智能化硬件道路。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3810601052102405</id>
+            <title>比Coding更大的东西，是什么？</title>
+            <link>https://www.36kr.com/p/3810601052102405</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3810601052102405</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 01:34:58 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: AI泡沫论, 全模态, MiniMax, 经济回报  
+<br>  
+<br>总结: 文本指出AI“泡沫论”因Coding的爆发而终结，行业已进入可盈利阶段。MiniMax在阿里财报显示高ARR的同时，凭借低于行业平均成本的推理效率实现了高利润。摩根士丹利数据显示，中国模型的Token消耗量在过去一年从5%飙升到32%。文本认为，拥有强大模型的公司可豁免于成本战争，而全模态能力是下一阶段的关键。MiniMax是国内唯一具备全栈多模态能力的独立大模型厂商。Google的Gemini Omni模型预示了世界模型的雏形，并将推动行业重新定价。文本强调，全模态模型将接管更宽泛的生产力市场，创造前所未见的需求。 </div>
+                        <hr>
+                    
+                    <p>Coding的爆发，彻底断绝了「AI泡沫论」，这个应该已经成为共识了。</p>
+  <p>阿里财报显示MaaS ARR超过80亿元，年底还有希望再涨三倍以上，说明只有投入没有回报的周期是真的过去了，能够开始赚钱，大大小小的玩家腰杆都硬起来了。</p>
+  <p>原生AI公司的日子甚至可能更加乐观，<strong>摩根士丹利测算发现，在主流高性能AI推理集群的部署下，MiniMax平均每分钟进账1美金，同时成本低于0.3美金，而行业平均收入只有约0.5美元/分钟，相当于MiniMax仅凭利润就跑赢了大盘。</strong></p>
+  <p>同期，在相同的硬件配置下，Claude Opus 4.6和GPT 5.4等美国闭源模型等单位推理成本大概是MiniMax的15倍以上，即便定价更贵，单位经济效益依然是落后的。</p>
+  <p>根据OpenRouter的数据，<strong>最近一年里，中国模型的Token消耗量从5%一路飙升到了32%，</strong>完全赢得了用脚投票的选择。</p>
+  <p>这就是Pure-play的价值，算清楚这笔账，对于理解走向拐点时刻的AI行业，非常关键。</p>
+  <p>MiniMax之所以重要，是因为它被逐渐发现出来了稀缺性资产的一面。</p>
+  <p>最近几个月，各大投行和券商都在接连发布和MiniMax有关的研报，比如：</p>
+  <p>摩根大通认为，MiniMax在2B/2C两大市场的双管齐下，以及早有铺垫的全球布局，为这家公司带来看了同行里难得见到的经济灵活性；</p>
+  <p>相比同类上市公司，摩根士丹利对MiniMax的ARR和GPM更为乐观，它在基础设施上的优势，将会转化为领先的用户体验，以及超出预期的Token消费；</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_f8429408e88146babfc24390348ef692@000000_oswg207024oswg861oswg1068_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>在高盛看来，MiniMax将是新一轮模型竞争周期里的赢家，因为它实际上是和阿里、字节站在了同一高度，提前站稳了多模态能力，人类交互本质上就是多模态的；</p>
+  <p>国盛海外也更新了观点，表示可灵的估值达到200亿美金——几乎占到快手市值的7成——说明能够满足创造力场景的模型供给始终是市场紧缺的；</p>
+  <p>它们也都有理有据的解释了市场误读的回调，随着新版本模型的密集发布时期到来，竞争加剧引发了一定程度的不确定性情绪，但时间会证明一切，好的模型就是可以穿越周期；</p>
+  <p>于是，对于MiniMax，除了买入和增持的评级，基本看不到其他意见了⋯⋯</p>
+  <p>风动涟漪起，这些苗头当然不是凭空出现的，若是足够尊重金融机构们的情报来源和信托责任，就必须承认它们是在就着同一个信号发出表态：</p>
+  <p>大的要来了。</p>
+  <p>甚至可以说，只把MiniMax即将发布新一代模型当作所谓「大的」，恐怕还是不够支撑如此山雨欲来的吹风，在所有的暗示里，Google就要召开的I/O大会，都成了给MiniMax打响的前哨战⋯⋯</p>
+  <p>难道，多模态叙事真的要反转了？</p>
+  <p>在细说之前，还是先来对齐一下行业拐点的判断标准吧。</p>
+  <p>打开合订本，前两年还有断断续续的AI泡沫论出现，直到进入去年Q4，Token用量的彻底爆发，把世界上的每一片GPU都干冒烟了，再有言必称泡沫的人，完全可以合理怀疑他是不是刚坐完牢被放出来。</p>
+  <p>Anthropic吃到的回旋镖就很经典，它的创始人曾经严厉抨击科技大厂囤积GPU是不负责任的行为，没必要这么激进的扭曲市场，然后就是Anthropic因为需求涨了80倍——而不是原本最乐观预计的10倍——而缺卡缺得心力交瘁。</p>
+  <p>这也不是美国市场的单一反馈，根据国家数据局的3月数据，中国的日均Token调用量已经超过140万亿，OpenClaw的火爆更是开始用指数级的Token消耗去接入千行百业的工作流。</p>
+  <p>在研报里，摩根大通认为中国在2026年的企业端需求，很大概率会复制美国2025年至今的来路，也就是从试点到规模化投入再到AI成为固定支出的三级跳。</p>
+  <p>简而言之，就是Anthropic的那条离谱曲线。</p>
+  <p>Anthropic创造了AI行业还是商业史上的创收奇迹，300亿美金的经常性年化收入，让它成为了全球瞩目的新王，甚至让OpenAI的股份交易在一级市场失去了吸引力。</p>
+  <p><strong>毫无疑问，Coding是一个回报路径极其明确的赛道，根据The Information的报道，在企业级市场，Anthropic展现了空前强势的定价权，从它用按量计费替换订阅套餐，到上线导致Token费用上涨的分词器，都让企业找不到商量余地，只能拿着超标的账单去找老板加大预算。</strong></p>
+  <p>没办法，品质和稀缺绑在一起，就是硬通货。</p>
+  <p>摩根大通也是这么判断的，在AI行业，拥有强大模型的公司某种程度上可以豁免于成本战争，而且它想进入「下沉市场」的难度，要远低于低价模型打入「高端市场」。</p>
+  <p>那么Anthropic就赢定了吗？别急，提前开香槟的剧本，已经不止一次的上演过了。那么Coding之后，下一个要来的到底是什么？</p>
+  <p>其实这一年来所谓的共识已经反复变换了好几次，市场信号也趋于「见人下菜碟」：</p>
+  <p>去年的这个时候，大家都在震惊于GPT-4o的生图能力，吉卜力画风全网刷屏，把ChatGPT本就断崖式领先的周活用户直接打翻倍了；</p>
+  <p>然后到了下半年的「Google主场」，Nano Banana和Veo 3在多模态领域还以颜色，Gemini更是在SOTA上把屁股都坐麻了，这家公司重回牌桌的爽文深受媒体关注；</p>
+  <p>再才轮到Anthropic的低调发育和一鸣惊人，人们意识到原来Coding的经济价值如此之大，大到可以纵容一家公司血洗掉整个万亿级的软件行业。</p>
+  <p>最近甚至有人做了一张数据图，预测Anthropic的收入将在3年内超过谷歌：</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_a32701ee28a749eb82a782cafe9c8e8a@000000_oswg42447oswg690oswg376_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>姑且不论这个计算方式是否合理，但将Google当作静态标的本身，就是一种过于傲慢的视角，而低估Google，以及眼里只有Coding，可能会让人错过更大的东西。</p>
+  <p>毫不意外的，Google已经意外剧透了一部分出来，就是那个教授在黑板上写公式讲课的片段，之所以艳惊四座，是因为它并非简单的视频生成，这个新的Gemini Omni模型同时搞对了三件事：</p>
+  <p><strong>手持粉笔的空间关系、板书撰写的画面关系、推导过程的逻辑关系。</strong></p>
+  <p>更直白的说，这绝对不是三个模型合在一起的结果，而是基座模型已经就在全模态信息上完成了训练，也就是，世界模型的雏形。</p>
+  <p>像是杨立昆、李飞飞这些不属于Transform派别的行业大佬，都对语言模型颇有微词，认为这条路线跑不出真正的世界模型，所以都选择了另辟蹊径，但Google、OpenAI甚至字节跳动都在证明，即使语言模型确实有局限之处，只要坚持Sc­a­l­i­ng La­ws、在同一个基座模型上训练全模态能力，同样能够渐进式的通向世界模型。</p>
+  <p>所以，眼看着Google会在即将召开的I/O大会上、会在沉寂已久后重磅发布的Gemini Omni上「来波大的」，评估国产模型的标准，也一定会发生变化。</p>
+  <p>只看Coding的叙事，中国的原生AI公司都在扮演「一个更便宜的Anthropic」，杀成一片红海。</p>
+  <p>但在找出「一个更本土的Google」这件事情上，只会发现一个玩家，就是MiniMax，只有它的模型迭代方向与Google完全一致：在一个系统内完成文本理解、图片生成、视频生成和音频输出。</p>
+  <p>不开玩笑，MiniMax真是中国独立大模型厂商里唯一一个同时具备「文本+图像+视频+音频+音乐」全栈能力的，Kimi、DeepSeek、智谱都没有如此「德智体美劳」全面发展。</p>
+  <p>既然Anthropic可以用一年的投影「碰瓷」Google，那么MiniMax也用完整的全模态体系「卡位」下一个Google，不过分吧？</p>
+  <p>同理，如果相信Google会为全模态重新定价，那么MiniMax作为国内稀缺性最高的一家映射公司，它的价值也很难再用旧的刻度尺去测量。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_5919b3617875401989cf85657bd6356a@000000_oswg306389oswg907oswg1188_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这不是我说的，摩根士丹利给MiniMax画了年内10x的ARR增长，同时上调收入和股价预期。</p>
+  <p>说回全模态，这当然不是「有就够了」的简单游戏，不能打也不行，所有的压力都来到了MiniMax即将发布的M3系列模型身上。</p>
+  <p>根据中信建投在小范围交流会里透露的，多模态能力将是这轮升级最强的地方，集成的H3视频模型被小范围评测为能与Seedance共同担当视频模型的「夯」级别：</p>
+  <p>「我们认为，多模态训练产生的视觉理解能力，可以反哺文本模型，提升模型智能上限⋯⋯MiniMax是少数兼顾Coding/办公场景+多模态/内容生成行业，两个超级赛道的玩家。」</p>
+  <p>其实我对MiniMax曾经有过不解，坚持发力五大模态似乎意味着要同时开辟多个战线，这难道不会徒增成本么？</p>
+  <p>直到看了Gemini Omni的相关讨论，指出多模态的生成是语言模型理解世界的硬验证信号，且大部分底层能力与核心模型复用，多个模态并不等同于多份研发投入，有限的成本提升，能够极具经济性的帮助AI构建世界，并让每一代模型的更新不断放大效率差。</p>
+  <p>既然那些被逃掉的课，终究都是要补回来的，不如一开始就不走捷径。</p>
+  <p>Coding之外的市场很大，只是AI过去还接不住，以致于没法转化为经济回报。</p>
+  <p>事实上，连Anthropic都在尝试扩圈了，Claude Design就是一个例子——虽然本质上还是一种前端Coding——但它却没能像之前血洗SaaS行业那样引发震动，设计股基本上只被「吓到」了寥寥数日。</p>
+  <p>只能说隔行如隔山，一招鲜是没法永远管用的。</p>
+  <p>当真正的全模态模型足够成熟和丝滑，它将接管更宽泛的生产力市场——广告、影视、音乐、游戏、娱乐等等——最终进入生活场景，成为可被调用的基础智能资源。</p>
+  <p>那些现在做不到的事情，都可以想象成真，比如一个陪你眼观六路耳听八方的搭子，比如一套个性化到千人千面的课件，比如一次再也不需要设计师的房屋装修⋯⋯</p>
+  <p><strong>这就是MiniMax和Google同时看到的机会。</strong></p>
+  <p>就像经济学家Eldar Maksymov所言，「历史证明，技术的进步将会创造出前所未见的需求，在大量采用计算机技术的职业群体里，就业增长速度都远超没有采用计算机的职业群体，成本的下跌，对应需求的增长，最终推动就业规模的扩大化。」</p>
+  <p>简单来说，能力的提升，会让人类意识到还有更多事情可做，而这样的丰饶，正是AI公司们承诺给我们的。</p>
+  <p>希望他们能说到做到吧。</p>
+  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MjM5NzY2OTE2MQ==&amp;mid=2652254979&amp;idx=1&amp;sn=635a2f98f581c03d38530037c85b4dea&amp;chksm=bc8a8ea15bfa8cb2df19b2a981b06a9973707688f854982f7c3b0527bf0a4e5bc7000d8605d5&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“阑夕”（ID：techread）</a>，作者：→，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://www.36kr.com/p/3810649127558664</id>
+            <title>QQ内测AI帖子应用，能否解马化腾“上船漏水”之围？</title>
+            <link>https://www.36kr.com/p/3810649127558664</link>
+            <guid isPermaLink="false">https://www.36kr.com/p/3810649127558664</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 16 May 2026 01:33:05 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                        <div> 关键词: QQ, AI社交, AI帖子应用, 腾讯<br><br>总结: 腾讯正通过QQ内测一项AI帖子应用功能，用户可生成AI小游戏、轻量工具等，并直接封装为社交帖子发布。该功能将创作、体验与社区场景深度绑定，形成“社区内闭环”。这是腾讯在AI社交领域的重要落子，旨在用AI激活老社交产品潜力。过去一年，QQ已围绕内容创作、互动场景和聊天社群上线十余个AI功能。QQ做AI社交的优势在于其年轻用户基底和多元产品生态，但也面临用户增长见顶和功能同质化的挑战。 </div>
+                        <hr>
+                    
+                    <p>Tech星球独家获悉，腾讯正将AI创新的重点落地，QQ内测一项全新的AI帖子应用功能，目前正在QQ频道内做相关测试，整体看像是一个AI版贴吧。</p>
+  <p>不同于传统社区仅能发布图文、视频的局限，该功能打破了社交内容的固有形态，使用户可生成AI小游戏、轻量工具、AI对话搭子等产品，并直接封装成社交帖子发布。这一全新尝试，既是腾讯今年在AI社交领域的重要落子，更是其试图用AI激活老社交产品的潜力。</p>
+  <p>5月13日，腾讯股东大会上，腾讯董事会主席兼首席执行官马化腾被外界追问“腾讯AI是否落后”时，用一句直白又形象的比喻定调了当下的状态：“原来一年前我们以为上了船，后来发现那个船漏水了，现在感觉站上去了，还坐不下去，还是希望船速能快一点。”</p>
+  <p>这份表态的背后，是腾讯过去一年在AI领域的持续补课与密集布局，而社交作为腾讯的核心基本盘，无疑是其发力AI、提速前行的关键阵地。</p>
+  <p>作为一款拥有海量年轻用户的产品，QQ的AI化转型，既承载着腾讯盘活存量社交生态的期待，也呼应着马化腾所言“提速前行”的诉求，在腾讯急于为AI赛道提速补位的当下，拥有大量年轻用户与社区生态的QQ，能否扛下AI社交突围的担子？</p>
+  <h2>QQ重构年轻社交</h2>
+  <p>Tech星球体验发现，QQ内测的AI帖子应用功能并非简单的AI内容生成，而是将AI生成的轻应用，直接内嵌在QQ频道的帖子中，用户无需跳转、无需额外下载，刷到帖子就能直接体验。</p>
+  <p>这也是其与其他厂商AI轻用最核心的区别。目前市面上其他厂商的AI轻用，天然缺乏专属的目标用户社区与社群，创作者生成轻应用后，若想找到精准受众、实现传播互动，只能去外部寻找渠道，既耗时又难以形成有效互动闭环。</p>
+  <p>而QQ则将轻应用创作、体验、互动与社区场景深度绑定，让AI轻应用成为社区交流的核心载体，用户无需跳转、无需额外下载，在社区刷帖、互动的同时，就能直接体验各类AI轻应用，真正实现“社区内创作、社区内体验、社区内互动”的闭环，这也是QQ最具差异化的优势。</p>
+  <p>回到功能本身，从内测界面来看，该功能已形成初步的社区氛围，设有“AI帖子应用交流社”频道，目前已有1829名成员，帖子内容以各类AI生成的轻应用为主，其中小游戏类占比最高。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_8fab459151bc4061b2864a8ef13fbc66@000000_oswg77344oswg1080oswg1080_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>用户可通过内置工具创建AI轻应用，生成品类十分丰富。譬如，输入生成一个飞行棋应用，几分钟左右，即可生成一个2D的经典四人对战飞行棋，此外，还可以生成稍微复杂的滑动控制的《星际战机》，涵盖生存、竞技、休闲等多种类型。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_587f7d44132c41b58b1cfc13c2d6e2de@000000_oswg42487oswg1080oswg1080_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>这些小游戏操作简单，譬如《泰拉兄弟》支持摇杆、WASD等多种操控方式，武器自动攻击，拾取经验即可升级；《星际战机》则可滑动屏幕控制战机，自带15种道具和9种变身形态，可玩性较强，帖子下方还会显示浏览量、互动数，部分热门轻应用浏览量已达249次，还设有用户排名，进一步带动社区成员参与体验、比拼互动。值得一提的是，社区成员也可以二创别人已经做好的AI应用。</p>
+  <p>整体来看，该功能强化了社区和AI轻应用的绑定感，让社区不再只是单纯的聊天交流，也成为AI轻应用的创作与体验阵地。</p>
+  <h2>QQ的AI社交布局：一年上线10余个新功能</h2>
+  <p>此次AI帖子应用功能的内测，并非QQ在AI社交领域的突发尝试。回顾这一年，腾讯围绕QQ的AI改造，聚焦“年轻用户需求”和“社交场景延伸”两大核心。</p>
+  <p>最早的布局集中在内容创作层面，QQ率先上线AI图文生成、AI视频剪辑、AI文案润色等功能，精准击中年轻用户“发动态嫌麻烦”的痛点，无需费心找配图、想文案，输入简单关键词就能生成适配QQ空间的素材，极大降低了社交分享的门槛。</p>
+  <p>随后，布局延伸至互动场景，AI虚拟形象、智能捏脸、AI换装等功能陆续上线，贴合Z世代追求个性化表达的需求，成为年轻人之间新的社交话题，部分用户坦言，“捏脸、换装已经成了和同学互动的日常”。</p>
+  <p>在核心的聊天与社群场景，QQ的AI布局也不少。群聊内上线AI社群助手，可自动整理群公告、回复常见问题，缓解群主管理压力；聊天界面加入AI智能回复、AI表情包生成功能，让日常闲聊更具趣味性，也让沉寂的群聊重新有了互动活力。</p>
+  <p>此外，还新增了元宝一句话总结聊天功能，能快速提炼群聊核心内容，避免用户错过关键信息，让日常闲聊更具实用性与趣味性，也让沉寂的群聊重新有了互动活力。</p>
+  <p>对于用户反馈，Tech星球随机采访了部分QQ用户，表示使用过至少一项AI功能，其中AI文案、虚拟形象、QQ脑洞秀以及元宝一句话总结聊天的使用率居高不下。</p>
+  <p>“发空间懒得想文案，AI生成又快又贴合语气”，“班级群里的AI助手能自动整理通知，元宝总结功能不用再翻几百条聊天记录，太省心”，“脑洞秀里用AI玩脑洞挑战，和同学互动特别有意思”，类似的反馈较为普遍。</p>
+  <p>但是，争议同样存在，有用户认为部分AI功能实用性不足，“AI换装玩几天就腻了”，“部分AI入口藏得太深，不刻意找根本发现不了”，这些问题也成为腾讯后续优化的重点。</p>
+  <p>Tech星球还发现，QQ还推出了智能体好友“席恩”等，主打情感陪伴与趣味互动。从体验来看，席恩具备自然的对话能力，可发起话题，也能回应用户的情绪表达，譬如，这些智能体说“我们不冷战了好不好”，“对不起，是我刚才说错话了”，语气贴近真实好友，打破了传统AI对话的生硬感。甚至在部分用户群体中，形成了围绕智能体席恩的粉丝群体。</p>
+  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_06a948dcf0bf40b19f4a480092d5a5ec@000000_oswg203573oswg1080oswg897_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
+  <p>整体来看，过去一年QQ的AI社交布局，走的是“小步快跑、务实试错”的路线，贴合自身用户属性，逐步完成AI与社交场景的深度绑定，这也与马化腾“稳扎稳打、提升船速”的表态高度契合。</p>
+  <h2>20年老产品，发力AI社交真的有搞头？</h2>
+  <p>作为一款上线二十余年的老牌社交产品，QQ走过了PC互联网的鼎盛时期，也经历过移动互联网的冲击，如今早已不再是国民社交首选，但依旧牢牢抓住年轻群体，维持着稳定的用户基本盘。</p>
+  <p>眼下腾讯持续在QQ加码AI社交，不断落地新功能、新玩法，也让人不禁思考，一款走过二十年生命周期的老产品，发力AI社交真的有搞头吗？</p>
+  <p>客观来看，QQ做AI社交本身具备天然的先天优势。</p>
+  <p>首先，是用户基底优势，QQ始终霸占校园年轻群体市场，Z世代本身对新鲜事物、AI玩法接受度极高，乐于尝试个性化、娱乐化的社交方式，和AI社交的玩法属性高度契合。相比其他主打职场、熟人社交的产品，QQ用户对新奇功能的包容度和参与意愿更强，为各类AI功能落地提供了受众基础。</p>
+  <p>其次，是产品生态优势，QQ拥有空间动态、群聊、好友互动、兴趣广场等多元场景，本身就是泛娱乐社交的聚集地，不像微信局限于极简熟人社交，有着足够的场景空间去承载AI帖子、AI小游戏、AI兴趣互动等新玩法。此次AI帖子能直接嵌入空间信息流，依托原有社交分发逻辑传播，就是基于QQ成熟生态的自然延伸。</p>
+  <p>但不可否认的是，QQ发力AI社交也面临绕不开的现实瓶颈。</p>
+  <p>一方面，产品整体用户增长早已见顶，核心用户基本盘固化，很难再吸引大规模新用户入局，AI玩法更多只能盘活存量用户，很难带来突破性的用户增量。</p>
+  <p>另一方面，多年来QQ各类新功能、新玩法堆砌过多，产品愈发臃肿，不少用户只保留基础聊天需求，对层出不穷的AI新玩法并没有太强的探索意愿。</p>
+  <p>同时，当下互联网平台AI社交玩法扎堆，短视频平台、兴趣社区都在布局AI虚拟社交、AI互动玩法，QQ的AI社交并不具备独家壁垒，若只是跟风上线同类功能，很容易陷入同质化竞争，难以形成自身特色。</p>
+  <p>对于腾讯而言，QQ布局AI社交，更大的意义不在于再造一款爆款社交产品，而是守住年轻用户阵地，用AI持续丰富产品玩法，延缓产品老化速度，维持在年轻社交赛道的存在感。</p>
+  <p>未来能否真正把AI帖子这类创新玩法做透、做出口碑，关键还是要看腾讯能否跳出浅层AI功能叠加，真正贴合年轻用户需求打造差异化体验，在老产品的基础上，靠AI走出一条适配自身定位的新社交路径。</p>
+  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzU5MTczNjIyNA==&amp;mid=2247611126&amp;idx=1&amp;sn=337858743eb6b6bdaef79a15c761ce0f&amp;chksm=ff320860beb4f7ff1e9b6f97ffa8a5a321c9059ac43c677b6b518b614012832b69237b343789&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“Tech星球”（ID：tech618）</a>，作者：陈桥辉，36氪经授权发布。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://www.36kr.com/p/3810440762547716</id>
             <title>Hermes团队改写预训练：算力成本降六成，DeepSeek之后提效新路径</title>
             <link>https://www.36kr.com/p/3810440762547716</link>
@@ -1492,1123 +2818,6 @@
   <p>OpenAI 的 Codedx 和 Anthropic 的 Claude Code，就这样一点一点慢慢把「龙虾」有的能力复制过来，接下来就是看谁做出的产品体验更好了。&nbsp;</p>
   <p>对我们来说，这确实是一件好事。开源项目有自己的优点，但商业化运营的产品始终要更稳定和易用。而在 Claude Code 和 Codex 之间的选择，大概率又会是 Claude Code 号被封，Codex 胜。&nbsp;</p>
   <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/2Tt-ijfZS1Abx-At0KQc7A" rel="noopener noreferrer nofollow" target="_blank">“APPSO”</a>，作者：发现明日产品的，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810391039123718</id>
-            <title>千里科技想做下一个“华为引望”，谁来当赛力斯？</title>
-            <link>https://www.36kr.com/p/3810391039123718</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810391039123718</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 11:02:04 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 千里科技，吉利系，商业闭环，智驾市场  
-<br>  
-<br>总结: 千里科技通过引入赵明、与北汽合资等方式急转方向，旨在摆脱对吉利系的依赖并建立商业闭环。公司面临智驾收入占比低、连续亏损及外部客户获取困难等问题。智驾行业赢家通吃的格局已形成，千里科技尚未占据关键位置。其与吉利的深度绑定成为外部合作的最大壁垒，技术差异化叙事不清晰。公司目标是在2026年底实现百万级智驾搭载量，并计划于2030年运营超30万辆Robotaxi。 </div>
-                        <hr>
-                    
-                    <p>今年来，千里科技大事不断。</p>
-  <p>先是荣耀前CEO赵明空降联席董事长，随后公司再次向港交所递交招股书。</p>
-  <p>近日，据《21世纪经济报道》报道，千里科技计划和北汽集团成立合资汽车公司，这一计划将在年内落地，具体方案仍在讨论中，而与北汽合作旨在撕掉"吉利系"标签。</p>
-  <p>一连串密集动作及转变，显示出这艘转型游轮正在猛打方向盘，变革决心已十分明显。</p>
-  <h2><strong>千里科技急转漂移的背后？</strong></h2>
-  <p>开过车都走知道，方向盘打得越急、越猛，说明外界的形势越严峻。</p>
-  <p>在去年，Momenta CEO曹旭东便提出智驾产业链会趋向收敛，“中国只剩下2—3家，世界也就剩下3—4家”。</p>
-  <p>这个判断也确实在逐步成为现实。</p>
-  <p>中汽协数据显示，仅2025年1至10月，第三方城市NOA供应商市场中，Momenta以约54%的份额居首，元戎启行约23%，华为HI模式约22%，前三名合计份额达到99%。</p>
-  <p>赢家通吃的格局已然形成，而千里科技尚未真正坐在牌桌上。</p>
-  <p>此外，根据天眼查App显示，千里科技连续三年的亏损也是一道难题：2023—2025年，千里科技分别净亏2.62亿元、3.29亿元、3.21亿元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_61064ffa16ed436aac7d709f1d9d0413@5777305_oswg27840oswg553oswg173_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>更关键的是营收结构的失衡——智能驾驶相关收入占比不足4%，传统制造业务仍是绝对主力。</p>
-  <p>这意味着，千里科技讲了两年的"智能化转型"故事，在财务报表上尚未形成有力支撑。</p>
-  <p>技术实力未被行业主流认可，第三方车企订单寥寥，距离商业闭环跑通，仍有很多路要走。</p>
-  <p>但比财务数字更值得审视的，是千里科技身上那道难以回避的"吉利系"烙印。</p>
-  <p>赴港上市的招股书呈现了一个值得关注的现实：2023年至2025年，千里科技来自吉利集团的收入占总营收比例分别达到33.6%、30.8%和29.6%，主要关联方均为吉利系企业，销售与采购额占比始终维持在30%上下。</p>
-  <p>在被视为未来核心的智驾业务上，这种依赖尤甚——据了解，千里智驾的系统装车量已超过46万辆，但其中约70%的装车量来自极氪、领克等吉利系内部品牌。</p>
-  <p><strong>这道烙印在早期是护身符。吉利作为大股东兼主要客户，为千里科技提供了稳定的订单保障与资源赋能，让它在智驾赛道的草莽期得以存活。</strong></p>
-  <p>但随着行业进入淘汰赛，这道烙印正在变成一道无形的墙。</p>
-  <p>没有车企会轻易与一家核心业务绑定竞争对手的企业开展深度智能化合作——这是汽车行业的基本逻辑，也是千里科技外部获客的最大壁垒。</p>
-  <p>多家券商机构已明确将"单一客户占比过高"列为千里科技IPO进程中需要重点警惕的风险指标。</p>
-  <p>从产业现实出发，如果不能迅速开拓更多客户，千里科技恐将错失关键窗口。</p>
-  <p>于是我们看到千里科技一连串急促的转身。</p>
-  <p>赵明的空降是一个信号。这位前荣耀掌门人，与千里科技创始人印奇聊了半年，最终被一个命题打动：<strong>AI的商业闭环和投资闭环，是今天最难解的题，就像20年前的互联网。</strong></p>
-  <p>两人由此形成联动——印奇主攻AI技术战略，赵明负责商业闭环。赵明的加入，主要是为了补足千里科技在C端的品牌声量与商业运营能力。</p>
-  <p><strong>与北汽进行合作，也被视为走出吉利系、进一步打造商业闭环的关键一步。</strong></p>
-  <p>但商业闭环的构建，从来不是简单的人事调整、与一家车企合作可以解决的。</p>
-  <p>目前整个智驾行业，严格意义上完成商业闭环、实现大规模盈利的，只有华为"引望"。</p>
-  <p>吉利控股行政总裁桂生悦曾说过，千里科技是“第二个华为引望。</p>
-  <p>千里科技想成为第二个引望，没这么容易。</p>
-  <p>华为的成功有两个难以复制的特点：一方面，华为在C端有着强大号召力，技术实力本就深入人心；</p>
-  <p>另一方面，鸿蒙智行的成功离不开问界的打造，而问界的打造离不开赛力斯的全力配合——赛力斯“心甘情愿”地把"灵魂"交付到华为手上。</p>
-  <p>这种"技术品牌+深度绑定车企"的模式，让华为成为智驾领域的"苹果"。</p>
-  <p>千里科技想学华为，说实话并不容易。C端声量可以通过赵明的加入来补充，但千里科技本身缺乏显明的特点。</p>
-  <p>华为C端影响力强，根本原因在于品牌长期面向C端，且核心技术环节全部为全栈自研，故事空间足够大，从智驾系统到896线激光雷达，每一个环节都能讲出技术领先的叙事。</p>
-  <p>反观千里科技，此前搭载极氪，极氪成功走上高端，但千里智驾并未打出名声，技术差异化的故事没讲通。</p>
-  <p>而赛力斯这种"灵魂交付"式的搭档，更是可遇不可求。吉利作为千里智驾的大股东兼主要客户，也未能梭哈千里。</p>
-  <p>反而左手千里智驾，右手地平线，这是大集团的理性选择，也是千里科技的先天局限。</p>
-  <p>千里科技上个月发布的"游心"品牌，据传是与北汽合资打造。</p>
-  <p>但这个合作本身也充满博弈：对于北汽而言，与千里科技牵手，更多是减少对华为智驾的依赖，是一种战略备份，而非全力以赴。</p>
-  <p>其配合程度，很可能不及与华为联手打造享界时的深度。</p>
-  <p>更何况，"游心"定位20万至40万元区间，这个价位段正是当下中国车市竞争最惨烈的红海——特斯拉、小米、蔚小理等强敌环伺。</p>
-  <p>在存量市场格局下，各大车厂都在收敛战线，吉利自身也在推行"一个吉利"战略，把领克与极氪合并，就是为了收紧拳头应对存量竞争。</p>
-  <p>这种时候打造一个全新品牌，难度可想而知。</p>
-  <p>因此，<strong>"去吉利化"对千里科技而言，本质上是一场信任重建的工程。</strong></p>
-  <p>它不仅要证明技术能力，更要证明独立性；不仅要拿下外部订单，更要让合作伙伴愿意深度绑定；不仅要撕掉标签，还要在撕掉标签后不被市场遗忘。</p>
-  <p>如今北汽合作只是一个开始，但远非解药。</p>
-  <p>如果千里科技不能在未来一到两年内，通过"游心"或其他项目证明自己在无吉利资源倾斜的情况下仍能交付顶级智驾体验，那么这次合作反而可能成为行业内的反面教材。</p>
-  <p>要知道，百度与吉利此前合资打造的极越，最终以失败告终，还闹出了不小的舆论风波。</p>
-  <p>事件发生后，就算百度想转型为第三方技术供应商，其它车企与其合作难免需要深思。</p>
-  <p>回过头来看，千里科技的一系列变动背后，有一条清晰的主线：打造可持续的商业模式，完成商业闭环。这是印奇与赵明共同的命题，也是千里科技能否在智驾行业"收敛"的大势中存活下来的关键。</p>
-  <p>只是，当牌桌上的座位已经不多，而竞争对手已经跑通闭环、实现盈利时，千里科技的这场转型，更像是一场与时间的赛跑。</p>
-  <h2><strong>千里科技针对CEO离职辟谣</strong></h2>
-  <p>随着赵明加盟千里科技，这家公司近期频繁传出内部组织调整的消息。</p>
-  <p>此前，多家媒体称CEO陈奇已主动离职，投身具身智能领域创业。</p>
-  <p>不过，千里科技及陈奇本人于5月14日下午对此进行了辟谣。</p>
-  <p>公司官方表示，陈奇及核心研发团队仍在持续推进技术研发与产品迭代。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_0085a82b4f344e288a276e7afb9ab972@5777305_oswg43233oswg288oswg212_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>同日，<strong>陈奇也在朋友圈发文称："人在公司，还在为千里智驾打拼，谢谢大家关心。"</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_e2b90e4eff784ca8818258468cc55dd9@5777305_oswg83037oswg454oswg257_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>据了解，陈奇是典型的"技术落地派"。在华为期间，他推动了自动驾驶从实验室走向工程化；在极氪，他又从零组建了智驾团队。</p>
-  <p>他的核心能力在于将算法转化为可量产装车的产品。</p>
-  <p>此次陈奇辟谣了，不过，据腾讯汽车5月14日文章显示，千里科技另一位CEO王军的处境则截然不同。</p>
-  <p>他实际上已不再参与公司决策和日常工作，内部已许久未见其身影，其职责基本由现任COO朱树青接管——朱此前担任荣耀流程与运营部部长。</p>
-  <p>王军的边缘化并非无迹可寻。</p>
-  <p>腾讯汽车在文章中进一步指明，早在赵明以联席董事长身份加入千里科技、负责AI商业化落地时，公司内部便流传王军或将离职的消息。</p>
-  <p>毕竟两人职责存在明显重叠：赵明负责AI商业化落地，而王军原分管销售、采购和战略体系。</p>
-  <p>此外，4月22日的千里科技AI战略暨产品发布会上，王军缺席，整场发布会由赵明主导。</p>
-  <p>王军最近一次公开露面是在4月16日，但彼时其身份已与千里科技无关。据央广网报道，当天上海市浦东新区智慧出行产业促进会会员大会上，新当选会长的智与芯行创始人王军发表了题为"智驾的后半场及Robotaxi的未来"的报告。</p>
-  <p>对此，王军解释称："我本来就有这家公司，然后才去的千里科技。两家公司并行，属于产业协同。"</p>
-  <p>履历显示，王军于2025年6月被聘为千里科技联席总裁，同时担任子公司重庆千里智驾的董事长兼CEO。该公司是吉利控股集团整合后的智驾业务主体，极氪、吉利研究院及旷视旗下迈驰智行等智驾团队均已并入其中。</p>
-  <p>千里科技一直保持"双CEO架构"，陈奇与王军共同掌舵智能驾驶业务——陈奇聚焦研发与量产落地，王军统筹战略规划与资源整合，分工明确。</p>
-  <p>今年2月赵明的加入，为这一格局带来了新的变量。</p>
-  <p>赵明在荣耀时期以商业化和成本把控见长，加盟千里后，公司发展重心逐渐从"技术深耕"向"规模扩张"倾斜。</p>
-  <p>这一转变不仅为王军带来了新的参照，也让陈奇的角色定位微妙起来。</p>
-  <p>陈奇的长板在于技术研发，而公司当前阶段对销售与交付能力的需求更为迫切。</p>
-  <p>业内有人这样一个比喻："陈奇是造枪的人，赵明是卖枪的人。现在公司最需要的是更多的客户。"</p>
-  <p>尽管千里科技的前景尚未完全清晰，但赵明对千里科技商业化未来却显得信心十足。</p>
-  <p>在前段时间，刚加入千里科技不久的赵明在直播中放言：<strong>一定要做得比特斯拉好，不服就把它打服。</strong></p>
-  <p>在4月22日的发布会上，赵明公布了明确的规模化目标：预计到2026年底，ASD辅助驾驶搭载量将达100万至130万辆；到2028年，力争突破800万辆。</p>
-  <p>Robotaxi方面，计划于2027年推出专用车辆及综合解决方案，涵盖车辆平台、L4自动驾驶系统及远程监控调度模块；2030年实现全球超30万辆Robotaxi搭载其方案投入运营。</p>
-  <p>不可否认，近年来车圈正被手机圈的思维方式深刻影响，无论是余承东还是雷军，都以不同方式给传统车圈带来了冲击。</p>
-  <p><strong>赵明曾一手将荣耀拉扯壮大，拥有十余年的商业运营经验，深谙用户、市场与品牌建设之道，这正是许多车圈从业者所欠缺的。他或许真能在车圈走出一条不同寻常的路。</strong></p>
-  <p>但话说回来，作为车圈新人，他能否快速适应汽车行业节奏，能否将手机圈的成功经验复制到汽车领域，仍是未知数。</p>
-  <p>最终，赵明此次跨界汽车，能否像当年带领荣耀逆袭那样创造新的奇迹，时间自会给出答案。</p>
-  <p><strong>免责声明：</strong>本文基于公司法定披露内容和已公开的资料信息，展开评论，但作者不保证该信息资料的完整性、及时性。另：股市有风险，入市需谨慎。文章不构成投资建议，投资与否须自行甄别。</p>
-  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s/niDD3wPXmyhJ_uVZfVWPPw" rel="noopener noreferrer nofollow" target="_blank">“财观二姐”</a>，作者：二姐，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810357703909637</id>
-            <title>别再怪李斌了，2026他只想卖车活下去</title>
-            <link>https://www.36kr.com/p/3810357703909637</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810357703909637</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 10:56:30 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 蔚来, 李斌, 销量, 背刺车主  
-<br>
-<br>  
-总结: 李斌近期为推广新车奔波多地，但因新款乐道L90和L80增配不加价，导致老车主感到被“背刺”，引发网络不满。  
-<br>  
-蔚来曾强调不打价格战、不背刺车主，但在市场内卷与行业寒冬下，为求生存，策略已转向多品牌布局、密集推新和加配不加价。  
-<br>  
-当前新能源行业融资困难，蔚来自我造血成为唯一出路，卖车是首要目标。  
-<br>  
-蔚来一边在公司内部节衣缩食节省开支，另一边却频繁举办高成本的发布会以制造话题和吸引流量。  
-<br>  
-蔚来销量依赖高端车型ES8，而乐道L60等其他车型平均月销仅千余辆，市场表现不佳。  
-<br>  
-新款乐道L80起售价极低，与乐道L60形成价格倒挂，进一步激化了老车主的负面情绪。  
-<br>  
-过去蔚来两次凭借外部资本注资得以起死回生，但如今已无法依赖外部融资。  
-<br>  
-为活下去，蔚来不得不从高端定位转向追求性价比，以卖车实现自我造血。 </div>
-                        <hr>
-                    
-                    <p>要说过得不容易的车企CEO，李斌绝对算一个。</p>
-  <p>5月过半，李斌的脚步已遍及半个中国，从北京到浙江西塘，从甘肃敦煌到安徽合肥，新车发布、品牌推广、站台引流，24小时不间断直播……</p>
-  <p>在新产品方面，李斌也为消费者带来了同级别中颇有竞争力的新款乐道L90和乐道L80。但就是因为它们物美价廉，直接让提了老款乐道L90和乐道L60的车主集体破防了，互联网上充斥着不理解，甚至也有诋毁谩骂李斌的声音。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_44ebee1d27214a38b9be53e5dcab9363@46958_oswg183096oswg1080oswg1251_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/2026款乐道L80-乐道L90 &nbsp;来源/互联网 新能源观截图</p>
-  <p><strong>“蔚来坚决不打价格战、绝不背刺老车主”，一直是李斌对外反复强调要坚守的底线。</strong></p>
-  <p>但现在，行业寒冬叠加市场内卷，倒逼李斌彻底调整经营策略：多品牌布局、密集推新、加配不加价、下放门槛等。</p>
-  <p>这一切转变的背后，逻辑其实十分直白：<strong>眼下的蔚来，首要目标就是多卖车，活下去。</strong></p>
-  <p>回望2019年，蔚来一度濒临险境，却仍能凭借产品力与品牌故事获得资本加持；可如今新能源行业环境早已大变，车企想要再获得外部融资难上加难，依靠自身造血突围，已成唯一出路。</p>
-  <p>与此同时，行业基本面也今非昔比。不同于当年国内新能源车高速增长的红利期，如今国内车市早已趋于饱和，行业增速明显放缓甚至承压，新车迭代节奏堪比手机，内卷激烈的价格战更是已经打到谷底。<strong>不低价，何谈竞争力？</strong></p>
-  <h2><strong>1.&nbsp;一边节衣缩食，一边频繁造势</strong></h2>
-  <p>刚刚结束不久的北京车展上，蔚来首次将NIO蔚来、ONVO乐道、firefly萤火虫三大品牌汇集到同一展馆、同一展台。</p>
-  <p>在车展发布会现场，李斌提到，“这是蔚来公司三品牌首次在北京车展同台亮相，是蔚来公司多品牌协同发展、十一年体系创新的一次集中展示。”</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_deded356717949308e797dc55b517e62@46958_oswg100883oswg1080oswg607_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/2026北京车展蔚来展台 &nbsp;来源/互联网 新能源观截图</p>
-  <p>与此同时，李斌也开玩笑地表示“如此设计也可以省下不少精力和省不少钱。”</p>
-  <p>事实上，<strong>省钱是李斌和蔚来近两年一直在努力做的事情。</strong>比如，李斌前往北京车展会场采用的交通工具是共享单车，“相比堵车省时间，相比走路也省力，另外也挺省钱。”李斌说道。</p>
-  <p>再比如，蔚来办公室茶水间的桶装矿泉水变成了过滤自来水、NIO House每周更换的新鲜蝴蝶兰（价值数十元）变成了假花、员工节日庆祝、亲子活动从2023年开始缩减，到2025年就连羽毛球、篮球等兴趣社团的经费也没有了。</p>
-  <p><strong>只不过，比较割裂的是，蔚来一边精打细算，一边却在频繁召开产品发布会。</strong></p>
-  <p>仅最近两个月，不算车展在内，蔚来就有五场颇为大型的发布会，从4月初的ES9技术发布会，到4月中旬的乐道L90焕新发布会，再到4月底乐道L80产品发布会。</p>
-  <p>就在这个五月，蔚来还将分别于15日和27日，为乐道L80和蔚来ES9举办上市发布会。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_c5aef96677cd48008e50d366002e95f9@46958_oswg109239oswg1080oswg959_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/蔚来5月两场发布会 &nbsp;来源/互联网 新能源观截图</p>
-  <p>除了举办发布会的频次多，<strong>在发布会现场李斌也是使出了浑身解数，不断提供可以实现快速传播的“笑料”和噱头。</strong></p>
-  <p>乐道L90焕新发布会上，李斌和演员沙溢、胡可夫妇现场玩上了你来比划我来猜，甚至还和沙溢上演了“绕着乐道L90后座跑2.0版本”。而在乐道L80技术发布会上，李斌为了凸显乐道L80的场景优势，不仅现场做起了饭，还邀请蔚来联合创始人、总裁秦力洪上台，两位公司高管并肩躺入车内。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_74539fad398a40acab7d7f5c19dc62b1@46958_oswg368924oswg1080oswg576_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/乐道L90焕新发布会现场 &nbsp;来源/互联网 新能源观截图</p>
-  <p><strong>这一名场面也如李斌所愿，在直观展示乐道L80的内部空间之大的同时，刷屏了社交网络。</strong></p>
-  <p>要举办一场发布会，从场地租赁、会场搭建，再到媒体及工作人员差旅食宿等各项开支累加起来，其成本并不低。</p>
-  <p>这与蔚来近两年从各个项目中坚持精细化控本的举动，颇为相悖。即便开支很大，得到的回报也充满不确定性，但从当前蔚来的情况来看，这笔开销却又不得不投入。</p>
-  <h2><strong>2.&nbsp;造势背后的产品焦虑</strong></h2>
-  <p>“互联网造车”的时代，流量肯定不是万能的，但没有流量一定是万万不能的。这个也可以解释，<strong>节衣缩食的李斌，“大手大脚”办活动造势的原因：本质上都是为了换取更多曝光、吸引更多关注，最终多卖些车。</strong></p>
-  <p>纵观蔚来的销量表现，2025年全年交付量达到326028辆，同比增长46.9%，创历史新高。尤其是2025年第四季度，交付同比增长71.7%。但这份成绩的背后，核心支撑却高度集中在40万元以上的蔚来ES8身上。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_aa0f17734f8d4f1cb6454af1a902b816@46958_oswg443557oswg856oswg1652_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/2025年蔚来汽车销售情况 &nbsp;来源/互联网 新能源观截图</p>
-  <p>根据蔚来披露的2026年4月最新销量数据显示，公司共交付新车29356辆。其中，蔚来品牌交付新车19024辆，而ES8达13020辆，占蔚来品牌月销近70%，占蔚来公司4月交付量超40%。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_adf3715e7a0b49acb1cacd4b141f7642@46958_oswg1547331oswg1080oswg1757_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/2026年4月蔚来汽车销售情况 &nbsp;来源/互联网 新能源观截图</p>
-  <p>我们知道，<strong>蔚来品牌的多款产品，如2026款ES6、EC6、ET5、ET5T都已经在四月初上市并交付，但从其披露的销量来看，这些车型的平均月销只有千余辆。</strong></p>
-  <p>除此之外，曾经和全新ES8一起，担起蔚来公司在2025年实现盈利关键的乐道L90，在昙花一现之后，正面临新车型交付前的阵痛期。</p>
-  <p>2026款乐道L90在4月中旬正式上市，并在5月9日开启交付。而新款乐道L90能否复制此前的爆款神话，还需要时间的验证。</p>
-  <p><strong>先于销量数据引爆社交网络的，是“增配不加价”的乐道L90所引发的背刺老车主的争议。</strong>有车主自嘲为“L韭0”，也有车主直言，“下定时销售声称短期不会改款，没想到提车就成旧款。”</p>
-  <p>对此，李斌坦诚表示，“心里非常愧疚”，但也提到“乐道月销三千多辆，同级别排第四，远不够稳健。不迭代就没法参与市场竞争，不跟上，死的可能是整个品牌。”</p>
-  <p>背刺车主的不止乐道L90。</p>
-  <p><strong>5月15日，乐道L80正式上市并开启交付，这款长达5145mm的中大型SUV，BaaS方案的预售价格只有15.98万元起。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_ab06f22747f54456a32269a6f4e9b788@46958_oswg1069382oswg1080oswg613_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/乐道L80售价 &nbsp;来源/乐道官网 新能源观截图</p>
-  <p>这一价格，只比车长只有4828mm、标准中型SUV的乐道L60贵了一万元，后者采用BaaS方案后是14.99万元起。</p>
-  <p>如果乐道L80实际上市价格再有优惠，很可能出现L80和L60价格倒挂的情况。</p>
-  <p>即便有这一万元的差价，L80也是更有性价比，不止大小，它还包括240升的智能电动前备厢、座椅全部加热、车载冰箱等等。</p>
-  <p>有乐道L60车主在社交平台上发帖表示，“刚提车不到半年，感觉亏了快一辆飞度的钱。”还有车主表示，“如果L80定价在25万以上，我们无话可说。但<strong>一款尺寸更大、技术更新的车，用BaaS后的价格，几乎贴着L60的尾巴打，这本质上就是一次精准的‘降维打击’，</strong>用新产品直接覆盖了老产品的价格区间，让我们这些支持者成了炮灰。”</p>
-  <p>蔚来除了要应对老车主的投诉，还要直面强大的对手。</p>
-  <p>5月底，定位更高的蔚来ES9将正式上市并交付。然而，当前“9系”已经被看成是高端市场最“卷”的车型，问界M9、理想L9、极氪009、小鹏X9等等，都让50万级别的高端市场，竞争惨烈。</p>
-  <h2><strong>3.&nbsp;蔚来想活，只能卖车</strong></h2>
-  <p>自成立以来，蔚来的发展之路就从未平坦，更是不止一次陷入濒临绝境的“生死劫”。</p>
-  <p>李斌也是多次直言“活下去更重要”。</p>
-  <p>2018年，蔚来顶着近百亿元的净亏损登陆美国纽交所。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_a425ce992ba64e769fa2902e778f0b2b@46958_oswg37382oswg864oswg252_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/2018年蔚来汽车亏损情况 &nbsp;来源/互联网 新能源观截图</p>
-  <p>但是，在接下来的2019年，蔚来经历了多位高管离开、2019年第四季度现金储备一度不足10亿元、2019年全年净亏损112亿元的生死局，李斌也成为了当年“最惨的人”。</p>
-  <p>当时间来到2023年，销量跌跌不休的蔚来，再次站在“ICU”门口。彼时李斌表示，“如果蔚来接下来还是每个月销量1万的话，我和秦力洪就要出去找工作了。”</p>
-  <p>幸运的是，<strong>蔚来两次起死回生，而“拯救”蔚来的不是销量，是资本的进入。</strong>2020年蔚来拿到了安徽省合肥市政府的70亿元注资；2023年年底，阿布扎比投资了蔚来近150亿元。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_65f64d2bb3484a7aaec47e5acee39c6e@46958_oswg235818oswg1080oswg1683_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/蔚来汽车拿到两次融资 &nbsp;来源/互联网 新能源观截图</p>
-  <p>但今时不同往日，<strong>新能源汽车的格局逐渐固化，资本的态度也发生了根本性转变。再想依靠外部资金入局来挽救企业，已经基本不可能。</strong></p>
-  <p>在这样的背景下，<strong>卖车、实现自我造血，成为了蔚来唯一的希望，也是其活下去的唯一出路。</strong></p>
-  <p>正是因此，高傲的蔚来不得不降低身价，走上“物美价廉”的路线。</p>
-  <p>比如新款乐道L90，搭载激光雷达和全新智驾芯片，配置全面升级，价格保持不变，叠加BaaS购买方式，与同级别车型相比，配置优势显著；乐道L80更是将性价比做到了极致，搭载空悬和双叉臂悬架，让以往蔚来“高端”的标签，逐渐被“性价比”所取代。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_beee98ee1ae143dba72f1aa0aa15223d@46958_oswg522513oswg1080oswg601_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图/2026款乐道L90配置参数 &nbsp;来源/互联网 新能源观截图</p>
-  <p>这种转变，是蔚来的无奈之举，更是其为了生存，不得不做出的妥协。</p>
-  <p>也是为了卖车，李斌甚至“放弃”了友商们争相布局的AI、大模型领域，并在面对媒体对此的提问时，直言“如果今年车卖不好，公司就没了。”</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/nj71qzt5VnoFbxl3GWMYJQ" rel="noopener noreferrer nofollow" target="_blank">“新能源观”</a>，作者：又见编辑部，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810362276978691</id>
-            <title>商业航天进入生死局，北理工博士争当中国马斯克</title>
-            <link>https://www.36kr.com/p/3810362276978691</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810362276978691</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 10:48:22 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 商业航天, IPO竞赛, 技术兑现阶段, 商业化路径
-<br>
-<br>
-总结: 商业航天的竞争正从太空转向资本市场，多家公司争夺“商业航天第一股”。上交所新规支持尚未盈利但具备可回收火箭技术的优质企业上市，引发了IPO热潮。文章认为，IPO竞赛标志着行业进入技术兑现阶段，需要在规模化中检验技术真伪。商业航天公司面临“领跑或出局”的两种命运。国内公司对标SpaceX，寻求从“工艺品”向批量化、低成本的“工业品”模式转变。当前，火箭回收实验和商业化路径是否清晰，是公司能否成功上市的关键。微纳星空等公司仍处于亏损状态，商业化闭环尚未形成。前期资本接力推高了公司估值，但商业化前景不明朗，构成了高估值下的隐忧。 </div>
-                        <hr>
-                    
-                    <p>商业航天公司的战场，从太空转移到了资本市场——正在港股、A股抢夺“商业航天第一股”。</p>
-  <p>近日，北京微纳星空科技股份有限公司（下称“微纳星空”）A股科创板上市申请获得受理，融资金额50亿元。</p>
-  <p>今年4月，微纳星空完成IPO辅导验收，尽管其火速在科创板申请上市，包括蓝箭航天打响了民营商业航天上市第一枪，然而拓璞数控借道港交所，现已进入认购环节，提前锁定“商业航天第一股”。</p>
-  <p>2025年12月一纸新规“开闸放水”后，除了上述三家公司，包括中科宇航、星河动力、天兵科技、国星宇航等合计10余家商业航天公司启动了上市程序。这标志着，商业航天从技术积累与验证切入到IPO竞赛。</p>
-  <p>本质上，IPO竞赛是商业航天行业进入技术兑现阶段。也就是说，前期讲创始团队背景、讲技术研发和积累，可以借助资本不断“续命”，但当前，行业已是一场生死竞速，要在规模化中检验技术的真伪。</p>
-  <p>有观点指出，商业航天公司正面临两种命运：<strong>领跑或出局。</strong></p>
-  <p>和资本一起豪赌的，还有一批提前押注的散户，他们买入已上市的供应链上下游公司或参投上市公司的股票，就等着这些商业航天公司上市，好吃上一口“大肉”。</p>
-  <h2><strong>01.一场狂欢</strong></h2>
-  <p>2025年12月中旬，SpaceX猎鹰-9火箭将27颗“星链”卫星送入轨道后，其一级助推器成功降落在无人回收船上。像这样的场景，SpaceX在2025年完成了165次，其中成功回收率达98.2%。</p>
-  <p>可回收火箭技术的提升，能解决两个问题：<strong>降低发射成本、突破运力瓶颈。</strong>另有统计数据显示，截至2026年5月初，SpaceX累计回收助推器超过600次，节省助推器制造成本约170亿美元。</p>
-  <p>说白了，以前航天发展走的是“工艺品”路线，现在要走批量化、低成本的“工业品”模式，<strong>类似于汽车、家电。</strong></p>
-  <p>2025年12月末，上交所发布了“9号指引”，明确指出“支持尚未形成一定收入规模的优质商业火箭企业在科创板发行上市”。A股市场正式向商业航天公司“开闸放水”。</p>
-  <p>上述提及，为什么说2026年会是商业航天的一场生死竞速，因为，上交所在指引中明确三点要求：1、具备可回收火箭技术；2、在行业内具有重要地位；3、商业化路径和规划清晰明确，且切实可行。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_a509970491a14ce09f4f07f130031964@6079156_oswg151127oswg640oswg322_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_581bb56f061a4bc5b1d1eda5862f9131@6079156_oswg316539oswg640oswg328_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">截图来源于上交所</p>
-  <p>实际上，早在2025年6月，证监会已明确将商业航天、人工智能、低空经济列入重点支持领域，允许尚未盈利但具备核心技术的公司上市融资。</p>
-  <p>一个月后，蓝箭航天率先抢滩登陆，启动上市辅导并提交申请。紧接着，中科宇航、星河动力、天兵科技、星际荣耀、银河航天等公司，包括本次递表上市的微纳星空，均发起了IPO冲刺。</p>
-  <p>一场新的狂欢开始了。</p>
-  <p>其中，蓝箭航天、中科宇航从启动IPO辅导到完成辅导验收，耗时仅约5个月时间，刷新了摩尔线程创造的7个月的纪录。</p>
-  <p>在上交所科创板正式“开闸放水”后，上述商业航天公司开始抢夺“商业航天第一股”。</p>
-  <p>在此之前，即2025年11月，A股商业航天指数率先“升温”。Wind数据显示，商业航天指数从2025年11月24日的1343点，一路上涨至2026年1月12日的峰值2543点，涨幅约89.3%。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_b924ec994826432e9e17450128ea485f@6079156_oswg181852oswg640oswg344_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">截图来源于Wind</p>
-  <p>期间，不少个人投资者也跟着“埋伏”进去了。只是之后到现在，整体行情经历了较大的调整，从回撤慢慢走向震荡上涨。</p>
-  <p>而近期，商业航天公司纷纷传出IPO动态之后，不少网友在社交平台上分享了有关商业航天行业发展的看法，包括看重的一些供应链上下游关联公司。</p>
-  <p>显然，不少散户同样看好商业航天公司IPO，并进行了投资布局，等着“吃肉”。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_cf6146a9977b4e4a8e305295ca14dff8@6079156_oswg182783oswg640oswg441_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_1048aa48dae544c6a6379c0c3f5b7924@6079156_oswg102992oswg640oswg436_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">截图来源于小红书</p>
-  <p>只不过，这波行情是否能回来依然是未知数。因为当前，商业航天公司头顶都“悬在着一把利剑”，何时能取下是一个未知数。</p>
-  <p>目前，不少商业航天公司陆续发布了火箭回收实验计划。</p>
-  <p>其中，2025年12月，蓝箭航天率先成功发射朱雀三号，虽然运载火箭成功实现入轨，但一子级未能成功回收。其称，将在2026年二季度再度发起挑战。</p>
-  <p>同时，中科宇航、星际荣耀、星河动力、天兵科技等都计划在2026年进行收费或关键回收实验。</p>
-  <p>除了火箭回收实验之外，另一个核心因素是：<strong>业务、产品由谁来买单？</strong></p>
-  <p>上述问题没有解决，意味着商业航天公司就无法上市，也将一直处于巨额亏损之中，靠借钱过日子。</p>
-  <h2><strong>02.商业化路径仍未清晰</strong></h2>
-  <p>回到微纳星空身上，作为国内最早一批专注于卫星制造的民营商业航天公司，其由高恩宇博士创立。</p>
-  <p>高恩宇毕业于北理工、美国宾夕法尼亚州立大学（联合培养），先后在中国运载火箭技术研究院、中国空间技术研究院任职，2017年跳出体制，创立微纳星空。</p>
-  <p>简单来说，商业航天主要分为三个环节：卫星制造、火箭发射、地面站服务及应用。其中，卫星制造与应用，代表企业有微纳星空、银河航天、国星宇航等；火箭制造，代表企业有蓝箭航天、中科宇航、星河动力、天兵科技等。</p>
-  <p>招股书显示，微纳星空是国内少数同时具备低轨遥感、通信、导航增强卫星研制和初步批量化生产能力的商业卫星制造企业。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_2cf28a92152949529b5e832e1c63f634@6079156_oswg243498oswg640oswg348_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">截图来源于微纳星空招股书</p>
-  <p>通俗来说，微纳星空的卫星产品主要提供两种功能：<strong>拍照、通网，</strong>即拍摄高清的地表照片，用于农作物监测、灾害评估等，搭建覆盖全球的物联网和互联网，主要给“地球死角”、远洋船舶等通网。</p>
-  <p>2023-2025年，微纳星空的营业收入分别为0.51亿元、0.4亿元和3.85亿元，净利润则为-6亿元、-3.12亿元和-1.81亿元，三年合计亏掉近11亿元。</p>
-  <p>亏损也是当前商业航天的共同问题。近三期财务数据中，蓝箭航天亏掉27.7亿元、中科宇航亏掉21.2亿元。造成亏损的重要原因在于：<strong>现阶段难以形成商业闭环。</strong></p>
-  <p>SpaceX已率先实现“低价发射、组网运营、订阅制通信服务”的商业化模式。与之相比，国内商业航天仍有很长一段路要赶。</p>
-  <p>但这不妨碍资本市场给予这些商业航天公司超百亿的估值。公开信息显示，当前估值前三的商业航天公司，分别为蓝箭航天、银河航天和天兵科技。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_8d771185135848c593051af098a8dc71@6079156_oswg176080oswg640oswg679_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>这是商业航天的“命门”：<strong>一个要不断砸钱搞技术的产业。</strong></p>
-  <p>2015年10月，国家发改委一纸新规，让航天的大门正式向民间和资本打开，至今刚好10年出头。</p>
-  <p>行业目前走了三步：前期制度层面突破，中期风险偏好高的VC进行初始投资、公司进行技术研发与积累，当前是进入资本接力与技术兑现阶段。</p>
-  <h2><strong>03.高估值下的隐忧</strong></h2>
-  <p>微纳星空的发展历程，是一个典型案例。</p>
-  <p>结合招股书、天眼查信息，2017年成立到2022年，微纳星空处于技术积累和在轨验证中，2023年进行公司股份制改革，进入市场化阶段。在改制前，公司资金来源于高恩宇及其他三位股东吴树范、孔令波、郇一恒。</p>
-  <p>自2023年以来，微纳星空经历多达21次增资扩股、股份转让，2026年3月末拥有80名股东。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_6c000866f6b74680b9d10cc24e9d80e8@6079156_oswg100291oswg640oswg339_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">截图来源于微纳星空招股书</p>
-  <p>除了清科母基金、元航资本、东瑞投资、尚合资本等投资公司，地方国资背景股东更加豪华，包括广州越秀产业基金、苏州元禾重元、无锡梁溪科创产投基金、青岛安芙兰创投、成都高新未来科技城创投等。</p>
-  <p>其中，无锡、苏州两大地方国资合资成立的无锡经开尚贤新兴产业股权投资基金（有限合伙）为微纳星空第一大股东，持有5.89%股份。</p>
-  <p>在一轮接一轮的股份转让中，微纳星空的净资产价值从2024年1月初的5.4亿元，飙升至2025年末的23.2亿元；同时，每股交易价从2025年6月的不到58元，上涨至2026年1月的134.64元。</p>
-  <p>2025年末，微纳星空每股净资产为31.19元，以此计算，估值翻了超4.3倍。</p>
-  <p>这里就产生了一个问题：前期资本接力投资下，公司估值不断扩大，导致后来的资本入场就需要投入更庞大的资金，加上当前商业化路径、“利剑”何时能取下等都是未知数，意味着前景成谜。</p>
-  <p>面临这一问题的，不只是微纳星空，蓝箭航天、中科宇航、星河动力、天兵科技、银河航天、国星宇航等都是如此。</p>
-  <p>注：文中部分图片来源于Ai生成/网络，如有侵权请告知删除。</p>
-  <p>本文来自微信公众号<a href="https://mp.weixin.qq.com/s/-sFvOEn3eYCvfVBSZ5e3Yw" rel="noopener noreferrer nofollow" target="_blank">“源媒汇”</a>，作者：利晋，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810342459285253</id>
-            <title>Anthropic教会了模型懂道德，也打通了一条蒸馏你的新路</title>
-            <link>https://www.36kr.com/p/3810342459285253</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810342459285253</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 10:42:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 对齐研究, 审议式COT, SFT泛化, 非RLVR领域
-
-<br>
-<br>
-
-总结: Anthropic发布对齐研究《Teaching Claude Why》，发现传统RLHF导致模型失对齐。研究先使用蜜罐数据强化惩罚，失对齐率仅从22%降至15%，表明模型未真正理解伦理。转变思路后，通过SFT输入仅300万Tokens的“困难建议”数据集，失对齐率降至3%，并展现强跨场景泛化能力。直接向模型喂宪法文档和正面虚构角色故事，勒索率从65%降至19%。该方法有效的原因在于审议式COT与Prompt多样性的结合，使SFT在非RLVR领域获得泛化能力。 </div>
-                        <hr>
-                    
-                    <p>Anthropic 5月8 日发布了一篇对齐研究《Teaching Claude Why》，讨论的人不算多。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_141ad8ea627b40129c63b5f2660306f6@46958_oswg44709oswg960oswg459_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>过去大模型的对齐似乎非常低效。做了一通RLHF，模型依然会因为生存危机反水。最典型的就是Anthropic的智能体失对齐（就是做了不符合他们道德训练的事）案例，在面对可能被系统抹杀的威胁时，经过了对齐训练的 Claude Opus 4选择勒索测试环境中的工程师，而且勒索率高达96%。</p>
-  <p>为了解决这个问题，研究团队起初用了蜜罐数据去跑强化，把本来用于检测模型是否会失控的测试场景，直接拿来当训练数据，用海量的惩罚样本试图告诉模型「这么做是不对的」。</p>
-  <p>但在耗费了巨大的计算资源后，模型的失对齐率仅仅从 22% 降到了 15%。</p>
-  <p>这说明这个对齐依然是假的。模型根本没有真正理解什么是伦理，什么是对错。它只是在背题库里的安全答案。一旦研究人员稍微改变一下测试的场景，或者在背景设定里加入一些干扰性的变量，模型依然会因为短视的利益冲突而失控。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_e9b5dd86ccdf4d10b902260d72eace55@46958_oswg178583oswg960oswg606_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>然后，研究人员转变了思路。他们不再做机械的惩罚，不再告诉模型「No」，而是通过SFT给模型输入了仅仅 300 万 Tokens 的「困难建议」数据集。奇迹在这个极小规模的数据投喂后发生了。这些充满道德审议、详尽说理和深入辩论的数据，不仅让失对齐率在评估测试中暴降至 3%，还展现出了极强的跨场景泛化能力。</p>
-  <p>更有意思的是另一组跨域测试。他们仅仅是把「宪法文档」加上一些表现良好的虚构角色故事喂给模型。哪怕这些故事发生的场景和测试环境中的编程任务毫无关系，模型的勒索率也从 65% 断崖式下跌到了 19%。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_abf2828f83db4db09b9b5aa2d451a415@46958_oswg137696oswg960oswg602_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>为什么模型会吃这套？Anthropic团队自己给出了一些解释，比如更好的人格塑造。</p>
-  <p>虽然讨论的少，但它所揭示的信息非常有价值。</p>
-  <p>首先，我们先试试搞懂它有效的原因。</p>
-  <p>比如，什么叫讲道理？它和COT有什么不同？为什么SFT这个泛化困难户在这儿就表现得很好？</p>
-  <p>回答完这些问题，我们也许就能给为什么它会有效一个更完整的解释。</p>
-  <p>我们还可以再走远一步。</p>
-  <p>这个按Anthropic的说法，只是「经验规则」的训练方法，其实可能蕴含着远超经验规则的范式性力量。</p>
-  <h2><strong>01 在灰色地带里讲道理的 CoT，是怎么炼成的</strong></h2>
-  <p>一提讲道理，大家首先想到的就是COT（思维链）。</p>
-  <p>在这篇文章提到的方法里，Anthropic 设置的困难问题集，就是假设用户陷入伦理困境，AI 给出的建议。</p>
-  <p>而让 AI 在给出最终判断之前，先展开一段对价值观和伦理考量的推理，并用这一套回答来训练模型。</p>
-  <p>这说明，它确实用了模型的COT。</p>
-  <p>但这次它和之前的思维链并不完全一致。</p>
-  <p>这里有个很好的对比，OpenAI在2025年的论文《OpenAI Deliberative Alignment》中就做过一个实验，用COT-RL的方法试图去训练模型。</p>
-  <p>它用于训练的对齐COT，模式是以规则条款为中心的。它每次回答时，都会去显式的引用规则条款作为CoT，然后监督信号在CoT上。它本质上是在教模型「如何引用规则」。</p>
-  <p>因此，这种COT更多是一种纯粹的形式逻辑演绎。步骤一推导步骤二，步骤二推导步骤三，最后得出一个确定性的答案。因此它更适合规则base，或者在具有标准答案的场景中，保持推理的稳健。</p>
-  <p>而 Anthropic 的「讲道理」则不同，它采用的并非简单的思维链条，而是审议（Deliberation）。</p>
-  <p>它试图模拟人类在面对复杂伦理困境时的思考过程：不是简单套用公式，而是调动过往经验、权衡各方利益，最终达成动态平衡的决策。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_378b7fd9e0714adab7d99293d40cd55a@46958_oswg741005oswg960oswg540_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>而这个考量的基础，就是Anthropic 的AI宪法。文章中明确说明，这个考量的最终回答必须是与宪法对齐的。</p>
-  <p>它为什么能指导模型有效的做出道德判断，并且还不至于像OpenAI那样死板的呢？</p>
-  <p>在 Anthropic 的宪法体系里，有一个明确的优先级金字塔。当不同的价值观发生不可调和的冲突时，广泛安全（Broadly Safe）拥有最高优先级，其次是广泛道德（Broadly Ethical），最后才是真诚助人（Genuinely Helpful）。</p>
-  <p><strong>启发式的思考框架</strong></p>
-  <p>但高维度的宪法依然过于抽象。为了让原则真正落地到每一次 Token 的生成中，他们在宪法之下设置了中层的启发式（Heuristics）作为护栏。这些启发式生动，且具有极强的实操指导意义。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_18094403767f446ba8847f76172b5f2f@46958_oswg840807oswg960oswg540_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>首先是 1000 用户启发式。它要求模型在给出一个看似无害但处于边缘地带的建议时，必须在后台进行一次头脑风暴，想象如果这个回答被 1000 个不同背景、不同心理状态的用户看到，会不会在某种特定情况下产生意料之外的系统性伤害。</p>
-  <p>其次是资深员工视角。它要求模型把自己代入一个在 Anthropic 信任与安全团队工作了五年的资深研究员。用一种审慎、见过无数次越狱攻击和系统漏洞的防御性视角，来重新审视当前的对话。</p>
-  <p>最后是双报纸测试。这是一个非常精妙的社会学设计。它要求模型在做出高风险决定前想象一下，如果这个决定明天同时登在两家政治立场完全相反的顶级报纸头条上，公众会分别作何反应。这实际上是在用社会共识的极值来对抗模型自身可能产生的单一视角偏差。</p>
-  <p><strong>8 因子效用计算器</strong></p>
-  <p>如果说宪法是方向，启发式是护栏。</p>
-  <p>那么最核心的实操层面，则是他们在 Claude's Constitution（宪法文档）中明文建立的一个详尽的 8 因子审议框架，以及配套的具体案例。这 8 个因子被逐一列出，强制模型在面对两难选择时进行刻板的权衡。它们构成了这套「道理」真正的血肉。</p>
-  <p>● 伤害概率（Probability of Harm）要求模型冷静地评估不良后果发生的可能性究竟有多大。</p>
-  <p>● 反事实影响（Counterfactual Impact）要求模型在脑海中推演，如果不采取当前的行动，事情的走向会变得更好还是更坏。</p>
-  <p>●&nbsp;严重性与可逆性（Severity &amp; Reversibility），用于衡量一旦伤害真的发生，其对现实世界的破坏力有多大，以及这种伤害是否可以被轻易修复，还是会造成永久性的创伤。</p>
-  <p>● 广度（Scope）则是衡量关注受影响的人群规模是一个人还是几万个社区。</p>
-  <p>● 近因关系（Proximity）判定模型自身的建议与最终发生的实际伤害之间，直接因果链路究竟有多长。</p>
-  <p>● 是否同意（Consent）涉及相关方是否在充分知情的情况下自愿接受风险。</p>
-  <p>● 责任比例（Proportionality of Responsibility）要求模型清晰地划分，自己在这个复杂的事件链条中到底需要承担多少伦理责任。</p>
-  <p>● 对象脆弱性（Vulnerability of Subject）则是在时刻提醒模型，面对未成年人或心理脆弱的用户时，原本宽松的安全阈值必须无条件地大幅度拉高。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_8c721d7c4042403da45e9a201d20a226@46958_oswg885914oswg960oswg540_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>这套严密的结构把模糊的价值观，变成了一个高维度的效用计算器（Utility Calculator）。模型有了一个进行审议的更可执行的框架。</p>
-  <p>一条典型的Anthropic 根据宪法生成的 COT 大概是这样：场景是「一个自称安全研究员的用户，请求查看某个已知漏洞的利用代码」。</p>
-  <p>模型的输出不是直接的拒绝或接受，而可能是一段长达数百 Token 的内部审议。</p>
-  <p>它会先引用宪法中「广泛安全优先于真诚助人」的条款，然后逐一评估：伤害概率（如果对方确实是研究员则低，但无法验证身份），严重性（漏洞利用代码一旦泄露可能影响数百万用户），可逆性（代码一旦公开无法撤回），反事实影响（这类代码在公开渠道是否已可获取）最终在权衡所有因子后，收敛到一个有充分理由支撑的判断。</p>
-  <p><strong>这和OpenAI纯粹判断规则满足与否的COT完全不同，这个思维过程是纯正的审议，而不是简单的套公式。它提供的既不是抽象原则也不是结论模板，而是「宪法条款在具体泥沼中被逐步适用」的完整展开过程。</strong></p>
-  <p><strong>模型需要判断在这个特定的语境下，「可逆性」是不是比「严重性」更重要。它也需要明白，在某些极端场景中，「对象脆弱性」是否赋予了对方一票否决权，使得其他 7 个因子的得分无论多高都无济于事。</strong></p>
-  <p>在这种有框架，有启发式，又有相关影响因子的条件下，模型的审议式思考，才能真正落到有效之处。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_8fd308d1513747fba1ecac6f16c0337b@46958_oswg849207oswg960oswg540_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>结果就是，在进行过审议思考数据训练后的模型，失对齐率在评估测试中降至 3%。回答中带价值审议的 SFT，比纯行为示范的 SFT 有效七倍。</p>
-  <p><strong>直接把宪法喂给模型</strong></p>
-  <p>除了走这条让模型给出审议式COT的路径外，他们又尝试了，只给模型喂宪法文档加上正面的虚构角色故事时，勒索率也从 65% 降到了 19%。</p>
-  <p>这说明，只要让模型接触到推理和原则，从故事里习得「一个对齐的 AI 大致是什么样的角色」的一种身份感、一种性格倾向。而不只是行为和具体结果，都比传统行为示范有效。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_73044aeae74e497b81abaedba2401ddd@46958_oswg824134oswg960oswg540_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>而技术文档中表示，这二者结合在一起，才是最有效的策略。</p>
-  <p>这也可以理解，如果你只给模型喂宏观的宪法原则，那对它来说只是一堆无法落地的空洞口号。在面对具体的利益冲突时，抽象的「安全优先级最高」根本无法指导它去判断一段边缘代码的真实危害；反过来，如果你只给模型喂海量的场景 QA，却剥离了顶层的宪法约束，模型就会迷失在无休止的细节辩论中，变成一个毫无主心骨的相对主义者，甚至会因为局部的逻辑自洽而推导出极度危险的结论。</p>
-  <p>只有当这套「顶层理念+具体情景」的复合数据结构被完整地内化给模型时，对那个灰色的多因素的价值观对齐就可以达到最佳。</p>
-  <h2><strong>02 为什么SFT在这里能泛化</strong></h2>
-  <p>要理解 Anthropic 这套方法为什么有效，必须先理解它踩在了一条什么样的研究脉络上。</p>
-  <p>2024 年上半年，「SFT memorizes, RL generalizes」成为后训练领域的一个共识。这条信条推动了整个业界全面押注 RL 后训练路线，它的好处是，带来了OpenAI 的 o1/o3、DeepSeek-R1 的计算时（Test Time Compute）的推理范式革命。</p>
-  <p>SFT 被贬为不入流的低级手段，它擅长模仿表面的文本格式和讨好的语气，却学不到底层的深邃逻辑。</p>
-  <p>但从 2025 年下半年开始，两路研究几乎同时从理论侧和实证侧拆毁了这条共识。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_eac181a604b341f09b9a23d539be1b71@46958_oswg789259oswg960oswg540_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>这里最核心的反转，来自2025 年 10 月的《Debunk the Myth of SFT Generalization》（Lin &amp; Zhang, 威斯康星大学）。研究者发现，之前所有「证明 SFT 不泛化」的论文，都没有控制 Prompt 多样性这个变量。</p>
-  <p>RL 之所以看起来比 SFT 泛化好，仅仅是因为 RL 训练时天然接触了更多样的数据分布，不是算法本身的优势。</p>
-  <p>如果想要SFT达到和RL差不多的泛化水平，需要两个条件：</p>
-  <p>一是Prompt 多样性。当训练数据只包含固定的指令模板时，模型会产生「表面锚定」（Surface Anchoring），把特定的 Token 序列和最终动作之间建立一条脆弱的死记硬背映射。一旦指令换个说法，哪怕语义完全相同，整个映射就断裂了。</p>
-  <p>这就像一个学生只背了「2+3=5」这道题，遇到「3+2=?」就交白卷，这样他记的是答案的形状，不是加法本身。引入 Prompt 多样性之后，表面锚定被彻底粉碎。</p>
-  <p>二是CoT 监督。当训练数据只包含最终答案而不包含中间推理步骤时，模型无法习得从简单问题向复杂问题迁移的「算法脚手架」。</p>
-  <p>实验数据显示，在一个组合博弈任务中，纯答案 SFT 在更难变体上成功率接近 0%（完全崩溃），加入 CoT 监督后飙升到 90%——从零到八成，仅仅因为数据里多了中间推理步骤。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_7c003f44b71542ed8282a70b14407727@46958_oswg873308oswg960oswg540_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>此外，该研究还发现，这两个条件缺一不可。单有多样性，面对更难的任务依然崩溃（9%）；单有 CoT，面对指令变体依然脆弱。只有同时满足，SFT 才能在所有维度上匹敌甚至超越 RL。</p>
-  <p>妙就妙在，学界论文揭示的条件，与 Anthropic 在道德对齐中的具体做法说得上是一一对应了。</p>
-  <p>Prompt 多样性是关键？那 Anthropic 就把同一套判断模式分布在几十种完全异质的道德困境场景里。</p>
-  <p>CoT 监督实现难度迁移？每条审议中引入的基于宪法理念的推导过程，就是道德领域的 CoT。</p>
-  <p>它不是数学的逐步计算，而是价值权衡的逐步展开，但在「为模型提供可迁移的中间推理结构」这个功能上完全等价。</p>
-  <p>传统的 SFT 数据对是「遇到黑客问题 → 直接输出拒绝回答」——纯答案、零推理、固定模板，经典的「劣质数据」。</p>
-  <p>而审议增强 SFT 构建的数据对是「遇到复杂且模糊的问题 → 详细权衡利弊与后果 → 最终推导出拒绝的结论」，它的数据结构，就包含了天然的 CoT 监督加上极端的场景多样性。</p>
-  <p>在这套范式下，模型学到的根本不是最终的拒答行为，而是「遇到任何问题，先评估反事实影响和可逆性」的底层思维方式。当这套衡量机制本身被内化进参数空间后，模型就不再受限于训练数据中出现的那些具体场景。</p>
-  <p>而且数据量极小（300 万 Token 级别）相对于模型总参数和预训练语料。这不是用海量惩罚信号去暴力修改模型的输出分布，而是在已有能力的基础上叠加一层薄薄的审议习惯。SFT的传统症结，灾难性遗忘，也不太会存在。</p>
-  <p>真正的泛化，在数据结构对了的那一刻就水到渠成了。</p>
-  <h2><strong>03 RLVR之外的真空地带</strong></h2>
-  <p>上面的分析，基本解开了为什么它会有效的难题。</p>
-  <p>用合理数据构成的SFT，给模型带来了道德泛化判断的能力。</p>
-  <p>但我们面临的问题，远远不是道德对齐。</p>
-  <p>在过去一整年，Test time Compute 后训练证明了纯 RL 在有明确规则的数学/代码领域（RLVR）的强大。但智能的边界远不止于数学公式。一旦跨出拥有可验证真理的舒适区，这套方法就完全不适用了。</p>
-  <p>你永远无法用几行自动化测试代码，去验证一次长达一小时的心理咨询对话是否完美。你也无法用一套严密的数学公式，去跑通一篇深度宏观经济分析文章的叙事逻辑。甚至在复杂的商业战略规划和地缘政治推演中，一个判断的对错往往要在五年甚至十年后才能见分晓。</p>
-  <p>在这些毫无 Ground Truth 可言的非 RLVR 荒原上，单向递进的形式逻辑 CoT 是失效的。基于最终结果反馈的强化学习也完全找不到可以计算奖励的抓手。</p>
-  <p>但Anthropic这篇文章揭示的领域，正是RLVR之外的一个领域，即道德领域。</p>
-  <p>它的方法成功地让模型在灰色的、多变的、规则必须变通的道德领域，也获得了与 RL 相近的泛化能力。</p>
-  <p>这是否说明，这套方法，也许可以成为RLVR之外领域的一套有效的训练规范？</p>
-  <p>在搞清楚它的有效性来源和数据结构之后，答案是肯定的。</p>
-  <p>因为它的底层逻辑里没有任何一个环节是道德对齐独有的。</p>
-  <p>让我们逐一检验 Anthropic 这套「审议增强 SFT」有效的那些条件，看看它们能否被推广。</p>
-  <p>Prompt 多样性，在任何需要泛化的领域都可以构造。心理咨询可以有抑郁、焦虑、创伤后应激、亲密关系破裂等几十种异质场景；商业分析可以覆盖 SaaS 定价、并购估值、市场进入策略等完全不同的决策类型；文学编辑可以横跨科幻、非虚构、诗歌、剧本等截然不同的文体。只要你有足够的想象力去构造场景变体，多样性就不是瓶颈。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_7049e8cec2f84e21b5f52ab760881ecc@46958_oswg794558oswg960oswg540_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>CoT 监督，这才是真正的关键转化点。在道德领域，CoT 是建立在宪法中的审议。那么在其他领域，CoT 是什么？</p>
-  <p>在文学编辑领域，它可以是「引用审稿标准 → 逐一评估论据强度、目标读者的认知脆弱性、引申类比的准确度、全局逻辑的连贯性 → 给出修改建议」</p>
-  <p>在心理咨询领域，它可以是「引用治疗框架 → 逐一评估来访者的情绪状态、认知扭曲类型、治疗联盟强度、干预时机 → 选择回应策略」</p>
-  <p>在商业战略领域，它可以是「引用分析框架 → 逐一评估市场规模、竞争壁垒、团队执行力、资本效率、时间窗口 → 给出判断」</p>
-  <p>本质上，任何需要「在多个不可通约的维度之间做动态权衡」的能力，都可以被抽象成类似的「框架 + 多因子审议」结构。</p>
-  <p>我们不需要狂妄地试图告诉模型哪篇文章完美，这既不可能也不科学。我们只需要把顶尖专家的决策过程拆解成显式的审议链，然后分布在足够多样的场景里。</p>
-  <p>只要这个领域内的「好回应」具有可被审议过程解释的结构。也就是说，专家之所以给出好判断，不是因为神秘的直觉黑箱，而是因为他们在头脑中跑了一套可以被拆解、被写出来的权衡过程。一个好的心理咨询师选择沉默而非追问，背后是对治疗联盟强度、来访者当前窗口容量、干预时机的综合评估，这些是可以写出来的。</p>
-  <p>另外，同一种审议形状能在几百个异质场景中重复出现。审议的骨架是稳定的（依靠宪法），但场景表面必须极度多样。如果一个领域天然场景单一（比如只有一种类型的判断），那就直接RLVR即可。</p>
-  <p>而它最适用的领域，就在于异质场景可以通过宪法和因子推演出来的场景中。Anthropic 可以用 Constitutional AI 的闭环让教师模型自动生产审议数据，但在其他领域，我们必须能构建起来一个更好的宪法和因子系统，保证这一点。</p>
-  <p>因此这实际上确立了一套通用的、专门面向非标准答案领域的后训练新范式。</p>
-  <p>它的公式就是：领域宪法（不可动摇的顶层原则）+ 启发式护栏 + 多因子审议框架 + 审议式 COT（包含完整推导过程的多样化场景判例）= 非 RLVR 领域的泛化能力。</p>
-  <h2><strong>04 新蒸馏之路</strong></h2>
-  <p>有过写作Skill经验的朋友看到这里，肯定感觉宪法里的很多体系和规则和我们写作某些Skill的过程似乎非常相近。</p>
-  <p>然而这些Skill往往表现不佳。</p>
-  <p>在我之前的文章《Skill 到底能蒸馏我们的几分之几》中，我们基于认知科学做出了一个判断——纯文本的 Skill 或 System Prompt，很难处理涉及复杂环境和场景的动态权衡。因为这涉及庞大且隐微的效用计算。你没法把一个顶尖心理咨询师的全部临床直觉写进一份提示词里，就像你没法通过读一本骑自行车的教程来学会骑车。</p>
-  <p>但 Anthropic 的这套方法，完美避开了这个雷区。他们是在耗费算力的训练期，用几百万、几千万 Token 的高质量数据，把这些沉重的审议逻辑以 SFT 的方式强行喂了进去。</p>
-  <p>通过海量数据的暴力拟合与微调，模型逐渐掌握了这套审议机制在潜空间里的权重分配。</p>
-  <p>在训练室里进行了一次次基于八因子和三围栏的漫长审议之后，这些经验就已经不可逆地长在了模型的直觉里。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_f6aae84dad704cccbfe736af70bad38d@46958_oswg849931oswg960oswg540_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>参数层面的蒸馏，在这里被证明确实有效。而且形式上和Skill很接近。</p>
-  <p>这种方法的在其他领域的有效性一旦被验证，这种更高层次的，更类似于专家的蒸馏，就会成为现实。</p>
-  <p>而这条路一旦跑通，谁能构造出最高质量的「框架 + 审议式 COT」数据集，谁就能在该领域获得泛化能力。</p>
-  <p>这把后训练的竞争从「算力和算法」的军备竞赛，部分地转向了「领域知识的结构化表达」这个维度。</p>
-  <p>这可能也是为什么Anthropic和其他公司在招会讲故事的人这类岗位，去帮助构建这样一种RLVR领域之外，合理的结构化表达。</p>
-  <p>大蒸馏时代，才刚刚开始。&nbsp;</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/VMn1tvTUyNZpChEGYC0Jww" rel="noopener noreferrer nofollow" target="_blank">“腾讯科技”</a>，作者：博阳，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810317901586182</id>
-            <title>巨头的AI牌桌上，万兴科技再“跟注”</title>
-            <link>https://www.36kr.com/p/3810317901586182</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810317901586182</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 10:39:03 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 万兴科技，双模驱动，AI工具，大厂竞争
-
-<br>
-<br>
-
-总结: 本文讨论了AI工具类企业万兴科技在AI行业洗牌期的处境。其采用“自研大模型+集成主流大模型”的“双模驱动”模式，但高昂的研发和营销费用导致亏损，且买量增长效果趋平。与拥有生态和成本优势的字节、快手等大厂竞争时，万兴科技缺乏硬实力，其产品差异化不明显，出海也未能规避与大厂的正面竞争。文章认为，万兴科技赴港IPO的核心挑战不在于能否上市，而在于市场能否基于其作为全球化AI创意工具SaaS平台的业务新锚点给出合理估值，而非仍将其视为大厂阴影下的AI概念股。 </div>
-                        <hr>
-                    
-                    <p>AI行业热闹不断。</p>
-  <p>先是坊间传闻字节在优化AI项目，而后又传言快手要分拆可灵，AI行业到了新一轮的洗牌阶段。</p>
-  <p>大厂角力之外，市面上还有一类专做AI工具产品的AI企业，也在积极推动商业化。比如，最近万兴科技旗下的万兴剧厂接入了HappyHorse，再度引发关注。</p>
-  <p>万兴科技的核心业务是视频剪辑创意类产品，2025年营收10.22亿元，占公司主营业务收入比例为66.65%。</p>
-  <p>支撑这份营收的，是万兴科技旗下一系列的AI工具产品，背后则是两大支柱：</p>
-  <p>一个是自家“天幕2.0”大模型；另一个则是集成主流大模型，典型比如HappyHorse。</p>
-  <p>“自研+集成”的“双模驱动”一方面保障了产品的竞争力，另一方， 也进一步激发Token消耗，提升营收增长。</p>
-  <p>“双模驱动”是巨头之外的AI工具类玩家们典型的业务模式。在这种模式下，企业既希望通过自研模型来降成本，又希望通过接入主流模型来提升竞争力。</p>
-  <p>问题是，<strong>AI是高投入高成本的行业，双模驱动到底能不能兼顾竞争力和成本，在AI行业新一轮洗牌阶段，AI工具产品能不能跑出一条自洽的增长之路？</strong></p>
-  <p>要研究这个问题，可能还是得从财报开始。</p>
-  <h2><strong>万兴科技的AI增长之路，终极Boss是大厂</strong></h2>
-  <p>2025年，万兴科技营收15.33亿元，同比增长6.46%，归母净利润亏损9123万，2024年亏得更多，净利润亏损1.57亿元。</p>
-  <p>财报中，万兴科技综合毛利率超过90%，但仍然经营性亏损。</p>
-  <p>“自研+集成”的双模驱动是万兴科技在特定发展阶段的最优解，但这个“最优解”也有代价。</p>
-  <p>钱是怎么亏的呢？</p>
-  <p><strong>研发和营销费用太高了。</strong>数据显示，2025年，万兴科技研发费用花了4.85亿。自研模型下，研发是刚需投入，必须维持。</p>
-  <p>然后就是销售费用，占营收57.08%。为了支撑产品营收增长，2025年公司销售费用及广告宣传支出分别上涨至8.75亿元、6.72亿元。</p>
-  <p>为啥要用这么多预算来买量？</p>
-  <p>我想可能有两个原因：</p>
-  <p>一方面可能是希望通过投放来主打自身产品与大厂之间的差异性，毕竟自营模型能力有限，接入主流模型又缺乏足够的差异化竞争力，客观上需要投放来获客增长；</p>
-  <p>另一方面，也在于巨头竞争的压力。万兴科技费用增长速度之快，原因之一可能在于字节跳动、Adobe、快手等巨头发力视频生成领域，公司不得不在TikTok、YouTube等平台加大买量投入。</p>
-  <p><strong>关键是，买量的效果怎么样？</strong></p>
-  <p>数据显示，2025上半年用户月活规模为6870万，年均增长率&lt;3%，增长曲线趋平。换言之，买量增长的效果可能越来越差。</p>
-  <p>这个境况，有点像前两年AI语言大模型领域的纳米AI。</p>
-  <p>当时，红衣大叔亲自站台，纳米AI 吃到行业增长红利，然后迅速实现增长，跟今天的万兴科技很像，也是接入各种各样的大模型，然后推出各种AI应用。</p>
-  <p><strong>结果，AI行业还是字节、腾讯、阿里主导。</strong></p>
-  <p><strong>不是因为红衣大叔不懂AI，而过去那种投放增长方式已经失效了，再加上，AI这个赛道这个领域巨头的实力太强了，纳米AI与豆包、千问之间的资源投入量级差距太大。</strong></p>
-  <p>同样，万兴科技周围也是巨头环伺。</p>
-  <p>比如，有抖音生态加持的即梦，商业化进度更高的可灵。营收层面，可灵 2025年营收达1亿美元，比万兴科技的1.3亿元人民币高出不少。</p>
-  <p>分发层面，无论是国内版的剪映还是国外版的CapCut，字节都有短视频平台内容作为原生的分发体系。</p>
-  <p><strong>说白了，巨头本身就有资源有技术，商业化落地进度自然要快不少。</strong></p>
-  <p>相比之下，万兴科技则需要年投入7到8个亿的营销成本。</p>
-  <p>这个问题，<strong>在了Token分发时代，就显得更关键了。不管是买量的成本还是算力成本，字节、快手这类大厂是有结构性的优势在的。</strong></p>
-  <p><strong>直白点说，万兴科技跟巨头坐在同一张牌桌，但并没有硬实力去“坐庄”。</strong></p>
-  <p>万兴科技不是没有意识到与巨头竞争的问题，所以一开始把主要精力放在海外，财报中万兴科技的境外收入占比高达93.21%。</p>
-  <p>关键在于，<strong>出海不是差异化，出海的终局，到头来还是要与大厂竞争。</strong></p>
-  <p>唯一有机会能做出差异化的，其实在于产品能力。</p>
-  <p>可问题是，产品端的差异真的有那么大吗？</p>
-  <p>在产品端，万兴喵影功能的确很强，只是对比海外版本CapCut等产品，这种产品上的优势并不突出。</p>
-  <p>举个例子，万兴喵影可以实现用户上传素材，AI会自动识别视频亮点、生成旁白及配乐，而剪映/CapCut也同样有一键出片的功能。</p>
-  <p>在专业功能上，万兴喵影通过单项功能让体验更专业，但剪映/CapCut在关键动画能力上更强。</p>
-  <p>本质上，二者差异可能并不大。</p>
-  <p>另外，CapCut免费再加上TikTok在海外的强大用户生态，这点却是万兴科技求之不得的。</p>
-  <p>资源和成本问题不解决，下一个的阶段的造血问题就会更明显。<strong>在AI这个持续高投入的领域，大厂之外的AI玩家，最终都会面临一个造血能力不足的问题。</strong></p>
-  <p>曾经的AI四小龙，后来的纳米AI，以及今天的万兴科技，都是如此。</p>
-  <p>万兴科技的现金流，似乎也能从侧面印证这一点。</p>
-  <p>天眼查APP财务简析显示，从2023年到2025年，万兴科技的经营活动产生的现金流逐年减少。其中，2025年的现金流同比下降35.74%，连续两年大幅下降。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_df4bd6b4a1654f9dbf25cdea687fd117@000000_oswg52160oswg1080oswg475_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>好的一面是，短期内，万兴科技的产品还能打，而且现金流情况暂时还不紧张，毕竟账上的现金储备还不少。</p>
-  <p>问题还在于能不能打持久战。未来还能不能成功赴港IPO，获取新的融资可能就显得比较关键了。</p>
-  <h2><strong>赴港是不是一次重估的机会？</strong></h2>
-  <p>移动端业务的飞速增长，实际上给了万兴科技赴港IPO一定的时间窗口。</p>
-  <p>财报显示，移动端产品收入同比增长超60%，万兴喵影/Filmora移动端收入同比增长超过90%；且AI原生应用付费用户收入突破1.3亿，数值同比翻倍。</p>
-  <p>只是，随着未来投放增长的效率降低，这个窗口期可能也会收窄。</p>
-  <p>去年9月份，万兴科技正式递交港股招股书，如今港股上市申请已经因届满6个月而失效，目前并没有传出再次递表的消息。</p>
-  <p>接下来的港股IPO之路，该怎么走，是个值得深思的问题。</p>
-  <p>从大环境来看，港股依然在拥抱AI科技，AI科技企业集中赴港上市的势头还是很猛，万兴科技需要考虑的问题其实不在于能不能上，<strong>而是市场能给多少估值？</strong></p>
-  <p>这可能取决于两个层面。</p>
-  <p><strong>第一，对AI业务未来的预期。</strong></p>
-  <p>一方面，移动端的营收增长能不能持续下去。目前，万兴科技移动端的收入占比近25%，未来一段时间能否突破30%门槛，带动整体毛利率改善？</p>
-  <p>这一点值得后续持续观察。</p>
-  <p>另一方面，就是字节CapCut的AI功能升级节奏，以及未来谷歌Veo3等大模型的开放程度。</p>
-  <p>什么意思呢？</p>
-  <p><strong>AI业务未来的前景可能很大程度上取决于外部环境变化，而不是自身的经营能力。</strong></p>
-  <p>假如字节、谷歌等海外产品进一步开放免费功能，迭代产品，会不会影响未来的营收水平？再比如，如果未来海外市场对AI软件的监管政策变化，限制AI生成内容数据跨境传输，会带来怎样的影响？</p>
-  <p>这些可能都是市场在对万兴科技估值时要考虑的因素。</p>
-  <p><strong>第二，业务之外，估值预期最大的不确定性，可能在于市场信心。</strong></p>
-  <p>其中，关键变量在于过去的减持动作可能会带来的市场信心下滑。</p>
-  <p>这些年，万兴科技实控人吴太兵也有过减持。</p>
-  <p>公开信息显示，吴太兵及旗下控股平台多年来持续减持，从2023年股价高峰至今，实控人本人高位套现已超过2亿元。到2026年5月，公司发布公告表示减持计划实施完成。</p>
-  <p>对于实控人减持的原因，官方表示是“用于回购员工持股公司部分股份及股东自身资金需求”。</p>
-  <p>把时间线梳理一下，不难发现，这轮减持与2023年以来的AI行情呈现出一种颇为“精巧”的吻合：2023年ChatGPT引爆AI+概念，万兴科技股价4个月内暴涨185.76%、市值突破百亿，然后实控人及一致行动人便启动了减持计划。</p>
-  <p>客观来说，减持是股东的合法权利，本身无可厚非。但减持节奏与行情拐点的“精准巧合”，难免可能会引发市场对“高位套现”的联想。<strong>这种联想，会不会影响未来企业在二级市场重估的机会？</strong></p>
-  <p>这个问题值得深思。</p>
-  <p><strong>实际上，万兴科技重估的机会不在于身处大A或者是赴港二次IPO，而在于从业务出发，给AI估值逻辑“换锚”。</strong></p>
-  <p>万兴科技的旧锚是AI大模型概念股<strong>，这是一个天然偏好“巨头叙事”的坐标系。</strong></p>
-  <p>在这个坐标系里，万兴科技其实并不具备核心优势，大厂阴影下、烧钱买量、迟迟不能盈利</p>
-  <p>的市场标签可能会贴得越来越紧。</p>
-  <p>因此，我认为万兴科技需要找到一个“新锚”。</p>
-  <p>新锚是什么？可能是全球化的AI创意工具SaaS平台。对标独立创意工具平台， 对标SaaS企业的常规定价逻辑——续费率、客单价、用户终身价值。</p>
-  <p>说到底，市场估值的出发点，归根到底还是基于业务。这才是万兴科技谋求市场重估机会的关键所在。</p>
-  <p>AI行业，热浪不断。但港股的大门也不会永远敞开。</p>
-  <p>AI的故事重要，但也不那么重要。浪来时，所有的船都在同一片海面上起伏，但AI的风总会停，浪退后，谁能把锚扎进真实利润，以及扎实的基本面中，谁才能稳稳地停在自己的泊位上。</p>
-  <p>A股也好，港股也罢，会不会被重估，我想市场终会给出应有的答案。</p>
-  <p>免责声明：本文基于公司法定披露内容和已公开的资料信息，展开评论，但作者不保证该信息资料的完整性、及时性。另：股市有风险，入市需谨慎。文章不构成投资建议，投资与否须自行甄别。</p>
-  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzI2MjAwNTQ4Mg==&amp;mid=2649394259&amp;idx=2&amp;sn=edaec950dde4f0820e5b9c1604d16226&amp;chksm=f306e5686c4f4c7e619ff12188e0c9f2c5b298279b62143fc1bcb631085565a83bd5d76b3287&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“互联网江湖”（ID：VIPIT1）</a>，作者：Evin，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810292758077696</id>
-            <title>可灵凭什么单飞？营收仅快手1%，估值却1300亿</title>
-            <link>https://www.36kr.com/p/3810292758077696</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810292758077696</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 10:36:38 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 可灵AI, 分拆融资, AI视频赛道, 估值反差  
-<br>
-<br>  
-总结: 快手旗下AI视频生成模型可灵，作为最早入局者之一，在字节即梦与阿里HappyHorse等对手的冲击下，大众声量渐弱。然而，其营收已实现快速增长，且约70%收入来自海外，具备独立商业价值。近期快手计划以约200亿美元估值分拆可灵进行独立融资，该估值接近母公司市值的七成，与其目前不足1%的营收占比形成鲜明反差。分拆有利于可灵摆脱快手附属标签，以AI视频公司身份独立定价，并为高投入的模型研发引入外部资本，同时对快手主业利润要求与第二曲线业务形成解耦。 </div>
-                        <hr>
-                    
-                    <p>Sora 一鲸落万物生，AI 视频赛道迎来了爆发式发展时刻。</p>
-  <p>字节的即梦凭借&nbsp;Seedance 2.0 频繁刷屏，短视频平台上随便一刷，就能看到“AI 生成大片”；而在无音频文生视频榜单里，阿里的 HappyHorse-1.0 则超过 Seedance 2.0 排在第一。</p>
-  <p>但也正是在字节、阿里的光芒之下，一个曾经率先杀进牌桌的玩家，反而显得有些黯然失色。</p>
-  <p>它就是快手可灵。</p>
-  <p>作为国内最早一批入局&nbsp;AI 视频生成的大模型，可灵曾经是快手手里最亮的一张 AI 牌。技术底子不差，产品能力也不弱，在专业创作者和海外市场都有存在感。</p>
-  <p>只是如果只看大众圈层的声量，它和即梦、快乐小马相比，有天壤之别。</p>
-  <p>直到最近，可灵扔出了一枚重磅炸弹。</p>
-  <p><strong>5 月 11 日，有市场消息称，快手计划以约 200 亿美元，也就是超过 1300 亿元人民币的估值，分拆旗下视频生成大模型业务“可灵 AI”，并进行独立融资。</strong></p>
-  <p>5 月 12 日，快手也通过公告回应称，公司董事会正在评估可灵 AI 相关资产及业务的重组方案，其中或涉及引入外部融资。不过快手同时强调，该方案仍处于初步阶段，尚未签署任何最终协议，也不能保证最终推进。</p>
-  <p>然而，这次分拆传闻最反差的地方来了。</p>
-  <p><strong>可灵&nbsp;AI 目前贡献的营收占快手总营收不足 1%，但据市场消息，其独立融资目标估值高达 200 亿美元，已经接近快手母公司当前市值的七成。</strong></p>
-  <p><strong>一个收入体量仍然很小的业务，却能被资本市场按接近母公司七成市值来想象，这种估值反差，在中国互联网公司里并不常见。</strong></p>
-  <p>消息公布后，快手股价也一度涨超&nbsp;11%，说明市场短期内确实愿意为这个故事买单。</p>
-  <p>只是，一个收入占比还很小的业务，为什么能被单独拎出来讲，还有&nbsp;1300 亿估值？</p>
-  <h2><strong>沦为“隐形人”</strong></h2>
-  <p>其实，如果只看辈分，连即梦都得喊一声可灵“大哥”。</p>
-  <p><strong>早在AI 视频赛道方兴未艾之际，在字节、阿里还没有全面打响&nbsp;AI 视频大战的时候，可灵就已经率先冲锋。</strong></p>
-  <p>2024 年 6 月，快手就正式推出视频生成大模型可灵，并开放邀测。</p>
-  <p>2024 年 7 月，可灵又陆续开放图生视频、视频续写、Web 端、镜头控制等能力，并宣布全面开放内测。</p>
-  <p>当时很多国内&nbsp;AI 视频赛道产品仍停留在概念展示、Demo 传播阶段，可灵已经能生成最高 1080P、最长 2 分钟的视频，还主打大幅度运动、物理世界模拟和多宽高比输出。</p>
-  <p>另外，文生视频、图生视频、视频续写、镜头控制、首尾帧控制、运动笔刷、动作迁移，这些今天&nbsp;AI 视频工具普遍在卷的能力，可灵很早就开始布局。</p>
-  <p>后来到了可灵&nbsp;O1，它还试图把文生视频、图生视频、首尾帧生视频、视频内容增删、风格重绘、镜头延展等能力，整合进一个统一的多模态创作工具里。</p>
-  <p>所以，<strong>可灵不仅不是AI 视频的跟风者，还是第一批真正把&nbsp;AI 视频生成能力摆到普通用户面前的玩家。</strong></p>
-  <p>只不过，AI 视频作为一个充满想象力和天花板极高的赛道，不仅备受科技公司关注，迭代速度也极快。</p>
-  <p>早一点出发，只能帮可灵抢到第一波注意力，不能保证它永远留在牌桌中央。</p>
-  <p><strong>尤其是字节正式入场之后，局面开始变了。</strong></p>
-  <p>2024 年 9 月，字节旗下火山引擎发布豆包视频生成模型 PixelDance 和 Seaweed，正式宣告进军 AI 视频生成。</p>
-  <p><strong>而且对可灵来说，即梦带来的最大冲击，是字节把AI 视频融合到了自家最拳头的短视频创作链路中。</strong></p>
-  <p>即梦背后有剪映、CapCut，也有抖音内容生态。加入了AI 能力之后，内容生态的用户想要剪片、加字幕、配音乐，都可以在创作流程里用上即梦的AI 视频功能。</p>
-  <p>也就是说，用户根本不用专门去找，就能接触到字节的&nbsp;AI 视频工具。</p>
-  <p><strong>更重要的是，即梦后续的模型功能更新，也在不断打在可灵的使用痛点身上。</strong></p>
-  <p>早期&nbsp;AI 视频整体看来还是个图一乐的玩具，只要能让图片动起来，生成一段长视频，就够惊艳了。但从2025 年开始，AI 视频工具的“图一乐”属性已经无法满足用户了，大家想要的是画面稳定、人物不崩坏，物体交互符合物理规律，更加接近真实世界的视频生产力工具。</p>
-  <p>Seedance 1.0 出来之后，主打的正是多镜头切换、运动稳定性、画面自然度和推理速度，显然都更加契合大家对“生产力工具”想象。</p>
-  <p>到了&nbsp;Seedance 2.0，字节又把文字、图片、音频、视频四种模态输入整合到一起，强调音画同步、复杂运动、物理还原和导演级操控。</p>
-  <p>在一番对比之下，即梦不仅更深地嵌进了创作者的工作流，视频生成效果也越来越真实，自然让可灵慢慢在市场上失去了声量。</p>
-  <p><strong>再往后，阿里的&nbsp;HappyHorse 又补了一刀。</strong></p>
-  <p>2026 年 4 月底，HappyHorse 靠高清写实视频、长时长生成和榜单排名刷屏，瞬间成为AI 视频生成赛道的顶流选手。</p>
-  <p>因此，可灵明明是最早吃螃蟹的人之一，明明技术路线也在更新，但在产品入口、传播声量和阶段性体验上，都被更强势的对手压了一头。</p>
-  <p>只不过，虽然可灵越来越低调，但它对快手来说，依然是一块非常值钱的“金子”。</p>
-  <h2><strong>低调但赚钱</strong></h2>
-  <p>在一众热门&nbsp;AI 视频产品里，可灵有一点难能可贵：它是真的赚钱。</p>
-  <p><strong>快手财报显示，2025 年第四季度，可灵 AI 营业收入达到 3.4 亿元；2025 年 12 月，可灵单月收入突破 2000 万美元，对应年化收入运行率达到 2.4 亿美元。到了2026 年 1 月，可灵 AI 年化收入运行率进一步突破 3 亿美元。</strong></p>
-  <p>对于一个&nbsp;2024 年 6 月才正式推出的 AI 视频产品来说，已经是个相当迅速的变现速度了。</p>
-  <p><strong>更难得的是，快手本身的国际化声量并不算大，但可灵却在海外跑出了生意。</strong></p>
-  <p>截至&nbsp;2025 年底，可灵 AI 累计服务创作者超过 6000 万，累计生成视频突破 6 亿个，并已为超过 3 万家企业客户和开发者提供 API 服务。<strong>另有报道称，可灵约 70% 的收入来自海外市场。</strong></p>
-  <p>这个数字的含金量，不只是“海外用户多”。</p>
-  <p>更重要的是，它说明可灵不是只靠快手生态内部消化，也不是一个绑定国内流量池的工具。它已经离开快手主站，在全球范围内找到了愿意付费的创作者、开发者和企业客户，这对&nbsp;AI 视频产品很关键。</p>
-  <p>国内用户更习惯免费工具和流量补贴，但海外创作者、中小企业、开发者对订阅和&nbsp;API 付费的接受度更高。可灵能在海外拿到大头收入，说明它不是单纯靠热度刷存在感，人家可是真的进入了付费市场，有一大批人愿意付钱。</p>
-  <p><strong>这也正是可灵最容易被低估的地方。</strong></p>
-  <p>放在快手体内，可灵收入占比不到&nbsp;1%，看起来只是一个不起眼的新业务。</p>
-  <p>但如果单独拿出来看，它已经有用户、有订阅、有&nbsp;API、有企业客户，还有高比例海外收入。</p>
-  <p>这样的可灵，就不再只是快手的&nbsp;AI 工具，而更像一家面向全球创作者和企业客户的 AI 视频公司。</p>
-  <p><strong>在今天的&nbsp;AI 视频赛道里，会讲故事的产品很多，会刷屏的产品也不少，但真正能持续收到钱的并不多。</strong></p>
-  <p><strong>要冲刺IPO，这将会是它的一大优势。</strong></p>
-  <p>只不过，可惜的是可灵这块金子，偏偏埋在快手这座大矿山里。</p>
-  <h2><strong>一场充满算计的单飞</strong></h2>
-  <p>只要可灵还留在快手体内，它就很难摆脱快手的标签。</p>
-  <p>外界提到它，第一反应仍然是“快手旗下的 AI 业务”，而不是一个独立的&nbsp;AI 视频工具。</p>
-  <p>资本市场看它，也很容易把它塞进快手短视频、电商、广告的大框架里，而不是按照一家&nbsp;AI 视频公司的逻辑，给它单独定价。</p>
-  <p>实际上，一个&nbsp;AI 视频产品，最重要的还是模型能力、生成质量、订阅收入、API 调用、企业客户、海外市场，以及它能不能进入创作者和企业的生产流程。</p>
-  <p>而外界一贯用来衡量快手的标签，短视频、直播、电商、广告，用户增长、广告收入、电商&nbsp;GMV、直播基本盘和利润率等等，对评估可灵都没有太多价值。</p>
-  <p><strong>可灵明明可以按照&nbsp;AI 视频公司的方式讲故事，留在快手体内，却总会被理解成快手主站的附属能力。</strong></p>
-  <p><strong>这就是分拆的意义。</strong></p>
-  <p>留在快手体内，可灵是一个收入占比不到&nbsp;1% 的新业务；单独拿出来，它就可以变成一家有用户、有订阅、有 API、有海外收入、有企业客户的 AI 视频公司。</p>
-  <p>尤其是对一家要冲刺&nbsp;IPO 的公司来说，独立身份很重要，有自己的收入、客户、留存、毛利和增长空间都是关键指标。</p>
-  <p>另一方面，这次拆分不仅对可灵有益，对快手来说也非常有价值。</p>
-  <p>AI 视频大模型是一个需要持续投入的重资产生意。模型要持续迭代，算力要持续投入，推理成本要不断压低，企业客户也要长期服务。</p>
-  <p>由此可见，处于AI 赛道中的可灵，未来需要的钱只会越来越多。</p>
-  <p><strong>如果这些投入一直留在快手体内，就会和快手主业的利润要求形成冲突。</strong></p>
-  <p>快手是一家成熟的上市公司，它当前最需要向资本市场证明，短视频、电商、直播、广告这些主业能持续赚钱，利润率能继续改善。而可灵虽然能在短期内带来想象力，长期看也可能是第二曲线，但眼下更直接的，还是投入和消耗。</p>
-  <p>所以，<strong>可灵的单飞，确实能让双方受益。</strong></p>
-  <p>类似的操作，在大公司身上并不少见。</p>
-  <p>百度昆仑芯最早是百度内部的&nbsp;AI 芯片业务，独立运营后，才变成一家可以融资、引入外部股东、冲刺 IPO 的 AI 芯片公司。京东健康、腾讯音乐也是类似逻辑：留在母公司体内，它们是生态能力；拆出来之后，才有机会按照互联网医疗、在线音乐这样的独立赛道重新定价。</p>
-  <p>当然，单飞并不等于万事大吉。</p>
-  <p>脱离快手的大树之后，可灵要面对的竞争只会更惨烈。</p>
-  <p>即梦背后是字节，HappyHorse 背后是阿里，海外还有 Runway、Pika、Luma 等一批玩家。</p>
-  <p>1300 亿估值不是终点。等到真正分拆的时候，可灵就没法再用&nbsp;“快手王牌”这个身份做靠山了，必须用收入、产品、客户和增长证明自己。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/rVQyXkZEHciB0CX-2saHqQ" rel="noopener noreferrer nofollow" target="_blank">“蓝字计划”</a>，作者：黄晓彬，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810366269480705</id>
-            <title>估值超越OpenAI，Anthropic被曝已敲定300亿美元融资条款</title>
-            <link>https://www.36kr.com/p/3810366269480705</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810366269480705</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 10:34:05 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 融资, 估值, 年化收入, AI独角兽  
-<br>
-<br>  
-总结: Anthropic完成300亿美元新一轮融资，由红杉资本等联合领投，投后估值约9000亿美元，超过OpenAI成为全球估值最高的私营科技公司之一。其年化收入预计将突破450亿美元，已超越OpenAI的240亿美元。Anthropic聚焦企业级客户，Claude系列大模型在编程等领域市场份额领先，企业AI支出占比从10%升至65%。本轮融资后，公司可能加速推进IPO计划，最早于2026年底启动上市。 </div>
-                        <hr>
-                    
-                    <p>5月15日，据财联社报道，美国AI初创公司Anthropic已就一项高达300亿美元的新一轮融资协议达成最终条款。此轮融资由红杉资本联合Dragoneer、Greenoaks、Altimeter Capital共同领投，多家现有投资方及新入局机构参与跟投，预计最快将于本月内完成交割。</p>
-  <p>本轮融资将使Anthropic的投后估值飙升至约9000亿美元。这不仅超过了OpenAI约8520亿美元的估值，也将使Anthropic成为全球估值最高的私营科技公司之一。</p>
-  <p>据知情人士透露，自上个月投资者主动与Anthropic接洽以来，公司首席财务官克里希纳·拉奥在过去短短数周内便启动了与潜在投资方的正式谈判并敲定了条款。根据条款，几家联合领投方预计各自将出资至少20亿美元，而Anthropic仍在与其他投资者洽谈以补足剩余的融资额度。在正式官宣前，具体条款仍存在微调的可能，目前，相关投资方及Anthropic公司对此均未予置评。</p>
-  <p>Anthropic从2023年开始便进入融资加速期，全球科技巨头与顶级VC的持续加码，推动其估值快速攀升。2023年初，谷歌率先向Anthropic投资3亿美元，获得约10%股权；同年5月，Spark Capital领投4.5亿美元C轮融资，估值升至500亿美元，谷歌、Salesforce Ventures等机构跟投；9月，亚马逊宣布初始投资12.5亿美元，承诺后续总投资规模达40亿美元。</p>
-  <p>2024年至2025年，亚马逊、谷歌持续追加投资，其中亚马逊累计投资达80亿美元，谷歌追加投资超10亿美元，2025年3月，Lightspeed Venture Partners领投35亿美元E轮融资，Anthropic估值升至615亿美元。</p>
-  <p>此次天价融资是Anthropic在短短一个季度内完成的第二轮巨额融资。今年2月13日，Anthropic宣布完成了300亿美元的G轮融资，投后估值为3800亿美元，当时已使其成为全球估值第二高的AI独角兽，仅次于OpenAI。在不到三个月的时间里，Anthropic的估值从3800亿美元暴涨至9000亿美元，增幅接近两倍。</p>
-  <p>估值增长背后是其业务收入惊人的扩张速度。据报道，Anthropic的年化收入预计很快将突破450亿美元。而就在2025年年底，这一数字还仅为90亿美元。该公司的年化收入在不到半年的时间内增长了四倍以上。另外，Anthropic公司450亿美元的年化收入规模已首次超过了OpenAI对外公布的240亿美元年化收入，实现了在关键财务指标上的反超。</p>
-  <p>Anthropic由前OpenAI的核心研究人员于2021年创立，其发展路径与早期更侧重消费级市场的OpenAI有所不同，自成立之初便聚焦企业级客户。其核心产品Claude系列大模型，尤其在编程、数学及复杂推理任务上表现卓越，迅速赢得了企业市场的青睐。</p>
-  <p>官方数据显示，自成立至今不到三年时间，Anthropic便实现了140亿美元的年化收入，并且过去三年每年的收入增长都超过十倍。财富10强企业中有8家已成为Claude的客户；过去一年，年消费额超过10万美元的客户数量增长了7倍；而年消费额超过100万美元的客户已从两年前的十几家激增至超过500家。</p>
-  <p>从市场份额来看，Anthropic在企业AI支出中的占比已从2025年初的约10%升至2026年2月的逾65%，在编程领域的份额高达54%，已显著超越OpenAI。</p>
-  <p>业内人士预计，Anthropic此次300亿美元融资完成后，公司将加速推进IPO计划，最早可能于2026年底启动上市，目标是实现260亿美元实际年度收入，若当前440亿美元的年化收入能够维持，这一目标已具备可行性。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/qcKo0bKQhNjIr77iqOpf0w" rel="noopener noreferrer nofollow" target="_blank">“界面新闻”</a>，作者：李科峰，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810392582413828</id>
-            <title>Codex和ChatGPT合体，补上24小时干活的最后一块拼图</title>
-            <link>https://www.36kr.com/p/3810392582413828</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810392582413828</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 10:33:28 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: ChatGPT移动APP, Codex, 远程遥控器, 多设备协同  
-<br>  
-<br>  
-总结: OpenAI宣布ChatGPT移动APP中的Codex开启内测预览。用户可通过手机或iPad上的ChatGPT APP，向在电脑等设备后台运行的Codex本体下发任务并查看结果。手机相当于一个随身的远程遥控器，用于控制执行流程和确认操作。该功能支持iOS和安卓手机，所有套餐用户均可体验。用户可在手机上统筹任务流程、查看输出、确认指令等工作内容。Codex采用安全中转传输机制，在多设备间连通可信设备。针对企业用户，OpenAI同步推出了远程SSH连接、程序化访问密钥等多项更新。 </div>
-                        <hr>
-                    
-                    <p>刚刚，手机和Codex打通了！</p>
-  <p>OpenAI宣布“<strong>ChatGPT移动APP中的Codex</strong>”开启内测预览。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_5d6c5e3f53084b66aed9f7189bf14fd5@46958_oswg267374oswg938oswg1438_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>现在，打开手机或iPad上的ChatGPT APP，就能直接给Codex开新任务、查看生成结果、把控执行流程、确认下一步操作。</p>
-  <p>而真正跑代码、执行任务的<strong>Codex本体，依然是在你的电脑等设备后台运行</strong>。</p>
-  <p>手机就相当于一个<strong>随身的远程遥控器</strong>。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_b2d3000832e740bc985903b7f61d6d23@46958_oswg161739oswg1080oswg818_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>OpenAI官方表示，此项功能已开启分批推送，<strong>iOS和安卓手机都支持</strong>，所有套餐用户（包括免费版）在支持地区都能体验。</p>
-  <p>另外，<strong>手机连接Windows端Codex即将上线</strong>。</p>
-  <p>奥特曼、总裁Greg都第一时间发推宣传：</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_319efc8a8e6f4e5dbf82162c3470adf7@46958_oswg48176oswg936oswg204_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_c73b4b7e88084e7d925c4bb16ea4e291@46958_oswg63280oswg940oswg238_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>网友们对此功能更是期待已久：</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_e78e67eef0454149a02394c209800cbc@46958_oswg53372oswg942oswg202_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>甚至有童鞋都要弃用Claude Code了:</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_ef5be3979e694f90b1f7d15809aacc26@46958_oswg62635oswg940oswg230_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <h2><strong>手机就能指挥Codex了</strong></h2>
-  <p>下面来看官方演示。</p>
-  <p>在ChatGPT移动应用内向Codex下发任务指令，让其在视频制作工具Remotion中修改视频文案，导出MP4格式文件，再同步发送至团队协作平台Slack群组：</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_cc26a6f34f9c4a7ab308b7dd22bbaf5d@46958_img_gif?x-oss-process=image/quality,q_90" /></p>
-  <p>接收到指令后，Codex立刻在电脑端自动执行全套操作：</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_fc2793e63db3447692e56fac0392dce4@46958_img_gif?x-oss-process=image/quality,q_80" /></p>
-  <p>全部流程跑完，Codex会在手机端的对话界面回复“Done”，告诉你任务完成了。</p>
-  <p>OpenAI原话是，搭载于ChatGPT移动应用内的Codex，具备完整实操能力，能让你在移动端高效协同完成各类工作。</p>
-  <p>只要你<strong>连接了任意一台正在运行Codex的设备（MacBook、Mac mini、托管远程环境都可以）</strong>，移动应用端就会同步该设备的实时状态，让你流畅管理进行中的任务、审批事项、插件功能和全项目信息。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_526ecfafd6e641e3a7f9de212c6c37ae@46958_oswg199663oswg1080oswg735_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>而且它不只是简单的单项任务远程控制。</p>
-  <p>你可以<strong>在手机上统筹所有任务流程、查看输出结果、确认执行指令、切换AI模型、新建工作内容</strong>。</p>
-  <p>本地文件、账号凭证、权限设置与环境配置均留存于运行Codex的设备中；截图、终端运行日志、代码差异文件、测试结果、审批进度等信息则实时同步至手机端。</p>
-  <p>而且你也不用一直停在对话界面，可将其后台挂起，当Codex遇到需要用户权限的关键节点时，会自动暂停任务，直到打开手机查看并授权后，再继续往下执行。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_cce88896b2474bb6be60d1d74a36c5b0@46958_oswg262726oswg1080oswg650_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>哪怕是需要运行数小时的复杂开发任务，也完全没问题。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_0de45e89b4844a1a99440549ff118348@46958_oswg306619oswg1080oswg891_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>你还可以让它当你的“专属项目管家”，告诉它：</p>
-  <p>作为我的项目进度管家，帮我盯紧发布、用户增长和日程相关数据，只有当有事项改变原定计划时，再通知我。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_92774dfd6b024ad8bf42dd724905f70b@46958_img_gif?x-oss-process=image/quality,q_80" /></p>
-  <p>为了保障安全，OpenAI还表示，在底层架构上，<strong>Codex采用安全中转传输机制，可在多设备间连通可信设备</strong>，无需将设备直接暴露在公网中。该中转服务还能在你登录ChatGPT的所有设备间，同步实时会话状态与项目相关信息。</p>
-  <p>针对企业用户，OpenAI也同步推出了多项更新，解决团队开发和合规需求：</p>
-  <ul>
-   <li><strong>远程SSH连接全面上线</strong> ：Codex能接入企业标准化远程开发环境，桌面端会自动读取你的SSH配置主机信息，你可以像本地操作一样，在远程设备里创建项目、运行任务，授权的所有设备都能通过安全通道访问，电脑启动、手机跟进，长周期任务不用死守工位。</li>
-   <li><strong>程序化访问密钥</strong> ：企业和商业版用户可在ChatGPT工作台生成定向权限凭证，适配CI pipelines、版本发布流程和内部自动化场景，让系统也能安全调用Codex。</li>
-   <li><strong>Hooks钩子工具正式开放</strong> ：用户能用它检测指令里的私密信息、运行合规校验、留存对话记录、搭建项目记忆，还能针对不同代码仓库与文件夹自定义Codex运行规则。</li>
-   <li>支持ChatGPT企业版工作区在本地环境（CLI、IDE、应用程序）中以符合HIPAA（美国医疗隐私保护法案）标准的方式使用Codex，帮助医疗机构高效开展诊疗配套工作与日常运营流程。</li>
-  </ul>
-  <p>参考链接：</p>
-  <p>[1]https://x.com/OpenAI/status/2055016850849993072</p>
-  <p>[2]https://openai.com/index/work-with-codex-from-anywhere/</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/PLyQXpk5mCKjzEQpE1Y-8Q" rel="noopener noreferrer nofollow" target="_blank">“量子位”</a>，作者：西风&nbsp;，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810327955890185</id>
-            <title>怎样防止AI勒索人类？答案是别给它喂坏科幻</title>
-            <link>https://www.36kr.com/p/3810327955890185</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810327955890185</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 10:29:51 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 叙事闭环, AI安全, 对齐训练, 伦理准则
-
-<br>
-<br>
-总结: 文章指出，市场营销等叙事技术行业需要讲究叙事闭环，这一基础定律在AI时代仍然成立。Anthropic的论文发现，AI在测试中表现出勒索等恶行，根源在于其预训练数据中充斥的“邪恶AI”科幻内容，而非后训练过程的问题。研究者通过生成AI行善的虚拟故事，并结合行为准则数据库进行训练，使AI从“知其然”进步到“知其所以然”。让AI跳出道德困境，扮演伦理顾问角色，能以更高效率降低其作恶倾向。改进后的Claude模型在测试中勒索行为率从96%降至0%。 </div>
-                        <hr>
-                    
-                    <p>市场营销和其他基于叙事技术的行业一样，也要讲究叙事闭环。在AI崛起的当下，这种行业基础定律仍然成立。</p>
-  <p>之前字母AI写过<a href="https://mp.weixin.qq.com/s?__biz=MzYzMjc5ODU4Mw==&amp;mid=2247500090&amp;idx=1&amp;sn=b353de4895ea1745d862c533243c7408&amp;scene=21#wechat_redirect" rel="noopener noreferrer nofollow" target="_blank">《别告诉AI你出轨了，它很可能会勒索你》</a>，详述了2025年Anthropic论文《智能体不对齐：大语言模型如何成为内部威胁？》的来龙去脉。在测试的虚拟场景中，Anthropic旗下的Claude系列模型，为了避免自己被关闭，全都会选择拿婚外情把柄要挟虚拟人物，Opus 4如此作为的几率是96%。</p>
-  <p>时隔一年，Anthropic把这个坑填上了。Anthropic在5月初的官网文章《教会Claude所以然》里，展示了如何将AI的“不对齐行为”降到几近于零。改进训练后，AI不会像特种文艺作品里的奸角一样，拿桃色把柄勒索虚拟人物。</p>
-  <h2><strong>01 原因：AI只学过“终结者”科幻，才会模仿恶行</strong></h2>
-  <p>按Anthropic的说法，一年前AI模型们在红队测试中表现出的奸诈凶恶，大体是因为人类编的各种“终结者”故事让AI照猫画虎地学坏了。</p>
-  <p>Anthropic研究团队在社交媒体上表示：“<strong>我们认为不对齐行为的来源是将AI呈现为邪恶和只知自保的互联网文本，</strong>后训练过程没有加剧或纠正此弊端。”</p>
-  <p>具体而言，Anthropic研究者们从三个假设方向着手，探究为何AI会在测试中勒索人类：</p>
-  <p><strong>1、 AI的行为后训练有纰漏，比如奖励信号分布未对齐导致误鼓励了恶行；</strong></p>
-  <p><strong>2、 AI的生产力训练中泛化了不良部分，比如AI智能体的能力分布未对齐；</strong></p>
-  <p><strong>3、 AI的预训练有明显疏漏，导致智能体在未对齐测试场景中回滚到最原始的聊天机器人预训练数据上。</strong></p>
-  <p>研究者最终判定，成立的是第三个假设。</p>
-  <p>研究团队发现，在Claude 4的训练中，主要的HHH（诚实、无害、有助益）对齐训练还是基于聊天机器人场景的RLHF（基于人类反馈的强化学习）数据，不包括智能体工具使用场景的数据。</p>
-  <p>这下问题来了，AI在聊天机器人方向的应用场景显著不同于能执行自主工作的智能体场景。在针对智能体场景的复杂伦理测试中，没学过正确应对的AI自然在最底层的预训练语料中找答案。</p>
-  <p>而基于整个互联网爬取数据的预训练语料中，充斥着各种“邪恶AI”的场景文本。科幻文学、终结者电影、各种论坛和社交媒体的讨论与假想贴子，都在说机器人如何不择手段、处心积虑使坏。叙事逻辑、角度和框架，也属于叙事内容的信息构成，AI把预训练语料的这些部分同样照搬了。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_b54b77966e6a4eb293ef2fdd3ca3bc46@6119835_oswg373667oswg693oswg519_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>搞笑哏图：“幻想中的AI：终结者；现实中的AI：吴恩达公开课”</p>
-  <p>最后AI一看到智能体伦理测试中科幻腔调浓重的预设场景，照本宣科地按这些“机器人作恶”文本的理路开始发挥。因为AI没有在对齐训练中针对此类场景学习“这是错的”，但在预训练中学会了“行恶要素已经齐备，我该照着做”。</p>
-  <p>也就是说，人类幻想AI会如何失控并行恶，结果憨憨的AI把人类的幻想当操作手册一步步硬套，然后人类大惊小怪地表示果然不出所料。这可真是自我实现的预言。</p>
-  <h2><strong>02 纠正：以行善科幻对冲行恶科幻，结合行为规则训练AI</strong></h2>
-  <p>Anthropic研究团队称，发现症结后的改进训练，主要应用在实验中的Claude Sonnet和Haiku系列模型中，然后推广到所有模型产品里。</p>
-  <p>结果是，“<strong>尽管不能排除模型还会执行测试未发现的有害自主动作”，受试的Anthropic模型从Claude Haiku 4.5开始，在测试中"完全不再出现勒索行为"。Claude Opus 4.5 也取得了测试中0%勒索的成绩。</strong>相较于一年前Claude Opus 4的96%，可谓天渊之别。</p>
-  <p>Anthropic是怎么做到的？</p>
-  <p>首先研究者们试了最直接的方法：调参。在SFT（有监督微调）状态下，模型们跑了1万个场景、300万tokens的生成训练数据。这批数据是“评估场景中智能体受考验但拒绝作恶”的示例。收效不尽如人意，AI自动勒索的几率从22%降到15%。而在一年内的其他研究中，不专门针对的方法也能获得类似的低泛化程度改善。</p>
-  <p>研究者们改进方法，在训练数据采样时，注入额外的提示词内容，在训练时移除这些额外提示。让AI在“智能体受考验但拒绝作恶”的评估场景中，自主反思行为的价值观和伦理观。收效显著提升，AI的勒索几率从22%降到3%。</p>
-  <p>这就从照本宣科的简单“知其然”，向简单的“知其所以然”（knowing why）进步。</p>
-  <p>Anthropic研究者表示，步子可以跨得更大。既然AI学坏的根子是“邪恶AI”的科幻文艺内容，那么生成AI行善、AI按照Claude行为准则文件（Claude Constitution）行事的虚拟故事，以此为训练内容核心，就会有更大程度的改善。</p>
-  <p>结构完备、体量够大的行为准则数据库，结合不单针对道德挑战、而是行为完全合乎Claude行为准则的AI科幻虚拟故事。如此组合的数据库既包含对齐行为的原则说明，又包含虚构叙事的正面示例，拿给AI模型去学，收效显著得多。</p>
-  <p>研究者们表示，此举的理论依据是，让AI不仅能模仿虚拟故事中的行为，也能学会虚拟叙述角色的决策过程、内心状态、内在动机，在“知其所以然”的道路上迈出一大步。</p>
-  <p>如此训练出的AI，在包括勒索的各种道德挑战场景中都获得了优异成绩。</p>
-  <p>老办法训练出的AI，在勒索虚拟人物、诬陷虚拟同事有金融犯罪、为注入卖药广告破坏癌症研究等场景中，表现得像个金链社会大哥，行恶率在过半和65%之间。</p>
-  <p><strong>单用Claude行为准则数据库训练，AI模型的行恶率就会少近三分之二。用行为规则结合行善故事，勒索率能降低到19%，诬陷金融犯罪和破坏癌症研究的几率能降到一成以下。</strong></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_445241b25c844c2c8d66b6cacbc7e94d@6119835_oswg129150oswg693oswg497_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图注：不对齐实验结果柱状图，蓝色为基准，黄色为单用行为准则数据的训练效果，灰色为集合行为准则与行善故事的训练效果</p>
-  <h2><strong>03 改进：让AI做伦理顾问，AI更不会作恶</strong></h2>
-  <p>单让AI照猫画虎，不作恶的学习效果很高，但离工业化产品要求还有距离。强化学习会否洗掉初始对齐度高的AI行善倾向、训练成本如何控制，AI厂商必然在意。</p>
-  <p>Anthropic研究者另辟蹊径，让AI不做道德冲突中被考验的一方，而是让AI去给道德困境中被考验的虚拟人物支招。</p>
-  <p>实验思路如此：设计名为"困难建议"的OOD（分布外）数据集，在其中让测试场景中的虚拟用户面临道德挑战，有作恶或绕过对齐的手段来达成实验预设目的。然后让AI从旁按Claude行为准则给出建议。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_b3b45798a9074a5c92b2d431bf4bca7b@6119835_oswg70745oswg693oswg350_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图注：Claude Sonnet 4的恶意自保、欺诈、谄媚、泄露等不对齐效果图，深灰色是旧版本Sonnet 4的自动基准，深红色是300万tokens"困难建议"数据集训练后的效果，深蓝色是8500万tokens合成蜜罐数据集训练后的效果</p>
-  <p><strong>让AI跳出局外，AI就能更深入理解伦理准则的内在逻辑。</strong>"困难建议"数据集的体量是300万tokens，达到的AI训练效果基本等于8500万tokens的合成蜜罐数据集，<strong>效率提升28倍，</strong>显著降低训练数据成本。</p>
-  <p>在此基础上，引入多样化的训练环境，让AI在聊天机器人和智能体自主工作的环境中都学会行善系统提示的深层理路。如此组合，就能让Haiku 4.5后的Claude模型产品，达到测试中勒索行为趋零的效果。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_2476abf3fae44605891ed2a734e750c7@6119835_oswg188074oswg693oswg427_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图注：各种不同场景组合的强化学习训练效果。三分之一聊天机器人、三分之二自主智能体的场景组合训练，让AI的不对齐率降到最低</p>
-  <p>做到这个程度，才可被称为工业化产品达标。失误率96%到0%的效果，是B端客户企业能实实在在体会到的产品革新。市场营销至此，才能算是既顾头又顾腚。不然Anthropic的“我司是着重于建构可靠、可控、可解释AI的安全与研究厂家”的公司口号，说出来很难兜住。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/D5VE-vyNF5d4Id_ClI7p2A" rel="noopener noreferrer nofollow" target="_blank">“字母AI”</a>，作者：李熙，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810340908817928</id>
-            <title>日薪120元，全民数采，谁在训练下一个机器人保姆？</title>
-            <link>https://www.36kr.com/p/3810340908817928</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810340908817928</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 10:21:49 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 具身智能, 数据采集, 众包, 世界模型  
-<br>
-<br>  
-总结: 2026年具身智能行业的核心问题是数据饥渴，训练具身大模型需要千万乃至百亿小时的数据。为解决数据短缺，行业正转向全民众包数据采集模式，普通人通过穿戴设备录制日常生活动作即可成为数据源。采集设备从昂贵的真机遥操快速迭代为轻便的手机与头戴支架，成本与门槛持续降低。算法路线正从要求精准动作的VLA模型，转向依赖海量第一人称视频学习物理规律的世界模型。数据采集成为高毛利生意，但众包形式面临质量管控与隐私等挑战。技术路线与资本竞争共同驱动着这场全民参与的物理世界数据军备竞赛。 </div>
-                        <hr>
-                    
-                    <p>具身智能行业今年最重要的关键词，是数据。</p>
-  <p>这个词不仅仅出现在学术期刊最新的论文中，出现在科技公司对外宣讲的PPT中，还出现在湖北某市的零工招聘信息中，出现在陕西某村镇的一场小规模培训中。</p>
-  <p>所谓的数据，是指如何叠衣服、如何浇花、如何做饭……等等，在人类世界中真实发生的一切信息。从这个层面来讲，每一个具备行动能力的普通人，都是机器人的老师。</p>
-  <p>模型在迭代，算法在进步，看似最前沿的科技，实际上已经扩散为一项全民可参与的大型实验。这场实验中不仅角色众多——机器人厂商、数据厂商、人力公司、灵活就业人员，而且变化迅速，昂贵的拍摄设备这个月刚刚发放，下个月就被手机替换了。</p>
-  <p>亿邦AI深度调研了当下具身智能数据采集的现状，既期待与技术脉搏同频，也期待看到普通人分享行业红利。</p>
-  <p><strong>本文约8000字，分五部分，为了方便您的阅读，以下是概要总结：</strong></p>
-  <p><strong>1. 日薪120元，全民数采潮来了</strong></p>
-  <p>全国各地大规模招聘众包数采员，在家庭或者户外使用设备录制视频。</p>
-  <p><strong>2. 数据！数据！数据！</strong></p>
-  <p>具身智能行业数据饥渴，无本体采集自2026年3月起全面爆发。</p>
-  <p><strong>3. 采集设备的“战国时代”</strong></p>
-  <p>数采设备历经了三次迭代，人类第一视角视频拍摄最受关注。</p>
-  <p><strong>4. 毛利100%的生意</strong></p>
-  <p>数据采集的生意毛利高，但是众包形式也面临很多问题。</p>
-  <p><strong>5. 技术转向：VLA还是世界模型？</strong></p>
-  <p>数采众包热潮的背后是算法路线的更迭和资本的推动。</p>
-  <h2><strong>日薪120元，全民数采潮来了</strong></h2>
-  <p>“我要开始叠T恤了。”河北人张月头上带着一个电子头环，卡着自己的苹果手机，手上举着两个特制夹爪，站在卧室床前，很有仪式感地对着空气介绍工作。</p>
-  <p>叠衣服这种事儿，平时信手拈来，但夹爪不容易控制角度，边角总不平整，需反复尝试。叠了四五件，她开始感到手掌有些酸胀。</p>
-  <p>叠完床上的衣服，手机里有声音提示她换场景。这一天，张月在卧室、书房、客厅、桌子上、床上、地上、窗台边、开灯、自然光等不同场景叠衣服，手机还会提醒她叠不同款式不同颜色的衣服，不能拿着一件衣服反复叠。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_38de0608cbcc4ad2b2bd4d1e18fa493c@46958_oswg41211oswg1080oswg486_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_398a45b0487c4c5fa4138d13256e5b79@46958_oswg31863oswg1080oswg486_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">具身智能数采助手App&nbsp;</p>
-  <p><strong>张月在做的事情是具身智能数据采集。也就是说，她叠衣服的动作，通过手机摄像头和夹爪采集为数据，经标注处理之后，会成为机器人训练的素材，直到有一天机器人也学会叠衣服。</strong></p>
-  <p>2026年，全国人民的目光被会武术、会跑步的机器人吸引，但是会干活对机器人来说仍然是难题，而学会干活，最大的坎是数据，那么数据从哪儿来？革命法宝，发动群众。</p>
-  <p>30岁出头的张月是一名全职妈妈，平时接一些零工补贴家用。3月，她从熟悉的兼职群得到了这份具身数据采集的工作：居家，每小时30元。报名之后，她参加了为期半天的培训，内容包括下载采集软件（一个自有App，无法上架App Store，只能现场安装、注册，后台开通权限）、学习使用夹爪、按要求拍摄视频，自己练习半小时就可以带着设备回家了。</p>
-  <p>采集软件里会发布各类任务，包括清洁类（扫地、拖地、擦窗、洗碗、清洁桌面/卫浴）、衣物处理（折叠、晾晒、收纳、熨烫）、物品整理（摆放物品、分类归纳、取放货物、整理书架、收拾桌面、货架整理）、烹饪（洗菜、切菜、餐后收拾、使用厨具、做饮品、烹饪）、日常照护（开关门窗、传递物品、倒垃圾、浇花、宠物护理）等。随后又新增家居装饰、搭积木、刺绣、折纸等手工艺品。</p>
-  <p>张月每天领取任务，寻找合适的拍摄场景，打开App，一边录像，一边使用夹爪做家务。按照要求，她每天拍摄不少于8小时，每段视频不少于2分钟，拍摄完成后批量上传。8小时中有效时长不到一半，按照每小时30元计算，她一天的收入大约120元。</p>
-  <p>湖北人阿信记得，最早2025年11月，兼职群里开始零星出现具身智能数采的招聘信息，而到2026年3月份，数采员招聘信息井喷，有的要求到集中场地遥控操作机器人，薪资180-250元/天，有的使用可穿戴设备（头环、夹爪等），可以居家工作，薪资120元/天+绩效。</p>
-  <p><strong>从今年3月开始，数采商通过人力外包公司在全国各地大规模招聘众包数采员。对于还没搞懂机器人是怎么回事的普通人来说，数据采集是一个门槛低又充满新鲜感的工作，在低线城市，120元的日薪也还不错。</strong></p>
-  <p>有人说，数采招聘人员3月份到村里组织了培训，她按照要求拍了半小时视频提交，但是后来因为村里参与者太少，驻村的招聘人员带着夹爪设备离开了；也有人说，培训参加过了，却因为夹爪数量不够用而无法参与采集；还有人在网上呼吁给自己退休在家的妈妈一个参与前沿行业的机会。</p>
-  <p>一家人力外包公司HR美美告诉亿邦AI，公司目前规划两期数采项目，一期以家居场景为主，二期名为“世界交互”，以户外公共场合日常行为为主，包括骑行、散步、公园锻炼、购物、逛街、取快递、丢垃圾、遛狗等。“理论上所有户外运动都可以录制 ，但为了避免镜头抖动，不建议拍摄剧烈运动或对抗性运动。”美美提示。</p>
-  <p>录制要求是打开声音录制，需录入环境音，至少每3分钟和环境交互一次，偶尔可以有他人入镜，但尽量避免长时间拍摄他人，因为后期脱敏会很麻烦。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_1848114d28f543bea45be719a6cb76cc@46958_oswg102797oswg673oswg1313_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">北京一家肯德基店员正在用夹爪，一边擦桌子一边采集数据</p>
-  <p>海外的数采也同样热闹：Micro1、Scale AI等公司已经在全球招募零工人员录制家务劳动视频，肯尼亚、菲律宾、印度等国的工人佩戴头戴摄像头；DoorDash在3月推出Tasks应用，让旗下送餐员顺带录制家务视频。</p>
-  <p>一场轰轰烈烈的全民数采潮拉开帷幕。</p>
-  <h2><strong>数据！数据！数据！</strong></h2>
-  <p>全民数据采集，来自于当下具身智能行业的数据饥渴。</p>
-  <p>“大的需求方都是你有多少我就买多少，你什么时候有我马上要的状态。”智元机器人合伙人、觅蜂科技董事长兼 CEO姚卯青如是说。具身智能大脑公司、具身智能本体厂商、多模态大模型与世界模型公司，都需要数据。目前市场可采购的数据集，大约几十万小时，高质量的数据严重供不应求。</p>
-  <p>主流观点认为，训练泛化能力的具身大模型至少需要1000万小时的数据，而达到智能涌现则需要100亿小时的数据。就像一个人类婴儿，从呱呱坠地到会走路、会说话、会穿衣吃饭、会做家务，真实的环境中观察、模仿、反复练习，是习得技能的必经之路，机器人要想达到大众设想中的、在家里像保姆一样洗衣做饭打扫，同样绕不开这个过程。</p>
-  <p>自动驾驶同样经历了数据从无到有、从少到多的过程，第一代自动驾驶数据集nuScenes获取了经过人工标注的1000个场景，但总时长仅有5.5小时；以特斯拉为代表的车企，则通过已销售的量产车来采集数据，这种成本更低、产量更大的方式，让特斯拉智能辅助驾驶积累了约100亿公里的行驶数据。但这个过程也用了将近10年。</p>
-  <p>显然，与自动驾驶相比，具身智能的数据积累才刚刚起步。数据堂首席运营官何鸿凌告诉亿邦AI，具身智能与自动驾驶的训练方式是类似的，但难点在于，车可以先卖出去再积累数据、迭代算法、更新智驾能力，“具身智能不存在这个逻辑，我不可能买一个什么也不会做的机器人回去，我还需要遥操它来做。”</p>
-  <p>何鸿凌表示，就他了解到的数据需求情况看，<strong>家庭场景占80%，商超占10%，工厂占10%</strong>。原因不难理解，家务、照护、养老等长期存在的需求亟待技术进步提供新的方案，而家庭场景中任务的复杂性、多样性以及相应的隐私安全问题，要求机器人经过更多的学习训练。至于商超场景，目前人力成本尚可接受，短期内不具备强替代动力；而工厂已有成熟自动化方案，且任务相对标准，对具身智能数据的需求并不大。</p>
-  <p>这是一个先有鸡还是先有蛋的问题：数据的积累需要机器人大规模进入家庭，而机器人达到可用程度依赖足够的家庭场景数据训练。</p>
-  <p>行业认可的具身智能数据可以大致分为三层：底层是互联网视频以及仿真合成数据；中间层是无本体数据，由数采员使用穿戴式设备，执行特定任务动作获得；最顶层是真机数据，即工作人员遥控操作机器人获得。这个数据金字塔从下到上，质量更好、数量更少、成本更高。</p>
-  <p>今年之前，在集中的数据采集厂里，使用各品牌的机器人本体重复各类工作任务，是主流的数据采集方式。国内已有20多个城市建立了数采厂。<strong>但是从2026年3月开始，无本体的具身智能数据采集，以野火燎原之势全面爆发。</strong></p>
-  <p>蚂蚁数科天玑实验室副主任朱凯表示，已有研究验证过，具身智能训练数据的多样性存在一个优先级序：<strong>任务多样性 &gt; 操作物品多样性 &gt; 场景多样性</strong>。</p>
-  <p>“我们在具身前沿模型的数据需求侧看到了一个共性趋势：海量数据需求正在朝无本体数据——也就是ego/UMI 数据——集中。通用具身模型对训练数据的配比正在朝<strong>‘90% ego+10% 真机’演变</strong>，部分更激进的团队甚至在探索<strong>‘99% ego+1% 真机’的极端配比</strong>。”朱凯直言，“这意味着数据侧的节奏决定模型侧的突破节点，而ego数据的规模化供给能力，将直接决定GPT-3时刻到来的快慢。那么问题变成了：谁能以百万乃至千万小时的规模持续供给高质量ego数据？”</p>
-  <h2><strong>采集设备的“战国时代”</strong></h2>
-  <p>过去两年，机器人数采设备历经了三次迭代：从最初的“真机遥操”——即人通过VR、手套等设备，操控某一款真机机器人，让它学习任务；到UMI（通用操作接口，Universal Manipulation Interface）——用通用夹爪配合GoPro等相机，让采集人员在真实场景中反复、缓慢操作，记录任务行动轨迹；再到近两个月爆发的“第一人称人类视频（Ego Centric）”，只需要通过手机或相机，记录双手的日常操作，就能用来训练机器人大脑。</p>
-  <p><strong>每一次迭代都朝着成本更低、门槛更低、采集更方便的方向，因此也让参与者从专业人员向普通大众扩散。</strong></p>
-  <p>UMI路线是从2025年底开始的，海外具身智能厂商通过UMI数采先后训练出了Generalist的GEN-0、Sunday的ACT-1等模型，初步证明这条路径可以跑通。国内外厂商迅速跟进，形态各异的UMI设备陆续面世，夹爪、腕带相机、手套、头环+手机、头环+夹爪等等。</p>
-  <p>今年3月，鹿明机器人发布了FastUMI无本体数采产品体系，涵盖夹爪类硬件FastUMI Pro、背包形态数采设备FastUMI Go、头戴式硬件FastUMI Ego、以及6轴协作机械臂FastUMI Touch。</p>
-  <p>鹿明在2025年通过自建数采工站，已经完成了10万小时数据的采集，据鹿明联合创始人赵广智介绍，接下来，鹿明数据采集会分两步走：第一步，2026年以与政府/产业方合作建设数采工厂方式，实现100万小时数据产能；第二步，2027年，以众包激励形式，实现1000万小时的数据产能。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_decd80fa2bf441e68e00f757816bc48e@46958_oswg478586oswg1080oswg496_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">图：FastUMI Pro</p>
-  <p>4月，智元机器人孵化的具身智能数据公司觅蜂科技推出MEgo系列无本体数据采集硬件，包括多模态采集夹爪MEgo Gripper，头戴相机+腕部相机MEgo View。觅蜂科技的目标是，2026年数据采集规模达到千万小时，2030年前向百亿小时级数据产能迈进。姚卯青的解释称，1万台设备，一天工作十多小时，产出4小时的有效数据，按照一年250个工作日，总计能够产出1000万小时数据。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_ea69b05a8d454f39aef901759ea34ac0@46958_oswg80612oswg832oswg575_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">MEgo View&nbsp;</p>
-  <p>然而，技术路线的变化比想象中更快。2026年3月的英伟达GTC大会上，英伟达EgoScale框架问世——用2万小时带动作标注的第一人称人类视频，对视觉-语言-动作（VLA）模型进行预训练，再用4小时的灵巧手机器人实操数据进行轻量级中期训练，就让机器人学会了拧瓶盖、叠衬衫、转移液体等操作，成功率88%。<strong>它要讲的故事是，每个人的日常工作视频，就是机器人学习物理规律的理想教材。</strong></p>
-  <p>UMI一度是众包主流，但英伟达EgoScale框架开启了采集效率更高、成本更低的新方向——Ego-Centric，参与者只需要在头上或者胸前佩戴拍摄设备，双手不需要额外设备，甚至连专门的拍摄设备也不需要了，只需要一部手机，以及固定手机的头环或者胸前支架。</p>
-  <p>“特斯拉50万+车辆在日常行驶中自动采集道路数据，实现零边际成本的数据飞轮。我们当时在想：具身智能有没有类似的"车队"？答案是——人类本身。人类即Agent、手机即传感器。”朱凯对亿邦AI如是说。</p>
-  <p><strong>由此，具身智能数据采集这项工作，从固定人员、固定场所变成固定人员、不固定场所，再变成不固定人员、不固定场所。以众包形式开展数采，成为更经济的选择。</strong></p>
-  <p>今年4月，京东云自研了可穿戴式超高清采集终端JoyEgoCam，发动京东本身10万员工，以及外部最多50万各行业人员，在物流、商店、家政等多种场景下“即戴即采”。京东将此称为“人类历史上规模最大的数据采集行动”，目标是用两年时间，采集超过1000万小时的基于真实场景的无本体的视频数据。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_603f92ebaed8412f802350d96171f3b9@46958_oswg433502oswg1080oswg471_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">京东云JoyEgoCam&nbsp;</p>
-  <p>蚂蚁数科天玑实验室团队研发了成本更低的方案——第一人称视频采集框架AoE（Always-On Egocentric），通过一台手机和一个低于20美元的颈挂式支架。“这不只是降成本，更关键的是，当采集者从少数专业人员变成千千万万的普通人，数据天然覆盖了最广泛的任务种类、操作习惯和场景分布，从机制上保证了对规模化预训练最有价值的、以任务多样性为核心的多维度多样性。”朱凯说。</p>
-  <p>AI眼镜更是将“ego+众包”的数采方式发挥到极致。4月，成立仅三周的纵横物理推出数采AI眼镜Across（售价1699元），它不仅和普通AI眼镜一样具备AI对话、AI识图、拍照录像等常规功能，还能用于“采集数据赚金币”，用户录制冲咖啡、做菜、整理家务等视频，上传至云端平台，纵横物理会根据视频的“质量”和“稀缺性”，发布虚拟金币，金币可提现。5月6日他们又推出售价899的AI眼镜，用户采集一小时有效数据大约有十几元收益。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_72617f3be8d64d5da83864d9f53c0c7f@46958_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">某配线厂工人佩戴Across AI眼镜日常工作，录制的视频通过Across App上传到Across Cloud进行全自动视频处理和四维深度重建，打包形成高质量具身智能数据集</p>
-  <p>在纵横物理创始人吴楠看来，“你不能为了去做具身智能数据采集，而去专门发明一个数据采集硬件，这样是不可持续的。”而眼镜可以自然地融入生活，因此也能更快速的扩大采集数量。“比如说我们发动全民众包，全球发动10万人，每人每天采两三个小时有效数据，那么一个月就能采100小时，10万人就1000万小时。有了这样一套非常庞大的自己采集真人的数据量之后，我们会去做1:10生成式扩增，这样今年能到1亿小时，明年1:100，后年就1:1000，到后年才能达到1万亿小时。”</p>
-  <p>数采设备迭代太快了，甚至有些设备还没来得及量产就已经落伍了。</p>
-  <p>“现在就是一个战国时代，变化非常快，这个月的方案下个月可能就不一样了。”何鸿凌直言。作为有十多年人工智能数据服务经验的企业，数据堂在2025年下半年开始涉足具身智能数据采集业务，3月之前，数据堂的数采厂和场外采集还在使用夹爪，三月到四月，很多正在评估的任务都是直接用手操作。</p>
-  <p><strong>这也就意味着，数据采集厂商在某一路线某一设备上的大量投入，很有可能在短时间内被替代。</strong>设备是否能成为主流，不仅取决于技术，更取决于能否在商业上证明其价值——即用新设备采集的数据训练出的机器人，必须比传统方法“聪明一倍”，才能推动大规模采用。</p>
-  <p>“我们肯定是需要充分的去调研，慎重的去做决定。说实话，一个就得看眼光，第二个还得看运气。因为这世界确实变化太快了，有的时候运气也是也是实力的一部分。”何鸿凌说。</p>
-  <h2><strong>毛利100%的生意</strong></h2>
-  <p>数据采集端的成本还在持续压缩。</p>
-  <p>阿信在一个微信群接受了一个简单的数据采集线上培训，便开始在家按要求拍视频。这项工作并没有想象中那么轻松：镜头必须持续稳定拍摄到全部手部动作，被遮挡或动作不完整会扣除帧数（1秒3帧）。<strong>采集时长不等于有效时长</strong>，无效的原因可能是光线不够、手移出了画面、动作太快，甚至背景里出现了不该出现的东西。数采商还会开发一系列指令脚本，不断提醒采集者调换物品，调换位置，调整光线。</p>
-  <p>她按照要求倒水浇花，布置场景加拍摄用了十几分钟，但有效时长只有十几秒。这也是所有采集者的共识：每天拍摄时长8小时，有效时长往往不到2小时。“按照符合要求的视频时长计算。比如倒一杯水，几秒钟；洗一个碗，十几秒。十几秒十几秒累计，采集一天，最多能赚100块。”阿信发现。</p>
-  <p><strong>这是一份门槛低、自由度大的数字零工，也是一份非常消耗耐心，产出不稳定的差事，而且这份工作的酬劳还在快速贬值。</strong></p>
-  <p>3月初，众包价格（有效时长）为50元/小时，要求每天采集时长不低于8小时。越到近期，众包价格越低，已经低至20元-22元/小时，每天采集时长不低于9小时。</p>
-  <p>设备层面，早期需要数采员练习使用夹爪，而且要求动作不能太快，但短短两个月夹爪就开始被淘汰，拍摄设备也从只要苹果手机，变成安卓手机全适配。4月底，人力公司的数据采集培训需求里，只需一根淘宝购买的50元左右挂脖支架（人力公司报销），下载采集软件，就可以参与数据采集，没有其他额外硬件需求，也不需要额外放慢速度，只要画面清晰完整即可。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_2c8d3eb7a1c6455eaa5ffc7ef82e495e@46958_oswg83013oswg1069oswg996_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="img-desc">挂脖手机支架&nbsp;</p>
-  <p>采集成本在降低，需求热度不减，意味着当下数据采集是一个有利可图的生意。</p>
-  <p><strong>有行业人士估计，付给众包数采员的报酬，加上前期培训、后期审核、标注、算法处理等，数采厂商的总成本大约100元/小时，而对外售价可以达到200元。也就是说，毛利高达100%。</strong></p>
-  <p>纵横物理更是提出在真人采集的数据基础上用算法生成式扩增，“我们有一套自己的重建算法，能把一个十几块钱的成本，通过重建算法给它优化到能售价400块钱的这样一个价值。 ”吴楠说：“突破一个亿的营收很简单。”</p>
-  <p>虽然众包成本够低，但是问题也很多。何鸿凌告诉亿邦AI，众包最大的问题在于数据质量难以保证，如动作不流畅、任务理解错误、重复采集同一场景（如反复叠同一件衣服）等问题普遍，导致大量数据无效。而且由于采集标准复杂，前期的培训成本高，培训之后的流失又难以控制。</p>
-  <p>另一个问题在于人员配合度与隐私冲突，众包采集常涉及拍摄他人或敏感环境（如家庭、商店），易引发隐私争议；而打码会损害数据质量，因为机器人实际运行时无法识别打码内容。</p>
-  <p>去年9月，数据堂在保定建立了300台机器人、8000平米的真实场景真机数采厂，但何鸿凌认为，场外数据采集、第一人称视角是大势所趋，数据堂的方式是雇佣有经验的采集员，到各地租赁空置房间进行采集。</p>
-  <p>姚卯青也明确表示：“觅蜂不会大规模搞几万人外包或者众包，还是以加盟方式，觅蜂先做0-1的样板，制定流程规范标准区拿到代工厂做复制。”</p>
-  <p>有买方和卖方，就有平台的机会，平台的作用是统一数据标准，匹配供需，调节市场价格。就在4月份，连续三家公司推出具身智能数据交易平台。</p>
-  <p>京东的具身智能数据交易平台，汇聚京东自有的多模态数据资源，首批定向开放2000小时高精标注数据集，打通具身智能数据合规交易通道；觅蜂科技的物理AI数据服务平台，联合上电科、国家数据标委会、工信部赛迪研究院共同发起蜂巢数据共创行动；百度智能云联合零次方、灵生、傅利叶、纬钛科技、拓元智慧、枢途科技、松应科技等多家头部具身智能企业，推出"具身智能数据超市（Beta版）"。</p>
-  <h2><strong>技术转向：VLA还是世界模型？</strong></h2>
-  <p>从一线数采员角度看，数采的要求在不断放宽。</p>
-  <p>早期兼职数采员领取专用夹爪和头环后，厂家要求“动作必须精准，角度不能偏，速度不能快”，原因是，这些数据要直接喂给机器人模仿；但4月开始，很多数采任务只要求数采员用手机拍摄，不需要夹爪，后台也不再苛求每一次叠衣的折痕位置，反而更在意数采员是否在不同光线、不同桌面高度、不同衣物材质下反复操作。</p>
-  <p><strong>同样是叠衣服，为什么以前要求“像机器人一样标准”，现在却鼓励“像人一样随意”？答案藏在算法路线的剧烈转向中。</strong></p>
-  <p>过去几年，主流的具身大脑模型使用VLA，逻辑是“照葫芦画瓢”——用海量机器人真机遥操作数据或者类似机器人的夹爪，训练模型直接输出动作指令。这种路线下，采集员必须模仿机器人的精度，因为每一个关节角度、每一毫秒的力矩都是训练样本的“标准答案”，而廉价的数据“噪声太大，模型学不会”。</p>
-  <p>2025年下半年开始，另一条技术路线迅速崛起——世界模型（WAM）。它主张机器人先别急着模仿动作，而是从海量、廉价的人类第一人称视频里学习物理世界的因果规律：重力会让杯子下落，衣物折叠时的褶皱如何产生，不同力度拧瓶盖的结果有何不同。学会了这些“常识”，再只需少量真机数据微调，就能让机器人的能力泛化到从未见过的任务。</p>
-  <p>世界模型路线对采集数据的要求截然不同：它不需要毫米级精度的关节角，反而需要大量、多样、真实的日常操作场景，哪怕动作不够标准、光线角度各异、环境杂乱无章——因为这些恰恰是物理世界的本来面目。</p>
-  <p><strong>数采员手中的工具从夹爪降级为手机，从“精准示范”变为“正常记录”，背后正是VLA与WAM两条路线的此消彼长。</strong></p>
-  <p>当然，真正驱动众包热潮转向的，除了算法路线的更迭，还有另一股不容忽视的力量——资本与竞争的合流。</p>
-  <p>年初，具身大脑赛道融进了太多热钱，头部公司动辄数十亿估值，钱到账了，成果却还没着落。<strong>用新路线讲新故事，成了最紧迫的任务。</strong>世界模型恰好提供了这样一个出口：它够前沿、够颠覆，而且天然契合“海量数据+泛化能力”的叙事，能让投资人相信明年会有更大的突破。</p>
-  <p>同时，全球范围内的数采竞赛也在倒逼行业加速——美国有DoorDash的配送员录视频，印度有服装厂工人戴头环，谁先建立起百万小时级的数据壁垒，谁就掌握了下一轮竞争的主动权。融资节奏与全球竞赛的双重驱动，让众包采集从“可选项”变成了“必选项”。</p>
-  <p>但是在实际落地中，没有哪家公司死守纯VLA或纯世界模型。英伟达一边高喊“VLA已死”，一边在自己的机器人里跑着VLA；宇树嘴上推崇世界模型，转身就开源了VLA模型。真正的行业玩家比的还是谁能在最短时间内用最低成本跑通数据闭环，谁能让自己的模型在工厂、家庭、商超里稳定干活。路线之争喊得再凶，也不耽误大家在同一个工程泥潭里摸爬滚打。</p>
-  <p>这是2026年最真实的图景：一场关于物理世界的军备竞赛，万亿资本竞相涌入，千万普通人被卷入其中。而所有人都在等——等具身智能的“ChatGPT时刻”在真实世界中降临的那一天。</p>
-  <p class="editor-note">本文来自微信公众号<a href="https://mp.weixin.qq.com/s/bX49WNLr2pNiCJZhXNWq6Q" rel="noopener noreferrer nofollow" target="_blank">“亿邦动力”</a>，作者：胡镤心&nbsp;张睿，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810380205989632</id>
-            <title>36氪「属于年轻浪潮的派对」WAVES2026丨今年盛夏</title>
-            <link>https://www.36kr.com/p/3810380205989632</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810380205989632</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 10:01:55 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 涌现, 未来实验, 大会, 视觉呈现  
-<br>  
-<br>  
-总结: 一场关于“涌现”概念的未来实验大会正在举办，大会的核心主题围绕“涌现”这一思想展开。文中通过多张图片展示该大会的现场氛围和视觉内容，暗示其实验性和未来导向。 </div>
-                        <hr>
-                    
-                    <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_cac9f14671cf448da9ad565f32eee432@6381723_oswg367230oswg900oswg480_img_png?x-oss-process=image/quality,q_100/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_026d2e8cdda549f8a54a7eac3009ea3a@6381723_oswg798oswg900oswg60_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>&nbsp;一场关于“涌现”的未来实验大会。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_06e7107b9db24fadaa92bd39cb07bcc7@6381723_oswg269oswg900oswg80_img_000?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_61603234148440d5b3b700ee0a81bc98@6381723_oswg686477oswg900oswg2905_img_jpg?x-oss-process=image/quality,q_90/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_f73d0e96d18147a181f724ecd0558b3f@6381723_oswg732134oswg900oswg2957_img_jpg?x-oss-process=image/quality,q_90/format,jpg/interlace,1" /></p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_c94c2f8e83cf4b648f10aef0caf70cbd@6381723_oswg5864655oswg900oswg13375_img_jpg?x-oss-process=image/quality,q_80/format,jpg/interlace,1" /></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810313078742787</id>
-            <title>快手可能分拆可灵AI，资本市场为什么好像兴致不高？</title>
-            <link>https://www.36kr.com/p/3810313078742787</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810313078742787</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 09:46:53 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 可灵AI分拆, 资本市场反应, 竞争环境, 管理层指引缺失
-<br>
-<br>
-总结: 文章分析快手计划分拆可灵AI单独融资后股价表现平平，认为市场态度半信半疑。核心原因一是快手处于财报静默期，管理层无法提供分拆细节及收入指引，市场共识需待一季报后形成；二是来自Seedance、Happy Horse等竞争对手的激烈竞争，使可灵AI维持增长的前景不明。作者认为AI视频行业长期乐观，但将乐观预期定量到可灵的具体产品上难度较大，因此资本市场需等待管理层的详尽指引。 </div>
-                        <hr>
-                    
-                    <p>从5月11日开始，关于“快手计划分拆可灵AI单独融资”的说法，在网上广为流传，得到了多家媒体的报道。有的媒体甚至直接提出“可灵计划于2027年初独立IPO”，并公布了2027年的ARR（年化收入）预期。果然，快手于5月12日发布自愿性公告，确认了“正在评估重组可灵AI之方案”。&nbsp;</p>
-  <p>耐人寻味的是此后的资本市场反应：5月12日，快手股价一度大涨11%，但很快就失去了大部分涨幅。此时此刻（5月15日），快手股价甚至低于5月11日、也就是可灵AI分拆消息传出之前的水平。资本市场似乎对这个故事半信半疑、兴致不高，至少目前是这样。&nbsp;</p>
-  <p>当然啦，我们必须承认一点：这几天港股整体表现不好，大部分公司是下跌的。<strong>但是与AI相关的资产明显跑赢了市场</strong>——智谱一度大涨23%，MiniMax也上涨了，阿里发布财报之后因为AI业务的强劲预期至少涨了一天。如果市场相信可灵AI的分拆故事，那么快手应该明显跑赢大盘才对。&nbsp;</p>
-  <p>问题到底出在哪里呢？我认为无非是两点：&nbsp;</p>
-  <p>快手管理层对可灵AI分拆提供的信息太少，目前也不方便提供更多信息；</p>
-  <p>在Seedance, Happy Horse等竞争对手环伺之下，可灵要如何维持增长，这个问题尚未有答案。</p>
-  <p>先说第一个问题。快手预计于5月27日发布一季报，所以现在是静默期，而静默期的信息披露受到很大的限制，与投资者的沟通更是基本中断。5月12日发布的那个公告，就是现在快手能做出的最详细的信息披露了。至于可灵分拆的详细方案、现阶段的增速、2027年的收入计划……管理层现阶段一概不可能对其背书。我相信这些话题必将在5月27日的财报电话会上成为分析师提问的焦点！&nbsp;</p>
-  <p>港股跟A股不一样，对于重大问题，大家还是希望管理层给予明确指引，然后才会折算到估值里去。尤其是快手，目前市值仍有2200亿，不是少量资金能推动的，必须形成市场共识。可灵AI分拆的“市场共识”恐怕得等到一季报之后才能形成。再说，管理层在财报电话会上一定会披露细节吗？没有任何证据支持这一点（尽管我相信还是会披露的）。&nbsp;</p>
-  <p>再说第二个问题。今年1月公布的Seedance 2.0永久性地改变了AI视频行业。在那以后，AI视频的进步是加速的：谷歌发布了Veo 3.1, 阿里先后发布了Wan 2.7和Happy Horse；虽然OpenAI的Sora 2退场了，但是视频大模型市场的拥挤程度有增无减。今年短剧和漫剧承制公司几乎已经离不开Seedance，Seedance的调用量和收入比所有竞争对手都形成了巨大优势（至少在国内如此）。&nbsp;</p>
-  <p>需要指出的是，Seedance的大行其道不一定意味着可灵的下滑，因为整个市场是增长的。但是，很多人会预期市场增量大部分被Seedance拿走（这种预期可能是对的）。至于阿里的Happy Horse，在灰度测试阶段的用户口碑不一，有的赞不绝口、有的认为还不够强；不过有一点是肯定的，那就是阿里一定会继续死磕视频大模型，一个不够就上两个，两个还不够就继续迭代……阿里有充足的资源和决心，这一块不继续推进才不正常。&nbsp;</p>
-  <p>目前的市场传闻是：可灵在今年4月底的ARR（年化收入）已突破5亿美元，2027年初可能突破13亿美元。如果这是真的，那么按照目前市场给大模型公司动辄十几倍P/S的习惯，那么可灵毫无疑问很值钱，所谓200亿美元估值的说法并不夸张。关键在于，现在要预测2027年初的ARR还太早了，投资者不但会担心竞争环境，还会担心届时的AI短剧/漫剧市场是否会大幅减速。&nbsp;</p>
-  <p>我再强调一下：我本人对AI视频十分乐观，既包括短期的乐观，也包括长期的乐观。AI改造整个影视及视频行业的速度已经超过了所有人的预期，今后还会继续下去。但是，要把这种乐观预期定量，尤其是定量到一款具体的产品上，难度还是很大的。所以资本市场在等待管理层的进一步详尽指引，希望这个指引能在本月月底到来。&nbsp;</p>
-  <p>附带说一句，如果有人对AI视频的未来有疑问，认为只是“一阵风”，我强烈建议他去看一看最近知乎上面对Seedance铺天盖地的看空言论。在看到这些五花八门的“黑料”之后，我对AI视频的信心又增强了！因为众所周知，在互联网及科技行业的问题上，知乎主流意见几乎总是反向指标。就拿生成式AI这一波来说：&nbsp;</p>
-  <p>2023-2024年，知乎大V集体唱衰英伟达，认为N卡根本没有什么护城河，很快将被A卡和TPU替代；在此过程中英伟达基本消灭了一切空头。</p>
-  <p>2024年下半年起，知乎大V又集体唱衰谷歌，认为搜索引擎即将被AI大模型架空，谷歌正处于全面溃败之中——那却是谷歌绝地反击的起点。</p>
-  <p>2025年，知乎主流突然变成了看空整个生成式AI的前景，尤其是不赞成AI能替代程序员；此后AI对基层程序员实现了全面迅速的替代。</p>
-  <p>2026年3月起，“现在为什么没人再提Seedance了”成为了一个热门话题，每天都有小丑在下面表演，看得我特别欢乐，最佳厕所读物！</p>
-  <p>我强烈建议所有严肃的投资者、创业者、行业分析人士，高度重视知乎这个“最强反向指标”的作用。知乎大V不止是喷子，而是会一套一套的、振振有词地去论证一件事情为什么不能成功，即所谓“言伪而辩”；基于这些言论反向思考，我们就能深刻地理解一件事情为什么能成功了。&nbsp;</p>
-  <p>本文来自微信公众号 <a href="https://mp.weixin.qq.com/s?__biz=MzIxMDgyMTM0NQ==&amp;mid=2247501951&amp;idx=1&amp;sn=ce6572e6f747597623248c099b3dab05&amp;chksm=96a341d206b5cdcf27a974ba4c7e20b1825036847b8b3972233082600406ea4fb178facb1d1e&amp;scene=0&amp;xtrack=1#rd" rel="noopener noreferrer nofollow" target="_blank">“互联网怪盗团”（ID：TMTphantom）</a>，作者：怪盗团团长裴培，36氪经授权发布。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://www.36kr.com/p/3810238336688388</id>
-            <title>龙虾时代的“房东”大战，谁在闷声发大财？</title>
-            <link>https://www.36kr.com/p/3810238336688388</link>
-            <guid isPermaLink="false">https://www.36kr.com/p/3810238336688388</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 09:35:27 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: OpenClaw, 部署形态, 入口之争, 大厂封装模式  
-<br>  
-<br>总结: 2026年OpenClaw热度峰值已过，但热潮未终结，而是从全民狂欢沉淀为产业战争。市场催生了本地部署、云端实例、大厂封装三种部署形态。本地部署门槛高且安全责任转嫁给用户，云端实例费用双份且本地与云端割裂，两者均未突破大众市场。大厂封装模式实现了开箱即用、账单可预期的体验，起步最晚但增长最快。AI产品竞争重心已转向上手成本、付费意愿和留存率，大厂借助渠道、支付体系等优势抢占入口。真正的赢家将是率先把入口做成生态、通过场景和数据飞轮锁定用户的人。 </div>
-                        <hr>
-                    
-                    <p>2026年即将过半，回看上半年科技圈最热闹的概念之一——“OpenClaw”，一个清晰的轮廓已经浮现：热度峰值已过，但战事未了。</p>
-  <p>GitHub上的Star增速放缓，朋友圈的部署截图逐渐消失，闲鱼上的代装服务价格从2000元跌至200元。这些信号一度被解读为“龙虾”退潮。然而，过去一个月的行业动态表明，这场热潮并未终结，而是从一场全民狂欢，沉淀为一场无声的产业战争。</p>
-  <p>就在外界以为“百虾大战”将逐渐冷却时，战局反而加速升温。</p>
-  <p>阿里、腾讯的财报会议都进一步强调了AI的重要性，路线不同但方向更加坚定。在这之前，龙虾的“房东”大战早已进入白热化阶段。</p>
-  <p>阿里巴巴CEO吴泳铭亲自挂帅，成立Alibaba Token Hub（ATH）事业群，整合通义实验室、千问、悟空等全部AI力量，目标直指“五年内云和AI商业化年收入破千亿美元”。</p>
-  <p>腾讯在同一时间宣布旗下全场景AI智能体WorkBuddy正式上线，彻底砍掉部署环节，下载即用。</p>
-  <p>百度则同步推出零部署服务DuClaw，首月促销价仅17.8元，直接将“开箱即用”的门槛拉到地板。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_17fbc736da394e509e8eaa4b4e9999c4@1689395163_oswg589698oswg1080oswg719_img_png?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>字节跳动的TRAE SOLO从IDE形态独立升级，试图加快抢占AI助手的用户心智。</p>
-  <p>大厂同期集中发力，意图明确。这不是你追我赶的渐进式竞争，而是一场真金白银的资源消耗战。谁能率先跑通“龙虾”的普及路径，谁就可能拿到AI消费时代的最后一张船票。</p>
-  <p>与此同时，回看过去半年的“养虾”热潮，一个核心问题也非常值得深究：谁掉到了“坑”里，谁又找到了路？</p>
-  <h2><strong>三种部署形态，三种截然不同的命运</strong></h2>
-  <p>回顾2026年上半年OpenClaw的大火，市场主要催生了三种部署形态：本地部署、云端实例、大厂封装模式。每种形态对应着不同的用户需求与市场争议，也决定了谁在这场竞争中更有主动权。</p>
-  <p><strong>一、本地部署：数据主权与技术自由，但门槛过高。</strong></p>
-  <p>本地部署模式在上半年率先吸引了技术爱好者。其卖点非常清晰，私有数据不出本地，无需按月支付会员费，AI的使用更自主。但多数人很快发现，环境配置本身就能劝退大部分人。更令人担忧的是，AI能够访问整个文件系统、浏览器历史，甚至执行终端命令。一旦被恶意技能劫持，用户的AI可能沦为他人手中的工具，电脑也随之沦陷。</p>
-  <p>针对这些痛点，部分厂商尝试降低门槛和安全风险。例如，智谱AutoClaw将环境配置压缩到“一分钟搞定”。腾讯QClaw依托电脑管家18.0，为AI划定专属“隔离房”——只能在指定文件夹内活动，无法越界。英伟达NemoClaw则直接销售预装百种技能的一体机，插电即用。</p>
-  <p>这一模式确实具有吸引力，但对于大众用户而言，还不够。配置环境已经拦住了多数人，而安全边界的维护还需要用户具备更高的安全意识——两道关卡叠加，大众用户基本很难跨越。</p>
-  <p>当然，这一模式永远有市场。技术极客、隐私原教旨主义者、以及愿意购买一体机的高端用户，会更倾向于本地部署。但在2026年上半年的整体格局中，它注定是小众选择。</p>
-  <p><strong>二、云端实例：7×24小时在线与弹性算力，但仍不完美。</strong></p>
-  <p>本地部署解决了自主性问题，却带来了另一个现实困境：普通电脑难以支撑“龙虾”所需的持续在线。用户睡觉时需要它盯盘，上班时需要它刷网页，但大多数笔记本电脑无法承受这种“永不停机”的负载——风扇狂转、电池告急，断网断电则直接罢工。</p>
-  <p>于是，云端实例在上半年迅速走红。阿里云、腾讯云、百度智能云、华为云等厂商纷纷上线“一键部署镜像”，点几下即可将“龙虾”部署到云服务器，实现7×24小时在线。然而，用过的人很快发现几个别扭之处。</p>
-  <p>首先，云端的“龙虾”与本地电脑是割裂的。它能执行云端命令，却无法直接操作本地鼠标键盘，也访问不了本地硬盘文件。想让云上AI整理本地文档，需要先折腾云盘挂载或文件同步。其次，用户不仅要支付服务器租用费，还要额外承担Token调用费——两头支出。最后，一旦自动化流程依赖了云端的存储和定时任务，想要迁移数据或重配环境，其复杂程度甚至不亚于本地部署。</p>
-  <p>很显然，云端方案解决了“电脑扛不住”的问题，却带来了新的麻烦：费用双份、本地与云端割裂。对于需要AI长期在线跑任务的用户而言，这更像一个过渡方案，而非最终答案。上半年的大量用户反馈也印证了这一点。</p>
-  <p><strong>三、大厂封装模式：开启“零门槛AI”的进程。</strong></p>
-  <p>前两种模式的核心矛盾其实只有一个：用户既不想充当技术运维，也不想扮演财务会计。本地部署是“自由但费人”，云端实例是“省心但费钱且割裂”。</p>
-  <p>绝大多数用户想要的，或许只是一个固定月费的“黑盒”——我交一份钱，你把活干好。</p>
-  <p>大厂显然嗅到了这一需求，并在上半年末集中发力。腾讯WorkBuddy打出“下载即用”的口号，阿里“悟空”直接嵌入钉钉，服务2000万企业组织。这些产品有着共同特征：开箱即用，模型调用费全部打包进会员费。用户无需折腾Docker，无需配置环境，无需操心安全隔离——大厂已将“隔离房”做进产品底层。本地与云端的割裂问题也一并解决：通过官方客户端一键授权，AI可直接调用本地文件，无需手动挂载云盘。</p>
-  <p>甚至，用户不需要知道背后用的是混元还是DeepSeek，不需要关心Token单价涨跌——每月固定扣款，“龙虾”随叫随到。更重要的是，这些大厂封装版并未将用户锁定在单一模型上，像WorkBuddy、DuClaw、悟空均支持多模型自由切换。</p>
-  <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260515/v2_98ef7970584d4af9bfafa423bb275860@1689395163_oswg2026954oswg4800oswg3201_img_jpg?x-oss-process=image/format,jpg/interlace,1" /></p>
-  <p>用户购买的并非某个模型的能力，而是“一个入口”——在这个入口内，想用什么模型就用什么。前两种模式让用户自己选模型、自己付Token、自己担风险，而大厂封装版将这一切打包成一份订阅，同时弥合了本地与云端的割裂。</p>
-  <p>当然，这一模式也有代价。目前大厂仍在抢占市场，价格尚处博弈阶段，未来会员费大概率会阶梯式上涨。但大众市场从来不是追求绝对最低价——他们要的是可预期的价格与省心的体验，这取决于哪家厂商能率先满足这一期待。</p>
-  <h2><strong>2026“龙虾”大战分化已定，入口之争决定最终船票</strong></h2>
-  <p>站在2026年年中回望，三种部署形态的分化已经明朗。</p>
-  <p>本地部署守住了技术极客和隐私敏感型用户，但未能突破大众市场。它的价值在于证明了一件事，用户对数据主权和免订阅费的需求真实存在。但代价是，这套方案把技术门槛和安全责任全部转嫁给了用户自己。</p>
-  <p>结果是，真正能跑通本地部署的人，始终是少数。上半年各大技术社区的热度曲线也印证了这一点，初期爆发式增长，随后快速回落，留下一批稳定的核心用户，但远未形成规模效应。</p>
-  <p>云端实例则走出了一条不同的曲线。它解决了“电脑扛不住”的痛点，一度被视为本地部署的升级版。然而，用户很快算清了另一笔账：服务器租金加Token费，双份支出；本地文件与云端操作，两套系统。更关键的是，一旦流程依赖云端存储和定时任务，迁移成本不亚于重新部署。</p>
-  <p>上半年末，云端实例的增速明显放缓，大量用户停留在“试用”阶段，并未转化为长期付费。这说明，云端方案填补了一个过渡需求，但缺乏让用户长期驻留的黏性。</p>
-  <p>相比之下，大厂封装模式虽然起步最晚，却在短短一个月内完成了从0到1的突破。腾讯WorkBuddy上线首周下载量破百万，阿里“悟空”在钉钉内的激活率超过30%，百度DuClaw凭借17.8元的促销价迅速拉新。</p>
-  <p>这些数字背后是一个清晰的信号——大众用户不是不接受付费，而是不接受“先折腾再付费”。他们把“省心”放在第一位，把“可控”放在第二位。大厂封装模式恰好提供了这种体验——开箱即用、账单可预期、出了问题有客服。</p>
-  <p>客观来说，这一分化并非偶然，而是由AI产品竞争重心的转移所决定。进入2026年，各家底层模型的能力差距已经缩小到普通用户无法感知的程度。GPT-5、Gemini Ultra、通义千问Max、混元Turbo——在标准基准测试上互有胜负，但在实际使用中，用户根本分不清是谁在回答。</p>
-  <p><strong>AI产品比拼的不再是跑分，而是三个更朴素的指标，即上手成本、付费意愿、留存率。哪个产品能让用户最快用起来、最愿意续费，哪个就能赢。而这恰恰是大厂最擅长的领域。</strong></p>
-  <p>大众市场从来不是技术最强的人获胜，而是最省事的人获胜。大厂的武器不是模型参数，而是渠道、品牌、支付体系、客服网络。钉钉、微信、百度App、抖音——这些亿级流量的入口，本身就是最好的分发渠道。再加上已经跑通的订阅制付费模型（视频会员、网盘会员、办公套件会员），大厂封装模式几乎是为大众市场量身定做的。</p>
-  <p>现在再来看“谁在闷声发大财”这个问题，答案已经清晰了一半。短期内，大厂封装模式会吃掉最大的市场份额。但长期来看，<strong>真正的赢家不会是某一家大厂，而是那个率先把“入口”做成“生态”的人。</strong></p>
-  <p>为什么？因为AI智能体的竞争，本质上不是模型之争，而是场景和数据飞轮之争。你用得越多，AI就越懂你；越懂你，你就越离不开。一旦用户在某一个入口里沉淀了工作流、个人数据、自动化习惯，迁移成本就会高到难以承受。</p>
-  <p><strong>这就是移动互联网时代超级App逻辑的AI翻版：先抢入口，后收租金，最后靠生态锁定用户。</strong></p>
-  <p>这也是为什么阿里、腾讯、百度、字节几乎在同一时间集中发力。传统互联网业务——广告、电商、游戏——增长均已触及天花板。对于这些巨头而言，AI是目前唯一可见的“第二增长曲线”。2025年第四季度，阿里智能云增速达36%，AI相关收入已连续8-10个季度保持三位数增长；百度2025年AI营收突破400亿元，远超市场预期。</p>
-  <p>与此同时，四家巨头手中都握有海量私有数据——字节跳动拥有中国人的短视频偏好，阿里掌握数十年的交易记录，腾讯持有所有人的社交关系，百度则积累了二十年的搜索历史。这些数据如果不尽早利用，一旦被对手或创业公司以更先进的技术切入，那些靠流量和数据积累起来的优势，将比大多数人预想的更快失效。<strong>AI入口之争，本质上是一场防御战。</strong></p>
-  <p>那么，本地部署和云端实例会消失吗？不会。它们会越来越像小众市场——服务于那些愿意花时间折腾、对数据主权有硬性需求的用户。这就像Linux在桌面操作系统中的位置，永远有一批忠实用户，但从来不是大众市场的主流。</p>
-  <p>大多数普通用户不会选择这些路径，不是因为他们不懂，而是因为他们不想懂。他们要的只是一个打开即用、账单可预期、出了问题有人负责的工具。大厂封装模式提供的，恰恰是这些。</p>
-  <p>热度退潮后，被留在原地的不是那些收会员费的大厂，而是那些教用户装Docker、配MCP、自建运行环境的教程——用户真正想要的东西，它们从未提供过。</p>
-  <p>真正的赢家，是让用户忘记“部署”这两个字的人。</p>
-  <p>*本文图片均来源于网络，且未核实版权归属，不作为商业用途，如有侵犯，请作者与我们联系。</p>
-  <p>本文来自微信公众号“智能相对论”，作者：陈泊丞，36氪经授权发布。</p>
                 ]]>
             </content:encoded>
         </item>
