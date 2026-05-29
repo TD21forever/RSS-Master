@@ -5,6 +5,84 @@
         <link>https://sspai.com/matrix</link>
         
         <item>
+            <id>https://sspai.com/post/110106</id>
+            <title>Await：五分钟，把点子变成 iPhone 小组件</title>
+            <link>https://sspai.com/post/110106</link>
+            <guid isPermaLink="false">https://sspai.com/post/110106</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 29 May 2026 07:00:28 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><p><strong>利益相关声明：</strong>作者是文中产品 Await 的开发者。</p><hr /><p>我女友在网上看到一张 ADHD Bingo 卡片。它把一些日常自我管理事项做成 bingo 格子：规律睡眠、少刷信息流、运动 15 分钟、晒太阳、刷牙、出门……每完成一项，就划掉一个。</p><p>它是手绘的，质感很好，但只存在于截图收藏夹里。</p><p>我看到它的第一个念头是：这不就是一个主屏小组件该有的样子吗？点一下格子，完成；零点自动清空，明天重来。如果它真的放在主屏上，每天打开手机都能看到，就会和收藏夹里的那张截图完全不一样。</p><p>我打开 Codex，用自己做的工具 Await 复刻了一版。基础结构大概一分半，再调几轮：用手绘网格替换方正边框，用荧光笔替换完成标记，加上每天零点重置。前后五分钟，它就从一张纸上的想法，变成了真的放在我女友 iPhone 主屏上的小组件。</p><figure class="image image_resized ss-img-wrapper" style="width: 300px;"><img alt="放到 iPhone 主屏上的 ADHD Bingo 小组件" src="https://cdnfile.sspai.com/2026/05/25/0c7246dc35872b2747bd78bf12ff34a9.PNG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>放到 iPhone 主屏上的 ADHD Bingo 小组件</figcaption></figure><h2>那些太小、又太值得存在的点子</h2><p>有很多点子就停在这里：聊天记录里、截图收藏夹里、某个「有空再做」的念头里。</p><p>不是不够好，而是太小了。小到不值得专门做一个 App，但如果真的存在，又会是每天都用得到的小作品。</p><p>iPhone 主屏上的小组件，可能是离人最近、也最小的一种界面。问题是，正常的 iOS 开发路径对这类小作品太重了。哪怕只是想在主屏上放一个自定义的小界面，仍然要面对 Xcode、工程结构、WidgetKit extension、打包、读完仍然不知道怎么回事的文档……这些准备工作加在一起，常常比想法本身还要重。</p><p>对普通用户来说，这条路几乎不存在；对开发者来说，也往往会因为麻烦而搁置。</p><p>Await 想做的，就是缩短这段距离。</p><h2>描述出来，放上去</h2><p>Await 是一个 iOS App，可以用 TypeScript 创建真实的 iPhone 小组件。它不是把网页塞进小组件，也不是生成静态图片，而是可以交互、有状态、真的能放在主屏上长期使用的小组件。</p><p>它的工作方式很接近今天的 vibe coding 流程：把想法告诉 Cursor、Claude Code、Codex 这类 AI 工具，让它写出 TypeScript；再把代码放进 Await，在 iPhone 上实时预览，调整，然后放到主屏。</p><p>一个基础小组件长这样：</p><pre class="language-typescript"><code>import {Text} from 'await';
+
+function widget() {
+return &lt;Text value='Hello World'/&gt;;
+}
+
+Await.define({widget});</code></pre><p>你可以让 AI 把这段改成倒计时、状态卡片、ADHD Bingo，或者任何你能说清楚的作品。对于一个想快速落地的小工具来说，这比从零开始配置 Xcode 工程要轻得多。</p><p>不会写代码的人也可以用。把想法告诉 AI，让它写，你负责看预览、说「这个格子再大一点」「颜色换成这个」。</p><p>现阶段，Await 没有把对话式 AI 直接做进 App。</p><p>AI coding 工具本身还在快速变化，模型、编辑器、工作流都会继续变得更好。Await 更想专注在它们之后的那一步：把 AI 写出来的 TypeScript，变成可以在 iPhone 上预览、调整、放到主屏、甚至打包分享的小组件，让这些小作品最终真正落到 iPhone 上。</p><h2>写完之后，还可以继续调</h2><p>不是所有调整都适合交给 AI。字号差一号、颜色深一点、间距松一些，这些改动说清楚比直接拖一下滑杆要麻烦得多。</p><figure class="image image_resized ss-img-wrapper" style="width: 300px;"><img alt="代码写完之后，Await 可以生成可调整参数的面板" src="https://cdnfile.sspai.com/2026/05/24/0270f5a1f8352b62b61db5af213c027f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>代码写完之后，Await 可以生成可调整参数的面板</figcaption></figure><p>Await 支持把代码里的参数标记成可调节项，App 里会自动生成对应的控制面板：文字、字号、颜色、开关，拖动或点击就能改，代码同步更新。</p><p>这一步同样可以交给 AI。跟它说「把标题、颜色和字号都标记成可调节的」，它改完代码，面板就出现了。</p><p>面板和代码是双向同步的：你在面板里改了一个值，代码里对应的参数也会随之改变。</p><p>这样，一个小组件可以先由 AI 或开发者搭出基本结构，再由使用者在面板里仔细调到自己想要的样子。</p><p>我录了短视频，展示这些小组件在主屏上的效果，以及编辑、预览、调整的过程：</p>  <h2>小，但不只是信息卡片</h2><p>ADHD Bingo 是一个生活化的例子，但 Await 能承载的不止于此。</p><p>它可以是倒计时、服务状态面板、纪念日提醒、常用动作的主屏入口。这些是最容易想到的「信息和按钮」。</p><p>也可以是连续弹奏的 MIDI piano 和 drum pad；是带翻页动画的翻页时钟和阅读器；是 2048、推箱子这样按步骤推进的小游戏；是可以自定义秒针样式的模拟时钟；是高帧率 GIF 动画；也是功能完整的 Apple Music 播放器。</p><p>这些例子在市面上的小组件工具里并不常见。它们更像是在说明：一旦小组件可以承载更复杂的界面、状态和交互，它就不再只是一张静态信息卡片，而可以变成一种很小、很贴近生活的作品。</p><figure class="image image_resized ss-img-wrapper" style="width: 300px;"><img alt="Await 可以自由地创作各种小组件" src="https://cdnfile.sspai.com/2026/05/24/f76986a562ed2f99618dd321b99dba4a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Await 可以自由地创作各种小组件</figcaption></figure><figure class="image image_resized ss-img-wrapper" style="width: 300px;"><img alt="Await 小组件的可能性" src="https://cdnfile.sspai.com/2026/05/24/b436b3d06f9c373095749e6545d4461c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Await 小组件的可能性</figcaption></figure><p>当然，小组件不是完整的 App，iOS 仍然会限制小组件的内存和刷新频率。但我反而觉得这是它的魅力。</p><p>它不是让你把 App 缩小，而是让你重新想清楚：哪些作品值得常驻在主屏上，哪些信息应该在打开手机那一刻就被看见，哪些动作可以不再绕进 App 里。</p><h2>做得不错，也可以分享出去</h2><p>Widgy 和 Scriptable 社区里有一种很有活力的现象：有人认真做一套小组件包，放到网上分享，甚至卖几美元。</p><p>Await 也希望让这种创作更容易发生。一个小组件包可以包含小组件本身、图片资源、参数设置，以及作者设计好的自定义面板。哪些文字可以填写，哪些颜色可以选择，哪些开关或数据源可以配置，都可以由创作者在制作时决定。</p><p>这样分享出去的不是一张截图，也不是一段需要别人自己读懂的代码，而是一件可以安装、配置和使用的作品包。它保留了作者的审美、结构和想法，也让认真做小组件的人有机会把作品分享给更多人。好的作品，不仅值得被分享，也值得获得收入。</p><p>换句话说，小组件包有价值的地方，往往不是代码本身，而是某种已经存在的创作资产、数据资产或服务能力，被做成了更贴近手机使用习惯的主屏入口。</p><p>比如插画师可以把一组角色、壁纸或视觉风格，做成主题时钟、倒计时、音乐控制器、每日签语小组件；用户买到的是这套审美在主屏上的延伸。</p><p>长期整理小众信息的人，也可以把自己的数据源做成小组件：演出开票、球鞋发售、游戏活动日历、潮汐和钓点、某个社区的内部日程，或者带有红包 CPS 的优惠信息入口。用户买到的不是一个空模板，而是持续维护的数据和更方便的查看方式。</p><p>如果是一个课程、社群或服务，也可以把打卡进度、活动倒计时、会员提醒、关键状态做成专属小组件。它不一定要服务很多人，但只要对那一小群人足够有用，就有被付费支持的理由。</p><h2>现在可以下载</h2><span class="ss-application">&nbsp;</span><ul><li>官网：<a href="https://awaitwidget.com/">https://awaitwidget.com</a></li></ul><p>接下来我会继续做更多有意思的示例，让小组件包更适合在社区里分享和传播；也会继续做更多面向 AI coding 的教程，让更多不熟悉开发人也能用 Await 做自己的小作品。</p><p>如果有人用 Await 做出了好作品，我也希望把它们展示出来，让创作者有被看见的机会。</p><p>我希望 Await 最后留下的，是一种更轻的创作入口：不必很大，但足够好看和好玩，也足够贴近自己每天使用手机的方式。</p><p>&gt; 关注 <a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/109936</id>
+            <title>告别植物杀手后，我做了一款App，把喜欢的植物都装进口袋里</title>
+            <link>https://sspai.com/post/109936</link>
+            <guid isPermaLink="false">https://sspai.com/post/109936</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 29 May 2026 01:10:25 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2>写在前面</h2><p>我一直以为养好植物的秘诀应该是<strong>浇水</strong>的频率，以往每一次想要认真对待一盆新到家的盆栽的时候，都会小心翼翼地在待办事项里记下一个重复任务<strong>提醒</strong>自己浇水。但是结果总是跟清单里的其他事物一样，逐渐被遗忘。对于植物来说，被遗忘也就意味着被杀死。</p><p>直到 2023 年的春天，最近才发现那天正好是植树节，机缘巧合地被我的植物爱好者朋友带着深度逛了一圈花卉市场，我开始打开了<strong>“植物眼”</strong>，也不曾想到在那之后<strong>“植物杀手”</strong>这个标签将会慢慢从我的身上掉落。</p><p>那是一次非常有趣的花卉市场导游，那天我开始知道许多常见的室内植物的名字，知道了哪些是猫咪友好植物，又带回了几盆小盆栽打算再给自己一次机会。虽然那一次带回来的植物没有存活到今天，但是我们埋下的另一个种子长出了小树，也长出了侧芽。</p><h2>从播客、社群到独立开发</h2><p>是的，我们决心做一档无门槛入坑园艺、植物杀手友好的植物爱好者播客 - <strong>《朱兜兜花园》</strong>。</p><p>这一档植物播客对我来说同时也是一个<strong>社群</strong>，它见证了我们和花友在家庭园艺和自然博物方面的成长。</p><span class="ss-linkCard">&nbsp;</span><p>这两年里，我养死过的植物数量，大概跟我现在养活的差不多。植物的死亡不会预警，它们没有办法告诉你哪里出了问题——有的植物死于毫不在意，也有的植物死于被过度关心。</p><p>做播客之后，我开始更系统地和植物爱好者们交流。我发现一件有意思的事：<strong>养好植物是一种慢慢积累的知识和觉醒的意识，不是只靠提醒事项能解决的事。</strong> 当你真的熟悉了一株植物，其实也不再需要提醒——那种感觉更像是形成了一种生活节奏。</p><p>但在真正熟悉之前，我们需要的是一个地方，把这些积累经验的<strong>过程</strong>留下来。</p><p>市面上的植物 App 大多数是这样的逻辑：输入、识别植物品种，告诉你每隔几天浇多少毫升的水，设置提醒，完成任务。还有大部分数据存在云端，方便拓展<strong>电商</strong>和<strong>社交</strong>功能。在我决定做口袋植物之前也几乎全部体验过，似乎对于我和一些花友来说都太重了。以及，<strong>养活第一株植物是一件很微妙的事情</strong>，完全靠提醒事项和养护百科大概率是没有用的（欢迎问我是怎么知道的，因为活着的或者死去的植物都没有办法告诉你）。</p><h2>「口袋植物」</h2><p>于是，我做了一个植物养护App -<strong>「口袋植物」（「PokePlant」）</strong>，说是一款植物<strong>收藏和养护日记</strong>更贴切。名字的来源是因为我觉得随着植物越养越多，就好像小时候在集宝可梦的卡牌，而宝可梦最早的翻译是口袋妖怪，所以分别有了这两个名字。（也有花友把它叫做<strong>植物口袋</strong>，其实也挺符合的）</p><p>App 上线后，我收到了大量来自用户的反馈。我发现大家对<strong>相册、日记</strong>的需求，远远大于对养护提醒和植物识别的需求。这让我想通了一件事：我们养植物，不只是为了养活它，更是为了和它在一起的那些时光。每一朵花、每一片叶子都有<strong>独特性</strong>和<strong>短暂性</strong>。记录下来，好像就能把这些流动的美丽定格。</p><p>所以「口袋植物」里，每株植物都有自己的<strong>成长相册</strong>，按时间轴展开，你可以看到它从一棵小苗到现在的全程。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/14cd900a219c48ff040708eaeab59cf3.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>为了解决从相册<strong>翻阅</strong>找到植物图片的<strong>痛点</strong>，我开发了从系统相册快捷添加到「口袋植物」的辅助功能。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/b1c745162f2e91c75f205a16873d8555.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&nbsp;</p><p><strong>最近，我还加入了贴纸墙的展示入口。</strong> 你收集的植物贴纸会在这里排列开来——有点像小时候在文具店买本子贴贴纸的感觉，打开来就可以看看自己的战绩，也可以给花友展示。功能发布后很快就收到了许多赏心悦目的返图（如下）。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/6445cba117e571d263b1a3401c304a46.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在目前的版本中，对于植物的<strong>养护频率</strong>、<strong>标签</strong>、<strong>养护动作</strong>，我都使用了尽量简单但是自定义的方式，来应对各种植物的不同需求。至于怎么设置，还是需要我们在生活中、网络上去筛选信息，结合实际操作去试错和总结。</p><p>以及同时作为开发者和用户的我，发现目前使用识别的需求其实很低，因为大部分家庭园艺植物我们在收到的时候也已经知道它的信息，所以识别这块我在系统设置里面加了一个不起眼的入口，帮你封装好了植物识别API在你需要的时候作为一个参考。但是就目前的植物数据标注而言，重任我们还是交给更专业的团队和更靠谱的花友吧～</p><h2>关于社群</h2><p>我也是在逐渐养护的过程中才发现，园艺也是一个可以有强社交属性的爱好！「口袋植物」现在的很多功能，都来自社群里真实的反馈和讨论。感谢一直以来跟我分享植物、教我养护、也支持和使用口袋植物的花友们！</p><p>我常常觉得，这款 App 本身就像我们一起养育的一株植物——它在成长，还有很多不完善的地方，但每一次更新都带着来自社群的养护。我相信它一定会在大家的共建之下更加茁壮地成长。</p><p>如果你愿意加入进来，一起把喜欢的植物装进口袋——</p><p>那就是最好的事了。</p><h2>写在结尾</h2><p>☝️用户们反馈和返图是我骄傲和动力的来源！（特此鸣谢）</p><ul><li><strong>「口袋植物」（「PokePlant」）现已上线 App Store，搜索「</strong><a href="https://apps.apple.com/cn/app/%E5%8F%A3%E8%A2%8B%E6%A4%8D%E7%89%A9/id6743841100"><strong>口袋植物</strong></a><strong>」（或者「PokePlant」）即可下载。</strong></li><li><a href="https://xhslink.com/m/84fzCcEQzsL"><strong>朱兜兜花园</strong></a>是一档围绕着植物和生活展开的杂谈类泛园艺播客。由「种植博爱」主播朱兜兜和被领入门的「种植偏科」主播芋子、「种植小白」主播莓莓姐，一起畅谈种植给我们带来的思考和乐趣。我们将从生活、电影、流行文化中寻找植物趣事， 从园艺种植中寻找真正的生活。你可以在小宇宙、小红书、苹果Podcast等所有泛播客平台找到我们。</li><li><a href="https://xhslink.com/m/1DCPbBEhX31" target="_blank">LilStrawberry</a></li></ul><p><i>欢迎在评论区告诉我你养过的最难忘的一盆植物，或者养死过的——那些也值得被记住。</i></p><p>&nbsp;</p><p>&nbsp;</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/110391</id>
+            <title>极氪7X开到3万公里，保养、充电、保险一共花了多少钱</title>
+            <link>https://sspai.com/post/110391</link>
+            <guid isPermaLink="false">https://sspai.com/post/110391</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 28 May 2026 07:17:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2><strong>引子</strong></h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/345fd41b6a481c0b2337b902a1beac1f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>一晃，距离提车已经17个月，目前已行驶超过3w公里。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/5f72c35c08cdc4c03cca9a2755ab9c6b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>辅助驾驶的主要使用场景为高速，日常城区道路不使用。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/80aa5986b987c268089212e34f739df7.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>车辆的版本是：长续航四驱智驾版，选的白色外观和白色内饰。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/e62262675ab9aa8248403ffa0e653fc5.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/2054c124a787a3139e36e223d922c1a6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/eb1affed387a3149d4094aeebd165434.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>只有一个选配：后排沙发。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/6c9ad54ddb75d4818d11897e49753d5d.gif" /></figure><p>最近几天，仔细把用车成本核算出来了， 我的主要使用场景是三个：接娃上下学、节假日长途出行、偶尔自驾。</p><p>这篇不谈感受，直接算账 ，以便给大家做一个真实的参考。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/f2b74d648b81559afd938c75570589c6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2><strong>3万公里的用车账本</strong></h2><p>整理账单其实挺费功夫的，主要是考虑到一辆车的用车成本肯定不只是其能耗表现， 要把充电、保险、保养、停车、高速、车品一起算才更贴近实际情况。</p><p>纯电车省不省钱，不能靠感觉，必须仔仔细细的算账，总计17个月的用车费用我分成了7个大的模块：</p><h3>充电费用： 12.74%</h3><p><strong>1）家充桩费用：1276.1元，占比3.99%</strong></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/a848ca35dbd796676f0cf29c38bbfcf9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>2）临时充电费用：约2800元，占比8.75%</strong></p><p>主要是在高速上充电，国家电网的充电桩用得最多。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/4933fe43fc549430fb547b0abb6031c3.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><i>PS： 汇总金额计为2800元是因为有几笔充电记录没找到</i></p><p>最终充电费用为：4076.1元，再结合当下的行驶里程为：31217公里。</p><p>简单计算便能得出能耗：</p><p><u>约等于每公里 0.13元，也就是1毛3/公里。</u></p><p>&nbsp;</p><h3>保险费用：45.17%</h3><p>两年的保险费用：14456.52元。</p><p>占整体用车费用的比例为45.17%，是所有费用里面占比最高的一项。</p><p>第一年：8361.89元 （赠补漆券，未出险）</p><p>第二年：6094.63元（有赠送900元购物卡+补漆券）</p><p><i>PS： 有一说一，纯电车的保险费用实在是贵</i></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/b093cf7f3bca44bea7da72bf5118c7b6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>保养费用：2.08%</h3><p>目前只做了一次保养，首保的费用：665元，是目前整体费用中占比最低的一项。</p><p>费用组成为两项：</p><p>1）基础保养费用为：517元</p><p>2）空调管路清洗服务：148元</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/df47a182ba0a90d656fcea47c46e7f37.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>当时有做动力电池健康度检测，最终结果是：99.73%。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/b20e4c1ef384f196da4b23b5abe2c350.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>当时去的上海嘉定的极氪家，整体环境不错，服务流程规范，中午有盒饭提供。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/8cae2501be246b7bc601c320fb52efff.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>极氪的保养不便宜，二保是4W公里或两年，可能需要1000元左右</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/16f8b2c953a55466e1e4c393e11f4f2d.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>高速和停车费用：23.93%</h3><p><strong>1）高速费用：7008.23元</strong></p><p>占比21.9%，仅次于保险费用占比。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/3bd7c77f63116179111b789a05010dbf.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>2）停车费用：约650元</strong></p><p>占比2.03%， 这一项无需过多解释，开车出行停车费是避免不了的。</p><p>&nbsp;</p><h3>车品费用：8.12%</h3><p>总计花费约2600元，都是一些必备的车载用品。</p><p><strong>1）NFC钥匙，在闲鱼买的</strong></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/7847dfa5e69cf82d5b7ac0ce5bf9fca4.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>2）全包围脚垫，提车当天去安装的</strong></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/ba324a1154752ed86a513ecd41610096.gif" /></figure><p><strong>3） ETC，跑高速必备</strong></p><p>这款大小适中，能放在扶手箱里面，半年充电一次即可</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/bb87678650a6fecea4aa132f9e958e69.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>4）小米充放电一体枪</strong></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/b694808b05913a1e2bc2b7fe09c93b3a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/abb7de0c309921913244fa188049a215.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>5）各种小配件</strong></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/72e7b2749c0e93046038a2c972a7fd43.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3><strong>贴膜费用：2500元</strong></h3><p>没有贴车衣，只贴了隔热膜，最终选的是3M透光度好一点的膜，具体型号已经忘记，只记得贴膜后三天不能升降车窗。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/e225362898f79306a4eb2f17f3289068.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>洗车及其他费用：3.12%</h3><p>大约一个月洗车1-2次，前期主要去店里面洗，但每次去几乎都需要排队等候。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/e05cfd1bf8e7c7e442794ed6b6947182.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/7899258208bcd3464ab0e7a80c67464d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>现在都是去自助洗车的地方清洗，不仅更实惠了，而且大部分时候也不用等，到了就洗，每次根据清洗的时长和用量，单次费用范围在10-20元。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/ef63414d845f3787455317c6d4079f83.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>自己洗车虽然比较费功夫，而且前期因为不太熟练也清洗的没有洗车店干净，但洗完之后的成就感满满！</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/724dff56890ad403ed500409cc2ef9cc.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><hr /><h2><strong>结语</strong></h2><p>相信通过以上相对明细的账单，你能得出一个结论：纯电车不一定在所有项目上都便宜，特别是高速场景偏多的时候。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/28/article/230366c859e08bdc3c3158bd8dbb836d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>但如果有稳定充电条件、日常通勤距离比较长、用车频繁的话，整体的综合使用成本和体验都会更有优势。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/110254</id>
+            <title>像孩子一样的 MacBook Neo</title>
+            <link>https://sspai.com/post/110254</link>
+            <guid isPermaLink="false">https://sspai.com/post/110254</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 28 May 2026 02:34:17 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2>引言</h2><p>无论是伟大还是平凡的大人，大抵都有一个只属于自己的孩提时代。在商业世界的逻辑同样如此：一个选择拥抱大众的品牌，必然会有一款门槛最低、最纯粹，却足以传递核心价值的入门产品。</p><p>不妨让我们把时间回溯到 1999 年 7 月。那一年，在乔布斯回归后重整的“四象限”产品架构下，苹果推出了面向非专业普通用户的笔记本：有着大胆蚌壳设计的 iBook G3。它在突破性的外表下，拥有同价位中极具竞争力的配置，而与朗讯合作的 AirPort 无线网络方案更塑造了延续至今的移动设备使用场景。色彩鲜活、亲和力十足的它曾走进美国的无数家庭与校园，陪伴一代代孩童和学生触碰互联网、学习新知识、尝试创作和自我表达，成为他们探索数字世界的第一把钥匙，也奠定了苹果亲民入门产品线的核心基调。这款经典的入门级产品伴随时代变迁演变为原初的 MacBook，直到 2015 年这个名字转向极致工艺的象征。</p><p>2008 年 1 月，MacBook 家族迎来了前所未有的全新产品线，Air&nbsp;一词首次成为苹果产品的后缀。这个名字最初用来注释那份令人惊叹的轻薄，但苹果或许自己都未曾料到它会超越“便携旗舰”的最初定义，成为大众群体中认知度最高的 Mac 符号之一。事实上，随着产品迭代而自动降档的旧款 MacBook Air 最终接替了塑料 MacBook 的使命，成为了实质上的入门机。学生、孩童以及对 Mac 世界充满好奇的芸芸众生，不约而同地将它作为了新的起点。</p><p>硬件部门出身的苹果现任总裁 John Ternus 在 M1 芯片发布时曾说：“任何一部搭载&nbsp;M1&nbsp;的&nbsp;Mac&nbsp;都将成为一类前所未有的产品。”&nbsp;<sup class="ss-footnote" href="" title="“As a result, M1 delivers a giant leap in performance per watt and every Mac with M1 will be transformed into a completely different class of product.”
+
+来自Apple Events：Apple Event, November 2020，2020年11月11日
+https://podcasts.apple.com/jp/podcast/apple-events/id1473854035?i=1000498009276&amp;r=422
+此内容可能受版权保护。">1</sup>最初，包括我在内的人们都只把这当作对 M1 能效比的夸张赞誉。但如今看来，这句话让 MacBook Neo 的问世显得有趣了起来，无论对于你我而言这究竟是一个惊喜，还是一场惊吓。</p><p>它采用移动端 SoC，外围配置看似全方位缩水，却继承了 MacBook 绝大多数的综合体验。就是这样披一袭鲜艳色彩的 MacBook Neo，用前所未有的超低全新售价向世界宣告：那个如孩童般平易近人的入门级 MacBook，回来了。在当地苹果授权店闲逛时，我曾亲耳听到一位父亲打算给八岁的女儿购买 Neo 作为学电脑的礼物。面对我的好奇，他给出了最朴素的解答：“家里有 iPad，我想用起来也差不多。”</p><p>至此，相信大家对 MacBook Neo 的应用场景已经有了基本预期。苹果从未避讳它面向海外 K12 教育市场、直面 Chromebook 竞争的意图。它会像当年的 iBook，也会像那些实质成为入门款的 MacBook Air 一样，被孩童与学生们注视和使用。在重回便携旗舰定义的 M5 Air，以及始终面向专业人士的 Pro 这两位更成熟的大人面前，它确实更像个小孩。</p><p>而至于它究竟是不是个好孩子？则需要通过接下来我与它的实际相处，告诉诸位一个答案。</p><h2>它还是个孩子</h2><p>迄今为止，已经有大量的评测媒体/自媒体测试过&nbsp;MacBook&nbsp;Neo&nbsp;的量化性能，故该部分无需过多赘述。下面是我个人并不严谨的量化测试结果。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/article/8465bdfd5ce7d7825237c9108b67882b.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Geekbench 6 量化测试分数图，在 Keynote 中完成</figcaption></figure><p>不得不承认，MacBook Neo 在性能上有着非常明显的边界。这和大众印象中的孩童极为相似：你能够非常轻易地触及它的性能上限，如同孩子一般，身上往往没有那么多深不可测的心机。受限于规模，A18 Pro&nbsp;的多核表现并不出众，再加上带宽的限制，它的拓展性能用捉襟见肘来形容。最高仅 8&nbsp;GB RAM 的配置、仅支持单台 4K 60Hz 显示器的外接能力，让它完全剥离了专业生产力的拓展需求。</p><p>在散热与接口上，这种由预算限制带来属于入门产品特有的取舍同样明显。Neo 直接搬用了与 iPhone 同级别的散热方案，持续性能释放比无风扇的 MacBook Air 还要更加克制。正因如此，由已知多个自媒体的体验来看，在视频导出等长时间高负载场景下，它与 Air 的时间差距都肉眼可见，这像极了孩子为了证明自己，一口气憋到满脸通红的倔强体力。例如下图的 Lightroom RAW（2400&nbsp;万像素/张） 转 JPG 批量导出任务中，可以看到 Neo 的温度和功耗表现几乎等于烤机满载，甚至在切换到其它任务的过程中会伴随一秒左右的卡顿，直至任务完成才恢复正常。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/7163db59542757f9ff6658e91514c3a3.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>通过 Mx Power Gadget 监测的导出过程，此时核心瞬时最高温度可达到 105 度</figcaption></figure><p><br />接口方面，Neo&nbsp;搭载的两个 USB Type-C 虽都能充电和传输数据，但其中有一个被限制在 USB 2.0 速率，且不支持视频输出。这就意味着，在教室、会议室等频繁接驳大屏或 U 盘的日常场景下，你可能需要随身携带扩展坞，也别想在它身上使用任何高速的雷电设备。</p><p>然而，我们不必因此全盘否定这个孩子。假如你在创意应用上的需求止步于使用 Canva（可画）、剪映这类工具完成轻度任务，而非 Photoshop、Final Cut Pro 等严肃的专业软件，那么 Neo 的流畅度会远超预期。依托 A18 Pro 出色的单核性能、macOS 成熟的内存调度机制与激进的 SWAP 策略，它在应对日常网课、文档编辑、多任务浏览等高频操作时，尽管偶尔会发生页面重载，却让人难以感知到任何明显的迟钝。即便是面对同价位最常被推荐的二手 M1/M2 MacBook Air（8GB RAM），Neo 的日常体验也毫不露怯。甚至得益于后发优势，它还支持前者尚未搭载的硬件加速光线追踪，并拥有支持更多格式的更新媒体处理引擎，面对未来的软件生态，它反而比这些前辈们握有更足的底气。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/article/6db234e9c0a8517e69fc41f412912a42.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>内置存储方面，Neo的256/512&nbsp;GB&nbsp;版本在读写速度表现上基本持平&nbsp;256&nbsp;GB&nbsp;版M2 Mac mini，足以匹配学生与轻中度办公用户的日常需求。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/652ddf8ba119c1d3e4f42325cb74455f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>AmorphousDiskMark（CrystalDiskMark macOS 移植版本）测试截图</figcaption></figure><h2>谁会拒绝一个可爱的小孩？</h2><p>得益于苹果强大的供应链和对工艺的长期探索，Neo 虽然在所有 MacBook 中能让人一眼认出它入门产品的身份，比如其相对跳脱的机身色彩和 “滞后” 一个时代的屏幕形态。然而，唯独不能用廉价一词来形容它的外观。与同价位的 Windows 笔记本相比，Neo 在设计、质感甚至机身体感的坚固性上，优势都极为明显，这也成为了它销量远超市场预期的根本原因，就像一个家教极好、举止得体的小孩，哪怕还不具备和大人共事的能力，你也绝对无法讨厌它。</p><p>铝合金一体成型机身、优雅的单手开合阻尼，Neo 维持了高水准的 MacBook 门面，唯一的妥协只是 A 面那个变成了哑光的苹果 Logo。然而，苹果却把心思花在了更有趣的地方：这是首次实现了键盘和机身采用同一色系的 MacBook。并且这一细节还极其强迫症地覆盖到了 D 面的橡胶脚垫，甚至是 USB-C 接口内部的塑料舌片。这种视觉上的高度一体化，赋予了 Neo 一种独特的、犹如玩具般的吸引力。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/283dd4993a0d7347c41a72766c337449.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>MacBook Neo 合盖状态</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/00f7f56f18ae36f485e6349a1db39a1b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>MacBook Neo 开盖状态</figcaption></figure><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2026/05/26/2d644fa696835e8b03df05cb5f7aca58.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2026/05/26/559e8e603f9fad04451e26c42daf0d15.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>在轻松的单手掀启后，一块 13 英寸、比 Air 略小的屏幕跃然而出。甚至对我个人而言，我会因为其没有“刘海”的形态更偏爱它。虽然在规格指标上，Neo 并不支持 Pro 的 HDR 显示能力与 ProMotion 高刷，也没有 Air 的 Display P3 广色域，但它仍然拥有标称 500 nits 的最高亮度和苹果一贯优秀的色彩管理机制。有些意外的是，全贴合工艺与自动亮度调整在 Neo 身上并未缺席。在实际使用中，它的自动亮度策略有些保守，且由于苹果对广色域的长期布局，使得它与 Air 并排时色彩上会稍显寡淡。不过，在 sRGB 色彩空间仍是互联网内容主流的当下，这块屏幕的综合体验依旧算得上优秀。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/1bd7f776865b57ab46f6b9c03ee74d0c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>MacBook Neo 屏幕（室内阳光）</figcaption></figure><p>触控板与键盘是 Neo 参数表上最容易看出缩水的两个地方。相比 Air 与 Pro，Neo 去掉了键盘背光（仅保留大小写切换灯），输入体验则基本维持在二代妙控键盘的水平，键程相对较短，触底偏硬。触控板的表现则带来了超出预期的惊喜，虽然没有 Air 和 Pro 那般宽大的面积，也拿掉了由振动马达带来的线性压感回馈，但苹果却通过机械结构实现了任意位置的全域按压。配合玻璃表面特有的顺滑，其物理按压手感在同级别中几乎没有对手，与 macOS 的滑动手势依旧协同无间，同样支持三指拖拽等广受好评的功能，而缺失的 Force Touch 压感操作也完全可以通过右键菜单“查询”、三指点按或空格键预览等替代方案来解决。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/f049502dfa021221c8481649a597eee4.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>MacBook Neo 键盘与触控板特写</figcaption></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/article/58bfd897559cd8a870a69e8a323dca7a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>三指拖拽相关设置</figcaption></figure><p>不过特别要提到的一点是，仅有&nbsp;512&nbsp;GB&nbsp;版本的&nbsp;Neo&nbsp;才搭载按压式触控&nbsp;ID&nbsp;指纹识别，实际体验上速度尚可。</p><p>最大惊喜是续航，尤其是当看到&nbsp;Neo&nbsp;参数表上仅有 36.5 Wh 的电池容量时，我当即将对它的续航能力心理预估从“有竞争力” 改为了 “令人震惊”，就像大人总是下意识地低估儿童的体力。在实际高负载场景（如运行 Lightroom）下，通过 iStat Menus 显示的预估续航大约在 4 到 5 小时左右。而若是如下图般仅是开启 Notability、Zotero、Safari 浏览器以及 QQ、微信这类典型的课堂与轻度办公场景，Neo 的体感续航时间可轻易达到 6 小时及以上，还几乎无需任何前置设置。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/5f333c97c90db89733209dce67a9044d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/54f1dcfc4af997d57c02e7f19a9c8386.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>即便绝对时长不及 MacBook Air，Neo 依旧契合包括我在内许多用户“实时待命”的使用习惯。日常无需关机、随开即用，完美地贯彻着新世代 MacBook 已然建立的可靠形象。</p><h2>孩子同样可以做个大人的梦</h2><p>Neo&nbsp;是我迄今为止用过的第二台&nbsp;MacBook&nbsp;以及第三台&nbsp;Mac。纵然我现今唯一能和“生产力”沾边的仅有以照片摄影为业余爱好展开的&nbsp;Lightroom、Photoshop&nbsp;使用需求，且在选择 Neo 的时候就已经建立了将其几乎完全用于便携文书工作的预期，但这些，在我看来仍然不会推翻一个事实，那就是完整&nbsp;macOS（且已为&nbsp;Apple&nbsp;智能准备好）就是&nbsp;Neo&nbsp;仅次于外围体验的绝对杀手锏。</p><p>讽刺的是，关于这一点的最佳比喻，在我看来居然出自微软 2018 年为 Surface Go 拍摄的那支圣诞节广告。广告里的歌词大致是这样的：“奶奶请你不要去买 iPad。我六岁的时候确实喜欢它，但今年我十岁了，我的梦想伟大到需要一台真正的电脑，它才能把我能做、也想做的大事做好。”<sup class="ss-footnote" href="https://www.macrumors.com/2018/12/04/microsoft-holiday-ad-surface-ipad/" title="Surface Go 2018 年圣诞节营销新闻报道如链接所示。">2</sup></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/article/6ef0c57569b7a34b57e7504bf945f548.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>有关 Surface Go 圣诞节促销广告的相关报道</figcaption></figure><p>只要在性能边界之内，Neo 的实际体验就与任何一台 Mac 毫无二致。无论是功能完整的微软 Office、WPS，还是像 Homebrew 包管理器这类需要调用终端的进阶工具。它从来不需要像 iPad 那样在“生产力”的伪命题里尴尬地自我证明，因为它生来就是一台货真价实的电脑。而完整的桌面级系统和优秀的单核性能，又赋予它远超依赖云端的 Chromebook 的可能性，这些对于 Neo 真正要面向的教育市场来说，或许比什么都重要。同时，MacBook Neo 仍然能够融入苹果广为人知的多设备互联生态。</p><p>Neo 确实有些稚嫩，它的力气可能只够它搬动日常的课业与琐碎，但它的梦境却无比宽广。手握完整 macOS 桌面生态的它仿佛一个煞有介事穿着大人西装的孩子，尽管衣服看上去有些不合身，但做起事来，竟也心思缜密、有模有样。</p><h2>一个阳谋，一个最好的礼物</h2><p>这就是 MacBook Neo。苹果从未避讳过用这台在内部硬件配置上全方位精准动刀的基础款，去直面海外 K12 教育市场的 Chromebook 竞争，顺便去承接那些对 Mac 世界充满好奇的芸芸众生。这是一场明摆在台面上的、精明的商业阳谋。然而，恰恰是这个看起来稚嫩、青涩而弱小的孩子，却在匹配其售价的前提下最大限度地保留了一台 MacBook 所有为人称道的尊严，愣是在一度被忽视的入门市场中，为自己、也为整个 Mac 家族开辟了独属于它的领地。</p><p>而当我们把审视的目光转到开篇那个对 Neo 兴趣盎然的父亲身上，这场阳谋对于他的八岁女儿来说，也许就会成为一份最好的、前所未有的礼物。她或许在很长一段时间里都不会懂得 A18 Pro、USB、雷电等有些陌生的技术名词，但在接下来的日子里，这台身披多巴胺色新衣、有着玩具般精致感的小小设备，或许就能点亮她触碰数字世界时的第一抹灵感。最重要的是，苹果并未因为低廉的售价就剥夺这个孩子做梦的权利。</p><p>至此，关于“它究竟是不是个好孩子”的提问，答案早已写在了那扇即将对无数孩童与学生开启的、宽广的新世界门扉上。何况现实中对门扉之后萌生好奇的人们，从来都不只有孩童与学生。在当今这个效率与价值至上、稍显沉闷的大人世界里，用 “穿着不合身西装、却心思缜密努力要把事情做好的孩子” 来形容&nbsp;MacBook&nbsp;Neo&nbsp;恰如其分。</p><p>不过，当日历恰好走到一个属于孩子们的节日，回首望去，或许你并不想要拒绝和这个可爱的孩子一同携手开始新的旅程呢？</p><h2>我，还能孩子多久？</h2><p>不知从何时起，我们对 Mac 的讨论早已越过就事论事的范畴，下意识去为它堆叠层层滤镜，把它捧为专业创作者的图腾信仰、精英办公的身份铭牌，甚至将一台简简单单的工具电脑定义成了圈层审美和生活格调的具象符号。我们似乎每天在无休止的参数焦虑、需求焦虑和性能焦虑里打转，陷入无尽的内耗和争吵，总是争夺着在论坛和社区里赢过别人，却唯独忘记了工具最原始的属性。这也让我经常感到，假如我放眼望去的尽是这些喧嚣，那么消费电子产品或许这一辈子都不会成为陪伴我长大的个人兴趣与爱好。</p><p>于是，当我让这台将“入门”二字彻头彻尾写在脸上的 MacBook Neo 住进双肩包，让它正式成为我的旅行伙伴之后，它给我带来了一种奇妙的释怀。诚然，相对弱小的它在有些应用场景中无法独当一面，我也认同许多人口中它不适合作为唯一电脑的观点，但这样的它依然是一台功能完备的个人电脑，用它敲字、看课件、浏览网页，和其他任何电脑并无本质的区别，亦不存在高下之分。这甚至不禁让我联想到 Macintosh 在 1984 年问世之初的一句经典宣传：</p><blockquote><p>“The computer for the rest of us.”（为绝大多数的我们而打造）。</p></blockquote><p>四十二年过去，MacBook Neo 似乎真的把这句来自 80 年代的遥远宣言唤回现实，宣言背后站着的则是一个令人有些怀念的形象：可以属于每一位普通人的电脑。</p><p>于是，当我们不再为了他人口中的精明和艳羡去追逐，坦然地去满足一次源于好奇心的开始，发自内心地挑选那个自己喜欢的有趣玩具，即便它只是刚好满足当下需要，在有些地方也做得不那么好，但至少我会相信，在你拥有它的时光中，它真的能够让你笑得像曾经那个无忧无虑的孩子，并赠予你一份微小但温暖亲切的愉悦。如果你也想拥有一台 Mac，那么这台入门级的 Neo，已经足够把你带入那个属于 Mac 的新世界。</p><p>最后在即将到来的六一儿童节之际，预祝全天下的孩子们，节日快乐。</p><h2>声明</h2><p>在本文的写作过程中，Gemini 3.1 Flash 和豆包全程参与了辅助。</p><p>标题用图的像素气球图标出自 icons8。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/110373</id>
             <title>留学的滤镜褪去后，真正的异国生活是什么样的？</title>
             <link>https://sspai.com/post/110373</link>
@@ -85,6 +163,474 @@
                 <![CDATA[
                     
                     <p>回忆起起高中宿舍里的夜晚，熄完灯安静下来以后，房间里只剩下风扇、翻身的声音，这时候最惬意的莫过于掏出mp3听午夜音乐电台，那时候具体听的是哪档节目，我已经记不太清了。可能是 MusicRadio 音乐之声，可能是本地的城市音乐台，也可能只是某个午夜情感节目里穿插的几首歌。不是某一首歌本身，而是主持人在歌和歌之间轻轻说几句话：介绍一下歌手，讲一点背景。你不用盯着屏幕，也不用主动搜索，只要躺着听，音乐就会自己慢慢展开。</p><p>后来听歌变得太方便了。歌单一点开，下一首自动接上下一首，效率很高，但那种“有人陪你进入一首歌”的感觉反而少了。</p><p>如果你也喜欢这种音乐电台式的听歌方式，我顺便安利一个播客：《野声宝库》。它是一个音乐分享类播客，顺便分享一下最近喜欢听的这期<a href="https://www.xiaoyuzhoufm.com/episode/69fd730ce1eb34a939f69a84" target="_blank">《百期特辑｜华语情歌30年（下）2006-2020》</a></p><figure class="image image_resized ss-img-wrapper" style="width: 304px;"><img alt="野声宝库" src="https://cdnfile.sspai.com/2026/05/26/article/15bd8043d1b7a45449aba8f4eabb9534.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>也正是这种感觉，让我想做一个小插件：能不能让普通歌单也多一点电台味？</p><p>我一直觉得，认真听一张专辑或一份歌单的时候，最容易被打断的不是音乐本身，而是“切歌”这个瞬间。</p><p>上一首刚结束，下一首突然开始。你可能还没从上一段情绪里出来，也还不知道下一首歌是谁唱的、来自哪张专辑、为什么值得听。于是歌单变成了背景音，音乐从“被听见”慢慢退回“被播放”。</p><p>所以我做了一个浏览器插件：每首歌播放前，它会像电台主持人一样，用一小段口播介绍接下来要听的歌，然后再自然进入音乐。</p><p>它现在支持网易云音乐网页版和 QQ 音乐网页版。你可以把它理解成一个很轻的小电台 DJ：它不会替你选歌，只负责在歌曲之间多说几句，让你更容易进入下一首。</p><h2>它能做什么</h2><p>插件的名字暂时叫「歌单电台」。</p><p>装好之后，在网易云音乐或 QQ 音乐网页版播放歌单，它会在每首歌开始前暂停一下，读取当前歌曲的信息，比如歌名、歌手、专辑，然后生成一段适合朗读的中文介绍：</p><blockquote><p>接下来要听到的是来自xxx歌曲，收录在xxx这张专辑里。这首歌的情绪比较克制，旋律也很适合在晚上慢慢听。现在就一起来听一下吧。</p></blockquote><p>目前它支持几种使用方式：</p><ul><li>不填 API Key：使用简单播报文案，加浏览器或系统自带语音朗读。</li><li>填百炼 API Key：用通义千问生成更自然的电台文案，也可以使用百炼的云端音色。</li><li>填 DeepSeek API Key：文案可以改走 DeepSeek 生成，但如果要用云端音色，仍然需要百炼 Key。</li><li>选择系统语音：不走云端 TTS，免费、延迟低，也更适合长期使用。</li></ul><figure class="image image_resized ss-img-wrapper" style="width: 176px;"><img src="https://cdnfile.sspai.com/2026/05/26/887e16f21bf1edb031ab9fbd06c7f810.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>挑选你的主播</figcaption></figure><h2>下载和安装</h2><p>因为它还是一个自用性质比较强的小插件，目前没有上架 Chrome 应用商店，需要用“开发者模式”安装。</p><p>下载方式：</p><ol><li>下载项目里的 <code>netease-intro-extension.zip</code>。</li><li>解压这个 zip，得到 <code>netease-intro-extension</code> 文件夹。</li><li>打开 Chrome 或 Edge，在地址栏输入 <code>chrome://extensions/</code>。</li><li>打开右上角「开发者模式」。</li><li>点击「加载已解压的扩展程序」。</li><li>选择刚才解压出来的 <code>netease-intro-extension</code> 文件夹。</li></ol><p>安装完成后，浏览器右上角会出现「音乐播报」插件。建议把它固定到工具栏，方便随时开关。</p><p>如果你之后修改了插件文件，或者我发布了新版本，只需要回到扩展程序页面，点击这个插件卡片上的「重新加载」即可。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/71239365ea9c9f220d5fa391c5fa7128.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>第一次使用</h2><p>安装后，打开网易云音乐网页版或 QQ 音乐网页版，随便播放一份歌单。</p><p>点击浏览器右上角的插件图标，你会看到几个选项：</p><ul><li>「播放前语音播报」：总开关。关闭后就和普通播放器一样。</li><li>「AI 生成介绍」：开启后会尝试生成更像电台口播的介绍；关闭时使用简单文案。</li><li>「音色」：可以选择浏览器系统语音，或者百炼云端音色。<ul><li>目前里面有几类比较有特色的声音，比如<ul><li><code>Neil · 新闻主持男声</code> 更像正经电台播报</li><li><code>Vincent · 烟嗓江湖男声</code> 有一点故事感</li></ul></li><li>方言里还有粤语、四川话、上海话等。</li><li>我自己最喜欢的是 <code>Maia · 知性温柔女声</code>，声音比较松弛，不会太甜，也不会太像播报，很像回忆中的声音（所以插件默认选择是 Maia😄）。</li></ul></li><li>「百炼 API Key」：用于通义千问文案和百炼云端语音。</li><li>「用 DeepSeek 替代生成文案」：如果你更想用 DeepSeek 生成口播，可以打开它并填写 DeepSeek Key。</li></ul><figure class="image image_resized ss-img-wrapper" style="width: 321px;"><img src="https://cdnfile.sspai.com/2026/05/25/d2b8bba3519c034ff2ab836bde5888f4.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>插件长这样</figcaption></figure><p>最省心的设置是：</p><ol><li>音色先选择默认的 Maia；如果暂时没有百炼 Key，就改成「浏览器默认」或某个系统语音。</li><li>如果你有百炼 Key，就填入百炼 Key，并开启「AI 生成介绍」。</li><li>如果暂时没有 Key，也可以直接用，只是文案会变成比较基础的“接下来为您播放xxx歌手的xxx歌”。</li></ol><h2>它是怎么实现的</h2><p>这个插件的核心其实不复杂，可以拆成四步：</p><p><strong>第一步，知道什么时候要播下一首歌。</strong></p><p>在网易云音乐里，插件会监听页面中的音频播放动作。当播放器准备播放新的音频时，插件先把这次播放拦一下，等口播结束后再恢复播放。</p><p>QQ 音乐的网页结构不太一样，不能完全照搬网易云的方式。所以插件用了另一套方案：定时观察页面底部播放器的信息变化，一旦发现歌名变了，就认为进入了下一首歌。</p><p><strong>第二步，读取当前歌曲信息。</strong></p><p>插件会尽量从播放器里拿到歌名、歌手、专辑等信息。</p><p>网易云这边优先读页面里的播放器对象，读不到就退回到播放栏 DOM，再不行就看页面标题。QQ 音乐则主要从底部播放器 DOM 里读取歌曲和歌手。</p><p><strong>第三步，生成一段介绍。</strong></p><p>插件会把歌曲信息交给 AI，提示它“请用中文，以电台主持人的口吻，为这首歌写一段 120 字以内的口播介绍”。提示词里还加了一点规则：</p><ul><li>第一首歌要有开场白。</li><li>中间的歌要有自然过渡。</li><li>最后一首歌要有收尾感。</li><li>不确定的信息不要乱编。</li><li>直接输出正文，不要 Markdown。</li></ul><p>如果没有配置 API Key，或者接口超时、失败，插件就自动退回简单文案。这样至少不会因为 AI 挂了而影响听歌。</p><p><strong>第四步，把文字读出来，再播放音乐。</strong></p><p>语音有两条路线。</p><p>如果选择系统语音，插件使用浏览器自带的 <code>speechSynthesis</code>。它免费、快，而且不用上传文本到云端。</p><p>如果选择百炼云端音色，插件会调用百炼的 TTS 接口生成音频，再在页面里播放这段口播音频。</p><p>为了不让“主持人说完话”和“音乐开始”之间断得太硬，我还加了一个简单的淡入淡出：云端口播快结束时，歌曲会以很低的音量提前进来，等口播结束后再慢慢恢复到正常音量。这样会更像真正的电台串场。</p><h2>遇到的问题，以及怎么解决的</h2><p><strong>第一个问题是：不同音乐网站差异较大。</strong></p><p>一开始我以为只要拦截网页里的 audio 播放就行。但 QQ 音乐不太吃这一套，它的播放器状态和页面结构更复杂。最后我把插件拆成了“通用拦截逻辑 + 网站适配器”：网易云用播放拦截，QQ 音乐用页面观察。这样以后如果要支持别的网站，只要再写一个适配器，不必重写整个插件。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/26/3685be087bc854159450c07c39b6c85a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>在QQ音乐的适配上花了最多时间</figcaption></figure><p><strong>第二个问题是：AI 或 TTS 失败时，不能影响正常听歌。</strong></p><p>听歌插件最重要的是不要打扰听歌。所以后台请求都设置了超时：文案生成大约 8 秒，语音生成大约 15 秒。失败就失败，插件会退回到简单文案和系统语音，不会卡住播放器。</p><p><strong>第三个问题是：切歌太快时，上一段口播可能还没结束。</strong></p><p>如果用户连续切歌，旧口播必须立刻停掉，否则就会出现“主持人还在介绍上一首，播放器已经到了下一首”的尴尬。现在插件里有一个 <code>activeIntro</code> 状态，每次新歌触发时都会取消上一段口播、清理淡入淡出计时器，并恢复原来的音量。</p><p><strong>第四个问题是：系统语音质量不稳定。</strong></p><p>有些系统自带中文语音听起来比较生硬，尤其在 Windows 上，不同机器可用的语音差异很大。所以插件会优先挑选更自然的中文语音，比如 Xiaoxiao、Yunxi 这类声音；如果用户手动选择了某个系统语音，就尊重用户选择。</p><p><strong>第五个问题是：API Key 放在哪里才安全。</strong></p><p>Chrome 插件前端没有真正安全的“藏 key”方式。只要把 key 内置进插件，别人拿到插件包就有机会看到它。因此我最终删掉了内置 Key 和免费次数逻辑，只保留用户自己填写 Key 的方式。它不如“开箱即用”那么丝滑，但更诚实，也更安全。</p><h2>适合谁用</h2><p>这个插件不适合所有听歌场景。</p><p>如果你只是想开一份歌单当背景音，它可能会显得有点啰嗦。但如果你喜欢认真听专辑、听主题歌单，或者想让一份歌单更像一档节目，它会有一种很微妙的仪式感。</p><p>它也适合这些场景：</p><ul><li>晚上一个人听歌，希望有人帮你轻轻串场。</li><li>播放一张不熟悉的专辑，想先知道歌手和专辑背景。</li><li>做自己的主题歌单，想让它更像一档私人电台。</li><li>给朋友放歌时，希望每首歌开始前有一点说明。</li></ul><h2>现在还不完美</h2><p>目前它还是一个很早期的小工具，有几个明显限制：</p><ul><li>只支持网页端，不支持桌面客户端和手机 App。</li><li>歌曲介绍依赖网页能读到的信息，遇到页面结构变化可能会失效。</li><li>AI 生成的背景介绍不一定百分百准确，尤其是冷门歌曲。</li><li>云端音色需要用户自己的百炼 API Key。</li><li>QQ 音乐目前主要靠观察页面变化，稳定性可能不如网易云方案。</li></ul><p>但对我来说，它已经完成了最重要的一件事：让“下一首歌开始之前”不再只是一个空白。</p><p>由于目前插件还在上架Chrome 应用商店的流程中 ，因此需要手动下载插件。<br />插件下载地址：<a href="https://github.com/jackyrwj/song2radio/releases/tag/v2.0" target="_blank">song2radio</a>（如果喜欢，也请给个仓库一个star🥺）</p><p>如果无法访问，也提供了网盘下载：<a href="https://pan.baidu.com/s/1sEmAsDD-sdIi4P2uzscqxQ?pwd=d533" target="_blank">https://pan.baidu.com/s/1lFgs92MQFrOIQDoDNMf89A?pwd=s4ws</a></p><h2>最后</h2><p>我做这个插件，不是为了把听歌变得更复杂。恰恰相反，我是想让自己少看一点屏幕，少查一点资料，少在歌和歌之间走神。</p><p>好的电台主持人不会抢音乐的风头。他只是把门轻轻推开，告诉你：下一首要来了，你可以认真听一下。</p><p>这个插件也是这样。</p><p>如果你也喜欢把歌单当成一段旅程，而不是一串文件列表，它也许会刚好适合你。</p><p>&nbsp;</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/110120</id>
+            <title>来自九年前的远古音频兵器 - Xperia XZ Premium</title>
+            <link>https://sspai.com/post/110120</link>
+            <guid isPermaLink="false">https://sspai.com/post/110120</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 24 May 2026 21:43:20 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><h2>前言</h2><p>Android 设备的音频质量，一直是一个被人们津津乐道的话题。从早年的低质量 AudioFlinger 强制重采样和低精度音频衰减，到现如今的专用 AAudio 高性能输出。但因为 SoC 制造商和 OEM 仍然对 HAL 有较大的自定义能力，不同设备上的音频质量区别仍旧非常巨大。比如联发科的某些设备会将 audioeffect 集成进 vendor 挂载在 AudioFlinger 上而无法关闭，高通设备的 Direct HD 可以在受支持的设备上绕过 effect chain 输出原始音频。</p><p>换句话说，Android 早已具备高质量音频输出的能力，但真正愿意保留声音原貌的厂商，却越来越少了。现在更流行的做法，则是先将所有音频统一送入 mixer 与 DSP 处理链路，再进行输出，在这里进行处理之后再输出。所谓的处理，大多是一些所谓的杜比音效，响度均衡，系统 EQ 甚至 OEM 音效。初衷确实是为了提升用户体验，但为此强行放弃了高保真音频，真的值得吗？</p><p>正巧在几个月前，我购入了一台银色镜面的 Sony Xperia XZ Premium。也正是从那时开始，我重新开始思考 Android 的声音到底应该是什么样子。</p><h2>一睹机皇的风采：硬件配置</h2><p>XZP 搭载了高通 msm8998 SoC，也就是高通骁龙 835。它的硬件基础或许算不上优秀，它没有专用的 DAC，而是使用了高通 Aqstic™ WCD9335 作为 DAC。</p><p>这颗 DAC 本身支持的最高音频规格来到了 32bit/384 KHz (PCM) 。支持 DSD64/128、FLAC、ALAC、LPCM 等常见的无损格式。</p><p>如果你对硬件感兴趣，这是一些来自其它网站的数据：</p><figure class="table"><table><tbody><tr><td>&nbsp;</td><td>44.1kHz</td><td>48kHz</td><td>96kHz</td><td>Z3</td></tr><tr><td>测试项目,dB（A）</td><td>-96.0</td><td>-96.7</td><td>-100.5</td><td>-86.6</td></tr><tr><td>噪声水平，DB（A）</td><td>95.8</td><td>96.6</td><td>105.1</td><td>86.5</td></tr><tr><td>总谐波失真,%</td><td>0.0016</td><td>0.0069</td><td>0.0067</td><td>0.012</td></tr><tr><td>互调失真，%</td><td>0.0055</td><td>0.0050</td><td>0.0023</td><td>0.019</td></tr><tr><td>立体声分离度，dB</td><td>-90.0</td><td>-90.3</td><td>-88.5</td><td>-86.4</td></tr></tbody></table></figure><p>上述数据以及更详细的硬件测试，见 <a href="https://soomal.cc/posts/10100007321/" target="_blank">Soomal</a> 我并不是太懂这方面，所以不说太多了，本文重点也不在此。</p><h2>DIRECT 和 MIXER：把原始音频送进 HAL</h2><p>这里测试了三 (四) 种不同的播放器，分别是：</p><ul><li>Apple Music（集成解码器）</li><li>Sony Music（MediaFramework）</li><li>Poweramp（集成 FFmpeg）</li><li>Sony Music Center（Exclusive）</li></ul><p>经过对比，发现输出类型大概可以分为四类：</p><ul><li>MIXER</li><li>DIRECT，经过了索尼的 effectchain</li><li>DIRECT，高通 DIRECT HD，跳过了 effect chain</li><li>OFFLOAD，非 PCM 且支持的格式会被直接送进 DSP</li></ul><p>这是来自 <code>audio_output_policy.conf</code> 的原始信息：</p><pre class="language-null"><code>outputs {
+  default {
+    flags AUDIO_OUTPUT_FLAG_PRIMARY
+    formats AUDIO_FORMAT_PCM_16_BIT
+    sampling_rates 48000
+    bit_width 16
+    app_type 69937
+  }
+  proaudio {
+    flags AUDIO_OUTPUT_FLAG_FAST|AUDIO_OUTPUT_FLAG_RAW
+    formats AUDIO_FORMAT_PCM_16_BIT
+    sampling_rates 48000
+    bit_width 16
+    app_type 69943
+  }
+  deep_buffer {
+    flags AUDIO_OUTPUT_FLAG_DEEP_BUFFER
+    formats AUDIO_FORMAT_PCM_16_BIT
+    sampling_rates 48000
+    bit_width 16
+    app_type 69936
+  }
+  direct_pcm_16 {
+    flags AUDIO_OUTPUT_FLAG_DIRECT
+    formats AUDIO_FORMAT_PCM_16_BIT|AUDIO_FORMAT_PCM_24_BIT_PACKED|AUDIO_FORMAT_PCM_8_24_BIT|AUDIO_FORMAT_PCM_32_BIT
+    sampling_rates 44100|48000|88200|96000|176400|192000
+    bit_width 16
+    app_type 69936
+  }
+  direct_pcm_24 {
+    flags AUDIO_OUTPUT_FLAG_DIRECT
+    formats AUDIO_FORMAT_PCM_24_BIT_PACKED|AUDIO_FORMAT_PCM_8_24_BIT|AUDIO_FORMAT_PCM_32_BIT
+    sampling_rates 44100|48000|88200|96000|176400|192000|352800|384000
+    bit_width 24
+    app_type 69940
+  }
+  direct_pcm_32 {
+    flags AUDIO_OUTPUT_FLAG_DIRECT
+    formats AUDIO_FORMAT_PCM_32_BIT
+    sampling_rates 44100|48000|88200|96000|176400|192000|352800|384000
+    bit_width 32
+    app_type 69942
+  }
+  compress_passthrough {
+    flags AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING|AUDIO_OUTPUT_FLAG_COMPRESS_PASSTHROUGH
+    formats AUDIO_FORMAT_AC3|AUDIO_FORMAT_E_AC3|AUDIO_FORMAT_E_AC3_JOC|AUDIO_FORMAT_DTS|AUDIO_FORMAT_DTS_HD|AUDIO_FORMAT_DSD
+    sampling_rates 32000|44100|48000|88200|96000|176400|192000|352800
+    bit_width 16
+    app_type 69941
+  }
+  compress_offload_16 {
+    flags AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING
+    formats AUDIO_FORMAT_MP3|AUDIO_FORMAT_PCM_16_BIT_OFFLOAD|AUDIO_FORMAT_PCM_24_BIT_OFFLOAD|AUDIO_FORMAT_FLAC|AUDIO_FORMAT_ALAC|AUDIO_FORMAT_APE|AUDIO_FORMAT_AAC_LC|AUDIO_FORMAT_AAC_HE_V1|AUDIO_FORMAT_AAC_HE_V2|AUDIO_FORMAT_WMA|AUDIO_FORMAT_WMA_PRO|AUDIO_FORMAT_VORBIS|AUDIO_FORMAT_AAC_ADTS_LC|AUDIO_FORMAT_AAC_ADTS_HE_V1|AUDIO_FORMAT_AAC_ADTS_HE_V2
+    sampling_rates 44100|48000|88200|96000|176400|192000
+    bit_width 16
+    app_type 69936
+  }
+  compress_offload_24 {
+    flags AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING
+    formats AUDIO_FORMAT_PCM_24_BIT_OFFLOAD|AUDIO_FORMAT_FLAC|AUDIO_FORMAT_ALAC|AUDIO_FORMAT_APE|AUDIO_FORMAT_VORBIS|AUDIO_FORMAT_WMA|AUDIO_FORMAT_WMA_PRO
+    sampling_rates 44100|48000|88200|96000|176400|192000
+    bit_width 24
+    app_type 69940
+  }
+}</code></pre><h2>MIXER：普通应用的输出方式</h2><p><strong>对于一般的应用输出音频，无论音频规格有多高，输出线程通常都是 MIXER（type 0），来看一个例子：</strong></p><pre class="language-null"><code>output thread 0xf3603f40, name AudioOut_D, tid 1218, type 0 (MIXER):
+  I/O handle: 13
+  Standby: no
+  Sample rate: 48000 Hz
+  HAL frame count: 192
+  HAL format: 0x1 (AUDIO_FORMAT_PCM_16_BIT)
+  HAL buffer size: 768 bytes
+  Channel count: 2
+  Channel mask: 0x00000003 (front-left, front-right)
+  Processing format: 0x5 (AUDIO_FORMAT_PCM_FLOAT)
+  Processing frame size: 8 bytes
+  Pending config events: none
+  Output device: 0x2 (AUDIO_DEVICE_OUT_SPEAKER)
+  Input device: 0 (AUDIO_DEVICE_NONE)
+  Audio source: 0 (default)
+  Normal frame count: 960
+  Last write occurred (msecs): 14
+  Total writes: 40169
+  Delayed writes: 0
+  Blocked in write: no
+  Suspend count: 0
+  Sink buffer : 0xf38c0000
+  Mixer buffer: 0xf38b6000
+  Effect buffer: 0xf38be000
+  Fast track availMask=0xf8
+  Standby delay ns=3000000000
+  AudioStreamOut: 0xf48ac6b8 flags 0x6 (AUDIO_OUTPUT_FLAG_PRIMARY|AUDIO_OUTPUT_FLAG_FAST)
+  Frames written: 38562240
+  Suspended frames: 0
+  PipeSink frames written: 38562240
+  Hal stream dump:
+  Thread throttle time (msecs): 0
+  AudioMixer tracks: 1 
+  Master mono: off</code></pre><p>在该设备的 MIXER 输出线程中，所有进入该混音路径的音频都最终会被转换为 48 kHz / PCM 16-bit 输出格式，此类行为和输出设备类型无关。</p><pre class="language-null"><code>1 Effect Chains
+    1 effects for session 6953
+In buffer    Out buffer                 Active tracks:
+0xf717e000   0xf7182000 -&gt; 0xf35e7000   0
+Effect ID 971:
+Session Status State Engine:
+06953   000    003   0xf489a1d0
+Descriptor:
+- UUID: af8da7e0-2ca1-11e3-b71d-0002a5d5c51b
+- TYPE: ec7178ec-e5e1-4432-a3f4-4657e6795210
+- apiVersion: F38B4040
+- flags: 00400240 (conn. mode: insert, insert pref: any, volume mgmt: implements control, device indication: requires updates, input mode: not set, output mode: not set, offloadable)
+- name: Sonysweffect
+- implementor: SONY
+- data: float
+- Input configuration:
+Buffer     Frames  Smp rate Channels Format
+0xf717e000 01920   48000    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
+- Output configuration:
+Buffer     Frames  Smp rate Channels Format
+0xf7182000 01920   48000    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
+- HAL buffers:
+In(0xf717e000) InConversion(nullptr) Out(0xf7182000 -&gt; 0xf35e7000) OutConversion(nullptr)
+1 Clients:
+ Pid Priority Ctrl Locked client server
+17347        0  yes    yes      0      0
+SonySWEffect
+EffectsSt: DN VPT CPSP CAPLUS ALC 
+WrapSt: ACTIVE 
+SupOnDev: DN CA CPSP XLOUD ALC 
+VPT mode: 0
+In Fmt: 0x5
+Out Fmt: 0x5
+In SR: 48000 Hz
+Out SR: 48000 Hz
+Cur Dev: 0x2
+Cur LeftVol: 4096
+Cur RightVol: 4096</code></pre><p>AudioFlinger 在 mixer 阶段统一完成多路音频的混合与处理，并在写入 HAL 之前进行格式转换。因此对于 MIXER 路径的输出而言，最终进入硬件层的音频格式固定为 48 kHz / 16-bit PCM。无论原始音频文件质量如何，都会被处理之后送入 HAL. 通过 AAudio 输出的音频也会进入这个路径。</p><p>在 effect chain 部分，可以观察到 Sony 的 audio effect 已经被挂载到当前 session，但 Active tracks 显示为 0，说明该 effect 当前并未绑定到任何正在播放的音频流。</p><p>这也意味着包括 DSEE、ClearAudio+ 等处理效果，在非白名单应用下并不会被激活。（推测）</p><p>实测的听感也符合上述结论和推测。</p><h2>DIRECT with effect chain：DIRECT 也有音效处理</h2><p>索尼自己的索尼音乐会走这个奇怪的路径。<br />&nbsp;</p><pre class="language-null"><code>Output thread 0xef375000, name AudioOut_4F5, tid 24237, type 1 (DIRECT):
+  I/O handle: 1269
+  Standby: no
+  Sample rate: 96000 Hz
+  HAL frame count: 7680
+  HAL format: 0x6 (AUDIO_FORMAT_PCM_24_BIT_PACKED)
+  HAL buffer size: 46080 bytes
+  Channel count: 2
+  Channel mask: 0x00000003 (front-left, front-right)
+  Processing format: 0x6 (AUDIO_FORMAT_PCM_24_BIT_PACKED)
+  Processing frame size: 6 bytes
+  Pending config events: none
+  Output device: 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
+  Input device: 0 (AUDIO_DEVICE_NONE)
+  Audio source: 0 (default)
+  Normal frame count: 7680
+  Last write occurred (msecs): 72
+  Total writes: 55
+  Delayed writes: 0
+  Blocked in write: yes
+  Suspend count: 0
+  Sink buffer : 0xefdd3000
+  Mixer buffer: 0xefdb4000
+  Effect buffer: 0xefc62000
+  Fast track availMask=0xfe
+  Standby delay ns=1000000000
+  AudioStreamOut: 0xefd836b8 flags 0x1 (AUDIO_OUTPUT_FLAG_DIRECT)
+  Frames written: 422400
+  Suspended frames: 0</code></pre><p>可以观察到 AUDIO_OUTPUT_FLAG_DIRECT FLAG. DIRECT 路径下，音频不再进入 mixer 进行统一重采样与位深转换，而是直接按输出 profile 以高分辨率 PCM 写入 HAL。</p><pre class="language-null"><code>Dsee 0xf186fa00:
+ DsxParam:
+   -Sample rate: 44100 -Codec: -1 -Average bitrate: -1
+ Mode: disable
+  Sample rate: 44100
+  Format: 0x1 (pcm16)
+  Fragment size: 14208
+
+HAL_Volume
+  Volume_l: 1.00000000
+  Volume_r: 1.00000000
+  Stream volumes in dB: 0:-17, 1:-26, 2:-26, 3:-26, 4:-26, 5:-26, 6:-inf, 7:-26, 8:-18, 9:-96, 10:0, 11:0, 12:0
+  Normal mixer raw underrun counters: partial=0 empty=0
+  1 Tracks of which 1 are active
+    T Name Active Client Session S  Flags   Format Chn mask  SRate ST  L dB  R dB  VS dB   Server FrmCnt  FrmRdy F Underruns  Flushed Main Buf  Aux Buf
+         0    yes  23947    7249 A  0x000 00000001 00000003  44100  3     0     0     0  0002C3A0  22932   19380 A         0        0 EF31C000 00000000
+  1 Effect Chains
+    1 effects for session 7249
+In buffer               Out buffer                 Active tracks:
+0xef31c000 -&gt; 0xf70f4000   0xf70f4000 -&gt; 0xef31c000   1
+Effect ID 1075:
+Session Status State Engine:
+07249   000    003   0xf3d858a0
+Descriptor:
+- UUID: af8da7e0-2ca1-11e3-b71d-0002a5d5c51b
+- TYPE: ec7178ec-e5e1-4432-a3f4-4657e6795210
+- apiVersion: F3DCD940
+- flags: 00400240 (conn. mode: insert, insert pref: any, volume mgmt: implements control, device indication: requires updates, input mode: not set, output mode: not set, offloadable)
+- name: Sonysweffect
+- implementor: SONY
+- data: float
+- Input configuration:
+Buffer     Frames  Smp rate Channels Format
+0xf70f4000 03552   44100    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
+- Output configuration:
+Buffer     Frames  Smp rate Channels Format
+0xf70f4000 03552   44100    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
+- HAL buffers:
+In(0xef31c000 -&gt; 0xf70f4000) InConversion(nullptr) Out(0xf70f4000 -&gt; 0xef31c000) OutConversion(nullptr)
+1 Clients:
+ Pid Priority Ctrl Locked client server
+17347        0  yes    yes      0      0
+Effect_params
+  Effect_enabled: 1
+  Effect_volume: 420
+SONY_Effects
+  ClearAudio plus status: 1
+  ca_plus_index: 0
+  VPT mode: 0
+  Dynamic_normalizer: 1
+  S-Force: 0
+  Clear Phase for Speaker: 4
+  ca_band_level: 0 0 0 0 0 0</code></pre><p>在索尼音乐的 DIRECT 输出下，effect chain 生效了。可以观察到 VPT 和 ClearAudio 都在工作，DSEE 只有在特定条件下才工作（可以正常工作，但是我没开）。在这个实例中，送入 AudioFlinger 的就是 PCM 流。</p><p>未观察到其它应用播放音频会经过此路径，实测的听感也符合上述结论和推测。</p><h2>DIRECT with DIRECT HD：绕过绝大多数 effect chain</h2><p>在 Poweramp 的 HIRES 输出模式上观察到了 DIRECT，而且这个 DIRECT 有点特殊，我们一点一点看。</p><h3>Poweramp 探测到的音频输出信息</h3><pre class="language-null"><code>reading /vendor/etc/audio_output_policy.conf
+has direct_pcm_24, sampling_rates=44100|48000|88200|96000|176400|192000|352800|384000
+AUDIO_OUTPUT_FLAG_DIRECT direct_pcm_24
+has direct_pcm_24 formats=AUDIO_FORMAT_PCM_24_BIT_PACKED|AUDIO_FORMAT_PCM_8_24_BIT|AUDIO_FORMAT_PCM_32_BIT
+FLAG_VARIANT_DIRECT_HD via direct_pcm_24
+FLAG_NEEDS_DEEP_BUFFER android_sdk=28
+USB can handle Hi-Res - sdk=28
+&gt;&gt;&gt;OK flags=0x854616600000000
+FLAG_VARIANT_DIRECT_HD
+FLAG_SUPPORTS_PCM_8_24
+FLAG_SUPPORTS_PCM_24
+FLAG_SUPPORTS_PCM_32
+FLAG_SUPPORTS_UNITY_GAIN_STREAM
+FLAG_SUPPORTS_USB
+FLAG_NEEDS_EXTRA_SLEEPS
+FLAG_SUPPORTS_LDAC
+FLAG_NEEDS_DEEP_BUFFER
+FLAG_ALLOW_DVC_EFFECT
+FLAG_BT_DVC_EFFECT
+INTERNAL_OUTPUT_FLAG_SR_384K
+INTERNAL_OUTPUT_FLAG_SR_352K
+INTERNAL_OUTPUT_FLAG_SR_192K
+INTERNAL_OUTPUT_FLAG_SR_176K
+INTERNAL_OUTPUT_FLAG_SR_96K
+INTERNAL_OUTPUT_FLAG_SR_88K
+INTERNAL_OUTPUT_FLAG_SR_48K
+INTERNAL_OUTPUT_FLAG_SR_44K</code></pre><p>Poweramp 探测到了非常多支持的音频规格，这些信息是从 &nbsp;<code>/vendor/etc/audio_output_policy.conf</code> 中获取的，说明设备本身也支持这些规格。</p><h3>AudioFlinger 和 effect chain</h3><pre class="language-null"><code>Output thread 0xf3074000, name AudioOut_5CD, tid 27468, type 1 (DIRECT):
+  I/O handle: 1485
+  Standby: no
+  Sample rate: 48000 Hz
+  HAL frame count: 3840
+  HAL format: 0x3 (AUDIO_FORMAT_PCM_32_BIT)
+  HAL buffer size: 30720 bytes
+  Channel count: 2
+  Channel mask: 0x00000003 (front-left, front-right)
+  Processing format: 0x3 (AUDIO_FORMAT_PCM_32_BIT)
+  Processing frame size: 8 bytes
+  Pending config events: none
+  Output device: 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
+  Input device: 0 (AUDIO_DEVICE_NONE)
+  Audio source: 0 (default)
+  Normal frame count: 3840
+  Last write occurred (msecs): 40
+  Total writes: 210
+  Delayed writes: 0
+  Blocked in write: yes
+  Suspend count: 0
+  Sink buffer : 0xef324000
+  Mixer buffer: 0xf2b03000
+  Effect buffer: 0xefdd3000
+  Fast track availMask=0xfe
+  Standby delay ns=1000000000
+  AudioStreamOut: 0xf48ddee8 flags 0x1 (AUDIO_OUTPUT_FLAG_DIRECT)
+  Frames written: 806400
+  Suspended frames: 0</code></pre><p>可以观察到 AUDIO_OUTPUT_FLAG_DIRECT，经过此路径的音频不会被重采样和进行位深转换，因为 Poweramp 已经完成了这些操作（如果符合条件），送入 AudioFlinger 的就是 PCM 流。</p><pre class="language-null"><code>Dsee 0x0:
+ Mode: disable
+  Sample rate: 48000
+  Format: 0x3 (pcm32)
+  Fragment size: 23040
+
+HAL_Volume
+  Volume_l: 1.00000000
+  Volume_r: 1.00000000
+  Stream volumes in dB: 0:-17, 1:-24, 2:-6, 3:-26, 4:-14, 5:-6, 6:-inf, 7:-6, 8:-18, 9:-96, 10:0, 11:0, 12:0
+  Normal mixer raw underrun counters: partial=0 empty=0
+  1 Tracks of which 1 are active
+    T Name Active Client Session S  Flags   Format Chn mask  SRate ST  L dB  R dB  VS dB   Server FrmCnt  FrmRdy F Underruns  Flushed Main Buf  Aux Buf
+         0    yes  27110    7337 A  0x000 00000003 00000003  48000  8     0     0     0  000C5D00   7684    3844 A         0      288 EFDD3000 00000000
+  1 Effect Chains
+    1 effects for session 7337
+In buffer               Out buffer                 Active tracks:
+0xefdd3000 -&gt; 0xf7112000   0xf7112000 -&gt; 0xefdd3000   1
+Effect ID 1099:
+Session Status State Engine:
+07337   000    003   0xf489ab30
+Descriptor:
+- UUID: 119341a0-8469-11df-81f9-0002a5d5c51b
+- TYPE: 09e8ede0-ddde-11db-b4f6-0002a5d5c51b
+- apiVersion: F38B5B40
+- flags: 00000050 (conn. mode: insert, insert pref: last, volume mgmt: implements control, input mode: not set, output mode: not set)
+- name: Volume
+- implementor: NXP Software Ltd.
+- data: float
+- Input configuration:
+Buffer     Frames  Smp rate Channels Format
+0xf7112000 03840   48000    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
+- Output configuration:
+Buffer     Frames  Smp rate Channels Format
+0xf7112000 03840   48000    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
+- HAL buffers:
+In(0xefdd3000 -&gt; 0xf7112000) InConversion(nullptr) Out(0xf7112000 -&gt; 0xefdd3000) OutConversion(nullptr)
+1 Clients:
+ Pid Priority Ctrl Locked client server
+27110     1337  yes    yes      0      0</code></pre><p>DSEE 挂载到了 effect chain 上，但被禁用了。可以看见 HAL 音量是 1.00000000，可能是因为 Poweramp 传递了 ALWAYS_UNITY_GAIN，它禁用了 HAL 的音频衰减，通过自己的 DVC 控制。</p><p>值得注意的是 effect chain 中出现了一个 Volume (NXP Software Ltd.). 我在网上并没有查到相关的信息，这个效果器的输出和输出却都是 48000，标识着音频可能进行了重采样，但不太可能，原因下述：</p><p>HAL 的音量是 1.00000000，说明 HAL 并没有调整音量，这个效果器可能是用来通知播放器 DVC 音量变化而非直接自行处理的音频，同时在其它播放器输出中并没有发现这个效果器，而测试的播放器中除了 Poweramp 都没有 DVC 功能。</p><p>作为对比，在关闭 DVC 后，发现了如下变化;</p><pre class="language-null"><code>Dsee 0x0:
+ Mode: disable
+  Sample rate: 48000
+  Format: 0x6 (pcm24)
+  Fragment size: 23040
+
+HAL_Volume
+  Volume_l: 0.05128648
+  Volume_r: 0.05128648
+  Stream volumes in dB: 0:-17, 1:-26, 2:-26, 3:-26, 4:-26, 5:-26, 6:-inf, 7:-26, 8:-18, 9:-96, 10:0, 11:0, 12:0
+  Normal mixer raw underrun counters: partial=0 empty=0
+  1 Tracks of which 1 are active
+    T Name Active Client Session S  Flags   Format Chn mask  SRate ST  L dB  R dB  VS dB   Server FrmCnt  FrmRdy F Underruns  Flushed Main Buf  Aux Buf
+         0    yes  27110    7385 A  0x000 00000006 00000003  48000  3     0     0     0  00027600   7684    7684 A         0        0 F3657000 00000000
+  0 Effect Chains
+  Local log:
+   05-24 18:00:56.490 CFG_EVENT_CREATE_AUDIO_PATCH: old device 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE) new device 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
+   05-24 18:00:56.493 AT::add       (0xf48f1080)      0     no  27110    7385 A  0x000 00000006 00000003  48000  3     0     0     0  00000000   7684       0 f         0        0 F3657000 00000000</code></pre><p>注意到 HAL 进行了音量衰减，而 Volume 效果器消失了，如果它是用来调整音量的，为什么反而不存在了？同时观察到了系统音量变化并没有影响 HAL 音量为 1，而 DVC 关闭时会变化。Volume 效果器并没有实际处理音频，所以也没有重采样这一说。</p><p>在实测中听感的变化也验证了上述推测。</p><h2>OFFLOAD：针对非 PCM 流的直通</h2><p>在索尼音乐的实测中，还发现了一个不是很常见的输出模式：</p><pre class="language-null"><code>Output thread 0xf3064000, name AudioOut_67D, tid 31664, type 4 (OFFLOAD):
+  I/O handle: 1661
+  Standby: no
+  Sample rate: 44100 Hz
+  HAL frame count: 32768
+  HAL format: 0x1000000 (AUDIO_FORMAT_MP3)
+  HAL buffer size: 32768 bytes
+  Channel count: 2
+  Channel mask: 0x00000003 (front-left, front-right)
+  Processing format: 0x1000000 (AUDIO_FORMAT_MP3)
+  Processing frame size: 1 bytes
+  Pending config events: none
+  Output device: 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
+  Input device: 0 (AUDIO_DEVICE_NONE)
+  Audio source: 0 (default)
+  Normal frame count: 32768
+  Last write occurred (msecs): 166
+  Total writes: 13
+  Delayed writes: 0
+  Blocked in write: no
+  Suspend count: 0
+  Sink buffer : 0xf2b03000
+  Mixer buffer: 0xefa83000
+  Effect buffer: 0xef903000
+  Fast track availMask=0xfe
+  Standby delay ns=1000000000
+  AudioStreamOut: 0xf48dde70 flags 0x31 (AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING)
+  Frames written: 262144
+  Suspended frames: 0</code></pre><p>观察到模式是 OFFLOAD（type 4），HAL 识别到了是 AUDIO_FORMAT_MP3，并携带了 <code>AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING</code> 这些 FLAGS。这些 FLAG 大致的意思就是 DIRECT 输出，不进行压缩，以非阻塞的方式输出。</p><p>在此音频路径中 MP3 被直接 HAL 送进了 DSP 进行解码，CPU 没有参与音频处理。它也绕过了 MIXER 的那些重采样和位深转换，在播放不同规格的 MP3 文件时观察到了 HAL 规格变化。</p><pre class="language-null"><code>Dsee 0xf13e5980:
+ DsxParam:
+   -Sample rate: 44100 -Codec: -1 -Average bitrate: -1
+ Mode: disable
+  Sample rate: 44100
+  Format: 0x1 (pcm16)
+  Fragment size: 14208
+
+HAL_Volume
+  Volume_l: 1.00000000
+  Volume_r: 1.00000000
+  Stream volumes in dB: 0:-17, 1:-30, 2:-30, 3:-30, 4:-30, 5:-30, 6:-inf, 7:-30, 8:-18, 9:-96, 10:-3.7, 11:0, 12:0
+  Normal mixer raw underrun counters: partial=0 empty=0
+  1 Tracks of which 1 are active
+    T Name Active Client Session S  Flags   Format Chn mask  SRate ST  L dB  R dB  VS dB   Server FrmCnt  FrmRdy F Underruns  Flushed Main Buf  Aux Buf
+         0    yes  31374    7737 A  0x000 00000001 00000003  44100  3     0     0     0  00006F00  22932   12276 A         0        0 EFC28000 00000000
+  1 Effect Chains
+    1 effects for session 7737
+In buffer               Out buffer                 Active tracks:
+0xefc28000 -&gt; 0xf70bc000   0xf70bc000 -&gt; 0xefc28000   1
+Effect ID 1195:
+Session Status State Engine:
+07737   000    003   0xf489ae00
+Descriptor:
+- UUID: af8da7e0-2ca1-11e3-b71d-0002a5d5c51b
+- TYPE: ec7178ec-e5e1-4432-a3f4-4657e6795210
+- apiVersion: F12AC400
+- flags: 00400240 (conn. mode: insert, insert pref: any, volume mgmt: implements control, device indication: requires updates, input mode: not set, output mode: not set, offloadable)
+- name: Sonysweffect
+- implementor: SONY
+- data: float
+- Input configuration:
+Buffer     Frames  Smp rate Channels Format
+0xf70bc000 03552   44100    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
+- Output configuration:
+Buffer     Frames  Smp rate Channels Format
+0xf70bc000 03552   44100    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
+- HAL buffers:
+In(0xefc28000 -&gt; 0xf70bc000) InConversion(nullptr) Out(0xf70bc000 -&gt; 0xefc28000) OutConversion(nullptr)
+1 Clients:
+ Pid Priority Ctrl Locked client server
+17347        0  yes    yes      0      0
+Effect_params
+  Effect_enabled: 1
+  Effect_volume: 259
+SONY_Effects
+  ClearAudio plus status: 1
+  ca_plus_index: 0
+  VPT mode: 0
+  Dynamic_normalizer: 1
+  S-Force: 0
+  Clear Phase for Speaker: 4
+  ca_band_level: 0 0 0 0 0 0
+  Local log:
+   05-24 19:23:24.969 CFG_EVENT_CREATE_AUDIO_PATCH: old device 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE) new device 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
+   05-24 19:23:24.971 AT::add       (0xf48ef280)      0     no  31374    7737 A  0x000 00000001 00000003  44100  3     0     0     0  00000000  22932       0 f         0        0 EFC28000 00000000</code></pre><p>这个路径的 effect chain 上挂的都是索尼效果器。可以观察到 ClearAudio, VPT 之类的功能都在正常工作。</p><p>没有压缩编码的上下文（如 MP3/AAC 的 metadata），DSEE 可以正常工作（我没开）。</p><p>值得注意的是，HAL 音量同样是 1.00000000，但是 effect chain 中没有发现 NXP 的 Volume 效果器，这是因为 <code>Dynamic_normalizer: 1</code>，也就是动态均衡器开启了，可能是它替代了 NXP Volume.</p><p>作为对比，我关闭了动态均衡器：</p><pre class="language-null"><code>HAL_Volume
+  Volume_l: 0.03162301
+  Volume_r: 0.03162301
+  Stream volumes in dB: 0:-17, 1:-30, 2:-30, 3:-30, 4:-30, 5:-30, 6:-inf, 7:-30, 8:-18, 9:-96, 10:-3.7, 11:0, 12:0
+  Normal mixer raw underrun counters: partial=0 empty=0
+  1 Tracks of which 1 are active
+    T Name Active Client Session S  Flags   Format Chn mask  SRate ST  L dB  R dB  VS dB   Server FrmCnt  FrmRdy F Underruns  Flushed Main Buf  Aux Buf
+         0    yes  31374    7817 A  0x000 00000001 00000003  44100  3     0     0     0  00633D20  22932   12276 A         0        0 EFC6B000 00000000
+  1 Effect Chains
+    1 effects for session 7817
+In buffer               Out buffer                 Active tracks:
+0xefc6b000 -&gt; 0xf70bc000   0xf70bc000 -&gt; 0xefc6b000   1
+Effect ID 1219:
+Session Status State Engine:
+07817   000    000   0xf489b100
+Descriptor:
+- UUID: af8da7e0-2ca1-11e3-b71d-0002a5d5c51b
+- TYPE: ec7178ec-e5e1-4432-a3f4-4657e6795210
+- apiVersion: F48EBE40
+- flags: 00400240 (conn. mode: insert, insert pref: any, volume mgmt: implements control, device indication: requires updates, input mode: not set, output mode: not set, offloadable)
+- name: Sonysweffect
+- implementor: SONY
+- data: float
+- Input configuration:
+Buffer     Frames  Smp rate Channels Format
+0xf70bc000 03552   44100    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
+- Output configuration:
+Buffer     Frames  Smp rate Channels Format
+0xf70bc000 03552   44100    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
+- HAL buffers:
+In(0xefc6b000 -&gt; 0xf70bc000) InConversion(nullptr) Out(0xf70bc000 -&gt; 0xefc6b000) OutConversion(nullptr)
+1 Clients:
+ Pid Priority Ctrl Locked client server
+17347        0  yes    yes      0      0
+Effect_params
+  Effect_enabled: 0
+  Effect_volume: 259
+  Local log:
+   05-24 19:40:49.662 CFG_EVENT_CREATE_AUDIO_PATCH: old device 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE) new device 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
+   05-24 19:40:49.664 AT::add       (0xf128a280)      0     no  31374    7817 A  0x000 00000001 00000003  44100  3     0     0     0  00000000  22932       0 f         0        0 EFC6B000 00000000
+```
+
+观察到 HAL 音量不再是 1，表明 HAL 进行了音量衰减，也说明了索尼音乐没有 DVC 功能。
+
+在实测中，除了 DSEE 的开关之外没有发现其它听感上的区别。</code></pre><h2><strong>放弃了高保真音频，真的值得吗？</strong></h2><p>在剖析了上述四种输出模式之后，我们回到最开始提出的一个问题：</p><p><strong>为此强行放弃了高保真音频，真的值得吗？</strong></p><p>这个问题站在不同人角度看答案是不同的。站在厂商的角度看是没有问题的，因为 DIRECT 不是 Android 默认就提供的，它需要厂商对 HAL 进行定制，而且会破坏杜比音效之类的后处理的兼容性，所以全都走 MIXER 并统一规格，是一个在工程上无可置疑的选择。</p><p>但在我看来，所谓的后处理效果根本就不是必要的。一盘好的母带，已经经过了混音师的调整，他的目的不是「更好听」，而是「更标准」。</p><p>这就像很多电视对画面的后处理一样，看上去确实更艳丽更生动，但是看久了不刺眼吗？色彩和白点标准吗？还原了导演的真实意图吗？为什么电视这么大的屏幕，在制作现场做一个参考性的大屏幕监看都不配？</p><p>换句话说，我们使用的这些回放设备，到底有没有尊重创作者？有没有努力地还原创作者想传递给我们的心意？在现在大多数消费级电子产品上，我可以说：没有。</p><p>在消费级电视上，我们看见了 filmmaker 模式，看见了厂商的一点诚意。但是在手机上，我没有看见任何现在厂商的诚意。</p><p>Xperia 基本已经退出了消费级电子市场，但这部来自 2017 年的上古兵器，却让我对 Xperia 有了新的认识，也让我对「到底是什么是高保真」有了新的认识。</p><p>也许，不作处理的处理，才是最好的处理吧。</p><h2>参见</h2><p>内容同步发表在独立博客 Nalanyinyun's Library 上，欢迎大家前去参观：</p><span class="ss-linkCard">&nbsp;</span><p>本站同时提供了邮件订阅服务，欢迎大家订阅以获得本站的内容更新，本站不定时更新文学类和技术类文章：</p><span class="ss-linkCard">&nbsp;</span><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>
@@ -383,178 +929,6 @@ summary: "企业战略增长的底层模型：蓝海战略 = 价值域再发现 
     }
   }
 ]</code></pre><p>其中，<code>raop.latency.ms</code> 参数可以自行调整。作为参考，笔者将其设置为 100，并没有遇到问题。</p><p>3. 重启 PipeWire：</p><pre class="language-shell"><code>systemctl --user restart pipewire</code></pre><p>等待桌面右上角的喇叭图标消失又出现后，你应当可以在设备列表中找到你的 HomePod。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/16/b522a2d0c32c4eb056c9f1fffb98432e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>现在，你可以将 HomePod 作为扬声器使用了。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/109830</id>
-            <title>写个 Hook 截胡大模型：将零散的 AI 对话重塑为本地知识资产</title>
-            <link>https://sspai.com/post/109830</link>
-            <guid isPermaLink="false">https://sspai.com/post/109830</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 16 May 2026 01:37:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 会话记录, SQLite, Claude Code, Hook 机制  
-<br>  
-<br>总结: 作者通过同时与多个 Claude Code 会话进行工作，发现对话记录未被保存，导致工作过程中的探讨、权衡和妥协在会话结束后被遗忘。为解决此问题，作者选择 SQLite 作为存储方案，设计数据库表结构存储标识、内容、关联性和分类信息。作者创建了 `logging-session` skill 并配置了 Claude Code 的 Stop hook，通过两阶段判断机制实现对话结束时自动提炼并记录会话摘要。记录的数据被整合进个人 dashboard 中，使作者能够通过命令查询和复盘工作过程，将 AI 对话转化为本地知识资产。 </div>
-                        <hr>
-                    
-                    <h2>一</h2><p>我同时开着好几个 Claude Code 的会话窗口。</p><p>一个在推敲怎么为我独立开发的 App 接入用户反馈功能，一个在帮我创建 <code>logging-session</code> skill，还有一个，正在基于 Obsidian 仓库中的工作资料，帮我生成给领导的演讲稿。每个窗口都聊了多轮，调整代码、优化流程、纠正语感。</p><p>人其实并不是擅长多线程处理的生物，但在 AI 时代，为了不在等待模型「吐字」的间隙去无脑刷微博，我被迫习惯了同时开几个窗口「压榨」时间。</p><p>但随之而来的问题，是我对于过程的记忆会变得相当模糊。也许最终我会实现这个反馈功能，有一个好用的 skill，拿出一份能交差的演讲稿，但过程中我和 AI 对于实现方案的探讨、权衡取舍、最终的妥协，都会在关闭终端的那一刻抛诸脑后。</p><p>另一方面，我有定期复盘的习惯。当前复盘的上下文，来自我的 dailylog 文档、番茄钟数据以及 GitHub 上的 commit 记录。基于这些信息，我能够让 AI 帮我总结出每周的成果，但仍然缺乏对于实现细节的分析。</p><p>在 AI 工具中产生的对话，是当下最真实的工作快照，但很少有人会去翻看他们，并且包含多轮交互的对话，期间夹杂着大量执行记录，并不适宜阅读。</p><p>面对这种算力与心力的双重浪费，我决定写一个工具。它必须能在每次对话结束时，自动把「问了什么、想了什么、结果是什么」无感提取并保存下来。</p><h2>二</h2><p>保存会话的方式得满足两个条件。第一，支持记录多个项目的会话，独立开发、Obsidian 仓库或是自建的 skill，这些不同路径的项目会话应当能统一保存并加以区分；第二，得方便检索，而不是在一堆文本文件里 grep。</p><p>我一开始也想过存 Markdown，每个项目一个文件夹，每次对话写一个文件。但试了试发现不行，一旦想跨项目做聚合，比如「过去 7 天我做了什么」，就得写脚本遍历所有文件夹、解析每个文件的前置元数据、再拼接在一起。太折腾了。</p><p>也考虑过 JSON，一个项目一个大数组，往里追加就行。但 JSON 文件读多了要全量加载到内存，而且查「项目 A 最近 7 天的 bugfix 有几个」这种条件查询，还是得写代码遍历。</p><p>最终选了 SQLite。一个数据库文件，一张表，所有项目的会话记录都在里面。想查「这周项目 A 做了什么」，一条 SQL 搞定。而且 SQLite 是单文件数据库，放在 Obsidian 的 vault 里，iCloud 自动同步，走到哪都能用。</p><p>每次会话存储的信息，应当包括以下几个方面：</p><ul><li>标识信息，比如唯一性 id，创建时间，项目名称，git commit 的哈希值；</li><li>完整内容，包括我提出的问题，Agent 的思考过程，以及最终输出的结果；</li><li>关联性（<code>parent_id</code>），有些会话是上一次的延续，串起来才能看到完整的线索；</li><li>分类（<code>task_category</code>），bugfix、feature、refactor 之类，后面做统计的时候按分类汇总很方便。</li></ul><pre class="language-sql"><code>CREATE TABLE dev_logs (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    project_name TEXT NOT NULL,
-    session_id TEXT NOT NULL,
-    parent_id INTEGER DEFAULT NULL,
-    task_category TEXT,
-    user_query TEXT NOT NULL,
-    thought_process TEXT,
-    final_result TEXT,
-    file_paths TEXT,
-    git_hash TEXT,
-    extra_metadata TEXT
-);</code></pre><p>git commit 的哈希值本来是一个顺手记录的信息，但它居然真的发挥了作用：我在 Claude Code 中使用 <code>rewind</code> 命令多返回了一个 checkpoint，导致最后一次提交的内容也被撤销了。</p><p>通过会话记录我查询到了当时提交的 commit 哈希值，AI 在本地的 reflog 中找到了记录，并帮我恢复了文件改动。</p><figure class="image ss-img-wrapper"><img alt="用 AI 把零散对话变成知识资产-20260515155833.png|500" src="https://cdnfile.sspai.com/2026/05/15/article/fa628f6a823aa7515c8b238b644da7b5.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>三</h2><p>想好了存哪，存什么，还得解决怎么存。</p><p>部分环境信息可以通过脚本来生成和获取，比如唯一性 id、项目名称等等，但 Agent 的执行过程只有它自己最清楚。</p><p>我让 Claude Code 帮我写了一个叫 <code>logging-session</code> 的 skill。我在这份操作手册里写清楚了，对话结束时要提炼哪些字段、怎么生成会话 ID、项目名从哪里获取、查询脚本怎么调用。</p><p>实际效果是这样的。对话结束，我输入 <code>/logging-session</code>，Claude Code 会自动从当前对话中提炼出三个东西，用户的问题是什么、中间的思考过程是怎样的、最终做到了什么。然后生成一个会话 ID，从当前目录拿到项目名和 git hash，调用写入脚本，一条记录就存进数据库了。</p><figure class="image ss-img-wrapper"><img alt="用 AI 把零散对话变成知识资产-20260515162628.png|500" src="https://cdnfile.sspai.com/2026/05/15/article/b69a9d701d597396b41dd09d077b6fea.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>比如我修完一个登录页的 bug，记录下来长这样：</p><pre class="language-bash"><code>python3 scripts/save_log.py \
-  --db ~/Library/Mobile\ Documents/.../dev_knowledge.db \
-  --project "my-app" \
-  --session "20260514_a3f2" \
-  --query "修复登录页面特殊字符崩溃" \
-  --thought "排查发现是正则表达式写错，特殊字符匹配时抛出未捕获异常" \
-  --result "修改了 src/auth/validator.ts 中的正则" \
-  --category "bugfix" \
-  --files src/auth/validator.ts</code></pre><p>查的时候更简单。想看这周做了什么，一条命令出结果，还能直接导出成 Markdown 文件塞进 Obsidian。</p><pre class="language-bash"><code>python3 scripts/query_logs.py \
-  --db ~/Library/Mobile\ Documents/.../dev_knowledge.db \
-  --project "my-app" \
-  --days 7 \
-  --format markdown</code></pre><p>输出是按日期分组的 Markdown，每个条目包含问题、思考过程和结果。导出的效果大概长这样：</p><pre class="language-"><code>## 2026-05-14
-
-### 修复登录页面特殊字符崩溃
-- 项目：my-app
-- 分类：bugfix
-
-思考过程：排查发现是正则表达式写错，特殊字符匹配时抛出未捕获异常
-
-最终结果：修改了 src/auth/validator.ts 中的正则
-
----
-
-### JWT 迁移到 session 方案
-- 项目：my-app
-- 分类：refactor
-
-思考过程：先试了无状态方案但与权限中间件冲突，换有状态方案，踩了 Cookie SameSite 的坑
-
-最终结果：完成迁移，修改了 src/middleware/auth.ts 和 src/config/session.ts</code></pre><p>直接在 Obsidian 里就能看。如果我想把每周的总结存下来，加一个 <code>--output</code> 参数指定文件路径，Markdown 文件就直接写进 Obsidian vault 了。</p><p>使用过程中，我观察到一个有趣的现象：我让 Agent 执行一个分阶段的任务，要求它每次执行完之后停止并等待我的指令。在它停止后，我会手动执行 <code>logging-session</code> 。</p><p>在同一个会话中连续重复这一过程 3 次后，它在第 4 次直接执行了 skill 中的脚本，甚至没有调用 skill 本身。</p><p>这大概率是因为当前会话上下文中「对话结束 -&gt; 调用记录工具」这种高度重复的模式，让模型在预测下一个动作时，「调用工具」这一行为的概率被历史记录无限放大。虽然这让模型看起来很「聪明」，仿佛已经具备了主观能动性，但却给我造成了麻烦，我仍然手动执行了 skill，导致会话记录重复，倒显得我更「笨」一点。</p><figure class="image ss-img-wrapper"><img alt="用 AI 把零散对话变成知识资产-20260515165745.png|500" src="https://cdnfile.sspai.com/2026/05/15/article/af11cd0ec54f6c49f7db5514838d0a25.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>到这里，手动记录的链路跑通了。但有个问题，手动记录靠的是人记得去执行。而人，是会忘的。</p><h2>四</h2><p>我需要让记录变成一个不需要人记得的动作。</p><p>Claude Code 有一个 hooks 机制，可以在特定事件发生时触发自定义行为。其中有一个事件叫 <code>Stop</code>，在 Claude 完成回复时触发。我一开始想的是，在对话结束时自动跑一段 shell 脚本，把记录写进去。但翻了翻文档发现，command 类型的 hook 拿不到对话上下文，它只能执行固定的 shell 命令。你没法让一段 shell 脚本去「理解」对话内容再提炼成摘要。如果用 command hook，最多只能写一条占位记录，写着「Session ended」，聊胜于无。</p><p>后来发现还有 prompt 类型的 hook。它不是跑脚本，而是把一段指令塞给模型，让模型自己判断该不该放行。返回 <code>{"ok": true}</code> 就放行，返回 <code>{"ok": false, "reason": "..."}</code> 就拦截，reason 会作为下一轮的指令发给 Claude。这就有意思了。</p><p>我的方案是这样的。当 Claude Code 准备结束对话时，Stop hook 拦住它，告诉它「你还没记录会话，先去跑 <code>/logging-session</code>，跑完再来结束」。Claude Code 收到这条指令，就会继续工作，自动执行 <code>/logging-session</code> 做总结。</p><p>但这里有个坑。Stop 事件不只是在你主动结束对话时触发，Claude 每次回复完都会触发一次。也就是说，如果 hook 每次都返回「不行，去记录」，Claude 就会在每一轮对话结束后都试图去跑 <code>/logging-session</code>，陷入无限循环。</p><p>所以得有一个判断机制。Claude Code 的 Stop hook 设计里自带了一个字段叫 <code>stop_hook_active</code>，第一次触发时是 false，当 hook 返回 <code>{"ok": false}</code> 后，下一次触发时这个字段就变成 true。我在 hook 的指令里写清楚了这个规则，第一次 Stop 拦截，第二次 Stop 放行。</p><p>从用户的角度看就是，每次会话结束，Claude Code 自动多做一步记录，然后才退出。全程不需要我手动操作。</p><figure class="image image_resized ss-img-wrapper" style="width: 400px;"><img alt="写个 Hook 截胡大模型：将零散的 AI 对话重塑为本地知识资产-20260515221911.png|500" src="https://cdnfile.sspai.com/2026/05/15/article/6cfc5e7e78e36f5f2c274d77c76e757a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>具体配置放在 <code>~/.claude/settings.json</code> 里，类型是 prompt，让模型自己判断是否放行。</p><pre class="language-json"><code>{
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "prompt",
-            "prompt": "你是一个负责检查会话是否真正可以结束的守卫……\n1. 第一次触发（stop_hook_active 为 false），返回 {\"ok\": false}，要求执行 /logging-session\n2. 第二次触发（stop_hook_active 为 true），返回 {\"ok\": true}，放行"
-          }
-        ]
-      }
-    ]
-  }
-}</code></pre><p>这个两阶段机制听起来有点绕，但实际用起来是无感的。你正常对话，该结束就结束。唯一的区别是，结束前会多出一条消息，Claude Code 告诉你它已经把这次会话记录下来了，顺手给你一个记录 ID。</p><p>配置完 hook 之后每次会话记录都会自动写入本地数据库，没有一次需要我手动输入 <code>/logging-session</code>。以前不记录是常态，记录需要额外操作。现在反过来了，记录是自动发生的，不记录才需要额外干预。</p><figure class="image ss-img-wrapper"><img alt="写个 Hook 截胡大模型：将零散的 AI 对话重塑为本地知识资产-20260515221002.png|500" src="https://cdnfile.sspai.com/2026/05/15/article/6d119d5d2b9661b9b795321b4e226153.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>当然也有边界情况。比如我只是在对话里问了一个简单的问题，不涉及任何编码，hook 也会触发，Claude Code 也会记录一条。这种记录没什么信息量，但也不碍事，查询的时候按 task_category 筛掉就行。如果你觉得烦，可以在 skill 的操作手册里加一条规则，只记录有实际编码操作的对话。</p><p>以及我正在使用的 Copilot CLI，它的 hook 机制则不像 Claude Code 这样强大，不支持 command 类型的 hook， 就只能在每次对话结束后，由我自己手动触发了。</p><h2>五</h2><p>SQLite 数据库中存储的信息并不能直接查阅，需要借助专门的软件比如 Navicat，或是 VSCode 插件、命令行，然而我希望能有更加轻量快捷的方式。</p><p>我曾在之前的文章中介绍过我的<a href="https://sspai.com/post/105710">个人 dashboard</a>，可以查看 dailylog 笔记和番茄钟数据，这次我将和 AI 对话的记录也加了进去。</p><figure class="image image_resized ss-img-wrapper" style="width: 401px;"><img alt="用 AI 把零散对话变成知识资产-20260515171651.png|500" src="https://cdnfile.sspai.com/2026/05/15/article/7830703d83a60636bbfc794775f56a6f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>终</h2><p>现在每次结束对话，Claude Code 都会自动帮我把这次会话沉淀下来。那些之前关掉终端就忘了的工作过程，现在都在我的数据库里，下周复盘的时候跑一条命令就能翻出来。</p><p>这本质上是我之前那篇《<a href="https://sspai.com/post/105710">数据主权：Obsidian 的本地存储在 AI 时代更香了</a>》背后思考的延续。</p><p>番茄钟数据存本地 SQLite，我能自己做统计页面对比时间开销；Dailylog 在本地 Markdown 文件里，我用脚本就能按需查询；现在，AI 的对话记录也回到了本地。它们共同遵循着一个极其朴素的原则——<strong>先有数据，再用 AI 加工</strong>。数据必须攥在自己手里，加工方式才能随心所欲。如果数据被锁在云端，AI 再强也只是空中楼阁，因为你连取回数据的自由都没有。</p><p>回头审视，无论是 dailylog 中的灵光一闪、番茄钟里的时间刻度，还是现在数据库里与 AI 的思维碰撞，我在探索 AI 的过程中，不自觉地将自己尽可能「数字化」了。它们不仅是我工作的产物，更是我数字生命的快照。</p><p>这也许就是我拥抱 AI 的方式吧。</p><hr /><p><code>logging-session</code> 也已经开源，与之前的 <code>mp-article-writor</code> 合并为一个开源仓库，<a href="https://github.com/balabalabalading/huuuuuuho-skills" target="_blank">balabalabalading/huuuuuuho-skills</a>，欢迎交流讨论。</p><p>我独立开发的 Mac 端 App「<a href="https://apps.apple.com/cn/app/%E6%B5%81%E9%87%8F%E6%97%A5%E8%AE%B0/id6753135743?mt=12">流量日记</a>」已上线 Mac App Store，专为自媒体创作者打造，可永久保存、分析各平台导出的账号数据。如果你是用 Mac 的内容创作者，欢迎下载体验，<strong>半年内免费使用</strong>。</p><p>欢迎关注我的公众号「高效人生指北」。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/109717</id>
-            <title>我写了个懂中国调休的闹钟——切克闹钟开发手记</title>
-            <link>https://sspai.com/post/109717</link>
-            <guid isPermaLink="false">https://sspai.com/post/109717</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 15 May 2026 01:47:32 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 闹钟调度逻辑, 中国调休体系, 自定义日历, 场景化提醒
-
-<br>
-<br>
-总结: 文章提出，苹果闹钟调度的根本缺陷是其逻辑“死板”，无法识别中国复杂的调休和法定节假日体系。作者为此开发了“切克闹钟”，核心是设计了一套规则引擎，让闹钟根据“当天是什么日子”而非固定日期循环来决定是否响铃。该引擎引入了优先级链（用户自定义>法定数据>周末兜底），并落地为“牛马模式”（工作日响铃）与“休假模式”（休息日响铃）。App还支持大小周、间隔工作日等复杂排班，以及用户可覆盖官方数据的自定义日历。此外，App增加了抢票、外卖等场景化提醒功能，并基于iOS 26的AlarmKit框架实现了系统级可靠的触发体验。 </div>
-                        <hr>
-                    
-                    <p>一个被苹果闹钟坑哭的程序员，花了大半年时间自己写了个闹钟 App。起因很简单：清明节的早晨被闹钟吵醒，调休上班的周六却睡过了头——iPhone 的闹钟不认识中国的节假日。</p><p>于是我决定自己动手。大半年后，<strong>切克闹钟</strong>上架了。</p><h2 style="margin-left: 0px;"><strong>我为什么要重写闹钟的调度逻辑</strong></h2><p>苹果闹钟的问题不是功能少，而是调度逻辑太死板。它只知道「每周几重复」和「几月几号」，完全不懂中国的调休体系。法定节假日它照响，调休工作日它闭嘴——这对一个有大小周、有调休、有弹性排班的劳动力市场来说，基本不能用。</p><p>所以我从零设计了一套规则引擎。核心思路是：<strong>闹钟的响与不响，应该由「这天是什么日子」来决定，而不是一个固定的日期循环</strong>。</p><p>中国的日期类型比「工作日 / 周末」复杂得多：</p><p style="margin-left: 0px;">法定节假日（全国放假）</p><p style="margin-left: 0px;">法定调休日（为了凑假期，周六被调成上班）</p><p style="margin-left: 0px;">用户自定义休息日（年假、请假）</p><p style="margin-left: 0px;">用户自定义工作日（加班、临时排班）</p><p style="margin-left: 0px;">普通周末</p><p>这些信息全部进入一个优先级链：<strong>用户自定义 &gt; 法定数据 &gt; 周末兜底</strong>。每次闹钟触发前，引擎会实时判断今天的类型，再决定响还是不响。</p><p>这套逻辑落地成了两个模式：</p><h2 style="margin-left: 0px;"><strong>牛马模式 &amp; 休假模式</strong></h2><p><strong>牛马模式</strong>——工作日响铃。我自己每天在用。</p><p>它的规则很简单：该上班的日子就响，不该上班的日子就安静。周一至周五、法定调休日、我自己标记的工作日会响；法定节假日、我标记的休息日、普通周末不会响。</p><p>最大的好处是再也不用放假前手动关闹钟了。去年五一一整个假期，我的闹钟一个都没响过——不是我手动关的，是它自己知道的。</p><p><strong>休假模式</strong>——反过来，只在休息日响铃。这个模式是我一个周末要上培训课的朋友提的需求。他周六想按闹钟起床，但不希望这个闹钟在周六被调成工作日那天吵他。</p><p>这两个模式的核心价值其实就一句话：<strong>你的闹钟和你的真实作息对齐了</strong>。</p><h3 style="margin-left: 0px;"><strong>大小周 &amp; 间隔工作日</strong></h3><p>在牛马模式下，我还支持了三种工作日节奏：</p><figure class="table"><table><thead><tr><th style="border-left: 1px solid rgb(71, 77, 84); border-right: 1px solid rgb(71, 77, 84); border-top: 1px solid rgb(71, 77, 84); padding: 5px 10px; vertical-align: top;"><strong>模式</strong></th><th style="border-left: 1px solid rgb(71, 77, 84); border-right: 1px solid rgb(71, 77, 84); border-top: 1px solid rgb(71, 77, 84); padding: 5px 10px; vertical-align: top;"><strong>说明</strong></th></tr></thead><tbody><tr><td style="border: 1px solid rgb(71, 77, 84); padding: 5px 10px; vertical-align: top;">标准五天制</td><td style="border: 1px solid rgb(71, 77, 84); padding: 5px 10px; vertical-align: top;">固定周一至周五</td></tr><tr><td style="border: 1px solid rgb(71, 77, 84); padding: 5px 10px; vertical-align: top;">大小周</td><td style="border: 1px solid rgb(71, 77, 84); padding: 5px 10px; vertical-align: top;">五天一休与六天一休交替，指定本周类型后自动推算</td></tr><tr><td style="border: 1px solid rgb(71, 77, 84); padding: 5px 10px; vertical-align: top;">间隔工作日</td><td style="border: 1px solid rgb(71, 77, 84); padding: 5px 10px; vertical-align: top;">每 N 个工作日响一次，适配做一休一、做二休一</td></tr></tbody></table></figure><p>大小周是我一个在互联网公司的朋友强烈要求的。他们公司大小周，他每周都要算下周是单休还是双休，然后去改闹钟设置。现在他只需要设一次。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/14/81f51afd95a8c21bedead8acc76074f8.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2 style="margin-left: 0px;"><strong>自定义日历：用户可以自己改</strong></h2><p>上面所有的判断，都依赖一套「哪天上班哪天休息」的数据。除了系统同步的法定节假日，我给了用户自己编辑的权限。</p><p>在日历标签页，每个月的每一天都有颜色标记：</p><p style="margin-left: 0px;">法定节假日（红）调休日（紫）自定义休息日（橙）自定义工作日（蓝）</p><p>你可以点一天标记，也可以批量操作多天。关键设计是：<strong>你手动标记的优先级最高</strong>——覆盖法定数据和周末规则。这对我自己就很实用：去年年假期间，我把那几天标成休息日，所有牛马模式的闹钟自动跳过。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/13/034256fdf1bb980cc816bec6ca7cc063.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2 style="margin-left: 0px;"><strong>场景化提醒：闹钟不止是叫醒</strong></h2><p>这部分是我写着写着「想多了」的产物。一开始只是做普通闹钟，后来觉得：既然到点我都要打开某个 App 做某事，为什么不直接帮我打开？</p><p>于是我加了<strong>六</strong>个场景：</p><ul><li><strong>抢票提醒</strong>：到点弹出倒计时，倒计时结束自动跳转大麦、猫眼、12306、携程。还有一个画中画悬浮计时器，切到别的 App 也能盯着倒计时。这个功能是我抢周杰伦演唱会门票时想出来的。</li><li><strong>外卖提醒</strong>：到点自动打开美团或饿了么。支持美团、饿了么、京东、淘宝。那些开会开到错过饭点的朋友应该懂。</li><li><strong>开会提醒</strong>：一键唤起企业微信、钉钉、腾讯会议、飞书。</li><li><strong>健康提醒</strong>：分为吃药提醒（支持每日 1-3 次或自定义间隔）和补剂清单（蛋白粉、维生素、鱼油等，到点弹出勾选）。</li><li><strong>出门提醒</strong>：弹出自定义清单（钥匙、工牌、耳机等），附带当日天气。</li><li><strong>起床提醒</strong>：可以设 2-6 个连续闹钟，间隔 3-15 分钟。7:00、7:05、7:10 三连击，=</li></ul><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/13/9b9efcbb9f5bb7f064cf0ff6f6a82927.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2 style="margin-left: 0px;"><strong>主题、铃声 &amp; 小组件</strong></h2><p>苹果闹钟的配色我一直不满意，默认的雷达铃声更是很多人吐槽的对象。我见过太多人说「听到雷达声心脏骤停」。</p><p>所以切克闹钟做了三件事：</p><h4 style="margin-left: 0px;"><strong>多套主题</strong>：浅色和暗黑模式自由切换，暗黑模式夜间不刺眼</h4><h4 style="margin-left: 0px;"><strong>自定义铃声</strong>：Pro 用户可以上传音频 DIY，也可以用我内置的铃声——我花了不少时间结合 AI 音乐工具筛选的，标准是「能叫醒你，但别吓醒你」</h4><h4 style="margin-left: 0px;"><strong>桌面小组件</strong>：抬手看下次闹钟的时间，不用进 App</h4><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/13/872bec4531feb6beeded947c3b790a66.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2 style="margin-left: 0px;"><strong>技术选型</strong></h2><p>切克闹钟基于 iOS 26 的 <strong>AlarmKit</strong> 框架构建。这是苹果在 iOS 26 中首次开放的闹钟专用 API——在此之前，第三方闹钟只能依赖本地通知，触发可靠性很差。AlarmKit 给了我们系统级的闹钟能力，<i><strong>这也是为什么切克闹钟能做到和原生闹钟一样可靠的触发体验</strong></i>。</p><p>代价是<strong>需要 iOS 26 及以上系统</strong>。</p><h2 style="margin-left: 0px;"><strong>这个 App 适合谁</strong></h2><ul><li>被调休折磨的打工人（这是我自己）</li><li>大小周排班的互联网/制造业朋友</li><li>需要抢票、抢外卖、按时吃药的人</li><li>讨厌苹果雷达铃声的人</li><li>想用一个 App 管多个生活提醒的人</li></ul><p>不适合：用 Android 的朋友（抱歉，目前只有 iOS 版），以及只需要极简闹钟功能的用户。</p><p>&nbsp;</p><p>切克闹钟不是什么「重新定义闹钟」，它就是想踏踏实实解决一个问题：<strong>让你的闹钟和你的真实生活对齐</strong>。如果你也吃过调休的亏，欢迎试试。</p><p><a href="https://apps.apple.com/cn/app/id6749170404"><u>App Store 搜索「切克闹钟」</u></a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/109715</id>
-            <title>溢价三倍，我在2026年收了一台“不中用”的iPhone7</title>
-            <link>https://sspai.com/post/109715</link>
-            <guid isPermaLink="false">https://sspai.com/post/109715</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 14 May 2026 15:13:22 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: 亮黑色, iPhone7, Jony Ive, 一体化设计  
-<br>
-<br>
-总结: 作者以高价收藏了一台全新仅激活的亮黑色iPhone7，认为其配色“昙花一现”。亮黑色通过九道特殊工序（抛光、上色、再打磨、镀膜）在铝金属上实现镜面与陶瓷质感，良品率仅60%-70%，体现了Jony Ive对“无缝、纯粹、简洁”的设计追求。然而该材质极易沾染指纹和划伤，最终苹果从iPhone8起改用玻璃后壳。iPhone7还取消了3.5mm耳机孔以容纳更大的电池和Taptic Engine，并为全系防水铺路，同时将Home键改为不可按压的震动反馈。文章认为iPhone7是承上启下的一代，用取消接口的“阵痛”换取了此后交互体验的红利。 </div>
-                        <hr>
-                    
-                    <figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/15/9a69b248da70ec5165f7a4f9989f004f.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0.0px;">就在不久之前，我花费了三倍的溢价收下了封面中这台已经将近10年的手机——iPhone7.</p><p style="margin-left: 0.0px;">是的，你没听错，这个价格在目前的二手市场上，基本可以买下3台成色尚好的iPhone7。但我心甘情愿为之买单的原因有二：一方面它保持着「全新仅激活」的完美状态，另一方面是因为它那抹早已消逝在历史长河中的特别配色，但也正是这个配色，让他几乎无法裸机使用。</p><p style="margin-left: 0.0px;">我爱好收藏苹果的老产品，而这么一台“不中用”的手机，在我的收藏库中却可谓“镇馆之宝”，时光荏苒，iPhone7虽已10年，但我还是想讲一讲这个足够特殊的配色，以及这台足够特殊的手机。</p><h3 style="margin-left: 0.0px;"><strong>当一件艺术品被量产</strong></h3><p style="margin-left: 0.0px;">从最初的黑白分明到如今的五彩缤纷，苹果近20年的iPhone产品配色可谓丰富多彩，但那种上色工艺及其特殊的配色，在iPhone序列里仅此一次。</p><p style="margin-left: 0.0px;">用一个词形容这个配色，那便是「昙花一现」。让我们把时间拨回2016年9月。那年的秋季发布会上，苹果为新机推出了多种配色，包括两款截然不同的黑色。</p><p style="margin-left: 0.0px;">乍一听并无特别，黑色历来都是iPhone的常规配色。但是同台发布两款黑色iPhone，这还是第一次。一个是沉稳收敛的哑光磨砂黑；而另一个则通体黝黑，黑得彻底。苹果它取了一个新名字——<strong>亮黑色（Jet black）</strong>。</p><figure class="image image_resized ss-img-wrapper" style="width: 664px;"><img src="https://cdnfile.sspai.com/2026/05/13/0f7f5b2fbca23a9812c0e97a31689d84.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>我新买的亮黑色(左)与家人曾经用过的磨砂黑(右)对比，亮黑色也曾被大家叫做“钢琴黑”</figcaption></figure><p><br />&nbsp;与众不同的亮黑色显然大有来头，不出所料，当苹果前首席设计官（AKA御用声优）Jony Ive那沉着而富有磁性的声音响起时，苹果对亮黑色赋予了至高的礼赞。</p><blockquote><p style="margin-left: 0.0px;"><i>‘Each refinement serves to bring absolute unity and efficiency to the design.’</i></p><p style="margin-left: 0.0px;"><i>“每一处雕琢专为设计带来绝对的一体和效率”</i></p></blockquote><p style="margin-left: 0.0px;">远望，它酷似一台钢琴的黑色烤漆，黝黑冷峻；近观，铝金属后盖的镜面黑与正面玻璃面板相得益彰，浑然一体。于光线的流转间，整台设备宛如直接从整块黑曜石中精雕而出，不带一丝拼凑的造作。更夸张的是，这种触手生温、酷似陶瓷的质感，竟是通过打磨铝金属还原而成的。视觉与材料的错位，加上最终呈现的深邃感与一体性，让人很难想象这是一台可以量产的手机。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2026/05/14/5e7f18d0a82a5c498d49aaf18627934b.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2026/05/13/d692c755f8c038504d5e86de5e280080.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0.0px;">一机激起千层浪，亮黑色小7一经问世，便引起了巨大反响，首发的第一个月便迅速断货，甚至在黄牛手中被炒到2万一台的天价后，仍旧一机难求<sup class="ss-footnote" href=" 1、https://36kr.com/p/1721189548033" title="据北京晨报报道，苹果iPhone7国行版发行首日，各苹果零售店门外，黄牛们拿着真机揽客，其中亮黑色的最为抢手，每台多加万元，炒到了21100元一部。价格这么高，黄牛却称囤货不愁卖。">1</sup>。这疯狂的市场需求，固然有苹果将该配色与高存储容量（128G/256G）捆绑的营销策略。</p><p style="margin-left: 0.0px;">但另一个不容忽视的深层原因，<strong>藏在那段良品率低得可怜的生产线里。</strong></p><p style="margin-left: 0.0px;">要理解亮黑色的生产难点，得先看看市面上成熟的「喷砂 + 阳极氧化」着色工艺。</p><p style="margin-left: 0.0px;"><strong>喷砂：</strong> 机器如喷枪般将极细的陶瓷砂喷向铝材，将金属材料原本易划伤的表面“打毛”，形成一种细腻的磨砂质感。</p><p style="margin-left: 0.0px;">&nbsp;<strong>阳极氧化上色</strong>： 将铝材浸入电解池，在表面生成一层带有千万个微孔的氧化膜，同时灌入染料后封死。</p><p style="margin-left: 0.0px;">从结果来看，这种工艺成本低廉，手感干爽，不沾指纹，良品率极高。</p><p style="margin-left: 0.0px;">而亮黑色的诞生，可以说是反其道而行之。根据官方的介绍视频，这个配色离不开九道特殊的阳极氧化与抛光工序。简单来看，可以总结为抛光—上色—打磨—镀膜：</p><p style="margin-left: 0.0px;"><strong>1、抛光：</strong>为了实现镜面般的绝对光滑，机身不但不能喷砂，还要将其置于类似“牙膏”质感的研磨液中进行长时间的3D旋转摩擦。</p><p style="margin-left: 0.0px;">重点来了：这一步没有任何退路——只要残留一丝颗粒感，整块铝材就会报废。直到金属表面能像冰面一样能清晰地照出人影，这场磨砺才算合格。</p><p style="margin-left: 0.0px;"><strong>2、上色：</strong>为了让黑更深邃，苹果使用了特殊的单组分染料。利用毛细效应，染料不再是浮在表面，而是深极地渗入氧化层内部。当光线射入时，它不再被铝材反射，而是被这层深不可测的黑色彻底吞噬。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2026/05/14/ecf8594ec65cdfb5198361d56ee16d1f.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2026/05/14/20c5faf02068855f3327ebe7f967e4af.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0.0px;">在上完色之后，普通手机就完工了。但亮黑色还要经历一次再打磨。</p><p style="margin-left: 0.0px;"><strong>3、再打磨：</strong>在磁场的精密调控下，无数极其细微的铁粉微粒对表面进行最后的微米级打磨。这进一步消除了上述步骤中产生的肉眼难见的凹凸感。</p><p style="margin-left: 0.0px;"><strong>4、镀膜：</strong>另外，为了提升耐磨性和坚固度，最后需要进行镀膜工艺。</p><p style="margin-left: 0.0px;">于是，观之黝黑，摸起来温润细腻的亮黑色iPhone7，在视觉和触感上便彻底“背叛”了铝金属原本的物理属性。</p><p style="margin-left: 0.0px;">10年前，由jony ive带领的设计团队对于亮黑色的追求近乎偏执。为了实现光泽及触感的「绝对一体」，天线带与铝材的色差被压缩至肉眼难辨的极限，在lightning接口、音量键等细小的连接处，哪怕是微米级的染料堆积，都会被视为对整体美感的亵渎。事实上，这把量产本身变成了一场追求完美的淘汰赛。根据当时的素材统计<sup class="ss-footnote" href="https://www.bnext.com.tw/article/41124/-iphone-7-sales-less-than-the-iphone-6s" title="亮黑色版本的iPhone 7 Plus之所以供應量低，主要原因是該版本的良品率維持在60%至70%之間。">2</sup>，亮黑色版本的iPhone7良品率仅有60%—70%，而常规配色大都在90%以上。这种不计成本的投入，注定了亮黑色的特别。可以说，苹果从 iPhone 11 Pro 开始为每年旗舰机型定制专属配色的传统，早在 iPhone 7 时代就已埋下了伏笔。</p><p style="margin-left: 0.0px;">将iPhone7与iPhone6s并置，最直观的震撼莫过于iPhone7那种无与伦比的纯净感，昔日6s为了信号而妥协的突兀天线，如今自然地隐匿在纯黑机身的上下边缘，按键与开孔、后盖与屏幕之间不再有生硬的边界，取而代之的是一种极度顺滑的无感过渡，在亮黑色iPhone7身上，「连续」与「一体化」不再是抽象的词汇。这一设计理念深受 Jony Ive 的影响——在他推崇的设计语言中，频频出现的三个词始终是：<strong>Seamless（无缝）、Purity（纯粹）与 Simplicity（简洁）。</strong></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/14/95f6fd614f0377532781e83f4a723bce.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0.0px;">Jony Ive的终极追求，便是把科技本身消融于生活之中。作为如影随形的必备品，若我们能在交互时察觉不到硬件的存在，那便是一体化的最高境界。正如一年后他在 iPhone X 发布会上所言，苹果向来追求的科技，是<i>'A physical object that disappears into the experience.(一个能消融在体验之中的物理实体)'</i></p><p style="margin-left: 0.0px;">黑若玛瑙，纯如明镜，于流光溢彩间，冷艳晶莹。</p><p style="margin-left: 0.0px;">亮黑色，是苹果试图用工业流水线，向世界复刻的一件「艺术孤品」。</p><h3 style="margin-left: 0.0px;"><strong>一鸣惊人，终成绝唱</strong></h3><p style="margin-left: 0.0px;">不过，我们还是要拿出那句老话：理想很丰满，现实很骨感。苹果成功做出了一件配色艺术品，却也成功让它继承了艺术品的脆弱。在日常中裸机使用亮黑色iPhone7，无疑是将《蒙娜丽莎》铺在地上当野餐垫。</p><p style="margin-left: 0.0px;">相较于磨砂喷漆的iPhone，亮黑色的镜面后壳是彻头彻尾的指纹收集器，一但上手，它的后壳便成了黄梅天永远擦不干的地板，斑驳的油印让深邃感瞬间烟消云散。而更致命的则是它的耐刮性，稍不注意，后壳的细小划痕马上满地开花，连苹果官方都在发售时直言了这一问题<sup class="ss-footnote" href="https://www.cbsnews.com/pittsburgh/news/apple-admits-iphone-7-jet-black-scratches-easily/" title="Apple Admits iPhone 7 'Jet Black' Scratches Easily">3</sup>，并建议用手机壳长期保护。在大多数裸机党手中，这抹惊艳的亮色用不了多久，就会在岁月的摧残下变得伤痕累累。</p><figure class="image image_resized ss-img-wrapper" style="width: 501px;"><img src="https://cdnfile.sspai.com/2026/05/14/59694f9d0402e62671d86a94ae099f46.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>受工艺限制，iPhone5裸机使用非常容易掉漆，于是苹果在后续的5s上开始使用深空灰色替代黑色，下半图则是iPhone7亮黑色裸机使用情况（图片来自网络）</figcaption></figure><p style="margin-left: 0.0px;">或许有些人还记得当年「一摸就掉漆」，饱受诟病的炭黑色iPhone5，仅仅4年之后，亮黑色iPhone7重蹈覆辙，带者苹果设计师对黑色最后的倔强，再次成为了只能活在橱窗里的艺术品。</p><p style="margin-left: 0.0px;">很清楚这一点的苹果，此后迅速修正了过于激进的上色策略，从iPhone8开始，苹果不再死磕铝合金的工艺上限，转而重投玻璃的怀抱。讽刺的是，iPhone7需要跨越诸多复杂工序的亮黑色外观，如今只需换成玻璃后壳，就能不费吹灰之力地完成视觉平替，我敢确信，将黑色的iPhone7与iPhone8并列，一般消费者很难一眼看出，谁才是那个挑战工厂极限的工艺试炼。玻璃继承手感的温润，却避开了容易毁容的宿命，显然，相比 iPhone 7 那种不计成本的孤注一掷，供应链和成本的平衡更符合苹果这种成熟商业帝国的逻辑。</p><figure class="image image_resized ss-img-wrapper" style="width: 451px;"><img src="https://cdnfile.sspai.com/2026/05/14/faa388361b480bbfeff5a03268ae7709.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>你可以试着把这张图给你身边不太熟悉iPhone的朋友，让他们猜猜看哪一代是iPhone8。图源：https://www.reddit.com/r/iphone/comments/71m4ir/iphone_8_plus_space_grey_and_7_plus_jet_black/</figcaption></figure><p style="margin-left: 0.0px;">近期的传闻中， 关于iPhone 18 Pro 的配色方案引发了不小的讨论：除了当卖点的酒红色，Apple 似乎打算只保留黑白两种基础色。 在全球供应链价格普遍上涨的压力下，这被视为维持 pro 系列价格「冻涨」采取的成本压缩策略。这种策略通过阉割配色多样性，换取了市场利润的相对稳定。虽然今年9月的发布会尚未到来，但是也可以窥见，如今的苹果不再放任设计随意冲破现实的围栏，在产品定义上变得冷静且理性。</p><p style="margin-left: 0.0px;">只为打磨一抹亮黑而不眠不休的日子，似乎真的已经走远了，亮黑色在 iPhone 上，可能很长一段时间内都不再会回归。</p><p style="margin-left: 0.0px;">然而，就在2024年，亮黑色作为基础款Apple watch series 10的配色选项回归了。得益于远小于iPhone的表壳面积与工业技术的跨代演进，时隔8年，化解了良率魔咒之后，这一久别重逢的惊喜，让许多人都非常激动，我也不例外。</p><p style="margin-left: 0.0px;">这款精神续作佩戴于手腕上，仿佛在向那个偏执的时代致意。2016 年的苹果，商业规模上已是巨龙，但在 Jony Ive 的主导下，其设计语言中仍保留着一种「屠龙少年」般的孤傲。那时他们敢为了纯粹的审美，不计成本，不问归途。而这种孤傲，正是亮黑色最迷人的底色。<br /><br />&nbsp;</p><h3 style="margin-left: 0.0px;"><strong>iPhone7，在此</strong></h3><p style="margin-left: 0.0px;">聊完色彩，我们再说说iPhone7的本身。在那场发布会上随亮黑色带来的，还有一系列全新的功能：非机械式的Home键、iPhone7Plus的双摄、抛弃了「滑动解锁」的iOS10，以及一个“违背祖宗的决定”——取消了3.5mm耳机口。</p><p style="margin-left: 0.0px;">许多人的记忆中，前有「钉子户神机」iPhone6s的余晖，后有开启全面屏纪元的iPhoneX问世，而夹在其中的iPhone7，存在感似乎略显尴尬。不过，在我看来，它却是真正<strong>承上启下</strong>的一代。</p><p style="margin-left: 0.0px;">iPhone7基本延续了iPhone6/6s的外观轮廓，区别在于更加匀称的后置摄像排列，以及人类科技史的重大倒退——砍掉了耳机孔（误）。</p><p style="margin-left: 0.0px;">当时，这个决定引起了巨大的争议，虽然苹果在包装中随附了Lightning to 3.5mm的转接线以及闪电接口的Earpods作为缓冲，但是仍挡不住消费者的口诛笔伐。毕竟，在充电和听歌之间只能二选一，或者随身带一个随时会人间蒸发的迷你配件，的确谈不上优雅。要知道，在TWS(真无线耳机)市场尚在襁褓中的2016年，苹果为何敢于冒天下之大不韪，在iPhone7上做出这样的取舍？</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/14/cabc876842dbe4c56f4c7194d16f8a5a.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>图源：<a href="https://www.theverge.com/a/apple-iphone-7-review-vs-iphone-7-plus"><u>https://www.theverge.com/a/apple-iphone-7-review-vs-iphone-7-plus</u></a><br />&nbsp;</figcaption></figure><p style="margin-left: 0.0px;">一方面，坊间认为是「库存克星」库克为了推销第一代AirPods的而主动设下的商业阴谋，但从内部结构透视，这更像是苹果为了未来的体验而进行的一次提前布局。</p><p style="margin-left: 0.0px;">为了供养 <strong>A10 Fusion</strong> 这颗能耗猛兽，苹果需要更大的电池；而为了彻底重构 Home 键的交互逻辑，苹果塞入了一块横贯机身近 1/3 纵深的 <strong>Taptic Engine</strong>；此外，取消 3.5mm 接口还为此后iPhone的全系防水铺平了道路。</p><p style="margin-left: 0.0px;">自iPhone7开始，当你按下home键的一刹那，机身内部的马达瞬时震动，配合扬声器模拟出的清脆“咔哒声”，在几近零延迟的响应下，Home键不再是一颗实体按键，而是成为一颗永不凹陷，反应快速的优雅按键。虽然这种震动反馈在iPhone6s上便已初露锋芒，但来到iPhone7上的Taptic engine才是足以驱动Home键的完全体，它的物理体积相比前代近乎翻倍。</p><p style="margin-left: 0.0px;">这样的拟真体验也延续到了之后的全面屏幕机型上，无论是弹出二级菜单，还是各种日常元素的交互，Taptic engine的身影无处不在：</p><p style="margin-left: 0.0px;"><strong>iOS11的跃然纸上</strong>： 锁屏界面的手电筒与相机按钮，在 Taptic Engine 的加持下拥有了物理开关般的阻尼感。<br /><strong>iOS16的指尖共鸣：</strong> 系统原生键盘加入的打字震动反馈选项，让屏幕上的虚拟按键每次敲击都带着指尖颤动，让“输入”这一动作变得更加有感。</p><p style="margin-left: 0.0px;">若论苹果新旧机型的交互体验，iPhone7可谓是全面升级的分水岭。3.5mm的“外星接口”轰轰烈烈地牺牲了，取而代之的是一颗默默无闻的新核心，但正是它恰到好处的震动反馈，让掌心的iPhone在生活中的每个“无感”瞬间变得格外“有感”。<br />Jony Ive在一个设计专访中曾提到：“很大程度上，我们所做的就是<strong>让设计消失</strong>（Getting design out of the way）”。</p><p style="margin-left: 0.0px;">iPhone7所开创的，并非某种张扬的交互噱头，而是让反馈出现在它本该出现的地方；让承载虚拟的方寸屏幕，拥有了触碰现实的力量。</p><p style="margin-left: 0.0px;">站上历史的维度，苹果以取消接口的“阵痛”为代价，换取了此后数年交互体验的跨代红利。iPhone 7 既是这条道路上的先行者，也无可避免地成为了市场适应期的“挡箭牌”。</p><p style="margin-left: 0.0px;">回头来看，这部手机承上启下，它一边打磨着过去未尽的配色梦，一边用更高维的交互理念布局未来的野心。</p><p style="margin-left: 0.0px;">iPhone7，着实不普通。</p><p><br />&nbsp;</p><p><br />&nbsp;</p><p><br />&nbsp;</p><p><br />&nbsp;</p><p><br />&nbsp;</p><p><br />&nbsp;</p><p>&nbsp;</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/109785</id>
-            <title>我把 AI 写小说拆成一个工作流：从灵感、大纲到章节初稿</title>
-            <link>https://sspai.com/post/109785</link>
-            <guid isPermaLink="false">https://sspai.com/post/109785</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 14 May 2026 15:13:09 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: AI 写小说，工作流，项目助理，作者判断  
-<br>
-<br>  
-总结: 作者认为AI不应该直接“写完整本小说”，而应作为项目助理参与工作流，包括小说构思、多层大纲（全书骨架、分卷路线、章节目标）、生成初稿、管理长篇记忆（章节摘要、伏笔追踪、世界观规则）以及素材库辅助风格控制。AI节省重复劳动，但作者必须负责审美判断、内容删改和最终责任。这套流程适合新手、连载作者和内容团队，不适合放弃思考的人。核心是AI帮作者把故事变成项目，而非代笔。 </div>
-                        <hr>
-                    
-                    <p style="margin-left: 0px;">&nbsp;</p><ul><li>不让 AI 直接写完整本小说后，我反而更愿意用它了</li><li>AI 写小说不该从“帮我续写”开始</li><li>我试着把 AI 当成小说项目助理，而不是代笔工具</li></ul><p style="margin-left: 0px;">利益相关披露建议：</p><blockquote><p style="margin-left: 0px;"><i>利益相关：本文提到的「蛙趣拼文」是我参与的 AI 小说创作工具项目。文章不包含购买链接、优惠码或返利信息；我更想借这个工具说明一个问题：如果把 AI 用在长篇写作里，它应该承担什么、不应该承担什么。</i></p></blockquote><p>&nbsp;</p><p style="margin-left: 0px;"><strong>我把 AI 写小说拆成一个工作流：从灵感、大纲到章节初稿</strong></p><p style="margin-left: 0px;">我一开始并不喜欢“AI 写小说”这个说法。</p><p style="margin-left: 0px;">它听起来像一个很省事的按钮：输入一句话，等一会儿，一本小说就出来了。但真正试过之后就会发现，这种想象基本不成立。AI 确实能写得很快，也能写得很顺，但它最容易产出的东西，是那种看起来完整、细看却没有方向的文字。</p><p style="margin-left: 0px;">尤其是长篇小说。</p><p style="margin-left: 0px;">短文可以靠一段提示词解决，长篇不行。长篇里有角色状态、关系变化、世界观规则、章节节奏、伏笔回收和读者期待。你不能只看这一章通不通顺，还要看它是不是接得上前文，推不推动主线，会不会把前面埋下的东西写丢。</p><p style="margin-left: 0px;">所以我后来换了一个思路：不要让 AI 直接“写小说”，而是把写小说拆成一个工作流，让 AI 参与其中的一部分。</p><p style="margin-left: 0px;">下面是我最近整理出来的一套流程。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/14/778f9124d77279cccf01be8ee648bd9a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Ai写小说软件界面</figcaption></figure><h2 style="margin-left: 0px;"><strong>第一步不是写正文，而是先问“这本书凭什么写下去”</strong></h2><p style="margin-left: 0px;">我以前用通用 AI 写小说，最常犯的错误是直接让它写第一章。</p><p style="margin-left: 0px;">结果通常是：开头很热闹，角色也很卖力，但写完之后我不知道下一章该怎么办。原因很简单，第一章之前的工作没有做完。主角想要什么、压力从哪里来、这个故事能展开多长、读者为什么愿意追，这些问题还没想清楚。</p><p style="margin-left: 0px;">现在我会先做一个“小说构思”阶段。</p><p style="margin-left: 0px;">我会把非常粗糙的想法先写下来，例如：</p><blockquote><p style="margin-left: 0px;"><i>一个失败过一次的短剧编剧，重生回到三年前，发现自己写过的狗血套路正在现实里发生。</i></p></blockquote><p style="margin-left: 0px;">然后我不让 AI 直接写开头，而是让它回答几个问题：</p><ul><li>这本书的类型和读者预期是什么？</li><li>主角的长期目标是什么？</li><li>主角每一阶段会面对什么压力？</li><li>这个设定能不能支撑 50 章、100 章？</li><li>开篇钩子是什么？</li><li>哪些地方容易写崩？</li></ul><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/14/2e417e636b8e978ebb900282b4e89aed.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p style="margin-left: 0px;">这一步的输出不一定好看，但它很有用。因为它把脑洞变成了一个项目。</p><p style="margin-left: 0px;">在蛙趣拼文里，我把这部分做成了“小说构思”流程。它会输出作品定位、目标读者、主角驱动力、核心冲突、世界观骨架、关键角色和剧情路线。换句话说，它不是在写正文，而是在帮我判断这个故事有没有继续写下去的空间。</p><h2 style="margin-left: 0px;"><strong>大纲不只是“第几章发生什么”</strong></h2><p style="margin-left: 0px;">有了构思之后，下一步是大纲。</p><p style="margin-left: 0px;">但这里也有一个坑：很多 AI 生成的大纲只是剧情列表。</p><p style="margin-left: 0px;">比如：</p><blockquote><p style="margin-left: 0px;"><i>第一章：主角重生。</i><br /><i>第二章：主角发现机会。</i><br /><i>第三章：主角开始反击。</i></p></blockquote><p style="margin-left: 0px;">这类大纲看似清楚，真正写的时候还是会卡。因为它没有告诉你这一章的叙事目标是什么，角色为什么行动，冲突从哪里来，读者读完这一章应该期待什么。</p><p style="margin-left: 0px;">我现在更倾向于把大纲拆成几层：</p><ul><li>全书骨架：这本书大体分成几个阶段。</li><li>分卷路线：每一阶段解决什么问题。</li><li>章节目标：每章推进什么信息、冲突或关系变化。</li></ul><p style="margin-left: 0px;">蛙趣拼文的大纲系统就是按这个思路做的。它可以把全书骨架、卷级大纲和章级大纲分开生成。章级大纲里，我更关注五个东西：剧情梗概、角色行为、场景氛围、核心冲突和叙事目标。</p><p style="margin-left: 0px;">这五个维度能帮我判断一章是不是有必要存在。</p><p style="margin-left: 0px;">如果一章只有“主角和朋友聊天”，那它很可能是废章；但如果这一章的目标是“通过聊天让朋友第一次怀疑主角知道未来”，它就有了作用。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/14/8f2ee72787b50305f938dc88de8f9ee6.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2 style="margin-left: 0px;"><strong>AI 适合生成初稿，不适合替我判断</strong></h2><p style="margin-left: 0px;">到了正文阶段，我对 AI 的期待也降低了。</p><p style="margin-left: 0px;">我不会指望它一次写出可以发布的章节。更现实的用法是：让它根据大纲和前文生成一版初稿，然后我来判断哪些能留、哪些必须删、哪些需要重写。</p><p style="margin-left: 0px;">这有点像搭脚手架。</p><p style="margin-left: 0px;">AI 可以帮我铺开场景、补足动作、组织对白，把一章从空白页变成可以修改的文本。但这一章是不是太慢、爽点有没有兑现、角色说话像不像本人、结尾有没有钩子，还是得由作者判断。</p><p style="margin-left: 0px;">我试过直接让 AI 写完整章，也试过只让它补局部。现在我更常用的方式是：</p><ol><li>先确定这一章的目标。</li><li>把前文摘要和角色状态放进去。</li><li>指定这一章必须推进的伏笔或关系。</li><li>生成初稿。</li><li>用精修模板做第一轮修改。</li><li>自己做最后一轮删改。</li></ol><p style="margin-left: 0px;">这比“帮我写第 12 章”稳定得多。</p><h2 style="margin-left: 0px;"><strong>长篇写作最怕 AI 失忆</strong></h2><p style="margin-left: 0px;">用 AI 写长篇时，我遇到最多的问题不是文笔，而是记忆。</p><p style="margin-left: 0px;">它会忘记人物受过伤，忘记某个角色已经知道秘密，忘记一个道具前面出现过，也会把人物关系写得忽远忽近。</p><p style="margin-left: 0px;">这并不是某个模型特别差，而是长篇小说本身就需要项目管理。人类作者也会忘，只是人类会翻笔记、看前文、查设定表。AI 如果没有这些东西，就只能靠当前上下文猜。</p><p style="margin-left: 0px;">所以我后来给工具加了几个东西：</p><ul><li>章节摘要</li><li>人物当前状态</li><li>未回收伏笔</li><li>世界观规则</li><li>组织和关系变化</li><li>重要事件时间线</li></ul><p style="margin-left: 0px;">这些内容不一定都要出现在提示词里，但需要能被检索到。当前章节涉及哪个角色，就找这个角色的状态；涉及哪个伏笔，就找对应线索；涉及某个地点，就找世界观设定。</p><p style="margin-left: 0px;">这也是我觉得“AI 写小说”不能只靠聊天框的原因。聊天框适合短任务，不适合长期项目。</p><h2 style="margin-left: 0px;"><strong>素材库比“写得更自然一点”更有用</strong></h2><p style="margin-left: 0px;">另一个常见问题是 AI 味。</p><p style="margin-left: 0px;">我以前会在提示词里写：“不要有 AI 味，写得自然一点。”后来发现这句话基本没用。因为“自然”太抽象了，AI 不知道我想要的自然是什么。</p><p style="margin-left: 0px;">更有效的方法是给它素材。</p><p style="margin-left: 0px;">比如我想写一场雨夜追逐，我会准备一些动作描写、环境描写和节奏参考。不是让它照抄，而是让它知道我想要的句子密度、感官细节和情绪方向。</p><p style="margin-left: 0px;">蛙趣拼文里有素材库和拆书功能，可以导入文本，提取词汇、句式、动作描写、环境描写、心理描写和段落节奏。这个功能听起来很工具化，但对写作很实际。</p><p style="margin-left: 0px;">因为作者真正的风格，不是“玄幻风”“都市风”这种标签，而是具体到怎么写动作、怎么写停顿、怎么写对话、怎么处理情绪。</p><p style="margin-left: 0px;">素材库不能自动生成风格，但它能让 AI 少一点凭空发挥。</p><h2 style="margin-left: 0px;"><strong>我不希望 AI 替我成为作者</strong></h2><p style="margin-left: 0px;">用 AI 写作最容易引发争议的问题是：这到底算不算我写的？</p><p style="margin-left: 0px;">我的看法比较保守。AI 可以参与生成，但作者必须负责判断。</p><p style="margin-left: 0px;">题材是谁定的？人物是谁选的？大纲是谁改的？章节节奏是谁确认的？哪些内容删掉，哪些内容保留，哪些地方重写，最终责任是谁承担？</p><p style="margin-left: 0px;">如果这些问题都是作者在做，那 AI 更像工具；如果作者只是把结果复制出去，那就更接近代笔。</p><p style="margin-left: 0px;">这也是为什么我不喜欢“一键生成小说”这种宣传。它让人误以为写作只剩下按按钮。但真正能长期写下去的人，仍然要做大量判断。</p><p style="margin-left: 0px;">AI 帮我节省的是重复劳动，不是审美责任。</p><h2 style="margin-left: 0px;"><strong>这套流程适合谁？</strong></h2><p style="margin-left: 0px;">我觉得它适合三类人。</p><p style="margin-left: 0px;">第一类是新手作者。你可能有很多脑洞，但不知道怎么开书。AI 可以帮你把想法拆成构思、大纲和章节目标。</p><p style="margin-left: 0px;">第二类是连载作者。你需要稳定更新，最怕写着写着忘线。项目记忆、伏笔追踪和章节摘要会有帮助。</p><p style="margin-left: 0px;">第三类是内容团队。你可能不只写小说，还要把故事改成短剧、漫剧或小说推文。把小说大纲和剧本分镜接起来，会比从零改编省事。</p><p style="margin-left: 0px;">但它不适合想完全省掉思考的人。</p><p style="margin-left: 0px;">如果你希望 AI 替你决定一切，它很快会写出一堆通顺但无聊的内容。如果你愿意把它当成助理、编辑、资料员和初稿生成器，它会有用得多。</p><h2 style="margin-left: 0px;"><strong>结语</strong></h2><p style="margin-left: 0px;">这段时间折腾下来，我最大的感受是：AI 写小说不应该从“帮我写一章”开始，而应该从“帮我把这个故事变成一个项目”开始。</p><p style="margin-left: 0px;">先构思，再大纲，再章节目标，再初稿，再精修，再检查伏笔和状态。这个流程看起来比一键生成麻烦，但最后反而更省时间。</p><p style="margin-left: 0px;">因为写作最浪费时间的，往往不是敲字，而是写到一半发现方向不对。</p><p style="margin-left: 0px;">AI 能不能写小说？能。</p><p style="margin-left: 0px;">但更准确地说，它适合帮作者拆解、整理、生成、检索和修改。它不应该替代作者的判断，也不应该替代作者对作品负责。</p><p style="margin-left: 0px;">如果一个 AI 工具能让作者更清楚自己在写什么、为什么写、下一章该往哪里走，那它就不只是生成器，而是一个真正有用的创作工作台。</p><p>&nbsp;</p><h2 style="margin-left: 0px;">&nbsp;</h2><h2 style="margin-left: 0px;">&nbsp;</h2>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/109741</id>
-            <title>capcap：一键搞定截图、标注与图床，免费、开源的 macOS 截图工具</title>
-            <link>https://sspai.com/post/109741</link>
-            <guid isPermaLink="false">https://sspai.com/post/109741</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 14 May 2026 01:20:01 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                        <div> 关键词: capcap, 截图工具, 菜单栏, 对象化标注  
-<br>
-<br>  
-总结: capcap 是一个常驻 macOS 菜单栏的截图工具，通过双击 ⌘ 键即可触发截图，集成了标注、长截图、美化及图床上传功能。它使用纯 AppKit 开发，零第三方依赖、零订阅、零遥测，并遵循 MIT 协议开源。该工具的核心设计是让用户从截图到可分享图片仅一步完成，并在编辑器中支持对象化的二次编辑，允许事后修改标注元素。内置的长截图功能可边滚边拼，结果能直接返回编辑器继续加工。美化模式提供圆角、阴影等一键效果。此外，它还支持直接编辑 Finder 中的图片、图床一键上传（密钥本地保存）、菜单栏历史、取色器及钉图等实用功能。 </div>
-                        <hr>
-                    
-                    <p><strong>Matrix 首页推荐</strong></p><p><a href="https://sspai.com/matrix">Matrix</a> 是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p>文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>做内容、写文档、VibeCoding 的时候，截图是高频动作。macOS 自带的截图功能不全，微信截图够用吧，但是每次得把微信开着。其它的截图工具如 pixpin、Snipaste 也都用过，感觉功能太重了，很多用不上，而且图床上传还得额外开一个 App。</p><p>于是我直接做了一个叫 capcap 的菜单栏截图应用，它只做一件事：双击 <code>⌘</code>，就能截取一张已经标好注、可以直接粘出去的图到剪贴板，同时很自然地支持直接在编辑栏里上传到图床，并且把 URL 自动复制到剪贴板。</p><figure class="image ss-img-wrapper"><img alt="capcap 编辑器主界面" src="https://cdnfile.sspai.com/2026/05/14/article/5ae2979c212f7ef9fbec3887dc55c04b.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>应用已在 <a href="https://github.com/realskyrin/capcap" target="_blank">GitHub</a> 基于 MIT 协议免费开源。</p><p>capcap 的核心交互只有一个：双击 <code>⌘</code>。这个灵感来自于 Claude App，它可以在任意 App 里双击 <code>⌘</code> 直接把图送进会话窗口。</p><p>如果你不喜欢双击 <code>⌘</code>，也可以在设置里录一个自己的全局快捷键。触发之后会进入选区模式：</p><ul><li><strong>悬停任意窗口</strong> → 自动识别窗口边界，点一下就贴边截取；</li><li><strong>拖一个区域</strong> → 像素级精准，Retina 原生分辨率；</li><li><strong>多显示器</strong> → 所有屏幕同时进入选区状态，拖到哪截到哪。</li></ul><figure class="image ss-img-wrapper"><img alt="智能窗口识别——绿色虚线自动贴合应用窗口边缘" src="https://cdnfile.sspai.com/2026/05/14/article/36f53d77196494c1435828f4049e00fb.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不需要凭眼力对齐窗口边——把鼠标移到窗口上，绿色虚线就贴上去了，按一下完事。</p><p>很多截图工具的标注其实是一次性栅格化——画完一个箭头之后，想挪一下、改个颜色，只能撤销重画。</p><p>capcap 的标注都是对象化的，全程可改：比如箭头放完之后还能拖端点、把直箭头掰成曲线，序号标注自动递增的数字圆点，拖出来可以带一根引线；文本内容可以双击直接改文案，10–100 pt 字号、颜色随便切；矩形、椭圆、画笔、高亮笔，颜色和线宽都能事后改；马赛克刷一下就把敏感信息糊掉，块大小可调。此外撤销、重做也都和文档编辑器一样自然。</p><p>选中已有标注后，还会出现旋转手柄、端点手柄、曲线手柄，截完图不满意也不用全部重来。</p><p>写文档时经常要截一整页表格、一整段聊天记录。capcap 内置长截图，你可以：</p><ol><li>框出要滚动的区域；</li><li>在选区里用触控板/鼠标滚轮往下滚；</li><li>实时拼接的预览图就显示在旁边；</li><li>觉得够了，合并回主编辑器，继续标注。</li></ol><figure class="image ss-img-wrapper"><img alt="长截图：边滚边拼，右侧实时预览拼接结果" src="https://cdnfile.sspai.com/2026/05/14/article/f3031b2967661721a03ab9953028e17d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>长截图的结果不是一张「最终图」，它会将你带回到编辑器，你可以在这里继续画箭头、加序号、上马赛克。</p><p>写公众号、做 Twitter 配图的时候，光秃秃的截图总差点意思。capcap 内置一个轻量美化模式，支持渐变背景、桌面壁纸背景，圆角，柔和阴影和可调内边距。</p><figure class="image ss-img-wrapper"><img alt="美化模式：壁纸背景 + 圆角 + 阴影，一键出&quot;看上去像样&quot;的成图" src="https://cdnfile.sspai.com/2026/05/14/article/bb83c7aba988ee866e06213356a6880c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>不用打开 PS，也不用上一堆「截图美化」网站——在编辑器里一个 tab 就切过去了。</p><p>还有很多功能不是 README 第一屏的重点，用起来也非常顺手。比如你可以直接编辑 Finder 里的图片，在桌面或 Finder 中点选一张图片后，按下你设定的截图快捷键，capcap 就会跳过截图直接把这张图载入编辑器。同时原文件不会被改动，如果你想给已有的图想加几个箭头再发出去，也就是两秒钟的事。</p><p>同时，最近的截图缩略图和取色记录都在菜单栏，再次复制只需要一次点击。完全本地存储（<code>~/Library/Application Support/capcap/History</code>），数量可配置 5–20 张。</p><figure class="image ss-img-wrapper"><img alt="菜单栏历史子菜单显示截图缩略图和取色记录" src="https://cdnfile.sspai.com/2026/05/14/article/7cc66ee6e4161222e4fcbb2b36050651.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>capcap 还支持调用 macOS 原生取色器，吸到的颜色 <code>#RRGGBB</code> 直接进剪贴板，也写进历史记录；你同样可以把当前截图作为一个浮动窗口钉在所有 App 之上做对照参考——抄设计稿、对比改版的时候特别有用。</p><p><strong>最后聊聊图床功能。</strong>这是我个人最离不开的功能。配置一次之后，编辑器里的上传按钮会被点亮：</p><figure class="image ss-img-wrapper"><img alt="设置面板中的图床配置：腾讯云 COS、七牛云 Kodo、阿里云 OSS" src="https://cdnfile.sspai.com/2026/05/14/article/ffa1a01c3d0337c0fcd3504223725582.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>capcap 目前支持三家国内主流对象存储：腾讯云 COS、七牛云 Kodo、阿里云 OSS，点一下上传按钮，公网 URL 会直接写到剪贴板，同时和缩略图一起进历史。下次写 Markdown 直接 <code>⌘+V</code>，图片链接就贴出来了。</p><p>图床密钥只保存在本机的 UserDefaults 里，不走任何中间服务器。所以这不是一个「capcap 图床」，是你自己的图床——出问题、被封号、想搬家，都是你自己的事；同样，安全和隐私也只取决于你自己。</p><p>如果你也是 macOS 开发者，可能会对 capcap 的这几个细节感兴趣：</p><ul><li>首先，capcap 纯 AppKit，没有 SwiftUI。理由很简单：我要的是「像 macOS 该有的样子」——精确的窗口控制、流畅的命中测试、可预测的事件循环。SwiftUI 在 14.0 上还做不到这些。</li><li>其次，零第三方依赖。<code>Package.swift</code> 里只有标准库和系统框架。结果就是包体很小、启动很快、维护成本低。</li><li>ScreenCaptureKit 做屏幕捕获，Retina 原生分辨率。</li><li>Carbon Hotkey API 注册自定义全局快捷键（macOS 至今没给出更现代的 API）。</li><li>双击 <code>⌘</code> 监听走 <code>CGEventTap</code>，权限是辅助功能权限。</li></ul><p>所以 capcap 要求 macOS 14.0+，universal binary，Apple Silicon + Intel 都能跑。</p><p>你可以通过两种方式安装 capcap：</p><p>方式一：Homebrew</p><pre class="language-shell"><code>brew tap realskyrin/capcap https://github.com/realskyrin/capcap
-brew install --cask capcap</code></pre><p>（仓库名是 <code>capcap</code> 不是 <code>homebrew-capcap</code>，所以要显式指定 URL）</p><p>方式二：直接下载</p><p>去 GitHub Release 页面下载最新的 DMG，拖进 Applications 就行。如果遇到「Apple 无法验证 capcap 是否包含恶意软件」的提示，是因为还没做 Apple 公证（一年 99 刀我暂时不想交），可以：</p><pre class="language-shell"><code>xattr -dr com.apple.quarantine /Applications/capcap.app</code></pre><p>只对你信任的来源做这个操作就好。</p><p>capcap 是我自己每天在用的工具，这意味着我不会塞一堆没人用的功能进来，但凡有 bug，我应该也比你更先发现，更重要的事，它不会收一分钱，也没有任何遥测和数据上报。</p><p>如果你也受够了在三四个截图、标注、图床 App 之间来回切，欢迎试试看。GitHub 上点个 Star 是对我最大的鼓励。</p><p>&gt; 关注 <a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>

@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6a197996657481ea4eb34178</id>
+            <title>AI探索站 05月29日</title>
+            <link>https://m.okjike.com/originalPosts/6a197996657481ea4eb34178</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a197996657481ea4eb34178</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 29 May 2026 11:33:42 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    微博推了一个Claude Opus 4.8蒸馏Qwen的热搜，就是因为有人用中文问那个老问题「你是什么模型」时得到的回答是Qwen。<br /><br />如果微博真想和B站、小红书等平台竞争对于AI内容的覆盖，就一定得提高一些专业性了，这个所谓的证据是幻觉，跟蒸馏一点儿关系都没有，蒸馏也不是这么简单的判定标准。<br /><br />再说了，如果Claude Opus 4.8这种水平的模型可以靠蒸馏实现，那简直天大的利好Anthropic，因为这意味着在同等的收入增速下训练成本可以降低一百倍以上，全世界所有的大模型厂商直接投降算了，你以为这样热搜是在赢，其实是输麻了，这就是不懂装懂的后果。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6a1842777f82528246a9c3df</id>
             <title>AI探索站 05月28日</title>
             <link>https://m.okjike.com/originalPosts/6a1842777f82528246a9c3df</link>
@@ -85,23 +102,6 @@
                 <![CDATA[
                     
                     AI 留给腾讯的时间，还大大的有。<br /><br />微信拥有普通中国人最多的上下文：你的同事、你的老板、你的父母、你的孩子、你的孩子的班主任，还有你的文件传输助手。这个上下文几乎无敌，近至今日，远至十几年前。中国人的一生都在微信上。<br /><br />微信因为小程序生态拥有近似 OS 的工具能力：小事一网打尽：打车、点餐、发快递，大事也面面俱到：医保、银行、随申办/京通/etc。<br /><br />微信还有视频号、公众号、朋友圈，以及它们的内容，和每个人的访问记录与习惯。<br /><br />可以说，微信上线 Agent 的那一天，才是全国人民群众都享受到 Agent 的一天。人们对其的耐心也可以说是无限的 ——因为别的厂家里根本没有这个条件！<br /><br />ps，小道消息，微信 Agent 也一直是张小龙亲盯，离上线不远了🤫
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6a16aa24657481ea4e6fc09e</id>
-            <title>AI探索站 05月27日</title>
-            <link>https://m.okjike.com/originalPosts/6a16aa24657481ea4e6fc09e</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a16aa24657481ea4e6fc09e</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 27 May 2026 08:24:04 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    昨天见了一个非常牛逼的Agent团队，我敢说在国内绝对是T0的级别（之前DPSK还找他们搞了点Agent数据）<br /><br />刚好聊到了这两天推上吵得非常热闹的AI产品（Agent）要不要用Python的话题<br /><br />他们Founder说的很直接：SB才在Agent项目里用Python🤣<br /><br />TS适合100%Agent项目，主要有几个原因：<br /><br />第一，Agent最终大多时候会在产品里。<br /><br />不管你做的是Chat界面、工作流面板、浏览器插件、Copilot，还是IDE扩展、Slack/Discord/网页工具，TS天然离这些更近。<br /><br />前端是TS，后端也是TS，中间的tool schema、事件流、UI状态都能共用一套类型。<br /><br />如果你用Python那就会变成：<br /><br />模型服务在Py、后端在Node、前端在TS<br />一份schema要复制三份<br /><br />如果某个字段名大小写错了，你的Agent马上就给死给你看。<br /><br />第二，Agent很依赖异步和事件流。<br /><br />Agent不是一次请求一次回答这么简单。<br /><br />它要边想边输出，边调用工具，边等用户确认，边更新UI，边处理取消、重试、超时、恢复。<br /><br />TS/Node在事件驱动、stream、WebSocket、server-sent events这些场景里很顺。<br /><br />Python当然也能做，但你会更容易感受到「这东西本来不是为这类Web产品链路长出来的」。<br /><br />第三，类型系统对Agent很重要。<br /><br />Agent真正容易炸的地方不是「模型不会说话」，而是工具参数错、返回结构错、状态字段错、上下文对象变形。<br /><br />TS可以把很多东西提前卡住：<br /><br />tool input/output、agent state、message format、UI事件、workflow node、permission object、external API response<br /><br />这对Agent很关键，因为Agent系统里有大量JSON对象在飞来飞去。<br /><br />第四，TS更适合做「Agent runtime」。<br /><br />如果你做的是一个Agent框架、SDK、运行时、插件系统，TS优势更明显。<br /><br />因为使用者往往要把它接进：<br />网页、后台服务、Electron、浏览器插件、VS Code插件、API route、serverless、edge runtime<br /><br />这些地方TS生态更统一。<br /><br />所以很多Agent infra选TS，不是因为Python不行，是因为它们要服务的使用场景更接近Web开发者和产品团队。<br /><br />第五，AI应用现在其实是拼系统。<br /><br />早期大家用Python，是因为AI=模型。<br /><br />现在很多AI产品已经演化到包含LLM API、tool calling、database、vector store、browser automation、workflow、UI、billing、auth、analytics<br /><br />这已经不是研究工程了，是产品工程。<br /><br />互联网产品工程的主语长期就是JS/TS。<br /><br />很无聊，但世界就是这么没品😮‍💨<br /><br />但他也表示Python不会消失。<br /><br />更合理的分工其实是：<br /><br />Python做模型层、数据层、eval、embedding pipeline、离线任务、实验脚本。<br /><br />TS做产品层、Agent编排层、前端交互层、插件层、用户可见的runtime。<br /><br />所以你如果做一个Agent产品，你最好：<br />MVP前端+Agent orchestrator用TS。<br /><br />涉及模型训练、数据处理、复杂检索、评测系统，再上Python。<br /><br />聊了一下午，真的学了太多了<br /><br />才知道自己之前对于Agent的认知到底有多浅薄🧎
                 ]]>
             </content:encoded>
         </item>
