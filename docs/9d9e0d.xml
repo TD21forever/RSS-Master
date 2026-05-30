@@ -5,6 +5,40 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6a1abb78c2dc8bf83f4777e7</id>
+            <title>AI探索站 05月30日</title>
+            <link>https://m.okjike.com/originalPosts/6a1abb78c2dc8bf83f4777e7</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a1abb78c2dc8bf83f4777e7</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 30 May 2026 10:27:04 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    我去，太牛批了！<br /><br />我的 Skill 冲到 GitHub 本周新建项目 Star 排名第一了！<br /><br />就是这个社交媒体卡片 Skill （guizang-social-card-skill）<br /><br />还是刚才一个群友让他的 Agent 找项目的时候发现的。我自己看了一下，果然是第一！<br /><br />这里尝试：github.com/op7418/guizang-social-card-skill
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6a1a94147f82528246e2a203</id>
+            <title>AI探索站 05月30日</title>
+            <link>https://m.okjike.com/originalPosts/6a1a94147f82528246e2a203</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a1a94147f82528246e2a203</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 30 May 2026 07:39:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    现在周围人发文件都变成 Markdown 和 HTML 了，但是微信这俩格式一个都不支持，而且相当封闭，想用其他应用打开都费劲，真是受不了。<br /><br />如果是在外面用手机，别人发过来的 Markdown 和 HTML 文件都不知道怎么打开。<br /><br />感觉得做个手机上的 HTML 和 Markdown 阅读器了。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6a197996657481ea4eb34178</id>
             <title>AI探索站 05月29日</title>
             <link>https://m.okjike.com/originalPosts/6a197996657481ea4eb34178</link>
@@ -90,40 +124,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6a16aa24657481ea4e6fc09e</id>
-            <title>AI探索站 05月27日</title>
-            <link>https://m.okjike.com/originalPosts/6a16aa24657481ea4e6fc09e</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a16aa24657481ea4e6fc09e</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 27 May 2026 08:24:04 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    昨天见了一个非常牛逼的Agent团队，我敢说在国内绝对是T0的级别（之前DPSK还找他们搞了点Agent数据）<br /><br />刚好聊到了这两天推上吵得非常热闹的AI产品（Agent）要不要用Python的话题<br /><br />他们Founder说的很直接：SB才在Agent项目里用Python🤣<br /><br />TS适合100%Agent项目，主要有几个原因：<br /><br />第一，Agent最终大多时候会在产品里。<br /><br />不管你做的是Chat界面、工作流面板、浏览器插件、Copilot，还是IDE扩展、Slack/Discord/网页工具，TS天然离这些更近。<br /><br />前端是TS，后端也是TS，中间的tool schema、事件流、UI状态都能共用一套类型。<br /><br />如果你用Python那就会变成：<br /><br />模型服务在Py、后端在Node、前端在TS<br />一份schema要复制三份<br /><br />如果某个字段名大小写错了，你的Agent马上就给死给你看。<br /><br />第二，Agent很依赖异步和事件流。<br /><br />Agent不是一次请求一次回答这么简单。<br /><br />它要边想边输出，边调用工具，边等用户确认，边更新UI，边处理取消、重试、超时、恢复。<br /><br />TS/Node在事件驱动、stream、WebSocket、server-sent events这些场景里很顺。<br /><br />Python当然也能做，但你会更容易感受到「这东西本来不是为这类Web产品链路长出来的」。<br /><br />第三，类型系统对Agent很重要。<br /><br />Agent真正容易炸的地方不是「模型不会说话」，而是工具参数错、返回结构错、状态字段错、上下文对象变形。<br /><br />TS可以把很多东西提前卡住：<br /><br />tool input/output、agent state、message format、UI事件、workflow node、permission object、external API response<br /><br />这对Agent很关键，因为Agent系统里有大量JSON对象在飞来飞去。<br /><br />第四，TS更适合做「Agent runtime」。<br /><br />如果你做的是一个Agent框架、SDK、运行时、插件系统，TS优势更明显。<br /><br />因为使用者往往要把它接进：<br />网页、后台服务、Electron、浏览器插件、VS Code插件、API route、serverless、edge runtime<br /><br />这些地方TS生态更统一。<br /><br />所以很多Agent infra选TS，不是因为Python不行，是因为它们要服务的使用场景更接近Web开发者和产品团队。<br /><br />第五，AI应用现在其实是拼系统。<br /><br />早期大家用Python，是因为AI=模型。<br /><br />现在很多AI产品已经演化到包含LLM API、tool calling、database、vector store、browser automation、workflow、UI、billing、auth、analytics<br /><br />这已经不是研究工程了，是产品工程。<br /><br />互联网产品工程的主语长期就是JS/TS。<br /><br />很无聊，但世界就是这么没品😮‍💨<br /><br />但他也表示Python不会消失。<br /><br />更合理的分工其实是：<br /><br />Python做模型层、数据层、eval、embedding pipeline、离线任务、实验脚本。<br /><br />TS做产品层、Agent编排层、前端交互层、插件层、用户可见的runtime。<br /><br />所以你如果做一个Agent产品，你最好：<br />MVP前端+Agent orchestrator用TS。<br /><br />涉及模型训练、数据处理、复杂检索、评测系统，再上Python。<br /><br />聊了一下午，真的学了太多了<br /><br />才知道自己之前对于Agent的认知到底有多浅薄🧎
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6a15b7f8c0e8104de9bc173e</id>
-            <title>AI探索站 05月26日</title>
-            <link>https://m.okjike.com/originalPosts/6a15b7f8c0e8104de9bc173e</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a15b7f8c0e8104de9bc173e</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 26 May 2026 15:10:48 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    在 AI 的帮助下，我读完了 AI 领域最关键的十篇论文，心潮澎湃。<br /><br />75年间，后来成为亿万富翁、独角兽公司创始人、诺贝尔奖获得者或依然少为人知的学者们，在AI这个大舞台上你方唱罢我登场，每一篇论文背后都有着充满张力的判断、偏见与赌局。<br /><br />1948 年，香农发表《通信的数学理论》，最先把语言放进了数学坐标系，并且提出，预测即压缩，如果信号传输的另一方和你有越多上下文，越懂你，就越能预测你压缩后的内容实际上是什么。<br /><br />两年后，一位叫图灵的英国人提出了一个想法：别再争论机器到底能不能思考了，如果你通过语言交互，根本判断不出来对方是人还是机器，那从结果来说，机器不就是实现了人思考的过程吗？<br /><br />这两位英国人定下整个AI时代的关键问题：机器思考不是个哲学问题，是个工程问题；这个工程问题，是可以通过压缩实现的。<br /><br />如果机器确实可以“思考”，那怎么思考才能得到人类想要的正确答案呢？<br /><br />Rumelhart、辛顿、Williams三位学者在1986年提出了反向传播算法，辛顿因为这一系列工作拿了 2024 年诺贝尔物理学奖。在反向传播之前，大家做AI的方法是：人类专家把知识写成规则（猫有四条腿、猫有胡须） → 输入计算机 → 计算机按规则推理 → 产生智能，但是这些规则写不完，且容易产生冲突，遇到狗就不知道怎么办了。<br /><br />反向传播的思路是，不告诉计算机任何规则，只给它海量的猫的图片和不是猫的图片，让它自己从错误中学习"猫"的特征，这意味着：智能不需要被编程，可以被学习出来。<br /><br />辛顿的博士后Yann LeCun沿袭了神经网络这条路，但其实当时学界的主流是SVM，SVM的发明者是一位俄罗斯数学家Vladimir Vapnik，他相信"理论先行"——算法必须有严格数学证明才值得做。Yann LeCun 则相信"工程先行"——能用就是好东西，不需要严格的数学证明。<br /><br />90年代，学术圈喜欢有理论保证的东西。Vapnik 的论文能发顶刊，神经网络只能发会议。当时主流期刊编辑甚至会把"神经网络"几个字从论文标题里删掉，因为太"民科"。<br /><br />当时可供训练的数据少、算力弱、神经网络确实跑不出好结果，SVM在文本分类、垃圾邮件过滤、人脸识别等领域确实表现更好，但10年后，时代变了。<br /><br />2006年，华裔科学家李飞飞在普林斯顿大学刚拿到教职，就申请了了一个疯狂的项目：她要构建一个有 1500 万张图片、2 万类的数据集，她打算从 Google、Yahoo、Bing 等图片搜索引擎批量下载图片，每张图标注出，这是猫还是狗，具体是苏格兰牧羊犬还是拉布拉多，这个想法的疯狂之处在于：<br /><br />1500 万张图，每张哪怕只看 1 秒——也要 17000 个工时，相当于 5 个人不吃不喝标注 1 年。<br /><br />2007 年之前，AI 视觉研究的标准任务是：在 9000 张图里区分 100 类物体，准确率能到 60-70% 就算很厉害，当时学者们觉得算法不够好，所以要研究更精妙的算法。<br /><br />李飞飞的判断则是：算法不是瓶颈——数据才是。<br /><br />这个没拿到终身教职的助理教授，赌上了一条没人看好的路，在亚马逊的众包平台上，花费3年请了全球167 个国家的 49000 名工人，花费百万美元，标注出了1400 万张图片，一个超大型的图片数据库ImageNet发布了，一开始用SVM来识别图片，错误率达到28%，学界又开始怀疑：是不是这事真的做不到？<br /><br />直到2012年9月，AI界迎来了史上最重要的一周。<br /><br />辛顿的两个学生 Alex Krizhevsky 和 Ilya Sutskever（对，就是后来 OpenAI 那个 Ilya），用一个深度卷积神经网络参加了 ImageNet 比赛，识别图片的错误率从 26% 直接降到 15%，比第二名（SVM）低了整整 10 个百分点。<br /><br />那一周之后，所有顶级实验室连夜重组研究方向，转向深度学习；Ilya Sutskever 加入 Google，4 年后跟Sam Altman创办了 OpenAI，整个 SVM 时代结束了。<br /><br />2010年，国际象棋神童、剑桥神经科学博士哈萨比斯在创办Deepmind的时候，就已经从神经科学的学习中意识到：深度学习与强化学习必须结合。<br /><br />接下来 8 年是 AI 史上少见的连胜：DQN、AlphaGo、AlphaZero、AlphaFold。<br /><br />后来Deepmind被谷歌收购，2017 年 6 月，同样是谷歌的另一支团队发表了 Transformer 论文。哈萨比斯没有跟进，因为他并不认为语言是智能的表现形式。<br /><br />他也低估了互联网文本的丰富性。他后来反思：如果五六年前你问我，人类文明有多复杂？我的回答大概会是，接近无限。但事实证明，互联网上大约有 14 万亿个单词，恰好够覆盖人类几乎所有行为模式。<br /><br />2022 年底 ChatGPT 风靡全球时，DeepMind 不再被视为世界顶级 AI 实验室。哈萨比斯承认：这是我第一个判断失误的地方。<br /><br />这一幕幕上演的AI大戏中，让我觉得最有趣的是，不同经历、背景的人带着完全不同的动机来做AI这件事。<br /><br />有人只是为了解决工作中非常具体的问题，却没想到开启了一个时代。LeCun 希望让AI实现“看见”的功能，只是为了识别银行支票；Transformer 8 人2024 年 在 NVIDIA GTC 大会上首次同台时，其中一位作者说：我们写这篇论文时，没想过它会改变世界。我们只是想让 Google 翻译更好用。<br /><br />有人是为了推动科学的进步。哈萨比斯把AGI像口头禅一样挂在嘴上，是因为他想要破解上帝的算法，他也相信，自然界中任何可生成或存在的模式，都能被经典学习算法高效发现并建模，这也对应了他功成名就后没有选择出去创业做个万亿市值的公司，而是继续做AI for Science。<br /><br />有人擅长组局弄权，但往往这样的人能快速把事推进下去。Sam Altman没什么学术背景，来自硅谷风投机构。2015 年他和马斯克在加州的一次晚餐上达成共识，要做一个非营利组织，对抗谷歌可能形成的 AI 垄断，把 AGI 的成果造福全人类。马斯克实际投了4500万美元，组织章程写明：所有研究成果开源，不追求商业利益。<br /><br />10 年后，OpenAI 估值 8520 亿美元，这家曾经的非盈利机构一度成了硅谷最贵的盈利公司。在那场宫斗一般的权力博弈中，Altman被董事会突然解雇，4 天后又被重新请回，背后是员工集体请愿、微软施压、董事会重组，但最终他还是赢了。<br /><br />他的前老板，YC 创始人Paul Graham对他有一句评价：Sam Altman 就是那种人，你可以把他空降到一个食人族的小岛上，5 年后回来，他会是那里的国王。<br /><br />回头看这 75 年，一个明显的变化：以前一个技术路线可以主导学界十几年。SVM 派主导 1990-2010 年代初，深度学习派主导 2012 年至今。研究者可以在顶刊或会议上慢慢争论。<br /><br />现在不行了。Transformer 论文 8 作者，6 个变成亿万富翁；Scaling Laws 10 作者，6 个集体创办一家估值万亿美元的公司。<br /><br />一篇论文不再是"发在哪里的区别"，是"亿万富翁还是普通研究员的区别"，是"一家公司能从几百亿涨到万亿、还是几个月内被快速超越的区别"，是"一步落后接着步步落后的区别"。<br /><br />押注一个方向还是同时做很多方向？做基础模型还是做应用层？做能力还是做安全？这些选择已经不是研究者个人能慢慢思考的事。<br /><br />舞台变大了，每个角色登场的时间窗口在变短。下一个登场的人会是谁，从哪个角度切入，我猜不出。但根据过去 75 年的规律，他可能在做一件今天看起来“无用”的事，真正改变世界的人，在改变世界之前，看起来都不像在改变世界。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/6a13a228657481ea4e268030</id>
             <title>AI探索站 05月25日</title>
             <link>https://m.okjike.com/originalPosts/6a13a228657481ea4e268030</link>
@@ -169,7 +169,7 @@
             <content:encoded>
                 <![CDATA[
                     
-                    WaytoAGI联合红杉中国开启AGI House第一季：招募Builder入驻
+                    WaytoAGI联合红杉中国开启AGI House第一季：招募Builder入驻<br /> #AGIBuilder
                 ]]>
             </content:encoded>
         </item>
