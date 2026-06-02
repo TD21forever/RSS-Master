@@ -5,6 +5,105 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/110492</id>
+            <title>得力管家还是多此一举？聊聊 macOS 后台进程管理工具 App Tamer</title>
+            <link>https://sspai.com/post/110492</link>
+            <guid isPermaLink="false">https://sspai.com/post/110492</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 02 Jun 2026 07:39:47 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><a href="https://stclairsoft.com/AppTamer/index.html">App Tamer</a> 是 St. Clair Software 开发多年的一款菜单栏工具。它常驻后台、实时监控所有运行中的进程，主打以可视化的方式管控应用后台资源占用。通过 App Tamer，用户既可以设定进程的 CPU 占用上限，也可以指定线程占用的核心类型，还可以强制应用在切入后台时直接挂起。</p>
+<figure class="image image_resized ss-img-wrapper" style="width: 452px;"><img src="https://cdnfile.sspai.com/2026/05/31/353bb8bdf84543b9ee97a91e7ea613d9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>我此前数次浅尝 App Tamer，但总觉得这个工具有点多此一举——macOS 自带的调度足够无感，偶尔用活动监视器定位问题即可，平时无须人工干预。直到最近，我的设备遇到了一些性能瓶颈，又正好发现 App Tamer 的 3.0 版正在公测，才算真正用了起来。下面，我就来聊聊重新捡起这款工具的动机、它的工作原理，以及在哪些场合可能值得一试。</p>
+<h2><strong>开始使用的动机</strong></h2>
+<p>作为一般原则，在操作系统自带的性能调度机制没有明显不足的情况下，没有必要寻求第三方工具的帮助。的确，macOS 自 10.9 起便引入了「App 小憩」（App Nap）机制，会在窗口完全不可见且不播放音频时，压低应用的调度优先级。</p>
+<p>然而，App 小憩是一个相当「心慈手软」的机制，只在面对那些根据 macOS 原生规范开发的应用时有较好的效果，不足以应对目前复杂、臃肿的应用生态。根据 App 小憩 的<a href="https://developer.apple.com/library/archive/documentation/Performance/Conceptual/power_efficiency_guidelines_osx/AppNap.html">豁免条件</a>，只要应用持有任何系统资源（网络连接、定时器等），或在播放音频，就不会被置于小憩状态。</p>
+<p>以浏览器为例，轮播的 banner 广告动画，定时轮询、抓取与刷新的社交媒体时间线，监听其他用户的操作并同步状态的在线文档，无不持续占用着系统资源，从而不能被 App 小憩机制所调节。类似地，许多使用 Electron 框架的套壳 web 应用也不听从 App 小憩的指挥。</p>
+<p>此外，对于我这样的多显示器用户而言，同时显示的窗口变多了，也就意味着在系统看来处于「后台」的应用少了。这进一步限制了 App 小憩机制的调节空间。因此，当我给手头用了好几年的 M1 Pro MacBook Pro 外接了两块显示器后，明显感觉到就算开机放着什么都不做，CPU 也有明显的持续占用。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/31/1986e2ace6cff3e2ddee84fd6f890bc2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>只有寥寥数个应用能进入小憩状态，不少还是自带应用。</figcaption>
+</figure>
+<p>既然系统的自动优化在这种场景下力有不逮，App Tamer 这样的第三方工具便有了用武之地。</p>
+<h2><strong>App Tamer 的功能和原理</strong></h2>
+<p>App Tamer 提供三种管控策略，可单独或组合施加于每个应用：</p>
+<ol>
+    <li>完全停止（stop this app completely）：应用切入后台时挂起进程。效果最彻底，适合完全不需要后台活动的应用；</li>
+    <li>在效率核心上运行（run this app on the CPU’s efficiency cores）：把应用线程限制在小核心上，应用仍能执行后台任务，只是降低了性能。对需要保持连接但不要求实时响应的应用（即时通讯、AI 客户端），这是侵入性最低的选项；</li>
+    <li>达占用率门槛后限速（slow down this app if it uses more than…）：设定进程的最大 CPU 占用比例。适合必须持续运行、但不需要占满资源的系统进程，如索引服务、备份服务。</li>
+</ol>
+<p>App Tamer 还内置了一些保护逻辑：检测到音频播放或文件下载时不会暂停对应应用，并定期唤醒被停止的应用以更新数据；也支持「闲置窗口超过一定时间即退出或隐藏」。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/31/63870f3b9381f168162d3cd45b61cbfd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>那么，这几种策略分别是如何实现的呢？</p>
+<p>其中，第一项「完全停止」和第三项「达占用率门槛后限速」都是通过发出进程信号（signal）来实现的。signal 是类 Unix 系统中一种通知机制：内核或具有管理权限的进程可以使用系统调用 <code>kill(2)</code>，向另一个进程「投递」一个 signal，打断其执行，并要求它作出反应。signal 有多种类型，常见的包括 <code>SIGTERM</code>（请求退出）、<code>SIGKILL</code>（强制终止）、<code>SIGSTOP</code>（挂起）、<code>SIGCONT</code>（恢复）等。</p>
+<p>如果选择「完全停止」，当目标应用进入后台时，App Tamer 会向其进程发送一个 <code>SIGSTOP</code>。这个 signal 会使得内核冻结该进程的全部线程，但保留它在内存中的地址空间；换言之，在停止执行的同时保留数据。当切回该应用时，App Tamer 便会再向其进程发送一个 <code>SIGCONT</code>，解除其冻结状态。</p>
+<p>而如果选择「达占用率门槛后限速」，App Tamer 会交替地向目标进程发送 <code>SIGSTOP</code> 与 <code>SIGCONT</code>，令其在冻结与运行之间反复切换；只要调整这两个信号之间的间隔，就能间接控制目标进程的 CPU 占用率。例如，要将一个进程的 CPU 占用率限制在 10% 以内，只要让它在约 90% 的时间处于挂起状态即可。</p>
+<p>另一方面，第二项策略「在效率核心上运行」则是通过调整应用的 QoS 优先级参数来实现的。</p>
+<p>回顾一下，从第一代产品 M1 开始，Apple silicon 系列处理器就一直采用「大小核」设计。其中，M4 及更早的型号分为性能核心（P Core）和效率核心（E Core），如名称所表明，分别着重高性能和低能耗。从 M5 开始，苹果将性能核心更名为超级核心（S Core），将性能核心（P Core）重新定位为兼顾性能和能耗的居中类型，专供 Pro 和 Max 型号中使用。</p>
+<p>尽管不同代际和型号的 Apple silicon 具有不同核心组合方式，但其调度方式是一致的，即 iOS 移植到 macOS 的 QoS（Quality of Service）机制。QoS 把线程划分为<a href="https://eclecticlight.co/2024/12/17/tune-for-performance-core-types/">若干等级</a>，获得 QoS 9（Background）及以下的线程被严格限制在较低性能的核心上，即便较高性能的核心完全空闲也不会迁移过去；获得更高 QoS 等级的线程则优先分配到较高性能的核心，仅在满载时，才会「溢出」到小核心。</p>
+<p>因此，要调整线程的核心归属，实际上就是调整它的 QoS 等级。对此，macOS 提供了一个名为 <code>setpriority(2)</code> 的系统调用。如果通过 <code>setpriority(2)</code> 将一个进程的优先级设为 <code>PRIO_DARWIN_BG</code>，即可确保该进程在小核上运行。</p>
+<p>（在使用 Intel 芯片的旧机型上，由于并无大小核区分，该选项会变为「以低优先级运行该应用」。）</p>
+<h2><strong>配置建议</strong></h2>
+<p>App Tamer 自带一套偏保守的预设：Adobe 旗下部分应用与内置的「预览」会被完全停止，其他多数应用则只在达占用率门槛后限速。以下是我根据自己的使用习惯，摸索出的一些额外设置建议：</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/110550</id>
+            <title>在视频时代，认真拍一张照片：OPPO Find X9 Ultra 影像漫谈</title>
+            <link>https://sspai.com/post/110550</link>
+            <guid isPermaLink="false">https://sspai.com/post/110550</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 02 Jun 2026 06:57:26 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>春天连傍晚也是温柔的。夕阳透过云层把楼幢染成金黄色，防盗栏在斜射的金黄里泛着光，楼顶之上是一片还没暗下来的蓝天。我和它们之间隔着几棵树，前景的枝叶几乎全部落在阴影里，密密地把画面框住，缝隙之间像是一盏暖暖夜灯。</p><p>我随手拍了一张照片，OPPO Find X9 Ultra 处理这个画面的方式和我预期的不太一样。前景的枝叶没有被算法提亮，它们就是暗的，接近剪影，叶子的细节大部分沉在黑里；楼面的金色也没变味，还是夕阳那种特定的暖；天空的蓝同样没有为了讨好眼球被推浓。明暗对比都在，光从哪个方向、怎么来的，一眼可见。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/article/83426347e98a4d60cfa061fff4fe573b.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>按手机计算摄影的常见取向，这种场景会被默认处理得「平」一些——枝叶会被提亮，让你看清叶片的层次；楼体的高光会被压一压，避免过曝；整体往一个「都能看清楚」的方向走。这样的处理对大部分用户是合理的。但 X9 Ultra 没有走这条路。现场本来就是大部分在暗、只有一块被光打亮，它把这个关系留住了。</p><h2>一点变化</h2><p>OPPO 给 Find X9 Ultra 用的广告词是「光学至上，口袋哈苏」。</p><p>尽管合作已经数年，但这是 OPPO 第一次把哈苏放进产品定位，当成一台手机的核心影像身份来讲。在早几代产品上，哈苏更多是镜头模组中央的一个 Logo，加上一套联合调校的色彩方案——它服务的是用户情绪，作为营销上锦上添花的部分，并没有真正进入品牌精神。那几代手机的影像叙事，是「清晰」「大师」这类词，是强调参数、关于计算摄影能做到多强的故事。即便也会提及一句「真实影调」「哈苏人像」，但走向依旧是朝着「大而全」迈进。</p><p>X9 Ultra 这一代，叙事的重心变了。「光学至上」这四个字像一种表态，它把光学放到了计算前面——X9 Ultra 当然依旧依赖计算摄影，任何一台现代手机都绕不开这件事，但 OPPO 这次的目标不再只是把画面做得比现实更精致——回到相机的逻辑，去想一张照片本来应该是什么样子。</p><h2>如何接住「口袋哈苏」的影像哲学</h2><p>哈苏从 1948 年首次推出民用相机至今，跨越了胶片、数码、计算摄影三个时代，而它选择的都是同一种影像主张：让画面尽量接近人眼对真实场景的感知。这种主张被演变成了声名大噪的「哈苏自然色彩解决方案」（Hasselblad Natural Colour Solution, HNCS），也成了哈苏被职业摄影师认可的核心理由。它最被推崇的特征是色彩还原的精确和影调过渡的自然——既不锐利刺眼，也不柔焦发虚，画面始终在「真实」附近徘徊，从不靠强对比或重饱和制造视觉冲击。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/article/963ffee821e631ee11985f557f752497.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/article/e89a0793acbd0b1fbc20e96cb49362ae.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这种影像哲学可以理解为对真实世界的刻画。哈苏不去夸张、美化或重新调度眼前的场景，它要做的是把现场的色彩、光线的强弱关系、明暗之间的过渡，用一种克制的方式呈现出来。</p><p>色彩还原是这种刻画的起点。如果在源头就不准，后面所有的影像处理都是空中楼阁。X9 Ultra 这一代用了第二代丹霞原彩镜头——它不参与成像，只负责判断现场色温。光源混杂的场景下也能算出最接近真实的色温值，再基于这些数据做白平衡。</p><p>色彩还原本身不是一个让人眼前一亮的功能，用户多半也意识不到自己的手机有这颗副摄。但它是 X9 Ultra 这套影像系统最基础的部分。OPPO 持续迭代这颗多光谱镜头，俨然也是认同哈苏对于影像的理解和坚持。</p><p>「LUMO 凝光影像引擎」是 X9 Ultra 与哈苏影像哲学的呼应里我觉得最有分量的部分，而这也并非只是为了模仿。哈苏的思路是用更广的色域和动态范围保留真实的影调层次，但它的产品形态是中画幅相机——传感器够大、像素够多、镜头配置够好。</p><p>因为物理条件不允许，所以手机做不到一比一复刻这套思路。OPPO 的做法是借鉴哈苏「不靠算法强行抹平明暗」的判断，在手机的硬件条件下用自己的方式去实现。LUMO 凝光引擎对暗部的处理就是这个判断的产物——它不会强迫症一样地把所有阴影都提亮成可见细节，愿意让画面里的暗就是暗，赋予光线合理的衰减节奏。文首那张暮色画面，就是凝光引擎这种判断的结果。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/article/5b08d248a9065fad20485c0791911842.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/article/9700ff3b812a1be34c611b3175dcdc20.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/article/d8dc77bf9d7337e8fb32f8d2d8b05bdc.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>LUMO 凝光引擎的算法、暗部曲线、对高光的处理等影像逻辑，是 OPPO 自己摸索而来的；哲学是借来的，表达属于 OPPO。</p><p>而大师模式则是 OPPO 在这套哲学之上的极致呈现。打开大师模式之后，即便不选任何风格，X9 Ultra 也已经切到了一个跟普通拍照模式不一样的工作状态。计算摄影的介入更克制，AI 锐化、暗部提亮、高光压制这些常规手段都被调到了更轻的档位。OPPO 在发布会上的表述是「不让算法替代真实，而是让计算服务于真实」。简单来说，普通拍照模式那一套调校是面向更多用户的常规直出体验，而大师模式则是更接近相机思路的拍摄状态。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/e8b2ee9e817a54ee85a206ddf8143a60.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>胶片预设是另一块内容，目的是回应当下用户对胶片美学的兴趣，同时借哈苏这个品牌做一次对胶片时代的呼应。X9 Ultra 内置九款原生胶片，目前我最喜欢的是「和光」——低反差、奶油光泽，画面带一层柔和的雾光感，适合大部分「欲拒还迎」的需求。它不像「复古」或「浓郁」那样靠强烈对比抓人，转用一种平稳的氛围去包裹画面。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/article/e38a92e21c3066dccb80bae44b0f420f.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>「和光」胶片风格</figcaption></figure><p>工程上，X9 Ultra 的胶片风格化直接做在影像处理管线里，而非传统滤镜那种成片之后再叠加，保留了更完整的原始光影信息。这是胶片质感的来源，也是它跟普通数字滤镜的根本区别。OPPO 借了哈苏的影像哲学，并在这套哲学上长出了自己的技术语言和色彩表达。「口袋哈苏」这个广告词的含金量在这里，而非外观和模式致敬。</p><h2>我最喜欢的部分</h2><p>数码相机在动态范围上的表现，长期都超出了显示设备能呈现的部分。一台旗舰相机能记录 14 档以上的动态范围，但传统 SDR 显示器只能呈现其中的一小部分；剩下的信息要么在后期被压缩进 SDR 空间里，要么直接丢掉。这种相机能拍但屏幕看不到的状态，在过去十几年里几乎是默认设置。</p><p>近年来这个状态发生了变化。HDR 显示设备开始普及——iPhone 几代下来的 HDR 显示能力越来越完善，MacBook Pro 用上了 XDR 屏，旗舰手机峰值亮度普遍突破 1500 尼特，支持 HDR 的监视器的价格也在下探。显示端正在奋力追赶，理论上，相机能记录的那些原本「拍了也看不到」的层次，现在有了被完整呈现的可能。</p><p>这本来应该是静态摄影的一个新起点，但近年的行业方向走向了另一边。</p><p>相机厂商和手机厂商都把更多注意力放在动态影像上。手机端有 4K 实况照片、3D 后制、电影感视频，相机端则是各家旗舰对视频规格的反复加码——Log、高帧升格、动态范围……社交平台的算法也在推动这件事，小红书主动把流量向视频内容倾斜，Instagram Reels 在挤压静态照片的位置，抖音的全球风靡改变了大部分用户对「记录」的认知。行业里有一种隐含的判断在形成——静态照片本身的表达力是不够的，得让画面动起来才能承载表达、才能在社交平台上传播。</p><p>这条路有它的合理性，对很多用户来说也确实更有效率。但这种判断会让一部分还在认真拍照的人觉得不舒服。静态摄影有它自己的力量——构图的张力、决定性瞬间、光影里的纵深——这些东西没法被「让画面动起来」替代。</p><p>哈苏选择了另一条路。</p><p>在所有相机厂商都在卷视频规格的这十年里，哈苏 X 系统至今仍保持着同一件事——只做静态摄影，没有视频功能。一台单机超五万的相机主动放弃视频，在如今这个语境下是一个非常罕见的产品决策。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/article/3c534bdc67d7b896b047c5821190ae00.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>哈苏不久前发布的 X2D II 100C 把这条路推到了一个新位置——它推出了 HNCS HDR，作为业界第一台实现完整端到端 HDR 工作流的中画幅相机，从机内拍摄到 1400 尼特 OLED 屏直接预览 HDR 效果，以及 Phocus Mobile 2 跨设备编辑 HDR RAW，最后 HDR 平台分享，打通了整条链路。</p><p>HNCS HDR 的关键不在于「行业首发」，在于哈苏对 HDR 的理解。哈苏在官方表述里写得很明确：</p><blockquote><p>Traditional HDR solutions focus solely on dynamic optimisation by brightening shadows and compressing highlights to retain detail. However, this approach reduces contrast, causing images to appear flat and losing crucial tonal qualities.</p><p>Hasselblad HNCS HDR extends the colour gamut to the wider P3. These advances unlock the medium-format sensor's complete imaging capabilities, revealing nuanced details in highlights that would otherwise be lost.</p><p>传统的 HDR 解决方案往往只聚焦于动态范围的优化，通过提亮暗部和压制高光来保留细节。然而，这种处理方式会降低对比度，导致画面显得扁平，并失去至关重要的影调质感。</p><p>哈苏 HNCS HDR 色彩方案将色域扩展到了更宽广的 P3 级别。这些技术突破释放了中画幅传感器完整的成像潜力，展现出高光区域中那些本会丢失的细腻细节。</p></blockquote><p>这是一种典型的哈苏式判断。HDR 在哈苏这里有了新的定义——让一张静态照片可以重现光的纵深。明暗不被算法抹平，高光不被压扁，色彩在更宽的空间里有它本来的浓度。在所有人都用动态影像追逐用户注意力的这几年，哈苏选择用 HDR 把静态摄影重新做深一次。</p><p>但 OPPO 早就在做同样的事。</p><p>从 Find X6 时代的「超光影」路线开始，到 Find X8 Ultra 2025 年初首发全链路原彩 ProXDR，到 Find X9 Pro 用 LYT-828 把动态范围拉到 101dB，OPPO 在 HDR 这条路上已经走了三年。这条线的判断从一开始就跟后来哈苏 HNCS HDR 是同方向——把 HDR 用在保留真实层次上，而非追求画面冲击。也就是说，OPPO 没有在哈苏发布 HNCS HDR 之后跟上来——OPPO 已经走了几年，他们在此刻会合。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/10f8699388b18a433ad02e433f6b2016.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/article/45296e20f04fe4cba5c9b82546889ea2.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/article/3c5f87f6011f3e368a75552d62f246ba.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>到了 Find X9 Ultra 这一代，这条线又走得更深一些。第二代丹霞色彩还原镜头支持了 DCG-HDR，把 HDR 能力从静态照片扩展到了实况照片和视频，大师模式的动态范围达到 16 档。这些升级不是颠覆性的，更像是 OPPO 在自己原有的 HDR 路线上的持续打磨。在大多数厂商把注意力转向动态记录的这几年里，OPPO 跟哈苏在同一个方向上，给喜欢拍照的人留下了一台值得拿在手里的设备。</p><p>实况照片和视频通过动态画面给记录带来了更灵动的表达，这是事实，也有它的合理性。静态摄影的本质是凝视——一张照片让你停下来看，让光线、构图、故事和情绪定格瞬间、却又在思绪里无限延绵。「凝视」这件事不会被替代，我没法在动态画面里得到我在一张照片前停下来的那种状态。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/06/01/article/62dfc212a2c59a54e98e380f4ec36469.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>HDR 让静态照片在「凝视」的状态下保有纵深——明暗有真实的硬度，色彩有情绪的浓度，光在画面里被有节奏地挥洒。SDR 时代的照片是平面的，HDR 时代让它有了呼吸；对我来说，这也比任何参数都重要。</p><p>因为站内压缩的关系，可能无法显示文中照片的 HDR 效果，你可以点击<a href="https://weibo.com/1788084034/R27kycZMq" target="_blank">这个链接</a>并跳转至微博打开查看完整效果。</p><h2>最后</h2><p>过去几年，手机厂商和传统相机品牌的联名变得很常见——蔡司、徕卡、理光等，都先后被放在了不同手机的镜头模组旁边。这些合作的深度差距其实很大。最浅的一类是 Logo 授权加几款联名调色预设，再加一两个以相机品牌命名的拍摄模式；做得深一些的，会在传感器规格或镜头方案上做联合调校，但整体仍然停留在硬件参数的对接上。这两类合作的共同点是——相机品牌提供的是「色彩」或「光学」这类局部能力，手机厂商用它来给自己的产品加分，整体产品方向还是手机厂商自己的事。</p><p>真正难做的是另一种合作——两边对「影像应该呈现什么」这件事有同样的判断，再把这种判断贯穿到产品的每一个设计选择里。这种合作没法靠合约推出来，得两边各自先把自己的影像方向想清楚，然后才有可能在某一代产品上汇合。</p><p>我喜欢OPPO Find X9 Ultra，但更准确地说，我喜欢 OPPO 这几年走的这条路。X9 Ultra 是这条路上的一个节点，路本身比单台机器更重要。</p><p>HDR 在当下的处境其实并不乐观。能完整呈现 HDR 静态图像的平台还很有限，即便是有了，对不同产品特有的格式和封装支持仍参差不齐，HDR 元数据经常在上传过程中被剥离。硬件层面的限制更大——能拍出真正端到端 HDR 静态照片的相机和手机只是少数，能正确显示的屏幕也尚待推广。</p><p>但 HDR 对静态摄影的意义，并不只是让画面在某些设备上看起来更好看，它为静态图像的观看体验打开一种新的可能。希望接下来能有更多厂商加入到这条路上来。HDR 不只是 OPPO 和哈苏的事，它需要更多硬件厂商、平台和创作者一起把这件事往前推。它值得。</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/109850</id>
+            <title>为什么我认为 Obsidian 是当前最好用的知识管理笔记软件？</title>
+            <link>https://sspai.com/post/109850</link>
+            <guid isPermaLink="false">https://sspai.com/post/109850</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 02 Jun 2026 03:00:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><strong>Matrix 首页推荐</strong>&nbsp;</p><p><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;</p><p>文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>曾经我也在 Notion、Obsidian 等众多知识管理软件中犹豫不决，不知道选择哪个。</p><p>但在多次深度使用 Notion 和 Obsdian ，特别是连续一个月高强度使用后，我最终决定，把 Obsidian 当成一个研究写作、知识管理的主力工具。</p><p>为什么呢？有几个事情，彻底改变了我对 Obsidian 的看法。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/3511be0c0d54ed764515af06ee5eb116.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>第一件事，是 Claudian 的出现，或者说 AI 的出现</h2><p>我认为， AI 的出现直接让 Obsidian 笔记的使用方式，发生了质变。称之为笔记届的 ChatGPT 时刻也毫不夸张。</p><p>现在的 AI ，完全不只是对话查资料、润色语句这么简单。</p><p>它可以完全接管你的笔记，整理笔记文件，自动提取待办事项，自动生成周报，绝对称得上是笔记里的超级助手，你能想到的一切，几乎都可以通过 AI 来实现。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/c512b94fabc829a6d9164c9e815f1fc5.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我以 Claudian 的使用作为一个例子，以下这些都是我在日常使用中会高频出现的场景，遇到的每一个加上 AI 功能以后都超级好用：</p><h3>选中即可定位修改，不用复制粘贴</h3><p>当我们要针对某一段、某个字进行修改时，只需要划中这段文字并问它怎么改或者怎么解释，模型就能识别上下文，根据你当前的语境去修改，而不需要反复输入其它的提示词。</p><p>这个功能现在看来很常规，但确是写作中最频繁，最基础，使用最刚需的一个场景。</p><h3>全局搜索内容，引用资料，记得你笔记的所有内容</h3><p>它可以搜索你笔记里的所有内容，无论你过去写过什么，或者需要找笔记内外的资料，都可以调用侧边栏的 Claudian 帮你搜索，现在 Claudian 搜到的资料你还可以在侧边栏直接点击，就会跳转出来，特别方便</p><h3>用 AI 管理笔记文件，自己再也不用动手整理笔记</h3><p>它还可以帮你管理笔记、移动文件，所有的增删查改，几乎都可以让 AI 来帮你完成，比如你可以说，把今天收藏的文章归类下，AI 就会自动识别你今天新增的文件，按规则命名并且放到你对应的分类中。</p><p>这种操作很适合用来批量整理笔记，之前你没有命名的，哪个文件夹一团乱麻的，以前大家普遍担心的笔记整理问题，现在完全可以交给 AI，我们自己则可以真正地专注在内容上。</p><h3>一句话让 AI 给你装 Obsidian 插件，改页面布局，调整配置</h3><p>我们完全可以借助它来帮助修改 obsidian 的配置，真正做到用语言控制你的所有页面，它可以随意帮你增删插件，修改页面，修改配置，关于 Obsidian 的一切操作它几乎都能接手。</p><p>比如你可以直接问它有哪些好用的官方插件，或者是 Obsidian 的功能， 它都可以帮你安装并且配置好，整个过程你只需要说一句话，剩下的 Claudian 就会帮你搞定。</p><p>这个功能我自己使用过几次，比如说可以直接把当前的外观调成深色模式，或者问它有没有什么记录字数之类的插件，有的话都可以直接让它帮你安装，基本上你自己不用再折腾任何的插件的搜索、安装和调试的问题。</p><p>我真心觉得，这才是 AI 时代应有的样子，之前的图形界面，人都是被迫去适应软件的界面，按钮在哪里？设置怎么关？哪个控制怎么更改？都很难找。为什么有那么多的软件交互设计？其实都是为了尽可能地降低使用的阻力。</p><p>但本质上都是让人去适应软件。AI 时代应该反过来——你只需要告诉 AI 你想要什么，不需要去翻菜单、找按钮。让 AI 解决产品背后的问题，而不是让人主动来找问题。</p><h3>让 AI 记得你是谁，用你喜欢的方式来管理笔记</h3><p>如果你稍微更进阶一点，知道 Claude Code 的使用办法，那么你可以在 <code>claude.md</code> 文件中，可以输入你希望他扮演的角色、风格、对话内容，甚至更高阶的用法，比如之前卡帕西曾经分享过用 Obsidian 来做 LLM Wiki ，里面就是用到了这种技巧。</p><p>总之，Claudian 这个 AI 插件在 Obisidan 的生态中实在太强大了，最新的客户端已经支持接入各种不同的模型，包括codex</p><p>借助 Image 2 近乎变态的图片生成能力，你完全可以针对复杂的知识结构生成图解，本次文章中的所有配图，我就是用这个方式生成的，效果可以说相当不错。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/872f9e665ddbfe9da588c102511fab34.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>DeepSeek V4 的推出</h2><p>如果说 Claudian 让 Obsidian 头一次有了手和脚，那 DeepSeek V4 就是给它装上了一个最强大脑，比肩顶尖旗舰的性能，击穿行业底线的地板价，把尊贵的 1M 超长上下文，从云端拉到了平民百姓都能无负担使用的水平。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/37624d01db233bc5c735280a33289f7f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>DeepSeek_V4 综合能力对比，来源：NIST/CAISI 官方评测（2026 年 5 月），展示 DeepSeek V4 Pro 与 GPT-5.5、Claude Opus 4.6 在各领域的综合能力对比</figcaption></figure><p>在 DeepSeek V4 推出以前，你想要用性能好的国产模型，要么在限购，要么价格过高，还没有 1M 的超长上下文；国外的顶级模型虽然性能好，但是成本高、门槛高，还有被封的危险，哪怕选用中转站，依然有不稳定，或者数据泄漏的风险。</p><p>DeepSeek v4 的推出改变了这个局面，性能上比肩顶尖闭源，虽然还有一定的距离，但已经足够强悍，是可以用到日常工作和生活中的水平。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/63d7c2ec379bb8c0bddbdf2223f1d03f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>DeepSeek V4 Pro 官方性能图 2026-04-24</figcaption></figure><p>最炸裂的还要属价格，我看了一下最近使用 DeepSeek 的 API 价格，中等强度用了两天，每天大概花三到五元钱。</p><p>而且这还是我绝大多数情况用 Pro 模型的结果，如果是 Flash 版本，价格还能再低个 80% 以上。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/c42544926b25668599408dc34926e6ec.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>而且这是 1M 上下文啊朋友们，什么概念，一本三百页的书，能塞五本进去。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/214dcd96bd0cd088f8f663d5b1b56aa0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这意味着模型可以同时处理你的上千篇笔记，不会遗忘，它几乎可以记住你的所有内容。</p><p>去年在笔记里记下一句话，看到的一本书，半个月前记得要拆的一篇文章，一个金句，要引用的一年前的报告，只要在你的笔记里，它永远都能索引到。</p><p>这种超长上下文，几万字的行业报告说拆就拆，对于知识工作者来说几乎是刚需，我经常用这个 Flash 模型帮我在 Obsidian 里翻译上万字的英文播客，效果好，成本低到可以忽略不计。</p><p>每次使用的时候，都会感叹，自己有种生在天堂的感觉，这简直是知识工作者最好的时代。</p><p>DeepSeek V4 加 Claudian 的完美结合，正是让我下定决心，用好 Obsidian 工具最核心的因素。</p><h2>内置浏览器</h2><p>如果说前面是 AI 功能给 Obsidian 带来的彻头彻尾的变化，接下来的这个内置浏览器，对于知识工作者来说，绝对是锦上添花，也属于用完一次就再也回不去的功能，那就是内置浏览器。</p><p>借助笔记自带的浏览器，你可以随意点击笔记链接的任何网页页面，而不用跳出笔记本身，这对于保持心流具有相当明显的效果。</p><p>第一次发现这个功能的时候，我真的惊为天人，特别是配合笔记中带有的各种跳转链接，用内置浏览器的无缝体验，这种感觉真的太爽了。</p><p>只需要点击一下链接，笔记内部就会直接跳转到对应的网页原文，不用切换应用，所有的内容都能在内置的浏览器里进行，这是一个很有想象力的功能。</p><p>对于普通人来说，虽然只是解决了一个频繁跳出的问题，但是对于写作任务繁多的知识工作者，心流不被打断，带来的价值是无与伦比的。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/a6521c1adef18970e9117007ea74b6e2.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>借助这个内置的浏览器，你可以实现各种各奇奇怪怪的功能，比如一边写作内容，一边打开 NotebookLM ，提问你的知识库，</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/fe43eac086adeae64c743cfafca41b5c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>当然，你可以打开各种网页，比如论文网站，或者常用的资料对比，甚至能打开 Bilibili 同步在 Obsidian 内学习。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/5b0a991f53f8134bc070a659ee85ca7a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>总之就是非常离谱，加上了内置浏览器以后，你会发现这个笔记突然间变成了无所不能的东西。</p><p>在看的任何链接页面，你都可以用。完全可以左右开一个窗口，新开一个笔记窗口把它记下来。</p><p>而且最让我惊喜的是，你在这个内置浏览器网页中勾选的任何文字，Claudian 也是可以直接识别的，根据你当前的上下文进行提问。</p><p>不得不说，这真的又顶替了不知道多少的工具...这个东西真的太离谱了。</p><p>唯一可惜的是，这玩意儿不能装插件。不过想想也是，人家毕竟是正儿八经的笔记软件，内置浏览器只是为了方便对比，要是真做成插件，那不跟其他浏览器形成正面竞争了。</p><h2>神级插件 Obsdian Web-Clipper ，一键剪藏，包括视频</h2><p>我很少会用这个词来形容一个插件，但 Obsidian 的这个插件真的做到了，而且是相当惊艳的水平。</p><p>用一句话来说，这个插件完全用免费级别的门槛达到了工业级可用的水准，不仅可以一键剪藏文章、还能一键剪藏 YouTube 视频，而且把字幕文件全部都能拉下来。</p><p>不仅速度非常快，格式还处理得非常好，从来没有出现过乱码或者抓取失败的问题，不愧是官方出品的插件，效果甩很多付费的剪藏插件一条街。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/7f6c006a70e9c3a27beea83fd336a247.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>剪藏的文章内容格式都很丰富，完全没有乱码或者其他的问题。</figcaption></figure><p>我个人最喜欢的一个操作就是先用 Clipper 剪藏一个 YouTube 视频，然后再用 Claudian 翻译成中文，这样就能全心全意地进行视频内容的学习了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/29cffd876d34fd74162316fe828e264d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>剪藏的卡帕西视频</figcaption></figure><p>有了这个插件以后，你完全可以无感地收藏网上的任何消息，而且格式都能保持完好无损。</p><p>真正让 Obsidian 可以轻松地收集任何你看到的文章、网页或者是视频信息，配合 Claudian 的翻译，然后再加上你自己的注释等等，可以很轻松地把 Obsidian 变成一个调查研究的知识管理的工具。</p><h2>Obsidian CLI 的推出</h2><p>其实这一段本应放在 AI 那段一起讲，但因为体感相对前面几个插件来说，可能会有点弱，所以我就放到后面来介绍。</p><p>但放到后面绝对不代表它不重要，相反，正是有了 Obsidian CLI 的推出，你可以让 AI 对笔记做更深入的操作，Claudian 这样的 AI 助手才会变得丝滑无比。</p><p>光说概念可能不直观，我举几个例子你就知道 CLI 到底在底层干了什么。</p><p>比如你让 Claudian「帮我找出所有没被任何笔记链接过的孤儿文件」，如果没有 CLI，Claudian 就得把你几百篇笔记一篇一篇打开，逐行扫描里面的链接，等黄花菜凉了，它可能都还没干完。</p><p>但是有了 CLI ，你只需要一句命令，三秒就能得到结果，快速发现哪个地方是孤儿笔记</p><p>再比如，你让 AI「把这 14 篇 AI 日报全部打上标签和日期」——没有 CLI 的话，只能你手动一篇一篇改。有了 CLI，只需要说一句话，Claudian 就在后台帮你批量处理完，你甚至不需要知道它是怎么做到的。</p><p>更进一步，CLI 还能帮 Claudian 安装插件、改快捷键、查你的标签有没有重复、看哪篇笔记写了待办还没勾选。这些东西如果靠 AI 自己翻文件，又慢又容易出错；但有了 CLI，Claudian 就能快速锁定 Obsidian 内部的功能和笔记</p><p>说白了，CLI 就是 Obsidian 和 AI 之间的桥梁。没有它，AI 只能笨拙地读文件；有了它，AI 才算是真正接管了你的笔记库。</p><h2><strong>美观的页面和自定义折腾的高自由度</strong></h2><p>如果说颜值也是生产力，那么Obsidian 这一点是真的征服到我了。这里不仅有特别多关于字体页面的布局样式，而且是真的高度自由可控，可以自己更改。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/cf8cbd5e21937e3dd9b4c38ee007cad8.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>特别是 MInimal 的深色模式，我觉得有一种恰到好处的美感，既不过分突兀，又简洁清晰，真的很适合不想过度折腾，但是又追求一定美观的用户。</p><p>其实 Obsidian 上还有很多很多的插件和好用的功能，还等着你自己去探索，我只是介绍了个人印象中最深的几个功能，这些功能都不是孤立的，它们完全可以配合起来，产生 1+1&gt;2 的效果。</p><p>比如说 Claudian 加 CLI 就能充分接管你的笔记，剪藏的外语资料再加上 Claudian 又可以无限制的翻译。</p><p>最近 Obsidian 官方又专门为插件推出了一个新的社区，可以说是把插件的玩法又推向了一个新的高度。有兴趣的伙伴可以自己去探索体验一下。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/ec73c403f79354984bf86f06d9157faf.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>为什么不选 Notion</h2><p>个人来说，我也很喜欢 Notion 的使用方式，它把强大的功能包装在非常简洁的页面中，几乎可以构建、搭建起任何一个体系的东西，实现非常多强大的功能。但网络同步、数据主权这些东西始终不归你自己管，相较于 Obsidian 就是差那么一点点。</p><p>长期使用下来，我觉得 Notion 更适合作为团队协作、大量数据库、有知识管理需求的团队使用，在 AI 这一块的开发上，Notion 也一直在更新，把这些功能做得越来越好用。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/17/4154f6af587733054a077840367ec05d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>而且 Notion 对 AI 的集成更加深度，AI 在回答的时候更能结合你笔记的内容，给出针对性的回答。前提是你愿意负担每个月超过一百个的 AI 付费功能。</p><p>对比下来，针对个人开发者，或者是有知识管理需求的个人用户。Obsidian 的上手门槛会高一点，但费用更低，自主性更强，玩法更多，数据也属于你，我认为完全可以弥补在上手门槛上的不足。</p><p>再加上今年 Obsidian 也给笔记补上了数据库的 Base 功能，对于管理大量的笔记，又有了更多充分好用的使用理由。</p><h2>结语</h2><p>作为一个自媒体创作者，你很难不为 Obsidian 这种大道至简、好用易用的风格所打动。</p><p>优雅的架构设计，简洁到极致的界面，个人完全可以随意更改的自定义画面。</p><p>这样一篇近五千字的长文，放在过去，我至少需要两三天的时间。但是现在借助各种插件和 AI 的帮助，我只需要短短一天就能完成。</p><p>大幅缩减了排版找图、发布、搜索资料的时间，把更多的精力用在构思文章的主题、结构、润色语句中。</p><p>在这个过程中，我久违地体验到了创作的心流感。以前这些写作过程中的各种脏活累活，都是需要耗费很多的心力的，同时也在消磨一个人写文章的耐性。</p><p>现在写作这件事真的变得更享受、更不容易被打断，也更加轻松了。</p><p>我觉得二十一世纪的知识管理工作者，不使用 Obsidian 真的是错过一个亿，真正怎么样还得上手体验了才知道。当我自己慢慢花时间沉浸式使用的时候，明显感觉现在的 Obsidian 真的好用了一倍不止。</p><p>当然，Obsidian 本身确实还是有一定的门槛，但如果你只是把它当成一个简单的 md 工具，不要过多地去捣鼓插件等这些跟生产力无关紧要的事情，相信我，你一定会爱上这个知识管理软件。</p><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/110592</id>
+            <title>派早报：英伟达、华硕等多个厂商在 COMPUTEX 2026 发布新品</title>
+            <link>https://sspai.com/post/110592</link>
+            <guid isPermaLink="false">https://sspai.com/post/110592</guid>
+            <pubDate></pubDate>
+            <updated>Tue, 02 Jun 2026 00:03:23 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2>少数派的近期动态</h2><ul><li>少数派 × 飞傲多功能便携 CD 音箱一体机 BEATBOX 预售开启。<a href="https://sspai.com/post/109957"><strong>火速入手</strong></a></li><li>可爱又好玩的经典萌物——监工水獭挂件复刻啦！会员点数也可兑换！<a href="https://sspai.com/product/19"><strong>给獭一个家</strong></a></li><li>首款 MBTI 定制墨水屏「口袋先知」预售进行中，一按知运势。<a href="https://sspai.com/order/confirm/product?id=76"><strong>立刻预购</strong></a></li><li>麦金獭钢化膜单膜补充装已上线，替换装，更划算。<a href="https://sspai.com/product/75"><strong>立即抢购</strong></a></li></ul><h2>你可能错过的文章</h2><ul><li><a href="https://sspai.com/post/110094">把一句经文放进每天：「一日一偈」的轻阅读尝试</a></li><li><a href="https://sspai.com/post/110412">成本 600 元不到，我 3D 打印了一把能弹的电吉他</a></li><li><a href="https://sspai.com/post/110547">派评 | 近期值得关注的 App</a></li></ul><p>&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/110547</id>
             <title>派评 | 近期值得关注的 App</title>
             <link>https://sspai.com/post/110547</link>
@@ -102,583 +201,6 @@
                 <![CDATA[
                     
                     <p><strong>Matrix 首页推荐</strong></p><p><a href="https://sspai.com/matrix">Matrix</a> 是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p>文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>影视飓风发布了一条偏议论散文风格的<a href="https://www.bilibili.com/video/av116634249336876">片子</a>，简单来说就是在视频社交媒体上，越来越多的人对于看到的视频产生越来越多的「是 AI 吗」的质疑，这些质问最终伤害了创作者。不过包括影视飓风的这条视频在内，大家对生成式人工智能的抱怨最终似乎都会被杂糅成两个问题：一个是创作者对于工作流使用生成式人工智能的隐瞒，另一个则更为隐蔽——生成式人工智能的工具，究竟会如何影响我们的审美。</p><p><strong>扩展阅读：</strong><a href="https://sspai.com/post/110102" target="_blank">为什么没人喜欢你用 LLM 写出来的东西？</a></p><p>前一个问题当然是更紧迫的问题，毕竟互联网的信任机制正被迅速打破，对舆论和意识的话语权问题也有影响。但我并不想在这篇文章中展开这个问题，我更想来谈的是后面那个问题：生成式人工智能会对我们的审美造成什么样的影响。</p><h2>大模型在做的事情</h2><p>先来讨论一下我们使用生成式人工智能创建图像、音频和视频等多媒体（多模态）内容时候会发生什么吧。</p><p>在用户侧，我们所做的事情是将想要的东西以语言（提示词）的形式描述出来，然后模型根据这份文本生成对应的视频。我们按照文本的语言容量通常是几十到几百 KB 估算，生成的视频则是几兆（MB）到几百兆不等。前后相差几百到上千倍。</p><p>按照<a href="https://zh.wikipedia.org/wiki/%E7%86%B5_%28%E4%BF%A1%E6%81%AF%E8%AE%BA%29">信息熵</a>理论，信息不可能以如此大的压缩率无损缩放，过程必然涉及对原本信息的篡改，包括补充、粉饰和舍弃。</p><p>从高熵到低熵丢弃的过程很好理解。我很推荐你收听重轻的<a href="https://buzaichang.xyz/episodes/dotmp3" target="_blank">《不在场》播客第二季第一集</a>节目，这是我见过的对「有损压缩」解释得最好的节目；而反过来，从低熵补充信息到高熵，就是模型在做的事情。毕竟没人会把每个像素点的 RGB 值直接扔给模型——那也不需要模型，直接扔给显卡就好。</p><p>如果要探究从提示词文本到多媒体内容，模型究竟在做什么，飞天闪客<a href="https://www.bilibili.com/video/BV1buFdz9EYb/" target="_blank">一期关于视频生成模型的节目</a>和 HEM Records 的<a href="https://www.bilibili.com/video/BV15Z421q7Xo" target="_blank">探究（当时的）AI 能做到什么样的音乐的节目</a>，某种程度上就在讨论这个问题。给没有看过这两个视频的朋友们简单解释一下节目的中心思想：与我们认知中「说得更详细就能得到更好结果」不同，说得越模糊、要求越低，模型做到「符合要求」的可能性越高。（如果你还是不能理解这个逻辑，十分推荐分别点进这两个视频，都看一遍。）</p><p>大语言模型本身没有任何的创作能动性，即使是「小步快跑也在超速进展」的生成式模型，它所做的也只是「将人类的文明做一个平均数」。连加权平均也没有。</p><p>因此大模型在「要求不高」的提示词中间的缝隙中，填充的就是「人类文明的平均数」（用 fancy 一点的话来说，我们会管这个「平均数」叫做「幻觉」）；我们从模型里收获的东西，也只能是「带使用者审美」的「人类文明的平均数」。</p><p>但人不是。</p><p>人在创作上可以有偏见（bias）、可以有自我审美、可以有艺术滤镜，生成式人工智能之前的世界有着无数个这样的「认知裂隙」，<a href="https://space.bilibili.com/20806742/lists/2738592" target="_blank">事实上造就了人类文明历史上大量的细分艺术形态和风格</a>。</p><p>如果把生成式 AI 拿给拥有正常的审美和强烈的自我表达意识的创作者们，他们几乎不会担心使用 AI 会对自己的艺术造成什么影响：对他们而言，它只是一个创作工具，仅此而已。但对更多的创作者来说，问题就会更严重一些。但这个问题早在模型出现之前就已经显现。</p><h2>生成式审美反刍</h2><p>我们前面提到，生成式 AI 模型们创作的时候更喜欢「模棱两可的地方比较多」的指令，这样它们就有办法将自己学到的「平均数」都塞到输出结果里。而在信息传播过程中，这些填充的信息同样会被其他同为受众的创作者吸收。</p><p>往坏了说，如果所有人都用平均数来创作，最终会令世界上所有的创作都变成了「平均数生成比赛」。</p><p>和 Claude 讨论了一下这个想法之后，我决定将这个过程称作「生成式审美反刍」，Claude 建议我把它的英文描述确定成「Generative Aesthetic Rumination」。它的意思是，在生成式人工智能广泛应用的环境下，人们利用 AI 在提示词里填充泡沫塑料（填充信息熵），然后这样的信息熵会被人们反过来吸收。</p><p>最终，泡沫塑料本身成为下一个作品中表达的一部分，经过再创作、再吸收，泡沫塑料也会在最后变成审美的一部分，达成一种「递归」式社会审美趋同的效果。</p><p>但正如我之前所说，「生成式审美反刍」并非是凭生成式模型一己之力造成的问题，这个问题早在媒介变化的过程中就已经显现。从传统报纸电视、博客、RSS 到之后的视频网站、短视频，这个过程中信息熵都是在急剧压缩的。特别是由字节跳动以来的互联网，人们亲手开启了「推荐算法」的潘多拉盒子，以及「注意力经济」速来快走的特性，令「调动人们的兴趣」成为了一条有且唯一的成功捷径。</p><p>此时「用平均数」就成为了所有创作者的「平均数」。</p><h2>你能做到的事情</h2><p>除了《女神异闻录 5》（Persona 5，P5）本篇，我同时也很喜欢同代的支线作品《<a href="https://zh.moegirl.org.cn/%E5%A5%B3%E7%A5%9E%E5%BC%82%E9%97%BB%E5%BD%955_%E4%B9%B1%E6%88%98%EF%BC%9A%E9%AD%85%E5%BD%B1%E6%94%BB%E6%89%8B">女神异闻录 5 乱战：魅影攻手</a>》（Persona 5 Strikers，P5S）。我甚至认为，在故事立意上 P5S 是可以和本篇平起平坐的。因为 P5S 的故事设定是「所有人都有一个无所不知的 AI」，而这刚好就是 2022 年末以来，以 LLM 为首的人工智能大跨步跃进后的世界。</p><p>P5S 故事的最后，「叛变」的 AI 索菲亚最终在与怪盗团的行动最后，看到了在涉谷烟花，更确定了要成为「人类的好朋友」的目标。但现实是，现在的 AI 模型只能躺在数据中心的服务器里，以人类的平均知识和平均价值观「和稀泥」。</p><p>它无法真正感受现实世界，无法培养真正的审美，无法做到有偏见（bias），更谈不上任何的能动性。</p><p>但你还可以。如果你觉得<a href="https://mp.weixin.qq.com/s/GVU1QQQST4A478ERX77m_A" target="_blank">你要将这份珍贵的礼物用来给 AI 跑腿</a>，那我尊重你的选择；不过你有另一条路可以选——你可以自己去感受这个世界，用眼睛、用腿、用你一切的感官、工具、甚至是 AI 去感受这个世界。</p><p>你有 AI 彻底做不到的事：审美、经验、精神，这些都是躺在数据中心的模型望尘莫及的东西，即便他有<a href="https://zh.wikipedia.org/wiki/%E7%84%A1%E9%87%8F%E5%A4%A7%E6%95%B8" target="_blank">无量大数</a>级别的参数，也无法替代这件事。</p><p>所以，去感受、去思考、去创作吧。这是只有身为人类的你能做到的事情。</p><p><a href="https://unsplash.com/photos/a-close-up-of-a-cow-with-long-horns-qQhpBHw1Ggs">题图来自 Unsplash+</a></p><p>&gt; 关注 <a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/110446</id>
-            <title>本周看什么 | 最近值得一看的 8 部作品</title>
-            <link>https://sspai.com/post/110446</link>
-            <guid isPermaLink="false">https://sspai.com/post/110446</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 29 May 2026 10:12:15 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <h2>📅 本周新预告</h2><h3>《玩具总动员 5》终极预告</h3> <p>5 月 26 日，皮克斯动画电影《玩具总动员 5》发布了终极预告，将于 6 月 19 日内地上映。安德鲁·斯坦顿、麦肯纳·哈里斯执导，胡迪、巴斯光年、翠丝等老朋友们回归，无所不能的科技产品「入侵」童年，一场时代变迁和永恒陪伴之间的较量正式打响。 <a href="https://www.youtube.com/watch?v=QftAW9TTmuQ">来源</a></p><h3>《沃特崛起》首支预告</h3> <p>5 月 22 日，《黑袍纠察队》前传剧集《沃特崛起》发布了首支预告，将于 2027 上线 Prime Video。詹森·阿克斯回归饰演士兵男孩，阿雅·卡什回归饰演风暴女，设定在 1950 年代冷战时期，聚焦沃特公司早期崛起、第一代超级英雄的「政治不正确」时代。 <a href="https://x.com/TheBoysTV/status/2057823805649645735">来源</a></p><h3>《穹庐下的魔女》新预告</h3> <p>5 月 27 日，TV 动画《穹庐下的魔女》发布了新预告，定档 7 月 4 日开始播出，首周两集连播。本作改编自同名漫画，山田尚子担任总导演，Abel Gongora 执导，Science SARU 制作，设定在 13 世纪的蒙古帝国，讲述失去一切的奴隶少女希塔拉掀起的风暴。 <a href="https://x.com/tenmaku_info/status/2059560377101492523">来源</a></p><h3>《缎带英雄》首支预告</h3> <p>5 月 26 日，动画电影《THE RIBBON HERO 缎带英雄》发布了首支预告，定档 8 月 8 日上线 Netflix。五十岚祐贵执导，望月圭人物原案，米山舞人物原案协力，新垣一成人设，塞德里克·埃洛尔艺术导演，OUTLINE 制作，改编自手冢治虫的漫画《缎带骑士》。 <a href="https://x.com/the_ribbon_hero/status/2059243299278623185">来源</a></p><h3>更多</h3><p><a href="https://www.bilibili.com/video/BV12cGd6AEBi/"><strong>TV 动画《历史之眼》首支预告：</strong></a>改编自岩明均（《寄生兽》）的同名漫画，LIDENFILMS 制作，以公元前 4 世纪的古希腊为舞台，描述亚历山大大帝的书记官尤米尼斯波折的一生，曾获 2012 年手冢治虫文化奖漫画大奖，2027 年 1 月开始播出。 <a href="https://x.com/historie_off/status/2058835714478125142">来源</a></p><p><a href="https://www.bilibili.com/video/BV1GTGR6gEvd/"><strong>TV 动画《相反的你和我 第二季》新预告：</strong></a>改编自阿贺泽红茶的同名漫画，仍由长友孝和执导，内海照子系构，Lapin Track 制作，讲述个性截然相反的铃木实优和谷悠介的恋爱喜剧及与朋友们一同度过的校园生活点滴，7 月 5 日开始播出。 <a href="https://x.com/seihantai_x/status/2058835463528743025">来源</a></p><p><a href="https://www.bilibili.com/video/BV1YJGQ6eERg/"><strong>电影《福尔摩斯小姐 3》首支预告：</strong></a>菲利普·巴兰蒂尼执导，米莉·波比·布朗、亨利·卡维尔、海伦娜·伯翰·卡特、路易斯·帕特里奇等主演，伊诺拉·福尔摩斯来到马耳他，她所面对的案件比以往更加纠结和诡谲，7 月 1 日上线 Netflix。 <a href="https://x.com/netflix/status/2059605539131113826">来源</a></p><p><a href="https://www.bilibili.com/video/BV1MZG165E1g/"><strong>A24 电影《黄金时段》首支预告：</strong></a>兰斯·奥本海姆执导，罗伯特·帕丁森领衔主演，聚焦电视主持人克里斯与他推出的一档真人秀节目，该节目利用人员在网络上伪装成未成年人，引诱恋童癖进入摄影棚并将其逮捕，秋季在北美上映。 <a href="https://x.com/A24/status/2059620679532568849">来源</a></p><h2>📽 影视新闻周报</h2><h3>《揭秘日》内地定档 6 月 12 日</h3><p>5 月 28 日，电影《揭秘日》发布了 <a href="https://www.bilibili.com/video/BV1E6VH6aEZv">中国内地定档预告</a> 和海报，将于 6 月 12 日同步北美上映。史蒂文·斯皮尔伯格执导，艾米莉·布朗特、乔什·奥康纳、科林·费尔斯、伊芙·休森等主演，一场危机四伏的揭秘行动，即将破局而出，在大银幕直击外星真相。 <a href="https://weibo.com/2108175657/R1whShr5J">来源</a></p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2026/05/29/ecf4852f9d0728559d564d3db2738362.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2026/05/29/b1b8ef380ece4dd5ec0b9f6d3d2ac4a9.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>《火遮眼》内地定档 6 月 11 日</h3><p>5 月 27 日，电影《火遮眼》发布了 <a href="https://www.bilibili.com/video/BV1sJGC6aEms/">内地定档预告</a> 和海报，将于 6 月 11 日上映。谷垣健治执导，谢苗、林科灯、杨恩又领衔主演，黎唯、岩永丞威主演，雅彦·鲁伊安特别演出，女儿当街被绑走，父亲拼命追击、大打出手，也遇到了为所爱之人奋不顾身的同伴。 <a href="https://weibo.com/1623886424/R1jjtyYtX">来源</a></p><figure class="image image_resized ss-img-wrapper" style="width: 361px;"><img src="https://cdnfile.sspai.com/2026/05/29/article/7525529425b2c3bc8fee25b49d8445c2.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>《年会不能停 2！》定档 8 月 7 日</h3><p>5 月 28 日，电影《年会不能停 2！》发布了 <a href="https://www.bilibili.com/video/BV1eLGQ6TEqs/">定档预告</a> 和海报，将于 8 月 7 日上映。董润年执导，董润年、应萝佳编剧，张若昀、白客领衔主演，高叶领衔主演，大鹏、庄达菲惊喜出演，备受期待的「刘马组合」于众和集团分公司正式集结，由此拉开故事新篇。 <a href="https://weibo.com/1623886424/R1sIyh9mF">来源</a></p><figure class="image image_resized ss-img-wrapper" style="width: 357px;"><img src="https://cdnfile.sspai.com/2026/05/29/89236a10a710008e589941adcff1ca55.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>《记忆碎片》发布中国独家海报</h3><p>5 月 27 日，电影《记忆碎片》发布中国独家海报，5 月 29 日公映。该片由克里斯托弗·诺兰执导， 盖·皮尔斯、凯瑞-安·莫斯、乔·潘托里亚诺、小马克·布恩、拉什·费加等主演，讲述莱纳·谢尔比在家遭到歹徒的袭击，患了罕见的「短期记忆丧失症」，展开艰难调查。</p><figure class="image image_resized ss-img-wrapper" style="width: 401px;"><img src="https://cdnfile.sspai.com/2026/05/29/article/f37f352a0d8b0ea1a5c8967cdf4129c4.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>🎪 彩蛋</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/29/b6262d6181dea883e211b389b1955580.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>本期的彩蛋是「看图猜电影」，首位猜中片名的读者，可获得彩蛋提供名额 1 次（彩蛋内容包括但不限于「猜电影」「你喜欢的经典影视作品/影人/台词」「电影冷知识」），和我们不定期发放的奖品。本期猜中「第一名」的读者是 <a class="ss-atUser" href="https://sspai.com/u/tkfr8bl4">@jim8t</a>，请这位朋友注意站内私信~本期答案：<a href="https://movie.douban.com/subject/1400829/" target="_blank">我的舅舅 Mon oncle (1958)</a></p><p>&gt; 简单、好用的 <a href="https://sspai.com/item/4?source=ppfv4au3&amp;source_platform=sspai" target="_blank">视频下载工具</a>，少数派为你呈现 🚀</p><p>&gt; &nbsp;关注 <a href="https://www.xiaohongshu.com/user/profile/62fb4cf90000000012002431" target="_blank">本周看什么</a> 小红书 📕，更多影视推荐尽在 <a href="https://sspai.com/tag/%E6%9C%AC%E5%91%A8%E7%9C%8B%E4%BB%80%E4%B9%88">#本周看什么</a> 🎬</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/110158</id>
-            <title>住久了没意思（三）：打造能好好放松的卧室</title>
-            <link>https://sspai.com/post/110158</link>
-            <guid isPermaLink="false">https://sspai.com/post/110158</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 29 May 2026 09:20:56 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>前文回顾：</p>
-<ul>
-    <li><a href="https://sspai.com/prime/story/how-to-renovate-a-rental">租房常见问题与我的改造原则</a></li>
-    <li><a href="https://sspai.com/prime/story/how-to-renovate-a-rental-balcony">从有光的地方开始动手</a></li>
-</ul>
-<p>对大部分人来说，卧室可能是在家里待得最长时间的区域。除了每天睡觉，周末可能也会花很多时间赖在卧室；如果家里比较小，卧室还可能承担休闲和娱乐的功能。即使是最不爱在家待着的选手，卧室也是家里必须保留的地方。所以弄完了有光的地方，接下来就从家里最重要也最不可或缺的地方下手吧。</p>
-<p>因为户型不同、生活习惯不同，所以每个人对卧室的定位也不一样，需要满足的功能也有很大差别。不过我想，所有人都认同的是：卧室要优先保障休息质量，因此卧室的<strong>第一定位应该是休息空间</strong>。在这个基础上，我们还可以把卧室包装成：舒适的阅读空间、最让人放松的角落，松散但出片的地方等等。我将根据这些定位，来为大家提供一些经验和布置技巧。</p>
-<h2>基础定位：休息空间要做到放松并恢复能量</h2>
-<p>在开始布置之前，我们先要明确一点：高质量的休息是什么。高质量的休息很难用过程来形容，还是要看结果。想象一下你所经历过的好的睡眠，是不是觉得起床之后神清气爽、精力充沛？没错，好的休息（不管是睡眠还是其他类型的休息）就是能让你放松，并在有限的时间内把能量恢复做到最大化。因此不管你怎么折腾卧室，都要以这两点作为目标：<strong>沉浸式的放松，最大化恢复能量。</strong></p>
-<h3>放松：把环境的能量降下来</h3>
-<p>卧室作为休息空间需要完成的第一个目标，就是让你一进来就能感到身心放松。想要达到这个目的需要考虑很多因素，但考虑到个体差异，追求大而全的思路是行不通的。综合了我身边的朋友（尤其是有睡眠障碍的朋友）的反馈，我总结了几个大家高频提到的、事关放松程度的因素：光照、触觉以及视觉。</p>
-<h4>暖光</h4>
-<p>无论是白天还是晚上，当你准备休息的时候，光照都应该是尽可能低的，因此选择合适的<strong>遮光帘</strong>很有必要。一个好的遮光帘可以阻挡大部分的可见光，保证卧室在你休息期间是黑暗且沉静的，这种低光照环境能帮助我们快速进入休息状态，对于改善入睡困难或失眠都是很有益处的。</p>
-<p>如果你想一踏入卧室就逐渐进入放松状态，一个实用的方法是：<strong>在卧室内多使用暖光</strong>，<strong>且避免光照处于特别强烈的状态</strong>。暖光源具有一些「抚慰人心」的作用，在晚上进入偏暖色和黄色的环境可以缓解紧绷感，更适合下班后放松情绪。同时，暖光通常更柔和，对眼睛的刺激感相对更低，尤其适合睡前阅读、整理、聊天这类低强度活动，这对身体来说也是一种进入休息状态的提示。</p>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/05/25/article/86735495dcc7e38776521b2f6d426650.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
-    <figcaption>晚上暖光情况下我的卧室状况</figcaption>
-</figure>
-<p>如果你有条件更换卧室主灯，可以选择支持 <strong>2700K–3000K </strong>左右暖光的产品。假设不行，也可以考虑用一个<strong>落地灯+智能灯泡</strong>来替代主灯。以我为例，我的卧室主灯是一个很普通的白光吸顶灯，为了避免破坏房东原有的灯具，我就直接用一个宜家落地灯+智能灯泡来解决问题。落地灯的照明范围不如主灯大，但是我可以把照明范围只控制在床附近，这样我下班回家进入的场景就是：床的周围被暖光围绕，而卧室的其他区域又相对昏暗，这个场景会让我一下子感受到足够的温馨和松弛感，休息的欲望也就被激发了。因此，就算你的主灯不支持，也有替代方案可以实现目的，而且替代方案似乎效果更好。</p>
-<figure class="image image_resized ss-img-wrapper" style="width: 369px;"><img src="https://cdnfile.sspai.com/2026/05/25/article/ed1e3882e34dd69a395036f6d8549544.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
-    <figcaption>nano leaf 的智能灯泡，是我现在卧室的主力照明设备</figcaption>
-</figure>
-<h4>软垫 or 地毯</h4>
-<p>和光照同样重要的是我们的触觉，一些柔软的触感也能让身体快速放松下来，<strong>我最推荐的做法是：在床边放一块地毯或是软垫</strong>。设想一下，在你准备上床的时候踩到的是柔软的地毯而不是冰冷的地板，那心情应该更能快速舒缓下来，放松的目的也就容易达到了。</p>
-<p>在选择上，我建议大家尽量选择长毛的地毯或者软垫，这类地毯的触感更好，不会扎脚。但如果你和我一样担心清洁问题，也可以选择底层加厚的可拆洗地毯，厚度足够而且踩上去的支撑力也很不错，这样短毛地毯也就可以跟长毛地毯等效了。</p>
-<p>另外，床边也是我认为放地毯最合适的位置，床边如果什么都没有，视觉上容易显得空。加一块地毯后，床的区域会被「框」出来，卧室会更像一个完整的休息空间；还能把很多有柜子、床边等这种硬朗的线条中和掉，把空间塑造的更柔和，更能为我们营造温馨的氛围。</p>
-<figure class="image image_resized ss-img-wrapper" style="width: 457px;"><img src="https://cdnfile.sspai.com/2026/05/25/660dad1c068c5f232fbc5c4ed0e99e78.JPEG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
-    <figcaption>我选择在卧室床边放置了一块可拆洗的短毛地毯</figcaption>
-</figure>
-<h4>抱枕 or 毛绒公仔</h4>
-<p>除了地毯，抱枕或毛绒公仔也是改善触觉的好物件。卧室里的松弛感讲究的是一种氛围，这些柔软的抱枕、公仔和地毯一样，都可以减少硬朗感，让你的卧室能释放出更多「放松的信号」。</p>
-<p>有些人睡觉的时候是习惯抱着东西的，这样的话选一些毛绒抱枕或是中型玩偶比较实用。如果你只是偶尔抱一抱，多数时候把它们当做装饰，那么可以像我一样选择一两个大型公仔，让你一看到它们就想「窝着」。</p>
-<figure class="image image_resized ss-img-wrapper" style="width: 411px;"><img src="https://cdnfile.sspai.com/2026/05/25/article/5be130597a9b779544cc82c843e56be9.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
-    <figcaption>玩偶的作用就是让床看起来更温暖</figcaption>
-</figure>
-<p>无论你的偏好是什么，如何选择，我都建议你不要集中摆放太多抱枕或公仔，这样容易看起来很混乱，不利于放松和休息。要始终牢记的一点是，布置卧室不是布置工位，东西太多不仅不会有帮助，反而会造成压力源，阻碍我们放松和休息，应该尽可能做到「化繁为简」，避免杂乱无章。</p>
-<h4>干净整洁的视觉</h4>
-<p>承接上面说的「化繁为简」，除了要注意东西不能太多以外，还应该注意整理和收纳，保证视觉上的干净整洁。因为，<strong>杂乱可能会持续给人一种「还有事情没做完」的暗示</strong>，从而演变成一种压力来源，导致我们的身心都很难进入放松状态。想要在卧室里避免混乱，首先要知道卧室里的混乱的来源，比如：堆衣服，过多的外露杂物，插排和线多且乱，开放式收纳太满等等。针对这些问题，我给你以下建议：</p>
-<ul>
-    <li>脏衣服不要直接堆放在外面，使用脏衣篓进行收纳，但一定不要堆放很久才集中清洗，保证视觉上「脏衣服永远在脏衣篓里面而不是冒出来」，同时把脏衣篮放在不太显眼的位置。</li>
-    <li>将摆件、书籍等物品使用收纳架归置好。如果采用的是开放式收纳架，可以直接选择一个大号的架子尽可能收纳全部，避免开放式收纳太多。</li>
-</ul>
-<figure class="image image_resized ss-img-wrapper" style="width: 585px;"><img src="https://cdnfile.sspai.com/2026/05/25/article/f9694947e4945ea488f5bd05fc88ca79.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
-    <figcaption>这类横向式置物架用途很多，储物使用且颜值过关</figcaption>
-</figure>
-<ul>
-    <li>减少线的使用，尽量把充电线遮挡住，或采用无线充电。</li>
-    <li>床上不要放太多东西，包括已经提到的公仔和抱枕。</li>
-    <li>在卧室中保留适当的留白，不要放得太满。</li>
-</ul>
-<p>以我的卧室为例。一般我都将脏衣篓放在阳台上，这样晚上回家拉上窗帘以后，整个卧室内完全看不到脏衣服。同时，我家里最多的东西就是书，鉴于客厅已经放满不适合收纳，我只能在卧室收纳我的书，以及很多摆件和其他的物品。这么一看，我可能需要多个收纳工具才能把这些东西都规整好。然而本着尽可能精简的原则，我选择直接用一个长收纳架直接搞定，而不是用多个小书架、边柜等组合收纳。这个方案的好处就是让收纳集中完成，不会在每个角落都看到用于收纳的柜子或架子等，避免显得杂乱无章。</p>
-<p>假设条件允许，你也可以和我一样，把<strong>大部分需要充电的物品从卧室中移出</strong>。在我的卧室中，只保留了一个需要日常插线充电的 iPad，并且将充电线遮挡在了书架之后，其余所有的电子产品（包括手机、电脑、耳机等）全部移出了卧室。这样不仅避免了在卧室里使用很多数据线导致看起来杂乱无章，同时也获得了一个安静、独立的睡眠空间，避免了躺下疯玩手机无法入睡的情况。另外，我还将原来放置在窗边的唱片柜移出了卧室，将床边完全留白，在视觉上就敞亮了许多。合理的收纳与合适的留白搭配，让卧室看起来整洁轻松，拥挤感和压迫感不再。</p>
-<h4>合理的动线</h4>
-<p>休息的水平和移动息息相关。设想一下，如若你在卧室里每个动作都需要大量或连续的移动才能完成，那应该很难进入稳定的休息状态。举一个我自己的例子，最开始为了放置投影仪，我把床头靠在了卧室的右墙，通道留在了卧室的左墙。这么一来，每次我要晾衣服或者放衣服，都要绕着卧室走一大圈才能到达阳台。不仅如此，因为走廊放在了左墙，所以所有的储物物品（例如架子，推车箱等）都在左边，每次取物的动线也很绕。</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/110106</id>
-            <title>Await：五分钟，把点子变成 iPhone 小组件</title>
-            <link>https://sspai.com/post/110106</link>
-            <guid isPermaLink="false">https://sspai.com/post/110106</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 29 May 2026 07:00:28 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><p><strong>利益相关声明：</strong>作者是文中产品 Await 的开发者。</p><hr /><p>我女友在网上看到一张 ADHD Bingo 卡片。它把一些日常自我管理事项做成 bingo 格子：规律睡眠、少刷信息流、运动 15 分钟、晒太阳、刷牙、出门……每完成一项，就划掉一个。</p><p>它是手绘的，质感很好，但只存在于截图收藏夹里。</p><p>我看到它的第一个念头是：这不就是一个主屏小组件该有的样子吗？点一下格子，完成；零点自动清空，明天重来。如果它真的放在主屏上，每天打开手机都能看到，就会和收藏夹里的那张截图完全不一样。</p><p>我打开 Codex，用自己做的工具 Await 复刻了一版。基础结构大概一分半，再调几轮：用手绘网格替换方正边框，用荧光笔替换完成标记，加上每天零点重置。前后五分钟，它就从一张纸上的想法，变成了真的放在我女友 iPhone 主屏上的小组件。</p><figure class="image image_resized ss-img-wrapper" style="width: 300px;"><img alt="放到 iPhone 主屏上的 ADHD Bingo 小组件" src="https://cdnfile.sspai.com/2026/05/25/0c7246dc35872b2747bd78bf12ff34a9.PNG?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>放到 iPhone 主屏上的 ADHD Bingo 小组件</figcaption></figure><h2>那些太小、又太值得存在的点子</h2><p>有很多点子就停在这里：聊天记录里、截图收藏夹里、某个「有空再做」的念头里。</p><p>不是不够好，而是太小了。小到不值得专门做一个 App，但如果真的存在，又会是每天都用得到的小作品。</p><p>iPhone 主屏上的小组件，可能是离人最近、也最小的一种界面。问题是，正常的 iOS 开发路径对这类小作品太重了。哪怕只是想在主屏上放一个自定义的小界面，仍然要面对 Xcode、工程结构、WidgetKit extension、打包、读完仍然不知道怎么回事的文档……这些准备工作加在一起，常常比想法本身还要重。</p><p>对普通用户来说，这条路几乎不存在；对开发者来说，也往往会因为麻烦而搁置。</p><p>Await 想做的，就是缩短这段距离。</p><h2>描述出来，放上去</h2><p>Await 是一个 iOS App，可以用 TypeScript 创建真实的 iPhone 小组件。它不是把网页塞进小组件，也不是生成静态图片，而是可以交互、有状态、真的能放在主屏上长期使用的小组件。</p><p>它的工作方式很接近今天的 vibe coding 流程：把想法告诉 Cursor、Claude Code、Codex 这类 AI 工具，让它写出 TypeScript；再把代码放进 Await，在 iPhone 上实时预览，调整，然后放到主屏。</p><p>一个基础小组件长这样：</p><pre class="language-typescript"><code>import {Text} from 'await';
-
-function widget() {
-return &lt;Text value='Hello World'/&gt;;
-}
-
-Await.define({widget});</code></pre><p>你可以让 AI 把这段改成倒计时、状态卡片、ADHD Bingo，或者任何你能说清楚的作品。对于一个想快速落地的小工具来说，这比从零开始配置 Xcode 工程要轻得多。</p><p>不会写代码的人也可以用。把想法告诉 AI，让它写，你负责看预览、说「这个格子再大一点」「颜色换成这个」。</p><p>现阶段，Await 没有把对话式 AI 直接做进 App。</p><p>AI coding 工具本身还在快速变化，模型、编辑器、工作流都会继续变得更好。Await 更想专注在它们之后的那一步：把 AI 写出来的 TypeScript，变成可以在 iPhone 上预览、调整、放到主屏、甚至打包分享的小组件，让这些小作品最终真正落到 iPhone 上。</p><h2>写完之后，还可以继续调</h2><p>不是所有调整都适合交给 AI。字号差一号、颜色深一点、间距松一些，这些改动说清楚比直接拖一下滑杆要麻烦得多。</p><figure class="image image_resized ss-img-wrapper" style="width: 300px;"><img alt="代码写完之后，Await 可以生成可调整参数的面板" src="https://cdnfile.sspai.com/2026/05/24/0270f5a1f8352b62b61db5af213c027f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>代码写完之后，Await 可以生成可调整参数的面板</figcaption></figure><p>Await 支持把代码里的参数标记成可调节项，App 里会自动生成对应的控制面板：文字、字号、颜色、开关，拖动或点击就能改，代码同步更新。</p><p>这一步同样可以交给 AI。跟它说「把标题、颜色和字号都标记成可调节的」，它改完代码，面板就出现了。</p><p>面板和代码是双向同步的：你在面板里改了一个值，代码里对应的参数也会随之改变。</p><p>这样，一个小组件可以先由 AI 或开发者搭出基本结构，再由使用者在面板里仔细调到自己想要的样子。</p><p>我录了短视频，展示这些小组件在主屏上的效果，以及编辑、预览、调整的过程：</p>  <h2>小，但不只是信息卡片</h2><p>ADHD Bingo 是一个生活化的例子，但 Await 能承载的不止于此。</p><p>它可以是倒计时、服务状态面板、纪念日提醒、常用动作的主屏入口。这些是最容易想到的「信息和按钮」。</p><p>也可以是连续弹奏的 MIDI piano 和 drum pad；是带翻页动画的翻页时钟和阅读器；是 2048、推箱子这样按步骤推进的小游戏；是可以自定义秒针样式的模拟时钟；是高帧率 GIF 动画；也是功能完整的 Apple Music 播放器。</p><p>这些例子在市面上的小组件工具里并不常见。它们更像是在说明：一旦小组件可以承载更复杂的界面、状态和交互，它就不再只是一张静态信息卡片，而可以变成一种很小、很贴近生活的作品。</p><figure class="image image_resized ss-img-wrapper" style="width: 300px;"><img alt="Await 可以自由地创作各种小组件" src="https://cdnfile.sspai.com/2026/05/24/f76986a562ed2f99618dd321b99dba4a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Await 可以自由地创作各种小组件</figcaption></figure><figure class="image image_resized ss-img-wrapper" style="width: 300px;"><img alt="Await 小组件的可能性" src="https://cdnfile.sspai.com/2026/05/24/b436b3d06f9c373095749e6545d4461c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Await 小组件的可能性</figcaption></figure><p>当然，小组件不是完整的 App，iOS 仍然会限制小组件的内存和刷新频率。但我反而觉得这是它的魅力。</p><p>它不是让你把 App 缩小，而是让你重新想清楚：哪些作品值得常驻在主屏上，哪些信息应该在打开手机那一刻就被看见，哪些动作可以不再绕进 App 里。</p><h2>做得不错，也可以分享出去</h2><p>Widgy 和 Scriptable 社区里有一种很有活力的现象：有人认真做一套小组件包，放到网上分享，甚至卖几美元。</p><p>Await 也希望让这种创作更容易发生。一个小组件包可以包含小组件本身、图片资源、参数设置，以及作者设计好的自定义面板。哪些文字可以填写，哪些颜色可以选择，哪些开关或数据源可以配置，都可以由创作者在制作时决定。</p><p>这样分享出去的不是一张截图，也不是一段需要别人自己读懂的代码，而是一件可以安装、配置和使用的作品包。它保留了作者的审美、结构和想法，也让认真做小组件的人有机会把作品分享给更多人。好的作品，不仅值得被分享，也值得获得收入。</p><p>换句话说，小组件包有价值的地方，往往不是代码本身，而是某种已经存在的创作资产、数据资产或服务能力，被做成了更贴近手机使用习惯的主屏入口。</p><p>比如插画师可以把一组角色、壁纸或视觉风格，做成主题时钟、倒计时、音乐控制器、每日签语小组件；用户买到的是这套审美在主屏上的延伸。</p><p>长期整理小众信息的人，也可以把自己的数据源做成小组件：演出开票、球鞋发售、游戏活动日历、潮汐和钓点、某个社区的内部日程，或者带有红包 CPS 的优惠信息入口。用户买到的不是一个空模板，而是持续维护的数据和更方便的查看方式。</p><p>如果是一个课程、社群或服务，也可以把打卡进度、活动倒计时、会员提醒、关键状态做成专属小组件。它不一定要服务很多人，但只要对那一小群人足够有用，就有被付费支持的理由。</p><h2>现在可以下载</h2><span class="ss-application">&nbsp;</span><ul><li>官网：<a href="https://awaitwidget.com/">https://awaitwidget.com</a></li></ul><p>接下来我会继续做更多有意思的示例，让小组件包更适合在社区里分享和传播；也会继续做更多面向 AI coding 的教程，让更多不熟悉开发人也能用 Await 做自己的小作品。</p><p>如果有人用 Await 做出了好作品，我也希望把它们展示出来，让创作者有被看见的机会。</p><p>我希望 Await 最后留下的，是一种更轻的创作入口：不必很大，但足够好看和好玩，也足够贴近自己每天使用手机的方式。</p><p>&gt; 关注 <a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/110120</id>
-            <title>来自九年前的远古音频兵器 - Xperia XZ Premium</title>
-            <link>https://sspai.com/post/110120</link>
-            <guid isPermaLink="false">https://sspai.com/post/110120</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 24 May 2026 21:43:20 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong>&nbsp;</p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。&nbsp;</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><h2>前言</h2><p>Android 设备的音频质量，一直是一个被人们津津乐道的话题。从早年的低质量 AudioFlinger 强制重采样和低精度音频衰减，到现如今的专用 AAudio 高性能输出。但因为 SoC 制造商和 OEM 仍然对 HAL 有较大的自定义能力，不同设备上的音频质量区别仍旧非常巨大。比如联发科的某些设备会将 audioeffect 集成进 vendor 挂载在 AudioFlinger 上而无法关闭，高通设备的 Direct HD 可以在受支持的设备上绕过 effect chain 输出原始音频。</p><p>换句话说，Android 早已具备高质量音频输出的能力，但真正愿意保留声音原貌的厂商，却越来越少了。现在更流行的做法，则是先将所有音频统一送入 mixer 与 DSP 处理链路，再进行输出，在这里进行处理之后再输出。所谓的处理，大多是一些所谓的杜比音效，响度均衡，系统 EQ 甚至 OEM 音效。初衷确实是为了提升用户体验，但为此强行放弃了高保真音频，真的值得吗？</p><p>正巧在几个月前，我购入了一台银色镜面的 Sony Xperia XZ Premium。也正是从那时开始，我重新开始思考 Android 的声音到底应该是什么样子。</p><h2>一睹机皇的风采：硬件配置</h2><p>XZP 搭载了高通 msm8998 SoC，也就是高通骁龙 835。它的硬件基础或许算不上优秀，它没有专用的 DAC，而是使用了高通 Aqstic™ WCD9335 作为 DAC。</p><p>这颗 DAC 本身支持的最高音频规格来到了 32bit/384 KHz (PCM) 。支持 DSD64/128、FLAC、ALAC、LPCM 等常见的无损格式。</p><p>如果你对硬件感兴趣，这是一些来自其它网站的数据：</p><figure class="table"><table><tbody><tr><td>&nbsp;</td><td>44.1kHz</td><td>48kHz</td><td>96kHz</td><td>Z3</td></tr><tr><td>测试项目,dB（A）</td><td>-96.0</td><td>-96.7</td><td>-100.5</td><td>-86.6</td></tr><tr><td>噪声水平，DB（A）</td><td>95.8</td><td>96.6</td><td>105.1</td><td>86.5</td></tr><tr><td>总谐波失真,%</td><td>0.0016</td><td>0.0069</td><td>0.0067</td><td>0.012</td></tr><tr><td>互调失真，%</td><td>0.0055</td><td>0.0050</td><td>0.0023</td><td>0.019</td></tr><tr><td>立体声分离度，dB</td><td>-90.0</td><td>-90.3</td><td>-88.5</td><td>-86.4</td></tr></tbody></table></figure><p>上述数据以及更详细的硬件测试，见 <a href="https://soomal.cc/posts/10100007321/" target="_blank">Soomal</a> 我并不是太懂这方面，所以不说太多了，本文重点也不在此。</p><h2>DIRECT 和 MIXER：把原始音频送进 HAL</h2><p>这里测试了三 (四) 种不同的播放器，分别是：</p><ul><li>Apple Music（集成解码器）</li><li>Sony Music（MediaFramework）</li><li>Poweramp（集成 FFmpeg）</li><li>Sony Music Center（Exclusive）</li></ul><p>经过对比，发现输出类型大概可以分为四类：</p><ul><li>MIXER</li><li>DIRECT，经过了索尼的 effectchain</li><li>DIRECT，高通 DIRECT HD，跳过了 effect chain</li><li>OFFLOAD，非 PCM 且支持的格式会被直接送进 DSP</li></ul><p>这是来自 <code>audio_output_policy.conf</code> 的原始信息：</p><pre class="language-null"><code>outputs {
-  default {
-    flags AUDIO_OUTPUT_FLAG_PRIMARY
-    formats AUDIO_FORMAT_PCM_16_BIT
-    sampling_rates 48000
-    bit_width 16
-    app_type 69937
-  }
-  proaudio {
-    flags AUDIO_OUTPUT_FLAG_FAST|AUDIO_OUTPUT_FLAG_RAW
-    formats AUDIO_FORMAT_PCM_16_BIT
-    sampling_rates 48000
-    bit_width 16
-    app_type 69943
-  }
-  deep_buffer {
-    flags AUDIO_OUTPUT_FLAG_DEEP_BUFFER
-    formats AUDIO_FORMAT_PCM_16_BIT
-    sampling_rates 48000
-    bit_width 16
-    app_type 69936
-  }
-  direct_pcm_16 {
-    flags AUDIO_OUTPUT_FLAG_DIRECT
-    formats AUDIO_FORMAT_PCM_16_BIT|AUDIO_FORMAT_PCM_24_BIT_PACKED|AUDIO_FORMAT_PCM_8_24_BIT|AUDIO_FORMAT_PCM_32_BIT
-    sampling_rates 44100|48000|88200|96000|176400|192000
-    bit_width 16
-    app_type 69936
-  }
-  direct_pcm_24 {
-    flags AUDIO_OUTPUT_FLAG_DIRECT
-    formats AUDIO_FORMAT_PCM_24_BIT_PACKED|AUDIO_FORMAT_PCM_8_24_BIT|AUDIO_FORMAT_PCM_32_BIT
-    sampling_rates 44100|48000|88200|96000|176400|192000|352800|384000
-    bit_width 24
-    app_type 69940
-  }
-  direct_pcm_32 {
-    flags AUDIO_OUTPUT_FLAG_DIRECT
-    formats AUDIO_FORMAT_PCM_32_BIT
-    sampling_rates 44100|48000|88200|96000|176400|192000|352800|384000
-    bit_width 32
-    app_type 69942
-  }
-  compress_passthrough {
-    flags AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING|AUDIO_OUTPUT_FLAG_COMPRESS_PASSTHROUGH
-    formats AUDIO_FORMAT_AC3|AUDIO_FORMAT_E_AC3|AUDIO_FORMAT_E_AC3_JOC|AUDIO_FORMAT_DTS|AUDIO_FORMAT_DTS_HD|AUDIO_FORMAT_DSD
-    sampling_rates 32000|44100|48000|88200|96000|176400|192000|352800
-    bit_width 16
-    app_type 69941
-  }
-  compress_offload_16 {
-    flags AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING
-    formats AUDIO_FORMAT_MP3|AUDIO_FORMAT_PCM_16_BIT_OFFLOAD|AUDIO_FORMAT_PCM_24_BIT_OFFLOAD|AUDIO_FORMAT_FLAC|AUDIO_FORMAT_ALAC|AUDIO_FORMAT_APE|AUDIO_FORMAT_AAC_LC|AUDIO_FORMAT_AAC_HE_V1|AUDIO_FORMAT_AAC_HE_V2|AUDIO_FORMAT_WMA|AUDIO_FORMAT_WMA_PRO|AUDIO_FORMAT_VORBIS|AUDIO_FORMAT_AAC_ADTS_LC|AUDIO_FORMAT_AAC_ADTS_HE_V1|AUDIO_FORMAT_AAC_ADTS_HE_V2
-    sampling_rates 44100|48000|88200|96000|176400|192000
-    bit_width 16
-    app_type 69936
-  }
-  compress_offload_24 {
-    flags AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING
-    formats AUDIO_FORMAT_PCM_24_BIT_OFFLOAD|AUDIO_FORMAT_FLAC|AUDIO_FORMAT_ALAC|AUDIO_FORMAT_APE|AUDIO_FORMAT_VORBIS|AUDIO_FORMAT_WMA|AUDIO_FORMAT_WMA_PRO
-    sampling_rates 44100|48000|88200|96000|176400|192000
-    bit_width 24
-    app_type 69940
-  }
-}</code></pre><h2>MIXER：普通应用的输出方式</h2><p><strong>对于一般的应用输出音频，无论音频规格有多高，输出线程通常都是 MIXER（type 0），来看一个例子：</strong></p><pre class="language-null"><code>output thread 0xf3603f40, name AudioOut_D, tid 1218, type 0 (MIXER):
-  I/O handle: 13
-  Standby: no
-  Sample rate: 48000 Hz
-  HAL frame count: 192
-  HAL format: 0x1 (AUDIO_FORMAT_PCM_16_BIT)
-  HAL buffer size: 768 bytes
-  Channel count: 2
-  Channel mask: 0x00000003 (front-left, front-right)
-  Processing format: 0x5 (AUDIO_FORMAT_PCM_FLOAT)
-  Processing frame size: 8 bytes
-  Pending config events: none
-  Output device: 0x2 (AUDIO_DEVICE_OUT_SPEAKER)
-  Input device: 0 (AUDIO_DEVICE_NONE)
-  Audio source: 0 (default)
-  Normal frame count: 960
-  Last write occurred (msecs): 14
-  Total writes: 40169
-  Delayed writes: 0
-  Blocked in write: no
-  Suspend count: 0
-  Sink buffer : 0xf38c0000
-  Mixer buffer: 0xf38b6000
-  Effect buffer: 0xf38be000
-  Fast track availMask=0xf8
-  Standby delay ns=3000000000
-  AudioStreamOut: 0xf48ac6b8 flags 0x6 (AUDIO_OUTPUT_FLAG_PRIMARY|AUDIO_OUTPUT_FLAG_FAST)
-  Frames written: 38562240
-  Suspended frames: 0
-  PipeSink frames written: 38562240
-  Hal stream dump:
-  Thread throttle time (msecs): 0
-  AudioMixer tracks: 1 
-  Master mono: off</code></pre><p>在该设备的 MIXER 输出线程中，所有进入该混音路径的音频都最终会被转换为 48 kHz / PCM 16-bit 输出格式，此类行为和输出设备类型无关。</p><pre class="language-null"><code>1 Effect Chains
-    1 effects for session 6953
-In buffer    Out buffer                 Active tracks:
-0xf717e000   0xf7182000 -&gt; 0xf35e7000   0
-Effect ID 971:
-Session Status State Engine:
-06953   000    003   0xf489a1d0
-Descriptor:
-- UUID: af8da7e0-2ca1-11e3-b71d-0002a5d5c51b
-- TYPE: ec7178ec-e5e1-4432-a3f4-4657e6795210
-- apiVersion: F38B4040
-- flags: 00400240 (conn. mode: insert, insert pref: any, volume mgmt: implements control, device indication: requires updates, input mode: not set, output mode: not set, offloadable)
-- name: Sonysweffect
-- implementor: SONY
-- data: float
-- Input configuration:
-Buffer     Frames  Smp rate Channels Format
-0xf717e000 01920   48000    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
-- Output configuration:
-Buffer     Frames  Smp rate Channels Format
-0xf7182000 01920   48000    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
-- HAL buffers:
-In(0xf717e000) InConversion(nullptr) Out(0xf7182000 -&gt; 0xf35e7000) OutConversion(nullptr)
-1 Clients:
- Pid Priority Ctrl Locked client server
-17347        0  yes    yes      0      0
-SonySWEffect
-EffectsSt: DN VPT CPSP CAPLUS ALC 
-WrapSt: ACTIVE 
-SupOnDev: DN CA CPSP XLOUD ALC 
-VPT mode: 0
-In Fmt: 0x5
-Out Fmt: 0x5
-In SR: 48000 Hz
-Out SR: 48000 Hz
-Cur Dev: 0x2
-Cur LeftVol: 4096
-Cur RightVol: 4096</code></pre><p>AudioFlinger 在 mixer 阶段统一完成多路音频的混合与处理，并在写入 HAL 之前进行格式转换。因此对于 MIXER 路径的输出而言，最终进入硬件层的音频格式固定为 48 kHz / 16-bit PCM。无论原始音频文件质量如何，都会被处理之后送入 HAL. 通过 AAudio 输出的音频也会进入这个路径。</p><p>在 effect chain 部分，可以观察到 Sony 的 audio effect 已经被挂载到当前 session，但 Active tracks 显示为 0，说明该 effect 当前并未绑定到任何正在播放的音频流。</p><p>这也意味着包括 DSEE、ClearAudio+ 等处理效果，在非白名单应用下并不会被激活。（推测）</p><p>实测的听感也符合上述结论和推测。</p><h2>DIRECT with effect chain：DIRECT 也有音效处理</h2><p>索尼自己的索尼音乐会走这个奇怪的路径。<br />&nbsp;</p><pre class="language-null"><code>Output thread 0xef375000, name AudioOut_4F5, tid 24237, type 1 (DIRECT):
-  I/O handle: 1269
-  Standby: no
-  Sample rate: 96000 Hz
-  HAL frame count: 7680
-  HAL format: 0x6 (AUDIO_FORMAT_PCM_24_BIT_PACKED)
-  HAL buffer size: 46080 bytes
-  Channel count: 2
-  Channel mask: 0x00000003 (front-left, front-right)
-  Processing format: 0x6 (AUDIO_FORMAT_PCM_24_BIT_PACKED)
-  Processing frame size: 6 bytes
-  Pending config events: none
-  Output device: 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
-  Input device: 0 (AUDIO_DEVICE_NONE)
-  Audio source: 0 (default)
-  Normal frame count: 7680
-  Last write occurred (msecs): 72
-  Total writes: 55
-  Delayed writes: 0
-  Blocked in write: yes
-  Suspend count: 0
-  Sink buffer : 0xefdd3000
-  Mixer buffer: 0xefdb4000
-  Effect buffer: 0xefc62000
-  Fast track availMask=0xfe
-  Standby delay ns=1000000000
-  AudioStreamOut: 0xefd836b8 flags 0x1 (AUDIO_OUTPUT_FLAG_DIRECT)
-  Frames written: 422400
-  Suspended frames: 0</code></pre><p>可以观察到 AUDIO_OUTPUT_FLAG_DIRECT FLAG. DIRECT 路径下，音频不再进入 mixer 进行统一重采样与位深转换，而是直接按输出 profile 以高分辨率 PCM 写入 HAL。</p><pre class="language-null"><code>Dsee 0xf186fa00:
- DsxParam:
-   -Sample rate: 44100 -Codec: -1 -Average bitrate: -1
- Mode: disable
-  Sample rate: 44100
-  Format: 0x1 (pcm16)
-  Fragment size: 14208
-
-HAL_Volume
-  Volume_l: 1.00000000
-  Volume_r: 1.00000000
-  Stream volumes in dB: 0:-17, 1:-26, 2:-26, 3:-26, 4:-26, 5:-26, 6:-inf, 7:-26, 8:-18, 9:-96, 10:0, 11:0, 12:0
-  Normal mixer raw underrun counters: partial=0 empty=0
-  1 Tracks of which 1 are active
-    T Name Active Client Session S  Flags   Format Chn mask  SRate ST  L dB  R dB  VS dB   Server FrmCnt  FrmRdy F Underruns  Flushed Main Buf  Aux Buf
-         0    yes  23947    7249 A  0x000 00000001 00000003  44100  3     0     0     0  0002C3A0  22932   19380 A         0        0 EF31C000 00000000
-  1 Effect Chains
-    1 effects for session 7249
-In buffer               Out buffer                 Active tracks:
-0xef31c000 -&gt; 0xf70f4000   0xf70f4000 -&gt; 0xef31c000   1
-Effect ID 1075:
-Session Status State Engine:
-07249   000    003   0xf3d858a0
-Descriptor:
-- UUID: af8da7e0-2ca1-11e3-b71d-0002a5d5c51b
-- TYPE: ec7178ec-e5e1-4432-a3f4-4657e6795210
-- apiVersion: F3DCD940
-- flags: 00400240 (conn. mode: insert, insert pref: any, volume mgmt: implements control, device indication: requires updates, input mode: not set, output mode: not set, offloadable)
-- name: Sonysweffect
-- implementor: SONY
-- data: float
-- Input configuration:
-Buffer     Frames  Smp rate Channels Format
-0xf70f4000 03552   44100    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
-- Output configuration:
-Buffer     Frames  Smp rate Channels Format
-0xf70f4000 03552   44100    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
-- HAL buffers:
-In(0xef31c000 -&gt; 0xf70f4000) InConversion(nullptr) Out(0xf70f4000 -&gt; 0xef31c000) OutConversion(nullptr)
-1 Clients:
- Pid Priority Ctrl Locked client server
-17347        0  yes    yes      0      0
-Effect_params
-  Effect_enabled: 1
-  Effect_volume: 420
-SONY_Effects
-  ClearAudio plus status: 1
-  ca_plus_index: 0
-  VPT mode: 0
-  Dynamic_normalizer: 1
-  S-Force: 0
-  Clear Phase for Speaker: 4
-  ca_band_level: 0 0 0 0 0 0</code></pre><p>在索尼音乐的 DIRECT 输出下，effect chain 生效了。可以观察到 VPT 和 ClearAudio 都在工作，DSEE 只有在特定条件下才工作（可以正常工作，但是我没开）。在这个实例中，送入 AudioFlinger 的就是 PCM 流。</p><p>未观察到其它应用播放音频会经过此路径，实测的听感也符合上述结论和推测。</p><h2>DIRECT with DIRECT HD：绕过绝大多数 effect chain</h2><p>在 Poweramp 的 HIRES 输出模式上观察到了 DIRECT，而且这个 DIRECT 有点特殊，我们一点一点看。</p><h3>Poweramp 探测到的音频输出信息</h3><pre class="language-null"><code>reading /vendor/etc/audio_output_policy.conf
-has direct_pcm_24, sampling_rates=44100|48000|88200|96000|176400|192000|352800|384000
-AUDIO_OUTPUT_FLAG_DIRECT direct_pcm_24
-has direct_pcm_24 formats=AUDIO_FORMAT_PCM_24_BIT_PACKED|AUDIO_FORMAT_PCM_8_24_BIT|AUDIO_FORMAT_PCM_32_BIT
-FLAG_VARIANT_DIRECT_HD via direct_pcm_24
-FLAG_NEEDS_DEEP_BUFFER android_sdk=28
-USB can handle Hi-Res - sdk=28
-&gt;&gt;&gt;OK flags=0x854616600000000
-FLAG_VARIANT_DIRECT_HD
-FLAG_SUPPORTS_PCM_8_24
-FLAG_SUPPORTS_PCM_24
-FLAG_SUPPORTS_PCM_32
-FLAG_SUPPORTS_UNITY_GAIN_STREAM
-FLAG_SUPPORTS_USB
-FLAG_NEEDS_EXTRA_SLEEPS
-FLAG_SUPPORTS_LDAC
-FLAG_NEEDS_DEEP_BUFFER
-FLAG_ALLOW_DVC_EFFECT
-FLAG_BT_DVC_EFFECT
-INTERNAL_OUTPUT_FLAG_SR_384K
-INTERNAL_OUTPUT_FLAG_SR_352K
-INTERNAL_OUTPUT_FLAG_SR_192K
-INTERNAL_OUTPUT_FLAG_SR_176K
-INTERNAL_OUTPUT_FLAG_SR_96K
-INTERNAL_OUTPUT_FLAG_SR_88K
-INTERNAL_OUTPUT_FLAG_SR_48K
-INTERNAL_OUTPUT_FLAG_SR_44K</code></pre><p>Poweramp 探测到了非常多支持的音频规格，这些信息是从 &nbsp;<code>/vendor/etc/audio_output_policy.conf</code> 中获取的，说明设备本身也支持这些规格。</p><h3>AudioFlinger 和 effect chain</h3><pre class="language-null"><code>Output thread 0xf3074000, name AudioOut_5CD, tid 27468, type 1 (DIRECT):
-  I/O handle: 1485
-  Standby: no
-  Sample rate: 48000 Hz
-  HAL frame count: 3840
-  HAL format: 0x3 (AUDIO_FORMAT_PCM_32_BIT)
-  HAL buffer size: 30720 bytes
-  Channel count: 2
-  Channel mask: 0x00000003 (front-left, front-right)
-  Processing format: 0x3 (AUDIO_FORMAT_PCM_32_BIT)
-  Processing frame size: 8 bytes
-  Pending config events: none
-  Output device: 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
-  Input device: 0 (AUDIO_DEVICE_NONE)
-  Audio source: 0 (default)
-  Normal frame count: 3840
-  Last write occurred (msecs): 40
-  Total writes: 210
-  Delayed writes: 0
-  Blocked in write: yes
-  Suspend count: 0
-  Sink buffer : 0xef324000
-  Mixer buffer: 0xf2b03000
-  Effect buffer: 0xefdd3000
-  Fast track availMask=0xfe
-  Standby delay ns=1000000000
-  AudioStreamOut: 0xf48ddee8 flags 0x1 (AUDIO_OUTPUT_FLAG_DIRECT)
-  Frames written: 806400
-  Suspended frames: 0</code></pre><p>可以观察到 AUDIO_OUTPUT_FLAG_DIRECT，经过此路径的音频不会被重采样和进行位深转换，因为 Poweramp 已经完成了这些操作（如果符合条件），送入 AudioFlinger 的就是 PCM 流。</p><pre class="language-null"><code>Dsee 0x0:
- Mode: disable
-  Sample rate: 48000
-  Format: 0x3 (pcm32)
-  Fragment size: 23040
-
-HAL_Volume
-  Volume_l: 1.00000000
-  Volume_r: 1.00000000
-  Stream volumes in dB: 0:-17, 1:-24, 2:-6, 3:-26, 4:-14, 5:-6, 6:-inf, 7:-6, 8:-18, 9:-96, 10:0, 11:0, 12:0
-  Normal mixer raw underrun counters: partial=0 empty=0
-  1 Tracks of which 1 are active
-    T Name Active Client Session S  Flags   Format Chn mask  SRate ST  L dB  R dB  VS dB   Server FrmCnt  FrmRdy F Underruns  Flushed Main Buf  Aux Buf
-         0    yes  27110    7337 A  0x000 00000003 00000003  48000  8     0     0     0  000C5D00   7684    3844 A         0      288 EFDD3000 00000000
-  1 Effect Chains
-    1 effects for session 7337
-In buffer               Out buffer                 Active tracks:
-0xefdd3000 -&gt; 0xf7112000   0xf7112000 -&gt; 0xefdd3000   1
-Effect ID 1099:
-Session Status State Engine:
-07337   000    003   0xf489ab30
-Descriptor:
-- UUID: 119341a0-8469-11df-81f9-0002a5d5c51b
-- TYPE: 09e8ede0-ddde-11db-b4f6-0002a5d5c51b
-- apiVersion: F38B5B40
-- flags: 00000050 (conn. mode: insert, insert pref: last, volume mgmt: implements control, input mode: not set, output mode: not set)
-- name: Volume
-- implementor: NXP Software Ltd.
-- data: float
-- Input configuration:
-Buffer     Frames  Smp rate Channels Format
-0xf7112000 03840   48000    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
-- Output configuration:
-Buffer     Frames  Smp rate Channels Format
-0xf7112000 03840   48000    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
-- HAL buffers:
-In(0xefdd3000 -&gt; 0xf7112000) InConversion(nullptr) Out(0xf7112000 -&gt; 0xefdd3000) OutConversion(nullptr)
-1 Clients:
- Pid Priority Ctrl Locked client server
-27110     1337  yes    yes      0      0</code></pre><p>DSEE 挂载到了 effect chain 上，但被禁用了。可以看见 HAL 音量是 1.00000000，可能是因为 Poweramp 传递了 ALWAYS_UNITY_GAIN，它禁用了 HAL 的音频衰减，通过自己的 DVC 控制。</p><p>值得注意的是 effect chain 中出现了一个 Volume (NXP Software Ltd.). 我在网上并没有查到相关的信息，这个效果器的输出和输出却都是 48000，标识着音频可能进行了重采样，但不太可能，原因下述：</p><p>HAL 的音量是 1.00000000，说明 HAL 并没有调整音量，这个效果器可能是用来通知播放器 DVC 音量变化而非直接自行处理的音频，同时在其它播放器输出中并没有发现这个效果器，而测试的播放器中除了 Poweramp 都没有 DVC 功能。</p><p>作为对比，在关闭 DVC 后，发现了如下变化;</p><pre class="language-null"><code>Dsee 0x0:
- Mode: disable
-  Sample rate: 48000
-  Format: 0x6 (pcm24)
-  Fragment size: 23040
-
-HAL_Volume
-  Volume_l: 0.05128648
-  Volume_r: 0.05128648
-  Stream volumes in dB: 0:-17, 1:-26, 2:-26, 3:-26, 4:-26, 5:-26, 6:-inf, 7:-26, 8:-18, 9:-96, 10:0, 11:0, 12:0
-  Normal mixer raw underrun counters: partial=0 empty=0
-  1 Tracks of which 1 are active
-    T Name Active Client Session S  Flags   Format Chn mask  SRate ST  L dB  R dB  VS dB   Server FrmCnt  FrmRdy F Underruns  Flushed Main Buf  Aux Buf
-         0    yes  27110    7385 A  0x000 00000006 00000003  48000  3     0     0     0  00027600   7684    7684 A         0        0 F3657000 00000000
-  0 Effect Chains
-  Local log:
-   05-24 18:00:56.490 CFG_EVENT_CREATE_AUDIO_PATCH: old device 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE) new device 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
-   05-24 18:00:56.493 AT::add       (0xf48f1080)      0     no  27110    7385 A  0x000 00000006 00000003  48000  3     0     0     0  00000000   7684       0 f         0        0 F3657000 00000000</code></pre><p>注意到 HAL 进行了音量衰减，而 Volume 效果器消失了，如果它是用来调整音量的，为什么反而不存在了？同时观察到了系统音量变化并没有影响 HAL 音量为 1，而 DVC 关闭时会变化。Volume 效果器并没有实际处理音频，所以也没有重采样这一说。</p><p>在实测中听感的变化也验证了上述推测。</p><h2>OFFLOAD：针对非 PCM 流的直通</h2><p>在索尼音乐的实测中，还发现了一个不是很常见的输出模式：</p><pre class="language-null"><code>Output thread 0xf3064000, name AudioOut_67D, tid 31664, type 4 (OFFLOAD):
-  I/O handle: 1661
-  Standby: no
-  Sample rate: 44100 Hz
-  HAL frame count: 32768
-  HAL format: 0x1000000 (AUDIO_FORMAT_MP3)
-  HAL buffer size: 32768 bytes
-  Channel count: 2
-  Channel mask: 0x00000003 (front-left, front-right)
-  Processing format: 0x1000000 (AUDIO_FORMAT_MP3)
-  Processing frame size: 1 bytes
-  Pending config events: none
-  Output device: 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
-  Input device: 0 (AUDIO_DEVICE_NONE)
-  Audio source: 0 (default)
-  Normal frame count: 32768
-  Last write occurred (msecs): 166
-  Total writes: 13
-  Delayed writes: 0
-  Blocked in write: no
-  Suspend count: 0
-  Sink buffer : 0xf2b03000
-  Mixer buffer: 0xefa83000
-  Effect buffer: 0xef903000
-  Fast track availMask=0xfe
-  Standby delay ns=1000000000
-  AudioStreamOut: 0xf48dde70 flags 0x31 (AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING)
-  Frames written: 262144
-  Suspended frames: 0</code></pre><p>观察到模式是 OFFLOAD（type 4），HAL 识别到了是 AUDIO_FORMAT_MP3，并携带了 <code>AUDIO_OUTPUT_FLAG_DIRECT|AUDIO_OUTPUT_FLAG_COMPRESS_OFFLOAD|AUDIO_OUTPUT_FLAG_NON_BLOCKING</code> 这些 FLAGS。这些 FLAG 大致的意思就是 DIRECT 输出，不进行压缩，以非阻塞的方式输出。</p><p>在此音频路径中 MP3 被直接 HAL 送进了 DSP 进行解码，CPU 没有参与音频处理。它也绕过了 MIXER 的那些重采样和位深转换，在播放不同规格的 MP3 文件时观察到了 HAL 规格变化。</p><pre class="language-null"><code>Dsee 0xf13e5980:
- DsxParam:
-   -Sample rate: 44100 -Codec: -1 -Average bitrate: -1
- Mode: disable
-  Sample rate: 44100
-  Format: 0x1 (pcm16)
-  Fragment size: 14208
-
-HAL_Volume
-  Volume_l: 1.00000000
-  Volume_r: 1.00000000
-  Stream volumes in dB: 0:-17, 1:-30, 2:-30, 3:-30, 4:-30, 5:-30, 6:-inf, 7:-30, 8:-18, 9:-96, 10:-3.7, 11:0, 12:0
-  Normal mixer raw underrun counters: partial=0 empty=0
-  1 Tracks of which 1 are active
-    T Name Active Client Session S  Flags   Format Chn mask  SRate ST  L dB  R dB  VS dB   Server FrmCnt  FrmRdy F Underruns  Flushed Main Buf  Aux Buf
-         0    yes  31374    7737 A  0x000 00000001 00000003  44100  3     0     0     0  00006F00  22932   12276 A         0        0 EFC28000 00000000
-  1 Effect Chains
-    1 effects for session 7737
-In buffer               Out buffer                 Active tracks:
-0xefc28000 -&gt; 0xf70bc000   0xf70bc000 -&gt; 0xefc28000   1
-Effect ID 1195:
-Session Status State Engine:
-07737   000    003   0xf489ae00
-Descriptor:
-- UUID: af8da7e0-2ca1-11e3-b71d-0002a5d5c51b
-- TYPE: ec7178ec-e5e1-4432-a3f4-4657e6795210
-- apiVersion: F12AC400
-- flags: 00400240 (conn. mode: insert, insert pref: any, volume mgmt: implements control, device indication: requires updates, input mode: not set, output mode: not set, offloadable)
-- name: Sonysweffect
-- implementor: SONY
-- data: float
-- Input configuration:
-Buffer     Frames  Smp rate Channels Format
-0xf70bc000 03552   44100    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
-- Output configuration:
-Buffer     Frames  Smp rate Channels Format
-0xf70bc000 03552   44100    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
-- HAL buffers:
-In(0xefc28000 -&gt; 0xf70bc000) InConversion(nullptr) Out(0xf70bc000 -&gt; 0xefc28000) OutConversion(nullptr)
-1 Clients:
- Pid Priority Ctrl Locked client server
-17347        0  yes    yes      0      0
-Effect_params
-  Effect_enabled: 1
-  Effect_volume: 259
-SONY_Effects
-  ClearAudio plus status: 1
-  ca_plus_index: 0
-  VPT mode: 0
-  Dynamic_normalizer: 1
-  S-Force: 0
-  Clear Phase for Speaker: 4
-  ca_band_level: 0 0 0 0 0 0
-  Local log:
-   05-24 19:23:24.969 CFG_EVENT_CREATE_AUDIO_PATCH: old device 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE) new device 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
-   05-24 19:23:24.971 AT::add       (0xf48ef280)      0     no  31374    7737 A  0x000 00000001 00000003  44100  3     0     0     0  00000000  22932       0 f         0        0 EFC28000 00000000</code></pre><p>这个路径的 effect chain 上挂的都是索尼效果器。可以观察到 ClearAudio, VPT 之类的功能都在正常工作。</p><p>没有压缩编码的上下文（如 MP3/AAC 的 metadata），DSEE 可以正常工作（我没开）。</p><p>值得注意的是，HAL 音量同样是 1.00000000，但是 effect chain 中没有发现 NXP 的 Volume 效果器，这是因为 <code>Dynamic_normalizer: 1</code>，也就是动态均衡器开启了，可能是它替代了 NXP Volume.</p><p>作为对比，我关闭了动态均衡器：</p><pre class="language-null"><code>HAL_Volume
-  Volume_l: 0.03162301
-  Volume_r: 0.03162301
-  Stream volumes in dB: 0:-17, 1:-30, 2:-30, 3:-30, 4:-30, 5:-30, 6:-inf, 7:-30, 8:-18, 9:-96, 10:-3.7, 11:0, 12:0
-  Normal mixer raw underrun counters: partial=0 empty=0
-  1 Tracks of which 1 are active
-    T Name Active Client Session S  Flags   Format Chn mask  SRate ST  L dB  R dB  VS dB   Server FrmCnt  FrmRdy F Underruns  Flushed Main Buf  Aux Buf
-         0    yes  31374    7817 A  0x000 00000001 00000003  44100  3     0     0     0  00633D20  22932   12276 A         0        0 EFC6B000 00000000
-  1 Effect Chains
-    1 effects for session 7817
-In buffer               Out buffer                 Active tracks:
-0xefc6b000 -&gt; 0xf70bc000   0xf70bc000 -&gt; 0xefc6b000   1
-Effect ID 1219:
-Session Status State Engine:
-07817   000    000   0xf489b100
-Descriptor:
-- UUID: af8da7e0-2ca1-11e3-b71d-0002a5d5c51b
-- TYPE: ec7178ec-e5e1-4432-a3f4-4657e6795210
-- apiVersion: F48EBE40
-- flags: 00400240 (conn. mode: insert, insert pref: any, volume mgmt: implements control, device indication: requires updates, input mode: not set, output mode: not set, offloadable)
-- name: Sonysweffect
-- implementor: SONY
-- data: float
-- Input configuration:
-Buffer     Frames  Smp rate Channels Format
-0xf70bc000 03552   44100    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
-- Output configuration:
-Buffer     Frames  Smp rate Channels Format
-0xf70bc000 03552   44100    00000003      5 (AUDIO_FORMAT_PCM_FLOAT)
-- HAL buffers:
-In(0xefc6b000 -&gt; 0xf70bc000) InConversion(nullptr) Out(0xf70bc000 -&gt; 0xefc6b000) OutConversion(nullptr)
-1 Clients:
- Pid Priority Ctrl Locked client server
-17347        0  yes    yes      0      0
-Effect_params
-  Effect_enabled: 0
-  Effect_volume: 259
-  Local log:
-   05-24 19:40:49.662 CFG_EVENT_CREATE_AUDIO_PATCH: old device 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE) new device 0x8 (AUDIO_DEVICE_OUT_WIRED_HEADPHONE)
-   05-24 19:40:49.664 AT::add       (0xf128a280)      0     no  31374    7817 A  0x000 00000001 00000003  44100  3     0     0     0  00000000  22932       0 f         0        0 EFC6B000 00000000
-```
-
-观察到 HAL 音量不再是 1，表明 HAL 进行了音量衰减，也说明了索尼音乐没有 DVC 功能。
-
-在实测中，除了 DSEE 的开关之外没有发现其它听感上的区别。</code></pre><h2><strong>放弃了高保真音频，真的值得吗？</strong></h2><p>在剖析了上述四种输出模式之后，我们回到最开始提出的一个问题：</p><p><strong>为此强行放弃了高保真音频，真的值得吗？</strong></p><p>这个问题站在不同人角度看答案是不同的。站在厂商的角度看是没有问题的，因为 DIRECT 不是 Android 默认就提供的，它需要厂商对 HAL 进行定制，而且会破坏杜比音效之类的后处理的兼容性，所以全都走 MIXER 并统一规格，是一个在工程上无可置疑的选择。</p><p>但在我看来，所谓的后处理效果根本就不是必要的。一盘好的母带，已经经过了混音师的调整，他的目的不是「更好听」，而是「更标准」。</p><p>这就像很多电视对画面的后处理一样，看上去确实更艳丽更生动，但是看久了不刺眼吗？色彩和白点标准吗？还原了导演的真实意图吗？为什么电视这么大的屏幕，在制作现场做一个参考性的大屏幕监看都不配？</p><p>换句话说，我们使用的这些回放设备，到底有没有尊重创作者？有没有努力地还原创作者想传递给我们的心意？在现在大多数消费级电子产品上，我可以说：没有。</p><p>在消费级电视上，我们看见了 filmmaker 模式，看见了厂商的一点诚意。但是在手机上，我没有看见任何现在厂商的诚意。</p><p>Xperia 基本已经退出了消费级电子市场，但这部来自 2017 年的上古兵器，却让我对 Xperia 有了新的认识，也让我对「到底是什么是高保真」有了新的认识。</p><p>也许，不作处理的处理，才是最好的处理吧。</p><h2>参见</h2><p>内容同步发表在独立博客 Nalanyinyun's Library 上，欢迎大家前去参观：</p><span class="ss-linkCard">&nbsp;</span><p>本站同时提供了邮件订阅服务，欢迎大家订阅以获得本站的内容更新，本站不定时更新文学类和技术类文章：</p><span class="ss-linkCard">&nbsp;</span><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>
