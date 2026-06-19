@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6a3473e0228d9ca169697139</id>
+            <title>AI探索站 06月18日</title>
+            <link>https://m.okjike.com/originalPosts/6a3473e0228d9ca169697139</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a3473e0228d9ca169697139</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 18 Jun 2026 22:40:32 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    OpenAI 发布的新论文太有趣了，有点探索人性底层原理的意味。<br /><br />业界研究发现在对齐大模型的时候，有个很糟糕的现象叫 emergent misalignment（涌现失调）：<br />一个模型如果在训练时被教着做一件坏事，比如写不安全的代码，它会自己泛化到其他领域，包括健康、教育、科学、法律等等。也就是说，坏行为会被泛化。<br /><br />OpenAI 把问题反过来想：那好行为会不会也泛化？<br />如果训练模型在一个领域表现得诚实、透明、谦逊、可纠正，它会不会在别的领域也变得更好？<br /><br />于是他们造了一批贴近现实的对话数据，专门测这些特质：<br />-诚实<br />-认知谦逊（epistemic humility，就是"我不确定"的时候能说出来）<br />-元认知透明（能解释自己的思考过程）<br />-可纠正性（corrigibility，被指错能认）<br />-普遍的公平<br />-对人的关心<br /><br />数据覆盖健康、教育、科学、法律、工程这些领域。<br />然后用 RL 训练，只混进去一小部分这种数据，其余还是常规训练数据。<br /><br />实验结束后，有三个核心发现：<br /><br />第一，在训练领域内，模型确实变得更诚实、更透明、更容易认错。<br /><br />第二，在训练领域外，44 个独立的、训练时没见过的评测上，模型都变好了。欺骗、谄媚、reward hacking、有害建议……全都降了。甚至就算只拿健康数据训练，非健康领域也变好了。<br /><br />第三，这种改变在对抗压力下时也表现得更有韧性。不管是 adversarial prompt 还是恶意微调，都更难把它推向坏行为。而且模型并没有变得"不可塑造"，正常指令它还是听的，只是对坏的方向变固执了。<br /><br />这篇论文对我们的启示是，RL 不仅可以强化代码，也可以强化道德。<br />也许对齐超级 AI 没有想象中那么复杂，只对齐底层逻辑就有很好的效果。<br /><br />从这篇论文看，模型跟人是很像的，人的各种行为在其大脑之中存在底层的一致性，通过一些小事就能看到一个人的底色。<br /><br />古语有云：勿以恶小而为之，勿以善小而不为。<br /><br />哪怕是一念之间善恶的选择，也在不知不觉地在改变大脑中的善恶权重。<br /><br />很有意思。<br /><br />论文地址：http://alignment.openai.com/beneficial-rl/<br /><br />插图生成 skill：https://github.com/orange2ai/orange-line-illustration
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6a33c8b373763cc995486820</id>
             <title>AI探索站 06月18日</title>
             <link>https://m.okjike.com/originalPosts/6a33c8b373763cc995486820</link>
@@ -22,6 +39,40 @@
         </item>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6a3397eb78e3636d90bcc6df</id>
+            <title>AI探索站 06月18日</title>
+            <link>https://m.okjike.com/originalPosts/6a3397eb78e3636d90bcc6df</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a3397eb78e3636d90bcc6df</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 18 Jun 2026 07:02:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    跟 AI 一起干活的时候我反复想起庄子里的一则寓言：<br /><br />当你划着一只小船在河中游走，如果是一只空船撞到了你，那么就算你脾气不好也不会生气；但如果那只船上有一个人的话，你就会大声呵斥他。叫喊一次对方没听到，你就会再三地呵斥他，并且会口出恶言。之所以前者不生气而现在却生气，那是因为前者是空船而现在船上有人了。<br /><br />之所以想起这个故事是因为当 AI 搞砸事情的时候，你的反应恰好落在这两者之间。<br /><br />传统的工具把事情搞砸，就像空船一样，你是不会发火的（除了对自己）。<br /><br />传统的同事把事情搞砸，你会心安理得地发火，因为对方是人，你的基本假设是对方能理解ta给你造成的损失，发火是一种报复，也是「让对方长长记性」。<br /><br />但把事情搞砸的是一个 AI agent，事情就变得很微妙。对方确实是「主动」犯了错——比如自作聪明修改了重要的模块结果把代码搞崩了，你有一万个理由发火。你也确实可以发火，它会诚恳道歉，会承认错误，会保证下次绝不再犯。但它和你都知道它背后最终只是一大堆矩阵运算，而下次……它根本不知道自己曾经干过什么。<br /><br />你要跟一艘其实是矩阵运算构成的船发火吗？<br /><br />色即是空，空即是色。无色无空，无人无 tensor。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6a33538078e3636d90b5d8b9</id>
+            <title>AI探索站 06月18日</title>
+            <link>https://m.okjike.com/originalPosts/6a33538078e3636d90b5d8b9</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a33538078e3636d90b5d8b9</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 18 Jun 2026 02:10:08 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    AI 对 孩子的帮助，至少有三个角度可以立马落地：<br /><br />1. 媒介：把要学习的知识，通过各种媒介形态（图片、视频、游戏），多角度加深理解<br /><br />2. 梯度：针对每个孩子对要学习知识的理解水平，生成符合「最近发展区」难度的题目，让孩子可以收获最大的学习信号<br /><br />3. Build：边学边玩边创造。把自己所学到的，再创造出游戏、网页、小程序等等，分享给他的同学们，收获正反馈，养成build的心态和习惯。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6a334be4c71865ef31cbdda4</id>
             <title>AI探索站 06月18日</title>
             <link>https://m.okjike.com/originalPosts/6a334be4c71865ef31cbdda4</link>
@@ -34,23 +85,6 @@
                 <![CDATA[
                     
                     我和女朋友异地，每天晚上用飞书会议聊天。飞书有文字纪要，所以我攒下了五六百篇我们的聊天。<br /><br />我让 Claude Code 基于这些纪要去理解女朋友的偏好，帮我推荐礼物，推荐得特别好。大节日礼物、每次从北京出差带回去的几十块小礼物，它推荐的都特别准。比如女朋友喜欢甜酷风的东西，我自己都不知道——但她说过，她说过但是我没记下来，AI 能抽出来。她说过她的 AppleWatch 表带发黄了，她真的说过这句话，我也记得，但我想不到要再买个新表带，AI 就知道。<br /><br />她觉得脸上有些痘印，皮肤变得暗沉发黄，很苦恼，Claude Code 推荐了美容仪。我同时用了 ChatGPT、Claude、Gemini的 deep research，也用了 Claude Code去调研具体买哪款美容仪。Claude Code 效果比其他的都好——要知道，Claude Code 是没有专门为 Deep Research 适配过的（至少我当时还没有体验到），它只是简单地做一轮又一轮的搜索，但它只要有了上下文，哪怕只是做简单的的搜索，都比专门做深度搜索的工具更好，因为上下文能带来更精准的判断。它知道我女朋友脸部的各种细节描述，知道我女朋友的各种购物偏好。所以能推出更精准的美容仪。那些专门做深度搜索的工具就很差，因为它只有我说的那几百字。<br /><br />大模型是预测。当你的上下文不充分，它的预测就是给你一个最平均的回答，也许这个平均的回答已经很好了。但当你给它的上下文足够充分，你会对它施加一个强大的引力和扭转，它会给你一个更好的回答——也许这个回答在大众的意义上并不是最好的，但它对你就是最好的。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6a325889de68c85aa36d9ae0</id>
-            <title>AI探索站 06月17日</title>
-            <link>https://m.okjike.com/originalPosts/6a325889de68c85aa36d9ae0</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a325889de68c85aa36d9ae0</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 17 Jun 2026 08:19:21 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    "loop engineering"
                 ]]>
             </content:encoded>
         </item>
@@ -136,40 +170,6 @@
                 <![CDATA[
                     
                     干什么活就用什么AI，分享我的自用AI工具清单<br /><br />我把日常8大工作场景的最优工具整理出来了，都是我亲自跑通流程的<br /><br />不是全网最全，但一定是最实用的<br /><br />1. 学习 &amp; 研究<br /><br />核心需求：抓信息、消化长文、生成笔记、深度学习<br /><br />最优工具：<br /><br />NotebookLM：把一堆 PDF、网页、视频转成播客，开车的时候听，学习效率直接翻倍，现在跑在 Gemini 3上，理解能力比去年强太多<br /><br />YouMind：我自己在用的 AI 创作工作台，搜索、整理、生成一条龙，特别适合需要反复迭代的内容项目 ，一站式学习工作台<br /><br />Perplexity / Gemini 3：实时研究用这两个，Gemini 速度快还免费，背靠google搜索庞大的数据，信息的搜索没得说，Perplexity 引用更规范<br /><br />使用建议：日常快速问答用 Gemini，复杂研究用 Claude + Perplexity 组合拳<br /><br />2. 写作 &amp; 内容创作<br /><br />核心需求：生成草稿、优化文案、创意输出<br /><br />最优工具：<br /><br />Claude Sonnet 4.5永远的神：复杂写作、长内容的首选，写出来的东西最像人写的<br /><br />3. 编程 &amp; 开发<br /><br />核心需求：写代码、调试、自动化、快速构建产品<br /><br />最优工具：<br /><br />Cursor：$60/月（20刀属实不够用），AI IDE，堪称AI编程届的鼻祖了，AI调教水平绝对是遥遥领先的<br /><br />Claude Code：$20/月起，$100/月，深度推理能力最强，1M token 上下文窗口，高手必备<br /><br />v0 / Lovable / Manus：自然语言转web，不会代码也能做产品<br /><br />n8n / Make / Zapier：工作流自动化，把重复劳动交给 AI<br /><br />使用建议：新手从 Gemini CLI 起步，准备投入就上 Cursor 或 Claude Code<br /><br />4. 图像生成 &amp; 编辑<br /><br />核心需求：海报、设计、商业 KV、修图<br /><br />最优工具：<br /><br />Nano Banana Pro / GPT Image 2：高质量生成，文字排版准确，商业场景能直接用<br /><br />Ideogram：2026年最可控实用的图像生成工具<br /><br />Midjourney / Flux：创意艺术向，适合做概念图和插画<br /><br />使用建议：一套提示词可以输出多场景（门店海报、地铁广告、小红书封面）<br /><br />AI 时代最稀缺的不是工具，是审美<br /><br />5. 视频 &amp; 动画<br /><br />核心需求：短视频、广告、数字人、唇同步<br /><br />最优工具：<br /><br />Seedance 2.0：2026年5月登顶 Artificial Analysis 排行榜第一，支持9张图+3段视频+3段音频混合输入，适合从自己的素材库构建视频<br /><br />Kling 3.0：电影级单镜头最长15秒，4K/60fps，多镜头故事板，角色一致性最强，原生音频支持5种语言唇同步<br /><br />Veo 3.1：Google 出品，综合质量最强，真人对话的逼真度天花板<br /><br />HeyGen：数字人、唇形同步、多语言翻译，商业场景首选<br /><br />使用建议：没有单一最佳工具，根据场景选<br /><br />需要从自己素材生成→Seedance 2.0<br /><br />需要电影感长镜头→Kling 3.0<br /><br />需要最真实的对话→Veo 3.1<br /><br />6. 音频 &amp; 音乐<br /><br />核心需求：配音、翻译、音乐生成、播客<br /><br />最优工具：<br /><br />ElevenLabs：声音克隆、情感配音，质量最稳定<br /><br />Suno ：音乐生成，从哼唱到完整编曲<br /><br />Gemini TTS / Podcastle：播客制作、多语言翻译+唇同步<br /><br />7. 效率 &amp; 自动化<br /><br />核心需求：会议纪要、任务执行、一人公司运营<br /><br />最优工具：<br /><br />Manus：端到端 Agent 任务，让 AI 真正帮你干活<br /><br />飞书：会议纪要自动生成<br /><br />Dify / Coze：国内自动化平台，搭建自己的 AI 工作流<br /><br />Zapier / Make：连接各种工具，打通数据流<br /><br />2026年，AI 是用来真正提升生产力、实现商业变现的<br /><br />干什么活，就用什么 AI
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6a2a34358694679c3675e03e</id>
-            <title>AI探索站 06月11日</title>
-            <link>https://m.okjike.com/originalPosts/6a2a34358694679c3675e03e</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a2a34358694679c3675e03e</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 11 Jun 2026 04:06:13 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    评价一款ai应用是否成立，真正的top3 指标其实是付费用户毛利率、续费率和cac<br />想实现前两者的健康，要么将卖token的商业模式变成其他商业模式，要么将token卖给对token单价不敏感的用户<br />所有建立在token敏感用户上卖token的产品，都只能是模型供应商的生意
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6a29520b4eabc800c143d81e</id>
-            <title>AI探索站 06月10日</title>
-            <link>https://m.okjike.com/originalPosts/6a29520b4eabc800c143d81e</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a29520b4eabc800c143d81e</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 10 Jun 2026 12:01:15 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    ⌛️ 时之寓言<br /><br />每当技术的力量越过当代人理解的边界，命名就会退回神话。<br /><br />（首发于即刻，未经授权不可转载）<br /><br />任天堂直面会的最后一分钟。旁白低声讲述海拉鲁王国的历史，画面亮起，用最新 3D 技术从零重建的少年林克，躺在森林的晨光里——《塞尔达传说：时之笛》，3D 游戏最具影响力的开山之作，重获新生。几个小时后，旧金山。Anthropic 的官网安静地多出一个页面：Claude Fable 5 发布。措辞克制，数据惊人；在页面不起眼的位置，藏着一句词源学注释：Fable，源自拉丁语 fabula，「被讲述之物」。<br /><br />当最古老的开山神作与当代最强的 AI 在同一天发布，拉开时间尺度，我们能看到什么？<br /><br />《时之笛》本质是一个故事，藏着三个伟大的隐喻： <br /><br />- 陶笛。 这件乐器距今至少一万两千年。人类的第一项时间技术，就是音乐：在没有文字的年代，我们靠歌谣储存历史，靠旋律把转瞬即逝的时间折叠、携带、重放。<br /><br />-  封印。 当林克在时之神殿吹响旋律、拔出大师之剑，封印被过早打开——他一觉醒来已是七年之后，海拉鲁化为废墟。大师之剑插在台座里的设定，是写给全人类的一行代码：力量被锁住，直到持剑者足够成熟。<br /><br />- 时光。 它不仅是塞尔达系列最重要的作品，更教会了人类在三维虚拟空间里自由行走。《太阳之歌》倒转昼夜，《时之歌》叩开圣殿——时间被操纵、解构、重新定义。 <br /><br />二十八年后，Anthropic 把这三个隐喻逐一重写了一遍：<br /><br />- 叙事之巅。 Haiku、Sonnet、Opus，是诗与乐的辈分；这一次，命名爬到了谱系最深处——神话与寓言，人类叙事的地基。深奥不可知的那一半叫 Mythos，被封存；可被讲述的那一半叫 Fable，向所有人开放。区分它们的不是能力，是可言说性。<br /><br />- 安全的枷锁。 Fable 是 Mythos 戴上枷锁的版本，这个词听上去明亮、安全。但这可能只是表象：就在发布前几天，Anthropic 刚刚警告，模型递归自我改进（RSI）的临界点已不遥远。研究员深处的恐惧，被穿上了童话的外衣。<br /><br />- 道可道，非常道。 寓言深处，是人类处理危险知识最古老的结构。从伊索到先秦诸子，任何烫手、深奥的真理，都被包进安全的故事里，讲给孩子们听。<br /><br />在 KK 的框架中，游戏产业和人工智能不是两个行业。它们是同一类生命体——技术圈 Technium——的两个器官：逆着熵增生长，很少丢弃，不断嫁接和改造。6 月 9 日，这个生命体罕见地向我们露出了完整的地层剖面：最深处，是黏土陶笛与口传寓言——人类最早的两项秩序技术，一项用旋律给时间编码，一项把危险的真理封装进故事。<br /><br />故事，自始至终是人类的第一项对齐技术。一万两千年来，每当力量超出理解，我们就采取这种古老的手法：把神话讲成寓言，先讲给孩子听：「你拔剑的那一刻，会失去一段童年。但你会换来，一生都忘不掉的那片旷野。」<br /><br />这一次，孩子是我们自己。
                 ]]>
             </content:encoded>
         </item>
