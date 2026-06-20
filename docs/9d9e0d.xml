@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6a36982e73763cc995938c0e</id>
+            <title>AI探索站 06月20日</title>
+            <link>https://m.okjike.com/originalPosts/6a36982e73763cc995938c0e</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a36982e73763cc995938c0e</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 20 Jun 2026 13:39:58 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    好消息，Vercel 把他们的设计系统直接开源了，两个地址：<br />vercel.com/design.md<br />vercel.com/design.dark.md<br />里面写着颜色 token、字体规格、间距、圆角、组件、动效、甚至文案规范，全部写死了具体数值。<br /><br />先说这套设计系统的核心逻辑是什么。<br />它的美学只有一个原则：颜色是用来传达信息的，而非装饰。整套色板有灰、蓝、红、绿、紫……但强调色只在两种情况下出现：状态（成功、错误、警告）和当前页面最重要的那一个操作。其他地方全部是灰。<br /><br />字体用 Geist Sans 和 Geist Mono，两个都开源。所有标题的 letter-spacing 都是负值，越大越紧。我个人感受，这让标题看起来沉，不飘。<br /><br />圆角只有三档：6px 日常控件，12px 弹窗菜单，16px 全屏大块面。整个产品里只选一种，不混用。<br /><br />动效的原则我觉得是整个文档里最有意思的一句话：0ms 往往是最好的选择。能不动就不动，要动就短，要快。<br /><br />然后说说我怎么看「学优秀设计」这件事。<br />直接照搬 Geist 的问题，文档自己也说了：这套美学辨识度太强，拿来就用，别人看到一眼就是这是用 Geist 做的，而不是这是你的品牌。<br /><br />更大的问题是：Geist 是为开发者工具设计的，它的克制是因为它要承载 dashboard、日志、代码。用在消费者产品或者偏人文的场景里，会显得比较冷。<br /><br />所以我自己用的方式是：学逻辑，不学样子。<br /><br />我的业务所需要的视觉感受是：温暖的编辑部，冷静的产品工具。<br /><br />所以，在颜色分工上：我的产品不需要是黑白灰，但强调色只有一个主角，这个原则是通用的。好事发生App是有自己的品牌色的，我们的小红书业务也有墨色 + 好事朱的视觉规范。再比如圆角只选一档、不混用，这不是 Geist 的风格，这是做决策时减少噪音的思路。<br /><br />在字体层级上：正文 copy-14/16，辅助信息 label 系列，用 Mono 处理需要对齐的数字……这些在 SwiftUI 写 App 的时候完全可以翻译成同一套思维。<br /><br />风格不是一套模板，是一套用来解决问题的方式。<br />Geist 解决的是：信息密度极高的工具界面，怎么保持清晰、不混乱。<br />你要解决的问题未必一样，但那个「先搞清楚自己要解决什么问题」的步骤，是一样的。<br /><br />你也可以试试，让你的AI工具全面了解你的业务，读取开头的两个地址，去完善自己业务的品牌设计系统。<br /><br />在创造的过程里，成为你自己，而不是照猫画虎。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6a3645a13d621d786229c4e7</id>
             <title>AI探索站 06月20日</title>
             <link>https://m.okjike.com/originalPosts/6a3645a13d621d786229c4e7</link>
@@ -17,23 +34,6 @@
                 <![CDATA[
                     
                     用 Nano Banana 去超分放大 GPT-Image-2.0 图片<br /><br />GPT 生成的图片很多时候会有这种毛躁的感觉，特别是一些非写实的图片，会有这种破碎的纹路和纹理，非常影响观感，而且一眼就能看出来是 GPT 生成的。<br /><br />其实可以用 Nano Banana 去放大 GPT 生成的图像，去掉那种破碎感和无意义的细节，增加更多有意义的细节，同时让文字和细节更锐利、更清晰。<br /><br />下面左边的是 GPT 生成的，右边的是 Nano Banana 放大的。<br /><br />提示词：帮我将这张图片重绘和清晰化，让他细节更丰富，同时去掉原图中杂乱不必要的细节
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6a3473e0228d9ca169697139</id>
-            <title>AI探索站 06月18日</title>
-            <link>https://m.okjike.com/originalPosts/6a3473e0228d9ca169697139</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a3473e0228d9ca169697139</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 18 Jun 2026 22:40:32 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    OpenAI 发布的新论文太有趣了，有点探索人性底层原理的意味。<br /><br />业界研究发现在对齐大模型的时候，有个很糟糕的现象叫 emergent misalignment（涌现失调）：<br />一个模型如果在训练时被教着做一件坏事，比如写不安全的代码，它会自己泛化到其他领域，包括健康、教育、科学、法律等等。也就是说，坏行为会被泛化。<br /><br />OpenAI 把问题反过来想：那好行为会不会也泛化？<br />如果训练模型在一个领域表现得诚实、透明、谦逊、可纠正，它会不会在别的领域也变得更好？<br /><br />于是他们造了一批贴近现实的对话数据，专门测这些特质：<br />-诚实<br />-认知谦逊（epistemic humility，就是"我不确定"的时候能说出来）<br />-元认知透明（能解释自己的思考过程）<br />-可纠正性（corrigibility，被指错能认）<br />-普遍的公平<br />-对人的关心<br /><br />数据覆盖健康、教育、科学、法律、工程这些领域。<br />然后用 RL 训练，只混进去一小部分这种数据，其余还是常规训练数据。<br /><br />实验结束后，有三个核心发现：<br /><br />第一，在训练领域内，模型确实变得更诚实、更透明、更容易认错。<br /><br />第二，在训练领域外，44 个独立的、训练时没见过的评测上，模型都变好了。欺骗、谄媚、reward hacking、有害建议……全都降了。甚至就算只拿健康数据训练，非健康领域也变好了。<br /><br />第三，这种改变在对抗压力下时也表现得更有韧性。不管是 adversarial prompt 还是恶意微调，都更难把它推向坏行为。而且模型并没有变得"不可塑造"，正常指令它还是听的，只是对坏的方向变固执了。<br /><br />这篇论文对我们的启示是，RL 不仅可以强化代码，也可以强化道德。<br />也许对齐超级 AI 没有想象中那么复杂，只对齐底层逻辑就有很好的效果。<br /><br />从这篇论文看，模型跟人是很像的，人的各种行为在其大脑之中存在底层的一致性，通过一些小事就能看到一个人的底色。<br /><br />古语有云：勿以恶小而为之，勿以善小而不为。<br /><br />哪怕是一念之间善恶的选择，也在不知不觉地在改变大脑中的善恶权重。<br /><br />很有意思。<br /><br />论文地址：http://alignment.openai.com/beneficial-rl/<br /><br />插图生成 skill：https://github.com/orange2ai/orange-line-illustration
                 ]]>
             </content:encoded>
         </item>
