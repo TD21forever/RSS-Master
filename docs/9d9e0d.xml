@@ -5,6 +5,57 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6a4e684e2b33e6f02d23d0d0</id>
+            <title>AI探索站 07月08日</title>
+            <link>https://m.okjike.com/originalPosts/6a4e684e2b33e6f02d23d0d0</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a4e684e2b33e6f02d23d0d0</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 08 Jul 2026 15:10:06 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    我经常用 AI 来搜索。现在 AI 搜索很牛逼，比如 ChatGPT，即刻、小宇宙甚至实习僧的信息也能搜到，但有些很好的数据源却没有什么通用 AI 搜索产品能触及，比如微信、小红书、Discord、Twitter等等。<br /><br />PC 互联网时代，谷歌几乎能搜到一切，而移动互联网时代，主流 APP 们都建了一堵墙，数据都封闭在自己的体系内。<br /><br />但 Agent 打开了一种可能性。如果 Agent 有一个人电脑的所有权限，就可以让它可以跨越所有 APP 的城墙，帮人搜索。<br /><br />我正在迭代一个 Skill， 我管它叫 OpenSearch，内容就是教 Agent 如何搜小红书、如何搜微信等等。当我提出一个搜索主题的时候，这个 Agent 就可以帮我搜索，它既能使用现成的网络搜索，也能搜索各种网站和 APP，还能直接获取通用的AI 搜索产品的结果，比如直接通过 browser use 使用 ChatGPT 的 DeepResearch，最后综合三者的结果来回答我。<br /><br />比如竞品分析。我想分析 Manus，ChatGPT 只能搜 Reddit 和 Twitter。但 Agent 可以进入 Manus 的 Discord，把所有频道的信息读一遍，私信某个反馈过问题的用户，针对他的问题进一步追问，拿到结果写到竞品分析报告里。这个事情只有人或者 Agent 能做到。<br /><br />再比如做旅行攻略。我跟女朋友爱自由行，体验更舒服，但也意味着要做大量的攻略，签证、订机票、订酒店、看景点、吃饭购物、交通出行等等。小红书是做旅行攻略最好的数据源，没有之一，但小红书的 AI 又很拉。我就让 Agent 先搜小红书再做旅行攻略，它既有 Claude 的智能，又有小红书的所有信息，做出来的攻略效果就很好。<br /><br />但 Agent 搜小红书也有很多坑点。比如电脑上点开一个帖子，图片可以左右滑，往下翻是评论，可我发现 Agent 就只读正文，不看图片，也不看评论。看公众号、网页只读正文也没问题，但小红书的图片和评论是很有信息量的，可并没有人告诉 Agent，小红书的图片和文字应该一起被利用。<br /><br />再比如我让 Agent 最后输出的 MD 文档要包含所有的小红书来源链接，结果它一开始给的链接都是错的。因为小红书点开一个帖子，出来个弹窗之后，浏览器的地址不会变，那个并不是帖子的地址，Agent 误以为是，实际上帖子的地址要点右下角那个链接按钮才能获得。<br /><br />造成这些麻烦的根源是：没有人教 Agent 怎么用小红书。因为这些产品还是适配于人的，而非适配于 Agent，且他们大概率也不想去适配，但我总觉得这会是个趋势。<br /><br />Agent 搜小红书、搜微信、搜 Discord，每个平台都有各自的 UI 逻辑和风控策略，我把用法持续迭代进 skill ，它才变得慢慢好用起来 。<br /><br />还有，人搜索有一个很厉害的地方——人不光可以看，还可以问。做旅游攻略的时候，我在评论区发现一个想追问的问题，我可以直接问那个人：姐妹你这个地方有答案了吗？比如签证的某个细节到底怎么填，我是个特殊身份到底该怎么办等等。但 ChatGPT 只能搜，做不了这种事，而 Agent 可以，它有权限直接发一条评论去问，过一段时间回来收集答案。<br /><br />因为我自己在用，所以我也在想，Agent 会不会有可能让我们回到那个 open search 的时代。互联网时代没有 APP 的墙，谷歌什么都能搜；移动互联网加了墙；现在我们可以 Agent 把这个墙再打破吗？
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6a4df9abb3b49e877a22af69</id>
+            <title>AI探索站 07月08日</title>
+            <link>https://m.okjike.com/originalPosts/6a4df9abb3b49e877a22af69</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a4df9abb3b49e877a22af69</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 08 Jul 2026 07:18:03 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    开源一个非常漂亮的文章配图 Skill。<br /><br />昨天给 Claude 用我的社交媒体卡片生成的时候，Codex 生成了一个配图，我觉得很漂亮、挺有意思。<br /><br />发出来后大家也都很喜欢，所以顺便就把它做成了一个配图 Skill。<br /><br />目前只适配了 GPT-Image-2.0 模型。<br /><br />支持将你的文档或文案发进去，生成一个干净漂亮、带标签的 3D 材质配图。<br /><br />如果 AI 觉得某些概念它不认识或者画不出来，它会自己寻找参考垫图来辅助绘画，减少瞎猜、画不出新东西的问题。<br /><br />可以帮你画一些教育类的解释图（比如杠杆原理、电磁感应等），人文类的图也可以做。<br /><br />它会直接读取你原始图表中的数据和内容并重新生成图片。<br />这样可以避免在原始图表比较丑时，直接用它垫图生成的图片也不好看的问题。<br /><br />如果你需要类似的配图，可以试试，建议在 Codex 里使用。<br /><br />详情：https://github.com/op7418/guizang-material-illustration
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6a4d9f4c64a7b806f1dbe4ed</id>
+            <title>AI探索站 07月08日</title>
+            <link>https://m.okjike.com/originalPosts/6a4d9f4c64a7b806f1dbe4ed</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a4d9f4c64a7b806f1dbe4ed</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 08 Jul 2026 00:52:28 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    AI 降低了很多事情的门槛<br />但并未降低赚钱的门槛<br />它甚至还更花钱了
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6a4c53919044d15af20e759f</id>
             <title>AI探索站 07月07日</title>
             <link>https://m.okjike.com/originalPosts/6a4c53919044d15af20e759f</link>
@@ -34,23 +85,6 @@
                 <![CDATA[
                     
                     3 个月前，我做了一个叫「职业.skill」<br /><br />职业.Skill，一个 Skill 包揽你的工作<br /><br />用法很简单：告诉 AI 你的职业，它给你输出一份清单，这个职业能做哪些 Skill、每个 Skill 怎么做、提示词直接复制发给 Agent 就能生成。<br /><br />比如输入产品经理，Agent 就会制作下面这几个 Skill，几乎覆盖产品的工作。<br /><br />但用得越久我越发现，它只解决了「有哪些 Skill 该做」，没解决「这些 Skill 靠什么判断力驱动」。<br /><br />所以我给职业.skill 升级到了职业.skill 2.0<br /><br />简单说，这个 Skill 的效果是：<br /><br />你告诉 AI 一个职业或者行业，它自动完成三件事，<br /><br />臻选这个行业最顶尖的3 位专家，蒸馏他们的心智模型，做成 3 个「专家视角 Skill」<br /><br />臻选这个行业最顶尖的3 本书，把方法论转成可追溯的判断框架，做成 3 个「方法论 Skill」<br /><br />编排1 个顾问团总控 Skill，能路由问题、召开多专家评审会<br /><br />最后交付 7 个可以直接安装的 Skill 文件，构成一支能陪你判断、复盘、做决策的私人顾问团
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6a4b0aba64a7b806f19cb146</id>
-            <title>AI探索站 07月06日</title>
-            <link>https://m.okjike.com/originalPosts/6a4b0aba64a7b806f19cb146</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a4b0aba64a7b806f19cb146</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 06 Jul 2026 01:54:02 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    近一年来试了好几个AI模型来写文章，体感如下：<br /><br />Claude Opus 4.6 行文流畅，思维有深度，几乎看不出AI味，稍微改改就能直接发<br /><br />Claude Opus 4.7 比4.6要稍差，开始出现一些黑话套话，偶尔甚至个别字会乱码<br /><br />ChatGPT 5.5 逻辑通顺，但是为了追求句子前后通顺，会加很多废话，看着像散文诗，会像小学生在「今天白天做了一件有意义的事情」的文章结尾一定要加上「做完事我就晚上回家吃饭睡觉」把一天的事情交代完才算完整。用来做最后的文章检查倒是不错<br /><br />Gemini 3.5Flash 套话很明显，来来回回就那么几种写法句式，而且黑话多，像是阿里员工说话<br /><br />Gemini 3.1Pro 词藻华丽，不过套话比3.5Flash要少一点，让它赞同某个事务，能夸出花，像是马屁精。<br /><br />Kimi 2.6 在思考写作思路上看上去有创新，有点Opus那味，但真正执行写作出的结果却很普通，有点像ChatGPT，加了很多逻辑通顺的废话。<br /><br />DeepSeek 4，早期的DeepSeek词藻也很华丽，像是高考作文，莫名其妙的比喻修辞看着很累，用了V4感觉又感觉矫枉过正，有些呆板，像是公文。<br /><br />GLM 5.2 在整理思路上思考完整，会像Opus那样反问我补全资料缺失。生成的文章中规中矩，好在黑话不多，多改几轮也能发。<br /><br />总得来说，所有AI模型都多少有点黑话，特别喜欢用一次看似真人感，实际上有点粗俗实际上AI味道很重的动词。
                 ]]>
             </content:encoded>
         </item>
@@ -107,23 +141,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6a472c6ad76807ea5b836860</id>
-            <title>AI探索站 07月03日</title>
-            <link>https://m.okjike.com/originalPosts/6a472c6ad76807ea5b836860</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a472c6ad76807ea5b836860</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 03 Jul 2026 03:28:42 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    这是我做的最有用的一套 skill，它可以监控小红书公众号 b 站抖音，各大社交媒体的任意博主的发文内容，以及点赞，收藏和评论。<br /><br />畅通无阻👇
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/6a47262e64a7b806f13788a2</id>
             <title>AI探索站 07月03日</title>
             <link>https://m.okjike.com/originalPosts/6a47262e64a7b806f13788a2</link>
@@ -136,23 +153,6 @@
                 <![CDATA[
                     
                     Token 分配的艺术<br /><br />Opus 4.5 诞生到 Fable 5 的仅仅半年，AI 生态的基础层已经飞跃了 N 次；但大多数人还停在 Chat 时代。核心的分野只有一个：你是否真正懂得 Token 经济学。<br /><br />最重要的基本功，是你亲手摸过多少个 SOTA 模型和应用层，以及把它们组合之后会长出什么。「理解」听上去是个主观的词——但它和「在一座超大城市里长住过」是同一回事：没有数千小时的深入体验，你只是个观光客。<br /><br />再往上，是 Harness 和业务建构本身。这些东西无法脱离实战。正如费曼所言：「凡我不能创造的，我便不曾真正理解。」<br /><br />Jacob Bank 说得极准：风险就是停滞。不是不确定让你危险，是原地不动让你危险。<br /><br />大公司还在按桌游的规则玩——排名、职级、晋升通道，热火朝天。只是那张桌子，摆在一艘正在下沉的船上。固定薪水、固定预算、固定工具链——大公司给你的是一份包餐。如果你从不需要练”分配”这块肌肉，因为分配是别人替你做的。在那套系统里，你不是分配资源的人，你就是被分配的那个 Token。<br /><br />而另一边，AI Native 团队、新一代企业家、科学家和创作者，在做一件完全不同的事：不是把 AI 塞进旧流程，而是以算力为轴，重造工作流、重造整个业务的运作方式。<br /><br />回到基本：编排，正在成为这个时代最核心的读写技能。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6a463582228d9ca1696b0361</id>
-            <title>AI探索站 07月02日</title>
-            <link>https://m.okjike.com/originalPosts/6a463582228d9ca1696b0361</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a463582228d9ca1696b0361</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 02 Jul 2026 09:55:14 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    https://fuck-claude.vercel.app/ 检测下你是不是「Claude 中国用户」🐶
                 ]]>
             </content:encoded>
         </item>
