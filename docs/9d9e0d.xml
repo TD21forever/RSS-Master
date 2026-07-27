@@ -5,6 +5,40 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6a67532f141b85b2921b78b4</id>
+            <title>AI探索站 07月27日</title>
+            <link>https://m.okjike.com/originalPosts/6a67532f141b85b2921b78b4</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a67532f141b85b2921b78b4</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 27 Jul 2026 12:46:39 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    随着 AI 代码产能的日渐暴增，为了守住入库代码质量的最后底线，我给自己做了一个代码审查工具 Duetlens。它的核心设计理念是：和 agent 一起看透每一处改动。<br /><br />🔍 Duetlens 是一个本地审查优先的代码审查工具。以 GitHub PR 审查流程举例话，agent 在一轮 review 结束后报告的问题，会在 Duetlens 里形成一张张本地的 finding 卡片。我们人类 Reviewer 则可以对 agent 发现的问题，以及任何一段代码进行追问讨论，比如觉得 agent 的修复建议不合理，让它改评审结论，或者直接动手编辑、甚至剔除觉得不需要修复的问题。最后汇总结论，把经过人审的 review 意见一起提交到 GitHub 上，让 PR 作者可见。<br /><br />🔍 Duetlens 也能支持本地分支的代码审查，也能方便的把审查意见一键导出给我们的 coding agent 去做修复。 不得不提 Duetlens 的开发就是用 Duetlens 的审查反复敲打过来的。<br />Duetlens 的重跑复审能力也是一大亮点，它会综合 Reviewer 的意见和 PR 作者的评论意见一起研判之前的 finding 结论。<br /><br />还有更多功能可以看项目主页：<br />https://github.com/xieziyu/duetlens<br /><br />目前已发布第一个正式版本。永久开源，欢迎大家来体验和提意见
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6a66f8cd141b85b292126fc1</id>
+            <title>AI探索站 07月27日</title>
+            <link>https://m.okjike.com/originalPosts/6a66f8cd141b85b292126fc1</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a66f8cd141b85b292126fc1</guid>
+            <pubDate></pubDate>
+            <updated>Mon, 27 Jul 2026 06:21:01 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    很多人都没意识到，用Agent做事，尤其是Vibe Coding，本质上就是去理发。<br /><br />前段时间我去理发，拿了一张GPT帮我改过的发型图，问理发师能不能帮我剪成这样。<br /><br />他明显有点犹豫。<br />我问他为什么。<br />他说，这种需求最难。<br />因为他根本不知道，这个发型是怎么剪出来的。<br />这只是一张最终效果图。<br />没有过程，没有侧面，没有背面，也没有告诉他每个地方该留多长。<br />他只能盯着结果，反推中间步骤。<br /><br />更麻烦的是，他也不知道自己到底能不能做到。<br />图片里的效果可能依赖发质、头型、打理方式，甚至可能根本不符合现实。<br />他既不知道路径，也无法完全确认自己的能力能不能实现。<br /><br />我当时突然觉得，这不就是今天所有Agent面对的问题吗？<br />用户给出的通常只是一个模糊的结果。<br />但这个结果怎么实现，中间需要哪些步骤，有哪些隐藏条件，用户自己往往也说不清楚。<br />Agent只能猜。<br />它要猜用户真正想要什么，也要猜自己应该怎么做。<br /><br />一个模型可能很会写代码，但它不知道这个项目里会不会遇到没权限的接口、不兼容的依赖、缺失的数据，或者某个自己根本处理不了的问题。<br /><br />所以Agent面对的，其实是两种不确定性。<br />第一种是需求不确定性。<br />用户说想要一个高级的网站。<br />什么叫高级？<br />是视觉高级、交互高级、代码架构高级，还是看起来适合融资？<br />用户自己脑子里可能有一个感觉，但很难完整表达出来。<br /><br />第二种是执行不确定性。<br />Agent即使理解了目标，也不代表它知道最合适的实现路径，更不代表它一定做得到。<br />这和理发师拿着一张AI发型图时的状态完全一样。<br /><br />我又问理发师，那你遇到这种需求，怎么尽量避免剪坏？<br />他说，最好的办法就是剪之前先给你看效果，剪的过程中不断问你。<br /><br />这其实就是一个可靠Agent应该有的工作方式。<br />执行前，先把自己的理解展示出来。<br />执行过程中，也不要一口气直接做到最后。<br />遇到不可逆操作，需要单独确认。<br /><br />Agent真正需要优化的，并不是少问问题。<br />它需要学会在正确的时间，问最有价值的问题。<br />问得太多，用户会烦。<br />完全不问，最后很容易把头发直接推成三毫米，然后告诉你任务已完成。<br /><br />而理发师还告诉了我另一件事。<br />我问他，什么情况下你最有可能剪出一个超过客户预期的发型？<br />他说，最好是这个客户已经在我这里剪过很多次。<br />我知道他的头发是什么状态，知道他喜欢什么，知道他平时怎么打理，也知道他说剪短一点，到底是多短。<br /><br />这就是Memory真正的价值。<br /><br />Memory并不只是记住用户上次说了什么。<br />一个长期合作的理发师，之所以越来越懂你，不是因为他的剪刀升级了。<br />是因为他逐渐学会了你的审美和验收标准。<br /><br />Agent也是一样。<br />真正优秀的Agent，不会只保存聊天记录。<br />它会逐渐建立一个关于用户的模型，知道这个用户在什么场景下，想要什么样的结果。<br />所以我现在越来越觉得，Agent的核心并不只是模型能力。<br />它还包括需求确认、Context管理、过程反馈和长期Memory。<br /><br />现在很多Agent最大的问题，就是太像一个过度自信的理发师。<br />用户拿出一张图，说照这个剪。<br />它回答：明白。<br />然后低头就是一剪刀。<br /><br />真正可靠的Agent，必须知道自己不知道什么。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6a65f9b85222c7751a1104d5</id>
             <title>AI探索站 07月26日</title>
             <link>https://m.okjike.com/originalPosts/6a65f9b85222c7751a1104d5</link>
@@ -73,23 +107,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6a6487f6756bbb665810cd98</id>
-            <title>AI探索站 07月25日</title>
-            <link>https://m.okjike.com/originalPosts/6a6487f6756bbb665810cd98</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a6487f6756bbb665810cd98</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 25 Jul 2026 09:55:02 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    Anthropic 讲解了随着模型的提升，应该如何更新自己的上下文规则，推荐看看。<br /><br />随着 Fable 5 和 Opus 5 的发布，他们精简了 80% 的系统提示词，但在编程测评上没有任何损失。<br /><br />其核心问题在于，Claude 的提示词只是它获取上下文的一小部分，更多的上下文来自于系统提示词、Skills、claude.md 以及 Memory。<br /><br />这里的难点在于：上下文是跨多个请求通用的，不能像单个提示词那么具体。<br /><br />他们之前对 Claude Code 的约束过度了，而且经常存在互相矛盾的指令（约束越多，冲突的概率就越大）。<br /><br />像 Fable 5、GPT 5.6 这种新模型，完全能够靠上下文和自己的判断力处理很多事情，因此没必要过度约束。<br /><br />他们总结了过去到现在关于上下文转变几条趋势：<br /><br />1. 从“给规则”到“让 Claude 运用判断力”：比如旧版会写“默认不写注释”，新版可以改成“写出与周围代码一致的代码”，这样它自己就会去匹配周围代码的注释密度、命名和习惯。<br /><br />2. 从“给具体示例”到“设计接口”：给具体示例容易让模型变得死板。现在可以给一些设计接口（比如脚本文件的设计），让参数更具表达力，以此来引导它，而不是塞给它具体的示例。<br /><br />3. 从“全部前置的上下文”到“渐进式披露”：把代码审查、验证等相互独立的信息放在不同的 Skills 里面，按需调用。模型可以通过文件搜索去查找，而不需要一次性塞入。<br /><br />4. 不在系统提示词和工具描述里重复提示：直接把用法写进工具描述里，不再到系统提示词里去强调。<br /><br />5. 从“手动记录”到“自动记忆”：以前是在 claude.md里存记忆，现在直接由模型自动记忆，不再依赖手写输入。<br /><br />6. 从“简单规则”到“丰富的引用”：以前规则非常单一，现在可以把图片、HTML 文件、测试文件、测试代码、函数甚至是评分标准，都作为模型的上下文塞进去。<br /><br />---<br /><br />关于如何将这些原则运用到你自己的上下文管理中，有以下几点建议：<br /><br />系统提示词定位：在系统提示词里明确告诉 Claude 在什么产品里做什么。如果你在构建 Agent，需要投入精力重新编写系统提示词。<br /><br />保持 [claude.md]或 [agent.md]的轻量：把仓库用途和说明性内容花在最核心的地方（比如已知的坑或缺陷上）。避免把 Claude 一看代码就能懂的事情非要写进 [claude.md]里。<br /><br />多用 Skills 进行模块化：把需要按需查找的信息打包成 Skills。如果 Skills 过长，需要采用渐进式披露的方式拆分成多个文件。<br /><br />优先引用代码形式：在使用 @ 引用文件时，优先引用代码。比如引用 HTML 模板的效果，通常比只给设计描述或截图效果更好。<br /><br />使用自动化工具：他们还提到了 `claude doctor` 这个命令，可以自动帮你精简 Skills 和 [claude.md]文件。<br /><br />详情：claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/6a644ed2756bbb66580acf7a</id>
             <title>AI探索站 07月25日</title>
             <link>https://m.okjike.com/originalPosts/6a644ed2756bbb66580acf7a</link>
@@ -102,23 +119,6 @@
                 <![CDATA[
                     
                     没刷的情况下拿了 github trending 日榜第一应该怎么炒作？
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6a64391bcfb5d08b3e9513c5</id>
-            <title>AI探索站 07月25日</title>
-            <link>https://m.okjike.com/originalPosts/6a64391bcfb5d08b3e9513c5</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a64391bcfb5d08b3e9513c5</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 25 Jul 2026 04:18:35 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    卧槽，发现一种可以在 Codex 里面无缝提高提示词能力的方法<br /><br />在 A 对话框里面输入要求，然后最后让 A 对话框里面的 Agent 新启动一个线程，发送给另外 B 对话框内的指令要求，如图2这种的提示词，我反正是写不出来这么详细的代码里面的细节的<br /><br />而且，A 对话框内的 Agent 还能自动跟踪监督结果，实现审查的人跟执行的人分离，避免自问自答的低质量情况<br /><br />还有一个细节是，发送给 B 对话框内的指令是可以带有插件指令的，这个也很方便了
                 ]]>
             </content:encoded>
         </item>
