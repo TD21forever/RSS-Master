@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6a78805fbd0563695b519057</id>
+            <title>AI探索站 08月09日</title>
+            <link>https://m.okjike.com/originalPosts/6a78805fbd0563695b519057</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a78805fbd0563695b519057</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 09 Aug 2026 13:27:59 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    最近做了一个复刻网站的 Skill：给一个 URL，就能 1:1 复刻整个页面，布局、排印、素材、滚动动画、交互状态全部还原。整个 skill 需要依赖于 ego lite 这个目前最好的浏览器自动化产品<br /><br />repo 地址往下翻👇<br /><br />首先为什么能做到 1:1？<br /><br />核心是把要复刻的网页当成一个可以查询的数据源，而不是一张一张靠眼睛比对的图片。<br /><br />大部分人让 AI 仿站的做法，是丢一张截图过去，让模型看图写代码。截图只有像素信息，字体、间距、动画曲线这些关键事实全靠模型猜，所以效果不稳定。<br /><br />我的做法是让 agent 打开真实页面，直接从运行中的页面里提取事实：完整 DOM 结构、CSS 设计变量、字体文件、动画关键帧，甚至从编译后的 JS 里挖出界面上懒加载的配置数据。<br /><br />滚动动画这种最难仿的部分，也是靠真实滚动逐帧采样逆向出来的，不是看着效果猜参数。<br /><br />拿到这些事实之后，重建就有据可依了。静态站直接做 HTML 镜像，框架站逐节重建成组件。<br /><br />最后一步是验收。<br /><br />在原站和克隆站上跑同一套测量脚本，对比几何位置、排印、颜色、字体、动画覆盖等八个维度的数值，任何一项不达标就继续修，直到收敛。<br /><br />所以，还原度不是靠模型“画得像”，而是整个流程里没有靠眼睛判断的环节：每一步的输入是测量出来的事实，产出也用测量来验证。<br /><br />“像不像”这件事，从主观判断变成了一个可以收敛的数值问题。<br /><br />但是要注意的是<br /><br />我写这个 skill 的原因是因为我看到一个网站的滚动动画很惊艳，但是无论怎么口述，模型都无法很好地复刻出来。通过开发这个 skill 之后，模型可以直接通过 ego lite 自己去理解对应滚动动画实现的各种逻辑。<br /><br />所以使用的时候也必须是用于学习，绝对不可以用于抄袭他人的作品。<br /><br />目前测试成功的模型有：fable 5、opus 5、gpt 5.6-sol<br /><br />repo: https://github.com/braxtonROSE4/clone-any-website
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6a78449acfb5d08b3e9e3831</id>
             <title>AI探索站 08月09日</title>
             <link>https://m.okjike.com/originalPosts/6a78449acfb5d08b3e9e3831</link>
@@ -68,23 +85,6 @@
                 <![CDATA[
                     
                     今天看到去年11月底认识好友发的小红书帖，内心涌流着一些东西。<br /><br />不知不觉距离SheNicest第一次上海黑客松过去已经8个月了，那是第一次向大家宣告SheNicest的全球最大的野心，这过程中有人离开，有人继续留下也，有新的人加入，好恍惚一幕幕都像过往电影，现在回过头原来已经走这么远了，看着我们的江山一点点打下，某种程度我们真的是这个行业的开拓者，从女性黑客松刚开始被质疑充满不确定到走到如今更多女性走入科技领域，我想说SheNicest早已经不是一家做女性黑客松的品牌了，我们想要定义下一代女性科技产品。这次SheNicest全球最大黑客松我们一定会证明另一件事情打破了消费品牌和科技品牌的隐形壁垒。这次野人先生，山下有松，珀莱雅等知名消费品牌也愿意相信我们，核心参与参与进来，所以请大家报名我们这次黑客松活动！我不想说这次多么牛现场体验多么好，但是请相信一个年轻的团队对做成这件事的坚定和夜以继日勤奋的7个月努力，以及锋芒与自我的来回拉扯都是为了最后这事儿能成。<br />​<br />​请相信我们，也相信自己，相信这个世界会因为我们变得好一点再好一点。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6a76c306cfb5d08b3e7719fa</id>
-            <title>AI探索站 08月08日</title>
-            <link>https://m.okjike.com/originalPosts/6a76c306cfb5d08b3e7719fa</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a76c306cfb5d08b3e7719fa</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 08 Aug 2026 05:47:50 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    求问各位即友：<br />有没有什么AI软件可以一键把中文口播的视频转为英文口播的？<br />（想要在外网分发一下视频呢，或者有其他建议嘛）<br />😀
                 ]]>
             </content:encoded>
         </item>
