@@ -5,6 +5,164 @@
         <link>https://sspai.com</link>
         
         <item>
+            <id>https://sspai.com/post/113225</id>
+            <title>不用改签名，给 Mac 微信聊天记录「搬个家」</title>
+            <link>https://sspai.com/post/113225</link>
+            <guid isPermaLink="false">https://sspai.com/post/113225</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 13 Aug 2026 09:30:00 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p><strong>Matrix 首页推荐</strong></p><p><a href="https://sspai.com/matrix">Matrix</a>是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p>文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p><strong>AI 辅助创作声明：</strong>本文写作过程中使用 AI 辅助核对技术思路、整理命令和润色文字。文章结构、操作步骤与结论均由作者撰写和审阅；涉及微信的关键步骤由作者在文末所列环境中实际测试。题图由 AI 生成。</p><p>阅前须知：</p><ul><li>本文方案保留 Mac App Store 微信的官方签名，不需要执行 <code>codesign</code> 操作重新签名</li><li>这不是普通的文件搬家操作</li><li>本文会修改 APFS 宗卷的挂载位置和 <code>/etc/fstab</code> ，填写错误的设备标识符、UUID 或路径，可能导致微信找不到聊天记录或丢失聊天记录</li><li>开始前请退出微信，<strong>并至少保留一份可用备份</strong></li><li>本文介绍的方法亦可用于其它 App 或游戏，实现空间扩容的效果</li></ul><p>我的 Mac mini「丐中丐」版本只有 256 GB 存储空间，但微信聊天记录的占用空间却会随着图片、视频和文件不断增长。按照传统思路把数据目录改成符号链接看似简单，但 Mac App Store 版微信运行在 App Sandbox 中，系统会解析链接的真实目标，指向外置硬盘的符号链接并不会自动获得访问权限。</p><p><a href="https://sspai.com/post/86175" target="_blank">一种常见做法</a>是用 <code>codesign</code> 给微信重新签名，再授权它访问外置硬盘。这个方案有用，但会改变 App 原有的签名状态，每次更新后都可能需要重新操作。我更希望保留 Mac App Store 版本的官方签名。</p><span class="ss-linkCard">&nbsp;</span><p>于是我在想有没有一种更好的方案，<strong>比如创建一个独立的 APFS 宗卷，并把它直接挂载到微信容器内的聊天数据目录</strong>——如此一来，对微信来说它仍在访问自己的 <code>xwechat_files</code>，但对 macOS 来说，这个目录实际上又是外置硬盘上的一个宗卷。</p><p>整个过程不修改微信 App，也不需要预先切出固定大小的传统分区，更适合以下情况：</p><ul><li>微信聊天记录占用了大量内置存储</li><li>外置硬盘通常会长期连接 Mac</li><li>外置硬盘已经采用 APFS 格式</li></ul><p>如果你经常拔掉外置硬盘、需要随时带着 Mac 离开，或者不熟悉备份与恢复操作，那么定期导出聊天记录通常更稳妥。</p><p><strong>另外，本文迁移的是微信的工作数据，不等同于备份</strong>。外置硬盘损坏后，数据仍可能丢失，因此还要另行保留备份。</p><h2>原理</h2><p>我们上面提到的「符号链接」，其实只是一个指向其他位置的路径。微信通过它访问外置硬盘时，App Sandbox 看到的仍是未经授权的外部路径。</p><p>挂载则不同。macOS 会把整个 APFS 宗卷接入微信容器内部的 <code>xwechat_files</code> 目录，即便底层存储位置其实是外置硬盘，微信看到的路径是没变的。</p><p>不过挂载点不能随意上移。在我的测试中，将宗卷挂载到微信容器的 <code>Data</code> 或 <code>Data/Documents</code> 都会触发容器完整性检查，导致微信运行崩溃。</p><p>只有挂载到更深一层的 <code>Data/Documents/xwechat_files</code> 才能正常运行。</p><h2>第一步：创建 APFS 宗卷</h2><p>打开「磁盘工具」，选中准备用来存放微信数据的外置 APFS 容器，然后点击工具栏中的「添加宗卷」。</p><p>建议使用以下设置：</p><ul><li>名称：<code>WeChatData</code></li><li>格式：APFS，不区分大小写</li><li>保留大小：留空</li><li>配额：留空，或者根据需要设置</li></ul><p>APFS 宗卷会共享所在容器的可用空间，因此无须像传统分区那样预先划定固定容量。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/09/8ccacb0ebb916d146222a1b73f5861dc.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>创建完成后，打开「终端」，查看宗卷信息：</p><pre class="language-shell"><code>diskutil info "/Volumes/WeChatData" | grep -E 'Device Identifier|Volume Name|Mount Point|Disk / Partition UUID'</code></pre><p>你会看到类似 <code>disk7s2</code> 的设备标识符，以及一串宗卷 UUID。把它们记下来。<s>（不记也没关系，后面也会用到）</s></p><p><strong>注意：后文中的 </strong><code><strong>disk7s2</strong></code><strong>、宗卷 UUID、用户名和路径都只是示例，必须替换为你自己的实际值。设备标识符在重新连接硬盘后可能变化，因此自动挂载应使用 UUID。</strong></p><h2>第二步：复制微信聊天数据</h2><p>这里有两种方法，一种是复制粘贴法，另外一种则是通过终端。</p><ul><li><strong>复制粘贴：</strong>完全退出微信，然后 <code>command+shift+G</code> 在 Finder 中中前往：</li></ul><pre class="language-"><code>~/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/</code></pre><p>将 <code>xwechat_files</code> 目录里面的全部内容复制到 <code>WeChatData</code> 宗卷根目录。</p><p>复制完成后，宗卷根目录应该直接出现 <code>all_users</code>、<code>Backup</code>、<code>用户名_…</code> 等目录，而不是再多嵌套一层 <code>xwechat_files</code>。</p><ul><li><strong>终端：</strong>继续保持微信退出，使用 macOS 自带的 <code>ditto</code> 保留目录结构和扩展属性：</li></ul><pre class="language-shell"><code>SRC="$HOME/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files"
+DST="/Volumes/WeChatData"
+
+ditto --rsrc --extattr "$SRC" "$DST"
+du -sh "$SRC" "$DST"
+
+find "$SRC" -type f 2&gt;/dev/null | wc -l
+find "$DST" -type f 2&gt;/dev/null | wc -l</code></pre><p>无论哪一种方法，都需要检查文件数量和占用空间大致一致后，把 Mac 上原来的 <code>xwechat_files</code> 重命名为 <code>xwechat_files-backup</code>。注意不要立即删除这个备份！确认微信稳定运行一段时间，并且另有完整备份后再处理。</p><h2>第三步：把宗卷挂载到微信数据目录</h2><p>原来的 <code>xwechat_files</code> 已经改名为 <code>xwechat_files-backup</code> ，因此先重新创建一个空目录作为挂载点，你可以直接在 <code>xwechat_files-backup</code>当前目录新建 <code>xwechat_files</code>：</p><pre class="language-shell"><code>mkdir "$HOME/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files"
+</code></pre><p>然后卸载新宗卷，再把它挂载到这个目录。请将 <code>disk7s2</code> 换成自己的设备标识符：</p><pre class="language-shell"><code>diskutil unmount disk7s2
+diskutil mount -mountPoint "$HOME/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files" disk7s2
+</code></pre><p>检查挂载结果：</p><pre class="language-shell"><code>diskutil info disk7s2 | grep -E 'Mounted|Mount Point|Volume Name'
+</code></pre><p>输出中的 <code>Mount Point</code> 应该准确指向：</p><pre class="language-shell"><code>/Users/你的用户名/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files
+</code></pre><p>如果挂载点不正确，不要启动微信。先卸载宗卷，再检查命令中的设备标识符和路径。</p><h2>第四步：启动微信并验证数据</h2><p>启动微信，依次检查：</p><ul><li>聊天列表是否完整；</li><li>多个不同日期的历史图片和文件能否打开；</li><li>聊天记录搜索是否正常；</li><li>新消息和新附件能否写入；</li><li>完全退出并重新启动微信后是否仍然正常。</li></ul><p>特别注意，「微信能够启动」并不代表迁移已经成功。至少要确认旧数据可读、新数据可写，并完成一次退出和重新启动测试。如果微信像刚安装一样显示空白聊天列表，请立即退出微信。</p><p>只要原来的 <code>xwechat_files-backup</code> 和外置宗卷中的数据还在，通常只是挂载点或目录层级不正确，并不代表聊天记录已经消失。</p><h2>第五步：使用 UUID 自动挂载</h2><p>手动指定的挂载点不会在重启或重新连接硬盘后自动保留。确认前四步全部正常后，可以通过 <code>/etc/fstab</code> 固定挂载位置。</p><p>再次读取 UUID：</p><pre class="language-shell"><code>diskutil info disk7s2 | grep 'Disk / Partition UUID'
+</code></pre><p>示例输出：</p><pre class="language-shell"><code>Disk / Partition UUID: 12345678-1234-1234-ABCD-1234567890AB
+</code></pre><p>使用系统提供的方式编辑 <code>fstab</code>：</p><pre class="language-shell"><code>sudo vifs
+</code></pre><p>添加下面一行，并替换其中的 UUID、用户名和路径：</p><pre class="language-shell"><code>UUID=你的宗卷UUID /Users/你的用户名/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files apfs rw,nobrowse 0 0
+</code></pre><p>其中：</p><ul><li><code>UUID=</code> 用来准确识别宗卷，不受 <code>disk7s2</code> 等临时编号变化影响</li><li><code>rw</code> 表示以读写方式挂载</li><li><code>nobrowse</code> 会隐藏 Finder 桌面和侧边栏中的宗卷图标，但不会影响读写</li></ul><p>如果实际路径包含空格，需要按照 <code>fstab</code> 的规则转义。保存前务必逐项核对，尤其不要把 UUID 或用户名照抄成示例内容。保存后重新挂载：</p><pre class="language-shell"><code>diskutil unmount disk7s2
+diskutil mount disk7s2
+</code></pre><p>再次检查 <code>Mount Point</code>，然后启动微信并重复上一节的验证。</p><h2>可选保护：避免硬盘缺席时误写</h2><p>外置硬盘没有连接时，底层的空挂载目录会重新出现。如果此时启动微信，它可能在本机创建一套新的空数据，实际表现嘛，你的聊天记录可能会突然消失。</p><p>你可以在微信退出、宗卷卸载的状态下，把底层空目录设置为不可写：</p><pre class="language-shell"><code>diskutil unmount disk7s2
+chmod 000 "$HOME/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files"
+diskutil mount disk7s2
+</code></pre><p>宗卷挂载后，它会覆盖权限为 <code>000</code> 的底层空目录，微信仍可正常读写宗卷；宗卷缺席时，微信则无法在空目录里写入新数据。可以在宗卷卸载时测试：</p><pre class="language-shell"><code>touch "$HOME/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/test"</code></pre><p>预期结果为：<code>Permission denied</code>。测试后立即重新挂载宗卷。如果以后需要恢复底层目录的权限，请先卸载宗卷，再执行：</p><pre class="language-shell"><code>chmod 700 "$HOME/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files"</code></pre><h2>一石二鸟：这套方法还能用于其他 App 吗</h2><p>理论上，它也可能适用于把大型资源集中存放在固定子目录中的其他 App。我曾在《异环》NTE 上测试同一思路，该 App 会把约 50 GB 的 Unreal Engine 资源下载到：</p><pre class="language-"><code>~/Library/Containers/tw.com.iwplay.nte/Data/Documents/HT</code></pre><p>将独立宗卷挂载到这个固定子目录后 App 可以正常运行，不过，这只是特定版本和环境中的实测结果。不同 App 的沙盒规则、完整性检查与更新机制并不相同，不能把微信的操作步骤直接套用到所有 App。</p><h2>写在最后</h2><p>这个方案没有让微信获得额外的外置硬盘访问权限、重置相应的权限，也没有修改微信的官方签名。它做的事情是让 macOS 把外置 APFS 宗卷，接入微信原本就能访问的数据目录。</p><p>对长期把 Mac 放在固定位置、外置硬盘常年连接的用户来说，它可以让体积庞大的聊天记录不再挤占有限的内置存储；对经常移动使用 Mac 的用户来说，传统备份或定期清理可能还是更加省心一点。</p><p>附测试环境：</p><ul><li>macOS 26.5.2</li><li>Mac App Store 微信 4.1.11</li></ul><p>&gt; 关注<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/112939</id>
+            <title>从原理出发，高效搞定夏日营养冷食</title>
+            <link>https://sspai.com/post/112939</link>
+            <guid isPermaLink="false">https://sspai.com/post/112939</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 13 Aug 2026 08:01:56 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>不知道多少人和我一样，夏天吃饭的纠结项往往从「今晚到底吃什么」，变成了「太热了到底要不要吃呢」。天气太闷太热、厨房又没有空调，在想到开火的那一刻又心生畏惧，最后还是点外卖或者随便吃点东西凑合了事。</p>
+<p>但也不总是一劳永逸。哪怕外卖已经跳过了开火这个最热的环节，有些食物吃起来就是比另外一些更容易让自己出一身汗。而且长期来看，如何在顿顿外卖之下保持健康营养（与钱包活力），也是一个不得不研究的课题。</p>
+<p>在夏天维持心情舒畅不大容易，能把吃饭这件事解决也算是减少了一些麻烦。于是经过我的摸索研究，总算研究出一套夏天也能吃得舒服的备餐公式。用哪些食材、如何搭配、合适的烹饪方法，才能让人在最热的天里，依然吃得清爽、吃得丰盛，还不必在厨房里把自己也一起煮熟。成品无论是室温或者冷藏吃都成立，不依赖刚出锅的热度，既适合上班族提前<a href="https://sspai.com/post/74169">备餐</a>，也适合休息日偷懒一锅出。</p>
+<p>这篇就想把这套思路分享给你，希望能对你的夏天食谱带来一些灵感。</p>
+<h2>食材的选择</h2>
+<p>正如开头所提到的那样，想要让自己的备餐和进食过程没那么「热」，主要可以从两方面入手。首先是食材的选择，在保证营养素齐全、能量充足的前提下，不是每种饭都适合在最热的时候吃。</p>
+<p>我想很多懒人都和我有过一样的体验，想偷懒把食物直接从冰箱里不加热就吃下去，但不是每次的口感和味道都足以入口，但也有些食材，冷吃的味道反而比刚出炉的时候更妙。这是因为每种食材都有它们最适合的赏味温度，背后都是简单的物理规律。</p>
+<h3>蛋白质</h3>
+<p>首先来说蛋白质，它的诀窍是：低脂、细嫩纤维、高水分含量的最适合冷吃。好用的食材比如：<strong>鸡胸肉、虾、三文鱼、豆腐、溏心蛋</strong>。</p>
+<p>受温度影响最大的影响因素是油脂含量，动物脂肪（尤其牛羊的饱和脂肪）熔点高，在热吃的时候就能带来那种流动、滑润的口感；但一旦降到室温或者冷藏的温度，这些脂肪则会凝固成蜡质的固体，吃起来油腻发柴。而低脂的蛋白质，像鸡胸肉、虾蟹白鱼、豆制品的脂肪含量低，三文鱼这样的高油鱼肉的脂肪由于是不饱和油脂，熔点低，因此在冷吃时都不会有牛羊肉那样的凝固脂肪影响口感。</p>
+<p>同样地，高水分含量的蛋白质在冷吃的时候口感也会更好。所以与其选择煎烤这类方式烹饪，倒不如用水煮、腌渍这些方法尽量保存水分，吃起来才会更嫩。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/07/31/article/aafc74c5c473b533e56a69835f32f525.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" />
+    <figcaption>图片由 ChatGPT 生成</figcaption>
+</figure>
+<h3>碳水化合物</h3>
+<p>其次是碳水化合物，也是我们食谱中常见的主食。适合冷吃的碳水有：荞麦面、米皮凉皮、糙米/杂粮饭、燕麦。</p>
+<p>我平时最喜欢用来 meal prep 的主食莫过于白米和意面，但它们冷吃起来都差了点意思，原因和它们的淀粉特性有关。长粒米和小麦面条主要由直链淀粉构成，经过煮制吸水膨胀，分子链相互分离，从而带来了软糯有弹性的口感。但放凉之后，这些直链分子很容易恢复到原来的形状，从而把加热时吸进去的水分挤出来，导致口感变硬、发干。</p>
+<p>有些方法则可以防止食物在低温下进行这样的变性。常用于做寿司的梗米、做粽子用的糯米和荞麦直链淀粉含量更低，所以哪怕冷吃，对口感的影响也有限。其次是制作的方式不同，比如米粉和凉皮，在制作过程中都改变了淀粉原先的结构，使它们本身就是一种更适合冷吃的形态。最后是使用化学方式干预回生过程，比如做寿司米饭时会在其中加入糖和醋，其中醋里的酸会干扰直链淀粉分子重新排列结晶，糖则吸湿保水、填在淀粉链之间不让它们靠拢挤水，所以寿司里的米饭哪怕冷吃也依然柔润不结块。</p>
+<p>另外，正是有「淀粉回生」这个因素的存在，米、面在放凉后会让一部分淀粉重新结晶成「抗性淀粉」，结构更致密、消化酶更难分解，于是相对而言升糖更慢、可吸收热量更少。而且热吃也不大会丢失这个优点：抗性淀粉在 120°C 以上才会分解，而微波、蒸这类日常加热远达不到这个温度。只要你记得把米饭提前冷藏、冷冻一下再吃，就基本能吃到这种福利。</p>
+<ul>
+    <li>关联阅读：<a href="https://sspai.com/prime/story/glucose-monitors-guide">为自己找一面「代谢的镜子」：动态血糖仪的选购与使用感受</a></li>
+</ul>
+<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/07/31/article/9431b1d6dbfa8ffbf48e21d1af8d758c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<h3>蔬菜和纤维素</h3>
+<p>大部分无天然毒素的蔬菜，健康人洗净后可以生吃或冷吃。最常见也是最方便的，比如黄瓜、番茄、彩椒、生菜、萝卜、芹菜、洋葱、紫甘蓝、菠菜、牛油果，冷吃的时候也不会影响口感，黄瓜丝和萝卜丝冰过再吃反而更脆爽解腻。</p>
+<p>如果你非常喜欢油脂的口感，那么秋葵、山药、海带、木耳这类蔬菜也是一个很好的口感补充。它们的粘液多糖和糖蛋白在冷却时不会像油脂那样凝固变质，反而更顺滑，可以很好弥补碳水发干的感觉。</p>
+<p>而像菠菜、豆芽、茄子、西兰花这种蔬菜，煮熟后冷藏，能让酱汁慢慢渗入吸收，给每顿饭提供更丰富的味觉层次。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/07/31/279ce53d650c4da9913f03a95a3bcd99.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<h3>酱汁和调味</h3>
+<p>热腾腾的饭菜吃起来就香，很大原因是有「温度」这个帮手。香气随热量挥发，趁热吃时香味扑鼻，而在冷吃的时候，不仅香气挥发大幅减弱，人对甜、鲜、香在低温下感知都会变钝，这就是为什么很多热食放冷了反而无味。</p>
+<p>所以，想要出彩的调味，就需要在备餐时用本身就强烈、且常温下就能充分成立的味道，来补偿低温下的嗅觉和味觉敏感度。</p>
+<p>根据口味，大致有这些推荐：</p>
+<ul>
+    <li>酸：米醋、香醋、柚子醋；柠檬、青柠</li>
+    <li>咸鲜：生抽/酱油、鱼露、味噌</li>
+    <li>辛香：蒜、姜、辣椒、花椒、薄荷、紫苏、香菜</li>
+</ul>
+<p>除此之外，也通常会加入一些液态油脂和糖作为补充。如辣椒油和麻酱里的油脂可以中和大部分食材的「干」，它也能够在一定程度上帮助香气挥发；而糖可以在一定程度上中和强烈的酸和咸，让食物更好入口。</p>
+<p>大部分基础酱汁（酸+咸鲜+糖+油）都可以提前调好、分装小瓶，冷藏一周都不会变味。而蒜末、辣椒、香草、青柠汁这类鲜料最好吃前再加，防止长期保存影响风味。在备餐时也要注意，尽量不要提前拌进碗，因为它们会让脆爽蔬菜出水变蔫，影响成品的口感。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/07/31/article/ca8efa9de2de8beab44933a967069c61.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>可以试试这五个百搭的味型作为调料的基础：</p>
+<ul>
+    <li><strong>川式麻酱汁</strong>：麻酱 2 勺（先用凉白开或香油澥开成可流动的稀糊）+ 生抽 1 勺 + 米醋 1.5 勺 + 蒜末 1 勺 + 糖 0.5 勺 + 辣椒红油 1 勺 + 花椒粉少许；</li>
+    <li><strong>越南鱼露汁</strong>：鱼露 1.5 勺 + 青柠汁 2 勺 + 糖 1 勺 + 温水 2 勺（调开）+ 蒜末辣椒碎适量；</li>
+    <li><strong>日式柚子醋汁</strong>：柚子醋 2 勺 + 酱油 0.5 勺 + 味醂 0.5 勺 + 一点点香油；</li>
+    <li><strong>韩式辣拌汁</strong>：韩式辣酱 1 勺 + 醋 1 勺 + 生抽 0.5 勺 + 糖 1 勺 + 蒜末 + 香油 1 勺 + 芝麻；</li>
+    <li><strong>中式蒜香油醋汁</strong>：生抽 1 勺 + 米醋 1 勺 + 香油 1 勺 + 蒜末 + 糖少许。</li>
+</ul>
+<h2>烹饪方式与保鲜</h2>
+<p>另一个显著影响进食感受的东西，就是烹饪过程中产生的热量。有些时候，哪怕做了让自己平时食指大动的菜肴，做完一身汗淋淋也没了享用的胃口。</p>
+<p>不过，这是可以通过选择烹饪方式而尽量避免的。有些烹饪方式能比其他方法显著减少产热和散热，让你的备餐过程也能稍微舒适一点。</p>
+<blockquote>
+    <p><strong>推荐方式排序：不开火 &gt; 微波 &gt; 密闭电器/空气炸锅 &gt; 集中焯水 &gt; 猛火快炒 &gt; 敞口蒸煮 &gt; 烤箱</strong></p>
+</blockquote>
+<p>推荐的烹饪方式首先是不开火的冷食，比如凉拌菜或生食，或者像肉片、豆芽这类一烫就熟的食材，对房间的散热微乎其微。大部分的香料也可以这样准备。</p>
+<p>其次是微波炉，它的用法是直接激发食物内部的水分子，几乎不会加热周围的空气和器具，因此基本不会升高室内温度。</p>
+<p>密闭式电器，像电饭煲、压力锅、慢炖锅和空气炸锅这类也是相对散热较少的烹饪工具。虽然不可避免会产生热量，但大部分热量会被锁在电器内部，极少传递到室外。在所有煎烤类做法中，空气炸锅也是散热最少的方式，在夏天强烈推荐。另外，这些工具通常都内置了定时或者自动化烹饪过程，节省精力和时间，对工作太忙、只能利用闲暇时间备餐的社畜非常友好。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/07/31/article/48edd09f497312a3707b94b31b099f6e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>像简易水煮、焯水这样的方法，虽然要用火，但开大火快煮能达到同样效果，且可以很方便地做到一锅出来减少散热。我的习惯是按照口味由淡到浓的顺序（如先煮蛋类再煮蔬菜），份量不大的或者容易掉渣的可以用滤网分隔同时煮（类似鸳鸯锅的概念），还能避免洗锅麻烦和串味。</p>
+<p>如果你非要煎炒，可以选择煎个蛋、煎虾、牛肉片等成熟快的食材，如果灶够猛，也可以猛火快炒。只要能在几分钟内结束战斗，往房间内散发的热量相对还在可控范围内，只是对正在炒菜的人体感影响最大。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/07/31/abf23e1fa68c21b02773f5896ac62fa0.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>比较不建议的烹饪方式，就是长时间炖煮和用烤箱做饭。炖煮需要长时间持续加热，虽然各种珐琅锅已经可以做到用小火保持相近的温度，但热量还是会随着时间推移不可避免地向房间扩散。而且这个过程会涉及大量水分蒸发，增加空气湿度会严重影响体感温度，让排汗更难，感觉更闷热，哪怕是密闭性好的产品也不能完全避免。</p>
+<p>而烤箱不仅在烹饪之前需要预热，在食物做好后，还需要漫长的散热过程，会持续给厨房加温。烤箱的体积往往也大于空气炸锅，因此哪怕是做同样体积的食物，烤箱也需要更多的热量加热到同样的温度、更长的时间散热来回到室温。</p>
+<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/07/31/3fd4ee8e10e60e9f5017f2de9968112c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
+<p>除了烹饪方式，还有这些方法能尽量降低厨房的温度。比如全程开启抽油烟机，既能排走气味，也能吸收烹饪产生的水汽，降低湿度，让体感不那么难受。另外，也可以尽量把开火的任务集中在一天中最凉爽的时段（如周日早晨或每天清晨），利用较低的环境温度来对冲烹饪产生的热量，做饭之后也能尽快散热。最后，一次性大批量备餐的时候，虽然无法控制单次的热量，但减少了每周开火的频率，整体散热量会更少，一天吃苦七天受益，从个人体验来说也绝对不差。</p>
+<h3>保鲜</h3>
+<p>夏天备餐的两难是：如果提前准备，有些食材放久了会影响口感；但不想加热、只想吃冷菜的时候又担心未完全加热，是否会有细菌的问题。</p>
+<p>通常来说，熟食冷藏 3–4 天以内吃完都不用担心细菌的问题，不过最好还是在备餐阶段就做好准备，尽量减少风险。</p>
+<p>首先要尽快冷藏，出锅后 2 小时内就应该放进冰箱，夏天室温高更要抓紧，因为室温到冷藏之间的温区正是细菌繁殖最快的阶段。其次是尽量分装，生熟分开是最基本的，每一份也要尽量小份分装、并且最好把不同类型的原料分开放置。小份降温更快，也能避免每次取用翻动整盒造成反复污染。</p>
+<p>这是根据食材类型的提前准备建议，可以在备餐时拿来做参考：</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/113338</id>
+            <title>TDS REVIEW | 铁三角 ATH-SQ1TW2NC 降噪真无线耳机体验</title>
+            <link>https://sspai.com/post/113338</link>
+            <guid isPermaLink="false">https://sspai.com/post/113338</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 13 Aug 2026 07:01:08 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这篇文章是 TDS Studio 在少数派上的第 28 篇文章，依然是全平台首发。</p><p>年初的时候我们曾经跟大家介绍过铁三角的中档主力真无线产品，降噪优秀，声音也有意思，还有着丰富的配色可选，而入门系列其实并不止「三系」 CK3TW/CKS3TW 这一个产品线，还有个偏离传统命名逻辑的 SQ1 系列在售。我们今天体验的是 SQ1TW 的第二代「半」产品，在 SQ1TW2NC 之前，这个系列是没有主动降噪功能的。</p><h2>包装与配件 | Package &amp; Accessories</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/5d4cb49ea1e0fb0d7bf76232c502b290.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>SQ1TW2NC 的包装就非常小巧了，甚至是我们见过的铁三角最小包装，基本上比耳机充电盒大不了多少，配色非常鲜艳，也能凸显出这个系列的特色，即不同风格的撞色组合。内部配件包含三对额外的耳套以及一条 USB-C to USB-A 短充电线，耳套是典型的矮轴，材料跟 CKS50TW2 附带的没有什么区别。充电盒被牛皮纸包裹着，倒是「环保」。出厂触点都有绝缘贴纸保护，不必担心运输亏电。</p><h2>设计、佩戴表现与声学结构 | Design, Fit &amp; Acoustic Structure</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/2656db2c9ac80cd3f12bcf28b527a5a2.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>SQ1 系列的撞色可选项是非常复杂的，之前甚至还有花式咖啡的配色，就 SQ1TW2NC 来说，目前你在市场上可以选择的配色包括：黑与灰白相间的「黑糖珍珠」、绿与米白相间搭配暗香槟金色的「抹茶生巧」、浅粉色搭配玫瑰金的「蜜桃奶冻」、卡其色与豆色结合的「太妃拿铁」、不同灰度的浅灰色搭配的「落雪霜灰」，以及我们手上的「焦糖海盐」——暖白色、深蓝色、银色以及深橙红色的搭配。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/article/55dd901670e8b1e837d170a46523bf49.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>用甜品命名配色方案，是个不错的主意，但它的充电盒外观反倒更像自家饭团机事业部可能推出的样式，像是个电饭煲。体积非常小巧，仅比 46mm 款 Apple Watch 稍微大一圈而已。顶部的透明盖板抗刮擦性能不算好，即使收纳袋包裹也很快就会出现轻微划痕，两处开窗也让耳机本体的配色融合进了充电盒的外观中，很有创意。开盖手感比较轻，耳机在盒内的磁吸力度适中。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/600fcf1f80bc95a3f6cf001764cae3e0.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>耳机本体非常小巧，几乎是这个价位最小的腔体了，单侧仅 4g 重，可以认为是 buds 豆式形态。形状基本上就是一个圆角正四棱柱，只是后端做了类似试戴镜插片的结构作为一定程度上耳翼存在，这个多出来的部分也能够帮助你更方便地从盒中取出耳机，同时加强佩戴稳定性，表面做了类似电镀的处理，这也是整机唯一有金属质感的部分。LED 灯从 LR 标识中透出来，不显眼但很精细。腔体侧面的凹陷结构也能够帮助你更加稳定地抓取。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/b23bf331d5b680bfba0015bf233e2541.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>实际佩戴下来，SQ1TW2NC 对于大多数人都是非常轻且无感的，即使是小耳廓人群也很难出现饱胀感。它的腔体内侧没有特别高的饱满度，大体平滑。大部分读者都能够实现舒服的长时间佩戴体验。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/c27a8d6f3b4119f5e127db1221660874.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>支持 IPX5 级别防泼溅，对于基础的小雨天气和运动汗水有基本的防护能力。</p><h2>操作与软件功能 | Control &amp; APP</h2><p>它的操作依靠于腔体后端面板上的触控识别。支持单击、双击、三击以及长按的定义。默认定义是左侧单击增大音量、双击降低音量、长按切换降噪；右侧单击播放控制、双击下一曲、三击上一曲、长按开启对讲。你可以在 app 中进行设置，也可以调节操作的反应速度。就默认的反应速度，暂停的反应会有约 1s 的滞后，其他则相对跟手。App 中也保留了类似 HOLD 键作用的传感器锁。语音提示音量默认足够高，没有佩戴感应。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/ee22538d2fe96318b01b8b2f1153c49e.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>和 TWX7 等一致，SQ1TW2NC 也使用铁三角的 Connect app 进行各项操作控制和调整。我们引用 CKS50TW2 的介绍。默认界面功能区域划分还是比较清晰的，只是设置区的功能堆砌没有进一步进行分类。好在 UI 是易懂的。下面展示一下各主要界面的样式并详细说说这些功能。</p><p>主页面的功能依次为环境声音控制、均衡器、低延迟、计时器、声景以及播控。自定义设置页则分类为音频设置和系统设置两个环节。通过 Connect app，可以进行的操作可以说非常多，比绝大多数我见过的 TWS 控制 app 都要细。</p><p>私人计时器就是一个独立于系统的倒计时工具，提供三种提示音来进行一分钟以上的倒计时提醒，对于长时间聆听的提醒或是午休佩戴时当作闹钟使用时都很方便。</p><p>关于声景 Sound Scape 功能，请阅读《<a href="https://sspai.com/post/105893" target="_blank">铁三角 ATH-CKS50TW2 降噪真无线耳机体验 - TDS REVIEW</a>》，已经有非常详细的介绍了。</p><h2>降噪/通透/通话 | ANC, Transparecy &amp; Call</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/64aed5310eedc4ae4a5ac1d00623f8d9.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>尽管腔体偏小，但得益于结构设计，SQ1TW2NC 的被动隔音性能其实还可以，跟 CKS50TW2 以及 WF-1000XM6 等稍大一些的 buds 没法比，但比很多 pods 还是会明显一些。开启主动降噪之后，SQ1TW2NC 对于大多数的低频稳定噪音的抑制还是明显的，深度跟 CKS50TW2 比起来稍有距离，但是通勤可用的状态。对于人声下盘的削弱有一定感知，但跟中价位手机厂出品比起来，人声的削弱程度就会明显差一些，跟稍低价位的布丁、原点比起来，它的有效频宽也会略有不如，只是差得不会特别多而已。它的耳压控制还是相当不错的，大多数人都不用太担心耳压问题造成的不适感。</p><p>抗风噪方面，它没有独立的抗风噪模式，但是在开启主动降噪之后我们进行三个方向的风源测试，SQ1TW2NC 的风噪影响都较少，在常规骑车出行之类的场景下都不用担心这类问题。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/a0da9471fcb68391afb5c302132ce097.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>通透模式的自然度延续了 CKS50TW2 的不错水平，但是高频依然可以感知到一定程度的衰减，使得对于环境音的还原稍微有点闷，好在没有对于某些频段的刻意突出。它的通透模式是多档调节的（体现在软件 UI 上几乎是无级调节）。我们认为通常情况下直接拉到最高一档即可。风噪对于通透模式的影响主要集中在正对和背对方向，且风噪听感并不尖锐，侧对风源的影响会更小。</p><p>通话方面，通话侧音会自动开启，我们依然在运营商网络环境下进行通话测试，它的默认收音音量足够，清晰度较高，几乎没有什么闷感。降噪的介入是相对明显的，但风噪的影响偏少。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/8a9ecf453c59fb002c8fb33f3fa33842.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>综合来看，铁三角 ATH-SQ1TW2NC 的降噪水平跟 CKS50TW2 还是有一些差距的，考虑到它本身的定价水平，跟国内一些数码品牌的中端主力型号对比没有明显的优势，但是它仍然在通话、通透模式的自然度、耳压控制等表现还不错，而且考虑到小体积 buds 本就是少见的形态，我们认为它的降噪综合水平可以进入 TDS 降噪综合能力金字塔 In-Ear Fine Level 并在此档排名中等靠后。不必冲着降噪购入就是了。</p><h2>信号与续航 | Connection &amp; Battery</h2><p>它不支持高码率编码，所以我们还是老样子测试 AAC 下的情况。来到我们熟悉的信号测试环境，AAC 连接标准测试设备 Xperia 1 V 和 iPhone 14 的状态下，无论 WLAN 关闭还是开启的情况下，卡顿丢包情况都比较少。距离 9m 且隔承重墙的状态下也不会有卡顿的明显增加，丢包在 9.5m 左右开始明显影响体验。</p><p>延迟方面，它支持独立低延迟模式。按照我们的流程，开启低延迟之后以 AAC 编解码器连接标准测试设备 iPhone 14，播放流媒体视频，主观感知上延迟控制在正常语速少于半个字，在大部分视频观看和不严格要求跟手的游戏场景都是可以用的。不开启低延迟的情况下则多于半个字，感知较为明显。</p><p>续航方面，官方标称仅耳机连续播放 6h/7.5h（降噪开/关），搭配充电盒最高一共 18h/22.5h（降噪开/关）。个人经过标准流程测试下来，以 AAC 编解码器连接 iPhone 14，开启降噪，设置其他为默认，以 50% 音量连续播放流媒体音乐（Apple Music Lossless）、播客节目（小宇宙），仅耳机续航为 4 小时 31 分钟（三次标识满电状态下均值），基本可以认为符合官方描述。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/6ac61c7e4dcfc00b31ee11e1266336bf.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>充电测试方面，PD 支持也没有问题，它也支持 Qi 标准无线充电，下面是无线充电测试结果。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/article/2d75c9916b4ee9057f86622d6259f272.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>扬声器、声音模式与编解码器 | Driver, Sound Modes &amp; Codec</h2><p>SQ1TW2NC 搭载了直径 5.8mm 的微动圈单元，没有明确的振膜材料或其他单元信息。支持的编码为 SBC / AAC，在中价位看来略显不足。四种预设均衡器效果基本上可以对应到文字描述上，四种模式都有着足够的可用性。APP 里依然可以控制三种不同精度的音量调节，最高可以细分到 64 级步进，这一点还是几乎没有其他厂商愿意做的。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/c8871cc391c2e524ea340c9ccefb0dd5.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>声音主观描述 | Sound Description</h2><p><strong>基于降噪关闭、AAC 编码、默认声音模式。</strong></p><p>低频量感适中略偏多一点，厚度和饱满度都不算夸张，弹性表现还不错，下潜能力一般。收放速度不算快，保留的残响则不多。氛围烘托的晕染感不强，有轻度的浓郁感。SQ1TW2NC 的低频属于质感比较扎实但是清晰度和能量都不算足的状态，极低频反而增益不少，中低频过渡区域有明显的快速滚降。单元素质表现也一般也让它的中低频分离并不是很好，部分曲目下显得有一点低频漫过人声的感觉。基音位于中下盘的乐器有一定的前倾。</p><p>中频，人声的距离稍近，口型则比标准状态略小一圈，精致程度尚可。对于人声质感的重视程度略高于线条刻画，男女声之间的倾向不算明显，适合于有一定能量的声线。颗粒感有保留，大体上的顺滑度还是可以的。音色渲染有一点偏冷，对于上盘也有调整，但程度不算明显，不会像刻板印象中的「铁三角女毒」那样偏薄、扭曲。喉音的位置稍高，气声比例适中，口水声之类细节的前凸不过分，齿音也有打磨。人声的通透程度中规中矩，有轻度的增亮。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/46ed59af45cd1983fbfe6425d013074b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>乐器方面，大部分乐器是质感优先一点。弦乐器中，小提琴、中提琴、吉他的拉拨弦细节都不算清晰扎实。大提琴的形体感也比较圆润，在空间里的比例稍大。在竖琴以及一些 bell 类音色出现的时候，SQ1TW2NC 会有轻度的金属感感知。铜管类的气势感还可以，需要亮度的小号等有稍加强调的音头。木管类的空气感有所收缩，音色比较保守。乐器的泛音不算丰富。打击乐器中，Kick 的存在感较足，Snare 收得不快。镲片类亮度中规中矩，刺激感也不多，只是部分曲目中会有轻度的金属感。</p><p>高频总体上不会有很足的能量堆积，亮度也不算高，中高频过渡频段有一处峰，除此之外还算平顺。极高频的信息量不多，延伸能力较为一般，滚降稍早、较快。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/3e827fd197679164b41eb6543dfa031e.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>声场规模没有什么明显的优势，横纵向都比较近，边界感相对清楚。结合相当一般的「高度感」，SQ1TW2NC 能够呈现的空间大体上是个小型扁球。人声与乐器之间的分离度表现中规中矩，整体感则还可以。解析能力在五六百价位没有明显优势，有轻度的「解析感」。动态还可以，瞬态一般。</p><h2>总结评价 | Overall Impression</h2><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/4f0b00386131f28519ec0a8b3fb6621b.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>SQ1TW2NC 的声音素质、编码配置和降噪综合能力，应该都算是在国内同价位甚至更低价位主流新产品面前不太拿得出手的水平，没有特别明显的功能层面的长板，但你会发现即使如此，它依然有一些点值得国内品牌学习。</p><p>首先是细分到 64 级步进的音量控制功能，到现在你仍然能够在各种地方见到普通消费者吐槽「多一格太吵、少一个不够响」的问题，而铁三角即使是最低端的产品也保留了这个其实挺实用的调节项。其次是连续三代产品不遗余力地在豆式结构中做文章，而似乎以手机品牌为首的国内厂商更愿意基于成熟的柄式结构来做，以至于让外观同质化非常严重。加上声景这一软件功能和出色的色彩搭配、佩戴兼容性，SQ1TW2NC 还是有一些可能发烧读者不太重视的点表现出色的。</p><p>直到 9 月 2 日，e-earphone 都有优惠，折合下来刚刚四百人民币出头…… 考虑到这个价格的话我们的推荐等级可以来到接近 IV 级。但是就国内目前的主要售价来看，还是更倾向于 III 级的综合评价了。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/article/14c75e6a4b6fba50be54fdba5a7b6c84.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><hr /><p><strong>本文所涉及型号在当时市场背景下的 KT MARK:</strong></p><p><strong>Audio-Technica ATH-SQ1TW2NC: III (Recommend)</strong></p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/11/b81a9d711966183bb0597c99c9230c0c.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>降噪综合能力金字塔 | TDS ANC Pyramid：</strong></p><p><strong>Audio-Technica ATH-SQ1TW2NC: In-Ear Fine Level</strong></p><p>关于 KT MARK 评分机制以及利益相关的「不干涉评价原则」，请搜索《TDS Studio 评分标准与内容说明 V202502》，可以在主流搜索引擎直接搜索。</p><p><strong>KingTsui, TDS Studio.</strong></p><p><strong>August 2026</strong></p><p><strong>It's a TDS production.</strong></p><p><strong>颜色示意来源于铁三角官网，其余所有内容全部自主创作，请勿抄袭内容、套抄行文结构等，保留一切权利。</strong></p><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://sspai.com/post/113385</id>
+            <title>派早报：荣耀发布 Robot Phone、Google 推出 Pixel 11 系列等</title>
+            <link>https://sspai.com/post/113385</link>
+            <guid isPermaLink="false">https://sspai.com/post/113385</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 13 Aug 2026 00:14:09 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <h2><strong>少数派的近期动态</strong></h2><ul><li>新一季少数派会员启航，更新权益，更多惊喜，还有实体纪念卡。<a href="https://sspai.com/post/112858" target="_blank"><strong>点击了解</strong></a></li><li>能让 AI 助手通过自然语言指令直接与您的 Quote/0 摘录墨水屏交互的 Dot Skill 已上线。<a href="https://sspai.com/link?target=https%3A%2F%2Fdot.mindreset.tech%2Fdocs%2Fservice%2Fopen%2Fskill" target="_blank"><strong>点击了解</strong></a></li><li>Quote/0 摘录双人套装即将以惊喜价格上线 8 月 13 日 20:00 小红书七夕专场活动直播间。<a href="https://www.xiaohongshu.com/user/profile/611a29af000000000100635c" target="_blank"><strong>点击预约</strong></a></li></ul><h2>你可能错过的好文章</h2><ul><li><a href="https://sspai.com/post/113219">把「闪念胶囊」（Almost）放到 iPhone 锁屏</a></li><li><a href="https://sspai.com/post/113352">对话少数派老麦：从 Palm、WebOS 到 AI 硬件，依然不想成为多数派</a></li><li><a href="https://sspai.com/post/112880">我，与「唯一」的 iPhone Air</a></li></ul><p>&gt; 下载<a href="https://sspai.com/page/client" target="_blank">少数派 2.0 客户端</a>、关注<a href="https://sspai.com/s/J71e" target="_blank">少数派公众号</a>，解锁全新阅读体验 📰</p><p>&gt; 实用、好用的<a href="https://sspai.com/mall" target="_blank">正版软件</a>，少数派为你呈现 🚀</p>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://sspai.com/post/113219</id>
             <title>把「闪念胶囊」（Almost）放到 iPhone 锁屏</title>
             <link>https://sspai.com/post/113219</link>
@@ -33,7 +191,7 @@
             <content:encoded>
                 <![CDATA[
                     
-                    <p><strong>编者按：</strong>本期播客为《<a href="https://podcasts.apple.com/cn/podcast/%E4%B8%89%E4%BA%94%E7%8E%AF/id1475113228" target="_blank">三五环</a>》邀请老麦参与的访谈，少数派仅转载节目内容。</p><hr /><h2>直接收听</h2><div class="ss-audioSource" id="229" src="https://media.xyzcdn.net/5e280fab418a84a0461faa3c/luf34bdBuAypd09__G30J1XhwWCW.m4a" title="对话少数派老麦：从 Palm、WebOS 到 AI 硬件，依然不想成为多数派">Audio</div><ul><li><strong>嘉宾｜老麦，</strong>少数派创始人。</li><li><strong>主播｜刘飞，</strong>内容创作者，产品经理。</li></ul><p>二十年前，智能手机还叫「PDA」，大家还在用触控笔和全键盘，为了刷一个 ROM 能在电脑前熬个通宵。那时候，老麦和一群极客在 BBS 论坛「主机网」里，构建了一个属于 Palm 和 WebOS 的乌托邦。一晃眼，iPhone 早已消灭了全键盘，手机变成了千篇一律的玻璃板，而 AI 硬件又试图把相机和 MP3 从手机里「拆」出来。</p><p>在这个技术浪潮翻涌的时代，老麦带着他的「少数派」活成了一个小众但坚韧的样本。</p><p>这次，我和老麦聊了聊他从 Palm 时代开始的二十年数码时代的经营历程。复盘了少数派如何从一家媒体，一步步跑通「内容+产品」的商业闭环；也聊到了他与罗永浩那段「不打不相识」的往事，以及那些改变了他对科技媒体商业模式认知的故事。</p><h2>内容索引</h2><p><strong>01:27 Part 1 极客启蒙与社区乌托邦：从 Palm 到主机网</strong></p><p>智能手机的「前 iPhone 时代」：从摩托罗拉 Linux 手机到 Palm OS，体验早期极客刷机、折腾 ROM 的纯粹乐趣。</p><p>社区的诞生与坚守：因热爱而聚集，从个人博客到 BBS 论坛「主机网」，在 WebOS 被惠普放弃后，老麦曾组织用户为开发者捐款，试图用「金币兑换」维持生态，最终在微信等应用的缺失中无奈落幕。</p><p><strong>23:00 Part 2 从内容厂牌到「少数派」的商业转型</strong></p><p>主机网关闭后，团队承接运营商 3G 流量内容服务，顺势创立「少数派」，从单纯的 APP 推荐升级为「数字生活指南」。</p><p>早期建立作者付费体系，用 B 端收入反哺 C 端创作者；从免费内容到百万级销量的 Notion 课程，再到实体产品共创，逐步跑通了从内容到产品的商业闭环。</p><p><strong>37:22 Part 3 行业变迁与「不打不相识」的转折</strong></p><p>怀念索爱、诺基亚百花齐放的功能机时代，回顾了 iPhone 如何消灭全键盘，以及当下手机硬件趋同、创新乏力的现状。</p><p>老麦回忆与罗永浩从早期网络冲突到线下和解的故事。因为这一次「不打不相识」的转折与罗永浩那句「科技媒体商业模式有局限」的直言，让老麦决定关闭主机网，并萌生了利用深圳供应链做产品的想法。</p><p><strong>51:24 Part 4 下一个十年——AI 硬件的「分久必合」与小众媒体的价值</strong></p><p>AI 时代是否迎来了「分」的趋势，AI 眼镜、录音戒指等专用设备将分担手机功能，而语音交互与第一人称视角的记录将成为个人助手的新入口。</p><p>当 AI 生成内容泛滥，坚持真人真实体验的深度内容反而变得稀缺。老麦认为，成功不是赚大钱，而是做热爱的事，与高净值用户共同成长，不被时代抛弃。</p><ul><li><strong>制作人：</strong>噗噗猫</li><li><strong>片头：</strong>Where Are You Going (Live) - 海龟先生</li><li><strong>片尾：</strong>像风一样自由 - 许巍</li></ul><h2>相关</h2><p>本期 shownotes 由 AI 工具联合辅助生成。欢迎在评论区留言交流。如果喜欢《三五环》，也恳请能在苹果 Podcast、网易云音乐、Spotify 或喜马拉雅留下你的宝贵好评。感谢！</p><p>商务合作&amp;嘉宾自荐，请加微信：wocaishiliufei</p><p>&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>，解锁全新阅读体验 📰</p><p>&gt; 简单、好用、<a href="https://sspai.com/item/49?source=ppfv4au3&amp;source_platform=sspai" target="_blank">专注的写作软件</a>，少数派为你呈现 🚀</p>
+                    <p><strong>编者按：</strong>本期播客为《<a href="https://podcasts.apple.com/cn/podcast/%E4%B8%89%E4%BA%94%E7%8E%AF/id1475113228" target="_blank">三五环</a>》邀请老麦参与的访谈，少数派仅转载节目内容。</p><hr /><h2>直接收听</h2><div class="ss-audioSource" id="229" src="https://media.xyzcdn.net/5e280fab418a84a0461faa3c/luf34bdBuAypd09__G30J1XhwWCW.m4a" title="对话少数派老麦：从 Palm、WebOS 到 AI 硬件，依然不想成为多数派">Audio</div><ul><li><strong>嘉宾｜老麦，</strong>少数派创始人。</li><li><strong>主播｜刘飞，</strong>内容创作者，产品经理。</li></ul><p>二十年前，智能手机还叫「PDA」，大家还在用触控笔和全键盘，为了刷一个 ROM 能在电脑前熬个通宵。那时候，老麦和一群极客在 BBS 论坛「主机网」里，构建了一个属于 Palm 和 WebOS 的乌托邦。一晃眼，iPhone 早已消灭了全键盘，手机变成了千篇一律的玻璃板，而 AI 硬件又试图把相机和 MP3 从手机里「拆」出来。</p><p>在这个技术浪潮翻涌的时代，老麦带着他的「少数派」活成了一个小众但坚韧的样本。</p><p>这次，我和老麦聊了聊他从 Palm 时代开始的二十年数码时代的经营历程。复盘了少数派如何从一家媒体，一步步跑通「内容+产品」的商业闭环；也聊到了他与罗永浩那段「不打不相识」的往事，以及那些改变了他对科技媒体商业模式认知的故事。</p><h2>内容索引</h2><p><strong>01:27 Part 1 极客启蒙与社区乌托邦：从 Palm 到煮机网</strong></p><p>智能手机的「前 iPhone 时代」：从摩托罗拉 Linux 手机到 Palm OS，体验早期极客刷机、折腾 ROM 的纯粹乐趣。</p><p>社区的诞生与坚守：因热爱而聚集，从个人博客到 BBS 论坛「煮机网」，在 WebOS 被惠普放弃后，老麦曾组织用户为开发者捐款，试图用「金币兑换」维持生态，最终在微信等应用的缺失中无奈落幕。</p><p><strong>23:00 Part 2 从内容厂牌到「少数派」的商业转型</strong></p><p>主机网关闭后，团队承接运营商 3G 流量内容服务，顺势创立「少数派」，从单纯的 APP 推荐升级为「数字生活指南」。</p><p>早期建立作者付费体系，用 B 端收入反哺 C 端创作者；从免费内容到百万级销量的 Notion 课程，再到实体产品共创，逐步跑通了从内容到产品的商业闭环。</p><p><strong>37:22 Part 3 行业变迁与「不打不相识」的转折</strong></p><p>怀念索爱、诺基亚百花齐放的功能机时代，回顾了 iPhone 如何消灭全键盘，以及当下手机硬件趋同、创新乏力的现状。</p><p>老麦回忆与罗永浩从早期网络冲突到线下和解的故事。因为这一次「不打不相识」的转折与罗永浩那句「科技媒体商业模式有局限」的直言，让老麦决定关闭主机网，并萌生了利用深圳供应链做产品的想法。</p><p><strong>51:24 Part 4 下一个十年——AI 硬件的「分久必合」与小众媒体的价值</strong></p><p>AI 时代是否迎来了「分」的趋势，AI 眼镜、录音戒指等专用设备将分担手机功能，而语音交互与第一人称视角的记录将成为个人助手的新入口。</p><p>当 AI 生成内容泛滥，坚持真人真实体验的深度内容反而变得稀缺。老麦认为，成功不是赚大钱，而是做热爱的事，与高净值用户共同成长，不被时代抛弃。</p><ul><li><strong>制作人：</strong>噗噗猫</li><li><strong>片头：</strong>Where Are You Going (Live) - 海龟先生</li><li><strong>片尾：</strong>像风一样自由 - 许巍</li></ul><h2>相关</h2><p>本期 shownotes 由 AI 工具联合辅助生成。欢迎在评论区留言交流。如果喜欢《三五环》，也恳请能在苹果 Podcast、网易云音乐、Spotify 或喜马拉雅留下你的宝贵好评。感谢！</p><p>商务合作&amp;嘉宾自荐，请加微信：wocaishiliufei</p><p>&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>，解锁全新阅读体验 📰</p><p>&gt; 简单、好用、<a href="https://sspai.com/item/49?source=ppfv4au3&amp;source_platform=sspai" target="_blank">专注的写作软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>
@@ -90,205 +248,18 @@
         </item>
         
         <item>
-            <id>https://sspai.com/post/112887</id>
-            <title>走通上架流程，拥抱新兴生态：《鸿蒙应用上架指南》上线</title>
-            <link>https://sspai.com/post/112887</link>
-            <guid isPermaLink="false">https://sspai.com/post/112887</guid>
+            <id>https://sspai.com/post/112873</id>
+            <title>说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路</title>
+            <link>https://sspai.com/post/112873</link>
+            <guid isPermaLink="false">https://sspai.com/post/112873</guid>
             <pubDate></pubDate>
-            <updated>Tue, 11 Aug 2026 05:59:27 GMT</updated>
+            <updated>Wed, 29 Jul 2026 15:05:27 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    <span class="ss-linkCard">&nbsp;</span><p>随着 HarmonyOS NEXT 的日渐成熟，越来越多的独立开发者和小团队开始将目光投向这片新的生态。借助日益强大的 AI 辅助编程工具，写出能跑通的代码、画出漂亮的 UI 界面，门槛已经变得前所未有地低。</p><p>但当你想把应用真正推向市场时，往往需要面对一个全新的领域。</p><p>作为一个独立的新生态，鸿蒙拥有自成体系的、有时甚至更加严格的上架规则。许多在其他平台有过开发经验的朋友在初次尝试时，往往会感到一丝陌生：证书和签名机制换了一套逻辑；国内特有的备案、资质和隐私合规有着具体的硬性要求；图标的呈现和启动页的停留时长也有了新的规范。</p><p>如果你刚接触这片生态，这些散落在海量官方文档中的细节，可能会占用你不少精力。</p><p>为了帮助大家更好地融入这片新生态，少数派编辑部在过去的一段时间里，与许多活跃在一线的鸿蒙开发者进行了广泛沟通。我们发现，虽然官方文档已经足够权威且详尽，但它更像是一本辞典；而大家在真正上手操作时，最需要的是一套连续、可执行的步骤。</p><p>因此，我们策划了这份《鸿蒙应用上架指南》。在这份指南里，我们不会干巴巴地照搬官方条款，而是替你把点状分布的关键信息串联起来。我们会用你熟悉的既有概念作为桥梁，告诉你哪些经验可以复用，哪些新规则需要特别留意。</p><p>这份指南会将规则转化为可以直接执行的步骤，为你理清脉络，让你能把更多精力留在打磨产品本身上。</p><p>本教程共分为 5 篇，合计约三万字。我们为你规划了一条从设计规范到最终上架的完整路径，每一步都有明确的实操指导和提醒：</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/07/b7d6f35a0948bcf7dfab519bef903d7c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>（一）揣摩规矩，考究方圆：把握鸿蒙设计、交互与生态规范。</strong> 梳理图标、启动页的视觉指标，适配折叠屏和大屏的 UX 体验标准。拆解隐私合规、华为账号登录及内购（IAP）等不可忽略的生态规则；</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/07/4741c2d735c60935f6a890db92945cc5.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>（二）严丝合缝，再三校验：鸿蒙应用的签名、打包与测试。</strong> 搞懂鸿蒙的四层签名体系（.p12、.csr、.cer、.p7b），理顺证书的申请顺序。带你完成打包，对比云调试、云测试及各类发布渠道的差异，跑通送审前必做的上架预检；</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/07/b5df23b93e8e92e3c778452350ca16fc.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>（三）章法有度，通行无忧：上架前的实名、备案与资质流程。</strong> 资质合规往往是大家容易卡壳的一环。我们会梳理 APP 备案、软件著作权申请，以及隐私政策与双清单的合规要求，为你提供一份清晰的倒推时间线；</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/07/5579b12b1e52855fc9edad2edddb3ce1.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>（四）一鼓作气，再而图远：提交审核、版本发布与后续管理。</strong> 详述 App Gallery Connect 的提交流程与配置顺序。盘点审核指南中的常见注意事项，分享版本发布的策略，以及应用上架后的监控和运营经验；</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/07/63a50946c9bbff4d8d35d3c56c0f4560.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>（五）事半功倍，点石成金：用 AI 助力鸿蒙开发。</strong> 探讨如何将 AI 融入开发工作流。无论你是习惯对话驱动的 Vibe Coding，还是基于文档驱动的 SDD 开发，我们都会提供实用的提示词技巧，演示如何用 AI 起草繁琐的隐私合规素材。</p><p>我们相信，这份指南同时适合：</p><ul><li><strong>首次接触鸿蒙开发的独立开发者或小团队：</strong>无论你是刚刚跑通第一个 Hello ArkTS 工程，还是已经完成了应用的主体功能，这本指南都能帮你打通从代码到上架的最终环节；</li><li><strong>有其他平台开发经验，想拓展鸿蒙生态的开发者：</strong>如果你已经熟悉了主流应用商店的上架流程，教程中的横向对比能帮你迅速理解鸿蒙平台的规则，大幅降低迁移和适配成本。</li></ul><p>为了鼓励更多开发者参与到新生态的建设中，<strong>本教程完全免费</strong>。你无需单独购买，即可直接阅读所有已发布的指南内容。祝各位朋友早日上架成功，期待在鸿蒙应用市场里看到你们的作品！</p><p>&gt; <a href="https://sspai.com/topic/526">点击免费阅读《鸿蒙应用上架指南》</a></p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/113288</id>
-            <title>从内容工坊到 Dot Skill，Quote/0 开始把屏幕交还给你</title>
-            <link>https://sspai.com/post/113288</link>
-            <guid isPermaLink="false">https://sspai.com/post/113288</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 11 Aug 2026 04:00:00 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>从最初的测试与共创算起，Quote/0（摘录）已经陪伴大家近一年半的时间。最初我们只想做一块安静的墨水屏：不推送、不闪烁，只把真正重要的信息留在抬眼可见的地方。</p><p>后来 Quote/0 进入了许多我们没有预设的场景：有人把它放在工位上作为专注提醒，有人用它展示写作目标、照片和服务器状态，也有人通过 API 把它改造成自己的自动化看板。在 AdventureX 2026，它还成为近千位选手的电子胸牌，被选手们称为这一届最有趣的产品。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2026/08/10/65a607b3d5d15d27cd0bf5bfec45ae6a.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2026/08/10/51ce596db352b895ec1d2646c9cf6605.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2026/08/10/64039f7ddd0fe9e16fe6370ecba25212.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2026/08/10/e7cc7ab199640c725a2589760e9b7139.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h2>当屏幕开始由你自己决定</h2><p>过去几个月，Dot. 的内容工坊一直在继续更新。我们也逐渐把 Quote/0 的一部分控制权交给用户。</p><p>现在你可以通过 APP 自己编排信息流，也可以使用文本、图像、RSS 等方式，把原本不在内容工坊里的信息放到 Quote/0 上。手机靠近设备的 NFC 区域，还可以进一步唤起对应内容。</p><p>除此之外，<a href="https://dot.mindreset.tech/developers" target="_blank"><strong>开发者平台</strong></a>已经开放文本 API、图像 API 与画板 API，可以进一步组合文字、图片、状态和数据，把自己的信息做成卡片、仪表盘，甚至一些小型视觉实验；借助 <a href="https://dot.mindreset.tech/docs/service/open/skill" target="_blank"><strong>Dot Skill</strong></a>，你可以直接通过自然语言告诉 AI 你想在屏幕上看到什么，再通过文本 API、图像 API 或画板 API，把结果显示在 Quote/0 上，比如「帮我做一张今天的待办」或者「把 Codex 额度状态整理成一张适合 Quote/0 显示的信息卡」。</p><p>原本需要自己处理接口、排版和数据的事情，现在可以尝试交给 AI 完成。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2026/08/10/1e93862287ec0540811611e917c6d95e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2026/08/10/0afdb442b9adff545309d604bd62196a.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>对我们来说，这可能比继续增加几十种固定卡片更有意思。因为 Quote/0 应该显示什么，应该由你自己决定。</p><h2>两块 Quote/0，也可以有一些新的用法</h2><p>当 Quote/0 能够显示的内容越来越自由之后，我们也重新想了一下「两块屏幕」这件事。</p><p>如果两个人各自有一台 Quote/0，它们不一定只是两台独立工作的设备。</p><p><strong>比如可以共用一份待办。</strong>今天谁去取快递、晚上买什么菜、周末还有什么事情没有完成，都可以留在一块不需要频繁打开的屏幕上。</p><p><strong>也可以互相投送一张图片。</strong>旅行时拍到的一张照片、一句突然想到的话，甚至只是某个只有两个人才看得懂的东西，都可以出现在另一块 Quote/0 上。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/10/a57aa56aef6972e1f1e257a23761c130.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>Quote/0 双人限定套装</figcaption></figure><p>一台放在公司，一台放在家里；一块显示工作进度，一块留下生活提醒；也可以完全不讲效率，只是偶尔发一张图给对方。</p><p>从这个角度看，双人套装真正多出来的并不只是「第二块屏幕」，它让 Quote/0 从一个人的信息入口，变成一种两个人之间的、新的信息流。</p><h2>它依然是一块很安静的屏幕</h2><p>一年半并不只意味着功能越来越多。我们收到过许多喜欢，也听到过不少直接的批评：有人喜欢它安静、低打扰，设置好后便自然融入桌面；也有人觉得配网不够顺利、App 不够直观、内容更新不够及时，或者在新鲜感过去后，不知道该让这块屏幕显示什么。</p><p>还有人问：「已经有手机了，为什么还需要一块墨水屏？」</p><p>这些声音提醒我们，真正重要的不是功能数量，而是摘录有没有持续进入你的日常。</p><figure class="image image_resized ss-img-wrapper" style="width: 420px;"><img src="https://cdnfile.sspai.com/2026/08/06/3f111a69dfc9ac51d35f0e7e6c2fb783.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>因此，我们准备了这份用户体验问卷，想了解你把 Quote/0 放在哪里、平时看什么、「碰一碰」是否好用、哪些问题最影响体验……以及<strong>你期待下一代摘录成为怎样的产品</strong>。没错，下一代摘录也已开始设计与验证。</p><p>无论你每天都在使用，还是已经暂时把它收进抽屉，你的回答将用于改善 Quote/0、Dot. 与相关服务，也会参与下一代产品的设计与验证。为了感谢大家的认真分享，<strong>我们将在问卷中选出十条用心的反馈，各送出 Quote/0 摘录一个</strong>，以及优先参与下一代摘录众测与共创的机会——至于两块 Quote/0 能产生什么新的用法，你也可以借此机会陪我们一起想想看。</p><p>另外，8 月 13 日 20:00 我们会在 @少数派共创 的直播里继续聊聊 Quote/0 的开发者玩法，并开启直播间限定惊喜价格，扫描下方二维码即可预约前往。</p><figure class="ss-imgRows"><img alt="" src="https://cdnfile.sspai.com/2026/08/10/a41255755167f2ec09ed46e3272b2b24.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><img alt="" src="https://cdnfile.sspai.com/2026/08/10/d8e869d08ed86cc65a15f2d597cc6551.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>，解锁全新阅读体验 📰</p><p>&gt; 简单、好用、<a href="https://sspai.com/item/49?source=ppfv4au3&amp;source_platform=sspai" target="_blank">专注的写作软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/113263</id>
-            <title>不喜欢对照式译文的阅读体验？Ovid 让你「按需」查看原版书籍</title>
-            <link>https://sspai.com/post/113263</link>
-            <guid isPermaLink="false">https://sspai.com/post/113263</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 11 Aug 2026 02:17:21 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p><strong>Matrix 首页推荐</strong></p><p><a href="https://sspai.com/matrix">Matrix</a> 是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p>文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>去年花了一些时间做了一款叫做 <a href="https://ovid.ink/" target="_blank">Ovid</a> 的阅读器。前三个字母「OVI」来自印钞中的变色油墨（Optical Variable Ink），这种墨水的特性之一是在不同的角度下会呈现不一样的色彩。</p><p>想要自己做一个阅读器的动机也非常单纯，我不太喜欢传统的那种原文、译文按段落或按分页对照的那种双语书形式：</p><figure class="image image_resized ss-img-wrapper" style="width: 450px;"><img src="https://cdnfile.sspai.com/2026/08/09/article/9febc0f6eb3f00c9122f11f860b7d56a.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>比如这种</figcaption></figure><figure class="image image_resized ss-img-wrapper" style="width: 450px;"><img src="https://cdnfile.sspai.com/2026/08/09/article/be4f700f7e2e714ab8412c2717e10570.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>以及这种</figcaption></figure><p>我理解这样的排版有助于英语学习，但我其实很多时候只是想更流畅地理解书中内容的意思，并不在意是否有学到什么。因此这样的形式常常让我读着读着就失焦了。我自己阅读原版文本的常见流程是「<strong>读原文 -&gt; 某段文本没看懂但不想细究语法和词汇，只想快速知道意思 -&gt; 看译文 -&gt; 继续读后面的原文</strong>」。其他的情况也包括有时候读原文有点累了，但我很想知道接下来的内容，想纯粹地看一会儿译文。我想对某本没有中文译本的书做 skimming reading（快速掌握文本内容和结构，不求细节），此时显然用母语来做是更快的。这些情况下，双语书形式很影响阅读效率。</p><p>于是我做了 Ovid。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/09/article/73e9a57092e5e9aeb294c16d95242f91.gif" /></figure><p>如图所示，你可以通过点击段落在原文和译文间切换，也可以通过右下角的菜单中选择全部切换为原文或者全部切换为译文。阅读器界面的设计参考了 Apple 图书应用——我此前最喜爱和常用的阅读 App——优雅、简洁、沉浸。</p><p>书中内容的翻译自然是由 LLM 提供的。不过也不是直接一段一段翻，还是对翻译流程下了一些功夫，比如尽可能确保全文地名、人名翻译的一致性，对于某个段落的翻译尽可能考虑上下文等。</p><p>除此之外我也做了一些雕花的工作：Ovid 拥有一个非常拟真的书架页，所有的书会整齐地插在书架上。对于你自己上传的书，你可以任意移动它们的位置，以及为每个书架的格子自定义标签。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/08/09/article/d1911bc403d0f52719778ba427fee664.gif" /></figure><p>既然要放到书架上，那么每本书都需要一个完整的外观。上传 epub 后，Ovid 还会自动生成侧面和正面的两张图，然后在页面上以书籍实体的两面样式展示出来。生成的逻辑目前还比较简朴：从一个模版库中随机选出一个模版作为基底，在上面「印」上书名、作者和原来的封面。此前尝试过用图像模型来做，也得到一些不错的图，但发现稳定性非常难控制，所以作罢了。</p><p>Ovid 目前暂时只支持 Google 登录，其他登录方式正在开发。新用户会送一些免费额度，应该足够导入两本通常文本量大小的书。另外你可以在左侧的公共书架上找到一些来自 Gutenberg Project 的免费图书，未登录状态下也可以随意翻阅、体验 Ovid 的功能。</p><p>Ovid 的 GitHub 仓库在<a href="https://github.com/GabrielDrapor/ovid" target="_blank">这里</a>，欢迎提供建议和意见。</p><p>&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>，解锁全新阅读体验 📰</p><p>&gt; 简单、好用、<a href="https://sspai.com/item/49?source=ppfv4au3&amp;source_platform=sspai" target="_blank">专注的写作软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/113301</id>
-            <title>派早报：Meta 发布开源本地 AI 智能体大模型 Muse Glimmer、阿里千问开放平台上线等</title>
-            <link>https://sspai.com/post/113301</link>
-            <guid isPermaLink="false">https://sspai.com/post/113301</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 11 Aug 2026 00:09:35 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <h2>少数派的近期动态</h2><ul><li>新一季少数派会员启航，更新权益，更多惊喜，还有实体纪念卡。<a href="https://sspai.com/post/112858"><strong>点击了解</strong></a></li><li>能让 AI 助手通过自然语言指令直接与您的 Quote/0 摘录墨水屏交互的 Dot Skill 已上线。<a href="https://dot.mindreset.tech/docs/service/open/skill"><strong>点击了解</strong></a></li><li>Quote/0 摘录双人套装即将以惊喜价格上线 8 月 13 日 20:00 小红书七夕专场活动直播间。<a href="https://www.xiaohongshu.com/user/profile/611a29af000000000100635c"><strong>点击预约</strong></a></li></ul><h2>你可能错过的文章</h2><ul><li><a href="https://sspai.com/post/113202">我与 Pixel 10 Pro 的生活：写在 Pixel 11 系列手机发布前夕</a></li><li><a href="https://sspai.com/post/113115">写给「跑两步就喘」的你：调整跑步姿势，舒适开跑</a></li><li><a href="https://sspai.com/post/113283">派评 | 近期值得关注的 App</a></li></ul><p>&gt; 下载 <a href="https://sspai.com/page/client">少数派 2.0 客户端</a>、关注 <a href="https://sspai.com/s/J71e">少数派公众号</a>，解锁全新阅读体验 📰</p><p>&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://sspai.com/post/112889</id>
-            <title>不再拆机飞线：借助 ACC 实现旧手机直供电「改造」</title>
-            <link>https://sspai.com/post/112889</link>
-            <guid isPermaLink="false">https://sspai.com/post/112889</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 10 Aug 2026 13:50:02 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>去年 4 月，我在某视频的影响下，萌生了将家里的旧安卓手机利用起来的想法。后续虽然跑起来了，但因为设备需要长期充电，电池安全又成了一个让我困扰的难题。</p>
-<p>为了解决这个问题，我在<a href="https://sspai.com/post/98174" target="_blank">《彻底告别电池焦虑：旧手机再利用的直供电改造》</a>一文中，把手机电池整个移除，然后通过飞线的方式，让充电器直接给主板供电，实现所谓的「直供电」或「旁路供电」。</p><span class="ss-linkCard">&nbsp;</span>
-<p>当时的改造确实一劳永逸地解决了电池鼓包的问题（毕竟电池都被移除了😂），但代价是主板裸露、走线外接，手机的物理结构也被彻底破坏了。以至于我每次在家里看到它的时候，都会担心这种粗暴的改造方式会不会带来新的安全隐患，也总忍不住在心里琢磨：</p>
-<blockquote>
-    <p>有没有一种不用拆机、也能达成同样直供电效果的方式？</p>
-</blockquote>
-<p>于是，我开始在网上搜寻，几番搜索之后，我惊奇地发现我以前用过的一个工具 <a href="https://github.com/VR-25/acc">Advanced Charging Controller</a>（以下简称 ACC）就能满足我的「直供电」需求。</p>
-<p>说来惭愧，之前我在使用 ACC 时，纯粹是照着网上的教程依葫芦画瓢，从没真正深入探究它的功能。而这一次，我决定沉下心来先搞懂它的原理，再完成对旧手机的直供电「改造」。</p>
-<h2>关于 ACC</h2>
-<p>多年的折腾经验教会我，想用好一个新工具，得先通读一遍「说明书」，尽量做到「知其所以然」，是避免弯路的最佳途径。</p>
-<p>所幸，在该项目的 <a href="https://github.com/VR-25/acc" target="_blank">GitHub 主页</a>上作者对它的运作原理做了详细的说明，让我不必大费周章地去他处查找。通过阅读，我得以了解到 ACC 是通过读写系统底层的充电参数，来接管手机硬件原本的充电行为，进而实现对充电的精准控制。</p>
-<p>简而言之，如果说原生系统的充电逻辑是「傻瓜式」——插上充电器就开始充电，充满了就停——那装上 ACC 就相当于给手机系统加装了一个「充电开关」。我们可以自由设置手机的充电过程（例如电量降到 40% 就启动充电，升到 60% 就自动停止等），甚至可以更进一步让电流绕过电池直接为主板供电。这也正是我想要实现的「直供电」模式。</p>
-<h2>安装 ACC 及相关工具</h2>
-<p>在对 ACC 有了基本的了解之后，接下来就是将它安装到手机中，并配置好相关工具。其中第一步是获得手机系统的 root 权限。</p>
-<p>受限于文章篇幅，且 root 的方式往往会因手机品牌、型号的差异而不同，所以这一步我建议参考极客湾的视频：《<a href="https://www.bilibili.com/video/BV1BY4y1H7Mc" target="_blank">玩机必看！带你入坑安卓刷机，小白也能看懂的 ROOT 基础指南来啦！</a>》来进行操作。我也是参考着视频一步步操作之后，成功获得了手里这台小米 Note 3 的 root 权限，并顺利安装上了 Magisk（它是一个 root 后，能让手机安全安装各种功能模块的框架）。</p>
-<p>Magisk 安装完成后就可以开始安装 ACC 模块了：</p>
-<ol>
-    <li>进入项目的 <a href="https://github.com/VR-25/acc/releases" target="_blank">Releases</a> 页面；</li>
-    <li>下载最新的 <code>.zip</code> 文件；</li>
-    <li>将文件传输到手机内；</li>
-    <li>打开手机中的 Magisk，依次点击「模块」-&gt;「从本地安装」；</li>
-    <li>找到已经传输到手机中的 <code>.zip</code> 文件，等待安装完成；</li>
-    <li>重启手机。</li>
-</ol>
-<figure class="image image_resized ss-img-wrapper" style="width: 363px;"><img src="https://cdnfile.sspai.com/2026/08/04/f2475eaf100313876bbe7677f86cb6bd.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>重启后 ACC 模块默认会随着 Magisk 的启动自动在后台运行。需要注意的是，由于它本身是一个纯后台服务，因此主屏幕上不会出现任何启动图标。如果你偏好图形化界面，可以考虑单独安装 <a href="https://github.com/MatteCarra/AccA" target="_blank">ACCA</a> 或 <a href="https://github.com/CrazyBoyFeng/AccSettings" target="_blank">ACC Settings</a> 这两个第三方客户端。不过由于二者均已停止维护，对新版 ACC 的兼容性较弱，因此强烈推荐直接使用命令行工具 Termux 来设置 ACC。</p>
-<p>Termux 的安装过程与安装其它 APK 无异，同样在项目的 <a href="https://github.com/termux/termux-app/releases" target="_blank">Releases</a> 页面下载对应型号的 <code>.apk</code> 包即可。</p>
-<figure class="image image_resized ss-img-wrapper" style="width: 461px;"><img src="https://cdnfile.sspai.com/2026/08/04/acd61198ec79b21541f8f670580fc201.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>Termux 安装完成后就可以通过它来执行命令来设置 ACC 了。不过在此之前，建议先执行一次<code>pkg update &amp;&amp; pkg upgrade -y</code>命令，确保软件源与依赖都是最新的（此步骤为可选操作，非必要）。</p>
-<figure class="image image_resized ss-img-wrapper" style="width: 222px;"><img src="https://cdnfile.sspai.com/2026/08/04/0a07b3468556d47b074290d80a2528e3.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>如果过程中提示更新失败，大概率是因为国内网络直连受限，通常将软件源切换至国内镜像即可解决。具体操作如下：</p>
-<ul>
-    <li>执行：<code>termux-change-repo</code>，系统会打开一个交互选单，将光标停在 <code>Mirror groupRotate</code> 上，按回车；</li>
-</ul>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/07/30/771456d3131c307f5ec0807bd9f4b095.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<ul>
-    <li>选择 <code>Mirrors in chinese</code>，确认。之后 Termux 会自动将软件源切换为国内镜像；</li>
-</ul>
-<figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/07/30/4cb419a71cf3a739a68a578cd6fea36d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<ul>
-    <li>再次执行：<code>pkg update &amp;&amp; pkg upgrade -y</code>，一般即可顺利完成更新。</li>
-</ul>
-<p>至此，准备工作全部完成。接下来就正式进入 ACC 模块的参数配置环节了。</p>
-<h2>配置 ACC</h2>
-<p>接着回到 Termux 终端，继续以下操作：</p>
-<ul>
-    <li>执行 <code>su</code>，获取 Root 权限；</li>
-    <li>执行 <code>acc -v</code>，查看当前 ACC 版本；</li>
-</ul>
-<figure class="image image_resized ss-img-wrapper" style="width: 443px;"><img src="https://cdnfile.sspai.com/2026/07/30/ddfbb12e55078d839e70e9fe78109428.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<ul>
-    <li>执行 <code>acc -u dev</code>，确保 ACC 版本为最新。</li>
-</ul>
-<figure class="image image_resized ss-img-wrapper" style="width: 443px;"><img src="https://cdnfile.sspai.com/2026/07/30/7bfeeea98849afeae0be5e6a4ba4bd29.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>将手机插上充电线，确保手机是充电状态，在 Termux 中运行测试命令：</p>
-<pre class="language-shell"><code>acc -t</code></pre>
-<p>运行该命令后，ACC 会自动开始测试可以适配手机的充电开关（测试时间有点长，请耐心等待）。测试完成后，除了会在当前终端窗口中显示结果外，还会在 <code>sdcard/Download</code> 目录下自动生成一份 <code>.log</code> 文件。</p>
-<figure class="image image_resized ss-img-wrapper" style="width: 307px;"><img src="https://cdnfile.sspai.com/2026/07/30/8b7eab80fcc7fa87b1d8d77a83791a4e.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure>
-<p>⚠️注意，为保证测试结果的可靠性，请尽可能使用原装充电头及数据线。</p>
-<h3>如何选择合适的充电开关</h3>
-<p>许多人可能会和我一样，初次看到测试结果的时候脑袋完全是发懵的：这么长的结果哪些是可用的？我该怎么选择？</p>
-<p>其实这里我们任意选择一个测试结果最后两行显示如下的开关即可：</p>
-<pre class="language-shell"><code>Switch works ✅
-battIdleMode=true</code></pre>
-<p>但若是你想更深入地了解这份测试报告背后的含义，就不得不了解一下<code>acc -t</code>这条命令背后的运作原理了：</p>
-<p>Android 手机的充电控制本质上依赖一个基本逻辑：系统向充电控制器发送「开始充电」或「停止充电」的指令。但由于安卓生态的高度碎片化，不同的设备制造商（OEM）、不同的芯片组（SoC）、不同的 Android 版本的「充电控制」指令各不相同，所以并不存在一条能「通杀」所有机型的统一指令。</p>
-<p>那怎么办呢？ACC 的解决方案是内置了一个作者从大量设备中收集而来的充电控制参数列表，而<code>acc -t</code>这个命令，就是用来逐一验证列表中开关是否有效的命令。测试过程与结果会完整记录在测试报告中，以下面我测试出的这段为例：</p>
-<pre class="language-shell"><code>6/33: battery/constant_charge_current_max 3300000 0
-  off (0)        -6mA        Idle
-  on (3300000)        -6mA        Idle
-  on (3300000)        -866mA        Charging
-  Switch works ✅
-  battIdleMode=true</code></pre>
-<p>首行显示的是充电开关的参数说明：</p>
-<ul>
-    <li>6/33：它是当前测试的第 6 个开关，共 33 个；</li>
-    <li>battery/constant_charge_current_max：是开关的路径或名称；</li>
-    <li>3300000 0：是开启和关闭这个开关的控制指令（数值）。</li>
-</ul>
-<p>第二行是第一次的测试结果：</p>
-<ul>
-    <li>off (0)：充电开关成功关闭（执行关闭指令 0）；</li>
-    <li>-6mA：此时进入电池的电流很小，接近无充电状态；</li>
-    <li>Idle：系统判定电池处于空闲或直供状态。</li>
-</ul>
-<p>第三行是第二次的测试结果：</p>
-<ul>
-    <li>on (3300000)：充电开关成功开启（执行开启指令 3300000）；</li>
-    <li>-6mA：此时电流仍未明显上升；</li>
-    <li>「Idle」系统依然判定电池是空闲状态；</li>
-</ul>
-<p>在第四行中，ACC 再次尝试向系统发送开启充电开关的指令。此时，后两个结果出现了变化：</p>
-<ul>
-    <li>-866mA：进入电池的电流显著增加；</li>
-    <li>Charging：系统确认电池已恢复充电状态。</li>
-</ul>
-<p>基于这个变化，ACC 在第五行给出 <code>Switch works ✅</code> 的结论。并在第六行认为该开关支持 <code>battIdleMode=true</code>（即支持直供电/电池空闲模式）。</p>
-<p>由于测试报告里可用的充电开关往往不止一个，例如在我的结果中，除了上面例子中的开关外，还有以下两个开关同样支持直供电：</p>
-<pre class="language-shell"><code>7/33: battery/constant_charge_current_max 3300000 10000
-  off (10000)        -6mA        Idle
-  on (3300000)        -897mA        Charging
-  Switch works ✅
-  battIdleMode=true</code></pre>
-<pre class="language-shell"><code>17/33: main/constant_charge_current_max 3300000 0
-  off (0)        -687mA        Charging
-  off (0)        -5mA        Idle
-  on (3300000)        -900mA        Charging
-  Switch works ✅
-  battIdleMode=true</code></pre>
-<p>通常来讲这三个开关我只需任选其一即可，但如果想在其中找到「最佳」的开关，就需要通过上述方法，观察测试结果中开关与电池的状态变化来做出选择了。</p>
-<h3>指定充电开关</h3>
-<p>了解了哪些充电开关是可用的后，下一步就是让 ACC 通过该开关来控制手机的充放电了，为此，需要先指定 ACC 使用的充电开关。例如我想使用<code>battery/constant_charge_current_max 3300000 0</code>这个开关，则需要在 Termux 中执行：</p>
-<pre class="language-shell"><code>acc -s s="battery/constant_charge_current_max 3300000 0 --"</code></pre>
-<p>如果想确认是否设置成功，可以输入 <code>acc -s</code> 查看当前设置，在列表中确认<code>charging_switch</code>项已正确显示为目标开关。</p>
-<p>之后，就是「告诉」ACC 在怎样的条件下让系统启用和关闭充电，一般此处有两种设置思路。</p>
-<h4>通过电量百分比控制</h4>
-<p>该思路的运作逻辑是充电到预设的百分比时停止充电，进入直供电模式；在电量低于预设的百分比时，退出直供电，恢复充电。</p>
-<p>假如我想将充电上限设置为 50%，下限为 40%，需要输入的命令为：</p>
-<pre class="language-shell"><code>acc 50 40</code></pre>
-<p>如果想要确认自己是否设置成功，同样可以通过 <code>acc -s</code> 核对设置，关键参数应如下所示：</p>
+                    <p style="margin-left: 0px;"><strong>Matrix 首页推荐</strong></p><p style="margin-left: 0px;"><a href="https://sspai.com/matrix">Matrix</a>&nbsp;是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。</p><p style="margin-left: 0px;">文章代表作者个人观点，少数派仅对标题和排版略作修改。</p><hr /><p>前段时间我在新疆旅居了一个多月，恰逢独库公路正式通车。本着中国人「来都来了」的心态，我决定骑行独库公路，最后也平安全程骑完。</p><p>这是我<strong>人生第二次长途骑行</strong>，上一次是去年九月骑行318川藏线。路途全程艰辛，但是沿途遇见的人与风景，都一点点抚平、治愈了我。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/d4c234bff9d16c2225428e16d4975440.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>打卡独库公路起点与终点</figcaption></figure><p>提前说清楚：我只是普通骑行爱好者，算不上骑行大神，本身也很少运动，日常骑车平均时速基本都低于20km/h。</p><p>这篇文章不只讲我是怎么骑完的，也会把独库骑行需要准备的装备、每天怎么走、沿途住哪里，以及中暑、爆胎、暴雨等突发情况怎么处理，一次说清楚。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/fa69c9e445a57da21b9676684af96dac.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>整篇内容分三块来讲：出发前要准备的东西、沿途路线和住宿选择、骑行常会碰到的问题与突发情况。</p><h2>出发前要准备的东西</h2><p>我是七月初出发骑行独库的。</p><p>这里昼夜温差特别夸张，白天大太阳下能飙到 40℃，傍晚降到 24℃，山里垭口的夜间温度甚至跌到个位数。</p><h3>第一部分：衣服</h3><p>我一共带了三套短袖长裤速干衣，走完全程的建议是至少备两套长袖骑行服。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/c58de832f500b9241c9f060b7aecb9b4.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>很多有骑行经验的朋友提前提醒我：独库天气变化极快，垭口经常突降暴雨、冰雹，很容易失温，最少要备一件冲锋衣加薄羽绒。</p><p>但我出发只带了冲锋衣，没准备薄羽绒。</p><p>结果我六天全程暴晒，全程没碰到雨天，防晒反而成了最大刚需。</p><p>真心建议大家来独库骑行一定要重视防晒：千万别穿短袖骑行服、短款骑行裤，优先全套长袖长裤。</p><p>我第一天图省事穿了短袖，也没戴骑行小帽、防晒面巾、袖套和手套，一整条手臂、手背、额头、鼻子全晒伤了，事后特别后悔。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/23872a4db06c63d8d9e3b3f0785ef378.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>我那晒得颜色分层的手</figcaption></figure><p>防晒装备清单给大家捋清楚：<strong>长袖骑行服长裤、全指/半指骑行手套、骑行小帽（遮额头）、薄骑行口罩（护脸）</strong>。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/1cbf22a13ff603c66803927e976cf3ef.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>我做好防晒工作的样子</figcaption></figure><p>日常休闲常服可以根据个人需求少量携带；我全程只带了常服，没准备骑行裤，路上手臂晒伤后，同行的大哥大姐还借了长袖骑行服给我应急。</p><h3>第二部分：自行车</h3><p>接下来说说自行车怎么安排，好多朋友都问我车子从哪弄的。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/110f416b065be51b39342974472320bd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我是直接在独库起点独山子的 517 骑行驿站租的车，驿站在独山子起点、库车终点都有门店，租车特别方便，不用自己长途托运自行车。</p><figure class="image ss-img-wrapper"><img src="https://cdnfile.sspai.com/2026/07/29/5d69a904841287f428a677fe25008d6f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>如果想自带车辆，有三种方式：飞机随车托运、火车打包运输，或是提前寄到 517 驿站存放。</p><p>驿站出租的车子配置普通，新车价位基本 3000 元以内，骑行体验一般；如果你自己有更好的单车，自带会舒服很多。</p><h3>第三部分：日常用品</h3><p>保温杯可带可不带，路上基本都是买矿泉水、运动饮料，保温杯几乎用不上。</p><p>租车配套装备驿站都会配齐：驮包、头盔、车前包全都有；但雨衣建议自己额外带一件，突遇大雨能立刻穿上。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/73fc2fb145e1484bb802d200ab4554a9.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>还有几样骑行必备小件：骑行眼镜、车前灯 + 尾灯。</p><p>独库隧道数量不多，但有几条超长隧道，内部完全无照明，没有车灯的话，没有对向车辆时伸手不见五指，骑行非常危险。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/e6694c5407e8cd02bb5f5a8f4c9ea74f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>独库骑行第二天需要走的隧道：哈希勒根隧道</figcaption></figure><p>补胎工具、备胎这类修车配件，租车驿站都会配齐，不用自己额外携带；冲锋衣依旧是刚需，无论晴雨都要随身带。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/9d977d806aaeea31aaa9c98c35e22304.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>住宿方面有个小细节：沿途民宿、酒店隔音普遍很差，睡眠浅的朋友一定要自备耳塞和眼罩，能大幅提升休息质量，我全程都带着，体验很好。</p><p>药品和电子设备也不能忘：藿香正气水、感冒药必备。我路上高温中暑，自己没带药，多亏同行大哥分了我一支藿香正气水，喝完才缓解。</p><p>大容量充电宝务必带，部分路段路程遥远，长时间骑行手机很容易没电，到不了目的地就彻底失联。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/4cd709b3a24592a964147591f4c8ce2d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>以上就是骑行独库出发前要准备的全部物资。</p><h2>沿途路线与住宿选择</h2><p>我这次选择正骑独库公路，路线是北起点独山子一路向南骑到终点库车。下面的行程分享，全部按照正骑顺序来讲。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/ccb5fec254aab708b6b6ae79523da946.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>海拔（图源网络）</figcaption></figure><p>独库公路每天爬升路段特别多，对骑行体能要求很高。建议大家出发前提前练车，每天短途骑行几十公里适应爬坡；别像我一样平时几乎不运动，毫无准备直接上路，全程爬坡会格外煎熬。</p><p>我原本计划 8 天慢悠悠骑完独库，最后 6 天就完成了全程。下文会先放出完整 8 天参考行程，再详细分享我自己 6 天实际骑行的完整经历。</p><blockquote><p>8 天完整参考路线（独山子→库车）</p><p>独山子 — 乌兰萨德克（77km）</p><p>乌兰萨德克 — 乔尔玛（56km）</p><p>乔尔玛 — 那拉提（108km）</p><p>那拉提 — 巴音布鲁克（59km）</p><p>巴音布鲁克 — 巴音郭楞乡（50km）</p><p>巴音郭楞乡 — 大龙池（57km）</p><p>大龙池 — 库如力（35km）</p><p>库如力 — 库车（98km）</p></blockquote><p>大家可以根据自身时间、体能灵活缩短行程；反骑（库车→独山子）路段里程和这条路线完全一致。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/f2a79127df916574afa5bc2bb297e894.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>我是先坐火车从伊宁到奎屯，再打车前往独山子。大部分骑友路线都和我类似，先抵达奎屯再坐车去独山子。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/14f3d72759060cc695846e3fc3dc4e84.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>因为我选择租车骑行，提前一天到独山子，去 517 骑行驿站租好单车，随后入住镇上一家民宿 6 人间的床位，一晚仅 36 元。</p><p>这家青旅地理位置很方便，靠近镇上商圈可以点外卖，距离独库起点纪念碑也很近，很适合骑行前一晚落脚休整。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/e9d35ee6dcecceba4732b93460c615aa.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>独山子住宿推荐</figcaption></figure><p>第二天正式开启骑行前，可以先导航到独库公路起点纪念碑打卡拍出发照。</p><p>纪念碑往前走约 200 米就是独库公路博物馆，展馆主要展示独库公路修建历史、沿线自然风光，免费参观，携带身份证即可。</p><p>开放时间：9:30-19:30，周一闭馆维护。</p><p>我前一天抵达独山子时展馆已经闭馆，第二天早上 7 点多就出发骑行，遗憾没能参观，下次再来补上。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/7b7e92e1df3b313042011599802a6081.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>Day1 独山子 — 乌兰萨德克（77km）</h3><p>这段路从出发开始就是漫长缓上坡，全程几乎没有平路，骑 10 公里、20 公里、30 公里全是持续爬坡，骑到中途我一度想放弃。</p><figure class="image image_resized ss-img-wrapper" style="width: 291px;"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/5dc6f8171bdffb6ab47800a167f46bcd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>路段里程分段</strong></p><blockquote><p>K562-K574（12km）：缓上坡，匀速调整踏频；</p><p>K574-K593（19km）：连续长上坡，其中 K586-K593 是 7km 陡坡，控制体力不要猛踩；</p><p>K593-K600（7km）：翻越垭口后连续长下坡，弯道多，提前减速控速；</p><p>K600：毛溜沟服务区，可吃面食、盖饭，也能吃自带路餐，建议充分休息补充能量；</p><p>K600-K603（3km）：短下坡，抵达守护天山服务区短暂补水休整；</p><p>K603-K630（27km）：起伏路面，保持稳定踏频骑行；</p><p>K630：补给服务区，提前补水，为最后一段爬坡蓄力；</p><p>K630-K640（10km）：收尾长上坡，抵达 K640 乌兰萨德克住宿点，结束当日行程。</p></blockquote><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/f644d64507b911509f12b8bd52fdd9c0.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>217独库公路-666路牌</figcaption></figure><p>路上每隔一公里都有清晰公路路牌，我们全程靠路牌判断骑行里程，我还特意沿路打卡 666、777、888、999 这类数字吉利的路牌，骑行途中多了不少乐趣。</p><p><strong>当日住宿 &amp; 应急提示</strong></p><p>赶早不赶晚，如果天黑前没能抵达 K640 乌兰萨德克，可联系丝路小杨驿站老板有偿接应。</p><p>当地住宿选择不多，有标间、床位、蒙古包三种房型，第一天建议在此落脚休息，养好体力应对第二天翻越哈希勒根达坂。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/9488632a2ba558dd923591823a79e784.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>640驿站的餐厅和住宿点</figcaption></figure><h3>Day2 乌兰萨德克 — 乔尔玛（56km）</h3><p>全程前 29 公里持续上坡，平均坡度 5%，累计爬升 1400 米，是当天最大挑战；</p><p>翻越哈希勒根达坂后穿过无照明隧道，迎来 24 公里连续下坡，海拔下降 1100 米抵达乔尔玛。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/ad9943dcf0d13c1a9312bb9b7189bb70.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>路段里程分段</strong></p><blockquote><p>K639-K668（28km）：持续上坡，中途设服务区，建议在此午餐补给；</p><p>K668-K669（1km）：最后爬坡抵达哈希勒根达坂（海拔 3400m），短暂停车拍照；</p><p>K669-K670（340m 隧道）：隧道完全无灯光，务必提前开启车灯 / 头灯，减速慢行；</p><p>K670-K693（23km）：连续陡下坡，弯道密集，严禁急刹车，入弯提前减速；</p><p>K693-K695（2km）：短下坡抵达乔尔玛，途经两处检查站，人车密集，减速注意避让。</p></blockquote><p>这段路风景反差极大：前半段山坡光秃秃，翻过隧道开始下坡后，整片山林铺满翠绿草原，景色绝美，当天最美的风景全部集中在后半段，坚持熬过前半段爬坡就能看到。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/8a236c388f461c2d9d10fb41efe5bea8.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>前半段与后半段对照</figcaption></figure><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/73050f315d2ec1a475c9226095a65cac.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>风景超美的，放坡也不忘停下来，拍张照</figcaption></figure><p><strong>当日住宿参考</strong></p><p>乔尔玛服务区周边有酒店、蒙古包，往前再骑行 1 公里同样有住宿，但当地酒店数量少，旅游季价格偏高。</p><p>我和同行四位骑友拼住一间大蒙古包，一晚总价 200 元，人均 50 元。蒙古包住宿条件一般，不推荐大家入住，抵达后可自行到服务区周边对比挑选酒店。</p><h3>Day3 乔尔玛 — 那拉提（约 110km）</h3><p>从乔尔玛出发先骑行 35 公里缓上坡，翻越玉希莫勒盖达坂，穿过无光长隧道后，40 公里超长下坡直达那拉提镇。</p><figure class="image image_resized ss-img-wrapper" style="width: 391px;"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/4fff990421cd3998825a86cf0501b68f.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>路段里程分段</strong></p><blockquote><p>K695-K728（34km 上坡）：前 27 公里缓陡混合上坡，海拔从 2000m 升至 2600m；</p><p>后 7.6 公里盘山陡坡，抵达玉希莫勒盖达坂（K728.6，海拔 3123m），坡顶有大型停车区；</p><p>K728 服务区：山顶补给点，可买泡面简餐，建议在此午餐；</p><p>K728-K728.5（500m 上坡）：抵达隧道入口；</p><p>K728.5-K730.5（2km 无光隧道）：全程无照明，车灯必须全程开启；</p><p>K730.5-K770（40km 长下坡）：海拔骤降 1700m，弯多路陡，严格控制车速；</p><p>K770：检查站，车流大，靠边减速骑行；</p><p>国道岔路口右转，沿 218 国道进入那拉提镇住宿；217/218 交汇处大型货车较多，骑行务必贴紧路边。</p></blockquote><p>沿途一路伴随河流前行，两侧山林全是成片翠绿，风景全程在线。</p><p>我当天一口气骑到那拉提镇，入住新源笠泊居民宿，标间 100 元一晚。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/0ecbedeb71a1a6483599b7362e6f52fc.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>民宿卫生间宽敞、热水充足，老板服务贴心，还主动帮忙拿行李，非常推荐。当晚休息质量很好，第二天骑行状态全程在线。</p><h3>Day4 那拉提 — 巴音布鲁克（70km）</h3><p>今日骑行难度大幅降低，先骑行32 公里上坡翻越拉尔敦达坂，随后一路下坡进入广袤巴音布鲁克草原。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/51de13a41a524147b3d80acbd63981d3.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>路段里程分段</strong></p><blockquote><p>K775-K804（29km 连续上坡）：平均坡度 5%，抵达拉尔敦达坂坡顶 K804；</p><p>K804-K806.5（2.5km 短下坡）：短暂放坡，控制车速；</p><p>K806.5：坡顶服务区，作为午餐补给点；</p><p>K806.5-K816（10.5km 缓下坡）：路况平整，匀速放坡至检查站岔口；</p><p>K816-K828（12km 起伏路面）：路况平缓；</p><p>K828-K832（4km 城镇道路）：进入巴音布鲁克镇区，人车繁多，减速慢行；</p><p>K832：抵达巴音布鲁克小镇。</p></blockquote><p>这段路全程在山林间盘山骑行，树木遮挡烈日，骑行体感凉爽舒适，沿途山水草木绿意盎然。巴音布鲁克草原视野辽阔，景色比那拉提收费空中草原还要好看，而且免费观赏。</p><figure class="image image_resized ss-img-wrapper" style="width: 262px;"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/65847d17bebaa6258122dac278a5fced.jpeg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><figure class="image image_resized ss-img-wrapper" style="width: 605px;"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/48bcd362e1863ce1e17832e6a9e7aa93.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>这里还是国内第二大高寒草原。</p><p><strong>当日住宿 &amp; 出行提示</strong></p><p>巴音布鲁克食宿配套齐全，住宿推荐华云都大酒店，标间 180 元，两人分摊性价比很高，酒店环境、配套完善，周边餐饮店铺密集，是六天行程里住宿条件最好的一站。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/4b73e60ec2b7ee80cddfc2e41d05dfea.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>镇上好吃的很多，看到哪家人多就去吃，基本不会踩雷</figcaption></figure><p>如果当天不想在巴音布鲁克停留，可继续向前骑行 50 公里平路，抵达 K880 巴音郭楞乡住宿，但乡镇食宿选择少，配套条件远不如巴音布鲁克。</p><h3>Day5 巴音布鲁克 — 大龙池（全程 119km）</h3><p>当天全程阴天，感觉随时有降雨的可能。</p><p>原定计划只骑到巴音郭楞乡，两地 56 公里全程平坦草原公路，路面宽阔、车流稀少，两侧一望无际大草原，骑行格外轻松。</p><figure class="image image_resized ss-img-wrapper" style="width: 316px;"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/cc5654390c26c4a4b1d8108a61802573.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>抵达巴音郭楞乡后，我们状态尚可，决定继续向前翻越达坂。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/6a4ce90371a96e4f6b14a09e8aebc26d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>经过前四天爬坡锻炼，第五天长上坡完全不用下车推行，可匀速直接登顶。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/68cd7f2083ef0c4eb3501b39f994f519.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>穿过铁力买提隧道后，18 公里连续陡下坡直达大龙池，下坡骑行体验极佳，但弯道密集险峻，下坡务必减速慢行。</p><h3>Day6 大龙池 — 库车（136km，最后一天）</h3><p>全程以缓下坡为主，进入库车地界后气温骤升、气候干燥，一定要做好防晒、频繁补水。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/3b0978588e415f11b3288f2dc9ff99aa.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p><strong>路段里程分段</strong></p><blockquote><p>K988-K1022（34km 持续缓下坡）：途经库车神秘大峡谷，路段日照极强、大型货车较多，骑行贴紧路边，注意大车；</p><p>K1022-K1040（18km 起伏路面）；</p><p>K1040-K1050（10km 收尾缓上坡），全程最后一段爬坡；</p><p>K1050-K1066（16km 缓下坡）；</p><p>K1066（盐水沟隧道）：隧道无照明、路面狭窄、车流密集，提前开灯减速；</p><p>K1066-K1071（盐水沟收费站）：路面暗藏减速带，提前减速缓慢通过；</p><p>K1071-K1075（4km 平缓公路）：抵达独库公路终点打卡点，打卡后再骑行 12 公里到库车 517 骑行驿站，归还单车，领取骑行证书与纪念奖牌。</p></blockquote><p>最后一天骑行全程煎熬：一路大风肆虐，侧风、逆风交替，气温酷热，路上大型货车数量激增。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/3da30a936296a78afa202a24e4a8fde4.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>大货车高速驶过会带来强气流，体重较轻很容易被风力影响车身平衡，骑行需要格外小心。</p><p>如果一天无法完成 136 公里全程，可中途康村镇留宿，拆分两天骑行。</p><p><strong>库车住宿推荐</strong></p><p>到库车517骑行驿站还车领完奖牌后，可直接打车前往库车新城区入住酒店休整，时间充裕也可以在库车市区游玩。</p><figure class="image image_resized ss-img-wrapper" style="width: 321px;"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/22262ff455d1a6955e1bcaa8c2d7a8cc.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><p>住宿推荐金色阳光酒店，标间 150 元，酒店服务周到，提供免费擦鞋、衣物清洗烘干上门服务，整体体验很好。</p><p>从库车返回乌鲁木齐可选择中转火车：库车→库尔勒硬座 43.5 元，库尔勒→乌鲁木齐硬座 108 元，全程中转合计 7 小时左右。</p><h2>骑行常会碰到的问题与突发情况</h2><h3>一路上会高反吗？</h3><p>独库公路一路上最高海拔会到3400左右，但是基本上都是缓慢的，慢慢骑自行车上去的，所以慢慢适应的过程中，基本上都不会太感受到高反。</p><h3>爆胎怎么办？</h3><p>我全程骑行运气不错，一次爆胎都没遇到。</p><p>同行的骑友大哥大姐中途都出现过爆胎，全程都是自己动手更换。租车时驿站会附带两条备用内胎，爆胎后可直接替换。</p><p>会补胎 / 换胎：直接自行更换备用内胎；</p><p>不会操作：向身边路过的骑友求助；</p><p>周边无其他骑友：联系就近驿站老板，付费申请道路救援。</p><h3>半道下雨/中暑/下冰雹骑不动了怎么办？</h3><p>优先联系就近驿站老板，预约付费救援；</p><p>其次留意过往皮卡、小型货车，询问车主能否顺路搭载一段。</p><p>这片山区偏远，线上平台叫不到货拉拉，没有别的备选方案。</p><h2>我的一些经验复盘</h2><h3>骑行搭子怎么找</h3><p>我的建议是别提前在小红书约骑行搭子。</p><p>线上约的人很难做到体能、踏频同频：对方骑太快，你全程追赶很累；你速度慢，对方总要停下来等，双方骑行体验都很差。</p><p>最好的方式是独自先上路，在路上偶遇节奏匹配的骑友结伴。</p><p>我这次独库骑行第一天就碰到几位黑龙江的大哥大姐，大家速度契合，一路结伴走完了全程。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/f8d0ecdb72dfd96ae9c9ec4e3882e30d.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>沿途补水与补给技巧</h3><p>独库沿途补给点间距比 318 大很多，中途缺水很难临时买到水，补水一定要提前规划。</p><p>如果单车只装了一个水壶架：推荐搭配 1 瓶尖叫运动饮料 + 1 瓶 1.5L 矿泉水。</p><p>用尖叫瓶随身装水方便随时喝，1.5L 大瓶水放进后座驼包侧边口袋备用，喝完尖叫再倒大瓶里的水补充。正常骑行，1.5 升水喝完刚好抵达下一处补给站，及时补货即可。</p><p>如果你自带专业骑行水壶，就不用额外买尖叫，直接用水壶装水。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/a59a2dc564402923b8f1d35a700fe040.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /></figure><h3>路上一定要备足高热量干粮</h3><p>沿途多山区爬坡，极度消耗体力，随身多带糖果、面包、巧克力、香蕉、坚果这类即食能量食物。</p><p>半山腰基本没有商店补给，一旦体力透支没食物补充，爬坡会格外煎熬，充足干粮才能稳住骑行状态。</p><figure class="image image_resized ss-img-wrapper" style="width: 321px;"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/db341096de61c5d12b4012ce31c9e822.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>来自乌鲁木齐的大哥他们特别好，请我吃烤串，送我水果和饮料</figcaption></figure><h3>怎么骑更省力</h3><p>根据路面坡度频繁换挡，全程保持稳定踏频（每分钟 80-90 圈），稳定踏频能大幅提升长途骑行耐力，避免腿部快速酸痛。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/b1be22e14713dffe73406df7781700dd.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>辽阔的巴音布鲁克大草原</figcaption></figure><h3>骑行后如何快速恢复</h3><p>每天骑行爬坡量大，腿部乳酸堆积严重，当晚住宿有条件一定要泡脚，能快速缓解腿部酸胀，恢复第二天骑行体力。</p><figure class="image image_resized ss-img-wrapper" style="width: 447px;"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/7f49e56324ba7cd029c2e1d497b5a128.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>如果没有条件，那就创造条件</figcaption></figure><h3>带行李箱骑行独库，大件行李寄存方案</h3><p>如果你有带行李箱来新疆，不想全程拖着行李，推荐中铁快运车站托运，性价比最高。</p><p>我当时从伊宁火车站出发，把行李箱直接通过中铁快运寄到乌鲁木齐站，骑完独库后我刚好要去乌鲁木齐乘机返程，流程完全适配。</p><figure class="image ss-img-wrapper"><img alt="说个离谱的事，我平时骑车不到20km/h，却用6天骑完了独库公路" src="https://cdnfile.sspai.com/2026/07/29/article/9eeb351174c9220f780948f7850f4a0c.png?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" /><figcaption>&nbsp;</figcaption></figure><p>收费按重量计算，我的行李箱 8 公斤，伊宁寄乌鲁木齐仅 40 元；包裹入库后有3 天免费保管期，超出每天每件收取 3 元保管费。我当时超了 4 天，只额外付了 12 元保管费，比酒店寄存、普通快递寄存划算很多。</p><p>取件流程：抵达乌鲁木齐站后出站左转就是行包房，凭托运单据或本人姓名就能领取行李，不清楚位置可以直接询问车站工作人员。</p><p>以上就是我单人骑行独库公路完整路线和全部实操经验。</p><p>大家有任何骑行相关疑问，都可以在评论区留言，我看到都会及时回复。</p><p>如果这份攻略对你有帮助，欢迎点赞、收藏、推荐；感兴趣的朋友也可以点个关注，后续持续分享骑行干货。</p><p style="margin-left: 0px;">&gt; 关注&nbsp;<a href="https://www.xiaohongshu.com/user/profile/63f5d65d000000001001d8d4" target="_blank">少数派小红书</a>，感受精彩数字生活 🍃</p><p style="margin-left: 0px;">&gt; 实用、好用的 <a href="https://sspai.com/mall">正版软件</a>，少数派为你呈现 🚀</p>
                 ]]>
             </content:encoded>
         </item>
