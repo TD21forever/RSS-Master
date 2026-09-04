@@ -5,6 +5,23 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6a9ab8cef2b6b2b40e1e9a98</id>
+            <title>AI探索站 09月04日</title>
+            <link>https://m.okjike.com/originalPosts/6a9ab8cef2b6b2b40e1e9a98</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a9ab8cef2b6b2b40e1e9a98</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 04 Sep 2026 12:25:50 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    最新一期播客里，小珺采访了曾鸣教授。有些观点说出了我心中的朦胧想法：<br /><br />1、AI 产业的三阶段：基础设施阶段（如 OpenAI、Anthropic 等模型公司）→ 探索性应用阶段（目前能看到的大多数应用）→ 原生 AI 应用阶段（目前还无法想象）。商业动力学规律显示，第一阶段的企业几乎无法跨越到第三阶段成为终局赢家。<br /><br />2、当前所处的时点：基础设施的收尾阶段，探索性应用的爆发前夜。现在的各种应用，大多类似于移动时代早期的手电筒、墨迹天气和汤姆猫。类似 Google、抖音这类第三阶段的原生应用还没有影子，甚至连统一标准、降低门槛的“浏览器”和做熵减的“Yahoo”都还没有出现。Codex 则像当年的 MS Visual Studio，是模型厂商提供的开发者工具。<br /><br />3、护城河与组织终局：AI 创业必须避开简单的脚手架型应用。真正的机会是构建数据飞轮之上的智能复利，以及构建网络效应之上的黑洞效应。组织形态上，工业时代的科层制终将消亡。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6a9a8aad141b85b29276cdba</id>
             <title>AI探索站 09月04日</title>
             <link>https://m.okjike.com/originalPosts/6a9a8aad141b85b29276cdba</link>
@@ -136,23 +153,6 @@
                 <![CDATA[
                     
                     分享几个免费生图的网站，赶紧薅羊毛啦<br />https://www.lovart.free/?lang=zh<br />https://www.liblib.im/<br />https://www.tapnow.free/?lang=zh<br />https://www.minimax.free/<br />https://www.libtv.org/
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6a94f0c7cfb5d08b3ea827ce</id>
-            <title>AI探索站 08月31日</title>
-            <link>https://m.okjike.com/originalPosts/6a94f0c7cfb5d08b3ea827ce</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6a94f0c7cfb5d08b3ea827ce</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 31 Aug 2026 03:11:03 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    在大环境如此不好的时候，我就知道这个项目迟早出世..<br /><br />ai-job-search 这个项目在github上已经2.9 万+ star了！！<br /><br />其实之前就一直想给自己做这么个东西，结果我还没开始，别人做的已经比我想的好了...<br /><br />作者 Mads Lorentzen 是个地球物理学家，被裁后用 Claude Code 搭了套求职框架，投了 69 份简历、拿到 20 个一面，最后成功转行 AI 工程师<br /><br />但这不是重点<br /><br />重点是他把求职这个高度主观、多步骤、容易崩溃的过程，拆解成了一套可被 AI 执行、验证、迭代的标准化工作流<br /><br />这才是这个项目真正值得关注的地方<br /><br />大部分人用 AI 写简历，就是把 ChatGPT 当个文案工具<br />丢进去职位描述，让它改改简历，润色求职信，然后复制粘贴<br /><br />但 ai-job-search 做的是把整个求职供应链重构了<br /><br />从职位搜索、匹配度评估、简历定制、求职信撰写、面试准备到申请追踪，全链路自动化<br /><br />更关键的是，它用了双 agent 互审机制：<br /><br />Drafter（起草者）：根据你的档案生成定制化简历和求职信<br />Reviewer（评审者）：用全新上下文启动的第二个 Claude Agent，独立调研目标公司，从第三方视角批判初稿<br /><br />这个设计直接解决了单次生成内容质量不稳定的问题<br /><br />四个核心命令，覆盖求职全流程<br /><br />/setup — 建立你的职业档案<br />支持三种方式：读取你的 documents 文件夹（CV PDF、LinkedIn 导出、学历证书、推荐信），导入单份简历，或者通过对话式访谈建立档案<br />/scrape — 搜索并排序职位<br />内置丹麦本地求职平台的搜索工具（Jobindex、Jobnet、Jobbank），但核心框架语言和地域无关，可以通过 /add-portal 命令快速扩展到任意地区的职位平台<br />还有个 linkedin-search 工具，零依赖，支持任意国家和地区<br />/apply — 一键生成定制化申请材料<br />这是整个框架最硬核的部分：<br />解析职位描述<br />评估匹配度（技能、经验、文化、地点、职业发展）<br />用 LaTeX 起草简历和求职信<br />启动 Reviewer Agent 调研公司并批判初稿<br />基于反馈修订<br /><br />编译并检查 PDF：确保简历正好 2 页、求职信正好 1 页、签名可见、字体一致<br /><br />ATS 验证：提取 PDF 文本层，验证联系方式、关键词覆盖率，确保 ATS 系统能正确解析<br /><br />输出最终版本和验证清单<br /><br />/interview — 生成面试准备包<br />针对已追踪的申请，生成阶段性面试准备包，包括公司调研、面试官背景、可能问题、STAR 案例映射，还能进行模拟面试<br /><br />这个项目最让我放心的一点：所有数据都在你本地<br /><br />不是某个 SaaS 平台，不用担心隐私泄露<br /><br />Fork 完就是你的，想怎么改就怎么改<br /><br />作者在 LinkedIn 上分享了完整的申请漏斗数据：69 份申请 → 20 个一面 → 最后拿到 offer<br /><br />这个转化率已经很高了<br /><br />如果你正在找工作，尤其是技术岗位，这个框架能帮你省下大量时间<br /><br />如果你是产品经理或者独立开发者，这个项目本身就是一个很好的 Agentic 工作流编排案例<br /><br />它展示了如何把一个复杂、高主观性的任务，拆解为可被 AI 执行的标准化流程<br /><br />这才是 AI 应用从“问答工具”向“工作流代理”演进的正确方向<br />项目地址：https://github.com/MadsLorentzen/ai-job-search
                 ]]>
             </content:encoded>
         </item>
