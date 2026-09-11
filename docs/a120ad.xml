@@ -5,6 +5,368 @@
         <link>http://www.ruanyifeng.com/blog/</link>
         
         <item>
+            <id>http://www.ruanyifeng.com/blog/2026/09/weekly-issue-412.html</id>
+            <title>科技爱好者周刊（第 412 期）：禁止 issue，只用 PR</title>
+            <link>http://www.ruanyifeng.com/blog/2026/09/weekly-issue-412.html</link>
+            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2026/09/weekly-issue-412.html</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 11 Sep 2026 08:11:50 +0800</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
+<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/11434">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
+
+<h2>封面</h2>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090901.webp" title="" /></p>
+
+<p>上海前滩太古里举办的"英雄联盟15周年"展览。（<a href="https://weibo.com/5720474518/RgUnYmL0t">via</a>）</p>
+
+<h2>禁止 issue，只用 PR</h2>
+
+<p>上周，PHP 框架 Laravel 宣布了<a href="https://x.com/taylorotwell/status/2095516796748996843">一个新规定</a>：禁止提交 issue，只能提交 Pull Request。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026091017.webp" title="" /></p>
+
+<p>乍一看，这个规定太荒谬了。用户不能提交 issue，怎么报告问题呢？难道你要每个人都读懂源码，自己动手解决问题！</p>
+
+<p>但是仔细想想，你会发现这个措施<a href="https://stitcher.io/blog/no-more-issues">很合理</a>，甚至值得推广。</p>
+
+<p>（1）没有了垃圾 issue。</p>
+
+<p>如果一个用户愿意花时间创建 PR，说明他对这个问题更上心。那些机器人和骚扰者，只会提交垃圾 issue，根本不愿意多花时间为项目做贡献。</p>
+
+<p>（2）对维护者更方便。</p>
+
+<p>项目维护者从 PR 里面得到的信息，远远多于 issue，更利于理解和解决问题，投入的时间也更少。</p>
+
+<p>（3）没有增加用户的提交难度。</p>
+
+<p>用户即使不懂源码，也能提交 PR。</p>
+
+<p>他可以向 AI 描述问题，让 AI 生成 PR。在 AI 时代，提交 PR 几乎和提交 issue 一样简单。</p>
+
+<p>（4）禁止 issue 的根本原因是，开源项目资源不足，应付不了激增的 issue。</p>
+
+<p>AI 时代，项目不再应鼓励用户把问题抛出来指望别人来解决，而应鼓励大家一起为项目贡献力量。</p>
+
+<h2>史上最长的数学程序</h2>
+
+<p>上周，Anthropic 公司使用 Claude AI，完成了一个史上最长的数学程序：程序化证明了费马大定理。</p>
+
+<p>17世纪，法国数学家费马提出一个著名猜想：大于2的整数，不可能满足下面的等式。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090502.webp" title="" /></p>
+
+<p>后世的数学家发现，这个猜想难得超乎想象，根本无法证明。直到三百多年后的1995年，英国数学家安德鲁·怀尔斯才最终证明了费马大定理是正确的。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090503.webp" title="" /></p>
+
+<p>安德鲁·怀尔斯的证明一共有129页，即使是专业的数学家也要花几个月才能读懂。</p>
+
+<p>自从这个证明提出后，数学界一直致力于将它翻译成计算机语言，实现机器证明，从而可以自动化验证推理过程。</p>
+
+<p>这个从人工证明到机器证明的翻译项目，也是超难，工作量超大，迟迟没有完成。直到上周，一个研究团队宣布，<a href="https://www.anthropic.com/research/formalizing-fermats-last-theorem">Claude AI</a> 用了11天终于完成了，将安德鲁·怀尔斯的证明翻译成了 Lean 语言的程序。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090504.webp" title="" /></p>
+
+<p>Lean 语言是微软研究院 2013年提出的一种专门用于数学定理证明的编程语言。</p>
+
+<p>研究人员本来只是想试一下 Claude AI 的数学研究能力，没想到它真的完成了这个超难的、无人完成的项目。</p>
+
+<p>在证明最终结果前，Claude 先证明了超过3万个辅助定理，用到了其中2万9千多个，消耗了数十亿的 Token，最终代码长达1300万行。</p>
+
+<p>这是有史以来最长的数学程序，不敢想象如果让人类的一个数学家团队来写要多久？所有代码现在就公布在 <a href="https://github.com/anthropics/fermats-last-theorem">GitHub</a> 上面。</p>
+
+<p>这件事情的意义在于，现在有大量的数学证明，无法验证是否正确，即使是数学家也要花很多时间才能看懂。现在，事实证明，AI 可以用来验证这些证明是否正确。</p>
+
+<p>最后，这里有一篇<a href="https://www.pbs.org/wgbh/nova/proof/wiles.html">安德鲁·怀尔斯专访</a>，他讲述自己的人生故事，推荐给大家。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202608/bg2026080302.webp" title="" /></p>
+
+<p>采访者问他："你为了证明费马大定理，苦苦探索了这么多年。这段旅程现在结束了，你想必会有点伤感吧？"</p>
+
+<p>安德鲁回答说，就像打完一场大战，感觉解脱了。</p>
+
+<blockquote>
+  <p>"确实有些伤感，但同时也有一种巨大的成就感，还感到终于自由了。我曾如此痴迷于这个问题，无时无刻不在思考它----早上醒来，晚上入睡----这种情况持续了八年。长时间思考一件事，确实很不容易。这段特殊的历程现在终于结束了，我的内心终于平静下来了。"</p>
+</blockquote>
+
+<h2>科技动态</h2>
+
+<p>1、<a href="https://electrek.co/2026/09/07/tesla-cybercab-fleet-profitable-wouldnt-sell/">特斯拉出售 Cyber​​cab</a></p>
+
+<p>特斯拉在美国推出 Cybercab 出租车。根据马斯克的说法，特斯拉将来的主营业务，不再是生产汽车，而是经营无人驾驶出租车。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090908.webp" title="" /></p>
+
+<p>本周，特斯拉又宣布，这些出租车是对外出售的。</p>
+
+<p>你购买无人驾驶出租车，不是为了自己乘坐，而是为了投资。每次载客收入，你和特斯拉对半分。</p>
+
+<p>由于这些车辆24小时运营，马斯克一直说，只要购买了它们，当你睡觉的时候，它们就会为你挣钱。</p>
+
+<p>问题是，你购买了这辆车，就需要承担它的折旧和贬值，还需要另外购买15000美元的自动驾驶功能包。很难想象，这种全天运营的车辆，能支撑几年。</p>
+
+<p>特斯拉把车卖给你，就不再拥有车辆硬件，变成了运营你的车辆，从重资产公司变成轻资产公司。在你睡觉的时候，你的车还能帮它挣钱。</p>
+
+<p>2、<a href="https://www.dyson.com/oral-care/electric-toothbrush/camerajet/ceramic-ultra-blue">戴森电动牙刷</a></p>
+
+<p>戴森公司，就是生产吸尘器和电吹风的那家公司，推出了电动牙刷。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090909.webp" title="" /></p>
+
+<p>它的特别之处在于，牙刷上有一个摄像头，还有一个照明灯。</p>
+
+<p>它不仅可以让你用手机查看口腔情况，更重要的是，它会根据摄像头拍到的景象，自动判断需要向哪里喷水，加大清洁力度。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090910.webp" title="" /></p>
+
+<p>我觉得，都已经做到这个程度了，不如做一个自动刷牙器，你张开嘴，它自动就把牙刷完了。</p>
+
+<p>3、<a href="https://seas.harvard.edu/news/smartphone-navigation-app-people-blindness-and-low-vision">AI 手杖</a></p>
+
+<p>哈佛大学工程学院的工程师，为盲人和视障人士，发明了一款 AI 手杖。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090912.webp" title="" /></p>
+
+<p>它需要跟手机配合使用。手机利用摄像头、GPS、运动和方向传感器捕捉到实时数据，再结合导航软件，自动找到下一步前进的方向，传给手杖。</p>
+
+<p>手杖则发出各种哔哔声，提示用户到底是向前走，还是向左走或向右走。如果用户走错方向，它还会发出警报声。</p>
+
+<p>我感觉，这个发明确实对于盲人很有价值，但需要手机全程打开，且摄像头还要能拍到街面。这还不如把手机功能集成到手杖上，就可以做出更强的智能手杖。</p>
+
+<h2>文章</h2>
+
+<p>1、<a href="https://note.com/masakazu_urabe/n/n7815f5b64fab?hl=en">李·霍洛威的悲剧故事</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090902.webp" title="" /></p>
+
+<p>1981年出生的李·霍洛威（Lee Holloway）是 Cloudflare 的创始工程师，公认的技术天才。上图是 Cloudflare 的三个创始人，他在中间。</p>
+
+<p>但是，36岁时他患上了早发性痴呆，大脑萎缩，后来发展到连话都没法说全了。</p>
+
+<p>2、<a href="https://huggingface.co/blog/state-of-open-models-summer-2026">开放模型2026年夏季述评</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090911.webp" title="" /></p>
+
+<p>Hugging face 分析开放模型的最新发展情况，可以了解中国模型在整个 AI 市场上目前的地位。</p>
+
+<p>3、<a href="https://mcpherrin.ca/2026/09/07/rsa.html">我分解了90年代 RSA 密钥</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090907.webp" title="" /></p>
+
+<p>互联网通信的安全，完全取决于密钥能否被破解。作者尝试破解1999年颁发的512位 RSA 密钥（目前的密钥至少是2048位）。</p>
+
+<p>结果，他的台式机用了32个小时，就破解成功。如果用 GPU 集群，大概1个小时就能完成。</p>
+
+<p>所以，加密货币从长远来看，也不安全，时不时就必须升级加密算法。</p>
+
+<p>4、<a href="https://vale.rocks/micros/20260902-1350">HTML 中不需要 initial-scale 属性</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090401.webp" title="" /></p>
+
+<p>网页自适应视口，不再需要指定<code>initial-scale=1.0</code>，只写<code>width=device-width</code>即可。</p>
+
+<p>早期 iPhone 横屏时，页面不会自动改变宽度，为了解决<a href="https://quirksmode.org/quirksblog/2026/0902-initial.html">这个问题</a>，就引入了 initial-scale 属性。</p>
+
+<p>5、<a href="https://blog.gaborkoos.com/posts/2026-05-09-Your-Recursion-Is-Lying-to-You/">JavaScript 递归的处理方法</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202608/bg2026080407.webp" title="" /></p>
+
+<p>使用递归时，嵌套的栈过多就会报错，尾递归可以解决这个问题。但是 JS 运行时目前不支持尾递归，本文教你怎么办。</p>
+
+<p>6、<a href="https://www.imkylelambert.com/articles/building-a-backyard-office-the-build-and-cost-breakdown">我在后院建了一个工作室</a>（英文）</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202608/bg2026082606.webp" title="" /></p>
+
+<p>一个美国程序员在自己的后院，搭了一件简易工作室。他详细记录了建设过程，配了照片。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202608/bg2026082605.webp" title="" /></p>
+
+<h2>工具</h2>
+
+<p>1、<a href="https://flyonui.com/">FlyonUI</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202410/bg2024100504.webp" title="" /></p>
+
+<p>一个基于 Tailwind CSS 的页面组件库。</p>
+
+<p>2、<a href="https://github.com/shizunge/endlessh-go">endlessh-go</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202403/bg2024032905.webp" title="" /></p>
+
+<p>一个抵御恶意的 SSH 登陆的工具，它不会阻断那些请求，而是让它们一直处在等待状态，从而增加对方的成本。它支持 Grafana 面板。</p>
+
+<p>3、<a href="https://puttykeyinfo.com/">PuTTYgen</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202403/bg2024033001.webp" title="" /></p>
+
+<p>Windows 平台生成密钥对的工具。</p>
+
+<p>4、<a href="https://github.com/thiagokokada/gh-gfm-preview">gh gfm-preview</a></p>
+
+<p>一个 Go 语言程序，用来新建一个服务，查看 Markdown 渲染结果。</p>
+
+<p>5、<a href="https://github.com/fabriziosalmi/caddy-waf">caddy-waf</a></p>
+
+<p>Web 服务器软件 Caddy 的应用防火墙（waf）插件，支持正则规则和 IP/DNS/ASN/国家黑名单来阻拦恶意请求。（<a href="https://github.com/ruanyf/weekly/issues/11486">@abriziosalmi</a> 投稿）</p>
+
+<p>6、<a href="https://github.com/Defiabell/yixi">一息</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090501.webp" title="" /></p>
+
+<p>一个部署在 Cloudwork Worker 的网页应用，利用 iOS 的"快捷指令"，在打开某个 App 前自动跳转到该页面，10秒后再决定是否打开该 App。（<a href="https://github.com/ruanyf/weekly/issues/11509">@Defiabell</a> 投稿）</p>
+
+<p>7、<a href="https://github.com/zsuroy/ctty">ctty</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026091001.webp" title="" /></p>
+
+<p>一个开源的终端应用，在终端图形界面中，管理 SSH、串口、Telnet 等连接。（<a href="https://github.com/ruanyf/weekly/issues/11522">@zsuroy</a> 投稿）</p>
+
+<p>8、<a href="https://github.com/vet-run/vet">vet</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202507/bg2025072420.webp" title="" /></p>
+
+<p>一个 Bash 脚本检查工具，可以用它运行网上下载的脚本，它会告诉你脚本做了哪些变动，得到你的批准后才会实际运行。</p>
+
+<p>9、<a href="https://github.com/davidesantangelo/krep">Krep</a></p>
+
+<p>一个 grep 命令的替代品，用来在文本文件搜索指定字符串，据说比 grep 速度快50倍。</p>
+
+<p>10、<a href="https://inbucket.org/">Inbucket</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024070709.webp" title="" /></p>
+
+<p>一个测试邮件发送功能的应用程序，嵌入你的应用，用它测试应用的邮件发送功能，自带 Web 后台。</p>
+
+<h2>资源</h2>
+
+<p>1、<a href="https://github.com/ahegazy0/linux-basics-for-hackers-notes">黑客的 Linux 基础知识</a>（Linux Basics for Hackers）</p>
+
+<p>一个英文教程，用通俗语言解释 Linux 基础概念，可以当做入门教材。</p>
+
+<p>2、<a href="https://howdnssec.works/">DNSSEC 的工作原理</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202506/bg2025062508.webp" title="" /></p>
+
+<p>这个英文网站使用大量漫画，解释 DNS 安全扩展 (DNSSEC) 的机制，它可以防止 DNS 投毒。</p>
+
+<p>3、<a href="https://github.com/Jacksaur/Gorgeous-GRUB">Gorgeous GRUB</a></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202505/bg2025050406.webp" title="" /></p>
+
+<p>这个仓库收集系统启动软件 Grub 的各种启动画面主题。</p>
+
+<h2>图片</h2>
+
+<p>1、<a href="https://publicdomainreview.org/collection/john-margolies-photographs-of-roadside-america/">美国公路的奇特建筑</a></p>
+
+<p>美国号称是汽车轮子上的国家，没车的话，寸步难行。</p>
+
+<p>经常有人在公路边修建奇特的房子，希望吸引过路旅客的注意。</p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090903.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090904.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090905.webp" title="" /></p>
+
+<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202609/bg2026090906.webp" title="" /></p>
+
+<p>美国国会图书馆有一个<a href="https://www.loc.gov/pictures/search/?q=mrg&amp;sp=1&amp;st=gallery">照片集</a>，包含了11,710张这种房子的彩色照片，大家可以查看。</p>
+
+<h2>文摘</h2>
+
+<p>1、<a href="https://jordanlord.co.uk/blog/3-constraints/">在开始构建任何东西之前，问自己三个问题</a></p>
+
+<p>我从事产品开发已有10年，开发过一些失败的产品，它们要么过于复杂，要么缺乏鲜明的特色。我在犯过这些错误后，总结出三个限制条件。</p>
+
+<p>后来，构建任何东西之前，我都会问自己三个问题。只有这三个问题都得到肯定回答，我才开发这个东西。</p>
+
+<p>（1）能不能把产品介绍写成一页纸的概要？</p>
+
+<p>如果一个项目的介绍需要超过一页纸才能写完，那就说明它太复杂了，不要开发。</p>
+
+<p>（2）核心技术能不能与产品分离？</p>
+
+<p>产品会不断调整方向，而核心技术则始终如一，并持续发展。</p>
+
+<p>将核心技术与产品分离，能迫使你跳出产品本身的局限去思考。</p>
+
+<p>比如，手机的核心技术是移动通信。某一种手机可能会失败，但移动通信不会。</p>
+
+<p>（3）产品有没有一个核心特色？</p>
+
+<p>这个特色清晰明了，赋予你的产品独特的个性。例如，游戏 MineCraft 完全由方块构成，宜家则提供平板包装、自行组装的家具。</p>
+
+<p>你选择的这个特色可以让你缩小决策空间，专注于真正重要的问题。如果你的产品没有特色，或者选择了错误的特色,你就会打造出一个臃肿的产品，试图面面俱到。</p>
+
+<h2>言论</h2>
+
+<p>1、</p>
+
+<p>AI 替代作家，我没有出声，因为我不是作家。</p>
+
+<p>然后，AI 替代艺术家，我没有出声，因为我不是艺术家。</p>
+
+<p>现在，AI 替代程序员，已经没有人能为我说话了。</p>
+
+<p>-- <a href="https://medium.com/@sebastiancarlos/the-tech-market-situation-is-crazy-ec49ea772903">《然后 AI 替代程序员了》</a></p>
+
+<p>2、</p>
+
+<p>目前，每五个新注册的顶级域名，就有一个是诈骗域名。</p>
+
+<p>-- <a href="https://simonwillison.net/2026/Sep/6/the-purpose-of-dns-is-to-spread-scams/">《域名的恶意注册》</a></p>
+
+<p>3、</p>
+
+<p>人们让 AI 大量解决数学难题，但是数学难题是不可再生的，如今好的问题已经变得稀缺。</p>
+
+<p>自动化工具解题，并没有增加人类的数学思维，损害了未来的数学发展。</p>
+
+<p>-- <a href="https://mathstodon.xyz/@tao/117237320796901560">陶哲轩</a>，著名数学家</p>
+
+<p>4、</p>
+
+<p>世界正在"电动化"，电池和电动机构成了生活的基础，再加上 AI 的飞速发展，意味着我们周围许多"无意识之物"将变得智能化，能够自主思考和移动。</p>
+
+<p>-- <a href="https://www.noahpinion.blog/p/at-least-five-interesting-things-304">Noah Smith</a>，美国经济分析师</p>
+
+<p>5、</p>
+
+<p>科学分成两种。"科学1"是一种理想化的追求真理，"科学2"是实际的科学实践，更多是一种社交活动，要考虑社会和政治现实。</p>
+
+<p>如果你是一个博士生，你必须知道，你主要从事科学2，而不是科学1。</p>
+
+<p>-- <a href="https://maxwellforbes.com/posts/dont-try-to-reform-science/">《博士生不要试图改革科学》</a></p>
+
+<h2>往年回顾</h2>
+
+<p><a href="https://www.ruanyifeng.com/blog/2025/09/weekly-issue-365.html">流量变现正在崩塌</a>（#365）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2024/08/weekly-issue-315.html">一份谷歌离职报告</a>（#315）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2023/08/weekly-issue-265.html">WiFi 的后面是 LiFi</a>（#265）</p>
+
+<p><a href="https://www.ruanyifeng.com/blog/2022/07/weekly-issue-215.html">互联网最喜欢的行为模式</a>（#215）</p>
+
+<p>（完）</p>
+<div><h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2026-09-11T08:11:50+08:00">2026年9月11日</abbr></li>
+
+</ul></div><div></div>
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>http://www.ruanyifeng.com/blog/2026/09/weekly-issue-411.html</id>
             <title>科技爱好者周刊（第 411 期）：OpenClaw 2.0 是一个缩影</title>
             <link>http://www.ruanyifeng.com/blog/2026/09/weekly-issue-411.html</link>
@@ -1887,428 +2249,6 @@
 <ul>
 <li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
 <li>发表日期： <abbr class="published" title="2026-08-07T08:08:27+08:00">2026年8月 7日</abbr></li>
-
-</ul></div><div></div>
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>http://www.ruanyifeng.com/blog/2026/07/weekly-issue-406.html</id>
-            <title>科技爱好者周刊（第 406 期）：道可，道非，常道</title>
-            <link>http://www.ruanyifeng.com/blog/2026/07/weekly-issue-406.html</link>
-            <guid isPermaLink="false">http://www.ruanyifeng.com/blog/2026/07/weekly-issue-406.html</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 31 Jul 2026 08:08:55 +0800</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    <p>这里记录每周值得分享的科技内容，周五发布。</p>
-<p>本杂志<a href="https://github.com/ruanyf/weekly">开源</a>，欢迎<a href="https://github.com/ruanyf/weekly/issues">投稿</a>。另有<a href="https://github.com/ruanyf/weekly/issues/10950">《谁在招人》</a>服务，发布程序员招聘信息。合作请<a href="mailto:yifeng.ruan@gmail.com">邮件联系</a>（yifeng.ruan@gmail.com）。</p>
-
-<h2>封面图</h2>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072904.webp" title="" /></p>
-
-<p>深圳坪山区的坑梓文化科技中心，本身只是普通的三层楼房，但是设计师巧妙地为它加上三级拱廊，顿时让这个建筑变得充满了现代层次感。（<a href="https://tanghuaarchitects.com/project/%E5%9D%91%E6%A2%93%E6%96%87%E5%8C%96%E7%A7%91%E6%8A%80%E4%B8%AD%E5%BF%83/">via</a>）</p>
-
-<h2>道可，道非，常道</h2>
-
-<p>上周（7月22日），华为公司的心声社区转发了《人民日报》对<a href="http://finance.people.com.cn/n1/2026/0528/c1004-40728832.html">何庭波的专访</a>。</p>
-
-<p>何庭波是华为的半导体业务部总裁，最近提出"韬（τ）定律受到关注。</p>
-
-<p>华为转发这篇专访时，附上了一段任正非写的序言，标题是<a href="https://www.163.com/dy/article/L2IH62SK0556LMBK.html">《道可，道非，常道》</a>。这段序言很短，只有几句话。</p>
-
-<blockquote>
-  <p>τ 定律是华为可以选择的唯一一条突围道路。</p>
-
-<p>其他厂家是有多条道路可选择的。华为为了逃生、活着、活下去、活得好，数万名员工6年来不断迭代，走出了一条已经成熟的道路。</p>
-
-<p>不是为了去颠覆什么，取代什么，而是找到了可以选的一条路。我们与高级社团交流时选择"只阐述，不激辩"。</p>
-</blockquote>
-
-<p>这段话的意思很清楚，别人已经走通的路，华为现在走不了，只能自己想办法找一条路，摸索着走下去。</p>
-
-<p>这条路的对错、难走还是易行，都已经不重要了。不走这条路，就只有等死。既然已经上路，就不要在意外界的议论了，埋头向前，足迹就是回答。</p>
-
-<p>比较有意思的是，任正非的标题《道可，道非，常道》，那是老子《道德经》的第一句话。</p>
-
-<p>大家知道，古人的书没有标点，这句话的原文是"道可道非常道"。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072702.webp" title="" /></p>
-
-<p>从古至今，公认的断句是"道可道，非常道"，意思是"可以说出来的道，就不是永恒的道"。</p>
-
-<p>当代有人提出，还有一种断句，就是"道可，道非，常道"。这样一断，意思全变了："走正确的路，走错误的路，这才是永恒的路。"</p>
-
-<p>这大概就是任正非的意思，华为尝试了各种道路，走对也好（道可），走错也好（道非），只为找到一条生路，这才是不变的路（常道）。</p>
-
-<h2>[本周软件] OpenConnector</h2>
-
-<p>今天介绍一款开源的密码连接网关 <a href="https://github.com/oomol-lab/open-connector">OpenConnector</a>。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072801.webp" title="" /></p>
-
-<p>它跟 AI Agent 配套使用，主要解决 AI 自动化工具（比如 OpenClaw）的授权问题。</p>
-
-<p>举例来说，邮箱密码交给 AI 工具，你放心吗，谁能保证它不会把密码泄漏到上下文？OpenConnector 就解决这个问题。</p>
-
-<p>它严格保存密码/授权凭证，统一负责与各种外部应用的连接，Agent 只能拿到账号标签、元数据和执行结果，不会发生密码泄漏，而且方便统一管理。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072802.webp" title="" /></p>
-
-<p>用户只需通过它连接一次外部应用，它就会自动保存连接信息，目前已经支持1000多个身份提供商和10000多个应用服务。</p>
-
-<p>它可以部署在 Cloudflare Workers 或者 Fly.io + SQLite，也支持本地 Node.js / Docker 部署。如果觉得麻烦，可以直接用它的 SaaS 云服务 <a href="https://oomol.com/apps">OOMOL</a>。</p>
-
-<p>它提供 Web 管理后台，可以查看实时运行状态和调用记录。团队版还带有权限管理，支持团队使用，一个团队成员建立连接，可共享给其他成员。</p>
-
-<h2>科技动态</h2>
-
-<p>1、<a href="https://www.163.com/dy/article/L2RLM65G0556BW7G.html">雷击火箭</a></p>
-
-<p>7月23日晚上8点，西昌卫星发射中心发射长征三号乙运载火箭。</p>
-
-<p>火箭升空47秒后，罕见地被闪电击中。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072905.webp" title="" /></p>
-
-<p>不过这道闪电并没有影响火箭运行，火箭上面搭载的天链二号卫星，也顺利送入了太空。</p>
-
-<p>火箭本身是一个容易遭受雷击的装置，长征三号乙火箭特别经过了防雷设计，金属外壳就是"法拉第笼"。具体点说，火箭外壳是良导体，雷击时电流只会沿着外壳表面流过，电流不会侵入内部舱室。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072906.webp" title="" /></p>
-
-<p>此外，高温尾焰相当于"避雷针接地线"，将电流排出。火箭内部的机电设备也包裹了专门的电磁屏蔽层，确保即使有一定电流侵入，核心设备也不会被烧毁。</p>
-
-<p>由于雷击是大气现象，其实只要再多飞十几秒，火箭就能到达大气层顶部，就不会遭遇雷击了。</p>
-
-<p>2、<a href="https://shop.tesla.com/product/balance-bike-for-kids">特斯拉童车</a></p>
-
-<p>特斯拉在官网上推出了一款儿童自行车，售价225美元。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072901.webp" title="" /></p>
-
-<p>它的车型设计很独特，没有踏板，据说会自己保持平衡。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072902.webp" title="" /></p>
-
-<p>它看上去似乎不含电池，那样的话，难道全靠双脚蹬地驱动，或者只是一个不能骑行的摆设？</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072903.webp" title="" /></p>
-
-<p>不管怎么说，它的样子让人眼前一亮，很有特斯拉早期的感觉。</p>
-
-<p>3、<a href="https://www.instagram.com/p/DN3btHw0MKn/">树的生长</a></p>
-
-<p>如果你的手一直握着一颗树，会怎样？</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026010301.webp" title="" /></p>
-
-<p>一个意大利艺术家做了一个实验。2004年，他用青铜做了一只手的模型，握在一颗树上。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026010302.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026010303.webp" title="" /></p>
-
-<p>结果，整棵树继续长，除了手握着的那个地方。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026010304.webp" title="" /></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026010305.webp" title="" /></p>
-
-<p>到了2018年，手已经陷入树里了，树干围着那只手继续生长。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202601/bg2026010306.webp" title="" /></p>
-
-<p>4、<a href="https://www.npr.org/2026/06/30/nx-s1-5835631/turner-camhi-do-no-harm-college-loans">助学贷款的条件</a></p>
-
-<p>现在上大学越来越容易，而且学生都能申请助学贷款，导致大学毕业生越来越多，找工作越来越难。</p>
-
-<p>美国教育部最新规定，如果某专业的毕业生收入低于同岗位未上过大学的劳动者，那么该专业的学生将无法申请助学贷款。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026073006.webp" title="" /></p>
-
-<p>我觉得，这个规定挺有道理。大学教育应该让毕业生的处境变好，如果做不到这一点，那么只有在学生经济实力足够的情况下，才可以选择该专业。这也意味着，该学生不需要助学贷款。</p>
-
-<h2>文章</h2>
-
-<p>1、<a href="https://www.tryai.dev/blog/ai-drawing-arena-colored-pencils-claude-gpt-grok">使用 GPT-5.6、Claude、Gemini 和 Grok "绘制"蒙娜丽莎</a>（英文）</p>
-
-<p>作者让具有视觉能力的四个旗舰模型----GPT-5.6 Sol、Claude Fable 5、Grok 4.5 和Gemini 3.6 Flash ---- 在网页上逐笔绘制蒙娜丽莎这幅世界名画。</p>
-
-<p>原作</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026073012.webp" title="" /></p>
-
-<p>GPT-5.6 Sol</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026073013.webp" title="" /></p>
-
-<p>Claude Fable 5</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026073014.webp" title="" /></p>
-
-<p>Grok 4.5</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026073015.webp" title="" /></p>
-
-<p>Gemini 3.6 Flash</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026073016.webp" title="" /></p>
-
-<p>作者的评价是，GPT-5.6 Sol 遥遥领先，Grok 4.5 简直就是个垃圾。很少能生成任何可用的东西，Gemini 3.6 Flash 只比 Grok 略好。</p>
-
-<p>Claude Fable 5 在质量上排名第二，但是它的成本和耗费的时间上却垫底，成本是其他三个模型的近20倍。</p>
-
-<p>2、<a href="https://www.xda-developers.com/the-story-of-bram-cohen-and-the-bittorrent-protocol/">BitTorrent 协议的故事</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202510/bg2025101405.webp" title="" /></p>
-
-<p>本文介绍美国程序员布拉姆·科恩（Bram Cohen）在2001年发明基于 P2P 的 BitTorrent 协议的故事。</p>
-
-<p>3、<a href="https://mp.weixin.qq.com/s/TyVxvHtTyDjmR2L8IXZCdw">为什么 Emoji 来自日本？</a>（中文）</p>
-
-<p>Emoji 的诞生，纯粹是因为日本在90年代末苛刻的移动网络资费，以及日语有各种敬语，需要有节省字数的表达方式。（<a href="https://github.com/ruanyf/weekly/issues/10931">@zuzuAndroid</a> 投稿）</p>
-
-<p>4、<a href="https://www.instructables.com/A-Koi-Pond-Mosaic-Made-From-10-Pounds-of-3D-Printe/">我用 3D 打印废料制作的锦鲤池马赛克</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026073017.webp" title="" /></p>
-
-<p>3D 打印会产生大量的塑料废料，作者用这些废料做了一个马赛克拼贴图。</p>
-
-<p>5、<a href="https://previnder.com/tls-ca-linux/">如何在 Linux 建立自己的证书颁布机构</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202502/bg2025021804.webp" title="" /></p>
-
-<p>本文是一篇教程，介绍在 Linux 建立自己的证书颁发机构，将它的根证书加入操作系统的受信任证书列表。</p>
-
-<h2>工具</h2>
-
-<p>1、<a href="https://orionbrowser.com/">Orion</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072701.webp" title="" /></p>
-
-<p>Kagi 公司推出的浏览器，支持桌面和手机，采用 WebKit 内核，同时支持 Safari、Chrome 和 Firefox 扩展程序，承诺隐私保护、零遥测和广告拦截。</p>
-
-<p>2、<a href="https://github.com/solst-ice/chirp">Chirp</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202503/bg2025030503.webp" title="" /></p>
-
-<p>通过声音（喇叭和麦克风），发送和接收数据的一个开源工具。</p>
-
-<p>3、<a href="https://bento.page/slides/">Bento Slides</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026073005.webp" title="" /></p>
-
-<p>只需要<a href="https://bento.page/">一个 HTML 文件</a>的 PowerPoint 编辑器/播放器。</p>
-
-<p>4、<a href="https://github.com/westpoint-io/lazyrsync">lazyrsync</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072622.webp" title="" /></p>
-
-<p>为文件同步工具 rsync 添加的终端界面。（<a href="https://github.com/ruanyf/weekly/issues/10830">@pobin6</a> 投稿）</p>
-
-<p>5、<a href="https://github.com/iAmCorey/birth">Birth</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072623.webp" title="" /></p>
-
-<p>开源的 macOS 启动项管理工具，把系统里每一个后台项、守护进程和登录项收进同一个窗口，可以一键停用或移除。（<a href="https://github.com/ruanyf/weekly/issues/10842">@iAmCorey</a> 投稿）</p>
-
-<p>6、<a href="https://github.com/Jaksay/Linux-Router">Linux Router</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072624.webp" title="" /></p>
-
-<p>将 Debian 或 Armbian 设备变成路由器，并提供一个清晰的 Web 控制台。（<a href="https://github.com/ruanyf/weekly/issues/10847">@Jaksay</a> 投稿）</p>
-
-<p>7、<a href="https://github.com/wutongyuonce/RepoMirror">RepoMirror</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072626.webp" title="" /></p>
-
-<p>一个 macOS 桌面应用，将 GitHub 仓库或其中的指定目录镜像同步至本地，不必检查几十个 GitHub 项目有没有更新。（<a href="https://github.com/ruanyf/weekly/issues/10851">@wutongyuonce</a> 投稿）</p>
-
-<p>8、<a href="https://github.com/zerx-lab/FluxDown">FluxDown</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072704.webp" title="" /></p>
-
-<p>开源的多协议下载器，内置 MCP 服务器，可供 Agent 调用。（<a href="https://github.com/ruanyf/weekly/issues/10901">@zerx-lab</a> 投稿）</p>
-
-<p>9、<a href="https://github.com/AndySkaura/mifun-storage">米饭云盘</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026073003.webp" title="" /></p>
-
-<p>基于 Telegram Channel 的小文件开源存储系统，适合部署为个人图床 / Markdown 图床。（<a href="https://github.com/ruanyf/weekly/issues/10936#issuecomment-5115313857">@AndySkaura</a> 投稿）</p>
-
-<p>10、<a href="https://github.com/wangshengithub/staticshield">StaticShield</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026073004.webp" title="" /></p>
-
-<p>为网页加上密码保护的 JS 库，加密后只有输入密码才能访问。（<a href="https://github.com/ruanyf/weekly/issues/10940#issuecomment-5117097770">@wangshengithub</a> 投稿）</p>
-
-<h2>AI 相关</h2>
-
-<p>1、<a href="https://github.com/vudsen/ai-disk-cleaner">ai-disk-cleaner</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072703.webp" title="" /></p>
-
-<p>开源的 Windows 磁盘清理工具，用 AI 分析垃圾文件。（<a href="https://github.com/ruanyf/weekly/issues/10900">@vudsen</a> 投稿）</p>
-
-<p>2、<a href="https://github.com/physiclaw/PhysiClaw">PhysiClaw</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072627.webp" title="" /></p>
-
-<p>一个开源的 AI 系统，需要自购硬件，可以像人一样操作 iPhone，用摄像头观察屏幕，机械臂操作手机。（<a href="https://github.com/ruanyf/weekly/issues/10893">@physiclaw</a> 投稿）</p>
-
-<p>3、<a href="https://github.com/awdr74100/figwright">Figwright</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026072625.webp" title="" /></p>
-
-<p>一个 MCP 服务器，让 Claude Code、Cursor、Codex 等 AI 代理直接操作 Figma，能读设计稿也能画设计稿。（<a href="https://github.com/ruanyf/weekly/issues/10850">@awdr74100</a> 投稿）</p>
-
-<h2>资源</h2>
-
-<p>1、<a href="https://www.howtodraw.ai/">How to Draw</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026073002.webp" title="" /></p>
-
-<p>这个网站有各种小动物的分步绘图指导，适合小朋友使用。（<a href="https://github.com/ruanyf/weekly/issues/10934">@Etshop-AI</a> 投稿）</p>
-
-<p>2、<a href="https://scroll-driven-animations.style/">网页滚动的动画效果</a>（英文）</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202607/bg2026073001.webp" title="" /></p>
-
-<p>这个网站收集各种网页滚动的动画效果，使用 Web Animations API (WAAPI) 和 CSS Animations API 实现。</p>
-
-<p>3、<a href="https://online-go.com/learn-to-play-go">学习下围棋</a></p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202509/bg2025092903.webp" title="" /></p>
-
-<p>在线互动围棋教程，从零开始分课讲解。</p>
-
-<h2>图片</h2>
-
-<p>1、<a href="https://www.bbc.co.uk/news/magazine-23536914">水瓶灯</a></p>
-
-<p>2002年，一个巴西工程师家里停电了，大白天屋里一片漆黑。</p>
-
-<p>他想到一个办法，找了一个透明的饮料宝特瓶，里面装满了水。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024073005.webp" title="" /></p>
-
-<p>然后，他在屋顶瓦片打了一个洞，把宝特瓶插在里面。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024073006.webp" title="" /></p>
-
-<p>阳光就通过瓶子里面的水，折射到了室内，就变成一个简单的灯。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024073007.webp" title="" /></p>
-
-<p>这个发明很快流行了起来，许多人开始采用。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202407/bg2024073008.webp" title="" /></p>
-
-<p>现在，它已经在巴西、菲律宾、印度、孟加拉国、坦桑尼亚、阿根廷和斐济等15个国家里面流行。</p>
-
-<h2>文摘</h2>
-
-<p>1、<a href="https://x.com/bigaiguy/status/2063903532575752211">世界最不知名的最强程序员</a></p>
-
-<p>一个法国程序员隐居在巴黎，过去30年，都在编写软件。整个互联网如今都依赖于他的作品，却很少人知道他的名字。</p>
-
-<p>他编写的代码支撑着 YouTube、Netflix 和 TikTok 的视频业务，也支撑着 AWS、谷歌云和微软 Azure 等云服务的底层虚拟服务器。他还创造过圆周率位数的世界纪录。</p>
-
-<p>他没有推特账号，也不做任何市场推广，只是默默地发布产品。</p>
-
-<p>他的名字叫法布里斯·贝拉尔（Fabrice Bellard）。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202606/bg2026062004.webp" title="" /></p>
-
-<p>在编程领域之外，几乎无人知晓他创造的奇迹。</p>
-
-<p>他1972年出生于法国格勒诺布尔，毕业于法国顶尖工程学院----巴黎综合理工学院。</p>
-
-<p>他从未去过硅谷，只是埋头编写代码。</p>
-
-<p>2000年，28岁的他启动了一个名为 FFmpeg 的项目，那是一个开源的多媒体框架，用于视频编码、解码和流媒体传输。这个项目完成了一项其他开发者都未能出色完成的任务。它在一个库中处理了所有现有的视频和音频格式，并且支持所有操作系统。</p>
-
-<p>他独自领导这个项目多年。如今，FFmpeg 已成为互联网视频的基石。YouTube 使用它，Netflix 使用它，VLC 使用它，Chrome 和 Firefox 也使用了它的部分代码。每一部安卓手机、每一部 iPhone、每一台智能电视、每一个你曾经接触过的视频编辑工具，其底层都运行着 FFmpeg。如果你在过去 20 年里看过任何视频，那么 FFmpeg 都处理过它。</p>
-
-<p>但他并未止步于此。2003 年，他创建了 QEMU，一个操作系统模拟器和虚拟化器。他独自编写了 QEMU，直到 2005 年的 0.7.1 版本为止。QEMU 允许你在任何操作系统上运行其他任何操作系统。</p>
-
-<p>它成为了现代虚拟化的基础。Linux 内核虚拟机管理程序 KVM 就运行在 QEMU 之上。所有主流云服务提供商，例如 AWS、Google Cloud、Microsoft Azure 和 IBM Cloud，都在基于 QEMU 构建的基础设施上运行虚拟机。QEMU 是地球上被引用次数最多的云基础设施代码。</p>
-
-<p>2001年，他凭借一个小型 C 编译器赢得了国际混淆 C 代码大赛（IOBC），该编译器后来发展成为 TCC，即 Tiny C Compiler（微型 C 编译器）。TCC 可以在15秒内从源代码编译好并启动 Linux 内核。</p>
-
-<p>2004年，他使用一台个人台式电脑和他自己推导的算法----贝拉德公式，计算出了当时最多的 π 位数。</p>
-
-<p>2011年，他用纯 JavaScript 编写了一个完整的 PC 模拟器，可以在浏览器中运行 Linux 系统，这个项目名为 JSLinux，至今仍让工程师们难以置信。</p>
-
-<p>2019年，他发布了 QuickJS，这是一个小巧但功能齐全的 JavaScript 引擎，可以胜任 V8 引擎无法胜任的工作。</p>
-
-<p>2021年，他发布了 NNCP，这是一个基于神经网络的无损数据压缩器，立即在大型文本压缩基准测试中名列前茅。</p>
-
-<p>之后，他将注意力转向了大型语言模型。他构建了 TextSynth Server，这是一个带有 REST API 的 Web 服务器，用于在本地运行 LLM。</p>
-
-<p>他还发布了 ts<em>zip 和 ts</em>sms，那是利用大模型压缩文本的工具，其压缩率远超传统算法。他还发布了  TSAC，一个超低比特率音频压缩系统。</p>
-
-<p>2025 年 12 月，他发布了 Micro QuickJS，这是一个独立于 QuickJS 的全新 JavaScript 微引擎，专为内存占用极低的环境而设计。</p>
-
-<p>法布里斯·贝拉尔于2012年加入电信公司 Amarisoft，并担任首席技术官。该公司开发 4G 和 5G 基站软件，供全球运营商和实验室使用。十多年来，他一直运营着这家公司，同时还在自己的个人主页 bellard.org 上发布个人项目。</p>
-
-<p><img alt="" src="https://cdn.beekka.com/blogimg/asset/202606/bg2026062005.webp" title="" /></p>
-
-<p>他没有 Twitter 账号，也没有 Instagram 账号，几乎不接受采访。他的个人网站只是一个项目列表，没有任何样式、字体或营销文案，只有标题和链接。</p>
-
-<p>这位从未移居硅谷的低调法国工程师，编写了默默运行互联网的代码。他至今仍在发布产品。</p>
-
-<h2>言论</h2>
-
-<p>1、</p>
-
-<p>有些网站的"登录"按钮比"注册"按钮小，或者默认只显示"注册"按钮。</p>
-
-<p>我很讨厌这种网站，这表明他们优先考虑新用户，而不是让老用户满意。</p>
-
-<p>-- <a href="https://news.ycombinator.com/item?id=48971030">Hacker News 读者</a></p>
-
-<p>2、</p>
-
-<p>人类程序员的职责从来都不是为编写代码而编写代码，而是在面对模糊性、各种限制和变化时降低代码的风险。以前如此，不写代码的 AI 时代更是如此。</p>
-
-<p>-- <a href="https://www.heavybit.com/library/article/write-only-code">《无人阅读的代码》</a></p>
-
-<p>3、</p>
-
-<p>我认识很多功成名就的人，都已经退休了，但是最近重出江湖，因为 AI 带来的挑战和机遇对他们来说有着不可抗拒的吸引力。</p>
-
-<p>过去几十年里，他们那些零散的副业项目想法，现在突然变得切实可行了，有太多新的事物值得探索和创造。</p>
-
-<p>-- <a href="https://news.ycombinator.com/item?id=47152086">Simon Willison</a>，著名开发者</p>
-
-<p>4、</p>
-
-<p>有人认为，现在的 CSS 是一团极度臃肿的大杂烩。我的看法恰恰相反，CSS 正尽力用人类易读的文本形式，完整地表达视觉呈现、布局设计、排版、动画、数字互动以及其他一些内容。它不是臃肿，而是极具野心。</p>
-
-<p>-- <a href="https://mastodon.social/@Meyerweb/116065151451468199">Eric A. Meyer</a>，著名互联网开发者</p>
-
-<h2>往年回顾</h2>
-
-<p><a href="https://www.ruanyifeng.com/blog/2025/08/weekly-issue-359.html">Palantir 值得关注</a>（#359）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2024/07/weekly-issue-309.html">无人驾驶出租车的双面刃</a>（#309）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2023/06/weekly-issue-259.html">如何免费使用 ChatGPT</a>（#259）</p>
-
-<p><a href="https://www.ruanyifeng.com/blog/2022/06/weekly-issue-209.html">程序员是怎样的人</a>（#209）</p>
-
-<p>（完）</p>
-<div><h3>文档信息</h3>
-<ul>
-<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
-<li>发表日期： <abbr class="published" title="2026-07-31T08:08:55+08:00">2026年7月31日</abbr></li>
 
 </ul></div><div></div>
                 ]]>
