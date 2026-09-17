@@ -5,35 +5,120 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6aaa7ab0756bbb665860a857</id>
-            <title>AI探索站 09月16日</title>
-            <link>https://m.okjike.com/originalPosts/6aaa7ab0756bbb665860a857</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aaa7ab0756bbb665860a857</guid>
+            <id>https://m.okjike.com/originalPosts/6aac02c9756bbb66588a5d1e</id>
+            <title>AI探索站 09月17日</title>
+            <link>https://m.okjike.com/originalPosts/6aac02c9756bbb66588a5d1e</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aac02c9756bbb66588a5d1e</guid>
             <pubDate></pubDate>
-            <updated>Wed, 16 Sep 2026 11:17:04 GMT</updated>
+            <updated>Thu, 17 Sep 2026 15:10:01 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    B站今天上线了测试模型能力的「AI无限竞技场」，我愿称之为本月最佳整活。<br /><br />之所以用整活二字，是因为所有测评项目都是由B站UP主手搓出来的，理论上并不像传统刷题型Benchmark那么严谨。<br /><br />但从今年以来模型评测的风向转变来看，所谓的严谨，其实是最不要紧的。<br /><br />要知道，现在市面上参考价值最高的LMArena——也就是AA竞技场——是由用户匿名投票投出来的，这意味着榜单充满了人类的主观偏好，不问对错，只看答案讨喜与否。<br /><br />所以从严谨性上，哪怕LMArena一度遭遇了很多业内人士的轮番炮轰，但这不耽误它依然是模型评测最大的参照系。<br /><br />说白了，哪有那么多人每天用模型去解专业数学题，评价到底好不好用，最后还不是得看大伙的真实需求吗。<br /><br />那么问题来了，既然LMArena已经如此权威，那为什么B站还要大费周章地再做一个呢？<br /><br />这就涉及到评分机制的问题了，由于LMArena并没有设置任何参与门槛，所以理论上，所有人都可以用脚投票。<br /><br />我记得年初Surge AI还喷过这一点，说你们的用户压根不会仔细读题，扫两眼就选出答案了，这对模型厂商不公平啊......<br /><br />但在B站，只有UP主可以参与测评，好不好不能选几道题就盖棺定论了，得拿作品说话。<br /><br />更何况，因为各模型训练语料不同，老外觉得好用，并不代表我们也认为好用。<br /><br />这就能解释得通，为什么B站的「AI无限竞技场」与LMArena榜单出入非常大，单是前10名里国产模型就占据了一半，仅有GPT-6 Astra、Claude Fable 5.1这些公认「六边形战士」是重合的。<br /><br />要知道，那些B站参与测评的UP主已经在实打实用模型解决问题了。<br /><br />注意啊，我指的不单是做网页、解决屎山代码这些主流Coding场景，UP们整出来的大活，还包括考建模、打麻将、当媒婆、对「新三国」暗号等等......<br /><br />我之前就说过，AI行业当下最要紧的，是去AI味，凭什么做模型就得对着别人的榜单和任务定向优化，反而忽略我们自己最需要的场景，中文社区的真实反馈，这不就来了吗。<br /><br />更重要的是，B站榜单的实时排名，既会不断刺激模型厂商进步，也相当于给模型的发展历史进行社区化「归档」，完成取之用户、用之用户的良性循环。<br /><br />我自己是很愿意见到这种场面的，看的人越多，就越能减少一些常识性误解，这对普通人之于AI的认知，助益莫大。<br /><br />看AI、学AI、搞产品、测模型，眼看着B站的生态，是越来越完善了。
+                    同事问我对 Jev 在 Broswer use 领域的应用有什么看法？<br /><br />答（一些比较初步的感受，不代表未来观点不会变）：<br /><br />Jev 我理解是用有限的分类输出，代替自回归生成结构化文本，所以快了。<br /><br />目前看起来有几个限制：<br /><br />第一，每次调用前需要准备好候选选项，虽然可以动态生成，但候选难以枚举或者数量太多时，就需要额外处理，常规的文本生成更不是它的适用范围；<br /><br />第二，分类不是百分之百准确的，和 LLM 一样，也受限于模型规模、训练质量等影响；<br /><br />所以具体到 Broswer use 这样的通用任务，我觉得还是要讨论讨论。<br /><br />具体可以从两个维度分析：单次动作的可选范围，以及单次动作的推理难度。<br /><br />从可选范围来看，一个页面的可交互元素，乘以每个元素的可交互方式，比如点击、输入、拖拽等，如果全部平铺，很容易把选项撑爆。Jev 目前单个 Choice 最多支持 255 个选项。把操作和目标拆开可以缓解，但某一类操作的目标仍然可能太多。<br /><br />从推理难度来看，浏览器任务里有大量操作，单步推理难度是不高的。Jev 更适合的 System 1 任务，我凭感觉可能占很大比例，大多数情况下应该超过 90%。<br /><br />举个例子，在网页上购物，商品、金额等都已经确认，走到结算这一步，页面上有个支付按钮，需要点它，确实就只是 System 1 难度的动作。<br /><br />但换个例子，页面上有一道复杂的数学选择题，只有三个选项。这时候选谁，就无法离开 System 2 进行推理。选项少，不代表问题简单。<br /><br />当然，Jev 分类这种输出形式本身不意味着没有推理能力。但 Jev 官方确实列出了多跳推理、精确数值处理等弱项。考虑到浏览器是一个通用容器，需要调动 System 2 能力的任务一定是无法避免的。<br /><br />那么，选项撑爆和 System 2 介入这两个问题要如何解决？<br /><br />选项撑爆<br />可以通过工程手段把候选分页，留出“下一页”“上一页”；也可以逐级选择，比如先选页面区域，再下钻到具体元素，最后选择操作。还可以先给候选打分，筛选后再做最终选择。这些方式可以配合使用。<br /><br />System 2 介入<br />可以给模型一个类似“不确定”的选项，或者根据概率和置信度，让 LLM 接管。理论可行，但可靠性需要验证<br /><br />另外，动作拆分的粒度也很重要。如果把鼠标操作拆成方向加步长，靠多轮交互逐步修正，点一个按钮可能要来回很多轮，不一定比 LLM 更快。<br /><br />公司里应该有部分同事，包括我，是从上一个时代的 AI 公司过来的。我们当时做的很多工作，核心就是训练模型做分类，所谓的模式识别。<br /><br />因此上面列出这些问题，大都在上一代模型和系统里就有一些解决思路，总体上就是先缩小候选范围，再逐级细分。我个人其实觉得这些方案并不优雅，因为分组、筛选、纠错、升级的复杂度最后还是落到了外围工程上。<br /><br />相较于传统分类模型，Jev 当然有巨大进步，可以理解自然语言描述，处理运行时定义的候选，还能并行回答多个问题。但在具体任务上的表现，是否能追平专门为该任务训练的分类模型，我持怀疑态度。对于方向加步长这样的低层控制任务，我也没有看到足够的公开评测来证明它的泛化表现。<br /><br />具体到 Broswer use，如果既要维护分类模型的候选空间，又要编排它和 LLM 的分工，处理不确定性、模型切换和失败恢复，这种组合，在我看来，似乎不如直接用一个速度很快的 LLM 来得优雅。<br /><br />当然，架构是否优雅不优先于实际业务表现。多模型组合省下的推理时间，能不能覆盖候选处理、额外轮次和模型切换的开销，最终还是要看任务成功率、总延迟和总成本。
                 ]]>
             </content:encoded>
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6aaa1e95a72a2ef721fe009a</id>
-            <title>AI探索站 09月16日</title>
-            <link>https://m.okjike.com/originalPosts/6aaa1e95a72a2ef721fe009a</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aaa1e95a72a2ef721fe009a</guid>
+            <id>https://m.okjike.com/originalPosts/6aabf499cfb5d08b3e188502</id>
+            <title>AI探索站 09月17日</title>
+            <link>https://m.okjike.com/originalPosts/6aabf499cfb5d08b3e188502</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aabf499cfb5d08b3e188502</guid>
             <pubDate></pubDate>
-            <updated>Wed, 16 Sep 2026 04:44:05 GMT</updated>
+            <updated>Thu, 17 Sep 2026 14:09:29 GMT</updated>
                 
                 
             <content:encoded>
                 <![CDATA[
                     
-                    怎么最近又来这么多个人AI助理的hype，OpenClaw们的坟头草都两米高了，这帮产品的叙事还是那句“它懂你”…<br />个人助理如果不训模型，本质就是重工程，要么依赖用户自己喂context（教育成本和体验成本都没法ToC），要么得接上其他应用嫖数据（纯检索没门槛，挨个渠道雕花又太重），两条路想象空间都有限。<br />一边给模型厂交token费，一边跟模型厂抢同一批用户，护城河薄到下一轮API降价、模型公司动一动就能被抹平啊……
+                    Jev 这个模型太牛逼了，值得好好研究，对游戏、推荐系统、投资交易、agent Harness、数据处理，都有极大的价值。<br /><br />简单来说，这个大模型不是输出文字，只输出判断，比如是否，选 a 还是选 b。速度极快，成本极低。<br /><br />但奇怪，好像国内对这个模型的反响和关注度还不够。<br /><br />https://typesafe.ai/
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6aaba3a9cfb5d08b3e0fd582</id>
+            <title>AI探索站 09月17日</title>
+            <link>https://m.okjike.com/originalPosts/6aaba3a9cfb5d08b3e0fd582</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aaba3a9cfb5d08b3e0fd582</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 17 Sep 2026 08:24:09 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    GPT-6 Astra 做软件宣传视频实在是太强了！<br /><br />这个视频从配乐到音效到组件，全部都是 GPT-6 Astra 自己处理的。<br /><br />没有用任何生成模型，纯代码，而且它是基于我的 Codepilot 组件和设计语言做的。<br /><br />跟软件本身的风格和效果都非常搭配。<br /><br />如果有人需要的话，我看要不要打包个 skill 给大家用。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6aab8d9ccfb5d08b3e0d628a</id>
+            <title>AI探索站 09月17日</title>
+            <link>https://m.okjike.com/originalPosts/6aab8d9ccfb5d08b3e0d628a</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aab8d9ccfb5d08b3e0d628a</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 17 Sep 2026 06:50:04 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    你能看出来，是 AI 生成的吗
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6aab5e6dbd0563695bb72a26</id>
+            <title>AI探索站 09月17日</title>
+            <link>https://m.okjike.com/originalPosts/6aab5e6dbd0563695bb72a26</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aab5e6dbd0563695bb72a26</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 17 Sep 2026 03:28:45 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    ⛰️ Claude 的新产品发布是一个里程碑，对创造者的启示非同寻常<br /><br />Chat 和 Cowork 并进主界面，顺手放进三样东西：Doc、Slide、Design，正式向传统巨头发起挑战。其中特别想先展开聊的，是 Doc。<br /><br />Hans 多年前写过一个判断：Word 如此臃肿、难用，不是微软缺优秀工程师，而是因为两件事叠在了一起。<br />一是创新者的窘境。庞大的官僚组织最擅长摘果子和向上管理；组织里没有创始人，产品就没有灵魂。<br />二是为了「通用」。用户分布越广，功能越堆越多，大部分按钮我们一辈子没点过。所以才有 Notion 这样的创新者横空出世。<br /><br />同样的剧本，今天换了个舞台。<br /><br />从去年 Opus 4.5 和 Coding Agent 开始，连外行都看得出一个规律：Anthropic 和 OpenAI 在前面探路，大厂在后面抄作业。元宝、豆包、千问，抄一轮不行，再换个名字——WorkBuddy、豆包工作、千问办公。年初 Claude Cowork 刚出来时，大多数人还没看懂它在干什么；几周之内，同款产品线就一字排开。<br /><br />传统巨头几乎没做出优秀的 AI 产品，反而是前沿模型实验室逼着自己在 Harness 上创新。巨头看起来强大，手里其实只剩三张牌：渠道分发、补贴、信息差。这不是能力问题，是体系问题：一个只会追赶的旧世界组织，内部根本没有「先于用户看见」的职责，一切只为 KPI。而这对 AI native 的创始人和产品负责人，正是利好。<br /><br />还有一个广泛的认知误区：模型什么都能做了，做应用没戏了。恰恰相反。<br /><br />Claude Code 就像第一辆奔驰，Harness 对于世界来说才刚刚开始。Coding 最先跑通，不过是因为代码能编译、能测试，对错天然可验证；而法律、教育、设计、内容创作，每个领域的「对错」长得都不一样，需要各自的框架，不是「通用」两个字能解决的。<br /><br />不必害怕巨头，无论是古早的 Word，还是明日黄花的元宝；每一次化繁为简的缝隙，都有机会涌现出无数个 Notion。<br /><br />在技术无限赋能的时代，发明本身，就是最伟大的杠杆。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6aab5440141b85b2923cf16e</id>
+            <title>AI探索站 09月17日</title>
+            <link>https://m.okjike.com/originalPosts/6aab5440141b85b2923cf16e</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aab5440141b85b2923cf16e</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 17 Sep 2026 02:45:20 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    我操，太整活，太开放了！<br /><br />小米 MiMo 团队居然在直播他们新模型 MiMo-V2.6 的RL 训练过程，看起来是一直在进行自动化的评估和测试。<br /><br />然后一个特别的点是，它显示了成本，而且成本是实时显示的。<br /><br />你可以看到训一个模型到底有多费钱，每一秒都在涨那个钱！<br /><br />https://mimo.xiaomi.com/rl/
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6aab4017bd0563695bb3d136</id>
+            <title>AI探索站 09月17日</title>
+            <link>https://m.okjike.com/originalPosts/6aab4017bd0563695bb3d136</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aab4017bd0563695bb3d136</guid>
+            <pubDate></pubDate>
+            <updated>Thu, 17 Sep 2026 01:19:19 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    其实有个象征性的事件<br /><br />在这波 personal ai的浪潮里面，没有人在乎也没有人讨论背后是什么模型。<br /><br />我觉得这就是一个标志性时间点，真正的价值从模型转到应用的时间点。<br /><br />说得更明确一点，用户不在乎 geek不在乎 投资人不在乎 x根本没人讨论用的啥模型，但是都在讨论能干到啥。
                 ]]>
             </content:encoded>
         </item>
@@ -73,40 +158,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6aa89c90bd0563695b6eba16</id>
-            <title>AI探索站 09月15日</title>
-            <link>https://m.okjike.com/originalPosts/6aa89c90bd0563695b6eba16</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aa89c90bd0563695b6eba16</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 15 Sep 2026 01:17:04 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    分享一个在小红书看到的vibe coding网页的教程，讲得很清楚，资料也给得很细，让我有点震惊这种级别的教程质量居然是一个匿名momo发的。总之特别推荐！
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6aa887c1141b85b292f38935</id>
-            <title>AI探索站 09月14日</title>
-            <link>https://m.okjike.com/originalPosts/6aa887c1141b85b292f38935</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aa887c1141b85b292f38935</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 14 Sep 2026 23:48:17 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    以前文章有错别字：不专业<br />现在文章有错别字：活人感<br /><br />前后间隔，也就两三年而已
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/6aa7d803141b85b292e15eb8</id>
             <title>AI探索站 09月14日</title>
             <link>https://m.okjike.com/originalPosts/6aa7d803141b85b292e15eb8</link>
@@ -119,57 +170,6 @@
                 <![CDATA[
                     
                     今天一朋友说：硅谷 AI 应用创业公司，经常是增长团队和产研团队人数一样多。<br /><br />原因很简单：有了 AI 后，产品研发只是时间问题。真正决定差距的，是增长。我比你会搞流量，我就赢过了你。<br /><br />好朴实无华又无比正确的团队策略。<br /><br />同时面对 VC 甚至同行，一定要隐藏团队人数，一定要说是产品超牛、是自然流量。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6aa7d6cfbd0563695b5a13ff</id>
-            <title>AI探索站 09月14日</title>
-            <link>https://m.okjike.com/originalPosts/6aa7d6cfbd0563695b5a13ff</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aa7d6cfbd0563695b5a13ff</guid>
-            <pubDate></pubDate>
-            <updated>Mon, 14 Sep 2026 11:13:19 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    卧槽！我开发的 Markdown 和 HTML 预览 iOS 应用「即览」终于上架了！目前国区限免！<br /><br />苹果上架时真的麻烦啊，审核等了十一天。<br /><br />主要帮大家解决 AI 时代两大主流文件在手机上无法预览的问题。<br /><br />手机上的各个应用对这两类文件的预览其实都不太好：Markdown 就别说了，最近有些虽然支持了但体验并不好；<br /><br />HTML 文件的话，即使是浏览器本身，想要打开本地的 HTML 文件也非常麻烦。<br /><br />你只需要在文件的打开方式中选择「即览」，就能快速打开。而且我做了很多优化，比如字号调整、夜间模式、比例调节等等<br /><br />这里尝试：https://www.glimpse.cards/
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6aa3a11ccfb5d08b3e3b4145</id>
-            <title>AI探索站 09月11日</title>
-            <link>https://m.okjike.com/originalPosts/6aa3a11ccfb5d08b3e3b4145</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aa3a11ccfb5d08b3e3b4145</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 11 Sep 2026 06:35:08 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    today.ai 其实是一个和我的理念挺像的产品，只是我和他 bet 的上下文入口不一样：我相信物理世界、用户随身；它相信数字世界、工具整合。而这两个恰好是最互补的。<br /><br />以及他直接强调了最宏大的概念，就是个人助手，并没有从某一个细节点切入，这也是他和我们的不同。<br /><br />除了这两个地方之外，无论是从界面架构上，还是从 onboarding 体验上，我觉得都有不少值得借鉴的地方。<br /><br />Onboarding 过程让人惊喜的地方在于，登录谷歌账号的时候就授权了 Gmail，在经历一些其他的 onboarding 步骤之后，它在给我的最后的 onboarding 介绍中就已经极快速地检索了我的 Gmail，表达了它对我的了解。<br /><br />这个是蛮让人惊喜的，速度太快了。我刚刚才授权，只是一两分钟经历其他 onboarding 步骤的时间，它就已经能够把我的 Gmail 翻个底朝天，然后告诉我它对我有什么了解了。<br /><br />这种惊喜感很强烈，在我还没结束 onboarding 的时候，就能让我快速感知和相信它懂我，这个设计得我觉得非常好。<br /><br />不过继续用下去，就只能止步于此了。当然，可能还是因为我最重要的信息都在飞书和微信上。如果是一个海外工作和生活的人，可能帮助还蛮大的。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6aa2564cbd0563695bc699ac</id>
-            <title>AI探索站 09月10日</title>
-            <link>https://m.okjike.com/originalPosts/6aa2564cbd0563695bc699ac</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aa2564cbd0563695bc699ac</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 10 Sep 2026 07:03:40 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    即使中国的模型能力距离美国还有差距，但差得也不会太多，这意味着美国前沿实验室的研究源们看到的东西，最多几个月到半年后，中国的同行也能看到。<br /><br />怎么就没有中国的研究员隔三差五的跳出来吓唬大家AI就要毁灭人类了呢？<br /><br />因为这些中国人在学生时代是真做题啊，没有给老派科幻小说钻进自己脑子的机会，我指的不是「星际穿越」这种通俗意义上的流行作品，而是海因莱因、克拉克、亚当斯、阿西莫夫的那些反乌托邦寓言集。<br /><br />「大西洋月刊」说美国AI行业活在一群13岁中学男孩的幻想里，他们要用一生去修复童年创伤，然后出现的过度补偿就是，把那些机器人摧毁世界、天网奴役人类的桥段，当成一种需要英雄站出来勇于对抗的自我使命。<br /><br />成群结队的堂吉柯德。
                 ]]>
             </content:encoded>
         </item>
