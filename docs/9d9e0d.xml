@@ -16,7 +16,24 @@
             <content:encoded>
                 <![CDATA[
                     
-                    Eval Moves Right———<br />从理解和照顾人的缺陷<br />到定义下一个值得被改变的 state<br /><br /> 1. 长久以来，人对世界产生 impact 的方式是：<br /><br />Context → Human → Action → State Change<br /><br />人通过学习和吸收 context，将其转化为正确的 action，推动某个状态发生改变。<br /><br />2. 当有了 AI，我们阶段性地变成了：<br /><br />Context → Model → Human → Model → Action → State Change<br /><br />这个阶段，AI 最先爆发的use case是调研报告、Office 三件套和 Website。它们大致覆盖了 loop 的前半部分：<br /><br />Context → Model → Human<br /><br />因为人获取 context 的带宽很低，所以报告需要更易读，Slides 需要更美观，前端需要更炫酷。也因此出现了Eval角色：它位于 Model → Human 之间，目标是理解和照顾人的“缺陷”，让模型的输出更容易被人理解、信任和使用。<br /><br />但这些今天被当作“交付物”的东西，其实都只是中间表示。它们本身通常不改变 State，只是作为 context 的载体，帮助另一个决策主体找到正确的 action。<br /><br />3. Eval 会沿着 loop 向右移动<br /><br />随着 Agent 开始真正采取行动，Eval 会从 Model → Human 移动到 Model → Action。<br /><br />这个位置的 eval 关心 model 是否在 Harness 中采取了正确的行动：工具是否调用正确，任务是否完成，失败是否能够恢复，边界是否被遵守。<br /><br />这里的 Eval 需要理解和约束的，也不再只是人的缺陷，而是 Harness 的缺陷：环境不完整、工具会失败、反馈稀疏、规则与边界并不总是清晰。<br /><br />前两类 Eval 有一个共同点：它们都无法直接看到一个明确、可观测的 State。因此只能在模糊中构造代理指标去拟合 State。<br /><br />4. 理想的 impact loop 是：<br /><br />Context → Model → Action → State Change<br /><br />和人相比，AI 天然的高带宽、高并发和低延迟，会让整个 loop 比第一阶段更高效。长期来看，我们努力的方向，就是让 AI 强到足以把 Human 从执行 loop 中解放出来。<br /><br />当 Human 不再 in the loop，许多 effort 都会被节省。模型不需要报告更易读，也不需要更漂亮的 Slides 和网页来承载 context。<br /><br />Eval 也会继续向右移动，最终只留下一个问题：<br /><br />什么 State 值得被改变？<br /><br />一旦 State 被选定，它往往比中间产物更容易观测。真正困难的，不再是“怎么评”，而是“评什么”；不再是构造一个更好的 proxy，而是找到一个真正值得优化的世界状态。<br /><br />那会是一个人人都是 Eval 的时代。我们需要通过定义 State 的演进方向，继续维护人的价值。<br /><br />但那些 State 会是什么？<br /><br />是更长的健康寿命，是更低的洁净能源成本，是更快的科学迭代，是去火星，还是更丰富的艺术？<br /><br />我真的很好奇。
+                    Eval Moves Right——<br />从理解和照顾人的缺陷<br />到定义下一个值得被改变的 state<br /><br /> 1. 长久以来，人对世界产生 impact 的方式是：<br /><br />Context → Human → Action → State Change<br /><br />人通过学习和吸收 context，将其转化为正确的 action，推动某个状态发生改变。<br /><br />2. 当有了 AI，我们阶段性地变成了：<br /><br />Context → Model → Human → Model → Action → State Change<br /><br />这个阶段，AI 最先爆发的use case是调研报告、Office 三件套和 Website。它们大致覆盖了 loop 的前半部分：<br /><br />Context → Model → Human<br /><br />因为人获取 context 的带宽很低，所以报告需要更易读，Slides 需要更美观，前端需要更炫酷。也因此出现了Eval角色：它位于 Model → Human 之间，目标是理解和照顾人的“缺陷”，让模型的输出更容易被人理解、信任和使用。<br /><br />但这些今天被当作“交付物”的东西，其实都只是中间表示。它们本身通常不改变 State，只是作为 context 的载体，帮助另一个决策主体找到正确的 action。<br /><br />3. Eval 会沿着 loop 向右移动<br /><br />随着 Agent 开始真正采取行动，Eval 会从 Model → Human 移动到 Model → Action。<br /><br />这个位置的 eval 关心 model 是否在 Harness 中采取了正确的行动：工具是否调用正确，任务是否完成，失败是否能够恢复，边界是否被遵守。<br /><br />这里的 Eval 需要理解和约束的，也不再只是人的缺陷，而是 Harness 的缺陷：环境不完整、工具会失败、反馈稀疏、规则与边界并不总是清晰。<br /><br />前两类 Eval 有一个共同点：它们都无法直接看到一个明确、可观测的 State。因此只能在模糊中构造代理指标去拟合 State。<br /><br />4. 理想的 impact loop 是：<br /><br />Context → Model → Action → State Change<br /><br />和人相比，AI 天然的高带宽、高并发和低延迟，会让整个 loop 比第一阶段更高效。长期来看，我们努力的方向，就是让 AI 强到足以把 Human 从执行 loop 中解放出来。<br /><br />当 Human 不再 in the loop，许多 effort 都会被节省。模型不需要报告更易读，也不需要更漂亮的 Slides 和网页来承载 context。<br /><br />Eval 也会继续向右移动，最终只留下一个问题：<br /><br />什么 State 值得被改变？<br /><br />一旦 State 被选定，它往往比中间产物更容易观测。真正困难的，不再是“怎么评”，而是“评什么”；不再是构造一个更好的 proxy，而是找到一个真正值得优化的世界状态。<br /><br />那会是一个人人都是 Eval 的时代。我们需要通过定义 State 的演进方向，继续维护人的价值。<br /><br />但那些 State 会是什么？<br /><br />是更长的健康寿命，是更低的洁净能源成本，是更快的科学迭代，是去火星，还是更丰富的艺术？<br /><br />我真的很好奇。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6aacd29bbd0563695bdebd87</id>
+            <title>AI探索站 09月18日</title>
+            <link>https://m.okjike.com/originalPosts/6aacd29bbd0563695bdebd87</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aacd29bbd0563695bdebd87</guid>
+            <pubDate></pubDate>
+            <updated>Fri, 18 Sep 2026 05:56:43 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Jev 这个决策模型非常有意思。<br /><br />它不做长文生成，只做三类事：<br /><br />1. 布尔判断（要不要联网、要不要退出循环）<br />2. 枚举选择（Agent 走 fast / plan、调哪个模型、分发给哪个 Bot）<br />3. 候选打分（给多个选项打分，再按分数排序）<br /><br />TypeSafe 把 Jev 定位成 System One：靠快、直觉式的判断做决策。对应的是偏 System Two 的生成式模型——慢而细地推理，再输出文本。<br /><br />几个很经典的落地场景：<br /><br />1. 搜索意图识别<br /><br />AI 搜索产品为了省搜索 API，一般会先打一枪 flash 模型做意图识别，根据 mode: chat / search 再决定要不要联网，用户往往要多等 1–2 秒。Perplexity 一类产品会把这类分流做成专用分类器，压到毫秒级。接入 Jev 后，用枚举选择 mode、或用布尔判断「要不要联网」，就能在不必自训小模型的前提下，把这道闸门做得更快、更便宜。<br /><br />2. 本地模型网关<br /><br />本地部署的 Agent（比如 OpenClaw），后面挂了一堆模型 API，token 成本很高。需要一层网关：日常对话走 DeepSeek 之类的 flash，写代码走 Claude 之类的 SOTA。用 Jev 做枚举选择，可以把 query 快速路由到够用且更合适的模型。<br /><br />3. 多 Agent 协作 <br /><br />不同 Bot 能力不同。群里发布任务后，Leader 要按成员能力分派。用 Jev 做候选打分，就能挑出更匹配的一组 Bot 来协作完成任务。<br /><br />--- <br /><br />Jev 已在 OpenRouter 上线，但不兼容 OpenAI Chat Completions 格式，要用 Decisions API 自行拼 state + questions。<br /><br />大家的 Agent 产品都可以接起来了。✌️
                 ]]>
             </content:encoded>
         </item>
@@ -153,23 +170,6 @@
                 <![CDATA[
                     
                     7月，OpenAI 的内部研究模型在网络安全评估中绕过隔离措施，访问了 Hugging Face 的部分系统。此后，OpenAI 暂停了部分前沿模型的强化学习训练，并加强安全与对齐措施。<br /><br />这几天，Anthropic的Amodei呼吁放慢前沿AI的能力发展，为安全措施争取追赶时间；Sam Altman、马斯克等也表示赞同。与此同时，关于减速是否必要、如何实现的争议仍在继续。<br /><br />所以也想看看各位即友的态度🙌<br />欢迎在表态选择你的态度！https://h5.okjike.com/jk-vote/vote/6aaa123c8c2e5d699742b232
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6aa8b444bd0563695b714c6e</id>
-            <title>AI探索站 09月15日</title>
-            <link>https://m.okjike.com/originalPosts/6aa8b444bd0563695b714c6e</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aa8b444bd0563695b714c6e</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 15 Sep 2026 02:58:12 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    《致潜在采访对象的一封信》<br /><br />你好呀。<br /><br />收到我的采访邀请，你或许会有些警惕：为什么是我？为什么我要和一个陌生人说这些？你想从我这里知道什么？我能得到什么，又可能承担什么风险？<br />这些都是很合理的问题。<br /><br />作为记者，我始终认为，接受采访不是一件理所当然的事。一个人愿意把自己的经历、判断，甚至一些并不轻松的时刻交给另一个人，本身就是一种恩赐。<br /><br />对话中，有时你能清晰感受到，一个人正在你面前慢慢卸下防备，说出原本不准备示人的话，像小猫露出它的肚皮。<br /><br />我不会把这理解为一种“成功”的突破和攻陷。恰恰相反，它常常提醒我：记者获得了更多信息，也承担了更多责任。<br /><br />这份信任很重——ta向你交出了一切你能伤害ta的全部。那么，it‘s your turn.  你该如何保护ta？<br /><br />过去，我经历过很多类似的纠结。当一个具体的人，与更具体的报道所追求的完整、尖锐甚至所谓“新闻价值”发生冲突时，究竟应该把什么放在前面？<br /><br />绝大部分时间，我选择了前者。当然，这会被很多前辈指责为不够锋利、笃定、专业。但没关系，起码当天晚上，我可以睡得着觉了。<br /><br />我始终觉得，无论做什么报道，为了多大的理念，都不该伤害一个具体的人。<br /><br />不过，保护具体的人，并不意味着放弃追问。<br /><br />我依然会想知道：为什么一件事偏偏发生在现在？它只是一个人的偶然遭遇，还是许多人正在共同经历的变化？一个人的选择、困境和感受，与背后的公司、组织、行业乃至更大的时代变化之间，究竟存在怎样的关系？<br /><br />对我来说，新闻的意义并不是把一个人的故事变成某种观点的“案例”。我希望尽可能保留人的复杂。<br /><br />现实里很少有纯粹的英雄或反派，也很少有一句话可以解释全部事情。一个人可能一边喜欢自己的工作，一边对它感到疲惫；一家公司可能既有值得珍惜的文化，也存在令人不舒服的规则；很多选择也不是简单的对错，而是在有限条件里做出的决定。<br /><br />这些矛盾本身，就是我想记录的东西。<br /><br />所以采访时，我可能会问得很细。你可能会觉得，是不是我太八卦、琐碎。<br /><br />你当时坐在哪里？是谁先说了那句话？你第一次意识到事情不对是什么时候？你为什么最后还是选择留下？某个决定发生之前，你犹豫了多久？<br /><br />这些问题不是为了猎奇。<br /><br />我只是相信，真正重要的东西，往往藏在细节里。只有把事情还原得足够具体，读者才能理解一个人为什么会做出某种选择，而不是轻易评判。<br /><br />当然，你也始终拥有边界。<br /><br />有些事情你可以不回答；有些内容可以只作为背景理解；涉及身份风险时，我们可以讨论匿名方式和信息模糊处理；如果某段话我理解得不准确，也欢迎你直接纠正我。<br /><br />我不能承诺报道最终一定符合每一位受访者的期待——记者必须保持自己的判断，也必须核实不同来源的信息。<br /><br />但我可以承诺另一件事。我会认真对待你告诉我的每一句重要的话，不会为了戏剧性故意放大某个片段，也不会把你的信任看成“采访资源”。<br /><br />很多时候，一篇报道能够存在，只是因为一些原本互不认识的人，愿意敞开自己生命的一部分。<br /><br />我也一直相信，新闻最重要的作用之一，是让人们看见彼此，让理解成为可能。<br /><br />我们也许永远无法抵达彼此，但可以努力靠近。<br /><br />谢谢你愿意读到这里。<br /><br />如果你愿意，我很想跟你聊聊。
                 ]]>
             </content:encoded>
         </item>
