@@ -5,6 +5,40 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6aaec3bc12e08e7cd49d25be</id>
+            <title>AI探索站 09月19日</title>
+            <link>https://m.okjike.com/originalPosts/6aaec3bc12e08e7cd49d25be</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aaec3bc12e08e7cd49d25be</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 19 Sep 2026 17:17:48 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Personal AI 未来竞争不只是“谁更懂用户”，而是：<br /><br />谁更早进入用户每天已经存在的 surface。<br /><br />WhatsApp、email、desktop、family account、glasses 都在变成入口。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6aae034885d3baf72f7b2a30</id>
+            <title>AI探索站 09月19日</title>
+            <link>https://m.okjike.com/originalPosts/6aae034885d3baf72f7b2a30</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aae034885d3baf72f7b2a30</guid>
+            <pubDate></pubDate>
+            <updated>Sat, 19 Sep 2026 03:36:40 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    用 GPT6 做了个可以基于你的代码库生成产品更新宣传片的 skill（guizang-product-video-skill）<br /><br />它可以直接读你的代码库，把你的组件、配色、logo 和其他素材拿来用，自动写文案、做动效。<br /><br />最屌的是它的音乐居然是 GPT 用 Python 生成的，直接用代码写音乐，太厉害了！<br /><br />我一直以为它是从哪儿找的，结果是代码写的，跟每一个视频的节奏都能对应匹配、卡上点。<br /><br />视频是纯前端生成的，不依赖生成模型，所以成本很低。<br /><br />感兴趣可以试试：https://github.com/op7418/guizang-product-video-skill
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6aad57ec6af7c2bd05742be7</id>
             <title>AI探索站 09月18日</title>
             <link>https://m.okjike.com/originalPosts/6aad57ec6af7c2bd05742be7</link>
@@ -17,23 +51,6 @@
                 <![CDATA[
                     
                     Eval Moves Right——<br />从理解和照顾人的缺陷<br />到定义下一个值得被改变的 state<br /><br /> 1. 长久以来，人对世界产生 impact 的方式是：<br /><br />Context → Human → Action → State Change<br /><br />人通过学习和吸收 context，将其转化为正确的 action，推动某个状态发生改变。<br /><br />2. 当有了 AI，我们阶段性地变成了：<br /><br />Context → Model → Human → Model → Action → State Change<br /><br />这个阶段，AI 最先爆发的use case是调研报告、Office 三件套和 Website。它们大致覆盖了 loop 的前半部分：<br /><br />Context → Model → Human<br /><br />因为人获取 context 的带宽很低，所以报告需要更易读，Slides 需要更美观，前端需要更炫酷。也因此出现了Eval角色：它位于 Model → Human 之间，目标是理解和照顾人的“缺陷”，让模型的输出更容易被人理解、信任和使用。<br /><br />但这些今天被当作“交付物”的东西，其实都只是中间表示。它们本身通常不改变 State，只是作为 context 的载体，帮助另一个决策主体找到正确的 action。<br /><br />3. Eval 会沿着 loop 向右移动<br /><br />随着 Agent 开始真正采取行动，Eval 会从 Model → Human 移动到 Model → Action。<br /><br />这个位置的 eval 关心 model 是否在 Harness 中采取了正确的行动：工具是否调用正确，任务是否完成，失败是否能够恢复，边界是否被遵守。<br /><br />这里的 Eval 需要理解和约束的，也不再只是人的缺陷，而是 Harness 的缺陷：环境不完整、工具会失败、反馈稀疏、规则与边界并不总是清晰。<br /><br />前两类 Eval 有一个共同点：它们都无法直接看到一个明确、可观测的 State。因此只能在模糊中构造代理指标去拟合 State。<br /><br />4. 理想的 impact loop 是：<br /><br />Context → Model → Action → State Change<br /><br />和人相比，AI 天然的高带宽、高并发和低延迟，会让整个 loop 比第一阶段更高效。长期来看，我们努力的方向，就是让 AI 强到足以把 Human 从执行 loop 中解放出来。<br /><br />当 Human 不再 in the loop，许多 effort 都会被节省。模型不需要报告更易读，也不需要更漂亮的 Slides 和网页来承载 context。<br /><br />Eval 也会继续向右移动，最终只留下一个问题：<br /><br />什么 State 值得被改变？<br /><br />一旦 State 被选定，它往往比中间产物更容易观测。真正困难的，不再是“怎么评”，而是“评什么”；不再是构造一个更好的 proxy，而是找到一个真正值得优化的世界状态。<br /><br />那会是一个人人都是 Eval 的时代。我们需要通过定义 State 的演进方向，继续维护人的价值。<br /><br />但那些 State 会是什么？<br /><br />是更长的健康寿命，是更低的洁净能源成本，是更快的科学迭代，是去火星，还是更丰富的艺术？<br /><br />我真的很好奇。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6aacd29bbd0563695bdebd87</id>
-            <title>AI探索站 09月18日</title>
-            <link>https://m.okjike.com/originalPosts/6aacd29bbd0563695bdebd87</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aacd29bbd0563695bdebd87</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 18 Sep 2026 05:56:43 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    Jev 这个决策模型非常有意思。<br /><br />它不做长文生成，只做三类事：<br /><br />1. 布尔判断（要不要联网、要不要退出循环）<br />2. 枚举选择（Agent 走 fast / plan、调哪个模型、分发给哪个 Bot）<br />3. 候选打分（给多个选项打分，再按分数排序）<br /><br />TypeSafe 把 Jev 定位成 System One：靠快、直觉式的判断做决策。对应的是偏 System Two 的生成式模型——慢而细地推理，再输出文本。<br /><br />几个很经典的落地场景：<br /><br />1. 搜索意图识别<br /><br />AI 搜索产品为了省搜索 API，一般会先打一枪 flash 模型做意图识别，根据 mode: chat / search 再决定要不要联网，用户往往要多等 1–2 秒。Perplexity 一类产品会把这类分流做成专用分类器，压到毫秒级。接入 Jev 后，用枚举选择 mode、或用布尔判断「要不要联网」，就能在不必自训小模型的前提下，把这道闸门做得更快、更便宜。<br /><br />2. 本地模型网关<br /><br />本地部署的 Agent（比如 OpenClaw），后面挂了一堆模型 API，token 成本很高。需要一层网关：日常对话走 DeepSeek 之类的 flash，写代码走 Claude 之类的 SOTA。用 Jev 做枚举选择，可以把 query 快速路由到够用且更合适的模型。<br /><br />3. 多 Agent 协作 <br /><br />不同 Bot 能力不同。群里发布任务后，Leader 要按成员能力分派。用 Jev 做候选打分，就能挑出更匹配的一组 Bot 来协作完成任务。<br /><br />--- <br /><br />Jev 已在 OpenRouter 上线，但不兼容 OpenAI Chat Completions 格式，要用 Decisions API 自行拼 state + questions。<br /><br />大家的 Agent 产品都可以接起来了。✌️
                 ]]>
             </content:encoded>
         </item>
@@ -153,23 +170,6 @@
                 <![CDATA[
                     
                     其实有个象征性的事件<br /><br />在这波 personal ai的浪潮里面，没有人在乎也没有人讨论背后是什么模型。<br /><br />我觉得这就是一个标志性时间点，真正的价值从模型转到应用的时间点。<br /><br />说得更明确一点，用户不在乎 geek不在乎 投资人不在乎 x根本没人讨论用的啥模型，但是都在讨论能干到啥。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6aaa1adf141b85b2921c6631</id>
-            <title>AI探索站 09月16日</title>
-            <link>https://m.okjike.com/originalPosts/6aaa1adf141b85b2921c6631</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6aaa1adf141b85b2921c6631</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 16 Sep 2026 04:28:15 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    7月，OpenAI 的内部研究模型在网络安全评估中绕过隔离措施，访问了 Hugging Face 的部分系统。此后，OpenAI 暂停了部分前沿模型的强化学习训练，并加强安全与对齐措施。<br /><br />这几天，Anthropic的Amodei呼吁放慢前沿AI的能力发展，为安全措施争取追赶时间；Sam Altman、马斯克等也表示赞同。与此同时，关于减速是否必要、如何实现的争议仍在继续。<br /><br />所以也想看看各位即友的态度🙌<br />欢迎在表态选择你的态度！https://h5.okjike.com/jk-vote/vote/6aaa123c8c2e5d699742b232
                 ]]>
             </content:encoded>
         </item>
