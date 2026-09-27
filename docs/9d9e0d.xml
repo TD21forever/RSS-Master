@@ -5,6 +5,40 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6ab90260756bbb6658e27edd</id>
+            <title>AI探索站 09月27日</title>
+            <link>https://m.okjike.com/originalPosts/6ab90260756bbb6658e27edd</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ab90260756bbb6658e27edd</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 27 Sep 2026 11:47:44 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    游戏行业都在偷偷摸摸的用AI画图已经不是秘密了，但既没有自己炼Lora，也没接图片模型的API，直接在豆包里出图带着[AI生成]的经典水印就上线了，还是有点绷不住。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6ab8ae732f9e34a0804e2cc6</id>
+            <title>AI探索站 09月27日</title>
+            <link>https://m.okjike.com/originalPosts/6ab8ae732f9e34a0804e2cc6</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ab8ae732f9e34a0804e2cc6</guid>
+            <pubDate></pubDate>
+            <updated>Sun, 27 Sep 2026 05:49:39 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    Opus 5.5 游戏动效制作提示词！<br /><br />昨天用 Opus 5.5 做的游戏结算动画，很多人都说做得不错，想要提示词。<br /><br />顺便还做了一个新的抽卡动画<br /><br />提示词：<br /><br />帮我做一个原创的手游「高光时刻」动效：[主体，例如：开宝箱 / 段位晋升 / 成就解锁 / Boss 掉落 / 角色升级]。<br />做成一个可以直接打开的单文件网页（HTML + CSS + JS），点一下就能完整播放，效果对标商业手游的结算 / 奖励演出。<br /><br />【世界观与风格】<br />- 原创美术，不要模仿任何现有游戏的 IP、角色或 Logo。<br />- 卡通手游风：高饱和配色，统一的深色描边（例如 #1A1033），圆润厚重的造型。 <br />- 配色随等级升级：[等级阶梯，例如：普通绿 → 稀有蓝 → 史诗紫 → 传说金]。每升一级都要切换主色、光效颜色和背景色调。<br />- 标题用圆胖的游戏字体（如 Titan One / Lilita One），描黑边，加投影；文字逐字「砸」进画面，带回弹。<br /><br />【主体物：做成真 3D】<br />- 用 Three.js 建模，不要用平面 SVG 贴图。要有厚度、倒角，以及符合主体的结构细节（木板缝、铆钉、包边、宝石切面、锁扣等）；木板缝这类细节用真实几何体拼出来，不要贴黑线条。<br />- 着色用卡通分阶（MeshToonMaterial 加 3～4 阶的渐变贴图），配三种灯光：主光、天光、等级色的轮廓光。<br />- 描边用后期边缘检测：渲染法线图 + 深度图，再用着色器画线。外轮廓粗、零件交界细，粗细全程一致；另外做 1.5 倍超采样和多重采样抗锯齿。<br />  不要用「放大一圈的黑色背面」那种描边，那样粗细不均、转角会断。<br />  深度判断的阈值要放宽，接缝主要靠法线判断，否则斜着看的表面会冒出细碎斜纹。<br />- 活动部件要真实运动，比如箱盖绕铰链翻开、奖章绕竖轴旋转。<br />- 待机时主体缓慢左右转动，让人看到侧面和厚度，同时轻微上下浮动；脚下要有随高度变化的柔和投影。<br /><br />【如果画面里有 2D 插画（卡面、奖励图标、角色）】<br />- 三层卡通着色：底色、成块的阴影色、高光色，不要只用一层渐变。<br />- 线条分粗细：外轮廓粗，内部结构线细。<br />- 每个角色或物件要有自己的表情和姿态，不要所有东西共用同一张脸。<br />- 脚下画投影，让主体「站」在画面里；背景按属性区分图案，不要全用同一套放射线。<br /><br />【演出节奏：五个阶段，缺一不可】<br />1. 预备：主体待机浮动，每隔几秒抖一下提示可以点击，底部显示「点击」提示。<br />2. 升级：每点一次，主体跳起、在空中转一圈、落地时压扁再回弹；同时切换到下一等级的颜色，闪一下光，冒一圈粒子，标题更新。<br />3. 蓄力（约 1 秒）：主体越抖越剧烈，缝隙透出光，四周粒子往中心吸，音效音调持续上升；最后一刻猛地压扁。<br />4. 爆发：从爆点向外扩散的泛光闪白、屏幕震动、镜头往前一推、多层冲击波、细长流光迸射、闪光星点、金币和宝石（带旋转）。高等级的爆发要明显更强。彩带只在最高潮用一次，不要满屏彩带。<br />5. 揭晓与结算：<br />   - 奖励卡片从主体里沿弧线飞出，落位时带超调和晃动收尾，数字滚动计数。<br />   - 稀有物品带彩虹流光边框和「NEW!」角标。<br />   - 点击领取后，金币和宝石沿贝塞尔曲线飞进右上角的余额，每到一个余额就跳一下。<br /><br />【揭晓舞台：让主角独占画面】<br />- 最高稀有度揭晓时，其他元素收起或淡出，背后换成一层干净的渐变幕布加缓慢旋转的柔光，不要让主角压在杂乱的背景上。<br />- 幕布出现时，把场景里的其他 3D 物件隐藏掉，否则后期描边会把它们的轮廓线画在幕布上。<br />- 主角的外发光要放在主体背后，只从边缘溢出，不能盖在主体前面把它糊成一片白。<br />- 可以加一圈围绕主角盘旋的星尘拖尾，但轨道必须完整在主角轮廓外侧，不能从主体正面扫过。<br /><br />【光效：必须柔和，不能有硬边】<br />- 背景光芒：用带渐变过渡的 conic-gradient，不要一刀切的色块边缘；叠 2～3 层不同密度、不同转速的光。<br />- 光柱：由 5～7 道带模糊的光束呈扇形散开，亮度各自轻微闪动；根部加一团柔光核心，光里有光尘缓慢上飘。<br />- 闪白：从爆点向外的径向泛光（mix-blend-mode: screen），强度不超过 0.8，不要整屏纯白过曝。<br />- 粒子：每个火花都带一圈低透明度的外晕；冲击波用三层描边（宽而淡、中等、细而亮）。<br /><br />【材质与界面】<br />- 边框、名牌、按钮要有材质感：金属拉丝渐变、左上亮右下暗的倒角光、内阴影；按稀有度换镶嵌件（钢铆钉 → 银框宝石 → 金框钻石加小王冠）。<br />- 小卡片上不要塞小字数值；详细数值放到揭晓时的信息面板里，面板里的数字滚动上涨，并弹出「▲+数值」。<br />- 画在 Canvas 上的贴图，分辨率至少是屏幕上最大显示尺寸的 1.5 倍，否则放大时会发虚。<br /><br />【动画原则】<br />- 用 GSAP 时间线编排。所有动作都要有挤压拉伸、超调和弹性回弹，不要匀速。<br />- 粒子系统用 Canvas 2D 自己写：重力、阻力、生命周期、叠加混合，以及「吸入」「曲线飞行」「环绕」三种运动。<br />- 不要用 CSS 3D 透视去翻转大尺寸元素，放大加侧翻时会被投影成铺满屏幕的平面，3D 翻转一律放在 WebGL 里做。<br />- 所有「抖动」「呼吸」类的循环补间，在状态切换时要先取消再归零，避免它比停止指令晚一帧结束，又把值设回去。<br /><br />【音效】<br />- 全部用 Web Audio 实时合成，不用音频文件：跳起、落地、升级和弦、蓄力上升音、爆炸低频加噪声、弹出音、计数滴答、金币叮当、胜利号角。<br />- 第一次点击时才初始化音频；右上角放静音开关。<br /><br />【界面与工程】<br />- 顶部 HUD：模式切换、金币和宝石余额、静音按钮。<br />- 手机宽度也要能用；遵守「减少动态效果」设置（关闭震屏，减少粒子）。<br />- 动画状态机要严谨：动画播放中忽略点击，不能出现点击被吞或状态错乱。<br />- 目标 60fps。第一次打开时就是完整的待机画面，不能是空白。<br /><br />【交付前自检】<br />在蓄力、爆发、揭晓、结算这几个时刻各截一张图，逐张检查：<br />- 主角有没有被光晕、粒子或文字挡住？<br />- 有没有过曝成一片白？<br />- 背景是否杂乱，有没有穿帮的描边线？<br />- 小字是否能看清？<br />- 结算后是否还有东西在不该动的时候继续抖动？<br /><br />最后告诉我：每个阶段的时长，以及哪些参数可以调整演出强度。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6ab7e33bcfb5d08b3e55d846</id>
             <title>AI探索站 09月26日</title>
             <link>https://m.okjike.com/originalPosts/6ab7e33bcfb5d08b3e55d846</link>
@@ -109,23 +143,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6ab5076ca5d660b612d9e2b1</id>
-            <title>AI探索站 09月24日</title>
-            <link>https://m.okjike.com/originalPosts/6ab5076ca5d660b612d9e2b1</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ab5076ca5d660b612d9e2b1</guid>
-            <pubDate></pubDate>
-            <updated>Thu, 24 Sep 2026 11:20:12 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    如果你有gemini的pro版本，<br />可以用spark<br />给spark一个指令：<br />打开一个远程网页muse.ai <br />打开后你接手这个远程网页的操作<br />用这个网页注册全程通畅<br />如果账号此前没有注册facebook，则需要用信用卡验证个年龄，我用的国内的visa信用卡过了<br /><br />注册通过之后在设置里可以填写邀请码 <br />有token可以薅<br />我的邀请码：T2XTHD
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/6ab4db67cfb5d08b3e04ab96</id>
             <title>AI探索站 09月24日</title>
             <link>https://m.okjike.com/originalPosts/6ab4db67cfb5d08b3e04ab96</link>
@@ -155,23 +172,6 @@
                 <![CDATA[
                     
                     重新写一下，再展开一点关于wb的，差点忘了<br />我对于AI 办公和 personal AI 的看法是<br />举个例子<br />如果你要做AI 办公<br />现在的豆包和千问，就应该叫飞书AI 版，或者钉钉AI 版，因为这里的核心依赖是数据整合和组织搭建，这么重的场景你不可能从C端打<br />如果你要做personal AI ，就应该把人民群众喜闻乐见的项目推到前面<br />钉钉就应该叫千问办公版，飞书叫豆包办公版<br /><br />所以如果AI 办公持续做下去的话，wb团队的处境非常尴尬，因为众所周知腾讯的办公套件是一坨屎<br />当然这也是wb能跑出来的原因之一，所谓君以此兴必以此亡<br />因为办公场景按上面的逻辑聊，是强烈依赖累积的数据和后续的服务的，办公场景明显是个to b场景，wb团队在这两部分的积累都远不如阿里和字节<br />你是能把企业微信还是能把微信（是的微信某种程度也是办公产品，现在也可以是personal ai了）的汇报关系放到CSIG去<br />会议，文档和企微这么多年都没搞明白。更何况话有说回来，虽然腾讯不同bu之间的合作问题是整件事里面最大的问题<br /><br />但是CSIG内部的会议+文档，也做了这么多年了，去年又收进来ima和元宝。确实方向没有那么一致吧，但是到底要干啥<br />wb是一个短期爆量的产品，值得肯定。但是长线钉钉和飞书在帮千问办公和豆包托底，我觉得如果大家还在乎AI 办公的话，明年就能追上wb了<br /><br />哦对了还有百度搭子，百度搭子没有以上的所有东西
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6ab33debbd0563695b87ab62</id>
-            <title>AI探索站 09月23日</title>
-            <link>https://m.okjike.com/originalPosts/6ab33debbd0563695b87ab62</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ab33debbd0563695b87ab62</guid>
-            <pubDate></pubDate>
-            <updated>Wed, 23 Sep 2026 02:48:11 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    藏师傅 1 万多 star 的去 AI 味 Skill Humanizer-zh 迎来了一大波更新！<br /><br />这次更新增加了很多上游的迭代，同时也吸收了很多 issue 里大家提的意见。<br /><br />大家可以试试。如果有问题，可以在 issue 里反馈<br /><br />github.com/op7418/Humanizer-zh
                 ]]>
             </content:encoded>
         </item>
