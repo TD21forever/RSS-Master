@@ -5,6 +5,91 @@
         <link>https://m.okjike.com/topics/63579abb6724cc583b9bba9a</link>
         
         <item>
+            <id>https://m.okjike.com/originalPosts/6ad8bfa1756bbb665829ad02</id>
+            <title>AI探索站 10月21日</title>
+            <link>https://m.okjike.com/originalPosts/6ad8bfa1756bbb665829ad02</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ad8bfa1756bbb665829ad02</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 21 Oct 2026 13:35:29 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    💃 健康管理：<br />✅ 破解了阿福送的体脂秤，连给AI<br />✅ Oura Ring和小米手环的数据，同步给AI做分析<br />✅ 每天吃了什么拍照给AI记录热量和营养比例（虽然还是糖油过量……）<br /><br />🏫 生活管理：<br />✅ 监控了幼儿园app发帖，根据人脸筛选，把崽的照片挑出来保存到电脑和推送给我<br />✅ 每周四根据大众点评推荐三个遛娃去处<br />✅ 一周有三天外卖，AI根据我的偏好和营养建议，自动帮我点，支付也不用我接管，剩下两天我自己散步+觅食<br />✅ 我的记事戒指接入AI，可以提取零散想法，总结我每天做了什么，时间花在哪儿和灵感/todo<br /><br />🖥️ 工作管理：<br />✅ 手机上跟AI说一个想法，自动研发，创建GitHub项目，部署到线上<br />✅ 手机上跟AI说一个主题，自动根据公司的品牌风格，做PPT<br />✅ 手机上跟AI说一个需求，自动把需求文档写进Confluence（主要是背景、收益、方案介绍，不出细节，因为细节直接coding出来）<br />✅ 每天监控竞品的AI动向，按类别排到一张地图上（不是真的地图，是有横纵坐标的N宫格），找灵感可以在地图上浏览
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6ad87b38756bbb6658221e70</id>
+            <title>AI探索站 10月21日</title>
+            <link>https://m.okjike.com/originalPosts/6ad87b38756bbb6658221e70</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ad87b38756bbb6658221e70</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 21 Oct 2026 08:43:36 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    用「文感力」评测 agent 的写作水平<br /><br />YouMind 内部原本有一套写作 benchmark，用来评测模型有没有覆盖写作要点、用对素材，结构、语气和篇幅是否符合要求。但随着模型不断变强，连 GPT-6 Luna 和 Opus 5.5 都打成了平手，但实际用起来，大家还是能感觉到不少差距。<br /><br />我们观察用户在写作任务中使用的 prompt 发现，很多时候，用户传达的是一种感觉。比如：“让结尾带一点落空感。” 模型可能写成伤感。如果把评分标准写成“结尾要带有落空感”，再交给评委打分，伤感的结尾其实也能过关。<br /><br />问题在于，把感觉写成评分标准，并没有让它变得更明确，只是把判断转交给了评委。最终测出来的，可能只是模型有多符合评委的口味。<br /><br />那么怎样的写作算好？我们选择的角度是：好的写作从作者的意图出发，每一个选择都为这个意图服务。<br /><br />写作很大程度上就是在做取舍：该交代哪个细节，哪句话不说出口，一个意思写到几分就停。而模型写作时是在替用户动笔，关键不是写出“一段合格的文字”，而是做出用户会做的选择。<br /><br />所以我们衡量的是：在具体语境下，模型做出的取舍和成熟作者有多接近。这就像语文考试里的阅读理解：作者为什么选这个细节？为什么偏偏在这里结尾？我们把这种能力叫做「文感力」。<br /><br />做法是：挑选知名作者近期发表、读者反响好的文章，挖掉其中一段，分析原文的写法为什么好，把每条理由写成一条标准，再针对每条标准改写原文，构造错误答案。这样只有原文能同时满足所有标准，答案是唯一的。<br /><br />测试分阅读和写作两部分。阅读是从几个候选段落里选出原文。写作是把原文拆成零散素材，混入错误素材，再给一句故意写得模糊的要求，比如“这里想要一种安静的感觉”，让模型自己挑素材，把这一段写出来。<br /><br />在这一指标下，Opus 5.5 拿下第一；Gemini 4 Argon 阅读最稳；Gemini 3.8 Flash 性价比最高。而在之前的评测里几乎没有差距的 Opus 5.5 和 GPT-6 Luna，在文感力上相差了 42 分。<br /><br />还有几个有意思的发现： 所有模型写出来的段落都比原文长，中位长度是原文的 1.6 倍。面对一堆素材和一句模糊的要求，模型往往倾向于物尽其用，DeepSeek V4.1 Flash 和 Haiku 5.5 几乎是给什么用什么。<br /><br />读得懂，不等于写得出。即使在模型每次都读对的文章上，仍有 58% 的补写至少破坏了一处作者的取舍。<br /><br />当然，文感力只覆盖了写作质量的一部分。但它测出了“按需交付”这类评测所测不出的东西。模型如今都能较好地按要求交稿，很多时候也认得出好文，可轮到自己动笔时，差距依然明显，而这种差距，往往是用户最在意的。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6ad83fa6295dce07bef54393</id>
+            <title>AI探索站 10月21日</title>
+            <link>https://m.okjike.com/originalPosts/6ad83fa6295dce07bef54393</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ad83fa6295dce07bef54393</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 21 Oct 2026 04:29:26 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    我觉得能随心所欲帮助用户抢到陈奕迅巡演最后三场的门票的，就是personal agent的王者。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6ad82f19bd0563695b59ca1e</id>
+            <title>AI探索站 10月21日</title>
+            <link>https://m.okjike.com/originalPosts/6ad82f19bd0563695b59ca1e</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ad82f19bd0563695b59ca1e</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 21 Oct 2026 03:18:49 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    推荐一篇论文：https://arxiv.org/pdf/2606.04308<br /><br />论文中针对阅读提出了一个非常有意思的取景框架。<br /><br />我们一直有「六经注我」 vs 「我注六经」的分类，可以理解为「以读者为中心」 vs 「以作者为中心」。<br /><br />现在有了 AI，会带来什么变化？<br /><br />这论文加了一个维度：「AI 替我读」vs「AI 陪我读」。<br /><br />两者一结合，就出现了四象限。可以把当下的 AI 工具和应用场景放置其中进行分析。<br /><br />针对「AI 陪我读」这个有意思的话题，又给了三个工具：<br /><br />第一类是跑鞋型。跑鞋不改变你跑步的方式，它减少脚和地面之间的摩擦，让你跑同样的路更省力。对应到阅读，就是让你用同样的方式读，但读得更顺。术语弹窗让你不必中断去查词典，高亮系统替你标出哪些段落值得细读、哪些可以略过，自动排版让长文档更容易扫视。你还是在读，读的动作没有变，只是路面变平了。<br /><br />第二类是哑铃型。哑铃的作用不是让你省力，恰恰相反，它故意给你加负重，目的是让你变强。对应到阅读，就是在阅读过程中设置有益的阻力。比如读完一段之后要求你用自己的话复述，再往下翻之前先让你预测作者接下来会说什么，或者定期抛出问题检验你是否真的理解了而不只是眼睛扫过去了。这些动作会让阅读变慢，但慢下来的那部分恰好是理解发生的地方。<br /><br />第三类是滑雪板型。滑雪板不是让你走路更快，也不是让你腿更有力，它让你做到一件走路根本做不到的事——在雪上滑行。对应到阅读，就是让你和文本之间产生以前不可能的交互方式。把一篇论文的段落拖到二维空间里重新排列，让两篇论文的论证链条并排对照，在阅读痕迹上回溯自己三个月前读同一篇时关注了什么、现在关注了什么。这些不是「读得更快」或「理解得更深」，而是一种全新的阅读动作。<br /><br />有了这个框架，就像是拥有了一张地图。针对自己的需求，可以在对应的象限中寻找解法。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
+            <id>https://m.okjike.com/originalPosts/6ad82532bd0563695b58de61</id>
+            <title>AI探索站 10月21日</title>
+            <link>https://m.okjike.com/originalPosts/6ad82532bd0563695b58de61</link>
+            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ad82532bd0563695b58de61</guid>
+            <pubDate></pubDate>
+            <updated>Wed, 21 Oct 2026 02:36:34 GMT</updated>
+                
+                
+            <content:encoded>
+                <![CDATA[
+                    
+                    最近沉迷于在上海“寻找湾区式生态”。我发现，从漕河泾科技绿洲，到红杉北杨加速器，这一带，上下 8 公里路途，非拥堵时段开车15 分钟车程，有那么一刻，你可以“假装在湾区”。<br /><br />再叠加上  徐汇西岸<br />这一片区，<br />散落着（欢迎纠正，补充）：<br />北杨人工智能小镇<br />模速空间<br />复旦发起的上智院<br />Minimax<br />阶跃星辰<br />奇绩创坛上海<br />AGI Bar（上海）<br />红杉北杨加速器<br />陆奇挂帅的创智学院<br />港科大上海<br />商汤<br />李所（李政道研究所）<br />临港国家实验室漕河泾<br />字节上海<br />商汤<br />超脑 AI<br />腾讯华东<br />AI Lab<br />齐俊元的 Today AI<br />十字路口 Koji 的 AI Hacker House<br />…<br /><br />这份名单，还可以加上米哈游，莉莉丝…<br /><br />偶尔，会听到所谓的交大系，复旦系，中科大系，南大系，浙大系，上科大系…<br />但更多时候，看到的是热火朝天的上海 AI “新黄金一代”。<br /><br />此时此刻，<br />谁正在思考 Personal Agent 的今日战场？<br />谁在推演 AI4S 的应用场景？<br />谁在卷具身？<br />谁又在思考 AI for fun？<br />谁在组队，谁在突围，谁又在单骑攻击？<br /><br />这里是群星闪耀，<br />是“每个人都在创造”的“新黄金一代。
+                ]]>
+            </content:encoded>
+        </item>
+        
+        <item>
             <id>https://m.okjike.com/originalPosts/6ad78fc8756bbb66580b15b1</id>
             <title>AI探索站 10月20日</title>
             <link>https://m.okjike.com/originalPosts/6ad78fc8756bbb66580b15b1</link>
@@ -17,23 +102,6 @@
                 <![CDATA[
                     
                     现在 AI 真是厉害，连电视界面都能改！<br /><br />我参考了比较流行的两个项目，给自己做了一个新的启动器<br /><br />终于不用忍受满是广告的国产电视界面了<br /><br />现在这个启动器完美符合我的需求：<br /><br />只展示常用的应用，比如我的 PS5 和 Apple TV 的连接，还有我常看的哔哩哔哩以及投屏。<br /><br />同时我还改了 UI，增加了壁纸轮播和一些内置的非常好看的壁纸<br /><br />我基于这个比较流行的 CleanFrame 和 cleanyourtv 重新打了一个guizang TV 的包。<br /><br />如果你是小米电视，然后喜欢我这个新增的功能的话，可以试试<br /><br />https://github.com/op7418/guizang-tv
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6ad6e3c1141b85b292bdc0e9</id>
-            <title>AI探索站 10月20日</title>
-            <link>https://m.okjike.com/originalPosts/6ad6e3c1141b85b292bdc0e9</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ad6e3c1141b85b292bdc0e9</guid>
-            <pubDate></pubDate>
-            <updated>Tue, 20 Oct 2026 03:45:05 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    想要实现一个真正的 Agents 协作团队，有什么好的技术栈么？<br />我的理想中，是有私聊和有群聊，各 Agents 之间有完全独立的工作空间、Profile 和长期记忆。<br />我可以在群里 At 一个 CEO，由它来显式 At 其他成员干活儿，各成员之间可在群里相互 At 交接工作成果。<br />我也可以单独 At 某一个员工或和它私聊看看它单独的工作。<br />就是……整个过程像一个真正的，由人类组成的团队那样协作。<br />现在真的有这样的成熟技术栈么？我试了好几个都不太行。
                 ]]>
             </content:encoded>
         </item>
@@ -73,23 +141,6 @@
         </item>
         
         <item>
-            <id>https://m.okjike.com/originalPosts/6ad4d690cfb5d08b3e52faea</id>
-            <title>AI探索站 10月18日</title>
-            <link>https://m.okjike.com/originalPosts/6ad4d690cfb5d08b3e52faea</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ad4d690cfb5d08b3e52faea</guid>
-            <pubDate></pubDate>
-            <updated>Sun, 18 Oct 2026 14:24:16 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    我最近做的两个开源项目。<br /><br />一个是制作36种艺术绘画效果动画的skill：huashu-art-motion，已经4000多 star了。而且这个skill内置了生成口播内容和制作知识类视频的方法，现在小红书和抖音都非常鼓励知识类AI视频的制作，感兴趣可以用起来试试。<br />https://github.com/alchaincyf/huashu-art-motion<br /><br />还有一个，是今天刚刚发布的huashu-motion，这可以轻松帮你制作产品的宣传发布动画，有在做产品做开源项目的可以试试看。<br />https://github.com/alchaincyf/huashu-motion
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
             <id>https://m.okjike.com/originalPosts/6ad4632c756bbb6658b6f29a</id>
             <title>AI探索站 10月18日</title>
             <link>https://m.okjike.com/originalPosts/6ad4632c756bbb6658b6f29a</link>
@@ -119,57 +170,6 @@
                 <![CDATA[
                     
                     强烈推荐大家看看 Anthropic 这个就业报告。<br /><br />Anthropic 的技术博客，含金量真的很高。最近发布的一些文章，我觉得已经可以当论文来看了，基本上都会打印出来仔细阅读。<br /><br />前天，Anthropic 又发表了一篇非常重要的研究报告，叫《How employment is changing at Anthropic》。<br /><br />这次 Anthropic 直接拿自己的员工做样本，通过内部招聘数据、员工工作记录、面试评价，以及 17 位员工的访谈，研究 AI 给公司的人员结构、招聘标准和协作方式带来了哪些变化。<br /><br />我觉得特别有价值。毕竟 Anthropic 已经是全球 AI 使用程度最高的公司之一，他们现在经历的变化，很可能就是接下来的趋势。<br /><br />分享几个我的收获，尤其是对正在找工作的朋友，我觉得很有参考价值。<br /><br />1、初级岗位的招聘，确实在明显减少。Anthropic 的数据显示，从 2025 年初到今年，技术部门的初级员工占比，从 21% 下降到了 14%。<br /><br />而在新招聘的技术员工中，初级岗位的占比下降得更厉害，从 27% 跌到了 9%。<br /><br />注意，Anthropic 的技术团队仍在扩张，但招聘越来越偏向有经验的人。<br /><br />原因也相对比较好理解。毕竟 AI 现在已经可以完成很多复杂任务了，所以企业对人的判断力要求反而越来越高。<br /><br />过去企业招聘初级工程师，通常会让他们先从简单的开发、测试、Bug 修复开始，慢慢积累经验。但现在，这些工作已经可以大量交给 AI 完成了。<br /><br />类似的变化也出现在一些基础行政岗位上。即使 Anthropic 的员工规模快速增长，这些岗位也没有出现相应的招聘增长。<br /><br />我自己也有类似的感受。<br /><br />从年初到现在，我陆续跟不同的实习生（非 985 高校）合作过。说实话，整体体验并不算特别满意。主要问题还是大家缺乏经验，遇到一个稍微复杂点的问题，可能就会卡很久。<br /><br />如果再缺乏主动性，就需要我不停地安排任务、检查进度，那我还真不如直接把事情交给 AI 完成。<br /><br />所以从生产效率的角度来看，对于 AI 使用程度很高的公司，初级岗位的需求可能会越来越少。<br /><br />2、Anthropic 的招聘标准也发生了明显变化，越来越看重一个人的自主性和判断力。<br /><br />Anthropic 分析了自 2024 年以来数千名录用员工的面试评价，发现技术岗位的评价中，增长最明显的两个维度是 Autonomy 和 Judgment，也就是自主性和判断力。<br /><br />与此同时，对特定领域专业知识的关注占比反而有所下降。<br /><br />这个变化很有意思。<br /><br />之前我也写过几次类似的话题，包括 Notion 首席设计师的一些分享，都提到了主动性的重要性。<br /><br />因为有了 AI 之后，一个员工实际上已经可以同时管理好几个 Agent，相当于每个人都带着几个下属。<br /><br />这时候，工作方式就需要改变了。<br /><br />过去可能是领导分配任务，员工按照要求完成。但现在，一个人完全可以自己提出想法，制定计划，再调动 AI 去实现目标。<br /><br />在 AI 时代，主动性可能会成为一个人非常重要的竞争力。<br /><br />3、但到底怎么判断一个人有没有主动性？<br /><br />和运营、编程、设计这些专业技能相比，主动性多少有些主观，很难通过一道面试题判断出来。<br /><br />年前，我给客户推荐过一个候选人，结果面试没通过。我很惊讶。因为之前跟他共事过，基本功不错，人也挺机灵。<br /><br />客户老大叹了口气说：主要问题是他的主动性不够。我继续追问：你是怎么判断出来主动性不够的？<br /><br />对方回答：问之前在某个项目里负责了什么，话里话外能听出来，他的工作范畴仅仅就局限在领导安排的事情上，没见着他的思考，基本上就是安排什么做什么。<br /><br />主动性不够，来我们团队，很难生存下去。所以也就没推进了。<br /> <br />我挺认同客户的判断。<br /> <br />不管是在大厂还是小厂，主动做事，为目标着急永远是重要的能力。<br /><br />领导推一步，然后干一步，这种性格很难把事情做好。<br /><br />并且，我总觉得，主动是一种受益终生的思维方式，主动和同事沟通进展，主动思考问题的解决方案，主动认识一些厉害的人......<br /><br />在我看来，主动性至少包括三个方面。<br /><br />首先，一个人眼里得有问题，能够主动发现哪些事情值得做、哪些地方需要改进。其次，发现问题之后，愿意自己想办法，寻找资源，不停地把事情往前推进。<br /><br />最后，遇到困难不会轻易停下来，更不会一直等着别人安排，而是会想办法把问题真正解决。<br /><br />总之就是没有等靠要的思维方式。<br /><br />4、Anthropic 越来越在乎候选人使用 AI 的能力，尤其是实际经历。<br /><br />报告里有个很有意思的数据。2024 年，Anthropic 的技术岗位面试评价中，只有大约 5% 会提到候选人使用 AI 工具的经历，非技术岗位大约是 7%。<br /><br />但到了 2026 年，这两个比例分别增长到了原来的 3 倍和 4 倍。<br /><br />尤其是非技术岗位，变化非常明显。<br /><br />这也给我们提了个醒。如果面试的时候，只是和面试官讲自己熟悉 Claude、Codex，恐怕已经没什么说服力了。这些工具谁都会用。<br /><br />重要的是，我们用 AI 解决过什么具体问题。比如自己设计过一套工作流，或者利用 AI 做过一个小工具。我个人觉得这种真实的作品，比简历上罗列一堆 AI 工具更有说服力。<br /><br />因为它能直接展示自己使用 AI 解决问题的能力。<br /><br />5、AI 对应届生确实不太友好。<br /><br />特别是非 985 或者 211 高校的学生，相比十年前的毕业生，大家就业压力大不少。<br /><br />过去很多应届生的起点，几乎都是从简单的工作开始，然后在实际项目里慢慢积累经验，几年之后才能逐渐独当一面。<br /><br />但现在，AI 正在接管其中一大部分基础工作。如果企业越来越倾向于招聘有经验、有判断力、能够独立完成任务的人，那么应届生，应该去哪里获得这些经验？<br /><br />这真是个挺棘手的问题。我亲戚家的孩子就是这情况，毕业一年了，现在还在家里待着。<br /><br />所以，我感觉尤其是还在上学的同学，毕业后想进入互联网行业，真的应该尽早利用 AI，积累一些真实的项目经验。<br /><br />比如开发一个自己真正想用的小产品，解决身边某个实际问题，或者给一项真实业务设计自动化流程。<br /><br />很多二流学校的学生，在这时候了，还是在努力考研，以考研为荣。我真心觉得糊涂。<br /><br />如果只是因为不知道毕业之后该做什么，或者天真的认为多一张文凭就能找到更好的工作，那真的应该重新考虑这事的逻辑。<br /><br />尤其是那些将来想进入互联网行业，做产品、运营或者开发的同学。<br /><br />现在 AI 已经把做产品的门槛降得非常低了。真的应该花点时间，去做几个真实的项目。最好能找到用户，收集反馈，再不断改进。<br /><br />这个过程既能积累经验，也能锻炼前面提到的主动性、判断力，以及使用 AI 解决问题的能力。<br /><br />等到真正找工作的时候，直接把作品拿出来，讲清楚自己解决了什么问题，以及取得了什么结果。反正如果我是面试官，我会非常愿意和这样的应届生聊聊。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6ad376a6cfb5d08b3e30c8bb</id>
-            <title>AI探索站 10月17日</title>
-            <link>https://m.okjike.com/originalPosts/6ad376a6cfb5d08b3e30c8bb</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ad376a6cfb5d08b3e30c8bb</guid>
-            <pubDate></pubDate>
-            <updated>Sat, 17 Oct 2026 13:22:46 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    新播客是一期关于 underdog 的故事。<br /><br />今年 ai 应用创业不要太难，融资难，找 PMF 难，养活团队难，不被模型吃掉难，更难的是环境差成这样，到底怎样才能坚持下去。 <br /><br />Jason 也经历了这个过程。<br /><br />他最惨的时候，TS 被撤，睡朋友家沙发，卖掉了自己的股票垫给公司，但还是一度要发不出工资。那段时间，他经常睡不着，在朋友家楼下转圈，一遍遍问自己：「我到底要不要放弃？」<br /><br />这期播客讲的就是他怎样撑过那段时间、怎样因为穷而找到新的 PMF、怎样慢慢跑通 GTM 获得收入的故事。<br /><br />用 Jason 自己的话说，从学生时代到创业，他一直把自己看作一个 underdog，也一直相信：<br /><br />underdog 能赢。而且很多事情就该由这样的人去改变。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6ad22db3a1af2007be120932</id>
-            <title>AI探索站 10月16日</title>
-            <link>https://m.okjike.com/originalPosts/6ad22db3a1af2007be120932</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ad22db3a1af2007be120932</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 16 Oct 2026 13:59:15 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    你醒了？<br /><br />现在是2022年11月30日，你在刷抖音的过程中发现有一个叫@ChatGPT的聊天机器人很火。<br /><br />于是你跃跃欲试去做了尝试 它的强大十分令人激动，你与他的交谈使你非常兴奋。<br /><br />过了几个月后，你发现ChatGPT推出了plus套餐 而免费用户的额度完全不足够你去使用。<br /><br />你开始去寻找各种各样的镜像站与免费，APIKey 每当发现一个能用的 你都如获珍宝般的珍藏。<br /><br />可惜时间总是过得很快。<br /><br />如今，你用着强大的Astra与Fable系列模型 享受着AI给你带来的无限乐趣<br /><br />2026年10月23日，最初让你感到非常兴奋GPT-3.5模型在那天下线了。<br /><br />而那天你和平常以往似乎没什么区别，OpenAI的Tibo 在玩雷霆大重置、A畜在玩开心消消乐、谷歌还在没完没了的造屎。<br /><br />你依旧每天都要打开Codex去输入你的idea。<br /><br />AI给你带来的那头一份喜悦，就像你的青春 不经意间回头看了你一眼，好像在和你告别。
-                ]]>
-            </content:encoded>
-        </item>
-        
-        <item>
-            <id>https://m.okjike.com/originalPosts/6ad1c4fdcfb5d08b3e03f268</id>
-            <title>AI探索站 10月16日</title>
-            <link>https://m.okjike.com/originalPosts/6ad1c4fdcfb5d08b3e03f268</link>
-            <guid isPermaLink="false">https://m.okjike.com/originalPosts/6ad1c4fdcfb5d08b3e03f268</guid>
-            <pubDate></pubDate>
-            <updated>Fri, 16 Oct 2026 06:32:29 GMT</updated>
-                
-                
-            <content:encoded>
-                <![CDATA[
-                    
-                    在杭州滨江招募一位做 AI 的产品同学<br />一起做一点有长期价值的产品～
                 ]]>
             </content:encoded>
         </item>
